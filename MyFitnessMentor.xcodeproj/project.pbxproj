@@ -43,6 +43,7 @@
 		07F0E3E41DE0D4DF00D0A13F /* EmphasisSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */; };
 		07F912081DC2D1240004C924 /* WarmupOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F912071DC2D1240004C924 /* WarmupOverview.swift */; };
 		07F9120C1DC3F9B00004C924 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9120B1DC3F9B00004C924 /* Navigation.swift */; };
+		07FE89EF1DE9D947004E4A07 /* MovementScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE89EE1DE9D947004E4A07 /* MovementScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmphasisSelection.swift; sourceTree = "<group>"; };
 		07F912071DC2D1240004C924 /* WarmupOverview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupOverview.swift; sourceTree = "<group>"; };
 		07F9120B1DC3F9B00004C924 /* Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		07FE89EE1DE9D947004E4A07 /* MovementScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovementScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 			children = (
 				077AC0DE1DA535840026895B /* MyGymGuide.swift */,
 				07F912071DC2D1240004C924 /* WarmupOverview.swift */,
+				07FE89EE1DE9D947004E4A07 /* MovementScreen.swift */,
 			);
 			name = MyGymGuide;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 			files = (
 				07F9120C1DC3F9B00004C924 /* Navigation.swift in Sources */,
 				077AC0DF1DA535840026895B /* MyGymGuide.swift in Sources */,
+				07FE89EF1DE9D947004E4A07 /* MovementScreen.swift in Sources */,
 				07F0E3E41DE0D4DF00D0A13F /* EmphasisSelection.swift in Sources */,
 				077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */,
 				077AC1001DA54C810026895B /* Information.swift in Sources */,
