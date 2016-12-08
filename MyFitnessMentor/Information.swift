@@ -40,6 +40,8 @@ class Information: UITableViewController{
             
             let alertInformation = UIAlertController(title: (NSLocalizedString("alertTitle3", comment: "")), message: (NSLocalizedString("alertMessage3", comment: "")), preferredStyle: UIAlertControllerStyle.alert)
             
+            alertInformation.view.tintColor = .black
+            
             alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
             
             self.present(alertInformation, animated: true, completion: nil)
@@ -65,8 +67,30 @@ class Information: UITableViewController{
 }
     
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
     
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+
+        return " "
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 15)!
+        header.textLabel?.textColor = .black
+        
+        
+//        let border = UIView(frame: CGRect(x: 0,y: header.frame.size.height ,width: self.view.frame.size.width,height: 1))
+//        border.backgroundColor = .black
+//        header.addSubview(border)
+        
+        
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
@@ -87,6 +111,7 @@ class Information: UITableViewController{
             cell.textLabel?.text = informationGroup[row].name
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor.init(white: 0.98, alpha: 1)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
             return cell
        
 }

@@ -60,6 +60,8 @@ class MyPreferences: UITableViewController{
             
             let alertInformation = UIAlertController(title: (NSLocalizedString("alertTitle2", comment: "")), message: (NSLocalizedString("alertMessage2", comment: "")), preferredStyle: UIAlertControllerStyle.alert)
             
+            alertInformation.view.tintColor = .black
+            
             alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
             
             self.present(alertInformation, animated: true, completion: nil)
@@ -125,9 +127,13 @@ class MyPreferences: UITableViewController{
     //
     // Table view delegates
     //
+    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
+    
+    
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
@@ -136,6 +142,23 @@ class MyPreferences: UITableViewController{
         case 2:  return (NSLocalizedString("case2", comment: ""))
         default: return (NSLocalizedString("default", comment: ""))
         }
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 20)!
+        header.textLabel?.textColor = .black
+        header.textLabel?.text = header.textLabel?.text?.capitalized
+        
+        //let border = UIView(frame: CGRectMake(0,39,self.view.bounds.width,1))
+       
+        let border = UIView(frame: CGRect(x: 15,y: header.frame.size.height ,width: self.view.frame.size.width,height: 1))
+        border.backgroundColor = .black
+        header.addSubview(border)
+        
+
     }
     
     
@@ -221,18 +244,18 @@ class MyPreferences: UITableViewController{
                 cell.textLabel?.text = meGroup[subSection].name
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor.init(white: 0.98, alpha: 1)
-                cell.textLabel?.font = UIFont(name: "SFUIText", size: 17)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
                 // UserDefaults
                 cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(meGroup[subSection].name)")
                 cell.detailTextLabel?.textAlignment = NSTextAlignment.right
                 cell.detailTextLabel?.textColor = UIColor.gray
-                cell.detailTextLabel?.font = UIFont(name: "SFUIText", size: 16)
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
                 //
                 return cell
             } else {
                 subcell.textLabel?.text = meGroup[subSection].items[row - 1]
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
-                subcell.textLabel?.font = UIFont(name: "SFUIText", size: 16)
+                subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
                 let collapsedMe = meGroup[subSection].collapsed
                 if collapsedMe == true{
                     subcell.textLabel?.alpha = 0
@@ -245,19 +268,19 @@ class MyPreferences: UITableViewController{
                 cell.textLabel?.text = movementsGroup[subSection].name
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor.init(white: 0.98, alpha: 1)
-                cell.textLabel?.font = UIFont(name: "SFUIText", size: 17)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
                 // UserDefaults
                 cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(movementsGroup[subSection].name)")
                 cell.detailTextLabel?.textAlignment = NSTextAlignment.right
                 cell.detailTextLabel?.textColor = UIColor.gray
-                cell.detailTextLabel?.font = UIFont(name: "SFUIText", size: 16)
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
 
                 //
                 return cell
             } else {
                 subcell.textLabel?.text = movementsGroup[subSection].items[row - 1]
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
-                subcell.textLabel?.font = UIFont(name: "SFUIText", size: 16)
+                subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
                 let collapsedMo = movementsGroup[subSection].collapsed
                 if collapsedMo == true{
                     subcell.textLabel?.alpha = 0
@@ -271,19 +294,19 @@ class MyPreferences: UITableViewController{
                 cell.textLabel?.text = volumeGroup[subSection].name
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor.init(white: 0.98, alpha: 1)
-                cell.textLabel?.font = UIFont(name: "SFUIText", size: 17)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
                 // UserDefaults
                 cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(volumeGroup[subSection].name)")
                 cell.detailTextLabel?.textAlignment = NSTextAlignment.right
                 cell.detailTextLabel?.textColor = UIColor.gray
-                cell.detailTextLabel?.font = UIFont(name: "SFUIText", size: 16)
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
 
                 //
                 return cell
             } else {
                 subcell.textLabel?.text = volumeGroup[subSection].items[row - 1]
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
-                subcell.textLabel?.font = UIFont(name: "SFUIText", size: 16)
+                subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
                 let collapsedVo = volumeGroup[subSection].collapsed
                 if collapsedVo == true{
                     subcell.textLabel?.alpha = 0

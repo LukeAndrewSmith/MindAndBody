@@ -1,0 +1,138 @@
+//
+//  WarmupScreen.swift
+//  MyFitnessMentor
+//
+//  Created by Luke Smith on 26/11/16.
+//  Copyright © 2016 Luke Smith. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout    {
+    
+
+    
+    // Outlets
+    
+    
+    // Body Image
+    @IBOutlet weak var bodyImage: UIImageView!
+    
+    // Table View
+    @IBOutlet weak var tableView: UITableView!
+    
+    // Description Label
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    // Extra Information
+    @IBOutlet weak var extraInformation: UIButton!
+    
+    // Collection View Controller
+    @IBOutlet weak var collectionView: UICollectionView!
+ 
+    
+   
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.setHidesBackButton(true, animated: false)
+    }
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        // Navigation Controller
+        self.navigationItem.prompt = (NSLocalizedString("movement", comment: ""))
+        
+        self.navigationItem.title = "5 minutes light cardio"
+        
+     
+        
+        // Labels
+        
+        extraInformation.setTitle((NSLocalizedString("extraInformation", comment: "")), for: UIControlState.normal)
+        extraInformation.backgroundColor = .blue
+      
+      
+        
+        collectionView.backgroundColor = .black
+    
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    // Warmup Array
+//    let warmupFull : [String] =
+//        [
+//            "movement1",
+//            "movement2",
+//            "movement3",
+//            "movement4",
+//            "movement5",
+//            "movement6",
+//            ]
+//    
+
+    // Table View
+    func tableView(_ tableView: UITableView, numberOfRowsInSection: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        let titleCell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        
+       
+        if indexPath.row == 0 {
+            titleCell.textLabel?.text = "Sets & Reps"
+            titleCell.textLabel?.textAlignment = .center
+            titleCell.textLabel?.font = UIFont(name: "SFUIText-semibold", size: 16)
+            
+            return titleCell
+        } else {
+            cell.textLabel?.text = "hi"
+            return cell
+            
+        }
+        
+        
+        
+    }
+
+
+    
+    // Collection View
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath as IndexPath)
+        
+        cell.backgroundColor = .red
+        
+        
+        return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = (self.view.frame.size.width-3)/6
+        return CGSize(width: width, height: 24.5)
+    }
+    
+}

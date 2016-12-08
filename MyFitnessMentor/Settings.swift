@@ -32,6 +32,15 @@ class Settings: UITableViewController{
         }
     }
     
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 15)!
+        header.textLabel?.textColor = .black
+    }
+    
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return 1
     }

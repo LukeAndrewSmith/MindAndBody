@@ -22,18 +22,39 @@
     "alertTitle1" = "Welcome to MyGymGuide!";
     "alertMessage1" = "\nThis is the homepage; it will contain your personalised workout plan and a bar showing the weeks workouts.\n\nGet started and set your preferences in the left tab.";
 
-    //
-    // Title //
-    "myGymGuide" = "MyGymGuide";
 
     //
-    //  Button Titles //
-    "warmup" = "Warmup";
-    "workout" = "Workout";
-    "stretching" = "Stretching";
-    "cardio" = "Cardio";
+    // Home Screen //
+        // Title //
+        "myGymGuide" = "MyGymGuide";
 
-    "workoutNumber" = " Workout Number:";
+        //
+        // Button Titles //
+        "warmup" = "Warmup";
+        "workout" = "Workout";
+        "stretching" = "Stretching";
+        "cardio" = "Cardio";
+
+        "workoutNumber" = " Workout Number:";
+
+
+    //
+    // Warmup //
+        // Overview //
+        "overview" = "Overview";
+        "begin" = "Begin";
+
+        // Warmup Screen //
+        "emphasisSelection" = "Emphasis Selection";
+        "movement" = "Movement:";
+
+        "next" = "Next";
+        "end" = "End";
+
+
+
+
+
 
 
 
@@ -43,8 +64,7 @@
     //
     // Title //
     "preferences" = "Preferences";
-        // Overview
-        "overview" = "Overview";
+
 
     //
     // Names //
@@ -102,8 +122,8 @@
     //
     // Section Titles //
     "case0" = "      Me";
-    "case1" = "      MyMovements";
-    "case2" = "      MyVolume";
+    "case1" = "      Movements";
+    "case2" = "      Volume";
     "default" = "";
 
 

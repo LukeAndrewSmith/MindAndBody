@@ -28,12 +28,14 @@ class MyFitnessPlan: UIViewController {
     // Workout Number
     @IBOutlet weak var workoutNumber: UILabel!
     
-    // Label Test
+    // Arrow Label
     @IBOutlet weak var arrowLabel: UILabel!
     
     
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.topItem?.title = (NSLocalizedString("myGymGuide", comment: ""))
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,30 +52,41 @@ class MyFitnessPlan: UIViewController {
             
             let alertInformation = UIAlertController(title: (NSLocalizedString("alertTitle1", comment: "")), message: (NSLocalizedString("alertMessage1", comment: "")), preferredStyle: UIAlertControllerStyle.alert)
             
+            alertInformation.view.tintColor = .black
+            
             alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
             
             self.present(alertInformation, animated: true, completion: nil)
+            
+            
+//            self.tabBarController?.appearance().shadowImage = UIImage.colorForNavBar(UIColor(red:0.34, green:0.69, blue:0.88, alpha:1.0))
+            UITabBar.appearance().shadowImage = UIImage(named: "ShadowImageN")
+            
         }
 
        // Title
-        self.navigationController?.navigationBar.topItem?.title = (NSLocalizedString("myGymGuide", comment: ""))
+        
        
         // Button Titles
         myWarmup.setTitle(NSLocalizedString("warmup", comment: ""), for: UIControlState.normal)
-        myWarmup.titleLabel!.font = UIFont(name: "SFUIText-semibold", size: 18)
+        myWarmup.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 18)
         
         
         myWorkout.setTitle(NSLocalizedString("workout", comment: ""), for: UIControlState.normal)
-        myWorkout.titleLabel!.font = UIFont(name: "SFUIText-semibold", size: 18)
+        myWorkout.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 18)
         
         myStretching.setTitle(NSLocalizedString("stretching", comment: ""), for: UIControlState.normal)
-        myStretching.titleLabel!.font = UIFont(name: "SFUIText-semibold", size: 18)
+        myStretching.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 18)
         
         myCardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
-        myCardio.titleLabel!.font = UIFont(name: "SFUIText-semibold", size: 18)
+        myCardio.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 18)
        
         // Workout Number
         workoutNumber.text = NSLocalizedString("workoutNumber", comment: "")
+        workoutNumber.font = UIFont(name: "SFUIText-Italic", size: 15)
+        workoutNumber.sizeToFit()
+        
+        
         
         
         

@@ -40,9 +40,12 @@
 		077AC1351DA793950026895B /* SF-UI-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC1271DA793950026895B /* SF-UI-Text-SemiboldItalic.otf */; };
 		077AC1361DA793950026895B /* SF-UI-Text-Ultrathin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC1281DA793950026895B /* SF-UI-Text-Ultrathin.otf */; };
 		077AC1371DA793950026895B /* SF-UI-Text-UltrathinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC1291DA793950026895B /* SF-UI-Text-UltrathinItalic.otf */; };
+		07C302BA1DE9F0FE00C55B04 /* WarmupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C302B91DE9F0FE00C55B04 /* WarmupScreen.swift */; };
 		07F0E3E41DE0D4DF00D0A13F /* EmphasisSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */; };
 		07F912081DC2D1240004C924 /* WarmupOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F912071DC2D1240004C924 /* WarmupOverview.swift */; };
 		07F9120C1DC3F9B00004C924 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9120B1DC3F9B00004C924 /* Navigation.swift */; };
+		07FE38081DF6E74E00E7EA20 /* PreferencesNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE38071DF6E74E00E7EA20 /* PreferencesNavigation.swift */; };
+		07FE380A1DF6E78700E7EA20 /* InformationNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE38091DF6E78700E7EA20 /* InformationNavigation.swift */; };
 		07FE89EF1DE9D947004E4A07 /* MovementScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE89EE1DE9D947004E4A07 /* MovementScreen.swift */; };
 /* End PBXBuildFile section */
 
@@ -94,9 +97,12 @@
 		077AC1271DA793950026895B /* SF-UI-Text-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		077AC1281DA793950026895B /* SF-UI-Text-Ultrathin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Ultrathin.otf"; sourceTree = "<group>"; };
 		077AC1291DA793950026895B /* SF-UI-Text-UltrathinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-UltrathinItalic.otf"; sourceTree = "<group>"; };
+		07C302B91DE9F0FE00C55B04 /* WarmupScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WarmupScreen.swift; path = ../WarmupScreen.swift; sourceTree = "<group>"; };
 		07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmphasisSelection.swift; sourceTree = "<group>"; };
 		07F912071DC2D1240004C924 /* WarmupOverview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupOverview.swift; sourceTree = "<group>"; };
 		07F9120B1DC3F9B00004C924 /* Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		07FE38071DF6E74E00E7EA20 /* PreferencesNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesNavigation.swift; sourceTree = "<group>"; };
+		07FE38091DF6E78700E7EA20 /* InformationNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InformationNavigation.swift; path = ../InformationNavigation.swift; sourceTree = "<group>"; };
 		07FE89EE1DE9D947004E4A07 /* MovementScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovementScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +172,7 @@
 		077AC0FC1DA54BD60026895B /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				07FE38071DF6E74E00E7EA20 /* PreferencesNavigation.swift */,
 				077AC1031DA579680026895B /* Preferences.swift */,
 				07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */,
 				077AC1011DA573210026895B /* Settings.swift */,
@@ -178,6 +185,7 @@
 			children = (
 				077AC0DE1DA535840026895B /* MyGymGuide.swift */,
 				07F912071DC2D1240004C924 /* WarmupOverview.swift */,
+				07C302B91DE9F0FE00C55B04 /* WarmupScreen.swift */,
 				07FE89EE1DE9D947004E4A07 /* MovementScreen.swift */,
 			);
 			name = MyGymGuide;
@@ -186,6 +194,7 @@
 		077AC0FE1DA54C500026895B /* Information */ = {
 			isa = PBXGroup;
 			children = (
+				07FE38091DF6E78700E7EA20 /* InformationNavigation.swift */,
 				077AC0FF1DA54C810026895B /* Information.swift */,
 			);
 			name = Information;
@@ -282,7 +291,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Luke Smith";
 				TargetAttributes = {
 					077AC0D61DA535830026895B = {
@@ -367,12 +376,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				07F9120C1DC3F9B00004C924 /* Navigation.swift in Sources */,
+				07C302BA1DE9F0FE00C55B04 /* WarmupScreen.swift in Sources */,
 				077AC0DF1DA535840026895B /* MyGymGuide.swift in Sources */,
 				07FE89EF1DE9D947004E4A07 /* MovementScreen.swift in Sources */,
+				07FE380A1DF6E78700E7EA20 /* InformationNavigation.swift in Sources */,
 				07F0E3E41DE0D4DF00D0A13F /* EmphasisSelection.swift in Sources */,
 				077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */,
 				077AC1001DA54C810026895B /* Information.swift in Sources */,
 				077AC1021DA573210026895B /* Settings.swift in Sources */,
+				07FE38081DF6E74E00E7EA20 /* PreferencesNavigation.swift in Sources */,
 				07F912081DC2D1240004C924 /* WarmupOverview.swift in Sources */,
 				077AC1041DA579680026895B /* Preferences.swift in Sources */,
 			);
@@ -434,6 +446,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -456,7 +469,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -484,6 +497,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -500,7 +514,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
