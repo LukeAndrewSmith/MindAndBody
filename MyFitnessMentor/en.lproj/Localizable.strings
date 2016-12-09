@@ -45,11 +45,10 @@
         "begin" = "Begin";
 
         // Warmup Screen //
-        "emphasisSelection" = "Emphasis Selection";
         "movement" = "Movement:";
+        "extraInformation" = "Extra Information";
 
-        "next" = "Next";
-        "end" = "End";
+
 
 
 

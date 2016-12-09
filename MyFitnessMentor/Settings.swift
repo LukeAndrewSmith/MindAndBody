@@ -32,13 +32,31 @@ class Settings: UITableViewController{
         }
     }
     
-    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
+        // Header
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 15)!
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 20)!
         header.textLabel?.textColor = .black
+        header.textLabel?.text = header.textLabel?.text?.capitalized
+        
+        
+        header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        // Border
+        let border = UIView(frame: CGRect(x: 15,y: header.frame.size.height ,width: self.view.frame.size.width,height: 1))
+        border.backgroundColor = .black
+        header.addSubview(border)
+        
     }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let view = UIView()
+        view.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        return view
+    }
+
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,11 +72,15 @@ class Settings: UITableViewController{
         case 0:
             cell.textLabel?.text = NSLocalizedString("language", comment: "")
             cell.textLabel?.textAlignment = NSTextAlignment.left
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
             return cell
             
         case 1:
             cell.textLabel?.text = NSLocalizedString("clearPreferences", comment: "")
             cell.textLabel?.textAlignment = NSTextAlignment.left
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
             return cell
         default: return cell
         }

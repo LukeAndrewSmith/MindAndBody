@@ -65,6 +65,12 @@ class MyPreferences: UITableViewController{
             alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
             
             self.present(alertInformation, animated: true, completion: nil)
+            
+            
+            
+        self.tableView.backgroundColor = .green
+            //UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            
         }
 
         
@@ -147,13 +153,18 @@ class MyPreferences: UITableViewController{
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
+        // Header
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 20)!
         header.textLabel?.textColor = .black
         header.textLabel?.text = header.textLabel?.text?.capitalized
         
-        //let border = UIView(frame: CGRectMake(0,39,self.view.bounds.width,1))
+        header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+     
+        
        
+        
+        // Border
         let border = UIView(frame: CGRect(x: 15,y: header.frame.size.height ,width: self.view.frame.size.width,height: 1))
         border.backgroundColor = .black
         header.addSubview(border)
@@ -161,6 +172,14 @@ class MyPreferences: UITableViewController{
 
     }
     
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let view = UIView()
+        view.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        return view
+    }
+    
+
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             //
@@ -205,23 +224,23 @@ class MyPreferences: UITableViewController{
         switch indexPath.section {
         case 0:
             if rowIndex == 0 {
-                return 44.0
+                return 47.0
             } else {
-            return meGroup[cellIndex].collapsed! ? 0.0 : 44.0
+            return meGroup[cellIndex].collapsed! ? 0.0 : 47.0
             }
         case 1:
             if rowIndex == 0{
-                return 44.0
+                return 47.0
             } else {
-            return movementsGroup[cellIndex].collapsed! ? 0.0 : 44.0
+            return movementsGroup[cellIndex].collapsed! ? 0.0 : 47.0
             }
         case 2:
             if rowIndex == 0 {
-                return 44.0
+                return 47.0
             } else {
-            return volumeGroup[cellIndex].collapsed! ? 0.0 : 44.0
+            return volumeGroup[cellIndex].collapsed! ? 0.0 : 47.0
             }
-        default: return 44.0
+        default: return 47.0
         }
 }
     
@@ -243,7 +262,7 @@ class MyPreferences: UITableViewController{
             if row == 0 {
                 cell.textLabel?.text = meGroup[subSection].name
                 cell.textLabel?.textAlignment = NSTextAlignment.left
-                cell.backgroundColor = UIColor.init(white: 0.98, alpha: 1)
+                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
                 // UserDefaults
                 cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(meGroup[subSection].name)")
@@ -256,6 +275,7 @@ class MyPreferences: UITableViewController{
                 subcell.textLabel?.text = meGroup[subSection].items[row - 1]
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
                 subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
+                subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
                 let collapsedMe = meGroup[subSection].collapsed
                 if collapsedMe == true{
                     subcell.textLabel?.alpha = 0
@@ -267,7 +287,7 @@ class MyPreferences: UITableViewController{
             if row == 0 {
                 cell.textLabel?.text = movementsGroup[subSection].name
                 cell.textLabel?.textAlignment = NSTextAlignment.left
-                cell.backgroundColor = UIColor.init(white: 0.98, alpha: 1)
+                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
                 // UserDefaults
                 cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(movementsGroup[subSection].name)")
@@ -281,6 +301,7 @@ class MyPreferences: UITableViewController{
                 subcell.textLabel?.text = movementsGroup[subSection].items[row - 1]
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
                 subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
+                subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
                 let collapsedMo = movementsGroup[subSection].collapsed
                 if collapsedMo == true{
                     subcell.textLabel?.alpha = 0
@@ -293,7 +314,7 @@ class MyPreferences: UITableViewController{
             if row == 0 {
                 cell.textLabel?.text = volumeGroup[subSection].name
                 cell.textLabel?.textAlignment = NSTextAlignment.left
-                cell.backgroundColor = UIColor.init(white: 0.98, alpha: 1)
+                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
                 // UserDefaults
                 cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(volumeGroup[subSection].name)")
@@ -307,6 +328,7 @@ class MyPreferences: UITableViewController{
                 subcell.textLabel?.text = volumeGroup[subSection].items[row - 1]
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
                 subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
+                subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
                 let collapsedVo = volumeGroup[subSection].collapsed
                 if collapsedVo == true{
                     subcell.textLabel?.alpha = 0

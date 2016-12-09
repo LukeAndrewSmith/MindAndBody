@@ -21,4 +21,10 @@ class PreferencesNaviagtion: UINavigationController {
         return .lightContent
     }
     
+    class navigationBar: UINavigationBar{
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        let newSize :CGSize = CGSize(width: self.frame.size.width, height: 54)
+        return newSize
+    }
+    }
 }

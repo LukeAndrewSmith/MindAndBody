@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07695CC01DBFD590007E6179 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07695CBF1DBFD590007E6179 /* Localizable.strings */; };
 		077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DA1DA535830026895B /* AppDelegate.swift */; };
 		077AC0DF1DA535840026895B /* MyGymGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DE1DA535840026895B /* MyGymGuide.swift */; };
 		077AC0E21DA535840026895B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E01DA535840026895B /* Main.storyboard */; };
@@ -46,6 +45,7 @@
 		07F9120C1DC3F9B00004C924 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9120B1DC3F9B00004C924 /* Navigation.swift */; };
 		07FE38081DF6E74E00E7EA20 /* PreferencesNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE38071DF6E74E00E7EA20 /* PreferencesNavigation.swift */; };
 		07FE380A1DF6E78700E7EA20 /* InformationNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE38091DF6E78700E7EA20 /* InformationNavigation.swift */; };
+		07FE380C1DF9B3A200E7EA20 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07FE380E1DF9B3A200E7EA20 /* Localizable.strings */; };
 		07FE89EF1DE9D947004E4A07 /* MovementScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE89EE1DE9D947004E4A07 /* MovementScreen.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,7 +60,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		07695CBF1DBFD590007E6179 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		077AC0D71DA535830026895B /* MyFitnessMentor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFitnessMentor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		077AC0DA1DA535830026895B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		077AC0DE1DA535840026895B /* MyGymGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGymGuide.swift; sourceTree = "<group>"; };
@@ -103,6 +102,8 @@
 		07F9120B1DC3F9B00004C924 /* Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		07FE38071DF6E74E00E7EA20 /* PreferencesNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesNavigation.swift; sourceTree = "<group>"; };
 		07FE38091DF6E78700E7EA20 /* InformationNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InformationNavigation.swift; path = ../InformationNavigation.swift; sourceTree = "<group>"; };
+		07FE380D1DF9B3A200E7EA20 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		07FE380F1DF9B3C700E7EA20 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		07FE89EE1DE9D947004E4A07 /* MovementScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovementScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,7 +146,7 @@
 		077AC0D91DA535830026895B /* MyFitnessMentor */ = {
 			isa = PBXGroup;
 			children = (
-				07695CBF1DBFD590007E6179 /* Localizable.strings */,
+				07FE380E1DF9B3A200E7EA20 /* Localizable.strings */,
 				077AC0DA1DA535830026895B /* AppDelegate.swift */,
 				077AC0E01DA535840026895B /* Main.storyboard */,
 				07F9120B1DC3F9B00004C924 /* Navigation.swift */,
@@ -314,6 +315,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 077AC0CE1DA535830026895B;
 			productRefGroup = 077AC0D81DA535830026895B /* Products */;
@@ -335,7 +337,7 @@
 				077AC1141DA7936E0026895B /* SF-UI-Display-Heavy.otf in Resources */,
 				077AC1181DA7936E0026895B /* SF-UI-Display-Semibold.otf in Resources */,
 				077AC12C1DA793950026895B /* SF-UI-Text-Heavy.otf in Resources */,
-				07695CC01DBFD590007E6179 /* Localizable.strings in Resources */,
+				07FE380C1DF9B3A200E7EA20 /* Localizable.strings in Resources */,
 				077AC1171DA7936E0026895B /* SF-UI-Display-Regular.otf in Resources */,
 				077AC1321DA793950026895B /* SF-UI-Text-Regular.otf in Resources */,
 				077AC12A1DA793950026895B /* SF-UI-Text-Bold.otf in Resources */,
@@ -413,6 +415,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				077AC0E11DA535840026895B /* Base */,
+				07FE380F1DF9B3C700E7EA20 /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -425,6 +428,14 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		07FE380E1DF9B3A200E7EA20 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07FE380D1DF9B3A200E7EA20 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -432,6 +443,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -483,6 +495,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

@@ -1,0 +1,69 @@
+
+/* Class = "UILabel"; text = ">"; ObjectID = "2r0-Ih-fdJ"; */
+"2r0-Ih-fdJ.text" = ">";
+
+/* Class = "UINavigationItem"; title = "Overview"; ObjectID = "2yi-Tz-kSQ"; */
+"2yi-Tz-kSQ.title" = "Overview";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "5Ju-W1-Ddq"; */
+"5Ju-W1-Ddq.title" = "Title";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "6Ok-DW-LtP"; */
+"6Ok-DW-LtP.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = "Start"; ObjectID = "A9Y-nW-coy"; */
+"A9Y-nW-coy.title" = "Start";
+
+/* Class = "UINavigationItem"; title = "Information"; ObjectID = "Aae-e2-qnX"; */
+"Aae-e2-qnX.title" = "Information";
+
+/* Class = "UIButton"; normalTitle = "Begin"; ObjectID = "BtL-bV-C5b"; */
+"BtL-bV-C5b.normalTitle" = "Begin";
+
+/* Class = "UIButton"; normalTitle = "Cardio"; ObjectID = "CCh-pG-ZxL"; */
+"CCh-pG-ZxL.normalTitle" = "Cardio";
+
+/* Class = "UIBarButtonItem"; title = "Superset"; ObjectID = "Cg7-LP-J5R"; */
+"Cg7-LP-J5R.title" = "Superset";
+
+/* Class = "UIButton"; normalTitle = "Warmup"; ObjectID = "FO6-D3-hxM"; */
+"FO6-D3-hxM.normalTitle" = "Warmup";
+
+/* Class = "UILabel"; text = "Language"; ObjectID = "ISH-lR-L4y"; */
+"ISH-lR-L4y.text" = "Language";
+
+/* Class = "UIButton"; normalTitle = "Workout"; ObjectID = "Lpd-0G-VoC"; */
+"Lpd-0G-VoC.normalTitle" = "Workout";
+
+/* Class = "UINavigationItem"; title = "MyPreferences"; ObjectID = "U3t-iA-4Ll"; */
+"U3t-iA-4Ll.title" = "MyPreferences";
+
+/* Class = "UIBarButtonItem"; title = "Start"; ObjectID = "YYo-H7-bAL"; */
+"YYo-H7-bAL.title" = "Start";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "cRC-HA-CGb"; */
+"cRC-HA-CGb.title" = "Settings";
+
+/* Class = "UILabel"; text = ">"; ObjectID = "d9Z-8v-SDu"; */
+"d9Z-8v-SDu.text" = ">";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "lml-oa-P8Y"; */
+"lml-oa-P8Y.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Stretching"; ObjectID = "ltX-8Q-xZc"; */
+"ltX-8Q-xZc.normalTitle" = "Stretching";
+
+/* Class = "UILabel"; text = ">"; ObjectID = "m4s-gP-aGQ"; */
+"m4s-gP-aGQ.text" = ">";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "obP-z8-zqP"; */
+"obP-z8-zqP.title" = " ";
+
+/* Class = "UILabel"; text = ">"; ObjectID = "qqY-Ur-fWy"; */
+"qqY-Ur-fWy.text" = ">";
+
+/* Class = "UILabel"; text = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"; ObjectID = "qw6-o2-pVX"; */
+"qw6-o2-pVX.text" = "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv";
+
+/* Class = "UINavigationItem"; title = "Overview"; ObjectID = "wLM-yg-MYL"; */
+"wLM-yg-MYL.title" = "Overview";

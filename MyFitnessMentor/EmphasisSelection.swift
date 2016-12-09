@@ -60,20 +60,29 @@ class EmphasisSelection: UITableViewController{
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 15)!
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 20)!
         header.textLabel?.textColor = .black
+        header.textLabel?.text = header.textLabel?.text?.capitalized
         
+        header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
-        if section == 0 {
-            let border = UIView(frame: CGRect(x: 0,y: header.frame.size.height ,width: self.view.frame.size.width,height: 1))
+        //if section == 0 {
+            let border = UIView(frame: CGRect(x: 15,y: header.frame.size.height ,width: self.view.frame.size.width,height: 1))
             border.backgroundColor = .black
             header.addSubview(border)
-        } else {
-            let border = UIView(frame: CGRect(x: 0,y: header.frame.size.height ,width: self.view.frame.size.width,height: 1))
-            border.backgroundColor = .black
-            header.addSubview(border)
-        }
+//        } else {
+//            let border = UIView(frame: CGRect(x: 0,y: header.frame.size.height ,width: self.view.frame.size.width,height: 1))
+//            border.backgroundColor = .black
+//            header.addSubview(border)
+//        }
 
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let view = UIView()
+        view.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        return view
     }
     
     
@@ -105,21 +114,21 @@ class EmphasisSelection: UITableViewController{
         case 0 :
             cell.textLabel?.text = emphasisGroup1[subSection].name[row]
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = UIColor.init(white: 0.98, alpha: 1)
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.tintColor = UIColor.black
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
             return cell
         case 1 :
             cell.textLabel?.text = emphasisGroup2[subSection].name[row]
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = UIColor.init(white: 0.98, alpha: 1)
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.tintColor = UIColor.black
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
             return cell
         case 2 :
             cell.textLabel?.text = emphasisGroup3[subSection].name[row]
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = UIColor.init(white: 0.98, alpha: 1)
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.tintColor = UIColor.black
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
             return cell

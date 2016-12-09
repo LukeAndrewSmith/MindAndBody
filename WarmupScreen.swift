@@ -52,10 +52,7 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
      
         
         // Labels
-        
-        extraInformation.setTitle((NSLocalizedString("extraInformation", comment: "")), for: UIControlState.normal)
-        extraInformation.backgroundColor = .blue
-      
+    extraInformation.setTitle((NSLocalizedString("extraInformation", comment: "")), for: .normal)
       
         
         collectionView.backgroundColor = .black
@@ -98,11 +95,12 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         if indexPath.row == 0 {
             titleCell.textLabel?.text = "Sets & Reps"
             titleCell.textLabel?.textAlignment = .center
-            titleCell.textLabel?.font = UIFont(name: "SFUIText-semibold", size: 16)
+            titleCell.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
             
             return titleCell
         } else {
-            cell.textLabel?.text = "hi"
+            cell.textLabel?.text = "Hi"
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 17)
             return cell
             
         }
