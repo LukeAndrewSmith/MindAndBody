@@ -40,6 +40,14 @@ class MyPreferences: UITableViewController{
     var volumeGroup = [Group]()
  
 
+    override func viewWillAppear(_ animated: Bool) {
+        let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        self.tableView.backgroundView = backView
+        
+    }
+    
     
     //
     // viewDidLoad
@@ -66,11 +74,9 @@ class MyPreferences: UITableViewController{
             
             self.present(alertInformation, animated: true, completion: nil)
             
-            
-            
-        self.tableView.backgroundColor = .green
-            //UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            
+  
+       
+            self.tableView.setContentOffset(CGPoint.zero, animated: true)
         }
 
         
@@ -118,10 +124,6 @@ class MyPreferences: UITableViewController{
             
         ]
 
-        
-        
-        
-        
         
     }
     
@@ -179,7 +181,6 @@ class MyPreferences: UITableViewController{
         return view
     }
     
-
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             //
@@ -412,7 +413,9 @@ class MyPreferences: UITableViewController{
             
             } else {
                 
+                tableView.deselectRow(at: indexPath, animated: true)
                 performSegue(withIdentifier: "emphasisSegue", sender: self)
+                
             }
                 
             
@@ -435,11 +438,15 @@ class MyPreferences: UITableViewController{
             let start = indices[subSection]
             let end = start + volumeGroup[subSection].items.count
             
+            
             tableView.beginUpdates()
             for i in start ..< end + 1 {
                 tableView.reloadRows(at: [IndexPath(row: i, section: 2)], with: .automatic)
+            
             }
             tableView.endUpdates()
+            
+            
             
             
         }
@@ -448,7 +455,7 @@ class MyPreferences: UITableViewController{
         
         
     }
-    
+  
     
     
     

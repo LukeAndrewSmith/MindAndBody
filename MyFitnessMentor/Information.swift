@@ -24,6 +24,15 @@ class Information: UITableViewController{
     var informationGroup = [Group2]()
     
 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        self.tableView.backgroundView = backView
+        
+    }
+    
     //
     // viewDidLoad
     //
@@ -78,19 +87,22 @@ class Information: UITableViewController{
         return " "
     }
 
+    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 15)!
-        header.textLabel?.textColor = .black
-        
-        
-//        let border = UIView(frame: CGRect(x: 0,y: header.frame.size.height ,width: self.view.frame.size.width,height: 1))
-//        border.backgroundColor = .black
-//        header.addSubview(border)
-        
+        header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
     }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let view = UIView()
+        view.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        return view
+    }
+
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
@@ -110,7 +122,7 @@ class Information: UITableViewController{
         
             cell.textLabel?.text = informationGroup[row].name
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = UIColor.init(white: 0.98, alpha: 1)
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
             return cell
        

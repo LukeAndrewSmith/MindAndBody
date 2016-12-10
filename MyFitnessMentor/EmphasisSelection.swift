@@ -27,6 +27,15 @@ class EmphasisSelection: UITableViewController{
     var emphasisGroup2 = [Group3]()
     var emphasisGroup3 = [Group3]()
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        self.tableView.backgroundView = backView
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

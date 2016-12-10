@@ -138,8 +138,8 @@
     //
         //
         // Titles //
-        "case10" = "General";
-        "case11" = "Reset";
+        "case10" = "      General";
+        "case11" = "      Reset";
 
         // Contents //
         // case10
@@ -154,13 +154,13 @@
         // Body Parts
         "muscles" = "Muscles";
         // Legs
-        "legs" = "Legs";
+        "legs" = "      Legs";
             "quads" = "Quads";
             "hamstrings" = "Hamstrings";
             "calves" = "Calves";
 
         // Pull
-        "pull" = "Pull";
+        "pull" = "      Pull";
             "back" = "Back";
             "upperBack" = "Upper Back";
             "lowerBack" = "Lower Back";
@@ -169,7 +169,7 @@
             "forearms" = "Forearms";
 
         // Push
-        "push" = "Push";
+        "push" = "      Push";
             "chest" = "Chest";
             "triceps" = "Triceps";
             "delts" = "Delts";
