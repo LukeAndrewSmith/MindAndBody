@@ -185,8 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				077AC0DE1DA535840026895B /* MyGymGuide.swift */,
-				07F912071DC2D1240004C924 /* WarmupOverview.swift */,
 				07C302B91DE9F0FE00C55B04 /* WarmupScreen.swift */,
+				07F912071DC2D1240004C924 /* WarmupOverview.swift */,
 				07FE89EE1DE9D947004E4A07 /* MovementScreen.swift */,
 			);
 			name = MyGymGuide;

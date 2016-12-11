@@ -92,7 +92,7 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
 //                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
 //            }
             
-            extraInformationView.center = CGPoint(x: view.center.x, y: view.center.y - self.navigationController!.navigationBar.frame.height)
+            extraInformationView.center = CGPoint(x: view.center.x, y: view.center.y)
             //gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
 
         }

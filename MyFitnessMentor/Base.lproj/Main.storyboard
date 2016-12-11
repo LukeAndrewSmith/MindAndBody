@@ -632,17 +632,17 @@
         <!--Warmup Screen-->
         <scene sceneID="nR9-IV-yRD">
             <objects>
-                <viewController id="GPB-uj-BAt" customClass="WarmupScreen" customModule="MyFitnessMentor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="GPB-uj-BAt" customClass="WarmupScreen" customModule="MyFitnessMentor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BE3-Sn-cAp"/>
                         <viewControllerLayoutGuide type="bottom" id="pBL-eF-Byk"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QCg-c5-O4a">
-                        <rect key="frame" x="0.0" y="94" width="375" height="573"/>
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="QCg-c5-O4a">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mAy-2a-pBz">
-                                <rect key="frame" x="0.0" y="548" width="375" height="24.5"/>
+                                <rect key="frame" x="0.0" y="548.5" width="375" height="24.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24.5" id="Rw6-8C-Scb"/>
@@ -669,7 +669,7 @@
                                 </connections>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pfy-LT-jaR">
-                                <rect key="frame" x="0.0" y="0.0" width="188" height="229"/>
+                                <rect key="frame" x="0.0" y="94" width="188" height="229"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -679,10 +679,10 @@
                                 </connections>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NWc-yf-R9O">
-                                <rect key="frame" x="187" y="0.0" width="188" height="229"/>
+                                <rect key="frame" x="187" y="94" width="188" height="229"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qw6-o2-pVX">
-                                <rect key="frame" x="0.0" y="229" width="375" height="191"/>
+                                <rect key="frame" x="0.0" y="323" width="375" height="191"/>
                                 <string key="text">vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -715,7 +715,6 @@
                             <constraint firstItem="Pfy-LT-jaR" firstAttribute="height" secondItem="QCg-c5-O4a" secondAttribute="height" multiplier="4/10" id="vIo-Sh-fH8"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" prompt="" id="Ogp-Y5-TPO">
                         <barButtonItem key="rightBarButtonItem" image="CheckMark" id="Njc-lF-GXZ">
                             <color key="tintColor" red="0.52941176469999995" green="1" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
