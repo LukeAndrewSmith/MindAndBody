@@ -169,7 +169,7 @@ class MyPreferences: UITableViewController{
         // Border
         let border = UIView(frame: CGRect(x: 15,y: header.frame.size.height ,width: self.view.frame.size.width,height: 1))
         border.backgroundColor = .black
-        header.addSubview(border)
+        //header.addSubview(border)
         
 
     }
