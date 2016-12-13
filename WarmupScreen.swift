@@ -38,6 +38,10 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.setHidesBackButton(true, animated: false)
+        
+        
+        self.extraInformationView.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - 73.5), width: self.view.frame.size.width, height: self.view.frame.size.height)
+        
     }
     
     
@@ -47,6 +51,7 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         
         // Navigation Controller
+        //self.navigationController?.navigationBar = navigationbarprompt
         self.navigationItem.prompt = (NSLocalizedString("movement", comment: ""))
         
         self.navigationItem.title = "5 minutes light cardio"
@@ -60,17 +65,31 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         collectionView.backgroundColor = .black
     
         
+        //self.extraInformationView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        //self.extraInformationView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        //self.extraInformationView.transform = CGAffineTransform(translationX: 0, y: ((self.view.frame.size.height) - 73.5))
+        //self.extraInformationView.frame = CGRect(x: 0, y: 0 + ((self.view.frame.size.height) - 73.5 - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height), width: self.view.frame.size.width, height: self.view.frame.size.height)
+        
+        //self.extraInformationView.frame = CGRect(x: 0, y: (self.view.frame.size.height) - 73.5, width: self.view.frame.size.width, height: self.view.frame.size.height)
         
         
         
-        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesture))
-        self.extraInformationView.addGestureRecognizer(gestureRecognizer)
+        
+        
+//        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesture))
+//        self.extraInformationView.addGestureRecognizer(gestureRecognizer)
+        
+        
+        let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        upSwipe.direction = UISwipeGestureRecognizerDirection.up
+        self.extraInformationView.addGestureRecognizer(upSwipe)
+        
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        downSwipe.direction = UISwipeGestureRecognizerDirection.down
+        self.extraInformationView.addGestureRecognizer(downSwipe)
+        
         
         view.bringSubview(toFront: extraInformationView)
-        self.extraInformationView.center = CGPoint(x: view.center.x, y: (2 * view.center.y) + 73.5)
-
-        
-        
         view.bringSubview(toFront: collectionView)
     }
     
@@ -84,18 +103,51 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         
         if gestureRecognizer.state == .ended {
-//            if (extraInformationView.center.y < 2 * view.center.y) {
-//                extraInformationView.center = CGPoint(x: gestureRecognizer.view!.center.x, y: view.center.y - 73.5)
-//                    gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-//            } else if (extraInformationView.center.y > 2 * view.center.y) {
+//            if (extraInformationView.center.y < 1.5 * view.center.y) {
+//                extraInformationView.center = CGPoint(x: gestureRecognizer.view!.center.x, y: view.center.y)
+//            } else if (extraInformationView.center.y < 1.5 * view.center.y) {
 //                extraInformationView.center = CGPoint(x: view.center.x, y: self.view.center.y)
-//                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
 //            }
             
-            extraInformationView.center = CGPoint(x: view.center.x, y: view.center.y)
-            //gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+            //extraInformationView.center = CGPoint(x: view.center.x, y: (3 * self.view.center.y) - 73.5)
+            
+            //gestureRecognizer.view!.center = CGPoint(x: view.center.x, y: view.center.y)
+            
 
         }
+    }
+    
+    @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
+        if (extraSwipe.direction == .up){
+            
+            
+            if self.extraInformationView.frame.maxY == (self.view.frame.maxY + ((self.view.frame.size.height) - 73.5)) {
+            
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+            self.extraInformationView.transform = CGAffineTransform(translationX: 0, y: 0)
+            
+            }, completion: nil)
+            } else {
+                
+            }
+            
+
+        } else if (extraSwipe.direction == .down){
+            
+            if self.extraInformationView.frame.maxY == self.view.frame.maxY {
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+            self.extraInformationView.transform = CGAffineTransform(translationX: 0, y: ((self.view.frame.size.height) - 73.5))
+                
+            }, completion: nil)
+            } else {
+                
+            }
+            
+            
+        }
+        
     }
 
     
