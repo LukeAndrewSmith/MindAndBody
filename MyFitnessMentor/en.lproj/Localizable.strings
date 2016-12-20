@@ -26,7 +26,7 @@
     //
     // Home Screen //
         // Title //
-        "myGymGuide" = "MyGymGuide";
+        "mind&body" = "Mind & Body";
 
         //
         // Button Titles //
@@ -34,6 +34,8 @@
         "workout" = "Workout";
         "stretching" = "Stretching";
         "cardio" = "Cardio";
+        "yoga" = "Yoga";
+        "mindfulness" = "Mindfulness";
 
         "workoutNumber" = " Workout Number:";
 

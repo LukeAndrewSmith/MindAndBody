@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
+
+
 class WarmupOverview: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     
     // Outlets
-    @IBOutlet weak var beginButton: UIButton!
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -29,13 +30,12 @@ class WarmupOverview: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
+        
         // Titles
         navigationBar.title = (NSLocalizedString("overview", comment: ""))
         
-        beginButton.setTitle((NSLocalizedString("begin", comment: "")), for: .normal)
-        beginButton.titleLabel!.font = UIFont(name: "SFUIText-bemibold", size: 17)
-        
-        
+       
         
         
     }

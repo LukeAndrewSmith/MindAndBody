@@ -96,12 +96,12 @@
 		077AC1271DA793950026895B /* SF-UI-Text-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		077AC1281DA793950026895B /* SF-UI-Text-Ultrathin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Ultrathin.otf"; sourceTree = "<group>"; };
 		077AC1291DA793950026895B /* SF-UI-Text-UltrathinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-UltrathinItalic.otf"; sourceTree = "<group>"; };
-		07C302B91DE9F0FE00C55B04 /* WarmupScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WarmupScreen.swift; path = ../WarmupScreen.swift; sourceTree = "<group>"; };
+		07C302B91DE9F0FE00C55B04 /* WarmupScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WarmupScreen.swift; path = MyFitnessMentor/WarmupScreen.swift; sourceTree = SOURCE_ROOT; };
 		07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmphasisSelection.swift; sourceTree = "<group>"; };
 		07F912071DC2D1240004C924 /* WarmupOverview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupOverview.swift; sourceTree = "<group>"; };
 		07F9120B1DC3F9B00004C924 /* Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		07FE38071DF6E74E00E7EA20 /* PreferencesNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesNavigation.swift; sourceTree = "<group>"; };
-		07FE38091DF6E78700E7EA20 /* InformationNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InformationNavigation.swift; path = ../InformationNavigation.swift; sourceTree = "<group>"; };
+		07FE38091DF6E78700E7EA20 /* InformationNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InformationNavigation.swift; path = MyFitnessMentor/InformationNavigation.swift; sourceTree = SOURCE_ROOT; };
 		07FE380D1DF9B3A200E7EA20 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		07FE380F1DF9B3C700E7EA20 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		07FE89EE1DE9D947004E4A07 /* MovementScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovementScreen.swift; sourceTree = "<group>"; };
