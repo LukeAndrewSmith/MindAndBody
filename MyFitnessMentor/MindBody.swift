@@ -26,7 +26,7 @@ extension UIView {
 
 
 
-class MyFitnessPlan: UIViewController {
+class MindBody: UIViewController {
 
     // Button Outlets
     
@@ -97,14 +97,14 @@ class MyFitnessPlan: UIViewController {
         Warmup.layer.borderWidth = 10
         Warmup.layer.borderColor = UIColor.white.cgColor
         Warmup.layer.cornerRadius = self.Warmup.frame.size.height / 2
-            //(view.frame.size.width * 0.4) / 2
+        
         
         Workout.setTitle(NSLocalizedString("workout", comment: ""), for: UIControlState.normal)
         Workout.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Workout.titleLabel!.textColor = .white
         Workout.layer.borderWidth = 10
         Workout.layer.borderColor = UIColor.white.cgColor
-        Workout.layer.cornerRadius = (view.frame.size.width * 0.4) / 2
+        Workout.layer.cornerRadius = self.Workout.frame.size.height / 2
 
         
         Stretching.setTitle(NSLocalizedString("stretching", comment: ""), for: UIControlState.normal)
@@ -112,7 +112,7 @@ class MyFitnessPlan: UIViewController {
         Stretching.titleLabel!.textColor = .white
         Stretching.layer.borderWidth = 10
         Stretching.layer.borderColor = UIColor.white.cgColor
-        Stretching.layer.cornerRadius = (view.frame.size.width * 0.4) / 2
+        Stretching.layer.cornerRadius = self.Stretching.frame.size.height / 2
 
         
         
@@ -121,7 +121,7 @@ class MyFitnessPlan: UIViewController {
         Cardio.titleLabel!.textColor = .white
         Cardio.layer.borderWidth = 10
         Cardio.layer.borderColor = UIColor.white.cgColor
-        Cardio.layer.cornerRadius = (view.frame.size.width * 0.4) / 2
+        Cardio.layer.cornerRadius = self.Cardio.frame.size.height / 2
 
        
         
@@ -130,7 +130,7 @@ class MyFitnessPlan: UIViewController {
         Yoga.titleLabel!.textColor = .white
         Yoga.layer.borderWidth = 10
         Yoga.layer.borderColor = UIColor.white.cgColor
-        Yoga.layer.cornerRadius = ((view.frame.size.width * 0.8) / 8)
+        Yoga.layer.cornerRadius = self.Yoga.frame.size.height / 2
 
         
         Mindfulness.setTitle(NSLocalizedString("mindfulness", comment: ""), for: UIControlState.normal)
@@ -138,7 +138,7 @@ class MyFitnessPlan: UIViewController {
         Mindfulness.titleLabel!.textColor = .white
         Mindfulness.layer.borderWidth = 10
         Mindfulness.layer.borderColor = UIColor.white.cgColor
-        Mindfulness.layer.cornerRadius = ((view.frame.size.width * 0.8) / 8)
+        Mindfulness.layer.cornerRadius = self.Mindfulness.frame.size.height / 2
         
         
         

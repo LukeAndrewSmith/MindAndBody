@@ -3,31 +3,31 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "Icon-Spotlight-40.png",
+      "filename" : "IconTest2.png",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "Icon-60.png",
+      "filename" : "IconTest2-1.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "MyFitness Icon @1x-1.png",
+      "filename" : "IconTest2-5.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "MyFitness Icon @2x-1.png",
+      "filename" : "IconTest2-2.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "Icon-Small@3x.png",
+      "filename" : "IconTest2-6.png",
       "scale" : "3x"
     },
     {
@@ -45,25 +45,25 @@
     {
       "size" : "57x57",
       "idiom" : "iphone",
-      "filename" : "Icon.png",
+      "filename" : "IconTest2-4.png",
       "scale" : "1x"
     },
     {
       "size" : "57x57",
       "idiom" : "iphone",
-      "filename" : "Icon@2x.png",
+      "filename" : "IconTest2-3.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "MyFitness Icon @2x Test.png",
+      "filename" : "IconTest3-1.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "Icon-60@3x-1.png",
+      "filename" : "IconTest3.png",
       "scale" : "3x"
     },
     {

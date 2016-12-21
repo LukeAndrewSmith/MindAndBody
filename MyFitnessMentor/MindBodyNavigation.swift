@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MyGymGuideNavigation: UINavigationController {
+class MindBodyNavigation: UINavigationController {
     
     
     override func viewDidLoad() {

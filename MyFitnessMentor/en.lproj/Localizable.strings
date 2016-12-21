@@ -42,15 +42,30 @@
 
     //
     // Warmup //
-        // Overview //
+        // Warmup //
         "overview" = "Overview";
-        "begin" = "Begin";
+        "fullBody" = "Full - Body";
+        "upperLower" = "Upper - Lower";
+        "legsPullPush" = "Legs - Pull - Push";
+        "cardio" = "Cardio";
 
         // Warmup Screen //
         "movement" = "Movement:";
         "extraInformation" = "Extra Information";
 
 
+    //
+    // Workout
+        // Choice //
+        "gym" = "Gym";
+        "home" = "Home";
+
+        // Workout //
+        "upperBody" = "Upper Body";
+        "lowerBody" = "Lower body";
+        "legs" = "Legs";
+        "pull" = "Pull";
+        "push" = "Push";
 
 
 
@@ -156,13 +171,13 @@
         // Body Parts
         "muscles" = "Muscles";
         // Legs
-        "legs" = "      Legs";
+        //"legs" = "      Legs";
             "quads" = "Quads";
             "hamstrings" = "Hamstrings";
             "calves" = "Calves";
 
         // Pull
-        "pull" = "      Pull";
+        //"pull" = "      Pull";
             "back" = "Back";
             "upperBack" = "Upper Back";
             "lowerBack" = "Lower Back";
@@ -171,7 +186,7 @@
             "forearms" = "Forearms";
 
         // Push
-        "push" = "      Push";
+        //"push" = "      Push";
             "chest" = "Chest";
             "triceps" = "Triceps";
             "delts" = "Delts";
