@@ -19,6 +19,8 @@ class YogaChoice: UIViewController  {
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     
+    // Information View
+    @IBOutlet weak var informationViewYogaC: UIView!
     
     
     
@@ -43,11 +45,56 @@ class YogaChoice: UIViewController  {
 //        fullBody.layer.cornerRadius = self.fullBody.frame.size.height / 2
         
         
+        // Information
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipesYogaC))
+        downSwipe.direction = UISwipeGestureRecognizerDirection.down
+        self.informationViewYogaC.addGestureRecognizer(downSwipe)
         
+        self.informationViewYogaC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height), width: self.view.frame.size.width, height: self.view.frame.size.height)
+        
+        
+        view.bringSubview(toFront: informationViewYogaC)
     }
     
     
+    @IBAction func informationButtonActionYogaC(_ sender: Any) {
+        
+        if self.informationViewYogaC.frame.maxY == (self.view.frame.maxY + ((self.view.frame.size.height))) {
+            
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationViewYogaC.transform = CGAffineTransform(translationX: 0, y: -((self.view.frame.size.height)))
+                
+            }, completion: nil)
+            
+        } else if self.informationViewYogaC.frame.maxY == self.view.frame.maxY {
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationViewYogaC.transform = CGAffineTransform(translationX: 0, y: 0)
+                
+            }, completion: nil)
+        }
+
+    }
     
-    
+    @IBAction func handleSwipesYogaC(extraSwipe:UISwipeGestureRecognizer) {
+        
+        if (extraSwipe.direction == .down){
+            
+            if self.informationViewYogaC.frame.maxY == self.view.frame.maxY {
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    
+                    self.informationViewYogaC.transform = CGAffineTransform(translationX: 0, y: 0)
+                    
+                }, completion: nil)
+            } else {
+                
+            }
+            
+            
+        }
+        
+    }
+
     
 }

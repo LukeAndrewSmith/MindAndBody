@@ -22,16 +22,18 @@ class WarmupChoice: UIViewController  {
     @IBOutlet weak var fullBody: UIButton!
     
     // Upper Lower
-    @IBOutlet weak var upperLower: UIButton!
+    @IBOutlet weak var upperBody: UIButton!
     
     // Legs Pull Push
-    @IBOutlet weak var legsPullPush: UIButton!
+    @IBOutlet weak var lowerBody: UIButton!
     
     // Cardio
     @IBOutlet weak var cardio: UIButton!
     
+    // Information View
+    @IBOutlet weak var informationViewWarmupC: UIView!
     
-
+    
     
     
     override func viewDidLoad() {
@@ -54,20 +56,20 @@ class WarmupChoice: UIViewController  {
         fullBody.layer.cornerRadius = self.fullBody.frame.size.height / 2
         
         
-        upperLower.setTitle(NSLocalizedString("upperLower", comment: ""), for: UIControlState.normal)
-        upperLower.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        upperLower.titleLabel!.textColor = .white
-        upperLower.layer.borderWidth = 10
-        upperLower.layer.borderColor = UIColor.white.cgColor
-        upperLower.layer.cornerRadius = self.upperLower.frame.size.height / 2
+        upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
+        upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        upperBody.titleLabel!.textColor = .white
+        upperBody.layer.borderWidth = 10
+        upperBody.layer.borderColor = UIColor.white.cgColor
+        upperBody.layer.cornerRadius = self.upperBody.frame.size.height / 2
        
         
-        legsPullPush.setTitle(NSLocalizedString("legsPullPush", comment: ""), for: UIControlState.normal)
-        legsPullPush.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        legsPullPush.titleLabel!.textColor = .white
-        legsPullPush.layer.borderWidth = 10
-        legsPullPush.layer.borderColor = UIColor.white.cgColor
-        legsPullPush.layer.cornerRadius = self.legsPullPush.frame.size.height / 2
+        lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
+        lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        lowerBody.titleLabel!.textColor = .white
+        lowerBody.layer.borderWidth = 10
+        lowerBody.layer.borderColor = UIColor.white.cgColor
+        lowerBody.layer.cornerRadius = self.lowerBody.frame.size.height / 2
         
         
         cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
@@ -76,10 +78,60 @@ class WarmupChoice: UIViewController  {
         cardio.layer.borderWidth = 10
         cardio.layer.borderColor = UIColor.white.cgColor
         cardio.layer.cornerRadius = self.cardio.frame.size.height / 2
+        
+        
+        // Information
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipesWarmupC))
+        downSwipe.direction = UISwipeGestureRecognizerDirection.down
+        self.informationViewWarmupC.addGestureRecognizer(downSwipe)
+        
+        self.informationViewWarmupC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height), width: self.view.frame.size.width, height: self.view.frame.size.height)
+        
+        
+        view.bringSubview(toFront: informationViewWarmupC)
     }
     
     
+    @IBAction func informationButtonActionWarmupC(_ sender: Any) {
+        
+        if self.informationViewWarmupC.frame.maxY == (self.view.frame.maxY + ((self.view.frame.size.height))) {
+            
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationViewWarmupC.transform = CGAffineTransform(translationX: 0, y: -((self.view.frame.size.height)))
+                
+            }, completion: nil)
+            
+        } else if self.informationViewWarmupC.frame.maxY == self.view.frame.maxY {
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationViewWarmupC.transform = CGAffineTransform(translationX: 0, y: 0)
+                
+            }, completion: nil)
+        }
+
+    }
     
+    
+    @IBAction func handleSwipesWarmupC(extraSwipe:UISwipeGestureRecognizer) {
+        
+        if (extraSwipe.direction == .down){
+            
+            if self.informationViewWarmupC.frame.maxY == self.view.frame.maxY {
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    
+                    self.informationViewWarmupC.transform = CGAffineTransform(translationX: 0, y: 0)
+                    
+                }, completion: nil)
+            } else {
+                
+            }
+            
+            
+        }
+        
+    }
+
     
     
 }

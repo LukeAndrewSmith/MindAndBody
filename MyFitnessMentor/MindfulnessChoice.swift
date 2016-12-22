@@ -18,6 +18,8 @@ class MindfulnessChoice: UIViewController  {
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
+    // Information View
+    @IBOutlet weak var informationViewMindfulnessC: UIView!
     
     
     
@@ -41,11 +43,56 @@ class MindfulnessChoice: UIViewController  {
 //        fullBody.layer.borderColor = UIColor.white.cgColor
 //        fullBody.layer.cornerRadius = self.fullBody.frame.size.height / 2
         
+        // Information
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipesMindfulnessC))
+        downSwipe.direction = UISwipeGestureRecognizerDirection.down
+        self.informationViewMindfulnessC.addGestureRecognizer(downSwipe)
         
+        self.informationViewMindfulnessC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height), width: self.view.frame.size.width, height: self.view.frame.size.height)
+        
+        
+        view.bringSubview(toFront: informationViewMindfulnessC)
     }
     
     
+    @IBAction func informationButtonActionMindfulnessC(_ sender: Any) {
+        if self.informationViewMindfulnessC.frame.maxY == (self.view.frame.maxY + ((self.view.frame.size.height))) {
+            
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationViewMindfulnessC.transform = CGAffineTransform(translationX: 0, y: -((self.view.frame.size.height)))
+                
+            }, completion: nil)
+            
+        } else if self.informationViewMindfulnessC.frame.maxY == self.view.frame.maxY {
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationViewMindfulnessC.transform = CGAffineTransform(translationX: 0, y: 0)
+                
+            }, completion: nil)
+        }
+
+    }
     
     
+    @IBAction func handleSwipesMindfulnessC(extraSwipe:UISwipeGestureRecognizer) {
+        
+        if (extraSwipe.direction == .down){
+            
+            if self.informationViewMindfulnessC.frame.maxY == self.view.frame.maxY {
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    
+                    self.informationViewMindfulnessC.transform = CGAffineTransform(translationX: 0, y: 0)
+                    
+                }, completion: nil)
+            } else {
+                
+            }
+            
+            
+        }
+        
+    }
+
     
 }

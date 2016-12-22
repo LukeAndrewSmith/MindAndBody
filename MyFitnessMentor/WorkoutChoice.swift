@@ -24,7 +24,17 @@ class WorkoutChoice: UIViewController  {
     // Home
     @IBOutlet weak var home: UIButton!
 
+    // Information View
+    @IBOutlet weak var informationViewWorkoutC: UIView!
+
+
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+    }
     
     
     override func viewDidLoad() {
@@ -36,7 +46,7 @@ class WorkoutChoice: UIViewController  {
         
         
         // Titles
-        navigationBar.title = (NSLocalizedString("workout", comment: ""))
+        navigationBar.title = (NSLocalizedString("location", comment: ""))
         
         // Button Titles
         gym.setTitle(NSLocalizedString("gym", comment: ""), for: UIControlState.normal)
@@ -54,11 +64,62 @@ class WorkoutChoice: UIViewController  {
         home.layer.cornerRadius = self.home.frame.size.height / 2
         
      
+        // informationViewWorkoutC
+        //
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipesWorkoutC))
+        downSwipe.direction = UISwipeGestureRecognizerDirection.down
+        self.informationViewWorkoutC.addGestureRecognizer(downSwipe)
         
+        self.informationViewWorkoutC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height), width: self.view.frame.size.width, height: self.view.frame.size.height)
+        
+        
+        view.bringSubview(toFront: informationViewWorkoutC)
        
     }
     
     
+   
+ 
+    @IBAction func informationButtonActionWorkoutC(_ sender: Any) {
+        
+        if self.informationViewWorkoutC.frame.maxY == (self.view.frame.maxY + ((self.view.frame.size.height))) {
+            
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationViewWorkoutC.transform = CGAffineTransform(translationX: 0, y: -((self.view.frame.size.height)))
+                
+            }, completion: nil)
+            
+        } else if self.informationViewWorkoutC.frame.maxY == self.view.frame.maxY {
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationViewWorkoutC.transform = CGAffineTransform(translationX: 0, y: 0)
+                
+            }, completion: nil)
+        }
+
+    }
+
+
+    @IBAction func handleSwipesWorkoutC(extraSwipe:UISwipeGestureRecognizer) {
+        
+        if (extraSwipe.direction == .down){
+            
+            if self.informationViewWorkoutC.frame.maxY == self.view.frame.maxY {
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    
+                    self.informationViewWorkoutC.transform = CGAffineTransform(translationX: 0, y: 0)
+                    
+                }, completion: nil)
+            } else {
+                
+            }
+            
+            
+        }
+        
+    }
+
     
     
     

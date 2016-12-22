@@ -44,9 +44,7 @@
     // Warmup //
         // Warmup //
         "overview" = "Overview";
-        "fullBody" = "Full - Body";
-        "upperLower" = "Upper - Lower";
-        "legsPullPush" = "Legs - Pull - Push";
+        "fullBody" = "Full Body";
         "cardio" = "Cardio";
 
         // Warmup Screen //
@@ -57,6 +55,7 @@
     //
     // Workout
         // Choice //
+        "location" = "Location";
         "gym" = "Gym";
         "home" = "Home";
 
@@ -68,6 +67,12 @@
         "push" = "Push";
 
 
+    //
+    // Cardio //
+        // Choice
+        "type" = "Type";
+        "hiit" = "HIIT";
+        "liss" = "LISS";
 
 
 

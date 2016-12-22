@@ -19,6 +19,9 @@ class StretchingChoice: UIViewController  {
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     
+    // Information View
+    @IBOutlet weak var informationViewStretchingC: UIView!
+    
     
     
     
@@ -43,10 +46,58 @@ class StretchingChoice: UIViewController  {
 //        fullBody.layer.cornerRadius = self.fullBody.frame.size.height / 2
         
         
+        // Information
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipesStretchingC))
+        downSwipe.direction = UISwipeGestureRecognizerDirection.down
+        self.informationViewStretchingC.addGestureRecognizer(downSwipe)
+        
+        self.informationViewStretchingC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height), width: self.view.frame.size.width, height: self.view.frame.size.height)
+        
+        
+        view.bringSubview(toFront: informationViewStretchingC)
+        
     }
     
     
+    @IBAction func informationButtonActionStretchingC(_ sender: Any) {
+        
+        if self.informationViewStretchingC.frame.maxY == (self.view.frame.maxY + ((self.view.frame.size.height))) {
+            
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationViewStretchingC.transform = CGAffineTransform(translationX: 0, y: -((self.view.frame.size.height)))
+                
+            }, completion: nil)
+            
+        } else if self.informationViewStretchingC.frame.maxY == self.view.frame.maxY {
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationViewStretchingC.transform = CGAffineTransform(translationX: 0, y: 0)
+                
+            }, completion: nil)
+        }
+
+    }
     
+    @IBAction func handleSwipesStretchingC(extraSwipe:UISwipeGestureRecognizer) {
+        
+        if (extraSwipe.direction == .down){
+            
+            if self.informationViewStretchingC.frame.maxY == self.view.frame.maxY {
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    
+                    self.informationViewStretchingC.transform = CGAffineTransform(translationX: 0, y: 0)
+                    
+                }, completion: nil)
+            } else {
+                
+            }
+            
+            
+        }
+        
+    }
+
     
     
 }

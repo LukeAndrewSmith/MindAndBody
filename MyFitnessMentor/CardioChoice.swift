@@ -18,7 +18,14 @@ class CardioChoice: UIViewController  {
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
+    // Hiit
+    @IBOutlet weak var hiit: UIButton!
     
+    // Liss
+    @IBOutlet weak var liss: UIButton!
+    
+    // Information Screen
+    @IBOutlet weak var informationViewCardioC: UIView!
     
     
     
@@ -31,21 +38,76 @@ class CardioChoice: UIViewController  {
         
         
         // Titles
-        navigationBar.title = (NSLocalizedString("cardio", comment: ""))
+        navigationBar.title = (NSLocalizedString("type", comment: ""))
         
         // Button Titles
-//        fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
-//        fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-//        fullBody.titleLabel!.textColor = .white
-//        fullBody.layer.borderWidth = 10
-//        fullBody.layer.borderColor = UIColor.white.cgColor
-//        fullBody.layer.cornerRadius = self.fullBody.frame.size.height / 2
+        hiit.setTitle(NSLocalizedString("hiit", comment: ""), for: UIControlState.normal)
+        hiit.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        hiit.titleLabel!.textColor = .white
+        hiit.layer.borderWidth = 10
+        hiit.layer.borderColor = UIColor.white.cgColor
+        hiit.layer.cornerRadius = self.hiit.frame.size.height / 2
         
         
+        liss.setTitle(NSLocalizedString("liss", comment: ""), for: UIControlState.normal)
+        liss.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        liss.titleLabel!.textColor = .white
+        liss.layer.borderWidth = 10
+        liss.layer.borderColor = UIColor.white.cgColor
+        liss.layer.cornerRadius = self.liss.frame.size.height / 2
+        
+        
+        // Information
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipesCardioC))
+        downSwipe.direction = UISwipeGestureRecognizerDirection.down
+        self.informationViewCardioC.addGestureRecognizer(downSwipe)
+        
+        self.informationViewCardioC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height), width: self.view.frame.size.width, height: self.view.frame.size.height)
+        
+        
+        view.bringSubview(toFront: informationViewCardioC)
+
     }
     
     
+    @IBAction func informationButtonActionCardioC(_ sender: Any) {
+        if self.informationViewCardioC.frame.maxY == (self.view.frame.maxY + ((self.view.frame.size.height))) {
+            
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationViewCardioC.transform = CGAffineTransform(translationX: 0, y: -((self.view.frame.size.height)))
+                
+            }, completion: nil)
+            
+        } else if self.informationViewCardioC.frame.maxY == self.view.frame.maxY {
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationViewCardioC.transform = CGAffineTransform(translationX: 0, y: 0)
+                
+            }, completion: nil)
+        }
+
+    }
     
+    @IBAction func handleSwipesCardioC(extraSwipe:UISwipeGestureRecognizer) {
+        
+        if (extraSwipe.direction == .down){
+            
+            if self.informationViewCardioC.frame.maxY == self.view.frame.maxY {
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    
+                    self.informationViewCardioC.transform = CGAffineTransform(translationX: 0, y: 0)
+                    
+                }, completion: nil)
+            } else {
+                
+            }
+            
+            
+        }
+        
+    }
+
     
     
 }
