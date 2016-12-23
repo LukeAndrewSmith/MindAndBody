@@ -44,11 +44,12 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         self.view.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
         
         
-        
-        // Titles
+        // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("warmup", comment: ""))
         
+        
         // Button Titles
+        //
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         fullBody.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
@@ -83,22 +84,25 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         cardio.layer.borderWidth = 10
         cardio.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         cardio.layer.cornerRadius = self.cardio.frame.size.height / 2
+        //
         
         
-        // Information
-//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipesWarmupC))
-//        downSwipe.direction = UISwipeGestureRecognizerDirection.down
-//        self.informationViewWarmupC.addGestureRecognizer(downSwipe)
         
+        
+        // Scroll View Frame
         self.informationViewWarmupC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height + 49), width: self.view.frame.size.width, height: (self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height - 49)
-        
         
         view.bringSubview(toFront: informationViewWarmupC)
         
         
         
         
-        // Information
+        // Information Text
+        //
+        // Information Title Frame
+        let informationTextWarmupC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationViewWarmupC.frame.size.width - 40, height: 0))
+        
+        // Information Text Frame
         self.informationTitleWarmupC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height), width: self.informationViewWarmupC.frame.size.width, height: 49)
         informationTitleWarmupC.text = (NSLocalizedString("information", comment: ""))
         informationTitleWarmupC.textAlignment = .center
@@ -108,40 +112,48 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         self.view.addSubview(informationTitleWarmupC)
         
         
-        let informationTextWarmupC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationViewWarmupC.frame.size.width - 40, height: 0))
-        
-        
+        // Information Text and Attributes
+        //
+        // String
         let informationLabelString = (
-            (NSLocalizedString("purpose", comment: ""))+"\n"/2+"\n"+(NSLocalizedString("purposeText", comment: ""))+"\n"+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+"\n"+(NSLocalizedString("bodyText", comment: ""))+"\n"+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+"\n"+(NSLocalizedString("mindText", comment: "")))
+            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeText", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyText", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindText", comment: "")))
         
-        
-        
-        
-        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+"\n"+(NSLocalizedString("purposeText", comment: ""))+"\n"+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+"\n"+(NSLocalizedString("bodyText", comment: ""))+"\n"+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+"\n"+(NSLocalizedString("mindText", comment: ""))
+        // Range of String
+        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeText", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyText", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindText", comment: ""))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
+        // Range of Titles
+        let titleRangeString1 = (NSLocalizedString("purpose", comment: ""))
+        let titleRangeString2 = (NSLocalizedString("body", comment: ""))
+        let titleRangeString3 = (NSLocalizedString("mind", comment: ""))
         
-        //let titleRangeString = ((NSLocalizedString("purpose", comment: ""))+NSLocalizedString("body", comment: ""))+(NSLocalizedString("mind", comment: "")))
-        let titleRangeString = (NSLocalizedString("purpose", comment: ""))
-        let titleRange = (informationLabelString as NSString).range(of: titleRangeString)
+        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString1)
+        let titleRange2 = (informationLabelString as NSString).range(of: titleRangeString2)
+        let titleRange3 = (informationLabelString as NSString).range(of: titleRangeString3)
         
         
+        // Line Spacing
+        let lineSpacing = NSMutableParagraphStyle()
+        lineSpacing.lineSpacing = 1.4
         
+        
+        // Add Attributes
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Light", size: 19)!, range: textRange)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange1)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange2)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange3)
+        informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         
         
         
-        
+        // Final Text Editing
         informationTextWarmupC.attributedText = informationLabelText
-        
         informationTextWarmupC.textAlignment = .justified
         informationTextWarmupC.lineBreakMode = NSLineBreakMode.byWordWrapping
         informationTextWarmupC.numberOfLines = 0
         informationTextWarmupC.sizeToFit()
-        //informationTextWarmupC.font = UIFont(name: "SFUIDisplay-light", size: 19)
         self.informationViewWarmupC.addSubview(informationTextWarmupC)
         
         
@@ -181,25 +193,6 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     }
     
     
-    @IBAction func handleSwipesWarmupC(extraSwipe:UISwipeGestureRecognizer) {
-        
-        if (extraSwipe.direction == .down){
-            
-            if self.informationViewWarmupC.frame.maxY == self.view.frame.maxY {
-                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    
-                    self.informationViewWarmupC.transform = CGAffineTransform(translationX: 0, y: 0)
-                    
-                }, completion: nil)
-            } else {
-                
-            }
-            
-            
-        }
-        
-    }
-
     
     
 }
