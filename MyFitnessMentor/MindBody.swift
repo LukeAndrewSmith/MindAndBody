@@ -49,6 +49,7 @@ class MindBody: UIViewController {
     @IBOutlet weak var Mindfulness: UIButton!
     
     
+ 
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,7 +96,7 @@ class MindBody: UIViewController {
         Warmup.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Warmup.titleLabel!.textColor = .white
         Warmup.layer.borderWidth = 10
-        Warmup.layer.borderColor = UIColor.white.cgColor
+        Warmup.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         Warmup.layer.cornerRadius = self.Warmup.frame.size.height / 2
         
         
@@ -103,7 +104,7 @@ class MindBody: UIViewController {
         Workout.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Workout.titleLabel!.textColor = .white
         Workout.layer.borderWidth = 10
-        Workout.layer.borderColor = UIColor.white.cgColor
+        Workout.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         Workout.layer.cornerRadius = self.Workout.frame.size.height / 2
 
         
@@ -111,7 +112,7 @@ class MindBody: UIViewController {
         Stretching.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Stretching.titleLabel!.textColor = .white
         Stretching.layer.borderWidth = 10
-        Stretching.layer.borderColor = UIColor.white.cgColor
+        Stretching.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         Stretching.layer.cornerRadius = self.Stretching.frame.size.height / 2
 
         
@@ -120,7 +121,7 @@ class MindBody: UIViewController {
         Cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Cardio.titleLabel!.textColor = .white
         Cardio.layer.borderWidth = 10
-        Cardio.layer.borderColor = UIColor.white.cgColor
+        Cardio.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         Cardio.layer.cornerRadius = self.Cardio.frame.size.height / 2
 
        
@@ -129,7 +130,7 @@ class MindBody: UIViewController {
         Yoga.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Yoga.titleLabel!.textColor = .white
         Yoga.layer.borderWidth = 10
-        Yoga.layer.borderColor = UIColor.white.cgColor
+        Yoga.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         Yoga.layer.cornerRadius = self.Yoga.frame.size.height / 2
 
         
@@ -137,7 +138,7 @@ class MindBody: UIViewController {
         Mindfulness.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Mindfulness.titleLabel!.textColor = .white
         Mindfulness.layer.borderWidth = 10
-        Mindfulness.layer.borderColor = UIColor.white.cgColor
+        Mindfulness.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         Mindfulness.layer.cornerRadius = self.Mindfulness.frame.size.height / 2
         
         

@@ -43,17 +43,17 @@ class CardioChoice: UIViewController  {
         // Button Titles
         hiit.setTitle(NSLocalizedString("hiit", comment: ""), for: UIControlState.normal)
         hiit.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        hiit.titleLabel!.textColor = .white
+        hiit.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         hiit.layer.borderWidth = 10
-        hiit.layer.borderColor = UIColor.white.cgColor
+        hiit.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         hiit.layer.cornerRadius = self.hiit.frame.size.height / 2
         
         
         liss.setTitle(NSLocalizedString("liss", comment: ""), for: UIControlState.normal)
         liss.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        liss.titleLabel!.textColor = .white
+        liss.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         liss.layer.borderWidth = 10
-        liss.layer.borderColor = UIColor.white.cgColor
+        liss.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         liss.layer.cornerRadius = self.liss.frame.size.height / 2
         
         

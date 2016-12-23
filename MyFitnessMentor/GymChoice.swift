@@ -52,49 +52,49 @@ class GymChoice: UIViewController  {
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        fullBody.titleLabel!.textColor = .white
+        fullBody.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         fullBody.layer.borderWidth = 10
-        fullBody.layer.borderColor = UIColor.white.cgColor
+        fullBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         fullBody.layer.cornerRadius = self.fullBody.frame.size.height / 2
         
         
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        upperBody.titleLabel!.textColor = .white
+        upperBody.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         upperBody.layer.borderWidth = 10
-        upperBody.layer.borderColor = UIColor.white.cgColor
+        upperBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         upperBody.layer.cornerRadius = self.upperBody.frame.size.height / 2
         
         
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
         lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        lowerBody.titleLabel!.textColor = .white
+        lowerBody.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         lowerBody.layer.borderWidth = 10
-        lowerBody.layer.borderColor = UIColor.white.cgColor
+        lowerBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         lowerBody.layer.cornerRadius = self.lowerBody.frame.size.height / 2
         
         
         legs.setTitle(NSLocalizedString("legs", comment: ""), for: UIControlState.normal)
         legs.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        legs.titleLabel!.textColor = .white
+        legs.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         legs.layer.borderWidth = 10
-        legs.layer.borderColor = UIColor.white.cgColor
+        legs.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         legs.layer.cornerRadius = self.legs.frame.size.height / 2
         
         
         pull.setTitle(NSLocalizedString("pull", comment: ""), for: UIControlState.normal)
         pull.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        pull.titleLabel!.textColor = .white
+        pull.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         pull.layer.borderWidth = 10
-        pull.layer.borderColor = UIColor.white.cgColor
+        pull.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         pull.layer.cornerRadius = self.pull.frame.size.height / 2
         
         
         push.setTitle(NSLocalizedString("push", comment: ""), for: UIControlState.normal)
         push.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        push.titleLabel!.textColor = .white
+        push.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         push.layer.borderWidth = 10
-        push.layer.borderColor = UIColor.white.cgColor
+        push.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         push.layer.cornerRadius = self.push.frame.size.height / 2
         
         

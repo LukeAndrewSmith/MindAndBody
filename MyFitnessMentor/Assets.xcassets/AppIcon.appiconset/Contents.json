@@ -3,31 +3,31 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "IconTest2.png",
+      "filename" : "MindBody @2x-3.png",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "IconTest2-1.png",
+      "filename" : "MindBody @3x-2.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "IconTest2-5.png",
+      "filename" : "MindBody @1x-2.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "IconTest2-2.png",
+      "filename" : "MindBody @2x-4.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "IconTest2-6.png",
+      "filename" : "MindBody @3x-3.png",
       "scale" : "3x"
     },
     {
@@ -45,25 +45,25 @@
     {
       "size" : "57x57",
       "idiom" : "iphone",
-      "filename" : "IconTest2-4.png",
+      "filename" : "MindBody @1x-1.png",
       "scale" : "1x"
     },
     {
       "size" : "57x57",
       "idiom" : "iphone",
-      "filename" : "IconTest2-3.png",
+      "filename" : "MindBody @2x-2.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "IconTest3-1.png",
+      "filename" : "MindBody @2x-1.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "IconTest3.png",
+      "filename" : "MindBody @3x-1.png",
       "scale" : "3x"
     },
     {
@@ -204,6 +204,18 @@
       "scale" : "2x",
       "role" : "quickLook",
       "subtype" : "42mm"
+    },
+    {
+      "filename" : "MindBody @1x.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "MindBody @2x.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "MindBody @3x.png",
+      "unassigned" : true
     }
   ],
   "info" : {

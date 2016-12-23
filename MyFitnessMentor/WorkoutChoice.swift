@@ -51,16 +51,16 @@ class WorkoutChoice: UIViewController  {
         // Button Titles
         gym.setTitle(NSLocalizedString("gym", comment: ""), for: UIControlState.normal)
         gym.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        gym.titleLabel!.textColor = .white
+        gym.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         gym.layer.borderWidth = 10
-        gym.layer.borderColor = UIColor.white.cgColor
+        gym.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         gym.layer.cornerRadius = self.gym.frame.size.height / 2
         
         home.setTitle(NSLocalizedString("home", comment: ""), for: UIControlState.normal)
         home.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        home.titleLabel!.textColor = .white
+        home.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         home.layer.borderWidth = 10
-        home.layer.borderColor = UIColor.white.cgColor
+        home.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         home.layer.cornerRadius = self.home.frame.size.height / 2
         
      
@@ -75,6 +75,22 @@ class WorkoutChoice: UIViewController  {
         
         view.bringSubview(toFront: informationViewWorkoutC)
        
+        
+        // Information
+        let informationTitleWorkoutC = UILabel(frame: CGRect(x: 0, y: 0, width: self.informationViewWorkoutC.frame.size.width, height: 49))
+        informationTitleWorkoutC.text = "Information"
+        informationTitleWorkoutC.textAlignment = .center
+        informationTitleWorkoutC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        informationTitleWorkoutC.textColor = .white
+        informationTitleWorkoutC.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        self.informationViewWorkoutC.addSubview(informationTitleWorkoutC)
+        
+        
+        let informationLabelWorkoutC = UILabel(frame: CGRect(x: 10, y: 59, width: self.informationViewWorkoutC.frame.size.width - 20, height: 49))
+        informationLabelWorkoutC.text = "Noice"
+        informationLabelWorkoutC.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        self.informationViewWorkoutC.addSubview(informationLabelWorkoutC)
+        
     }
     
     

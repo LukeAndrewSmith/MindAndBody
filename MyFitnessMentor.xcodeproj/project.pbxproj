@@ -49,6 +49,7 @@
 		07F0E3E41DE0D4DF00D0A13F /* EmphasisSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */; };
 		07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F912071DC2D1240004C924 /* WarmupChoice.swift */; };
 		07F9120C1DC3F9B00004C924 /* MindBodyNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9120B1DC3F9B00004C924 /* MindBodyNavigation.swift */; };
+		07FA89DB1E0C231F004ADF73 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FA89DA1E0C231F004ADF73 /* Calendar.swift */; };
 		07FE38081DF6E74E00E7EA20 /* PreferencesNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE38071DF6E74E00E7EA20 /* PreferencesNavigation.swift */; };
 		07FE380A1DF6E78700E7EA20 /* InformationNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE38091DF6E78700E7EA20 /* InformationNavigation.swift */; };
 		07FE380C1DF9B3A200E7EA20 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07FE380E1DF9B3A200E7EA20 /* Localizable.strings */; };
@@ -111,6 +112,7 @@
 		07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmphasisSelection.swift; sourceTree = "<group>"; };
 		07F912071DC2D1240004C924 /* WarmupChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoice.swift; sourceTree = "<group>"; };
 		07F9120B1DC3F9B00004C924 /* MindBodyNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindBodyNavigation.swift; sourceTree = "<group>"; };
+		07FA89DA1E0C231F004ADF73 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		07FE38071DF6E74E00E7EA20 /* PreferencesNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesNavigation.swift; sourceTree = "<group>"; };
 		07FE38091DF6E78700E7EA20 /* InformationNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InformationNavigation.swift; path = MyFitnessMentor/InformationNavigation.swift; sourceTree = SOURCE_ROOT; };
 		07FE380D1DF9B3A200E7EA20 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				077AC0DE1DA535840026895B /* MindBody.swift */,
+				07FA89DA1E0C231F004ADF73 /* Calendar.swift */,
 				07F912071DC2D1240004C924 /* WarmupChoice.swift */,
 				07DEE6FA1E0AC47F003B89AB /* WorkoutChoice.swift */,
 				07DEE6F01E0AAD2E003B89AB /* GymChoice.swift */,
@@ -393,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07F9120C1DC3F9B00004C924 /* MindBodyNavigation.swift in Sources */,
+				07FA89DB1E0C231F004ADF73 /* Calendar.swift in Sources */,
 				07C302BA1DE9F0FE00C55B04 /* WarmupScreen.swift in Sources */,
 				077AC0DF1DA535840026895B /* MindBody.swift in Sources */,
 				07DEE6F71E0AADE6003B89AB /* YogaChoice.swift in Sources */,
