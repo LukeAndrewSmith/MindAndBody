@@ -112,20 +112,25 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         
         
         let informationLabelString = (
-            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeText", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyText", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindText", comment: "")))
-        
-        //let titleAttribute = [NSFontAttributeName: UIFont(name: "SFUIDisplay-Medium", size: 19)]
+            (NSLocalizedString("purpose", comment: ""))+"\n"/2+"\n"+(NSLocalizedString("purposeText", comment: ""))+"\n"+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+"\n"+(NSLocalizedString("bodyText", comment: ""))+"\n"+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+"\n"+(NSLocalizedString("mindText", comment: "")))
         
         
-        let titleRange1 = (NSLocalizedString("purpose", comment: ""))
         
-        let titleRange = (informationLabelString as NSString).range(of: titleRange1)
+        
+        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+"\n"+(NSLocalizedString("purposeText", comment: ""))+"\n"+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+"\n"+(NSLocalizedString("bodyText", comment: ""))+"\n"+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+"\n"+(NSLocalizedString("mindText", comment: ""))
+        let textRange = (informationLabelString as NSString).range(of: textRangeString)
+        
+        
+        
+        //let titleRangeString = ((NSLocalizedString("purpose", comment: ""))+NSLocalizedString("body", comment: ""))+(NSLocalizedString("mind", comment: "")))
+        let titleRangeString = (NSLocalizedString("purpose", comment: ""))
+        let titleRange = (informationLabelString as NSString).range(of: titleRangeString)
+        
+        
         
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
-    
-        //informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: titleAttribute, range: titleRange)
-        
-        informationLabelText.addAttributes([NSFontAttributeName: UIFont(name: "SFUIDisplay-Medium", size: 19)!], range: titleRange)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Light", size: 19)!, range: textRange)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange)
         
         
         
@@ -136,7 +141,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         informationTextWarmupC.lineBreakMode = NSLineBreakMode.byWordWrapping
         informationTextWarmupC.numberOfLines = 0
         informationTextWarmupC.sizeToFit()
-        informationTextWarmupC.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        //informationTextWarmupC.font = UIFont(name: "SFUIDisplay-light", size: 19)
         self.informationViewWarmupC.addSubview(informationTextWarmupC)
         
         
