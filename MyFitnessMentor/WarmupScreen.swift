@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-private var warmupScreenIndex = 0
+var warmupScreenIndex = 0
 
 
 class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout    {
@@ -36,7 +36,8 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     // Collection View Controller
     @IBOutlet weak var collectionView: UICollectionView!
  
-   
+
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.setHidesBackButton(true, animated: false)
         
@@ -64,6 +65,7 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         // Navigation Controller
         self.navigationItem.prompt = (NSLocalizedString("movement", comment: ""))
+        
         
         
         self.navigationItem.title = titleArray[warmupScreenIndex]
@@ -118,11 +120,19 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     
  
     @IBAction func warmupScreenNextButton(_ sender: Any) {
+    
         
         warmupScreenIndex = warmupScreenIndex + 1
         
         self.view.setNeedsDisplay()
-
+        
+        
+    }
+    @IBAction func Test(_ sender: Any) {
+        
+        warmupScreenIndex = warmupScreenIndex + 1
+        
+        self.view.setNeedsDisplay()
         
     }
 
