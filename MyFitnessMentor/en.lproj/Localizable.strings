@@ -54,7 +54,7 @@
             "body" = "Body";
             "bodyText" = "A warmup increases body temperature and heart rate, and subsequently blood flow, which together increase the flexibility of muscles and joints";
             "mind" = "Mind";
-            "mindText" = "A warmup increases the firing of nerual pathways related to exercise and muscle activation thus preparing the mind for exercise/nIdeally there is also a conscious change, the warmup is a chance to put aside any thought that might hinder the exercise to come through awareness of the feeling of the 'awakening' of your muscles, through visualisation of the exercise to come and by focusing the mind on the present";
+            "mindText" = "A warmup increases the firing of nerual pathways related to exercise and muscle activation thus preparing the mind for exercise\nIdeally there is also a conscious change, the warmup is a chance to put aside any thought that might hinder the exercise to come through awareness of the feeling of the 'awakening' of your muscles, through visualisation of the exercise to come and by focusing the mind on the present";
 
         // Warmup Screen //
         "movement" = "Movement:";

@@ -37,6 +37,9 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     @IBOutlet weak var informationTitleWarmupC: UILabel!
     
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -599,6 +599,9 @@
                                         <state key="normal" title="Full - Body">
                                             <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="GPB-uj-BAt" kind="show" id="HLI-i5-MlQ"/>
+                                        </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JvH-fp-SB1">
                                         <rect key="frame" x="16.5" y="181" width="342" height="161"/>
@@ -1177,9 +1180,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NWc-yf-R9O">
                                 <rect key="frame" x="187" y="0.0" width="188" height="229"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qw6-o2-pVX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qw6-o2-pVX">
                                 <rect key="frame" x="0.0" y="229" width="375" height="191"/>
-                                <string key="text">vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1223,6 +1225,9 @@
                     <navigationItem key="navigationItem" prompt="" id="Ogp-Y5-TPO">
                         <barButtonItem key="rightBarButtonItem" image="CheckMark" id="Njc-lF-GXZ">
                             <color key="tintColor" red="0.52941176469999995" green="1" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="warmupScreenNextButton:" destination="GPB-uj-BAt" id="xVH-q3-hkU"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
@@ -1237,7 +1242,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A6h-Gv-1IR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5952.8000000000002" y="-997.15142428785612"/>
+            <point key="canvasLocation" x="5585" y="-887"/>
         </scene>
     </scenes>
     <resources>
