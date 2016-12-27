@@ -51,42 +51,16 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Title Array
-        let titleArray : [String] =
-            [
-                "title1",
-                "title2",
-                "title3",
-                "title4",
-                "title5",
-                "title6",
-                ]
-        
+
         
         // Navigation Controller
+        
         self.navigationItem.prompt = (NSLocalizedString("movement", comment: ""))
         
-        
-        
-        self.navigationItem.title = titleArray[warmupScreenIndex]
-        
-     
-        self.descriptionLabel.text = titleArray[warmupScreenIndex]
-        
-        // Labels
-    
-      
-        
         collectionView.backgroundColor = .black
-    
-        // ExtraInformationContents
+
         
-        
-        
-        
-        extraInformation.text = NSLocalizedString("extraInformation", comment: "")
-        
-        
+        displayThings()
         
         
         extraInformation.sizeToFit()
@@ -117,6 +91,31 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
+    func displayThings() {
+        
+        let titleArray : [String] =
+            [
+                "5 min Light Cardio",
+                "title2",
+                "title3",
+                "title4",
+                "title5",
+                "title6",
+                ]
+        
+        
+        
+        
+        // Navigation Controller
+
+        self.navigationItem.title = titleArray[warmupScreenIndex]
+        
+        
+        self.descriptionLabel.text = titleArray[warmupScreenIndex]
+        
+        extraInformation.text = NSLocalizedString("extraInformation", comment: "")
+
+    }
     
  
     @IBAction func warmupScreenNextButton(_ sender: Any) {
@@ -124,15 +123,18 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         warmupScreenIndex = warmupScreenIndex + 1
         
-        self.view.setNeedsDisplay()
+        //self.view.setNeedsDisplay()
         
+        displayThings()
         
     }
     @IBAction func Test(_ sender: Any) {
         
         warmupScreenIndex = warmupScreenIndex + 1
         
-        self.view.setNeedsDisplay()
+        //self.view.setNeedsDisplay()
+        
+        displayThings()
         
     }
 
@@ -231,7 +233,7 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath as IndexPath)
         
-        cell.backgroundColor = UIColor(red:0.89, green:0.20, blue:0.25, alpha:1.0)
+        cell.backgroundColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
         
         //Green colour: UIColor(red:0.41, green:0.97, blue:0.63, alpha:1.0)
         
