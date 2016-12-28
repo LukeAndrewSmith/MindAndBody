@@ -49,12 +49,12 @@
         "cardio" = "Cardio";
 
             // Information
-            "purpose" = "Warmup Purpose";
+            "purpose" = "Purpose";
             "purposeText" = "The purpose of a warmup is two-fold, it prepares both mind and body for the activity to come. A warmup should be consistently performed before exercise; for workouts it should be 15-20min long (a longer warmup coupled with a shorter workout is more effective than the inverse), for cardio it should be 10-15min long. In both cases the warmup should produce mild sweating, and increased mental and physical focus.";
             "body" = "Body";
-            "bodyText" = "A warmup increases body temperature and heart rate, and subsequently blood flow, which together increase the flexibility of muscles and joints";
+            "bodyText" = "A warmup increases body temperature and heart rate, and subsequently blood flow, which together increase the flexibility of muscles and joints.";
             "mind" = "Mind";
-            "mindText" = "A warmup increases the firing of nerual pathways related to exercise and muscle activation thus preparing the mind for exercise\nIdeally there is also a conscious change, the warmup is a chance to put aside any thought that might hinder the exercise to come through awareness of the feeling of the 'awakening' of your muscles, through visualisation of the exercise to come and by focusing the mind on the present";
+            "mindText" = "A warmup increases the firing of nerual pathways related to exercise and muscle activation thus preparing the mind for exercise.\nIdeally there is also a conscious change, the warmup is a chance to put aside any thoughts that might hinder the exercise through awareness of the feeling of the 'awakening' of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
 
         // Warmup Screen //
         "movement" = "Movement:";

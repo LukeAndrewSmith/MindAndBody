@@ -18,6 +18,12 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     // Outlets
     
+    // Scroll Views
+    @IBOutlet weak var scrollViewBodyImage: UIScrollView!
+    @IBOutlet weak var scrollViewExplanation: UIScrollView!
+    @IBOutlet weak var scrollViewDemonstrationImage: UIScrollView!
+    
+    
     
     // Body Image
     @IBOutlet weak var bodyImage: UIImageView!
@@ -29,14 +35,31 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var descriptionLabel: UILabel!
     
     // Extra Information
-    @IBOutlet weak var extraInformation: UILabel!
+    @IBOutlet weak var extraInformation: UIButton!
+    
+    //
+    
     //@IBOutlet weak var extraInformation: UIButton!
     @IBOutlet weak var extraInformationView: UIView!
     
     // Collection View Controller
     @IBOutlet weak var collectionView: UICollectionView!
  
+    // Back Button Item
+    @IBOutlet weak var warmupScreenBackButton: UIBarButtonItem!
+    
 
+    // Arrays
+    let titleArray : [String] =
+        [
+            "5 min Light Cardio",
+            "title2",
+            "title3",
+            "title4",
+            "title5",
+            "title6",
+            ]
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.setHidesBackButton(true, animated: false)
@@ -52,6 +75,10 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         
 
+        // Background Gradient
+        self.view.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
+        
+        
         
         // Navigation Controller
         
@@ -68,6 +95,10 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         extraInformation.center.x = extraInformationView.center.x
         
         extraInformation.frame.size.height = 49
+        
+        
+        
+        
         
         // ExtraInformationView
         //
@@ -93,18 +124,6 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func displayThings() {
         
-        let titleArray : [String] =
-            [
-                "5 min Light Cardio",
-                "title2",
-                "title3",
-                "title4",
-                "title5",
-                "title6",
-                ]
-        
-        
-        
         
         // Navigation Controller
 
@@ -113,31 +132,45 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         self.descriptionLabel.text = titleArray[warmupScreenIndex]
         
-        extraInformation.text = NSLocalizedString("extraInformation", comment: "")
+        extraInformation.titleLabel?.text = NSLocalizedString("extraInformation", comment: "")
+        
+        // Back Button
+        if warmupScreenIndex == 0 {
+            warmupScreenBackButton.title = ""
+        } else if warmupScreenIndex != 0 {
+            warmupScreenBackButton.title = "<"
+            
+        }
 
     }
     
  
     @IBAction func warmupScreenNextButton(_ sender: Any) {
-    
-        
-        warmupScreenIndex = warmupScreenIndex + 1
-        
-        //self.view.setNeedsDisplay()
-        
-        displayThings()
-        
-    }
-    @IBAction func Test(_ sender: Any) {
-        
-        warmupScreenIndex = warmupScreenIndex + 1
-        
-        //self.view.setNeedsDisplay()
-        
-        displayThings()
-        
-    }
 
+        
+            if warmupScreenIndex == 5 {
+                self.performSegue(withIdentifier: "unwindToViewController1", sender: self)
+                warmupScreenIndex = 0
+                
+            } else {
+                warmupScreenIndex = warmupScreenIndex + 1
+                displayThings()
+            }
+        
+       
+        
+    }
+    
+    @IBAction func warmupScreenBackButton(_ sender: Any) {
+        
+        warmupScreenIndex = warmupScreenIndex - 1
+        
+        
+        displayThings()
+        
+        
+    }
+    
     
     
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
@@ -179,23 +212,14 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     
 
     
-    
-    // Warmup Array
-//    let warmupFull : [String] =
-//        [
-//            "",
-//            "movement1",
-//            "movement2",
-//            "movement3",
-//            "movement4",
-//            "movement5",
-//            "movement6",
-//            ]
+    //
+    // Table View
+    //
     
 
     // Table View
     func tableView(_ tableView: UITableView, numberOfRowsInSection: Int) -> Int {
-        return 3
+        return titleArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -209,11 +233,14 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             titleCell.textLabel?.text = "Sets & Reps"
             titleCell.textLabel?.textAlignment = .center
             titleCell.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+            titleCell.isUserInteractionEnabled = false
+            
             
             return titleCell
         } else {
             cell.textLabel?.text = "Hi"
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 17)
+            cell.tintColor = UIColor.black
             return cell
             
         }
@@ -221,7 +248,25 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 35.0
+    }
+   
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+
+        
+            if cell?.accessoryType == .checkmark {
+                cell?.accessoryType = .none
+            } else {
+                cell?.accessoryType = .checkmark
+        }
+    }
 
     
     // Collection View
