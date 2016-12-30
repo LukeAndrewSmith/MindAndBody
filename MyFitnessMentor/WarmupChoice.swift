@@ -92,6 +92,9 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         
         
         
+        
+        
+        
         // Scroll View Frame
         self.informationViewWarmupC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height + 49), width: self.view.frame.size.width, height: (self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height - 49)
         

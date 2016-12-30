@@ -15,7 +15,7 @@
 
 
 //
-// MyGymGuide //
+// Mind & Body //
 //
     //
     // Alert Information //
@@ -59,6 +59,8 @@
         // Warmup Screen //
         "movement" = "Movement:";
         "extraInformation" = "Extra Information";
+
+        "explanationTitle" = "Explanation";
 
 
     //

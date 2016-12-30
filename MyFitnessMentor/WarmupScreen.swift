@@ -12,7 +12,7 @@ import UIKit
 var warmupScreenIndex = 0
 
 
-class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout    {
+class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate    {
     
 
     
@@ -32,10 +32,9 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var tableView: UITableView!
     
     // Description Label
-    @IBOutlet weak var descriptionLabel: UILabel!
-    
+   
     // Extra Information
-    @IBOutlet weak var extraInformation: UIButton!
+    @IBOutlet weak var extraInformation: UILabel!
     
     //
     
@@ -99,6 +98,33 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         
         
+       
+        let descriptionLabel = UILabel(frame: CGRect(x: 10, y: 10, width: self.scrollViewExplanation.frame.size.width - 20, height: 0))
+        
+        
+        descriptionLabel.text = NSLocalizedString("purposeText", comment: "")
+        
+        descriptionLabel.textAlignment = .justified
+        
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.sizeToFit()
+        
+        self.scrollViewExplanation.addSubview(descriptionLabel)
+        
+        
+        bodyImage.image = #imageLiteral(resourceName: "MyWorkout")
+        
+        
+        
+        // ScrollView Frames
+        //
+        
+        
+        // Scroll View Description Label
+        self.scrollViewExplanation.frame = CGRect(x: 0, y: self.scrollViewExplanation.frame.maxY, width: self.view.frame.size.width, height: self.scrollViewExplanation.frame.size.height)
+        
+        
+        self.scrollViewExplanation.contentSize = CGSize(width: self.view.frame.size.width, height: descriptionLabel.frame.size.height + 20)
         
         // ExtraInformationView
         //
@@ -130,9 +156,8 @@ class WarmupScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.navigationItem.title = titleArray[warmupScreenIndex]
         
         
-        self.descriptionLabel.text = titleArray[warmupScreenIndex]
-        
-        extraInformation.titleLabel?.text = NSLocalizedString("extraInformation", comment: "")
+        //descriptionLabel.text = NSLocalizedString("purposeText", comment: "")
+        extraInformation.text = NSLocalizedString("extraInformation", comment: "")
         
         // Back Button
         if warmupScreenIndex == 0 {
