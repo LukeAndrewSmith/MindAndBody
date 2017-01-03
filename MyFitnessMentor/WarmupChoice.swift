@@ -108,6 +108,8 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         // Information Title Frame
         let informationTextWarmupC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationViewWarmupC.frame.size.width - 40, height: 0))
         
+       
+        
         // Information Text Frame
         self.informationTitleWarmupC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height), width: self.informationViewWarmupC.frame.size.width, height: 49)
         informationTitleWarmupC.text = (NSLocalizedString("information", comment: ""))
@@ -115,6 +117,15 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         informationTitleWarmupC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         informationTitleWarmupC.textColor = .white
         informationTitleWarmupC.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        
+        
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        downSwipe.direction = UISwipeGestureRecognizerDirection.down
+        informationTitleWarmupC.addGestureRecognizer(downSwipe)
+        informationTitleWarmupC.isUserInteractionEnabled = true
+        
+        
+        
         self.view.addSubview(informationTitleWarmupC)
         
         
@@ -199,6 +210,24 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     }
     
     
+    // Handle Swipes
+    @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
+        if (extraSwipe.direction == .down){
+            
+            if self.informationViewWarmupC.frame.maxY == (self.view.frame.maxY - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height) {
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    
+                    self.informationViewWarmupC.transform = CGAffineTransform(translationX: 0, y: 0)
+                    
+                }, completion: nil)
+                UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    
+                    self.informationTitleWarmupC.transform = CGAffineTransform(translationX: 0, y: 0)
+                }, completion: nil)
+
+            }
+        }
+    }
     
     
 }

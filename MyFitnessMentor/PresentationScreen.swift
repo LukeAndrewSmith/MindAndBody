@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
-class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     // Warmup Screen Index
@@ -59,20 +60,65 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
 
     
     
+    
     //
     // Initialize View Elements
     //
     
         // Explanation Label
         let explanationLabel = UILabel()
+
     
-    
-    
-        // Clock View
+        // Clock/Time Views
         let timerView = UIView()
         let clockView = UIView()
     
     
+        // Timer View Position
+        let timerViewPosition = UIView()
+        // Timer View CountDown
+        let timerViewCountDown = UIView()
+        // Timer Countdown Label
+        let countDownLabel = UILabel()
+        // Timer Countdown
+        var timerCountDown = Timer()
+        // Timer Value
+        var timerValue = 0
+        // Timer Start
+        var timerStart = UIButton()
+        // Timer Cancel
+        var timerCancel = UIButton()
+    
+    
+        // ScrollViewClock Position Indicators
+        let leftDot = UILabel()
+        let rightDot = UILabel()
+    
+    
+        // Picker Data
+        var minuteData = [Int]()
+        var secondData = [Int]()
+        // Picker Views
+        let minutePicker = UIPickerView()
+        let secondPicker = UIPickerView()
+        // Picker Background View
+        let pickerViewTimer = UIView()
+        //
+        let nilLabel = UILabel()
+    
+    
+        // Stop Clock Label
+        let stopClockLabel = UILabel()
+        // StopClock Start Button
+        let stopClockStart = UIButton()
+        // StopClock Stop
+        let stopClockStop = UIButton()
+        // StopClock Reset
+        let stopClockReset = UIButton()
+        // StopClock Value
+        var stopClockValue = 0
+        // StopClock Timer
+        var stopClockTimer = Timer()
     
     
     
@@ -95,9 +141,15 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         
+        
+        
         // Background Gradient
         //
         self.view.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
+        
+        
+        
+        
         
         
         //
@@ -114,6 +166,10 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
             imageView.image = image
         
         scrollViewBody.addSubview(imageView)
+        
+        
+        
+        
         
         
         //
@@ -143,6 +199,10 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
         
         
         
+        
+        
+        
+        
         //
         // Scroll  View Clock
         //
@@ -153,11 +213,16 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
         
         
         
-            // CountDown Timer
         
+        
+        
+        //
+        // CountDown Timer
+        //
+        
+            // Timer View
             timerView.frame = CGRect(x: 0, y: 0, width: scrollViewClock.frame.size.width, height: scrollViewClock.frame.size.height)
             timerView.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
-        
         
         
             let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleClockSwipes))
@@ -166,37 +231,264 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
             timerView.isUserInteractionEnabled = true
         
         
-            let labelTest = UILabel(frame: CGRect(x: timerView.frame.size.width / 2, y: timerView.frame.size.height / 2, width: 50, height: 50))
-            labelTest.text = "00:00"
-            labelTest.textColor = .white
-            labelTest.textAlignment = .center
-            timerView.addSubview(labelTest)
+
         
-        
-        scrollViewClock.addSubview(timerView)
-        
-        
+            // Timer View Position Indicator (Two dots at bottom of view)
+            //
+            timerViewPosition.frame = CGRect(x: 0, y: 0, width: (view.frame.size.width - 4) / 2, height: scrollViewClock.frame.size.height / 8)
+            timerViewPosition.center = CGPoint(x: collectionView.center.x * 1.5, y: collectionView.center.y - (24.5/2) - (timerViewPosition.frame.size.height / 2))
+            timerViewPosition.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
         
         
         
+            // Timer View Left Indicator
+            leftDot.frame = CGRect(x: (timerViewPosition.frame.size.width * (9/20)) - ((timerView.frame.size.height/32)/2), y: (timerViewPosition.frame.size.height / 2) - ((timerView.frame.size.height/32)/2), width: timerView.frame.size.height/32, height: timerView.frame.size.height/32)
+            //
+            leftDot.layer.cornerRadius = (timerView.frame.size.height/32)/2
+            leftDot.layer.masksToBounds = true
         
-        
-        clockView.frame = CGRect(x: scrollViewClock.frame.maxX, y: 0, width: scrollViewClock.frame.size.width, height: scrollViewClock.frame.size.height)
-        clockView.backgroundColor = .black
-        
-        
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleClockSwipes))
-        rightSwipe.direction = UISwipeGestureRecognizerDirection.right
-        clockView.addGestureRecognizer(rightSwipe)
-        clockView.isUserInteractionEnabled = true
+            timerViewPosition.addSubview(leftDot)
         
         
         
-        scrollViewClock.addSubview(clockView)
+            // Timer View Right Indicator
+            rightDot.frame = CGRect(x: (timerViewPosition.frame.size.width * (11/20)) - ((timerView.frame.size.height/32)/2), y: (timerViewPosition.frame.size.height / 2) - ((timerView.frame.size.height/32)/2), width: timerView.frame.size.height/32, height: timerView.frame.size.height/32)
+            //
+            rightDot.layer.cornerRadius = (timerView.frame.size.height/32)/2
+            rightDot.layer.masksToBounds = true
+        
+            timerViewPosition.addSubview(rightDot)
+        
+        
+            leftDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+            rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+
+        
+        
+                self.view.addSubview(timerViewPosition)
         
         
         
         
+        
+            // Timer View CountDown Label View
+            //
+            timerViewCountDown.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width/1.5, height: self.timerView.frame.size.height/3)
+            timerViewCountDown.center = CGPoint(x: self.timerView.center.x, y: self.timerView.frame.size.height / 3)
+            timerViewCountDown.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+            self.timerView.addSubview(timerViewCountDown)
+            self.timerView.sendSubview(toBack: timerViewCountDown)
+        
+        
+            // TimerView CountDown Label
+            countDownLabel.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width/1.5, height: self.timerView.frame.size.height/3)
+            countDownLabel.textAlignment = .center
+            countDownLabel.font = UIFont(name: "SFUIDisplay-Light", size: 27)
+            countDownLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        
+            self.timerViewCountDown.addSubview(countDownLabel)
+        
+        
+        
+        
+        
+        
+        
+            // Picker View Timer
+            //
+            pickerViewTimer.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * 0.75, height: self.timerView.frame.size.height/3)
+            pickerViewTimer.center = CGPoint(x: self.timerView.center.x, y: self.timerView.frame.size.height / 3)
+            pickerViewTimer.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+
+        
+        
+            // Pick Minutes
+            //
+            minutePicker.frame = CGRect(x: 0, y: 0, width: pickerViewTimer.frame.size.width / 4, height: pickerViewTimer.frame.size.height)
+            minutePicker.dataSource = self
+            minutePicker.delegate = self
+            minutePicker.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+            pickerViewTimer.addSubview(minutePicker)
+        
+        
+            let minuteLabel = UILabel()
+            minuteLabel.frame = CGRect(x: minutePicker.frame.size.width, y: 0, width: minutePicker.frame.size.width, height: pickerViewTimer.frame.size.height)
+            minuteLabel.text = "min"
+            minuteLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
+            minuteLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            minuteLabel.textAlignment = .left
+        
+            pickerViewTimer.addSubview(minuteLabel)
+        
+        
+        
+            // Pick Seconds
+            //
+            secondPicker.frame = CGRect(x: minutePicker.frame.size.width + minuteLabel.frame.size.width, y: 0, width: pickerViewTimer.frame.size.width / 4, height: pickerViewTimer.frame.size.height)
+            secondPicker.dataSource = self
+            secondPicker.delegate = self
+            secondPicker.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+            pickerViewTimer.addSubview(secondPicker)
+       
+        
+            let secondLabel = UILabel()
+            secondLabel.frame = CGRect(x: minutePicker.frame.size.width + minuteLabel.frame.size.width + secondPicker.frame.size.width, y: 0, width: secondPicker.frame.size.width, height: pickerViewTimer.frame.size.height)
+            secondLabel.text = "sec"
+            secondLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
+            secondLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            secondLabel.textAlignment = .left
+        
+            pickerViewTimer.addSubview(secondLabel)
+        
+        
+        
+            timerView.addSubview(pickerViewTimer)
+        
+        
+        
+            // Picker View Data
+            //
+            minuteData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30]
+            secondData = [0, 15, 30, 45]
+        
+        
+        
+        
+            // Start Button Timer
+            //
+            timerStart.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * (2/3), height: self.timerView.frame.size.height/7)
+            timerStart.center = CGPoint(x: timerView.center.x, y: (self.timerView.frame.size.height / 4) * 3)
+            timerStart.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+            timerStart.setTitle("Start", for: .normal)
+            timerStart.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+            timerStart.titleLabel?.textAlignment = .center
+        
+            timerStart.addTarget(self, action: #selector(startTimer(_:)), for: .touchUpInside)
+        
+            timerView.addSubview(timerStart)
+        
+        
+        
+            // Cancel Button Timer
+            //
+            timerCancel.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * (2/3), height: self.timerView.frame.size.height/7)
+            timerCancel.center = CGPoint(x: timerView.center.x, y: (self.timerView.frame.size.height / 4) * 3)
+            timerCancel.backgroundColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+            timerCancel.setTitle("Cancel", for: .normal)
+            timerCancel.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+            timerCancel.titleLabel?.textAlignment = .center
+        
+            timerCancel.addTarget(self, action: #selector(cancelTimer(_:)), for: .touchUpInside)
+        
+            timerView.addSubview(timerCancel)
+        
+            timerView.sendSubview(toBack: timerCancel)
+
+        
+                scrollViewClock.addSubview(timerView)
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        //
+        // StopClock
+        //
+        
+        
+        
+            // StopClock View
+            //
+            clockView.frame = CGRect(x: scrollViewClock.frame.maxX, y: 0, width: scrollViewClock.frame.size.width, height: scrollViewClock.frame.size.height)
+            clockView.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+        
+            let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleClockSwipes))
+            rightSwipe.direction = UISwipeGestureRecognizerDirection.right
+            clockView.addGestureRecognizer(rightSwipe)
+            clockView.isUserInteractionEnabled = true
+        
+        
+        
+                scrollViewClock.addSubview(clockView)
+        
+        
+        
+        
+            //
+            // StopClock Label
+            //stopClockLabel.frame = CGRect(x: 0, y: 0, width: self.clockView.frame.size.width/1.5, height: self.clockView.frame.size.height/3)
+            stopClockLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+            stopClockLabel.center = CGPoint(x: timerView.center.x, y: self.timerView.frame.size.height / 3)
+            stopClockLabel.textAlignment = .center
+            stopClockLabel.font = UIFont(name: "SFUIDisplay-Light", size: 27)
+            stopClockLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            stopClockLabel.text = "00:00"
+            stopClockLabel.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+    
+
+        
+        
+        
+                self.clockView.addSubview(stopClockLabel)
+        
+        
+            // Start Button StopClock
+            stopClockStart.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * (1/3), height: self.timerView.frame.size.height/7)
+            stopClockStart.center = CGPoint(x: (timerView.center.x * 1.5) - (stopClockStart.frame.size.width / 16), y: (self.timerView.frame.size.height / 4) * 3)
+            stopClockStart.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+            stopClockStart.setTitle("Start", for: .normal)
+            stopClockStart.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            stopClockStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+            stopClockStart.titleLabel?.textAlignment = .center
+        
+            stopClockStart.addTarget(self, action: #selector(startStopClock(_:)), for: .touchUpInside)
+        
+            clockView.addSubview(stopClockStart)
+        
+        
+            // Stop Button StopClock
+            stopClockStop.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * (1/3), height: self.timerView.frame.size.height/7)
+            stopClockStop.center = CGPoint(x: (timerView.center.x * 1.5) - (stopClockStart.frame.size.width / 16), y: (self.timerView.frame.size.height / 4) * 3)
+            stopClockStop.backgroundColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+            stopClockStop.setTitle("Stop", for: .normal)
+            stopClockStop.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            stopClockStop.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+            stopClockStop.titleLabel?.textAlignment = .center
+        
+            stopClockStop.addTarget(self, action: #selector(stopStopClock(_:)), for: .touchUpInside)
+        
+            clockView.addSubview(stopClockStop)
+        
+        
+            // Reset Button StopClock
+            stopClockReset.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * (1/3), height: self.timerView.frame.size.height/7)
+            stopClockReset.center = CGPoint(x: (timerView.center.x / 2) + (stopClockReset.frame.size.width / 16), y: (self.timerView.frame.size.height / 4) * 3)
+            stopClockReset.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+            stopClockReset.setTitle("Reset", for: .normal)
+            stopClockReset.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            stopClockReset.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+            stopClockReset.titleLabel?.textAlignment = .center
+        
+            stopClockReset.addTarget(self, action: #selector(resetStopClock(_:)), for: .touchUpInside)
+        
+            clockView.addSubview(stopClockReset)
+        
+            stopClockReset.isUserInteractionEnabled = false
+        
+        
+        
+        
+            clockView.bringSubview(toFront: stopClockStart)
         
         
         
@@ -208,6 +500,7 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
         //
         self.extraInformationView.frame = CGRect(x: 0, y: self.view.frame.size.height - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height, width: self.view.frame.size.height, height: self.view.frame.size.height)
         self.extraInformationView.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
         
         
             // Extra Information Label
@@ -232,15 +525,19 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
         
         
         
-        
+        // Collection View
         collectionView.backgroundColor = .black
+        
         
         
         
         // View Order
         //
+        view.bringSubview(toFront: timerViewPosition)
         view.bringSubview(toFront: extraInformationView)
         view.bringSubview(toFront: collectionView)
+        
+        
         
         
         
@@ -248,9 +545,292 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
         // Display Content
         //
         displayContent()
+        
+        
+
+        
+        
+        
+        
+        
+        //
+        // End of ViewDidLoad()
+        //
     }
     
     
+    
+    
+    
+    
+    
+    
+    //
+    // Count Down Timer
+    //
+    
+    
+    // Timer CountDown Value
+    func setTimerValue() {
+        
+        let minutesSelectedRow = minutePicker.selectedRow(inComponent: 0)
+        let minutes = minuteData[minutesSelectedRow]
+        
+        let secondsSelectedRow = secondPicker.selectedRow(inComponent: 0)
+        let seconds = secondData[secondsSelectedRow]
+        
+        self.timerValue = (minutes * 60) + seconds
+        
+    }
+    
+    
+    // Timer CountDown Title
+    func timeFormatted(totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    
+    
+    // Update Timer
+    func updateTimer() {
+        
+        
+        if timerValue == 0{
+            self.timerCountDown.invalidate()
+            removeCircle()
+            self.timerView.bringSubview(toFront: pickerViewTimer)
+            self.timerView.bringSubview(toFront: timerStart)
+            
+            // Vibrate and Sound
+            let systemSoundID: SystemSoundID = 1016
+            AudioServicesPlaySystemSound (systemSoundID)
+            
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            
+            
+        } else if timerValue == 1 {
+            
+            // Vibrate and Sound
+            let systemSoundID: SystemSoundID = 1016
+            AudioServicesPlaySystemSound (systemSoundID)
+            
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            
+            timerValue -= 1
+            countDownLabel.text = timeFormatted(totalSeconds: timerValue)
+            
+        } else {
+        timerValue -= 1
+        countDownLabel.text = timeFormatted(totalSeconds: timerValue)
+        
+        }
+        
+    }
+    
+
+    let timerShapeLayer = CAShapeLayer()
+    //            var countDownTimer = Timer()
+    
+    //            let timerLabel = UILabel()
+    
+    
+    
+    // Funcs
+    func addCircle() {
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: timerView.center.x ,y: (timerView.center.y * 2) / 3), radius: CGFloat((timerView.frame.size.width / 2) - 30), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(2*M_PI-M_PI_2), clockwise: true)
+        timerShapeLayer.path = circlePath.cgPath
+        timerShapeLayer.fillColor = UIColor.clear.cgColor
+        timerShapeLayer.strokeColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
+        timerShapeLayer.lineWidth = 1.0
+        
+        timerView.layer.addSublayer(timerShapeLayer)
+    }
+    
+    func removeCircle() {
+        
+        timerShapeLayer.removeFromSuperlayer()
+        
+    }
+    
+    func startAnimation() {
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.duration = Double(timerValue)
+        animation.fillMode = kCAFillModeForwards
+        animation.isRemovedOnCompletion = false
+        
+        timerShapeLayer.add(animation, forKey: "circleAnimation")
+        
+        
+    }
+
+    
+    @IBAction func startTimer(_ sender: Any) {
+    
+        setTimerValue()
+        
+        if timerValue == 0 {
+            
+        } else {
+        
+        
+        
+        self.timerView.sendSubview(toBack: pickerViewTimer)
+        self.timerView.bringSubview(toFront: timerCancel)
+        
+        self.countDownLabel.text = timeFormatted(totalSeconds: timerValue)
+        
+        let delayInSeconds = 0.1
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            
+            self.addCircle()
+            self.startAnimation()
+            self.timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+            
+            
+        }
+        
+        }
+        
+    }
+    
+    
+    
+    @IBAction func cancelTimer(_ sender: Any) {
+        
+        
+        self.timerCountDown.invalidate()
+        self.timerValue = 0
+        removeCircle()
+        self.timerView.bringSubview(toFront: pickerViewTimer)
+        self.timerView.bringSubview(toFront: timerStart)
+        
+        
+    }
+    
+
+    
+    // Picker Views
+    //
+   
+    func numberOfComponents(in: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent: Int) -> Int {
+        
+        if pickerView == minutePicker {
+            return 14
+        } else if pickerView == secondPicker {
+            return 4
+        }
+    
+        return 0
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        if pickerView == minutePicker {
+        
+            let rowLabel = UILabel()
+            let titleData = String(minuteData[row])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+            
+        } else if pickerView == secondPicker {
+            
+            let rowLabel = UILabel()
+            let titleData = String(secondData[row])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+            
+        }
+        
+        return nilLabel
+    }
+    
+    
+    
+    
+    //
+    // StopClock
+    //
+    
+    func updateStopClock() {
+        
+        
+        if stopClockValue == 3600 {
+            
+            self.stopClockTimer.invalidate()
+            
+            
+        } else {
+        
+            stopClockValue += 1
+            stopClockLabel.text = timeFormatted(totalSeconds: stopClockValue)
+
+        }
+        
+    }
+
+    
+    
+    
+    @IBAction func startStopClock(_ sender: Any) {
+        
+    
+        self.clockView.bringSubview(toFront: stopClockStop)
+
+        
+        self.countDownLabel.text = timeFormatted(totalSeconds: stopClockValue)
+    
+        self.stopClockTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateStopClock), userInfo: nil, repeats: true)
+        
+        
+        stopClockReset.isUserInteractionEnabled = false
+        
+    }
+
+    
+    @IBAction func stopStopClock(_ sender: Any) {
+        
+        
+        self.clockView.bringSubview(toFront: stopClockStart)
+        
+        
+        self.stopClockTimer.invalidate()
+        
+        stopClockReset.isUserInteractionEnabled = true
+    
+    }
+    
+    
+    @IBAction func resetStopClock(_ sender: Any) {
+        
+        
+        stopClockValue = 0
+        self.stopClockLabel.text = "00:00"
+        
+        stopClockReset.isUserInteractionEnabled = false
+    }
+    
+    
+    
+    
+    
+    
+
+
+
+
+
     
     
     
@@ -270,15 +850,6 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.title = titleArray[warmupScreenIndex]
         
         
-        //descriptionLabel.text = NSLocalizedString("purposeText", comment: "")
-        
-        // Back Button
-//        if warmupScreenIndex == 0 {
-//            warmupScreenBackButton.title = ""
-//        } else if warmupScreenIndex != 0 {
-//            warmupScreenBackButton.title = "<"
-//            
-//        }
         
     }
 
@@ -389,6 +960,13 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
                     
                 self.scrollViewClock.contentOffset.x = self.scrollViewClock.frame.size.width
             }, completion: nil)
+            
+            
+            leftDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            rightDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+            
+            
+            
         } else if (extraSwipe.direction == .right){
             
             
@@ -396,19 +974,25 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
                 
                 self.scrollViewClock.contentOffset.x = 0
             }, completion: nil)
+            
+            
+            leftDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+            rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+
+            
+            
         }
     }
     
     
+
     
     
     
     
-    
-    
-    
-    
-    
+
+
+
     
     
     //
@@ -482,6 +1066,13 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
             cell?.accessoryType = .checkmark
         }
     }
+    
+    
+    
+    
+    
+    
+    
     
     
     // Collection View
