@@ -63,6 +63,37 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
 
             ]
     
+    // Warmup Selected Array
+    let warmupSelectedArray =
+        [
+            // Mandatory
+            [0],
+            // Lower Back
+            [1,
+             0,
+             1,
+             0,
+             0],
+            // Shoulders
+            [0,
+             1,
+             0,
+             1,
+             0,
+             1,
+             0,
+             0],
+            // Pull
+            [0,
+             1,
+             0,
+             1],
+            // Push
+            [1,
+             0,
+             0,
+             1]
+    ]
     
     // CheckMark Array
     let checkMarkArray =
@@ -192,17 +223,24 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             
-        cell.textLabel?.text = warmupUpperArray[indexPath.section][indexPath.row]
+        //cell.textLabel?.text = warmupUpperArray[indexPath.section][indexPath.row]
         cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
         cell.textLabel?.textAlignment = .left
         cell.backgroundColor = .clear
         cell.tintColor = .black
         
-        for cell.accessoryType = .checkmark for checkMarkArray[indexPath.row]
+        
+        cell.textLabel?.text = String(checkMarkArray[indexPath.section])
         
         
-            
+        if checkMarkArray[indexPath.section][indexPath.row] == 1 {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+        
+        
         return cell
 
             
