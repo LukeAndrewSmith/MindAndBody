@@ -81,7 +81,6 @@ class MindBody: UIViewController {
             self.present(alertInformation, animated: true, completion: nil)
             
             
-//            self.tabBarController?.appearance().shadowImage = UIImage.colorForNavBar(UIColor(red:0.34, green:0.69, blue:0.88, alpha:1.0))
             UITabBar.appearance().shadowImage = UIImage(named: "ShadowImageN")
             
         }
@@ -176,6 +175,11 @@ class MindBody: UIViewController {
     }
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+    }
 
     
 }

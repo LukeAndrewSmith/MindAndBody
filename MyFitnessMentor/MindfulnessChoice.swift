@@ -93,6 +93,15 @@ class MindfulnessChoice: UIViewController  {
         }
         
     }
+    
+    
+    
+    // Remove Back Bar Text
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+    }
 
     
 }

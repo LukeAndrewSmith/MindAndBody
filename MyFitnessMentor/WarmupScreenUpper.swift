@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AVFoundation
 
-class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     // Warmup Screen Index
@@ -315,7 +315,7 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
         
             let minuteLabel = UILabel()
             minuteLabel.frame = CGRect(x: minutePicker.frame.size.width, y: 0, width: minutePicker.frame.size.width, height: pickerViewTimer.frame.size.height)
-            minuteLabel.text = "min"
+            minuteLabel.text = NSLocalizedString("minutes", comment: "")
             minuteLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
             minuteLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             minuteLabel.textAlignment = .left
@@ -336,7 +336,7 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
         
             let secondLabel = UILabel()
             secondLabel.frame = CGRect(x: minutePicker.frame.size.width + minuteLabel.frame.size.width + secondPicker.frame.size.width, y: 0, width: secondPicker.frame.size.width, height: pickerViewTimer.frame.size.height)
-            secondLabel.text = "sec"
+            secondLabel.text = NSLocalizedString("seconds", comment: "")
             secondLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
             secondLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             secondLabel.textAlignment = .left
@@ -362,7 +362,7 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
             timerStart.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * (2/3), height: self.timerView.frame.size.height/7)
             timerStart.center = CGPoint(x: timerView.center.x, y: (self.timerView.frame.size.height / 4) * 3)
             timerStart.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
-            timerStart.setTitle("Start", for: .normal)
+            timerStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
             timerStart.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
             timerStart.titleLabel?.textAlignment = .center
@@ -378,7 +378,7 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
             timerCancel.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * (2/3), height: self.timerView.frame.size.height/7)
             timerCancel.center = CGPoint(x: timerView.center.x, y: (self.timerView.frame.size.height / 4) * 3)
             timerCancel.backgroundColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
-            timerCancel.setTitle("Cancel", for: .normal)
+            timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
             timerCancel.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
             timerCancel.titleLabel?.textAlignment = .center
@@ -446,7 +446,7 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
             stopClockStart.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * (1/3), height: self.timerView.frame.size.height/7)
             stopClockStart.center = CGPoint(x: (timerView.center.x * 1.5) - (stopClockStart.frame.size.width / 16), y: (self.timerView.frame.size.height / 4) * 3)
             stopClockStart.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
-            stopClockStart.setTitle("Start", for: .normal)
+            stopClockStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
             stopClockStart.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             stopClockStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
             stopClockStart.titleLabel?.textAlignment = .center
@@ -460,7 +460,7 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
             stopClockStop.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * (1/3), height: self.timerView.frame.size.height/7)
             stopClockStop.center = CGPoint(x: (timerView.center.x * 1.5) - (stopClockStart.frame.size.width / 16), y: (self.timerView.frame.size.height / 4) * 3)
             stopClockStop.backgroundColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
-            stopClockStop.setTitle("Stop", for: .normal)
+            stopClockStop.setTitle(NSLocalizedString("stop", comment: ""), for: .normal)
             stopClockStop.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             stopClockStop.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
             stopClockStop.titleLabel?.textAlignment = .center
@@ -474,7 +474,7 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
             stopClockReset.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * (1/3), height: self.timerView.frame.size.height/7)
             stopClockReset.center = CGPoint(x: (timerView.center.x / 2) + (stopClockReset.frame.size.width / 16), y: (self.timerView.frame.size.height / 4) * 3)
             stopClockReset.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
-            stopClockReset.setTitle("Reset", for: .normal)
+            stopClockReset.setTitle(NSLocalizedString("reset", comment: ""), for: .normal)
             stopClockReset.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             stopClockReset.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
             stopClockReset.titleLabel?.textAlignment = .center
@@ -505,7 +505,7 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
         
             // Extra Information Label
             let extraInformationLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 49))
-            extraInformationLabel.text = "Information"
+            extraInformationLabel.text = NSLocalizedString("information", comment: "")
             extraInformationLabel.textAlignment = .center
             extraInformationLabel.font = UIFont(name: "SFUIDisplay-medium", size: 20)
             extraInformationLabel.textColor = .white
@@ -1013,7 +1013,7 @@ class PresentationScreen: UIViewController, UITableViewDelegate, UITableViewData
         
         
         if indexPath.row == 0 {
-            titleCell.textLabel?.text = "Sets & Reps"
+            titleCell.textLabel?.text = (NSLocalizedString("setsReps", comment: "") + " " + "1 x 1")
             titleCell.textLabel?.textAlignment = .center
             titleCell.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
             titleCell.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
