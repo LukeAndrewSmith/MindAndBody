@@ -180,6 +180,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         homeButton.titleLabel?.textColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
         
+        
+        
                 
         self.tableView.reloadData()
         
@@ -187,7 +189,9 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
+        
     @IBAction func homeAction(_ sender: Any) {
+
         warmupUpperArray =
             [
                 // Mandatory
@@ -243,23 +247,15 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
              1]
         ]
         
-        
-        
-        //homeButton.titleLabel?.textColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
-        
-        homeButton.titleLabel?.textColor = .blue
-        
-        
-        //homeButton.backgroundColor = .green
-        
+    
         gymButton.titleLabel?.textColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
         
         
-
+        homeButton.titleLabel?.textColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        
+        
         self.tableView.reloadData()
     }
-    
-    
     
     
    
@@ -293,7 +289,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Home Button
         homeButton.titleLabel?.text = NSLocalizedString("home", comment: "")
-        
         
         
         
