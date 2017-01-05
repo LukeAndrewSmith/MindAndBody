@@ -17,6 +17,7 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     var warmupScreenIndex = 0
     
+
     
     //Outlets
     //
@@ -48,15 +49,8 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     // Initialize Arrays
     //
-    let titleArray : [String] =
-        [
-            "5 min Light Cardio",
-            "title2",
-            "title3",
-            "title4",
-            "title5",
-            "title6",
-            ]
+ 
+    var warmupMovementsArray: [String] = []
 
     
     
@@ -64,6 +58,13 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     // Initialize View Elements
     //
+    
+    
+        // Body Image Views
+        let frontImage = UIImageView()
+        let backImage = UIImageView()
+    
+    
     
         // Explanation Label
         let explanationLabel = UILabel()
@@ -134,6 +135,12 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
+    
+    
+    
+    
+    
+    
     //
     // ViewDidLoad
     //
@@ -157,15 +164,49 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         
         scrollViewBody.frame = CGRect(x: 0, y: 0, width: scrollViewBody.frame.size.width, height: scrollViewBody.frame.size.height)
-        scrollViewBody.contentSize = CGSize(width: scrollViewBody.frame.size.width, height: scrollViewBody.frame.size.height)
+        scrollViewBody.contentSize = CGSize(width: scrollViewBody.frame.size.width * 2, height: scrollViewBody.frame.size.height)
+        scrollViewBody.isScrollEnabled = false
         
-            // Image
-            let image = #imageLiteral(resourceName: "MyPreferences Selected")
-            let imageView = UIImageView()
-            imageView.frame = CGRect(x: 0, y: 0, width: scrollViewBody.frame.size.width, height: scrollViewBody.frame.size.height)
-            imageView.image = image
         
-        scrollViewBody.addSubview(imageView)
+        
+        
+        // Front Image
+        frontImage.frame = CGRect(x: 0, y: 0, width: scrollViewBody.frame.size.width, height: scrollViewBody.frame.size.height)
+        frontImage.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+        
+        
+            let leftSwipeImage = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipes))
+            leftSwipeImage.direction = UISwipeGestureRecognizerDirection.left
+            frontImage.addGestureRecognizer(leftSwipeImage)
+            frontImage.isUserInteractionEnabled = true
+        
+        
+                scrollViewBody.addSubview(frontImage)
+
+        
+        
+        
+        // Back Image
+        backImage.frame = CGRect(x: scrollViewBody.frame.maxX, y: 0, width: scrollViewBody.frame.size.width, height: scrollViewBody.frame.size.height)
+        backImage.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+        
+            let rightSwipeImage = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipes))
+            rightSwipeImage.direction = UISwipeGestureRecognizerDirection.right
+            backImage.addGestureRecognizer(rightSwipeImage)
+            backImage.isUserInteractionEnabled = true
+        
+        
+        
+                scrollViewBody.addSubview(backImage)
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -184,7 +225,7 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
             // Explanation Label
             explanationLabel.frame = CGRect(x: 10, y: 10, width: scrollViewExplanation.frame.size.width - 20, height: scrollViewExplanation.frame.size.height)
-            explanationLabel.text = NSLocalizedString("purposeText", comment: "")
+            //explanationLabel.text = NSLocalizedString("purposeText", comment: "")
         
         
             explanationLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
@@ -196,6 +237,15 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         scrollViewExplanation.addSubview(explanationLabel)
         scrollViewExplanation.contentSize = CGSize(width: scrollViewExplanation.frame.size.width, height: explanationLabel.frame.size.height + 20)
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -398,8 +448,6 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
         
         
-        
-        
         //
         // StopClock
         //
@@ -436,10 +484,9 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             stopClockLabel.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
     
 
-        
-        
-        
                 self.clockView.addSubview(stopClockLabel)
+        
+        
         
         
             // Start Button StopClock
@@ -830,10 +877,6 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
 
 
 
-
-    
-    
-    
     
     
     
@@ -845,14 +888,60 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     func displayContent() {
         
         
-        // Navigation Controller
+        // Navigation Bar
+        self.navigationItem.title = warmupMovementsArray[warmupScreenIndex]
         
-        self.navigationItem.title = titleArray[warmupScreenIndex]
+        
+        // TableView
+        self.tableView.reloadData()
+        
+        
+        // Body Image
+        
+        
+        
+        
+        
+        // Explanation Label
+        
+        
+        
+        
+        
+        
+        // Demonstration Image
+        
+        
+        
+        
+        
+        
+        // Extra Information Label
+        
+        
+        
+        
         
         
         
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     //
@@ -887,7 +976,7 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         // Next Button
         @IBAction func nextButton(_ sender: Any) {
     
-            if warmupScreenIndex == 5 {
+            if warmupScreenIndex == warmupMovementsArray.count - 1 {
                 self.performSegue(withIdentifier: "unwindToViewController1", sender: self)
                 warmupScreenIndex = 0
             
@@ -929,9 +1018,54 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
+    
+    
+    
+    
+    
+    
     //
     // Swipe Handlers
     //
+    
+    
+    // Horizontal Image Swipe
+    @IBAction func handleImageSwipes(extraSwipe:UISwipeGestureRecognizer) {
+        if (extraSwipe.direction == .left){
+            
+            
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [],animations: {
+                
+                self.scrollViewBody.contentOffset.x = self.scrollViewBody.frame.size.width
+            }, completion: nil)
+            
+            
+            //leftDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            //rightDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+            
+            
+            
+        } else if (extraSwipe.direction == .right){
+            
+            
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [],animations: {
+                
+                self.scrollViewBody.contentOffset.x = 0
+            }, completion: nil)
+            
+            
+            //leftDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+            //rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            
+            
+            
+        }
+    }
+
+    
+    
+    
+    
     
     
     // Extra InformationLabel Downswipe
@@ -992,6 +1126,10 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
 
 
+    
+    
+    
+    
 
     
     
@@ -1002,8 +1140,10 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     // Table View
     func tableView(_ tableView: UITableView, numberOfRowsInSection: Int) -> Int {
-        return titleArray.count
+        return 5
     }
+    
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -1013,7 +1153,7 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         if indexPath.row == 0 {
-            titleCell.textLabel?.text = (NSLocalizedString("setsReps", comment: "") + " " + "1 x 1")
+            titleCell.textLabel?.text = (NSLocalizedString("setsReps", comment: "") + " " + String(warmupScreenIndex))
             titleCell.textLabel?.textAlignment = .center
             titleCell.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
             titleCell.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
@@ -1042,8 +1182,13 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         } else if indexPath.row != 0{
             
             
-            let height = self.view.frame.size.height
-            return ((height * (1/3)) - 35) / 5
+            
+            let height = ((self.view.frame.size.height / 3) - 35)
+            
+            
+            
+            return height / 4
+            
             
             
         }
@@ -1051,6 +1196,9 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         return 35.0
     }
+
+    
+    
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -1077,7 +1225,7 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     // Collection View
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return 6
+        return warmupMovementsArray.count
     }
     
     

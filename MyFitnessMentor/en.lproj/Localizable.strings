@@ -33,11 +33,14 @@
     "mandatory" = "Mandatory";
     "lowerBack" = "Lower Back";
     "shoudlers" = "Shoulders";
-    
 
 
 
 
+
+//
+// Calendar //
+    "calendar" = "Calendar";
 
 
 //
@@ -73,13 +76,18 @@
         "fullBody" = "Full Body";
         "cardio" = "Cardio";
 
-            // Information
+            // Information //
             "purpose" = "Purpose";
             "purposeText" = "The purpose of a warmup is two-fold, it prepares both mind and body for the activity to come. A warmup should be consistently performed before exercise; for workouts it should be 15-20min long (a longer warmup coupled with a shorter workout is more effective than the inverse), for cardio it should be 10-15min long. In both cases the warmup should produce mild sweating, and increased mental and physical focus.";
             "body" = "Body";
             "bodyText" = "A warmup increases body temperature and heart rate, and subsequently blood flow, which together increase the flexibility of muscles and joints.";
             "mind" = "Mind";
             "mindText" = "A warmup increases the firing of nerual pathways related to exercise and muscle activation thus preparing the mind for exercise.\nIdeally there is also a conscious change, the warmup is a chance to put aside any thoughts that might hinder the exercise through awareness of the feeling of the 'awakening' of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
+
+
+        // Warmup Choice Upper //
+        "movements" = "Movements";
+        "warmupChoiceUpperText" = "This page includes a large selection of excellent dynamic mobility warmup movements, the selected movements (checked) indicate those to be included in the warmup. The default warmup provides a sensible collection of movements that works for all.\nThe warmup can be customised by selecting and deselecting movements to fit personal needs; if you are unsure what each movement is I suggest you select all movements and take a minute to read through them.\nChange between different sets of movements with the Gym and Home buttons at the top to ensure they are best suited to the environment";
 
         // Warmup Screen //
         "movement" = "Movement:";
@@ -140,7 +148,7 @@
 
     //
     "split" = "Split";
-        "fullBody" = "Full-Body";
+        "fullbody" = "Full-Body";
         "upperLower" = "Upper-Lower";
         "legsPullPush" = "Legs-Pull-Push";
 

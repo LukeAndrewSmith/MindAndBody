@@ -18,6 +18,37 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Calendar Screen-->
+        <scene sceneID="nUg-Bs-cxn">
+            <objects>
+                <viewController id="0KB-Tf-Xvb" customClass="CalendarScreen" customModule="MyFitnessMentor" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6Ev-lv-hGl"/>
+                        <viewControllerLayoutGuide type="bottom" id="G1W-VH-BJj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HK5-Qx-paG">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="MJ5-2C-c5K">
+                        <barButtonItem key="rightBarButtonItem" image="CheckMark" id="rbo-ni-maD">
+                            <color key="tintColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="checkMarkAction:" destination="0KB-Tf-Xvb" id="Hml-xU-1Wu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="navigationBar" destination="MJ5-2C-c5K" id="pRw-6A-CaX"/>
+                        <segue destination="bo6-Ea-pQj" kind="unwind" identifier="unwindToHomeScreen" unwindAction="prepareForUnwindWithSegue:" id="NAm-YC-vlE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SPK-F5-Qs1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="bo6-Ea-pQj" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="617" y="-2018"/>
+        </scene>
         <!--Preferences Naviagtion-->
         <scene sceneID="0z0-hv-ZvX">
             <objects>
@@ -48,6 +79,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5td-NJ-eg6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-6" y="-648"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="15w-ZM-49s">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ycg-nf-oeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="hzu-YA-w1J" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="CcZ-cs-3tG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="23"/>
+                            <color key="textColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="0KB-Tf-Xvb" kind="relationship" relationship="rootViewController" id="Q7P-nl-fLk"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-295" y="-2017"/>
         </scene>
         <!--Emphasis Selection-->
         <scene sceneID="Ytt-ce-mRJ">
@@ -297,25 +350,6 @@
             </objects>
             <point key="canvasLocation" x="726" y="744"/>
         </scene>
-        <!--Calendar-->
-        <scene sceneID="fCA-xI-BUA">
-            <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="qZ1-Ti-lco" customClass="Calendar" customModule="MyFitnessMentor" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xcW-9z-Nn8"/>
-                        <viewControllerLayoutGuide type="bottom" id="8pl-4F-eAm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="9ti-F1-nMw">
-                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Calendar" id="f6V-07-oQi"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6GN-7m-LN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="270" y="-1711"/>
-        </scene>
         <!--Mind Body-->
         <scene sceneID="o7y-bT-TM5">
             <objects>
@@ -556,7 +590,7 @@
                         <barButtonItem key="rightBarButtonItem" image="Calendar" id="JOB-oS-KBB">
                             <color key="tintColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="qZ1-Ti-lco" kind="show" id="Aca-8c-Hdj"/>
+                                <segue destination="hzu-YA-w1J" kind="presentation" id="BL0-yL-JiH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1161,7 +1195,7 @@
                                 <rect key="frame" x="0.0" y="553" width="375" height="1"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="gp3-KK-ztA"/>
+                                    <constraint firstAttribute="height" constant="0.20000000000000001" id="gp3-KK-ztA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -1215,21 +1249,22 @@
                                     <color key="titleColor" red="0.90980392160000001" green="0.43529411759999997" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="a3c-Kb-LyL" kind="presentation" id="YU1-GR-WHM"/>
+                                    <action selector="beginButton:" destination="noc-gN-vr3" eventType="touchUpInside" id="nqU-Tu-m16"/>
+                                    <segue destination="a3c-Kb-LyL" kind="presentation" identifier="warmupUpper" id="8Jq-0y-P8i"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Nk-TS-Sm7">
                                 <rect key="frame" x="0.0" y="553" width="375" height="1"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="74D-vD-Y6g"/>
+                                    <constraint firstAttribute="height" constant="0.20000000000000001" id="74D-vD-Y6g"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YGL-Ss-O4a">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="553"/>
+                                <rect key="frame" x="0.0" y="24.5" width="375" height="528.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="noc-gN-vr3" id="t9c-A4-zmh"/>
@@ -1248,17 +1283,53 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrz-ce-eSb">
+                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="24.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24.5" id="4gJ-WA-kRF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="18"/>
+                                <state key="normal" title="Gym">
+                                    <color key="titleColor" red="0.90980392160000001" green="0.43529411759999997" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="gymAction:" destination="noc-gN-vr3" eventType="touchUpInside" id="Y20-cy-4lr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gcf-iO-8fY">
+                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="24.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24.5" id="90W-ZP-trh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="18"/>
+                                <state key="normal" title="Home">
+                                    <color key="titleColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="homeAction:" destination="noc-gN-vr3" eventType="touchUpInside" id="Sfd-fa-CYv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YGL-Ss-O4a" firstAttribute="leading" secondItem="Cg2-S4-hgS" secondAttribute="leading" id="2fR-Nx-upT"/>
+                            <constraint firstItem="lrz-ce-eSb" firstAttribute="top" secondItem="jne-2D-CSK" secondAttribute="bottom" id="BjK-pG-8AH"/>
+                            <constraint firstItem="YGL-Ss-O4a" firstAttribute="top" secondItem="Gcf-iO-8fY" secondAttribute="bottom" id="ESa-Wx-9Iq"/>
+                            <constraint firstItem="Gcf-iO-8fY" firstAttribute="top" secondItem="Cg2-S4-hgS" secondAttribute="top" id="G7Y-qm-UME"/>
                             <constraint firstAttribute="trailing" secondItem="sEX-SJ-diI" secondAttribute="trailing" id="H1j-88-c81"/>
                             <constraint firstItem="sEX-SJ-diI" firstAttribute="leading" secondItem="Cg2-S4-hgS" secondAttribute="leading" id="Hfm-5c-MeJ"/>
                             <constraint firstAttribute="trailing" secondItem="YGL-Ss-O4a" secondAttribute="trailing" id="Lvm-Iv-R6L"/>
+                            <constraint firstItem="YGL-Ss-O4a" firstAttribute="top" secondItem="lrz-ce-eSb" secondAttribute="bottom" id="Ol0-49-jGb"/>
+                            <constraint firstAttribute="trailing" secondItem="Gcf-iO-8fY" secondAttribute="trailing" id="Thh-5l-rf1"/>
+                            <constraint firstItem="Gcf-iO-8fY" firstAttribute="width" secondItem="Cg2-S4-hgS" secondAttribute="width" multiplier="0.5" id="WcI-TK-TqA"/>
                             <constraint firstAttribute="trailing" secondItem="8Nk-TS-Sm7" secondAttribute="trailing" id="ZfA-8g-iOb"/>
-                            <constraint firstItem="YGL-Ss-O4a" firstAttribute="top" secondItem="jne-2D-CSK" secondAttribute="bottom" id="bUv-Fm-cfA"/>
+                            <constraint firstItem="lrz-ce-eSb" firstAttribute="leading" secondItem="Cg2-S4-hgS" secondAttribute="leading" id="btv-NQ-pWC"/>
+                            <constraint firstItem="lrz-ce-eSb" firstAttribute="width" secondItem="Cg2-S4-hgS" secondAttribute="width" multiplier="1/2" id="gEL-O2-AgM"/>
                             <constraint firstItem="crs-0F-8YR" firstAttribute="top" secondItem="sEX-SJ-diI" secondAttribute="bottom" id="oNw-Rj-qd5"/>
                             <constraint firstItem="sEX-SJ-diI" firstAttribute="top" secondItem="8Nk-TS-Sm7" secondAttribute="bottom" id="pGK-6p-VdS"/>
+                            <constraint firstItem="YGL-Ss-O4a" firstAttribute="top" secondItem="lrz-ce-eSb" secondAttribute="bottom" id="pOe-Sr-x2u"/>
                             <constraint firstItem="8Nk-TS-Sm7" firstAttribute="top" secondItem="YGL-Ss-O4a" secondAttribute="bottom" id="s1r-1a-APo"/>
                             <constraint firstItem="8Nk-TS-Sm7" firstAttribute="leading" secondItem="Cg2-S4-hgS" secondAttribute="leading" id="uK0-wa-ss1"/>
                             <constraint firstItem="sEX-SJ-diI" firstAttribute="top" secondItem="8Nk-TS-Sm7" secondAttribute="bottom" id="zLA-GQ-CfL"/>
@@ -1274,6 +1345,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="beginButton" destination="sEX-SJ-diI" id="VnA-k8-BLi"/>
+                        <outlet property="gymButton" destination="lrz-ce-eSb" id="hhN-8s-QvW"/>
+                        <outlet property="homeButton" destination="Gcf-iO-8fY" id="9UQ-SB-TOQ"/>
                         <outlet property="informationTitle" destination="40q-ky-kGV" id="LxY-ZN-9Eb"/>
                         <outlet property="informationView" destination="GTX-rO-gQa" id="cOZ-I1-UEO"/>
                         <outlet property="navigationBar" destination="mAL-cl-0lB" id="o2D-EJ-5vl"/>

@@ -29,9 +29,22 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var informationTitle: UILabel!
     
     
+    // Gym Button
+    @IBOutlet weak var gymButton: UIButton!
+    
+    
+    // Home Button
+    @IBOutlet weak var homeButton: UIButton!
+    
+    
+    
+    
+    
+    
+    
     
     // Warmup Upper Array
-    let warmupUpperArray =
+    var warmupUpperArray =
         [
             // Mandatory
             ["5minCardio"],
@@ -64,10 +77,10 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             ]
     
     // Warmup Selected Array
-    let warmupSelectedArray =
+    var warmupSelectedArray =
         [
             // Mandatory
-            [0],
+            [1],
             // Lower Back
             [1,
              0,
@@ -94,13 +107,167 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
              0,
              1]
     ]
+
     
-    // CheckMark Array
-    let checkMarkArray =
+    
+    @IBAction func gymAction(_ sender: Any) {
+        warmupUpperArray =
+            [
+                // Mandatory
+                ["5minCardio"],
+                // Lower Back
+                ["sideLegDrop",
+                 "sideLegKick",
+                 "ScorpionKick",
+                 "UpwardsDog",
+                 "catCow"],
+                // Shoulders
+                ["superManShoulder",
+                 "scapula",
+                 "shoulderRotation",
+                 "facePull",
+                 "externalRotation",
+                 "internalRotation",
+                 "rearDeltFly",
+                 "wallSlides"],
+                // Pull
+                ["latPullover",
+                 "pullUp",
+                 "pullDown",
+                 "curl"],
+                // Push
+                ["pushUp",
+                 "trianglePushUp",
+                 "tricepPushDown",
+                 "shoulderPress"]
+                
+        ]
+
+        warmupSelectedArray =
+            [
+                // Mandatory
+                [1],
+                // Lower Back
+                [1,
+                 0,
+                 1,
+                 0,
+                 0],
+                // Shoulders
+                [0,
+                 1,
+                 0,
+                 1,
+                 0,
+                 1,
+                 0,
+                 0],
+                // Pull
+                [0,
+                 1,
+                 0,
+                 1],
+                // Push
+                [1,
+                 0,
+                 0,
+                 1]
+            ]
+
+        
+        gymButton.titleLabel?.textColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        
+        
+        homeButton.titleLabel?.textColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        
+                
+        self.tableView.reloadData()
+        
+        
+    }
+    
+    
+    @IBAction func homeAction(_ sender: Any) {
+        warmupUpperArray =
+            [
+                // Mandatory
+                ["5minCardio"],
+                // Lower Back
+                ["sideLegDrop",
+                 "sideLegKick",
+                 "ScorpionKick",
+                 "UpwardsDog",
+                 "catCow"],
+                // Shoulders
+                ["externalRotation",
+                 "internalRotation",
+                 "rearDeltFly",
+                 "wallSlides"],
+                // Pull
+                ["latPullover",
+                 "pullUp",
+                 "curl"],
+                // Push
+                ["pushUp",
+                 "trianglePushUp",
+                 ]
+                
+        ]
+        
+        
+        warmupSelectedArray =
         [
-            1,3,5,7,9,10,14
-    ]
+            // Mandatory
+            [1],
+            // Lower Back
+            [1,
+             0,
+             1,
+             0,
+             0],
+            // Shoulders
+            [0,
+             1,
+             0,
+             1,
+             0],
+            // Pull
+            [0,
+             1,
+             0,
+             1],
+            // Push
+            [1,
+             0,
+             0,
+             1]
+        ]
+        
+        
+        
+        //homeButton.titleLabel?.textColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        
+        homeButton.titleLabel?.textColor = .blue
+        
+        
+        //homeButton.backgroundColor = .green
+        
+        gymButton.titleLabel?.textColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        
+        
+
+        self.tableView.reloadData()
+    }
     
+    
+    
+    
+   
+    
+    
+    //
+    // ViewDidLoad
+    //
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,10 +277,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
 
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("begin", comment: ""))
-        
-        
-        
+        navigationBar.title = (NSLocalizedString("upperBody", comment: ""))
         
         
         
@@ -124,6 +288,11 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         
+        // Gym Button
+        gymButton.titleLabel?.text = NSLocalizedString("gym", comment: "")
+        
+        // Home Button
+        homeButton.titleLabel?.text = NSLocalizedString("home", comment: "")
         
         
         
@@ -133,14 +302,15 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         self.informationView.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height + 49), width: self.view.frame.size.width, height: (self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height - 49)
         
         
-        
         view.bringSubview(toFront: informationView)
         
         
         // Information Text
         //
         // Information Title Frame
-        let informationTextWarmupC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
+        let informationText = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
+        
+        
         
         
         
@@ -164,8 +334,54 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
 
         
+        // Information Text and Attributes
+        //
+        // String
+        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceUpperText", comment: "")))
+        
+        // Range of String
+        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceUpperText", comment: "")))
+        let textRange = (informationLabelString as NSString).range(of: textRangeString)
+        
+        
+        // Range of Titles
+        let titleRangeString = (NSLocalizedString("movements", comment: ""))
+        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
+        
+        
+        // Line Spacing
+        let lineSpacing = NSMutableParagraphStyle()
+        lineSpacing.lineSpacing = 1.4
+        
+        
+        // Add Attributes
+        let informationLabelText = NSMutableAttributedString(string: informationLabelString)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Light", size: 19)!, range: textRange)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange1)
+        informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
+        
+        
+        
+        // Final Text Editing
+        informationText.attributedText = informationLabelText
+        informationText.textAlignment = .justified
+        informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
+        informationText.numberOfLines = 0
+        informationText.sizeToFit()
+        self.informationView.addSubview(informationText)
+        
+        
+        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
+        
+        
+        
+        
+        
         
     }
+    
+    
+    
     
     
     
@@ -223,7 +439,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             
-        //cell.textLabel?.text = warmupUpperArray[indexPath.section][indexPath.row]
+        cell.textLabel?.text = warmupUpperArray[indexPath.section][indexPath.row]
         cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
         cell.textLabel?.textAlignment = .left
@@ -231,10 +447,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.tintColor = .black
         
         
-        cell.textLabel?.text = String(checkMarkArray[indexPath.section])
-        
-        
-        if checkMarkArray[indexPath.section][indexPath.row] == 1 {
+        if warmupSelectedArray[indexPath.section][indexPath.row] == 1 {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
@@ -265,8 +478,10 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         if cell?.accessoryType == .checkmark {
             cell?.accessoryType = .none
+            warmupSelectedArray[indexPath.section][indexPath.row] = 0
         } else {
             cell?.accessoryType = .checkmark
+            warmupSelectedArray[indexPath.section][indexPath.row] = 1
         }
     }
     
@@ -337,13 +552,41 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
-    override func viewWillDisappear(_ animated : Bool) {
-        super.viewWillDisappear(animated)
+    
+    // Warmup Array
+    var warmupArray: [String] = []
+    
+    // Begin Button
+    @IBAction func beginButton(_ sender: Any) {
         
-        if (self.isMovingFromParentViewController){
-            navigationController?.popToRootViewController(animated: true)
+        
+        warmupArray = zip(warmupUpperArray.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        performSegue(withIdentifier: "warmupUpper", sender: sender)
+    }
+    
+    // Pass Array to next ViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "warmupUpper") {
+
+            
+            var destinationNC = segue.destination as! UINavigationController
+            
+            var destinationVC = destinationNC.viewControllers.first as! WarmupScreenUpper
+            
+            destinationVC.warmupMovementsArray = warmupArray
+            
         }
     }
+    
+    
+//    override func viewWillDisappear(_ animated : Bool) {
+//        super.viewWillDisappear(animated)
+//        
+//        if (self.isMovingFromParentViewController){
+//            navigationController?.popToRootViewController(animated: true)
+//        }
+//    }
     
     
 }

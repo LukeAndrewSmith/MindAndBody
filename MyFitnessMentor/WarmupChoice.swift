@@ -103,14 +103,12 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         
         
         
-        // Information Text
-        //
-        // Information Title Frame
-        let informationTextWarmupC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationViewWarmupC.frame.size.width - 40, height: 0))
-        
        
         
-        // Information Text Frame
+       
+        // Information Title
+        //
+        // Information Title Frame
         self.informationTitleWarmupC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height), width: self.informationViewWarmupC.frame.size.width, height: 49)
         informationTitleWarmupC.text = (NSLocalizedString("information", comment: ""))
         informationTitleWarmupC.textAlignment = .center
@@ -128,6 +126,12 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         
         self.view.addSubview(informationTitleWarmupC)
         
+        
+        
+        // Information Text
+        //
+        // Information Text Frame
+        let informationTextWarmupC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationViewWarmupC.frame.size.width - 40, height: 0))
         
         // Information Text and Attributes
         //

@@ -17,7 +17,6 @@ class WarmupScreenFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     //
     var warmupScreenIndex = 0
     
-    
     //Outlets
     //
     
@@ -139,8 +138,6 @@ class WarmupScreenFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         
         // Background Gradient

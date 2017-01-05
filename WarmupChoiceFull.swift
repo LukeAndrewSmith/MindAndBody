@@ -31,7 +31,7 @@ class WarmupChoiceFull: UIViewController {
         
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("begin", comment: ""))
+        navigationBar.title = (NSLocalizedString("fullBody", comment: ""))
         
         
         
