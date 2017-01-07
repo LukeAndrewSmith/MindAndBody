@@ -619,6 +619,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         warmupArray = zip(warmupUpperArray.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
         performSegue(withIdentifier: "warmupUpper", sender: sender)
+        
+        _ = self.navigationController?.popToRootViewController(animated: false)
     }
     
     // Pass Array to next ViewController
@@ -630,20 +632,10 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
             let destinationVC = destinationNC.viewControllers.first as! WarmupScreenUpper
             
-           // let destinationVC = segue.destination as! WarmupScreenUpper
-            
             destinationVC.warmupMovementsArray = warmupArray
             
         }
     }
-    
-    
-//    func modalViewControllerDidDismiss(info: Bool) {
-//        if info == true {
-//            self.navigationController?.popToRootViewController(animated: true)
-//        }
-//    }
-    
     
     
 }

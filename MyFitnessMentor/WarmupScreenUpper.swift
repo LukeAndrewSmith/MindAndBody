@@ -11,10 +11,6 @@ import UIKit
 import AVFoundation
 
 
-//protocol ModalViewControllerDelegate: class {
-//    func modalViewControllerDidDismiss()
-//}
-
 
 class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -962,23 +958,9 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             if warmupScreenIndex == warmupMovementsArray.count - 1 {
                 
                 warmupScreenIndex = 0
-//                
-//              delegate?.modalViewControllerDidDismiss()
                 
+                self.dismiss(animated: true)
                 
-                //self.dismiss(animated: true, completion: nil)
-                
-                //self.navigationController?.popToRootViewController(animated: true)
-                
-            
-            let navigationController1 = self.presentingViewController as? UINavigationController
-                
-            self.dismiss(animated: true) {
-                
-                let _ = navigationController1?.popToRootViewController(animated: true)
-                }
-                
-            navigationController1?.popToRootViewController(animated: true)
                 
                 
             } else {
