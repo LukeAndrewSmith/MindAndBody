@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -28,16 +28,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     // Information Title Label
     @IBOutlet weak var informationTitle: UILabel!
     
-    
-    // Gym Button
-    @IBOutlet weak var gymButton: UIButton!
-    
-    
-    // Home Button
-    @IBOutlet weak var homeButton: UIButton!
-    
-    
-    
+    // PickerViews
+    @IBOutlet weak var pickerView: UIPickerView!
     
     
     
@@ -48,101 +40,125 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         [
             // Mandatory
             ["5minCardio"],
+            // Foam/Ball Roll
+            ["back",
+            "thoracicSpin",
+            "lat",
+            "pecDelt",
+            "rearDelt"],
             // Lower Back
             ["sideLegDrop",
             "sideLegKick",
-            "ScorpionKick",
-            "UpwardsDog",
+            "scorpionKick",
+            "sideBend",
+            "upwardsDog",
             "catCow"],
-            // Shoulders
-            ["superManShoulder",
+            // Shoulder
+            ["wallSlides",
+            "superManShoulder",
             "scapula",
             "shoulderRotation",
-            "facePull",
+            ],
+            // Band/Bar/Machine Assisted
+            ["facePull",
             "externalRotation",
             "internalRotation",
+            "shoulderDislocation",
             "rearDeltFly",
-            "wallSlides"],
-            // Pull
-            ["latPullover",
-            "pullUp",
-            "pullDown",
-            "curl"],
-            // Push
-            ["pushUp",
-            "trianglePushUp",
-            "tricepPushDown",
-            "shoulderPress"]
+            "latPullover",
+            ],
+            // Accessory
+            ["wristAnkleRotation",
+            "pushUp",
+            "pullUp"]
+    
+        ]
 
-            ]
     
     // Warmup Selected Array
     var warmupSelectedArray =
         [
             // Mandatory
             [1],
+            // Foam/Ball Roll
+            [1,
+             0,
+             0,
+             0,
+             0],
             // Lower Back
             [1,
              0,
              1,
              0,
-             0],
-            // Shoulders
-            [0,
-             1,
-             0,
-             1,
-             0,
-             1,
-             0,
-             0],
-            // Pull
-            [0,
-             1,
              0,
              1],
-            // Push
+            // Shoulders
             [1,
              0,
              0,
+             1],
+            // Band Assisted
+            [1,
+             1,
+             0,
+             1,
+             0,
+             0],
+            // Accessory
+            [1,
+             1,
              1]
     ]
+    
+    // Picker View Array
+    var pickerViewArray =
+        [
+            "default",
+            "bodyWeight",
+            "bodybuilding",
+            "strength",
+            "circuit",
+            "quick"
+            
+        ]
+    
+    // Table View Section Title Array
+    var tableViewSectionArray =
+        [
+            "mandatory",
+            "foamRoll",
+            "lowerBack",
+            "shoulder",
+            "bandAssisted",
+            "accessory"
+        ]
 
+    
+    // Flash Screen
+    func flashScreen() {
+        
+        let flash = UIView()
+        
+        flash.frame = CGRect(x: 0, y: 98, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
+        flash.backgroundColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        self.view.alpha = 1
+        self.view.addSubview(flash)
+        self.view.bringSubview(toFront: flash)
+        
+        
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
+            
+            flash.alpha = 0
+            
+        }, completion: {(finished: Bool) -> Void in
+            flash.removeFromSuperview()
+        })
+        
+    }
     
     
     @IBAction func gymAction(_ sender: Any) {
-        warmupUpperArray =
-            [
-                // Mandatory
-                ["5minCardio"],
-                // Lower Back
-                ["sideLegDrop",
-                 "sideLegKick",
-                 "ScorpionKick",
-                 "UpwardsDog",
-                 "catCow"],
-                // Shoulders
-                ["superManShoulder",
-                 "scapula",
-                 "shoulderRotation",
-                 "facePull",
-                 "externalRotation",
-                 "internalRotation",
-                 "rearDeltFly",
-                 "wallSlides"],
-                // Pull
-                ["latPullover",
-                 "pullUp",
-                 "pullDown",
-                 "curl"],
-                // Push
-                ["pushUp",
-                 "trianglePushUp",
-                 "tricepPushDown",
-                 "shoulderPress"]
-                
-        ]
-
         warmupSelectedArray =
             [
                 // Mandatory
@@ -175,18 +191,15 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             ]
 
         
-        gymButton.titleLabel?.textColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        flashScreen()
         
-        
-        homeButton.titleLabel?.textColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
-        
-        
-        
-                
         self.tableView.reloadData()
         
+        self.pickerView.reloadAllComponents()
+      
         
     }
+    
     
     
         
@@ -233,29 +246,35 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             [0,
              1,
              0,
-             1,
-             0],
+             1],
             // Pull
             [0,
              1,
-             0,
-             1],
+             0],
             // Push
             [1,
              0,
-             0,
-             1]
+             ]
         ]
         
     
-        gymButton.titleLabel?.textColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+       
         
         
-        homeButton.titleLabel?.textColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        flashScreen()
         
-        
+     
         self.tableView.reloadData()
+        
+        self.pickerView.reloadAllComponents()
+
+        
+            
     }
+    
+    
+    
+    
     
     
    
@@ -283,13 +302,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         
-        
-        // Gym Button
-        gymButton.titleLabel?.text = NSLocalizedString("gym", comment: "")
-        
-        // Home Button
-        homeButton.titleLabel?.text = NSLocalizedString("home", comment: "")
-        
+    
         
         
         // Information
@@ -391,6 +404,56 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
+    
+    
+    
+    // Picker Views
+    //
+    
+    func numberOfComponents(in: UIPickerView) -> Int {
+        return 1
+    }
+    
+
+        
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent: Int) -> Int {
+        
+        return pickerViewArray.count
+
+        }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+    
+            let rowLabel = UILabel()
+            let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
+            //let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+                
+        
+    }
+
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        self.tableView.reloadData()
+        flashScreen()
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Table View
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -398,17 +461,9 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0: return (NSLocalizedString("mandatory", comment: ""))
-        case 1: return (NSLocalizedString("lowerBack", comment: ""))
-        case 2: return (NSLocalizedString("shoulders", comment: ""))
-        case 3: return (NSLocalizedString("pull", comment: ""))
-        case 4: return (NSLocalizedString("push", comment: ""))
-        default: return ""
+        return NSLocalizedString(tableViewSectionArray[section], comment: "")
         }
-        
-        
-    }
+    
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
@@ -417,6 +472,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
         header.textLabel?.textColor = .black
         header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        header.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
         
         
@@ -434,7 +490,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             
-        cell.textLabel?.text = warmupUpperArray[indexPath.section][indexPath.row]
+        cell.textLabel?.text = NSLocalizedString(warmupUpperArray[indexPath.section][indexPath.row], comment: "")
+        
         cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
         cell.textLabel?.textAlignment = .left
@@ -447,7 +504,11 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         } else {
             cell.accessoryType = .none
         }
+    
         
+        if cell.textLabel?.text == NSLocalizedString("5minCardio", comment: "") {
+            cell.isUserInteractionEnabled = false
+        }
         
         return cell
 
@@ -565,9 +626,11 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         if (segue.identifier == "warmupUpper") {
 
             
-            var destinationNC = segue.destination as! UINavigationController
+            let destinationNC = segue.destination as! UINavigationController
             
-            var destinationVC = destinationNC.viewControllers.first as! WarmupScreenUpper
+            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenUpper
+            
+           // let destinationVC = segue.destination as! WarmupScreenUpper
             
             destinationVC.warmupMovementsArray = warmupArray
             
@@ -575,13 +638,12 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
-//    override func viewWillDisappear(_ animated : Bool) {
-//        super.viewWillDisappear(animated)
-//        
-//        if (self.isMovingFromParentViewController){
-//            navigationController?.popToRootViewController(animated: true)
+//    func modalViewControllerDidDismiss(info: Bool) {
+//        if info == true {
+//            self.navigationController?.popToRootViewController(animated: true)
 //        }
 //    }
+    
     
     
 }

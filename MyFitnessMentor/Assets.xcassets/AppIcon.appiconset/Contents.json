@@ -204,18 +204,6 @@
       "scale" : "2x",
       "role" : "quickLook",
       "subtype" : "42mm"
-    },
-    {
-      "filename" : "MindBody @1x.png",
-      "unassigned" : true
-    },
-    {
-      "filename" : "MindBody @2x.png",
-      "unassigned" : true
-    },
-    {
-      "filename" : "MindBody @3x.png",
-      "unassigned" : true
     }
   ],
   "info" : {

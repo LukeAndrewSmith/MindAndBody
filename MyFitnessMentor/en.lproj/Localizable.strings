@@ -76,9 +76,61 @@
         "fullBody" = "Full Body";
         "cardio" = "Cardio";
 
+
+
+        // Warmup Array //
+        // Mandatory
+            "mandatory" = "Mandatory";
+        "5minCardio" = "5min Cardio";
+        // Foam/Ball Roll
+            "foamRoll" = "Foam/Ball Roll";
+        "back" = "Back";
+        "thoracicSpin" = "Thoracic Spine";
+        "lat" = "Lat";
+        "pecDelt" = "Pec and Delt";
+        "rearDelt" = "Rear Delt";
+        // Lower Back
+            "lowerBack" = "Lower Back";
+        "sideLegDrop" = "Side Leg Drop";
+        "sideLegKick" = "Side Leg Kick";
+        "scorpionKick" = "Scorpion Kick";
+        "sideBend" = "Side Bends";
+        "upwardsDog" = "Upwards Dog";
+        "catCow" = "Cat Cow";
+        // Shoulder
+            "shoulder" = "Shoulder";
+        "wallSlides" = "Wall Slides";
+        "superManShoulder" = "Super Man w/ Shoulder";
+        "scapula" = "Scapula Retraction/Protraction";
+        "shoulderRotation" = "Shoulder Rotation";
+        // Band/Bar/Machine Assisted
+            "bandAssisted" = "Band/Bar/Machine Assisted";
+        "facePull" = "Face Pull";
+        "externalRotation" = "External Rotation";
+        "internalRotation" = "Internal Rotation";
+        "shoulderDislocation" = "Shoulder Dislocation";
+        "rearDeltFly" = "Rear Delt Fly";
+        "latPullover" = "Lat Pullover";
+        // Accessory
+            "accessory" = "Accessory";
+        "wristAnkleRotation" = "Wrist & Ankle Rotations";
+        "pushUp" = "Push Up";
+        "pullUp" = "Pull Up";
+
+        // Warmup Picker Array
+        "default" = "Default";
+        "bodyWeight" = "Body Weight (no equiptment)";
+        "bodybuilding" = "BodyBuilding/Aesthetics";
+        "strength" = "Strength";
+        "circuit" = "Circuit";
+        "quick" = "Quick";
+
+
+
+
             // Information //
             "purpose" = "Purpose";
-            "purposeText" = "The purpose of a warmup is two-fold, it prepares both mind and body for the activity to come. A warmup should be consistently performed before exercise; for workouts it should be 15-20min long (a longer warmup coupled with a shorter workout is more effective than the inverse), for cardio it should be 10-15min long. In both cases the warmup should produce mild sweating, and increased mental and physical focus.";
+            "purposeText" = "The purpose of a warmup is two-fold, it prepares both mind and body for the activity to come. A warmup should be consistently performed before exercise; for gym workouts it should be 15-20min long (a longer warmup coupled with a shorter workout is more effective than the inverse), for home workouts 10min long, and for cardio 10-15min long. In both cases the warmup should produce mild sweating, and increased mental and physical focus.";
             "body" = "Body";
             "bodyText" = "A warmup increases body temperature and heart rate, and subsequently blood flow, which together increase the flexibility of muscles and joints.";
             "mind" = "Mind";
@@ -87,7 +139,7 @@
 
         // Warmup Choice Upper //
         "movements" = "Movements";
-        "warmupChoiceUpperText" = "This page includes a large selection of excellent dynamic mobility warmup movements, the selected movements (checked) indicate those to be included in the warmup. The default warmup provides a sensible collection of movements that works for all.\nThe warmup can be customised by selecting and deselecting movements to fit personal needs; if you are unsure what each movement is I suggest you select all movements and take a minute to read through them.\nChange between different sets of movements with the Gym and Home buttons at the top to ensure they are best suited to the environment";
+        "warmupChoiceUpperText" = "This page includes a large selection of excellent dynamic mobility warmup movements, the selected movements (checked) indicate those to be included in the warmup. A number of warmups have been provided and can be selected using the picker underneath the title.\nThe warmup can be customised by selecting and deselecting movements to fit personal needs; if you are unsure what each movement is I suggest you select all movements and take a minute to read through them.";
 
         // Warmup Screen //
         "movement" = "Movement:";
@@ -191,7 +243,6 @@
     "case0" = "      Me";
     "case1" = "      Movements";
     "case2" = "      Volume";
-    "default" = "";
 
 
     //

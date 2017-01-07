@@ -10,20 +10,29 @@ import Foundation
 import UIKit
 import AVFoundation
 
+
+//protocol ModalViewControllerDelegate: class {
+//    func modalViewControllerDidDismiss()
+//}
+
+
 class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    
+    
+//    weak var delegate: ModalViewControllerDelegate? = nil
+//  
     
     
     // Warmup Screen Index
     //
     var warmupScreenIndex = 0
-    
 
     
     //Outlets
     //
     
     // Scroll Views
-    @IBOutlet weak var scrollViewBody: UIScrollView!
     @IBOutlet weak var scrollViewExplanation: UIScrollView!
     @IBOutlet weak var scrollViewDemonstration: UIScrollView!
     @IBOutlet weak var scrollViewClock: UIScrollView!
@@ -31,6 +40,11 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     // TableView
     @IBOutlet weak var tableView: UITableView!
+    
+    
+    // Body Image View
+    @IBOutlet weak var bodyImage: UIImageView!
+    
     
     
     // CollectionView
@@ -58,12 +72,6 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     // Initialize View Elements
     //
-    
-    
-        // Body Image Views
-        let frontImage = UIImageView()
-        let backImage = UIImageView()
-    
     
     
         // Explanation Label
@@ -153,59 +161,6 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         // Background Gradient
         //
         self.view.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
-        
-        
-        
-        
-        
-        
-        //
-        // Scroll View Body Image
-        //
-        
-        scrollViewBody.frame = CGRect(x: 0, y: 0, width: scrollViewBody.frame.size.width, height: scrollViewBody.frame.size.height)
-        scrollViewBody.contentSize = CGSize(width: scrollViewBody.frame.size.width * 2, height: scrollViewBody.frame.size.height)
-        scrollViewBody.isScrollEnabled = false
-        
-        
-        
-        
-        // Front Image
-        frontImage.frame = CGRect(x: 0, y: 0, width: scrollViewBody.frame.size.width, height: scrollViewBody.frame.size.height)
-        frontImage.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
-        
-        
-        
-            let leftSwipeImage = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipes))
-            leftSwipeImage.direction = UISwipeGestureRecognizerDirection.left
-            frontImage.addGestureRecognizer(leftSwipeImage)
-            frontImage.isUserInteractionEnabled = true
-        
-        
-                scrollViewBody.addSubview(frontImage)
-
-        
-        
-        
-        // Back Image
-        backImage.frame = CGRect(x: scrollViewBody.frame.maxX, y: 0, width: scrollViewBody.frame.size.width, height: scrollViewBody.frame.size.height)
-        backImage.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
-        
-        
-            let rightSwipeImage = UISwipeGestureRecognizer(target: self, action: #selector(handleImageSwipes))
-            rightSwipeImage.direction = UISwipeGestureRecognizerDirection.right
-            backImage.addGestureRecognizer(rightSwipeImage)
-            backImage.isUserInteractionEnabled = true
-        
-        
-        
-                scrollViewBody.addSubview(backImage)
-        
-        
-        
-        
-        
-        
         
         
         
@@ -897,7 +852,7 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         // Body Image
-        
+        bodyImage.image = #imageLiteral(resourceName: "BodyImage")
         
         
         
@@ -937,6 +892,29 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
+    // Flash Screen
+    func flashScreen() {
+        
+        let flash = UIView()
+        
+        flash.frame = CGRect(x: 0, y: -100, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
+        flash.backgroundColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        self.view.alpha = 1
+        self.view.addSubview(flash)
+        self.view.bringSubview(toFront: flash)
+        
+        
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
+            
+            flash.alpha = 0
+            
+        }, completion: {(finished: Bool) -> Void in
+            flash.removeFromSuperview()
+        })
+        
+    }
+
+    
     
     
     
@@ -970,16 +948,39 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
             }
+            
+            flashScreen()
 
         }
+    
+    
+    
     
         // Next Button
         @IBAction func nextButton(_ sender: Any) {
     
             if warmupScreenIndex == warmupMovementsArray.count - 1 {
-                self.performSegue(withIdentifier: "unwindToViewController1", sender: self)
+                
                 warmupScreenIndex = 0
+//                
+//              delegate?.modalViewControllerDidDismiss()
+                
+                
+                //self.dismiss(animated: true, completion: nil)
+                
+                //self.navigationController?.popToRootViewController(animated: true)
+                
             
+            let navigationController1 = self.presentingViewController as? UINavigationController
+                
+            self.dismiss(animated: true) {
+                
+                let _ = navigationController1?.popToRootViewController(animated: true)
+                }
+                
+            navigationController1?.popToRootViewController(animated: true)
+                
+                
             } else {
                 warmupScreenIndex = warmupScreenIndex + 1
                 displayContent()
@@ -993,6 +994,11 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                     self.extraInformationView.transform = CGAffineTransform(translationX: 0, y: 0)
                 }, completion: nil)
             }
+            
+            
+            flashScreen()
+        
+            
         }
     
     
@@ -1027,46 +1033,7 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     // Swipe Handlers
     //
-    
-    
-    // Horizontal Image Swipe
-    @IBAction func handleImageSwipes(extraSwipe:UISwipeGestureRecognizer) {
-        if (extraSwipe.direction == .left){
-            
-            
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [],animations: {
-                
-                self.scrollViewBody.contentOffset.x = self.scrollViewBody.frame.size.width
-            }, completion: nil)
-            
-            
-            //leftDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            //rightDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
-            
-            
-            
-        } else if (extraSwipe.direction == .right){
-            
-            
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [],animations: {
-                
-                self.scrollViewBody.contentOffset.x = 0
-            }, completion: nil)
-            
-            
-            //leftDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
-            //rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            
-            
-            
-        }
-    }
 
-    
-    
-    
-    
-    
     
     // Extra InformationLabel Downswipe
     //
@@ -1243,9 +1210,15 @@ class WarmupScreenUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = (self.view.frame.size.width-3)/6
+        let numberOfCells = CGFloat(warmupMovementsArray.count)
+        
+        let width = (self.view.frame.size.width-3)/numberOfCells
         return CGSize(width: width, height: 24.5)
     }
+    
+    
+    
+    
     
     
 }
