@@ -39,9 +39,10 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     var warmupUpperArray =
         [
             // Mandatory
-            ["5minCardio"],
+            ["5minCardioL",
+             "5minCardioI"],
             // Foam/Ball Roll
-            ["back",
+            ["backf",
             "thoracicSpin",
             "lat",
             "pecDelt",
@@ -75,11 +76,12 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         ]
 
     
-    // Warmup Selected Array
+    // Default Warmup Selected Array
     var warmupSelectedArray =
         [
             // Mandatory
-            [1],
+            [1,
+             0],
             // Foam/Ball Roll
             [1,
              0,
@@ -118,7 +120,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             "bodyWeight",
             "bodybuilding",
             "strength",
-            "circuit",
+            "highIntensity",
             "quick"
             
         ]
@@ -140,7 +142,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         let flash = UIView()
         
-        flash.frame = CGRect(x: 0, y: 98, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
+        flash.frame = CGRect(x: 0, y: 171.5, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
         flash.backgroundColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
         self.view.alpha = 1
         self.view.addSubview(flash)
@@ -298,6 +300,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
+        beginButton.setTitleColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), for: .normal)
         
         
         
@@ -315,7 +318,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Information Text
         //
-        // Information Title Frame
+        // Information Text Frame
         let informationText = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
         
         
@@ -428,8 +431,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
             let rowLabel = UILabel()
             let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
-            //let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)])
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -472,7 +474,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
         header.textLabel?.textColor = .black
         header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        header.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        header.contentView.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
         
         
@@ -607,20 +609,22 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
-    
-    
-    // Warmup Array
-    var warmupArray: [String] = []
-    
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         
         
-        warmupArray = zip(warmupUpperArray.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
         
         performSegue(withIdentifier: "warmupUpper", sender: sender)
         
-        _ = self.navigationController?.popToRootViewController(animated: false)
+        
+        let delayInSeconds = 1.0
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            
+            _ = self.navigationController?.popToRootViewController(animated: false)
+            
+        }
+       
     }
     
     // Pass Array to next ViewController
@@ -632,7 +636,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
             let destinationVC = destinationNC.viewControllers.first as! WarmupScreenUpper
             
-            destinationVC.warmupMovementsArray = warmupArray
+            destinationVC.warmupMovementsArray = warmupUpperArray
+            destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
             
         }
     }

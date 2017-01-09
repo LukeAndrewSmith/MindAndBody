@@ -63,30 +63,7 @@ class MindBody: UIViewController {
         // Background Gradient
         self.view.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
         
-        
-        // Alert
-        let defaults = UserDefaults.standard
-        defaults.register(defaults: ["alertInfo1" : false])
-        
-        if UserDefaults.standard.bool(forKey: "alertInfo1") == false {
-            
-            UserDefaults.standard.set(true, forKey: "alertInfo1")
-            
-            let alertInformation = UIAlertController(title: (NSLocalizedString("alertTitle1", comment: "")), message: (NSLocalizedString("alertMessage1", comment: "")), preferredStyle: UIAlertControllerStyle.alert)
-            
-            alertInformation.view.tintColor = .black
-            
-            alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
-            
-            self.present(alertInformation, animated: true, completion: nil)
-            
-            
-            UITabBar.appearance().shadowImage = UIImage(named: "ShadowImageN")
-            
-        }
-
-        
-        
+      
        // Title
         
        
@@ -144,35 +121,38 @@ class MindBody: UIViewController {
         
         
         
-    }
-
-    // Default workout test
-    var fullBodyMale: [String : Int] =
-    [
-        // Compound
-        "Legs": 3,
-        "Pull": 2,
-        "Push": 2,
-        // Isolation
-        //Legs
-        "Quadriceps": 0,
-        "Hamstrings": 0,
-        "Glutes": 0,
-        // Pull
-        "Biceps": 1,
-        //Push
-        "Triceps": 1,
-        "Deltoids": 1,
-        // Other
-        "Calves": 1,
-        "Abs": 1
-    ]
-    
-    
-    // Workout func test
-    func fullBodyWorkout() {
+        
+        
+        //
+        // Instructions Popup View
+        //
+        let defaults = UserDefaults.standard
+        defaults.register(defaults: ["alertInfo1" : false])
+        
+        if UserDefaults.standard.bool(forKey: "alertInfo1") == false {
+            
+            UserDefaults.standard.set(true, forKey: "alertInfo1")
+            
+            let alertInformation = UIAlertController(title: (NSLocalizedString("alertTitle1", comment: "")), message: (NSLocalizedString("alertMessage1", comment: "")), preferredStyle: UIAlertControllerStyle.alert)
+            
+            alertInformation.view.tintColor = .black
+            
+            alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
+            
+            self.present(alertInformation, animated: true, completion: nil)
+            
+            
+            UITabBar.appearance().shadowImage = UIImage(named: "ShadowImageN")
+            
+        }
+        
+        
+        
+        
+        
         
     }
+
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
