@@ -12,8 +12,10 @@ import AVFoundation
 import UserNotifications
 
 
+
 class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
+ 
     
     
     // Warmup Screen Inde
@@ -514,6 +516,9 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     // Button Actions
     //
     
+    
+
+    
     // Set Button
     @IBAction func setButtonAction(sender: UIButton) {
         
@@ -526,14 +531,15 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             //content.title = NSString.localizedUserNotificationString(forKey: "Rest over: Begin next set", arguments: nil)
             //content.body = NSString.localizedUserNotificationString(forKey: "", arguments: nil)
             content.title = "Rest over: Begin next set"
-            content.body = ""
+            content.body = "The the the "
             content.sound = UNNotificationSound.default()
-            content.categoryIdentifier = "restTimer"
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
             let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
             
+            
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            
             
         } else {
             // Fallback on earlier versions
