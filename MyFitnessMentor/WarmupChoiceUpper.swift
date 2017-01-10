@@ -58,21 +58,18 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             ["wallSlides",
             "superManShoulder",
             "scapula",
-            "shoulderRotation",
-            ],
+            "shoulderRotation"],
             // Band/Bar/Machine Assisted
             ["facePull",
             "externalRotation",
             "internalRotation",
             "shoulderDislocation",
             "rearDeltFly",
-            "latPullover",
-            ],
+            "latPullover"],
             // Accessory
             ["wristAnkleRotation",
             "pushUp",
             "pullUp"]
-    
         ]
 
     
@@ -117,6 +114,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     var pickerViewArray =
         [
             "default",
+            "beginner",
             "bodyWeight",
             "bodybuilding",
             "strength",
@@ -442,6 +440,317 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
+        
+        switch row {
+            
+        case 0:
+            warmupSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [1,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Lower Back
+                    [1,
+                     0,
+                     0,
+                     0,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
+                     0,
+                     1,
+                     0,
+                     0],
+                    // Accessory
+                    [1,
+                     1,
+                     1]
+            ]
+        
+            
+        case 1:
+            warmupSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Lower Back
+                    [1,
+                     0,
+                     0,
+                     1,
+                     0,
+                     0],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [0,
+                     0,
+                     0,
+                     1,
+                     0,
+                     0],
+                    // Accessory
+                    [1,
+                     1,
+                     0]
+            ]
+
+            
+        case 2:
+            warmupSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Lower Back
+                    [1,
+                     1,
+                     1,
+                     0,
+                     1,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     1,
+                     1],
+                    // Band Assisted
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Accessory
+                    [1,
+                     1,
+                     1]
+            ]
+
+            
+        case 3:
+            warmupSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [1,
+                     0,
+                     1,
+                     0,
+                     1],
+                    // Lower Back
+                    [1,
+                     1,
+                     1,
+                     0,
+                     0,
+                     0],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
+                     0,
+                     0,
+                     0,
+                     1],
+                    // Accessory
+                    [1,
+                     1,
+                     1]
+            ]
+
+            
+        case 4:
+            warmupSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [0,
+                     1,
+                     1,
+                     0,
+                     1],
+                    // Lower Back
+                    [1,
+                     0,
+                     1,
+                     0,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     1,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
+                     0,
+                     1,
+                     0,
+                     1],
+                    // Accessory
+                    [1,
+                     1,
+                     1]
+            ]
+
+            
+        case 5:
+            warmupSelectedArray =
+                [
+                    // Mandatory
+                    [0,
+                     1],
+                    // Foam/Ball Roll
+                    [1,
+                     0,
+                     1,
+                     0,
+                     0],
+                    // Lower Back
+                    [1,
+                     1,
+                     1,
+                     0,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
+                     0,
+                     0,
+                     1,
+                     1],
+                    // Accessory
+                    [1,
+                     1,
+                     1]
+            ]
+
+            
+        case 6:
+            warmupSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [1,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Lower Back
+                    [1,
+                     0,
+                     0,
+                     0,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [1,
+                     0,
+                     0,
+                     1,
+                     0,
+                     0],
+                    // Accessory
+                    [1,
+                     0,
+                     0]
+            ]
+
+            
+        default:
+            warmupSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [1,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Lower Back
+                    [1,
+                     0,
+                     1,
+                     0,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
+                     0,
+                     1,
+                     0,
+                     0],
+                    // Accessory
+                    [1,
+                     1,
+                     1]
+            ]
+
+            
+            
+        }
+        
+        
         self.tableView.reloadData()
         flashScreen()
         
@@ -508,7 +817,10 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     
         
-        if cell.textLabel?.text == NSLocalizedString("5minCardio", comment: "") {
+        if cell.textLabel?.text == NSLocalizedString("5minCardioL", comment: "") {
+            cell.isUserInteractionEnabled = false
+        }
+        if cell.textLabel?.text == NSLocalizedString("5minCardioI", comment: "") {
             cell.isUserInteractionEnabled = false
         }
         
@@ -612,12 +924,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         
-        
-        
-        
-        performSegue(withIdentifier: "warmupUpper", sender: sender)
-        
-        
         let delayInSeconds = 1.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             
@@ -627,7 +933,11 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
        
     }
     
+    
+    
+    
     // Pass Array to next ViewController
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "warmupUpper") {
 

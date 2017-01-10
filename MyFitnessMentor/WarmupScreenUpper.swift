@@ -22,23 +22,132 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     
     // Initialize Arrays
+    // Warmup Choice Arrays
+        // Warmup Choice Movement Array
+        var warmupMovementsArray: [[String]] = [[]]
+        // Warmup Choice Selected Array
+        var warmupMovementsSelectedArray: [[Int]] = [[]]
     
-    var warmupMovementsArray: [[String]] = [[]]
+    // Warmup Arrays
+        // Movement Array
+        var warmupArray: [String] = []
+        // Sets Array
+        var setsArrayF =
+            [
+                // Mandatory
+                [1,
+                 1],
+                // Foam/Ball Roll
+                [1,
+                 3,
+                 1,
+                 1,
+                 1],
+                // Lower Back
+                [1,
+                1,
+                1,
+                1,
+                1,
+                1],
+                // Shoulder
+                [2,
+                 1,
+                 1,
+                 1],
+                // Band/Bar/Machine Assisted
+                [2,
+                 1,
+                 1,
+                 1,
+                 1,
+                 1],
+                // Accessory
+                [1,
+                 1,
+                 1]
+            ]
+        var setsArray: [Int] = []
+        // Sets Array
+        var repsArrayF =
+            [
+                // Mandatory
+                ["1",
+                 "1"],
+                // Foam/Ball Roll
+                ["10-20",
+                "5-10",
+                "5-10",
+                "5-10",
+                "30-60s"],
+                // Lower Back
+                ["5-10",
+                "5-10",
+                "5-10",
+                "5-10",
+                "5-10",
+                "15-20"],
+                // Shoulder
+                ["10-20",
+                "5-10",
+                "15",
+                "10"],
+                // Band/Bar/Machine Assisted
+                ["10-15",
+                "5-15",
+                "5-10",
+                "5-10",
+                "10-15",
+                "10-20",],
+                // Accessory
+                ["15-30s",
+                NSLocalizedString("asNecessary", comment: ""),
+                NSLocalizedString("asNecessary", comment: "")
+                ]
+            ]
+        var repsArray: [String] = []
+        // Demonstration Array
+        var demonstrationArrayF: [[UIImage]] = [[]]
+        var demonstrationArray: [UIImage] = []
+        // Target Area Array
+        var targetAreaArrayF: [[UIImage]] = [[]]
+        var targetAreaArray: [UIImage] = []
+        // Explanation Array
+        var explanationArrayF: [[String]] = [[]]
+        var explanationArray: [String] = []
+        // Extra Information Array
+        var extraInformationArrayF: [[String]] = [[]]
+        var extraInformationArray: [String] = []
+
     
-    var warmupMovementsSelectedArray: [[Int]] = [[]]
     
-    var warmupArray: [String] = []
-    
-    var setsRepsArray: [String] = []
-    
-    
-    func createArrays() {
+    // Populate Arrays
+    func populateArrays() {
         
         // Warmup Array
-        self.warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
     
-        // Sets and Reps Array
+        // Sets Array
+        setsArray = zip(setsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
+        
+        // Reps Array
+        repsArray = zip(repsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        
+        // Demonstration Array
+        demonstrationArray = zip(demonstrationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        
+        // Target Area Array
+        targetAreaArray = zip(targetAreaArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        
+        // Explanation Array
+        explanationArray = zip(explanationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        // Extra Information Array
+        extraInformationArray = zip(extraInformationArray.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
     }
     
     
@@ -52,15 +161,16 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     @IBOutlet weak var navigationBar: UINavigationItem!
         // Buttons
         @IBOutlet weak var nextButton: UIBarButtonItem!
-    @IBOutlet weak var backButton: UIBarButtonItem!
+        @IBOutlet weak var backButton: UIBarButtonItem!
     
     
     
-    // Views
+    // Set Rep
     @IBOutlet weak var setRepView: UIView!
-    
-    // Buttons
-    @IBOutlet weak var testButton: UIButton!
+        // Buttons
+        var setButton1 = UIButton()
+        var setButton2 = UIButton()
+        var setButton3 = UIButton()
     
     // Scroll Views
         // Demonstration
@@ -86,8 +196,8 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         @IBOutlet weak var setsRepsLabel: UILabel!
         // Demonstration
         @IBOutlet weak var demonstrationLabel: UILabel!
-        // Worked Area Label
-        @IBOutlet weak var workedAreaLabel: UILabel!
+        // Target Area Label
+        @IBOutlet weak var targetAreaLabel: UILabel!
         // Explanation Label
         @IBOutlet weak var explanationLabel: UILabel!
         // Progress Label
@@ -118,7 +228,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Create Arrays
         //
-        createArrays()
+        populateArrays()
         
         
         // Background Gradient
@@ -131,16 +241,6 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         //
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
         rightSwipe.direction = UISwipeGestureRecognizerDirection.right
-        
-        
-        
-        
-        
-        // Test Button
-        
-        testButton.layer.borderWidth = 10
-        testButton.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
-        testButton.layer.cornerRadius = self.testButton.frame.size.height / 2
         
         
         
@@ -233,11 +333,96 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         self.navigationItem.title = NSLocalizedString(warmupArray[warmupScreenIndex], comment: "")
         
         
+        // Set Buttons
+        switch setsArray[warmupScreenIndex] {
+    
+        case 1:
+            setButton1.frame = CGRect(x: 0, y: self.setRepView.frame.size.height / 2 - 24.5, width: 49, height: 49)
+            setButton1.center.x = self.setRepView.center.x
+            setButton1.layer.borderWidth = 10
+            setButton1.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
+            setButton1.layer.cornerRadius = 24.5
+            setButton1.addTarget(self, action: #selector(setButtonAction1), for: .touchUpInside)
+            setButton1.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            setButton1.isEnabled = true
+            
+            self.setRepView.addSubview(setButton1)
+            
+            
+        case 2:
+           setButton1.frame = CGRect(x: (self.view.frame.size.width * (1/3) - 24.5), y: self.setRepView.frame.size.height / 2 - 24.5, width: 49, height: 49)
+            setButton1.layer.borderWidth = 10
+            setButton1.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
+            setButton1.layer.cornerRadius = 24.5
+            setButton1.addTarget(self, action: #selector(setButtonAction2), for: .touchUpInside)
+            setButton1.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            setButton1.isEnabled = true
+            
+            self.setRepView.addSubview(setButton1)
+            
+            
+            
+            setButton2.frame = CGRect(x: (self.view.frame.size.width * (2/3) - 24.5), y: self.setRepView.frame.size.height / 2 - 24.5, width: 49, height: 49)
+            setButton2.center.y = self.setRepView.center.y
+            setButton2.layer.borderWidth = 10
+            setButton2.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
+            setButton2.layer.cornerRadius = 24.5
+            setButton1.addTarget(self, action: #selector(setButtonAction2), for: .touchUpInside)
+            setButton2.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            setButton2.isEnabled = true
+            
+            self.setRepView.addSubview(setButton2)
+            
+        
+        case 3:
+            setButton1.frame = CGRect(x: 0, y: self.setRepView.frame.size.height / 2 - 24.5, width: 49, height: 49)
+            setButton1.center = self.setRepView.center
+            setButton1.layer.borderWidth = 10
+            setButton1.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
+            setButton1.layer.cornerRadius = 24.5
+            setButton1.addTarget(self, action: #selector(setButtonAction1), for: .touchUpInside)
+            setButton1.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            setButton1.isEnabled = true
+            
+            self.setRepView.addSubview(setButton1)
+            
+            
+            setButton2.frame = CGRect(x: 0, y: self.setRepView.frame.size.height / 2 - 24.5, width: 49, height: 49)
+            setButton2.center = self.setRepView.center
+            setButton2.layer.borderWidth = 10
+            setButton2.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
+            setButton2.layer.cornerRadius = 24.5
+            setButton1.addTarget(self, action: #selector(setButtonAction1), for: .touchUpInside)
+            setButton2.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            setButton2.isEnabled = true
+            
+            self.setRepView.addSubview(setButton2)
+            
+            
+            
+            setButton3.frame = CGRect(x: 0, y: self.setRepView.frame.size.height / 2 - 24.5, width: 49, height: 49)
+            setButton3.center = self.setRepView.center
+            setButton3.layer.borderWidth = 10
+            setButton3.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
+            setButton3.layer.cornerRadius = 24.5
+            setButton1.addTarget(self, action: #selector(setButtonAction1), for: .touchUpInside)
+            setButton3.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            setButton3.isEnabled = true
+            
+            self.setRepView.addSubview(setButton3)
+            
+        default:
+            setButton1.removeFromSuperview()
+            setButton2.removeFromSuperview()
+            setButton3.removeFromSuperview()
+        }
+        
         
         
     
         // Body Image
         bodyImage.image = #imageLiteral(resourceName: "BodyImage")
+        //bodyImage.image = targetAreaArray[warmupScreenIndex]
         
         
         
@@ -262,21 +447,24 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         // Title Labels
-        //self.setsRepsLabel.text = ""
-        
-        self.demonstrationLabel.text = NSLocalizedString("demonstration", comment: "")
-        
-        self.workedAreaLabel.text = NSLocalizedString("workedArea", comment: "")
-        
-        self.progressLabel.text = (String(warmupScreenIndex + 1)+"/"+String(warmupArray.count))
+            // Sets Reps
+            self.setsRepsLabel.text = (String(setsArray[warmupScreenIndex]) + " x " + repsArray[warmupScreenIndex])
+            // Demonstration
+            self.demonstrationLabel.text = NSLocalizedString("demonstration", comment: "")
+            // Target Area
+            self.targetAreaLabel.text = NSLocalizedString("targetArea", comment: "")
+            // Explanation
+            self.explanationLabel.text = NSLocalizedString("explanation", comment: "")
+            // Progress
+            self.progressLabel.text = (String(warmupScreenIndex + 1)+"/"+String(warmupArray.count))
        
         
         
         // Progress Bar
-        let warmupIndex = Float(warmupScreenIndex)
-        let warmupArray = Float(self.warmupArray.count)
+        let warmupIndexP = Float(warmupScreenIndex)
+        let warmupArrayP = Float(self.warmupArray.count)
 
-        let fractionalProgress = warmupIndex/warmupArray
+        let fractionalProgress = warmupIndexP/warmupArrayP
     
         progressBar.setProgress(fractionalProgress, animated: true)
         
@@ -284,6 +472,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
     }
 
+    
     
     
     
@@ -314,15 +503,19 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     
     
-    @IBAction func testButtonAction(_ sender: Any) {
+    @IBAction func setButtonAction1() {
+    
+        self.setButton1.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        self.setButton1.isEnabled = false
         
-        self.testButton.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
-        self.testButton.isEnabled = false
         
     }
     
     
-    
+    @IBAction func setButtonAction2(){
+        
+        
+    }
     
     
     
@@ -343,12 +536,16 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             
         } else {
             warmupScreenIndex = warmupScreenIndex + 1
+            setButton1.removeFromSuperview()
+            setButton2.removeFromSuperview()
+            setButton3.removeFromSuperview()
             displayContent()
         }
         
         flashScreen()
         
         
+       
     }
 
     
@@ -361,6 +558,9 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         } else {
             warmupScreenIndex = warmupScreenIndex - 1
             
+            setButton1.removeFromSuperview()
+            setButton2.removeFromSuperview()
+            setButton3.removeFromSuperview()
             flashScreen()
             displayContent()
         }

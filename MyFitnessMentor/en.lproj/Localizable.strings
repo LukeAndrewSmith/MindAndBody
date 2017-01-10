@@ -34,6 +34,9 @@
     "lowerBack" = "Lower Back";
     "shoudlers" = "Shoulders";
 
+    "asNecessary" = "As Necessary";
+
+    "explanation" = "Explanation";
 
 
 
@@ -95,14 +98,14 @@
         "sideLegDrop" = "Side Leg Drop";
         "sideLegKick" = "Side Leg Kick";
         "scorpionKick" = "Scorpion Kick";
-        "sideBend" = "Side Bends";
+        "sideBend" = "Side Bends and Twists";
         "upwardsDog" = "Upwards Dog";
         "catCow" = "Cat Cow";
         // Shoulder
             "shoulder" = "Shoulder";
         "wallSlides" = "Wall Slides";
-        "superManShoulder" = "Super Man w/ Shoulder";
-        "scapula" = "Scapula Retraction/Protraction";
+        "superManShoulder" = "Super Man with Shoulder Slides";
+        "scapula" = "Scapula Retraction and Protraction";
         "shoulderRotation" = "Shoulder Rotation";
         // Band/Bar/Machine Assisted
             "bandAssisted" = "Band/Bar/Machine Assisted";
@@ -120,6 +123,7 @@
 
         // Warmup Picker Array
         "default" = "Default";
+        "beginner" = "Beginner";
         "bodyWeight" = "Body Weight (no equipment)";
         "bodybuilding" = "BodyBuilding/Aesthetics";
         "strength" = "Strength";
@@ -149,7 +153,7 @@
         "explanationTitle" = "Explanation";
 
         "demonstration" = "Demonstration";
-        "workedArea" = "Worked Area";
+        "targetArea" = "Target Area";
 
 
 
