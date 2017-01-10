@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import AVFoundation
+import UserNotifications
 
 
 class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -325,6 +326,87 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     
     
+    
+    
+    //
+    // Generate Buttons
+    //
+    
+    
+    
+    func createButton() -> UIButton {
+        let setButton = UIButton()
+        let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
+        setButton.addConstraints([widthHeight])
+        setButton.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
+        setButton.layer.borderWidth = 10
+        setButton.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
+        setButton.layer.cornerRadius = 24.5
+        setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
+        setButton.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        setButton.isEnabled = true
+        
+        
+        
+        setRepView.addSubview(setButton)
+    
+        return setButton
+    }
+    
+    
+    func createButtonArray(){
+        //generate an array of buttons
+        
+        var buttonArray = [UIButton]()
+        let numberOfButtons = setsArray[warmupScreenIndex]
+        
+        for _ in 1...numberOfButtons{
+            buttonArray += [createButton()]
+            
+        }
+    
+       
+        if setsArray[warmupScreenIndex] == 1 {
+            
+            let stackView = UIStackView(arrangedSubviews: buttonArray)
+            stackView.frame = CGRect(x: (self.view.frame.size.width / 2) - 24.5, y: 12.25, width: 49, height: 49)
+            stackView.axis = .horizontal
+            stackView.distribution = .equalSpacing
+            
+            setRepView.addSubview(stackView)
+            
+            
+        } else if setsArray[warmupScreenIndex] == 2 {
+        
+            let stackView = UIStackView(arrangedSubviews: buttonArray)
+            stackView.frame = CGRect(x: ((self.view.frame.size.width - 98) / 3), y: 12.25, width: ((self.view.frame.size.width - 98) / 3) + 98, height: 49)
+            stackView.axis = .horizontal
+            stackView.distribution = .equalSpacing
+       
+            setRepView.addSubview(stackView)
+        
+            
+        } else if setsArray[warmupScreenIndex] == 3 {
+           
+            let stackView = UIStackView(arrangedSubviews: buttonArray)
+            stackView.frame = CGRect(x: ((self.view.frame.size.width - 147) / 4), y: 12.25, width: ((2 * (self.view.frame.size.width - 147)) / 4) + 147, height: 49)
+            stackView.axis = .horizontal
+            stackView.distribution = .equalSpacing
+            
+            setRepView.addSubview(stackView)
+            
+        }
+        
+        
+    }
+    
+        
+    
+        
+        
+        
+    
+    
     // Display Content Function
     func displayContent() {
         
@@ -334,90 +416,11 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         // Set Buttons
-        switch setsArray[warmupScreenIndex] {
-    
-        case 1:
-            setButton1.frame = CGRect(x: 0, y: self.setRepView.frame.size.height / 2 - 24.5, width: 49, height: 49)
-            setButton1.center.x = self.setRepView.center.x
-            setButton1.layer.borderWidth = 10
-            setButton1.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
-            setButton1.layer.cornerRadius = 24.5
-            setButton1.addTarget(self, action: #selector(setButtonAction1), for: .touchUpInside)
-            setButton1.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            setButton1.isEnabled = true
-            
-            self.setRepView.addSubview(setButton1)
-            
-            
-        case 2:
-           setButton1.frame = CGRect(x: (self.view.frame.size.width * (1/3) - 24.5), y: self.setRepView.frame.size.height / 2 - 24.5, width: 49, height: 49)
-            setButton1.layer.borderWidth = 10
-            setButton1.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
-            setButton1.layer.cornerRadius = 24.5
-            setButton1.addTarget(self, action: #selector(setButtonAction2), for: .touchUpInside)
-            setButton1.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            setButton1.isEnabled = true
-            
-            self.setRepView.addSubview(setButton1)
-            
-            
-            
-            setButton2.frame = CGRect(x: (self.view.frame.size.width * (2/3) - 24.5), y: self.setRepView.frame.size.height / 2 - 24.5, width: 49, height: 49)
-            setButton2.center.y = self.setRepView.center.y
-            setButton2.layer.borderWidth = 10
-            setButton2.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
-            setButton2.layer.cornerRadius = 24.5
-            setButton1.addTarget(self, action: #selector(setButtonAction2), for: .touchUpInside)
-            setButton2.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            setButton2.isEnabled = true
-            
-            self.setRepView.addSubview(setButton2)
-            
-        
-        case 3:
-            setButton1.frame = CGRect(x: 0, y: self.setRepView.frame.size.height / 2 - 24.5, width: 49, height: 49)
-            setButton1.center = self.setRepView.center
-            setButton1.layer.borderWidth = 10
-            setButton1.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
-            setButton1.layer.cornerRadius = 24.5
-            setButton1.addTarget(self, action: #selector(setButtonAction1), for: .touchUpInside)
-            setButton1.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            setButton1.isEnabled = true
-            
-            self.setRepView.addSubview(setButton1)
-            
-            
-            setButton2.frame = CGRect(x: 0, y: self.setRepView.frame.size.height / 2 - 24.5, width: 49, height: 49)
-            setButton2.center = self.setRepView.center
-            setButton2.layer.borderWidth = 10
-            setButton2.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
-            setButton2.layer.cornerRadius = 24.5
-            setButton1.addTarget(self, action: #selector(setButtonAction1), for: .touchUpInside)
-            setButton2.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            setButton2.isEnabled = true
-            
-            self.setRepView.addSubview(setButton2)
-            
-            
-            
-            setButton3.frame = CGRect(x: 0, y: self.setRepView.frame.size.height / 2 - 24.5, width: 49, height: 49)
-            setButton3.center = self.setRepView.center
-            setButton3.layer.borderWidth = 10
-            setButton3.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
-            setButton3.layer.cornerRadius = 24.5
-            setButton1.addTarget(self, action: #selector(setButtonAction1), for: .touchUpInside)
-            setButton3.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            setButton3.isEnabled = true
-            
-            self.setRepView.addSubview(setButton3)
-            
-        default:
-            setButton1.removeFromSuperview()
-            setButton2.removeFromSuperview()
-            setButton3.removeFromSuperview()
+        let setRepSubViews = self.setRepView.subviews
+        for subview in setRepSubViews{
+            subview.removeFromSuperview()
         }
-        
-        
+        createButtonArray()
         
     
         // Body Image
@@ -503,29 +506,59 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     
     
-    @IBAction func setButtonAction1() {
-    
-        self.setButton1.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
-        self.setButton1.isEnabled = false
-        
-        
-    }
-    
-    
-    @IBAction func setButtonAction2(){
-        
-        
-    }
-    
+   
     
     
     
     //
     // Button Actions
     //
+    
+    // Set Button
+    @IBAction func setButtonAction(sender: UIButton) {
+        
+        //
+        // Rest Timer Notification
+        //
+        if #available(iOS 10.0, *) {
+         
+            let content = UNMutableNotificationContent()
+            //content.title = NSString.localizedUserNotificationString(forKey: "Rest over: Begin next set", arguments: nil)
+            //content.body = NSString.localizedUserNotificationString(forKey: "", arguments: nil)
+            content.title = "Rest over: Begin next set"
+            content.body = ""
+            content.sound = UNNotificationSound.default()
+            content.categoryIdentifier = "restTimer"
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            
+        } else {
+            // Fallback on earlier versions
+        }
+    
+        
+        
+        if setsArray[warmupScreenIndex] == 1 {
+        
+        } else if setsArray[warmupScreenIndex] == 2{
+            
+                        
+        }
+        
+        sender.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        sender.isEnabled = false
+        
+    }
+    
+    
+    
     // Next Button
     @IBAction func nextButton(_ sender: Any) {
     
+        
         if warmupScreenIndex == warmupArray.count - 1 {
             
             warmupScreenIndex = 0

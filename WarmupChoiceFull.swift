@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 
 class WarmupChoiceFull: UIViewController {
@@ -45,14 +46,26 @@ class WarmupChoiceFull: UIViewController {
       
     }
     
- 
-    override func viewWillDisappear(_ animated : Bool) {
-        super.viewWillDisappear(animated)
+    
+    @IBAction func beginButtonAction(_ sender: Any) {
         
-        if (self.isMovingFromParentViewController){
-            navigationController?.popToRootViewController(animated: true)
-        }
+        let content = UNMutableNotificationContent()
+        //content.title = NSString.localizedUserNotificationString(forKey: "Rest over: Begin next set", arguments: nil)
+        //content.body = NSString.localizedUserNotificationString(forKey: "", arguments: nil)
+        content.title = "Rest over: Begin next set"
+        content.body = ""
+        content.sound = UNNotificationSound.default()
+        content.categoryIdentifier = "restTimer"
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
+    
+    
+    
+    
     
     
 }
