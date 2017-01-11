@@ -203,6 +203,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         @IBOutlet weak var targetAreaLabel: UILabel!
         // Explanation Label
         @IBOutlet weak var explanationLabel: UILabel!
+        let explanationText = UILabel()
         // Progress Label
         @IBOutlet weak var progressLabel: UILabel!
     
@@ -247,6 +248,13 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         
+        
+        // Explanation Text
+        explanationText.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        explanationText.textColor = .black
+        explanationText.textAlignment = .justified
+        explanationText.lineBreakMode = NSLineBreakMode.byWordWrapping
+        explanationText.numberOfLines = 0
         
         
         
@@ -346,7 +354,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         setButton.layer.cornerRadius = 24.5
         setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
         setButton.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        setButton.isEnabled = true
+        setButton.isEnabled = false
         
         
         
@@ -356,10 +364,12 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     }
     
     
+    var buttonArray = [UIButton]()
+    
     func createButtonArray(){
         //generate an array of buttons
         
-        var buttonArray = [UIButton]()
+        
         let numberOfButtons = setsArray[warmupScreenIndex]
         
         for _ in 1...numberOfButtons{
@@ -377,6 +387,8 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             
             setRepView.addSubview(stackView)
             
+            buttonArray[0].isEnabled = true
+            
             
         } else if setsArray[warmupScreenIndex] == 2 {
         
@@ -386,6 +398,8 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             stackView.distribution = .equalSpacing
        
             setRepView.addSubview(stackView)
+            
+            buttonArray[0].isEnabled = true
         
             
         } else if setsArray[warmupScreenIndex] == 3 {
@@ -396,6 +410,8 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             stackView.distribution = .equalSpacing
             
             setRepView.addSubview(stackView)
+            
+            buttonArray[0].isEnabled = true
             
         }
         
@@ -422,6 +438,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         for subview in setRepSubViews{
             subview.removeFromSuperview()
         }
+        buttonArray = []
         createButtonArray()
         
     
@@ -432,11 +449,17 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         
-        // Explanation Label
+        // Explanation Text and Scroll View
+        explanationText.text = NSLocalizedString("purposeText", comment: "")
+        explanationText.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width - 20, height: 0)
+        explanationText.sizeToFit()
+    
+        scrollViewExplanation.addSubview(explanationText)
+        
+        scrollViewExplanation.contentSize = CGSize(width: self.view.frame.size.width, height: explanationText.frame.size.height + 20)
         
         
-        
-        
+        self.scrollViewExplanation.contentOffset.y = 0
         
         
         // Demonstration Image
@@ -549,9 +572,22 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         if setsArray[warmupScreenIndex] == 1 {
         
-        } else if setsArray[warmupScreenIndex] == 2{
             
-                        
+        } else if setsArray[warmupScreenIndex] == 2 {
+            
+            buttonArray[1].isEnabled = true
+            
+        } else if setsArray[warmupScreenIndex] == 3 {
+            
+            if buttonArray[1].isEnabled == false {
+                
+                buttonArray[1].isEnabled = true
+                
+            } else if buttonArray[0].isEnabled == false {
+                buttonArray[2].isEnabled = true
+            }
+            
+            
         }
         
         sender.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
@@ -575,9 +611,6 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             
         } else {
             warmupScreenIndex = warmupScreenIndex + 1
-            setButton1.removeFromSuperview()
-            setButton2.removeFromSuperview()
-            setButton3.removeFromSuperview()
             displayContent()
         }
         
@@ -597,9 +630,6 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         } else {
             warmupScreenIndex = warmupScreenIndex - 1
             
-            setButton1.removeFromSuperview()
-            setButton2.removeFromSuperview()
-            setButton3.removeFromSuperview()
             flashScreen()
             displayContent()
         }
