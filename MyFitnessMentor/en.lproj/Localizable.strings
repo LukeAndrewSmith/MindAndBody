@@ -38,7 +38,11 @@
 
     "explanation" = "Explanation";
 
+    "restOver" = "Rest over";
+    "nextSet" = "Begin next set";
 
+    "timer" = "Timer";
+    "timerEnd" = "Timer Ended";
 
 
 //

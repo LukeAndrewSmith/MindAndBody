@@ -1707,9 +1707,34 @@
                                     <constraint firstAttribute="height" constant="73.5" id="yXw-I4-j7f"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYj-ij-PMD">
+                                <rect key="frame" x="326" y="373" width="49" height="48.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="a9g-R3-fna"/>
+                                    <constraint firstAttribute="width" constant="49" id="rVy-of-9tz"/>
+                                </constraints>
+                                <state key="normal" title="Timer">
+                                    <color key="titleColor" red="0.094117647058823528" green="0.098039215686274508" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="timerViewButton:" destination="hXa-Gd-Ugt" eventType="touchUpInside" id="q9G-Co-x33"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DwW-1r-st3">
+                                <rect key="frame" x="326" y="373" width="49" height="48.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="AlT-Cs-RDq"/>
+                                    <constraint firstAttribute="width" constant="49" id="QKJ-OJ-mge"/>
+                                </constraints>
+                                <state key="normal" title="Timer"/>
+                                <connections>
+                                    <action selector="timerViewButton2:" destination="hXa-Gd-Ugt" eventType="touchUpInside" id="rZ4-67-MTx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="eYj-ij-PMD" secondAttribute="trailing" id="2RP-f9-Q7b"/>
                             <constraint firstAttribute="trailing" secondItem="l4B-Y3-gv3" secondAttribute="trailing" id="8Lc-wr-7um"/>
                             <constraint firstItem="cid-Vm-yFh" firstAttribute="leading" secondItem="45i-Of-NFx" secondAttribute="leading" id="8cO-Ux-VQs"/>
                             <constraint firstAttribute="trailing" secondItem="Wzb-Q5-pmg" secondAttribute="trailing" id="8l2-CK-2ey"/>
@@ -1717,6 +1742,7 @@
                             <constraint firstItem="l4B-Y3-gv3" firstAttribute="leading" secondItem="45i-Of-NFx" secondAttribute="leading" id="I4R-aQ-Wqr"/>
                             <constraint firstItem="Uhe-O6-VRo" firstAttribute="leading" secondItem="45i-Of-NFx" secondAttribute="leading" constant="3" id="KWm-ch-Kyv"/>
                             <constraint firstAttribute="trailing" secondItem="Rad-pA-8i2" secondAttribute="trailing" id="Nbw-kv-EEU"/>
+                            <constraint firstItem="eYj-ij-PMD" firstAttribute="top" secondItem="l4B-Y3-gv3" secondAttribute="bottom" id="PsW-Ut-KF7"/>
                             <constraint firstItem="l4B-Y3-gv3" firstAttribute="top" secondItem="hH5-42-MVV" secondAttribute="bottom" id="QTU-FV-ij1"/>
                             <constraint firstItem="ySr-PR-1KZ" firstAttribute="leading" secondItem="sUO-IB-vFH" secondAttribute="leading" constant="3" id="RPO-Yi-17W"/>
                             <constraint firstAttribute="trailing" secondItem="cid-Vm-yFh" secondAttribute="trailing" id="SVd-Bx-rJW"/>
@@ -1729,13 +1755,17 @@
                             <constraint firstItem="l4B-Y3-gv3" firstAttribute="height" secondItem="45i-Of-NFx" secondAttribute="height" multiplier="1/3" id="cwE-qF-VLb"/>
                             <constraint firstItem="Wzb-Q5-pmg" firstAttribute="top" secondItem="l4B-Y3-gv3" secondAttribute="bottom" constant="49" id="iST-U0-vcm"/>
                             <constraint firstItem="TmN-Y0-3BC" firstAttribute="leading" secondItem="45i-Of-NFx" secondAttribute="leading" constant="2" id="iqb-Tb-EOi"/>
+                            <constraint firstItem="DwW-1r-st3" firstAttribute="top" secondItem="l4B-Y3-gv3" secondAttribute="bottom" id="mPL-hf-NTD"/>
                             <constraint firstAttribute="trailing" secondItem="VZT-fs-XBn" secondAttribute="trailing" id="pqM-1W-D3f"/>
+                            <constraint firstAttribute="trailing" secondItem="DwW-1r-st3" secondAttribute="trailing" id="r4b-zT-GCS"/>
                             <constraint firstItem="VZT-fs-XBn" firstAttribute="leading" secondItem="45i-Of-NFx" secondAttribute="leading" id="r7j-ks-Obj"/>
                             <constraint firstItem="N4a-XL-gGU" firstAttribute="top" secondItem="cid-Vm-yFh" secondAttribute="bottom" id="rZm-rN-wKJ"/>
                             <constraint firstItem="cid-Vm-yFh" firstAttribute="top" secondItem="TmN-Y0-3BC" secondAttribute="bottom" id="vc7-Vh-KnL"/>
+                            <constraint firstItem="Wzb-Q5-pmg" firstAttribute="top" secondItem="DwW-1r-st3" secondAttribute="bottom" id="vrc-gN-uUe"/>
                             <constraint firstItem="Rad-pA-8i2" firstAttribute="top" secondItem="UkN-dG-hd1" secondAttribute="bottom" id="xae-Uu-hNj"/>
                             <constraint firstItem="l4B-Y3-gv3" firstAttribute="top" secondItem="VZT-fs-XBn" secondAttribute="bottom" constant="49" id="yL1-jW-1sK"/>
                             <constraint firstItem="l4B-Y3-gv3" firstAttribute="top" secondItem="ySr-PR-1KZ" secondAttribute="bottom" id="yMP-oB-fya"/>
+                            <constraint firstItem="Wzb-Q5-pmg" firstAttribute="top" secondItem="eYj-ij-PMD" secondAttribute="bottom" id="yvv-Gq-LJV"/>
                             <constraint firstItem="hH5-42-MVV" firstAttribute="leading" secondItem="45i-Of-NFx" secondAttribute="leading" constant="3" id="ztq-R2-E3B"/>
                         </constraints>
                     </view>
@@ -1771,6 +1801,8 @@
                         <outlet property="setRepView" destination="VZT-fs-XBn" id="8kj-bu-Iy6"/>
                         <outlet property="setsRepsLabel" destination="vhe-Hc-E7f" id="P9q-SD-oLD"/>
                         <outlet property="targetAreaLabel" destination="ySr-PR-1KZ" id="0GR-hS-7AY"/>
+                        <outlet property="timerButton" destination="eYj-ij-PMD" id="Jdt-BB-YPL"/>
+                        <outlet property="timerButton2" destination="DwW-1r-st3" id="yoB-u6-VZN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3vC-nc-pFm" userLabel="First Responder" sceneMemberID="firstResponder"/>

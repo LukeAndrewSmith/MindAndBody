@@ -124,6 +124,10 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
 
     
     
+    
+    
+    
+    
     // Populate Arrays
     func populateArrays() {
         
@@ -184,10 +188,43 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     // Image View
     @IBOutlet weak var bodyImage: UIImageView!
+    // Demonstration Image
+        // Image View Position
+        var imageViewPosition = UIView()
+        let leftDot = UILabel()
+        let rightDot = UILabel()
+        // Image Views
+        let demonstrationImage1 = UIImageView()
+        let demonstrationImage2 = UIImageView()
     
     
+    // Timer
+        // Timer View
+        var timerView = UIView()
+        // Timer Elements
+        // Timer Countdown Label
+        let countDownLabel = UILabel()
+        // Timer Countdown
+        var timerCountDown = Timer()
+        // Timer Value
+        var timerValue = 0
+        // Timer Start
+        var timerStart = UIButton()
+        // Timer Cancel
+        var timerCancel = UIButton()
+        // Picker View
+        // Picker Data
+        var minuteData = [Int]()
+        var secondData = [Int]()
+        // Picker Views
+        let minutePicker = UIPickerView()
+        let secondPicker = UIPickerView()
+        var pickerViewTimer = UIView()
+        // Timer Show Buttons
+        @IBOutlet weak var timerButton: UIButton!
+        @IBOutlet weak var timerButton2: UIButton!
     
-  
+    
     
     // Progress Bar
     @IBOutlet weak var progressBarView: UIView!
@@ -238,13 +275,84 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         // Background Gradient
         //
         self.view.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
+      
         
         
-        
-        // Navigation Bar
         //
+        // Demonstration Image
+        //
+        
+        // Demonstration Image Scroll View
+        scrollViewDemonstration.contentSize = CGSize(width: scrollViewExplanation.frame.size.width * 2, height: self.scrollViewExplanation.frame.size.height)
+        scrollViewDemonstration.isScrollEnabled = false
+        
+        
+        // Demonstration Image Views
+        demonstrationImage1.frame = CGRect(x: 0, y: 0, width: scrollViewDemonstration.frame.size.width, height: scrollViewDemonstration.frame.size.height)
+        demonstrationImage1.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        leftSwipe.direction = UISwipeGestureRecognizerDirection.left
+        demonstrationImage1.addGestureRecognizer(leftSwipe)
+        demonstrationImage1.isUserInteractionEnabled = true
+        
+        scrollViewDemonstration.addSubview(demonstrationImage1)
+        
+        
+        demonstrationImage2.frame = CGRect(x: scrollViewDemonstration.frame.size.width, y: 0, width: scrollViewDemonstration.frame.size.width, height: scrollViewDemonstration.frame.size.height)
+        demonstrationImage2.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
         rightSwipe.direction = UISwipeGestureRecognizerDirection.right
+        demonstrationImage2.addGestureRecognizer(rightSwipe)
+        demonstrationImage2.isUserInteractionEnabled = true
+        
+        scrollViewDemonstration.addSubview(demonstrationImage2)
+        
+        
+        
+        
+        
+        // Image View Position
+        imageViewPosition.frame = CGRect(x: 0, y: (98 + self.setRepView.frame.size.height + self.scrollViewDemonstration.frame.size.height) - 12.25, width: self.scrollViewDemonstration.frame.size.width, height: 12.25)
+        
+        
+        imageViewPosition.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+        self.view.addSubview(imageViewPosition)
+        self.view.bringSubview(toFront: imageViewPosition)
+        
+        
+        // Timer View Left Indicator
+        leftDot.frame = CGRect(x: (self.imageViewPosition.frame.size.width * (4/10)) - 5, y: 1.25, width: 10, height: 10)
+        leftDot.layer.cornerRadius = 5
+        leftDot.layer.masksToBounds = true
+        
+        imageViewPosition.addSubview(leftDot)
+        
+      
+        // Timer View Right Indicator
+        rightDot.frame = CGRect(x: (self.imageViewPosition.frame.size.width * (6/10)) - 5, y: 1.25, width: 10, height: 10)
+        rightDot.layer.cornerRadius = 5
+        rightDot.layer.masksToBounds = true
+        
+        imageViewPosition.addSubview(rightDot)
+        
+        
+        leftDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+    
+        
+        
+        
+        
+        
+        // Body Image View
+        bodyImage.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+        
+        
         
         
         
@@ -255,6 +363,132 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         explanationText.textAlignment = .justified
         explanationText.lineBreakMode = NSLineBreakMode.byWordWrapping
         explanationText.numberOfLines = 0
+        
+        
+        
+        //
+        // Timer
+        //
+        // Timer Button
+        self.view.bringSubview(toFront: timerButton)
+        
+        // Timer View
+        timerView.frame = CGRect(x: 0, y: 0, width: self.scrollViewExplanation.frame.size.width, height: self.scrollViewExplanation.frame.size.height)
+        timerView.center = scrollViewExplanation.center
+        timerView.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+        
+        // Timer Elements
+        //
+        // Picker View Timer
+        //
+        pickerViewTimer.frame = CGRect(x: 0, y: 0, width: self.scrollViewExplanation.frame.size.width/2, height: self.scrollViewExplanation.frame.size.height)
+        pickerViewTimer.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+        
+        // Pick Minutes
+        //
+        minutePicker.frame = CGRect(x: 10, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
+        minutePicker.dataSource = self
+        minutePicker.delegate = self
+        minutePicker.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+        pickerViewTimer.addSubview(minutePicker)
+        
+        
+        let minuteLabel = UILabel()
+        minuteLabel.frame = CGRect(x: 10 + minutePicker.frame.size.width, y: 0, width: minutePicker.frame.size.width, height: pickerViewTimer.frame.size.height*(2/3))
+        minuteLabel.text = NSLocalizedString("minutes", comment: "")
+        minuteLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
+        minuteLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        minuteLabel.textAlignment = .left
+        
+        pickerViewTimer.addSubview(minuteLabel)
+        
+        
+        // Pick Seconds
+        //
+        secondPicker.frame = CGRect(x: 10 + minutePicker.frame.size.width + minuteLabel.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
+        secondPicker.dataSource = self
+        secondPicker.delegate = self
+        secondPicker.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+        pickerViewTimer.addSubview(secondPicker)
+        
+        
+        let secondLabel = UILabel()
+        secondLabel.frame = CGRect(x: 10 + minutePicker.frame.size.width + minuteLabel.frame.size.width + secondPicker.frame.size.width, y: 0, width: secondPicker.frame.size.width, height: pickerViewTimer.frame.size.height*(2/3))
+        secondLabel.text = NSLocalizedString("seconds", comment: "")
+        secondLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
+        secondLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        secondLabel.textAlignment = .left
+        
+        pickerViewTimer.addSubview(secondLabel)
+        
+        timerView.addSubview(pickerViewTimer)
+        
+        
+        // Picker View Data
+        //
+        minuteData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30]
+        secondData = [0, 15, 30, 45]
+        
+
+        // Start Button Timer
+        //
+        timerStart.frame = CGRect(x: 0, y: 0, width: self.pickerViewTimer.frame.size.width/2, height: (self.timerView.frame.size.height/5))
+        timerStart.center = CGPoint(x: pickerViewTimer.center.x, y: (self.timerView.frame.size.height * (2/3)) + ((self.timerView.frame.size.height/3)/2))
+        timerStart.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        timerStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
+        timerStart.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+        timerStart.titleLabel?.textAlignment = .center
+        
+        timerStart.addTarget(self, action: #selector(startTimer(_:)), for: .touchUpInside)
+        
+        pickerViewTimer.addSubview(timerStart)
+        
+        
+        
+        // Cancel Button Timer
+        //
+        timerCancel.frame = CGRect(x: 0, y: 0, width: self.pickerViewTimer.frame.size.width/2, height: (self.timerView.frame.size.height/5))
+        timerCancel.center = CGPoint(x: pickerViewTimer.center.x, y: (self.timerView.frame.size.height * (2/3)) + ((self.timerView.frame.size.height/3)/2))
+        timerCancel.backgroundColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
+        timerCancel.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+        timerCancel.titleLabel?.textAlignment = .center
+        
+        timerCancel.addTarget(self, action: #selector(cancelTimer(_:)), for: .touchUpInside)
+        
+        pickerViewTimer.addSubview(timerCancel)
+        
+        pickerViewTimer.bringSubview(toFront: timerStart)
+        
+        
+        
+        // Countdown Label
+        countDownLabel.frame = CGRect(x: self.scrollViewExplanation.frame.size.width/2, y: 0, width: self.scrollViewExplanation.frame.size.width/2, height: self.scrollViewExplanation.frame.size.height)
+        countDownLabel.textAlignment = .center
+        countDownLabel.font = UIFont(name: "SFUIDisplay-Light", size: 27)
+        countDownLabel.text = "00:00"
+        countDownLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        
+        self.timerView.addSubview(countDownLabel)
+        
+        
+        self.view.addSubview(timerView)
+        self.view.sendSubview(toBack: timerView)
+        
+        
+        // App Moved To Background
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        
+        
+    
         
         
         
@@ -441,7 +675,16 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         buttonArray = []
         createButtonArray()
         
-    
+        
+        // Demonstration Image
+        scrollViewDemonstration.contentOffset.x = 0
+        leftDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        //demonstrationImage1.image = #imageLiteral(resourceName: "BodyImage")
+        
+        
+        
+        
         // Body Image
         bodyImage.image = #imageLiteral(resourceName: "BodyImage")
         //bodyImage.image = targetAreaArray[warmupScreenIndex]
@@ -451,18 +694,25 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Explanation Text and Scroll View
         explanationText.text = NSLocalizedString("purposeText", comment: "")
+        
         explanationText.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width - 20, height: 0)
         explanationText.sizeToFit()
-    
+        // Scroll View
         scrollViewExplanation.addSubview(explanationText)
-        
         scrollViewExplanation.contentSize = CGSize(width: self.view.frame.size.width, height: explanationText.frame.size.height + 20)
-        
-        
+
         self.scrollViewExplanation.contentOffset.y = 0
         
         
-        // Demonstration Image
+        
+        
+        // Send Timer to Back
+        self.view.bringSubview(toFront: scrollViewExplanation)
+        self.view.bringSubview(toFront: timerButton)
+        cancelTimer(Any)
+        
+        
+        
         
         
         
@@ -470,6 +720,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         // Extra Information Label
+        
         
         
         
@@ -504,6 +755,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     
     
+    
     // Flash Screen
     func flashScreen() {
         
@@ -531,6 +783,236 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //
+    // Count Down Timer
+    //
+    
+    
+    // Timer CountDown Value
+    func setTimerValue() {
+        
+        let minutesSelectedRow = minutePicker.selectedRow(inComponent: 0)
+        let minutes = minuteData[minutesSelectedRow]
+        
+        let secondsSelectedRow = secondPicker.selectedRow(inComponent: 0)
+        let seconds = secondData[secondsSelectedRow]
+        
+        self.timerValue = (minutes * 60) + seconds
+        
+    }
+    
+    
+    // Timer CountDown Title
+    func timeFormatted(totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    
+    
+    // Update Timer
+    func updateTimer() {
+        
+        
+        if timerValue == 0{
+            self.timerCountDown.invalidate()
+            removeCircle()
+            self.pickerViewTimer.bringSubview(toFront: timerStart)
+            
+        } else if timerValue == 1 {
+            
+            timerValue -= 1
+            countDownLabel.text = timeFormatted(totalSeconds: timerValue)
+            
+        } else {
+            timerValue -= 1
+            countDownLabel.text = timeFormatted(totalSeconds: timerValue)
+            
+        }
+        
+    }
+    
+    
+    let timerShapeLayer = CAShapeLayer()
+    
+    // Funcs
+    func addCircle() {
+        let circlePath = UIBezierPath(arcCenter: countDownLabel.center, radius: CGFloat((timerView.frame.size.height-10)/2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(2*M_PI-M_PI_2), clockwise: true)
+        timerShapeLayer.path = circlePath.cgPath
+        timerShapeLayer.fillColor = UIColor.clear.cgColor
+        timerShapeLayer.strokeColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
+        timerShapeLayer.lineWidth = 1.0
+        
+        timerView.layer.addSublayer(timerShapeLayer)
+
+    }
+    
+    func removeCircle() {
+        
+        timerShapeLayer.removeFromSuperlayer()
+        
+    }
+    
+    func startAnimation() {
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.duration = Double(timerValue)
+        animation.fillMode = kCAFillModeForwards
+        animation.isRemovedOnCompletion = false
+        
+        timerShapeLayer.add(animation, forKey: "circleAnimation")
+        
+        
+    }
+    
+    
+    @IBAction func startTimer(_ sender: Any) {
+        
+        setTimerValue()
+        
+        
+        if timerValue == 0 {
+            
+        } else {
+            
+            
+            self.pickerViewTimer.bringSubview(toFront: timerCancel)
+            
+            self.countDownLabel.text = timeFormatted(totalSeconds: timerValue)
+            
+            let delayInSeconds = 0.1
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                
+                self.addCircle()
+                self.startAnimation()
+                self.timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+                
+                
+                
+                if #available(iOS 10.0, *) {
+                    
+                    let content = UNMutableNotificationContent()
+                    content.title = NSLocalizedString("timerEnd", comment: "")
+                    content.body = " "
+                    content.sound = UNNotificationSound.default()
+                    
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
+                    let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
+                    
+                    
+                    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                    
+                    
+                } else {
+                    // Fallback on earlier versions
+                }
+
+                
+                
+            }
+            
+        }
+        
+    }
+    
+    
+    
+    @IBAction func cancelTimer(_ sender: Any) {
+        
+        
+        self.timerCountDown.invalidate()
+        self.timerValue = 0
+        self.countDownLabel.text = "00:00"
+        removeCircle()
+        self.pickerViewTimer.bringSubview(toFront: timerStart)
+        
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
+        
+    }
+    
+    
+    
+    // Picker Views
+    //
+    
+    func numberOfComponents(in: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent: Int) -> Int {
+        
+        if pickerView == minutePicker {
+            return 14
+        } else if pickerView == secondPicker {
+            return 4
+        }
+        
+        return 0
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        if pickerView == minutePicker {
+            
+            let rowLabel = UILabel()
+            let titleData = String(minuteData[row])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+            
+        } else if pickerView == secondPicker {
+            
+            let rowLabel = UILabel()
+            let titleData = String(secondData[row])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+            
+        }
+        
+        return UIView()
+    }
+    
+    
+    // Background
+    func appMovedToBackground() {
+        
+        self.timerCountDown.invalidate()
+        self.timerValue = 0
+        self.countDownLabel.text = "00:00"
+        removeCircle()
+        self.pickerViewTimer.bringSubview(toFront: timerStart)
+
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
    
     
     
@@ -551,10 +1033,8 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         if #available(iOS 10.0, *) {
          
             let content = UNMutableNotificationContent()
-            //content.title = NSString.localizedUserNotificationString(forKey: "Rest over: Begin next set", arguments: nil)
-            //content.body = NSString.localizedUserNotificationString(forKey: "", arguments: nil)
-            content.title = "Rest over: Begin next set"
-            content.body = "The the the "
+            content.title = NSLocalizedString("restOver", comment: "")
+            content.body = NSLocalizedString("nextSet", comment: "")
             content.sound = UNNotificationSound.default()
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
@@ -699,6 +1179,46 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     
     
+    // Display TimerView
+    @IBAction func timerViewButton(_ sender: Any) {
+        
+        
+        self.view.bringSubview(toFront: timerView)
+    
+        self.view.bringSubview(toFront: timerButton2)
+        
+        self.explanationLabel.text = NSLocalizedString("timer", comment: "")
+        
+    }
+    
+    
+    @IBAction func timerViewButton2(_ sender: Any) {
+        
+        self.view.bringSubview(toFront: scrollViewExplanation)
+        
+        self.view.bringSubview(toFront: timerButton)
+        
+        self.explanationLabel.text = NSLocalizedString("explanation", comment: "")
+        
+    }
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     // Handle Swipe
@@ -724,31 +1244,43 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             backButton.isEnabled = true
             nextButton.isEnabled = true
         
+            
+            
+            
+            // Image Swipes
+            //
+        } else if (extraSwipe.direction == .left) {
+            
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [],animations: {
+                
+                self.scrollViewDemonstration.contentOffset.x = self.scrollViewDemonstration.frame.size.width
+            }, completion: nil)
+            
+            
+            leftDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            rightDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+            
+            
+        } else if (extraSwipe.direction == .right) {
+            
+            
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [],animations: {
+                
+                self.scrollViewDemonstration.contentOffset.x = 0
+                
+            }, completion: nil)
+            
+            
+            leftDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+            rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            
+            
         }
+        
+        
+        
+        
 
-    }
-    
-    
-    
-    
-    
-    
-    
-    // Picker Views
-    //
-    
-    func numberOfComponents(in: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent: Int) -> Int {
-        return 1
-        
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
-        return UIView()
     }
     
     
