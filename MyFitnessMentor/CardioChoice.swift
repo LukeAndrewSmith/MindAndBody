@@ -27,6 +27,8 @@ class CardioChoice: UIViewController  {
     // Information Screen
     @IBOutlet weak var informationViewCardioC: UIView!
     
+    // Stack View
+    @IBOutlet weak var stackView: UIStackView!
     
     
     override func viewDidLoad() {
@@ -46,7 +48,7 @@ class CardioChoice: UIViewController  {
         hiit.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         hiit.layer.borderWidth = 10
         hiit.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        hiit.layer.cornerRadius = self.hiit.frame.size.height / 2
+        
         
         
         liss.setTitle(NSLocalizedString("liss", comment: ""), for: UIControlState.normal)
@@ -54,7 +56,7 @@ class CardioChoice: UIViewController  {
         liss.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         liss.layer.borderWidth = 10
         liss.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        liss.layer.cornerRadius = self.liss.frame.size.height / 2
+        
         
         
         // Information
@@ -66,6 +68,17 @@ class CardioChoice: UIViewController  {
         
         
         view.bringSubview(toFront: informationViewCardioC)
+
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        hiit.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
+        hiit.layer.masksToBounds = true
+        
+        liss.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
+        liss.layer.masksToBounds = true
 
     }
     

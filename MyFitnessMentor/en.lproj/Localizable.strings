@@ -83,9 +83,23 @@
         "fullBody" = "Full Body";
         "cardio" = "Cardio";
 
+        // Information //
+        "purpose" = "Purpose";
+        "purposeText" = "The purpose of a warmup is two-fold, it prepares both mind and body for the activity to come. A warmup should be consistently performed before exercise; for gym workouts it should be 10-20min long (a longer warmup coupled with a shorter workout is more effective than the inverse), for home workouts 5-10min long, and for cardio 5-15min long. In both cases the warmup should produce mild sweating, and increased mental and physical focus.";
+        "body" = "Body";
+        "bodyText" = "A warmup increases body temperature and heart rate, and subsequently blood flow, which together increase the flexibility of muscles and joints.";
+        "mind" = "Mind";
+        "mindText" = "A warmup increases the firing of nerual pathways related to exercise and muscle activation thus preparing the mind for exercise.\nIdeally there is also a conscious change, the warmup is a chance to put aside any thoughts that might hinder the exercise through awareness of the feeling of the 'awakening' of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
 
 
-        // Warmup Array //
+        // Warmup Choice Upper //
+        "movements" = "Movements";
+        "warmupChoiceUpperText" = "This page includes a large selection of excellent dynamic mobility warmup movements, the selected movements (checked) indicate those to be included in the warmup. A number of warmups have been provided and can be selected using the picker underneath the title.\nThe warmup can be customised by selecting and deselecting movements in the table to fit personal needs and preferences; if you are unsure what each movement is I suggest you select all movements and take a minute to read through them.";
+
+
+
+
+        // Warmup Movements Array //
         // Mandatory
             "mandatory" = "Mandatory";
         "5minCardioL" = "5min Light Cardio";
@@ -93,8 +107,8 @@
         // Foam/Ball Roll
             "foamRoll" = "Foam/Ball Roll";
         "backf" = "Back Foam Roll";
-        "thoracicSpin" = "Thoracic Spine Foam Roll";
-        "lat" = "Lat Foam Roll";
+        "thoracicSpine" = "Thoracic Extensions";
+        "lat" = "Lat/Delt Foam Roll";
         "pecDelt" = "Pec and Delt Ball Roll";
         "rearDelt" = "Rear Delt Ball Roll";
         // Lower Back
@@ -102,8 +116,7 @@
         "sideLegDrop" = "Side Leg Drop";
         "sideLegKick" = "Side Leg Kick";
         "scorpionKick" = "Scorpion Kick";
-        "sideBend" = "Side Bends and Twists";
-        "upwardsDog" = "Upwards Dog";
+        "sideBend" = "Side Bends and Rotations";
         "catCow" = "Cat Cow";
         // Shoulder
             "shoulder" = "Shoulder";
@@ -122,6 +135,7 @@
         // Accessory
             "accessory" = "Accessory";
         "wristAnkleRotation" = "Wrist & Ankle Rotations";
+        "latStretch" = "Lat Stretch";
         "pushUp" = "Push Up";
         "pullUp" = "Pull Up";
 
@@ -135,26 +149,49 @@
         "quick" = "Quick";
 
 
+        // Warmup Movements Explanations
+        //
+        // Mandatory
+        "5minCardioLE" = "The cardio can be performed in any manner that seems fit.\nI recommended:\n- Treadmill (Walking/Jogging)\n- Step Machine\n- Biking\n- Rowing Machine \n\n\nPurpose:\nThe cardio should raise the body temperature, heart rate, and blood flow which together increase the flexibility of muscles and joints. Cardio is also an oppertunity to put aside any thoughts that might hinder the workout through awareness of the feeling of the 'awakening' of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
+        "5minCardioIE" = "The cardio can be performed in any manner that seems fit\n.I recommended:\n- Treadmill (Running/Sprints with 15-30s breaks)\n- Step Machine(10min)\n- Biking(Fast/Sprints with 15-30s breaks)\n- Rowing Machine(Fast/Sprints with 15-30s breaks)\n\n\nPurpose:\nThe cardio should raise the body temperature, heart rate, and blood flow which together increase the flexibility of muscles and joints. Cardio is also an oppertunity to put aside any thoughts that might hinder the workout through awareness of the feeling of the 'awakening' of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
+        // Foam/Ball Roll
+        "backfE" = "Place the foam roller underneath the back, around shoulder height, just below the cervical curve (neck).\nBend your knees close to their maximum and place your feet at hip width apart flat on the ground (close to your glutes).\nSlowly roll down and up 1/4 of the length of your back each time starting and ending the roll slightly lower until your reach the end of your thoracic curve (around where your ribcage ends) and then do the same back up to the starting position (this is 1 rep)\n\nYour thoracic spine should be slightly extended (leaning back over the foam roller) and your glutes should maintain as much contact with the ground as possible to remove your abs from the exercise and allow for a better stretch.\nYour arms can be in any position (where your elbows are in front of your chest not out to the side) that does not cause pain or discomfort, here are some suggestions:\n- Put your hands and elows together and (so your elbows are in front of your face) and place your hand just behind the top of your head (without pulling your head up)\n- Hold your elbows or your shoulders and point your elbows at a 90º angle away from your chest.\n- Hold your arms straight out or above your head.\nYou can pause at points that feel especially tight along the back for a few seconds, and rotate your up to 45º in either direction to roll a wider range of muscles.\n\nCommon mistakes:\n- Rolling too fast\n- Rolling too far (avoid the lower back and neck areas)\n\n\nPurpose:\nFoam rolling loosens the muscles and warms them up in preperation for the warmup, it also increases blood flow to the rolled area. This will increase your range of motion and the effectiveness of exercises geared towards the rolled area.";
+        "thoracicSpineE" = "Place the foam roller underneath the back, at the lower end of the thoracic curve (near the bottom of your ribcage).\nBend your knees close to 45º and place your feet at hip width apart flat on the ground.\nRelax the back at the contact area of the foam roller and extend (lean) back to stretch the thoracic curve, then cruch back up (concentrate not on using your abs but on the feeling in your thoracic spine and make sure your glutes are in constant contact with the ground)(this is 1 rep). Each set move the foam roller furthur up your thoracic spine 10-15cm or to another position that seems fit.\nKeep your neck in a comfortable neutral position.\nYour arms can be in any position (where your elbows are in front of your chest not out to the side) that does not cause pain or discomfort, here are some suggestions:\n- Put your hands and elows together and (so your elbows are in front of your face) and place your hand just behind the top of your head (without pulling your head up)\n- Hold your elbows or your shoulders and point your elbows at a 90º angle away from your chest.\n- Place your hands somewhere on your chest area and relax your elbows so they are close to your torso.\n\n\nPurpose:\nFoam rolling loosens the muscles and warms them up in preperation for the warmup, it also increases blood flow to the rolled area. This will increase your range of motion and the effectiveness of exercises geared towards the rolled area.";
+        "latE" = "Lie on one side with your lower leg relaxed and  in front of your body and your upper leg stabilizing you and your lower arm extanded upwards with your palm facing upwards.\nPlace the foam roller underneath your armpit and work your weight forward and backward 5 times (this should work the rotator cuff area), move the foam roller a little down and repeat then do so again once more (or as feels necessary).\nProceed to roll down and then up the lat (1 rep) from the armpit to 1/2 - 2/3 of the way down the ribcage leaning forwards or backwards as feels necessary.\nRepeat on the other lat.\nThis can be a particularly uncomfortable roll so be gentle and pause for several seconds wherever necessary.\n\n\nPurpose:\nBall rolling loosens the muscles and warms them up in preperation for the warmup, it also increases blood flow to the rolled area. This will increase your range of motion and the effectiveness of exercises geared towards the rolled area.";
+        "pecDeltE" = "Lie face down on the ground or lean face forwards against a wall (recommended) with a small ball (tennis. lacross etc.) around the connection between your delt and pec (shoulder and chest).\nWithout using excessive pressure, roll the ball all around your upper and mid pec and front delt area for 30-60 seconds each side.\nYour arm can be down parallel to your torso, outstretched 90º from your torso or above your head. \nThis can be a painfull process so be gentle and pause for several seconds wherever necessary.\n\n\nPurpose:\nBall rolling loosens the muscles and warms them up in preperation for the warmup, it also increases blood flow to the rolled area. This will increase your range of motion and the effectiveness of exercises geared towards the rolled area.";
+        "rearDeltE" = "Lean sideways against a wall with a small ball (tennis, lacross etc.) on your rear delt (rear shoulder).\nWithout using excessive pressure, roll the ball all around your rear delt (and possibly lateral delt).\nYou can also with your elbow at 90º rotate your shoulder gently to work the rotator cuff.\nThis can be a painfull process so be gentle and pause for several seconds wherever necessary.\n\n\\nPurpose:\nBall rolling loosens the muscles and warms them up in preperation for the warmup, it also increases blood flow to the rolled area. This will increase your range of motion and the effectiveness of exercises geared towards the rolled area.";
+        // Lower Back
+        "sideLegDropE" = "Lie on your back with your arms outstretched.\nKeeping your legs straight, lift them up into the air so they are perpendicular to the ground.\nKeeping your upper torso flat to the ground and your legs parallel and straight, lower them to one side, then bring them back up slowly and do the same on the other (this is 1 rep).\nAllow your lower back to gently strech when in the bottom position if comfortable by relaxing a little (may cause cracks and pops), and ensure your feet are flexed throughout the movement (pull your toes back towards your legs).\nThis movement can also be done as side knee drops if your lacking the hamstring flexibility to keep your legs straight, perform the same movement but keep your knees at a 90º angle.\n\n\nPurpose:\nSide leg drops stretch the lower back and warmup the core muscles.";
+        "sideLegKickE" = "Lie on your back with your arms outstretched.\n\Keeping both legs straight and your upper torso flat to the ground, swing your right foot to your left hand keeping it close to the ground and allowing your lower back to strech, then bring it back to parallel with your torso and repeat with the other leg (this is 1 rep).\nThe movement should be one fluid continuous motion (but should not be performed to fast or vigorously).\n\n\nPurpose:\nSide leg kicks are especially good for warming up and dynamically stretching the lower back.";
+        "scorpionKickE" = "Lie on your front with your palms facing down and legs outstretched.\nWith your right foot swing and try to reach past for your left hand and then return the leg to the starting position, repeat with the other leg (this is 1 rep)\nThe movement should be one fluid continuous motion (but should not be performed to fast or vigorously)\nIt is a difficult movement so if it causes any discomfort in the lower back don't continue.\n\n\nPurpose:\nScorpion kicks are especially good for warming up and dynamically stretching the lower back.";
+        "sideBendE" = "Stand straight up with your feet at or past than shoulder width.\nKeeping a straight back (especially lower back), lean to one side as far as comfortable and hold for 2s then repeat on the other side (this is 1 rep).\nSide bends are nicely followed by torso rotations:\nHold you arms at out to your side with your elbows bent and rotate your torso to one side, try to hold in the most rotated position for half a second, return to the starting position and pause for half a second then repeat in the other direction (this is 1 rep)(The movement can also be performed seated).\nThis movement should not use any momentum which why the pauses are important.\nPerform the recomended number of reps for both the side bends and torso rotations.\n\n\nPurpose:\Both movements warmup the obliques and stretch the lower back.";
+        "catCowE" = "";
+        // Shoulder
+        "wallSlidesE" = "";
+        "superManShoulderE" = "";
+        "scapulaE" = "";
+        "shoulderRotationE" = "";
+        // Band/Bar/Machine Assisted
+        "facePullE" = "";
+        "externalRotationE" = "";
+        "internalRotationE" = "";
+        "shoulderDislocationE" = "";
+        "rearDeltFlyE" = "";
+        "latPulloverE" = "";
+        // Accessory
+        "wristAnkleRotationE" = "";
+        "latStretchE" = "";
+        "pushUpE" = "";
+        "pullUpE" = "";
 
 
-            // Information //
-            "purpose" = "Purpose";
-            "purposeText" = "The purpose of a warmup is two-fold, it prepares both mind and body for the activity to come. A warmup should be consistently performed before exercise; for gym workouts it should be 10-20min long (a longer warmup coupled with a shorter workout is more effective than the inverse), for home workouts 5-10min long, and for cardio 5-15min long. In both cases the warmup should produce mild sweating, and increased mental and physical focus.";
-            "body" = "Body";
-            "bodyText" = "A warmup increases body temperature and heart rate, and subsequently blood flow, which together increase the flexibility of muscles and joints.";
-            "mind" = "Mind";
-            "mindText" = "A warmup increases the firing of nerual pathways related to exercise and muscle activation thus preparing the mind for exercise.\nIdeally there is also a conscious change, the warmup is a chance to put aside any thoughts that might hinder the exercise through awareness of the feeling of the 'awakening' of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
-
-
-        // Warmup Choice Upper //
-        "movements" = "Movements";
-        "warmupChoiceUpperText" = "This page includes a large selection of excellent dynamic mobility warmup movements, the selected movements (checked) indicate those to be included in the warmup. A number of warmups have been provided and can be selected using the picker underneath the title.\nThe warmup can be customised by selecting and deselecting movements in the table to fit personal needs and preferences; if you are unsure what each movement is I suggest you select all movements and take a minute to read through them.";
 
         // Warmup Screen //
         "movement" = "Movement:";
         "extraInformation" = "Extra Information";
 
         "explanationTitle" = "Explanation";
+
 
         "demonstration" = "Demonstration";
         "targetArea" = "Target Area";

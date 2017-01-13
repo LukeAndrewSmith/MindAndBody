@@ -55,6 +55,11 @@ class MyPreferences: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Initial Content Offset
+        tableView.contentOffset.y = 0
+        
+        
+        
         //
         // Initial Alert Suggesting reading the info
         //

@@ -27,7 +27,8 @@ class WorkoutChoice: UIViewController  {
     // Information View
     @IBOutlet weak var informationViewWorkoutC: UIView!
 
-
+    // Stack View
+    @IBOutlet weak var stackView: UIStackView!
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -54,14 +55,13 @@ class WorkoutChoice: UIViewController  {
         gym.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         gym.layer.borderWidth = 10
         gym.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        gym.layer.cornerRadius = self.gym.frame.size.height / 2
+        
         
         home.setTitle(NSLocalizedString("home", comment: ""), for: UIControlState.normal)
         home.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         home.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         home.layer.borderWidth = 10
         home.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        home.layer.cornerRadius = self.home.frame.size.height / 2
         
      
         // informationViewWorkoutC
@@ -93,6 +93,17 @@ class WorkoutChoice: UIViewController  {
         
     }
     
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        gym.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
+        gym.layer.masksToBounds = true
+        
+        home.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
+        home.layer.masksToBounds = true
+
+    }
     
    
  

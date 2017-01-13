@@ -49,7 +49,13 @@ class MindBody: UIViewController {
     @IBOutlet weak var Mindfulness: UIButton!
     
     
- 
+    // Stack Views
+    @IBOutlet weak var stackView1: UIStackView!
+    
+    @IBOutlet weak var stackView2: UIStackView!
+    
+    @IBOutlet weak var stackView3: UIStackView!
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,14 +72,12 @@ class MindBody: UIViewController {
       
        // Title
         
-       
         // Button Titles
         Warmup.setTitle(NSLocalizedString("warmup", comment: ""), for: UIControlState.normal)
         Warmup.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Warmup.titleLabel!.textColor = .white
         Warmup.layer.borderWidth = 10
         Warmup.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        Warmup.layer.cornerRadius = self.Warmup.frame.size.height / 2
         
         
         Workout.setTitle(NSLocalizedString("workout", comment: ""), for: UIControlState.normal)
@@ -81,16 +85,14 @@ class MindBody: UIViewController {
         Workout.titleLabel!.textColor = .white
         Workout.layer.borderWidth = 10
         Workout.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        Workout.layer.cornerRadius = self.Workout.frame.size.height / 2
-
+        
         
         Stretching.setTitle(NSLocalizedString("stretching", comment: ""), for: UIControlState.normal)
         Stretching.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Stretching.titleLabel!.textColor = .white
         Stretching.layer.borderWidth = 10
         Stretching.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        Stretching.layer.cornerRadius = self.Stretching.frame.size.height / 2
-
+        
         
         
         Cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
@@ -98,25 +100,21 @@ class MindBody: UIViewController {
         Cardio.titleLabel!.textColor = .white
         Cardio.layer.borderWidth = 10
         Cardio.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        Cardio.layer.cornerRadius = self.Cardio.frame.size.height / 2
-
-       
+        
+        
         
         Yoga.setTitle(NSLocalizedString("yoga", comment: ""), for: UIControlState.normal)
         Yoga.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Yoga.titleLabel!.textColor = .white
         Yoga.layer.borderWidth = 10
         Yoga.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        Yoga.layer.cornerRadius = self.Yoga.frame.size.height / 2
-
+        
         
         Mindfulness.setTitle(NSLocalizedString("mindfulness", comment: ""), for: UIControlState.normal)
         Mindfulness.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Mindfulness.titleLabel!.textColor = .white
         Mindfulness.layer.borderWidth = 10
         Mindfulness.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        Mindfulness.layer.cornerRadius = self.Mindfulness.frame.size.height / 2
-        
         
         
         
@@ -147,12 +145,45 @@ class MindBody: UIViewController {
         }
         
         
-        
-        
-        
+        viewDidLayoutSubviews()
         
     }
-
+        
+        override func viewDidLayoutSubviews() {
+            
+            super.viewDidLayoutSubviews()
+            
+            
+           
+            
+            // Button Rounded Edges
+            
+            Warmup.layer.cornerRadius = stackView1.frame.size.height / 2
+            Warmup.layer.masksToBounds = true
+            
+            Workout.layer.cornerRadius = stackView1.frame.size.height / 2
+            Workout.layer.masksToBounds = true
+            
+            Stretching.layer.cornerRadius = stackView2.frame.size.height / 2
+            Stretching.layer.masksToBounds = true
+            
+            Cardio.layer.cornerRadius = stackView2.frame.size.height / 2
+            Cardio.layer.masksToBounds = true
+            
+            Yoga.layer.cornerRadius =
+                (stackView3.frame.size.height - 20) / 4
+            Yoga.layer.masksToBounds = true
+            
+            Mindfulness.layer.cornerRadius = (stackView3.frame.size.height - 20) / 4
+            Mindfulness.layer.masksToBounds = true
+            
+            
+        }
+    
+    
+    
+        
+        
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -43,7 +43,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
              "5minCardioI"],
             // Foam/Ball Roll
             ["backf",
-            "thoracicSpin",
+            "thoracicSpine",
             "lat",
             "pecDelt",
             "rearDelt"],
@@ -52,7 +52,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             "sideLegKick",
             "scorpionKick",
             "sideBend",
-            "upwardsDog",
             "catCow"],
             // Shoulder
             ["wallSlides",
@@ -90,7 +89,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
              0,
              1,
              0,
-             0,
              1],
             // Shoulders
             [1,
@@ -106,6 +104,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
              0],
             // Accessory
             [1,
+             1,
              1,
              1]
     ]
@@ -156,125 +155,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         })
         
     }
-    
-    
-    @IBAction func gymAction(_ sender: Any) {
-        warmupSelectedArray =
-            [
-                // Mandatory
-                [1],
-                // Lower Back
-                [1,
-                 0,
-                 1,
-                 0,
-                 0],
-                // Shoulders
-                [0,
-                 1,
-                 0,
-                 1,
-                 0,
-                 1,
-                 0,
-                 0],
-                // Pull
-                [0,
-                 1,
-                 0,
-                 1],
-                // Push
-                [1,
-                 0,
-                 0,
-                 1]
-            ]
-
-        
-        flashScreen()
-        
-        self.tableView.reloadData()
-        
-        self.pickerView.reloadAllComponents()
-      
-        
-    }
-    
-    
-    
-        
-    @IBAction func homeAction(_ sender: Any) {
-
-        warmupUpperArray =
-            [
-                // Mandatory
-                ["5minCardio"],
-                // Lower Back
-                ["sideLegDrop",
-                 "sideLegKick",
-                 "ScorpionKick",
-                 "UpwardsDog",
-                 "catCow"],
-                // Shoulders
-                ["externalRotation",
-                 "internalRotation",
-                 "rearDeltFly",
-                 "wallSlides"],
-                // Pull
-                ["latPullover",
-                 "pullUp",
-                 "curl"],
-                // Push
-                ["pushUp",
-                 "trianglePushUp",
-                 ]
-                
-        ]
-        
-        
-        warmupSelectedArray =
-        [
-            // Mandatory
-            [1],
-            // Lower Back
-            [1,
-             0,
-             1,
-             0,
-             0],
-            // Shoulders
-            [0,
-             1,
-             0,
-             1],
-            // Pull
-            [0,
-             1,
-             0],
-            // Push
-            [1,
-             0,
-             ]
-        ]
-        
-    
-       
-        
-        
-        flashScreen()
-        
-     
-        self.tableView.reloadData()
-        
-        self.pickerView.reloadAllComponents()
-
-        
-            
-    }
-    
-    
-    
-    
     
     
    
@@ -361,6 +241,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.4
+        lineSpacing.hyphenationFactor = 1
         
         
         // Add Attributes
@@ -460,7 +341,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      0,
                      0,
                      0,
-                     0,
                      1],
                     // Shoulders
                     [1,
@@ -476,6 +356,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      0],
                     // Accessory
                     [1,
+                     1,
                      1,
                      1]
             ]
@@ -498,7 +379,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      0,
                      0,
                      1,
-                     0,
                      0],
                     // Shoulders
                     [1,
@@ -514,6 +394,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      0],
                     // Accessory
                     [1,
+                     1,
                      1,
                      0]
             ]
@@ -536,7 +417,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1,
                      1,
                      0,
-                     1,
                      1],
                     // Shoulders
                     [1,
@@ -552,6 +432,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      0],
                     // Accessory
                     [1,
+                     1,
                      1,
                      1]
             ]
@@ -574,7 +455,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1,
                      1,
                      0,
-                     0,
                      0],
                     // Shoulders
                     [1,
@@ -590,6 +470,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1],
                     // Accessory
                     [1,
+                     1,
                      1,
                      1]
             ]
@@ -612,7 +493,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      0,
                      1,
                      0,
-                     0,
                      1],
                     // Shoulders
                     [1,
@@ -628,6 +508,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1],
                     // Accessory
                     [1,
+                     1,
                      1,
                      1]
             ]
@@ -650,7 +531,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1,
                      1,
                      0,
-                     0,
                      1],
                     // Shoulders
                     [1,
@@ -666,6 +546,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1],
                     // Accessory
                     [1,
+                     1,
                      1,
                      1]
             ]
@@ -688,7 +569,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      0,
                      0,
                      0,
-                     0,
                      1],
                     // Shoulders
                     [1,
@@ -704,6 +584,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      0],
                     // Accessory
                     [1,
+                     1,
                      0,
                      0]
             ]
@@ -738,10 +619,10 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1,
                      0,
                      1,
-                     0,
                      0],
                     // Accessory
                     [1,
+                     1,
                      1,
                      1]
             ]

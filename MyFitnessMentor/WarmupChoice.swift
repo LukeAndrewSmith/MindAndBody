@@ -36,7 +36,8 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     // Information Title
     @IBOutlet weak var informationTitleWarmupC: UILabel!
     
-    
+    // Stack View
+    @IBOutlet weak var stackView: UIStackView!
     
     
     
@@ -59,7 +60,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
             //.white
         fullBody.layer.borderWidth = 10
         fullBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        fullBody.layer.cornerRadius = self.fullBody.frame.size.height / 2
+        
         
         
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
@@ -68,8 +69,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
             //.white
         upperBody.layer.borderWidth = 10
         upperBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        upperBody.layer.cornerRadius = self.upperBody.frame.size.height / 2
-       
+        
         
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
         lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
@@ -77,7 +77,6 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
             //.white
         lowerBody.layer.borderWidth = 10
         lowerBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        lowerBody.layer.cornerRadius = self.lowerBody.frame.size.height / 2
         
         
         cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
@@ -86,7 +85,6 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
             //.white
         cardio.layer.borderWidth = 10
         cardio.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        cardio.layer.cornerRadius = self.cardio.frame.size.height / 2
         //
         
         
@@ -157,6 +155,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.4
+        lineSpacing.hyphenationFactor = 1
         
         
         // Add Attributes
@@ -180,6 +179,22 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         
         self.informationViewWarmupC.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextWarmupC.frame.size.height + informationTitleWarmupC.frame.size.height + 20)
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        cardio.layer.cornerRadius = (self.stackView.frame.size.height - 49) / 6
+        cardio.layer.masksToBounds = true
+        
+        lowerBody.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 6
+        lowerBody.layer.masksToBounds = true
+        
+        upperBody.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 6
+        upperBody.layer.masksToBounds = true
+        
+        fullBody.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 6
+        fullBody.layer.masksToBounds = true
     }
     
     
