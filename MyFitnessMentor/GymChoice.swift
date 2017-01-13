@@ -36,9 +36,13 @@ class GymChoice: UIViewController  {
     @IBOutlet weak var informationViewGymC: UIView!
     
     
-    // Stack View
-    @IBOutlet weak var stackView: UIStackView!
-   
+    // Stack Views
+    @IBOutlet weak var stackView1: UIStackView!
+    
+    @IBOutlet weak var stackView2: UIStackView!
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,8 +64,17 @@ class GymChoice: UIViewController  {
         fullBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         
         
+        if UIScreen.main.nativeBounds.height < 1334 {
+            upperBody.setTitle(NSLocalizedString("upper", comment: ""), for: UIControlState.normal)
+            
+            lowerBody.setTitle(NSLocalizedString("lower", comment: ""), for: UIControlState.normal)
+            
+        } else {
+            upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
+            lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
+        }
         
-        upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
+        
         upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         upperBody.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         upperBody.layer.borderWidth = 10
@@ -69,7 +82,7 @@ class GymChoice: UIViewController  {
         
         
         
-        lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
+        
         lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         lowerBody.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         lowerBody.layer.borderWidth = 10
@@ -152,30 +165,25 @@ class GymChoice: UIViewController  {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        
-        let stackView1 = fullBody.frame.size.height
-        let stackView2 = stackView1 * 0.7
-        let stackView3 = stackView2 * 0.7
-        
         //
-        fullBody.layer.cornerRadius = stackView1 / 2
+        fullBody.layer.cornerRadius = fullBody.frame.size.height / 2
         fullBody.layer.masksToBounds = true
         
         //
-        upperBody.layer.cornerRadius = stackView2 / 2
+        upperBody.layer.cornerRadius = stackView1.frame.size.height / 2
         upperBody.layer.masksToBounds = true
         
-        lowerBody.layer.cornerRadius = stackView2 / 2
+        lowerBody.layer.cornerRadius = stackView1.frame.size.height / 2
         lowerBody.layer.masksToBounds = true
 
         //
-        legs.layer.cornerRadius = stackView3 / 2
+        legs.layer.cornerRadius = stackView2.frame.size.height / 2
         legs.layer.masksToBounds = true
 
-        pull.layer.cornerRadius = stackView3 / 2
+        pull.layer.cornerRadius = stackView2.frame.size.height / 2
         pull.layer.masksToBounds = true
 
-        push.layer.cornerRadius = stackView3 / 2
+        push.layer.cornerRadius = stackView2.frame.size.height / 2
         push.layer.masksToBounds = true
 
     }
