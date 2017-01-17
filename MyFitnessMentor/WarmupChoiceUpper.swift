@@ -67,6 +67,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             "latPullover"],
             // Accessory
             ["wristAnkleRotation",
+            "latStretch",
             "pushUp",
             "pullUp"]
         ]

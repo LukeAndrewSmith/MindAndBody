@@ -51,7 +51,6 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
                 1,
                 1,
                 1,
-                1,
                 1],
                 // Shoulder
                 [2,
@@ -86,7 +85,6 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
                 "30-60s"],
                 // Lower Back
                 ["5-10",
-                "5-10",
                 "5-10",
                 "5-10",
                 "5-10",
