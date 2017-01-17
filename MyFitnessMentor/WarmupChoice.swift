@@ -94,7 +94,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         
         
         // Scroll View Frame
-        self.informationViewWarmupC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height + 49), width: self.view.frame.size.width, height: (self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height - 49)
+        self.informationViewWarmupC.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
         
         view.bringSubview(toFront: informationViewWarmupC)
         
@@ -107,7 +107,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         // Information Title
         //
         // Information Title Frame
-        self.informationTitleWarmupC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height), width: self.informationViewWarmupC.frame.size.width, height: 49)
+        self.informationTitleWarmupC.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
         informationTitleWarmupC.text = (NSLocalizedString("information", comment: ""))
         informationTitleWarmupC.textAlignment = .center
         informationTitleWarmupC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
@@ -123,6 +123,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         
         
         self.view.addSubview(informationTitleWarmupC)
+        self.view.bringSubview(toFront: informationTitleWarmupC)
         
         
         
@@ -198,22 +199,14 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     }
     
     
+    
+    
+    // Information Button Action
     @IBAction func informationButtonActionWarmupC(_ sender: Any) {
         
-        if self.informationViewWarmupC.frame.maxY == (self.view.frame.maxY + ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height)) {
+        
+        if self.informationViewWarmupC.frame.minY < self.view.frame.maxY {
             
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
-                self.informationViewWarmupC.transform = CGAffineTransform(translationX: 0, y: -((self.view.frame.size.height)))
-                
-            }, completion: nil)
-            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            
-                self.informationTitleWarmupC.transform = CGAffineTransform(translationX: 0, y: -((self.view.frame.size.height)))
-            }, completion: nil)
-            self.informationViewWarmupC.contentOffset.y = 0
-            
-        } else if self.informationViewWarmupC.frame.maxY == (self.view.frame.maxY - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height) {
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 
                 self.informationViewWarmupC.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -224,8 +217,29 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
                 self.informationTitleWarmupC.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
             self.informationViewWarmupC.contentOffset.y = 0
-        }
+            
+            
+        } else {
+            
+            
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationViewWarmupC.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
+                
+            }, completion: nil)
+            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationTitleWarmupC.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
+                
+            }, completion: nil)
+            self.informationViewWarmupC.contentOffset.y = 0
 
+            
+            
+        }
+        
+        
+        
     }
     
     
@@ -233,7 +247,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
         if (extraSwipe.direction == .down){
             
-            if self.informationViewWarmupC.frame.maxY == (self.view.frame.maxY - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height) {
+            if self.informationViewWarmupC.frame.minY < self.view.frame.maxY {
                 UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                     
                     self.informationViewWarmupC.transform = CGAffineTransform(translationX: 0, y: 0)

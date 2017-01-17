@@ -246,7 +246,7 @@
                 <tabBarController id="49e-Tb-3d3" customClass="tabBarContoller" customModule="MyFitnessMentor" customModuleProvider="target" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" translucent="NO" backgroundImage="BackgroundImage" shadowImage="ShadowImage" id="W28-zg-YXA">
+                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" translucent="NO" shadowImage="ShadowImage" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -304,7 +304,7 @@
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" shadowImage="ShadowImageN" id="4pX-9H-3C4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" shadowImage="ShadowImage" id="4pX-9H-3C4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -712,6 +712,7 @@
                             <constraint firstItem="XuC-fv-ydW" firstAttribute="top" secondItem="doF-1k-deY" secondAttribute="bottom" constant="40" id="mL6-2F-phS"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="wSi-Qn-Jil">
                         <barButtonItem key="rightBarButtonItem" image="QuestionMarkN" id="q81-7E-YAP">
                             <color key="tintColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -1654,7 +1655,7 @@
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explanation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhe-O6-VRo">
-                                <rect key="frame" x="3" y="397" width="100" height="25"/>
+                                <rect key="frame" x="3" y="397" width="93" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24.5" id="eH5-ur-HO1"/>
                                 </constraints>
@@ -1663,7 +1664,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 x 5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhe-Hc-E7f">
-                                <rect key="frame" x="3" y="25" width="42" height="24"/>
+                                <rect key="frame" x="3" y="25" width="39.5" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24.5" id="sNU-Op-hK6"/>
                                 </constraints>
@@ -1672,7 +1673,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TmN-Y0-3BC">
-                                <rect key="frame" x="2" y="555" width="38.5" height="24"/>
+                                <rect key="frame" x="2" y="555" width="35" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24.5" id="puy-wL-hDw"/>
                                 </constraints>
@@ -1681,7 +1682,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Demonstration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hH5-42-MVV">
-                                <rect key="frame" x="3" y="147" width="125" height="25"/>
+                                <rect key="frame" x="3" y="147" width="118.5" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24.5" id="sDL-d6-O8X"/>
                                 </constraints>
@@ -1690,7 +1691,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Worked Area" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySr-PR-1KZ">
-                                <rect key="frame" x="191" y="147" width="109.5" height="25"/>
+                                <rect key="frame" x="191" y="147" width="103" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24.5" id="5I7-zt-atV"/>
                                 </constraints>
@@ -1734,8 +1735,8 @@
                                     <action selector="explanationExpandAction:" destination="hXa-Gd-Ugt" eventType="touchUpInside" id="xCF-lz-0re"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Bu-xO-SBO">
-                                <rect key="frame" x="219" y="381" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Bu-xO-SBO">
+                                <rect key="frame" x="277" y="373" width="49" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="49" id="9FD-qd-svA"/>
                                     <constraint firstAttribute="height" constant="49" id="kTf-Iq-uyJ"/>
@@ -1843,7 +1844,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BackgroundImage" width="1" height="1"/>
         <image name="Calendar" width="30" height="30"/>
         <image name="CheckMark" width="30" height="30"/>
         <image name="MyPreferences" width="30" height="30"/>
@@ -1853,7 +1853,6 @@
         <image name="QuestionMarkN" width="30" height="30"/>
         <image name="Settings" width="30" height="30"/>
         <image name="ShadowImage" width="1" height="1"/>
-        <image name="ShadowImageN" width="1" height="1"/>
         <image name="Timer" width="30" height="30"/>
     </resources>
 </document>

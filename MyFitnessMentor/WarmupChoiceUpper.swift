@@ -188,7 +188,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Information
         // Scroll View Frame
-        self.informationView.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height + 49), width: self.view.frame.size.width, height: (self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height - 49)
+        self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
         
         
         view.bringSubview(toFront: informationView)
@@ -204,7 +204,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         // Information Text Frame
-        self.informationTitle.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height), width: self.informationView.frame.size.width, height: 49)
+        self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
@@ -748,20 +748,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     // QuestionMark Button Action
     @IBAction func informationButtonAction(_ sender: Any) {
         
-        if self.informationView.frame.maxY == (self.view.frame.maxY + ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height)) {
+        if self.informationView.frame.minY < self.view.frame.maxY {
             
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
-                self.informationView.transform = CGAffineTransform(translationX: 0, y: -((self.view.frame.size.height)))
-                
-            }, completion: nil)
-            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
-                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -((self.view.frame.size.height)))
-            }, completion: nil)
-            self.informationView.contentOffset.y = 0
-            
-        } else if self.informationView.frame.maxY == (self.view.frame.maxY - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height) {
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 
                 self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -772,6 +760,24 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
             self.informationView.contentOffset.y = 0
+            
+            
+        } else {
+            
+            
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationView.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
+                
+            }, completion: nil)
+            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
+                
+            }, completion: nil)
+            self.informationView.contentOffset.y = 0
+            
+            
         }
 
     }
@@ -783,7 +789,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
         if (extraSwipe.direction == .down){
             
-            if self.informationView.frame.maxY == (self.view.frame.maxY - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height) {
+            if self.informationView.frame.minY < self.view.frame.maxY {
                 UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                     
                     self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)

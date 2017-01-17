@@ -79,7 +79,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
                 ["1",
                  "1"],
                 // Foam/Ball Roll
-                ["5-15",
+                ["2-5",
                 "5-10",
                 "5-10",
                 "30-60s",
@@ -734,14 +734,17 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Body Image
         bodyImage.image = #imageLiteral(resourceName: "BodyImage")
+        
+        
+        
         //bodyImage.image = targetAreaArray[warmupScreenIndex]
         
         
         
         
         // Explanation Text and Scroll View
-        var attributedExplanation = NSMutableAttributedString(string: NSLocalizedString(explanationArray[warmupScreenIndex], comment: ""))
-        var paragraphStyleE = NSMutableParagraphStyle()
+        let attributedExplanation = NSMutableAttributedString(string: NSLocalizedString(explanationArray[warmupScreenIndex], comment: ""))
+        let paragraphStyleE = NSMutableParagraphStyle()
         paragraphStyleE.alignment = .justified
         paragraphStyleE.hyphenationFactor = 1
         
@@ -765,7 +768,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         timerView.removeFromSuperview()
         //self.view.bringSubview(toFront: scrollViewExplanation)
         self.view.bringSubview(toFront: timerButton)
-        cancelTimer(Any)
+        cancelTimer(Any.self)
         
         
         
