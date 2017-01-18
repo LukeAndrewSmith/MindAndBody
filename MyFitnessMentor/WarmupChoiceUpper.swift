@@ -32,7 +32,13 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var pickerView: UIPickerView!
     
     
+    // Add Preset
+    @IBOutlet weak var addPreset: UIButton!
     
+    // Personalized Preset Arrays
+    var warmupUpperPreset1 = [[Int]]
+    var warmupUpperPreset2 = [[Int]]
+    var warmupUpperPreset3 = [[Int]]
     
     
     // Warmup Upper Array
@@ -269,6 +275,19 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         
+        //
+        // Preset Warmups
+        //
+        // Personalized Arrays
+        //
+        
+        let defaults = UserDefaults.standard
+        defaults.set(warmupUpperPreset1, forKey: "warmupUpperPreset1")
+        defaults.set(warmupUpperPreset2, forKey: "warmupUpperPreset2")
+        defaults.set(warmupUpperPreset3, forKey: "warmupUpperPreset3")
+        defaults.synchronize()
+        
+        
     }
     
     
@@ -283,11 +302,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
-    
-    
-    
-    
-    
+  
     
     
     // Picker Views
@@ -300,28 +315,46 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
 
         
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent: Int) -> Int {
-        
-        return pickerViewArray.count
-
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    
+        return pickerViewArray.count + 4
+            
         }
     
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
     
+        if row > pickerViewArray.count {
             let rowLabel = UILabel()
             let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
-                
+        
+        } else if row == pickerViewArray.count {
+            
+            return UIView()
+            
+        } else if row == pickerViewArray.count + 1 {
+            
+            
+            
+        } else if row == pickerViewArray.count + 2 {
+            
+            
+        } else if row == pickerViewArray.count + 3 {
+            
+            
+        }
+    
+        
+        
         
     }
 
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         
         switch row {
             
@@ -589,7 +622,20 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      0,
                      0]
             ]
-
+            
+        case 7:
+            
+            
+        case 8:
+            //warmupSelectedArray = warmupUpperPreset1
+            warmupSelectedArray = UserDefaults.standard.object(forKey: "warmupUpperPreset1")
+            
+        case 9:
+            warmupSelectedArray = UserDefaults.standard.object(forKey: "warmupUpperPreset2")
+            
+        case 10:
+            warmupSelectedArray = warmupUpperPreset3
+            
             
         default:
             warmupSelectedArray =
@@ -630,11 +676,16 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
 
             
             
+            
+            
+            
         }
         
         
         self.tableView.reloadData()
         flashScreen()
+        
+        
         
     }
     

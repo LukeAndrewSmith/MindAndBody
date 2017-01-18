@@ -1294,7 +1294,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warmup Movements" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Sa-mi-kDq">
-                                <rect key="frame" x="3" y="147" width="372" height="24.5"/>
+                                <rect key="frame" x="3" y="147" width="323" height="24.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24.5" id="azM-8Z-PLn"/>
@@ -1304,12 +1304,23 @@
                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IXn-PH-IQK">
+                                <rect key="frame" x="326" y="122.5" width="49" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="QaQ-ka-wuF"/>
+                                    <constraint firstAttribute="height" constant="49" id="cVZ-6f-NPr"/>
+                                </constraints>
+                                <state key="normal" image="Plus">
+                                    <color key="titleColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YGL-Ss-O4a" firstAttribute="top" secondItem="3Oh-76-5xt" secondAttribute="bottom" constant="49" id="19t-As-gQe"/>
                             <constraint firstItem="YGL-Ss-O4a" firstAttribute="leading" secondItem="Cg2-S4-hgS" secondAttribute="leading" id="2fR-Nx-upT"/>
                             <constraint firstItem="1Sa-mi-kDq" firstAttribute="top" secondItem="3Oh-76-5xt" secondAttribute="bottom" constant="24.5" id="4Aa-s5-DAk"/>
+                            <constraint firstItem="YGL-Ss-O4a" firstAttribute="top" secondItem="IXn-PH-IQK" secondAttribute="bottom" id="5FG-dx-on4"/>
                             <constraint firstItem="BSp-1u-Iqb" firstAttribute="leading" secondItem="Cg2-S4-hgS" secondAttribute="leading" constant="3" id="5jA-vs-Lq1"/>
                             <constraint firstItem="BSp-1u-Iqb" firstAttribute="top" secondItem="jne-2D-CSK" secondAttribute="bottom" constant="24.5" id="Coi-yR-RUM"/>
                             <constraint firstAttribute="trailing" secondItem="sEX-SJ-diI" secondAttribute="trailing" id="H1j-88-c81"/>
@@ -1320,9 +1331,10 @@
                             <constraint firstItem="3Oh-76-5xt" firstAttribute="leading" secondItem="Cg2-S4-hgS" secondAttribute="leading" id="WAj-TA-DuD"/>
                             <constraint firstAttribute="trailing" secondItem="8Nk-TS-Sm7" secondAttribute="trailing" id="ZfA-8g-iOb"/>
                             <constraint firstAttribute="trailing" secondItem="BSp-1u-Iqb" secondAttribute="trailing" id="gzN-AI-g4u"/>
-                            <constraint firstAttribute="trailing" secondItem="1Sa-mi-kDq" secondAttribute="trailing" id="m5A-2H-EnF"/>
+                            <constraint firstAttribute="trailing" secondItem="1Sa-mi-kDq" secondAttribute="trailing" constant="49" id="m5A-2H-EnF"/>
                             <constraint firstItem="crs-0F-8YR" firstAttribute="top" secondItem="sEX-SJ-diI" secondAttribute="bottom" id="oNw-Rj-qd5"/>
                             <constraint firstItem="1Sa-mi-kDq" firstAttribute="leading" secondItem="Cg2-S4-hgS" secondAttribute="leading" constant="3" id="p88-Vt-qBr"/>
+                            <constraint firstAttribute="trailing" secondItem="IXn-PH-IQK" secondAttribute="trailing" id="p9c-8G-lZq"/>
                             <constraint firstItem="sEX-SJ-diI" firstAttribute="top" secondItem="8Nk-TS-Sm7" secondAttribute="bottom" id="pGK-6p-VdS"/>
                             <constraint firstItem="8Nk-TS-Sm7" firstAttribute="top" secondItem="YGL-Ss-O4a" secondAttribute="bottom" id="s1r-1a-APo"/>
                             <constraint firstItem="8Nk-TS-Sm7" firstAttribute="leading" secondItem="Cg2-S4-hgS" secondAttribute="leading" id="uK0-wa-ss1"/>
@@ -1338,6 +1350,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addPreset" destination="IXn-PH-IQK" id="cPA-3L-PnZ"/>
                         <outlet property="beginButton" destination="sEX-SJ-diI" id="VnA-k8-BLi"/>
                         <outlet property="informationTitle" destination="40q-ky-kGV" id="LxY-ZN-9Eb"/>
                         <outlet property="informationView" destination="GTX-rO-gQa" id="cOZ-I1-UEO"/>
@@ -1720,34 +1733,19 @@
                                     <action selector="timerViewButton:" destination="hXa-Gd-Ugt" eventType="touchUpInside" id="q9G-Co-x33"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZO-gW-rVa">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZO-gW-rVa">
                                 <rect key="frame" x="277" y="373" width="49" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="31p-mH-SJg"/>
                                     <constraint firstAttribute="width" constant="49" id="vJk-cN-eGM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="27"/>
-                                <state key="normal" title="+">
+                                <color key="tintColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="Plus">
                                     <color key="titleColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="explanationExpandAction:" destination="hXa-Gd-Ugt" eventType="touchUpInside" id="xCF-lz-0re"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Bu-xO-SBO">
-                                <rect key="frame" x="277" y="373" width="49" height="49"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="49" id="9FD-qd-svA"/>
-                                    <constraint firstAttribute="height" constant="49" id="kTf-Iq-uyJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="27"/>
-                                <state key="normal" title="-">
-                                    <color key="titleColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="explanationRetractAction:" destination="hXa-Gd-Ugt" eventType="touchUpInside" id="nAT-l7-EUG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DwW-1r-st3">
@@ -1762,6 +1760,21 @@
                                 </state>
                                 <connections>
                                     <action selector="timerViewButton2:" destination="hXa-Gd-Ugt" eventType="touchUpInside" id="rZ4-67-MTx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Bu-xO-SBO">
+                                <rect key="frame" x="277" y="373" width="49" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="9FD-qd-svA"/>
+                                    <constraint firstAttribute="height" constant="49" id="kTf-Iq-uyJ"/>
+                                </constraints>
+                                <color key="tintColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="Minus">
+                                    <color key="titleColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="explanationRetractAction:" destination="hXa-Gd-Ugt" eventType="touchUpInside" id="nAT-l7-EUG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1846,9 +1859,11 @@
     <resources>
         <image name="Calendar" width="30" height="30"/>
         <image name="CheckMark" width="30" height="30"/>
+        <image name="Minus" width="30" height="30"/>
         <image name="MyPreferences" width="30" height="30"/>
         <image name="MyPreferences Selected" width="30" height="30"/>
         <image name="MyWorkout" width="30" height="30"/>
+        <image name="Plus" width="30" height="30"/>
         <image name="QuestionMark" width="30" height="30"/>
         <image name="QuestionMarkN" width="30" height="30"/>
         <image name="Settings" width="30" height="30"/>

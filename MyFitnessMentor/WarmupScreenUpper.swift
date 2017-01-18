@@ -113,7 +113,42 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         var demonstrationArrayF: [[UIImage]] = [[]]
         var demonstrationArray: [UIImage] = []
         // Target Area Array
-        var targetAreaArrayF: [[UIImage]] = [[]]
+        var targetAreaArrayF =
+                [
+                // Mandatory
+                [#imageLiteral(resourceName: "Heart"),
+                 #imageLiteral(resourceName: "Heart")],
+                // Foam/Ball Roll
+                [#imageLiteral(resourceName: "Thoracic"),
+                 #imageLiteral(resourceName: "Thoracic"),
+                 #imageLiteral(resourceName: "Lat and Delt"),
+                 #imageLiteral(resourceName: "Pec and Front Delt"),
+                 #imageLiteral(resourceName: "Rear Delt")],
+                // Lower Back
+                [#imageLiteral(resourceName: "Core"),
+                 #imageLiteral(resourceName: "Core"),
+                 #imageLiteral(resourceName: "Core"),
+                 #imageLiteral(resourceName: "Core"),
+                 #imageLiteral(resourceName: "Spine")],
+                // Shoulder
+                [#imageLiteral(resourceName: "Shoulder"),
+                 #imageLiteral(resourceName: "Back and Shoulder"),
+                 #imageLiteral(resourceName: "Serratus"),
+                 #imageLiteral(resourceName: "Shoulder")],
+                // Band/Bar/Machine Assisted
+                [#imageLiteral(resourceName: "Upper Back and Shoulder"),
+                 #imageLiteral(resourceName: "Rear Delt"),
+                 #imageLiteral(resourceName: "Rear Delt"),
+                 #imageLiteral(resourceName: "Shoulder"),
+                 #imageLiteral(resourceName: "Rear Delt"),
+                 #imageLiteral(resourceName: "Back")],
+                // Accessory
+                [#imageLiteral(resourceName: "Wrist and Ankle"),
+                 #imageLiteral(resourceName: "Lat"),
+                 #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+                 #imageLiteral(resourceName: "Back and Bicep")]
+    ]
+
         var targetAreaArray: [UIImage] = []
         // Explanation Array
         var explanationArrayF =
@@ -370,7 +405,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         // Body Image View
         bodyImage.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
         
-        
+       
         
         
         
@@ -384,6 +419,28 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         explanationText.numberOfLines = 0
         
         
+        // Expand Button
+        let origImage1 = UIImage(named: "Plus")
+        let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        explanationExpand.setImage(tintedImage1, for: .normal)
+        
+        //Image Tint
+        explanationExpand.tintColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        
+        
+        
+        
+        // Retract Button
+        let origImage2 = UIImage(named: "Minus")
+        let tintedImage2 = origImage2?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        explanationRetract.setImage(tintedImage2, for: .normal)
+        
+        //Image Tint
+        explanationRetract.tintColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        
+        
         
         
         
@@ -393,15 +450,17 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         // Timer Button
         self.view.bringSubview(toFront: timerButton)
         // Image With Tint
-        let origImage = UIImage(named: "Timer")
-        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        let origImage3 = UIImage(named: "Timer")
+        let tintedImage3 = origImage3?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
-        timerButton.setImage(tintedImage, for: .normal)
-        timerButton2.setImage(tintedImage, for: .normal)
+        timerButton.setImage(tintedImage3, for: .normal)
+        timerButton2.setImage(tintedImage3, for: .normal)
         
         //Image Tint
         timerButton.tintColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
         timerButton2.tintColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        
+        
         
         
         // Timer View
@@ -731,12 +790,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         // Body Image
-        bodyImage.image = #imageLiteral(resourceName: "BodyImage")
-        
-        
-        
-        //bodyImage.image = targetAreaArray[warmupScreenIndex]
-        
+         bodyImage.image = targetAreaArray[warmupScreenIndex]
         
         
         
