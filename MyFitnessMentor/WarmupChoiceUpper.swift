@@ -36,9 +36,113 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var addPreset: UIButton!
     
     // Personalized Preset Arrays
-    var warmupUpperPreset1 = [[Int]]
-    var warmupUpperPreset2 = [[Int]]
-    var warmupUpperPreset3 = [[Int]]
+    var warmupUpperPreset1 =
+        [
+            // Mandatory
+            [0,
+             0],
+            // Foam/Ball Roll
+            [0,
+             0,
+             0,
+             0,
+             0],
+            // Lower Back
+            [0,
+             0,
+             0,
+             0,
+             0],
+            // Shoulders
+            [0,
+             0,
+             0,
+             0],
+            // Band Assisted
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Accessory
+            [0,
+             0,
+             0,
+             0]
+    ]
+    var warmupUpperPreset2 =
+        [
+            // Mandatory
+            [0,
+             0],
+            // Foam/Ball Roll
+            [0,
+             0,
+             0,
+             0,
+             0],
+            // Lower Back
+            [0,
+             0,
+             0,
+             0,
+             0],
+            // Shoulders
+            [0,
+             0,
+             0,
+             0],
+            // Band Assisted
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Accessory
+            [0,
+             0,
+             0,
+             0]
+    ]
+    
+
+    var warmupUpperPreset3 =
+        [
+            // Mandatory
+            [0,
+             0],
+            // Foam/Ball Roll
+            [0,
+             0,
+             0,
+             0,
+             0],
+            // Lower Back
+            [0,
+             0,
+             0,
+             0,
+             0],
+            // Shoulders
+            [0,
+             0,
+             0,
+             0],
+            // Band Assisted
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Accessory
+            [0,
+             0,
+             0,
+             0]
+    ]
     
     
     // Warmup Upper Array
@@ -288,6 +392,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         defaults.synchronize()
         
         
+        defaults.set(0, forKey: "warmupUpperPresetNumber")
+        
     }
     
     
@@ -297,7 +403,41 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
-    
+    // Set Personalized Preset
+    @IBAction func addPreset(_ sender: Any) {
+        
+        // Number of Presets
+        if UserDefaults.standard.integer(forKey: "warmupUpperPreset") < 3 {
+        UserDefaults.standard.integer(forKey: "warmupUpperPreset") = UserDefaults.standard.integer(forKey: "warmupUpperPreset") + 1
+            
+        } else if UserDefaults.standard.integer(forKey: "warmupUpperPreset") == 3 {
+            
+            
+        }
+        
+        
+        
+        // Set Preset
+        switch UserDefaults.standard.integer(forKey: "warmupUpperPreset") {
+            
+        case 0:
+            
+            
+        case 1:
+            
+            
+        case 2:
+            
+            
+        default:
+            
+            
+        }
+        
+        
+        
+        
+    }
     
     
     

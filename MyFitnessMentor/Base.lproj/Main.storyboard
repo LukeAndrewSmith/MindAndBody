@@ -1313,6 +1313,9 @@
                                 <state key="normal" image="Plus">
                                     <color key="titleColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="addPreset:" destination="noc-gN-vr3" eventType="touchUpInside" id="eW4-Qr-fkX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
