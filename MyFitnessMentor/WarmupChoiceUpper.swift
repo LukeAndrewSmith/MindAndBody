@@ -38,6 +38,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     var presetTexts = ["", "", ""]
     
+    let emptyString = ""
+    
     let emptyArray =
         [
             // Mandatory
@@ -514,7 +516,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
             
-            
             // Increase Preset Counter
             //
             let newNumber = number + 1
@@ -531,9 +532,9 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         } else {
 
         }
-    
-        
     }
+    
+    
     
     
     // Remove Personalized Preset
@@ -542,23 +543,43 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         let defaults = UserDefaults.standard
         let number = defaults.integer(forKey: "warmupUpperPresetNumber")
         var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "warmupUpperPresetTexts") as! [String]
+        
         
         let selectedRow = pickerView.selectedRow(inComponent: 0)
-        let index = (selectedRow + 1) - (pickerViewArray.count + 1)
+        let index = (selectedRow) - (pickerViewArray.count + 1)
+        
         
         if index > -1 {
             
             warmupPreset.remove(at: index)
             warmupPreset.append(emptyArray)
-            defaults.set(warmupPreset, forKey: "warmupUpperPresetNumber")
+            
+            defaults.set(warmupPreset, forKey: "warmupUpperPresets")
+
+            
+            presetTextArray.remove(at: index)
+            presetTextArray.append(emptyString)
+            
+            defaults.set(presetTextArray, forKey: "warmupUpperPresetTexts")
+            
+            
+            let newNumber = number - 1
+            defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
+            
+            
+            
+            
+            
             defaults.synchronize()
             
            
             
             
-        // Flash Scree
+        // Flash Screen
         flashScreen()
         tableView.reloadData()
+        pickerView.reloadComponent(0)
             
         } else {
             
