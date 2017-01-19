@@ -18,7 +18,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
  
     
     
-    // Warmup Screen Inde
+    // Warmup Screen Index
     //
     var warmupScreenIndex = 0
     

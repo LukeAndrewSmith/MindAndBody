@@ -35,8 +35,79 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     // Add Preset
     @IBOutlet weak var addPreset: UIButton!
     
-    // Personalized Preset Arrays
-    var warmupUpperPreset1 =
+    
+    var warmupUpperPresets =
+        [
+            [
+                // Mandatory
+                [0,
+                 0],
+                // Foam/Ball Roll
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Lower Back
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Shoulders
+                [0,
+                 0,
+                 0,
+                 0],
+                // Band Assisted
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Accessory
+                [0,
+                 0,
+                 0,
+                 0]
+        ],
+            
+        [
+            // Mandatory
+            [0,
+             0],
+            // Foam/Ball Roll
+            [0,
+             0,
+             0,
+             0,
+             0],
+            // Lower Back
+            [0,
+             0,
+             0,
+             0,
+             0],
+            // Shoulders
+            [0,
+             0,
+             0,
+             0],
+            // Band Assisted
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Accessory
+            [0,
+             0,
+             0,
+             0]
+        ],
+    
         [
             // Mandatory
             [0,
@@ -71,78 +142,9 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
              0,
              0]
     ]
-    var warmupUpperPreset2 =
-        [
-            // Mandatory
-            [0,
-             0],
-            // Foam/Ball Roll
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // Lower Back
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // Shoulders
-            [0,
-             0,
-             0,
-             0],
-            // Band Assisted
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Accessory
-            [0,
-             0,
-             0,
-             0]
+
     ]
     
-
-    var warmupUpperPreset3 =
-        [
-            // Mandatory
-            [0,
-             0],
-            // Foam/Ball Roll
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // Lower Back
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // Shoulders
-            [0,
-             0,
-             0,
-             0],
-            // Band Assisted
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Accessory
-            [0,
-             0,
-             0,
-             0]
-    ]
     
     
     // Warmup Upper Array
@@ -286,6 +288,16 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         navigationBar.title = (NSLocalizedString("upperBody", comment: ""))
         
         
+        // Plus Button Colour
+        let origImage1 = UIImage(named: "Plus")
+        let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        addPreset.setImage(tintedImage1, for: .normal)
+        
+        //Image Tint
+        addPreset.tintColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        
+        
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
@@ -382,17 +394,12 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         // Preset Warmups
         //
-        // Personalized Arrays
-        //
-        
         let defaults = UserDefaults.standard
-        defaults.set(warmupUpperPreset1, forKey: "warmupUpperPreset1")
-        defaults.set(warmupUpperPreset2, forKey: "warmupUpperPreset2")
-        defaults.set(warmupUpperPreset3, forKey: "warmupUpperPreset3")
+        
+        defaults.register(defaults: ["warmupUpperPresets" : warmupUpperPresets])
+        defaults.register(defaults: ["warmupUpperPresetNumber" : 0])
+        
         defaults.synchronize()
-        
-        
-        defaults.set(0, forKey: "warmupUpperPresetNumber")
         
     }
     
@@ -404,37 +411,85 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     // Set Personalized Preset
+    //
     @IBAction func addPreset(_ sender: Any) {
         
-        // Number of Presets
-        if UserDefaults.standard.integer(forKey: "warmupUpperPreset") < 3 {
-        UserDefaults.standard.integer(forKey: "warmupUpperPreset") = UserDefaults.standard.integer(forKey: "warmupUpperPreset") + 1
-            
-        } else if UserDefaults.standard.integer(forKey: "warmupUpperPreset") == 3 {
-            
-            
-        }
-        
-        
+        let defaults = UserDefaults.standard
         
         // Set Preset
-        switch UserDefaults.standard.integer(forKey: "warmupUpperPreset") {
+        
+//        switch defaults.integer(forKey: "warmupUpperPresetNumber") {
+//            
+//        case 0:
+//            var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+//            warmupPreset[0] = warmupSelectedArray
+//            defaults.set(warmupPreset, forKey: "WarmupUpperPresets")
+//            
+////            warmupUpperPresets[0] = warmupSelectedArray
+////            defaults.set(warmupUpperPresets, forKey: "warmupUpperPresets")
+//            
+//            defaults.synchronize()
+//            
+//            
+//        case 1:
+//            var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+//            warmupPreset[1] = warmupSelectedArray
+//            defaults.set(warmupPreset, forKey: "WarmupUpperPresets")
+//            
+//            //warmupUpperPresets[1] = warmupSelectedArray
+//            //defaults.set(warmupUpperPresets, forKey: "warmupUpperPresets")
+//            
+//            
+//            defaults.synchronize()
+//            
+//            
+//        case 2:
+//            var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+//            warmupPreset[2] = warmupSelectedArray
+//            defaults.set(warmupPreset, forKey: "WarmupUpperPresets")
+//            
+////            warmupUpperPresets[2] = warmupSelectedArray
+////            defaults.set(warmupUpperPresets, forKey: "warmupUpperPresets")
+//            
+//            
+//            defaults.synchronize()
+//            
+//        default:
+//            break
+//            
+//        }
+        
+        
+        if defaults.integer(forKey: "warmupUpperPresetNumber") < 3 {
             
-        case 0:
+            let number = defaults.integer(forKey: "warmupUpperPresetNumber")
+            var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+            warmupPreset[number] = warmupSelectedArray
+            defaults.set(warmupPreset, forKey: "WarmupUpperPresets")
+            
+            defaults.synchronize()
             
             
-        case 1:
-            
-            
-        case 2:
-            
-            
-        default:
-            
+        } else {
             
         }
         
         
+        
+        
+    
+        
+        // Number of Presets
+        if defaults.integer(forKey: "warmupUpperPresetNumber") < 3 {
+            
+            let number = defaults.integer(forKey: "warmupUpperPresetNumber") + 1
+            
+            defaults.set(number, forKey: "warmupUpperPresetNumber")
+            defaults.synchronize()
+            
+        } else if defaults.integer(forKey: "warmupUpperPresetNumber") == 3 {
+            
+        }
         
         
     }
@@ -464,7 +519,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
     
-        if row > pickerViewArray.count {
+        if row < pickerViewArray.count {
             let rowLabel = UILabel()
             let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
@@ -474,10 +529,17 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         } else if row == pickerViewArray.count {
             
-            return UIView()
+            let line = UILabel()
+            line.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width / 2, height: 1)
+            line.backgroundColor = .black
+            line.isEnabled = false
+            return line
             
         } else if row == pickerViewArray.count + 1 {
-            
+            let rowLabel = UILabel()
+            rowLabel.text = "1"
+            rowLabel.textAlignment = .center
+            return rowLabel
             
             
         } else if row == pickerViewArray.count + 2 {
@@ -488,13 +550,15 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
         }
     
-        
+        return UIView()
         
         
     }
 
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        let defaults = UserDefaults.standard
         
         switch row {
             
@@ -535,6 +599,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1]
             ]
         
+            self.tableView.reloadData()
+            flashScreen()
             
         case 1:
             warmupSelectedArray =
@@ -573,6 +639,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      0]
             ]
 
+            self.tableView.reloadData()
+            flashScreen()
             
         case 2:
             warmupSelectedArray =
@@ -611,6 +679,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1]
             ]
 
+            self.tableView.reloadData()
+            flashScreen()
             
         case 3:
             warmupSelectedArray =
@@ -649,6 +719,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1]
             ]
 
+            self.tableView.reloadData()
+            flashScreen()
             
         case 4:
             warmupSelectedArray =
@@ -687,6 +759,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1]
             ]
 
+            self.tableView.reloadData()
+            flashScreen()
             
         case 5:
             warmupSelectedArray =
@@ -725,6 +799,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1]
             ]
 
+            self.tableView.reloadData()
+            flashScreen()
             
         case 6:
             warmupSelectedArray =
@@ -763,19 +839,41 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      0]
             ]
             
-        case 7:
+            self.tableView.reloadData()
+            flashScreen()
             
+        case 7:
+            break
             
         case 8:
-            //warmupSelectedArray = warmupUpperPreset1
-            warmupSelectedArray = UserDefaults.standard.object(forKey: "warmupUpperPreset1")
+            //warmupSelectedArray = defaults.object(forKey: "warmupUpperPreset0") as! [Array<Int>]
+            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+            let array = fullArray[0]
+            warmupSelectedArray = array
+            
+            
+            self.tableView.reloadData()
+            flashScreen()
             
         case 9:
-            warmupSelectedArray = UserDefaults.standard.object(forKey: "warmupUpperPreset2")
+            //warmupSelectedArray = defaults.object(forKey: "warmupUpperPreset1") as! [Array<Int>]
+            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+            let array = fullArray[1]
+            warmupSelectedArray = array
+            
+            
+            self.tableView.reloadData()
+            flashScreen()
             
         case 10:
-            warmupSelectedArray = warmupUpperPreset3
+            //warmupSelectedArray = defaults.object(forKey: "warmupUpperPreset2") as! [Array<Int>]
+            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+            let array = fullArray[2]
+            warmupSelectedArray = array
             
+            
+            self.tableView.reloadData()
+            flashScreen()
             
         default:
             warmupSelectedArray =
@@ -814,7 +912,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1]
             ]
 
-            
+            self.tableView.reloadData()
+            flashScreen()
             
             
             
@@ -822,8 +921,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         }
         
         
-        self.tableView.reloadData()
-        flashScreen()
+        
         
         
         
