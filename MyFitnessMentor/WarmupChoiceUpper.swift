@@ -34,6 +34,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     // Add Preset
     @IBOutlet weak var addPreset: UIButton!
+    @IBOutlet weak var removePreset: UIButton!
+    
     
     
     var warmupUpperPresets =
@@ -288,6 +290,9 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         navigationBar.title = (NSLocalizedString("upperBody", comment: ""))
         
         
+        
+        
+        
         // Plus Button Colour
         let origImage1 = UIImage(named: "Plus")
         let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
@@ -296,6 +301,19 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         //Image Tint
         addPreset.tintColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        
+        
+        
+        // Minus Button Colour
+        let origImage2 = UIImage(named: "Minus")
+        let tintedImage2 = origImage2?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        removePreset.setImage(tintedImage2, for: .normal)
+        
+        //Image Tint
+        removePreset.tintColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        
+        
         
         
         
@@ -463,19 +481,51 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         if defaults.integer(forKey: "warmupUpperPresetNumber") < 3 {
             
             let number = defaults.integer(forKey: "warmupUpperPresetNumber")
-            var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
-            warmupPreset[number] = warmupSelectedArray
-            defaults.set(warmupPreset, forKey: "WarmupUpperPresets")
+            //var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+            //warmupPreset[number] = warmupSelectedArray
+            //defaults.set(warmupPreset, forKey: "WarmupUpperPresets")
+            
+    
+            
+                    //        var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+            //
+            //            warmupPreset[number] = warmupSelectedArray
+            //
+            //            defaults.set(warmupPreset, forKey: "WarmupUpperPresets")
+            
+            warmupUpperPresets[number] = warmupSelectedArray
+            defaults.set(warmupUpperPresets, forKey: "warmupUpperPresets")
+            
             
             defaults.synchronize()
             
             
         } else {
-            
+
         }
         
         
+//        let alert = UIAlertController(title: "Warmup Name", message: "", preferredStyle: .alert)
+//        
+//        //2. Add the text field. You can configure it however you need.
+//        alert.addTextField { (textField) in
+//            textField.text = " "
+//        }
+//        
+//        // 3. Grab the value from the text field, and print it when the user clicks OK.
+//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+//            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+//            defaults.set(textField?.text, forKey: "preset1")
+//        }))
+//        
+//        // 4. Present the alert.
+//        self.present(alert, animated: true, completion: nil)
         
+        
+        
+        
+        
+       
         
     
         
@@ -491,9 +541,15 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
         }
         
-        
     }
     
+    
+    // Remove Personalized Preset
+    @IBAction func removePreset(_ sender: Any) {
+        
+        
+        
+    }
     
     
     
@@ -535,18 +591,35 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             line.isEnabled = false
             return line
             
+            
         } else if row == pickerViewArray.count + 1 {
             let rowLabel = UILabel()
-            rowLabel.text = "1"
+            var titleData = "1"
+            titleData = UserDefaults.standard.object(forKey: "preset1") as! String
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
+            rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
             
             
+            
         } else if row == pickerViewArray.count + 2 {
+            let rowLabel = UILabel()
+            let titleData = "2"
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+            
             
             
         } else if row == pickerViewArray.count + 3 {
-            
+            let rowLabel = UILabel()
+            let titleData = "3"
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
             
         }
     
@@ -914,15 +987,9 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
 
             self.tableView.reloadData()
             flashScreen()
-            
-            
-            
+         
             
         }
-        
-        
-        
-        
         
         
     }
