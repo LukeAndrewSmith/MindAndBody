@@ -36,6 +36,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var addPreset: UIButton!
     @IBOutlet weak var removePreset: UIButton!
     
+    var presetTexts = ["", "", ""]
+    
     let emptyArray =
         [
             // Mandatory
@@ -446,11 +448,15 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         let defaults = UserDefaults.standard
         
         defaults.register(defaults: ["warmupUpperPresets" : warmupUpperPresets])
+        defaults.register(defaults: ["warmupUpperPresetTexts" : presetTexts])
         defaults.register(defaults: ["warmupUpperPresetNumber" : 0])
         
         defaults.synchronize()
         
     }
+    
+    
+    
     
     
     
@@ -465,31 +471,44 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         let defaults = UserDefaults.standard
         let number = defaults.integer(forKey: "warmupUpperPresetNumber")
-        
+        var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "warmupUpperPresetTexts") as! [String]
+
         
         // Set Preset
-        if number < 3 {
+        if number < 2 {
             
             // Set new Preset Array
-            //var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
-            //warmupPreset[number] = warmupSelectedArray
-            //defaults.set(warmupPreset, forKey: "WarmupUpperPresets")
-            
-    
-            
-//                var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
-//            
-//                warmupPreset[number] = warmupSelectedArray
-//            
-//                defaults.set(warmupPreset, forKey: "WarmupUpperPresets")
-            
-            
-            warmupUpperPresets[number] = warmupSelectedArray
-            defaults.set(warmupUpperPresets, forKey: "warmupUpperPresets")
-            
+            //
+            warmupPreset[number] = warmupSelectedArray
+            defaults.set(warmupPreset, forKey: "warmupUpperPresets")
             
             defaults.synchronize()
             
+            
+            
+            
+            // Alert
+            //
+            let alert = UIAlertController(title: "Warmup Name", message: "", preferredStyle: .alert)
+            
+            //2. Add the text field. You can configure it however you need.
+            alert.addTextField { (textField) in
+                textField.text = " "
+            }
+            
+            // 3. Grab the value from the text field, and print it when the user clicks OK.
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+                // Update Preset Text Arrays
+                presetTextArray[number] = (textField?.text)!
+                defaults.set(presetTextArray, forKey: "warmupUpperPresetTexts")
+                defaults.synchronize()
+                
+            }))
+                    
+            // 4. Present the alert.
+            self.present(alert, animated: true, completion: nil)
             
             
             
@@ -497,6 +516,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
             // Increase Preset Counter
+            //
             let newNumber = number + 1
             
             defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
@@ -511,27 +531,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         } else {
 
         }
-        
-        
-//        let alert = UIAlertController(title: "Warmup Name", message: "", preferredStyle: .alert)
-//        
-//        //2. Add the text field. You can configure it however you need.
-//        alert.addTextField { (textField) in
-//            textField.text = " "
-//        }
-//        
-//        // 3. Grab the value from the text field, and print it when the user clicks OK.
-//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-//            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
-//            defaults.set(textField?.text, forKey: "preset1")
-//        }))
-//        
-//        // 4. Present the alert.
-//        self.present(alert, animated: true, completion: nil)
-        
-        
-        
-        
     
         
     }
@@ -616,8 +615,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
         } else if row == pickerViewArray.count + 1 {
             let rowLabel = UILabel()
-            var titleData = "1"
-            //titleData = UserDefaults.standard.object(forKey: "preset1") as! String
+            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
+            let titleData = titleDataArray[0]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
