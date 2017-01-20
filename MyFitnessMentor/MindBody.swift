@@ -124,25 +124,25 @@ class MindBody: UIViewController {
         //
         // Instructions Popup View
         //
-        let defaults = UserDefaults.standard
-        defaults.register(defaults: ["alertInfo1" : false])
-        
-        if UserDefaults.standard.bool(forKey: "alertInfo1") == false {
-            
-            UserDefaults.standard.set(true, forKey: "alertInfo1")
-            
-            let alertInformation = UIAlertController(title: (NSLocalizedString("alertTitle1", comment: "")), message: (NSLocalizedString("alertMessage1", comment: "")), preferredStyle: UIAlertControllerStyle.alert)
-            
-            alertInformation.view.tintColor = .black
-            
-            alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
-            
-            self.present(alertInformation, animated: true, completion: nil)
-            
-            
-            UITabBar.appearance().shadowImage = UIImage(named: "ShadowImageN")
-            
-        }
+//        let defaults = UserDefaults.standard
+//        defaults.register(defaults: ["alertInfo1" : false])
+//        
+//        if UserDefaults.standard.bool(forKey: "alertInfo1") == false {
+//            
+//            UserDefaults.standard.set(true, forKey: "alertInfo1")
+//            
+//            let alertInformation = UIAlertController(title: (NSLocalizedString("alertTitle1", comment: "")), message: (NSLocalizedString("alertMessage1", comment: "")), preferredStyle: UIAlertControllerStyle.alert)
+//            
+//            alertInformation.view.tintColor = .black
+//            
+//            alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
+//            
+//            self.present(alertInformation, animated: true, completion: nil)
+//            
+//            
+//            UITabBar.appearance().shadowImage = UIImage(named: "ShadowImageN")
+//            
+//        }
         
         
         viewDidLayoutSubviews()

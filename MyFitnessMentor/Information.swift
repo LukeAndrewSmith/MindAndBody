@@ -40,21 +40,21 @@ class Information: UITableViewController{
         super.viewDidLoad()
         
         // Alert
-        let defaults = UserDefaults.standard
-        defaults.register(defaults: ["alertInfo3" : false])
-        
-        if UserDefaults.standard.bool(forKey: "alertInfo3") == false {
-            
-            UserDefaults.standard.set(true, forKey: "alertInfo3")
-            
-            let alertInformation = UIAlertController(title: (NSLocalizedString("alertTitle3", comment: "")), message: (NSLocalizedString("alertMessage3", comment: "")), preferredStyle: UIAlertControllerStyle.alert)
-            
-            alertInformation.view.tintColor = .black
-            
-            alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
-            
-            self.present(alertInformation, animated: true, completion: nil)
-        }
+//        let defaults = UserDefaults.standard
+//        defaults.register(defaults: ["alertInfo3" : false])
+//        
+//        if UserDefaults.standard.bool(forKey: "alertInfo3") == false {
+//            
+//            UserDefaults.standard.set(true, forKey: "alertInfo3")
+//            
+//            let alertInformation = UIAlertController(title: (NSLocalizedString("alertTitle3", comment: "")), message: (NSLocalizedString("alertMessage3", comment: "")), preferredStyle: UIAlertControllerStyle.alert)
+//            
+//            alertInformation.view.tintColor = .black
+//            
+//            alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
+//            
+//            self.present(alertInformation, animated: true, completion: nil)
+//        }
 
         
         

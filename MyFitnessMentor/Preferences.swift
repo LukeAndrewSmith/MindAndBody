@@ -63,26 +63,26 @@ class MyPreferences: UITableViewController{
         //
         // Initial Alert Suggesting reading the info
         //
-        let defaults = UserDefaults.standard
-        defaults.register(defaults: ["alertInfo2" : false])
-        
-        
-        if UserDefaults.standard.bool(forKey: "alertInfo2") == false {
-            
-            UserDefaults.standard.set(true, forKey: "alertInfo2")
-            
-            let alertInformation = UIAlertController(title: (NSLocalizedString("alertTitle2", comment: "")), message: (NSLocalizedString("alertMessage2", comment: "")), preferredStyle: UIAlertControllerStyle.alert)
-            
-            alertInformation.view.tintColor = .black
-            
-            alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
-            
-            self.present(alertInformation, animated: true, completion: nil)
-            
-  
-       
-            self.tableView.setContentOffset(CGPoint.zero, animated: true)
-        }
+//        let defaults = UserDefaults.standard
+//        defaults.register(defaults: ["alertInfo2" : false])
+//        
+//        
+//        if UserDefaults.standard.bool(forKey: "alertInfo2") == false {
+//            
+//            UserDefaults.standard.set(true, forKey: "alertInfo2")
+//            
+//            let alertInformation = UIAlertController(title: (NSLocalizedString("alertTitle2", comment: "")), message: (NSLocalizedString("alertMessage2", comment: "")), preferredStyle: UIAlertControllerStyle.alert)
+//            
+//            alertInformation.view.tintColor = .black
+//            
+//            alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
+//            
+//            self.present(alertInformation, animated: true, completion: nil)
+//            
+//  
+//       
+//            self.tableView.setContentOffset(CGPoint.zero, animated: true)
+//        }
 
         
         

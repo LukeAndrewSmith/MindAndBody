@@ -76,7 +76,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              0]
     ]
     
-    var warmupUpperPresets =
+    var warmupCardioPresets =
         [
             [
                 // Mandatory
@@ -184,8 +184,8 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     
     
     
-    // Warmup Upper Array
-    var warmupUpperArray =
+    // Warmup Cardio Array
+    var warmupCardioArray =
         [
             // Mandatory
             ["5minCardioL",
@@ -322,7 +322,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("upperBody", comment: ""))
+        navigationBar.title = (NSLocalizedString("cardio", comment: ""))
         
         
         
@@ -402,10 +402,10 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceUpperText", comment: "")))
+        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceCardioText", comment: "")))
         
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceUpperText", comment: "")))
+        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceCardioText", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
@@ -449,9 +449,9 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         //
         let defaults = UserDefaults.standard
         
-        defaults.register(defaults: ["warmupUpperPresets" : warmupUpperPresets])
-        defaults.register(defaults: ["warmupUpperPresetTexts" : presetTexts])
-        defaults.register(defaults: ["warmupUpperPresetNumber" : 0])
+        defaults.register(defaults: ["warmupCardioPresets" : warmupCardioPresets])
+        defaults.register(defaults: ["warmupCardioPresetTexts" : presetTexts])
+        defaults.register(defaults: ["warmupCardioPresetNumber" : 0])
         
         defaults.synchronize()
         
@@ -472,9 +472,9 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func addPreset(_ sender: Any) {
         
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "warmupUpperPresetNumber")
-        var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "warmupUpperPresetTexts") as! [String]
+        let number = defaults.integer(forKey: "warmupCardioPresetNumber")
+        var warmupPreset = defaults.object(forKey: "warmupCardioPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "warmupCardioPresetTexts") as! [String]
         
         
         // Set Preset
@@ -505,7 +505,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                 
                 // Update Preset Text Arrays
                 presetTextArray[number] = (textField?.text)!
-                defaults.set(presetTextArray, forKey: "warmupUpperPresetTexts")
+                defaults.set(presetTextArray, forKey: "warmupCardioPresetTexts")
                 defaults.synchronize()
                 
                 
@@ -515,7 +515,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                 // Set new Preset Array
                 //
                 warmupPreset[number] = self.warmupSelectedArray
-                defaults.set(warmupPreset, forKey: "warmupUpperPresets")
+                defaults.set(warmupPreset, forKey: "warmupCardioPresets")
                 
                 defaults.synchronize()
                 
@@ -524,7 +524,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                 //
                 let newNumber = number + 1
                 
-                defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
+                defaults.set(newNumber, forKey: "warmupCardioPresetNumber")
                 defaults.synchronize()
                 
                 
@@ -556,9 +556,9 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func removePreset(_ sender: Any) {
         
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "warmupUpperPresetNumber")
-        var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "warmupUpperPresetTexts") as! [String]
+        let number = defaults.integer(forKey: "warmupCardioPresetNumber")
+        var warmupPreset = defaults.object(forKey: "warmupCardioPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "warmupCardioPresetTexts") as! [String]
         
         
         let selectedRow = pickerView.selectedRow(inComponent: 0)
@@ -570,18 +570,18 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             warmupPreset.remove(at: index)
             warmupPreset.append(emptyArray)
             
-            defaults.set(warmupPreset, forKey: "warmupUpperPresets")
+            defaults.set(warmupPreset, forKey: "warmupCardioPresets")
             
             
             presetTextArray.remove(at: index)
             presetTextArray.append(emptyString)
             
-            defaults.set(presetTextArray, forKey: "warmupUpperPresetTexts")
+            defaults.set(presetTextArray, forKey: "warmupCardioPresetTexts")
             
             
             if number > 0 {
                 let newNumber = number - 1
-                defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
+                defaults.set(newNumber, forKey: "warmupCardioPresetNumber")
             } else {
                 
             }
@@ -647,7 +647,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             
         } else if row == pickerViewArray.count + 1 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "warmupCardioPresetTexts") as! [String]
             let titleData = titleDataArray[0]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -658,7 +658,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             
         } else if row == pickerViewArray.count + 2 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "warmupCardioPresetTexts") as! [String]
             let titleData = titleDataArray[1]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -669,7 +669,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             
         } else if row == pickerViewArray.count + 3 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "warmupCardioPresetTexts") as! [String]
             let titleData = titleDataArray[2]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -974,7 +974,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             break
             
         case 8:
-            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "warmupCardioPresets") as! [Array<Array<Int>>]
             let array = fullArray[0]
             warmupSelectedArray = array
             
@@ -983,7 +983,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             flashScreen()
             
         case 9:
-            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "warmupCardioPresets") as! [Array<Array<Int>>]
             let array = fullArray[1]
             warmupSelectedArray = array
             
@@ -992,7 +992,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             flashScreen()
             
         case 10:
-            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "warmupCardioPresets") as! [Array<Array<Int>>]
             let array = fullArray[2]
             warmupSelectedArray = array
             
@@ -1058,7 +1058,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     // Table View
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return warmupUpperArray.count
+        return warmupCardioArray.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -1082,7 +1082,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return warmupUpperArray[section].count
+        return warmupCardioArray[section].count
     }
     
     
@@ -1091,7 +1091,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         
-        cell.textLabel?.text = NSLocalizedString(warmupUpperArray[indexPath.section][indexPath.row], comment: "")
+        cell.textLabel?.text = NSLocalizedString(warmupCardioArray[indexPath.section][indexPath.row], comment: "")
         
         cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
@@ -1235,14 +1235,14 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     // Pass Array to next ViewController
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "warmupUpper") {
+        if (segue.identifier == "warmupCardio") {
             
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenUpper
+            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenCardio
             
-            destinationVC.warmupMovementsArray = warmupUpperArray
+            destinationVC.warmupMovementsArray = warmupCardioArray
             destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
             
         }

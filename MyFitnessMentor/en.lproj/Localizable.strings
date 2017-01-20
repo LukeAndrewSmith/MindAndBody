@@ -110,31 +110,31 @@
 
                 // Warm Up Upper Movements Array //
                 // Mandatory
-                "mandatory" = "Mandatory";
+                    "mandatory" = "Mandatory";
                 "5minCardioL" = "5min Light Cardio";
                 "5minCardioI" = "5min Intense Cardio";
                 // Foam/Ball Roll
-                "foamRoll" = "Foam/Ball Roll";
+                    "foamRoll" = "Foam/Ball Roll";
                 "backf" = "Back Foam Roll";
                 "thoracicSpine" = "Thoracic Extensions";
                 "lat" = "Lat/Delt Foam Roll";
                 "pecDelt" = "Pec and Delt Ball Roll";
                 "rearDelt" = "Rear Delt Ball Roll";
                 // Lower Back
-                "lowerBack" = "Lower Back";
+                    "lowerBack" = "Lower Back";
                 "sideLegDrop" = "Side Leg Drop";
                 "sideLegKick" = "Side Leg Kick";
                 "scorpionKick" = "Scorpion Kick";
                 "sideBend" = "Side Bends and Rotations";
                 "catCow" = "Cat Cow";
                 // Shoulder
-                "shoulder" = "Shoulder";
+                    "shoulder" = "Shoulder";
                 "wallSlides" = "Wall Slides";
                 "superManShoulder" = "Super Man with Shoulder Slides";
                 "scapula" = "Scapula Push Ups";
                 "shoulderRotation" = "Shoulder Rotation";
                 // Band/Bar/Machine Assisted
-                "bandAssisted" = "Band/Bar/Machine Assisted";
+                    "bandAssisted" = "Band/Bar/Machine Assisted";
                 "facePull" = "Face Pull";
                 "externalRotation" = "External Rotation";
                 "internalRotation" = "Internal Rotation";
@@ -142,7 +142,7 @@
                 "rearDeltFly" = "Rear Delt Fly";
                 "latPullover" = "Lat Pullover";
                 // Accessory
-                "accessory" = "Accessory";
+                    "accessory" = "Accessory";
                 "wristAnkleRotation" = "Wrist & Ankle Rotations";
                 "latStretch" = "Lat Stretch";
                 "pushUp" = "Push Up";
@@ -197,10 +197,62 @@
 
 
 
-
-
         // Warm Up Choice Lower //
         "warmupChoiceLowerText" = "";
+
+
+                // Warm Up Upper Movements Array //
+                // Mandatory
+                    "mandatory" = "Mandatory";
+                "5minCardioL" = "5min Light Cardio";
+                "5minCardioI" = "5min Intense Cardio";
+                // Foam/Ball Roll
+                    "foamRoll" = "Foam/Ball Roll";
+                "backf" = "Back Foam Roll";
+                "thoracicSpine" = "Thoracic Extensions";
+                "itBandf" = "IT Band Foam Roll";
+                "quadf" = "Quad Foam Roll";
+                "adductorf" = "Adductor Foam Roll";
+                "hamstringf" = "Hamstring Foam Roll";
+                "glutef" = "Glute Foam/Ball Roll";
+                "calvef" = "Calve Foam Roll";
+                // General Mobility
+                    "generalMobility" = "General Mobility";
+                "" = "";
+                "" = "";
+                "piriformisStretch" = "Piriformis Stretch";
+                // Lower Back
+                    "lowerBack" = "Lower Back";
+                "sideLegDrop" = "Side Leg Drop";
+                "sideLegKick" = "Side Leg Kick";
+                "scorpionKick" = "Scorpion Kick";
+                "sideBend" = "Side Bends and Rotations";
+                "catCow" = "Cat Cow";
+                // Band/Bar/Machine Assisted
+                    "bandAssisted" = "Band/Bar/Machine Assisted";
+                "facePull" = "Face Pull";
+                "externalRotation" = "External Rotation";
+                "internalRotation" = "Internal Rotation";
+                "shoulderDislocation" = "Shoulder Dislocations";
+                "rearDeltFly" = "Rear Delt Fly";
+                "latPullover" = "Lat Pullover";
+                // Accessory
+                    "accessory" = "Accessory";
+                "wristAnkleRotation" = "Wrist & Ankle Rotations";
+                "wallSlides" = "Wall Slides";
+                "calveStretch" = "Calve Stretch";
+                "pushUp" = "Push Up";
+                "pullUp" = "Pull Up";
+
+                // Warm Up Picker Array
+                    "default" = "Default";
+                "beginner" = "Beginner";
+                "bodyWeight" = "Body Weight (no equipment)";
+                "bodybuilding" = "BodyBuilding/Aesthetics";
+                "strength" = "Strength";
+                "highIntensity" = "High Intensity";
+                "quick" = "Quick";
+
 
 
 

@@ -184,7 +184,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
-    // Warmup Upper Array
+    // Warmup Lower Array
     var warmupLowerArray =
         [
             // Mandatory
@@ -1238,7 +1238,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     // Pass Array to next ViewController
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "warmupUpper") {
+        if (segue.identifier == "warmupLower") {
             
             
             let destinationNC = segue.destination as! UINavigationController

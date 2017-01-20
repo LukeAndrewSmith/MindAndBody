@@ -1629,7 +1629,7 @@
                                 </state>
                                 <connections>
                                     <action selector="beginButton:" destination="dvr-ua-ne1" eventType="touchUpInside" id="bMf-cQ-KcW"/>
-                                    <segue destination="Z28-U7-DQL" kind="presentation" identifier="warmupUpper" id="3uE-Ka-2kO"/>
+                                    <segue destination="Z28-U7-DQL" kind="presentation" identifier="warmupLower" id="3uE-Ka-2kO"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JkZ-Wy-n4o">
@@ -2074,7 +2074,7 @@
                                 </state>
                                 <connections>
                                     <action selector="beginButton:" destination="wJ7-Al-1ao" eventType="touchUpInside" id="x2n-b3-WOS"/>
-                                    <segue destination="Pul-T6-F7n" kind="presentation" identifier="warmupUpper" id="cTA-Mt-vf8"/>
+                                    <segue destination="Pul-T6-F7n" kind="presentation" identifier="warmupFull" id="cTA-Mt-vf8"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yn1-6k-sjp">
@@ -2241,7 +2241,7 @@
         <!--Title-->
         <scene sceneID="MQa-yH-SY2">
             <objects>
-                <viewController id="cgL-Mf-Kky" customClass="WarmupScreenFull" customModule="MyFitnessMentor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cgL-Mf-Kky" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WD5-Ns-ujO"/>
                         <viewControllerLayoutGuide type="bottom" id="jMG-fA-HW6"/>
@@ -2519,7 +2519,7 @@
                                 </state>
                                 <connections>
                                     <action selector="beginButton:" destination="C6Q-5p-wos" eventType="touchUpInside" id="MLc-pM-oIp"/>
-                                    <segue destination="hCJ-eH-v5h" kind="presentation" identifier="warmupUpper" id="lQT-Ni-sLH"/>
+                                    <segue destination="hCJ-eH-v5h" kind="presentation" identifier="warmupCardio" id="lQT-Ni-sLH"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjV-QJ-1yh">
@@ -2666,7 +2666,7 @@
             <objects>
                 <navigationController id="hCJ-eH-v5h" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="mPH-VK-oAm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="mPH-VK-oAm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
