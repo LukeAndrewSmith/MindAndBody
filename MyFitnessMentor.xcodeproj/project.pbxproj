@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0728F3DE1E1C2C6C00EA409B /* WarmupChoiceFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728F3DD1E1C2C6C00EA409B /* WarmupChoiceFull.swift */; };
-		0728F3E01E1C2D6900EA409B /* WarmupScreenFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728F3DF1E1C2D6900EA409B /* WarmupScreenFull.swift */; };
+		0701FEDC1E322DE8004BBACE /* WarmupChoiceLower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0701FEDB1E322DE8004BBACE /* WarmupChoiceLower.swift */; };
+		0701FEDE1E322E58004BBACE /* WarmupScreenLower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0701FEDD1E322E58004BBACE /* WarmupScreenLower.swift */; };
 		0728F3E31E1D22C200EA409B /* WarmupChoiceUpper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728F3E21E1D22C200EA409B /* WarmupChoiceUpper.swift */; };
 		0728F3E51E1E9C0E00EA409B /* CalendarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728F3E41E1E9C0E00EA409B /* CalendarScreen.swift */; };
 		0739AB0B1E12D2AE00A97711 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0739AB0A1E12D2AE00A97711 /* TabBarController.swift */; };
 		075AA85A1E225F6F0072AE9E /* WarmupScreenUpper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075AA8591E225F6F0072AE9E /* WarmupScreenUpper.swift */; };
-		0769D0A91E15378100FF03FC /* WarmupScreenUpperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0769D0A81E15378100FF03FC /* WarmupScreenUpperTest.swift */; };
 		077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DA1DA535830026895B /* AppDelegate.swift */; };
 		077AC0DF1DA535840026895B /* MindBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DE1DA535840026895B /* MindBody.swift */; };
 		077AC0E21DA535840026895B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E01DA535840026895B /* Main.storyboard */; };
@@ -71,13 +70,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0728F3DD1E1C2C6C00EA409B /* WarmupChoiceFull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WarmupChoiceFull.swift; path = ../WarmupChoiceFull.swift; sourceTree = "<group>"; };
-		0728F3DF1E1C2D6900EA409B /* WarmupScreenFull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupScreenFull.swift; sourceTree = "<group>"; };
+		0701FEDB1E322DE8004BBACE /* WarmupChoiceLower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoiceLower.swift; sourceTree = "<group>"; };
+		0701FEDD1E322E58004BBACE /* WarmupScreenLower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupScreenLower.swift; sourceTree = "<group>"; };
 		0728F3E21E1D22C200EA409B /* WarmupChoiceUpper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoiceUpper.swift; sourceTree = "<group>"; };
 		0728F3E41E1E9C0E00EA409B /* CalendarScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarScreen.swift; sourceTree = "<group>"; };
 		0739AB0A1E12D2AE00A97711 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		075AA8591E225F6F0072AE9E /* WarmupScreenUpper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupScreenUpper.swift; sourceTree = "<group>"; };
-		0769D0A81E15378100FF03FC /* WarmupScreenUpperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupScreenUpperTest.swift; sourceTree = "<group>"; };
 		077AC0D71DA535830026895B /* MyFitnessMentor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFitnessMentor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		077AC0DA1DA535830026895B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		077AC0DE1DA535840026895B /* MindBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindBody.swift; sourceTree = "<group>"; };
@@ -147,13 +145,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0701FEDA1E322D9F004BBACE /* Lower */ = {
+			isa = PBXGroup;
+			children = (
+				0701FEDB1E322DE8004BBACE /* WarmupChoiceLower.swift */,
+				0701FEDD1E322E58004BBACE /* WarmupScreenLower.swift */,
+			);
+			name = Lower;
+			sourceTree = "<group>";
+		};
 		0728F3E11E1C2D7C00EA409B /* Warmup */ = {
 			isa = PBXGroup;
 			children = (
 				07F912071DC2D1240004C924 /* WarmupChoice.swift */,
 				076A9D091E23B1D700DC8F42 /* Full */,
 				076A9D081E23B1C500DC8F42 /* Upper */,
-				0769D0A81E15378100FF03FC /* WarmupScreenUpperTest.swift */,
+				0701FEDA1E322D9F004BBACE /* Lower */,
 			);
 			name = Warmup;
 			sourceTree = "<group>";
@@ -170,8 +177,6 @@
 		076A9D091E23B1D700DC8F42 /* Full */ = {
 			isa = PBXGroup;
 			children = (
-				0728F3DD1E1C2C6C00EA409B /* WarmupChoiceFull.swift */,
-				0728F3DF1E1C2D6900EA409B /* WarmupScreenFull.swift */,
 			);
 			name = Full;
 			sourceTree = "<group>";
@@ -241,10 +246,9 @@
 				07FE380E1DF9B3A200E7EA20 /* Localizable.strings */,
 				077AC0DA1DA535830026895B /* AppDelegate.swift */,
 				077AC0E01DA535840026895B /* Main.storyboard */,
-				0728F3E41E1E9C0E00EA409B /* CalendarScreen.swift */,
 				0739AB0A1E12D2AE00A97711 /* TabBarController.swift */,
 				07F9120B1DC3F9B00004C924 /* MindBodyNavigation.swift */,
-				077AC0FC1DA54BD60026895B /* Preferences */,
+				077AC0FC1DA54BD60026895B /* Profile */,
 				077AC0FD1DA54C0C0026895B /* MindBody */,
 				077AC0FE1DA54C500026895B /* Information */,
 				077AC0E31DA535840026895B /* Assets.xcassets */,
@@ -264,7 +268,7 @@
 			path = MyFitnessMentorTests;
 			sourceTree = "<group>";
 		};
-		077AC0FC1DA54BD60026895B /* Preferences */ = {
+		077AC0FC1DA54BD60026895B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				07FE38071DF6E74E00E7EA20 /* PreferencesNavigation.swift */,
@@ -272,12 +276,13 @@
 				07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */,
 				077AC1011DA573210026895B /* Settings.swift */,
 			);
-			name = Preferences;
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		077AC0FD1DA54C0C0026895B /* MindBody */ = {
 			isa = PBXGroup;
 			children = (
+				0728F3E41E1E9C0E00EA409B /* CalendarScreen.swift */,
 				077AC0DE1DA535840026895B /* MindBody.swift */,
 				0728F3E11E1C2D7C00EA409B /* Warmup */,
 				076A9D0A1E23B1ED00DC8F42 /* Workout */,
@@ -476,11 +481,11 @@
 			files = (
 				07F9120C1DC3F9B00004C924 /* MindBodyNavigation.swift in Sources */,
 				077AC0DF1DA535840026895B /* MindBody.swift in Sources */,
-				0728F3E01E1C2D6900EA409B /* WarmupScreenFull.swift in Sources */,
+				0701FEDC1E322DE8004BBACE /* WarmupChoiceLower.swift in Sources */,
 				07DEE6F71E0AADE6003B89AB /* YogaChoice.swift in Sources */,
 				07FE380A1DF6E78700E7EA20 /* InformationNavigation.swift in Sources */,
 				07DEE6F91E0AADF2003B89AB /* MindfulnessChoice.swift in Sources */,
-				0769D0A91E15378100FF03FC /* WarmupScreenUpperTest.swift in Sources */,
+				0701FEDE1E322E58004BBACE /* WarmupScreenLower.swift in Sources */,
 				07DEE6FB1E0AC47F003B89AB /* WorkoutChoice.swift in Sources */,
 				07DEE6F11E0AAD2E003B89AB /* GymChoice.swift in Sources */,
 				07F0E3E41DE0D4DF00D0A13F /* EmphasisSelection.swift in Sources */,
@@ -492,7 +497,6 @@
 				077AC1001DA54C810026895B /* Information.swift in Sources */,
 				0728F3E31E1D22C200EA409B /* WarmupChoiceUpper.swift in Sources */,
 				077AC1021DA573210026895B /* Settings.swift in Sources */,
-				0728F3DE1E1C2C6C00EA409B /* WarmupChoiceFull.swift in Sources */,
 				07DEE6F31E0AADAC003B89AB /* StretchingChoice.swift in Sources */,
 				07FE38081DF6E74E00E7EA20 /* PreferencesNavigation.swift in Sources */,
 				07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */,

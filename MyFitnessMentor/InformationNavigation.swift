@@ -17,5 +17,8 @@ class InformationNavigation: UINavigationController {
     }
     
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
 }
