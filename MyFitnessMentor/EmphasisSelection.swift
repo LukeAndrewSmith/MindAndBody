@@ -156,7 +156,7 @@ class EmphasisSelection: UITableViewController{
         
         let section = indexPath.section
         let cell = tableView.cellForRow(at: indexPath)
-        let str = cell?.textLabel?.text
+        //let str = cell?.textLabel?.text
         tableView.deselectRow(at: indexPath, animated: true)
         
         

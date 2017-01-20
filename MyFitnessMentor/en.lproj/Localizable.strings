@@ -161,8 +161,8 @@
                 // Warm Up Movements Explanations
                 //
                 // Mandatory
-                "5minCardioLE" = "The cardio can be performed in any manner that seems fit.\nI recommended:\n- Treadmill (Walking/Jogging)\n- Step Machine\n- Biking\n- Rowing Machine \n\n\nPurpose:\nThe cardio should raise the body temperature, heart rate, and blood flow which together increase the flexibility of muscles and joints. Cardio is also an oppertunity to put aside any thoughts that might hinder the workout through awareness of the feeling of the activation/stimulation of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
-                "5minCardioIE" = "The cardio can be performed in any manner that seems fit\n.I recommended:\n- Treadmill (Running/Sprints with 15-30s breaks)\n- Step Machine(10min)\n- Biking(Fast/Sprints with 15-30s breaks)\n- Rowing Machine(Fast/Sprints with 15-30s breaks)\n\n\nPurpose:\nThe cardio should raise the body temperature, heart rate, and blood flow which together increase the flexibility of muscles and joints. Cardio is also an oppertunity to put aside any thoughts that might hinder the workout through awareness of the feeling of the activation/stimulation of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
+                "5minCardioLE" = "The cardio can be performed in any manner that seems fit.\nRecommended:\n- Treadmill (Walking/Jogging)\n- Step Machine\n- Biking\n- Rowing Machine \n\n\nPurpose:\nThe cardio should raise the body temperature, heart rate, and blood flow which together increase the flexibility of muscles and joints. Cardio is also an oppertunity to put aside any thoughts that might hinder the workout through awareness of the feeling of the activation/stimulation of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
+                "5minCardioIE" = "The cardio can be performed in any manner that seems fit\n.Recommended:\n- Treadmill (Running/Sprints with 15-30s breaks)\n- Step Machine(10min)\n- Biking(Fast/Sprints with 15-30s breaks)\n- Rowing Machine(Fast/Sprints with 15-30s breaks)\n\n\nPurpose:\nThe cardio should raise the body temperature, heart rate, and blood flow which together increase the flexibility of muscles and joints. Cardio is also an oppertunity to put aside any thoughts that might hinder the workout through awareness of the feeling of the activation/stimulation of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
                 // Foam/Ball Roll
                 "backfE" = "Movement:\nPlace the foam roller underneath the back, around shoulder height, just below the cervical curve (neck).\nBend your knees close to their maximum and place your feet at hip width apart flat on the ground (close to your glutes).\nSlowly roll down and then up 1/4 of the length of your back each time starting and ending the roll slightly lower until your reach the end of your thoracic curve (around where your ribcage ends) and then repeat the same back up to the starting position.\n1 rep is completed when your have returned to the starting position.\n\nNotes:\nYour thoracic spine should be slightly extended (arched back over the foam roller) and your glutes should maintain as much contact with the ground as possible to remove your core muscles from the exercise and allow for a better stretch in the back.\nYour arms can be in any position (where your elbows are in front of your chest not out to the side) that does not cause pain or discomfort, here are some suggestions:\n- With your palms facing towards you and your hand touching, bring your elows close together and place your palms just behind the top of your head so that your elbows are close to your forehead (without pulling your head up with your arms)\n- Hold your elbows or your shoulders and point your elbows up, perpendicular to your chest.\n- Hold your straight above your head.\nYou can pause at points that feel especially tight along the back for a few seconds, and can also rotate your torso up to 45º in either direction as feels necessary to roll a wider range of muscles.\nDon't roll too fast.\nDon't roll too far (avoid the lower back and neck areas)\n\n\nPurpose:\nFoam rolling loosens the muscles and warms them up in preperation for the warm up and exercise, it also increases blood flow to the rolled area. This will increase your range of motion and the effectiveness of exercises geared towards the rolled area.";
                 "thoracicSpineE" = "Movement:\nPlace the foam roller underneath your back, at the lower end of the thoracic curve (near the bottom of your ribcage).\nBend your knees close to 45º and place your feet at hip width apart flat on the ground.\nRelax the muscles of the back around the contact area of the foam roller and arch/extend (lean) back to stretch the thoracic curve keeping a constant neck position (don't lean the neck back), then slowly cruch back up by reactivating the muscles around the contact point of the foam roller (concentrate not on using your abs but on the feeling in your thoracic spine and make sure your glutes are in constant contact with the ground)\n1 rep is completed when you have returned to the starting position. With each new set, move the foam roller furthur up your thoracic spine 10-15cm or to another position that seems fit (that feels it could benifit from stretching).\n\nNotes:\nKeep your neck in a comfortable neutral position.\n\nYour arms can be in any position (where your elbows are in front of your chest not out to the side) that does not cause pain or discomfort, here are some suggestions:\n- With your palms facing towards you and your hand touching, bring your elows close together and place your palms just behind the top of your head so that your elbows are close to your forehead (without pulling your head up with your arms)\n- Hold your elbows or your shoulders and point your elbows up, perpendicular to your chest.\n- Place your hands somewhere on your chest area and relax your elbows so they are close to your torso.\n\n\nPurpose:\nFoam rolling loosens the muscles and warms them up in preperation for the warm up and exercise, it also increases blood flow to the rolled area. This will increase your range of motion and the effectiveness of exercises geared towards the rolled area. This movement also results in a better posture of the thoracic spine and thus protects your spine during training and allows for cleaner movements (especially pressing movements)";
@@ -216,11 +216,6 @@
                 "hamstringf" = "Hamstring Foam Roll";
                 "glutef" = "Glute Foam/Ball Roll";
                 "calvef" = "Calve Foam Roll";
-                // General Mobility
-                    "generalMobility" = "General Mobility";
-                "" = "";
-                "" = "";
-                "piriformisStretch" = "Piriformis Stretch";
                 // Lower Back
                     "lowerBack" = "Lower Back";
                 "sideLegDrop" = "Side Leg Drop";
@@ -228,21 +223,27 @@
                 "scorpionKick" = "Scorpion Kick";
                 "sideBend" = "Side Bends and Rotations";
                 "catCow" = "Cat Cow";
-                // Band/Bar/Machine Assisted
-                    "bandAssisted" = "Band/Bar/Machine Assisted";
-                "facePull" = "Face Pull";
-                "externalRotation" = "External Rotation";
-                "internalRotation" = "Internal Rotation";
-                "shoulderDislocation" = "Shoulder Dislocations";
-                "rearDeltFly" = "Rear Delt Fly";
-                "latPullover" = "Lat Pullover";
+                // General Mobility
+                    "generalMobility" = "General Mobility";
+                "rollBack" = "Roll Back to Hamstring";
+                "hipCircles" = "Hip Circles";
+                "mountainClimber" = "Mountain Climber Stretch";
+                "groinStretch" = "Groin Stretch";
+                "gluteBridge" = "Glute Bridge";
+                "piriformisStretch" = "Piriformis Stretch";
+                "hipFlexorStretch" = "Hip Flexor Stretxh";
+                "cossakSquat" = "Cossak Squat";
+                "lateralLunge" = "Lateral Lunge";
+                "hipHinges" = "Hip Hinges";
+                "sideKicks" = "Side Kicks";
+                "frontKicks" = "Front Kicks";
+                "jumpSquat" = "Jump Squat";
+                "lunge" = "Lunge";
                 // Accessory
                     "accessory" = "Accessory";
                 "wristAnkleRotation" = "Wrist & Ankle Rotations";
                 "wallSlides" = "Wall Slides";
                 "calveStretch" = "Calve Stretch";
-                "pushUp" = "Push Up";
-                "pullUp" = "Pull Up";
 
                 // Warm Up Picker Array
                     "default" = "Default";
