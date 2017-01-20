@@ -1,15 +1,15 @@
 //
-//  WarmupChoiceUpper.swift
+//  WarmupChoiceFull.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 04.01.17.
+//  Created by Luke Smith on 20.01.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -111,75 +111,75 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                  0,
                  0,
                  0]
-        ],
-        [
-            // Mandatory
-            [0,
-             0],
-            // Foam/Ball Roll
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // Lower Back
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // Shoulders
-            [0,
-             0,
-             0,
-             0],
-            // Band Assisted
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Accessory
-            [0,
-             0,
-             0,
-             0]
-        ],
-        [
-            // Mandatory
-            [0,
-             0],
-            // Foam/Ball Roll
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // Lower Back
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // Shoulders
-            [0,
-             0,
-             0,
-             0],
-            // Band Assisted
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Accessory
-            [0,
-             0,
-             0,
-             0]
-        ]
+            ],
+            [
+                // Mandatory
+                [0,
+                 0],
+                // Foam/Ball Roll
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Lower Back
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Shoulders
+                [0,
+                 0,
+                 0,
+                 0],
+                // Band Assisted
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Accessory
+                [0,
+                 0,
+                 0,
+                 0]
+            ],
+            [
+                // Mandatory
+                [0,
+                 0],
+                // Foam/Ball Roll
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Lower Back
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Shoulders
+                [0,
+                 0,
+                 0,
+                 0],
+                // Band Assisted
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Accessory
+                [0,
+                 0,
+                 0,
+                 0]
+            ]
     ]
     
     
@@ -192,35 +192,35 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
              "5minCardioI"],
             // Foam/Ball Roll
             ["backf",
-            "thoracicSpine",
-            "lat",
-            "pecDelt",
-            "rearDelt"],
+             "thoracicSpine",
+             "lat",
+             "pecDelt",
+             "rearDelt"],
             // Lower Back
             ["sideLegDrop",
-            "sideLegKick",
-            "scorpionKick",
-            "sideBend",
-            "catCow"],
+             "sideLegKick",
+             "scorpionKick",
+             "sideBend",
+             "catCow"],
             // Shoulder
             ["wallSlides",
-            "superManShoulder",
-            "scapula",
-            "shoulderRotation"],
+             "superManShoulder",
+             "scapula",
+             "shoulderRotation"],
             // Band/Bar/Machine Assisted
             ["facePull",
-            "externalRotation",
-            "internalRotation",
-            "shoulderDislocation",
-            "rearDeltFly",
-            "latPullover"],
+             "externalRotation",
+             "internalRotation",
+             "shoulderDislocation",
+             "rearDeltFly",
+             "latPullover"],
             // Accessory
             ["wristAnkleRotation",
-            "latStretch",
-            "pushUp",
-            "pullUp"]
-        ]
-
+             "latStretch",
+             "pushUp",
+             "pullUp"]
+    ]
+    
     
     // Default Warmup Selected Array
     var warmupSelectedArray =
@@ -270,7 +270,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             "highIntensity",
             "quick"
             
-        ]
+    ]
     
     // Table View Section Title Array
     var tableViewSectionArray =
@@ -281,8 +281,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             "shoulder",
             "bandAssisted",
             "accessory"
-        ]
-
+    ]
+    
     
     // Flash Screen
     func flashScreen() {
@@ -307,7 +307,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
-   
+    
     
     
     //
@@ -320,7 +320,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         // Background Gradient
         self.view.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
         
-
+        
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("upperBody", comment: ""))
         
@@ -359,7 +359,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         
-    
+        
         
         
         // Information
@@ -397,7 +397,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
         self.view.addSubview(informationTitle)
         
-
+        
         
         // Information Text and Attributes
         //
@@ -475,7 +475,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         let number = defaults.integer(forKey: "warmupUpperPresetNumber")
         var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
         var presetTextArray = defaults.object(forKey: "warmupUpperPresetTexts") as! [String]
-
+        
         
         // Set Preset
         if number < 3 {
@@ -499,7 +499,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             // 3. Get the value from the text field, and perform actions when OK clicked.
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                 let textField = alert?.textFields![0]
-             
+                
+                
                 
                 
                 
@@ -535,7 +536,9 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.tableView.reloadData()
                 
             }))
-                    
+            // End of actions upon OK press
+
+            
             // 4. Present the alert.
             self.present(alert, animated: true, completion: nil)
             
@@ -545,7 +548,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
         } else {
-
+            
         }
     }
     
@@ -571,7 +574,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             warmupPreset.append(emptyArray)
             
             defaults.set(warmupPreset, forKey: "warmupUpperPresets")
-
+            
             
             presetTextArray.remove(at: index)
             presetTextArray.append(emptyString)
@@ -580,8 +583,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
             if number > 0 {
-            let newNumber = number - 1
-            defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
+                let newNumber = number - 1
+                defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
             } else {
                 
             }
@@ -591,7 +594,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
             defaults.synchronize()
             
-           
+            
             
             
             // Flash Screen
@@ -606,7 +609,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
-  
+    
     
     
     // Picker Views
@@ -616,18 +619,18 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         return 1
     }
     
-
-        
+    
+    
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    
+        
         return pickerViewArray.count + 4
-            
-        }
+        
+    }
     
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-    
+        
         if row < pickerViewArray.count {
             let rowLabel = UILabel()
             let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
@@ -635,7 +638,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
-        
+            
         } else if row == pickerViewArray.count {
             
             let line = UILabel()
@@ -677,12 +680,12 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             return rowLabel
             
         }
-    
+        
         return UIView()
         
         
     }
-
+    
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
@@ -726,7 +729,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1,
                      1]
             ]
-        
+            
             self.tableView.reloadData()
             flashScreen()
             
@@ -766,7 +769,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1,
                      0]
             ]
-
+            
             self.tableView.reloadData()
             flashScreen()
             
@@ -806,7 +809,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1,
                      1]
             ]
-
+            
             self.tableView.reloadData()
             flashScreen()
             
@@ -846,7 +849,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1,
                      1]
             ]
-
+            
             self.tableView.reloadData()
             flashScreen()
             
@@ -886,7 +889,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1,
                      1]
             ]
-
+            
             self.tableView.reloadData()
             flashScreen()
             
@@ -926,7 +929,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1,
                      1]
             ]
-
+            
             self.tableView.reloadData()
             flashScreen()
             
@@ -1036,10 +1039,10 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                      1,
                      1]
             ]
-
+            
             self.tableView.reloadData()
             flashScreen()
-         
+            
             
         }
         
@@ -1063,12 +1066,12 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return NSLocalizedString(tableViewSectionArray[section], comment: "")
-        }
+    }
     
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
-      
+        
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
         header.textLabel?.textColor = .black
@@ -1079,18 +1082,18 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         
     }
     
-
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return warmupUpperArray[section].count
     }
     
-
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            
+        
         cell.textLabel?.text = NSLocalizedString(warmupUpperArray[indexPath.section][indexPath.row], comment: "")
         
         cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
@@ -1105,7 +1108,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         } else {
             cell.accessoryType = .none
         }
-    
+        
         
         if cell.textLabel?.text == NSLocalizedString("5minCardioL", comment: "") {
             cell.isUserInteractionEnabled = false
@@ -1115,8 +1118,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         }
         
         return cell
-
-            
+        
+        
     }
     
     
@@ -1146,7 +1149,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
-   
+    
     
     
     
@@ -1188,7 +1191,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
         }
-
+        
     }
     
     
@@ -1226,7 +1229,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             _ = self.navigationController?.popToRootViewController(animated: false)
             
         }
-       
+        
     }
     
     
@@ -1236,11 +1239,11 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "warmupUpper") {
-
+            
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenUpper
+            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenFull
             
             destinationVC.warmupMovementsArray = warmupUpperArray
             destinationVC.warmupMovementsSelectedArray = warmupSelectedArray

@@ -484,16 +484,27 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             
             // Alert and Functions
             //
-            let alert = UIAlertController(title: "Warmup Name", message: "", preferredStyle: .alert)
+            let inputTitle = NSLocalizedString("inputTitle", comment: "")
+            //
+            let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+            alert.view.tintColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             
             //2. Add the text field. You can configure it however you need.
             alert.addTextField { (textField) in
                 textField.text = " "
+                textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
             }
             
-            // 3. Grab the value from the text field, and print it when the user clicks OK.
+            // 3. Get the value from the text field, and perform actions when OK clicked.
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-                let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+                let textField = alert?.textFields![0]
+                
+                
+                
+                
+                
+                
                 // Update Preset Text Arrays
                 presetTextArray[number] = (textField?.text)!
                 defaults.set(presetTextArray, forKey: "warmupUpperPresetTexts")
@@ -526,6 +537,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.tableView.reloadData()
                 
             }))
+            // End of actions upon OK press
             
             // 4. Present the alert.
             self.present(alert, animated: true, completion: nil)
@@ -1231,7 +1243,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenUpper
+            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenLower
             
             destinationVC.warmupMovementsArray = warmupUpperArray
             destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
