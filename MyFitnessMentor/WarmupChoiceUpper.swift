@@ -478,19 +478,11 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
 
         
         // Set Preset
-        if number < 2 {
-            
-            // Set new Preset Array
-            //
-            warmupPreset[number] = warmupSelectedArray
-            defaults.set(warmupPreset, forKey: "warmupUpperPresets")
-            
-            defaults.synchronize()
+        if number < 3 {
             
             
             
-            
-            // Alert
+            // Alert and Functions
             //
             let alert = UIAlertController(title: "Warmup Name", message: "", preferredStyle: .alert)
             
@@ -507,6 +499,32 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
                 defaults.set(presetTextArray, forKey: "warmupUpperPresetTexts")
                 defaults.synchronize()
                 
+                
+                
+                
+                
+                // Set new Preset Array
+                //
+                warmupPreset[number] = self.warmupSelectedArray
+                defaults.set(warmupPreset, forKey: "warmupUpperPresets")
+                
+                defaults.synchronize()
+                
+                
+                // Increase Preset Counter
+                //
+                let newNumber = number + 1
+                
+                defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
+                defaults.synchronize()
+                
+                
+                
+                // Flash Screen
+                self.flashScreen()
+                self.pickerView.reloadAllComponents()
+                self.tableView.reloadData()
+                
             }))
                     
             // 4. Present the alert.
@@ -516,18 +534,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
             
-            // Increase Preset Counter
-            //
-            let newNumber = number + 1
-            
-            defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
-            defaults.synchronize()
-            
-            
-            
-            // Flash Screen
-            flashScreen()
-            tableView.reloadData()
             
         } else {
 
@@ -564,9 +570,12 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             defaults.set(presetTextArray, forKey: "warmupUpperPresetTexts")
             
             
+            if number > 0 {
             let newNumber = number - 1
             defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
-            
+            } else {
+                
+            }
             
             
             
@@ -576,21 +585,14 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
            
             
             
-        // Flash Screen
-        flashScreen()
-        tableView.reloadData()
-        pickerView.reloadComponent(0)
+            // Flash Screen
+            self.flashScreen()
+            self.pickerView.reloadAllComponents()
+            self.tableView.reloadData()
             
         } else {
             
         }
-        
-            
-            
-        
-        
-        
-        
     }
     
     
@@ -647,7 +649,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
         } else if row == pickerViewArray.count + 2 {
             let rowLabel = UILabel()
-            let titleData = "2"
+            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
+            let titleData = titleDataArray[1]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
@@ -657,7 +660,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
         } else if row == pickerViewArray.count + 3 {
             let rowLabel = UILabel()
-            let titleData = "3"
+            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
+            let titleData = titleDataArray[2]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
@@ -961,7 +965,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             break
             
         case 8:
-            //warmupSelectedArray = defaults.object(forKey: "warmupUpperPreset0") as! [Array<Int>]
             let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
             let array = fullArray[0]
             warmupSelectedArray = array
@@ -971,7 +974,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             flashScreen()
             
         case 9:
-            //warmupSelectedArray = defaults.object(forKey: "warmupUpperPreset1") as! [Array<Int>]
             let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
             let array = fullArray[1]
             warmupSelectedArray = array
@@ -981,7 +983,6 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             flashScreen()
             
         case 10:
-            //warmupSelectedArray = defaults.object(forKey: "warmupUpperPreset2") as! [Array<Int>]
             let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
             let array = fullArray[2]
             warmupSelectedArray = array
