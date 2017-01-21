@@ -65,7 +65,7 @@ class MindBody: UIViewController {
     @IBOutlet weak var Yoga: UIButton!
     
     // Mindfullness
-    @IBOutlet weak var Mindfulness: UIButton!
+    @IBOutlet weak var Meditation: UIButton!
     
     // Calendar
     @IBOutlet weak var calendar: UIBarButtonItem!
@@ -163,11 +163,11 @@ class MindBody: UIViewController {
         Yoga.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         
         
-        Mindfulness.setTitle(NSLocalizedString("mindfulness", comment: ""), for: UIControlState.normal)
-        Mindfulness.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        Mindfulness.titleLabel!.textColor = .white
-        Mindfulness.layer.borderWidth = 10
-        Mindfulness.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
+        Meditation.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        Meditation.titleLabel!.textColor = .white
+        Meditation.layer.borderWidth = 10
+        Meditation.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         
         
         
@@ -227,8 +227,8 @@ class MindBody: UIViewController {
                 (stackView3.frame.size.height - 20) / 4
             Yoga.layer.masksToBounds = true
             
-            Mindfulness.layer.cornerRadius = (stackView3.frame.size.height - 20) / 4
-            Mindfulness.layer.masksToBounds = true
+            Meditation.layer.cornerRadius = (stackView3.frame.size.height - 20) / 4
+            Meditation.layer.masksToBounds = true
             
             
         }

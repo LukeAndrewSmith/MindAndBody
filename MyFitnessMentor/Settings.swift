@@ -33,9 +33,6 @@ class Settings: UITableViewController{
         
         tableView.tintColor = .black
         
-        
-        
-        
         // Checked UserDefaults
         let checked = [1,0,0,0]
         UserDefaults.standard.register(defaults: ["colourChecked" : checked])
@@ -96,14 +93,13 @@ class Settings: UITableViewController{
     
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return (NSLocalizedString("case10", comment: ""))
-        case 1: return (NSLocalizedString("case11", comment: ""))
-        case 2: return (NSLocalizedString("colour", comment: ""))
+        case 0: return (NSLocalizedString("case11", comment: ""))
+        case 1: return (NSLocalizedString("colour", comment: ""))
         default: return (NSLocalizedString("default", comment: ""))
         }
     }
@@ -132,7 +128,7 @@ class Settings: UITableViewController{
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section < 2 {
+        if section < 1 {
             return 1
         } else {
             return 4
@@ -149,26 +145,21 @@ class Settings: UITableViewController{
         
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = NSLocalizedString("language", comment: "")
-            cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
-            return cell
-            
-        case 1:
             cell.textLabel?.text = NSLocalizedString("clearPreferences", comment: "")
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
             return cell
-        case 2:
+        case 1:
             if indexPath.row == 0 {
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
                 
                 // Gradient Label
+                gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
                 gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
                 gradientLabel.center.y = cell.center.y
                 gradientLabel.applyGradient(colours: [colourSets[0][0], colourSets[0][1]])
+                
                 
                 cell.addSubview(gradientLabel)
                 
@@ -188,6 +179,7 @@ class Settings: UITableViewController{
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
 
                 // Gradient Label
+                gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
                 gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
                 gradientLabel.center.y = cell.center.y
                 gradientLabel.applyGradient(colours: [colourSets[1][0], colourSets[1][1]])
@@ -209,6 +201,7 @@ class Settings: UITableViewController{
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
 
                 // Gradient Label
+                gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
                 gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
                 gradientLabel.center.y = cell.center.y
                 gradientLabel.applyGradient(colours: [colourSets[2][0], colourSets[2][1]])
@@ -231,6 +224,7 @@ class Settings: UITableViewController{
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
 
                 // Gradient Label
+                gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
                 gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
                 gradientLabel.center.y = cell.center.y
                 gradientLabel.applyGradient(colours: [colourSets[3][0], colourSets[3][1]])
@@ -267,9 +261,6 @@ class Settings: UITableViewController{
         
         switch section {
         case 0:
-            break
-            
-        case 1:
             UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
             UserDefaults.standard.synchronize()
             
@@ -288,7 +279,11 @@ class Settings: UITableViewController{
             
             self.present(alert, animated: true, completion: nil)
             
-        case 2:
+            // Reset Colour Defaults
+            UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "colour1")
+            UserDefaults.standard.setColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), forKey: "colour2")
+            
+        case 1:
             
             if checked[indexPath.row] == 0 {
                 

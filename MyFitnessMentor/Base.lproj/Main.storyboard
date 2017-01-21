@@ -446,7 +446,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3z7-Jg-AQk">
                                         <rect key="frame" x="0.0" y="87" width="300" height="67"/>
-                                        <state key="normal" title="Mindfulness">
+                                        <state key="normal" title="Meditation">
                                             <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -601,7 +601,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="Cardio" destination="CCh-pG-ZxL" id="eG3-ua-Lpb"/>
-                        <outlet property="Mindfulness" destination="3z7-Jg-AQk" id="2Ta-2X-QYj"/>
+                        <outlet property="Meditation" destination="3z7-Jg-AQk" id="fAJ-2l-DQ0"/>
                         <outlet property="Stretching" destination="ltX-8Q-xZc" id="caL-uA-KeN"/>
                         <outlet property="Warmup" destination="FO6-D3-hxM" id="aRK-e9-9vc"/>
                         <outlet property="Workout" destination="Lpd-0G-VoC" id="X6j-Jg-jlN"/>
@@ -1090,10 +1090,10 @@
             </objects>
             <point key="canvasLocation" x="3950" y="782"/>
         </scene>
-        <!--Mindfulness Choice-->
+        <!--Meditation Choice-->
         <scene sceneID="WGk-qs-yqb">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="7el-a7-o9h" customClass="MindfulnessChoice" customModule="MyFitnessMentor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="7el-a7-o9h" customClass="MeditationChoice" customModule="MyFitnessMentor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nhs-2l-8ae"/>
                         <viewControllerLayoutGuide type="bottom" id="SoU-0A-Rtu"/>
@@ -1114,13 +1114,13 @@
                         <barButtonItem key="rightBarButtonItem" image="QuestionMarkN" id="1ct-s3-ThE">
                             <color key="tintColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="informationButtonActionMindfulnessC:" destination="7el-a7-o9h" id="9hv-eY-jxH"/>
+                                <action selector="informationButtonActionMeditationC:" destination="7el-a7-o9h" id="iBC-7J-KHa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="informationViewMindfulnessC" destination="WLo-SJ-NEI" id="qjU-TJ-fpW"/>
+                        <outlet property="informationViewMeditationC" destination="WLo-SJ-NEI" id="kdT-Ay-8ya"/>
                         <outlet property="navigationBar" destination="CTx-5q-WzN" id="mP1-MK-Mch"/>
                         <outlet property="questionMark" destination="1ct-s3-ThE" id="Te2-YI-Sb5"/>
                     </connections>

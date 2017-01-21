@@ -53,7 +53,7 @@
 		07DEE6F31E0AADAC003B89AB /* StretchingChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F21E0AADAC003B89AB /* StretchingChoice.swift */; };
 		07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F41E0AADC3003B89AB /* CardioChoice.swift */; };
 		07DEE6F71E0AADE6003B89AB /* YogaChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F61E0AADE6003B89AB /* YogaChoice.swift */; };
-		07DEE6F91E0AADF2003B89AB /* MindfulnessChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F81E0AADF2003B89AB /* MindfulnessChoice.swift */; };
+		07DEE6F91E0AADF2003B89AB /* MeditationChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */; };
 		07DEE6FB1E0AC47F003B89AB /* WorkoutChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6FA1E0AC47F003B89AB /* WorkoutChoice.swift */; };
 		07F0E3E41DE0D4DF00D0A13F /* EmphasisSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */; };
 		07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F912071DC2D1240004C924 /* WarmupChoice.swift */; };
@@ -124,7 +124,7 @@
 		07DEE6F21E0AADAC003B89AB /* StretchingChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StretchingChoice.swift; sourceTree = "<group>"; };
 		07DEE6F41E0AADC3003B89AB /* CardioChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioChoice.swift; sourceTree = "<group>"; };
 		07DEE6F61E0AADE6003B89AB /* YogaChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaChoice.swift; sourceTree = "<group>"; };
-		07DEE6F81E0AADF2003B89AB /* MindfulnessChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindfulnessChoice.swift; sourceTree = "<group>"; };
+		07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationChoice.swift; sourceTree = "<group>"; };
 		07DEE6FA1E0AC47F003B89AB /* WorkoutChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutChoice.swift; sourceTree = "<group>"; };
 		07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmphasisSelection.swift; sourceTree = "<group>"; };
 		07F912071DC2D1240004C924 /* WarmupChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoice.swift; sourceTree = "<group>"; };
@@ -234,12 +234,12 @@
 			name = Yoga;
 			sourceTree = "<group>";
 		};
-		076A9D0E1E23B20300DC8F42 /* Mindfulness */ = {
+		076A9D0E1E23B20300DC8F42 /* Meditation */ = {
 			isa = PBXGroup;
 			children = (
-				07DEE6F81E0AADF2003B89AB /* MindfulnessChoice.swift */,
+				07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */,
 			);
-			name = Mindfulness;
+			name = Meditation;
 			sourceTree = "<group>";
 		};
 		077AC0CE1DA535830026895B = {
@@ -309,7 +309,7 @@
 				076A9D0B1E23B1F300DC8F42 /* Stretching */,
 				076A9D0C1E23B1F900DC8F42 /* Cardio */,
 				076A9D0D1E23B1FF00DC8F42 /* Yoga */,
-				076A9D0E1E23B20300DC8F42 /* Mindfulness */,
+				076A9D0E1E23B20300DC8F42 /* Meditation */,
 			);
 			name = MindBody;
 			sourceTree = "<group>";
@@ -505,7 +505,7 @@
 				0701FEDC1E322DE8004BBACE /* WarmupChoiceLower.swift in Sources */,
 				07DEE6F71E0AADE6003B89AB /* YogaChoice.swift in Sources */,
 				07FE380A1DF6E78700E7EA20 /* InformationNavigation.swift in Sources */,
-				07DEE6F91E0AADF2003B89AB /* MindfulnessChoice.swift in Sources */,
+				07DEE6F91E0AADF2003B89AB /* MeditationChoice.swift in Sources */,
 				073E70EB1E3246D600FB0B15 /* WarmupScreenCardio.swift in Sources */,
 				0701FEDE1E322E58004BBACE /* WarmupScreenLower.swift in Sources */,
 				07DEE6FB1E0AC47F003B89AB /* WorkoutChoice.swift in Sources */,

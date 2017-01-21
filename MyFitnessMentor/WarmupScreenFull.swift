@@ -229,6 +229,10 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
+    
+    // Navigation Title
+    let navigationTitle = UILabel()
+    
     // Buttons
     @IBOutlet weak var nextButton: UIBarButtonItem!
     @IBOutlet weak var backButton: UIBarButtonItem!
@@ -318,6 +322,7 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     
     
+    
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
@@ -343,7 +348,18 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         backButton.tintColor = colour1
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-heavy", size: 23)!]
+        //self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-heavy", size: 23)!]
+        
+        // Navigation Title
+        navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
+        navigationTitle.textColor = colour1
+        navigationTitle.font = UIFont(name: "SFUIDisplay-heavy", size: 23)
+        navigationTitle.text = "hehehehehhehehehhehehehhehehehhe"
+        navigationTitle.backgroundColor = .clear
+        navigationTitle.adjustsFontSizeToFitWidth = true
+        
+        self.navigationController?.navigationItem.titleView = navigationTitle
+        
         
         
         //
@@ -774,7 +790,8 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         // Navigation Bar
-        self.navigationItem.title = NSLocalizedString(warmupArray[warmupScreenIndex], comment: "")
+        //self.navigationItem.title = NSLocalizedString(warmupArray[warmupScreenIndex], comment: "")
+        self.navigationTitle.text = NSLocalizedString(warmupArray[warmupScreenIndex], comment: "")
         
         
         // Set Buttons
