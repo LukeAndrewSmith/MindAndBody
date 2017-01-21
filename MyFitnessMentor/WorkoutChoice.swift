@@ -30,6 +30,14 @@ class WorkoutChoice: UIViewController  {
     // Stack View
     @IBOutlet weak var stackView: UIStackView!
     
+    // Question Mark
+    @IBOutlet weak var questionMark: UIBarButtonItem!
+    
+    // Colours
+    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
+    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
@@ -41,8 +49,9 @@ class WorkoutChoice: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Background Gradient
-        self.view.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
+        // Colours
+        self.view.applyGradient(colours: [colour1, colour2])
+        questionMark.tintColor = colour1
         
         
         
@@ -82,7 +91,7 @@ class WorkoutChoice: UIViewController  {
         informationTitleWorkoutC.textAlignment = .center
         informationTitleWorkoutC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         informationTitleWorkoutC.textColor = .white
-        informationTitleWorkoutC.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        informationTitleWorkoutC.backgroundColor = colour2
         self.informationViewWorkoutC.addSubview(informationTitleWorkoutC)
         
         

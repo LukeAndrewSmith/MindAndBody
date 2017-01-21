@@ -31,6 +31,14 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     // PickerViews
     @IBOutlet weak var pickerView: UIPickerView!
     
+    // Question Mark
+    @IBOutlet weak var questionMark: UIBarButtonItem!
+    
+    
+    // Colours
+    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
+    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    
     
     // Add Preset
     @IBOutlet weak var addPreset: UIButton!
@@ -290,7 +298,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         let flash = UIView()
         
         flash.frame = CGRect(x: 0, y: 171.5, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
-        flash.backgroundColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        flash.backgroundColor = colour1
         self.view.alpha = 1
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
@@ -317,8 +325,10 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Background Gradient
-        self.view.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
+        // Colours
+        self.view.applyGradient(colours: [colour1, colour2])
+        questionMark.tintColor = colour1
+
         
         
         // Navigation Bar Title
@@ -335,7 +345,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         addPreset.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        addPreset.tintColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        addPreset.tintColor = colour2
         
         
         
@@ -346,7 +356,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         removePreset.setImage(tintedImage2, for: .normal)
         
         //Image Tint
-        removePreset.tintColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        removePreset.tintColor = colour2
         
         
         
@@ -354,7 +364,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), for: .normal)
+        beginButton.setTitleColor(colour2, for: .normal)
         
         
         
@@ -385,7 +395,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         informationTitle.textColor = .white
-        informationTitle.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        informationTitle.backgroundColor = colour2
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -487,7 +497,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             let inputTitle = NSLocalizedString("inputTitle", comment: "")
             //
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-            alert.view.tintColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+            alert.view.tintColor = colour1
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             
             //2. Add the text field. You can configure it however you need.

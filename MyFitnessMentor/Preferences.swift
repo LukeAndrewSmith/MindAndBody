@@ -55,6 +55,20 @@ class MyPreferences: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set Colours
+        let colour1 = UserDefaults.standard.color(forKey: "colour1")!
+        let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+        
+        self.navigationController?.navigationBar.barTintColor = colour1
+        self.navigationController?.navigationBar.tintColor = .white
+        
+        self.tabBarController?.tabBar.tintColor = colour2
+        
+        
+        
+        
+        
+        
         // Initial Content Offset
         tableView.contentOffset.y = 0
         
@@ -129,6 +143,13 @@ class MyPreferences: UITableViewController{
             
         ]
 
+        
+        
+        
+        
+        
+        
+        
         
     }
     

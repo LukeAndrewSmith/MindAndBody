@@ -318,6 +318,9 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     
     
+    // Colours
+    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
+    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
     
     
     
@@ -336,8 +339,11 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Background Gradient
         //
-        self.view.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
+        self.view.applyGradient(colours: [colour1, colour2])
       
+        backButton.tintColor = colour1
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-heavy", size: 23)!]
         
         
         //
@@ -393,7 +399,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         imageViewPosition.addSubview(rightDot)
         
         
-        leftDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        leftDot.backgroundColor = colour2
         rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
     
@@ -426,7 +432,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         explanationExpand.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        explanationExpand.tintColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        explanationExpand.tintColor = colour1
         
         
         
@@ -438,7 +444,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         explanationRetract.setImage(tintedImage2, for: .normal)
         
         //Image Tint
-        explanationRetract.tintColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        explanationRetract.tintColor = colour1
         
         
         
@@ -457,8 +463,8 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         timerButton2.setImage(tintedImage3, for: .normal)
         
         //Image Tint
-        timerButton.tintColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
-        timerButton2.tintColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        timerButton.tintColor = colour1
+        timerButton2.tintColor = colour1
         
         
         
@@ -520,7 +526,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
 
         // Start Button Timer
         //
-        timerStart.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        timerStart.backgroundColor = colour2
         timerStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
         timerStart.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
@@ -534,7 +540,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Cancel Button Timer
         //
-        timerCancel.backgroundColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        timerCancel.backgroundColor = colour1
         timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
         timerCancel.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
@@ -688,7 +694,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         setButton.addConstraints([widthHeight])
         setButton.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
         setButton.layer.borderWidth = 10
-        setButton.layer.borderColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
+        setButton.layer.borderColor = colour1.cgColor
         setButton.layer.cornerRadius = 24.5
         setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
         setButton.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
@@ -782,7 +788,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Demonstration Image
         scrollViewDemonstration.contentOffset.x = 0
-        leftDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        leftDot.backgroundColor = colour2
         rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         //demonstrationImage1.image = #imageLiteral(resourceName: "BodyImage")
         
@@ -877,7 +883,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         let flash = UIView()
         
         flash.frame = CGRect(x: 0, y: -100, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
-        flash.backgroundColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+        flash.backgroundColor = colour1
         self.view.alpha = 1
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
@@ -971,7 +977,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         let circlePath = UIBezierPath(arcCenter: countDownLabel.center, radius: CGFloat((timerView.frame.size.height-10)/2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(2*M_PI-M_PI_2), clockwise: true)
         timerShapeLayer.path = circlePath.cgPath
         timerShapeLayer.fillColor = UIColor.clear.cgColor
-        timerShapeLayer.strokeColor = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0).cgColor
+        timerShapeLayer.strokeColor = colour1.cgColor
         timerShapeLayer.lineWidth = 1.0
         
         timerView.layer.addSublayer(timerShapeLayer)
@@ -1185,7 +1191,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             
         }
         
-        sender.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+        sender.backgroundColor = colour2
         sender.isEnabled = false
         
     }
@@ -1330,7 +1336,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             
             
             leftDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            rightDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+            rightDot.backgroundColor = colour2
             
             
         } else if (extraSwipe.direction == .right) {
@@ -1343,7 +1349,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             }, completion: nil)
             
             
-            leftDot.backgroundColor = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+            leftDot.backgroundColor = colour2
             rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             
             

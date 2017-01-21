@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 
+
 extension UIView {
     func applyGradient(colours: [UIColor]) -> Void {
         self.applyGradient(colours: colours, locations: nil)
@@ -21,6 +22,24 @@ extension UIView {
         gradient.colors = colours.map { $0.cgColor }
         gradient.locations = locations
         self.layer.insertSublayer(gradient, at: 0)
+    }
+}
+
+extension UserDefaults {
+    func color(forKey defaultName: String) -> UIColor? {
+        var color: UIColor?
+        if let colorData = data(forKey: defaultName) {
+            color = NSKeyedUnarchiver.unarchiveObject(with: colorData) as? UIColor
+        }
+        return color
+    }
+    
+    func setColor(_ value: UIColor?, forKey defaultName: String) {
+        var colorData: NSData?
+        if let color = value {
+            colorData = NSKeyedArchiver.archivedData(withRootObject: color) as NSData?
+        }
+        set(colorData, forKey: defaultName)
     }
 }
 
@@ -48,6 +67,8 @@ class MindBody: UIViewController {
     // Mindfullness
     @IBOutlet weak var Mindfulness: UIButton!
     
+    // Calendar
+    @IBOutlet weak var calendar: UIBarButtonItem!
     
     // Stack Views
     @IBOutlet weak var stackView1: UIStackView!
@@ -60,14 +81,45 @@ class MindBody: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = (NSLocalizedString("mind&body", comment: ""))
+
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set Background Colour Default
+        //
         
-        // Background Gradient
-        self.view.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
+        UserDefaults.standard.register(defaults: ["didSetColour" : false])
+        
+        if UserDefaults.standard.bool(forKey: "didSetColour") == false {
+            // Did set
+            UserDefaults.standard.set(true, forKey: "didSetColour")
+            // Set Colour
+            UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "colour1")
+            UserDefaults.standard.setColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), forKey: "colour2")
+            
+            UserDefaults.standard.synchronize()
+            
+        }
+        
+        // Set Colours
+        
+        let colour1 = UserDefaults.standard.color(forKey: "colour1")!
+        let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+
+        self.view.applyGradient(colours: [colour1, colour2])
+        
+        self.navigationController?.navigationBar.tintColor = colour1
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-heavy", size: 23)!]
+        
+        calendar.tintColor = colour1
+        
+        self.tabBarController?.tabBar.tintColor = colour2
+        
+        
+        
         
       
        // Title
