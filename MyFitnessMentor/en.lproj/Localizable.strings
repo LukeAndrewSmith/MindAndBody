@@ -44,7 +44,7 @@
     "timer" = "Timer";
     "timerEnd" = "Timer Ended";
 
-    "inputTitle" = "Input Title";
+    "warmupInputTitle" = "Warmup Title";
 
 
 
@@ -203,11 +203,9 @@
 
                 // Warm Up Upper Movements Array //
                 // Mandatory
-                    "mandatory" = "Mandatory";
                 "5minCardioL" = "5min Light Cardio";
                 "5minCardioI" = "5min Intense Cardio";
                 // Foam/Ball Roll
-                    "foamRoll" = "Foam/Ball Roll";
                 "backf" = "Back Foam Roll";
                 "thoracicSpine" = "Thoracic Extensions";
                 "itBandf" = "IT Band Foam Roll";
@@ -217,7 +215,6 @@
                 "glutef" = "Glute Foam/Ball Roll";
                 "calvef" = "Calve Foam Roll";
                 // Lower Back
-                    "lowerBack" = "Lower Back";
                 "sideLegDrop" = "Side Leg Drop";
                 "sideLegKick" = "Side Leg Kick";
                 "scorpionKick" = "Scorpion Kick";
@@ -231,9 +228,8 @@
                 "groinStretch" = "Groin Stretch";
                 "gluteBridge" = "Glute Bridge";
                 "piriformisStretch" = "Piriformis Stretch";
-                "hipFlexorStretch" = "Hip Flexor Stretxh";
+                "hipFlexorStretch" = "Hip Flexor Stretch";
                 "cossakSquat" = "Cossak Squat";
-                "lateralLunge" = "Lateral Lunge";
                 "hipHinges" = "Hip Hinges";
                 "sideKicks" = "Side Kicks";
                 "frontKicks" = "Front Kicks";
@@ -400,8 +396,8 @@
     //
         //
         // Titles //
-        "case10" = "      General";
-        "case11" = "      Reset";
+        "case10" = "General";
+        "case11" = "Reset";
         "colour" = "Colour";
 
         // Contents //
@@ -410,6 +406,13 @@
         // case11
         "clearPreferences" = "Clear Preferences";
 
+        // Colour Alert //
+        "colourTitle" = "App Colour Change";
+        "colourMessage" = "\nTo register the colour change, it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone, swipe the Mind & Body app upwards to quit it.";
+
+        // Reset Alert //
+        "resetTitle" = "User Defaults Reset";
+        "resetMessage" = "\nTo register the resetting of the defaults, it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone, swipe the Mind & Body  app upwards to quit it.";
 
     //
     // Emphasis Selection //

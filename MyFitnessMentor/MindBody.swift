@@ -111,6 +111,7 @@ class MindBody: UIViewController {
 
         self.view.applyGradient(colours: [colour1, colour2])
         
+        
         self.navigationController?.navigationBar.tintColor = colour1
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-heavy", size: 23)!]
         

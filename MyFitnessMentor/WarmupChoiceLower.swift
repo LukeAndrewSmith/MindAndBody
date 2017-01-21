@@ -58,6 +58,9 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              0,
              0,
              0,
+             0,
+             0,
+             0,
              0],
             // Lower Back
             [0,
@@ -65,13 +68,15 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              0,
              0,
              0],
-            // Shoulders
+            // General Mobility
             [0,
              0,
              0,
-             0],
-            // Band Assisted
-            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0,
              0,
              0,
@@ -80,114 +85,126 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             // Accessory
             [0,
              0,
-             0,
              0]
     ]
     
+    // Personal Presets
     var warmupLowerPresets =
+    [
         [
-            [
-                // Mandatory
-                [0,
-                 0],
-                // Foam/Ball Roll
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Lower Back
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Shoulders
-                [0,
-                 0,
-                 0,
-                 0],
-                // Band Assisted
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Accessory
-                [0,
-                 0,
-                 0,
-                 0]
-            ],
-            [
-                // Mandatory
-                [0,
-                 0],
-                // Foam/Ball Roll
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Lower Back
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Shoulders
-                [0,
-                 0,
-                 0,
-                 0],
-                // Band Assisted
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Accessory
-                [0,
-                 0,
-                 0,
-                 0]
-            ],
-            [
-                // Mandatory
-                [0,
-                 0],
-                // Foam/Ball Roll
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Lower Back
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Shoulders
-                [0,
-                 0,
-                 0,
-                 0],
-                // Band Assisted
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Accessory
-                [0,
-                 0,
-                 0,
-                 0]
-            ]
+            // Mandatory
+            [0,
+             0],
+            // Foam/Ball Roll
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Lower Back
+            [0,
+             0,
+             0,
+             0,
+             0],
+            // General Mobility
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Accessory
+            [0,
+             0,
+             0]
+        ],
+        [
+            // Mandatory
+            [0,
+             0],
+            // Foam/Ball Roll
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Lower Back
+            [0,
+             0,
+             0,
+             0,
+             0],
+            // General Mobility
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Accessory
+            [0,
+             0,
+             0],
+        ],
+        [
+            // Mandatory
+            [0,
+             0],
+            // Foam/Ball Roll
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Lower Back
+            [0,
+             0,
+             0,
+             0,
+             0],
+            // General Mobility
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Accessory
+            [0,
+             0,
+             0]
+        ]
     ]
     
     
@@ -201,32 +218,36 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             // Foam/Ball Roll
             ["backf",
              "thoracicSpine",
-             "lat",
-             "pecDelt",
-             "rearDelt"],
+             "itBandf",
+             "quadf",
+             "adductorf",
+             "hamstringf",
+             "glutef",
+             "calvef"],
             // Lower Back
             ["sideLegDrop",
              "sideLegKick",
              "scorpionKick",
              "sideBend",
              "catCow"],
-            // Shoulder
-            ["wallSlides",
-             "superManShoulder",
-             "scapula",
-             "shoulderRotation"],
-            // Band/Bar/Machine Assisted
-            ["facePull",
-             "externalRotation",
-             "internalRotation",
-             "shoulderDislocation",
-             "rearDeltFly",
-             "latPullover"],
+            // General Mobility
+            ["rollBack",
+             "hipCircles",
+             "mountainClimber",
+             "groinStretch",
+             "gluteBridge",
+             "piriformisStretch",
+             "hipFlexorStretch",
+             "cossakSquat",
+             "hipHinges",
+             "sideKicks",
+             "frontKicks",
+             "jumpSquat",
+             "lunge"],
             // Accessory
             ["wristAnkleRotation",
-             "latStretch",
-             "pushUp",
-             "pullUp"]
+             "wallSlides",
+             "calveStretch"]
     ]
     
     
@@ -234,38 +255,43 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     var warmupSelectedArray =
         [
             // Mandatory
-            [1,
+            [0,
              0],
             // Foam/Ball Roll
-            [1,
+            [0,
+             0,
+             0,
+             0,
              0,
              0,
              0,
              0],
             // Lower Back
-            [1,
-             0,
-             1,
-             0,
-             1],
-            // Shoulders
-            [1,
+            [0,
              0,
              0,
-             1],
-            // Band Assisted
-            [1,
-             1,
              0,
-             1,
+             0],
+            // General Mobility
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0,
              0],
             // Accessory
-            [1,
-             1,
-             1,
-             1]
+            [0,
+             0,
+             0]
     ]
+
     
     // Picker View Array
     var pickerViewArray =
@@ -286,8 +312,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             "mandatory",
             "foamRoll",
             "lowerBack",
-            "shoulder",
-            "bandAssisted",
+            "generalMobility",
             "accessory"
     ]
     
@@ -494,7 +519,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             
             // Alert and Functions
             //
-            let inputTitle = NSLocalizedString("inputTitle", comment: "")
+            let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
             //
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
             alert.view.tintColor = colour1

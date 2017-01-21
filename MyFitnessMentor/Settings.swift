@@ -39,6 +39,7 @@ class Settings: UITableViewController{
         // Checked UserDefaults
         let checked = [1,0,0,0]
         UserDefaults.standard.register(defaults: ["colourChecked" : checked])
+        //UserDefaults.standard.set(checked, forKey: "colourChecked")
         
         UserDefaults.standard.synchronize()
     }
@@ -50,8 +51,8 @@ class Settings: UITableViewController{
         [
             [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)],
             [UIColor(red:0.38, green:0.56, blue:0.91, alpha:1.0), UIColor(red:0.65, green:0.75, blue:0.91, alpha:1.0)],
-            [UIColor.blue],
-            [UIColor.red]
+            [UIColor(red:0.17, green:0.24, blue:0.31, alpha:1.0), UIColor(red:0.20, green:0.60, blue:0.86, alpha:1.0)],
+            [UIColor(red:0.09, green:0.16, blue:0.28, alpha:1.0), UIColor(red:0.29, green:0.42, blue:0.72, alpha:1.0)]
     ]
     
 
@@ -145,9 +146,6 @@ class Settings: UITableViewController{
         let gradientLabel = UILabel()
         let checked = UserDefaults.standard.object(forKey: "colourChecked") as! [Int]
         
-        let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-        let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-        
         
         switch indexPath.section {
         case 0:
@@ -168,8 +166,8 @@ class Settings: UITableViewController{
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
                 
                 // Gradient Label
-                gradientLabel.frame = CGRect(x: 0, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
-                gradientLabel.center = CGPoint(x: cell.center.x, y: cell.center.y)
+                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
+                gradientLabel.center.y = cell.center.y
                 gradientLabel.applyGradient(colours: [colourSets[0][0], colourSets[0][1]])
                 
                 cell.addSubview(gradientLabel)
@@ -190,8 +188,8 @@ class Settings: UITableViewController{
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
 
                 // Gradient Label
-                gradientLabel.frame = CGRect(x: 0, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
-                gradientLabel.center = CGPoint(x: cell.center.x, y: cell.center.y)
+                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
+                gradientLabel.center.y = cell.center.y
                 gradientLabel.applyGradient(colours: [colourSets[1][0], colourSets[1][1]])
                 
                 cell.addSubview(gradientLabel)
@@ -210,7 +208,12 @@ class Settings: UITableViewController{
             } else if indexPath.row == 2 {
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
 
+                // Gradient Label
+                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
+                gradientLabel.center.y = cell.center.y
+                gradientLabel.applyGradient(colours: [colourSets[2][0], colourSets[2][1]])
                 
+                cell.addSubview(gradientLabel)
                 
                 
                 // Checked
@@ -227,7 +230,12 @@ class Settings: UITableViewController{
             } else if indexPath.row == 3 {
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
 
+                // Gradient Label
+                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
+                gradientLabel.center.y = cell.center.y
+                gradientLabel.applyGradient(colours: [colourSets[3][0], colourSets[3][1]])
                 
+                cell.addSubview(gradientLabel)
                 
                 
                 
@@ -254,7 +262,7 @@ class Settings: UITableViewController{
         let section = indexPath.section
         let cell = tableView.cellForRow(at: indexPath)
         var checked = UserDefaults.standard.object(forKey: "colourChecked") as! [Int]
-        
+        let colour1 = UserDefaults.standard.color(forKey: "colour1")
         
         
         switch section {
@@ -264,6 +272,21 @@ class Settings: UITableViewController{
         case 1:
             UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
             UserDefaults.standard.synchronize()
+            
+            // Alert View
+            let title = NSLocalizedString("resetTitle", comment: "")
+            let message = NSLocalizedString("resetMessage", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.view.tintColor = colour1
+            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .justified
+            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
             
         case 2:
             
@@ -285,6 +308,26 @@ class Settings: UITableViewController{
             }
         
             tableView.reloadData()
+            
+            
+            // Alert View
+            let title = NSLocalizedString("colourTitle", comment: "")
+            let message = NSLocalizedString("colourMessage", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.view.tintColor = colour1
+            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .justified
+            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
+                
+            self.present(alert, animated: true, completion: nil)
+            
+            
+            
+            
             
         default:
             break

@@ -12,16 +12,29 @@ import UIKit
 
 class CalendarScreen: UIViewController {
     
-    
+    // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
+    
+    // CheckMark
+    @IBOutlet weak var checkMark: UIBarButtonItem!
+    
+    
+    
+    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
+    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        // Background Gradient
-        self.view.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
+        // Background Gradient and Colour
+        self.view.applyGradient(colours: [colour1, colour2])
+        
+        checkMark.tintColor = colour1
+        
+        self.navigationController?.navigationBar.tintColor = colour1
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-heavy", size: 23)!]
         
         
         // Navigation Title

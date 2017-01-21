@@ -494,7 +494,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
             // Alert and Functions
             //
-            let inputTitle = NSLocalizedString("inputTitle", comment: "")
+            let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
             //
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
             alert.view.tintColor = colour1

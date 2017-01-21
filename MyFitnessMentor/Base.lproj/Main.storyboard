@@ -41,6 +41,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="checkMark" destination="rbo-ni-maD" id="hRh-eL-wla"/>
                         <outlet property="navigationBar" destination="MJ5-2C-c5K" id="pRw-6A-CaX"/>
                         <segue destination="bo6-Ea-pQj" kind="unwind" identifier="unwindToHomeScreen" unwindAction="prepareForUnwindWithSegue:" id="NAm-YC-vlE"/>
                     </connections>
@@ -101,7 +102,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ycg-nf-oeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="60" y="-2019"/>
+            <point key="canvasLocation" x="-103" y="-2019"/>
         </scene>
         <!--Emphasis Selection-->
         <scene sceneID="Ytt-ce-mRJ">
@@ -129,7 +130,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hW1-LH-yB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1173" y="-1424"/>
+            <point key="canvasLocation" x="1182" y="-1387"/>
         </scene>
         <!--MyPreferences-->
         <scene sceneID="qWL-8a-yNh">
