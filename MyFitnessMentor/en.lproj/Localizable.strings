@@ -106,7 +106,7 @@
 
 
         // Warm Up Choice Upper //
-        "warmupChoiceUpperText" = "This page includes a large selection of excellent dynamic mobility warm up movements, the selected movements (checked) indicate those to be included in the warm up. A number of warm ups have been provided and can be selected using the picker underneath the title.\nThe warm up can be customised by selecting and deselecting movements in the table to fit personal needs and preferences; if you are unsure what each movement is I suggest you select all movements and take a minute to read through them. You can save up to three custom warm ups by pressing the + button at the top right of the table (personal presets are at the bottom of the picker, below a seperator line), to remove a custom preset select it in the picker then press the - button.";
+        "warmupChoiceUpperText" = "This page includes a large selection of excellent dynamic mobility warm up movements, the selected movements (checked) indicate those to be included in the warm up. A number of warm ups have been provided and can be selected by scrolling through the picker underneath the title.\nThe warm up can be customised by selecting and deselecting movements in the table to fit personal needs and preferences; if you are unsure what each movement is I suggest you select all movements and take a minute to read through them. You can save up to three custom warm ups by pressing the + button at the top right of the table (personal presets are at the bottom of the picker, below a seperator line), to remove a custom preset select it in the picker then press the - button.";
 
 
                 // Warm Up Upper Movements Array //

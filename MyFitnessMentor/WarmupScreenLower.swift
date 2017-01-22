@@ -37,12 +37,15 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     // Sets Array
     var setsArrayF =
         [
-            // Mandatory
+           // Mandatory
             [1,
              1],
             // Foam/Ball Roll
             [1,
              3,
+             1,
+             1,
+             1,
              1,
              1,
              1],
@@ -52,23 +55,24 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
              1,
              1,
              1],
-            // Shoulder
-            [2,
-             1,
-             1,
-             1],
-            // Band/Bar/Machine Assisted
-            [2,
-             1,
-             1,
-             1,
-             1,
-             1],
-            // Accessory
+            // General Mobility
             [1,
              1,
              1,
-             1]
+             1,
+             1,
+             1,
+             1,
+             1,
+             1,
+             1,
+             1,
+             2,
+             2],
+            // Accessory
+            [1,
+             0,
+             0]
     ]
     var setsArray: [Int] = []
     // Sets Array

@@ -78,6 +78,18 @@ class MindBody: UIViewController {
     @IBOutlet weak var stackView3: UIStackView!
     
     
+    // Mind Connection Label
+    @IBOutlet weak var connectionLabel: UILabel!
+    
+    // StackView 1 bottom Constraint
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    // Mind Body Constraints
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var positionConstraint: NSLayoutConstraint!
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = (NSLocalizedString("mind&body", comment: ""))
@@ -159,11 +171,11 @@ class MindBody: UIViewController {
         Yoga.setTitle(NSLocalizedString("yoga", comment: ""), for: UIControlState.normal)
         Yoga.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Yoga.titleLabel!.textColor = .white
+        Yoga.titleLabel!.adjustsFontSizeToFitWidth = true
         Yoga.layer.borderWidth = 10
         Yoga.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         
-        
-        Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
+    Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
         Meditation.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Meditation.titleLabel!.textColor = .white
         Meditation.layer.borderWidth = 10
@@ -172,6 +184,16 @@ class MindBody: UIViewController {
         
         
         
+        // Iphone 5/SE
+        
+        if UIScreen.main.nativeBounds.height < 1334 {
+            bottomConstraint.constant = 15
+            stackView3.spacing = 15
+            
+            heightConstraint.constant = 15
+            positionConstraint.constant = -15
+            
+        }
         
         
         //

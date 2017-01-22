@@ -47,9 +47,9 @@ class Settings: UITableViewController{
     let colourSets =
         [
             [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)],
-            [UIColor(red:0.38, green:0.56, blue:0.91, alpha:1.0), UIColor(red:0.65, green:0.75, blue:0.91, alpha:1.0)],
             [UIColor(red:0.17, green:0.24, blue:0.31, alpha:1.0), UIColor(red:0.20, green:0.60, blue:0.86, alpha:1.0)],
-            [UIColor(red:0.09, green:0.16, blue:0.28, alpha:1.0), UIColor(red:0.29, green:0.42, blue:0.72, alpha:1.0)]
+            [UIColor(red:0.04, green:0.21, blue:0.22, alpha:1.0), UIColor(red:0.27, green:0.63, blue:0.55, alpha:1.0)],
+            [UIColor(red:0.37, green:0.76, blue:0.89, alpha:1.0), UIColor(red:0.90, green:0.36, blue:0.53, alpha:1.0)]
     ]
     
 

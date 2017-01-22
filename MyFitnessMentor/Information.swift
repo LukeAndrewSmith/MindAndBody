@@ -42,7 +42,6 @@ class Information: UITableViewController{
         
         // Set Colours
         let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-        let colour2 = UserDefaults.standard.color(forKey: "colour2")!
         
         self.navigationController?.navigationBar.barTintColor = colour1
         self.navigationController?.navigationBar.tintColor = .white
