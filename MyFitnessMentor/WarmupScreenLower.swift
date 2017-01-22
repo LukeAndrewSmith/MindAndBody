@@ -229,6 +229,8 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
+    
+    let navigationTitle = UILabel()
     // Buttons
     @IBOutlet weak var nextButton: UIBarButtonItem!
     @IBOutlet weak var backButton: UIBarButtonItem!
@@ -342,7 +344,18 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         backButton.tintColor = colour1
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-heavy", size: 23)!]
+        
+        // Navigation Title
+        navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
+        navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
+        navigationTitle.center.x = self.view.center.x
+        navigationTitle.textColor = colour1
+        navigationTitle.font = UIFont(name: "SFUIDisplay-heavy", size: 23)
+        navigationTitle.backgroundColor = .clear
+        navigationTitle.textAlignment = .center
+        navigationTitle.adjustsFontSizeToFitWidth = true
+        
+        self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
         
         //
@@ -773,7 +786,7 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         // Navigation Bar
-        self.navigationItem.title = NSLocalizedString(warmupArray[warmupScreenIndex], comment: "")
+        navigationTitle.text = NSLocalizedString(warmupArray[warmupScreenIndex], comment: "")
         
         
         // Set Buttons

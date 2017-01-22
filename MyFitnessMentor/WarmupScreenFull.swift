@@ -223,7 +223,6 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     
     //
-    
     // Outlets
     //
     
@@ -348,17 +347,18 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         backButton.tintColor = colour1
         
-        //self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-heavy", size: 23)!]
-        
         // Navigation Title
+        //
         navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
+        navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
+        navigationTitle.center.x = self.view.center.x
         navigationTitle.textColor = colour1
         navigationTitle.font = UIFont(name: "SFUIDisplay-heavy", size: 23)
-        navigationTitle.text = "hehehehehhehehehhehehehhehehehhe"
         navigationTitle.backgroundColor = .clear
+        navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
         
-        self.navigationController?.navigationItem.titleView = navigationTitle
+        self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
         
         
