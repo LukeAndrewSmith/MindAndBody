@@ -47,7 +47,6 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
              1,
              1,
              1,
-             1,
              1],
             // Lower Back
             [1,
@@ -83,7 +82,6 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
              "1"],
             // Foam/Ball Roll
             ["",
-             "",
              "",
              "",
              "",
@@ -128,7 +126,6 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             // Foam/Ball Roll
             [#imageLiteral(resourceName: "Thoracic"),
              #imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Lat and Delt"),
              #imageLiteral(resourceName: "Pec and Front Delt"),
              #imageLiteral(resourceName: "Rear Delt"),
              #imageLiteral(resourceName: "Lat and Delt"),
@@ -170,7 +167,6 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             // Foam/Ball Roll
             ["backfE",
              "thoracicSpineE",
-             "itBandfE",
              "quadfE",
              "adductorfE",
              "hamstringfE",

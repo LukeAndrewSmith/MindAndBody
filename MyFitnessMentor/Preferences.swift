@@ -1,5 +1,5 @@
 //
-//  MyPreferences.swift
+//  Profile.swift
 //  MyFitnessMentor
 //
 //  Created by Luke Smith on 05/10/16.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MyPreferences: UITableViewController{
+class Profile: UITableViewController{
     
     //Outlets
     @IBOutlet weak var MyPreferencesNavigationBar: UINavigationItem!

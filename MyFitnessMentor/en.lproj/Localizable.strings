@@ -211,7 +211,6 @@
         //            "foamRoll" = "Foam/Ball Roll"'
         //        "backf" = "Back Foam Roll";
         //       "thoracicSpine" = "Thoracic Extensions";
-                "itBandf" = "IT Band Foam Roll";
                 "quadf" = "Quad Foam Roll";
                 "adductorf" = "Adductor Foam Roll";
                 "hamstringf" = "Hamstring Foam Roll";
@@ -260,8 +259,7 @@
 
                 // Warm Up Lower Movements Explanations //
                 // Foam/Ball Roll //
-                "itBandfE" = "";
-                "quadfE" = "";
+                "quadfE" = "Movement:\nPosition yourself lying facedown on the floor.\nPlace the foam roller perpendicular to your legs underneath the top of your left quad, your left leg should be close to the right of the foam roller.\nBend your right hip and knee 90º so they are lying gently out to your right side.\nActivate your core and rest your upper body on your forearms whilst keeping your shoulders back and down.\nWith a comfortable amount of your weight resting on your left leg, gently roll forwards and backwards in small motions (1/4 or less of the quad), each forwards motion going a little less high up the quad and each downwards motion going a little furthur.\nWhen you reach the bottom of the quad (just above the knee), return to the top in the same motion.\n1 rep is completed when back at the top of the quad\nRepeat for the recommended number of reps then perform the movement on the right leg.\n\nNotes:\nDon't perform the movement too vigorously, it should be fairly slow and gentle.\nDon't move of the quad muscle during this movement.\n";
                 "adductorfE" = "";
                 "hamstringfE" = "";
                 "glutefE" = "";
