@@ -255,7 +255,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     var warmupSelectedArray =
         [
             // Mandatory
-            [0,
+            [1,
              0],
             // Foam/Ball Roll
             [0,
@@ -479,6 +479,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         
+        
         //
         // Preset Warmups
         //
@@ -489,6 +490,8 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         defaults.register(defaults: ["warmupLowerPresetNumber" : 0])
         
         defaults.synchronize()
+        
+        
         
     }
     

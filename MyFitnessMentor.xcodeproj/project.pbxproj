@@ -58,7 +58,7 @@
 		07F0E3E41DE0D4DF00D0A13F /* EmphasisSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */; };
 		07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F912071DC2D1240004C924 /* WarmupChoice.swift */; };
 		07F9120C1DC3F9B00004C924 /* MindBodyNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9120B1DC3F9B00004C924 /* MindBodyNavigation.swift */; };
-		07FE38081DF6E74E00E7EA20 /* PreferencesNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE38071DF6E74E00E7EA20 /* PreferencesNavigation.swift */; };
+		07FE38081DF6E74E00E7EA20 /* ProfileNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE38071DF6E74E00E7EA20 /* ProfileNavigation.swift */; };
 		07FE380A1DF6E78700E7EA20 /* InformationNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE38091DF6E78700E7EA20 /* InformationNavigation.swift */; };
 		07FE380C1DF9B3A200E7EA20 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07FE380E1DF9B3A200E7EA20 /* Localizable.strings */; };
 /* End PBXBuildFile section */
@@ -129,7 +129,7 @@
 		07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmphasisSelection.swift; sourceTree = "<group>"; };
 		07F912071DC2D1240004C924 /* WarmupChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoice.swift; sourceTree = "<group>"; };
 		07F9120B1DC3F9B00004C924 /* MindBodyNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindBodyNavigation.swift; sourceTree = "<group>"; };
-		07FE38071DF6E74E00E7EA20 /* PreferencesNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesNavigation.swift; sourceTree = "<group>"; };
+		07FE38071DF6E74E00E7EA20 /* ProfileNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileNavigation.swift; sourceTree = "<group>"; };
 		07FE38091DF6E78700E7EA20 /* InformationNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InformationNavigation.swift; path = MyFitnessMentor/InformationNavigation.swift; sourceTree = SOURCE_ROOT; };
 		07FE380D1DF9B3A200E7EA20 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		07FE380F1DF9B3C700E7EA20 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 		077AC0FC1DA54BD60026895B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				07FE38071DF6E74E00E7EA20 /* PreferencesNavigation.swift */,
+				07FE38071DF6E74E00E7EA20 /* ProfileNavigation.swift */,
 				077AC1031DA579680026895B /* Preferences.swift */,
 				07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */,
 				077AC1011DA573210026895B /* Settings.swift */,
@@ -522,7 +522,7 @@
 				0728F3E31E1D22C200EA409B /* WarmupChoiceUpper.swift in Sources */,
 				077AC1021DA573210026895B /* Settings.swift in Sources */,
 				07DEE6F31E0AADAC003B89AB /* StretchingChoice.swift in Sources */,
-				07FE38081DF6E74E00E7EA20 /* PreferencesNavigation.swift in Sources */,
+				07FE38081DF6E74E00E7EA20 /* ProfileNavigation.swift in Sources */,
 				07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */,
 				077AC1041DA579680026895B /* Preferences.swift in Sources */,
 			);

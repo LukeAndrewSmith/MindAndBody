@@ -149,7 +149,7 @@
                 "pushUp" = "Push Up";
                 "pullUp" = "Pull Up";
 
-                // Warm Up Picker Array
+                // Warm Up Picker Array Upper
                 "default" = "Default";
                 "beginner" = "Beginner";
                 "bodyWeight" = "Body Weight (no equipment)";
@@ -159,7 +159,7 @@
                 "quick" = "Quick";
 
 
-                // Warm Up Movements Explanations
+                // Warm Up Upper Movements Explanations
                 //
                 // Mandatory
                 "5minCardioLE" = "The cardio can be performed in any manner that seems fit.\nRecommended:\n- Treadmill (Walking/Jogging)\n- Step Machine\n- Biking\n- Rowing Machine \n\n\nPurpose:\nThe cardio should raise the body temperature, heart rate, and blood flow which together increase the flexibility of muscles and joints. Cardio is also an oppertunity to put aside any thoughts that might hinder the workout through awareness of the feeling of the activation/stimulation of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
@@ -204,11 +204,13 @@
 
                 // Warm Up Upper Movements Array //
                 // Mandatory
-                "5minCardioL" = "5min Light Cardio";
-                "5minCardioI" = "5min Intense Cardio";
+        //            "mandatory" = "Mandatory";
+        //        "5minCardioL" = "5min Light Cardio";
+        //        "5minCardioI" = "5min Intense Cardio";
                 // Foam/Ball Roll
-                "backf" = "Back Foam Roll";
-                "thoracicSpine" = "Thoracic Extensions";
+        //            "foamRoll" = "Foam/Ball Roll"'
+        //        "backf" = "Back Foam Roll";
+        //       "thoracicSpine" = "Thoracic Extensions";
                 "itBandf" = "IT Band Foam Roll";
                 "quadf" = "Quad Foam Roll";
                 "adductorf" = "Adductor Foam Roll";
@@ -216,13 +218,14 @@
                 "glutef" = "Glute Foam/Ball Roll";
                 "calvef" = "Calve Foam Roll";
                 // Lower Back
-                "sideLegDrop" = "Side Leg Drop";
-                "sideLegKick" = "Side Leg Kick";
-                "scorpionKick" = "Scorpion Kick";
-                "sideBend" = "Side Bends and Rotations";
-                "catCow" = "Cat Cow";
+        //            "lowerBack" = "Lower Back";
+        //        "sideLegDrop" = "Side Leg Drop";
+        //        "sideLegKick" = "Side Leg Kick";
+        //        "scorpionKick" = "Scorpion Kick";
+        //        "sideBend" = "Side Bends and Rotations";
+        //        "catCow" = "Cat Cow";
                 // General Mobility
-                    "generalMobility" = "General Mobility";
+                    "generalMobility" = "Lower Body Mobility";
                 "rollBack" = "Roll Back to Hamstring";
                 "hipCircles" = "Hip Circles";
                 "mountainClimber" = "Mountain Climber Stretch";
@@ -238,11 +241,12 @@
                 "lunge" = "Lunge";
                 // Accessory
                     "accessory" = "Accessory";
-                "wristAnkleRotation" = "Wrist & Ankle Rotations";
-                "wallSlides" = "Wall Slides";
+         //       "wristAnkleRotation" = "Wrist & Ankle Rotations";
+         //       "wallSlides" = "Wall Slides";
                 "calveStretch" = "Calve Stretch";
 
-                // Warm Up Picker Array
+
+                // Warm Up Picker Array Lower
                     "default" = "Default";
                 "beginner" = "Beginner";
                 "bodyWeight" = "Body Weight (no equipment)";
@@ -250,6 +254,34 @@
                 "strength" = "Strength";
                 "highIntensity" = "High Intensity";
                 "quick" = "Quick";
+
+
+
+
+                // Warm Up Lower Movements Explanations //
+                // Foam/Ball Roll //
+                "itBandfE" = "";
+                "quadfE" = "";
+                "adductorfE" = "";
+                "hamstringfE" = "";
+                "glutefE" = "";
+                "calvefE" = "";
+                // General Lower Body Mobility //
+                "rollBackE" = "";
+                "hipCirclesE" = "";
+                "mountainClimberE" = "";
+                "groinStretchE" = "";
+                "gluteBridgeE" = "";
+                "piriformisStretchE" = "";
+                "hipFlexorStretchE" = "";
+                "cossakSquatE" = "";
+                "hipHingesE" = "";
+                "sideKicksE" = "";
+                "frontKicksE" = "";
+                "jumpSquatE" = "";
+                "lungeE" = "";
+                // Accessory //
+                "calveStretchE" = "";
 
 
 

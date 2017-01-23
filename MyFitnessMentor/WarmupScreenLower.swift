@@ -82,35 +82,38 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             ["1",
              "1"],
             // Foam/Ball Roll
-            ["2-5",
-             "5-10",
-             "5-10",
-             "30-60s",
-             "30-60s"],
+            ["",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             ""],
             // Lower Back
-            ["5-10",
-             "5-10",
-             "5-10",
-             "5-10",
-             "15-20"],
-            // Shoulder
-            ["10-20",
-             "5-10",
-             "15",
-             "10"],
-            // Band/Bar/Machine Assisted
-            ["10-15",
-             "5-15",
-             "5-10",
-             "5-10",
-             "10-15",
-             "10-20",],
+            ["",
+             "",
+             "",
+             "",
+             ""],
+            // General Mobility
+            ["",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             ""],
             // Accessory
-            ["15-30s",
-             "15-30s",
-             NSLocalizedString("asNecessary", comment: ""),
-             NSLocalizedString("asNecessary", comment: "")
-            ]
+            ["",
+             "",
+             ""]
     ]
     var repsArray: [String] = []
     // Demonstration Array
@@ -127,6 +130,9 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
              #imageLiteral(resourceName: "Thoracic"),
              #imageLiteral(resourceName: "Lat and Delt"),
              #imageLiteral(resourceName: "Pec and Front Delt"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Lat and Delt"),
+             #imageLiteral(resourceName: "Pec and Front Delt"),
              #imageLiteral(resourceName: "Rear Delt")],
             // Lower Back
             [#imageLiteral(resourceName: "Core"),
@@ -134,23 +140,24 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
              #imageLiteral(resourceName: "Core"),
              #imageLiteral(resourceName: "Core"),
              #imageLiteral(resourceName: "Spine")],
-            // Shoulder
-            [#imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Back and Shoulder"),
-             #imageLiteral(resourceName: "Serratus"),
-             #imageLiteral(resourceName: "Shoulder")],
-            // Band/Bar/Machine Assisted
+            // General Mobility
             [#imageLiteral(resourceName: "Upper Back and Shoulder"),
              #imageLiteral(resourceName: "Rear Delt"),
              #imageLiteral(resourceName: "Rear Delt"),
              #imageLiteral(resourceName: "Shoulder"),
              #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Back"),
+             #imageLiteral(resourceName: "Upper Back and Shoulder"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Back"),
              #imageLiteral(resourceName: "Back")],
             // Accessory
             [#imageLiteral(resourceName: "Wrist and Ankle"),
-             #imageLiteral(resourceName: "Lat"),
-             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-             #imageLiteral(resourceName: "Back and Bicep")]
+             #imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep")]
     ]
     
     var targetAreaArray: [UIImage] = []
@@ -163,32 +170,36 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             // Foam/Ball Roll
             ["backfE",
              "thoracicSpineE",
-             "latE",
-             "pecDeltE",
-             "rearDeltE"],
+             "itBandfE",
+             "quadfE",
+             "adductorfE",
+             "hamstringfE",
+             "glutefE",
+             "calvefE"],
             // Lower Back
             ["sideLegDropE",
              "sideLegKickE",
              "scorpionKickE",
              "sideBendE",
              "catCowE"],
-            // Shoulder
-            ["wallSlidesE",
-             "superManShoulderE",
-             "scapulaE",
-             "shoulderRotationE"],
-            // Band/Bar/Machine Assisted
-            ["facePullE",
-             "externalRotationE",
-             "internalRotationE",
-             "shoulderDislocationE",
-             "rearDeltFlyE",
-             "latPulloverE"],
+            // General Mobility
+            ["rollBackE",
+            "hipCirclesE",
+            "mountainClimberE",
+            "groinStretchE",
+            "gluteBridgeE",
+            "piriformisStretchE",
+            "hipFlexorStretchE",
+            "cossakSquatE",
+            "hipHingesE",
+            "sideKicksE",
+            "frontKicksE",
+            "jumpSquatE",
+            "lungeE",],
             // Accessory
             ["wristAnkleRotationE",
-             "latStretchE",
-             "pushUpE",
-             "pullUpE"]
+             "wallSlidesE",
+             "calveStretchE"]
     ]
     var explanationArray: [String] = []
     
@@ -265,13 +276,14 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     // Image Views
     let demonstrationImage1 = UIImageView()
     let demonstrationImage2 = UIImageView()
+    // Image Expand
+    @IBOutlet weak var imageExpand: UIButton!
     
     
     
     
     // Explanation
     @IBOutlet weak var explanationExpand: UIButton!
-    @IBOutlet weak var explanationRetract: UIButton!
     
     
     // Timer
@@ -431,6 +443,20 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         
+        // Image Expand
+        let origImageImage = UIImage(named: "Plus")
+        let tintedImageImage = origImageImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        imageExpand.setImage(tintedImageImage, for: .normal)
+        
+        //Image Tint
+        imageExpand.tintColor = colour2
+        
+
+        
+        
+        
+        
         
         
         // Explanation Text
@@ -449,18 +475,6 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         //Image Tint
         explanationExpand.tintColor = colour1
-        
-        
-        
-        
-        // Retract Button
-        let origImage2 = UIImage(named: "Minus")
-        let tintedImage2 = origImage2?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        // Set Image
-        explanationRetract.setImage(tintedImage2, for: .normal)
-        
-        //Image Tint
-        explanationRetract.tintColor = colour1
         
         
         
@@ -592,15 +606,6 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         
-        
-        
-        
-        
-        
-        
-        // Explanation
-        self.view.bringSubview(toFront: explanationExpand)
-        self.explanationRetract.alpha = 0
         
         
         
@@ -848,12 +853,6 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         // Explanation
-        
-        if isExpanded == true {
-            retractExplanation()
-            self.explanationRetract.alpha = 0
-            self.explanationExpand.alpha = 1
-        }
         
         self.scrollViewExplanation.contentOffset.y = 0
         
@@ -1289,7 +1288,6 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Ensure Explanation Hidden
         self.scrollViewExplanation.alpha = 1
-        self.explanationRetract.alpha = 0
         self.explanationExpand.alpha = 1
         
         
@@ -1298,43 +1296,313 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     
     
-    // Expand and Retract Explanation
     
     
-    var isExpanded = false
+    // Expand and Retract Images
+    //
     
-    func expandExplanation() {
-        self.scrollViewExplanation.frame.size.height = self.scrollViewExplanation.frame.size.height + 73.5
+    
+    let imageViewExpanded = UIView()
+    let backgroundViewExpanded = UIButton()
+    let cancelButtonImage = UIButton()
+    
+    let bodyImageExpanded = UIImageView()
+    let demonstrationImageExpanded = UIScrollView()
+    
+    let demonstrationImageExpandedPosition = UIView()
+    
+    
+    @IBAction func expandImage(_ sender: Any) {
+
         
-        isExpanded = true
+        //Screen Size
+        //
+        let width = view.frame.size.width
+        let height = view.frame.size.height
+        
+        
+        // View
+        //
+        imageViewExpanded.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: (view.frame.size.height * (2/3) + 24.5))
+        imageViewExpanded.center.x = width/2
+        imageViewExpanded.center.y = height/2
+        imageViewExpanded.isUserInteractionEnabled = true
+        
+        imageViewExpanded.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+        
+        
+        // Background View
+        //
+        backgroundViewExpanded.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        backgroundViewExpanded.backgroundColor = .black
+        backgroundViewExpanded.alpha = 0.5
+        
+        backgroundViewExpanded.addTarget(self, action: #selector(retractImage), for: .touchUpInside)
+        
+        
+        
+        
+        // Cancel Button
+        //
+        cancelButtonImage.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
+        cancelButtonImage.center.y = imageViewExpanded.frame.minY/2
+        cancelButtonImage.center.x = imageViewExpanded.frame.maxX - (imageViewExpanded.frame.minY/2)
+        
+        cancelButtonImage.addTarget(self, action: #selector(retractImage), for: .touchUpInside)
+        cancelButtonImage.layer.cornerRadius = 24.5
+        cancelButtonImage.layer.masksToBounds = true
+        
+        
+        cancelButtonImage.backgroundColor = colour2
+        
+        let origImage = UIImage(named: "Minus")
+        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        cancelButtonImage.setImage(tintedImage, for: .normal)
+        //Image Tint
+        cancelButtonImage.tintColor = colour1
+        
+        
+        
+        
+        
+        // Demonstration or Body Image
+        //
+        // Demonstration
+        let demonstrationButton = UIButton()
+        demonstrationButton.isEnabled = true
+        demonstrationButton.frame = CGRect(x: 0, y: 0, width: imageViewExpanded.frame.size.width/2, height: 24.5)
+        demonstrationButton.setTitle(NSLocalizedString("demonstration", comment: ""), for: .normal)
+        demonstrationButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        demonstrationButton.addTarget(self, action: #selector(demonstrationImageButton(_:)), for: .touchUpInside)
+        
+        imageViewExpanded.addSubview(demonstrationButton)
+        
+        
+        demonstrationButton.backgroundColor = colour1
+        demonstrationButton.titleLabel?.textColor = colour2
+        
+        // Target
+        let targetButton = UIButton()
+        targetButton.frame = CGRect(x: imageViewExpanded.frame.size.width/2, y: 0, width: imageViewExpanded.frame.size.width/2, height: 24.5)
+        
+        targetButton.setTitle(NSLocalizedString("targetArea", comment: ""), for: .normal)
+        targetButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        targetButton.addTarget(self, action: #selector(bodyImageButton(_:)), for: .touchUpInside)
+        
+        targetButton.backgroundColor = colour2
+        targetButton.titleLabel?.textColor = colour1
+        
+        
+        imageViewExpanded.addSubview(targetButton)
+        
+        
+        
+        
+        
+        // View Contents
+        //
+        // Body Image
+        bodyImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5)
+        bodyImageExpanded.image = targetAreaArray[warmupScreenIndex]
+        
+        imageViewExpanded.addSubview(bodyImageExpanded)
+        
+        
+        
+        // Demonstration Image
+        demonstrationImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5 - 12.5)
+        demonstrationImageExpanded.contentSize = CGSize(width: demonstrationImageExpanded.frame.size.width * 2, height: demonstrationImageExpanded.frame.size.height)
+        
+        
+        
+        
+        
+        
+        // Demonstration Image Position
+        demonstrationImageExpandedPosition.frame = CGRect(x: 0, y: demonstrationImageExpanded.frame.maxY, width: demonstrationImageExpanded.frame.size.width, height: 12.25)
+        demonstrationImageExpandedPosition.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+        
+        
+        
+        
+        
+        // Add Subviews
+        //
+        view.addSubview(backgroundViewExpanded)
+        view.addSubview(imageViewExpanded)
+        view.addSubview(cancelButtonImage)
+        
+        
+        view.bringSubview(toFront: backgroundViewExpanded)
+        view.bringSubview(toFront: imageViewExpanded)
+        view.bringSubview(toFront: cancelButtonImage)
+        
+        
+        nextButton.isEnabled = false
+        backButton.isEnabled = false
+        
+    }
+    
+    @IBAction func demonstrationImageButton(_ sender: Any) {
+        
+        imageViewExpanded.bringSubview(toFront: demonstrationImageExpanded)
+        demonstrationImageExpanded.alpha = 1
+        bodyImageExpanded.alpha = 0
+        
+    }
+    
+    @IBAction func bodyImageButton(_ sender: Any) {
+        
+        imageViewExpanded.bringSubview(toFront: bodyImageExpanded)
+        bodyImageExpanded.alpha = 1
+        demonstrationImageExpanded.alpha = 0
+        
     }
     
     
-    func retractExplanation() {
-        self.scrollViewExplanation.frame.size.height = self.scrollViewExplanation.frame.size.height - 73.5
+    @IBAction func retractImage(_ sender: Any) {
         
-        isExpanded = false
+        imageViewExpanded.removeFromSuperview()
+        backgroundViewExpanded.removeFromSuperview()
+        cancelButtonImage.removeFromSuperview()
+        
+        
+        nextButton.isEnabled = true
+        backButton.isEnabled = true
     }
     
     
     
-    @IBAction func explanationExpandAction(_ sender: Any) {
+    
+    
+    
+    // Expand Explanation
+    //
+    let scrollViewExplanationE = UIScrollView()
+    let backgroundViewExplanationE = UIButton()
+    let cancelButtonExplanationE = UIButton()
+    
+    let explanationLabelE = UILabel()
+    
+    
+    
+    
+    
+    
+    // Expand Explanation
+    //
+    
+    @IBAction func expandExplanation(_ sender: Any) {
         
-        expandExplanation()
         
-        self.explanationExpand.alpha = 0
-        self.explanationRetract.alpha = 1
+        // View
+        //
+        scrollViewExplanationE.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: (view.frame.size.height * (2/3) + 24.5))
+        scrollViewExplanationE.center.x = self.view.frame.size.width/2
+        scrollViewExplanationE.center.y = self.view.frame.size.height/2
+        
+        scrollViewExplanationE.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        
+        
+        // Background View
+        //
+        backgroundViewExplanationE.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        backgroundViewExplanationE.backgroundColor = .black
+        backgroundViewExplanationE.alpha = 0.5
+        
+        backgroundViewExplanationE.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
+        
+        
+        
+        
+        // Cancel Button
+        //
+        cancelButtonExplanationE.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
+        cancelButtonExplanationE.center.y = scrollViewExplanationE.frame.minY/2
+        cancelButtonExplanationE.center.x = scrollViewExplanationE.frame.maxX - (scrollViewExplanationE.frame.minY/2)
+        
+        cancelButtonExplanationE.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
+        cancelButtonExplanationE.layer.cornerRadius = 24.5
+        cancelButtonExplanationE.layer.masksToBounds = true
+        
+        
+        cancelButtonExplanationE.backgroundColor = colour2
+        
+        let origImage = UIImage(named: "Minus")
+        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        cancelButtonExplanationE.setImage(tintedImage, for: .normal)
+        //Image Tint
+        cancelButtonExplanationE.tintColor = colour1
+        
+        
+        
+        
+        // Contents
+        //
+        explanationLabelE.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        explanationLabelE.textColor = .black
+        explanationLabelE.textAlignment = .justified
+        explanationLabelE.lineBreakMode = NSLineBreakMode.byWordWrapping
+        explanationLabelE.numberOfLines = 0
+        
+        
+        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[warmupScreenIndex], comment: ""))
+        let paragraphStyleEE = NSMutableParagraphStyle()
+        paragraphStyleEE.alignment = .justified
+        paragraphStyleEE.hyphenationFactor = 1
+        
+        attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
+        
+        explanationLabelE.attributedText = attributedStringE
+        
+        explanationLabelE.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width - 20, height: 0)
+        explanationLabelE.sizeToFit()
+        
+        // Scroll View
+        scrollViewExplanationE.addSubview(explanationLabelE)
+        scrollViewExplanationE.contentSize = CGSize(width: self.view.frame.size.width, height: explanationLabelE.frame.size.height + 20)
+        
+        scrollViewExplanationE.contentOffset.y = 0
+        
+        
+        
+        
+        
+        
+        // Add Views
+        view.addSubview(scrollViewExplanationE)
+        view.addSubview(backgroundViewExplanationE)
+        view.addSubview(cancelButtonExplanationE)
+        
+        view.bringSubview(toFront: scrollViewExplanationE)
+        view.bringSubview(toFront: cancelButtonExplanationE)
+        
+        
+        nextButton.isEnabled = false
+        backButton.isEnabled = false
         
     }
     
-    @IBAction func explanationRetractAction(_ sender: Any) {
-        
-        retractExplanation()
-        
-        self.explanationRetract.alpha = 0
-        self.explanationExpand.alpha = 1
-    }
     
+    
+    @IBAction func retractExplanation(_ sender: Any) {
+        
+        
+        scrollViewExplanationE.removeFromSuperview()
+        backgroundViewExplanationE.removeFromSuperview()
+        cancelButtonExplanationE.removeFromSuperview()
+        
+        explanationLabelE.removeFromSuperview()
+        
+        
+        nextButton.isEnabled = true
+        backButton.isEnabled = true
+    }
     
     
     
