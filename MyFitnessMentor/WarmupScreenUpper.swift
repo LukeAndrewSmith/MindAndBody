@@ -262,10 +262,14 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         let demonstrationImage1 = UIImageView()
         let demonstrationImage2 = UIImageView()
     
+    // Expand Image
+    @IBOutlet weak var imageExpand: UIButton!
     
     
     
-    // Explanation
+    
+    
+    // Explanation Expand
     @IBOutlet weak var explanationExpand: UIButton!
     @IBOutlet weak var explanationRetract: UIButton!
     
@@ -419,12 +423,30 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         
-        
-        
         // Body Image View
         bodyImage.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
         
        
+        
+        
+        // Image Expand
+        let origImageImage = UIImage(named: "Plus")
+        let tintedImageImage = origImageImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+    imageExpand.setImage(tintedImageImage, for: .normal)
+        
+        //Image Tint
+        imageExpand.tintColor = colour2
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1293,10 +1315,169 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
     }
     
+    
+    
+    
+    
+    // Expand and Retract Images
+    //
+    
+    
+    let imageViewExpanded = UIView()
+    let backgroundViewExpanded = UIButton()
+    let cancelButtonImage = UIButton()
+    
+    let bodyImageExpanded = UIImageView()
+    let demonstrationImageExpanded = UIScrollView()
+    
+    @IBAction func expandImage(_ sender: Any) {
+    
+        
+        //Screen Size
+        let width = view.frame.size.width
+        let height = view.frame.size.height
+        
+        // Image View
+        imageViewExpanded.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: (view.frame.size.height * (2/3) + 24.5))
+        imageViewExpanded.center.x = width/2
+        imageViewExpanded.center.y = height/2
+        imageViewExpanded.isUserInteractionEnabled = true
+
+        imageViewExpanded.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        
+        
+            
+        // Background View
+        backgroundViewExpanded.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        backgroundViewExpanded.backgroundColor = .black
+        backgroundViewExpanded.alpha = 0.5
+        
+        backgroundViewExpanded.addTarget(self, action: #selector(retractImage), for: .touchUpInside)
+        
+        
+        
+        // Cancel Button
+        cancelButtonImage.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
+        cancelButtonImage.center.y = imageViewExpanded.frame.minY/2
+        cancelButtonImage.center.x = imageViewExpanded.frame.maxX - (imageViewExpanded.frame.minY/2)
+        
+        cancelButtonImage.addTarget(self, action: #selector(retractImage), for: .touchUpInside)
+        cancelButtonImage.layer.cornerRadius = 24.5
+        cancelButtonImage.layer.masksToBounds = true
+        
+        
+        
+       
+        
+        cancelButtonImage.backgroundColor = colour2
+
+        let origImage = UIImage(named: "Minus")
+        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        cancelButtonImage.setImage(tintedImage, for: .normal)
+        //Image Tint
+        cancelButtonImage.tintColor = colour1
+        
+
+        
+        
+        
+        // Demonstration or Body Image
+        //
+        // Demonstration
+        let demonstration = UIButton()
+        demonstration.isEnabled = true
+        demonstration.frame = CGRect(x: 0, y: 0, width: imageViewExpanded.frame.size.width/2, height: 24.5)
+    demonstration.setTitle(NSLocalizedString("demonstration", comment: ""), for: .normal)
+        demonstration.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        demonstration.addTarget(self, action: #selector(demonstrationImageButton(_:)), for: .touchUpInside)
+        
+        imageViewExpanded.addSubview(demonstration)
+        
+        
+        demonstration.backgroundColor = colour1
+        demonstration.titleLabel?.textColor = colour2
+        
+        
+        // Body
+        let target = UIButton()
+        target.isEnabled = true
+        target.frame = CGRect(x: imageViewExpanded.frame.size.width/2, y: 0, width: imageViewExpanded.frame.size.width/2, height: 24.5)
+        
+        target.setTitle(NSLocalizedString("targetArea", comment: ""), for: .normal)
+        target.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        target.addTarget(self, action: #selector(bodyImageButton(_:)), for: .touchUpInside)
+        
+        imageViewExpanded.addSubview(target)
+
+        target.backgroundColor = colour2
+        target.titleLabel?.textColor = colour1
+        
+        
+        
+        
+        // View Contents
+        bodyImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5)
+        bodyImageExpanded.image = targetAreaArray[warmupScreenIndex]
+        
+        imageViewExpanded.addSubview(bodyImageExpanded)
+        
+        
+        
+        
+        
+        // Add Subviews
+        view.addSubview(backgroundViewExpanded)
+        view.addSubview(imageViewExpanded)
+        view.addSubview(cancelButtonImage)
+        
+        
+        view.bringSubview(toFront: backgroundViewExpanded)
+        view.bringSubview(toFront: imageViewExpanded)
+        view.bringSubview(toFront: cancelButtonImage)
+        
+        
+        nextButton.isEnabled = false
+        backButton.isEnabled = false
+        
+    }
+    
+    @IBAction func demonstrationImageButton(_ sender: Any) {
+        
+        imageViewExpanded.bringSubview(toFront: demonstrationImageExpanded)
+        
+        
+    }
+    
+    @IBAction func bodyImageButton(_ sender: Any) {
+        
+        imageViewExpanded.bringSubview(toFront: bodyImageExpanded)
+        
+    }
+    
+    
+    @IBAction func retractImage(_ sender: Any) {
+        
+        imageViewExpanded.removeFromSuperview()
+    backgroundViewExpanded.removeFromSuperview()
+        cancelButtonImage.removeFromSuperview()
+        
+        
+        nextButton.isEnabled = true
+        backButton.isEnabled = true
+    }
+    
+    
+    
+    
+    
+    
+    
+    
   
     
     // Expand and Retract Explanation
-    
+    //
     
     var isExpanded = false
     

@@ -1349,10 +1349,11 @@
         <scene sceneID="cdh-mn-n1U">
             <objects>
                 <navigationController id="sEP-eW-cs4" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="JrB-Q7-XLk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="JrB-Q7-XLk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1429,7 +1430,7 @@
                                     </stackView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sUO-IB-vFH">
                                         <rect key="frame" x="188" y="0.0" width="187" height="201"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                        <color key="backgroundColor" red="0.094117647058823528" green="0.098039215686274508" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
@@ -1547,16 +1548,30 @@
                                     <action selector="explanationRetractAction:" destination="hXa-Gd-Ugt" eventType="touchUpInside" id="nAT-l7-EUG"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIS-mA-czg">
+                                <rect key="frame" x="326" y="123" width="49" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="9gm-z0-S8c"/>
+                                    <constraint firstAttribute="height" constant="49" id="bS8-tx-4lK"/>
+                                </constraints>
+                                <color key="tintColor" red="0.90980392160000001" green="0.43529411759999997" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="Plus"/>
+                                <connections>
+                                    <action selector="expandImage:" destination="hXa-Gd-Ugt" eventType="touchUpInside" id="qgh-xj-41G"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="eYj-ij-PMD" secondAttribute="trailing" id="2RP-f9-Q7b"/>
+                            <constraint firstItem="l4B-Y3-gv3" firstAttribute="top" secondItem="cIS-mA-czg" secondAttribute="bottom" id="5ek-UA-bkY"/>
                             <constraint firstItem="Wzb-Q5-pmg" firstAttribute="top" secondItem="aZO-gW-rVa" secondAttribute="bottom" id="5nD-qs-cEb"/>
                             <constraint firstItem="Wzb-Q5-pmg" firstAttribute="top" secondItem="DwW-1r-st3" secondAttribute="bottom" id="7rv-PX-VoU"/>
                             <constraint firstAttribute="trailing" secondItem="l4B-Y3-gv3" secondAttribute="trailing" id="8Lc-wr-7um"/>
                             <constraint firstItem="cid-Vm-yFh" firstAttribute="leading" secondItem="45i-Of-NFx" secondAttribute="leading" id="8cO-Ux-VQs"/>
                             <constraint firstAttribute="trailing" secondItem="Wzb-Q5-pmg" secondAttribute="trailing" id="8l2-CK-2ey"/>
                             <constraint firstItem="cid-Vm-yFh" firstAttribute="top" secondItem="Wzb-Q5-pmg" secondAttribute="bottom" constant="49" id="B75-Md-r3S"/>
+                            <constraint firstAttribute="trailing" secondItem="cIS-mA-czg" secondAttribute="trailing" id="EYD-dW-eUV"/>
                             <constraint firstItem="l4B-Y3-gv3" firstAttribute="leading" secondItem="45i-Of-NFx" secondAttribute="leading" id="I4R-aQ-Wqr"/>
                             <constraint firstItem="eYj-ij-PMD" firstAttribute="leading" secondItem="2Bu-xO-SBO" secondAttribute="trailing" id="IyJ-Fu-nBx"/>
                             <constraint firstItem="Uhe-O6-VRo" firstAttribute="leading" secondItem="45i-Of-NFx" secondAttribute="leading" constant="3" id="KWm-ch-Kyv"/>
@@ -1585,6 +1600,7 @@
                             <constraint firstItem="hH5-42-MVV" firstAttribute="leading" secondItem="45i-Of-NFx" secondAttribute="leading" constant="3" id="ztq-R2-E3B"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Title" id="iLN-TN-dgV">
                         <barButtonItem key="leftBarButtonItem" title="&lt;" id="aam-3A-tUw">
                             <color key="tintColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -1606,6 +1622,7 @@
                         <outlet property="explanationExpand" destination="aZO-gW-rVa" id="ZoE-Af-btw"/>
                         <outlet property="explanationLabel" destination="Uhe-O6-VRo" id="015-sk-PqD"/>
                         <outlet property="explanationRetract" destination="2Bu-xO-SBO" id="otL-DE-2f2"/>
+                        <outlet property="imageExpand" destination="cIS-mA-czg" id="m9A-v6-9b3"/>
                         <outlet property="imageViewPosition" destination="w43-h8-ZbF" id="uul-bP-Dpm"/>
                         <outlet property="navigationBar" destination="iLN-TN-dgV" id="YII-rm-V7y"/>
                         <outlet property="nextButton" destination="5Jf-ud-jcH" id="kus-r5-ZgK"/>

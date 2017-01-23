@@ -409,11 +409,11 @@
 
         // Colour Alert //
         "colourTitle" = "App Colour Change";
-        "colourMessage" = "\nTo register the colour change, it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone, swipe the Mind & Body app upwards to quit it.";
+        "colourMessage" = "\nTo register the colour change, it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone and swipe the Mind & Body app upwards to quit it.";
 
         // Reset Alert //
         "resetTitle" = "User Defaults Reset";
-        "resetMessage" = "\nTo register the resetting of the defaults, it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone, swipe the Mind & Body  app upwards to quit it.";
+        "resetMessage" = "\nTo register the resetting of the defaults, it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone and swipe the Mind & Body  app upwards to quit it.";
 
     //
     // Emphasis Selection //
