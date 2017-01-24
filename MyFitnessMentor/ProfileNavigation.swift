@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PreferencesNaviagtion: UINavigationController {
+class ProfileNaviagtion: UINavigationController {
     
     
     override func viewDidLoad() {

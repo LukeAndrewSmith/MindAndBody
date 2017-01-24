@@ -25,7 +25,7 @@
 		077AC0F21DA535840026895B /* MyFitnessMentorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0F11DA535840026895B /* MyFitnessMentorTests.swift */; };
 		077AC1001DA54C810026895B /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0FF1DA54C810026895B /* Information.swift */; };
 		077AC1021DA573210026895B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC1011DA573210026895B /* Settings.swift */; };
-		077AC1041DA579680026895B /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC1031DA579680026895B /* Preferences.swift */; };
+		077AC1041DA579680026895B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC1031DA579680026895B /* Profile.swift */; };
 		077AC1121DA7936E0026895B /* SF-UI-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC1091DA7936E0026895B /* SF-UI-Display-Black.otf */; };
 		077AC1131DA7936E0026895B /* SF-UI-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC10A1DA7936E0026895B /* SF-UI-Display-Bold.otf */; };
 		077AC1141DA7936E0026895B /* SF-UI-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC10B1DA7936E0026895B /* SF-UI-Display-Heavy.otf */; };
@@ -96,7 +96,7 @@
 		077AC0F31DA535840026895B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		077AC0FF1DA54C810026895B /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		077AC1011DA573210026895B /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		077AC1031DA579680026895B /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		077AC1031DA579680026895B /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		077AC1091DA7936E0026895B /* SF-UI-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Black.otf"; sourceTree = "<group>"; };
 		077AC10A1DA7936E0026895B /* SF-UI-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Bold.otf"; sourceTree = "<group>"; };
 		077AC10B1DA7936E0026895B /* SF-UI-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Heavy.otf"; sourceTree = "<group>"; };
@@ -292,7 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				07FE38071DF6E74E00E7EA20 /* ProfileNavigation.swift */,
-				077AC1031DA579680026895B /* Preferences.swift */,
+				077AC1031DA579680026895B /* Profile.swift */,
 				07F0E3E31DE0D4DF00D0A13F /* EmphasisSelection.swift */,
 				077AC1011DA573210026895B /* Settings.swift */,
 			);
@@ -524,7 +524,7 @@
 				07DEE6F31E0AADAC003B89AB /* StretchingChoice.swift in Sources */,
 				07FE38081DF6E74E00E7EA20 /* ProfileNavigation.swift in Sources */,
 				07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */,
-				077AC1041DA579680026895B /* Preferences.swift in Sources */,
+				077AC1041DA579680026895B /* Profile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

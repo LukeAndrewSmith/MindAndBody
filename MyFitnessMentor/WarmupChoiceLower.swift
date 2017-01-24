@@ -235,8 +235,8 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              "hipFlexorStretch",
              "cossakSquat",
              "hipHinges",
-             "sideKicks",
-             "frontKicks",
+             "sideLegSwings",
+             "frontLegSwings",
              "jumpSquat",
              "lunge"],
             // Accessory
