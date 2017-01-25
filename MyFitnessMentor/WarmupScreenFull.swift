@@ -45,6 +45,11 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
              3,
              1,
              1,
+             1,
+             1,
+             1,
+             1,
+             1,
              1],
             // Lower Back
             [1,
@@ -64,8 +69,24 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
              1,
              1,
              1],
+            // General Mobility
+            [1,
+             1,
+             1,
+             1,
+             1,
+             2,
+             1,
+             1,
+             1,
+             2,
+             1,
+             1,
+             2,
+             2],
             // Accessory
             [1,
+             1,
              1,
              1,
              1]
@@ -78,11 +99,16 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             ["1",
              "1"],
             // Foam/Ball Roll
-            ["2-5",
+            ["2-7",
              "5-10",
-             "5-10",
-             "30-60s",
-             "30-60s"],
+             "2-7",
+             "30-60",
+             "30-60",
+             "2-7",
+             "2-7",
+             "2-7",
+             "2-7",
+             "2-7"],
             // Lower Back
             ["5-10",
              "5-10",
@@ -100,13 +126,28 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
              "5-10",
              "5-10",
              "10-15",
-             "10-20",],
+             "10-20"],
+            // General Mobility
+            ["10-15",
+             "5-10",
+             "5-10",
+             "5-10",
+             "10-15",
+             "15-30s",
+             "15-30s",
+             "5-10",
+             "30-60s",
+             "10-20",
+             "10-20",
+             "10-20",
+             "5-15",
+             "10-15"],
             // Accessory
             ["15-30s",
              "15-30s",
+             "15-30s",
              NSLocalizedString("asNecessary", comment: ""),
-             NSLocalizedString("asNecessary", comment: "")
-            ]
+             NSLocalizedString("asNecessary", comment: "")]
     ]
     var repsArray: [String] = []
     // Demonstration Array
@@ -123,7 +164,12 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
              #imageLiteral(resourceName: "Thoracic"),
              #imageLiteral(resourceName: "Lat and Delt"),
              #imageLiteral(resourceName: "Pec and Front Delt"),
-             #imageLiteral(resourceName: "Rear Delt")],
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Quad"),
+             #imageLiteral(resourceName: "Adductor"),
+             #imageLiteral(resourceName: "Hamstring"),
+             #imageLiteral(resourceName: "Glute"),
+             #imageLiteral(resourceName: "Calf")],
             // Lower Back
             [#imageLiteral(resourceName: "Core"),
              #imageLiteral(resourceName: "Core"),
@@ -142,9 +188,25 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
              #imageLiteral(resourceName: "Shoulder"),
              #imageLiteral(resourceName: "Rear Delt"),
              #imageLiteral(resourceName: "Back")],
+            // General Mobility
+            [#imageLiteral(resourceName: "Hamstring and Lower Back"),
+             #imageLiteral(resourceName: "Hip Area"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Adductor"),
+             #imageLiteral(resourceName: "Hamstring and Lower Back"),
+             #imageLiteral(resourceName: "Piriformis"),
+             #imageLiteral(resourceName: "Adductor"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Hamstring and Glute"),
+             #imageLiteral(resourceName: "Hamstring and Glute"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat")],
             // Accessory
             [#imageLiteral(resourceName: "Wrist and Ankle"),
              #imageLiteral(resourceName: "Lat"),
+             #imageLiteral(resourceName: "Calf"),
              #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
              #imageLiteral(resourceName: "Back and Bicep")]
     ]
@@ -161,7 +223,12 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
              "thoracicSpineE",
              "latE",
              "pecDeltE",
-             "rearDeltE"],
+             "rearDeltE",
+             "quadfE",
+             "adductorfE",
+             "hamstringfE",
+             "glutefE",
+             "calvefE"],
             // Lower Back
             ["sideLegDropE",
              "sideLegKickE",
@@ -180,9 +247,25 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
              "shoulderDislocationE",
              "rearDeltFlyE",
              "latPulloverE"],
+            // General Mobility
+            ["rollBackE",
+             "hipCirclesE",
+             "mountainClimberE",
+             "groinStretchE",
+             "gluteBridgeE",
+             "piriformisStretchE",
+             "hipFlexorStretchE",
+             "cossakSquatE",
+             "hamstringStretchE",
+             "hipHingesE",
+             "sideLegSwingsE",
+             "frontLegSwingsE",
+             "jumpSquatE",
+             "lungeE"],
             // Accessory
             ["wristAnkleRotationE",
              "latStretchE",
+             "calveStretchE",
              "pushUpE",
              "pullUpE"]
     ]
@@ -1159,7 +1242,7 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             content.body = NSLocalizedString("nextSet", comment: "")
             content.sound = UNNotificationSound.default()
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
             let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
             
             

@@ -37,12 +37,11 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     // Sets Array
     var setsArrayF =
         [
-            // Mandatory
-            [1,
-             1],
             // Foam/Ball Roll
-            [1,
-             3,
+            [3,
+             1,
+             1,
+             1,
              1,
              1,
              1],
@@ -52,13 +51,23 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
              1,
              1,
              1],
-            // Shoulder
-            [2,
+            // General Mobility
+            [1,
              1,
              1,
-             1],
-            // Band/Bar/Machine Assisted
-            [2,
+             1,
+             2,
+             1,
+             1,
+             1,
+             2,
+             1,
+             1,],
+            // Dynamic Warm Up Drills
+            [1,
+             1,
+             2,
+             2,
              1,
              1,
              1,
@@ -66,7 +75,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
              1],
             // Accessory
             [1,
-             1,
+             2,
              1,
              1]
     ]
@@ -78,35 +87,50 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
             ["1",
              "1"],
             // Foam/Ball Roll
-            ["2-5",
+            ["2-7",
              "5-10",
-             "5-10",
-             "30-60s",
-             "30-60s"],
+             "2-7",
+             "2-7",
+             "2-7",
+             "2-7",
+             "2-7"],
             // Lower Back
             ["5-10",
              "5-10",
              "5-10",
              "5-10",
              "15-20"],
-            // Shoulder
-            ["10-20",
-             "5-10",
-             "15",
-             "10"],
-            // Band/Bar/Machine Assisted
-            ["10-15",
-             "5-15",
+            // General Mobility
+            ["5-10",
              "5-10",
              "5-10",
              "10-15",
-             "10-20",],
+             "15-30s",
+             "15-30s",
+             "5-10",
+             "30-60s",
+             "10-20",
+             "10-20",
+             "10-20",
+             ],
+            // Dynamic Warm Up Drills
+            ["5-15",
+             "10-15",
+             "30-60s",
+             "30-60s",
+             "",
+             "",
+             "",
+             "30-60s",
+             "2-7"],
             // Accessory
-            ["15-30s",
+            ["5-15",
+             "10-15",
+             "15-30s",
+             "15-30s",
              "15-30s",
              NSLocalizedString("asNecessary", comment: ""),
-             NSLocalizedString("asNecessary", comment: "")
-            ]
+             NSLocalizedString("asNecessary", comment: "")]
     ]
     var repsArray: [String] = []
     // Demonstration Array
@@ -115,76 +139,94 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     // Target Area Array
     var targetAreaArrayF =
         [
-            // Mandatory
-            [#imageLiteral(resourceName: "Heart"),
-             #imageLiteral(resourceName: "Heart")],
             // Foam/Ball Roll
             [#imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Thoracic"),
              #imageLiteral(resourceName: "Lat and Delt"),
-             #imageLiteral(resourceName: "Pec and Front Delt"),
-             #imageLiteral(resourceName: "Rear Delt")],
+             #imageLiteral(resourceName: "Quad"),
+             #imageLiteral(resourceName: "Adductor"),
+             #imageLiteral(resourceName: "Hamstring"),
+             #imageLiteral(resourceName: "Glute"),
+             #imageLiteral(resourceName: "Calf")],
             // Lower Back
             [#imageLiteral(resourceName: "Core"),
              #imageLiteral(resourceName: "Core"),
              #imageLiteral(resourceName: "Core"),
              #imageLiteral(resourceName: "Core"),
              #imageLiteral(resourceName: "Spine")],
-            // Shoulder
-            [#imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Back and Shoulder"),
-             #imageLiteral(resourceName: "Serratus"),
-             #imageLiteral(resourceName: "Shoulder")],
-            // Band/Bar/Machine Assisted
-            [#imageLiteral(resourceName: "Upper Back and Shoulder"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Back")],
+            // General Mobility
+            [#imageLiteral(resourceName: "Hip Area"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Adductor"),
+             #imageLiteral(resourceName: "Hamstring and Lower Back"),
+             #imageLiteral(resourceName: "Piriformis"),
+             #imageLiteral(resourceName: "Adductor"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Hamstring and Glute"),
+             #imageLiteral(resourceName: "Hamstring and Glute"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch")],
+            // Dynamic Warm Up Drills
+            [#imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat")],
             // Accessory
             [#imageLiteral(resourceName: "Wrist and Ankle"),
+             #imageLiteral(resourceName: "Shoulder"),
              #imageLiteral(resourceName: "Lat"),
-             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-             #imageLiteral(resourceName: "Back and Bicep")]
+             #imageLiteral(resourceName: "Calf")]
     ]
     
     var targetAreaArray: [UIImage] = []
     // Explanation Array
     var explanationArrayF =
         [
-            // Mandatory
-            ["5minCardioLE",
-             "5minCardioIE"],
             // Foam/Ball Roll
-            ["backfE",
-             "thoracicSpineE",
+            ["thoracicSpineE",
              "latE",
-             "pecDeltE",
-             "rearDeltE"],
+             "quadfE",
+             "adductorfE",
+             "hamstringfE",
+             "glutefE",
+             "calvefE"],
             // Lower Back
             ["sideLegDropE",
              "sideLegKickE",
              "scorpionKickE",
              "sideBendE",
              "catCowE"],
-            // Shoulder
-            ["wallSlidesE",
-             "superManShoulderE",
-             "scapulaE",
-             "shoulderRotationE"],
-            // Band/Bar/Machine Assisted
-            ["facePullE",
-             "externalRotationE",
-             "internalRotationE",
-             "shoulderDislocationE",
-             "rearDeltFlyE",
-             "latPulloverE"],
+            // General Mobility
+            ["hipCirclesE",
+             "mountainClimberE",
+             "groinStretchE",
+             "gluteBridgeE",
+             "piriformisStretchE",
+             "hipFlexorStretchE",
+             "cossakSquatE",
+             "hamstringStretchE",
+             "hipHingesE",
+             "sideLegSwingsE",
+             "frontLegSwingsE"],
+            // Dynamic Warm Up Drills
+            ["jumpSquatE",
+             "lungeE",
+             "gluteKicksE",
+             "aSkipsE",
+             "bSkipsE",
+             "grapeVinesE",
+             "lateralBoundE",
+             "straightLegBoundE",
+             "sprintsE"],
             // Accessory
             ["wristAnkleRotationE",
+             "wallSlidesE",
              "latStretchE",
-             "pushUpE",
-             "pullUpE"]
+             "calveStretchE"]
     ]
     var explanationArray: [String] = []
     
@@ -1161,7 +1203,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
             content.body = NSLocalizedString("nextSet", comment: "")
             content.sound = UNNotificationSound.default()
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
             let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
             
             

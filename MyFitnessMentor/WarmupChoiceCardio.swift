@@ -54,11 +54,10 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     
     let emptyArray =
         [
-            // Mandatory
-            [0,
-             0],
             // Foam/Ball Roll
             [0,
+             0,
+             0,
              0,
              0,
              0,
@@ -69,13 +68,23 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              0,
              0,
              0],
-            // Shoulders
+            // General Mobility
             [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0,
              0,
              0],
-            // Band Assisted
+            // Dynamic Warm Up Drills
             [0,
+             0,
+             0,
+             0,
              0,
              0,
              0,
@@ -91,11 +100,10 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     var warmupCardioPresets =
         [
             [
-                // Mandatory
-                [0,
-                 0],
                 // Foam/Ball Roll
                 [0,
+                 0,
+                 0,
                  0,
                  0,
                  0,
@@ -106,13 +114,23 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0],
-                // Shoulders
+                // General Mobility
                 [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0,
                  0,
                  0],
-                // Band Assisted
+                // Dynamic Warm Up Drills
                 [0,
+                 0,
+                 0,
+                 0,
                  0,
                  0,
                  0,
@@ -125,11 +143,10 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0]
             ],
             [
-                // Mandatory
-                [0,
-                 0],
                 // Foam/Ball Roll
                 [0,
+                 0,
+                 0,
                  0,
                  0,
                  0,
@@ -140,18 +157,28 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0],
-                // Shoulders
-                [0,
-                 0,
-                 0,
-                 0],
-                // Band Assisted
+                // General Mobility
                 [0,
                  0,
                  0,
                  0,
                  0,
-                 0],
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,],
+                // Dynamic Warm Up Drills
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,],
                 // Accessory
                 [0,
                  0,
@@ -159,11 +186,10 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0]
             ],
             [
-                // Mandatory
-                [0,
-                 0],
                 // Foam/Ball Roll
                 [0,
+                 0,
+                 0,
                  0,
                  0,
                  0,
@@ -174,13 +200,23 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0],
-                // Shoulders
+                // General Mobility
                 [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0,
                  0,
                  0],
-                // Band Assisted
+                // Dynamic Warm Up Drills
                 [0,
+                 0,
+                 0,
+                 0,
                  0,
                  0,
                  0,
@@ -199,76 +235,94 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     // Warmup Cardio Array
     var warmupCardioArray =
         [
-            // Mandatory
-            ["5minCardioL",
-             "5minCardioI"],
             // Foam/Ball Roll
-            ["backf",
-             "thoracicSpine",
+            ["thoracicSpine",
              "lat",
-             "pecDelt",
-             "rearDelt"],
+             "quadf",
+             "adductorf",
+             "hamstringf",
+             "glutef",
+             "calvef"],
             // Lower Back
             ["sideLegDrop",
              "sideLegKick",
              "scorpionKick",
              "sideBend",
              "catCow"],
-            // Shoulder
-            ["wallSlides",
-             "superManShoulder",
-             "scapula",
-             "shoulderRotation"],
-            // Band/Bar/Machine Assisted
-            ["facePull",
-             "externalRotation",
-             "internalRotation",
-             "shoulderDislocation",
-             "rearDeltFly",
-             "latPullover"],
+            // General Mobility
+            ["hipCircles",
+             "mountainClimber",
+             "groinStretch",
+             "gluteBridge",
+             "piriformisStretch",
+             "hipFlexorStretch",
+             "cossakSquat",
+             "hamstringStretch",
+             "hipHinges",
+             "sideLegSwings",
+             "frontLegSwings"],
+            // Dynamic Warm Up Drills
+            ["jumpSquat",
+             "lunge",
+             "gluteKicks",
+             "aSkips",
+             "bSkips",
+             "grapeVines",
+             "lateralBound",
+             "straightLegBound",
+             "sprints"],
             // Accessory
             ["wristAnkleRotation",
+             "wallSlides",
              "latStretch",
-             "pushUp",
-             "pullUp"]
+             "calveStretch"]
     ]
     
     
     // Default Warmup Selected Array
     var warmupSelectedArray =
         [
-            // Mandatory
-            [1,
-             0],
             // Foam/Ball Roll
-            [1,
+            [0,
+             0,
+             0,
              0,
              0,
              0,
              0],
             // Lower Back
-            [1,
-             0,
-             1,
-             0,
-             1],
-            // Shoulders
-            [1,
+            [0,
              0,
              0,
-             1],
-            // Band Assisted
-            [1,
-             1,
              0,
-             1,
+             0],
+            // General Mobility
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Dynamic Warm Up Drills
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0,
              0],
             // Accessory
             [1,
-             1,
-             1,
-             1]
+             0,
+             0,
+             0]
     ]
     
     // Picker View Array
@@ -287,11 +341,10 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     // Table View Section Title Array
     var tableViewSectionArray =
         [
-            "mandatory",
             "foamRoll",
             "lowerBack",
-            "shoulder",
-            "bandAssisted",
+            "generalMobility",
+            "dynamicWarmupDrills",
             "accessory"
     ]
     
@@ -706,38 +759,47 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 0:
             warmupSelectedArray =
                 [
-                    // Mandatory
-                    [1,
-                     0],
                     // Foam/Ball Roll
-                    [1,
+                    [0,
+                     0,
+                     0,
                      0,
                      0,
                      0,
                      0],
                     // Lower Back
-                    [1,
+                    [0,
                      0,
                      0,
                      0,
-                     1],
-                    // Shoulders
-                    [1,
+                     0],
+                    // General Mobility
+                    [0,
                      0,
                      0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
                      0,
-                     1,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0],
                     // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                    [0,
+                     0,
+                     0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -746,37 +808,46 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 1:
             warmupSelectedArray =
                 [
-                    // Mandatory
-                    [1,
-                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
                      0,
                      0,
+                     0,
+                     0,
                      0],
                     // Lower Back
-                    [1,
-                     0,
-                     0,
-                     1,
-                     0],
-                    // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
                     [0,
                      0,
                      0,
-                     1,
+                     0,
+                     0],
+                    // General Mobility
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0],
                     // Accessory
-                    [1,
-                     1,
-                     1,
+                    [0,
+                     0,
+                     0,
                      0]
             ]
             
@@ -786,38 +857,47 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 2:
             warmupSelectedArray =
                 [
-                    // Mandatory
-                    [1,
-                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
                      0,
                      0,
+                     0,
+                     0,
                      0],
                     // Lower Back
-                    [1,
-                     1,
-                     1,
-                     0,
-                     1],
-                    // Shoulders
-                    [1,
-                     0,
-                     1,
-                     1],
-                    // Band Assisted
                     [0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // General Mobility
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
                      0,
                      0,
                      0,
                      0,
                      0],
                     // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                    [0,
+                     0,
+                     0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -826,38 +906,47 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 3:
             warmupSelectedArray =
                 [
-                    // Mandatory
-                    [1,
-                     0],
                     // Foam/Ball Roll
-                    [1,
+                    [0,
                      0,
-                     1,
                      0,
-                     1],
-                    // Lower Back
-                    [1,
-                     1,
-                     1,
+                     0,
+                     0,
                      0,
                      0],
-                    // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
+                    // Lower Back
+                    [0,
                      0,
                      0,
                      0,
-                     1],
+                     0],
+                    // General Mobility
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                    [0,
+                     0,
+                     0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -866,38 +955,47 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 4:
             warmupSelectedArray =
                 [
-                    // Mandatory
-                    [1,
-                     0],
                     // Foam/Ball Roll
                     [0,
-                     1,
-                     1,
                      0,
-                     1],
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Lower Back
-                    [1,
+                    [0,
                      0,
-                     1,
                      0,
-                     1],
-                    // Shoulders
-                    [1,
                      0,
-                     1,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
+                     0],
+                    // General Mobility
+                    [0,
                      0,
-                     1,
                      0,
-                     1],
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                    [0,
+                     0,
+                     0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -906,38 +1004,47 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 5:
             warmupSelectedArray =
                 [
-                    // Mandatory
-                    [0,
-                     1],
                     // Foam/Ball Roll
-                    [1,
+                    [0,
                      0,
-                     1,
+                     0,
+                     0,
+                     0,
                      0,
                      0],
                     // Lower Back
-                    [1,
-                     1,
-                     1,
-                     0,
-                     1],
-                    // Shoulders
-                    [1,
+                    [0,
                      0,
                      0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
+                     0,
+                     0],
+                    // General Mobility
+                    [0,
                      0,
                      0,
-                     1,
-                     1],
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                    [0,
+                     0,
+                     0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -946,36 +1053,45 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 6:
             warmupSelectedArray =
                 [
-                    // Mandatory
-                    [1,
-                     0],
                     // Foam/Ball Roll
-                    [1,
+                    [0,
+                     0,
+                     0,
                      0,
                      0,
                      0,
                      0],
                     // Lower Back
-                    [1,
+                    [0,
                      0,
                      0,
                      0,
-                     1],
-                    // Shoulders
-                    [1,
+                     0],
+                    // General Mobility
+                    [0,
                      0,
                      0,
-                     1],
-                    // Band Assisted
-                    [1,
                      0,
                      0,
-                     1,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0],
                     // Accessory
-                    [1,
-                     1,
+                    [0,
+                     0,
                      0,
                      0]
             ]
@@ -1014,46 +1130,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             flashScreen()
             
         default:
-            warmupSelectedArray =
-                [
-                    // Mandatory
-                    [1,
-                     0],
-                    // Foam/Ball Roll
-                    [1,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Lower Back
-                    [1,
-                     0,
-                     1,
-                     0,
-                     0,
-                     1],
-                    // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
-                     0,
-                     1,
-                     0],
-                    // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
-            ]
-            
-            self.tableView.reloadData()
-            flashScreen()
-            
-            
+            break
         }
         
         

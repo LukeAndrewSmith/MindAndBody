@@ -60,18 +60,19 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
              1,
              1,
              1,
+             2,
              1,
              1,
              1,
-             1,
+             2,
              1,
              1,
              2,
              2],
             // Accessory
             [1,
-             0,
-             0]
+             2,
+             1]
     ]
     var setsArray: [Int] = []
     // Sets Array
@@ -81,37 +82,38 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             ["1",
              "1"],
             // Foam/Ball Roll
-            ["",
-             "",
-             "",
-             "",
-             "",
-             "",
-             ""],
+            ["2-7",
+             "5-10",
+             "2-7",
+             "2-7",
+             "2-7",
+             "2-7",
+             "2-7"],
             // Lower Back
-            ["",
-             "",
-             "",
-             "",
-             ""],
+            ["5-10",
+             "5-10",
+             "5-10",
+             "5-10",
+             "15-20"],
             // General Mobility
-            ["",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             ""],
+            ["10-15",
+             "5-10",
+             "5-10",
+             "5-10",
+             "10-15",
+             "15-30s",
+             "15-30s",
+             "5-10",
+             "30-60s",
+             "10-20",
+             "10-20",
+             "10-20",
+             "5-15",
+             "10-15"],
             // Accessory
-            ["",
-             "",
-             ""]
+            ["15-30s",
+             "10-20",
+             "15-30s"]
     ]
     var repsArray: [String] = []
     // Demonstration Array
@@ -126,11 +128,11 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             // Foam/Ball Roll
             [#imageLiteral(resourceName: "Thoracic"),
              #imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Pec and Front Delt"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Lat and Delt"),
-             #imageLiteral(resourceName: "Pec and Front Delt"),
-             #imageLiteral(resourceName: "Rear Delt")],
+             #imageLiteral(resourceName: "Quad"),
+             #imageLiteral(resourceName: "Adductor"),
+             #imageLiteral(resourceName: "Hamstring"),
+             #imageLiteral(resourceName: "Glute"),
+             #imageLiteral(resourceName: "Calf")],
             // Lower Back
             [#imageLiteral(resourceName: "Core"),
              #imageLiteral(resourceName: "Core"),
@@ -138,23 +140,24 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
              #imageLiteral(resourceName: "Core"),
              #imageLiteral(resourceName: "Spine")],
             // General Mobility
-            [#imageLiteral(resourceName: "Upper Back and Shoulder"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Back"),
-             #imageLiteral(resourceName: "Upper Back and Shoulder"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Back"),
-             #imageLiteral(resourceName: "Back")],
+            [#imageLiteral(resourceName: "Hamstring and Lower Back"),
+             #imageLiteral(resourceName: "Hip Area"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Adductor"),
+             #imageLiteral(resourceName: "Hamstring and Lower Back"),
+             #imageLiteral(resourceName: "Piriformis"),
+             #imageLiteral(resourceName: "Adductor"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Hamstring and Glute"),
+             #imageLiteral(resourceName: "Hamstring and Glute"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat")],
             // Accessory
             [#imageLiteral(resourceName: "Wrist and Ankle"),
              #imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Chest, Front Delt and Tricep")]
+             #imageLiteral(resourceName: "Calf")]
     ]
     
     var targetAreaArray: [UIImage] = []
@@ -187,6 +190,7 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             "piriformisStretchE",
             "hipFlexorStretchE",
             "cossakSquatE",
+            "hamstringStretchE",
             "hipHingesE",
             "sideKicksE",
             "frontKicksE",
@@ -1169,7 +1173,7 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             content.body = NSLocalizedString("nextSet", comment: "")
             content.sound = UNNotificationSound.default()
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
             let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
             
             

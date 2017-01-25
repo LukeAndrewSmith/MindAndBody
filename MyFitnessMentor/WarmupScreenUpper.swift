@@ -78,9 +78,9 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
                 ["1",
                  "1"],
                 // Foam/Ball Roll
-                ["2-5",
+                ["2-7",
                 "5-10",
-                "5-10",
+                "2-7",
                 "30-60s",
                 "30-60s"],
                 // Lower Back
@@ -1160,7 +1160,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             content.body = NSLocalizedString("nextSet", comment: "")
             content.sound = UNNotificationSound.default()
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
             let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
             
             

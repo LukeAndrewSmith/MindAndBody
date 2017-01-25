@@ -58,6 +58,11 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              0,
              0,
              0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0],
             // Lower Back
             [0,
@@ -65,13 +70,28 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              0,
              0,
              0],
-            // Shoulders
+            // Shoulder
             [0,
              0,
              0,
              0],
-            // Band Assisted
+            // Band/Bar/Machine Assisted
             [0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // General Mobility
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0,
              0,
              0,
@@ -79,6 +99,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              0],
             // Accessory
             [0,
+             0,
              0,
              0,
              0]
@@ -95,6 +116,11 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0],
                 // Lower Back
                 [0,
@@ -102,13 +128,28 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0],
-                // Shoulders
+                // Shoulder
                 [0,
                  0,
                  0,
                  0],
-                // Band Assisted
+                // Band/Bar/Machine Assisted
                 [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // General Mobility
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0,
                  0,
                  0,
@@ -116,6 +157,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0],
                 // Accessory
                 [0,
+                 0,
                  0,
                  0,
                  0]
@@ -129,6 +171,11 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0],
                 // Lower Back
                 [0,
@@ -136,13 +183,28 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0],
-                // Shoulders
+                // Shoulder
                 [0,
                  0,
                  0,
                  0],
-                // Band Assisted
+                // Band/Bar/Machine Assisted
                 [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // General Mobility
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0,
                  0,
                  0,
@@ -150,6 +212,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0],
                 // Accessory
                 [0,
+                 0,
                  0,
                  0,
                  0]
@@ -163,6 +226,11 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0],
                 // Lower Back
                 [0,
@@ -170,13 +238,28 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0],
-                // Shoulders
+                // Shoulder
                 [0,
                  0,
                  0,
                  0],
-                // Band Assisted
+                // Band/Bar/Machine Assisted
                 [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // General Mobility
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0,
                  0,
                  0,
@@ -184,6 +267,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0],
                 // Accessory
                 [0,
+                 0,
                  0,
                  0,
                  0]
@@ -203,7 +287,12 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              "thoracicSpine",
              "lat",
              "pecDelt",
-             "rearDelt"],
+             "rearDelt",
+             "quadf",
+             "adductorf",
+             "hamstringf",
+             "glutef",
+             "calvef"],
             // Lower Back
             ["sideLegDrop",
              "sideLegKick",
@@ -222,9 +311,25 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              "shoulderDislocation",
              "rearDeltFly",
              "latPullover"],
+            // General Mobility
+            ["rollBack",
+             "hipCircles",
+             "mountainClimber",
+             "groinStretch",
+             "gluteBridge",
+             "piriformisStretch",
+             "hipFlexorStretch",
+             "cossakSquat",
+             "hamstringStretch",
+             "hipHinges",
+             "sideLegSwings",
+             "frontLegSwings",
+             "jumpSquat",
+             "lunge"],
             // Accessory
             ["wristAnkleRotation",
              "latStretch",
+             "calveStretch",
              "pushUp",
              "pullUp"]
     ]
@@ -237,34 +342,55 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             [1,
              0],
             // Foam/Ball Roll
-            [1,
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0,
              0,
              0,
              0],
             // Lower Back
-            [1,
-             0,
-             1,
-             0,
-             1],
-            // Shoulders
-            [1,
+            [0,
              0,
              0,
-             1],
-            // Band Assisted
-            [1,
-             1,
              0,
-             1,
+             0],
+            // Shoulder
+            [0,
+             0,
+             0,
+             0],
+            // Band/Bar/Machine Assisted
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // General Mobility
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0,
              0],
             // Accessory
-            [1,
-             1,
-             1,
-             1]
+            [0,
+             0,
+             0,
+             0,
+             0]
     ]
     
     // Picker View Array
@@ -288,6 +414,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             "lowerBack",
             "shoulder",
             "bandAssisted",
+            "generalMobility",
             "accessory"
     ]
     
@@ -707,37 +834,57 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             warmupSelectedArray =
                 [
                     // Mandatory
-                    [1,
+                    [0,
                      0],
                     // Foam/Ball Roll
-                    [1,
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0,
                      0,
                      0],
                     // Lower Back
-                    [1,
+                    [0,
                      0,
                      0,
                      0,
-                     1],
-                    // Shoulders
-                    [1,
+                     0],
+                    // Shoulder
+                    [0,
                      0,
                      0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
+                     0],
+                    // Band/Bar/Machine Assisted
+                    [0,
                      0,
-                     1,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // General Mobility
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0],
                     // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -747,36 +894,57 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             warmupSelectedArray =
                 [
                     // Mandatory
-                    [1,
+                    [0,
                      0],
                     // Foam/Ball Roll
                     [0,
                      0,
                      0,
                      0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0],
                     // Lower Back
-                    [1,
-                     0,
-                     0,
-                     1,
-                     0],
-                    // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
                     [0,
                      0,
                      0,
-                     1,
+                     0,
+                     0],
+                    // Shoulder
+                    [0,
+                     0,
+                     0,
+                     0],
+                    // Band/Bar/Machine Assisted
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // General Mobility
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0],
                     // Accessory
-                    [1,
-                     1,
-                     1,
+                    [0,
+                     0,
+                     0,
+                     0,
                      0]
             ]
             
@@ -787,37 +955,58 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             warmupSelectedArray =
                 [
                     // Mandatory
-                    [1,
+                    [0,
                      0],
                     // Foam/Ball Roll
                     [0,
                      0,
                      0,
                      0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0],
                     // Lower Back
-                    [1,
-                     1,
-                     1,
+                    [0,
                      0,
-                     1],
-                    // Shoulders
-                    [1,
                      0,
-                     1,
-                     1],
-                    // Band Assisted
+                     0,
+                     0],
+                    // Shoulder
+                    [0,
+                     0,
+                     0,
+                     0],
+                    // Band/Bar/Machine Assisted
                     [0,
                      0,
                      0,
                      0,
                      0,
                      0],
+                    // General Mobility
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -827,37 +1016,58 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             warmupSelectedArray =
                 [
                     // Mandatory
-                    [1,
+                    [0,
                      0],
                     // Foam/Ball Roll
-                    [1,
+                    [0,
                      0,
-                     1,
                      0,
-                     1],
-                    // Lower Back
-                    [1,
-                     1,
-                     1,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0],
-                    // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
+                    // Lower Back
+                    [0,
                      0,
                      0,
                      0,
-                     1],
+                     0],
+                    // Shoulder
+                    [0,
+                     0,
+                     0,
+                     0],
+                    // Band/Bar/Machine Assisted
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // General Mobility
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -867,37 +1077,58 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             warmupSelectedArray =
                 [
                     // Mandatory
-                    [1,
+                    [0,
                      0],
                     // Foam/Ball Roll
                     [0,
-                     1,
-                     1,
                      0,
-                     1],
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Lower Back
-                    [1,
+                    [0,
                      0,
-                     1,
                      0,
-                     1],
-                    // Shoulders
-                    [1,
                      0,
-                     1,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
+                     0],
+                    // Shoulder
+                    [0,
                      0,
-                     1,
                      0,
-                     1],
+                     0],
+                    // Band/Bar/Machine Assisted
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // General Mobility
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -908,36 +1139,57 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                 [
                     // Mandatory
                     [0,
-                     1],
+                     0],
                     // Foam/Ball Roll
-                    [1,
+                    [0,
                      0,
-                     1,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0],
                     // Lower Back
-                    [1,
-                     1,
-                     1,
-                     0,
-                     1],
-                    // Shoulders
-                    [1,
+                    [0,
                      0,
                      0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
+                     0,
+                     0],
+                    // Shoulder
+                    [0,
                      0,
                      0,
-                     1,
-                     1],
+                     0],
+                    // Band/Bar/Machine Assisted
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // General Mobility
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -947,35 +1199,56 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             warmupSelectedArray =
                 [
                     // Mandatory
-                    [1,
+                    [0,
                      0],
                     // Foam/Ball Roll
-                    [1,
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0,
                      0,
                      0],
                     // Lower Back
-                    [1,
+                    [0,
                      0,
                      0,
                      0,
-                     1],
-                    // Shoulders
-                    [1,
+                     0],
+                    // Shoulder
+                    [0,
                      0,
                      0,
-                     1],
-                    // Band Assisted
-                    [1,
+                     0],
+                    // Band/Bar/Machine Assisted
+                    [0,
                      0,
                      0,
-                     1,
+                     0,
+                     0,
+                     0],
+                    // General Mobility
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0],
                     // Accessory
-                    [1,
-                     1,
+                    [0,
+                     0,
+                     0,
                      0,
                      0]
             ]
@@ -1014,44 +1287,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             flashScreen()
             
         default:
-            warmupSelectedArray =
-                [
-                    // Mandatory
-                    [1,
-                     0],
-                    // Foam/Ball Roll
-                    [1,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Lower Back
-                    [1,
-                     0,
-                     1,
-                     0,
-                     0,
-                     1],
-                    // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
-                     0,
-                     1,
-                     0],
-                    // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
-            ]
-            
-            self.tableView.reloadData()
-            flashScreen()
+            break
             
             
         }

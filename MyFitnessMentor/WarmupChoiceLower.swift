@@ -80,6 +80,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              0,
              0,
              0,
+             0,
              0],
             // Accessory
             [0,
@@ -121,6 +122,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              0,
              0,
              0,
+             0,
              0],
             // Accessory
             [0,
@@ -158,6 +160,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              0,
              0,
              0,
+             0,
              0],
             // Accessory
             [0,
@@ -184,6 +187,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              0],
             // General Mobility
             [0,
+             0,
              0,
              0,
              0,
@@ -234,6 +238,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              "piriformisStretch",
              "hipFlexorStretch",
              "cossakSquat",
+             "hamstringStretch",
              "hipHinges",
              "sideLegSwings",
              "frontLegSwings",
@@ -245,6 +250,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              "calveStretch"]
     ]
     
+
     
     // Default Warmup Selected Array
     var warmupSelectedArray =
@@ -254,36 +260,37 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              0],
             // Foam/Ball Roll
             [0,
+             1,
+             1,
              0,
-             0,
-             0,
-             0,
+             1,
              0,
              0],
             // Lower Back
-            [0,
+            [1,
              0,
+             1,
              0,
-             0,
-             0],
+             1],
             // General Mobility
             [0,
+             1,
+             0,
+             0,
+             1,
              0,
              0,
              0,
              0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
+             1,
+             1,
+             1,
+             1,
              0],
             // Accessory
-            [0,
-             0,
-             0]
+            [1,
+             1,
+             1]
     ]
 
     
@@ -733,36 +740,37 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                      0],
                     // Foam/Ball Roll
                     [0,
+                     1,
+                     1,
                      0,
-                     0,
-                     0,
-                     0,
+                     1,
                      0,
                      0],
                     // Lower Back
-                    [0,
+                    [1,
                      0,
+                     1,
                      0,
-                     0,
-                     0],
+                     1],
                     // General Mobility
                     [0,
+                     1,
+                     0,
+                     0,
+                     1,
                      0,
                      0,
                      0,
                      0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
+                     1,
+                     1,
+                     1,
+                     1,
                      0],
                     // Accessory
-                    [0,
-                     0,
-                     0]
+                    [1,
+                     1,
+                     1]
             ]
             
             self.tableView.reloadData()
@@ -790,6 +798,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                      0],
                     // General Mobility
                     [0,
+                     0,
                      0,
                      0,
                      0,
@@ -844,6 +853,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                      0,
                      0,
                      0,
+                     0,
                      0],
                     // Accessory
                     [0,
@@ -876,6 +886,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                      0],
                     // General Mobility
                     [0,
+                     0,
                      0,
                      0,
                      0,
@@ -930,6 +941,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                      0,
                      0,
                      0,
+                     0,
                      0],
                     // Accessory
                     [0,
@@ -962,6 +974,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                      0],
                     // General Mobility
                     [0,
+                     0,
                      0,
                      0,
                      0,
@@ -1016,6 +1029,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                      0,
                      0,
                      0,
+                     0,
                      0],
                     // Accessory
                     [0,
@@ -1057,48 +1071,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             flashScreen()
             
         default:
-            warmupSelectedArray =
-                [
-                    // Mandatory
-                    [1,
-                     0],
-                    // Foam/Ball Roll
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Lower Back
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // General Mobility
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Accessory
-                    [0,
-                     0,
-                     0]
-            ]
-            
-            self.tableView.reloadData()
-            flashScreen()
-            
+            break
             
         }
         
