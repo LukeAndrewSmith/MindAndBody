@@ -18,22 +18,22 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
     
     
     
-    // Warmup Screen Index
+    // Stretching Index
     //
-    var warmupScreenIndex = 0
+    var stretchingScreenIndex = 0
     
     
     
     // Initialize Arrays
-    // Warmup Choice Arrays
-    // Warmup Choice Movement Array
-    var warmupMovementsArray: [[String]] = [[]]
-    // Warmup Choice Selected Array
-    var warmupMovementsSelectedArray: [[Int]] = [[]]
+    // Stretching Choice Arrays
+    // Stretching Choice Movement Array
+    var stretchingMovementsArray: [[String]] = [[]]
+    // Stretching Choice Selected Array
+    var stretchingMovementsSelectedArray: [[Int]] = [[]]
     
-    // Warmup Arrays
+    // Stretching Arrays
     // Movement Array
-    var warmupArray: [String] = []
+    var stretchingArray: [String] = []
     // Sets Array
     var setsArrayF =
         [
@@ -196,27 +196,27 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
     // Populate Arrays
     func populateArrays() {
         
-        // Warmup Array
-        warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        // Stretching Array
+        stretchingArray = zip(stretchingMovementsArray.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
         // Sets Array
-        setsArray = zip(setsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        setsArray = zip(setsArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
         
         // Reps Array
-        repsArray = zip(repsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        repsArray = zip(repsArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
         
         // Demonstration Array
-        demonstrationArray = zip(demonstrationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        demonstrationArray = zip(demonstrationArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
         
         // Target Area Array
-        targetAreaArray = zip(targetAreaArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        targetAreaArray = zip(targetAreaArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
         
         // Explanation Array
-        explanationArray = zip(explanationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        explanationArray = zip(explanationArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
     }
     
@@ -708,7 +708,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         //generate an array of buttons
         
         
-        let numberOfButtons = setsArray[warmupScreenIndex]
+        let numberOfButtons = setsArray[stretchingScreenIndex]
         
         for _ in 1...numberOfButtons{
             buttonArray += [createButton()]
@@ -716,7 +716,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         }
         
         
-        if setsArray[warmupScreenIndex] == 1 {
+        if setsArray[stretchingScreenIndex] == 1 {
             
             let stackView = UIStackView(arrangedSubviews: buttonArray)
             stackView.frame = CGRect(x: (self.view.frame.size.width / 2) - 24.5, y: 12.25, width: 49, height: 49)
@@ -728,7 +728,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
             buttonArray[0].isEnabled = true
             
             
-        } else if setsArray[warmupScreenIndex] == 2 {
+        } else if setsArray[stretchingScreenIndex] == 2 {
             
             let stackView = UIStackView(arrangedSubviews: buttonArray)
             stackView.frame = CGRect(x: ((self.view.frame.size.width - 98) / 3), y: 12.25, width: ((self.view.frame.size.width - 98) / 3) + 98, height: 49)
@@ -740,7 +740,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
             buttonArray[0].isEnabled = true
             
             
-        } else if setsArray[warmupScreenIndex] == 3 {
+        } else if setsArray[stretchingScreenIndex] == 3 {
             
             let stackView = UIStackView(arrangedSubviews: buttonArray)
             stackView.frame = CGRect(x: ((self.view.frame.size.width - 147) / 4), y: 12.25, width: ((2 * (self.view.frame.size.width - 147)) / 4) + 147, height: 49)
@@ -768,7 +768,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         // Navigation Bar
-        navigationTitle.text = NSLocalizedString(warmupArray[warmupScreenIndex], comment: "")
+        navigationTitle.text = NSLocalizedString(stretchingArray[stretchingScreenIndex], comment: "")
         
         // Navigation Title
         navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
@@ -804,12 +804,12 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         // Body Image
-        bodyImage.image = targetAreaArray[warmupScreenIndex]
+        bodyImage.image = targetAreaArray[stretchingScreenIndex]
         
         
         
         // Explanation Text and Scroll View
-        let attributedExplanation = NSMutableAttributedString(string: NSLocalizedString(explanationArray[warmupScreenIndex], comment: ""))
+        let attributedExplanation = NSMutableAttributedString(string: NSLocalizedString(explanationArray[stretchingScreenIndex], comment: ""))
         let paragraphStyleE = NSMutableParagraphStyle()
         paragraphStyleE.alignment = .justified
         paragraphStyleE.hyphenationFactor = 1
@@ -852,7 +852,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         
         // Title Labels
         // Sets Reps
-        self.setsRepsLabel.text = (String(setsArray[warmupScreenIndex]) + " x " + repsArray[warmupScreenIndex])
+        self.setsRepsLabel.text = (String(setsArray[stretchingScreenIndex]) + " x " + repsArray[stretchingScreenIndex])
         // Demonstration
         self.demonstrationLabel.text = NSLocalizedString("demonstration", comment: "")
         // Target Area
@@ -860,15 +860,15 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         // Explanation
         self.explanationLabel.text = NSLocalizedString("explanation", comment: "")
         // Progress
-        self.progressLabel.text = (String(warmupScreenIndex + 1)+"/"+String(warmupArray.count))
+        self.progressLabel.text = (String(stretchingScreenIndex + 1)+"/"+String(stretchingArray.count))
         
         
         
         // Progress Bar
-        let warmupIndexP = Float(warmupScreenIndex)
-        let warmupArrayP = Float(self.warmupArray.count)
+        let stretchingIndexP = Float(stretchingScreenIndex)
+        let stretchingArrayP = Float(self.stretchingArray.count)
         
-        let fractionalProgress = warmupIndexP/warmupArrayP
+        let fractionalProgress = stretchingIndexP/stretchingArrayP
         
         progressBar.setProgress(fractionalProgress, animated: true)
         
@@ -1174,14 +1174,14 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         
-        if setsArray[warmupScreenIndex] == 1 {
+        if setsArray[stretchingScreenIndex] == 1 {
             
             
-        } else if setsArray[warmupScreenIndex] == 2 {
+        } else if setsArray[stretchingScreenIndex] == 2 {
             
             buttonArray[1].isEnabled = true
             
-        } else if setsArray[warmupScreenIndex] == 3 {
+        } else if setsArray[stretchingScreenIndex] == 3 {
             
             if buttonArray[1].isEnabled == false {
                 
@@ -1205,16 +1205,16 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
     @IBAction func nextButton(_ sender: Any) {
         
         
-        if warmupScreenIndex == warmupArray.count - 1 {
+        if stretchingScreenIndex == stretchingArray.count - 1 {
             
-            warmupScreenIndex = 0
+            stretchingScreenIndex = 0
             
             self.dismiss(animated: true)
             
             
             
         } else {
-            warmupScreenIndex = warmupScreenIndex + 1
+            stretchingScreenIndex = stretchingScreenIndex + 1
             displayContent()
         }
         
@@ -1229,10 +1229,10 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
     // Back Button
     @IBAction func backButton(_ sender: Any) {
         
-        if warmupScreenIndex == 0 {
+        if stretchingScreenIndex == 0 {
             
         } else {
-            warmupScreenIndex = warmupScreenIndex - 1
+            stretchingScreenIndex = stretchingScreenIndex - 1
             
             flashScreen()
             displayContent()
@@ -1392,7 +1392,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         //
         // Body Image
         bodyImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5)
-        bodyImageExpanded.image = targetAreaArray[warmupScreenIndex]
+        bodyImageExpanded.image = targetAreaArray[stretchingScreenIndex]
         
         imageViewExpanded.addSubview(bodyImageExpanded)
         
@@ -1538,7 +1538,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         explanationLabelE.numberOfLines = 0
         
         
-        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[warmupScreenIndex], comment: ""))
+        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[stretchingScreenIndex], comment: ""))
         let paragraphStyleEE = NSMutableParagraphStyle()
         paragraphStyleEE.alignment = .justified
         paragraphStyleEE.hyphenationFactor = 1

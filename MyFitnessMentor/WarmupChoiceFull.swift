@@ -36,6 +36,13 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
     
+    // Titles
+    @IBOutlet weak var presetTitle: UILabel!
+    
+    @IBOutlet weak var tableTitle: UILabel!
+    
+    
+    
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
@@ -419,7 +426,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         let flash = UIView()
         
-        flash.frame = CGRect(x: 0, y: 171.5, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
+        flash.frame = CGRect(x: 0, y: pickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
         flash.backgroundColor = colour1
         self.view.alpha = 1
         self.view.addSubview(flash)
@@ -457,7 +464,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         navigationBar.title = (NSLocalizedString("fullBody", comment: ""))
         
         
-        
+        // Titles
+        presetTitle.text = NSLocalizedString("presetWarmups", comment: "")
+        tableTitle.text = NSLocalizedString("warmupTableTitle", comment: "")
         
         
         // Plus Button Colour
@@ -690,17 +699,19 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Remove Personalized Preset
     @IBAction func removePreset(_ sender: Any) {
         
-        let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "warmupFullPresetNumber")
-        var warmupPreset = defaults.object(forKey: "warmupFullPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "warmupFullPresetTexts") as! [String]
-        
         
         let selectedRow = pickerView.selectedRow(inComponent: 0)
         let index = (selectedRow) - (pickerViewArray.count + 1)
         
         
         if index > -1 {
+            
+            let defaults = UserDefaults.standard
+            let number = defaults.integer(forKey: "warmupFullPresetNumber")
+            var warmupPreset = defaults.object(forKey: "warmupFullPresets") as! [Array<Array<Int>>]
+            var presetTextArray = defaults.object(forKey: "warmupFullPresetTexts") as! [String]
+            
+            
             
             warmupPreset.remove(at: index)
             warmupPreset.append(emptyArray)

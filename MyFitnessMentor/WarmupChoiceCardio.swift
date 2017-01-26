@@ -34,6 +34,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
+    // Titles
+    @IBOutlet weak var presetTitle: UILabel!
+    
+    @IBOutlet weak var tableTitle: UILabel!
+    
     
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
@@ -348,7 +353,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         
         let flash = UIView()
         
-        flash.frame = CGRect(x: 0, y: 171.5, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
+        flash.frame = CGRect(x: 0, y: pickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
         flash.backgroundColor = colour1
         self.view.alpha = 1
         self.view.addSubview(flash)
@@ -384,6 +389,10 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("cardio", comment: ""))
         
+        
+        // Titles
+        presetTitle.text = NSLocalizedString("presetWarmups", comment: "")
+        tableTitle.text = NSLocalizedString("warmupTableTitle", comment: "")
         
         
         

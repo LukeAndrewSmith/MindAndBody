@@ -35,6 +35,12 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
+    // Titles
+    @IBOutlet weak var presetTitle: UILabel!
+    
+    @IBOutlet weak var tableTitle: UILabel!
+    
+    
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
@@ -84,7 +90,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
              0]
     ]
     
-    var warmupUpperPresets =
+    var stretchingWorkoutPresets =
         [
             [
                 // Mandatory
@@ -192,8 +198,8 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     
     
     
-    // Warmup Upper Array
-    var warmupUpperArray =
+    // Stretching Array
+    var stretchingWorkoutArray =
         [
             // Mandatory
             ["5minCardioL",
@@ -230,8 +236,8 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     ]
     
     
-    // Default Warmup Selected Array
-    var warmupSelectedArray =
+    // Default Stretching Selected Array
+    var stretchingSelectedArray =
         [
             // Mandatory
             [1,
@@ -332,8 +338,13 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("upperBody", comment: ""))
+        navigationBar.title = (NSLocalizedString("postWorkout", comment: ""))
         
+        
+        // Titles
+        // Titles
+        presetTitle.text = NSLocalizedString("presetSessions", comment: "")
+        tableTitle.text = NSLocalizedString("stretches", comment: "")
         
         
         
@@ -412,10 +423,10 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceUpperText", comment: "")))
+        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("stretchingChoiceWorkoutText", comment: "")))
         
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceUpperText", comment: "")))
+        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("stretchingChoiceWorkoutText", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
@@ -455,13 +466,13 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         
         
         //
-        // Preset Warmups
+        // Preset Stretchings
         //
         let defaults = UserDefaults.standard
         
-        defaults.register(defaults: ["warmupUpperPresets" : warmupUpperPresets])
-        defaults.register(defaults: ["warmupUpperPresetTexts" : presetTexts])
-        defaults.register(defaults: ["warmupUpperPresetNumber" : 0])
+        defaults.register(defaults: ["stretchingWorkoutPresets" : stretchingWorkoutPresets])
+        defaults.register(defaults: ["stretchingWorkoutPresetTexts" : presetTexts])
+        defaults.register(defaults: ["stretchingWorkoutPresetNumber" : 0])
         
         defaults.synchronize()
         
@@ -482,9 +493,9 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func addPreset(_ sender: Any) {
         
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "warmupUpperPresetNumber")
-        var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "warmupUpperPresetTexts") as! [String]
+        let number = defaults.integer(forKey: "stretchingWorkoutPresetNumber")
+        var stretchingPreset = defaults.object(forKey: "stretchingWorkoutPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "stretchingWorkoutPresetTexts") as! [String]
         
         
         // Set Preset
@@ -494,7 +505,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             
             // Alert and Functions
             //
-            let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
+            let inputTitle = NSLocalizedString("stretchingInputTitle", comment: "")
             //
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
             alert.view.tintColor = colour1
@@ -515,7 +526,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                 
                 // Update Preset Text Arrays
                 presetTextArray[number] = (textField?.text)!
-                defaults.set(presetTextArray, forKey: "warmupUpperPresetTexts")
+                defaults.set(presetTextArray, forKey: "stretchingWorkoutPresetTexts")
                 defaults.synchronize()
                 
                 
@@ -524,8 +535,8 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                 
                 // Set new Preset Array
                 //
-                warmupPreset[number] = self.warmupSelectedArray
-                defaults.set(warmupPreset, forKey: "warmupUpperPresets")
+                stretchingPreset[number] = self.stretchingSelectedArray
+                defaults.set(stretchingPreset, forKey: "stretchingWorkoutPresets")
                 
                 defaults.synchronize()
                 
@@ -534,7 +545,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                 //
                 let newNumber = number + 1
                 
-                defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
+                defaults.set(newNumber, forKey: "stretchingWorkoutPresetNumber")
                 defaults.synchronize()
                 
                 
@@ -566,9 +577,9 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func removePreset(_ sender: Any) {
         
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "warmupUpperPresetNumber")
-        var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "warmupUpperPresetTexts") as! [String]
+        let number = defaults.integer(forKey: "stretchingWorkoutPresetNumber")
+        var stretchingPreset = defaults.object(forKey: "stretchingWorkoutPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "stretchingWorkoutPresetTexts") as! [String]
         
         
         let selectedRow = pickerView.selectedRow(inComponent: 0)
@@ -577,21 +588,21 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         
         if index > -1 {
             
-            warmupPreset.remove(at: index)
-            warmupPreset.append(emptyArray)
+            stretchingPreset.remove(at: index)
+            stretchingPreset.append(emptyArray)
             
-            defaults.set(warmupPreset, forKey: "warmupUpperPresets")
+            defaults.set(stretchingPreset, forKey: "stretchingWorkoutPresets")
             
             
             presetTextArray.remove(at: index)
             presetTextArray.append(emptyString)
             
-            defaults.set(presetTextArray, forKey: "warmupUpperPresetTexts")
+            defaults.set(presetTextArray, forKey: "stretchingWorkoutPresetTexts")
             
             
             if number > 0 {
                 let newNumber = number - 1
-                defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
+                defaults.set(newNumber, forKey: "stretchingWorkoutPresetNumber")
             } else {
                 
             }
@@ -657,7 +668,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             
         } else if row == pickerViewArray.count + 1 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingWorkoutPresetTexts") as! [String]
             let titleData = titleDataArray[0]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -668,7 +679,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             
         } else if row == pickerViewArray.count + 2 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingWorkoutPresetTexts") as! [String]
             let titleData = titleDataArray[1]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -679,7 +690,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             
         } else if row == pickerViewArray.count + 3 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingWorkoutPresetTexts") as! [String]
             let titleData = titleDataArray[2]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -701,7 +712,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         switch row {
             
         case 0:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
                     // Mandatory
                     [1,
@@ -741,7 +752,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             flashScreen()
             
         case 1:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
                     // Mandatory
                     [1,
@@ -781,7 +792,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             flashScreen()
             
         case 2:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
                     // Mandatory
                     [1,
@@ -821,7 +832,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             flashScreen()
             
         case 3:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
                     // Mandatory
                     [1,
@@ -861,7 +872,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             flashScreen()
             
         case 4:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
                     // Mandatory
                     [1,
@@ -901,7 +912,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             flashScreen()
             
         case 5:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
                     // Mandatory
                     [0,
@@ -941,7 +952,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             flashScreen()
             
         case 6:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
                     // Mandatory
                     [1,
@@ -984,34 +995,34 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             break
             
         case 8:
-            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "stretchingWorkoutPresets") as! [Array<Array<Int>>]
             let array = fullArray[0]
-            warmupSelectedArray = array
+            stretchingSelectedArray = array
             
             
             self.tableView.reloadData()
             flashScreen()
             
         case 9:
-            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "stretchingWorkoutPresets") as! [Array<Array<Int>>]
             let array = fullArray[1]
-            warmupSelectedArray = array
+            stretchingSelectedArray = array
             
             
             self.tableView.reloadData()
             flashScreen()
             
         case 10:
-            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "stretchingWorkoutPresets") as! [Array<Array<Int>>]
             let array = fullArray[2]
-            warmupSelectedArray = array
+            stretchingSelectedArray = array
             
             
             self.tableView.reloadData()
             flashScreen()
             
         default:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
                     // Mandatory
                     [1,
@@ -1068,7 +1079,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     // Table View
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return warmupUpperArray.count
+        return stretchingWorkoutArray.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -1092,7 +1103,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return warmupUpperArray[section].count
+        return stretchingWorkoutArray[section].count
     }
     
     
@@ -1101,7 +1112,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         
-        cell.textLabel?.text = NSLocalizedString(warmupUpperArray[indexPath.section][indexPath.row], comment: "")
+        cell.textLabel?.text = NSLocalizedString(stretchingWorkoutArray[indexPath.section][indexPath.row], comment: "")
         
         cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
@@ -1110,7 +1121,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         cell.tintColor = .black
         
         
-        if warmupSelectedArray[indexPath.section][indexPath.row] == 1 {
+        if stretchingSelectedArray[indexPath.section][indexPath.row] == 1 {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
@@ -1148,10 +1159,10 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         
         if cell?.accessoryType == .checkmark {
             cell?.accessoryType = .none
-            warmupSelectedArray[indexPath.section][indexPath.row] = 0
+            stretchingSelectedArray[indexPath.section][indexPath.row] = 0
         } else {
             cell?.accessoryType = .checkmark
-            warmupSelectedArray[indexPath.section][indexPath.row] = 1
+            stretchingSelectedArray[indexPath.section][indexPath.row] = 1
         }
     }
     
@@ -1245,15 +1256,15 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     // Pass Array to next ViewController
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "warmupUpper") {
+        if (segue.identifier == "stretchingWorkout") {
             
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenUpper
+            let destinationVC = destinationNC.viewControllers.first as! StretchingScreenWorkout
             
-            destinationVC.warmupMovementsArray = warmupUpperArray
-            destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
+            destinationVC.stretchingMovementsArray = stretchingWorkoutArray
+            destinationVC.stretchingMovementsSelectedArray = stretchingSelectedArray
             
         }
     }

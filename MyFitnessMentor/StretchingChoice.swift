@@ -2,45 +2,44 @@
 //  StretchingChoice.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 21/12/16.
-//  Copyright © 2016 Luke Smith. All rights reserved.
+//  Created by Luke Smith on 26.01.17.
+//  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-
-
-class StretchingChoice: UIViewController  {
-    
-    // Outlets
+class StretchingChoice: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    
-    // Buttons
-    @IBOutlet weak var postWorkout: UIButton!
-    
-    
-    @IBOutlet weak var postCardio: UIButton!
+    // Begin Button
+    @IBOutlet weak var beginButton: UIButton!
     
     
-    @IBOutlet weak var general: UIButton!
+    // Table View
+    @IBOutlet weak var tableView: UITableView!
     
     
     // Information View
-    @IBOutlet weak var informationViewStretchingC: UIScrollView!
+    @IBOutlet weak var informationView: UIScrollView!
     
-    // Information Title
-    @IBOutlet weak var informationTitleStretchingC: UILabel!
+    // Information Title Label
+    @IBOutlet weak var informationTitle: UILabel!
     
-    // Stack View
-    @IBOutlet weak var stackView: UIStackView!
+    // PickerViews
+    @IBOutlet weak var pickerView: UIPickerView!
     
     
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
+    
+    
+    // Titles
+    @IBOutlet weak var presetTitle: UILabel!
+    
+    @IBOutlet weak var tableTitle: UILabel!
     
     
     // Colours
@@ -48,82 +47,387 @@ class StretchingChoice: UIViewController  {
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
     
     
+    // Add Preset
+    @IBOutlet weak var addPreset: UIButton!
+    @IBOutlet weak var removePreset: UIButton!
+    
+    var presetTexts = ["", "", ""]
+    
+    let emptyString = ""
+    
+    let emptyArray =
+        [
+            // Mandatory
+            [0,
+             0],
+            // Foam/Ball Roll
+            [0,
+             0,
+             0,
+             0,
+             0],
+            // Lower Back
+            [0,
+             0,
+             0,
+             0,
+             0],
+            // Shoulders
+            [0,
+             0,
+             0,
+             0],
+            // Band Assisted
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Accessory
+            [0,
+             0,
+             0,
+             0]
+    ]
+    
+    var stretchingPresets =
+        [
+            [
+                // Mandatory
+                [0,
+                 0],
+                // Foam/Ball Roll
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Lower Back
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Shoulders
+                [0,
+                 0,
+                 0,
+                 0],
+                // Band Assisted
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Accessory
+                [0,
+                 0,
+                 0,
+                 0]
+            ],
+            [
+                // Mandatory
+                [0,
+                 0],
+                // Foam/Ball Roll
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Lower Back
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Shoulders
+                [0,
+                 0,
+                 0,
+                 0],
+                // Band Assisted
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Accessory
+                [0,
+                 0,
+                 0,
+                 0]
+            ],
+            [
+                // Mandatory
+                [0,
+                 0],
+                // Foam/Ball Roll
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Lower Back
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Shoulders
+                [0,
+                 0,
+                 0,
+                 0],
+                // Band Assisted
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Accessory
+                [0,
+                 0,
+                 0,
+                 0]
+            ]
+    ]
+    
+    
+    
+    // Stretching Upper Array
+    var stretchingArray =
+        [
+            // Mandatory
+            ["5minCardioL",
+             "5minCardioI"],
+            // Foam/Ball Roll
+            ["backf",
+             "thoracicSpine",
+             "lat",
+             "pecDelt",
+             "rearDelt"],
+            // Lower Back
+            ["sideLegDrop",
+             "sideLegKick",
+             "scorpionKick",
+             "sideBend",
+             "catCow"],
+            // Shoulder
+            ["wallSlides",
+             "superManShoulder",
+             "scapula",
+             "shoulderRotation"],
+            // Band/Bar/Machine Assisted
+            ["facePull",
+             "externalRotation",
+             "internalRotation",
+             "shoulderDislocation",
+             "rearDeltFly",
+             "latPullover"],
+            // Accessory
+            ["wristAnkleRotation",
+             "latStretch",
+             "pushUp",
+             "pullUp"]
+    ]
+    
+    
+    // Default Stretching Selected Array
+    var stretchingSelectedArray =
+        [
+            // Mandatory
+            [1,
+             0],
+            // Foam/Ball Roll
+            [1,
+             0,
+             0,
+             0,
+             0],
+            // Lower Back
+            [1,
+             0,
+             1,
+             0,
+             1],
+            // Shoulders
+            [1,
+             0,
+             0,
+             1],
+            // Band Assisted
+            [1,
+             1,
+             0,
+             1,
+             0,
+             0],
+            // Accessory
+            [1,
+             1,
+             1,
+             1]
+    ]
+    
+    // Picker View Array
+    var pickerViewArray =
+        [
+            "default",
+            "beginner",
+            "bodyWeight",
+            "bodybuilding",
+            "strength",
+            "highIntensity",
+            "quick"
+            
+    ]
+    
+    // Table View Section Title Array
+    var tableViewSectionArray =
+        [
+            "mandatory",
+            "foamRoll",
+            "lowerBack",
+            "shoulder",
+            "bandAssisted",
+            "accessory"
+    ]
+    
+    
+    // Flash Screen
+    func flashScreen() {
+        
+        let flash = UIView()
+        
+        flash.frame = CGRect(x: 0, y: pickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
+        flash.backgroundColor = colour1
+        self.view.alpha = 1
+        self.view.addSubview(flash)
+        self.view.bringSubview(toFront: flash)
+        
+        
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
+            
+            flash.alpha = 0
+            
+        }, completion: {(finished: Bool) -> Void in
+            flash.removeFromSuperview()
+        })
+        
+    }
+    
+    
+    
+    
+    
+    //
+    // ViewDidLoad
+    //
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Colours
+        // Colour
         self.view.applyGradient(colours: [colour1, colour2])
         questionMark.tintColor = colour1
         
         
         
-        // Titles
+        // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("stretching", comment: ""))
         
-        // Button Titles
-        general.setTitle(NSLocalizedString("general", comment: ""), for: UIControlState.normal)
-        general.titleLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        general.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        general.layer.borderWidth = 10
-        general.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         
-        postWorkout.setTitle(NSLocalizedString("postWorkout", comment: ""), for: UIControlState.normal)
-        postWorkout.titleLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        postWorkout.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        postWorkout.layer.borderWidth = 10
-        postWorkout.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         
-        postCardio.setTitle(NSLocalizedString("postCardio", comment: ""), for: UIControlState.normal)
-        postCardio.titleLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        postCardio.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        postCardio.layer.borderWidth = 10
-        postCardio.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        // Titles
+        presetTitle.text = NSLocalizedString("presetSessions", comment: "")
+        tableTitle.text = NSLocalizedString("stretches", comment: "")
         
         
         
+        // Plus Button Colour
+        let origImage1 = UIImage(named: "Plus")
+        let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        addPreset.setImage(tintedImage1, for: .normal)
+        
+        //Image Tint
+        addPreset.tintColor = colour2
+        
+        
+        
+        // Minus Button Colour
+        let origImage2 = UIImage(named: "Minus")
+        let tintedImage2 = origImage2?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        removePreset.setImage(tintedImage2, for: .normal)
+        
+        //Image Tint
+        removePreset.tintColor = colour2
+        
+        
+        
+        
+        
+        // Begin Button Title
+        beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
+        beginButton.setTitleColor(colour2, for: .normal)
+        
+        
+        
+        
+        
+        
+        
+        // Information
         // Scroll View Frame
-        self.informationViewStretchingC.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
-        
-        view.bringSubview(toFront: informationViewStretchingC)
+        self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
         
         
-        // Information Title
-        //
-        // Information Title Frame
-        self.informationTitleStretchingC.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
-        informationTitleStretchingC.text = (NSLocalizedString("information", comment: ""))
-        informationTitleStretchingC.textAlignment = .center
-        informationTitleStretchingC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitleStretchingC.textColor = .white
-        informationTitleStretchingC.backgroundColor = colour2
-        
-        
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        downSwipe.direction = UISwipeGestureRecognizerDirection.down
-        informationTitleStretchingC.addGestureRecognizer(downSwipe)
-        informationTitleStretchingC.isUserInteractionEnabled = true
-        
-        
-        
-        self.view.addSubview(informationTitleStretchingC)
-        self.view.bringSubview(toFront: informationTitleStretchingC)
-        
+        view.bringSubview(toFront: informationView)
         
         
         // Information Text
         //
         // Information Text Frame
-        let informationTextStretchingC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationViewStretchingC.frame.size.width - 40, height: 0))
+        let informationText = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
+        
+        
+        
+        
+        
+        // Information Text Frame
+        self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
+        informationTitle.text = (NSLocalizedString("information", comment: ""))
+        informationTitle.textAlignment = .center
+        informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        informationTitle.textColor = .white
+        informationTitle.backgroundColor = colour2
+        
+        
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        downSwipe.direction = UISwipeGestureRecognizerDirection.down
+        informationTitle.addGestureRecognizer(downSwipe)
+        informationTitle.isUserInteractionEnabled = true
+        
+        
+        
+        self.view.addSubview(informationTitle)
+        
+        
         
         // Information Text and Attributes
         //
         // String
         let informationLabelString = (
-            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeText", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyText", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindText", comment: "")))
+            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: "")))
         
         // Range of String
-        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeText", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyText", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindText", comment: ""))
+        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: ""))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
@@ -154,55 +458,746 @@ class StretchingChoice: UIViewController  {
         
         
         // Final Text Editing
-        informationTextStretchingC.attributedText = informationLabelText
-        informationTextStretchingC.textAlignment = .justified
-        informationTextStretchingC.lineBreakMode = NSLineBreakMode.byWordWrapping
-        informationTextStretchingC.numberOfLines = 0
-        informationTextStretchingC.sizeToFit()
-        self.informationViewStretchingC.addSubview(informationTextStretchingC)
+        informationText.attributedText = informationLabelText
+        informationText.textAlignment = .justified
+        informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
+        informationText.numberOfLines = 0
+        informationText.sizeToFit()
+        self.informationView.addSubview(informationText)
         
         
-        self.informationViewStretchingC.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextStretchingC.frame.size.height + informationTitleStretchingC.frame.size.height + 20)
+        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
+        
+        
+        
+        
+        
+        
+        //
+        // Preset Stretchings
+        //
+        let defaults = UserDefaults.standard
+        
+        defaults.register(defaults: ["stretchingPresets" : stretchingPresets])
+        defaults.register(defaults: ["stretchingPresetTexts" : presetTexts])
+        defaults.register(defaults: ["stretchingPresetNumber" : 0])
+        
+        defaults.synchronize()
         
     }
     
-    // Layout Subviews
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // Set Personalized Preset
+    //
+    @IBAction func addPreset(_ sender: Any) {
         
-        general.layer.cornerRadius = ((self.stackView.frame.size.height) * 3/2) / 2
-        general.layer.masksToBounds = true
+        let defaults = UserDefaults.standard
+        let number = defaults.integer(forKey: "stretchingPresetNumber")
+        var stretchingPreset = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "stretchingPresetTexts") as! [String]
         
-        postWorkout.layer.cornerRadius = (self.stackView.frame.size.height) / 2
-        postWorkout.layer.masksToBounds = true
         
-        postCardio.layer.cornerRadius = (self.stackView.frame.size.height) / 2
-        postCardio.layer.masksToBounds = true
+        // Set Preset
+        if number < 3 {
+            
+            
+            
+            // Alert and Functions
+            //
+            let inputTitle = NSLocalizedString("stretchingInputTitle", comment: "")
+            //
+            let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+            alert.view.tintColor = colour1
+            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+            
+            //2. Add the text field. You can configure it however you need.
+            alert.addTextField { (textField) in
+                textField.text = " "
+                textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
+            }
+            
+            // 3. Get the value from the text field, and perform actions when OK clicked.
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                let textField = alert?.textFields![0]
+                
+                
+                
+                
+                // Update Preset Text Arrays
+                presetTextArray[number] = (textField?.text)!
+                defaults.set(presetTextArray, forKey: "stretchingPresetTexts")
+                defaults.synchronize()
+                
+                
+                
+                
+                
+                // Set new Preset Array
+                //
+                stretchingPreset[number] = self.stretchingSelectedArray
+                defaults.set(stretchingPreset, forKey: "stretchingPresets")
+                
+                defaults.synchronize()
+                
+                
+                // Increase Preset Counter
+                //
+                let newNumber = number + 1
+                
+                defaults.set(newNumber, forKey: "stretchingPresetNumber")
+                defaults.synchronize()
+                
+                
+                
+                // Flash Screen
+                self.flashScreen()
+                self.pickerView.reloadAllComponents()
+                self.tableView.reloadData()
+                
+            }))
+            
+            // 4. Present the alert.
+            self.present(alert, animated: true, completion: nil)
+            
+            
+            
+            
+            
+            
+        } else {
+            
+        }
+    }
+    
+    
+    
+    
+    // Remove Personalized Preset
+    @IBAction func removePreset(_ sender: Any) {
+        
+        let defaults = UserDefaults.standard
+        let number = defaults.integer(forKey: "stretchingPresetNumber")
+        var stretchingPreset = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "stretchingPresetTexts") as! [String]
+        
+        
+        let selectedRow = pickerView.selectedRow(inComponent: 0)
+        let index = (selectedRow) - (pickerViewArray.count + 1)
+        
+        
+        if index > -1 {
+            
+            stretchingPreset.remove(at: index)
+            stretchingPreset.append(emptyArray)
+            
+            defaults.set(stretchingPreset, forKey: "stretchingPresets")
+            
+            
+            presetTextArray.remove(at: index)
+            presetTextArray.append(emptyString)
+            
+            defaults.set(presetTextArray, forKey: "stretchingPresetTexts")
+            
+            
+            if number > 0 {
+                let newNumber = number - 1
+                defaults.set(newNumber, forKey: "stretchingPresetNumber")
+            } else {
+                
+            }
+            
+            
+            
+            
+            defaults.synchronize()
+            
+            
+            
+            
+            // Flash Screen
+            self.flashScreen()
+            self.pickerView.reloadAllComponents()
+            self.tableView.reloadData()
+            
+        } else {
+            
+        }
+    }
+    
+    
+    
+    
+    
+    
+    // Picker Views
+    //
+    
+    func numberOfComponents(in: UIPickerView) -> Int {
+        return 1
+    }
+    
+    
+    
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        return pickerViewArray.count + 4
         
     }
-
     
     
-    
-    
-    
-    
-    // Information Button Action
-    @IBAction func informationButtonActionStretchingC(_ sender: Any) {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        if row < pickerViewArray.count {
+            let rowLabel = UILabel()
+            let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+            
+        } else if row == pickerViewArray.count {
+            
+            let line = UILabel()
+            line.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width / 2, height: 1)
+            line.backgroundColor = .black
+            line.isEnabled = false
+            return line
+            
+            
+        } else if row == pickerViewArray.count + 1 {
+            let rowLabel = UILabel()
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTexts") as! [String]
+            let titleData = titleDataArray[0]
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+            
+            
+            
+        } else if row == pickerViewArray.count + 2 {
+            let rowLabel = UILabel()
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTexts") as! [String]
+            let titleData = titleDataArray[1]
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+            
+            
+            
+        } else if row == pickerViewArray.count + 3 {
+            let rowLabel = UILabel()
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTexts") as! [String]
+            let titleData = titleDataArray[2]
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+            
+        }
+        
+        return UIView()
         
         
-        if self.informationViewStretchingC.frame.minY < self.view.frame.maxY {
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        let defaults = UserDefaults.standard
+        
+        switch row {
+            
+        case 0:
+            stretchingSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [1,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Lower Back
+                    [1,
+                     0,
+                     0,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
+                     0,
+                     1,
+                     0,
+                     0],
+                    // Accessory
+                    [1,
+                     1,
+                     1,
+                     1]
+            ]
+            
+            self.tableView.reloadData()
+            flashScreen()
+            
+        case 1:
+            stretchingSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Lower Back
+                    [1,
+                     0,
+                     0,
+                     1,
+                     0],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [0,
+                     0,
+                     0,
+                     1,
+                     0,
+                     0],
+                    // Accessory
+                    [1,
+                     1,
+                     1,
+                     0]
+            ]
+            
+            self.tableView.reloadData()
+            flashScreen()
+            
+        case 2:
+            stretchingSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Lower Back
+                    [1,
+                     1,
+                     1,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     1,
+                     1],
+                    // Band Assisted
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Accessory
+                    [1,
+                     1,
+                     1,
+                     1]
+            ]
+            
+            self.tableView.reloadData()
+            flashScreen()
+            
+        case 3:
+            stretchingSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [1,
+                     0,
+                     1,
+                     0,
+                     1],
+                    // Lower Back
+                    [1,
+                     1,
+                     1,
+                     0,
+                     0],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
+                     0,
+                     0,
+                     0,
+                     1],
+                    // Accessory
+                    [1,
+                     1,
+                     1,
+                     1]
+            ]
+            
+            self.tableView.reloadData()
+            flashScreen()
+            
+        case 4:
+            stretchingSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [0,
+                     1,
+                     1,
+                     0,
+                     1],
+                    // Lower Back
+                    [1,
+                     0,
+                     1,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     1,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
+                     0,
+                     1,
+                     0,
+                     1],
+                    // Accessory
+                    [1,
+                     1,
+                     1,
+                     1]
+            ]
+            
+            self.tableView.reloadData()
+            flashScreen()
+            
+        case 5:
+            stretchingSelectedArray =
+                [
+                    // Mandatory
+                    [0,
+                     1],
+                    // Foam/Ball Roll
+                    [1,
+                     0,
+                     1,
+                     0,
+                     0],
+                    // Lower Back
+                    [1,
+                     1,
+                     1,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
+                     0,
+                     0,
+                     1,
+                     1],
+                    // Accessory
+                    [1,
+                     1,
+                     1,
+                     1]
+            ]
+            
+            self.tableView.reloadData()
+            flashScreen()
+            
+        case 6:
+            stretchingSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [1,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Lower Back
+                    [1,
+                     0,
+                     0,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [1,
+                     0,
+                     0,
+                     1,
+                     0,
+                     0],
+                    // Accessory
+                    [1,
+                     1,
+                     0,
+                     0]
+            ]
+            
+            self.tableView.reloadData()
+            flashScreen()
+            
+        case 7:
+            break
+            
+        case 8:
+            let fullArray = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
+            let array = fullArray[0]
+            stretchingSelectedArray = array
+            
+            
+            self.tableView.reloadData()
+            flashScreen()
+            
+        case 9:
+            let fullArray = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
+            let array = fullArray[1]
+            stretchingSelectedArray = array
+            
+            
+            self.tableView.reloadData()
+            flashScreen()
+            
+        case 10:
+            let fullArray = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
+            let array = fullArray[2]
+            stretchingSelectedArray = array
+            
+            
+            self.tableView.reloadData()
+            flashScreen()
+            
+        default:
+            stretchingSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [1,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Lower Back
+                    [1,
+                     0,
+                     1,
+                     0,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
+                     0,
+                     1,
+                     0],
+                    // Accessory
+                    [1,
+                     1,
+                     1,
+                     1]
+            ]
+            
+            self.tableView.reloadData()
+            flashScreen()
+            
+            
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // Table View
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return stretchingArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return NSLocalizedString(tableViewSectionArray[section], comment: "")
+    }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
+        header.textLabel?.textColor = .black
+        header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        header.contentView.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        
+        
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return stretchingArray[section].count
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        
+        cell.textLabel?.text = NSLocalizedString(stretchingArray[indexPath.section][indexPath.row], comment: "")
+        
+        cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+        cell.textLabel?.textAlignment = .left
+        cell.backgroundColor = .clear
+        cell.tintColor = .black
+        
+        
+        if stretchingSelectedArray[indexPath.section][indexPath.row] == 1 {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+        
+        
+        if cell.textLabel?.text == NSLocalizedString("5minCardioL", comment: "") {
+            cell.isUserInteractionEnabled = false
+        }
+        if cell.textLabel?.text == NSLocalizedString("5minCardioI", comment: "") {
+            cell.isUserInteractionEnabled = false
+        }
+        
+        return cell
+        
+        
+    }
+    
+    
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 47
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        
+        
+        if cell?.accessoryType == .checkmark {
+            cell?.accessoryType = .none
+            stretchingSelectedArray[indexPath.section][indexPath.row] = 0
+        } else {
+            cell?.accessoryType = .checkmark
+            stretchingSelectedArray[indexPath.section][indexPath.row] = 1
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // QuestionMark Button Action
+    @IBAction func informationButtonAction(_ sender: Any) {
+        
+        if self.informationView.frame.minY < self.view.frame.maxY {
             
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 
-                self.informationViewStretchingC.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
                 
             }, completion: nil)
             UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 
-                self.informationTitleStretchingC.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
-            self.informationViewStretchingC.contentOffset.y = 0
+            self.informationView.contentOffset.y = 0
             
             
         } else {
@@ -210,50 +1205,77 @@ class StretchingChoice: UIViewController  {
             
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 
-                self.informationViewStretchingC.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
+                self.informationView.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
                 
             }, completion: nil)
             UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 
-                self.informationTitleStretchingC.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
+                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
                 
             }, completion: nil)
-            self.informationViewStretchingC.contentOffset.y = 0
-            
+            self.informationView.contentOffset.y = 0
             
             
         }
         
-        
-        
     }
     
-
+    
+    
     
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
         if (extraSwipe.direction == .down){
             
-            if self.informationViewStretchingC.frame.minY < self.view.frame.maxY {
+            if self.informationView.frame.minY < self.view.frame.maxY {
                 UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                     
-                    self.informationViewStretchingC.transform = CGAffineTransform(translationX: 0, y: 0)
+                    self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
                     
                 }, completion: nil)
                 UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                     
-                    self.informationTitleStretchingC.transform = CGAffineTransform(translationX: 0, y: 0)
+                    self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
                 }, completion: nil)
                 
             }
         }
     }
-
-    // Remove Back Bar Text
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        navigationItem.backBarButtonItem = backItem
+    
+    
+    
+    
+    
+    // Begin Button
+    @IBAction func beginButton(_ sender: Any) {
+        
+        let delayInSeconds = 1.0
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            
+            _ = self.navigationController?.popToRootViewController(animated: false)
+            
+        }
+        
     }
+    
+    
+    
+    
+    // Pass Array to next ViewController
+    //
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "stretching") {
+            
+            
+            let destinationNC = segue.destination as! UINavigationController
+            
+            let destinationVC = destinationNC.viewControllers.first as! StretchingScreen
+            
+            destinationVC.stretchingMovementsArray = stretchingArray
+            destinationVC.stretchingMovementsSelectedArray = stretchingSelectedArray
+            
+        }
+    }
+    
     
 }
