@@ -1,8 +1,8 @@
 //
-//  WarmupScreenCardio.swift
+//  StretchingScreenWorkout.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 20.01.17.
+//  Created by Luke Smith on 26.01.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -13,7 +13,7 @@ import UserNotifications
 
 
 
-class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     
@@ -37,11 +37,12 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     // Sets Array
     var setsArrayF =
         [
+            // Mandatory
+            [1,
+             1],
             // Foam/Ball Roll
-            [3,
-             1,
-             1,
-             1,
+            [1,
+             3,
              1,
              1,
              1],
@@ -51,32 +52,21 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
              1,
              1,
              1],
-            // General Mobility
-            [1,
-             1,
-             1,
-             1,
-             2,
-             1,
-             1,
-             1,
-             1,
-             2,
-             1,
-             1,],
-            // Dynamic Warm Up Drills
+            // Shoulder
             [2,
-             2,
-             3,
-             3,
-             3,
-             2,
-             2,
-             2,
-             4],
+             1,
+             1,
+             1],
+            // Band/Bar/Machine Assisted
+            [2,
+             1,
+             1,
+             1,
+             1,
+             1],
             // Accessory
             [1,
-             2,
+             1,
              1,
              1]
     ]
@@ -91,45 +81,32 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
             ["2-7",
              "5-10",
              "2-7",
-             "2-7",
-             "2-7",
-             "2-7",
-             "2-7"],
+             "30-60s",
+             "30-60s"],
             // Lower Back
             ["5-10",
              "5-10",
              "5-10",
              "5-10",
              "15-20"],
-            // General Mobility
-            ["5-10",
+            // Shoulder
+            ["10-20",
+             "5-10",
+             "15",
+             "10"],
+            // Band/Bar/Machine Assisted
+            ["10-15",
+             "5-15",
              "5-10",
              "5-10",
              "10-15",
-             "15-30s",
-             "15-30s",
-             "5-10",
-             "30-60s",
-             "30-60s",
-             "10-20",
-             "10-20",
-             "10-20"],
-            // Dynamic Warm Up Drills
-            ["5-15",
-             "10-15",
-             "15-30s",
-             "15-30s",
-             "15-30s",
-             "50m",
-             "50m",
-             "50m",
-             "5-20"],
+             "10-20",],
             // Accessory
-            ["30-60s",
-             "10-15",
+            ["15-30s",
              "15-30s",
-             "15-30s",
-             "15-30s"]
+             NSLocalizedString("asNecessary", comment: ""),
+             NSLocalizedString("asNecessary", comment: "")
+            ]
     ]
     var repsArray: [String] = []
     // Demonstration Array
@@ -138,96 +115,76 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     // Target Area Array
     var targetAreaArrayF =
         [
+            // Mandatory
+            [#imageLiteral(resourceName: "Heart"),
+             #imageLiteral(resourceName: "Heart")],
             // Foam/Ball Roll
             [#imageLiteral(resourceName: "Thoracic"),
+             #imageLiteral(resourceName: "Thoracic"),
              #imageLiteral(resourceName: "Lat and Delt"),
-             #imageLiteral(resourceName: "Quad"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Glute"),
-             #imageLiteral(resourceName: "Calf")],
+             #imageLiteral(resourceName: "Pec and Front Delt"),
+             #imageLiteral(resourceName: "Rear Delt")],
             // Lower Back
             [#imageLiteral(resourceName: "Core"),
              #imageLiteral(resourceName: "Core"),
              #imageLiteral(resourceName: "Core"),
              #imageLiteral(resourceName: "Core"),
              #imageLiteral(resourceName: "Spine")],
-            // General Mobility
-            [#imageLiteral(resourceName: "Hip Area"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hamstring and Lower Back"),
-             #imageLiteral(resourceName: "Piriformis"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Hamstring and Glute"),
-             #imageLiteral(resourceName: "Hamstring and Glute"),
-             #imageLiteral(resourceName: "Quad"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch")],
-            // Dynamic Warm Up Drills
-            [#imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat")],
+            // Shoulder
+            [#imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Back and Shoulder"),
+             #imageLiteral(resourceName: "Serratus"),
+             #imageLiteral(resourceName: "Shoulder")],
+            // Band/Bar/Machine Assisted
+            [#imageLiteral(resourceName: "Upper Back and Shoulder"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Back")],
             // Accessory
             [#imageLiteral(resourceName: "Wrist and Ankle"),
-             #imageLiteral(resourceName: "Shoulder"),
              #imageLiteral(resourceName: "Lat"),
-             #imageLiteral(resourceName: "Calf")]
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Back and Bicep")]
     ]
     
     var targetAreaArray: [UIImage] = []
     // Explanation Array
     var explanationArrayF =
         [
+            // Mandatory
+            ["5minCardioLE",
+             "5minCardioIE"],
             // Foam/Ball Roll
-            ["thoracicSpineE",
+            ["backfE",
+             "thoracicSpineE",
              "latE",
-             "quadfE",
-             "adductorfE",
-             "hamstringfE",
-             "glutefE",
-             "calvefE"],
+             "pecDeltE",
+             "rearDeltE"],
             // Lower Back
             ["sideLegDropE",
              "sideLegKickE",
              "scorpionKickE",
              "sideBendE",
              "catCowE"],
-            // General Mobility
-            ["hipCirclesE",
-             "mountainClimberE",
-             "groinStretchE",
-             "gluteBridgeE",
-             "piriformisStretchE",
-             "hipFlexorStretchE",
-             "cossakSquatE",
-             "hipHingesE",
-             "hamstringStretchE",
-             "quadStretchE",
-             "sideLegSwingsE",
-             "frontLegSwingsE"],
-            // Dynamic Warm Up Drills
-            ["jumpSquatE",
-             "lungeE",
-             "gluteKicksE",
-             "aSkipsE",
-             "bSkipsE",
-             "grapeVinesE",
-             "lateralBoundE",
-             "straightLegBoundE",
-             "sprintsE"],
+            // Shoulder
+            ["wallSlidesE",
+             "superManShoulderE",
+             "scapulaE",
+             "shoulderRotationE"],
+            // Band/Bar/Machine Assisted
+            ["facePullE",
+             "externalRotationE",
+             "internalRotationE",
+             "shoulderDislocationE",
+             "rearDeltFlyE",
+             "latPulloverE"],
             // Accessory
             ["wristAnkleRotationE",
-             "wallSlidesE",
              "latStretchE",
-             "calveStretchE"]
+             "pushUpE",
+             "pullUpE"]
     ]
     var explanationArray: [String] = []
     
@@ -304,14 +261,15 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     // Image Views
     let demonstrationImage1 = UIImageView()
     let demonstrationImage2 = UIImageView()
-    // Image Expand
+    
+    // Expand Image
     @IBOutlet weak var imageExpand: UIButton!
     
     
     
     
     
-    // Explanation
+    // Explanation Expand
     @IBOutlet weak var explanationExpand: UIButton!
     
     // Timer
@@ -367,6 +325,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    
     
     
     
@@ -449,11 +408,8 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         
         
         
-        
-        
         // Body Image View
         bodyImage.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
-        
         
         
         
@@ -467,7 +423,12 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         //Image Tint
         imageExpand.tintColor = colour2
         
-
+        
+        
+        
+        
+        
+        
         
         
         
@@ -619,12 +580,6 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         // App Moved To Background
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
-        
-        
-        
-        
-        
-        
         
         
         
@@ -796,17 +751,6 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
             
             buttonArray[0].isEnabled = true
             
-        } else if setsArray[warmupScreenIndex] == 4 {
-            
-            let stackView = UIStackView(arrangedSubviews: buttonArray)
-            stackView.frame = CGRect(x: ((self.view.frame.size.width - 196) / 5), y: 12.25, width: ((3 * (self.view.frame.size.width - 196)) / 5) + 196, height: 49)
-            stackView.axis = .horizontal
-            stackView.distribution = .equalSpacing
-            
-            setRepView.addSubview(stackView)
-            
-            buttonArray[0].isEnabled = true
-            
         }
         
         
@@ -838,7 +782,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         
         self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
-
+        
         
         
         // Set Buttons
@@ -896,6 +840,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         
         
         // Explanation
+        
         
         self.scrollViewExplanation.contentOffset.y = 0
         
@@ -1242,32 +1187,18 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
                 
                 buttonArray[1].isEnabled = true
                 
-            } else if buttonArray[2].isEnabled == false {
+            } else if buttonArray[0].isEnabled == false {
                 buttonArray[2].isEnabled = true
             }
             
             
-        } else if setsArray[warmupScreenIndex] == 4{
-    
-            if buttonArray[1].isEnabled == false {
-    
-                buttonArray[1].isEnabled = true
-    
-            } else if buttonArray[2].isEnabled == false {
-                buttonArray[2].isEnabled = true
-                buttonArray[3].isEnabled = true
-            } else if buttonArray[3].isEnabled == false {
-                buttonArray[3].isEnabled = true
-            }
-    
-    
-    }
-    
+        }
+        
         sender.backgroundColor = colour2
         sender.isEnabled = false
-    
+        
     }
-
+    
     
     
     // Next Button
@@ -1368,9 +1299,8 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     
     let demonstrationImageExpandedPosition = UIView()
     
-    
     @IBAction func expandImage(_ sender: Any) {
-       
+        
         
         //Screen Size
         //
@@ -1551,8 +1481,8 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     
     // Expand Explanation
     //
-    
     @IBAction func expandExplanation(_ sender: Any) {
+        
         
         
         // View
@@ -1660,8 +1590,6 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         nextButton.isEnabled = true
         backButton.isEnabled = true
     }
-    
-    
     
     
     

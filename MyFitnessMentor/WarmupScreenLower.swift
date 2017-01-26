@@ -63,8 +63,9 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
              2,
              1,
              1,
-             1,
              2,
+             1,
+             1,
              1,
              1,
              2,
@@ -104,7 +105,6 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
              "15-30s",
              "15-30s",
              "5-10",
-             "30-60s",
              "10-20",
              "10-20",
              "10-20",
@@ -149,7 +149,6 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
              #imageLiteral(resourceName: "Adductor"),
              #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
              #imageLiteral(resourceName: "Hamstring and Glute"),
-             #imageLiteral(resourceName: "Hamstring and Glute"),
              #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
              #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
              #imageLiteral(resourceName: "Squat"),
@@ -190,7 +189,6 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             "piriformisStretchE",
             "hipFlexorStretchE",
             "cossakSquatE",
-            "hamstringStretchE",
             "hipHingesE",
             "sideKicksE",
             "frontKicksE",
@@ -359,19 +357,6 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         self.view.applyGradient(colours: [colour1, colour2])
         
         backButton.tintColor = colour1
-        
-        
-        // Navigation Title
-        navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
-        navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
-        navigationTitle.center.x = self.view.center.x
-        navigationTitle.textColor = colour1
-        navigationTitle.font = UIFont(name: "SFUIDisplay-heavy", size: 23)
-        navigationTitle.backgroundColor = .clear
-        navigationTitle.textAlignment = .center
-        navigationTitle.adjustsFontSizeToFitWidth = true
-        
-        self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
         
         //
@@ -796,6 +781,20 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Navigation Bar
         navigationTitle.text = NSLocalizedString(warmupArray[warmupScreenIndex], comment: "")
+        
+        // Navigation Title
+        navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
+        navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
+        navigationTitle.center.x = self.view.center.x
+        navigationTitle.textColor = colour1
+        navigationTitle.font = UIFont(name: "SFUIDisplay-heavy", size: 23)
+        navigationTitle.backgroundColor = .clear
+        navigationTitle.textAlignment = .center
+        navigationTitle.adjustsFontSizeToFitWidth = true
+        
+        self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
+        
+        
         
         
         // Set Buttons

@@ -348,19 +348,6 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         backButton.tintColor = colour1
         
         
-        // Navigation Title
-        navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
-        navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
-        navigationTitle.center.x = self.view.center.x
-        navigationTitle.textColor = colour1
-        navigationTitle.font = UIFont(name: "SFUIDisplay-heavy", size: 23)
-        navigationTitle.backgroundColor = .clear
-        navigationTitle.textAlignment = .center
-        navigationTitle.adjustsFontSizeToFitWidth = true
-        
-        self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
-        
-        
         //
         // Demonstration Image
         //
@@ -782,6 +769,20 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Navigation Bar
         navigationTitle.text = NSLocalizedString(warmupArray[warmupScreenIndex], comment: "")
+        
+        // Navigation Title
+        navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
+        navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
+        navigationTitle.center.x = self.view.center.x
+        navigationTitle.textColor = colour1
+        navigationTitle.font = UIFont(name: "SFUIDisplay-heavy", size: 23)
+        navigationTitle.backgroundColor = .clear
+        navigationTitle.textAlignment = .center
+        navigationTitle.adjustsFontSizeToFitWidth = true
+        
+        self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
+        
+
         
         
         // Set Buttons

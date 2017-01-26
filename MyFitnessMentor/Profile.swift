@@ -104,7 +104,7 @@ class Profile: UITableViewController{
         // Title
         //
         
-        self.navigationController?.navigationBar.topItem?.title = (NSLocalizedString("preferences", comment: ""))
+        self.navigationController?.navigationBar.topItem?.title = (NSLocalizedString("profile", comment: ""))
         
         
         

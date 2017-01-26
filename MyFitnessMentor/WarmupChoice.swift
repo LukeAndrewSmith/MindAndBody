@@ -66,7 +66,6 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         fullBody.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            //.white
         fullBody.layer.borderWidth = 10
         fullBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         
@@ -75,7 +74,6 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         upperBody.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            //.white
         upperBody.layer.borderWidth = 10
         upperBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         
@@ -83,7 +81,6 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
         lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         lowerBody.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            //.white
         lowerBody.layer.borderWidth = 10
         lowerBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         
@@ -91,7 +88,6 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
         cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         cardio.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            //.white
         cardio.layer.borderWidth = 10
         cardio.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         //

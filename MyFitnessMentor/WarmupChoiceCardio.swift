@@ -78,7 +78,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              0,
              0,
              0,
-             0,
              0],
             // Dynamic Warm Up Drills
             [0,
@@ -124,7 +123,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0,
-                 0,
                  0],
                 // Dynamic Warm Up Drills
                 [0,
@@ -167,7 +165,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0,
-                 0,
                  0,],
                 // Dynamic Warm Up Drills
                 [0,
@@ -202,7 +199,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0],
                 // General Mobility
                 [0,
-                 0,
                  0,
                  0,
                  0,
@@ -257,7 +253,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              "piriformisStretch",
              "hipFlexorStretch",
              "cossakSquat",
-             "hamstringStretch",
              "hipHinges",
              "sideLegSwings",
              "frontLegSwings"],
@@ -298,7 +293,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              0],
             // General Mobility
             [0,
-             0,
              0,
              0,
              0,
@@ -783,7 +777,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Dynamic Warm Up Drills
                     [0,
@@ -824,7 +817,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0],
                     // General Mobility
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -881,7 +873,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Dynamic Warm Up Drills
                     [0,
@@ -922,7 +913,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0],
                     // General Mobility
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -979,7 +969,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Dynamic Warm Up Drills
                     [0,
@@ -1028,7 +1017,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Dynamic Warm Up Drills
                     [0,
@@ -1069,7 +1057,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0],
                     // General Mobility
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1197,12 +1184,10 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         
-        if cell.textLabel?.text == NSLocalizedString("5minCardioL", comment: "") {
+        if cell.textLabel?.text == NSLocalizedString("wristAnkleRotation", comment: "") {
             cell.isUserInteractionEnabled = false
         }
-        if cell.textLabel?.text == NSLocalizedString("5minCardioI", comment: "") {
-            cell.isUserInteractionEnabled = false
-        }
+        
         
         return cell
         

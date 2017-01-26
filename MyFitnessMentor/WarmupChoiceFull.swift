@@ -95,7 +95,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              0,
              0,
              0,
-             0,
              0],
             // Accessory
             [0,
@@ -153,7 +152,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0,
-                 0,
                  0],
                 // Accessory
                 [0,
@@ -208,7 +206,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0,
-                 0,
                  0],
                 // Accessory
                 [0,
@@ -252,7 +249,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0],
                 // General Mobility
                 [0,
-                 0,
                  0,
                  0,
                  0,
@@ -320,7 +316,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              "piriformisStretch",
              "hipFlexorStretch",
              "cossakSquat",
-             "hamstringStretch",
              "hipHinges",
              "sideLegSwings",
              "frontLegSwings",
@@ -877,7 +872,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Accessory
                     [0,
@@ -927,7 +921,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0],
                     // General Mobility
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -999,7 +992,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Accessory
                     [0,
@@ -1049,7 +1041,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0],
                     // General Mobility
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1121,7 +1112,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Accessory
                     [0,
@@ -1182,7 +1172,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Accessory
                     [0,
@@ -1232,7 +1221,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0],
                     // General Mobility
                     [0,
-                     0,
                      0,
                      0,
                      0,

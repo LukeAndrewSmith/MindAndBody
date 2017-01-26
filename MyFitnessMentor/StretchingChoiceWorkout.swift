@@ -1,15 +1,15 @@
 //
-//  WarmupChoiceLower.swift
+//  StretchingChoiceWorkout.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 20.01.17.
+//  Created by Luke Smith on 26.01.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -31,9 +31,9 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     // PickerViews
     @IBOutlet weak var pickerView: UIPickerView!
     
+    
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
-    
     
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
@@ -58,8 +58,6 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              0,
              0,
              0,
-             0,
-             0,
              0],
             // Lower Back
             [0,
@@ -67,15 +65,13 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              0,
              0,
              0],
-            // General Mobility
+            // Shoulders
             [0,
              0,
              0,
-             0,
-             0,
-             0,
-             0,
-             0,
+             0],
+            // Band Assisted
+            [0,
              0,
              0,
              0,
@@ -83,130 +79,121 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              0],
             // Accessory
             [0,
+             0,
              0,
              0]
     ]
     
-    // Personal Presets
-    var warmupLowerPresets =
-    [
+    var warmupUpperPresets =
         [
-            // Mandatory
-            [0,
-             0],
-            // Foam/Ball Roll
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Lower Back
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // General Mobility
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Accessory
-            [0,
-             0,
-             0]
-        ],
-        [
-            // Mandatory
-            [0,
-             0],
-            // Foam/Ball Roll
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Lower Back
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // General Mobility
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Accessory
-            [0,
-             0,
-             0],
-        ],
-        [
-            // Mandatory
-            [0,
-             0],
-            // Foam/Ball Roll
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Lower Back
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // General Mobility
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Accessory
-            [0,
-             0,
-             0]
-        ]
+            [
+                // Mandatory
+                [0,
+                 0],
+                // Foam/Ball Roll
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Lower Back
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Shoulders
+                [0,
+                 0,
+                 0,
+                 0],
+                // Band Assisted
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Accessory
+                [0,
+                 0,
+                 0,
+                 0]
+            ],
+            [
+                // Mandatory
+                [0,
+                 0],
+                // Foam/Ball Roll
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Lower Back
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Shoulders
+                [0,
+                 0,
+                 0,
+                 0],
+                // Band Assisted
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Accessory
+                [0,
+                 0,
+                 0,
+                 0]
+            ],
+            [
+                // Mandatory
+                [0,
+                 0],
+                // Foam/Ball Roll
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Lower Back
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Shoulders
+                [0,
+                 0,
+                 0,
+                 0],
+                // Band Assisted
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Accessory
+                [0,
+                 0,
+                 0,
+                 0]
+            ]
     ]
     
     
     
-    // Warmup Lower Array
-    var warmupLowerArray =
+    // Warmup Upper Array
+    var warmupUpperArray =
         [
             // Mandatory
             ["5minCardioL",
@@ -214,38 +201,34 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             // Foam/Ball Roll
             ["backf",
              "thoracicSpine",
-             "quadf",
-             "adductorf",
-             "hamstringf",
-             "glutef",
-             "calvef"],
+             "lat",
+             "pecDelt",
+             "rearDelt"],
             // Lower Back
             ["sideLegDrop",
              "sideLegKick",
              "scorpionKick",
              "sideBend",
              "catCow"],
-            // General Mobility
-            ["rollBack",
-             "hipCircles",
-             "mountainClimber",
-             "groinStretch",
-             "gluteBridge",
-             "piriformisStretch",
-             "hipFlexorStretch",
-             "cossakSquat",
-             "hipHinges",
-             "sideLegSwings",
-             "frontLegSwings",
-             "jumpSquat",
-             "lunge"],
+            // Shoulder
+            ["wallSlides",
+             "superManShoulder",
+             "scapula",
+             "shoulderRotation"],
+            // Band/Bar/Machine Assisted
+            ["facePull",
+             "externalRotation",
+             "internalRotation",
+             "shoulderDislocation",
+             "rearDeltFly",
+             "latPullover"],
             // Accessory
             ["wristAnkleRotation",
-             "wallSlides",
-             "calveStretch"]
+             "latStretch",
+             "pushUp",
+             "pullUp"]
     ]
     
-
     
     // Default Warmup Selected Array
     var warmupSelectedArray =
@@ -254,11 +237,9 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             [1,
              0],
             // Foam/Ball Roll
-            [0,
-             1,
-             1,
+            [1,
              0,
-             1,
+             0,
              0,
              0],
             // Lower Back
@@ -267,26 +248,24 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
              1,
              0,
              1],
-            // General Mobility
-            [0,
+            // Shoulders
+            [1,
+             0,
+             0,
+             1],
+            // Band Assisted
+            [1,
              1,
              0,
-             0,
              1,
              0,
-             0,
-             0,
-             0,
-             1,
-             1,
-             1,
              0],
             // Accessory
             [1,
              1,
+             1,
              1]
     ]
-
     
     // Picker View Array
     var pickerViewArray =
@@ -307,7 +286,8 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             "mandatory",
             "foamRoll",
             "lowerBack",
-            "generalMobility",
+            "shoulder",
+            "bandAssisted",
             "accessory"
     ]
     
@@ -345,14 +325,14 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Colours
+        // Colour
         self.view.applyGradient(colours: [colour1, colour2])
         questionMark.tintColor = colour1
-
+        
         
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("lowerBody", comment: ""))
+        navigationBar.title = (NSLocalizedString("upperBody", comment: ""))
         
         
         
@@ -432,10 +412,10 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceLowerText", comment: "")))
+        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceUpperText", comment: "")))
         
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceLowerText", comment: "")))
+        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceUpperText", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
@@ -474,19 +454,16 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         
-        
         //
         // Preset Warmups
         //
         let defaults = UserDefaults.standard
         
-        defaults.register(defaults: ["warmupLowerPresets" : warmupLowerPresets])
-        defaults.register(defaults: ["warmupLowerPresetTexts" : presetTexts])
-        defaults.register(defaults: ["warmupLowerPresetNumber" : 0])
+        defaults.register(defaults: ["warmupUpperPresets" : warmupUpperPresets])
+        defaults.register(defaults: ["warmupUpperPresetTexts" : presetTexts])
+        defaults.register(defaults: ["warmupUpperPresetNumber" : 0])
         
         defaults.synchronize()
-        
-        
         
     }
     
@@ -505,9 +482,9 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBAction func addPreset(_ sender: Any) {
         
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "warmupLowerPresetNumber")
-        var warmupPreset = defaults.object(forKey: "warmupLowerPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "warmupLowerPresetTexts") as! [String]
+        let number = defaults.integer(forKey: "warmupUpperPresetNumber")
+        var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "warmupUpperPresetTexts") as! [String]
         
         
         // Set Preset
@@ -536,11 +513,9 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                 
                 
                 
-                
-                
                 // Update Preset Text Arrays
                 presetTextArray[number] = (textField?.text)!
-                defaults.set(presetTextArray, forKey: "warmupLowerPresetTexts")
+                defaults.set(presetTextArray, forKey: "warmupUpperPresetTexts")
                 defaults.synchronize()
                 
                 
@@ -550,7 +525,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                 // Set new Preset Array
                 //
                 warmupPreset[number] = self.warmupSelectedArray
-                defaults.set(warmupPreset, forKey: "warmupLowerPresets")
+                defaults.set(warmupPreset, forKey: "warmupUpperPresets")
                 
                 defaults.synchronize()
                 
@@ -559,7 +534,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                 //
                 let newNumber = number + 1
                 
-                defaults.set(newNumber, forKey: "warmupLowerPresetNumber")
+                defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
                 defaults.synchronize()
                 
                 
@@ -570,7 +545,6 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.tableView.reloadData()
                 
             }))
-            // End of actions upon OK press
             
             // 4. Present the alert.
             self.present(alert, animated: true, completion: nil)
@@ -592,9 +566,9 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBAction func removePreset(_ sender: Any) {
         
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "warmupLowerPresetNumber")
-        var warmupPreset = defaults.object(forKey: "warmupLowerPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "warmupLowerPresetTexts") as! [String]
+        let number = defaults.integer(forKey: "warmupUpperPresetNumber")
+        var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "warmupUpperPresetTexts") as! [String]
         
         
         let selectedRow = pickerView.selectedRow(inComponent: 0)
@@ -606,18 +580,18 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             warmupPreset.remove(at: index)
             warmupPreset.append(emptyArray)
             
-            defaults.set(warmupPreset, forKey: "warmupLowerPresets")
+            defaults.set(warmupPreset, forKey: "warmupUpperPresets")
             
             
             presetTextArray.remove(at: index)
             presetTextArray.append(emptyString)
             
-            defaults.set(presetTextArray, forKey: "warmupLowerPresetTexts")
+            defaults.set(presetTextArray, forKey: "warmupUpperPresetTexts")
             
             
             if number > 0 {
                 let newNumber = number - 1
-                defaults.set(newNumber, forKey: "warmupLowerPresetNumber")
+                defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
             } else {
                 
             }
@@ -683,7 +657,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             
         } else if row == pickerViewArray.count + 1 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupLowerPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
             let titleData = titleDataArray[0]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -694,7 +668,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             
         } else if row == pickerViewArray.count + 2 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupLowerPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
             let titleData = titleDataArray[1]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -705,7 +679,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             
         } else if row == pickerViewArray.count + 3 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupLowerPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
             let titleData = titleDataArray[2]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -733,35 +707,32 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                     [1,
                      0],
                     // Foam/Ball Roll
-                    [0,
-                     1,
-                     1,
+                    [1,
                      0,
-                     1,
+                     0,
                      0,
                      0],
                     // Lower Back
                     [1,
                      0,
-                     1,
+                     0,
                      0,
                      1],
-                    // General Mobility
-                    [0,
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [1,
                      1,
                      0,
-                     0,
                      1,
                      0,
-                     0,
-                     0,
-                     0,
-                     1,
-                     1,
-                     1,
                      0],
                     // Accessory
                     [1,
+                     1,
                      1,
                      1]
             ]
@@ -780,32 +751,29 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                      0,
                      0,
                      0,
-                     0,
-                     0,
                      0],
                     // Lower Back
-                    [0,
+                    [1,
                      0,
                      0,
-                     0,
+                     1,
                      0],
-                    // General Mobility
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
                     [0,
                      0,
                      0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
+                     1,
                      0,
                      0],
                     // Accessory
-                    [0,
-                     0,
+                    [1,
+                     1,
+                     1,
                      0]
             ]
             
@@ -823,33 +791,30 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                      0,
                      0,
                      0,
-                     0,
-                     0,
                      0],
                     // Lower Back
+                    [1,
+                     1,
+                     1,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     1,
+                     1],
+                    // Band Assisted
                     [0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // General Mobility
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
                      0,
                      0,
                      0,
                      0,
                      0],
                     // Accessory
-                    [0,
-                     0,
-                     0]
+                    [1,
+                     1,
+                     1,
+                     1]
             ]
             
             self.tableView.reloadData()
@@ -862,37 +827,34 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                     [1,
                      0],
                     // Foam/Ball Roll
-                    [0,
+                    [1,
                      0,
+                     1,
                      0,
-                     0,
-                     0,
-                     0,
-                     0],
+                     1],
                     // Lower Back
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // General Mobility
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
+                    [1,
+                     1,
+                     1,
                      0,
                      0],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
+                     0,
+                     0,
+                     0,
+                     1],
                     // Accessory
-                    [0,
-                     0,
-                     0]
+                    [1,
+                     1,
+                     1,
+                     1]
             ]
             
             self.tableView.reloadData()
@@ -906,36 +868,33 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                      0],
                     // Foam/Ball Roll
                     [0,
+                     1,
+                     1,
                      0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
+                     1],
                     // Lower Back
-                    [0,
+                    [1,
                      0,
+                     1,
                      0,
+                     1],
+                    // Shoulders
+                    [1,
                      0,
-                     0],
-                    // General Mobility
-                    [0,
+                     1,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
                      0,
+                     1,
                      0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
+                     1],
                     // Accessory
-                    [0,
-                     0,
-                     0]
+                    [1,
+                     1,
+                     1,
+                     1]
             ]
             
             self.tableView.reloadData()
@@ -945,40 +904,37 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             warmupSelectedArray =
                 [
                     // Mandatory
-                    [1,
-                     0],
-                    // Foam/Ball Roll
                     [0,
+                     1],
+                    // Foam/Ball Roll
+                    [1,
                      0,
-                     0,
-                     0,
-                     0,
+                     1,
                      0,
                      0],
                     // Lower Back
-                    [0,
+                    [1,
+                     1,
+                     1,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
                      0,
                      0,
-                     0,
-                     0],
-                    // General Mobility
-                    [0,
-                     0,
-                     0,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
                      0,
                      0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
+                     1,
+                     1],
                     // Accessory
-                    [0,
-                     0,
-                     0]
+                    [1,
+                     1,
+                     1,
+                     1]
             ]
             
             self.tableView.reloadData()
@@ -991,35 +947,32 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
                     [1,
                      0],
                     // Foam/Ball Roll
-                    [0,
-                     0,
-                     0,
+                    [1,
                      0,
                      0,
                      0,
                      0],
                     // Lower Back
-                    [0,
+                    [1,
                      0,
                      0,
                      0,
-                     0],
-                    // General Mobility
-                    [0,
+                     1],
+                    // Shoulders
+                    [1,
                      0,
                      0,
+                     1],
+                    // Band Assisted
+                    [1,
                      0,
                      0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
+                     1,
                      0,
                      0],
                     // Accessory
-                    [0,
+                    [1,
+                     1,
                      0,
                      0]
             ]
@@ -1031,7 +984,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             break
             
         case 8:
-            let fullArray = defaults.object(forKey: "warmupLowerPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
             let array = fullArray[0]
             warmupSelectedArray = array
             
@@ -1040,7 +993,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             flashScreen()
             
         case 9:
-            let fullArray = defaults.object(forKey: "warmupLowerPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
             let array = fullArray[1]
             warmupSelectedArray = array
             
@@ -1049,7 +1002,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             flashScreen()
             
         case 10:
-            let fullArray = defaults.object(forKey: "warmupLowerPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
             let array = fullArray[2]
             warmupSelectedArray = array
             
@@ -1058,7 +1011,45 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             flashScreen()
             
         default:
-            break
+            warmupSelectedArray =
+                [
+                    // Mandatory
+                    [1,
+                     0],
+                    // Foam/Ball Roll
+                    [1,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Lower Back
+                    [1,
+                     0,
+                     1,
+                     0,
+                     0,
+                     1],
+                    // Shoulders
+                    [1,
+                     0,
+                     0,
+                     1],
+                    // Band Assisted
+                    [1,
+                     1,
+                     0,
+                     1,
+                     0],
+                    // Accessory
+                    [1,
+                     1,
+                     1,
+                     1]
+            ]
+            
+            self.tableView.reloadData()
+            flashScreen()
+            
             
         }
         
@@ -1077,7 +1068,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     // Table View
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return warmupLowerArray.count
+        return warmupUpperArray.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -1101,7 +1092,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return warmupLowerArray[section].count
+        return warmupUpperArray[section].count
     }
     
     
@@ -1110,7 +1101,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         
-        cell.textLabel?.text = NSLocalizedString(warmupLowerArray[indexPath.section][indexPath.row], comment: "")
+        cell.textLabel?.text = NSLocalizedString(warmupUpperArray[indexPath.section][indexPath.row], comment: "")
         
         cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
@@ -1254,14 +1245,14 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     // Pass Array to next ViewController
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "warmupLower") {
+        if (segue.identifier == "warmupUpper") {
             
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenLower
+            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenUpper
             
-            destinationVC.warmupMovementsArray = warmupLowerArray
+            destinationVC.warmupMovementsArray = warmupUpperArray
             destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
             
         }
