@@ -37,6 +37,15 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     // Sets Array
     var setsArrayF =
         [
+            // Joint Rotations
+            [1,
+             1,
+             1,
+             1,
+             1,
+             1,
+             1,
+             1],
             // Foam/Ball Roll
             [3,
              1,
@@ -75,8 +84,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
              2,
              4],
             // Accessory
-            [1,
-             2,
+            [2,
              1,
              1]
     ]
@@ -84,9 +92,15 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     // Sets Array
     var repsArrayF =
         [
-            // Mandatory
-            ["1",
-             "1"],
+            // Joint Rotations
+            ["5-10",
+             "5=10",
+             "5-10",
+             "5-10",
+             "5-10",
+             "5-10",
+             "5-10",
+             "5-10"],
             // Foam/Ball Roll
             ["2-7",
              "5-10",
@@ -109,8 +123,8 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
              "15-30s",
              "15-30s",
              "5-10",
-             "30-60s",
-             "30-60s",
+             "15-30s",
+             "15-30s",
              "10-20",
              "10-20",
              "10-20"],
@@ -125,8 +139,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
              "50m",
              "5-20"],
             // Accessory
-            ["30-60s",
-             "10-15",
+            ["10-15",
              "15-30s",
              "15-30s",
              "15-30s"]
@@ -138,6 +151,15 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     // Target Area Array
     var targetAreaArrayF =
         [
+            // Joint Rotations
+            [#imageLiteral(resourceName: "Wrist"),
+             #imageLiteral(resourceName: "Elbow"),
+             #imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Neck"),
+             #imageLiteral(resourceName: "Waist"),
+             #imageLiteral(resourceName: "Hip Area"),
+             #imageLiteral(resourceName: "Knee"),
+             #imageLiteral(resourceName: "Ankle")],
             // Foam/Ball Roll
             [#imageLiteral(resourceName: "Thoracic"),
              #imageLiteral(resourceName: "Lat and Delt"),
@@ -176,8 +198,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
              #imageLiteral(resourceName: "Squat"),
              #imageLiteral(resourceName: "Squat")],
             // Accessory
-            [#imageLiteral(resourceName: "Wrist and Ankle"),
-             #imageLiteral(resourceName: "Shoulder"),
+            [#imageLiteral(resourceName: "Shoulder"),
              #imageLiteral(resourceName: "Lat"),
              #imageLiteral(resourceName: "Calf")]
     ]
@@ -186,6 +207,15 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     // Explanation Array
     var explanationArrayF =
         [
+            // Joint Rotations
+            ["wristE",
+             "elbowE",
+             "shoulderE",
+             "neckE",
+             "waistE",
+             "hipE",
+             "kneesE",
+             "anklesE"],
             // Foam/Ball Roll
             ["thoracicSpineE",
              "latE",
@@ -209,8 +239,6 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
              "hipFlexorStretchE",
              "cossakSquatE",
              "hipHingesE",
-             "hamstringStretchE",
-             "quadStretchE",
              "sideLegSwingsE",
              "frontLegSwingsE"],
             // Dynamic Warm Up Drills
@@ -224,8 +252,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
              "straightLegBoundE",
              "sprintsE"],
             // Accessory
-            ["wristAnkleRotationE",
-             "wallSlidesE",
+            ["wallSlidesE",
              "latStretchE",
              "calveStretchE"]
     ]

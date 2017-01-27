@@ -40,6 +40,15 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
                 // Mandatory
                 [1,
                  1],
+                // Joint Rotations
+                [1,
+                 1,
+                 1,
+                 1,
+                 1,
+                 1,
+                 1,
+                 1],
                 // Foam/Ball Roll
                 [1,
                  3,
@@ -67,7 +76,6 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
                 // Accessory
                 [1,
                  1,
-                 1,
                  1]
             ]
         var setsArray: [Int] = []
@@ -77,12 +85,21 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
                 // Mandatory
                 ["1",
                  "1"],
+                // Joint Rotations
+                ["5-10",
+                 "5=10",
+                 "5-10",
+                 "5-10",
+                 "5-10",
+                 "5-10",
+                 "5-10",
+                 "5-10"],
                 // Foam/Ball Roll
                 ["2-7",
                 "5-10",
                 "2-7",
-                "30-60s",
-                "30-60s"],
+                "15-30s",
+                "15-30s"],
                 // Lower Back
                 ["5-10",
                 "5-10",
@@ -103,7 +120,6 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
                 "10-20",],
                 // Accessory
                 ["15-30s",
-                 "15-30s",
                 NSLocalizedString("asNecessary", comment: ""),
                 NSLocalizedString("asNecessary", comment: "")
                 ]
@@ -118,6 +134,15 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
                 // Mandatory
                 [#imageLiteral(resourceName: "Heart"),
                  #imageLiteral(resourceName: "Heart")],
+                // Joint Rotations
+                    [#imageLiteral(resourceName: "Wrist"),
+                     #imageLiteral(resourceName: "Elbow"),
+                     #imageLiteral(resourceName: "Shoulder"),
+                     #imageLiteral(resourceName: "Neck"),
+                     #imageLiteral(resourceName: "Waist"),
+                     #imageLiteral(resourceName: "Hip Area"),
+                     #imageLiteral(resourceName: "Knee"),
+                     #imageLiteral(resourceName: "Ankle")],
                 // Foam/Ball Roll
                 [#imageLiteral(resourceName: "Thoracic"),
                  #imageLiteral(resourceName: "Thoracic"),
@@ -143,8 +168,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
                  #imageLiteral(resourceName: "Rear Delt"),
                  #imageLiteral(resourceName: "Back")],
                 // Accessory
-                [#imageLiteral(resourceName: "Wrist and Ankle"),
-                 #imageLiteral(resourceName: "Lat"),
+                [#imageLiteral(resourceName: "Lat"),
                  #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
                  #imageLiteral(resourceName: "Back and Bicep")]
     ]
@@ -156,6 +180,15 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
                 // Mandatory
                 ["5minCardioLE",
                  "5minCardioIE"],
+                // Joint Rotations
+                ["wristE",
+                 "elbowE",
+                 "shoulderE",
+                 "neckE",
+                 "waistE",
+                 "hipE",
+                 "kneesE",
+                 "anklesE"],
                 // Foam/Ball Roll
                 ["backfE",
                  "thoracicSpineE",
@@ -181,8 +214,7 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
                  "rearDeltFlyE",
                  "latPulloverE"],
                 // Accessory
-                ["wristAnkleRotationE",
-                 "latStretchE",
+                ["latStretchE",
                  "pushUpE",
                  "pullUpE"]
             ]

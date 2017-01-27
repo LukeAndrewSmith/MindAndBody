@@ -40,6 +40,15 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             // Mandatory
             [1,
              1],
+            // Joint Rotations
+            [1,
+             1,
+             1,
+             1,
+             1,
+             1,
+             1,
+             1],
             // Foam/Ball Roll
             [1,
              3,
@@ -87,7 +96,6 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             [1,
              1,
              1,
-             1,
              1]
     ]
     var setsArray: [Int] = []
@@ -97,12 +105,21 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             // Mandatory
             ["1",
              "1"],
+            // Joint Rotations
+            ["5-10",
+             "5=10",
+             "5-10",
+             "5-10",
+             "5-10",
+             "5-10",
+             "5-10",
+             "5-10"],
             // Foam/Ball Roll
             ["2-7",
              "5-10",
              "2-7",
-             "30-60",
-             "30-60",
+             "15-30s",
+             "15-30s",
              "2-7",
              "2-7",
              "2-7",
@@ -143,7 +160,6 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             // Accessory
             ["15-30s",
              "15-30s",
-             "15-30s",
              NSLocalizedString("asNecessary", comment: ""),
              NSLocalizedString("asNecessary", comment: "")]
     ]
@@ -157,6 +173,15 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             // Mandatory
             [#imageLiteral(resourceName: "Heart"),
              #imageLiteral(resourceName: "Heart")],
+            // Joint Rotations
+            [#imageLiteral(resourceName: "Wrist"),
+             #imageLiteral(resourceName: "Elbow"),
+             #imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Neck"),
+             #imageLiteral(resourceName: "Waist"),
+             #imageLiteral(resourceName: "Hip Area"),
+             #imageLiteral(resourceName: "Knee"),
+             #imageLiteral(resourceName: "Ankle")],
             // Foam/Ball Roll
             [#imageLiteral(resourceName: "Thoracic"),
              #imageLiteral(resourceName: "Thoracic"),
@@ -201,8 +226,7 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
              #imageLiteral(resourceName: "Squat"),
              #imageLiteral(resourceName: "Squat")],
             // Accessory
-            [#imageLiteral(resourceName: "Wrist and Ankle"),
-             #imageLiteral(resourceName: "Lat"),
+            [#imageLiteral(resourceName: "Lat"),
              #imageLiteral(resourceName: "Calf"),
              #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
              #imageLiteral(resourceName: "Back and Bicep")]
@@ -215,6 +239,15 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             // Mandatory
             ["5minCardioLE",
              "5minCardioIE"],
+            // Joint Rotations
+            ["wristE",
+             "elbowE",
+             "shoulderE",
+             "neckE",
+             "waistE",
+             "hipE",
+             "kneesE",
+             "anklesE"],
             // Foam/Ball Roll
             ["backfE",
              "thoracicSpineE",
@@ -259,8 +292,7 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
              "jumpSquatE",
              "lungeE"],
             // Accessory
-            ["wristAnkleRotationE",
-             "latStretchE",
+            ["latStretchE",
              "calveStretchE",
              "pushUpE",
              "pullUpE"]

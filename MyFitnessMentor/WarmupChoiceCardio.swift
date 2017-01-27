@@ -59,6 +59,15 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     
     let emptyArray =
         [
+            // Joint Rotations
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0],
             // Foam/Ball Roll
             [0,
              0,
@@ -97,13 +106,21 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             // Accessory
             [0,
              0,
-             0,
              0]
     ]
     
     var warmupCardioPresets =
         [
             [
+                // Joint Rotations
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
                 // Foam/Ball Roll
                 [0,
                  0,
@@ -142,10 +159,18 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                 // Accessory
                 [0,
                  0,
-                 0,
                  0]
             ],
             [
+                // Joint Rotations
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
                 // Foam/Ball Roll
                 [0,
                  0,
@@ -184,10 +209,18 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                 // Accessory
                 [0,
                  0,
-                 0,
                  0]
             ],
             [
+                // Joint Rotations
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
                 // Foam/Ball Roll
                 [0,
                  0,
@@ -225,7 +258,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0],
                 // Accessory
                 [0,
-                 0,
                  0,
                  0]
             ]
@@ -236,6 +268,15 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     // Warmup Cardio Array
     var warmupCardioArray =
         [
+            // Joint Rotations
+            ["wrist",
+             "elbow",
+             "shoulder",
+             "neck",
+             "waist",
+             "hip",
+             "knees",
+             "ankles"],
             // Foam/Ball Roll
             ["thoracicSpine",
              "lat",
@@ -272,8 +313,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              "straightLegBound",
              "sprints"],
             // Accessory
-            ["wristAnkleRotation",
-             "wallSlides",
+            ["wallSlides",
              "latStretch",
              "calveStretch"]
     ]
@@ -282,6 +322,15 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     // Default Warmup Selected Array
     var warmupSelectedArray =
         [
+            // Joint Rotations
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0],
             // Foam/Ball Roll
             [0,
              0,
@@ -318,8 +367,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              0,
              0],
             // Accessory
-            [1,
-             0,
+            [0,
              0,
              0]
     ]
@@ -340,6 +388,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     // Table View Section Title Array
     var tableViewSectionArray =
         [
+            "jointRotation",
             "foamRoll",
             "lowerBack",
             "generalMobility",
@@ -762,6 +811,15 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 0:
             warmupSelectedArray =
                 [
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -799,7 +857,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]
@@ -810,6 +867,15 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 1:
             warmupSelectedArray =
                 [
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -847,7 +913,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]
@@ -858,6 +923,15 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 2:
             warmupSelectedArray =
                 [
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -895,7 +969,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]
@@ -906,6 +979,15 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 3:
             warmupSelectedArray =
                 [
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -943,7 +1025,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]
@@ -954,6 +1035,15 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 4:
             warmupSelectedArray =
                 [
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -991,7 +1081,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]
@@ -1002,6 +1091,15 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 5:
             warmupSelectedArray =
                 [
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -1039,7 +1137,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]
@@ -1050,6 +1147,15 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         case 6:
             warmupSelectedArray =
                 [
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -1087,7 +1193,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]

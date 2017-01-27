@@ -60,6 +60,15 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             // Mandatory
             [0,
              0],
+            // Joint Rotations
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0],
             // Foam/Ball Roll
             [0,
              0,
@@ -107,7 +116,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             [0,
              0,
              0,
-             0,
              0]
     ]
     
@@ -117,6 +125,15 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                 // Mandatory
                 [0,
                  0],
+                // Joint Rotations
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
                 // Foam/Ball Roll
                 [0,
                  0,
@@ -162,7 +179,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0],
                 // Accessory
                 [0,
-                 0,
                  0,
                  0,
                  0]
@@ -171,6 +187,15 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                 // Mandatory
                 [0,
                  0],
+                // Joint Rotations
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
                 // Foam/Ball Roll
                 [0,
                  0,
@@ -216,7 +241,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0],
                 // Accessory
                 [0,
-                 0,
                  0,
                  0,
                  0]
@@ -225,6 +249,15 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                 // Mandatory
                 [0,
                  0],
+                // Joint Rotations
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
                 // Foam/Ball Roll
                 [0,
                  0,
@@ -270,7 +303,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0],
                 // Accessory
                 [0,
-                 0,
                  0,
                  0,
                  0]
@@ -285,6 +317,15 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             // Mandatory
             ["5minCardioL",
              "5minCardioI"],
+            // Joint Rotations
+            ["wrist",
+             "elbow",
+             "shoulder",
+             "neck",
+             "waist",
+             "hip",
+             "knees",
+             "ankles"],
             // Foam/Ball Roll
             ["backf",
              "thoracicSpine",
@@ -329,8 +370,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              "jumpSquat",
              "lunge"],
             // Accessory
-            ["wristAnkleRotation",
-             "latStretch",
+            ["latStretch",
              "calveStretch",
              "pushUp",
              "pullUp"]
@@ -342,6 +382,15 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         [
             // Mandatory
             [1,
+             0],
+            // Joint Rotations
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0],
             // Foam/Ball Roll
             [0,
@@ -391,7 +440,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             [0,
              0,
              0,
-             0,
              0]
     ]
     
@@ -412,6 +460,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     var tableViewSectionArray =
         [
             "mandatory",
+            "jointRotation",
             "foamRoll",
             "lowerBack",
             "shoulder",
@@ -842,6 +891,15 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                     // Mandatory
                     [0,
                      0],
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -886,7 +944,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0,
                      0]
@@ -901,6 +958,15 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                     // Mandatory
                     [0,
                      0],
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -946,7 +1012,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0,
                      0]
@@ -961,6 +1026,15 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                     // Mandatory
                     [0,
                      0],
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -1006,7 +1080,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0,
                      0]
@@ -1021,6 +1094,15 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                     // Mandatory
                     [0,
                      0],
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -1066,7 +1148,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0,
                      0]
@@ -1081,6 +1162,15 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                     // Mandatory
                     [0,
                      0],
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -1126,7 +1216,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0,
                      0]
@@ -1141,6 +1230,15 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                     // Mandatory
                     [0,
                      0],
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -1186,7 +1284,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0,
                      0]
@@ -1201,6 +1298,15 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                     // Mandatory
                     [0,
                      0],
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
                     // Foam/Ball Roll
                     [0,
                      0,
@@ -1246,7 +1352,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0,
                      0]
