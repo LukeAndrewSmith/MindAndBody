@@ -1,15 +1,15 @@
 //
-//  WarmupChoiceCardio.swift
+//  StretchingChoice.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 20.01.17.
+//  Created by Luke Smith on 26.01.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class StretchingChoiceGeneral: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -31,8 +31,10 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     // PickerViews
     @IBOutlet weak var pickerView: UIPickerView!
     
+    
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
+    
     
     // Titles
     @IBOutlet weak var presetTitle: UILabel!
@@ -45,10 +47,6 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
     
     
-    
-    
-    
-    
     // Add Preset
     @IBOutlet weak var addPreset: UIButton!
     @IBOutlet weak var removePreset: UIButton!
@@ -59,6 +57,9 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     
     let emptyArray =
         [
+            // Recommended
+            [0,
+             0],
             // Joint Rotations
             [0,
              0,
@@ -75,14 +76,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              0,
              0,
              0,
-             0],
-            // Lower Back
-            [0,
              0,
              0,
              0,
              0],
-            // General Mobility
+            // Back
             [0,
              0,
              0,
@@ -93,9 +91,32 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              0,
              0,
              0],
-            // Dynamic Warm Up Drills
+            // Obliques(Sides)
             [0,
              0,
+             0],
+            // Neck
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Arms
+            [0,
+             0,
+             0],
+            // Pecs
+            [0],
+            // Shoulders
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Hips and Glutes
+            [0,
              0,
              0,
              0,
@@ -103,15 +124,27 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              0,
              0,
              0],
-            // Accessory
+            // Calves
+            [0],
+            // Hamstrings
             [0,
              0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Quads
+            [0,
              0]
     ]
     
-    var warmupCardioPresets =
+    var stretchingPresets =
         [
             [
+                // Recommended
+                [0,
+                 0],
                 // Joint Rotations
                 [0,
                  0,
@@ -128,14 +161,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0,
-                 0],
-                // Lower Back
-                [0,
                  0,
                  0,
                  0,
                  0],
-                // General Mobility
+                // Back
                 [0,
                  0,
                  0,
@@ -146,9 +176,32 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0],
-                // Dynamic Warm Up Drills
+                // Obliques(Sides)
                 [0,
                  0,
+                 0],
+                // Neck
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Arms
+                [0,
+                 0,
+                 0],
+                // Pecs
+                [0],
+                // Shoulders
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Hips and Glutes
+                [0,
                  0,
                  0,
                  0,
@@ -156,12 +209,24 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0],
-                // Accessory
+                // Calves
+                [0],
+                // Hamstrings
                 [0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Quads
+                [0,
                  0]
             ],
             [
+                // Recommended
+                [0,
+                 0],
                 // Joint Rotations
                 [0,
                  0,
@@ -178,14 +243,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0,
-                 0],
-                // Lower Back
-                [0,
                  0,
                  0,
                  0,
                  0],
-                // General Mobility
+                // Back
                 [0,
                  0,
                  0,
@@ -195,8 +257,32 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0,
-                 0,],
-                // Dynamic Warm Up Drills
+                 0],
+                // Obliques(Sides)
+                [0,
+                 0,
+                 0],
+                // Neck
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Arms
+                [0,
+                 0,
+                 0],
+                // Pecs
+                [0],
+                // Shoulders
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Hips and Glutes
                 [0,
                  0,
                  0,
@@ -204,14 +290,25 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0,
-                 0,
-                 0,],
-                // Accessory
+                 0],
+                // Calves
+                [0],
+                // Hamstrings
                 [0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Quads
+                [0,
                  0]
             ],
             [
+                // Recommended
+                [0,
+                 0],
                 // Joint Rotations
                 [0,
                  0,
@@ -228,14 +325,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0,
-                 0],
-                // Lower Back
-                [0,
                  0,
                  0,
                  0,
                  0],
-                // General Mobility
+                // Back
                 [0,
                  0,
                  0,
@@ -246,9 +340,32 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0],
-                // Dynamic Warm Up Drills
+                // Obliques(Sides)
                 [0,
                  0,
+                 0],
+                // Neck
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Arms
+                [0,
+                 0,
+                 0],
+                // Pecs
+                [0],
+                // Shoulders
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Hips and Glutes
+                [0,
                  0,
                  0,
                  0,
@@ -256,18 +373,30 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                  0,
                  0,
                  0],
-                // Accessory
+                // Calves
+                [0],
+                // Hamstrings
                 [0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Quads
+                [0,
                  0]
             ]
     ]
     
     
     
-    // Warmup Cardio Array
-    var warmupCardioArray =
+    // Stretching Upper Array
+    var stretchingArray =
         [
+            // Recommended
+            ["5minCardioL",
+             "5minCardioI"],
             // Joint Rotations
             ["wrist",
              "elbow",
@@ -278,50 +407,82 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              "knees",
              "ankles"],
             // Foam/Ball Roll
-            ["thoracicSpine",
+            ["backf",
+             "thoracicSpine",
              "lat",
+             "pecDelt",
+             "rearDelt",
              "quadf",
              "adductorf",
              "hamstringf",
              "glutef",
              "calvef"],
-            // Lower Back
-            ["sideLegDrop",
-             "sideLegKick",
-             "scorpionKick",
-             "sideBend",
-             "catCow"],
-            // General Mobility
-            ["hipCircles",
-             "mountainClimber",
+            // Back
+            ["catCow",
+             "upwardsDog",
+             "extendedPuppy",
+             "childPose",
+             "staffPose",
+             "pelvicTilt",
+             "kneeToChest",
+             "legDrop",
+             "seatedTwist",
+             "legsWall"],
+            // Obliques(Sides)
+            ["sideLean",
+             "extendedSideAngle",
+             "seatedSide"],
+            // Neck
+            ["rearNeck",
+             "rearNeckHand",
+             "seatedLateral",
+             "neckRotator",
+             "scalene",
+             "headRoll"],
+            // Arms
+            ["forearmStretch",
+             "tricepStretch",
+             "bicepStretch"],
+            // Pecs
+            ["pecStretch"],
+            // Shoulders
+            ["shoulderRoll",
+             "behindBackTouch",
+             "frontDelt",
+             "lateralDelt",
+             "rearDelt",
+             "rotatorCuff"],
+            // Hips and Glutes
+            ["squatHold",
              "groinStretch",
-             "gluteBridge",
-             "threadTheNeedle",
              "butterflyPose",
-             "cossakSquat",
-             "hipHinges",
-             "sideLegSwings",
-             "frontLegSwings"],
-            // Dynamic Warm Up Drills
-            ["jumpSquat",
-             "lunge",
-             "gluteKicks",
-             "aSkips",
-             "bSkips",
-             "grapeVines",
-             "lateralBound",
-             "straightLegBound",
-             "sprints"],
-            // Accessory
-            ["wallSlides",
-             "latStretch",
-             "calveStretch"]
+             "lungeStretch",
+             "threadTheNeedle",
+             "pigeonPose",
+             "seatedGlute",
+             "lyingGlute"],
+            // Calves
+            ["calveStretch"],
+            // Hamstrings
+            ["standingHamstring",
+             "standingOneLegHamstring",
+             "singleLegStanding",
+             "downWardsDog",
+             "singleLegHamstring",
+             "twoLegHamstring",
+             "lyingHamstring"],
+            // Quads
+            ["lungeStretchWall",
+             "lyingQuadStretch"]
     ]
     
     
-    // Default Warmup Selected Array
-    var warmupSelectedArray =
+    // Default Stretching Selected Array
+    var stretchingSelectedArray =
         [
+            // Recommended
+            [1,
+             0],
             // Joint Rotations
             [0,
              0,
@@ -338,14 +499,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              0,
              0,
              0,
-             0],
-            // Lower Back
-            [0,
              0,
              0,
              0,
              0],
-            // General Mobility
+            // Back
             [0,
              0,
              0,
@@ -356,9 +514,32 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              0,
              0,
              0],
-            // Dynamic Warm Up Drills
+            // Obliques(Sides)
             [0,
              0,
+             0],
+            // Neck
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Arms
+            [0,
+             0,
+             0],
+            // Pecs
+            [0],
+            // Shoulders
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Hips and Glutes
+            [0,
              0,
              0,
              0,
@@ -366,9 +547,18 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
              0,
              0,
              0],
-            // Accessory
+            // Calves
+            [0],
+            // Hamstrings
             [0,
              0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Quads
+            [0,
              0]
     ]
     
@@ -388,12 +578,19 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     // Table View Section Title Array
     var tableViewSectionArray =
         [
+            "recommended",
             "jointRotation",
             "foamRoll",
-            "lowerBack",
-            "generalMobility",
-            "dynamicWarmupDrills",
-            "accessory"
+            "backStretch",
+            "sides",
+            "neck",
+            "arms",
+            "pecs",
+            "shoulders",
+            "hipsaGlutes",
+            "calves",
+            "hamstrings",
+            "quads"
     ]
     
     
@@ -430,19 +627,20 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Colours
+        // Colour
         self.view.applyGradient(colours: [colour1, colour2])
         questionMark.tintColor = colour1
         
         
+        
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("cardio", comment: ""))
+        navigationBar.title = (NSLocalizedString("stretching", comment: ""))
+        
         
         
         // Titles
-        presetTitle.text = NSLocalizedString("presetWarmups", comment: "")
-        tableTitle.text = NSLocalizedString("warmupTableTitle", comment: "")
-        
+        presetTitle.text = NSLocalizedString("presetSessions", comment: "")
+        tableTitle.text = NSLocalizedString("stretches", comment: "")
         
         
         
@@ -520,16 +718,22 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceCardioText", comment: "")))
+        let informationLabelString = (
+            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: "")))
         
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceCardioText", comment: "")))
+        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: ""))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
         // Range of Titles
-        let titleRangeString = (NSLocalizedString("movements", comment: ""))
-        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
+        let titleRangeString1 = (NSLocalizedString("purpose", comment: ""))
+        let titleRangeString2 = (NSLocalizedString("body", comment: ""))
+        let titleRangeString3 = (NSLocalizedString("mind", comment: ""))
+        
+        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString1)
+        let titleRange2 = (informationLabelString as NSString).range(of: titleRangeString2)
+        let titleRange3 = (informationLabelString as NSString).range(of: titleRangeString3)
         
         
         // Line Spacing
@@ -542,6 +746,8 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Light", size: 19)!, range: textRange)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange1)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange2)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange3)
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         
         
@@ -563,13 +769,13 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         
         
         //
-        // Preset Warmups
+        // Preset Stretchings
         //
         let defaults = UserDefaults.standard
         
-        defaults.register(defaults: ["warmupCardioPresets" : warmupCardioPresets])
-        defaults.register(defaults: ["warmupCardioPresetTexts" : presetTexts])
-        defaults.register(defaults: ["warmupCardioPresetNumber" : 0])
+        defaults.register(defaults: ["stretchingPresets" : stretchingPresets])
+        defaults.register(defaults: ["stretchingPresetTexts" : presetTexts])
+        defaults.register(defaults: ["stretchingPresetNumber" : 0])
         
         defaults.synchronize()
         
@@ -590,9 +796,9 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func addPreset(_ sender: Any) {
         
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "warmupCardioPresetNumber")
-        var warmupPreset = defaults.object(forKey: "warmupCardioPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "warmupCardioPresetTexts") as! [String]
+        let number = defaults.integer(forKey: "stretchingPresetNumber")
+        var stretchingPreset = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "stretchingPresetTexts") as! [String]
         
         
         // Set Preset
@@ -602,7 +808,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             
             // Alert and Functions
             //
-            let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
+            let inputTitle = NSLocalizedString("stretchingInputTitle", comment: "")
             //
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
             alert.view.tintColor = colour1
@@ -623,7 +829,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                 
                 // Update Preset Text Arrays
                 presetTextArray[number] = (textField?.text)!
-                defaults.set(presetTextArray, forKey: "warmupCardioPresetTexts")
+                defaults.set(presetTextArray, forKey: "stretchingPresetTexts")
                 defaults.synchronize()
                 
                 
@@ -632,8 +838,8 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                 
                 // Set new Preset Array
                 //
-                warmupPreset[number] = self.warmupSelectedArray
-                defaults.set(warmupPreset, forKey: "warmupCardioPresets")
+                stretchingPreset[number] = self.stretchingSelectedArray
+                defaults.set(stretchingPreset, forKey: "stretchingPresets")
                 
                 defaults.synchronize()
                 
@@ -642,7 +848,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                 //
                 let newNumber = number + 1
                 
-                defaults.set(newNumber, forKey: "warmupCardioPresetNumber")
+                defaults.set(newNumber, forKey: "stretchingPresetNumber")
                 defaults.synchronize()
                 
                 
@@ -674,9 +880,9 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func removePreset(_ sender: Any) {
         
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "warmupCardioPresetNumber")
-        var warmupPreset = defaults.object(forKey: "warmupCardioPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "warmupCardioPresetTexts") as! [String]
+        let number = defaults.integer(forKey: "stretchingPresetNumber")
+        var stretchingPreset = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "stretchingPresetTexts") as! [String]
         
         
         let selectedRow = pickerView.selectedRow(inComponent: 0)
@@ -685,21 +891,21 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         
         if index > -1 {
             
-            warmupPreset.remove(at: index)
-            warmupPreset.append(emptyArray)
+            stretchingPreset.remove(at: index)
+            stretchingPreset.append(emptyArray)
             
-            defaults.set(warmupPreset, forKey: "warmupCardioPresets")
+            defaults.set(stretchingPreset, forKey: "stretchingPresets")
             
             
             presetTextArray.remove(at: index)
             presetTextArray.append(emptyString)
             
-            defaults.set(presetTextArray, forKey: "warmupCardioPresetTexts")
+            defaults.set(presetTextArray, forKey: "stretchingPresetTexts")
             
             
             if number > 0 {
                 let newNumber = number - 1
-                defaults.set(newNumber, forKey: "warmupCardioPresetNumber")
+                defaults.set(newNumber, forKey: "stretchingPresetNumber")
             } else {
                 
             }
@@ -765,7 +971,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             
         } else if row == pickerViewArray.count + 1 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupCardioPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTexts") as! [String]
             let titleData = titleDataArray[0]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -776,7 +982,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             
         } else if row == pickerViewArray.count + 2 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupCardioPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTexts") as! [String]
             let titleData = titleDataArray[1]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -787,7 +993,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             
         } else if row == pickerViewArray.count + 3 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupCardioPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTexts") as! [String]
             let titleData = titleDataArray[2]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -809,8 +1015,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         switch row {
             
         case 0:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
+                    // Recommended
+                    [1,
+                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -827,14 +1036,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0,
-                     0],
-                    // Lower Back
-                    [0,
                      0,
                      0,
                      0,
                      0],
-                    // General Mobility
+                    // Back
                     [0,
                      0,
                      0,
@@ -845,9 +1051,32 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Obliques(Sides)
                     [0,
                      0,
+                     0],
+                    // Neck
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
+                    // Shoulders
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Hips and Glutes
+                    [0,
                      0,
                      0,
                      0,
@@ -855,9 +1084,18 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Calves
+                    [0],
+                    // Hamstrings
                     [0,
                      0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
                      0]
             ]
             
@@ -865,8 +1103,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             flashScreen()
             
         case 1:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
+                    // Recommended
+                    [1,
+                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -883,14 +1124,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0,
-                     0],
-                    // Lower Back
-                    [0,
                      0,
                      0,
                      0,
                      0],
-                    // General Mobility
+                    // Back
                     [0,
                      0,
                      0,
@@ -901,9 +1139,32 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Obliques(Sides)
                     [0,
                      0,
+                     0],
+                    // Neck
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
+                    // Shoulders
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Hips and Glutes
+                    [0,
                      0,
                      0,
                      0,
@@ -911,9 +1172,18 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Calves
+                    [0],
+                    // Hamstrings
                     [0,
                      0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
                      0]
             ]
             
@@ -921,8 +1191,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             flashScreen()
             
         case 2:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
+                    // Recommended
+                    [1,
+                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -939,14 +1212,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0,
-                     0],
-                    // Lower Back
-                    [0,
                      0,
                      0,
                      0,
                      0],
-                    // General Mobility
+                    // Back
                     [0,
                      0,
                      0,
@@ -957,9 +1227,32 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Obliques(Sides)
                     [0,
                      0,
+                     0],
+                    // Neck
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
+                    // Shoulders
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Hips and Glutes
+                    [0,
                      0,
                      0,
                      0,
@@ -967,9 +1260,18 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Calves
+                    [0],
+                    // Hamstrings
                     [0,
                      0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
                      0]
             ]
             
@@ -977,8 +1279,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             flashScreen()
             
         case 3:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
+                    // Recommended
+                    [1,
+                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -995,14 +1300,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0,
-                     0],
-                    // Lower Back
-                    [0,
                      0,
                      0,
                      0,
                      0],
-                    // General Mobility
+                    // Back
                     [0,
                      0,
                      0,
@@ -1013,9 +1315,32 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Obliques(Sides)
                     [0,
                      0,
+                     0],
+                    // Neck
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
+                    // Shoulders
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Hips and Glutes
+                    [0,
                      0,
                      0,
                      0,
@@ -1023,9 +1348,18 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Calves
+                    [0],
+                    // Hamstrings
                     [0,
                      0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
                      0]
             ]
             
@@ -1033,8 +1367,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             flashScreen()
             
         case 4:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
+                    // Recommended
+                    [1,
+                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -1051,14 +1388,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0,
-                     0],
-                    // Lower Back
-                    [0,
                      0,
                      0,
                      0,
                      0],
-                    // General Mobility
+                    // Back
                     [0,
                      0,
                      0,
@@ -1069,9 +1403,32 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Obliques(Sides)
                     [0,
                      0,
+                     0],
+                    // Neck
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
+                    // Shoulders
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Hips and Glutes
+                    [0,
                      0,
                      0,
                      0,
@@ -1079,9 +1436,18 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Calves
+                    [0],
+                    // Hamstrings
                     [0,
                      0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
                      0]
             ]
             
@@ -1089,8 +1455,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             flashScreen()
             
         case 5:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
+                    // Recommended
+                    [1,
+                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -1107,14 +1476,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0,
-                     0],
-                    // Lower Back
-                    [0,
                      0,
                      0,
                      0,
                      0],
-                    // General Mobility
+                    // Back
                     [0,
                      0,
                      0,
@@ -1125,9 +1491,32 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Obliques(Sides)
                     [0,
                      0,
+                     0],
+                    // Neck
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
+                    // Shoulders
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Hips and Glutes
+                    [0,
                      0,
                      0,
                      0,
@@ -1135,9 +1524,18 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Calves
+                    [0],
+                    // Hamstrings
                     [0,
                      0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
                      0]
             ]
             
@@ -1145,8 +1543,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             flashScreen()
             
         case 6:
-            warmupSelectedArray =
+            stretchingSelectedArray =
                 [
+                    // Recommended
+                    [1,
+                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -1163,14 +1564,11 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0,
-                     0],
-                    // Lower Back
-                    [0,
                      0,
                      0,
                      0,
                      0],
-                    // General Mobility
+                    // Back
                     [0,
                      0,
                      0,
@@ -1181,9 +1579,32 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Obliques(Sides)
                     [0,
                      0,
+                     0],
+                    // Neck
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
+                    // Shoulders
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Hips and Glutes
+                    [0,
                      0,
                      0,
                      0,
@@ -1191,9 +1612,18 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Calves
+                    [0],
+                    // Hamstrings
                     [0,
                      0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
                      0]
             ]
             
@@ -1204,27 +1634,27 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             break
             
         case 8:
-            let fullArray = defaults.object(forKey: "warmupCardioPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
             let array = fullArray[0]
-            warmupSelectedArray = array
+            stretchingSelectedArray = array
             
             
             self.tableView.reloadData()
             flashScreen()
             
         case 9:
-            let fullArray = defaults.object(forKey: "warmupCardioPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
             let array = fullArray[1]
-            warmupSelectedArray = array
+            stretchingSelectedArray = array
             
             
             self.tableView.reloadData()
             flashScreen()
             
         case 10:
-            let fullArray = defaults.object(forKey: "warmupCardioPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
             let array = fullArray[2]
-            warmupSelectedArray = array
+            stretchingSelectedArray = array
             
             
             self.tableView.reloadData()
@@ -1232,6 +1662,8 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             
         default:
             break
+            
+            
         }
         
         
@@ -1249,7 +1681,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     // Table View
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return warmupCardioArray.count
+        return stretchingArray.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -1273,7 +1705,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return warmupCardioArray[section].count
+        return stretchingArray[section].count
     }
     
     
@@ -1282,7 +1714,7 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         
-        cell.textLabel?.text = NSLocalizedString(warmupCardioArray[indexPath.section][indexPath.row], comment: "")
+        cell.textLabel?.text = NSLocalizedString(stretchingArray[indexPath.section][indexPath.row], comment: "")
         
         cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
@@ -1291,17 +1723,19 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         cell.tintColor = .black
         
         
-        if warmupSelectedArray[indexPath.section][indexPath.row] == 1 {
+        if stretchingSelectedArray[indexPath.section][indexPath.row] == 1 {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
         }
         
         
-        if cell.textLabel?.text == NSLocalizedString("wristAnkleRotation", comment: "") {
+        if cell.textLabel?.text == NSLocalizedString("5minCardioL", comment: "") {
             cell.isUserInteractionEnabled = false
         }
-        
+        if cell.textLabel?.text == NSLocalizedString("5minCardioI", comment: "") {
+            cell.isUserInteractionEnabled = false
+        }
         
         return cell
         
@@ -1327,10 +1761,10 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         
         if cell?.accessoryType == .checkmark {
             cell?.accessoryType = .none
-            warmupSelectedArray[indexPath.section][indexPath.row] = 0
+            stretchingSelectedArray[indexPath.section][indexPath.row] = 0
         } else {
             cell?.accessoryType = .checkmark
-            warmupSelectedArray[indexPath.section][indexPath.row] = 1
+            stretchingSelectedArray[indexPath.section][indexPath.row] = 1
         }
     }
     
@@ -1424,15 +1858,15 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
     // Pass Array to next ViewController
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "warmupCardio") {
+        if (segue.identifier == "stretching") {
             
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenCardio
+            let destinationVC = destinationNC.viewControllers.first as! StretchingScreenFull
             
-            destinationVC.warmupMovementsArray = warmupCardioArray
-            destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
+            destinationVC.stretchingMovementsArray = stretchingArray
+            destinationVC.stretchingMovementsSelectedArray = stretchingSelectedArray
             
         }
     }

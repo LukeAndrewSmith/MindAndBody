@@ -94,7 +94,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         [
             // Joint Rotations
             ["5-10",
-             "5=10",
+             "5-10",
              "5-10",
              "5-10",
              "5-10",
@@ -235,8 +235,8 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
              "mountainClimberE",
              "groinStretchE",
              "gluteBridgeE",
-             "piriformisStretchE",
-             "hipFlexorStretchE",
+             "threadTheNeedleE",
+             "butterflyPoseE",
              "cossakSquatE",
              "hipHingesE",
              "sideLegSwingsE",

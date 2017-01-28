@@ -35,6 +35,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
+    
     // Titles
     @IBOutlet weak var presetTitle: UILabel!
     
@@ -56,221 +57,509 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     
     let emptyArray =
         [
-            // Mandatory
+            // Recommended
             [0,
+             0],
+            // Joint Rotations
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0],
             // Foam/Ball Roll
             [0,
              0,
              0,
              0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0],
-            // Lower Back
+            // Back
             [0,
              0,
              0,
              0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0],
+            // Obliques(Sides)
+            [0,
+             0,
+             0],
+            // Neck
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Arms
+            [0,
+             0,
+             0],
+            // Pecs
+            [0],
             // Shoulders
             [0,
              0,
              0,
+             0,
+             0,
              0],
-            // Band Assisted
+            // Hips and Glutes
             [0,
              0,
              0,
              0,
              0,
+             0,
+             0,
              0],
-            // Accessory
+            // Calves
+            [0],
+            // Hamstrings
             [0,
              0,
              0,
+             0,
+             0,
+             0,
+             0],
+            // Quads
+            [0,
              0]
     ]
     
-    var stretchingWorkoutPresets =
+    var stretchingPresets =
         [
             [
-                // Mandatory
+                // Recommended
                 [0,
+                 0],
+                // Joint Rotations
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0],
                 // Foam/Ball Roll
                 [0,
                  0,
                  0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0],
-                // Lower Back
+                // Back
                 [0,
                  0,
                  0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0],
+                // Obliques(Sides)
+                [0,
+                 0,
+                 0],
+                // Neck
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Arms
+                [0,
+                 0,
+                 0],
+                // Pecs
+                [0],
                 // Shoulders
                 [0,
                  0,
                  0,
+                 0,
+                 0,
                  0],
-                // Band Assisted
+                // Hips and Glutes
                 [0,
                  0,
                  0,
                  0,
                  0,
+                 0,
+                 0,
                  0],
-                // Accessory
+                // Calves
+                [0],
+                // Hamstrings
                 [0,
                  0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Quads
+                [0,
                  0]
             ],
             [
-                // Mandatory
+                // Recommended
                 [0,
+                 0],
+                // Joint Rotations
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0],
                 // Foam/Ball Roll
                 [0,
                  0,
                  0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0],
-                // Lower Back
+                // Back
                 [0,
                  0,
                  0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0],
+                // Obliques(Sides)
+                [0,
+                 0,
+                 0],
+                // Neck
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Arms
+                [0,
+                 0,
+                 0],
+                // Pecs
+                [0],
                 // Shoulders
                 [0,
                  0,
                  0,
+                 0,
+                 0,
                  0],
-                // Band Assisted
+                // Hips and Glutes
                 [0,
                  0,
                  0,
                  0,
                  0,
+                 0,
+                 0,
                  0],
-                // Accessory
+                // Calves
+                [0],
+                // Hamstrings
                 [0,
                  0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Quads
+                [0,
                  0]
             ],
             [
-                // Mandatory
+                // Recommended
                 [0,
+                 0],
+                // Joint Rotations
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0],
                 // Foam/Ball Roll
                 [0,
                  0,
                  0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0],
-                // Lower Back
+                // Back
                 [0,
                  0,
                  0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0],
+                // Obliques(Sides)
+                [0,
+                 0,
+                 0],
+                // Neck
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Arms
+                [0,
+                 0,
+                 0],
+                // Pecs
+                [0],
                 // Shoulders
                 [0,
                  0,
                  0,
+                 0,
+                 0,
                  0],
-                // Band Assisted
+                // Hips and Glutes
                 [0,
                  0,
                  0,
                  0,
                  0,
+                 0,
+                 0,
                  0],
-                // Accessory
+                // Calves
+                [0],
+                // Hamstrings
                 [0,
                  0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Quads
+                [0,
                  0]
             ]
     ]
     
     
     
-    // Stretching Array
-    var stretchingWorkoutArray =
+    // Stretching Upper Array
+    var stretchingArray =
         [
-            // Mandatory
+            // Recommended
             ["5minCardioL",
              "5minCardioI"],
+            // Joint Rotations
+            ["wrist",
+             "elbow",
+             "shoulder",
+             "neck",
+             "waist",
+             "hip",
+             "knees",
+             "ankles"],
             // Foam/Ball Roll
             ["backf",
              "thoracicSpine",
              "lat",
              "pecDelt",
-             "rearDelt"],
-            // Lower Back
-            ["sideLegDrop",
-             "sideLegKick",
-             "scorpionKick",
-             "sideBend",
-             "catCow"],
-            // Shoulder
-            ["wallSlides",
-             "superManShoulder",
-             "scapula",
-             "shoulderRotation"],
-            // Band/Bar/Machine Assisted
-            ["facePull",
-             "externalRotation",
-             "internalRotation",
-             "shoulderDislocation",
-             "rearDeltFly",
-             "latPullover"],
-            // Accessory
-            ["wristAnkleRotation",
-             "latStretch",
-             "pushUp",
-             "pullUp"]
+             "rearDelt",
+             "quadf",
+             "adductorf",
+             "hamstringf",
+             "glutef",
+             "calvef"],
+            // Back
+            ["catCow",
+             "upwardsDog",
+             "extendedPuppy",
+             "childPose",
+             "staffPose",
+             "pelvicTilt",
+             "kneeToChest",
+             "legDrop",
+             "seatedTwist",
+             "legsWall"],
+            // Obliques(Sides)
+            ["sideLean",
+             "extendedSideAngle",
+             "seatedSide"],
+            // Neck
+            ["rearNeck",
+             "rearNeckHand",
+             "seatedLateral",
+             "neckRotator",
+             "scalene",
+             "headRoll"],
+            // Arms
+            ["forearmStretch",
+             "tricepStretch",
+             "bicepStretch"],
+            // Pecs
+            ["pecStretch"],
+            // Shoulders
+            ["shoulderRoll",
+             "behindBackTouch",
+             "frontDelt",
+             "lateralDelt",
+             "rearDelt",
+             "rotatorCuff"],
+            // Hips and Glutes
+            ["squatHold",
+             "groinStretch",
+             "butterflyPose",
+             "lungeStretch",
+             "threadTheNeedle",
+             "pigeonPose",
+             "seatedGlute",
+             "lyingGlute"],
+            // Calves
+            ["calveStretch"],
+            // Hamstrings
+            ["standingHamstring",
+             "standingOneLegHamstring",
+             "singleLegStanding",
+             "downWardsDog",
+             "singleLegHamstring",
+             "twoLegHamstring",
+             "lyingHamstring"],
+            // Quads
+            ["lungeStretchWall",
+             "lyingQuadStretch"]
     ]
     
     
     // Default Stretching Selected Array
     var stretchingSelectedArray =
         [
-            // Mandatory
+            // Recommended
             [1,
+             0],
+            // Joint Rotations
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0],
             // Foam/Ball Roll
-            [1,
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
              0,
              0,
              0,
              0],
-            // Lower Back
-            [1,
+            // Back
+            [0,
              0,
-             1,
              0,
-             1],
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Obliques(Sides)
+            [0,
+             0,
+             0],
+            // Neck
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Arms
+            [0,
+             0,
+             0],
+            // Pecs
+            [0],
             // Shoulders
-            [1,
+            [0,
              0,
              0,
-             1],
-            // Band Assisted
-            [1,
-             1,
              0,
-             1,
              0,
              0],
-            // Accessory
-            [1,
-             1,
-             1,
-             1]
+            // Hips and Glutes
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Calves
+            [0],
+            // Hamstrings
+            [0,
+             0,
+             0,
+             0,
+             0,
+             0,
+             0],
+            // Quads
+            [0,
+             0]
     ]
     
     // Picker View Array
@@ -289,12 +578,19 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     // Table View Section Title Array
     var tableViewSectionArray =
         [
-            "mandatory",
+            "recommended",
+            "jointRotation",
             "foamRoll",
-            "lowerBack",
-            "shoulder",
-            "bandAssisted",
-            "accessory"
+            "backStretch",
+            "sides",
+            "neck",
+            "arms",
+            "pecs",
+            "shoulders",
+            "hipsaGlutes",
+            "calves",
+            "hamstrings",
+            "quads"
     ]
     
     
@@ -303,7 +599,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         
         let flash = UIView()
         
-        flash.frame = CGRect(x: 0, y: 171.5, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
+        flash.frame = CGRect(x: 0, y: pickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
         flash.backgroundColor = colour1
         self.view.alpha = 1
         self.view.addSubview(flash)
@@ -338,14 +634,13 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("postWorkout", comment: ""))
+        navigationBar.title = (NSLocalizedString("stretching", comment: ""))
         
         
-        // Titles
+        
         // Titles
         presetTitle.text = NSLocalizedString("presetSessions", comment: "")
         tableTitle.text = NSLocalizedString("stretches", comment: "")
-        
         
         
         
@@ -423,16 +718,22 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("stretchingChoiceWorkoutText", comment: "")))
+        let informationLabelString = (
+            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: "")))
         
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("stretchingChoiceWorkoutText", comment: "")))
+        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: ""))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
         // Range of Titles
-        let titleRangeString = (NSLocalizedString("movements", comment: ""))
-        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
+        let titleRangeString1 = (NSLocalizedString("purpose", comment: ""))
+        let titleRangeString2 = (NSLocalizedString("body", comment: ""))
+        let titleRangeString3 = (NSLocalizedString("mind", comment: ""))
+        
+        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString1)
+        let titleRange2 = (informationLabelString as NSString).range(of: titleRangeString2)
+        let titleRange3 = (informationLabelString as NSString).range(of: titleRangeString3)
         
         
         // Line Spacing
@@ -445,6 +746,8 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Light", size: 19)!, range: textRange)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange1)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange2)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange3)
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         
         
@@ -470,9 +773,9 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         //
         let defaults = UserDefaults.standard
         
-        defaults.register(defaults: ["stretchingWorkoutPresets" : stretchingWorkoutPresets])
-        defaults.register(defaults: ["stretchingWorkoutPresetTexts" : presetTexts])
-        defaults.register(defaults: ["stretchingWorkoutPresetNumber" : 0])
+        defaults.register(defaults: ["stretchingPresets" : stretchingPresets])
+        defaults.register(defaults: ["stretchingPresetTexts" : presetTexts])
+        defaults.register(defaults: ["stretchingPresetNumber" : 0])
         
         defaults.synchronize()
         
@@ -493,9 +796,9 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func addPreset(_ sender: Any) {
         
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "stretchingWorkoutPresetNumber")
-        var stretchingPreset = defaults.object(forKey: "stretchingWorkoutPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "stretchingWorkoutPresetTexts") as! [String]
+        let number = defaults.integer(forKey: "stretchingPresetNumber")
+        var stretchingPreset = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "stretchingPresetTexts") as! [String]
         
         
         // Set Preset
@@ -526,7 +829,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                 
                 // Update Preset Text Arrays
                 presetTextArray[number] = (textField?.text)!
-                defaults.set(presetTextArray, forKey: "stretchingWorkoutPresetTexts")
+                defaults.set(presetTextArray, forKey: "stretchingPresetTexts")
                 defaults.synchronize()
                 
                 
@@ -536,7 +839,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                 // Set new Preset Array
                 //
                 stretchingPreset[number] = self.stretchingSelectedArray
-                defaults.set(stretchingPreset, forKey: "stretchingWorkoutPresets")
+                defaults.set(stretchingPreset, forKey: "stretchingPresets")
                 
                 defaults.synchronize()
                 
@@ -545,7 +848,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                 //
                 let newNumber = number + 1
                 
-                defaults.set(newNumber, forKey: "stretchingWorkoutPresetNumber")
+                defaults.set(newNumber, forKey: "stretchingPresetNumber")
                 defaults.synchronize()
                 
                 
@@ -577,9 +880,9 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func removePreset(_ sender: Any) {
         
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "stretchingWorkoutPresetNumber")
-        var stretchingPreset = defaults.object(forKey: "stretchingWorkoutPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "stretchingWorkoutPresetTexts") as! [String]
+        let number = defaults.integer(forKey: "stretchingPresetNumber")
+        var stretchingPreset = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "stretchingPresetTexts") as! [String]
         
         
         let selectedRow = pickerView.selectedRow(inComponent: 0)
@@ -591,18 +894,18 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             stretchingPreset.remove(at: index)
             stretchingPreset.append(emptyArray)
             
-            defaults.set(stretchingPreset, forKey: "stretchingWorkoutPresets")
+            defaults.set(stretchingPreset, forKey: "stretchingPresets")
             
             
             presetTextArray.remove(at: index)
             presetTextArray.append(emptyString)
             
-            defaults.set(presetTextArray, forKey: "stretchingWorkoutPresetTexts")
+            defaults.set(presetTextArray, forKey: "stretchingPresetTexts")
             
             
             if number > 0 {
                 let newNumber = number - 1
-                defaults.set(newNumber, forKey: "stretchingWorkoutPresetNumber")
+                defaults.set(newNumber, forKey: "stretchingPresetNumber")
             } else {
                 
             }
@@ -668,7 +971,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             
         } else if row == pickerViewArray.count + 1 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingWorkoutPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTexts") as! [String]
             let titleData = titleDataArray[0]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -679,7 +982,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             
         } else if row == pickerViewArray.count + 2 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingWorkoutPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTexts") as! [String]
             let titleData = titleDataArray[1]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -690,7 +993,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             
         } else if row == pickerViewArray.count + 3 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingWorkoutPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTexts") as! [String]
             let titleData = titleDataArray[2]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -714,38 +1017,86 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         case 0:
             stretchingSelectedArray =
                 [
-                    // Mandatory
+                    // Recommended
                     [1,
+                     0],
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0],
                     // Foam/Ball Roll
-                    [1,
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0,
                      0,
                      0],
-                    // Lower Back
-                    [1,
+                    // Back
+                    [0,
                      0,
                      0,
                      0,
-                     1],
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Obliques(Sides)
+                    [0,
+                     0,
+                     0],
+                    // Neck
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
                     // Shoulders
-                    [1,
+                    [0,
                      0,
                      0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
                      0,
-                     1,
                      0,
                      0],
-                    // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                    // Hips and Glutes
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Calves
+                    [0],
+                    // Hamstrings
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -754,37 +1105,85 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         case 1:
             stretchingSelectedArray =
                 [
-                    // Mandatory
+                    // Recommended
                     [1,
+                     0],
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0],
                     // Foam/Ball Roll
                     [0,
                      0,
                      0,
                      0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0],
-                    // Lower Back
-                    [1,
-                     0,
-                     0,
-                     1,
-                     0],
-                    // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
+                    // Back
                     [0,
                      0,
                      0,
-                     1,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0],
-                    // Accessory
-                    [1,
-                     1,
-                     1,
+                    // Obliques(Sides)
+                    [0,
+                     0,
+                     0],
+                    // Neck
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
+                    // Shoulders
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Hips and Glutes
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Calves
+                    [0],
+                    // Hamstrings
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
                      0]
             ]
             
@@ -794,38 +1193,86 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         case 2:
             stretchingSelectedArray =
                 [
-                    // Mandatory
+                    // Recommended
                     [1,
+                     0],
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0],
                     // Foam/Ball Roll
                     [0,
                      0,
                      0,
                      0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0],
-                    // Lower Back
-                    [1,
-                     1,
-                     1,
+                    // Back
+                    [0,
                      0,
-                     1],
-                    // Shoulders
-                    [1,
                      0,
-                     1,
-                     1],
-                    // Band Assisted
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Obliques(Sides)
+                    [0,
+                     0,
+                     0],
+                    // Neck
                     [0,
                      0,
                      0,
                      0,
                      0,
                      0],
-                    // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
+                    // Shoulders
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Hips and Glutes
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Calves
+                    [0],
+                    // Hamstrings
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -834,38 +1281,86 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         case 3:
             stretchingSelectedArray =
                 [
-                    // Mandatory
+                    // Recommended
                     [1,
+                     0],
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0],
                     // Foam/Ball Roll
-                    [1,
+                    [0,
                      0,
-                     1,
                      0,
-                     1],
-                    // Lower Back
-                    [1,
-                     1,
-                     1,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0],
+                    // Back
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Obliques(Sides)
+                    [0,
+                     0,
+                     0],
+                    // Neck
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
                     // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
+                    [0,
                      0,
                      0,
                      0,
-                     1],
-                    // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                     0,
+                     0],
+                    // Hips and Glutes
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Calves
+                    [0],
+                    // Hamstrings
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -874,38 +1369,86 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         case 4:
             stretchingSelectedArray =
                 [
-                    // Mandatory
+                    // Recommended
                     [1,
+                     0],
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0],
                     // Foam/Ball Roll
                     [0,
-                     1,
-                     1,
                      0,
-                     1],
-                    // Lower Back
-                    [1,
                      0,
-                     1,
                      0,
-                     1],
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Back
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Obliques(Sides)
+                    [0,
+                     0,
+                     0],
+                    // Neck
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
                     // Shoulders
-                    [1,
+                    [0,
                      0,
-                     1,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
                      0,
-                     1,
                      0,
-                     1],
-                    // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                     0,
+                     0],
+                    // Hips and Glutes
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Calves
+                    [0],
+                    // Hamstrings
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -914,38 +1457,86 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         case 5:
             stretchingSelectedArray =
                 [
-                    // Mandatory
-                    [0,
-                     1],
-                    // Foam/Ball Roll
+                    // Recommended
                     [1,
+                     0],
+                    // Joint Rotations
+                    [0,
                      0,
-                     1,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0],
-                    // Lower Back
-                    [1,
-                     1,
-                     1,
+                    // Foam/Ball Roll
+                    [0,
                      0,
-                     1],
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Back
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Obliques(Sides)
+                    [0,
+                     0,
+                     0],
+                    // Neck
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
                     // Shoulders
-                    [1,
+                    [0,
                      0,
                      0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
                      0,
                      0,
-                     1,
-                     1],
-                    // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
+                     0],
+                    // Hips and Glutes
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Calves
+                    [0],
+                    // Hamstrings
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
+                     0]
             ]
             
             self.tableView.reloadData()
@@ -954,37 +1545,85 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         case 6:
             stretchingSelectedArray =
                 [
-                    // Mandatory
+                    // Recommended
                     [1,
+                     0],
+                    // Joint Rotations
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0],
                     // Foam/Ball Roll
-                    [1,
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0,
                      0,
                      0],
-                    // Lower Back
-                    [1,
+                    // Back
+                    [0,
                      0,
                      0,
                      0,
-                     1],
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Obliques(Sides)
+                    [0,
+                     0,
+                     0],
+                    // Neck
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Arms
+                    [0,
+                     0,
+                     0],
+                    // Pecs
+                    [0],
                     // Shoulders
-                    [1,
+                    [0,
                      0,
                      0,
-                     1],
-                    // Band Assisted
-                    [1,
                      0,
-                     0,
-                     1,
                      0,
                      0],
-                    // Accessory
-                    [1,
-                     1,
+                    // Hips and Glutes
+                    [0,
                      0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Calves
+                    [0],
+                    // Hamstrings
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    // Quads
+                    [0,
                      0]
             ]
             
@@ -995,7 +1634,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             break
             
         case 8:
-            let fullArray = defaults.object(forKey: "stretchingWorkoutPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
             let array = fullArray[0]
             stretchingSelectedArray = array
             
@@ -1004,7 +1643,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             flashScreen()
             
         case 9:
-            let fullArray = defaults.object(forKey: "stretchingWorkoutPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
             let array = fullArray[1]
             stretchingSelectedArray = array
             
@@ -1013,7 +1652,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             flashScreen()
             
         case 10:
-            let fullArray = defaults.object(forKey: "stretchingWorkoutPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
             let array = fullArray[2]
             stretchingSelectedArray = array
             
@@ -1022,44 +1661,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             flashScreen()
             
         default:
-            stretchingSelectedArray =
-                [
-                    // Mandatory
-                    [1,
-                     0],
-                    // Foam/Ball Roll
-                    [1,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Lower Back
-                    [1,
-                     0,
-                     1,
-                     0,
-                     0,
-                     1],
-                    // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
-                     0,
-                     1,
-                     0],
-                    // Accessory
-                    [1,
-                     1,
-                     1,
-                     1]
-            ]
-            
-            self.tableView.reloadData()
-            flashScreen()
+            break
             
             
         }
@@ -1079,7 +1681,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     // Table View
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return stretchingWorkoutArray.count
+        return stretchingArray.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -1103,7 +1705,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stretchingWorkoutArray[section].count
+        return stretchingArray[section].count
     }
     
     
@@ -1112,7 +1714,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         
-        cell.textLabel?.text = NSLocalizedString(stretchingWorkoutArray[indexPath.section][indexPath.row], comment: "")
+        cell.textLabel?.text = NSLocalizedString(stretchingArray[indexPath.section][indexPath.row], comment: "")
         
         cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
@@ -1256,14 +1858,14 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     // Pass Array to next ViewController
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "stretchingWorkout") {
+        if (segue.identifier == "stretching") {
             
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! StretchingScreenWorkout
+            let destinationVC = destinationNC.viewControllers.first as! StretchingScreenFull
             
-            destinationVC.stretchingMovementsArray = stretchingWorkoutArray
+            destinationVC.stretchingMovementsArray = stretchingArray
             destinationVC.stretchingMovementsSelectedArray = stretchingSelectedArray
             
         }

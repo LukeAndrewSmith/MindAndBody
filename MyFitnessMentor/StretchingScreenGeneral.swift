@@ -13,7 +13,7 @@ import UserNotifications
 
 
 
-class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class StretchingScreenGeneral: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     
