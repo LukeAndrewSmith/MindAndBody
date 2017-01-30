@@ -14,16 +14,20 @@ class Information: UITableViewController{
     
     
     
-    struct Group2 {
-        var name: String!
-        
-        init(name: String) {
-            self.name = name
-        }
-    }
     
-    var informationGroup = [Group2]()
+    // Arrays
     
+    let sectionArray =
+        ["Noice", "app", "music"]
+    
+    
+    let rowArray =
+        [
+            ["breathing", "coreActivation", "posture", "commonTerms", "trainingPhilosophy"],
+            ["vision", "usage"],
+            ["noice"]
+    
+        ]
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,136 +50,88 @@ class Information: UITableViewController{
         self.navigationController?.navigationBar.barTintColor = colour1
         self.navigationController?.navigationBar.tintColor = .white
         
-        // Alert
-//        let defaults = UserDefaults.standard
-//        defaults.register(defaults: ["alertInfo3" : false])
-//        
-//        if UserDefaults.standard.bool(forKey: "alertInfo3") == false {
-//            
-//            UserDefaults.standard.set(true, forKey: "alertInfo3")
-//            
-//            let alertInformation = UIAlertController(title: (NSLocalizedString("alertTitle3", comment: "")), message: (NSLocalizedString("alertMessage3", comment: "")), preferredStyle: UIAlertControllerStyle.alert)
-//            
-//            alertInformation.view.tintColor = .black
-//            
-//            alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
-//            
-//            self.present(alertInformation, animated: true, completion: nil)
-//        }
-
-        
         
         //
         // Title
         self.navigationController?.navigationBar.topItem?.title = (NSLocalizedString("information", comment: ""))
         
-    
-        // Initialize the sections array
-        informationGroup = [
-            Group2(name: NSLocalizedString("myPreferencesHelp", comment: "")),
-            Group2(name: NSLocalizedString("coreActivation", comment: "")),
-            Group2(name: NSLocalizedString("trainingPhilosophy", comment: "")),
-            Group2(name: NSLocalizedString("appFeatures", comment: ""))
-            ]
-            
-            
         
 }
     
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sectionArray.count
     }
     
     
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
-        return " "
+        return sectionArray[section]
     }
 
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
         let header = view as! UITableViewHeaderFooterView
+        
+        // View
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 20)!
+        header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        header.textLabel?.textColor = .black
+        header.textLabel?.text = header.textLabel?.text?.capitalized
+        
         header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        // Text
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 20)!
         
-        let view = UIView()
-        view.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        return view
+        // Border
+        let border = CALayer()
+        border.backgroundColor = UIColor.black.cgColor
+        border.frame = CGRect(x: 15, y: header.frame.size.height-1, width: self.view.frame.size.height, height: 1)
+        
+        
+        header.layer.addSublayer(border)
+        header.layer.masksToBounds = true
+        
+        }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 47
     }
-
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0: return informationGroup.count
-        default: return 0
-        }
+        return rowArray[section].count
     }
 
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         
-        // Calculate the real sub-section index and row index
-        let row = getRowIndex(row: indexPath.row)
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            cell.textLabel?.text = NSLocalizedString(rowArray[indexPath.section][indexPath.row], comment: "")
         
-            cell.textLabel?.text = informationGroup[row].name
+        
+        
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+            cell.textLabel?.textAlignment = .left
+
             return cell
        
 }
     
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        tableView.deselectRow(at: indexPath, animated: true)
 
-
-
-
-
-
-
-//
-// Helper Functions
-//
-
-func getRowIndex(row: NSInteger) -> Int {
-    var index = row
-    let indices = getHeaderIndices()
-    
-    for i in 0..<indices.count {
-        if i == indices.count - 1 || row < indices[i + 1] {
-            index -= indices[i]
-            break
-        }
     }
-    
-    return index
-}
-
-    
-    func getHeaderIndices() -> [Int] {
-        var index = 0
-        var indices: [Int] = []
-    
-        indices.append(index)
-        index += informationGroup.count + 1
-        return indices
-
-}
-
-
-
-
-
 
 
 

@@ -571,6 +571,45 @@
 
 
 
+        //
+        // Yoga //
+        //
+
+        // Yoga Choice //
+        "guided" = "Guided";
+        "normal" = "Normal";
+
+        "monday" = "Monday";
+        "tuesday" = "Tuesday";
+        "wednesday" = "Wednesday";
+        "thursday" = "Thursday";
+        "friday" = "Friday";
+        "saturday" ="Saturday";
+        "sunday" = "Sunday";
+
+            // Guided //
+            "length" = "Length";
+            "guidedPractice" = "Guided Practices";
+
+
+            // Normal //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -640,9 +679,9 @@
 
     //
     // Section Titles //
-    "case0" = "      Me";
-    "case1" = "      Movements";
-    "case2" = "      Volume";
+    "case0" = "Me";
+    "case1" = "Movements";
+    "case2" = "Volume";
 
 
     //
@@ -714,32 +753,30 @@
 
 
 
-        //
-        // Yoga //
-        //
-
-        // Yoga Choice //
-        "guided" = "Guided";
-        "normal" = "Normal";
-
-
-        // Guided //
-
-
-
-        // Normal //
-
 
 
 //
 // Information //
 //
 //
-    // Names //
-    "myPreferencesHelp" = "MyPreferences Help";
-    "coreActivation" = "Core Activation";
-    "trainingPhilosophy" = "Training Philosophy";
-    "appFeatures" = "App Features";
+    // Section Array //
+    "" = "";
+    "app" = "App";
+    "music" = "Music";
+
+    // Row Array //
+        //
+        "breathing" = "Breathing";
+        "coreActivation" = "Core Activation";
+        "posture" = "Posture";
+        "commonTerms" = "Common Terms";
+        "trainingPhilosophy" = "Training Philosophy";
+
+        //
+        "vision" = "Vision";
+        "usage" = "Usage";
+
+        //
 
     //
     // Title //

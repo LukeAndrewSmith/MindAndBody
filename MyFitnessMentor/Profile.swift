@@ -190,21 +190,17 @@ class Profile: UITableViewController{
         header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
      
         
-       
         
         // Border
-        let border = UIView(frame: CGRect(x: 15,y: header.frame.size.height ,width: self.view.frame.size.width,height: 1))
-        border.backgroundColor = .black
-        //header.addSubview(border)
+        let border = CALayer()
+        border.backgroundColor = UIColor.black.cgColor
+        border.frame = CGRect(x: 15, y: header.frame.size.height-1, width: self.view.frame.size.height, height: 1)
+        
+        
+        header.layer.addSublayer(border)
+        header.layer.masksToBounds = true
         
 
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        let view = UIView()
-        view.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        return view
     }
     
     
