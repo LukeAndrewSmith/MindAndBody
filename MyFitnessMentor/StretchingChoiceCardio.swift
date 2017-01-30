@@ -122,13 +122,11 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
              0,
              0,
              0,
-             0,
              0],
             // Calves
             [0],
             // Hamstrings
             [0,
-             0,
              0,
              0,
              0,
@@ -207,13 +205,11 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
                  0,
                  0,
                  0,
-                 0,
                  0],
                 // Calves
                 [0],
                 // Hamstrings
                 [0,
-                 0,
                  0,
                  0,
                  0,
@@ -289,13 +285,11 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
                  0,
                  0,
                  0,
-                 0,
                  0],
                 // Calves
                 [0],
                 // Hamstrings
                 [0,
-                 0,
                  0,
                  0,
                  0,
@@ -371,13 +365,11 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
                  0,
                  0,
                  0,
-                 0,
                  0],
                 // Calves
                 [0],
                 // Hamstrings
                 [0,
-                 0,
                  0,
                  0,
                  0,
@@ -459,8 +451,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
              "lungeStretch",
              "threadTheNeedle",
              "pigeonPose",
-             "seatedGlute",
-             "lyingGlute"],
+             "seatedGlute"],
             // Calves
             ["calveStretch"],
             // Hamstrings
@@ -469,8 +460,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
              "singleLegStanding",
              "downWardsDog",
              "singleLegHamstring",
-             "twoLegHamstring",
-             "lyingHamstring"],
+             "twoLegHamstring"],
             // Quads
             ["lungeStretchWall",
              "lyingQuadStretch"]
@@ -545,13 +535,11 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
              0,
              0,
              0,
-             0,
              0],
             // Calves
             [0],
             // Hamstrings
             [0,
-             0,
              0,
              0,
              0,
@@ -1082,13 +1070,11 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1170,13 +1156,11 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1258,13 +1242,11 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1346,13 +1328,11 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1434,13 +1414,11 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1522,13 +1500,11 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1610,13 +1586,11 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1858,12 +1832,12 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
     // Pass Array to next ViewController
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "stretching") {
+        if (segue.identifier == "stretchingCardio") {
             
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! StretchingScreenFull
+            let destinationVC = destinationNC.viewControllers.first as! StretchingScreenCardio
             
             destinationVC.stretchingMovementsArray = stretchingArray
             destinationVC.stretchingMovementsSelectedArray = stretchingSelectedArray

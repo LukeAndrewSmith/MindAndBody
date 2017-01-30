@@ -520,10 +520,10 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceCardioText", comment: "")))
+        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
         
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceCardioText", comment: "")))
+        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         

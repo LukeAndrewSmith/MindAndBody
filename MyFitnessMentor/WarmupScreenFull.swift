@@ -107,7 +107,7 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
              "1"],
             // Joint Rotations
             ["5-10",
-             "5=10",
+             "5-10",
              "5-10",
              "5-10",
              "5-10",
@@ -174,14 +174,14 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             [#imageLiteral(resourceName: "Heart"),
              #imageLiteral(resourceName: "Heart")],
             // Joint Rotations
-            [#imageLiteral(resourceName: "Wrist"),
-             #imageLiteral(resourceName: "Elbow"),
-             #imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Neck"),
-             #imageLiteral(resourceName: "Waist"),
-             #imageLiteral(resourceName: "Hip Area"),
-             #imageLiteral(resourceName: "Knee"),
-             #imageLiteral(resourceName: "Ankle")],
+            [#imageLiteral(resourceName: "Wrist Joint"),
+             #imageLiteral(resourceName: "Elbow Joint"),
+             #imageLiteral(resourceName: "Shoulder Joint"),
+             #imageLiteral(resourceName: "Neck Joint"),
+             #imageLiteral(resourceName: "Waist Joint"),
+             #imageLiteral(resourceName: "Hip Joint"),
+             #imageLiteral(resourceName: "Knee Joint"),
+             #imageLiteral(resourceName: "Ankle Joint")],
             // Foam/Ball Roll
             [#imageLiteral(resourceName: "Thoracic"),
              #imageLiteral(resourceName: "Thoracic"),
@@ -259,7 +259,7 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
              "hamstringfE",
              "glutefE",
              "calvefE"],
-            // Lower Back
+            // Back
             ["sideLegDropE",
              "sideLegKickE",
              "scorpionKickE",

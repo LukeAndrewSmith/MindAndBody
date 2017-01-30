@@ -152,14 +152,14 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     var targetAreaArrayF =
         [
             // Joint Rotations
-            [#imageLiteral(resourceName: "Wrist"),
-             #imageLiteral(resourceName: "Elbow"),
-             #imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Neck"),
-             #imageLiteral(resourceName: "Waist"),
-             #imageLiteral(resourceName: "Hip Area"),
-             #imageLiteral(resourceName: "Knee"),
-             #imageLiteral(resourceName: "Ankle")],
+            [#imageLiteral(resourceName: "Wrist Joint"),
+             #imageLiteral(resourceName: "Elbow Joint"),
+             #imageLiteral(resourceName: "Shoulder Joint"),
+             #imageLiteral(resourceName: "Neck Joint"),
+             #imageLiteral(resourceName: "Waist Joint"),
+             #imageLiteral(resourceName: "Hip Joint"),
+             #imageLiteral(resourceName: "Knee Joint"),
+             #imageLiteral(resourceName: "Ankle Joint")],
             // Foam/Ball Roll
             [#imageLiteral(resourceName: "Thoracic"),
              #imageLiteral(resourceName: "Lat and Delt"),

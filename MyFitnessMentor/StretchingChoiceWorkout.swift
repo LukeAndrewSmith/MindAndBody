@@ -122,13 +122,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
              0,
              0,
              0,
-             0,
              0],
             // Calves
             [0],
             // Hamstrings
             [0,
-             0,
              0,
              0,
              0,
@@ -207,13 +205,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                  0,
                  0,
                  0,
-                 0,
                  0],
                 // Calves
                 [0],
                 // Hamstrings
                 [0,
-                 0,
                  0,
                  0,
                  0,
@@ -289,13 +285,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                  0,
                  0,
                  0,
-                 0,
                  0],
                 // Calves
                 [0],
                 // Hamstrings
                 [0,
-                 0,
                  0,
                  0,
                  0,
@@ -371,13 +365,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                  0,
                  0,
                  0,
-                 0,
                  0],
                 // Calves
                 [0],
                 // Hamstrings
                 [0,
-                 0,
                  0,
                  0,
                  0,
@@ -459,8 +451,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
              "lungeStretch",
              "threadTheNeedle",
              "pigeonPose",
-             "seatedGlute",
-             "lyingGlute"],
+             "seatedGlute"],
             // Calves
             ["calveStretch"],
             // Hamstrings
@@ -469,8 +460,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
              "singleLegStanding",
              "downWardsDog",
              "singleLegHamstring",
-             "twoLegHamstring",
-             "lyingHamstring"],
+             "twoLegHamstring"],
             // Quads
             ["lungeStretchWall",
              "lyingQuadStretch"]
@@ -545,13 +535,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
              0,
              0,
              0,
-             0,
              0],
             // Calves
             [0],
             // Hamstrings
             [0,
-             0,
              0,
              0,
              0,
@@ -773,9 +761,9 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         //
         let defaults = UserDefaults.standard
         
-        defaults.register(defaults: ["stretchingPresets" : stretchingPresets])
-        defaults.register(defaults: ["stretchingPresetTexts" : presetTexts])
-        defaults.register(defaults: ["stretchingPresetNumber" : 0])
+        defaults.register(defaults: ["stretchingPresetsWorkout" : stretchingPresets])
+        defaults.register(defaults: ["stretchingPresetTextsWorkout" : presetTexts])
+        defaults.register(defaults: ["stretchingPresetNumberWorkout" : 0])
         
         defaults.synchronize()
         
@@ -796,9 +784,9 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func addPreset(_ sender: Any) {
         
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "stretchingPresetNumber")
-        var stretchingPreset = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "stretchingPresetTexts") as! [String]
+        let number = defaults.integer(forKey: "stretchingPresetNumberWorkout")
+        var stretchingPreset = defaults.object(forKey: "stretchingPresetsWorkout") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "stretchingPresetTextsWorkout") as! [String]
         
         
         // Set Preset
@@ -829,7 +817,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                 
                 // Update Preset Text Arrays
                 presetTextArray[number] = (textField?.text)!
-                defaults.set(presetTextArray, forKey: "stretchingPresetTexts")
+                defaults.set(presetTextArray, forKey: "stretchingPresetTextsWorkout")
                 defaults.synchronize()
                 
                 
@@ -839,7 +827,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                 // Set new Preset Array
                 //
                 stretchingPreset[number] = self.stretchingSelectedArray
-                defaults.set(stretchingPreset, forKey: "stretchingPresets")
+                defaults.set(stretchingPreset, forKey: "stretchingPresetsWorkout")
                 
                 defaults.synchronize()
                 
@@ -848,7 +836,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                 //
                 let newNumber = number + 1
                 
-                defaults.set(newNumber, forKey: "stretchingPresetNumber")
+                defaults.set(newNumber, forKey: "stretchingPresetNumberWorkout")
                 defaults.synchronize()
                 
                 
@@ -880,9 +868,9 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func removePreset(_ sender: Any) {
         
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "stretchingPresetNumber")
-        var stretchingPreset = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "stretchingPresetTexts") as! [String]
+        let number = defaults.integer(forKey: "stretchingPresetNumberWorkout")
+        var stretchingPreset = defaults.object(forKey: "stretchingPresetsWorkout") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "stretchingPresetTextsWorkout") as! [String]
         
         
         let selectedRow = pickerView.selectedRow(inComponent: 0)
@@ -894,18 +882,18 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             stretchingPreset.remove(at: index)
             stretchingPreset.append(emptyArray)
             
-            defaults.set(stretchingPreset, forKey: "stretchingPresets")
+            defaults.set(stretchingPreset, forKey: "stretchingPresetsWorkout")
             
             
             presetTextArray.remove(at: index)
             presetTextArray.append(emptyString)
             
-            defaults.set(presetTextArray, forKey: "stretchingPresetTexts")
+            defaults.set(presetTextArray, forKey: "stretchingPresetTextsWorkout")
             
             
             if number > 0 {
                 let newNumber = number - 1
-                defaults.set(newNumber, forKey: "stretchingPresetNumber")
+                defaults.set(newNumber, forKey: "stretchingPresetNumberWorkout")
             } else {
                 
             }
@@ -971,7 +959,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             
         } else if row == pickerViewArray.count + 1 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTextsWorkout") as! [String]
             let titleData = titleDataArray[0]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -982,7 +970,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             
         } else if row == pickerViewArray.count + 2 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTextsWorkout") as! [String]
             let titleData = titleDataArray[1]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -993,7 +981,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             
         } else if row == pickerViewArray.count + 3 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTextsWorkout") as! [String]
             let titleData = titleDataArray[2]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -1082,13 +1070,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1170,13 +1156,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1258,13 +1242,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1346,13 +1328,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1434,13 +1414,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1522,13 +1500,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1610,13 +1586,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                      0,
                      0,
                      0,
-                     0,
                      0],
                     // Calves
                     [0],
                     // Hamstrings
                     [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1634,7 +1608,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             break
             
         case 8:
-            let fullArray = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "stretchingPresetsWorkout") as! [Array<Array<Int>>]
             let array = fullArray[0]
             stretchingSelectedArray = array
             
@@ -1643,7 +1617,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             flashScreen()
             
         case 9:
-            let fullArray = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "stretchingPresetsWorkout") as! [Array<Array<Int>>]
             let array = fullArray[1]
             stretchingSelectedArray = array
             
@@ -1652,7 +1626,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             flashScreen()
             
         case 10:
-            let fullArray = defaults.object(forKey: "stretchingPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "stretchingPresetsWorkout") as! [Array<Array<Int>>]
             let array = fullArray[2]
             stretchingSelectedArray = array
             
@@ -1858,12 +1832,12 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     // Pass Array to next ViewController
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "stretching") {
+        if (segue.identifier == "stretchingWorkout") {
             
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! StretchingScreenFull
+            let destinationVC = destinationNC.viewControllers.first as! StretchingScreenWorkout
             
             destinationVC.stretchingMovementsArray = stretchingArray
             destinationVC.stretchingMovementsSelectedArray = stretchingSelectedArray
