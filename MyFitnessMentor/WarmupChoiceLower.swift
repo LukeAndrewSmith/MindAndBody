@@ -251,8 +251,8 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             // Joint Rotations
             ["wrist",
              "elbow",
-             "shoulder",
-             "neck",
+             "shoulderR",
+             "neckR",
              "waist",
              "hip",
              "knees",

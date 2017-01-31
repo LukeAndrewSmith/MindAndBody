@@ -121,8 +121,8 @@
                     "jointRotation" = "Joint Rotations";
                 "wrist" = "Wrist Rotations";
                 "elbow" = "Elbow Rotations";
-                "shoulder" = "Shoulder Rotations";
-                "neck" = "Neck Rotations";
+                "shoulderR" = "Shoulder Rotations";
+                "neckR" = "Neck Rotations";
                 "waist" = "Waist Rotations";
                 "hip" = "Hip Rotations";
                 "knees" = "Knee Rotations";
@@ -506,7 +506,7 @@
 
             // Back (upper to lower)
     //       "catCow" = ""
-            "upwardsDogE" = "Stretch:\nLie on your front with your legs straight and toes pointed.\nBend your elbows and place your hands flat on the floor close to your torso, between the height of your chest and your waist, making sure your forearms are perpendicular to the floor.\nPress into the floor whilst inhaling and and straighten your arms, lifting your torso and legs off the floor, whilst keeping your legs straight and weight on the tops of your feet. While pressing up imagine also that your pushing yourself forwards a little along the floor.\nKeep your elbows facing backwards (elbow creases facing forwards).\nKeep your thighs contracted and rotate your pelvis forwards a little by activating/mildy contract the glutes without tensing them (imagine your pushing your tailbone to the ground, and the front of your pelvis forwards). This  ensures your lower back isn't being overly compressed.\nKeep your shoulders down and back (push them away from your ears) and lift the torso by imagining lifting the top of your chest dircectly up. Don't push the chest forwards.\nLook straight ahead (or up a little so long as you don't compress your neck).\n\nNotes:\nDon't relax your legs or upper body, this will feel like you get a greater bend in the lower back (which you might), but it will compress it which is not advised. You can relax your core muscles a little so long as you are pushing up through your chest (imagine your pushing the top of your chest away from the floor), and contracting your thighs with your knees off the floor. This avoids your back compressing.\nMake sure you keep your shoulders down and back, don't allow them to rise towards your ears.\nMake sure your thighs and knees never touch the ground.\nDon't lean on your arms in such a way that pushes your chest backwards, this compresses the spine. Your weight should be pushing down your arms perpendicular to the ground.\nBreath into your back.";
+            "upwardsDogE" = "Stretch:\nLie on your front with your legs straight and toes pointed.\nBend your elbows and place your hands flat on the floor close to your torso, between the height of your chest and your waist, making sure your forearms are perpendicular to the floor.\nPress into the floor whilst inhaling and and straighten your arms, lifting your torso and legs off the floor, whilst keeping your legs straight and weight on the tops of your feet. While pressing up imagine also that your pushing yourself forwards a little along the floor.\nKeep your elbows facing backwards (elbow creases facing forwards).\nKeep your thighs contracted and rotate your pelvis forwards a little by activating/mildy contract the glutes without tensing them (imagine your pushing your tailbone to the ground, and the front of your pelvis forwards). This  ensures your lower back isn't being overly compressed.\nKeep your shoulders down and back (push them away from your ears) and lift the torso by imagining lifting the top of your chest dircectly up. Don't push the chest forwards.\nLook straight ahead (or up a little so long as you don't compress your neck).\n\nNotes:\nDon't relax your legs or upper body, this will feel like you get a deeper stretch in the lower back (which you might), but it will compress it which is not advised. You can relax your core muscles a little so long as you are pushing up through your chest (imagine your pushing the top of your chest away from the floor), and contracting your thighs with your knees off the floor. This avoids your back compressing.\nMake sure you keep your shoulders down and back, don't allow them to rise towards your ears.\nMake sure your thighs and knees never touch the ground.\nDon't lean on your arms in such a way that pushes your chest backwards, this compresses the spine. Your weight should be pushing down your arms perpendicular to the ground.\n\nYou can stick your chest out and look upwards if you are flexible.\nBreath into your back.";
             "extendedPuppyE" = "Stretch:\nKneel on your hands and knees, so that your hands are below your shoulders, and knees below hips.\nPoint your toes.\nBegin to walk your hands forwards whilst exhaling, bringing your forehead and chest towards the ground.\nElongate your spine gently.\nKeep your hips directly above your knees.\nPlace your forehead on the ground, relaxing your neck and allowing a slight bend in the lower back.\nRelax your shoulders towards the ground and stretch your arms, keeping some pressure on your hands.\n\nNotes:\nKeep your hips above your knees when getting into the stretch.\nYou can increase the stretch in the back by moving your hips back slightly while keeping pressure through your hands, or moving your hands forwards a little with your hips in a constant position.\nBreath into your back.";
             "childPoseE" = "Stretch:\nKneel on the floor, with your knees hip width apart and your toes pointed.\nLie your torso on your thigs, and your forehead on the ground.\nRotate your pelvis forwards a little to elongate your spine.\nMove your tailbone away from your spine, and move the back of your head away from your neck (straighten your neck).\nYour arms can be stretched out above your head with your palms down, or straight down beside your torso with your palsm up.\nRelax your shoulders toward the ground.\n\nNotes:\nRelax the hips and core, and elongate the lower back.\nBreath into the lower back and rear torso.";
             "staffPoseE" = "Stretch:\nSit on the floor with your legs outstretched in front of you and knees together.\nRotate your pelvis back, straightening your lower back perpendicular to the floor and put your weight on your sitting bones.\nTense your thighs to straighten your legs and straighten your torso up.\nFlex your feet, and place your hands flat on the ground next to your hips.\nMake sure your shoulders are back and down and your back straight.\n\nNotes:\nIf your hamstrings aren't flexible enough sit on a small block, rolled up towel or anything appropriate to elevate your hips and reduce the stretch in your hamstrings.\nThis stretch can be down with your back against a wall, your tailbone area and shoulder blades should be the only things in contact with the wall.\nYour torso and legs should form a 90º angle.\nBreath into your lower back and hamstrings.";
@@ -577,7 +577,8 @@
 
         // Yoga Choice //
         "guided" = "Guided";
-        "normal" = "Normal";
+        "custom" = "Custom";
+        "practices" = "Practices";
 
         "monday" = "Monday";
         "tuesday" = "Tuesday";
@@ -596,7 +597,10 @@
 
 
 
-
+        //
+        // Meditation //
+        //
+        "meditationTimer" = "Timer";
 
 
 
@@ -643,13 +647,10 @@
         "upperLower" = "Upper-Lower";
         "legsPullPush" = "Legs-Pull-Push";
 
-    "emphasis1" = "Emphasis (aim)";
+    "emphasis" = "Emphasis (aim)";
         "aesthetics" = "Aesthetics";
         "strength" = "Strength";
 
-    "emphasis2" = "Emphasis (body-parts)";
-        "upper" = "Upper";
-        "lower" = "Lower";
 
     "freeWeightPreference" = "Free-Weight Preference";
         "barbell" = "Barbell";
@@ -679,9 +680,9 @@
 
     //
     // Section Titles //
-    "case0" = "Me";
-    "case1" = "Movements";
-    "case2" = "Volume";
+    "me" = "Me";
+    "movements" = "Movements";
+    "volume" = "Volume";
 
 
     //

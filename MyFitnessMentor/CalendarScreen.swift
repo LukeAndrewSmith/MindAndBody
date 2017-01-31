@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class CalendarScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CalendarScreen: UITableViewController {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -19,7 +19,6 @@ class CalendarScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var checkMark: UIBarButtonItem!
     
     // Table View
-    @IBOutlet weak var tableView: UITableView!
     
     
     
@@ -57,19 +56,40 @@ class CalendarScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
     
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        self.tableView.backgroundView = backView
+        
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        // Background Gradient and Colour
-        self.view.applyGradient(colours: [colour1, colour2])
+        // Colours
         
-        checkMark.tintColor = colour1
+        self.tableView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
-        self.navigationController?.navigationBar.tintColor = colour1
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-heavy", size: 23)!]
+        checkMark.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        self.navigationController?.navigationBar.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+     
+        
+        self.navigationController?.navigationBar.barTintColor = colour1
         
         
+        
+        // Title
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 22)!]
+        
+        
+        
+    
         // Navigation Title
         navigationBar.title = NSLocalizedString("calendar", comment: "")
         
@@ -85,69 +105,90 @@ class CalendarScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // Table View
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 7
             //daysArray.count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return NSLocalizedString(daysArray[section], comment: "")
     }
     
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
         
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)!
-        header.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        header.contentView.backgroundColor = .clear
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)!
+        header.textLabel?.textColor = .black
+        header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         header.contentView.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
         header.textLabel?.text = header.textLabel?.text?.capitalized
         
+        
+        // Border
+        let border = CALayer()
+        border.backgroundColor = UIColor.black.cgColor
+        border.frame = CGRect(x: 15, y: header.frame.size.height-1, width: self.view.frame.size.height, height: 1)
+        
+        
+        header.layer.addSublayer(border)
+        header.layer.masksToBounds = true
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 47
     }
     
     
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         
-        cell.textLabel?.text = "Test"
         
         //NSLocalizedString(warmupUpperArray[indexPath.section][indexPath.row], comment: "")
         
-        cell.textLabel?.textColor = .black
-        cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
-        cell.textLabel?.textAlignment = .left
-        cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        cell.tintColor = .black
-        
+//        cell.textLabel?.textColor = .black
+//        cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+//        cell.textLabel?.textAlignment = .left
+//        cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+//        cell.tintColor = .black
+//        
 
         
-        return cell
         
+        
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            cell.tintColor = .black
+            
+            cell.imageView?.image = #imageLiteral(resourceName: "Plus")
+        
+            cell.contentView.transform = CGAffineTransform(scaleX: -1,y: 1);
+            cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
+            
+            return cell
         
     }
     
     
     
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return 47
         
     }
     
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -159,9 +200,8 @@ class CalendarScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     
-    
     @IBAction func checkMarkAction(_ sender: Any) {
-        
+    
         self.performSegue(withIdentifier: "unwindToHomeScreen", sender: self)
         
     }

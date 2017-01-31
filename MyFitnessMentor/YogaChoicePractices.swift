@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class YogaChoiceNormal: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -47,9 +47,68 @@ class YogaChoiceNormal: UIViewController, UITableViewDelegate, UITableViewDataSo
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
     
     
-    // Add Preset
-    @IBOutlet weak var addPreset: UIButton!
-    @IBOutlet weak var removePreset: UIButton!
+    
+    
+    
+    
+    
+    //
+    // Yoga Poses
+    //
+    let posesDictionary =
+        [
+            //Standing
+            0: "upwardsSalute",
+            1: "mountain",
+            2: "tree",
+            3: "extendedHandToe",
+            4: "eagle",
+            5: "chair",
+            6: "lordOfDance",
+            7: "warrior1",
+            8: "warrior2",
+            9: "warrior3",
+            10: "halfMoon",
+            11: "",
+            12: "",
+            13: "",
+            14: "",
+            15: "",
+            16: "",
+            17: "",
+            18: "",
+            19: "",
+            20: "",
+            21: "",
+            22: "",
+            23: "",
+            24: "",
+            25: "",
+            26: "",
+            27: "",
+            28: "",
+            29: "",
+            30: "",
+            31: "",
+            32: "",
+            33: "",
+            // 2 points of contact
+
+    
+    
+    
+    
+        ]
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     var presetTexts = ["", "", ""]
     

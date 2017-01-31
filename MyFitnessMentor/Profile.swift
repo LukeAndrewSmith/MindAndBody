@@ -19,10 +19,28 @@ class Profile: UITableViewController{
     
     
     
+    // Arrays
+    let sectionArray =
+        ["me", "movements", "volume"  ]
     
-    //
-    // Sections
-    //
+    
+    let rowArray =
+        [
+            ["gender", "experience"],
+            ["split", "emphasis", "freeWeightPreference", "nSessions", "prefferedWorkoutLength"]
+    ]
+    
+    let selectionArray =
+        [
+            ["male", "female"],
+            ["beginner", "average", "expert"],
+            ["fullBody", "upperLower", "legsPullPush", "emphasis"],
+            ["aesthetics", "strength"],
+            ["barbell", "dumbell", "machineUsage", "low", "moderate", "medium"],
+            ["2", "3", "4", "5", "6"],
+            ["<60", "60", "90", "120"]
+        ]
+    
     struct Group {
         var name: String!
         var items: [String]!
@@ -73,37 +91,9 @@ class Profile: UITableViewController{
         tableView.contentOffset.y = 0
         
         
-        
-        //
-        // Initial Alert Suggesting reading the info
-        //
-//        let defaults = UserDefaults.standard
-//        defaults.register(defaults: ["alertInfo2" : false])
-//        
-//        
-//        if UserDefaults.standard.bool(forKey: "alertInfo2") == false {
-//            
-//            UserDefaults.standard.set(true, forKey: "alertInfo2")
-//            
-//            let alertInformation = UIAlertController(title: (NSLocalizedString("alertTitle2", comment: "")), message: (NSLocalizedString("alertMessage2", comment: "")), preferredStyle: UIAlertControllerStyle.alert)
-//            
-//            alertInformation.view.tintColor = .black
-//            
-//            alertInformation.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
-//            
-//            self.present(alertInformation, animated: true, completion: nil)
-//            
-//  
-//       
-//            self.tableView.setContentOffset(CGPoint.zero, animated: true)
-//        }
-
-        
-        
         //
         // Title
         //
-        
         self.navigationController?.navigationBar.topItem?.title = (NSLocalizedString("profile", comment: ""))
         
         
@@ -111,49 +101,28 @@ class Profile: UITableViewController{
         
         // Initialize the sections array
         meGroup = [
-            Group(name: (NSLocalizedString("gender", comment: "")),
-                  items: [(NSLocalizedString("male", comment: "")), (NSLocalizedString("female", comment: ""))]),
-            Group(name: (NSLocalizedString("experience", comment: "")),
-                  items: [(NSLocalizedString("beginner", comment: "")), (NSLocalizedString("average", comment: "")), (NSLocalizedString("expert", comment: ""))]),
-            
+            Group(name: "gender", items: ["male", "female"]),
+            Group(name: "experience", items: ["beginner", "average", "expert"])
         ]
         
         
         movementsGroup = [
-            Group(name: (NSLocalizedString("split", comment: "")),
-                  items: [(NSLocalizedString("fullBody", comment: "")), (NSLocalizedString("upperLower", comment: "")), (NSLocalizedString("legsPullPush", comment: ""))]),
-            Group(name: (NSLocalizedString("emphasis1", comment: "")),
-                  items: [(NSLocalizedString("aesthetics", comment: "")), (NSLocalizedString("strength", comment: ""))]),
-            Group(name: (NSLocalizedString("emphasis2", comment: "")),
-                  items: [(NSLocalizedString("upper", comment: "")), (NSLocalizedString("lower", comment: ""))]),
-            Group(name: (NSLocalizedString("freeWeightPreference", comment: "")),
-                  items: [(NSLocalizedString("barbell", comment: "")), (NSLocalizedString("dumbell", comment: ""))]),
-            Group(name: (NSLocalizedString("machineUsage", comment: "")),
-                  items: [(NSLocalizedString("low", comment: "")), (NSLocalizedString("moderate", comment: "")), (NSLocalizedString("medium", comment: ""))]),
-            
-            
+            Group(name: "split", items: ["fullBody", "upperLower", "legsPullPush"]),
+            Group(name: "emphasis", items: ["aesthetics", "strength"]),
+            Group(name: "freeWeightPreference", items: ["barbell", "dumbell"]),
+            Group(name: "machineUsage", items: ["low", "moderate", "medium"]),
         ]
         
         
         volumeGroup = [
-            Group(name: (NSLocalizedString("nSessions", comment: "")),
-                  items: [(NSLocalizedString("2", comment: "")), (NSLocalizedString("3", comment: "")), (NSLocalizedString("4", comment: "")), (NSLocalizedString("5", comment: "")), (NSLocalizedString("6", comment: ""))]),
-            Group(name: (NSLocalizedString("prefferedWorkoutLength", comment: "")),
-                  items: [(NSLocalizedString("<60", comment: "")), (NSLocalizedString("60", comment: "")), (NSLocalizedString("90", comment: "")), (NSLocalizedString("120", comment: "")), (NSLocalizedString(">120", comment: ""))]),
-            
+            Group(name: "nSessions", items: ["2", "3", "4", "5", "6"]),
+            Group(name: "prefferedWorkoutLength", items: ["<60", "60", "90", "120", ">120"])
         ]
 
         
-        
-        
-        
-        
-        
-        
+      
         
     }
-    
-    
     
     
     
@@ -168,15 +137,11 @@ class Profile: UITableViewController{
     }
     
     
-
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:  return (NSLocalizedString("case0", comment: ""))
-        case 1:  return (NSLocalizedString("case1", comment: ""))
-        case 2:  return (NSLocalizedString("case2", comment: ""))
-        default: return (NSLocalizedString("default", comment: ""))
-        }
+        return sectionArray[section]
     }
+    
     
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
@@ -199,9 +164,14 @@ class Profile: UITableViewController{
         
         header.layer.addSublayer(border)
         header.layer.masksToBounds = true
-        
-
     }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 47
+    }
+    
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -283,7 +253,7 @@ class Profile: UITableViewController{
         switch indexPath.section{
         case 0:
             if row == 0 {
-                cell.textLabel?.text = meGroup[subSection].name
+                cell.textLabel?.text = NSLocalizedString(meGroup[subSection].name, comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
@@ -295,7 +265,7 @@ class Profile: UITableViewController{
                 //
                 return cell
             } else {
-                subcell.textLabel?.text = meGroup[subSection].items[row - 1]
+                subcell.textLabel?.text = NSLocalizedString(meGroup[subSection].items[row - 1], comment: "")
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
                 subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
                 subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
@@ -308,7 +278,7 @@ class Profile: UITableViewController{
             
         case 1:
             if row == 0 {
-                cell.textLabel?.text = movementsGroup[subSection].name
+                cell.textLabel?.text = NSLocalizedString(movementsGroup[subSection].name, comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
@@ -321,7 +291,7 @@ class Profile: UITableViewController{
                 //
                 return cell
             } else {
-                subcell.textLabel?.text = movementsGroup[subSection].items[row - 1]
+                subcell.textLabel?.text = NSLocalizedString(movementsGroup[subSection].items[row - 1], comment: "")
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
                 subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
                 subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
@@ -335,7 +305,7 @@ class Profile: UITableViewController{
             
         case 2:
             if row == 0 {
-                cell.textLabel?.text = volumeGroup[subSection].name
+                cell.textLabel?.text = NSLocalizedString(volumeGroup[subSection].name, comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
@@ -348,7 +318,7 @@ class Profile: UITableViewController{
                 //
                 return cell
             } else {
-                subcell.textLabel?.text = volumeGroup[subSection].items[row - 1]
+                subcell.textLabel?.text = NSLocalizedString(volumeGroup[subSection].items[row - 1], comment: "")
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
                 subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
                 subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
@@ -416,8 +386,6 @@ class Profile: UITableViewController{
                 UserDefaults.standard.synchronize()
             }
             
-            if subSection != 2 {
-                
             
             // Toggle collapse
             movementsGroup[subSection].collapsed = !collapsed!
@@ -433,12 +401,6 @@ class Profile: UITableViewController{
             }
             tableView.endUpdates()
             
-            } else {
-                
-                tableView.deselectRow(at: indexPath, animated: true)
-                performSegue(withIdentifier: "emphasisSegue", sender: self)
-                
-            }
                 
             
             //

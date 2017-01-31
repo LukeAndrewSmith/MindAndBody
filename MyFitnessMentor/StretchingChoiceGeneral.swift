@@ -392,8 +392,8 @@ class StretchingChoiceGeneral: UIViewController, UITableViewDelegate, UITableVie
             // Joint Rotations
             ["wrist",
              "elbow",
-             "shoulder",
-             "neck",
+             "shoulderR",
+             "neckR",
              "waist",
              "hip",
              "knees",

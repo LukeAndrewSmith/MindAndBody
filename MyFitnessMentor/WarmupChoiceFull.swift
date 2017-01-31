@@ -321,7 +321,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             ["wrist",
              "elbow",
              "shoulder",
-             "neck",
+             "neckR",
              "waist",
              "hip",
              "knees",

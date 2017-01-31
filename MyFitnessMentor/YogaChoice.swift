@@ -21,7 +21,9 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     // Buttons
     @IBOutlet weak var guided: UIButton!
     
-    @IBOutlet weak var normal: UIButton!
+    @IBOutlet weak var custom: UIButton!
+    
+    @IBOutlet weak var practices: UIButton!
     
     // Information View
     @IBOutlet weak var informationViewYogaC: UIScrollView!
@@ -63,13 +65,19 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         guided.layer.borderWidth = 10
         guided.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         
+        custom.setTitle(NSLocalizedString("custom", comment: ""), for: UIControlState.normal)
+        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        custom.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        custom.layer.borderWidth = 10
+        custom.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         
+
         
-        normal.setTitle(NSLocalizedString("normal", comment: ""), for: UIControlState.normal)
-        normal.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        normal.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        normal.layer.borderWidth = 10
-        normal.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        practices.setTitle(NSLocalizedString("practices", comment: ""), for: UIControlState.normal)
+        practices.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        practices.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        practices.layer.borderWidth = 10
+        practices.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         //
         
         
@@ -170,11 +178,16 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        guided.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
+        guided.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         guided.layer.masksToBounds = true
         
-        normal.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
-        normal.layer.masksToBounds = true
+        custom.layer.cornerRadius = (self.stackView.frame.size.height) / 2
+        custom.layer.masksToBounds = true
+        
+        practices.layer.cornerRadius = (self.stackView.frame.size.height * 3/2) / 2
+        practices.layer.masksToBounds = true
+        
+        
         
         
     }

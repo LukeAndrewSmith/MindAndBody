@@ -392,8 +392,8 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
             // Joint Rotations
             ["wrist",
              "elbow",
-             "shoulder",
-             "neck",
+             "shoulderR",
+             "neckR",
              "waist",
              "hip",
              "knees",

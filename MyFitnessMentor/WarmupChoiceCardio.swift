@@ -271,8 +271,8 @@ class WarmupChoiceCardio: UIViewController, UITableViewDelegate, UITableViewData
             // Joint Rotations
             ["wrist",
              "elbow",
-             "shoulder",
-             "neck",
+             "shoulderR",
+             "neckR",
              "waist",
              "hip",
              "knees",
