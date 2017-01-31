@@ -57,7 +57,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     //
     let posesDictionary =
         [
-            //Standing
+            // Standing
             0: "upwardsSalute",
             1: "mountain",
             2: "tree",
@@ -69,35 +69,81 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             8: "warrior2",
             9: "warrior3",
             10: "halfMoon",
-            11: "",
-            12: "",
-            13: "",
-            14: "",
-            15: "",
-            16: "",
-            17: "",
-            18: "",
-            19: "",
-            20: "",
-            21: "",
-            22: "",
-            23: "",
-            24: "",
-            25: "",
-            26: "",
-            27: "",
-            28: "",
-            29: "",
-            30: "",
-            31: "",
-            32: "",
-            33: "",
-            // 2 points of contact
-
-    
-    
-    
-    
+            11: "extendedTriangle",
+            12: "extendedSideAngle",
+            13: "revolvedSideAngle",
+            14: "revolvedTriangle",
+            15: "halfForwardBend",
+            16: "forwardBend",
+            17: "wideLeggedForwardBend",
+            18: "intenseSide",
+            19: "gate",
+            20: "highLunge",
+            21: "lunge",
+            22: "deepSquat",
+            // Hand/Elbows and Feet/Knees
+            23: "dolphin",
+            24: "downwardDog",
+            25: "halfDownwardDog",
+            26: "plank",
+            27: "dolphinPlank",
+            28: "fourLimbedStaff",
+            29: "sidePlank",
+            30: "cat",
+            31: "cow",
+            32: "kowtow",
+            33: "catBalance",
+            34: "dynamicTiger",
+            35: "halfMonkey",
+            36: "childPose",            //
+            37: "wildThing",
+            38: "upwardBow",
+            39: "bridge",
+            40: "upwardPlank",
+            41: "extendedPuppy",
+            42: "upwardDog",
+            43: "kneelingBridge",
+            // Seated
+            44: "crossLeg",
+            45: "lotus",
+            46: "fireLog",
+            47: "boat",
+            48: "cowFace",
+            49: "hero",
+            50: "heron",
+            51: "butterfly",            //
+            52: "staffPose",
+            53: "archer",
+            54: "forwardBend",
+            55: "vForwardBend",
+            56: "halfVForwardPose",
+            57: "halfVSideBend",
+            58: "marichi1",
+            59: "marichi3",
+            60: "bharadvajaTwist",
+            61: "halfLordFish",
+            62: "frontSplit",
+            63: "sideSplit",
+            // Lying
+            64: "corpse",
+            65: "lyingMountain",
+            66: "fish",
+            67: "lyingButterfly",
+            68: "legRaiseToe",
+            69: "threadTheNeedle",
+            70: "shoulderStand",
+            71: "plow",
+            72: "frog",
+            73: "cobra",
+            74: "sphinx",
+            75: "pigeon",
+            76: "spineRolling",
+            // Hand Stands
+            77: "handstand",
+            78: "headstand",
+            79: "flatHandHandstand",
+            80: "forearmStand"
+            
         ]
     
     
@@ -454,29 +500,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         presetTitle.text = NSLocalizedString("presetWarmups", comment: "")
         tableTitle.text = NSLocalizedString("warmupTableTitle", comment: "")
         
-        
-        // Plus Button Colour
-        let origImage1 = UIImage(named: "Plus")
-        let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        // Set Image
-        addPreset.setImage(tintedImage1, for: .normal)
-        
-        //Image Tint
-        addPreset.tintColor = colour2
-        
-        
-        
-        // Minus Button Colour
-        let origImage2 = UIImage(named: "Minus")
-        let tintedImage2 = origImage2?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        // Set Image
-        removePreset.setImage(tintedImage2, for: .normal)
-        
-        //Image Tint
-        removePreset.tintColor = colour2
-        
-        
-        
+    
         
         
         // Begin Button Title
