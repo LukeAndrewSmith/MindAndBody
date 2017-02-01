@@ -195,13 +195,13 @@
 			name = Guided;
 			sourceTree = "<group>";
 		};
-		071966C61E3FAF5F00816A83 /* Normal */ = {
+		071966C61E3FAF5F00816A83 /* Practices */ = {
 			isa = PBXGroup;
 			children = (
 				071966C41E3FAF5B00816A83 /* YogaChoicePractices.swift */,
 				071966C71E3FAFC300816A83 /* YogaScreenPractices.swift */,
 			);
-			name = Normal;
+			name = Practices;
 			sourceTree = "<group>";
 		};
 		071F78381E3D0A7500C72301 /* General */ = {
@@ -293,7 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				07DEE6F61E0AADE6003B89AB /* YogaChoice.swift */,
-				071966C61E3FAF5F00816A83 /* Normal */,
+				071966C61E3FAF5F00816A83 /* Practices */,
 				079CAF9E1E40E405003ED63B /* Custom */,
 				071966C31E3FAF4D00816A83 /* Guided */,
 			);

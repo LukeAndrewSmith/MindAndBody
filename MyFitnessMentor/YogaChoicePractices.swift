@@ -48,7 +48,8 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     
-    
+    // Is Enabled
+    var beginButtonEnabled = 0
     
     
     
@@ -153,304 +154,68 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     
-    
-    
-    
-    var presetTexts = ["", "", ""]
-    
-    let emptyString = ""
-    
-    let emptyArray =
-        [
-            // Mandatory
-            [0,
-             0],
-            // Joint Rotations
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Foam/Ball Roll
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // Lower Back
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // Shoulders
-            [0,
-             0,
-             0,
-             0],
-            // Band Assisted
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Accessory
-            [0,
-             0,
-             0]
-    ]
-    
-    var warmupUpperPresets =
-        [
-            [
-                // Mandatory
-                [0,
-                 0],
-                // Joint Rotations
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Foam/Ball Roll
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Lower Back
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Shoulders
-                [0,
-                 0,
-                 0,
-                 0],
-                // Band Assisted
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Accessory
-                [0,
-                 0,
-                 0]
-            ],
-            [
-                // Mandatory
-                [0,
-                 0],
-                // Joint Rotations
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Foam/Ball Roll
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Lower Back
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Shoulders
-                [0,
-                 0,
-                 0,
-                 0],
-                // Band Assisted
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Accessory
-                [0,
-                 0,
-                 0]
-            ],
-            [
-                // Mandatory
-                [0,
-                 0],
-                // Joint Rotations
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Foam/Ball Roll
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Lower Back
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Shoulders
-                [0,
-                 0,
-                 0,
-                 0],
-                // Band Assisted
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Accessory
-                [0,
-                 0,
-                 0]
-            ]
-    ]
-    
-    
-    
-    // Warmup Upper Array
-    var warmupUpperArray =
-        [
-            // Mandatory
-            ["5minCardioL",
-             "5minCardioI"],
-            // Joint Rotations
-            ["wrist",
-             "elbow",
-             "shoulder",
-             "neck",
-             "waist",
-             "hip",
-             "knees",
-             "ankles"],
-            // Foam/Ball Roll
-            ["backf",
-             "thoracicSpine",
-             "lat",
-             "pecDelt",
-             "rearDelt"],
-            // Lower Back
-            ["sideLegDrop",
-             "sideLegKick",
-             "scorpionKick",
-             "sideBend",
-             "catCow"],
-            // Shoulder
-            ["wallSlides",
-             "superManShoulder",
-             "scapula",
-             "shoulderRotation"],
-            // Band/Bar/Machine Assisted
-            ["facePull",
-             "externalRotation",
-             "internalRotation",
-             "shoulderDislocation",
-             "rearDeltFly",
-             "latPullover"],
-            // Accessory
-            ["latStretch",
-             "pushUp",
-             "pullUp"]
-    ]
-    
-    
-    // Default Warmup Selected Array
-    var warmupSelectedArray =
-        [
-            // Mandatory
-            [1,
-             0],
-            // Joint Rotations
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Foam/Ball Roll
-            [1,
-             0,
-             0,
-             0,
-             0],
-            // Lower Back
-            [1,
-             0,
-             1,
-             0,
-             1],
-            // Shoulders
-            [1,
-             0,
-             0,
-             1],
-            // Band Assisted
-            [1,
-             1,
-             0,
-             1,
-             0,
-             0],
-            // Accessory
-            [1,
-             1,
-             1]
-    ]
-    
     // Picker View Array
-    var pickerViewArray =
+    let pickerViewArray =
         [
-            "default",
-            "beginner",
-            "bodyWeight",
-            "bodybuilding",
-            "strength",
-            "highIntensity",
-            "quick"
+            "5 min",
+            "10 min",
+            "15 min",
+            "30 min",
+            "60 min"
             
-    ]
+        ]
     
-    // Table View Section Title Array
-    var tableViewSectionArray =
+    
+    // Preset Arrays
+    let practiceArrayTitles =
         [
-            "mandatory",
-            "jointRotation",
-            "foamRoll",
-            "lowerBack",
-            "shoulder",
-            "bandAssisted",
-            "accessory"
-    ]
+            ["lit", "lit", "44"],
+            ["noice", "vnoice"],
+            ["wut", "pot"],
+            ["qjf", "adjfa"],
+            ["www", "Wkj", "35", "gsdfg"]
+    
+        ]
+    
+    
+    let practiceArray =
+        [
+            [
+            [1,2,3,4,5,6,7,8],
+            [2,5,7,55,7,33,2],
+            [3,4,4]
+            ],
+            
+            [
+            [1,2],
+            [5,3]
+            ],
+            
+            [
+            [33,72],
+            [34,24]
+            ],
+            
+            [
+            [3,4],
+            [33,78]
+            ],
+            
+            [
+            [33,33,33],
+            [9,8,7,6],
+            [8,0,9],
+            [67,6,7]
+            ]
+            
+        ]
+    
+    // Selected Array
+    var selectedArray = [Int]()
+    
+    // Selected Title
+    var selectedTitle = Int()
+
     
     
     // Flash Screen
@@ -590,175 +355,27 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
         
+
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         
         
-        
-        
-        
-        //
-        // Preset Warmups
-        //
-        let defaults = UserDefaults.standard
-        
-        defaults.register(defaults: ["warmupUpperPresets" : warmupUpperPresets])
-        defaults.register(defaults: ["warmupUpperPresetTexts" : presetTexts])
-        defaults.register(defaults: ["warmupUpperPresetNumber" : 0])
-        
-        defaults.synchronize()
-        
+        // Begin Button
+        beginEnabled()
     }
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    // Set Personalized Preset
-    //
-    @IBAction func addPreset(_ sender: Any) {
+    // Is Begin Button Enabled
+    func beginEnabled() {
         
-        let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "warmupUpperPresetNumber")
-        var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "warmupUpperPresetTexts") as! [String]
-        
-        
-        // Set Preset
-        if number < 3 {
-            
-            
-            
-            // Alert and Functions
-            //
-            let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
-            //
-            let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-            alert.view.tintColor = colour1
-            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-            
-            //2. Add the text field. You can configure it however you need.
-            alert.addTextField { (textField) in
-                textField.text = " "
-                textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
-            }
-            
-            // 3. Get the value from the text field, and perform actions when OK clicked.
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-                let textField = alert?.textFields![0]
-                
-                
-                
-                
-                // Update Preset Text Arrays
-                presetTextArray[number] = (textField?.text)!
-                defaults.set(presetTextArray, forKey: "warmupUpperPresetTexts")
-                defaults.synchronize()
-                
-                
-                
-                
-                
-                // Set new Preset Array
-                //
-                warmupPreset[number] = self.warmupSelectedArray
-                defaults.set(warmupPreset, forKey: "warmupUpperPresets")
-                
-                defaults.synchronize()
-                
-                
-                // Increase Preset Counter
-                //
-                let newNumber = number + 1
-                
-                defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
-                defaults.synchronize()
-                
-                
-                
-                // Flash Screen
-                self.flashScreen()
-                self.pickerView.reloadAllComponents()
-                self.tableView.reloadData()
-                
-            }))
-            
-            // 4. Present the alert.
-            self.present(alert, animated: true, completion: nil)
-            
-            
-            
-            
-            
-            
+        if beginButtonEnabled == 0 {
+            beginButton.isEnabled = false
         } else {
-            
+            beginButton.isEnabled = true
         }
     }
     
-    
-    
-    
-    // Remove Personalized Preset
-    @IBAction func removePreset(_ sender: Any) {
-        
-        let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "warmupUpperPresetNumber")
-        var warmupPreset = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "warmupUpperPresetTexts") as! [String]
-        
-        
-        let selectedRow = pickerView.selectedRow(inComponent: 0)
-        let index = (selectedRow) - (pickerViewArray.count + 1)
-        
-        
-        if index > -1 {
-            
-            warmupPreset.remove(at: index)
-            warmupPreset.append(emptyArray)
-            
-            defaults.set(warmupPreset, forKey: "warmupUpperPresets")
-            
-            
-            presetTextArray.remove(at: index)
-            presetTextArray.append(emptyString)
-            
-            defaults.set(presetTextArray, forKey: "warmupUpperPresetTexts")
-            
-            
-            if number > 0 {
-                let newNumber = number - 1
-                defaults.set(newNumber, forKey: "warmupUpperPresetNumber")
-            } else {
-                
-            }
-            
-            
-            
-            
-            defaults.synchronize()
-            
-            
-            
-            
-            // Flash Screen
-            self.flashScreen()
-            self.pickerView.reloadAllComponents()
-            self.tableView.reloadData()
-            
-        } else {
-            
-        }
-    }
-    
-    
-    
-    
-    
+
     
     // Picker Views
     //
@@ -772,452 +389,32 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
-        return pickerViewArray.count + 4
+        return pickerViewArray.count
         
     }
     
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
-        if row < pickerViewArray.count {
-            let rowLabel = UILabel()
-            let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
-            rowLabel.attributedText = myTitle
-            rowLabel.textAlignment = .center
-            return rowLabel
-            
-        } else if row == pickerViewArray.count {
-            
-            let line = UILabel()
-            line.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width / 2, height: 1)
-            line.backgroundColor = .black
-            line.isEnabled = false
-            return line
-            
-            
-        } else if row == pickerViewArray.count + 1 {
-            let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
-            let titleData = titleDataArray[0]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
-            rowLabel.attributedText = myTitle
-            rowLabel.textAlignment = .center
-            return rowLabel
-            
-            
-            
-        } else if row == pickerViewArray.count + 2 {
-            let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
-            let titleData = titleDataArray[1]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
-            rowLabel.attributedText = myTitle
-            rowLabel.textAlignment = .center
-            return rowLabel
-            
-            
-            
-        } else if row == pickerViewArray.count + 3 {
-            let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupUpperPresetTexts") as! [String]
-            let titleData = titleDataArray[2]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
-            rowLabel.attributedText = myTitle
-            rowLabel.textAlignment = .center
-            return rowLabel
-            
-        }
-        
-        return UIView()
-        
+        let rowLabel = UILabel()
+        let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
+        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
+        rowLabel.attributedText = myTitle
+        rowLabel.textAlignment = .center
+        return rowLabel
         
     }
     
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        let defaults = UserDefaults.standard
-        
-        switch row {
-            
-        case 0:
-            warmupSelectedArray =
-                [
-                    // Mandatory
-                    [1,
-                     0],
-                    // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Foam/Ball Roll
-                    [1,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Lower Back
-                    [1,
-                     0,
-                     0,
-                     0,
-                     1],
-                    // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
-                     0,
-                     1,
-                     0,
-                     0],
-                    // Accessory
-                    [1,
-                     1,
-                     1]
-            ]
-            
-            self.tableView.reloadData()
-            flashScreen()
-            
-        case 1:
-            warmupSelectedArray =
-                [
-                    // Mandatory
-                    [1,
-                     0],
-                    // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Foam/Ball Roll
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Lower Back
-                    [1,
-                     0,
-                     0,
-                     1,
-                     0],
-                    // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
-                    [0,
-                     0,
-                     0,
-                     1,
-                     0,
-                     0],
-                    // Accessory
-                    [1,
-                     1,
-                     0]
-            ]
-            
-            self.tableView.reloadData()
-            flashScreen()
-            
-        case 2:
-            warmupSelectedArray =
-                [
-                    // Mandatory
-                    [1,
-                     0],
-                    // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Foam/Ball Roll
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Lower Back
-                    [1,
-                     1,
-                     1,
-                     0,
-                     1],
-                    // Shoulders
-                    [1,
-                     0,
-                     1,
-                     1],
-                    // Band Assisted
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Accessory
-                    [1,
-                     1,
-                     1]
-            ]
-            
-            self.tableView.reloadData()
-            flashScreen()
-            
-        case 3:
-            warmupSelectedArray =
-                [
-                    // Mandatory
-                    [1,
-                     0],
-                    // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Foam/Ball Roll
-                    [1,
-                     0,
-                     1,
-                     0,
-                     1],
-                    // Lower Back
-                    [1,
-                     1,
-                     1,
-                     0,
-                     0],
-                    // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
-                     0,
-                     0,
-                     0,
-                     1],
-                    // Accessory
-                    [1,
-                     1,
-                     1]
-            ]
-            
-            self.tableView.reloadData()
-            flashScreen()
-            
-        case 4:
-            warmupSelectedArray =
-                [
-                    // Mandatory
-                    [1,
-                     0],
-                    // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Foam/Ball Roll
-                    [0,
-                     1,
-                     1,
-                     0,
-                     1],
-                    // Lower Back
-                    [1,
-                     0,
-                     1,
-                     0,
-                     1],
-                    // Shoulders
-                    [1,
-                     0,
-                     1,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
-                     0,
-                     1,
-                     0,
-                     1],
-                    // Accessory
-                    [1,
-                     1,
-                     1]
-            ]
-            
-            self.tableView.reloadData()
-            flashScreen()
-            
-        case 5:
-            warmupSelectedArray =
-                [
-                    // Mandatory
-                    [0,
-                     1],
-                    // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Foam/Ball Roll
-                    [1,
-                     0,
-                     1,
-                     0,
-                     0],
-                    // Lower Back
-                    [1,
-                     1,
-                     1,
-                     0,
-                     1],
-                    // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     1,
-                     0,
-                     0,
-                     1,
-                     1],
-                    // Accessory
-                    [1,
-                     1,
-                     1]
-            ]
-            
-            self.tableView.reloadData()
-            flashScreen()
-            
-        case 6:
-            warmupSelectedArray =
-                [
-                    // Mandatory
-                    [1,
-                     0],
-                    // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Foam/Ball Roll
-                    [1,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Lower Back
-                    [1,
-                     0,
-                     0,
-                     0,
-                     1],
-                    // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
-                    // Band Assisted
-                    [1,
-                     0,
-                     0,
-                     1,
-                     0,
-                     0],
-                    // Accessory
-                    [1,
-                     0,
-                     0]
-            ]
-            
-            self.tableView.reloadData()
-            flashScreen()
-            
-        case 7:
-            break
-            
-        case 8:
-            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
-            let array = fullArray[0]
-            warmupSelectedArray = array
-            
-            
-            self.tableView.reloadData()
-            flashScreen()
-            
-        case 9:
-            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
-            let array = fullArray[1]
-            warmupSelectedArray = array
-            
-            
-            self.tableView.reloadData()
-            flashScreen()
-            
-        case 10:
-            let fullArray = defaults.object(forKey: "warmupUpperPresets") as! [Array<Array<Int>>]
-            let array = fullArray[2]
-            warmupSelectedArray = array
-            
-            
-            self.tableView.reloadData()
-            flashScreen()
-            
-        default:
-            break
-            
-            
-        }
+    
+        selectedTitle = row
         
         
+        flashScreen()
+        tableView.reloadData()
     }
-    
-    
-    
     
     
     
@@ -1228,31 +425,15 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     // Table View
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return warmupUpperArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString(tableViewSectionArray[section], comment: "")
-    }
-    
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
-        
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
-        header.textLabel?.textColor = .black
-        header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        header.contentView.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        
-        
-        
+        return 1
     }
     
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return warmupUpperArray[section].count
+        
+        return practiceArrayTitles[selectedTitle].count
+        
     }
     
     
@@ -1261,28 +442,13 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         
-        cell.textLabel?.text = NSLocalizedString(warmupUpperArray[indexPath.section][indexPath.row], comment: "")
+        cell.textLabel?.text = NSLocalizedString(practiceArrayTitles[selectedTitle][indexPath.row], comment: "")
         
         cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
         cell.textLabel?.textAlignment = .left
         cell.backgroundColor = .clear
         cell.tintColor = .black
-        
-        
-        if warmupSelectedArray[indexPath.section][indexPath.row] == 1 {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
-        
-        
-        if cell.textLabel?.text == NSLocalizedString("5minCardioL", comment: "") {
-            cell.isUserInteractionEnabled = false
-        }
-        if cell.textLabel?.text == NSLocalizedString("5minCardioI", comment: "") {
-            cell.isUserInteractionEnabled = false
-        }
         
         return cell
         
@@ -1302,19 +468,29 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell = tableView.cellForRow(at: indexPath)
+        
+        
+        for visibleCell in tableView.visibleCells where visibleCell != cell {
+            visibleCell.accessoryType = .none
+        }
+    
+        cell?.accessoryType = .checkmark
         tableView.deselectRow(at: indexPath, animated: true)
         
         
+        // Enable Begin Button
+        beginButtonEnabled = 1
+        beginEnabled()
         
-        if cell?.accessoryType == .checkmark {
-            cell?.accessoryType = .none
-            warmupSelectedArray[indexPath.section][indexPath.row] = 0
-        } else {
-            cell?.accessoryType = .checkmark
-            warmupSelectedArray[indexPath.section][indexPath.row] = 1
-        }
+        
+        
+        // Selected Array
+        //
+        let i1 = pickerView.selectedRow(inComponent: 0)
+        let i2 = indexPath.row
+        
+        selectedArray = practiceArray[i1][i2]
     }
-    
     
     
     
@@ -1396,7 +572,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             _ = self.navigationController?.popToRootViewController(animated: false)
             
         }
-        
+            
     }
     
     
@@ -1407,13 +583,14 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "warmupUpper") {
             
+           
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenUpper
+            let destinationVC = destinationNC.viewControllers.first as! YogaScreenPractices
             
-            destinationVC.warmupMovementsArray = warmupUpperArray
-            destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
+            destinationVC.keyArray = selectedArray
+            destinationVC.poses = posesDictionary
             
         }
     }
