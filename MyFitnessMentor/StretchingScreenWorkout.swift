@@ -424,8 +424,6 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
     var setButton3 = UIButton()
     
     // Scroll Views
-    // Demonstration
-    @IBOutlet weak var scrollViewDemonstration: UIScrollView!
     // Explanation
     @IBOutlet weak var scrollViewExplanation: UIScrollView!
     
@@ -433,13 +431,8 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
     // Image View
     @IBOutlet weak var bodyImage: UIImageView!
     // Demonstration Image
-    // Image View Position
-    @IBOutlet weak var imageViewPosition: UIView!
-    let leftDot = UILabel()
-    let rightDot = UILabel()
-    // Image Views
-    let demonstrationImage1 = UIImageView()
-    let demonstrationImage2 = UIImageView()
+    @IBOutlet weak var demonstrationImage: UIImageView!
+    
     
     // Expand Image
     @IBOutlet weak var imageExpand: UIButton!
@@ -504,6 +497,8 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    let colour3 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour4 = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
     
     
     
@@ -530,59 +525,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         //
         // Demonstration Image
         //
-        
-        // Demonstration Image Scroll View
-        scrollViewDemonstration.contentSize = CGSize(width: scrollViewDemonstration.frame.size.width * 2, height: self.scrollViewDemonstration.frame.size.height)
-        scrollViewDemonstration.isScrollEnabled = false
-        
-        
-        // Demonstration Image Views
-        
-        demonstrationImage1.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
-        
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        leftSwipe.direction = UISwipeGestureRecognizerDirection.left
-        demonstrationImage1.addGestureRecognizer(leftSwipe)
-        demonstrationImage1.isUserInteractionEnabled = true
-        
-        scrollViewDemonstration.addSubview(demonstrationImage1)
-        
-        
-        
-        demonstrationImage2.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
-        
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        rightSwipe.direction = UISwipeGestureRecognizerDirection.right
-        demonstrationImage2.addGestureRecognizer(rightSwipe)
-        demonstrationImage2.isUserInteractionEnabled = true
-        
-        scrollViewDemonstration.addSubview(demonstrationImage2)
-        
-        
-        
-        
-        
-        // Image View Position
-        imageViewPosition.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
-        
-        
-        // Timer View Left Indicator
-        leftDot.layer.cornerRadius = 5
-        leftDot.layer.masksToBounds = true
-        
-        imageViewPosition.addSubview(leftDot)
-        
-        
-        // Timer View Right Indicator
-        rightDot.layer.cornerRadius = 5
-        rightDot.layer.masksToBounds = true
-        
-        imageViewPosition.addSubview(rightDot)
-        
-        
-        leftDot.backgroundColor = colour2
-        rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        
+        demonstrationImage.backgroundColor = colour4
         
         
         
@@ -600,15 +543,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         imageExpand.setImage(tintedImageImage, for: .normal)
         
         //Image Tint
-        imageExpand.tintColor = colour2
-        
-        
-        
-        
-        
-        
-        
-        
+        imageExpand.tintColor = colour4
         
         
         
@@ -631,7 +566,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         explanationExpand.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        explanationExpand.tintColor = colour1
+        explanationExpand.tintColor = colour3
         
         
         
@@ -651,8 +586,8 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         timerButton2.setImage(tintedImage3, for: .normal)
         
         //Image Tint
-        timerButton.tintColor = colour1
-        timerButton2.tintColor = colour1
+        timerButton.tintColor = colour4
+        timerButton2.tintColor = colour3
         
         
         
@@ -797,11 +732,6 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        // Demonstration images
-        demonstrationImage1.frame = CGRect(x: 0, y: 0, width: scrollViewDemonstration.frame.size.width, height: scrollViewDemonstration.frame.size.height)
-        demonstrationImage2.frame = CGRect(x: scrollViewDemonstration.frame.size.width, y: 0, width: scrollViewDemonstration.frame.size.width, height: scrollViewDemonstration.frame.size.height)
-        
-        
         //
         // Timer View
         //
@@ -840,16 +770,6 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         timerCancel.layer.borderColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0).cgColor
         //
         countDownLabel.frame = CGRect(x: self.scrollViewExplanation.frame.size.width/2, y: 0, width: self.scrollViewExplanation.frame.size.width/2, height: self.timerView.frame.size.height)
-        
-        
-        //
-        leftDot.frame = CGRect(x: (self.imageViewPosition.frame.size.width * (4/10)) - 5, y: 1.25, width: 10, height: 10)
-        rightDot.frame = CGRect(x: (self.imageViewPosition.frame.size.width * (6/10)) - 5, y: 1.25, width: 10, height: 10)
-        
-        
-        
-        
-        
         
         
     }
@@ -971,14 +891,6 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         }
         buttonArray = []
         createButtonArray()
-        
-        
-        // Demonstration Image
-        scrollViewDemonstration.contentOffset.x = 0
-        leftDot.backgroundColor = colour2
-        rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        //demonstrationImage1.image = #imageLiteral(resourceName: "BodyImage")
-        
         
         
         
@@ -1474,9 +1386,8 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
     let cancelButtonImage = UIButton()
     
     let bodyImageExpanded = UIImageView()
-    let demonstrationImageExpanded = UIScrollView()
+    let demonstrationImageExpanded = UIImageView()
     
-    let demonstrationImageExpandedPosition = UIView()
     
     @IBAction func expandImage(_ sender: Any) {
         
@@ -1578,18 +1489,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         // Demonstration Image
-        demonstrationImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5 - 12.5)
-        demonstrationImageExpanded.contentSize = CGSize(width: demonstrationImageExpanded.frame.size.width * 2, height: demonstrationImageExpanded.frame.size.height)
-        
-        
-        
-        
-        
-        
-        // Demonstration Image Position
-        demonstrationImageExpandedPosition.frame = CGRect(x: 0, y: demonstrationImageExpanded.frame.maxY, width: demonstrationImageExpanded.frame.size.width, height: 12.25)
-        demonstrationImageExpandedPosition.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
-        
+        demonstrationImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5)
         
         
         
@@ -1769,46 +1669,5 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         nextButton.isEnabled = true
         backButton.isEnabled = true
     }
-    
-    
-    
-    
-    
-    // Handle Swipe
-    @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
-        if (extraSwipe.direction == .left) {
-            
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [],animations: {
-                
-                self.scrollViewDemonstration.contentOffset.x = self.scrollViewDemonstration.frame.size.width
-            }, completion: nil)
-            
-            
-            leftDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            rightDot.backgroundColor = colour2
-            
-            
-        } else if (extraSwipe.direction == .right) {
-            
-            
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [],animations: {
-                
-                self.scrollViewDemonstration.contentOffset.x = 0
-                
-            }, completion: nil)
-            
-            
-            leftDot.backgroundColor = colour2
-            rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            
-            
-        }
-        
-        
-        
-        
-        
-    }
-    
     
 }

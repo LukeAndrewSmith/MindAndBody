@@ -424,8 +424,6 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
     var setButton3 = UIButton()
     
     // Scroll Views
-    // Demonstration
-    @IBOutlet weak var scrollViewDemonstration: UIScrollView!
     // Explanation
     @IBOutlet weak var scrollViewExplanation: UIScrollView!
     
@@ -433,13 +431,8 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
     // Image View
     @IBOutlet weak var bodyImage: UIImageView!
     // Demonstration Image
-    // Image View Position
-    @IBOutlet weak var imageViewPosition: UIView!
-    let leftDot = UILabel()
-    let rightDot = UILabel()
-    // Image Views
-    let demonstrationImage1 = UIImageView()
-    let demonstrationImage2 = UIImageView()
+    @IBOutlet weak var demonstrationImage: UIImageView!
+    
     
     // Expand Image
     @IBOutlet weak var imageExpand: UIButton!
@@ -504,6 +497,8 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    let colour3 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour4 = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
     
     
     
@@ -530,65 +525,12 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         //
         // Demonstration Image
         //
-        
-        // Demonstration Image Scroll View
-        scrollViewDemonstration.contentSize = CGSize(width: scrollViewDemonstration.frame.size.width * 2, height: self.scrollViewDemonstration.frame.size.height)
-        scrollViewDemonstration.isScrollEnabled = false
-        
-        
-        // Demonstration Image Views
-        
-        demonstrationImage1.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
-        
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        leftSwipe.direction = UISwipeGestureRecognizerDirection.left
-        demonstrationImage1.addGestureRecognizer(leftSwipe)
-        demonstrationImage1.isUserInteractionEnabled = true
-        
-        scrollViewDemonstration.addSubview(demonstrationImage1)
-        
-        
-        
-        demonstrationImage2.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
-        
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        rightSwipe.direction = UISwipeGestureRecognizerDirection.right
-        demonstrationImage2.addGestureRecognizer(rightSwipe)
-        demonstrationImage2.isUserInteractionEnabled = true
-        
-        scrollViewDemonstration.addSubview(demonstrationImage2)
-        
-        
-        
-        
-        
-        // Image View Position
-        imageViewPosition.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
-        
-        
-        // Timer View Left Indicator
-        leftDot.layer.cornerRadius = 5
-        leftDot.layer.masksToBounds = true
-        
-        imageViewPosition.addSubview(leftDot)
-        
-        
-        // Timer View Right Indicator
-        rightDot.layer.cornerRadius = 5
-        rightDot.layer.masksToBounds = true
-        
-        imageViewPosition.addSubview(rightDot)
-        
-        
-        leftDot.backgroundColor = colour2
-        rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        
-        
+        demonstrationImage.backgroundColor = colour4
         
         
         
         // Body Image View
-        bodyImage.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        bodyImage.backgroundColor = colour4
         
         
         
@@ -600,7 +542,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         imageExpand.setImage(tintedImageImage, for: .normal)
         
         //Image Tint
-        imageExpand.tintColor = colour2
+        imageExpand.tintColor = colour4
         
         
         
@@ -631,7 +573,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         explanationExpand.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        explanationExpand.tintColor = colour1
+        explanationExpand.tintColor = colour3
         
         
         
@@ -651,21 +593,21 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         timerButton2.setImage(tintedImage3, for: .normal)
         
         //Image Tint
-        timerButton.tintColor = colour1
-        timerButton2.tintColor = colour1
+        timerButton.tintColor = colour4
+        timerButton2.tintColor = colour3
         
         
         
         
         // Timer View
-        timerView.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        timerView.backgroundColor = colour4
         
         
         // Timer Elements
         //
         // Picker View Timer
         //
-        pickerViewTimer.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        pickerViewTimer.backgroundColor = colour4
         view.addSubview(pickerViewTimer)
         
         
@@ -673,7 +615,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         //
         minutePicker.dataSource = self
         minutePicker.delegate = self
-        minutePicker.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        minutePicker.backgroundColor = colour4
         
         pickerViewTimer.addSubview(minutePicker)
         
@@ -681,7 +623,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         
         minuteLabel.text = NSLocalizedString("minutes", comment: "")
         minuteLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
-        minuteLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        minuteLabel.textColor = colour3
         minuteLabel.textAlignment = .left
         
         pickerViewTimer.addSubview(minuteLabel)
@@ -691,14 +633,14 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         //
         secondPicker.dataSource = self
         secondPicker.delegate = self
-        secondPicker.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        secondPicker.backgroundColor = colour4
         
         pickerViewTimer.addSubview(secondPicker)
         
         
         secondLabel.text = NSLocalizedString("seconds", comment: "")
         secondLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
-        secondLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        secondLabel.textColor = colour3
         secondLabel.textAlignment = .left
         
         pickerViewTimer.addSubview(secondLabel)
@@ -716,7 +658,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         //
         timerStart.backgroundColor = colour2
         timerStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
-        timerStart.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        timerStart.titleLabel?.textColor = colour3
         timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
         timerStart.titleLabel?.textAlignment = .center
         
@@ -730,7 +672,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         //
         timerCancel.backgroundColor = colour1
         timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
-        timerCancel.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        timerCancel.titleLabel?.textColor = colour3
         timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
         timerCancel.titleLabel?.textAlignment = .center
         
@@ -746,7 +688,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         countDownLabel.textAlignment = .center
         countDownLabel.font = UIFont(name: "SFUIDisplay-Light", size: 27)
         countDownLabel.text = "00:00"
-        countDownLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        countDownLabel.textColor = colour3
         
         
         self.timerView.addSubview(countDownLabel)
@@ -797,11 +739,6 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        // Demonstration images
-        demonstrationImage1.frame = CGRect(x: 0, y: 0, width: scrollViewDemonstration.frame.size.width, height: scrollViewDemonstration.frame.size.height)
-        demonstrationImage2.frame = CGRect(x: scrollViewDemonstration.frame.size.width, y: 0, width: scrollViewDemonstration.frame.size.width, height: scrollViewDemonstration.frame.size.height)
-        
-        
         //
         // Timer View
         //
@@ -833,23 +770,13 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         //
         timerStart.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
         timerStart.layer.borderWidth = timerStart.frame.size.height/4
-        timerStart.layer.borderColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0).cgColor
+        timerStart.layer.borderColor = colour4.cgColor
         //
         timerCancel.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
         timerCancel.layer.borderWidth = timerCancel.frame.size.height/4
-        timerCancel.layer.borderColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0).cgColor
+        timerCancel.layer.borderColor = colour4.cgColor
         //
         countDownLabel.frame = CGRect(x: self.scrollViewExplanation.frame.size.width/2, y: 0, width: self.scrollViewExplanation.frame.size.width/2, height: self.timerView.frame.size.height)
-        
-        
-        //
-        leftDot.frame = CGRect(x: (self.imageViewPosition.frame.size.width * (4/10)) - 5, y: 1.25, width: 10, height: 10)
-        rightDot.frame = CGRect(x: (self.imageViewPosition.frame.size.width * (6/10)) - 5, y: 1.25, width: 10, height: 10)
-        
-        
-        
-        
-        
         
         
     }
@@ -870,7 +797,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         setButton.layer.borderColor = colour1.cgColor
         setButton.layer.cornerRadius = 24.5
         setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
-        setButton.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        setButton.backgroundColor = colour3
         setButton.isEnabled = false
         
         
@@ -971,14 +898,6 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         }
         buttonArray = []
         createButtonArray()
-        
-        
-        // Demonstration Image
-        scrollViewDemonstration.contentOffset.x = 0
-        leftDot.backgroundColor = colour2
-        rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        //demonstrationImage1.image = #imageLiteral(resourceName: "BodyImage")
-        
         
         
         
@@ -1276,7 +1195,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
             
             let rowLabel = UILabel()
             let titleData = String(minuteData[row])
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:colour3])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -1285,7 +1204,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
             
             let rowLabel = UILabel()
             let titleData = String(secondData[row])
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:colour3])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -1474,9 +1393,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
     let cancelButtonImage = UIButton()
     
     let bodyImageExpanded = UIImageView()
-    let demonstrationImageExpanded = UIScrollView()
-    
-    let demonstrationImageExpandedPosition = UIView()
+    let demonstrationImageExpanded = UIImageView()
     
     @IBAction func expandImage(_ sender: Any) {
         
@@ -1494,7 +1411,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         imageViewExpanded.center.y = height/2
         imageViewExpanded.isUserInteractionEnabled = true
         
-        imageViewExpanded.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        imageViewExpanded.backgroundColor = colour4
         
         
         
@@ -1578,19 +1495,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         
         
         // Demonstration Image
-        demonstrationImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5 - 12.5)
-        demonstrationImageExpanded.contentSize = CGSize(width: demonstrationImageExpanded.frame.size.width * 2, height: demonstrationImageExpanded.frame.size.height)
-        
-        
-        
-        
-        
-        
-        // Demonstration Image Position
-        demonstrationImageExpandedPosition.frame = CGRect(x: 0, y: demonstrationImageExpanded.frame.maxY, width: demonstrationImageExpanded.frame.size.width, height: 12.25)
-        demonstrationImageExpandedPosition.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
-        
-        
+        demonstrationImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5)
         
         
         
@@ -1670,7 +1575,7 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         scrollViewExplanationE.center.x = self.view.frame.size.width/2
         scrollViewExplanationE.center.y = self.view.frame.size.height/2
         
-        scrollViewExplanationE.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        scrollViewExplanationE.backgroundColor = colour3
         
         
         
@@ -1768,46 +1673,6 @@ class StretchingScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerVi
         
         nextButton.isEnabled = true
         backButton.isEnabled = true
-    }
-    
-    
-    
-    
-    
-    // Handle Swipe
-    @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
-        if (extraSwipe.direction == .left) {
-            
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [],animations: {
-                
-                self.scrollViewDemonstration.contentOffset.x = self.scrollViewDemonstration.frame.size.width
-            }, completion: nil)
-            
-            
-            leftDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            rightDot.backgroundColor = colour2
-            
-            
-        } else if (extraSwipe.direction == .right) {
-            
-            
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [],animations: {
-                
-                self.scrollViewDemonstration.contentOffset.x = 0
-                
-            }, completion: nil)
-            
-            
-            leftDot.backgroundColor = colour2
-            rightDot.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            
-            
-        }
-        
-        
-        
-        
-        
     }
     
     

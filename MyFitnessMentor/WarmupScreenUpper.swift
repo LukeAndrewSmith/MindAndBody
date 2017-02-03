@@ -1252,8 +1252,6 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     let bodyImageExpanded = UIImageView()
     let demonstrationImageExpanded = UIImageView()
     
-    let demonstrationImageExpandedPosition = UIView()
-    
     @IBAction func expandImage(_ sender: Any) {
     
         
@@ -1354,21 +1352,12 @@ class WarmupScreenUpper: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         // Demonstration Image
-        demonstrationImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5 - 12.5)
+        demonstrationImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5)
         
         demonstrationImageExpanded.backgroundColor = colour4
         
 
         imageViewExpanded.addSubview(demonstrationImageExpanded)
-        
-        
-        
-        
-        // Demonstration Image Position
-        demonstrationImageExpandedPosition.frame = CGRect(x: 0, y: demonstrationImageExpanded.frame.maxY, width: demonstrationImageExpanded.frame.size.width, height: 12.25)
-        demonstrationImageExpandedPosition.backgroundColor = colour4
-
-        
         
         
         

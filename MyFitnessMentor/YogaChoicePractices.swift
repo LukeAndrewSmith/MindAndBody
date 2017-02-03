@@ -45,6 +45,8 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    let colour3 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour4 = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
     
     
     
@@ -440,7 +442,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         
 //        let header = view as! UITableViewHeaderFooterView
 //        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
-//        header.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+//        header.textLabel?.textColor = colour3
 //        header.contentView.backgroundColor = colour1
 //        //
     }
@@ -454,7 +456,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
         cell.textLabel?.textAlignment = .left
-        cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        cell.backgroundColor = colour3
         cell.textLabel?.textColor = .black
         cell.tintColor = .black
         //

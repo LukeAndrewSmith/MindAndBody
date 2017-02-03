@@ -263,6 +263,8 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    let colour3 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour4 = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
     
     
     // View Will Appear
@@ -291,7 +293,7 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         
         
         // Image View
-        imageView.backgroundColor = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+        imageView.backgroundColor = colour4
         
         
         
@@ -310,7 +312,7 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         explanationExpand.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        explanationExpand.tintColor = colour1
+        explanationExpand.tintColor = colour3
         
         
         
@@ -540,7 +542,7 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         scrollViewExplanationE.center.x = self.view.frame.size.width/2
         scrollViewExplanationE.center.y = self.view.frame.size.height/2
         
-        scrollViewExplanationE.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        scrollViewExplanationE.backgroundColor = colour3
         
         
         

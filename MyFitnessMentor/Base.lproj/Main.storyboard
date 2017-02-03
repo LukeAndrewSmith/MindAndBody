@@ -2033,31 +2033,9 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="PJM-x9-ESc">
                                 <rect key="frame" x="0.0" y="172" width="375" height="201"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="R2d-hv-PDm">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n8S-k5-6JI">
                                         <rect key="frame" x="0.0" y="0.0" width="187" height="201"/>
-                                        <subviews>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nlV-W6-ICU">
-                                                <rect key="frame" x="0.0" y="0.0" width="187" height="189"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                            </scrollView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cbg-DK-RvR">
-                                                <rect key="frame" x="0.0" y="189" width="187" height="12"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="12.25" id="Nch-xb-BvY"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="Cbg-DK-RvR" secondAttribute="bottom" id="Bnj-cB-GXZ"/>
-                                            <constraint firstItem="nlV-W6-ICU" firstAttribute="leading" secondItem="R2d-hv-PDm" secondAttribute="leading" id="E6H-F3-1WW"/>
-                                            <constraint firstAttribute="trailing" secondItem="Cbg-DK-RvR" secondAttribute="trailing" id="RKD-Ju-W7a"/>
-                                            <constraint firstItem="Cbg-DK-RvR" firstAttribute="leading" secondItem="R2d-hv-PDm" secondAttribute="leading" id="S2C-S9-kWC"/>
-                                            <constraint firstItem="nlV-W6-ICU" firstAttribute="top" secondItem="R2d-hv-PDm" secondAttribute="top" id="YGm-eT-XWC"/>
-                                            <constraint firstAttribute="trailing" secondItem="nlV-W6-ICU" secondAttribute="trailing" id="j8e-4h-Skg"/>
-                                            <constraint firstItem="Cbg-DK-RvR" firstAttribute="top" secondItem="nlV-W6-ICU" secondAttribute="bottom" id="jvE-EA-9t9"/>
-                                        </constraints>
-                                    </stackView>
+                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jZf-fp-sYi">
                                         <rect key="frame" x="188" y="0.0" width="187" height="201"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
@@ -2229,17 +2207,16 @@
                     <connections>
                         <outlet property="backButton" destination="ie1-B8-Mj6" id="WtQ-Yq-yBZ"/>
                         <outlet property="bodyImage" destination="jZf-fp-sYi" id="PgT-jI-lW9"/>
+                        <outlet property="demonstrationImage" destination="n8S-k5-6JI" id="ZvZ-8n-GHX"/>
                         <outlet property="demonstrationLabel" destination="CEE-dW-x2l" id="BoJ-7z-5C8"/>
                         <outlet property="explanationExpand" destination="JAv-C6-Ux8" id="pYs-6u-dY6"/>
                         <outlet property="explanationLabel" destination="Eiz-T0-SCb" id="5AM-Bi-lgF"/>
                         <outlet property="imageExpand" destination="Kdh-Vo-e6z" id="Out-vu-ocb"/>
-                        <outlet property="imageViewPosition" destination="Cbg-DK-RvR" id="rpq-aD-Moo"/>
                         <outlet property="navigationBar" destination="DGM-hZ-yvs" id="rDS-Xo-qFH"/>
                         <outlet property="nextButton" destination="LUJ-VY-Tjm" id="pYP-gk-VlO"/>
                         <outlet property="progressBar" destination="dcS-Wf-AxX" id="fBq-4N-sHg"/>
                         <outlet property="progressBarView" destination="gO9-pX-5Iy" id="gfZ-08-zBe"/>
                         <outlet property="progressLabel" destination="C4F-Gc-gCO" id="oRC-4A-7iO"/>
-                        <outlet property="scrollViewDemonstration" destination="nlV-W6-ICU" id="tH0-d8-Mpg"/>
                         <outlet property="scrollViewExplanation" destination="peO-jt-PJa" id="qmm-Ug-bsL"/>
                         <outlet property="setRepView" destination="HsA-lH-Thj" id="yMt-GX-hdK"/>
                         <outlet property="setsRepsLabel" destination="2JP-oT-Fjj" id="04R-hs-wIH"/>
@@ -2431,7 +2408,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="21"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="19"/>
                             <color key="textColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                     </navigationBar>
@@ -2897,31 +2874,9 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Laf-ku-vA8">
                                 <rect key="frame" x="0.0" y="172" width="375" height="201"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gZV-XJ-iwT">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4fM-JP-typ">
                                         <rect key="frame" x="0.0" y="0.0" width="187" height="201"/>
-                                        <subviews>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pne-Me-TTt">
-                                                <rect key="frame" x="0.0" y="0.0" width="187" height="189"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                            </scrollView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KPp-oL-3BW">
-                                                <rect key="frame" x="0.0" y="189" width="187" height="12"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="12.25" id="2Hg-1j-MT8"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="KPp-oL-3BW" firstAttribute="leading" secondItem="gZV-XJ-iwT" secondAttribute="leading" id="2m6-g9-oLS"/>
-                                            <constraint firstItem="KPp-oL-3BW" firstAttribute="top" secondItem="Pne-Me-TTt" secondAttribute="bottom" id="3hJ-6z-XKZ"/>
-                                            <constraint firstAttribute="bottom" secondItem="KPp-oL-3BW" secondAttribute="bottom" id="8Bw-Xw-Wtr"/>
-                                            <constraint firstItem="Pne-Me-TTt" firstAttribute="top" secondItem="gZV-XJ-iwT" secondAttribute="top" id="W6p-xV-HvA"/>
-                                            <constraint firstAttribute="trailing" secondItem="Pne-Me-TTt" secondAttribute="trailing" id="fAe-cW-LT7"/>
-                                            <constraint firstItem="Pne-Me-TTt" firstAttribute="leading" secondItem="gZV-XJ-iwT" secondAttribute="leading" id="o4x-x8-oBR"/>
-                                            <constraint firstAttribute="trailing" secondItem="KPp-oL-3BW" secondAttribute="trailing" id="vQU-eW-QIG"/>
-                                        </constraints>
-                                    </stackView>
+                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bQN-58-dMR">
                                         <rect key="frame" x="188" y="0.0" width="187" height="201"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
@@ -3093,17 +3048,16 @@
                     <connections>
                         <outlet property="backButton" destination="SEE-N5-wMJ" id="Xc4-3R-txM"/>
                         <outlet property="bodyImage" destination="bQN-58-dMR" id="RG5-7M-OCw"/>
+                        <outlet property="demonstrationImage" destination="4fM-JP-typ" id="cAQ-KP-Op8"/>
                         <outlet property="demonstrationLabel" destination="uY3-Wg-wRL" id="BU0-9w-ODZ"/>
                         <outlet property="explanationExpand" destination="4p7-dz-W0Y" id="ted-Tx-MP2"/>
                         <outlet property="explanationLabel" destination="v9n-cM-47x" id="AoS-R8-nqP"/>
                         <outlet property="imageExpand" destination="pn1-qX-o88" id="UFr-gI-cKo"/>
-                        <outlet property="imageViewPosition" destination="KPp-oL-3BW" id="u8x-av-9f6"/>
                         <outlet property="navigationBar" destination="3sc-cA-7HQ" id="OUO-iS-k0p"/>
                         <outlet property="nextButton" destination="dAN-Qn-3Ca" id="uWu-AN-I0k"/>
                         <outlet property="progressBar" destination="XfI-rE-AS5" id="YL3-03-yZ6"/>
                         <outlet property="progressBarView" destination="7dN-2L-hm3" id="exi-Cu-j84"/>
                         <outlet property="progressLabel" destination="Ets-uG-3bH" id="Hbl-ue-Usk"/>
-                        <outlet property="scrollViewDemonstration" destination="Pne-Me-TTt" id="fDz-g0-VMl"/>
                         <outlet property="scrollViewExplanation" destination="0x6-cg-efr" id="Xdw-w0-ujo"/>
                         <outlet property="setRepView" destination="LSo-if-Zgu" id="qUI-ak-vOf"/>
                         <outlet property="setsRepsLabel" destination="FV2-Ph-nW0" id="k3n-lr-J2G"/>
@@ -3342,31 +3296,9 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="QrM-wT-frr">
                                 <rect key="frame" x="0.0" y="172" width="375" height="201"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="o1c-f4-Y7a">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g4D-XA-mqc">
                                         <rect key="frame" x="0.0" y="0.0" width="187" height="201"/>
-                                        <subviews>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h24-wc-Tnr">
-                                                <rect key="frame" x="0.0" y="0.0" width="187" height="189"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                            </scrollView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y4d-vf-6Sr">
-                                                <rect key="frame" x="0.0" y="189" width="187" height="12"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="12.25" id="xxF-zO-IqE"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="Y4d-vf-6Sr" firstAttribute="leading" secondItem="o1c-f4-Y7a" secondAttribute="leading" id="7sy-G9-wBt"/>
-                                            <constraint firstItem="h24-wc-Tnr" firstAttribute="leading" secondItem="o1c-f4-Y7a" secondAttribute="leading" id="GPQ-3Y-EmF"/>
-                                            <constraint firstAttribute="trailing" secondItem="Y4d-vf-6Sr" secondAttribute="trailing" id="Qfa-fu-gqx"/>
-                                            <constraint firstAttribute="trailing" secondItem="h24-wc-Tnr" secondAttribute="trailing" id="W7s-5t-unQ"/>
-                                            <constraint firstAttribute="bottom" secondItem="Y4d-vf-6Sr" secondAttribute="bottom" id="Xx5-BM-5ap"/>
-                                            <constraint firstItem="Y4d-vf-6Sr" firstAttribute="top" secondItem="h24-wc-Tnr" secondAttribute="bottom" id="a7C-7k-fUt"/>
-                                            <constraint firstItem="h24-wc-Tnr" firstAttribute="top" secondItem="o1c-f4-Y7a" secondAttribute="top" id="vzP-dy-xCk"/>
-                                        </constraints>
-                                    </stackView>
+                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U3v-7c-sx9">
                                         <rect key="frame" x="188" y="0.0" width="187" height="201"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
@@ -3538,17 +3470,16 @@
                     <connections>
                         <outlet property="backButton" destination="H40-PA-aek" id="qpQ-IP-XmY"/>
                         <outlet property="bodyImage" destination="U3v-7c-sx9" id="igF-N4-Eem"/>
+                        <outlet property="demonstrationImage" destination="g4D-XA-mqc" id="cuB-Y4-foC"/>
                         <outlet property="demonstrationLabel" destination="rU4-la-1mu" id="Ueo-cx-UCJ"/>
                         <outlet property="explanationExpand" destination="7si-Pq-Ih7" id="Knl-es-LFE"/>
                         <outlet property="explanationLabel" destination="rqR-vd-TxU" id="WeV-pM-Tzp"/>
                         <outlet property="imageExpand" destination="6AX-Z0-LS0" id="4XI-4f-ZQK"/>
-                        <outlet property="imageViewPosition" destination="Y4d-vf-6Sr" id="t2d-bc-24z"/>
                         <outlet property="navigationBar" destination="Zu2-fJ-bzb" id="G7t-fd-2nl"/>
                         <outlet property="nextButton" destination="KdU-ve-DaK" id="AFI-wi-z3T"/>
                         <outlet property="progressBar" destination="kAw-Dt-e1U" id="vUq-Ze-Se7"/>
                         <outlet property="progressBarView" destination="mjZ-eX-xeU" id="gGm-m7-gmQ"/>
                         <outlet property="progressLabel" destination="aiS-Wm-mXM" id="Wds-bW-Yxg"/>
-                        <outlet property="scrollViewDemonstration" destination="h24-wc-Tnr" id="UCM-C8-Ani"/>
                         <outlet property="scrollViewExplanation" destination="DFs-ly-9aJ" id="FJr-6a-9Zn"/>
                         <outlet property="setRepView" destination="rKH-uO-Qus" id="Ist-8S-eJh"/>
                         <outlet property="setsRepsLabel" destination="JNq-99-ycN" id="jpM-Q9-xQj"/>
@@ -3786,31 +3717,9 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="PyF-D8-T3w">
                                 <rect key="frame" x="0.0" y="172" width="375" height="201"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nAW-Uj-F1G">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bt7-Do-M5r">
                                         <rect key="frame" x="0.0" y="0.0" width="187" height="201"/>
-                                        <subviews>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3dk-PW-SYZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="187" height="189"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                            </scrollView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qrJ-Re-6Bk">
-                                                <rect key="frame" x="0.0" y="189" width="187" height="12"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="12.25" id="qeO-8S-jCk"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="qrJ-Re-6Bk" secondAttribute="trailing" id="MKv-Yz-k8T"/>
-                                            <constraint firstAttribute="bottom" secondItem="qrJ-Re-6Bk" secondAttribute="bottom" id="MYl-UO-Ssn"/>
-                                            <constraint firstAttribute="trailing" secondItem="3dk-PW-SYZ" secondAttribute="trailing" id="ST2-RV-6dq"/>
-                                            <constraint firstItem="3dk-PW-SYZ" firstAttribute="leading" secondItem="nAW-Uj-F1G" secondAttribute="leading" id="arx-1B-Shx"/>
-                                            <constraint firstItem="qrJ-Re-6Bk" firstAttribute="leading" secondItem="nAW-Uj-F1G" secondAttribute="leading" id="hSj-9D-h03"/>
-                                            <constraint firstItem="3dk-PW-SYZ" firstAttribute="top" secondItem="nAW-Uj-F1G" secondAttribute="top" id="omP-q6-fDR"/>
-                                            <constraint firstItem="qrJ-Re-6Bk" firstAttribute="top" secondItem="3dk-PW-SYZ" secondAttribute="bottom" id="rVA-NG-bmD"/>
-                                        </constraints>
-                                    </stackView>
+                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ASk-M0-PhX">
                                         <rect key="frame" x="188" y="0.0" width="187" height="201"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
@@ -3982,17 +3891,16 @@
                     <connections>
                         <outlet property="backButton" destination="MQc-TQ-3Yu" id="lTa-ea-2km"/>
                         <outlet property="bodyImage" destination="ASk-M0-PhX" id="PTD-In-mSr"/>
+                        <outlet property="demonstrationImage" destination="Bt7-Do-M5r" id="CtR-gH-LCN"/>
                         <outlet property="demonstrationLabel" destination="drz-x2-y8g" id="bJf-Pa-qBZ"/>
                         <outlet property="explanationExpand" destination="19s-ez-wCf" id="0D1-Bo-PpE"/>
                         <outlet property="explanationLabel" destination="UXn-hl-HPQ" id="bDL-oH-eRY"/>
                         <outlet property="imageExpand" destination="air-Qg-JPv" id="Uha-oQ-FVo"/>
-                        <outlet property="imageViewPosition" destination="qrJ-Re-6Bk" id="Gcb-uo-jtd"/>
                         <outlet property="navigationBar" destination="34U-37-NJN" id="mVl-ik-O3R"/>
                         <outlet property="nextButton" destination="UXF-XB-H8s" id="Mdy-eH-l0h"/>
                         <outlet property="progressBar" destination="aiv-lu-lH3" id="N6e-4y-K0k"/>
                         <outlet property="progressBarView" destination="ABM-Uf-cjM" id="Z5D-jS-rl8"/>
                         <outlet property="progressLabel" destination="mDk-SV-R5a" id="wXL-Sb-E14"/>
-                        <outlet property="scrollViewDemonstration" destination="3dk-PW-SYZ" id="0jf-YX-3me"/>
                         <outlet property="scrollViewExplanation" destination="J0g-jO-DRI" id="pPw-kZ-2VK"/>
                         <outlet property="setRepView" destination="8r7-Yu-snZ" id="20c-Mi-39e"/>
                         <outlet property="setsRepsLabel" destination="qDR-yP-rel" id="9IV-1q-Az2"/>
@@ -4230,31 +4138,9 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Oq3-T5-Ujl">
                                 <rect key="frame" x="0.0" y="172" width="375" height="201"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EeZ-nH-PAm">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tki-DR-f0e">
                                         <rect key="frame" x="0.0" y="0.0" width="187" height="201"/>
-                                        <subviews>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSJ-te-9RC">
-                                                <rect key="frame" x="0.0" y="0.0" width="187" height="189"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                            </scrollView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f5p-cd-Ww6">
-                                                <rect key="frame" x="0.0" y="189" width="187" height="12"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="12.25" id="csI-Zw-8YP"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="f5p-cd-Ww6" secondAttribute="bottom" id="2B2-pl-Kus"/>
-                                            <constraint firstItem="dSJ-te-9RC" firstAttribute="top" secondItem="EeZ-nH-PAm" secondAttribute="top" id="93H-zG-Kbk"/>
-                                            <constraint firstItem="dSJ-te-9RC" firstAttribute="leading" secondItem="EeZ-nH-PAm" secondAttribute="leading" id="9tj-gp-EAA"/>
-                                            <constraint firstItem="f5p-cd-Ww6" firstAttribute="top" secondItem="dSJ-te-9RC" secondAttribute="bottom" id="NRr-RA-IxS"/>
-                                            <constraint firstAttribute="trailing" secondItem="f5p-cd-Ww6" secondAttribute="trailing" id="OYf-Ak-k9j"/>
-                                            <constraint firstItem="f5p-cd-Ww6" firstAttribute="leading" secondItem="EeZ-nH-PAm" secondAttribute="leading" id="Rgf-5Y-lCm"/>
-                                            <constraint firstAttribute="trailing" secondItem="dSJ-te-9RC" secondAttribute="trailing" id="otL-oM-VCG"/>
-                                        </constraints>
-                                    </stackView>
+                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rZc-ZK-KaG">
                                         <rect key="frame" x="188" y="0.0" width="187" height="201"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
@@ -4426,17 +4312,16 @@
                     <connections>
                         <outlet property="backButton" destination="V7G-89-jls" id="6iM-vz-a7z"/>
                         <outlet property="bodyImage" destination="rZc-ZK-KaG" id="AFA-PI-kub"/>
+                        <outlet property="demonstrationImage" destination="Tki-DR-f0e" id="AJY-Y9-kbA"/>
                         <outlet property="demonstrationLabel" destination="h33-Ln-6P6" id="Ai9-TZ-nfh"/>
                         <outlet property="explanationExpand" destination="lIZ-3o-iQi" id="hDj-Yd-o3S"/>
                         <outlet property="explanationLabel" destination="cXW-Li-BU5" id="p8y-6f-q6T"/>
                         <outlet property="imageExpand" destination="jFm-QY-Ayk" id="nvl-7a-HbJ"/>
-                        <outlet property="imageViewPosition" destination="f5p-cd-Ww6" id="KYG-qZ-Gfq"/>
                         <outlet property="navigationBar" destination="pjt-jZ-Akf" id="zpD-zm-OvR"/>
                         <outlet property="nextButton" destination="KEc-Bi-U6k" id="QTT-MR-61b"/>
                         <outlet property="progressBar" destination="xdP-1I-HC6" id="JAP-Ul-fvy"/>
                         <outlet property="progressBarView" destination="svl-MH-ndx" id="Nm2-kJ-srW"/>
                         <outlet property="progressLabel" destination="XlX-XY-pTp" id="18k-wP-pJM"/>
-                        <outlet property="scrollViewDemonstration" destination="dSJ-te-9RC" id="ZJh-LB-yl1"/>
                         <outlet property="scrollViewExplanation" destination="EDF-pp-Hld" id="K8Z-pp-djp"/>
                         <outlet property="setRepView" destination="gnp-8b-qr4" id="FvO-b7-DGv"/>
                         <outlet property="setsRepsLabel" destination="rJy-B9-ZaL" id="uNi-4C-bmI"/>
@@ -4583,7 +4468,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hLu-Hh-0K7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3949.5999999999999" y="3143.4782608695655"/>
+            <point key="canvasLocation" x="3950" y="2455"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ICj-0w-Tti">
@@ -4608,7 +4493,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rWh-zy-X4r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4894" y="3144"/>
+            <point key="canvasLocation" x="4894" y="2455"/>
         </scene>
         <!--Title-->
         <scene sceneID="YJV-pM-c9U">
@@ -4745,7 +4630,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dDq-0f-1iw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5709.6000000000004" y="3143.4782608695655"/>
+            <point key="canvasLocation" x="5710" y="2455"/>
         </scene>
         <!--Yoga Choice Practices-->
         <scene sceneID="sWJ-QN-20z">
@@ -4912,7 +4797,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7E-dO-bNi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3949.5999999999999" y="2427.4362818590707"/>
+            <point key="canvasLocation" x="3950" y="3163"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GBp-8c-atx">
@@ -4937,7 +4822,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hL5-bA-jzd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4894" y="2427"/>
+            <point key="canvasLocation" x="4894" y="3162"/>
         </scene>
         <!--Yoga Choice Guided-->
         <scene sceneID="otO-qP-5ek">
@@ -5266,7 +5151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kvY-UQ-M5U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5710" y="2427"/>
+            <point key="canvasLocation" x="5710" y="3162"/>
         </scene>
         <!--Title-->
         <scene sceneID="6Ld-8o-s4d">
