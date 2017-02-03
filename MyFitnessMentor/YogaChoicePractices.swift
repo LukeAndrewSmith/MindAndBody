@@ -71,7 +71,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             9: "warrior3",
             10: "halfMoon",
             11: "extendedTriangle",
-            12: "extendedSideAngle",
+            12: "extendedSideAngleY",
             13: "revolvedSideAngle",
             14: "revolvedTriangle",
             15: "halfForwardBend",
@@ -80,7 +80,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             18: "intenseSide",
             19: "gate",
             20: "highLunge",
-            21: "lunge",
+            21: "lungeY",
             22: "deepSquat",
             // Hand/Elbows and Feet/Knees
             23: "dolphin",
@@ -258,7 +258,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("upperBody", comment: ""))
+        navigationBar.title = (NSLocalizedString("practices", comment: ""))
         
         
         // Titles
@@ -436,6 +436,14 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+//        let header = view as! UITableViewHeaderFooterView
+//        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
+//        header.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+//        header.contentView.backgroundColor = colour1
+//        //
+    }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -444,11 +452,12 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.textLabel?.text = NSLocalizedString(practiceArrayTitles[selectedTitle][indexPath.row], comment: "")
         
-        cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
         cell.textLabel?.textAlignment = .left
-        cell.backgroundColor = .clear
+        cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        cell.textLabel?.textColor = .black
         cell.tintColor = .black
+        //
         
         return cell
         

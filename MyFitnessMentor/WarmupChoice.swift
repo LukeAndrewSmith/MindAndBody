@@ -43,6 +43,18 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
     
+    
+    // Constraints
+    @IBOutlet weak var stackTop: NSLayoutConstraint!
+    
+    @IBOutlet weak var stackBottom: NSLayoutConstraint!
+    
+    @IBOutlet weak var stack2: UIStackView!
+    
+    @IBOutlet weak var connectionLabelWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var connectionLabelTrailing: NSLayoutConstraint!
+    
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
@@ -185,6 +197,21 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         
         self.informationViewWarmupC.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextWarmupC.frame.size.height + informationTitleWarmupC.frame.size.height + 20)
         
+        
+        
+        
+        // Iphone 5/SE
+        
+        if UIScreen.main.nativeBounds.height < 1334 {
+           
+            stackTop.constant = 30
+            stackBottom.constant = 30
+            
+            stack2.spacing = 15
+            connectionLabelTrailing.constant = 15
+            connectionLabelWidth.constant = 15
+            
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -192,15 +219,31 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         
         cardio.layer.cornerRadius = (self.stackView.frame.size.height - 49) / 6
         cardio.layer.masksToBounds = true
+        cardio.titleLabel?.adjustsFontSizeToFitWidth = true
+        cardio.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        cardio.titleLabel?.numberOfLines = 0
+        cardio.titleLabel?.textAlignment = .center
         
         lowerBody.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 6
         lowerBody.layer.masksToBounds = true
+        lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
+        lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        lowerBody.titleLabel?.numberOfLines = 0
+        lowerBody.titleLabel?.textAlignment = .center
         
         upperBody.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 6
         upperBody.layer.masksToBounds = true
+        upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
+        upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        upperBody.titleLabel?.numberOfLines = 0
+        upperBody.titleLabel?.textAlignment = .center
         
         fullBody.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 6
         fullBody.layer.masksToBounds = true
+        fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
+        fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        fullBody.titleLabel?.numberOfLines = 0
+        fullBody.titleLabel?.textAlignment = .center
     }
     
     

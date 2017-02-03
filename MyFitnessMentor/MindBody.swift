@@ -89,6 +89,20 @@ class MindBody: UIViewController {
     
     @IBOutlet weak var positionConstraint: NSLayoutConstraint!
     
+    // Body Constraints
+    @IBOutlet weak var bodyTop: NSLayoutConstraint!
+    
+    @IBOutlet weak var bodyBottom: NSLayoutConstraint!
+    
+    // Mind Constraints
+    @IBOutlet weak var mindTop: NSLayoutConstraint!
+    
+    @IBOutlet weak var mindBottom: NSLayoutConstraint!
+    
+    
+    // Bottom StackView 3 Bottom Constraint
+    @IBOutlet weak var stack3Bottom: NSLayoutConstraint!
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -143,6 +157,10 @@ class MindBody: UIViewController {
         Warmup.titleLabel!.textColor = .white
         Warmup.layer.borderWidth = 10
         Warmup.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        Warmup.titleLabel?.adjustsFontSizeToFitWidth = true
+        Warmup.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        Warmup.titleLabel?.numberOfLines = 0
+        Warmup.titleLabel?.textAlignment = .center
         
         
         Workout.setTitle(NSLocalizedString("workout", comment: ""), for: UIControlState.normal)
@@ -150,6 +168,10 @@ class MindBody: UIViewController {
         Workout.titleLabel!.textColor = .white
         Workout.layer.borderWidth = 10
         Workout.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        Workout.titleLabel?.adjustsFontSizeToFitWidth = true
+        Workout.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        Workout.titleLabel?.numberOfLines = 0
+        Workout.titleLabel?.textAlignment = .center
         
         
         Stretching.setTitle(NSLocalizedString("stretching", comment: ""), for: UIControlState.normal)
@@ -157,6 +179,10 @@ class MindBody: UIViewController {
         Stretching.titleLabel!.textColor = .white
         Stretching.layer.borderWidth = 10
         Stretching.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        Stretching.titleLabel?.adjustsFontSizeToFitWidth = true
+        Stretching.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        Stretching.titleLabel?.numberOfLines = 0
+        Stretching.titleLabel?.textAlignment = .center
         
         
         
@@ -165,6 +191,10 @@ class MindBody: UIViewController {
         Cardio.titleLabel!.textColor = .white
         Cardio.layer.borderWidth = 10
         Cardio.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        Cardio.titleLabel?.adjustsFontSizeToFitWidth = true
+        Cardio.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        Cardio.titleLabel?.numberOfLines = 0
+        Cardio.titleLabel?.textAlignment = .center
         
         
         
@@ -174,12 +204,22 @@ class MindBody: UIViewController {
         Yoga.titleLabel!.adjustsFontSizeToFitWidth = true
         Yoga.layer.borderWidth = 10
         Yoga.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        Yoga.titleLabel?.adjustsFontSizeToFitWidth = true
+        Yoga.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        Yoga.titleLabel?.numberOfLines = 0
+        Yoga.titleLabel?.textAlignment = .center
         
-    Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
+        
+        
+        Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
         Meditation.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Meditation.titleLabel!.textColor = .white
         Meditation.layer.borderWidth = 10
         Meditation.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        Meditation.titleLabel?.adjustsFontSizeToFitWidth = true
+        Meditation.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        Meditation.titleLabel?.numberOfLines = 0
+        Meditation.titleLabel?.textAlignment = .center
         
         
         
@@ -193,6 +233,13 @@ class MindBody: UIViewController {
             heightConstraint.constant = 15
             positionConstraint.constant = -15
             
+            
+            bodyTop.constant = 5
+            bodyBottom.constant = 2
+            mindTop.constant = 5
+            mindBottom.constant = 3
+            
+            stack3Bottom.constant = 15
         }
         
         

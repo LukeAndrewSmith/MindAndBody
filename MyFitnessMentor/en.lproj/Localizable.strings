@@ -177,6 +177,7 @@
                 // Mandatory
                 "5minCardioLE" = "The cardio can be performed in any manner that seems fit.\nRecommended:\n- Treadmill (Walking/Jogging)\n- Step Machine\n- Biking\n- Rowing Machine \n\n\nPurpose:\nThe cardio should raise the body temperature, heart rate, and blood flow which together increase the flexibility of muscles and joints. Cardio is also an opportunity to put aside any thoughts that might hinder the workout through awareness of the feeling of the activation/stimulation of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
                 "5minCardioIE" = "The cardio can be performed in any manner that seems fit.\nRecommended:\n- Treadmill (Running/Sprints with 15-30s breaks)\n- Step Machine(10min)\n- Biking(Fast/Sprints with 15-30s breaks)\n- Rowing Machine(Fast/Sprints with 15-30s breaks)\n\n\nPurpose:\nThe cardio should raise the body temperature, heart rate, and blood flow which together increase the flexibility of muscles and joints. Cardio is also an oppertunity to put aside any thoughts that might hinder the workout through awareness of the feeling of the activation/stimulation of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
+                "5minCardioLCE" = "The cardio can be performed in any manner that seems fit.\nRecommended:\n- Treadmill (Walking/Jogging)\n- Step Machine\n- Biking\n- Rowing Machine \n\n\nPurpose:\nThe cardio should be performed slowly and at a lower intensity than the workout so as to provide the heart an oppertunity to slow it's rate down gently. The cardio also keeps the blood flowing and aids recovery.";
                 // Joint Rotations
                 "wristE" = "Movement:\nStand straight up with good posture and interlock your hands.\nMove your wrists in a circular pattern without over extending them.\nHalf way through the recommended time switch direction of motion.\n\nNotes:\nDon't perform the movement too quickly.\n\n\nPurpose:\nJoint rotations lubricate the joints with synovial fluid which facilitates their movement and helps to prevent injury.";
                 "elbowE" = "Movement:\nStand straight up with good posture and your shoulders relaxed.\nFlex and extend your elbow, flexing being bringing your forearm to your bicep, and extending being straightening your arm.\nRepeat for 5-10reps with each arm, 1 rep being 1 flex then 1 entension.\nNext perform elbow supination and pronation.\nRelax your arm down, and keeping a constant upper arm position, rotate your palm as far in one direction as possible, then as far in the other direction as possible.\nRepeat for 5-10 rotations in each direction with each arm.\n\nNotes:\nDon't use momentum in the flexing and extending of the elbows.\n\n\nPurpose:\nJoint rotations lubricate the joints with synovial fluid which facilitates their movement and helps to prevent injury.";
@@ -365,6 +366,8 @@
         // Workout //
         "upperBody" = "Upper Body";
         "lowerBody" = "Lower body";
+        "upper" = "Upper";
+        "lower" = "Lower";
         "legs" = "Legs";
         "pull" = "Pull";
         "push" = "Push";
@@ -492,7 +495,7 @@
             // Quads
                 "quads" = "Quads";
             "lungeStretchWall" = "Lunge Stretch Against a Wall";
-            "lyingQuadStretch" = "Lying Quad Stretch";
+            "QuadStretch" = "Quad Stretch";
 
 
 
@@ -518,7 +521,7 @@
 
             // Sides
             "sideLeanE" = "Stretch:\nStand straight with your feet past shoulder width.\nLift your right arm up to your ear, then lean to the left, placing your left hand on the side of your left thigh or knee.\nReach over to your left with your right arm, and stretch the right side of your torso.\nHold for the recommended amount of time then repeat on the other side.\n\nNotes:\nThis is a stretch that can be easily performed wrong, and requires a minimum core strength.\nSupport so of your weight with the hand on your thigh so as not to strain the lower back.\nKeep the back as elongated as possible throughout, don't let your spine compress.";
-            "extendedSideAngleE" = "Stretch:\nStand straight with good posture.\nStep your right leg forwards to a distance where your thigh is as close to parrallel with the ground as comfortable with your front knee at 90º and directly above your heel.\nKeep a straight back and active core whilst doing this, and turn your rear foot to 90º.\nReach down to the left side of your right foot with your right hand, holding the front of your ankle. Your shoulder should be to the left of your knee.\nTurn your torso and head to facing left, and reach over your head with your left arm.\nStretch the left side of your body from toe to finger (try to stretch the right side as well so as not to compress the spine).\nHold for the recommended amount of time then repeat on the other side.\n\nNotes:\nTry and keep your legs and torso in line.\nIncrease the twist in your torso by pushing your shoulder against your knee a little.\nYour arm upper arm should be directly above your torso, with your palm facing the floor.";
+            "extendedSideAngleE" = "Stretch:\nStand straight with good posture.\nStep your right leg forwards to a distance where your thigh is as close to parrallel with the ground as comfortable with your front knee at 90º and directly above your heel.\nKeep a straight back and active core whilst doing this, and turn your rear foot to 90º.\nReach down to the left side of your right foot with your right hand, holding the front of your ankle. Your shoulder should be to the left of your knee.\nTurn your torso and head to facing left, and reach over your head with your left arm.\nStretch the left side of your body from toe to finger (try to stretch the right side as well so as not to compress the spine).\nHold for the recommended amount of time then repeat on the other side.\n\nNotes:\nTry and keep your legs and torso in line.\nIncrease the twist in your torso by pushing your shoulder against your knee a little.\nYour arm upper arm should be directly above your head, with your palm facing the floor.";
             "seatedSideE" = "Stretch:\nSit down with your legs outstretched in front of you.\nBend your right knee and bring your heel as close to your crotch as possible.\nPress the sole of your foot against your inner thigh and point your right knee out to the side, allowing it to relax down towards the floor.\nEnsure that your pelvis is rotated backwards and that your weight is on your sitting bones.\nRotate your torso right trying to get your shoulders to form a straight line with your left.\nLean towards your left leg, placing your left hand/forearm to the right of it (this hand is used to stabilize and increase the stretch).\nLift your right up, next to your ear and in line with your left leg.\nMake sure you feel the stretch in the right oblique (right side of your abs) and stretch towards your left foot, trying to past it and up with your right arm.\nHold for the recommended amopunt of time then repeat on the other side.\n\nNotes:\nKeep the foot of your outstretched leg flexed.\nYou can support some your your weight with the hand on the floot, so as to avoid overstretching or pulling any muscles in the obliques.\nYou feel the best stretch in the obliques when your torso is rotated to be nearly in line with your outstretched leg.\nIt is better to remain more upright with a more rotation than to have less rotation and to stretch down furthur towards the leg, as a greater rotation lends itself to a greater stretch in the oblique.\nIf you can't feel a stretch in your oblique it's probably due to your pelvis not being rotated far enough back.\nBreath into your obliques.";
 
             // Neck
@@ -563,11 +566,11 @@
             "singleLegStandingE" = "Stretch:\nStand upright with good posture and an active core, next to a bench or elevated surface you can put a foot on.\nLift your right foot placing your heel on the surface.\nKeeping a straight back and legs, rotate your hips back and lean forwards to get a stretch in your hamstring.\nNow lean forwards to trying and touch your toes, keeping your lower back as straight as possible, and your foot flexed.\nHold for the recommended amount of time then repeat with the other leg.\n\nNotes:\nDon't allow the hip of the leg not being stretch to move back, keep them in line.\nDon't push past your limit.\nIf needed support a little weight with your hand pressed against the stretched leg so as not to put too much pressure on the lower back.\nBreath into the hamstring.";
             "downWardsDogE" = "Stretch:\nKneel on all fours, with your knees directly under your hips, and your hands a little in front of your shoulders.\nYour toes should be curled under you feet.\nStraighten your legs whilst pressing through your palms, knuckles and oustretched fingers.\nTry to move your heels to the ground, whilst rotating your pelvis back to straighten your lower back and move you stomach down towards your thighs.\nPress your chest forwards through your shoulders towards the ground, and keep your head in line with your torso.\n\nNotes:\nYou can warm up for this exercise by getting in position an pedalling your feet.\nTry stretch your hamstrings, bringing your stomach towards your thighs.\nKeep a straight lower back.";
             "singleLegHamstringE" = "Stretch:\nSit down with your legs outstretched in front of you.\nBend your right knee and bring your heel as close to your crotch as possible.\nPress the sole of your foot against your inner thigh and point your right knee out to the side, allowing it to relax down towards the floor.\nEnsure that your pelvis is rotated backwards and that your weight is on your sitting bones.\nStretch your arms straight up over your head, and turn your torso so it's facing your left leg, and keeping a straight back stretch forwards as far as possible.\nBend forwards to try and touch your toes, keeping your lower back straight to enhance the stretch on the hamstring and aleviate excess pressure on the lower back.\nHold for the recommended amount of time then repeat with the other leg.\n\nNotes:\nRotate your pelvis forwards keeping a straight lower back.\nDon't force the stretch so as not to put excess pressure on the lower back.\nKeep your foot flexed during the stretch.\nBreath into the hamstring.";
-            "twoLegHamstringE" = "Stretch:\nSit down with your legs outstretched in front of you.\nStraighten your back and rotate your torso back, placing your weight on your sitting bones.\nStretch your arms over your head, and lean forwards, keeping a straight back.\nBend forwards and reach for your toes, trying to keep your lower back as straight as possible.\nAllow your head to rest forwards to stretch your neck and back.\n\nNotes:\nDon't force the stretch and put too much pressure on the lower back.\nThis stretch isn't advised if your hamstrings are unflexible, i.e if you can't touch your toes, as you will likely put excess pressure on the lower back.\nKeep your toes flexed, and try to bring your stomach to touch your thighs.\nBreath into your hamstrings.";
+            "twoLegHamstringE" = "Stretch:\nSit down with your legs outstretched in front of you.\nStraighten your back and rotate your torso back, placing your weight on your sitting bones.\nStretch your arms over your head, and lean forwards, keeping a straight back.\nBend forwards and reach for your toes, trying to keep your lower back as straight as possible.\nAllow your head to rest forwards to stretch your neck and back.\n\nNotes:\nDon't force the stretch and put too much pressure on the lower back.\nThis stretch isn't advised if your hamstrings are inflexible, i.e if you can't touch your toes, as you will likely put excess pressure on the lower back.\nKeep your toes flexed, and try to bring your stomach to touch your thighs.\nBreath into your hamstrings.";
 
             // Quads
             "lungeStretchWallE" = "Stretch:\nKneel down next to a wall.\nStretch your right leg forward, so that your knee is above your ankle, you should be in a lunge stretch position.\nLift your back foot up, and move back so that it is resting on the wall at about the height of your glute.\nRest your hands on your front thigh, and keeping an upright torso, stretch your hips towards the ground. You should feel a good stretch in the quad.\nHold for the recommended amount of time then repeat with the other leg.\n\nNotes:\nPut your foot at a height on the wall that allows you to get a good stretch in the quad.\nRotate your pelvis forwards to increase the stretch.\nBreath into the quad.";
-            "lyingQuadStretchE" = "Stretch:\nA simple standing quad stretch where you you hold your heel at your glute is hard to perform without overly bending your lower back and aleiviating the stretch in the quad. If done lying, this can be avoided:\nLy on your left side with your hand above your head and your knees and hips pointing at 90º in front of you.\nHold the front of your right ankle/foot with your right hand, hold your heel at your glute and extend the right knee away from your and back to try and get your thigh in line with your torso.\nActively keep a straight lower back when doing this.\nHold for the recommended amount of time then repeat with the other leg.\n\nNotes:\nDon't rotate your torso.\nKeep your hips rotated forwards.\nBreath into your quad.";
+            "QuadStretchE" = "Stretch:\nA simple standing quad stretch where you you hold your heel at your glute is hard to perform without overly bending your lower back and aleiviating the stretch in the quad. If you can comfortably do it standing without rounding the lower back then do so, if not perform it lying down.:\nLie on your left side with your left arm above your head and your knees and hips pointing at 90º in front of you.\nHold the front of your right ankle/foot with your right hand, hold your heel at your glute and extend the right knee away from your and back to try and get your thigh in line with your torso.\nActively keep a straight lower back when doing this.\nHold for the recommended amount of time then repeat with the other leg.\n\nNotes:\nDon't rotate your torso.\nKeep your hips rotated forwards.\nBreath into your quad.";
 
 
 
@@ -593,7 +596,186 @@
             "guidedPractice" = "Guided Practices";
 
 
-            // Normal //
+        // Poses List //
+        "upwardsSalute" = "Upward Salute";
+        "mountain" = "Mountain";
+        "tree" = "Tree";
+        "extendedHandToe" = "Extended Toe Grab";
+        "eagle" = "Eagle";
+        "chair" = "Chair";
+        "lordOfDance" = "Lord of the Dance";
+        "warrior1" = "Warrior I";
+        "warrior2" = "Warrior II";
+        "warrior3" = "Warrior III";
+        "halfMoon" = "Half Moon";
+        "extendedTriangle" = "Extended Triangle";
+        "extendedSideAngleY" = "Extended Side Angle";
+        "revolvedSideAngle" = "Revolved Side Angle";
+        "revolvedTriangle" = "Revolved Triangle";
+        "halfForwardBend" = "Half Forward Bend";
+        "forwardBend" = "Forward Bend";
+        "wideLeggedForwardBend" = "Wide Legged Forward Bend";
+        "intenseSide" = "Intense Side Stretch";
+        "gate" = "Gate";
+        "highLunge" = "High Lunge";
+        "lungeY" = "Lunge";
+        "deepSquat" = "Deep Squat";
+        // Hand/Elbows and Feet/Knees
+        "dolphin" = "Dolphin";
+        "downwardDog" = "Downward Dog";
+        "halfDownwardDog" = "Half Downward Dog";
+        "plank" = "Plank";
+        "dolphinPlank" = "Dolphin Plank";
+        "fourLimbedStaff" = "Four Limbed Staff";
+        "sidePlank" = "Side Plank";
+        "cat" = "Cat";
+        "cow" = "Cow";
+        "kowtow" = "Kowtow";
+        "catBalance" = "Cat Balance";
+        "dynamicTiger" = "Dynamic Tiger";
+        "halfMonkey" = "Half Monkey";
+        "childPose" = "Child Pose";            //
+        "wildThing" = "Wild Thing";
+        "upwardBow" = "Upward Bow";
+        "bridge" = "Bridge";
+        "upwardPlank" = "Upward Plank";
+        "extendedPuppy" = "Extended Puppy";
+        "upwardDog" = "Upward Dog";
+        "kneelingBridge" = "Kneeling Bridge";
+        // Seated
+        "crossLeg" = "Leg Cross";
+        "lotus" = "Lotus";
+        "fireLog" = "Fire Log";
+        "boat" = "Boat";
+        "cowFace" = "Cow Face";
+        "hero" = "Hero";
+        "heron" = "Heron";
+        "butterfly" = "Butterfly";           //
+        "staffPose" = "Staff Pose";
+        "archer" = "Archer";
+        "forwardBend" = "Forward Bend";
+        "vForwardBend" = "Wide Legged Forward Bend";
+        "halfVForwardPose" = "One Legged Forward Bend";
+        "halfVSideBend" = "One Legged Side Bend";
+        "marichi1" = "Marichi's Pose I";
+        "marichi3" = "Marichi's Pose II";
+        "bharadvajaTwist" = "Bharadvaja's Twist";
+        "halfLordFish" = "Half Lord of the Fishes";
+        "frontSplit" = "Front Split";
+        "sideSplit" = "Side Split";
+        // Lying
+        "corpse" = "Corpse";
+        "lyingMountain" = "Lying Mountain";
+        "fish" = "Fish";
+        "lyingButterfly" = "Lying Butterfly";
+        "legRaiseToe" = "Leg Raise Toe Grab";
+        "threadTheNeedle" = "Thread the Needle";
+        "shoulderStand" = "Shoulder Stand";
+        "plow" = "Plow";
+        "frog" = "Frog";
+        "cobra" = "Cobra";
+        "sphinx" = "Sphinx";
+        "pigeon" = "Pigeon";
+        "spineRolling" = "Spine Rolling";
+        // Hand Stands
+        "handstand" = "Handstand";
+        "headstand" = "Headstand";
+        "flatHandHandstand" = "Flat Hand Handstand";
+        "forearmStand" = "Forearm Stand";
+
+
+
+
+
+        // Poses List //
+        "upwardsSaluteE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders.\nStraighten your legs, imagining your pulling yourself up through your head and activate your quads whilst rotating your knees in a little to point them straight out in front of you.\nActivate your core a little to lift your chest and neck (and the back of your head) up as far away from your tailbone as possible.\nTurn your arms and point your palms forwards (You are now in the mountain pose/tadasana).\nInhale while bringing your arms up out to your sides in a curve, reach up as far as you can and bring your palms together above your head, all the while keeping the arms straight without locking the elbows (forcing them straight with your triceps).\nRelax your shoulders down away from your ears, keeping the rest of your body as tall as possible, pay attention to relax your shoulder blades down and keep your chest upright.\nRotate your head back and look up to your hands without collapsing your neck, keeping your ears in line with your shoulders.\nBreath deeply into your entire body, extending your spine and bringing the top of your head up futher away from the ground on the inhale (keeping your shoulders relaxed), and relaxing your shoulders more on the exhale.\n\nNotes:\nHold your palms at shoulder width apart if you have inflexible shoulders.\nStand with your feet at hip width apart if you have a hard time balancing.\nYour shoulders, hips, and ankles should be aligned throughout.\nDon't allow your pelvis or chest to rotate too far forwards or backwards, however if you are extending your spine up through the top of your head well this shouldn't be an issue.\n\nExit:\nExhale and gently sweep your arms down to your side.";
+        "mountainE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders.\nStraighten your legs, imagining your pulling yourself up through your head and activate your quads whilst rotating your knees in a little to point them straight out in front of you.\nActivate your core a little to lift your chest and neck up as far away from your tailbone as possible.\nWiden your back and pull your shoulder blades out, then relax them and allow your shoulders to relax into a natural position.\nTurn your arms and point your palms forwards, keeping them fairly straight. Your hands should be in line with your hips.\nBreath deeply into your entire body, extending your spine and bringing the top of your head up futher away from the ground on the inhale (keeping your shoulders relaxed), and relaxing your shoulders more on the exhale.\n\nNotes:\nYour shoulders, hips, and ankles shoulder be aligned.\nWork from the ground up, stretching each joint up away from the ground from ankle to neck, then extend through the top of your head.\nDon't allow your pelvis or chest to rotate too far forwards or backwards, however if you are extending your spine up through the top of your head well this shouldn't be an issue.";
+        "treeE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nShift your weight slightly onto your right foot, bend your left knee, then grab your left ankle with your left hand.\nBring your ankle up as close to the right side of your groin as possible, extending your knee out to your side and placing the sole of your foot down your inner thigh.\nPress your sole into your left leg and resist with your left leg, then stretch each joint up away from the ground, from ankles up to the neck, then the top of your head.\nYour palms can be together and your thumbs against your lower chest (prayer hands) or they can be pressed together straight up above your head, in both cases your shoulders should be relaxed and down.\nBreath deeply into your entire body, extending your spine and bringing the top of your head up futher away from the ground on the inhale (keeping your shoulders relaxed), and relaxing your shoulders more on the exhale.\nHold for the recommended amount of breaths then repeat on the other leg.\n\nNotes:\nFix your gaze at a point on the ground several meters in front of your to help your balance.\n\nExit:\nRelax your arms down to your side, exhale and with the help of your hand remove your foot from your inner thigh then left it go to return to standing (mountain pose).";
+        "extendedHandToeE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nShift your weight slightly onto your right foot, bend your left knee and slowly bring it up toward your chest.\nHold your knee with your left hand then wrap your right index finger firmly round your big toe.\nStraighten your spine and activate your core to remain stable.\nExhale and extend your foot as far forward as possible, keeping your back straight.\nKeep your shoulders as far down and back as possible.\nStretch each joint up away from the ground, from ankles up to the neck, then the top of your head.\nBreath deeply into your entire body, extending your spine and bringing the top of your head up futher away from the ground on the inhale (keeping your shoulders relaxed), and relaxing your shoulders more on the exhale.\nHold for the recommended amount of breaths then repeat on the other leg.\n\nNotes:\nDon't allow your hips to rotate sideways when extending your foot in front of you, or for one hip to raise heigher than the other.\nDon't slouch your back fowards, keep your spine upright.\n\nExit:\nExhale and bend your right leg back to you, let go of your toe and slowly return to standing.";
+        "eagleE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nBend your knees a little and shift your weight slightly onto your right foot.\nLift your left leg and place cross the thigh over the right, bring your left foot back (try to wrap it round the right calf).\nStretch your arms out in front of you, then cross your right arm over your left.\nBend your elbows so that your right is sitting in the crack of your left, then rotate your palms inward and try to touch your palms together.\nYour fingers and forearms should be pointing up to the ceiling.\nHold for the recommended number of breaths then repeat on the other leg.\n\nNotes:\nThis pose can prove to be difficult, so go to your limits.\nKeep your spine upright, shoulders down and hips in line with eachother.\n\nExit:\nExhale and unwrap your arms, dropping them by your side. Exhale again and unwrap your legs, returning to a standing moutain pose.";
+        "chairE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nInhale while bringing your arms up out to your sides in a curve, reach up as far as you can and bring your palms together above your head or keep your arms parallel.\nRelax your shoulders down away from your ears.\nBend your knees forwards and break at the hips.\nBring your torso and thighs to form a 90º angle with your torso leaning over your thighs a little.\nPress your hips down as far as possible whilst keeping them directly above your ankles.\n\nNotes:\nKeep your spine extended with arms and torso in line.\nDon't let your ankles cave inwards, keep them straight and keep your weight in the center of your foot.\nYou can put your palms together in the prayer position instead of above your head.\nYou can maintain a slight arch in your back, and keep your chest forwards a little so as not to allow the shoulders to round forward.\nIf your finding it hard to balance, bring your feet to hip width apart.\n\nExit:\nExhale whilst simultaneously bringing your arms down and returning to standing straight in the mountain pose.";
+        "lordOfDanceE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nBend your knees a little and shift your weight slightly onto your right foot.\nBend your left leg and bring your heel to your glute.\nHold the inside of your foot with your left hand.\nSlowly lift your left foot back and up away from the ground, keeping your pelvis rotated forwards a little so as not to compress your lower spine.\nTry to bring your leg up so your thigh is parallel with the ground whilst keeping your torso as upright as possible, and point your elbow towards the ceiling.\nOutstretch your right arm above your head, parallel with your torso.\nHold for the the recommended number of breaths then repeat on the other leg.\nHold for the recommended number of breaths then repeat on the other leg.\n\nNotes:\nDon't force the stretch, perform it according your abilities.\nTry not to allow your body to rotate, i.e keep it facing the same direction as when your were standing upright.\nTo make the stretch a little easier, hold the outside of your foot instead of the inside.\nKeep the rear foor flexed.\n\nExit:\nExhale and bring your leg down, ankle back to your glute and your torso upright, then let go of the foot and slowly return to the standing position.";
+        "warrior1E" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nStep your left foot a good way forward and drop your hips towards the ground until your left thigh is as close to parallel with the ground as possible and your knee is directly above your ankle.\nTurn your right foot 90º, so it is perpendicular to the left.\nLift your arms and press your palms together overhead, keeping your shoulders down. Your arms should be pointing straight up to the ceiling.\nEither keep your head looking forward, or bend your head back without compressing your neck and look at your hands.\nHold for the recommended number of breaths then repeat on the other side.\n\nNotes:\nTry to keep your thighs parallel so as not to stick your glutes out.\nKeep your torso rotated forwards, don't allow your chest to point to the side when in the pose.\nKeep your hips vertically in line (at the same height).\nKeep the pelvis rotated forward.\n\nExit:\nExhale and push with the back leg and straighten the front leg to stand upright whilst you bring your arms down.";
+        "warrior2E" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nStep your left foot a good way forward and drop your hips towards the ground until your left thigh is as close to parallel with the ground as possible and your knee is directly above your ankle.\nTurn your right foot 90º, so it is perpendicular to the left.\nRotate your torso so you are facing perpendicular to your left leg, and outstretch your arms directly out to your sides. Keep your head looking in it's original direction.\nHold for the recommended number of breaths then repeat on the other side.\n\nNotes:\nYour palms should be facing down when outstretched and exnted your fingers out as far as possible.\nTry to keep your thighs parallel so as not to stick your glutes out.\nKeep your hips vertically in line(at the same height).\nKeep the pelvis rotated forward.\n\nExit:\nExhale and push with the back leg and straighten the front leg to stand upright whilst you bring your arms down.";
+        "warrior3E" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nStep your left foot back into a lunge position, bringing your right thigh close to parallel with the ground.\nHold your right knee with your palms on each side of the knee, and lay your torso on your right thigh, ensuring a straight torso and hips.\nStretch your arms out in over your head.\nExhale and press with your left leg, then straighten your right leg and simultaneously bring your left leg up behind you.\nYour arms, torso and left leg should be parallel to the ground, our hips also should be so rotate them forwards if necessary.\nStretch your arms and the top of your head away from eachother and either look up at your hands or down at the floor in front of you.\nHold for the recommended number of breaths then repeat on the other leg.\n\nNotes:\nDon't bring your torso forwards when moving from the lunge position, it is better to bring your hip back a little as this enables better stability.\nDon't compress your neck if looking up.\nDon't to lean forwards and push your weight onto the front of your foot, try to keep the weight centered on your foot.\n\nExit:\nExhale and slowly return to a lunge position, then bring your arms gently to your sides and step forwards into the standing mountain pose.";
+        "halfMoonE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nStep your left foot back a meter or so, make sure your legs are straight then rotate your left foot (and knee) 90º so it is perpendicular to the right.\nBend you right knee a little and bring your back foot forwards, shifting your weight onto the right foot.\nBend your torso forwards and place your right hand on the ground so that your right arm and leg are parallel.\nExhale and straighten the right leg, lifting your left leg up behind you to bring your torso and left leg parallel with the ground.\nRotate your torso to the left to bring your shoulders in line with your hand on the ground, and lift you left arm directly up to also align it parallel with the right arm.\nHold for the recommended number of breaths the repeat on the other side.\n\nNotes:\nKeep your hips rotated forwards, and your knee facing your bottom arm.\nYou rear leg can be past parallel with the ground if you are flexible enough.\nUse your hand on the ground to balance the pose.\nKeep the torso and core straight throughout the pose.\n\nExit:\nInhale and lift your torso up, while bringing your back leg down into the lunge position, then exhale and set forwards into the standing mountain pose.";
+        "extendedTriangleE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nStep your left foot back a meter or so, make sure your legs are straight then rotate your left foot (and knee) 90º so it is perpendicular to the right.\nExtend your arms straight out to your sides with your palms facing the ground.\nRotate your torso so it your arms are parallel to your legs.\nBend your torso down to the right by bending at the hips so as to keep the torso and core straight. Make sure you don't lean your weight forwards, keep your hips back.\nHold your shin, ankle or the floor next to your foot and support your weight a little with this arm.\nStretch your other arms out towards the ceiling and look up towards it.\nHold for the recommended number of breaths the repeat on the other side.\n\nNotes:\nKeep good pressure on the back foot to help stabilize the pose.\nKeep your torso straight and extend your spine and tailbone.\nDon't allow your upper shoulder to fall forwards in the full stretch, keep your shoulders and arms in line with your ankle.\n\nExit:\nInhale and bring your torso back upright, then exhale and step forwards into the standing mountain pose.";
+        "extendedSideAngleYE" = "Pose\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nStep your right leg forwards a meter or so, then bend your knee and bring your thigh is as close to parrallel with the ground as comfortable with your knee directly above your heel.\nKeep a straight back and active core whilst doing this.\nTurn your rear foot to 90º so it is perpendicular to the other and make sure the rear leg is straight.\nLift your left arm up overhead.\nExhale, rotate your torso so your shoulders are in line with your thigs, and reach down to the left side of your right foot with your right hand, holding the front of your ankle. Your shoulder should be to the left of your knee.\nStretch the left side of your body from toe to finger (try to stretch the right side as well so as not to compress the spine).\nHold for the recommended number of breaths then repeat on the other side.\n\nNotes:\nTry and keep your legs and torso in line.\nIncrease the twist in your torso by pushing your shoulder against your knee a little.\nYour arm upper arm should be directly above your head, with your palm facing the floor.\nKeep your pelvis rotated forwards to avoid compressing the spine.\nBring your torso as close as you can to your thigh.\nKeep thighs in line to avoid sticking your glutes out.\n\nExit:\nInhale and bring your torso back upright, then exhale and step forward into the standing mountain pose.";
+        "revolvedSideAngleE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nStep your left foot back a meter or so, make sure your legs are straight then rotate your left foot (and knee) 90º so it is perpendicular to the right.\nExhale and rotate your torso to the right to face your thigh.\nPlace your left elbow on the right of your right thigh then exhale and bend forward whilst rotating your torso furthur.\nBring your rear shoulder to the right side of your knee, then place your hand flat on the floor if possible and extend your right arm over your head.\nHold for the recommended number of breaths then repeat on the other side.\nHold for the recommended number of breaths then repeat on the other side.\n\nNotes:\nThis is a difficult move, and if you lack the flexibility you can place your hand on the floor to the right of your foot with your arm in front of your shin.\nTry to keep your thighs in line to not allow your glutes to move back.\nRotate your pelvis forward to avoid compressing the spine.\nExtend the spine as far as possible to keep the rotation uniform.\nLook up as far as possible in the stretch:\n\nExit:\nInhale and bring your torso up then rotate it to a neutral position whilst bringing it upright. Exhale and step forward into the standing mountain pose.";
+        "revolvedTriangleE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nStep your left foot back a meter or so, make sure your legs are straight and try to bring your heel to the ground rotating your foot as little as possible (try to keep it parallel to the other).\nExhale and bend forward, rotating your pelvis forward and keeping your torso and core straight whilst keeping your torso facing forward.\nPlace your left hand on the ground to the left of your foot, then exhale and rotate your torso right more.\nLift your right arm directly above the other to bring your shoulders and arms in line.\nLook down at the floor, or up to your hand if you are experienced and flexible.\nHold for the recommended number of breaths then repeat on the other side.\n\nNotes:\nTry to keep your hips in line, the more in line they are the more you'll feel the stretch in your glutes.\nTry to keep your thighs parallel.\nIf you lack flexibility, rest your hand on your fingers instead of your palm and lift your rear heel off the ground a little.\nDon't lean your weight onto your front foot too much, keep the weight evenly distributed between feet.\n\nExit:\nExhale and rotate your torso to face the ground, then inhale and lift your torso upright, then exhale and step forward into the standing mountain pose.";
+        "halfForwardBendE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nExhale and break at the hips, bending your torso forward while keeping a straight back (especially lower back) and rotate your pelvis forward.\nExtend and lengthen your spine whilst you are bending down.\nPlace your hands on your shins and look at the floor with your head in line with your torso, or look straight out in front of you without compressing your neck.\n\nNotes:\nDon't overly bend your lower back to get your hands lower, try to keep your lower back straight. If you are very inflexible, place your hands on your knees or thighs and remain more upright to keep your back straight.\nPush your hips back a little to reduce the pressure on the lower back.\n\nExit:\nInhale and bring your torso upright focusing on glute and hamstring activation.";
+        "forwardBendE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nExhale and break at the hips, bending your torso forward while keeping a straight back (especially lower back) and rotate your pelvis forward.\nExtend and lengthen your spine whilst you are bending down.\nReach down towards your feet, holding your ankles, toes, or placing your hands flat in front of or next to your feet.\nLet your head hang towards the ground, and relax furthur into the stretch on each exhale.\n\nNotes:\nDon't bend your lower back too much, this puts excess pressure on the lower spine.\nIf you are lacking in hamstring flexibility, the pose can be done withe bent knees to allow for a good stretch without bending the lower back too much.\n\nExit:\nInhale and straighten your back, then bring your torso upright focusing on glute and hamstring activation.";
+        "wideLeggedForwardBendE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nStep out to the side half a meter to a meter, to feel a mild stretch in the inside thigh.\nMake sure your feet are parallel and hips in line with your ankles.\nInhale and bring your torso up tall, then exhale and break at the hips, bending your torso forward while keeping a straight back (especially lower back) whilst rotating your pelvis forward.\nExtend and lengthen your spine whilst you are bending down.\nReach down towards the floor, to support your weight a little as your torso becomes parallel with the ground.\nPause and inhale when parallel, then exhale and continue down.\nPlace your palms flat on the ground between your legs or a little infront, and let your head hang towards the ground.\nRelax furthur into the stretch on each exhale, without overly rounding your lower back and maintianing a little weight on your hands to reduce the stress on your lower back.\n\nNotes:\n\nPush your hips back a little to reduce pressure on the lower back.\nIf your can, place your head on the ground in the maximum stretch.\n\n\nExit:\nInhale and press your torso up with your hands until it is parallel to the ground, pause to exhale, then inhale again and lift your torso upright using your glutes and hamstrings. Exhale and step your feet together into the standing mountain pose.";
+        "intenseSideE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nStep your left foot back a meter or so, make sure your legs are straight and try to bring your heel to the ground rotating your foot as little as possible (try to keep it parallel to the other).\nExhale and bend forward, rotating your pelvis forward and keeping your torso and core straight whilst keeping your torso facing forward.\nReach down to put your palms flat on the floor next to your right foot, or place your hands on your ankle or shin.\nHold for the recommended amount of time the repeat with the other leg.\n\nNotes:\nTry to keep your pelvis pointing straight forwards, not letting one hip get in front of the other.\nRelax your head down towards your knee and breath into the stretch without rounding your lower back too much.\nSupport some weight with your hands if necessary to reduce the pressure on the lower back.\nKeep your weight equally distributed on both feet, don't allow it to shift forward onto your front foot.\n\nExit:\nInhale and straighten your back, then bring your torso upright. Exhale and step forward into the standing mountain pose.";
+        "gateE" = "Pose:\nKneel on the floor, with and upright core and neutral hips.\nOutstretch your left leg to the lef, placing your foot flat on the floor with your toes pointing to the side (you can also be on your heel with a flexed foot).\nRotate you knee to make sure it is pointing up.\nExhale and lean to the left without bending forward, placing your left hand on your shin and lifting your right up over your head. Continue to a point where you feel a good stretch in your side, supporting some weight on your left hand if necessary to reduce pressure on the lower back.\nStretch your right arm over your head extending your hand as far away from your right hip as possible.\nHold for the recommended amount of time then repeat on the other side.\n\nNotes:\nDon't lean your weight too far to the side, keep it equally distributed on your knee and foot.\nDon't compress you lower back on the side your stretch, extend your chest up as well as to the side to keep your spine elongated while leaning to the side.\nLook straight forward during the pose.\n\nExit:\nInhale and bring your torso upright, aiding yourself with your hand on your leg. Exhale and bring your knees back together.";
+        "highLungeE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nStep your left foot forward a meter or so.\nBend your front knee to 90º so it is above your ankle, and straighet your back leg which should be on your toes.\nRelax your hips down toward the ground, until your front thigh is as close to parallel with the ground as possible.\nInhale and lift your arms over your head, pressing your palms together at the top and stretching as far up as possible.\nRelax your shoulders down, and make sure your lower back is upright and hips inline.\nHold for the recommended number of breaths then repeat on the other side.\n\nNotes:\nKeep your hips in line, don't allow one to move in front of the other, and keep your pelvis rotated forward.\nKeep the rear leg activated and as straight as possible, pressing through the toes.\nKeep your weight equally distributed between both feet.\n\nExit:\nExhale and bring your arms down to your sides, then exhale and step forward back into the standing position.";
+        "lungeYE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nStep your left foot forward a meter or so.\nBend your front knee to 90º so it is above your ankle, place your back knee on the ground and point your toes.\nRelax your hips down toward the ground, until your front thigh is as close to parallel with the ground as possible or past.\nInhale and lift your arms over your head, pressing your palms together at the top and stretching as far up as possible.\nRelax your shoulders down, and make sure your lower back is upright and hips inline.\nHold for the recommended number of breaths then repeat on the other side.\n\nNotes:\nKeep your hips in line, don't allow one to move in front of the other, and keep your pelvis rotated forward.\n\nExit:\nExhale and bring your arms down to your sides, then exhale and step forward back into the standing position.";
+        "deepSquatE" = "Pose:\nStand upright with the balls of your feet together, heels slightly apart, a straight core and relaxed shoulders (mountain pose/tadasana).\nStep your feet out a little, keeping them as close together as you can still maintaining the ability to squat deep.\nSquat down as far as possible, breaking at the hips and knees simultaneously.\nKeep your knees press out as your go down.\nPlace your palms together in the prayer position, and press your knees out gently with your elbows.\n\nNotes:\nIncrease the stretch by leaning your torso forward and place you armpits round your shins.\nDon't let your ankles cave in.\nPoint your toes out a little to facilitate the stretch, and outstretch your arms in front of you to help stabilize the squat if necessary.\nIf you can't deep squat, hold onto a support while performing the pose.\n\nExit:\nExhale while slowly standing up.";
+        // Hand/Elbows and Feet/Knees
+        "dolphinE" = "Pose:\nKneel on all fours, with your hands below your shoulders and your knees below your hips.\n";
+        "downwardDogE" = "Pose:\nKneel on all fours, with your hands below your shoulders and your knees below your hips. Your feet should be resting on your toes, and your hands spread a little.\nExhale and straighten your legs until your knees are almost straight.\nRotate your pelvis forward, then push your hips back and bring your heels to the floor.\nStraighten and lengthen your spine, bringing your stomach closer to your hips whilst keeping your lower back straight.\nPress your hands to the with equal weight on your palm, fingers and knuckles, and lower your shoulders towards the ground.\nPress your chest through your shoulders towards the ground.\nKeep your head parallel to your arms and in line with your chest (so it may be pressed a little forward).\n\nNotes:\nTo warm up for the pose, pedal your feet (alternating lifting one heel up and the other down).\nTry to keep your lower back straight and to bring your torso to a 90º angle with your thighs.\nKeep equal weight on your hands and feet.\nIf you lack the flexibility, keep you feet on your toes rather than rounding your back.\n\nExit:\nExhale and bend your knees, returning them to the ground, and bringing your shoulders over your hands.";
+        "halfDownwardDogE" = "Pose:\nKneel on all fours, with your hands below your shoulders and your knees below your hips. Your feet should be resting on your toes, and your hands spread a little.\nExhale and straighten your legs until your knees are almost straight.\nRotate your pelvis forward, then push your hips back and bring your heels to the floor.\nStraighten and lengthen your spine, bringing your stomach closer to your hips whilst keeping your lower back straight.\nPress your hands to the with equal weight on your palm, fingers and knuckles, and lower your shoulders towards the ground.\nPress your chest through your shoulders towards the ground.\nKeep your head parallel to your arms and in line with your chest (so it may be pressed a little forward).\nLift your left leg up behind you, keeping it straight, \n\nNotes:\nTo warm up for the pose, pedal your feet (alternating lifting one heel up and the other down).\nTry to keep your lower back straight and to bring your torso to a 90º angle with your thighs.\nKeep equal weight on your hands and feet.\nIf you lack the flexibility, keep you feet on your toes rather than rounding your back.\n\nExit:\nExhale and bend your knees, returning them to the ground, and bringing your shoulders over your hands.";
+        "plankE" = "Plank";
+        "dolphinPlankE" = "Dolphin Plank";
+        "fourLimbedStaffE" = "Four Limbed Staff";
+        "sidePlankE" = "Side Plank";
+        "catE" = "Cat";
+        "cowE" = "Cow";
+        "kowtowE" = "Kowtow";
+        "catBalanceE" = "Cat Balance";
+        "dynamicTigerE" = "Dynamic Tiger";
+        "halfMonkeyE" = "Half Monkey";
+        "childPoseE" = "Child Pose";            //
+        "wildThingE" = "Wild Thing";
+        "upwardBowE" = "Upward Bow";
+        "bridgeE" = "Bridge";
+        "upwardPlankE" = "Upward Plank";
+        "extendedPuppyE" = "Extended Puppy";
+        "upwardDogE" = "Upward Dog";
+        "kneelingBridgeE" = "Kneeling Bridge";
+        // Seated
+        "crossLegE" = "Leg Cross";
+        "lotusE" = "Lotus";
+        "fireLogE" = "Fire Log";
+        "boatE" = "Boat";
+        "cowFaceE" = "Cow Face";
+        "heroE" = "Hero";
+        "heronE" = "Heron";
+        "butterflyE" = "Pose:\nnSit with a straight back and your legs bent in front of you.\nBring the bottom of your feet together so that your outer foot is in contact with the ground and your knees are pointing outwards.\nPut your hands on the ground next to your glutes (I like to use my fists for this) and lift yourself off the ground.\nWhilst off the ground, keeping your feet in a constant position, move your hips as close to your heels as comfortably possible whilst keeping a straight lower back.\nWith you hands locked around your feet and your shoulders back and down, straighten your back and pull your torso forwards (all the while keeping a straight back) to increase the stretch of the inner thigh and hip flexors.\nHold for the recommended amount of time then allow your back to bend forwards, push your knees towards the floor with your elbows and gently pull your head and torso towards your toes (without overly rounding your lower back) and hold for the recommended amount of time.\n\nNotes:\nBe gentle, don't pull too hard and relax into the stretch when you've reached your limit.\nWhen finished extend your legs straight in front of you and bounce your knees and rotate your hips to relax the muscles.";           //
+        "staffPoseE" = "Staff Pose";
+        "archerE" = "Archer";
+        "forwardBendE" = "Forward Bend";
+        "vForwardBendE" = "Wide Legged Forward Bend";
+        "halfVForwardPoseE" = "One Legged Forward Bend";
+        "halfVSideBendE" = "One Legged Side Bend";
+        "marichi1E" = "Marichi's Pose I";
+        "marichi3E" = "Marichi's Pose II";
+        "bharadvajaTwistE" = "Bharadvaja's Twist";
+        "halfLordFishE" = "Half Lord of the Fishes";
+        "frontSplitE" = "Front Split";
+        "sideSplitE" = "Side Split";
+        // Lying
+        "corpseE" = "Corpse";
+        "lyingMountainE" = "Lying Mountain";
+        "fishE" = "Fish";
+        "lyingButterflyE" = "Lying Butterfly";
+        "legRaiseToeE" = "Leg Raise Toe Grab";
+        "threadTheNeedleE" = "Thread the Needle";
+        "shoulderStandE" = "Shoulder Stand";
+        "plowE" = "Plow";
+        "frogE" = "Frog";
+        "cobraE" = "Cobra";
+        "sphinxE" = "Sphinx";
+        "pigeonE" = "Pigeon";
+        "spineRollingE" = "Spine Rolling";
+        // Hand Stands
+        "handstandE" = "Handstand";
+        "headstandE" = "Headstand";
+        "flatHandHandstandE" = "Flat Hand Handstand";
+        "forearmStandE" = "Forearm Stand";
+
+
+
 
 
 
@@ -705,15 +887,15 @@
         // case10
         "language" = "Language";
         // case11
-        "clearPreferences" = "Clear Preferences";
+        "resetApp" = "Reset App";
 
         // Colour Alert //
         "colourTitle" = "App Colour Change";
-        "colourMessage" = "\nTo register the colour change, it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone and swipe the Mind & Body app upwards to quit it.";
+        "colourMessage" = "\nTo register the colour change it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone and swipe the Mind & Body app upwards to quit it.";
 
         // Reset Alert //
         "resetTitle" = "User Defaults Reset";
-        "resetMessage" = "\nTo register the resetting of the defaults, it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone and swipe the Mind & Body  app upwards to quit it.";
+        "resetMessage" = "\nTo register the resetting of the defaults it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone and swipe the Mind & Body  app upwards to quit it.";
 
     //
     // Emphasis Selection //
@@ -761,7 +943,7 @@
 //
 //
     // Section Array //
-    "" = "";
+    "important" = "Important";
     "app" = "App";
     "music" = "Music";
 
@@ -778,6 +960,8 @@
         "usage" = "Usage";
 
         //
+        "role" = "Role";
+        "suggestions" = "Suggestions";
 
     //
     // Title //

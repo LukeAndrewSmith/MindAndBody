@@ -77,7 +77,8 @@ class CalendarScreen: UITableViewController {
         
         checkMark.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
-        self.navigationController?.navigationBar.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        self.navigationController?.navigationBar.tintColor = .white
      
         
         self.navigationController?.navigationBar.barTintColor = colour1
@@ -85,8 +86,7 @@ class CalendarScreen: UITableViewController {
         
         
         // Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 22)!]
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 22)!]
         
         
     

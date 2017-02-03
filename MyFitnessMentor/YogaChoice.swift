@@ -39,6 +39,17 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
     
+    // Constraints
+    @IBOutlet weak var practicesTop: NSLayoutConstraint!
+    
+    @IBOutlet weak var practicesBottom: NSLayoutConstraint!
+    
+    @IBOutlet weak var stackBottom: NSLayoutConstraint!
+    
+    
+    
+    
+    
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
@@ -173,6 +184,19 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         
         self.informationViewYogaC.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextYogaC.frame.size.height + informationTitleYogaC.frame.size.height + 20)
         
+        
+        // Iphone 5/SE
+        
+        if UIScreen.main.nativeBounds.height < 1334 {
+            
+            practicesTop.constant = 52
+            practicesBottom.constant = 52
+            stackBottom.constant = 52
+        
+            stackView.spacing = 15
+            
+        }
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -180,12 +204,24 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         
         guided.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         guided.layer.masksToBounds = true
+        guided.titleLabel?.adjustsFontSizeToFitWidth = true
+        guided.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        guided.titleLabel?.numberOfLines = 0
+        guided.titleLabel?.textAlignment = .center
         
         custom.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         custom.layer.masksToBounds = true
+        custom.titleLabel?.adjustsFontSizeToFitWidth = true
+        custom.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        custom.titleLabel?.numberOfLines = 0
+        custom.titleLabel?.textAlignment = .center
         
         practices.layer.cornerRadius = (self.stackView.frame.size.height * 3/2) / 2
         practices.layer.masksToBounds = true
+        practices.titleLabel?.adjustsFontSizeToFitWidth = true
+        practices.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        practices.titleLabel?.numberOfLines = 0
+        practices.titleLabel?.textAlignment = .center
         
         
         

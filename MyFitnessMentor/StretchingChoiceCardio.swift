@@ -58,8 +58,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
     let emptyArray =
         [
             // Recommended
-            [0,
-             0],
+            [0],
             // Joint Rotations
             [0,
              0,
@@ -141,8 +140,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
         [
             [
                 // Recommended
-                [0,
-                 0],
+                [0],
                 // Joint Rotations
                 [0,
                  0,
@@ -221,8 +219,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
             ],
             [
                 // Recommended
-                [0,
-                 0],
+                [0],
                 // Joint Rotations
                 [0,
                  0,
@@ -301,8 +298,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
             ],
             [
                 // Recommended
-                [0,
-                 0],
+                [0],
                 // Joint Rotations
                 [0,
                  0,
@@ -387,8 +383,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
     var stretchingArray =
         [
             // Recommended
-            ["5minCardioL",
-             "5minCardioI"],
+            ["5minCardioL"],
             // Joint Rotations
             ["wrist",
              "elbow",
@@ -463,7 +458,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
              "twoLegHamstring"],
             // Quads
             ["lungeStretchWall",
-             "lyingQuadStretch"]
+             "QuadStretch"]
     ]
     
     
@@ -471,8 +466,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
     var stretchingSelectedArray =
         [
             // Recommended
-            [1,
-             0],
+            [1],
             // Joint Rotations
             [0,
              0,
@@ -1006,8 +1000,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
             stretchingSelectedArray =
                 [
                     // Recommended
-                    [1,
-                     0],
+                    [1],
                     // Joint Rotations
                     [0,
                      0,
@@ -1092,8 +1085,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
             stretchingSelectedArray =
                 [
                     // Recommended
-                    [1,
-                     0],
+                    [1],
                     // Joint Rotations
                     [0,
                      0,
@@ -1178,8 +1170,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
             stretchingSelectedArray =
                 [
                     // Recommended
-                    [1,
-                     0],
+                    [1],
                     // Joint Rotations
                     [0,
                      0,
@@ -1264,8 +1255,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
             stretchingSelectedArray =
                 [
                     // Recommended
-                    [1,
-                     0],
+                    [1],
                     // Joint Rotations
                     [0,
                      0,
@@ -1350,8 +1340,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
             stretchingSelectedArray =
                 [
                     // Recommended
-                    [1,
-                     0],
+                    [1],
                     // Joint Rotations
                     [0,
                      0,
@@ -1436,8 +1425,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
             stretchingSelectedArray =
                 [
                     // Recommended
-                    [1,
-                     0],
+                    [1],
                     // Joint Rotations
                     [0,
                      0,
@@ -1522,8 +1510,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
             stretchingSelectedArray =
                 [
                     // Recommended
-                    [1,
-                     0],
+                    [1],
                     // Joint Rotations
                     [0,
                      0,
@@ -1668,9 +1655,9 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
         
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
-        header.textLabel?.textColor = .black
-        header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        header.contentView.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        header.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        header.contentView.backgroundColor = colour1
+        //
         
         
         
@@ -1690,11 +1677,13 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
         
         cell.textLabel?.text = NSLocalizedString(stretchingArray[indexPath.section][indexPath.row], comment: "")
         
-        cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
         cell.textLabel?.textAlignment = .left
-        cell.backgroundColor = .clear
+        cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        cell.textLabel?.textColor = .black
         cell.tintColor = .black
+        //
         
         
         if stretchingSelectedArray[indexPath.section][indexPath.row] == 1 {
@@ -1711,6 +1700,12 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
             cell.isUserInteractionEnabled = false
         }
         
+        
+        // Cell Image
+        cell.imageView?.image = #imageLiteral(resourceName: "Test")
+        
+        
+        
         return cell
         
         
@@ -1721,7 +1716,7 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 47
+        return 72
         
     }
     

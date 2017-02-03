@@ -43,6 +43,20 @@ class StretchingChoice: UIViewController  {
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
     
+    // Constraints
+    @IBOutlet weak var generalTop: NSLayoutConstraint!
+    
+    @IBOutlet weak var generalBottom: NSLayoutConstraint!
+    
+    @IBOutlet weak var stackBottom: NSLayoutConstraint!
+    
+    @IBOutlet weak var connectionWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var connectionTrailing: NSLayoutConstraint!
+    
+    
+    
+    
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
@@ -164,6 +178,23 @@ class StretchingChoice: UIViewController  {
         
         self.informationViewStretchingC.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextStretchingC.frame.size.height + informationTitleStretchingC.frame.size.height + 20)
         
+        
+        
+        // Iphone 5/SE
+        
+        if UIScreen.main.nativeBounds.height < 1334 {
+            
+            generalTop.constant = 52
+            generalBottom.constant = 52
+            stackBottom.constant = 52
+            
+            
+            stackView.spacing = 15
+            connectionWidth.constant = 15
+            connectionTrailing.constant = 15
+            
+            
+        }
     }
     
     // Layout Subviews
@@ -172,12 +203,27 @@ class StretchingChoice: UIViewController  {
         
         general.layer.cornerRadius = ((self.stackView.frame.size.height) * 3/2) / 2
         general.layer.masksToBounds = true
+        general.titleLabel?.adjustsFontSizeToFitWidth = true
+        general.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        general.titleLabel?.numberOfLines = 0
+        general.titleLabel?.textAlignment = .center
         
         postWorkout.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         postWorkout.layer.masksToBounds = true
+        postWorkout.titleLabel?.adjustsFontSizeToFitWidth = true
+        postWorkout.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        postWorkout.titleLabel?.numberOfLines = 0
+        postWorkout.titleLabel?.textAlignment = .center
+
         
         postCardio.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         postCardio.layer.masksToBounds = true
+        postCardio.titleLabel?.adjustsFontSizeToFitWidth = true
+        postCardio.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        postCardio.titleLabel?.numberOfLines = 0
+        postCardio.titleLabel?.textAlignment = .center
+
+
         
     }
 

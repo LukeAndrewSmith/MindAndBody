@@ -38,8 +38,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
     var setsArrayF =
         [
             // Recommended
-            [1,
-             1],
+            [1],
             // Joint Rotations
             [1,
              1,
@@ -121,8 +120,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
     var repsArrayF =
         [
             // Recommended
-            ["1",
-             "1"],
+            ["1"],
             // Joint Rotations
             ["10-30s",
              "10-30s",
@@ -207,8 +205,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
     var targetAreaArrayF =
         [
             // Mandatory
-            [#imageLiteral(resourceName: "Heart"),
-             #imageLiteral(resourceName: "Heart")],
+            [#imageLiteral(resourceName: "Heart")],
             // Joint Rotations
             [#imageLiteral(resourceName: "Wrist Joint"),
              #imageLiteral(resourceName: "Elbow Joint"),
@@ -291,8 +288,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
     var explanationArrayF =
         [
             // Recommended
-            ["5minCardioLE",
-             "5minCardioIE"],
+            ["5minCardioLCE"],
             // Joint Rotations
             ["wristE",
              "elbowE",
@@ -367,7 +363,7 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
              "twoLegHamstringE"],
             // Quads
             ["lungeStretchWallE",
-             "lyingQuadStretchE"]
+             "QuadStretchE"]
     ]
     var explanationArray: [String] = []
     

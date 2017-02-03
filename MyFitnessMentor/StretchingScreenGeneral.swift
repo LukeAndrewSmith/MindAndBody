@@ -368,7 +368,7 @@ class StretchingScreenGeneral: UIViewController, UIScrollViewDelegate, UIPickerV
              "twoLegHamstringE"],
             // Quads
             ["lungeStretchWallE",
-             "lyingQuadStretchE"]
+             "QuadStretchE"]
     ]
     var explanationArray: [String] = []
     

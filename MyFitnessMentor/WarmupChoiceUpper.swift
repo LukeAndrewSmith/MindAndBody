@@ -45,6 +45,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    let colour3 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour4 = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
     
     
     // Add Preset
@@ -403,7 +405,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         addPreset.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        addPreset.tintColor = colour2
+        //addPreset.tintColor = colour2
+        addPreset.tintColor = colour3
         
         
         
@@ -414,7 +417,8 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
         removePreset.setImage(tintedImage2, for: .normal)
         
         //Image Tint
-        removePreset.tintColor = colour2
+        //removePreset.tintColor = colour2
+        removePreset.tintColor = colour3
         
         
         
@@ -1158,11 +1162,10 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
       
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
-        header.textLabel?.textColor = .black
-        header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        header.contentView.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        
-        
+        header.textLabel?.textColor = colour3
+        header.contentView.backgroundColor = colour1
+        header.contentView.tintColor = colour1
+        //
         
     }
     
@@ -1180,11 +1183,13 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             
         cell.textLabel?.text = NSLocalizedString(warmupUpperArray[indexPath.section][indexPath.row], comment: "")
         
-        cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
         cell.textLabel?.textAlignment = .left
-        cell.backgroundColor = .clear
+        cell.backgroundColor = colour3
+        cell.textLabel?.textColor = .black
         cell.tintColor = .black
+        //
         
         
         if warmupSelectedArray[indexPath.section][indexPath.row] == 1 {
@@ -1201,9 +1206,15 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.isUserInteractionEnabled = false
         }
         
+
+        
+        // Cell Image
+        cell.imageView?.image = #imageLiteral(resourceName: "Test")
+        
+
         return cell
 
-            
+        
     }
     
     
@@ -1211,7 +1222,7 @@ class WarmupChoiceUpper: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 47
+        return 72
         
     }
     

@@ -108,9 +108,17 @@ class WorkoutChoice: UIViewController  {
         
         gym.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
         gym.layer.masksToBounds = true
+        gym.titleLabel?.adjustsFontSizeToFitWidth = true
+        gym.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        gym.titleLabel?.numberOfLines = 0
+        gym.titleLabel?.textAlignment = .center
         
         home.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
         home.layer.masksToBounds = true
+        home.titleLabel?.adjustsFontSizeToFitWidth = true
+        home.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        home.titleLabel?.numberOfLines = 0
+        home.titleLabel?.textAlignment = .center
 
     }
     

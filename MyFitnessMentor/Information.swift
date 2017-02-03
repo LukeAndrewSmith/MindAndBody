@@ -18,14 +18,14 @@ class Information: UITableViewController{
     // Arrays
     
     let sectionArray =
-        ["Noice", "app", "music"]
+        ["important", "app", "music"]
     
     
     let rowArray =
         [
             ["breathing", "coreActivation", "posture", "commonTerms", "trainingPhilosophy"],
             ["vision", "usage"],
-            ["noice"]
+            ["role", "suggestions"]
     
         ]
 
@@ -120,6 +120,8 @@ class Information: UITableViewController{
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
             cell.textLabel?.textAlignment = .left
+        
+            cell.accessoryType = .disclosureIndicator
 
             return cell
        

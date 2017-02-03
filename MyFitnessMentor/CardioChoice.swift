@@ -87,9 +87,17 @@ class CardioChoice: UIViewController  {
         
         hiit.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
         hiit.layer.masksToBounds = true
+        hiit.titleLabel?.adjustsFontSizeToFitWidth = true
+        hiit.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        hiit.titleLabel?.numberOfLines = 0
+        hiit.titleLabel?.textAlignment = .center
         
         liss.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
         liss.layer.masksToBounds = true
+        liss.titleLabel?.adjustsFontSizeToFitWidth = true
+        liss.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        liss.titleLabel?.numberOfLines = 0
+        liss.titleLabel?.textAlignment = .center
 
     }
     
