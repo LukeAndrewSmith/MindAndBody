@@ -653,8 +653,8 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
         
         // Rounded Edges
-        progressBar.layer.cornerRadius = self.progressBar.frame.size.height
-        progressBar.clipsToBounds = true
+        progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
+        progressBar.layer.masksToBounds = true
         
         // Initial state
         progressBar.setProgress(0, animated: true)
@@ -728,10 +728,10 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         let setButton = UIButton()
         let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
         setButton.addConstraints([widthHeight])
-        setButton.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
-        setButton.layer.borderWidth = 10
+        setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
+        setButton.layer.borderWidth = 4
         setButton.layer.borderColor = colour1.cgColor
-        setButton.layer.cornerRadius = 24.5
+        setButton.layer.cornerRadius = 21.4375
         setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
         setButton.backgroundColor = colour3
         setButton.isEnabled = false
@@ -761,7 +761,7 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         if setsArray[warmupScreenIndex] == 1 {
             
             let stackView = UIStackView(arrangedSubviews: buttonArray)
-            stackView.frame = CGRect(x: (self.view.frame.size.width / 2) - 24.5, y: 12.25, width: 49, height: 49)
+            stackView.frame = CGRect(x: (self.view.frame.size.width / 2) - 24.5, y: 9.1875, width: 42.875, height: 42.875)
             stackView.axis = .horizontal
             stackView.distribution = .equalSpacing
             
@@ -773,7 +773,7 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         } else if setsArray[warmupScreenIndex] == 2 {
             
             let stackView = UIStackView(arrangedSubviews: buttonArray)
-            stackView.frame = CGRect(x: ((self.view.frame.size.width - 98) / 3), y: 12.25, width: ((self.view.frame.size.width - 98) / 3) + 98, height: 49)
+            stackView.frame = CGRect(x: ((self.view.frame.size.width - 85.75) / 3), y: 9.1875, width: ((self.view.frame.size.width - 85.75) / 3) + 85.75, height: 42.875)
             stackView.axis = .horizontal
             stackView.distribution = .equalSpacing
             
@@ -785,7 +785,7 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         } else if setsArray[warmupScreenIndex] == 3 {
             
             let stackView = UIStackView(arrangedSubviews: buttonArray)
-            stackView.frame = CGRect(x: ((self.view.frame.size.width - 147) / 4), y: 12.25, width: ((2 * (self.view.frame.size.width - 147)) / 4) + 147, height: 49)
+            stackView.frame = CGRect(x: ((self.view.frame.size.width - 128.625) / 4), y: 9.1875, width: ((2 * (self.view.frame.size.width - 128.625)) / 4) + 128.625, height: 42.875)
             stackView.axis = .horizontal
             stackView.distribution = .equalSpacing
             
@@ -1335,6 +1335,11 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     let bodyImageExpanded = UIImageView()
     let demonstrationImageExpanded = UIImageView()
     
+    let targetButton = UIButton()
+    let demonstrationButton = UIButton()
+
+
+    
     @IBAction func expandImage(_ sender: Any) {
         
         //Screen Size
@@ -1345,7 +1350,7 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         // View
         //
-        imageViewExpanded.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: (view.frame.size.height * (2/3) + 24.5))
+        imageViewExpanded.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: (view.frame.size.height * (2/3) + 36.75))
         imageViewExpanded.center.x = width/2
         imageViewExpanded.center.y = height/2
         imageViewExpanded.isUserInteractionEnabled = true
@@ -1389,12 +1394,13 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         
+        
+        
         // Demonstration or Body Image
         //
         // Demonstration
-        let demonstrationButton = UIButton()
         demonstrationButton.isEnabled = true
-        demonstrationButton.frame = CGRect(x: 0, y: 0, width: imageViewExpanded.frame.size.width/2, height: 24.5)
+        demonstrationButton.frame = CGRect(x: 0, y: 0, width: imageViewExpanded.frame.size.width/2, height: 36.75)
         demonstrationButton.setTitle(NSLocalizedString("demonstration", comment: ""), for: .normal)
         demonstrationButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
         demonstrationButton.addTarget(self, action: #selector(demonstrationImageButton(_:)), for: .touchUpInside)
@@ -1405,14 +1411,10 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         demonstrationButton.backgroundColor = .white
         demonstrationButton.setTitleColor(colour2, for: .normal)
         
-        
-        
-        
         // Target
-        let targetButton = UIButton()
-        targetButton.frame = CGRect(x: imageViewExpanded.frame.size.width/2, y: 0, width: imageViewExpanded.frame.size.width/2, height: 24.5)
+        targetButton.frame = CGRect(x: imageViewExpanded.frame.size.width/2, y: 0, width: imageViewExpanded.frame.size.width/2, height: 36.75)
         
-    targetButton.setTitle(NSLocalizedString("targetArea", comment: ""), for: .normal)
+        targetButton.setTitle(NSLocalizedString("targetArea", comment: ""), for: .normal)
         targetButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
         targetButton.addTarget(self, action: #selector(bodyImageButton(_:)), for: .touchUpInside)
         
@@ -1422,9 +1424,13 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         imageViewExpanded.addSubview(targetButton)
         
         
+        
+        
+        
+        
         // Seperator
         let seperator = UILabel()
-        seperator.frame = CGRect(x: 0, y: 0, width: 1, height: 24.5)
+        seperator.frame = CGRect(x: 0, y: 0, width: 1, height: 36.75)
         seperator.center.x = imageViewExpanded.center.x
         seperator.backgroundColor = colour4
         
@@ -1435,7 +1441,7 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         // View Contents
         //
         // Body Image
-        bodyImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5)
+        bodyImageExpanded.frame = CGRect(x: 0, y: 36.75, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 36.75)
         bodyImageExpanded.image = targetAreaArray[warmupScreenIndex]
         
         imageViewExpanded.addSubview(bodyImageExpanded)
@@ -1443,7 +1449,7 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         // Demonstration Image
-        demonstrationImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5)
+        demonstrationImageExpanded.frame = CGRect(x: 0, y: 36.75, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 36.75)
         demonstrationImageExpanded.backgroundColor = colour4
         
         
@@ -1452,6 +1458,12 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         imageViewExpanded.addSubview(demonstrationImageExpanded)
         
         
+        
+        // Order
+        imageViewExpanded.bringSubview(toFront: demonstrationImageExpanded)
+        demonstrationImageExpanded.alpha = 1
+        bodyImageExpanded.alpha = 0
+        demonstrationButton.backgroundColor = colour3
         
         
         
@@ -1479,6 +1491,9 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         demonstrationImageExpanded.alpha = 1
         bodyImageExpanded.alpha = 0
         
+        demonstrationButton.backgroundColor = colour3
+        targetButton.backgroundColor = .white
+        
     }
     
     @IBAction func bodyImageButton(_ sender: Any) {
@@ -1487,10 +1502,14 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         bodyImageExpanded.alpha = 1
         demonstrationImageExpanded.alpha = 0
         
+        targetButton.backgroundColor = colour3
+        demonstrationButton.backgroundColor = .white
     }
     
     
     @IBAction func retractImage(_ sender: Any) {
+        
+        imageViewExpanded.bringSubview(toFront: demonstrationImageExpanded)
         
         imageViewExpanded.removeFromSuperview()
         backgroundViewExpanded.removeFromSuperview()

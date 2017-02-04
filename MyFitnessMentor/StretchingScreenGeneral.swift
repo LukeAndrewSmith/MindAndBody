@@ -795,10 +795,10 @@ class StretchingScreenGeneral: UIViewController, UIScrollViewDelegate, UIPickerV
         let setButton = UIButton()
         let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
         setButton.addConstraints([widthHeight])
-        setButton.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
-        setButton.layer.borderWidth = 10
+        setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
+        setButton.layer.borderWidth = 4
         setButton.layer.borderColor = colour1.cgColor
-        setButton.layer.cornerRadius = 24.5
+        setButton.layer.cornerRadius = 21.4375
         setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
         setButton.backgroundColor = colour3
         setButton.isEnabled = false
@@ -828,7 +828,7 @@ class StretchingScreenGeneral: UIViewController, UIScrollViewDelegate, UIPickerV
         if setsArray[stretchingScreenIndex] == 1 {
             
             let stackView = UIStackView(arrangedSubviews: buttonArray)
-            stackView.frame = CGRect(x: (self.view.frame.size.width / 2) - 24.5, y: 12.25, width: 49, height: 49)
+            stackView.frame = CGRect(x: (self.view.frame.size.width / 2) - 24.5, y: 9.1875, width: 42.875, height: 42.875)
             stackView.axis = .horizontal
             stackView.distribution = .equalSpacing
             
@@ -840,7 +840,7 @@ class StretchingScreenGeneral: UIViewController, UIScrollViewDelegate, UIPickerV
         } else if setsArray[stretchingScreenIndex] == 2 {
             
             let stackView = UIStackView(arrangedSubviews: buttonArray)
-            stackView.frame = CGRect(x: ((self.view.frame.size.width - 98) / 3), y: 12.25, width: ((self.view.frame.size.width - 98) / 3) + 98, height: 49)
+            stackView.frame = CGRect(x: ((self.view.frame.size.width - 85.75) / 3), y: 9.1875, width: ((self.view.frame.size.width - 85.75) / 3) + 85.75, height: 42.875)
             stackView.axis = .horizontal
             stackView.distribution = .equalSpacing
             
@@ -852,7 +852,7 @@ class StretchingScreenGeneral: UIViewController, UIScrollViewDelegate, UIPickerV
         } else if setsArray[stretchingScreenIndex] == 3 {
             
             let stackView = UIStackView(arrangedSubviews: buttonArray)
-            stackView.frame = CGRect(x: ((self.view.frame.size.width - 147) / 4), y: 12.25, width: ((2 * (self.view.frame.size.width - 147)) / 4) + 147, height: 49)
+            stackView.frame = CGRect(x: ((self.view.frame.size.width - 128.625) / 4), y: 9.1875, width: ((2 * (self.view.frame.size.width - 128.625)) / 4) + 128.625, height: 42.875)
             stackView.axis = .horizontal
             stackView.distribution = .equalSpacing
             
@@ -884,7 +884,7 @@ class StretchingScreenGeneral: UIViewController, UIScrollViewDelegate, UIPickerV
         navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
         navigationTitle.center.x = self.view.center.x
         navigationTitle.textColor = colour1
-        navigationTitle.font = UIFont(name: "SFUIDisplay-heavy", size: 23)
+        navigationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 22)
         navigationTitle.backgroundColor = .clear
         navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
