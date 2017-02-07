@@ -161,7 +161,10 @@ class Settings: UITableViewController{
                 
                 // Gradient Label
                 gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
+                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
+                if UIScreen.main.nativeBounds.height < 1334 {
+                    gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
+                }
                 gradientLabel.center.y = cell.center.y
                 gradientLabel.applyGradient(colours: [colourSets[0][0], colourSets[0][1]])
                 
@@ -185,7 +188,10 @@ class Settings: UITableViewController{
 
                 // Gradient Label
                 gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
+                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
+                if UIScreen.main.nativeBounds.height < 1334 {
+                    gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
+                }
                 gradientLabel.center.y = cell.center.y
                 gradientLabel.applyGradient(colours: [colourSets[1][0], colourSets[1][1]])
                 
@@ -207,7 +213,10 @@ class Settings: UITableViewController{
 
                 // Gradient Label
                 gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
+                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
+                if UIScreen.main.nativeBounds.height < 1334 {
+                    gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
+                }
                 gradientLabel.center.y = cell.center.y
                 gradientLabel.applyGradient(colours: [colourSets[2][0], colourSets[2][1]])
                 
@@ -230,7 +239,10 @@ class Settings: UITableViewController{
 
                 // Gradient Label
                 gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 20, height: cell.frame.size.height/2)
+                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
+                if UIScreen.main.nativeBounds.height < 1334 {
+                    gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
+                }
                 gradientLabel.center.y = cell.center.y
                 gradientLabel.applyGradient(colours: [colourSets[3][0], colourSets[3][1]])
                 

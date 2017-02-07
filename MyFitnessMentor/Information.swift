@@ -29,7 +29,7 @@ class Information: UITableViewController{
     
     let rowArray =
         [
-            ["breathing", "coreActivation", "posture", "commonTerms", "trainingPhilosophy"],
+            ["breathing", "coreActivation", "equipment", "posture", "commonTerms", "trainingPhilosophy", "nutrition"],
             ["vision", "usage"],
             ["role", "suggestions"]
     
@@ -50,6 +50,11 @@ class Information: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Walkthrough
+        walkthroughMindBody()
+        
+        
+        //
         self.navigationController?.navigationBar.barTintColor = colour1
         self.navigationController?.navigationBar.tintColor = .white
         
@@ -140,6 +145,93 @@ class Information: UITableViewController{
 
     }
 
+
+//---------------------------------------------------------------------------------------------------------------
+    
+    
+    var  viewNumber = 0
+    let walkthroughView = UIView()
+    let label = UILabel()
+    let nextButton = UIButton()
+    let backButton = UIButton()
+    
+    
+    // Walkthrough
+    func walkthroughMindBody() {
+        
+        //
+        let screenSize = UIScreen.main.bounds
+        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+        let tabBarHeight = self.tabBarController?.tabBar.frame.size.height
+        //
+        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+        walkthroughView.backgroundColor = .black
+        walkthroughView.alpha = 0.72
+        walkthroughView.clipsToBounds = true
+        //
+        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
+        label.center = view.center
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        label.textColor = .white
+        //
+        nextButton.frame = screenSize
+        nextButton.backgroundColor = .clear
+        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
+        //
+        
+        
+        switch viewNumber {
+        case 0:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height, width: view.frame.size.width, height: 47))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("information1", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            
+            
+            
+        //
+        default: break
+            
+            
+        }
+        
+        
+    }
+    
+    
+    
+    func nextWalkthroughView(_ sender: Any) {
+        walkthroughView.removeFromSuperview()
+        viewNumber = viewNumber + 1
+        walkthroughMindBody()
+    }
 
 
 }

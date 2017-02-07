@@ -58,6 +58,11 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Walkthrough
+        let delayInSeconds = 0.5
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            self.walkthroughMindBody()
+        }
         // Colours
         self.view.applyGradient(colours: [colour1, colour2])
         questionMark.tintColor = colour1
@@ -75,20 +80,32 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         guided.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         guided.layer.borderWidth = 10
         guided.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        guided.titleLabel?.adjustsFontSizeToFitWidth = true
+        guided.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        guided.titleLabel?.textAlignment = .center
+        
+        
+        
         
         custom.setTitle(NSLocalizedString("custom", comment: ""), for: UIControlState.normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         custom.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         custom.layer.borderWidth = 10
         custom.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        custom.titleLabel?.adjustsFontSizeToFitWidth = true
+        custom.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        custom.titleLabel?.textAlignment = .center
         
 
-        
+    
         practices.setTitle(NSLocalizedString("practices", comment: ""), for: UIControlState.normal)
         practices.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         practices.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         practices.layer.borderWidth = 10
         practices.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        practices.titleLabel?.adjustsFontSizeToFitWidth = true
+        practices.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        practices.titleLabel?.textAlignment = .center
         //
         
         
@@ -301,4 +318,93 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         navigationItem.backBarButtonItem = backItem
     }
     
+    
+    //---------------------------------------------------------------------------------------------------------------
+    
+    
+    var  viewNumber = 0
+    let walkthroughView = UIView()
+    let label = UILabel()
+    let nextButton = UIButton()
+    let backButton = UIButton()
+    
+    
+    // Walkthrough
+    func walkthroughMindBody() {
+        
+        //
+        let screenSize = UIScreen.main.bounds
+        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+        let tabBarHeight = self.tabBarController?.tabBar.frame.size.height
+        //
+        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+        walkthroughView.backgroundColor = .black
+        walkthroughView.alpha = 0.72
+        walkthroughView.clipsToBounds = true
+        //
+        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
+        label.center = view.center
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        label.textColor = .white
+        //
+        nextButton.frame = screenSize
+        nextButton.backgroundColor = .clear
+        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
+        //
+        
+        
+        switch viewNumber {
+        case 0:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: view.frame.size.width - 31, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("choiceScreen1", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            
+            
+            
+        //
+        default: break
+            
+            
+        }
+        
+        
+    }
+    
+    
+    
+    func nextWalkthroughView(_ sender: Any) {
+        walkthroughView.removeFromSuperview()
+        viewNumber = viewNumber + 1
+        walkthroughMindBody()
+    }
+    
+
 }

@@ -258,6 +258,11 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
     // Progress Label
     @IBOutlet weak var progressLabel: UILabel!
     
+    // Constraints
+    @IBOutlet weak var breathTop: NSLayoutConstraint!
+    @IBOutlet weak var imageTop: NSLayoutConstraint!
+    @IBOutlet weak var imageBottom: NSLayoutConstraint!
+    @IBOutlet weak var explanationBottom: NSLayoutConstraint!
     
     
     // Colours
@@ -282,6 +287,16 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Iphone 5/SE layout
+        //
+        if UIScreen.main.nativeBounds.height < 1334 {
+            breathTop.constant = 6.125
+            imageTop.constant = 36.75
+            imageBottom.constant = 36.75
+            explanationBottom.constant = 36.75
+        }
+        
         
         
         // Background Gradient
@@ -328,7 +343,7 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
         
         // Rounded Edges
-        progressBar.layer.cornerRadius = self.progressBar.frame.size.height
+        progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
         progressBar.clipsToBounds = true
         
         // Initial state
@@ -371,7 +386,7 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
         navigationTitle.center.x = self.view.center.x
         navigationTitle.textColor = colour1
-        navigationTitle.font = UIFont(name: "SFUIDisplay-heavy", size: 23)
+        navigationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 22)
         navigationTitle.backgroundColor = .clear
         navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
@@ -559,23 +574,23 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         
         // Cancel Button
         //
-        cancelButtonExplanationE.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
+        cancelButtonExplanationE.frame = CGRect(x: 0, y: 0, width: 36.75, height: 36.75)
         cancelButtonExplanationE.center.y = scrollViewExplanationE.frame.minY/2
         cancelButtonExplanationE.center.x = scrollViewExplanationE.frame.maxX - (scrollViewExplanationE.frame.minY/2)
         
         cancelButtonExplanationE.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
-        cancelButtonExplanationE.layer.cornerRadius = 24.5
+        cancelButtonExplanationE.layer.cornerRadius = 18.375
         cancelButtonExplanationE.layer.masksToBounds = true
         
         
-        cancelButtonExplanationE.backgroundColor = colour2
+        cancelButtonExplanationE.backgroundColor = colour3
         
         let origImage = UIImage(named: "Minus")
         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         cancelButtonExplanationE.setImage(tintedImage, for: .normal)
         //Image Tint
-        cancelButtonExplanationE.tintColor = colour1
+        cancelButtonExplanationE.tintColor = colour4
         
         
         

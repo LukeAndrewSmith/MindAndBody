@@ -75,7 +75,7 @@ class CalendarScreen: UITableViewController {
         
         self.tableView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
-        checkMark.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        checkMark.tintColor = .white
         
         
         self.navigationController?.navigationBar.tintColor = .white

@@ -430,6 +430,13 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     
     
+    // Constraints
+    @IBOutlet weak var setTop: NSLayoutConstraint!
+    @IBOutlet weak var setBottom: NSLayoutConstraint!
+    @IBOutlet weak var imageBottom: NSLayoutConstraint!
+    @IBOutlet weak var explanationBottom: NSLayoutConstraint!
+    
+    
     
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
@@ -445,6 +452,20 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Iphone 5/SE layout
+        //
+        if UIScreen.main.nativeBounds.height < 1334 {
+           
+            setTop.constant = 36.75
+            setBottom.constant = 36.75
+            imageBottom.constant = 36.75
+            explanationBottom.constant = 36.75
+        }
+        
+        
+        
+        
         
         
         // Create Arrays
@@ -1183,7 +1204,7 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     //
     
     
-    
+    var buttonNumber = 0
     
     // Set Button
     @IBAction func setButtonAction(sender: UIButton) {
@@ -1205,30 +1226,18 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
             
             
-        } else {
-            // Fallback on earlier versions
         }
         
         
+        buttonArray[buttonNumber].isEnabled = false
         
-        if setsArray[warmupScreenIndex] == 1 {
+        let delayInSeconds = 30.0
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             
-            
-        } else if setsArray[warmupScreenIndex] == 2 {
-            
-            buttonArray[1].isEnabled = true
-            
-        } else if setsArray[warmupScreenIndex] == 3 {
-            
-            if buttonArray[1].isEnabled == false {
-                
-                buttonArray[1].isEnabled = true
-                
-            } else if buttonArray[0].isEnabled == false {
-                buttonArray[2].isEnabled = true
+            if self.buttonNumber < 2 {
+                self.buttonNumber = self.buttonNumber + 1
+                self.buttonArray[self.buttonNumber].isEnabled = true
             }
-            
-            
         }
         
         sender.backgroundColor = colour2
@@ -1419,11 +1428,9 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         targetButton.addTarget(self, action: #selector(bodyImageButton(_:)), for: .touchUpInside)
         
         targetButton.backgroundColor = .white
-        targetButton.setTitleColor(colour1, for: .normal)
+        targetButton.setTitleColor(colour2, for: .normal)
         
         imageViewExpanded.addSubview(targetButton)
-        
-        
         
         
         
@@ -1435,6 +1442,21 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         seperator.backgroundColor = colour4
         
         imageViewExpanded.addSubview(seperator)
+        
+        
+        
+        
+        // Order
+        imageViewExpanded.bringSubview(toFront: demonstrationImageExpanded)
+        demonstrationImageExpanded.alpha = 1
+        bodyImageExpanded.alpha = 0
+        demonstrationButton.backgroundColor = colour3
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1457,13 +1479,6 @@ class WarmupScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         imageViewExpanded.addSubview(demonstrationImageExpanded)
         
-        
-        
-        // Order
-        imageViewExpanded.bringSubview(toFront: demonstrationImageExpanded)
-        demonstrationImageExpanded.alpha = 1
-        bodyImageExpanded.alpha = 0
-        demonstrationButton.backgroundColor = colour3
         
         
         

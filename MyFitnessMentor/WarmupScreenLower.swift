@@ -223,8 +223,8 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             "butterflyPoseE",
             "cossakSquatE",
             "hipHingesE",
-            "sideKicksE",
-            "frontKicksE",
+            "sideLegSwingsE",
+            "frontLegSwingsE",
             "jumpSquatE",
             "lungeE",],
             // Accessory
@@ -358,6 +358,15 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     @IBOutlet weak var progressLabel: UILabel!
     
     
+    // Constraints
+    @IBOutlet weak var setTop: NSLayoutConstraint!
+    @IBOutlet weak var setBottom: NSLayoutConstraint!
+    @IBOutlet weak var imageBottom: NSLayoutConstraint!
+    @IBOutlet weak var explanationBottom: NSLayoutConstraint!
+    
+    
+    
+    
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
@@ -372,6 +381,17 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Iphone 5/SE layout
+        //
+        if UIScreen.main.nativeBounds.height < 1334 {
+            
+            setTop.constant = 36.75
+            setBottom.constant = 36.75
+            imageBottom.constant = 36.75
+            explanationBottom.constant = 36.75
+        }
+        
         
         
         // Create Arrays
@@ -581,7 +601,7 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
         
         // Rounded Edges
-        progressBar.layer.cornerRadius = self.progressBar.frame.size.height
+        progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
         progressBar.clipsToBounds = true
         
         // Initial state
@@ -1108,7 +1128,7 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     //
     
     
-    
+    var buttonNumber = 0
     
     // Set Button
     @IBAction func setButtonAction(sender: UIButton) {
@@ -1130,31 +1150,19 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
             
             
-        } else {
-            // Fallback on earlier versions
         }
         
+        buttonArray[buttonNumber].isEnabled = false
         
-        
-        if setsArray[warmupScreenIndex] == 1 {
+        let delayInSeconds = 30.0
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             
-            
-        } else if setsArray[warmupScreenIndex] == 2 {
-            
-            buttonArray[1].isEnabled = true
-            
-        } else if setsArray[warmupScreenIndex] == 3 {
-            
-            if buttonArray[1].isEnabled == false {
-                
-                buttonArray[1].isEnabled = true
-                
-            } else if buttonArray[0].isEnabled == false {
-                buttonArray[2].isEnabled = true
+            if self.buttonNumber < 2 {
+                self.buttonNumber = self.buttonNumber + 1
+                self.buttonArray[self.buttonNumber].isEnabled = true
             }
-            
-            
         }
+        
         
         sender.backgroundColor = colour2
         sender.isEnabled = false
@@ -1258,7 +1266,9 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     let bodyImageExpanded = UIImageView()
     let demonstrationImageExpanded = UIImageView()
-        
+    
+    let targetButton = UIButton()
+    let demonstrationButton = UIButton()
     
     @IBAction func expandImage(_ sender: Any) {
 
@@ -1293,23 +1303,24 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Cancel Button
         //
-        cancelButtonImage.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
+        cancelButtonImage.frame = CGRect(x: 0, y: 0, width: 36.75, height: 36.75)
         cancelButtonImage.center.y = imageViewExpanded.frame.minY/2
         cancelButtonImage.center.x = imageViewExpanded.frame.maxX - (imageViewExpanded.frame.minY/2)
         
         cancelButtonImage.addTarget(self, action: #selector(retractImage), for: .touchUpInside)
-        cancelButtonImage.layer.cornerRadius = 24.5
+        cancelButtonImage.layer.cornerRadius = 18.375
         cancelButtonImage.layer.masksToBounds = true
         
         
-        cancelButtonImage.backgroundColor = colour2
+        cancelButtonImage.backgroundColor = colour3
         
         let origImage = UIImage(named: "Minus")
         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         cancelButtonImage.setImage(tintedImage, for: .normal)
         //Image Tint
-        cancelButtonImage.tintColor = colour1
+        cancelButtonImage.tintColor = colour4
+        
         
         
         
@@ -1318,9 +1329,8 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         // Demonstration or Body Image
         //
         // Demonstration
-        let demonstrationButton = UIButton()
         demonstrationButton.isEnabled = true
-        demonstrationButton.frame = CGRect(x: 0, y: 0, width: imageViewExpanded.frame.size.width/2, height: 24.5)
+        demonstrationButton.frame = CGRect(x: 0, y: 0, width: imageViewExpanded.frame.size.width/2, height: 36.75)
         demonstrationButton.setTitle(NSLocalizedString("demonstration", comment: ""), for: .normal)
         demonstrationButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
         demonstrationButton.addTarget(self, action: #selector(demonstrationImageButton(_:)), for: .touchUpInside)
@@ -1328,22 +1338,42 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         imageViewExpanded.addSubview(demonstrationButton)
         
         
-        demonstrationButton.backgroundColor = colour1
-        demonstrationButton.titleLabel?.textColor = colour2
+        demonstrationButton.backgroundColor = .white
+        demonstrationButton.setTitleColor(colour2, for: .normal)
         
         // Target
-        let targetButton = UIButton()
-        targetButton.frame = CGRect(x: imageViewExpanded.frame.size.width/2, y: 0, width: imageViewExpanded.frame.size.width/2, height: 24.5)
+        targetButton.frame = CGRect(x: imageViewExpanded.frame.size.width/2, y: 0, width: imageViewExpanded.frame.size.width/2, height: 36.75)
         
         targetButton.setTitle(NSLocalizedString("targetArea", comment: ""), for: .normal)
         targetButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
         targetButton.addTarget(self, action: #selector(bodyImageButton(_:)), for: .touchUpInside)
         
-        targetButton.backgroundColor = colour2
-        targetButton.titleLabel?.textColor = colour1
-        
+        targetButton.backgroundColor = .white
+        targetButton.setTitleColor(colour2, for: .normal)
         
         imageViewExpanded.addSubview(targetButton)
+        
+        
+        
+        
+        // Seperator
+        let seperator = UILabel()
+        seperator.frame = CGRect(x: 0, y: 0, width: 1, height: 36.75)
+        seperator.center.x = imageViewExpanded.center.x
+        seperator.backgroundColor = colour4
+        
+        imageViewExpanded.addSubview(seperator)
+        
+        
+        
+        
+        // Order
+        imageViewExpanded.bringSubview(toFront: demonstrationImageExpanded)
+        demonstrationImageExpanded.alpha = 1
+        bodyImageExpanded.alpha = 0
+        demonstrationButton.backgroundColor = colour3
+        
+        
         
         
         
@@ -1352,7 +1382,7 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         // View Contents
         //
         // Body Image
-        bodyImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5)
+        bodyImageExpanded.frame = CGRect(x: 0, y: 36.75, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 36.75)
         bodyImageExpanded.image = targetAreaArray[warmupScreenIndex]
         
         imageViewExpanded.addSubview(bodyImageExpanded)
@@ -1360,10 +1390,10 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         // Demonstration Image
-        demonstrationImageExpanded.frame = CGRect(x: 0, y: 24.5, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 24.5)
+        demonstrationImageExpanded.frame = CGRect(x: 0, y: 36.75, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 36.75)
         
 
-        imageViewExpanded.addSubview(demonstrationImage)
+        imageViewExpanded.addSubview(demonstrationImageExpanded)
         
         
         
@@ -1390,6 +1420,8 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         demonstrationImageExpanded.alpha = 1
         bodyImageExpanded.alpha = 0
         
+        demonstrationButton.backgroundColor = colour3
+        targetButton.backgroundColor = .white
     }
     
     @IBAction func bodyImageButton(_ sender: Any) {
@@ -1398,6 +1430,8 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         bodyImageExpanded.alpha = 1
         demonstrationImageExpanded.alpha = 0
         
+        demonstrationButton.backgroundColor = .white
+        targetButton.backgroundColor = colour3
     }
     
     
@@ -1459,23 +1493,23 @@ class WarmupScreenLower: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Cancel Button
         //
-        cancelButtonExplanationE.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
+        cancelButtonExplanationE.frame = CGRect(x: 0, y: 0, width: 36.75, height: 36.75)
         cancelButtonExplanationE.center.y = scrollViewExplanationE.frame.minY/2
         cancelButtonExplanationE.center.x = scrollViewExplanationE.frame.maxX - (scrollViewExplanationE.frame.minY/2)
         
         cancelButtonExplanationE.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
-        cancelButtonExplanationE.layer.cornerRadius = 24.5
+        cancelButtonExplanationE.layer.cornerRadius = 18.375
         cancelButtonExplanationE.layer.masksToBounds = true
         
         
-        cancelButtonExplanationE.backgroundColor = colour2
+        cancelButtonExplanationE.backgroundColor = colour3
         
         let origImage = UIImage(named: "Minus")
         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         cancelButtonExplanationE.setImage(tintedImage, for: .normal)
         //Image Tint
-        cancelButtonExplanationE.tintColor = colour1
+        cancelButtonExplanationE.tintColor = colour4
         
         
         

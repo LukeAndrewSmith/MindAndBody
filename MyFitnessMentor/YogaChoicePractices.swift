@@ -264,8 +264,8 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         // Titles
-        presetTitle.text = NSLocalizedString("presetWarmups", comment: "")
-        tableTitle.text = NSLocalizedString("warmupTableTitle", comment: "")
+        presetTitle.text = NSLocalizedString("presetPractices", comment: "")
+        tableTitle.text = NSLocalizedString("yogaTableTitle", comment: "")
         
     
         

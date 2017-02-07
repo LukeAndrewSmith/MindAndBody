@@ -114,7 +114,6 @@ class GymChoice: UIViewController  {
         upperBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
         upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
-        upperBody.titleLabel?.numberOfLines = 0
         upperBody.titleLabel?.textAlignment = .center
         
         
@@ -125,7 +124,6 @@ class GymChoice: UIViewController  {
         lowerBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
         lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
-        lowerBody.titleLabel?.numberOfLines = 0
         lowerBody.titleLabel?.textAlignment = .center
         
         
@@ -137,7 +135,6 @@ class GymChoice: UIViewController  {
         legs.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         legs.titleLabel?.adjustsFontSizeToFitWidth = true
         legs.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
-        legs.titleLabel?.numberOfLines = 0
         legs.titleLabel?.textAlignment = .center
         
         
@@ -149,7 +146,6 @@ class GymChoice: UIViewController  {
         pull.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         pull.titleLabel?.adjustsFontSizeToFitWidth = true
         pull.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
-        pull.titleLabel?.numberOfLines = 0
         pull.titleLabel?.textAlignment = .center
         
         
@@ -161,7 +157,6 @@ class GymChoice: UIViewController  {
         push.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         push.titleLabel?.adjustsFontSizeToFitWidth = true
         push.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
-        push.titleLabel?.numberOfLines = 0
         push.titleLabel?.textAlignment = .center
         
         
