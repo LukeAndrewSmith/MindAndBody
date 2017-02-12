@@ -888,15 +888,14 @@
     //
         //
         // Titles //
-        "case10" = "General";
-        "case11" = "Reset";
+        "reset" = "Reset";
         "colour" = "Colour";
 
         // Contents //
-        // case10
-        "language" = "Language";
         // case11
         "resetApp" = "Reset App";
+        "resetWalkthrough" = "Reset Walkthrough";
+
 
         // Colour Alert //
         "colourTitle" = "App Colour Change";
@@ -904,7 +903,7 @@
 
         // Reset Alert //
         "resetTitle" = "User Defaults Reset";
-        "resetMessage" = "\nTo register the resetting of the defaults it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone and swipe the Mind & Body  app upwards to quit it.";
+        "resetMessage" = "\nTo register the reset it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone and swipe the Mind & Body  app upwards to quit it.";
 
     //
     // Emphasis Selection //
@@ -993,10 +992,10 @@
 //
     // Mind Body
         // Home
-        "mindBody1" = "This is the walkthrough, it appears on the first viewing of each screen.\n\nThe text provides an explanation regarding the function of the highlighted object.\n\nPress anywhere on the screen to continue or on subsequent screen press the top left button to go back.\n\nThe current screen is the home screen.";
-        "mindBody2" = "Calendar\n\nThe calendar contains your weekly schedule.\n\nA schedule will be suggested upon completion of your profile, but will remain fully customisable so you can tweak it to your liking.\n\nThe first thing to do after this screens walkthrough is to fill in your profile.";
-        "mindBody3" = "Sessions\n\nThe essence of the app is to show you the path, but not walk it for you.\n\nThis is portrayed by making you click along a path (suggested in the calendar) to get to your session, starting from the buttons on this home screen.";
-        "mindBody4" = "Profile\n\nThe profile tab is accessed using this button.";
+        "mindBody1" = "This is the walkthrough, it appears on the first viewing of each screen.\n\nThe text provides an explanation regarding the function of the highlighted object.\n\nPress anywhere on the screen to continue, or on subsequent screens press the top left button to go back.\n\nThe current screen is the home screen.";
+        "mindBody2" = "Calendar\n\nThe calendar contains your weekly schedule.\n\nA schedule will be suggested upon completion of your profile, but will remain fully customisable.\n\nThe first thing to do after this screens walkthrough is to fill in your profile.";
+        "mindBody3" = "Sessions\n\nThe essence of the app is to show you the path, but not walk it for you.\n\nThis is portrayed by making you click through a path (suggested in the calendar) to get to a session, starting from the buttons on this home screen.";
+        "mindBody4" = "Profile\n\nThe profile tab is accessed using this button.\n\nThe tab bar buttons highlight orange if selected.";
         "mindBody5" = "Home\n\nThe home screen (current screen) is accessed using this button.";
         "mindBody6" = "Information\n\nThe information tab is accessed using this button.";
 
@@ -1006,22 +1005,62 @@
         // Calendar
 
         // Choice Screen 1
-        "choiceScreen1" = "Information\n\nOn the screens following the home screen information regarding the activity is provided.";
+        "choiceScreen1" = "Information\n\nOn the screens directly after the home screen, information about the activity is provided.";
 
 
         // Choice Screen 2
         "choiceScreen21" = "This is always the final screen layout before a session.";
-        "choiceScreen22" = "Presets\n\nScroll through the picker to select a preset or leave it on the suggested one.";
-        "choiceScreen23" = "Table\n\nThe table contains all possible movements, those included in the session are indicated with a tick.\nSessions can be fine tuned by selecting and deselecting movements.";
-        "choiceScreen24" = "Custom Presets\n\nUp to 3 custom presets can be saved or removed using the '+' and '-' buttons respectively. A custom preset will appear at the bottom of the picker below the seperator line. To remove a custom preset you must first select it in the picker.";
-        "choiceScreen25" = "Begin\n\nOnce content with the session, press the begin button.";
-        "choiceScreen26" = "Information\n\nThe walkthrough information is restated in case it is needed.";
+        "choiceScreen22" = "Presets\n\nScroll through the 'picker' to select a preset session or leave it on the suggested one.";
+        "choiceScreen23" = "Table\nThe table contains all possible movements, those included in the session are indicated with a tick.\nSessions can be fine tuned by selecting or deselecting movements.";
+        "choiceScreen24" = "Custom Presets\nUp to 3 custom presets can be saved using the '+' button. A custom preset is found at the bottom of the picker below the seperator line.\nTo remove a custom preset you must first select it in the picker the press the '-' button.";
+        "choiceScreen25" = "Begin\n\nOnce happy with the session, press the begin button.";
+        "choiceScreen26" = "Information\n\nThe walkthrough information for this screen is restated in case it is needed.";
+        //
+        "choiceScreen23s" = "Table\nThe table contains all possible stretches, those included in the session are indicated with a tick.\nSessions can be fine tuned by selecting or deselecting stretches.";
+        //
+        "choiceScreen22y" = "Length\n\nSelect the desired length of the yoga practice in the 'picker'.";
+        "choiceScreen23y" = "Practices\n\nSelect the desired practice from the table.";
+        //
+        "choiceScreen21y2" = "The custom and preset practices are seperated in the yoga section, this is where you can create your own custom practices.";
+        "choiceScreen22y2" = "Custom Practices\n\nYour custom presets are be stored in this 'picker'.";
+        "choiceScreen23y2" = "New Practice\n\nCreate a new practice using the '+' button, you will be prompted to name the practice.";
+        "choiceScreen24y2" = "Poses\n\nOnce you have created a custom practice, add poses using the '+' button. You can remove poses by selected them and pressing the '-', and change their order by pressing the right of the cell and dragging to the new position.";
+        "choiceScreen25y2" = "Begin\n\nOnce happy with the practice, press the begin button.";
+
+
 
         // Movement Screen
+        "movementScreen1" = "Movement\n\nThis is the name of the movement.";
+        "movementScreen2" = "Next Button\n\nPress the next button when finished with the movement to go to the next.";
+        "movementScreen3" = "Back Buton\n\nThe back button is there incase you press next by accident.";
+        "movementScreen4" = "Sets & Reps\n\nThe sets and reps are given in the form: sets x reps.\nReps can take the form of an amount of time.\n\nA rep is a repetition of a movement, and a set is a group of reps.";
+        "movementScreen5" = "Sets\n\nThe number of sets are represented by the number of circular buttons. When you finish a set press the button to activate a rest timer (a notification pops up upon completion)";
+        "movementScreen6" = "Demonstration\n\nThe demonstration is often in the form of a video (indicated by a play button in the top right hand corner), press anywhere on the video to play one rep of the movement.";
+        "movementScreen7" = "Target Area\n\nThe image highlights in red the body parts being targeted.";
+        "movementScreen8" = "Enlarge Image\n\nThe images can be enlarged by pressing this button.";
+        "movementScreen9" = "Explanation\n\nThe explanation of the movement is here, scroll down to read through it.";
+        "movementScreen10" = "Enlarge Explanation\n\nThe explanation can be enlarged by pressing this button.";
+        "movementScreen11" = "Timer\n\nThe explanation can be swapped for a timer using this button, and will run in the background if you remain on the same screen (i.e don't press next or back).";
+        "movementScreen12" = "Progress\n\nThe progress through the session is indicated in the format;\ncurrent movement/number of movements";
+        "movementScreen13" = "Progress\n\nThe progress is shown in a progress bar as well.";
+        //
+        "movementScreen1m" = "Movement\n\nThis is the name of the movement/stretch.";
+        "movementScreen2m" = "Next Button\n\nPress the next button when finished with the movement\stretch to go to the next.";
+        //
+        "yogaScreen1" = "Pose\n\nThis is the name of the pose.";
+        "yogaScreen2" = "Next Button\n\nPress the next button when finished with the pose to go to the next.";
+        // movementScreen3
+        "yogaScreen3" = "Breaths\n\nThe number of breaths to hold the pose for is indicated here.";
+        "yogaScreen4" = "Demonstration\nThe demonstration is in the form of a video (indicated by a play button in the top right hand corner), press anywhere on the video to play the demonstration.";
+        "yogaScreen5" = "Explanation\n\nThe explanation of the pose is here, scroll down to read through it.";
+        // movementScreen8
+        // movementScreen12
+        // movementScreen13
+
 
 
     // Profile
-    "profile1" = "Profile\n\nFill in the profile so that the app can suggest to you a weekly schedule which can be accessed and modified in the calendar.";
+    "profile1" = "Profile\n\nComplete the profile so that the app can suggest to you a weekly schedule which can be accessed and modified in the calendar.";
     "profile2" = "Settings\n\nThe settings provide the possibility to change the colour scheme of the app, reset the app or reset the walkthrough (incase you need to go through it again).";
 
 

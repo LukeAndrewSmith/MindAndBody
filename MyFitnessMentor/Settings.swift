@@ -98,8 +98,8 @@ class Settings: UITableViewController{
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return (NSLocalizedString("case11", comment: ""))
-        case 1: return (NSLocalizedString("colour", comment: ""))
+        case 0: return (NSLocalizedString("colour", comment: ""))
+        case 1: return (NSLocalizedString("reset", comment: ""))
         default: return (NSLocalizedString("default", comment: ""))
         }
     }
@@ -133,11 +133,12 @@ class Settings: UITableViewController{
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section < 1 {
-            return 1
-        } else {
+        if section == 0 {
             return 4
+        } else {
+            return 2
         }
+        return 0
     }
     
     
@@ -150,12 +151,6 @@ class Settings: UITableViewController{
         
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = NSLocalizedString("resetApp", comment: "")
-            cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
-            return cell
-        case 1:
             if indexPath.row == 0 {
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
                 
@@ -262,6 +257,22 @@ class Settings: UITableViewController{
                 return cell
 
             }
+        case 1:
+            if indexPath.row == 0 {
+                cell.textLabel?.text = NSLocalizedString("resetWalkthrough", comment: "")
+                cell.textLabel?.textAlignment = NSTextAlignment.left
+                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                return cell
+            }
+            else if indexPath.row == 1 {
+                cell.textLabel?.text = NSLocalizedString("resetApp", comment: "")
+                cell.textLabel?.textAlignment = NSTextAlignment.left
+                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                return cell
+            }
+
         default: return cell
         }
         return cell
@@ -277,30 +288,8 @@ class Settings: UITableViewController{
         
         
         switch section {
+            
         case 0:
-            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-            UserDefaults.standard.synchronize()
-            
-            // Alert View
-            let title = NSLocalizedString("resetTitle", comment: "")
-            let message = NSLocalizedString("resetMessage", comment: "")
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.view.tintColor = colour1
-            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-            
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .justified
-            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
-            
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
-            
-            self.present(alert, animated: true, completion: nil)
-            
-            // Reset Colour Defaults
-            UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "colour1")
-            UserDefaults.standard.setColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), forKey: "colour2")
-            
-        case 1:
             
             if checked[indexPath.row] == 0 {
                 
@@ -315,10 +304,10 @@ class Settings: UITableViewController{
                 UserDefaults.standard.synchronize()
                 
             } else {
-              
+                
                 
             }
-        
+            
             tableView.reloadData()
             
             
@@ -333,12 +322,92 @@ class Settings: UITableViewController{
             paragraphStyle.alignment = .justified
             alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
             
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
-                
+            //alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
+            
             self.present(alert, animated: true, completion: nil)
             
+
+        case 1:
+            if indexPath.row == 0 {
+                
+                
+                // Walkthrough
+                    // Mind Body
+                        // Home Screen
+                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough")
+                        // Calendar
+                
+                        // Choice Screen 1
+                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough1")
+                
+                        // Choice Screen 2
+                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough2")
+                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough2y")
+                
+                        // Movement Screen
+                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough3")
+                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough3y")
+                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough4y")
+                
+                
+                    //Profile
+                    UserDefaults.standard.set(false, forKey: "profileWalkthrough")
+                
+                    // Information
+                    UserDefaults.standard.set(false, forKey: "informationWalkthrough")
+                
+                
+                //
+                // Alert View
+                let title = NSLocalizedString("resetTitle", comment: "")
+                let message = NSLocalizedString("resetMessage", comment: "")
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alert.view.tintColor = colour1
+                alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+                
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.alignment = .justified
+                alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+                
+                //alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
+                
+                self.present(alert, animated: true, completion: nil)
+                
+                // Reset Colour Defaults
+                UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "colour1")
+                UserDefaults.standard.setColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), forKey: "colour2")
+                
+                
+                
+                
+                
+            } else if indexPath.row == 1 {
+                
+            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+            UserDefaults.standard.synchronize()
             
+            // Alert View
+            let title = NSLocalizedString("resetTitle", comment: "")
+            let message = NSLocalizedString("resetMessage", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.view.tintColor = colour1
+            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .justified
+            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+            
+            //alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+            
+            // Reset Colour Defaults
+            UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "colour1")
+            UserDefaults.standard.setColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), forKey: "colour2")
+            
+            }
+
+        
             
             
         default:

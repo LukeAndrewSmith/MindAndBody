@@ -288,6 +288,18 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        // Walkthrough
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough3y") == false {
+            let delayInSeconds = 0.5
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.walkthroughMindBody()
+            }
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough3y")
+        }
+        
+        
+        
         //Iphone 5/SE layout
         //
         if UIScreen.main.nativeBounds.height < 1334 {
@@ -309,6 +321,7 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         
         // Image View
         imageView.backgroundColor = colour4
+        imageView.contentMode = .scaleAspectFit
         
         
         
@@ -656,6 +669,368 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         nextButton.isEnabled = true
         backButton.isEnabled = true
     }
+    
+    
+    
+//---------------------------------------------------------------------------------------------------------------
+    
+    
+    var  viewNumber = 0
+    let walkthroughView = UIView()
+    let label = UILabel()
+    let nextButtonW = UIButton()
+    let backButtonW = UIButton()
+    
+    
+    // Walkthrough
+    func walkthroughMindBody() {
+        
+        //
+        let screenSize = UIScreen.main.bounds
+        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+        //
+        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+        walkthroughView.backgroundColor = .black
+        walkthroughView.alpha = 0.72
+        walkthroughView.clipsToBounds = true
+        //
+        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
+        label.center = view.center
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
+        label.textColor = .white
+        //
+        nextButtonW.frame = screenSize
+        nextButtonW.backgroundColor = .clear
+        nextButtonW.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
+        //
+        backButtonW.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
+        backButtonW.setTitle("Back", for: .normal)
+        backButtonW.titleLabel?.textAlignment = .left
+        backButtonW.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        backButtonW.titleLabel?.textColor = .white
+        backButtonW.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
+        
+        
+        
+        
+        switch viewNumber {
+            
+        case 0:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - ((navigationTitle.frame.size.width + 50) / 2), y: UIApplication.shared.statusBarFrame.height, width: navigationTitle.frame.size.width + 50, height: 40))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("yogaScreen1", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            
+            
+            
+            
+        //
+        case 1:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("yogaScreen2", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 2:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.083, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreen3", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            backButtonW.setTitle("", for: .normal)
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+        case 3:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: (view.frame.size.width / 2) - (setsRepsLabel.frame.size.width / 2), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height, width: setsRepsLabel.frame.size.width + 6, height: imageTop.constant))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("yogaScreen3", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+        case 4:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageTop.constant, width: view.frame.size.height, height: imageView.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.center.y = scrollViewExplanation.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("yogaScreen4", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+//
+        case 5:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (imageTop.constant * 2) + imageView.frame.size.height , width: view.frame.size.width, height: scrollViewExplanation.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center.y = imageView.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("yogaScreen5", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+//
+        case 6:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: explanationExpand.center.x, y: explanationExpand.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center.y = imageView.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("movementScreen8", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 7:
+            // Clear Section
+            let path = CGMutablePath()
+            let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + (imageTop.constant * 2.5)
+            let yValue = y + scrollViewExplanation.frame.size.height + imageView.frame.size.height
+            path.addRect(CGRect(x: 0, y: yValue, width: progressLabel.frame.size.width + 6, height: progressLabel.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center.y = imageView.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("movementScreen12", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 8:
+            // Clear Section
+            let path = CGMutablePath()
+            let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + (imageTop.constant * 3)
+            let yValue = y + scrollViewExplanation.frame.size.height + imageView.frame.size.height
+            path.addRect(CGRect(x: 0, y: yValue, width: view.frame.size.width, height: progressBarView.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center.y = imageView.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("movementScreen13", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+
+        
+//
+        default: break
+            
+            
+        }
+        
+        
+    }
+    
+    
+    
+    func nextWalkthroughView(_ sender: Any) {
+        walkthroughView.removeFromSuperview()
+        viewNumber = viewNumber + 1
+        walkthroughMindBody()
+    }
+    
+    
+    func backWalkthroughView(_ sender: Any) {
+        if viewNumber > 0 {
+            backButtonW.removeFromSuperview()
+            walkthroughView.removeFromSuperview()
+            viewNumber = viewNumber - 1
+            walkthroughMindBody()
+        }
+        
+    }
+    
     
     
     

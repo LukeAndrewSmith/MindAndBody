@@ -73,9 +73,13 @@ class Profile: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        walkthroughMindBody()
+        // Walkthrough
+        if UserDefaults.standard.bool(forKey: "profileWalkthrough") == false {
+            self.walkthroughMindBody()
+            UserDefaults.standard.set(true, forKey: "profileWalkthrough")
+        }
         
-        // Set Colours
+        // Colours
         let colour1 = UserDefaults.standard.color(forKey: "colour1")!
         let colour2 = UserDefaults.standard.color(forKey: "colour2")!
         
@@ -543,7 +547,7 @@ class Profile: UITableViewController{
         label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
         label.textColor = .white
         
         //
@@ -599,7 +603,7 @@ class Profile: UITableViewController{
             
             // Clear Section
             let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width - 31, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()

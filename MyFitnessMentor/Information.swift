@@ -15,11 +15,13 @@ class Information: UITableViewController{
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    let colour1 = UserDefaults.standard.color(forKey: "colour1")
+    let colour2 = UserDefaults.standard.color(forKey: "colour2")
     let colour3 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     let colour4 = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
     
+    //let colour1 = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
+    //let colour2 = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
     
     // Arrays
     
@@ -51,7 +53,11 @@ class Information: UITableViewController{
         super.viewDidLoad()
         
         // Walkthrough
-        walkthroughMindBody()
+        if UserDefaults.standard.bool(forKey: "informationWalkthrough") == false {
+            self.walkthroughMindBody()
+            UserDefaults.standard.set(true, forKey: "informationWalkthrough")
+        }
+        
         
         
         //
@@ -174,7 +180,7 @@ class Information: UITableViewController{
         label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
         label.textColor = .white
         //
         nextButton.frame = screenSize

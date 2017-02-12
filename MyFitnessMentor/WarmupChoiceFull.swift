@@ -508,9 +508,12 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         
         // Walkthrough
-        let delayInSeconds = 0.5
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            self.walkthroughMindBody()
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough2") == false {
+            let delayInSeconds = 0.5
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.walkthroughMindBody()
+            }
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2")
         }
         
         
@@ -1651,7 +1654,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
         label.textColor = .white
         //
         nextButton.frame = screenSize
@@ -1756,6 +1759,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         //
         
         label.center = pickerView.center
+        label.center.y = 24.5 + (UIApplication.shared.statusBarFrame.height/2) + pickerView.frame.size.height
         label.text = NSLocalizedString("choiceScreen23", comment: "")
         walkthroughView.addSubview(label)
         
@@ -1791,6 +1795,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         //
         
         label.center = tableView.center
+        label.center.y = tableView.frame.maxY - 49
         label.text = NSLocalizedString("choiceScreen24", comment: "")
         walkthroughView.addSubview(label)
         
@@ -1846,7 +1851,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             // Clear Section
             let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width - 31, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()

@@ -50,9 +50,12 @@ class WorkoutChoice: UIViewController  {
         super.viewDidLoad()
         
         // Walkthrough
-        let delayInSeconds = 0.5
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            self.walkthroughMindBody()
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough1") == false {
+            let delayInSeconds = 0.5
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.walkthroughMindBody()
+            }
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough1")
         }
         
         
@@ -201,7 +204,7 @@ class WorkoutChoice: UIViewController  {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
         label.textColor = .white
         //
         nextButton.frame = screenSize
@@ -217,7 +220,7 @@ class WorkoutChoice: UIViewController  {
             
             // Clear Section
             let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width - 31, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()

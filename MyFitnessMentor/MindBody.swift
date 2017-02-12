@@ -138,7 +138,31 @@ class MindBody: UIViewController {
         
         
         // Walkthrough
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough" : false])
+
+        
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough") == false {
         walkthroughMindBody()
+        UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough")
+        }
+        
+        
+        
+        // Register Walkthroughs
+        //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough1" : false])
+        //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2" : false])
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2y" : false])
+        //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough3" : false])
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough3y" : false])
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough4y" : false])
+        //
+        UserDefaults.standard.register(defaults: ["profileWalkthrough" : false])
+        //
+        UserDefaults.standard.register(defaults: ["informationWalkthrough" : false])
+        
         
         
         
@@ -372,7 +396,7 @@ class MindBody: UIViewController {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
         label.textColor = .white
         
         //
@@ -429,7 +453,7 @@ class MindBody: UIViewController {
             
             // Clear Section
             let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width - 31, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()

@@ -1237,6 +1237,9 @@
                                         <state key="normal" title="Button">
                                             <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="5B0-jP-Deq" kind="presentation" identifier="meditationTimer" id="rgq-5w-oIJ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -4564,7 +4567,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 Breaths" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDo-Pk-1Vx">
-                                <rect key="frame" x="149" y="13" width="77" height="24"/>
+                                <rect key="frame" x="149.5" y="13" width="76.5" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24.5" id="HrL-OS-RBR"/>
                                 </constraints>
@@ -5247,7 +5250,7 @@
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 Breaths" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7A-2t-B2u">
-                                <rect key="frame" x="149" y="13" width="77" height="24"/>
+                                <rect key="frame" x="149.5" y="13" width="76.5" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24.5" id="RSa-cC-zOG"/>
                                 </constraints>
@@ -5319,6 +5322,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e99-rl-h8J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5710" y="3859"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bRx-PS-Ocr">
+            <objects>
+                <navigationController id="5B0-jP-Deq" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Fc6-fW-0Bf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9S0-A9-DaJ" kind="relationship" relationship="rootViewController" id="mvY-Fx-mxz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ygJ-a7-54o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7458" y="3572"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="9Hf-wF-hDY">
+            <objects>
+                <viewController id="9S0-A9-DaJ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zJg-Dp-OL2"/>
+                        <viewControllerLayoutGuide type="bottom" id="95e-XY-Nu4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CUo-zA-JB0">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="Title" id="aQB-Sr-6DJ">
+                        <barButtonItem key="rightBarButtonItem" image="CheckMark" id="4gI-po-7yV">
+                            <color key="tintColor" red="0.14901960780000001" green="0.65098039220000004" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="KcH-Zf-P4X" kind="unwind" unwindAction="prepareForUnwindWithSegue:" id="ng0-MJ-X9r"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dgu-CZ-DX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="KcH-Zf-P4X" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="8454" y="3573"/>
         </scene>
     </scenes>
     <resources>
