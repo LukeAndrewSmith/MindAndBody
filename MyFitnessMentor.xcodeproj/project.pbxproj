@@ -22,6 +22,7 @@
 		073E70E71E32375100FB0B15 /* WarmupScreenFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073E70E61E32375100FB0B15 /* WarmupScreenFull.swift */; };
 		073E70E91E3246C300FB0B15 /* WarmupChoiceCardio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073E70E81E3246C300FB0B15 /* WarmupChoiceCardio.swift */; };
 		073E70EB1E3246D600FB0B15 /* WarmupScreenCardio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073E70EA1E3246D600FB0B15 /* WarmupScreenCardio.swift */; };
+		075560911E521382002ACDA3 /* MeditationTimerPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075560901E521382002ACDA3 /* MeditationTimerPresets.swift */; };
 		075AA85A1E225F6F0072AE9E /* WarmupScreenUpper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075AA8591E225F6F0072AE9E /* WarmupScreenUpper.swift */; };
 		077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DA1DA535830026895B /* AppDelegate.swift */; };
 		077AC0DF1DA535840026895B /* MindBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DE1DA535840026895B /* MindBody.swift */; };
@@ -102,6 +103,7 @@
 		073E70E61E32375100FB0B15 /* WarmupScreenFull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupScreenFull.swift; sourceTree = "<group>"; };
 		073E70E81E3246C300FB0B15 /* WarmupChoiceCardio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoiceCardio.swift; sourceTree = "<group>"; };
 		073E70EA1E3246D600FB0B15 /* WarmupScreenCardio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupScreenCardio.swift; sourceTree = "<group>"; };
+		075560901E521382002ACDA3 /* MeditationTimerPresets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationTimerPresets.swift; sourceTree = "<group>"; };
 		075AA8591E225F6F0072AE9E /* WarmupScreenUpper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupScreenUpper.swift; sourceTree = "<group>"; };
 		077AC0D71DA535830026895B /* MyFitnessMentor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFitnessMentor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		077AC0DA1DA535830026895B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				0719F2B11E50F89F00AC6729 /* MeditationTimer.swift */,
+				075560901E521382002ACDA3 /* MeditationTimerPresets.swift */,
 			);
 			name = Timer;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				07E0A6E01E3A218C005DCA08 /* StretchingScreenWorkout.swift in Sources */,
 				07FE38081DF6E74E00E7EA20 /* ProfileNavigation.swift in Sources */,
 				071966C21E3FAF3F00816A83 /* YogaChoiceGuided.swift in Sources */,
+				075560911E521382002ACDA3 /* MeditationTimerPresets.swift in Sources */,
 				07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */,
 				077AC1041DA579680026895B /* Profile.swift in Sources */,
 				079CAFA01E40E480003ED63B /* YogaChoiceCustom.swift in Sources */,

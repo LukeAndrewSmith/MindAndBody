@@ -336,6 +336,7 @@ class Settings: UITableViewController{
                         // Home Screen
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough")
                         // Calendar
+                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthroughC")
                 
                         // Choice Screen 1
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough1")

@@ -793,6 +793,9 @@
         //
         "meditationTimer" = "Timer";
 
+        "meditationTimerTitle" = "Meditation Timer";
+        "presetTimerTitle" = "Preset Timers";
+
 
 
 
@@ -1000,9 +1003,15 @@
         "mindBody6" = "Information\n\nThe information tab is accessed using this button.";
 
 
-
-
         // Calendar
+        "mindBodyC1" = "Calendar\n\nThe calendar contains your weekly schedule.\nOne is suggested once your profile is completed which can be modified to your preference or made completely custom.";
+        "mindBodyC2" = "Day\n\nThe sessions for each day appear in rows underneath the day title, they show the session, time to perform the session, and the route to take from the homescreen to get to the session.";
+        "mindBodyC3" = "New Session\n\nPress the '+' row to add a new session.\nSessions can be removed by pressing '-' on their row.";
+        "mindBodyC4" = "Press this button to dismiss the calendar.";
+
+
+
+
 
         // Choice Screen 1
         "choiceScreen1" = "Information\n\nOn the screens directly after the home screen, information about the activity is provided.";

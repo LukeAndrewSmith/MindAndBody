@@ -137,8 +137,8 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         informationTitleYogaC.text = (NSLocalizedString("information", comment: ""))
         informationTitleYogaC.textAlignment = .center
         informationTitleYogaC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitleYogaC.textColor = .white
-        informationTitleYogaC.backgroundColor = colour2
+        informationTitleYogaC.textColor = colour2
+        informationTitleYogaC.backgroundColor = colour1
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))

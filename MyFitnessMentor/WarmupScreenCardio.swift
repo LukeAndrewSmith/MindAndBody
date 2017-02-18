@@ -1201,9 +1201,13 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         let delayInSeconds = 30.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             
+            if self.buttonArray.count == 1 {
+                
+            } else {
             if self.buttonNumber < 3 {
                 self.buttonNumber = self.buttonNumber + 1
                 self.buttonArray[self.buttonNumber].isEnabled = true
+            }
             }
         }
         sender.backgroundColor = colour2

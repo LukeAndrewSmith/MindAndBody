@@ -24,11 +24,32 @@ class WorkoutChoice: UIViewController  {
     // Home
     @IBOutlet weak var home: UIButton!
 
+    // Gym 2
+    @IBOutlet weak var gym2: UIButton!
+    
+    
+    
     // Information View
-    @IBOutlet weak var informationViewWorkoutC: UIView!
+    @IBOutlet weak var informationView: UIScrollView!
 
+    // Information Title
+    @IBOutlet weak var informationTitle: UILabel!
+    
+    
+    
     // Stack View
     @IBOutlet weak var stackView: UIStackView!
+
+    
+    
+    // Constraints
+    @IBOutlet weak var gymTop: NSLayoutConstraint!
+    
+    @IBOutlet weak var gymBottom: NSLayoutConstraint!
+    
+    @IBOutlet weak var stackBottom: NSLayoutConstraint!
+    
+    
     
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
@@ -83,33 +104,113 @@ class WorkoutChoice: UIViewController  {
         home.layer.borderWidth = 10
         home.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
         
+        
+        gym2.setTitle(NSLocalizedString("gym2", comment: ""), for: UIControlState.normal)
+        gym2.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        gym2.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        gym2.layer.borderWidth = 10
+        gym2.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        
+        
+        
+        
      
-        // informationViewWorkoutC
+        // Scroll View Frame
+        self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
+        
+        view.bringSubview(toFront: informationView)
+        
+        
+        // Information Title
         //
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipesWorkoutC))
+        // Information Title Frame
+        self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
+        informationTitle.text = (NSLocalizedString("information", comment: ""))
+        informationTitle.textAlignment = .center
+        informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        informationTitle.textColor = colour2
+        informationTitle.backgroundColor = colour1
+        
+        
+        
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
         downSwipe.direction = UISwipeGestureRecognizerDirection.down
-        self.informationViewWorkoutC.addGestureRecognizer(downSwipe)
-        
-        self.informationViewWorkoutC.frame = CGRect(x: 0, y: ((self.view.frame.size.height) - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height), width: self.view.frame.size.width, height: self.view.frame.size.height)
-        
-        
-        view.bringSubview(toFront: informationViewWorkoutC)
-       
-        
-        // Information
-        let informationTitleWorkoutC = UILabel(frame: CGRect(x: 0, y: 0, width: self.informationViewWorkoutC.frame.size.width, height: 49))
-        informationTitleWorkoutC.text = "Information"
-        informationTitleWorkoutC.textAlignment = .center
-        informationTitleWorkoutC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitleWorkoutC.textColor = .white
-        informationTitleWorkoutC.backgroundColor = colour2
-        self.informationViewWorkoutC.addSubview(informationTitleWorkoutC)
+        informationTitle.addGestureRecognizer(downSwipe)
+        informationTitle.isUserInteractionEnabled = true
         
         
-        let informationLabelWorkoutC = UILabel(frame: CGRect(x: 10, y: 59, width: self.informationViewWorkoutC.frame.size.width - 20, height: 49))
-        informationLabelWorkoutC.text = "Noice"
-        informationLabelWorkoutC.font = UIFont(name: "SFUIDisplay-light", size: 19)
-        self.informationViewWorkoutC.addSubview(informationLabelWorkoutC)
+        
+        self.view.addSubview(informationTitle)
+        self.view.bringSubview(toFront: informationTitle)
+        
+        
+        
+        // Information Text
+        //
+        // Information Text Frame
+        let informationTextStretchingC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
+        
+        // Information Text and Attributes
+        //
+        // String
+        let informationLabelString = (
+            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: "")))
+        
+        // Range of String
+        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: ""))
+        let textRange = (informationLabelString as NSString).range(of: textRangeString)
+        
+        
+        // Range of Titles
+        let titleRangeString1 = (NSLocalizedString("purpose", comment: ""))
+        let titleRangeString2 = (NSLocalizedString("body", comment: ""))
+        let titleRangeString3 = (NSLocalizedString("mind", comment: ""))
+        
+        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString1)
+        let titleRange2 = (informationLabelString as NSString).range(of: titleRangeString2)
+        let titleRange3 = (informationLabelString as NSString).range(of: titleRangeString3)
+        
+        
+        // Line Spacing
+        let lineSpacing = NSMutableParagraphStyle()
+        lineSpacing.lineSpacing = 1.4
+        lineSpacing.hyphenationFactor = 1
+        
+        
+        // Add Attributes
+        let informationLabelText = NSMutableAttributedString(string: informationLabelString)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Light", size: 19)!, range: textRange)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange1)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange2)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange3)
+        informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
+        
+        
+        
+        // Final Text Editing
+        informationTextStretchingC.attributedText = informationLabelText
+        informationTextStretchingC.textAlignment = .justified
+        informationTextStretchingC.lineBreakMode = NSLineBreakMode.byWordWrapping
+        informationTextStretchingC.numberOfLines = 0
+        informationTextStretchingC.sizeToFit()
+        self.informationView.addSubview(informationTextStretchingC)
+        
+        
+        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextStretchingC.frame.size.height + informationTitle.frame.size.height + 20)
+        
+        
+        
+        // Iphone 5/SE
+        if UIScreen.main.nativeBounds.height < 1334 {
+            
+            gymTop.constant = 52
+            gymBottom.constant = 52
+            stackBottom.constant = 52
+            
+            stackView.spacing = 15
+            
+        }
+
         
     }
     
@@ -117,66 +218,95 @@ class WorkoutChoice: UIViewController  {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        gym.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
+        
+        gym.layer.cornerRadius = ((self.stackView.frame.size.height) * 3/2) / 2
         gym.layer.masksToBounds = true
         gym.titleLabel?.adjustsFontSizeToFitWidth = true
         gym.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
         gym.titleLabel?.numberOfLines = 0
         gym.titleLabel?.textAlignment = .center
         
-        home.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
+        
+        home.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         home.layer.masksToBounds = true
         home.titleLabel?.adjustsFontSizeToFitWidth = true
         home.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
         home.titleLabel?.numberOfLines = 0
         home.titleLabel?.textAlignment = .center
+        
+        
+        gym2.layer.cornerRadius = (self.stackView.frame.size.height) / 2
+        gym2.layer.masksToBounds = true
+        gym2.titleLabel?.adjustsFontSizeToFitWidth = true
+        gym2.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        gym2.titleLabel?.numberOfLines = 0
+        gym2.titleLabel?.textAlignment = .center
+        
 
     }
     
    
+    
  
     @IBAction func informationButtonActionWorkoutC(_ sender: Any) {
         
-        if self.informationViewWorkoutC.frame.maxY == (self.view.frame.maxY + ((self.view.frame.size.height))) {
+        
+        if self.informationView.frame.minY < self.view.frame.maxY {
             
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 
-                self.informationViewWorkoutC.transform = CGAffineTransform(translationX: 0, y: -((self.view.frame.size.height)))
+                self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
                 
             }, completion: nil)
+            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
+            }, completion: nil)
+            self.informationView.contentOffset.y = 0
             
-        } else if self.informationViewWorkoutC.frame.maxY == self.view.frame.maxY {
+            
+        } else {
+            
+            
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 
-                self.informationViewWorkoutC.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.informationView.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
                 
             }, completion: nil)
+            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
+                
+            }, completion: nil)
+            self.informationView.contentOffset.y = 0
+            
+            
+            
         }
-
     }
 
 
-    @IBAction func handleSwipesWorkoutC(extraSwipe:UISwipeGestureRecognizer) {
+    @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
         
         if (extraSwipe.direction == .down){
-            
-            if self.informationViewWorkoutC.frame.maxY == self.view.frame.maxY {
-                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    
-                    self.informationViewWorkoutC.transform = CGAffineTransform(translationX: 0, y: 0)
-                    
-                }, completion: nil)
-            } else {
+        
+        if self.informationView.frame.minY < self.view.frame.maxY {
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 
-            }
-            
+                self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
+                
+            }, completion: nil)
+            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                
+                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
+            }, completion: nil)
             
         }
-        
+        }
     }
 
    
-    //---------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------
     
     
     var  viewNumber = 0
@@ -262,8 +392,5 @@ class WorkoutChoice: UIViewController  {
         viewNumber = viewNumber + 1
         walkthroughMindBody()
     }
-    
 
-    
-    
 }

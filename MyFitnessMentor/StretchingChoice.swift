@@ -120,8 +120,9 @@ class StretchingChoice: UIViewController  {
         informationTitleStretchingC.text = (NSLocalizedString("information", comment: ""))
         informationTitleStretchingC.textAlignment = .center
         informationTitleStretchingC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitleStretchingC.textColor = .white
-        informationTitleStretchingC.backgroundColor = colour2
+        informationTitleStretchingC.textColor = colour2
+        informationTitleStretchingC.backgroundColor = colour1
+        
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))

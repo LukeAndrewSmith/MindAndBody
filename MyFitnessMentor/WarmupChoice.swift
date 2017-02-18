@@ -150,8 +150,8 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         informationTitleWarmupC.text = (NSLocalizedString("information", comment: ""))
         informationTitleWarmupC.textAlignment = .center
         informationTitleWarmupC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitleWarmupC.textColor = .white
-        informationTitleWarmupC.backgroundColor = colour2
+        informationTitleWarmupC.textColor = colour2
+        informationTitleWarmupC.backgroundColor = colour1
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))

@@ -1296,9 +1296,13 @@ class StretchingScreenWorkout: UIViewController, UIScrollViewDelegate, UIPickerV
         let delayInSeconds = 15.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             
+            if self.buttonArray.count == 1 {
+                
+            } else {
             if self.buttonNumber < 2 {
                 self.buttonNumber = self.buttonNumber + 1
                 self.buttonArray[self.buttonNumber].isEnabled = true
+            }
             }
         }
         

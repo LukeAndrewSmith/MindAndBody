@@ -115,8 +115,8 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         informationTitleMeditationC.text = (NSLocalizedString("information", comment: ""))
         informationTitleMeditationC.textAlignment = .center
         informationTitleMeditationC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitleMeditationC.textColor = .white
-        informationTitleMeditationC.backgroundColor = colour2
+        informationTitleMeditationC.textColor = colour2
+        informationTitleMeditationC.backgroundColor = colour1
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -261,6 +261,17 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
         
+    }
+    
+    
+    @IBAction func timerButtonAction(_ sender: Any) {
+        
+            let delayInSeconds = 1.0
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                
+                _ = self.navigationController?.popToRootViewController(animated: false)
+                
+        }
     }
 
     
