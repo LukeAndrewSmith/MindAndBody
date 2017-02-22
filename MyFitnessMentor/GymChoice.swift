@@ -21,9 +21,13 @@ class GymChoice: UIViewController  {
     // classic
     @IBOutlet weak var classic: UIButton!
     
-    
     // circuit
     @IBOutlet weak var circuit: UIButton!
+    
+    //
+    @IBOutlet weak var fiveByFive: UIButton!
+    
+    
     
     
     // Custom
@@ -42,6 +46,13 @@ class GymChoice: UIViewController  {
     // Stack View
     @IBOutlet weak var stackView: UIStackView!
     
+    
+    // Constraints
+    @IBOutlet weak var classicTop: NSLayoutConstraint!
+    
+    @IBOutlet weak var classicBottom: NSLayoutConstraint!
+    
+    @IBOutlet weak var stackBottom: NSLayoutConstraint!
     
     
     // Question Mark
@@ -103,17 +114,27 @@ class GymChoice: UIViewController  {
         circuit.setTitleColor(colour3, for: .normal)
         
         
+        
+        fiveByFive.setTitle(NSLocalizedString("5x5", comment: ""), for: UIControlState.normal)
+        fiveByFive.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        fiveByFive.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        fiveByFive.layer.borderWidth = 8
+        fiveByFive.layer.borderColor = colour3.cgColor
+        fiveByFive.setTitleColor(colour3, for: .normal)
+        
+        
+        
+        
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        custom.layer.borderWidth = 8
+        custom.layer.borderWidth = 7
         custom.layer.borderColor = colour3.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
         custom.titleLabel?.textAlignment = .center
         custom.setTitleColor(colour3, for: .normal)
         custom.layer.cornerRadius = 49/2
         custom.layer.masksToBounds = true
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         custom.titleLabel?.numberOfLines = 0
         custom.titleLabel?.textAlignment = .center
         //
@@ -206,6 +227,19 @@ class GymChoice: UIViewController  {
         
         self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextStretchingC.frame.size.height + informationTitle.frame.size.height + 20)
         
+        
+        // Iphone 5/SE
+        
+        if UIScreen.main.nativeBounds.height < 1334 {
+            
+            classicTop.constant = 52
+            classicBottom.constant = 52
+            stackBottom.constant = 52
+            
+            stackView.spacing = 15
+            
+            
+        }
     }
     
     
@@ -213,20 +247,27 @@ class GymChoice: UIViewController  {
         super.viewDidLayoutSubviews()
         
         
-        classic.layer.cornerRadius = ((self.stackView.frame.size.height) - 40) / 4
+        classic.layer.cornerRadius = ((self.stackView.frame.size.height) * 3/2) / 2
         classic.layer.masksToBounds = true
         classic.titleLabel?.adjustsFontSizeToFitWidth = true
         classic.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         classic.titleLabel?.numberOfLines = 0
         classic.titleLabel?.textAlignment = .center
         
-        
-        circuit.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
+        circuit.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         circuit.layer.masksToBounds = true
         circuit.titleLabel?.adjustsFontSizeToFitWidth = true
         circuit.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         circuit.titleLabel?.numberOfLines = 0
         circuit.titleLabel?.textAlignment = .center
+        
+        
+        fiveByFive.layer.cornerRadius = (self.stackView.frame.size.height) / 2
+        fiveByFive.layer.masksToBounds = true
+        fiveByFive.titleLabel?.adjustsFontSizeToFitWidth = true
+        fiveByFive.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        fiveByFive.titleLabel?.numberOfLines = 0
+        fiveByFive.titleLabel?.textAlignment = .center
     }
     
     

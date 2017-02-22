@@ -110,17 +110,18 @@ class HomeChoice: UIViewController  {
         lowerBody.layer.borderColor = colour3.cgColor
         
         
+        
+        
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        custom.layer.borderWidth = 8
+        custom.layer.borderWidth = 7
         custom.layer.borderColor = colour3.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
         custom.titleLabel?.textAlignment = .center
         custom.setTitleColor(colour3, for: .normal)
         custom.layer.cornerRadius = 49/2
         custom.layer.masksToBounds = true
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         custom.titleLabel?.numberOfLines = 0
         custom.titleLabel?.textAlignment = .center
         //

@@ -137,10 +137,10 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         
         
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        custom.layer.borderWidth = 6
+        custom.layer.borderWidth = 7
         custom.layer.borderColor = colour3.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,6,0,6)
+        custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
         custom.titleLabel?.textAlignment = .center
         custom.setTitleColor(colour3, for: .normal)
         custom.layer.cornerRadius = 49/2
