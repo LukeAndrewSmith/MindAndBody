@@ -66,16 +66,14 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     let emptyArray =
         [
-            // Joint Rotations
+            // Legs (Quads)
             [0,
              0,
              0,
              0,
              0,
-             0,
-             0,
              0],
-            // Foam/Ball Roll
+            // Legs (Hamstrings/Glutes)
             [0,
              0,
              0,
@@ -83,13 +81,13 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
              0,
              0,
              0],
-            // Lower Back
+            // Legs (General)
             [0,
              0,
              0,
-             0,
              0],
-            // General Mobility
+            
+            // Pull (Back)
             [0,
              0,
              0,
@@ -100,9 +98,28 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
              0,
              0,
              0],
-            // Dynamic Warm Up Drills
+            // Pull (Upper Back)
             [0,
              0,
+             0,
+             0],
+            // Pull (Rear Delts)
+            [0],
+            // Pull (Traps)
+            [0,
+             0],
+            // Pull (Biceps)
+            [0,
+             0,
+             0,
+             0],
+            // Pull (Forearms)
+            [0,
+             0,
+             0],
+            
+            // Push (Chest)
+            [0,
              0,
              0,
              0,
@@ -110,8 +127,24 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
              0,
              0,
              0],
-            // Accessory
+            // Push (Shoulders)
             [0,
+             0,
+             0,
+             0],
+            // Push (Triceps)
+            [0,
+             0,
+             0,
+             0,
+             0],
+            
+            // Calves
+            [0,
+             0],
+            // Abs/Core
+            [0,
+             0,
              0,
              0]
     ]
@@ -119,16 +152,14 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var workoutFullPresets =
         [
             [
-                // Joint Rotations
+                // Legs (Quads)
                 [0,
                  0,
                  0,
                  0,
                  0,
-                 0,
-                 0,
                  0],
-                // Foam/Ball Roll
+                // Legs (Hamstrings/Glutes)
                 [0,
                  0,
                  0,
@@ -136,13 +167,13 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                  0,
                  0,
                  0],
-                // Lower Back
+                // Legs (General)
                 [0,
                  0,
                  0,
-                 0,
                  0],
-                // General Mobility
+                
+                // Pull (Back)
                 [0,
                  0,
                  0,
@@ -153,9 +184,28 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                  0,
                  0,
                  0],
-                // Dynamic Warm Up Drills
+                // Pull (Upper Back)
                 [0,
                  0,
+                 0,
+                 0],
+                // Pull (Rear Delts)
+                [0],
+                // Pull (Traps)
+                [0,
+                 0],
+                // Pull (Biceps)
+                [0,
+                 0,
+                 0,
+                 0],
+                // Pull (Forearms)
+                [0,
+                 0,
+                 0],
+                
+                // Push (Chest)
+                [0,
                  0,
                  0,
                  0,
@@ -163,13 +213,81 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                  0,
                  0,
                  0],
-                // Accessory
+                // Push (Shoulders)
                 [0,
+                 0,
+                 0,
+                 0],
+                // Push (Triceps)
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                
+                // Calves
+                [0,
+                 0],
+                // Abs/Core
+                [0,
+                 0,
                  0,
                  0]
             ],
             [
-                // Joint Rotations
+                // Legs (Quads)
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Legs (Hamstrings/Glutes)
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Legs (General)
+                [0,
+                 0,
+                 0,
+                 0],
+                
+                // Pull (Back)
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0],
+                // Pull (Upper Back)
+                [0,
+                 0,
+                 0,
+                 0],
+                // Pull (Rear Delts)
+                [0],
+                // Pull (Traps)
+                [0,
+                 0],
+                // Pull (Biceps)
+                [0,
+                 0,
+                 0,
+                 0],
+                // Pull (Forearms)
+                [0,
+                 0,
+                 0],
+                
+                // Push (Chest)
                 [0,
                  0,
                  0,
@@ -178,57 +296,36 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                  0,
                  0,
                  0],
-                // Foam/Ball Roll
+                // Push (Shoulders)
                 [0,
                  0,
                  0,
-                 0,
-                 0,
-                 0,
                  0],
-                // Lower Back
+                // Push (Triceps)
                 [0,
                  0,
                  0,
                  0,
                  0],
-                // General Mobility
+                
+                // Calves
+                [0,
+                 0],
+                // Abs/Core
                 [0,
                  0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,],
-                // Dynamic Warm Up Drills
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,],
-                // Accessory
-                [0,
                  0,
                  0]
             ],
             [
-                // Joint Rotations
+                // Legs (Quads)
                 [0,
                  0,
                  0,
                  0,
                  0,
-                 0,
-                 0,
                  0],
-                // Foam/Ball Roll
+                // Legs (Hamstrings/Glutes)
                 [0,
                  0,
                  0,
@@ -236,13 +333,13 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                  0,
                  0,
                  0],
-                // Lower Back
+                // Legs (General)
                 [0,
                  0,
                  0,
-                 0,
                  0],
-                // General Mobility
+                
+                // Pull (Back)
                 [0,
                  0,
                  0,
@@ -253,9 +350,28 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                  0,
                  0,
                  0],
-                // Dynamic Warm Up Drills
+                // Pull (Upper Back)
                 [0,
                  0,
+                 0,
+                 0],
+                // Pull (Rear Delts)
+                [0],
+                // Pull (Traps)
+                [0,
+                 0],
+                // Pull (Biceps)
+                [0,
+                 0,
+                 0,
+                 0],
+                // Pull (Forearms)
+                [0,
+                 0,
+                 0],
+                
+                // Push (Chest)
+                [0,
                  0,
                  0,
                  0,
@@ -263,8 +379,24 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                  0,
                  0,
                  0],
-                // Accessory
+                // Push (Shoulders)
                 [0,
+                 0,
+                 0,
+                 0],
+                // Push (Triceps)
+                [0,
+                 0,
+                 0,
+                 0,
+                 0],
+                
+                // Calves
+                [0,
+                 0],
+                // Abs/Core
+                [0,
+                 0,
                  0,
                  0]
             ]
@@ -275,70 +407,101 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
     // Workout Cardio Array
     var workoutFullArray =
         [
-            // Joint Rotations
-            ["wrist",
-             "elbow",
-             "shoulderR",
-             "neckR",
-             "waist",
-             "hip",
-             "knees",
-             "ankles"],
-            // Foam/Ball Roll
-            ["thoracicSpine",
-             "lat",
-             "quadf",
-             "adductorf",
-             "hamstringf",
-             "glutef",
-             "calvef"],
-            // Lower Back
-            ["sideLegDrop",
-             "sideLegKick",
-             "scorpionKick",
-             "sideBend",
-             "catCow"],
-            // General Mobility
-            ["hipCircles",
-             "mountainClimber",
-             "groinStretch",
-             "gluteBridge",
-             "threadTheNeedle",
-             "butterflyPose",
-             "cossakSquat",
-             "hipHinges",
-             "sideLegSwings",
-             "frontLegSwings"],
-            // Dynamic Warm Up Drills
-            ["jumpSquat",
-             "lunge",
-             "gluteKicks",
-             "aSkips",
-             "bSkips",
-             "grapeVines",
-             "lateralBound",
-             "straightLegBound",
-             "sprints"],
-            // Accessory
-            ["wallSlides",
-             "latStretch",
-             "calveStretch"]
+            // Legs (Quads)
+            ["squat",
+             "frontSquat",
+             "hackSquat",
+             "legPress",
+             "dumbellFrontSquat",
+             "legExtensions"],
+            // Legs (Hamstrings/Glutes)
+            ["deadlift",
+             "romanianDeadlift",
+             "dumbellRomanianDeadlift",
+             "weightedHipThrust",
+             "legCurl",
+             "oneLeggedDeadlift",
+             "gluteIsolationMachine"],
+            // Legs (General)
+            ["lungeBarbell",
+             "lungeDumbell",
+             "bulgarianSplitSquat",
+             "stepUp"],
+            
+            // Pull (Back)
+            ["pullUp",
+             "pullDown",
+             "kneelingPullDown",
+             "pullDownMachine",
+             "hammerStrengthPullDown",
+             "bentOverRowBarbell",
+             "bentOverRowDumbell",
+             "tBarRow",
+             "rowMachine",
+             "hammerStrengthRow"],
+            // Pull (Upper Back)
+            ["facePull",
+             "smithMachineLyingPullUp",
+             "leaningBackPullDown",
+             "seatedMachineRow"],
+            // Pull (Rear Delts)
+            ["bentOverBarbellRow"],
+            // Pull (Traps)
+            ["shrugBarbell",
+             "shrugDumbell"],
+            // Pull (Biceps)
+            ["hamerCurl",
+             "hammerCurlCable",
+             "cableCurl",
+             "curl"],
+            // Pull (Forearms)
+            ["farmersCarry",
+             "reverseBarbellCurl",
+             "forearmCurl"],
+            
+            // Push (Chest)
+            ["pushUp",
+             "benchPress",
+             "benchPressDumbell",
+             "semiInclineDumbellPress",
+             "platPress",
+             "barbellKneelingPress",
+             "cableFly",
+             "hammerStrengthPress"],
+            // Push (Shoulders)
+            ["standingShoulderPressBarbell",
+             "standingShoulderPressDumbell",
+             "lateralRaise",
+             "frontRaise"],
+            // Push (Triceps)
+            ["ballPushUp",
+             "trianglePushUp",
+             "closeGripBench",
+             "cablePullDown",
+             "ropePullDown"],
+            
+            // Calves
+            ["standingCalfRaise",
+             "seatedCalfRaise"],
+            // Abs/Core
+            ["hangingLegRaise",
+             "plank",
+             "sideLegDrop",
+             "abRollout"]
     ]
     
     
     // Default Workout Selected Array
     var workoutSelectedArray =
         [
-            // Joint Rotations
+            // Legs (Quads)
             [0,
              0,
              0,
              0,
              0,
-             0,
-             0,
              0],
-            // Foam/Ball Roll
+            // Legs (Hamstrings/Glutes)
             [0,
              0,
              0,
@@ -346,13 +509,13 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
              0,
              0,
              0],
-            // Lower Back
+            // Legs (General)
             [0,
              0,
              0,
-             0,
              0],
-            // General Mobility
+            
+            // Pull (Back)
             [0,
              0,
              0,
@@ -363,9 +526,28 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
              0,
              0,
              0],
-            // Dynamic Warm Up Drills
+            // Pull (Upper Back)
             [0,
              0,
+             0,
+             0],
+            // Pull (Rear Delts)
+            [0],
+            // Pull (Traps)
+            [0,
+             0],
+            // Pull (Biceps)
+            [0,
+             0,
+             0,
+             0],
+            // Pull (Forearms)
+            [0,
+             0,
+             0],
+            
+            // Push (Chest)
+            [0,
              0,
              0,
              0,
@@ -373,8 +555,24 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
              0,
              0,
              0],
-            // Accessory
+            // Push (Shoulders)
             [0,
+             0,
+             0,
+             0],
+            // Push (Triceps)
+            [0,
+             0,
+             0,
+             0,
+             0],
+            
+            // Calves
+            [0,
+             0],
+            // Abs/Core
+            [0,
+             0,
              0,
              0]
     ]
@@ -389,18 +587,25 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
             "strength",
             "highIntensity",
             "quick"
-            
-    ]
+        ]
     
     // Table View Section Title Array
     var tableViewSectionArray =
         [
-            "jointRotation",
-            "foamRoll",
-            "lowerBack",
-            "generalMobility",
-            "dynamicWarmupDrills",
-            "accessory"
+            "legsQ",
+            "legsHG",
+            "legsG",
+            "pullBa",
+            "pullUB",
+            "pullRD",
+            "pullT",
+            "pullB",
+            "pullF",
+            "pushC",
+            "pushS",
+            "pushT",
+            "calves",
+            "coreAbs"
     ]
     
     
@@ -830,16 +1035,14 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
         case 0:
             workoutSelectedArray =
                 [
-                    // Joint Rotations
+                    // Legs (Quads)
                     [0,
                      0,
                      0,
                      0,
                      0,
-                     0,
-                     0,
                      0],
-                    // Foam/Ball Roll
+                    // Legs (Hamstrings/Glutes)
                     [0,
                      0,
                      0,
@@ -847,13 +1050,13 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Lower Back
+                    // Legs (General)
                     [0,
                      0,
                      0,
-                     0,
                      0],
-                    // General Mobility
+                    
+                    // Pull (Back)
                     [0,
                      0,
                      0,
@@ -864,9 +1067,28 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Pull (Upper Back)
                     [0,
                      0,
+                     0,
+                     0],
+                    // Pull (Rear Delts)
+                    [0],
+                    // Pull (Traps)
+                    [0,
+                     0],
+                    // Pull (Biceps)
+                    [0,
+                     0,
+                     0,
+                     0],
+                    // Pull (Forearms)
+                    [0,
+                     0,
+                     0],
+                    
+                    // Push (Chest)
+                    [0,
                      0,
                      0,
                      0,
@@ -874,8 +1096,24 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Push (Shoulders)
                     [0,
+                     0,
+                     0,
+                     0],
+                    // Push (Triceps)
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    
+                    // Calves
+                    [0,
+                     0],
+                    // Abs/Core
+                    [0,
+                     0,
                      0,
                      0]
             ]
@@ -886,16 +1124,14 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
         case 1:
             workoutSelectedArray =
                 [
-                    // Joint Rotations
+                    // Legs (Quads)
                     [0,
                      0,
                      0,
                      0,
                      0,
-                     0,
-                     0,
                      0],
-                    // Foam/Ball Roll
+                    // Legs (Hamstrings/Glutes)
                     [0,
                      0,
                      0,
@@ -903,13 +1139,13 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Lower Back
+                    // Legs (General)
                     [0,
                      0,
                      0,
-                     0,
                      0],
-                    // General Mobility
+                    
+                    // Pull (Back)
                     [0,
                      0,
                      0,
@@ -920,9 +1156,28 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Pull (Upper Back)
                     [0,
                      0,
+                     0,
+                     0],
+                    // Pull (Rear Delts)
+                    [0],
+                    // Pull (Traps)
+                    [0,
+                     0],
+                    // Pull (Biceps)
+                    [0,
+                     0,
+                     0,
+                     0],
+                    // Pull (Forearms)
+                    [0,
+                     0,
+                     0],
+                    
+                    // Push (Chest)
+                    [0,
                      0,
                      0,
                      0,
@@ -930,8 +1185,24 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Push (Shoulders)
                     [0,
+                     0,
+                     0,
+                     0],
+                    // Push (Triceps)
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    
+                    // Calves
+                    [0,
+                     0],
+                    // Abs/Core
+                    [0,
+                     0,
                      0,
                      0]
             ]
@@ -942,16 +1213,14 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
         case 2:
             workoutSelectedArray =
                 [
-                    // Joint Rotations
+                    // Legs (Quads)
                     [0,
                      0,
                      0,
                      0,
                      0,
-                     0,
-                     0,
                      0],
-                    // Foam/Ball Roll
+                    // Legs (Hamstrings/Glutes)
                     [0,
                      0,
                      0,
@@ -959,13 +1228,13 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Lower Back
+                    // Legs (General)
                     [0,
                      0,
                      0,
-                     0,
                      0],
-                    // General Mobility
+                    
+                    // Pull (Back)
                     [0,
                      0,
                      0,
@@ -976,9 +1245,28 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Pull (Upper Back)
                     [0,
                      0,
+                     0,
+                     0],
+                    // Pull (Rear Delts)
+                    [0],
+                    // Pull (Traps)
+                    [0,
+                     0],
+                    // Pull (Biceps)
+                    [0,
+                     0,
+                     0,
+                     0],
+                    // Pull (Forearms)
+                    [0,
+                     0,
+                     0],
+                    
+                    // Push (Chest)
+                    [0,
                      0,
                      0,
                      0,
@@ -986,8 +1274,24 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Push (Shoulders)
                     [0,
+                     0,
+                     0,
+                     0],
+                    // Push (Triceps)
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    
+                    // Calves
+                    [0,
+                     0],
+                    // Abs/Core
+                    [0,
+                     0,
                      0,
                      0]
             ]
@@ -998,16 +1302,14 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
         case 3:
             workoutSelectedArray =
                 [
-                    // Joint Rotations
+                    // Legs (Quads)
                     [0,
                      0,
                      0,
                      0,
                      0,
-                     0,
-                     0,
                      0],
-                    // Foam/Ball Roll
+                    // Legs (Hamstrings/Glutes)
                     [0,
                      0,
                      0,
@@ -1015,13 +1317,13 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Lower Back
+                    // Legs (General)
                     [0,
                      0,
                      0,
-                     0,
                      0],
-                    // General Mobility
+                    
+                    // Pull (Back)
                     [0,
                      0,
                      0,
@@ -1032,9 +1334,28 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Pull (Upper Back)
                     [0,
                      0,
+                     0,
+                     0],
+                    // Pull (Rear Delts)
+                    [0],
+                    // Pull (Traps)
+                    [0,
+                     0],
+                    // Pull (Biceps)
+                    [0,
+                     0,
+                     0,
+                     0],
+                    // Pull (Forearms)
+                    [0,
+                     0,
+                     0],
+                    
+                    // Push (Chest)
+                    [0,
                      0,
                      0,
                      0,
@@ -1042,8 +1363,24 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Push (Shoulders)
                     [0,
+                     0,
+                     0,
+                     0],
+                    // Push (Triceps)
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    
+                    // Calves
+                    [0,
+                     0],
+                    // Abs/Core
+                    [0,
+                     0,
                      0,
                      0]
             ]
@@ -1054,16 +1391,14 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
         case 4:
             workoutSelectedArray =
                 [
-                    // Joint Rotations
+                    // Legs (Quads)
                     [0,
                      0,
                      0,
                      0,
                      0,
-                     0,
-                     0,
                      0],
-                    // Foam/Ball Roll
+                    // Legs (Hamstrings/Glutes)
                     [0,
                      0,
                      0,
@@ -1071,13 +1406,13 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Lower Back
+                    // Legs (General)
                     [0,
                      0,
                      0,
-                     0,
                      0],
-                    // General Mobility
+                    
+                    // Pull (Back)
                     [0,
                      0,
                      0,
@@ -1088,9 +1423,28 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Pull (Upper Back)
                     [0,
                      0,
+                     0,
+                     0],
+                    // Pull (Rear Delts)
+                    [0],
+                    // Pull (Traps)
+                    [0,
+                     0],
+                    // Pull (Biceps)
+                    [0,
+                     0,
+                     0,
+                     0],
+                    // Pull (Forearms)
+                    [0,
+                     0,
+                     0],
+                    
+                    // Push (Chest)
+                    [0,
                      0,
                      0,
                      0,
@@ -1098,8 +1452,24 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Push (Shoulders)
                     [0,
+                     0,
+                     0,
+                     0],
+                    // Push (Triceps)
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    
+                    // Calves
+                    [0,
+                     0],
+                    // Abs/Core
+                    [0,
+                     0,
                      0,
                      0]
             ]
@@ -1110,16 +1480,14 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
         case 5:
             workoutSelectedArray =
                 [
-                    // Joint Rotations
+                    // Legs (Quads)
                     [0,
                      0,
                      0,
                      0,
                      0,
-                     0,
-                     0,
                      0],
-                    // Foam/Ball Roll
+                    // Legs (Hamstrings/Glutes)
                     [0,
                      0,
                      0,
@@ -1127,13 +1495,13 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Lower Back
+                    // Legs (General)
                     [0,
                      0,
                      0,
-                     0,
                      0],
-                    // General Mobility
+                    
+                    // Pull (Back)
                     [0,
                      0,
                      0,
@@ -1144,9 +1512,28 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Pull (Upper Back)
                     [0,
                      0,
+                     0,
+                     0],
+                    // Pull (Rear Delts)
+                    [0],
+                    // Pull (Traps)
+                    [0,
+                     0],
+                    // Pull (Biceps)
+                    [0,
+                     0,
+                     0,
+                     0],
+                    // Pull (Forearms)
+                    [0,
+                     0,
+                     0],
+                    
+                    // Push (Chest)
+                    [0,
                      0,
                      0,
                      0,
@@ -1154,8 +1541,24 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Push (Shoulders)
                     [0,
+                     0,
+                     0,
+                     0],
+                    // Push (Triceps)
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    
+                    // Calves
+                    [0,
+                     0],
+                    // Abs/Core
+                    [0,
+                     0,
                      0,
                      0]
             ]
@@ -1166,16 +1569,14 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
         case 6:
             workoutSelectedArray =
                 [
-                    // Joint Rotations
+                    // Legs (Quads)
                     [0,
                      0,
                      0,
                      0,
                      0,
-                     0,
-                     0,
                      0],
-                    // Foam/Ball Roll
+                    // Legs (Hamstrings/Glutes)
                     [0,
                      0,
                      0,
@@ -1183,13 +1584,13 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Lower Back
+                    // Legs (General)
                     [0,
                      0,
                      0,
-                     0,
                      0],
-                    // General Mobility
+                    
+                    // Pull (Back)
                     [0,
                      0,
                      0,
@@ -1200,9 +1601,28 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Dynamic Warm Up Drills
+                    // Pull (Upper Back)
                     [0,
                      0,
+                     0,
+                     0],
+                    // Pull (Rear Delts)
+                    [0],
+                    // Pull (Traps)
+                    [0,
+                     0],
+                    // Pull (Biceps)
+                    [0,
+                     0,
+                     0,
+                     0],
+                    // Pull (Forearms)
+                    [0,
+                     0,
+                     0],
+                    
+                    // Push (Chest)
+                    [0,
                      0,
                      0,
                      0,
@@ -1210,8 +1630,24 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0],
-                    // Accessory
+                    // Push (Shoulders)
                     [0,
+                     0,
+                     0,
+                     0],
+                    // Push (Triceps)
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0],
+                    
+                    // Calves
+                    [0,
+                     0],
+                    // Abs/Core
+                    [0,
+                     0,
                      0,
                      0]
             ]

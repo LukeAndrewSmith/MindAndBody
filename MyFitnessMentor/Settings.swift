@@ -402,6 +402,8 @@ class Settings: UITableViewController{
                 
                         // Choice Screen 1
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough1")
+                        // c
+                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthroughc")
                 
                         // Choice Screen 2
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough2")
@@ -411,6 +413,8 @@ class Settings: UITableViewController{
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough3")
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough3y")
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough4y")
+                
+                
                 
                 
                     //Profile

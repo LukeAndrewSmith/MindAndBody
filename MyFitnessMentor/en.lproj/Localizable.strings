@@ -376,6 +376,22 @@
         "workoutInputTitle" = "Workout Title";
 
 
+        // General Workout Terms
+        "legsQ" = "Legs (Quads)";
+        "legsHG" = "Legs (Hamstring/Glutes)";
+        "legsG" = "Legs (General)";
+        "pullBa" = "Pull (Back)";
+        "pullUB" = "Pull (Upper Back)";
+        "pullRD" = "Pull (Rear Delts)";
+        "pullT" = "Pull (Traps)";
+        "pullB" = "Pull (Biceps)";
+        "pullF" = "Pull (Forearms)";
+        "pushC" = "Push (Chest)";
+        "pushS" = "Push (Shoulders)";
+        "pushT" = "Push (Triceps)";
+        "calves" = "Calves";
+        "coreAbs" = "Core/Abs";
+
         // Classic Workout //
         "upperBody" = "Upper Body";
         "lowerBody" = "Lower Body";
@@ -384,6 +400,7 @@
         "legs" = "Legs";
         "pull" = "Pull";
         "push" = "Push";
+
             // Full
             // Upper
             // Lower
@@ -1044,6 +1061,7 @@
 
         // Choice Screen 1
         "choiceScreen1" = "Information\n\nOn the screens directly after the home screen, information about the activity is provided.";
+        "choiceScreen12" = "The 'C' (custom) buttons present a way to make fully custom sessions built from scratch; exercise order, sets, reps and rest times can be specified";
 
 
         // Choice Screen 2

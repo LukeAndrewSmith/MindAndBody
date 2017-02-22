@@ -167,9 +167,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="MyPreferences" id="U3t-iA-4Ll">
                         <barButtonItem key="backBarButtonItem" title=" " id="obP-z8-zqP"/>
-                        <barButtonItem key="leftBarButtonItem" image="Profile" id="Taj-Da-leK">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Settings" id="ZAC-kI-hek">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -1317,7 +1314,7 @@
                                         </state>
                                         <connections>
                                             <action selector="timerButtonAction:" destination="7el-a7-o9h" eventType="touchUpInside" id="6hS-aO-tzK"/>
-                                            <segue destination="tFy-0V-bSq" kind="presentation" identifier="meditationTimer" id="jFe-lI-WaV"/>
+                                            <segue destination="tFy-0V-bSq" kind="presentation" id="Zju-Bm-dBW"/>
                                         </connections>
                                     </button>
                                 </subviews>
