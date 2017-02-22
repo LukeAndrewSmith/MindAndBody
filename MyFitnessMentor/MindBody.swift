@@ -122,8 +122,10 @@ class MindBody: UIViewController {
     @IBOutlet weak var stack3Bottom: NSLayoutConstraint!
     
     
+    // Labels
     
 //---------------------------------------------------------------------------------------------------------------
+    
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,6 +137,14 @@ class MindBody: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Status Bar
+        UserDefaults.standard.register(defaults: ["blacknWhite" : false])
+        if UserDefaults.standard.bool(forKey: "blacknWhite") == true {
+                UIApplication.shared.statusBarStyle = .lightContent
+            } else {
+                UIApplication.shared.statusBarStyle = .default
+            }
         
         
         // Walkthrough
@@ -170,6 +180,7 @@ class MindBody: UIViewController {
         //
         
         UserDefaults.standard.register(defaults: ["didSetColour" : false])
+        //UserDefaults.standard.set(false, forKey: "didSetColour")
         
         if UserDefaults.standard.bool(forKey: "didSetColour") == false {
             // Did set
@@ -177,21 +188,44 @@ class MindBody: UIViewController {
             // Set Colour
             UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "colour1")
             UserDefaults.standard.setColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), forKey: "colour2")
+            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour3")
+            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour4")
+            UserDefaults.standard.setColor(UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0), forKey: "colour5")
+            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour6")
+            UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "colour7")
+            UserDefaults.standard.setColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), forKey: "colour8")
+            
             
             UserDefaults.standard.synchronize()
             
         }
         
         // Set Colours
-        
         let colour1 = UserDefaults.standard.color(forKey: "colour1")!
         let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+        let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+        let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+        let colour5 = UserDefaults.standard.color(forKey: "colour5")!
+        let colour6 = UserDefaults.standard.color(forKey: "colour6")!
+        let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+        
+        
 
         self.view.applyGradient(colours: [colour1, colour2])
         
         
         self.navigationController?.navigationBar.tintColor = colour1
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-heavy", size: 23)!]
+        self.navigationController?.navigationBar.barTintColor = colour5
+        self.tabBarController?.tabBar.barTintColor = colour5
+        UITabBar.appearance().barTintColor = colour5
+        tabBarController?.tabBar.barStyle = .default
+        self.tabBarController?.tabBar.barTintColor = colour5
+        
+        
+        
+        
+        
         
         calendar.tintColor = colour1
         
@@ -207,42 +241,49 @@ class MindBody: UIViewController {
         Warmup.setTitle(NSLocalizedString("warmup", comment: ""), for: UIControlState.normal)
         Warmup.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Warmup.titleLabel!.textColor = .white
-        Warmup.layer.borderWidth = 10
-        Warmup.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        Warmup.layer.borderWidth = 8
+        Warmup.layer.borderColor = colour3.cgColor
         Warmup.titleLabel?.adjustsFontSizeToFitWidth = true
-        Warmup.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        Warmup.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Warmup.titleLabel?.textAlignment = .center
+        Warmup.setTitleColor(colour3, for: .normal)
         
         
         Workout.setTitle(NSLocalizedString("workout", comment: ""), for: UIControlState.normal)
         Workout.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Workout.titleLabel!.textColor = .white
-        Workout.layer.borderWidth = 10
-        Workout.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        Workout.layer.borderWidth = 8
+        Workout.layer.borderColor = colour3.cgColor
         Workout.titleLabel?.adjustsFontSizeToFitWidth = true
-        Workout.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        Workout.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Workout.titleLabel?.textAlignment = .center
+        Workout.setTitleColor(colour3, for: .normal)
+
         
         
         Stretching.setTitle(NSLocalizedString("stretching", comment: ""), for: UIControlState.normal)
         Stretching.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Stretching.titleLabel!.textColor = .white
-        Stretching.layer.borderWidth = 10
-        Stretching.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        Stretching.layer.borderWidth = 8
+        Stretching.layer.borderColor = colour3.cgColor
         Stretching.titleLabel?.adjustsFontSizeToFitWidth = true
-        Stretching.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        Stretching.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Stretching.titleLabel?.textAlignment = .center
+        Stretching.setTitleColor(colour3, for: .normal)
+
         
         
         
         Cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
         Cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Cardio.titleLabel!.textColor = .white
-        Cardio.layer.borderWidth = 10
-        Cardio.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        Cardio.layer.borderWidth = 8
+        Cardio.layer.borderColor = colour3.cgColor
         Cardio.titleLabel?.adjustsFontSizeToFitWidth = true
-        Cardio.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        Cardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Cardio.titleLabel?.textAlignment = .center
+        Cardio.setTitleColor(colour3, for: .normal)
+
         
         
         
@@ -250,22 +291,26 @@ class MindBody: UIViewController {
         Yoga.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Yoga.titleLabel!.textColor = .white
         Yoga.titleLabel!.adjustsFontSizeToFitWidth = true
-        Yoga.layer.borderWidth = 10
-        Yoga.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        Yoga.layer.borderWidth = 8
+        Yoga.layer.borderColor = colour3.cgColor
         Yoga.titleLabel?.adjustsFontSizeToFitWidth = true
-        Yoga.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        Yoga.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Yoga.titleLabel?.textAlignment = .center
+        Yoga.setTitleColor(colour3, for: .normal)
+
         
         
         
-    Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
+        Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
         Meditation.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         Meditation.titleLabel!.textColor = .white
-        Meditation.layer.borderWidth = 10
-        Meditation.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        Meditation.layer.borderWidth = 8
+        Meditation.layer.borderColor = colour3.cgColor
         Meditation.titleLabel?.adjustsFontSizeToFitWidth = true
-        Meditation.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        Meditation.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Meditation.titleLabel?.textAlignment = .center
+        Meditation.setTitleColor(colour3, for: .normal)
+
         
         
         

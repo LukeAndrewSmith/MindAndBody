@@ -1,15 +1,15 @@
 //
-//  WarmupChoiceFull.swift
+//  ClassicFull.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 20.01.17.
+//  Created by Luke Smith on 22.02.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -31,16 +31,13 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     // PickerViews
     @IBOutlet weak var pickerView: UIPickerView!
     
-    
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
-    
     
     // Titles
     @IBOutlet weak var presetTitle: UILabel!
     
     @IBOutlet weak var tableTitle: UILabel!
-    
     
     
     // Colours
@@ -52,17 +49,16 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     let colour6 = UserDefaults.standard.color(forKey: "colour6")!
     let colour7 = UserDefaults.standard.color(forKey: "colour7")!
     let colour8 = UserDefaults.standard.color(forKey: "colour8")!
-
+    
+    
+    
+    
+    
     
     
     // Add Preset
     @IBOutlet weak var addPreset: UIButton!
     @IBOutlet weak var removePreset: UIButton!
-    
-    
-    
-    
-    
     
     var presetTexts = ["", "", ""]
     
@@ -70,9 +66,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     let emptyArray =
         [
-            // Mandatory
-            [0,
-             0],
             // Joint Rotations
             [0,
              0,
@@ -89,24 +82,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              0,
              0,
              0,
-             0,
-             0,
-             0,
              0],
             // Lower Back
             [0,
-             0,
-             0,
-             0,
-             0],
-            // Shoulder
-            [0,
-             0,
-             0,
-             0],
-            // Band/Bar/Machine Assisted
-            [0,
-             0,
              0,
              0,
              0,
@@ -121,6 +99,13 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              0,
              0,
              0,
+             0],
+            // Dynamic Warm Up Drills
+            [0,
+             0,
+             0,
+             0,
+             0,
              0,
              0,
              0,
@@ -128,16 +113,12 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             // Accessory
             [0,
              0,
-             0,
              0]
     ]
     
-    var warmupFullPresets =
+    var workoutFullPresets =
         [
             [
-                // Mandatory
-                [0,
-                 0],
                 // Joint Rotations
                 [0,
                  0,
@@ -154,24 +135,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0,
-                 0,
-                 0,
-                 0,
                  0],
                 // Lower Back
                 [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Shoulder
-                [0,
-                 0,
-                 0,
-                 0],
-                // Band/Bar/Machine Assisted
-                [0,
-                 0,
                  0,
                  0,
                  0,
@@ -186,20 +152,23 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0,
+                 0],
+                // Dynamic Warm Up Drills
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0,
                  0,
                  0,
                  0],
                 // Accessory
                 [0,
-                 0,
                  0,
                  0]
             ],
             [
-                // Mandatory
-                [0,
-                 0],
                 // Joint Rotations
                 [0,
                  0,
@@ -216,24 +185,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0,
-                 0,
-                 0,
-                 0,
                  0],
                 // Lower Back
                 [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Shoulder
-                [0,
-                 0,
-                 0,
-                 0],
-                // Band/Bar/Machine Assisted
-                [0,
-                 0,
                  0,
                  0,
                  0,
@@ -248,20 +202,23 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Accessory
+                 0,],
+                // Dynamic Warm Up Drills
                 [0,
                  0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,
+                 0,],
+                // Accessory
+                [0,
                  0,
                  0]
             ],
             [
-                // Mandatory
-                [0,
-                 0],
                 // Joint Rotations
                 [0,
                  0,
@@ -278,24 +235,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0,
-                 0,
-                 0,
-                 0,
                  0],
                 // Lower Back
                 [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Shoulder
-                [0,
-                 0,
-                 0,
-                 0],
-                // Band/Bar/Machine Assisted
-                [0,
-                 0,
                  0,
                  0,
                  0,
@@ -310,13 +252,19 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                  0,
                  0,
                  0,
+                 0],
+                // Dynamic Warm Up Drills
+                [0,
+                 0,
+                 0,
+                 0,
+                 0,
                  0,
                  0,
                  0,
                  0],
                 // Accessory
                 [0,
-                 0,
                  0,
                  0]
             ]
@@ -324,27 +272,21 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     
     
-    // Warmup Full Array
-    var warmupFullArray =
+    // Workout Cardio Array
+    var workoutFullArray =
         [
-            // Mandatory
-            ["5minCardioL",
-             "5minCardioI"],
             // Joint Rotations
             ["wrist",
              "elbow",
-             "shoulder",
+             "shoulderR",
              "neckR",
              "waist",
              "hip",
              "knees",
              "ankles"],
             // Foam/Ball Roll
-            ["backf",
-             "thoracicSpine",
+            ["thoracicSpine",
              "lat",
-             "pecDelt",
-             "rearDelt",
              "quadf",
              "adductorf",
              "hamstringf",
@@ -356,21 +298,8 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              "scorpionKick",
              "sideBend",
              "catCow"],
-            // Shoulder
-            ["wallSlides",
-             "superManShoulder",
-             "scapula",
-             "shoulderRotation"],
-            // Band/Bar/Machine Assisted
-            ["facePull",
-             "externalRotation",
-             "internalRotation",
-             "shoulderDislocation",
-             "rearDeltFly",
-             "latPullover"],
             // General Mobility
-            ["rollBack",
-             "hipCircles",
+            ["hipCircles",
              "mountainClimber",
              "groinStretch",
              "gluteBridge",
@@ -379,23 +308,27 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              "cossakSquat",
              "hipHinges",
              "sideLegSwings",
-             "frontLegSwings",
-             "jumpSquat",
-             "lunge"],
+             "frontLegSwings"],
+            // Dynamic Warm Up Drills
+            ["jumpSquat",
+             "lunge",
+             "gluteKicks",
+             "aSkips",
+             "bSkips",
+             "grapeVines",
+             "lateralBound",
+             "straightLegBound",
+             "sprints"],
             // Accessory
-            ["latStretch",
-             "calveStretch",
-             "pushUp",
-             "pullUp"]
+            ["wallSlides",
+             "latStretch",
+             "calveStretch"]
     ]
     
     
-    // Default Warmup Selected Array
-    var warmupSelectedArray =
+    // Default Workout Selected Array
+    var workoutSelectedArray =
         [
-            // Mandatory
-            [1,
-             0],
             // Joint Rotations
             [0,
              0,
@@ -412,24 +345,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              0,
              0,
              0,
-             0,
-             0,
-             0,
              0],
             // Lower Back
             [0,
-             0,
-             0,
-             0,
-             0],
-            // Shoulder
-            [0,
-             0,
-             0,
-             0],
-            // Band/Bar/Machine Assisted
-            [0,
-             0,
              0,
              0,
              0,
@@ -444,6 +362,12 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              0,
              0,
              0,
+             0],
+            // Dynamic Warm Up Drills
+            [0,
+             0,
+             0,
+             0,
              0,
              0,
              0,
@@ -451,7 +375,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
              0],
             // Accessory
             [0,
-             0,
              0,
              0]
     ]
@@ -472,13 +395,11 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Table View Section Title Array
     var tableViewSectionArray =
         [
-            "mandatory",
             "jointRotation",
             "foamRoll",
             "lowerBack",
-            "shoulder",
-            "bandAssisted",
             "generalMobility",
+            "dynamicWarmupDrills",
             "accessory"
     ]
     
@@ -516,7 +437,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // Walkthrough
         if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough2") == false {
             let delayInSeconds = 0.5
@@ -527,11 +447,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
         
-        
         // Colours
         self.view.applyGradient(colours: [colour1, colour2])
         questionMark.tintColor = colour1
-
         
         
         // Navigation Bar Title
@@ -539,15 +457,10 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         
         // Titles
-        presetTitle.text = NSLocalizedString("presetWarmups", comment: "")
+        presetTitle.text = NSLocalizedString("presetWorkouts", comment: "")
+        tableTitle.text = NSLocalizedString("workoutTableTitle", comment: "")
         presetTitle.textColor = colour3
-        tableTitle.text = NSLocalizedString("warmupTableTitle", comment: "")
         tableTitle.textColor = colour3
-        
-        
-        
-        
-        
         
         
         
@@ -572,8 +485,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         //Image Tint
         removePreset.tintColor = colour3
         
-        
-                
         
         
         
@@ -671,13 +582,13 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         
         //
-        // Preset Warmups
+        // Preset Workouts
         //
         let defaults = UserDefaults.standard
         
-        defaults.register(defaults: ["warmupFullPresets" : warmupFullPresets])
-        defaults.register(defaults: ["warmupFullPresetTexts" : presetTexts])
-        defaults.register(defaults: ["warmupFullPresetNumber" : 0])
+        defaults.register(defaults: ["workoutFullPresets" : workoutFullPresets])
+        defaults.register(defaults: ["workoutFullPresetTexts" : presetTexts])
+        defaults.register(defaults: ["workoutFullPresetNumber" : 0])
         
         defaults.synchronize()
         
@@ -698,9 +609,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBAction func addPreset(_ sender: Any) {
         
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: "warmupFullPresetNumber")
-        var warmupPreset = defaults.object(forKey: "warmupFullPresets") as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: "warmupFullPresetTexts") as! [String]
+        let number = defaults.integer(forKey: "workoutFullPresetNumber")
+        var workoutPreset = defaults.object(forKey: "workoutFullPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "workoutFullPresetTexts") as! [String]
         
         
         // Set Preset
@@ -710,7 +621,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             // Alert and Functions
             //
-            let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
+            let inputTitle = NSLocalizedString("workoutInputTitle", comment: "")
             //
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
             alert.view.tintColor = colour7
@@ -729,10 +640,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                 
                 
                 
-                
                 // Update Preset Text Arrays
                 presetTextArray[number] = (textField?.text)!
-                defaults.set(presetTextArray, forKey: "warmupFullPresetTexts")
+                defaults.set(presetTextArray, forKey: "workoutFullPresetTexts")
                 defaults.synchronize()
                 
                 
@@ -741,8 +651,8 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                 
                 // Set new Preset Array
                 //
-                warmupPreset[number] = self.warmupSelectedArray
-                defaults.set(warmupPreset, forKey: "warmupFullPresets")
+                workoutPreset[number] = self.workoutSelectedArray
+                defaults.set(workoutPreset, forKey: "workoutFullPresets")
                 
                 defaults.synchronize()
                 
@@ -751,7 +661,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                 //
                 let newNumber = number + 1
                 
-                defaults.set(newNumber, forKey: "warmupFullPresetNumber")
+                defaults.set(newNumber, forKey: "workoutFullPresetNumber")
                 defaults.synchronize()
                 
                 
@@ -762,8 +672,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                 self.tableView.reloadData()
                 
             }))
-            // End of actions upon OK press
-
             
             // 4. Present the alert.
             self.present(alert, animated: true, completion: nil)
@@ -784,6 +692,11 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Remove Personalized Preset
     @IBAction func removePreset(_ sender: Any) {
         
+        let defaults = UserDefaults.standard
+        let number = defaults.integer(forKey: "workoutFullPresetNumber")
+        var workoutPreset = defaults.object(forKey: "workoutFullPresets") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "workoutFullPresetTexts") as! [String]
+        
         
         let selectedRow = pickerView.selectedRow(inComponent: 0)
         let index = (selectedRow) - (pickerViewArray.count + 1)
@@ -791,28 +704,21 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         if index > -1 {
             
-            let defaults = UserDefaults.standard
-            let number = defaults.integer(forKey: "warmupFullPresetNumber")
-            var warmupPreset = defaults.object(forKey: "warmupFullPresets") as! [Array<Array<Int>>]
-            var presetTextArray = defaults.object(forKey: "warmupFullPresetTexts") as! [String]
+            workoutPreset.remove(at: index)
+            workoutPreset.append(emptyArray)
             
-            
-            
-            warmupPreset.remove(at: index)
-            warmupPreset.append(emptyArray)
-            
-            defaults.set(warmupPreset, forKey: "warmupFullPresets")
+            defaults.set(workoutPreset, forKey: "workoutFullPresets")
             
             
             presetTextArray.remove(at: index)
             presetTextArray.append(emptyString)
             
-            defaults.set(presetTextArray, forKey: "warmupFullPresetTexts")
+            defaults.set(presetTextArray, forKey: "workoutFullPresetTexts")
             
             
             if number > 0 {
                 let newNumber = number - 1
-                defaults.set(newNumber, forKey: "warmupFullPresetNumber")
+                defaults.set(newNumber, forKey: "workoutFullPresetNumber")
             } else {
                 
             }
@@ -878,7 +784,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             
         } else if row == pickerViewArray.count + 1 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupFullPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "workoutFullPresetTexts") as! [String]
             let titleData = titleDataArray[0]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -889,7 +795,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             
         } else if row == pickerViewArray.count + 2 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupFullPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "workoutFullPresetTexts") as! [String]
             let titleData = titleDataArray[1]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -900,7 +806,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             
         } else if row == pickerViewArray.count + 3 {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupFullPresetTexts") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "workoutFullPresetTexts") as! [String]
             let titleData = titleDataArray[2]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
@@ -922,11 +828,8 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         switch row {
             
         case 0:
-            warmupSelectedArray =
+            workoutSelectedArray =
                 [
-                    // Mandatory
-                    [0,
-                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -943,24 +846,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
-                     0,
-                     0,
-                     0,
                      0],
                     // Lower Back
                     [0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Shoulder
-                    [0,
-                     0,
-                     0,
-                     0],
-                    // Band/Bar/Machine Assisted
-                    [0,
-                     0,
                      0,
                      0,
                      0,
@@ -975,12 +863,19 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0,
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]
@@ -989,11 +884,8 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             flashScreen()
             
         case 1:
-            warmupSelectedArray =
+            workoutSelectedArray =
                 [
-                    // Mandatory
-                    [0,
-                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -1010,24 +902,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
-                     0,
-                     0,
-                     0,
                      0],
                     // Lower Back
                     [0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Shoulder
-                    [0,
-                     0,
-                     0,
-                     0],
-                    // Band/Bar/Machine Assisted
-                    [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1042,13 +919,19 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0,
                      0,
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]
@@ -1057,11 +940,8 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             flashScreen()
             
         case 2:
-            warmupSelectedArray =
+            workoutSelectedArray =
                 [
-                    // Mandatory
-                    [0,
-                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -1078,24 +958,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
-                     0,
-                     0,
-                     0,
                      0],
                     // Lower Back
                     [0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Shoulder
-                    [0,
-                     0,
-                     0,
-                     0],
-                    // Band/Bar/Machine Assisted
-                    [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1110,13 +975,19 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0,
                      0,
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]
@@ -1125,11 +996,8 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             flashScreen()
             
         case 3:
-            warmupSelectedArray =
+            workoutSelectedArray =
                 [
-                    // Mandatory
-                    [0,
-                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -1146,24 +1014,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
-                     0,
-                     0,
-                     0,
                      0],
                     // Lower Back
                     [0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Shoulder
-                    [0,
-                     0,
-                     0,
-                     0],
-                    // Band/Bar/Machine Assisted
-                    [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1178,13 +1031,19 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0,
                      0,
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]
@@ -1193,11 +1052,8 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             flashScreen()
             
         case 4:
-            warmupSelectedArray =
+            workoutSelectedArray =
                 [
-                    // Mandatory
-                    [0,
-                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -1214,24 +1070,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
-                     0,
-                     0,
-                     0,
                      0],
                     // Lower Back
                     [0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Shoulder
-                    [0,
-                     0,
-                     0,
-                     0],
-                    // Band/Bar/Machine Assisted
-                    [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1246,13 +1087,19 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0,
                      0,
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]
@@ -1261,11 +1108,8 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             flashScreen()
             
         case 5:
-            warmupSelectedArray =
+            workoutSelectedArray =
                 [
-                    // Mandatory
-                    [0,
-                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -1282,24 +1126,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
-                     0,
-                     0,
-                     0,
                      0],
                     // Lower Back
                     [0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Shoulder
-                    [0,
-                     0,
-                     0,
-                     0],
-                    // Band/Bar/Machine Assisted
-                    [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1314,13 +1143,19 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0,
                      0,
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]
@@ -1329,11 +1164,8 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             flashScreen()
             
         case 6:
-            warmupSelectedArray =
+            workoutSelectedArray =
                 [
-                    // Mandatory
-                    [0,
-                     0],
                     // Joint Rotations
                     [0,
                      0,
@@ -1350,24 +1182,9 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
-                     0,
-                     0,
-                     0,
                      0],
                     // Lower Back
                     [0,
-                     0,
-                     0,
-                     0,
-                     0],
-                    // Shoulder
-                    [0,
-                     0,
-                     0,
-                     0],
-                    // Band/Bar/Machine Assisted
-                    [0,
-                     0,
                      0,
                      0,
                      0,
@@ -1382,13 +1199,19 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
                      0,
                      0,
                      0,
+                     0],
+                    // Dynamic Warm Up Drills
+                    [0,
+                     0,
+                     0,
+                     0,
+                     0,
                      0,
                      0,
                      0,
                      0],
                     // Accessory
                     [0,
-                     0,
                      0,
                      0]
             ]
@@ -1400,27 +1223,27 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             break
             
         case 8:
-            let fullArray = defaults.object(forKey: "warmupFullPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "workoutFullPresets") as! [Array<Array<Int>>]
             let array = fullArray[0]
-            warmupSelectedArray = array
+            workoutSelectedArray = array
             
             
             self.tableView.reloadData()
             flashScreen()
             
         case 9:
-            let fullArray = defaults.object(forKey: "warmupFullPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "workoutFullPresets") as! [Array<Array<Int>>]
             let array = fullArray[1]
-            warmupSelectedArray = array
+            workoutSelectedArray = array
             
             
             self.tableView.reloadData()
             flashScreen()
             
         case 10:
-            let fullArray = defaults.object(forKey: "warmupFullPresets") as! [Array<Array<Int>>]
+            let fullArray = defaults.object(forKey: "workoutFullPresets") as! [Array<Array<Int>>]
             let array = fullArray[2]
-            warmupSelectedArray = array
+            workoutSelectedArray = array
             
             
             self.tableView.reloadData()
@@ -1428,8 +1251,6 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             
         default:
             break
-            
-            
         }
         
         
@@ -1447,7 +1268,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Table View
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return warmupFullArray.count
+        return workoutFullArray.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -1460,16 +1281,17 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
-        header.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         header.contentView.backgroundColor = colour7
         //
+        
         
     }
     
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return warmupFullArray[section].count
+        return workoutFullArray[section].count
     }
     
     
@@ -1478,39 +1300,31 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         
-        cell.textLabel?.text = NSLocalizedString(warmupFullArray[indexPath.section][indexPath.row], comment: "")
+        cell.textLabel?.text = NSLocalizedString(workoutFullArray[indexPath.section][indexPath.row], comment: "")
         
         
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
         cell.textLabel?.textAlignment = .left
-        cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        
         cell.textLabel?.textColor = .black
         cell.tintColor = .black
         //
         
-        
-        if warmupSelectedArray[indexPath.section][indexPath.row] == 1 {
+        if workoutSelectedArray[indexPath.section][indexPath.row] == 1 {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
         }
         
         
-        if cell.textLabel?.text == NSLocalizedString("5minCardioL", comment: "") {
+        if cell.textLabel?.text == NSLocalizedString("wristAnkleRotation", comment: "") {
             cell.isUserInteractionEnabled = false
         }
-        if cell.textLabel?.text == NSLocalizedString("5minCardioI", comment: "") {
-            cell.isUserInteractionEnabled = false
-        }
-        
         
         
         // Cell Image
         cell.imageView?.image = #imageLiteral(resourceName: "Test")
-        
-        
-        
-        
         
         
         return cell
@@ -1537,10 +1351,10 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         if cell?.accessoryType == .checkmark {
             cell?.accessoryType = .none
-            warmupSelectedArray[indexPath.section][indexPath.row] = 0
+            workoutSelectedArray[indexPath.section][indexPath.row] = 0
         } else {
             cell?.accessoryType = .checkmark
-            warmupSelectedArray[indexPath.section][indexPath.row] = 1
+            workoutSelectedArray[indexPath.section][indexPath.row] = 1
         }
     }
     
@@ -1634,26 +1448,20 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Pass Array to next ViewController
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "warmupFull") {
+        if (segue.identifier == "workoutFull") {
             
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenFull
+            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenCardio
             
-            destinationVC.warmupMovementsArray = warmupFullArray
-            destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
+            destinationVC.warmupMovementsArray = workoutFullArray
+            destinationVC.warmupMovementsSelectedArray = workoutSelectedArray
             
         }
     }
     
-    
-    
-    
-    
-    
-    
-//---------------------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------------------
     
     
     var  viewNumber = 0
@@ -1694,7 +1502,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         backButton.titleLabel?.textColor = .white
         backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
         
-
+        
         
         
         switch viewNumber {
@@ -1730,7 +1538,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             
             
-//
+        //
         case 1:
             //
             
@@ -1765,108 +1573,109 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             
             
-//
+        //
         case 2:
-        //
-        
-        
-        // Clear Section
-        let path = CGMutablePath()
-        path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 98 + pickerView.frame.size.height, width: self.view.frame.size.width, height: tableView.frame.size.height))
-        path.addRect(screenSize)
-        //
-        let maskLayer = CAShapeLayer()
-        maskLayer.backgroundColor = UIColor.black.cgColor
-        maskLayer.path = path
-        maskLayer.fillRule = kCAFillRuleEvenOdd
-        //
-        walkthroughView.layer.mask = maskLayer
-        walkthroughView.clipsToBounds = true
-        //
-        
-        label.center = pickerView.center
-        label.center.y = 24.5 + (UIApplication.shared.statusBarFrame.height/2) + pickerView.frame.size.height
-        label.text = NSLocalizedString("choiceScreen23", comment: "")
-        walkthroughView.addSubview(label)
-        
-        
-        
-        
-        walkthroughView.addSubview(backButton)
-        walkthroughView.addSubview(nextButton)
-        self.view.addSubview(walkthroughView)
-        UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-        walkthroughView.bringSubview(toFront: nextButton)
-        walkthroughView.bringSubview(toFront: backButton)
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 98 + pickerView.frame.size.height, width: self.view.frame.size.width, height: tableView.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center = pickerView.center
+            label.center.y = tableView.frame.maxY - 49
+            label.center.y = 24.5 + (UIApplication.shared.statusBarFrame.height/2) + pickerView.frame.size.height
+            label.text = NSLocalizedString("choiceScreen23", comment: "")
+            walkthroughView.addSubview(label)
             
             
             
-//
+            
+            walkthroughView.addSubview(backButton)
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            walkthroughView.bringSubview(toFront: backButton)
+            
+            
+            
+        //
         case 3:
-        //
-        
-        
-        // Clear Section
-        let path = CGMutablePath()
-        path.addEllipse(in: CGRect(x: self.view.frame.size.width - 98, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + pickerView.frame.size.height, width: 98, height: 49))
-        path.addRect(screenSize)
-        //
-        let maskLayer = CAShapeLayer()
-        maskLayer.backgroundColor = UIColor.black.cgColor
-        maskLayer.path = path
-        maskLayer.fillRule = kCAFillRuleEvenOdd
-        //
-        walkthroughView.layer.mask = maskLayer
-        walkthroughView.clipsToBounds = true
-        //
-        
-        label.center = tableView.center
-        label.center.y = tableView.frame.maxY - 49
-        label.text = NSLocalizedString("choiceScreen24", comment: "")
-        walkthroughView.addSubview(label)
-        
-        
-        
-        walkthroughView.addSubview(backButton)
-        walkthroughView.addSubview(nextButton)
-        self.view.addSubview(walkthroughView)
-        UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-        walkthroughView.bringSubview(toFront: nextButton)
-        walkthroughView.bringSubview(toFront: backButton)
+            //
             
-        
-//
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addEllipse(in: CGRect(x: self.view.frame.size.width - 98, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + pickerView.frame.size.height, width: 98, height: 49))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center = tableView.center
+            label.center.y = tableView.frame.maxY - 49
+            label.text = NSLocalizedString("choiceScreen24", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            walkthroughView.addSubview(backButton)
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            walkthroughView.bringSubview(toFront: backButton)
+            
+            
+        //
         case 4:
-        //
-        
-        
-        // Clear Section
-        let path = CGMutablePath()
-        path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 98 + pickerView.frame.size.height + tableView.frame.size.height, width: self.view.frame.size.height, height: 49))
-        path.addRect(screenSize)
-        //
-        let maskLayer = CAShapeLayer()
-        maskLayer.backgroundColor = UIColor.black.cgColor
-        maskLayer.path = path
-        maskLayer.fillRule = kCAFillRuleEvenOdd
-        //
-        walkthroughView.layer.mask = maskLayer
-        walkthroughView.clipsToBounds = true
-        //
-        
-        
-        label.text = NSLocalizedString("choiceScreen25", comment: "")
-        walkthroughView.addSubview(label)
-        
-        
-        
-        
-        walkthroughView.addSubview(backButton)
-        walkthroughView.addSubview(nextButton)
-        self.view.addSubview(walkthroughView)
-        UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-        walkthroughView.bringSubview(toFront: nextButton)
-        walkthroughView.bringSubview(toFront: backButton)
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 98 + pickerView.frame.size.height + tableView.frame.size.height, width: self.view.frame.size.height, height: 49))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("choiceScreen25", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButton)
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            walkthroughView.bringSubview(toFront: backButton)
             
             
             
@@ -1932,6 +1741,7 @@ class WarmupChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
     }
-
+    
+    
     
 }

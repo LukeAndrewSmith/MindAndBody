@@ -45,7 +45,14 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
+    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour8 = UserDefaults.standard.color(forKey: "colour8")!
     
+
     
     // Add Preset
     @IBOutlet weak var addPreset: UIButton!
@@ -626,14 +633,15 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("stretching", comment: ""))
+        navigationBar.title = (NSLocalizedString("postWorkout", comment: ""))
         
         
         
         // Titles
         presetTitle.text = NSLocalizedString("presetSessions", comment: "")
         tableTitle.text = NSLocalizedString("stretches", comment: "")
-        
+        presetTitle.textColor = colour3
+        tableTitle.textColor = colour3
         
         
         // Plus Button Colour
@@ -643,7 +651,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         addPreset.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        addPreset.tintColor = colour2
+        addPreset.tintColor = colour3
         
         
         
@@ -654,7 +662,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         removePreset.setImage(tintedImage2, for: .normal)
         
         //Image Tint
-        removePreset.tintColor = colour2
+        removePreset.tintColor = colour3
         
         
         
@@ -662,7 +670,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour2, for: .normal)
+        beginButton.setTitleColor(colour8, for: .normal)
         
         
         
@@ -693,7 +701,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         informationTitle.textColor = colour2
-        informationTitle.backgroundColor = colour1
+        informationTitle.backgroundColor = colour7
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -803,7 +811,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             let inputTitle = NSLocalizedString("stretchingInputTitle", comment: "")
             //
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-            alert.view.tintColor = colour1
+            alert.view.tintColor = colour7
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             
             //2. Add the text field. You can configure it however you need.
@@ -1666,7 +1674,7 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
         header.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        header.contentView.backgroundColor = colour1
+        header.contentView.backgroundColor = colour7
         //
         
         

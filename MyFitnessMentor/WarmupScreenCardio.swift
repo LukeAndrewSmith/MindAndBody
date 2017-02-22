@@ -391,8 +391,11 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-    let colour4 = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
+    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
     
     
     
@@ -440,7 +443,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         //
         // Demonstration Image
         //
-        demonstrationImage.backgroundColor = colour4
+        demonstrationImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         demonstrationImage.contentMode = .scaleAspectFit
         
         
@@ -448,7 +451,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         
         
         // Body Image View
-        bodyImage.backgroundColor = colour4
+        bodyImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         bodyImage.contentMode = .scaleAspectFit
         
         
@@ -462,7 +465,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         imageExpand.setImage(tintedImageImage, for: .normal)
         
         //Image Tint
-        imageExpand.tintColor = colour4
+        imageExpand.tintColor = colour3
         
 
         
@@ -508,21 +511,21 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         timerButton2.setImage(tintedImage3, for: .normal)
         
         //Image Tint
-        timerButton.tintColor = colour4
+        timerButton.tintColor = colour3
         timerButton2.tintColor = colour3
         
         
         
         
         // Timer View
-        timerView.backgroundColor = colour4
+        timerView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
         
         // Timer Elements
         //
         // Picker View Timer
         //
-        pickerViewTimer.backgroundColor = colour4
+        pickerViewTimer.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         view.addSubview(pickerViewTimer)
         
         
@@ -530,7 +533,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         //
         minutePicker.dataSource = self
         minutePicker.delegate = self
-        minutePicker.backgroundColor = colour4
+        minutePicker.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
         pickerViewTimer.addSubview(minutePicker)
         
@@ -538,7 +541,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         
         minuteLabel.text = NSLocalizedString("minutes", comment: "")
         minuteLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
-        minuteLabel.textColor = colour3
+        minuteLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         minuteLabel.textAlignment = .left
         
         pickerViewTimer.addSubview(minuteLabel)
@@ -548,14 +551,14 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         //
         secondPicker.dataSource = self
         secondPicker.delegate = self
-        secondPicker.backgroundColor = colour4
+        secondPicker.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
         pickerViewTimer.addSubview(secondPicker)
         
         
         secondLabel.text = NSLocalizedString("seconds", comment: "")
         secondLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
-        secondLabel.textColor = colour3
+        secondLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         secondLabel.textAlignment = .left
         
         pickerViewTimer.addSubview(secondLabel)
@@ -573,7 +576,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         //
         timerStart.backgroundColor = colour2
         timerStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
-        timerStart.titleLabel?.textColor = colour3
+        timerStart.setTitleColor(colour6, for: .normal)
         timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
         timerStart.titleLabel?.textAlignment = .center
         
@@ -587,7 +590,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         //
         timerCancel.backgroundColor = colour1
         timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
-        timerCancel.titleLabel?.textColor = colour3
+        timerCancel.setTitleColor(colour6, for: .normal)
         timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
         timerCancel.titleLabel?.textAlignment = .center
         
@@ -603,7 +606,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         countDownLabel.textAlignment = .center
         countDownLabel.font = UIFont(name: "SFUIDisplay-Light", size: 27)
         countDownLabel.text = "00:00"
-        countDownLabel.textColor = colour3
+        countDownLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
         
         self.timerView.addSubview(countDownLabel)
@@ -689,11 +692,11 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         //
         timerStart.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
         timerStart.layer.borderWidth = timerStart.frame.size.height/4
-        timerStart.layer.borderColor = colour4.cgColor
+        timerStart.layer.borderColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0).cgColor
         //
         timerCancel.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
         timerCancel.layer.borderWidth = timerCancel.frame.size.height/4
-        timerCancel.layer.borderColor = colour4.cgColor
+        timerCancel.layer.borderColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0).cgColor
         //
         countDownLabel.frame = CGRect(x: self.scrollViewExplanation.frame.size.width/2, y: 0, width: self.scrollViewExplanation.frame.size.width/2, height: self.timerView.frame.size.height)
         
@@ -705,16 +708,18 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
     // Generate Buttons
     //
 
+    
+    
     func createButton() -> UIButton {
         let setButton = UIButton()
         let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
         setButton.addConstraints([widthHeight])
         setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
         setButton.layer.borderWidth = 4
-        setButton.layer.borderColor = colour1.cgColor
+        setButton.layer.borderColor = colour7.cgColor
         setButton.layer.cornerRadius = 21.4375
         setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
-        setButton.backgroundColor = colour3
+        setButton.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         setButton.isEnabled = false
         
         
@@ -813,6 +818,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         navigationTitle.backgroundColor = .clear
         navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
+        self.navigationController?.navigationBar.barTintColor = colour5
         
         self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
@@ -886,6 +892,13 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         self.explanationLabel.text = NSLocalizedString("explanation", comment: "")
         // Progress
         self.progressLabel.text = (String(warmupScreenIndex + 1)+"/"+String(warmupArray.count))
+        
+        setsRepsLabel.textColor = colour3
+        demonstrationLabel.textColor = colour3
+        targetAreaLabel.textColor = colour3
+        explanationLabel.textColor = colour3
+        progressLabel.textColor = colour3
+        
         
         
         
@@ -1122,7 +1135,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
             
             let rowLabel = UILabel()
             let titleData = String(minuteData[row])
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:colour3])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -1131,7 +1144,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
             
             let rowLabel = UILabel()
             let titleData = String(secondData[row])
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:colour3])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -1210,7 +1223,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
             }
             }
         }
-        sender.backgroundColor = colour2
+        sender.backgroundColor = colour7
         sender.isEnabled = false
     
     }
@@ -1334,7 +1347,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         imageViewExpanded.center.y = height/2
         imageViewExpanded.isUserInteractionEnabled = true
         
-        imageViewExpanded.backgroundColor = colour4
+        imageViewExpanded.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
         
         
@@ -1408,7 +1421,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         let seperator = UILabel()
         seperator.frame = CGRect(x: 0, y: 0, width: 1, height: 36.75)
         seperator.center.x = imageViewExpanded.center.x
-        seperator.backgroundColor = colour4
+        seperator.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
         imageViewExpanded.addSubview(seperator)
         
@@ -1440,10 +1453,11 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         
         // Demonstration Image
         demonstrationImageExpanded.frame = CGRect(x: 0, y: 36.75, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 36.75)
+        demonstrationImageExpanded.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
         demonstrationImageExpanded.contentMode = .scaleAspectFit
         
-        view.addSubview(demonstrationImageExpanded)
+        imageViewExpanded.addSubview(demonstrationImageExpanded)
         
         
         
@@ -1529,7 +1543,7 @@ class WarmupScreenCardio: UIViewController, UIScrollViewDelegate, UIPickerViewDe
         scrollViewExplanationE.center.x = self.view.frame.size.width/2
         scrollViewExplanationE.center.y = self.view.frame.size.height/2
         
-        scrollViewExplanationE.backgroundColor = colour3
+        scrollViewExplanationE.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
         
         

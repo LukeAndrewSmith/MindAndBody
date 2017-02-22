@@ -17,8 +17,11 @@ class Information: UITableViewController{
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")
     let colour2 = UserDefaults.standard.color(forKey: "colour2")
-    let colour3 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-    let colour4 = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
+    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")
     
     //let colour1 = UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)
     //let colour2 = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
@@ -61,7 +64,7 @@ class Information: UITableViewController{
         
         
         //
-        self.navigationController?.navigationBar.barTintColor = colour1
+        self.navigationController?.navigationBar.barTintColor = colour7
         self.navigationController?.navigationBar.tintColor = .white
         
         
@@ -131,7 +134,7 @@ class Information: UITableViewController{
         
         
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = colour3
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
             cell.textLabel?.textAlignment = .left
         

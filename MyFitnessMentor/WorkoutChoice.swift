@@ -24,9 +24,6 @@ class WorkoutChoice: UIViewController  {
     // Home
     @IBOutlet weak var home: UIButton!
 
-    // Gym 2
-    @IBOutlet weak var gym2: UIButton!
-    
     
     
     // Information View
@@ -40,16 +37,7 @@ class WorkoutChoice: UIViewController  {
     // Stack View
     @IBOutlet weak var stackView: UIStackView!
 
-    
-    
-    // Constraints
-    @IBOutlet weak var gymTop: NSLayoutConstraint!
-    
-    @IBOutlet weak var gymBottom: NSLayoutConstraint!
-    
-    @IBOutlet weak var stackBottom: NSLayoutConstraint!
-    
-    
+
     
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
@@ -57,7 +45,9 @@ class WorkoutChoice: UIViewController  {
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    
+    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -94,23 +84,20 @@ class WorkoutChoice: UIViewController  {
         gym.setTitle(NSLocalizedString("gym", comment: ""), for: UIControlState.normal)
         gym.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         gym.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        gym.layer.borderWidth = 10
-        gym.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        gym.layer.borderWidth = 8
+        gym.layer.borderColor = colour3.cgColor
+        gym.setTitleColor(colour3, for: .normal)
+
         
         
         home.setTitle(NSLocalizedString("home", comment: ""), for: UIControlState.normal)
         home.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         home.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        home.layer.borderWidth = 10
-        home.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        
-        
-        gym2.setTitle(NSLocalizedString("gym2", comment: ""), for: UIControlState.normal)
-        gym2.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        gym2.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        gym2.layer.borderWidth = 10
-        gym2.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        
+        home.layer.borderWidth = 8
+        home.layer.borderColor = colour3.cgColor
+        home.setTitleColor(colour3, for: .normal)
+
+
         
         
         
@@ -129,7 +116,7 @@ class WorkoutChoice: UIViewController  {
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         informationTitle.textColor = colour2
-        informationTitle.backgroundColor = colour1
+        informationTitle.backgroundColor = colour7
         
         
         
@@ -198,20 +185,6 @@ class WorkoutChoice: UIViewController  {
         
         self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextStretchingC.frame.size.height + informationTitle.frame.size.height + 20)
         
-        
-        
-        // Iphone 5/SE
-        if UIScreen.main.nativeBounds.height < 1334 {
-            
-            gymTop.constant = 52
-            gymBottom.constant = 52
-            stackBottom.constant = 52
-            
-            stackView.spacing = 15
-            
-        }
-
-        
     }
     
     
@@ -219,31 +192,21 @@ class WorkoutChoice: UIViewController  {
         super.viewDidLayoutSubviews()
         
         
-        gym.layer.cornerRadius = ((self.stackView.frame.size.height) * 3/2) / 2
+        gym.layer.cornerRadius = ((self.stackView.frame.size.height) - 40) / 4
         gym.layer.masksToBounds = true
         gym.titleLabel?.adjustsFontSizeToFitWidth = true
-        gym.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        gym.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         gym.titleLabel?.numberOfLines = 0
         gym.titleLabel?.textAlignment = .center
         
         
-        home.layer.cornerRadius = (self.stackView.frame.size.height) / 2
+        home.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
         home.layer.masksToBounds = true
         home.titleLabel?.adjustsFontSizeToFitWidth = true
-        home.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        home.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         home.titleLabel?.numberOfLines = 0
         home.titleLabel?.textAlignment = .center
-        
-        
-        gym2.layer.cornerRadius = (self.stackView.frame.size.height) / 2
-        gym2.layer.masksToBounds = true
-        gym2.titleLabel?.adjustsFontSizeToFitWidth = true
-        gym2.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
-        gym2.titleLabel?.numberOfLines = 0
-        gym2.titleLabel?.textAlignment = .center
-        
-
-    }
+        }
     
    
     

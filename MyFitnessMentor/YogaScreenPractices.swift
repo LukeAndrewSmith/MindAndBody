@@ -268,8 +268,12 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-    let colour4 = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
+    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    
     
     
     // View Will Appear
@@ -318,9 +322,12 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         backButton.tintColor = colour1
         
         
+        // Breath Label
+        setsRepsLabel.textColor = colour3
+        
         
         // Image View
-        imageView.backgroundColor = colour4
+        imageView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         imageView.contentMode = .scaleAspectFit
         
         
@@ -403,6 +410,7 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         navigationTitle.backgroundColor = .clear
         navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
+        self.navigationController?.navigationBar.barTintColor = colour5
         
         self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
@@ -570,7 +578,7 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         scrollViewExplanationE.center.x = self.view.frame.size.width/2
         scrollViewExplanationE.center.y = self.view.frame.size.height/2
         
-        scrollViewExplanationE.backgroundColor = colour3
+        scrollViewExplanationE.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
         
         

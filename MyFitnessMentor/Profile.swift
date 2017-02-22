@@ -82,8 +82,10 @@ class Profile: UITableViewController{
         // Colours
         let colour1 = UserDefaults.standard.color(forKey: "colour1")!
         let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+        let colour7 = UserDefaults.standard.color(forKey: "colour7")!
         
-        self.navigationController?.navigationBar.barTintColor = colour1
+        
+        self.navigationController?.navigationBar.barTintColor = colour7
         self.navigationController?.navigationBar.tintColor = .white
         
         self.tabBarController?.tabBar.tintColor = colour2

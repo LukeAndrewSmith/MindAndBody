@@ -53,6 +53,9 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
     
     
     override func viewDidLoad() {
@@ -82,11 +85,11 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         //
         guided.setTitle(NSLocalizedString("guided", comment: ""), for: UIControlState.normal)
         guided.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        guided.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        guided.layer.borderWidth = 10
-        guided.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        guided.setTitleColor(colour3, for: .normal)
+        guided.layer.borderWidth = 8
+        guided.layer.borderColor = colour3.cgColor
         guided.titleLabel?.adjustsFontSizeToFitWidth = true
-        guided.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        guided.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         guided.titleLabel?.textAlignment = .center
         
         
@@ -94,22 +97,22 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         
         custom.setTitle(NSLocalizedString("custom", comment: ""), for: UIControlState.normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        custom.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        custom.layer.borderWidth = 10
-        custom.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        custom.setTitleColor(colour3, for: .normal)
+        custom.layer.borderWidth = 8
+        custom.layer.borderColor = colour3.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         custom.titleLabel?.textAlignment = .center
         
 
     
         practices.setTitle(NSLocalizedString("practices", comment: ""), for: UIControlState.normal)
         practices.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        practices.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        practices.layer.borderWidth = 10
-        practices.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        practices.setTitleColor(colour3, for: .normal)
+        practices.layer.borderWidth = 8
+        practices.layer.borderColor = colour3.cgColor
         practices.titleLabel?.adjustsFontSizeToFitWidth = true
-        practices.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        practices.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         practices.titleLabel?.textAlignment = .center
         //
         
@@ -138,7 +141,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         informationTitleYogaC.textAlignment = .center
         informationTitleYogaC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         informationTitleYogaC.textColor = colour2
-        informationTitleYogaC.backgroundColor = colour1
+        informationTitleYogaC.backgroundColor = colour7
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -227,21 +230,21 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         guided.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         guided.layer.masksToBounds = true
         guided.titleLabel?.adjustsFontSizeToFitWidth = true
-        guided.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        guided.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         guided.titleLabel?.numberOfLines = 0
         guided.titleLabel?.textAlignment = .center
         
         custom.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         custom.layer.masksToBounds = true
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         custom.titleLabel?.numberOfLines = 0
         custom.titleLabel?.textAlignment = .center
         
         practices.layer.cornerRadius = (self.stackView.frame.size.height * 3/2) / 2
         practices.layer.masksToBounds = true
         practices.titleLabel?.adjustsFontSizeToFitWidth = true
-        practices.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        practices.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         practices.titleLabel?.numberOfLines = 0
         practices.titleLabel?.textAlignment = .center
         

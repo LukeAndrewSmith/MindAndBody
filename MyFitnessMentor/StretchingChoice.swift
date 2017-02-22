@@ -29,6 +29,9 @@ class StretchingChoice: UIViewController  {
     @IBOutlet weak var general: UIButton!
     
     
+    @IBOutlet weak var custom: UIButton!
+    
+    
     // Information View
     @IBOutlet weak var informationViewStretchingC: UIScrollView!
     
@@ -60,7 +63,9 @@ class StretchingChoice: UIViewController  {
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    
+    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
     
     
     override func viewDidLoad() {
@@ -89,21 +94,37 @@ class StretchingChoice: UIViewController  {
         // Button Titles
         general.setTitle(NSLocalizedString("general", comment: ""), for: UIControlState.normal)
         general.titleLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        general.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        general.layer.borderWidth = 10
-        general.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        general.setTitleColor(colour3, for: .normal)
+        general.layer.borderWidth = 8
+        general.layer.borderColor = colour3.cgColor
         
         postWorkout.setTitle(NSLocalizedString("postWorkout", comment: ""), for: UIControlState.normal)
         postWorkout.titleLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        postWorkout.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        postWorkout.layer.borderWidth = 10
-        postWorkout.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        postWorkout.setTitleColor(colour3, for: .normal)
+        postWorkout.layer.borderWidth = 8
+        postWorkout.layer.borderColor = colour3.cgColor
         
         postCardio.setTitle(NSLocalizedString("postCardio", comment: ""), for: UIControlState.normal)
+        postCardio.setTitleColor(colour3, for: .normal)
         postCardio.titleLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        postCardio.titleLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        postCardio.layer.borderWidth = 10
-        postCardio.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        postCardio.layer.borderWidth = 8
+        postCardio.layer.borderColor = colour3.cgColor
+        
+        
+        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        custom.layer.borderWidth = 8
+        custom.layer.borderColor = colour3.cgColor
+        custom.titleLabel?.adjustsFontSizeToFitWidth = true
+        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        custom.titleLabel?.textAlignment = .center
+        custom.setTitleColor(colour3, for: .normal)
+        custom.layer.cornerRadius = 49/2
+        custom.layer.masksToBounds = true
+        custom.titleLabel?.adjustsFontSizeToFitWidth = true
+        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        custom.titleLabel?.numberOfLines = 0
+        custom.titleLabel?.textAlignment = .center
+        //
         
         
         
@@ -121,7 +142,7 @@ class StretchingChoice: UIViewController  {
         informationTitleStretchingC.textAlignment = .center
         informationTitleStretchingC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         informationTitleStretchingC.textColor = colour2
-        informationTitleStretchingC.backgroundColor = colour1
+        informationTitleStretchingC.backgroundColor = colour7
         
         
         
@@ -216,14 +237,14 @@ class StretchingChoice: UIViewController  {
         general.layer.cornerRadius = ((self.stackView.frame.size.height) * 3/2) / 2
         general.layer.masksToBounds = true
         general.titleLabel?.adjustsFontSizeToFitWidth = true
-        general.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        general.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         general.titleLabel?.numberOfLines = 0
         general.titleLabel?.textAlignment = .center
         
         postWorkout.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         postWorkout.layer.masksToBounds = true
         postWorkout.titleLabel?.adjustsFontSizeToFitWidth = true
-        postWorkout.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        postWorkout.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         postWorkout.titleLabel?.numberOfLines = 0
         postWorkout.titleLabel?.textAlignment = .center
 
@@ -231,7 +252,7 @@ class StretchingChoice: UIViewController  {
         postCardio.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         postCardio.layer.masksToBounds = true
         postCardio.titleLabel?.adjustsFontSizeToFitWidth = true
-        postCardio.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        postCardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         postCardio.titleLabel?.numberOfLines = 0
         postCardio.titleLabel?.textAlignment = .center
 

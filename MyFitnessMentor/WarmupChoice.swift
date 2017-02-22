@@ -30,6 +30,10 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     // Cardio
     @IBOutlet weak var cardio: UIButton!
     
+    //
+    @IBOutlet weak var custom: UIButton!
+    
+    
     // Information View
     @IBOutlet weak var informationViewWarmupC: UIScrollView!
     
@@ -58,7 +62,13 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    
+    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
+    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,42 +98,57 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         //
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        fullBody.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        fullBody.layer.borderWidth = 10
-        fullBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        fullBody.layer.borderWidth = 8
+        fullBody.layer.borderColor = colour3.cgColor
         fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         fullBody.titleLabel?.textAlignment = .center
+        fullBody.setTitleColor(colour3, for: .normal)
         
         
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        upperBody.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        upperBody.layer.borderWidth = 10
-        upperBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        upperBody.layer.borderWidth = 8
+        upperBody.layer.borderColor = colour3.cgColor
         upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         upperBody.titleLabel?.textAlignment = .center
+        upperBody.setTitleColor(colour3, for: .normal)
         
         
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
         lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        lowerBody.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        lowerBody.layer.borderWidth = 10
-        lowerBody.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        lowerBody.layer.borderWidth = 8
+        lowerBody.layer.borderColor = colour3.cgColor
         lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         lowerBody.titleLabel?.textAlignment = .center
+        lowerBody.setTitleColor(colour3, for: .normal)
         
         
         cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
         cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        cardio.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        cardio.layer.borderWidth = 10
-        cardio.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        cardio.layer.borderWidth = 8
+        cardio.layer.borderColor = colour3.cgColor
         cardio.titleLabel?.adjustsFontSizeToFitWidth = true
-        cardio.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        cardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         cardio.titleLabel?.textAlignment = .center
+        cardio.setTitleColor(colour3, for: .normal)
+        
+        
+        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        custom.layer.borderWidth = 8
+        custom.layer.borderColor = colour3.cgColor
+        custom.titleLabel?.adjustsFontSizeToFitWidth = true
+        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        custom.titleLabel?.textAlignment = .center
+        custom.setTitleColor(colour3, for: .normal)
+        custom.layer.cornerRadius = 49/2
+        custom.layer.masksToBounds = true
+        custom.titleLabel?.adjustsFontSizeToFitWidth = true
+        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        custom.titleLabel?.numberOfLines = 0
+        custom.titleLabel?.textAlignment = .center
         //
         
         
@@ -151,7 +176,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         informationTitleWarmupC.textAlignment = .center
         informationTitleWarmupC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         informationTitleWarmupC.textColor = colour2
-        informationTitleWarmupC.backgroundColor = colour1
+        informationTitleWarmupC.backgroundColor = colour7
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -242,28 +267,28 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         cardio.layer.cornerRadius = (self.stackView.frame.size.height - 49) / 6
         cardio.layer.masksToBounds = true
         cardio.titleLabel?.adjustsFontSizeToFitWidth = true
-        cardio.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        cardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         cardio.titleLabel?.numberOfLines = 0
         cardio.titleLabel?.textAlignment = .center
         
         lowerBody.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 6
         lowerBody.layer.masksToBounds = true
         lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         lowerBody.titleLabel?.numberOfLines = 0
         lowerBody.titleLabel?.textAlignment = .center
         
         upperBody.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 6
         upperBody.layer.masksToBounds = true
         upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         upperBody.titleLabel?.numberOfLines = 0
         upperBody.titleLabel?.textAlignment = .center
         
         fullBody.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 6
         fullBody.layer.masksToBounds = true
         fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         fullBody.titleLabel?.numberOfLines = 0
         fullBody.titleLabel?.textAlignment = .center
     }

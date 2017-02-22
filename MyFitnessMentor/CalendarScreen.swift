@@ -54,6 +54,11 @@ class CalendarScreen: UITableViewController {
     
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
+    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
     
     
     
@@ -91,7 +96,7 @@ class CalendarScreen: UITableViewController {
         self.navigationController?.navigationBar.tintColor = .white
      
         
-        self.navigationController?.navigationBar.barTintColor = colour1
+        self.navigationController?.navigationBar.barTintColor = colour7
         
         
         

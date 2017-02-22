@@ -42,6 +42,9 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
     
     
     override func viewDidLoad() {
@@ -75,20 +78,20 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         //
         guided.setTitle(NSLocalizedString("guided", comment: ""), for: UIControlState.normal)
         guided.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        guided.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        guided.layer.borderWidth = 10
-        guided.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        guided.setTitleColor(colour3, for: .normal)
+        guided.layer.borderWidth = 8
+        guided.layer.borderColor = colour3.cgColor
         guided.titleLabel?.adjustsFontSizeToFitWidth = true
-        guided.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        guided.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         guided.titleLabel?.textAlignment = .center
         
         meditationTimer.setTitle(NSLocalizedString("meditationTimer", comment: ""), for: UIControlState.normal)
         meditationTimer.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        meditationTimer.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        meditationTimer.layer.borderWidth = 10
-        meditationTimer.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        meditationTimer.setTitleColor(colour3, for: .normal)
+        meditationTimer.layer.borderWidth = 8
+        meditationTimer.layer.borderColor = colour3.cgColor
         meditationTimer.titleLabel?.adjustsFontSizeToFitWidth = true
-        meditationTimer.titleEdgeInsets = UIEdgeInsetsMake(0,10,0,10)
+        meditationTimer.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         meditationTimer.titleLabel?.textAlignment = .center
         //
         
@@ -116,7 +119,7 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         informationTitleMeditationC.textAlignment = .center
         informationTitleMeditationC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         informationTitleMeditationC.textColor = colour2
-        informationTitleMeditationC.backgroundColor = colour1
+        informationTitleMeditationC.backgroundColor = colour7
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -245,11 +248,20 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
     
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
-        let delayInSeconds = 1.0
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        if (extraSwipe.direction == .down){
             
-            _ = self.navigationController?.popToRootViewController(animated: false)
-            
+            if self.informationViewMeditationC.frame.minY < self.view.frame.maxY {
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    
+                    self.informationViewMeditationC.transform = CGAffineTransform(translationX: 0, y: 0)
+                    
+                }, completion: nil)
+                UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    
+                    self.informationTitleMeditationC.transform = CGAffineTransform(translationX: 0, y: 0)
+                }, completion: nil)
+                
+            }
         }
     }
     

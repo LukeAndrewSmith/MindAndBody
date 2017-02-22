@@ -43,8 +43,13 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-    let colour4 = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
+    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour8 = UserDefaults.standard.color(forKey: "colour8")!
+    
     
     
     // Add Preset
@@ -424,6 +429,8 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         // Titles
         presetTitle.text = NSLocalizedString("presetWarmups", comment: "")
         tableTitle.text = NSLocalizedString("warmupTableTitle", comment: "")
+        presetTitle.textColor = colour3
+        tableTitle.textColor = colour3
         
         
         
@@ -453,7 +460,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour2, for: .normal)
+        beginButton.setTitleColor(colour8, for: .normal)
         
         
         
@@ -484,7 +491,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         informationTitle.textColor = colour2
-        informationTitle.backgroundColor = colour1
+        informationTitle.backgroundColor = colour7
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -589,7 +596,7 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
             let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
             //
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-            alert.view.tintColor = colour1
+            alert.view.tintColor = colour7
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             
             //2. Add the text field. You can configure it however you need.
@@ -1215,8 +1222,8 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
-        header.textLabel?.textColor = colour3
-        header.contentView.backgroundColor = colour1
+        header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        header.contentView.backgroundColor = colour7
         header.contentView.tintColor = colour1
         //
         
@@ -1241,7 +1248,8 @@ class WarmupChoiceLower: UIViewController, UITableViewDelegate, UITableViewDataS
         
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
         cell.textLabel?.textAlignment = .left
-        cell.backgroundColor = colour3
+        cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+
         cell.textLabel?.textColor = .black
         cell.tintColor = .black
         //

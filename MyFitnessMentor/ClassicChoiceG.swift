@@ -1,5 +1,5 @@
 //
-//  CardioChoice.swift
+//  WorkoutChoice.swift
 //  MyFitnessMentor
 //
 //  Created by Luke Smith on 21/12/16.
@@ -11,36 +11,66 @@ import UIKit
 
 
 
-class CardioChoice: UIViewController  {
+class ClassicChoiceG: UIViewController  {
     
     // Outlets
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    // Hiit
-    @IBOutlet weak var hiit: UIButton!
-    
-    // Liss
-    @IBOutlet weak var liss: UIButton!
-    
-    // Custom
-    @IBOutlet weak var custom: UIButton!
+    // Full Body
+    @IBOutlet weak var fullBody: UIButton!
     
     
-    // Information Screen
+    // Upper Lower
+    @IBOutlet weak var upperBody: UIButton!
+    @IBOutlet weak var lowerBody: UIButton!
+    
+    
+    // Legs Pull Push
+    @IBOutlet weak var legs: UIButton!
+    @IBOutlet weak var pull: UIButton!
+    @IBOutlet weak var push: UIButton!
+    
+    // Information View
     @IBOutlet weak var informationView: UIScrollView!
-   
+    // Information Title
     @IBOutlet weak var informationTitle: UILabel!
     
     
+    // Stack Views
+    @IBOutlet weak var stackView1: UIStackView!
     
-    // Stack View
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var stackView2: UIStackView!
     
     
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
+    
+    
+    
+   
+    
+    
+    // Constraints
+    @IBOutlet weak var fullTop: NSLayoutConstraint!
+    
+    @IBOutlet weak var fullBottom: NSLayoutConstraint!
+    
+    @IBOutlet weak var stack1Bottom: NSLayoutConstraint!
+    
+    @IBOutlet weak var stack2Bottom: NSLayoutConstraint!
+        //
+    @IBOutlet weak var connection1Width: NSLayoutConstraint!
+    
+    @IBOutlet weak var connection2Width: NSLayoutConstraint!
+    
+    @IBOutlet weak var connection2Trailing: NSLayoutConstraint!
+    
+    @IBOutlet weak var connection3Width: NSLayoutConstraint!
+    
+    @IBOutlet weak var connection3Trailing: NSLayoutConstraint!
+    
     
     
     // Colours
@@ -54,62 +84,103 @@ class CardioChoice: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Walkthrough
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough1") == false {
-            let delayInSeconds = 0.5
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                self.walkthroughMindBody()
-            }
-            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough1")
-        }
-        
         // Colours
         self.view.applyGradient(colours: [colour1, colour2])
         questionMark.tintColor = colour1
         
         
         
+        
         // Titles
-        navigationBar.title = (NSLocalizedString("cardioType", comment: ""))
+        navigationBar.title = (NSLocalizedString("workout", comment: ""))
         
         // Button Titles
-        hiit.setTitle(NSLocalizedString("hiit", comment: ""), for: UIControlState.normal)
-        hiit.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        hiit.setTitleColor(colour3, for: .normal)
-        hiit.layer.borderWidth = 8
-        hiit.layer.borderColor = colour3.cgColor
-        hiit.titleLabel?.adjustsFontSizeToFitWidth = true
-        hiit.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        hiit.titleLabel?.textAlignment = .center
+        fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
+        fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        fullBody.setTitleColor(colour3, for: .normal)
+        fullBody.layer.borderWidth = 8
+        fullBody.layer.borderColor = colour3.cgColor
+        fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
+        fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        fullBody.titleLabel?.textAlignment = .center
+
+        
+        
+        if UIScreen.main.nativeBounds.height < 1334 {
+            upperBody.setTitle(NSLocalizedString("upper", comment: ""), for: UIControlState.normal)
+            
+            lowerBody.setTitle(NSLocalizedString("lower", comment: ""), for: UIControlState.normal)
+            
+        } else {
+            upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
+            lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
+        }
+        
+        upperBody.setTitle(NSLocalizedString("upper", comment: ""), for: UIControlState.normal)
+        upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        upperBody.setTitleColor(colour3, for: .normal)
+        upperBody.layer.borderWidth = 8
+        upperBody.layer.borderColor = colour3.cgColor
+        upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
+        upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        upperBody.titleLabel?.textAlignment = .center
+        
+        
+        lowerBody.setTitle(NSLocalizedString("lower", comment: ""), for: UIControlState.normal)
+        lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        lowerBody.setTitleColor(colour3, for: .normal)
+        lowerBody.layer.borderWidth = 8
+        lowerBody.layer.borderColor = colour3.cgColor
+        lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
+        lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        lowerBody.titleLabel?.textAlignment = .center
         
         
         
-        liss.setTitle(NSLocalizedString("liss", comment: ""), for: UIControlState.normal)
-        liss.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        liss.setTitleColor(colour3, for: .normal)
-        liss.layer.borderWidth = 8
-        liss.layer.borderColor = colour3.cgColor
-        liss.titleLabel?.adjustsFontSizeToFitWidth = true
-        liss.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        liss.titleLabel?.textAlignment = .center
+        legs.setTitle(NSLocalizedString("legs", comment: ""), for: UIControlState.normal)
+        legs.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        legs.setTitleColor(colour3, for: .normal)
+        legs.layer.borderWidth = 8
+        legs.layer.borderColor = colour3.cgColor
+        legs.titleLabel?.adjustsFontSizeToFitWidth = true
+        legs.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        legs.titleLabel?.textAlignment = .center
         
         
-        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        custom.layer.borderWidth = 8
-        custom.layer.borderColor = colour3.cgColor
-        custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(colour3, for: .normal)
-        custom.layer.cornerRadius = 49/2
-        custom.layer.masksToBounds = true
-        custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        custom.titleLabel?.numberOfLines = 0
-        custom.titleLabel?.textAlignment = .center
-        //
+        
+        pull.setTitle(NSLocalizedString("pull", comment: ""), for: UIControlState.normal)
+        pull.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        pull.setTitleColor(colour3, for: .normal)
+        pull.layer.borderWidth = 8
+        pull.layer.borderColor = colour3.cgColor
+        pull.titleLabel?.adjustsFontSizeToFitWidth = true
+        pull.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        pull.titleLabel?.textAlignment = .center
         
         
+        
+        push.setTitle(NSLocalizedString("push", comment: ""), for: UIControlState.normal)
+        push.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        push.setTitleColor(colour3, for: .normal)
+        push.layer.borderWidth = 8
+        push.layer.borderColor = colour3.cgColor
+        push.titleLabel?.adjustsFontSizeToFitWidth = true
+        push.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        push.titleLabel?.textAlignment = .center
+        
+        
+        
+        
+        
+        // Information
+//        extraInformation.text = NSLocalizedString("extraInformation", comment: "")
+//        
+//        extraInformation.sizeToFit()
+//        
+//        extraInformation.center.x = extrainformationViewGymC.center.x
+//        
+//        extraInformation.frame.size.height = 49
+//        
         
         // Information
         // Scroll View Frame
@@ -188,34 +259,73 @@ class CardioChoice: UIViewController  {
         
         self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
         
-    
-    
+
+        
+        
+        // Iphone 5/SE
+        
+        if UIScreen.main.nativeBounds.height < 1334 {
+            
+            fullTop.constant = 20
+            fullBottom.constant = 20
+            stack1Bottom.constant = 20
+            stack2Bottom.constant = 20
+            
+            stackView1.spacing = 15
+            connection1Width.constant = 15
+            
+            stackView2.spacing = 10
+            connection2Width.constant = 10
+            connection2Trailing.constant = 10
+            connection3Width.constant = 10
+            connection3Trailing.constant = 10
+            
+        }
+        
+        
+        
     }
+    
+    
+
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        hiit.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
-        hiit.layer.masksToBounds = true
-        hiit.titleLabel?.adjustsFontSizeToFitWidth = true
-        hiit.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        hiit.titleLabel?.numberOfLines = 0
-        hiit.titleLabel?.textAlignment = .center
+        //
+        fullBody.layer.cornerRadius = fullBody.frame.size.height / 2
+        fullBody.layer.masksToBounds = true
         
-        liss.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
-        liss.layer.masksToBounds = true
-        liss.titleLabel?.adjustsFontSizeToFitWidth = true
-        liss.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        liss.titleLabel?.numberOfLines = 0
-        liss.titleLabel?.textAlignment = .center
+        //
+        upperBody.layer.cornerRadius = stackView1.frame.size.height / 2
+        upperBody.layer.masksToBounds = true
+        
+        lowerBody.layer.cornerRadius = stackView1.frame.size.height / 2
+        lowerBody.layer.masksToBounds = true
+
+        //
+        legs.layer.cornerRadius = stackView2.frame.size.height / 2
+        legs.layer.masksToBounds = true
+
+        pull.layer.cornerRadius = stackView2.frame.size.height / 2
+        pull.layer.masksToBounds = true
+
+        push.layer.cornerRadius = stackView2.frame.size.height / 2
+        push.layer.masksToBounds = true
 
     }
+
     
+    
+    
+    //
+    // Extra Information
     
     // QuestionMark Button Action
     
     @IBAction func informationButtonAction(_ sender: Any) {
-    
+        
         if self.informationView.frame.minY < self.view.frame.maxY {
             
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
@@ -250,9 +360,6 @@ class CardioChoice: UIViewController  {
         
     }
     
-    
-    
-    
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
         if (extraSwipe.direction == .down){
@@ -272,10 +379,6 @@ class CardioChoice: UIViewController  {
         }
     }
     
-    
-    
-
-    // Remove Back Bar Text
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
         backItem.title = ""
@@ -283,92 +386,5 @@ class CardioChoice: UIViewController  {
     }
     
     
-//---------------------------------------------------------------------------------------------------------------
     
-    
-    var  viewNumber = 0
-    let walkthroughView = UIView()
-    let label = UILabel()
-    let nextButton = UIButton()
-    let backButton = UIButton()
-    
-    
-    // Walkthrough
-    func walkthroughMindBody() {
-        
-        //
-        let screenSize = UIScreen.main.bounds
-        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-    
-        //
-        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
-        walkthroughView.backgroundColor = .black
-        walkthroughView.alpha = 0.72
-        walkthroughView.clipsToBounds = true
-        //
-        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
-        label.center = view.center
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
-        label.textColor = .white
-        //
-        nextButton.frame = screenSize
-        nextButton.backgroundColor = .clear
-        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
-        //
-        
-        
-        switch viewNumber {
-        case 0:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            
-            label.text = NSLocalizedString("choiceScreen1", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            
-            
-            
-        //
-        default: break
-            
-            
-        }
-        
-        
-    }
-    
-    
-    
-    func nextWalkthroughView(_ sender: Any) {
-        walkthroughView.removeFromSuperview()
-        viewNumber = viewNumber + 1
-        walkthroughMindBody()
-    }
-    
-
 }
