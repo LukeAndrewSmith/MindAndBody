@@ -15,7 +15,7 @@ class Settings: UITableViewController{
     
     
     
-    
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
     
     override func viewWillAppear(_ animated: Bool) {
         let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
@@ -324,13 +324,13 @@ class Settings: UITableViewController{
             }
         case 1:
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            cell.textLabel?.text = NSLocalizedString("units", comment: "")
+            cell.textLabel?.text = UserDefaults.standard.string(forKey: "units")
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
-            cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "units")
-            cell.detailTextLabel?.textColor = .gray
-            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+//            cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "units")
+//            cell.detailTextLabel?.textColor = .gray
+//            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
             return cell
 
         case 2:
@@ -403,11 +403,11 @@ class Settings: UITableViewController{
             self.present(alert, animated: true, completion: nil)
             
         case 1:
-            if cell?.detailTextLabel?.text == "kg" {
-                cell?.detailTextLabel?.text = "lb"
+            if cell?.textLabel?.text == "kg" {
+                cell?.textLabel?.text = "lb"
                 UserDefaults.standard.set("lb", forKey: "units")
-            } else if cell?.detailTextLabel?.text == "lb" {
-                cell?.detailTextLabel?.text = "kg"
+            } else if cell?.textLabel?.text == "lb" {
+                cell?.textLabel?.text = "kg"
                 UserDefaults.standard.set("kg", forKey: "units")
             }
             tableView.deselectRow(at: indexPath, animated: true)
@@ -437,11 +437,8 @@ class Settings: UITableViewController{
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough4y")
                 
                 
-                
-                
                     //Profile
                     UserDefaults.standard.set(false, forKey: "profileWalkthrough")
-                
                     // Information
                     UserDefaults.standard.set(false, forKey: "informationWalkthrough")
                 
@@ -458,43 +455,61 @@ class Settings: UITableViewController{
                 paragraphStyle.alignment = .justified
                 alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
                 
-                //alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
-                
-                self.present(alert, animated: true, completion: nil)
                 
                 
-                // Reset Colour Defaults
-                //UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "colour1")
-                //UserDefaults.standard.setColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), forKey: "colour2")
+            self.present(alert, animated: true, completion: nil)
                 
-                
-                
-                
+                tableView.deselectRow(at: indexPath, animated: true)
                 
             } else if indexPath.row == 1 {
                 
-            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-            UserDefaults.standard.synchronize()
+            
             
             // Alert View
-            let title = NSLocalizedString("resetTitle", comment: "")
-            let message = NSLocalizedString("resetMessage", comment: "")
+            let title = NSLocalizedString("resetWarning", comment: "")
+            let message = NSLocalizedString("resetWarningMessage", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.view.tintColor = colour1
+            alert.view.tintColor = colour7
             alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .justified
             alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
-            
-            //alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
-            
+           
+                
+            // Action
+                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                    
+                    UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+                    UserDefaults.standard.synchronize()
+                    
+                    // Alert View
+                    let title = NSLocalizedString("resetTitle", comment: "")
+                    let message = NSLocalizedString("resetMessage", comment: "")
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    alert.view.tintColor = self.colour7
+                    alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+                    
+                    let paragraphStyle = NSMutableParagraphStyle()
+                    paragraphStyle.alignment = .justified
+                    alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+                    
+                    self.present(alert, animated: true, completion: nil)
+
+                    
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+
+                }
+                
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+                
             self.present(alert, animated: true, completion: nil)
             
-            // Reset Colour Defaults
-            UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "colour1")
-            UserDefaults.standard.setColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), forKey: "colour2")
-            
+                tableView.deselectRow(at: indexPath, animated: true)
             }
 
         

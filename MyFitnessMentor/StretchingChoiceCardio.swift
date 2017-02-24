@@ -770,6 +770,20 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
         
         
         
+        // TableView Background
+        if String(describing: colour7) == String(describing: UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)) {
+            
+            let tableViewBackground = UIView()
+            
+            tableViewBackground.backgroundColor = colour7
+            tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
+            
+            tableView.backgroundView = tableViewBackground
+        }
+        
+        
+        
+        
         //
         // Preset Stretchings
         //

@@ -18,34 +18,22 @@ class MeditationGuided: UIViewController {
     @IBOutlet weak var beginButton: UIButton!
     
     
-    
-    // Information View
-    @IBOutlet weak var informationView: UIScrollView!
-    
-    // Information Title Label
-    @IBOutlet weak var informationTitle: UILabel!
-    
-
-    
-    // Question Mark
-    @IBOutlet weak var questionMark: UIBarButtonItem!
-    
-    
-    
     // Image
     @IBOutlet weak var imageView: UIImageView!
     
     
-    // Description
-    @IBOutlet weak var descriptionView: UIView!
-    @IBOutlet weak var descriptionTitle: UILabel!
-    
+    // Detail
+    @IBOutlet weak var detailView: UIView!
+    @IBOutlet weak var detailTitle: UILabel!
     
     // Discussion
     @IBOutlet weak var discussionScrollView: UIScrollView!
     @IBOutlet weak var discussionTitle: UILabel!
     
     
+    
+    // Passed from previous VC
+    var guidedTitle = String()
     
     
     
@@ -61,176 +49,8 @@ class MeditationGuided: UIViewController {
     let colour8 = UserDefaults.standard.color(forKey: "colour8")!
     
     
-    
-    
-    
-    // Is Enabled
-    var beginButtonEnabled = 0
-    
-    
-    
-    //
-    // Yoga Poses
-    //
-    let posesDictionary =
-        [
-            // Standing
-            0: "upwardsSalute",
-            1: "mountain",
-            2: "tree",
-            3: "extendedHandToe",
-            4: "eagle",
-            5: "chair",
-            6: "lordOfDance",
-            7: "warrior1",
-            8: "warrior2",
-            9: "warrior3",
-            10: "halfMoon",
-            11: "extendedTriangle",
-            12: "extendedSideAngleY",
-            13: "revolvedSideAngle",
-            14: "revolvedTriangle",
-            15: "halfForwardBend",
-            16: "forwardBend",
-            17: "wideLeggedForwardBend",
-            18: "intenseSide",
-            19: "gate",
-            20: "highLunge",
-            21: "lungeY",
-            22: "deepSquat",
-            // Hand/Elbows and Feet/Knees
-            23: "dolphin",
-            24: "downwardDog",
-            25: "halfDownwardDog",
-            26: "plank",
-            27: "dolphinPlank",
-            28: "fourLimbedStaff",
-            29: "sidePlank",
-            30: "cat",
-            31: "cow",
-            32: "kowtow",
-            33: "catBalance",
-            34: "dynamicTiger",
-            35: "halfMonkey",
-            36: "childPose",            //
-            37: "wildThing",
-            38: "upwardBow",
-            39: "bridge",
-            40: "upwardPlank",
-            41: "extendedPuppy",
-            42: "upwardDog",
-            43: "kneelingBridge",
-            // Seated
-            44: "crossLeg",
-            45: "lotus",
-            46: "fireLog",
-            47: "boat",
-            48: "cowFace",
-            49: "hero",
-            50: "heron",
-            51: "butterfly",            //
-            52: "staffPose",
-            53: "archer",
-            54: "forwardBend",
-            55: "vForwardBend",
-            56: "halfVForwardPose",
-            57: "halfVSideBend",
-            58: "marichi1",
-            59: "marichi3",
-            60: "bharadvajaTwist",
-            61: "halfLordFish",
-            62: "frontSplit",
-            63: "sideSplit",
-            // Lying
-            64: "corpse",
-            65: "lyingMountain",
-            66: "fish",
-            67: "lyingButterfly",
-            68: "legRaiseToe",
-            69: "threadTheNeedle",
-            70: "shoulderStand",
-            71: "plow",
-            72: "frog",
-            73: "cobra",
-            74: "sphinx",
-            75: "pigeon",
-            76: "spineRolling",
-            // Hand Stands
-            77: "handstand",
-            78: "headstand",
-            79: "flatHandHandstand",
-            80: "forearmStand"
-            
-    ]
-    
-    
-    
-    
-    
-    
-    
-    
-    // Picker View Array
-    let pickerViewArray =
-        [
-            "5 min",
-            "10 min",
-            "15 min",
-            "30 min",
-            "60 min"
-            
-    ]
-    
-    
-    // Preset Arrays
-    let practiceArrayTitles =
-        [
-            ["lit", "lit", "44"],
-            ["noice", "vnoice"],
-            ["wut", "pot"],
-            ["qjf", "adjfa"],
-            ["www", "Wkj", "35", "gsdfg"]
-            
-    ]
-    
-    
-    let practiceArray =
-        [
-            [
-                [1,2,3,4,5,6,7,8],
-                [2,5,7,55,7,33,2],
-                [3,4,4]
-            ],
-            
-            [
-                [1,2],
-                [5,3]
-            ],
-            
-            [
-                [33,72],
-                [34,24]
-            ],
-            
-            [
-                [3,4],
-                [33,78]
-            ],
-            
-            [
-                [33,33,33],
-                [9,8,7,6],
-                [8,0,9],
-                [67,6,7]
-            ]
-            
-    ]
-    
-    // Selected Array
-    var selectedArray = [Int]()
-    
-    // Selected Title
-    var selectedTitle = Int()
+
+
     
     
     
@@ -254,14 +74,13 @@ class MeditationGuided: UIViewController {
         
         // Colour
         self.view.applyGradient(colours: [colour1, colour2])
-        questionMark.tintColor = colour1
         
         
         
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("practices", comment: ""))
-        
+        //navigationBar.title = (NSLocalizedString("practices", comment: ""))
+        navigationBar.title = guidedTitle
         
         
         
@@ -276,17 +95,18 @@ class MeditationGuided: UIViewController {
         // View Elements
         //
         // Discription
-        descriptionView.backgroundColor = colour7
+        detailView.backgroundColor = colour7
         
-        descriptionTitle.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        descriptionTitle.text = NSLocalizedString("description", comment: "")
+        detailTitle.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        detailTitle.text = NSLocalizedString("detail", comment: "")
         
         
         //
         imageView.backgroundColor = colour7
+        imageView.contentMode = UIViewContentMode.scaleAspectFit
         imageView.layer.cornerRadius = 3
         imageView.layer.masksToBounds = true
-        
+        imageView.layer.clipsToBounds = true
         
         imageView.image = #imageLiteral(resourceName: "TestG")
         
@@ -306,170 +126,7 @@ class MeditationGuided: UIViewController {
         
         
         
-        
-        
-        
-        // Information
-        // Scroll View Frame
-        self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
-        
-        
-        view.bringSubview(toFront: informationView)
-        
-        
-        // Information Text
-        //
-        // Information Text Frame
-        let informationText = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
-        
-        
-        
-        
-        
-        // Information Text Frame
-        self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
-        informationTitle.text = (NSLocalizedString("information", comment: ""))
-        informationTitle.textAlignment = .center
-        informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour2
-        informationTitle.backgroundColor = colour7
-        
-        
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        downSwipe.direction = UISwipeGestureRecognizerDirection.down
-        informationTitle.addGestureRecognizer(downSwipe)
-        informationTitle.isUserInteractionEnabled = true
-        
-        
-        
-        self.view.addSubview(informationTitle)
-        
-        
-        
-        // Information Text and Attributes
-        //
-        // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
-        
-        // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
-        let textRange = (informationLabelString as NSString).range(of: textRangeString)
-        
-        
-        // Range of Titles
-        let titleRangeString = (NSLocalizedString("movements", comment: ""))
-        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
-        
-        
-        // Line Spacing
-        let lineSpacing = NSMutableParagraphStyle()
-        lineSpacing.lineSpacing = 1.4
-        lineSpacing.hyphenationFactor = 1
-        
-        
-        // Add Attributes
-        let informationLabelText = NSMutableAttributedString(string: informationLabelString)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Light", size: 19)!, range: textRange)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange1)
-        informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
-        
-        
-        
-        // Final Text Editing
-        informationText.attributedText = informationLabelText
-        informationText.textAlignment = .justified
-        informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
-        informationText.numberOfLines = 0
-        informationText.sizeToFit()
-        self.informationView.addSubview(informationText)
-        
-        
-        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
-        
-        
-        // Begin Button
-        beginEnabled()
     }
-    
-    
-    
-    // Is Begin Button Enabled
-    func beginEnabled() {
-        
-        if beginButtonEnabled == 0 {
-            beginButton.isEnabled = false
-        } else {
-            beginButton.isEnabled = true
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // QuestionMark Button Action
-    @IBAction func informationButtonAction(_ sender: Any) {
-        
-        if self.informationView.frame.minY < self.view.frame.maxY {
-            
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
-                self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                
-            }, completion: nil)
-            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
-                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
-            }, completion: nil)
-            self.informationView.contentOffset.y = 0
-            
-            
-        } else {
-            
-            
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
-                self.informationView.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-                
-            }, completion: nil)
-            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
-                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-                
-            }, completion: nil)
-            self.informationView.contentOffset.y = 0
-            
-            
-        }
-        
-    }
-    
-    
-    
-    
-    // Handle Swipes
-    @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
-        if (extraSwipe.direction == .down){
-            
-            if self.informationView.frame.minY < self.view.frame.maxY {
-                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    
-                    self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                    
-                }, completion: nil)
-                UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    
-                    self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
-                }, completion: nil)
-                
-            }
-        }
-    }
-    
     
     
     
@@ -500,8 +157,8 @@ class MeditationGuided: UIViewController {
             
             let destinationVC = destinationNC.viewControllers.first as! YogaScreenPractices
             
-            destinationVC.keyArray = selectedArray
-            destinationVC.poses = posesDictionary
+            //destinationVC.keyArray = selectedArray
+            //destinationVC.poses = posesDictionary
             
         }
     }
@@ -512,6 +169,10 @@ class MeditationGuided: UIViewController {
    
     
 
+    
+    
+    
+    
     
     
     
