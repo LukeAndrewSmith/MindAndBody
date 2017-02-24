@@ -1,21 +1,18 @@
 //
-//  YogaChoiceNormal.swift
+//  MeditationChoiceGuided.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 30.01.17.
+//  Created by Luke Smith on 24.02.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
-    
-    // Begin Button
-    @IBOutlet weak var beginButton: UIButton!
     
     
     // Table View
@@ -28,18 +25,9 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     // Information Title Label
     @IBOutlet weak var informationTitle: UILabel!
     
-    // PickerViews
-    @IBOutlet weak var pickerView: UIPickerView!
-    
     
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
-    
-    
-    // Titles
-    @IBOutlet weak var presetTitle: UILabel!
-    
-    @IBOutlet weak var tableTitle: UILabel!
     
     
     // Colours
@@ -52,7 +40,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     let colour7 = UserDefaults.standard.color(forKey: "colour7")!
     let colour8 = UserDefaults.standard.color(forKey: "colour8")!
     
-
+    
     
     
     
@@ -153,7 +141,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             79: "flatHandHandstand",
             80: "forearmStand"
             
-        ]
+    ]
     
     
     
@@ -171,7 +159,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             "30 min",
             "60 min"
             
-        ]
+    ]
     
     
     // Preset Arrays
@@ -182,73 +170,47 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             ["wut", "pot"],
             ["qjf", "adjfa"],
             ["www", "Wkj", "35", "gsdfg"]
-    
-        ]
+            
+    ]
     
     
     let practiceArray =
         [
             [
-            [1,2,3,4,5,6,7,8],
-            [2,5,7,55,7,33,2],
-            [3,4,4]
+                [1,2,3,4,5,6,7,8],
+                [2,5,7,55,7,33,2],
+                [3,4,4]
             ],
             
             [
-            [1,2],
-            [5,3]
+                [1,2],
+                [5,3]
             ],
             
             [
-            [33,72],
-            [34,24]
+                [33,72],
+                [34,24]
             ],
             
             [
-            [3,4],
-            [33,78]
+                [3,4],
+                [33,78]
             ],
             
             [
-            [33,33,33],
-            [9,8,7,6],
-            [8,0,9],
-            [67,6,7]
+                [33,33,33],
+                [9,8,7,6],
+                [8,0,9],
+                [67,6,7]
             ]
             
-        ]
+    ]
     
     // Selected Array
     var selectedArray = [Int]()
     
     // Selected Title
     var selectedTitle = Int()
-
-    
-    
-    // Flash Screen
-    func flashScreen() {
-        
-        let flash = UIView()
-        
-        flash.frame = CGRect(x: 0, y: pickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
-        flash.backgroundColor = colour1
-        self.view.alpha = 1
-        self.view.addSubview(flash)
-        self.view.bringSubview(toFront: flash)
-        
-        
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
-            
-            flash.alpha = 0
-            
-        }, completion: {(finished: Bool) -> Void in
-            flash.removeFromSuperview()
-        })
-        
-    }
-    
-    
     
     
     
@@ -268,7 +230,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2y")
         }
         
-
+        
         
         // Colour
         self.view.applyGradient(colours: [colour1, colour2])
@@ -277,24 +239,9 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("practices", comment: ""))
+        navigationBar.title = (NSLocalizedString("guidedSessions", comment: ""))
         
-        
-        // Titles
-        presetTitle.text = NSLocalizedString("length", comment: "")
-        tableTitle.text = NSLocalizedString("yogaTableTitle", comment: "")
-        presetTitle.textColor = colour3
-        tableTitle.textColor = colour3
-        
-    
-        
-        
-        // Begin Button Title
-        beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour8, for: .normal)
-        
-        
-        
+
         
         
         
@@ -376,68 +323,11 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
         
-
+        
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         
         
-        // Begin Button
-        beginEnabled()
     }
-    
-    
-    
-    // Is Begin Button Enabled
-    func beginEnabled() {
-        
-        if beginButtonEnabled == 0 {
-            beginButton.isEnabled = false
-        } else {
-            beginButton.isEnabled = true
-        }
-    }
-    
-
-    
-    // Picker Views
-    //
-    
-    func numberOfComponents(in: UIPickerView) -> Int {
-        return 1
-    }
-    
-    
-    
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
-        return pickerViewArray.count
-        
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
-        let rowLabel = UILabel()
-        let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
-        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
-        rowLabel.attributedText = myTitle
-        rowLabel.textAlignment = .center
-        return rowLabel
-        
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-    
-        selectedTitle = row
-        
-        
-        flashScreen()
-        tableView.reloadData()
-    }
-    
-    
     
     
     
@@ -459,26 +349,34 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
-//        let header = view as! UITableViewHeaderFooterView
-//        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
-//        header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-//        header.contentView.backgroundColor = colour7
-//        //
+        //        let header = view as! UITableViewHeaderFooterView
+        //        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
+        //        header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        //        header.contentView.backgroundColor = colour7
+        //        //
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        //let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "guidedCell")!
         
         cell.textLabel?.text = NSLocalizedString(practiceArrayTitles[selectedTitle][indexPath.row], comment: "")
         
+        //
+        cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        cell.tintColor = .black
+
+        //
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
         cell.textLabel?.textAlignment = .left
-        cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         cell.textLabel?.textColor = .black
-        cell.tintColor = .black
+        
         //
+        cell.imageView?.image = #imageLiteral(resourceName: "TestG")
+        
+        
         
         return cell
         
@@ -490,7 +388,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 47
+        return 96
         
     }
     
@@ -500,30 +398,23 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.cellForRow(at: indexPath)
         
         
-        for visibleCell in tableView.visibleCells where visibleCell != cell {
-            visibleCell.layer.borderColor = UIColor.clear.cgColor
-            visibleCell.layer.borderWidth = 0
-            visibleCell.accessoryType = .none
-        }
-    
-        cell?.layer.borderColor = colour7.cgColor
-        cell?.layer.borderWidth = 2
-        cell?.accessoryType = .checkmark
+//        for visibleCell in tableView.visibleCells where visibleCell != cell {
+//            visibleCell.layer.borderColor = UIColor.clear.cgColor
+//            visibleCell.layer.borderWidth = 0
+//            visibleCell.accessoryType = .none
+//        }
+//        
+//        cell?.layer.borderColor = colour7.cgColor
+//        cell?.layer.borderWidth = 2
+//        cell?.accessoryType = .checkmark
+        
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
         
-        // Enable Begin Button
-        beginButtonEnabled = 1
-        beginEnabled()
+        performSegue(withIdentifier: "meditationGuided", sender: nil)
         
         
-        
-        // Selected Array
-        //
-        let i1 = pickerView.selectedRow(inComponent: 0)
-        let i2 = indexPath.row
-        
-        selectedArray = practiceArray[i1][i2]
     }
     
     
@@ -606,7 +497,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             _ = self.navigationController?.popToRootViewController(animated: false)
             
         }
-            
+        
     }
     
     
@@ -617,7 +508,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "warmupUpper") {
             
-           
+            
             
             let destinationNC = segue.destination as! UINavigationController
             
@@ -627,11 +518,19 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             destinationVC.poses = posesDictionary
             
         }
+        
+        
+        
+        // Remove Back Button Text
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
     }
     
     
     
-//---------------------------------------------------------------------------------------------------------------
+    
+    //---------------------------------------------------------------------------------------------------------------
     
     
     var  viewNumber = 0
@@ -715,7 +614,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49, width: self.view.frame.size.width, height: pickerView.frame.size.height))
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49, width: self.view.frame.size.width, height: 96))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -750,7 +649,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 98 + pickerView.frame.size.height, width: self.view.frame.size.width, height: tableView.frame.size.height))
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 98, width: self.view.frame.size.width, height: tableView.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -761,8 +660,6 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
             //
-            
-            label.center.y = pickerView.frame.minY + (navigationBarHeight * 2)
             
             label.text = NSLocalizedString("choiceScreen23y", comment: "")
             walkthroughView.addSubview(label)
@@ -781,14 +678,14 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             
         //
         case 3:
-
+            
             //
             
             
             
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 98 + pickerView.frame.size.height + tableView.frame.size.height, width: self.view.frame.size.height, height: 49))
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 98 + tableView.frame.size.height, width: self.view.frame.size.height, height: 49))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -878,7 +775,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
     }
-
+    
     
     
 }

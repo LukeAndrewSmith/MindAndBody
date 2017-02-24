@@ -46,6 +46,8 @@
 
     "warmupInputTitle" = "Warmup Title";
 
+    "units" = "Units";
+
 
 
 //
@@ -126,7 +128,7 @@
                 "waist" = "Waist Rotations";
                 "hip" = "Hip Rotations";
                 "knees" = "Knee Rotations";
-                "ankles" = "Ankles Rotations";
+                "ankles" = "Ankle Rotations";
                 // Foam/Ball Roll
                     "foamRoll" = "Foam/Ball Roll";
                 "backf" = "Back Foam Roll";
@@ -402,10 +404,176 @@
         "pull" = "Pull";
         "push" = "Push";
 
-            // Full
-            // Upper
-            // Lower
+            // Movements
+            //
+            // Legs (Quads)
+            "squat" = "Squat";
+            "frontSquat" = "Front Squat";
+            "hackSquat" = "Hack Squat";
+            "legPress" = "Leg Press";
+            "dumbellFrontSquat" = "Dumbell Front Squat";
+            "legExtensions" = "Leg Extensions";
+            // Legs (Hamstrings/Glutes)
+            "deadlift" = "Deadlift";
+            "romanianDeadlift" = "Romanian Deadlift";
+            "dumbellRomanianDeadlift" = "Dumbell Romanian Deadlift";
+            "weightedHipThrust" = "Weighted Hip Thrust";
+            "legCurl" = "Leg Curl";
+            "oneLeggedDeadlift" = "One Legged Deadlift";
+            "gluteIsolationMachine" = "Glute Isolation Machine";
+            // Legs (General)
+            "lungeBarbell" = "Barbell Lunge";
+            "lungeDumbell" = "Dumbell Lunge";
+            "bulgarianSplitSquat" = "Bulgarian Split Squat";
+            "stepUp" = "Step Up";
 
+            // Pull (Back)
+            "pullUp" = "Pull Up";
+            "pullDown" = "Pull Down";
+            "kneelingPullDown" = "Kneeling Pull Down";
+            "pullDownMachine" = "Pull Down Machine";
+            "hammerStrengthPullDown" = "Hammer Strength Pull Down";
+            "bentOverRowBarbell" = "Bent Over Barbell Row";
+            "bentOverRowDumbell" = "Bent Over Dumbell Row";
+            "tBarRow" = "T-Bar Row";
+            "rowMachine" = "Machine Row";
+            "hammerStrengthRow" = "Hammer Strength Row";
+            // Pull (Upper Back)
+            "facePull" = "Face Pull";
+            "smithMachinePullUp" = "Smith Machine Pull Up";
+            "leaningBackPullDown" = "Leaning Back Pull Down";
+            "seatedMachineRow" = "Wide Grip Machine Row";
+            // Pull (Rear Delts)
+            "bentOverBarbellRow" = "Wide Grip Bent Over Barbell Row";
+            // Pull (Traps)
+            "shrugBarbell" = "Barbell Shrug";
+            "shrugDumbell" = "Dumbell Shrug";
+            // Pull (Biceps)
+            "hamerCurl" = "Hammer Curl";
+            "hammerCurlCable" = "Cable Hammer Curl";
+            "cableCurl" = "Cable Curl";
+            "curl" = "Curl";
+            // Pull (Forearms)
+            "farmersCarry" = "Farmer's Carry";
+            "reverseBarbellCurl" = "Reverse Barbell Curl";
+            "forearmCurl" = "Forearm Curl";
+
+            // Push (Chest)
+            "pushUp" = "Push Up";
+            "benchPress" = "Bench Press";
+            "benchPressDumbell" = "Dumbell Bench Press";
+            "semiInclineDumbellPress" = "Semi-Incline Dumbell Press";
+            "platePress" = "Plate Press";
+            "barbellKneelingPress" = "Barbell Kneeling Press";
+            "cableFly" = "Cable Fly";
+            "hammerStrengthPress" = "Hammer Strength Press";
+            // Push (Shoulders)
+            "standingShoulderPressBarbell" = "Standing Barbell Shoulder Press";
+            "standingShoulderPressDumbell" = "Standing Dumbell Shoulder Press";
+            "lateralRaise" = "Lateral Raise";
+            "frontRaise" = "Front Raise";
+            // Push (Triceps)
+            "ballPushUp" = "Ball Push Up";
+            "trianglePushUp" = "Triangle Push Up";
+            "closeGripBench" = "Close Grip Bench Press";
+            "cableExtension" = "Cable Tricep Extension";
+            "ropeExtension" = "Rope Tricep Extension";
+
+            // Calves
+            "standingCalfRaise" = "Standing Calf Raise";
+            "seatedCalfRaise" = "Seated Calf Raise";
+            // Abs/Core
+            "hangingLegRaise" = "Hanging Leg Raise";
+            "hangingLegTwist" = "Hanging Leg Twist";
+            "plank" = "Plank";
+            "sideLegDrop" = "Side Leg Drop";
+            "abRollout" = "Ab Rollout";
+
+
+            // Movement Explanations
+            //
+            // Legs (Quads)
+            "squatE" = "Squat";
+            "frontSquatE" = "Front Squat";
+            "hackSquatE" = "Hack Squat";
+            "legPressE" = "Leg Press";
+            "dumbellFrontSquatE" = "Dumbell Front Squat";
+            "legExtensionsE" = "Leg Extensions";
+            // Legs (Hamstrings/Glutes)
+            "deadliftE" = "Deadlift";
+            "romanianDeadliftE" = "Romanian Deadlift";
+            "dumbellRomanianDeadliftE" = "Dumbell Romanian Deadlift";
+            "weightedHipThrustE" = "Weighted Hip Thrust";
+            "legCurlE" = "Leg Curl";
+            "oneLeggedDeadliftE" = "One Legged Deadlift";
+            "gluteIsolationMachineE" = "Glute Isolation Machine";
+            // Legs (General)
+            "lungeBarbellE" = "Barbell Lunge";
+            "lungeDumbellE" = "Dumbell Lunge";
+            "bulgarianSplitSquatE" = "Bulgarian Split Squat";
+            "stepUpE" = "Step Up";
+
+            // Pull (Back)
+            "pullUpE" = "Pull Up";
+            "pullDownE" = "Pull Down";
+            "kneelingPullDownE" = "Kneeling Pull Down";
+            "pullDownMachineE" = "Pull Down Machine";
+            "hammerStrengthPullDownE" = "Hammer Strength Pull Down";
+            "bentOverRowBarbellE" = "Bent Over Barbell Row";
+            "bentOverRowDumbellE" = "Bent Over Dumbell Row";
+            "tBarRowE" = "T-Bar Row";
+            "rowMachineE" = "Machine Row";
+            "hammerStrengthRowE" = "Hammer Strength Row";
+            // Pull (Upper Back)
+            "facePullE" = "Face Pull";
+            "smithMachinePullUpE" = "Smith Machine Pull Up";
+            "leaningBackPullDownE" = "Leaning Back Pull Down";
+            "seatedMachineRowE" = "Wide Grip Machine Row";
+            // Pull (Rear Delts)
+            "bentOverBarbellRowE" = "Wide Grip Bent Over Barbell Row";
+            // Pull (Traps)
+            "shrugBarbellE" = "Barbell Shrug";
+            "shrugDumbellE" = "Dumbell Shrug";
+            // Pull (Biceps)
+            "hamerCurlE" = "Hammer Curl";
+            "hammerCurlCableE" = "Cable Hammer Curl";
+            "cableCurlE" = "Cable Curl";
+            "curlE" = "Curl";
+            // Pull (Forearms)
+            "farmersCarryE" = "Farmer's Carry";
+            "reverseBarbellCurlE" = "Reverse Barbell Curl";
+            "forearmCurlE" = "Forearm Curl";
+
+            // Push (Chest)
+            "pushUpE" = "Push Up";
+            "benchPressE" = "Bench Press";
+            "benchPressDumbellE" = "Dumbell Bench Press";
+            "semiInclineDumbellPressE" = "Semi-Incline Dumbell Press";
+            "platePressE" = "Plate Press";
+            "barbellKneelingPressE" = "Barbell Kneeling Press";
+            "cableFlyE" = "Cable Fly";
+            "hammerStrengthPressE" = "Hammer Strength Press";
+            // Push (Shoulders)
+            "standingShoulderPressBarbellE" = "Standing Barbell Shoulder Press";
+            "standingShoulderPressDumbellE" = "Standing Dumbell Shoulder Press";
+            "lateralRaiseE" = "Lateral Raise";
+            "frontRaiseE" = "Front Raise";
+            // Push (Triceps)
+            "ballPushUpE" = "Ball Push Up";
+            "trianglePushUpE" = "Triangle Push Up";
+            "closeGripBenchE" = "Close Grip Bench Press";
+            "cableExtensionE" = "Cable Tricep Extension";
+            "ropeExtensionE" = "Rope Tricep Extension";
+
+            // Calves
+            "standingCalfRaiseE" = "Standing Calf Raise";
+            "seatedCalfRaiseE" = "Seated Calf Raise";
+            // Abs/Core
+            "hangingLegRaiseE" = "Hanging Leg Raise";
+            "hangingLegTwistE" = "Hanging Leg Twist";
+            "plankE" = "Plank";
+            "sideLegDropE" = "Side Leg Drop";
+            "abRolloutE" = "Ab Rollout";
 
 
 
@@ -843,6 +1011,11 @@
         "meditationTimerTitle" = "Meditation Timer";
         "presetTimerTitle" = "Preset Timers";
 
+        // Guided
+        "guidedSessions" = "Guided Sessions";
+
+        "description" = "Description";
+        "discussion" = "Discussion";
 
 
 

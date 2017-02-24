@@ -781,8 +781,24 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
         
         defaults.synchronize()
         
+        
+        //
+        beginButtonEnabled()
     }
     
+    
+    // Button Enabled
+    func beginButtonEnabled() {
+        // Begin Button
+        for item in stretchingSelectedArray {
+            if item.contains(1) {
+                beginButton.isEnabled = true
+                break
+            } else {
+                beginButton.isEnabled = false
+            }
+        }
+    }
     
     
     
@@ -1707,17 +1723,11 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
         
         
         if stretchingSelectedArray[indexPath.section][indexPath.row] == 1 {
+            cell.layer.borderColor = colour7.cgColor
+            cell.layer.borderWidth = 2
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
-        }
-        
-        
-        if cell.textLabel?.text == NSLocalizedString("5minCardioL", comment: "") {
-            cell.isUserInteractionEnabled = false
-        }
-        if cell.textLabel?.text == NSLocalizedString("5minCardioI", comment: "") {
-            cell.isUserInteractionEnabled = false
         }
         
         
@@ -1751,10 +1761,15 @@ class StretchingChoiceCardio: UIViewController, UITableViewDelegate, UITableView
         if cell?.accessoryType == .checkmark {
             cell?.accessoryType = .none
             stretchingSelectedArray[indexPath.section][indexPath.row] = 0
+            tableView.reloadData()
         } else {
             cell?.accessoryType = .checkmark
             stretchingSelectedArray[indexPath.section][indexPath.row] = 1
+            tableView.reloadData()
         }
+        
+        
+        beginButtonEnabled()
     }
     
     

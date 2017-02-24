@@ -129,13 +129,14 @@ class Settings: UITableViewController{
     
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0: return (NSLocalizedString("colour", comment: ""))
-        case 1: return (NSLocalizedString("reset", comment: ""))
+        case 1: return (NSLocalizedString("units", comment: ""))
+        case 2: return (NSLocalizedString("reset", comment: ""))
         default: return (NSLocalizedString("default", comment: ""))
         }
     }
@@ -171,7 +172,9 @@ class Settings: UITableViewController{
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 5
-        } else {
+        } else if section == 1 {
+            return 1
+        } else{
             return 2
         }
         return 0
@@ -320,6 +323,17 @@ class Settings: UITableViewController{
                 return cell
             }
         case 1:
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            cell.textLabel?.text = NSLocalizedString("units", comment: "")
+            cell.textLabel?.textAlignment = NSTextAlignment.left
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+            cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "units")
+            cell.detailTextLabel?.textColor = .gray
+            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+            return cell
+
+        case 2:
             if indexPath.row == 0 {
                 cell.textLabel?.text = NSLocalizedString("resetWalkthrough", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
@@ -388,8 +402,16 @@ class Settings: UITableViewController{
             
             self.present(alert, animated: true, completion: nil)
             
-
         case 1:
+            if cell?.detailTextLabel?.text == "kg" {
+                cell?.detailTextLabel?.text = "lb"
+                UserDefaults.standard.set("lb", forKey: "units")
+            } else if cell?.detailTextLabel?.text == "lb" {
+                cell?.detailTextLabel?.text = "kg"
+                UserDefaults.standard.set("kg", forKey: "units")
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
+        case 2:
             if indexPath.row == 0 {
                 
                 

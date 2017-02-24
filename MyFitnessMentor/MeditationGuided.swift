@@ -1,15 +1,15 @@
 //
-//  YogaChoiceNormal.swift
+//  MeditationGuided.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 30.01.17.
+//  Created by Luke Smith on 24.02.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class MeditationGuided: UIViewController {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -18,9 +18,6 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var beginButton: UIButton!
     
     
-    // Table View
-    @IBOutlet weak var tableView: UITableView!
-    
     
     // Information View
     @IBOutlet weak var informationView: UIScrollView!
@@ -28,18 +25,29 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     // Information Title Label
     @IBOutlet weak var informationTitle: UILabel!
     
-    // PickerViews
-    @IBOutlet weak var pickerView: UIPickerView!
-    
+
     
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
     
-    // Titles
-    @IBOutlet weak var presetTitle: UILabel!
     
-    @IBOutlet weak var tableTitle: UILabel!
+    // Image
+    @IBOutlet weak var imageView: UIImageView!
+    
+    
+    // Description
+    @IBOutlet weak var descriptionView: UIView!
+    @IBOutlet weak var descriptionTitle: UILabel!
+    
+    
+    // Discussion
+    @IBOutlet weak var discussionScrollView: UIScrollView!
+    @IBOutlet weak var discussionTitle: UILabel!
+    
+    
+    
+    
     
     
     // Colours
@@ -52,7 +60,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     let colour7 = UserDefaults.standard.color(forKey: "colour7")!
     let colour8 = UserDefaults.standard.color(forKey: "colour8")!
     
-
+    
     
     
     
@@ -153,7 +161,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             79: "flatHandHandstand",
             80: "forearmStand"
             
-        ]
+    ]
     
     
     
@@ -171,7 +179,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             "30 min",
             "60 min"
             
-        ]
+    ]
     
     
     // Preset Arrays
@@ -182,73 +190,47 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             ["wut", "pot"],
             ["qjf", "adjfa"],
             ["www", "Wkj", "35", "gsdfg"]
-    
-        ]
+            
+    ]
     
     
     let practiceArray =
         [
             [
-            [1,2,3,4,5,6,7,8],
-            [2,5,7,55,7,33,2],
-            [3,4,4]
+                [1,2,3,4,5,6,7,8],
+                [2,5,7,55,7,33,2],
+                [3,4,4]
             ],
             
             [
-            [1,2],
-            [5,3]
+                [1,2],
+                [5,3]
             ],
             
             [
-            [33,72],
-            [34,24]
+                [33,72],
+                [34,24]
             ],
             
             [
-            [3,4],
-            [33,78]
+                [3,4],
+                [33,78]
             ],
             
             [
-            [33,33,33],
-            [9,8,7,6],
-            [8,0,9],
-            [67,6,7]
+                [33,33,33],
+                [9,8,7,6],
+                [8,0,9],
+                [67,6,7]
             ]
             
-        ]
+    ]
     
     // Selected Array
     var selectedArray = [Int]()
     
     // Selected Title
     var selectedTitle = Int()
-
-    
-    
-    // Flash Screen
-    func flashScreen() {
-        
-        let flash = UIView()
-        
-        flash.frame = CGRect(x: 0, y: pickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
-        flash.backgroundColor = colour1
-        self.view.alpha = 1
-        self.view.addSubview(flash)
-        self.view.bringSubview(toFront: flash)
-        
-        
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
-            
-            flash.alpha = 0
-            
-        }, completion: {(finished: Bool) -> Void in
-            flash.removeFromSuperview()
-        })
-        
-    }
-    
-    
     
     
     
@@ -268,7 +250,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2y")
         }
         
-
+        
         
         // Colour
         self.view.applyGradient(colours: [colour1, colour2])
@@ -276,23 +258,51 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         
+        
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("practices", comment: ""))
         
         
-        // Titles
-        presetTitle.text = NSLocalizedString("length", comment: "")
-        tableTitle.text = NSLocalizedString("yogaTableTitle", comment: "")
-        presetTitle.textColor = colour3
-        tableTitle.textColor = colour3
-        
-    
         
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
         beginButton.setTitleColor(colour8, for: .normal)
         
+        
+        
+        
+        
+        // View Elements
+        //
+        // Discription
+        descriptionView.backgroundColor = colour7
+        
+        descriptionTitle.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        descriptionTitle.text = NSLocalizedString("description", comment: "")
+        
+        
+        //
+        imageView.backgroundColor = colour7
+        imageView.layer.cornerRadius = 3
+        imageView.layer.masksToBounds = true
+        
+        
+        imageView.image = #imageLiteral(resourceName: "TestG")
+        
+        
+        
+        
+        
+        
+
+        //
+        discussionScrollView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        
+        
+        discussionTitle.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        discussionTitle.textColor = colour7
+        discussionTitle.text = NSLocalizedString("discussion", comment: "")
         
         
         
@@ -376,9 +386,6 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
         
-
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        
         
         // Begin Button
         beginEnabled()
@@ -394,136 +401,6 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             beginButton.isEnabled = true
         }
-    }
-    
-
-    
-    // Picker Views
-    //
-    
-    func numberOfComponents(in: UIPickerView) -> Int {
-        return 1
-    }
-    
-    
-    
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
-        return pickerViewArray.count
-        
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
-        let rowLabel = UILabel()
-        let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
-        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
-        rowLabel.attributedText = myTitle
-        rowLabel.textAlignment = .center
-        return rowLabel
-        
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-    
-        selectedTitle = row
-        
-        
-        flashScreen()
-        tableView.reloadData()
-    }
-    
-    
-    
-    
-    
-    
-    
-    // Table View
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return practiceArrayTitles[selectedTitle].count
-        
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        
-//        let header = view as! UITableViewHeaderFooterView
-//        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
-//        header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-//        header.contentView.backgroundColor = colour7
-//        //
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        
-        cell.textLabel?.text = NSLocalizedString(practiceArrayTitles[selectedTitle][indexPath.row], comment: "")
-        
-        cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
-        cell.textLabel?.textAlignment = .left
-        cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        cell.textLabel?.textColor = .black
-        cell.tintColor = .black
-        //
-        
-        return cell
-        
-        
-    }
-    
-    
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 47
-        
-    }
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let cell = tableView.cellForRow(at: indexPath)
-        
-        
-        for visibleCell in tableView.visibleCells where visibleCell != cell {
-            visibleCell.layer.borderColor = UIColor.clear.cgColor
-            visibleCell.layer.borderWidth = 0
-            visibleCell.accessoryType = .none
-        }
-    
-        cell?.layer.borderColor = colour7.cgColor
-        cell?.layer.borderWidth = 2
-        cell?.accessoryType = .checkmark
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        
-        // Enable Begin Button
-        beginButtonEnabled = 1
-        beginEnabled()
-        
-        
-        
-        // Selected Array
-        //
-        let i1 = pickerView.selectedRow(inComponent: 0)
-        let i2 = indexPath.row
-        
-        selectedArray = practiceArray[i1][i2]
     }
     
     
@@ -606,7 +483,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             _ = self.navigationController?.popToRootViewController(animated: false)
             
         }
-            
+        
     }
     
     
@@ -617,7 +494,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "warmupUpper") {
             
-           
+            
             
             let destinationNC = segue.destination as! UINavigationController
             
@@ -628,6 +505,16 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             
         }
     }
+    
+    
+    
+    
+   
+    
+
+    
+    
+    
     
     
     
@@ -715,114 +602,6 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
             
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49, width: self.view.frame.size.width, height: pickerView.frame.size.height))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            
-            label.text = NSLocalizedString("choiceScreen22y", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-            
-        //
-        case 2:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 98 + pickerView.frame.size.height, width: self.view.frame.size.width, height: tableView.frame.size.height))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            label.center.y = pickerView.frame.minY + (navigationBarHeight * 2)
-            
-            label.text = NSLocalizedString("choiceScreen23y", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-            
-        //
-        case 3:
-
-            //
-            
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 98 + pickerView.frame.size.height + tableView.frame.size.height, width: self.view.frame.size.height, height: 49))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            
-            label.text = NSLocalizedString("choiceScreen25", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-            
-        //
-        case 4:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
             path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
@@ -878,7 +657,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
     }
-
+    
     
     
 }

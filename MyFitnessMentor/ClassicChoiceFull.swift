@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -126,6 +126,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
              0,
              0,
              0,
+             0,
              0],
             // Push (Shoulders)
             [0,
@@ -144,6 +145,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
              0],
             // Abs/Core
             [0,
+             0,
              0,
              0,
              0]
@@ -212,6 +214,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                  0,
                  0,
                  0,
+                 0,
                  0],
                 // Push (Shoulders)
                 [0,
@@ -230,6 +233,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                  0],
                 // Abs/Core
                 [0,
+                 0,
                  0,
                  0,
                  0]
@@ -295,6 +299,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                  0,
                  0,
                  0,
+                 0,
                  0],
                 // Push (Shoulders)
                 [0,
@@ -313,6 +318,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                  0],
                 // Abs/Core
                 [0,
+                 0,
                  0,
                  0,
                  0]
@@ -378,6 +384,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                  0,
                  0,
                  0,
+                 0,
                  0],
                 // Push (Shoulders)
                 [0,
@@ -396,6 +403,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                  0],
                 // Abs/Core
                 [0,
+                 0,
                  0,
                  0,
                  0]
@@ -431,9 +439,9 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
             // Pull (Back)
             ["pullUp",
              "pullDown",
-             "kneelingPullDown",
              "pullDownMachine",
              "hammerStrengthPullDown",
+             "kneelingPullDown",
              "bentOverRowBarbell",
              "bentOverRowDumbell",
              "tBarRow",
@@ -441,7 +449,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
              "hammerStrengthRow"],
             // Pull (Upper Back)
             ["facePull",
-             "smithMachineLyingPullUp",
+             "smithMachinePullUp",
              "leaningBackPullDown",
              "seatedMachineRow"],
             // Pull (Rear Delts)
@@ -464,10 +472,11 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
              "benchPress",
              "benchPressDumbell",
              "semiInclineDumbellPress",
-             "platPress",
+             "hammerStrengthPress",
+             "chestPress",
+             "platePress",
              "barbellKneelingPress",
-             "cableFly",
-             "hammerStrengthPress"],
+             "cableFly"],
             // Push (Shoulders)
             ["standingShoulderPressBarbell",
              "standingShoulderPressDumbell",
@@ -477,14 +486,15 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
             ["ballPushUp",
              "trianglePushUp",
              "closeGripBench",
-             "cablePullDown",
-             "ropePullDown"],
+             "cableExtension",
+             "ropeExtension"],
             
             // Calves
             ["standingCalfRaise",
              "seatedCalfRaise"],
             // Abs/Core
             ["hangingLegRaise",
+             "hangingLegTwist",
              "plank",
              "sideLegDrop",
              "abRollout"]
@@ -554,6 +564,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
              0,
              0,
              0,
+             0,
              0],
             // Push (Shoulders)
             [0,
@@ -574,8 +585,582 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
             [0,
              0,
              0,
+             0,
              0]
     ]
+    
+    
+    
+    
+    
+    // Sets Dictionary
+    let setsDictionary =
+    [
+        0:
+        [
+            // Legs (Quads)
+            [5, 2, 2, 2, 2, 2],
+            // Legs (Hamstrings/Glutes)
+            [1, 1, 1, 1, 1, 1, 1],
+            // Legs (General)
+            [1, 1, 1, 1],
+        
+            // Pull (Back)
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            // Pull (Upper Back)
+            [1, 1, 1, 1],
+            // Pull (Rear Delts)
+            [1],
+            // Pull (Traps)
+            [1, 1],
+            // Pull (Biceps)
+            [1, 1, 1, 1],
+            // Pull (Forearms)
+            [1, 1, 1],
+        
+            // Push (Chest)
+            [1, 1, 1, 1, 1, 1, 1, 1, 1],
+            // Push (Shoulders)
+            [1, 1, 1, 1],
+            // Push (Triceps)
+            [1, 1, 1, 1, 1],
+        
+            // Calves
+            [1, 1],
+            // Abs/Core
+            [1, 1, 1, 1, 1]
+        ],
+        1:
+        [
+            // Legs (Quads)
+            [3, 3, 3, 3, 3, 3],
+            // Legs (Hamstrings/Glutes)
+            [1, 1, 1, 1, 1, 1, 1],
+            // Legs (General)
+            [1, 1, 1, 1],
+            
+            // Pull (Back)
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            // Pull (Upper Back)
+            [1, 1, 1, 1],
+            // Pull (Rear Delts)
+            [1],
+            // Pull (Traps)
+            [1, 1],
+            // Pull (Biceps)
+            [1, 1, 1, 1],
+            // Pull (Forearms)
+            [1, 1, 1],
+            
+            // Push (Chest)
+            [1, 1, 1, 1, 1, 1, 1, 1, 1],
+            // Push (Shoulders)
+            [1, 1, 1, 1],
+            // Push (Triceps)
+            [1, 1, 1, 1, 1],
+            
+            // Calves
+            [1, 1],
+            // Abs/Core
+            [1, 1, 1, 1, 1]
+        ],
+        2:
+        [
+            // Legs (Quads)
+            [1, 1, 1, 1, 1, 1],
+            // Legs (Hamstrings/Glutes)
+            [1, 1, 1, 1, 1, 1, 1],
+            // Legs (General)
+            [1, 1, 1, 1],
+            
+            // Pull (Back)
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            // Pull (Upper Back)
+            [1, 1, 1, 1],
+            // Pull (Rear Delts)
+            [1],
+            // Pull (Traps)
+            [1, 1],
+            // Pull (Biceps)
+            [1, 1, 1, 1],
+            // Pull (Forearms)
+            [1, 1, 1],
+            
+            // Push (Chest)
+            [1, 1, 1, 1, 1, 1, 1, 1, 1],
+            // Push (Shoulders)
+            [1, 1, 1, 1],
+            // Push (Triceps)
+            [1, 1, 1, 1, 1],
+            
+            // Calves
+            [1, 1],
+            // Abs/Core
+            [1, 1, 1, 1, 1]
+        ],
+        3:
+        [
+            // Legs (Quads)
+            [1, 1, 1, 1, 1, 1],
+            // Legs (Hamstrings/Glutes)
+            [1, 1, 1, 1, 1, 1, 1],
+            // Legs (General)
+            [1, 1, 1, 1],
+            
+            // Pull (Back)
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            // Pull (Upper Back)
+            [1, 1, 1, 1],
+            // Pull (Rear Delts)
+            [1],
+            // Pull (Traps)
+            [1, 1],
+            // Pull (Biceps)
+            [1, 1, 1, 1],
+            // Pull (Forearms)
+            [1, 1, 1],
+            
+            // Push (Chest)
+            [1, 1, 1, 1, 1, 1, 1, 1, 1],
+            // Push (Shoulders)
+            [1, 1, 1, 1],
+            // Push (Triceps)
+            [1, 1, 1, 1, 1],
+            
+            // Calves
+            [1, 1],
+            // Abs/Core
+            [1, 1, 1, 1, 1]
+        ],
+        4:
+        [
+            // Legs (Quads)
+            [1, 1, 1, 1, 1, 1],
+            // Legs (Hamstrings/Glutes)
+            [1, 1, 1, 1, 1, 1, 1],
+            // Legs (General)
+            [1, 1, 1, 1],
+            
+            // Pull (Back)
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            // Pull (Upper Back)
+            [1, 1, 1, 1],
+            // Pull (Rear Delts)
+            [1],
+            // Pull (Traps)
+            [1, 1],
+            // Pull (Biceps)
+            [1, 1, 1, 1],
+            // Pull (Forearms)
+            [1, 1, 1],
+        
+            // Push (Chest)
+            [1, 1, 1, 1, 1, 1, 1, 1, 1],
+            // Push (Shoulders)
+            [1, 1, 1, 1],
+            // Push (Triceps)
+            [1, 1, 1, 1, 1],
+            
+            // Calves
+            [1, 1],
+            // Abs/Core
+            [1, 1, 1, 1, 1]
+        ],
+        5:
+        [
+            // Legs (Quads)
+            [1, 1, 1, 1, 1, 1],
+            // Legs (Hamstrings/Glutes)
+            [1, 1, 1, 1, 1, 1, 1],
+            // Legs (General)
+            [1, 1, 1, 1],
+            
+            // Pull (Back)
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            // Pull (Upper Back)
+            [1, 1, 1, 1],
+            // Pull (Rear Delts)
+            [1],
+            // Pull (Traps)
+            [1, 1],
+            // Pull (Biceps)
+            [1, 1, 1, 1],
+            // Pull (Forearms)
+            [1, 1, 1],
+            
+            // Push (Chest)
+            [1, 1, 1, 1, 1, 1, 1, 1, 1],
+            // Push (Shoulders)
+            [1, 1, 1, 1],
+            // Push (Triceps)
+            [1, 1, 1, 1, 1],
+            
+            // Calves
+            [1, 1],
+            // Abs/Core
+            [1, 1, 1, 1, 1]
+        ],
+    ]
+    
+    
+    // Reps Array
+    let repsDictionary =
+        [
+            0:
+                [
+                    // Legs (Quads)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "15-20 reps", "15-25 reps", "10-20 reps"],
+                    // Legs (Hamstrings/Glutes)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-20 reps", "10-20 reps", "10-20 reps"],
+                    // Legs (General)
+                    ["10-20 reps", "10-20 reps", "10-15 reps", "10-20 reps"],
+                    
+                    // Pull (Back)
+                    ["5-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Upper Back)
+                    ["10-15 reps", "5-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Rear Delts)
+                    ["10-20 reps"],
+                    // Pull (Traps)
+                    ["10-20 reps", "10-20 reps"],
+                    // Pull (Biceps)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Forearms)
+                    ["15-30s", "10-20 reps", "10-20 reps"],
+                    
+                    // Push (Chest)
+                    ["5-20 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-20 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Push (Shoulders)
+                    ["10-15 reps", "10-15 reps", "10-20 reps", "10-20 reps"],
+                    // Push (Triceps)
+                    ["5-15 reps", "5-20 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    
+                    // Calves
+                    ["15-25 reps", "15-25 reps"],
+                    // Abs/Core
+                    ["5-20 reps", "5-20 reps", "30-120s", "10-15 reps", "5-10 reps"]
+            ],
+            1:
+                [
+                    // Legs (Quads)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "15-20 reps", "15-25 reps", "10-20 reps"],
+                    // Legs (Hamstrings/Glutes)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-20 reps", "10-20 reps", "10-20 reps"],
+                    // Legs (General)
+                    ["10-20 reps", "10-20 reps", "10-15 reps", "10-20 reps"],
+                    
+                    // Pull (Back)
+                    ["5-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Upper Back)
+                    ["10-15 reps", "5-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Rear Delts)
+                    ["10-20 reps"],
+                    // Pull (Traps)
+                    ["10-20 reps", "10-20 reps"],
+                    // Pull (Biceps)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Forearms)
+                    ["15-30s", "10-20 reps", "10-20 reps"],
+                    
+                    // Push (Chest)
+                    ["5-20 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-20 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Push (Shoulders)
+                    ["10-15 reps", "10-15 reps", "10-20 reps", "10-20 reps"],
+                    // Push (Triceps)
+                    ["5-15 reps", "5-20 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    
+                    // Calves
+                    ["15-25 reps", "15-25 reps"],
+                    // Abs/Core
+                    ["5-20 reps", "5-20 reps", "30-120s", "10-15 reps", "5-10 reps"]
+            ],
+            2:
+                [
+                    // Legs (Quads)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "15-20 reps", "15-25 reps", "10-20 reps"],
+                    // Legs (Hamstrings/Glutes)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-20 reps", "10-20 reps", "10-20 reps"],
+                    // Legs (General)
+                    ["10-20 reps", "10-20 reps", "10-15 reps", "10-20 reps"],
+                    
+                    // Pull (Back)
+                    ["5-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Upper Back)
+                    ["10-15 reps", "5-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Rear Delts)
+                    ["10-20 reps"],
+                    // Pull (Traps)
+                    ["10-20 reps", "10-20 reps"],
+                    // Pull (Biceps)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Forearms)
+                    ["15-30s", "10-20 reps", "10-20 reps"],
+                    
+                    // Push (Chest)
+                    ["5-20 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-20 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Push (Shoulders)
+                    ["10-15 reps", "10-15 reps", "10-20 reps", "10-20 reps"],
+                    // Push (Triceps)
+                    ["5-15 reps", "5-20 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    
+                    // Calves
+                    ["15-25 reps", "15-25 reps"],
+                    // Abs/Core
+                    ["5-20 reps", "5-20 reps", "30-120s", "10-15 reps", "5-10 reps"]
+            ],
+            3:
+                [
+                    // Legs (Quads)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "15-20 reps", "15-25 reps", "10-20 reps"],
+                    // Legs (Hamstrings/Glutes)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-20 reps", "10-20 reps", "10-20 reps"],
+                    // Legs (General)
+                    ["10-20 reps", "10-20 reps", "10-15 reps", "10-20 reps"],
+                    
+                    // Pull (Back)
+                    ["5-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Upper Back)
+                    ["10-15 reps", "5-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Rear Delts)
+                    ["10-20 reps"],
+                    // Pull (Traps)
+                    ["10-20 reps", "10-20 reps"],
+                    // Pull (Biceps)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Forearms)
+                    ["15-30s", "10-20 reps", "10-20 reps"],
+                    
+                    // Push (Chest)
+                    ["5-20 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-20 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Push (Shoulders)
+                    ["10-15 reps", "10-15 reps", "10-20 reps", "10-20 reps"],
+                    // Push (Triceps)
+                    ["5-15 reps", "5-20 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    
+                    // Calves
+                    ["15-25 reps", "15-25 reps"],
+                    // Abs/Core
+                    ["5-20 reps", "5-20 reps", "30-120s", "10-15 reps", "5-10 reps"]
+            ],
+            4:
+                [
+                    // Legs (Quads)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "15-20 reps", "15-25 reps", "10-20 reps"],
+                    // Legs (Hamstrings/Glutes)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-20 reps", "10-20 reps", "10-20 reps"],
+                    // Legs (General)
+                    ["10-20 reps", "10-20 reps", "10-15 reps", "10-20 reps"],
+                    
+                    // Pull (Back)
+                    ["5-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Upper Back)
+                    ["10-15 reps", "5-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Rear Delts)
+                    ["10-20 reps"],
+                    // Pull (Traps)
+                    ["10-20 reps", "10-20 reps"],
+                    // Pull (Biceps)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Forearms)
+                    ["15-30s", "10-20 reps", "10-20 reps"],
+                    
+                    // Push (Chest)
+                    ["5-20 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-20 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Push (Shoulders)
+                    ["10-15 reps", "10-15 reps", "10-20 reps", "10-20 reps"],
+                    // Push (Triceps)
+                    ["5-15 reps", "5-20 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    
+                    // Calves
+                    ["15-25 reps", "15-25 reps"],
+                    // Abs/Core
+                    ["5-20 reps", "5-20 reps", "30-120s", "10-15 reps", "5-10 reps"]
+            ],
+            5:
+                [
+                    // Legs (Quads)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "15-20 reps", "15-25 reps", "10-20 reps"],
+                    // Legs (Hamstrings/Glutes)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-20 reps", "10-20 reps", "10-20 reps"],
+                    // Legs (General)
+                    ["10-20 reps", "10-20 reps", "10-15 reps", "10-20 reps"],
+                    
+                    // Pull (Back)
+                    ["5-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Upper Back)
+                    ["10-15 reps", "5-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Rear Delts)
+                    ["10-20 reps"],
+                    // Pull (Traps)
+                    ["10-20 reps", "10-20 reps"],
+                    // Pull (Biceps)
+                    ["10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Pull (Forearms)
+                    ["15-30s", "10-20 reps", "10-20 reps"],
+                    
+                    // Push (Chest)
+                    ["5-20 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-20 reps", "10-15 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    // Push (Shoulders)
+                    ["10-15 reps", "10-15 reps", "10-20 reps", "10-20 reps"],
+                    // Push (Triceps)
+                    ["5-15 reps", "5-20 reps", "10-15 reps", "10-15 reps", "10-15 reps"],
+                    
+                    // Calves
+                    ["15-25 reps", "15-25 reps"],
+                    // Abs/Core
+                    ["5-20 reps", "5-20 reps", "30-120s", "10-15 reps", "5-10 reps"]
+            ],
+            ]
+    
+
+    // Weight Array
+    let weightDictionaryKG =
+        [
+            0:
+                [
+                    // Legs (Quads)
+                    [5, 2, 2, 2, 2, 2],
+                    // Legs (Hamstrings/Glutes)
+                    [1, 1, 1, 1, 1, 1, 1],
+                    // Legs (General)
+                    [1, 1, 1, 1],
+                    
+                    // Pull (Back)
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    // Pull (Upper Back)
+                    [1, 1, 1, 1],
+                    // Pull (Rear Delts)
+                    [1],
+                    // Pull (Traps)
+                    [1, 1],
+                    // Pull (Biceps)
+                    [1, 1, 1, 1],
+                    // Pull (Forearms)
+                    [1, 1, 1],
+                    
+                    // Push (Chest)
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    // Push (Shoulders)
+                    [1, 1, 1, 1],
+                    // Push (Triceps)
+                    [1, 1, 1, 1, 1],
+                    
+                    // Calves
+                    [1, 1],
+                    // Abs/Core
+                    [1, 1, 1, 1, 1]
+            ],
+            1:
+                [
+                    // Legs (Quads)
+                    [3, 3, 3, 3, 3, 3],
+                    // Legs (Hamstrings/Glutes)
+                    [1, 1, 1, 1, 1, 1, 1],
+                    // Legs (General)
+                    [1, 1, 1, 1],
+                    
+                    // Pull (Back)
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    // Pull (Upper Back)
+                    [1, 1, 1, 1],
+                    // Pull (Rear Delts)
+                    [1],
+                    // Pull (Traps)
+                    [1, 1],
+                    // Pull (Biceps)
+                    [1, 1, 1, 1],
+                    // Pull (Forearms)
+                    [1, 1, 1],
+                    
+                    // Push (Chest)
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    // Push (Shoulders)
+                    [1, 1, 1, 1],
+                    // Push (Triceps)
+                    [1, 1, 1, 1, 1],
+                    
+                    // Calves
+                    [1, 1],
+                    // Abs/Core
+                    [1, 1, 1, 1, 1]
+            ],
+        ]
+    
+    // Weight Array
+    let weightDictionaryLB =
+        [
+            0:
+                [
+                    // Legs (Quads)
+                    [5, 2, 2, 2, 2, 2],
+                    // Legs (Hamstrings/Glutes)
+                    [1, 1, 1, 1, 1, 1, 1],
+                    // Legs (General)
+                    [1, 1, 1, 1],
+                    
+                    // Pull (Back)
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    // Pull (Upper Back)
+                    [1, 1, 1, 1],
+                    // Pull (Rear Delts)
+                    [1],
+                    // Pull (Traps)
+                    [1, 1],
+                    // Pull (Biceps)
+                    [1, 1, 1, 1],
+                    // Pull (Forearms)
+                    [1, 1, 1],
+                    
+                    // Push (Chest)
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    // Push (Shoulders)
+                    [1, 1, 1, 1],
+                    // Push (Triceps)
+                    [1, 1, 1, 1, 1],
+                    
+                    // Calves
+                    [1, 1],
+                    // Abs/Core
+                    [1, 1, 1, 1, 1]
+            ],
+            1:
+                [
+                    // Legs (Quads)
+                    [3, 3, 3, 3, 3, 3],
+                    // Legs (Hamstrings/Glutes)
+                    [1, 1, 1, 1, 1, 1, 1],
+                    // Legs (General)
+                    [1, 1, 1, 1],
+                    
+                    // Pull (Back)
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    // Pull (Upper Back)
+                    [1, 1, 1, 1],
+                    // Pull (Rear Delts)
+                    [1],
+                    // Pull (Traps)
+                    [1, 1],
+                    // Pull (Biceps)
+                    [1, 1, 1, 1],
+                    // Pull (Forearms)
+                    [1, 1, 1],
+                    
+                    // Push (Chest)
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    // Push (Shoulders)
+                    [1, 1, 1, 1],
+                    // Push (Triceps)
+                    [1, 1, 1, 1, 1],
+                    
+                    // Calves
+                    [1, 1],
+                    // Abs/Core
+                    [1, 1, 1, 1, 1]
+            ],
+            ]
+    
+    
+    
     
     // Picker View Array
     var pickerViewArray =
@@ -797,10 +1382,25 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         defaults.synchronize()
         
+        
+        beginButtonEnabled()
+        
+        
     }
     
     
-    
+    // Button Enabled
+    func beginButtonEnabled() {
+        // Begin Button
+        for item in workoutSelectedArray {
+            if item.contains(1) {
+                beginButton.isEnabled = true
+                break
+            } else {
+                beginButton.isEnabled = false
+            }
+        }
+    }
     
     
     
@@ -1095,6 +1695,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0,
+                     0,
                      0],
                     // Push (Shoulders)
                     [0,
@@ -1113,6 +1714,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0],
                     // Abs/Core
                     [0,
+                     0,
                      0,
                      0,
                      0]
@@ -1184,6 +1786,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0,
+                     0,
                      0],
                     // Push (Shoulders)
                     [0,
@@ -1202,6 +1805,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0],
                     // Abs/Core
                     [0,
+                     0,
                      0,
                      0,
                      0]
@@ -1273,6 +1877,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0,
+                     0,
                      0],
                     // Push (Shoulders)
                     [0,
@@ -1291,6 +1896,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0],
                     // Abs/Core
                     [0,
+                     0,
                      0,
                      0,
                      0]
@@ -1362,6 +1968,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0,
+                     0,
                      0],
                     // Push (Shoulders)
                     [0,
@@ -1380,6 +1987,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0],
                     // Abs/Core
                     [0,
+                     0,
                      0,
                      0,
                      0]
@@ -1451,6 +2059,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0,
+                     0,
                      0],
                     // Push (Shoulders)
                     [0,
@@ -1469,6 +2078,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0],
                     // Abs/Core
                     [0,
+                     0,
                      0,
                      0,
                      0]
@@ -1540,6 +2150,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0,
+                     0,
                      0],
                     // Push (Shoulders)
                     [0,
@@ -1558,6 +2169,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0],
                     // Abs/Core
                     [0,
+                     0,
                      0,
                      0,
                      0]
@@ -1629,6 +2241,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0,
                      0,
                      0,
+                     0,
                      0],
                     // Push (Shoulders)
                     [0,
@@ -1647,6 +2260,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
                      0],
                     // Abs/Core
                     [0,
+                     0,
                      0,
                      0,
                      0]
@@ -1688,6 +2302,7 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
         default:
             break
         }
+        
         
         
     }
@@ -1748,9 +2363,15 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
         //
         
         if workoutSelectedArray[indexPath.section][indexPath.row] == 1 {
+            cell.layer.borderColor = colour7.cgColor
+            cell.layer.borderWidth = 2
+            
             cell.accessoryType = .checkmark
+            
+
         } else {
             cell.accessoryType = .none
+            
         }
         
         
@@ -1788,10 +2409,15 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
         if cell?.accessoryType == .checkmark {
             cell?.accessoryType = .none
             workoutSelectedArray[indexPath.section][indexPath.row] = 0
+            tableView.reloadData()
         } else {
             cell?.accessoryType = .checkmark
             workoutSelectedArray[indexPath.section][indexPath.row] = 1
+            tableView.reloadData()
         }
+        
+        beginButtonEnabled()
+
     }
     
     
@@ -1889,11 +2515,20 @@ class ClassicFull: UIViewController, UITableViewDelegate, UITableViewDataSource,
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenCardio
+            let destinationVC = destinationNC.viewControllers.first as! ClassicScreenFull
             
-            destinationVC.warmupMovementsArray = workoutFullArray
-            destinationVC.warmupMovementsSelectedArray = workoutSelectedArray
+            destinationVC.workoutMovementsArray = workoutFullArray
+            destinationVC.workoutMovementsSelectedArray = workoutSelectedArray
+            destinationVC.setsArrayF = setsDictionary[pickerView.selectedRow(inComponent: 0)]!
+            destinationVC.repsArrayF = repsDictionary[pickerView.selectedRow(inComponent: 0)]!
             
+            
+            // Weight
+            if UserDefaults.standard.string(forKey: "units") == "kg" {
+                destinationVC.weightArrayF = weightDictionaryKG[pickerView.selectedRow(inComponent: 0)]!
+            } else {
+                destinationVC.weightArrayF = weightDictionaryLB[pickerView.selectedRow(inComponent: 0)]!
+            }
         }
     }
     

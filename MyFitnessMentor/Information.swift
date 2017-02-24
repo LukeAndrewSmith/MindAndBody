@@ -15,8 +15,6 @@ class Information: UITableViewController{
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")
     let colour4 = UserDefaults.standard.color(forKey: "colour4")
     let colour7 = UserDefaults.standard.color(forKey: "colour7")
     

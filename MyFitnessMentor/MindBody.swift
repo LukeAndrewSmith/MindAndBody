@@ -163,7 +163,8 @@ class MindBody: UIViewController {
         //
         UserDefaults.standard.register(defaults: ["informationWalkthrough" : false])
         
-        
+        // Register Weight
+        UserDefaults.standard.register(defaults: ["units" : "kg"])
         
         
         // Retrieve Colours

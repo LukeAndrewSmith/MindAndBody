@@ -466,9 +466,13 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         
         for visibleCell in tableView.visibleCells where visibleCell != cell {
+            visibleCell.layer.borderColor = UIColor.clear.cgColor
+            visibleCell.layer.borderWidth = 0
             visibleCell.accessoryType = .none
         }
         
+        cell?.layer.borderColor = colour7.cgColor
+        cell?.layer.borderWidth = 2
         cell?.accessoryType = .checkmark
         tableView.deselectRow(at: indexPath, animated: true)
         
