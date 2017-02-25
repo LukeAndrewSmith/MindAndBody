@@ -48,8 +48,8 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         [
             ["introduction", "breathing"],
             ["scale", "perspective"],
-            ["lettingGo", "acceptance", "wandering"],
-            ["bodyScan"]
+            ["lettingGo", "acceptance", "wandering", "oneness"],
+            ["bodyScan", "unwind"]
     
         ]
     

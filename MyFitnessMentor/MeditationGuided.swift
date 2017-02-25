@@ -31,6 +31,24 @@ class MeditationGuided: UIViewController {
     @IBOutlet weak var discussionTitle: UILabel!
     
     
+    // Details
+    //
+    // Theme
+    @IBOutlet weak var themeTitle: UILabel!
+    @IBOutlet weak var theme: UILabel!
+    // Aim
+    @IBOutlet weak var aimTitle: UILabel!
+    @IBOutlet weak var aim: UILabel!
+    // Focus
+    @IBOutlet weak var focusTitle: UILabel!
+    @IBOutlet weak var focus: UILabel!
+    // Duration
+    @IBOutlet weak var durationTitle: UILabel!
+    @IBOutlet weak var duration: UILabel!
+    
+    
+    
+    
     
     // Passed from previous VC
     var guidedTitle = String()
@@ -103,14 +121,44 @@ class MeditationGuided: UIViewController {
         
         //
         imageView.backgroundColor = colour7
-        imageView.contentMode = UIViewContentMode.scaleAspectFit
+        //imageView.contentMode = UIViewContentMode.scaleAspectFit
         imageView.layer.cornerRadius = 3
         imageView.layer.masksToBounds = true
-        imageView.layer.clipsToBounds = true
         
         imageView.image = #imageLiteral(resourceName: "TestG")
         
         
+        
+        
+        // Details
+        //
+        // Theme
+            //
+            themeTitle.text = NSLocalizedString("theme", comment: "")
+            //
+            theme.adjustsFontSizeToFitWidth = true
+        
+        
+        // Aim
+            //
+            aimTitle.text = NSLocalizedString("aim", comment: "")
+            //
+            aim.adjustsFontSizeToFitWidth = true
+
+        
+        // Focus
+            //
+            focusTitle.text = NSLocalizedString("focus", comment: "")
+            //
+            focus.adjustsFontSizeToFitWidth = true
+
+        
+        // Duration
+            //
+            durationTitle.text = NSLocalizedString("duration", comment: "")
+            //
+            duration.adjustsFontSizeToFitWidth = true
+
         
         
         

@@ -1003,6 +1003,9 @@
 
 
 
+
+
+
         //
         // Meditation //
         //
@@ -1024,13 +1027,32 @@
             "lettingGo" = "Letting Go";
             "acceptance" = "Acceptance";
             "wandering" = "Wandering";
+            "oneness" = "Oneness";
             "bodyScan" = "Body Scan";
+            "unwind" = "Unwind";
+
+            "guidedSessions" = "Guided Sessions";
 
 
-        "guidedSessions" = "Guided Sessions";
+            // Info Screen
+            "detail" = "Details";
+            "discussion" = "Discussion";
 
-        "detail" = "Details";
-        "discussion" = "Discussion";
+                // Theme
+                "theme" = "Theme";
+
+
+                // Aim
+                "aim" = "Aim";
+
+
+                // Focus
+                "focus" = "Focus";
+
+
+                // Duration
+                "duration" = "Duration";
+
 
 
 
