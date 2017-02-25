@@ -30,6 +30,10 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
     
+    // Selected Session
+    var selectedSession = [0, 0]
+    
+    
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
@@ -48,7 +52,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         [
             ["introduction", "breathing"],
             ["scale", "perspective"],
-            ["lettingGo", "acceptance", "wandering", "oneness"],
+            ["lettingGo", "acceptance", "wandering", "oneness", "duality"],
             ["bodyScan", "unwind"]
     
         ]
@@ -270,9 +274,13 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         //
         tableView.deselectRow(at: indexPath, animated: true)
         
+        // Selected Session
+        selectedSession[0] = indexPath.section
+        selectedSession[1] = indexPath.row
+        
         // Title
-        let currentCell = tableView.cellForRow(at: indexPath) as UITableViewCell!
-        guidedTitleText = (currentCell?.textLabel!.text)!
+//        let currentCell = tableView.cellForRow(at: indexPath) as UITableViewCell!
+//        guidedTitleText = (currentCell?.textLabel!.text)!
         
         //
         performSegue(withIdentifier: "meditationGuided", sender: nil)
@@ -359,9 +367,9 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
             let destinationVC = segue.destination as! MeditationGuided
             
             
+            destinationVC.selectedSession = selectedSession
             
-            
-            destinationVC.guidedTitle = guidedTitleText
+            //destinationVC.guidedTitle = guidedTitleText
             //destinationVC.keyArray = selectedArray
             //destinationVC.poses = posesDictionary
             

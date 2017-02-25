@@ -223,9 +223,7 @@ class YogaChoiceGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
-            
-        return UIView()
-        
+                    
         
     }
     
@@ -261,7 +259,7 @@ class YogaChoiceGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         
-        cell.textLabel?.text = NSLocalizedString(tableViewArray[indexPath.row] as! String, comment: "")
+        cell.textLabel?.text = NSLocalizedString(tableViewArray[indexPath.row] , comment: "")
         
         cell.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)

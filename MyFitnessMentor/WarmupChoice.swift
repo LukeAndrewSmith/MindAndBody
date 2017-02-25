@@ -383,7 +383,6 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         //
         let screenSize = UIScreen.main.bounds
         let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-        let tabBarHeight = self.tabBarController?.tabBar.frame.size.height
         //
         walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
         walkthroughView.backgroundColor = .black

@@ -965,7 +965,7 @@
         "cowFaceE" = "Cow Face";
         "heroE" = "Hero";
         "heronE" = "Heron";
-        "butterflyE" = "Pose:\nnSit with a straight back and your legs bent in front of you.\nBring the bottom of your feet together so that your outer foot is in contact with the ground and your knees are pointing outwards.\nPut your hands on the ground next to your glutes (I like to use my fists for this) and lift yourself off the ground.\nWhilst off the ground, keeping your feet in a constant position, move your hips as close to your heels as comfortably possible whilst keeping a straight lower back.\nWith you hands locked around your feet and your shoulders back and down, straighten your back and pull your torso forwards (all the while keeping a straight back) to increase the stretch of the inner thigh and hip flexors.\nHold for the recommended amount of time then allow your back to bend forwards, push your knees towards the floor with your elbows and gently pull your head and torso towards your toes (without overly rounding your lower back) and hold for the recommended amount of time.\n\nNotes:\nBe gentle, don't pull too hard and relax into the stretch when you've reached your limit.\nWhen finished extend your legs straight in front of you and bounce your knees and rotate your hips to relax the muscles.";           //
+        "butterflyE" = "Pose:\nSit with a straight back and your legs bent in front of you.\nBring the bottom of your feet together so that your outer foot is in contact with the ground and your knees are pointing outwards.\nPut your hands on the ground next to your glutes (I like to use my fists for this) and lift yourself off the ground.\nWhilst off the ground, keeping your feet in a constant position, move your hips as close to your heels as comfortably possible whilst keeping a straight lower back.\nWith you hands locked around your feet and your shoulders back and down, straighten your back and pull your torso forwards (all the while keeping a straight back) to increase the stretch of the inner thigh and hip flexors.\nHold for the recommended amount of time then allow your back to bend forwards, push your knees towards the floor with your elbows and gently pull your head and torso towards your toes (without overly rounding your lower back) and hold for the recommended amount of time.\n\nNotes:\nBe gentle, don't pull too hard and relax into the stretch when you've reached your limit.\nWhen finished extend your legs straight in front of you and bounce your knees and rotate your hips to relax the muscles.";           //
         "staffPoseE" = "Staff Pose";
         "archerE" = "Archer";
         "forwardBendE" = "Forward Bend";
@@ -1028,6 +1028,7 @@
             "acceptance" = "Acceptance";
             "wandering" = "Wandering";
             "oneness" = "Oneness";
+            "duality" = "Duality";
             "bodyScan" = "Body Scan";
             "unwind" = "Unwind";
 
@@ -1036,22 +1037,71 @@
 
             // Info Screen
             "detail" = "Details";
-            "discussion" = "Discussion";
 
                 // Theme
                 "theme" = "Theme";
 
 
                 // Aim
-                "aim" = "Aim";
+                    "aim" = "Aim";
+                "comprehension" = "Comprehension";
+                "calm" = "Calm";
+                "comfort" = "Comfort";
+                "creativity" = "Creativity";
+                "relaxation" = "Relaxation";
+                "recreation" = "Recreation";
+                "harmony" = "Harmony";
+                "trance" = "Trance";
+                "disentangle" = "Disentangle";
 
 
                 // Focus
-                "focus" = "Focus";
+                    "focus" = "Focus";
+                "understanding" = "Understanding";
+                "body" = "Body";
+                "conscious" = "Conscious";
+                "subconscious" = "Subconscious";
+                "freedom" = "Freedom";
+                "relaxation" = "Relaxation";
+                "recreation" = "Recreation";
+                "individuality" = "Individuality";
+                "interdependence" = "Interdepence";
+                "admission" = "Admission";
+                "clarity" = "Clarity";
 
 
                 // Duration
-                "duration" = "Duration";
+                    "duration" = "Duration";
+
+
+                // Discussion
+                    "discussion" = "Discussion";
+                "introductionD" = "This meditation session ";
+                "breathingD" = "";
+                "scaleD" = "Scale";
+                "perspectiveD" = "Perspective";
+                "lettingGoD" = "Letting Go";
+                "acceptanceD" = "Acceptance";
+                "wanderingD" = "Wandering";
+                "onenessD" = "Oneness";
+                "dualityD" = "Duality";
+                "bodyScanD" = "Body Scan";
+                "unwindD" = "Unwind";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

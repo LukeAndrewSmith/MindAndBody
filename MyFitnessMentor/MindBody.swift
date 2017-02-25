@@ -110,6 +110,8 @@ class MindBody: UIViewController {
     @IBOutlet weak var stack3Bottom: NSLayoutConstraint!
     
     
+    
+    
     // Labels
     
 //---------------------------------------------------------------------------------------------------------------
@@ -186,8 +188,6 @@ class MindBody: UIViewController {
         UITabBar.appearance().barTintColor = colour5
         tabBarController?.tabBar.barStyle = .default
         self.tabBarController?.tabBar.barTintColor = colour5
-        
-        
         
         
         

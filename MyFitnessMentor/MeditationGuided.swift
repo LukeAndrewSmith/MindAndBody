@@ -51,8 +51,69 @@ class MeditationGuided: UIViewController {
     
     
     // Passed from previous VC
-    var guidedTitle = String()
+    //var guidedTitle = String()
+    var selectedSession = [0, 0]
     
+    
+    
+    // Content Arrays
+    
+    // Sessions Titles
+    let guidedSessions =
+        [
+            ["introduction", "breathing"],
+            ["scale", "perspective"],
+            ["lettingGo", "acceptance", "wandering", "oneness", "duality"],
+            ["bodyScan", "unwind"]
+        ]
+    
+    // Theme
+    let themeArray =
+        [
+            ["introduction", "breathing"],
+            ["scale", "perspective"],
+            ["lettingGo", "acceptance", "wandering", "oneness", "duality"],
+            ["bodyScan", "unwind"]
+        ]
+    
+    // Aim
+    let aimArray =
+        [
+            ["comprehension", "calm"],
+            ["comfort", "creativity"],
+            ["relaxation", "relaxation", "recreation", "harmony", "harmony"],
+            ["trance", "disentangle"]
+    ]
+    
+    // Focus
+    let focusArray =
+        [
+            ["understanding", "body"],
+            ["conscious", "subconscious"],
+            ["freedom", "relaxation", "recreation", "individuality", "interdependence"],
+            ["admission", "clarity"]
+    ]
+    
+    // Duration
+    let durationArray =
+        [
+            ["12min", "10min"],
+            ["13min", "8min"],
+            ["20min", "12min", "10min", "10min", "10min"],
+            ["20min", "10min"]
+    ]
+    
+    // Image
+    
+    
+    // Discussion
+    let discussionArray =
+        [
+            ["introductionD", "breathingD"],
+            ["scaleD", "perspectiveD"],
+            ["lettingGoD", "acceptanceD", "wanderingD", "onenessD", "dualityD"],
+            ["bodyScanD", "unwindD"]
+    ]
     
     
     
@@ -95,13 +156,6 @@ class MeditationGuided: UIViewController {
         
         
         
-        
-        // Navigation Bar Title
-        //navigationBar.title = (NSLocalizedString("practices", comment: ""))
-        navigationBar.title = guidedTitle
-        
-        
-        
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
         beginButton.setTitleColor(colour8, for: .normal)
@@ -121,7 +175,6 @@ class MeditationGuided: UIViewController {
         
         //
         imageView.backgroundColor = colour7
-        //imageView.contentMode = UIViewContentMode.scaleAspectFit
         imageView.layer.cornerRadius = 3
         imageView.layer.masksToBounds = true
         
@@ -130,12 +183,26 @@ class MeditationGuided: UIViewController {
         
         
         
+        
+        
+        
+        
+        
+        //
+        // Content
+        //
+        
+        // Navigation Bar Title
+        navigationBar.title = NSLocalizedString(guidedSessions[selectedSession[0]][selectedSession[1]], comment: "")
+        
+        
         // Details
         //
         // Theme
             //
             themeTitle.text = NSLocalizedString("theme", comment: "")
             //
+            theme.text = NSLocalizedString(themeArray[selectedSession[0]][selectedSession[1]], comment: "")
             theme.adjustsFontSizeToFitWidth = true
         
         
@@ -143,6 +210,7 @@ class MeditationGuided: UIViewController {
             //
             aimTitle.text = NSLocalizedString("aim", comment: "")
             //
+            aim.text = NSLocalizedString(aimArray[selectedSession[0]][selectedSession[1]], comment: "")
             aim.adjustsFontSizeToFitWidth = true
 
         
@@ -150,6 +218,7 @@ class MeditationGuided: UIViewController {
             //
             focusTitle.text = NSLocalizedString("focus", comment: "")
             //
+            focus.text = NSLocalizedString(focusArray[selectedSession[0]][selectedSession[1]], comment: "")
             focus.adjustsFontSizeToFitWidth = true
 
         
@@ -157,14 +226,19 @@ class MeditationGuided: UIViewController {
             //
             durationTitle.text = NSLocalizedString("duration", comment: "")
             //
+            duration.text = NSLocalizedString(durationArray[selectedSession[0]][selectedSession[1]], comment: "")
             duration.adjustsFontSizeToFitWidth = true
 
         
-        
-        
-        
-
+        // Image
         //
+        
+        
+        
+        
+        // Discussion
+        //
+        // Scroll
         discussionScrollView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
         
@@ -173,8 +247,42 @@ class MeditationGuided: UIViewController {
         discussionTitle.text = NSLocalizedString("discussion", comment: "")
         
         
+        // Text
+        let discussionLabel = UILabel()
+        let attributedText = NSMutableAttributedString(string: NSLocalizedString(discussionArray[selectedSession[0]][selectedSession[1]], comment: ""))
+        let paragraphStyleE = NSMutableParagraphStyle()
+        paragraphStyleE.alignment = .justified
+        paragraphStyleE.hyphenationFactor = 1
+        
+        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleE, range: NSMakeRange(0, attributedText.length))
+        
+        discussionLabel.attributedText = attributedText
+        
+        discussionLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        discussionLabel.textColor = .black
+        discussionLabel.textAlignment = .justified
+        discussionLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        discussionLabel.numberOfLines = 0
+        discussionLabel.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width - 20, height: 0)
+        discussionLabel.sizeToFit()
+        
+        // Scroll View
+        discussionScrollView.addSubview(discussionLabel)
+        discussionScrollView.contentSize = CGSize(width: self.view.frame.size.width, height: discussionLabel.frame.size.height + 20)
+        
+        self.discussionScrollView.contentOffset.y = 0
+        
+        
+        
         
     }
+    
+    
+    
+    
+    
+    
+    
     
     
     
