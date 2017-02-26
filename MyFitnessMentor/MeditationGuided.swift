@@ -305,17 +305,17 @@ class MeditationGuided: UIViewController {
     // Pass Array to next ViewController
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "warmupUpper") {
-            
+        
+        // Pass Info
+        if (segue.identifier == "meditationGuided") {
             
             
             let destinationNC = segue.destination as! UINavigationController
+            let destinationVC = destinationNC.viewControllers.first as! MeditationScreenGuided
             
-            let destinationVC = destinationNC.viewControllers.first as! YogaScreenPractices
             
-            //destinationVC.keyArray = selectedArray
-            //destinationVC.poses = posesDictionary
             
+            destinationVC.selectedSession = selectedSession
         }
     }
     
