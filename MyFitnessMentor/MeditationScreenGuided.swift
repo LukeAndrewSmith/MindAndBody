@@ -19,6 +19,20 @@ class MeditationScreenGuided: UIViewController {
     
     
     
+    // Timer Label
+    @IBOutlet weak var timerLabel: UILabel!
+    
+    
+    
+    // Play
+    @IBOutlet weak var play: UIButton!
+    
+    
+    // Pause
+    @IBOutlet weak var pause: UIButton!
+    
+    
+    
     
     // Selected Session
     var selectedSession = [0, 0]
@@ -77,6 +91,15 @@ class MeditationScreenGuided: UIViewController {
         
         
         
+        // Play & Pause
+        pause.alpha = 0
+        view.bringSubview(toFront: play)
+
+    
+        
+        
+        
+        
         
         
         // Background Image
@@ -85,10 +108,95 @@ class MeditationScreenGuided: UIViewController {
         
         // Blur
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurEffectView)
+        view.sendSubview(toBack: blurEffectView)
+        
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+        let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
+        vibrancyEffectView.frame = view.bounds
+        vibrancyEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //view.addSubview(vibrancyEffectView)
+        //view.sendSubview(toBack: vibrancyEffectView)
+    }
+    
+    
+    
+    
+    
+    
+    
+    // Play & Pause
+    //
+    @IBAction func play(_ sender: Any) {
+        
+        
+        
+        
+        //
+        play.alpha = 0
+        pause.alpha = 1
+        view.bringSubview(toFront: pause)
+    }
+    
+    
+    
+    //
+    @IBAction func pause(_ sender: Any) {
+        
+        
+        //
+        pause.alpha = 0
+        play.alpha = 1
+        view.bringSubview(toFront: play)
+    }
+    
+    
+    
+    
+        
+    // Hide Screen
+    //
+    let hideScreenView = UIView()
+    let blurEffectView = UIVisualEffectView()
+    let hideLabel = UILabel()
+    
+    var brightness = UIScreen.main.brightness
+    
+    @IBAction func hideScreen(_ sender: Any) {
+        
+    
+        // Hide Screen view
+        let screenSize = UIScreen.main.bounds
+        hideScreenView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+        hideScreenView.backgroundColor = .black
+        hideScreenView.clipsToBounds = true
+        hideScreenView.alpha = 0
+      
+        
+        
+        
+        // Double Tap
+        let doubleTap = UITapGestureRecognizer()
+        //doubleTap.numberOfTapsRequired = 2
+        doubleTap.addTarget(self, action: #selector(handleTap))
+        hideScreenView.isUserInteractionEnabled = true
+        hideScreenView.addGestureRecognizer(doubleTap)
+        
+        
+        UIApplication.shared.keyWindow?.insertSubview(self.hideScreenView, aboveSubview: view)
+        
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            UIApplication.shared.isStatusBarHidden = true
+            self.hideScreenView.alpha = 1
+            UIScreen.main.brightness = CGFloat(0)
+
+        }, completion: nil)
         
         
         
@@ -96,17 +204,49 @@ class MeditationScreenGuided: UIViewController {
     
     
     
+    @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
     
-    
+        UIApplication.shared.isStatusBarHidden = false
+        hideScreenView.removeFromSuperview()
+        UIScreen.main.brightness = brightness
         
-        
+    }
     
-    
+
     
     
     // Dismiss View
     @IBAction func dismissView(_ sender: Any) {
-        self.dismiss(animated: true)
+        
+        // Alert View
+        let title = NSLocalizedString("finishEarly", comment: "")
+        let message = NSLocalizedString("finishEarlyMessage", comment: "")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = colour7
+        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .justified
+        alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+        
+        // Action
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            
+            self.dismiss(animated: true)
+            
+        }
+        let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        
+        //
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        
+        
+        self.present(alert, animated: true, completion: nil)
+
     }
     
     

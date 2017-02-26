@@ -426,6 +426,9 @@ class Settings: UITableViewController{
                         // c
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthroughc")
                 
+                        // w
+                        UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughw")
+                
                         // Choice Screen 2
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough2")
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough2y")

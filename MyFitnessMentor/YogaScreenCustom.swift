@@ -658,5 +658,73 @@ class YogaScreenCustom: UIViewController, UIScrollViewDelegate {
     }
     
     
+    // Hide Screen
+    //
+    let hideScreenView = UIView()
+    let blurEffectView = UIVisualEffectView()
+    let hideLabel = UILabel()
+    
+    
+    
+    @IBAction func hideScreen(_ sender: Any) {
+    
+        
+        // Hide Screen view
+        let screenSize = UIScreen.main.bounds
+        hideScreenView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+        hideScreenView.backgroundColor = .clear
+        hideScreenView.clipsToBounds = true
+        
+        // Blur
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        blurEffectView.effect = blurEffect
+        blurEffectView.frame = hideScreenView.frame
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        hideScreenView.addSubview(blurEffectView)
+        
+        
+        
+        
+        
+        // Double Tap
+        let doubleTap = UITapGestureRecognizer()
+        doubleTap.numberOfTapsRequired = 2
+        doubleTap.addTarget(self, action: #selector(handleTap))
+        hideScreenView.isUserInteractionEnabled = true
+        hideScreenView.addGestureRecognizer(doubleTap)
+        
+        
+        // Text
+        hideLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
+        hideLabel.center = hideScreenView.center
+        hideLabel.textAlignment = .center
+        hideLabel.numberOfLines = 0
+        hideLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        hideLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        hideLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        
+        hideLabel.text = NSLocalizedString("hideScreen", comment: "")
+        
+        
+        //
+        hideScreenView.addSubview(hideLabel)
+        UIApplication.shared.keyWindow?.insertSubview(hideScreenView, aboveSubview: view)
+    }
+    
+    
+    @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
+        
+        blurEffectView.removeFromSuperview()
+        hideLabel.removeFromSuperview()
+        
+        
+        
+        hideScreenView.removeFromSuperview()
+        
+    }
+    
+
+    
+    
     
 }

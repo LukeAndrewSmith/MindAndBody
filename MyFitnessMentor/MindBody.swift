@@ -154,6 +154,8 @@ class MindBody: UIViewController {
         //
         UserDefaults.standard.register(defaults: ["mindBodyWalkthroughc" : false])
         //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthroughw" : false])
+        //
         UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2" : false])
         UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2y" : false])
         //
@@ -461,6 +463,41 @@ class MindBody: UIViewController {
         case 1:
             //
             
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - 80, y: UIApplication.shared.statusBarFrame.height, width: 160, height: 40))
+            path.addRect(walkthroughView.frame)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("mindBody2", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            walkthroughView.addSubview(backButton)
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            walkthroughView.bringSubview(toFront: backButton)
+            
+            
+            
+            //
+
+        case 2:
+            //
+            
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -476,7 +513,7 @@ class MindBody: UIViewController {
             //
             //
             
-            label.text = NSLocalizedString("mindBody2", comment: "")
+            label.text = NSLocalizedString("mindBody3", comment: "")
             
             
             
@@ -491,7 +528,7 @@ class MindBody: UIViewController {
             
             
 //
-        case 2:
+        case 3:
             
             // Clear Section
             let path = CGMutablePath()
@@ -508,7 +545,7 @@ class MindBody: UIViewController {
             //
             //
             
-            label.text = NSLocalizedString("mindBody3", comment: "")
+            label.text = NSLocalizedString("mindBody4", comment: "")
             
             label.center = stackView3.center
             
@@ -524,43 +561,10 @@ class MindBody: UIViewController {
   
             
 //
-        case 3:
+        case 4:
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: (view.frame.width / 4) - ((view.frame.width / 4) * 1/3 ), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + view.frame.size.height + (tabBarHeight! / 2)), radius: 23, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(walkthroughView.frame)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            //
-            
-            label.text = NSLocalizedString("mindBody4", comment: "")
-            
-            label.center = view.center
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-
-            
-            
-            
-//
-        case 4:
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.center.x, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + view.frame.size.height + (tabBarHeight! / 2)), radius: 23, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(walkthroughView.frame)
             //
             let maskLayer = CAShapeLayer()
@@ -584,13 +588,46 @@ class MindBody: UIViewController {
             UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
+
+            
+            
+            
+//
+        case 5:
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: view.center.x, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + view.frame.size.height + (tabBarHeight! / 2)), radius: 23, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(walkthroughView.frame)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            //
+            
+            label.text = NSLocalizedString("mindBody6", comment: "")
+            
+            label.center = view.center
+            
+            
+            walkthroughView.addSubview(backButton)
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            walkthroughView.bringSubview(toFront: backButton)
             
 
             
             
             
         //
-        case 5:
+        case 6:
           
             // Clear Section
             let path = CGMutablePath()
@@ -607,7 +644,7 @@ class MindBody: UIViewController {
             //
             //
             
-            label.text = NSLocalizedString("mindBody6", comment: "")
+            label.text = NSLocalizedString("mindBody7", comment: "")
             
             label.center = view.center
             

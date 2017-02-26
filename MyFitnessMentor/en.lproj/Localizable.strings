@@ -49,6 +49,8 @@
     "units" = "Units";
 
 
+    "hideScreen" = "Pocket Mode\n\nDouble tap to exit";
+
 
 //
 // Calendar //
@@ -1090,6 +1092,9 @@
 
 
 
+                // Guided Screen
+                "finishEarly" = "Finish Early";
+                "finishEarlyMessage" = "\nAre you sure you want to finish early?";
 
 
 
@@ -1306,11 +1311,12 @@
     // Mind Body
         // Home
         "mindBody1" = "This is the walkthrough, it appears on the first viewing of each screen.\n\nThe text provides an explanation regarding the function of the highlighted object.\n\nPress anywhere on the screen to continue, or on subsequent screens press the top left button to go back.\n\nThe current screen is the home screen.";
-        "mindBody2" = "Calendar\n\nThe calendar contains your weekly schedule.\n\nA schedule will be suggested upon completion of your profile, but will remain fully customisable.\n\nThe first thing to do after this screens walkthrough is to fill in your profile.";
-        "mindBody3" = "Sessions\n\nThe essence of the app is to show you the path, but not walk it for you.\n\nThis is portrayed by making you click through a path (suggested in the calendar) to get to a session, starting from the buttons on this home screen.";
-        "mindBody4" = "Profile\n\nThe profile tab is accessed using this button.\n\nThe tab bar buttons highlight orange if selected.";
-        "mindBody5" = "Home\n\nThe home screen (current screen) is accessed using this button.";
-        "mindBody6" = "Information\n\nThe information tab is accessed using this button.";
+        "mindBody2" = "Colour\n\nThis colour is best for the walkthrough, a more modern black and white colour scheme can be chosen in the settings.";
+        "mindBody3" = "Calendar\n\nThe calendar contains your weekly schedule.\n\nA schedule will be suggested upon completion of your profile, but will remain fully customisable.\n\nThe first thing to do after this screens walkthrough is to fill in your profile.";
+        "mindBody4" = "Sessions\n\nThe essence of the app is to show you the path, but not walk it for you.\n\nThis is portrayed by making you click through a path (suggested in the calendar) to get to a session, starting from the buttons on this home screen.";
+        "mindBody5" = "Profile\n\nThe profile tab is accessed using this button.\n\nThe tab bar buttons highlight orange if selected.";
+        "mindBody6" = "Home\n\nThe home screen (current screen) is accessed using this button.";
+        "mindBody7" = "Information\n\nThe information tab is accessed using this button.";
 
 
         // Calendar
@@ -1363,6 +1369,10 @@
         "movementScreen11" = "Timer\n\nThe explanation can be swapped for a timer using this button, and will run in the background if you remain on the same screen (i.e don't press next or back).";
         "movementScreen12" = "Progress\n\nThe progress through the session is indicated in the format;\ncurrent movement/number of movements";
         "movementScreen13" = "Progress\n\nThe progress is shown in a progress bar as well.";
+
+        "movementScreenh" = "Pocket Mode\n\nActivate pocket mode before you put your phone in your pocket so as to avoid accidentally pressing buttons on the screen.";
+        "movementScreens" = "Sets & Reps\n\nThe sets and reps are given in the form: sets x reps.\nReps can take the form of an amount of time.\n\nA rep is a repetition of a movement, and a set is a group of reps.\n\n1 or 2 warm up sets should be performed in addition before the working sets. The first using a very light weight or just the bar, and the second using half the working set weight.";
+        "movementScreenw" = "Weight\n\nA suggested starting weight is provided to give an idea of the weight to use. It is important however to get to know your strength and understand what weight works for you (this may vary day to day).\nDon't put excess weight as this greatly hinders progress, and for a beginner it is advised to use lower weights for longer to allow your muscles to get used to the movements.";
         //
         "movementScreen1m" = "Movement\n\nThis is the name of the movement/stretch.";
         "movementScreen2m" = "Next Button\n\nPress the next button when finished with the movement\stretch to go to the next.";

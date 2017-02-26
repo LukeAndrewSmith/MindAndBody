@@ -356,11 +356,16 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     
     
+    
     // Constraints
     @IBOutlet weak var setTop: NSLayoutConstraint!
     @IBOutlet weak var setBottom: NSLayoutConstraint!
     @IBOutlet weak var imageBottom: NSLayoutConstraint!
     @IBOutlet weak var explanationBottom: NSLayoutConstraint!
+    
+    
+    // Hide Screen
+    @IBOutlet weak var hideScreen: UIButton!
     
     
     
@@ -382,12 +387,12 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         super.viewDidLoad()
         
         // Walkthrough
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough3") == false {
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughw") == false {
             let delayInSeconds = 0.5
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 self.walkthroughMindBody()
             }
-            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough3")
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughw")
         }
         
         //Iphone 5/SE layout
@@ -441,7 +446,6 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         //Image Tint
         imageExpand.tintColor = colour3
-        
         
         
         
@@ -1644,6 +1648,90 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     }
     
     
+    
+    // Hide Screen
+    //
+    let hideScreenView = UIView()
+    let blurEffectView = UIVisualEffectView()
+    let hideLabel = UILabel()
+
+    
+    @IBAction func hideScreen(_ sender: Any) {
+        
+        
+        
+        
+        
+        // Hide Screen view
+        let screenSize = UIScreen.main.bounds
+        hideScreenView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+        hideScreenView.backgroundColor = .clear
+        hideScreenView.clipsToBounds = true
+        hideScreenView.alpha = 0
+        
+        // Blur
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        blurEffectView.effect = blurEffect
+        blurEffectView.frame = hideScreenView.frame
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        hideScreenView.addSubview(blurEffectView)
+        blurEffectView.alpha = 0
+        
+        
+        
+        
+        
+        // Double Tap
+        let doubleTap = UITapGestureRecognizer()
+        doubleTap.numberOfTapsRequired = 2
+        doubleTap.addTarget(self, action: #selector(handleTap))
+        hideScreenView.isUserInteractionEnabled = true
+        hideScreenView.addGestureRecognizer(doubleTap)
+        
+        
+        // Text
+        hideLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
+        hideLabel.center = hideScreenView.center
+        hideLabel.textAlignment = .center
+        hideLabel.numberOfLines = 0
+        hideLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        hideLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        hideLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        
+        hideLabel.text = NSLocalizedString("hideScreen", comment: "")
+        
+        
+        //
+        hideScreenView.addSubview(hideLabel)
+        UIApplication.shared.keyWindow?.insertSubview(hideScreenView, aboveSubview: view)
+        //
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.blurEffectView.alpha = 1
+            self.hideScreenView.alpha = 1
+        }, completion: nil)
+    }
+    
+    
+    
+    @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
+        
+        blurEffectView.removeFromSuperview()
+        hideLabel.removeFromSuperview()
+                
+        hideScreenView.removeFromSuperview()
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //---------------------------------------------------------------------------------------------------------------
     
     
@@ -1802,7 +1890,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             //
             
             
-            label.text = NSLocalizedString("movementScreen4", comment: "")
+            label.text = NSLocalizedString("movementScreens", comment: "")
             walkthroughView.addSubview(label)
             
             
@@ -1844,9 +1932,39 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
             
-            
-            
+           
         case 5:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: self.view.frame.size.width - weightLabel.frame.size.width - 6, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant / 2), width: weightLabel.frame.size.width + 6, height: setTop.constant/2))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreenw", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+
+            
+        case 6:
             // Clear Section
             let path = CGMutablePath()
             path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 2) + setRepView.frame.size.height , width: demonstrationImage.frame.size.width, height: demonstrationImage.frame.size.height))
@@ -1877,7 +1995,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             
             
             
-        case 6:
+        case 7:
             // Clear Section
             let path = CGMutablePath()
             path.addRect(CGRect(x: demonstrationImage.frame.size.width + 1, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 2) + setRepView.frame.size.height , width: demonstrationImage.frame.size.width, height: demonstrationImage.frame.size.height))
@@ -1908,7 +2026,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             
             
             
-        case 7:
+        case 8:
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: imageExpand.center.x, y: imageExpand.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -1940,7 +2058,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             
             
             
-        case 8:
+        case 9:
             // Clear Section
             let path = CGMutablePath()
             path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 3) + setRepView.frame.size.height + demonstrationImage.frame.size.height, width: scrollViewExplanation.frame.size.width, height: scrollViewExplanation.frame.size.height))
@@ -1970,7 +2088,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             walkthroughView.bringSubview(toFront: backButtonW)
             
             
-        case 9:
+        case 10:
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: explanationExpand.center.x, y: explanationExpand.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -2001,7 +2119,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             walkthroughView.bringSubview(toFront: backButtonW)
             
             
-        case 10:
+        case 11:
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: timerButton.center.x, y: timerButton.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -2029,9 +2147,43 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
+          
             
             
-        case 11:
+        case 12:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: hideScreen.center.x, y: hideScreen.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center.y = demonstrationImage.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("movementScreenh", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+
+            
+        case 13:
             // Clear Section
             let path = CGMutablePath()
             let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 3.5)
@@ -2064,7 +2216,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             
             
             
-        case 12:
+        case 14:
             // Clear Section
             let path = CGMutablePath()
             let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 4)
