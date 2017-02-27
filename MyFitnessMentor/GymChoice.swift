@@ -98,7 +98,7 @@ class GymChoice: UIViewController  {
         
         // Button Titles
         classic.setTitle(NSLocalizedString("classic", comment: ""), for: UIControlState.normal)
-        classic.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        classic.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         classic.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         classic.layer.borderWidth = 8
         classic.layer.borderColor = colour3.cgColor
@@ -107,7 +107,7 @@ class GymChoice: UIViewController  {
         
         
         circuit.setTitle(NSLocalizedString("circuit", comment: ""), for: UIControlState.normal)
-        circuit.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        circuit.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         circuit.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         circuit.layer.borderWidth = 8
         circuit.layer.borderColor = colour3.cgColor
@@ -116,7 +116,7 @@ class GymChoice: UIViewController  {
         
         
         fiveByFive.setTitle(NSLocalizedString("5x5", comment: ""), for: UIControlState.normal)
-        fiveByFive.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        fiveByFive.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         fiveByFive.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         fiveByFive.layer.borderWidth = 8
         fiveByFive.layer.borderColor = colour3.cgColor
@@ -125,7 +125,7 @@ class GymChoice: UIViewController  {
         
         
         
-        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 7
         custom.layer.borderColor = colour3.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true

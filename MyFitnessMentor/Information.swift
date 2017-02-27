@@ -87,15 +87,13 @@ class Information: UITableViewController{
         let header = view as! UITableViewHeaderFooterView
         
         // View
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 20)!
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 21)!
         header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         header.textLabel?.textColor = .black
         header.textLabel?.text = header.textLabel?.text?.capitalized
         
         header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
-        // Text
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 20)!
         
         // Border
         let border = CALayer()
@@ -129,7 +127,7 @@ class Information: UITableViewController{
         
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             cell.textLabel?.textAlignment = .left
         
             cell.tintColor = colour4

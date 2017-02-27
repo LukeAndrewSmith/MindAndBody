@@ -84,7 +84,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         // Button Titles
         //
         guided.setTitle(NSLocalizedString("guided", comment: ""), for: UIControlState.normal)
-        guided.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        guided.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         guided.setTitleColor(colour3, for: .normal)
         guided.layer.borderWidth = 8
         guided.layer.borderColor = colour3.cgColor
@@ -96,7 +96,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         
         
         custom.setTitle(NSLocalizedString("custom", comment: ""), for: UIControlState.normal)
-        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.setTitleColor(colour3, for: .normal)
         custom.layer.borderWidth = 8
         custom.layer.borderColor = colour3.cgColor
@@ -105,9 +105,8 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         custom.titleLabel?.textAlignment = .center
         
 
-    
         practices.setTitle(NSLocalizedString("practices", comment: ""), for: UIControlState.normal)
-        practices.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        practices.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         practices.setTitleColor(colour3, for: .normal)
         practices.layer.borderWidth = 8
         practices.layer.borderColor = colour3.cgColor

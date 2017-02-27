@@ -77,7 +77,7 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         // Button Titles
         //
         guided.setTitle(NSLocalizedString("guided", comment: ""), for: UIControlState.normal)
-        guided.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        guided.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         guided.setTitleColor(colour3, for: .normal)
         guided.layer.borderWidth = 8
         guided.layer.borderColor = colour3.cgColor
@@ -86,7 +86,7 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         guided.titleLabel?.textAlignment = .center
         
         meditationTimer.setTitle(NSLocalizedString("meditationTimer", comment: ""), for: UIControlState.normal)
-        meditationTimer.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        meditationTimer.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         meditationTimer.setTitleColor(colour3, for: .normal)
         meditationTimer.layer.borderWidth = 8
         meditationTimer.layer.borderColor = colour3.cgColor

@@ -206,7 +206,7 @@ class MindBody: UIViewController {
         
         // Button Titles
         Warmup.setTitle(NSLocalizedString("warmup", comment: ""), for: UIControlState.normal)
-        Warmup.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        Warmup.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
         Warmup.titleLabel!.textColor = .white
         Warmup.layer.borderWidth = 8
         Warmup.layer.borderColor = colour3.cgColor
@@ -217,7 +217,7 @@ class MindBody: UIViewController {
         
         
         Workout.setTitle(NSLocalizedString("workout", comment: ""), for: UIControlState.normal)
-        Workout.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        Workout.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
         Workout.titleLabel!.textColor = .white
         Workout.layer.borderWidth = 8
         Workout.layer.borderColor = colour3.cgColor
@@ -229,7 +229,7 @@ class MindBody: UIViewController {
         
         
         Stretching.setTitle(NSLocalizedString("stretching", comment: ""), for: UIControlState.normal)
-        Stretching.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        Stretching.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
         Stretching.titleLabel!.textColor = .white
         Stretching.layer.borderWidth = 8
         Stretching.layer.borderColor = colour3.cgColor
@@ -242,7 +242,7 @@ class MindBody: UIViewController {
         
         
         Cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
-        Cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        Cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
         Cardio.titleLabel!.textColor = .white
         Cardio.layer.borderWidth = 8
         Cardio.layer.borderColor = colour3.cgColor
@@ -255,7 +255,7 @@ class MindBody: UIViewController {
         
         
         Yoga.setTitle(NSLocalizedString("yoga", comment: ""), for: UIControlState.normal)
-        Yoga.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        Yoga.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
         Yoga.titleLabel!.textColor = .white
         Yoga.titleLabel!.adjustsFontSizeToFitWidth = true
         Yoga.layer.borderWidth = 8
@@ -269,7 +269,7 @@ class MindBody: UIViewController {
         
         
         Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
-        Meditation.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        Meditation.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
         Meditation.titleLabel!.textColor = .white
         Meditation.layer.borderWidth = 8
         Meditation.layer.borderColor = colour3.cgColor

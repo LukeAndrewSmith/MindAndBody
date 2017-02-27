@@ -96,7 +96,7 @@ class ClassicChoiceG: UIViewController  {
         
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
-        fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         fullBody.setTitleColor(colour3, for: .normal)
         fullBody.layer.borderWidth = 8
         fullBody.layer.borderColor = colour3.cgColor
@@ -117,7 +117,7 @@ class ClassicChoiceG: UIViewController  {
         }
         
         upperBody.setTitle(NSLocalizedString("upper", comment: ""), for: UIControlState.normal)
-        upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         upperBody.setTitleColor(colour3, for: .normal)
         upperBody.layer.borderWidth = 8
         upperBody.layer.borderColor = colour3.cgColor
@@ -127,7 +127,7 @@ class ClassicChoiceG: UIViewController  {
         
         
         lowerBody.setTitle(NSLocalizedString("lower", comment: ""), for: UIControlState.normal)
-        lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         lowerBody.setTitleColor(colour3, for: .normal)
         lowerBody.layer.borderWidth = 8
         lowerBody.layer.borderColor = colour3.cgColor
@@ -138,7 +138,7 @@ class ClassicChoiceG: UIViewController  {
         
         
         legs.setTitle(NSLocalizedString("legs", comment: ""), for: UIControlState.normal)
-        legs.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        legs.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         legs.setTitleColor(colour3, for: .normal)
         legs.layer.borderWidth = 8
         legs.layer.borderColor = colour3.cgColor
@@ -149,7 +149,7 @@ class ClassicChoiceG: UIViewController  {
         
         
         pull.setTitle(NSLocalizedString("pull", comment: ""), for: UIControlState.normal)
-        pull.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        pull.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         pull.setTitleColor(colour3, for: .normal)
         pull.layer.borderWidth = 8
         pull.layer.borderColor = colour3.cgColor
@@ -160,7 +160,7 @@ class ClassicChoiceG: UIViewController  {
         
         
         push.setTitle(NSLocalizedString("push", comment: ""), for: UIControlState.normal)
-        push.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        push.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         push.setTitleColor(colour3, for: .normal)
         push.layer.borderWidth = 8
         push.layer.borderColor = colour3.cgColor

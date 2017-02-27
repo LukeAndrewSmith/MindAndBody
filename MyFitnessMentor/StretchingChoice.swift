@@ -93,25 +93,25 @@ class StretchingChoice: UIViewController  {
         
         // Button Titles
         general.setTitle(NSLocalizedString("general", comment: ""), for: UIControlState.normal)
-        general.titleLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        general.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         general.setTitleColor(colour3, for: .normal)
         general.layer.borderWidth = 8
         general.layer.borderColor = colour3.cgColor
         
         postWorkout.setTitle(NSLocalizedString("postWorkout", comment: ""), for: UIControlState.normal)
-        postWorkout.titleLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        postWorkout.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         postWorkout.setTitleColor(colour3, for: .normal)
         postWorkout.layer.borderWidth = 8
         postWorkout.layer.borderColor = colour3.cgColor
         
         postCardio.setTitle(NSLocalizedString("postCardio", comment: ""), for: UIControlState.normal)
         postCardio.setTitleColor(colour3, for: .normal)
-        postCardio.titleLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        postCardio.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         postCardio.layer.borderWidth = 8
         postCardio.layer.borderColor = colour3.cgColor
         
         
-        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 7
         custom.layer.borderColor = colour3.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true

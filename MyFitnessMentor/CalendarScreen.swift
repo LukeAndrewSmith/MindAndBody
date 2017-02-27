@@ -134,7 +134,7 @@ class CalendarScreen: UITableViewController {
     {
         
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)!
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 21)!
         header.textLabel?.textColor = .black
         header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         header.contentView.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)

@@ -48,9 +48,9 @@ class Settings: UITableViewController{
         [
             [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)],
             [UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)],
-            [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)],
-            [UIColor(red:0.54, green:0.15, blue:0.24, alpha:1.0), UIColor(red:0.23, green:0.38, blue:0.53, alpha:1.0)],
-            [UIColor(red:0.17, green:0.24, blue:0.31, alpha:1.0), UIColor(red:0.20, green:0.60, blue:0.86, alpha:1.0)]
+            //[UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)],
+            //[UIColor(red:0.54, green:0.15, blue:0.24, alpha:1.0), UIColor(red:0.23, green:0.38, blue:0.53, alpha:1.0)],
+            //[UIColor(red:0.17, green:0.24, blue:0.31, alpha:1.0), UIColor(red:0.20, green:0.60, blue:0.86, alpha:1.0)]
     ]
     
 
@@ -73,7 +73,17 @@ class Settings: UITableViewController{
         UserDefaults.standard.setColor(newColourSet[1], forKey: "colour2")
     
         
-        if checked[1] == 1 {
+        if checked[0] == 1 {
+            
+            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour3")
+            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour4")
+            UserDefaults.standard.setColor(UIColor.white, forKey: "colour5")
+            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour6")
+            UserDefaults.standard.setColor(newColourSet[0], forKey: "colour7")
+            UserDefaults.standard.setColor(newColourSet[1], forKey: "colour8")
+            UserDefaults.standard.set(false, forKey: "blacknWhite")
+            
+        } else if checked[1] == 1 {
             
             UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour3")
             UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour4")
@@ -84,28 +94,28 @@ class Settings: UITableViewController{
             UserDefaults.standard.set(true, forKey: "blacknWhite")
             
             
-        } else if checked[2] == 1 {
-        
-            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour3")
-            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour4")
-            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour5")
-            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour6")
-            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour7")
-            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour8")
-            UserDefaults.standard.set(false, forKey: "blacknWhite")
-            
-            
-        } else {
-        
-            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour3")
-            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour4")
-            UserDefaults.standard.setColor(UIColor.white, forKey: "colour5")
-            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour6")
-            UserDefaults.standard.setColor(newColourSet[0], forKey: "colour7")
-            UserDefaults.standard.setColor(newColourSet[1], forKey: "colour8")
-            UserDefaults.standard.set(false, forKey: "blacknWhite")
-
-        }
+        } //else if checked[2] == 1 {
+//        
+//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour3")
+//            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour4")
+//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour5")
+//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour6")
+//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour7")
+//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour8")
+//            UserDefaults.standard.set(false, forKey: "blacknWhite")
+//            
+//            
+//        } //else {
+//
+//            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour3")
+//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour4")
+//            UserDefaults.standard.setColor(UIColor.white, forKey: "colour5")
+//            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour6")
+//            UserDefaults.standard.setColor(newColourSet[0], forKey: "colour7")
+//            UserDefaults.standard.setColor(newColourSet[1], forKey: "colour8")
+//            UserDefaults.standard.set(false, forKey: "blacknWhite")
+//
+//        }
 
         
         UserDefaults.standard.synchronize()
@@ -145,7 +155,7 @@ class Settings: UITableViewController{
     {
         // Header
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 20)!
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 21)!
         header.textLabel?.textColor = .black
         header.textLabel?.text = header.textLabel?.text?.capitalized
         
@@ -171,7 +181,7 @@ class Settings: UITableViewController{
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 5
+            return 2
         } else if section == 1 {
             return 1
         } else{
@@ -241,92 +251,92 @@ class Settings: UITableViewController{
                 
                 return cell
 
-            } else if indexPath.row == 2 {
-                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-
-                // Gradient Label
-                gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
-                if UIScreen.main.nativeBounds.height < 1334 {
-                    gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
-                }
-                gradientLabel.center.y = cell.center.y
-                gradientLabel.applyGradient(colours: [UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), colourSets[2][0]])
-                
-                cell.addSubview(gradientLabel)
-                
-                
-                // Checked
-                if checked[indexPath.row] == 1 {
-                    cell.accessoryType = .checkmark
-                } else {
-                    cell.accessoryType = .none
-                }
-                
-                cell.selectionStyle = .none
-                
-                return cell
-
-            } else if indexPath.row == 3 {
-                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-
-                // Gradient Label
-                gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
-                if UIScreen.main.nativeBounds.height < 1334 {
-                    gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
-                }
-                gradientLabel.center.y = cell.center.y
-                //gradientLabel.applyGradient(colours: [colourSets[3][0], colourSets[3][1]])
-                gradientLabel.applyGradient(colours: [colourSets[3][0], colourSets[3][1]])
-                
-                cell.addSubview(gradientLabel)
-                
-                
-                
-                // Checked
-                if checked[indexPath.row] == 1 {
-                    cell.accessoryType = .checkmark
-                } else {
-                    cell.accessoryType = .none
-                }
-                
-                cell.selectionStyle = .none
-                
-                return cell
-
-            }  else if indexPath.row == 4 {
-                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-                
-                // Gradient Label
-                gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
-                if UIScreen.main.nativeBounds.height < 1334 {
-                    gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
-                }
-                gradientLabel.center.y = cell.center.y
-                gradientLabel.applyGradient(colours: [colourSets[4][0], colourSets[4][1]])
-                
-                cell.addSubview(gradientLabel)
-                
-                
-                // Checked
-                if checked[indexPath.row] == 1 {
-                    cell.accessoryType = .checkmark
-                } else {
-                    cell.accessoryType = .none
-                }
-
-                cell.selectionStyle = .none
-                
-                return cell
-            }
+            } //else if indexPath.row == 2 {
+//                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+//
+//                // Gradient Label
+//                gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+//                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
+//                if UIScreen.main.nativeBounds.height < 1334 {
+//                    gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
+//                }
+//                gradientLabel.center.y = cell.center.y
+//                gradientLabel.applyGradient(colours: [UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), colourSets[2][0]])
+//                
+//                cell.addSubview(gradientLabel)
+//                
+//                
+//                // Checked
+//                if checked[indexPath.row] == 1 {
+//                    cell.accessoryType = .checkmark
+//                } else {
+//                    cell.accessoryType = .none
+//                }
+//                
+//                cell.selectionStyle = .none
+//                
+//                return cell
+//
+//            } else if indexPath.row == 3 {
+//                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+//
+//                // Gradient Label
+//                gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+//                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
+//                if UIScreen.main.nativeBounds.height < 1334 {
+//                    gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
+//                }
+//                gradientLabel.center.y = cell.center.y
+//                //gradientLabel.applyGradient(colours: [colourSets[3][0], colourSets[3][1]])
+//                gradientLabel.applyGradient(colours: [colourSets[3][0], colourSets[3][1]])
+//                
+//                cell.addSubview(gradientLabel)
+//                
+//                
+//                
+//                // Checked
+//                if checked[indexPath.row] == 1 {
+//                    cell.accessoryType = .checkmark
+//                } else {
+//                    cell.accessoryType = .none
+//                }
+//                
+//                cell.selectionStyle = .none
+//                
+//                return cell
+//
+//            }  else if indexPath.row == 4 {
+//                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+//                
+//                // Gradient Label
+//                gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+//                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
+//                if UIScreen.main.nativeBounds.height < 1334 {
+//                    gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
+//                }
+//                gradientLabel.center.y = cell.center.y
+//                gradientLabel.applyGradient(colours: [colourSets[4][0], colourSets[4][1]])
+//                
+//                cell.addSubview(gradientLabel)
+//                
+//                
+//                // Checked
+//                if checked[indexPath.row] == 1 {
+//                    cell.accessoryType = .checkmark
+//                } else {
+//                    cell.accessoryType = .none
+//                }
+//
+//                cell.selectionStyle = .none
+//                
+//                return cell
+//            }
         case 1:
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             cell.textLabel?.text = UserDefaults.standard.string(forKey: "units")
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
 //            cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "units")
 //            cell.detailTextLabel?.textColor = .gray
 //            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
@@ -337,14 +347,14 @@ class Settings: UITableViewController{
                 cell.textLabel?.text = NSLocalizedString("resetWalkthrough", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
                 return cell
             }
             else if indexPath.row == 1 {
                 cell.textLabel?.text = NSLocalizedString("resetApp", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
                 return cell
             }
 

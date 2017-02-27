@@ -155,7 +155,7 @@ class Profile: UITableViewController{
     {
         // Header
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 20)!
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 21)!
         header.textLabel?.textColor = .black
         header.textLabel?.text = header.textLabel?.text?.capitalized
         
@@ -263,18 +263,18 @@ class Profile: UITableViewController{
                 cell.textLabel?.text = NSLocalizedString(meGroup[subSection].name, comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
                 // UserDefaults
                 cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(meGroup[subSection].name)")
                 cell.detailTextLabel?.textAlignment = NSTextAlignment.right
                 cell.detailTextLabel?.textColor = UIColor.gray
-                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
                 //
                 return cell
             } else {
                 subcell.textLabel?.text = NSLocalizedString(meGroup[subSection].items[row - 1], comment: "")
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
-                subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
+                subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
                 subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
                 let collapsedMe = meGroup[subSection].collapsed
                 if collapsedMe == true{
@@ -288,19 +288,19 @@ class Profile: UITableViewController{
                 cell.textLabel?.text = NSLocalizedString(movementsGroup[subSection].name, comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
                 // UserDefaults
                 cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(movementsGroup[subSection].name)")
                 cell.detailTextLabel?.textAlignment = NSTextAlignment.right
                 cell.detailTextLabel?.textColor = UIColor.gray
-                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
 
                 //
                 return cell
             } else {
                 subcell.textLabel?.text = NSLocalizedString(movementsGroup[subSection].items[row - 1], comment: "")
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
-                subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
+                subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
                 subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
                 let collapsedMo = movementsGroup[subSection].collapsed
                 if collapsedMo == true{
@@ -315,19 +315,19 @@ class Profile: UITableViewController{
                 cell.textLabel?.text = NSLocalizedString(volumeGroup[subSection].name, comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
                 // UserDefaults
                 cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(volumeGroup[subSection].name)")
                 cell.detailTextLabel?.textAlignment = NSTextAlignment.right
                 cell.detailTextLabel?.textColor = UIColor.gray
-                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
 
                 //
                 return cell
             } else {
                 subcell.textLabel?.text = NSLocalizedString(volumeGroup[subSection].items[row - 1], comment: "")
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
-                subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 18)
+                subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
                 subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
                 let collapsedVo = volumeGroup[subSection].collapsed
                 if collapsedVo == true{

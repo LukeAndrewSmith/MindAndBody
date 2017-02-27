@@ -82,7 +82,7 @@ class WorkoutChoice: UIViewController  {
         
         // Button Titles
         gym.setTitle(NSLocalizedString("gym", comment: ""), for: UIControlState.normal)
-        gym.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        gym.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         gym.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         gym.layer.borderWidth = 8
         gym.layer.borderColor = colour3.cgColor
@@ -91,7 +91,7 @@ class WorkoutChoice: UIViewController  {
         
         
         home.setTitle(NSLocalizedString("home", comment: ""), for: UIControlState.normal)
-        home.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        home.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         home.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         home.layer.borderWidth = 8
         home.layer.borderColor = colour3.cgColor
