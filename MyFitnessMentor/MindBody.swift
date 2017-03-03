@@ -53,6 +53,10 @@ extension UIView {
 
 class MindBody: UIViewController {
 
+    // Navigation Bar
+    @IBOutlet weak var navigationBar: UINavigationItem!
+
+    
     // Button Outlets
     
     // Warmup
@@ -73,8 +77,15 @@ class MindBody: UIViewController {
     // Mindfullness
     @IBOutlet weak var Meditation: UIButton!
     
+    
+    
     // Calendar
     @IBOutlet weak var calendar: UIBarButtonItem!
+    
+    // Tracking
+    @IBOutlet weak var tracking: UIBarButtonItem!
+    
+    
     
     // Stack Views
     @IBOutlet weak var stackView1: UIStackView!
@@ -82,6 +93,7 @@ class MindBody: UIViewController {
     @IBOutlet weak var stackView2: UIStackView!
     
     @IBOutlet weak var stackView3: UIStackView!
+    
     
     
     // Mind Connection Label
@@ -115,14 +127,6 @@ class MindBody: UIViewController {
     // Labels
     
 //---------------------------------------------------------------------------------------------------------------
-    
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.topItem?.title = (NSLocalizedString("mind&body", comment: ""))
-
-
-    }
     
     
     override func viewDidLoad() {
@@ -166,6 +170,10 @@ class MindBody: UIViewController {
         UserDefaults.standard.register(defaults: ["profileWalkthrough" : false])
         //
         UserDefaults.standard.register(defaults: ["informationWalkthrough" : false])
+        //
+        UserDefaults.standard.register(defaults: ["informationWalkthroughI" : false])
+        //
+        UserDefaults.standard.register(defaults: ["informationWalkthroughm" : false])
         
         // Register Weight
         UserDefaults.standard.register(defaults: ["units" : "kg"])
@@ -183,6 +191,11 @@ class MindBody: UIViewController {
         
         
         
+        
+        // Navigation Bar
+        navigationBar.title = "Mind & Body"
+        
+        
         self.navigationController?.navigationBar.tintColor = colour1
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-heavy", size: 23)!]
         self.navigationController?.navigationBar.barTintColor = colour5
@@ -195,6 +208,7 @@ class MindBody: UIViewController {
         
         
         calendar.tintColor = colour1
+        tracking.tintColor = colour1
         
         self.tabBarController?.tabBar.tintColor = colour2
         
@@ -378,7 +392,27 @@ class MindBody: UIViewController {
     
     
 //---------------------------------------------------------------------------------------------------------------
-
+    
+    // Countdown
+    var time = 7
+    let countdownLabel = UILabel()
+    
+    //
+    // Update Timer
+    func updateTimer() {
+        if time == 0 {
+            
+            countdownLabel.text = "0"
+            
+        } else {
+            
+            time -= 1
+            countdownLabel.text = String(time)
+            
+        }
+    }
+    
+    
     
     var  viewNumber = 0
     let walkthroughView = UIView()
@@ -445,7 +479,7 @@ class MindBody: UIViewController {
             //
             
             
-            label.text = NSLocalizedString("mindBody1", comment: "")
+            label.text = NSLocalizedString("mindBody0", comment: "")
             walkthroughView.addSubview(label)
             
             
@@ -460,9 +494,12 @@ class MindBody: UIViewController {
 
             
 //
+        
         case 1:
             //
             
+            nextButton.isEnabled = false
+            backButton.isEnabled = false
             
             // Clear Section
             let path = CGMutablePath()
@@ -479,7 +516,7 @@ class MindBody: UIViewController {
             //
             
             
-            label.text = NSLocalizedString("mindBody2", comment: "")
+            label.text = NSLocalizedString("mindBody1", comment: "")
             walkthroughView.addSubview(label)
             
             
@@ -493,8 +530,39 @@ class MindBody: UIViewController {
             
             
             
+            // CountDown
             //
+            time = 7
+            //
+            countdownLabel.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
+            countdownLabel.text = String(time)
+            countdownLabel.center.x = self.view.frame.size.width - 24.5
+            countdownLabel.center.y = self.view.frame.size.height - 24.5 + navigationBarHeight + UIApplication.shared.statusBarFrame.height + tabBarHeight!
+            countdownLabel.textAlignment = .center
+            countdownLabel.numberOfLines = 0
+            countdownLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+            countdownLabel.font = UIFont(name: "SFUIDisplay-light", size: 22)
+            countdownLabel.textColor = .white
+            
+            walkthroughView.addSubview(countdownLabel)
 
+            
+            
+            let countdownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+            
+        
+            
+            
+            let delayInSeconds = 7.0
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.nextButton.isEnabled = true
+                self.backButton.isEnabled = true
+                countdownTimer.invalidate()
+                self.countdownLabel.removeFromSuperview()
+                
+            }
+            
+        //
         case 2:
             //
             
@@ -513,7 +581,7 @@ class MindBody: UIViewController {
             //
             //
             
-            label.text = NSLocalizedString("mindBody3", comment: "")
+            label.text = NSLocalizedString("mindBody2", comment: "")
             
             
             
@@ -545,7 +613,7 @@ class MindBody: UIViewController {
             //
             //
             
-            label.text = NSLocalizedString("mindBody4", comment: "")
+            label.text = NSLocalizedString("mindBody3", comment: "")
             
             label.center = stackView3.center
             
@@ -577,7 +645,7 @@ class MindBody: UIViewController {
             //
             //
             
-            label.text = NSLocalizedString("mindBody5", comment: "")
+            label.text = NSLocalizedString("mindBody4", comment: "")
             
             label.center = view.center
             
@@ -610,7 +678,7 @@ class MindBody: UIViewController {
             //
             //
             
-            label.text = NSLocalizedString("mindBody6", comment: "")
+            label.text = NSLocalizedString("mindBody5", comment: "")
             
             label.center = view.center
             
@@ -644,7 +712,7 @@ class MindBody: UIViewController {
             //
             //
             
-            label.text = NSLocalizedString("mindBody7", comment: "")
+            label.text = NSLocalizedString("mindBody6", comment: "")
             
             label.center = view.center
             

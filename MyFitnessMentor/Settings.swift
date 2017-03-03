@@ -448,11 +448,19 @@ class Settings: UITableViewController{
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough3y")
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough4y")
                 
+                        // Session Screen
+                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthroughw")
+                
+                
+                        // Information
+                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthroughI")
                 
                     //Profile
                     UserDefaults.standard.set(false, forKey: "profileWalkthrough")
                     // Information
                     UserDefaults.standard.set(false, forKey: "informationWalkthrough")
+                    //
+                    UserDefaults.standard.set(false, forKey: "informationWalkthroughm")
                 
                 
                 //

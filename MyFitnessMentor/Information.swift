@@ -13,6 +13,14 @@ import UIKit
 class Information: UITableViewController{
     
     
+    // Navigation Bar
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    
+
+    
+    
+    // Selected Topic
+    var selectedTopic = [0,0]
     
     // Colours
     let colour4 = UserDefaults.standard.color(forKey: "colour4")
@@ -23,15 +31,15 @@ class Information: UITableViewController{
     // Arrays
     
     let sectionArray =
-        ["important", "app", "music"]
+        ["important", "music", "app"]
     
     
     let rowArray =
         [
-            ["breathing", "coreActivation", "equipment", "posture", "commonTerms", "trainingPhilosophy", "nutrition"],
+            ["breathing", "coreActivation", "mindMuscle", "anatomy", "equipment", "posture", "commonTerms", "routineBuilding", "trainingPhilosophy", "nutrition"],
+            ["suggestions"],
             ["vision", "usage"],
-            ["role", "suggestions"]
-    
+            
         ]
 
     
@@ -44,7 +52,7 @@ class Information: UITableViewController{
     }
     
     //
-    // viewDidLoad
+    // ViewDidLoad
     //
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +72,8 @@ class Information: UITableViewController{
         
         //
         // Title
-        self.navigationController?.navigationBar.topItem?.title = (NSLocalizedString("information", comment: ""))
+        //self.navigationController?.navigationBar.topItem?.title = (NSLocalizedString("information", comment: ""))
+        navigationBar.title = NSLocalizedString("information", comment: "")
         
         
 }
@@ -132,19 +141,74 @@ class Information: UITableViewController{
         
             cell.tintColor = colour4
             cell.accessoryType = .disclosureIndicator
-        
 
+        
             return cell
        
 }
     
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
+        //
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        
+        // Selected Topic
+        selectedTopic[0] = indexPath.section
+        selectedTopic[1] = indexPath.row
+        
+        
+        // Perform Segue
+        //
+        // Anatomy
+        if (indexPath.section, indexPath.row) == (0, 3) {
+            performSegue(withIdentifier: "anatomy", sender: nil)
+        } else if (indexPath.section, indexPath.row) == (1, 0) {
+            performSegue(withIdentifier: "music", sender: nil)
+        } else {
+            performSegue(withIdentifier: "informationSegue", sender: nil)
+        }
 
     }
+    
+    
+    
+    // Pass Array to next ViewController
+    //
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // Pass Info
+        if (segue.identifier == "informationSegue") {
+            
+            let destinationVC = segue.destination as! InformationScreen1
+            
+            destinationVC.selectedTopic = selectedTopic
+            
+            
+            //destinationVC.selectedSession = selectedSession
+            
+            //destinationVC.guidedTitle = guidedTitleText
+            //destinationVC.keyArray = selectedArray
+            //destinationVC.poses = posesDictionary
+            
+        }
+        
+        
+        
+        // Remove Back Button Text
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 //---------------------------------------------------------------------------------------------------------------

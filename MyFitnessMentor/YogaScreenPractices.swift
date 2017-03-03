@@ -18,6 +18,9 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
     
     
     
+    
+    
+    
     // Warmup Screen Index
     //
     var warmupScreenIndex = 0
@@ -242,6 +245,10 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
     
     // Explanation Expand
     @IBOutlet weak var explanationExpand: UIButton!
+    
+    // Hide Screen
+    @IBOutlet weak var hideScreen: UIButton!
+
     
     
     // Progress Bar
@@ -1018,9 +1025,40 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
             
-            
-            
         case 7:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: hideScreen.center.x, y: hideScreen.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center.y = imageView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("movementScreenh", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+   
+            
+        case 8:
             // Clear Section
             let path = CGMutablePath()
             let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + (imageTop.constant * 2.5)
@@ -1053,7 +1091,7 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
             
             
             
-        case 8:
+        case 9:
             // Clear Section
             let path = CGMutablePath()
             let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + (imageTop.constant * 3)

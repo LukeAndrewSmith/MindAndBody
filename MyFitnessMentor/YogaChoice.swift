@@ -39,14 +39,6 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
     
-    // Constraints
-    @IBOutlet weak var practicesTop: NSLayoutConstraint!
-    
-    @IBOutlet weak var practicesBottom: NSLayoutConstraint!
-    
-    @IBOutlet weak var stackBottom: NSLayoutConstraint!
-    
-    
     
     
     
@@ -62,12 +54,12 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         super.viewDidLoad()
         
         // Walkthrough
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough1") == false {
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughc") == false {
             let delayInSeconds = 0.5
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 self.walkthroughMindBody()
             }
-            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough1")
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughc")
         }
         
         
@@ -93,18 +85,6 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         guided.titleLabel?.textAlignment = .center
         
         
-        
-        
-        custom.setTitle(NSLocalizedString("custom", comment: ""), for: UIControlState.normal)
-        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        custom.setTitleColor(colour3, for: .normal)
-        custom.layer.borderWidth = 8
-        custom.layer.borderColor = colour3.cgColor
-        custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        custom.titleLabel?.textAlignment = .center
-        
-
         practices.setTitle(NSLocalizedString("practices", comment: ""), for: UIControlState.normal)
         practices.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         practices.setTitleColor(colour3, for: .normal)
@@ -113,6 +93,25 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         practices.titleLabel?.adjustsFontSizeToFitWidth = true
         practices.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         practices.titleLabel?.textAlignment = .center
+        
+        
+        
+        custom.setTitle("C", for: UIControlState.normal)
+        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        custom.setTitleColor(colour3, for: .normal)
+        custom.layer.borderWidth = 8
+        custom.layer.borderColor = colour3.cgColor
+        custom.titleLabel?.adjustsFontSizeToFitWidth = true
+        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        custom.titleLabel?.textAlignment = .center
+        
+        custom.layer.cornerRadius = 49/2
+        custom.layer.masksToBounds = true
+        custom.titleLabel?.numberOfLines = 0
+        //
+
+
+        
         //
         
         
@@ -207,48 +206,32 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         
         
         self.informationViewYogaC.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextYogaC.frame.size.height + informationTitleYogaC.frame.size.height + 20)
-        
-        
-        // Iphone 5/SE
-        
-        if UIScreen.main.nativeBounds.height < 1334 {
-            
-            practicesTop.constant = 52
-            practicesBottom.constant = 52
-            stackBottom.constant = 52
-        
-            stackView.spacing = 15
-            
-        }
-        
     }
     
+    
+    
+    
+    
+    //
     override func viewDidLayoutSubviews() {
+        //
         super.viewDidLayoutSubviews()
         
-        guided.layer.cornerRadius = (self.stackView.frame.size.height) / 2
+        guided.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
         guided.layer.masksToBounds = true
         guided.titleLabel?.adjustsFontSizeToFitWidth = true
         guided.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         guided.titleLabel?.numberOfLines = 0
         guided.titleLabel?.textAlignment = .center
         
-        custom.layer.cornerRadius = (self.stackView.frame.size.height) / 2
-        custom.layer.masksToBounds = true
-        custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        custom.titleLabel?.numberOfLines = 0
-        custom.titleLabel?.textAlignment = .center
         
-        practices.layer.cornerRadius = (self.stackView.frame.size.height * 3/2) / 2
+        
+        practices.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
         practices.layer.masksToBounds = true
         practices.titleLabel?.adjustsFontSizeToFitWidth = true
         practices.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         practices.titleLabel?.numberOfLines = 0
         practices.titleLabel?.textAlignment = .center
-        
-        
-        
         
     }
     
@@ -326,7 +309,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     }
     
     
-    //---------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------
     
     
     var  viewNumber = 0
@@ -360,6 +343,12 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         nextButton.backgroundColor = .clear
         nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
         //
+        backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
+        backButton.setTitle("Back", for: .normal)
+        backButton.titleLabel?.textAlignment = .left
+        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        backButton.titleLabel?.textColor = .white
+        backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
         
         
         switch viewNumber {
@@ -396,6 +385,41 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
             
             
         //
+        case 1:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: custom.center.x, y: custom.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height), radius: 24.5, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("choiceScreen122", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButton)
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            walkthroughView.bringSubview(toFront: backButton)
+            
+            
+            //
+            
         default: break
             
             
@@ -410,6 +434,18 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         walkthroughView.removeFromSuperview()
         viewNumber = viewNumber + 1
         walkthroughMindBody()
+    }
+    
+    
+    
+    func backWalkthroughView(_ sender: Any) {
+        if viewNumber > 0 {
+            backButton.removeFromSuperview()
+            walkthroughView.removeFromSuperview()
+            viewNumber = viewNumber - 1
+            walkthroughMindBody()
+        }
+        
     }
     
 

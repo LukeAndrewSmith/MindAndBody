@@ -336,7 +336,7 @@ class HomeChoice: UIViewController  {
     }
 
 
-    //---------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------
     
     
     var  viewNumber = 0
@@ -370,10 +370,49 @@ class HomeChoice: UIViewController  {
         nextButton.backgroundColor = .clear
         nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
         //
+        backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
+        backButton.setTitle("Back", for: .normal)
+        backButton.titleLabel?.textAlignment = .left
+        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        backButton.titleLabel?.textColor = .white
+        backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
         
         
         switch viewNumber {
         case 0:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("choiceScreen1", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            
+            
+            
+        //
+        case 1:
             //
             
             
@@ -423,7 +462,18 @@ class HomeChoice: UIViewController  {
         viewNumber = viewNumber + 1
         walkthroughMindBody()
     }
-
+    
+    
+    
+    func backWalkthroughView(_ sender: Any) {
+        if viewNumber > 0 {
+            backButton.removeFromSuperview()
+            walkthroughView.removeFromSuperview()
+            viewNumber = viewNumber - 1
+            walkthroughMindBody()
+        }
+        
+    }
     
     
 }

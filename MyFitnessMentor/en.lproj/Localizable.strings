@@ -58,6 +58,11 @@
 
 
 //
+// Tracking //
+    "tracking" = "Tracking";
+
+
+//
 // Mind & Body //
 //
     //
@@ -1031,6 +1036,7 @@
             "wandering" = "Wandering";
             "oneness" = "Oneness";
             "duality" = "Duality";
+            "effort" = "Effort";
             "bodyScan" = "Body Scan";
             "unwind" = "Unwind";
 
@@ -1053,6 +1059,7 @@
                 "relaxation" = "Relaxation";
                 "recreation" = "Recreation";
                 "harmony" = "Harmony";
+                "motivation" = "Motivation";
                 "trance" = "Trance";
                 "disentangle" = "Disentangle";
 
@@ -1068,6 +1075,7 @@
                 "recreation" = "Recreation";
                 "individuality" = "Individuality";
                 "interdependence" = "Interdepence";
+                "energy" = "Energy";
                 "admission" = "Admission";
                 "clarity" = "Clarity";
 
@@ -1087,6 +1095,7 @@
                 "wanderingD" = "Wandering";
                 "onenessD" = "Oneness";
                 "dualityD" = "Duality";
+                "effortD" = "Effort";
                 "bodyScanD" = "Body Scan";
                 "unwindD" = "Unwind";
 
@@ -1277,9 +1286,12 @@
         //
         "breathing" = "Breathing";
         "coreActivation" = "Core Activation";
+        "mindMuscle" = "Mind-Muscle Connection";
+        "anatomy" = "Anatomy";
         "posture" = "Posture";
         "equipment" = "Equipment";
         "commonTerms" = "Common Terms";
+        "routineBuilding" = "Routine Building";
         "trainingPhilosophy" = "Training Philosophy";
         "nutrition" = "Nutrition";
 
@@ -1290,6 +1302,42 @@
         //
         "role" = "Role";
         "suggestions" = "Suggestions";
+
+
+
+            // Anatomy
+            //
+            "rearDelts" = "Rear Delts";
+            "lateralDelts" = "Lateral Delts";
+            "frontDelts" = "Front Delts";
+            "pecs2" = "Pectorals (Pecs)";
+            "lats" = "Latissimus Dorsi (Lats)";
+            "erectors" = "Spinal Erectors";
+            "core" = "Core";
+            "serratus" = "Serratus Anterior";
+            "obliques" = "Obliques";
+            "rectusAbdominis" = "Rectus Abdominis";
+            "glutes" = "Gluteus Maximus (Glutes)";
+            "adductors" = "Adductors";
+            "gastrocnemius" = "Gastrocnemius";
+            "soleus" = "Soleus";
+
+
+            // Music
+            //
+            "blues" = "Blues";
+            "rock" = "Rock";
+            "house" = "House";
+            "funk" = "Funk";
+            "meditative" = "Meditative";
+            "jazz" = "Jazz";
+                //
+                "jazz(piano)" = "Jazz (Piano)";
+                "jazz(guitar)" = "Jazz (Guitar)";
+                "jazz(harp)" = "Jazz (Harp)";
+                "jazz(house)" = "Jazz (House)";
+            "classical" = "Classical";
+
 
     //
     // Title //
@@ -1310,13 +1358,13 @@
 //
     // Mind Body
         // Home
-        "mindBody1" = "This is the walkthrough, it appears on the first viewing of each screen.\n\nThe text provides an explanation regarding the function of the highlighted object.\n\nPress anywhere on the screen to continue, or on subsequent screens press the top left button to go back.\n\nThe current screen is the home screen.";
-        "mindBody2" = "Colour\n\nThis colour is best for the walkthrough, a more modern black and white colour scheme can be chosen in the settings.";
-        "mindBody3" = "Calendar\n\nThe calendar contains your weekly schedule.\n\nA schedule will be suggested upon completion of your profile, but will remain fully customisable.\n\nThe first thing to do after this screens walkthrough is to fill in your profile.";
-        "mindBody4" = "Sessions\n\nThe essence of the app is to show you the path, but not walk it for you.\n\nThis is portrayed by making you click through a path (suggested in the calendar) to get to a session, starting from the buttons on this home screen.";
-        "mindBody5" = "Profile\n\nThe profile tab is accessed using this button.\n\nThe tab bar buttons highlight orange if selected.";
-        "mindBody6" = "Home\n\nThe home screen (current screen) is accessed using this button.";
-        "mindBody7" = "Information\n\nThe information tab is accessed using this button.";
+        "mindBody0" = "This is the walkthrough, it appears on the first viewing of each screen.\n\nThe text provides an explanation regarding the function of the highlighted object.\n\nPress anywhere on the screen to continue, or on subsequent screens press the top left button to go back.\n\nThe current screen is the home screen.";
+        "mindBody1" = "For those who won't bother to read the walkthrough:\n\nThe essential idea is to fill in your profile, be presented with a schedule on the homepage and to follow it.\n\nThe app is fully customizable.\n\nA modern black and white colour scheme can be chosen in the settings.";
+        "mindBody2" = "Calendar\n\nThe calendar contains your weekly schedule.\n\nA schedule will be suggested upon completion of your profile, but will remain fully customisable.\n\nThe first thing to do after this screens walkthrough is to fill in your profile.";
+        "mindBody3" = "Sessions\n\nThe essence of the app is to show you the path, but not walk it for you.\n\nThis is portrayed by making you click through a path (suggested in the calendar) to get to a session, starting from the buttons on this home screen.";
+        "mindBody4" = "Profile\n\nThe profile tab is accessed using this button.\n\nThe tab bar buttons highlight orange if selected.";
+        "mindBody5" = "Home\n\nThe home screen (current screen) is accessed using this button.";
+        "mindBody6" = "Information\n\nThe information tab is accessed using this button.";
 
 
         // Calendar
@@ -1331,11 +1379,11 @@
 
         // Choice Screen 1
         "choiceScreen1" = "Information\n\nOn the screens directly after the home screen, information about the activity is provided.";
-        "choiceScreen12" = "The 'C' (custom) buttons present a way to make fully custom sessions built from scratch; exercise order, sets, reps and rest times can be specified";
+        "choiceScreen12" = "The 'C' (custom) buttons present a way to make fully custom sessions built from scratch; exercise order, sets, reps and rest times can be specified.";
+        "choiceScreen122" = "The 'C' (custom) buttons present a way to make fully custom session built from scratch; pose order and number of breaths to hold each pose for can be specified.";
 
 
         // Choice Screen 2
-        "choiceScreen21" = "This is always the final screen layout before a session.";
         "choiceScreen22" = "Presets\n\nScroll through the 'picker' to select a preset session or leave it on the suggested one.";
         "choiceScreen23" = "Table\nThe table contains all possible movements, those included in the session are indicated with a tick.\nSessions can be fine tuned by selecting or deselecting movements.";
         "choiceScreen24" = "Custom Presets\nUp to 3 custom presets can be saved using the '+' button. A custom preset is found at the bottom of the picker below the seperator line.\nTo remove a custom preset you must first select it in the picker the press the '-' button.";
@@ -1347,7 +1395,6 @@
         "choiceScreen22y" = "Length\n\nSelect the desired length of the yoga practice in the 'picker'.";
         "choiceScreen23y" = "Practices\n\nSelect the desired practice from the table.";
         //
-        "choiceScreen21y2" = "The custom and preset practices are seperated in the yoga section, this is where you can create your own custom practices.";
         "choiceScreen22y2" = "Custom Practices\n\nYour custom presets are be stored in this 'picker'.";
         "choiceScreen23y2" = "New Practice\n\nCreate a new practice using the '+' button, you will be prompted to name the practice.";
         "choiceScreen24y2" = "Poses\n\nOnce you have created a custom practice, add poses using the '+' button. You can remove poses by selected them and pressing the '-', and change their order by pressing the right of the cell and dragging to the new position.";
@@ -1391,7 +1438,7 @@
 
     // Profile
     "profile1" = "Profile\n\nComplete the profile so that the app can suggest to you a weekly schedule which can be accessed and modified in the calendar.";
-    "profile2" = "Settings\n\nThe settings provide the possibility to change the colour scheme of the app, reset the app or reset the walkthrough (incase you need to go through it again).";
+    "profile2" = "Settings\n\nThe settings provide the possibility to change colour schemes, units, reset the app and reset the walkthrough.";
 
 
 
@@ -1399,7 +1446,9 @@
     // Information
     "information1" = "Important\n\nI advise you, at the very least, to read the top three topics in the 'important' section as they provide essential information regarding training.";
 
-
+        // Anatomy
+        "anatomy1" = "Back Button\n\nHold down the back button to return to the information screen.";
+        "music1" = "Music\n\nSuggestions for music are given using playlists on youtube (a list of the songs is also stored in the app).\n\nI urge you to support the artists and buy the songs you like.";
 
 
 

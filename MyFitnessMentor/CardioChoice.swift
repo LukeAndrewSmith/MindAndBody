@@ -55,13 +55,14 @@ class CardioChoice: UIViewController  {
         super.viewDidLoad()
         
         // Walkthrough
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough1") == false {
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughc") == false {
             let delayInSeconds = 0.5
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 self.walkthroughMindBody()
             }
-            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough1")
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughc")
         }
+        
         
         // Colours
         self.view.applyGradient(colours: [colour1, colour2])
@@ -94,6 +95,7 @@ class CardioChoice: UIViewController  {
         liss.titleLabel?.textAlignment = .center
         
         
+        custom.setTitle("C", for: .normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 8
         custom.layer.borderColor = colour3.cgColor
@@ -299,7 +301,6 @@ class CardioChoice: UIViewController  {
         //
         let screenSize = UIScreen.main.bounds
         let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-    
         //
         walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
         walkthroughView.backgroundColor = .black
@@ -318,6 +319,12 @@ class CardioChoice: UIViewController  {
         nextButton.backgroundColor = .clear
         nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
         //
+        backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
+        backButton.setTitle("Back", for: .normal)
+        backButton.titleLabel?.textAlignment = .left
+        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        backButton.titleLabel?.textColor = .white
+        backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
         
         
         switch viewNumber {
@@ -354,6 +361,41 @@ class CardioChoice: UIViewController  {
             
             
         //
+        case 1:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: custom.center.x, y: custom.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height), radius: 24.5, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("choiceScreen12", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButton)
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            walkthroughView.bringSubview(toFront: backButton)
+            
+            
+            //
+            
         default: break
             
             
@@ -368,6 +410,18 @@ class CardioChoice: UIViewController  {
         walkthroughView.removeFromSuperview()
         viewNumber = viewNumber + 1
         walkthroughMindBody()
+    }
+    
+    
+    
+    func backWalkthroughView(_ sender: Any) {
+        if viewNumber > 0 {
+            backButton.removeFromSuperview()
+            walkthroughView.removeFromSuperview()
+            viewNumber = viewNumber - 1
+            walkthroughMindBody()
+        }
+        
     }
     
 

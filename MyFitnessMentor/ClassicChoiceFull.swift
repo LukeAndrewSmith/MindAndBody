@@ -2542,7 +2542,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
-    //---------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------
     
     
     var  viewNumber = 0
@@ -2593,39 +2593,6 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             
             // Clear Section
             let path = CGMutablePath()
-            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - 80, y: UIApplication.shared.statusBarFrame.height, width: 160, height: 40))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            
-            label.text = NSLocalizedString("choiceScreen21", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            
-            
-            
-        //
-        case 1:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
             path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49, width: self.view.frame.size.width, height: pickerView.frame.size.height))
             path.addRect(screenSize)
             //
@@ -2655,7 +2622,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
         //
-        case 2:
+        case 1:
             //
             
             
@@ -2692,7 +2659,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
         //
-        case 3:
+        case 2:
             //
             
             
@@ -2726,7 +2693,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
         //
-        case 4:
+        case 3:
             //
             
             
@@ -2761,7 +2728,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
         //
-        case 5:
+        case 4:
             //
             
             

@@ -1,18 +1,23 @@
 //
-//  MeditationChoiceGuided.swift
+//  InformationScreenT.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 24.02.17.
+//  Created by Luke Smith on 01.03.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class InformationScreenMusic: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
+    
+    // Question MArk
+    @IBOutlet weak var questionMark: UIBarButtonItem!
     
     
     // Table View
@@ -21,20 +26,58 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     
     // Information View
     @IBOutlet weak var informationView: UIScrollView!
-    
-    // Information Title Label
+    // Information Title
     @IBOutlet weak var informationTitle: UILabel!
     
     
-    // Question Mark
-    @IBOutlet weak var questionMark: UIBarButtonItem!
+    
+    // Genre Array
+    let genreArray =
+        [
+            "blues",
+            "rock",
+            "house",
+            "funk",
+            "meditative",
+            "jazz",
+            "classical"
+        ]
+    
+    // Music Array
+    
+    let musicArray =
+        [
+            //
+            [""],
+            
+            //
+            [""],
+            
+            //
+            ["",
+             ""],
+            
+            //
+            [""],
+            
+            //
+            ["",
+             "",
+             ""],
+            
+            //
+             ["jazz(piano)",
+             "jazz(guitar)",
+             "jazz(harp)",
+             "jazz(house)"],
+            
+            //
+            ["",
+             ""]
+        ]
     
     
-    // Selected Session
-    var selectedSession = [0, 0]
-    
-    
-    // Colours
+    // Retreive Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
     let colour3 = UserDefaults.standard.color(forKey: "colour3")!
@@ -42,45 +85,54 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     let colour5 = UserDefaults.standard.color(forKey: "colour5")!
     let colour6 = UserDefaults.standard.color(forKey: "colour6")!
     let colour7 = UserDefaults.standard.color(forKey: "colour7")!
-    let colour8 = UserDefaults.standard.color(forKey: "colour8")!
+
     
     
     
-    
-    // Guided Sessions
-    let guidedSessions =
-        [
-            ["introduction", "breathing"],
-            ["scale", "perspective"],
-            ["lettingGo", "acceptance", "wandering", "oneness", "duality", "effort"],
-            ["bodyScan", "unwind"]
-    
-        ]
     
     
     
     //
-    // ViewDidLoad
+    // View Did Load
     //
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // Walkthrough
+        if UserDefaults.standard.bool(forKey: "informationWalkthroughm") == false {
+            let delayInSeconds = 0.5
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.walkthroughMindBody()
+            }
+            UserDefaults.standard.set(true, forKey: "informationWalkthroughm")
+        }
+        
         
         
         // Colour
         self.view.applyGradient(colours: [colour1, colour2])
         questionMark.tintColor = colour1
-        
-        
-        
-        // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("guidedSessions", comment: ""))
-        
 
         
+        // Background
+        let tableViewBackground = UIView()
+        
+        tableViewBackground.backgroundColor = colour7
+        tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
+        
+        tableView.backgroundView = tableViewBackground
         
         
         
+        // Navigation Title
+        navigationBar.title = NSLocalizedString("Music", comment: "")
+        
+        
+        
+        
+        
+        // Information
         // Information
         // Scroll View Frame
         self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
@@ -159,92 +211,69 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
         
         
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        
-        
-        
-            let tableViewBackground = UIView()
-            
-            tableViewBackground.backgroundColor = colour7
-            tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
-            
-            tableView.backgroundView = tableViewBackground
-        
+        view.bringSubview(toFront: informationView)
+        view.bringSubview(toFront: informationTitle)
+    
     }
     
     
     
     
     
-    // Table View
     
+    
+    
+    
+    
+    // 
+    // TableView
+    //
+    
+    // Section
+    //
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return genreArray.count
     }
-    
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-            
-        case 0: return NSLocalizedString("introduction", comment: "")
-        case 1: return NSLocalizedString("view", comment: "")
-        case 2: return NSLocalizedString("self", comment: "")
-        case 3: return NSLocalizedString("sleep", comment: "")
-        default: break
-        }
-        return ""
+        return NSLocalizedString(genreArray[section], comment: "")
     }
     
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
+        header.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        header.contentView.backgroundColor = colour7
+        //
+    }
+    
+    // Cell
+    //
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return guidedSessions[section].count
-        
+        return musicArray[section].count
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        
-                let header = view as! UITableViewHeaderFooterView
-                header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
-                header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-                header.contentView.backgroundColor = colour7
-                //
-    }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-
+        
+        cell.textLabel?.text = NSLocalizedString(musicArray[indexPath.section][indexPath.row], comment: "")
         
         
-        //
-        cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        cell.tintColor = .black
-
-        //
-        cell.textLabel?.text = NSLocalizedString(guidedSessions[indexPath.section][indexPath.row], comment: "")
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
         cell.textLabel?.textAlignment = .left
+        cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         cell.textLabel?.textColor = .black
-        
+        cell.tintColor = .black
         //
-        cell.imageView?.image = #imageLiteral(resourceName: "TestG")
-        
-        let itemSize = CGSize(width: 76, height: 76)
-        UIGraphicsBeginImageContextWithOptions(itemSize, false, UIScreen.main.scale)
-        let imageRect = CGRect(x: 0, y: 0, width: itemSize.width, height: itemSize.height)
-        cell.imageView?.image!.draw(in: imageRect)
-        cell.imageView?.image! = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        
-        cell.imageView?.layer.cornerRadius = 3
-        cell.imageView?.layer.masksToBounds = true
         
         
         return cell
-        
-        
     }
     
     
@@ -252,28 +281,15 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 96
-        
+        return 47
     }
     
-    
-    var guidedTitleText = String()
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //
+        let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
         
-        // Selected Session
-        selectedSession[0] = indexPath.section
-        selectedSession[1] = indexPath.row
-        
-        // Title
-//        let currentCell = tableView.cellForRow(at: indexPath) as UITableViewCell!
-//        guidedTitleText = (currentCell?.textLabel!.text)!
-        
-        //
-        performSegue(withIdentifier: "meditationGuided", sender: nil)
     }
     
     
@@ -284,8 +300,16 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     
     
     
+    
+    
+    //
+    // Extra Information
+    
     // QuestionMark Button Action
     @IBAction func informationButtonAction(_ sender: Any) {
+    
+        
+        
         
         if self.informationView.frame.minY < self.view.frame.maxY {
             
@@ -299,7 +323,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
             self.informationView.contentOffset.y = 0
-            
+
             
         } else {
             
@@ -316,13 +340,9 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
             }, completion: nil)
             self.informationView.contentOffset.y = 0
             
-            
         }
         
     }
-    
-    
-    
     
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
@@ -342,35 +362,145 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
+
+
     
+    //---------------------------------------------------------------------------------------------------------------
     
+    // Countdown
+    var time = 7
+    let countdownLabel = UILabel()
     
-    
-    
-    // Pass Array to next ViewController
     //
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
-        // Pass Info
-        if (segue.identifier == "meditationGuided") {
+    // Update Timer
+    func updateTimer() {
+        if time == 0 {
             
-            let destinationVC = segue.destination as! MeditationGuided
+            countdownLabel.text = "0"
+            
+        } else {
+            
+            time -= 1
+            countdownLabel.text = String(time)
+            
+        }
+    }
+    
+    
+    
+    var  viewNumber = 0
+    let walkthroughView = UIView()
+    let label = UILabel()
+    let nextButton = UIButton()
+    
+    
+    
+    // Walkthrough
+    func walkthroughMindBody() {
+        
+        //
+        let screenSize = UIScreen.main.bounds
+        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+        
+        //
+        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+        walkthroughView.backgroundColor = .black
+        walkthroughView.alpha = 0.72
+        walkthroughView.clipsToBounds = true
+        //
+        
+        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
+        label.center = view.center
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
+        label.textColor = .white
+        
+        //
+        nextButton.frame = screenSize
+        nextButton.backgroundColor = .clear
+        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
+        
+        
+        switch viewNumber {
+        case 0:
+            //
+            
+            nextButton.isEnabled = false
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - 80, y: UIApplication.shared.statusBarFrame.height, width: 160, height: 40))
+            path.addRect(walkthroughView.frame)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
             
             
-            destinationVC.selectedSession = selectedSession
+            label.text = NSLocalizedString("music1", comment: "")
+            walkthroughView.addSubview(label)
             
-            //destinationVC.guidedTitle = guidedTitleText
-            //destinationVC.keyArray = selectedArray
-            //destinationVC.poses = posesDictionary
+            
+            
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            
+            
+            
+            // CountDown
+            //
+            time = 7
+            //
+            countdownLabel.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
+            countdownLabel.text = String(time)
+            countdownLabel.center.x = self.view.frame.size.width - 24.5
+            countdownLabel.center.y = self.view.frame.size.height - 24.5 + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            countdownLabel.textAlignment = .center
+            countdownLabel.numberOfLines = 0
+            countdownLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+            countdownLabel.font = UIFont(name: "SFUIDisplay-light", size: 22)
+            countdownLabel.textColor = .white
+            
+            walkthroughView.addSubview(countdownLabel)
+            
+            
+            
+            let countdownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+            
+            
+            
+            
+            let delayInSeconds = 7.0
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.nextButton.isEnabled = true
+                countdownTimer.invalidate()
+                self.countdownLabel.removeFromSuperview()
+                
+            }
+        //
+        default: break
+            
             
         }
         
         
-        
-        // Remove Back Button Text
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        navigationItem.backBarButtonItem = backItem
+    }
+    
+    
+    
+    func nextWalkthroughView(_ sender: Any) {
+        walkthroughView.removeFromSuperview()
+        viewNumber = viewNumber + 1
+        walkthroughMindBody()
     }
     
     

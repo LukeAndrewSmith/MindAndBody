@@ -63,7 +63,7 @@ class MeditationGuided: UIViewController {
         [
             ["introduction", "breathing"],
             ["scale", "perspective"],
-            ["lettingGo", "acceptance", "wandering", "oneness", "duality"],
+            ["lettingGo", "acceptance", "wandering", "oneness", "duality", "effort"],
             ["bodyScan", "unwind"]
         ]
     
@@ -72,7 +72,7 @@ class MeditationGuided: UIViewController {
         [
             ["introduction", "breathing"],
             ["scale", "perspective"],
-            ["lettingGo", "acceptance", "wandering", "oneness", "duality"],
+            ["lettingGo", "acceptance", "wandering", "oneness", "duality", "effort"],
             ["bodyScan", "unwind"]
         ]
     
@@ -81,7 +81,7 @@ class MeditationGuided: UIViewController {
         [
             ["comprehension", "calm"],
             ["comfort", "creativity"],
-            ["relaxation", "relaxation", "recreation", "harmony", "harmony"],
+            ["relaxation", "relaxation", "recreation", "harmony", "harmony", "motivation"],
             ["trance", "disentangle"]
     ]
     
@@ -90,7 +90,7 @@ class MeditationGuided: UIViewController {
         [
             ["understanding", "body"],
             ["conscious", "subconscious"],
-            ["freedom", "relaxation", "recreation", "individuality", "interdependence"],
+            ["freedom", "relaxation", "recreation", "individuality", "interdependence", "energy"],
             ["admission", "clarity"]
     ]
     
@@ -99,7 +99,7 @@ class MeditationGuided: UIViewController {
         [
             ["12min", "10min"],
             ["13min", "8min"],
-            ["20min", "12min", "10min", "10min", "10min"],
+            ["20min", "12min", "10min", "10min", "10min", "10min"],
             ["20min", "10min"]
     ]
     
@@ -111,7 +111,7 @@ class MeditationGuided: UIViewController {
         [
             ["introductionD", "breathingD"],
             ["scaleD", "perspectiveD"],
-            ["lettingGoD", "acceptanceD", "wanderingD", "onenessD", "dualityD"],
+            ["lettingGoD", "acceptanceD", "wanderingD", "onenessD", "dualityD", "effortD"],
             ["bodyScanD", "unwindD"]
     ]
     
@@ -155,7 +155,7 @@ class MeditationGuided: UIViewController {
         
         // View Elements
         //
-        // Discription
+        // Description
         detailView.backgroundColor = colour7
         
         detailTitle.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
