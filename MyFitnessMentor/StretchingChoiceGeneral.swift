@@ -723,22 +723,16 @@ class StretchingChoiceGeneral: UIViewController, UITableViewDelegate, UITableVie
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = (
-            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: "")))
+        let informationLabelString = ((NSLocalizedString("stretches", comment: ""))+"\n"+(NSLocalizedString("stretchingChoiceText", comment: "")))
         
         // Range of String
-        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: ""))
+        let textRangeString = ((NSLocalizedString("stretches", comment: ""))+"\n"+(NSLocalizedString("stretchingChoiceText", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
         // Range of Titles
-        let titleRangeString1 = (NSLocalizedString("purpose", comment: ""))
-        let titleRangeString2 = (NSLocalizedString("body", comment: ""))
-        let titleRangeString3 = (NSLocalizedString("mind", comment: ""))
-        
-        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString1)
-        let titleRange2 = (informationLabelString as NSString).range(of: titleRangeString2)
-        let titleRange3 = (informationLabelString as NSString).range(of: titleRangeString3)
+        let titleRangeString = (NSLocalizedString("stretches", comment: ""))
+        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
         
         
         // Line Spacing
@@ -751,8 +745,6 @@ class StretchingChoiceGeneral: UIViewController, UITableViewDelegate, UITableVie
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Light", size: 19)!, range: textRange)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange1)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange2)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange3)
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         
         

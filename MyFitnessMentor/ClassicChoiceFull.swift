@@ -1329,10 +1329,10 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("workoutChoiceText", comment: "")))
         
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("workoutChoiceText", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         

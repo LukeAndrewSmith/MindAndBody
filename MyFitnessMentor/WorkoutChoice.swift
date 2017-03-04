@@ -78,7 +78,7 @@ class WorkoutChoice: UIViewController  {
         
         
         // Titles
-        navigationBar.title = (NSLocalizedString("location", comment: ""))
+        navigationBar.title = (NSLocalizedString("workout", comment: ""))
         
         // Button Titles
         gym.setTitle(NSLocalizedString("gym", comment: ""), for: UIControlState.normal)
@@ -141,10 +141,10 @@ class WorkoutChoice: UIViewController  {
         //
         // String
         let informationLabelString = (
-            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: "")))
+            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextWorkout", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextWorkout", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextWorkout", comment: "")))
         
         // Range of String
-        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: ""))
+        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextWorkout", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextWorkout", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextWorkout", comment: ""))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         

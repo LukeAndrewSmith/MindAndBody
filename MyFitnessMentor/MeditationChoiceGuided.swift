@@ -53,7 +53,8 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
             ["introduction", "breathing"],
             ["scale", "perspective"],
             ["lettingGo", "acceptance", "wandering", "oneness", "duality", "effort"],
-            ["bodyScan", "unwind"]
+            ["bodyScan", "unwind"],
+            ["lotusStretch", "generalStretch"]
     
         ]
     
@@ -121,15 +122,15 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let informationLabelString = ((NSLocalizedString("guidedMeditation", comment: ""))+"\n"+(NSLocalizedString("guidedInformation", comment: "")))
         
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let textRangeString = ((NSLocalizedString("guidedMeditation", comment: ""))+"\n"+(NSLocalizedString("guidedInformation", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
         // Range of Titles
-        let titleRangeString = (NSLocalizedString("movements", comment: ""))
+        let titleRangeString = (NSLocalizedString("guidedMeditation", comment: ""))
         let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
         
         
@@ -179,7 +180,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     // Table View
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     
@@ -190,6 +191,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         case 1: return NSLocalizedString("view", comment: "")
         case 2: return NSLocalizedString("self", comment: "")
         case 3: return NSLocalizedString("sleep", comment: "")
+        case 4: return NSLocalizedString("yogaMeditation", comment: "")
         default: break
         }
         return ""

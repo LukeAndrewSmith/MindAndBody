@@ -247,7 +247,10 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         // Titles
         presetTitle.text = NSLocalizedString("customPractices", comment: "")
+        presetTitle.textColor = colour3
         tableTitle.text = NSLocalizedString("yogaTableTitle", comment: "")
+        tableTitle.textColor = colour3
+
         
         
         

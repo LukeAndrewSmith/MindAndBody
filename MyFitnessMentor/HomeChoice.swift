@@ -35,7 +35,8 @@ class HomeChoice: UIViewController  {
     @IBOutlet weak var informationView: UIScrollView!
     
     // Information Title
-    @IBOutlet weak var informationVTitle: UILabel!
+    @IBOutlet weak var informationTitle: UILabel!
+    
     
     // Stack View
     @IBOutlet weak var stackView: UIStackView!
@@ -92,27 +93,27 @@ class HomeChoice: UIViewController  {
         
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
-        fullBody.titleLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        fullBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         fullBody.setTitleColor(colour3, for: .normal)
         fullBody.layer.borderWidth = 8
         fullBody.layer.borderColor = colour3.cgColor
         
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
-        upperBody.titleLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        upperBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         upperBody.setTitleColor(colour3, for: .normal)
         upperBody.layer.borderWidth = 8
         upperBody.layer.borderColor = colour3.cgColor
         
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
         lowerBody.setTitleColor(colour3, for: .normal)
-        lowerBody.titleLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        lowerBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         lowerBody.layer.borderWidth = 8
         lowerBody.layer.borderColor = colour3.cgColor
         
         
         
         
-        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 7
         custom.layer.borderColor = colour3.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -128,60 +129,61 @@ class HomeChoice: UIViewController  {
         
         
         
+        
+        
+        
+        
+        
+        // Information
         // Scroll View Frame
         self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
         
+        
         view.bringSubview(toFront: informationView)
-        
-        
-        // Information Title
-        //
-        // Information Title Frame
-        self.informationVTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
-        informationVTitle.text = (NSLocalizedString("information", comment: ""))
-        informationVTitle.textAlignment = .center
-        informationVTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationVTitle.textColor = colour2
-        informationVTitle.backgroundColor = colour7
-        
-        
-        
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        downSwipe.direction = UISwipeGestureRecognizerDirection.down
-        informationVTitle.addGestureRecognizer(downSwipe)
-        informationVTitle.isUserInteractionEnabled = true
-        
-        
-        
-        self.view.addSubview(informationVTitle)
-        self.view.bringSubview(toFront: informationVTitle)
-        
         
         
         // Information Text
         //
         // Information Text Frame
-        let informationTextStretchingC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
+        let informationText = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
+        
+        
+        
+        
+        
+        // Information Text Frame
+        self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
+        informationTitle.text = (NSLocalizedString("information", comment: ""))
+        informationTitle.textAlignment = .center
+        informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
+        informationTitle.textColor = colour2
+        informationTitle.backgroundColor = colour7
+        
+        
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        downSwipe.direction = UISwipeGestureRecognizerDirection.down
+        informationTitle.addGestureRecognizer(downSwipe)
+        informationTitle.isUserInteractionEnabled = true
+        
+        
+        
+        self.view.addSubview(informationTitle)
+        
+        
         
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = (
-            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: "")))
+        let informationLabelString = ((NSLocalizedString("bodyweightWorkouts", comment: ""))+"\n"+(NSLocalizedString("homeWorkoutChoice", comment: "")))
         
         // Range of String
-        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: ""))
+        let textRangeString = ((NSLocalizedString("bodyweightWorkouts", comment: ""))+"\n"+(NSLocalizedString("homeWorkoutChoice", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
         // Range of Titles
-        let titleRangeString1 = (NSLocalizedString("purpose", comment: ""))
-        let titleRangeString2 = (NSLocalizedString("body", comment: ""))
-        let titleRangeString3 = (NSLocalizedString("mind", comment: ""))
-        
-        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString1)
-        let titleRange2 = (informationLabelString as NSString).range(of: titleRangeString2)
-        let titleRange3 = (informationLabelString as NSString).range(of: titleRangeString3)
+        let titleRangeString = (NSLocalizedString("bodyweightWorkouts", comment: ""))
+        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
         
         
         // Line Spacing
@@ -194,22 +196,27 @@ class HomeChoice: UIViewController  {
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Light", size: 19)!, range: textRange)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange1)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange2)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange3)
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         
         
         
         // Final Text Editing
-        informationTextStretchingC.attributedText = informationLabelText
-        informationTextStretchingC.textAlignment = .justified
-        informationTextStretchingC.lineBreakMode = NSLineBreakMode.byWordWrapping
-        informationTextStretchingC.numberOfLines = 0
-        informationTextStretchingC.sizeToFit()
-        self.informationView.addSubview(informationTextStretchingC)
+        informationText.attributedText = informationLabelText
+        informationText.textAlignment = .justified
+        informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
+        informationText.numberOfLines = 0
+        informationText.sizeToFit()
+        self.informationView.addSubview(informationText)
         
         
-        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextStretchingC.frame.size.height + informationVTitle.frame.size.height + 20)
+        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -279,7 +286,7 @@ class HomeChoice: UIViewController  {
             }, completion: nil)
             UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 
-                self.informationVTitle.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
             self.informationView.contentOffset.y = 0
             
@@ -294,7 +301,7 @@ class HomeChoice: UIViewController  {
             }, completion: nil)
             UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 
-                self.informationVTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
+                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
                 
             }, completion: nil)
             self.informationView.contentOffset.y = 0
@@ -321,7 +328,7 @@ class HomeChoice: UIViewController  {
                 }, completion: nil)
                 UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                     
-                    self.informationVTitle.transform = CGAffineTransform(translationX: 0, y: 0)
+                    self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
                 }, completion: nil)
                 
             }

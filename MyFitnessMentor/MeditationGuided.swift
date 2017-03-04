@@ -64,7 +64,8 @@ class MeditationGuided: UIViewController {
             ["introduction", "breathing"],
             ["scale", "perspective"],
             ["lettingGo", "acceptance", "wandering", "oneness", "duality", "effort"],
-            ["bodyScan", "unwind"]
+            ["bodyScan", "unwind"],
+            ["lotusStretch", "generalStretch"]
         ]
     
     // Theme
@@ -73,7 +74,8 @@ class MeditationGuided: UIViewController {
             ["introduction", "breathing"],
             ["scale", "perspective"],
             ["lettingGo", "acceptance", "wandering", "oneness", "duality", "effort"],
-            ["bodyScan", "unwind"]
+            ["bodyScan", "unwind"],
+            ["lotusStretch", "generalStretch"]
         ]
     
     // Aim
@@ -82,7 +84,8 @@ class MeditationGuided: UIViewController {
             ["comprehension", "calm"],
             ["comfort", "creativity"],
             ["relaxation", "relaxation", "recreation", "harmony", "harmony", "motivation"],
-            ["trance", "disentangle"]
+            ["trance", "disentangle"],
+            ["relaxation", "relaxation"]
     ]
     
     // Focus
@@ -91,7 +94,8 @@ class MeditationGuided: UIViewController {
             ["understanding", "body"],
             ["conscious", "subconscious"],
             ["freedom", "relaxation", "recreation", "individuality", "interdependence", "energy"],
-            ["admission", "clarity"]
+            ["admission", "clarity"],
+            ["acceptance", "acceptance"]
     ]
     
     // Duration
@@ -100,7 +104,8 @@ class MeditationGuided: UIViewController {
             ["12min", "10min"],
             ["13min", "8min"],
             ["20min", "12min", "10min", "10min", "10min", "10min"],
-            ["20min", "10min"]
+            ["20min", "10min"],
+            ["20min", "20min"]
     ]
     
     // Image
@@ -112,7 +117,8 @@ class MeditationGuided: UIViewController {
             ["introductionD", "breathingD"],
             ["scaleD", "perspectiveD"],
             ["lettingGoD", "acceptanceD", "wanderingD", "onenessD", "dualityD", "effortD"],
-            ["bodyScanD", "unwindD"]
+            ["bodyScanD", "unwindD"],
+            ["lotusStretchD", "generalStretchD"]
     ]
     
     

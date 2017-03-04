@@ -21,8 +21,8 @@ class CardioChoice: UIViewController  {
     // Hiit
     @IBOutlet weak var hiit: UIButton!
     
-    // Liss
-    @IBOutlet weak var liss: UIButton!
+    // Regular
+    @IBOutlet weak var regular: UIButton!
     
     // Custom
     @IBOutlet weak var custom: UIButton!
@@ -71,7 +71,7 @@ class CardioChoice: UIViewController  {
         
         
         // Titles
-        navigationBar.title = (NSLocalizedString("cardioType", comment: ""))
+        navigationBar.title = (NSLocalizedString("cardio", comment: ""))
         
         // Button Titles
         hiit.setTitle(NSLocalizedString("hiit", comment: ""), for: UIControlState.normal)
@@ -85,14 +85,14 @@ class CardioChoice: UIViewController  {
         
         
         
-        liss.setTitle(NSLocalizedString("liss", comment: ""), for: UIControlState.normal)
-        liss.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        liss.setTitleColor(colour3, for: .normal)
-        liss.layer.borderWidth = 8
-        liss.layer.borderColor = colour3.cgColor
-        liss.titleLabel?.adjustsFontSizeToFitWidth = true
-        liss.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        liss.titleLabel?.textAlignment = .center
+        regular.setTitle(NSLocalizedString("regular", comment: ""), for: UIControlState.normal)
+        regular.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        regular.setTitleColor(colour3, for: .normal)
+        regular.layer.borderWidth = 8
+        regular.layer.borderColor = colour3.cgColor
+        regular.titleLabel?.adjustsFontSizeToFitWidth = true
+        regular.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        regular.titleLabel?.textAlignment = .center
         
         
         custom.setTitle("C", for: .normal)
@@ -113,24 +113,29 @@ class CardioChoice: UIViewController  {
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
         // Information
         // Scroll View Frame
         self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
         
-        
         view.bringSubview(toFront: informationView)
         
         
-        // Information Text
+        
+        
+        
+        
+        
+        // Information Title
         //
-        // Information Text Frame
-        let informationText = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
-        
-        
-        
-        
-        
-        // Information Text Frame
+        // Information Title Frame
         self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
@@ -147,22 +152,41 @@ class CardioChoice: UIViewController  {
         
         
         self.view.addSubview(informationTitle)
+        self.view.bringSubview(toFront: informationTitle)
         
         
+        
+        // Information Text
+        //
+        // Information Text Frame
+        let informationTextWarmupC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
         
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let informationLabelString = (
+            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextCardio", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextCardio", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextCardio", comment: "")) + "\n" + "\n" + (NSLocalizedString("hiit", comment: ""))+"\n"+(NSLocalizedString("purposeText", comment: ""))+"\n"+"\n"+(NSLocalizedString("regular", comment: ""))+"\n"+(NSLocalizedString("bodyText", comment: ""))+"\n"+"\n"+(NSLocalizedString("custom", comment: ""))+"\n"+(NSLocalizedString("mindText", comment: "")))
         
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextCardio", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextCardio", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextCardio", comment: "")) + "\n" + "\n" + (NSLocalizedString("hiit", comment: ""))+"\n"+(NSLocalizedString("purposeText", comment: ""))+"\n"+"\n"+(NSLocalizedString("regular", comment: ""))+"\n"+(NSLocalizedString("bodyText", comment: ""))+"\n"+"\n"+(NSLocalizedString("custom", comment: ""))+"\n"+(NSLocalizedString("mindText", comment: ""))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
         // Range of Titles
-        let titleRangeString = (NSLocalizedString("movements", comment: ""))
-        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
+        let titleRangeString1 = (NSLocalizedString("purpose", comment: ""))
+        let titleRangeString2 = (NSLocalizedString("body", comment: ""))
+        let titleRangeString3 = (NSLocalizedString("mind", comment: ""))
+        let titleRangeString4 = (NSLocalizedString("hiit", comment: ""))
+        let titleRangeString5 = (NSLocalizedString("regular", comment: ""))
+        let titleRangeString6 = (NSLocalizedString("custom", comment: ""))
+        
+        
+        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString1)
+        let titleRange2 = (informationLabelString as NSString).range(of: titleRangeString2)
+        let titleRange3 = (informationLabelString as NSString).range(of: titleRangeString3)
+        let titleRange4 = (informationLabelString as NSString).range(of: titleRangeString4)
+        let titleRange5 = (informationLabelString as NSString).range(of: titleRangeString5)
+        let titleRange6 = (informationLabelString as NSString).range(of: titleRangeString6)
         
         
         // Line Spacing
@@ -175,25 +199,39 @@ class CardioChoice: UIViewController  {
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Light", size: 19)!, range: textRange)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange1)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange2)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange3)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange4)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange5)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange6)
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         
         
         
         // Final Text Editing
-        informationText.attributedText = informationLabelText
-        informationText.textAlignment = .justified
-        informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
-        informationText.numberOfLines = 0
-        informationText.sizeToFit()
-        self.informationView.addSubview(informationText)
+        informationTextWarmupC.attributedText = informationLabelText
+        informationTextWarmupC.textAlignment = .justified
+        informationTextWarmupC.lineBreakMode = NSLineBreakMode.byWordWrapping
+        informationTextWarmupC.numberOfLines = 0
+        informationTextWarmupC.sizeToFit()
+        self.informationView.addSubview(informationTextWarmupC)
         
         
-        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
+        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextWarmupC.frame.size.height + informationTitle.frame.size.height + 20)
+        
+        
+        
         
     
     
     }
     
+    
+    
+    
+    
+    // View Di Layout Subviews
+    //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -204,12 +242,12 @@ class CardioChoice: UIViewController  {
         hiit.titleLabel?.numberOfLines = 0
         hiit.titleLabel?.textAlignment = .center
         
-        liss.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
-        liss.layer.masksToBounds = true
-        liss.titleLabel?.adjustsFontSizeToFitWidth = true
-        liss.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        liss.titleLabel?.numberOfLines = 0
-        liss.titleLabel?.textAlignment = .center
+        regular.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
+        regular.layer.masksToBounds = true
+        regular.titleLabel?.adjustsFontSizeToFitWidth = true
+        regular.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        regular.titleLabel?.numberOfLines = 0
+        regular.titleLabel?.textAlignment = .center
 
     }
     

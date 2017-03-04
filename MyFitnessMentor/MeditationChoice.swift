@@ -143,10 +143,10 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         //
         // String
         let informationLabelString = (
-            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeText", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyText", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindText", comment: "")))
+            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("meditationPurposeText", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("meditationBodyText", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("meditationMindText", comment: "")))
         
         // Range of String
-        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeText", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyText", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindText", comment: ""))
+        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("meditationPurposeText", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("meditationBodyText", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("meditationMindText", comment: ""))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         

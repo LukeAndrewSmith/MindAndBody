@@ -1070,13 +1070,13 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R5R-N8-vaI">
-                                <rect key="frame" x="63" y="539" width="240" height="128"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G2c-AI-Ay4">
+                                <rect key="frame" x="25" y="533" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbt-1S-5Z6">
-                                <rect key="frame" x="316" y="509" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lnx-nd-3kh">
+                                <rect key="frame" x="266" y="580" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -1092,10 +1092,10 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="IJt-w0-gId">
-                        <barButtonItem key="rightBarButtonItem" image="QuestionMarkN" id="02O-d9-2c4">
+                        <barButtonItem key="rightBarButtonItem" image="QuestionMarkN" id="JSb-Fx-YA1">
                             <color key="tintColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="informationButtonActionWorkoutC:" destination="ecR-GP-fQv" id="aHe-Ez-4do"/>
+                                <action selector="informationButtonActionWorkoutC:" destination="ecR-GP-fQv" id="ZXA-BU-gnn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1103,10 +1103,10 @@
                     <connections>
                         <outlet property="gym" destination="qbj-QB-fUR" id="WCr-2o-ltU"/>
                         <outlet property="home" destination="hzq-yo-xC7" id="Jxc-kF-K8O"/>
-                        <outlet property="informationTitle" destination="gbt-1S-5Z6" id="FUf-5s-Eel"/>
-                        <outlet property="informationView" destination="R5R-N8-vaI" id="jej-j7-LnL"/>
+                        <outlet property="informationTitle" destination="Lnx-nd-3kh" id="VeU-Rj-zWk"/>
+                        <outlet property="informationView" destination="G2c-AI-Ay4" id="4mI-pB-Zfo"/>
                         <outlet property="navigationBar" destination="IJt-w0-gId" id="GIy-hR-YoF"/>
-                        <outlet property="questionMark" destination="02O-d9-2c4" id="ATX-cf-uw3"/>
+                        <outlet property="questionMark" destination="JSb-Fx-YA1" id="HVf-SM-fZr"/>
                         <outlet property="stackView" destination="Wsl-io-GYd" id="k3v-z7-SD1"/>
                     </connections>
                 </viewController>
@@ -1197,9 +1197,9 @@
                         <outlet property="hiit" destination="XOo-fI-6z9" id="zYg-bI-bfx"/>
                         <outlet property="informationTitle" destination="syR-v7-paL" id="nSH-H3-Zod"/>
                         <outlet property="informationView" destination="sR9-TR-fwS" id="IeH-mu-IW7"/>
-                        <outlet property="liss" destination="OxV-0W-Hfe" id="tc0-fj-rzR"/>
                         <outlet property="navigationBar" destination="01h-cK-uQf" id="dTW-Ab-aMz"/>
                         <outlet property="questionMark" destination="9eZ-A6-pbc" id="Fm6-vn-K7m"/>
+                        <outlet property="regular" destination="OxV-0W-Hfe" id="eRd-KB-OM4"/>
                         <outlet property="stackView" destination="wyf-Wz-KpN" id="tDK-cl-TCY"/>
                     </connections>
                 </viewController>
@@ -6893,7 +6893,7 @@
                         <outlet property="fullBody" destination="JdC-8E-LDg" id="NAo-qq-Msk"/>
                         <outlet property="fullBodyBottom" destination="hiF-Em-Pgk" id="QEt-7s-vN8"/>
                         <outlet property="fullBodyTop" destination="swG-Hd-J4e" id="jT8-HV-hua"/>
-                        <outlet property="informationVTitle" destination="iqO-Aa-YHE" id="73j-V5-cxg"/>
+                        <outlet property="informationTitle" destination="iqO-Aa-YHE" id="lY8-12-AW5"/>
                         <outlet property="informationView" destination="Ju6-77-zoi" id="OYD-25-oMY"/>
                         <outlet property="lowerBody" destination="0Fo-1i-lDb" id="Ida-TS-KkY"/>
                         <outlet property="navigationBar" destination="App-X6-Wak" id="gIv-jS-qz9"/>

@@ -183,17 +183,18 @@ class GymChoice: UIViewController  {
         //
         // String
         let informationLabelString = (
-            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: "")))
+            (NSLocalizedString("classic", comment: ""))+"\n"+(NSLocalizedString("workoutTypeClassic", comment: ""))+"\n"+"\n"+(NSLocalizedString("circuit", comment: ""))+"\n"+(NSLocalizedString("workoutTypeCircuit", comment: ""))+"\n"+"\n"+(NSLocalizedString("5x5", comment: ""))+"\n"+(NSLocalizedString("workoutType5x5", comment: "")))
+        
         
         // Range of String
-        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextStretching", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextStretching", comment: ""))
+        let textRangeString = (NSLocalizedString("classic", comment: ""))+"\n"+(NSLocalizedString("workoutTypeClassic", comment: ""))+"\n"+"\n"+(NSLocalizedString("circuit", comment: ""))+"\n"+(NSLocalizedString("workoutTypeCircuit", comment: ""))+"\n"+"\n"+(NSLocalizedString("5x5", comment: ""))+"\n"+(NSLocalizedString("workoutType5x5", comment: ""))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
         // Range of Titles
-        let titleRangeString1 = (NSLocalizedString("purpose", comment: ""))
-        let titleRangeString2 = (NSLocalizedString("body", comment: ""))
-        let titleRangeString3 = (NSLocalizedString("mind", comment: ""))
+        let titleRangeString1 = (NSLocalizedString("classic", comment: ""))
+        let titleRangeString2 = (NSLocalizedString("circuit", comment: ""))
+        let titleRangeString3 = (NSLocalizedString("5x5", comment: ""))
         
         let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString1)
         let titleRange2 = (informationLabelString as NSString).range(of: titleRangeString2)

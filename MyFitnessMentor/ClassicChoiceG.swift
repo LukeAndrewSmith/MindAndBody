@@ -92,7 +92,7 @@ class ClassicChoiceG: UIViewController  {
         
         
         // Titles
-        navigationBar.title = (NSLocalizedString("workout", comment: ""))
+        navigationBar.title = (NSLocalizedString("split", comment: ""))
         
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
@@ -172,40 +172,27 @@ class ClassicChoiceG: UIViewController  {
         
         
         
-        // Information
-//        extraInformation.text = NSLocalizedString("extraInformation", comment: "")
-//        
-//        extraInformation.sizeToFit()
-//        
-//        extraInformation.center.x = extrainformationViewGymC.center.x
-//        
-//        extraInformation.frame.size.height = 49
-//        
         
-        // Information
+        
+        
+        
+        
         // Scroll View Frame
         self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
-        
         
         view.bringSubview(toFront: informationView)
         
         
-        // Information Text
+        // Information Title
         //
-        // Information Text Frame
-        let informationText = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
-        
-        
-        
-        
-        
-        // Information Text Frame
+        // Information Title Frame
         self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         informationTitle.textColor = colour2
         informationTitle.backgroundColor = colour7
+        
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -216,22 +203,35 @@ class ClassicChoiceG: UIViewController  {
         
         
         self.view.addSubview(informationTitle)
+        self.view.bringSubview(toFront: informationTitle)
         
         
+        
+        // Information Text
+        //
+        // Information Text Frame
+        let informationTextStretchingC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
         
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let informationLabelString = (
+            (NSLocalizedString("fullBody", comment: ""))+"\n"+(NSLocalizedString("fullBodyInformation", comment: ""))+"\n"+"\n"+(NSLocalizedString("upperLower", comment: ""))+"\n"+(NSLocalizedString("upperLowerInformation", comment: ""))+"\n"+"\n"+(NSLocalizedString("legsPullPush", comment: ""))+"\n"+(NSLocalizedString("legsPullPushInformation", comment: "")))
+        
         
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let textRangeString = (NSLocalizedString("fullBody", comment: ""))+"\n"+(NSLocalizedString("fullBodyInformation", comment: ""))+"\n"+"\n"+(NSLocalizedString("upperLower", comment: ""))+"\n"+(NSLocalizedString("upperLowerInformation", comment: ""))+"\n"+"\n"+(NSLocalizedString("legsPullPush", comment: ""))+"\n"+(NSLocalizedString("legsPullPushInformation", comment: ""))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
         // Range of Titles
-        let titleRangeString = (NSLocalizedString("movements", comment: ""))
-        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
+        let titleRangeString1 = (NSLocalizedString("fullBody", comment: ""))
+        let titleRangeString2 = (NSLocalizedString("upperLower", comment: ""))
+        let titleRangeString3 = (NSLocalizedString("legsPullPush", comment: ""))
+        
+        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString1)
+        let titleRange2 = (informationLabelString as NSString).range(of: titleRangeString2)
+        let titleRange3 = (informationLabelString as NSString).range(of: titleRangeString3)
         
         
         // Line Spacing
@@ -244,22 +244,27 @@ class ClassicChoiceG: UIViewController  {
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Light", size: 19)!, range: textRange)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange1)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange2)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange3)
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         
         
         
         // Final Text Editing
-        informationText.attributedText = informationLabelText
-        informationText.textAlignment = .justified
-        informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
-        informationText.numberOfLines = 0
-        informationText.sizeToFit()
-        self.informationView.addSubview(informationText)
+        informationTextStretchingC.attributedText = informationLabelText
+        informationTextStretchingC.textAlignment = .justified
+        informationTextStretchingC.lineBreakMode = NSLineBreakMode.byWordWrapping
+        informationTextStretchingC.numberOfLines = 0
+        informationTextStretchingC.sizeToFit()
+        self.informationView.addSubview(informationTextStretchingC)
         
         
-        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
+        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextStretchingC.frame.size.height + informationTitle.frame.size.height + 20)
         
-
+        
+        
+        
+        
         
         
         // Iphone 5/SE
