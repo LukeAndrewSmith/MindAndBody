@@ -598,7 +598,7 @@ class StretchingScreenGeneral: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         // Explanation Text
-        explanationText.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        explanationText.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         explanationText.textColor = .black
         explanationText.textAlignment = .justified
         explanationText.lineBreakMode = NSLineBreakMode.byWordWrapping

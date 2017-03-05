@@ -313,7 +313,7 @@ class YogaScreenCustom: UIViewController, UIScrollViewDelegate {
         
         
         // Explanation Text
-        explanationText.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        explanationText.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         explanationText.textColor = .black
         explanationText.textAlignment = .justified
         explanationText.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -597,7 +597,7 @@ class YogaScreenCustom: UIViewController, UIScrollViewDelegate {
         
         // Contents
         //
-        explanationLabelE.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        explanationLabelE.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         explanationLabelE.textColor = .black
         explanationLabelE.textAlignment = .justified
         explanationLabelE.lineBreakMode = NSLineBreakMode.byWordWrapping
