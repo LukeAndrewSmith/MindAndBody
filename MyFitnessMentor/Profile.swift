@@ -21,25 +21,28 @@ class Profile: UITableViewController{
     
     // Arrays
     let sectionArray =
-        ["me", "movements", "volume"  ]
+        ["me", "goals", "workout", "cardio", "stretching", "yoga", "meditation"]
     
     
-    let rowArray =
-        [
-            ["gender", "experience"],
-            ["split", "emphasis", "freeWeightPreference", "nSessions", "prefferedWorkoutLength"]
-    ]
     
-    let selectionArray =
-        [
-            ["male", "female"],
-            ["beginner", "average", "expert"],
-            ["fullBody", "upperLower", "legsPullPush", "emphasis"],
-            ["aesthetics", "strength"],
-            ["barbell", "dumbell", "machineUsage", "low", "moderate", "medium"],
-            ["2", "3", "4", "5", "6"],
-            ["<60", "60", "90", "120"]
-        ]
+//    let rowArray =
+//        [
+//            ["gender", "experience"],
+//            ["split", "emphasis", "freeWeightPreference", "nSessions", "prefferedWorkoutLength"]
+//    ]
+//    
+//    let selectionArray =
+//        [
+//            ["male", "female"],
+//            ["beginner", "average", "expert"],
+//            ["fullBody", "upperLower", "legsPullPush", "emphasis"],
+//            ["aesthetics", "strength"],
+//            ["barbell", "dumbell", "machineUsage", "low", "moderate", "medium"],
+//            ["2", "3", "4", "5", "6"],
+//            ["<60", "60", "90", "120"]
+//        ]
+    
+    
     
     struct Group {
         var name: String!
@@ -54,8 +57,12 @@ class Profile: UITableViewController{
     }
     
     var meGroup = [Group]()
-    var movementsGroup = [Group]()
-    var volumeGroup = [Group]()
+    var goalsGroup = [Group]()
+    var workoutGroup = [Group]()
+    var cardioGroup = [Group]()
+    var stretchingGroup = [Group]()
+    var yogaGroup = [Group]()
+    var meditationGroup = [Group]()
  
 
     override func viewWillAppear(_ animated: Bool) {
@@ -113,7 +120,7 @@ class Profile: UITableViewController{
         ]
         
         
-        movementsGroup = [
+        goalsGroup = [
             Group(name: "split", items: ["fullBody", "upperLower", "legsPullPush"]),
             Group(name: "emphasis", items: ["aesthetics", "strength"]),
             Group(name: "freeWeightPreference", items: ["barbell", "dumbell"]),
@@ -121,13 +128,31 @@ class Profile: UITableViewController{
         ]
         
         
-        volumeGroup = [
+        workoutGroup = [
             Group(name: "nSessions", items: ["2", "3", "4", "5", "6"]),
             Group(name: "prefferedWorkoutLength", items: ["<60", "60", "90", "120", ">120"])
         ]
 
+        cardioGroup = [
+            Group(name: "nSessions", items: ["2", "3", "4", "5", "6"]),
+            Group(name: "prefferedWorkoutLength", items: ["<60", "60", "90", "120", ">120"])
+        ]
         
-      
+        stretchingGroup = [
+            Group(name: "nSessions", items: ["2", "3", "4", "5", "6"]),
+            Group(name: "prefferedWorkoutLength", items: ["<60", "60", "90", "120", ">120"])
+        ]
+        
+        yogaGroup = [
+            Group(name: "nSessions", items: ["2", "3", "4", "5", "6"]),
+            Group(name: "prefferedWorkoutLength", items: ["<60", "60", "90", "120", ">120"])
+        ]
+        
+        meditationGroup = [
+            Group(name: "nSessions", items: ["2", "3", "4", "5", "6"]),
+            Group(name: "prefferedWorkoutLength", items: ["<60", "60", "90", "120", ">120"])
+        ]
+        
         
     }
     
@@ -140,7 +165,7 @@ class Profile: UITableViewController{
     
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 6
     }
     
     
@@ -185,6 +210,7 @@ class Profile: UITableViewController{
             //
 
         switch section{
+        //
         case 0:
             var count = meGroup.count
             for row in meGroup {
@@ -193,22 +219,61 @@ class Profile: UITableViewController{
             }
             
             return count
+        //
         case 1:
-            var count = movementsGroup.count
+            var count = goalsGroup.count
         
-            for row in movementsGroup {
+            for row in goalsGroup {
                 count += row.items.count
             }
         
             return count
+        //
         case 2:
-            var count = volumeGroup.count
+            var count = workoutGroup.count
             
-            for row in volumeGroup {
+            for row in workoutGroup {
                 count += row.items.count
             }
             
             return count
+        //
+        case 3:
+            var count = cardioGroup.count
+            for row in cardioGroup {
+                print (row)
+                count += row.items.count
+            }
+            
+            return count
+        //
+        case 4:
+            var count = stretchingGroup.count
+            for row in stretchingGroup {
+                print (row)
+                count += row.items.count
+            }
+            
+            return count
+        //
+        case 5:
+            var count = yogaGroup.count
+            for row in yogaGroup {
+                print (row)
+                count += row.items.count
+            }
+            
+            return count
+        //
+        case 6:
+            var count = meditationGroup.count
+            for row in meditationGroup {
+                print (row)
+                count += row.items.count
+            }
+            
+            return count
+        //
         default: return 0
     }
         
@@ -222,24 +287,56 @@ class Profile: UITableViewController{
 
         
         switch indexPath.section {
+        //
         case 0:
             if rowIndex == 0 {
                 return 47.0
             } else {
             return meGroup[cellIndex].collapsed! ? 0.0 : 47.0
             }
+        //
         case 1:
             if rowIndex == 0{
                 return 47.0
             } else {
-            return movementsGroup[cellIndex].collapsed! ? 0.0 : 47.0
+            return goalsGroup[cellIndex].collapsed! ? 0.0 : 47.0
             }
+        //
         case 2:
             if rowIndex == 0 {
                 return 47.0
             } else {
-            return volumeGroup[cellIndex].collapsed! ? 0.0 : 47.0
+            return workoutGroup[cellIndex].collapsed! ? 0.0 : 47.0
             }
+        //
+        case 3:
+            if rowIndex == 0{
+                return 47.0
+            } else {
+            return cardioGroup[cellIndex].collapsed! ? 0.0 : 47.0
+            }
+        //
+        case 4:
+            if rowIndex == 0{
+                return 47.0
+            } else {
+            return stretchingGroup[cellIndex].collapsed! ? 0.0 : 47.0
+            }
+        //
+        case 5:
+            if rowIndex == 0{
+                return 47.0
+            } else {
+            return yogaGroup[cellIndex].collapsed! ? 0.0 : 47.0
+            }
+        //
+        case 6:
+            if rowIndex == 0{
+                return 47.0
+            } else {
+            return meditationGroup[cellIndex].collapsed! ? 0.0 : 47.0
+            }
+        //
         default: return 47.0
         }
 }
@@ -258,6 +355,7 @@ class Profile: UITableViewController{
         
         
         switch indexPath.section{
+        //
         case 0:
             if row == 0 {
                 cell.textLabel?.text = NSLocalizedString(meGroup[subSection].name, comment: "")
@@ -283,14 +381,15 @@ class Profile: UITableViewController{
                 return subcell
             }
             
+        //
         case 1:
             if row == 0 {
-                cell.textLabel?.text = NSLocalizedString(movementsGroup[subSection].name, comment: "")
+                cell.textLabel?.text = NSLocalizedString(goalsGroup[subSection].name, comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
                 // UserDefaults
-                cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(movementsGroup[subSection].name)")
+                cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(goalsGroup[subSection].name)")
                 cell.detailTextLabel?.textAlignment = NSTextAlignment.right
                 cell.detailTextLabel?.textColor = UIColor.gray
                 cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
@@ -298,26 +397,27 @@ class Profile: UITableViewController{
                 //
                 return cell
             } else {
-                subcell.textLabel?.text = NSLocalizedString(movementsGroup[subSection].items[row - 1], comment: "")
+                subcell.textLabel?.text = NSLocalizedString(goalsGroup[subSection].items[row - 1], comment: "")
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
                 subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
                 subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
-                let collapsedMo = movementsGroup[subSection].collapsed
+                let collapsedMo = goalsGroup[subSection].collapsed
                 if collapsedMo == true{
                     subcell.textLabel?.alpha = 0
                 }
                 return subcell
                 
             }
-            
+           
+        //
         case 2:
             if row == 0 {
-                cell.textLabel?.text = NSLocalizedString(volumeGroup[subSection].name, comment: "")
+                cell.textLabel?.text = NSLocalizedString(workoutGroup[subSection].name, comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
                 // UserDefaults
-                cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(volumeGroup[subSection].name)")
+                cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(workoutGroup[subSection].name)")
                 cell.detailTextLabel?.textAlignment = NSTextAlignment.right
                 cell.detailTextLabel?.textColor = UIColor.gray
                 cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
@@ -325,17 +425,131 @@ class Profile: UITableViewController{
                 //
                 return cell
             } else {
-                subcell.textLabel?.text = NSLocalizedString(volumeGroup[subSection].items[row - 1], comment: "")
+                subcell.textLabel?.text = NSLocalizedString(workoutGroup[subSection].items[row - 1], comment: "")
                 subcell.textLabel?.textAlignment = NSTextAlignment.center
                 subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
                 subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
-                let collapsedVo = volumeGroup[subSection].collapsed
+                let collapsedVo = workoutGroup[subSection].collapsed
                 if collapsedVo == true{
                     subcell.textLabel?.alpha = 0
                 }
                 return subcell
                 
             }
+            
+        //
+        case 3:
+            if row == 0 {
+                cell.textLabel?.text = NSLocalizedString(cardioGroup[subSection].name, comment: "")
+                cell.textLabel?.textAlignment = NSTextAlignment.left
+                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+                // UserDefaults
+                cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(cardioGroup[subSection].name)")
+                cell.detailTextLabel?.textAlignment = NSTextAlignment.right
+                cell.detailTextLabel?.textColor = UIColor.gray
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                
+                //
+                return cell
+            } else {
+                subcell.textLabel?.text = NSLocalizedString(cardioGroup[subSection].items[row - 1], comment: "")
+                subcell.textLabel?.textAlignment = NSTextAlignment.center
+                subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
+                let collapsedVo = cardioGroup[subSection].collapsed
+                if collapsedVo == true{
+                    subcell.textLabel?.alpha = 0
+                }
+                return subcell
+                
+            }
+            
+        //
+        case 4:
+            if row == 0 {
+                cell.textLabel?.text = NSLocalizedString(stretchingGroup[subSection].name, comment: "")
+                cell.textLabel?.textAlignment = NSTextAlignment.left
+                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+                // UserDefaults
+                cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(stretchingGroup[subSection].name)")
+                cell.detailTextLabel?.textAlignment = NSTextAlignment.right
+                cell.detailTextLabel?.textColor = UIColor.gray
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                
+                //
+                return cell
+            } else {
+                subcell.textLabel?.text = NSLocalizedString(stretchingGroup[subSection].items[row - 1], comment: "")
+                subcell.textLabel?.textAlignment = NSTextAlignment.center
+                subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
+                let collapsedVo = stretchingGroup[subSection].collapsed
+                if collapsedVo == true{
+                    subcell.textLabel?.alpha = 0
+                }
+                return subcell
+                
+            }
+            
+        //
+        case 5:
+            if row == 0 {
+                cell.textLabel?.text = NSLocalizedString(yogaGroup[subSection].name, comment: "")
+                cell.textLabel?.textAlignment = NSTextAlignment.left
+                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+                // UserDefaults
+                cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(yogaGroup[subSection].name)")
+                cell.detailTextLabel?.textAlignment = NSTextAlignment.right
+                cell.detailTextLabel?.textColor = UIColor.gray
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                
+                //
+                return cell
+            } else {
+                subcell.textLabel?.text = NSLocalizedString(yogaGroup[subSection].items[row - 1], comment: "")
+                subcell.textLabel?.textAlignment = NSTextAlignment.center
+                subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
+                let collapsedVo = yogaGroup[subSection].collapsed
+                if collapsedVo == true{
+                    subcell.textLabel?.alpha = 0
+                }
+                return subcell
+                
+            }
+            
+        //
+        case 6:
+            if row == 0 {
+                cell.textLabel?.text = NSLocalizedString(meditationGroup[subSection].name, comment: "")
+                cell.textLabel?.textAlignment = NSTextAlignment.left
+                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+                // UserDefaults
+                cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "\(workoutGroup[subSection].name)")
+                cell.detailTextLabel?.textAlignment = NSTextAlignment.right
+                cell.detailTextLabel?.textColor = UIColor.gray
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                
+                //
+                return cell
+            } else {
+                subcell.textLabel?.text = NSLocalizedString(meditationGroup[subSection].items[row - 1], comment: "")
+                subcell.textLabel?.textAlignment = NSTextAlignment.center
+                subcell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+                subcell.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
+                let collapsedVo = workoutGroup[subSection].collapsed
+                if collapsedVo == true{
+                    subcell.textLabel?.alpha = 0
+                }
+                return subcell
+                
+            }
+            
+        //
         default: return cell
     }
 
@@ -356,7 +570,8 @@ class Profile: UITableViewController{
         let cell = tableView.cellForRow(at: indexPath)
         let str = cell?.textLabel?.text
         
-        if section == 0 {
+        switch section {
+        case 0:
             
             // UserDefaults
             if row != 0 {
@@ -384,23 +599,23 @@ class Profile: UITableViewController{
           
             //
             //
-        } else if section == 1 {
-            let collapsed = movementsGroup[subSection].collapsed
+        case 1:
+            let collapsed = goalsGroup[subSection].collapsed
             
             // UserDefaults
             if row != 0 {
-                UserDefaults.standard.set("\(str!)", forKey: "\(movementsGroup[subSection].name)")
+                UserDefaults.standard.set("\(str!)", forKey: "\(goalsGroup[subSection].name)")
                 UserDefaults.standard.synchronize()
             }
             
             
             // Toggle collapse
-            movementsGroup[subSection].collapsed = !collapsed!
+            goalsGroup[subSection].collapsed = !collapsed!
             
             let indices = getHeaderIndices(section: 1)
             
             let start = indices[subSection]
-            let end = start + movementsGroup[subSection].items.count
+            let end = start + goalsGroup[subSection].items.count
             
             tableView.beginUpdates()
             for i in start ..< end + 1 {
@@ -412,22 +627,22 @@ class Profile: UITableViewController{
             
             //
             //
-        } else if section == 2 {
-            let collapsed = volumeGroup[subSection].collapsed
+        case 2:
+            let collapsed = workoutGroup[subSection].collapsed
             
             // UserDefaults
             if row != 0 {
-                UserDefaults.standard.set("\(str!)", forKey: "\(volumeGroup[subSection].name)")
+                UserDefaults.standard.set("\(str!)", forKey: "\(workoutGroup[subSection].name)")
                 UserDefaults.standard.synchronize()
             }
             
             // Toggle collapse
-            volumeGroup[subSection].collapsed = !collapsed!
+            workoutGroup[subSection].collapsed = !collapsed!
             
             let indices = getHeaderIndices(section: 2)
             
             let start = indices[subSection]
-            let end = start + volumeGroup[subSection].items.count
+            let end = start + workoutGroup[subSection].items.count
             
             
             tableView.beginUpdates()
@@ -437,9 +652,117 @@ class Profile: UITableViewController{
             }
             tableView.endUpdates()
             
+            //
+            //
+        case 3:
+            let collapsed = cardioGroup[subSection].collapsed
+            
+            // UserDefaults
+            if row != 0 {
+                UserDefaults.standard.set("\(str!)", forKey: "\(cardioGroup[subSection].name)")
+                UserDefaults.standard.synchronize()
+            }
+            
+            // Toggle collapse
+            cardioGroup[subSection].collapsed = !collapsed!
+            
+            let indices = getHeaderIndices(section: 3)
+            
+            let start = indices[subSection]
+            let end = start + cardioGroup[subSection].items.count
             
             
+            tableView.beginUpdates()
+            for i in start ..< end + 1 {
+                tableView.reloadRows(at: [IndexPath(row: i, section: 3)], with: .automatic)
+                
+            }
+            tableView.endUpdates()
             
+            //
+            //
+        case 4:
+            let collapsed = stretchingGroup[subSection].collapsed
+            
+            // UserDefaults
+            if row != 0 {
+                UserDefaults.standard.set("\(str!)", forKey: "\(stretchingGroup[subSection].name)")
+                UserDefaults.standard.synchronize()
+            }
+            
+            // Toggle collapse
+            stretchingGroup[subSection].collapsed = !collapsed!
+            
+            let indices = getHeaderIndices(section: 4)
+            
+            let start = indices[subSection]
+            let end = start + stretchingGroup[subSection].items.count
+            
+            
+            tableView.beginUpdates()
+            for i in start ..< end + 1 {
+                tableView.reloadRows(at: [IndexPath(row: i, section: 4)], with: .automatic)
+                
+            }
+            tableView.endUpdates()
+            
+            //
+            //
+        case 5:
+            let collapsed = yogaGroup[subSection].collapsed
+            
+            // UserDefaults
+            if row != 0 {
+                UserDefaults.standard.set("\(str!)", forKey: "\(yogaGroup[subSection].name)")
+                UserDefaults.standard.synchronize()
+            }
+            
+            // Toggle collapse
+            yogaGroup[subSection].collapsed = !collapsed!
+            
+            let indices = getHeaderIndices(section: 5)
+            
+            let start = indices[subSection]
+            let end = start + yogaGroup[subSection].items.count
+            
+            
+            tableView.beginUpdates()
+            for i in start ..< end + 1 {
+                tableView.reloadRows(at: [IndexPath(row: i, section: 5)], with: .automatic)
+                
+            }
+            tableView.endUpdates()
+            
+            //
+            //
+        case 6:
+            let collapsed = meditationGroup[subSection].collapsed
+            
+            // UserDefaults
+            if row != 0 {
+                UserDefaults.standard.set("\(str!)", forKey: "\(meditationGroup[subSection].name)")
+                UserDefaults.standard.synchronize()
+            }
+            
+            // Toggle collapse
+            meditationGroup[subSection].collapsed = !collapsed!
+            
+            let indices = getHeaderIndices(section: 6)
+            
+            let start = indices[subSection]
+            let end = start + meditationGroup[subSection].items.count
+            
+            
+            tableView.beginUpdates()
+            for i in start ..< end + 1 {
+                tableView.reloadRows(at: [IndexPath(row: i, section: 6)], with: .automatic)
+                
+            }
+            tableView.endUpdates()
+            
+            //
+            //
+        default: break
         }
         
         
@@ -494,21 +817,55 @@ class Profile: UITableViewController{
             }
                 return indices
         
+        //
         case 1:
-            for row in movementsGroup {
+            for row in goalsGroup {
                 indices.append(index)
                 index += row.items.count + 1
             }
                 return indices
         
-        
+        //
         case 2:
-            for row in volumeGroup {
+            for row in workoutGroup {
                 indices.append(index)
                 index += row.items.count + 1
             }
             return indices
         
+        //
+        case 3:
+            for row in cardioGroup {
+                indices.append(index)
+                index += row.items.count + 1
+            }
+            return indices
+            
+        //
+        case 4:
+            for row in stretchingGroup {
+                indices.append(index)
+                index += row.items.count + 1
+            }
+            return indices
+            
+        //
+        case 5:
+            for row in yogaGroup {
+                indices.append(index)
+                index += row.items.count + 1
+            }
+            return indices
+            
+        //
+        case 6:
+            for row in meditationGroup {
+                indices.append(index)
+                index += row.items.count + 1
+            }
+            return indices
+            
+        //
         default: return [0]
         
     }
