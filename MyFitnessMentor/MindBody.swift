@@ -178,6 +178,9 @@ class MindBody: UIViewController {
         // Register Weight
         UserDefaults.standard.register(defaults: ["units" : "kg"])
         
+        // Register Presentation Style
+        UserDefaults.standard.register(defaults: ["presentationStyle" : "detailed"])
+        
         
         // Retrieve Colours
         let colour1 = UserDefaults.standard.color(forKey: "colour1")!

@@ -54,12 +54,12 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
              #imageLiteral(resourceName: "Squat"),
              #imageLiteral(resourceName: "Quad")],
             // Legs (Hamstrings/Glutes)
-            [#imageLiteral(resourceName: "Hamstring and Lower Back"),
-             #imageLiteral(resourceName: "Hamstring and Lower Back"),
-             #imageLiteral(resourceName: "Hamstring and Lower Back"),
-             #imageLiteral(resourceName: "Hamstring and Glute"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring and Glute"),
+            [#imageLiteral(resourceName: "Deadlift"),
+             #imageLiteral(resourceName: "Deadlift"),
+             #imageLiteral(resourceName: "Deadlift"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Rear Thigh"),
+             #imageLiteral(resourceName: "Squat"),
              #imageLiteral(resourceName: "Glute")],
             // Legs (General)
             [#imageLiteral(resourceName: "Squat"),
@@ -73,9 +73,9 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
              #imageLiteral(resourceName: "Back and Bicep"),
              #imageLiteral(resourceName: "Back and Bicep"),
              #imageLiteral(resourceName: "Back and Bicep"),
-             #imageLiteral(resourceName: "Back and Bicep"),
-             #imageLiteral(resourceName: "Back and Bicep"),
-             #imageLiteral(resourceName: "Back and Bicep"),
+             #imageLiteral(resourceName: "Back, Bicep and Erector"),
+             #imageLiteral(resourceName: "Back, Bicep and Erector"),
+             #imageLiteral(resourceName: "Back, Bicep and Erector"),
              #imageLiteral(resourceName: "Back and Bicep"),
              #imageLiteral(resourceName: "Back and Bicep")],
             // Pull (Upper Back)
@@ -86,8 +86,8 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             // Pull (Rear Delts)
             [#imageLiteral(resourceName: "Rear Delt")],
             // Pull (Traps)
-            [#imageLiteral(resourceName: "Upper Back and Shoulder"),
-             #imageLiteral(resourceName: "Upper Back and Shoulder")],
+            [#imageLiteral(resourceName: "Trap"),
+             #imageLiteral(resourceName: "Trap")],
             // Pull (Biceps)
             [#imageLiteral(resourceName: "Bicep"),
              #imageLiteral(resourceName: "Bicep"),
@@ -105,9 +105,9 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
              #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
              #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
              #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-             #imageLiteral(resourceName: "Chest, Front Delt and Tricep")],
+             #imageLiteral(resourceName: "Pec and Front Delt"),
+             #imageLiteral(resourceName: "Pec and Front Delt"),
+             #imageLiteral(resourceName: "Pec and Front Delt")],
             // Push (Shoulders)
             [#imageLiteral(resourceName: "Shoulder"),
              #imageLiteral(resourceName: "Shoulder"),

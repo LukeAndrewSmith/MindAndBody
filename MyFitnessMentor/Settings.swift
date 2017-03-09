@@ -139,14 +139,15 @@ class Settings: UITableViewController{
     
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0: return (NSLocalizedString("colour", comment: ""))
         case 1: return (NSLocalizedString("units", comment: ""))
-        case 2: return (NSLocalizedString("reset", comment: ""))
+        case 2: return (NSLocalizedString("PresentationStyle", comment: ""))
+        case 3: return (NSLocalizedString("reset", comment: ""))
         default: return (NSLocalizedString("default", comment: ""))
         }
     }
@@ -184,9 +185,12 @@ class Settings: UITableViewController{
             return 2
         } else if section == 1 {
             return 1
-        } else{
+        } else if section == 2 {
+            return 1
+        } else if section == 3 {
             return 2
         }
+        return 0
     }
     
     
@@ -331,18 +335,28 @@ class Settings: UITableViewController{
 //                
 //                return cell
 //            }
+        //
         case 1:
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             cell.textLabel?.text = UserDefaults.standard.string(forKey: "units")
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
-//            cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "units")
-//            cell.detailTextLabel?.textColor = .gray
-//            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+
             return cell
 
+        //
         case 2:
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            cell.textLabel?.text = UserDefaults.standard.string(forKey: "presentationStyle")
+            cell.textLabel?.textAlignment = NSTextAlignment.left
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            
+            return cell
+            
+        //
+        case 3:
             if indexPath.row == 0 {
                 cell.textLabel?.text = NSLocalizedString("resetWalkthrough", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
@@ -421,6 +435,15 @@ class Settings: UITableViewController{
             }
             tableView.deselectRow(at: indexPath, animated: true)
         case 2:
+            if cell?.textLabel?.text == "detailed" {
+                cell?.textLabel?.text = "overview"
+                UserDefaults.standard.set("overview", forKey: "presentationStyle")
+            } else if cell?.textLabel?.text == "overview" {
+                cell?.textLabel?.text = "detailed"
+                UserDefaults.standard.set("detailed", forKey: "presentationStyle")
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
+        case 3:
             if indexPath.row == 0 {
                 
                 

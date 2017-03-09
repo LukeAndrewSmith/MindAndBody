@@ -173,28 +173,31 @@ class InformationScreenMusic: UIViewController, UITableViewDelegate, UITableView
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let informationLabelString = ((NSLocalizedString("role", comment: ""))+"\n"+(NSLocalizedString("musicText1", comment: ""))+"\n"+(NSLocalizedString("suggestions", comment: ""))+"\n"+(NSLocalizedString("musicText2", comment: "")))
         
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let textRangeString = (NSLocalizedString("role", comment: ""))+"\n"+(NSLocalizedString("musicText1", comment: ""))+"\n"+(NSLocalizedString("suggestions", comment: ""))+"\n"+(NSLocalizedString("musicText2", comment: ""))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
         // Range of Titles
-        let titleRangeString = (NSLocalizedString("movements", comment: ""))
-        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
+        let titleRangeString1 = (NSLocalizedString("role", comment: ""))
+        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString1)
+        let titleRangeString2 = (NSLocalizedString("suggestions", comment: ""))
+        let titleRange2 = (informationLabelString as NSString).range(of: titleRangeString2)
         
         
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
-        lineSpacing.lineSpacing = 1.4
+        lineSpacing.lineSpacing = 1.6
         lineSpacing.hyphenationFactor = 1
         
         
         // Add Attributes
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Light", size: 19)!, range: textRange)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 19)!, range: titleRange1)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange1)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange2)
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         
         

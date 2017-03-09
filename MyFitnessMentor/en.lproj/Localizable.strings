@@ -511,6 +511,7 @@
             "barbellKneelingPress" = "Barbell Kneeling Press";
             "cableFly" = "Cable Fly";
             "hammerStrengthPress" = "Hammer Strength Press";
+            "chestPress" = "Chest Press";
             // Push (Shoulders)
             "standingShoulderPressBarbell" = "Standing Barbell Shoulder Press";
             "standingShoulderPressDumbell" = "Standing Dumbell Shoulder Press";
@@ -597,6 +598,7 @@
             "barbellKneelingPressE" = "Barbell Kneeling Press";
             "cableFlyE" = "Cable Fly";
             "hammerStrengthPressE" = "Hammer Strength Press";
+            "chestPressE" = "Chest Press";
             // Push (Shoulders)
             "standingShoulderPressBarbellE" = "Standing Barbell Shoulder Press";
             "standingShoulderPressDumbellE" = "Standing Dumbell Shoulder Press";
@@ -1279,10 +1281,14 @@
         //
         // Titles //
         "reset" = "Reset";
+        "presentationStyle" = "Presentation Style";
         "colour" = "Colour";
 
         // Contents //
-        // case11
+        // Presentation Style
+        "detailed" = "Detailed";
+        "overview" = "Overview";
+        // Reset
         "resetApp" = "Reset App";
         "resetWalkthrough" = "Reset Walkthrough";
 
@@ -1403,6 +1409,10 @@
                 "jazz(harp)" = "Jazz (Harp)";
                 "jazz(house)" = "Jazz (House)";
             "classical" = "Classical";
+
+                // Information
+                "musicText1" = "";
+                "musicText2" = "";
 
 
     //

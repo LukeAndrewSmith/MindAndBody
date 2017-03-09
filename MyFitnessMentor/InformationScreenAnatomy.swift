@@ -78,26 +78,26 @@ class InformationScreenAnatomy: UIViewController {
     
     let imageArray =
         [
-            #imageLiteral(resourceName: "Upper Back and Shoulder"),
-            #imageLiteral(resourceName: "Rear Delt"),
+            #imageLiteral(resourceName: "Trap"),
+            #imageLiteral(resourceName: "Rear Delt 2"),
             #imageLiteral(resourceName: "Lateral Delt"),
             #imageLiteral(resourceName: "Front Delt"),
             #imageLiteral(resourceName: "Bicep"),
             #imageLiteral(resourceName: "Tricep"),
             #imageLiteral(resourceName: "Forearm"),
             #imageLiteral(resourceName: "Pec"),
-            #imageLiteral(resourceName: "Lat"),
-            #imageLiteral(resourceName: "Core"),
+            #imageLiteral(resourceName: "Lat 2"),
+            #imageLiteral(resourceName: "Erector"),
             #imageLiteral(resourceName: "Core"),
             #imageLiteral(resourceName: "Serratus"),
             #imageLiteral(resourceName: "Oblique"),
-            #imageLiteral(resourceName: "Core"),
+            #imageLiteral(resourceName: "Rectus"),
             #imageLiteral(resourceName: "Glute"),
             #imageLiteral(resourceName: "Hamstring"),
             #imageLiteral(resourceName: "Adductor"),
             #imageLiteral(resourceName: "Quad"),
-            #imageLiteral(resourceName: "Calf"),
-            #imageLiteral(resourceName: "Calf")
+            #imageLiteral(resourceName: "Gastrocnemius"),
+            #imageLiteral(resourceName: "Soleus")
         ]
     
     
