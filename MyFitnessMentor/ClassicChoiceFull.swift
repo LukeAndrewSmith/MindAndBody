@@ -2502,8 +2502,24 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
+    
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
+        
+        
+        if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
+            
+            performSegue(withIdentifier: "workoutFull1", sender: nil)
+
+            
+        } else {
+            
+            performSegue(withIdentifier: "workoutFull2", sender: nil)
+        }
+        
+        
+        
+        
         
         let delayInSeconds = 1.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -2520,7 +2536,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
     // Pass Array to next ViewController
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "workoutFull") {
+        if (segue.identifier == "workoutFull1") {
             
             
             let destinationNC = segue.destination as! UINavigationController
@@ -2539,8 +2555,39 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             } else {
                 destinationVC.weightArrayF = weightDictionaryLB[pickerView.selectedRow(inComponent: 0)]!
             }
+            
+        //
+        } else if (segue.identifier == "workoutFull2"){
+            
+            let destinationNC = segue.destination as! UINavigationController
+            
+            let destinationVC = destinationNC.viewControllers.first as! ClassicScreenFull2
+            
+            destinationVC.workoutMovementsArray = workoutFullArray
+            destinationVC.workoutMovementsSelectedArray = workoutSelectedArray
+            destinationVC.setsArrayF = setsDictionary[pickerView.selectedRow(inComponent: 0)]!
+            destinationVC.repsArrayF = repsDictionary[pickerView.selectedRow(inComponent: 0)]!
+            
+            
+            // Weight
+            if UserDefaults.standard.string(forKey: "units") == "kg" {
+                destinationVC.weightArrayF = weightDictionaryKG[pickerView.selectedRow(inComponent: 0)]!
+            } else {
+                destinationVC.weightArrayF = weightDictionaryLB[pickerView.selectedRow(inComponent: 0)]!
+            }
+            
+            
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 //---------------------------------------------------------------------------------------------------------------
     

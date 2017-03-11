@@ -15,7 +15,7 @@ import UIKit
 //
 class OverviewTableViewCell: UITableViewCell {
     
-    // Image View
+    // Demonstration Image View
     @IBOutlet weak var demonstrationImageView: UIImageView!
     
     // Title Label
@@ -24,17 +24,278 @@ class OverviewTableViewCell: UITableViewCell {
     // Button View
     @IBOutlet weak var buttonView: UIView!
     
-    
 }
 
 
 
 // View Controller
 //
-class ClassicScreenFull2: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ClassicScreenFull2: UITableViewController {
+    
+    
+    // Initialize Arrays
+    // Workout Choice Movement Array
+    var workoutMovementsArray: [[String]] = [[]]
+    var workoutArray: [String] = []
+    // Workout Choice Selected Array
+    var workoutMovementsSelectedArray: [[Int]] = [[]]
+    
+    // Sets Array
+    var setsArrayF: [[Int]] = []
+    var setsArray: [Int] = []
+    // Reps Array
+    var repsArrayF: [[String]] = [[]]
+    var repsArray: [String] = []
+    // Weight Array
+    var weightArrayF: [[Int]] = []
+    var weightArray: [Int] = []
+    // Demonstration Array
+    var demonstrationArrayF: [[UIImage]] = [[]]
+    var demonstrationArray: [UIImage] = []
+    // Target Area Array
+    var targetAreaArrayF =
+        [
+            // Legs (Quads)
+            [#imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Quad")],
+            // Legs (Hamstrings/Glutes)
+            [#imageLiteral(resourceName: "Deadlift"),
+             #imageLiteral(resourceName: "Deadlift"),
+             #imageLiteral(resourceName: "Deadlift"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Rear Thigh"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Glute")],
+            // Legs (General)
+            [#imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat")],
+            
+            // Pull (Back)
+            [#imageLiteral(resourceName: "Back and Bicep"),
+             #imageLiteral(resourceName: "Back and Bicep"),
+             #imageLiteral(resourceName: "Back and Bicep"),
+             #imageLiteral(resourceName: "Back and Bicep"),
+             #imageLiteral(resourceName: "Back and Bicep"),
+             #imageLiteral(resourceName: "Back, Bicep and Erector"),
+             #imageLiteral(resourceName: "Back, Bicep and Erector"),
+             #imageLiteral(resourceName: "Back, Bicep and Erector"),
+             #imageLiteral(resourceName: "Back and Bicep"),
+             #imageLiteral(resourceName: "Back and Bicep")],
+            // Pull (Upper Back)
+            [#imageLiteral(resourceName: "Upper Back and Shoulder"),
+             #imageLiteral(resourceName: "Upper Back and Shoulder"),
+             #imageLiteral(resourceName: "Upper Back and Shoulder"),
+             #imageLiteral(resourceName: "Upper Back and Shoulder")],
+            // Pull (Rear Delts)
+            [#imageLiteral(resourceName: "Rear Delt")],
+            // Pull (Traps)
+            [#imageLiteral(resourceName: "Trap"),
+             #imageLiteral(resourceName: "Trap")],
+            // Pull (Biceps)
+            [#imageLiteral(resourceName: "Bicep"),
+             #imageLiteral(resourceName: "Bicep"),
+             #imageLiteral(resourceName: "Bicep"),
+             #imageLiteral(resourceName: "Bicep")],
+            // Pull (Forearms)
+            [#imageLiteral(resourceName: "Forearm"),
+             #imageLiteral(resourceName: "Forearm"),
+             #imageLiteral(resourceName: "Forearm")],
+            
+            // Push (Chest)
+            [#imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Pec and Front Delt"),
+             #imageLiteral(resourceName: "Pec and Front Delt"),
+             #imageLiteral(resourceName: "Pec and Front Delt")],
+            // Push (Shoulders)
+            [#imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Shoulder")],
+            // Push (Triceps)
+            [#imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Tricep"),
+             #imageLiteral(resourceName: "Tricep"),
+             #imageLiteral(resourceName: "Tricep"),
+             #imageLiteral(resourceName: "Tricep")],
+            
+            // Calves
+            [#imageLiteral(resourceName: "Calf"),
+             #imageLiteral(resourceName: "Calf")],
+            // Abs/Core
+            [#imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core")]
+    ]
+    
+    var targetAreaArray: [UIImage] = []
+    // Explanation Array
+    var explanationArrayF =
+        [
+            // Legs (Quads)
+            ["squatE",
+             "frontSquatE",
+             "hackSquatE",
+             "legPressE",
+             "dumbellFrontSquatE",
+             "legExtensionsE"],
+            // Legs (Hamstrings/Glutes)
+            ["deadliftE",
+             "romanianDeadliftE",
+             "dumbellRomanianDeadliftE",
+             "weightedHipThrustE",
+             "legCurlE",
+             "oneLeggedDeadliftE",
+             "gluteIsolationMachineE"],
+            // Legs (General)
+            ["lungeBarbellE",
+             "lungeDumbellE",
+             "bulgarianSplitSquatE",
+             "stepUpE"],
+            
+            // Pull (Back)
+            ["pullUpE",
+             "pullDownE",
+             "pullDownMachineE",
+             "hammerStrengthPullDownE",
+             "kneelingPullDownE",
+             "bentOverRowBarbellE",
+             "bentOverRowDumbellE",
+             "tBarRowE",
+             "rowMachineE",
+             "hammerStrengthRowE"],
+            // Pull (Upper Back)
+            ["facePullE",
+             "smithMachinePullUpE",
+             "leaningBackPullDownE",
+             "seatedMachineRowE"],
+            // Pull (Rear Delts)
+            ["bentOverBarbellRowE"],
+            // Pull (Traps)
+            ["shrugBarbellE",
+             "shrugDumbellE"],
+            // Pull (Biceps)
+            ["hamerCurlE",
+             "hammerCurlCableE",
+             "cableCurlE",
+             "curlE"],
+            // Pull (Forearms)
+            ["farmersCarryE",
+             "reverseBarbellCurlE",
+             "forearmCurlE"],
+            
+            // Push (Chest)
+            ["pushUpE",
+             "benchPressE",
+             "benchPressDumbellE",
+             "semiInclineDumbellPressE",
+             "hammerStrengthPressE",
+             "chestPressE",
+             "platePressE",
+             "barbellKneelingPressE",
+             "cableFlyE"],
+            // Push (Shoulders)
+            ["standingShoulderPressBarbellE",
+             "standingShoulderPressDumbellE",
+             "lateralRaiseE",
+             "frontRaiseE"],
+            // Push (Triceps)
+            ["ballPushUpE",
+             "trianglePushUpE",
+             "closeGripBenchE",
+             "cableExtensionE",
+             "ropeExtensionE"],
+            
+            // Calves
+            ["standingCalfRaiseE",
+             "seatedCalfRaiseE"],
+            // Abs/Core
+            ["hangingLegRaiseE",
+             "hangingLegTwistE",
+             "plankE",
+             "sideLegDropE",
+             "abRolloutE"]
+    ]
+    var explanationArray: [String] = []
+    
+
     
     
     
+    // Populate Arrays
+    func populateArrays() {
+        
+        // Workout Array
+        workoutArray = zip(workoutMovementsArray.flatMap{$0},workoutMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        // Sets Array
+        setsArray = zip(setsArrayF.flatMap{$0},workoutMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        
+        // Reps Array
+        repsArray = zip(repsArrayF.flatMap{$0},workoutMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        // Weight Array
+        weightArray = zip(weightArrayF.flatMap{$0},workoutMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        // Demonstration Array
+        demonstrationArray = zip(demonstrationArrayF.flatMap{$0},workoutMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        
+        // Target Area Array
+        targetAreaArray = zip(targetAreaArrayF.flatMap{$0},workoutMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        
+        // Explanation Array
+        explanationArray = zip(explanationArrayF.flatMap{$0},workoutMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+    }
+    
+    
+    
+    
+    
+    
+    //
+    // Outlets
+    //
+    
+    // Navigation Bar
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    
+    // Navigation Title
+    let navigationTitle = UILabel()
+    
+    // Hide Screen
+    @IBOutlet weak var hideScreen: UIBarButtonItem!
+    
+    
+    
+    
+    
+    
+    // Colours
+    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
+    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
+    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour8 = UserDefaults.standard.color(forKey: "colour8")!
+
     
     
     
@@ -45,6 +306,55 @@ class ClassicScreenFull2: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        // Navigation Title
+        navigationTitle.text = "Test"
+        
+        // Navigation Title
+        //
+        navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
+        navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
+        navigationTitle.center.x = self.view.center.x
+        navigationTitle.textColor = colour1
+        navigationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 22)
+        navigationTitle.backgroundColor = .clear
+        navigationTitle.textAlignment = .center
+        navigationTitle.adjustsFontSizeToFitWidth = true
+        self.navigationController?.navigationBar.barTintColor = colour5
+        
+        self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
+        
+        
+        // Hide Screen
+        hideScreen.tintColor = colour1
+        
+        
+        
+        
+    
+        // TableView Background
+        let tableViewBackground = UIView()
+            
+        tableViewBackground.backgroundColor = colour7
+        tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
+            
+        tableView.backgroundView = tableViewBackground
+        
+        tableView.tableFooterView = UIView()
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // Create Arrays
+        //
+        populateArrays()
         
         
         
@@ -59,70 +369,106 @@ class ClassicScreenFull2: UIViewController, UITableViewDelegate, UITableViewData
     //
     // Table View
     //
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "test"
     }
     
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OverviewTableViewCell", for: indexPath) as! OverviewTableViewCell
+        let header = view as! UITableViewHeaderFooterView
+        //header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
+        //header.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        header.contentView.backgroundColor = colour1
+        //
+        
+    }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        switch section {
+        case 0: return workoutArray.count
+        case 1: return 1
+        default: return 0
+        }
+       // return workoutArray.count
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OverviewTableViewCell", for: indexPath) as! OverviewTableViewCell
 
         
-        //cell.titleLabel?.text = NSLocalizedString(warmupFullArray[indexPath.section][indexPath.row], comment: "")
         
-        // Cell
-        //
-        cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        cell.tintColor = .black
-        
-        
-        
-        // Title
-        //
-        cell.titleLabel.text = "Test"
-        
-        cell.titleLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 21)
-        cell.titleLabel?.textAlignment = .left
-        cell.titleLabel?.textColor = .black
+            // Cell
+            //
+            cell.backgroundColor = colour3
+            cell.tintColor = colour3
         
         
         
-        // Image
-        //
-        cell.demonstrationImageView.image = #imageLiteral(resourceName: "Test")
+            // Title
+            //
+            cell.titleLabel.text = NSLocalizedString(workoutArray[indexPath.row], comment: "")
+        
+            cell.titleLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 21)
+            cell.titleLabel?.textAlignment = .left
+            cell.titleLabel?.textColor = .black
         
         
         
-        
-        // Set Buttons
-        //
-        
-        
+            // Image
+            //
+            cell.demonstrationImageView.image = #imageLiteral(resourceName: "Test")
         
         
         
-        
-        
-        return cell
-        
-        
+            // Set Buttons
+            //
+            cell.buttonView.backgroundColor = colour3
+       
+            return cell
+            
+        case 1:
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            
+            cell.backgroundColor = colour7
+            
+            cell.textLabel?.text = NSLocalizedString("end", comment: "")
+            cell.textLabel?.textColor = colour8
+            cell.textLabel?.textAlignment = .center
+            
+            return cell
+            
+        default: return UITableViewCell(style: .value1, reuseIdentifier: nil)
+
+        }
     }
     
     
     
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 108
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0: return 108
+        case 1: return 49
+        default: return 0
+        }
     }
     
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -149,7 +495,7 @@ class ClassicScreenFull2: UIViewController, UITableViewDelegate, UITableViewData
     
     
     @IBAction func hideScreen(_ sender: Any) {
-        
+    
         
         // Hide Screen view
         let screenSize = UIScreen.main.bounds

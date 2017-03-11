@@ -29,6 +29,7 @@
     "setsReps" = "Sets x Reps:";
 
     "begin" = "Begin";
+    "end" = "End";
 
     "mandatory" = "Mandatory";
     "lowerBack" = "Lower Back";

@@ -146,7 +146,7 @@ class Settings: UITableViewController{
         switch section {
         case 0: return (NSLocalizedString("colour", comment: ""))
         case 1: return (NSLocalizedString("units", comment: ""))
-        case 2: return (NSLocalizedString("PresentationStyle", comment: ""))
+        case 2: return (NSLocalizedString("presentationStyle", comment: ""))
         case 3: return (NSLocalizedString("reset", comment: ""))
         default: return (NSLocalizedString("default", comment: ""))
         }
@@ -348,7 +348,7 @@ class Settings: UITableViewController{
         //
         case 2:
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            cell.textLabel?.text = UserDefaults.standard.string(forKey: "presentationStyle")
+            cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "presentationStyle")!, comment: "")
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
@@ -435,11 +435,11 @@ class Settings: UITableViewController{
             }
             tableView.deselectRow(at: indexPath, animated: true)
         case 2:
-            if cell?.textLabel?.text == "detailed" {
-                cell?.textLabel?.text = "overview"
+            if cell?.textLabel?.text == NSLocalizedString("detailed", comment: "") {
+                cell?.textLabel?.text = NSLocalizedString("overview", comment: "")
                 UserDefaults.standard.set("overview", forKey: "presentationStyle")
-            } else if cell?.textLabel?.text == "overview" {
-                cell?.textLabel?.text = "detailed"
+            } else if cell?.textLabel?.text == NSLocalizedString("overview", comment: "") {
+                cell?.textLabel?.text = NSLocalizedString("detailed", comment: "")
                 UserDefaults.standard.set("detailed", forKey: "presentationStyle")
             }
             tableView.deselectRow(at: indexPath, animated: true)
