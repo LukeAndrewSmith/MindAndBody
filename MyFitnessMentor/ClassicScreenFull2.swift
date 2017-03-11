@@ -26,6 +26,12 @@ class OverviewTableViewCell: UITableViewCell {
     
 }
 
+class EndTableViewCell: UITableViewCell {
+    
+    // Title Label
+    
+    
+}
 
 
 // View Controller
@@ -374,7 +380,7 @@ class ClassicScreenFull2: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "test"
+        return " "
     }
     
     
@@ -424,7 +430,7 @@ class ClassicScreenFull2: UITableViewController {
         
             cell.titleLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 21)
             cell.titleLabel?.textAlignment = .left
-            cell.titleLabel?.textColor = .black
+            cell.titleLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
         
         
@@ -443,7 +449,9 @@ class ClassicScreenFull2: UITableViewController {
         case 1:
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             
-            cell.backgroundColor = colour7
+            cell.backgroundColor = colour1
+            
+            cell.separatorInset =  UIEdgeInsetsMake(0.0, 0.0, 0.0, cell.bounds.size.width)
             
             cell.textLabel?.text = NSLocalizedString("end", comment: "")
             cell.textLabel?.textColor = colour8

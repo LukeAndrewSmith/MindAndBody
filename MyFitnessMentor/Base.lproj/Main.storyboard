@@ -12421,6 +12421,29 @@
                                     <outlet property="titleLabel" destination="egl-rA-rgl" id="E8c-LS-Lwt"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EndTableViewCell" rowHeight="72" id="JoZ-0f-Lta" customClass="EndTableViewCell" customModule="MyFitnessMentor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="136" width="375" height="72"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JoZ-0f-Lta" id="8lx-Ku-LKq">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5p-Gy-OZE">
+                                            <rect key="frame" x="163.5" y="23" width="48.5" height="25.5"/>
+                                            <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="21"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="v5p-Gy-OZE" firstAttribute="centerX" secondItem="8lx-Ku-LKq" secondAttribute="centerX" id="RFV-4I-OVD"/>
+                                        <constraint firstItem="v5p-Gy-OZE" firstAttribute="centerY" secondItem="8lx-Ku-LKq" secondAttribute="centerY" id="WAt-P6-2NI"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="v5p-Gy-OZE" id="LkJ-UO-bQn"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="uhj-8e-uQI" id="q2z-y3-aVg"/>
