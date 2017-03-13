@@ -2568,6 +2568,14 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             destinationVC.setsArrayF = setsDictionary[pickerView.selectedRow(inComponent: 0)]!
             destinationVC.repsArrayF = repsDictionary[pickerView.selectedRow(inComponent: 0)]!
             
+            let pickerIndex = pickerView.selectedRow(inComponent: 0)
+            if pickerIndex < pickerViewArray.count - 1 {
+                destinationVC.workoutTitle = pickerViewArray[pickerIndex]
+            } else if pickerIndex > pickerViewArray.count - 1 {
+                let pickerArray = UserDefaults.standard.object(forKey: "workoutFullPresetTexts") as! [String]
+                destinationVC.workoutTitle = pickerArray [pickerIndex - pickerViewArray.count]
+            }
+            
             
             // Weight
             if UserDefaults.standard.string(forKey: "units") == "kg" {

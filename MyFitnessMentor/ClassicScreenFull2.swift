@@ -19,7 +19,11 @@ class OverviewTableViewCell: UITableViewCell {
     @IBOutlet weak var demonstrationImageView: UIImageView!
     
     // Title Label
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var movementLabel: UILabel!
+    
+    //
+    @IBOutlet weak var setsRepsLabel: UILabel!
+    
     
     // Button View
     @IBOutlet weak var buttonView: UIView!
@@ -29,7 +33,7 @@ class OverviewTableViewCell: UITableViewCell {
 class EndTableViewCell: UITableViewCell {
     
     // Title Label
-    
+    @IBOutlet weak var titleLabel: UILabel!
     
 }
 
@@ -40,6 +44,10 @@ class ClassicScreenFull2: UITableViewController {
     
     
     // Initialize Arrays
+    
+    // Title
+    var workoutTitle = String()
+    
     // Workout Choice Movement Array
     var workoutMovementsArray: [[String]] = [[]]
     var workoutArray: [String] = []
@@ -314,7 +322,7 @@ class ClassicScreenFull2: UITableViewController {
         
         
         // Navigation Title
-        navigationTitle.text = "Test"
+        navigationTitle.text = NSLocalizedString(workoutTitle, comment: "")
         
         // Navigation Title
         //
@@ -419,21 +427,30 @@ class ClassicScreenFull2: UITableViewController {
         
             // Cell
             //
-            cell.backgroundColor = colour3
-            cell.tintColor = colour3
+            cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+            cell.tintColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+            tableView.separatorInset = UIEdgeInsets(top: 0, left: (10 + cell.demonstrationImageView.frame.size.width), bottom: 0, right: 0)
+
         
         
-        
-            // Title
+            // Movement
             //
-            cell.titleLabel.text = NSLocalizedString(workoutArray[indexPath.row], comment: "")
+            cell.movementLabel.text = NSLocalizedString(workoutArray[indexPath.row], comment: "")
         
-            cell.titleLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 21)
-            cell.titleLabel?.textAlignment = .left
-            cell.titleLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 21)
+            cell.movementLabel?.textAlignment = .left
+            cell.movementLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
         
-        
+            // Set and Reps
+            //
+            cell.setsRepsLabel?.text = repsArray[indexPath.row]
+            cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+            cell.setsRepsLabel?.textAlignment = .right
+            cell.setsRepsLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            cell.setsRepsLabel.adjustsFontSizeToFitWidth = true
+            
+            
             // Image
             //
             cell.demonstrationImageView.image = #imageLiteral(resourceName: "Test")
@@ -442,20 +459,28 @@ class ClassicScreenFull2: UITableViewController {
         
             // Set Buttons
             //
-            cell.buttonView.backgroundColor = colour3
+            cell.buttonView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
        
+            
+            
             return cell
             
         case 1:
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             
-            cell.backgroundColor = colour1
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EndTableViewCell", for: indexPath) as! EndTableViewCell
             
-            cell.separatorInset =  UIEdgeInsetsMake(0.0, 0.0, 0.0, cell.bounds.size.width)
             
-            cell.textLabel?.text = NSLocalizedString("end", comment: "")
-            cell.textLabel?.textColor = colour8
-            cell.textLabel?.textAlignment = .center
+            
+            cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+            
+            cell.separatorInset =  UIEdgeInsetsMake(0.0, 0.0, 0.0, -cell.bounds.size.width)
+            
+            cell.layer.borderWidth = 2
+            cell.layer.borderColor = colour4.cgColor
+            
+            cell.titleLabel?.text = NSLocalizedString("end", comment: "")
+            cell.titleLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            cell.titleLabel?.textAlignment = .center
             
             return cell
             
@@ -478,9 +503,70 @@ class ClassicScreenFull2: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let cell = tableView.cellForRow(at: indexPath)
-        tableView.deselectRow(at: indexPath, animated: true)
-        
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.cellForRow(at: indexPath)
+            
+            performSegue(withIdentifier: "workoutFull1", sender: nil)
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            
+            
+        //
+        case 1:
+            
+            self.dismiss(animated: true)
+            
+//            // Alert View
+//            let title = NSLocalizedString("resetWarning", comment: "")
+//            let message = NSLocalizedString("resetWarningMessage", comment: "")
+//            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//            alert.view.tintColor = colour7
+//            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+//            
+//            let paragraphStyle = NSMutableParagraphStyle()
+//            paragraphStyle.alignment = .justified
+//            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+//            
+//            
+//            // Action
+//            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+//                UIAlertAction in
+//                
+//                UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+//                UserDefaults.standard.synchronize()
+//                
+//                // Alert View
+//                let title = NSLocalizedString("resetTitle", comment: "")
+//                let message = NSLocalizedString("resetMessage", comment: "")
+//                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//                alert.view.tintColor = self.colour7
+//                alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+//                
+//                let paragraphStyle = NSMutableParagraphStyle()
+//                paragraphStyle.alignment = .justified
+//                alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+//                
+//                self.present(alert, animated: true, completion: nil)
+//                
+//                
+//            }
+//            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+//                UIAlertAction in
+//                
+//            }
+//            
+//            alert.addAction(okAction)
+//            alert.addAction(cancelAction)
+//            
+//            self.present(alert, animated: true, completion: nil)
+//            
+//            tableView.deselectRow(at: indexPath, animated: true)
+            
+        //
+        default: break
+        }
         
     }
     
