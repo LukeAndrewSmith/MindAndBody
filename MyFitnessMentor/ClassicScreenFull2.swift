@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 
 
@@ -339,6 +340,8 @@ class ClassicScreenFull2: UITableViewController {
         self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
         
+        
+        
         // Hide Screen
         hideScreen.tintColor = colour1
         
@@ -373,6 +376,96 @@ class ClassicScreenFull2: UITableViewController {
         
         
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //
+    // Generate Buttons
+    //
+    func createButton() -> UIButton {
+        let setButton = UIButton()
+        let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
+        setButton.addConstraints([widthHeight])
+        setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
+        setButton.layer.borderWidth = 3
+        setButton.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        setButton.layer.cornerRadius = 21.4375
+        setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
+        setButton.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        setButton.isEnabled = false
+        
+        return setButton
+    }
+    
+    // Button Array
+    //
+    var buttonArray = [UIButton]()
+
+    
+    //
+    // Set Button Action
+    var buttonNumber = 0
+    
+    // Set Button
+    @IBAction func setButtonAction(sender: UIButton) {
+        
+        //
+        // Rest Timer Notification
+        //
+        if #available(iOS 10.0, *) {
+            
+            let content = UNMutableNotificationContent()
+            content.title = NSLocalizedString("restOver", comment: "")
+            content.body = NSLocalizedString("nextSet", comment: "")
+            content.sound = UNNotificationSound.default()
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
+            let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
+            
+            
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            
+            
+        }
+        
+        
+        buttonArray[buttonNumber].isEnabled = false
+        
+        let delayInSeconds = 30.0
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            
+            
+            if self.buttonArray.count == 1 {
+                
+            } else {
+                if self.buttonNumber < 2 {
+                    self.buttonNumber = self.buttonNumber + 1
+                    self.buttonArray[self.buttonNumber].isEnabled = true
+                }
+            }
+        }
+        
+        sender.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        sender.isEnabled = false
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -460,11 +553,100 @@ class ClassicScreenFull2: UITableViewController {
             // Set Buttons
             //
             cell.buttonView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-       
+            
+            
+            
+            
+            
+            func createButtonArray(){
+                //generate an array of buttons
+                let numberOfButtons = setsArray[indexPath.row]
+                
+                for _ in 1...numberOfButtons{
+                    buttonArray += [createButton()]
+                }
+            }
+            
+            createButtonArray()
+            
+            // Layout Buttons
+            
+
+            if setsArray[indexPath.row] == 1 {
+                
+                
+                
+                let stackView = UIStackView(arrangedSubviews: buttonArray)
+                stackView.frame = CGRect(x: (self.view.frame.size.width / 2) - 24.5, y: 9.1875, width: 42.875, height: 42.875)
+                stackView.axis = .horizontal
+                stackView.distribution = .equalSpacing
+                
+                cell.buttonView.addSubview(stackView)
+                
+                buttonArray[0].isEnabled = true
+                
+                
+            } else if setsArray[indexPath.row] == 2 {
+                
+                //createButtonArray()
+
+                let stackView = UIStackView(arrangedSubviews: buttonArray)
+                stackView.frame = CGRect(x: ((self.view.frame.size.width - 85.75) / 3), y: 9.1875, width: ((self.view.frame.size.width - 85.75) / 3) + 85.75, height: 42.875)
+                stackView.axis = .horizontal
+                stackView.distribution = .equalSpacing
+                
+                cell.buttonView.addSubview(stackView)
+                
+                buttonArray[0].isEnabled = true
+                
+                
+            } else if setsArray[indexPath.row] == 3 {
+                
+                //createButtonArray()
+
+                let stackView = UIStackView(arrangedSubviews: buttonArray)
+                stackView.frame = CGRect(x: ((self.view.frame.size.width - 128.625) / 4), y: 9.1875, width: ((2 * (self.view.frame.size.width - 128.625)) / 4) + 128.625, height: 42.875)
+                stackView.axis = .horizontal
+                stackView.distribution = .equalSpacing
+                
+                cell.buttonView.addSubview(stackView)
+                
+                buttonArray[0].isEnabled = true
+                
+            }   else if setsArray[indexPath.row] == 4 {
+                
+                //createButtonArray()
+
+                let stackView = UIStackView(arrangedSubviews: buttonArray)
+                stackView.frame = CGRect(x: ((self.view.frame.size.width - 171.5) / 5), y: 9.1875, width: ((3 * (self.view.frame.size.width - 171.5)) / 5) + 171.5, height: 42.875)
+                stackView.axis = .horizontal
+                stackView.distribution = .equalSpacing
+                
+                cell.buttonView.addSubview(stackView)
+                
+                buttonArray[0].isEnabled = true
+                
+            }    else if setsArray[indexPath.row] == 5 {
+                
+                //createButtonArray()
+
+                let stackView = UIStackView(arrangedSubviews: buttonArray)
+                stackView.frame = CGRect(x: ((self.view.frame.size.width - 214.375) / 6), y: 9.1875, width: ((4 * (self.view.frame.size.width - 214.375)) / 6) + 214.375, height: 42.875)
+                stackView.axis = .horizontal
+                stackView.distribution = .equalSpacing
+                
+                cell.buttonView.addSubview(stackView)
+                
+                buttonArray[0].isEnabled = true
+                
+            }
+            
+            
             
             
             return cell
             
+        //
         case 1:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "EndTableViewCell", for: indexPath) as! EndTableViewCell
@@ -507,7 +689,7 @@ class ClassicScreenFull2: UITableViewController {
         case 0:
             let cell = tableView.cellForRow(at: indexPath)
             
-            performSegue(withIdentifier: "workoutFull1", sender: nil)
+            performSegue(withIdentifier: "detailSegue", sender: nil)
             
             tableView.deselectRow(at: indexPath, animated: true)
             
@@ -654,6 +836,34 @@ class ClassicScreenFull2: UITableViewController {
     
     
     
+    // Prepare for Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "detailSegue") {
+            
+            let destinationVC = segue.destination as! ClassicScreenFullDetail
     
+            let indexPath = tableView.indexPathForSelectedRow
+            
+            let indexPathInt = Int((indexPath?.row)!)
+            
+            destinationVC.selectedMovement = indexPathInt
+            
+            
+            destinationVC.workoutArray = workoutArray
+            destinationVC.workoutMovementsSelectedArray = workoutMovementsSelectedArray
+            destinationVC.setsArray = setsArray
+            destinationVC.repsArray = repsArray
+            destinationVC.weightArray = weightArray
+            
+            destinationVC.targetAreaArray = targetAreaArray
+            destinationVC.explanationArray = explanationArray
+            
+            
+            // Hide Back Button Text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
+        }
+    }
     
 }

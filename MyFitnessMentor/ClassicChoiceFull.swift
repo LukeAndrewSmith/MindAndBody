@@ -2559,6 +2559,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         } else if (segue.identifier == "workoutFull2"){
             
+            // OverView View Controller
             let destinationNC = segue.destination as! UINavigationController
             
             let destinationVC = destinationNC.viewControllers.first as! ClassicScreenFull2
@@ -2583,6 +2584,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             } else {
                 destinationVC.weightArrayF = weightDictionaryLB[pickerView.selectedRow(inComponent: 0)]!
             }
+            
             
             
         }
