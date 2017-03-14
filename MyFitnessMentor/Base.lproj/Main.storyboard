@@ -11836,13 +11836,13 @@
                                         <rect key="frame" x="8" y="114" width="172" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Focus" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iuG-f6-A75">
-                                                <rect key="frame" x="0.0" y="0.0" width="46" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="115.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Present" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ga-UH-hwY">
-                                                <rect key="frame" x="54" y="0.0" width="118" height="20.5"/>
+                                                <rect key="frame" x="123.5" y="0.0" width="48.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="15"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -12317,7 +12317,7 @@
                                             </subviews>
                                         </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rh7-48-yAX">
-                                            <rect key="frame" x="107.5" y="54" width="257.5" height="54"/>
+                                            <rect key="frame" x="107.5" y="54" width="267.5" height="54"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                     </subviews>
@@ -12329,7 +12329,7 @@
                                         <constraint firstItem="887-IY-bkv" firstAttribute="leading" secondItem="3Zq-ou-mkc" secondAttribute="trailing" constant="10" id="BwO-jy-unq"/>
                                         <constraint firstItem="3Zq-ou-mkc" firstAttribute="leading" secondItem="B9i-GK-Jgo" secondAttribute="leading" id="DUm-an-LNo"/>
                                         <constraint firstAttribute="trailing" secondItem="887-IY-bkv" secondAttribute="trailing" constant="10" id="FXm-z1-CcP"/>
-                                        <constraint firstAttribute="trailing" secondItem="Rh7-48-yAX" secondAttribute="trailing" constant="10" id="RlO-ey-wNj"/>
+                                        <constraint firstAttribute="trailing" secondItem="Rh7-48-yAX" secondAttribute="trailing" id="RlO-ey-wNj"/>
                                         <constraint firstItem="Rh7-48-yAX" firstAttribute="leading" secondItem="3Zq-ou-mkc" secondAttribute="trailing" constant="10" id="lyD-3e-DFK"/>
                                         <constraint firstItem="Rh7-48-yAX" firstAttribute="height" secondItem="B9i-GK-Jgo" secondAttribute="height" multiplier="1/2" id="yCO-Si-T3Q"/>
                                     </constraints>

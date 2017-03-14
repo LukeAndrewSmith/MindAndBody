@@ -375,6 +375,14 @@ class ClassicScreenFull2: UITableViewController {
         
         
         
+        
+        
+        
+        // Buttons
+        //
+        fillButtonArray()
+
+        
     }
     
     
@@ -383,12 +391,24 @@ class ClassicScreenFull2: UITableViewController {
     
     
     
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+    // Buttons
+    
+    
+    // Button Array
+    //
+    var buttonArray = [[UIButton]]()
+    
+    //
+    // Set Button Action
+    var buttonNumber = 0
     
     
     //
     // Generate Buttons
     //
     func createButton() -> UIButton {
+        
         let setButton = UIButton()
         let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
         setButton.addConstraints([widthHeight])
@@ -401,16 +421,15 @@ class ClassicScreenFull2: UITableViewController {
         setButton.isEnabled = false
         
         return setButton
+        
+//        for _ in 1...numberOfButtons {
+//        
+//        buttonArray[buttonArrayIndex] += setButton
+//            
+//        }
     }
+   
     
-    // Button Array
-    //
-    var buttonArray = [UIButton]()
-
-    
-    //
-    // Set Button Action
-    var buttonNumber = 0
     
     // Set Button
     @IBAction func setButtonAction(sender: UIButton) {
@@ -435,9 +454,9 @@ class ClassicScreenFull2: UITableViewController {
         }
         
         
-        buttonArray[buttonNumber].isEnabled = false
+        //buttonArray[buttonNumber].isEnabled = false
         
-        let delayInSeconds = 30.0
+        let delayInSeconds = 5.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             
             
@@ -446,7 +465,7 @@ class ClassicScreenFull2: UITableViewController {
             } else {
                 if self.buttonNumber < 2 {
                     self.buttonNumber = self.buttonNumber + 1
-                    self.buttonArray[self.buttonNumber].isEnabled = true
+                    //self.buttonArray[self.buttonNumber].isEnabled = true
                 }
             }
         }
@@ -456,10 +475,22 @@ class ClassicScreenFull2: UITableViewController {
         
     }
     
+  
     
-    
-    
-    
+    // Generate an Array of Arrays of Buttons
+    //
+    func fillButtonArray() {
+        for i in 0...(setsArray.count - 1){
+            //
+            var buttonArray2 = [UIButton]()
+            //
+            for _ in 1...setsArray[i]{
+                buttonArray2 += [createButton()]
+                }
+            //
+            buttonArray += [buttonArray2]
+        }
+    }
     
     
     
@@ -487,13 +518,9 @@ class ClassicScreenFull2: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
-        
         let header = view as! UITableViewHeaderFooterView
-        //header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
-        //header.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         header.contentView.backgroundColor = colour1
         //
-        
     }
     
     
@@ -554,93 +581,15 @@ class ClassicScreenFull2: UITableViewController {
             //
             cell.buttonView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             
+            // Stack View
+            let stackView = UIStackView(arrangedSubviews: buttonArray[indexPath.row])
+            stackView.frame = cell.buttonView.bounds
+            stackView.axis = .horizontal
+            stackView.distribution = .equalSpacing
             
+            cell.buttonView.addSubview(stackView)
             
-            
-            
-            func createButtonArray(){
-                //generate an array of buttons
-                let numberOfButtons = setsArray[indexPath.row]
-                
-                for _ in 1...numberOfButtons{
-                    buttonArray += [createButton()]
-                }
-            }
-            
-            createButtonArray()
-            
-            // Layout Buttons
-            
-
-            if setsArray[indexPath.row] == 1 {
-                
-                
-                
-                let stackView = UIStackView(arrangedSubviews: buttonArray)
-                stackView.frame = CGRect(x: (self.view.frame.size.width / 2) - 24.5, y: 9.1875, width: 42.875, height: 42.875)
-                stackView.axis = .horizontal
-                stackView.distribution = .equalSpacing
-                
-                cell.buttonView.addSubview(stackView)
-                
-                buttonArray[0].isEnabled = true
-                
-                
-            } else if setsArray[indexPath.row] == 2 {
-                
-                //createButtonArray()
-
-                let stackView = UIStackView(arrangedSubviews: buttonArray)
-                stackView.frame = CGRect(x: ((self.view.frame.size.width - 85.75) / 3), y: 9.1875, width: ((self.view.frame.size.width - 85.75) / 3) + 85.75, height: 42.875)
-                stackView.axis = .horizontal
-                stackView.distribution = .equalSpacing
-                
-                cell.buttonView.addSubview(stackView)
-                
-                buttonArray[0].isEnabled = true
-                
-                
-            } else if setsArray[indexPath.row] == 3 {
-                
-                //createButtonArray()
-
-                let stackView = UIStackView(arrangedSubviews: buttonArray)
-                stackView.frame = CGRect(x: ((self.view.frame.size.width - 128.625) / 4), y: 9.1875, width: ((2 * (self.view.frame.size.width - 128.625)) / 4) + 128.625, height: 42.875)
-                stackView.axis = .horizontal
-                stackView.distribution = .equalSpacing
-                
-                cell.buttonView.addSubview(stackView)
-                
-                buttonArray[0].isEnabled = true
-                
-            }   else if setsArray[indexPath.row] == 4 {
-                
-                //createButtonArray()
-
-                let stackView = UIStackView(arrangedSubviews: buttonArray)
-                stackView.frame = CGRect(x: ((self.view.frame.size.width - 171.5) / 5), y: 9.1875, width: ((3 * (self.view.frame.size.width - 171.5)) / 5) + 171.5, height: 42.875)
-                stackView.axis = .horizontal
-                stackView.distribution = .equalSpacing
-                
-                cell.buttonView.addSubview(stackView)
-                
-                buttonArray[0].isEnabled = true
-                
-            }    else if setsArray[indexPath.row] == 5 {
-                
-                //createButtonArray()
-
-                let stackView = UIStackView(arrangedSubviews: buttonArray)
-                stackView.frame = CGRect(x: ((self.view.frame.size.width - 214.375) / 6), y: 9.1875, width: ((4 * (self.view.frame.size.width - 214.375)) / 6) + 214.375, height: 42.875)
-                stackView.axis = .horizontal
-                stackView.distribution = .equalSpacing
-                
-                cell.buttonView.addSubview(stackView)
-                
-                buttonArray[0].isEnabled = true
-                
-            }
-            
+            buttonArray[indexPath.row][0].isEnabled = true
             
             
             
