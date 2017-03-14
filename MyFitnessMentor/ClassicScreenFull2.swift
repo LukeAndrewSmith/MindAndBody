@@ -576,19 +576,37 @@ class ClassicScreenFull2: UITableViewController {
             cell.demonstrationImageView.image = #imageLiteral(resourceName: "Test")
         
         
+            
+            
         
             // Set Buttons
             //
             cell.buttonView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             
             // Stack View
+            //
             let stackView = UIStackView(arrangedSubviews: buttonArray[indexPath.row])
-            stackView.frame = cell.buttonView.bounds
+        
+            
+            // Layout
+            //
+            let numberOfButtons = CGFloat(setsArray[indexPath.row])
+            let xValue = ((cell.buttonView.frame.size.width - (numberOfButtons * 42.875)) / (numberOfButtons + 1))
+            let yValue = (cell.buttonView.frame.size.height - 42.875) / 2
+            let widthValue1 =
+                (numberOfButtons - 1) * (cell.buttonView.frame.size.width - (numberOfButtons * 42.875))
+            let widthValue2 = (widthValue1 / (numberOfButtons + 1)) + (numberOfButtons * 42.875)
+            //
+            stackView.frame = CGRect(x: xValue, y: yValue, width: widthValue2, height: 42.875)
+            
+            //
             stackView.axis = .horizontal
             stackView.distribution = .equalSpacing
             
             cell.buttonView.addSubview(stackView)
             
+            
+            //
             buttonArray[indexPath.row][0].isEnabled = true
             
             
@@ -610,7 +628,7 @@ class ClassicScreenFull2: UITableViewController {
             cell.layer.borderColor = colour4.cgColor
             
             cell.titleLabel?.text = NSLocalizedString("end", comment: "")
-            cell.titleLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            cell.titleLabel?.textColor = colour2
             cell.titleLabel?.textAlignment = .center
             
             return cell

@@ -599,7 +599,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         0:
         [
             // Legs (Quads)
-            [5, 2, 2, 2, 2, 2],
+            [5, 4, 3, 2, 1, 1],
             // Legs (Hamstrings/Glutes)
             [1, 1, 1, 1, 1, 1, 1],
             // Legs (General)

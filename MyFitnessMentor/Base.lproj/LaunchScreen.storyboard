@@ -23,12 +23,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Loading" translatesAutoresizingMaskIntoConstraints="NO" id="Lkf-Vu-P6M">
-                                <rect key="frame" x="115" y="261" width="144" height="144"/>
+                                <rect key="frame" x="69" y="215" width="236" height="236"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="144" id="bOH-iZ-676"/>
                                     <constraint firstAttribute="width" secondItem="Lkf-Vu-P6M" secondAttribute="height" id="jzD-N6-VWd"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="144" id="pfw-mn-ewd"/>
-                                    <constraint firstAttribute="width" constant="72" id="so1-7w-XUZ"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -41,10 +38,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Loading" width="161" height="161"/>
+        <image name="Loading" width="236" height="236"/>
     </resources>
 </document>

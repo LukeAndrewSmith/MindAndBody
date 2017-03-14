@@ -181,7 +181,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         // Navigation
-        self.navigationController?.navigationBar.tintColor = colour2
+        self.navigationController?.navigationBar.tintColor = colour1
         
         
         // Background Gradient and Colours
