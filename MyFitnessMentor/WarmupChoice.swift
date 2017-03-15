@@ -358,11 +358,54 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     
     
     
+    
+    
+    
+    //
+    // Warmup Type Button Segue
+    //
+    var warmupType = Int()
+    // Full Body
+    @IBAction func fullBody(_ sender: Any) {
+        performSegue(withIdentifier: "detailSegue", sender: nil)
+        warmupType = 0
+    }
+    
+    
+    // Upper Body
+    @IBAction func upperBody(_ sender: Any) {
+        performSegue(withIdentifier: "detailSegue", sender: nil)
+        warmupType = 1
+    }
+    
+    
+    // Lower Body
+    @IBAction func lowerBody(_ sender: Any) {
+        performSegue(withIdentifier: "detailSegue", sender: nil)
+        warmupType = 2
+    }
+    
+    
+    // Cardio
+    @IBAction func cardio(_ sender: Any) {
+        performSegue(withIdentifier: "detailSegue", sender: nil)
+        warmupType = 3
+    }
+    
+    
     // Remove Back Bar Text
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: warmupSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+        
+        let destinationVC = segue.destination as! WarmupChoiceFinal
+        
+        destinationVC.warmupType = warmupType
+        
+        
+        
     }
     
     

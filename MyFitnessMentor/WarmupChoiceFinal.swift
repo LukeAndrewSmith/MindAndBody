@@ -12,232 +12,421 @@ import UIKit
 class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
+    //
+    // Warmup Type
+    //
     
-    // Selected Warmup Type
-    
-    // Navigation Bar
-    @IBOutlet weak var navigationBar: UINavigationItem!
-    
-    // Begin Button
-    @IBOutlet weak var beginButton: UIButton!
-    
-    
-    // Table View
-    @IBOutlet weak var tableView: UITableView!
+        // Selected Warmup Type
+        //
+        var warmupType = Int()
     
     
-    // Information View
-    @IBOutlet weak var informationView: UIScrollView!
-    
-    // Information Title Label
-    @IBOutlet weak var informationTitle: UILabel!
-    
-    // PickerViews
-    @IBOutlet weak var pickerView: UIPickerView!
     
     
-    // Question Mark
-    @IBOutlet weak var questionMark: UIBarButtonItem!
+    // Arrays
     
     
-    // Titles
-    @IBOutlet weak var presetTitle: UILabel!
-    
-    @IBOutlet weak var tableTitle: UILabel!
-    
-    
-    // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
-    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
-    let colour8 = UserDefaults.standard.color(forKey: "colour8")!
-    
-    
-    // Add Preset
-    @IBOutlet weak var addPreset: UIButton!
-    @IBOutlet weak var removePreset: UIButton!
-    
-    var presetTexts = ["", "", ""]
-    
-    let emptyString = ""
-    
-    let emptyArray =
+        //
+    // Picker View Array
+    var pickerViewArray =
         [
-            // Mandatory
-            [0,
-             0],
-            // Joint Rotations
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Foam/Ball Roll
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // Lower Back
-            [0,
-             0,
-             0,
-             0,
-             0],
-            // Shoulders
-            [0,
-             0,
-             0,
-             0],
-            // Band Assisted
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0],
-            // Accessory
-            [0,
-             0,
-             0]
-    ]
+            "default",
+            "beginner",
+            "bodyWeight",
+            "bodybuilding",
+            "strength",
+            "highIntensity",
+            "quick"
+        ]
+
     
-    var warmupUpperPresets =
-        [
+    
+        // Initial Upper Custom Preset Arrays
+        //
+    
+            //
+            // Full
+            //
+            let emptyArrayFull =
+                [
+                    // Mandatory
+                    [0, 0],
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // Shoulder
+                    [0, 0, 0, 0],
+                    // Band/Bar/Machine Assisted
+                    [0, 0, 0, 0, 0, 0],
+                    // General Mobility
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0, 0, 0]
+                ]
+            //
+            var warmupFullPresets =
             [
-                // Mandatory
-                [0,
-                 0],
-                // Joint Rotations
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Foam/Ball Roll
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Lower Back
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Shoulders
-                [0,
-                 0,
-                 0,
-                 0],
-                // Band Assisted
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Accessory
-                [0,
-                 0,
-                 0]
-            ],
-            [
-                // Mandatory
-                [0,
-                 0],
-                // Joint Rotations
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Foam/Ball Roll
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Lower Back
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Shoulders
-                [0,
-                 0,
-                 0,
-                 0],
-                // Band Assisted
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Accessory
-                [0,
-                 0,
-                 0]
-            ],
-            [
-                // Mandatory
-                [0,
-                 0],
-                // Joint Rotations
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Foam/Ball Roll
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Lower Back
-                [0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Shoulders
-                [0,
-                 0,
-                 0,
-                 0],
-                // Band Assisted
-                [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0],
-                // Accessory
-                [0,
-                 0,
-                 0]
+                [
+                    // Mandatory
+                    [0, 0],
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // Shoulder
+                    [0, 0, 0, 0],
+                    // Band/Bar/Machine Assisted
+                    [0, 0, 0, 0, 0, 0],
+                    // General Mobility
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0, 0, 0]
+                ],
+                [
+                    // Mandatory
+                    [0, 0],
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // Shoulder
+                    [0, 0, 0, 0],
+                    // Band/Bar/Machine Assisted
+                    [0, 0, 0, 0, 0, 0],
+                    // General Mobility
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0, 0, 0]
+                ],
+                [
+                    // Mandatory
+                    [0, 0],
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // Shoulder
+                    [0, 0, 0, 0],
+                    // Band/Bar/Machine Assisted
+                    [0, 0, 0, 0, 0, 0],
+                    // General Mobility
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0, 0, 0]
+                ]
             ]
-    ]
+    
+        // Warmup Full Movements Array
+        var warmupFullArray =
+            [
+                // Mandatory
+                ["5minCardioL",
+                 "5minCardioI"],
+                // Joint Rotations
+                ["wrist",
+                 "elbow",
+                 "shoulder",
+                "neckR",
+                "waist",
+                "hip",
+                "knees",
+                "ankles"],
+                // Foam/Ball Roll
+                ["backf",
+                "thoracicSpine",
+                "lat",
+                "pecDelt",
+                "rearDelt",
+                "quadf",
+                "adductorf",
+                "hamstringf",
+                "glutef",
+                "calvef"],
+                // Lower Back
+                ["sideLegDrop",
+                 "sideLegKick",
+                 "scorpionKick",
+                 "sideBend",
+                "catCow"],
+                // Shoulder
+                ["wallSlides",
+                 "superManShoulder",
+                 "scapula",
+                "shoulderRotation"],
+                // Band/Bar/Machine Assisted
+                ["facePull",
+                 "externalRotation",
+                "internalRotation",
+                "shoulderDislocation",
+                "rearDeltFly",
+                "latPullover"],
+                // General Mobility
+                ["rollBack",
+                 "hipCircles",
+                 "mountainClimber",
+                 "groinStretch",
+                 "gluteBridge",
+                "threadTheNeedle",
+                "butterflyPose",
+                "cossakSquat",
+                "hipHinges",
+                "sideLegSwings",
+                "frontLegSwings",
+                "jumpSquat",
+                "lunge"],
+                // Accessory
+                ["latStretch",
+                 "calveStretch",
+                 "pushUp",
+                 "pullUp"]
+            ]
+        //
+        // Warmup
+        let warmupFullSelectedArray =
+            [
+                // Mandatory
+                [0, 0],
+                // Joint Rotations
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                // Foam/Ball Roll
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                // Lower Back
+                [0, 0, 0, 0, 0],
+                // Shoulder
+                [0, 0, 0, 0],
+                // Band/Bar/Machine Assisted
+                [0, 0, 0, 0, 0, 0],
+                // General Mobility
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                // Accessory
+                [0, 0, 0, 0]
+            ]
+    
+    
+            //
+            // Upper
+            //
+            let emptyArrayUpper =
+                [
+                    // Mandatory
+                    [0, 0],
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // Shoulders
+                    [0, 0, 0, 0],
+                    // Band Assisted
+                    [0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0, 0]
+                ]
+            //
+            var warmupUpperPresets =
+            [
+                [
+                    // Mandatory
+                    [0, 0],
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // Shoulders
+                    [0, 0, 0, 0],
+                    // Band Assisted
+                    [0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0, 0]
+                ],
+                [
+                    // Mandatory
+                    [0, 0],
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // Shoulders
+                    [0, 0, 0, 0],
+                    // Band Assisted
+                    [0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0, 0]
+                ],
+                [
+                    // Mandatory
+                    [0, 0],
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // Shoulders
+                    [0, 0, 0, 0],
+                    // Band Assisted
+                    [0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0, 0]
+                ]
+            ]
+    
+    
+    
+            //
+            // Lower
+            //
+            let emptyArrayLower =
+                [
+                    // Mandatory
+                    [0, 0],
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // General Mobility
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0]
+                ]
+            //
+            var warmupLowerPresets =
+            [
+                [
+                    // Mandatory
+                    [0, 0],
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // General Mobility
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0]
+                ],
+                [
+                    // Mandatory
+                    [0, 0],
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // General Mobility
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0],
+                ],
+                [
+                    // Mandatory
+                    [0, 0],
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // General Mobility
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0]
+                ]
+            ]
+
+    
+    
+            //
+            // Cardio
+            //
+            let emptyArrayCardio =
+                [
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // General Mobility
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Dynamic Warm Up Drills
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0, 0]
+                ]
+            //
+            var warmupCardioPresets =
+            [
+                [
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // General Mobility
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Dynamic Warm Up Drills
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0, 0]
+                ],
+                [
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // General Mobility
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    // Dynamic Warm Up Drills
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    // Accessory
+                    [0, 0, 0]
+                ],
+                [
+                    // Joint Rotations
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    // Foam/Ball Roll
+                    [0, 0, 0, 0, 0, 0, 0],
+                    // Lower Back
+                    [0, 0, 0, 0, 0],
+                    // General Mobility
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Dynamic Warm Up Drills
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    // Accessory
+                    [0, 0, 0]
+                ]
+            ]
+    
+    
+    
+    
+    
+        // Initial Custom Preset Texts
+        var presetTexts = ["", "", ""]
+    
+    
     
     
     
@@ -287,62 +476,33 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     ]
     
     
+
+    
+    
+    
+    
+    
+    
     // Default Warmup Selected Array
     var warmupSelectedArray =
         [
             // Mandatory
-            [1,
-             0],
+            [1, 0],
             // Joint Rotations
-            [0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
             // Foam/Ball Roll
-            [1,
-             0,
-             0,
-             0,
-             0],
+            [1, 0, 0, 0, 0],
             // Lower Back
-            [1,
-             0,
-             1,
-             0,
-             1],
+            [1, 0, 1, 0, 1],
             // Shoulders
-            [1,
-             0,
-             0,
-             1],
+            [1, 0, 0, 1],
             // Band Assisted
-            [1,
-             1,
-             0,
-             1,
-             0,
-             0],
+            [1, 1, 0, 1, 0, 0],
             // Accessory
-            [1,
-             1,
-             1]
+            [1, 1, 1]
     ]
     
-    // Picker View Array
-    var pickerViewArray =
-        [
-            "default",
-            "beginner",
-            "bodyWeight",
-            "bodybuilding",
-            "strength",
-            "highIntensity",
-            "quick"
-            
+    
     ]
     
     // Table View Section Title Array
@@ -356,6 +516,93 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             "bandAssisted",
             "accessory"
     ]
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // Navigation Bar
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    
+    // Begin Button
+    @IBOutlet weak var beginButton: UIButton!
+    
+    
+    // Table View
+    @IBOutlet weak var tableView: UITableView!
+    
+    
+    // Information View
+    @IBOutlet weak var informationView: UIScrollView!
+    
+    // Information Title Label
+    @IBOutlet weak var informationTitle: UILabel!
+    
+    // PickerViews
+    @IBOutlet weak var pickerView: UIPickerView!
+    
+    
+    // Question Mark
+    @IBOutlet weak var questionMark: UIBarButtonItem!
+    
+    
+    // Titles
+    @IBOutlet weak var presetTitle: UILabel!
+    
+    @IBOutlet weak var tableTitle: UILabel!
+    
+    
+    // Colours
+    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
+    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
+    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
+    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
+    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour8 = UserDefaults.standard.color(forKey: "colour8")!
+    
+    
+    // Add Preset
+    @IBOutlet weak var addPreset: UIButton!
+    @IBOutlet weak var removePreset: UIButton!
+    
+    
+    let emptyString = ""
+    
+    
+    
+    
+    
+    
     
     
     // Flash Screen
@@ -560,9 +807,29 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         let defaults = UserDefaults.standard
         
-        defaults.register(defaults: ["warmupUpperPresets" : warmupUpperPresets])
+        // Full Body
+        defaults.register(defaults: ["warmupFullPresets" : emptyCustomPresets])
+        defaults.register(defaults: ["warmupFullPresetTexts" : presetTexts])
+        defaults.register(defaults: ["warmupFullPresetNumber" : 0])
+        
+        // Upper Body
+        defaults.register(defaults: ["warmupUpperPresets" : emptyCustomPresets])
         defaults.register(defaults: ["warmupUpperPresetTexts" : presetTexts])
         defaults.register(defaults: ["warmupUpperPresetNumber" : 0])
+        
+        
+        // Lower Body
+        defaults.register(defaults: ["warmupLowerPresets" : emptyCustomPresets])
+        defaults.register(defaults: ["warmupLowerPresetTexts" : presetTexts])
+        defaults.register(defaults: ["warmupLowerPresetNumber" : 0])
+        
+        
+        // Cardio
+        defaults.register(defaults: ["warmupCardioPresets" : emptyCustomPresets])
+        defaults.register(defaults: ["warmupCardioPresetTexts" : presetTexts])
+        defaults.register(defaults: ["warmupCardioPresetNumber" : 0])
+        
+        
         
         defaults.synchronize()
         
@@ -821,45 +1088,19 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             warmupSelectedArray =
                 [
                     // Mandatory
-                    [1,
-                     0],
+                    [1, 0],
                     // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
                     // Foam/Ball Roll
-                    [1,
-                     0,
-                     0,
-                     0,
-                     0],
+                    [1, 0, 0, 0, 0],
                     // Lower Back
-                    [1,
-                     0,
-                     0,
-                     0,
-                     1],
+                    [1, 0, 0, 0, 1],
                     // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
+                    [1, 0, 0, 1],
                     // Band Assisted
-                    [1,
-                     1,
-                     0,
-                     1,
-                     0,
-                     0],
+                    [1, 1, 0, 1, 0, 0],
                     // Accessory
-                    [1,
-                     1,
-                     1]
+                    [1, 1, 1]
             ]
             
             self.tableView.reloadData()
@@ -872,42 +1113,17 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                     [1,
                      0],
                     // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
                     // Foam/Ball Roll
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0],
+                    [0, 0, 0, 0, 0],
                     // Lower Back
-                    [1,
-                     0,
-                     0,
-                     1,
-                     0],
+                    [1, 0, 0, 1, 0],
                     // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
+                    [1, 0, 0, 1],
                     // Band Assisted
-                    [0,
-                     0,
-                     0,
-                     1,
-                     0,
-                     0],
+                    [0, 0, 0, 1, 0, 0],
                     // Accessory
-                    [1,
-                     1,
-                     0]
+                    [1, 1, 0]
             ]
             
             self.tableView.reloadData()
@@ -917,45 +1133,19 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             warmupSelectedArray =
                 [
                     // Mandatory
-                    [1,
-                     0],
+                    [1, 0],
                     // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
                     // Foam/Ball Roll
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0],
+                    [0, 0, 0, 0, 0],
                     // Lower Back
-                    [1,
-                     1,
-                     1,
-                     0,
-                     1],
+                    [1, 1, 1, 0, 1],
                     // Shoulders
-                    [1,
-                     0,
-                     1,
-                     1],
+                    [1, 0, 1, 1],
                     // Band Assisted
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
+                    [0, 0, 0, 0, 0, 0],
                     // Accessory
-                    [1,
-                     1,
-                     1]
+                    [1, 1, 1]
             ]
             
             self.tableView.reloadData()
@@ -965,45 +1155,19 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             warmupSelectedArray =
                 [
                     // Mandatory
-                    [1,
-                     0],
+                    [1, 0],
                     // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
                     // Foam/Ball Roll
-                    [1,
-                     0,
-                     1,
-                     0,
-                     1],
+                    [1, 0, 1, 0, 1],
                     // Lower Back
-                    [1,
-                     1,
-                     1,
-                     0,
-                     0],
+                    [1, 1, 1, 0, 0],
                     // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
+                    [1, 0, 0, 1],
                     // Band Assisted
-                    [1,
-                     1,
-                     0,
-                     0,
-                     0,
-                     1],
+                    [1, 1, 0, 0, 0, 1],
                     // Accessory
-                    [1,
-                     1,
-                     1]
+                    [1, 1, 1]
             ]
             
             self.tableView.reloadData()
@@ -1013,45 +1177,19 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             warmupSelectedArray =
                 [
                     // Mandatory
-                    [1,
-                     0],
+                    [1, 0],
                     // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
                     // Foam/Ball Roll
-                    [0,
-                     1,
-                     1,
-                     0,
-                     1],
+                    [0, 1, 1, 0, 1],
                     // Lower Back
-                    [1,
-                     0,
-                     1,
-                     0,
-                     1],
+                    [1, 0, 1, 0, 1],
                     // Shoulders
-                    [1,
-                     0,
-                     1,
-                     1],
+                    [1, 0, 1, 1],
                     // Band Assisted
-                    [1,
-                     1,
-                     0,
-                     1,
-                     0,
-                     1],
+                    [1, 1, 0, 1, 0, 1],
                     // Accessory
-                    [1,
-                     1,
-                     1]
+                    [1, 1, 1]
             ]
             
             self.tableView.reloadData()
@@ -1061,45 +1199,19 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             warmupSelectedArray =
                 [
                     // Mandatory
-                    [0,
-                     1],
+                    [0, 1],
                     // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
                     // Foam/Ball Roll
-                    [1,
-                     0,
-                     1,
-                     0,
-                     0],
+                    [1, 0, 1, 0, 0],
                     // Lower Back
-                    [1,
-                     1,
-                     1,
-                     0,
-                     1],
+                    [1, 1, 1, 0, 1],
                     // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
+                    [1, 0, 0, 1],
                     // Band Assisted
-                    [1,
-                     1,
-                     0,
-                     0,
-                     1,
-                     1],
+                    [1, 1, 0, 0, 1, 1],
                     // Accessory
-                    [1,
-                     1,
-                     1]
+                    [1, 1, 1]
             ]
             
             self.tableView.reloadData()
@@ -1109,45 +1221,19 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             warmupSelectedArray =
                 [
                     // Mandatory
-                    [1,
-                     0],
+                    [1, 0],
                     // Joint Rotations
-                    [0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0,
-                     0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
                     // Foam/Ball Roll
-                    [1,
-                     0,
-                     0,
-                     0,
-                     0],
+                    [1, 0, 0, 0, 0],
                     // Lower Back
-                    [1,
-                     0,
-                     0,
-                     0,
-                     1],
+                    [1, 0, 0, 0, 1],
                     // Shoulders
-                    [1,
-                     0,
-                     0,
-                     1],
+                    [1, 0, 0, 1],
                     // Band Assisted
-                    [1,
-                     0,
-                     0,
-                     1,
-                     0,
-                     0],
+                    [1, 0, 0, 1, 0, 0],
                     // Accessory
-                    [1,
-                     0,
-                     0]
+                    [1, 0, 0]
             ]
             
             self.tableView.reloadData()
