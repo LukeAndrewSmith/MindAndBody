@@ -1,8 +1,8 @@
 //
-//  ClassicScreenFullDetail.swift
+//  WarmupScreen.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 13.03.17.
+//  Created by Luke Smith on 15.03.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -13,45 +13,260 @@ import UserNotifications
 
 
 
-class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
-    // Selected Movement
-    var selectedMovement = Int()
+    
+    
+    // Warmup Screen Index
+    //
+    var warmupScreenIndex = 0
+    
     
     
     // Initialize Arrays
-    // Workout Choice Movement Array
-    var workoutArray: [String] = []
-    // Workout Choice Selected Array
-    var workoutMovementsSelectedArray: [[Int]] = [[]]
+    // Warmup Choice Arrays
+    // Warmup Choice Movement Array
+    var warmupMovementsArray: [[String]] = [[]]
+    // Warmup Choice Selected Array
+    var warmupMovementsSelectedArray: [[Int]] = [[]]
     
+    // Warmup Arrays
+    // Movement Array
+    var warmupArray: [String] = []
     // Sets Array
+    var setsArrayF =
+        [
+            // Mandatory
+            [1,
+             1],
+            // Joint Rotations
+            [1,
+             1,
+             1,
+             1,
+             1,
+             1,
+             1,
+             1],
+            // Foam/Ball Roll
+            [1,
+             3,
+             1,
+             1,
+             1],
+            // Lower Back
+            [1,
+             1,
+             1,
+             1,
+             1],
+            // Shoulder
+            [2,
+             1,
+             1,
+             1],
+            // Band/Bar/Machine Assisted
+            [2,
+             1,
+             1,
+             1,
+             1,
+             1],
+            // Accessory
+            [1,
+             1,
+             1]
+    ]
     var setsArray: [Int] = []
-    // Reps Array
+    // Sets Array
+    var repsArrayF =
+        [
+            // Mandatory
+            ["5min",
+             "5min"],
+            // Joint Rotations
+            ["10-30s",
+             "10-30s",
+             "10-30s",
+             "10-30s",
+             "10-30s",
+             "10-30s",
+             "10-30s",
+             "10-30s"],
+            // Foam/Ball Roll
+            ["2-7 reps",
+             "5-10 reps",
+             "2-7 reps",
+             "15-30s",
+             "15-30s"],
+            // Lower Back
+            ["5-10 reps",
+             "5-10 reps",
+             "5-10 reps",
+             "5-10 reps",
+             "15-20 reps"],
+            // Shoulder
+            ["10-20 reps",
+             "5-10 reps",
+             "15 reps",
+             "10 reps"],
+            // Band/Bar/Machine Assisted
+            ["10-15 reps",
+             "5-15 reps",
+             "5-10 reps",
+             "5-10 reps",
+             "10-15 reps",
+             "10-20 reps",],
+            // Accessory
+            ["15-30s",
+             NSLocalizedString("asNecessary", comment: ""),
+             NSLocalizedString("asNecessary", comment: "")
+            ]
+    ]
     var repsArray: [String] = []
-    // Weight Array
-    var weightArray: [Int] = []
     // Demonstration Array
+    var demonstrationArrayF: [[UIImage]] = [[]]
     var demonstrationArray: [UIImage] = []
     // Target Area Array
-    var targetAreaArray: [UIImage] = []
+    var targetAreaArrayF =
+        [
+            // Mandatory
+            [#imageLiteral(resourceName: "Heart"),
+             #imageLiteral(resourceName: "Heart")],
+            // Joint Rotations
+            [#imageLiteral(resourceName: "Wrist Joint"),
+             #imageLiteral(resourceName: "Elbow Joint"),
+             #imageLiteral(resourceName: "Shoulder Joint"),
+             #imageLiteral(resourceName: "Neck Joint"),
+             #imageLiteral(resourceName: "Waist Joint"),
+             #imageLiteral(resourceName: "Hip Joint"),
+             #imageLiteral(resourceName: "Knee Joint"),
+             #imageLiteral(resourceName: "Ankle Joint")],
+            // Foam/Ball Roll
+            [#imageLiteral(resourceName: "Thoracic"),
+             #imageLiteral(resourceName: "Thoracic"),
+             #imageLiteral(resourceName: "Lat and Delt"),
+             #imageLiteral(resourceName: "Pec and Front Delt"),
+             #imageLiteral(resourceName: "Rear Delt")],
+            // Lower Back
+            [#imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Spine")],
+            // Shoulder
+            [#imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Back and Shoulder"),
+             #imageLiteral(resourceName: "Serratus"),
+             #imageLiteral(resourceName: "Shoulder")],
+            // Band/Bar/Machine Assisted
+            [#imageLiteral(resourceName: "Upper Back and Shoulder"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Back")],
+            // Accessory
+            [#imageLiteral(resourceName: "Lat"),
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Back and Bicep")]
+    ]
     
+    var targetAreaArray: [UIImage] = []
     // Explanation Array
+    var explanationArrayF =
+        [
+            // Mandatory
+            ["5minCardioLE",
+             "5minCardioIE"],
+            // Joint Rotations
+            ["wristE",
+             "elbowE",
+             "shoulderE",
+             "neckE",
+             "waistE",
+             "hipE",
+             "kneesE",
+             "anklesE"],
+            // Foam/Ball Roll
+            ["backfE",
+             "thoracicSpineE",
+             "latE",
+             "pecDeltE",
+             "rearDeltE"],
+            // Lower Back
+            ["sideLegDropE",
+             "sideLegKickE",
+             "scorpionKickE",
+             "sideBendE",
+             "catCowE"],
+            // Shoulder
+            ["wallSlidesE",
+             "superManShoulderE",
+             "scapulaE",
+             "shoulderRotationE"],
+            // Band/Bar/Machine Assisted
+            ["facePullE",
+             "externalRotationE",
+             "internalRotationE",
+             "shoulderDislocationE",
+             "rearDeltFlyE",
+             "latPulloverE"],
+            // Accessory
+            ["latStretchE",
+             "pushUpE",
+             "pullUpE"]
+    ]
     var explanationArray: [String] = []
     
     
     
-
+    
+    
+    
+    // Populate Arrays
+    func populateArrays() {
+        
+        // Warmup Array
+        warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        // Sets Array
+        setsArray = zip(setsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        
+        // Reps Array
+        repsArray = zip(repsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        
+        // Demonstration Array
+        demonstrationArray = zip(demonstrationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        
+        // Target Area Array
+        targetAreaArray = zip(targetAreaArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+        
+        // Explanation Array
+        explanationArray = zip(explanationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
+    }
+    
+    
+    
     //
+    
     // Outlets
     //
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    // Navigation Title
     let navigationTitle = UILabel()
+    // Buttons
+    @IBOutlet weak var nextButton: UIBarButtonItem!
+    @IBOutlet weak var backButton: UIBarButtonItem!
+    
     
     
     // Set Rep
@@ -62,28 +277,25 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     var setButton3 = UIButton()
     
     // Scroll Views
-    
     // Explanation
     @IBOutlet weak var scrollViewExplanation: UIScrollView!
     
     
     // Image View
     @IBOutlet weak var bodyImage: UIImageView!
-    
     // Demonstration Image
     @IBOutlet weak var demonstrationImage: UIImageView!
     
     
-    
+    // Expand Image
     @IBOutlet weak var imageExpand: UIButton!
     
     
     
     
     
-    // Explanation
+    // Explanation Expand
     @IBOutlet weak var explanationExpand: UIButton!
-    
     
     // Timer
     // Timer View
@@ -123,8 +335,6 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     // Title Labels
     // Sets and Reps
     @IBOutlet weak var setsRepsLabel: UILabel!
-    // Weight
-    @IBOutlet weak var weightLabel: UILabel!
     // Demonstration
     @IBOutlet weak var demonstrationLabel: UILabel!
     // Target Area Label
@@ -135,7 +345,8 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     // Progress Label
     @IBOutlet weak var progressLabel: UILabel!
     
-    
+    // Hide Screen
+    @IBOutlet weak var hideScreen: UIButton!
     
     
     // Constraints
@@ -143,11 +354,6 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     @IBOutlet weak var setBottom: NSLayoutConstraint!
     @IBOutlet weak var imageBottom: NSLayoutConstraint!
     @IBOutlet weak var explanationBottom: NSLayoutConstraint!
-    
-    
-    // Hide Screen
-    @IBOutlet weak var hideScreen: UIButton!
-    
     
     
     // Colours
@@ -161,11 +367,24 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     
     
     
+    
     //
     // View Did Load
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // Walkthrough
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough3") == false {
+            let delayInSeconds = 0.5
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.walkthroughMindBody()
+            }
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough3")
+        }
+        
+        
         
         //Iphone 5/SE layout
         //
@@ -180,29 +399,29 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         
+        // Create Arrays
+        //
+        populateArrays()
         
-        // Navigation
-        self.navigationController?.navigationBar.tintColor = colour1
         
-        // Background Gradient and Colours
+        // Background Gradient
         //
         self.view.applyGradient(colours: [colour1, colour2])
+        
+        backButton.tintColor = colour1
         
         
         //
         // Demonstration Image
         //
         demonstrationImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        
-        
-        demonstrationImage.image = #imageLiteral(resourceName: "Test 2")
         demonstrationImage.contentMode = .scaleAspectFit
-        
         
         
         
         // Body Image View
         bodyImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        
         
         
         
@@ -213,7 +432,12 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         imageExpand.setImage(tintedImageImage, for: .normal)
         
         //Image Tint
-        imageExpand.tintColor = colour3
+        imageExpand.tintColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        
+        
+        
+        
+        
         
         
         
@@ -241,6 +465,9 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         //Image Tint
         explanationExpand.tintColor = colour3
+        
+        
+        
         
         
         
@@ -372,13 +599,6 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         
-        
-        
-        
-        
-        
-        
-        
         // Progress Bar
         //
         
@@ -390,7 +610,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         // Rounded Edges
         progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
-        progressBar.layer.masksToBounds = true
+        progressBar.clipsToBounds = true
         
         // Initial state
         progressBar.setProgress(0, animated: true)
@@ -409,7 +629,6 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         
         //
         // Timer View
@@ -451,16 +670,17 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         countDownLabel.frame = CGRect(x: self.scrollViewExplanation.frame.size.width/2, y: 0, width: self.scrollViewExplanation.frame.size.width/2, height: self.timerView.frame.size.height)
         
         
+        
+        
     }
-    
-    
-    
-    
     
     
     //
     // Generate Buttons
     //
+    
+    
+    
     func createButton() -> UIButton {
         let setButton = UIButton()
         let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
@@ -487,15 +707,15 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         //generate an array of buttons
         
         
-        let numberOfButtons = setsArray[selectedMovement]
+        let numberOfButtons = setsArray[warmupScreenIndex]
         
-        for _ in 1...numberOfButtons {
+        for _ in 1...numberOfButtons{
             buttonArray += [createButton()]
             
         }
         
         
-        if setsArray[selectedMovement] == 1 {
+        if setsArray[warmupScreenIndex] == 1 {
             
             let stackView = UIStackView(arrangedSubviews: buttonArray)
             stackView.frame = CGRect(x: (self.view.frame.size.width / 2) - 24.5, y: 9.1875, width: 42.875, height: 42.875)
@@ -507,7 +727,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
             buttonArray[0].isEnabled = true
             
             
-        } else if setsArray[selectedMovement] == 2 {
+        } else if setsArray[warmupScreenIndex] == 2 {
             
             let stackView = UIStackView(arrangedSubviews: buttonArray)
             stackView.frame = CGRect(x: ((self.view.frame.size.width - 85.75) / 3), y: 9.1875, width: ((self.view.frame.size.width - 85.75) / 3) + 85.75, height: 42.875)
@@ -519,7 +739,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
             buttonArray[0].isEnabled = true
             
             
-        } else if setsArray[selectedMovement] == 3 {
+        } else if setsArray[warmupScreenIndex] == 3 {
             
             let stackView = UIStackView(arrangedSubviews: buttonArray)
             stackView.frame = CGRect(x: ((self.view.frame.size.width - 128.625) / 4), y: 9.1875, width: ((2 * (self.view.frame.size.width - 128.625)) / 4) + 128.625, height: 42.875)
@@ -530,58 +750,8 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
             
             buttonArray[0].isEnabled = true
             
-        }   else if setsArray[selectedMovement] == 4 {
-            
-            let stackView = UIStackView(arrangedSubviews: buttonArray)
-            stackView.frame = CGRect(x: ((self.view.frame.size.width - 171.5) / 5), y: 9.1875, width: ((3 * (self.view.frame.size.width - 171.5)) / 5) + 171.5, height: 42.875)
-            stackView.axis = .horizontal
-            stackView.distribution = .equalSpacing
-            
-            setRepView.addSubview(stackView)
-            
-            buttonArray[0].isEnabled = true
-            
-        }    else if setsArray[selectedMovement] == 5 {
-            
-            let stackView = UIStackView(arrangedSubviews: buttonArray)
-            stackView.frame = CGRect(x: ((self.view.frame.size.width - 214.375) / 6), y: 9.1875, width: ((4 * (self.view.frame.size.width - 214.375)) / 6) + 214.375, height: 42.875)
-            stackView.axis = .horizontal
-            stackView.distribution = .equalSpacing
-            
-            setRepView.addSubview(stackView)
-            
-            buttonArray[0].isEnabled = true
-            
         }
         
-        
-        // Set Buttons
-        //
-        // Disable pressed buttons
-        let indexOfUnpressedButton = buttonNumber[selectedMovement]
-        if indexOfUnpressedButton == setsArray[selectedMovement] - 1 {
-            for s in 0...indexOfUnpressedButton {
-                
-                buttonArray[s].isEnabled = false
-                buttonArray[s].backgroundColor = colour7
-                
-            }
-        } else if indexOfUnpressedButton > 0 {
-            for s in 0...indexOfUnpressedButton - 1 {
-    
-                buttonArray[s].isEnabled = false
-                buttonArray[s].backgroundColor = colour7
-                
-            }
-        }
-    
-    
-        // Enable next unpressed button
-        if indexOfUnpressedButton == setsArray[selectedMovement] - 1 {
-            
-        } else {
-            buttonArray[indexOfUnpressedButton].isEnabled = true
-        }
         
     }
     
@@ -591,17 +761,15 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     
     
     
-
+    
     // Display Content Function
     func displayContent() {
         
         
         // Navigation Bar
-        self.navigationTitle.text = NSLocalizedString(workoutArray[selectedMovement], comment: "")
-        
+        navigationTitle.text = NSLocalizedString(warmupArray[warmupScreenIndex], comment: "")
         
         // Navigation Title
-        //
         navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
         navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
         navigationTitle.center.x = self.view.center.x
@@ -612,8 +780,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         navigationTitle.adjustsFontSizeToFitWidth = true
         self.navigationController?.navigationBar.barTintColor = colour5
         
-        navigationBar.titleView = navigationTitle
-        
+        self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
         
         
@@ -628,15 +795,14 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         
-        
         // Body Image
-        bodyImage.image = targetAreaArray[selectedMovement]
+        bodyImage.image = targetAreaArray[warmupScreenIndex]
         bodyImage.contentMode = .scaleAspectFit
         
         
         
         // Explanation Text and Scroll View
-        let attributedExplanation = NSMutableAttributedString(string: NSLocalizedString(explanationArray[selectedMovement], comment: ""))
+        let attributedExplanation = NSMutableAttributedString(string: NSLocalizedString(explanationArray[warmupScreenIndex], comment: ""))
         let paragraphStyleE = NSMutableParagraphStyle()
         paragraphStyleE.alignment = .justified
         paragraphStyleE.hyphenationFactor = 1
@@ -668,6 +834,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         // Explanation
         
+        
         self.scrollViewExplanation.contentOffset.y = 0
         
         
@@ -678,9 +845,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         // Title Labels
         // Sets Reps
-        self.setsRepsLabel.text = (String(setsArray[selectedMovement]) + " x " + repsArray[selectedMovement])
-        // Weight
-        self.weightLabel.text = (String(weightArray[selectedMovement]) + UserDefaults.standard.string(forKey: "units")!)
+        self.setsRepsLabel.text = (String(setsArray[warmupScreenIndex]) + " x " + repsArray[warmupScreenIndex])
         // Demonstration
         self.demonstrationLabel.text = NSLocalizedString("demonstration", comment: "")
         // Target Area
@@ -688,10 +853,10 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         // Explanation
         self.explanationLabel.text = NSLocalizedString("explanation", comment: "")
         // Progress
-        self.progressLabel.text = (String(selectedMovement + 1)+"/"+String(workoutArray.count))
+        self.progressLabel.text = (String(warmupScreenIndex + 1)+"/"+String(warmupArray.count))
+        
         
         setsRepsLabel.textColor = colour3
-        weightLabel.textColor = colour3
         demonstrationLabel.textColor = colour3
         targetAreaLabel.textColor = colour3
         explanationLabel.textColor = colour3
@@ -701,10 +866,10 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         // Progress Bar
-        let workoutIndexP = Float(selectedMovement)
-        let workoutArrayP = Float(self.workoutArray.count)
+        let warmupIndexP = Float(warmupScreenIndex)
+        let warmupArrayP = Float(self.warmupArray.count)
         
-        let fractionalProgress = workoutIndexP/workoutArrayP
+        let fractionalProgress = warmupIndexP/warmupArrayP
         
         progressBar.setProgress(fractionalProgress, animated: true)
         
@@ -982,7 +1147,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     //
     
     
-    var buttonNumber = [Int]()
+    var buttonNumber = 0
     
     // Set Button
     @IBAction func setButtonAction(sender: UIButton) {
@@ -997,7 +1162,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
             content.body = NSLocalizedString("nextSet", comment: "")
             content.sound = UNNotificationSound.default()
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
             let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
             
             
@@ -1006,19 +1171,17 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
             
         }
         
+        buttonArray[buttonNumber].isEnabled = false
         
-        buttonArray[buttonNumber[selectedMovement]].isEnabled = false
-        
-        let delayInSeconds = 2.0
+        let delayInSeconds = 30.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            
             
             if self.buttonArray.count == 1 {
                 
             } else {
-                if self.buttonNumber[self.selectedMovement] < self.setsArray[self.selectedMovement] - 1  {
-                    self.buttonNumber[self.selectedMovement] = self.buttonNumber[self.selectedMovement] + 1
-                    self.buttonArray[self.buttonNumber[self.selectedMovement]].isEnabled = true
+                if self.buttonNumber < 2 {
+                    self.buttonNumber = self.buttonNumber + 1
+                    self.buttonArray[self.buttonNumber].isEnabled = true
                 }
             }
         }
@@ -1028,6 +1191,47 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
     }
     
+    
+    
+    // Next Button
+    @IBAction func nextButton(_ sender: Any) {
+        
+        
+        if warmupScreenIndex == warmupArray.count - 1 {
+            
+            warmupScreenIndex = 0
+            
+            self.dismiss(animated: true)
+            
+            
+            
+        } else {
+            warmupScreenIndex = warmupScreenIndex + 1
+            displayContent()
+        }
+        
+        flashScreen()
+        
+        
+        
+    }
+    
+    
+    
+    // Back Button
+    @IBAction func backButton(_ sender: Any) {
+        
+        if warmupScreenIndex == 0 {
+            
+        } else {
+            warmupScreenIndex = warmupScreenIndex - 1
+            
+            flashScreen()
+            displayContent()
+        }
+        
+        
+    }
     
     
     
@@ -1074,7 +1278,6 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     
     
     
-    
     // Expand and Retract Images
     //
     
@@ -1089,9 +1292,8 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     let targetButton = UIButton()
     let demonstrationButton = UIButton()
     
-    
-    
     @IBAction func expandImage(_ sender: Any) {
+        
         
         //Screen Size
         //
@@ -1146,7 +1348,6 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         
-        
         // Demonstration or Body Image
         //
         // Demonstration
@@ -1187,7 +1388,6 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         
-        
         // Order
         imageViewExpanded.bringSubview(toFront: demonstrationImageExpanded)
         demonstrationImageExpanded.alpha = 1
@@ -1199,14 +1399,11 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         
-        
-        
-        
         // View Contents
         //
         // Body Image
         bodyImageExpanded.frame = CGRect(x: 0, y: 36.75, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 36.75)
-        bodyImageExpanded.image = targetAreaArray[selectedMovement]
+        bodyImageExpanded.image = targetAreaArray[warmupScreenIndex]
         bodyImageExpanded.contentMode = .scaleAspectFit
         
         imageViewExpanded.addSubview(bodyImageExpanded)
@@ -1215,13 +1412,13 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         // Demonstration Image
         demonstrationImageExpanded.frame = CGRect(x: 0, y: 36.75, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 36.75)
+        
         demonstrationImageExpanded.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        
-        
-        demonstrationImageExpanded.image = #imageLiteral(resourceName: "Test 2")
         demonstrationImageExpanded.contentMode = .scaleAspectFit
         
+        
         imageViewExpanded.addSubview(demonstrationImageExpanded)
+        
         
         
         
@@ -1237,7 +1434,9 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         view.bringSubview(toFront: imageViewExpanded)
         view.bringSubview(toFront: cancelButtonImage)
         
-        view.bringSubview(toFront: seperator)
+        
+        nextButton.isEnabled = false
+        backButton.isEnabled = false
         
     }
     
@@ -1249,7 +1448,6 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         demonstrationButton.backgroundColor = colour3
         targetButton.backgroundColor = .white
-        
     }
     
     @IBAction func bodyImageButton(_ sender: Any) {
@@ -1258,19 +1456,20 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         bodyImageExpanded.alpha = 1
         demonstrationImageExpanded.alpha = 0
         
-        targetButton.backgroundColor = colour3
         demonstrationButton.backgroundColor = .white
+        targetButton.backgroundColor = colour3
     }
     
     
     @IBAction func retractImage(_ sender: Any) {
         
-        imageViewExpanded.bringSubview(toFront: demonstrationImageExpanded)
-        
         imageViewExpanded.removeFromSuperview()
         backgroundViewExpanded.removeFromSuperview()
         cancelButtonImage.removeFromSuperview()
         
+        
+        nextButton.isEnabled = true
+        backButton.isEnabled = true
     }
     
     
@@ -1293,8 +1492,9 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     
     // Expand Explanation
     //
-    
     @IBAction func expandExplanation(_ sender: Any) {
+        
+        
         
         // View
         //
@@ -1349,7 +1549,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         explanationLabelE.numberOfLines = 0
         
         
-        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[selectedMovement], comment: ""))
+        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[warmupScreenIndex], comment: ""))
         let paragraphStyleEE = NSMutableParagraphStyle()
         paragraphStyleEE.alignment = .justified
         paragraphStyleEE.hyphenationFactor = 1
@@ -1380,6 +1580,10 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         view.bringSubview(toFront: scrollViewExplanationE)
         view.bringSubview(toFront: cancelButtonExplanationE)
         
+        
+        nextButton.isEnabled = false
+        backButton.isEnabled = false
+        
     }
     
     
@@ -1392,8 +1596,14 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         cancelButtonExplanationE.removeFromSuperview()
         
         explanationLabelE.removeFromSuperview()
-       
+        
+        
+        nextButton.isEnabled = true
+        backButton.isEnabled = true
     }
+    
+    
+    
     
     
     
@@ -1402,12 +1612,9 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     let hideScreenView = UIView()
     let blurEffectView = UIVisualEffectView()
     let hideLabel = UILabel()
-    
+    var brightness = UIScreen.main.brightness
     
     @IBAction func hideScreen(_ sender: Any) {
-        
-        
-        
         
         
         // Hide Screen view
@@ -1456,6 +1663,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.blurEffectView.alpha = 1
             self.hideScreenView.alpha = 1
+            UIScreen.main.brightness = self.brightness/2
         }, completion: nil)
     }
     
@@ -1466,21 +1674,534 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         blurEffectView.removeFromSuperview()
         hideLabel.removeFromSuperview()
         
+        UIScreen.main.brightness = brightness
+        
         hideScreenView.removeFromSuperview()
         
     }
     
     
+    //---------------------------------------------------------------------------------------------------------------
     
     
-//    
-//    // Pass Data Back
-//    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-//        if let controller = viewController as? ClassicScreenFull2 {
-//            controller.buttonNumber = buttonNumber
-//            
-//        }
-//    }
+    var  viewNumber = 0
+    let walkthroughView = UIView()
+    let label = UILabel()
+    let nextButtonW = UIButton()
+    let backButtonW = UIButton()
+    
+    
+    // Walkthrough
+    func walkthroughMindBody() {
+        
+        // Walkthrough
+        let delayInSeconds = 0.5
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            self.walkthroughMindBody()
+        }
+        
+        //
+        let screenSize = UIScreen.main.bounds
+        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+        //
+        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+        walkthroughView.backgroundColor = .black
+        walkthroughView.alpha = 0.72
+        walkthroughView.clipsToBounds = true
+        //
+        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
+        label.center = view.center
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
+        label.textColor = .white
+        //
+        nextButtonW.frame = screenSize
+        nextButtonW.backgroundColor = .clear
+        nextButtonW.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
+        //
+        backButtonW.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
+        backButtonW.setTitle("Back", for: .normal)
+        backButtonW.titleLabel?.textAlignment = .left
+        backButtonW.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        backButtonW.titleLabel?.textColor = .white
+        backButtonW.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
+        
+        
+        
+        
+        switch viewNumber {
+            
+        case 0:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - ((navigationTitle.frame.size.width + 50) / 2), y: UIApplication.shared.statusBarFrame.height, width: navigationTitle.frame.size.width + 50, height: 40))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreen1", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            
+            
+            
+            
+        //
+        case 1:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreen2", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 2:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.083, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreen3", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            backButtonW.setTitle("", for: .normal)
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+        case 3:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant / 2), width: setsRepsLabel.frame.size.width + 6, height: setTop.constant/2))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreen4", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+        case 4:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + setTop.constant, width: setRepView.frame.size.width, height: setRepView.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreen5", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 5:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 2) + setRepView.frame.size.height , width: demonstrationImage.frame.size.width, height: demonstrationImage.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center.y = scrollViewExplanation.frame.maxY
+            label.text = NSLocalizedString("movementScreen6", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 6:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: demonstrationImage.frame.size.width + 1, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 2) + setRepView.frame.size.height , width: demonstrationImage.frame.size.width, height: demonstrationImage.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center.y = scrollViewExplanation.frame.maxY
+            label.text = NSLocalizedString("movementScreen7", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 7:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: imageExpand.center.x, y: imageExpand.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreen8", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+            
+        case 8:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 3) + setRepView.frame.size.height + demonstrationImage.frame.size.height, width: scrollViewExplanation.frame.size.width, height: scrollViewExplanation.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center.y = demonstrationImage.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("movementScreen9", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+        case 9:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: explanationExpand.center.x, y: explanationExpand.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.center.y = demonstrationImage.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("movementScreen10", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+        case 10:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: timerButton.center.x, y: timerButton.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center.y = demonstrationImage.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("movementScreen11", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+            
+        case 11:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: hideScreen.center.x, y: hideScreen.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center.y = demonstrationImage.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("movementScreenh", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+            
+            
+        case 12:
+            // Clear Section
+            let path = CGMutablePath()
+            let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 3.5)
+            let yValue = y + scrollViewExplanation.frame.size.height + setRepView.frame.size.height + demonstrationImage.frame.size.height
+            path.addRect(CGRect(x: 0, y: yValue, width: progressLabel.frame.size.width + 6, height: progressLabel.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreen12", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 13:
+            // Clear Section
+            let path = CGMutablePath()
+            let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 4)
+            let yValue = y + scrollViewExplanation.frame.size.height + setRepView.frame.size.height + demonstrationImage.frame.size.height
+            path.addRect(CGRect(x: 0, y: yValue, width: view.frame.size.width, height: progressBarView.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreen13", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        default: break
+            
+            
+        }
+        
+        
+    }
+    
+    
+    
+    func nextWalkthroughView(_ sender: Any) {
+        walkthroughView.removeFromSuperview()
+        viewNumber = viewNumber + 1
+        walkthroughMindBody()
+    }
+    
+    
+    func backWalkthroughView(_ sender: Any) {
+        if viewNumber > 0 {
+            backButtonW.removeFromSuperview()
+            walkthroughView.removeFromSuperview()
+            viewNumber = viewNumber - 1
+            walkthroughMindBody()
+        }
+        
+    }
+    
+    
     
 }
-

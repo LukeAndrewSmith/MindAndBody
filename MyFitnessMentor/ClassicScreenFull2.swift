@@ -401,8 +401,7 @@ class ClassicScreenFull2: UITableViewController {
     
     //
     // Set Button Action
-    var buttonNumber = 0
-    
+    var buttonNumber = [Int]()
     
     //
     // Generate Buttons
@@ -421,12 +420,6 @@ class ClassicScreenFull2: UITableViewController {
         setButton.isEnabled = false
         
         return setButton
-        
-//        for _ in 1...numberOfButtons {
-//        
-//        buttonArray[buttonArrayIndex] += setButton
-//            
-//        }
     }
    
     
@@ -444,7 +437,7 @@ class ClassicScreenFull2: UITableViewController {
             content.body = NSLocalizedString("nextSet", comment: "")
             content.sound = UNNotificationSound.default()
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
             let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
             
             
@@ -453,19 +446,20 @@ class ClassicScreenFull2: UITableViewController {
             
         }
         
+        let buttonRow = sender.tag
         
-        //buttonArray[buttonNumber].isEnabled = false
+        buttonArray[buttonRow][buttonNumber[buttonRow]].isEnabled = false
         
-        let delayInSeconds = 5.0
+        let delayInSeconds = 2.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             
             
-            if self.buttonArray.count == 1 {
+            if self.setsArray[buttonRow] == 1 {
                 
             } else {
-                if self.buttonNumber < 2 {
-                    self.buttonNumber = self.buttonNumber + 1
-                    //self.buttonArray[self.buttonNumber].isEnabled = true
+                if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] - 1 {
+                    self.buttonNumber[buttonRow] = self.buttonNumber[buttonRow] + 1
+                    self.buttonArray[buttonRow][self.buttonNumber[buttonRow]].isEnabled = true
                 }
             }
         }
@@ -489,7 +483,9 @@ class ClassicScreenFull2: UITableViewController {
                 }
             //
             buttonArray += [buttonArray2]
+            buttonNumber.append(0)
         }
+        
     }
     
     
@@ -543,7 +539,13 @@ class ClassicScreenFull2: UITableViewController {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "OverviewTableViewCell", for: indexPath) as! OverviewTableViewCell
 
-        
+            
+            
+            // Clean
+            //
+            for v in cell.buttonView.subviews {
+                v.removeFromSuperview()
+            }
         
             // Cell
             //
@@ -560,6 +562,7 @@ class ClassicScreenFull2: UITableViewController {
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 21)
             cell.movementLabel?.textAlignment = .left
             cell.movementLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            cell.movementLabel?.adjustsFontSizeToFitWidth = true
         
         
             // Set and Reps
@@ -579,7 +582,7 @@ class ClassicScreenFull2: UITableViewController {
             
             
         
-            // Set Buttons
+            // Set Button View
             //
             cell.buttonView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             
@@ -587,7 +590,7 @@ class ClassicScreenFull2: UITableViewController {
             //
             let stackView = UIStackView(arrangedSubviews: buttonArray[indexPath.row])
         
-            
+        
             // Layout
             //
             let numberOfButtons = CGFloat(setsArray[indexPath.row])
@@ -604,6 +607,37 @@ class ClassicScreenFull2: UITableViewController {
             stackView.distribution = .equalSpacing
             
             cell.buttonView.addSubview(stackView)
+            
+            
+            
+            
+            // Set Buttons
+            //
+            // Disable pressed buttons
+            let indexOfUnpressedButton = buttonNumber[indexPath.row]
+            if indexOfUnpressedButton == setsArray[indexPath.row] - 1 {
+                for s in 0...indexOfUnpressedButton {
+                    
+                    buttonArray[indexPath.row][s].isEnabled = false
+                    buttonArray[indexPath.row][s].backgroundColor = colour7
+                    
+                }
+            } else if indexOfUnpressedButton > 0 {
+                for s in 0...indexOfUnpressedButton - 1 {
+                    
+                    buttonArray[indexPath.row][s].isEnabled = false
+                    buttonArray[indexPath.row][s].backgroundColor = colour7
+                    
+                }
+            }
+            
+            // Enable next unpressed button
+            if indexOfUnpressedButton == setsArray[indexPath.row] - 1 {
+                
+            } else {
+                buttonArray[indexPath.row][indexOfUnpressedButton].isEnabled = true
+            }
+            
             
             
             //
@@ -824,6 +858,9 @@ class ClassicScreenFull2: UITableViewController {
             
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
+            
+            // Set Button
+            destinationVC.buttonNumber = buttonNumber
             
             
             // Hide Back Button Text
