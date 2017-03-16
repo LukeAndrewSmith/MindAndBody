@@ -367,34 +367,36 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     var warmupType = Int()
     // Full Body
     @IBAction func fullBody(_ sender: Any) {
-        performSegue(withIdentifier: "detailSegue", sender: nil)
         warmupType = 0
+        performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     
     
     // Upper Body
     @IBAction func upperBody(_ sender: Any) {
-        performSegue(withIdentifier: "detailSegue", sender: nil)
         warmupType = 1
+        performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     
     
     // Lower Body
     @IBAction func lowerBody(_ sender: Any) {
-        performSegue(withIdentifier: "detailSegue", sender: nil)
         warmupType = 2
+        performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     
     
     // Cardio
     @IBAction func cardio(_ sender: Any) {
-        performSegue(withIdentifier: "detailSegue", sender: nil)
         warmupType = 3
+        performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     
     
+    
     // Remove Back Bar Text
-    override func prepare(for segue: warmupSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "warmupSegue") {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
@@ -404,8 +406,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         
         destinationVC.warmupType = warmupType
         
-        
-        
+        }
     }
     
     

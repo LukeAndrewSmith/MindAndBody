@@ -25,199 +25,32 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
     
     
     // Initialize Arrays
-    // Warmup Choice Arrays
-    // Warmup Choice Movement Array
-    var warmupMovementsArray: [[String]] = [[]]
-    // Warmup Choice Selected Array
+
+    // Selected Array
     var warmupMovementsSelectedArray: [[Int]] = [[]]
     
-    // Warmup Arrays
     // Movement Array
+    var warmupMovementsArray: [[String]] = [[]]
     var warmupArray: [String] = []
+    
     // Sets Array
-    var setsArrayF =
-        [
-            // Mandatory
-            [1,
-             1],
-            // Joint Rotations
-            [1,
-             1,
-             1,
-             1,
-             1,
-             1,
-             1,
-             1],
-            // Foam/Ball Roll
-            [1,
-             3,
-             1,
-             1,
-             1],
-            // Lower Back
-            [1,
-             1,
-             1,
-             1,
-             1],
-            // Shoulder
-            [2,
-             1,
-             1,
-             1],
-            // Band/Bar/Machine Assisted
-            [2,
-             1,
-             1,
-             1,
-             1,
-             1],
-            // Accessory
-            [1,
-             1,
-             1]
-    ]
+    var setsArrayF: [[Int]] = [[]]
     var setsArray: [Int] = []
+    
     // Sets Array
-    var repsArrayF =
-        [
-            // Mandatory
-            ["5min",
-             "5min"],
-            // Joint Rotations
-            ["10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s"],
-            // Foam/Ball Roll
-            ["2-7 reps",
-             "5-10 reps",
-             "2-7 reps",
-             "15-30s",
-             "15-30s"],
-            // Lower Back
-            ["5-10 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "15-20 reps"],
-            // Shoulder
-            ["10-20 reps",
-             "5-10 reps",
-             "15 reps",
-             "10 reps"],
-            // Band/Bar/Machine Assisted
-            ["10-15 reps",
-             "5-15 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "10-15 reps",
-             "10-20 reps",],
-            // Accessory
-            ["15-30s",
-             NSLocalizedString("asNecessary", comment: ""),
-             NSLocalizedString("asNecessary", comment: "")
-            ]
-    ]
+    var repsArrayF: [[String]] = [[]]
     var repsArray: [String] = []
+    
     // Demonstration Array
     var demonstrationArrayF: [[UIImage]] = [[]]
     var demonstrationArray: [UIImage] = []
-    // Target Area Array
-    var targetAreaArrayF =
-        [
-            // Mandatory
-            [#imageLiteral(resourceName: "Heart"),
-             #imageLiteral(resourceName: "Heart")],
-            // Joint Rotations
-            [#imageLiteral(resourceName: "Wrist Joint"),
-             #imageLiteral(resourceName: "Elbow Joint"),
-             #imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Neck Joint"),
-             #imageLiteral(resourceName: "Waist Joint"),
-             #imageLiteral(resourceName: "Hip Joint"),
-             #imageLiteral(resourceName: "Knee Joint"),
-             #imageLiteral(resourceName: "Ankle Joint")],
-            // Foam/Ball Roll
-            [#imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Lat and Delt"),
-             #imageLiteral(resourceName: "Pec and Front Delt"),
-             #imageLiteral(resourceName: "Rear Delt")],
-            // Lower Back
-            [#imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Spine")],
-            // Shoulder
-            [#imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Back and Shoulder"),
-             #imageLiteral(resourceName: "Serratus"),
-             #imageLiteral(resourceName: "Shoulder")],
-            // Band/Bar/Machine Assisted
-            [#imageLiteral(resourceName: "Upper Back and Shoulder"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Back")],
-            // Accessory
-            [#imageLiteral(resourceName: "Lat"),
-             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-             #imageLiteral(resourceName: "Back and Bicep")]
-    ]
     
+    // Target Area Array
+    var targetAreaArrayF: [[UIImage]] = [[]]
     var targetAreaArray: [UIImage] = []
+    
     // Explanation Array
-    var explanationArrayF =
-        [
-            // Mandatory
-            ["5minCardioLE",
-             "5minCardioIE"],
-            // Joint Rotations
-            ["wristE",
-             "elbowE",
-             "shoulderE",
-             "neckE",
-             "waistE",
-             "hipE",
-             "kneesE",
-             "anklesE"],
-            // Foam/Ball Roll
-            ["backfE",
-             "thoracicSpineE",
-             "latE",
-             "pecDeltE",
-             "rearDeltE"],
-            // Lower Back
-            ["sideLegDropE",
-             "sideLegKickE",
-             "scorpionKickE",
-             "sideBendE",
-             "catCowE"],
-            // Shoulder
-            ["wallSlidesE",
-             "superManShoulderE",
-             "scapulaE",
-             "shoulderRotationE"],
-            // Band/Bar/Machine Assisted
-            ["facePullE",
-             "externalRotationE",
-             "internalRotationE",
-             "shoulderDislocationE",
-             "rearDeltFlyE",
-             "latPulloverE"],
-            // Accessory
-            ["latStretchE",
-             "pushUpE",
-             "pullUpE"]
-    ]
+    var explanationArrayF: [[String]] = [[]]
     var explanationArray: [String] = []
     
     
@@ -335,12 +168,7 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
     // Title Labels
     // Sets and Reps
     @IBOutlet weak var setsRepsLabel: UILabel!
-    // Demonstration
-    @IBOutlet weak var demonstrationLabel: UILabel!
-    // Target Area Label
-    @IBOutlet weak var targetAreaLabel: UILabel!
-    // Explanation Label
-    @IBOutlet weak var explanationLabel: UILabel!
+    // Explanation Text
     let explanationText = UILabel()
     // Progress Label
     @IBOutlet weak var progressLabel: UILabel!
@@ -583,11 +411,7 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         
         
         self.timerView.addSubview(countDownLabel)
-        
-        
-        //self.view.addSubview(timerView)
-        //self.view.sendSubview(toBack: timerView)
-        
+     
         
         // App Moved To Background
         let notificationCenter = NotificationCenter.default
@@ -822,6 +646,8 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         
         
         
+        
+        
         // Timer to Back
         self.scrollViewExplanation.alpha = 1
         timerView.removeFromSuperview()
@@ -832,13 +658,14 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         
         
         
+        
+        
+        
         // Explanation
-        
-        
         self.scrollViewExplanation.contentOffset.y = 0
-        
-        
+    
         self.view.bringSubview(toFront: scrollViewExplanation)
+        
         
         
         
@@ -846,21 +673,13 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         // Title Labels
         // Sets Reps
         self.setsRepsLabel.text = (String(setsArray[warmupScreenIndex]) + " x " + repsArray[warmupScreenIndex])
-        // Demonstration
-        self.demonstrationLabel.text = NSLocalizedString("demonstration", comment: "")
-        // Target Area
-        self.targetAreaLabel.text = NSLocalizedString("targetArea", comment: "")
-        // Explanation
-        self.explanationLabel.text = NSLocalizedString("explanation", comment: "")
         // Progress
         self.progressLabel.text = (String(warmupScreenIndex + 1)+"/"+String(warmupArray.count))
         
-        
+        //
         setsRepsLabel.textColor = colour3
-        demonstrationLabel.textColor = colour3
-        targetAreaLabel.textColor = colour3
-        explanationLabel.textColor = colour3
         progressLabel.textColor = colour3
+        
         
         
         
@@ -1243,16 +1062,11 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         
         
         self.view.bringSubview(toFront: timerButton2)
-        self.explanationLabel.text = NSLocalizedString("timer", comment: "")
-        
-        
         
         
         // Ensure Explanation Hidden
         self.scrollViewExplanation.alpha = 0
-        
-        
-        
+
     }
     
     
@@ -1262,16 +1076,12 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         timerView.removeFromSuperview()
         
         self.view.bringSubview(toFront: timerButton)
-        self.explanationLabel.text = NSLocalizedString("explanation", comment: "")
-        
-        
+    
         
         // Ensure Explanation Hidden
         self.scrollViewExplanation.alpha = 1
         self.explanationExpand.alpha = 1
-        
-        
-        
+    
     }
     
     
