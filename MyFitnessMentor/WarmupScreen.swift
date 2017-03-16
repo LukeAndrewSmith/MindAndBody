@@ -378,7 +378,7 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         timerStart.backgroundColor = colour2
         timerStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
         timerStart.setTitleColor(colour6, for: .normal)
-        timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+        timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
         timerStart.titleLabel?.textAlignment = .center
         
         timerStart.addTarget(self, action: #selector(startTimer(_:)), for: .touchUpInside)
@@ -392,7 +392,7 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         timerCancel.backgroundColor = colour1
         timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
         timerCancel.setTitleColor(colour6, for: .normal)
-        timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+        timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
         timerCancel.titleLabel?.textAlignment = .center
         
         timerCancel.addTarget(self, action: #selector(cancelTimer(_:)), for: .touchUpInside)
@@ -1164,7 +1164,7 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         demonstrationButton.isEnabled = true
         demonstrationButton.frame = CGRect(x: 0, y: 0, width: imageViewExpanded.frame.size.width/2, height: 36.75)
         demonstrationButton.setTitle(NSLocalizedString("demonstration", comment: ""), for: .normal)
-        demonstrationButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        demonstrationButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)
         demonstrationButton.addTarget(self, action: #selector(demonstrationImageButton(_:)), for: .touchUpInside)
         
         imageViewExpanded.addSubview(demonstrationButton)
@@ -1177,7 +1177,7 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         targetButton.frame = CGRect(x: imageViewExpanded.frame.size.width/2, y: 0, width: imageViewExpanded.frame.size.width/2, height: 36.75)
         
         targetButton.setTitle(NSLocalizedString("targetArea", comment: ""), for: .normal)
-        targetButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        targetButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)
         targetButton.addTarget(self, action: #selector(bodyImageButton(_:)), for: .touchUpInside)
         
         targetButton.backgroundColor = .white
@@ -1512,7 +1512,9 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         
         //
         let screenSize = UIScreen.main.bounds
-        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+        //let navigationBarHeight = self.navigationController!.navigationBar.frame.height
+        //let navigationBarHeight = self.navigationBar.accessibilityFrame.height
+        let navigationBarHeight = self.navigationController!.navigationBar.frame.size.height
         //
         walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
         walkthroughView.backgroundColor = .black

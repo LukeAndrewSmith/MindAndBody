@@ -13,7 +13,7 @@ import UserNotifications
 
 
 
-class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate {
     
     
     // Selected Movement
@@ -183,6 +183,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         // Navigation
         self.navigationController?.navigationBar.tintColor = colour1
+        navigationController?.delegate = self
         
         // Background Gradient and Colours
         //
@@ -323,7 +324,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         timerStart.backgroundColor = colour2
         timerStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
         timerStart.setTitleColor(colour6, for: .normal)
-        timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+        timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
         timerStart.titleLabel?.textAlignment = .center
         
         timerStart.addTarget(self, action: #selector(startTimer(_:)), for: .touchUpInside)
@@ -337,7 +338,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         timerCancel.backgroundColor = colour1
         timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
         timerCancel.setTitleColor(colour6, for: .normal)
-        timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+        timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
         timerCancel.titleLabel?.textAlignment = .center
         
         timerCancel.addTarget(self, action: #selector(cancelTimer(_:)), for: .touchUpInside)
@@ -555,18 +556,14 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         }
         
         
+        
+        
+        
         // Set Buttons
         //
         // Disable pressed buttons
         let indexOfUnpressedButton = buttonNumber[selectedMovement]
-        if indexOfUnpressedButton == setsArray[selectedMovement] - 1 {
-            for s in 0...indexOfUnpressedButton {
-                
-                buttonArray[s].isEnabled = false
-                buttonArray[s].backgroundColor = colour7
-                
-            }
-        } else if indexOfUnpressedButton > 0 {
+        if indexOfUnpressedButton > 0 {
             for s in 0...indexOfUnpressedButton - 1 {
     
                 buttonArray[s].isEnabled = false
@@ -577,7 +574,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     
     
         // Enable next unpressed button
-        if indexOfUnpressedButton == setsArray[selectedMovement] - 1 {
+        if indexOfUnpressedButton == setsArray[selectedMovement] {
             
         } else {
             buttonArray[indexOfUnpressedButton].isEnabled = true
@@ -681,20 +678,11 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         self.setsRepsLabel.text = (String(setsArray[selectedMovement]) + " x " + repsArray[selectedMovement])
         // Weight
         self.weightLabel.text = (String(weightArray[selectedMovement]) + UserDefaults.standard.string(forKey: "units")!)
-        // Demonstration
-        self.demonstrationLabel.text = NSLocalizedString("demonstration", comment: "")
-        // Target Area
-        self.targetAreaLabel.text = NSLocalizedString("targetArea", comment: "")
-        // Explanation
-        self.explanationLabel.text = NSLocalizedString("explanation", comment: "")
         // Progress
         self.progressLabel.text = (String(selectedMovement + 1)+"/"+String(workoutArray.count))
         
         setsRepsLabel.textColor = colour3
         weightLabel.textColor = colour3
-        demonstrationLabel.textColor = colour3
-        targetAreaLabel.textColor = colour3
-        explanationLabel.textColor = colour3
         progressLabel.textColor = colour3
         
         
@@ -1009,15 +997,20 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         buttonArray[buttonNumber[selectedMovement]].isEnabled = false
         
+        
+        // Increase Button Number
+        if self.buttonArray.count == 1 {
+        } else {
+            if self.buttonNumber[self.selectedMovement] < self.setsArray[self.selectedMovement] {
+                self.buttonNumber[self.selectedMovement] = self.buttonNumber[self.selectedMovement] + 1
+            }
+        }
+        // Enable Button
         let delayInSeconds = 2.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            
-            
             if self.buttonArray.count == 1 {
-                
             } else {
-                if self.buttonNumber[self.selectedMovement] < self.setsArray[self.selectedMovement] - 1  {
-                    self.buttonNumber[self.selectedMovement] = self.buttonNumber[self.selectedMovement] + 1
+                if self.buttonNumber[self.selectedMovement] < self.setsArray[self.selectedMovement] {
                     self.buttonArray[self.buttonNumber[self.selectedMovement]].isEnabled = true
                 }
             }
@@ -1039,7 +1032,6 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         self.view.bringSubview(toFront: timerButton2)
-        self.explanationLabel.text = NSLocalizedString("timer", comment: "")
         
         
         
@@ -1058,7 +1050,6 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         timerView.removeFromSuperview()
         
         self.view.bringSubview(toFront: timerButton)
-        self.explanationLabel.text = NSLocalizedString("explanation", comment: "")
         
         
         
@@ -1153,7 +1144,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         demonstrationButton.isEnabled = true
         demonstrationButton.frame = CGRect(x: 0, y: 0, width: imageViewExpanded.frame.size.width/2, height: 36.75)
         demonstrationButton.setTitle(NSLocalizedString("demonstration", comment: ""), for: .normal)
-        demonstrationButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        demonstrationButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)
         demonstrationButton.addTarget(self, action: #selector(demonstrationImageButton(_:)), for: .touchUpInside)
         
         imageViewExpanded.addSubview(demonstrationButton)
@@ -1166,7 +1157,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         targetButton.frame = CGRect(x: imageViewExpanded.frame.size.width/2, y: 0, width: imageViewExpanded.frame.size.width/2, height: 36.75)
         
         targetButton.setTitle(NSLocalizedString("targetArea", comment: ""), for: .normal)
-        targetButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        targetButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)
         targetButton.addTarget(self, action: #selector(bodyImageButton(_:)), for: .touchUpInside)
         
         targetButton.backgroundColor = .white
@@ -1473,14 +1464,14 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
     
     
     
-//    
-//    // Pass Data Back
-//    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-//        if let controller = viewController as? ClassicScreenFull2 {
-//            controller.buttonNumber = buttonNumber
-//            
-//        }
-//    }
+    
+    // Pass Data Back
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if let controller = viewController as? ClassicScreenFull2 {
+            controller.buttonNumber = buttonNumber
+            controller.tableView.reloadData()
+        }
+    }
     
 }
 

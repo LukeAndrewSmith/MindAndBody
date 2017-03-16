@@ -34,12 +34,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
-    // Titles
-    @IBOutlet weak var presetTitle: UILabel!
-    
-    @IBOutlet weak var tableTitle: UILabel!
-    
-    
+   
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
@@ -1246,14 +1241,6 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         navigationBar.title = (NSLocalizedString("fullBody", comment: ""))
         
         
-        // Titles
-        presetTitle.text = NSLocalizedString("presetWorkouts", comment: "")
-        tableTitle.text = NSLocalizedString("workoutTableTitle", comment: "")
-        presetTitle.textColor = colour3
-        tableTitle.textColor = colour3
-        
-        
-        
         
         // Plus Button Colour
         let origImage1 = UIImage(named: "Plus")
@@ -1583,7 +1570,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         if row < pickerViewArray.count {
             let rowLabel = UILabel()
             let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -1601,7 +1588,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             let rowLabel = UILabel()
             let titleDataArray = UserDefaults.standard.object(forKey: "workoutFullPresetTexts") as! [String]
             let titleData = titleDataArray[0]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -1612,7 +1599,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             let rowLabel = UILabel()
             let titleDataArray = UserDefaults.standard.object(forKey: "workoutFullPresetTexts") as! [String]
             let titleData = titleDataArray[1]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -1623,7 +1610,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             let rowLabel = UILabel()
             let titleDataArray = UserDefaults.standard.object(forKey: "workoutFullPresetTexts") as! [String]
             let titleData = titleDataArray[2]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 20)!,NSForegroundColorAttributeName:UIColor.black])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor.black])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -1633,6 +1620,11 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         return UIView()
         
         
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        
+        return 30
     }
     
     
@@ -2341,7 +2333,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
     {
         
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
         header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         header.contentView.backgroundColor = colour7
         //
@@ -2364,7 +2356,8 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.textLabel?.text = NSLocalizedString(workoutFullArray[indexPath.section][indexPath.row], comment: "")
         
         
-        cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+        cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+        cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.textLabel?.textAlignment = .left
         cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
@@ -2382,11 +2375,6 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         } else {
             cell.accessoryType = .none
             
-        }
-        
-        
-        if cell.textLabel?.text == NSLocalizedString("wristAnkleRotation", comment: "") {
-            cell.isUserInteractionEnabled = false
         }
         
         

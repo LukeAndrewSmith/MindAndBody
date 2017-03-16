@@ -1490,7 +1490,7 @@
         "movementScreen8" = "Enlarge Image\n\nThe images can be enlarged by pressing this button.";
         "movementScreen9" = "Explanation\n\nThe explanation of the movement is here, scroll down to read through it.";
         "movementScreen10" = "Enlarge Explanation\n\nThe explanation can be enlarged by pressing this button.";
-        "movementScreen11" = "Timer\n\nThe explanation can be swapped for a timer using this button, and will run in the background if you remain on the same screen (i.e don't press next or back).";
+        "movementScreen11" = "Timer\n\nThe explanation can be swapped for a timer using this button, and will run in the background if you remain on the same screen (i.e don't press next or back).\nPress the timer button again to return to the explanation.";
         "movementScreen12" = "Progress\n\nThe progress through the session is indicated in the format;\ncurrent movement/number of movements";
         "movementScreen13" = "Progress\n\nThe progress is shown in a progress bar as well.";
 

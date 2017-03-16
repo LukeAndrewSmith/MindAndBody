@@ -424,6 +424,7 @@ class ClassicScreenFull2: UITableViewController {
    
     
     
+    
     // Set Button
     @IBAction func setButtonAction(sender: UIButton) {
         
@@ -443,29 +444,38 @@ class ClassicScreenFull2: UITableViewController {
             
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
             
-            
         }
         
+        
+        // indexPath.row
         let buttonRow = sender.tag
         
         buttonArray[buttonRow][buttonNumber[buttonRow]].isEnabled = false
+
         
+        // Increase Button Number
+        if self.setsArray[buttonRow] == 1 {
+        } else {
+            if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] {
+                self.buttonNumber[buttonRow] = self.buttonNumber[buttonRow] + 1
+
+            }
+        }
+        
+        // Enable After Delay
         let delayInSeconds = 2.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            
-            
             if self.setsArray[buttonRow] == 1 {
-                
             } else {
-                if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] - 1 {
-                    self.buttonNumber[buttonRow] = self.buttonNumber[buttonRow] + 1
+                if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] {
                     self.buttonArray[buttonRow][self.buttonNumber[buttonRow]].isEnabled = true
                 }
             }
         }
         
-        sender.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         sender.isEnabled = false
+        sender.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+
         
     }
     
@@ -485,7 +495,7 @@ class ClassicScreenFull2: UITableViewController {
             buttonArray += [buttonArray2]
             buttonNumber.append(0)
         }
-        
+        buttonArray[0][0].isEnabled = true
     }
     
     
@@ -581,6 +591,16 @@ class ClassicScreenFull2: UITableViewController {
         
             
             
+            
+            
+            //
+            // Button Stuff
+            //
+            
+            // Button Tag
+            for b in buttonArray[indexPath.row] {
+                b.tag = indexPath.row
+            }
         
             // Set Button View
             //
@@ -615,24 +635,17 @@ class ClassicScreenFull2: UITableViewController {
             //
             // Disable pressed buttons
             let indexOfUnpressedButton = buttonNumber[indexPath.row]
-            if indexOfUnpressedButton == setsArray[indexPath.row] - 1 {
-                for s in 0...indexOfUnpressedButton {
-                    
-                    buttonArray[indexPath.row][s].isEnabled = false
-                    buttonArray[indexPath.row][s].backgroundColor = colour7
-                    
-                }
-            } else if indexOfUnpressedButton > 0 {
+            if indexOfUnpressedButton > 0 {
                 for s in 0...indexOfUnpressedButton - 1 {
                     
                     buttonArray[indexPath.row][s].isEnabled = false
-                    buttonArray[indexPath.row][s].backgroundColor = colour7
+                    buttonArray[indexPath.row][s].backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
                     
                 }
             }
             
             // Enable next unpressed button
-            if indexOfUnpressedButton == setsArray[indexPath.row] - 1 {
+            if indexOfUnpressedButton == setsArray[indexPath.row] {
                 
             } else {
                 buttonArray[indexPath.row][indexOfUnpressedButton].isEnabled = true
@@ -641,7 +654,7 @@ class ClassicScreenFull2: UITableViewController {
             
             
             //
-            buttonArray[indexPath.row][0].isEnabled = true
+            //buttonArray[indexPath.row][0].isEnabled = true
             
             
             

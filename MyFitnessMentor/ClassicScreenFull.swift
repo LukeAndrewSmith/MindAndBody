@@ -344,12 +344,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     @IBOutlet weak var setsRepsLabel: UILabel!
     // Weight
     @IBOutlet weak var weightLabel: UILabel!
-    // Demonstration
-    @IBOutlet weak var demonstrationLabel: UILabel!
-    // Target Area Label
-    @IBOutlet weak var targetAreaLabel: UILabel!
-    // Explanation Label
-    @IBOutlet weak var explanationLabel: UILabel!
+    // Explanation Text
     let explanationText = UILabel()
     // Progress Label
     @IBOutlet weak var progressLabel: UILabel!
@@ -555,7 +550,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         timerStart.backgroundColor = colour2
         timerStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
         timerStart.setTitleColor(colour6, for: .normal)
-        timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+        timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
         timerStart.titleLabel?.textAlignment = .center
         
         timerStart.addTarget(self, action: #selector(startTimer(_:)), for: .touchUpInside)
@@ -569,7 +564,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         timerCancel.backgroundColor = colour1
         timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
         timerCancel.setTitleColor(colour6, for: .normal)
-        timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+        timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
         timerCancel.titleLabel?.textAlignment = .center
         
         timerCancel.addTarget(self, action: #selector(cancelTimer(_:)), for: .touchUpInside)
@@ -879,20 +874,11 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         self.setsRepsLabel.text = (String(setsArray[workoutScreenIndex]) + " x " + repsArray[workoutScreenIndex])
         // Weight
         self.weightLabel.text = (String(weightArray[workoutScreenIndex]) + UserDefaults.standard.string(forKey: "units")!)
-            // Demonstration
-        self.demonstrationLabel.text = NSLocalizedString("demonstration", comment: "")
-        // Target Area
-        self.targetAreaLabel.text = NSLocalizedString("targetArea", comment: "")
-        // Explanation
-        self.explanationLabel.text = NSLocalizedString("explanation", comment: "")
         // Progress
         self.progressLabel.text = (String(workoutScreenIndex + 1)+"/"+String(workoutArray.count))
         
         setsRepsLabel.textColor = colour3
         weightLabel.textColor = colour3
-        demonstrationLabel.textColor = colour3
-        targetAreaLabel.textColor = colour3
-        explanationLabel.textColor = colour3
         progressLabel.textColor = colour3
         
         
@@ -1278,7 +1264,6 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         self.view.bringSubview(toFront: timerButton2)
-        self.explanationLabel.text = NSLocalizedString("timer", comment: "")
         
         
         
@@ -1297,7 +1282,6 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         timerView.removeFromSuperview()
         
         self.view.bringSubview(toFront: timerButton)
-        self.explanationLabel.text = NSLocalizedString("explanation", comment: "")
         
         
         
@@ -1392,7 +1376,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         demonstrationButton.isEnabled = true
         demonstrationButton.frame = CGRect(x: 0, y: 0, width: imageViewExpanded.frame.size.width/2, height: 36.75)
         demonstrationButton.setTitle(NSLocalizedString("demonstration", comment: ""), for: .normal)
-        demonstrationButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        demonstrationButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)
         demonstrationButton.addTarget(self, action: #selector(demonstrationImageButton(_:)), for: .touchUpInside)
         
         imageViewExpanded.addSubview(demonstrationButton)
@@ -1405,7 +1389,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         targetButton.frame = CGRect(x: imageViewExpanded.frame.size.width/2, y: 0, width: imageViewExpanded.frame.size.width/2, height: 36.75)
         
         targetButton.setTitle(NSLocalizedString("targetArea", comment: ""), for: .normal)
-        targetButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        targetButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)
         targetButton.addTarget(self, action: #selector(bodyImageButton(_:)), for: .touchUpInside)
         
         targetButton.backgroundColor = .white
