@@ -22,13 +22,133 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
+// Arrays -------------------------------------------------------------------------------------------------------------------------------------------------------
     
-    // Arrays
     
     
-        //
+    // Changeable Arrays to be used
+    // Movements Array
+    var warmupMovementsArray = [[String]]()
+    
+    // Selected Array
+    var warmupSelectedArray = [[Int]]()
+    
     // Picker View Array
-    var pickerViewArray =
+    var pickerViewArray = [[String]]()
+    
+    // TableView Section Array
+    var tableViewSectionArray = [[String]]()
+    
+    // Custom Presets
+        // Empty Array
+        var emptyArray = [[Int]]()
+    
+    
+    
+    
+    // Static Arrays
+    // Initial Custom Preset Texts
+    var presetTexts = ["", "", ""]
+    
+    
+    
+//
+// Warmup Type Arrays -------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+    
+    
+    //
+    // Full -----------------------------------------------------------------------------------------------------------------------------------------------
+    //
+    
+    // Warmup Full Movements Array
+    var warmupFullArray =
+        [
+            // Mandatory
+            ["5minCardioL",
+             "5minCardioI"],
+            // Joint Rotations
+            ["wrist",
+             "elbow",
+             "shoulder",
+             "neckR",
+             "waist",
+             "hip",
+             "knees",
+             "ankles"],
+            // Foam/Ball Roll
+            ["backf",
+             "thoracicSpine",
+             "lat",
+             "pecDelt",
+             "rearDelt",
+             "quadf",
+             "adductorf",
+             "hamstringf",
+             "glutef",
+             "calvef"],
+            // Lower Back
+            ["sideLegDrop",
+             "sideLegKick",
+             "scorpionKick",
+             "sideBend",
+             "catCow"],
+            // Shoulder
+            ["wallSlides",
+             "superManShoulder",
+             "scapula",
+             "shoulderRotation"],
+            // Band/Bar/Machine Assisted
+            ["facePull",
+             "externalRotation",
+             "internalRotation",
+             "shoulderDislocation",
+             "rearDeltFly",
+             "latPullover"],
+            // General Mobility
+            ["rollBack",
+             "hipCircles",
+             "mountainClimber",
+             "groinStretch",
+             "gluteBridge",
+             "threadTheNeedle",
+             "butterflyPose",
+             "cossakSquat",
+             "hipHinges",
+             "sideLegSwings",
+             "frontLegSwings",
+             "jumpSquat",
+             "lunge"],
+            // Accessory
+            ["latStretch",
+             "calveStretch",
+             "pushUp",
+             "pullUp"]
+        ]
+    
+    // Warmup
+    let warmupFullSelectedArray =
+        [
+            // Mandatory
+            [0, 0],
+            // Joint Rotations
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            // Foam/Ball Roll
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            // Lower Back
+            [0, 0, 0, 0, 0],
+            // Shoulder
+            [0, 0, 0, 0],
+            // Band/Bar/Machine Assisted
+            [0, 0, 0, 0, 0, 0],
+            // General Mobility
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            // Accessory
+            [0, 0, 0, 0]
+        ]
+    
+    // Picker View Array
+    var pickerViewArrayFull =
         [
             "default",
             "beginner",
@@ -38,15 +158,22 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             "highIntensity",
             "quick"
         ]
-
     
+    // Table View Section Title Array
+    var tableViewSectionArrayFull =
+        [
+            "mandatory",
+            "jointRotation",
+            "foamRoll",
+            "lowerBack",
+            "shoulder",
+            "bandAssisted",
+            "generalMobility",
+            "accessory"
+        ]
     
-        // Initial Upper Custom Preset Arrays
+        // Custom Preset Full
         //
-    
-            //
-            // Full
-            //
             let emptyArrayFull =
                 [
                     // Mandatory
@@ -125,96 +252,103 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 ]
             ]
     
-        // Warmup Full Movements Array
-        var warmupFullArray =
-            [
-                // Mandatory
-                ["5minCardioL",
-                 "5minCardioI"],
-                // Joint Rotations
-                ["wrist",
-                 "elbow",
-                 "shoulder",
-                "neckR",
-                "waist",
-                "hip",
-                "knees",
-                "ankles"],
-                // Foam/Ball Roll
-                ["backf",
-                "thoracicSpine",
-                "lat",
-                "pecDelt",
-                "rearDelt",
-                "quadf",
-                "adductorf",
-                "hamstringf",
-                "glutef",
-                "calvef"],
-                // Lower Back
-                ["sideLegDrop",
-                 "sideLegKick",
-                 "scorpionKick",
-                 "sideBend",
-                "catCow"],
-                // Shoulder
-                ["wallSlides",
-                 "superManShoulder",
-                 "scapula",
-                "shoulderRotation"],
-                // Band/Bar/Machine Assisted
-                ["facePull",
-                 "externalRotation",
-                "internalRotation",
-                "shoulderDislocation",
-                "rearDeltFly",
-                "latPullover"],
-                // General Mobility
-                ["rollBack",
-                 "hipCircles",
-                 "mountainClimber",
-                 "groinStretch",
-                 "gluteBridge",
-                "threadTheNeedle",
-                "butterflyPose",
-                "cossakSquat",
-                "hipHinges",
-                "sideLegSwings",
-                "frontLegSwings",
-                "jumpSquat",
-                "lunge"],
-                // Accessory
-                ["latStretch",
-                 "calveStretch",
-                 "pushUp",
-                 "pullUp"]
-            ]
-        //
-        // Warmup
-        let warmupFullSelectedArray =
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // Shoulder
-                [0, 0, 0, 0],
-                // Band/Bar/Machine Assisted
-                [0, 0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0, 0]
-            ]
     
     
-            //
-            // Upper
-            //
+    //
+    // Upper -----------------------------------------------------------------------------------------------------------------------------------------------
+    //
+    
+    
+    // Warmup Upper Array
+    var warmupUpperArray =
+        [
+            // Mandatory
+            ["5minCardioL",
+             "5minCardioI"],
+            // Joint Rotations
+            ["wrist",
+             "elbow",
+             "shoulderR",
+             "neckR",
+             "waist",
+             "hip",
+             "knees",
+             "ankles"],
+            // Foam/Ball Roll
+            ["backf",
+             "thoracicSpine",
+             "lat",
+             "pecDelt",
+             "rearDelt"],
+            // Lower Back
+            ["sideLegDrop",
+             "sideLegKick",
+             "scorpionKick",
+             "sideBend",
+             "catCow"],
+            // Shoulder
+            ["wallSlides",
+             "superManShoulder",
+             "scapula",
+             "shoulderRotation"],
+            // Band/Bar/Machine Assisted
+            ["facePull",
+             "externalRotation",
+             "internalRotation",
+             "shoulderDislocation",
+             "rearDeltFly",
+             "latPullover"],
+            // Accessory
+            ["latStretch",
+             "pushUp",
+             "pullUp"]
+        ]
+    
+    // Default Warmup Selected Array
+    var warmupSelectedArrayUpper =
+        [
+            // Mandatory
+            [1, 0],
+            // Joint Rotations
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            // Foam/Ball Roll
+            [1, 0, 0, 0, 0],
+            // Lower Back
+            [1, 0, 1, 0, 1],
+            // Shoulders
+            [1, 0, 0, 1],
+            // Band Assisted
+            [1, 1, 0, 1, 0, 0],
+            // Accessory
+            [1, 1, 1]
+        ]
+    
+    // Picker View Array
+    var pickerViewArrayUpper =
+        [
+            "default",
+            "beginner",
+            "bodyWeight",
+            "bodybuilding",
+            "strength",
+            "highIntensity",
+            "quick"
+        ]
+    
+    // Table View Section Title Array
+    var tableViewSectionArrayUpper =
+        [
+            "mandatory",
+            "jointRotation",
+            "foamRoll",
+            "lowerBack",
+            "shoulder",
+            "bandAssisted",
+            "accessory"
+        ]
+    
+    // Custom Presets Upper
+    //
             let emptyArrayUpper =
                 [
                     // Mandatory
@@ -286,10 +420,101 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             ]
     
     
+    //
+    // Lower -----------------------------------------------------------------------------------------------------------------------------------------------
+    //
+
     
-            //
-            // Lower
-            //
+    // Warmup Lower Array
+    var warmupLowerArray =
+        [
+            // Mandatory
+            ["5minCardioL",
+             "5minCardioI"],
+            // Joint Rotations
+            ["wrist",
+             "elbow",
+             "shoulderR",
+             "neckR",
+             "waist",
+             "hip",
+             "knees",
+             "ankles"],
+            // Foam/Ball Roll
+            ["backf",
+             "thoracicSpine",
+             "quadf",
+             "adductorf",
+             "hamstringf",
+             "glutef",
+             "calvef"],
+            // Lower Back
+            ["sideLegDrop",
+             "sideLegKick",
+             "scorpionKick",
+             "sideBend",
+             "catCow"],
+            // General Mobility
+            ["rollBack",
+             "hipCircles",
+             "mountainClimber",
+             "groinStretch",
+             "gluteBridge",
+             "threadTheNeedle",
+             "butterflyPose",
+             "cossakSquat",
+             "hipHinges",
+             "sideLegSwings",
+             "frontLegSwings",
+             "jumpSquat",
+             "lunge"],
+            // Accessory
+            ["wallSlides",
+             "calveStretch"]
+        ]
+    
+    // Default Warmup Selected Array
+    var warmupSelectedArrayLower =
+        [
+            // Mandatory
+            [1, 0],
+            // Joint Rotations
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            // Foam/Ball Roll
+            [0, 1, 1, 0, 1, 0, 0],
+            // Lower Back
+            [1, 0, 1, 0, 1],
+            // General Mobility
+            [0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0],
+            // Accessory
+            [1, 1]
+    ]
+    
+    // Picker View Array
+    var pickerViewArrayLower =
+        [
+            "default",
+            "beginner",
+            "bodyWeight",
+            "bodybuilding",
+            "strength",
+            "highIntensity",
+            "quick"
+        ]
+    
+    // Table View Section Title Array
+    var tableViewSectionArrayLower =
+        [
+            "mandatory",
+            "jointRotation",
+            "foamRoll",
+            "lowerBack",
+            "generalMobility",
+            "accessory"
+        ]
+    
+    // Custom Presets Lower
+    //
             let emptyArrayLower =
                 [
                     // Mandatory
@@ -353,10 +578,106 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             ]
 
     
+    //
+    // Cardio -----------------------------------------------------------------------------------------------------------------------------------------------
+    //
+    // Warmup Cardio Array
+    var warmupCardioArray =
+        [
+            // Joint Rotations
+            ["wrist",
+             "elbow",
+             "shoulderR",
+             "neckR",
+             "waist",
+             "hip",
+             "knees",
+             "ankles"],
+            // Foam/Ball Roll
+            ["thoracicSpine",
+             "lat",
+             "quadf",
+             "adductorf",
+             "hamstringf",
+             "glutef",
+             "calvef"],
+            // Lower Back
+            ["sideLegDrop",
+             "sideLegKick",
+             "scorpionKick",
+             "sideBend",
+             "catCow"],
+            // General Mobility
+            ["hipCircles",
+             "mountainClimber",
+             "groinStretch",
+             "gluteBridge",
+             "threadTheNeedle",
+             "butterflyPose",
+             "cossakSquat",
+             "hipHinges",
+             "sideLegSwings",
+             "frontLegSwings"],
+            // Dynamic Warm Up Drills
+            ["jumpSquat",
+             "lunge",
+             "gluteKicks",
+             "aSkips",
+             "bSkips",
+             "grapeVines",
+             "lateralBound",
+             "straightLegBound",
+             "sprints"],
+            // Accessory
+            ["wallSlides",
+             "latStretch",
+             "calveStretch"]
+        ]
     
-            //
-            // Cardio
-            //
+    
+    // Default Warmup Selected Array
+    var warmupSelectedArray =
+        [
+            // Joint Rotations
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            // Foam/Ball Roll
+            [0, 0, 0, 0, 0, 0, 0],
+            // Lower Back
+            [0, 0, 0, 0, 0],
+            // General Mobility
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            // Dynamic Warm Up Drills
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            // Accessory
+            [0, 0, 0]
+        ]
+    
+    // Picker View Array
+    var pickerViewArrayCardio =
+        [
+            "default",
+            "beginner",
+            "bodyWeight",
+            "bodybuilding",
+            "strength",
+            "highIntensity",
+            "quick"
+            
+        ]
+    
+    // Table View Section Title Array
+    var tableViewSectionArrayCardio =
+        [
+            "jointRotation",
+            "foamRoll",
+            "lowerBack",
+            "generalMobility",
+            "dynamicWarmupDrills",
+            "accessory"
+        ]
+    
+    // Warmup Presets Cardio
+    //
             let emptyArrayCardio =
                 [
                     // Joint Rotations
@@ -421,104 +742,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
-    
-    
-        // Initial Custom Preset Texts
-        var presetTexts = ["", "", ""]
-    
-    
-    
-    
-    
-    // Warmup Upper Array
-    var warmupUpperArray =
-        [
-            // Mandatory
-            ["5minCardioL",
-             "5minCardioI"],
-            // Joint Rotations
-            ["wrist",
-             "elbow",
-             "shoulderR",
-             "neckR",
-             "waist",
-             "hip",
-             "knees",
-             "ankles"],
-            // Foam/Ball Roll
-            ["backf",
-             "thoracicSpine",
-             "lat",
-             "pecDelt",
-             "rearDelt"],
-            // Lower Back
-            ["sideLegDrop",
-             "sideLegKick",
-             "scorpionKick",
-             "sideBend",
-             "catCow"],
-            // Shoulder
-            ["wallSlides",
-             "superManShoulder",
-             "scapula",
-             "shoulderRotation"],
-            // Band/Bar/Machine Assisted
-            ["facePull",
-             "externalRotation",
-             "internalRotation",
-             "shoulderDislocation",
-             "rearDeltFly",
-             "latPullover"],
-            // Accessory
-            ["latStretch",
-             "pushUp",
-             "pullUp"]
-    ]
-    
-    
-
-    
-    
-    
-    
-    
-    
-    // Default Warmup Selected Array
-    var warmupSelectedArray =
-        [
-            // Mandatory
-            [1, 0],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [1, 0, 0, 0, 0],
-            // Lower Back
-            [1, 0, 1, 0, 1],
-            // Shoulders
-            [1, 0, 0, 1],
-            // Band Assisted
-            [1, 1, 0, 1, 0, 0],
-            // Accessory
-            [1, 1, 1]
-    ]
-    
-    
-    ]
-    
-    // Table View Section Title Array
-    var tableViewSectionArray =
-        [
-            "mandatory",
-            "jointRotation",
-            "foamRoll",
-            "lowerBack",
-            "shoulder",
-            "bandAssisted",
-            "accessory"
-    ]
-    
-    
-
+    // 
     
     
     
@@ -526,28 +750,9 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    //
+    // Outlets
+    //
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
