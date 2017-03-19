@@ -2403,6 +2403,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 beginButton.isEnabled = false
             }
         }
+        
     }
     
     
@@ -2898,13 +2899,23 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         
+        if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
+            
+            performSegue(withIdentifier: "warmupSessionSegue1", sender: nil)
+            
+        } else {
+            
+            performSegue(withIdentifier: "warmupSessionSegue2", sender: nil)
+        }
+        
+        
+        // Return background to homescreen
         let delayInSeconds = 1.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             
             _ = self.navigationController?.popToRootViewController(animated: false)
             
         }
-        
     }
     
     
@@ -2913,12 +2924,12 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // Pass Array to next ViewController
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "warmupSessionSegue") {
+        if (segue.identifier == "warmupSessionSegue1") {
             
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! WarmupScreen
+            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenTest
             
             destinationVC.warmupMovementsArray = warmupMovementsArray
             destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
@@ -2931,6 +2942,30 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             destinationVC.explanationArrayF = explanationArrayF
             
             
+        } else if (segue.identifier == "warmupSessionSegue2") {
+            
+            
+            let destinationNC = segue.destination as! UINavigationController
+            
+            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenOverview
+            
+            destinationVC.warmupMovementsArray = warmupMovementsArray
+            destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
+            
+            
+            destinationVC.setsArrayF = setsArrayF
+            destinationVC.repsArrayF = repsArrayF
+            destinationVC.demonstrationArrayF = demonstrationArrayF
+            destinationVC.targetAreaArrayF = targetAreaArrayF
+            destinationVC.explanationArrayF = explanationArrayF
+            
+            let pickerIndex = pickerView.selectedRow(inComponent: 0)
+            if pickerIndex < pickerViewArray.count - 1 {
+                destinationVC.warmupTitle = pickerViewArray[pickerIndex]
+            } else if pickerIndex > pickerViewArray.count - 1 {
+                let pickerArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
+                destinationVC.warmupTitle = pickerArray[pickerIndex - pickerViewArray.count]
+            }
         }
     }
     

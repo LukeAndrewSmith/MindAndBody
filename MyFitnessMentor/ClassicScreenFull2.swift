@@ -454,7 +454,7 @@ class ClassicScreenFull2: UITableViewController {
 
         
         // Increase Button Number
-        if self.setsArray[buttonRow] == 1 {
+        if self.setsArray[buttonRow] == 0 {
         } else {
             if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] {
                 self.buttonNumber[buttonRow] = self.buttonNumber[buttonRow] + 1
@@ -465,7 +465,7 @@ class ClassicScreenFull2: UITableViewController {
         // Enable After Delay
         let delayInSeconds = 2.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            if self.setsArray[buttonRow] == 1 {
+            if self.setsArray[buttonRow] == 0 {
             } else {
                 if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] {
                     self.buttonArray[buttonRow][self.buttonNumber[buttonRow]].isEnabled = true
@@ -857,9 +857,7 @@ class ClassicScreenFull2: UITableViewController {
             let destinationVC = segue.destination as! ClassicScreenFullDetail
     
             let indexPath = tableView.indexPathForSelectedRow
-            
             let indexPathInt = Int((indexPath?.row)!)
-            
             destinationVC.selectedMovement = indexPathInt
             
             

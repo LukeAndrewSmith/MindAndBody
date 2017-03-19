@@ -122,6 +122,9 @@ class MindBody: UIViewController {
     @IBOutlet weak var stack3Bottom: NSLayoutConstraint!
     
     
+    // Background Image
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
     
     
     // Labels
@@ -195,6 +198,14 @@ class MindBody: UIViewController {
         
         
         
+        
+        // Background Image
+        //backgroundImage.frame = view.bounds
+        //backgroundImage.image = #imageLiteral(resourceName: "Test Background")
+        
+        
+        
+        
         // Navigation Bar
         navigationBar.title = "Mind & Body"
         
@@ -219,7 +230,8 @@ class MindBody: UIViewController {
         
         
       
-       // Title
+        // Title
+        
         
         // Button Titles
         Warmup.setTitle(NSLocalizedString("warmup", comment: ""), for: UIControlState.normal)
@@ -375,6 +387,44 @@ class MindBody: UIViewController {
             Meditation.layer.masksToBounds = true
             
             
+            
+//            // Blur Effect
+//            let blur = UIVisualEffectView(effect: UIBlurEffect(style:
+//                UIBlurEffectStyle.light))
+//            blur.frame = Warmup.bounds
+//            blur.isUserInteractionEnabled = false
+//            Warmup.insertSubview(blur, at: 0)
+//            
+//            let blur1 = UIVisualEffectView(effect: UIBlurEffect(style:
+//                UIBlurEffectStyle.light))
+//            blur1.frame = Workout.bounds
+//            blur1.isUserInteractionEnabled = false
+//            Workout.insertSubview(blur1, at: 0)
+//            
+//            let blur2 = UIVisualEffectView(effect: UIBlurEffect(style:
+//                UIBlurEffectStyle.light))
+//            blur2.frame = Cardio.bounds
+//            blur2.isUserInteractionEnabled = false
+//            Cardio.insertSubview(blur2, at: 0)
+//            
+//            let blur3 = UIVisualEffectView(effect: UIBlurEffect(style:
+//                UIBlurEffectStyle.light))
+//            blur3.frame = Stretching.bounds
+//            blur3.isUserInteractionEnabled = false
+//            Stretching.insertSubview(blur3, at: 0)
+//            
+//            let blur4 = UIVisualEffectView(effect: UIBlurEffect(style:
+//                UIBlurEffectStyle.light))
+//            blur4.frame = Yoga.bounds
+//            blur4.isUserInteractionEnabled = false
+//            Yoga.insertSubview(blur4, at: 0)
+//            
+//            let blur5 = UIVisualEffectView(effect: UIBlurEffect(style:
+//                UIBlurEffectStyle.light))
+//            blur5.frame = Meditation.bounds
+//            blur5.isUserInteractionEnabled = false
+//            Meditation.insertSubview(blur5, at: 0)
+
         }
     
     
@@ -385,6 +435,7 @@ class MindBody: UIViewController {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
     }
 
     

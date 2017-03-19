@@ -2494,28 +2494,23 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         
-        
         if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
             
             performSegue(withIdentifier: "workoutFull1", sender: nil)
 
-            
         } else {
             
             performSegue(withIdentifier: "workoutFull2", sender: nil)
         }
         
         
-        
-        
-        
+        // Return background to homescreen
         let delayInSeconds = 1.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             
             _ = self.navigationController?.popToRootViewController(animated: false)
             
         }
-        
     }
     
     
@@ -2562,7 +2557,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
                 destinationVC.workoutTitle = pickerViewArray[pickerIndex]
             } else if pickerIndex > pickerViewArray.count - 1 {
                 let pickerArray = UserDefaults.standard.object(forKey: "workoutFullPresetTexts") as! [String]
-                destinationVC.workoutTitle = pickerArray [pickerIndex - pickerViewArray.count]
+                destinationVC.workoutTitle = pickerArray[pickerIndex - pickerViewArray.count]
             }
             
             
@@ -2572,8 +2567,6 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             } else {
                 destinationVC.weightArrayF = weightDictionaryLB[pickerView.selectedRow(inComponent: 0)]!
             }
-            
-            
             
         }
     }

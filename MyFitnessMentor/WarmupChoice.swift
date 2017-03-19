@@ -328,13 +328,9 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
             }, completion: nil)
             self.informationViewWarmupC.contentOffset.y = 0
 
-            
-            
         }
-        
-        
-        
     }
+    
     
     
     // Handle Swipes

@@ -999,7 +999,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         
         
         // Increase Button Number
-        if self.buttonArray.count == 1 {
+        if self.buttonArray.count == 0 {
         } else {
             if self.buttonNumber[self.selectedMovement] < self.setsArray[self.selectedMovement] {
                 self.buttonNumber[self.selectedMovement] = self.buttonNumber[self.selectedMovement] + 1
@@ -1008,7 +1008,7 @@ class ClassicScreenFullDetail: UIViewController, UIScrollViewDelegate, UIPickerV
         // Enable Button
         let delayInSeconds = 2.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            if self.buttonArray.count == 1 {
+            if self.buttonArray.count == 0 {
             } else {
                 if self.buttonNumber[self.selectedMovement] < self.setsArray[self.selectedMovement] {
                     self.buttonArray[self.buttonNumber[self.selectedMovement]].isEnabled = true
