@@ -1480,27 +1480,34 @@
 
 
         // Movement Screen
-        "movementScreen1" = "Movement\n\nThis is the name of the movement.";
-        "movementScreen2" = "Next Button\n\nPress the next button when finished with the movement to go to the next.";
-        "movementScreen3" = "Back Buton\n\nThe back button is there incase you press next by accident.";
-        "movementScreen4" = "Sets & Reps\n\nThe sets and reps are given in the form: sets x reps.\nReps can take the form of an amount of time.\n\nA rep is a repetition of a movement, and a set is a group of reps.";
-        "movementScreen5" = "Sets\n\nThe number of sets are represented by the number of circular buttons. When you finish a set press the button to activate a rest timer (a notification pops up upon completion)";
-        "movementScreen6" = "Demonstration\n\nThe demonstration is often in the form of a video (indicated by a play button in the top right hand corner), press anywhere on the video to play one rep of the movement.";
-        "movementScreen7" = "Target Area\n\nThe image highlights in red the body parts being targeted.";
-        "movementScreen8" = "Enlarge Image\n\nThe images can be enlarged by pressing this button.";
-        "movementScreen9" = "Explanation\n\nThe explanation of the movement is here, scroll down to read through it.";
-        "movementScreen10" = "Enlarge Explanation\n\nThe explanation can be enlarged by pressing this button.";
-        "movementScreen11" = "Timer\n\nThe explanation can be swapped for a timer using this button, and will run in the background if you remain on the same screen (i.e don't press next or back).\nPress the timer button again to return to the explanation.";
+        "movementScreen0" = "Movement\n\nThis is the name of the movement.";
+        "movementScreen1" = "Next Button\n\nPress the next button when finished with the movement to proceed.";
+        "movementScreen2" = "Back Buton\n\nIncase you need to go back a movement.";
+        "movementScreen3" = "Demonstration\n\nThe demonstration is often in the form of a video (indicated by a play button in the top right), press the video to view one rep of the movement.";
+        "movementScreen4" = "Target Area Button\n\nThe target area can be viewed by pressing this next button or by swiping the image left.";
+        "movementScreen5" = "Target Area\n\nThe image highlights in red the body parts being targeted.";
+        "movementScreen6" = "Demonstration Button\n\nReturn to the demonstration by pressing this back button or by swiping the image right.";
+//
+        "movementScreen7" = "Sets & Reps\n\nThe sets and reps are given in the form: sets x reps.\nReps can take the form of an amount of time.\n\nA rep is a repetition of a movement, and a set is a group of reps .(sets are usually seperated by a rest)";
+        "movementScreen8" = "Sets\n\nThe number of sets are represented by the number of circular buttons. When you finish a set press the button to activate a rest timer (a notification pops up to tell you to start the next set)";
+//
+        "movementScreen9" = "Timer\n\nA timer is provided and accessed with this button. Once open, it can be dismissed by pressing the darker area above the timer.\nThe timer will run in the background if you remain on the same screen (i.e don't press next or back).";
+        "movementScreen10" = "Explanation\n\nThe explanation for the movement is accessed using this button, scroll down to read through it.\nOnce open, it can be dismissed by pressing the darker area above the explanation.";
+        "movementScreen11" = "Pocket Mode\n\nActivate pocket mode before you put your phone in your pocket so as to avoid the accidentall pressing of buttons.";
+
+
         "movementScreen12" = "Progress\n\nThe progress through the session is indicated in the format;\ncurrent movement/number of movements";
         "movementScreen13" = "Progress\n\nThe progress is shown in a progress bar as well.";
 
-        "movementScreenh" = "Pocket Mode\n\nActivate pocket mode before you put your phone in your pocket so as to avoid accidentally pressing buttons on the screen.";
+
+
+        // Workout
         "movementScreens" = "Sets & Reps\n\nThe sets and reps are given in the form: sets x reps.\nReps can take the form of an amount of time.\n\nA rep is a repetition of a movement, and a set is a group of reps.\n\n1 or 2 warm up sets should be performed in addition before the working sets. The first using a very light weight or just the bar, and the second using half the working set weight.";
         "movementScreenw" = "Weight\n\nA suggested starting weight is provided to give an idea of the weight to use. It is important however to get to know your strength and understand what weight works for you (this may vary day to day).\nDon't put excess weight as this greatly hinders progress, and for a beginner it is advised to use lower weights for longer to allow your muscles to get used to the movements.";
-        //
+        // Stretching
         "movementScreen1m" = "Movement\n\nThis is the name of the movement/stretch.";
         "movementScreen2m" = "Next Button\n\nPress the next button when finished with the movement\stretch to go to the next.";
-        //
+        // Yoga
         "yogaScreen1" = "Pose\n\nThis is the name of the pose.";
         "yogaScreen2" = "Next Button\n\nPress the next button when finished with the pose to go to the next.";
         // movementScreen3
@@ -1510,6 +1517,7 @@
         // movementScreen8
         // movementScreen12
         // movementScreen13
+
 
 
 

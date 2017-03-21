@@ -207,14 +207,14 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         super.viewDidLoad()
         
         
-//        // Walkthrough
-//        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough3") == false {
-//            let delayInSeconds = 0.5
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-//                self.walkthroughMindBody()
-//            }
-//            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough3")
-//        }
+        // Walkthrough
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough3") == false {
+            let delayInSeconds = 0.5
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.walkthroughMindBody()
+            }
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough3")
+        }
         
         
         
@@ -356,7 +356,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         minuteLabel.text = NSLocalizedString("minutes", comment: "")
-        minuteLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
+        minuteLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
         minuteLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         minuteLabel.textAlignment = .left
         
@@ -371,7 +371,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         secondLabel.text = NSLocalizedString("seconds", comment: "")
-        secondLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
+        secondLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
         secondLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         secondLabel.textAlignment = .left
         
@@ -387,12 +387,10 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         // Start Button Timer
         //
-        timerStart.layer.borderWidth = timerStart.frame.size.height/4
-        timerStart.layer.borderColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0).cgColor
         timerStart.backgroundColor = colour2
         timerStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
         timerStart.setTitleColor(colour6, for: .normal)
-        timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         timerStart.titleLabel?.textAlignment = .center
         
         timerStart.addTarget(self, action: #selector(startTimer(_:)), for: .touchUpInside)
@@ -402,12 +400,11 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         // Cancel Button Timer
         //
-        timerCancel.layer.borderWidth = timerCancel.frame.size.height/4
-        timerCancel.layer.borderColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0).cgColor
+        
         timerCancel.backgroundColor = colour1
         timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
         timerCancel.setTitleColor(colour6, for: .normal)
-        timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         timerCancel.titleLabel?.textAlignment = .center
         
         timerCancel.addTarget(self, action: #selector(cancelTimer(_:)), for: .touchUpInside)
@@ -418,7 +415,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         // Countdown Label
         countDownLabel.textAlignment = .center
-        countDownLabel.font = UIFont(name: "SFUIDisplay-Light", size: 27)
+        countDownLabel.font = UIFont(name: "SFUIDisplay-Light", size: 43)
         countDownLabel.text = "00:00"
         countDownLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
@@ -726,6 +723,8 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     // Count Down Timer
     //
     
+    var isTiming = false
+
     
     // Timer CountDown Value
     func setTimerValue() {
@@ -757,7 +756,10 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         if timerValue == 0{
             self.timerCountDown.invalidate()
             removeCircle()
-            self.pickerViewTimer.bringSubview(toFront: timerStart)
+            timerView.bringSubview(toFront: timerStart)
+            countDownLabel.removeFromSuperview()
+            pickerViewTimer.alpha = 1
+            isTiming = false
             
         } else if timerValue == 1 {
             
@@ -777,7 +779,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     // Funcs
     func addCircle() {
-        let circlePath = UIBezierPath(arcCenter: countDownLabel.center, radius: CGFloat((timerView.frame.size.height-10)/2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(2*M_PI-M_PI_2), clockwise: true)
+        let circlePath = UIBezierPath(arcCenter: countDownLabel.center, radius: CGFloat((pickerViewTimer.frame.size.height-10)/2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(2*M_PI-M_PI_2), clockwise: true)
         timerShapeLayer.path = circlePath.cgPath
         timerShapeLayer.fillColor = UIColor.clear.cgColor
         timerShapeLayer.strokeColor = colour1.cgColor
@@ -810,16 +812,26 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     @IBAction func startTimer(_ sender: Any) {
         
         setTimerValue()
-        
+        isTiming = true
         
         if timerValue == 0 {
             
         } else {
             
             
-            self.pickerViewTimer.bringSubview(toFront: timerCancel)
+            self.timerView.bringSubview(toFront: timerCancel)
+            
+            pickerViewTimer.alpha = 0
+            timerView.addSubview(countDownLabel)
+            timerView.bringSubview(toFront: countDownLabel)
+            
             
             self.countDownLabel.text = timeFormatted(totalSeconds: timerValue)
+            
+            
+            
+            
+            
             
             let delayInSeconds = 0.1
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -859,12 +871,15 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
 
     @IBAction func cancelTimer(_ sender: Any) {
         
-        
         self.timerCountDown.invalidate()
         self.timerValue = 0
         self.countDownLabel.text = "00:00"
         removeCircle()
-        self.pickerViewTimer.bringSubview(toFront: timerStart)
+        self.timerView.bringSubview(toFront: timerStart)
+        countDownLabel.removeFromSuperview()
+        pickerViewTimer.alpha = 1
+        isTiming = false
+        
         
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
         
@@ -896,7 +911,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             
             let rowLabel = UILabel()
             let titleData = String(minuteData[row])
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 27)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -905,7 +920,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             
             let rowLabel = UILabel()
             let titleData = String(secondData[row])
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 27)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -913,6 +928,10 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         }
         
         return UIView()
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 30
     }
     
     
@@ -923,10 +942,10 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         self.timerValue = 0
         removeCircle()
         self.countDownLabel.text = "00:00"
-        self.pickerViewTimer.bringSubview(toFront: timerStart)
+        timerView.bringSubview(toFront: timerStart)
+        isTiming = false
         
     }
-    
     
     
     
@@ -936,47 +955,11 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
 
     @IBAction func timerViewButton(_ sender: Any) {
         
-        // Picker View Timer
+        
         //
-        pickerViewTimer.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width/2, height: self.timerView.frame.size.height)
-        view.addSubview(pickerViewTimer)
+        nextButton.isEnabled = false
+        backButton.isEnabled = false
         
-        // Pick Minutes
-        //
-        minutePicker.frame = CGRect(x: 10, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
-        pickerViewTimer.addSubview(minutePicker)
-        minuteLabel.frame = CGRect(x: 10 + minutePicker.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
-        pickerViewTimer.addSubview(minuteLabel)
-        
-        // Pick Seconds
-        //
-        secondPicker.frame = CGRect(x: 10 + minutePicker.frame.size.width + minuteLabel.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
-        pickerViewTimer.addSubview(secondPicker)
-        
-        secondLabel.frame = CGRect(x: 10 + minutePicker.frame.size.width + minuteLabel.frame.size.width + secondPicker.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
-        
-        
-        pickerViewTimer.addSubview(secondLabel)
-        
-        timerView.addSubview(pickerViewTimer)
-        
-        
-        // Start Button Timer
-        //
-        timerStart.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
-        pickerViewTimer.addSubview(timerStart)
-        
-        
-        // Cancel Button Timer
-        //
-        timerCancel.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
-        pickerViewTimer.addSubview(timerCancel)
-        
-        pickerViewTimer.bringSubview(toFront: timerStart)
-        
-        // Countdown Label
-        countDownLabel.frame = CGRect(x: self.timerView.frame.size.width/2, y: 0, width: self.timerView.frame.size.width/2, height: self.timerView.frame.size.height)
-        self.timerView.addSubview(countDownLabel)
         
         
         // Timer View
@@ -984,6 +967,74 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         timerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height/2)
         timerView.center.x = self.view.frame.size.width/2
         timerView.center.y = (self.view.frame.size.height/2) * 2.5
+        
+
+        
+        // Picker View Timer
+        //
+        pickerViewTimer.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * (2/3), height: self.timerView.frame.size.height * (2/3))
+        pickerViewTimer.center.x = timerView.center.x
+        timerView.addSubview(pickerViewTimer)
+        
+        // Pick Minutes
+        //
+        minutePicker.frame = CGRect(x: 10, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
+        minutePicker.center.y = pickerViewTimer.center.y
+        pickerViewTimer.addSubview(minutePicker)
+        //
+        minuteLabel.frame = CGRect(x: 10 + minutePicker.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
+        minuteLabel.center.y = pickerViewTimer.center.y
+        pickerViewTimer.addSubview(minuteLabel)
+        
+        // Pick Seconds
+        //
+        secondPicker.frame = CGRect(x: 10 + minutePicker.frame.size.width + minuteLabel.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
+        secondPicker.center.y = pickerViewTimer.center.y
+        pickerViewTimer.addSubview(secondPicker)
+        //
+        secondLabel.frame = CGRect(x: 10 + minutePicker.frame.size.width + minuteLabel.frame.size.width + secondPicker.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
+        secondLabel.center.y = pickerViewTimer.center.y
+        pickerViewTimer.addSubview(secondLabel)
+        
+        timerView.addSubview(pickerViewTimer)
+        
+        
+        
+        
+        
+        // Start Button Timer
+        //
+        timerStart.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
+        timerStart.center.x = timerView.center.x
+        timerStart.layer.borderWidth = timerStart.frame.size.height/4
+        timerStart.layer.borderColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0).cgColor
+        timerStart.layer.cornerRadius = (timerStart.frame.height - (timerStart.frame.size.height/4)) / 2
+        timerStart.clipsToBounds = true
+        timerView.addSubview(timerStart)
+        
+        
+        // Cancel Button Timer
+        //
+        timerCancel.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
+        timerCancel.center.x = timerView.center.x
+        timerCancel.layer.borderWidth = timerCancel.frame.size.height/4
+        timerCancel.layer.borderColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0).cgColor
+        timerCancel.layer.cornerRadius = (timerCancel.frame.height - (timerCancel.frame.size.height/4)) / 2
+        timerCancel.clipsToBounds = true
+        timerView.addSubview(timerCancel)
+        
+        if isTiming == false {
+            timerView.bringSubview(toFront: timerStart)
+        } else if isTiming == true {
+            timerView.bringSubview(toFront: timerCancel)
+
+        }
+        
+        // Countdown Label
+        countDownLabel.frame = CGRect(x: self.timerView.frame.size.width/2, y: 0, width: self.timerView.frame.size.width/2, height: self.timerView.frame.size.height)
+        countDownLabel.center.x = timerView.center.x
+        countDownLabel.center.y = pickerViewTimer.center.y
+        //self.timerView.addSubview(countDownLabel)
         
         
         
@@ -1004,9 +1055,6 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         self.view.bringSubview(toFront: timerView)
         
         
-        //
-        nextButton.isEnabled = false
-        backButton.isEnabled = false
         
         
         
@@ -1165,6 +1213,10 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     @IBAction func expandExplanation(_ sender: Any) {
         
         
+        nextButton.isEnabled = false
+        backButton.isEnabled = false
+        
+        
         // View
         //
         scrollViewExplanation.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height / 2)
@@ -1220,8 +1272,6 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         view.bringSubview(toFront: scrollViewExplanation)
         
         
-        nextButton.isEnabled = false
-        backButton.isEnabled = false
         
         
         
@@ -1433,518 +1483,578 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     let backButtonW = UIButton()
     
     
-//    // Walkthrough
-//    func walkthroughMindBody() {
-//        
-//        // Walkthrough
-//        let delayInSeconds = 0.5
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-//            self.walkthroughMindBody()
-//        }
-//        
-//        //
-//        let screenSize = UIScreen.main.bounds
-//        //let navigationBarHeight = self.navigationController!.navigationBar.frame.height
-//        //let navigationBarHeight = self.navigationBar.accessibilityFrame.height
-//        let navigationBarHeight = self.navigationController!.navigationBar.frame.size.height
-//        //
-//        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
-//        walkthroughView.backgroundColor = .black
-//        walkthroughView.alpha = 0.72
-//        walkthroughView.clipsToBounds = true
-//        //
-//        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
-//        label.center = view.center
-//        label.textAlignment = .center
-//        label.numberOfLines = 0
-//        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-//        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
-//        label.textColor = .white
-//        //
-//        nextButtonW.frame = screenSize
-//        nextButtonW.backgroundColor = .clear
-//        nextButtonW.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
-//        //
-//        backButtonW.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
-//        backButtonW.setTitle("Back", for: .normal)
-//        backButtonW.titleLabel?.textAlignment = .left
-//        backButtonW.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
-//        backButtonW.titleLabel?.textColor = .white
-//        backButtonW.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
-//        
-//        
-//        
-//        
-//        switch viewNumber {
-//            
-//        case 0:
-//            //
-//            
-//            
-//            // Clear Section
-//            let path = CGMutablePath()
-//            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - ((navigationTitle.frame.size.width + 50) / 2), y: UIApplication.shared.statusBarFrame.height, width: navigationTitle.frame.size.width + 50, height: 40))
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            
-//            label.text = NSLocalizedString("movementScreen1", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            
-//            
-//            
-//            
-//        //
-//        case 1:
-//            //
-//            
-//            
-//            // Clear Section
-//            let path = CGMutablePath()
-//            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            
-//            label.text = NSLocalizedString("movementScreen2", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            walkthroughView.addSubview(backButtonW)
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            walkthroughView.bringSubview(toFront: backButtonW)
-//            
-//            
-//            
-//        case 2:
-//            // Clear Section
-//            let path = CGMutablePath()
-//            path.addArc(center: CGPoint(x: view.frame.size.width * 0.083, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            
-//            label.text = NSLocalizedString("movementScreen3", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            backButtonW.setTitle("", for: .normal)
-//            walkthroughView.addSubview(backButtonW)
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            walkthroughView.bringSubview(toFront: backButtonW)
-//            
-//        case 3:
-//            // Clear Section
-//            let path = CGMutablePath()
-//            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant / 2), width: setsRepsLabel.frame.size.width + 6, height: setTop.constant/2))
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            
-//            label.text = NSLocalizedString("movementScreen4", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            
-//            walkthroughView.addSubview(backButtonW)
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            walkthroughView.bringSubview(toFront: backButtonW)
-//            
-//        case 4:
-//            // Clear Section
-//            let path = CGMutablePath()
-//            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + setTop.constant, width: setRepView.frame.size.width, height: setRepView.frame.size.height))
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            
-//            label.text = NSLocalizedString("movementScreen5", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            
-//            walkthroughView.addSubview(backButtonW)
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            walkthroughView.bringSubview(toFront: backButtonW)
-//            
-//            
-//            
-//        case 5:
-//            // Clear Section
-//            let path = CGMutablePath()
-//            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 2) + setRepView.frame.size.height , width: demonstrationImage.frame.size.width, height: demonstrationImage.frame.size.height))
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            label.center.y = scrollViewExplanation.frame.maxY
-//            label.text = NSLocalizedString("movementScreen6", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            
-//            walkthroughView.addSubview(backButtonW)
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            walkthroughView.bringSubview(toFront: backButtonW)
-//            
-//            
-//            
-//        case 6:
-//            // Clear Section
-//            let path = CGMutablePath()
-//            path.addRect(CGRect(x: demonstrationImage.frame.size.width + 1, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 2) + setRepView.frame.size.height , width: demonstrationImage.frame.size.width, height: demonstrationImage.frame.size.height))
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            label.center.y = scrollViewExplanation.frame.maxY
-//            label.text = NSLocalizedString("movementScreen7", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            
-//            walkthroughView.addSubview(backButtonW)
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            walkthroughView.bringSubview(toFront: backButtonW)
-//            
-//            
-//            
-//        case 7:
-//            // Clear Section
-//            let path = CGMutablePath()
-//            path.addArc(center: CGPoint(x: imageExpand.center.x, y: imageExpand.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            
-//            label.text = NSLocalizedString("movementScreen8", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            
-//            walkthroughView.addSubview(backButtonW)
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            walkthroughView.bringSubview(toFront: backButtonW)
-//            
-//            
-//            
-//            
-//        case 8:
-//            // Clear Section
-//            let path = CGMutablePath()
-//            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 3) + setRepView.frame.size.height + demonstrationImage.frame.size.height, width: scrollViewExplanation.frame.size.width, height: scrollViewExplanation.frame.size.height))
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            label.center.y = demonstrationImage.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
-//            label.text = NSLocalizedString("movementScreen9", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            
-//            walkthroughView.addSubview(backButtonW)
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            walkthroughView.bringSubview(toFront: backButtonW)
-//            
-//            
-//        case 9:
-//            // Clear Section
-//            let path = CGMutablePath()
-//            path.addArc(center: CGPoint(x: explanationExpand.center.x, y: explanationExpand.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            
-//            label.center.y = demonstrationImage.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
-//            label.text = NSLocalizedString("movementScreen10", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            
-//            walkthroughView.addSubview(backButtonW)
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            walkthroughView.bringSubview(toFront: backButtonW)
-//            
-//            
-//        case 10:
-//            // Clear Section
-//            let path = CGMutablePath()
-//            path.addArc(center: CGPoint(x: timerButton.center.x, y: timerButton.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            label.center.y = demonstrationImage.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
-//            label.text = NSLocalizedString("movementScreen11", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            
-//            walkthroughView.addSubview(backButtonW)
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            walkthroughView.bringSubview(toFront: backButtonW)
-//            
-//            
-//            
-//            
-//        case 11:
-//            // Clear Section
-//            let path = CGMutablePath()
-//            path.addArc(center: CGPoint(x: hideScreen.center.x, y: hideScreen.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            label.center.y = demonstrationImage.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
-//            label.text = NSLocalizedString("movementScreenh", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            
-//            walkthroughView.addSubview(backButtonW)
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            walkthroughView.bringSubview(toFront: backButtonW)
-//            
-//            
-//            
-//            
-//            
-//        case 12:
-//            // Clear Section
-//            let path = CGMutablePath()
-//            let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 3.5)
-//            let yValue = y + scrollViewExplanation.frame.size.height + setRepView.frame.size.height + demonstrationImage.frame.size.height
-//            path.addRect(CGRect(x: 0, y: yValue, width: progressLabel.frame.size.width + 6, height: progressLabel.frame.size.height))
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            
-//            label.text = NSLocalizedString("movementScreen12", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            
-//            walkthroughView.addSubview(backButtonW)
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            walkthroughView.bringSubview(toFront: backButtonW)
-//            
-//            
-//            
-//        case 13:
-//            // Clear Section
-//            let path = CGMutablePath()
-//            let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 4)
-//            let yValue = y + scrollViewExplanation.frame.size.height + setRepView.frame.size.height + demonstrationImage.frame.size.height
-//            path.addRect(CGRect(x: 0, y: yValue, width: view.frame.size.width, height: progressBarView.frame.size.height))
-//            path.addRect(screenSize)
-//            //
-//            let maskLayer = CAShapeLayer()
-//            maskLayer.backgroundColor = UIColor.black.cgColor
-//            maskLayer.path = path
-//            maskLayer.fillRule = kCAFillRuleEvenOdd
-//            //
-//            walkthroughView.layer.mask = maskLayer
-//            walkthroughView.clipsToBounds = true
-//            //
-//            
-//            
-//            label.text = NSLocalizedString("movementScreen13", comment: "")
-//            walkthroughView.addSubview(label)
-//            
-//            
-//            
-//            
-//            walkthroughView.addSubview(backButtonW)
-//            walkthroughView.addSubview(nextButtonW)
-//            self.view.addSubview(walkthroughView)
-//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-//            walkthroughView.bringSubview(toFront: nextButtonW)
-//            walkthroughView.bringSubview(toFront: backButtonW)
-//            
-//            
-//            
-//        default: break
-//            
-//            
-//        }
-//        
-//        
-//    }
-//    
+    // Walkthrough
+    func walkthroughMindBody() {
+        
+        // Walkthrough
+        let delayInSeconds = 0.5
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            self.walkthroughMindBody()
+        }
+        
+        //
+        let screenSize = UIScreen.main.bounds
+        let navigationBarHeight = CGFloat(44)
+        //
+        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+        walkthroughView.backgroundColor = .black
+        walkthroughView.alpha = 0.72
+        walkthroughView.clipsToBounds = true
+        //
+        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
+        label.center = view.center
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
+        label.textColor = .white
+        //
+        nextButtonW.frame = screenSize
+        nextButtonW.backgroundColor = .clear
+        nextButtonW.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
+        //
+        backButtonW.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
+        backButtonW.setTitle("Back", for: .normal)
+        backButtonW.titleLabel?.textAlignment = .left
+        backButtonW.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        backButtonW.titleLabel?.textColor = .white
+        backButtonW.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
+        
+        
+        
+        
+        switch viewNumber {
+            
+        case 0:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - ((navigationTitle.frame.size.width + 50) / 2), y: UIApplication.shared.statusBarFrame.height, width: navigationTitle.frame.size.width + 50, height: 40))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreen0", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            
+            
+            
+            
+        //
+        case 1:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreen1", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 2:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.075, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreen2", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            backButtonW.setTitle("", for: .normal)
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 3:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height, width: imageScroll.frame.size.width, height: imageScroll.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.center.y = centerY
+            label.text = NSLocalizedString("movementScreen3", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+           
+            
+            
+        case 4:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: view.frame.size.width - targetAreaButton.frame.size.width, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height - targetAreaButton.frame.size.height, width: targetAreaButton.frame.size.width, height: targetAreaButton.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.center.y = centerY
+            label.text = NSLocalizedString("movementScreen4", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            // Demonstration Image
+            //
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                self.imageScroll.contentOffset.x = 0
+            }, completion: nil)
+            //
+            targetAreaButton.alpha = 1
+            targetAreaButton.isEnabled = true
+            demonstrationImageButton.alpha = 0
+            demonstrationImageButton.isEnabled = false
+            //
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 5:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height, width: imageScroll.frame.size.width, height: imageScroll.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.center.y = centerY
+            label.text = NSLocalizedString("movementScreen5", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            // Target Area Image
+            //
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                self.imageScroll.contentOffset.x = self.imageScroll.frame.size.width
+            }, completion: nil)
+            //
+            targetAreaButton.alpha = 0
+            targetAreaButton.isEnabled = false
+            demonstrationImageButton.alpha = 1
+            demonstrationImageButton.isEnabled = true
+            //
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 6:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height - demonstrationImageButton.frame.size.height, width: demonstrationImageButton.frame.size.width, height: demonstrationImageButton.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.center.y = centerY
+            label.text = NSLocalizedString("movementScreen6", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            // Target Area Image
+            //
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                self.imageScroll.contentOffset.x = self.imageScroll.frame.size.width
+            }, completion: nil)
+            //
+            targetAreaButton.alpha = 0
+            targetAreaButton.isEnabled = false
+            demonstrationImageButton.alpha = 1
+            demonstrationImageButton.isEnabled = true
+            //
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 7:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: (view.frame.size.width / 2) - (setsRepsLabel.frame.size.width / 2), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height, width: setsRepsLabel.frame.size.width, height: setsRepsLabel.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.center.y = centerY
+            label.text = NSLocalizedString("movementScreen7", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            // Demonstration Image
+            //
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                self.imageScroll.contentOffset.x = 0
+            }, completion: nil)
+            //
+            targetAreaButton.alpha = 1
+            targetAreaButton.isEnabled = true
+            demonstrationImageButton.alpha = 0
+            demonstrationImageButton.isEnabled = false
+            //
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+            
+        case 8:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + setsRepsLabel.frame.size.height, width: setRepView.frame.size.width, height: setRepView.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.center.y = centerY
+            label.text = NSLocalizedString("movementScreen8", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+        case 9:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + setsRepsLabel.frame.size.height + setRepView.frame.size.height, width: timerButton.frame.size.width, height: timerButton.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.center.y = centerY
+            label.text = NSLocalizedString("movementScreen9", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+        case 10:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: (view.frame.size.width / 2) - (explanationExpand.frame.size.width / 2), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + setsRepsLabel.frame.size.height + setRepView.frame.size.height, width: explanationExpand.frame.size.width, height: explanationExpand.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.center.y = centerY
+            label.text = NSLocalizedString("movementScreen10", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+            
+        case 11:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: view.frame.size.width - hideScreen.frame.size.width, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + setsRepsLabel.frame.size.height + setRepView.frame.size.height, width: hideScreen.frame.size.width, height: hideScreen.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.center.y = centerY
+            label.text = NSLocalizedString("movementScreen11", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+            
+            
+        case 12:
+            // Clear Section
+            let path = CGMutablePath()
+            let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height
+            let yValue = y + setsRepsLabel.frame.size.height + setRepView.frame.size.height + timerButton.frame.size.height
+            path.addRect(CGRect(x: 0, y: yValue, width: progressLabel.frame.size.width + 14, height: progressLabel.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            
+            label.text = NSLocalizedString("movementScreen12", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        case 13:
+            // Clear Section
+            let path = CGMutablePath()
+            let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height
+            let yValue = y + setsRepsLabel.frame.size.height + setRepView.frame.size.height + timerButton.frame.size.height
+            path.addRect(CGRect(x: 14 + progressLabel.frame.size.width, y: yValue, width: view.frame.size.width - 14 - progressLabel.frame.size.width, height: progressBarView.frame.size.height))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("movementScreen13", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButtonW)
+            walkthroughView.addSubview(nextButtonW)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButtonW)
+            walkthroughView.bringSubview(toFront: backButtonW)
+            
+            
+            
+        default: break
+            
+            
+        }
+        
+        
+    }
     
-//    
-//    func nextWalkthroughView(_ sender: Any) {
-//        walkthroughView.removeFromSuperview()
-//        viewNumber = viewNumber + 1
-//        walkthroughMindBody()
-//    }
-//    
-//    
-//    func backWalkthroughView(_ sender: Any) {
-//        if viewNumber > 0 {
-//            backButtonW.removeFromSuperview()
-//            walkthroughView.removeFromSuperview()
-//            viewNumber = viewNumber - 1
-//            walkthroughMindBody()
-//        }
-//        
-//    }
+    
+    
+    func nextWalkthroughView(_ sender: Any) {
+        walkthroughView.removeFromSuperview()
+        viewNumber = viewNumber + 1
+        walkthroughMindBody()
+    }
+    
+    
+    func backWalkthroughView(_ sender: Any) {
+        if viewNumber > 0 {
+            backButtonW.removeFromSuperview()
+            walkthroughView.removeFromSuperview()
+            viewNumber = viewNumber - 1
+            walkthroughMindBody()
+        }
+        
+    }
     
     
     
