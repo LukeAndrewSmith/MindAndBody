@@ -53,6 +53,10 @@
     "hideScreen" = "Pocket Mode\n\nTriple tap to exit";
 
 
+    "sessionStarted" = "Session Began!";
+
+
+
 //
 // Calendar //
     "calendar" = "Calendar";
@@ -1462,8 +1466,8 @@
 
         // Choice Screen 2
         "choiceScreen22" = "Presets\n\nScroll through the 'picker' to select a preset session or leave it on the suggested one.";
-        "choiceScreen23" = "Table\nThe table contains all possible movements, those included in the session are indicated with a tick.\nSessions can be fine tuned by selecting or deselecting movements.";
-        "choiceScreen24" = "Custom Presets\nUp to 3 custom presets can be saved using the '+' button. A custom preset is found at the bottom of the picker below the seperator line.\nTo remove a custom preset you must first select it in the picker the press the '-' button.";
+        "choiceScreen23" = "The table contains all movements, those included in the session are indicated by a tick. Sessions can be fine tuned by selecting or deselecting movements.";
+        "choiceScreen24" = "Custom Presets\n\nUp to 3 custom presets can be saved using the '+' button. They are found at the bottom of the picker, below the seperator line shown above.\nTo remove a custom preset you must first select it in the picker the press the '-' button.";
         "choiceScreen25" = "Begin\n\nOnce happy with the session, press the begin button.";
         "choiceScreen26" = "Information\n\nThe walkthrough information for this screen is restated in case it is needed.";
         //
@@ -1523,7 +1527,7 @@
 
     // Profile
     "profile1" = "Profile\n\nComplete the profile so that the app can suggest to you a weekly schedule which can be accessed and modified in the calendar.";
-    "profile2" = "Settings\n\nThe settings provide the possibility to change colour schemes, units, reset the app and reset the walkthrough.";
+    "profile2" = "Settings\n\nThe settings provide the possibility change the manner in which the app displays the sessions, change the apps units, reset the app and reset the walkthrough.";
 
 
 

@@ -1,8 +1,8 @@
 //
-//  WarmupScreenTest.swift
+//  WarmupScreen.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 18.03.17.
+//  Created by Luke Smith on 15.03.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -13,7 +13,7 @@ import UserNotifications
 
 
 
-class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class WarmupScreenOld: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     
@@ -25,7 +25,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     
     // Initialize Arrays
-    //
+
     // Selected Array
     var warmupMovementsSelectedArray: [[Int]] = [[]]
     
@@ -37,7 +37,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     var setsArrayF: [[Int]] = [[]]
     var setsArray: [Int] = []
     
-    // Reps Array
+    // Sets Array
     var repsArrayF: [[String]] = [[]]
     var repsArray: [String] = []
     
@@ -60,28 +60,35 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     // Populate Arrays
     func populateArrays() {
-        //
+        
+        // Warmup Array
         warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
-        //
+        // Sets Array
         setsArray = zip(setsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
-        //
+        
+        // Reps Array
         repsArray = zip(repsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
-        //
+        
+        // Demonstration Array
         demonstrationArray = zip(demonstrationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
-        //
+        
+        // Target Area Array
         targetAreaArray = zip(targetAreaArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
-        //
+        
+        // Explanation Array
         explanationArray = zip(explanationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
     }
     
     
     
     //
+    
     // Outlets
     //
     
@@ -94,6 +101,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     @IBOutlet weak var backButton: UIBarButtonItem!
     
     
+    
     // Set Rep
     @IBOutlet weak var setRepView: UIView!
     // Buttons
@@ -101,14 +109,26 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     var setButton2 = UIButton()
     var setButton3 = UIButton()
     
-
+    // Scroll Views
+    // Explanation
+    @IBOutlet weak var scrollViewExplanation: UIScrollView!
+    
+    
     // Image View
-    @IBOutlet weak var imageScroll: UIScrollView!
+    @IBOutlet weak var bodyImage: UIImageView!
+    // Demonstration Image
+    @IBOutlet weak var demonstrationImage: UIImageView!
+    
+    
+    // Expand Image
+    @IBOutlet weak var imageExpand: UIButton!
+    
+    
+    
     
     
     // Explanation Expand
     @IBOutlet weak var explanationExpand: UIButton!
-    
     
     // Timer
     // Timer View
@@ -134,17 +154,15 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     let minuteLabel = UILabel()
     let secondLabel = UILabel()
     var pickerViewTimer = UIView()
-    
-    
     // Timer Show Buttons
     @IBOutlet weak var timerButton: UIButton!
+    @IBOutlet weak var timerButton2: UIButton!
+    
     
     
     // Progress Bar
     @IBOutlet weak var progressBarView: UIView!
     @IBOutlet weak var progressBar: UIProgressView!
-    
-    @IBOutlet weak var progressBarLeft: NSLayoutConstraint!
     
     
     // Title Labels
@@ -157,28 +175,6 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     // Hide Screen
     @IBOutlet weak var hideScreen: UIButton!
-    
-    
-    
-    // Image Scroll
-    //
-    @IBOutlet weak var targetAreaButton: UIButton!
-    //
-    @IBOutlet weak var demonstrationImageButton: UIButton!
-    
-    
-    // Images
-    let demonstrationImage = UIImageView()
-    let bodyImage = UIImageView()
-    
-    var imageExpanded = false
-    
-    
-    // Button Stack View Height
-    @IBOutlet weak var buttonStackHeight: NSLayoutConstraint!
-    
-    
-    
     
     
     // Constraints
@@ -221,7 +217,11 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         //Iphone 5/SE layout
         //
         if UIScreen.main.nativeBounds.height < 1334 {
-            buttonStackHeight.constant = 49
+            
+            setTop.constant = 36.75
+            setBottom.constant = 36.75
+            imageBottom.constant = 36.75
+            explanationBottom.constant = 36.75
         }
         
         
@@ -239,38 +239,28 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         backButton.tintColor = colour1
         
         
-
-        
-        
-
-        
-        // Images
         //
         // Demonstration Image
+        //
         demonstrationImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        imageScroll.addSubview(demonstrationImage)
-        //
-        let imageSwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        imageSwipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        demonstrationImage.addGestureRecognizer(imageSwipeLeft)
-        demonstrationImage.isUserInteractionEnabled = true
+        demonstrationImage.contentMode = .scaleAspectFit
         
-        // Body Image
+        
+        
+        // Body Image View
         bodyImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        imageScroll.addSubview(bodyImage)
-        //
-        let imageSwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        imageSwipeRight.direction = UISwipeGestureRecognizerDirection.right
-        bodyImage.addGestureRecognizer(imageSwipeRight)
-        bodyImage.isUserInteractionEnabled = true
-
-        
-        demonstrationImageButton.alpha = 0
         
         
         
         
+        // Image Expand
+        let origImageImage = UIImage(named: "Plus")
+        let tintedImageImage = origImageImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        imageExpand.setImage(tintedImageImage, for: .normal)
         
+        //Image Tint
+        imageExpand.tintColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
         
         
@@ -280,9 +270,8 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         
-        // Set Rep View
-        setRepView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            //colour3
+        
+        
         
         
         
@@ -310,27 +299,22 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         
-        
-        
-        
-        
-        
-
-        
-        
         //
         // Timer
         //
+        // Timer Button
+        self.view.bringSubview(toFront: timerButton)
         // Image With Tint
         let origImage3 = UIImage(named: "Timer")
         let tintedImage3 = origImage3?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         timerButton.setImage(tintedImage3, for: .normal)
-        //timerButton2.setImage(tintedImage3, for: .normal)
+        timerButton2.setImage(tintedImage3, for: .normal)
         
         //Image Tint
         timerButton.tintColor = colour3
-        //timerButton2.tintColor = colour3
+        timerButton2.tintColor = colour3
+        
         
         
         
@@ -343,23 +327,25 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         // Picker View Timer
         //
         pickerViewTimer.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        view.addSubview(pickerViewTimer)
         
-      
         
         // Pick Minutes
         //
-        minutePicker.frame = CGRect(x: 10, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
         minutePicker.dataSource = self
         minutePicker.delegate = self
         minutePicker.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
+        pickerViewTimer.addSubview(minutePicker)
+        
         
         
         minuteLabel.text = NSLocalizedString("minutes", comment: "")
-        minuteLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        minuteLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
         minuteLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         minuteLabel.textAlignment = .left
         
+        pickerViewTimer.addSubview(minuteLabel)
         
         
         // Pick Seconds
@@ -368,13 +354,17 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         secondPicker.delegate = self
         secondPicker.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
+        pickerViewTimer.addSubview(secondPicker)
         
         
         secondLabel.text = NSLocalizedString("seconds", comment: "")
-        secondLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        secondLabel.font = UIFont(name: "SFUIDisplay-light", size: 17)
         secondLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         secondLabel.textAlignment = .left
         
+        pickerViewTimer.addSubview(secondLabel)
+        
+        timerView.addSubview(pickerViewTimer)
         
         
         // Picker View Data
@@ -383,44 +373,45 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         secondData = [0, 15, 30, 45]
         
         
-        
-        
         // Start Button Timer
         //
         timerStart.backgroundColor = colour2
         timerStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
         timerStart.setTitleColor(colour6, for: .normal)
-        timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
         timerStart.titleLabel?.textAlignment = .center
         
         timerStart.addTarget(self, action: #selector(startTimer(_:)), for: .touchUpInside)
         
+        pickerViewTimer.addSubview(timerStart)
         
         
         
         // Cancel Button Timer
         //
-        
         timerCancel.backgroundColor = colour1
         timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
         timerCancel.setTitleColor(colour6, for: .normal)
-        timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
         timerCancel.titleLabel?.textAlignment = .center
         
         timerCancel.addTarget(self, action: #selector(cancelTimer(_:)), for: .touchUpInside)
         
+        pickerViewTimer.addSubview(timerCancel)
         
+        pickerViewTimer.bringSubview(toFront: timerStart)
         
         
         
         // Countdown Label
         countDownLabel.textAlignment = .center
-        countDownLabel.font = UIFont(name: "SFUIDisplay-Light", size: 43)
+        countDownLabel.font = UIFont(name: "SFUIDisplay-Light", size: 27)
         countDownLabel.text = "00:00"
         countDownLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
         
-        
+        self.timerView.addSubview(countDownLabel)
+     
         
         // App Moved To Background
         let notificationCenter = NotificationCenter.default
@@ -432,12 +423,11 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         
-    
-        //
         // Progress Bar
         //
         
         // Thickness
+        
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 49, height: self.progressBarView.frame.size.height / 2)
         progressBar.center = progressBarView.center
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
@@ -446,21 +436,16 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
         progressBar.clipsToBounds = true
         
-        
         // Initial state
         progressBar.setProgress(0, animated: true)
-        
-        //
-        progressBarLeft.constant = progressLabel.frame.size.width + 34
-        
-        
-        
         
         
         
         // Display Content
         displayContent()
-      
+        
+        
+        
     }
     
     
@@ -469,21 +454,47 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        
-        
-        // Image Scroll
         //
-        imageScroll.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        imageScroll.contentSize = CGSize(width: imageScroll.frame.size.width * 2, height: imageScroll.frame.size.height)
-        imageScroll.isScrollEnabled = false
+        // Timer View
+        //
+        // Timer View
+        //
+        if UIScreen.main.nativeBounds.height < 1334 {
+            timerView.frame = CGRect(x: 0, y: 0, width: self.scrollViewExplanation.frame.size.width, height: self.scrollViewExplanation.frame.size.height + 73.5)
+            timerView.center.x = scrollViewExplanation.center.x
+            timerView.center.y = scrollViewExplanation.center.y + 36.75
+        } else {
+            timerView.frame = CGRect(x: 0, y: 0, width: self.scrollViewExplanation.frame.size.width, height: self.scrollViewExplanation.frame.size.height)
+            timerView.center.x = scrollViewExplanation.center.x
+            timerView.center.y = scrollViewExplanation.center.y
+        }
+        // Timer View Elements
+        //
+        pickerViewTimer.frame = CGRect(x: 0, y: 0, width: self.scrollViewExplanation.frame.size.width/2, height: self.timerView.frame.size.height)
+        //
         
-        // Demonstration Image
-        demonstrationImage.frame = imageScroll.frame
-        demonstrationImage.contentMode = .scaleAspectFit
         
-        // Body Image
-        bodyImage.frame = CGRect(x: imageScroll.frame.size.width, y: 0, width: imageScroll.frame.size.width, height: imageScroll.frame.size.width)
-        bodyImage.contentMode = .scaleAspectFit
+        
+        minutePicker.frame = CGRect(x: 10, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
+        minuteLabel.frame = CGRect(x: 10 + minutePicker.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
+        
+        //
+        secondPicker.frame = CGRect(x: 10 + minutePicker.frame.size.width + minuteLabel.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
+        secondLabel.frame = CGRect(x: 10 + minutePicker.frame.size.width + minuteLabel.frame.size.width + secondPicker.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
+        
+        //
+        timerStart.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
+        timerStart.layer.borderWidth = timerStart.frame.size.height/4
+        timerStart.layer.borderColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0).cgColor
+        //
+        timerCancel.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
+        timerCancel.layer.borderWidth = timerCancel.frame.size.height/4
+        timerCancel.layer.borderColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0).cgColor
+        //
+        countDownLabel.frame = CGRect(x: self.scrollViewExplanation.frame.size.width/2, y: 0, width: self.scrollViewExplanation.frame.size.width/2, height: self.timerView.frame.size.height)
+        
+        
+        
         
     }
     
@@ -500,12 +511,10 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         setButton.addConstraints([widthHeight])
         setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
         setButton.layer.borderWidth = 4
-        setButton.layer.borderColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0).cgColor
-            //colour4.cgColor
+        setButton.layer.borderColor = colour7.cgColor
         setButton.layer.cornerRadius = 21.4375
         setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
-        setButton.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            //colour3
+        setButton.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         setButton.isEnabled = false
         
         
@@ -519,12 +528,55 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     var buttonArray = [UIButton]()
     
     func createButtonArray(){
-        //
+        //generate an array of buttons
+        
+        
         let numberOfButtons = setsArray[warmupScreenIndex]
-        //
+        
         for _ in 1...numberOfButtons{
             buttonArray += [createButton()]
+            
         }
+        
+        
+        if setsArray[warmupScreenIndex] == 1 {
+            
+            let stackView = UIStackView(arrangedSubviews: buttonArray)
+            stackView.frame = CGRect(x: (self.view.frame.size.width / 2) - 24.5, y: 9.1875, width: 42.875, height: 42.875)
+            stackView.axis = .horizontal
+            stackView.distribution = .equalSpacing
+            
+            setRepView.addSubview(stackView)
+            
+            buttonArray[0].isEnabled = true
+            
+            
+        } else if setsArray[warmupScreenIndex] == 2 {
+            
+            let stackView = UIStackView(arrangedSubviews: buttonArray)
+            stackView.frame = CGRect(x: ((self.view.frame.size.width - 85.75) / 3), y: 9.1875, width: ((self.view.frame.size.width - 85.75) / 3) + 85.75, height: 42.875)
+            stackView.axis = .horizontal
+            stackView.distribution = .equalSpacing
+            
+            setRepView.addSubview(stackView)
+            
+            buttonArray[0].isEnabled = true
+            
+            
+        } else if setsArray[warmupScreenIndex] == 3 {
+            
+            let stackView = UIStackView(arrangedSubviews: buttonArray)
+            stackView.frame = CGRect(x: ((self.view.frame.size.width - 128.625) / 4), y: 9.1875, width: ((2 * (self.view.frame.size.width - 128.625)) / 4) + 128.625, height: 42.875)
+            stackView.axis = .horizontal
+            stackView.distribution = .equalSpacing
+            
+            setRepView.addSubview(stackView)
+            
+            buttonArray[0].isEnabled = true
+            
+        }
+        
+        
     }
     
     
@@ -557,33 +609,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         
-        // Images
-        //
-        demonstrationImage.image = #imageLiteral(resourceName: "Test 2")
-        //
-        bodyImage.image = targetAreaArray[warmupScreenIndex]
-        
-        // Scroll
-        imageScroll.contentOffset.x = 0
-        //
-        demonstrationImageButton.alpha = 0
-        demonstrationImageButton.isEnabled = false
-        //
-        targetAreaButton.alpha = 1
-        targetAreaButton.isEnabled = true
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         // Set Buttons
-        //
         let setRepSubViews = self.setRepView.subviews
         for subview in setRepSubViews{
             subview.removeFromSuperview()
@@ -593,44 +619,29 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         
-                // Stack View
-                //
-                let stackView = UIStackView(arrangedSubviews: buttonArray)
-                buttonArray[0].isEnabled = true
-                let numberOfButtons2 = CGFloat(setsArray[warmupScreenIndex])
-        
-                // Layout
-                //
-                let xValue = ((view.frame.size.width - (numberOfButtons2 * 42.875)) / CGFloat(numberOfButtons2 + 1))
-                let yValue = (setRepView.frame.size.height - 42.875) / 2
-                let widthValue1 =
-                    CGFloat(numberOfButtons2 - 1) * CGFloat(view.frame.size.width - (numberOfButtons2 * 42.875))
-                let widthValue2 = (CGFloat(widthValue1) / CGFloat(numberOfButtons2 + 1)) + (numberOfButtons2 * 42.875)
-                //
-                stackView.frame = CGRect(x: xValue, y: yValue, width: widthValue2, height: 42.875)
-        
-                //
-                stackView.axis = .horizontal
-                stackView.distribution = .equalSpacing
-                
-                setRepView.addSubview(stackView)
-                
-
+        // Body Image
+        bodyImage.image = targetAreaArray[warmupScreenIndex]
+        bodyImage.contentMode = .scaleAspectFit
         
         
         
+        // Explanation Text and Scroll View
+        let attributedExplanation = NSMutableAttributedString(string: NSLocalizedString(explanationArray[warmupScreenIndex], comment: ""))
+        let paragraphStyleE = NSMutableParagraphStyle()
+        paragraphStyleE.alignment = .justified
+        paragraphStyleE.hyphenationFactor = 1
         
+        attributedExplanation.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleE, range: NSMakeRange(0, attributedExplanation.length))
         
+        explanationText.attributedText = attributedExplanation
         
+        explanationText.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width - 20, height: 0)
+        explanationText.sizeToFit()
+        // Scroll View
+        scrollViewExplanation.addSubview(explanationText)
+        scrollViewExplanation.contentSize = CGSize(width: self.view.frame.size.width, height: explanationText.frame.size.height + 20)
         
-        
-        
-        
-        
-        
-        
-        
-        
+        self.scrollViewExplanation.contentOffset.y = 0
         
         
         
@@ -638,10 +649,22 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         // Timer to Back
+        self.scrollViewExplanation.alpha = 1
+        timerView.removeFromSuperview()
+        //self.view.bringSubview(toFront: scrollViewExplanation)
         self.view.bringSubview(toFront: timerButton)
         cancelTimer(Any.self)
         
         
+        
+        
+        
+        
+        
+        // Explanation
+        self.scrollViewExplanation.contentOffset.y = 0
+    
+        self.view.bringSubview(toFront: scrollViewExplanation)
         
         
         
@@ -655,7 +678,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         //
         setsRepsLabel.textColor = colour3
-        progressLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        progressLabel.textColor = colour3
         
         
         
@@ -723,8 +746,6 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     // Count Down Timer
     //
     
-    var isTiming = false
-
     
     // Timer CountDown Value
     func setTimerValue() {
@@ -756,10 +777,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         if timerValue == 0{
             self.timerCountDown.invalidate()
             removeCircle()
-            timerView.bringSubview(toFront: timerStart)
-            countDownLabel.removeFromSuperview()
-            pickerViewTimer.alpha = 1
-            isTiming = false
+            self.pickerViewTimer.bringSubview(toFront: timerStart)
             
         } else if timerValue == 1 {
             
@@ -779,7 +797,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     // Funcs
     func addCircle() {
-        let circlePath = UIBezierPath(arcCenter: countDownLabel.center, radius: CGFloat((pickerViewTimer.frame.size.height-10)/2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(2*M_PI-M_PI_2), clockwise: true)
+        let circlePath = UIBezierPath(arcCenter: countDownLabel.center, radius: CGFloat((timerView.frame.size.height-10)/2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(2*M_PI-M_PI_2), clockwise: true)
         timerShapeLayer.path = circlePath.cgPath
         timerShapeLayer.fillColor = UIColor.clear.cgColor
         timerShapeLayer.strokeColor = colour1.cgColor
@@ -812,26 +830,16 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     @IBAction func startTimer(_ sender: Any) {
         
         setTimerValue()
-        isTiming = true
+        
         
         if timerValue == 0 {
             
         } else {
             
             
-            self.timerView.bringSubview(toFront: timerCancel)
-            
-            pickerViewTimer.alpha = 0
-            timerView.addSubview(countDownLabel)
-            timerView.bringSubview(toFront: countDownLabel)
-            
+            self.pickerViewTimer.bringSubview(toFront: timerCancel)
             
             self.countDownLabel.text = timeFormatted(totalSeconds: timerValue)
-            
-            
-            
-            
-            
             
             let delayInSeconds = 0.1
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -868,18 +876,16 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
     }
     
-
+    
+    
     @IBAction func cancelTimer(_ sender: Any) {
+        
         
         self.timerCountDown.invalidate()
         self.timerValue = 0
         self.countDownLabel.text = "00:00"
         removeCircle()
-        self.timerView.bringSubview(toFront: timerStart)
-        countDownLabel.removeFromSuperview()
-        pickerViewTimer.alpha = 1
-        isTiming = false
-        
+        self.pickerViewTimer.bringSubview(toFront: timerStart)
         
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
         
@@ -911,7 +917,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             
             let rowLabel = UILabel()
             let titleData = String(minuteData[row])
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 27)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -920,7 +926,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             
             let rowLabel = UILabel()
             let titleData = String(secondData[row])
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 27)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 23)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -928,10 +934,6 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         }
         
         return UIView()
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 30
     }
     
     
@@ -942,156 +944,13 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         self.timerValue = 0
         removeCircle()
         self.countDownLabel.text = "00:00"
-        timerView.bringSubview(toFront: timerStart)
-        isTiming = false
-        
-    }
-    
-    
-    
-    // Display TimerView
-    //
-    let backgroundViewTimer = UIButton()
-
-    @IBAction func timerViewButton(_ sender: Any) {
-        
-        
-        //
-        nextButton.isEnabled = false
-        backButton.isEnabled = false
-        
-        
-        
-        // Timer View
-        //
-        timerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height/2)
-        timerView.center.x = self.view.frame.size.width/2
-        timerView.center.y = (self.view.frame.size.height/2) * 2.5
-        
-
-        
-        // Picker View Timer
-        //
-        pickerViewTimer.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * (2/3), height: self.timerView.frame.size.height * (2/3))
-        pickerViewTimer.center.x = timerView.center.x
-        timerView.addSubview(pickerViewTimer)
-        
-        // Pick Minutes
-        //
-        minutePicker.frame = CGRect(x: 10, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
-        minutePicker.center.y = pickerViewTimer.center.y
-        pickerViewTimer.addSubview(minutePicker)
-        //
-        minuteLabel.frame = CGRect(x: 10 + minutePicker.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
-        minuteLabel.center.y = pickerViewTimer.center.y
-        pickerViewTimer.addSubview(minuteLabel)
-        
-        // Pick Seconds
-        //
-        secondPicker.frame = CGRect(x: 10 + minutePicker.frame.size.width + minuteLabel.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
-        secondPicker.center.y = pickerViewTimer.center.y
-        pickerViewTimer.addSubview(secondPicker)
-        //
-        secondLabel.frame = CGRect(x: 10 + minutePicker.frame.size.width + minuteLabel.frame.size.width + secondPicker.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
-        secondLabel.center.y = pickerViewTimer.center.y
-        pickerViewTimer.addSubview(secondLabel)
-        
-        timerView.addSubview(pickerViewTimer)
-        
-        
-        
-        
-        
-        // Start Button Timer
-        //
-        timerStart.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
-        timerStart.center.x = timerView.center.x
-        timerStart.layer.borderWidth = timerStart.frame.size.height/4
-        timerStart.layer.borderColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0).cgColor
-        timerStart.layer.cornerRadius = (timerStart.frame.height - (timerStart.frame.size.height/4)) / 2
-        timerStart.clipsToBounds = true
-        timerView.addSubview(timerStart)
-        
-        
-        // Cancel Button Timer
-        //
-        timerCancel.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
-        timerCancel.center.x = timerView.center.x
-        timerCancel.layer.borderWidth = timerCancel.frame.size.height/4
-        timerCancel.layer.borderColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0).cgColor
-        timerCancel.layer.cornerRadius = (timerCancel.frame.height - (timerCancel.frame.size.height/4)) / 2
-        timerCancel.clipsToBounds = true
-        timerView.addSubview(timerCancel)
-        
-        if isTiming == false {
-            timerView.bringSubview(toFront: timerStart)
-        } else if isTiming == true {
-            timerView.bringSubview(toFront: timerCancel)
-
-        }
-        
-        // Countdown Label
-        countDownLabel.frame = CGRect(x: self.timerView.frame.size.width/2, y: 0, width: self.timerView.frame.size.width/2, height: self.timerView.frame.size.height)
-        countDownLabel.center.x = timerView.center.x
-        countDownLabel.center.y = pickerViewTimer.center.y
-        //self.timerView.addSubview(countDownLabel)
-        
-        
-        
-        // Background View
-        //
-        backgroundViewTimer.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        backgroundViewTimer.backgroundColor = .black
-        backgroundViewTimer.alpha = 0
-        
-        backgroundViewTimer.addTarget(self, action: #selector(retractTimer(_:)), for: .touchUpInside)
-        
-        
-        
-        
-        self.view.addSubview(timerView)
-        self.view.addSubview(backgroundViewTimer)
-        
-        self.view.bringSubview(toFront: timerView)
-        
-        
-        
-        
-        
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.timerView.center.y = (self.view.frame.size.height/2) * 1.5
-            self.backgroundViewTimer.alpha = 0.5
-        }, completion: nil)
+        self.pickerViewTimer.bringSubview(toFront: timerStart)
         
         
     }
     
     
     
-    @IBAction func retractTimer(_ sender: Any) {
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.timerView.center.y = (self.view.frame.size.height/2) * 2.5
-            self.backgroundViewTimer.alpha = 0
-            
-        }, completion: nil)
-        
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            
-            self.timerView.removeFromSuperview()
-            self.backgroundViewTimer.removeFromSuperview()
-            
-            self.nextButton.isEnabled = true
-            self.backButton.isEnabled = true
-            
-        }
-    }
-    
-    
-    
-    
     
     
     
@@ -1103,13 +962,10 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     
     //
-    // Button Actions ---------------------------------------------------------------------------------------------------------------------------------
+    // Button Actions
     //
     
     
-    
-    // Set Buttons
-    //
     var buttonNumber = 0
     
     // Set Button
@@ -1149,11 +1005,11 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             }
         }
         
-        sender.backgroundColor = UIColor(red: 0.88, green: 0.89, blue: 0.89, alpha: 1.0)
-        //colour4
+        sender.backgroundColor = colour7
         sender.isEnabled = false
         
     }
+    
     
     
     // Next Button
@@ -1163,7 +1019,9 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         if warmupScreenIndex == warmupArray.count - 1 {
             
             warmupScreenIndex = 0
+            
             self.dismiss(animated: true)
+            
             
             
         } else {
@@ -1173,7 +1031,10 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         flashScreen()
         
+        
+        
     }
+    
     
     
     // Back Button
@@ -1187,6 +1048,238 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             flashScreen()
             displayContent()
         }
+        
+        
+    }
+    
+    
+    
+    // Display TimerView
+    @IBAction func timerViewButton(_ sender: Any) {
+        
+        self.view.addSubview(timerView)
+        self.view.bringSubview(toFront: timerView)
+        
+        
+        self.view.bringSubview(toFront: timerButton2)
+        
+        
+        // Ensure Explanation Hidden
+        self.scrollViewExplanation.alpha = 0
+
+    }
+    
+    
+    @IBAction func timerViewButton2(_ sender: Any) {
+        
+        
+        timerView.removeFromSuperview()
+        
+        self.view.bringSubview(toFront: timerButton)
+    
+        
+        // Ensure Explanation Hidden
+        self.scrollViewExplanation.alpha = 1
+        self.explanationExpand.alpha = 1
+    
+    }
+    
+    
+    
+    
+    
+    // Expand and Retract Images
+    //
+    
+    
+    let imageViewExpanded = UIView()
+    let backgroundViewExpanded = UIButton()
+    let cancelButtonImage = UIButton()
+    
+    let bodyImageExpanded = UIImageView()
+    let demonstrationImageExpanded = UIImageView()
+    
+    let targetButton = UIButton()
+    let demonstrationButton = UIButton()
+    
+    @IBAction func expandImage(_ sender: Any) {
+        
+        
+        //Screen Size
+        //
+        let width = view.frame.size.width
+        let height = view.frame.size.height
+        
+        
+        // View
+        //
+        imageViewExpanded.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: (view.frame.size.height * (2/3) + 36.75))
+        imageViewExpanded.center.x = width/2
+        imageViewExpanded.center.y = height/2
+        imageViewExpanded.isUserInteractionEnabled = true
+        
+        imageViewExpanded.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        
+        
+        
+        // Background View
+        //
+        backgroundViewExpanded.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        backgroundViewExpanded.backgroundColor = .black
+        backgroundViewExpanded.alpha = 0.5
+        
+        backgroundViewExpanded.addTarget(self, action: #selector(retractImage), for: .touchUpInside)
+        
+        
+        
+        
+        // Cancel Button
+        //
+        cancelButtonImage.frame = CGRect(x: 0, y: 0, width: 36.75, height: 36.75)
+        cancelButtonImage.center.y = imageViewExpanded.frame.minY/2
+        cancelButtonImage.center.x = imageViewExpanded.frame.maxX - (imageViewExpanded.frame.minY/2)
+        
+        cancelButtonImage.addTarget(self, action: #selector(retractImage), for: .touchUpInside)
+        cancelButtonImage.layer.cornerRadius = 18.375
+        cancelButtonImage.layer.masksToBounds = true
+        
+        
+        cancelButtonImage.backgroundColor = colour3
+        
+        let origImage = UIImage(named: "Minus")
+        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        cancelButtonImage.setImage(tintedImage, for: .normal)
+        //Image Tint
+        cancelButtonImage.tintColor = colour4
+        
+        
+        
+        
+        
+        
+        // Demonstration or Body Image
+        //
+        // Demonstration
+        demonstrationButton.isEnabled = true
+        demonstrationButton.frame = CGRect(x: 0, y: 0, width: imageViewExpanded.frame.size.width/2, height: 36.75)
+        demonstrationButton.setTitle(NSLocalizedString("demonstration", comment: ""), for: .normal)
+        demonstrationButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)
+        demonstrationButton.addTarget(self, action: #selector(demonstrationImageButton(_:)), for: .touchUpInside)
+        
+        imageViewExpanded.addSubview(demonstrationButton)
+        
+        
+        demonstrationButton.backgroundColor = .white
+        demonstrationButton.setTitleColor(colour2, for: .normal)
+        
+        // Target
+        targetButton.frame = CGRect(x: imageViewExpanded.frame.size.width/2, y: 0, width: imageViewExpanded.frame.size.width/2, height: 36.75)
+        
+        targetButton.setTitle(NSLocalizedString("targetArea", comment: ""), for: .normal)
+        targetButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)
+        targetButton.addTarget(self, action: #selector(bodyImageButton(_:)), for: .touchUpInside)
+        
+        targetButton.backgroundColor = .white
+        targetButton.setTitleColor(colour2, for: .normal)
+        
+        imageViewExpanded.addSubview(targetButton)
+        
+        
+        
+        
+        // Seperator
+        let seperator = UILabel()
+        seperator.frame = CGRect(x: 0, y: 0, width: 1, height: 36.75)
+        seperator.center.x = imageViewExpanded.center.x
+        seperator.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        
+        imageViewExpanded.addSubview(seperator)
+        
+        
+        
+        // Order
+        imageViewExpanded.bringSubview(toFront: demonstrationImageExpanded)
+        demonstrationImageExpanded.alpha = 1
+        bodyImageExpanded.alpha = 0
+        demonstrationButton.backgroundColor = colour3
+        
+        
+        
+        
+        
+        
+        // View Contents
+        //
+        // Body Image
+        bodyImageExpanded.frame = CGRect(x: 0, y: 36.75, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 36.75)
+        bodyImageExpanded.image = targetAreaArray[warmupScreenIndex]
+        bodyImageExpanded.contentMode = .scaleAspectFit
+        
+        imageViewExpanded.addSubview(bodyImageExpanded)
+        
+        
+        
+        // Demonstration Image
+        demonstrationImageExpanded.frame = CGRect(x: 0, y: 36.75, width: imageViewExpanded.frame.size.width, height: imageViewExpanded.frame.size.height - 36.75)
+        
+        demonstrationImageExpanded.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        demonstrationImageExpanded.contentMode = .scaleAspectFit
+        
+        
+        imageViewExpanded.addSubview(demonstrationImageExpanded)
+        
+        
+        
+        
+        
+        // Add Subviews
+        //
+        view.addSubview(backgroundViewExpanded)
+        view.addSubview(imageViewExpanded)
+        view.addSubview(cancelButtonImage)
+        
+        
+        view.bringSubview(toFront: backgroundViewExpanded)
+        view.bringSubview(toFront: imageViewExpanded)
+        view.bringSubview(toFront: cancelButtonImage)
+        
+        
+        nextButton.isEnabled = false
+        backButton.isEnabled = false
+        
+    }
+    
+    @IBAction func demonstrationImageButton(_ sender: Any) {
+        
+        imageViewExpanded.bringSubview(toFront: demonstrationImageExpanded)
+        demonstrationImageExpanded.alpha = 1
+        bodyImageExpanded.alpha = 0
+        
+        demonstrationButton.backgroundColor = colour3
+        targetButton.backgroundColor = .white
+    }
+    
+    @IBAction func bodyImageButton(_ sender: Any) {
+        
+        imageViewExpanded.bringSubview(toFront: bodyImageExpanded)
+        bodyImageExpanded.alpha = 1
+        demonstrationImageExpanded.alpha = 0
+        
+        demonstrationButton.backgroundColor = .white
+        targetButton.backgroundColor = colour3
+    }
+    
+    
+    @IBAction func retractImage(_ sender: Any) {
+        
+        imageViewExpanded.removeFromSuperview()
+        backgroundViewExpanded.removeFromSuperview()
+        cancelButtonImage.removeFromSuperview()
+        
+        
+        nextButton.isEnabled = true
+        backButton.isEnabled = true
     }
     
     
@@ -1194,18 +1287,17 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     
     
-    
-    
-    //
-    // Explanation
-    //
-    
     // Expand Explanation
     //
-    let scrollViewExplanation = UIScrollView()
-    let backgroundViewExplanation = UIButton()
+    let scrollViewExplanationE = UIScrollView()
+    let backgroundViewExplanationE = UIButton()
+    let cancelButtonExplanationE = UIButton()
     
-    let explanationLabel = UILabel()
+    let explanationLabelE = UILabel()
+    
+    
+    
+    
     
     
     // Expand Explanation
@@ -1213,37 +1305,58 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     @IBAction func expandExplanation(_ sender: Any) {
         
         
-        nextButton.isEnabled = false
-        backButton.isEnabled = false
-        
         
         // View
         //
-        scrollViewExplanation.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height / 2)
-        scrollViewExplanation.center.x = self.view.frame.size.width/2
-        scrollViewExplanation.center.y = (self.view.frame.size.height/2) * 2.5
+        scrollViewExplanationE.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: (view.frame.size.height * (2/3) + 24.5))
+        scrollViewExplanationE.center.x = self.view.frame.size.width/2
+        scrollViewExplanationE.center.y = self.view.frame.size.height/2
         
-        scrollViewExplanation.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        scrollViewExplanationE.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
         
         
         // Background View
         //
-        backgroundViewExplanation.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        backgroundViewExplanation.backgroundColor = .black
-        backgroundViewExplanation.alpha = 0
+        backgroundViewExplanationE.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        backgroundViewExplanationE.backgroundColor = .black
+        backgroundViewExplanationE.alpha = 0.5
         
-        backgroundViewExplanation.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
+        backgroundViewExplanationE.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
+        
+        
+        
+        
+        // Cancel Button
+        //
+        cancelButtonExplanationE.frame = CGRect(x: 0, y: 0, width: 36.75, height: 36.75)
+        cancelButtonExplanationE.center.y = scrollViewExplanationE.frame.minY/2
+        cancelButtonExplanationE.center.x = scrollViewExplanationE.frame.maxX - (scrollViewExplanationE.frame.minY/2)
+        
+        cancelButtonExplanationE.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
+        cancelButtonExplanationE.layer.cornerRadius = 18.375
+        cancelButtonExplanationE.layer.masksToBounds = true
+        
+        
+        cancelButtonExplanationE.backgroundColor = colour3
+        
+        let origImage = UIImage(named: "Minus")
+        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        cancelButtonExplanationE.setImage(tintedImage, for: .normal)
+        //Image Tint
+        cancelButtonExplanationE.tintColor = colour4
+        
         
         
         
         // Contents
         //
-        explanationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-        explanationLabel.textColor = .black
-        explanationLabel.textAlignment = .justified
-        explanationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-        explanationLabel.numberOfLines = 0
+        explanationLabelE.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+        explanationLabelE.textColor = .black
+        explanationLabelE.textAlignment = .justified
+        explanationLabelE.lineBreakMode = NSLineBreakMode.byWordWrapping
+        explanationLabelE.numberOfLines = 0
         
         
         let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[warmupScreenIndex], comment: ""))
@@ -1253,34 +1366,33 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
         
-        explanationLabel.attributedText = attributedStringE
+        explanationLabelE.attributedText = attributedStringE
         
-        explanationLabel.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width - 20, height: 0)
-        explanationLabel.sizeToFit()
+        explanationLabelE.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width - 20, height: 0)
+        explanationLabelE.sizeToFit()
         
         // Scroll View
-        scrollViewExplanation.addSubview(explanationLabel)
-        scrollViewExplanation.contentSize = CGSize(width: self.view.frame.size.width, height: explanationLabel.frame.size.height + 20)
+        scrollViewExplanationE.addSubview(explanationLabelE)
+        scrollViewExplanationE.contentSize = CGSize(width: self.view.frame.size.width, height: explanationLabelE.frame.size.height + 20)
         
-        scrollViewExplanation.contentOffset.y = 0
+        scrollViewExplanationE.contentOffset.y = 0
+        
+        
+        
+        
         
         
         // Add Views
-        view.addSubview(scrollViewExplanation)
-        view.addSubview(backgroundViewExplanation)
+        view.addSubview(scrollViewExplanationE)
+        view.addSubview(backgroundViewExplanationE)
+        view.addSubview(cancelButtonExplanationE)
         
-        view.bringSubview(toFront: scrollViewExplanation)
-        
-        
-        
-        
+        view.bringSubview(toFront: scrollViewExplanationE)
+        view.bringSubview(toFront: cancelButtonExplanationE)
         
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.scrollViewExplanation.center.y = (self.view.frame.size.height/2) * 1.5
-            self.backgroundViewExplanation.alpha = 0.5
-        }, completion: nil)
-        
+        nextButton.isEnabled = false
+        backButton.isEnabled = false
         
     }
     
@@ -1288,189 +1400,95 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     @IBAction func retractExplanation(_ sender: Any) {
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.scrollViewExplanation.center.y = (self.view.frame.size.height/2) * 2.5
-            self.backgroundViewExplanation.alpha = 0
-
-        }, completion: nil)
         
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-    
-            self.scrollViewExplanation.removeFromSuperview()
-            self.backgroundViewExplanation.removeFromSuperview()
+        scrollViewExplanationE.removeFromSuperview()
+        backgroundViewExplanationE.removeFromSuperview()
+        cancelButtonExplanationE.removeFromSuperview()
         
-            self.explanationLabel.removeFromSuperview()
-    
-            self.nextButton.isEnabled = true
-            self.backButton.isEnabled = true
-                    
-        }
+        explanationLabelE.removeFromSuperview()
+        
+        
+        nextButton.isEnabled = true
+        backButton.isEnabled = true
     }
     
     
     
     
     
-    //
+    
     // Hide Screen
     //
+    let hideScreenView = UIView()
     let blurEffectView = UIVisualEffectView()
     let hideLabel = UILabel()
     var brightness = UIScreen.main.brightness
     
     @IBAction func hideScreen(_ sender: Any) {
         
+        
+        // Hide Screen view
+        let screenSize = UIScreen.main.bounds
+        hideScreenView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+        hideScreenView.backgroundColor = .clear
+        hideScreenView.clipsToBounds = true
+        hideScreenView.alpha = 0
+        
         // Blur
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-        let screenSize = UIScreen.main.bounds
         blurEffectView.effect = blurEffect
-        blurEffectView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+        blurEffectView.frame = hideScreenView.frame
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        hideScreenView.addSubview(blurEffectView)
         blurEffectView.alpha = 0
         
-    
         
-        // Triple Tap
-        let tripleTap = UITapGestureRecognizer()
-        tripleTap.numberOfTapsRequired = 3
-        tripleTap.addTarget(self, action: #selector(handleTap))
-        blurEffectView.isUserInteractionEnabled = true
-        blurEffectView.addGestureRecognizer(tripleTap)
         
+        
+        
+        // Double Tap
+        let doubleTap = UITapGestureRecognizer()
+        doubleTap.numberOfTapsRequired = 2
+        doubleTap.addTarget(self, action: #selector(handleTap))
+        hideScreenView.isUserInteractionEnabled = true
+        hideScreenView.addGestureRecognizer(doubleTap)
         
         
         // Text
         hideLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
-        hideLabel.center = blurEffectView.center
+        hideLabel.center = hideScreenView.center
         hideLabel.textAlignment = .center
         hideLabel.numberOfLines = 0
         hideLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         hideLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
         hideLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        hideLabel.alpha = 0
+        
         hideLabel.text = NSLocalizedString("hideScreen", comment: "")
         
         
-        
         //
-        blurEffectView.addSubview(hideLabel)
-        UIApplication.shared.keyWindow?.insertSubview(blurEffectView, aboveSubview: view)
+        hideScreenView.addSubview(hideLabel)
+        UIApplication.shared.keyWindow?.insertSubview(hideScreenView, aboveSubview: view)
         //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.blurEffectView.alpha = 1
-            //UIScreen.main.brightness = self.brightness/2
+            self.hideScreenView.alpha = 1
+            UIScreen.main.brightness = self.brightness/2
         }, completion: nil)
-        //
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            self.hideLabel.alpha = 1
-        }
     }
     
     
     
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
         
-        self.hideLabel.alpha = 0
-
-        //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.blurEffectView.alpha = 0
-            //UIScreen.main.brightness = self.brightness/2
-        }, completion: nil)
-        //
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        blurEffectView.removeFromSuperview()
+        hideLabel.removeFromSuperview()
         
-        self.blurEffectView.removeFromSuperview()
-        self.hideLabel.removeFromSuperview()
+        UIScreen.main.brightness = brightness
         
-        //UIScreen.main.brightness = brightness
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    //
-    // Image Buttons
-    //
-    
-    // Target Area Button
-    @IBAction func targetAreaAction(_ sender: Any) {
-        
-        //
-        targetAreaButton.alpha = 0
-        targetAreaButton.isEnabled = false
-        demonstrationImageButton.alpha = 1
-        demonstrationImageButton.isEnabled = true
-        
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.imageScroll.contentOffset.x = self.imageScroll.frame.size.width
-        }, completion: nil)
+        hideScreenView.removeFromSuperview()
         
     }
-    
-    
-    @IBAction func demonstrationAction(_ sender: Any) {
-        
-        //
-        targetAreaButton.alpha = 1
-        targetAreaButton.isEnabled = true
-        demonstrationImageButton.alpha = 0
-        demonstrationImageButton.isEnabled = false
-
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.imageScroll.contentOffset.x = 0
-        }, completion: nil)
-    }
-    
-    
-    // Handle Swipes
-    @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
-        if (extraSwipe.direction == .right){
-            
-            //
-            targetAreaButton.alpha = 1
-            targetAreaButton.isEnabled = true
-            demonstrationImageButton.alpha = 0
-            demonstrationImageButton.isEnabled = false
-            
-            
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.imageScroll.contentOffset.x = 0
-            }, completion: nil)
-        
-            
-        } else if extraSwipe.direction == .left {
-            
-            //
-            targetAreaButton.alpha = 0
-            targetAreaButton.isEnabled = false
-            demonstrationImageButton.alpha = 1
-            demonstrationImageButton.isEnabled = true
-            
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.imageScroll.contentOffset.x = self.imageScroll.frame.size.width
-            }, completion: nil)
-            
-        }
-    }
-
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     //---------------------------------------------------------------------------------------------------------------
@@ -1494,7 +1512,9 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         //
         let screenSize = UIScreen.main.bounds
-        let navigationBarHeight = CGFloat(44)
+        //let navigationBarHeight = self.navigationController!.navigationBar.frame.height
+        //let navigationBarHeight = self.navigationBar.accessibilityFrame.height
+        let navigationBarHeight = self.navigationController!.navigationBar.frame.size.height
         //
         walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
         walkthroughView.backgroundColor = .black
@@ -1544,7 +1564,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             //
             
             
-            label.text = NSLocalizedString("movementScreen0", comment: "")
+            label.text = NSLocalizedString("movementScreen1", comment: "")
             walkthroughView.addSubview(label)
             
             
@@ -1578,7 +1598,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             //
             
             
-            label.text = NSLocalizedString("movementScreen1", comment: "")
+            label.text = NSLocalizedString("movementScreen2", comment: "")
             walkthroughView.addSubview(label)
             
             
@@ -1595,7 +1615,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 2:
             // Clear Section
             let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width * 0.075, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.083, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1608,7 +1628,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             //
             
             
-            label.text = NSLocalizedString("movementScreen2", comment: "")
+            label.text = NSLocalizedString("movementScreen3", comment: "")
             walkthroughView.addSubview(label)
             
             
@@ -1621,12 +1641,10 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
             
-            
-            
         case 3:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height, width: imageScroll.frame.size.width, height: imageScroll.frame.size.height))
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant / 2), width: setsRepsLabel.frame.size.width + 6, height: setTop.constant/2))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1639,9 +1657,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             //
             
             
-            let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
-            label.center.y = centerY
-            label.text = NSLocalizedString("movementScreen3", comment: "")
+            label.text = NSLocalizedString("movementScreen4", comment: "")
             walkthroughView.addSubview(label)
             
             
@@ -1653,13 +1669,11 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
-           
-            
             
         case 4:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: view.frame.size.width - targetAreaButton.frame.size.width, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height - targetAreaButton.frame.size.height, width: targetAreaButton.frame.size.width, height: targetAreaButton.frame.size.height))
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + setTop.constant, width: setRepView.frame.size.width, height: setRepView.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1671,23 +1685,11 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             walkthroughView.clipsToBounds = true
             //
             
-            let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
-            label.center.y = centerY
-            label.text = NSLocalizedString("movementScreen4", comment: "")
+            
+            label.text = NSLocalizedString("movementScreen5", comment: "")
             walkthroughView.addSubview(label)
             
             
-            // Demonstration Image
-            //
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.imageScroll.contentOffset.x = 0
-            }, completion: nil)
-            //
-            targetAreaButton.alpha = 1
-            targetAreaButton.isEnabled = true
-            demonstrationImageButton.alpha = 0
-            demonstrationImageButton.isEnabled = false
-            //
             
             
             walkthroughView.addSubview(backButtonW)
@@ -1702,7 +1704,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 5:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height, width: imageScroll.frame.size.width, height: imageScroll.frame.size.height))
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 2) + setRepView.frame.size.height , width: demonstrationImage.frame.size.width, height: demonstrationImage.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1714,23 +1716,11 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             walkthroughView.clipsToBounds = true
             //
             
-            let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
-            label.center.y = centerY
-            label.text = NSLocalizedString("movementScreen5", comment: "")
+            label.center.y = scrollViewExplanation.frame.maxY
+            label.text = NSLocalizedString("movementScreen6", comment: "")
             walkthroughView.addSubview(label)
             
             
-            // Target Area Image
-            //
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.imageScroll.contentOffset.x = self.imageScroll.frame.size.width
-            }, completion: nil)
-            //
-            targetAreaButton.alpha = 0
-            targetAreaButton.isEnabled = false
-            demonstrationImageButton.alpha = 1
-            demonstrationImageButton.isEnabled = true
-            //
             
             
             walkthroughView.addSubview(backButtonW)
@@ -1745,7 +1735,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 6:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height - demonstrationImageButton.frame.size.height, width: demonstrationImageButton.frame.size.width, height: demonstrationImageButton.frame.size.height))
+            path.addRect(CGRect(x: demonstrationImage.frame.size.width + 1, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 2) + setRepView.frame.size.height , width: demonstrationImage.frame.size.width, height: demonstrationImage.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1757,23 +1747,10 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             walkthroughView.clipsToBounds = true
             //
             
-            let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
-            label.center.y = centerY
-            label.text = NSLocalizedString("movementScreen6", comment: "")
+            label.center.y = scrollViewExplanation.frame.maxY
+            label.text = NSLocalizedString("movementScreen7", comment: "")
             walkthroughView.addSubview(label)
             
-            
-            // Target Area Image
-            //
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.imageScroll.contentOffset.x = self.imageScroll.frame.size.width
-            }, completion: nil)
-            //
-            targetAreaButton.alpha = 0
-            targetAreaButton.isEnabled = false
-            demonstrationImageButton.alpha = 1
-            demonstrationImageButton.isEnabled = true
-            //
             
             
             
@@ -1789,7 +1766,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 7:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: (view.frame.size.width / 2) - (setsRepsLabel.frame.size.width / 2), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height, width: setsRepsLabel.frame.size.width, height: setsRepsLabel.frame.size.height))
+            path.addArc(center: CGPoint(x: imageExpand.center.x, y: imageExpand.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1802,23 +1779,10 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             //
             
             
-            let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
-            label.center.y = centerY
-            label.text = NSLocalizedString("movementScreen7", comment: "")
+            label.text = NSLocalizedString("movementScreen8", comment: "")
             walkthroughView.addSubview(label)
             
             
-            // Demonstration Image
-            //
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.imageScroll.contentOffset.x = 0
-            }, completion: nil)
-            //
-            targetAreaButton.alpha = 1
-            targetAreaButton.isEnabled = true
-            demonstrationImageButton.alpha = 0
-            demonstrationImageButton.isEnabled = false
-            //
             
             
             walkthroughView.addSubview(backButtonW)
@@ -1834,7 +1798,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 8:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + setsRepsLabel.frame.size.height, width: setRepView.frame.size.width, height: setRepView.frame.size.height))
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 3) + setRepView.frame.size.height + demonstrationImage.frame.size.height, width: scrollViewExplanation.frame.size.width, height: scrollViewExplanation.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1846,9 +1810,8 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             walkthroughView.clipsToBounds = true
             //
             
-            let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
-            label.center.y = centerY
-            label.text = NSLocalizedString("movementScreen8", comment: "")
+            label.center.y = demonstrationImage.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("movementScreen9", comment: "")
             walkthroughView.addSubview(label)
             
             
@@ -1865,7 +1828,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 9:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + setsRepsLabel.frame.size.height + setRepView.frame.size.height, width: timerButton.frame.size.width, height: timerButton.frame.size.height))
+            path.addArc(center: CGPoint(x: explanationExpand.center.x, y: explanationExpand.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1878,9 +1841,8 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             //
             
             
-            let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
-            label.center.y = centerY
-            label.text = NSLocalizedString("movementScreen9", comment: "")
+            label.center.y = demonstrationImage.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("movementScreen10", comment: "")
             walkthroughView.addSubview(label)
             
             
@@ -1897,7 +1859,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 10:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: (view.frame.size.width / 2) - (explanationExpand.frame.size.width / 2), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + setsRepsLabel.frame.size.height + setRepView.frame.size.height, width: explanationExpand.frame.size.width, height: explanationExpand.frame.size.height))
+            path.addArc(center: CGPoint(x: timerButton.center.x, y: timerButton.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1909,10 +1871,8 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             walkthroughView.clipsToBounds = true
             //
             
-            
-            let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
-            label.center.y = centerY
-            label.text = NSLocalizedString("movementScreen10", comment: "")
+            label.center.y = demonstrationImage.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("movementScreen11", comment: "")
             walkthroughView.addSubview(label)
             
             
@@ -1931,7 +1891,7 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 11:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: view.frame.size.width - hideScreen.frame.size.width, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + setsRepsLabel.frame.size.height + setRepView.frame.size.height, width: hideScreen.frame.size.width, height: hideScreen.frame.size.height))
+            path.addArc(center: CGPoint(x: hideScreen.center.x, y: hideScreen.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.size.height), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1943,9 +1903,8 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             walkthroughView.clipsToBounds = true
             //
             
-            let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
-            label.center.y = centerY
-            label.text = NSLocalizedString("movementScreen11", comment: "")
+            label.center.y = demonstrationImage.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            label.text = NSLocalizedString("movementScreenh", comment: "")
             walkthroughView.addSubview(label)
             
             
@@ -1965,9 +1924,9 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 12:
             // Clear Section
             let path = CGMutablePath()
-            let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height
-            let yValue = y + setsRepsLabel.frame.size.height + setRepView.frame.size.height + timerButton.frame.size.height
-            path.addRect(CGRect(x: 0, y: yValue, width: progressLabel.frame.size.width + 14, height: progressLabel.frame.size.height))
+            let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 3.5)
+            let yValue = y + scrollViewExplanation.frame.size.height + setRepView.frame.size.height + demonstrationImage.frame.size.height
+            path.addRect(CGRect(x: 0, y: yValue, width: progressLabel.frame.size.width + 6, height: progressLabel.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1978,7 +1937,6 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
             //
-            
             
             
             label.text = NSLocalizedString("movementScreen12", comment: "")
@@ -1999,9 +1957,9 @@ class WarmupScreenTest: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 13:
             // Clear Section
             let path = CGMutablePath()
-            let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height
-            let yValue = y + setsRepsLabel.frame.size.height + setRepView.frame.size.height + timerButton.frame.size.height
-            path.addRect(CGRect(x: 14 + progressLabel.frame.size.width, y: yValue, width: view.frame.size.width - 14 - progressLabel.frame.size.width, height: progressBarView.frame.size.height))
+            let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + (setTop.constant * 4)
+            let yValue = y + scrollViewExplanation.frame.size.height + setRepView.frame.size.height + demonstrationImage.frame.size.height
+            path.addRect(CGRect(x: 0, y: yValue, width: view.frame.size.width, height: progressBarView.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()

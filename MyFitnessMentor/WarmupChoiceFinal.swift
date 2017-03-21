@@ -174,27 +174,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              "pullUp"]
         ]
     
-    // Warmup
-    let warmupSelectedArrayFull =
-        [
-            // Mandatory
-            [0, 0],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            // Lower Back
-            [0, 0, 0, 0, 0],
-            // Shoulder
-            [0, 0, 0, 0],
-            // Band/Bar/Machine Assisted
-            [0, 0, 0, 0, 0, 0],
-            // General Mobility
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            // Accessory
-            [0, 0, 0, 0]
-        ]
-
+    
     // Table View Section Title Array
     var tableViewSectionArrayFull =
         [
@@ -256,7 +236,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                     // Joint Rotations
                     [0, 0, 0, 0, 0, 0, 0, 0],
                     // Foam/Ball Roll
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     // Lower Back
                     [0, 0, 0, 0, 0],
                     // Shoulder
@@ -532,7 +512,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 // Joint Rotations
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 // Lower Back
                 [0, 0, 0, 0, 0],
                 // Shoulder
@@ -550,7 +530,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 // Joint Rotations
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 // Lower Back
                 [0, 0, 0, 0, 0],
                 // Shoulder
@@ -568,7 +548,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 // Joint Rotations
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 // Lower Back
                 [0, 0, 0, 0, 0],
                 // Shoulder
@@ -586,7 +566,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 // Joint Rotations
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 // Lower Back
                 [0, 0, 0, 0, 0],
                 // Shoulder
@@ -604,7 +584,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 // Joint Rotations
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 // Lower Back
                 [0, 0, 0, 0, 0],
                 // Shoulder
@@ -622,7 +602,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 // Joint Rotations
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 // Lower Back
                 [0, 0, 0, 0, 0],
                 // Shoulder
@@ -640,7 +620,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 // Joint Rotations
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 // Lower Back
                 [0, 0, 0, 0, 0],
                 // Shoulder
@@ -706,24 +686,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              "pullUp"]
         ]
     
-    // Default Warmup Selected Array
-    var warmupSelectedArrayUpper =
-        [
-            // Mandatory
-            [1, 0],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [1, 0, 0, 0, 0],
-            // Lower Back
-            [1, 0, 1, 0, 1],
-            // Shoulders
-            [1, 0, 0, 1],
-            // Band Assisted
-            [1, 1, 0, 1, 0, 0],
-            // Accessory
-            [1, 1, 1]
-        ]
     
     // Table View Section Title Array
     var tableViewSectionArrayUpper =
@@ -1159,22 +1121,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              "calveStretch"]
         ]
     
-    // Default Warmup Selected Array
-    var warmupSelectedArrayLower =
-        [
-            // Mandatory
-            [1, 0],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [0, 1, 1, 0, 1, 0, 0],
-            // Lower Back
-            [1, 0, 1, 0, 1],
-            // General Mobility
-            [0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0],
-            // Accessory
-            [1, 1]
-    ]
     
     // Table View Section Title Array
     var tableViewSectionArrayLower =
@@ -1438,17 +1384,17 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         [
             [
                 // Mandatory
-                [0, 0],
+                [1, 0],
                 // Joint Rotations
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
+                [0, 1, 1, 0, 1, 0, 0],
                 // Lower Back
-                [0, 0, 0, 0, 0],
+                [1, 0, 1, 0, 1],
                 // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0],
                 // Accessory
-                [0, 0]
+                [1, 1]
             ],
             [
                 // Mandatory
@@ -1594,23 +1540,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              "calveStretch"]
         ]
     
-    
-    // Default Warmup Selected Array
-    var warmupSelectedArrayCardio =
-        [
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [0, 0, 0, 0, 0, 0, 0],
-            // Lower Back
-            [0, 0, 0, 0, 0],
-            // General Mobility
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            // Dynamic Warm Up Drills
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            // Accessory
-            [0, 0, 0]
-        ]
     
     // Table View Section Title Array
     var tableViewSectionArrayCardio =
@@ -1909,7 +1838,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 // Joint Rotations
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
+                [0, 1, 1, 1, 0, 0, 0],
                 // Lower Back
                 [0, 0, 0, 0, 0],
                 // General Mobility
@@ -2007,7 +1936,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             // Choice Screen Arrays
             //
                 warmupMovementsArray = warmupFullArray
-                warmupSelectedArray = warmupSelectedArrayFull
+                warmupSelectedArray = presetsArraysFull[0]
                 pickerViewArray = pickerViewArrayFull
                 tableViewSectionArray = tableViewSectionArrayFull
                 presetsArrays = presetsArraysFull
@@ -2026,7 +1955,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             // Choice Screen Arrays
             //
                 warmupMovementsArray = warmupUpperArray
-                warmupSelectedArray = warmupSelectedArrayUpper
+                warmupSelectedArray = presetsArraysUpper[0]
                 pickerViewArray = pickerViewArrayUpper
                 tableViewSectionArray = tableViewSectionArrayUpper
                 presetsArrays = presetsArraysUpper
@@ -2045,7 +1974,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             // Choice Screen Arrays
             //
                 warmupMovementsArray = warmupLowerArray
-                warmupSelectedArray = warmupSelectedArrayLower
+                warmupSelectedArray = presetsArraysLower[0]
                 pickerViewArray = pickerViewArrayLower
                 tableViewSectionArray = tableViewSectionArrayLower
                 presetsArrays = presetsArraysLower
@@ -2064,7 +1993,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             // Choice Screen Arrays
             //
                 warmupMovementsArray = warmupCardioArray
-                warmupSelectedArray = warmupSelectedArrayCardio
+                warmupSelectedArray = presetsArraysCardio[0]
                 pickerViewArray = pickerViewArrayCardio
                 tableViewSectionArray = tableViewSectionArrayCardio
                 presetsArrays = presetsArraysCardio
@@ -2213,6 +2142,17 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString(navigationTitles[warmupType], comment: ""))
+        
+        
+        
+        
+        // Picker View Test
+        pickerView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        
+        
+        
+        
+        
         
         
         
@@ -2577,7 +2517,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         if row < pickerViewArray.count {
             let rowLabel = UILabel()
             let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor.black])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -2585,8 +2525,8 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         } else if row == pickerViewArray.count {
             
             let line = UILabel()
-            line.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width / 2, height: 1)
-            line.backgroundColor = .black
+            line.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width * (2/3), height: 1)
+            line.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             line.isEnabled = false
             return line
             
@@ -2595,7 +2535,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             let rowLabel = UILabel()
             let titleDataArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
             let titleData = titleDataArray[0]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor.black])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -2606,7 +2546,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             let rowLabel = UILabel()
             let titleDataArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
             let titleData = titleDataArray[1]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor.black])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -2617,7 +2557,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             let rowLabel = UILabel()
             let titleDataArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
             let titleData = titleDataArray[2]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor.black])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
@@ -2745,7 +2685,8 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
         header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        header.contentView.backgroundColor = colour7
+        header.contentView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+        //colour7
         header.contentView.tintColor = colour1
         //
         
@@ -3021,7 +2962,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49, width: self.view.frame.size.width, height: pickerView.frame.size.height))
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight, width: self.view.frame.size.width, height: pickerView.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -3038,14 +2979,20 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             walkthroughView.addSubview(label)
             
             
+            // Picker View
+            let delayInSeconds = 0.4
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.pickerView.selectRow(self.pickerViewArray.count, inComponent: 0, animated: true)
+            }
             
             
-            walkthroughView.addSubview(backButton)
+            
+            
+            
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
             UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
             walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
             
             
             
@@ -3056,7 +3003,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 98 + pickerView.frame.size.height, width: self.view.frame.size.width, height: tableView.frame.size.height))
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + pickerView.frame.size.height, width: self.view.frame.size.width, height: tableView.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -3069,7 +3016,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             //
             
             label.center = pickerView.center
-            label.center.y = 24.5 + (UIApplication.shared.statusBarFrame.height/2) + pickerView.frame.size.height
+            label.center.y = (UIApplication.shared.statusBarFrame.height/2) + pickerView.frame.size.height
             label.text = NSLocalizedString("choiceScreen23", comment: "")
             walkthroughView.addSubview(label)
             
@@ -3092,7 +3039,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             // Clear Section
             let path = CGMutablePath()
-            path.addEllipse(in: CGRect(x: self.view.frame.size.width - 98, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + pickerView.frame.size.height, width: 98, height: 49))
+            path.addEllipse(in: CGRect(x: self.view.frame.size.width - 98, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + pickerView.frame.size.height, width: 98, height: 49))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -3104,8 +3051,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             walkthroughView.clipsToBounds = true
             //
             
-            label.center = tableView.center
-            label.center.y = tableView.frame.maxY - 49
             label.text = NSLocalizedString("choiceScreen24", comment: "")
             walkthroughView.addSubview(label)
             
@@ -3126,7 +3071,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 98 + pickerView.frame.size.height + tableView.frame.size.height, width: self.view.frame.size.height, height: 49))
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + pickerView.frame.size.height + tableView.frame.size.height, width: self.view.frame.size.height, height: 49))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -3143,6 +3088,10 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             walkthroughView.addSubview(label)
             
             
+            
+            // Picker
+            self.pickerView.selectRow(0, inComponent: 0, animated: true)
+
             
             
             walkthroughView.addSubview(backButton)
