@@ -2728,6 +2728,15 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Cell Image
         cell.imageView?.image = #imageLiteral(resourceName: "Test")
+        cell.imageView?.isUserInteractionEnabled = true
+        
+        // Triple Tap
+        let imageTap = UITapGestureRecognizer()
+        imageTap.numberOfTapsRequired = 1
+        imageTap.addTarget(self, action: #selector(handleTap))
+        cell.imageView?.addGestureRecognizer(imageTap)
+        
+
         
         
         return cell
@@ -2833,6 +2842,74 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
+    // Handle Tap
+    //
+    let expandedImage = UIImageView()
+    let backgroundViewImage = UIButton()
+    //
+    @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
+        
+        
+        let sender = extraTap.view as! UIImageView
+        let image = sender.image
+        
+        
+        
+        // Expanded Image
+        //
+        expandedImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height/2)
+        expandedImage.center.x = self.view.frame.size.width/2
+        expandedImage.center.y = (self.view.frame.size.height/2) * 2.5
+        //
+        expandedImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        expandedImage.image = demonstrationArrayF[section][row]
+        
+        
+        
+        
+        // Background View
+        //
+        backgroundViewImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        backgroundViewImage.backgroundColor = .black
+        backgroundViewImage.alpha = 0
+        
+        backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
+        
+        
+        
+        
+        
+        
+        
+        //
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.expandedImage.center.y = (self.view.frame.size.height/2) * 1.5
+            self.backgroundViewImage.alpha = 0.5
+        }, completion: nil)
+    }
+    
+    
+    @IBAction func retractImage(_ sender: Any) {
+        //
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.expandedImage.center.y = (self.view.frame.size.height/2) * 2.5
+            self.backgroundViewImage.alpha = 0
+            
+        }, completion: nil)
+        
+        //
+        let delayInSeconds = 0.4
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            //
+            self.expandedImage.removeFromSuperview()
+            self.backgroundViewImage.removeFromSuperview()
+        }
+    }
+    
+    
+    
+
+    
     
     
     
@@ -2870,7 +2947,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenTest
+            let destinationVC = destinationNC.viewControllers.first as! WarmupScreen
             
             destinationVC.warmupMovementsArray = warmupMovementsArray
             destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
