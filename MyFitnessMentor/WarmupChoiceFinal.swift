@@ -2730,7 +2730,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.imageView?.image = #imageLiteral(resourceName: "Test")
         cell.imageView?.isUserInteractionEnabled = true
         
-        // Triple Tap
+        // Image Tap
         let imageTap = UITapGestureRecognizer()
         imageTap.numberOfTapsRequired = 1
         imageTap.addTarget(self, action: #selector(handleTap))
@@ -2850,40 +2850,49 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
         
         
+        // Get Image
         let sender = extraTap.view as! UIImageView
         let image = sender.image
+        // Get Image
+        // let index = demonstrationImage.indexWhere
         
-        
+        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
+
         
         // Expanded Image
         //
-        expandedImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height/2)
+        expandedImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height/2)
         expandedImage.center.x = self.view.frame.size.width/2
-        expandedImage.center.y = (self.view.frame.size.height/2) * 2.5
+        expandedImage.center.y = (height/2) * 2.5
         //
         expandedImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        expandedImage.image = demonstrationArrayF[section][row]
+        expandedImage.contentMode = .scaleAspectFit
+        expandedImage.isUserInteractionEnabled = true
         
+        //expandedImage.image = demonstrationArrayF[section][row]
+        expandedImage.image = #imageLiteral(resourceName: "Test 2")
         
         
         
         // Background View
         //
-        backgroundViewImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        backgroundViewImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height)
         backgroundViewImage.backgroundColor = .black
         backgroundViewImage.alpha = 0
         
         backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
         
-        
-        
-        
-        
+        //
+        self.questionMark.isEnabled = true
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
+            UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
+
         
         
         //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.expandedImage.center.y = (self.view.frame.size.height/2) * 1.5
+            self.expandedImage.center.y = (height/2) * 1.5
             self.backgroundViewImage.alpha = 0.5
         }, completion: nil)
     }
@@ -2891,8 +2900,10 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     
     @IBAction func retractImage(_ sender: Any) {
         //
+        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
+        //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.expandedImage.center.y = (self.view.frame.size.height/2) * 2.5
+            self.expandedImage.center.y = (height/2) * 2.5
             self.backgroundViewImage.alpha = 0
             
         }, completion: nil)
@@ -2903,6 +2914,8 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             //
             self.expandedImage.removeFromSuperview()
             self.backgroundViewImage.removeFromSuperview()
+            self.questionMark.isEnabled = true
+            self.navigationItem.setHidesBackButton(false, animated: true)
         }
     }
     
@@ -2928,7 +2941,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         // Return background to homescreen
-        let delayInSeconds = 1.0
+        let delayInSeconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             
             _ = self.navigationController?.popToRootViewController(animated: false)
@@ -2986,6 +2999,10 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             }
         }
     }
+    
+    
+    
+    
     
     
     //---------------------------------------------------------------------------------------------------------------
@@ -3052,14 +3069,22 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             //
             
             
-            label.text = NSLocalizedString("choiceScreen22", comment: "")
+            label.text = NSLocalizedString("choiceScreen21", comment: "")
             walkthroughView.addSubview(label)
             
             
+            nextButton.isEnabled = false
+            let delayInSeconds2 = 1.0
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds2) {
+                self.pickerView.selectRow(self.pickerViewArray.count, inComponent: 0, animated: true)
+                self.nextButton.isEnabled = true
+            }
+            //
             // Picker View
             let delayInSeconds = 0.4
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 self.pickerView.selectRow(self.pickerViewArray.count, inComponent: 0, animated: true)
+                self.nextButton.isEnabled = true
             }
             
             
@@ -3094,6 +3119,41 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             label.center = pickerView.center
             label.center.y = (UIApplication.shared.statusBarFrame.height/2) + pickerView.frame.size.height
+            label.text = NSLocalizedString("choiceScreen22", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButton)
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            walkthroughView.bringSubview(toFront: backButton)
+            
+            
+        //
+        case 2:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y:   UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + pickerView.frame.size.height + 24.5, width: 72 + 5, height: 72))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.center = pickerView.center
+            label.center.y = (UIApplication.shared.statusBarFrame.height/2) + pickerView.frame.size.height
             label.text = NSLocalizedString("choiceScreen23", comment: "")
             walkthroughView.addSubview(label)
             
@@ -3109,8 +3169,9 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
             
+  
         //
-        case 2:
+        case 3:
             //
             
             
@@ -3142,7 +3203,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
         //
-        case 3:
+        case 4:
             //
             
             
@@ -3181,7 +3242,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
         //
-        case 4:
+        case 5:
             //
             
             

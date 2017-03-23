@@ -126,8 +126,12 @@ class MindBody: UIViewController {
     @IBOutlet weak var backgroundImage: UIImageView!
     
     
+    // Mind
+    @IBOutlet weak var body: UILabel!
     
-    // Labels
+    // Body
+    @IBOutlet weak var mind: UILabel!
+    
     
 //---------------------------------------------------------------------------------------------------------------
     
@@ -200,8 +204,8 @@ class MindBody: UIViewController {
         
         
         // Background Image
-        //backgroundImage.frame = view.bounds
-        //backgroundImage.image = #imageLiteral(resourceName: "Test Background")
+        backgroundImage.frame = view.bounds
+        backgroundImage.image = #imageLiteral(resourceName: "Background 0")
         
         
         
@@ -236,79 +240,150 @@ class MindBody: UIViewController {
         // Button Titles
         Warmup.setTitle(NSLocalizedString("warmup", comment: ""), for: UIControlState.normal)
         Warmup.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
-        Warmup.titleLabel!.textColor = .white
         Warmup.layer.borderWidth = 8
         Warmup.layer.borderColor = colour3.cgColor
         Warmup.titleLabel?.adjustsFontSizeToFitWidth = true
         Warmup.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Warmup.titleLabel?.textAlignment = .center
-        Warmup.setTitleColor(colour3, for: .normal)
+        Warmup.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
         
         
         Workout.setTitle(NSLocalizedString("workout", comment: ""), for: UIControlState.normal)
         Workout.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
-        Workout.titleLabel!.textColor = .white
         Workout.layer.borderWidth = 8
         Workout.layer.borderColor = colour3.cgColor
         Workout.titleLabel?.adjustsFontSizeToFitWidth = true
         Workout.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Workout.titleLabel?.textAlignment = .center
-        Workout.setTitleColor(colour3, for: .normal)
+        Workout.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
 
         
         
         Stretching.setTitle(NSLocalizedString("stretching", comment: ""), for: UIControlState.normal)
         Stretching.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
-        Stretching.titleLabel!.textColor = .white
         Stretching.layer.borderWidth = 8
         Stretching.layer.borderColor = colour3.cgColor
         Stretching.titleLabel?.adjustsFontSizeToFitWidth = true
         Stretching.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Stretching.titleLabel?.textAlignment = .center
-        Stretching.setTitleColor(colour3, for: .normal)
+        Stretching.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
 
         
         
         
         Cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
         Cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
-        Cardio.titleLabel!.textColor = .white
         Cardio.layer.borderWidth = 8
         Cardio.layer.borderColor = colour3.cgColor
         Cardio.titleLabel?.adjustsFontSizeToFitWidth = true
         Cardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Cardio.titleLabel?.textAlignment = .center
-        Cardio.setTitleColor(colour3, for: .normal)
+        Cardio.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
 
         
         
         
         Yoga.setTitle(NSLocalizedString("yoga", comment: ""), for: UIControlState.normal)
         Yoga.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
-        Yoga.titleLabel!.textColor = .white
         Yoga.titleLabel!.adjustsFontSizeToFitWidth = true
         Yoga.layer.borderWidth = 8
         Yoga.layer.borderColor = colour3.cgColor
         Yoga.titleLabel?.adjustsFontSizeToFitWidth = true
         Yoga.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Yoga.titleLabel?.textAlignment = .center
-        Yoga.setTitleColor(colour3, for: .normal)
+        Yoga.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
 
         
         
         
         Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
         Meditation.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
-        Meditation.titleLabel!.textColor = .white
         Meditation.layer.borderWidth = 8
         Meditation.layer.borderColor = colour3.cgColor
         Meditation.titleLabel?.adjustsFontSizeToFitWidth = true
         Meditation.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Meditation.titleLabel?.textAlignment = .center
-        Meditation.setTitleColor(colour3, for: .normal)
+        Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
 
         
         
+        // Blur and Vibranct
+        let blurE = UIBlurEffect(style: .dark)
+        let blur = UIVisualEffectView(effect: blurE)
+        let vibrancyE = UIVibrancyEffect(blurEffect: blurE)
+        blur.effect = vibrancyE
+        blur.frame = Warmup.bounds
+        blur.isUserInteractionEnabled = false
+        Warmup.insertSubview(blur, belowSubview: Warmup.titleLabel!)
+        //
+        let blurE1 = UIBlurEffect(style: .dark)
+        let blur1 = UIVisualEffectView(effect: blurE1)
+        let vibrancyE1 = UIVibrancyEffect(blurEffect: blurE1)
+        blur1.effect = vibrancyE1
+        blur1.frame = Workout.bounds
+        blur1.isUserInteractionEnabled = false
+        Workout.insertSubview(blur1, belowSubview: Workout.titleLabel!)
+        //
+        let blurE2 = UIBlurEffect(style: .dark)
+        let blur2 = UIVisualEffectView(effect: blurE2)
+        let vibrancyE2 = UIVibrancyEffect(blurEffect: blurE2)
+        blur2.effect = vibrancyE2
+        blur2.frame = Cardio.bounds
+        blur2.isUserInteractionEnabled = false
+        Cardio.insertSubview(blur2, belowSubview: Cardio.titleLabel!)
+        //
+        let blurE3 = UIBlurEffect(style: .dark)
+        let blur3 = UIVisualEffectView(effect: blurE3)
+        let vibrancyE3 = UIVibrancyEffect(blurEffect: blurE3)
+        blur3.effect = vibrancyE3
+        blur3.frame = Stretching.bounds
+        blur3.isUserInteractionEnabled = false
+        Stretching.insertSubview(blur3, belowSubview: Stretching.titleLabel!)
+        //
+        let blurE4 = UIBlurEffect(style: .dark)
+        let blur4 = UIVisualEffectView(effect: blurE4)
+        let vibrancyE4 = UIVibrancyEffect(blurEffect: blurE4)
+        blur4.effect = vibrancyE4
+        blur4.frame = Yoga.bounds
+        blur4.isUserInteractionEnabled = false
+        Yoga.insertSubview(blur4, belowSubview: Yoga.titleLabel!)
+        //
+        let blurE5 = UIBlurEffect(style: .dark)
+        let blur5 = UIVisualEffectView(effect: blurE5)
+        let vibrancyE5 = UIVibrancyEffect(blurEffect: blurE5)
+        blur5.effect = vibrancyE5
+        blur5.frame = Meditation.bounds
+        blur5.isUserInteractionEnabled = false
+        Meditation.insertSubview(blur5, belowSubview: Meditation.titleLabel!)
+        
+        
+        // Test
+        body.layer.cornerRadius = body.frame.size.height / 2
+        body.layer.masksToBounds = true
+        let blurE6 = UIBlurEffect(style: .dark)
+        let blur6 = UIVisualEffectView(effect: blurE6)
+        let vibrancyE6 = UIVibrancyEffect(blurEffect: blurE6)
+        blur6.effect = vibrancyE6
+        blur6.frame = body.bounds
+        blur6.center = body.center
+        blur6.isUserInteractionEnabled = false
+        blur6.layer.cornerRadius = body.frame.size.height / 2
+        blur6.layer.masksToBounds = true
+        view.insertSubview(blur6, belowSubview: body)
+        
+        //
+        mind.layer.cornerRadius = mind.frame.size.height / 2
+        mind.layer.masksToBounds = true
+        let blurE7 = UIBlurEffect(style: .dark)
+        let blur7 = UIVisualEffectView(effect: blurE7)
+        let vibrancyE7 = UIVibrancyEffect(blurEffect: blurE7)
+        blur7.effect = vibrancyE7
+        blur7.frame = mind.bounds
+        blur7.center = mind.center
+        blur7.isUserInteractionEnabled = false
+        blur7.layer.cornerRadius = mind.frame.size.height / 2
+        blur7.layer.masksToBounds = true
+        view.insertSubview(blur7, belowSubview: mind)
         
         
         // Iphone 5/SE
@@ -327,6 +402,14 @@ class MindBody: UIViewController {
             mindBottom.constant = 3
             
             stack3Bottom.constant = 15
+            
+            
+           
+
+        }
+        
+        if colour1 == UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0) {
+            backgroundImage.image = nil
         }
         
         
@@ -387,44 +470,6 @@ class MindBody: UIViewController {
             Meditation.layer.masksToBounds = true
             
             
-            
-//            // Blur Effect
-//            let blur = UIVisualEffectView(effect: UIBlurEffect(style:
-//                UIBlurEffectStyle.light))
-//            blur.frame = Warmup.bounds
-//            blur.isUserInteractionEnabled = false
-//            Warmup.insertSubview(blur, at: 0)
-//            
-//            let blur1 = UIVisualEffectView(effect: UIBlurEffect(style:
-//                UIBlurEffectStyle.light))
-//            blur1.frame = Workout.bounds
-//            blur1.isUserInteractionEnabled = false
-//            Workout.insertSubview(blur1, at: 0)
-//            
-//            let blur2 = UIVisualEffectView(effect: UIBlurEffect(style:
-//                UIBlurEffectStyle.light))
-//            blur2.frame = Cardio.bounds
-//            blur2.isUserInteractionEnabled = false
-//            Cardio.insertSubview(blur2, at: 0)
-//            
-//            let blur3 = UIVisualEffectView(effect: UIBlurEffect(style:
-//                UIBlurEffectStyle.light))
-//            blur3.frame = Stretching.bounds
-//            blur3.isUserInteractionEnabled = false
-//            Stretching.insertSubview(blur3, at: 0)
-//            
-//            let blur4 = UIVisualEffectView(effect: UIBlurEffect(style:
-//                UIBlurEffectStyle.light))
-//            blur4.frame = Yoga.bounds
-//            blur4.isUserInteractionEnabled = false
-//            Yoga.insertSubview(blur4, at: 0)
-//            
-//            let blur5 = UIVisualEffectView(effect: UIBlurEffect(style:
-//                UIBlurEffectStyle.light))
-//            blur5.frame = Meditation.bounds
-//            blur5.isUserInteractionEnabled = false
-//            Meditation.insertSubview(blur5, at: 0)
-
         }
     
     

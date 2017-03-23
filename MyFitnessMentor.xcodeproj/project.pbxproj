@@ -60,9 +60,10 @@
 		077C2C7E1E5C723D00BA62C0 /* GymChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */; };
 		077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */; };
 		077C2C861E5C8E8100BA62C0 /* HomeChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C2C851E5C8E8100BA62C0 /* HomeChoice.swift */; };
+		0780FD531E8400420026F2E4 /* WarmupScreenOverviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780FD521E8400420026F2E4 /* WarmupScreenOverviewDetail.swift */; };
 		0782A2981E5DA6B20016F908 /* ClassicChoiceFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782A2971E5DA6B20016F908 /* ClassicChoiceFull.swift */; };
 		0791872B1E7B4E2C00E7153A /* WarmupScreenOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872A1E7B4E2C00E7153A /* WarmupScreenOverview.swift */; };
-		0791872E1E7B4E4700E7153A /* WarmupScreenOverviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872D1E7B4E4700E7153A /* WarmupScreenOverviewDetail.swift */; };
+		0791872E1E7B4E4700E7153A /* WarmupScreenOverviewDetailOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872D1E7B4E4700E7153A /* WarmupScreenOverviewDetailOld.swift */; };
 		079187301E7DB15000E7153A /* WarmupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872F1E7DB15000E7153A /* WarmupScreen.swift */; };
 		079CAFA01E40E480003ED63B /* YogaChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CAF9F1E40E480003ED63B /* YogaChoiceCustom.swift */; };
 		079CAFA21E40E48F003ED63B /* YogaScreenCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CAFA11E40E48F003ED63B /* YogaScreenCustom.swift */; };
@@ -156,9 +157,10 @@
 		077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymChoice.swift; sourceTree = "<group>"; };
 		077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircuitChoiceG.swift; sourceTree = "<group>"; };
 		077C2C851E5C8E8100BA62C0 /* HomeChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeChoice.swift; sourceTree = "<group>"; };
+		0780FD521E8400420026F2E4 /* WarmupScreenOverviewDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupScreenOverviewDetail.swift; sourceTree = "<group>"; };
 		0782A2971E5DA6B20016F908 /* ClassicChoiceFull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassicChoiceFull.swift; sourceTree = "<group>"; };
 		0791872A1E7B4E2C00E7153A /* WarmupScreenOverview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupScreenOverview.swift; sourceTree = "<group>"; };
-		0791872D1E7B4E4700E7153A /* WarmupScreenOverviewDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupScreenOverviewDetail.swift; sourceTree = "<group>"; };
+		0791872D1E7B4E4700E7153A /* WarmupScreenOverviewDetailOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupScreenOverviewDetailOld.swift; sourceTree = "<group>"; };
 		0791872F1E7DB15000E7153A /* WarmupScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupScreen.swift; sourceTree = "<group>"; };
 		079CAF9F1E40E480003ED63B /* YogaChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaChoiceCustom.swift; sourceTree = "<group>"; };
 		079CAFA11E40E48F003ED63B /* YogaScreenCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreenCustom.swift; sourceTree = "<group>"; };
@@ -517,7 +519,8 @@
 			isa = PBXGroup;
 			children = (
 				0791872A1E7B4E2C00E7153A /* WarmupScreenOverview.swift */,
-				0791872D1E7B4E4700E7153A /* WarmupScreenOverviewDetail.swift */,
+				0791872D1E7B4E4700E7153A /* WarmupScreenOverviewDetailOld.swift */,
+				0780FD521E8400420026F2E4 /* WarmupScreenOverviewDetail.swift */,
 			);
 			name = Overview;
 			sourceTree = "<group>";
@@ -706,8 +709,9 @@
 				07E0A6DB1E3A2146005DCA08 /* StretchingScreenGeneral.swift in Sources */,
 				077AC1001DA54C810026895B /* Information.swift in Sources */,
 				077AC1021DA573210026895B /* Settings.swift in Sources */,
+				0780FD531E8400420026F2E4 /* WarmupScreenOverviewDetail.swift in Sources */,
 				071F783D1E3D0B1C00C72301 /* StretchingScreenCardio.swift in Sources */,
-				0791872E1E7B4E4700E7153A /* WarmupScreenOverviewDetail.swift in Sources */,
+				0791872E1E7B4E4700E7153A /* WarmupScreenOverviewDetailOld.swift in Sources */,
 				071966C51E3FAF5B00816A83 /* YogaChoicePractices.swift in Sources */,
 				07DEE6F31E0AADAC003B89AB /* StretchingChoice.swift in Sources */,
 				07E0A6E01E3A218C005DCA08 /* StretchingScreenWorkout.swift in Sources */,

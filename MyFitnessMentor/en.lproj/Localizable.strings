@@ -53,7 +53,7 @@
     "hideScreen" = "Pocket Mode\n\nTriple tap to exit";
 
 
-    "sessionStarted" = "Session Began!";
+    "sessionStarted" = "Session Begun!";
 
 
 
@@ -1465,8 +1465,9 @@
 
 
         // Choice Screen 2
-        "choiceScreen22" = "Presets\n\nScroll through the 'picker' to select a preset session or leave it on the suggested one.";
-        "choiceScreen23" = "The table contains all movements, those included in the session are indicated by a tick. Sessions can be fine tuned by selecting or deselecting movements.";
+        "choiceScreen21" = "Presets\n\nScroll through the 'picker' to select a preset session or leave it on the suggested one.";
+        "choiceScreen22" = "The table contains all movements, those included in the session are indicated by a tick. Sessions can be fine tuned by selecting or deselecting movements.";
+        "choiceScreen23" = "Image\nPress the image to expand it.\nOnce expanded, it can be dismissed by pressing the darker area above the image.";
         "choiceScreen24" = "Custom Presets\n\nUp to 3 custom presets can be saved using the '+' button. They are found at the bottom of the picker, below the seperator line shown above.\nTo remove a custom preset you must first select it in the picker the press the '-' button.";
         "choiceScreen25" = "Begin\n\nOnce happy with the session, press the begin button.";
         "choiceScreen26" = "Information\n\nThe walkthrough information for this screen is restated in case it is needed.";
@@ -1489,10 +1490,10 @@
         "movementScreen2" = "Back Buton\n\nIncase you need to go back a movement.";
         "movementScreen3" = "Demonstration\n\nThe demonstration is often in the form of a video (indicated by a play button in the top right), press the video to view one rep of the movement.";
         "movementScreen4" = "Target Area Button\n\nThe target area can be viewed by pressing this next button or by swiping the image left.";
-        "movementScreen5" = "Target Area\n\nThe image highlights in red the body parts being targeted.";
+        "movementScreen5" = "Target Area\n\nThe image highlights in red the body parts being targeted.\nThe target area image is important in helping the mind muscle connection and thus better muscle activation.";
         "movementScreen6" = "Demonstration Button\n\nReturn to the demonstration by pressing this back button or by swiping the image right.";
 //
-        "movementScreen7" = "Sets & Reps\n\nThe sets and reps are given in the form: sets x reps.\nReps can take the form of an amount of time.\n\nA rep is a repetition of a movement, and a set is a group of reps .(sets are usually seperated by a rest)";
+        "movementScreen7" = "Sets & Reps\n\nThe sets and reps are given in the form: sets x reps.\nReps can take the form of an amount of time.\n\nA rep is a repetition of a movement, and a set is a group of reps (sets are usually seperated by a rest).";
         "movementScreen8" = "Sets\n\nThe number of sets are represented by the number of circular buttons. When you finish a set press the button to activate a rest timer (a notification pops up to tell you to start the next set)";
 //
         "movementScreen9" = "Timer\n\nA timer is provided and accessed with this button. Once open, it can be dismissed by pressing the darker area above the timer.\nThe timer will run in the background if you remain on the same screen (i.e don't press next or back).";

@@ -100,6 +100,10 @@ class WarmupScreenOverview: UITableViewController {
     
     
     
+    // Progress Bar
+    let progressBar = UIProgressView()
+
+    
     
     
     
@@ -181,6 +185,12 @@ class WarmupScreenOverview: UITableViewController {
         // Buttons
         //
         fillButtonArray()
+        
+        
+        
+        
+        
+        
         
         
     }
@@ -277,7 +287,10 @@ class WarmupScreenOverview: UITableViewController {
         sender.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
         
-    }
+        tableView.reloadData()
+        
+        
+           }
     
     
     
@@ -322,11 +335,68 @@ class WarmupScreenOverview: UITableViewController {
     }
     
     
+    //
+    var didSetFrame = false
+    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
+        
         let header = view as! UITableViewHeaderFooterView
         header.contentView.backgroundColor = colour1
         //
+    
+        
+        
+        if section == 0 {
+            
+            progressBar.removeFromSuperview()
+           
+            
+        if didSetFrame == false {
+            // Thickness
+            progressBar.frame = CGRect(x: 27, y: 0, width: self.view.frame.size.width - 54, height: header.frame.size.height / 2)
+            progressBar.center = header.center
+            progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
+        
+            // Rounded Edges
+            progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
+            progressBar.clipsToBounds = true
+            
+            // Colour
+            progressBar.trackTintColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+            progressBar.progressTintColor = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
+            
+            didSetFrame = true
+        }
+
+        header.addSubview(progressBar)
+    
+            
+            // Progress Bar
+            // Current Button
+            let currentButton = Float(buttonNumber.reduce(0, +))
+            // Total Buttons
+            let totalButtons = Float(setsArray.reduce(0, +))
+            
+            
+            if currentButton > 0 {
+                // Current Progress
+                let currentProgress = currentButton/totalButtons
+                progressBar.setProgress(currentProgress
+                    , animated: true)
+            } else {
+                // Initial state
+                progressBar.setProgress(0, animated: true)
+            }
+            
+            
+            
+            
+            
+        }
+        
+        
+        
     }
     
     
@@ -452,10 +522,14 @@ class WarmupScreenOverview: UITableViewController {
             
             
             
-            //
-            //buttonArray[indexPath.row][0].isEnabled = true
             
+            // Image Tap
+            let imageTap = UITapGestureRecognizer()
+            imageTap.numberOfTapsRequired = 1
+            imageTap.addTarget(self, action: #selector(handleImageTap))
+            cell.demonstrationImageView.addGestureRecognizer(imageTap)
             
+
             
             return cell
             
@@ -645,6 +719,94 @@ class WarmupScreenOverview: UITableViewController {
         hideScreenView.removeFromSuperview()
         
     }
+    
+    
+    
+    
+    // Handle Tap
+    //
+    let expandedImage = UIImageView()
+    let backgroundViewImage = UIButton()
+    
+    //
+    @IBAction func handleImageTap(extraTap:UITapGestureRecognizer) {
+        
+        
+        // Get Image
+        let sender = extraTap.view as! UIImageView
+        let image = sender.image
+        // Get Image
+        // let index = demonstrationImage.indexWhere
+        
+        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
+        
+        // Expanded Image
+        //
+        expandedImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height/2)
+        expandedImage.center.x = self.view.frame.size.width/2
+        expandedImage.center.y = (height/2) * 2.5
+        //
+        expandedImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        expandedImage.contentMode = .scaleAspectFit
+        expandedImage.isUserInteractionEnabled = true
+        
+        //expandedImage.image = demonstrationArrayF[section][row]
+        expandedImage.image = #imageLiteral(resourceName: "Test 2")
+        
+        
+        
+        // Background View
+        //
+        backgroundViewImage.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        backgroundViewImage.backgroundColor = .black
+        backgroundViewImage.alpha = 0
+        
+        backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
+        
+        
+        //
+        tableView.isScrollEnabled = false
+        hideScreen.isEnabled = false
+        
+        
+        //
+        UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
+        UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
+
+        
+        //
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.expandedImage.center.y = (height/2) * 1.5
+            self.backgroundViewImage.alpha = 0.5
+        }, completion: nil)
+    }
+    
+    
+    @IBAction func retractImage(_ sender: Any) {
+        //
+        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
+        //
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.expandedImage.center.y = (height/2) * 2.5
+            self.backgroundViewImage.alpha = 0
+            
+        }, completion: nil)
+        
+        //
+        let delayInSeconds = 0.4
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            //
+            self.expandedImage.removeFromSuperview()
+            self.backgroundViewImage.removeFromSuperview()
+        }
+        
+        //
+        tableView.isScrollEnabled = true
+        hideScreen.isEnabled = true
+
+    }
+    
+    
     
     
     
