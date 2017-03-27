@@ -1309,6 +1309,13 @@
         "resetWarningMessage" = "\nThis will reset the app to the state it was in when first downloaded.";
 
 
+        // Background Image //
+        "homeScreenImage" = "Home Screen Image";
+
+
+
+
+
     //
     // Emphasis Selection //
     //

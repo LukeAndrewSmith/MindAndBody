@@ -9,9 +9,15 @@
 import Foundation
 import UIKit
 
-class Settings: UITableViewController{
+class Settings: UITableViewController {
     
     
+    
+    // Background Image
+    //
+    let backgroundImageArray = [#imageLiteral(resourceName: "Background 0"), #imageLiteral(resourceName: "Background 1"), #imageLiteral(resourceName: "Background 2"), #imageLiteral(resourceName: "Background 3"), #imageLiteral(resourceName: "Background 4")]
+    
+
     
     
     
@@ -23,6 +29,9 @@ class Settings: UITableViewController{
         
         self.tableView.backgroundView = backView
         
+        //
+        tableView.reloadData()
+
     }
     
     
@@ -40,6 +49,8 @@ class Settings: UITableViewController{
         
         UserDefaults.standard.synchronize()
     }
+    
+    
     
     
     // Default Backgroud Colour
@@ -61,52 +72,20 @@ class Settings: UITableViewController{
     ]
     
     // Set
-    func setDefaultColour() {
-        
-        let checked = UserDefaults.standard.object(forKey: "colourChecked") as! [Int]
-        let newColour = zip(colour.flatMap{$0},checked.flatMap{$0}).filter{$1==1}.map{$0.0}
-        let index = newColour[0]
-        
-        let newColourSet = colourSets[index]
-        
-        UserDefaults.standard.setColor(newColourSet[0], forKey: "colour1")
-        UserDefaults.standard.setColor(newColourSet[1], forKey: "colour2")
-    
-        
-        if checked[0] == 1 {
-            
-            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour3")
-            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour4")
-            UserDefaults.standard.setColor(UIColor.white, forKey: "colour5")
-            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour6")
-            UserDefaults.standard.setColor(newColourSet[0], forKey: "colour7")
-            UserDefaults.standard.setColor(newColourSet[1], forKey: "colour8")
-            UserDefaults.standard.set(false, forKey: "blacknWhite")
-            
-        } else if checked[1] == 1 {
-            
-            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour3")
-            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour4")
-            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour5")
-            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour6")
-            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour7")
-            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour8")
-            UserDefaults.standard.set(true, forKey: "blacknWhite")
-            
-            
-        } //else if checked[2] == 1 {
+//    func setDefaultColour() {
 //        
-//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour3")
-//            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour4")
-//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour5")
-//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour6")
-//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour7")
-//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour8")
-//            UserDefaults.standard.set(false, forKey: "blacknWhite")
+//        let checked = UserDefaults.standard.object(forKey: "colourChecked") as! [Int]
+//        let newColour = zip(colour.flatMap{$0},checked.flatMap{$0}).filter{$1==1}.map{$0.0}
+//        let index = newColour[0]
+//        
+//        let newColourSet = colourSets[index]
+//        
+//        UserDefaults.standard.setColor(newColourSet[0], forKey: "colour1")
+//        UserDefaults.standard.setColor(newColourSet[1], forKey: "colour2")
+//    
+//        
+//        if checked[0] == 1 {
 //            
-//            
-//        } //else {
-//
 //            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour3")
 //            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour4")
 //            UserDefaults.standard.setColor(UIColor.white, forKey: "colour5")
@@ -114,24 +93,56 @@ class Settings: UITableViewController{
 //            UserDefaults.standard.setColor(newColourSet[0], forKey: "colour7")
 //            UserDefaults.standard.setColor(newColourSet[1], forKey: "colour8")
 //            UserDefaults.standard.set(false, forKey: "blacknWhite")
+//            
+//        } else if checked[1] == 1 {
+//            
+//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour3")
+//            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour4")
+//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour5")
+//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour6")
+//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour7")
+//            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour8")
+//            UserDefaults.standard.set(true, forKey: "blacknWhite")
+//            
+//            
+//        } //else if checked[2] == 1 {
+////        
+////            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour3")
+////            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour4")
+////            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour5")
+////            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour6")
+////            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour7")
+////            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour8")
+////            UserDefaults.standard.set(false, forKey: "blacknWhite")
+////            
+////            
+////        } //else {
+////
+////            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour3")
+////            UserDefaults.standard.setColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour4")
+////            UserDefaults.standard.setColor(UIColor.white, forKey: "colour5")
+////            UserDefaults.standard.setColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour6")
+////            UserDefaults.standard.setColor(newColourSet[0], forKey: "colour7")
+////            UserDefaults.standard.setColor(newColourSet[1], forKey: "colour8")
+////            UserDefaults.standard.set(false, forKey: "blacknWhite")
+////
+////        }
 //
-//        }
-
-        
-        UserDefaults.standard.synchronize()
-        
-        
-        // Set Colours
-        let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-        let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-        
-        self.navigationController?.navigationBar.barTintColor = colour1
-        self.navigationController?.navigationBar.tintColor = .white
-        
-        
-        self.tabBarController?.tabBar.tintColor = colour2
-        
-    }
+//        
+//        UserDefaults.standard.synchronize()
+//        
+//        
+//        // Set Colours
+//        let colour1 = UserDefaults.standard.color(forKey: "colour1")!
+//        let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+//        
+//        self.navigationController?.navigationBar.barTintColor = colour1
+//        self.navigationController?.navigationBar.tintColor = .white
+//        
+//        
+//        self.tabBarController?.tabBar.tintColor = colour2
+//        
+//    }
     
     
     
@@ -144,7 +155,7 @@ class Settings: UITableViewController{
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return (NSLocalizedString("colour", comment: ""))
+        case 0: return (NSLocalizedString("homeScreenImage", comment: ""))
         case 1: return (NSLocalizedString("units", comment: ""))
         case 2: return (NSLocalizedString("presentationStyle", comment: ""))
         case 3: return (NSLocalizedString("reset", comment: ""))
@@ -182,7 +193,7 @@ class Settings: UITableViewController{
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 2
+            return 1
         } else if section == 1 {
             return 1
         } else if section == 2 {
@@ -198,64 +209,101 @@ class Settings: UITableViewController{
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         let gradientLabel = UILabel()
-        let checked = UserDefaults.standard.object(forKey: "colourChecked") as! [Int]
+        //let checked = UserDefaults.standard.object(forKey: "colourChecked") as! [Int]
         
+        let backgroundImageView = UIImageView()
         
         switch indexPath.section {
         case 0:
-            if indexPath.row == 0 {
+            //if indexPath.row == 0 {
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
                 
-                // Gradient Label
-                gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
+                
+                
+                backgroundImageView.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
                 if UIScreen.main.nativeBounds.height < 1334 {
                     gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
                 }
-                gradientLabel.center.y = cell.center.y
-                gradientLabel.applyGradient(colours: [colourSets[0][0], colourSets[0][1]])
-                
-                
-                cell.addSubview(gradientLabel)
-                
-                // Checked
-                if checked[indexPath.row] == 1 {
-                    cell.accessoryType = .checkmark
-                } else {
-                    cell.accessoryType = .none
+                backgroundImageView.center.y = cell.center.y
+                //
+                //
+                let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+                //
+                if backgroundIndex < backgroundImageArray.count {
+                    backgroundImageView.image = backgroundImageArray[backgroundIndex]
+                //
+                } else if backgroundIndex == backgroundImageArray.count {
+                    //
+                    backgroundImageView.layer.borderWidth = 1
+                    backgroundImageView.layer.borderColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0).cgColor
+                    //
+                    backgroundImageView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+                //
+                } else if backgroundIndex == backgroundImageArray.count + 1 {
+                    //
+                    backgroundImageView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+                    backgroundImageView.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
+                    backgroundImageView.center.y = cell.center.y
+                    //
+                    backgroundImageView.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
+                //
                 }
+                //
+                backgroundImageView.contentMode = .scaleToFill
+                cell.addSubview(backgroundImageView)
                 
-                cell.selectionStyle = .none
+                cell.accessoryType = .disclosureIndicator
+                
                 return cell
                 
-                
-                
-            } else if indexPath.row == 1 {
-                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-
-                // Gradient Label
-                gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
-                if UIScreen.main.nativeBounds.height < 1334 {
-                    gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
-                }
-                gradientLabel.center.y = cell.center.y
-                gradientLabel.applyGradient(colours: [UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), colourSets[1][1]])
-                
-                cell.addSubview(gradientLabel)
-                
-                // Checked
-                if checked[indexPath.row] == 1 {
-                    cell.accessoryType = .checkmark
-                } else {
-                    cell.accessoryType = .none
-                }
-                
-                cell.selectionStyle = .none
-                
-                return cell
-
-            } //else if indexPath.row == 2 {
+            
+            
+            
+            
+            
+            //
+            // Colours
+            //
+            
+            // Gradient Label
+            //gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+            //gradientLabel.applyGradient(colours: [colourSets[0][0], colourSets[0][1]])
+            
+            // Checked
+            //                if checked[indexPath.row] == 1 {
+            //                    cell.accessoryType = .checkmark
+            //                } else {
+            //                    cell.accessoryType = .none
+            //                }
+            //
+            
+//
+//            } else if indexPath.row == 1 {
+//                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+//
+//                // Gradient Label
+//                gradientLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+//                gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
+//                if UIScreen.main.nativeBounds.height < 1334 {
+//                    gradientLabel.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
+//                }
+//                gradientLabel.center.y = cell.center.y
+//                gradientLabel.applyGradient(colours: [UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), colourSets[1][1]])
+//                
+//                cell.addSubview(gradientLabel)
+//                
+//                // Checked
+//                if checked[indexPath.row] == 1 {
+//                    cell.accessoryType = .checkmark
+//                } else {
+//                    cell.accessoryType = .none
+//                }
+//                
+//                cell.selectionStyle = .none
+//                
+//                return cell
+//
+//            } //else if indexPath.row == 2 {
 //                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
 //
 //                // Gradient Label
@@ -390,40 +438,49 @@ class Settings: UITableViewController{
             
         case 0:
             
-            if checked[indexPath.row] == 0 {
-                
-                checked = [0,0,0,0,0]
-                cell?.accessoryType = .checkmark
-                checked[indexPath.row] = 1
-                
-                UserDefaults.standard.set(checked, forKey: "colourChecked")
-                
-                setDefaultColour()
-                
-                UserDefaults.standard.synchronize()
-                
-            } else {
-                
-                
-            }
+            performSegue(withIdentifier: "BackgroundImageSegue", sender: nil)
+
+//            if checked[indexPath.row] == 0 {
+//                
+//                checked = [0,0,0,0,0]
+//                cell?.accessoryType = .checkmark
+//                checked[indexPath.row] = 1
+//                
+//                UserDefaults.standard.set(checked, forKey: "colourChecked")
+//                
+//                //setDefaultColour()
+//                
+//                UserDefaults.standard.synchronize()
+//                
+//            } else {
+//                
+//                
+//            }
+//            
+//            tableView.reloadData()
+//            
+//            
+//            // Alert View
+//            let title = NSLocalizedString("colourTitle", comment: "")
+//            let message = NSLocalizedString("colourMessage", comment: "")
+//            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//            alert.view.tintColor = colour1
+//            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+//            
+//            let paragraphStyle = NSMutableParagraphStyle()
+//            paragraphStyle.alignment = .justified
+//            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+//            
+//            //alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
+//            
+//            self.present(alert, animated: true, completion: nil)
             
-            tableView.reloadData()
             
             
-            // Alert View
-            let title = NSLocalizedString("colourTitle", comment: "")
-            let message = NSLocalizedString("colourMessage", comment: "")
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.view.tintColor = colour1
-            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .justified
-            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
             
-            //alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
-            
-            self.present(alert, animated: true, completion: nil)
+            tableView.deselectRow(at: indexPath, animated: true)
+
             
         case 1:
             if cell?.textLabel?.text == "kg" {
@@ -566,6 +623,17 @@ class Settings: UITableViewController{
         
     
     }
+    
+    
+    
+    // Remove Back Button
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+        
+    }
+
     
     
     

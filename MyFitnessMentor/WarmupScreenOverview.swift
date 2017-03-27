@@ -679,12 +679,12 @@ class WarmupScreenOverview: UITableViewController {
         
         
         
-        // Double Tap
-        let doubleTap = UITapGestureRecognizer()
-        doubleTap.numberOfTapsRequired = 2
-        doubleTap.addTarget(self, action: #selector(handleTap))
+        // triple Tap
+        let tripleTap = UITapGestureRecognizer()
+        tripleTap.numberOfTapsRequired = 3
+        tripleTap.addTarget(self, action: #selector(handleTap))
         hideScreenView.isUserInteractionEnabled = true
-        hideScreenView.addGestureRecognizer(doubleTap)
+        hideScreenView.addGestureRecognizer(tripleTap)
         
         
         // Text

@@ -1,8 +1,8 @@
 //
-//  CalendarScreen.swift
+//  Calendar.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 27.03.17.
+//  Created by Luke Smith on 05.01.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -10,65 +10,46 @@ import Foundation
 import UIKit
 
 
-class CalendarCell: UICollectionViewCell {
+class CalendarScreenOld: UITableViewController {
     
-    @IBOutlet weak var cellBackgroundView: UIView!
-    
-    @IBOutlet weak var dayLabel: UILabel!
-    
-    @IBOutlet weak var activitiesScroll: UIScrollView!
-    
-    @IBOutlet weak var activitiesLabel: UILabel!
-    
-    
-}
-
-
-class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    
-    
-    
-    //
-    let dayArray = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",]
-    
-    var selectedDay = Int()
-    
-    
-    //
-    let routineArray =
-        [
-            // Monday
-            [
-            ],
-            // Tuesday
-            [
-            ],
-            // Wednesday
-            [
-            ],
-            // Thursday
-            [
-            ],
-            // Friday
-            [
-            ],
-            // Saturday
-            [
-            ],
-            // Sunday
-            [
-            ]
-    ]
-    
-    
-    // Outlets
+    // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    // Collection View
-    @IBOutlet weak var collectionView: UICollectionView!
+    // CheckMark
+    @IBOutlet weak var checkMark: UIBarButtonItem!
+    
+    // Table View
     
     
+    
+    // Arrays
+    let daysArray =
+    ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+    
+    let routineArray =
+    [
+        // Monday
+        [
+        ],
+        // Tuesday
+        [
+        ],
+        // Wednesday
+        [
+        ],
+        // Thursday
+        [
+        ],
+        // Friday
+        [
+        ],
+        // Saturday
+        [
+        ],
+        // Sunday
+        [
+        ]
+    ]
     
     
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
@@ -81,18 +62,21 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        self.tableView.backgroundView = backView
+        
+    }
     
     
-    //
-    // View Did Load
-    //
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         // Walkthrough
-        //
         if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughC") == false {
             let delayInSeconds = 0.5
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -102,143 +86,140 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         
         
-        //
-        // Navigation Bar
-        //
+        // Colours
+        
+        self.tableView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        
+        
         self.navigationController?.navigationBar.barTintColor = colour7
-
+        
+        
+        
         // Title
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 22)!]
+        
+        
     
         // Navigation Title
         navigationBar.title = NSLocalizedString("calendar", comment: "")
         
         
-        
-        
-        
-        
-        
-        //
-        // Collection View
-        //
-        collectionView?.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+        // Table View
+        tableView.backgroundColor = .clear
         
     }
     
     
     
     
-    // Collection View
-    //
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    
+    // Table View
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 7
+            //daysArray.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return NSLocalizedString(daysArray[section], comment: "")
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 21)!
+        header.textLabel?.textColor = .black
+        header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        header.contentView.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        header.textLabel?.text = header.textLabel?.text?.capitalized
+        
+        
+        // Border
+        let border = CALayer()
+        border.backgroundColor = UIColor.black.cgColor
+        border.frame = CGRect(x: 15, y: header.frame.size.height-1, width: self.view.frame.size.height, height: 1)
+        
+        
+        header.layer.addSublayer(border)
+        header.layer.masksToBounds = true
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 47
+    }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
-    }
     
-    
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
+        //NSLocalizedString(warmupUpperArray[indexPath.section][indexPath.row], comment: "")
+        
+//        cell.textLabel?.textColor = .black
+//        cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+//        cell.textLabel?.textAlignment = .left
+//        cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+//        cell.tintColor = .black
+//        
+
         
         
         
-        //
-        cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-        
-        
-        // Backround View
-        //
-        let screenHeight = UIScreen.main.bounds.height - (navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height
-        let screenWidth = UIScreen.main.bounds.width
-        let ratio = screenHeight / screenWidth
-        
-        let width = cell.frame.size.width - 40
-        let height = width * ratio
-        //
-        if indexPath.item % 2 == 0 {
-            cell.cellBackgroundView.frame = CGRect(x: 25, y: (cell.frame.size.height - height) / 3, width: width, height: height)
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            cell.tintColor = .black
             
-        } else {
-            cell.cellBackgroundView.frame = CGRect(x: 15, y: (cell.frame.size.height - height) / 3, width: width, height: height)
-        }
-        //
-        cell.cellBackgroundView.layer.cornerRadius = 5
-        cell.cellBackgroundView.layer.masksToBounds = true
+            cell.imageView?.image = #imageLiteral(resourceName: "Plus")
         
+            cell.contentView.transform = CGAffineTransform(scaleX: -1,y: 1);
+            cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
+            
+            return cell
         
-        
-        // Day Title
-        //
-        cell.dayLabel.frame = CGRect(x: 0, y: 0, width: cell.cellBackgroundView.frame.size.width, height: 36.75)
-        //
-        cell.dayLabel.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        cell.dayLabel.textColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-        //
-        cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        cell.dayLabel.textAlignment = .center
-        //
-        cell.dayLabel.text = NSLocalizedString(dayArray[indexPath.item], comment: "")
-        
-        
-        
-        
-        
-        // Scroll View
-        //
-        cell.activitiesScroll.frame = CGRect(x: 0, y: 36.75, width: cell.cellBackgroundView.frame.size.width, height: cell.cellBackgroundView.frame.size.height - 36.75)
-        cell.activitiesScroll.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        cell.activitiesScroll.contentSize = CGSize(width: cell.activitiesScroll.frame.size.width, height: cell.activitiesScroll.frame.size.height)
-        
-        
-        
-        // Activities Label
-        //
-        cell.activitiesLabel.frame = CGRect(x: 10, y: 10, width: cell.activitiesScroll.frame.size.width - 20, height: cell.activitiesScroll.frame.size.height - 10)
-        cell.activitiesLabel.numberOfLines = 0
-        //
-        cell.activitiesLabel.textColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-        cell.activitiesLabel.font = UIFont(name: "SFUIDisplay-thin", size: 19)
-        cell.activitiesLabel.text = "• Yoga\n• Meditation\n\n• Warmup\n• Workout\n• Stretching"
-        
-        
-       
-        return cell
     }
     
     
     
     
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        // Selected Day
-        //
-        selectedDay = indexPath.item
+        return 47
         
-        
-        // Segue to Detail
-        //performSegue(withIdentifier: "", sender: Any)
-        
-        
-        // Deselect
-        collectionView.deselectItem(at: indexPath, animated: false)
     }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+    
+    }
+    
+    
     
     
     
     @IBAction func checkMarkAction(_ sender: Any) {
-        //
+    
         self.performSegue(withIdentifier: "unwindToHomeScreen", sender: self)
+        
     }
     
+    
+    
+
     
     
 //---------------------------------------------------------------------------------------------------------------
@@ -372,8 +353,8 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             walkthroughView.clipsToBounds = true
             //
             
-            //            label.center = pickerView.center
-            //            label.center.y = 24.5 + (UIApplication.shared.statusBarFrame.height/2) + pickerView.frame.size.height
+//            label.center = pickerView.center
+//            label.center.y = 24.5 + (UIApplication.shared.statusBarFrame.height/2) + pickerView.frame.size.height
             label.text = NSLocalizedString("mindBodyC3", comment: "")
             walkthroughView.addSubview(label)
             
@@ -451,65 +432,9 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         
     }
-    
 
     
-}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-extension CalendarScreen : UICollectionViewDelegateFlowLayout {
-    //
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let width = collectionView.frame.size.width / 2
-        
-        let screenHeight = UIScreen.main.bounds.height - (navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height
-        let screenWidth = UIScreen.main.bounds.width
-        let ratio = screenHeight / screenWidth
-        let height = width * ratio
-        
-        return CGSize(width: width, height: height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    }
     
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
 }
