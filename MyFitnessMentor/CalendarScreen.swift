@@ -117,7 +117,7 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
         // View
-        view.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        view.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
         
         
         
