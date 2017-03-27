@@ -128,6 +128,27 @@ class WarmupScreenOverview: UITableViewController {
         super.viewDidLoad()
         
         
+        
+        // Session Started
+        //
+        // Alert View
+        let title = NSLocalizedString("sessionStarted", comment: "")
+        //let message = NSLocalizedString("resetMessage", comment: "")
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.view.tintColor = colour1
+        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        self.present(alert, animated: true, completion: nil)
+        
+        
+        let delayInSeconds = 2.3
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            alert.dismiss(animated: true, completion: nil)
+        }
+
+        
+        
+        
+        
         // Navigation Title
         navigationTitle.text = NSLocalizedString(warmupTitle, comment: "")
         

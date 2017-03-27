@@ -2786,6 +2786,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // QuestionMark Button Action
     @IBAction func informationButtonAction(_ sender: Any) {
         
+        // Information Down
         if self.informationView.frame.minY < self.view.frame.maxY {
             
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
@@ -2800,6 +2801,12 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             self.informationView.contentOffset.y = 0
             
             
+            // Buttons
+            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+            navigationBar.setHidesBackButton(false, animated: true)
+            
+            
+        // Information Up
         } else {
             
             
@@ -2815,6 +2822,11 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             }, completion: nil)
             self.informationView.contentOffset.y = 0
             
+            
+            // Buttons
+            questionMark.image = #imageLiteral(resourceName: "Down")
+            navigationBar.setHidesBackButton(true, animated: true)
+
             
         }
         
@@ -2837,7 +2849,12 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                     
                     self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
                 }, completion: nil)
+              
                 
+                // Buttons
+                questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+                navigationBar.setHidesBackButton(false, animated: true)
+
             }
         }
     }

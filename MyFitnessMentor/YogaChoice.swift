@@ -256,6 +256,11 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
             self.informationViewYogaC.contentOffset.y = 0
             
             
+            // Buttons
+            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+            navigationBar.setHidesBackButton(false, animated: true)
+            
+            
         } else {
             
             
@@ -271,6 +276,10 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
             }, completion: nil)
             self.informationViewYogaC.contentOffset.y = 0
             
+            
+            // Buttons
+            questionMark.image = #imageLiteral(resourceName: "Down")
+            navigationBar.setHidesBackButton(true, animated: true)
             
             
         }
@@ -295,6 +304,12 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
                     self.informationTitleYogaC.transform = CGAffineTransform(translationX: 0, y: 0)
                 }, completion: nil)
                 
+                
+                // Buttons
+                questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+                navigationBar.setHidesBackButton(false, animated: true)
+                
+
             }
         }
     }

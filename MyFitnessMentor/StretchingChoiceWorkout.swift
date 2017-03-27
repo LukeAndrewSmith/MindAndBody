@@ -1805,6 +1805,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             self.informationView.contentOffset.y = 0
             
             
+            // Buttons
+            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+            navigationBar.setHidesBackButton(false, animated: true)
+            
+            
         } else {
             
             
@@ -1821,6 +1826,11 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
             self.informationView.contentOffset.y = 0
             
             
+            // Buttons
+            questionMark.image = #imageLiteral(resourceName: "Down")
+            navigationBar.setHidesBackButton(true, animated: true)
+            
+
         }
         
     }
@@ -1843,6 +1853,12 @@ class StretchingChoiceWorkout: UIViewController, UITableViewDelegate, UITableVie
                     self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
                 }, completion: nil)
                 
+                
+                // Buttons
+                questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+                navigationBar.setHidesBackButton(false, animated: true)
+                
+
             }
         }
     }

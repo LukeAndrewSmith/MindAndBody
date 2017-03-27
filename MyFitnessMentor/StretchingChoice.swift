@@ -283,6 +283,11 @@ class StretchingChoice: UIViewController  {
             self.informationViewStretchingC.contentOffset.y = 0
             
             
+            // Buttons
+            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+            navigationBar.setHidesBackButton(false, animated: true)
+            
+
         } else {
             
             
@@ -298,6 +303,10 @@ class StretchingChoice: UIViewController  {
             }, completion: nil)
             self.informationViewStretchingC.contentOffset.y = 0
             
+            
+            // Buttons
+            questionMark.image = #imageLiteral(resourceName: "Down")
+            navigationBar.setHidesBackButton(true, animated: true)
             
             
         }
@@ -322,6 +331,11 @@ class StretchingChoice: UIViewController  {
                     
                     self.informationTitleStretchingC.transform = CGAffineTransform(translationX: 0, y: 0)
                 }, completion: nil)
+                
+                
+                // Buttons
+                questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+                navigationBar.setHidesBackButton(false, animated: true)
                 
             }
         }

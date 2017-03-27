@@ -210,7 +210,7 @@ class WorkoutChoice: UIViewController  {
     
    
     
- 
+    // Information Button
     @IBAction func informationButtonActionWorkoutC(_ sender: Any) {
         
         
@@ -228,6 +228,12 @@ class WorkoutChoice: UIViewController  {
             self.informationView.contentOffset.y = 0
             
             
+            // Buttons
+            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+            navigationBar.setHidesBackButton(false, animated: true)
+            
+
+            
         } else {
             
             
@@ -244,6 +250,11 @@ class WorkoutChoice: UIViewController  {
             self.informationView.contentOffset.y = 0
             
             
+            
+            // Buttons
+            questionMark.image = #imageLiteral(resourceName: "Down")
+            navigationBar.setHidesBackButton(true, animated: true)
+
             
         }
     }
@@ -264,7 +275,12 @@ class WorkoutChoice: UIViewController  {
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
             
-        }
+            
+            // Buttons
+            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+            navigationBar.setHidesBackButton(false, animated: true)
+            
+            }
         }
     }
 

@@ -303,6 +303,11 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
             self.informationView.contentOffset.y = 0
             
             
+            // Buttons
+            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+            navigationBar.setHidesBackButton(false, animated: true)
+            
+            
         } else {
             
             
@@ -319,6 +324,11 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
             self.informationView.contentOffset.y = 0
             
             
+            // Buttons
+            questionMark.image = #imageLiteral(resourceName: "Down")
+            navigationBar.setHidesBackButton(true, animated: true)
+            
+
         }
         
     }
@@ -341,6 +351,12 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
                     self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
                 }, completion: nil)
                 
+                
+                // Buttons
+                questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+                navigationBar.setHidesBackButton(false, animated: true)
+                
+
             }
         }
     }

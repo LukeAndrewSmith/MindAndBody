@@ -116,6 +116,9 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
         
+        // View
+        view.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        
         
         
         
@@ -163,10 +166,10 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         let height = width * ratio
         //
         if indexPath.item % 2 == 0 {
-            cell.cellBackgroundView.frame = CGRect(x: 25, y: (cell.frame.size.height - height) / 3, width: width, height: height)
+            cell.cellBackgroundView.frame = CGRect(x: 25, y: ((cell.frame.size.height - height) / 3) * 2, width: width, height: height)
             
         } else {
-            cell.cellBackgroundView.frame = CGRect(x: 15, y: (cell.frame.size.height - height) / 3, width: width, height: height)
+            cell.cellBackgroundView.frame = CGRect(x: 15, y: ((cell.frame.size.height - height) / 3) * 2, width: width, height: height)
         }
         //
         cell.cellBackgroundView.layer.cornerRadius = 5
@@ -236,7 +239,7 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     @IBAction func checkMarkAction(_ sender: Any) {
         //
-        self.performSegue(withIdentifier: "unwindToHomeScreen", sender: self)
+        self.dismiss(animated: true)
     }
     
     
@@ -491,7 +494,14 @@ extension CalendarScreen : UICollectionViewDelegateFlowLayout {
         let screenHeight = UIScreen.main.bounds.height - (navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height
         let screenWidth = UIScreen.main.bounds.width
         let ratio = screenHeight / screenWidth
-        let height = width * ratio
+        
+        // Height
+        let height1 = width * ratio
+        
+        let width2 = width - 40
+        let height2 = width2 * ratio
+        
+        let height = height1 - ((height1 - height2) / 2)
         
         return CGSize(width: width, height: height)
     }
