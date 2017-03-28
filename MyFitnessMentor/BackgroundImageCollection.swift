@@ -19,6 +19,9 @@ class CollectionImageCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        if backgroundImage.layer.sublayers?.count != 0 {
+            backgroundImage.layer.sublayers?.remove(at: 0)
+        }
         
         backgroundImage.image = nil
     }
@@ -85,12 +88,14 @@ class BackgroundImageCollection: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionImageCell", for: indexPath) as! CollectionImageCell
         
         
-        let gradientLabel = UILabel()
-
-        // Remove Gradient
-        if cell.subviews.contains(gradientLabel) {
-            gradientLabel.removeFromSuperview()
-        }
+//        let gradientLabel = UILabel()
+//
+//        // Remove Gradient
+//        if cell.subviews.contains(gradientLabel) {
+//            gradientLabel.removeFromSuperview()
+//        }
+        
+        
         
         
         //
@@ -172,13 +177,13 @@ class BackgroundImageCollection: UICollectionViewController {
             } else {
                 //
                 cell.backgroundImage.image = nil
-                gradientLabel.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
-                gradientLabel.frame = cell.backgroundImage.frame
+//                gradientLabel.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
+//                gradientLabel.frame = cell.backgroundImage.frame
+//                
+//                cell.addSubview(gradientLabel)
+//                cell.bringSubview(toFront: gradientLabel)
                 
-                cell.addSubview(gradientLabel)
-                cell.bringSubview(toFront: gradientLabel)
-                
-                //cell.backgroundImage.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
+                cell.backgroundImage.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
                 //
             }
             

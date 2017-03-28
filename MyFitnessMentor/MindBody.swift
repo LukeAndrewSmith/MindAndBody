@@ -15,17 +15,19 @@ import UIKit
 
 
 extension UIView {
+
     func applyGradient(colours: [UIColor]) -> Void {
         self.applyGradient(colours: colours, locations: nil)
     }
     
     func applyGradient(colours: [UIColor], locations: [NSNumber]?) -> Void {
-        let gradient: CAGradientLayer = CAGradientLayer()
+        let gradient = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = colours.map { $0.cgColor }
         gradient.locations = locations
         self.layer.insertSublayer(gradient, at: 0)
     }
+    
 }
 
 
@@ -210,12 +212,9 @@ class MindBody: UIViewController {
         // Register 
         UserDefaults.standard.register(defaults: ["homeScreenBackground" : 0])
         
-        // Retreive HomeScreen Background
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
         
         
-        // Background Image
-        backgroundImage.frame = view.bounds
+        
 //        if backgroundIndex < backgroundImageArray.count {
 //            backgroundImage.image = backgroundImageArray[backgroundIndex]
 //        } else if backgroundIndex == backgroundImageArray.count {
@@ -504,6 +503,7 @@ class MindBody: UIViewController {
             backgroundImage.image = backgroundImageArray[backgroundIndex]
         } else if backgroundIndex == backgroundImageArray.count {
             //
+            backgroundImage.image = nil
             backgroundImage.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         } else if backgroundIndex == backgroundImageArray.count + 1 {
             backgroundImage.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
