@@ -341,12 +341,53 @@ class StretchingChoice: UIViewController  {
         }
     }
 
+   
+    
+    
+    //
+    // Stretching Type Segue
+    //
+    var stretchingType = Int()
+    // General
+    @IBAction func general(_ sender: Any) {
+        stretchingType = 0
+        performSegue(withIdentifier: "stretchingSegue", sender: nil)
+    }
+    
+    
+    // Post-Workout
+    @IBAction func postWorkout(_ sender: Any) {
+        stretchingType = 1
+        performSegue(withIdentifier: "stretchingSegue", sender: nil)
+    }
+    
+    
+    // Post-Cardio
+    @IBAction func postCardio(_ sender: Any) {
+        stretchingType = 2
+        performSegue(withIdentifier: "stretchingSegue", sender: nil)
+    }
+    
+    
+
+    
     // Remove Back Bar Text
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        navigationItem.backBarButtonItem = backItem
+        if (segue.identifier == "stretchingSegue") {
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
+            
+            
+            let destinationVC = segue.destination as! StretchingChoiceFinal
+            
+            destinationVC.stretchingType = stretchingType
+            
+        }
     }
+    
+    
+    
     
     
     

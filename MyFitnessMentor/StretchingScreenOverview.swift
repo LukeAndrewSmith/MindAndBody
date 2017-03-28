@@ -1,8 +1,8 @@
 //
-//  WarmupScreenOverview.swift
+//  StretchingScreenOverview.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 16.03.17.
+//  Created by Luke Smith on 28.03.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -14,22 +14,22 @@ import UserNotifications
 
 // View Controller
 //
-class WarmupScreenOverview: UITableViewController {
+class StretchingScreenOverview: UITableViewController {
     
     
     // Initialize Arrays
     
     // Title
-    var warmupTitle = String()
+    var stretchingTitle = String()
     
     // Initialize Arrays
     
     // Selected Array
-    var warmupMovementsSelectedArray: [[Int]] = [[]]
+    var stretchingMovementsSelectedArray: [[Int]] = [[]]
     
     // Movement Array
-    var warmupMovementsArray: [[String]] = [[]]
-    var warmupArray: [String] = []
+    var stretchingMovementsArray: [[String]] = [[]]
+    var stretchingArray: [String] = []
     
     // Sets Array
     var setsArrayF: [[Int]] = [[]]
@@ -59,30 +59,30 @@ class WarmupScreenOverview: UITableViewController {
     // Populate Arrays
     func populateArrays() {
         
-        // Warmup Array
-        warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        // Stretching Array
+        stretchingArray = zip(stretchingMovementsArray.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
         // Sets Array
-        setsArray = zip(setsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        setsArray = zip(setsArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
         
         // Reps Array
-        repsArray = zip(repsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        repsArray = zip(repsArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
         
         // Demonstration Array
-        demonstrationArray = zip(demonstrationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        demonstrationArray = zip(demonstrationArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
         
         // Target Area Array
-        targetAreaArray = zip(targetAreaArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        targetAreaArray = zip(targetAreaArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
         
         
         // Explanation Array
-        explanationArray = zip(explanationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-
+        explanationArray = zip(explanationArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+        
     }
-
+    
     
     
     //
@@ -102,7 +102,7 @@ class WarmupScreenOverview: UITableViewController {
     
     // Progress Bar
     let progressBar = UIProgressView()
-
+    
     
     
     
@@ -144,13 +144,13 @@ class WarmupScreenOverview: UITableViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             alert.dismiss(animated: true, completion: nil)
         }
-
+        
         
         
         
         
         // Navigation Title
-        navigationTitle.text = NSLocalizedString(warmupTitle, comment: "")
+        navigationTitle.text = NSLocalizedString(stretchingTitle, comment: "")
         
         // Navigation Title
         //
@@ -311,7 +311,7 @@ class WarmupScreenOverview: UITableViewController {
         tableView.reloadData()
         
         
-           }
+    }
     
     
     
@@ -365,33 +365,33 @@ class WarmupScreenOverview: UITableViewController {
         let header = view as! UITableViewHeaderFooterView
         header.contentView.backgroundColor = colour1
         //
-    
+        
         
         
         if section == 0 {
             
             progressBar.removeFromSuperview()
-           
             
-        if didSetFrame == false {
-            // Thickness
-            progressBar.frame = CGRect(x: 27, y: 0, width: self.view.frame.size.width - 54, height: header.frame.size.height / 2)
-            progressBar.center = header.center
-            progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
-        
-            // Rounded Edges
-            progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
-            progressBar.clipsToBounds = true
             
-            // Colour
-            progressBar.trackTintColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            progressBar.progressTintColor = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
+            if didSetFrame == false {
+                // Thickness
+                progressBar.frame = CGRect(x: 27, y: 0, width: self.view.frame.size.width - 54, height: header.frame.size.height / 2)
+                progressBar.center = header.center
+                progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
+                
+                // Rounded Edges
+                progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
+                progressBar.clipsToBounds = true
+                
+                // Colour
+                progressBar.trackTintColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+                progressBar.progressTintColor = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
+                
+                didSetFrame = true
+            }
             
-            didSetFrame = true
-        }
-
-        header.addSubview(progressBar)
-    
+            header.addSubview(progressBar)
+            
             
             // Progress Bar
             // Current Button
@@ -425,7 +425,7 @@ class WarmupScreenOverview: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch section {
-        case 0: return warmupArray.count
+        case 0: return stretchingArray.count
         case 1: return 1
         default: return 0
         }
@@ -457,7 +457,7 @@ class WarmupScreenOverview: UITableViewController {
             
             // Movement
             //
-            cell.movementLabel.text = NSLocalizedString(warmupArray[indexPath.row], comment: "")
+            cell.movementLabel.text = NSLocalizedString(stretchingArray[indexPath.row], comment: "")
             
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 21)
             cell.movementLabel?.textAlignment = .left
@@ -550,7 +550,7 @@ class WarmupScreenOverview: UITableViewController {
             imageTap.addTarget(self, action: #selector(handleImageTap))
             cell.demonstrationImageView.addGestureRecognizer(imageTap)
             
-
+            
             
             return cell
             
@@ -597,7 +597,7 @@ class WarmupScreenOverview: UITableViewController {
         case 0:
             let cell = tableView.cellForRow(at: indexPath)
             
-            performSegue(withIdentifier: "WarmupDetailSegue", sender: nil)
+            performSegue(withIdentifier: "StretchingDetailSegue", sender: nil)
             
             tableView.deselectRow(at: indexPath, animated: true)
             
@@ -679,13 +679,14 @@ class WarmupScreenOverview: UITableViewController {
     
     @IBAction func hideScreen(_ sender: Any) {
         
-        // Blur
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         let screenSize = UIScreen.main.bounds
         blurEffectView.effect = blurEffect
         blurEffectView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.alpha = 0
+        
+        
         
         
         
@@ -728,7 +729,7 @@ class WarmupScreenOverview: UITableViewController {
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
         
         self.hideLabel.alpha = 0
-
+        
         //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.blurEffectView.alpha = 0
@@ -741,7 +742,6 @@ class WarmupScreenOverview: UITableViewController {
             self.hideLabel.removeFromSuperview()
             
         }
-        
     }
     
     
@@ -796,7 +796,7 @@ class WarmupScreenOverview: UITableViewController {
         //
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
-
+        
         
         //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
@@ -827,7 +827,7 @@ class WarmupScreenOverview: UITableViewController {
         //
         tableView.isScrollEnabled = true
         hideScreen.isEnabled = true
-
+        
     }
     
     
@@ -837,16 +837,16 @@ class WarmupScreenOverview: UITableViewController {
     
     // Prepare for Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "WarmupDetailSegue") {
+        if (segue.identifier == "StretchingDetailSegue") {
             
-            let destinationVC = segue.destination as! WarmupScreenOverviewDetail
+            let destinationVC = segue.destination as! StretchingScreenOverviewDetail
             
             let indexPath = tableView.indexPathForSelectedRow
             let indexPathInt = Int((indexPath?.row)!)
             destinationVC.selectedMovement = indexPathInt
             
             
-            destinationVC.warmupArray = warmupArray
+            destinationVC.stretchingArray = stretchingArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
             

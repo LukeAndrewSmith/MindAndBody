@@ -1447,7 +1447,7 @@
     // Mind Body
         // Home
         "mindBody0" = "This is the walkthrough, it appears on the first viewing of each screen.\n\nThe text provides an explanation regarding the function of the highlighted object.\n\nPress anywhere on the screen to continue, or on subsequent screens press the top left button to go back.\n\nThe current screen is the home screen.";
-        "mindBody1" = "For those who won't bother to read the walkthrough:\n\nThe essential idea is to fill in your profile, be presented with a schedule on the homepage and to follow it.\n\nThe app is fully customizable.\n\nA modern black and white colour scheme can be chosen in the settings.";
+        "mindBody1" = "For those who won't bother to read the walkthrough:\n\nThe essential idea is to fill in your profile, be presented with a schedule on the homepage and to follow it.\n\nThe app is fully customizable.\n\nThe home screen (current screen) background image can be changed or removed in the settings.";
         "mindBody2" = "Calendar\n\nThe calendar contains your weekly schedule.\n\nA schedule will be suggested upon completion of your profile, but will remain fully customisable.\n\nThe first thing to do after this screens walkthrough is to fill in your profile.";
         "mindBody3" = "Sessions\n\nThe essence of the app is to show you the path, but not walk it for you.\n\nThis is portrayed by making you click through a path (suggested in the calendar) to get to a session, starting from the buttons on this home screen.";
         "mindBody4" = "Profile\n\nThe profile tab is accessed using this button.\n\nThe tab bar buttons highlight orange if selected.";

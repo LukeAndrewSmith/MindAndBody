@@ -1,8 +1,8 @@
 //
-//  WarmupScreenOverviewDetail2.swift
+//  StretchingScreenOverviewDetail.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 23.03.17.
+//  Created by Luke Smith on 28.03.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -13,7 +13,7 @@ import UserNotifications
 
 
 
-class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate {
+class StretchingScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate {
     
     
     
@@ -27,7 +27,7 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
     // Initialize Arrays
     //
     // Movement Array
-    var warmupArray: [String] = []
+    var stretchingArray: [String] = []
     
     // Sets Array
     var setsArray: [Int] = []
@@ -140,7 +140,7 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
     @IBOutlet weak var buttonStackHeight: NSLayoutConstraint!
     
     
-
+    
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
@@ -499,7 +499,7 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
         } else {
             buttonArray[indexOfUnpressedButton].isEnabled = true
         }
-
+        
     }
     
     
@@ -514,7 +514,7 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
         
         
         // Navigation Bar
-        navigationTitle.text = NSLocalizedString(warmupArray[selectedMovement], comment: "")
+        navigationTitle.text = NSLocalizedString(stretchingArray[selectedMovement], comment: "")
         
         // Navigation Title
         navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
@@ -626,7 +626,7 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
         // Sets Reps
         self.setsRepsLabel.text = (String(setsArray[selectedMovement]) + " x " + repsArray[selectedMovement])
         // Progress
-        self.progressLabel.text = (String(selectedMovement + 1)+"/"+String(warmupArray.count))
+        self.progressLabel.text = (String(selectedMovement + 1)+"/"+String(stretchingArray.count))
         
         //
         setsRepsLabel.textColor = colour3
@@ -637,10 +637,10 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
         
         
         // Progress Bar
-        let warmupIndexP = Float(selectedMovement)
-        let warmupArrayP = Float(self.warmupArray.count)
+        let stretchingIndexP = Float(selectedMovement)
+        let stretchingArrayP = Float(self.stretchingArray.count)
         
-        let fractionalProgress = warmupIndexP/warmupArrayP
+        let fractionalProgress = stretchingIndexP/stretchingArrayP
         
         progressBar.setProgress(fractionalProgress, animated: true)
         
@@ -1263,7 +1263,6 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
     //
     let blurEffectView = UIVisualEffectView()
     let hideLabel = UILabel()
-    var brightness = UIScreen.main.brightness
     
     @IBAction func hideScreen(_ sender: Any) {
         
@@ -1305,7 +1304,6 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
         //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.blurEffectView.alpha = 1
-            //UIScreen.main.brightness = self.brightness/2
         }, completion: nil)
         //
         let delayInSeconds = 0.4
@@ -1323,7 +1321,6 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
         //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.blurEffectView.alpha = 0
-            //UIScreen.main.brightness = self.brightness/2
         }, completion: nil)
         //
         let delayInSeconds = 0.4
@@ -1332,7 +1329,6 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
             self.blurEffectView.removeFromSuperview()
             self.hideLabel.removeFromSuperview()
             
-            //UIScreen.main.brightness = brightness
         }
     }
     
@@ -1413,7 +1409,7 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
     
     // Pass Data Back
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        if let controller = viewController as? WarmupScreenOverview {
+        if let controller = viewController as? StretchingScreenOverview {
             controller.buttonNumber = buttonNumber
             controller.tableView.reloadData()
         }
