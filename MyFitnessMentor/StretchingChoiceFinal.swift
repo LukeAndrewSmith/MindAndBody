@@ -445,7 +445,88 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     ]
     
     // Demonstration Array
-    var demonstrationArrayGeneral = [[UIImage]]()
+    var demonstrationArrayGeneral =
+    [
+    // Mandatory
+    [#imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test")],
+    // Joint Rotations
+    [wrist,
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test")],
+    // Foam/Ball Roll
+    [#imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test")],
+    // Back
+    [cow,
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test")],
+    // Obliques(Sides)
+    [#imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test")],
+    // Neck
+    [#imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test")],
+    // Arms
+    [#imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test")],
+    // Pecs
+    [#imageLiteral(resourceName: "Test")],
+    // Shoulders
+    [#imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test")],
+    // Hips and Glutes
+    [#imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test")],
+    // Calves
+    [#imageLiteral(resourceName: "Test")],
+    // Hamstrings
+    [#imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test")],
+    // Quads
+    [#imageLiteral(resourceName: "Test"),
+    #imageLiteral(resourceName: "Test")]
+    
+    ]
     
     // Target Area Array
     var targetAreaArrayGeneral =
@@ -2539,7 +2620,11 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         
         
         
+        #imageLiteral(resourceName: "Wrist Rotations")
         
+        
+        #imageLiteral(resourceName: "Cow")
+        upwards
         
         
         
