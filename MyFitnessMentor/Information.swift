@@ -45,7 +45,7 @@ class Information: UITableViewController{
         backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
         self.tableView.backgroundView = backView
-        
+        self.tableView.contentOffset.y = 0
     }
     
     //

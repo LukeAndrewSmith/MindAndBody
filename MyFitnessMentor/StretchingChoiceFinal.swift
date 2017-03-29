@@ -444,6 +444,14 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
              "15-30s"]
     ]
     
+    
+    
+    
+    
+    
+    
+    
+    
     // Demonstration Array
     var demonstrationArrayGeneral =
     [
@@ -451,7 +459,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     [#imageLiteral(resourceName: "Test"),
     #imageLiteral(resourceName: "Test")],
     // Joint Rotations
-    [wrist,
+    [#imageLiteral(resourceName: "Wrist Rotations"),
     #imageLiteral(resourceName: "Test"),
     #imageLiteral(resourceName: "Test"),
     #imageLiteral(resourceName: "Test"),
@@ -471,20 +479,20 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     #imageLiteral(resourceName: "Test"),
     #imageLiteral(resourceName: "Test")],
     // Back
-    [cow,
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test")],
+    [#imageLiteral(resourceName: "Cow"),
+    #imageLiteral(resourceName: "Upwards Dog"),
+    #imageLiteral(resourceName: "Extended Puppy"),
+    #imageLiteral(resourceName: "Childs Pose"),
+    #imageLiteral(resourceName: "Staff Pose"),
+    #imageLiteral(resourceName: "Pelvic Tilt"),
+    #imageLiteral(resourceName: "Knee Chest"),
+    #imageLiteral(resourceName: "Knee Drop"),
+    #imageLiteral(resourceName: "Marichis Pose"),
+    #imageLiteral(resourceName: "Legs Wall")],
     // Obliques(Sides)
-    [#imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test")],
+    [#imageLiteral(resourceName: "Side Bend"),
+    #imageLiteral(resourceName: "Extended Side Angle"),
+    #imageLiteral(resourceName: "Half Straddle Side Bend")],
     // Neck
     [#imageLiteral(resourceName: "Test"),
     #imageLiteral(resourceName: "Test"),
@@ -2620,11 +2628,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         
         
         
-        #imageLiteral(resourceName: "Wrist Rotations")
         
-        
-        #imageLiteral(resourceName: "Cow")
-        upwards
         
         
         
@@ -2708,7 +2712,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         
         
         
-        
+
         
         
         // TableView Background
@@ -3153,7 +3157,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         
         
         // Cell Image
-        cell.imageView?.image = #imageLiteral(resourceName: "Test")
+        cell.imageView?.image = demonstrationArrayF[indexPath.section][indexPath.row]
         cell.imageView?.isUserInteractionEnabled = true
         
         // Image Tap
@@ -3292,14 +3296,15 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     //
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
         
+        //
+        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
+        
+        
         
         // Get Image
         let sender = extraTap.view as! UIImageView
         let image = sender.image
-        // Get Image
-        // let index = demonstrationImage.indexWhere
         
-        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
         
         
         // Expanded Image
@@ -3313,7 +3318,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         expandedImage.isUserInteractionEnabled = true
         
         //expandedImage.image = demonstrationArrayF[section][row]
-        expandedImage.image = #imageLiteral(resourceName: "Test 2")
+        expandedImage.image = image
         
         
         

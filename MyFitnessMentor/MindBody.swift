@@ -212,22 +212,7 @@ class MindBody: UIViewController {
         // Register 
         UserDefaults.standard.register(defaults: ["homeScreenBackground" : 0])
         
-        
-        
-        
-//        if backgroundIndex < backgroundImageArray.count {
-//            backgroundImage.image = backgroundImageArray[backgroundIndex]
-//        } else if backgroundIndex == backgroundImageArray.count {
-//            backgroundImage.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-//        } else if backgroundIndex == backgroundImageArray.count + 1 {
-//            backgroundImage.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
-//        }
-        
-        
-
-        
-        
-        
+                
         
         
         

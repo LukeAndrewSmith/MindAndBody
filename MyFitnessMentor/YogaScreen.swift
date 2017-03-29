@@ -1,8 +1,8 @@
 //
-//  StretchingScreen.swift
+//  YogaScreen.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 28.03.17.
+//  Created by Luke Smith on 29.03.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -13,33 +13,27 @@ import UserNotifications
 
 
 
-class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     
     
-    // Stretching Screen Index
+    // Yoga Screen Index
     //
-    var stretchingScreenIndex = 0
+    var yogaScreenIndex = 0
     
     
     
     // Initialize Arrays
     //
-    // Selected Array
-    var stretchingMovementsSelectedArray: [[Int]] = [[]]
+    // Movement Array
+    var yogaArray: [String] = []
+    
+    // Breaths Array
+    var breathsArray: [Int] = []
     
     // Movement Array
-    var stretchingMovementsArray: [[String]] = [[]]
-    var stretchingArray: [String] = []
-    
-    // Sets Array
-    var setsArrayF: [[Int]] = [[]]
-    var setsArray: [Int] = []
-    
-    // Reps Array
-    var repsArrayF: [[String]] = [[]]
-    var repsArray: [String] = []
+    var bodyPartArray: [String] = []
     
     // Demonstration Array
     var demonstrationArrayF: [[UIImage]] = [[]]
@@ -58,29 +52,6 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     
     
-    // Populate Arrays
-    func populateArrays() {
-        //
-        stretchingArray = zip(stretchingMovementsArray.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        //
-        setsArray = zip(setsArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        //
-        repsArray = zip(repsArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        //
-        demonstrationArray = zip(demonstrationArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        //
-        targetAreaArray = zip(targetAreaArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        //
-        explanationArray = zip(explanationArrayF.flatMap{$0},stretchingMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-    }
-    
-    
-    
     //
     // Outlets
     //
@@ -95,11 +66,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     
     // Set Rep
-    @IBOutlet weak var setRepView: UIView!
-    // Buttons
-    var setButton1 = UIButton()
-    var setButton2 = UIButton()
-    var setButton3 = UIButton()
+    @IBOutlet weak var bodyPartLabel: UILabel!
     
     
     // Image View
@@ -149,7 +116,8 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     // Title Labels
     // Sets and Reps
-    @IBOutlet weak var setsRepsLabel: UILabel!
+    @IBOutlet weak var breathsLabel: UILabel!
+
     // Explanation Text
     let explanationText = UILabel()
     // Progress Label
@@ -177,15 +145,6 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     // Button Stack View Height
     @IBOutlet weak var buttonStackHeight: NSLayoutConstraint!
     
-    
-    
-    
-    
-    // Constraints
-    @IBOutlet weak var setTop: NSLayoutConstraint!
-    @IBOutlet weak var setBottom: NSLayoutConstraint!
-    @IBOutlet weak var imageBottom: NSLayoutConstraint!
-    @IBOutlet weak var explanationBottom: NSLayoutConstraint!
     
     
     // Colours
@@ -245,12 +204,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         
-        
-        
-        // Create Arrays
-        //
-        populateArrays()
-        
+
         
         // Background Gradient
         //
@@ -301,7 +255,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         // Set Rep View
-        setRepView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        bodyPartLabel.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         //colour3
         
         
@@ -530,7 +484,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         
-        setRepView.addSubview(setButton)
+        bodyPartLabel.addSubview(setButton)
         
         return setButton
     }
@@ -540,7 +494,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     func createButtonArray(){
         //
-        let numberOfButtons = setsArray[stretchingScreenIndex]
+        let numberOfButtons = breathsArray[yogaScreenIndex]
         //
         for _ in 1...numberOfButtons{
             buttonArray += [createButton()]
@@ -559,7 +513,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         // Navigation Bar
-        navigationTitle.text = NSLocalizedString(stretchingArray[stretchingScreenIndex], comment: "")
+        navigationTitle.text = NSLocalizedString(yogaArray[yogaScreenIndex], comment: "")
         
         // Navigation Title
         navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
@@ -579,9 +533,9 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         // Images
         //
-        demonstrationImage.image = demonstrationArray[stretchingScreenIndex]
+        demonstrationImage.image = #imageLiteral(resourceName: "Test 2")
         //
-        bodyImage.image = targetAreaArray[stretchingScreenIndex]
+        bodyImage.image = targetAreaArray[yogaScreenIndex]
         
         // Scroll
         imageScroll.contentOffset.x = 0
@@ -604,7 +558,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         // Set Buttons
         //
-        let setRepSubViews = self.setRepView.subviews
+        let setRepSubViews = self.bodyPartLabel.subviews
         for subview in setRepSubViews{
             subview.removeFromSuperview()
         }
@@ -617,12 +571,12 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         //
         let stackView = UIStackView(arrangedSubviews: buttonArray)
         buttonArray[0].isEnabled = true
-        let numberOfButtons2 = CGFloat(setsArray[stretchingScreenIndex])
+        let numberOfButtons2 = CGFloat(breathsArray[yogaScreenIndex])
         
         // Layout
         //
         let xValue = ((view.frame.size.width - (numberOfButtons2 * 42.875)) / CGFloat(numberOfButtons2 + 1))
-        let yValue = (setRepView.frame.size.height - 42.875) / 2
+        let yValue = (bodyPartLabel.frame.size.height - 42.875) / 2
         let widthValue1 =
             CGFloat(numberOfButtons2 - 1) * CGFloat(view.frame.size.width - (numberOfButtons2 * 42.875))
         let widthValue2 = (CGFloat(widthValue1) / CGFloat(numberOfButtons2 + 1)) + (numberOfButtons2 * 42.875)
@@ -633,7 +587,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         
-        setRepView.addSubview(stackView)
+        bodyPartLabel.addSubview(stackView)
         
         
         
@@ -669,12 +623,12 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         // Title Labels
         // Sets Reps
-        self.setsRepsLabel.text = (String(setsArray[stretchingScreenIndex]) + " x " + repsArray[stretchingScreenIndex])
+        self.breathsLabel.text = (String(breathsArray[yogaScreenIndex]) + " x " + bodyPartArray[yogaScreenIndex])
         // Progress
-        self.progressLabel.text = (String(stretchingScreenIndex + 1)+"/"+String(stretchingArray.count))
+        self.progressLabel.text = (String(yogaScreenIndex + 1)+"/"+String(yogaArray.count))
         
         //
-        setsRepsLabel.textColor = colour3
+        breathsLabel.textColor = colour3
         progressLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
         
@@ -682,10 +636,10 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         
         // Progress Bar
-        let stretchingIndexP = Float(stretchingScreenIndex)
-        let stretchingArrayP = Float(self.stretchingArray.count)
+        let yogaIndexP = Float(yogaScreenIndex)
+        let yogaArrayP = Float(self.yogaArray.count)
         
-        let fractionalProgress = stretchingIndexP/stretchingArrayP
+        let fractionalProgress = yogaIndexP/yogaArrayP
         
         progressBar.setProgress(fractionalProgress, animated: true)
         
@@ -1180,14 +1134,14 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     @IBAction func nextButton(_ sender: Any) {
         
         
-        if stretchingScreenIndex == stretchingArray.count - 1 {
+        if yogaScreenIndex == yogaArray.count - 1 {
             
-            stretchingScreenIndex = 0
+            yogaScreenIndex = 0
             self.dismiss(animated: true)
             
             
         } else {
-            stretchingScreenIndex = stretchingScreenIndex + 1
+            yogaScreenIndex = yogaScreenIndex + 1
             displayContent()
         }
         
@@ -1199,10 +1153,10 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     // Back Button
     @IBAction func backButton(_ sender: Any) {
         
-        if stretchingScreenIndex == 0 {
+        if yogaScreenIndex == 0 {
             
         } else {
-            stretchingScreenIndex = stretchingScreenIndex - 1
+            yogaScreenIndex = yogaScreenIndex - 1
             
             flashScreen()
             displayContent()
@@ -1266,7 +1220,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         explanationLabel.numberOfLines = 0
         
         
-        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[stretchingScreenIndex], comment: ""))
+        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[yogaScreenIndex], comment: ""))
         let paragraphStyleEE = NSMutableParagraphStyle()
         paragraphStyleEE.alignment = .justified
         paragraphStyleEE.hyphenationFactor = 1
@@ -1654,7 +1608,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             //
             
             
-            let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            let centerY = bodyPartLabel.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
             label.center.y = centerY
             label.text = NSLocalizedString("movementScreen3", comment: "")
             walkthroughView.addSubview(label)
@@ -1686,7 +1640,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             walkthroughView.clipsToBounds = true
             //
             
-            let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            let centerY = bodyPartLabel.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
             label.center.y = centerY
             label.text = NSLocalizedString("movementScreen4", comment: "")
             walkthroughView.addSubview(label)
@@ -1729,7 +1683,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             walkthroughView.clipsToBounds = true
             //
             
-            let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            let centerY = bodyPartLabel.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
             label.center.y = centerY
             label.text = NSLocalizedString("movementScreen5", comment: "")
             walkthroughView.addSubview(label)
@@ -1772,7 +1726,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             walkthroughView.clipsToBounds = true
             //
             
-            let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            let centerY = bodyPartLabel.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
             label.center.y = centerY
             label.text = NSLocalizedString("movementScreen6", comment: "")
             walkthroughView.addSubview(label)
@@ -1804,7 +1758,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 7:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: (view.frame.size.width / 2) - (setsRepsLabel.frame.size.width / 2), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height, width: setsRepsLabel.frame.size.width, height: setsRepsLabel.frame.size.height))
+            path.addRect(CGRect(x: (view.frame.size.width / 2) - (breathsLabel.frame.size.width / 2), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height, width: breathsLabel.frame.size.width, height: breathsLabel.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1849,7 +1803,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 8:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + setsRepsLabel.frame.size.height, width: setRepView.frame.size.width, height: setRepView.frame.size.height))
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + breathsLabel.frame.size.height, width: bodyPartLabel.frame.size.width, height: bodyPartLabel.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1880,7 +1834,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 9:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + setsRepsLabel.frame.size.height + setRepView.frame.size.height, width: timerButton.frame.size.width, height: timerButton.frame.size.height))
+            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + breathsLabel.frame.size.height + bodyPartLabel.frame.size.height, width: timerButton.frame.size.width, height: timerButton.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1912,7 +1866,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 10:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: (view.frame.size.width / 2) - (explanationExpand.frame.size.width / 2), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + setsRepsLabel.frame.size.height + setRepView.frame.size.height, width: explanationExpand.frame.size.width, height: explanationExpand.frame.size.height))
+            path.addRect(CGRect(x: (view.frame.size.width / 2) - (explanationExpand.frame.size.width / 2), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + breathsLabel.frame.size.height + bodyPartLabel.frame.size.height, width: explanationExpand.frame.size.width, height: explanationExpand.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1946,7 +1900,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         case 11:
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: view.frame.size.width - hideScreen.frame.size.width, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + setsRepsLabel.frame.size.height + setRepView.frame.size.height, width: hideScreen.frame.size.width, height: hideScreen.frame.size.height))
+            path.addRect(CGRect(x: view.frame.size.width - hideScreen.frame.size.width, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height + breathsLabel.frame.size.height + bodyPartLabel.frame.size.height, width: hideScreen.frame.size.width, height: hideScreen.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1981,7 +1935,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             // Clear Section
             let path = CGMutablePath()
             let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height
-            let yValue = y + setsRepsLabel.frame.size.height + setRepView.frame.size.height + timerButton.frame.size.height
+            let yValue = y + breathsLabel.frame.size.height + bodyPartLabel.frame.size.height + timerButton.frame.size.height
             path.addRect(CGRect(x: 0, y: yValue, width: progressLabel.frame.size.width + 14, height: progressLabel.frame.size.height))
             path.addRect(screenSize)
             //
@@ -2015,7 +1969,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
             // Clear Section
             let path = CGMutablePath()
             let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height
-            let yValue = y + setsRepsLabel.frame.size.height + setRepView.frame.size.height + timerButton.frame.size.height
+            let yValue = y + breathsLabel.frame.size.height + bodyPartLabel.frame.size.height + timerButton.frame.size.height
             path.addRect(CGRect(x: 14 + progressLabel.frame.size.width, y: yValue, width: view.frame.size.width - 14 - progressLabel.frame.size.width, height: progressBarView.frame.size.height))
             path.addRect(screenSize)
             //

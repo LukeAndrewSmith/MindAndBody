@@ -476,7 +476,7 @@ class StretchingScreenOverview: UITableViewController {
             
             // Image
             //
-            cell.demonstrationImageView.image = #imageLiteral(resourceName: "Test")
+            cell.demonstrationImageView.image = demonstrationArray[indexPath.row]
             
             
             
@@ -759,8 +759,6 @@ class StretchingScreenOverview: UITableViewController {
         // Get Image
         let sender = extraTap.view as! UIImageView
         let image = sender.image
-        // Get Image
-        // let index = demonstrationImage.indexWhere
         
         let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
         
@@ -775,7 +773,7 @@ class StretchingScreenOverview: UITableViewController {
         expandedImage.isUserInteractionEnabled = true
         
         //expandedImage.image = demonstrationArrayF[section][row]
-        expandedImage.image = #imageLiteral(resourceName: "Test 2")
+        expandedImage.image = image
         
         
         

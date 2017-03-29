@@ -534,7 +534,7 @@ class StretchingScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UI
         
         // Images
         //
-        demonstrationImage.image = #imageLiteral(resourceName: "Test 2")
+        demonstrationImage.image = demonstrationArray[selectedMovement]
         //
         bodyImage.image = targetAreaArray[selectedMovement]
         
