@@ -27,7 +27,7 @@
 		077AC0E21DA535840026895B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E01DA535840026895B /* Main.storyboard */; };
 		077AC0E41DA535840026895B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E31DA535840026895B /* Assets.xcassets */; };
 		077AC0E71DA535840026895B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E51DA535840026895B /* LaunchScreen.storyboard */; };
-		077AC0F21DA535840026895B /* MyFitnessMentorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0F11DA535840026895B /* MyFitnessMentorTests.swift */; };
+		077AC0F21DA535840026895B /* MindAndBodyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0F11DA535840026895B /* MindAndBodyTests.swift */; };
 		077AC1001DA54C810026895B /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0FF1DA54C810026895B /* Information.swift */; };
 		077AC1021DA573210026895B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC1011DA573210026895B /* Settings.swift */; };
 		077AC1041DA579680026895B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC1031DA579680026895B /* Profile.swift */; };
@@ -113,15 +113,15 @@
 		075988661E797E1900E630E5 /* WarmupChoiceFinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoiceFinal.swift; sourceTree = "<group>"; };
 		075A0DB71E8C55680008E014 /* WarmupChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoiceCustom.swift; sourceTree = "<group>"; };
 		07653DA51E71D62000342C0B /* ClassicScreenFull2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassicScreenFull2.swift; sourceTree = "<group>"; };
-		077AC0D71DA535830026895B /* MyFitnessMentor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFitnessMentor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		077AC0D71DA535830026895B /* MindAndBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindAndBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		077AC0DA1DA535830026895B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		077AC0DE1DA535840026895B /* MindBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindBody.swift; sourceTree = "<group>"; };
 		077AC0E11DA535840026895B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		077AC0E31DA535840026895B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		077AC0E61DA535840026895B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		077AC0E81DA535840026895B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		077AC0ED1DA535840026895B /* MyFitnessMentorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFitnessMentorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		077AC0F11DA535840026895B /* MyFitnessMentorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFitnessMentorTests.swift; sourceTree = "<group>"; };
+		077AC0ED1DA535840026895B /* MindAndBodyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MindAndBodyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		077AC0F11DA535840026895B /* MindAndBodyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindAndBodyTests.swift; sourceTree = "<group>"; };
 		077AC0F31DA535840026895B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		077AC0FF1DA54C810026895B /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		077AC1011DA573210026895B /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -351,8 +351,8 @@
 		077AC0CE1DA535830026895B = {
 			isa = PBXGroup;
 			children = (
-				077AC0D91DA535830026895B /* MyFitnessMentor */,
-				077AC0F01DA535840026895B /* MyFitnessMentorTests */,
+				077AC0D91DA535830026895B /* MindAndBody */,
+				077AC0F01DA535840026895B /* MindAndBodyTests */,
 				077AC0D81DA535830026895B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -360,13 +360,13 @@
 		077AC0D81DA535830026895B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				077AC0D71DA535830026895B /* MyFitnessMentor.app */,
-				077AC0ED1DA535840026895B /* MyFitnessMentorTests.xctest */,
+				077AC0D71DA535830026895B /* MindAndBody.app */,
+				077AC0ED1DA535840026895B /* MindAndBodyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		077AC0D91DA535830026895B /* MyFitnessMentor */ = {
+		077AC0D91DA535830026895B /* MindAndBody */ = {
 			isa = PBXGroup;
 			children = (
 				07FE380E1DF9B3A200E7EA20 /* Localizable.strings */,
@@ -380,16 +380,16 @@
 				077AC0E81DA535840026895B /* Info.plist */,
 				077AC1061DA792EC0026895B /* SF Font */,
 			);
-			path = MyFitnessMentor;
+			path = MindAndBody;
 			sourceTree = "<group>";
 		};
-		077AC0F01DA535840026895B /* MyFitnessMentorTests */ = {
+		077AC0F01DA535840026895B /* MindAndBodyTests */ = {
 			isa = PBXGroup;
 			children = (
-				077AC0F11DA535840026895B /* MyFitnessMentorTests.swift */,
+				077AC0F11DA535840026895B /* MindAndBodyTests.swift */,
 				077AC0F31DA535840026895B /* Info.plist */,
 			);
-			path = MyFitnessMentorTests;
+			path = MindAndBodyTests;
 			sourceTree = "<group>";
 		};
 		077AC0FC1DA54BD60026895B /* Profile */ = {
@@ -588,9 +588,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		077AC0D61DA535830026895B /* MyFitnessMentor */ = {
+		077AC0D61DA535830026895B /* MindAndBody */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 077AC0F61DA535840026895B /* Build configuration list for PBXNativeTarget "MyFitnessMentor" */;
+			buildConfigurationList = 077AC0F61DA535840026895B /* Build configuration list for PBXNativeTarget "MindAndBody" */;
 			buildPhases = (
 				077AC0D31DA535830026895B /* Sources */,
 				077AC0D41DA535830026895B /* Frameworks */,
@@ -600,14 +600,14 @@
 			);
 			dependencies = (
 			);
-			name = MyFitnessMentor;
+			name = MindAndBody;
 			productName = MyFitnessMentor;
-			productReference = 077AC0D71DA535830026895B /* MyFitnessMentor.app */;
+			productReference = 077AC0D71DA535830026895B /* MindAndBody.app */;
 			productType = "com.apple.product-type.application";
 		};
-		077AC0EC1DA535840026895B /* MyFitnessMentorTests */ = {
+		077AC0EC1DA535840026895B /* MindAndBodyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 077AC0F91DA535840026895B /* Build configuration list for PBXNativeTarget "MyFitnessMentorTests" */;
+			buildConfigurationList = 077AC0F91DA535840026895B /* Build configuration list for PBXNativeTarget "MindAndBodyTests" */;
 			buildPhases = (
 				077AC0E91DA535840026895B /* Sources */,
 				077AC0EA1DA535840026895B /* Frameworks */,
@@ -618,9 +618,9 @@
 			dependencies = (
 				077AC0EF1DA535840026895B /* PBXTargetDependency */,
 			);
-			name = MyFitnessMentorTests;
+			name = MindAndBodyTests;
 			productName = MyFitnessMentorTests;
-			productReference = 077AC0ED1DA535840026895B /* MyFitnessMentorTests.xctest */;
+			productReference = 077AC0ED1DA535840026895B /* MindAndBodyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -646,7 +646,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 077AC0D21DA535830026895B /* Build configuration list for PBXProject "Mind-and-Body" */;
+			buildConfigurationList = 077AC0D21DA535830026895B /* Build configuration list for PBXProject "MindAndBody" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -660,8 +660,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				077AC0D61DA535830026895B /* MyFitnessMentor */,
-				077AC0EC1DA535840026895B /* MyFitnessMentorTests */,
+				077AC0D61DA535830026895B /* MindAndBody */,
+				077AC0EC1DA535840026895B /* MindAndBodyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -772,7 +772,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				077AC0F21DA535840026895B /* MyFitnessMentorTests.swift in Sources */,
+				077AC0F21DA535840026895B /* MindAndBodyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,7 +781,7 @@
 /* Begin PBXTargetDependency section */
 		077AC0EF1DA535840026895B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 077AC0D61DA535830026895B /* MyFitnessMentor */;
+			target = 077AC0D61DA535830026895B /* MindAndBody */;
 			targetProxy = 077AC0EE1DA535840026895B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -917,10 +917,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 693LQB6VVR;
-				INFOPLIST_FILE = MyFitnessMentor/Info.plist;
+				INFOPLIST_FILE = MindAndBody/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smith.MyFitnessMentor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smith.MindAndBody;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -931,10 +931,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 693LQB6VVR;
-				INFOPLIST_FILE = MyFitnessMentor/Info.plist;
+				INFOPLIST_FILE = MindAndBody/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smith.MyFitnessMentor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smith.MindAndBody;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -946,9 +946,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 693LQB6VVR;
-				INFOPLIST_FILE = MyFitnessMentorTests/Info.plist;
+				INFOPLIST_FILE = MindAndBodyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smith.MyFitnessMentorTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smith.MindAndBodyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyFitnessMentor.app/MyFitnessMentor";
@@ -961,9 +961,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 693LQB6VVR;
-				INFOPLIST_FILE = MyFitnessMentorTests/Info.plist;
+				INFOPLIST_FILE = MindAndBodyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smith.MyFitnessMentorTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smith.MindAndBodyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyFitnessMentor.app/MyFitnessMentor";
@@ -973,7 +973,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		077AC0D21DA535830026895B /* Build configuration list for PBXProject "Mind-and-Body" */ = {
+		077AC0D21DA535830026895B /* Build configuration list for PBXProject "MindAndBody" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				077AC0F41DA535840026895B /* Debug */,
@@ -982,7 +982,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		077AC0F61DA535840026895B /* Build configuration list for PBXNativeTarget "MyFitnessMentor" */ = {
+		077AC0F61DA535840026895B /* Build configuration list for PBXNativeTarget "MindAndBody" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				077AC0F71DA535840026895B /* Debug */,
@@ -991,7 +991,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		077AC0F91DA535840026895B /* Build configuration list for PBXNativeTarget "MyFitnessMentorTests" */ = {
+		077AC0F91DA535840026895B /* Build configuration list for PBXNativeTarget "MindAndBodyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				077AC0FA1DA535840026895B /* Debug */,
