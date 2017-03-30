@@ -646,7 +646,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 077AC0D21DA535830026895B /* Build configuration list for PBXProject "MyFitnessMentor" */;
+			buildConfigurationList = 077AC0D21DA535830026895B /* Build configuration list for PBXProject "Mind-and-Body" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -973,7 +973,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		077AC0D21DA535830026895B /* Build configuration list for PBXProject "MyFitnessMentor" */ = {
+		077AC0D21DA535830026895B /* Build configuration list for PBXProject "Mind-and-Body" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				077AC0F41DA535840026895B /* Debug */,

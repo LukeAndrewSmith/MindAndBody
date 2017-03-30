@@ -17,7 +17,7 @@
                BlueprintIdentifier = "077AC0D61DA535830026895B"
                BuildableName = "MyFitnessMentor.app"
                BlueprintName = "MyFitnessMentor"
-               ReferencedContainer = "container:MyFitnessMentor.xcodeproj">
+               ReferencedContainer = "container:Mind-and-Body.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "077AC0EC1DA535840026895B"
                BuildableName = "MyFitnessMentorTests.xctest"
                BlueprintName = "MyFitnessMentorTests"
-               ReferencedContainer = "container:MyFitnessMentor.xcodeproj">
+               ReferencedContainer = "container:Mind-and-Body.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -45,7 +45,7 @@
             BlueprintIdentifier = "077AC0D61DA535830026895B"
             BuildableName = "MyFitnessMentor.app"
             BlueprintName = "MyFitnessMentor"
-            ReferencedContainer = "container:MyFitnessMentor.xcodeproj">
+            ReferencedContainer = "container:Mind-and-Body.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -68,7 +68,7 @@
             BlueprintIdentifier = "077AC0D61DA535830026895B"
             BuildableName = "MyFitnessMentor.app"
             BlueprintName = "MyFitnessMentor"
-            ReferencedContainer = "container:MyFitnessMentor.xcodeproj">
+            ReferencedContainer = "container:Mind-and-Body.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -94,7 +94,7 @@
             BlueprintIdentifier = "077AC0D61DA535830026895B"
             BuildableName = "MyFitnessMentor.app"
             BlueprintName = "MyFitnessMentor"
-            ReferencedContainer = "container:MyFitnessMentor.xcodeproj">
+            ReferencedContainer = "container:Mind-and-Body.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
