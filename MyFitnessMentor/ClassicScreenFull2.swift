@@ -302,17 +302,10 @@ class ClassicScreenFull2: UITableViewController {
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
-    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
-    let colour8 = UserDefaults.standard.color(forKey: "colour8")!
-
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
-    
+        
     
     
     //
@@ -335,7 +328,7 @@ class ClassicScreenFull2: UITableViewController {
         navigationTitle.backgroundColor = .clear
         navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
-        self.navigationController?.navigationBar.barTintColor = colour5
+        self.navigationController?.navigationBar.barTintColor = colour2
         
         self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
@@ -352,7 +345,7 @@ class ClassicScreenFull2: UITableViewController {
         // TableView Background
         let tableViewBackground = UIView()
             
-        tableViewBackground.backgroundColor = colour7
+        tableViewBackground.backgroundColor = colour2
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
             
         tableView.backgroundView = tableViewBackground
@@ -672,10 +665,10 @@ class ClassicScreenFull2: UITableViewController {
             cell.separatorInset =  UIEdgeInsetsMake(0.0, 0.0, 0.0, -cell.bounds.size.width)
             
             cell.layer.borderWidth = 2
-            cell.layer.borderColor = colour4.cgColor
+            cell.layer.borderColor = colour1.cgColor
             
             cell.titleLabel?.text = NSLocalizedString("end", comment: "")
-            cell.titleLabel?.textColor = colour2
+            cell.titleLabel?.textColor = colour1
             cell.titleLabel?.textAlignment = .center
             
             return cell
@@ -718,7 +711,7 @@ class ClassicScreenFull2: UITableViewController {
 //            let title = NSLocalizedString("resetWarning", comment: "")
 //            let message = NSLocalizedString("resetWarningMessage", comment: "")
 //            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//            alert.view.tintColor = colour7
+//            alert.view.tintColor = colour2
 //            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
 //            
 //            let paragraphStyle = NSMutableParagraphStyle()
@@ -737,7 +730,7 @@ class ClassicScreenFull2: UITableViewController {
 //                let title = NSLocalizedString("resetTitle", comment: "")
 //                let message = NSLocalizedString("resetMessage", comment: "")
 //                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//                alert.view.tintColor = self.colour7
+//                alert.view.tintColor = self.colour2
 //                alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
 //                
 //                let paragraphStyle = NSMutableParagraphStyle()

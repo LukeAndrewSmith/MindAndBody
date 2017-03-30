@@ -48,16 +48,9 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
-    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
-    let colour8 = UserDefaults.standard.color(forKey: "colour8")!
-
-    
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        
     
     // Is Enabled
     var beginButtonEnabled = 0
@@ -230,7 +223,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         
         // Colour
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
         
         
@@ -243,16 +236,16 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour8, for: .normal)
+        beginButton.setTitleColor(colour2, for: .normal)
         
         
         
         // Custom Buttons
-        addPreset.tintColor = colour3
-        removePreset.tintColor = colour3
+        addPreset.tintColor = colour2
+        removePreset.tintColor = colour2
         
-        addPose.tintColor = colour3
-        removePose.tintColor = colour3
+        addPose.tintColor = colour2
+        removePose.tintColor = colour2
         
         
         
@@ -278,8 +271,8 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour2
-        informationTitle.backgroundColor = colour7
+        informationTitle.textColor = colour1
+        informationTitle.backgroundColor = colour2
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -460,7 +453,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
             visibleCell.accessoryType = .none
         }
         
-        cell?.layer.borderColor = colour7.cgColor
+        cell?.layer.borderColor = colour2.cgColor
         cell?.layer.borderWidth = 2
         cell?.accessoryType = .checkmark
         tableView.deselectRow(at: indexPath, animated: true)

@@ -43,11 +43,8 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
     
     override func viewDidLoad() {
@@ -64,7 +61,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         
         
         // Colours
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
         
         
@@ -77,9 +74,9 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         //
         guided.setTitle(NSLocalizedString("guided", comment: ""), for: UIControlState.normal)
         guided.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        guided.setTitleColor(colour3, for: .normal)
+        guided.setTitleColor(colour2, for: .normal)
         guided.layer.borderWidth = 8
-        guided.layer.borderColor = colour3.cgColor
+        guided.layer.borderColor = colour2.cgColor
         guided.titleLabel?.adjustsFontSizeToFitWidth = true
         guided.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         guided.titleLabel?.textAlignment = .center
@@ -87,9 +84,9 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         
         practices.setTitle(NSLocalizedString("practices", comment: ""), for: UIControlState.normal)
         practices.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        practices.setTitleColor(colour3, for: .normal)
+        practices.setTitleColor(colour2, for: .normal)
         practices.layer.borderWidth = 8
-        practices.layer.borderColor = colour3.cgColor
+        practices.layer.borderColor = colour2.cgColor
         practices.titleLabel?.adjustsFontSizeToFitWidth = true
         practices.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         practices.titleLabel?.textAlignment = .center
@@ -98,9 +95,9 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         
         custom.setTitle("C", for: UIControlState.normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        custom.setTitleColor(colour3, for: .normal)
+        custom.setTitleColor(colour2, for: .normal)
         custom.layer.borderWidth = 8
-        custom.layer.borderColor = colour3.cgColor
+        custom.layer.borderColor = colour2.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         custom.titleLabel?.textAlignment = .center
@@ -138,8 +135,8 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         informationTitleYogaC.text = (NSLocalizedString("information", comment: ""))
         informationTitleYogaC.textAlignment = .center
         informationTitleYogaC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitleYogaC.textColor = colour2
-        informationTitleYogaC.backgroundColor = colour7
+        informationTitleYogaC.textColor = colour1
+        informationTitleYogaC.backgroundColor = colour2
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))

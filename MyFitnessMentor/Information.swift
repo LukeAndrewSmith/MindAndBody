@@ -62,13 +62,13 @@ class Information: UITableViewController{
         
         
         // Colours
-        let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-        let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+        let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
         
         
         //
-        self.navigationController?.navigationBar.barTintColor = colour7
+        self.navigationController?.navigationBar.barTintColor = colour2
         self.navigationController?.navigationBar.tintColor = .white
         
         
@@ -96,7 +96,9 @@ class Information: UITableViewController{
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
         let header = view as! UITableViewHeaderFooterView
-        let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+        let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        
         
         // View
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 21)!
@@ -132,7 +134,9 @@ class Information: UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            let colour4 = UserDefaults.standard.color(forKey: "colour4")!
+            let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        
+        
         
             cell.textLabel?.text = NSLocalizedString(rowArray[indexPath.section][indexPath.row], comment: "")
         
@@ -143,7 +147,7 @@ class Information: UITableViewController{
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             cell.textLabel?.textAlignment = .left
         
-            cell.tintColor = colour4
+            cell.tintColor = colour1
             cell.accessoryType = .disclosureIndicator
 
         

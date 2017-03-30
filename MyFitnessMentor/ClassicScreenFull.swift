@@ -365,15 +365,9 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
-    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
-    
-    
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        
     
     //
     // View Did Load
@@ -412,7 +406,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Background Gradient and Colours
         //
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         
         backButton.tintColor = colour1
         
@@ -440,7 +434,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         imageExpand.setImage(tintedImageImage, for: .normal)
         
         //Image Tint
-        imageExpand.tintColor = colour3
+        imageExpand.tintColor = colour2
         
         
         
@@ -467,7 +461,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         explanationExpand.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        explanationExpand.tintColor = colour3
+        explanationExpand.tintColor = colour2
         
         
         
@@ -484,8 +478,8 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         timerButton2.setImage(tintedImage3, for: .normal)
         
         //Image Tint
-        timerButton.tintColor = colour3
-        timerButton2.tintColor = colour3
+        timerButton.tintColor = colour2
+        timerButton2.tintColor = colour2
         
         
         
@@ -547,9 +541,9 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Start Button Timer
         //
-        timerStart.backgroundColor = colour2
+        timerStart.backgroundColor = colour1
         timerStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
-        timerStart.setTitleColor(colour6, for: .normal)
+        timerStart.setTitleColor(colour2, for: .normal)
         timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
         timerStart.titleLabel?.textAlignment = .center
         
@@ -563,7 +557,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         //
         timerCancel.backgroundColor = colour1
         timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
-        timerCancel.setTitleColor(colour6, for: .normal)
+        timerCancel.setTitleColor(colour2, for: .normal)
         timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
         timerCancel.titleLabel?.textAlignment = .center
         
@@ -688,7 +682,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         setButton.addConstraints([widthHeight])
         setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
         setButton.layer.borderWidth = 4
-        setButton.layer.borderColor = colour7.cgColor
+        setButton.layer.borderColor = colour2.cgColor
         setButton.layer.cornerRadius = 21.4375
         setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
         setButton.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
@@ -803,7 +797,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         navigationTitle.backgroundColor = .clear
         navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
-        self.navigationController?.navigationBar.barTintColor = colour5
+        self.navigationController?.navigationBar.barTintColor = colour2
         
         self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
@@ -877,9 +871,9 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         // Progress
         self.progressLabel.text = (String(workoutScreenIndex + 1)+"/"+String(workoutArray.count))
         
-        setsRepsLabel.textColor = colour3
-        weightLabel.textColor = colour3
-        progressLabel.textColor = colour3
+        setsRepsLabel.textColor = colour2
+        weightLabel.textColor = colour2
+        progressLabel.textColor = colour2
         
         
         
@@ -1207,7 +1201,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
             }
         }
         
-        sender.backgroundColor = colour7
+        sender.backgroundColor = colour2
         sender.isEnabled = false
         
     }
@@ -1355,14 +1349,14 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         cancelButtonImage.layer.masksToBounds = true
         
         
-        cancelButtonImage.backgroundColor = colour3
+        cancelButtonImage.backgroundColor = colour2
         
         let origImage = UIImage(named: "Minus")
         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         cancelButtonImage.setImage(tintedImage, for: .normal)
         //Image Tint
-        cancelButtonImage.tintColor = colour4
+        cancelButtonImage.tintColor = colour1
         
         
         
@@ -1383,7 +1377,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         
         demonstrationButton.backgroundColor = .white
-        demonstrationButton.setTitleColor(colour2, for: .normal)
+        demonstrationButton.setTitleColor(colour1, for: .normal)
         
         // Target
         targetButton.frame = CGRect(x: imageViewExpanded.frame.size.width/2, y: 0, width: imageViewExpanded.frame.size.width/2, height: 36.75)
@@ -1393,7 +1387,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         targetButton.addTarget(self, action: #selector(bodyImageButton(_:)), for: .touchUpInside)
         
         targetButton.backgroundColor = .white
-        targetButton.setTitleColor(colour2, for: .normal)
+        targetButton.setTitleColor(colour1, for: .normal)
         
         imageViewExpanded.addSubview(targetButton)
         
@@ -1415,7 +1409,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         imageViewExpanded.bringSubview(toFront: demonstrationImageExpanded)
         demonstrationImageExpanded.alpha = 1
         bodyImageExpanded.alpha = 0
-        demonstrationButton.backgroundColor = colour3
+        demonstrationButton.backgroundColor = colour2
         
         
         
@@ -1473,7 +1467,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         demonstrationImageExpanded.alpha = 1
         bodyImageExpanded.alpha = 0
         
-        demonstrationButton.backgroundColor = colour3
+        demonstrationButton.backgroundColor = colour2
         targetButton.backgroundColor = .white
         
     }
@@ -1484,7 +1478,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         bodyImageExpanded.alpha = 1
         demonstrationImageExpanded.alpha = 0
         
-        targetButton.backgroundColor = colour3
+        targetButton.backgroundColor = colour2
         demonstrationButton.backgroundColor = .white
     }
     
@@ -1557,14 +1551,14 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         cancelButtonExplanationE.layer.masksToBounds = true
         
         
-        cancelButtonExplanationE.backgroundColor = colour3
+        cancelButtonExplanationE.backgroundColor = colour2
         
         let origImage = UIImage(named: "Minus")
         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         cancelButtonExplanationE.setImage(tintedImage, for: .normal)
         //Image Tint
-        cancelButtonExplanationE.tintColor = colour4
+        cancelButtonExplanationE.tintColor = colour1
         
         
         

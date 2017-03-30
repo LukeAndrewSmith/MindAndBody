@@ -44,13 +44,10 @@ class CardioChoice: UIViewController  {
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,7 +62,7 @@ class CardioChoice: UIViewController  {
         
         
         // Colours
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
         
         
@@ -76,9 +73,9 @@ class CardioChoice: UIViewController  {
         // Button Titles
         hiit.setTitle(NSLocalizedString("hiit", comment: ""), for: UIControlState.normal)
         hiit.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        hiit.setTitleColor(colour3, for: .normal)
+        hiit.setTitleColor(colour2, for: .normal)
         hiit.layer.borderWidth = 8
-        hiit.layer.borderColor = colour3.cgColor
+        hiit.layer.borderColor = colour2.cgColor
         hiit.titleLabel?.adjustsFontSizeToFitWidth = true
         hiit.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         hiit.titleLabel?.textAlignment = .center
@@ -87,9 +84,9 @@ class CardioChoice: UIViewController  {
         
         regular.setTitle(NSLocalizedString("regular", comment: ""), for: UIControlState.normal)
         regular.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        regular.setTitleColor(colour3, for: .normal)
+        regular.setTitleColor(colour2, for: .normal)
         regular.layer.borderWidth = 8
-        regular.layer.borderColor = colour3.cgColor
+        regular.layer.borderColor = colour2.cgColor
         regular.titleLabel?.adjustsFontSizeToFitWidth = true
         regular.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         regular.titleLabel?.textAlignment = .center
@@ -98,11 +95,11 @@ class CardioChoice: UIViewController  {
         custom.setTitle("C", for: .normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 8
-        custom.layer.borderColor = colour3.cgColor
+        custom.layer.borderColor = colour2.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(colour3, for: .normal)
+        custom.setTitleColor(colour2, for: .normal)
         custom.layer.cornerRadius = 49/2
         custom.layer.masksToBounds = true
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -140,8 +137,8 @@ class CardioChoice: UIViewController  {
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour2
-        informationTitle.backgroundColor = colour7
+        informationTitle.textColor = colour1
+        informationTitle.backgroundColor = colour2
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))

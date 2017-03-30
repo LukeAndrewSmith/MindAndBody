@@ -40,8 +40,10 @@ class YogaChoiceGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+    
+    
     
     
     // TableView Arrays
@@ -100,7 +102,7 @@ class YogaChoiceGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
         
         // Colour
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
         
         
@@ -137,7 +139,7 @@ class YogaChoiceGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour2
+        informationTitle.textColor = colour1
         informationTitle.backgroundColor = colour1
         
         

@@ -78,14 +78,10 @@ class InformationScreenMusic: UIViewController, UITableViewDelegate, UITableView
     
     
     // Retreive Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
-    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
-
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+    
+    
     
     
     
@@ -111,14 +107,14 @@ class InformationScreenMusic: UIViewController, UITableViewDelegate, UITableView
         
         
         // Colour
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
 
         
         // Background
         let tableViewBackground = UIView()
         
-        tableViewBackground.backgroundColor = colour7
+        tableViewBackground.backgroundColor = colour2
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
         
         tableView.backgroundView = tableViewBackground
@@ -155,8 +151,8 @@ class InformationScreenMusic: UIViewController, UITableViewDelegate, UITableView
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour2
-        informationTitle.backgroundColor = colour7
+        informationTitle.textColor = colour1
+        informationTitle.backgroundColor = colour2
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -249,7 +245,7 @@ class InformationScreenMusic: UIViewController, UITableViewDelegate, UITableView
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
         header.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        header.contentView.backgroundColor = colour7
+        header.contentView.backgroundColor = colour2
         //
     }
     

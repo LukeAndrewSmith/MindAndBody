@@ -10,38 +10,34 @@ import Foundation
 import UIKit
 
 
+//
+// Custom Profile Cells -------------------------------------------------------------------------------------------------------------------------
+//
 
-
+// Title Cell
 class profileCell1: UITableViewCell {
     
     @IBOutlet weak var profileTitle: UILabel!
     
     @IBOutlet weak var settingButton: UIButton!
     
-    
-    
 }
 
 
 
-
-
-
-
-
+//
+// Profile Class --------------------------------------------------------------------------------------------------------------------------------
+//
 
 class Profile: UITableViewController{
     
+    
     //Outlets
     @IBOutlet weak var MyPreferencesNavigationBar: UINavigationItem!
-
-    
-    // Label Outlets
-    
     
     
     // Arrays
-    let sectionArray =
+    let sectionArray: Array<String> =
         ["", "me", "goals", "workout", "cardio", "stretching", "yoga", "meditation"]
     
     
@@ -101,6 +97,11 @@ class Profile: UITableViewController{
     
     
     
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+    
+    
+    
     //
     // viewDidLoad
     //
@@ -113,15 +114,12 @@ class Profile: UITableViewController{
             UserDefaults.standard.set(true, forKey: "profileWalkthrough")
         }
         
-        // Colours
-        let colour2 = UserDefaults.standard.color(forKey: "colour2")
-        let colour7 = UserDefaults.standard.color(forKey: "colour7")
+
         
-        
-        self.navigationController?.navigationBar.barTintColor = colour7
+        self.navigationController?.navigationBar.barTintColor = colour2
         self.navigationController?.navigationBar.tintColor = .white
         
-        self.tabBarController?.tabBar.tintColor = colour2
+        self.tabBarController?.tabBar.tintColor = colour1
         
         
         
@@ -933,9 +931,9 @@ class Profile: UITableViewController{
 
     
     
-    
-//---------------------------------------------------------------------------------------------------------------
-    
+//  
+// Walkthrough ----------------------------------------------------------------------------------------------------------------------------------
+//
     
     var  viewNumber = 0
     let walkthroughView = UIView()

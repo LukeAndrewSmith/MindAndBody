@@ -71,7 +71,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     //
     
     
-    var warmupPresetsCustom =
+    var warmupPresetsCustom: Array<Array<Int>> =
         [
             [], [], []
         ]
@@ -335,15 +335,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
-    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
-    let colour8 = UserDefaults.standard.color(forKey: "colour8")!
-    
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
     // Add Preset
     @IBOutlet weak var addPreset: UIButton!
@@ -434,8 +427,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         addPreset.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        //addPreset.tintColor = colour2
-        addPreset.tintColor = colour3
+        //addPreset.tintColor = colour1
+        addPreset.tintColor = colour2
         
         
         
@@ -446,8 +439,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         removePreset.setImage(tintedImage2, for: .normal)
         
         //Image Tint
-        //removePreset.tintColor = colour2
-        removePreset.tintColor = colour3
+        //removePreset.tintColor = colour1
+        removePreset.tintColor = colour2
         
         
         
@@ -455,7 +448,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour8, for: .normal)
+        beginButton.setTitleColor(colour2, for: .normal)
         
         
         
@@ -485,8 +478,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour2
-        informationTitle.backgroundColor = colour7
+        informationTitle.textColor = colour1
+        informationTitle.backgroundColor = colour2
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -549,7 +542,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         // TableView Background
         let tableViewBackground = UIView()
             
-        tableViewBackground.backgroundColor = colour7
+        tableViewBackground.backgroundColor = colour2
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
             
         tableView.backgroundView = tableViewBackground
@@ -611,8 +604,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     
     // Set Personalized Preset
     //
-    @IBAction func addPreset(_ sender: Any) {
-        
+    @IBAction func addCustomWarmup(_ sender: Any) {
+    
         let defaults = UserDefaults.standard
         let number = defaults.integer(forKey: "warmupPresetNumberCustom")
         var warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [Array<Array<Int>>]
@@ -629,7 +622,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
             //
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-            alert.view.tintColor = colour7
+            alert.view.tintColor = colour2
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             
             //2. Add the text field. You can configure it however you need.
@@ -645,19 +638,21 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 
                 
                 
-                // Update Preset Text Arrays
-                presetTextArray[number] = (textField?.text)!
-                defaults.set(presetTextArray, forKey: "warmupPresetTextsCustom")
-                defaults.synchronize()
-                
-                
-                
                 // Increase Preset Counter
                 //
                 let newNumber = number + 1
                 
                 defaults.set(newNumber, forKey: "warmupPresetNumberCustom")
                 defaults.synchronize()
+                
+                
+                
+                
+                // Update Preset Text Arrays
+                presetTextArray[newNumber] = (textField?.text)!
+                defaults.set(presetTextArray, forKey: "warmupPresetTextsCustom")
+                defaults.synchronize()
+                
                 
                 
                 
@@ -672,10 +667,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             self.present(alert, animated: true, completion: nil)
             
             
-            
-            
-            
-            
         } else {
             
         }
@@ -685,7 +676,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     
     
     // Remove Personalized Preset
-    @IBAction func removePreset(_ sender: Any) {
+    
+    @IBAction func removeCustomWarmup(_ sender: Any) {
+    
         
         let defaults = UserDefaults.standard
         let number = defaults.integer(forKey: "warmupPresetNumberCustom")
@@ -760,43 +753,46 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
-        switch row {
-        case 0:
-            let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
-            let titleData = titleDataArray[0]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
-            rowLabel.attributedText = myTitle
-            rowLabel.textAlignment = .center
-            return rowLabel
-            
-            
-            
-        case 1:
-            let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
-            let titleData = titleDataArray[1]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
-            rowLabel.attributedText = myTitle
-            rowLabel.textAlignment = .center
-            return rowLabel
-            
-            
-            
-        case 2:
-            let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
-            let titleData = titleDataArray[2]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
-            rowLabel.attributedText = myTitle
-            rowLabel.textAlignment = .center
-            return rowLabel
-            
-            
-        default: return UIView()
-        }
+    
+        let rowLabel = UILabel()
+        let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+        //
+        let titleData = titleDataArray[row]
+        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
+        rowLabel.attributedText = myTitle
+        //
+        rowLabel.textAlignment = .center
+        return rowLabel
         
-        return UIView()
+        
+            
+//            
+//            
+//        case 1:
+//            let rowLabel = UILabel()
+//            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+//            let titleData = titleDataArray[1]
+//            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
+//            rowLabel.attributedText = myTitle
+//            rowLabel.textAlignment = .center
+//            return rowLabel
+//            
+//            
+//            
+//        case 2:
+//            let rowLabel = UILabel()
+//            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+//            let titleData = titleDataArray[2]
+//            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
+//            rowLabel.attributedText = myTitle
+//            rowLabel.textAlignment = .center
+//            return rowLabel
+//            
+//            
+//        default: return UIView()
+//        }
+//        
+//        return UIView()
         
     }
     
@@ -857,9 +853,33 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+        return titleDataArray[pickerView.selectedRow(inComponent: 0)]
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
+        header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        header.contentView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+        //colour2
+        header.contentView.tintColor = colour1
+        //
+        
+        
+    }
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let defaults = UserDefaults.standard
+        
         return 0
 //        let fullArray = defaults.object(forKey: "warmupPresetsCustom") as! [Array<Array<Int>>]
 //        return fullArray[pickerView.selectedRow(inComponent: 0)].count

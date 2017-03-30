@@ -74,18 +74,16 @@ class ClassicChoiceG: UIViewController  {
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Colours
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
         
         
@@ -97,9 +95,9 @@ class ClassicChoiceG: UIViewController  {
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        fullBody.setTitleColor(colour3, for: .normal)
+        fullBody.setTitleColor(colour2, for: .normal)
         fullBody.layer.borderWidth = 8
-        fullBody.layer.borderColor = colour3.cgColor
+        fullBody.layer.borderColor = colour2.cgColor
         fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
         fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         fullBody.titleLabel?.textAlignment = .center
@@ -118,9 +116,9 @@ class ClassicChoiceG: UIViewController  {
         
         upperBody.setTitle(NSLocalizedString("upper", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        upperBody.setTitleColor(colour3, for: .normal)
+        upperBody.setTitleColor(colour2, for: .normal)
         upperBody.layer.borderWidth = 8
-        upperBody.layer.borderColor = colour3.cgColor
+        upperBody.layer.borderColor = colour2.cgColor
         upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
         upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         upperBody.titleLabel?.textAlignment = .center
@@ -128,9 +126,9 @@ class ClassicChoiceG: UIViewController  {
         
         lowerBody.setTitle(NSLocalizedString("lower", comment: ""), for: UIControlState.normal)
         lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        lowerBody.setTitleColor(colour3, for: .normal)
+        lowerBody.setTitleColor(colour2, for: .normal)
         lowerBody.layer.borderWidth = 8
-        lowerBody.layer.borderColor = colour3.cgColor
+        lowerBody.layer.borderColor = colour2.cgColor
         lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
         lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         lowerBody.titleLabel?.textAlignment = .center
@@ -139,9 +137,9 @@ class ClassicChoiceG: UIViewController  {
         
         legs.setTitle(NSLocalizedString("legs", comment: ""), for: UIControlState.normal)
         legs.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        legs.setTitleColor(colour3, for: .normal)
+        legs.setTitleColor(colour2, for: .normal)
         legs.layer.borderWidth = 8
-        legs.layer.borderColor = colour3.cgColor
+        legs.layer.borderColor = colour2.cgColor
         legs.titleLabel?.adjustsFontSizeToFitWidth = true
         legs.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         legs.titleLabel?.textAlignment = .center
@@ -150,9 +148,9 @@ class ClassicChoiceG: UIViewController  {
         
         pull.setTitle(NSLocalizedString("pull", comment: ""), for: UIControlState.normal)
         pull.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        pull.setTitleColor(colour3, for: .normal)
+        pull.setTitleColor(colour2, for: .normal)
         pull.layer.borderWidth = 8
-        pull.layer.borderColor = colour3.cgColor
+        pull.layer.borderColor = colour2.cgColor
         pull.titleLabel?.adjustsFontSizeToFitWidth = true
         pull.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         pull.titleLabel?.textAlignment = .center
@@ -161,9 +159,9 @@ class ClassicChoiceG: UIViewController  {
         
         push.setTitle(NSLocalizedString("push", comment: ""), for: UIControlState.normal)
         push.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        push.setTitleColor(colour3, for: .normal)
+        push.setTitleColor(colour2, for: .normal)
         push.layer.borderWidth = 8
-        push.layer.borderColor = colour3.cgColor
+        push.layer.borderColor = colour2.cgColor
         push.titleLabel?.adjustsFontSizeToFitWidth = true
         push.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         push.titleLabel?.textAlignment = .center
@@ -178,7 +176,7 @@ class ClassicChoiceG: UIViewController  {
         
         
         // Scroll View Frame
-        self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
+        self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 10, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
         
         view.bringSubview(toFront: informationView)
         
@@ -186,12 +184,12 @@ class ClassicChoiceG: UIViewController  {
         // Information Title
         //
         // Information Title Frame
-        self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
+        self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 10)
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour2
-        informationTitle.backgroundColor = colour7
+        informationTitle.textColor = colour1
+        informationTitle.backgroundColor = colour2
         
         
         
@@ -210,7 +208,7 @@ class ClassicChoiceG: UIViewController  {
         // Information Text
         //
         // Information Text Frame
-        let informationTextStretchingC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
+        let informationTextStretchingC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 10, height: 0))
         
         // Information Text and Attributes
         //

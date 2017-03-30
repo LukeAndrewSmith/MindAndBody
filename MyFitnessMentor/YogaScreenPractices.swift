@@ -273,15 +273,10 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
-    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
-    
+        
     
     // View Will Appear
     override func viewWillAppear(_ animated: Bool) {
@@ -324,13 +319,13 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         
         // Background Gradient
         //
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         
         backButton.tintColor = colour1
         
         
         // Breath Label
-        setsRepsLabel.textColor = colour3
+        setsRepsLabel.textColor = colour2
         
         
         // Image View
@@ -354,7 +349,7 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         explanationExpand.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        explanationExpand.tintColor = colour3
+        explanationExpand.tintColor = colour2
         
         
         
@@ -417,7 +412,7 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         navigationTitle.backgroundColor = .clear
         navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
-        self.navigationController?.navigationBar.barTintColor = colour5
+        self.navigationController?.navigationBar.barTintColor = colour2
         
         self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
@@ -611,14 +606,14 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         cancelButtonExplanationE.layer.masksToBounds = true
         
         
-        cancelButtonExplanationE.backgroundColor = colour3
+        cancelButtonExplanationE.backgroundColor = colour2
         
         let origImage = UIImage(named: "Minus")
         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         cancelButtonExplanationE.setImage(tintedImage, for: .normal)
         //Image Tint
-        cancelButtonExplanationE.tintColor = colour4
+        cancelButtonExplanationE.tintColor = colour1
         
         
         

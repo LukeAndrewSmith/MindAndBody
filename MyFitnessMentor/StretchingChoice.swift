@@ -61,11 +61,9 @@ class StretchingChoice: UIViewController  {
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+    
     
     
     override func viewDidLoad() {
@@ -83,7 +81,7 @@ class StretchingChoice: UIViewController  {
         
         
         // Colours
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
         
         
@@ -94,30 +92,30 @@ class StretchingChoice: UIViewController  {
         // Button Titles
         general.setTitle(NSLocalizedString("general", comment: ""), for: UIControlState.normal)
         general.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        general.setTitleColor(colour3, for: .normal)
+        general.setTitleColor(colour2, for: .normal)
         general.layer.borderWidth = 8
-        general.layer.borderColor = colour3.cgColor
+        general.layer.borderColor = colour2.cgColor
         
         postWorkout.setTitle(NSLocalizedString("postWorkout", comment: ""), for: UIControlState.normal)
         postWorkout.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        postWorkout.setTitleColor(colour3, for: .normal)
+        postWorkout.setTitleColor(colour2, for: .normal)
         postWorkout.layer.borderWidth = 8
-        postWorkout.layer.borderColor = colour3.cgColor
+        postWorkout.layer.borderColor = colour2.cgColor
         
         postCardio.setTitle(NSLocalizedString("postCardio", comment: ""), for: UIControlState.normal)
-        postCardio.setTitleColor(colour3, for: .normal)
+        postCardio.setTitleColor(colour2, for: .normal)
         postCardio.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         postCardio.layer.borderWidth = 8
-        postCardio.layer.borderColor = colour3.cgColor
+        postCardio.layer.borderColor = colour2.cgColor
         
         
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 7
-        custom.layer.borderColor = colour3.cgColor
+        custom.layer.borderColor = colour2.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
         custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(colour3, for: .normal)
+        custom.setTitleColor(colour2, for: .normal)
         custom.layer.cornerRadius = 49/2
         custom.layer.masksToBounds = true
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -140,8 +138,8 @@ class StretchingChoice: UIViewController  {
         informationTitleStretchingC.text = (NSLocalizedString("information", comment: ""))
         informationTitleStretchingC.textAlignment = .center
         informationTitleStretchingC.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitleStretchingC.textColor = colour2
-        informationTitleStretchingC.backgroundColor = colour7
+        informationTitleStretchingC.textColor = colour1
+        informationTitleStretchingC.backgroundColor = colour2
         
         
         

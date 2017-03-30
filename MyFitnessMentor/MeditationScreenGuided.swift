@@ -54,12 +54,10 @@ class MeditationScreenGuided: UIViewController {
     
     
     // Retrieve Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
-    
+        
     
     
     override func viewDidLoad() {
@@ -69,7 +67,7 @@ class MeditationScreenGuided: UIViewController {
         
         
         // Navigation Controller
-        navigationController?.navigationBar.barTintColor = colour5
+        navigationController?.navigationBar.barTintColor = colour2
         
         // Navigation Title
         //
@@ -222,7 +220,7 @@ class MeditationScreenGuided: UIViewController {
         let title = NSLocalizedString("finishEarly", comment: "")
         let message = NSLocalizedString("finishEarlyMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = colour7
+        alert.view.tintColor = colour2
         alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         
         let paragraphStyle = NSMutableParagraphStyle()

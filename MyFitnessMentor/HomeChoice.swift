@@ -61,13 +61,9 @@ class HomeChoice: UIViewController  {
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
-    
-    
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,7 +79,7 @@ class HomeChoice: UIViewController  {
         
         
         // Colours
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
         
         
@@ -94,32 +90,32 @@ class HomeChoice: UIViewController  {
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        fullBody.setTitleColor(colour3, for: .normal)
+        fullBody.setTitleColor(colour2, for: .normal)
         fullBody.layer.borderWidth = 8
-        fullBody.layer.borderColor = colour3.cgColor
+        fullBody.layer.borderColor = colour2.cgColor
         
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        upperBody.setTitleColor(colour3, for: .normal)
+        upperBody.setTitleColor(colour2, for: .normal)
         upperBody.layer.borderWidth = 8
-        upperBody.layer.borderColor = colour3.cgColor
+        upperBody.layer.borderColor = colour2.cgColor
         
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
-        lowerBody.setTitleColor(colour3, for: .normal)
+        lowerBody.setTitleColor(colour2, for: .normal)
         lowerBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         lowerBody.layer.borderWidth = 8
-        lowerBody.layer.borderColor = colour3.cgColor
+        lowerBody.layer.borderColor = colour2.cgColor
         
         
         
         
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 7
-        custom.layer.borderColor = colour3.cgColor
+        custom.layer.borderColor = colour2.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
         custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(colour3, for: .normal)
+        custom.setTitleColor(colour2, for: .normal)
         custom.layer.cornerRadius = 49/2
         custom.layer.masksToBounds = true
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -156,8 +152,8 @@ class HomeChoice: UIViewController  {
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour2
-        informationTitle.backgroundColor = colour7
+        informationTitle.textColor = colour1
+        informationTitle.backgroundColor = colour2
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))

@@ -26,10 +26,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Profile Naviagtion-->
+        <!--Navigation Controller-->
         <scene sceneID="0z0-hv-ZvX">
             <objects>
-                <navigationController id="Jem-Gk-Dv6" customClass="ProfileNaviagtion" customModule="MyFitnessMentor" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="Jem-Gk-Dv6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Profile" selectedImage="Profile Selected" id="KEj-Md-lGJ">
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
@@ -471,10 +471,10 @@
             </objects>
             <point key="canvasLocation" x="-1742" y="32"/>
         </scene>
-        <!--Mind Body Navigation-->
+        <!--Navigation Controller-->
         <scene sceneID="Lwk-bd-tU1">
             <objects>
-                <navigationController id="eh5-tX-IBt" customClass="MindBodyNavigation" customModule="MyFitnessMentor" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="eh5-tX-IBt" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Mind&amp;Body" id="cIM-AQ-4Nl">
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
@@ -500,10 +500,10 @@
             </objects>
             <point key="canvasLocation" x="-985" y="32"/>
         </scene>
-        <!--Information Navigation-->
+        <!--Navigation Controller-->
         <scene sceneID="zz9-aE-qaz">
             <objects>
-                <navigationController id="bCZ-Mx-QR3" customClass="InformationNavigation" customModule="MyFitnessMentor" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="bCZ-Mx-QR3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="QuestionMark" id="Zd5-2F-Ypb">
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
@@ -6555,7 +6555,7 @@
                                     <color key="titleColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="addPreset:" destination="tVV-zd-pp1" eventType="touchUpInside" id="vSZ-7V-PQe"/>
+                                    <action selector="addCustomWarmup:" destination="tVV-zd-pp1" eventType="touchUpInside" id="Xlt-K8-K1c"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgr-15-TUj">
@@ -6566,7 +6566,7 @@
                                 </constraints>
                                 <state key="normal" image="Minus"/>
                                 <connections>
-                                    <action selector="removePreset:" destination="tVV-zd-pp1" eventType="touchUpInside" id="UKN-dz-tDh"/>
+                                    <action selector="removeCustomWarmup:" destination="tVV-zd-pp1" eventType="touchUpInside" id="W2Z-VD-CGQ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -6609,11 +6609,13 @@
                         <outlet property="questionMark" destination="XFq-eu-hsV" id="Wro-23-yZO"/>
                         <outlet property="removePreset" destination="dgr-15-TUj" id="OI6-ju-Ptu"/>
                         <outlet property="tableView" destination="qSI-4K-81t" id="eid-KJ-eD1"/>
+                        <segue destination="3iN-Mc-KWv" kind="presentation" id="i7V-oS-mJh"/>
+                        <segue destination="L0V-XO-TtM" kind="presentation" id="aea-JR-8Yj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3JK-F5-lRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3089" y="-1464"/>
+            <point key="canvasLocation" x="3206" y="-1462"/>
         </scene>
     </scenes>
     <resources>
@@ -6638,4 +6640,8 @@
         <image name="Timer" width="30" height="30"/>
         <image name="Tricep" width="375" height="375"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="aea-JR-8Yj"/>
+        <segue reference="i7V-oS-mJh"/>
+    </inferredMetricsTieBreakers>
 </document>

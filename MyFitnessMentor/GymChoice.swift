@@ -59,13 +59,11 @@ class GymChoice: UIViewController  {
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
     
+ 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
         backItem.title = ""
@@ -88,7 +86,7 @@ class GymChoice: UIViewController  {
         
         
         // Colours
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
         
         
@@ -101,8 +99,8 @@ class GymChoice: UIViewController  {
         classic.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         classic.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         classic.layer.borderWidth = 8
-        classic.layer.borderColor = colour3.cgColor
-        classic.setTitleColor(colour3, for: .normal)
+        classic.layer.borderColor = colour2.cgColor
+        classic.setTitleColor(colour2, for: .normal)
         
         
         
@@ -110,8 +108,8 @@ class GymChoice: UIViewController  {
         circuit.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         circuit.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         circuit.layer.borderWidth = 8
-        circuit.layer.borderColor = colour3.cgColor
-        circuit.setTitleColor(colour3, for: .normal)
+        circuit.layer.borderColor = colour2.cgColor
+        circuit.setTitleColor(colour2, for: .normal)
         
         
         
@@ -119,19 +117,19 @@ class GymChoice: UIViewController  {
         fiveByFive.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         fiveByFive.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         fiveByFive.layer.borderWidth = 8
-        fiveByFive.layer.borderColor = colour3.cgColor
-        fiveByFive.setTitleColor(colour3, for: .normal)
+        fiveByFive.layer.borderColor = colour2.cgColor
+        fiveByFive.setTitleColor(colour2, for: .normal)
         
         
         
         
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 7
-        custom.layer.borderColor = colour3.cgColor
+        custom.layer.borderColor = colour2.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
         custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(colour3, for: .normal)
+        custom.setTitleColor(colour2, for: .normal)
         custom.layer.cornerRadius = 49/2
         custom.layer.masksToBounds = true
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -157,8 +155,8 @@ class GymChoice: UIViewController  {
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour2
-        informationTitle.backgroundColor = colour7
+        informationTitle.textColor = colour1
+        informationTitle.backgroundColor = colour2
         
         
         

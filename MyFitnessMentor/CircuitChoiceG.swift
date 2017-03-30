@@ -57,11 +57,9 @@ class CircuitChoiceG: UIViewController  {
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+    
     
     
     override func viewDidLoad() {
@@ -69,7 +67,7 @@ class CircuitChoiceG: UIViewController  {
        
         
         // Colours
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
         
         
@@ -80,21 +78,21 @@ class CircuitChoiceG: UIViewController  {
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        fullBody.setTitleColor(colour3, for: .normal)
+        fullBody.setTitleColor(colour2, for: .normal)
         fullBody.layer.borderWidth = 8
-        fullBody.layer.borderColor = colour3.cgColor
+        fullBody.layer.borderColor = colour2.cgColor
         
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        upperBody.setTitleColor(colour3, for: .normal)
+        upperBody.setTitleColor(colour2, for: .normal)
         upperBody.layer.borderWidth = 8
-        upperBody.layer.borderColor = colour3.cgColor
+        upperBody.layer.borderColor = colour2.cgColor
         
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
-        lowerBody.setTitleColor(colour3, for: .normal)
+        lowerBody.setTitleColor(colour2, for: .normal)
         lowerBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         lowerBody.layer.borderWidth = 8
-        lowerBody.layer.borderColor = colour3.cgColor
+        lowerBody.layer.borderColor = colour2.cgColor
         
         
         
@@ -111,8 +109,8 @@ class CircuitChoiceG: UIViewController  {
         informationVTitle.text = (NSLocalizedString("information", comment: ""))
         informationVTitle.textAlignment = .center
         informationVTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationVTitle.textColor = colour2
-        informationVTitle.backgroundColor = colour7
+        informationVTitle.textColor = colour1
+        informationVTitle.backgroundColor = colour2
         
         
         

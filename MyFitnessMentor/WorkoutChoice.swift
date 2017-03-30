@@ -43,13 +43,10 @@ class WorkoutChoice: UIViewController  {
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
-    
+        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
         backItem.title = ""
@@ -72,7 +69,7 @@ class WorkoutChoice: UIViewController  {
         
         
         // Colours
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
         
         
@@ -85,8 +82,8 @@ class WorkoutChoice: UIViewController  {
         gym.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         gym.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         gym.layer.borderWidth = 8
-        gym.layer.borderColor = colour3.cgColor
-        gym.setTitleColor(colour3, for: .normal)
+        gym.layer.borderColor = colour2.cgColor
+        gym.setTitleColor(colour2, for: .normal)
 
         
         
@@ -94,8 +91,8 @@ class WorkoutChoice: UIViewController  {
         home.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         home.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         home.layer.borderWidth = 8
-        home.layer.borderColor = colour3.cgColor
-        home.setTitleColor(colour3, for: .normal)
+        home.layer.borderColor = colour2.cgColor
+        home.setTitleColor(colour2, for: .normal)
 
 
         
@@ -115,8 +112,8 @@ class WorkoutChoice: UIViewController  {
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour2
-        informationTitle.backgroundColor = colour7
+        informationTitle.textColor = colour1
+        informationTitle.backgroundColor = colour2
         
         
         

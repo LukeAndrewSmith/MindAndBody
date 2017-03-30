@@ -36,7 +36,10 @@ class InformationScreen1: UIViewController {
     
     
     // Colours
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+    
+    
 
     
     
@@ -52,7 +55,7 @@ class InformationScreen1: UIViewController {
         //
         navigationBar.title = (NSLocalizedString(titleArray[selectedTopic[0]][selectedTopic[1]], comment: ""))
         
-        //self.navigationController?.navigationBar.barTintColor = colour7
+        //self.navigationController?.navigationBar.barTintColor = colour2
         //self.navigationController?.navigationBar.tintColor = .white
         
         

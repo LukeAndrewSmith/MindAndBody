@@ -189,15 +189,10 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
-    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
-    
+        
     
     
     //
@@ -254,7 +249,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         // Background Gradient
         //
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         
         backButton.tintColor = colour1
         
@@ -302,7 +297,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         // Set Rep View
         setRepView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        //colour3
+        //colour2
         
         
         
@@ -323,7 +318,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         explanationExpand.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        explanationExpand.tintColor = colour3
+        explanationExpand.tintColor = colour2
         
         
         
@@ -349,8 +344,8 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         //timerButton2.setImage(tintedImage3, for: .normal)
         
         //Image Tint
-        timerButton.tintColor = colour3
-        //timerButton2.tintColor = colour3
+        timerButton.tintColor = colour2
+        //timerButton2.tintColor = colour2
         
         
         
@@ -407,9 +402,9 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         // Start Button Timer
         //
-        timerStart.backgroundColor = colour2
+        timerStart.backgroundColor = colour1
         timerStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
-        timerStart.setTitleColor(colour6, for: .normal)
+        timerStart.setTitleColor(colour2, for: .normal)
         timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         timerStart.titleLabel?.textAlignment = .center
         
@@ -423,7 +418,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         
         timerCancel.backgroundColor = colour1
         timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
-        timerCancel.setTitleColor(colour6, for: .normal)
+        timerCancel.setTitleColor(colour2, for: .normal)
         timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         timerCancel.titleLabel?.textAlignment = .center
         
@@ -521,11 +516,11 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
         setButton.layer.borderWidth = 4
         setButton.layer.borderColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0).cgColor
-        //colour4.cgColor
+        //colour1.cgColor
         setButton.layer.cornerRadius = 21.4375
         setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
         setButton.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        //colour3
+        //colour2
         setButton.isEnabled = false
         
         
@@ -570,7 +565,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         navigationTitle.backgroundColor = .clear
         navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
-        self.navigationController?.navigationBar.barTintColor = colour5
+        self.navigationController?.navigationBar.barTintColor = colour2
         
         self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
@@ -674,7 +669,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         self.progressLabel.text = (String(stretchingScreenIndex + 1)+"/"+String(stretchingArray.count))
         
         //
-        setsRepsLabel.textColor = colour3
+        setsRepsLabel.textColor = colour2
         progressLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
         
@@ -1170,7 +1165,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         }
         
         sender.backgroundColor = UIColor(red: 0.88, green: 0.89, blue: 0.89, alpha: 1.0)
-        //colour4
+        //colour1
         sender.isEnabled = false
         
     }

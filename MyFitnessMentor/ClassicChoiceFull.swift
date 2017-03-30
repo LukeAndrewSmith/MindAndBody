@@ -36,14 +36,8 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
     
    
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
-    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
-    let colour8 = UserDefaults.standard.color(forKey: "colour8")!
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
     
     
@@ -1233,7 +1227,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         // Colours
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
         
         
@@ -1249,7 +1243,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         addPreset.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        addPreset.tintColor = colour3
+        addPreset.tintColor = colour2
         
         
         
@@ -1260,7 +1254,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         removePreset.setImage(tintedImage2, for: .normal)
         
         //Image Tint
-        removePreset.tintColor = colour3
+        removePreset.tintColor = colour2
         
         
         
@@ -1268,7 +1262,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour8, for: .normal)
+        beginButton.setTitleColor(colour2, for: .normal)
         
         
         
@@ -1298,8 +1292,8 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour2
-        informationTitle.backgroundColor = colour7
+        informationTitle.textColor = colour1
+        informationTitle.backgroundColor = colour2
         
         
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -1356,11 +1350,11 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         // TableView Background
-        if String(describing: colour7) == String(describing: UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)) {
+        if String(describing: colour2) == String(describing: UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)) {
         
         let tableViewBackground = UIView()
     
-        tableViewBackground.backgroundColor = colour7
+        tableViewBackground.backgroundColor = colour2
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
         
         tableView.backgroundView = tableViewBackground
@@ -1426,7 +1420,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             let inputTitle = NSLocalizedString("workoutInputTitle", comment: "")
             //
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-            alert.view.tintColor = colour7
+            alert.view.tintColor = colour2
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             
             //2. Add the text field. You can configure it however you need.
@@ -2335,7 +2329,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
         header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        header.contentView.backgroundColor = colour7
+        header.contentView.backgroundColor = colour2
         //
         
         
@@ -2366,7 +2360,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         
         if workoutSelectedArray[indexPath.section][indexPath.row] == 1 {
-            cell.layer.borderColor = colour7.cgColor
+            cell.layer.borderColor = colour2.cgColor
             cell.layer.borderWidth = 2
             
             cell.accessoryType = .checkmark

@@ -266,10 +266,8 @@ class YogaScreenCustom: UIViewController, UIScrollViewDelegate {
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-    let colour4 = UIColor(red:0.09, green:0.10, blue:0.11, alpha:1.0)
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
     
     // View Will Appear
@@ -301,14 +299,14 @@ class YogaScreenCustom: UIViewController, UIScrollViewDelegate {
         
         // Background Gradient
         //
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         
         backButton.tintColor = colour1
         
         
         
         // Image View
-        imageView.backgroundColor = colour4
+        imageView.backgroundColor = colour2
         
         
         
@@ -327,7 +325,7 @@ class YogaScreenCustom: UIViewController, UIScrollViewDelegate {
         explanationExpand.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        explanationExpand.tintColor = colour3
+        explanationExpand.tintColor = colour1
         
         
         
@@ -557,7 +555,7 @@ class YogaScreenCustom: UIViewController, UIScrollViewDelegate {
         scrollViewExplanationE.center.x = self.view.frame.size.width/2
         scrollViewExplanationE.center.y = self.view.frame.size.height/2
         
-        scrollViewExplanationE.backgroundColor = colour3
+        scrollViewExplanationE.backgroundColor = colour1
         
         
         
@@ -583,14 +581,14 @@ class YogaScreenCustom: UIViewController, UIScrollViewDelegate {
         cancelButtonExplanationE.layer.masksToBounds = true
         
         
-        cancelButtonExplanationE.backgroundColor = colour3
+        cancelButtonExplanationE.backgroundColor = colour1
         
         let origImage = UIImage(named: "Minus")
         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         cancelButtonExplanationE.setImage(tintedImage, for: .normal)
         //Image Tint
-        cancelButtonExplanationE.tintColor = colour4
+        cancelButtonExplanationE.tintColor = colour2
         
         
         

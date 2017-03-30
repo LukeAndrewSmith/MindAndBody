@@ -148,16 +148,11 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
-    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
     
-    
+        
     
     //
     // View Did Load
@@ -208,7 +203,7 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         
         // Background Gradient
         //
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         
         backButton.tintColor = colour1
         
@@ -256,7 +251,7 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         
         // Set Rep View
         bodyPartLabel.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        //colour3
+        //colour2
         
         
         
@@ -277,7 +272,7 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         explanationExpand.setImage(tintedImage1, for: .normal)
         
         //Image Tint
-        explanationExpand.tintColor = colour3
+        explanationExpand.tintColor = colour2
         
         
         
@@ -303,8 +298,8 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         //timerButton2.setImage(tintedImage3, for: .normal)
         
         //Image Tint
-        timerButton.tintColor = colour3
-        //timerButton2.tintColor = colour3
+        timerButton.tintColor = colour2
+        //timerButton2.tintColor = colour2
         
         
         
@@ -361,9 +356,9 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         
         // Start Button Timer
         //
-        timerStart.backgroundColor = colour2
+        timerStart.backgroundColor = colour1
         timerStart.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
-        timerStart.setTitleColor(colour6, for: .normal)
+        timerStart.setTitleColor(colour2, for: .normal)
         timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         timerStart.titleLabel?.textAlignment = .center
         
@@ -377,7 +372,7 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         
         timerCancel.backgroundColor = colour1
         timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
-        timerCancel.setTitleColor(colour6, for: .normal)
+        timerCancel.setTitleColor(colour2, for: .normal)
         timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         timerCancel.titleLabel?.textAlignment = .center
         
@@ -479,7 +474,7 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         setButton.layer.cornerRadius = 21.4375
         setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
         setButton.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        //colour3
+        //colour2
         setButton.isEnabled = false
         
         
@@ -524,7 +519,7 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         navigationTitle.backgroundColor = .clear
         navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
-        self.navigationController?.navigationBar.barTintColor = colour5
+        self.navigationController?.navigationBar.barTintColor = colour2
         
         self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
@@ -628,7 +623,7 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         self.progressLabel.text = (String(yogaScreenIndex + 1)+"/"+String(yogaArray.count))
         
         //
-        breathsLabel.textColor = colour3
+        breathsLabel.textColor = colour2
         progressLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
         
@@ -1124,7 +1119,6 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         }
         
         sender.backgroundColor = UIColor(red: 0.88, green: 0.89, blue: 0.89, alpha: 1.0)
-        //colour4
         sender.isEnabled = false
         
     }

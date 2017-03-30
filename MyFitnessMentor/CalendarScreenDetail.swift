@@ -16,12 +16,12 @@ class CalendarScreenDetail: UITableViewController {
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     // Table View
-    
-    let selectedDay = Int()
+    var selectedDay = Int()
     
     // Arrays
-    let daysArray =
-    ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+    let daysArray: Array<String> =
+        ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+    
     
     
     let routineArray =
@@ -50,13 +50,9 @@ class CalendarScreenDetail: UITableViewController {
     ]
     
     
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
-    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
+    // Colours
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
     
     
@@ -90,8 +86,7 @@ class CalendarScreenDetail: UITableViewController {
         
         
         
-        self.navigationController?.navigationBar.barTintColor = colour7
-        
+        self.navigationController?.navigationBar.tintColor = colour1
         
         
         // Title
@@ -100,7 +95,7 @@ class CalendarScreenDetail: UITableViewController {
         
     
         // Navigation Title
-        navigationBar.title = NSLocalizedString("calendar", comment: "")
+        navigationBar.title = NSLocalizedString(daysArray[selectedDay], comment: "")
         
         
         // Table View
@@ -115,12 +110,12 @@ class CalendarScreenDetail: UITableViewController {
     // Table View
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
-            //daysArray.count
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString(daysArray[section], comment: "")
+        //return NSLocalizedString(daysArray[section], comment: "")
+        return "19:45"
     }
     
     
@@ -195,6 +190,7 @@ class CalendarScreenDetail: UITableViewController {
         return 47
         
     }
+    
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

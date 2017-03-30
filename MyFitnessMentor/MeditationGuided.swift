@@ -124,16 +124,9 @@ class MeditationGuided: UIViewController {
     
     
     // Colours
-    let colour1 = UserDefaults.standard.color(forKey: "colour1")!
-    let colour2 = UserDefaults.standard.color(forKey: "colour2")!
-    let colour3 = UserDefaults.standard.color(forKey: "colour3")!
-    let colour4 = UserDefaults.standard.color(forKey: "colour4")!
-    let colour5 = UserDefaults.standard.color(forKey: "colour5")!
-    let colour6 = UserDefaults.standard.color(forKey: "colour6")!
-    let colour7 = UserDefaults.standard.color(forKey: "colour7")!
-    let colour8 = UserDefaults.standard.color(forKey: "colour8")!
-    
-    
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        
 
 
     
@@ -147,13 +140,13 @@ class MeditationGuided: UIViewController {
         super.viewDidLoad()
         
         // Colour
-        self.view.applyGradient(colours: [colour1, colour2])
+        self.view.applyGradient(colours: [colour1, colour1])
         
         
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour8, for: .normal)
+        beginButton.setTitleColor(colour2, for: .normal)
         
         
         
@@ -162,14 +155,14 @@ class MeditationGuided: UIViewController {
         // View Elements
         //
         // Description
-        detailView.backgroundColor = colour7
+        detailView.backgroundColor = colour2
         
         detailTitle.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         detailTitle.text = NSLocalizedString("detail", comment: "")
         
         
         //
-        imageView.backgroundColor = colour7
+        imageView.backgroundColor = colour2
         imageView.layer.cornerRadius = 3
         imageView.layer.masksToBounds = true
         
@@ -238,7 +231,7 @@ class MeditationGuided: UIViewController {
         
         
         discussionTitle.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        discussionTitle.textColor = colour7
+        discussionTitle.textColor = colour2
         discussionTitle.text = NSLocalizedString("discussion", comment: "")
         
         
