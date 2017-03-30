@@ -32,8 +32,10 @@ class Settings: UITableViewController {
         //
         tableView.reloadData()
 
+        
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-    
     
     
     override func viewDidLoad() {
@@ -254,8 +256,18 @@ class Settings: UITableViewController {
                 
                 cell.accessoryType = .disclosureIndicator
                 
-                return cell
                 
+                
+                if UIScreen.main.nativeBounds.height < 1334 {
+                    backgroundImageView.frame = CGRect(x: 15, y: (cell.frame.size.height / 2) - (backgroundImageView.frame.size.height / 2), width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
+                }
+                
+                
+                
+                
+                return cell
+            
+            
             
             
             

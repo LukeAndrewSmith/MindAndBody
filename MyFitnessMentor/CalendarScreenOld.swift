@@ -10,21 +10,19 @@ import Foundation
 import UIKit
 
 
-class CalendarScreenOld: UITableViewController {
+class CalendarScreenDetail: UITableViewController {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    // CheckMark
-    @IBOutlet weak var checkMark: UIBarButtonItem!
-    
     // Table View
     
-    
+    let selectedDay = Int()
     
     // Arrays
     let daysArray =
     ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+    
     
     let routineArray =
     [
@@ -208,14 +206,6 @@ class CalendarScreenOld: UITableViewController {
     }
     
     
-    
-    
-    
-    @IBAction func checkMarkAction(_ sender: Any) {
-    
-        self.performSegue(withIdentifier: "unwindToHomeScreen", sender: self)
-        
-    }
     
     
     

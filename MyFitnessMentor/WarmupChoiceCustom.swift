@@ -1,5 +1,5 @@
 //
-//  YogaChoiceFinal.swift
+//  WarmupChoiceCustom.swift
 //  MyFitnessMentor
 //
 //  Created by Luke Smith on 29.03.17.
@@ -9,313 +9,295 @@
 import Foundation
 import UIKit
 
-class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
-   
-    
-    // Is Enabled
-    var beginButtonEnabled = 0
-    
+class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     //
-    // Yoga Poses
+    // Warmup Type
     //
-    let posesDictionary =
-        [
-            // Standing
-            0: "upwardsSalute",
-            1: "mountain",
-            2: "tree",
-            3: "extendedHandToe",
-            4: "eagle",
-            5: "chair",
-            6: "lordOfDance",
-            7: "warrior1",
-            8: "warrior2",
-            9: "warrior3",
-            10: "halfMoon",
-            11: "extendedTriangle",
-            12: "extendedSideAngleY",
-            13: "revolvedSideAngle",
-            14: "revolvedTriangle",
-            15: "halfForwardBend",
-            16: "forwardBend",
-            17: "wideLeggedForwardBend",
-            18: "intenseSide",
-            19: "gate",
-            20: "highLunge",
-            21: "lungeY",
-            22: "deepSquat",
-            // Hand/Elbows and Feet/Knees
-            23: "dolphin",
-            24: "downwardDog",
-            25: "halfDownwardDog",
-            26: "plank",
-            27: "dolphinPlank",
-            28: "fourLimbedStaff",
-            29: "sidePlank",
-            30: "cat",
-            31: "cow",
-            32: "kowtow",
-            33: "catBalance",
-            34: "dynamicTiger",
-            35: "halfMonkey",
-            36: "childPose",            //
-            37: "wildThing",
-            38: "upwardBow",
-            39: "bridge",
-            40: "upwardPlank",
-            41: "extendedPuppy",
-            42: "upwardDog",
-            43: "kneelingBridge",
-            // Seated
-            44: "crossLeg",
-            45: "lotus",
-            46: "fireLog",
-            47: "boat",
-            48: "cowFace",
-            49: "hero",
-            50: "heron",
-            51: "butterfly",            //
-            52: "staffPose",
-            53: "archer",
-            54: "forwardBend",
-            55: "vForwardBend",
-            56: "halfVForwardPose",
-            57: "halfVSideBend",
-            58: "marichi1",
-            59: "marichi3",
-            60: "bharadvajaTwist",
-            61: "halfLordFish",
-            62: "frontSplit",
-            63: "sideSplit",
-            // Lying
-            64: "corpse",
-            65: "lyingMountain",
-            66: "fish",
-            67: "lyingButterfly",
-            68: "legRaiseToe",
-            69: "threadTheNeedle",
-            70: "shoulderStand",
-            71: "plow",
-            72: "frog",
-            73: "cobra",
-            74: "sphinx",
-            75: "pigeon",
-            76: "spineRolling",
-            // Hand Stands
-            77: "handstand",
-            78: "headstand",
-            79: "flatHandHandstand",
-            80: "forearmStand"
-            
-    ]
+    
+    // Selected Warmup Type
+    //
+    var warmupType = Int()
     
     
     
+    // Arrays -------------------------------------------------------------------------------------------------------------------------------------------------------
     
     
     
-    
+    // Changeable Arrays to be used
+    //
     
     // Picker View Array
-    let pickerViewArray =
-        [
-            "5 min",
-            "10 min",
-            "15 min",
-            "30 min",
-            "60 min",
-            "yogaMeditation"
-            
-    ]
+    var pickerViewArray = [String]()
     
-    // Practice Section Title
-    let practiceSectionTitles =
-    [
-        // 5 min
-        ["relaxing", "calming", "uplifting"],
-        // 10 min
-        ["relaxing", "calming", "uplifting"],
-        // 15 min
-        ["relaxing", "uplifting"],
-        // 30 min
-        ["relaxing", "calming", "uplifting"],
-        // 60 min
-        ["relaxing", "calming", "uplifting"],
-        // Meditation
-        ["yogaMeditation"]
+    // TableView Section Array
+    var tableViewSectionArray = [String]()
     
-    ]
+    // Presets
+    var presetsArrays = [[[Int]]]()
+    
+    // Custom Presets
+    // Empty Array
+    var emptyArray = [[Int]]()
     
     
-    // Preset Arrays
-    let practiceTitlesArray =
-    [
-        // 5 min
+    // Screen Arrays
+    // Sets Array
+    var setsArrayF = [[Int]]()
+    
+    // Reps Array
+    var repsArrayF = [[String]]()
+    
+    // Demonstration Array
+    var demonstrationArrayF = [[UIImage]]()
+    
+    // Target Area Array
+    var targetAreaArrayF = [[UIImage]]()
+    
+    // Explanation Array
+    var explanationArrayF = [[String]]()
+    
+    
+    
+    
+    // Static Arrays
+    // Initial Custom Preset Texts
+    var presetTexts = ["", "", ""]
+    
+    //
+    // Warmup Arrays -------------------------------------------------------------------------------------------------------------------------------------------------------
+    //
+    
+    
+    var warmupPresetsCustom =
         [
-            // Relaxing
-            ["lit", "lit", "44"],
-            // Calming
-            ["lit", "lit", "44"],
-            // Uplifting
-            ["lit", "lit", "44"],
-        ],
-        // 10 min
-        [
-            // Relaxing
-            ["lit", "lit", "44"],
-            // Calming
-            ["lit", "lit", "44"],
-            // Uplifting
-            ["lit", "lit", "44"]
-        ],
-        // 15 min
-        [
-            // Relaxing
-            ["noice", "vnoice"],
-            // Uplifting
-            ["noice", "vnoice"],
-        ],
-        // 30 min
-        [
-            // Relaxing
-            ["qjf", "adjfa"],
-            // Calming
-            ["qjf", "adjfa"],
-            // Uplifting
-            ["qjf", "adjfa"],
-        ],
-        // 60 min
-        [
-            // Relaxing
-            ["www", "Wkj", "35", "gsdfg"],
-            // Calming
-            ["www", "Wkj", "35", "gsdfg"],
-            // Uplifting
-            ["www", "Wkj", "35", "gsdfg"]
-        ],
-        // Yoga Meditation
-        [
-            // Yoga Meditation
-            ["lettingGo", "breathing"]
+            [], [], []
         ]
+  
+    
+    // Warmup Movements Array
+    var warmupMovementsArray =
+        [
+            // Cardio
+            ["5minCardioL",
+             "5minCardioI"],
+            // Joint Rotations
+            ["wrist",
+             "elbow",
+             "shoulder",
+             "neckR",
+             "waist",
+             "hip",
+             "knees",
+             "ankles"],
+            // Foam/Ball Roll
+            ["backf",
+             "thoracicSpine",
+             "lat",
+             "pecDelt",
+             "rearDelt",
+             "quadf",
+             "adductorf",
+             "hamstringf",
+             "glutef",
+             "calvef"],
+            // Lower Back
+            ["sideLegDrop",
+             "sideLegKick",
+             "scorpionKick",
+             "sideBend",
+             "catCow"],
+            // Shoulder
+            ["wallSlides",
+             "superManShoulder",
+             "scapula",
+             "shoulderRotation"],
+            // Band/Bar/Machine Assisted
+            ["facePull",
+             "externalRotation",
+             "internalRotation",
+             "shoulderDislocation",
+             "rearDeltFly",
+             "latPullover"],
+            // General Mobility
+            ["rollBack",
+             "hipCircles",
+             "mountainClimber",
+             "groinStretch",
+             "gluteBridge",
+             "threadTheNeedle",
+             "butterflyPose",
+             "cossakSquat",
+             "hipHinges",
+             "sideLegSwings",
+             "frontLegSwings"],
+            // Dynamic Warmup Drills
+            ["jumpSquat",
+             "lunge",
+             "gluteKicks",
+             "aSkips",
+             "bSkips",
+             "grapeVines",
+             "lateralBound",
+             "straightLegBound",
+             "sprints"],
+            // Accessory
+            ["latStretch",
+             "calveStretch",
+             "pushUp",
+             "pullUp"]
     ]
     
+    // Demonstration Array
+    var demonstrationArrayFull = [[UIImage]]()
     
-    // Practice Content Array
-    let practiceArray =
-    [
-        // 5 min
+    // Target Area Array
+    var targetAreaArrayFull =
         [
-            // Relaxing
-            [
-                [1,2,3,4,5,6,7,8],
-                [2,5,7,55,7,33,2],
-                [3,4,4]
-            ],
-            // Calming
-            [
-                [1,2,3,4,5,6,7,8],
-                [2,5,7,55,7,33,2],
-                [3,4,4]
-            ],
-            // Uplifting
-            [
-                [1,2,3,4,5,6,7,8],
-                [2,5,7,55,7,33,2],
-                [3,4,4]
-            ]
-        ],
-        // 10 min
-        [
-            // Relaxing
-            [
-                [1,2],
-                [5,3]
-            ],
-            // Calming
-            [
-                [1,2],
-                [5,3]
-            ],
-            // Uplifting
-            [
-                [1,2],
-                [5,3]
-            ]
-        ],
-        // 15 min
-        [
-            // Relaxing
-            [
-                [33,72],
-                [34,24]
-            ],
-            // Uplifting
-            [
-                [33,72],
-                [34,24]
-            ]
-        ],
-        // 30 min
-        [
-            // Relaxing
-            [
-                [3,4],
-                [33,78]
-            ],
-            // Calming
-            [
-                [3,4],
-                [33,78]
-            ],
-            // Uplifting
-            [
-                [3,4],
-                [33,78]
-            ],
-        ],
-        // 60 min
-        [
-            // Relaxing
-            [
-                [33,33,33],
-                [9,8,7,6],
-                [8,0,9],
-                [67,6,7]
-            ],
-            // Calming
-            [
-                [33,33,33],
-                [9,8,7,6],
-                [8,0,9],
-                [67,6,7]
-            ],
-            // Uplifting
-            [
-                [33,33,33],
-                [9,8,7,6],
-                [8,0,9],
-                [67,6,7]
-            ]
-        ],
-        // Meditation
-        [
-            [33,33,33],
-            [66,66,66]
-        
-        ]
+            // Mandatory
+            [#imageLiteral(resourceName: "Heart"),
+             #imageLiteral(resourceName: "Heart")],
+            // Joint Rotations
+            [#imageLiteral(resourceName: "Wrist Joint"),
+             #imageLiteral(resourceName: "Elbow Joint"),
+             #imageLiteral(resourceName: "Shoulder Joint"),
+             #imageLiteral(resourceName: "Neck Joint"),
+             #imageLiteral(resourceName: "Waist Joint"),
+             #imageLiteral(resourceName: "Hip Joint"),
+             #imageLiteral(resourceName: "Knee Joint"),
+             #imageLiteral(resourceName: "Ankle Joint")],
+            // Foam/Ball Roll
+            [#imageLiteral(resourceName: "Thoracic"),
+             #imageLiteral(resourceName: "Thoracic"),
+             #imageLiteral(resourceName: "Lat and Delt"),
+             #imageLiteral(resourceName: "Pec and Front Delt"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Quad"),
+             #imageLiteral(resourceName: "Adductor"),
+             #imageLiteral(resourceName: "Hamstring"),
+             #imageLiteral(resourceName: "Glute"),
+             #imageLiteral(resourceName: "Calf")],
+            // Lower Back
+            [#imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Spine")],
+            // Shoulder
+            [#imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Back and Shoulder"),
+             #imageLiteral(resourceName: "Serratus"),
+             #imageLiteral(resourceName: "Shoulder")],
+            // Band/Bar/Machine Assisted
+            [#imageLiteral(resourceName: "Upper Back and Shoulder"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Rear Delt"),
+             #imageLiteral(resourceName: "Back")],
+            // General Mobility
+            [#imageLiteral(resourceName: "Hamstring and Lower Back"),
+             #imageLiteral(resourceName: "Hip Area"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Adductor"),
+             #imageLiteral(resourceName: "Hamstring and Lower Back"),
+             #imageLiteral(resourceName: "Piriformis"),
+             #imageLiteral(resourceName: "Adductor"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Hamstring and Glute"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch")],
+            // Dynamic Warm Up Drills
+            [#imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat")],
+            // Accessory
+            [#imageLiteral(resourceName: "Lat"),
+             #imageLiteral(resourceName: "Calf"),
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Back and Bicep")]
     ]
     
-    
-    // Selected Array
-    var selectedArray = [Int]()
-    
-    // Selected Title
-    var selectedTitle = Int()
-    
-
+    // Explanation Array
+    var explanationArrayFull =
+        [
+            // Mandatory
+            ["5minCardioLE",
+             "5minCardioIE"],
+            // Joint Rotations
+            ["wristE",
+             "elbowE",
+             "shoulderE",
+             "neckE",
+             "waistE",
+             "hipE",
+             "kneesE",
+             "anklesE"],
+            // Foam/Ball Roll
+            ["backfE",
+             "thoracicSpineE",
+             "latE",
+             "pecDeltE",
+             "rearDeltE",
+             "quadfE",
+             "adductorfE",
+             "hamstringfE",
+             "glutefE",
+             "calvefE"],
+            // Back
+            ["sideLegDropE",
+             "sideLegKickE",
+             "scorpionKickE",
+             "sideBendE",
+             "catCowE"],
+            // Shoulder
+            ["wallSlidesE",
+             "superManShoulderE",
+             "scapulaE",
+             "shoulderRotationE"],
+            // Band/Bar/Machine Assisted
+            ["facePullE",
+             "externalRotationE",
+             "internalRotationE",
+             "shoulderDislocationE",
+             "rearDeltFlyE",
+             "latPulloverE"],
+            // General Mobility
+            ["rollBackE",
+             "hipCirclesE",
+             "mountainClimberE",
+             "groinStretchE",
+             "gluteBridgeE",
+             "threadTheNeedleE",
+             "butterflyPoseE",
+             "cossakSquatE",
+             "hipHingesE",
+             "sideLegSwingsE",
+             "frontLegSwingsE"],
+            // Dynamic Warm Up Drills
+            ["jumpSquatE",
+             "lungeE",
+             "gluteKicksE",
+             "aSkipsE",
+             "bSkipsE",
+             "grapeVinesE",
+             "lateralBoundE",
+             "straightLegBoundE",
+             "sprintsE"],
+            // Accessory
+            ["latStretchE",
+             "calveStretchE",
+             "pushUpE",
+             "pullUpE"]
+    ]
     
     
     
@@ -351,6 +333,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
     
+    
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
@@ -360,6 +343,16 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     let colour6 = UserDefaults.standard.color(forKey: "colour6")!
     let colour7 = UserDefaults.standard.color(forKey: "colour7")!
     let colour8 = UserDefaults.standard.color(forKey: "colour8")!
+    
+    
+    // Add Preset
+    @IBOutlet weak var addPreset: UIButton!
+    @IBOutlet weak var removePreset: UIButton!
+    
+    
+    let emptyString = ""
+    
+    
     
     
     
@@ -389,17 +382,6 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     
-    // Is Begin Button Enabled
-    func beginEnabled() {
-        
-        if beginButtonEnabled == 0 {
-            beginButton.isEnabled = false
-        } else {
-            beginButton.isEnabled = true
-        }
-    }
-    
-    
     
     
     
@@ -409,26 +391,28 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
+        
         // Walkthrough
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough2y") == false {
+        // Walkthrough
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough2") == false {
             let delayInSeconds = 0.5
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 self.walkthroughMindBody()
             }
-            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2y")
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2")
         }
         
         
         
         // Colour
-        self.view.backgroundColor = colour1
+        self.view.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         questionMark.tintColor = colour1
         
         
         
         // Navigation Bar Title
-       navigationBar.title = (NSLocalizedString("practices", comment: ""))
+        navigationBar.title = NSLocalizedString("custom", comment: "")
         
         
         
@@ -436,6 +420,34 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Picker View Test
         pickerView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
+        
+        
+        
+        
+        
+        
+        
+        // Plus Button Colour
+        let origImage1 = UIImage(named: "Plus")
+        let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        addPreset.setImage(tintedImage1, for: .normal)
+        
+        //Image Tint
+        //addPreset.tintColor = colour2
+        addPreset.tintColor = colour3
+        
+        
+        
+        // Minus Button Colour
+        let origImage2 = UIImage(named: "Minus")
+        let tintedImage2 = origImage2?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        removePreset.setImage(tintedImage2, for: .normal)
+        
+        //Image Tint
+        //removePreset.tintColor = colour2
+        removePreset.tintColor = colour3
         
         
         
@@ -542,14 +554,186 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             
         tableView.backgroundView = tableViewBackground
         
-        
-        
-        
+        // TableView Footer
+        let footerView = UIView(frame: .zero)
+        footerView.backgroundColor = .clear
+        tableView.tableFooterView = footerView
             
+        
+        
+        
+        
+        
+        
+        
+        //
+        // Preset Warmups
+        //
+        let defaults = UserDefaults.standard
+        
+        // Custom
+        defaults.register(defaults: ["warmupPresetsCustom" : warmupPresetsCustom])
+        defaults.register(defaults: ["warmupPresetTextsCustom" : presetTexts])
+        defaults.register(defaults: ["warmupPresetNumberCustom" : 0])
+        
+        
+        defaults.synchronize()
+        
+        
+        
+        //
+        beginButtonEnabled()
+        
+    }
+    
+    
+    // Button Enabled
+    func beginButtonEnabled() {
         // Begin Button
-        beginEnabled()
+        let defaults = UserDefaults.standard
+        var warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [Array<Array<Int>>]
+        
+        if warmupPreset[pickerView.selectedRow(inComponent: 0)].count == 0 {
+            beginButton.isEnabled = false
+        } else {
+            beginButton.isEnabled = true
+        }
+        
+        
+    }
     
     
+    
+    
+    
+    
+    
+    
+    // Set Personalized Preset
+    //
+    @IBAction func addPreset(_ sender: Any) {
+        
+        let defaults = UserDefaults.standard
+        let number = defaults.integer(forKey: "warmupPresetNumberCustom")
+        var warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "warmupPresetTextsCustom") as! [String]
+        
+        
+        // Set Preset
+        if number < 3 {
+            
+            
+            
+            // Alert and Functions
+            //
+            let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
+            //
+            let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+            alert.view.tintColor = colour7
+            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+            
+            //2. Add the text field. You can configure it however you need.
+            alert.addTextField { (textField) in
+                textField.text = " "
+                textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
+            }
+            
+            // 3. Get the value from the text field, and perform actions when OK clicked.
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                let textField = alert?.textFields![0]
+                
+                
+                
+                
+                // Update Preset Text Arrays
+                presetTextArray[number] = (textField?.text)!
+                defaults.set(presetTextArray, forKey: "warmupPresetTextsCustom")
+                defaults.synchronize()
+                
+                
+                
+                // Increase Preset Counter
+                //
+                let newNumber = number + 1
+                
+                defaults.set(newNumber, forKey: "warmupPresetNumberCustom")
+                defaults.synchronize()
+                
+                
+                
+                // Flash Screen
+                self.flashScreen()
+                self.pickerView.reloadAllComponents()
+                self.tableView.reloadData()
+                
+            }))
+            
+            // 4. Present the alert.
+            self.present(alert, animated: true, completion: nil)
+            
+            
+            
+            
+            
+            
+        } else {
+            
+        }
+    }
+    
+    
+    
+    
+    // Remove Personalized Preset
+    @IBAction func removePreset(_ sender: Any) {
+        
+        let defaults = UserDefaults.standard
+        let number = defaults.integer(forKey: "warmupPresetNumberCustom")
+        var warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [Array<Array<Int>>]
+        var presetTextArray = defaults.object(forKey: "warmupPresetTextsCustom") as! [String]
+        
+        
+        let selectedRow = pickerView.selectedRow(inComponent: 0)
+        let index = (selectedRow) - (pickerViewArray.count + 1)
+        
+        
+        if index > -1 {
+            
+            warmupPreset.remove(at: index)
+            warmupPreset.append(emptyArray)
+            
+            defaults.set(warmupPreset, forKey: "warmupPresetsCustom")
+            
+            
+            presetTextArray.remove(at: index)
+            presetTextArray.append(emptyString)
+            
+            defaults.set(presetTextArray, forKey: "warmupPresetTextsCustom")
+            
+            
+            if number > 0 {
+                let newNumber = number - 1
+                defaults.set(newNumber, forKey: "warmupPresetNumberCustom")
+            } else {
+                
+            }
+            
+            
+            
+            
+            defaults.synchronize()
+            
+            
+            
+            
+            // Flash Screen
+            self.flashScreen()
+            self.pickerView.reloadAllComponents()
+            self.tableView.reloadData()
+            
+        } else {
+            
+        }
     }
     
     
@@ -569,19 +753,50 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
-        return pickerViewArray.count
+        return 3
         
     }
     
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
-        let rowLabel = UILabel()
-        let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
-        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
-        rowLabel.attributedText = myTitle
-        rowLabel.textAlignment = .center
-        return rowLabel
+        switch row {
+        case 0:
+            let rowLabel = UILabel()
+            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+            let titleData = titleDataArray[0]
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+            
+            
+            
+        case 1:
+            let rowLabel = UILabel()
+            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+            let titleData = titleDataArray[1]
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+            
+            
+            
+        case 2:
+            let rowLabel = UILabel()
+            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+            let titleData = titleDataArray[2]
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+            
+            
+        default: return UIView()
+        }
+        
+        return UIView()
         
     }
     
@@ -591,11 +806,39 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedTitle = row
         
+        let defaults = UserDefaults.standard
         
-        flashScreen()
-        tableView.reloadData()
+        switch row {
+        //
+        case 0:
+            let fullArray = defaults.object(forKey: "warmupPresetsCustom") as! [Array<Array<Int>>]
+            let array = fullArray[0]
+            
+            
+            self.tableView.reloadData()
+            flashScreen()
+        //
+        case 1:
+            let fullArray = defaults.object(forKey: "warmupPresetsCustom") as! [Array<Array<Int>>]
+            let array = fullArray[1]
+            
+            
+            self.tableView.reloadData()
+            flashScreen()
+        //
+        case 2:
+            let fullArray = defaults.object(forKey: "warmupPresetsCustom") as! [Array<Array<Int>>]
+            let array = fullArray[2]
+            
+            
+            self.tableView.reloadData()
+            flashScreen()
+        //
+        default:
+            break
+            
+        }
     }
     
     
@@ -610,33 +853,16 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Table View
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return practiceSectionTitles[selectedTitle].count
+        return 1
     }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString(practiceSectionTitles[selectedTitle][section], comment: "")
-    }
-    
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
-        
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
-        header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        header.contentView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-        //colour7
-        header.contentView.tintColor = colour1
-        //
-        
-    }
-    
-    
     
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return practiceTitlesArray[selectedTitle].count
+        let defaults = UserDefaults.standard
+        return 0
+//        let fullArray = defaults.object(forKey: "warmupPresetsCustom") as! [Array<Array<Int>>]
+//        return fullArray[pickerView.selectedRow(inComponent: 0)].count
     }
     
     
@@ -645,7 +871,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         
-        cell.textLabel?.text = NSLocalizedString(practiceTitlesArray[selectedTitle][indexPath.section][indexPath.row], comment: "")
+        cell.textLabel?.text = NSLocalizedString(warmupMovementsArray[pickerView.selectedRow(inComponent: 0)][indexPath.row], comment: "")
         
         
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
@@ -655,6 +881,21 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         cell.textLabel?.textColor = .black
         cell.tintColor = .black
         //
+        
+        
+        
+        // Cell Image
+        cell.imageView?.image = #imageLiteral(resourceName: "Test")
+        cell.imageView?.isUserInteractionEnabled = true
+        
+        // Image Tap
+        let imageTap = UITapGestureRecognizer()
+        imageTap.numberOfTapsRequired = 1
+        imageTap.addTarget(self, action: #selector(handleTap))
+        cell.imageView?.addGestureRecognizer(imageTap)
+        
+        
+        
         
         return cell
         
@@ -666,7 +907,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 47
+        return 72
         
     }
     
@@ -674,34 +915,11 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell = tableView.cellForRow(at: indexPath)
-        
-        
-        for visibleCell in tableView.visibleCells where visibleCell != cell {
-            visibleCell.layer.borderColor = UIColor.clear.cgColor
-            visibleCell.layer.borderWidth = 0
-            visibleCell.accessoryType = .none
-        }
-        
-        cell?.layer.borderColor = colour7.cgColor
-        cell?.layer.borderWidth = 2
-        cell?.accessoryType = .checkmark
         tableView.deselectRow(at: indexPath, animated: true)
         
-        
-        // Enable Begin Button
-        beginButtonEnabled = 1
-        beginEnabled()
-        
-        
-        
-        // Selected Array
-        //
-        let i1 = pickerView.selectedRow(inComponent: 0)
-        let i2 = indexPath.section
-        let i3 = indexPath.row
-        
-        selectedArray = practiceArray[i1][i2][i3] as! [Int]
+        beginButtonEnabled()
     }
+    
     
     
     
@@ -877,11 +1095,11 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
             
-            performSegue(withIdentifier: "yogaSessionSegue1", sender: nil)
+            performSegue(withIdentifier: "warmupSessionSegue1", sender: nil)
             
         } else {
             
-            performSegue(withIdentifier: "yogaSessionSegue2", sender: nil)
+            performSegue(withIdentifier: "warmupSessionSegue2", sender: nil)
         }
         
         
@@ -897,8 +1115,8 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     
-    // Pass Array to next ViewController
-    //
+//    // Pass Array to next ViewController
+//    //
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if (segue.identifier == "warmupSessionSegue1") {
 //            
@@ -939,12 +1157,12 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
 //            if pickerIndex < pickerViewArray.count - 1 {
 //                destinationVC.warmupTitle = pickerViewArray[pickerIndex]
 //            } else if pickerIndex > pickerViewArray.count - 1 {
-//                let pickerArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
+//                let pickerArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
 //                destinationVC.warmupTitle = pickerArray[pickerIndex - pickerViewArray.count]
 //            }
 //        }
 //    }
-    
+//    
     
     
     
@@ -1133,7 +1351,6 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
             //
-            
             label.text = NSLocalizedString("choiceScreen24", comment: "")
             walkthroughView.addSubview(label)
             

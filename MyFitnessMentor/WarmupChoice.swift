@@ -412,16 +412,17 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     // Remove Back Bar Text
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "warmupSegue") {
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        navigationItem.backBarButtonItem = backItem
-        
         
         let destinationVC = segue.destination as! WarmupChoiceFinal
         
         destinationVC.warmupType = warmupType
         
         }
+        
+        
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
     }
     
     

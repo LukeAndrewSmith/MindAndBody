@@ -26,58 +26,27 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
     
     // Initialize Arrays
     //
-    // Selected Array
-    var warmupMovementsSelectedArray: [[Int]] = [[]]
-    
     // Movement Array
-    var warmupMovementsArray: [[String]] = [[]]
     var warmupArray: [String] = []
     
     // Sets Array
-    var setsArrayF: [[Int]] = [[]]
     var setsArray: [Int] = []
     
     // Reps Array
-    var repsArrayF: [[String]] = [[]]
     var repsArray: [String] = []
     
     // Demonstration Array
-    var demonstrationArrayF: [[UIImage]] = [[]]
     var demonstrationArray: [UIImage] = []
     
     // Target Area Array
-    var targetAreaArrayF: [[UIImage]] = [[]]
     var targetAreaArray: [UIImage] = []
     
     // Explanation Array
-    var explanationArrayF: [[String]] = [[]]
     var explanationArray: [String] = []
     
     
     
     
-    
-    
-    // Populate Arrays
-    func populateArrays() {
-        //
-        warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        //
-        setsArray = zip(setsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        //
-        repsArray = zip(repsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        //
-        demonstrationArray = zip(demonstrationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        //
-        targetAreaArray = zip(targetAreaArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        //
-        explanationArray = zip(explanationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-    }
     
     
     
@@ -179,15 +148,6 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
     
     
     
-    
-    
-    // Constraints
-    @IBOutlet weak var setTop: NSLayoutConstraint!
-    @IBOutlet weak var setBottom: NSLayoutConstraint!
-    @IBOutlet weak var imageBottom: NSLayoutConstraint!
-    @IBOutlet weak var explanationBottom: NSLayoutConstraint!
-    
-    
     // Colours
     let colour1 = UserDefaults.standard.color(forKey: "colour1")!
     let colour2 = UserDefaults.standard.color(forKey: "colour2")!
@@ -243,14 +203,7 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         }
         
         
-        
-        
-        
-        
-        // Create Arrays
-        //
-        populateArrays()
-        
+    
         
         // Background Gradient
         //

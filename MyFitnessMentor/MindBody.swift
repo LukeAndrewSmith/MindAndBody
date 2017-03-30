@@ -386,7 +386,7 @@ class MindBody: UIViewController {
         blur6.effect = blurE6
         let vibrancyE6 = UIVibrancyEffect(blurEffect: blurE6)
         blur6.effect = vibrancyE6
-        blur6.frame = body.bounds
+       
         blur6.center = body.center
         blur6.isUserInteractionEnabled = false
         blur6.layer.cornerRadius = body.frame.size.height / 2
@@ -400,7 +400,6 @@ class MindBody: UIViewController {
         blur7.effect = blurE7
         let vibrancyE7 = UIVibrancyEffect(blurEffect: blurE7)
         blur7.effect = vibrancyE7
-        blur7.frame = mind.bounds
         blur7.center = mind.center
         blur7.isUserInteractionEnabled = false
         blur7.layer.cornerRadius = mind.frame.size.height / 2
@@ -468,7 +467,11 @@ class MindBody: UIViewController {
             Meditation.layer.cornerRadius = (stackView3.frame.size.height - 20) / 4
             Meditation.layer.masksToBounds = true
             
-            
+            blur6.frame = body.bounds
+            blur6.center = body.center
+            blur7.frame = mind.bounds
+            blur7.center = mind.center
+
         }
     
     

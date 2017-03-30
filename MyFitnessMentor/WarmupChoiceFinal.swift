@@ -30,6 +30,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     // Movements Array
     var warmupMovementsArray = [[String]]()
+    var warmupArray: [String] = []
     
     // Selected Array
     var warmupSelectedArray = [[Int]]()
@@ -51,18 +52,23 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // Screen Arrays
     // Sets Array
     var setsArrayF = [[Int]]()
+    var setsArray: [Int] = []
     
     // Reps Array
     var repsArrayF = [[String]]()
+    var repsArray: [String] = []
     
     // Demonstration Array
     var demonstrationArrayF = [[UIImage]]()
+    var demonstrationArray: [UIImage] = []
     
     // Target Area Array
     var targetAreaArrayF = [[UIImage]]()
+    var targetAreaArray: [UIImage] = []
     
     // Explanation Array
     var explanationArrayF = [[String]]()
+    var explanationArray: [String] = []
     
     
     
@@ -405,15 +411,15 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             // General Mobility
             [#imageLiteral(resourceName: "Hamstring and Lower Back"),
              #imageLiteral(resourceName: "Hip Area"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+    #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
              #imageLiteral(resourceName: "Adductor"),
              #imageLiteral(resourceName: "Hamstring and Lower Back"),
              #imageLiteral(resourceName: "Piriformis"),
              #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+        #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
              #imageLiteral(resourceName: "Hamstring and Glute"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+        #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+        #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
              #imageLiteral(resourceName: "Squat"),
              #imageLiteral(resourceName: "Squat")],
             // Accessory
@@ -1669,8 +1675,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              "15-30s",
              "5-10 reps",
              "15-30s",
-             "15-30s",
-             "10-20 reps",
              "10-20 reps",
              "10-20 reps"],
             // Dynamic Warm Up Drills
@@ -1728,8 +1732,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              #imageLiteral(resourceName: "Adductor"),
              #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
              #imageLiteral(resourceName: "Hamstring and Glute"),
-             #imageLiteral(resourceName: "Hamstring and Glute"),
-             #imageLiteral(resourceName: "Quad"),
              #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
              #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch")],
             // Dynamic Warm Up Drills
@@ -2979,15 +2981,39 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             let destinationVC = destinationNC.viewControllers.first as! WarmupScreen
             
-            destinationVC.warmupMovementsArray = warmupMovementsArray
-            destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
+           
+
+            // Compress Arrays
+            
+            warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            
+            //
+            setsArray = zip(setsArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            
+            //
+            repsArray = zip(repsArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            
+            //
+            demonstrationArray = zip(demonstrationArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            
+            //
+            targetAreaArray = zip(targetAreaArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            
+            //
+            explanationArray = zip(explanationArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             
             
-            destinationVC.setsArrayF = setsArrayF
-            destinationVC.repsArrayF = repsArrayF
-            destinationVC.demonstrationArrayF = demonstrationArrayF
-            destinationVC.targetAreaArrayF = targetAreaArrayF
-            destinationVC.explanationArrayF = explanationArrayF
+            
+            
+            //
+            destinationVC.warmupArray = warmupArray
+            destinationVC.setsArray = setsArray
+            destinationVC.repsArray = repsArray
+            destinationVC.demonstrationArray = demonstrationArray
+            destinationVC.targetAreaArray = targetAreaArray
+            destinationVC.explanationArray = explanationArray
+            
+            
             
             
         } else if (segue.identifier == "warmupSessionSegue2") {
@@ -2997,15 +3023,39 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             let destinationVC = destinationNC.viewControllers.first as! WarmupScreenOverview
             
-            destinationVC.warmupMovementsArray = warmupMovementsArray
-            destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
+            // Compress Arrays
+            
+            warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            
+            //
+            setsArray = zip(setsArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            
+            //
+            repsArray = zip(repsArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            
+            //
+            demonstrationArray = zip(demonstrationArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            
+            //
+            targetAreaArray = zip(targetAreaArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            
+            //
+            explanationArray = zip(explanationArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             
             
-            destinationVC.setsArrayF = setsArrayF
-            destinationVC.repsArrayF = repsArrayF
-            destinationVC.demonstrationArrayF = demonstrationArrayF
-            destinationVC.targetAreaArrayF = targetAreaArrayF
-            destinationVC.explanationArrayF = explanationArrayF
+            
+            
+            //
+            destinationVC.warmupArray = warmupArray
+            destinationVC.setsArray = setsArray
+            destinationVC.repsArray = repsArray
+            destinationVC.demonstrationArray = demonstrationArray
+            destinationVC.targetAreaArray = targetAreaArray
+            destinationVC.explanationArray = explanationArray
+            
+            
+            
+            
             
             let pickerIndex = pickerView.selectedRow(inComponent: 0)
             if pickerIndex < pickerViewArray.count - 1 {
@@ -3205,8 +3255,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
             //
-            
-            label.text = NSLocalizedString("choiceScreen24", comment: "")
+             label.text = NSLocalizedString("choiceScreen24", comment: "")
             walkthroughView.addSubview(label)
             
             
@@ -3324,3 +3373,5 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
 }
+       
+    

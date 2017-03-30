@@ -16,8 +16,6 @@ class CalendarCell: UICollectionViewCell {
     
     @IBOutlet weak var dayLabel: UILabel!
     
-    @IBOutlet weak var activitiesScroll: UIScrollView!
-    
     @IBOutlet weak var activitiesLabel: UILabel!
     
     
@@ -166,15 +164,15 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         let height = width * ratio
         //
         if indexPath.item % 2 == 0 {
-            cell.cellBackgroundView.frame = CGRect(x: 25, y: ((cell.frame.size.height - height) / 3) * 2, width: width, height: height)
+            cell.cellBackgroundView.frame = CGRect(x: 25, y: 15, width: width, height: height)
             
         } else {
-            cell.cellBackgroundView.frame = CGRect(x: 15, y: ((cell.frame.size.height - height) / 3) * 2, width: width, height: height)
+            cell.cellBackgroundView.frame = CGRect(x: 15, y: 15, width: width, height: height)
         }
         //
         cell.cellBackgroundView.layer.cornerRadius = 5
         cell.cellBackgroundView.layer.masksToBounds = true
-        
+        cell.cellBackgroundView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
         
         // Day Title
@@ -193,22 +191,17 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
         
-        // Scroll View
-        //
-        cell.activitiesScroll.frame = CGRect(x: 0, y: 36.75, width: cell.cellBackgroundView.frame.size.width, height: cell.cellBackgroundView.frame.size.height - 36.75)
-        cell.activitiesScroll.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        cell.activitiesScroll.contentSize = CGSize(width: cell.activitiesScroll.frame.size.width, height: cell.activitiesScroll.frame.size.height)
-        
-        
-        
         // Activities Label
         //
-        cell.activitiesLabel.frame = CGRect(x: 10, y: 10, width: cell.activitiesScroll.frame.size.width - 20, height: cell.activitiesScroll.frame.size.height - 10)
+        cell.activitiesLabel.frame = CGRect(x: 10, y: 36.75, width: cell.cellBackgroundView.frame.size.width - 20, height: cell.cellBackgroundView.frame.size.height - 36.75)
+        cell.activitiesLabel.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        
+        //
         cell.activitiesLabel.numberOfLines = 0
         //
         cell.activitiesLabel.textColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
         cell.activitiesLabel.font = UIFont(name: "SFUIDisplay-thin", size: 19)
-        cell.activitiesLabel.text = "• Yoga\n• Meditation\n\n• Warmup\n• Workout\n• Stretching"
+        cell.activitiesLabel.text = "• Yoga\n• Meditation\n\n• Warmup\n• Workout\n• Stretching\n• Workout\n• Stretching"
         
         
        
@@ -228,11 +221,26 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
         // Segue to Detail
-        //performSegue(withIdentifier: "", sender: Any)
+        performSegue(withIdentifier: "calendarDetail", sender: (Any).self)
         
         
         // Deselect
         collectionView.deselectItem(at: indexPath, animated: false)
+    }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
+        let destinationVC = segue.destination as! CalendarScreenDetail
+        
+        destinationVC.selectedDay = selectedDay
+        
+        
+        
+        
+
     }
     
     
@@ -496,12 +504,10 @@ extension CalendarScreen : UICollectionViewDelegateFlowLayout {
         let ratio = screenHeight / screenWidth
         
         // Height
-        let height1 = width * ratio
-        
         let width2 = width - 40
         let height2 = width2 * ratio
         
-        let height = height1 - ((height1 - height2) / 2)
+        let height = height2 + 30
         
         return CGSize(width: width, height: height)
     }

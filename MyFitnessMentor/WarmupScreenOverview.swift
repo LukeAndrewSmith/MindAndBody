@@ -24,65 +24,26 @@ class WarmupScreenOverview: UITableViewController {
     
     // Initialize Arrays
     
-    // Selected Array
-    var warmupMovementsSelectedArray: [[Int]] = [[]]
-    
     // Movement Array
-    var warmupMovementsArray: [[String]] = [[]]
     var warmupArray: [String] = []
     
     // Sets Array
-    var setsArrayF: [[Int]] = [[]]
     var setsArray: [Int] = []
     
     // Sets Array
-    var repsArrayF: [[String]] = [[]]
     var repsArray: [String] = []
     
     // Demonstration Array
-    var demonstrationArrayF: [[UIImage]] = [[]]
     var demonstrationArray: [UIImage] = []
     
     // Target Area Array
-    var targetAreaArrayF: [[UIImage]] = [[]]
     var targetAreaArray: [UIImage] = []
     
     // Explanation Array
-    var explanationArrayF: [[String]] = [[]]
     var explanationArray: [String] = []
     
     
     
-    
-    
-    
-    // Populate Arrays
-    func populateArrays() {
-        
-        // Warmup Array
-        warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        // Sets Array
-        setsArray = zip(setsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        
-        // Reps Array
-        repsArray = zip(repsArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        
-        // Demonstration Array
-        demonstrationArray = zip(demonstrationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        
-        // Target Area Array
-        targetAreaArray = zip(targetAreaArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-        
-        
-        // Explanation Array
-        explanationArray = zip(explanationArrayF.flatMap{$0},warmupMovementsSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-
-    }
-
     
     
     //
@@ -191,16 +152,7 @@ class WarmupScreenOverview: UITableViewController {
         
         
         
-        
-        
-        
-        // Create Arrays
-        //
-        populateArrays()
-        
-        
-        
-        
+
         
         
         // Buttons

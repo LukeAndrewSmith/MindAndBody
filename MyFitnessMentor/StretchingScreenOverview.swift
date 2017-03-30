@@ -847,7 +847,7 @@ class StretchingScreenOverview: UITableViewController {
             destinationVC.stretchingArray = stretchingArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
-            
+            destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             

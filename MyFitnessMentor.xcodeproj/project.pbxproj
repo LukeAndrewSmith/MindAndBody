@@ -21,6 +21,7 @@
 		075732741E69957A003DA77E /* TrackingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075732731E69957A003DA77E /* TrackingScreen.swift */; };
 		075988651E76B06000E630E5 /* ClassicScreenFullDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075988641E76B06000E630E5 /* ClassicScreenFullDetail.swift */; };
 		075988671E797E1900E630E5 /* WarmupChoiceFinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075988661E797E1900E630E5 /* WarmupChoiceFinal.swift */; };
+		075A0DB81E8C55680008E014 /* WarmupChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075A0DB71E8C55680008E014 /* WarmupChoiceCustom.swift */; };
 		07653DA61E71D62000342C0B /* ClassicScreenFull2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07653DA51E71D62000342C0B /* ClassicScreenFull2.swift */; };
 		077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DA1DA535830026895B /* AppDelegate.swift */; };
 		077AC0DF1DA535840026895B /* MindBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DE1DA535840026895B /* MindBody.swift */; };
@@ -115,6 +116,7 @@
 		075732731E69957A003DA77E /* TrackingScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingScreen.swift; sourceTree = "<group>"; };
 		075988641E76B06000E630E5 /* ClassicScreenFullDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassicScreenFullDetail.swift; sourceTree = "<group>"; };
 		075988661E797E1900E630E5 /* WarmupChoiceFinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoiceFinal.swift; sourceTree = "<group>"; };
+		075A0DB71E8C55680008E014 /* WarmupChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoiceCustom.swift; sourceTree = "<group>"; };
 		07653DA51E71D62000342C0B /* ClassicScreenFull2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassicScreenFull2.swift; sourceTree = "<group>"; };
 		077AC0D71DA535830026895B /* MyFitnessMentor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFitnessMentor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		077AC0DA1DA535830026895B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			children = (
 				07F912071DC2D1240004C924 /* WarmupChoice.swift */,
 				075988661E797E1900E630E5 /* WarmupChoiceFinal.swift */,
+				075A0DB61E8C538B0008E014 /* Custom */,
 				079187261E7B4D9F00E7153A /* Detail */,
 				079187271E7B4DCD00E7153A /* Overview */,
 			);
@@ -274,6 +277,14 @@
 				075732711E6757B1003DA77E /* InformationScreenMusic.swift */,
 			);
 			name = Screen;
+			sourceTree = "<group>";
+		};
+		075A0DB61E8C538B0008E014 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				075A0DB71E8C55680008E014 /* WarmupChoiceCustom.swift */,
+			);
+			name = Custom;
 			sourceTree = "<group>";
 		};
 		076A9D0A1E23B1ED00DC8F42 /* Workout */ = {
@@ -729,6 +740,7 @@
 				07995A411E8A88150009C9B1 /* StretchingScreenOverview.swift in Sources */,
 				0719F2B21E50F89F00AC6729 /* MeditationTimer.swift in Sources */,
 				07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */,
+				075A0DB81E8C55680008E014 /* WarmupChoiceCustom.swift in Sources */,
 				0739AB0B1E12D2AE00A97711 /* TabBarController.swift in Sources */,
 				0728F3E51E1E9C0E00EA409B /* CalendarScreenOld.swift in Sources */,
 				07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */,
