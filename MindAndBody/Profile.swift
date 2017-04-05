@@ -15,13 +15,61 @@ import UIKit
 //
 
 // Title Cell
-class profileCell1: UITableViewCell {
-    
-    @IBOutlet weak var profileTitle: UILabel!
+class headerCell: UITableViewCell {
+    //
+    @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var settingButton: UIButton!
     
+    @IBOutlet weak var logoView: UIImageView!
+    
+    @IBOutlet weak var gradientView: UIView!
 }
+
+
+
+// Navigation Cell
+class profileNavigationCell: UITableViewCell {
+    
+    @IBOutlet weak var me: UIButton!
+    
+    @IBOutlet weak var goals: UIButton!
+    
+    @IBOutlet weak var body: UIButton!
+    
+    @IBOutlet weak var mind: UIButton!
+}
+
+//
+class profileMeCell: UITableViewCell {
+    
+    
+    @IBOutlet weak var titleLabel: UILabel!
+}
+
+//
+class profileGoalsCell: UITableViewCell {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
+}
+
+//
+class profileBodyCell: UITableViewCell {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
+}
+
+//
+class profileMindCell: UITableViewCell {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
+}
+
+
+
 
 
 
@@ -35,10 +83,22 @@ class Profile: UITableViewController{
     //Outlets
     @IBOutlet weak var MyPreferencesNavigationBar: UINavigationItem!
     
+    // Background Colour View
+    let backView = UIView()
+    
+    //
+    let scrollUpButton = UIButton()
+
+
     
     // Arrays
     let sectionArray: [String] =
         ["", "me", "goals", "workout", "cardio", "stretching", "yoga", "meditation"]
+    
+    
+    
+    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
     
 //    let rowArray =
@@ -82,22 +142,23 @@ class Profile: UITableViewController{
  
 
     override func viewWillAppear(_ animated: Bool) {
-        let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
-        backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        
-        self.tableView.backgroundView = backView
-        self.tableView.contentOffset.y = 0
-
-        
+        //
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        
+        //
+        tableView.contentOffset.y = 0
     }
     
     
     
     
-    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //
+        UIApplication.shared.statusBarStyle = .lightContent
+        //
+        scrollUpButton.removeFromSuperview()
+    }
+    
     
     
     
@@ -115,12 +176,13 @@ class Profile: UITableViewController{
         
 
         
+        //
         self.navigationController?.navigationBar.barTintColor = colour2
-        self.navigationController?.navigationBar.tintColor = .white
-        
+        //
         self.tabBarController?.tabBar.tintColor = colour1
         
         
+
         
         
         
@@ -134,6 +196,34 @@ class Profile: UITableViewController{
         //
         self.navigationController?.navigationBar.topItem?.title = (NSLocalizedString("profile", comment: ""))
         
+        
+        
+        
+        // Background Coolour
+        backView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        //
+        self.tableView.backgroundView = backView
+        self.tableView.contentOffset.y = 0
+        //
+        
+        
+        
+        
+        
+        // Scroll Up Button
+        scrollUpButton.frame = CGRect(x: view.frame.size.width - 59, y: view.frame.size.height - UIApplication.shared.statusBarFrame.height - 88.5, width: 44, height: 44)
+        //
+        scrollUpButton.layer.borderWidth = 2
+        scrollUpButton.layer.borderColor = colour2.cgColor
+        scrollUpButton.layer.cornerRadius = 22
+        //
+        scrollUpButton.backgroundColor = colour1
+        //
+        scrollUpButton.setImage(#imageLiteral(resourceName: "Up Arrow"), for: .normal)
+        scrollUpButton.tintColor = colour2
+        //
+        scrollUpButton.addTarget(self, action: #selector(scrollUpButtonAction(_:)), for: .touchUpInside)
+
         
         
         
@@ -178,6 +268,30 @@ class Profile: UITableViewController{
         ]
         
         
+    }
+    
+    
+    
+    //
+    //
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == tableView {
+            //
+            if tableView.contentOffset.y > 186 {
+                //
+                UIApplication.shared.keyWindow?.insertSubview(scrollUpButton, aboveSubview: self.tableView)
+                //
+                backView.backgroundColor = colour1
+                UIApplication.shared.statusBarStyle = .default
+                
+            } else {
+                //
+                self.scrollUpButton.removeFromSuperview()
+                //
+                backView.backgroundColor = colour2
+                UIApplication.shared.statusBarStyle = .lightContent
+            }
+        }
     }
     
     
@@ -240,7 +354,7 @@ class Profile: UITableViewController{
 
 //        switch section{
 //        case 0:
-            return 1
+            return 6
         //
 //        case 1:
 //            var count = meGroup.count
@@ -313,6 +427,16 @@ class Profile: UITableViewController{
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
      
         
+        switch indexPath.row {
+        case 0:
+            return 152
+        case 1:
+            return 44
+        case 2,3,4,5:
+            return 200
+        default: break
+        }
+        return 0
         
         // Calculate the real section index
 //        let cellIndex = getSubSectionIndex(section: indexPath.section, row: indexPath.row)
@@ -321,7 +445,7 @@ class Profile: UITableViewController{
         
 //        switch indexPath.section {
 //        case 0:
-            return 142 + UIApplication.shared.statusBarFrame.height
+        
         //
 //        case 1:
 //            if rowIndex == 0 {
@@ -385,6 +509,161 @@ class Profile: UITableViewController{
         
         
         
+        switch indexPath.row {
+        //
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! headerCell
+            
+            
+            //
+            cell.settingButton.addTarget(self, action: #selector(settingsButtonAction(_:)), for: .touchUpInside)
+            
+            cell.gradientView.frame = cell.bounds
+            
+            cell.titleLabel.text = NSLocalizedString("profile", comment: "")
+            cell.titleLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            
+            cell.gradientView.applyGradient(colours: [UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)])
+            
+            
+            
+            cell.logoView.tintColor = colour1
+            
+            
+            cell.selectionStyle = .none
+            
+            return cell
+          
+            
+        //
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "profileNavigationCell", for: indexPath) as! profileNavigationCell
+            
+            
+            //cell.profileTitle.text = NSLocalizedString("profile", comment: "")
+            
+            //cell.settingButton.tintColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            
+            
+            //cell.selectionStyle = .none
+            
+            
+            //
+            cell.me.titleLabel?.adjustsFontSizeToFitWidth = true
+            //
+            cell.me.tag = 1
+            cell.me.addTarget(self, action: #selector(navigationButtonAction(_:)), for: .touchUpInside)
+            
+            //
+            cell.goals.titleLabel?.adjustsFontSizeToFitWidth = true
+            //
+            cell.goals.tag = 2
+            cell.goals.addTarget(self, action: #selector(navigationButtonAction(_:)), for: .touchUpInside)
+            
+            //
+            cell.body.titleLabel?.adjustsFontSizeToFitWidth = true
+            //
+            cell.body.tag = 3
+            cell.body.addTarget(self, action: #selector(navigationButtonAction(_:)), for: .touchUpInside)
+            
+            //
+            cell.mind.titleLabel?.adjustsFontSizeToFitWidth = true
+            //
+            cell.mind.tag = 4
+            cell.mind.addTarget(self, action: #selector(navigationButtonAction(_:)), for: .touchUpInside)
+            
+            
+            return cell
+            
+        //
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "profileMeCell", for: indexPath) as! profileMeCell
+            
+            //
+            // Border
+            let border = CALayer()
+            border.backgroundColor = UIColor.black.cgColor
+            border.frame = CGRect(x: 15, y: cell.titleLabel.frame.maxY, width: cell.frame.size.width - 15, height: 1)
+            //
+            cell.layer.addSublayer(border)
+            cell.layer.masksToBounds = true
+            
+            
+            //
+            cell.backgroundColor = colour1
+            
+            return cell
+        
+        //
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "profileGoalsCell", for: indexPath) as! profileGoalsCell
+            
+            //
+            // Border
+            let border = CALayer()
+            border.backgroundColor = UIColor.black.cgColor
+            border.frame = CGRect(x: 15, y: cell.titleLabel.frame.maxY, width: cell.frame.size.width - 15, height: 1)
+            //
+            cell.layer.addSublayer(border)
+            cell.layer.masksToBounds = true
+            
+            
+            //
+            cell.backgroundColor = colour1
+            
+            return cell
+        
+        //
+        case 4:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "profileBodyCell", for: indexPath) as! profileBodyCell
+            
+            //
+            // Border
+            let border = CALayer()
+            border.backgroundColor = UIColor.black.cgColor
+            border.frame = CGRect(x: 15, y: cell.titleLabel.frame.maxY, width: cell.frame.size.width - 15, height: 1)
+            //
+            cell.layer.addSublayer(border)
+            cell.layer.masksToBounds = true
+            
+            
+            
+            
+            //
+            cell.backgroundColor = colour1
+            
+            return cell
+            
+            
+        //
+        case 5:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "profileMindCell", for: indexPath) as! profileMindCell
+            
+            //
+            // Border
+            let border = CALayer()
+            border.backgroundColor = UIColor.black.cgColor
+            border.frame = CGRect(x: 15, y: cell.titleLabel.frame.maxY, width: cell.frame.size.width - 15, height: 1)
+            //
+            cell.layer.addSublayer(border)
+            cell.layer.masksToBounds = true
+            
+            
+            
+            //
+            cell.backgroundColor = colour1
+            
+            return cell
+            
+            
+        //
+        default: break
+        }
+        
+        return UITableViewCell()
+        
+        
+        
         
         // Calculate the real sub-section index and row index
 //        let subSection = getSubSectionIndex(section: indexPath.section, row: indexPath.row)
@@ -395,20 +674,7 @@ class Profile: UITableViewController{
         
 //        switch indexPath.section{
 //        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell1", for: indexPath) as! profileCell1
-            
-            
-            cell.profileTitle.text = NSLocalizedString("profile", comment: "")
-            
-            cell.settingButton.tintColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        
-        
-            cell.selectionStyle = .none
-        
-        
-            return cell
-            
-        //
+                    //
 //        case 1:
 //            if row == 0 {
 //                cell.textLabel?.text = NSLocalizedString(meGroup[subSection].name, comment: "")
@@ -611,11 +877,101 @@ class Profile: UITableViewController{
     
     
     
+    
+    // Button Actions
+    func navigationButtonAction(_ sender: Any) {
+    //
+        //
+        let row0 = NSIndexPath(row: 2, section: 0)
+        let row0Height = (tableView.cellForRow(at: row0 as IndexPath)?.frame.size.height)!
+        //
+        let row1 = NSIndexPath(row: 3, section: 0)
+        let row1Height = (tableView.cellForRow(at: row1 as IndexPath)?.frame.size.height)!
+        //
+        let row2 = NSIndexPath(row: 4, section: 0)
+        let row2Height = (tableView.cellForRow(at: row2 as IndexPath)?.frame.size.height)!
+        
+        //
+        switch (sender as AnyObject).tag {
+        //
+        case 1:
+            UIView.animate(withDuration: 0.4, animations: {
+            self.tableView.contentOffset.y = 132
+            })
+        //
+        case 2:
+            let height = 186 + row0Height
+            //
+            if tableView.frame.maxY > height - tableView.frame.size.height {
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.tableView.contentOffset.y = 186 + row0Height
+                })
+            } else {
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.tableView.contentOffset.y = self.tableView.contentSize.height - self.tableView.frame.size.height
+                })
+            }
+        //
+        case 3:
+            let height = 186 + row0Height + row1Height
+            //
+            if tableView.frame.maxY > height - tableView.frame.size.height {
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.tableView.contentOffset.y = 186 + row0Height
+                })
+            } else {
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.tableView.contentOffset.y = self.tableView.contentSize.height - self.tableView.frame.size.height
+                })
+            }
+        //
+        case 4:
+            let height = row0Height + row1Height + row2Height
+            //
+            if tableView.frame.maxY > height - tableView.frame.size.height {
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.tableView.contentOffset.y = 186 + row0Height
+                })
+            } else {
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.tableView.contentOffset.y = self.tableView.contentSize.height - self.tableView.frame.size.height
+                })
+            }
+        //
+        default: break
+        }
+    }
+    
+    
+    
+    // Button Actions
+    func settingsButtonAction(_ sender: Any) {
+        //
+        performSegue(withIdentifier: "settingsSegue", sender: nil)
+    }
+    
+    
+    
+    // Scroll Up Button Action
+    func scrollUpButtonAction(_ sender: Any) {
+        //
+        UIView.animate(withDuration: 0.4, animations: {
+            self.tableView.contentOffset.y = 0
+        })
+    }
+    
+    
+    
+    
+    
+    
+    
     //
     // Event Handlers
     //
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    
         // Calculate the real sub-section index and row index
         let section = indexPath.section
         let subSection = getSubSectionIndex(section: indexPath.section, row: indexPath.row)
@@ -823,7 +1179,7 @@ class Profile: UITableViewController{
 //        }
         
         
-        
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
   

@@ -1,135 +1,134 @@
 //
-//  ClassicChoiceH.swift
+//  InformationScreenT.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 21.02.17.
+//  Created by Luke Smith on 01.03.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-
-
-class BodyweightChoice: UIViewController  {
+class InformationScreenMusic: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    // Outlets
+    
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    
-    // Buttons
-    @IBOutlet weak var fullBody: UIButton!
-   
-    @IBOutlet weak var upperBody: UIButton!
-    
-    @IBOutlet weak var lowerBody: UIButton!
+    // Question MArk
+    @IBOutlet weak var questionMark: UIBarButtonItem!
     
     
-    @IBOutlet weak var custom: UIButton!
-    
+    // Table View
+    @IBOutlet weak var tableView: UITableView!
     
     
     // Information View
     @IBOutlet weak var informationView: UIScrollView!
-    
     // Information Title
     @IBOutlet weak var informationTitle: UILabel!
     
     
-    // Stack View
-    @IBOutlet weak var stackView: UIStackView!
+    
+    // Genre Array
+    let genreArray: [String] =
+        [
+            "blues",
+            "rock",
+            "house",
+            "funk",
+            "meditative",
+            "jazz",
+            "classical"
+        ]
+    
+    // Music Array
+    
+    let musicArray : [[String]] =
+        [
+            //
+            [""],
+            
+            //
+            [""],
+            
+            //
+            ["",
+             ""],
+            
+            //
+            [""],
+            
+            //
+            ["",
+             "",
+             ""],
+            
+            //
+             ["jazz(piano)",
+             "jazz(guitar)",
+             "jazz(harp)",
+             "jazz(house)"],
+            
+            //
+            ["",
+             ""]
+        ]
     
     
-    // Question Mark
-    @IBOutlet weak var questionMark: UIBarButtonItem!
-    
-    
-    // Constraints
-    @IBOutlet weak var fullBodyTop: NSLayoutConstraint!
-    
-    @IBOutlet weak var fullBodyBottom: NSLayoutConstraint!
-    
-    @IBOutlet weak var stackBottom: NSLayoutConstraint!
-    
-    @IBOutlet weak var connectionWidth: NSLayoutConstraint!
-    
-    @IBOutlet weak var connectionTrailing: NSLayoutConstraint!
-    
-    
-    
-    
-    // Colours
+    // Retreive Colours
     let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        
+    
+    
+    
+    
+    
+    
+    
+    
+    //
+    // View Did Load
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         // Walkthrough
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughc") == false {
+        if UserDefaults.standard.bool(forKey: "informationWalkthroughm") == false {
             let delayInSeconds = 0.5
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 self.walkthroughMindBody()
             }
-            UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughc")
+            UserDefaults.standard.set(true, forKey: "informationWalkthroughm")
         }
         
         
-        // Colours
+        
+        // Colour
         self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
+
+        
+        // Background
+        let tableViewBackground = UIView()
+        
+        tableViewBackground.backgroundColor = colour2
+        tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
+        
+        tableView.backgroundView = tableViewBackground
         
         
         
-        // Titles
-        navigationBar.title = (NSLocalizedString("bodyweightWorkout", comment: ""))
-        
-        // Button Titles
-        fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
-        fullBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        fullBody.setTitleColor(colour2, for: .normal)
-        fullBody.layer.borderWidth = 8
-        fullBody.layer.borderColor = colour2.cgColor
-        
-        upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
-        upperBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        upperBody.setTitleColor(colour2, for: .normal)
-        upperBody.layer.borderWidth = 8
-        upperBody.layer.borderColor = colour2.cgColor
-        
-        lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
-        lowerBody.setTitleColor(colour2, for: .normal)
-        lowerBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        lowerBody.layer.borderWidth = 8
-        lowerBody.layer.borderColor = colour2.cgColor
-        
-        
-        
-        
-        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        custom.layer.borderWidth = 7
-        custom.layer.borderColor = colour2.cgColor
-        custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
-        custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(colour2, for: .normal)
-        custom.layer.cornerRadius = 49/2
-        custom.layer.masksToBounds = true
-        custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleLabel?.numberOfLines = 0
-        custom.titleLabel?.textAlignment = .center
-        //
+        // Navigation Title
+        navigationBar.title = NSLocalizedString("Music", comment: "")
         
         
         
         
         
-        
-        
-        
+        // Information
         // Information
         // Scroll View Frame
         self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
@@ -170,16 +169,18 @@ class BodyweightChoice: UIViewController  {
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("bodyweightWorkouts", comment: ""))+"\n"+(NSLocalizedString("bodyweightWorkoutChoice", comment: "")))
+        let informationLabelString = ((NSLocalizedString("role", comment: ""))+"\n"+(NSLocalizedString("musicText1", comment: ""))+"\n"+(NSLocalizedString("suggestions", comment: ""))+"\n"+(NSLocalizedString("musicText2", comment: "")))
         
         // Range of String
-        let textRangeString = ((NSLocalizedString("bodyweightWorkouts", comment: ""))+"\n"+(NSLocalizedString("bodyweightWorkoutChoice", comment: "")))
+        let textRangeString = (NSLocalizedString("role", comment: ""))+"\n"+(NSLocalizedString("musicText1", comment: ""))+"\n"+(NSLocalizedString("suggestions", comment: ""))+"\n"+(NSLocalizedString("musicText2", comment: ""))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         
         
         // Range of Titles
-        let titleRangeString = (NSLocalizedString("bodyweightWorkouts", comment: ""))
-        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
+        let titleRangeString1 = (NSLocalizedString("role", comment: ""))
+        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString1)
+        let titleRangeString2 = (NSLocalizedString("suggestions", comment: ""))
+        let titleRange2 = (informationLabelString as NSString).range(of: titleRangeString2)
         
         
         // Line Spacing
@@ -192,6 +193,7 @@ class BodyweightChoice: UIViewController  {
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange1)
+        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange2)
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         
         
@@ -208,59 +210,9 @@ class BodyweightChoice: UIViewController  {
         self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        // Iphone 5/SE
-        
-        if UIScreen.main.nativeBounds.height < 1334 {
-            
-            fullBodyTop.constant = 52
-            fullBodyBottom.constant = 52
-            stackBottom.constant = 52
-            
-            
-            stackView.spacing = 15
-            connectionWidth.constant = 15
-            connectionTrailing.constant = 15
-            
-            
-        }
-    }
+        view.bringSubview(toFront: informationView)
+        view.bringSubview(toFront: informationTitle)
     
-    // Layout Subviews
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        fullBody.layer.cornerRadius = ((self.stackView.frame.size.height) * 3/2) / 2
-        fullBody.layer.masksToBounds = true
-        fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        fullBody.titleLabel?.numberOfLines = 0
-        fullBody.titleLabel?.textAlignment = .center
-        
-        upperBody.layer.cornerRadius = (self.stackView.frame.size.height) / 2
-        upperBody.layer.masksToBounds = true
-        upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        upperBody.titleLabel?.numberOfLines = 0
-        upperBody.titleLabel?.textAlignment = .center
-        
-        
-        lowerBody.layer.cornerRadius = (self.stackView.frame.size.height) / 2
-        lowerBody.layer.masksToBounds = true
-        lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        lowerBody.titleLabel?.numberOfLines = 0
-        lowerBody.titleLabel?.textAlignment = .center
-        
-        
-        
     }
     
     
@@ -269,8 +221,93 @@ class BodyweightChoice: UIViewController  {
     
     
     
-    // Information Button Action
-    @IBAction func informationButtonActionStretchingC(_ sender: Any) {
+    
+    
+    
+    // 
+    // TableView
+    //
+    
+    // Section
+    //
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return genreArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return NSLocalizedString(genreArray[section], comment: "")
+    }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
+        header.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        header.contentView.backgroundColor = colour2
+        //
+    }
+    
+    // Cell
+    //
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return musicArray[section].count
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        
+        cell.textLabel?.text = NSLocalizedString(musicArray[indexPath.section][indexPath.row], comment: "")
+        
+        
+        cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
+        cell.textLabel?.textAlignment = .left
+        cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        cell.textLabel?.textColor = .black
+        cell.tintColor = .black
+        //
+        
+        
+        return cell
+    }
+    
+    
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 47
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //
+    // Extra Information
+    
+    // QuestionMark Button Action
+    @IBAction func informationButtonAction(_ sender: Any) {
+    
+        
         
         
         if self.informationView.frame.minY < self.view.frame.maxY {
@@ -285,12 +322,10 @@ class BodyweightChoice: UIViewController  {
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
             self.informationView.contentOffset.y = 0
-            
-            
+
             // Buttons
             questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
             navigationBar.setHidesBackButton(false, animated: true)
-            
             
             
         } else {
@@ -313,14 +348,10 @@ class BodyweightChoice: UIViewController  {
             questionMark.image = #imageLiteral(resourceName: "Down")
             navigationBar.setHidesBackButton(true, animated: true)
             
-            
+
         }
         
-        
-        
     }
-    
-    
     
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
@@ -342,27 +373,41 @@ class BodyweightChoice: UIViewController  {
                 questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
                 navigationBar.setHidesBackButton(false, animated: true)
                 
-
+                
             }
         }
     }
+
+
     
-    // Remove Back Bar Text
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        navigationItem.backBarButtonItem = backItem
+    //---------------------------------------------------------------------------------------------------------------
+    
+    // Countdown
+    var time = 7
+    let countdownLabel = UILabel()
+    
+    //
+    // Update Timer
+    func updateTimer() {
+        if time == 0 {
+            
+            countdownLabel.text = "0"
+            
+        } else {
+            
+            time -= 1
+            countdownLabel.text = String(time)
+            
+        }
     }
-
-
-//---------------------------------------------------------------------------------------------------------------
+    
     
     
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()
     let nextButton = UIButton()
-    let backButton = UIButton()
+    
     
     
     // Walkthrough
@@ -371,12 +416,14 @@ class BodyweightChoice: UIViewController  {
         //
         let screenSize = UIScreen.main.bounds
         let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+        
         //
         walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
         walkthroughView.backgroundColor = .black
         walkthroughView.alpha = 0.72
         walkthroughView.clipsToBounds = true
         //
+        
         label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
         label.center = view.center
         label.textAlignment = .center
@@ -384,28 +431,23 @@ class BodyweightChoice: UIViewController  {
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.font = UIFont(name: "SFUIDisplay-light", size: 22)
         label.textColor = .white
+        
         //
         nextButton.frame = screenSize
         nextButton.backgroundColor = .clear
         nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
-        //
-        backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
-        backButton.setTitle("Back", for: .normal)
-        backButton.titleLabel?.textAlignment = .left
-        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        backButton.titleLabel?.textColor = .white
-        backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
         
         
         switch viewNumber {
         case 0:
             //
             
+            nextButton.isEnabled = false
             
             // Clear Section
             let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(screenSize)
+            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - 80, y: UIApplication.shared.statusBarFrame.height, width: 160, height: 40))
+            path.addRect(walkthroughView.frame)
             //
             let maskLayer = CAShapeLayer()
             maskLayer.backgroundColor = UIColor.black.cgColor
@@ -417,9 +459,8 @@ class BodyweightChoice: UIViewController  {
             //
             
             
-            label.text = NSLocalizedString("choiceScreen1", comment: "")
+            label.text = NSLocalizedString("music1", comment: "")
             walkthroughView.addSubview(label)
-            
             
             
             
@@ -430,42 +471,37 @@ class BodyweightChoice: UIViewController  {
             
             
             
+            // CountDown
+            //
+            time = 7
+            //
+            countdownLabel.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
+            countdownLabel.text = String(time)
+            countdownLabel.center.x = self.view.frame.size.width - 24.5
+            countdownLabel.center.y = self.view.frame.size.height - 24.5 + navigationBarHeight + UIApplication.shared.statusBarFrame.height
+            countdownLabel.textAlignment = .center
+            countdownLabel.numberOfLines = 0
+            countdownLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+            countdownLabel.font = UIFont(name: "SFUIDisplay-light", size: 22)
+            countdownLabel.textColor = .white
+            
+            walkthroughView.addSubview(countdownLabel)
+            
+            
+            
+            let countdownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+            
+            
+            
+            
+            let delayInSeconds = 7.0
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.nextButton.isEnabled = true
+                countdownTimer.invalidate()
+                self.countdownLabel.removeFromSuperview()
+                
+            }
         //
-        case 1:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: custom.center.x, y: custom.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height), radius: 24.5, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            
-            label.text = NSLocalizedString("choiceScreen12", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-            //
-            
         default: break
             
             
@@ -480,18 +516,6 @@ class BodyweightChoice: UIViewController  {
         walkthroughView.removeFromSuperview()
         viewNumber = viewNumber + 1
         walkthroughMindBody()
-    }
-    
-    
-    
-    func backWalkthroughView(_ sender: Any) {
-        if viewNumber > 0 {
-            backButton.removeFromSuperview()
-            walkthroughView.removeFromSuperview()
-            viewNumber = viewNumber - 1
-            walkthroughMindBody()
-        }
-        
     }
     
     
