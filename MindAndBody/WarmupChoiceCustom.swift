@@ -22,7 +22,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     
     
     
-    // Arrays -------------------------------------------------------------------------------------------------------------------------------------------------------
+// Arrays -------------------------------------------------------------------------------------------------------------------------------------------------------
 
     // Custom Arrays
     //
@@ -32,11 +32,12 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     var emptyArrayOfArrays: [[Int]] = []
     
     
+    // Selected row 
+    var selectedRow = Int()
     
-    
-    //
-    // Warmup Arrays -------------------------------------------------------------------------------------------------------------------------------------------------------
-    //
+//
+// Warmup Arrays --------------------------------------------------------------------------------------------------------------------------------
+//
     
     
     var tableViewSectionArray: [String] =
@@ -1058,7 +1059,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 }
                 
                 
-                
             // Row Label
             //
             } else if component == 1 {
@@ -1187,7 +1187,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             let defaults = UserDefaults.standard
             let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
             //
-            
+            var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
+            var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
             
             
             if customKeyArray.count == 0 {
@@ -1244,7 +1245,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
                     cell.detailTextLabel?.textAlignment = .left
                     cell.detailTextLabel?.textColor = colour2
-                    cell.detailTextLabel?.text = "3 x 12"
+                    cell.detailTextLabel?.text = String(setsPickerArray[customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]]) + " x " + repsPickerArray[customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]]
                     
         
         
@@ -1341,6 +1342,12 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
         
         
+        //
+        // If no session created
+        if customKeyArray.count == 0 {
+            tableView.deselectRow(at: indexPath, animated: true)
+        } else {
+        
         switch tableView {
         //
         case customTableView:
@@ -1371,6 +1378,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     
                 }, completion: nil)
                 
+                //
+                selectedRow = indexPath.row
+                
             } else {
                 
                 if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
@@ -1399,6 +1409,10 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
 
                     }, completion: nil)
                 
+                    //
+                    selectedRow = indexPath.row
+                    
+                    
                 } else {
                 
                     // View
@@ -1406,7 +1420,11 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
                     let selectedCell = tableView.cellForRow(at: indexPath)
                     setsRepsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
-                    //
+                    // selected row
+                    setsRepsPicker.selectRow(customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 0, animated: true)
+                    setsRepsPicker.selectRow(customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 1, animated: true)
+                    
+                    
                     
                     //
                     let componentWidth = setsRepsPicker.frame.size.width / 3
@@ -1453,6 +1471,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
 
                     
             }
+        
         }
             
         //
@@ -1502,6 +1521,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         
         tableView.deselectRow(at: indexPath, animated: true)
         beginButtonEnabled()
+        }
     }
     
     
@@ -1652,22 +1672,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    
-    
-    func okButtonAction(_ sender: Any) {
-        //
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     //
     // Edit Tableview
     //
@@ -1687,10 +1691,44 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
 
         }
     }
-    
-    
    
     
+    
+    
+    //
+    // Picker Related Actions
+    //
+    func okButtonAction(_ sender: Any) {
+        //
+        let defaults = UserDefaults.standard
+        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        //
+        customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = setsRepsPicker.selectedRow(inComponent: 0)
+        defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+        //
+        customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = setsRepsPicker.selectedRow(inComponent: 1)
+        defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+        //
+        defaults.synchronize()
+        
+        //
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.setsRepsView.alpha = 0
+            //
+            self.backgroundViewExpanded.alpha = 0
+            
+        }, completion: nil)
+        
+        let delayInSeconds = 0.4
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            self.setsRepsView.removeFromSuperview()
+            //
+            self.backgroundViewExpanded.removeFromSuperview()
+        }
+        //
+        customTableView.reloadData()
+    }
     
     
     
