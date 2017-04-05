@@ -28,13 +28,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     //
     //
     var presetTexts: [String] = []
-    //
-    var warmupPresetsCustom: [[Int]] = []
-    
-    //
-    var setsArray: [Int] = []
-    //
-    var repsArray: [String] = []
+    // WarmupPresetsCustom, SetsArray, RepsArray
+    var emptyArrayOfArrays: [[Int]] = []
     
     
     
@@ -355,7 +350,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             58: "pullUpE"
     ]
     
-    
+  
     
     
     
@@ -423,7 +418,11 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     var backgroundViewExpanded = UIButton()
     
     // Sets and Reps Choice
-    var setsRepsView = UIPickerView()
+    var setsRepsView = UIView()
+    var setsRepsPicker = UIPickerView()
+    var okButton = UIButton()
+    //
+    let setsIndicatorLabel = UILabel()
     
     
     
@@ -464,8 +463,11 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         let defaults = UserDefaults.standard
         
         // Custom
-        defaults.register(defaults: ["warmupPresetsCustom" : warmupPresetsCustom])
+        defaults.register(defaults: ["warmupPresetsCustom" : emptyArrayOfArrays])
         defaults.register(defaults: ["warmupPresetTextsCustom" : presetTexts])
+        //
+        defaults.register(defaults: ["warmupSetsCustom" : emptyArrayOfArrays])
+        defaults.register(defaults: ["warmupRepsCustom" : emptyArrayOfArrays])
         
         
         defaults.synchronize()
@@ -660,31 +662,50 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         
         
         
-        
+        //
         // TableView Cell action items
         //
+        
         // Movement table
         movementsTableView.backgroundColor = colour2
         movementsTableView.delegate = self
         movementsTableView.dataSource = self
-        movementsTableView.contentOffset.y = 0
+        movementsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         movementsTableView.layer.cornerRadius = 5
         movementsTableView.layer.masksToBounds = true
         //
+        
         // Sets Reps Selection
+        // view
         setsRepsView.backgroundColor = colour2
-        setsRepsView.delegate = self
-        setsRepsView.dataSource = self
         setsRepsView.layer.cornerRadius = 5
         setsRepsView.layer.masksToBounds = true
+        // picker
+        setsRepsPicker.backgroundColor = colour2
+        setsRepsPicker.delegate = self
+        setsRepsPicker.dataSource = self
+        // ok
+        okButton.backgroundColor = colour1
+        okButton.setTitleColor(colour2, for: .normal)
+        okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
+        okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
+        // sets
+        setsIndicatorLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        setsIndicatorLabel.textColor = colour1
+        setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
         //
+        setsRepsView.addSubview(setsRepsPicker)
+        setsRepsView.addSubview(okButton)
+        setsRepsView.addSubview(setsIndicatorLabel)
+        setsRepsView.bringSubview(toFront: setsIndicatorLabel)
+        //
+        
         // Background View
         backgroundViewExpanded.backgroundColor = .black
         backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
-
-
-        
         //
+
         
     }
     
@@ -744,7 +765,10 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         let defaults = UserDefaults.standard
         var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
         var presetTextArray = defaults.object(forKey: "warmupPresetTextsCustom") as! [String]
-        
+        //
+        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+
         
             
             // Alert and Functions
@@ -767,20 +791,23 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 let textField = alert?.textFields![0]
                 
                 
-            
-                
                 // Update Preset Text Arrays
                 presetTextArray.append((textField?.text)!)
                 defaults.set(presetTextArray, forKey: "warmupPresetTextsCustom")
-                defaults.synchronize()
-                
                 
                 // Add New empty array
                 customKeyArray.append([])
                 defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
-                defaults.synchronize()
-                //
                 
+                // Add new sets and reps arrays
+                customSetsArray.append([])
+                defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+                
+                //
+                customRepsArray.append([])
+                defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+
+                //
                 defaults.synchronize()
                 
                 
@@ -829,7 +856,10 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         let defaults = UserDefaults.standard
         var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
         var presetTextArray = defaults.object(forKey: "warmupPresetTextsCustom") as! [String]
-        
+        //
+        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+
         
         let selectedRow = sessionPickerView.selectedRow(inComponent: 0)
         
@@ -848,17 +878,23 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             
             if presetTextArray.count != 0 {
             
-            
-                customKeyArray.remove(at: selectedRow)
                 //
+                customKeyArray.remove(at: selectedRow)
                 defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
             
-            
-                presetTextArray.remove(at: selectedRow)
                 //
+                presetTextArray.remove(at: selectedRow)
                 defaults.set(presetTextArray, forKey: "warmupPresetTextsCustom")
             
-            
+                //
+                customSetsArray.remove(at: selectedRow)
+                defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+                
+                //
+                customRepsArray.remove(at: selectedRow)
+                defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+                
+                //
                 defaults.synchronize()
             
             
@@ -900,7 +936,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         if pickerView == sessionPickerView {
           return 1
-        } else if pickerView == setsRepsView {
+        } else if pickerView == setsRepsPicker {
             return 2
         }
         return 0
@@ -911,7 +947,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         if pickerView == sessionPickerView {
             let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
             return titleDataArray.count
-        } else if pickerView == setsRepsView {
+        } else if pickerView == setsRepsPicker {
             if component == 0{
                 return 6
             } else {
@@ -937,7 +973,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 return rowLabel
             }
         //
-        } else if pickerView == setsRepsView {
+        } else if pickerView == setsRepsPicker {
             //
             if component == 0 {
                 let setsLabel = UILabel()
@@ -948,13 +984,32 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 setsLabel.textAlignment = .center
                 return setsLabel
             //
-            } else {
+            } else if component == 1 {
+                //
                 let repsLabel = UILabel()
-                repsLabel.text = repsPickerArray[row]
+                // Row Label Text
+                switch row {
+                //
+                case 0:
+                    repsLabel.text = "        " + String(repsPickerArray[row]) + "  " + NSLocalizedString("rep", comment: "")
+                //
+                case 1:
+                    repsLabel.text = "         " + String(repsPickerArray[row]) + " " + NSLocalizedString("reps", comment: "")
+                //
+                case 12:
+                    repsLabel.text = "       " + String(repsPickerArray[row]) + " " + NSLocalizedString("sec", comment: "")
+                //
+                case 2...11, 13...15:
+                    repsLabel.text = String(repsPickerArray[row])
+                //
+                default: break
+                }
                 repsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
                 repsLabel.textColor = colour1
                 repsLabel.textAlignment = .center
                 return repsLabel
+                
+                
             //
             }
 
@@ -969,13 +1024,57 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         //
-        self.customTableView.reloadData()
-        flashScreen()
+        if pickerView == sessionPickerView {
+            return sessionPickerView.frame.size.width
+        //
+        } else if pickerView == setsRepsPicker {
+            if component == 0 {
+                return (setsRepsPicker.frame.size.width / 3)
+            } else if component == 1{
+                return (setsRepsPicker.frame.size.width / 3)
+            }
+        }
+    return 0
     }
     
-    
+    //
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        //
+        if pickerView == sessionPickerView {
+            //
+            self.customTableView.reloadData()
+            flashScreen()
+        //
+        } else if pickerView == setsRepsPicker {
+            //
+            if component ==  0{
+                //
+                if row == 0 {
+                    self.setsIndicatorLabel.text = NSLocalizedString("set", comment: "")
+                } else {
+                    self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+                }
+                
+                
+                
+            // Row Label
+            //
+            } else if component == 1 {
+                //
+                
+                
+                
+                
+                //
+                let componentWidth = setsRepsPicker.frame.size.width / 3
+                let componentWidthFourth = componentWidth / 4
+                //
+                
+            }
+        }
+    }
     
     
     
@@ -1087,6 +1186,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             
             let defaults = UserDefaults.standard
             let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+            //
+            
             
             
             if customKeyArray.count == 0 {
@@ -1235,7 +1336,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         
         let defaults = UserDefaults.standard
         var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-        let customTitleArray = defaults.object(forKey: "warmupPresetTextsCustom") as! [String]
+        //
+        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
         
         
         switch tableView {
@@ -1298,20 +1401,25 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 
                 } else {
                 
-                    //
+                    // View
                     setsRepsView.alpha = 0
                     UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
                     let selectedCell = tableView.cellForRow(at: indexPath)
                     setsRepsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
                     //
                     
+                    //
+                    let componentWidth = setsRepsPicker.frame.size.width / 3
+                    let componentWidthFourth = componentWidth / 4
+                    //
                     
-                    let testLabel = UILabel()
-                    testLabel.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
-                    testLabel.center.x = (setsRepsView.center.x / 2) + (setsRepsView.center.x / 4)
-                    testLabel.textColor = colour1
-                    setsRepsView.addSubview(testLabel)
-                    setsRepsView.bringSubview(toFront: testLabel)
+                    // picker
+                    setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+                    // ok
+                    okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
+                    //
+                    self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+                    //
                     
                     
                     //
@@ -1327,8 +1435,17 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     }, completion: nil)
                     // Position
                     UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                        self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147)
+                        //
+                        self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
                         self.setsRepsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
+                        // picker
+                        self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+                        // ok
+                        self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
+                        // Sets Indicator Label
+                        self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+                        self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+                        //
                         //
                         self.backgroundViewExpanded.alpha = 0.7
                         
@@ -1344,16 +1461,24 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             //
             customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].append(fullKeyArray[indexPath.section][indexPath.row])
             defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
+            // sets
+            customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
+            defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+            // reps
+            customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
+            defaults.set(customRepsArray, forKey: "warmupRepsCustom")
             //
             defaults.synchronize()
 
             
+            // Remove Table
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 self.movementsTableView.alpha = 0
                 //
                 self.backgroundViewExpanded.alpha = 0
-                
+                //
             }, completion: nil)
+            //
             
             let delayInSeconds = 0.4
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -1361,8 +1486,16 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 self.backgroundViewExpanded.removeFromSuperview()
                 //
                 self.customTableView.reloadData()
-
+                
+                // Scroll to Bottom
+                if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
+                    //
+                    self.customTableView.setContentOffset(CGPoint(x: 0, y: self.customTableView.contentSize.height - self.customTableView.frame.size.height), animated: true)
+                }
             }
+            
+           
+            
             
         default: break
         }
@@ -1419,11 +1552,30 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         let defaults = UserDefaults.standard
         var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-        //
+        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        
+        // Key
         let itemToMove = customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
         customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].insert(itemToMove, at: destinationIndexPath.row)
         //
         defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
+        //
+        
+        // Sets
+        let setToMove = customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
+        customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(setToMove, at: destinationIndexPath.row)
+        //
+        defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+
+        
+        // Reps
+        let repToMove = customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
+        customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(repToMove, at: destinationIndexPath.row)
+        //
+        defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+        
+        //
         defaults.synchronize()
     }
     
@@ -1438,7 +1590,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             return proposedDestinationIndexPath
         }
-        
     }
     
     
@@ -1455,13 +1606,22 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         if editingStyle == UITableViewCellEditingStyle.delete {
             let defaults = UserDefaults.standard
             var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-            //
+            var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
+            var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+            
+            // Key
             customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
             defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
+            // sets
+            customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
+            defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+            // reps
+            customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
+            defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+            //
             defaults.synchronize()
             //
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-            
         }
     }
     
@@ -1490,6 +1650,21 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 self.backgroundViewExpanded.removeFromSuperview()
             }
     }
+    
+    
+    
+    
+    func okButtonAction(_ sender: Any) {
+        //
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1555,7 +1730,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
-            self.informationView.contentOffset.y = 0
+            self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             
             
             // Buttons
@@ -1577,7 +1752,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
                 
             }, completion: nil)
-            self.informationView.contentOffset.y = 0
+            self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             
             
             // Buttons

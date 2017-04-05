@@ -1238,7 +1238,7 @@ class StretchingScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDele
         scrollViewExplanation.addSubview(explanationLabel)
         scrollViewExplanation.contentSize = CGSize(width: self.view.frame.size.width, height: explanationLabel.frame.size.height + 20)
         
-        scrollViewExplanation.contentOffset.y = 0
+        scrollViewExplanation.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         
         
         // Add Views

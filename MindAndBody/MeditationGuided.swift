@@ -258,7 +258,7 @@ class MeditationGuided: UIViewController {
         discussionScrollView.addSubview(discussionLabel)
         discussionScrollView.contentSize = CGSize(width: self.view.frame.size.width, height: discussionLabel.frame.size.height + 20)
         
-        self.discussionScrollView.contentOffset.y = 0
+        self.discussionScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         
         
         

@@ -250,7 +250,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
                 
                 self.informationTitleYogaC.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
-            self.informationViewYogaC.contentOffset.y = 0
+            self.informationViewYogaC.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             
             
             // Buttons
@@ -271,7 +271,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
                 self.informationTitleYogaC.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
                 
             }, completion: nil)
-            self.informationViewYogaC.contentOffset.y = 0
+            self.informationViewYogaC.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             
             
             // Buttons

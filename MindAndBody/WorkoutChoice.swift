@@ -222,7 +222,7 @@ class WorkoutChoice: UIViewController  {
                 
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
-            self.informationView.contentOffset.y = 0
+            self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             
             
             // Buttons
@@ -244,7 +244,7 @@ class WorkoutChoice: UIViewController  {
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
                 
             }, completion: nil)
-            self.informationView.contentOffset.y = 0
+            self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             
             
             

@@ -278,7 +278,7 @@ class StretchingChoice: UIViewController  {
                 
                 self.informationTitleStretchingC.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
-            self.informationViewStretchingC.contentOffset.y = 0
+            self.informationViewStretchingC.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             
             
             // Buttons
@@ -299,7 +299,7 @@ class StretchingChoice: UIViewController  {
                 self.informationTitleStretchingC.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
                 
             }, completion: nil)
-            self.informationViewStretchingC.contentOffset.y = 0
+            self.informationViewStretchingC.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             
             
             // Buttons

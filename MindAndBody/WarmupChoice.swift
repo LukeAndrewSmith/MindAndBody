@@ -304,7 +304,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
                 
                 self.informationTitleWarmupC.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
-            self.informationViewWarmupC.contentOffset.y = 0
+            self.informationViewWarmupC.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             
             
             // Buttons
@@ -326,7 +326,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
                 self.informationTitleWarmupC.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
                 
             }, completion: nil)
-            self.informationViewWarmupC.contentOffset.y = 0
+            self.informationViewWarmupC.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
 
             
             // Buttons

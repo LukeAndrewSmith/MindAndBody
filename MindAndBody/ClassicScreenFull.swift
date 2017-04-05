@@ -838,7 +838,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         scrollViewExplanation.addSubview(explanationText)
         scrollViewExplanation.contentSize = CGSize(width: self.view.frame.size.width, height: explanationText.frame.size.height + 20)
         
-        self.scrollViewExplanation.contentOffset.y = 0
+        self.scrollViewExplanation.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         
         
         
@@ -855,7 +855,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         // Explanation
         
-        self.scrollViewExplanation.contentOffset.y = 0
+        self.scrollViewExplanation.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         
         
         self.view.bringSubview(toFront: scrollViewExplanation)
@@ -1588,7 +1588,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         scrollViewExplanationE.addSubview(explanationLabelE)
         scrollViewExplanationE.contentSize = CGSize(width: self.view.frame.size.width, height: explanationLabelE.frame.size.height + 20)
         
-        scrollViewExplanationE.contentOffset.y = 0
+        scrollViewExplanationE.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         
         
         

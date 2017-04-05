@@ -217,7 +217,7 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
                 
                 self.informationTitleMeditationC.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
-            self.informationViewMeditationC.contentOffset.y = 0
+            self.informationViewMeditationC.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             
             
             // Buttons
@@ -238,7 +238,7 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
                 self.informationTitleMeditationC.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
                 
             }, completion: nil)
-            self.informationViewMeditationC.contentOffset.y = 0
+            self.informationViewMeditationC.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             
             
             // Buttons

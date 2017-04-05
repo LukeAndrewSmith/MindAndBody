@@ -98,7 +98,7 @@ class Information: UITableViewController{
         //
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         //
-        tableView.contentOffset.y = 0
+        tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         
     }
     
@@ -133,7 +133,7 @@ class Information: UITableViewController{
         backView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
         //
         self.tableView.backgroundView = backView
-        self.tableView.contentOffset.y = 0
+        self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         //
         
         //
@@ -163,18 +163,18 @@ class Information: UITableViewController{
     //
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == tableView {
-            if tableView.contentOffset.y < 196 {
+            if tableView.contentOffset.y > 186 {
                 //
-                backView.backgroundColor = colour2
-                UIApplication.shared.statusBarStyle = .lightContent
+                backView.backgroundColor = colour1
+                UIApplication.shared.statusBarStyle = .default
                 //
                 UIApplication.shared.keyWindow?.insertSubview(scrollUpButton, aboveSubview: self.tableView)
             //
             } else {
                 self.scrollUpButton.removeFromSuperview()
                 //
-                backView.backgroundColor = colour1
-                UIApplication.shared.statusBarStyle = .default
+                backView.backgroundColor = colour2
+                UIApplication.shared.statusBarStyle = .lightContent
             }
         }
     }
@@ -448,47 +448,40 @@ class Information: UITableViewController{
         switch (sender as AnyObject).tag {
         //
         case 1:
-            UIView.animate(withDuration: 0.4, animations: {
-                self.tableView.contentOffset.y = 132
-            })
+            self.tableView.setContentOffset(CGPoint(x: 0, y: 132), animated: true)
         //
         case 2:
             let height = 186 + row0Height
             //
             if tableView.frame.maxY > height - tableView.frame.size.height {
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.tableView.contentOffset.y = 186 + row0Height
-                })
+                //
+                self.tableView.setContentOffset(CGPoint(x: 0, y: 186 + row0Height), animated: true)
+            //
             } else {
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.tableView.contentOffset.y = self.tableView.contentSize.height - self.tableView.frame.size.height
-                })
+                //
+                self.tableView.setContentOffset(CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height), animated: true)
             }
         //
         case 3:
             let height = 186 + row0Height + row1Height
             //
             if tableView.frame.maxY > height - tableView.frame.size.height {
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.tableView.contentOffset.y = 186 + row0Height
-                })
+                //
+                self.tableView.setContentOffset(CGPoint(x: 0, y: 186 + row0Height), animated: true)
             } else {
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.tableView.contentOffset.y = self.tableView.contentSize.height - self.tableView.frame.size.height
-                })
+                //
+                self.tableView.setContentOffset(CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height), animated: true)
             }
         //
         case 4:
             let height = row0Height + row1Height + row2Height
             //
             if tableView.frame.maxY > height - tableView.frame.size.height {
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.tableView.contentOffset.y = 186 + row0Height
-                })
+                //
+                self.tableView.setContentOffset(CGPoint(x: 0, y: 186 + row0Height), animated: true)
             } else {
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.tableView.contentOffset.y = self.tableView.contentSize.height - self.tableView.frame.size.height
-                })
+                //
+                self.tableView.setContentOffset(CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height), animated: true)
             }
         //
         default: break
@@ -499,9 +492,7 @@ class Information: UITableViewController{
     // Scroll Up Button Action
     func scrollUpButtonAction(_ sender: Any) {
         //
-        UIView.animate(withDuration: 0.4, animations: {
-            self.tableView.contentOffset.y = 0
-        })
+        self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
 
