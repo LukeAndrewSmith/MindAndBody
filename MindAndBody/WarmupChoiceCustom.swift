@@ -819,6 +819,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 self.sessionPickerView.reloadAllComponents()
                 self.customTableView.reloadData()
                 
+                            
             })
             okAction.isEnabled = false
             alert.addAction(okAction)
@@ -908,8 +909,12 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             }
             
         })
-        alert.addAction(okAction)
         
+        if customSetsArray.count > 0 {
+        alert.addAction(okAction)
+        } else {
+            
+        }
         
         
         // Cancel reset action
@@ -1352,6 +1357,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         case customTableView:
             //
+            selectedRow = indexPath.row
+
             if customKeyArray.count == 0 {
                 
                 movementsTableView.alpha = 0
@@ -1379,7 +1386,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 }, completion: nil)
                 
                 //
-                selectedRow = indexPath.row
                 
             } else {
                 
@@ -1409,9 +1415,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
 
                     }, completion: nil)
                 
-                    //
-                    selectedRow = indexPath.row
-                    
                     
                 } else {
                 

@@ -18,9 +18,8 @@ class CollectionImageCell: UICollectionViewCell {
     
     // Outlets
     @IBOutlet weak var backgroundImage: UIImageView!
-    
+    //
     @IBOutlet weak var selectionLabel: UILabel!
-    
     
     // Ensure image view is cleared
     override func prepareForReuse() {
@@ -37,24 +36,17 @@ class CollectionImageCell: UICollectionViewCell {
 
 
 //
-// Collection Class -----------------------------------------------------------------------------------------------------------------------------
+// Collection Class ---------------------------------------------------------------------------------------------------------------------------
 //
 
 class BackgroundImageCollection: UICollectionViewController {
-    
-    
     
     //
     let backgroundImageArray: [UIImage] =
         [#imageLiteral(resourceName: "Background 0"), #imageLiteral(resourceName: "Background 1"), #imageLiteral(resourceName: "Background 2"), #imageLiteral(resourceName: "Background 3"), #imageLiteral(resourceName: "Background 4")]
     
-    
-    
     // Outlets
     @IBOutlet weak var navigationBar: UINavigationItem!
-    
-    
-    
     
     //
     // View Did Load
@@ -72,7 +64,6 @@ class BackgroundImageCollection: UICollectionViewController {
         
     }
 
-    
 
 // 
 // Collection View -----------------------------------------------------------------------------------------------------------------------------
@@ -103,8 +94,7 @@ class BackgroundImageCollection: UICollectionViewController {
         
         // Dequeue reusable cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionImageCell", for: indexPath) as! CollectionImageCell
-        
-
+    
         //
         cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
 
@@ -130,9 +120,7 @@ class BackgroundImageCollection: UICollectionViewController {
         cell.backgroundImage.layer.cornerRadius = 5
         cell.backgroundImage.layer.masksToBounds = true
         cell.backgroundImage.contentMode = .scaleAspectFill
-        
     
-        
         
         // Selection Indicator
         //
@@ -210,16 +198,14 @@ class BackgroundImageCollection: UICollectionViewController {
         return cell
     }
     
-    
 
     // Selection handler
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         // Deselect previous selection
         let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
-        
-        var deselectIndex = NSIndexPath()
         //
+        var deselectIndex = NSIndexPath()
         // Image
         if backgroundIndex < backgroundImageArray.count {
             deselectIndex = NSIndexPath(item: backgroundIndex, section: 0)
@@ -230,7 +216,6 @@ class BackgroundImageCollection: UICollectionViewController {
         //
         collectionView.deselectItem(at: deselectIndex as IndexPath, animated: false)
     
-        
         
         // Set New Selection
         let cell = collectionView.cellForItem(at: indexPath) as! CollectionImageCell
@@ -248,28 +233,27 @@ class BackgroundImageCollection: UICollectionViewController {
             UserDefaults.standard.set(backgroundImageArray.count + indexPath.item, forKey: "homeScreenBackground")
             //
         }
-        
         collectionView.reloadData()
     }
 }
 
 
 //
-// Collection Layout ----------------------------------------------------------------------------------------------------------------------------
+// Collection Layout ------------------------------------------------------------------------------------------------------------------------
 //
 
 extension BackgroundImageCollection : UICollectionViewDelegateFlowLayout {
-    
     // Cell size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+        //
         let width = collectionView.frame.size.width / 2
-        
+        //
         let screenHeight = UIScreen.main.bounds.height - (navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height - (tabBarController?.tabBar.frame.size.height)!
         let screenWidth = UIScreen.main.bounds.width
         let ratio = screenHeight / screenWidth
+        //
         let height = width * ratio
-        
+        //
         return CGSize(width: width, height: height)
     }
     
@@ -277,6 +261,7 @@ extension BackgroundImageCollection : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
+        //
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
@@ -285,11 +270,13 @@ extension BackgroundImageCollection : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        //
         return 0
     }
     
     // Minimum column spacing
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        //
         return 0
     }
 }

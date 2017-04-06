@@ -9,15 +9,17 @@
 import Foundation
 import UIKit
 //
-// Gradient Extension ---------------------------------------------------------------------------------------------------------------------------
+// Gradient Extension ----------------------------------------------------------------------------------------------------------------------
 //
 extension UIView {
 
     func applyGradient(colours: [UIColor]) -> Void {
+        //
         self.applyGradient(colours: colours, locations: nil)
     }
     
     func applyGradient(colours: [UIColor], locations: [NSNumber]?) -> Void {
+        //
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = colours.map { $0.cgColor }
@@ -28,7 +30,7 @@ extension UIView {
 
 
 //
-// Mind & Body Class ----------------------------------------------------------------------------------------------------------------------------
+// Mind & Body Class ------------------------------------------------------------------------------------------------------------------------
 //
 class MindBody: UIViewController {
     
@@ -40,9 +42,7 @@ class MindBody: UIViewController {
     
     //  (UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour2")
     //  (UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour3")
-   
-    
-    
+
     // Background Array
     let backgroundImageArray: [UIImage] =
     [#imageLiteral(resourceName: "Background 0"), #imageLiteral(resourceName: "Background 1"), #imageLiteral(resourceName: "Background 2"), #imageLiteral(resourceName: "Background 3"), #imageLiteral(resourceName: "Background 4")]
@@ -55,83 +55,61 @@ class MindBody: UIViewController {
     //
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
-    
     // Calendar
     @IBOutlet weak var calendar: UIBarButtonItem!
-    
     // Tracking
     @IBOutlet weak var tracking: UIBarButtonItem!
-    
     
     // Button Outlets
     //
     // Warmup
     @IBOutlet weak var Warmup: UIButton!
-    
     // Workout
     @IBOutlet weak var Workout: UIButton!
-    
     // Stretching
     @IBOutlet weak var Stretching: UIButton!
-    
     // Cardio
     @IBOutlet weak var Cardio: UIButton!
-    
     // Yoga
     @IBOutlet weak var Yoga: UIButton!
-    
     // Mindfullness
     @IBOutlet weak var Meditation: UIButton!
-    
     
     // Stack Views
     //
     @IBOutlet weak var stackView1: UIStackView!
-    
+    //
     @IBOutlet weak var stackView2: UIStackView!
-    
+    //
     @IBOutlet weak var stackView3: UIStackView!
-    
     
     // Constraints
     //
     // StackView 1 bottom Constraint
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    
     // Mind Body Constraints
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var positionConstraint: NSLayoutConstraint!
-    
     // Body Constraints
     @IBOutlet weak var bodyTop: NSLayoutConstraint!
-    
     @IBOutlet weak var bodyBottom: NSLayoutConstraint!
-    
     // Mind Constraints
     @IBOutlet weak var mindTop: NSLayoutConstraint!
-    
     @IBOutlet weak var mindBottom: NSLayoutConstraint!
-    
     // Bottom StackView 3 Bottom Constraint
     @IBOutlet weak var stack3Bottom: NSLayoutConstraint!
-    
     
     // Background Image
     @IBOutlet weak var backgroundImage: UIImageView!
     
-    
     // Mind Connection Label
     @IBOutlet weak var connectionLabel: UILabel!
-    
     
     // Mind & Body section titles
     // Mind
     @IBOutlet weak var body: UILabel!
-    
     // Body
     @IBOutlet weak var mind: UILabel!
-    
 
     // Blurs
     let blur = UIVisualEffectView()
@@ -142,7 +120,6 @@ class MindBody: UIViewController {
     let blur5 = UIVisualEffectView()
     let blur6 = UIVisualEffectView()
     let blur7 = UIVisualEffectView()
-
     
     // Colours
     let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
@@ -187,7 +164,7 @@ class MindBody: UIViewController {
             Meditation.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
             body.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
             mind.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            
+            //
             blur.removeFromSuperview()
             blur1.removeFromSuperview()
             blur2.removeFromSuperview()
@@ -207,7 +184,7 @@ class MindBody: UIViewController {
             Meditation.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
             body.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
             mind.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            
+            //
             Warmup.insertSubview(blur, belowSubview: Warmup.titleLabel!)
             Workout.insertSubview(blur1, belowSubview: Workout.titleLabel!)
             Cardio.insertSubview(blur2, belowSubview: Cardio.titleLabel!)
@@ -228,8 +205,7 @@ class MindBody: UIViewController {
             Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
             body.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             mind.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            
-            
+            //
             Warmup.insertSubview(blur, belowSubview: Warmup.titleLabel!)
             Workout.insertSubview(blur1, belowSubview: Workout.titleLabel!)
             Cardio.insertSubview(blur2, belowSubview: Cardio.titleLabel!)
@@ -249,7 +225,7 @@ class MindBody: UIViewController {
             Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
             body.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
             mind.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            
+            //
             blur.removeFromSuperview()
             blur1.removeFromSuperview()
             blur2.removeFromSuperview()
@@ -258,7 +234,6 @@ class MindBody: UIViewController {
             blur5.removeFromSuperview()
             blur6.removeFromSuperview()
             blur7.removeFromSuperview()
-            
             
         // White Text, Black body, White mind
         case 0:
@@ -270,7 +245,7 @@ class MindBody: UIViewController {
             Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
             body.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
             mind.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            
+            //
             Warmup.insertSubview(blur, belowSubview: Warmup.titleLabel!)
             Workout.insertSubview(blur1, belowSubview: Workout.titleLabel!)
             Cardio.insertSubview(blur2, belowSubview: Cardio.titleLabel!)
@@ -279,7 +254,6 @@ class MindBody: UIViewController {
             Meditation.insertSubview(blur5, belowSubview: Meditation.titleLabel!)
             view.insertSubview(blur6, belowSubview: body)
             view.insertSubview(blur7, belowSubview: mind)
-            
             
         // White Text, Black mind, White body
         case 2:
@@ -300,7 +274,6 @@ class MindBody: UIViewController {
             Meditation.insertSubview(blur5, belowSubview: Meditation.titleLabel!)
             view.insertSubview(blur6, belowSubview: body)
             view.insertSubview(blur7, belowSubview: mind)
-            
         //
         default: break
         }
@@ -350,10 +323,8 @@ class MindBody: UIViewController {
         
         // Register Weight
         UserDefaults.standard.register(defaults: ["units" : "kg"])
-        
         // Register Presentation Style
         UserDefaults.standard.register(defaults: ["presentationStyle" : "detailed"])
-        
         // Register background index
         UserDefaults.standard.register(defaults: ["homeScreenBackground" : 0])
         
@@ -362,7 +333,6 @@ class MindBody: UIViewController {
         //
         // Title
         navigationBar.title = "Mind & Body"
-        
         // Appearance
         self.navigationController?.navigationBar.tintColor = colour1
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-heavy", size: 23)!]
@@ -371,7 +341,6 @@ class MindBody: UIViewController {
         UITabBar.appearance().barTintColor = colour2
         tabBarController?.tabBar.barStyle = .default
         self.tabBarController?.tabBar.barTintColor = colour2
-        
         // Navigation button
         calendar.tintColor = colour1
         tracking.tintColor = colour1
@@ -390,7 +359,6 @@ class MindBody: UIViewController {
         Warmup.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Warmup.titleLabel?.textAlignment = .center
         Warmup.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-        
         // Workout
         Workout.setTitle(NSLocalizedString("workout", comment: ""), for: UIControlState.normal)
         Workout.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
@@ -400,7 +368,6 @@ class MindBody: UIViewController {
         Workout.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Workout.titleLabel?.textAlignment = .center
         Workout.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-
         // Stretching
         Stretching.setTitle(NSLocalizedString("stretching", comment: ""), for: UIControlState.normal)
         Stretching.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
@@ -410,7 +377,6 @@ class MindBody: UIViewController {
         Stretching.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Stretching.titleLabel?.textAlignment = .center
         Stretching.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-        
         // Cardio
         Cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
         Cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
@@ -420,7 +386,6 @@ class MindBody: UIViewController {
         Cardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Cardio.titleLabel?.textAlignment = .center
         Cardio.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-
         // Yoga
         Yoga.setTitle(NSLocalizedString("yoga", comment: ""), for: UIControlState.normal)
         Yoga.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
@@ -431,7 +396,6 @@ class MindBody: UIViewController {
         Yoga.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Yoga.titleLabel?.textAlignment = .center
         Yoga.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-
         // Meditation
         Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
         Meditation.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
@@ -441,7 +405,6 @@ class MindBody: UIViewController {
         Meditation.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Meditation.titleLabel?.textAlignment = .center
         Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-
 
         // Blur and Vibrancy for Buttons
         let blurE = UIBlurEffect(style: .dark)
@@ -536,8 +499,6 @@ class MindBody: UIViewController {
             //
             stack3Bottom.constant = 15
         }
-        
-        
         viewDidLayoutSubviews()
     }
     

@@ -28,17 +28,14 @@ class Settings: UITableViewController {
     
     // View Will Appear
     override func viewWillAppear(_ animated: Bool) {
-        
         // Set TableView Background Colour
         //
         let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         //
         self.tableView.backgroundView = backView
-        
         //
         tableView.reloadData()
-
         
         // Show Navigation Bar
         //
@@ -49,12 +46,9 @@ class Settings: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-   
-    
-    
     
 //
-// Settings TableView ---------------------------------------------------------------------------------------------------------------------------
+// Settings TableView --------------------------------------------------------------------------------------------------------------------------
 //
     
     
@@ -84,15 +78,14 @@ class Settings: UITableViewController {
         header.textLabel?.textColor = .black
         header.textLabel?.text = header.textLabel?.text?.capitalized
         
-        
+        //
         header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
         // Border
         let border = CALayer()
         border.backgroundColor = UIColor.black.cgColor
         border.frame = CGRect(x: 15, y: header.frame.size.height-1, width: self.view.frame.size.height, height: 1)
-        
-        
+        //
         header.layer.addSublayer(border)
         header.layer.masksToBounds = true
         
@@ -125,15 +118,9 @@ class Settings: UITableViewController {
         
         // Get cell
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        
-        // Gradient label for red-orange background
-        let gradientLabel = UILabel()
-
         // Image View for background images
         let backgroundImageView = UIImageView()
-        
-        
-        
+    
         // Settings sections
         switch indexPath.section {
         // Homescreen Background
@@ -146,10 +133,8 @@ class Settings: UITableViewController {
             backgroundImageView.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
             backgroundImageView.center.y = cell.center.y
             
-        
             // Retreive background index
             let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
-            
             
             // Set image background based on index
             if backgroundIndex < backgroundImageArray.count {
@@ -169,12 +154,10 @@ class Settings: UITableViewController {
                 backgroundImageView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
                 backgroundImageView.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
                 backgroundImageView.center.y = cell.center.y
-                
                 //
                 backgroundImageView.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
                 //
                 }
-            
             
             // Final background image view customization
             backgroundImageView.contentMode = .scaleToFill
@@ -185,7 +168,7 @@ class Settings: UITableViewController {
             if UIScreen.main.nativeBounds.height < 1334 {
                 backgroundImageView.frame = CGRect(x: 15, y: (cell.frame.size.height / 2) - (backgroundImageView.frame.size.height / 2), width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
             }
-                
+            //
             return cell
             
         // Units
@@ -197,7 +180,6 @@ class Settings: UITableViewController {
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
-
             return cell
 
         // Presentation Style
@@ -209,7 +191,6 @@ class Settings: UITableViewController {
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
-            
             return cell
             
         // Reset
@@ -231,7 +212,6 @@ class Settings: UITableViewController {
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
                 return cell
             }
-
         //
         default: return cell
         }
@@ -243,7 +223,7 @@ class Settings: UITableViewController {
         
         let section = indexPath.section
         let cell = tableView.cellForRow(at: indexPath)
-        
+        //
         switch section {
         
         // Homescreen Image
@@ -287,7 +267,6 @@ class Settings: UITableViewController {
             // Reset Walkthrough
             if indexPath.row == 0 {
                 
-                
                 // Walkthrough
                     // Mind Body
                         // Home Screen
@@ -318,14 +297,12 @@ class Settings: UITableViewController {
                         // Information
                         UserDefaults.standard.set(false, forKey: "mindBodyWalkthroughI")
                 
-                
                     //Profile
                     UserDefaults.standard.set(false, forKey: "profileWalkthrough")
                     // Information
                     UserDefaults.standard.set(false, forKey: "informationWalkthrough")
                     //
                     UserDefaults.standard.set(false, forKey: "informationWalkthroughm")
-                
                 
                 //
                 // Alert View indicating need for app reset
@@ -339,7 +316,6 @@ class Settings: UITableViewController {
                 paragraphStyle.alignment = .justified
                 alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
 
-                
                 // Present alert
                 self.present(alert, animated: true, completion: nil)
                 
@@ -362,7 +338,6 @@ class Settings: UITableViewController {
             alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
            
                 
-                
             // Reset app action
                 let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
                     UIAlertAction in
@@ -382,32 +357,24 @@ class Settings: UITableViewController {
                     alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
                     
                     self.present(alert, animated: true, completion: nil)
-
-                    
                 }
             // Cancel reset action
                 let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
                     UIAlertAction in
-
                 }
-                
             // Add Actions
             alert.addAction(okAction)
             alert.addAction(cancelAction)
                
             // Present Alert
             self.present(alert, animated: true, completion: nil)
-            
                 tableView.deselectRow(at: indexPath, animated: true)
             }
-            
         //
         default:
             break
-        
         }
     }
-    
     
     
 //   
@@ -425,4 +392,5 @@ class Settings: UITableViewController {
     
     
     
+//
 }
