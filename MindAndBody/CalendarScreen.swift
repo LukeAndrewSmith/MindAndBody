@@ -10,20 +10,15 @@ import Foundation
 import UIKit
 
 
-
 //
 // Custom Calendar Cell -----------------------------------------------------------------------------------------------------------------------
 //
 class CalendarCell: UICollectionViewCell {
-    
+    //
     @IBOutlet weak var cellBackgroundView: UIView!
-    
     @IBOutlet weak var dayLabel: UILabel!
-    
     @IBOutlet weak var activitiesLabel: UILabel!
-    
 }
-
 
 
 //
@@ -31,16 +26,12 @@ class CalendarCell: UICollectionViewCell {
 //
 class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    
-    
-    
     // Days array
     let dayArray: [String] =
         ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",]
     
     // Selected day
     var selectedDay = Int()
-    
     
     // Routine Array
     let routineArray =
@@ -68,28 +59,22 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             ]
     ]
     
-    
     // Outlets
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     // Collection View
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
-    
     // Colours
     let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
-
     
-    
-    //
-    // View Did Load
-    //
+//
+// View did load --------------------------------------------------------------------------------------------------------
+//
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // Walkthrough
         //
@@ -101,8 +86,6 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughC")
         }
         
-        
-        //
         // Navigation Bar
         //
         self.navigationController?.navigationBar.barTintColor = colour2
@@ -113,61 +96,47 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         // Navigation Title
         navigationBar.title = NSLocalizedString("calendar", comment: "")
         
-        
-        
-        
         // View
         view.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
         
-        
-        
-        
-        //
         // Collection View
         //
         collectionView?.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-        
     }
     
     
-    
-    
-    // Collection View
-    //
+//
+// Collection View --------------------------------------------------------------------------------------------------------
+//
+    // Number of sections
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    
+    // Number of items
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 7
     }
     
-    
-    
+    // Cell for row
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        
+        //
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
-        
-        
         
         //
         cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-        
         
         // Backround View
         //
         let screenHeight = UIScreen.main.bounds.height - (navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height
         let screenWidth = UIScreen.main.bounds.width
         let ratio = screenHeight / screenWidth
-        
+        //
         let width = cell.frame.size.width - 40
         let height = width * ratio
         //
         if indexPath.item % 2 == 0 {
             cell.cellBackgroundView.frame = CGRect(x: 25, y: 15, width: width, height: height)
-            
         } else {
             cell.cellBackgroundView.frame = CGRect(x: 15, y: 15, width: width, height: height)
         }
@@ -175,8 +144,6 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.cellBackgroundView.layer.cornerRadius = 5
         cell.cellBackgroundView.layer.masksToBounds = true
         cell.cellBackgroundView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        
-        
         // Day Title
         //
         cell.dayLabel.frame = CGRect(x: 0, y: 0, width: cell.cellBackgroundView.frame.size.width, height: 36.75)
@@ -189,78 +156,59 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         //
         cell.dayLabel.text = NSLocalizedString(dayArray[indexPath.item], comment: "")
         
-        
-        
-        
-        
         // Activities Label
         //
         cell.activitiesLabel.frame = CGRect(x: 10, y: 36.75, width: cell.cellBackgroundView.frame.size.width - 20, height: cell.cellBackgroundView.frame.size.height - 36.75)
         cell.activitiesLabel.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        
         //
         cell.activitiesLabel.numberOfLines = 0
         //
         cell.activitiesLabel.textColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
         cell.activitiesLabel.font = UIFont(name: "SFUIDisplay-thin", size: 19)
         cell.activitiesLabel.text = "• Yoga\n• Meditation\n\n• Warmup\n• Workout\n• Stretching\n• Workout\n• Stretching"
-        
-        
-       
+        //
         return cell
     }
     
-    
-    
-    
-    
+    // Did select
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
-        
         // Selected Day
         //
         selectedDay = indexPath.item
-        
-        
         // Segue to Detail
         performSegue(withIdentifier: "calendarDetail", sender: (Any).self)
-        
-        
         // Deselect
         collectionView.deselectItem(at: indexPath, animated: false)
     }
     
     
-    
+//
+// Prepare for segue -------------------------------------------------------------------------------------------
+//
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        
+        //
         let destinationVC = segue.destination as! CalendarScreenDetail
-        
+        //
         destinationVC.selectedDay = selectedDay
-        
-        
-        
-        
         // Remove Back Button Text
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
-        
     }
     
     
-    
+//
+// Dismiss --------------------------------------------------------------------------------------------------------
+//
     @IBAction func checkMarkAction(_ sender: Any) {
         //
         self.dismiss(animated: true)
     }
     
     
-    
-//---------------------------------------------------------------------------------------------------------------
-    
-    
+//
+// Walkthrough --------------------------------------------------------------------------------------------------------
+//
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()

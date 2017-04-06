@@ -411,49 +411,37 @@ class MindBody: UIViewController {
         blur.effect = blurE
         let vibrancyE = UIVibrancyEffect(blurEffect: blurE)
         blur.effect = vibrancyE
-        blur.frame = Warmup.bounds
         blur.isUserInteractionEnabled = false
-        Warmup.insertSubview(blur, belowSubview: Warmup.titleLabel!)
         //
         let blurE1 = UIBlurEffect(style: .dark)
         blur1.effect = blurE1
         let vibrancyE1 = UIVibrancyEffect(blurEffect: blurE1)
         blur1.effect = vibrancyE1
-        blur1.frame = Workout.bounds
         blur1.isUserInteractionEnabled = false
-        Workout.insertSubview(blur1, belowSubview: Workout.titleLabel!)
         //
         let blurE2 = UIBlurEffect(style: .dark)
         blur2.effect = blurE2
         let vibrancyE2 = UIVibrancyEffect(blurEffect: blurE2)
         blur2.effect = vibrancyE2
-        blur2.frame = Cardio.bounds
         blur2.isUserInteractionEnabled = false
-        Cardio.insertSubview(blur2, belowSubview: Cardio.titleLabel!)
         //
         let blurE3 = UIBlurEffect(style: .dark)
         blur3.effect = blurE3
         let vibrancyE3 = UIVibrancyEffect(blurEffect: blurE3)
         blur3.effect = vibrancyE3
-        blur3.frame = Stretching.bounds
         blur3.isUserInteractionEnabled = false
-        Stretching.insertSubview(blur3, belowSubview: Stretching.titleLabel!)
         //
         let blurE4 = UIBlurEffect(style: .dark)
         blur4.effect = blurE4
         let vibrancyE4 = UIVibrancyEffect(blurEffect: blurE4)
         blur4.effect = vibrancyE4
-        blur4.frame = Yoga.bounds
         blur4.isUserInteractionEnabled = false
-        Yoga.insertSubview(blur4, belowSubview: Yoga.titleLabel!)
         //
         let blurE5 = UIBlurEffect(style: .dark)
         blur5.effect = blurE5
         let vibrancyE5 = UIVibrancyEffect(blurEffect: blurE5)
         blur5.effect = vibrancyE5
-        blur5.frame = Meditation.bounds
         blur5.isUserInteractionEnabled = false
-        Meditation.insertSubview(blur5, belowSubview: Meditation.titleLabel!)
         
         
         // Mind & Body section titles
@@ -513,21 +501,33 @@ class MindBody: UIViewController {
         //
         Warmup.layer.cornerRadius = stackView1.frame.size.height / 2
         Warmup.layer.masksToBounds = true
+        blur.frame = Warmup.bounds
+        Warmup.insertSubview(blur, belowSubview: Warmup.titleLabel!)
         //
         Workout.layer.cornerRadius = stackView1.frame.size.height / 2
         Workout.layer.masksToBounds = true
+        blur1.frame = Workout.bounds
+        Workout.insertSubview(blur1, belowSubview: Workout.titleLabel!)
         //
         Stretching.layer.cornerRadius = stackView2.frame.size.height / 2
         Stretching.layer.masksToBounds = true
+        blur2.frame = Cardio.bounds
+        Cardio.insertSubview(blur2, belowSubview: Cardio.titleLabel!)
         //
         Cardio.layer.cornerRadius = stackView2.frame.size.height / 2
         Cardio.layer.masksToBounds = true
+        blur3.frame = Stretching.bounds
+        Stretching.insertSubview(blur3, belowSubview: Stretching.titleLabel!)
         //
         Yoga.layer.cornerRadius = (stackView3.frame.size.height - 20) / 4
         Yoga.layer.masksToBounds = true
+        blur4.frame = Yoga.bounds
+        Yoga.insertSubview(blur4, belowSubview: Yoga.titleLabel!)
         //
         Meditation.layer.cornerRadius = (stackView3.frame.size.height - 20) / 4
         Meditation.layer.masksToBounds = true
+        blur5.frame = Meditation.bounds
+        Meditation.insertSubview(blur5, belowSubview: Meditation.titleLabel!)
 
         // Blur Positioning and frame
         blur6.frame = body.bounds

@@ -9,22 +9,19 @@
 import Foundation
 import UIKit
 
+
+//
+// Warmup Choice Class -------------------------------------------------------------------------------------------------------------
+//
 class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    
+    // Selected Warmup Type
     //
-    // Warmup Type
-    //
+    var warmupType = Int()
     
-        // Selected Warmup Type
-        //
-        var warmupType = Int()
-    
-    
-    
-// Arrays -------------------------------------------------------------------------------------------------------------------------------------------------------
-    
-    
+//
+// Arrays ------------------------------------------------------------------------------------------------------------------------------
+//
     
     // Changeable Arrays to be used
     //
@@ -48,7 +45,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         // Empty Array
         var emptyArray: [[Int]] = [[]]
     
-    
     // Screen Arrays
     // Sets Array
     var setsArrayF: [[Int]] = [[]]
@@ -70,9 +66,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     var explanationArrayF: [[String]] = [[]]
     var explanationArray: [String] = []
     
-    
-    
-    
     // Static Arrays
     // Initial Custom Preset Texts
     var presetTexts: [String] = ["", "", ""]
@@ -83,7 +76,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
          "upperBody",
          "lowerBody",
          "cardio"]
-    
     
     // Custom Preset Keys
     // Preset Number
@@ -107,13 +99,11 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
 //
-// Warmup Type Arrays -------------------------------------------------------------------------------------------------------------------------------------------------------
+// Warmup Type Arrays --------------------------------------------------------------------------------------------------------------
 //
-    
-    
-    //
-    // Full -----------------------------------------------------------------------------------------------------------------------------------------------
-    //
+//
+// Full ----------------------------------------------------------------------------------------------------------------------------
+//
     
     // Warmup Full Movements Array
     var warmupFullArray: [[String]] =
@@ -180,7 +170,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              "pullUp"]
         ]
     
-    
     // Table View Section Title Array
     var tableViewSectionArrayFull: [String] =
         [
@@ -194,8 +183,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             "accessory"
         ]
     
-        // Custom Preset Full
-        //
+    // Custom Preset Full
     let emptyArrayFull: [[Int]] =
                 [
                     // Mandatory
@@ -411,15 +399,15 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             // General Mobility
             [#imageLiteral(resourceName: "Hamstring and Lower Back"),
              #imageLiteral(resourceName: "Hip Area"),
-    #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
              #imageLiteral(resourceName: "Adductor"),
              #imageLiteral(resourceName: "Hamstring and Lower Back"),
              #imageLiteral(resourceName: "Piriformis"),
              #imageLiteral(resourceName: "Adductor"),
-        #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
              #imageLiteral(resourceName: "Hamstring and Glute"),
-        #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-        #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+            #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
              #imageLiteral(resourceName: "Squat"),
              #imageLiteral(resourceName: "Squat")],
             // Accessory
@@ -493,7 +481,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              "pushUpE",
              "pullUpE"]
         ]
-    
     
     // Presets Arrys
     //
@@ -641,12 +628,9 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     ]
 
     
-    
-    //
-    // Upper -----------------------------------------------------------------------------------------------------------------------------------------------
-    //
-    
-    
+//
+// Upper ----------------------------------------------------------------------------------------------------------------------------
+//
     // Warmup Upper Array
     var warmupUpperArray: [[String]] =
         [
@@ -692,7 +676,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              "pullUp"]
         ]
     
-    
     // Table View Section Title Array
     var tableViewSectionArrayUpper: [String] =
         [
@@ -706,7 +689,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         ]
     
     // Custom Presets Upper
-    //
     let emptyArrayUpper: [[Int]] =
                 [
                     // Mandatory
@@ -777,9 +759,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 ]
             ]
     
-    
     // Screen Arrays
-    //
     var setsArrayUpper: [[Int]] =
         [
             // Mandatory
@@ -937,13 +917,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              "pullUpE"]
         ]
     
-    
-    
-    
-    
-    
-    // Upper Presets Arrays
-    //
     // Picker View Array
     var pickerViewArrayUpper: [String] =
         [
@@ -1074,11 +1047,9 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     ]
     
     
-    //
-    // Lower -----------------------------------------------------------------------------------------------------------------------------------------------
-    //
-
-    
+//
+// Lower --------------------------------------------------------------------------------------------------------------------------
+//
     // Warmup Lower Array
     var warmupLowerArray: [[String]] =
         [
@@ -1127,7 +1098,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              "calveStretch"]
         ]
     
-    
     // Table View Section Title Array
     var tableViewSectionArrayLower: [String] =
         [
@@ -1140,7 +1110,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         ]
     
     // Custom Presets Lower
-    //
     let emptyArrayLower: [[Int]] =
                 [
                     // Mandatory
@@ -1203,10 +1172,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 ]
             ]
     
-    
-    
     // Screen Arrays
-    //
     var setsArrayLower: [[Int]] =
         [
             // Mandatory
@@ -1370,9 +1336,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              "calveStretchE"]
         ]
     
-    
-    // Presets Sessions Arrays
-    //
     // Picker View Array
     var pickerViewArrayLower: [String] =
         [
@@ -1489,10 +1452,9 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         ]
     
     
-    
-    //
-    // Cardio ----------------------------------------------------------------------------------------------------------------------------------------
-    //
+//
+// Cardio ----------------------------------------------------------------------------------------------------------------------------
+//
     // Warmup Cardio Array
     var warmupCardioArray: [[String]] =
         [
@@ -1546,7 +1508,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              "calveStretch"]
         ]
     
-    
     // Table View Section Title Array
     var tableViewSectionArrayCardio: [String] =
         [
@@ -1559,7 +1520,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         ]
     
     // Warmup Presets Cardio
-    //
     let emptyArrayCardio: [[Int]] =
                 [
                     // Joint Rotations
@@ -1623,7 +1583,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             ]
     
     // Screen Arrays
-    //
     var setsArrayCardio: [[Int]] =
         [
             // Joint Rotations
@@ -1803,9 +1762,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
              "calveStretchE"]
     ]
     
-    
-    // Presets Arrays
-    //
     // Picker View Array
     var pickerViewArrayCardio: [String] =
         [
@@ -1923,192 +1879,132 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         ]
     
     
-    
-    
-    
-    
-    
-    
-    // Set Arrays Functino
+    // Set Arrays Function
     func setArrays() {
-        
+        //
         switch warmupType {
-            
+        //
         case 0:
             // Choice Screen Arrays
-            //
                 warmupMovementsArray = warmupFullArray
                 warmupSelectedArray = presetsArraysFull[0]
                 pickerViewArray = pickerViewArrayFull
                 tableViewSectionArray = tableViewSectionArrayFull
                 presetsArrays = presetsArraysFull
                 emptyArray = emptyArrayFull
-            
             // Screen Arrays
-            //
                 setsArrayF = setsArrayFull
                 repsArrayF = repsArrayFull
                 demonstrationArrayF = demonstrationArrayFull
                 targetAreaArrayF = targetAreaArrayFull
                 explanationArrayF = explanationArrayFull
-        
         //
         case 1:
             // Choice Screen Arrays
-            //
                 warmupMovementsArray = warmupUpperArray
                 warmupSelectedArray = presetsArraysUpper[0]
                 pickerViewArray = pickerViewArrayUpper
                 tableViewSectionArray = tableViewSectionArrayUpper
                 presetsArrays = presetsArraysUpper
                 emptyArray = emptyArrayUpper
-            
             // Screen Arrays
-            //
                 setsArrayF = setsArrayUpper
                 repsArrayF = repsArrayUpper
                 demonstrationArrayF = demonstrationArrayUpper
                 targetAreaArrayF = targetAreaArrayUpper
                 explanationArrayF = explanationArrayUpper
-            
         //
         case 2:
             // Choice Screen Arrays
-            //
                 warmupMovementsArray = warmupLowerArray
                 warmupSelectedArray = presetsArraysLower[0]
                 pickerViewArray = pickerViewArrayLower
                 tableViewSectionArray = tableViewSectionArrayLower
                 presetsArrays = presetsArraysLower
                 emptyArray = emptyArrayLower
-            
             // Screen Arrays
-            //
                 setsArrayF = setsArrayLower
                 repsArrayF = repsArrayLower
                 demonstrationArrayF = demonstrationArrayLower
                 targetAreaArrayF = targetAreaArrayLower
                 explanationArrayF = explanationArrayLower
-            
         //
         case 3:
             // Choice Screen Arrays
-            //
                 warmupMovementsArray = warmupCardioArray
                 warmupSelectedArray = presetsArraysCardio[0]
                 pickerViewArray = pickerViewArrayCardio
                 tableViewSectionArray = tableViewSectionArrayCardio
                 presetsArrays = presetsArraysCardio
                 emptyArray = emptyArrayCardio
-            
             // Screen Arrays
-            //
                 setsArrayF = setsArrayCardio
                 repsArrayF = repsArrayCardio
                 demonstrationArrayF = demonstrationArrayCardio
                 targetAreaArrayF = targetAreaArrayCardio
                 explanationArrayF = explanationArrayCardio
-            
         //
         default: break
-            
-            
-            
         }
-        
-        
     }
     
     
-    
-    
-    
-    
-    
-    //
-    // Outlets
-    //
-    
+//
+// Outlets ------------------------------------------------------------------------------------------------------------------------------
+//
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     // Begin Button
     @IBOutlet weak var beginButton: UIButton!
     
-    
     // Table View
     @IBOutlet weak var tableView: UITableView!
     
-    
     // Information View
-    @IBOutlet weak var informationView: UIScrollView!
-    
+    let informationView = UIScrollView()
     // Information Title Label
-    @IBOutlet weak var informationTitle: UILabel!
+    let informationTitle = UILabel()
     
     // PickerViews
     @IBOutlet weak var pickerView: UIPickerView!
     
-    
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
-    
-    
-    // Titles
-    @IBOutlet weak var presetTitle: UILabel!
-    
-    @IBOutlet weak var tableTitle: UILabel!
-    
     
     // Colours
     let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
-    
     // Add Preset
     @IBOutlet weak var addPreset: UIButton!
     @IBOutlet weak var removePreset: UIButton!
     
-    
     let emptyString = ""
-    
-    
-    
-    
-    
-    
     
     
     // Flash Screen
     func flashScreen() {
-        
+        //
         let flash = UIView()
-        
+        //
         flash.frame = CGRect(x: 0, y: pickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
         flash.backgroundColor = colour1
         self.view.alpha = 1
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
-        
-        
+        //
         UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
-            
             flash.alpha = 0
-            
         }, completion: {(finished: Bool) -> Void in
             flash.removeFromSuperview()
         })
-        
     }
     
     
-    
-    
-    
-    //
-    // ViewDidLoad
-    //
-    
+//
+// View did load ------------------------------------------------------------------------------------------------------------------------------
+//
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -2116,9 +2012,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         setArrays()
         
-        
-        
-        // Walkthrough
         // Walkthrough
         if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough2") == false {
             let delayInSeconds = 0.5
@@ -2128,83 +2021,45 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2")
         }
         
-        
-        
         // Colour
         self.view.applyGradient(colours: [colour1, colour1])
         questionMark.tintColor = colour1
         
-        
-        
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString(navigationTitles[warmupType], comment: ""))
         
-        
-        
-        
-        // Picker View Test
+        // Picker View
         pickerView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        
-        
-        
-        
-        
-        
-        
         
         // Plus Button Colour
         let origImage1 = UIImage(named: "Plus")
         let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         addPreset.setImage(tintedImage1, for: .normal)
-        
         //Image Tint
-        //addPreset.tintColor = colour1
         addPreset.tintColor = colour2
-        
-        
         
         // Minus Button Colour
         let origImage2 = UIImage(named: "Minus")
         let tintedImage2 = origImage2?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         removePreset.setImage(tintedImage2, for: .normal)
-        
         //Image Tint
-        //removePreset.tintColor = colour1
         removePreset.tintColor = colour2
-        
-        
-        
-        
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
         beginButton.setTitleColor(colour2, for: .normal)
         
         
-        
-        
-        
-        
-        
         // Information
         // Scroll View Frame
         self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
-        
-        
-        view.bringSubview(toFront: informationView)
-        
-        
+        informationView.backgroundColor = colour1
         // Information Text
         //
         // Information Text Frame
         let informationText = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
-        
-        
-        
-        
-        
         // Information Text Frame
         self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
         informationTitle.text = (NSLocalizedString("information", comment: ""))
@@ -2212,48 +2067,30 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         informationTitle.textColor = colour1
         informationTitle.backgroundColor = colour2
-        
-        
+        //
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
         downSwipe.direction = UISwipeGestureRecognizerDirection.down
         informationTitle.addGestureRecognizer(downSwipe)
         informationTitle.isUserInteractionEnabled = true
-        
-        
-        
-        self.view.addSubview(informationTitle)
-        
-        
-        
         // Information Text and Attributes
         //
         // String
         let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
-        
         // Range of String
         let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
-        
-        
         // Range of Titles
         let titleRangeString = (NSLocalizedString("movements", comment: ""))
         let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
-        
-        
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.6
         lineSpacing.hyphenationFactor = 1
-        
-        
         // Add Attributes
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange1)
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
-        
-        
-        
         // Final Text Editing
         informationText.attributedText = informationLabelText
         informationText.textAlignment = .justified
@@ -2261,73 +2098,49 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         informationText.numberOfLines = 0
         informationText.sizeToFit()
         self.informationView.addSubview(informationText)
-        
-        
+        //
         self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
-        
-        
-        
-        
-        
-        
-        
         // TableView Background
         if String(describing: colour2) == String(describing: UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)) {
-            
+            //
             let tableViewBackground = UIView()
-            
+            //
             tableViewBackground.backgroundColor = colour2
             tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
-            
+            //
             tableView.backgroundView = tableViewBackground
-            
-
         }
-        
-        
-        
-        
-        
         
         //
         // Preset Warmups
         //
         let defaults = UserDefaults.standard
-        
         // Full Body
         defaults.register(defaults: ["warmupFullPresets" : warmupFullPresets])
         defaults.register(defaults: ["warmupFullPresetTexts" : presetTexts])
         defaults.register(defaults: ["warmupFullPresetNumber" : 0])
-        
         // Upper Body
         defaults.register(defaults: ["warmupUpperPresets" : warmupUpperPresets])
         defaults.register(defaults: ["warmupUpperPresetTexts" : presetTexts])
         defaults.register(defaults: ["warmupUpperPresetNumber" : 0])
-        
-        
         // Lower Body
         defaults.register(defaults: ["warmupLowerPresets" : warmupLowerPresets])
         defaults.register(defaults: ["warmupLowerPresetTexts" : presetTexts])
         defaults.register(defaults: ["warmupLowerPresetNumber" : 0])
-        
-        
         // Cardio
         defaults.register(defaults: ["warmupCardioPresets" : warmupCardioPresets])
         defaults.register(defaults: ["warmupCardioPresetTexts" : presetTexts])
         defaults.register(defaults: ["warmupCardioPresetNumber" : 0])
-        
-        
-        
+        //
         defaults.synchronize()
-        
-        
         
         //
         beginButtonEnabled()
-        
     }
-    
-    
+   
+//
+// Begin button check if should be enabled func
+//
     // Button Enabled
     func beginButtonEnabled() {
         // Begin Button
@@ -2339,31 +2152,22 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 beginButton.isEnabled = false
             }
         }
-        
     }
     
     
-    
-    
-    
-    
-    
-    
-    // Set Personalized Preset
-    //
+//
+// Custom Warmups --------------------------------------------------------------------------------------------------------------
+//
+    // Add
     @IBAction func addPreset(_ sender: Any) {
-        
+        //
         let defaults = UserDefaults.standard
         let number = defaults.integer(forKey: warmupPresetNumbers[warmupType])
         var warmupPreset = defaults.object(forKey: warmupPresets[warmupType]) as! [Array<Array<Int>>]
         var presetTextArray = defaults.object(forKey: warmupPresetTexts[warmupType]) as! [String]
         
-        
         // Set Preset
         if number < 3 {
-            
-            
-            
             // Alert and Functions
             //
             let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
@@ -2371,145 +2175,98 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
             alert.view.tintColor = colour2
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-            
             //2. Add the text field. You can configure it however you need.
             alert.addTextField { (textField) in
                 textField.text = " "
                 textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
             }
-            
             // 3. Get the value from the text field, and perform actions when OK clicked.
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                //
                 let textField = alert?.textFields![0]
-                
-                
-                
-                
                 // Update Preset Text Arrays
                 presetTextArray[number] = (textField?.text)!
                 defaults.set(presetTextArray, forKey: self.warmupPresetTexts[self.warmupType])
                 defaults.synchronize()
-                
-                
-                
-                
-                
                 // Set new Preset Array
                 //
                 warmupPreset[number] = self.warmupSelectedArray
                 defaults.set(warmupPreset, forKey: self.warmupPresets[self.warmupType])
-                
+                //
                 defaults.synchronize()
-                
-                
                 // Increase Preset Counter
                 //
                 let newNumber = number + 1
-                
+                //
                 defaults.set(newNumber, forKey: self.warmupPresetNumbers[self.warmupType])
                 defaults.synchronize()
-                
-                
-                
                 // Flash Screen
                 self.flashScreen()
                 self.pickerView.reloadAllComponents()
                 self.tableView.reloadData()
                 
             }))
-            
             // 4. Present the alert.
             self.present(alert, animated: true, completion: nil)
-            
-            
-            
-            
-            
-            
         } else {
-            
         }
     }
-    
-    
-    
-    
-    // Remove Personalized Preset
+
+    // Remove
     @IBAction func removePreset(_ sender: Any) {
-        
+        //
         let defaults = UserDefaults.standard
         let number = defaults.integer(forKey: warmupPresetNumbers[warmupType])
         var warmupPreset = defaults.object(forKey: warmupPresets[warmupType]) as! [Array<Array<Int>>]
         var presetTextArray = defaults.object(forKey: warmupPresetTexts[warmupType]) as! [String]
-        
-        
+        //
         let selectedRow = pickerView.selectedRow(inComponent: 0)
         let index = (selectedRow) - (pickerViewArray.count + 1)
-        
-        
+        //
         if index > -1 {
-            
+            //
             warmupPreset.remove(at: index)
             warmupPreset.append(emptyArray)
-            
             defaults.set(warmupPreset, forKey: warmupPresets[warmupType])
-            
-            
+            //
             presetTextArray.remove(at: index)
             presetTextArray.append(emptyString)
-            
             defaults.set(presetTextArray, forKey: warmupPresetTexts[warmupType])
-            
-            
+            //
             if number > 0 {
                 let newNumber = number - 1
                 defaults.set(newNumber, forKey: warmupPresetNumbers[warmupType])
             } else {
-                
             }
-            
-            
-            
-            
+            //
             defaults.synchronize()
-            
-            
-            
-            
             // Flash Screen
             self.flashScreen()
             self.pickerView.reloadAllComponents()
             self.tableView.reloadData()
-            
         } else {
-            
         }
     }
     
     
-    
-    
-    
-    
-    // Picker Views
-    //
-    
+//
+// Picker View ------------------------------------------------------------------------------------------------------------------------------
+//
+    // Number of components
     func numberOfComponents(in: UIPickerView) -> Int {
         return 1
     }
-    
-    
-    
-    
+   
+    // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         return pickerViewArray.count + 4
         
     }
     
-    
+    // View for row
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
+        //
         if row < pickerViewArray.count {
             let rowLabel = UILabel()
             let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
@@ -2517,16 +2274,14 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
-            
+        //
         } else if row == pickerViewArray.count {
-            
             let line = UILabel()
             line.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width * (2/3), height: 1)
             line.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             line.isEnabled = false
             return line
-            
-            
+        //
         } else if row == pickerViewArray.count + 1 {
             let rowLabel = UILabel()
             let titleDataArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
@@ -2535,9 +2290,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
-            
-            
-            
+        //
         } else if row == pickerViewArray.count + 2 {
             let rowLabel = UILabel()
             let titleDataArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
@@ -2546,9 +2299,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
-            
-            
-            
+        //
         } else if row == pickerViewArray.count + 3 {
             let rowLabel = UILabel()
             let titleDataArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
@@ -2557,65 +2308,54 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
-            
         }
-        
         return UIView()
-        
     }
     
+    // Row height
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        
         return 30
     }
     
+    // Did select
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+        //
         let defaults = UserDefaults.standard
-        
+        //
         switch row {
-            
+        //
         case 0:
             warmupSelectedArray = presetsArrays[row]
-            
             self.tableView.reloadData()
             flashScreen()
         //
         case 1:
             warmupSelectedArray = presetsArrays[row]
-            
             self.tableView.reloadData()
             flashScreen()
         //
         case 2:
             warmupSelectedArray = presetsArrays[row]
-            
             self.tableView.reloadData()
             flashScreen()
         //
         case 3:
             warmupSelectedArray = presetsArrays[row]
-                
-            
             self.tableView.reloadData()
             flashScreen()
         //
         case 4:
             warmupSelectedArray = presetsArrays[row]
-                
-            
             self.tableView.reloadData()
             flashScreen()
         //
         case 5:
             warmupSelectedArray = presetsArrays[row]
-            
             self.tableView.reloadData()
             flashScreen()
         //
         case 6:
             warmupSelectedArray = presetsArrays[row]
-            
             self.tableView.reloadData()
             flashScreen()
         //
@@ -2626,8 +2366,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             let fullArray = defaults.object(forKey: warmupPresets[warmupType]) as! [Array<Array<Int>>]
             let array = fullArray[0]
             warmupSelectedArray = array
-            
-            
             self.tableView.reloadData()
             flashScreen()
         //
@@ -2635,8 +2373,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             let fullArray = defaults.object(forKey: warmupPresets[warmupType]) as! [Array<Array<Int>>]
             let array = fullArray[1]
             warmupSelectedArray = array
-            
-            
             self.tableView.reloadData()
             flashScreen()
         //
@@ -2644,65 +2380,48 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             let fullArray = defaults.object(forKey: warmupPresets[warmupType]) as! [Array<Array<Int>>]
             let array = fullArray[2]
             warmupSelectedArray = array
-            
-            
             self.tableView.reloadData()
             flashScreen()
         //
         default:
             break
-            
         }
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    // Table View
-    
+//
+// TableView -----------------------------------------------------------------------------------------------------------------------
+//
+    // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
         return warmupMovementsArray.count
     }
     
+    // Title for header
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return NSLocalizedString(tableViewSectionArray[section], comment: "")
     }
     
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
-        
+    // Will display header
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
         header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         header.contentView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-        //colour2
         header.contentView.tintColor = colour1
-        //
-        
     }
     
-    
-    
+    // Number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return warmupMovementsArray[section].count
     }
     
-    
-    
+    // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        //
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        
+        //
         cell.textLabel?.text = NSLocalizedString(warmupMovementsArray[indexPath.section][indexPath.row], comment: "")
-        
-        
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.textLabel?.textAlignment = .left
@@ -2710,8 +2429,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.textLabel?.textColor = .black
         cell.tintColor = .black
         //
-        
-        
         if warmupSelectedArray[indexPath.section][indexPath.row] == 1 {
             cell.layer.borderColor = colour2.cgColor
             cell.layer.borderWidth = 2
@@ -2720,43 +2437,29 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         } else {
             cell.accessoryType = .none
         }
-        
-        
         // Cell Image
         cell.imageView?.image = #imageLiteral(resourceName: "Test")
         cell.imageView?.isUserInteractionEnabled = true
-        
         // Image Tap
         let imageTap = UITapGestureRecognizer()
         imageTap.numberOfTapsRequired = 1
         imageTap.addTarget(self, action: #selector(handleTap))
         cell.imageView?.addGestureRecognizer(imageTap)
-        
-
-        
-        
+        //
         return cell
-        
-        
     }
     
-    
-    
-    
+    // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 72
-        
     }
     
-    
+    // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        //
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        
-        
+        //
         if cell?.accessoryType == .checkmark {
             cell?.accessoryType = .none
             warmupSelectedArray[indexPath.section][indexPath.row] = 0
@@ -2766,112 +2469,91 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             warmupSelectedArray[indexPath.section][indexPath.row] = 1
             tableView.reloadData()
         }
-        
+        //
         beginButtonEnabled()
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+//
+// Information Actions ---------------------------------------------------------------------------------------------------------------------------
+//
     // QuestionMark Button Action
     @IBAction func informationButtonAction(_ sender: Any) {
-        
-        // Information Down
+        // Slide information down
         if self.informationView.frame.minY < self.view.frame.maxY {
-            
+            // Animate slide
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
                 self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                
-            }, completion: nil)
-            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
+                
             }, completion: nil)
+            //
             self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-            
-            
-            // Buttons
+            // Remove after animation
+            let delayInSeconds = 0.4
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.informationView.removeFromSuperview()
+                self.informationTitle.removeFromSuperview()
+            }
+            // Navigation buttons
             questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
             navigationBar.setHidesBackButton(false, animated: true)
             
-            
-        // Information Up
+            // Slide information up
         } else {
-            
-            
+            //
+            view.addSubview(informationView)
+            view.addSubview(informationTitle)
+            //
+            view.bringSubview(toFront: informationView)
+            view.bringSubview(toFront: informationTitle)
+            // Animate slide
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
                 self.informationView.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-                
-            }, completion: nil)
-            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-                
             }, completion: nil)
+            //
             self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-            
-            
-            // Buttons
+            // Navigation buttons
             questionMark.image = #imageLiteral(resourceName: "Down")
             navigationBar.setHidesBackButton(true, animated: true)
-
-            
         }
-        
     }
-    
-    
-    
     
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
+        // Information Swipe Down
         if (extraSwipe.direction == .down){
-            
+            // Animate slide
             if self.informationView.frame.minY < self.view.frame.maxY {
                 UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    
                     self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                    
-                }, completion: nil)
-                UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    
                     self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
                 }, completion: nil)
-              
-                
-                // Buttons
+                // Navigation buttons
                 questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
                 navigationBar.setHidesBackButton(false, animated: true)
-
             }
         }
     }
     
+    
+    
+//
+// Expand image actions ----------------------------------------------------------------------------------------------------------------
+//
     // Handle Tap
-    //
     let expandedImage = UIImageView()
     let backgroundViewImage = UIButton()
     //
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
-        
-        
         // Get Image
         let sender = extraTap.view as! UIImageView
         let image = sender.image
         // Get Image
         // let index = demonstrationImage.indexWhere
-        
         let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
 
-        
         // Expanded Image
         //
         expandedImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height/2)
@@ -2885,24 +2567,17 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         //expandedImage.image = demonstrationArrayF[section][row]
         expandedImage.image = #imageLiteral(resourceName: "Test 2")
         
-        
-        
         // Background View
         //
         backgroundViewImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height)
         backgroundViewImage.backgroundColor = .black
         backgroundViewImage.alpha = 0
-        
         backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
-        
         //
         self.questionMark.isEnabled = true
         self.navigationItem.setHidesBackButton(true, animated: true)
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
             UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
-
-        
-        
         //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.expandedImage.center.y = (height/2) * 1.5
@@ -2910,7 +2585,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         }, completion: nil)
     }
     
-    
+    // Retract image
     @IBAction func retractImage(_ sender: Any) {
         //
         let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
@@ -2918,9 +2593,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.expandedImage.center.y = (height/2) * 2.5
             self.backgroundViewImage.alpha = 0
-            
         }, completion: nil)
-        
         //
         let delayInSeconds = 0.4
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -2933,72 +2606,47 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
-    
-
-    
-    
-    
-    
-    
+//
+// Begin Button ---------------------------------------------------------------------------------------------------------------------------
+//
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
-        
+        //
         if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
-            
             performSegue(withIdentifier: "warmupSessionSegue1", sender: nil)
-            
         } else {
-            
             performSegue(withIdentifier: "warmupSessionSegue2", sender: nil)
         }
-        
-        
         // Return background to homescreen
         let delayInSeconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            
             _ = self.navigationController?.popToRootViewController(animated: false)
-            
         }
     }
     
     
-    
-    
+//
+// Information Actions ---------------------------------------------------------------------------------------------------------------------------
+//
     // Pass Array to next ViewController
-    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "warmupSessionSegue1") {
-            
-            
+            //
             let destinationNC = segue.destination as! UINavigationController
-            
             let destinationVC = destinationNC.viewControllers.first as! SessionScreen
             
-           
-
             // Compress Arrays
-            
             warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
             //
             setsArray = zip(setsArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
             //
             repsArray = zip(repsArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
             //
             demonstrationArray = zip(demonstrationArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
             //
             targetAreaArray = zip(targetAreaArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
             //
             explanationArray = zip(explanationArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
-            
-            
-            
             //
             destinationVC.sessionArray = warmupArray
             destinationVC.setsArray = setsArray
@@ -3006,39 +2654,24 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
-            
-            
-            
-            
+        //
         } else if (segue.identifier == "warmupSessionSegue2") {
-            
-            
+            //
             let destinationNC = segue.destination as! UINavigationController
-            
             let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
             
             // Compress Arrays
-            
             warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
             //
             setsArray = zip(setsArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
             //
             repsArray = zip(repsArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
             //
             demonstrationArray = zip(demonstrationArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
             //
             targetAreaArray = zip(targetAreaArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
             //
             explanationArray = zip(explanationArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
-            
-            
-            
             //
             destinationVC.sessionArray = warmupArray
             destinationVC.setsArray = setsArray
@@ -3046,11 +2679,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
-            
-            
-            
-            
-            
+            //
             let pickerIndex = pickerView.selectedRow(inComponent: 0)
             if pickerIndex < pickerViewArray.count - 1 {
                 destinationVC.sessionTitle = pickerViewArray[pickerIndex]
@@ -3062,13 +2691,9 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
-    
-    
-    
-    
-    //---------------------------------------------------------------------------------------------------------------
-    
-    
+//
+// Walkthrough ----------------------------------------------------------------------------------------------------------
+//
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()
@@ -3324,29 +2949,18 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             label.text = NSLocalizedString("choiceScreen26", comment: "")
             walkthroughView.addSubview(label)
             
-            
-            
-            
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
             UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
-            
-            
-            
         //
         default: break
-            
-            
         }
-        
-        
     }
     
-    
-    
+
     func nextWalkthroughView(_ sender: Any) {
         walkthroughView.removeFromSuperview()
         viewNumber = viewNumber + 1
@@ -3361,11 +2975,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             viewNumber = viewNumber - 1
             walkthroughMindBody()
         }
-        
     }
     
-    
-    
+//
 }
-       
-    

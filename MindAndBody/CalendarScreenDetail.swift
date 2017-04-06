@@ -22,8 +22,7 @@ class CalendarScreenDetail: UITableViewController {
     let daysArray: [String] =
         ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
     
-    
-    
+    //
     let routineArray =
     [
         // Monday
@@ -49,26 +48,24 @@ class CalendarScreenDetail: UITableViewController {
         ]
     ]
     
-    
     // Colours
     let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
-    
-    
+//
+// View will appear --------------------------------------------------------------------------------------------------------
+//
     override func viewWillAppear(_ animated: Bool) {
         let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        
         self.tableView.backgroundView = backView
-        
     }
     
-    
-    
+//
+// View did appear --------------------------------------------------------------------------------------------------------
+//
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // Walkthrough
         if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughC") == false {
@@ -79,138 +76,100 @@ class CalendarScreenDetail: UITableViewController {
             UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughC")
         }
         
-        
         // Colours
-        
         self.tableView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        
-        
-        
         self.navigationController?.navigationBar.tintColor = colour1
-        
         
         // Title
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 22)!]
         
-        
-    
         // Navigation Title
         navigationBar.title = NSLocalizedString(daysArray[selectedDay], comment: "")
         
-        
         // Table View
         tableView.backgroundColor = .clear
-        
     }
     
     
-    
-    
-    
-    // Table View
-    
+//
+// Table View --------------------------------------------------------------------------------------------------------
+//
+    // Number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    // Title for header
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         //return NSLocalizedString(daysArray[section], comment: "")
         return "19:45"
     }
     
-    
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
-        
+    // Will display header view
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-medium", size: 21)!
         header.textLabel?.textColor = .black
         header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         header.contentView.tintColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        
         header.textLabel?.text = header.textLabel?.text?.capitalized
-        
         
         // Border
         let border = CALayer()
         border.backgroundColor = UIColor.black.cgColor
         border.frame = CGRect(x: 15, y: header.frame.size.height-1, width: self.view.frame.size.height, height: 1)
-        
-        
+        //
         header.layer.addSublayer(border)
         header.layer.masksToBounds = true
     }
     
+    // Height for header
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 47
     }
     
-    
-    
+    // Number of rows
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    
-    
+    // Cell for row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        //
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        
-        
         //NSLocalizedString(warmupUpperArray[indexPath.section][indexPath.row], comment: "")
-        
 //        cell.textLabel?.textColor = .black
 //        cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
 //        cell.textLabel?.textAlignment = .left
 //        cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
 //        cell.tintColor = .black
-//        
-
-        
-        
-        
+//
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.tintColor = .black
-            
+            //
             cell.imageView?.image = #imageLiteral(resourceName: "Plus")
-        
+            //
             cell.contentView.transform = CGAffineTransform(scaleX: -1,y: 1);
             cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
-            
+            //
             return cell
-        
     }
     
-    
-    
-    
+    // Height for row
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 47
-        
     }
     
-    
-    
+    // Did select row
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-        
-    
     }
     
-    
-    
-    
-    
 
-    
-    
-//---------------------------------------------------------------------------------------------------------------
-    
-    
+//
+// Walkthrough --------------------------------------------------------------------------------------------------------
+//
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()
