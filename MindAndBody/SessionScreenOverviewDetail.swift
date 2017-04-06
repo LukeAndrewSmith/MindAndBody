@@ -1,5 +1,5 @@
 //
-//  WarmupScreenOverviewDetail2.swift
+//  SessionScreenOverviewDetail2.swift
 //  MyFitnessMentor
 //
 //  Created by Luke Smith on 23.03.17.
@@ -13,7 +13,7 @@ import UserNotifications
 
 
 
-class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate {
+class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate {
     
     
     
@@ -27,7 +27,7 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
     // Initialize Arrays
     //
     // Movement Array
-    var warmupArray: [String] = []
+    var sessionArray: [String] = []
     
     // Sets Array
     var setsArray: [Int] = []
@@ -509,7 +509,7 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
         
         
         // Navigation Bar
-        navigationTitle.text = NSLocalizedString(warmupArray[selectedMovement], comment: "")
+        navigationTitle.text = NSLocalizedString(sessionArray[selectedMovement], comment: "")
         
         // Navigation Title
         navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
@@ -621,7 +621,7 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
         // Sets Reps
         self.setsRepsLabel.text = (String(setsArray[selectedMovement]) + " x " + repsArray[selectedMovement])
         // Progress
-        self.progressLabel.text = (String(selectedMovement + 1)+"/"+String(warmupArray.count))
+        self.progressLabel.text = (String(selectedMovement + 1)+"/"+String(sessionArray.count))
         
         //
         setsRepsLabel.textColor = colour2
@@ -632,10 +632,10 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
         
         
         // Progress Bar
-        let warmupIndexP = Float(selectedMovement)
-        let warmupArrayP = Float(self.warmupArray.count)
+        let sessionIndexP = Float(selectedMovement)
+        let sessionArrayP = Float(self.sessionArray.count)
         
-        let fractionalProgress = warmupIndexP/warmupArrayP
+        let fractionalProgress = sessionIndexP/sessionArrayP
         
         progressBar.setProgress(fractionalProgress, animated: true)
         
@@ -1408,7 +1408,7 @@ class WarmupScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPick
     
     // Pass Data Back
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        if let controller = viewController as? WarmupScreenOverview {
+        if let controller = viewController as? SessionScreenOverview {
             controller.buttonNumber = buttonNumber
             controller.tableView.reloadData()
         }

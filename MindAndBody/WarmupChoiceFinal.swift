@@ -2973,7 +2973,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! WarmupScreen
+            let destinationVC = destinationNC.viewControllers.first as! SessionScreen
             
            
 
@@ -3000,7 +3000,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
             //
-            destinationVC.warmupArray = warmupArray
+            destinationVC.sessionArray = warmupArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
             destinationVC.demonstrationArray = demonstrationArray
@@ -3015,7 +3015,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenOverview
+            let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
             
             // Compress Arrays
             
@@ -3040,7 +3040,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             
             //
-            destinationVC.warmupArray = warmupArray
+            destinationVC.sessionArray = warmupArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
             destinationVC.demonstrationArray = demonstrationArray
@@ -3053,10 +3053,10 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             let pickerIndex = pickerView.selectedRow(inComponent: 0)
             if pickerIndex < pickerViewArray.count - 1 {
-                destinationVC.warmupTitle = pickerViewArray[pickerIndex]
+                destinationVC.sessionTitle = pickerViewArray[pickerIndex]
             } else if pickerIndex > pickerViewArray.count - 1 {
                 let pickerArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
-                destinationVC.warmupTitle = pickerArray[pickerIndex - pickerViewArray.count]
+                destinationVC.sessionTitle = pickerArray[pickerIndex - pickerViewArray.count]
             }
         }
     }

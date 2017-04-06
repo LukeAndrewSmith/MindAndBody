@@ -1,5 +1,5 @@
 //
-//  WarmupScreenTest.swift
+//  SessionScreenTest.swift
 //  MyFitnessMentor
 //
 //  Created by Luke Smith on 18.03.17.
@@ -13,21 +13,21 @@ import UserNotifications
 
 
 
-class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     
     
-    // Warmup Screen Index
+    // Session Screen Index
     //
-    var warmupScreenIndex = 0
+    var sessionScreenIndex = 0
     
     
     
     // Initialize Arrays
     //
     // Movement Array
-    var warmupArray: [String] = []
+    var sessionArray: [String] = []
     
     // Sets Array
     var setsArray: [Int] = []
@@ -489,7 +489,7 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
     
     func createButtonArray(){
         //
-        let numberOfButtons = setsArray[warmupScreenIndex]
+        let numberOfButtons = setsArray[sessionScreenIndex]
         //
         for _ in 1...numberOfButtons{
             buttonArray += [createButton()]
@@ -508,7 +508,7 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         
         
         // Navigation Bar
-        navigationTitle.text = NSLocalizedString(warmupArray[warmupScreenIndex], comment: "")
+        navigationTitle.text = NSLocalizedString(sessionArray[sessionScreenIndex], comment: "")
         
         // Navigation Title
         navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
@@ -530,7 +530,7 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         //
         demonstrationImage.image = #imageLiteral(resourceName: "Test 2")
         //
-        bodyImage.image = targetAreaArray[warmupScreenIndex]
+        bodyImage.image = targetAreaArray[sessionScreenIndex]
         
         // Scroll
         imageScroll.contentOffset.x = 0
@@ -566,7 +566,7 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
                 //
                 let stackView = UIStackView(arrangedSubviews: buttonArray)
                 buttonArray[0].isEnabled = true
-                let numberOfButtons2 = CGFloat(setsArray[warmupScreenIndex])
+                let numberOfButtons2 = CGFloat(setsArray[sessionScreenIndex])
         
                 // Layout
                 //
@@ -618,9 +618,9 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         
         // Title Labels
         // Sets Reps
-        self.setsRepsLabel.text = (String(setsArray[warmupScreenIndex]) + " x " + repsArray[warmupScreenIndex])
+        self.setsRepsLabel.text = (String(setsArray[sessionScreenIndex]) + " x " + repsArray[sessionScreenIndex])
         // Progress
-        self.progressLabel.text = (String(warmupScreenIndex + 1)+"/"+String(warmupArray.count))
+        self.progressLabel.text = (String(sessionScreenIndex + 1)+"/"+String(sessionArray.count))
         
         //
         setsRepsLabel.textColor = colour2
@@ -631,10 +631,10 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         
         
         // Progress Bar
-        let warmupIndexP = Float(warmupScreenIndex)
-        let warmupArrayP = Float(self.warmupArray.count)
+        let sessionIndexP = Float(sessionScreenIndex)
+        let sessionArrayP = Float(self.sessionArray.count)
         
-        let fractionalProgress = warmupIndexP/warmupArrayP
+        let fractionalProgress = sessionIndexP/sessionArrayP
         
         progressBar.setProgress(fractionalProgress, animated: true)
         
@@ -1129,14 +1129,14 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
     @IBAction func nextButton(_ sender: Any) {
         
         
-        if warmupScreenIndex == warmupArray.count - 1 {
+        if sessionScreenIndex == sessionArray.count - 1 {
             
-            warmupScreenIndex = 0
+            sessionScreenIndex = 0
             self.dismiss(animated: true)
             
             
         } else {
-            warmupScreenIndex = warmupScreenIndex + 1
+            sessionScreenIndex = sessionScreenIndex + 1
             displayContent()
         }
         
@@ -1148,10 +1148,10 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
     // Back Button
     @IBAction func backButton(_ sender: Any) {
         
-        if warmupScreenIndex == 0 {
+        if sessionScreenIndex == 0 {
             
         } else {
-            warmupScreenIndex = warmupScreenIndex - 1
+            sessionScreenIndex = sessionScreenIndex - 1
             
             flashScreen()
             displayContent()
@@ -1215,7 +1215,7 @@ class WarmupScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate
         explanationLabel.numberOfLines = 0
         
         
-        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[warmupScreenIndex], comment: ""))
+        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[sessionScreenIndex], comment: ""))
         let paragraphStyleEE = NSMutableParagraphStyle()
         paragraphStyleEE.alignment = .justified
         paragraphStyleEE.hyphenationFactor = 1

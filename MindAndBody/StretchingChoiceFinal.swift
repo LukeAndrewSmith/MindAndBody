@@ -3424,9 +3424,9 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             // Pass Data
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! StretchingScreen
+            let destinationVC = destinationNC.viewControllers.first as! SessionScreen
             
-            destinationVC.stretchingArray = stretchingArray
+            destinationVC.sessionArray = stretchingArray
             
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
@@ -3454,9 +3454,9 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             // Pass Data
             let destinationNC = segue.destination as! UINavigationController
             
-            let destinationVC = destinationNC.viewControllers.first as! StretchingScreenOverview
+            let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
             
-            destinationVC.stretchingArray = stretchingArray
+            destinationVC.sessionArray = stretchingArray
             
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
@@ -3466,10 +3466,10 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             
             let pickerIndex = pickerView.selectedRow(inComponent: 0)
             if pickerIndex < pickerViewArray.count - 1 {
-                destinationVC.stretchingTitle = pickerViewArray[pickerIndex]
+                destinationVC.sessionTitle = pickerViewArray[pickerIndex]
             } else if pickerIndex > pickerViewArray.count - 1 {
                 let pickerArray = UserDefaults.standard.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
-                destinationVC.stretchingTitle = pickerArray[pickerIndex - pickerViewArray.count]
+                destinationVC.sessionTitle = pickerArray[pickerIndex - pickerViewArray.count]
             }
         }
     }

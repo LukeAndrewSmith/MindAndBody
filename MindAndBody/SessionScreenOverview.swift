@@ -1,5 +1,5 @@
 //
-//  WarmupScreenOverview.swift
+//  SessionScreenOverview.swift
 //  MyFitnessMentor
 //
 //  Created by Luke Smith on 16.03.17.
@@ -14,18 +14,18 @@ import UserNotifications
 
 // View Controller
 //
-class WarmupScreenOverview: UITableViewController {
+class SessionScreenOverview: UITableViewController {
     
     
     // Initialize Arrays
     
     // Title
-    var warmupTitle = String()
+    var sessionTitle = String()
     
     // Initialize Arrays
     
     // Movement Array
-    var warmupArray: [String] = []
+    var sessionArray: [String] = []
     
     // Sets Array
     var setsArray: [Int] = []
@@ -106,7 +106,7 @@ class WarmupScreenOverview: UITableViewController {
         
         
         // Navigation Title
-        navigationTitle.text = NSLocalizedString(warmupTitle, comment: "")
+        navigationTitle.text = NSLocalizedString(sessionTitle, comment: "")
         
         // Navigation Title
         //
@@ -372,7 +372,7 @@ class WarmupScreenOverview: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch section {
-        case 0: return warmupArray.count
+        case 0: return sessionArray.count
         case 1: return 1
         default: return 0
         }
@@ -404,7 +404,7 @@ class WarmupScreenOverview: UITableViewController {
             
             // Movement
             //
-            cell.movementLabel.text = NSLocalizedString(warmupArray[indexPath.row], comment: "")
+            cell.movementLabel.text = NSLocalizedString(sessionArray[indexPath.row], comment: "")
             
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 21)
             cell.movementLabel?.textAlignment = .left
@@ -544,7 +544,7 @@ class WarmupScreenOverview: UITableViewController {
         case 0:
             let cell = tableView.cellForRow(at: indexPath)
             
-            performSegue(withIdentifier: "WarmupDetailSegue", sender: nil)
+            performSegue(withIdentifier: "SessionDetailSegue", sender: nil)
             
             tableView.deselectRow(at: indexPath, animated: true)
             
@@ -784,16 +784,16 @@ class WarmupScreenOverview: UITableViewController {
     
     // Prepare for Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "WarmupDetailSegue") {
+        if (segue.identifier == "SessionDetailSegue") {
             
-            let destinationVC = segue.destination as! WarmupScreenOverviewDetail
+            let destinationVC = segue.destination as! SessionScreenOverviewDetail
             
             let indexPath = tableView.indexPathForSelectedRow
             let indexPathInt = Int((indexPath?.row)!)
             destinationVC.selectedMovement = indexPathInt
             
             
-            destinationVC.warmupArray = warmupArray
+            destinationVC.sessionArray = sessionArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
             
