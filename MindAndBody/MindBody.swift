@@ -499,7 +499,6 @@ class MindBody: UIViewController {
             //
             stack3Bottom.constant = 15
         }
-        viewDidLayoutSubviews()
     }
     
     

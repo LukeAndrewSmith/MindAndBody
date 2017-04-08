@@ -165,12 +165,13 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.view.tintColor = colour1
         alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
-        self.present(alert, animated: true, completion: nil)
-        //
-        let delayInSeconds = 2.3
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            alert.dismiss(animated: true, completion: nil)
-        }
+        self.present(alert, animated: true, completion: {
+            //
+            let delayInSeconds = 0.7
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                alert.dismiss(animated: true, completion: nil)
+            }
+        })
         
         // Background Color
         //
@@ -339,7 +340,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         setButton.addConstraints([widthHeight])
         setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
         setButton.layer.borderWidth = 4
-        setButton.layer.borderColor = colour2.cgColor
+        setButton.layer.borderColor = colour1.cgColor
         setButton.layer.cornerRadius = 21.4375
         setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
         setButton.backgroundColor = colour2
@@ -397,6 +398,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         targetAreaButton.alpha = 1
         targetAreaButton.isEnabled = true
         
+        
         // Set Buttons
         //
         let setRepSubViews = self.setRepView.subviews
@@ -405,25 +407,26 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         }
         buttonArray = []
         createButtonArray()
-                // Stack View
-                //
-                let stackView = UIStackView(arrangedSubviews: buttonArray)
-                buttonArray[0].isEnabled = true
-                let numberOfButtons2 = CGFloat(setsArray[sessionScreenIndex])
-                // Layout
-                //
-                let xValue = ((view.frame.size.width - (numberOfButtons2 * 42.875)) / CGFloat(numberOfButtons2 + 1))
-                let yValue = (setRepView.frame.size.height - 42.875) / 2
-                let widthValue1 =
-                    CGFloat(numberOfButtons2 - 1) * CGFloat(view.frame.size.width - (numberOfButtons2 * 42.875))
-                let widthValue2 = (CGFloat(widthValue1) / CGFloat(numberOfButtons2 + 1)) + (numberOfButtons2 * 42.875)
-                //
-                stackView.frame = CGRect(x: xValue, y: yValue, width: widthValue2, height: 42.875)
-                //
-                stackView.axis = .horizontal
-                stackView.distribution = .equalSpacing
-                //
-                setRepView.addSubview(stackView)
+        // Stack View
+        //
+        let stackView = UIStackView(arrangedSubviews: buttonArray)
+        buttonArray[0].isEnabled = true
+        let numberOfButtons2 = CGFloat(setsArray[sessionScreenIndex])
+        // Set Button Layout
+        //
+        let xValue = ((view.frame.size.width - (numberOfButtons2 * 42.875)) / CGFloat(numberOfButtons2 + 1))
+        let yValue = (setRepView.frame.size.height - 42.875) / 2
+        let widthValue1 =
+            CGFloat(numberOfButtons2 - 1) * CGFloat(view.frame.size.width - (numberOfButtons2 * 42.875))
+        let widthValue2 = (CGFloat(widthValue1) / CGFloat(numberOfButtons2 + 1)) + (numberOfButtons2 * 42.875)
+        // Layout formula
+        stackView.frame = CGRect(x: xValue, y: yValue, width: widthValue2, height: 42.875)
+        //
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        //
+        setRepView.addSubview(stackView)
+        
         
         // Timer to Back
         self.view.bringSubview(toFront: timerButton)

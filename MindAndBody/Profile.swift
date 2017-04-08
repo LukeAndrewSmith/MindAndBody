@@ -786,15 +786,15 @@ class Profile: UITableViewController{
     func navigationButtonAction(_ sender: Any) {
     //
         //
-        let row0 = NSIndexPath(row: 2, section: 0)
-        let row0Height = (tableView.cellForRow(at: row0 as IndexPath)?.frame.size.height)!
-        //
-        let row1 = NSIndexPath(row: 3, section: 0)
-        let row1Height = (tableView.cellForRow(at: row1 as IndexPath)?.frame.size.height)!
-        //
-        let row2 = NSIndexPath(row: 4, section: 0)
-        let row2Height = (tableView.cellForRow(at: row2 as IndexPath)?.frame.size.height)!
-        
+//        let row0 = NSIndexPath(row: 2, section: 0)
+//        let row0Height = (tableView.cellForRow(at: row0 as IndexPath)?.frame.size.height)!
+//        //
+//        let row1 = NSIndexPath(row: 3, section: 0)
+//        let row1Height = (tableView.cellForRow(at: row1 as IndexPath)?.frame.size.height)!
+//        //
+//        let row2 = NSIndexPath(row: 4, section: 0)
+//        let row2Height = (tableView.cellForRow(at: row2 as IndexPath)?.frame.size.height)!
+//        
         //
         switch (sender as AnyObject).tag {
         //
@@ -802,11 +802,11 @@ class Profile: UITableViewController{
             self.tableView.setContentOffset(CGPoint(x: 0, y: 132), animated: true)
         //
         case 2:
-            let height = 186 + row0Height
+            let height = CGFloat(186 + 200)
             //
             if tableView.frame.maxY > height - tableView.frame.size.height {
                 //
-                self.tableView.setContentOffset(CGPoint(x: 0, y: 186 + row0Height), animated: true)
+                self.tableView.setContentOffset(CGPoint(x: 0, y: 186 + 200), animated: true)
                 //
             } else {
                 //
@@ -814,22 +814,22 @@ class Profile: UITableViewController{
             }
         //
         case 3:
-            let height = 186 + row0Height + row1Height
+            let height = CGFloat(186 + 200 + 200)
             //
             if tableView.frame.maxY > height - tableView.frame.size.height {
                 //
-                self.tableView.setContentOffset(CGPoint(x: 0, y: 186 + row0Height), animated: true)
+                self.tableView.setContentOffset(CGPoint(x: 0, y: 186 + 200), animated: true)
             } else {
                 //
                 self.tableView.setContentOffset(CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height), animated: true)
             }
         //
         case 4:
-            let height = row0Height + row1Height + row2Height
+            let height = CGFloat(200 + 200 + 200)
             //
             if tableView.frame.maxY > height - tableView.frame.size.height {
                 //
-                self.tableView.setContentOffset(CGPoint(x: 0, y: 186 + row0Height), animated: true)
+                self.tableView.setContentOffset(CGPoint(x: 0, y: 186 + 200), animated: true)
             } else {
                 //
                 self.tableView.setContentOffset(CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height), animated: true)
