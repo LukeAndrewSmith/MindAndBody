@@ -12,17 +12,19 @@ import AVFoundation
 import UserNotifications
 
 
-
+//
+// Session Screen Class --------------------------------------------------------------------------------------------------------
+//
 class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     
-    
+//
+// Retreive Arrays ---=---------------------------------------------------------------------------------------------------------
+//
     // Session Screen Index
     //
     var sessionScreenIndex = 0
-    
-    
     
     // Initialize Arrays
     //
@@ -43,17 +45,11 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     
     // Explanation Array
     var explanationArray: [String] = []
-    
-    
-    
-    
-    
-    
-    
-    //
-    // Outlets
-    //
-    
+
+
+//
+// Outlets ---------------------------------------------------------------------------------------------------------------------
+//
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
@@ -62,22 +58,18 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     @IBOutlet weak var nextButton: UIBarButtonItem!
     @IBOutlet weak var backButton: UIBarButtonItem!
     
-    
     // Set Rep
     @IBOutlet weak var setRepView: UIView!
     // Buttons
     var setButton1 = UIButton()
     var setButton2 = UIButton()
     var setButton3 = UIButton()
-    
 
     // Image View
     @IBOutlet weak var imageScroll: UIScrollView!
     
-    
     // Explanation Expand
     @IBOutlet weak var explanationExpand: UIButton!
-    
     
     // Timer
     // Timer View
@@ -104,19 +96,16 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     let secondLabel = UILabel()
     var pickerViewTimer = UIView()
     
-    
     // Timer Show Buttons
     @IBOutlet weak var timerButton: UIButton!
-    
     
     // Progress Bar
     @IBOutlet weak var progressBarView: UIView!
     @IBOutlet weak var progressBar: UIProgressView!
-    
+    //
     @IBOutlet weak var progressBarLeft: NSLayoutConstraint!
     
-    
-    // Title Labels
+    // Labels
     // Sets and Reps
     @IBOutlet weak var setsRepsLabel: UILabel!
     // Explanation Text
@@ -127,41 +116,31 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     // Hide Screen
     @IBOutlet weak var hideScreen: UIButton!
     
-    
-    
     // Image Scroll
     //
     @IBOutlet weak var targetAreaButton: UIButton!
     //
     @IBOutlet weak var demonstrationImageButton: UIButton!
     
-    
     // Images
     let demonstrationImage = UIImageView()
     let bodyImage = UIImageView()
-    
+    //
     var imageExpanded = false
-    
     
     // Button Stack View Height
     @IBOutlet weak var buttonStackHeight: NSLayoutConstraint!
-    
-    
     
     // Colours
     let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
 
     
-    
-    
-    
-    //
-    // View Did Load
-    //
+//
+// View did load ---------------------------------------------------------------------------------------------------------------------
+//
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // Walkthrough
         if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough3") == false {
@@ -172,15 +151,11 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough3")
         }
         
-        
-        
         //Iphone 5/SE layout
         //
         if UIScreen.main.nativeBounds.height < 1334 {
             buttonStackHeight.constant = 49
         }
-        
-        
         
         // Session Started
         //
@@ -191,27 +166,17 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         alert.view.tintColor = colour1
         alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
         self.present(alert, animated: true, completion: nil)
-        
-        
+        //
         let delayInSeconds = 2.3
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             alert.dismiss(animated: true, completion: nil)
         }
         
-        
-    
-        
-        // Background Gradient
+        // Background Color
         //
-        self.view.applyGradient(colours: [colour1, colour1])
-        
+        self.view.backgroundColor = colour1
+        //
         backButton.tintColor = colour1
-        
-        
-
-        
-        
-
         
         // Images
         //
@@ -232,30 +197,11 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         imageSwipeRight.direction = UISwipeGestureRecognizerDirection.right
         bodyImage.addGestureRecognizer(imageSwipeRight)
         bodyImage.isUserInteractionEnabled = true
-
-        
+        //
         demonstrationImageButton.alpha = 0
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         // Set Rep View
-        setRepView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            //colour2
-        
-        
-        
-        
+        setRepView.backgroundColor = colour2
         
         // Explanation Text
         explanationText.font = UIFont(name: "SFUIDisplay-thin", size: 21)
@@ -263,7 +209,6 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         explanationText.textAlignment = .justified
         explanationText.lineBreakMode = NSLineBreakMode.byWordWrapping
         explanationText.numberOfLines = 0
-        
         
         // Expand Button
         let origImage1 = UIImage(named: "Plus")
@@ -275,85 +220,48 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         explanationExpand.tintColor = colour2
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-        //
-        // Timer
-        //
+//
+// Timer ---------------------------------------------------------------------------------------------------------------------
+//
         // Image With Tint
         let origImage3 = UIImage(named: "Timer")
         let tintedImage3 = origImage3?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         timerButton.setImage(tintedImage3, for: .normal)
-        //timerButton2.setImage(tintedImage3, for: .normal)
-        
         //Image Tint
         timerButton.tintColor = colour2
-        //timerButton2.tintColor = colour2
-        
-        
-        
         // Timer View
         timerView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        
-        
         // Timer Elements
         //
         // Picker View Timer
         //
         pickerViewTimer.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        
-      
-        
         // Pick Minutes
         //
         minutePicker.frame = CGRect(x: 10, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
         minutePicker.dataSource = self
         minutePicker.delegate = self
         minutePicker.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        
-        
-        
+        //
         minuteLabel.text = NSLocalizedString("minutes", comment: "")
         minuteLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
         minuteLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         minuteLabel.textAlignment = .left
-        
-        
-        
         // Pick Seconds
         //
         secondPicker.dataSource = self
         secondPicker.delegate = self
         secondPicker.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        
-        
-        
+        //
         secondLabel.text = NSLocalizedString("seconds", comment: "")
         secondLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
         secondLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         secondLabel.textAlignment = .left
-        
-        
-        
         // Picker View Data
         //
         minuteData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30]
         secondData = [0, 15, 30, 45]
-        
-        
-        
-        
         // Start Button Timer
         //
         timerStart.backgroundColor = colour1
@@ -361,132 +269,90 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         timerStart.setTitleColor(colour2, for: .normal)
         timerStart.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         timerStart.titleLabel?.textAlignment = .center
-        
+        //
         timerStart.addTarget(self, action: #selector(startTimer(_:)), for: .touchUpInside)
-        
-        
-        
-        
         // Cancel Button Timer
         //
-        
         timerCancel.backgroundColor = colour1
         timerCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
         timerCancel.setTitleColor(colour2, for: .normal)
         timerCancel.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         timerCancel.titleLabel?.textAlignment = .center
-        
+        //
         timerCancel.addTarget(self, action: #selector(cancelTimer(_:)), for: .touchUpInside)
-        
-        
-        
-        
-        
         // Countdown Label
         countDownLabel.textAlignment = .center
         countDownLabel.font = UIFont(name: "SFUIDisplay-Light", size: 43)
         countDownLabel.text = "00:00"
         countDownLabel.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
-        
-        
-        
         // App Moved To Background
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
         
-        
-        
-        
-        
-        
-        
-    
-        //
-        // Progress Bar
-        //
-        
+
+//
+// Progress Bar ----------------------------------------------------------------------------------------------------------
+//
         // Thickness
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 49, height: self.progressBarView.frame.size.height / 2)
         progressBar.center = progressBarView.center
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
-        
         // Rounded Edges
         progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
         progressBar.clipsToBounds = true
-        
-        
         // Initial state
         progressBar.setProgress(0, animated: true)
-        
         //
         progressBarLeft.constant = progressLabel.frame.size.width + 34
         
-        
-        
-        
-        
-        
         // Display Content
         displayContent()
-      
     }
     
     
-    
-    //
+//
+// View did layout subviews -------------------------------------------------------------------------------------------------
+//
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        
-        
         // Image Scroll
         //
         imageScroll.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         imageScroll.contentSize = CGSize(width: imageScroll.frame.size.width * 2, height: imageScroll.frame.size.height)
         imageScroll.isScrollEnabled = false
-        
         // Demonstration Image
         demonstrationImage.frame = imageScroll.frame
         demonstrationImage.contentMode = .scaleAspectFit
-        
         // Body Image
         bodyImage.frame = CGRect(x: imageScroll.frame.size.width, y: 0, width: imageScroll.frame.size.width, height: imageScroll.frame.size.width)
         bodyImage.contentMode = .scaleAspectFit
-        
     }
     
     
-    //
-    // Generate Buttons
-    //
-    
-    
-    
+//
+// Generate Buttons ---------------------------------------------------------------------------------------------------------------------
+//
     func createButton() -> UIButton {
         let setButton = UIButton()
         let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
         setButton.addConstraints([widthHeight])
         setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
         setButton.layer.borderWidth = 4
-        setButton.layer.borderColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0).cgColor
-            //colour2.cgColor
+        setButton.layer.borderColor = colour2.cgColor
         setButton.layer.cornerRadius = 21.4375
         setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
-        setButton.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            //colour2
+        setButton.backgroundColor = colour2
         setButton.isEnabled = false
-        
-        
-        
+        //
         setRepView.addSubview(setButton)
-        
+        //
         return setButton
     }
     
-    
+    //
     var buttonArray = [UIButton]()
-    
+    //
     func createButtonArray(){
         //
         let numberOfButtons = setsArray[sessionScreenIndex]
@@ -496,20 +362,14 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
+
+//
+// Display Content ---------------------------------------------------------------------------------------------------------------------
+//
     // Display Content Function
     func displayContent() {
-        
-        
         // Navigation Bar
         navigationTitle.text = NSLocalizedString(sessionArray[sessionScreenIndex], comment: "")
-        
         // Navigation Title
         navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
         navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
@@ -520,18 +380,14 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
         self.navigationController?.navigationBar.barTintColor = colour2
-        
+        //
         self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
-        
-        
-        
         
         // Images
         //
         demonstrationImage.image = #imageLiteral(resourceName: "Test 2")
         //
         bodyImage.image = targetAreaArray[sessionScreenIndex]
-        
         // Scroll
         imageScroll.contentOffset.x = 0
         //
@@ -541,16 +397,6 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         targetAreaButton.alpha = 1
         targetAreaButton.isEnabled = true
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         // Set Buttons
         //
         let setRepSubViews = self.setRepView.subviews
@@ -559,15 +405,11 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         }
         buttonArray = []
         createButtonArray()
-        
-        
-        
                 // Stack View
                 //
                 let stackView = UIStackView(arrangedSubviews: buttonArray)
                 buttonArray[0].isEnabled = true
                 let numberOfButtons2 = CGFloat(setsArray[sessionScreenIndex])
-        
                 // Layout
                 //
                 let xValue = ((view.frame.size.width - (numberOfButtons2 * 42.875)) / CGFloat(numberOfButtons2 + 1))
@@ -577,137 +419,72 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
                 let widthValue2 = (CGFloat(widthValue1) / CGFloat(numberOfButtons2 + 1)) + (numberOfButtons2 * 42.875)
                 //
                 stackView.frame = CGRect(x: xValue, y: yValue, width: widthValue2, height: 42.875)
-        
                 //
                 stackView.axis = .horizontal
                 stackView.distribution = .equalSpacing
-                
+                //
                 setRepView.addSubview(stackView)
-                
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         // Timer to Back
         self.view.bringSubview(toFront: timerButton)
         cancelTimer(Any.self)
-        
-        
-        
-        
-        
-        
         
         // Title Labels
         // Sets Reps
         self.setsRepsLabel.text = (String(setsArray[sessionScreenIndex]) + " x " + repsArray[sessionScreenIndex])
         // Progress
         self.progressLabel.text = (String(sessionScreenIndex + 1)+"/"+String(sessionArray.count))
-        
         //
         setsRepsLabel.textColor = colour2
         progressLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
-        
-        
-        
-        
         // Progress Bar
         let sessionIndexP = Float(sessionScreenIndex)
         let sessionArrayP = Float(self.sessionArray.count)
-        
+        //
         let fractionalProgress = sessionIndexP/sessionArrayP
-        
+        //
         progressBar.setProgress(fractionalProgress, animated: true)
-        
-        
     }
     
     
-    
-    
-    
-    
+//
+// Flash Screen ---------------------------------------------------------------------------------------------------------
+//
     // Flash Screen
     func flashScreen() {
-        
+        //
         let flash = UIView()
-        
+        //
         flash.frame = CGRect(x: 0, y: -100, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
         flash.backgroundColor = colour1
         self.view.alpha = 1
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
-        
-        
+        //
         UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
-            
             flash.alpha = 0
-            
         }, completion: {(finished: Bool) -> Void in
             flash.removeFromSuperview()
         })
-        
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //
-    // Count Down Timer
-    //
-    
+  
+//
+// CountDown Timer ---------------------------------------------------------------------------------------------
+//
     var isTiming = false
-
-    
     // Timer CountDown Value
     func setTimerValue() {
-        
+        //
         let minutesSelectedRow = minutePicker.selectedRow(inComponent: 0)
         let minutes = minuteData[minutesSelectedRow]
-        
+        //
         let secondsSelectedRow = secondPicker.selectedRow(inComponent: 0)
         let seconds = secondData[secondsSelectedRow]
-        
+        //
         self.timerValue = (minutes * 60) + seconds
-        
     }
-    
     
     // Timer CountDown Title
     func timeFormatted(totalSeconds: Int) -> String {
@@ -716,12 +493,9 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
-    
-    
     // Update Timer
     func updateTimer() {
-        
-        
+        //
         if timerValue == 0{
             self.timerCountDown.invalidate()
             removeCircle()
@@ -729,41 +503,36 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             countDownLabel.removeFromSuperview()
             pickerViewTimer.alpha = 1
             isTiming = false
-            
+        //
         } else if timerValue == 1 {
-            
             timerValue -= 1
             countDownLabel.text = timeFormatted(totalSeconds: timerValue)
-            
+        //
         } else {
             timerValue -= 1
             countDownLabel.text = timeFormatted(totalSeconds: timerValue)
-            
         }
-        
     }
     
-    
     let timerShapeLayer = CAShapeLayer()
-    
     // Funcs
+    // Add circle
     func addCircle() {
         let circlePath = UIBezierPath(arcCenter: countDownLabel.center, radius: CGFloat((pickerViewTimer.frame.size.height-10)/2), startAngle: CGFloat(-(Double.pi / 2)), endAngle:CGFloat((2*Double.pi)-(Double.pi / 2)), clockwise: true)
         timerShapeLayer.path = circlePath.cgPath
         timerShapeLayer.fillColor = UIColor.clear.cgColor
         timerShapeLayer.strokeColor = colour1.cgColor
         timerShapeLayer.lineWidth = 1.0
-        
+        //
         timerView.layer.addSublayer(timerShapeLayer)
-        
     }
     
+    // Remove circle
     func removeCircle() {
-        
         timerShapeLayer.removeFromSuperlayer()
-        
     }
     
+    // Start animation
     func startAnimation() {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0
@@ -771,75 +540,55 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         animation.duration = Double(timerValue)
         animation.fillMode = kCAFillModeForwards
         animation.isRemovedOnCompletion = false
-        
+        //
         timerShapeLayer.add(animation, forKey: "circleAnimation")
-        
-        
     }
     
-    
+    // Start Timer
     @IBAction func startTimer(_ sender: Any) {
-        
+        //
         setTimerValue()
         isTiming = true
-        
+        //
         if timerValue == 0 {
-            
         } else {
-            
-            
+            //
             self.timerView.bringSubview(toFront: timerCancel)
-            
+            //
             pickerViewTimer.alpha = 0
             timerView.addSubview(countDownLabel)
             timerView.bringSubview(toFront: countDownLabel)
-            
-            
+            //
             self.countDownLabel.text = timeFormatted(totalSeconds: timerValue)
-            
-            
-            
-            
-            
-            
+            //
             let delayInSeconds = 0.1
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                
+                //
                 self.addCircle()
                 self.startAnimation()
                 self.timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
-                
-                
-                
+                //
                 if #available(iOS 10.0, *) {
-                    
+                    //
                     let content = UNMutableNotificationContent()
                     content.title = NSLocalizedString("timerEnd", comment: "")
                     content.body = " "
                     content.sound = UNNotificationSound.default()
-                    
+                    //
                     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
                     let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
-                    
-                    
+                    //
                     UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-                    
-                    
                 } else {
                     // Fallback on earlier versions
                 }
-                
-                
-                
             }
-            
         }
-        
     }
     
-
+    // Cancel Timer
     @IBAction func cancelTimer(_ sender: Any) {
-        
+        //
         self.timerCountDown.invalidate()
         self.timerValue = 0
         self.countDownLabel.text = "00:00"
@@ -848,103 +597,94 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         countDownLabel.removeFromSuperview()
         pickerViewTimer.alpha = 1
         isTiming = false
-        
-        
+        //
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
-        
     }
     
     
-    
-    // Picker Views
-    //
-    
-    func numberOfComponents(in: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent: Int) -> Int {
-        
-        if pickerView == minutePicker {
-            return 14
-        } else if pickerView == secondPicker {
-            return 4
-        }
-        
-        return 0
-        
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        if pickerView == minutePicker {
-            
-            let rowLabel = UILabel()
-            let titleData = String(minuteData[row])
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 27)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
-            rowLabel.attributedText = myTitle
-            rowLabel.textAlignment = .center
-            return rowLabel
-            
-        } else if pickerView == secondPicker {
-            
-            let rowLabel = UILabel()
-            let titleData = String(secondData[row])
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 27)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
-            rowLabel.attributedText = myTitle
-            rowLabel.textAlignment = .center
-            return rowLabel
-            
-        }
-        
-        return UIView()
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 30
-    }
-    
-    
-    // Background
+    // Stop timer if moved to background (notification will still ring)
     func appMovedToBackground() {
-        
+        //
         self.timerCountDown.invalidate()
         self.timerValue = 0
         removeCircle()
         self.countDownLabel.text = "00:00"
         timerView.bringSubview(toFront: timerStart)
         isTiming = false
-        
+    }
+    
+
+//
+// Timer Picker View ---------------------------------------------------------------------------------------------
+//
+    // Number of components
+    func numberOfComponents(in: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // Number of rows
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent: Int) -> Int {
+        //
+        if pickerView == minutePicker {
+            return 14
+        //
+        } else if pickerView == secondPicker {
+            return 4
+        }
+        return 0
+    }
+    
+    // View for row
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        //
+        if pickerView == minutePicker {
+            //
+            let rowLabel = UILabel()
+            let titleData = String(minuteData[row])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 27)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+        //
+        } else if pickerView == secondPicker {
+            //
+            let rowLabel = UILabel()
+            let titleData = String(secondData[row])
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 27)!,NSForegroundColorAttributeName:UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+        }
+        return UIView()
+    }
+    
+    // Row height
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 30
     }
     
     
-    
+//
+// Timer Display and retract ----------------------------------------------------------------------------------------
+//
     // Display TimerView
     //
     let backgroundViewTimer = UIButton()
-
+    //
     @IBAction func timerViewButton(_ sender: Any) {
-        
-        
         //
         nextButton.isEnabled = false
         backButton.isEnabled = false
-        
-        
-        
         // Timer View
         //
         timerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height/2)
         timerView.center.x = self.view.frame.size.width/2
         timerView.center.y = (self.view.frame.size.height/2) * 2.5
-        
-
-        
         // Picker View Timer
         //
         pickerViewTimer.frame = CGRect(x: 0, y: 0, width: self.timerView.frame.size.width * (2/3), height: self.timerView.frame.size.height * (2/3))
         pickerViewTimer.center.x = timerView.center.x
         timerView.addSubview(pickerViewTimer)
-        
         // Pick Minutes
         //
         minutePicker.frame = CGRect(x: 10, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
@@ -954,7 +694,6 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         minuteLabel.frame = CGRect(x: 10 + minutePicker.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
         minuteLabel.center.y = pickerViewTimer.center.y
         pickerViewTimer.addSubview(minuteLabel)
-        
         // Pick Seconds
         //
         secondPicker.frame = CGRect(x: 10 + minutePicker.frame.size.width + minuteLabel.frame.size.width, y: 0, width: (pickerViewTimer.frame.size.width - 20) / 4, height: pickerViewTimer.frame.size.height*(2/3))
@@ -967,10 +706,6 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         
         timerView.addSubview(pickerViewTimer)
         
-        
-        
-        
-        
         // Start Button Timer
         //
         timerStart.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
@@ -980,8 +715,6 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         timerStart.layer.cornerRadius = (timerStart.frame.height - (timerStart.frame.size.height/4)) / 2
         timerStart.clipsToBounds = true
         timerView.addSubview(timerStart)
-        
-        
         // Cancel Button Timer
         //
         timerCancel.frame = CGRect(x: 0, y: self.timerView.frame.size.height * (2/3), width: self.pickerViewTimer.frame.size.width, height: (self.timerView.frame.size.height*(1/3)))
@@ -992,124 +725,90 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         timerCancel.clipsToBounds = true
         timerView.addSubview(timerCancel)
         
+        //
         if isTiming == false {
             timerView.bringSubview(toFront: timerStart)
         } else if isTiming == true {
             timerView.bringSubview(toFront: timerCancel)
-
         }
         
         // Countdown Label
         countDownLabel.frame = CGRect(x: self.timerView.frame.size.width/2, y: 0, width: self.timerView.frame.size.width/2, height: self.timerView.frame.size.height)
         countDownLabel.center.x = timerView.center.x
         countDownLabel.center.y = pickerViewTimer.center.y
-        //self.timerView.addSubview(countDownLabel)
-        
-        
         
         // Background View
         //
         backgroundViewTimer.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
         backgroundViewTimer.backgroundColor = .black
         backgroundViewTimer.alpha = 0
-        
+        //
         backgroundViewTimer.addTarget(self, action: #selector(retractTimer(_:)), for: .touchUpInside)
         
-        
-        
-        
+        //
         self.view.addSubview(timerView)
         self.view.addSubview(backgroundViewTimer)
-        
+        //
         self.view.bringSubview(toFront: timerView)
         
-        
-        
-        
-        
-        
+        //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.timerView.center.y = (self.view.frame.size.height/2) * 1.5
             self.backgroundViewTimer.alpha = 0.5
         }, completion: nil)
-        
-        
     }
     
-    
-    
+    // Retract Timer
     @IBAction func retractTimer(_ sender: Any) {
-        
+        //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.timerView.center.y = (self.view.frame.size.height/2) * 2.5
             self.backgroundViewTimer.alpha = 0
-            
         }, completion: nil)
-        
+        //
         let delayInSeconds = 0.4
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            
+            //
             self.timerView.removeFromSuperview()
             self.backgroundViewTimer.removeFromSuperview()
-            
+            //
             self.nextButton.isEnabled = true
             self.backButton.isEnabled = true
-            
         }
     }
+  
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //
-    // Button Actions ---------------------------------------------------------------------------------------------------------------------------------
-    //
-    
-    
-    
+//
+// Button Actions ------------------------------------------------------------------------------------------------
+//
     // Set Buttons
     //
     var buttonNumber = 0
     
     // Set Button
     @IBAction func setButtonAction(sender: UIButton) {
-        
         //
         // Rest Timer Notification
         //
         if #available(iOS 10.0, *) {
-            
+            //
             let content = UNMutableNotificationContent()
             content.title = NSLocalizedString("restOver", comment: "")
             content.body = NSLocalizedString("nextSet", comment: "")
             content.sound = UNNotificationSound.default()
-            
+            //
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
             let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
-            
-            
+            //
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-            
-            
         }
-        
+        //
         buttonArray[buttonNumber].isEnabled = false
-        
+        //
         let delayInSeconds = 30.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            
+            //
             if self.buttonArray.count == 1 {
-                
             } else {
                 if self.buttonNumber < 2 {
                     self.buttonNumber = self.buttonNumber + 1
@@ -1117,94 +816,73 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
                 }
             }
         }
-        
-        sender.backgroundColor = UIColor(red: 0.88, green: 0.89, blue: 0.89, alpha: 1.0)
-        //colour2
+        //
+        sender.backgroundColor = colour1
         sender.isEnabled = false
-        
     }
     
     
-    // Next Button
+    // Next Navigation Button
     @IBAction func nextButton(_ sender: Any) {
-        
-        
+        //
         if sessionScreenIndex == sessionArray.count - 1 {
-            
+            //
             sessionScreenIndex = 0
             self.dismiss(animated: true)
-            
-            
+        //
         } else {
+            //
             sessionScreenIndex = sessionScreenIndex + 1
             displayContent()
         }
-        
+        //
         flashScreen()
-        
     }
     
-    
-    // Back Button
+    // Back Navigation Button
     @IBAction func backButton(_ sender: Any) {
-        
+        //
         if sessionScreenIndex == 0 {
-            
         } else {
+            //
             sessionScreenIndex = sessionScreenIndex - 1
-            
+            //
             flashScreen()
             displayContent()
         }
     }
     
     
-    
-    
-    
-    
-    
-    
-    //
-    // Explanation
-    //
-    
+//
+// Explanation -------------------------------------------------------------------------------------------------------------
+//
     // Expand Explanation
     //
     let scrollViewExplanation = UIScrollView()
     let backgroundViewExplanation = UIButton()
-    
+    //
     let explanationLabel = UILabel()
     
-    
     // Expand Explanation
-    //
     @IBAction func expandExplanation(_ sender: Any) {
-        
-        
+        //
         nextButton.isEnabled = false
         backButton.isEnabled = false
-        
-        
         // View
         //
         scrollViewExplanation.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height / 2)
         scrollViewExplanation.center.x = self.view.frame.size.width/2
         scrollViewExplanation.center.y = (self.view.frame.size.height/2) * 2.5
-        
+        //
         scrollViewExplanation.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        
-        
         
         // Background View
         //
         backgroundViewExplanation.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
         backgroundViewExplanation.backgroundColor = .black
         backgroundViewExplanation.alpha = 0
-        
+        //
         backgroundViewExplanation.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
-        
-        
         
         // Contents
         //
@@ -1213,83 +891,68 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         explanationLabel.textAlignment = .justified
         explanationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         explanationLabel.numberOfLines = 0
-        
-        
+        //
         let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[sessionScreenIndex], comment: ""))
         let paragraphStyleEE = NSMutableParagraphStyle()
         paragraphStyleEE.alignment = .justified
         paragraphStyleEE.hyphenationFactor = 1
-        
+        //
         attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
-        
+        //
         explanationLabel.attributedText = attributedStringE
-        
+        //
         explanationLabel.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width - 20, height: 0)
         explanationLabel.sizeToFit()
         
         // Scroll View
         scrollViewExplanation.addSubview(explanationLabel)
         scrollViewExplanation.contentSize = CGSize(width: self.view.frame.size.width, height: explanationLabel.frame.size.height + 20)
-        
+        //
         scrollViewExplanation.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        
         
         // Add Views
         view.addSubview(scrollViewExplanation)
         view.addSubview(backgroundViewExplanation)
-        
+        //
         view.bringSubview(toFront: scrollViewExplanation)
         
-        
-        
-        
-        
-        
+        //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.scrollViewExplanation.center.y = (self.view.frame.size.height/2) * 1.5
             self.backgroundViewExplanation.alpha = 0.5
         }, completion: nil)
-        
-        
     }
     
-    
-    
+    // Retract Explanation
     @IBAction func retractExplanation(_ sender: Any) {
-        
+        //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.scrollViewExplanation.center.y = (self.view.frame.size.height/2) * 2.5
             self.backgroundViewExplanation.alpha = 0
-
         }, completion: nil)
-        
+        //
         let delayInSeconds = 0.4
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-    
+            //
             self.scrollViewExplanation.removeFromSuperview()
             self.backgroundViewExplanation.removeFromSuperview()
-        
+            //
             self.explanationLabel.removeFromSuperview()
-    
+            //
             self.nextButton.isEnabled = true
             self.backButton.isEnabled = true
-                    
         }
     }
     
     
-    
-    
-    
-    //
-    // Hide Screen
-    //
+//
+// Pocket Mode ---------------------------------------------------------------------------------------------------------------------
+//
     let blurEffectView = UIVisualEffectView()
     let hideLabel = UILabel()
     var brightness = UIScreen.main.brightness
-    
+    //
     @IBAction func hideScreen(_ sender: Any) {
-        
         // Blur
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         let screenSize = UIScreen.main.bounds
@@ -1298,16 +961,12 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.alpha = 0
         
-    
-        
         // Triple Tap
         let tripleTap = UITapGestureRecognizer()
         tripleTap.numberOfTapsRequired = 3
         tripleTap.addTarget(self, action: #selector(handleTap))
         blurEffectView.isUserInteractionEnabled = true
         blurEffectView.addGestureRecognizer(tripleTap)
-        
-        
         
         // Text
         hideLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
@@ -1319,8 +978,6 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         hideLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         hideLabel.alpha = 0
         hideLabel.text = NSLocalizedString("hideScreen", comment: "")
-        
-        
         
         //
         blurEffectView.addSubview(hideLabel)
@@ -1337,10 +994,9 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         }
     }
     
-    
-    
+    // Exit pocket mode
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
-        
+        //
         self.hideLabel.alpha = 0
 
         //
@@ -1351,106 +1007,77 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         //
         let delayInSeconds = 0.4
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-        
+        //
         self.blurEffectView.removeFromSuperview()
         self.hideLabel.removeFromSuperview()
-        
-        //UIScreen.main.brightness = brightness
         }
     }
     
-    
-    
-    
-    
-    
-    
-    //
-    // Image Buttons
-    //
-    
-    // Target Area Button
+
+//
+// Image Buttons ----------------------------------------------------------------------------------------------------------
+//
+    // Target Area Button (move to right image)
     @IBAction func targetAreaAction(_ sender: Any) {
-        
         //
         targetAreaButton.alpha = 0
         targetAreaButton.isEnabled = false
         demonstrationImageButton.alpha = 1
         demonstrationImageButton.isEnabled = true
-        
-        
+        //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.imageScroll.contentOffset.x = self.imageScroll.frame.size.width
         }, completion: nil)
-        
     }
     
-    
+    // Demonstration Button (move to left image)
     @IBAction func demonstrationAction(_ sender: Any) {
-        
         //
         targetAreaButton.alpha = 1
         targetAreaButton.isEnabled = true
         demonstrationImageButton.alpha = 0
         demonstrationImageButton.isEnabled = false
-
-        
+        //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.imageScroll.contentOffset.x = 0
         }, completion: nil)
     }
     
-    
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
         if (extraSwipe.direction == .right){
-            
             //
             targetAreaButton.alpha = 1
             targetAreaButton.isEnabled = true
             demonstrationImageButton.alpha = 0
             demonstrationImageButton.isEnabled = false
-            
-            
+            //
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 self.imageScroll.contentOffset.x = 0
             }, completion: nil)
-        
-            
+        //
         } else if extraSwipe.direction == .left {
-            
             //
             targetAreaButton.alpha = 0
             targetAreaButton.isEnabled = false
             demonstrationImageButton.alpha = 1
             demonstrationImageButton.isEnabled = true
-            
+            //
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 self.imageScroll.contentOffset.x = self.imageScroll.frame.size.width
             }, completion: nil)
-            
         }
     }
 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //---------------------------------------------------------------------------------------------------------------
-    
-    
+//
+// Walkthrough ----------------------------------------------------------------------------------------------------
+//
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()
     let nextButtonW = UIButton()
     let backButtonW = UIButton()
-    
     
     // Walkthrough
     func walkthroughMindBody() {

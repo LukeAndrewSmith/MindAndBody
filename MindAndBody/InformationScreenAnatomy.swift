@@ -10,25 +10,21 @@ import Foundation
 import UIKit
 
 
-
-
+//
+// Anatomy Class ------------------------------------------------------------------------------------
+//
 class InformationScreenAnatomy: UIViewController {
+  
     
-    
-    
+//
+// Outlets ------------------------------------------------------------------------------------
+//
     // Navigation
     @IBOutlet weak var navigationBar: UINavigationItem!
     let navigationTitle = UILabel()
     
-    
-    
-    
-    
     // Image
     @IBOutlet weak var image: UIImageView!
-    
-    
-    
     
     // Progress Bar
     @IBOutlet weak var progressBarView: UIView!
@@ -40,18 +36,17 @@ class InformationScreenAnatomy: UIViewController {
     // Left Constraint
     @IBOutlet weak var progressLeft: NSLayoutConstraint!
     
-    
-    
-    
     // Colours
     let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
-    
-    
-    
     var bodyPartIndex = 0
     
+    
+//
+// Arrays ------------------------------------------------------------------------------------
+//
+    // Body part array
     let bodyArray: [String] =
         [
             "traps",
@@ -76,6 +71,7 @@ class InformationScreenAnatomy: UIViewController {
             "soleus"
         ]
     
+    // Image Array
     let imageArray: [UIImage] =
         [
             #imageLiteral(resourceName: "Trap"),
@@ -101,22 +97,16 @@ class InformationScreenAnatomy: UIViewController {
         ]
     
     
-    
-    
-    
-    
-    // View Did Load
-    //
+//
+// View did load ------------------------------------------------------------------------------------
+//
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // Title Colour
         //
         self.navigationController?.navigationBar.barTintColor = colour2
         self.navigationController?.navigationBar.tintColor = .white
-        
-        
         
         // Image Swipes
         //
@@ -124,51 +114,37 @@ class InformationScreenAnatomy: UIViewController {
         imageSwipeLeft.direction = UISwipeGestureRecognizerDirection.left
         image.addGestureRecognizer(imageSwipeLeft)
         image.isUserInteractionEnabled = true
-    
         //
         let imageSwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
         imageSwipeRight.direction = UISwipeGestureRecognizerDirection.right
         image.addGestureRecognizer(imageSwipeRight)
         image.isUserInteractionEnabled = true
-        
-
-        
-        
-        
-        
-        
-        
-        
+    
         // Progress Bar
         //
-
         // Thickness
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 49, height: self.progressBarView.frame.size.height / 2)
         progressBar.center = progressBarView.center
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
-        
         // Rounded Edges
         progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
         progressBar.layer.masksToBounds = true
-        
         // Initial state
         progressBar.setProgress(0, animated: true)
-        
         // Left Constraint
         progressLeft.constant = 34 + progressLabel.frame.size.width
         
-        
         // Display Content
         displayContent()
-
     }
     
     
+//
+// Display Content ------------------------------------------------------------------------------------
+//
     // Display Content Function
     //
     func displayContent() {
-        
-        
         
         // Title
         //
@@ -184,20 +160,12 @@ class InformationScreenAnatomy: UIViewController {
         navigationTitle.backgroundColor = .clear
         navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
-        
-        //self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
+        //
         self.navigationBar.titleView = navigationTitle
-        
-        
-        
-        
-    
         
         // Image
         //
         image.image = imageArray[bodyPartIndex]
-        
-        
         
         // Progress
         //
@@ -206,110 +174,64 @@ class InformationScreenAnatomy: UIViewController {
         // Progress Bar
         let bodyIndexP = Float(bodyPartIndex)
         let bodyArrayP = Float(self.bodyArray.count)
-
+        //
         let fractionalProgress = bodyIndexP/bodyArrayP
-        
+        //
         progressBar.setProgress(fractionalProgress, animated: true)
     }
+   
     
-    
-    
-    
-    // Flash Screen
-    //
-    func flashScreen() {
-        
-        let flash = UIView()
-        
-        flash.frame = CGRect(x: 0, y: -100, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
-        flash.backgroundColor = colour1
-        self.view.alpha = 1
-        self.view.addSubview(flash)
-        self.view.bringSubview(toFront: flash)
-        
-        
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
-            
-            flash.alpha = 0
-            
-        }, completion: {(finished: Bool) -> Void in
-            flash.removeFromSuperview()
-        })
-        
-    }
-    
-    
-    
-    
-    
-    
-    //
-    //
+//
+// Button Actions ------------------------------------------------------------------------------------
+//
+    // Next Button
     @IBAction func nextButton(_ sender: Any) {
         //
         if bodyPartIndex == bodyArray.count - 1 {
             navigationTitle.removeFromSuperview()
             _ = self.navigationController?.popToRootViewController(animated: true)
-            
+        //
         } else {
-            
+            //
             bodyPartIndex = bodyPartIndex + 1
-            
-            //flashScreen()
             displayContent()
-
         }
     }
     
-    
+    // Back Button
     @IBAction func backButton(_ sender: Any) {
         //
         if bodyPartIndex == 0 {
-            
         } else {
             bodyPartIndex = bodyPartIndex - 1
-            
-            //flashScreen()
             displayContent()
         }
     }
-    
-
-    
-    
     
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
         //
         if (extraSwipe.direction == .left){
-            
             //
             if bodyPartIndex == bodyArray.count - 1 {
+                //
                 navigationTitle.removeFromSuperview()
                 _ = self.navigationController?.popToRootViewController(animated: true)
-                
+            //
             } else {
-                
+                //
                 bodyPartIndex = bodyPartIndex + 1
-                
-                //flashScreen()
                 displayContent()
             }
-
         //
         } else if extraSwipe.direction == .right {
-            
             //
             if bodyPartIndex == 0 {
-                
             } else {
                 bodyPartIndex = bodyPartIndex - 1
-                
-                //flashScreen()
                 displayContent()
             }
         }
     }
-    
-
+//
 }

@@ -1,8 +1,8 @@
 //
-//  meditationTimerPresets.swift
+//  MeditationTimer.swift
 //  MyFitnessMentor
 //
-//  Created by Luke Smith on 13.02.17.
+//  Created by Luke Smith on 12.02.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -11,10 +11,25 @@ import UIKit
 
 
 //
-// Meditation Timer Presets Class -------------------------------------------------------------------------------------
+// Meditation Timer Class -------------------------------------------------------------------------------------------
 //
-class MeditationTimerPresets: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MeditationTimerOld: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    
+//
+// Arrays -------------------------------------------------------------------------------------------
+//
+    // Arrays
+    let tableViewSections =
+    ["start", "during", "end"
+    ]
+    //
+    let tableViewRows =
+    [
+    ["",],
+    ["", ""],
+    [""]
+    ]
     
 //
 // Outlets -------------------------------------------------------------------------------------------
@@ -29,7 +44,6 @@ class MeditationTimerPresets: UIViewController, UITableViewDelegate, UITableView
     let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
-    
 //
 // View did load -------------------------------------------------------------------------------------------
 //
@@ -40,21 +54,24 @@ class MeditationTimerPresets: UIViewController, UITableViewDelegate, UITableView
         self.view.applyGradient(colours: [colour1, colour1])
         
         //
-        navigationBar.title = NSLocalizedString("presetTimerTitle", comment: "")
+        navigationBar.title = NSLocalizedString("meditationTimerTitle", comment: "")
         //
         self.navigationController?.navigationBar.tintColor = colour1
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 22)!]
         self.navigationController?.navigationBar.barTintColor = colour2
         self.tabBarController?.tabBar.barTintColor = colour2
+        UITabBar.appearance().barTintColor = colour2
+        tabBarController?.tabBar.barStyle = .default
+        self.tabBarController?.tabBar.barTintColor = colour2
+        self.tabBarController?.tabBar.tintColor = colour1
         
-        // TableView
         // TableView Footer
         let footerView = UIView(frame: .zero)
         footerView.backgroundColor = .clear
         tableView.tableFooterView = footerView
     }
     
-
+    
 //
 // Dismiss View -------------------------------------------------------------------------------------------
 //
@@ -64,7 +81,7 @@ class MeditationTimerPresets: UIViewController, UITableViewDelegate, UITableView
     
     
 //
-// TableView -------------------------------------------------------------------------------------------
+// Table View -------------------------------------------------------------------------------------------
 //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -73,12 +90,11 @@ class MeditationTimerPresets: UIViewController, UITableViewDelegate, UITableView
     
     // Title for header
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ""
+        return NSLocalizedString(tableViewSections[section], comment: "")
     }
     
     // Will display header
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
         header.textLabel?.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
@@ -86,16 +102,25 @@ class MeditationTimerPresets: UIViewController, UITableViewDelegate, UITableView
         //
     }
     
+    // View for footer
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }
+    
     // Number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return tableViewRows[section].count
     }
     
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        //cell.textLabel?.text = NSLocalizedString(tableViewRows[indexPath.section][indexPath.row], comment: "")
+        //
+        cell.textLabel?.text = NSLocalizedString(tableViewRows[indexPath.section][indexPath.row], comment: "")
+        //
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
         cell.textLabel?.textAlignment = .left
         cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)

@@ -11,34 +11,6 @@ import UIKit
 import UserNotifications
 
 
-
-// Custom Cell
-//
-class OverviewTableViewCell: UITableViewCell {
-    
-    // Demonstration Image View
-    @IBOutlet weak var demonstrationImageView: UIImageView!
-    
-    // Title Label
-    @IBOutlet weak var movementLabel: UILabel!
-    
-    //
-    @IBOutlet weak var setsRepsLabel: UILabel!
-    
-    
-    // Button View
-    @IBOutlet weak var buttonView: UIView!
-    
-}
-
-class EndTableViewCell: UITableViewCell {
-    
-    // Title Label
-    @IBOutlet weak var titleLabel: UILabel!
-    
-}
-
-
 // View Controller
 //
 class ClassicScreenFull2: UITableViewController {

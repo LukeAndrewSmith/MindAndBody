@@ -9,17 +9,21 @@
 import Foundation
 import UIKit
 
+
+//
+// Yoga Choice Class --------------------------------------------------------------------------------------------------------
+//
 class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
    
     
     // Is Enabled
     var beginButtonEnabled = 0
+ 
     
-    
-    
-    //
+//
+// Arrays --------------------------------------------------------------------------------------------------------
+//
     // Yoga Poses
-    //
     let posesDictionary: [Int: String] =
         [
             // Standing
@@ -109,14 +113,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             79: "flatHandHandstand",
             80: "forearmStand"
             
-    ]
-    
-    
-    
-    
-    
-    
-    
+        ]
     
     // Picker View Array
     let pickerViewArray: [String] =
@@ -127,8 +124,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             "30 min",
             "60 min",
             "yogaMeditation"
-            
-    ]
+        ]
     
     // Practice Section Title
     let practiceSectionTitles: [[String]] =
@@ -145,9 +141,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         ["relaxing", "calming", "uplifting"],
         // Meditation
         ["yogaMeditation"]
-    
     ]
-    
     
     // Preset Arrays
     let practiceTitlesArray: [[[String]]] =
@@ -201,7 +195,6 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             ["lettingGo", "breathing"]
         ]
     ]
-    
     
     // Practice Content Array
     let practiceArray: [[[[Int]]]] =
@@ -309,82 +302,66 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         ]
     ]
     
-    
     // Selected Array
     var selectedArray: [Int] = []
     
     // Selected Title
     var selectedTitle = Int()
     
-
-    
-    
-    
-    
-    
-    
-    //
-    // Outlets
-    //
-    
+//
+// Outlets --------------------------------------------------------------------------------------------------------
+//
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     // Begin Button
     @IBOutlet weak var beginButton: UIButton!
     
-    
     // Table View
     @IBOutlet weak var tableView: UITableView!
     
-    
     // Information View
-    @IBOutlet weak var informationView: UIScrollView!
-    
+    let informationView = UIScrollView()
     // Information Title Label
-    @IBOutlet weak var informationTitle: UILabel!
+    let informationTitle = UILabel()
     
     // PickerViews
     @IBOutlet weak var pickerView: UIPickerView!
     
-    
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
-    
     
     // Colours
     let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        
+   
     
-    
-    
+//
+// Flash Screen --------------------------------------------------------------------------------------------------------
+//
     // Flash Screen
     func flashScreen() {
-        
+        //
         let flash = UIView()
-        
+        //
         flash.frame = CGRect(x: 0, y: pickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
         flash.backgroundColor = colour1
         self.view.alpha = 1
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
-        
-        
+        //
         UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
-            
             flash.alpha = 0
-            
         }, completion: {(finished: Bool) -> Void in
             flash.removeFromSuperview()
         })
-        
     }
     
     
-    // Is Begin Button Enabled
+//
+// Check if begin should be enabled func ------------------------------------------------------------------------------
+//
     func beginEnabled() {
-        
         if beginButtonEnabled == 0 {
             beginButton.isEnabled = false
         } else {
@@ -392,14 +369,10 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    
-    
-    
-    
-    //
-    // ViewDidLoad
-    //
-    
+
+//
+// View did load --------------------------------------------------------------------------------------------------------
+//
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -412,55 +385,29 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2y")
         }
         
-        
-        
         // Colour
         self.view.backgroundColor = colour1
         questionMark.tintColor = colour1
         
-        
-        
         // Navigation Bar Title
-       navigationBar.title = (NSLocalizedString("practices", comment: ""))
-        
-        
-        
+        navigationBar.title = (NSLocalizedString("practices", comment: ""))
         
         // Picker View Test
         pickerView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
-        
-        
-        
-        
-        
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
         beginButton.setTitleColor(colour2, for: .normal)
-        
-        
-        
-        
-        
-        
-        
+    
         // Information
+        //
         // Scroll View Frame
-        self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
-        
-        
-        view.bringSubview(toFront: informationView)
-        
-        
+        informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
+        informationView.backgroundColor = colour1
         // Information Text
         //
         // Information Text Frame
         let informationText = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
-        
-        
-        
-        
-        
         // Information Text Frame
         self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
         informationTitle.text = (NSLocalizedString("information", comment: ""))
@@ -468,48 +415,30 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
         informationTitle.textColor = colour1
         informationTitle.backgroundColor = colour2
-        
-        
+        //
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
         downSwipe.direction = UISwipeGestureRecognizerDirection.down
         informationTitle.addGestureRecognizer(downSwipe)
         informationTitle.isUserInteractionEnabled = true
-        
-        
-        
-        self.view.addSubview(informationTitle)
-        
-        
-        
         // Information Text and Attributes
         //
         // String
         let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
-        
         // Range of String
         let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
-        
-        
         // Range of Titles
         let titleRangeString = (NSLocalizedString("movements", comment: ""))
         let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
-        
-        
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.6
         lineSpacing.hyphenationFactor = 1
-        
-        
         // Add Attributes
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange1)
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
-        
-        
-        
         // Final Text Editing
         informationText.attributedText = informationLabelText
         informationText.textAlignment = .justified
@@ -517,106 +446,74 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         informationText.numberOfLines = 0
         informationText.sizeToFit()
         self.informationView.addSubview(informationText)
-        
-        
+        //
         self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
-        
-        
-        
-        
-        
-        
-        
+    
         // TableView Background
         let tableViewBackground = UIView()
-            
+        //
         tableViewBackground.backgroundColor = colour2
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
-            
+        //
         tableView.backgroundView = tableViewBackground
         
-        
-        
-        
-            
         // Begin Button
         beginEnabled()
-    
-    
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    // Picker Views
-    //
-    
+//
+// Picker View --------------------------------------------------------------------------------------------------------
+//
+    // Number of components
     func numberOfComponents(in: UIPickerView) -> Int {
         return 1
     }
     
-    
-    
-    
+    // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
         return pickerViewArray.count
-        
     }
     
-    
+    // View for row
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
+        //
         let rowLabel = UILabel()
         let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
         let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
         rowLabel.attributedText = myTitle
         rowLabel.textAlignment = .center
         return rowLabel
-        
     }
     
+    // Row height
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        
         return 30
     }
     
+    // Did select row
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedTitle = row
-        
-        
         flashScreen()
         tableView.reloadData()
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    // Table View
-    
+//
+// Table View --------------------------------------------------------------------------------------------------------
+//
+    // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
         return practiceSectionTitles[selectedTitle].count
     }
     
+    // Title for header
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return NSLocalizedString(practiceSectionTitles[selectedTitle][section], comment: "")
     }
     
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
-        
+    // Will display header
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
         header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
@@ -624,26 +521,20 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         //colour2
         header.contentView.tintColor = colour1
         //
-        
     }
     
-    
-    
-    
-    
+    // Number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return practiceTitlesArray[selectedTitle].count
     }
     
-    
-    
+    // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        //
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        
+        //
         cell.textLabel?.text = NSLocalizedString(practiceTitlesArray[selectedTitle][indexPath.section][indexPath.row], comment: "")
-        
-        
+        //
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.textLabel?.textAlignment = .left
@@ -651,155 +542,120 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         cell.textLabel?.textColor = .black
         cell.tintColor = .black
         //
-        
         return cell
-        
-        
     }
     
-    
-    
-    
+    // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 47
-        
     }
     
-    
+    // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        //
         let cell = tableView.cellForRow(at: indexPath)
-        
-        
+        //
         for visibleCell in tableView.visibleCells where visibleCell != cell {
             visibleCell.layer.borderColor = UIColor.clear.cgColor
             visibleCell.layer.borderWidth = 0
             visibleCell.accessoryType = .none
         }
-        
+        //
         cell?.layer.borderColor = colour2.cgColor
         cell?.layer.borderWidth = 2
         cell?.accessoryType = .checkmark
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        
         // Enable Begin Button
         beginButtonEnabled = 1
         beginEnabled()
-        
-        
-        
         // Selected Array
         //
         let i1 = pickerView.selectedRow(inComponent: 0)
         let i2 = indexPath.section
         let i3 = indexPath.row
-        
+        //
         selectedArray = practiceArray[i1][i2][i3] as! [Int]
     }
     
     
-    
-    
-    
-    
-    
-    
-    
+//
+// Information Actions --------------------------------------------------------------------------------------------------------
+//
     // QuestionMark Button Action
     @IBAction func informationButtonAction(_ sender: Any) {
-        
-        // Information Down
+        // Slide information down
         if self.informationView.frame.minY < self.view.frame.maxY {
-            
+            // Animate slide
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
                 self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                
-            }, completion: nil)
-            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
+                
             }, completion: nil)
+            //
             self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-            
-            
-            // Buttons
+            // Remove after animation
+            let delayInSeconds = 0.4
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.informationView.removeFromSuperview()
+                self.informationTitle.removeFromSuperview()
+            }
+            // Navigation buttons
             questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
             navigationBar.setHidesBackButton(false, animated: true)
             
-            
-            // Information Up
+            // Slide information up
         } else {
-            
-            
+            //
+            view.addSubview(informationView)
+            view.addSubview(informationTitle)
+            //
+            view.bringSubview(toFront: informationView)
+            view.bringSubview(toFront: informationTitle)
+            // Animate slide
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
                 self.informationView.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-                
-            }, completion: nil)
-            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-                
             }, completion: nil)
+            //
             self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-            
-            
-            // Buttons
+            // Navigation buttons
             questionMark.image = #imageLiteral(resourceName: "Down")
             navigationBar.setHidesBackButton(true, animated: true)
-            
-            
         }
-        
     }
-    
-    
-    
     
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
+        // Information Swipe Down
         if (extraSwipe.direction == .down){
-            
+            // Animate slide
             if self.informationView.frame.minY < self.view.frame.maxY {
                 UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    
                     self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                    
-                }, completion: nil)
-                UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    
                     self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
                 }, completion: nil)
-                
-                
-                // Buttons
+                // Navigation buttons
                 questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
                 navigationBar.setHidesBackButton(false, animated: true)
-                
             }
         }
     }
     
-    // Handle Tap
-    //
+    
+//
+// Expand Image --------------------------------------------------------------------------------------------------------
+//
+    // Expand Image
     let expandedImage = UIImageView()
     let backgroundViewImage = UIButton()
     //
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
-        
-        
         // Get Image
         let sender = extraTap.view as! UIImageView
         let image = sender.image
         // Get Image
         // let index = demonstrationImage.indexWhere
-        
         let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
-        
-        
         // Expanded Image
         //
         expandedImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height/2)
@@ -809,28 +665,20 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         expandedImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         expandedImage.contentMode = .scaleAspectFit
         expandedImage.isUserInteractionEnabled = true
-        
         //expandedImage.image = demonstrationArrayF[section][row]
         expandedImage.image = #imageLiteral(resourceName: "Test 2")
-        
-        
-        
         // Background View
         //
         backgroundViewImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height)
         backgroundViewImage.backgroundColor = .black
         backgroundViewImage.alpha = 0
-        
+        //
         backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
-        
         //
         self.questionMark.isEnabled = true
         self.navigationItem.setHidesBackButton(true, animated: true)
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
-        
-        
-        
         //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.expandedImage.center.y = (height/2) * 1.5
@@ -838,7 +686,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         }, completion: nil)
     }
     
-    
+    // Retract Image
     @IBAction func retractImage(_ sender: Any) {
         //
         let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
@@ -861,37 +709,28 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     
-    
-    
-    
-    
-    
-    
-    
+//
+// Begin Button --------------------------------------------------------------------------------------------------------
+//
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
-        
+        //
         if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
-            
             performSegue(withIdentifier: "yogaSessionSegue1", sender: nil)
-            
         } else {
-            
             performSegue(withIdentifier: "yogaSessionSegue2", sender: nil)
         }
-        
-        
         // Return background to homescreen
         let delayInSeconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            
             _ = self.navigationController?.popToRootViewController(animated: false)
-            
         }
     }
     
     
-    
+//
+// Pass Arrays --------------------------------------------------------------------------------------------------------
+//
     
     // Pass Array to next ViewController
     //
@@ -942,13 +781,9 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
 //    }
     
     
-    
-    
-    
-    
-    //---------------------------------------------------------------------------------------------------------------
-    
-    
+//
+// Walkthrough --------------------------------------------------------------------------------------------------------
+//
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()

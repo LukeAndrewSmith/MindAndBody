@@ -10,15 +10,13 @@ import Foundation
 import UIKit
 
 
-
-
+//
+// Information Screen 1 Class -----------------------------------------------------------------------------
+//
 class InformationScreen1: UIViewController {
-    
-    
     
     // Navigation
     @IBOutlet weak var navigationBar: UINavigationItem!
-    
     
     // Title Array
     let titleArray: [[String]] =
@@ -26,49 +24,27 @@ class InformationScreen1: UIViewController {
             ["breathing", "coreActivation", "mindMuscle", "anatomy", "equipment", "posture", "commonTerms", "routineBuilding", "trainingPhilosophy", "nutrition"],
             ["suggestions"],
             ["vision", "usage"]
-            
         ]
-    
     
     //
     var selectedTopic = [0,0]
-    
-    
     
     // Colours
     let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
     
-
-    
-    
-    
-    
-    // View Did Load
-    //
+//
+// View did load ------------------------------------------------------------------------------------
+//
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         // Title
         //
         navigationBar.title = (NSLocalizedString(titleArray[selectedTopic[0]][selectedTopic[1]], comment: ""))
         
         //self.navigationController?.navigationBar.barTintColor = colour2
         //self.navigationController?.navigationBar.tintColor = .white
-        
-        
-        
-        
-    }
-    
-    
-    //
-    
-    
-    
-    
-    
-    
+    } 
+//
 }

@@ -322,7 +322,6 @@ class Settings: UITableViewController {
                 //
                 tableView.deselectRow(at: indexPath, animated: true)
                
-                
             // Reset App
             } else if indexPath.row == 1 {
                 
@@ -388,9 +387,5 @@ class Settings: UITableViewController {
         navigationItem.backBarButtonItem = backItem
         
     }
-
-    
-    
-    
 //
 }

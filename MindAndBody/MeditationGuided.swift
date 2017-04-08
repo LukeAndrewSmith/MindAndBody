@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+
+//
+// Meditation Guided Class ------------------------------------------------------------------------------------
+//
 class MeditationGuided: UIViewController {
     
     // Navigation Bar
@@ -17,10 +21,8 @@ class MeditationGuided: UIViewController {
     // Begin Button
     @IBOutlet weak var beginButton: UIButton!
     
-    
     // Image
     @IBOutlet weak var imageView: UIImageView!
-    
     
     // Detail
     @IBOutlet weak var detailView: UIView!
@@ -29,7 +31,6 @@ class MeditationGuided: UIViewController {
     // Discussion
     @IBOutlet weak var discussionScrollView: UIScrollView!
     @IBOutlet weak var discussionTitle: UILabel!
-    
     
     // Details
     //
@@ -47,17 +48,14 @@ class MeditationGuided: UIViewController {
     @IBOutlet weak var duration: UILabel!
     
     
-    
-    
-    
     // Passed from previous VC
     //var guidedTitle = String()
     var selectedSession = [0, 0]
     
     
-    
-    // Content Arrays
-    
+//
+// Content Arrays -------------------------------------------------------------------------------------------
+//
     // Sessions Titles
     let guidedSessions =
         [
@@ -67,7 +65,6 @@ class MeditationGuided: UIViewController {
             ["bodyScan", "unwind"],
             ["lotusStretch", "generalStretch"]
         ]
-    
     // Theme
     let themeArray =
         [
@@ -77,7 +74,6 @@ class MeditationGuided: UIViewController {
             ["bodyScan", "unwind"],
             ["lotusStretch", "generalStretch"]
         ]
-    
     // Aim
     let aimArray =
         [
@@ -87,7 +83,6 @@ class MeditationGuided: UIViewController {
             ["trance", "disentangle"],
             ["relaxation", "relaxation"]
     ]
-    
     // Focus
     let focusArray =
         [
@@ -97,7 +92,6 @@ class MeditationGuided: UIViewController {
             ["admission", "clarity"],
             ["acceptance", "acceptance"]
     ]
-    
     // Duration
     let durationArray =
         [
@@ -107,7 +101,6 @@ class MeditationGuided: UIViewController {
             ["20min", "10min"],
             ["20min", "20min"]
     ]
-    
     // Image
     
     
@@ -121,68 +114,44 @@ class MeditationGuided: UIViewController {
             ["lotusStretchD", "generalStretchD"]
     ]
     
-    
-    
     // Colours
     let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        
-
-
     
     
-    
-    //
-    // ViewDidLoad
-    //
-    
+//
+// View did load -------------------------------------------------------------------------------------------
+//
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Colour
         self.view.applyGradient(colours: [colour1, colour1])
         
-        
-        
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
         beginButton.setTitleColor(colour2, for: .normal)
-        
-        
-        
-        
         
         // View Elements
         //
         // Description
         detailView.backgroundColor = colour2
-        
+        //
         detailTitle.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         detailTitle.text = NSLocalizedString("detail", comment: "")
-        
-        
         //
         imageView.backgroundColor = colour2
         imageView.layer.cornerRadius = 3
         imageView.layer.masksToBounds = true
-        
+        //
         imageView.image = #imageLiteral(resourceName: "TestG")
         
         
-        
-        
-        
-        
-        
-        
-        
-        //
         // Content
         //
         
         // Navigation Bar Title
         navigationBar.title = NSLocalizedString(guidedSessions[selectedSession[0]][selectedSession[1]], comment: "")
-        
         
         // Details
         //
@@ -193,7 +162,6 @@ class MeditationGuided: UIViewController {
             theme.text = NSLocalizedString(themeArray[selectedSession[0]][selectedSession[1]], comment: "")
             theme.adjustsFontSizeToFitWidth = true
         
-        
         // Aim
             //
             aimTitle.text = NSLocalizedString("aim", comment: "")
@@ -201,7 +169,6 @@ class MeditationGuided: UIViewController {
             aim.text = NSLocalizedString(aimArray[selectedSession[0]][selectedSession[1]], comment: "")
             aim.adjustsFontSizeToFitWidth = true
 
-        
         // Focus
             //
             focusTitle.text = NSLocalizedString("focus", comment: "")
@@ -209,7 +176,6 @@ class MeditationGuided: UIViewController {
             focus.text = NSLocalizedString(focusArray[selectedSession[0]][selectedSession[1]], comment: "")
             focus.adjustsFontSizeToFitWidth = true
 
-        
         // Duration
             //
             durationTitle.text = NSLocalizedString("duration", comment: "")
@@ -217,23 +183,18 @@ class MeditationGuided: UIViewController {
             duration.text = NSLocalizedString(durationArray[selectedSession[0]][selectedSession[1]], comment: "")
             duration.adjustsFontSizeToFitWidth = true
 
-        
         // Image
         //
         
-        
-        
-        
+    
         // Discussion
         //
         // Scroll
         discussionScrollView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        
-        
+        //
         discussionTitle.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         discussionTitle.textColor = colour2
         discussionTitle.text = NSLocalizedString("discussion", comment: "")
-        
         
         // Text
         let discussionLabel = UILabel()
@@ -241,11 +202,11 @@ class MeditationGuided: UIViewController {
         let paragraphStyleE = NSMutableParagraphStyle()
         paragraphStyleE.alignment = .justified
         paragraphStyleE.hyphenationFactor = 1
-        
+        //
         attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleE, range: NSMakeRange(0, attributedText.length))
-        
+        //
         discussionLabel.attributedText = attributedText
-        
+        //
         discussionLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
         discussionLabel.textColor = .black
         discussionLabel.textAlignment = .justified
@@ -253,60 +214,38 @@ class MeditationGuided: UIViewController {
         discussionLabel.numberOfLines = 0
         discussionLabel.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width - 20, height: 0)
         discussionLabel.sizeToFit()
-        
         // Scroll View
         discussionScrollView.addSubview(discussionLabel)
         discussionScrollView.contentSize = CGSize(width: self.view.frame.size.width, height: discussionLabel.frame.size.height + 20)
-        
+        //
         self.discussionScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        
-        
-        
-        
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+//
+// Begin Button ----------------------------------------------------------------------------------
+//
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
-        
+        //
         let delayInSeconds = 1.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            
             _ = self.navigationController?.popToRootViewController(animated: false)
-            
         }
-        
     }
     
     
-    
-    
-    // Pass Array to next ViewController
-    //
+//
+// Pass arrays to next View controller -------------------------------------------------------------------------------------------
+//
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         // Pass Info
         if (segue.identifier == "meditationGuided") {
-            
-            
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.viewControllers.first as! MeditationScreenGuided
-            
-            
-            
+            //
             destinationVC.selectedSession = selectedSession
         }
     }
-
-    
-    
+//
 }
