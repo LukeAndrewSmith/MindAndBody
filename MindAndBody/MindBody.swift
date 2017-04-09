@@ -458,15 +458,27 @@ class MindBody: UIViewController {
         
         // Mind & Body section titles
         // body
+//        body.layer.cornerRadius = body.frame.size.height / 2
+//        body.layer.masksToBounds = true
+//        let blurE6 = UIBlurEffect(style: .dark)
+//        blur6.effect = blurE6
+//        let vibrancyE6 = UIVibrancyEffect(blurEffect: blurE6)
+//        blur6.effect = vibrancyE6
+//        blur6.center = body.center
+//        blur6.isUserInteractionEnabled = false
+//        blur6.layer.cornerRadius = body.frame.size.height / 2
+//        blur6.layer.masksToBounds = true
+//        view.insertSubview(blur6, belowSubview: body)
+        //
         body.layer.cornerRadius = body.frame.size.height / 2
         body.layer.masksToBounds = true
         let blurE6 = UIBlurEffect(style: .dark)
         blur6.effect = blurE6
         let vibrancyE6 = UIVibrancyEffect(blurEffect: blurE6)
         blur6.effect = vibrancyE6
-        blur6.center = body.center
+        blur6.center = blur6.center
         blur6.isUserInteractionEnabled = false
-        blur6.layer.cornerRadius = body.frame.size.height / 2
+        blur6.layer.cornerRadius = blur6.frame.size.height / 2
         blur6.layer.masksToBounds = true
         view.insertSubview(blur6, belowSubview: body)
         // mind
@@ -529,9 +541,13 @@ class MindBody: UIViewController {
         Meditation.layer.masksToBounds = true
 
         // Blur Positioning and frame
+        blur6.layer.cornerRadius = body.frame.size.height / 2
+        blur6.layer.masksToBounds = true
         blur6.frame = body.bounds
         blur6.center = body.center
         //
+        blur7.layer.cornerRadius = mind.frame.size.height / 2
+        blur7.layer.masksToBounds = true
         blur7.frame = mind.bounds
         blur7.center = mind.center
     }

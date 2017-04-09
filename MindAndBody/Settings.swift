@@ -83,7 +83,7 @@ class Settings: UITableViewController {
         
         // Border
         let border = CALayer()
-        border.backgroundColor = UIColor.black.cgColor
+        border.backgroundColor = colour2.cgColor
         border.frame = CGRect(x: 15, y: header.frame.size.height-1, width: self.view.frame.size.height, height: 1)
         //
         header.layer.addSublayer(border)

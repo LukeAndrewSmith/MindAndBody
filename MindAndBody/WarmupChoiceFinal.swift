@@ -2158,6 +2158,8 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
 //
 // Custom Warmups --------------------------------------------------------------------------------------------------------------
 //
+    //
+    var okAction = UIAlertAction()
     // Add
     @IBAction func addPreset(_ sender: Any) {
         //
@@ -2206,6 +2208,11 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.tableView.reloadData()
                 
             }))
+            // Cancel reset action
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+                UIAlertAction in
+            }
+            alert.addAction(cancelAction)
             // 4. Present the alert.
             self.present(alert, animated: true, completion: nil)
         } else {
@@ -2223,27 +2230,46 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         let selectedRow = pickerView.selectedRow(inComponent: 0)
         let index = (selectedRow) - (pickerViewArray.count + 1)
         //
+        //
+        let inputTitle = NSLocalizedString("warmupRemoveTitle", comment: "")
+        //
+        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+        alert.view.tintColor = colour2
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         if index > -1 {
             //
-            warmupPreset.remove(at: index)
-            warmupPreset.append(emptyArray)
-            defaults.set(warmupPreset, forKey: warmupPresets[warmupType])
-            //
-            presetTextArray.remove(at: index)
-            presetTextArray.append(emptyString)
-            defaults.set(presetTextArray, forKey: warmupPresetTexts[warmupType])
-            //
-            if number > 0 {
-                let newNumber = number - 1
-                defaults.set(newNumber, forKey: warmupPresetNumbers[warmupType])
-            } else {
-            }
-            //
-            defaults.synchronize()
-            // Flash Screen
-            self.flashScreen()
-            self.pickerView.reloadAllComponents()
-            self.tableView.reloadData()
+            // 3. Get the value from the text field, and perform actions upon OK press
+            okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                //
+
+                warmupPreset.remove(at: index)
+                warmupPreset.append(self.emptyArray)
+                defaults.set(warmupPreset, forKey: self.warmupPresets[self.warmupType])
+                //
+                presetTextArray.remove(at: index)
+                presetTextArray.append(self.emptyString)
+                defaults.set(presetTextArray, forKey: self.warmupPresetTexts[self.warmupType])
+                //
+                if number > 0 {
+                    let newNumber = number - 1
+                    defaults.set(newNumber, forKey: self.warmupPresetNumbers[self.warmupType])
+                } else {
+                }
+                //
+                defaults.synchronize()
+                // Flash Screen
+                self.flashScreen()
+                self.pickerView.reloadAllComponents()
+                self.tableView.reloadData()
+            })
+        alert.addAction(okAction)
+        // Cancel reset action
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        alert.addAction(cancelAction)
+        //
+        self.present(alert, animated: true, completion: nil)
         } else {
         }
     }
