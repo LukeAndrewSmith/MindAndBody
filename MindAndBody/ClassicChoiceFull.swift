@@ -1325,7 +1325,6 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.6
-        lineSpacing.hyphenationFactor = 1
         
         
         // Add Attributes
@@ -1338,7 +1337,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Final Text Editing
         informationText.attributedText = informationLabelText
-        informationText.textAlignment = .justified
+        informationText.textAlignment = .natural
         informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
         informationText.numberOfLines = 0
         informationText.sizeToFit()

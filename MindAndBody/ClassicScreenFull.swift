@@ -825,8 +825,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         // Explanation Text and Scroll View
         let attributedExplanation = NSMutableAttributedString(string: NSLocalizedString(explanationArray[workoutScreenIndex], comment: ""))
         let paragraphStyleE = NSMutableParagraphStyle()
-        paragraphStyleE.alignment = .justified
-        paragraphStyleE.hyphenationFactor = 1
+        paragraphStyleE.alignment = .natural
         
         attributedExplanation.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleE, range: NSMakeRange(0, attributedExplanation.length))
         
@@ -1574,8 +1573,7 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
         
         let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[workoutScreenIndex], comment: ""))
         let paragraphStyleEE = NSMutableParagraphStyle()
-        paragraphStyleEE.alignment = .justified
-        paragraphStyleEE.hyphenationFactor = 1
+        paragraphStyleEE.alignment = .natural
         
         attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
         

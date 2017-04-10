@@ -20,7 +20,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     
     
 //
-// Retreive Arrays ---=---------------------------------------------------------------------------------------------------------
+// Retreive Arrays ---------------------------------------------------------------------------------------------------------
 //
     // Session Screen Index
     //
@@ -386,7 +386,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         
         // Images
         //
-        demonstrationImage.image = #imageLiteral(resourceName: "Test 2")
+        demonstrationImage.image = demonstrationArray[sessionScreenIndex]
         //
         bodyImage.image = targetAreaArray[sessionScreenIndex]
         // Scroll
@@ -897,8 +897,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         //
         let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[sessionScreenIndex], comment: ""))
         let paragraphStyleEE = NSMutableParagraphStyle()
-        paragraphStyleEE.alignment = .justified
-        paragraphStyleEE.hyphenationFactor = 1
+        paragraphStyleEE.alignment = .natural
         //
         attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
         //

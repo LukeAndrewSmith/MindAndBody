@@ -124,7 +124,6 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.6
-        lineSpacing.hyphenationFactor = 1
         // Add Attributes
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
@@ -134,7 +133,7 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         // Final Text Editing
         informationTextMeditationC.attributedText = informationLabelText
-        informationTextMeditationC.textAlignment = .justified
+        informationTextMeditationC.textAlignment = .natural
         informationTextMeditationC.lineBreakMode = NSLineBreakMode.byWordWrapping
         informationTextMeditationC.numberOfLines = 0
         informationTextMeditationC.sizeToFit()

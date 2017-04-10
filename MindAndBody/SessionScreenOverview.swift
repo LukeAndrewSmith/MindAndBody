@@ -355,7 +355,7 @@ class SessionScreenOverview: UITableViewController {
             
             // Image
             //
-            cell.demonstrationImageView.image = #imageLiteral(resourceName: "Test")
+            cell.demonstrationImageView.image = demonstrationArray[indexPath.row]
             
             
             //
@@ -607,8 +607,7 @@ class SessionScreenOverview: UITableViewController {
         expandedImage.contentMode = .scaleAspectFit
         expandedImage.isUserInteractionEnabled = true
         
-        //expandedImage.image = demonstrationArrayF[section][row]
-        expandedImage.image = #imageLiteral(resourceName: "Test 2")
+        expandedImage.image = image
         
         // Background View
         //

@@ -55,7 +55,7 @@ class Settings: UITableViewController {
 // Sections
     // Number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     // Section Titles
@@ -64,7 +64,8 @@ class Settings: UITableViewController {
         case 0: return (NSLocalizedString("homeScreenImage", comment: ""))
         case 1: return (NSLocalizedString("units", comment: ""))
         case 2: return (NSLocalizedString("presentationStyle", comment: ""))
-        case 3: return (NSLocalizedString("reset", comment: ""))
+        case 3: return (NSLocalizedString("restTime", comment: ""))
+        case 4: return (NSLocalizedString("reset", comment: ""))
         default: return (NSLocalizedString("default", comment: ""))
         }
     }
@@ -101,14 +102,12 @@ class Settings: UITableViewController {
 // Rows
     // Number of rows per section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else if section == 1 {
-            return 1
-        } else if section == 2 {
-            return 1
-        } else if section == 3 {
-            return 2
+        //
+        switch section {
+        case 0,1,2: return 1
+        case 3: return 3
+        case 4: return 2
+        default: break
         }
         return 0
     }
@@ -193,8 +192,20 @@ class Settings: UITableViewController {
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             return cell
             
-        // Reset
+        // Rest Time
         case 3:
+            //
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            let row = indexPath.row
+            // Retreive Rest Time
+            //cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "restTime")!, comment: "")
+            cell.textLabel?.textAlignment = NSTextAlignment.left
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            return cell
+            
+        // Reset
+        case 4:
         //
             // Reset Walkthrough
             if indexPath.row == 0 {
@@ -261,8 +272,12 @@ class Settings: UITableViewController {
             }
             tableView.deselectRow(at: indexPath, animated: true)
             
-        // Reset
+        // Rest Time
         case 3:
+            tableView.deselectRow(at: indexPath, animated: true)
+
+        // Reset
+        case 4:
         //
             // Reset Walkthrough
             if indexPath.row == 0 {

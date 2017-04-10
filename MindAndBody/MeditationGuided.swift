@@ -201,7 +201,6 @@ class MeditationGuided: UIViewController {
         let attributedText = NSMutableAttributedString(string: NSLocalizedString(discussionArray[selectedSession[0]][selectedSession[1]], comment: ""))
         let paragraphStyleE = NSMutableParagraphStyle()
         paragraphStyleE.alignment = .justified
-        paragraphStyleE.hyphenationFactor = 1
         //
         attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleE, range: NSMakeRange(0, attributedText.length))
         //
@@ -209,7 +208,7 @@ class MeditationGuided: UIViewController {
         //
         discussionLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
         discussionLabel.textColor = .black
-        discussionLabel.textAlignment = .justified
+        discussionLabel.textAlignment = .natural
         discussionLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         discussionLabel.numberOfLines = 0
         discussionLabel.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width - 20, height: 0)

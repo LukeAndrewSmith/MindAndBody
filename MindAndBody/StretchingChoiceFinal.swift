@@ -20,57 +20,50 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     //
     var stretchingType = Int()
     
+    // Custom
+    //
+    var emptyArrayofArrays: [[Int]] = []
+    
     
 //
 // Arrays -----------------------------------------------------------------------------------------------------------
 //
-    // Changeable Arrays to be used
-    //
-    // Movements Array
-    var stretchingMovementsArray: [[String]] = [[]]
-    var stretchingArray: [String] = []
-
     // Selected Array
-    var stretchingSelectedArray: [[Int]] = [[]]
+    var stretchingSelectedArray: [Int] = []
     
     // Picker View Array
     var pickerViewArray: [String] = []
-    
     // TableView Section Array
-    var tableViewSectionArray: [String] = []
-    
     // Presets
-    var presetsArrays: [[[Int]]] = [[[]]]
+    var presetsArrays: [[Int]] = []
     
     // Custom Presets
         // Empty Array
         var emptyArray: [[Int]] = [[]]
     
     
-    // Screen Arrays
+    // Arrays to be set and used (Screen arrays)
+    // Movements Array
+    var stretchingArray: [String] = []
+
     // Sets Array
-    var setsArrayF: [[Int]] = [[]]
     var setsArray: [Int] = []
     
     // Reps Array
-    var repsArrayF: [[String]] = [[]]
     var repsArray: [String] = []
     
     // Demonstration Array
-    var demonstrationArrayF: [[UIImage]] = [[]]
     var demonstrationArray: [UIImage] = []
     
     // Target Area Array
-    var targetAreaArrayF: [[UIImage]] = [[]]
     var targetAreaArray: [UIImage] = []
     
     // Explanation Array
-    var explanationArrayF: [[String]] = [[]]
     var explanationArray: [String] = []
     
     // Static Arrays
     // Initial Custom Preset Texts
-    var presetTexts: [String] = ["", "", ""]
+    var presetTexts: [String] = []
     
     // Navigation Titles
     let navigationTitles: [String] =
@@ -79,11 +72,6 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
          "postCardio"]
     
     // Custom Preset Keys
-    // Preset Number
-    let stretchingPresetNumbers: [String] =
-        ["stretchingPresetNumberGeneral",
-         "stretchingPresetNumberWorkout",
-         "stretchingPresetNumberCardio"]
     // Preset Array
     let stretchingPresets: [String] =
         ["stretchingPresetsGeneral",
@@ -97,93 +85,10 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     
     
 //
-// General -----------------------------------------------------------------------------------------------------
+// Dictionaries -----------------------------------------------------------------------------------------------------------------------
 //
-    // Stretching General Movements Array
-    var stretchingGeneralArray: [[String]] =
-        [
-            // Recommended
-            ["5minCardioL",
-             "5minCardioI"],
-            // Joint Rotations
-            ["wrist",
-             "elbow",
-             "shoulderR",
-             "neckR",
-             "waist",
-             "hip",
-             "knees",
-             "ankles"],
-            // Foam/Ball Roll
-            ["backf",
-             "thoracicSpine",
-             "lat",
-             "pecDelt",
-             "rearDelt",
-             "quadf",
-             "adductorf",
-             "hamstringf",
-             "glutef",
-             "calvef"],
-            // Back
-            ["catCow",
-             "upwardsDog",
-             "extendedPuppy",
-             "childPose",
-             "staffPose",
-             "pelvicTilt",
-             "kneeToChest",
-             "legDrop",
-             "seatedTwist",
-             "legsWall"],
-            // Obliques(Sides)
-            ["sideLean",
-             "extendedSideAngle",
-             "seatedSide"],
-            // Neck
-            ["rearNeck",
-             "rearNeckHand",
-             "seatedLateral",
-             "neckRotator",
-             "scalene",
-             "headRoll"],
-            // Arms
-            ["forearmStretch",
-             "tricepStretch",
-             "bicepStretch"],
-            // Pecs
-            ["pecStretch"],
-            // Shoulders
-            ["shoulderRoll",
-             "behindBackTouch",
-             "frontDelt",
-             "lateralDelt",
-             "rearDelt",
-             "rotatorCuff"],
-            // Hips and Glutes
-            ["squatHold",
-             "groinStretch",
-             "butterflyPose",
-             "lungeStretch",
-             "threadTheNeedle",
-             "pigeonPose",
-             "seatedGlute"],
-            // Calves
-            ["calveStretch"],
-            // Hamstrings
-            ["standingHamstring",
-             "standingOneLegHamstring",
-             "singleLegStanding",
-             "downWardsDog",
-             "singleLegHamstring",
-             "twoLegHamstring"],
-            // Quads
-            ["lungeStretchWall",
-             "QuadStretch"]
-        ]
-    
     // Table View Section Title Array
-    var tableViewSectionArrayGeneral: [String] =
+    var tableViewSectionArray: [String] =
         [
             "recommended",
             "jointRotation",
@@ -198,493 +103,587 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             "calves",
             "hamstrings",
             "quads"
-        ]
-    
-    // Custom Preset General
-    let emptyArrayGeneral: [[Int]] =
-        [
-            // Recommended
-            [0,0],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            // Back
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            // Obliques(Sides)
-            [0, 0, 0],
-            // Neck
-            [0, 0, 0, 0, 0, 0],
-            // Arms
-            [0, 0, 0],
-            // Pecs
-            [0],
-            // Shoulders
-            [0, 0, 0, 0, 0, 0],
-            // Hips and Glutes
-            [0, 0, 0, 0, 0, 0, 0],
-            // Calves
-            [0],
-            // Hamstrings
-            [0, 0, 0, 0, 0, 0],
-            // Quads
-            [0, 0]
-        ]
-    
-    //
-    var stretchingGeneralPresets: [[[Int]]] =
-        [
-            [
-                // Recommended
-                [0,0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0,0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0,0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ]
     ]
     
-    // Stretching Screen Arrays
-    //
-    var setsArrayGeneral: [[Int]] =
+    // Stretching Post Workout Array
+    var stretchingKeyArray: [[Int]] =
         [
             // Recommended
-            [1, 1],
+            [0],
             // Joint Rotations
             [1,
-             1, 1, 1, 1, 1, 1, 1],
+             2,
+             3,
+             4,
+             5,
+             6,
+             7,
+             8],
             // Foam/Ball Roll
-            [1, 3, 1, 1, 1, 1, 1, 1, 1, 1],
+            [9,
+             10,
+             11,
+             12,
+             13,
+             14,
+             15,
+             16,
+             17,
+             18],
             // Back
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [19,
+             20,
+             21,
+             22,
+             23,
+             24,
+             25,
+             26,
+             27,
+             28],
             // Obliques(Sides)
-            [1, 1, 1],
+            [29,
+             30,
+             31],
             // Neck
-            [1, 2, 1, 1, 1, 1],
+            [32,
+             33,
+             34,
+             35,
+             36,
+             37],
             // Arms
-            [1, 1, 1],
+            [38,
+             39,
+             40],
             // Pecs
-            [1],
+            [41],
             // Shoulders
-            [1, 1, 1, 1, 1, 1],
+            [42,
+             43,
+             44,
+             45,
+             46,
+             47],
             // Hips and Glutes
-            [2, 1, 1, 1, 1, 1, 1],
+            [48,
+             49,
+             50,
+             51,
+             52,
+             53,
+             54],
             // Calves
-            [1],
+            [55],
             // Hamstrings
-            [3, 3, 1, 1, 1, 1],
+            [56,
+             57,
+             58,
+             59,
+             60,
+             61],
             // Quads
-            [1, 1]
-        ]
+            [62,
+             63]
+    ]
     
-    // Reps Array
-    var repsArrayGeneral: [[String]] =
+    // Stretching Post Workout Array
+    var stretchingDictionary: [Int : String] =
         [
             // Recommended
-            ["5min",
-             "5min"],
+            0: "5minCardioL",
             // Joint Rotations
-            ["10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s"],
+            1: "wrist",
+            2: "elbow",
+            3: "shoulderR",
+            4: "neckR",
+            5: "waist",
+            6: "hip",
+            7: "knees",
+            8: "ankles",
             // Foam/Ball Roll
-            ["2-7 reps",
-             "5-10 reps",
-             "2-7 reps",
-             "15-30s",
-             "15-30s",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps"],
+            9: "backf",
+            10: "thoracicSpine",
+            11: "lat",
+            12: "pecDelt",
+            13: "rearDelt",
+            14: "quadf",
+            15: "adductorf",
+            16: "hamstringf",
+            17: "glutef",
+            18: "calvef",
             // Back
-            ["15-20 reps",
-             "15-30s",
-             "30-60s",
-             "30-180s",
-             "30-90s",
-             "10-30 reps",
-             "30-60s",
-             "25-45s",
-             "30-60s",
-             "30-180s"],
+            19: "catCow",
+            20: "upwardsDog",
+            21: "extendedPuppy",
+            22: "childPose",
+            23: "staffPose",
+            24: "pelvicTilt",
+            25: "kneeToChest",
+            26: "legDrop",
+            27: "seatedTwist",
+            28: "legsWall",
             // Obliques(Sides)
-            ["10-20s",
-             "15-30s",
-             "15-30s"],
+            29: "sideLean",
+            30: "extendedSideAngle",
+            31: "seatedSide",
             // Neck
-            ["15-30s",
-             "5-10s",
-             "15-30s",
-             "15-30s",
-             "15-30s",
-             "20-40s"],
+            32: "rearNeck",
+            33: "rearNeckHand",
+            34: "seatedLateral",
+            35: "neckRotator",
+            36: "scalene",
+            37: "headRoll",
             // Arms
-            ["15-30s",
-             "15-30s",
-             "15-30s"],
+            38: "forearmStretch",
+            39: "tricepStretch",
+            40: "bicepStretch",
             // Pecs
-            ["15-30s"],
+            41: "pecStretch",
             // Shoulders
-            ["20-40s",
-             "10-20s",
-             "15-30s",
-             "15-30s",
-             "15-30s",
-             "15-30s"],
+            42: "shoulderRoll",
+            43: "behindBackTouch",
+            44: "frontDelt",
+            45: "lateralDelt",
+            46: "rearDelt",
+            47: "rotatorCuff",
             // Hips and Glutes
-            ["1-5min",
-             "5-10 reps",
-             "15-30s",
-             "15-30s",
-             "15-30s",
-             "15-45s",
-             "15-45s"],
+            48: "squatHold",
+            49: "groinStretch",
+            50: "butterflyPose",
+            51: "lungeStretch",
+            52: "threadTheNeedle",
+            53: "pigeonPose",
+            54: "seatedGlute",
             // Calves
-            ["15-30s"],
+            55: "calveStretch",
             // Hamstrings
-            ["10s",
-             "10s",
-             "15-30s",
-             "15-45s",
-             "15-60s",
-             "15-60s"],
+            56: "standingHamstring",
+            57: "standingOneLegHamstring",
+            58: "singleLegStanding",
+            59: "downWardsDog",
+            60: "singleLegHamstring",
+            61: "twoLegHamstring",
             // Quads
-            ["15-30s",
-             "15-30s"]
-        ]
+            62: "lungeStretchWall",
+            63: "QuadStretch"
+    ]
+    
+    // Screen Arrays
+    //
+    var setsDictionary: [Int : Int] =
+        [
+            // Recommended
+            0: 1,
+            // Joint Rotations
+            1: 1,
+            2: 1,
+            3: 1,
+            4: 1,
+            5: 1,
+            6: 1,
+            7: 1,
+            8: 1,
+            // Foam/Ball Roll
+            9: 1,
+            10: 3,
+            11: 1,
+            12: 1,
+            13: 1,
+            14: 1,
+            15: 1,
+            16: 1,
+            17: 1,
+            18: 1,
+            // Back
+            19: 1,
+            20: 1,
+            21: 1,
+            22: 1,
+            23: 1,
+            24: 1,
+            25: 1,
+            26: 1,
+            27: 1,
+            28: 1,
+            // Obliques(Sides)
+            29: 1,
+            30: 1,
+            31: 1,
+            // Neck
+            32: 1,
+            33: 2,
+            34: 1,
+            35: 1,
+            36: 1,
+            37: 1,
+            // Arms
+            38: 1,
+            39: 1,
+            40: 1,
+            // Pecs
+            41: 1,
+            // Shoulders
+            42: 1,
+            43: 1,
+            44: 1,
+            45: 1,
+            46: 1,
+            47: 1,
+            // Hips and Glutes
+            48: 2,
+            49: 1,
+            50: 1,
+            51: 1,
+            52: 1,
+            53: 1,
+            54: 1,
+            // Calves
+            55: 1,
+            // Hamstrings
+            56: 3,
+            57: 3,
+            58: 1,
+            59: 1,
+            60: 1,
+            61: 1,
+            // Quads
+            62: 1,
+            63: 1
+    ]
+    
+    // Reps Array
+    var repsDictionary: [Int : String] =
+        [
+            // Recommended
+            0: "5min",
+            // Joint Rotations
+            1: "10-30s",
+            2: "10-30s",
+            3: "10-30s",
+            4: "10-30s",
+            5: "10-30s",
+            6: "10-30s",
+            7: "10-30s",
+            8: "10-30s",
+            // Foam/Ball Roll
+            9: "2-7 reps",
+            10: "5-10 reps",
+            11: "2-7 reps",
+            12: "15-30s",
+            13: "15-30s",
+            14: "2-7 reps",
+            15: "2-7 reps",
+            16: "2-7 reps",
+            17: "2-7 reps",
+            18: "2-7 reps",
+            // Back
+            19: "15-20 reps",
+            20: "15-30s",
+            21: "30-60s",
+            22: "30-180s",
+            23: "30-90s",
+            24: "10-30 reps",
+            25: "30-60s",
+            26: "25-45s",
+            27: "30-60s",
+            28: "30-180s",
+            // Obliques(Sides)
+            29: "10-20s",
+            30: "15-30s",
+            31: "15-30s",
+            // Neck
+            32: "15-30s",
+            33: "5-10s",
+            34: "15-30s",
+            35: "15-30s",
+            36: "15-30s",
+            37: "20-40s",
+            // Arms
+            38: "15-30s",
+            39: "15-30s",
+            40: "15-30s",
+            // Pecs
+            41: "15-30s",
+            // Shoulders
+            42: "20-40s",
+            43: "10-20s",
+            44: "15-30s",
+            45: "15-30s",
+            46: "15-30s",
+            47: "15-30s",
+            // Hips and Glutes
+            48: "1-5min",
+            49: "5-10 reps",
+            50: "15-30s",
+            51: "15-30s",
+            52: "15-30s",
+            53: "15-45s",
+            54: "15-45s",
+            // Calves
+            55: "15-30s",
+            // Hamstrings
+            56: "10s",
+            57: "10s",
+            58: "15-30s",
+            59: "15-45s",
+            60: "15-60s",
+            61: "15-60s",
+            // Quads
+            62: "15-30s",
+            63: "15-30s"
+    ]
     
     // Demonstration Array
-    var demonstrationArrayGeneral: [[UIImage]] =
-    [
-    // Mandatory
-    [#imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test")],
-    // Joint Rotations
-    [#imageLiteral(resourceName: "Wrist Rotations"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test")],
-    // Foam/Ball Roll
-    [#imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test")],
-    // Back
-    [#imageLiteral(resourceName: "Cow"),
-    #imageLiteral(resourceName: "Upwards Dog"),
-    #imageLiteral(resourceName: "Extended Puppy"),
-    #imageLiteral(resourceName: "Childs Pose"),
-    #imageLiteral(resourceName: "Staff Pose"),
-    #imageLiteral(resourceName: "Pelvic Tilt"),
-    #imageLiteral(resourceName: "Knee Chest"),
-    #imageLiteral(resourceName: "Knee Drop"),
-    #imageLiteral(resourceName: "Marichis Pose"),
-    #imageLiteral(resourceName: "Legs Wall")],
-    // Obliques(Sides)
-    [#imageLiteral(resourceName: "Side Bend"),
-    #imageLiteral(resourceName: "Extended Side Angle"),
-    #imageLiteral(resourceName: "Half Straddle Side Bend")],
-    // Neck
-    [#imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test")],
-    // Arms
-    [#imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test")],
-    // Pecs
-    [#imageLiteral(resourceName: "Test")],
-    // Shoulders
-    [#imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test")],
-    // Hips and Glutes
-    [#imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test")],
-    // Calves
-    [#imageLiteral(resourceName: "Test")],
-    // Hamstrings
-    [#imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test")],
-    // Quads
-    [#imageLiteral(resourceName: "Test"),
-    #imageLiteral(resourceName: "Test")]
+    var demonstrationDictionary: [Int : UIImage] =
+        [
+            // Mandatory
+            0: #imageLiteral(resourceName: "Test"),
+            // Joint Rotations
+            1: #imageLiteral(resourceName: "Wrist Rotations"),
+            2: #imageLiteral(resourceName: "Test"),
+            3: #imageLiteral(resourceName: "Test"),
+            4: #imageLiteral(resourceName: "Test"),
+            5: #imageLiteral(resourceName: "Test"),
+            6: #imageLiteral(resourceName: "Test"),
+            7: #imageLiteral(resourceName: "Test"),
+            8: #imageLiteral(resourceName: "Test"),
+            // Foam/Ball Roll
+            9: #imageLiteral(resourceName: "Test"),
+            10: #imageLiteral(resourceName: "Test"),
+            11: #imageLiteral(resourceName: "Test"),
+            12: #imageLiteral(resourceName: "Test"),
+            13: #imageLiteral(resourceName: "Test"),
+            14: #imageLiteral(resourceName: "Test"),
+            15: #imageLiteral(resourceName: "Test"),
+            16: #imageLiteral(resourceName: "Test"),
+            17: #imageLiteral(resourceName: "Test"),
+            18: #imageLiteral(resourceName: "Test"),
+            // Back
+            19: #imageLiteral(resourceName: "Cow"),
+            20: #imageLiteral(resourceName: "Upwards Dog"),
+            21: #imageLiteral(resourceName: "Extended Puppy"),
+            22: #imageLiteral(resourceName: "Childs Pose"),
+            23: #imageLiteral(resourceName: "Staff Pose"),
+            24: #imageLiteral(resourceName: "Pelvic Tilt"),
+            25: #imageLiteral(resourceName: "Knee Chest"),
+            26: #imageLiteral(resourceName: "Knee Drop"),
+            27: #imageLiteral(resourceName: "Marichis Pose"),
+            28: #imageLiteral(resourceName: "Legs Wall"),
+            // Obliques(Sides)
+            29: #imageLiteral(resourceName: "Side Bend"),
+            30: #imageLiteral(resourceName: "Extended Side Angle"),
+            31: #imageLiteral(resourceName: "Half Straddle Side Bend"),
+            // Neck
+            32: #imageLiteral(resourceName: "Test"),
+            33: #imageLiteral(resourceName: "Test"),
+            34: #imageLiteral(resourceName: "Test"),
+            35: #imageLiteral(resourceName: "Test"),
+            36: #imageLiteral(resourceName: "Test"),
+            37: #imageLiteral(resourceName: "Test"),
+            // Arms
+            38: #imageLiteral(resourceName: "Test"),
+            39: #imageLiteral(resourceName: "Test"),
+            40: #imageLiteral(resourceName: "Test"),
+            // Pecs
+            41: #imageLiteral(resourceName: "Test"),
+            // Shoulders
+            42: #imageLiteral(resourceName: "Test"),
+            43: #imageLiteral(resourceName: "Test"),
+            44: #imageLiteral(resourceName: "Test"),
+            45: #imageLiteral(resourceName: "Test"),
+            46: #imageLiteral(resourceName: "Test"),
+            47: #imageLiteral(resourceName: "Test"),
+            // Hips and Glutes
+            48: #imageLiteral(resourceName: "Test"),
+            49: #imageLiteral(resourceName: "Test"),
+            50: #imageLiteral(resourceName: "Test"),
+            51: #imageLiteral(resourceName: "Test"),
+            52: #imageLiteral(resourceName: "Test"),
+            53: #imageLiteral(resourceName: "Test"),
+            54:#imageLiteral(resourceName: "Test"),
+            // Calves
+            55: #imageLiteral(resourceName: "Test"),
+            // Hamstrings
+            56: #imageLiteral(resourceName: "Test"),
+            57: #imageLiteral(resourceName: "Test"),
+            58: #imageLiteral(resourceName: "Test"),
+            59: #imageLiteral(resourceName: "Test"),
+            60: #imageLiteral(resourceName: "Test"),
+            61: #imageLiteral(resourceName: "Test"),
+            // Quads
+            62: #imageLiteral(resourceName: "Test"),
+            63: #imageLiteral(resourceName: "Test")
     ]
     
     // Target Area Array
-    var targetAreaArrayGeneral: [[UIImage]] =
+    var targetAreaDictionary: [Int : UIImage] =
         [
             // Mandatory
-            [#imageLiteral(resourceName: "Heart"),
-             #imageLiteral(resourceName: "Heart")],
+            0: #imageLiteral(resourceName: "Heart"),
             // Joint Rotations
-            [#imageLiteral(resourceName: "Wrist Joint"),
-             #imageLiteral(resourceName: "Elbow Joint"),
-             #imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Neck Joint"),
-             #imageLiteral(resourceName: "Waist Joint"),
-             #imageLiteral(resourceName: "Hip Joint"),
-             #imageLiteral(resourceName: "Knee Joint"),
-             #imageLiteral(resourceName: "Ankle Joint")],
+            1: #imageLiteral(resourceName: "Wrist Joint"),
+            2: #imageLiteral(resourceName: "Elbow Joint"),
+            3: #imageLiteral(resourceName: "Shoulder Joint"),
+            4: #imageLiteral(resourceName: "Neck Joint"),
+            5: #imageLiteral(resourceName: "Waist Joint"),
+            6: #imageLiteral(resourceName: "Hip Joint"),
+            7: #imageLiteral(resourceName: "Knee Joint"),
+            8: #imageLiteral(resourceName: "Ankle Joint"),
             // Foam/Ball Roll
-            [#imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Lat and Delt"),
-             #imageLiteral(resourceName: "Pec and Front Delt"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Quad"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Glute"),
-             #imageLiteral(resourceName: "Calf")],
+            9: #imageLiteral(resourceName: "Thoracic"),
+            10: #imageLiteral(resourceName: "Thoracic"),
+            11: #imageLiteral(resourceName: "Lat and Delt"),
+            12: #imageLiteral(resourceName: "Pec and Front Delt"),
+            13: #imageLiteral(resourceName: "Rear Delt"),
+            14: #imageLiteral(resourceName: "Quad"),
+            15: #imageLiteral(resourceName: "Adductor"),
+            16: #imageLiteral(resourceName: "Hamstring"),
+            17: #imageLiteral(resourceName: "Glute"),
+            18: #imageLiteral(resourceName: "Calf"),
             // Back
-            [#imageLiteral(resourceName: "Spine"),
-             #imageLiteral(resourceName: "Spine and Core"),
-             #imageLiteral(resourceName: "Spine"),
-             #imageLiteral(resourceName: "Spine"),
-             #imageLiteral(resourceName: "Hamstring and Lower Back"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Spine"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Hamstring and Lower Back")],
+            19: #imageLiteral(resourceName: "Spine"),
+            20: #imageLiteral(resourceName: "Spine and Core"),
+            21: #imageLiteral(resourceName: "Spine"),
+            22: #imageLiteral(resourceName: "Spine"),
+            23: #imageLiteral(resourceName: "Hamstring and Lower Back"),
+            24: #imageLiteral(resourceName: "Core"),
+            25: #imageLiteral(resourceName: "Spine"),
+            26: #imageLiteral(resourceName: "Core"),
+            27: #imageLiteral(resourceName: "Core"),
+            28: #imageLiteral(resourceName: "Hamstring and Lower Back"),
             // Obliques(Sides)
-            [#imageLiteral(resourceName: "Oblique"),
-             #imageLiteral(resourceName: "Oblique"),
-             #imageLiteral(resourceName: "Oblique")],
+            29: #imageLiteral(resourceName: "Oblique"),
+            30: #imageLiteral(resourceName: "Oblique"),
+            31: #imageLiteral(resourceName: "Oblique"),
             // Neck
-            [#imageLiteral(resourceName: "Rear Neck"),
-             #imageLiteral(resourceName: "Rear Neck"),
-             #imageLiteral(resourceName: "Lateral Neck"),
-             #imageLiteral(resourceName: "Neck Rotator"),
-             #imageLiteral(resourceName: "Neck Rotator"),
-             #imageLiteral(resourceName: "Neck")],
+            32: #imageLiteral(resourceName: "Rear Neck"),
+            33: #imageLiteral(resourceName: "Rear Neck"),
+            34: #imageLiteral(resourceName: "Lateral Neck"),
+            35: #imageLiteral(resourceName: "Neck Rotator"),
+            36: #imageLiteral(resourceName: "Neck Rotator"),
+            37: #imageLiteral(resourceName: "Neck"),
             // Arms
-            [#imageLiteral(resourceName: "Forearm"),
-             #imageLiteral(resourceName: "Tricep"),
-             #imageLiteral(resourceName: "Bicep")],
+            38: #imageLiteral(resourceName: "Forearm"),
+            39: #imageLiteral(resourceName: "Tricep"),
+            40: #imageLiteral(resourceName: "Bicep"),
             // Pecs
-            [#imageLiteral(resourceName: "Pec")],
+            41: #imageLiteral(resourceName: "Pec"),
             // Shoulders
-            [#imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Front Delt"),
-             #imageLiteral(resourceName: "Lateral Neck"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Rear Delt")],
+            42: #imageLiteral(resourceName: "Shoulder Joint"),
+            43: #imageLiteral(resourceName: "Shoulder Joint"),
+            44: #imageLiteral(resourceName: "Front Delt"),
+            45: #imageLiteral(resourceName: "Lateral Neck"),
+            46: #imageLiteral(resourceName: "Rear Delt"),
+            47: #imageLiteral(resourceName: "Rear Delt"),
             // Hips and Glutes
-            [#imageLiteral(resourceName: "Hip Joint"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hip Area"),
-             #imageLiteral(resourceName: "Piriformis"),
-             #imageLiteral(resourceName: "Glute"),
-             #imageLiteral(resourceName: "Glute")],
+            48: #imageLiteral(resourceName: "Hip Joint"),
+            49: #imageLiteral(resourceName: "Adductor"),
+            50: #imageLiteral(resourceName: "Adductor"),
+            51: #imageLiteral(resourceName: "Hip Area"),
+            52: #imageLiteral(resourceName: "Piriformis"),
+            53: #imageLiteral(resourceName: "Glute"),
+            54: #imageLiteral(resourceName: "Glute"),
             // Calves
-            [#imageLiteral(resourceName: "Calf")],
+            55: #imageLiteral(resourceName: "Calf"),
             // Hamstrings
-            [#imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring")],
+            56: #imageLiteral(resourceName: "Hamstring"),
+            57: #imageLiteral(resourceName: "Hamstring"),
+            58: #imageLiteral(resourceName: "Hamstring"),
+            59: #imageLiteral(resourceName: "Hamstring"),
+            60: #imageLiteral(resourceName: "Hamstring"),
+            61: #imageLiteral(resourceName: "Hamstring"),
             // Quads
-            [#imageLiteral(resourceName: "Quad"),
-             #imageLiteral(resourceName: "Quad")]
-            
+            62: #imageLiteral(resourceName: "Quad"),
+            63: #imageLiteral(resourceName: "Quad")
     ]
     
     // Explanation Array
-    var explanationArrayGeneral: [[String]] =
+    var explanationDictionary: [Int : String] =
         [
             // Recommended
-            ["5minCardioLE",
-             "5minCardioIE"],
+            0: "5minCardioL",
             // Joint Rotations
-            ["wristE",
-             "elbowE",
-             "shoulderE",
-             "neckE",
-             "waistE",
-             "hipE",
-             "kneesE",
-             "anklesE"],
+            1: "wrist",
+            2: "elbow",
+            3: "shoulderR",
+            4: "neckR",
+            5: "waist",
+            6: "hip",
+            7: "knees",
+            8: "ankles",
             // Foam/Ball Roll
-            ["backfE",
-             "thoracicSpineE",
-             "latE",
-             "pecDeltE",
-             "rearDeltE",
-             "quadfE",
-             "adductorfE",
-             "hamstringfE",
-             "glutefE",
-             "calvefE"],
+            9: "backf",
+            10: "thoracicSpine",
+            11: "lat",
+            12: "pecDelt",
+            13: "rearDelt",
+            14: "quadf",
+            15: "adductorf",
+            16: "hamstringf",
+            17: "glutef",
+            18: "calvef",
             // Back
-            ["catCowE",
-             "upwardsDogE",
-             "extendedPuppyE",
-             "childPoseE",
-             "staffPoseE",
-             "pelvicTiltE",
-             "kneeToChestE",
-             "legDropE",
-             "seatedTwistE",
-             "legsWallE"],
+            19: "catCow",
+            20: "upwardsDog",
+            21: "extendedPuppy",
+            22: "childPose",
+            23: "staffPose",
+            24: "pelvicTilt",
+            25: "kneeToChest",
+            26: "legDrop",
+            27: "seatedTwist",
+            28: "legsWall",
             // Obliques(Sides)
-            ["sideLeanE",
-             "extendedSideAngleE",
-             "seatedSideE"],
+            29: "sideLean",
+            30: "extendedSideAngle",
+            31: "seatedSide",
             // Neck
-            ["rearNeckE",
-             "rearNeckHandE",
-             "seatedLateralE",
-             "neckRotatorE",
-             "scaleneE",
-             "headRollE"],
+            32: "rearNeck",
+            33: "rearNeckHand",
+            34: "seatedLateral",
+            35: "neckRotator",
+            36: "scalene",
+            37: "headRoll",
             // Arms
-            ["forearmStretchE",
-             "tricepStretchE",
-             "bicepStretchE"],
+            38: "forearmStretch",
+            39: "tricepStretch",
+            40: "bicepStretch",
             // Pecs
-            ["pecStretchE"],
+            41: "pecStretch",
             // Shoulders
-            ["shoulderRollE",
-             "behindBackTouchE",
-             "frontDeltE",
-             "lateralDeltE",
-             "rearDeltE",
-             "rotatorCuffE"],
+            42: "shoulderRoll",
+            43: "behindBackTouch",
+            44: "frontDelt",
+            45: "lateralDelt",
+            46: "rearDelt",
+            47: "rotatorCuff",
             // Hips and Glutes
-            ["squatHoldE",
-             "groinStretchE",
-             "butterflyPoseE",
-             "lungeStretchE",
-             "threadTheNeedleE",
-             "pigeonPoseE",
-             "seatedGluteE"],
+            48: "squatHold",
+            49: "groinStretch",
+            50: "butterflyPose",
+            51: "lungeStretch",
+            52: "threadTheNeedle",
+            53: "pigeonPose",
+            54: "seatedGlute",
             // Calves
-            ["calveStretchE"],
+            55: "calveStretch",
             // Hamstrings
-            ["standingHamstringE",
-             "standingOneLegHamstringE",
-             "singleLegStandingE",
-             "downWardsDogE",
-             "singleLegHamstringE",
-             "twoLegHamstringE"],
+            56: "standingHamstring",
+            57: "standingOneLegHamstring",
+            58: "singleLegStanding",
+            59: "downWardsDog",
+            60: "singleLegHamstring",
+            61: "twoLegHamstring",
             // Quads
-            ["lungeStretchWallE",
-             "QuadStretchE"]
-        ]
+            62: "lungeStretchWall",
+            63: "QuadStretch"
+    ]
+    
+    
+//
+// General -----------------------------------------------------------------------------------------------------
+//
     
     // Picker View Array
     var pickerViewArrayGeneral: [String] =
@@ -699,711 +698,21 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         ]
     
     // Preseys Arrays
-    var presetsArraysGeneral: [[[Int]]] =
+    var presetsArraysGeneral: [[Int]] =
         [
-            [
-                // Recommended
-                [0,0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0,0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0,0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0,0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0,0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0,0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0,0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ]
-    ]
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ]
     
     
 //
 // Post Workout -----------------------------------------------------------------------------------------------------------
 //
-    // Stretching Post Workout Array
-    var stretchingWorkoutArray: [[String]] =
-        [
-            // Recommended
-            ["5minCardioL"],
-            // Joint Rotations
-            ["wrist",
-             "elbow",
-             "shoulderR",
-             "neckR",
-             "waist",
-             "hip",
-             "knees",
-             "ankles"],
-            // Foam/Ball Roll
-            ["backf",
-             "thoracicSpine",
-             "lat",
-             "pecDelt",
-             "rearDelt",
-             "quadf",
-             "adductorf",
-             "hamstringf",
-             "glutef",
-             "calvef"],
-            // Back
-            ["catCow",
-             "upwardsDog",
-             "extendedPuppy",
-             "childPose",
-             "staffPose",
-             "pelvicTilt",
-             "kneeToChest",
-             "legDrop",
-             "seatedTwist",
-             "legsWall"],
-            // Obliques(Sides)
-            ["sideLean",
-             "extendedSideAngle",
-             "seatedSide"],
-            // Neck
-            ["rearNeck",
-             "rearNeckHand",
-             "seatedLateral",
-             "neckRotator",
-             "scalene",
-             "headRoll"],
-            // Arms
-            ["forearmStretch",
-             "tricepStretch",
-             "bicepStretch"],
-            // Pecs
-            ["pecStretch"],
-            // Shoulders
-            ["shoulderRoll",
-             "behindBackTouch",
-             "frontDelt",
-             "lateralDelt",
-             "rearDelt",
-             "rotatorCuff"],
-            // Hips and Glutes
-            ["squatHold",
-             "groinStretch",
-             "butterflyPose",
-             "lungeStretch",
-             "threadTheNeedle",
-             "pigeonPose",
-             "seatedGlute"],
-            // Calves
-            ["calveStretch"],
-            // Hamstrings
-            ["standingHamstring",
-             "standingOneLegHamstring",
-             "singleLegStanding",
-             "downWardsDog",
-             "singleLegHamstring",
-             "twoLegHamstring"],
-            // Quads
-            ["lungeStretchWall",
-             "QuadStretch"]
-        ]
-    
-    // Table View Section Title Array
-    var tableViewSectionArrayWorkout: [String] =
-        [
-            "recommended",
-            "jointRotation",
-            "foamRoll",
-            "backStretch",
-            "sides",
-            "neck",
-            "arms",
-            "pecs",
-            "shoulders",
-            "hipsaGlutes",
-            "calves",
-            "hamstrings",
-            "quads"
-        ]
-    
-    // Custom Presets Post Workout
-    //
-    let emptyArrayWorkout: [[Int]] =
-        [
-            // Recommended
-            [0],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            // Back
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            // Obliques(Sides)
-            [0, 0, 0],
-            // Neck
-            [0, 0, 0, 0, 0, 0],
-            // Arms
-            [0, 0, 0],
-            // Pecs
-            [0],
-            // Shoulders
-            [0, 0, 0, 0, 0, 0],
-            // Hips and Glutes
-            [0, 0, 0, 0, 0, 0, 0],
-            // Calves
-            [0],
-            // Hamstrings
-            [0, 0, 0, 0, 0, 0],
-            // Quads
-            [0, 0]
-    ]
-    //
-    var stretchingWorkoutPresets: [[[Int]]] =
-        [
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ]
-        ]
-    
-    // Screen Arrays
-    //
-    var setsArrayWorkout: [[Int]] =
-        [
-            // Recommended
-            [1],
-            // Joint Rotations
-            [1, 1, 1, 1, 1, 1, 1, 1],
-            // Foam/Ball Roll
-            [1, 3, 1, 1, 1, 1, 1, 1, 1, 1],
-            // Back
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            // Obliques(Sides)
-            [1, 1, 1],
-            // Neck
-            [1, 2, 1, 1, 1, 1],
-            // Arms
-            [1, 1, 1],
-            // Pecs
-            [1],
-            // Shoulders
-            [1, 1, 1, 1, 1, 1],
-            // Hips and Glutes
-            [2, 1, 1, 1, 1, 1, 1],
-            // Calves
-            [1],
-            // Hamstrings
-            [3, 3, 1, 1, 1, 1],
-            // Quads
-            [1, 1]
-    ]
-    
-    // Reps Array
-    var repsArrayWorkout: [[String]] =
-        [
-            // Recommended
-            ["5min"],
-            // Joint Rotations
-            ["10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s"],
-            // Foam/Ball Roll
-            ["2-7 reps",
-             "5-10 reps",
-             "2-7 reps",
-             "15-30s",
-             "15-30s",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps"],
-            // Back
-            ["15-20 reps",
-             "15-30s",
-             "30-60s",
-             "30-180s",
-             "30-90s",
-             "10-30 reps",
-             "30-60s",
-             "25-45s",
-             "30-60s",
-             "30-180s"],
-            // Obliques(Sides)
-            ["10-20s",
-             "15-30s",
-             "15-30s"],
-            // Neck
-            ["15-30s",
-             "5-10s",
-             "15-30s",
-             "15-30s",
-             "15-30s",
-             "20-40s"],
-            // Arms
-            ["15-30s",
-             "15-30s",
-             "15-30s"],
-            // Pecs
-            ["15-30s"],
-            // Shoulders
-            ["20-40s",
-             "10-20s",
-             "15-30s",
-             "15-30s",
-             "15-30s",
-             "15-30s"],
-            // Hips and Glutes
-            ["1-5min",
-             "5-10 reps",
-             "15-30s",
-             "15-30s",
-             "15-30s",
-             "15-45s",
-             "15-45s"],
-            // Calves
-            ["15-30s"],
-            // Hamstrings
-            ["10s",
-             "10s",
-             "15-30s",
-             "15-45s",
-             "15-60s",
-             "15-60s"],
-            // Quads
-            ["15-30s",
-             "15-30s"]
-        ]
-    
-    // Demonstration Array
-    var demonstrationArrayWorkout: [[UIImage]] = [[]]
-    
-    // Target Area Array
-    var targetAreaArrayWorkout: [[UIImage]] =
-        [
-            // Mandatory
-            [#imageLiteral(resourceName: "Heart")],
-            // Joint Rotations
-            [#imageLiteral(resourceName: "Wrist Joint"),
-             #imageLiteral(resourceName: "Elbow Joint"),
-             #imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Neck Joint"),
-             #imageLiteral(resourceName: "Waist Joint"),
-             #imageLiteral(resourceName: "Hip Joint"),
-             #imageLiteral(resourceName: "Knee Joint"),
-             #imageLiteral(resourceName: "Ankle Joint")],
-            // Foam/Ball Roll
-            [#imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Lat and Delt"),
-             #imageLiteral(resourceName: "Pec and Front Delt"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Quad"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Glute"),
-             #imageLiteral(resourceName: "Calf")],
-            // Back
-            [#imageLiteral(resourceName: "Spine"),
-             #imageLiteral(resourceName: "Spine and Core"),
-             #imageLiteral(resourceName: "Spine"),
-             #imageLiteral(resourceName: "Spine"),
-             #imageLiteral(resourceName: "Hamstring and Lower Back"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Spine"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Hamstring and Lower Back")],
-            // Obliques(Sides)
-            [#imageLiteral(resourceName: "Oblique"),
-             #imageLiteral(resourceName: "Oblique"),
-             #imageLiteral(resourceName: "Oblique")],
-            // Neck
-            [#imageLiteral(resourceName: "Rear Neck"),
-             #imageLiteral(resourceName: "Rear Neck"),
-             #imageLiteral(resourceName: "Lateral Neck"),
-             #imageLiteral(resourceName: "Neck Rotator"),
-             #imageLiteral(resourceName: "Neck Rotator"),
-             #imageLiteral(resourceName: "Neck")],
-            // Arms
-            [#imageLiteral(resourceName: "Forearm"),
-             #imageLiteral(resourceName: "Tricep"),
-             #imageLiteral(resourceName: "Bicep")],
-            // Pecs
-            [#imageLiteral(resourceName: "Pec")],
-            // Shoulders
-            [#imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Front Delt"),
-             #imageLiteral(resourceName: "Lateral Neck"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Rear Delt")],
-            // Hips and Glutes
-            [#imageLiteral(resourceName: "Hip Joint"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hip Area"),
-             #imageLiteral(resourceName: "Piriformis"),
-             #imageLiteral(resourceName: "Glute"),
-             #imageLiteral(resourceName: "Glute")],
-            // Calves
-            [#imageLiteral(resourceName: "Calf")],
-            // Hamstrings
-            [#imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring")],
-            // Quads
-            [#imageLiteral(resourceName: "Quad"),
-             #imageLiteral(resourceName: "Quad")]
-        ]
-    
-    // Explanation Array
-    var explanationArrayWorkout: [[String]] =
-        [
-            // Recommended
-            ["5minCardioLCE"],
-            // Joint Rotations
-            ["wristE",
-             "elbowE",
-             "shoulderE",
-             "neckE",
-             "waistE",
-             "hipE",
-             "kneesE",
-             "anklesE"],
-            // Foam/Ball Roll
-            ["backfE",
-             "thoracicSpineE",
-             "latE",
-             "pecDeltE",
-             "rearDeltE",
-             "quadfE",
-             "adductorfE",
-             "hamstringfE",
-             "glutefE",
-             "calvefE"],
-            // Back
-            ["catCowE",
-             "upwardsDogE",
-             "extendedPuppyE",
-             "childPoseE",
-             "staffPoseE",
-             "pelvicTiltE",
-             "kneeToChestE",
-             "legDropE",
-             "seatedTwistE",
-             "legsWallE"],
-            // Obliques(Sides)
-            ["sideLeanE",
-             "extendedSideAngleE",
-             "seatedSideE"],
-            // Neck
-            ["rearNeckE",
-             "rearNeckHandE",
-             "seatedLateralE",
-             "neckRotatorE",
-             "scaleneE",
-             "headRollE"],
-            // Arms
-            ["forearmStretchE",
-             "tricepStretchE",
-             "bicepStretchE"],
-            // Pecs
-            ["pecStretchE"],
-            // Shoulders
-            ["shoulderRollE",
-             "behindBackTouchE",
-             "frontDeltE",
-             "lateralDeltE",
-             "rearDeltE",
-             "rotatorCuffE"],
-            // Hips and Glutes
-            ["squatHoldE",
-             "groinStretchE",
-             "butterflyPoseE",
-             "lungeStretchE",
-             "threadTheNeedleE",
-             "pigeonPoseE",
-             "seatedGluteE"],
-            // Calves
-            ["calveStretchE"],
-            // Hamstrings
-            ["standingHamstringE",
-             "standingOneLegHamstringE",
-             "singleLegStandingE",
-             "downWardsDogE",
-             "singleLegHamstringE",
-             "twoLegHamstringE"],
-            // Quads
-            ["lungeStretchWallE",
-             "QuadStretchE"]
-        ]
-    
     // Post Workout Presets Arrays
     //
     // Picker View Array
@@ -1420,710 +729,22 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         ]
     
     // Preseys Arrays
-    var presetsArraysWorkout: [[[Int]]] =
+    var presetsArraysWorkout: [[Int]] =
         [
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ]
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
         ]
     
     
 //
 // Post Cardio -----------------------------------------------------------------------------------------------------------
 //
-    // Stretching Post Cardio Array
-    var stretchingCardioArray: [[String]] =
-        [
-            // Recommended
-            ["5minCardioL"],
-            // Joint Rotations
-            ["wrist",
-             "elbow",
-             "shoulderR",
-             "neckR",
-             "waist",
-             "hip",
-             "knees",
-             "ankles"],
-            // Foam/Ball Roll
-            ["backf",
-             "thoracicSpine",
-             "lat",
-             "pecDelt",
-             "rearDelt",
-             "quadf",
-             "adductorf",
-             "hamstringf",
-             "glutef",
-             "calvef"],
-            // Back
-            ["catCow",
-             "upwardsDog",
-             "extendedPuppy",
-             "childPose",
-             "staffPose",
-             "pelvicTilt",
-             "kneeToChest",
-             "legDrop",
-             "seatedTwist",
-             "legsWall"],
-            // Obliques(Sides)
-            ["sideLean",
-             "extendedSideAngle",
-             "seatedSide"],
-            // Neck
-            ["rearNeck",
-             "rearNeckHand",
-             "seatedLateral",
-             "neckRotator",
-             "scalene",
-             "headRoll"],
-            // Arms
-            ["forearmStretch",
-             "tricepStretch",
-             "bicepStretch"],
-            // Pecs
-            ["pecStretch"],
-            // Shoulders
-            ["shoulderRoll",
-             "behindBackTouch",
-             "frontDelt",
-             "lateralDelt",
-             "rearDelt",
-             "rotatorCuff"],
-            // Hips and Glutes
-            ["squatHold",
-             "groinStretch",
-             "butterflyPose",
-             "lungeStretch",
-             "threadTheNeedle",
-             "pigeonPose",
-             "seatedGlute"],
-            // Calves
-            ["calveStretch"],
-            // Hamstrings
-            ["standingHamstring",
-             "standingOneLegHamstring",
-             "singleLegStanding",
-             "downWardsDog",
-             "singleLegHamstring",
-             "twoLegHamstring"],
-            // Quads
-            ["lungeStretchWall",
-             "QuadStretch"]
-        ]
-    
-    // Table View Section Title Array
-    var tableViewSectionArrayCardio: [String] =
-        [
-            "recommended",
-            "jointRotation",
-            "foamRoll",
-            "backStretch",
-            "sides",
-            "neck",
-            "arms",
-            "pecs",
-            "shoulders",
-            "hipsaGlutes",
-            "calves",
-            "hamstrings",
-            "quads"
-        ]
-    
-    // Custom Presets Post Cardio
     //
-    let emptyArrayCardio: [[Int]] =
-        [
-            // Recommended
-            [0],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            // Back
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            // Obliques(Sides)
-            [0, 0, 0],
-            // Neck
-            [0, 0, 0, 0, 0, 0],
-            // Arms
-            [0, 0, 0],
-            // Pecs
-            [0],
-            // Shoulders
-            [0, 0, 0, 0, 0, 0],
-            // Hips and Glutes
-            [0, 0, 0, 0, 0, 0, 0],
-            // Calves
-            [0],
-            // Hamstrings
-            [0, 0, 0, 0, 0, 0],
-            // Quads
-            [0, 0]
-        ]
-    //
-    var stretchingCardioPresets: [[[Int]]] =
-        [
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ]
-        ]
-    
-    // Screen Arrays
-    //
-    var setsArrayCardio: [[Int]] =
-        [
-            // Recommended
-            [1],
-            // Joint Rotations
-            [1, 1, 1, 1, 1, 1, 1, 1],
-            // Foam/Ball Roll
-            [1, 3, 1, 1, 1, 1, 1, 1, 1, 1],
-            // Back
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            // Obliques(Sides)
-            [1, 1, 1],
-            // Neck
-            [1, 2, 1, 1, 1, 1],
-            // Arms
-            [1, 1, 1],
-            // Pecs
-            [1],
-            // Shoulders
-            [1, 1, 1, 1, 1, 1],
-            // Hips and Glutes
-            [2, 1, 1, 1, 1, 1, 1],
-            // Calves
-            [1],
-            // Hamstrings
-            [3, 3, 1, 1, 1, 1],
-            // Quads
-            [1, 1]
-        ]
-    
-    // Reps Array
-    var repsArrayCardio: [[String]] =
-        [
-            // Recommended
-            ["5min"],
-            // Joint Rotations
-            ["10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s"],
-            // Foam/Ball Roll
-            ["2-7 reps",
-             "5-10 reps",
-             "2-7 reps",
-             "15-30s",
-             "15-30s",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps"],
-            // Back
-            ["15-20 reps",
-             "15-30s",
-             "30-60s",
-             "30-180s",
-             "30-90s",
-             "10-30 reps",
-             "30-60s",
-             "25-45s",
-             "30-60s",
-             "30-180s"],
-            // Obliques(Sides)
-            ["10-20s",
-             "15-30s",
-             "15-30s"],
-            // Neck
-            ["15-30s",
-             "5-10s",
-             "15-30s",
-             "15-30s",
-             "15-30s",
-             "20-40s"],
-            // Arms
-            ["15-30s",
-             "15-30s",
-             "15-30s"],
-            // Pecs
-            ["15-30s"],
-            // Shoulders
-            ["20-40s",
-             "10-20s",
-             "15-30s",
-             "15-30s",
-             "15-30s",
-             "15-30s"],
-            // Hips and Glutes
-            ["1-5min",
-             "5-10 reps",
-             "15-30s",
-             "15-30s",
-             "15-30s",
-             "15-45s",
-             "15-45s"],
-            // Calves
-            ["15-30s"],
-            // Hamstrings
-            ["10s",
-             "10s",
-             "15-30s",
-             "15-45s",
-             "15-60s",
-             "15-60s"],
-            // Quads
-            ["15-30s",
-             "15-30s"]
-        ]
-    
-    // Demonstration Array
-    var demonstrationArrayCardio: [[UIImage]] = [[]]
-    
-    // Target Area Array
-    var targetAreaArrayCardio: [[UIImage]] =
-        [
-            // Mandatory
-            [#imageLiteral(resourceName: "Heart")],
-            // Joint Rotations
-            [#imageLiteral(resourceName: "Wrist Joint"),
-             #imageLiteral(resourceName: "Elbow Joint"),
-             #imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Neck Joint"),
-             #imageLiteral(resourceName: "Waist Joint"),
-             #imageLiteral(resourceName: "Hip Joint"),
-             #imageLiteral(resourceName: "Knee Joint"),
-             #imageLiteral(resourceName: "Ankle Joint")],
-            // Foam/Ball Roll
-            [#imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Lat and Delt"),
-             #imageLiteral(resourceName: "Pec and Front Delt"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Quad"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Glute"),
-             #imageLiteral(resourceName: "Calf")],
-            // Back
-            [#imageLiteral(resourceName: "Spine"),
-             #imageLiteral(resourceName: "Spine and Core"),
-             #imageLiteral(resourceName: "Spine"),
-             #imageLiteral(resourceName: "Spine"),
-             #imageLiteral(resourceName: "Hamstring and Lower Back"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Spine"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Hamstring and Lower Back")],
-            // Obliques(Sides)
-            [#imageLiteral(resourceName: "Oblique"),
-             #imageLiteral(resourceName: "Oblique"),
-             #imageLiteral(resourceName: "Oblique")],
-            // Neck
-            [#imageLiteral(resourceName: "Rear Neck"),
-             #imageLiteral(resourceName: "Rear Neck"),
-             #imageLiteral(resourceName: "Lateral Neck"),
-             #imageLiteral(resourceName: "Neck Rotator"),
-             #imageLiteral(resourceName: "Neck Rotator"),
-             #imageLiteral(resourceName: "Neck")],
-            // Arms
-            [#imageLiteral(resourceName: "Forearm"),
-             #imageLiteral(resourceName: "Tricep"),
-             #imageLiteral(resourceName: "Bicep")],
-            // Pecs
-            [#imageLiteral(resourceName: "Pec")],
-            // Shoulders
-            [#imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Front Delt"),
-             #imageLiteral(resourceName: "Lateral Neck"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Rear Delt")],
-            // Hips and Glutes
-            [#imageLiteral(resourceName: "Hip Joint"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hip Area"),
-             #imageLiteral(resourceName: "Piriformis"),
-             #imageLiteral(resourceName: "Glute"),
-             #imageLiteral(resourceName: "Glute")],
-            // Calves
-            [#imageLiteral(resourceName: "Calf")],
-            // Hamstrings
-            [#imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Hamstring")],
-            // Quads
-            [#imageLiteral(resourceName: "Quad"),
-             #imageLiteral(resourceName: "Quad")]
-        ]
-    
-    // Explanation Array
-    var explanationArrayCardio: [[String]] =
-        [
-            // Recommended
-            ["5minCardioLCE"],
-            // Joint Rotations
-            ["wristE",
-             "elbowE",
-             "shoulderE",
-             "neckE",
-             "waistE",
-             "hipE",
-             "kneesE",
-             "anklesE"],
-            // Foam/Ball Roll
-            ["backfE",
-             "thoracicSpineE",
-             "latE",
-             "pecDeltE",
-             "rearDeltE",
-             "quadfE",
-             "adductorfE",
-             "hamstringfE",
-             "glutefE",
-             "calvefE"],
-            // Back
-            ["catCowE",
-             "upwardsDogE",
-             "extendedPuppyE",
-             "childPoseE",
-             "staffPoseE",
-             "pelvicTiltE",
-             "kneeToChestE",
-             "legDropE",
-             "seatedTwistE",
-             "legsWallE"],
-            // Obliques(Sides)
-            ["sideLeanE",
-             "extendedSideAngleE",
-             "seatedSideE"],
-            // Neck
-            ["rearNeckE",
-             "rearNeckHandE",
-             "seatedLateralE",
-             "neckRotatorE",
-             "scaleneE",
-             "headRollE"],
-            // Arms
-            ["forearmStretchE",
-             "tricepStretchE",
-             "bicepStretchE"],
-            // Pecs
-            ["pecStretchE"],
-            // Shoulders
-            ["shoulderRollE",
-             "behindBackTouchE",
-             "frontDeltE",
-             "lateralDeltE",
-             "rearDeltE",
-             "rotatorCuffE"],
-            // Hips and Glutes
-            ["squatHoldE",
-             "groinStretchE",
-             "butterflyPoseE",
-             "lungeStretchE",
-             "threadTheNeedleE",
-             "pigeonPoseE",
-             "seatedGluteE"],
-            // Calves
-            ["calveStretchE"],
-            // Hamstrings
-            ["standingHamstringE",
-             "standingOneLegHamstringE",
-             "singleLegStandingE",
-             "downWardsDogE",
-             "singleLegHamstringE",
-             "twoLegHamstringE"],
-            // Quads
-            ["lungeStretchWallE",
-             "QuadStretchE"]
-        ]
     
     // Presets Sessions Arrays
     //
@@ -2140,204 +761,15 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         ]
     
     // Preseys Arrays
-    var presetsArraysCardio: [[[Int]]] =
+    var presetsArraysCardio: [[Int]] =
         [
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ],
-            [
-                // Recommended
-                [0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Back
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Obliques(Sides)
-                [0, 0, 0],
-                // Neck
-                [0, 0, 0, 0, 0, 0],
-                // Arms
-                [0, 0, 0],
-                // Pecs
-                [0],
-                // Shoulders
-                [0, 0, 0, 0, 0, 0],
-                // Hips and Glutes
-                [0, 0, 0, 0, 0, 0, 0],
-                // Calves
-                [0],
-                // Hamstrings
-                [0, 0, 0, 0, 0, 0],
-                // Quads
-                [0, 0]
-            ]
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
         ]
     
     
@@ -2346,52 +778,23 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
 //
     func setArrays() {
         //
+        
         switch stretchingType {
         //
         case 0:
             // Choice Screen Arrays
-            stretchingMovementsArray = stretchingGeneralArray
             stretchingSelectedArray = presetsArraysGeneral[0]
             pickerViewArray = pickerViewArrayGeneral
-            tableViewSectionArray = tableViewSectionArrayGeneral
-            presetsArrays = presetsArraysGeneral
-            emptyArray = emptyArrayGeneral
-            // Screen Arrays
-            setsArrayF = setsArrayGeneral
-            repsArrayF = repsArrayGeneral
-            demonstrationArrayF = demonstrationArrayGeneral
-            targetAreaArrayF = targetAreaArrayGeneral
-            explanationArrayF = explanationArrayGeneral
         //
         case 1:
             // Choice Screen Arrays
-            stretchingMovementsArray = stretchingWorkoutArray
             stretchingSelectedArray = presetsArraysWorkout[0]
             pickerViewArray = pickerViewArrayWorkout
-            tableViewSectionArray = tableViewSectionArrayWorkout
-            presetsArrays = presetsArraysWorkout
-            emptyArray = emptyArrayWorkout
-            // Screen Arrays
-            setsArrayF = setsArrayWorkout
-            repsArrayF = repsArrayWorkout
-            demonstrationArrayF = demonstrationArrayWorkout
-            targetAreaArrayF = targetAreaArrayWorkout
-            explanationArrayF = explanationArrayWorkout
         //
         case 2:
             // Choice Screen Arrays
-            stretchingMovementsArray = stretchingCardioArray
             stretchingSelectedArray = presetsArraysCardio[0]
             pickerViewArray = pickerViewArrayCardio
-            tableViewSectionArray = tableViewSectionArrayCardio
-            presetsArrays = presetsArraysCardio
-            emptyArray = emptyArrayCardio
-            // Screen Arrays
-            setsArrayF = setsArrayCardio
-            repsArrayF = repsArrayCardio
-            demonstrationArrayF = demonstrationArrayCardio
-            targetAreaArrayF = targetAreaArrayCardio
-            explanationArrayF = explanationArrayCardio
         //
         default: break
         }
@@ -2453,9 +856,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         }, completion: {(finished: Bool) -> Void in
             flash.removeFromSuperview()
         })
-        
     }
-    
     
     
 //
@@ -2543,7 +944,6 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.6
-        lineSpacing.hyphenationFactor = 1
         // Add Attributes
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
@@ -2551,7 +951,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         // Final Text Editing
         informationText.attributedText = informationLabelText
-        informationText.textAlignment = .justified
+        informationText.textAlignment = .natural
         informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
         informationText.numberOfLines = 0
         informationText.sizeToFit()
@@ -2571,15 +971,15 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         //
         let defaults = UserDefaults.standard
         // General
-        defaults.register(defaults: ["stretchingPresetsGeneral" : stretchingGeneralPresets])
+        defaults.register(defaults: ["stretchingPresetsGeneral" : emptyArrayofArrays])
         defaults.register(defaults: ["stretchingPresetTextsGeneral" : presetTexts])
         defaults.register(defaults: ["stretchingPresetNumberGeneral" : 0])
         // Post Workout
-        defaults.register(defaults: ["stretchingPresetsWorkout" : stretchingWorkoutPresets])
+        defaults.register(defaults: ["stretchingPresetsWorkout" : emptyArrayofArrays])
         defaults.register(defaults: ["stretchingPresetTextsWorkout" : presetTexts])
         defaults.register(defaults: ["stretchingPresetNumberWorkout" : 0])
         // Post Cardio
-        defaults.register(defaults: ["stretchingPresetsCardio" : stretchingCardioPresets])
+        defaults.register(defaults: ["stretchingPresetsCardio" : emptyArrayofArrays])
         defaults.register(defaults: ["stretchingPresetTextsCardio" : presetTexts])
         defaults.register(defaults: ["stretchingPresetNumberCardio" : 0])
         //
@@ -2595,13 +995,10 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
 //
     func beginButtonEnabled() {
         // Begin Button
-        for item in stretchingSelectedArray {
-            if item.contains(1) {
-                beginButton.isEnabled = true
-                break
-            } else {
-                beginButton.isEnabled = false
-            }
+        if stretchingSelectedArray.count != 0 {
+            beginButton.isEnabled = true
+        } else {
+            beginButton.isEnabled = false
         }
     }
     
@@ -2613,7 +1010,6 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func addPreset(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: stretchingPresetNumbers[stretchingType])
         var stretchingPreset = defaults.object(forKey: stretchingPresets[stretchingType]) as! [Array<Array<Int>>]
         var presetTextArray = defaults.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
         // Set Preset
@@ -2662,7 +1058,6 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func removePreset(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: stretchingPresetNumbers[stretchingType])
         var stretchingPreset = defaults.object(forKey: stretchingPresets[stretchingType]) as! [Array<Array<Int>>]
         var presetTextArray = defaults.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
         //
@@ -2679,11 +1074,6 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             presetTextArray.append(emptyString)
             defaults.set(presetTextArray, forKey: stretchingPresetTexts[stretchingType])
             //
-            if number > 0 {
-                let newNumber = number - 1
-                defaults.set(newNumber, forKey: stretchingPresetNumbers[stretchingType])
-            } else {
-            }
             defaults.synchronize()
             // Flash Screen
             self.flashScreen()
@@ -2767,37 +1157,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         //
         switch row {
          //
-        case 0:
-            stretchingSelectedArray = presetsArrays[row]
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 1:
-            stretchingSelectedArray = presetsArrays[row]
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 2:
-            stretchingSelectedArray = presetsArrays[row]
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 3:
-            stretchingSelectedArray = presetsArrays[row]
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 4:
-            stretchingSelectedArray = presetsArrays[row]
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 5:
-            stretchingSelectedArray = presetsArrays[row]
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 6:
+        case 0,1,2,3,4,5,6:
             stretchingSelectedArray = presetsArrays[row]
             self.tableView.reloadData()
             flashScreen()
@@ -2837,7 +1197,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
 //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        return stretchingMovementsArray.count
+        return stretchingMovementsDictionary.count
     }
     
     // Title for header
@@ -2859,7 +1219,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     
     // Number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stretchingMovementsArray[section].count
+        return stretchingMovementsDictionary[section].count
     }
     
     // Cell for row
@@ -2867,7 +1227,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         //
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         //
-        cell.textLabel?.text = NSLocalizedString(stretchingMovementsArray[indexPath.section][indexPath.row], comment: "")
+        cell.textLabel?.text = NSLocalizedString(stretchingMovementsDictionary[indexPath.section][indexPath.row], comment: "")
         //
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
         cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -2884,7 +1244,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             cell.accessoryType = .none
         }
         // Cell Image
-        cell.imageView?.image = demonstrationArrayF[indexPath.section][indexPath.row]
+        cell.imageView?.image = demonstrationDictionary[indexPath.section][indexPath.row]
         cell.imageView?.isUserInteractionEnabled = true
         // Image Tap
         let imageTap = UITapGestureRecognizer()
@@ -3008,7 +1368,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         expandedImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         expandedImage.contentMode = .scaleAspectFit
         expandedImage.isUserInteractionEnabled = true
-        //expandedImage.image = demonstrationArrayF[section][row]
+        //expandedImage.image = demonstrationDictionary[section][row]
         expandedImage.image = image
         
         // Background View
@@ -3079,17 +1439,17 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         if (segue.identifier == "stretchingSessionSegue1") {
             // Compress Arrays
             //
-            stretchingArray = zip(stretchingMovementsArray.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            stretchingArray = zip(stretchingMovementsDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             //
-            setsArray = zip(setsArrayF.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            setsArray = zip(setsDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             //
-            repsArray = zip(repsArrayF.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            repsArray = zip(repsDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             //
-            demonstrationArray = zip(demonstrationArrayF.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            demonstrationArray = zip(demonstrationDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             //
-            targetAreaArray = zip(targetAreaArrayF.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            targetAreaArray = zip(targetAreaDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             //
-            explanationArray = zip(explanationArrayF.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            explanationArray = zip(explanationDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             
             // Pass Data
             let destinationNC = segue.destination as! UINavigationController
@@ -3106,17 +1466,17 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             
             // Compress Arrays
             //
-            stretchingArray = zip(stretchingMovementsArray.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            stretchingArray = zip(stretchingMovementsDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             //
-            setsArray = zip(setsArrayF.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            setsArray = zip(setsDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             //
-            repsArray = zip(repsArrayF.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            repsArray = zip(repsDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             //
-            demonstrationArray = zip(demonstrationArrayF.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            demonstrationArray = zip(demonstrationDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             //
-            targetAreaArray = zip(targetAreaArrayF.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            targetAreaArray = zip(targetAreaDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             //
-            explanationArray = zip(explanationArrayF.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            explanationArray = zip(explanationDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
             
             // Pass Data
             let destinationNC = segue.destination as! UINavigationController

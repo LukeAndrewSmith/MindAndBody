@@ -865,8 +865,7 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         //
         let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[selectedMovement], comment: ""))
         let paragraphStyleEE = NSMutableParagraphStyle()
-        paragraphStyleEE.alignment = .justified
-        paragraphStyleEE.hyphenationFactor = 1
+        paragraphStyleEE.alignment = .natural
         //
         attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
         //

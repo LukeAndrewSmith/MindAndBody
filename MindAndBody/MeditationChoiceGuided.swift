@@ -93,8 +93,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
-        lineSpacing.lineSpacing = 1.4
-        lineSpacing.hyphenationFactor = 1
+        lineSpacing.lineSpacing = 1.6
         // Add Attributes
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Light", size: 19)!, range: textRange)
@@ -102,7 +101,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         // Final Text Editing
         informationText.attributedText = informationLabelText
-        informationText.textAlignment = .justified
+        informationText.textAlignment = .natural
         informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
         informationText.numberOfLines = 0
         informationText.sizeToFit()

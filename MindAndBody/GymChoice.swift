@@ -79,7 +79,7 @@ class GymChoice: UIViewController  {
         questionMark.tintColor = colour1
         
         // Titles
-        navigationBar.title = (NSLocalizedString("workoutType", comment: ""))
+        navigationBar.title = (NSLocalizedString("gym", comment: ""))
         
         // Button Titles
         classic.setTitle(NSLocalizedString("classic", comment: ""), for: UIControlState.normal)
@@ -159,7 +159,6 @@ class GymChoice: UIViewController  {
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.6
-        lineSpacing.hyphenationFactor = 1
         // Add Attributes
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
@@ -169,7 +168,7 @@ class GymChoice: UIViewController  {
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         // Final Text Editing
         informationTextStretchingC.attributedText = informationLabelText
-        informationTextStretchingC.textAlignment = .justified
+        informationTextStretchingC.textAlignment = .natural
         informationTextStretchingC.lineBreakMode = NSLineBreakMode.byWordWrapping
         informationTextStretchingC.numberOfLines = 0
         informationTextStretchingC.sizeToFit()

@@ -348,7 +348,6 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.6
-        lineSpacing.hyphenationFactor = 1
         
         
         // Add Attributes
@@ -361,7 +360,7 @@ class YogaChoicePractices: UIViewController, UITableViewDelegate, UITableViewDat
         
         // Final Text Editing
         informationText.attributedText = informationLabelText
-        informationText.textAlignment = .justified
+        informationText.textAlignment = .natural
         informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
         informationText.numberOfLines = 0
         informationText.sizeToFit()

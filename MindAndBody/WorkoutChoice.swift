@@ -130,7 +130,6 @@ class WorkoutChoice: UIViewController  {
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.6
-        lineSpacing.hyphenationFactor = 1
         // Add Attributes
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
@@ -140,7 +139,7 @@ class WorkoutChoice: UIViewController  {
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         // Final Text Editing
         informationTextStretchingC.attributedText = informationLabelText
-        informationTextStretchingC.textAlignment = .justified
+        informationTextStretchingC.textAlignment = .natural
         informationTextStretchingC.lineBreakMode = NSLineBreakMode.byWordWrapping
         informationTextStretchingC.numberOfLines = 0
         informationTextStretchingC.sizeToFit()

@@ -138,7 +138,6 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.6
-        lineSpacing.hyphenationFactor = 1
         // Add Attributes
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
@@ -148,7 +147,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         // Final Text Editing
         informationTextYogaC.attributedText = informationLabelText
-        informationTextYogaC.textAlignment = .justified
+        informationTextYogaC.textAlignment = .natural
         informationTextYogaC.lineBreakMode = NSLineBreakMode.byWordWrapping
         informationTextYogaC.numberOfLines = 0
         informationTextYogaC.sizeToFit()

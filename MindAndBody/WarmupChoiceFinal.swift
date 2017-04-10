@@ -19,56 +19,53 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     var warmupType = Int()
     
+    // Custom
+    //
+    var emptyArrayofArrays: [[Int]] = []
+    
 //
 // Arrays ------------------------------------------------------------------------------------------------------------------------------
 //
-    
-    // Changeable Arrays to be used
     //
-    // Movements Array
-    var warmupMovementsArray: [[String]] = [[]]
-    var warmupArray: [String] = []
-    
+    var warmupKeyArray: [[Int]] = []
     // Selected Array
-    var warmupSelectedArray: [[Int]] = [[]]
+    var warmupSelectedArray: [Int] = []
     
     // Picker View Array
     var pickerViewArray: [String] = []
-    
     // TableView Section Array
     var tableViewSectionArray: [String] = []
+    //
+    var presetsArrays: [[Int]] = []
     
-    // Presets
-    var presetsArrays: [[[Int]]] = [[[]]]
+    // Arrays to be set and used (Screen arrays)
+    // Movements Array
+    var warmupMovementsDictionary: [Int : String] = [:]
+    var warmupArray: [String] = []
     
-    // Custom Presets
-        // Empty Array
-        var emptyArray: [[Int]] = [[]]
-    
-    // Screen Arrays
     // Sets Array
-    var setsArrayF: [[Int]] = [[]]
+    var setsDictionary: [Int : Int] = [:]
     var setsArray: [Int] = []
     
     // Reps Array
-    var repsArrayF: [[String]] = [[]]
+    var repsDictionary: [Int : String] = [:]
     var repsArray: [String] = []
     
     // Demonstration Array
-    var demonstrationArrayF: [[UIImage]] = [[]]
+    var demonstrationDictionary: [Int : UIImage] = [:]
     var demonstrationArray: [UIImage] = []
     
     // Target Area Array
-    var targetAreaArrayF: [[UIImage]] = [[]]
+    var targetAreaDictionary: [Int : UIImage] = [:]
     var targetAreaArray: [UIImage] = []
     
     // Explanation Array
-    var explanationArrayF: [[String]] = [[]]
+    var explanationDictionary: [Int : String] = [:]
     var explanationArray: [String] = []
     
     // Static Arrays
     // Initial Custom Preset Texts
-    var presetTexts: [String] = ["", "", ""]
+    var presetTexts: [String] = []
     
     // Navigation Titles
     let navigationTitles: [String] =
@@ -78,24 +75,18 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
          "cardio"]
     
     // Custom Preset Keys
-    // Preset Number
-    let warmupPresetNumbers: [String] =
-        ["warmupFullPresetNumber",
-        "warmupUpperPresetNumber",
-        "warmupLowerPresetNumber",
-        "warmupCardioPresetNumber"]
     // Preset Array
     let warmupPresets: [String] =
-        ["warmupFullPresets",
-         "warmupUpperPresets",
-        "warmupLowerPresets",
-        "warmupCardioPresets"]
+        ["warmupPresetsFull",
+         "warmupPresetsUpper",
+         "warmupPresetsLower",
+         "warmupPresetsCardio"]
     // Preset Text
     let warmupPresetTexts: [String] =
-        ["warmupFullPresetTexts",
-         "warmupUpperPresetTexts",
-         "warmupLowerPresetTexts",
-         "warmupCardioPresetTexts"]
+        ["warmupPresetTextsFull",
+         "warmupPresetTextsUpper",
+         "warmupPresetTextsLower",
+         "warmupPresetTextsCardio"]
     
     
 //
@@ -104,71 +95,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
 //
 // Full ----------------------------------------------------------------------------------------------------------------------------
 //
-    
-    // Warmup Full Movements Array
-    var warmupFullArray: [[String]] =
-        [
-            // Mandatory
-            ["5minCardioL",
-             "5minCardioI"],
-            // Joint Rotations
-            ["wrist",
-             "elbow",
-             "shoulder",
-             "neckR",
-             "waist",
-             "hip",
-             "knees",
-             "ankles"],
-            // Foam/Ball Roll
-            ["backf",
-             "thoracicSpine",
-             "lat",
-             "pecDelt",
-             "rearDelt",
-             "quadf",
-             "adductorf",
-             "hamstringf",
-             "glutef",
-             "calvef"],
-            // Lower Back
-            ["sideLegDrop",
-             "sideLegKick",
-             "scorpionKick",
-             "sideBend",
-             "catCow"],
-            // Shoulder
-            ["wallSlides",
-             "superManShoulder",
-             "scapula",
-             "shoulderRotation"],
-            // Band/Bar/Machine Assisted
-            ["facePull",
-             "externalRotation",
-             "internalRotation",
-             "shoulderDislocation",
-             "rearDeltFly",
-             "latPullover"],
-            // General Mobility
-            ["rollBack",
-             "hipCircles",
-             "mountainClimber",
-             "groinStretch",
-             "gluteBridge",
-             "threadTheNeedle",
-             "butterflyPose",
-             "cossakSquat",
-             "hipHinges",
-             "sideLegSwings",
-             "frontLegSwings",
-             "jumpSquat",
-             "lunge"],
-            // Accessory
-            ["latStretch",
-             "calveStretch",
-             "pushUp",
-             "pullUp"]
-        ]
     
     // Table View Section Title Array
     var tableViewSectionArrayFull: [String] =
@@ -181,305 +107,462 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             "bandAssisted",
             "generalMobility",
             "accessory"
+    ]
+    
+    // Warmup Key Array
+    var warmupKeyArrayFull: [[Int]] =
+        [
+            // Mandatory
+            [0,
+             1],
+            // Joint Rotations
+            [2,
+             3,
+             4,
+             5,
+             6,
+             7,
+             8,
+             9],
+            // Foam/Ball Roll
+            [10,
+             11,
+             12,
+             13,
+             14,
+             15,
+             16,
+             17,
+             18,
+             19],
+            // Lower Back
+            [20,
+             21,
+             22,
+             23,
+             24],
+            // Shoulder
+            [25,
+             26,
+             27,
+             28],
+            // Band/Bar/Machine Assisted
+            [29,
+             30,
+             31,
+             32,
+             33,
+             34],
+            // General Mobility
+            [35,
+             36,
+             37,
+             38,
+             39,
+             40,
+             41,
+             42,
+             43,
+             44,
+             45,
+             46,
+             47],
+            // Accessory
+            [48,
+             49,
+             50,
+             51]
         ]
     
-    // Custom Preset Full
-    let emptyArrayFull: [[Int]] =
-                [
-                    // Mandatory
-                    [0, 0],
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // Shoulder
-                    [0, 0, 0, 0],
-                    // Band/Bar/Machine Assisted
-                    [0, 0, 0, 0, 0, 0],
-                    // General Mobility
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0, 0, 0]
-                ]
-            //
-    var warmupFullPresets: [[[Int]]] =
-            [
-                [
-                    // Mandatory
-                    [0, 0],
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // Shoulder
-                    [0, 0, 0, 0],
-                    // Band/Bar/Machine Assisted
-                    [0, 0, 0, 0, 0, 0],
-                    // General Mobility
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0, 0, 0]
-                ],
-                [
-                    // Mandatory
-                    [0, 0],
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // Shoulder
-                    [0, 0, 0, 0],
-                    // Band/Bar/Machine Assisted
-                    [0, 0, 0, 0, 0, 0],
-                    // General Mobility
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0, 0, 0]
-                ],
-                [
-                    // Mandatory
-                    [0, 0],
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // Shoulder
-                    [0, 0, 0, 0],
-                    // Band/Bar/Machine Assisted
-                    [0, 0, 0, 0, 0, 0],
-                    // General Mobility
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0, 0, 0]
-                ]
-            ]
+    // Warmup Movements
+    var warmupDictionaryFull: [Int : String] =
+        [
+            // Mandatory
+            0: "5minCardioL",
+            1: "5minCardioI",
+            // Joint Rotations
+            2: "wrist",
+            3: "elbow",
+            4: "shoulder",
+            5: "neckR",
+            6: "waist",
+            7: "hip",
+            8: "knees",
+            9: "ankles",
+            // Foam/Ball Roll
+            10: "backf",
+            11: "thoracicSpine",
+            12: "lat",
+            13: "pecDelt",
+            14: "rearDelt",
+            15: "quadf",
+            16: "adductorf",
+            17: "hamstringf",
+            18: "glutef",
+            19: "calvef",
+            // Lower Back
+            20: "sideLegDrop",
+            21: "sideLegKick",
+            22: "scorpionKick",
+            23: "sideBend",
+            24: "catCow",
+            // Shoulder
+            25: "wallSlides",
+            26: "superManShoulder",
+            27: "scapula",
+            28: "shoulderRotation",
+            // Band/Bar/Machine Assisted
+            29: "facePull",
+            30: "externalRotation",
+            31: "internalRotation",
+            32: "shoulderDislocation",
+            33: "rearDeltFly",
+            34: "latPullover",
+            // General Mobility
+            35: "rollBack",
+            36: "hipCircles",
+            37: "mountainClimber",
+            38: "groinStretch",
+            39: "gluteBridge",
+            40: "threadTheNeedle",
+            41: "butterflyPose",
+            42: "cossakSquat",
+            43: "hipHinges",
+            44: "sideLegSwings",
+            45: "frontLegSwings",
+            46: "jumpSquat",
+            47: "lunge",
+            // Accessory
+            48: "latStretch",
+            49: "calveStretch",
+            50: "pushUp",
+            51: "pullUp"
+        ]
     
     // Screen Arrays
     //
-    var setsArrayFull: [[Int]] =
+    var setsDictionaryFull: [Int : Int] =
         [
             // Mandatory
-            [1, 1],
+            0: 1,
+            1: 1,
             // Joint Rotations
-            [1, 1, 1, 1, 1, 1, 1, 1],
+            2: 1,
+            3: 1,
+            4: 1,
+            5: 1,
+            6: 1,
+            7: 1,
+            8: 1,
+            9: 1,
             // Foam/Ball Roll
-            [1, 3, 1, 1, 1, 1, 1, 1, 1, 1],
+            10: 1,
+            11: 3,
+            12: 1,
+            13: 1,
+            14: 1,
+            15: 1,
+            16: 1,
+            17: 1,
+            18: 1,
+            19: 1,
             // Lower Back
-            [1, 1, 1, 1, 1],
+            20: 1,
+            21: 1,
+            22: 1,
+            23: 1,
+            24: 1,
             // Shoulder
-            [2, 1, 1, 1],
+            25: 2,
+            26: 1,
+            27: 1,
+            28: 1,
             // Band/Bar/Machine Assisted
-            [2, 1, 1, 1, 1, 1],
+            29: 2,
+            30: 1,
+            31: 1,
+            32: 1,
+            33: 1,
+            34: 1,
             // General Mobility
-            [1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2, 2],
+            35: 1,
+            36: 1,
+            37: 1,
+            38: 1,
+            39: 1,
+            40: 2,
+            41: 1,
+            42: 1,
+            43: 2,
+            44: 1,
+            45: 1,
+            46: 2,
+            47: 2,
             // Accessory
-            [1, 1, 1, 1]
+            48: 1,
+            49: 1,
+            50: 1,
+            51: 1
         ]
     
     // Reps Array
-    var repsArrayFull: [[String]] =
+    var repsDictionaryFull: [Int : String] =
         [
             // Mandatory
-            ["5min",
-             "5min"],
+            0: "5min",
+            1: "5min",
             // Joint Rotations
-            ["10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s"],
+            2: "10-30s",
+            3: "10-30s",
+            4: "10-30s",
+            5: "10-30s",
+            6: "10-30s",
+            7: "10-30s",
+            8: "10-30s",
+            9: "10-30s",
             // Foam/Ball Roll
-            ["2-7 reps",
-             "5-10 reps",
-             "2-7 reps",
-             "15-30s",
-             "15-30s",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps"],
+            10: "2-7 reps",
+            11: "5-10 reps",
+            12: "2-7 reps",
+            13: "15-30s",
+            14: "15-30s",
+            15: "2-7 reps",
+            16: "2-7 reps",
+            17: "2-7 reps",
+            18: "2-7 reps",
+            19: "2-7 reps",
             // Lower Back
-            ["5-10 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "15-20 reps"],
+            20: "5-10 reps",
+            21: "5-10 reps",
+            22: "5-10 reps",
+            23: "5-10 reps",
+            24: "15-20 reps",
             // Shoulder
-            ["10-20 reps",
-             "5-10 reps",
-             "15 reps",
-             "10 reps"],
+            25: "10-20 reps",
+            26: "5-10 reps",
+            27: "15 reps",
+            28: "10 reps",
             // Band/Bar/Machine Assisted
-            ["10-15 reps",
-             "5-15 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "10-15 reps",
-             "10-20 reps"],
+            29: "10-15 reps",
+            30: "5-15 reps",
+            31: "5-10 reps",
+            32: "5-10 reps",
+            33: "10-15 reps",
+            34: "10-20 reps",
             // General Mobility
-            ["10-15 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "10-15 reps",
-             "15-30s",
-             "15-30s",
-             "5-10 reps",
-             "10-20 reps",
-             "10-20 reps",
-             "10-20 reps",
-             "5-15 reps",
-             "10-15 reps"],
+            35: "10-15 reps",
+            36: "5-10 reps",
+            37: "5-10 reps",
+            38: "5-10 reps",
+            39: "10-15 reps",
+            40: "15-30s",
+            41: "15-30s",
+            42: "5-10 reps",
+            43: "10-20 reps",
+            44: "10-20 reps",
+            45: "10-20 reps",
+            46: "5-15 reps",
+            47: "10-15 reps",
             // Accessory
-            ["15-30s",
-             "15-30s",
-             NSLocalizedString("asNecessary", comment: ""),
-             NSLocalizedString("asNecessary", comment: "")]
+            48 :"15-30s",
+            49: "15-30s",
+            50: NSLocalizedString("asNecessary", comment: ""),
+            51: NSLocalizedString("asNecessary", comment: "")
     ]
     
     // Demonstration Array
-    var demonstrationArrayFull: [[UIImage]] = [[]]
+    var demonstrationDictionaryFull: [Int : UIImage] =
+        [
+            // Mandatory
+            0: #imageLiteral(resourceName: "Test 2"),
+            1: #imageLiteral(resourceName: "Test 2"),
+            // Joint Rotations
+            2: #imageLiteral(resourceName: "Test 2"),
+            3: #imageLiteral(resourceName: "Test 2"),
+            4: #imageLiteral(resourceName: "Test 2"),
+            5: #imageLiteral(resourceName: "Test 2"),
+            6: #imageLiteral(resourceName: "Test 2"),
+            7: #imageLiteral(resourceName: "Test 2"),
+            8: #imageLiteral(resourceName: "Test 2"),
+            9: #imageLiteral(resourceName: "Test 2"),
+            // Foam/Ball Roll
+            10: #imageLiteral(resourceName: "Test 2"),
+            11: #imageLiteral(resourceName: "Test 2"),
+            12: #imageLiteral(resourceName: "Test 2"),
+            13: #imageLiteral(resourceName: "Test 2"),
+            14: #imageLiteral(resourceName: "Test 2"),
+            15: #imageLiteral(resourceName: "Test 2"),
+            16: #imageLiteral(resourceName: "Test 2"),
+            17: #imageLiteral(resourceName: "Test 2"),
+            18: #imageLiteral(resourceName: "Test 2"),
+            19: #imageLiteral(resourceName: "Test 2"),
+            // Lower Back
+            20: #imageLiteral(resourceName: "Test 2"),
+            21: #imageLiteral(resourceName: "Test 2"),
+            22: #imageLiteral(resourceName: "Test 2"),
+            23: #imageLiteral(resourceName: "Test 2"),
+            24: #imageLiteral(resourceName: "Test 2"),
+            // Shoulder
+            25: #imageLiteral(resourceName: "Test 2"),
+            26: #imageLiteral(resourceName: "Test 2"),
+            27: #imageLiteral(resourceName: "Test 2"),
+            28: #imageLiteral(resourceName: "Test 2"),
+            // Band/Bar/Machine Assisted
+            29: #imageLiteral(resourceName: "Test 2"),
+            30: #imageLiteral(resourceName: "Test 2"),
+            31: #imageLiteral(resourceName: "Test 2"),
+            32: #imageLiteral(resourceName: "Test 2"),
+            33: #imageLiteral(resourceName: "Test 2"),
+            34: #imageLiteral(resourceName: "Test 2"),
+            // General Mobility
+            35: #imageLiteral(resourceName: "Test 2"),
+            36: #imageLiteral(resourceName: "Test 2"),
+            37: #imageLiteral(resourceName: "Test 2"),
+            38: #imageLiteral(resourceName: "Test 2"),
+            39: #imageLiteral(resourceName: "Test 2"),
+            40: #imageLiteral(resourceName: "Test 2"),
+            41: #imageLiteral(resourceName: "Test 2"),
+            42: #imageLiteral(resourceName: "Test 2"),
+            43: #imageLiteral(resourceName: "Test 2"),
+            44: #imageLiteral(resourceName: "Test 2"),
+            45: #imageLiteral(resourceName: "Test 2"),
+            46: #imageLiteral(resourceName: "Test 2"),
+            47: #imageLiteral(resourceName: "Test 2"),
+            // Accessory
+            48: #imageLiteral(resourceName: "Test 2"),
+            49: #imageLiteral(resourceName: "Test 2"),
+            50: #imageLiteral(resourceName: "Test 2"),
+            51: #imageLiteral(resourceName: "Test 2")
+        ]
     
     // Target Area Array
-    var targetAreaArrayFull: [[UIImage]] =
+    var targetAreaDictionaryFull: [Int : UIImage] =
         [
             // Mandatory
-            [#imageLiteral(resourceName: "Heart"),
-             #imageLiteral(resourceName: "Heart")],
+            0: #imageLiteral(resourceName: "Heart"),
+            1: #imageLiteral(resourceName: "Heart"),
             // Joint Rotations
-            [#imageLiteral(resourceName: "Wrist Joint"),
-             #imageLiteral(resourceName: "Elbow Joint"),
-             #imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Neck Joint"),
-             #imageLiteral(resourceName: "Waist Joint"),
-             #imageLiteral(resourceName: "Hip Joint"),
-             #imageLiteral(resourceName: "Knee Joint"),
-             #imageLiteral(resourceName: "Ankle Joint")],
+            2: #imageLiteral(resourceName: "Wrist Joint"),
+            3: #imageLiteral(resourceName: "Elbow Joint"),
+            4: #imageLiteral(resourceName: "Shoulder Joint"),
+            5: #imageLiteral(resourceName: "Neck Joint"),
+            6: #imageLiteral(resourceName: "Waist Joint"),
+            7: #imageLiteral(resourceName: "Hip Joint"),
+            8: #imageLiteral(resourceName: "Knee Joint"),
+            9: #imageLiteral(resourceName: "Ankle Joint"),
             // Foam/Ball Roll
-            [#imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Lat and Delt"),
-             #imageLiteral(resourceName: "Pec and Front Delt"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Quad"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Glute"),
-             #imageLiteral(resourceName: "Calf")],
+            10: #imageLiteral(resourceName: "Thoracic"),
+            11: #imageLiteral(resourceName: "Thoracic"),
+            12: #imageLiteral(resourceName: "Lat and Delt"),
+            13: #imageLiteral(resourceName: "Pec and Front Delt"),
+            14: #imageLiteral(resourceName: "Rear Delt"),
+            15: #imageLiteral(resourceName: "Quad"),
+            16: #imageLiteral(resourceName: "Adductor"),
+            17: #imageLiteral(resourceName: "Hamstring"),
+            18: #imageLiteral(resourceName: "Glute"),
+            19: #imageLiteral(resourceName: "Calf"),
             // Lower Back
-            [#imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Spine")],
+            20: #imageLiteral(resourceName: "Core"),
+            21: #imageLiteral(resourceName: "Core"),
+            22: #imageLiteral(resourceName: "Core"),
+            23: #imageLiteral(resourceName: "Core"),
+            24: #imageLiteral(resourceName: "Spine"),
             // Shoulder
-            [#imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Back and Shoulder"),
-             #imageLiteral(resourceName: "Serratus"),
-             #imageLiteral(resourceName: "Shoulder")],
+            25: #imageLiteral(resourceName: "Shoulder"),
+            26: #imageLiteral(resourceName: "Back and Shoulder"),
+            27: #imageLiteral(resourceName: "Serratus"),
+            28: #imageLiteral(resourceName: "Shoulder"),
             // Band/Bar/Machine Assisted
-            [#imageLiteral(resourceName: "Upper Back and Shoulder"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Back")],
+            29: #imageLiteral(resourceName: "Upper Back and Shoulder"),
+            30: #imageLiteral(resourceName: "Rear Delt"),
+            31: #imageLiteral(resourceName: "Rear Delt"),
+            32: #imageLiteral(resourceName: "Shoulder"),
+            33: #imageLiteral(resourceName: "Rear Delt"),
+            34: #imageLiteral(resourceName: "Back"),
             // General Mobility
-            [#imageLiteral(resourceName: "Hamstring and Lower Back"),
-             #imageLiteral(resourceName: "Hip Area"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hamstring and Lower Back"),
-             #imageLiteral(resourceName: "Piriformis"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Hamstring and Glute"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-            #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat")],
+            35: #imageLiteral(resourceName: "Hamstring and Lower Back"),
+            36: #imageLiteral(resourceName: "Hip Area"),
+            37: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+            38: #imageLiteral(resourceName: "Adductor"),
+            39: #imageLiteral(resourceName: "Hamstring and Lower Back"),
+            40: #imageLiteral(resourceName: "Piriformis"),
+            41: #imageLiteral(resourceName: "Adductor"),
+            42: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+            43: #imageLiteral(resourceName: "Hamstring and Glute"),
+            44: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+            45: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+            46: #imageLiteral(resourceName: "Squat"),
+            47: #imageLiteral(resourceName: "Squat"),
             // Accessory
-            [#imageLiteral(resourceName: "Lat"),
-             #imageLiteral(resourceName: "Calf"),
-             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-             #imageLiteral(resourceName: "Back and Bicep")]
-    ]
+            48: #imageLiteral(resourceName: "Lat"),
+            49: #imageLiteral(resourceName: "Calf"),
+            50: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            51: #imageLiteral(resourceName: "Back and Bicep")
+        ]
     
     // Explanation Array
-    var explanationArrayFull: [[String]] =
+    var explanationDictionaryFull: [Int: String] =
         [
             // Mandatory
-            ["5minCardioLE",
-             "5minCardioIE"],
+            0: "5minCardioLE",
+            1: "5minCardioIE",
             // Joint Rotations
-            ["wristE",
-             "elbowE",
-             "shoulderE",
-             "neckE",
-             "waistE",
-             "hipE",
-             "kneesE",
-             "anklesE"],
+            2: "wristE",
+            3: "elbowE",
+            4: "shoulderE",
+            5: "neckE",
+            6: "waistE",
+            7: "hipE",
+            8: "kneesE",
+            9: "anklesE",
             // Foam/Ball Roll
-            ["backfE",
-             "thoracicSpineE",
-             "latE",
-             "pecDeltE",
-             "rearDeltE",
-             "quadfE",
-             "adductorfE",
-             "hamstringfE",
-             "glutefE",
-             "calvefE"],
+            10: "backfE",
+            11: "thoracicSpineE",
+            12: "latE",
+            13: "pecDeltE",
+            14: "rearDeltE",
+            15: "quadfE",
+            16: "adductorfE",
+            17: "hamstringfE",
+            18: "glutefE",
+            19: "calvefE",
             // Back
-            ["sideLegDropE",
-             "sideLegKickE",
-             "scorpionKickE",
-             "sideBendE",
-             "catCowE"],
+            20: "sideLegDropE",
+            21: "sideLegKickE",
+            22: "scorpionKickE",
+            23: "sideBendE",
+            24: "catCowE",
             // Shoulder
-            ["wallSlidesE",
-             "superManShoulderE",
-             "scapulaE",
-             "shoulderRotationE"],
+            25: "wallSlidesE",
+            26: "superManShoulderE",
+            27: "scapulaE",
+            28: "shoulderRotationE",
             // Band/Bar/Machine Assisted
-            ["facePullE",
-             "externalRotationE",
-             "internalRotationE",
-             "shoulderDislocationE",
-             "rearDeltFlyE",
-             "latPulloverE"],
+            29: "facePullE",
+            30: "externalRotationE",
+            31: "internalRotationE",
+            32: "shoulderDislocationE",
+            33: "rearDeltFlyE",
+            34: "latPulloverE",
             // General Mobility
-            ["rollBackE",
-             "hipCirclesE",
-             "mountainClimberE",
-             "groinStretchE",
-             "gluteBridgeE",
-             "threadTheNeedleE",
-             "butterflyPoseE",
-             "cossakSquatE",
-             "hipHingesE",
-             "sideLegSwingsE",
-             "frontLegSwingsE",
-             "jumpSquatE",
-             "lungeE"],
+            35: "rollBackE",
+            36: "hipCirclesE",
+            37: "mountainClimberE",
+            38: "groinStretchE",
+            39: "gluteBridgeE",
+            40: "threadTheNeedleE",
+            41: "butterflyPoseE",
+            42: "cossakSquatE",
+            43: "hipHingesE",
+            44: "sideLegSwingsE",
+            45: "frontLegSwingsE",
+            46: "jumpSquatE",
+            47: "lungeE",
             // Accessory
-            ["latStretchE",
-             "calveStretchE",
-             "pushUpE",
-             "pullUpE"]
+            48: "latStretchE",
+            49: "calveStretchE",
+            50: "pushUpE",
+            51: "pullUpE"
         ]
     
     // Presets Arrys
@@ -497,185 +580,21 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         ]
     
     // Preseys Arrays
-    var presetsArraysFull: [[[Int]]] =
+    var presetsArraysFull: [[Int]] =
         [
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // Shoulder
-                [0, 0, 0, 0],
-                // Band/Bar/Machine Assisted
-                [0, 0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0, 0]
-            ],
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // Shoulder
-                [0, 0, 0, 0],
-                // Band/Bar/Machine Assisted
-                [0, 0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0, 0]
-            ],
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // Shoulder
-                [0, 0, 0, 0],
-                // Band/Bar/Machine Assisted
-                [0, 0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0, 0]
-            ],
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // Shoulder
-                [0, 0, 0, 0],
-                // Band/Bar/Machine Assisted
-                [0, 0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0, 0]
-            ],
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // Shoulder
-                [0, 0, 0, 0],
-                // Band/Bar/Machine Assisted
-                [0, 0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0, 0]
-            ],
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // Shoulder
-                [0, 0, 0, 0],
-                // Band/Bar/Machine Assisted
-                [0, 0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0, 0]
-            ],
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // Shoulder
-                [0, 0, 0, 0],
-                // Band/Bar/Machine Assisted
-                [0, 0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0, 0]
-            ]
-    ]
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ]
 
     
 //
 // Upper ----------------------------------------------------------------------------------------------------------------------------
 //
-    // Warmup Upper Array
-    var warmupUpperArray: [[String]] =
-        [
-            // Mandatory
-            ["5minCardioL",
-             "5minCardioI"],
-            // Joint Rotations
-            ["wrist",
-             "elbow",
-             "shoulderR",
-             "neckR",
-             "waist",
-             "hip",
-             "knees",
-             "ankles"],
-            // Foam/Ball Roll
-            ["backf",
-             "thoracicSpine",
-             "lat",
-             "pecDelt",
-             "rearDelt"],
-            // Lower Back
-            ["sideLegDrop",
-             "sideLegKick",
-             "scorpionKick",
-             "sideBend",
-             "catCow"],
-            // Shoulder
-            ["wallSlides",
-             "superManShoulder",
-             "scapula",
-             "shoulderRotation"],
-            // Band/Bar/Machine Assisted
-            ["facePull",
-             "externalRotation",
-             "internalRotation",
-             "shoulderDislocation",
-             "rearDeltFly",
-             "latPullover"],
-            // Accessory
-            ["latStretch",
-             "pushUp",
-             "pullUp"]
-        ]
-    
     // Table View Section Title Array
     var tableViewSectionArrayUpper: [String] =
         [
@@ -688,234 +607,320 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             "accessory"
         ]
     
-    // Custom Presets Upper
-    let emptyArrayUpper: [[Int]] =
-                [
-                    // Mandatory
-                    [0, 0],
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // Shoulders
-                    [0, 0, 0, 0],
-                    // Band Assisted
-                    [0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0, 0]
-                ]
-            //
-    var warmupUpperPresets: [[[Int]]] =
-            [
-                [
-                    // Mandatory
-                    [0, 0],
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // Shoulders
-                    [0, 0, 0, 0],
-                    // Band Assisted
-                    [0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0, 0]
-                ],
-                [
-                    // Mandatory
-                    [0, 0],
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // Shoulders
-                    [0, 0, 0, 0],
-                    // Band Assisted
-                    [0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0, 0]
-                ],
-                [
-                    // Mandatory
-                    [0, 0],
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // Shoulders
-                    [0, 0, 0, 0],
-                    // Band Assisted
-                    [0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0, 0]
-                ]
-            ]
-    
-    // Screen Arrays
-    var setsArrayUpper: [[Int]] =
+    // Warmup Key Array Upper
+    var warmupKeyArrayUpper: [[Int]] =
         [
             // Mandatory
-            [1, 1],
+            [0,
+             1],
             // Joint Rotations
-            [1, 1, 1, 1, 1, 1, 1, 1],
+            [2,
+             3,
+             4,
+             5,
+             6,
+             7,
+             8,
+             9],
             // Foam/Ball Roll
-            [1, 3, 1, 1, 1],
+            [10,
+             11,
+             12,
+             13,
+             14],
             // Lower Back
-            [1, 1, 1, 1, 1],
+            [15,
+             16,
+             17,
+             18,
+             19],
             // Shoulder
-            [2, 1, 1, 1],
+            [20,
+             21,
+             22,
+             23],
             // Band/Bar/Machine Assisted
-            [2, 1, 1, 1, 1, 1],
+            [24,
+             25,
+             26,
+             27,
+             28,
+             29],
             // Accessory
-            [1, 1, 1]
+            [30,
+             31,
+             32]
+    ]
+    // Warmup Dictionary Upper
+    var warmupDictionaryUpper: [Int : String] =
+        [
+            // Mandatory
+            0: "5minCardioL",
+            1: "5minCardioI",
+            // Joint Rotations
+            2: "wrist",
+            3: "elbow",
+            4: "shoulderR",
+            5: "neckR",
+            6: "waist",
+            7: "hip",
+            8: "knees",
+            9: "ankles",
+            // Foam/Ball Roll
+            10: "backf",
+            11: "thoracicSpine",
+            12: "lat",
+            13: "pecDelt",
+            14: "rearDelt",
+            // Lower Back
+            15: "sideLegDrop",
+            16: "sideLegKick",
+            17: "scorpionKick",
+            18: "sideBend",
+            19: "catCow",
+            // Shoulder
+            20: "wallSlides",
+            21: "superManShoulder",
+            22: "scapula",
+            23: "shoulderRotation",
+            // Band/Bar/Machine Assisted
+            24: "facePull",
+            25: "externalRotation",
+            26: "internalRotation",
+            27: "shoulderDislocation",
+            28: "rearDeltFly",
+            29: "latPullover",
+            // Accessory
+            30: "latStretch",
+            31: "pushUp",
+            32: "pullUp"
+        ]
+    
+    
+    // Screen Arrays
+    var setsDictionaryUpper: [Int : Int] =
+        [
+            // Mandatory
+            0: 1,
+            1: 1,
+            // Joint Rotations
+            2: 1,
+            3: 1,
+            4: 1,
+            5: 1,
+            6: 1,
+            7: 1,
+            8: 1,
+            9: 1,
+            // Foam/Ball Roll
+            10: 1,
+            11: 3,
+            12: 1,
+            13: 1,
+            14: 1,
+            // Lower Back
+            15: 1,
+            16: 1,
+            17: 1,
+            18: 1,
+            19: 1,
+            // Shoulder
+            20: 2,
+            21: 1,
+            22: 1,
+            23: 1,
+            // Band/Bar/Machine Assisted
+            24: 2,
+            25: 1,
+            26: 1,
+            27: 1,
+            28: 1,
+            29: 1,
+            // Accessory
+            30: 1,
+            31: 1,
+            32: 1,
         ]
     
     // Reps Array
-    var repsArrayUpper: [[String]] =
+    var repsDictionaryUpper: [Int : String] =
         [
             // Mandatory
-            ["5min",
-             "5min"],
+            0: "5min",
+            1: "5min",
             // Joint Rotations
-            ["10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s"],
+            2: "10-30s",
+            3: "10-30s",
+            4: "10-30s",
+            5: "10-30s",
+            6: "10-30s",
+            7: "10-30s",
+            8: "10-30s",
+            9: "10-30s",
             // Foam/Ball Roll
-            ["2-7 reps",
-             "5-10 reps",
-             "2-7 reps",
-             "15-30s",
-             "15-30s"],
+            10: "2-7 reps",
+            11: "5-10 reps",
+            12: "2-7 reps",
+            13: "15-30s",
+            14: "15-30s",
             // Lower Back
-            ["5-10 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "15-20 reps"],
+            15: "5-10 reps",
+            16: "5-10 reps",
+            17: "5-10 reps",
+            18: "5-10 reps",
+            19: "15-20 reps",
             // Shoulder
-            ["10-20 reps",
-             "5-10 reps",
-             "15 reps",
-             "10 reps"],
+            20: "10-20 reps",
+            21: "5-10 reps",
+            22: "15 reps",
+            23: "10 reps",
             // Band/Bar/Machine Assisted
-            ["10-15 reps",
-             "5-15 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "10-15 reps",
-             "10-20 reps",],
+            24: "10-15 reps",
+            25: "5-15 reps",
+            26: "5-10 reps",
+            27: "5-10 reps",
+            28: "10-15 reps",
+            29: "10-20 reps",
             // Accessory
-            ["15-30s",
-             NSLocalizedString("asNecessary", comment: ""),
-             NSLocalizedString("asNecessary", comment: "")
-            ]
+            30: "15-30s",
+            31: NSLocalizedString("asNecessary", comment: ""),
+            32: NSLocalizedString("asNecessary", comment: "")
         ]
     
     // Demonstration Array
-    var demonstrationArrayUpper: [[UIImage]] = [[]]
-    
-    // Target Area Array
-    var targetAreaArrayUpper: [[UIImage]] =
+    var demonstrationDictionaryUpper: [Int : UIImage] =
         [
             // Mandatory
-            [#imageLiteral(resourceName: "Heart"),
-             #imageLiteral(resourceName: "Heart")],
+            0: #imageLiteral(resourceName: "Test 2"),
+            1: #imageLiteral(resourceName: "Test 2"),
             // Joint Rotations
-            [#imageLiteral(resourceName: "Wrist Joint"),
-             #imageLiteral(resourceName: "Elbow Joint"),
-             #imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Neck Joint"),
-             #imageLiteral(resourceName: "Waist Joint"),
-             #imageLiteral(resourceName: "Hip Joint"),
-             #imageLiteral(resourceName: "Knee Joint"),
-             #imageLiteral(resourceName: "Ankle Joint")],
+            2: #imageLiteral(resourceName: "Test 2"),
+            3: #imageLiteral(resourceName: "Test 2"),
+            4: #imageLiteral(resourceName: "Test 2"),
+            5: #imageLiteral(resourceName: "Test 2"),
+            6: #imageLiteral(resourceName: "Test 2"),
+            7: #imageLiteral(resourceName: "Test 2"),
+            8: #imageLiteral(resourceName: "Test 2"),
+            9: #imageLiteral(resourceName: "Test 2"),
             // Foam/Ball Roll
-            [#imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Lat and Delt"),
-             #imageLiteral(resourceName: "Pec and Front Delt"),
-             #imageLiteral(resourceName: "Rear Delt")],
+            10: #imageLiteral(resourceName: "Test 2"),
+            11: #imageLiteral(resourceName: "Test 2"),
+            12: #imageLiteral(resourceName: "Test 2"),
+            13: #imageLiteral(resourceName: "Test 2"),
+            14: #imageLiteral(resourceName: "Test 2"),
             // Lower Back
-            [#imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Spine")],
+            15: #imageLiteral(resourceName: "Test 2"),
+            16: #imageLiteral(resourceName: "Test 2"),
+            17: #imageLiteral(resourceName: "Test 2"),
+            18: #imageLiteral(resourceName: "Test 2"),
+            19: #imageLiteral(resourceName: "Test 2"),
             // Shoulder
-            [#imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Back and Shoulder"),
-             #imageLiteral(resourceName: "Serratus"),
-             #imageLiteral(resourceName: "Shoulder")],
+            20: #imageLiteral(resourceName: "Test 2"),
+            21: #imageLiteral(resourceName: "Test 2"),
+            22: #imageLiteral(resourceName: "Test 2"),
+            23: #imageLiteral(resourceName: "Test 2"),
             // Band/Bar/Machine Assisted
-            [#imageLiteral(resourceName: "Upper Back and Shoulder"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Rear Delt"),
-             #imageLiteral(resourceName: "Back")],
+            24: #imageLiteral(resourceName: "Test 2"),
+            25: #imageLiteral(resourceName: "Test 2"),
+            26: #imageLiteral(resourceName: "Test 2"),
+            27: #imageLiteral(resourceName: "Test 2"),
+            28: #imageLiteral(resourceName: "Test 2"),
+            29: #imageLiteral(resourceName: "Test 2"),
             // Accessory
-            [#imageLiteral(resourceName: "Lat"),
-             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-             #imageLiteral(resourceName: "Back and Bicep")]
+            30: #imageLiteral(resourceName: "Test 2"),
+            31: #imageLiteral(resourceName: "Test 2"),
+            32: #imageLiteral(resourceName: "Test 2")
+        ]
+    
+    // Target Area Array
+    var targetAreaDictionaryUpper: [Int : UIImage] =
+        [
+            // Mandatory
+            0: #imageLiteral(resourceName: "Heart"),
+            1: #imageLiteral(resourceName: "Heart"),
+            // Joint Rotations
+            2: #imageLiteral(resourceName: "Wrist Joint"),
+            3: #imageLiteral(resourceName: "Elbow Joint"),
+            4: #imageLiteral(resourceName: "Shoulder Joint"),
+            5: #imageLiteral(resourceName: "Neck Joint"),
+            6: #imageLiteral(resourceName: "Waist Joint"),
+            7: #imageLiteral(resourceName: "Hip Joint"),
+            8: #imageLiteral(resourceName: "Knee Joint"),
+            9: #imageLiteral(resourceName: "Ankle Joint"),
+            // Foam/Ball Roll
+            10: #imageLiteral(resourceName: "Thoracic"),
+            11: #imageLiteral(resourceName: "Thoracic"),
+            12: #imageLiteral(resourceName: "Lat and Delt"),
+            13: #imageLiteral(resourceName: "Pec and Front Delt"),
+            14: #imageLiteral(resourceName: "Rear Delt"),
+            // Lower Back
+            15: #imageLiteral(resourceName: "Core"),
+            16: #imageLiteral(resourceName: "Core"),
+            17: #imageLiteral(resourceName: "Core"),
+            18: #imageLiteral(resourceName: "Core"),
+            19: #imageLiteral(resourceName: "Spine"),
+            // Shoulder
+            20: #imageLiteral(resourceName: "Shoulder"),
+            21: #imageLiteral(resourceName: "Back and Shoulder"),
+            22: #imageLiteral(resourceName: "Serratus"),
+            23: #imageLiteral(resourceName: "Shoulder"),
+            // Band/Bar/Machine Assisted
+            24: #imageLiteral(resourceName: "Upper Back and Shoulder"),
+            25: #imageLiteral(resourceName: "Rear Delt"),
+            26: #imageLiteral(resourceName: "Rear Delt"),
+            27: #imageLiteral(resourceName: "Shoulder"),
+            28: #imageLiteral(resourceName: "Rear Delt"),
+            29: #imageLiteral(resourceName: "Back"),
+            // Accessory
+            30: #imageLiteral(resourceName: "Lat"),
+            31: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            32: #imageLiteral(resourceName: "Back and Bicep")
         ]
     
     // Explanation Array
-    var explanationArrayUpper: [[String]] =
+    var explanationDictionaryUpper: [Int : String] =
         [
             // Mandatory
-            ["5minCardioLE",
-             "5minCardioIE"],
+            0: "5minCardioLE",
+            1: "5minCardioIE",
             // Joint Rotations
-            ["wristE",
-             "elbowE",
-             "shoulderE",
-             "neckE",
-             "waistE",
-             "hipE",
-             "kneesE",
-             "anklesE"],
+            2: "wristE",
+            3: "elbowE",
+            4: "shoulderRE",
+            5: "neckRE",
+            6: "waistE",
+            7: "hipE",
+            8: "kneesE",
+            9: "anklesE",
             // Foam/Ball Roll
-            ["backfE",
-             "thoracicSpineE",
-             "latE",
-             "pecDeltE",
-             "rearDeltE"],
+            10: "backfE",
+            11: "thoracicSpineE",
+            12: "latE",
+            13: "pecDeltE",
+            14: "rearDeltE",
             // Lower Back
-            ["sideLegDropE",
-             "sideLegKickE",
-             "scorpionKickE",
-             "sideBendE",
-             "catCowE"],
+            15: "sideLegDropE",
+            16: "sideLegKickE",
+            17: "scorpionKickE",
+            18: "sideBendE",
+            19: "catCowE",
             // Shoulder
-            ["wallSlidesE",
-             "superManShoulderE",
-             "scapulaE",
-             "shoulderRotationE"],
+            20: "wallSlidesE",
+            21: "superManShoulderE",
+            22: "scapulaE",
+            23: "shoulderRotationE",
             // Band/Bar/Machine Assisted
-            ["facePullE",
-             "externalRotationE",
-             "internalRotationE",
-             "shoulderDislocationE",
-             "rearDeltFlyE",
-             "latPulloverE"],
+            24: "facePullE",
+            25: "externalRotationE",
+            26: "internalRotationE",
+            27: "shoulderDislocationE",
+            28: "rearDeltFlyE",
+            29: "latPulloverE",
             // Accessory
-            ["latStretchE",
-             "pushUpE",
-             "pullUpE"]
-        ]
+            30: "latStretchE",
+            31: "pushUpE",
+            32: "pullUpE"
+    ]
     
     // Picker View Array
     var pickerViewArrayUpper: [String] =
@@ -927,177 +932,31 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             "strength",
             "highIntensity",
             "quick"
-    ]
-    // Preseys Arrays
-    var presetsArraysUpper: [[[Int]]] =
-    [
-        [
-            // Mandatory
-            [1, 0],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [1, 0, 0, 0, 0],
-            // Lower Back
-            [1, 0, 0, 0, 1],
-            // Shoulders
-            [1, 0, 0, 1],
-            // Band Assisted
-            [1, 1, 0, 1, 0, 0],
-            // Accessory
-            [1, 1, 1]
-        ],
-        [
-            // Mandatory
-            [1,
-             0],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [0, 0, 0, 0, 0],
-            // Lower Back
-            [1, 0, 0, 1, 0],
-            // Shoulders
-            [1, 0, 0, 1],
-            // Band Assisted
-            [0, 0, 0, 1, 0, 0],
-            // Accessory
-            [1, 1, 0]
-        ],
-        [
-            // Mandatory
-            [1, 0],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [0, 0, 0, 0, 0],
-            // Lower Back
-            [1, 1, 1, 0, 1],
-            // Shoulders
-            [1, 0, 1, 1],
-            // Band Assisted
-            [0, 0, 0, 0, 0, 0],
-            // Accessory
-            [1, 1, 1]
-        ],
-        [
-            // Mandatory
-            [1, 0],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [1, 0, 1, 0, 1],
-            // Lower Back
-            [1, 1, 1, 0, 0],
-            // Shoulders
-            [1, 0, 0, 1],
-            // Band Assisted
-            [1, 1, 0, 0, 0, 1],
-            // Accessory
-            [1, 1, 1]
-        ],
-        [
-            // Mandatory
-            [1, 0],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [0, 1, 1, 0, 1],
-            // Lower Back
-            [1, 0, 1, 0, 1],
-            // Shoulders
-            [1, 0, 1, 1],
-            // Band Assisted
-            [1, 1, 0, 1, 0, 1],
-            // Accessory
-            [1, 1, 1]
-        ],
-        [
-            // Mandatory
-            [0, 1],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [1, 0, 1, 0, 0],
-            // Lower Back
-            [1, 1, 1, 0, 1],
-            // Shoulders
-            [1, 0, 0, 1],
-            // Band Assisted
-            [1, 1, 0, 0, 1, 1],
-            // Accessory
-            [1, 1, 1]
-        ],
-        [
-            // Mandatory
-            [1, 0],
-            // Joint Rotations
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            // Foam/Ball Roll
-            [1, 0, 0, 0, 0],
-            // Lower Back
-            [1, 0, 0, 0, 1],
-            // Shoulders
-            [1, 0, 0, 1],
-            // Band Assisted
-            [1, 0, 0, 1, 0, 0],
-            // Accessory
-            [1, 0, 0]
         ]
+    
+    // Preseys Arrays
+    var presetsArraysUpper: [[Int]] =
+    [
+        // Default
+        [0, 10, 15, 19, 24, 25, 27, 30, 31, 32],
+        // Beginner
+        [0, 15, 18, 20, 23, 27, 30, 31],
+        // BodyWeight
+        [0, 15, 16, 17, 19, 20, 22, 23, 30, 31, 32],
+        // Bodybuilding
+        [0, 10, 12, 14, 15, 16, 17, 20, 23, 24, 25, 29, 30, 31, 32],
+        // Strength
+        [0, 11, 12, 14, 15, 17, 19, 20, 22, 23,24, 25, 27, 29,30, 31, 32],
+        // High Intensity
+        [1, 10, 12, 15, 16, 17, 19, 20, 23, 24, 25, 28, 29, 30, 31, 32],
+        // Quick
+        [0, 10, 15, 19, 20, 23, 24, 27, 30],
     ]
     
     
 //
 // Lower --------------------------------------------------------------------------------------------------------------------------
 //
-    // Warmup Lower Array
-    var warmupLowerArray: [[String]] =
-        [
-            // Mandatory
-            ["5minCardioL",
-             "5minCardioI"],
-            // Joint Rotations
-            ["wrist",
-             "elbow",
-             "shoulderR",
-             "neckR",
-             "waist",
-             "hip",
-             "knees",
-             "ankles"],
-            // Foam/Ball Roll
-            ["backf",
-             "thoracicSpine",
-             "quadf",
-             "adductorf",
-             "hamstringf",
-             "glutef",
-             "calvef"],
-            // Lower Back
-            ["sideLegDrop",
-             "sideLegKick",
-             "scorpionKick",
-             "sideBend",
-             "catCow"],
-            // General Mobility
-            ["rollBack",
-             "hipCircles",
-             "mountainClimber",
-             "groinStretch",
-             "gluteBridge",
-             "threadTheNeedle",
-             "butterflyPose",
-             "cossakSquat",
-             "hipHinges",
-             "sideLegSwings",
-             "frontLegSwings",
-             "jumpSquat",
-             "lunge"],
-            // Accessory
-            ["wallSlides",
-             "calveStretch"]
-        ]
-    
     // Table View Section Title Array
     var tableViewSectionArrayLower: [String] =
         [
@@ -1107,233 +966,342 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             "lowerBack",
             "generalMobility",
             "accessory"
-        ]
+    ]
     
-    // Custom Presets Lower
-    let emptyArrayLower: [[Int]] =
-                [
-                    // Mandatory
-                    [0, 0],
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // General Mobility
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0]
-                ]
-            //
-    var warmupLowerPresets: [[[Int]]] =
-            [
-                [
-                    // Mandatory
-                    [0, 0],
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // General Mobility
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0]
-                ],
-                [
-                    // Mandatory
-                    [0, 0],
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // General Mobility
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0],
-                ],
-                [
-                    // Mandatory
-                    [0, 0],
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // General Mobility
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0]
-                ]
-            ]
-    
-    // Screen Arrays
-    var setsArrayLower: [[Int]] =
+    // Warmup Key Dictionary Lower
+    var warmupKeyArrayLower: [[Int]] =
         [
             // Mandatory
-            [1, 1],
+            [0,
+             1],
             // Joint Rotations
-            [1, 1, 1, 1, 1, 1, 1, 1],
+            [2,
+             3,
+             4,
+             5,
+             6,
+             7,
+             8,
+             9],
             // Foam/Ball Roll
-            [1, 3, 1, 1, 1, 1, 1],
+            [10,
+             11,
+             12,
+             13,
+             14,
+             15,
+             16],
             // Lower Back
-            [1, 1, 1, 1, 1],
+            [17,
+             18,
+             19,
+             20,
+             21],
             // General Mobility
-            [1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 2],
+            [22,
+             23,
+             24,
+             25,
+             26,
+             27,
+             28,
+             29,
+             30,
+             31,
+             32,
+             33,
+             34],
             // Accessory
-            [2, 1]
+            [35,
+             36]
+        ]
+    
+    // Warmup Lower Array
+    var warmupDictionaryLower: [Int : String] =
+        [
+            // Mandatory
+            0: "5minCardioL",
+            1: "5minCardioI",
+            // Joint Rotations
+            2:"wrist",
+            3: "elbow",
+            4: "shoulderR",
+            5: "neckR",
+            6: "waist",
+            7: "hip",
+            8: "knees",
+            9: "ankles",
+            // Foam/Ball Roll
+            10: "backf",
+            11: "thoracicSpine",
+            12: "quadf",
+            13: "adductorf",
+            14: "hamstringf",
+            15: "glutef",
+            16: "calvef",
+            // Lower Back
+            17: "sideLegDrop",
+            18: "sideLegKick",
+            19: "scorpionKick",
+            20: "sideBend",
+            21: "catCow",
+            // General Mobility
+            22: "rollBack",
+            23: "hipCircles",
+            24: "mountainClimber",
+            25: "groinStretch",
+            26: "gluteBridge",
+            27: "threadTheNeedle",
+            28: "butterflyPose",
+            29: "cossakSquat",
+            30: "hipHinges",
+            31: "sideLegSwings",
+            32: "frontLegSwings",
+            33: "jumpSquat",
+            34: "lunge",
+            // Accessory
+            35: "wallSlides",
+            36: "calveStretch"
+        ]
+    
+    // Screen Arrays
+    var setsDictionaryLower: [Int : Int] =
+        [
+            // Mandatory
+            0: 1,
+            1: 1,
+            // Joint Rotations
+            2: 1,
+            3: 1,
+            4: 1,
+            5: 1,
+            6: 1,
+            7: 1,
+            8: 1,
+            9: 1,
+            // Foam/Ball Roll
+            10: 1,
+            11: 3,
+            12: 1,
+            13: 1,
+            14: 1,
+            15: 1,
+            16: 1,
+            // Lower Back
+            17: 1,
+            18: 1,
+            19: 1,
+            20: 1,
+            21: 1,
+            // General Mobility
+            22: 1,
+            23: 1,
+            24: 1,
+            25: 1,
+            26: 1,
+            27: 1,
+            28: 1,
+            29: 1,
+            30: 2,
+            31: 1,
+            32: 1,
+            33: 2,
+            34: 2,
+            // Accessory
+            35: 2,
+            36: 1
         ]
 
     // Reps Array
-    var repsArrayLower: [[String]] =
+    var repsDictionaryLower: [Int : String] =
         [
             // Mandatory
-            ["5min",
-             "5min"],
+            0: "5min",
+            1: "5min",
             // Joint Rotations
-            ["10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s"],
+            2: "10-30s",
+            3: "10-30s",
+            4: "10-30s",
+            5: "10-30s",
+            6: "10-30s",
+            7: "10-30s",
+            8: "10-30s",
+            9: "10-30s",
             // Foam/Ball Roll
-            ["2-7 reps",
-             "5-10 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps"],
+            10: "2-7 reps",
+            11: "5-10 reps",
+            12: "2-7 reps",
+            13: "2-7 reps",
+            14: "2-7 reps",
+            15: "2-7 reps",
+            16: "2-7 reps",
             // Lower Back
-            ["5-10 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "15-20 reps"],
+            17: "5-10 reps",
+            18: "5-10 reps",
+            19: "5-10 reps",
+            20: "5-10 reps",
+            21: "15-20 reps",
             // General Mobility
-            ["10-15 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "10-15 reps",
-             "15-30s",
-             "15-30s",
-             "5-10 reps",
-             "10-20 reps",
-             "10-20 reps",
-             "10-20 reps",
-             "5-15 reps",
-             "10-15 reps"],
+            22: "10-15 reps",
+            23: "5-10 reps",
+            24: "5-10 reps",
+            25: "5-10 reps",
+            26: "10-15 reps",
+            27: "15-30s",
+            28: "15-30s",
+            29: "5-10 reps",
+            30: "10-20 reps",
+            31: "10-20 reps",
+            32: "10-20 reps",
+            33: "5-15 reps",
+            34: "10-15 reps",
             // Accessory
-            ["10-20 reps",
-             "15-30s"]
+            35: "10-20 reps",
+            36: "15-30s"
         ]
 
     // Demonstration Array
-    var demonstrationArrayLower: [[UIImage]] = [[]]
-
-    // Target Area Array
-    var targetAreaArrayLower: [[UIImage]] =
+    var demonstrationDictionaryLower: [Int: UIImage] =
         [
             // Mandatory
-            [#imageLiteral(resourceName: "Heart"),
-             #imageLiteral(resourceName: "Heart")],
+            0: #imageLiteral(resourceName: "Test 2"),
+            1: #imageLiteral(resourceName: "Test 2"),
             // Joint Rotations
-            [#imageLiteral(resourceName: "Wrist Joint"),
-             #imageLiteral(resourceName: "Elbow Joint"),
-             #imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Neck Joint"),
-             #imageLiteral(resourceName: "Waist Joint"),
-             #imageLiteral(resourceName: "Hip Joint"),
-             #imageLiteral(resourceName: "Knee Joint"),
-             #imageLiteral(resourceName: "Ankle Joint")],
+            2: #imageLiteral(resourceName: "Test 2"),
+            3: #imageLiteral(resourceName: "Test 2"),
+            4: #imageLiteral(resourceName: "Test 2"),
+            5: #imageLiteral(resourceName: "Test 2"),
+            6: #imageLiteral(resourceName: "Test 2"),
+            7: #imageLiteral(resourceName: "Test 2"),
+            8: #imageLiteral(resourceName: "Test 2"),
+            9: #imageLiteral(resourceName: "Test 2"),
             // Foam/Ball Roll
-            [#imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Quad"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Glute"),
-             #imageLiteral(resourceName: "Calf")],
+            10: #imageLiteral(resourceName: "Test 2"),
+            11: #imageLiteral(resourceName: "Test 2"),
+            12: #imageLiteral(resourceName: "Test 2"),
+            13: #imageLiteral(resourceName: "Test 2"),
+            14: #imageLiteral(resourceName: "Test 2"),
+            15: #imageLiteral(resourceName: "Test 2"),
+            16: #imageLiteral(resourceName: "Test 2"),
             // Lower Back
-            [#imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Spine")],
+            17: #imageLiteral(resourceName: "Test 2"),
+            18: #imageLiteral(resourceName: "Test 2"),
+            19: #imageLiteral(resourceName: "Test 2"),
+            20: #imageLiteral(resourceName: "Test 2"),
+            21: #imageLiteral(resourceName: "Test 2"),
             // General Mobility
-            [#imageLiteral(resourceName: "Hamstring and Lower Back"),
-             #imageLiteral(resourceName: "Hip Area"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hamstring and Lower Back"),
-             #imageLiteral(resourceName: "Piriformis"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Hamstring and Glute"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat")],
+            22: #imageLiteral(resourceName: "Test 2"),
+            23: #imageLiteral(resourceName: "Test 2"),
+            24: #imageLiteral(resourceName: "Test 2"),
+            25: #imageLiteral(resourceName: "Test 2"),
+            26: #imageLiteral(resourceName: "Test 2"),
+            27: #imageLiteral(resourceName: "Test 2"),
+            28: #imageLiteral(resourceName: "Test 2"),
+            29: #imageLiteral(resourceName: "Test 2"),
+            30: #imageLiteral(resourceName: "Test 2"),
+            31: #imageLiteral(resourceName: "Test 2"),
+            32: #imageLiteral(resourceName: "Test 2"),
+            33: #imageLiteral(resourceName: "Test 2"),
+            34: #imageLiteral(resourceName: "Test 2"),
             // Accessory
-            [#imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Calf")]
+            35: #imageLiteral(resourceName: "Test 2"),
+            36: #imageLiteral(resourceName: "Test 2")
+        ]
+
+    // Target Area Array
+    var targetAreaDictionaryLower: [Int : UIImage] =
+        [
+            // Mandatory
+            0: #imageLiteral(resourceName: "Heart"),
+            1: #imageLiteral(resourceName: "Heart"),
+            // Joint Rotations
+            2: #imageLiteral(resourceName: "Wrist Joint"),
+            3: #imageLiteral(resourceName: "Elbow Joint"),
+            4: #imageLiteral(resourceName: "Shoulder Joint"),
+            5: #imageLiteral(resourceName: "Neck Joint"),
+            6: #imageLiteral(resourceName: "Waist Joint"),
+            7: #imageLiteral(resourceName: "Hip Joint"),
+            8: #imageLiteral(resourceName: "Knee Joint"),
+            9: #imageLiteral(resourceName: "Ankle Joint"),
+            // Foam/Ball Roll
+            10: #imageLiteral(resourceName: "Thoracic"),
+            11: #imageLiteral(resourceName: "Thoracic"),
+            12: #imageLiteral(resourceName: "Quad"),
+            13: #imageLiteral(resourceName: "Adductor"),
+            14: #imageLiteral(resourceName: "Hamstring"),
+            15: #imageLiteral(resourceName: "Glute"),
+            16: #imageLiteral(resourceName: "Calf"),
+            // Lower Back
+            17: #imageLiteral(resourceName: "Core"),
+            18: #imageLiteral(resourceName: "Core"),
+            19: #imageLiteral(resourceName: "Core"),
+            20: #imageLiteral(resourceName: "Core"),
+            21: #imageLiteral(resourceName: "Spine"),
+            // General Mobility
+            22: #imageLiteral(resourceName: "Hamstring and Lower Back"),
+            23: #imageLiteral(resourceName: "Hip Area"),
+            24: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+            25: #imageLiteral(resourceName: "Adductor"),
+            26: #imageLiteral(resourceName: "Hamstring and Lower Back"),
+            27: #imageLiteral(resourceName: "Piriformis"),
+            28: #imageLiteral(resourceName: "Adductor"),
+            29: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+            30: #imageLiteral(resourceName: "Hamstring and Glute"),
+            31: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+            32: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+            33: #imageLiteral(resourceName: "Squat"),
+            34: #imageLiteral(resourceName: "Squat"),
+            // Accessory
+            35: #imageLiteral(resourceName: "Shoulder"),
+            36: #imageLiteral(resourceName: "Calf")
         ]
     
     // Explanation Array
-    var explanationArrayLower: [[String]] =
+    var explanationDictionaryLower: [Int : String] =
         [
             // Mandatory
-            ["5minCardioLE",
-             "5minCardioIE"],
+            0: "5minCardioLE",
+            1: "5minCardioIE",
             // Joint Rotations
-            ["wristE",
-             "elbowE",
-             "shoulderE",
-             "neckE",
-             "waistE",
-             "hipE",
-             "kneesE",
-             "anklesE"],
+            2: "wristE",
+            3: "elbowE",
+            4: "shoulderE",
+            5: "neckE",
+            6: "waistE",
+            7: "hipE",
+            8: "kneesE",
+            9: "anklesE",
             // Foam/Ball Roll
-            ["backfE",
-             "thoracicSpineE",
-             "quadfE",
-             "adductorfE",
-             "hamstringfE",
-             "glutefE",
-             "calvefE"],
+            10: "backfE",
+            11: "thoracicSpineE",
+            12: "quadfE",
+            13: "adductorfE",
+            14: "hamstringfE",
+            15: "glutefE",
+            16: "calvefE",
             // Lower Back
-            ["sideLegDropE",
-             "sideLegKickE",
-             "scorpionKickE",
-             "sideBendE",
-             "catCowE"],
+            17: "sideLegDropE",
+            18: "sideLegKickE",
+            19: "scorpionKickE",
+            20: "sideBendE",
+            21: "catCowE",
             // General Mobility
-            ["rollBackE",
-             "hipCirclesE",
-             "mountainClimberE",
-             "groinStretchE",
-             "gluteBridgeE",
-             "threadTheNeedleE",
-             "butterflyPoseE",
-             "cossakSquatE",
-             "hipHingesE",
-             "sideLegSwingsE",
-             "frontLegSwingsE",
-             "jumpSquatE",
-             "lungeE",],
+            22: "rollBackE",
+            23: "hipCirclesE",
+            24: "mountainClimberE",
+            25: "groinStretchE",
+            26: "gluteBridgeE",
+            27: "threadTheNeedleE",
+            28: "butterflyPoseE",
+            29: "cossakSquatE",
+            30: "hipHingesE",
+            31: "sideLegSwingsE",
+            32: "frontLegSwingsE",
+            33: "jumpSquatE",
+            34: "lungeE",
             // Accessory
-            ["wallSlidesE",
-             "calveStretchE"]
+            35: "wallSlidesE",
+            36: "calveStretchE"
         ]
     
     // Picker View Array
@@ -1349,165 +1317,21 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     ]
     
     // Preseys Arrays
-    var presetsArraysLower: [[[Int]]] =
+    var presetsArraysLower: [[Int]] =
         [
-            [
-                // Mandatory
-                [1, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 1, 1, 0, 1, 0, 0],
-                // Lower Back
-                [1, 0, 1, 0, 1],
-                // General Mobility
-                [0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0],
-                // Accessory
-                [1, 1]
-            ],
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0]
-            ],
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0]
-            ],
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0]
-            ],
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0]
-            ],
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0]
-            ],
-            [
-                // Mandatory
-                [0, 0],
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0]
-            ]
+            [0, 11, 12, 14, 17, 19, 21, 23, 26, 31, 32, 33, 35, 36],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
         ]
     
     
 //
 // Cardio ----------------------------------------------------------------------------------------------------------------------------
 //
-    // Warmup Cardio Array
-    var warmupCardioArray: [[String]] =
-        [
-            // Joint Rotations
-            ["wrist",
-             "elbow",
-             "shoulderR",
-             "neckR",
-             "waist",
-             "hip",
-             "knees",
-             "ankles"],
-            // Foam/Ball Roll
-            ["thoracicSpine",
-             "lat",
-             "quadf",
-             "adductorf",
-             "hamstringf",
-             "glutef",
-             "calvef"],
-            // Lower Back
-            ["sideLegDrop",
-             "sideLegKick",
-             "scorpionKick",
-             "sideBend",
-             "catCow"],
-            // General Mobility
-            ["hipCircles",
-             "mountainClimber",
-             "groinStretch",
-             "gluteBridge",
-             "threadTheNeedle",
-             "butterflyPose",
-             "cossakSquat",
-             "hipHinges",
-             "sideLegSwings",
-             "frontLegSwings"],
-            // Dynamic Warm Up Drills
-            ["jumpSquat",
-             "lunge",
-             "gluteKicks",
-             "aSkips",
-             "bSkips",
-             "grapeVines",
-             "lateralBound",
-             "straightLegBound",
-             "sprints"],
-            // Accessory
-            ["wallSlides",
-             "latStretch",
-             "calveStretch"]
-        ]
-    
     // Table View Section Title Array
     var tableViewSectionArrayCardio: [String] =
         [
@@ -1517,250 +1341,378 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             "generalMobility",
             "dynamicWarmupDrills",
             "accessory"
-        ]
+    ]
     
-    // Warmup Presets Cardio
-    let emptyArrayCardio: [[Int]] =
-                [
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // General Mobility
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Dynamic Warm Up Drills
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0, 0]
-                ]
-            //
-    var warmupCardioPresets: [[[Int]]] =
-            [
-                [
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // General Mobility
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Dynamic Warm Up Drills
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0, 0]
-                ],
-                [
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // General Mobility
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-                    // Dynamic Warm Up Drills
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0,],
-                    // Accessory
-                    [0, 0, 0]
-                ],
-                [
-                    // Joint Rotations
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    // Foam/Ball Roll
-                    [0, 0, 0, 0, 0, 0, 0],
-                    // Lower Back
-                    [0, 0, 0, 0, 0],
-                    // General Mobility
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Dynamic Warm Up Drills
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    // Accessory
-                    [0, 0, 0]
-                ]
-            ]
-    
-    // Screen Arrays
-    var setsArrayCardio: [[Int]] =
+    // Warmup Cardio Array
+    var warmupKeyArrayCardio: [[Int]] =
         [
             // Joint Rotations
-            [1, 1, 1, 1, 1, 1, 1, 1],
+            [0,
+             1,
+             2,
+             3,
+             4,
+             5,
+             6,
+             7],
             // Foam/Ball Roll
-            [3, 1, 1, 1, 1, 1, 1],
+            [8,
+             9,
+             10,
+             11,
+             12,
+             13,
+             14],
             // Lower Back
-            [1, 1, 1, 1, 1],
+            [15,
+             16,
+             17,
+             18,
+             19],
             // General Mobility
-            [1, 1, 1, 1, 2, 1, 1, 2, 1, 1,],
+            [20,
+             21,
+             22,
+             23,
+             24,
+             25,
+             26,
+             27,
+             28,
+             29],
             // Dynamic Warm Up Drills
-            [2, 2, 3, 3, 3, 2, 2, 2, 4],
+            [30,
+             31,
+             32,
+             33,
+             34,
+             35,
+             36,
+             37,
+             38],
             // Accessory
-            [2, 1, 1]
+            [39,
+             40,
+             41]
+    ]
+    
+    // Warmup Cardio Array
+    var warmupDictionaryCardio: [Int : String] =
+        [
+            // Joint Rotations
+            0: "wrist",
+            1: "elbow",
+            2: "shoulderR",
+            3: "neckR",
+            4: "waist",
+            5: "hip",
+            6: "knees",
+            7: "ankles",
+            // Foam/Ball Roll
+            8: "thoracicSpine",
+            9: "lat",
+            10: "quadf",
+            11: "adductorf",
+            12: "hamstringf",
+            13: "glutef",
+            14: "calvef",
+            // Lower Back
+            15: "sideLegDrop",
+            16: "sideLegKick",
+            17: "scorpionKick",
+            18: "sideBend",
+            19: "catCow",
+            // General Mobility
+            20: "hipCircles",
+            21: "mountainClimber",
+            22: "groinStretch",
+            23: "gluteBridge",
+            24: "threadTheNeedle",
+            25: "butterflyPose",
+            26: "cossakSquat",
+            27: "hipHinges",
+            28: "sideLegSwings",
+            29: "frontLegSwings",
+            // Dynamic Warm Up Drills
+            30: "jumpSquat",
+            31: "lunge",
+            32: "gluteKicks",
+            33: "aSkips",
+            34: "bSkips",
+            35: "grapeVines",
+            36: "lateralBound",
+            37: "straightLegBound",
+            38: "sprints",
+            // Accessory
+            39: "wallSlides",
+            40: "latStretch",
+            41: "calveStretch"
+        ]
+    
+    // Screen Arrays
+    var setsDictionaryCardio: [Int : Int] =
+        [
+            // Joint Rotations
+            0: 1,
+            1: 1,
+            2: 1,
+            3: 1,
+            4: 1,
+            5: 1,
+            6: 1,
+            7: 1,
+            // Foam/Ball Roll
+            8: 3,
+            9: 1,
+            10: 1,
+            11: 1,
+            12: 1,
+            13: 1,
+            14: 1,
+            // Lower Back
+            15: 1,
+            16: 1,
+            17: 1,
+            18: 1,
+            19: 1,
+            // General Mobility
+            20: 1,
+            21: 1,
+            22: 1,
+            23: 1,
+            24: 2,
+            25: 1,
+            26: 1,
+            27: 2,
+            28: 1,
+            29: 1,
+            // Dynamic Warm Up Drills
+            30: 2,
+            31: 2,
+            32: 3,
+            33: 3,
+            34: 3,
+            35: 2,
+            36: 2,
+            37: 2,
+            38: 4,
+            // Accessory
+            39: 2,
+            40: 1,
+            41: 1
         ]
     
     // Reps Array
-    var repsArrayCardio: [[String]] =
+    var repsDictionaryCardio: [Int : String] =
         [
             // Joint Rotations
-            ["10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s",
-             "10-30s"],
+            0: "10-30s",
+            1: "10-30s",
+            2: "10-30s",
+            3: "10-30s",
+            4: "10-30s",
+            5: "10-30s",
+            6: "10-30s",
+            7: "10-30s",
             // Foam/Ball Roll
-            ["2-7 reps",
-             "5-10 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps",
-             "2-7 reps"],
+            8: "2-7 reps",
+            9: "5-10 reps",
+            10: "2-7 reps",
+            11: "2-7 reps",
+            12: "2-7 reps",
+            13: "2-7 reps",
+            14: "2-7 reps",
             // Lower Back
-            ["5-10 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "15-20 reps"],
+            15: "5-10 reps",
+            16: "5-10 reps",
+            17: "5-10 reps",
+            18: "5-10 reps",
+            19: "15-20 reps",
             // General Mobility
-            ["5-10 reps",
-             "5-10 reps",
-             "5-10 reps",
-             "10-15 reps",
-             "15-30s",
-             "15-30s",
-             "5-10 reps",
-             "15-30s",
-             "10-20 reps",
-             "10-20 reps"],
+            20: "5-10 reps",
+            21: "5-10 reps",
+            22: "5-10 reps",
+            23: "10-15 reps",
+            24: "15-30s",
+            25: "15-30s",
+            26: "5-10 reps",
+            27: "15-30s",
+            28: "10-20 reps",
+            29: "10-20 reps",
             // Dynamic Warm Up Drills
-            ["5-15 reps",
-             "10-15 reps",
-             "15-30s",
-             "15-30s",
-             "15-30s",
-             "50m",
-             "50m",
-             "50m",
-             "5-20 reps"],
+            30: "5-15 reps",
+            31: "10-15 reps",
+            32: "15-30s",
+            33: "15-30s",
+            34: "15-30s",
+            35: "50m",
+            36: "50m",
+            37: "50m",
+            38: "5-20 reps",
             // Accessory
-            ["10-15 reps",
-             "15-30s",
-             "15-30s",
-             "15-30s"]
+            39: "10-15 reps",
+            40: "15-30s",
+            41: "15-30s",
         ]
-    
+  
     // Demonstration Array
-    var demonstrationArrayCardio: [[UIImage]] = [[]]
+    var demonstrationDictionaryCardio: [Int : UIImage] =
+        [
+            // Joint Rotations
+            0: #imageLiteral(resourceName: "Test 2"),
+            1: #imageLiteral(resourceName: "Test 2"),
+            2: #imageLiteral(resourceName: "Test 2"),
+            3: #imageLiteral(resourceName: "Test 2"),
+            4: #imageLiteral(resourceName: "Test 2"),
+            5: #imageLiteral(resourceName: "Test 2"),
+            6: #imageLiteral(resourceName: "Test 2"),
+            7: #imageLiteral(resourceName: "Test 2"),
+            // Foam/Ball Roll
+            8: #imageLiteral(resourceName: "Test 2"),
+            9: #imageLiteral(resourceName: "Test 2"),
+            10: #imageLiteral(resourceName: "Test 2"),
+            11: #imageLiteral(resourceName: "Test 2"),
+            12: #imageLiteral(resourceName: "Test 2"),
+            13: #imageLiteral(resourceName: "Test 2"),
+            14: #imageLiteral(resourceName: "Test 2"),
+            // Lower Back
+            15: #imageLiteral(resourceName: "Test 2"),
+            16: #imageLiteral(resourceName: "Test 2"),
+            17: #imageLiteral(resourceName: "Test 2"),
+            18: #imageLiteral(resourceName: "Test 2"),
+            19: #imageLiteral(resourceName: "Test 2"),
+            // General Mobility
+            20: #imageLiteral(resourceName: "Test 2"),
+            21: #imageLiteral(resourceName: "Test 2"),
+            22: #imageLiteral(resourceName: "Test 2"),
+            23: #imageLiteral(resourceName: "Test 2"),
+            24: #imageLiteral(resourceName: "Test 2"),
+            25: #imageLiteral(resourceName: "Test 2"),
+            26: #imageLiteral(resourceName: "Test 2"),
+            27: #imageLiteral(resourceName: "Test 2"),
+            28: #imageLiteral(resourceName: "Test 2"),
+            29: #imageLiteral(resourceName: "Test 2"),
+            // Dynamic Warm Up Drills
+            30: #imageLiteral(resourceName: "Test 2"),
+            31: #imageLiteral(resourceName: "Test 2"),
+            32: #imageLiteral(resourceName: "Test 2"),
+            33: #imageLiteral(resourceName: "Test 2"),
+            34: #imageLiteral(resourceName: "Test 2"),
+            35: #imageLiteral(resourceName: "Test 2"),
+            36: #imageLiteral(resourceName: "Test 2"),
+            37: #imageLiteral(resourceName: "Test 2"),
+            38: #imageLiteral(resourceName: "Test 2"),
+            // Accessory
+            39: #imageLiteral(resourceName: "Test 2"),
+            40: #imageLiteral(resourceName: "Test 2"),
+            41: #imageLiteral(resourceName: "Test 2")
+        ]
 
     // Target Area Array
-    var targetAreaArrayCardio: [[UIImage]] =
+    var targetAreaDictionaryCardio: [Int : UIImage] =
         [
             // Joint Rotations
-            [#imageLiteral(resourceName: "Wrist Joint"),
-             #imageLiteral(resourceName: "Elbow Joint"),
-             #imageLiteral(resourceName: "Shoulder Joint"),
-             #imageLiteral(resourceName: "Neck Joint"),
-             #imageLiteral(resourceName: "Waist Joint"),
-             #imageLiteral(resourceName: "Hip Joint"),
-             #imageLiteral(resourceName: "Knee Joint"),
-             #imageLiteral(resourceName: "Ankle Joint")],
+            0: #imageLiteral(resourceName: "Wrist Joint"),
+            1: #imageLiteral(resourceName: "Elbow Joint"),
+            2: #imageLiteral(resourceName: "Shoulder Joint"),
+            3: #imageLiteral(resourceName: "Neck Joint"),
+            4: #imageLiteral(resourceName: "Waist Joint"),
+            5: #imageLiteral(resourceName: "Hip Joint"),
+            6: #imageLiteral(resourceName: "Knee Joint"),
+            7: #imageLiteral(resourceName: "Ankle Joint"),
             // Foam/Ball Roll
-            [#imageLiteral(resourceName: "Thoracic"),
-             #imageLiteral(resourceName: "Lat and Delt"),
-             #imageLiteral(resourceName: "Quad"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hamstring"),
-             #imageLiteral(resourceName: "Glute"),
-             #imageLiteral(resourceName: "Calf")],
+            8: #imageLiteral(resourceName: "Thoracic"),
+            9: #imageLiteral(resourceName: "Lat and Delt"),
+            10: #imageLiteral(resourceName: "Quad"),
+            11: #imageLiteral(resourceName: "Adductor"),
+            12: #imageLiteral(resourceName: "Hamstring"),
+            13: #imageLiteral(resourceName: "Glute"),
+            14: #imageLiteral(resourceName: "Calf"),
             // Lower Back
-            [#imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Core"),
-             #imageLiteral(resourceName: "Spine")],
+            15: #imageLiteral(resourceName: "Core"),
+            16: #imageLiteral(resourceName: "Core"),
+            17: #imageLiteral(resourceName: "Core"),
+            18: #imageLiteral(resourceName: "Core"),
+            19: #imageLiteral(resourceName: "Spine"),
             // General Mobility
-            [#imageLiteral(resourceName: "Hip Area"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Hamstring and Lower Back"),
-             #imageLiteral(resourceName: "Piriformis"),
-             #imageLiteral(resourceName: "Adductor"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Hamstring and Glute"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-             #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch")],
+            20: #imageLiteral(resourceName: "Hip Area"),
+            21: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+            22: #imageLiteral(resourceName: "Adductor"),
+            23: #imageLiteral(resourceName: "Hamstring and Lower Back"),
+            24: #imageLiteral(resourceName: "Piriformis"),
+            25: #imageLiteral(resourceName: "Adductor"),
+            26: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+            27: #imageLiteral(resourceName: "Hamstring and Glute"),
+            28: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
+            29: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
             // Dynamic Warm Up Drills
-            [#imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat"),
-             #imageLiteral(resourceName: "Squat")],
+            30: #imageLiteral(resourceName: "Squat"),
+            31: #imageLiteral(resourceName: "Squat"),
+            32: #imageLiteral(resourceName: "Squat"),
+            33: #imageLiteral(resourceName: "Squat"),
+            34: #imageLiteral(resourceName: "Squat"),
+            35: #imageLiteral(resourceName: "Squat"),
+            36: #imageLiteral(resourceName: "Squat"),
+            37: #imageLiteral(resourceName: "Squat"),
+            38: #imageLiteral(resourceName: "Squat"),
             // Accessory
-            [#imageLiteral(resourceName: "Shoulder"),
-             #imageLiteral(resourceName: "Lat"),
-             #imageLiteral(resourceName: "Calf")]
-    ]
+            39: #imageLiteral(resourceName: "Shoulder"),
+            40: #imageLiteral(resourceName: "Lat"),
+            41: #imageLiteral(resourceName: "Calf")
+        ]
     
     // Explanation Array
-    var explanationArrayCardio: [[String]] =
+    var explanationDictionaryCardio: [Int : String] =
         [
             // Joint Rotations
-            ["wristE",
-             "elbowE",
-             "shoulderE",
-             "neckE",
-             "waistE",
-             "hipE",
-             "kneesE",
-             "anklesE"],
+            0: "wristE",
+            1: "elbowE",
+            2: "shoulderRE",
+            3: "neckRE",
+            4: "waistE",
+            5: "hipE",
+            6: "kneesE",
+            7: "anklesE",
             // Foam/Ball Roll
-            ["thoracicSpineE",
-             "latE",
-             "quadfE",
-             "adductorfE",
-             "hamstringfE",
-             "glutefE",
-             "calvefE"],
+            8: "thoracicSpineE",
+            9: "latE",
+            10: "quadfE",
+            11: "adductorfE",
+            12: "hamstringfE",
+            13: "glutefE",
+            14: "calvefE",
             // Lower Back
-            ["sideLegDropE",
-             "sideLegKickE",
-             "scorpionKickE",
-             "sideBendE",
-             "catCowE"],
+            15: "sideLegDropE",
+            16: "sideLegKickE",
+            17: "scorpionKickE",
+            18: "sideBendE",
+            19: "catCowE",
             // General Mobility
-            ["hipCirclesE",
-             "mountainClimberE",
-             "groinStretchE",
-             "gluteBridgeE",
-             "threadTheNeedleE",
-             "butterflyPoseE",
-             "cossakSquatE",
-             "hipHingesE",
-             "sideLegSwingsE",
-             "frontLegSwingsE"],
+            20: "hipCirclesE",
+            21: "mountainClimberE",
+            22: "groinStretchE",
+            23: "gluteBridgeE",
+            24: "threadTheNeedleE",
+            25: "butterflyPoseE",
+            26: "cossakSquatE",
+            27: "hipHingesE",
+            28: "sideLegSwingsE",
+            29: "frontLegSwingsE",
             // Dynamic Warm Up Drills
-            ["jumpSquatE",
-             "lungeE",
-             "gluteKicksE",
-             "aSkipsE",
-             "bSkipsE",
-             "grapeVinesE",
-             "lateralBoundE",
-             "straightLegBoundE",
-             "sprintsE"],
+            30: "jumpSquatE",
+            31: "lungeE",
+            32: "gluteKicksE",
+            33: "aSkipsE",
+            34: "bSkipsE",
+            35: "grapeVinesE",
+            36: "lateralBoundE",
+            37: "straightLegBoundE",
+            38: "sprintsE",
             // Accessory
-            ["wallSlidesE",
-             "latStretchE",
-             "calveStretchE"]
-    ]
+            39: "wallSlidesE",
+            40: "latStretchE",
+            41: "calveStretchE"
+        ]
     
     // Picker View Array
     var pickerViewArrayCardio: [String] =
@@ -1776,106 +1728,15 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     ]
     
     // Preseys Arrays
-    var presetsArraysCardio: [[[Int]]] =
+    var presetsArraysCardio: [[Int]] =
         [
-            [
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Dynamic Warm Up Drills
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0]
-            ],
-            [
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 1, 1, 1, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Dynamic Warm Up Drills
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0]
-            ],
-            [
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Dynamic Warm Up Drills
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0]
-            ],
-            [
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Dynamic Warm Up Drills
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0]
-            ],
-            [
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Dynamic Warm Up Drills
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0]
-            ],
-            [
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Dynamic Warm Up Drills
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0]
-            ],
-            [
-                // Joint Rotations
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                // Foam/Ball Roll
-                [0, 0, 0, 0, 0, 0, 0],
-                // Lower Back
-                [0, 0, 0, 0, 0],
-                // General Mobility
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Dynamic Warm Up Drills
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                // Accessory
-                [0, 0, 0]
-            ]
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
         ]
     
     
@@ -1886,63 +1747,63 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         case 0:
             // Choice Screen Arrays
-                warmupMovementsArray = warmupFullArray
+                warmupKeyArray = warmupKeyArrayFull
+                warmupMovementsDictionary = warmupDictionaryFull
                 warmupSelectedArray = presetsArraysFull[0]
                 pickerViewArray = pickerViewArrayFull
                 tableViewSectionArray = tableViewSectionArrayFull
                 presetsArrays = presetsArraysFull
-                emptyArray = emptyArrayFull
             // Screen Arrays
-                setsArrayF = setsArrayFull
-                repsArrayF = repsArrayFull
-                demonstrationArrayF = demonstrationArrayFull
-                targetAreaArrayF = targetAreaArrayFull
-                explanationArrayF = explanationArrayFull
+                setsDictionary = setsDictionaryFull
+                repsDictionary = repsDictionaryFull
+                demonstrationDictionary = demonstrationDictionaryFull
+                targetAreaDictionary = targetAreaDictionaryFull
+                explanationDictionary = explanationDictionaryFull
         //
         case 1:
             // Choice Screen Arrays
-                warmupMovementsArray = warmupUpperArray
+                warmupKeyArray = warmupKeyArrayUpper
+                warmupMovementsDictionary = warmupDictionaryUpper
                 warmupSelectedArray = presetsArraysUpper[0]
                 pickerViewArray = pickerViewArrayUpper
                 tableViewSectionArray = tableViewSectionArrayUpper
                 presetsArrays = presetsArraysUpper
-                emptyArray = emptyArrayUpper
             // Screen Arrays
-                setsArrayF = setsArrayUpper
-                repsArrayF = repsArrayUpper
-                demonstrationArrayF = demonstrationArrayUpper
-                targetAreaArrayF = targetAreaArrayUpper
-                explanationArrayF = explanationArrayUpper
+                setsDictionary = setsDictionaryUpper
+                repsDictionary = repsDictionaryUpper
+                demonstrationDictionary = demonstrationDictionaryUpper
+                targetAreaDictionary = targetAreaDictionaryUpper
+                explanationDictionary = explanationDictionaryUpper
         //
         case 2:
             // Choice Screen Arrays
-                warmupMovementsArray = warmupLowerArray
+                warmupKeyArray = warmupKeyArrayLower
+                warmupMovementsDictionary = warmupDictionaryLower
                 warmupSelectedArray = presetsArraysLower[0]
                 pickerViewArray = pickerViewArrayLower
                 tableViewSectionArray = tableViewSectionArrayLower
                 presetsArrays = presetsArraysLower
-                emptyArray = emptyArrayLower
             // Screen Arrays
-                setsArrayF = setsArrayLower
-                repsArrayF = repsArrayLower
-                demonstrationArrayF = demonstrationArrayLower
-                targetAreaArrayF = targetAreaArrayLower
-                explanationArrayF = explanationArrayLower
+                setsDictionary = setsDictionaryLower
+                repsDictionary = repsDictionaryLower
+                demonstrationDictionary = demonstrationDictionaryLower
+                targetAreaDictionary = targetAreaDictionaryLower
+                explanationDictionary = explanationDictionaryLower
         //
         case 3:
             // Choice Screen Arrays
-                warmupMovementsArray = warmupCardioArray
+                warmupKeyArray = warmupKeyArrayCardio
+                warmupMovementsDictionary = warmupDictionaryCardio
                 warmupSelectedArray = presetsArraysCardio[0]
                 pickerViewArray = pickerViewArrayCardio
                 tableViewSectionArray = tableViewSectionArrayCardio
                 presetsArrays = presetsArraysCardio
-                emptyArray = emptyArrayCardio
             // Screen Arrays
-                setsArrayF = setsArrayCardio
-                repsArrayF = repsArrayCardio
-                demonstrationArrayF = demonstrationArrayCardio
-                targetAreaArrayF = targetAreaArrayCardio
-                explanationArrayF = explanationArrayCardio
+                setsDictionary = setsDictionaryCardio
+                repsDictionary = repsDictionaryCardio
+                demonstrationDictionary = demonstrationDictionaryCardio
+                targetAreaDictionary = targetAreaDictionaryCardio
+                explanationDictionary = explanationDictionaryCardio
         //
         default: break
         }
@@ -2085,7 +1946,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.6
-        lineSpacing.hyphenationFactor = 1
         // Add Attributes
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
@@ -2093,7 +1953,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         // Final Text Editing
         informationText.attributedText = informationLabelText
-        informationText.textAlignment = .justified
+        informationText.textAlignment = .natural
         informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
         informationText.numberOfLines = 0
         informationText.sizeToFit()
@@ -2116,21 +1976,17 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         let defaults = UserDefaults.standard
         // Full Body
-        defaults.register(defaults: ["warmupFullPresets" : warmupFullPresets])
-        defaults.register(defaults: ["warmupFullPresetTexts" : presetTexts])
-        defaults.register(defaults: ["warmupFullPresetNumber" : 0])
+        defaults.register(defaults: ["warmupPresetsFull" : emptyArrayofArrays])
+        defaults.register(defaults: ["warmupPresetTextsFull" : presetTexts])
         // Upper Body
-        defaults.register(defaults: ["warmupUpperPresets" : warmupUpperPresets])
-        defaults.register(defaults: ["warmupUpperPresetTexts" : presetTexts])
-        defaults.register(defaults: ["warmupUpperPresetNumber" : 0])
+        defaults.register(defaults: ["warmupPresetsUpper" : emptyArrayofArrays])
+        defaults.register(defaults: ["warmupPresetTextsUpper" : presetTexts])
         // Lower Body
-        defaults.register(defaults: ["warmupLowerPresets" : warmupLowerPresets])
-        defaults.register(defaults: ["warmupLowerPresetTexts" : presetTexts])
-        defaults.register(defaults: ["warmupLowerPresetNumber" : 0])
+        defaults.register(defaults: ["warmupPresetsLower" : emptyArrayofArrays])
+        defaults.register(defaults: ["warmupPresetTextsLower" : presetTexts])
         // Cardio
-        defaults.register(defaults: ["warmupCardioPresets" : warmupCardioPresets])
-        defaults.register(defaults: ["warmupCardioPresetTexts" : presetTexts])
-        defaults.register(defaults: ["warmupCardioPresetNumber" : 0])
+        defaults.register(defaults: ["warmupPresetsCardio" : emptyArrayofArrays])
+        defaults.register(defaults: ["warmupPresetTextsCardio" : presetTexts])
         //
         defaults.synchronize()
         
@@ -2144,13 +2000,10 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // Button Enabled
     func beginButtonEnabled() {
         // Begin Button
-        for item in warmupSelectedArray {
-            if item.contains(1) {
-                beginButton.isEnabled = true
-                break
-            } else {
-                beginButton.isEnabled = false
-            }
+        if warmupSelectedArray.count != 0 {
+            beginButton.isEnabled = true
+        } else {
+            beginButton.isEnabled = false
         }
     }
     
@@ -2164,12 +2017,10 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBAction func addPreset(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: warmupPresetNumbers[warmupType])
-        var warmupPreset = defaults.object(forKey: warmupPresets[warmupType]) as! [Array<Array<Int>>]
+        var warmupPreset = defaults.object(forKey: warmupPresets[warmupType]) as! [[Int]]
         var presetTextArray = defaults.object(forKey: warmupPresetTexts[warmupType]) as! [String]
         
         // Set Preset
-        if number < 3 {
             // Alert and Functions
             //
             let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
@@ -2187,20 +2038,14 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 //
                 let textField = alert?.textFields![0]
                 // Update Preset Text Arrays
-                presetTextArray[number] = (textField?.text)!
+                presetTextArray.append((textField?.text)!)
                 defaults.set(presetTextArray, forKey: self.warmupPresetTexts[self.warmupType])
                 defaults.synchronize()
                 // Set new Preset Array
                 //
-                warmupPreset[number] = self.warmupSelectedArray
+                warmupPreset.append(self.warmupSelectedArray)
                 defaults.set(warmupPreset, forKey: self.warmupPresets[self.warmupType])
                 //
-                defaults.synchronize()
-                // Increase Preset Counter
-                //
-                let newNumber = number + 1
-                //
-                defaults.set(newNumber, forKey: self.warmupPresetNumbers[self.warmupType])
                 defaults.synchronize()
                 // Flash Screen
                 self.flashScreen()
@@ -2215,16 +2060,13 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             alert.addAction(cancelAction)
             // 4. Present the alert.
             self.present(alert, animated: true, completion: nil)
-        } else {
-        }
     }
 
     // Remove
     @IBAction func removePreset(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        let number = defaults.integer(forKey: warmupPresetNumbers[warmupType])
-        var warmupPreset = defaults.object(forKey: warmupPresets[warmupType]) as! [Array<Array<Int>>]
+        var warmupPreset = defaults.object(forKey: warmupPresets[warmupType]) as! [[Int]]
         var presetTextArray = defaults.object(forKey: warmupPresetTexts[warmupType]) as! [String]
         //
         let selectedRow = pickerView.selectedRow(inComponent: 0)
@@ -2236,25 +2078,15 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = colour2
         alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-        if index > -1 {
             //
             // 3. Get the value from the text field, and perform actions upon OK press
             okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                 //
-
                 warmupPreset.remove(at: index)
-                warmupPreset.append(self.emptyArray)
                 defaults.set(warmupPreset, forKey: self.warmupPresets[self.warmupType])
                 //
                 presetTextArray.remove(at: index)
-                presetTextArray.append(self.emptyString)
                 defaults.set(presetTextArray, forKey: self.warmupPresetTexts[self.warmupType])
-                //
-                if number > 0 {
-                    let newNumber = number - 1
-                    defaults.set(newNumber, forKey: self.warmupPresetNumbers[self.warmupType])
-                } else {
-                }
                 //
                 defaults.synchronize()
                 // Flash Screen
@@ -2262,7 +2094,11 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.pickerView.reloadAllComponents()
                 self.tableView.reloadData()
             })
-        alert.addAction(okAction)
+        //
+        if index > -1 {
+            alert.addAction(okAction)
+        } else {
+        }
         // Cancel reset action
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
             UIAlertAction in
@@ -2270,8 +2106,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         alert.addAction(cancelAction)
         //
         self.present(alert, animated: true, completion: nil)
-        } else {
-        }
+        
     }
     
     
@@ -2285,8 +2120,8 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
    
     // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
-        return pickerViewArray.count + 4
+        let titleDataArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
+        return pickerViewArray.count + 1 + titleDataArray.count
         
     }
     
@@ -2350,64 +2185,25 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         switch row {
         //
-        case 0:
+        case 0,1,2,3,4,5,6:
             warmupSelectedArray = presetsArrays[row]
             self.tableView.reloadData()
             flashScreen()
-        //
-        case 1:
-            warmupSelectedArray = presetsArrays[row]
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 2:
-            warmupSelectedArray = presetsArrays[row]
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 3:
-            warmupSelectedArray = presetsArrays[row]
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 4:
-            warmupSelectedArray = presetsArrays[row]
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 5:
-            warmupSelectedArray = presetsArrays[row]
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 6:
-            warmupSelectedArray = presetsArrays[row]
-            self.tableView.reloadData()
-            flashScreen()
-        //
         case 7:
             break
         //
-        case 8:
-            let fullArray = defaults.object(forKey: warmupPresets[warmupType]) as! [Array<Array<Int>>]
-            let array = fullArray[0]
-            warmupSelectedArray = array
+        case _ where row > 7:
+            let presetsArrayCustom = defaults.object(forKey: warmupPresets[warmupType]) as! [[Int]]
+            var presetsArray = [Int]()
+            if presetsArrayCustom.count != 0 {
+                presetsArray = presetsArrayCustom[row - (pickerViewArray.count + 1)]
+            } else {
+                 presetsArray = []
+            }
+            warmupSelectedArray = presetsArray
             self.tableView.reloadData()
             flashScreen()
-        //
-        case 9:
-            let fullArray = defaults.object(forKey: warmupPresets[warmupType]) as! [Array<Array<Int>>]
-            let array = fullArray[1]
-            warmupSelectedArray = array
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 10:
-            let fullArray = defaults.object(forKey: warmupPresets[warmupType]) as! [Array<Array<Int>>]
-            let array = fullArray[2]
-            warmupSelectedArray = array
-            self.tableView.reloadData()
-            flashScreen()
+            
         //
         default:
             break
@@ -2420,7 +2216,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
 //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        return warmupMovementsArray.count
+        return tableViewSectionArray.count
     }
     
     // Title for header
@@ -2439,7 +2235,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     
     // Number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return warmupMovementsArray[section].count
+        return warmupKeyArray[section].count
     }
     
     // Cell for row
@@ -2447,7 +2243,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         //
-        cell.textLabel?.text = NSLocalizedString(warmupMovementsArray[indexPath.section][indexPath.row], comment: "")
+        cell.textLabel?.text = NSLocalizedString(warmupMovementsDictionary[warmupKeyArray[indexPath.section][indexPath.row]]!, comment: "")
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.textLabel?.textAlignment = .left
@@ -2455,7 +2251,8 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.textLabel?.textColor = .black
         cell.tintColor = .black
         //
-        if warmupSelectedArray[indexPath.section][indexPath.row] == 1 {
+        let key = warmupKeyArray[indexPath.section][indexPath.row]
+        if warmupSelectedArray.contains(key) {
             cell.layer.borderColor = colour2.cgColor
             cell.layer.borderWidth = 2
             
@@ -2464,7 +2261,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.accessoryType = .none
         }
         // Cell Image
-        cell.imageView?.image = #imageLiteral(resourceName: "Test")
+        cell.imageView?.image = demonstrationDictionary[warmupKeyArray[indexPath.section][indexPath.row]]
         cell.imageView?.isUserInteractionEnabled = true
         // Image Tap
         let imageTap = UITapGestureRecognizer()
@@ -2488,11 +2285,13 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         if cell?.accessoryType == .checkmark {
             cell?.accessoryType = .none
-            warmupSelectedArray[indexPath.section][indexPath.row] = 0
+            let keyToRemove = warmupKeyArray[indexPath.section][indexPath.row]
+            warmupSelectedArray = warmupSelectedArray.filter() {$0 != keyToRemove}
             tableView.reloadData()
         } else {
             cell?.accessoryType = .checkmark
-            warmupSelectedArray[indexPath.section][indexPath.row] = 1
+            let keyToAdd = warmupKeyArray[indexPath.section][indexPath.row]
+            warmupSelectedArray.append(keyToAdd)
             tableView.reloadData()
         }
         //
@@ -2589,9 +2388,8 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         expandedImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         expandedImage.contentMode = .scaleAspectFit
         expandedImage.isUserInteractionEnabled = true
-        
-        //expandedImage.image = demonstrationArrayF[section][row]
-        expandedImage.image = #imageLiteral(resourceName: "Test 2")
+        //
+        expandedImage.image = image
         
         // Background View
         //
@@ -2652,7 +2450,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
 //
-// Information Actions ---------------------------------------------------------------------------------------------------------------------------
+// Pass Arrays ---------------------------------------------------------------------------------------------------------------------------
 //
     // Pass Array to next ViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -2661,18 +2459,24 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.viewControllers.first as! SessionScreen
             
+            // Ensure array in ascending order
+            warmupSelectedArray.sort()
             // Compress Arrays
-            warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            setsArray = zip(setsArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            repsArray = zip(repsArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            demonstrationArray = zip(demonstrationArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            targetAreaArray = zip(targetAreaArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            explanationArray = zip(explanationArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            warmupSelectedArray.sort()
+            for i in warmupSelectedArray {
+                //
+                warmupArray.append(warmupMovementsDictionary[i]!)
+                //
+                setsArray.append(setsDictionary[i]!)
+                //
+                repsArray.append(repsDictionary[i]!)
+                //
+                demonstrationArray.append(demonstrationDictionary[i]!)
+                //
+                targetAreaArray.append(targetAreaDictionary[i]!)
+                //
+                explanationArray.append(explanationDictionary[i]!)
+            }
             //
             destinationVC.sessionArray = warmupArray
             destinationVC.setsArray = setsArray
@@ -2686,18 +2490,23 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
             
+            // Ensure array in ascending order
+            warmupSelectedArray.sort()
             // Compress Arrays
-            warmupArray = zip(warmupMovementsArray.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            setsArray = zip(setsArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            repsArray = zip(repsArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            demonstrationArray = zip(demonstrationArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            targetAreaArray = zip(targetAreaArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            explanationArray = zip(explanationArrayF.flatMap{$0},warmupSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
+            for i in warmupSelectedArray {
+                //
+                warmupArray.append(warmupMovementsDictionary[i]!)
+                //
+                setsArray.append(setsDictionary[i]!)
+                //
+                repsArray.append(repsDictionary[i]!)
+                //
+                demonstrationArray.append(demonstrationDictionary[i]!)
+                //
+                targetAreaArray.append(targetAreaDictionary[i]!)
+                //
+                explanationArray.append(explanationDictionary[i]!)
+            }
             //
             destinationVC.sessionArray = warmupArray
             destinationVC.setsArray = setsArray

@@ -77,7 +77,7 @@ class ClassicChoiceG: UIViewController  {
         questionMark.tintColor = colour1
         
         // Titles
-        navigationBar.title = (NSLocalizedString("split", comment: ""))
+        navigationBar.title = (NSLocalizedString("classic", comment: ""))
         
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
@@ -164,7 +164,7 @@ class ClassicChoiceG: UIViewController  {
         // Information Text
         //
         // Information Text Frame
-        let informationTextStretchingC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 10, height: 0))
+        let informationTextStretchingC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
         // Information Text and Attributes
         //
         // String
@@ -184,7 +184,6 @@ class ClassicChoiceG: UIViewController  {
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.6
-        lineSpacing.hyphenationFactor = 1
         // Add Attributes
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
@@ -194,7 +193,7 @@ class ClassicChoiceG: UIViewController  {
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         // Final Text Editing
         informationTextStretchingC.attributedText = informationLabelText
-        informationTextStretchingC.textAlignment = .justified
+        informationTextStretchingC.textAlignment = .natural
         informationTextStretchingC.lineBreakMode = NSLineBreakMode.byWordWrapping
         informationTextStretchingC.numberOfLines = 0
         informationTextStretchingC.sizeToFit()

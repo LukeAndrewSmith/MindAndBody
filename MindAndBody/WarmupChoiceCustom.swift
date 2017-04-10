@@ -31,6 +31,21 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     // Selected row
     var selectedRow = Int()
     
+    //
+    var warmupArray: [String] = []
+    //
+    var demonstrationArray: [UIImage] = []
+    //
+    var targetAreaArray: [UIImage] = []
+    //
+    var explanationArray: [String] = []
+    
+    //
+    var setsArray: [Int] = []
+    //
+    var repsArray: [String] = []
+  
+    
 //
 // Warmup Arrays -----------------------------------------------------------------------------------------------
 //
@@ -195,7 +210,77 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     ]
 
     // Demonstration Array
-    var demonstrationArray: [[UIImage]] = [[]]
+    var demonstrationDictionary: [Int : UIImage] =
+        [
+            // Mandatory
+            0: #imageLiteral(resourceName: "Test 2"),
+            1: #imageLiteral(resourceName: "Test 2"),
+            // Joint Rotations
+            2: #imageLiteral(resourceName: "Test 2"),
+            3: #imageLiteral(resourceName: "Test 2"),
+            4: #imageLiteral(resourceName: "Test 2"),
+            5: #imageLiteral(resourceName: "Test 2"),
+            6: #imageLiteral(resourceName: "Test 2"),
+            7: #imageLiteral(resourceName: "Test 2"),
+            8: #imageLiteral(resourceName: "Test 2"),
+            9: #imageLiteral(resourceName: "Test 2"),
+            // Foam/Ball Roll
+            10: #imageLiteral(resourceName: "Test 2"),
+            11: #imageLiteral(resourceName: "Test 2"),
+            12: #imageLiteral(resourceName: "Test 2"),
+            13: #imageLiteral(resourceName: "Test 2"),
+            14: #imageLiteral(resourceName: "Test 2"),
+            15: #imageLiteral(resourceName: "Test 2"),
+            16: #imageLiteral(resourceName: "Test 2"),
+            17: #imageLiteral(resourceName: "Test 2"),
+            18: #imageLiteral(resourceName: "Test 2"),
+            19: #imageLiteral(resourceName: "Test 2"),
+            // Lower Back
+            20: #imageLiteral(resourceName: "Test 2"),
+            21: #imageLiteral(resourceName: "Test 2"),
+            22: #imageLiteral(resourceName: "Test 2"),
+            23: #imageLiteral(resourceName: "Test 2"),
+            24: #imageLiteral(resourceName: "Test 2"),
+            // Shoulder
+            25: #imageLiteral(resourceName: "Test 2"),
+            26: #imageLiteral(resourceName: "Test 2"),
+            27: #imageLiteral(resourceName: "Test 2"),
+            28: #imageLiteral(resourceName: "Test 2"),
+            // Band/Bar/Machine Assisted
+            29: #imageLiteral(resourceName: "Test 2"),
+            30: #imageLiteral(resourceName: "Test 2"),
+            31: #imageLiteral(resourceName: "Test 2"),
+            32: #imageLiteral(resourceName: "Test 2"),
+            33: #imageLiteral(resourceName: "Test 2"),
+            34: #imageLiteral(resourceName: "Test 2"),
+            // General Mobility
+            35: #imageLiteral(resourceName: "Test 2"),
+            36: #imageLiteral(resourceName: "Test 2"),
+            37: #imageLiteral(resourceName: "Test 2"),
+            38: #imageLiteral(resourceName: "Test 2"),
+            39: #imageLiteral(resourceName: "Test 2"),
+            40: #imageLiteral(resourceName: "Test 2"),
+            41: #imageLiteral(resourceName: "Test 2"),
+            42: #imageLiteral(resourceName: "Test 2"),
+            43: #imageLiteral(resourceName: "Test 2"),
+            44: #imageLiteral(resourceName: "Test 2"),
+            45: #imageLiteral(resourceName: "Test 2"),
+            // Dynamic Warm Up Drills
+            46: #imageLiteral(resourceName: "Test 2"),
+            47: #imageLiteral(resourceName: "Test 2"),
+            48: #imageLiteral(resourceName: "Test 2"),
+            49: #imageLiteral(resourceName: "Test 2"),
+            50: #imageLiteral(resourceName: "Test 2"),
+            51: #imageLiteral(resourceName: "Test 2"),
+            52: #imageLiteral(resourceName: "Test 2"),
+            53: #imageLiteral(resourceName: "Test 2"),
+            54: #imageLiteral(resourceName: "Test 2"),
+            // Accessory
+            55: #imageLiteral(resourceName: "Test 2"),
+            56: #imageLiteral(resourceName: "Test 2"),
+            57: #imageLiteral(resourceName: "Test 2"),
+            58: #imageLiteral(resourceName: "Test 2")
+        ]
     
     // Target Area Array
     var targetAreaDictionary: [Int: UIImage] =
@@ -271,7 +356,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     ]
     
     // Explanation Array
-    var explanationArray: [Int : String] =
+    var explanationDictionary: [Int : String] =
         [
             // Mandatory
             0: "5minCardioLE",
@@ -527,7 +612,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.6
-        lineSpacing.hyphenationFactor = 1
         // Add Attributes
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
@@ -535,7 +619,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         // Final Text Editing
         informationText.attributedText = informationLabelText
-        informationText.textAlignment = .justified
+        informationText.textAlignment = .natural
         informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
         informationText.numberOfLines = 0
         informationText.sizeToFit()
@@ -605,18 +689,20 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         customTableView.tableFooterView = footerView
         //
         beginButtonEnabled()
+        editButtonEnabled()
+        pickerViewEnabled()
     }
 
     
 //
-// Begin button check enabled func ------------------------------------------------------------------------------------------------
+// Elements check enabled funcs ------------------------------------------------------------------------------
 //
     // Button Enabled
     func beginButtonEnabled() {
         // Begin Button
         let defaults = UserDefaults.standard
         var warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-
+        //
         if customTableView.isEditing {
             beginButton.isEnabled = false
         } else {
@@ -632,7 +718,35 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    // Edit Button Enabled
+    func editButtonEnabled() {
+        //
+        let defaults = UserDefaults.standard
+        var warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        //
+        if warmupPreset.count == 0 {
+            editingButton.isEnabled = false
+        } else {
+            if warmupPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
+                editingButton.isEnabled = false
+            } else {
+                editingButton.isEnabled = true
+            }
+        }
+    }
     
+    // PickerView Enabled
+    func pickerViewEnabled() {
+        //
+        let defaults = UserDefaults.standard
+        let warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        //
+        if warmupPreset.count == 0 {
+            sessionPickerView.isUserInteractionEnabled = false
+        } else {
+            sessionPickerView.isUserInteractionEnabled = true
+        }
+    }
 //
 // Custom Sessions -----------------------------------------------------------------------------------------------------
 //
@@ -682,6 +796,10 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 self.flashScreen()
                 self.sessionPickerView.reloadAllComponents()
                 self.customTableView.reloadData()
+                //
+                self.beginButtonEnabled()
+                self.editButtonEnabled()
+                self.pickerViewEnabled()
             })
             okAction.isEnabled = false
             alert.addAction(okAction)
@@ -692,6 +810,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             alert.addAction(cancelAction)
             // 4. Present the alert.
             self.present(alert, animated: true, completion: nil)
+        //
     }
     
     // Enable ok alert action func
@@ -742,6 +861,10 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 self.flashScreen()
                 self.sessionPickerView.reloadAllComponents()
                 self.customTableView.reloadData()
+                //
+                self.beginButtonEnabled()
+                self.editButtonEnabled()
+                self.pickerViewEnabled()
             } else {
             }
         })
@@ -757,8 +880,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         alert.addAction(cancelAction)
         //
         self.present(alert, animated: true, completion: nil)
-    }
         
+    }
+    
     
     
 //
@@ -886,11 +1010,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 }
             // Row Label
             //
-            } else if component == 1 {
-                //
-                let componentWidth = setsRepsPicker.frame.size.width / 3
-                let componentWidthFourth = componentWidth / 4
-                //
+            } else {
             }
         }
     }
@@ -967,7 +1087,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             //
             let defaults = UserDefaults.standard
             let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-            let customTitleArray = defaults.object(forKey: "warmupPresetTextsCustom") as! [String]
             //
             if customKeyArray.count == 0 {
                 return 1
@@ -1047,7 +1166,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     cell.detailTextLabel?.text = String(setsPickerArray[customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]]) + " x " + repsPickerArray[customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]]
                     //
                     // Cell Image
-                    cell.imageView?.image = #imageLiteral(resourceName: "Test")
+                    cell.imageView?.image = demonstrationDictionary[keyIndex]
                     cell.imageView?.isUserInteractionEnabled = true
                     // Image Tap
                     let imageTap = UITapGestureRecognizer()
@@ -1073,7 +1192,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             cell.textLabel?.textColor = .black
             cell.tintColor = .black
             // Cell Image
-            cell.imageView?.image = #imageLiteral(resourceName: "Test")
+            cell.imageView?.image = demonstrationDictionary[keyIndex]
             cell.imageView?.isUserInteractionEnabled = true
             // Image Tap
             let imageTap = UITapGestureRecognizer()
@@ -1268,6 +1387,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         tableView.deselectRow(at: indexPath, animated: true)
         beginButtonEnabled()
+        editButtonEnabled()
         }
     }
     
@@ -1521,7 +1641,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     
     
 //
-// Information Actions ------------------------------------------------------------------------------------------------
+// Expand/Retract Image ------------------------------------------------------------------------------------------------
 //
     // Expand Image
     let expandedImage = UIImageView()
@@ -1543,8 +1663,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         expandedImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         expandedImage.contentMode = .scaleAspectFit
         expandedImage.isUserInteractionEnabled = true
-        //expandedImage.image = demonstrationArray[section][row]
-        expandedImage.image = #imageLiteral(resourceName: "Test 2")
+        expandedImage.image = image
         // Background View
         //
         backgroundViewImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height)
@@ -1593,11 +1712,11 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         
         if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
             
-            performSegue(withIdentifier: "warmupSessionSegue1", sender: nil)
+            performSegue(withIdentifier: "warmupCustomSegue1", sender: nil)
             
         } else {
             
-            performSegue(withIdentifier: "warmupSessionSegue2", sender: nil)
+            performSegue(withIdentifier: "warmupCustomSegue2", sender: nil)
         }
         
         
@@ -1614,55 +1733,88 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
 //
 // Pass Arrays ------------------------------------------------------------------------------------------------
 //
-    
-//    // Pass Array to next ViewController
-//    //
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if (segue.identifier == "warmupSessionSegue1") {
-//            
-//            
-//            let destinationNC = segue.destination as! UINavigationController
-//            
-//            let destinationVC = destinationNC.viewControllers.first as! WarmupScreen
-//            
-//            destinationVC.warmupMovementsArray = warmupMovementsArray
-//            destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
-//            
-//            
-//            destinationVC.setsArrayF = setsArrayF
-//            destinationVC.repsArrayF = repsArrayF
-//            destinationVC.demonstrationArrayF = demonstrationArrayF
-//            destinationVC.targetAreaArrayF = targetAreaArrayF
-//            destinationVC.explanationArrayF = explanationArrayF
-//            
-//            
-//        } else if (segue.identifier == "warmupSessionSegue2") {
-//            
-//            
-//            let destinationNC = segue.destination as! UINavigationController
-//            
-//            let destinationVC = destinationNC.viewControllers.first as! WarmupScreenOverview
-//            
-//            destinationVC.warmupMovementsArray = warmupMovementsArray
-//            destinationVC.warmupMovementsSelectedArray = warmupSelectedArray
-//            
-//            
-//            destinationVC.setsArrayF = setsArrayF
-//            destinationVC.repsArrayF = repsArrayF
-//            destinationVC.demonstrationArrayF = demonstrationArrayF
-//            destinationVC.targetAreaArrayF = targetAreaArrayF
-//            destinationVC.explanationArrayF = explanationArrayF
-//            
-//            let pickerIndex = pickerView.selectedRow(inComponent: 0)
-//            if pickerIndex < pickerViewArray.count - 1 {
-//                destinationVC.warmupTitle = pickerViewArray[pickerIndex]
-//            } else if pickerIndex > pickerViewArray.count - 1 {
-//                let pickerArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
-//                destinationVC.warmupTitle = pickerArray[pickerIndex - pickerViewArray.count]
-//            }
-//        }
-//    }
-//    
+    // Pass Array to next ViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //
+        let defaults = UserDefaults.standard
+        //
+        var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        //
+        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        //
+        let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+
+        
+        if (segue.identifier == "warmupCustomSegue1") {
+            //
+            let destinationNC = segue.destination as! UINavigationController
+            let destinationVC = destinationNC.viewControllers.first as! SessionScreen
+            
+            // Compress Arrays
+            for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
+                //
+                warmupArray.append(warmupMovementsDictionary[i]!)
+                //
+                demonstrationArray.append(demonstrationDictionary[i]!)
+                //
+                targetAreaArray.append(targetAreaDictionary[i]!)
+                //
+                explanationArray.append(explanationDictionary[i]!)
+            }
+            //
+            for i in customSetsArray[sessionPickerView.selectedRow(inComponent: 0)] {
+                setsArray.append(setsPickerArray[i])
+            }
+            //
+            for i in customRepsArray[sessionPickerView.selectedRow(inComponent: 0)] {
+                repsArray.append(repsPickerArray[i])
+            }
+            
+            //
+            destinationVC.sessionArray = warmupArray
+            destinationVC.setsArray = setsArray
+            destinationVC.repsArray = repsArray
+            destinationVC.demonstrationArray = demonstrationArray
+            destinationVC.targetAreaArray = targetAreaArray
+            destinationVC.explanationArray = explanationArray
+            //
+        } else if (segue.identifier == "warmupCustomSegue2") {
+            //
+            let destinationNC = segue.destination as! UINavigationController
+            let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
+            
+            // Compress Arrays
+            for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
+                //
+                warmupArray.append(warmupMovementsDictionary[i]!)
+                //
+                demonstrationArray.append(demonstrationDictionary[i]!)
+                //
+                targetAreaArray.append(targetAreaDictionary[i]!)
+                //
+                explanationArray.append(explanationDictionary[i]!)
+            }
+            //
+            for i in customSetsArray[sessionPickerView.selectedRow(inComponent: 0)] {
+                setsArray.append(setsPickerArray[i])
+            }
+            //
+            for i in customRepsArray[sessionPickerView.selectedRow(inComponent: 0)] {
+                repsArray.append(repsPickerArray[i])
+            }
+            
+            //
+            destinationVC.sessionArray = warmupArray
+            destinationVC.setsArray = setsArray
+            destinationVC.repsArray = repsArray
+            destinationVC.demonstrationArray = demonstrationArray
+            destinationVC.targetAreaArray = targetAreaArray
+            destinationVC.explanationArray = explanationArray
+            //
+            destinationVC.sessionTitle = titleDataArray[sessionPickerView.numberOfRows(inComponent: 0)]
+        }
+    }
  
     
     

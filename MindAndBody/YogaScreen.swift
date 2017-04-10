@@ -1209,7 +1209,7 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         //
         explanationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         explanationLabel.textColor = .black
-        explanationLabel.textAlignment = .justified
+        explanationLabel.textAlignment = .natural
         explanationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         explanationLabel.numberOfLines = 0
         
@@ -1217,7 +1217,6 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[yogaScreenIndex], comment: ""))
         let paragraphStyleEE = NSMutableParagraphStyle()
         paragraphStyleEE.alignment = .justified
-        paragraphStyleEE.hyphenationFactor = 1
         
         attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
         
