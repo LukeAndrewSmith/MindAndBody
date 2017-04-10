@@ -1165,24 +1165,15 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         case 7:
             break
         //
-        case 8:
-            let fullArray = defaults.object(forKey: stretchingPresets[stretchingType]) as! [Array<Array<Int>>]
-            let array = fullArray[0]
-            stretchingSelectedArray = array
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 9:
-            let fullArray = defaults.object(forKey: stretchingPresets[stretchingType]) as! [Array<Array<Int>>]
-            let array = fullArray[1]
-            stretchingSelectedArray = array
-            self.tableView.reloadData()
-            flashScreen()
-        //
-        case 10:
-            let fullArray = defaults.object(forKey: stretchingPresets[stretchingType]) as! [Array<Array<Int>>]
-            let array = fullArray[2]
-            stretchingSelectedArray = array
+        case _ where row > 7:
+            let presetsArraysCustom = defaults.object(forKey: stretchingPresets[stretchingType]) as! [[Int]]
+            var presetsArray = [Int]()
+            if presetsArraysCustom.count != 0 {
+                presetsArray = presetsArrayCustom[row - (pickerViewArray.count + 1)]
+            } else {
+                presetsArray = []
+            }
+            stretchingSelectedArray = presetsArray
             self.tableView.reloadData()
             flashScreen()
         //
@@ -1197,7 +1188,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
 //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        return stretchingMovementsDictionary.count
+        return stretchingSectionArray.count
     }
     
     // Title for header
@@ -1219,7 +1210,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     
     // Number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stretchingMovementsDictionary[section].count
+        return stretchingKeyArray[section].count
     }
     
     // Cell for row
@@ -1227,7 +1218,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         //
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         //
-        cell.textLabel?.text = NSLocalizedString(stretchingMovementsDictionary[indexPath.section][indexPath.row], comment: "")
+        cell.textLabel?.text = NSLocalizedString(stretchingMovementsDictionary[stretchingKeyArray[indexPath.section][indexPath.row]], comment: "")
         //
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
         cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -1236,7 +1227,8 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         cell.textLabel?.textColor = .black
         cell.tintColor = .black
         //
-        if stretchingSelectedArray[indexPath.section][indexPath.row] == 1 {
+        let key = stretchingKeyArray[indexPath.section][indexPath.row]
+        if stretchingSelectedArray.containt(key) {
             cell.layer.borderColor = colour2.cgColor
             cell.layer.borderWidth = 2
             cell.accessoryType = .checkmark
@@ -1244,7 +1236,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             cell.accessoryType = .none
         }
         // Cell Image
-        cell.imageView?.image = demonstrationDictionary[indexPath.section][indexPath.row]
+        cell.imageView?.image = demonstrationDictionary[stretchingKeyArray[indexPath.section][indexPath.row]]
         cell.imageView?.isUserInteractionEnabled = true
         // Image Tap
         let imageTap = UITapGestureRecognizer()
@@ -1268,11 +1260,13 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         //
         if cell?.accessoryType == .checkmark {
             cell?.accessoryType = .none
-            stretchingSelectedArray[indexPath.section][indexPath.row] = 0
+            let keyToRemove = stretchingKeyArray[indexPath.section][indexPath.row]
+            stretchingSelectedArray = stretchingSelectedArray.filter() {$0 != keyToRemove}
             tableView.reloadData()
         } else {
             cell?.accessoryType = .checkmark
-            stretchingSelectedArray[indexPath.section][indexPath.row] = 1
+            let keyToAdd = stretchingKeyArray[indexPath.section][indexPath.row]
+            stretchingSelectedArray.append(keyToAdd)
             tableView.reloadData()
         }
         //
