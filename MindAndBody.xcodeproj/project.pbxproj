@@ -481,9 +481,10 @@
 			isa = PBXGroup;
 			children = (
 				077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */,
+				07DEE6F01E0AAD2E003B89AB /* ClassicChoiceG.swift */,
+				077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */,
 				079B7AF51E9A6326005750F0 /* Custom */,
-				0782A2961E5DA6730016F908 /* Classic */,
-				0782A2991E5DA6B90016F908 /* Circuit */,
+				0782A2961E5DA6730016F908 /* Classic Old Stuff */,
 			);
 			name = Gym;
 			sourceTree = "<group>";
@@ -496,21 +497,12 @@
 			name = Bodyweight;
 			sourceTree = "<group>";
 		};
-		0782A2961E5DA6730016F908 /* Classic */ = {
+		0782A2961E5DA6730016F908 /* Classic Old Stuff */ = {
 			isa = PBXGroup;
 			children = (
-				07DEE6F01E0AAD2E003B89AB /* ClassicChoiceG.swift */,
 				071B93501E5F23BD00865FC5 /* Full */,
 			);
-			name = Classic;
-			sourceTree = "<group>";
-		};
-		0782A2991E5DA6B90016F908 /* Circuit */ = {
-			isa = PBXGroup;
-			children = (
-				077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */,
-			);
-			name = Circuit;
+			name = "Classic Old Stuff";
 			sourceTree = "<group>";
 		};
 		079187261E7B4D9F00E7153A /* Detail Session */ = {

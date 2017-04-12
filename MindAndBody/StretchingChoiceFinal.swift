@@ -785,16 +785,19 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             // Choice Screen Arrays
             stretchingSelectedArray = presetsArraysGeneral[0]
             pickerViewArray = pickerViewArrayGeneral
+            presetsArrays = presetsArraysGeneral
         //
         case 1:
             // Choice Screen Arrays
             stretchingSelectedArray = presetsArraysWorkout[0]
             pickerViewArray = pickerViewArrayWorkout
+            presetsArrays = presetsArraysWorkout
         //
         case 2:
             // Choice Screen Arrays
             stretchingSelectedArray = presetsArraysCardio[0]
             pickerViewArray = pickerViewArrayCardio
+            presetsArrays = presetsArraysCardio
         //
         default: break
         }
@@ -973,15 +976,12 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         // General
         defaults.register(defaults: ["stretchingPresetsGeneral" : emptyArrayofArrays])
         defaults.register(defaults: ["stretchingPresetTextsGeneral" : presetTexts])
-        defaults.register(defaults: ["stretchingPresetNumberGeneral" : 0])
         // Post Workout
         defaults.register(defaults: ["stretchingPresetsWorkout" : emptyArrayofArrays])
         defaults.register(defaults: ["stretchingPresetTextsWorkout" : presetTexts])
-        defaults.register(defaults: ["stretchingPresetNumberWorkout" : 0])
         // Post Cardio
         defaults.register(defaults: ["stretchingPresetsCardio" : emptyArrayofArrays])
         defaults.register(defaults: ["stretchingPresetTextsCardio" : presetTexts])
-        defaults.register(defaults: ["stretchingPresetNumberCardio" : 0])
         //
         defaults.synchronize()
         
@@ -1006,81 +1006,101 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
 //
 // Workout Choice Class -----------------------------------------------------------------------------------------------------------
 //
+    //
+    var okAction = UIAlertAction()
     // Custom sessions
     @IBAction func addPreset(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        var stretchingPreset = defaults.object(forKey: stretchingPresets[stretchingType]) as! [Array<Array<Int>>]
+        var stretchingPreset = defaults.object(forKey: stretchingPresets[stretchingType]) as! [[Int]]
         var presetTextArray = defaults.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
         // Set Preset
-        if number < 3 {
-            // Alert and Functions
-            //
-            let inputTitle = NSLocalizedString("stretchingInputTitle", comment: "")
-            //
-            let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-            alert.view.tintColor = colour2
-            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-            //2. Add the text field. You can configure it however you need.
-            alert.addTextField { (textField) in
-                textField.text = " "
-                textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
-            }
-            // 3. Get the value from the text field, and perform actions when OK clicked.
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-                let textField = alert?.textFields![0]
-                // Update Preset Text Arrays
-                presetTextArray[number] = (textField?.text)!
-                defaults.set(presetTextArray, forKey: self.stretchingPresetTexts[self.stretchingType])
-                defaults.synchronize()
-                // Set new Preset Array
-                //
-                stretchingPreset[number] = self.stretchingSelectedArray
-                defaults.set(stretchingPreset, forKey: self.stretchingPresets[self.stretchingType])
-                defaults.synchronize()
-                // Increase Preset Counter
-                //
-                let newNumber = number + 1
-                defaults.set(newNumber, forKey: self.stretchingPresetNumbers[self.stretchingType])
-                defaults.synchronize()
-                // Flash Screen
-                self.flashScreen()
-                self.pickerView.reloadAllComponents()
-                self.tableView.reloadData()
-            }))
-            // 4. Present the alert.
-            self.present(alert, animated: true, completion: nil)
-        } else {
+        // Alert and Functions
+        //
+        let inputTitle = NSLocalizedString("stretchingInputTitle", comment: "")
+        //
+        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+        alert.view.tintColor = colour2
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField { (textField) in
+            textField.text = " "
+            textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
         }
-    }
-    
-    // Remove Personalized Preset
-    @IBAction func removePreset(_ sender: Any) {
-        //
-        let defaults = UserDefaults.standard
-        var stretchingPreset = defaults.object(forKey: stretchingPresets[stretchingType]) as! [Array<Array<Int>>]
-        var presetTextArray = defaults.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
-        //
-        let selectedRow = pickerView.selectedRow(inComponent: 0)
-        let index = (selectedRow) - (pickerViewArray.count + 1)
-        //
-        if index > -1 {
+        // 3. Get the value from the text field, and perform actions when OK clicked.
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             //
-            stretchingPreset.remove(at: index)
-            stretchingPreset.append(emptyArray)
-            defaults.set(stretchingPreset, forKey: stretchingPresets[stretchingType])
+            let textField = alert?.textFields![0]
+            // Update Preset Text Arrays
+            presetTextArray.append((textField?.text)!)
+            defaults.set(presetTextArray, forKey: self.stretchingPresetTexts[self.stretchingType])
+            defaults.synchronize()
+            // Set new Preset Array
             //
-            presetTextArray.remove(at: index)
-            presetTextArray.append(emptyString)
-            defaults.set(presetTextArray, forKey: stretchingPresetTexts[stretchingType])
+            stretchingPreset.append(self.stretchingSelectedArray)
+            defaults.set(stretchingPreset, forKey: self.stretchingPresets[self.stretchingType])
             //
             defaults.synchronize()
             // Flash Screen
             self.flashScreen()
             self.pickerView.reloadAllComponents()
             self.tableView.reloadData()
+            
+        }))
+        // Cancel reset action
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        alert.addAction(cancelAction)
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // Remove Personalized Preset
+    @IBAction func removePreset(_ sender: Any) {
+        //
+        let defaults = UserDefaults.standard
+        var stretchingPreset = defaults.object(forKey: stretchingPresets[stretchingType]) as! [[Int]]
+        var presetTextArray = defaults.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
+        //
+        let selectedRow = pickerView.selectedRow(inComponent: 0)
+        let index = (selectedRow) - (pickerViewArray.count + 1)
+        //
+        //
+        let inputTitle = NSLocalizedString("stretchingRemoveTitle", comment: "")
+        //
+        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+        alert.view.tintColor = colour2
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        //
+        // 3. Get the value from the text field, and perform actions upon OK press
+        okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            //
+            stretchingPreset.remove(at: index)
+            defaults.set(stretchingPreset, forKey: self.stretchingPresets[self.stretchingType])
+            //
+            presetTextArray.remove(at: index)
+            defaults.set(presetTextArray, forKey: self.stretchingPresetTexts[self.stretchingType])
+            //
+            defaults.synchronize()
+            // Flash Screen
+            self.flashScreen()
+            self.pickerView.reloadAllComponents()
+            self.tableView.reloadData()
+        })
+        //
+        if index > -1 {
+            alert.addAction(okAction)
         } else {
         }
+        // Cancel reset action
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        alert.addAction(cancelAction)
+        //
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
 
@@ -1094,7 +1114,8 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     
     // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerViewArray.count + 4
+        let titleDataArray = UserDefaults.standard.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
+        return pickerViewArray.count + 1 + titleDataArray.count
     }
     
     // View for row
@@ -1115,32 +1136,15 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             line.isEnabled = false
             return line
         //
-        } else if row == pickerViewArray.count + 1 {
+        } else if row > pickerViewArray.count {
             let rowLabel = UILabel()
             let titleDataArray = UserDefaults.standard.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
-            let titleData = titleDataArray[0]
+            let titleData = titleDataArray[row - (pickerViewArray.count + 1)]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
         //
-        } else if row == pickerViewArray.count + 2 {
-            let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
-            let titleData = titleDataArray[1]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
-            rowLabel.attributedText = myTitle
-            rowLabel.textAlignment = .center
-            return rowLabel
-        //
-        } else if row == pickerViewArray.count + 3 {
-            let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
-            let titleData = titleDataArray[2]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
-            rowLabel.attributedText = myTitle
-            rowLabel.textAlignment = .center
-            return rowLabel
         }
         return UIView()
     }
@@ -1169,7 +1173,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             let presetsArraysCustom = defaults.object(forKey: stretchingPresets[stretchingType]) as! [[Int]]
             var presetsArray = [Int]()
             if presetsArraysCustom.count != 0 {
-                presetsArray = presetsArrayCustom[row - (pickerViewArray.count + 1)]
+                presetsArray = presetsArraysCustom[row - (pickerViewArray.count + 1)]
             } else {
                 presetsArray = []
             }
@@ -1180,6 +1184,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         default:
             break
         }
+        beginButtonEnabled()
     }
     
 
@@ -1188,7 +1193,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
 //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        return stretchingSectionArray.count
+        return tableViewSectionArray.count
     }
     
     // Title for header
@@ -1218,7 +1223,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         //
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         //
-        cell.textLabel?.text = NSLocalizedString(stretchingMovementsDictionary[stretchingKeyArray[indexPath.section][indexPath.row]], comment: "")
+        cell.textLabel?.text = NSLocalizedString(stretchingDictionary[stretchingKeyArray[indexPath.section][indexPath.row]]!, comment: "")
         //
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
         cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -1228,7 +1233,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         cell.tintColor = .black
         //
         let key = stretchingKeyArray[indexPath.section][indexPath.row]
-        if stretchingSelectedArray.containt(key) {
+        if stretchingSelectedArray.contains(key) {
             cell.layer.borderColor = colour2.cgColor
             cell.layer.borderWidth = 2
             cell.accessoryType = .checkmark
@@ -1429,25 +1434,29 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
 // Pass Array to next view controller -----------------------------------------------------------------------------------
 //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //
         if (segue.identifier == "stretchingSessionSegue1") {
-            // Compress Arrays
             //
-            stretchingArray = zip(stretchingMovementsDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            setsArray = zip(setsDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            repsArray = zip(repsDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            demonstrationArray = zip(demonstrationDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            targetAreaArray = zip(targetAreaDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            explanationArray = zip(explanationDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
-            // Pass Data
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.viewControllers.first as! SessionScreen
+            
+            // Ensure array in ascending order
+            stretchingSelectedArray.sort()
+            // Compress Arrays
+            stretchingSelectedArray.sort()
+            for i in stretchingSelectedArray {
+                //
+                stretchingArray.append(stretchingDictionary[i]!)
+                //
+                setsArray.append(setsDictionary[i]!)
+                //
+                repsArray.append(repsDictionary[i]!)
+                //
+                demonstrationArray.append(demonstrationDictionary[i]!)
+                //
+                targetAreaArray.append(targetAreaDictionary[i]!)
+                //
+                explanationArray.append(explanationDictionary[i]!)
+            }
             //
             destinationVC.sessionArray = stretchingArray
             destinationVC.setsArray = setsArray
@@ -1455,26 +1464,31 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
-        //
+            //
+            destinationVC.sessionType = 2
+            //
         } else if (segue.identifier == "stretchingSessionSegue2") {
-            
-            // Compress Arrays
             //
-            stretchingArray = zip(stretchingMovementsDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            setsArray = zip(setsDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            repsArray = zip(repsDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            demonstrationArray = zip(demonstrationDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            targetAreaArray = zip(targetAreaDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            //
-            explanationArray = zip(explanationDictionary.flatMap{$0},stretchingSelectedArray.flatMap{$0}).filter{$1==1}.map{$0.0}
-            
-            // Pass Data
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
+            
+            // Ensure array in ascending order
+            stretchingSelectedArray.sort()
+            // Compress Arrays
+            for i in stretchingSelectedArray {
+                //
+                stretchingArray.append(stretchingDictionary[i]!)
+                //
+                setsArray.append(setsDictionary[i]!)
+                //
+                repsArray.append(repsDictionary[i]!)
+                //
+                demonstrationArray.append(demonstrationDictionary[i]!)
+                //
+                targetAreaArray.append(targetAreaDictionary[i]!)
+                //
+                explanationArray.append(explanationDictionary[i]!)
+            }
             //
             destinationVC.sessionArray = stretchingArray
             destinationVC.setsArray = setsArray
@@ -1483,12 +1497,14 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
+            destinationVC.sessionType = 2
+            //
             let pickerIndex = pickerView.selectedRow(inComponent: 0)
-            if pickerIndex < pickerViewArray.count - 1 {
+            if pickerIndex < pickerViewArray.count {
                 destinationVC.sessionTitle = pickerViewArray[pickerIndex]
-            } else if pickerIndex > pickerViewArray.count - 1 {
+            } else if pickerIndex > pickerViewArray.count {
                 let pickerArray = UserDefaults.standard.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
-                destinationVC.sessionTitle = pickerArray[pickerIndex - pickerViewArray.count]
+                destinationVC.sessionTitle = pickerArray[pickerIndex - (pickerViewArray.count + 1)]
             }
         }
     }

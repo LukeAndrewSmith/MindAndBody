@@ -200,7 +200,7 @@ class MeditationGuided: UIViewController {
         let discussionLabel = UILabel()
         let attributedText = NSMutableAttributedString(string: NSLocalizedString(discussionArray[selectedSession[0]][selectedSession[1]], comment: ""))
         let paragraphStyleE = NSMutableParagraphStyle()
-        paragraphStyleE.alignment = .justified
+        paragraphStyleE.alignment = .natural
         //
         attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleE, range: NSMakeRange(0, attributedText.length))
         //

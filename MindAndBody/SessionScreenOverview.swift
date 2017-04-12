@@ -42,6 +42,9 @@ class SessionScreenOverview: UITableViewController {
 //
 // Retreive Arrays ---------------------------------------------------------------------------------------------------
 //
+    //
+    var sessionType = Int()
+    
     // Title
     var sessionTitle = String()
     
@@ -187,7 +190,9 @@ class SessionScreenOverview: UITableViewController {
             content.body = NSLocalizedString("nextSet", comment: "")
             content.sound = UNNotificationSound.default()
             //
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+            let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+            //
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTimes[sessionType]), repeats: false)
             let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
             //
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
@@ -675,6 +680,8 @@ class SessionScreenOverview: UITableViewController {
             //
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
+            //
+            destinationVC.sessionType = sessionType
             
             // Set Button
             destinationVC.buttonNumber = buttonNumber

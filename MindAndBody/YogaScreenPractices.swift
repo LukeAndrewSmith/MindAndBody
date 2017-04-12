@@ -337,7 +337,7 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         // Explanation Text
         explanationText.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         explanationText.textColor = .black
-        explanationText.textAlignment = .justified
+        explanationText.textAlignment = .natural
         explanationText.lineBreakMode = NSLineBreakMode.byWordWrapping
         explanationText.numberOfLines = 0
         
@@ -621,7 +621,7 @@ class YogaScreenPractices: UIViewController, UIScrollViewDelegate {
         //
         explanationLabelE.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         explanationLabelE.textColor = .black
-        explanationLabelE.textAlignment = .justified
+        explanationLabelE.textAlignment = .natural
         explanationLabelE.lineBreakMode = NSLineBreakMode.byWordWrapping
         explanationLabelE.numberOfLines = 0
         

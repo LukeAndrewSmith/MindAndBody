@@ -22,6 +22,9 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
 //
 // Retreive Arrays ---------------------------------------------------------------------------------------------------------
 //
+    // Session Type
+    var sessionType = Int()
+    
     // Session Screen Index
     //
     var sessionScreenIndex = 0
@@ -207,7 +210,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         // Explanation Text
         explanationText.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         explanationText.textColor = .black
-        explanationText.textAlignment = .justified
+        explanationText.textAlignment = .natural
         explanationText.lineBreakMode = NSLineBreakMode.byWordWrapping
         explanationText.numberOfLines = 0
         
@@ -800,7 +803,9 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             content.body = NSLocalizedString("nextSet", comment: "")
             content.sound = UNNotificationSound.default()
             //
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
+            let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+            //
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTimes[sessionType]), repeats: false)
             let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
             //
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
@@ -891,7 +896,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         //
         explanationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         explanationLabel.textColor = .black
-        explanationLabel.textAlignment = .justified
+        explanationLabel.textAlignment = .natural
         explanationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         explanationLabel.numberOfLines = 0
         //

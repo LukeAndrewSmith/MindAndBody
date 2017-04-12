@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 //
 // Gradient Extension ----------------------------------------------------------------------------------------------------------------------
 //
@@ -32,7 +33,7 @@ extension UIView {
 //
 // Mind & Body Class ------------------------------------------------------------------------------------------------------------------------
 //
-class MindBody: UIViewController {
+class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     
     // Previous Colours
     //            UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "colour1")
@@ -131,6 +132,8 @@ class MindBody: UIViewController {
 //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
         
         // Background Index
         let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
@@ -292,11 +295,43 @@ class MindBody: UIViewController {
         // Walkthrough
         //
         UserDefaults.standard.register(defaults: ["mindBodyWalkthrough" : false])
-
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough") == false {
-        walkthroughMindBody()
-            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough")
+        
+        
+        //
+        // Alert View indicating meaning of resetting the app
+        let title = NSLocalizedString("notificationsPopup", comment: "")
+        let message = NSLocalizedString("notificationsPopupMessage", comment: "")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+        
+        // Reset app action
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            //
+            if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough") == false {
+                self.walkthroughMindBody()
+                UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough")
+            }
+            //
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            }
         }
+        //
+        alert.addAction(okAction)
+        
+        // Present Alert
+        self.present(alert, animated: true, completion: nil)
+        //
+        
+        
+        
+        
+    
         
         // Register Walkthroughs for all screens
         //
@@ -325,8 +360,12 @@ class MindBody: UIViewController {
         UserDefaults.standard.register(defaults: ["units" : "kg"])
         // Register Presentation Style
         UserDefaults.standard.register(defaults: ["presentationStyle" : "detailed"])
-        // Register background index
+        // Register background image index
         UserDefaults.standard.register(defaults: ["homeScreenBackground" : 0])
+        // Register rest times
+        UserDefaults.standard.register(defaults: ["restTimes" : [15, 45, 10]])
+
+        
         
         
         // Navigation Bar
@@ -623,7 +662,7 @@ class MindBody: UIViewController {
         //
         walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
         walkthroughView.backgroundColor = .black
-        walkthroughView.alpha = 0.72
+        walkthroughView.alpha = 0.55
         walkthroughView.clipsToBounds = true
         //
         

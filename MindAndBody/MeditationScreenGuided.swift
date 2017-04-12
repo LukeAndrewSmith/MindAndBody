@@ -159,7 +159,7 @@ class MeditationScreenGuided: UIViewController {
         alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .justified
+        paragraphStyle.alignment = .natural
         alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
         // Action
         let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {

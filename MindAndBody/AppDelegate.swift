@@ -7,45 +7,24 @@
 //
 
 import UIKit
-import UserNotifications
 
 
 //
 // App Delegate Class --------------------------------------------------------------------------------------------------------
 //
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
 //
 // Did finish launching ----------------------------------------------------------------------------------------------
 //
+    
+    //
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        if #available(iOS 10.0, *) {
-            //
-            UNUserNotificationCenter.current().delegate = self
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-            }
-        }
         return true
-    }
-    
-    
-    //
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent: UNNotification,
-                                withCompletionHandler: @escaping (UNNotificationPresentationOptions)->()) {
-        withCompletionHandler([.alert, .sound, .badge])
-    }
-    
-    
-    //
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive: UNNotificationResponse,
-                                withCompletionHandler: @escaping ()->()) {
-        withCompletionHandler()
     }
     
     

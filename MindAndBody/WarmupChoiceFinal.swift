@@ -22,6 +22,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // Custom
     //
     var emptyArrayofArrays: [[Int]] = []
+
     
 //
 // Arrays ------------------------------------------------------------------------------------------------------------------------------
@@ -2143,32 +2144,15 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             line.isEnabled = false
             return line
         //
-        } else if row == pickerViewArray.count + 1 {
+        } else if row > pickerViewArray.count {
             let rowLabel = UILabel()
             let titleDataArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
-            let titleData = titleDataArray[0]
+            let titleData = titleDataArray[row - (pickerViewArray.count + 1)]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
         //
-        } else if row == pickerViewArray.count + 2 {
-            let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
-            let titleData = titleDataArray[1]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
-            rowLabel.attributedText = myTitle
-            rowLabel.textAlignment = .center
-            return rowLabel
-        //
-        } else if row == pickerViewArray.count + 3 {
-            let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
-            let titleData = titleDataArray[2]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
-            rowLabel.attributedText = myTitle
-            rowLabel.textAlignment = .center
-            return rowLabel
         }
         return UIView()
     }
@@ -2208,6 +2192,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         default:
             break
         }
+        beginButtonEnabled()
     }
     
     
@@ -2452,7 +2437,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
 //
 // Pass Arrays ---------------------------------------------------------------------------------------------------------------------------
 //
-    // Pass Array to next ViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "warmupSessionSegue1") {
             //
@@ -2484,6 +2468,8 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
+            //
+            destinationVC.sessionType = 0
         //
         } else if (segue.identifier == "warmupSessionSegue2") {
             //
@@ -2515,12 +2501,14 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
+            destinationVC.sessionType = 0
+            //
             let pickerIndex = pickerView.selectedRow(inComponent: 0)
-            if pickerIndex < pickerViewArray.count - 1 {
+            if pickerIndex < pickerViewArray.count {
                 destinationVC.sessionTitle = pickerViewArray[pickerIndex]
-            } else if pickerIndex > pickerViewArray.count - 1 {
+            } else if pickerIndex > pickerViewArray.count {
                 let pickerArray = UserDefaults.standard.object(forKey: warmupPresetTexts[warmupType]) as! [String]
-                destinationVC.sessionTitle = pickerArray[pickerIndex - pickerViewArray.count]
+                destinationVC.sessionTitle = pickerArray[pickerIndex - (pickerViewArray.count + 1)]
             }
         }
     }

@@ -1779,6 +1779,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
+            destinationVC.sessionType = 0
+            //
         } else if (segue.identifier == "warmupCustomSegue2") {
             //
             let destinationNC = segue.destination as! UINavigationController
@@ -1811,6 +1813,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
+            //
+            destinationVC.sessionType = 0
             //
             destinationVC.sessionTitle = titleDataArray[sessionPickerView.numberOfRows(inComponent: 0)]
         }

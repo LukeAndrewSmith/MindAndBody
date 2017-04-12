@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 
 
-
 //
 // Settings Class -------------------------------------------------------------------------------------------------------------------------------
 //
 
-class Settings: UITableViewController {
+class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Background Image Array
     let backgroundImageArray: [UIImage] =
@@ -24,6 +23,24 @@ class Settings: UITableViewController {
     // Colours
     let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+    
+    //
+    // Outlets
+    //
+    // Sets and Reps Choice
+    var restTimeView = UIView()
+    var restTimePicker = UIPickerView()
+    var okButton = UIButton()
+    //
+    let secondIndicatorLabel = UILabel()
+    //
+    var backgroundViewExpanded = UIButton()
+    //
+    var selectedRow = Int()
+    
+    //
+    let restTimesArray: [Int] = [1, 5, 10, 15, 20, 30, 45, 60, 90, 120]
+    
     
     
     // View Will Appear
@@ -42,11 +59,90 @@ class Settings: UITableViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+
+//
+// Rest Time Related -------------------------------------------------------------------------------------------------------------------------
+//
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //
+        // Sets Reps Selection
+        // view
+        restTimeView.backgroundColor = colour2
+        restTimeView.layer.cornerRadius = 5
+        restTimeView.layer.masksToBounds = true
+        // picker
+        restTimePicker.backgroundColor = colour2
+        restTimePicker.delegate = self
+        restTimePicker.dataSource = self
+        // ok
+        okButton.backgroundColor = colour1
+        okButton.setTitleColor(colour2, for: .normal)
+        okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
+        okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
+        // sets
+        secondIndicatorLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        secondIndicatorLabel.textColor = colour1
+        secondIndicatorLabel.text = "s"
+        //
+        restTimeView.addSubview(restTimePicker)
+        restTimeView.addSubview(okButton)
+        restTimeView.addSubview(secondIndicatorLabel)
+        restTimeView.bringSubview(toFront: secondIndicatorLabel)
+        //
+        // Background View
+        backgroundViewExpanded.backgroundColor = .black
+        backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
+        //
+    }
+    // Add movement table background (dismiss table)
+    func backgroundViewExpandedAction(_ sender: Any) {
+        //
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.restTimeView.alpha = 0
+            //
+            self.backgroundViewExpanded.alpha = 0
+        }, completion: nil)
+        //
+        let delayInSeconds = 0.4
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            self.restTimeView.removeFromSuperview()
+            //
+            self.backgroundViewExpanded.removeFromSuperview()
+        }
+    }
+    //
+    // Ok button action
+    func okButtonAction(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        //
+        var restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+        //
+        restTimes[selectedRow] = restTimesArray[restTimePicker.selectedRow(inComponent: 0)]
+        defaults.set(restTimes, forKey: "restTimes")
+        //
+        defaults.synchronize()
+        //
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.restTimeView.alpha = 0
+            //
+            self.backgroundViewExpanded.alpha = 0
+        }, completion: nil)
+        //
+        let delayInSeconds = 0.4
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            self.restTimeView.removeFromSuperview()
+            //
+            self.backgroundViewExpanded.removeFromSuperview()
+        }
+        //
+        tableView.reloadData()
     }
     
+
 //
 // Settings TableView --------------------------------------------------------------------------------------------------------------------------
 //
@@ -197,11 +293,22 @@ class Settings: UITableViewController {
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             let row = indexPath.row
+            // Titles
+            let restTimeTitles = ["warmup", "workout", "stretching"]
+            cell.textLabel?.text = NSLocalizedString(restTimeTitles[indexPath.row], comment: "")
+            //
             // Retreive Rest Time
-            //cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "restTime")!, comment: "")
+            let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+            cell.detailTextLabel?.text = String(restTimes[indexPath.row]) + " s"
+            //
+            //
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            //cell.detailTextLabel?.textAlignment = NSTextAlignment
+            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
+            cell.detailTextLabel?.textColor = colour2
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            //
             return cell
             
         // Reset
@@ -274,6 +381,51 @@ class Settings: UITableViewController {
             
         // Rest Time
         case 3:
+            //
+            selectedRow = indexPath.row
+            //
+            let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+            // View
+            restTimeView.alpha = 0
+            UIApplication.shared.keyWindow?.insertSubview(restTimeView, aboveSubview: tableView)
+            let selectedCell = tableView.cellForRow(at: indexPath)
+            restTimeView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+            // selected row
+            let rowIndex = restTimesArray.index(of: restTimes[selectedRow])
+            restTimePicker.selectRow(rowIndex!, inComponent: 0, animated: false)
+            //
+            // picker
+            restTimePicker.frame = CGRect(x: 0, y: 0, width: restTimeView.frame.size.width, height: 147)
+            // ok
+            okButton.frame = CGRect(x: 0, y: 147, width: restTimeView.frame.size.width, height: 49)
+            //
+            self.secondIndicatorLabel.frame = CGRect(x: (restTimeView.frame.size.width / 2 + 30), y: (self.restTimePicker.frame.size.height / 2) - 15, width: 50, height: 30)
+            //
+            backgroundViewExpanded.alpha = 0
+            UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: restTimeView)
+            backgroundViewExpanded.frame = UIScreen.main.bounds
+            // Animate table fade and size
+            // Alpha
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
+                self.restTimeView.alpha = 1
+                //
+            }, completion: nil)
+            // Position
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                //
+                self.restTimeView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
+                self.restTimeView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
+                // picker
+                self.restTimePicker.frame = CGRect(x: 0, y: 0, width: self.restTimeView.frame.size.width, height: 147)
+                // ok
+                self.okButton.frame = CGRect(x: 0, y: 147, width: self.restTimeView.frame.size.width, height: 49)
+                // Sets Indicator Label
+                self.secondIndicatorLabel.frame = CGRect(x: (self.restTimeView.frame.size.width / 2 + 30), y: (self.restTimePicker.frame.size.height / 2) - 15, width: 50, height: 30)
+                //
+                //
+                self.backgroundViewExpanded.alpha = 0.7
+                
+            }, completion: nil)
             tableView.deselectRow(at: indexPath, animated: true)
 
         // Reset
@@ -281,7 +433,23 @@ class Settings: UITableViewController {
         //
             // Reset Walkthrough
             if indexPath.row == 0 {
+                //
+                // Alert View indicating meaning of resetting the app
+                let title = NSLocalizedString("resetWarning", comment: "")
+                let message = NSLocalizedString("resetWalkthroughWarningMessage", comment: "")
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alert.view.tintColor = colour2
+                alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
                 
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.alignment = .natural
+                alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+                
+                
+                // Reset app action
+                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+
                 // Walkthrough
                     // Mind Body
                         // Home Screen
@@ -324,18 +492,28 @@ class Settings: UITableViewController {
                 let title = NSLocalizedString("resetTitle", comment: "")
                 let message = NSLocalizedString("resetMessage", comment: "")
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alert.view.tintColor = colour1
+                alert.view.tintColor = self.colour1
                 alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
                 
                 let paragraphStyle = NSMutableParagraphStyle()
-                paragraphStyle.alignment = .justified
+                paragraphStyle.alignment = .natural
                 alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
 
                 // Present alert
                 self.present(alert, animated: true, completion: nil)
-                
+            }
+            // Cancel reset action
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+                UIAlertAction in
+            }
+            // Add Actions
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            
+            // Present Alert
+            self.present(alert, animated: true, completion: nil)
                 //
-                tableView.deselectRow(at: indexPath, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
                
             // Reset App
             } else if indexPath.row == 1 {
@@ -348,7 +526,7 @@ class Settings: UITableViewController {
             alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             
             let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .justified
+            paragraphStyle.alignment = .natural
             alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
            
                 
@@ -367,7 +545,7 @@ class Settings: UITableViewController {
                     alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
                     
                     let paragraphStyle = NSMutableParagraphStyle()
-                    paragraphStyle.alignment = .justified
+                    paragraphStyle.alignment = .natural
                     alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
                     
                     self.present(alert, animated: true, completion: nil)
@@ -382,7 +560,7 @@ class Settings: UITableViewController {
                
             // Present Alert
             self.present(alert, animated: true, completion: nil)
-                tableView.deselectRow(at: indexPath, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
             }
         //
         default:
@@ -391,8 +569,59 @@ class Settings: UITableViewController {
     }
     
     
+//
+// Picker View ----------------------------------------------------------------------------------------------------
+//
+    // Number of components
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        if pickerView == restTimePicker {
+            return 1
+        }
+        return 0
+    }
+    
+    // Number of rows
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == restTimePicker {
+            return restTimesArray.count
+        }
+        return 0
+    }
+    
+    // View for row
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        if pickerView == restTimePicker {
+            //
+            let secondsLabel = UILabel()
+            secondsLabel.text = String(restTimesArray[row])
+            secondsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
+            secondsLabel.textColor = colour1
+            //
+            secondsLabel.textAlignment = .center
+            return secondsLabel
+            //
+        }
+        return UIView()
+    }
+    
+    // Row height
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        if pickerView == restTimePicker {
+            return 30
+        }
+        return 0
+    }
+    
+    // Did select row
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == restTimePicker {
+        }
+        //
+    }
+    
+
 //   
-// Settings TableView ---------------------------------------------------------------------------------------------------------------------------
+// Remove BackButton from next screen ----------------------------------------------------------------------------------------------
 //
     
     // Remove Back Button for next screen

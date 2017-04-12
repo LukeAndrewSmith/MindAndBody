@@ -21,6 +21,9 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
 //
 // Receive Arrays --------------------------------------------------------------------------------------------
 //
+    //
+    var sessionType = Int()
+    
     // Selected Movement
     //
     var selectedMovement = Int()
@@ -178,7 +181,7 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         // Explanation Text
         explanationText.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         explanationText.textColor = .black
-        explanationText.textAlignment = .justified
+        explanationText.textAlignment = .natural
         explanationText.lineBreakMode = NSLineBreakMode.byWordWrapping
         explanationText.numberOfLines = 0
         
@@ -276,96 +279,6 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         progressBarLeft.constant = progressLabel.frame.size.width + 34
 
         // Display Content
-        displayContent()
-    }
-    
-    
-//
-// View did layout subviews ----------------------------------------------------------------------------------------
-//
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        // Image Scroll
-        //
-        imageScroll.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        imageScroll.contentSize = CGSize(width: imageScroll.frame.size.width * 2, height: imageScroll.frame.size.height)
-        imageScroll.isScrollEnabled = false
-        
-        // Demonstration Image
-        demonstrationImage.frame = imageScroll.frame
-        demonstrationImage.contentMode = .scaleAspectFit
-        
-        // Body Image
-        bodyImage.frame = CGRect(x: imageScroll.frame.size.width, y: 0, width: imageScroll.frame.size.width, height: imageScroll.frame.size.width)
-        bodyImage.contentMode = .scaleAspectFit
-        
-        // Image Scroll Position on Target Area
-        //
-        imageScroll.contentOffset.x = imageScroll.frame.size.width
-        //
-        targetAreaButton.isEnabled = false
-        targetAreaButton.alpha = 0
-        //
-        demonstrationImageButton.isEnabled = true
-        demonstrationImageButton.alpha = 1
-    }
-    
-    
-//
-// Generate Buttons ----------------------------------------------------------------------------------------------
-//
-    // Create Buttons
-    func createButton() -> UIButton {
-        let setButton = UIButton()
-        let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
-        setButton.addConstraints([widthHeight])
-        setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
-        setButton.layer.borderWidth = 4
-        setButton.layer.borderColor = colour1.cgColor
-        setButton.layer.cornerRadius = 21.4375
-        setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
-        setButton.backgroundColor = colour2
-        setButton.isEnabled = false
-        //
-        setRepView.addSubview(setButton)
-        //
-        return setButton
-    }
-    
-    // Create Button Array
-    var buttonArray = [UIButton]()
-    //
-    func createButtonArray(){
-        //
-        let numberOfButtons = setsArray[selectedMovement]
-        //
-        for _ in 1...numberOfButtons{
-            buttonArray += [createButton()]
-        }
-        // Set Buttons
-        //
-        // Disable pressed buttons
-        let indexOfUnpressedButton = buttonNumber[selectedMovement]
-        if indexOfUnpressedButton > 0 {
-            for s in 0...indexOfUnpressedButton - 1 {
-                //
-                buttonArray[s].isEnabled = false
-                buttonArray[s].backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-            }
-        }
-        // Enable next unpressed button
-        if indexOfUnpressedButton == setsArray[selectedMovement] {
-        } else {
-            buttonArray[indexOfUnpressedButton].isEnabled = true
-        }
-    }
-    
-    
-//
-// Display Content View ---------------------------------------------------------------------------------------------------------------------
-//
-    func displayContent() {
         // Navigation Bar
         navigationTitle.text = NSLocalizedString(sessionArray[selectedMovement], comment: "")
         // Navigation Title
@@ -383,7 +296,7 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         
         // Images
         //
-        demonstrationImage.image = #imageLiteral(resourceName: "Test 2")
+        demonstrationImage.image = demonstrationArray[selectedMovement]
         //
         bodyImage.image = targetAreaArray[selectedMovement]
         // Scroll
@@ -442,6 +355,90 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         let fractionalProgress = sessionIndexP/sessionArrayP
         //
         progressBar.setProgress(fractionalProgress, animated: true)
+        
+        
+        // Image Scroll
+        //
+        imageScroll.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        imageScroll.contentSize = CGSize(width: imageScroll.frame.size.width * 2, height: imageScroll.frame.size.height)
+        imageScroll.isScrollEnabled = false
+        
+        // Demonstration Image
+        demonstrationImage.frame = imageScroll.frame
+        demonstrationImage.contentMode = .scaleAspectFit
+        
+        // Body Image
+        bodyImage.frame = CGRect(x: imageScroll.frame.size.width, y: 0, width: imageScroll.frame.size.width, height: imageScroll.frame.size.width)
+        bodyImage.contentMode = .scaleAspectFit
+        
+        // Image Scroll Position on Target Area
+        //
+        imageScroll.contentOffset.x = imageScroll.frame.size.width
+        //
+        targetAreaButton.isEnabled = false
+        targetAreaButton.alpha = 0
+        //
+        demonstrationImageButton.isEnabled = true
+        demonstrationImageButton.alpha = 1
+    }
+    
+    
+//
+// View did layout subviews ----------------------------------------------------------------------------------------
+//
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+       
+    }
+    
+    
+//
+// Generate Buttons ----------------------------------------------------------------------------------------------
+//
+    // Create Buttons
+    func createButton() -> UIButton {
+        let setButton = UIButton()
+        let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
+        setButton.addConstraints([widthHeight])
+        setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
+        setButton.layer.borderWidth = 4
+        setButton.layer.borderColor = colour1.cgColor
+        setButton.layer.cornerRadius = 21.4375
+        setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
+        setButton.backgroundColor = colour2
+        setButton.isEnabled = false
+        //
+        setRepView.addSubview(setButton)
+        //
+        return setButton
+    }
+    
+    // Create Button Array
+    var buttonArray = [UIButton]()
+    //
+    func createButtonArray(){
+        //
+        let numberOfButtons = setsArray[selectedMovement]
+        //
+        for _ in 1...numberOfButtons{
+            buttonArray += [createButton()]
+        }
+        // Set Buttons
+        //
+        // Disable pressed buttons
+        let indexOfUnpressedButton = buttonNumber[selectedMovement]
+        if indexOfUnpressedButton > 0 {
+            for s in 0...indexOfUnpressedButton - 1 {
+                //
+                buttonArray[s].isEnabled = false
+                buttonArray[s].backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            }
+        }
+        // Enable next unpressed button
+        if indexOfUnpressedButton == setsArray[selectedMovement] {
+        } else {
+            buttonArray[indexOfUnpressedButton].isEnabled = true
+        }
     }
     
     
@@ -792,7 +789,9 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
             content.body = NSLocalizedString("nextSet", comment: "")
             content.sound = UNNotificationSound.default()
             //
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
+            let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+            //
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTimes[sessionType]), repeats: false)
             let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
             //
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
@@ -858,7 +857,7 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         //
         explanationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         explanationLabel.textColor = .black
-        explanationLabel.textAlignment = .justified
+        explanationLabel.textAlignment = .natural
         explanationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         explanationLabel.numberOfLines = 0
         
