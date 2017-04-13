@@ -497,18 +497,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         
         // Mind & Body section titles
         // body
-//        body.layer.cornerRadius = body.frame.size.height / 2
-//        body.layer.masksToBounds = true
-//        let blurE6 = UIBlurEffect(style: .dark)
-//        blur6.effect = blurE6
-//        let vibrancyE6 = UIVibrancyEffect(blurEffect: blurE6)
-//        blur6.effect = vibrancyE6
-//        blur6.center = body.center
-//        blur6.isUserInteractionEnabled = false
-//        blur6.layer.cornerRadius = body.frame.size.height / 2
-//        blur6.layer.masksToBounds = true
-//        view.insertSubview(blur6, belowSubview: body)
-        //
         body.layer.cornerRadius = body.frame.size.height / 2
         body.layer.masksToBounds = true
         let blurE6 = UIBlurEffect(style: .dark)
