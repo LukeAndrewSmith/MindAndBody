@@ -231,20 +231,6 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
   
     
 //
-// Meditation timer segue Actions -------------------------------------------------------------------------------------
-//
-    @IBAction func timerButtonAction(_ sender: Any) {
-        
-            let delayInSeconds = 1.0
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                
-                _ = self.navigationController?.popToRootViewController(animated: false)
-                
-        }
-    }
-
-    
-//
 // Walkthrogh -------------------------------------------------------------------------------------------------------
 //
     var  viewNumber = 0
