@@ -313,10 +313,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
             UIAlertAction in
             //
-            if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough") == false {
-                self.walkthroughMindBody()
-                UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough")
-            }
+            self.walkthroughMindBody()
             //
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             }
@@ -325,9 +322,14 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         alert.addAction(okAction)
         
         // Present Alert
-        self.present(alert, animated: true, completion: nil)
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough") == false {
+            self.present(alert, animated: true, completion: nil)
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough")
+        }
+
+
         //
-        
+    
         
         
         
