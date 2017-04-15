@@ -41,10 +41,6 @@ class CollectionImageCell: UICollectionViewCell {
 
 class BackgroundImageCollection: UICollectionViewController {
     
-    //
-    let backgroundImageArray: [UIImage] =
-        [#imageLiteral(resourceName: "Background 0"), #imageLiteral(resourceName: "Background 1"), #imageLiteral(resourceName: "Background 2"), #imageLiteral(resourceName: "Background 3"), #imageLiteral(resourceName: "Background 4")]
-    
     // Outlets
     @IBOutlet weak var navigationBar: UINavigationItem!
     

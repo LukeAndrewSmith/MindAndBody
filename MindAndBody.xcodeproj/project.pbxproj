@@ -216,7 +216,6 @@
 		0719F2B31E50F8D100AC6729 /* Meditation Screens */ = {
 			isa = PBXGroup;
 			children = (
-				071C4FB21E98D6D800328D18 /* MeditationTimer.swift */,
 				07520BB31E9F894C00FA682E /* MeditationScreen.swift */,
 				07B65F7A1E624A73004DBB97 /* MeditationScreenGuided.swift */,
 			);
@@ -251,6 +250,14 @@
 				075A0DB61E8C538B0008E014 /* Custom */,
 			);
 			name = Warmup;
+			sourceTree = "<group>";
+		};
+		07520BB51E9FB80C00FA682E /* Meditation Timer */ = {
+			isa = PBXGroup;
+			children = (
+				071C4FB21E98D6D800328D18 /* MeditationTimer.swift */,
+			);
+			name = "Meditation Timer";
 			sourceTree = "<group>";
 		};
 		07530C971E96716300BD33EC /* Choice Screens */ = {
@@ -355,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */,
+				07520BB51E9FB80C00FA682E /* Meditation Timer */,
 				071B93511E60459600865FC5 /* Guided Meditation */,
 			);
 			name = Meditation;

@@ -16,13 +16,6 @@ import UIKit
 
 class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    // Background Image Array
-    let backgroundImageArray: [UIImage] =
-        [#imageLiteral(resourceName: "Background 0"), #imageLiteral(resourceName: "Background 1"), #imageLiteral(resourceName: "Background 2"), #imageLiteral(resourceName: "Background 3"), #imageLiteral(resourceName: "Background 4")]
-    
-    // Colours
-    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     
     //
     // Outlets
