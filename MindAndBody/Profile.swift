@@ -77,10 +77,7 @@ class Profile: UITableViewController{
     let sectionArray: [String] =
         ["", "me", "goals", "workout", "cardio", "stretching", "yoga", "meditation"]
     
-    // Colours
-    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-    
+   
 //    let rowArray =
 //        [
 //            ["gender", "experience"],
@@ -1190,7 +1187,6 @@ class Profile: UITableViewController{
         //
         let screenSize = UIScreen.main.bounds
         let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-        let tabBarHeight = self.tabBarController?.tabBar.frame.size.height
         
         //
         walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
@@ -1206,6 +1202,7 @@ class Profile: UITableViewController{
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.font = UIFont(name: "SFUIDisplay-light", size: 22)
         label.textColor = .white
+        label.alpha = 0.9
         
         //
         nextButton.frame = screenSize
@@ -1219,16 +1216,14 @@ class Profile: UITableViewController{
         backButton.titleLabel?.textColor = .white
         backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
         
-        
-        
+        //
         switch viewNumber {
+        //
         case 0:
-            //
-            
-            
             // Clear Section
             let path = CGMutablePath()
-            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - 80, y: UIApplication.shared.statusBarFrame.height, width: 160, height: 40))
+            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - 50
+                , y: 94, width: 100, height: 40))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1238,21 +1233,16 @@ class Profile: UITableViewController{
             //
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
+            
             //
-            
-            
-            label.text = NSLocalizedString("profile1", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
             UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
             walkthroughView.bringSubview(toFront: nextButton)
             
-            
+            //
+            label.text = NSLocalizedString("profile1", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
             
         //
         case 1:
@@ -1260,7 +1250,7 @@ class Profile: UITableViewController{
             
             // Clear Section
             let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addArc(center: CGPoint(x: view.frame.size.width - 22, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 18, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1270,14 +1260,8 @@ class Profile: UITableViewController{
             //
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
+            
             //
-            //
-            
-            label.text = NSLocalizedString("profile2", comment: "")
-            
-            
-            
-            
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
@@ -1285,38 +1269,32 @@ class Profile: UITableViewController{
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
 
-            
-            
+            //
+            label.text = NSLocalizedString("profile2", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
             
         //
         default: break
-            
-            
         }
-        
-        
     }
-    
-    
-    
+
+    //
     func nextWalkthroughView(_ sender: Any) {
         walkthroughView.removeFromSuperview()
+        label.removeFromSuperview()
         viewNumber = viewNumber + 1
         walkthroughMindBody()
     }
 
-    
-    
+    //
     func backWalkthroughView(_ sender: Any) {
         if viewNumber > 0 {
             backButton.removeFromSuperview()
+            label.removeFromSuperview()
             walkthroughView.removeFromSuperview()
             viewNumber = viewNumber - 1
             walkthroughMindBody()
         }
-        
     }
-
-    
 //
 }

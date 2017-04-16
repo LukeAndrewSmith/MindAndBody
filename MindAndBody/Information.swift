@@ -66,10 +66,6 @@ class Information: UITableViewController{
     // Selected Topic
     var selectedTopic = [0,0]
     
-    // Colours
-    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-    
     // Arrays
     let sectionArray: [String] =
         ["important", "music", "app"]
@@ -476,21 +472,19 @@ class Information: UITableViewController{
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.font = UIFont(name: "SFUIDisplay-light", size: 22)
         label.textColor = .white
+        label.alpha = 0.9
         //
         nextButton.frame = screenSize
         nextButton.backgroundColor = .clear
         nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
+        
         //
-        
-        
         switch viewNumber {
+        //
         case 0:
-            //
-            
-            
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height, width: view.frame.size.width, height: 47))
+            path.addRect(CGRect(x: 0, y: 196, width: view.frame.size.width, height: 44))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -500,38 +494,28 @@ class Information: UITableViewController{
             //
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
+            
             //
-            
-            
-            label.text = NSLocalizedString("information1", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
             UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
             walkthroughView.bringSubview(toFront: nextButton)
             
-            
-            
+            //
+            label.text = NSLocalizedString("information1", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+            label.center.y = view.center.y + 50
         //
         default: break
-            
-            
         }
-        
-        
     }
     
-    
-    
+    //
     func nextWalkthroughView(_ sender: Any) {
         walkthroughView.removeFromSuperview()
+        label.removeFromSuperview()
         viewNumber = viewNumber + 1
         walkthroughMindBody()
     }
-
-
+//
 }

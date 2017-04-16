@@ -485,7 +485,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let title = NSLocalizedString("resetTitle", comment: "")
                 let message = NSLocalizedString("resetMessage", comment: "")
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alert.view.tintColor = self.colour1
+                alert.view.tintColor = colour1
                 alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
                 
                 let paragraphStyle = NSMutableParagraphStyle()
@@ -534,7 +534,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     let title = NSLocalizedString("resetTitle", comment: "")
                     let message = NSLocalizedString("resetMessage", comment: "")
                     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    alert.view.tintColor = self.colour2
+                    alert.view.tintColor = colour2
                     alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
                     
                     let paragraphStyle = NSMutableParagraphStyle()

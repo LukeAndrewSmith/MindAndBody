@@ -624,26 +624,19 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     // Update Timer
     func updateTimer() {
         if time == 0 {
-            
             countdownLabel.text = "0"
-            
         } else {
-            
             time -= 1
             countdownLabel.text = String(time)
-            
         }
     }
     
-    
-    
+    //
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()
     let nextButton = UIButton()
     let backButton = UIButton()
-
-
     
     // Walkthrough
     func walkthroughMindBody() {
@@ -667,6 +660,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.font = UIFont(name: "SFUIDisplay-light", size: 22)
         label.textColor = .white
+        label.alpha = 0.9
         
         //
         nextButton.frame = screenSize
@@ -681,12 +675,11 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         backButton.titleLabel?.textColor = .white
         backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
         
-        
+        //
         switch viewNumber {
+        //
         case 0:
             //
-            
-            
             // Clear Section
             let path = CGMutablePath()
             path.addEllipse(in: CGRect(x: view.frame.size.width/2 - 80, y: UIApplication.shared.statusBarFrame.height, width: 160, height: 40))
@@ -700,13 +693,8 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
             //
-            
-            
-            label.text = NSLocalizedString("mindBody0", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
+
+            //
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
@@ -714,13 +702,14 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
 
-
             
-//
-        
+            label.text = NSLocalizedString("mindBody0", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+            
+
+        //
         case 1:
             //
-            
             nextButton.isEnabled = false
             backButton.isEnabled = false
             
@@ -737,13 +726,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
             //
-            
-            
-            label.text = NSLocalizedString("mindBody1", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
@@ -751,7 +733,9 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
             
-            
+            //
+            label.text = NSLocalizedString("mindBody1", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
             
             // CountDown
             //
@@ -766,29 +750,23 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             countdownLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
             countdownLabel.font = UIFont(name: "SFUIDisplay-light", size: 22)
             countdownLabel.textColor = .white
-            
+            //
             walkthroughView.addSubview(countdownLabel)
 
-            
-            
+            //
             let countdownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
             
-        
-            
-            
+            //
             let delayInSeconds = 7.0
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 self.nextButton.isEnabled = true
                 self.backButton.isEnabled = true
                 countdownTimer.invalidate()
                 self.countdownLabel.removeFromSuperview()
-                
             }
             
         //
         case 2:
-            //
-            
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -802,13 +780,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
             //
-            //
-            
-            label.text = NSLocalizedString("mindBody2", comment: "")
-            
-            
-            
-            
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
@@ -816,11 +787,39 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
 
+            //
+            label.text = NSLocalizedString("mindBody2", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
             
-            
-//
+        //
         case 3:
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.083, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            walkthroughView.addSubview(backButton)
+            backButton.setTitle("", for: .normal)
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            walkthroughView.bringSubview(toFront: backButton)
             
+            //
+            label.text = NSLocalizedString("mindBody3", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+            
+        //
+        case 4:
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: stackView1.center.x - 10 - (Warmup.frame.size.width / 2), y: stackView1.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height), radius: Warmup.frame.width / 2, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -834,25 +833,21 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
             //
-            //
-            
-            label.text = NSLocalizedString("mindBody3", comment: "")
-            
-            label.center = stackView3.center
-            
-            
             walkthroughView.addSubview(backButton)
+            backButton.setTitle(NSLocalizedString("back", comment: ""), for: .normal)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
             UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
 
+            //
+            label.text = NSLocalizedString("mindBody4", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+            label.center = stackView3.center
             
-  
-            
-//
-        case 4:
+        //
+        case 5:
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: (view.frame.width / 4) - ((view.frame.width / 4) * 1/3 ), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + view.frame.size.height + (tabBarHeight! / 2)), radius: 23, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -866,13 +861,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
             //
-            //
-            
-            label.text = NSLocalizedString("mindBody4", comment: "")
-            
-            label.center = view.center
-            
-            
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
@@ -880,12 +868,13 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
 
-            
-            
-            
-//
-        case 5:
-            
+            //
+            label.text = NSLocalizedString("mindBody5", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+            label.center = view.center
+
+        //
+        case 6:
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: view.center.x, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + view.frame.size.height + (tabBarHeight! / 2)), radius: 23, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -899,13 +888,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
             //
-            //
-            
-            label.text = NSLocalizedString("mindBody5", comment: "")
-            
-            label.center = view.center
-            
-            
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
@@ -913,13 +895,12 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
             
-
-            
-            
+            //
+            label.text = NSLocalizedString("mindBody6", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
             
         //
-        case 6:
-          
+        case 7:
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: ((view.frame.width / 4) * 3) + ((view.frame.width / 4) * 1/3 ), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + view.frame.size.height + (tabBarHeight! / 2)), radius: 23, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -933,13 +914,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
             //
-            //
-            
-            label.text = NSLocalizedString("mindBody6", comment: "")
-            
-            label.center = view.center
-            
-            
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
@@ -947,33 +921,30 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
             
-            
+            //
+            label.text = NSLocalizedString("mindBody7", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
         //
         default: break
-            
-            
         }
-        
-        
     }
     
-    
-    
+    //
     func nextWalkthroughView(_ sender: Any) {
         walkthroughView.removeFromSuperview()
+        label.removeFromSuperview()
         viewNumber = viewNumber + 1
         walkthroughMindBody()
     }
     
-    
+    //
     func backWalkthroughView(_ sender: Any) {
         if viewNumber > 0 {
-        walkthroughView.removeFromSuperview()
-        viewNumber = viewNumber - 1
-        walkthroughMindBody()
+            label.removeFromSuperview()
+            walkthroughView.removeFromSuperview()
+            viewNumber = viewNumber - 1
+            walkthroughMindBody()
         }
-        
     }
-    
-    
+//
 }

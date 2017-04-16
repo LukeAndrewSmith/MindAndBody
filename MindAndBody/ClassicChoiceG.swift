@@ -61,11 +61,7 @@ class ClassicChoiceG: UIViewController  {
     @IBOutlet weak var connection3Width: NSLayoutConstraint!
     //
     @IBOutlet weak var connection3Trailing: NSLayoutConstraint!
-    
-    // Colours
-    let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-    let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-    
+   
 //
 // View did load ----------------------------------------------------------------------------------------------------------------
 //

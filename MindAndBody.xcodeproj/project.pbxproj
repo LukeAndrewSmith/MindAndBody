@@ -15,6 +15,7 @@
 		071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071FB62B1E9283AE0081444F /* BodyweightChoice.swift */; };
 		0728F3E51E1E9C0E00EA409B /* CalendarScreenDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728F3E41E1E9C0E00EA409B /* CalendarScreenDetail.swift */; };
 		07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07520BB31E9F894C00FA682E /* MeditationScreen.swift */; };
+		07520BB71EA381AF00FA682E /* TestGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 07520BB61EA381AE00FA682E /* TestGif.gif */; };
 		0757326B1E64D8A3003DA77E /* InformationScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757326A1E64D8A3003DA77E /* InformationScreen1.swift */; };
 		075732701E660AEC003DA77E /* InformationScreenAnatomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757326F1E660AEC003DA77E /* InformationScreenAnatomy.swift */; };
 		075732721E6757B1003DA77E /* InformationScreenMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075732711E6757B1003DA77E /* InformationScreenMusic.swift */; };
@@ -103,6 +104,7 @@
 		071FB62B1E9283AE0081444F /* BodyweightChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyweightChoice.swift; sourceTree = "<group>"; };
 		0728F3E41E1E9C0E00EA409B /* CalendarScreenDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarScreenDetail.swift; sourceTree = "<group>"; };
 		07520BB31E9F894C00FA682E /* MeditationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationScreen.swift; sourceTree = "<group>"; };
+		07520BB61EA381AE00FA682E /* TestGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = TestGif.gif; sourceTree = "<group>"; };
 		0757326A1E64D8A3003DA77E /* InformationScreen1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationScreen1.swift; sourceTree = "<group>"; };
 		0757326F1E660AEC003DA77E /* InformationScreenAnatomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationScreenAnatomy.swift; sourceTree = "<group>"; };
 		075732711E6757B1003DA77E /* InformationScreenMusic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationScreenMusic.swift; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				077AC0D91DA535830026895B /* MindAndBody */,
+				07520BB61EA381AE00FA682E /* TestGif.gif */,
 				077AC0F01DA535840026895B /* MindAndBodyTests */,
 				077AC0D81DA535830026895B /* Products */,
 			);
@@ -678,6 +681,7 @@
 				077AC1171DA7936E0026895B /* SF-UI-Display-Regular.otf in Resources */,
 				077AC1321DA793950026895B /* SF-UI-Text-Regular.otf in Resources */,
 				077AC12A1DA793950026895B /* SF-UI-Text-Bold.otf in Resources */,
+				07520BB71EA381AF00FA682E /* TestGif.gif in Resources */,
 				077AC1151DA7936E0026895B /* SF-UI-Display-Light.otf in Resources */,
 				077AC12D1DA793950026895B /* SF-UI-Text-HeavyItalic.otf in Resources */,
 				077AC1311DA793950026895B /* SF-UI-Text-MediumItalic.otf in Resources */,
