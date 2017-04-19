@@ -1037,26 +1037,18 @@ class ClassicScreenFull: UIViewController, UIScrollViewDelegate, UIPickerViewDel
                 self.timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
                 
                 
-                
-                if #available(iOS 10.0, *) {
+                let content = UNMutableNotificationContent()
+                content.title = NSLocalizedString("timerEnd", comment: "")
+                content.body = " "
+                content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+                content.sound = UNNotificationSound.default()
                     
-                    let content = UNMutableNotificationContent()
-                    content.title = NSLocalizedString("timerEnd", comment: "")
-                    content.body = " "
-                    content.sound = UNNotificationSound.default()
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
+                let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
+                //
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
                     
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
-                    let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
-                    
-                    
-                    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-                    
-                    
-                } else {
-                    // Fallback on earlier versions
-                }
-                
-                
+
                 
             }
             

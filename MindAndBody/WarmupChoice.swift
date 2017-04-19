@@ -343,7 +343,6 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     }
     
     
-
 //
 // Walkthrough  ---------------------------------------------------------------------------------------------------------------------
 //
@@ -355,7 +354,6 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     
     // Walkthrough
     func walkthroughMindBody() {
-        
         //
         let screenSize = UIScreen.main.bounds
         let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
@@ -372,6 +370,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.font = UIFont(name: "SFUIDisplay-light", size: 22)
         label.textColor = .white
+        label.alpha = 0.9
         //
         nextButton.frame = screenSize
         nextButton.backgroundColor = .clear
@@ -384,12 +383,10 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         backButton.titleLabel?.textColor = .white
         backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
         
-        
+        //
         switch viewNumber {
         case 0:
             //
-            
-            
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -404,25 +401,19 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
             walkthroughView.clipsToBounds = true
             //
             
-            
-            label.text = NSLocalizedString("choiceScreen1", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
+            //
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
             UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
             walkthroughView.bringSubview(toFront: nextButton)
             
-            
+            //
+            label.text = NSLocalizedString("choiceScreen1", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
             
         //
         case 1:
             //
-            
-            
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: custom.center.x, y: custom.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height), radius: 24.5, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -436,14 +427,11 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
             walkthroughView.layer.mask = maskLayer
             walkthroughView.clipsToBounds = true
             //
-            
-            
+            //
             label.text = NSLocalizedString("choiceScreen12", comment: "")
             walkthroughView.addSubview(label)
             
-            
-            
-            
+            //
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
@@ -451,37 +439,32 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
             
-            
             //
-
+            label.text = NSLocalizedString("choiceScreen12", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+            
+        //
         default: break
-            
-            
         }
-        
-        
     }
     
-    
-    
+    //
     func nextWalkthroughView(_ sender: Any) {
+        label.removeFromSuperview()
         walkthroughView.removeFromSuperview()
         viewNumber = viewNumber + 1
         walkthroughMindBody()
     }
     
-    
-    
+    //
     func backWalkthroughView(_ sender: Any) {
         if viewNumber > 0 {
             backButton.removeFromSuperview()
             walkthroughView.removeFromSuperview()
+            label.removeFromSuperview()
             viewNumber = viewNumber - 1
             walkthroughMindBody()
         }
-        
     }
-    
-
-    
+//
 }

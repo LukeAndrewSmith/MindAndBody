@@ -1,8 +1,8 @@
 //
 //  StretchingChoiceFinal.swift
-//  MindAndBody
+//  MyFitnessMentor
 //
-//  Created by Luke Smith on 18.04.17.
+//  Created by Luke Smith on 28.03.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -11,38 +11,41 @@ import UIKit
 
 
 //
-// Stretching Choice Class -------------------------------------------------------------------------------------------------------------
+// Stretching Choice Class ----------------------------------------------------------------------------------------------------
 //
-class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class StretchingChoiceFinalOld: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
+  
     // Selected Stretching Type
     //
     var stretchingType = Int()
     
-    // Selected Preset
+    // Custom
     //
-    var selectedPreset: [Int] = [0, 0]
+    var emptyArrayofArrays: [[Int]] = []
     
-    // Section Numbers
-    //
-    var sectionNumbers: [Int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     
-    //
-    // Arrays ------------------------------------------------------------------------------------------------------------------------------
-    //
-    //
-    var overviewArray: [[Int]] = []
+//
+// Arrays -----------------------------------------------------------------------------------------------------------
+//
+    // Selected Array
+    var stretchingSelectedArray: [Int] = []
     
-    //
     // Picker View Array
-    var presetsArray: [[String]] = []
-    //
-    var presetsArrays: [[[Int]]] = []
+    var pickerViewArray: [String] = []
+    // TableView Section Array
+    // Presets
+    var presetsArrays: [[Int]] = []
+    
+    // Custom Presets
+        // Empty Array
+        var emptyArray: [[Int]] = [[]]
+    
     
     // Arrays to be set and used (Screen arrays)
     // Movements Array
     var stretchingArray: [String] = []
-    
+
     // Sets Array
     var setsArray: [Int] = []
     
@@ -64,28 +67,25 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     
     // Navigation Titles
     let navigationTitles: [String] =
-        ["fullBody",
-         "upperBody",
-         "lowerBody",
-         "cardio"]
+        ["general",
+         "postWorkout",
+         "postCardio"]
     
     // Custom Preset Keys
     // Preset Array
     let stretchingPresets: [String] =
-        ["stretchingPresetsFull",
-         "stretchingPresetsUpper",
-         "stretchingPresetsLower",
+        ["stretchingPresetsGeneral",
+         "stretchingPresetsWorkout",
          "stretchingPresetsCardio"]
     // Preset Text
     let stretchingPresetTexts: [String] =
-        ["stretchingPresetTextsFull",
-         "stretchingPresetTextsUpper",
-         "stretchingPresetTextsLower",
+        ["stretchingPresetTextsGeneral",
+         "stretchingPresetTextsWorkout",
          "stretchingPresetTextsCardio"]
     
     
 //
-// Dictionaries -----------------------------------------------------------------------------------------------------
+// Dictionaries -----------------------------------------------------------------------------------------------------------------------
 //
     // Table View Section Title Array
     var tableViewSectionArray: [String] =
@@ -106,7 +106,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     ]
     
     // Stretching Post Workout Array
-    var fullKeyArray: [[Int]] =
+    var stretchingKeyArray: [[Int]] =
         [
             // Recommended
             [0],
@@ -188,7 +188,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     ]
     
     // Stretching Post Workout Array
-    var stretchingMovementsDictionary: [Int : String] =
+    var stretchingDictionary: [Int : String] =
         [
             // Recommended
             0: "5minCardioL",
@@ -681,118 +681,101 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     ]
     
     
-    //
-    // General -----------------------------------------------------------------------------------------------------
-    //
+//
+// General -----------------------------------------------------------------------------------------------------
+//
     
     // Picker View Array
-    var pickerViewArrayGeneral: [[String]] =
+    var pickerViewArrayGeneral: [String] =
         [
-            ["default",
-            "beginner"],
-            ["bodyWeight",
+            "default",
+            "beginner",
+            "bodyWeight",
             "bodybuilding",
-            "strength"],
-            ["highIntensity",
-            "quick"]
-    ]
+            "strength",
+            "highIntensity",
+            "quick"
+        ]
     
     // Preseys Arrays
-    var presetsArraysGeneral: [[[Int]]] =
+    var presetsArraysGeneral: [[Int]] =
         [
-            [
-                [],
-                []
-            ],
-            [
-                [],
-                [],
-                []
-            ],
-            [
-                [],
-                []
-            ]
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
         ]
     
     
-    //
-    // Post Workout -----------------------------------------------------------------------------------------------------------
-    //
+//
+// Post Workout -----------------------------------------------------------------------------------------------------------
+//
     // Post Workout Presets Arrays
     //
     // Picker View Array
-    var pickerViewArrayWorkout: [[String]] =
+    var pickerViewArrayWorkout: [String] =
         [
-            ["default",
-            "beginner"],
-            ["bodyWeight",
+            "default",
+            "beginner",
+            "bodyWeight",
             "bodybuilding",
-            "strength"],
-            ["highIntensity",
-            "quick"]
+            "strength",
+            "highIntensity",
+            "quick"
+            
         ]
     
     // Preseys Arrays
-    var presetsArraysWorkout: [[[Int]]] =
+    var presetsArraysWorkout: [[Int]] =
         [
-            [
-                [],
-                [],
-            ],
-            [
-                [],
-                [],
-                []
-            ],
-            [
-                [],
-                []
-            ]
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
         ]
     
     
-    //
-    // Post Cardio -----------------------------------------------------------------------------------------------------------
-    //
+//
+// Post Cardio -----------------------------------------------------------------------------------------------------------
+//
     //
     
     // Presets Sessions Arrays
     //
     // Picker View Array
-    var pickerViewArrayCardio: [[String]] =
+    var pickerViewArrayCardio: [String] =
         [
-            ["default",
-            "beginner"],
-            ["bodyWeight",
+            "default",
+            "beginner",
+            "bodyWeight",
             "bodybuilding",
-            "strength"],
-            ["highIntensity",
-            "quick"]
+            "strength",
+            "highIntensity",
+            "quick"
         ]
     
     // Preseys Arrays
-    var presetsArraysCardio: [[[Int]]] =
+    var presetsArraysCardio: [[Int]] =
         [
-            [
-                [],
-                []
-            ],
-            [
-                [],
-                [],
-                []
-            ],
-            [
-                [],
-                []
-            ]
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
         ]
     
     
-    //
-    // Set Arrays Function -----------------------------------------------------------------------------------------------------------
-    //
+//
+// Set Arrays Function -----------------------------------------------------------------------------------------------------------
+//
     func setArrays() {
         //
         
@@ -800,17 +783,20 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         //
         case 0:
             // Choice Screen Arrays
-            presetsArray = pickerViewArrayGeneral
+            stretchingSelectedArray = presetsArraysGeneral[0]
+            pickerViewArray = pickerViewArrayGeneral
             presetsArrays = presetsArraysGeneral
         //
         case 1:
             // Choice Screen Arrays
-            presetsArray = pickerViewArrayWorkout
+            stretchingSelectedArray = presetsArraysWorkout[0]
+            pickerViewArray = pickerViewArrayWorkout
             presetsArrays = presetsArraysWorkout
         //
         case 2:
             // Choice Screen Arrays
-            presetsArray = pickerViewArrayCardio
+            stretchingSelectedArray = presetsArraysCardio[0]
+            pickerViewArray = pickerViewArrayCardio
             presetsArrays = presetsArraysCardio
         //
         default: break
@@ -818,72 +804,63 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    //
-    // Outlets ------------------------------------------------------------------------------------------------------------------------------
-    //
+//
+// Outlets -----------------------------------------------------------------------------------------------------------
+//
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     // Begin Button
     @IBOutlet weak var beginButton: UIButton!
     
-    // Movements Table View
-    @IBOutlet weak var movementsTableView: UITableView!
+    // Table View
+    @IBOutlet weak var tableView: UITableView!
     
     // Information View
     let informationView = UIScrollView()
     // Information Title Label
     let informationTitle = UILabel()
     
-    // Presets Button
-    @IBOutlet weak var presetsButton: UIButton!
+    // PickerViews
+    @IBOutlet weak var pickerView: UIPickerView!
     
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
     
-    
-    //
-    @IBOutlet weak var presetsConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var tableConstraint1: NSLayoutConstraint!
-    
-    @IBOutlet weak var tableConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var beginConstraint: NSLayoutConstraint!
-    
-    
+    // Add Preset
+    @IBOutlet weak var addPreset: UIButton!
+    @IBOutlet weak var removePreset: UIButton!
     
     let emptyString = ""
     
-    // Presets Table
-    //
-    // Select Prest
-    var presetsTableView = UITableView()
-    var backgroundViewExpanded = UIButton()
     
-    
-    // Flash Screen
+//
+// Flash Screen -----------------------------------------------------------------------------------------------------------
+//
     func flashScreen() {
-        //
+        
         let flash = UIView()
-        //
-        flash.frame = CGRect(x: 0, y: presetsButton.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
+        
+        flash.frame = CGRect(x: 0, y: pickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
         flash.backgroundColor = colour1
         self.view.alpha = 1
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
-        //
+        
+        
         UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
+            
             flash.alpha = 0
+            
         }, completion: {(finished: Bool) -> Void in
             flash.removeFromSuperview()
         })
     }
     
     
-    //
-    // View did load ------------------------------------------------------------------------------------------------------------------------------
-    //
+//
+// View Did Load -----------------------------------------------------------------------------------------------------------
+//
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -891,47 +868,51 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         //
         setArrays()
         
+        // Walkthrough
+        // Walkthrough
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough2") == false {
+            let delayInSeconds = 0.5
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.walkthroughMindBody()
+            }
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2")
+        }
+        
         // Colour
-        view.backgroundColor = UIColor(red:0.08, green:0.08, blue:0.08, alpha:1.0)
+        self.view.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         questionMark.tintColor = colour1
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString(navigationTitles[stretchingType], comment: ""))
         
-        //
-        presetsButton.backgroundColor = colour2
-        presetsButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        presetsButton.setTitle(NSLocalizedString("selectStretching", comment: ""), for: .normal)
+        // Picker View
+        pickerView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
-        //
-        movementsTableView.tableFooterView = UIView()
+        // Plus Button Colour
+        let origImage1 = UIImage(named: "Plus")
+        let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        addPreset.setImage(tintedImage1, for: .normal)
+        //Image Tint
+        //addPreset.tintColor = colour1
+        addPreset.tintColor = colour2
+        
+        // Minus Button Colour
+        let origImage2 = UIImage(named: "Minus")
+        let tintedImage2 = origImage2?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        // Set Image
+        removePreset.setImage(tintedImage2, for: .normal)
+        //Image Tint
+        //removePreset.tintColor = colour1
+        removePreset.tintColor = colour2
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
         beginButton.setTitleColor(colour2, for: .normal)
         
-        
-        
-        
-        
-        
-        // Initial Element Positions
-        //
-        presetsConstraint.constant = 0
-        //
-        tableConstraint1.constant = view.frame.size.height
-        tableConstraint.constant = -49.25
-        //
-        beginConstraint.constant = -49
-        
-        
-        
-        
-        
-        
         // Information
         // Scroll View Frame
-        self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
+        informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
         informationView.backgroundColor = colour1
         // Information Text
         //
@@ -952,12 +933,12 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("stretchingChoiceText", comment: "")))
+        let informationLabelString = ((NSLocalizedString("stretches", comment: ""))+"\n"+(NSLocalizedString("stretchingChoiceText", comment: "")))
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("stretchingChoiceText", comment: "")))
+        let textRangeString = ((NSLocalizedString("stretches", comment: ""))+"\n"+(NSLocalizedString("stretchingChoiceText", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         // Range of Titles
-        let titleRangeString = (NSLocalizedString("movements", comment: ""))
+        let titleRangeString = (NSLocalizedString("stretches", comment: ""))
         let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
@@ -974,74 +955,246 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         informationText.numberOfLines = 0
         informationText.sizeToFit()
         self.informationView.addSubview(informationText)
-        //
         self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
         
-        //
-        // TableView Backgrounds
+        // TableView Background
         //
         let tableViewBackground = UIView()
         //
         tableViewBackground.backgroundColor = colour2
-        tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.movementsTableView.frame.size.width, height: self.movementsTableView.frame.size.height)
+        tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
         //
-        movementsTableView.backgroundView = tableViewBackground
+        tableView.backgroundView = tableViewBackground
+    
+        // Preset Stretching Sessions
+        //
+        let defaults = UserDefaults.standard
+        // General
+        defaults.register(defaults: ["stretchingPresetsGeneral" : emptyArrayofArrays])
+        defaults.register(defaults: ["stretchingPresetTextsGeneral" : presetTexts])
+        // Post Workout
+        defaults.register(defaults: ["stretchingPresetsWorkout" : emptyArrayofArrays])
+        defaults.register(defaults: ["stretchingPresetTextsWorkout" : presetTexts])
+        // Post Cardio
+        defaults.register(defaults: ["stretchingPresetsCardio" : emptyArrayofArrays])
+        defaults.register(defaults: ["stretchingPresetTextsCardio" : presetTexts])
+        //
+        defaults.synchronize()
         
         //
-        let tableViewBackground2 = UIView()
-        //
-        tableViewBackground2.backgroundColor = colour2
-        tableViewBackground2.frame = CGRect(x: 0, y: 0, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
-        //
-        presetsTableView.backgroundView = tableViewBackground2
-        
-        presetsTableView.tableFooterView = UIView()
-        
-        
-        // TableView Cell action items
-        //
-        // Movement table
-        presetsTableView.backgroundColor = colour2
-        presetsTableView.delegate = self
-        presetsTableView.dataSource = self
-        presetsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        presetsTableView.layer.cornerRadius = 5
-        presetsTableView.layer.masksToBounds = true
-        presetsTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        //
-        // Background View
-        backgroundViewExpanded.backgroundColor = .black
-        backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
-        //
-        
+        beginButtonEnabled()
     }
     
     
+//
+// Begin Button Enabled test --------------------------------------------------------------------------------------------------
+//
+    func beginButtonEnabled() {
+        // Begin Button
+        if stretchingSelectedArray.count != 0 {
+            beginButton.isEnabled = true
+        } else {
+            beginButton.isEnabled = false
+        }
+    }
+    
+    
+//
+// Workout Choice Class -----------------------------------------------------------------------------------------------------------
+//
     //
-    // TableView -----------------------------------------------------------------------------------------------------------------------
-    //
+    var okAction = UIAlertAction()
+    // Custom sessions
+    @IBAction func addPreset(_ sender: Any) {
+        //
+        let defaults = UserDefaults.standard
+        var stretchingPreset = defaults.object(forKey: stretchingPresets[stretchingType]) as! [[Int]]
+        var presetTextArray = defaults.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
+        // Set Preset
+        // Alert and Functions
+        //
+        let inputTitle = NSLocalizedString("stretchingInputTitle", comment: "")
+        //
+        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+        alert.view.tintColor = colour2
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField { (textField) in
+            textField.text = " "
+            textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
+        }
+        // 3. Get the value from the text field, and perform actions when OK clicked.
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            //
+            let textField = alert?.textFields![0]
+            // Update Preset Text Arrays
+            presetTextArray.append((textField?.text)!)
+            defaults.set(presetTextArray, forKey: self.stretchingPresetTexts[self.stretchingType])
+            defaults.synchronize()
+            // Set new Preset Array
+            //
+            stretchingPreset.append(self.stretchingSelectedArray)
+            defaults.set(stretchingPreset, forKey: self.stretchingPresets[self.stretchingType])
+            //
+            defaults.synchronize()
+            // Flash Screen
+            self.flashScreen()
+            self.pickerView.reloadAllComponents()
+            self.tableView.reloadData()
+            
+        }))
+        // Cancel reset action
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        alert.addAction(cancelAction)
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // Remove Personalized Preset
+    @IBAction func removePreset(_ sender: Any) {
+        //
+        let defaults = UserDefaults.standard
+        var stretchingPreset = defaults.object(forKey: stretchingPresets[stretchingType]) as! [[Int]]
+        var presetTextArray = defaults.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
+        //
+        let selectedRow = pickerView.selectedRow(inComponent: 0)
+        let index = (selectedRow) - (pickerViewArray.count + 1)
+        //
+        //
+        let inputTitle = NSLocalizedString("stretchingRemoveTitle", comment: "")
+        //
+        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+        alert.view.tintColor = colour2
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        //
+        // 3. Get the value from the text field, and perform actions upon OK press
+        okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            //
+            stretchingPreset.remove(at: index)
+            defaults.set(stretchingPreset, forKey: self.stretchingPresets[self.stretchingType])
+            //
+            presetTextArray.remove(at: index)
+            defaults.set(presetTextArray, forKey: self.stretchingPresetTexts[self.stretchingType])
+            //
+            defaults.synchronize()
+            // Flash Screen
+            self.flashScreen()
+            self.pickerView.reloadAllComponents()
+            self.tableView.reloadData()
+        })
+        //
+        if index > -1 {
+            alert.addAction(okAction)
+        } else {
+        }
+        // Cancel reset action
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        alert.addAction(cancelAction)
+        //
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+
+//
+// Workout Choice Class -----------------------------------------------------------------------------------------------------------
+//
+    // Number of components
+    func numberOfComponents(in: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // Number of rows
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        let titleDataArray = UserDefaults.standard.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
+        return pickerViewArray.count + 1 + titleDataArray.count
+    }
+    
+    // View for row
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        //
+        if row < pickerViewArray.count {
+            let rowLabel = UILabel()
+            let titleData = NSLocalizedString(pickerViewArray[row], comment: "")
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+        //
+        } else if row == pickerViewArray.count {
+            let line = UILabel()
+            line.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width * (2/3), height: 1)
+            line.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            line.isEnabled = false
+            return line
+        //
+        } else if row > pickerViewArray.count {
+            let rowLabel = UILabel()
+            let titleDataArray = UserDefaults.standard.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
+            let titleData = titleDataArray[row - (pickerViewArray.count + 1)]
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
+            rowLabel.attributedText = myTitle
+            rowLabel.textAlignment = .center
+            return rowLabel
+        //
+        }
+        return UIView()
+    }
+    
+    // Row height for component
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 30
+    }
+    
+    // Did select row
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        //
+        let defaults = UserDefaults.standard
+        //
+        switch row {
+         //
+        case 0,1,2,3,4,5,6:
+            stretchingSelectedArray = presetsArrays[row]
+            self.tableView.reloadData()
+            flashScreen()
+        //
+        case 7:
+            break
+        //
+        case _ where row > 7:
+            let presetsArraysCustom = defaults.object(forKey: stretchingPresets[stretchingType]) as! [[Int]]
+            var presetsArray = [Int]()
+            if presetsArraysCustom.count != 0 {
+                presetsArray = presetsArraysCustom[row - (pickerViewArray.count + 1)]
+            } else {
+                presetsArray = []
+            }
+            stretchingSelectedArray = presetsArray
+            self.tableView.reloadData()
+            flashScreen()
+        //
+        default:
+            break
+        }
+        beginButtonEnabled()
+    }
+    
+
+//
+// Table View -----------------------------------------------------------------------------------------------------------
+//
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        switch tableView {
-        case movementsTableView:
-            return overviewArray.count
-        case presetsTableView:
-            return 3
-        default: break
-        }
-        return 0
+        return tableViewSectionArray.count
     }
     
     // Title for header
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch tableView {
-        case movementsTableView:
-            return NSLocalizedString(tableViewSectionArray[sectionNumbers[section]], comment: "")
-        case presetsTableView:
-            return " "
-        default: break
-        }
-        return ""
+        return NSLocalizedString(tableViewSectionArray[section], comment: "")
     }
     
     // Will display header
@@ -1050,201 +1203,81 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
         header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         header.contentView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+        //colour2
         header.contentView.tintColor = colour1
+        //
+        
     }
     
-    // Number of sections
+    // Number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch tableView {
-        case movementsTableView:
-            return overviewArray[section].count
-        case presetsTableView:
-            return 2
-        default: break
-        }
-        return 0
+        return stretchingKeyArray[section].count
     }
     
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch tableView {
         //
-        case movementsTableView:
-            //
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            //
-            cell.selectionStyle = .none
-            //
-            cell.textLabel?.text = NSLocalizedString(stretchingMovementsDictionary[overviewArray[indexPath.section][indexPath.row]]!, comment: "")
-            //
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
-            cell.textLabel?.adjustsFontSizeToFitWidth = true
-            cell.textLabel?.textAlignment = .left
-            cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-            cell.textLabel?.textColor = colour2
-            cell.tintColor = colour2
-            //
-            // Cell Image
-            cell.imageView?.image = demonstrationDictionary[overviewArray[indexPath.section][indexPath.row]]
-            cell.imageView?.isUserInteractionEnabled = true
-            // Image Tap
-            let imageTap = UITapGestureRecognizer()
-            imageTap.numberOfTapsRequired = 1
-            imageTap.addTarget(self, action: #selector(handleTap))
-            cell.imageView?.addGestureRecognizer(imageTap)
-            //
-            return cell
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         //
-        case presetsTableView:
-            //
-            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            //
-            cell.textLabel?.text = NSLocalizedString(presetsArray[indexPath.section][indexPath.row], comment: "")
-            cell.textLabel?.textAlignment = .center
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
-            cell.textLabel?.adjustsFontSizeToFitWidth = true
-            cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-            cell.textLabel?.textColor = colour2
-            cell.tintColor = colour2
-            //
-            return cell
-        default: break
+        cell.textLabel?.text = NSLocalizedString(stretchingDictionary[stretchingKeyArray[indexPath.section][indexPath.row]]!, comment: "")
+        //
+        cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+        cell.textLabel?.adjustsFontSizeToFitWidth = true
+        cell.textLabel?.textAlignment = .left
+        cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        cell.textLabel?.textColor = .black
+        cell.tintColor = .black
+        //
+        let key = stretchingKeyArray[indexPath.section][indexPath.row]
+        if stretchingSelectedArray.contains(key) {
+            cell.layer.borderColor = colour2.cgColor
+            cell.layer.borderWidth = 2
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
         }
-        return UITableViewCell()
+        // Cell Image
+        cell.imageView?.image = demonstrationDictionary[stretchingKeyArray[indexPath.section][indexPath.row]]
+        cell.imageView?.isUserInteractionEnabled = true
+        // Image Tap
+        let imageTap = UITapGestureRecognizer()
+        imageTap.numberOfTapsRequired = 1
+        imageTap.addTarget(self, action: #selector(handleTap))
+        cell.imageView?.addGestureRecognizer(imageTap)
+        //
+        return cell
     }
     
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch tableView {
-        case movementsTableView:
-            return 72
-        case presetsTableView:
-            return 44
-        default: break
-        }
-        return 0
+        return 72
     }
     
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch tableView {
         //
-        case movementsTableView:
-            break
+        let cell = tableView.cellForRow(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
         //
-        case presetsTableView:
-            //
-            selectedPreset[0] = indexPath.section
-            selectedPreset[1] = indexPath.row
-            //
-            sectionNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-            
-            // Compress to new array
-            overviewArray = fullKeyArray
-            
-            //
-            for i in (0...(overviewArray.count - 1)).reversed() {
-                // Reduce Array to session
-                for j in (0...(overviewArray[i].count - 1)).reversed() {
-                    if presetsArrays[selectedPreset[0]][selectedPreset[1]].contains(overviewArray[i][j]) == false {
-                        overviewArray[i].remove(at: j)
-                    }
-                }
-                
-                // Remove empty arrays
-                if overviewArray[i] == [] {
-                    overviewArray.remove(at: i)
-                    sectionNumbers.remove(at: i)
-                }
-            }
-            
-            
-            
-            
-            presetsButton.setTitle("- " + NSLocalizedString(presetsArray[indexPath.section][indexPath.row], comment: "") + " -", for: .normal)
-            presetsTableView.deselectRow(at: indexPath, animated: true)
-            
-            //
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsButton.frame.size.width - 60, height: 1)
-                self.presetsTableView.alpha = 0
-                self.backgroundViewExpanded.alpha = 0
-                self.movementsTableView.reloadData()
-            }, completion: { finished in
-                //
-                self.presetsTableView.removeFromSuperview()
-                self.backgroundViewExpanded.removeFromSuperview()
-                if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough2") == false {
-                    self.walkthroughMindBody()
-                    UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2")
-                }
-            })
+        if cell?.accessoryType == .checkmark {
+            cell?.accessoryType = .none
+            let keyToRemove = stretchingKeyArray[indexPath.section][indexPath.row]
+            stretchingSelectedArray = stretchingSelectedArray.filter() {$0 != keyToRemove}
+            tableView.reloadData()
+        } else {
+            cell?.accessoryType = .checkmark
+            let keyToAdd = stretchingKeyArray[indexPath.section][indexPath.row]
+            stretchingSelectedArray.append(keyToAdd)
+            tableView.reloadData()
+        }
+        //
+        beginButtonEnabled()
+    }
+    
 
-                //
-                self.tableConstraint1.constant = 73.75
-                self.tableConstraint.constant = 49.75
-                //
-                self.presetsConstraint.constant = self.view.frame.size.height - 73.25
-                //
-                self.beginConstraint.constant = 0
-                UIView.animate(withDuration: 0.4) {
-                    self.view.layoutIfNeeded()
-                }
-        default: break
-        }
-        
-    }
-    
-    
-    //
-    // Presets Button Action -----------------------------------------------------------------------------------------------------------------
-    //
-    @IBAction func presetsButtonAction(_ sender: Any) {
-        //
-        presetsTableView.alpha = 0
-        UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
-        presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + (presetsButton.frame.size.height / 2), width: presetsButton.frame.size.width - 60, height: 0)
-        //presetsTableView.frame = presetsButton.bounds
-        presetsTableView.center.x = presetsButton.center.x
-        presetsTableView.center.y = presetsButton.center.y + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height)!
-        //
-        backgroundViewExpanded.alpha = 0
-        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: presetsTableView)
-        backgroundViewExpanded.frame = UIScreen.main.bounds
-        // Animate table fade and size
-        // Position
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: [], animations: {
-            self.presetsTableView.alpha = 1
-            self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + 44, width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88)
-            self.presetsTableView.reloadData()
-            //
-            self.backgroundViewExpanded.alpha = 0.7
-        }, completion: nil)
-        //
-        //        })
-    }
-    
-    
-    // Dismiss presets table
-    func backgroundViewExpandedAction(_ sender: Any) {
-        //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsButton.frame.size.width - 60, height: 1)
-            self.presetsTableView.alpha = 0
-            self.backgroundViewExpanded.alpha = 0
-        }, completion: nil)
-        //
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            self.presetsTableView.removeFromSuperview()
-            self.backgroundViewExpanded.removeFromSuperview()
-        }
-    }
-    
-    
-    //
-    // Information Actions ---------------------------------------------------------------------------------------------------------------------------
-    //
+//
+// Information Actions -----------------------------------------------------------------------------------------------------------
+//
     // QuestionMark Button Action
     @IBAction func informationButtonAction(_ sender: Any) {
         // Slide information down
@@ -1306,20 +1339,20 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    //
-    // Expand image actions ----------------------------------------------------------------------------------------------------------------
-    //
-    // Handle Tap
+//
+// Expand Image -----------------------------------------------------------------------------------------------------------
+//
+    // Expand Image
     let expandedImage = UIImageView()
     let backgroundViewImage = UIButton()
     //
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
+        //
+        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
+        
         // Get Image
         let sender = extraTap.view as! UIImageView
         let image = sender.image
-        // Get Image
-        // let index = demonstrationImage.indexWhere
-        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
         
         // Expanded Image
         //
@@ -1330,7 +1363,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         expandedImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         expandedImage.contentMode = .scaleAspectFit
         expandedImage.isUserInteractionEnabled = true
-        //
+        //expandedImage.image = demonstrationDictionary[section][row]
         expandedImage.image = image
         
         // Background View
@@ -1339,11 +1372,13 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         backgroundViewImage.backgroundColor = .black
         backgroundViewImage.alpha = 0
         backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
+        
         //
         self.questionMark.isEnabled = true
         self.navigationItem.setHidesBackButton(true, animated: true)
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
+    
         //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.expandedImage.center.y = (height/2) * 1.5
@@ -1351,7 +1386,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         }, completion: nil)
     }
     
-    // Retract image
+    // Retract Image
     @IBAction func retractImage(_ sender: Any) {
         //
         let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
@@ -1371,10 +1406,10 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    
-    //
-    // Begin Button ---------------------------------------------------------------------------------------------------------------------------
-    //
+
+//
+// Begin Button -----------------------------------------------------------------------------------------------------------
+//
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         //
@@ -1391,9 +1426,9 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    //
-    // Pass Arrays ---------------------------------------------------------------------------------------------------------------------------
-    //
+//
+// Pass Array to next view controller -----------------------------------------------------------------------------------
+//
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "stretchingSessionSegue1") {
             //
@@ -1401,9 +1436,12 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             let destinationVC = destinationNC.viewControllers.first as! SessionScreen
             
             // Ensure array in ascending order
-            for i in presetsArrays[selectedPreset[0]][selectedPreset[1]] {
+            stretchingSelectedArray.sort()
+            // Compress Arrays
+            stretchingSelectedArray.sort()
+            for i in stretchingSelectedArray {
                 //
-                stretchingArray.append(stretchingMovementsDictionary[i]!)
+                stretchingArray.append(stretchingDictionary[i]!)
                 //
                 setsArray.append(setsDictionary[i]!)
                 //
@@ -1423,7 +1461,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
-            destinationVC.sessionType = 0
+            destinationVC.sessionType = 2
             //
         } else if (segue.identifier == "stretchingSessionSegue2") {
             //
@@ -1431,10 +1469,11 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
             
             // Ensure array in ascending order
+            stretchingSelectedArray.sort()
             // Compress Arrays
-            for i in presetsArrays[selectedPreset[0]][selectedPreset[1]] {
+            for i in stretchingSelectedArray {
                 //
-                stretchingArray.append(stretchingMovementsDictionary[i]!)
+                stretchingArray.append(stretchingDictionary[i]!)
                 //
                 setsArray.append(setsDictionary[i]!)
                 //
@@ -1454,23 +1493,31 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
-            destinationVC.sessionType = 0
+            destinationVC.sessionType = 2
             //
-            destinationVC.sessionTitle = presetsArray[selectedPreset[0]][selectedPreset[1]]
+            let pickerIndex = pickerView.selectedRow(inComponent: 0)
+            if pickerIndex < pickerViewArray.count {
+                destinationVC.sessionTitle = pickerViewArray[pickerIndex]
+            } else if pickerIndex > pickerViewArray.count {
+                let pickerArray = UserDefaults.standard.object(forKey: stretchingPresetTexts[stretchingType]) as! [String]
+                destinationVC.sessionTitle = pickerArray[pickerIndex - (pickerViewArray.count + 1)]
+            }
         }
     }
-    //
-    //
-    // Walkthrough --------------------------------------------------------------------------------------------------------
-    //
+    
+//
+// Walkthrough -----------------------------------------------------------------------------------------------------------
+//
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()
     let nextButton = UIButton()
     let backButton = UIButton()
     
+    
     // Walkthrough
     func walkthroughMindBody() {
+        
         //
         let screenSize = UIScreen.main.bounds
         let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
@@ -1499,13 +1546,17 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         backButton.titleLabel?.textColor = .white
         backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
         
-        //
+        
+        
+        
         switch viewNumber {
         case 0:
             //
+            
+            
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight, width: self.view.frame.size.width, height: 73.5))
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight, width: self.view.frame.size.width, height: pickerView.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1517,21 +1568,44 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             walkthroughView.clipsToBounds = true
             //
             
+            
+            label.text = NSLocalizedString("choiceScreen21", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            nextButton.isEnabled = false
+            let delayInSeconds2 = 1.0
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds2) {
+                self.pickerView.selectRow(self.pickerViewArray.count, inComponent: 0, animated: true)
+                self.nextButton.isEnabled = true
+            }
             //
+            // Picker View
+            let delayInSeconds = 0.4
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.pickerView.selectRow(self.pickerViewArray.count, inComponent: 0, animated: true)
+                self.nextButton.isEnabled = true
+            }
+            
+            
+            
+            
+            
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
             UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
             walkthroughView.bringSubview(toFront: nextButton)
             
-            //
-            label.text = NSLocalizedString("choiceScreen2W", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+            
+            
         //
         case 1:
             //
+            
+            
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 73.5, width: self.view.frame.size.width, height: movementsTableView.frame.size.height))
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + pickerView.frame.size.height, width: self.view.frame.size.width, height: tableView.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1543,7 +1617,14 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             walkthroughView.clipsToBounds = true
             //
             
-            //
+            label.center = pickerView.center
+            label.center.y = (UIApplication.shared.statusBarFrame.height/2) + pickerView.frame.size.height
+            label.text = NSLocalizedString("choiceScreen22", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
@@ -1551,17 +1632,15 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
             
-            //
-            label.center.y = presetsButton.center.y + UIApplication.shared.statusBarFrame.height + navigationBarHeight
-            label.text = NSLocalizedString("choiceScreen21", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-            //
+            
         //
         case 2:
             //
+            
+            
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 73.5 + movementsTableView.frame.size.height, width: self.view.frame.size.width, height: 49))
+            path.addRect(CGRect(x: 0, y:   UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + pickerView.frame.size.height + 24.5, width: 72 + 5, height: 72))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1573,7 +1652,14 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             walkthroughView.clipsToBounds = true
             //
             
-            //
+            label.center = pickerView.center
+            label.center.y = (UIApplication.shared.statusBarFrame.height/2) + pickerView.frame.size.height
+            label.text = NSLocalizedString("choiceScreen23", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
@@ -1581,32 +1667,143 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
             
+            
+            
+            
+        //
+        case 3:
             //
-            label.center = movementsTableView.center
-            label.text = NSLocalizedString("choiceScreen22", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addEllipse(in: CGRect(x: self.view.frame.size.width - 98, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + pickerView.frame.size.height, width: 98, height: 49))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            label.text = NSLocalizedString("choiceScreen24", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            walkthroughView.addSubview(backButton)
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            walkthroughView.bringSubview(toFront: backButton)
+            
+            
+        //
+        case 4:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + pickerView.frame.size.height + tableView.frame.size.height, width: self.view.frame.size.height, height: 49))
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("choiceScreen25", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            // Picker
+            self.pickerView.selectRow(0, inComponent: 0, animated: true)
+            
+            
+            
+            walkthroughView.addSubview(backButton)
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            walkthroughView.bringSubview(toFront: backButton)
+            
+            
+            
+        //
+        case 5:
+            //
+            
+            
+            // Clear Section
+            let path = CGMutablePath()
+            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            path.addRect(screenSize)
+            //
+            let maskLayer = CAShapeLayer()
+            maskLayer.backgroundColor = UIColor.black.cgColor
+            maskLayer.path = path
+            maskLayer.fillRule = kCAFillRuleEvenOdd
+            //
+            walkthroughView.layer.mask = maskLayer
+            walkthroughView.clipsToBounds = true
+            //
+            
+            
+            label.text = NSLocalizedString("choiceScreen26", comment: "")
+            walkthroughView.addSubview(label)
+            
+            
+            
+            
+            walkthroughView.addSubview(backButton)
+            walkthroughView.addSubview(nextButton)
+            self.view.addSubview(walkthroughView)
+            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+            walkthroughView.bringSubview(toFront: nextButton)
+            walkthroughView.bringSubview(toFront: backButton)
+            
+            
+            
         //
         default: break
+            
+            
         }
+        
+        
     }
     
-    //
+    
+    
     func nextWalkthroughView(_ sender: Any) {
         walkthroughView.removeFromSuperview()
-        label.removeFromSuperview()
         viewNumber = viewNumber + 1
         walkthroughMindBody()
     }
     
-    //
+    
     func backWalkthroughView(_ sender: Any) {
         if viewNumber > 0 {
             backButton.removeFromSuperview()
-            label.removeFromSuperview()
             walkthroughView.removeFromSuperview()
             viewNumber = viewNumber - 1
             walkthroughMindBody()
         }
+        
     }
-    //
+    
+    
+    
 }

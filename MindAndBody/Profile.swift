@@ -1243,11 +1243,8 @@ class Profile: UITableViewController{
             //
             label.text = NSLocalizedString("profile1", comment: "")
             UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-            
         //
         case 1:
-            //
-            
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: view.frame.size.width - 22, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 18, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -1272,7 +1269,6 @@ class Profile: UITableViewController{
             //
             label.text = NSLocalizedString("profile2", comment: "")
             UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-            
         //
         default: break
         }

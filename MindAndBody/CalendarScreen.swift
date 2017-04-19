@@ -89,7 +89,7 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 22)!]
     
         // Navigation Title
-        navigationBar.title = NSLocalizedString("calendar", comment: "")
+        navigationBar.title = NSLocalizedString("schedule", comment: "")
         
         // View
         view.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
@@ -210,10 +210,8 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
     let nextButton = UIButton()
     let backButton = UIButton()
     
-    
     // Walkthrough
     func walkthroughMindBody() {
-        
         //
         let screenSize = UIScreen.main.bounds
         let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
@@ -242,14 +240,10 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         backButton.titleLabel?.textColor = .white
         backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
         
-        
-        
-        
+        //
         switch viewNumber {
         case 0:
             //
-            
-            
             // Clear Section
             let path = CGMutablePath()
             path.addEllipse(in: CGRect(x: view.frame.size.width/2 - 80, y: UIApplication.shared.statusBarFrame.height, width: 160, height: 40))
@@ -264,28 +258,21 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             walkthroughView.clipsToBounds = true
             //
             
-            
-            label.text = NSLocalizedString("mindBodyC1", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
+            //
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
             UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
             walkthroughView.bringSubview(toFront: nextButton)
             
-            
-            
+            //
+            label.text = NSLocalizedString("mindBodyC1", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
         //
         case 1:
             //
-            
-            
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight, width: self.view.frame.size.width, height: 47))
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight, width: self.view.frame.size.width, height: 44))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -297,13 +284,7 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             walkthroughView.clipsToBounds = true
             //
             
-            
-            label.text = NSLocalizedString("mindBodyC2", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
+            //
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
@@ -311,16 +292,15 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
             
-            
-            
+            //
+            label.text = NSLocalizedString("mindBodyC2", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
         //
         case 2:
             //
-            
-            
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 47, width: self.view.frame.size.width, height: 47))
+            path.addRect(CGRect(x: 10, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 44, width: (self.view.frame.size.width / 2) - 10, height: collectionView.frame.size.height / 2.1))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -332,14 +312,7 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             walkthroughView.clipsToBounds = true
             //
             
-            //            label.center = pickerView.center
-            //            label.center.y = 24.5 + (UIApplication.shared.statusBarFrame.height/2) + pickerView.frame.size.height
-            label.text = NSLocalizedString("mindBodyC3", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
+            //
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
@@ -347,13 +320,13 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
             
-            
-            
+            //
+            label.center.y = UIApplication.shared.statusBarFrame.height + navigationBarHeight + (collectionView.frame.size.height * 4/5)
+            label.text = NSLocalizedString("mindBodyC3", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
         //
         case 3:
             //
-            
-            
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -368,13 +341,7 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             walkthroughView.clipsToBounds = true
             //
             
-            
-            label.text = NSLocalizedString("mindBodyC4", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
+            //
             walkthroughView.addSubview(backButton)
             walkthroughView.addSubview(nextButton)
             self.view.addSubview(walkthroughView)
@@ -382,66 +349,41 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             walkthroughView.bringSubview(toFront: nextButton)
             walkthroughView.bringSubview(toFront: backButton)
             
-            
-            
+            //
+            label.text = NSLocalizedString("mindBodyC4", comment: "")
+            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
         //
         default: break
-            
-            
         }
-        
-        
     }
     
-    
-    
+    //
     func nextWalkthroughView(_ sender: Any) {
         walkthroughView.removeFromSuperview()
+        label.removeFromSuperview()
         viewNumber = viewNumber + 1
         walkthroughMindBody()
     }
     
-    
+    //
     func backWalkthroughView(_ sender: Any) {
         if viewNumber > 0 {
             backButton.removeFromSuperview()
+            label.removeFromSuperview()
             walkthroughView.removeFromSuperview()
             viewNumber = viewNumber - 1
             walkthroughMindBody()
         }
-        
     }
-    
-
-    
+//
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//
+// Calendar Screen Extension -----------------------------------------------------------------------------------------------------------
+//
 extension CalendarScreen : UICollectionViewDelegateFlowLayout {
     //
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -461,20 +403,23 @@ extension CalendarScreen : UICollectionViewDelegateFlowLayout {
         return CGSize(width: width, height: height)
     }
     
+    //
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
-    
+    //
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
+    //
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+//
 }

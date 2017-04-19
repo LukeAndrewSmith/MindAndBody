@@ -805,25 +805,17 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
                 
                 
                 
-                if #available(iOS 10.0, *) {
+                let content = UNMutableNotificationContent()
+                content.title = NSLocalizedString("timerEnd", comment: "")
+                content.body = " "
+                content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+                content.sound = UNNotificationSound.default()
                     
-                    let content = UNMutableNotificationContent()
-                    content.title = NSLocalizedString("timerEnd", comment: "")
-                    content.body = " "
-                    content.sound = UNNotificationSound.default()
-                    
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
-                    let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
-                    
-                    
-                    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
+                let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
                     
                     
-                } else {
-                    // Fallback on earlier versions
-                }
-                
-                
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
                 
             }
             
@@ -1081,21 +1073,18 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         //
         // Rest Timer Notification
         //
-        if #available(iOS 10.0, *) {
+        let content = UNMutableNotificationContent()
+        content.title = NSLocalizedString("restOver", comment: "")
+        content.body = NSLocalizedString("nextSet", comment: "")
+        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+        content.sound = UNNotificationSound.default()
             
-            let content = UNMutableNotificationContent()
-            content.title = NSLocalizedString("restOver", comment: "")
-            content.body = NSLocalizedString("nextSet", comment: "")
-            content.sound = UNNotificationSound.default()
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
+        let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
+        //
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
-            let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
-            
-            
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-            
-            
-        }
+
         
         buttonArray[buttonNumber].isEnabled = false
         

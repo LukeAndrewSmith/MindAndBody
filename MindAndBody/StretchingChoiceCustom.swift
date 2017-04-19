@@ -1,8 +1,8 @@
 //
-//  WarmupChoiceCustom.swift
-//  MyFitnessMentor
+//  StretchingChoiceCustom.swift
+//  MindAndBody
 //
-//  Created by Luke Smith on 29.03.17.
+//  Created by Luke Smith on 18.04.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -11,24 +11,24 @@ import UIKit
 
 
 //
-// Warmup Choice Custom --------------------------------------------------------------------------------------
+// Stretching Choice Custom --------------------------------------------------------------------------------------
 //
-class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
-
+class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
-//
-// Arrays -----------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Arrays -----------------------------------------------------------------------------------------------------
+    //
     // Custom Arrays
     //
     var presetTexts: [String] = []
-    // WarmupPresetsCustom, SetsArray, RepsArray
+    // stretchingPresetsCustom, SetsArray, RepsArray
     var emptyArrayOfArrays: [[Int]] = []
     // Selected row
     var selectedRow = Int()
     
     //
-    var warmupArray: [String] = []
+    var stretchingArray: [String] = []
     //
     var demonstrationArray: [UIImage] = []
     //
@@ -40,29 +40,33 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     var setsArray: [Int] = []
     //
     var repsArray: [String] = []
-  
     
-//
-// Warmup Arrays -----------------------------------------------------------------------------------------------
-//
-    // TableView Section Array
+    
+    //
+    // Stretching Arrays -----------------------------------------------------------------------------------------------
+    //
+    // Table View Section Title Array
     var tableViewSectionArray: [String] =
         [
-            "cardio",
+            "recommended",
             "jointRotation",
             "foamRoll",
-            "lowerBack",
-            "shoulder",
-            "bandAssisted",
-            "generalMobility",
-            "dynamicWarmupDrills",
-            "accessory"
+            "backStretch",
+            "sides",
+            "neck",
+            "arms",
+            "pecs",
+            "shoulders",
+            "hipsaGlutes",
+            "calves",
+            "hamstrings",
+            "quads"
     ]
     
-    // Full Key Array
+    // Stretching Post Workout Array
     var fullKeyArray: [[Int]] =
         [
-            // Cardio
+            // Recommended
             [0],
             // Joint Rotations
             [1,
@@ -84,62 +88,72 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
              16,
              17,
              18],
-            // Lower Back
+            // Back
             [19,
              20,
              21,
              22,
-             23],
-            // Shoulder
-            [24,
+             23,
+             24,
              25,
              26,
-             27],
-            // Band/Bar/Machine Assisted
-            [28,
-             29,
+             27,
+             28],
+            // Obliques(Sides)
+            [29,
              30,
-             31,
-             32,
-             33],
-            // General Mobility
-            [34,
+             31],
+            // Neck
+            [32,
+             33,
+             34,
              35,
              36,
-             37,
-             38,
+             37],
+            // Arms
+            [38,
              39,
-             40,
-             41,
-             42,
+             40],
+            // Pecs
+            [41],
+            // Shoulders
+            [42,
              43,
-             44],
-            // Dynamic Warmup Drills
-            [45,
+             44,
+             45,
              46,
-             47,
-             48,
+             47],
+            // Hips and Glutes
+            [48,
              49,
              50,
              51,
              52,
-             53],
-            // Accessory
-            [54,
-             55,
-             56,
-             57]
+             53,
+             54],
+            // Calves
+            [55],
+            // Hamstrings
+            [56,
+             57,
+             58,
+             59,
+             60,
+             61],
+            // Quads
+            [62,
+             63]
     ]
     
-    // Warmup Movements Dictionary
-    var warmupMovementsDictionary: [Int : String] =
+    // Stretching Post Workout Array
+    var stretchingMovementsDictionary: [Int : String] =
         [
-            // Cardio
-            0: "5minCardio",
+            // Recommended
+            0: "5minCardioL",
             // Joint Rotations
             1: "wrist",
             2: "elbow",
-            3: "shoulder",
+            3: "shoulderR",
             4: "neckR",
             5: "waist",
             6: "hip",
@@ -156,129 +170,314 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             16: "hamstringf",
             17: "glutef",
             18: "calvef",
-            // Lower Back
-            19: "sideLegDrop",
-            20: "sideLegKick",
-            21: "scorpionKick",
-            22: "sideBend",
-            23: "catCow",
-            // Shoulder
-            24: "wallSlides",
-            25: "superManShoulder",
-            26: "scapula",
-            27: "shoulderRotation",
-            // Band/Bar/Machine Assisted
-            28: "facePull",
-            29: "externalRotation",
-            30: "internalRotation",
-            31: "shoulderDislocation",
-            32: "rearDeltFly",
-            33: "latPullover",
-            // General Mobility
-            34: "rollBack",
-            35: "hipCircles",
-            36: "mountainClimber",
-            37: "groinStretch",
-            38: "gluteBridge",
-            39: "threadTheNeedle",
-            40: "butterflyPose",
-            41: "cossakSquat",
-            42: "hipHinges",
-            43: "sideLegSwings",
-            44: "frontLegSwings",
-            // Dynamic Warmup Drills
-            45: "jumpSquat",
-            46: "lunge",
-            47: "gluteKicks",
-            48: "aSkips",
-            49: "bSkips",
-            50: "grapeVines",
-            51: "lateralBound",
-            52: "straightLegBound",
-            53: "sprints",
-            // Accessory
-            54: "latStretch",
+            // Back
+            19: "catCow",
+            20: "upwardsDog",
+            21: "extendedPuppy",
+            22: "childPose",
+            23: "staffPose",
+            24: "pelvicTilt",
+            25: "kneeToChest",
+            26: "legDrop",
+            27: "seatedTwist",
+            28: "legsWall",
+            // Obliques(Sides)
+            29: "sideLean",
+            30: "extendedSideAngle",
+            31: "seatedSide",
+            // Neck
+            32: "rearNeck",
+            33: "rearNeckHand",
+            34: "seatedLateral",
+            35: "neckRotator",
+            36: "scalene",
+            37: "headRoll",
+            // Arms
+            38: "forearmStretch",
+            39: "tricepStretch",
+            40: "bicepStretch",
+            // Pecs
+            41: "pecStretch",
+            // Shoulders
+            42: "shoulderRoll",
+            43: "behindBackTouch",
+            44: "frontDelt",
+            45: "lateralDelt",
+            46: "rearDelt",
+            47: "rotatorCuff",
+            // Hips and Glutes
+            48: "squatHold",
+            49: "groinStretch",
+            50: "butterflyPose",
+            51: "lungeStretch",
+            52: "threadTheNeedle",
+            53: "pigeonPose",
+            54: "seatedGlute",
+            // Calves
             55: "calveStretch",
-            56: "pushUp",
-            57: "pullUp"
+            // Hamstrings
+            56: "standingHamstring",
+            57: "standingOneLegHamstring",
+            58: "singleLegStanding",
+            59: "downWardsDog",
+            60: "singleLegHamstring",
+            61: "twoLegHamstring",
+            // Quads
+            62: "lungeStretchWall",
+            63: "QuadStretch"
+    ]
+    
+    // Screen Arrays
+    //
+    var setsDictionary: [Int : Int] =
+        [
+            // Recommended
+            0: 1,
+            // Joint Rotations
+            1: 1,
+            2: 1,
+            3: 1,
+            4: 1,
+            5: 1,
+            6: 1,
+            7: 1,
+            8: 1,
+            // Foam/Ball Roll
+            9: 1,
+            10: 3,
+            11: 1,
+            12: 1,
+            13: 1,
+            14: 1,
+            15: 1,
+            16: 1,
+            17: 1,
+            18: 1,
+            // Back
+            19: 1,
+            20: 1,
+            21: 1,
+            22: 1,
+            23: 1,
+            24: 1,
+            25: 1,
+            26: 1,
+            27: 1,
+            28: 1,
+            // Obliques(Sides)
+            29: 1,
+            30: 1,
+            31: 1,
+            // Neck
+            32: 1,
+            33: 2,
+            34: 1,
+            35: 1,
+            36: 1,
+            37: 1,
+            // Arms
+            38: 1,
+            39: 1,
+            40: 1,
+            // Pecs
+            41: 1,
+            // Shoulders
+            42: 1,
+            43: 1,
+            44: 1,
+            45: 1,
+            46: 1,
+            47: 1,
+            // Hips and Glutes
+            48: 2,
+            49: 1,
+            50: 1,
+            51: 1,
+            52: 1,
+            53: 1,
+            54: 1,
+            // Calves
+            55: 1,
+            // Hamstrings
+            56: 3,
+            57: 3,
+            58: 1,
+            59: 1,
+            60: 1,
+            61: 1,
+            // Quads
+            62: 1,
+            63: 1
+    ]
+    
+    // Reps Array
+    var repsDictionary: [Int : String] =
+        [
+            // Recommended
+            0: "5min",
+            // Joint Rotations
+            1: "10-30s",
+            2: "10-30s",
+            3: "10-30s",
+            4: "10-30s",
+            5: "10-30s",
+            6: "10-30s",
+            7: "10-30s",
+            8: "10-30s",
+            // Foam/Ball Roll
+            9: "2-7 reps",
+            10: "5-10 reps",
+            11: "2-7 reps",
+            12: "15-30s",
+            13: "15-30s",
+            14: "2-7 reps",
+            15: "2-7 reps",
+            16: "2-7 reps",
+            17: "2-7 reps",
+            18: "2-7 reps",
+            // Back
+            19: "15-20 reps",
+            20: "15-30s",
+            21: "30-60s",
+            22: "30-180s",
+            23: "30-90s",
+            24: "10-30 reps",
+            25: "30-60s",
+            26: "25-45s",
+            27: "30-60s",
+            28: "30-180s",
+            // Obliques(Sides)
+            29: "10-20s",
+            30: "15-30s",
+            31: "15-30s",
+            // Neck
+            32: "15-30s",
+            33: "5-10s",
+            34: "15-30s",
+            35: "15-30s",
+            36: "15-30s",
+            37: "20-40s",
+            // Arms
+            38: "15-30s",
+            39: "15-30s",
+            40: "15-30s",
+            // Pecs
+            41: "15-30s",
+            // Shoulders
+            42: "20-40s",
+            43: "10-20s",
+            44: "15-30s",
+            45: "15-30s",
+            46: "15-30s",
+            47: "15-30s",
+            // Hips and Glutes
+            48: "1-5min",
+            49: "5-10 reps",
+            50: "15-30s",
+            51: "15-30s",
+            52: "15-30s",
+            53: "15-45s",
+            54: "15-45s",
+            // Calves
+            55: "15-30s",
+            // Hamstrings
+            56: "10s",
+            57: "10s",
+            58: "15-30s",
+            59: "15-45s",
+            60: "15-60s",
+            61: "15-60s",
+            // Quads
+            62: "15-30s",
+            63: "15-30s"
     ]
     
     // Demonstration Array
     var demonstrationDictionary: [Int : UIImage] =
         [
-            // Cardio
-            0: #imageLiteral(resourceName: "Test 2"),
+            // Mandatory
+            0: #imageLiteral(resourceName: "Test"),
             // Joint Rotations
-            1: #imageLiteral(resourceName: "Test 2"),
-            2: #imageLiteral(resourceName: "Test 2"),
-            3: #imageLiteral(resourceName: "Test 2"),
-            4: #imageLiteral(resourceName: "Test 2"),
-            5: #imageLiteral(resourceName: "Test 2"),
-            6: #imageLiteral(resourceName: "Test 2"),
-            7: #imageLiteral(resourceName: "Test 2"),
-            8: #imageLiteral(resourceName: "Test 2"),
+            1: #imageLiteral(resourceName: "Wrist Rotations"),
+            2: #imageLiteral(resourceName: "Test"),
+            3: #imageLiteral(resourceName: "Test"),
+            4: #imageLiteral(resourceName: "Test"),
+            5: #imageLiteral(resourceName: "Test"),
+            6: #imageLiteral(resourceName: "Test"),
+            7: #imageLiteral(resourceName: "Test"),
+            8: #imageLiteral(resourceName: "Test"),
             // Foam/Ball Roll
-            9: #imageLiteral(resourceName: "Test 2"),
-            10: #imageLiteral(resourceName: "Test 2"),
-            11: #imageLiteral(resourceName: "Test 2"),
-            12: #imageLiteral(resourceName: "Test 2"),
-            13: #imageLiteral(resourceName: "Test 2"),
-            14: #imageLiteral(resourceName: "Test 2"),
-            15: #imageLiteral(resourceName: "Test 2"),
-            16: #imageLiteral(resourceName: "Test 2"),
-            17: #imageLiteral(resourceName: "Test 2"),
-            18: #imageLiteral(resourceName: "Test 2"),
-            // Lower Back
-            19: #imageLiteral(resourceName: "Test 2"),
-            20: #imageLiteral(resourceName: "Test 2"),
-            21: #imageLiteral(resourceName: "Test 2"),
-            22: #imageLiteral(resourceName: "Test 2"),
-            23: #imageLiteral(resourceName: "Test 2"),
-            // Shoulder
-            24: #imageLiteral(resourceName: "Test 2"),
-            25: #imageLiteral(resourceName: "Test 2"),
-            26: #imageLiteral(resourceName: "Test 2"),
-            27: #imageLiteral(resourceName: "Test 2"),
-            // Band/Bar/Machine Assisted
-            28: #imageLiteral(resourceName: "Test 2"),
-            29: #imageLiteral(resourceName: "Test 2"),
-            30: #imageLiteral(resourceName: "Test 2"),
-            31: #imageLiteral(resourceName: "Test 2"),
-            32: #imageLiteral(resourceName: "Test 2"),
-            33: #imageLiteral(resourceName: "Test 2"),
-            // General Mobility
-            34: #imageLiteral(resourceName: "Test 2"),
-            35: #imageLiteral(resourceName: "Test 2"),
-            36: #imageLiteral(resourceName: "Test 2"),
-            37: #imageLiteral(resourceName: "Test 2"),
-            38: #imageLiteral(resourceName: "Test 2"),
-            39: #imageLiteral(resourceName: "Test 2"),
-            40: #imageLiteral(resourceName: "Test 2"),
-            41: #imageLiteral(resourceName: "Test 2"),
-            42: #imageLiteral(resourceName: "Test 2"),
-            43: #imageLiteral(resourceName: "Test 2"),
-            44: #imageLiteral(resourceName: "Test 2"),
-            // Dynamic Warm Up Drills
-            45: #imageLiteral(resourceName: "Test 2"),
-            46: #imageLiteral(resourceName: "Test 2"),
-            47: #imageLiteral(resourceName: "Test 2"),
-            48: #imageLiteral(resourceName: "Test 2"),
-            49: #imageLiteral(resourceName: "Test 2"),
-            50: #imageLiteral(resourceName: "Test 2"),
-            51: #imageLiteral(resourceName: "Test 2"),
-            52: #imageLiteral(resourceName: "Test 2"),
-            53: #imageLiteral(resourceName: "Test 2"),
-            // Accessory
-            54: #imageLiteral(resourceName: "Test 2"),
-            55: #imageLiteral(resourceName: "Test 2"),
-            56: #imageLiteral(resourceName: "Test 2"),
-            57: #imageLiteral(resourceName: "Test 2")
+            9: #imageLiteral(resourceName: "Test"),
+            10: #imageLiteral(resourceName: "Test"),
+            11: #imageLiteral(resourceName: "Test"),
+            12: #imageLiteral(resourceName: "Test"),
+            13: #imageLiteral(resourceName: "Test"),
+            14: #imageLiteral(resourceName: "Test"),
+            15: #imageLiteral(resourceName: "Test"),
+            16: #imageLiteral(resourceName: "Test"),
+            17: #imageLiteral(resourceName: "Test"),
+            18: #imageLiteral(resourceName: "Test"),
+            // Back
+            19: #imageLiteral(resourceName: "Cow"),
+            20: #imageLiteral(resourceName: "Upwards Dog"),
+            21: #imageLiteral(resourceName: "Extended Puppy"),
+            22: #imageLiteral(resourceName: "Childs Pose"),
+            23: #imageLiteral(resourceName: "Staff Pose"),
+            24: #imageLiteral(resourceName: "Pelvic Tilt"),
+            25: #imageLiteral(resourceName: "Knee Chest"),
+            26: #imageLiteral(resourceName: "Knee Drop"),
+            27: #imageLiteral(resourceName: "Marichis Pose"),
+            28: #imageLiteral(resourceName: "Legs Wall"),
+            // Obliques(Sides)
+            29: #imageLiteral(resourceName: "Side Bend"),
+            30: #imageLiteral(resourceName: "Extended Side Angle"),
+            31: #imageLiteral(resourceName: "Half Straddle Side Bend"),
+            // Neck
+            32: #imageLiteral(resourceName: "Test"),
+            33: #imageLiteral(resourceName: "Test"),
+            34: #imageLiteral(resourceName: "Test"),
+            35: #imageLiteral(resourceName: "Test"),
+            36: #imageLiteral(resourceName: "Test"),
+            37: #imageLiteral(resourceName: "Test"),
+            // Arms
+            38: #imageLiteral(resourceName: "Test"),
+            39: #imageLiteral(resourceName: "Test"),
+            40: #imageLiteral(resourceName: "Test"),
+            // Pecs
+            41: #imageLiteral(resourceName: "Test"),
+            // Shoulders
+            42: #imageLiteral(resourceName: "Test"),
+            43: #imageLiteral(resourceName: "Test"),
+            44: #imageLiteral(resourceName: "Test"),
+            45: #imageLiteral(resourceName: "Test"),
+            46: #imageLiteral(resourceName: "Test"),
+            47: #imageLiteral(resourceName: "Test"),
+            // Hips and Glutes
+            48: #imageLiteral(resourceName: "Test"),
+            49: #imageLiteral(resourceName: "Test"),
+            50: #imageLiteral(resourceName: "Test"),
+            51: #imageLiteral(resourceName: "Test"),
+            52: #imageLiteral(resourceName: "Test"),
+            53: #imageLiteral(resourceName: "Test"),
+            54:#imageLiteral(resourceName: "Test"),
+            // Calves
+            55: #imageLiteral(resourceName: "Test"),
+            // Hamstrings
+            56: #imageLiteral(resourceName: "Test"),
+            57: #imageLiteral(resourceName: "Test"),
+            58: #imageLiteral(resourceName: "Test"),
+            59: #imageLiteral(resourceName: "Test"),
+            60: #imageLiteral(resourceName: "Test"),
+            61: #imageLiteral(resourceName: "Test"),
+            // Quads
+            62: #imageLiteral(resourceName: "Test"),
+            63: #imageLiteral(resourceName: "Test")
     ]
     
     // Target Area Array
-    var targetAreaDictionary: [Int: UIImage] =
+    var targetAreaDictionary: [Int : UIImage] =
         [
-            // Cardio
+            // Mandatory
             0: #imageLiteral(resourceName: "Heart"),
             // Joint Rotations
             1: #imageLiteral(resourceName: "Wrist Joint"),
@@ -300,124 +499,145 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             16: #imageLiteral(resourceName: "Hamstring"),
             17: #imageLiteral(resourceName: "Glute"),
             18: #imageLiteral(resourceName: "Calf"),
-            // Lower Back
-            19: #imageLiteral(resourceName: "Core"),
-            20: #imageLiteral(resourceName: "Core"),
-            21: #imageLiteral(resourceName: "Core"),
-            22: #imageLiteral(resourceName: "Core"),
-            23: #imageLiteral(resourceName: "Spine"),
-            // Shoulder
-            24: #imageLiteral(resourceName: "Shoulder"),
-            25: #imageLiteral(resourceName: "Back and Shoulder"),
-            26: #imageLiteral(resourceName: "Serratus"),
-            27: #imageLiteral(resourceName: "Shoulder"),
-            // Band/Bar/Machine Assisted
-            28: #imageLiteral(resourceName: "Upper Back and Shoulder"),
-            29: #imageLiteral(resourceName: "Rear Delt"),
-            30: #imageLiteral(resourceName: "Rear Delt"),
-            31: #imageLiteral(resourceName: "Shoulder"),
-            32: #imageLiteral(resourceName: "Rear Delt"),
-            33: #imageLiteral(resourceName: "Back"),
-            // General Mobility
-            34: #imageLiteral(resourceName: "Hamstring and Lower Back"),
-            35: #imageLiteral(resourceName: "Hip Area"),
-            36: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-            37: #imageLiteral(resourceName: "Adductor"),
-            38: #imageLiteral(resourceName: "Hamstring and Lower Back"),
-            39: #imageLiteral(resourceName: "Piriformis"),
-            40: #imageLiteral(resourceName: "Adductor"),
-            41: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-            42: #imageLiteral(resourceName: "Hamstring and Glute"),
-            43: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-            44: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-            // Dynamic Warm Up Drills
-            45: #imageLiteral(resourceName: "Squat"),
-            46: #imageLiteral(resourceName: "Squat"),
-            47: #imageLiteral(resourceName: "Squat"),
-            48: #imageLiteral(resourceName: "Squat"),
-            49: #imageLiteral(resourceName: "Squat"),
-            50: #imageLiteral(resourceName: "Squat"),
-            51: #imageLiteral(resourceName: "Squat"),
-            52: #imageLiteral(resourceName: "Squat"),
-            53: #imageLiteral(resourceName: "Squat"),
-            // Accessory
-            54: #imageLiteral(resourceName: "Lat"),
+            // Back
+            19: #imageLiteral(resourceName: "Spine"),
+            20: #imageLiteral(resourceName: "Spine and Core"),
+            21: #imageLiteral(resourceName: "Spine"),
+            22: #imageLiteral(resourceName: "Spine"),
+            23: #imageLiteral(resourceName: "Hamstring and Lower Back"),
+            24: #imageLiteral(resourceName: "Core"),
+            25: #imageLiteral(resourceName: "Spine"),
+            26: #imageLiteral(resourceName: "Core"),
+            27: #imageLiteral(resourceName: "Core"),
+            28: #imageLiteral(resourceName: "Hamstring and Lower Back"),
+            // Obliques(Sides)
+            29: #imageLiteral(resourceName: "Oblique"),
+            30: #imageLiteral(resourceName: "Oblique"),
+            31: #imageLiteral(resourceName: "Oblique"),
+            // Neck
+            32: #imageLiteral(resourceName: "Rear Neck"),
+            33: #imageLiteral(resourceName: "Rear Neck"),
+            34: #imageLiteral(resourceName: "Lateral Neck"),
+            35: #imageLiteral(resourceName: "Neck Rotator"),
+            36: #imageLiteral(resourceName: "Neck Rotator"),
+            37: #imageLiteral(resourceName: "Neck"),
+            // Arms
+            38: #imageLiteral(resourceName: "Forearm"),
+            39: #imageLiteral(resourceName: "Tricep"),
+            40: #imageLiteral(resourceName: "Bicep"),
+            // Pecs
+            41: #imageLiteral(resourceName: "Pec"),
+            // Shoulders
+            42: #imageLiteral(resourceName: "Shoulder Joint"),
+            43: #imageLiteral(resourceName: "Shoulder Joint"),
+            44: #imageLiteral(resourceName: "Front Delt"),
+            45: #imageLiteral(resourceName: "Lateral Neck"),
+            46: #imageLiteral(resourceName: "Rear Delt"),
+            47: #imageLiteral(resourceName: "Rear Delt"),
+            // Hips and Glutes
+            48: #imageLiteral(resourceName: "Hip Joint"),
+            49: #imageLiteral(resourceName: "Adductor"),
+            50: #imageLiteral(resourceName: "Adductor"),
+            51: #imageLiteral(resourceName: "Hip Area"),
+            52: #imageLiteral(resourceName: "Piriformis"),
+            53: #imageLiteral(resourceName: "Glute"),
+            54: #imageLiteral(resourceName: "Glute"),
+            // Calves
             55: #imageLiteral(resourceName: "Calf"),
-            56: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            57: #imageLiteral(resourceName: "Back and Bicep")
+            // Hamstrings
+            56: #imageLiteral(resourceName: "Hamstring"),
+            57: #imageLiteral(resourceName: "Hamstring"),
+            58: #imageLiteral(resourceName: "Hamstring"),
+            59: #imageLiteral(resourceName: "Hamstring"),
+            60: #imageLiteral(resourceName: "Hamstring"),
+            61: #imageLiteral(resourceName: "Hamstring"),
+            // Quads
+            62: #imageLiteral(resourceName: "Quad"),
+            63: #imageLiteral(resourceName: "Quad")
     ]
     
     // Explanation Array
     var explanationDictionary: [Int : String] =
         [
-            // Cardio
+            // Recommended
             0: "5minCardioL",
             // Joint Rotations
-            1: "wristE",
-            2: "elbowE",
-            3: "shoulderE",
-            4: "neckE",
-            5: "waistE",
-            6: "hipE",
-            7: "kneesE",
-            8: "anklesE",
+            1: "wrist",
+            2: "elbow",
+            3: "shoulderR",
+            4: "neckR",
+            5: "waist",
+            6: "hip",
+            7: "knees",
+            8: "ankles",
             // Foam/Ball Roll
-            9: "backfE",
-            10: "thoracicSpineE",
-            11: "latE",
-            12: "pecDeltE",
-            13: "rearDeltE",
-            14: "quadfE",
-            15: "adductorfE",
-            16: "hamstringfE",
-            17: "glutefE",
-            18: "calvefE",
+            9: "backf",
+            10: "thoracicSpine",
+            11: "lat",
+            12: "pecDelt",
+            13: "rearDelt",
+            14: "quadf",
+            15: "adductorf",
+            16: "hamstringf",
+            17: "glutef",
+            18: "calvef",
             // Back
-            19: "sideLegDropE",
-            20: "sideLegKickE",
-            21: "scorpionKickE",
-            22: "sideBendE",
-            23: "catCowE",
-            // Shoulder
-            24: "wallSlidesE",
-            25: "superManShoulderE",
-            26: "scapulaE",
-            27: "shoulderRotationE",
-            // Band/Bar/Machine Assisted
-            28: "facePullE",
-            29: "externalRotationE",
-            30: "internalRotationE",
-            31: "shoulderDislocationE",
-            32: "rearDeltFlyE",
-            33: "latPulloverE",
-            // General Mobility
-            34: "rollBackE",
-            35: "hipCirclesE",
-            36: "mountainClimberE",
-            37: "groinStretchE",
-            38: "gluteBridgeE",
-            39: "threadTheNeedleE",
-            40: "butterflyPoseE",
-            41: "cossakSquatE",
-            42: "hipHingesE",
-            43: "sideLegSwingsE",
-            44: "frontLegSwingsE",
-            // Dynamic Warm Up Drills
-            45: "jumpSquatE",
-            46: "lungeE",
-            47: "gluteKicksE",
-            48: "aSkipsE",
-            49: "bSkipsE",
-            50: "grapeVinesE",
-            51: "lateralBoundE",
-            52: "straightLegBoundE",
-            53: "sprintsE",
-            // Accessory
-            54: "latStretchE",
-            55: "calveStretchE",
-            56: "pushUpE",
-            57: "pullUpE"
+            19: "catCow",
+            20: "upwardsDog",
+            21: "extendedPuppy",
+            22: "childPose",
+            23: "staffPose",
+            24: "pelvicTilt",
+            25: "kneeToChest",
+            26: "legDrop",
+            27: "seatedTwist",
+            28: "legsWall",
+            // Obliques(Sides)
+            29: "sideLean",
+            30: "extendedSideAngle",
+            31: "seatedSide",
+            // Neck
+            32: "rearNeck",
+            33: "rearNeckHand",
+            34: "seatedLateral",
+            35: "neckRotator",
+            36: "scalene",
+            37: "headRoll",
+            // Arms
+            38: "forearmStretch",
+            39: "tricepStretch",
+            40: "bicepStretch",
+            // Pecs
+            41: "pecStretch",
+            // Shoulders
+            42: "shoulderRoll",
+            43: "behindBackTouch",
+            44: "frontDelt",
+            45: "lateralDelt",
+            46: "rearDelt",
+            47: "rotatorCuff",
+            // Hips and Glutes
+            48: "squatHold",
+            49: "groinStretch",
+            50: "butterflyPose",
+            51: "lungeStretch",
+            52: "threadTheNeedle",
+            53: "pigeonPose",
+            54: "seatedGlute",
+            // Calves
+            55: "calveStretch",
+            // Hamstrings
+            56: "standingHamstring",
+            57: "standingOneLegHamstring",
+            58: "singleLegStanding",
+            59: "downWardsDog",
+            60: "singleLegHamstring",
+            61: "twoLegHamstring",
+            // Quads
+            62: "lungeStretchWall",
+            63: "QuadStretch"
     ]
+    
     
     
     //
@@ -428,9 +648,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     var repsPickerArray: [String] = ["1", "3", "5", "8", "10", "12", "15", "20", "3-5", "5-8", "8-12", "15-20", "15", "30", "60", "90"]
     
     
-//
-// Outlets ---------------------------------------------------------------------------------------------------------------------------
-//
+    //
+    // Outlets ---------------------------------------------------------------------------------------------------------------------------
+    //
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
@@ -440,8 +660,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     // Table View
     @IBOutlet weak var customTableView: UITableView!
     
-        // Editing
-        @IBOutlet weak var editingButton: UIButton!
+    // Editing
+    @IBOutlet weak var editingButton: UIButton!
     
     // Information View
     let informationView = UIScrollView()
@@ -487,9 +707,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     let setsIndicatorLabel = UILabel()
     
     
-//
-// Flash Screen -----------------------------------------------------------------------------------------------
-//
+    //
+    // Flash Screen -----------------------------------------------------------------------------------------------
+    //
     // Flash Screen
     func flashScreen() {
         //
@@ -506,24 +726,24 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             flash.removeFromSuperview()
         })
     }
-   
-
-//
-// View did load  ---------------------------------------------------------------------------------------------------------------------------
-//
+    
+    
+    //
+    // View did load  ---------------------------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //
-        // Preset Warmups
+        // Preset Stretchings Sessions
         //
         let defaults = UserDefaults.standard
         // Custom
-        defaults.register(defaults: ["warmupPresetsCustom" : emptyArrayOfArrays])
-        defaults.register(defaults: ["warmupPresetTextsCustom" : presetTexts])
+        defaults.register(defaults: ["stretchingPresetsCustom" : emptyArrayOfArrays])
+        defaults.register(defaults: ["stretchingPresetTextsCustom" : presetTexts])
         //
-        defaults.register(defaults: ["warmupSetsCustom" : emptyArrayOfArrays])
-        defaults.register(defaults: ["warmupRepsCustom" : emptyArrayOfArrays])
+        defaults.register(defaults: ["stretchingSetsCustom" : emptyArrayOfArrays])
+        defaults.register(defaults: ["stretchingRepsCustom" : emptyArrayOfArrays])
         //
         defaults.synchronize()
         
@@ -575,8 +795,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         
         
         // Initial Element Positions
-        let warmupPreset = UserDefaults.standard.object(forKey: "warmupPresetsCustom") as! [[Int]]
-        if warmupPreset.count == 0 {
+        let stretchingPreset = UserDefaults.standard.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+        if stretchingPreset.count == 0 {
             editingButton.alpha = 0
             removePreset.alpha = 0
             //
@@ -589,7 +809,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             //
             beginButtonConstraint.constant = -49
         }
-        
+    
         
         
         
@@ -617,9 +837,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("stretchingChoiceText", comment: "")))
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("stretchingChoiceText", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         // Range of Titles
         let titleRangeString = (NSLocalizedString("movements", comment: ""))
@@ -693,9 +913,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-//
-// View did layout subviews Actions -------------------------------------------------------------------------------------------------
-//
+    //
+    // View did layout subviews Actions -------------------------------------------------------------------------------------------------
+    //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // TableView Footer
@@ -707,24 +927,24 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         editButtonEnabled()
         pickerViewEnabled()
     }
-
     
-//
-// Elements check enabled funcs ------------------------------------------------------------------------------
-//
+    
+    //
+    // Elements check enabled funcs ------------------------------------------------------------------------------
+    //
     // Button Enabled
     func beginButtonEnabled() {
         // Begin Button
         let defaults = UserDefaults.standard
-        var warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        var stretchingPreset = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
         //
         if customTableView.isEditing {
             beginButton.isEnabled = false
         } else {
-            if warmupPreset.count == 0 {
+            if stretchingPreset.count == 0 {
                 beginButton.isEnabled = false
             } else {
-                if warmupPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
+                if stretchingPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
                     beginButton.isEnabled = false
                 } else {
                     beginButton.isEnabled = true
@@ -737,12 +957,12 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     func editButtonEnabled() {
         //
         let defaults = UserDefaults.standard
-        var warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        var stretchingPreset = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
         //
-        if warmupPreset.count == 0 {
+        if stretchingPreset.count == 0 {
             editingButton.isEnabled = false
         } else {
-            if warmupPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
+            if stretchingPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
                 editingButton.isEnabled = false
             } else {
                 editingButton.isEnabled = true
@@ -754,97 +974,97 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     func pickerViewEnabled() {
         //
         let defaults = UserDefaults.standard
-        let warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        let stretchingPreset = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
         //
-        if warmupPreset.count == 0 {
+        if stretchingPreset.count == 0 {
             sessionPickerView.isUserInteractionEnabled = false
         } else {
             sessionPickerView.isUserInteractionEnabled = true
         }
     }
-//
-// Custom Sessions -----------------------------------------------------------------------------------------------------
-//
+    //
+    // Custom Sessions -----------------------------------------------------------------------------------------------------
+    //
     // Set Personalized Preset
     var okAction = UIAlertAction()
     //
-    @IBAction func addCustomWarmup(_ sender: Any) {
+    @IBAction func addCustomStretchingSession(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-        var presetTextArray = defaults.object(forKey: "warmupPresetTextsCustom") as! [String]
+        var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+        var presetTextArray = defaults.object(forKey: "stretchingPresetTextsCustom") as! [String]
         //
-        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
-            // Alert and Functions
+        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+        // Alert and Functions
+        //
+        let inputTitle = NSLocalizedString("stretchingInputTitle", comment: "")
+        //
+        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+        alert.view.tintColor = colour2
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        //2. Add the text field
+        alert.addTextField { (textField: UITextField) in
+            textField.text = " "
+            textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
+            textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
+        }
+        // 3. Get the value from the text field, and perform actions upon OK press
+        okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             //
-            let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
+            let textField = alert?.textFields![0]
+            // Update Preset Text Arrays
+            presetTextArray.append((textField?.text)!)
+            defaults.set(presetTextArray, forKey: "stretchingPresetTextsCustom")
+            // Add New empty array
+            customKeyArray.append([])
+            defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
+            // Add new sets and reps arrays
+            customSetsArray.append([])
+            defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
             //
-            let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-            alert.view.tintColor = colour2
-            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-            //2. Add the text field
-            alert.addTextField { (textField: UITextField) in
-                textField.text = " "
-                textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
-                textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
-            }
-            // 3. Get the value from the text field, and perform actions upon OK press
-            okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            customRepsArray.append([])
+            defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+            //
+            defaults.synchronize()
+            // Flash Screen
+            self.sessionPickerView.reloadAllComponents()
+            self.sessionPickerView.selectRow(self.sessionPickerView.selectedRow(inComponent: 0) + 1, inComponent: 0, animated: true)
+            self.customTableView.reloadData()
+            //
+            self.beginButtonEnabled()
+            self.editButtonEnabled()
+            self.pickerViewEnabled()
+            
+            //
+            // Initial Element Positions
+            if customKeyArray.count != 0 {
                 //
-                let textField = alert?.textFields![0]
-                // Update Preset Text Arrays
-                presetTextArray.append((textField?.text)!)
-                defaults.set(presetTextArray, forKey: "warmupPresetTextsCustom")
-                // Add New empty array
-                customKeyArray.append([])
-                defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
-                // Add new sets and reps arrays
-                customSetsArray.append([])
-                defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+                self.presetsConstraint.constant = 0
                 //
-                customRepsArray.append([])
-                defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+                self.tableViewConstraint.constant = 49
+                self.tableViewConstraint1.constant = 49.75
                 //
-                defaults.synchronize()
-                // Flash Screen
-                self.sessionPickerView.reloadAllComponents()
-                self.sessionPickerView.selectRow(self.sessionPickerView.selectedRow(inComponent: 0) + 1, inComponent: 0, animated: true)
-                self.customTableView.reloadData()
+                self.seperatorConstraint.constant = 49.25
                 //
-                self.beginButtonEnabled()
-                self.editButtonEnabled()
-                self.pickerViewEnabled()
-                
+                self.beginButtonConstraint.constant = 0
                 //
-                // Initial Element Positions
-                if customKeyArray.count != 0 {
-                    //
-                    self.presetsConstraint.constant = 0
-                    //
-                    self.tableViewConstraint.constant = 49
-                    self.tableViewConstraint1.constant = 49.75
-                    //
-                    self.seperatorConstraint.constant = 49.25
-                    //
-                    self.beginButtonConstraint.constant = 0
-                    //
-                    UIView.animate(withDuration: 0.4) {
-                        self.view.layoutIfNeeded()
-                        self.editingButton.alpha = 1
-                        self.removePreset.alpha = 1
-                    }
+                UIView.animate(withDuration: 0.4) {
+                    self.view.layoutIfNeeded()
+                    self.editingButton.alpha = 1
+                    self.removePreset.alpha = 1
                 }
-            })
-            okAction.isEnabled = false
-            alert.addAction(okAction)
-            // Cancel reset action
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
-                UIAlertAction in
             }
-            alert.addAction(cancelAction)
-            // 4. Present the alert.
-            self.present(alert, animated: true, completion: nil)
+        })
+        okAction.isEnabled = false
+        alert.addAction(okAction)
+        // Cancel reset action
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        alert.addAction(cancelAction)
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
         //
     }
     
@@ -856,20 +1076,20 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             okAction.isEnabled = true
         }
     }
-
+    
     // Remove Personalized Preset
-    @IBAction func removeCustomWarmup(_ sender: Any) {
+    @IBAction func removeCustomStretchingSession(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-        var presetTextArray = defaults.object(forKey: "warmupPresetTextsCustom") as! [String]
+        var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+        var presetTextArray = defaults.object(forKey: "stretchingPresetTextsCustom") as! [String]
         //
-        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
         //
         let selectedRow = sessionPickerView.selectedRow(inComponent: 0)
         //
-        let inputTitle = NSLocalizedString("warmupRemoveTitle", comment: "")
+        let inputTitle = NSLocalizedString("stretchingRemoveTitle", comment: "")
         //
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = colour2
@@ -880,16 +1100,16 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             if presetTextArray.count != 0 {
                 //
                 customKeyArray.remove(at: selectedRow)
-                defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
+                defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
                 //
                 presetTextArray.remove(at: selectedRow)
-                defaults.set(presetTextArray, forKey: "warmupPresetTextsCustom")
+                defaults.set(presetTextArray, forKey: "stretchingPresetTextsCustom")
                 //
                 customSetsArray.remove(at: selectedRow)
-                defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+                defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
                 //
                 customRepsArray.remove(at: selectedRow)
-                defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+                defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
                 //
                 defaults.synchronize()
                 
@@ -940,13 +1160,13 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     
     
     
-//
-// Picker View ----------------------------------------------------------------------------------------------------
-//
+    //
+    // Picker View ----------------------------------------------------------------------------------------------------
+    //
     // Number of components
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         if pickerView == sessionPickerView {
-          return 1
+            return 1
         } else if pickerView == setsRepsPicker {
             return 2
         }
@@ -956,7 +1176,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == sessionPickerView {
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTextsCustom") as! [String]
             return titleDataArray.count
         } else if pickerView == setsRepsPicker {
             if component == 0{
@@ -973,7 +1193,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         if pickerView == sessionPickerView {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTextsCustom") as! [String]
             //
             if titleDataArray.count > 0 {
                 let titleData = titleDataArray[row]
@@ -983,7 +1203,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 rowLabel.textAlignment = .center
                 return rowLabel
             }
-        //
+            //
         } else if pickerView == setsRepsPicker {
             //
             if component == 0 {
@@ -994,7 +1214,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 //
                 setsLabel.textAlignment = .center
                 return setsLabel
-            //
+                //
             } else if component == 1 {
                 //
                 let repsLabel = UILabel()
@@ -1019,10 +1239,10 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 repsLabel.textColor = colour1
                 repsLabel.textAlignment = .center
                 return repsLabel
-            //
+                //
             }
         }
-    return UILabel()
+        return UILabel()
     }
     
     // Row height
@@ -1035,7 +1255,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         if pickerView == sessionPickerView {
             return sessionPickerView.frame.size.width
-        //
+            //
         } else if pickerView == setsRepsPicker {
             if component == 0 {
                 return (setsRepsPicker.frame.size.width / 3)
@@ -1043,7 +1263,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 return (setsRepsPicker.frame.size.width / 3)
             }
         }
-    return 0
+        return 0
     }
     
     // Did select row
@@ -1053,7 +1273,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             //
             self.customTableView.reloadData()
             flashScreen()
-        //
+            //
         } else if pickerView == setsRepsPicker {
             //
             if component ==  0{
@@ -1063,20 +1283,20 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 } else {
                     self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
                 }
-            // Row Label
-            //
+                // Row Label
+                //
             } else {
             }
         }
     }
     
     
-//
-// Table View ------------------------------------------------------------------------------------------------------------
-//
+    //
+    // Table View ------------------------------------------------------------------------------------------------------------
+    //
     // Number of Sections
     func numberOfSections(in tableView: UITableView) -> Int {
-
+        
         switch tableView {
         case customTableView:
             return 1
@@ -1085,7 +1305,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             return numberOfSections
         default: break
         }
-    return 0
+        return 0
     }
     
     // Title for header
@@ -1095,7 +1315,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         case customTableView:
             //
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTextsCustom") as! [String]
             if titleDataArray.count != 0 {
                 return titleDataArray[sessionPickerView.selectedRow(inComponent: 0)]
             } else {
@@ -1106,7 +1326,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             return NSLocalizedString(tableViewSectionArray[section], comment: "")
         default: break
         }
-    return ""
+        return ""
     }
     
     // Will display header
@@ -1114,12 +1334,12 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     {
         switch tableView {
         case customTableView:
-        let header = view as! UITableViewHeaderFooterView
+            let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
             header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             header.contentView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             header.contentView.tintColor = colour1
-            //
+        //
         case movementsTableView:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
@@ -1141,7 +1361,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         case customTableView:
             //
             let defaults = UserDefaults.standard
-            let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+            let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
             //
             if customKeyArray.count == 0 {
                 return 1
@@ -1155,7 +1375,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         default: break
         }
-    return 0
+        return 0
     }
     
     // Cell for row
@@ -1165,10 +1385,10 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         case customTableView:
             //
             let defaults = UserDefaults.standard
-            let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+            let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
             //
-            var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-            var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+            var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
+            var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
             //
             if customKeyArray.count == 0 {
                 //
@@ -1183,7 +1403,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
                 //
                 return cell
-            //
+                //
             } else {
                 //
                 if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count  {
@@ -1199,13 +1419,13 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
                     //
                     return cell
-                //
+                    //
                 } else {
                     //
                     let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                     //
                     let keyIndex = customKeyArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]
-                    cell.textLabel?.text = NSLocalizedString(warmupMovementsDictionary[keyIndex]!, comment: "")
+                    cell.textLabel?.text = NSLocalizedString(stretchingMovementsDictionary[keyIndex]!, comment: "")
                     //
                     cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
                     cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -1238,7 +1458,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
             let keyIndex = fullKeyArray[indexPath.section][indexPath.row]
-            cell.textLabel?.text = NSLocalizedString(warmupMovementsDictionary[keyIndex]!, comment: "")
+            cell.textLabel?.text = NSLocalizedString(stretchingMovementsDictionary[keyIndex]!, comment: "")
             //
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -1259,7 +1479,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         default: break
         }
-    return UITableViewCell()
+        return UITableViewCell()
     }
     
     // Height for row
@@ -1269,16 +1489,16 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         case customTableView:
             //
             let defaults = UserDefaults.standard
-            let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+            let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
             //
             if customKeyArray.count == 0 {
                 return 49
-            //
+                //
             } else {
                 //
                 if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count  {
                     return 49
-                //
+                    //
                 } else {
                     return 72
                 }
@@ -1287,53 +1507,28 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             return 72
         default: break
         }
-    return 72
+        return 72
     }
     
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
         //
-        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
         // If no session created
         if customKeyArray.count == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
         } else {
-        switch tableView {
-        //
-        case customTableView:
+            switch tableView {
             //
-            selectedRow = indexPath.row
-            //
-            if customKeyArray.count == 0 {
+            case customTableView:
                 //
-                movementsTableView.alpha = 0
-                UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
-                let selectedCell = tableView.cellForRow(at: indexPath)
-                movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+                selectedRow = indexPath.row
                 //
-                backgroundViewExpanded.alpha = 0
-                UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
-                backgroundViewExpanded.frame = UIScreen.main.bounds
-                // Animate table fade and size
-                // Alpha
-                UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
-                    self.movementsTableView.alpha = 1
-                    //
-                }, completion: nil)
-                // Position
-                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
-                    //
-                    self.backgroundViewExpanded.alpha = 0.7
-                }, completion: nil)
-            //
-            } else {
-                //
-                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+                if customKeyArray.count == 0 {
                     //
                     movementsTableView.alpha = 0
                     UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
@@ -1355,106 +1550,131 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                         //
                         self.backgroundViewExpanded.alpha = 0.7
                     }, completion: nil)
-                //
+                    //
                 } else {
-                    // View
-                    setsRepsView.alpha = 0
-                    UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
-                    let selectedCell = tableView.cellForRow(at: indexPath)
-                    setsRepsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
-                    // selected row
-                    setsRepsPicker.selectRow(customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 0, animated: true)
-                    setsRepsPicker.selectRow(customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 1, animated: true)
                     //
-                    let componentWidth = setsRepsPicker.frame.size.width / 3
-                    let componentWidthFourth = componentWidth / 4
-                    // picker
-                    setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: setsRepsView.frame.size.width + componentWidthFourth, height: 147)
-                    // ok
-                    okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
-                    //
-                    self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                    //
-                    backgroundViewExpanded.alpha = 0
-                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
-                    backgroundViewExpanded.frame = UIScreen.main.bounds
-                    // Animate table fade and size
-                    // Alpha
-                    UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
-                        self.setsRepsView.alpha = 1
+                    if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
                         //
-                    }, completion: nil)
-                    // Position
-                    UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                        movementsTableView.alpha = 0
+                        UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
+                        let selectedCell = tableView.cellForRow(at: indexPath)
+                        movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
                         //
-                        self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
-                        self.setsRepsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
+                        backgroundViewExpanded.alpha = 0
+                        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
+                        backgroundViewExpanded.frame = UIScreen.main.bounds
+                        // Animate table fade and size
+                        // Alpha
+                        UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
+                            self.movementsTableView.alpha = 1
+                            //
+                        }, completion: nil)
+                        // Position
+                        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                            self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
+                            //
+                            self.backgroundViewExpanded.alpha = 0.7
+                        }, completion: nil)
+                        //
+                    } else {
+                        // View
+                        setsRepsView.alpha = 0
+                        UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
+                        let selectedCell = tableView.cellForRow(at: indexPath)
+                        setsRepsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+                        // selected row
+                        setsRepsPicker.selectRow(customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 0, animated: true)
+                        setsRepsPicker.selectRow(customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 1, animated: true)
+                        //
+                        let componentWidth = setsRepsPicker.frame.size.width / 3
+                        let componentWidthFourth = componentWidth / 4
                         // picker
-                        self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+                        setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: setsRepsView.frame.size.width + componentWidthFourth, height: 147)
                         // ok
-                        self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
-                        // Sets Indicator Label
+                        okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
+                        //
                         self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                        self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
                         //
-                        //
-                        self.backgroundViewExpanded.alpha = 0.7
-                        
-                    }, completion: nil)
-            }
-        }
-        //
-        case movementsTableView:
-            //
-            customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].append(fullKeyArray[indexPath.section][indexPath.row])
-            defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
-            // sets
-            customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
-            defaults.set(customSetsArray, forKey: "warmupSetsCustom")
-            // reps
-            customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
-            defaults.set(customRepsArray, forKey: "warmupRepsCustom")
-            //
-            defaults.synchronize()
-            // Remove Table
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.movementsTableView.alpha = 0
-                //
-                self.backgroundViewExpanded.alpha = 0
-                //
-            }, completion: nil)
-            //
-            let delayInSeconds = 0.4
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                self.movementsTableView.removeFromSuperview()
-                self.backgroundViewExpanded.removeFromSuperview()
-                //
-                self.customTableView.reloadData()
-                // Scroll to Bottom
-                if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
-                    //
-                    self.customTableView.setContentOffset(CGPoint(x: 0, y: self.customTableView.contentSize.height - self.customTableView.frame.size.height), animated: true)
+                        backgroundViewExpanded.alpha = 0
+                        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
+                        backgroundViewExpanded.frame = UIScreen.main.bounds
+                        // Animate table fade and size
+                        // Alpha
+                        UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
+                            self.setsRepsView.alpha = 1
+                            //
+                        }, completion: nil)
+                        // Position
+                        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                            //
+                            self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
+                            self.setsRepsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
+                            // picker
+                            self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+                            // ok
+                            self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
+                            // Sets Indicator Label
+                            self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+                            self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+                            //
+                            //
+                            self.backgroundViewExpanded.alpha = 0.7
+                            
+                        }, completion: nil)
+                    }
                 }
+            //
+            case movementsTableView:
+                //
+                customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].append(fullKeyArray[indexPath.section][indexPath.row])
+                defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
+                // sets
+                customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
+                defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
+                // reps
+                customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
+                defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+                //
+                defaults.synchronize()
+                // Remove Table
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    self.movementsTableView.alpha = 0
+                    //
+                    self.backgroundViewExpanded.alpha = 0
+                    //
+                }, completion: nil)
+                //
+                let delayInSeconds = 0.4
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                    self.movementsTableView.removeFromSuperview()
+                    self.backgroundViewExpanded.removeFromSuperview()
+                    //
+                    self.customTableView.reloadData()
+                    // Scroll to Bottom
+                    if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
+                        //
+                        self.customTableView.setContentOffset(CGPoint(x: 0, y: self.customTableView.contentSize.height - self.customTableView.frame.size.height), animated: true)
+                    }
+                }
+            //
+            default: break
             }
-        //
-        default: break
-        }
-        //
-        tableView.deselectRow(at: indexPath, animated: true)
-        beginButtonEnabled()
-        editButtonEnabled()
+            //
+            tableView.deselectRow(at: indexPath, animated: true)
+            beginButtonEnabled()
+            editButtonEnabled()
         }
     }
     
     
-//
-// TableView Editing -----------------------------------------------------------------------------------------------------
-//
+    //
+    // TableView Editing -----------------------------------------------------------------------------------------------------
+    //
     // Can edit row
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         //
         let defaults = UserDefaults.standard
-        let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
         //
         if customKeyArray.count == 0 {
             return false
@@ -1471,7 +1691,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         //
         let defaults = UserDefaults.standard
-        let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
         //
         if customKeyArray.count == 0 {
             return false
@@ -1488,24 +1708,24 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
         // Key
         let itemToMove = customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
         customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].insert(itemToMove, at: destinationIndexPath.row)
         //
-        defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
+        defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
         // Sets
         let setToMove = customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
         customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(setToMove, at: destinationIndexPath.row)
         //
-        defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+        defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
         // Reps
         let repToMove = customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
         customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(repToMove, at: destinationIndexPath.row)
         //
-        defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+        defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
         //
         defaults.synchronize()
     }
@@ -1514,7 +1734,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
         //
         if proposedDestinationIndexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
             return NSIndexPath(row: proposedDestinationIndexPath.row - 1, section: proposedDestinationIndexPath.section) as IndexPath
@@ -1534,18 +1754,18 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         if editingStyle == UITableViewCellEditingStyle.delete {
             let defaults = UserDefaults.standard
-            var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-            var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-            var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+            var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+            var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
+            var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
             // Key
             customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
+            defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
             // sets
             customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+            defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
             // reps
             customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+            defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
             //
             defaults.synchronize()
             //
@@ -1554,26 +1774,26 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-//
-// Table view related button actions ------------------------------------------------------------------------------------------------
-//
+    //
+    // Table view related button actions ------------------------------------------------------------------------------------------------
+    //
     // Add movement table background (dismiss table)
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.movementsTableView.alpha = 0
-                self.setsRepsView.alpha = 0
-                //
-                self.backgroundViewExpanded.alpha = 0
-            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.movementsTableView.alpha = 0
+            self.setsRepsView.alpha = 0
             //
-            let delayInSeconds = 0.4
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                self.movementsTableView.removeFromSuperview()
-                self.setsRepsView.removeFromSuperview()
-                //
-                self.backgroundViewExpanded.removeFromSuperview()
-            }
+            self.backgroundViewExpanded.alpha = 0
+        }, completion: nil)
+        //
+        let delayInSeconds = 0.4
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            self.movementsTableView.removeFromSuperview()
+            self.setsRepsView.removeFromSuperview()
+            //
+            self.backgroundViewExpanded.removeFromSuperview()
+        }
     }
     
     
@@ -1586,7 +1806,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             self.editingButton.setTitle(NSLocalizedString("edit", comment: ""), for: .normal)
             self.sessionPickerView.isUserInteractionEnabled = true
             self.beginButton.isEnabled = true
-        //
+            //
         } else {
             self.customTableView.setEditing(true, animated: true)
             self.editingButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
@@ -1594,23 +1814,23 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             self.beginButton.isEnabled = false
         }
     }
-   
     
-//
-// Picker Related actions ------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Picker Related actions ------------------------------------------------------------------------------------------------
+    //
     // Ok button action
     func okButtonAction(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
         //
         customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = setsRepsPicker.selectedRow(inComponent: 0)
-        defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+        defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
         //
         customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = setsRepsPicker.selectedRow(inComponent: 1)
-        defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+        defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
         //
         defaults.synchronize()
         //
@@ -1631,9 +1851,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-//
-// Information Actions ------------------------------------------------------------------------------------------------
-//
+    //
+    // Information Actions ------------------------------------------------------------------------------------------------
+    //
     // QuestionMark Button Action
     @IBAction func informationButtonAction(_ sender: Any) {
         // Slide information down
@@ -1695,9 +1915,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-//
-// Expand/Retract Image ------------------------------------------------------------------------------------------------
-//
+    //
+    // Expand/Retract Image ------------------------------------------------------------------------------------------------
+    //
     // Expand Image
     let expandedImage = UIImageView()
     let backgroundViewImage = UIButton()
@@ -1759,19 +1979,19 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     
     
     
-//
-// Begin Button ------------------------------------------------------------------------------------------------
-//
+    //
+    // Begin Button ------------------------------------------------------------------------------------------------
+    //
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         
         if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
             
-            performSegue(withIdentifier: "warmupCustomSegue1", sender: nil)
+            performSegue(withIdentifier: "stretchingCustomSegue1", sender: nil)
             
         } else {
             
-            performSegue(withIdentifier: "warmupCustomSegue2", sender: nil)
+            performSegue(withIdentifier: "stretchingCustomSegue2", sender: nil)
         }
         
         
@@ -1785,23 +2005,23 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-//
-// Pass Arrays ------------------------------------------------------------------------------------------------
-//
+    //
+    // Pass Arrays ------------------------------------------------------------------------------------------------
+    //
     // Pass Array to next ViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
         let defaults = UserDefaults.standard
         //
-        var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
         //
-        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
         //
-        let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
-
+        let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTextsCustom") as! [String]
         
-        if (segue.identifier == "warmupCustomSegue1") {
+        
+        if (segue.identifier == "stretchingCustomSegue1") {
             //
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.viewControllers.first as! SessionScreen
@@ -1809,7 +2029,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             // Compress Arrays
             for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
                 //
-                warmupArray.append(warmupMovementsDictionary[i]!)
+                stretchingArray.append(stretchingMovementsDictionary[i]!)
                 //
                 demonstrationArray.append(demonstrationDictionary[i]!)
                 //
@@ -1827,7 +2047,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             //
-            destinationVC.sessionArray = warmupArray
+            destinationVC.sessionArray = stretchingArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
             destinationVC.demonstrationArray = demonstrationArray
@@ -1836,7 +2056,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             //
             destinationVC.sessionType = 0
             //
-        } else if (segue.identifier == "warmupCustomSegue2") {
+        } else if (segue.identifier == "stretchingCustomSegue2") {
             //
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
@@ -1844,7 +2064,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             // Compress Arrays
             for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
                 //
-                warmupArray.append(warmupMovementsDictionary[i]!)
+                stretchingArray.append(stretchingMovementsDictionary[i]!)
                 //
                 demonstrationArray.append(demonstrationDictionary[i]!)
                 //
@@ -1862,7 +2082,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             //
-            destinationVC.sessionArray = warmupArray
+            destinationVC.sessionArray = stretchingArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
             destinationVC.demonstrationArray = demonstrationArray
@@ -1874,12 +2094,12 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             destinationVC.sessionTitle = titleDataArray[sessionPickerView.numberOfRows(inComponent: 0)]
         }
     }
- 
     
     
-//
-// Walkthrough ------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Walkthrough ------------------------------------------------------------------------------------------------
+    //
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()
@@ -2158,5 +2378,5 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-//
+    //
 }

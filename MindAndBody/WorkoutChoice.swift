@@ -68,6 +68,8 @@ class WorkoutChoice: UIViewController  {
         // Titles
         navigationBar.title = (NSLocalizedString("workout", comment: ""))
         
+        //
+        
         // Button Titles
         //
         gym.setTitle(NSLocalizedString("gym", comment: ""), for: UIControlState.normal)

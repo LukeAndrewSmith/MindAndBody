@@ -179,20 +179,20 @@ class SessionScreenOverview: UITableViewController {
         //
         // Rest Timer Notification
         //
-        if #available(iOS 10.0, *) {
-            //
-            let content = UNMutableNotificationContent()
-            content.title = NSLocalizedString("restOver", comment: "")
-            content.body = NSLocalizedString("nextSet", comment: "")
-            content.sound = UNNotificationSound.default()
-            //
-            let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
-            //
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTimes[sessionType]), repeats: false)
-            let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
-            //
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        }
+        //
+        let content = UNMutableNotificationContent()
+        content.title = NSLocalizedString("restOver", comment: "")
+        content.body = NSLocalizedString("nextSet", comment: "")
+        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+        content.sound = UNNotificationSound.default()
+        //
+        let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+        //
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTimes[sessionType]), repeats: false)
+        let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
+        //
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+
         
         //
         let buttonRow = sender.tag
@@ -674,6 +674,7 @@ class SessionScreenOverview: UITableViewController {
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
             //
+            destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //

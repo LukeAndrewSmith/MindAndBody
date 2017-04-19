@@ -294,15 +294,16 @@ class StretchingChoice: UIViewController  {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
         if (segue.identifier == "stretchingSegue") {
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            navigationItem.backBarButtonItem = backItem
-            
             // Pass data to next screen
             let destinationVC = segue.destination as! StretchingChoiceFinal
             // indicate which button pressed
             destinationVC.stretchingType = stretchingType
         }
+        
+        // Remove Back Bar Text
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
     }
     
     

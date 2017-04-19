@@ -176,7 +176,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         //
         self.view.backgroundColor = colour1
         //
-        backButton.tintColor = colour1
+        backButton.tintColor = .clear
         
         // Images
         //
@@ -385,8 +385,8 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         
         // Images
         //
-        demonstrationImage.image = UIImage.gif
-            //demonstrationArray[sessionScreenIndex]
+        //demonstrationImage.loadGif(name: "TestGif")
+        demonstrationImage.image = demonstrationArray[sessionScreenIndex]
         //
         bodyImage.image = targetAreaArray[sessionScreenIndex]
         // Scroll
@@ -571,20 +571,17 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
                 self.startAnimation()
                 self.timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
                 //
-                if #available(iOS 10.0, *) {
-                    //
-                    let content = UNMutableNotificationContent()
-                    content.title = NSLocalizedString("timerEnd", comment: "")
-                    content.body = " "
-                    content.sound = UNNotificationSound.default()
-                    //
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
-                    let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
-                    //
-                    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-                } else {
-                    // Fallback on earlier versions
-                }
+                //
+                let content = UNMutableNotificationContent()
+                content.title = NSLocalizedString("timerEnd", comment: "")
+                content.body = " "
+                content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+                content.sound = UNNotificationSound.default()
+                //
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
+                let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
+                //
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
             }
         }
     }
@@ -793,26 +790,19 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         //
         // Rest Timer Notification
         //
-        if #available(iOS 10.0, *) {
-            //
-            let content = UNMutableNotificationContent()
-            content.title = NSLocalizedString("restOver", comment: "")
-            content.body = NSLocalizedString("nextSet", comment: "")
-            content.sound = UNNotificationSound.default()
-            //
-            let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
-            //
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTimes[sessionType]), repeats: false)
-            let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
-            //
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        }
         //
-        buttonArray[buttonNumber].isEnabled = false
+        let content = UNMutableNotificationContent()
+        content.title = NSLocalizedString("restOver", comment: "")
+        content.body = NSLocalizedString("nextSet", comment: "")
+        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+        content.sound = UNNotificationSound.default()
         //
-        let delayInSeconds = 30.0
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            //
+        let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+        //
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTimes[sessionType]), repeats: false)
+        let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
+        //
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { finished in
             if self.buttonArray.count == 1 {
             } else {
                 if self.buttonNumber < 2 {
@@ -820,7 +810,11 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
                     self.buttonArray[self.buttonNumber].isEnabled = true
                 }
             }
-        }
+        })
+        
+        //
+        buttonArray[buttonNumber].isEnabled = false
+        //
         //
         sender.backgroundColor = colour1
         sender.isEnabled = false
@@ -837,7 +831,9 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         //
         } else {
             //
+            backButton.tintColor = colour1
             sessionScreenIndex = sessionScreenIndex + 1
+            buttonNumber = 0
             displayContent()
         }
         //
@@ -848,9 +844,19 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     @IBAction func backButton(_ sender: Any) {
         //
         if sessionScreenIndex == 0 {
+            
+        } else if sessionScreenIndex == 1 {
+            //
+            backButton.tintColor = .clear
+            sessionScreenIndex = sessionScreenIndex - 1
+            buttonNumber = 0
+            //
+            flashScreen()
+            displayContent()
         } else {
             //
             sessionScreenIndex = sessionScreenIndex - 1
+            buttonNumber = 0
             //
             flashScreen()
             displayContent()

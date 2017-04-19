@@ -560,22 +560,19 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
                 self.addCircle()
                 self.startAnimation()
                 self.timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+               
                 //
-                if #available(iOS 10.0, *) {
-                    //
-                    let content = UNMutableNotificationContent()
-                    content.title = NSLocalizedString("timerEnd", comment: "")
-                    content.body = " "
-                    content.sound = UNNotificationSound.default()
-                    //
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
-                    let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
-                    //
-                    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                let content = UNMutableNotificationContent()
+                content.title = NSLocalizedString("timerEnd", comment: "")
+                content.body = " "
+                content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+                content.sound = UNNotificationSound.default()
                 //
-                } else {
-                    // Fallback on earlier versions
-                }
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
+                let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
+                //
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                //
             }
         }
     }
@@ -778,21 +775,20 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         //
         // Rest Timer Notification
         //
-        if #available(iOS 10.0, *) {
-            //
-            let content = UNMutableNotificationContent()
-            content.title = NSLocalizedString("restOver", comment: "")
-            content.body = NSLocalizedString("nextSet", comment: "")
-            content.sound = UNNotificationSound.default()
-            //
-            let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
-            //
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTimes[sessionType]), repeats: false)
-            let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
-            //
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        }
+        let content = UNMutableNotificationContent()
+        content.title = NSLocalizedString("restOver", comment: "")
+        content.body = NSLocalizedString("nextSet", comment: "")
+        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+        content.sound = UNNotificationSound.default()
+        //
+        let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+        //
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTimes[sessionType]), repeats: false)
+        let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
+        //
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
+
         //
         buttonArray[buttonNumber[selectedMovement]].isEnabled = false
         
