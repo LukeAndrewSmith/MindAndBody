@@ -102,11 +102,10 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     // Timer Show Buttons
     @IBOutlet weak var timerButton: UIButton!
     
-    // Progress Bar
-    @IBOutlet weak var progressBarView: UIView!
-    @IBOutlet weak var progressBar: UIProgressView!
+    // Round View
     //
-    @IBOutlet weak var progressBarLeft: NSLayoutConstraint!
+    @IBOutlet weak var roundView: UIView!
+    
     
     // Labels
     // Sets and Reps
@@ -114,7 +113,6 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     // Explanation Text
     let explanationText = UILabel()
     // Progress Label
-    @IBOutlet weak var progressLabel: UILabel!
     
     // Hide Screen
     @IBOutlet weak var hideScreen: UIButton!
@@ -831,7 +829,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             //
         } else {
             //
-            backButton.tintColor = colour1
+            backButton.tintColor = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
             sessionScreenIndex = sessionScreenIndex + 1
             buttonNumber = 0
             displayContent()

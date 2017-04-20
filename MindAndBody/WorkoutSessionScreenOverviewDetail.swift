@@ -98,19 +98,15 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
     // Timer Show Buttons
     @IBOutlet weak var timerButton: UIButton!
     
-    // Progress Bar
-    @IBOutlet weak var progressBarView: UIView!
-    @IBOutlet weak var progressBar: UIProgressView!
+    // Round View
     //
-    @IBOutlet weak var progressBarLeft: NSLayoutConstraint!
+    @IBOutlet weak var roundView: UIView!
     
     // Title Labels
     // Sets and Reps
     @IBOutlet weak var setsRepsLabel: UILabel!
     // Explanation Text
     let explanationText = UILabel()
-    // Progress Label
-    @IBOutlet weak var progressLabel: UILabel!
     
     // Hide Screen
     @IBOutlet weak var hideScreen: UIButton!

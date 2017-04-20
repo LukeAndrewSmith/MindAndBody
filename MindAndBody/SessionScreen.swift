@@ -831,7 +831,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         //
         } else {
             //
-            backButton.tintColor = colour1
+            backButton.tintColor = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
             sessionScreenIndex = sessionScreenIndex + 1
             buttonNumber = 0
             displayContent()

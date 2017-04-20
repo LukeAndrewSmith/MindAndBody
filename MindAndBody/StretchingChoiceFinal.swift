@@ -737,7 +737,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     var presetsArraysWorkout: [[[Int]]] =
         [
             [
-                [],
+                [0, 1, 2],
                 [],
             ],
             [
