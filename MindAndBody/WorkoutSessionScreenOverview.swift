@@ -1,8 +1,8 @@
 //
-//  SessionScreenOverview.swift
-//  MyFitnessMentor
+//  WorkoutSessionScreenOverview.swift
+//  MindAndBody
 //
-//  Created by Luke Smith on 16.03.17.
+//  Created by Luke Smith on 20.04.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -15,7 +15,7 @@ import UserNotifications
 // Custom Overview Tableview Cells ---------------------------------------------------------------------------
 //
 // Overview TableView Cell
-class WorkoutOverviewTableViewCell: UITableViewCell {
+class OverviewTableViewCell: UITableViewCell {
     // Demonstration Image View
     @IBOutlet weak var demonstrationImageView: UIImageView!
     // Title Label
@@ -26,16 +26,22 @@ class WorkoutOverviewTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonView: UIView!
 }
 
+// Overview End Cell
+class EndTableViewCell: UITableViewCell {
+    // Title Label
+    @IBOutlet weak var titleLabel: UILabel!
+}
+
 
 //
 // Session Screen Overview Class ------------------------------------------------------------------------------------
 //
-class SessionScreenOverview: UITableViewController {
+class WorkoutSessionScreenOverview: UITableViewController {
     
     
-//
-// Retreive Arrays ---------------------------------------------------------------------------------------------------
-//
+    //
+    // Retreive Arrays ---------------------------------------------------------------------------------------------------
+    //
     //
     var sessionType = Int()
     
@@ -60,10 +66,10 @@ class SessionScreenOverview: UITableViewController {
     // Explanation Array
     var explanationArray: [String] = []
     
-   
-//
-// Outlets -----------------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Outlets -----------------------------------------------------------------------------------------------------------
+    //
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
@@ -77,9 +83,9 @@ class SessionScreenOverview: UITableViewController {
     let progressBar = UIProgressView()
     
     
-//
-// View did load -----------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load -----------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -99,7 +105,7 @@ class SessionScreenOverview: UITableViewController {
             }
         })
         
-       // self.present(alert, animated: true, completion: (() -> Void)?)
+        // self.present(alert, animated: true, completion: (() -> Void)?)
         
         
         // Navigation Title
@@ -137,10 +143,10 @@ class SessionScreenOverview: UITableViewController {
         fillButtonArray()
     }
     
-
-//
-// Set Buttons -----------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Set Buttons -----------------------------------------------------------------------------------------------
+    //
     // Button Array
     //
     var buttonArray = [[UIButton]]()
@@ -186,7 +192,7 @@ class SessionScreenOverview: UITableViewController {
         let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
         //
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-
+        
         
         //
         let buttonRow = sender.tag
@@ -238,9 +244,9 @@ class SessionScreenOverview: UITableViewController {
     }
     
     
-//
-// TableView ---------------------------------------------------------------------------------------------------------------------
-//
+    //
+    // TableView ---------------------------------------------------------------------------------------------------------------------
+    //
     // Number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -281,7 +287,7 @@ class SessionScreenOverview: UITableViewController {
             }
             //
             header.addSubview(progressBar)
-    
+            
             // Progress Bar
             // Current Button
             let currentButton = Float(buttonNumber.reduce(0, +))
@@ -509,9 +515,9 @@ class SessionScreenOverview: UITableViewController {
     }
     
     
-//
-// Pocket Mode ------------------------------------------------------------------------------------------------------
-//
+    //
+    // Pocket Mode ------------------------------------------------------------------------------------------------------
+    //
     let blurEffectView = UIVisualEffectView()
     let hideLabel = UILabel()
     //
@@ -560,7 +566,7 @@ class SessionScreenOverview: UITableViewController {
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
         //
         self.hideLabel.alpha = 0
-
+        
         //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.blurEffectView.alpha = 0
@@ -575,9 +581,9 @@ class SessionScreenOverview: UITableViewController {
     }
     
     
-//
-// Image -------------------------------------------------------------------------------------------------------
-//
+    //
+    // Image -------------------------------------------------------------------------------------------------------
+    //
     // Expand Image
     let expandedImage = UIImageView()
     let backgroundViewImage = UIButton()
@@ -619,7 +625,7 @@ class SessionScreenOverview: UITableViewController {
         //
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
-
+        
         //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.expandedImage.center.y = (height/2) * 1.5
@@ -651,9 +657,9 @@ class SessionScreenOverview: UITableViewController {
     }
     
     
-//
-// Pass data to next view controller --------------------------------------------------------------------------------
-//
+    //
+    // Pass data to next view controller --------------------------------------------------------------------------------
+    //
     // Prepare for Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "SessionDetailSegue") {
@@ -683,5 +689,5 @@ class SessionScreenOverview: UITableViewController {
             navigationItem.backBarButtonItem = backItem
         }
     }
-//
+    //
 }

@@ -645,7 +645,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     //
     var setsPickerArray: [Int] = [1, 2, 3, 4, 5, 6]
     //                              // Reps                                      Rep Range§                     // Seconds
-    var repsPickerArray: [String] = ["1", "3", "5", "8", "10", "12", "15", "20", "3-5", "5-8", "8-12", "15-20", "15", "30", "60", "90"]
+    var repsPickerArray: [String] = ["1", "3", "5", "8", "10", "12", "15", "20", "3-5", "5-8", "8-12", "15-20", "15s", "30s", "60s", "90s"]
     
     
     //
@@ -679,8 +679,6 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var removePreset: UIButton!
     
     //
-    @IBOutlet weak var presetsConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var tableViewConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var tableViewConstraint1: NSLayoutConstraint!
@@ -778,7 +776,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         // Set Image
         addPreset.setImage(tintedImage1, for: .normal)
         //Image Tint
-        addPreset.tintColor = colour2
+        addPreset.tintColor = colour1
         
         // Minus Button Colour
         let origImage2 = UIImage(named: "Minus")
@@ -786,7 +784,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         // Set Image
         removePreset.setImage(tintedImage2, for: .normal)
         //Image Tint
-        removePreset.tintColor = colour2
+        removePreset.tintColor = colour1
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
@@ -799,8 +797,6 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         if stretchingPreset.count == 0 {
             editingButton.alpha = 0
             removePreset.alpha = 0
-            //
-            presetsConstraint.constant = (view.frame.size.width / 2) - 24.5
             //
             tableViewConstraint.constant = view.frame.size.height - 98
             tableViewConstraint1.constant = -49.25
@@ -1040,7 +1036,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             // Initial Element Positions
             if customKeyArray.count != 0 {
                 //
-                self.presetsConstraint.constant = 0
+                self.removePreset.alpha = 1
                 //
                 self.tableViewConstraint.constant = 49
                 self.tableViewConstraint1.constant = 49.75
@@ -1125,7 +1121,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                 // Initial Element Positions
                 if customKeyArray.count == 0 {
                     //
-                    self.presetsConstraint.constant = (self.view.frame.size.width / 2) - 24.5
+                    self.removePreset.alpha = 1
                     //
                     self.tableViewConstraint.constant = self.view.frame.size.height - 98
                     self.tableViewConstraint1.constant = -49.25
@@ -1227,10 +1223,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                 case 1:
                     repsLabel.text = "         " + String(repsPickerArray[row]) + " " + NSLocalizedString("reps", comment: "")
                 //
-                case 12:
-                    repsLabel.text = "       " + String(repsPickerArray[row]) + " " + NSLocalizedString("sec", comment: "")
-                //
-                case 2...11, 13...15:
+                case 2...15:
                     repsLabel.text = String(repsPickerArray[row])
                 //
                 default: break

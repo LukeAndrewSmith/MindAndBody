@@ -65,6 +65,12 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
     // Collection View
     @IBOutlet weak var collectionView: UICollectionView!
    
+    //
+    @IBOutlet weak var One: UIButton!
+    @IBOutlet weak var Two: UIButton!
+    @IBOutlet weak var Three: UIButton!
+    
+    @IBOutlet weak var stack: UIStackView!
 //
 // View did load --------------------------------------------------------------------------------------------------------
 //
@@ -92,7 +98,14 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         navigationBar.title = NSLocalizedString("schedule", comment: "")
         
         // View
-        view.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+        view.backgroundColor = UIColor(red:0.08, green:0.08, blue:0.08, alpha:1.0)
+        
+        //
+        One.backgroundColor = colour2
+        Two.backgroundColor = colour2
+        Three.backgroundColor = colour2
+        //
+        stack.spacing = 0.25
         
         // Collection View
         //

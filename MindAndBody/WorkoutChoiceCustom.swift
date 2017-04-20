@@ -1,8 +1,8 @@
 //
-//  WarmupChoiceCustom.swift
-//  MyFitnessMentor
+//  WorkoutChoiceCustom.swift
+//  MindAndBody
 //
-//  Created by Luke Smith on 29.03.17.
+//  Created by Luke Smith on 19.04.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -13,12 +13,12 @@ import UIKit
 //
 // Warmup Choice Custom --------------------------------------------------------------------------------------
 //
-class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
-
+class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
-//
-// Arrays -----------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Arrays -----------------------------------------------------------------------------------------------------
+    //
     // Custom Arrays
     //
     var presetTexts: [String] = []
@@ -40,11 +40,11 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     var setsArray: [Int] = []
     //
     var repsArray: [String] = []
-  
     
-//
-// Warmup Arrays -----------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Warmup Arrays -----------------------------------------------------------------------------------------------
+    //
     // TableView Section Array
     var tableViewSectionArray: [String] =
         [
@@ -428,9 +428,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     var repsPickerArray: [String] = ["1", "3", "5", "8", "10", "12", "15", "20", "3-5", "5-8", "8-12", "15-20", "15s", "30s", "60s", "90s"]
     
     
-//
-// Outlets ---------------------------------------------------------------------------------------------------------------------------
-//
+    //
+    // Outlets ---------------------------------------------------------------------------------------------------------------------------
+    //
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
@@ -440,8 +440,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     // Table View
     @IBOutlet weak var customTableView: UITableView!
     
-        // Editing
-        @IBOutlet weak var editingButton: UIButton!
+    // Editing
+    @IBOutlet weak var editingButton: UIButton!
     
     // Information View
     let informationView = UIScrollView()
@@ -459,6 +459,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var removePreset: UIButton!
     
     //
+    @IBOutlet weak var presetsConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var tableViewConstraint: NSLayoutConstraint!
     
@@ -486,9 +487,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     let setsIndicatorLabel = UILabel()
     
     
-//
-// Flash Screen -----------------------------------------------------------------------------------------------
-//
+    //
+    // Flash Screen -----------------------------------------------------------------------------------------------
+    //
     // Flash Screen
     func flashScreen() {
         //
@@ -505,11 +506,11 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             flash.removeFromSuperview()
         })
     }
-   
-
-//
-// View did load  ---------------------------------------------------------------------------------------------------------------------------
-//
+    
+    
+    //
+    // View did load  ---------------------------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -557,7 +558,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         // Set Image
         addPreset.setImage(tintedImage1, for: .normal)
         //Image Tint
-        addPreset.tintColor = colour1
+        addPreset.tintColor = colour2
         
         // Minus Button Colour
         let origImage2 = UIImage(named: "Minus")
@@ -565,7 +566,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         // Set Image
         removePreset.setImage(tintedImage2, for: .normal)
         //Image Tint
-        removePreset.tintColor = colour1
+        removePreset.tintColor = colour2
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
@@ -579,7 +580,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             editingButton.alpha = 0
             removePreset.alpha = 0
             //
-            removePreset.alpha = 0
+            presetsConstraint.constant = (view.frame.size.width / 2) - 24.5
             //
             tableViewConstraint.constant = view.frame.size.height - 98
             tableViewConstraint1.constant = -49.25
@@ -692,9 +693,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-//
-// View did layout subviews Actions -------------------------------------------------------------------------------------------------
-//
+    //
+    // View did layout subviews Actions -------------------------------------------------------------------------------------------------
+    //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // TableView Footer
@@ -706,11 +707,11 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         editButtonEnabled()
         pickerViewEnabled()
     }
-
     
-//
-// Elements check enabled funcs ------------------------------------------------------------------------------
-//
+    
+    //
+    // Elements check enabled funcs ------------------------------------------------------------------------------
+    //
     // Button Enabled
     func beginButtonEnabled() {
         // Begin Button
@@ -761,9 +762,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             sessionPickerView.isUserInteractionEnabled = true
         }
     }
-//
-// Custom Sessions -----------------------------------------------------------------------------------------------------
-//
+    //
+    // Custom Sessions -----------------------------------------------------------------------------------------------------
+    //
     // Set Personalized Preset
     var okAction = UIAlertAction()
     //
@@ -775,75 +776,75 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
         var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
-            // Alert and Functions
+        // Alert and Functions
+        //
+        let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
+        //
+        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+        alert.view.tintColor = colour2
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        //2. Add the text field
+        alert.addTextField { (textField: UITextField) in
+            textField.text = " "
+            textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
+            textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
+        }
+        // 3. Get the value from the text field, and perform actions upon OK press
+        okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             //
-            let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
+            let textField = alert?.textFields![0]
+            // Update Preset Text Arrays
+            presetTextArray.append((textField?.text)!)
+            defaults.set(presetTextArray, forKey: "warmupPresetTextsCustom")
+            // Add New empty array
+            customKeyArray.append([])
+            defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
+            // Add new sets and reps arrays
+            customSetsArray.append([])
+            defaults.set(customSetsArray, forKey: "warmupSetsCustom")
             //
-            let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-            alert.view.tintColor = colour2
-            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-            //2. Add the text field
-            alert.addTextField { (textField: UITextField) in
-                textField.text = " "
-                textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
-                textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
-            }
-            // 3. Get the value from the text field, and perform actions upon OK press
-            okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            customRepsArray.append([])
+            defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+            //
+            defaults.synchronize()
+            // Flash Screen
+            self.sessionPickerView.reloadAllComponents()
+            self.sessionPickerView.selectRow(self.sessionPickerView.selectedRow(inComponent: 0) + 1, inComponent: 0, animated: true)
+            self.customTableView.reloadData()
+            //
+            self.beginButtonEnabled()
+            self.editButtonEnabled()
+            self.pickerViewEnabled()
+            
+            //
+            // Initial Element Positions
+            if customKeyArray.count != 0 {
                 //
-                let textField = alert?.textFields![0]
-                // Update Preset Text Arrays
-                presetTextArray.append((textField?.text)!)
-                defaults.set(presetTextArray, forKey: "warmupPresetTextsCustom")
-                // Add New empty array
-                customKeyArray.append([])
-                defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
-                // Add new sets and reps arrays
-                customSetsArray.append([])
-                defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+                self.presetsConstraint.constant = 0
                 //
-                customRepsArray.append([])
-                defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+                self.tableViewConstraint.constant = 49
+                self.tableViewConstraint1.constant = 49.75
                 //
-                defaults.synchronize()
-                // Flash Screen
-                self.sessionPickerView.reloadAllComponents()
-                self.sessionPickerView.selectRow(self.sessionPickerView.selectedRow(inComponent: 0) + 1, inComponent: 0, animated: true)
-                self.customTableView.reloadData()
+                self.seperatorConstraint.constant = 49.25
                 //
-                self.beginButtonEnabled()
-                self.editButtonEnabled()
-                self.pickerViewEnabled()
-                
+                self.beginButtonConstraint.constant = 0
                 //
-                // Initial Element Positions
-                if customKeyArray.count != 0 {
-                    //
+                UIView.animate(withDuration: 0.4) {
+                    self.view.layoutIfNeeded()
+                    self.editingButton.alpha = 1
                     self.removePreset.alpha = 1
-                    //
-                    self.tableViewConstraint.constant = 49
-                    self.tableViewConstraint1.constant = 49.75
-                    //
-                    self.seperatorConstraint.constant = 49.25
-                    //
-                    self.beginButtonConstraint.constant = 0
-                    //
-                    UIView.animate(withDuration: 0.4) {
-                        self.view.layoutIfNeeded()
-                        self.editingButton.alpha = 1
-                        self.removePreset.alpha = 1
-                    }
                 }
-            })
-            okAction.isEnabled = false
-            alert.addAction(okAction)
-            // Cancel reset action
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
-                UIAlertAction in
             }
-            alert.addAction(cancelAction)
-            // 4. Present the alert.
-            self.present(alert, animated: true, completion: nil)
+        })
+        okAction.isEnabled = false
+        alert.addAction(okAction)
+        // Cancel reset action
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        alert.addAction(cancelAction)
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
         //
     }
     
@@ -855,7 +856,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             okAction.isEnabled = true
         }
     }
-
+    
     // Remove Personalized Preset
     @IBAction func removeCustomWarmup(_ sender: Any) {
         //
@@ -904,7 +905,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 // Initial Element Positions
                 if customKeyArray.count == 0 {
                     //
-                    self.removePreset.alpha = 0
+                    self.presetsConstraint.constant = (self.view.frame.size.width / 2) - 24.5
                     //
                     self.tableViewConstraint.constant = self.view.frame.size.height - 98
                     self.tableViewConstraint1.constant = -49.25
@@ -939,13 +940,13 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     
     
     
-//
-// Picker View ----------------------------------------------------------------------------------------------------
-//
+    //
+    // Picker View ----------------------------------------------------------------------------------------------------
+    //
     // Number of components
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         if pickerView == sessionPickerView {
-          return 1
+            return 1
         } else if pickerView == setsRepsPicker {
             return 2
         }
@@ -982,7 +983,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 rowLabel.textAlignment = .center
                 return rowLabel
             }
-        //
+            //
         } else if pickerView == setsRepsPicker {
             //
             if component == 0 {
@@ -993,7 +994,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 //
                 setsLabel.textAlignment = .center
                 return setsLabel
-            //
+                //
             } else if component == 1 {
                 //
                 let repsLabel = UILabel()
@@ -1015,10 +1016,10 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 repsLabel.textColor = colour1
                 repsLabel.textAlignment = .center
                 return repsLabel
-            //
+                //
             }
         }
-    return UILabel()
+        return UILabel()
     }
     
     // Row height
@@ -1031,7 +1032,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         if pickerView == sessionPickerView {
             return sessionPickerView.frame.size.width
-        //
+            //
         } else if pickerView == setsRepsPicker {
             if component == 0 {
                 return (setsRepsPicker.frame.size.width / 3)
@@ -1039,7 +1040,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 return (setsRepsPicker.frame.size.width / 3)
             }
         }
-    return 0
+        return 0
     }
     
     // Did select row
@@ -1049,7 +1050,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             //
             self.customTableView.reloadData()
             flashScreen()
-        //
+            //
         } else if pickerView == setsRepsPicker {
             //
             if component ==  0{
@@ -1059,20 +1060,20 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 } else {
                     self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
                 }
-            // Row Label
-            //
+                // Row Label
+                //
             } else {
             }
         }
     }
     
     
-//
-// Table View ------------------------------------------------------------------------------------------------------------
-//
+    //
+    // Table View ------------------------------------------------------------------------------------------------------------
+    //
     // Number of Sections
     func numberOfSections(in tableView: UITableView) -> Int {
-
+        
         switch tableView {
         case customTableView:
             return 1
@@ -1081,7 +1082,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             return numberOfSections
         default: break
         }
-    return 0
+        return 0
     }
     
     // Title for header
@@ -1102,7 +1103,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             return NSLocalizedString(tableViewSectionArray[section], comment: "")
         default: break
         }
-    return ""
+        return ""
     }
     
     // Will display header
@@ -1110,12 +1111,12 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     {
         switch tableView {
         case customTableView:
-        let header = view as! UITableViewHeaderFooterView
+            let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
             header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             header.contentView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             header.contentView.tintColor = colour1
-            //
+        //
         case movementsTableView:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
@@ -1151,7 +1152,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         default: break
         }
-    return 0
+        return 0
     }
     
     // Cell for row
@@ -1179,7 +1180,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
                 //
                 return cell
-            //
+                //
             } else {
                 //
                 if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count  {
@@ -1195,7 +1196,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
                     //
                     return cell
-                //
+                    //
                 } else {
                     //
                     let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
@@ -1255,7 +1256,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         default: break
         }
-    return UITableViewCell()
+        return UITableViewCell()
     }
     
     // Height for row
@@ -1269,12 +1270,12 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             //
             if customKeyArray.count == 0 {
                 return 49
-            //
+                //
             } else {
                 //
                 if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count  {
                     return 49
-                //
+                    //
                 } else {
                     return 72
                 }
@@ -1283,7 +1284,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             return 72
         default: break
         }
-    return 72
+        return 72
     }
     
     // Did select row
@@ -1298,38 +1299,13 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         if customKeyArray.count == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
         } else {
-        switch tableView {
-        //
-        case customTableView:
+            switch tableView {
             //
-            selectedRow = indexPath.row
-            //
-            if customKeyArray.count == 0 {
+            case customTableView:
                 //
-                movementsTableView.alpha = 0
-                UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
-                let selectedCell = tableView.cellForRow(at: indexPath)
-                movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+                selectedRow = indexPath.row
                 //
-                backgroundViewExpanded.alpha = 0
-                UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
-                backgroundViewExpanded.frame = UIScreen.main.bounds
-                // Animate table fade and size
-                // Alpha
-                UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
-                    self.movementsTableView.alpha = 1
-                    //
-                }, completion: nil)
-                // Position
-                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
-                    //
-                    self.backgroundViewExpanded.alpha = 0.7
-                }, completion: nil)
-            //
-            } else {
-                //
-                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+                if customKeyArray.count == 0 {
                     //
                     movementsTableView.alpha = 0
                     UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
@@ -1351,101 +1327,126 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                         //
                         self.backgroundViewExpanded.alpha = 0.7
                     }, completion: nil)
-                //
+                    //
                 } else {
-                    // View
-                    setsRepsView.alpha = 0
-                    UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
-                    let selectedCell = tableView.cellForRow(at: indexPath)
-                    setsRepsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
-                    // selected row
-                    setsRepsPicker.selectRow(customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 0, animated: true)
-                    setsRepsPicker.selectRow(customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 1, animated: true)
                     //
-                    let componentWidth = setsRepsPicker.frame.size.width / 3
-                    let componentWidthFourth = componentWidth / 4
-                    // picker
-                    setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: setsRepsView.frame.size.width + componentWidthFourth, height: 147)
-                    // ok
-                    okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
-                    //
-                    self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                    //
-                    backgroundViewExpanded.alpha = 0
-                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
-                    backgroundViewExpanded.frame = UIScreen.main.bounds
-                    // Animate table fade and size
-                    // Alpha
-                    UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
-                        self.setsRepsView.alpha = 1
+                    if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
                         //
-                    }, completion: nil)
-                    // Position
-                    UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                        movementsTableView.alpha = 0
+                        UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
+                        let selectedCell = tableView.cellForRow(at: indexPath)
+                        movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
                         //
-                        self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
-                        self.setsRepsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
+                        backgroundViewExpanded.alpha = 0
+                        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
+                        backgroundViewExpanded.frame = UIScreen.main.bounds
+                        // Animate table fade and size
+                        // Alpha
+                        UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
+                            self.movementsTableView.alpha = 1
+                            //
+                        }, completion: nil)
+                        // Position
+                        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                            self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
+                            //
+                            self.backgroundViewExpanded.alpha = 0.7
+                        }, completion: nil)
+                        //
+                    } else {
+                        // View
+                        setsRepsView.alpha = 0
+                        UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
+                        let selectedCell = tableView.cellForRow(at: indexPath)
+                        setsRepsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+                        // selected row
+                        setsRepsPicker.selectRow(customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 0, animated: true)
+                        setsRepsPicker.selectRow(customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 1, animated: true)
+                        //
+                        let componentWidth = setsRepsPicker.frame.size.width / 3
+                        let componentWidthFourth = componentWidth / 4
                         // picker
-                        self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+                        setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: setsRepsView.frame.size.width + componentWidthFourth, height: 147)
                         // ok
-                        self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
-                        // Sets Indicator Label
+                        okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
+                        //
                         self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                        self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
                         //
-                        //
-                        self.backgroundViewExpanded.alpha = 0.7
-                        
-                    }, completion: nil)
-            }
-        }
-        //
-        case movementsTableView:
-            //
-            customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].append(fullKeyArray[indexPath.section][indexPath.row])
-            defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
-            // sets
-            customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
-            defaults.set(customSetsArray, forKey: "warmupSetsCustom")
-            // reps
-            customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
-            defaults.set(customRepsArray, forKey: "warmupRepsCustom")
-            //
-            defaults.synchronize()
-            // Remove Table
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.movementsTableView.alpha = 0
-                //
-                self.backgroundViewExpanded.alpha = 0
-                //
-            }, completion: nil)
-            //
-            let delayInSeconds = 0.4
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                self.movementsTableView.removeFromSuperview()
-                self.backgroundViewExpanded.removeFromSuperview()
-                //
-                self.customTableView.reloadData()
-                // Scroll to Bottom
-                if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
-                    //
-                    self.customTableView.setContentOffset(CGPoint(x: 0, y: self.customTableView.contentSize.height - self.customTableView.frame.size.height), animated: true)
+                        backgroundViewExpanded.alpha = 0
+                        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
+                        backgroundViewExpanded.frame = UIScreen.main.bounds
+                        // Animate table fade and size
+                        // Alpha
+                        UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
+                            self.setsRepsView.alpha = 1
+                            //
+                        }, completion: nil)
+                        // Position
+                        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                            //
+                            self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
+                            self.setsRepsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
+                            // picker
+                            self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+                            // ok
+                            self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
+                            // Sets Indicator Label
+                            self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+                            self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+                            //
+                            //
+                            self.backgroundViewExpanded.alpha = 0.7
+                            
+                        }, completion: nil)
+                    }
                 }
+            //
+            case movementsTableView:
+                //
+                customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].append(fullKeyArray[indexPath.section][indexPath.row])
+                defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
+                // sets
+                customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
+                defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+                // reps
+                customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
+                defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+                //
+                defaults.synchronize()
+                // Remove Table
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    self.movementsTableView.alpha = 0
+                    //
+                    self.backgroundViewExpanded.alpha = 0
+                    //
+                }, completion: nil)
+                //
+                let delayInSeconds = 0.4
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                    self.movementsTableView.removeFromSuperview()
+                    self.backgroundViewExpanded.removeFromSuperview()
+                    //
+                    self.customTableView.reloadData()
+                    // Scroll to Bottom
+                    if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
+                        //
+                        self.customTableView.setContentOffset(CGPoint(x: 0, y: self.customTableView.contentSize.height - self.customTableView.frame.size.height), animated: true)
+                    }
+                }
+            //
+            default: break
             }
-        //
-        default: break
-        }
-        //
-        tableView.deselectRow(at: indexPath, animated: true)
-        beginButtonEnabled()
-        editButtonEnabled()
+            //
+            tableView.deselectRow(at: indexPath, animated: true)
+            beginButtonEnabled()
+            editButtonEnabled()
         }
     }
     
     
-//
-// TableView Editing -----------------------------------------------------------------------------------------------------
-//
+    //
+    // TableView Editing -----------------------------------------------------------------------------------------------------
+    //
     // Can edit row
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         //
@@ -1550,26 +1551,26 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-//
-// Table view related button actions ------------------------------------------------------------------------------------------------
-//
+    //
+    // Table view related button actions ------------------------------------------------------------------------------------------------
+    //
     // Add movement table background (dismiss table)
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.movementsTableView.alpha = 0
-                self.setsRepsView.alpha = 0
-                //
-                self.backgroundViewExpanded.alpha = 0
-            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            self.movementsTableView.alpha = 0
+            self.setsRepsView.alpha = 0
             //
-            let delayInSeconds = 0.4
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                self.movementsTableView.removeFromSuperview()
-                self.setsRepsView.removeFromSuperview()
-                //
-                self.backgroundViewExpanded.removeFromSuperview()
-            }
+            self.backgroundViewExpanded.alpha = 0
+        }, completion: nil)
+        //
+        let delayInSeconds = 0.4
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            self.movementsTableView.removeFromSuperview()
+            self.setsRepsView.removeFromSuperview()
+            //
+            self.backgroundViewExpanded.removeFromSuperview()
+        }
     }
     
     
@@ -1582,7 +1583,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             self.editingButton.setTitle(NSLocalizedString("edit", comment: ""), for: .normal)
             self.sessionPickerView.isUserInteractionEnabled = true
             self.beginButton.isEnabled = true
-        //
+            //
         } else {
             self.customTableView.setEditing(true, animated: true)
             self.editingButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
@@ -1590,11 +1591,11 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             self.beginButton.isEnabled = false
         }
     }
-   
     
-//
-// Picker Related actions ------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Picker Related actions ------------------------------------------------------------------------------------------------
+    //
     // Ok button action
     func okButtonAction(_ sender: Any) {
         //
@@ -1627,9 +1628,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-//
-// Information Actions ------------------------------------------------------------------------------------------------
-//
+    //
+    // Information Actions ------------------------------------------------------------------------------------------------
+    //
     // QuestionMark Button Action
     @IBAction func informationButtonAction(_ sender: Any) {
         // Slide information down
@@ -1691,9 +1692,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-//
-// Expand/Retract Image ------------------------------------------------------------------------------------------------
-//
+    //
+    // Expand/Retract Image ------------------------------------------------------------------------------------------------
+    //
     // Expand Image
     let expandedImage = UIImageView()
     let backgroundViewImage = UIButton()
@@ -1755,9 +1756,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     
     
     
-//
-// Begin Button ------------------------------------------------------------------------------------------------
-//
+    //
+    // Begin Button ------------------------------------------------------------------------------------------------
+    //
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         
@@ -1781,9 +1782,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-//
-// Pass Arrays ------------------------------------------------------------------------------------------------
-//
+    //
+    // Pass Arrays ------------------------------------------------------------------------------------------------
+    //
     // Pass Array to next ViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
@@ -1795,7 +1796,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
         //
         let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
-
+        
         
         if (segue.identifier == "warmupCustomSegue1") {
             //
@@ -1835,7 +1836,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         } else if (segue.identifier == "warmupCustomSegue2") {
             //
             let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
+            let destinationVC = destinationNC.viewControllers.first as! WorkoutSessionScreenOverview
             
             // Compress Arrays
             for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
@@ -1870,12 +1871,12 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             destinationVC.sessionTitle = titleDataArray[sessionPickerView.numberOfRows(inComponent: 0)]
         }
     }
- 
     
     
-//
-// Walkthrough ------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Walkthrough ------------------------------------------------------------------------------------------------
+    //
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()
@@ -2154,5 +2155,5 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-//
+    //
 }

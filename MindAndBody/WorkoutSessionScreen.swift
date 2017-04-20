@@ -1,8 +1,8 @@
 //
-//  SessionScreenTest.swift
-//  MyFitnessMentor
+//  WorkoutSessionScreen.swift
+//  MindAndBody
 //
-//  Created by Luke Smith on 18.03.17.
+//  Created by Luke Smith on 20.04.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -15,13 +15,13 @@ import UserNotifications
 //
 // Session Screen Class --------------------------------------------------------------------------------------------------------
 //
-class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     
-//
-// Retreive Arrays ---------------------------------------------------------------------------------------------------------
-//
+    //
+    // Retreive Arrays ---------------------------------------------------------------------------------------------------------
+    //
     // Session Type
     var sessionType = Int()
     
@@ -48,11 +48,11 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     
     // Explanation Array
     var explanationArray: [String] = []
-
-
-//
-// Outlets ---------------------------------------------------------------------------------------------------------------------
-//
+    
+    
+    //
+    // Outlets ---------------------------------------------------------------------------------------------------------------------
+    //
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
@@ -67,7 +67,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     var setButton1 = UIButton()
     var setButton2 = UIButton()
     var setButton3 = UIButton()
-
+    
     // Image View
     @IBOutlet weak var imageScroll: UIScrollView!
     
@@ -135,9 +135,9 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     @IBOutlet weak var buttonStackHeight: NSLayoutConstraint!
     
     
-//
-// View did load ---------------------------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load ---------------------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -220,9 +220,9 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         explanationExpand.tintColor = colour2
         
         
-//
-// Timer ---------------------------------------------------------------------------------------------------------------------
-//
+        //
+        // Timer ---------------------------------------------------------------------------------------------------------------------
+        //
         // Image With Tint
         let origImage3 = UIImage(named: "Timer")
         let tintedImage3 = origImage3?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
@@ -290,10 +290,10 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
         
-
-//
-// Progress Bar ----------------------------------------------------------------------------------------------------------
-//
+        
+        //
+        // Progress Bar ----------------------------------------------------------------------------------------------------------
+        //
         // Thickness
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 49, height: self.progressBarView.frame.size.height / 2)
         progressBar.center = progressBarView.center
@@ -311,9 +311,9 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     }
     
     
-//
-// View did layout subviews -------------------------------------------------------------------------------------------------
-//
+    //
+    // View did layout subviews -------------------------------------------------------------------------------------------------
+    //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // Image Scroll
@@ -330,9 +330,9 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     }
     
     
-//
-// Generate Buttons ---------------------------------------------------------------------------------------------------------------------
-//
+    //
+    // Generate Buttons ---------------------------------------------------------------------------------------------------------------------
+    //
     func createButton() -> UIButton {
         let setButton = UIButton()
         let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
@@ -362,10 +362,10 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         }
     }
     
-
-//
-// Display Content ---------------------------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Display Content ---------------------------------------------------------------------------------------------------------------------
+    //
     // Display Content Function
     func displayContent() {
         // Navigation Bar
@@ -451,9 +451,9 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     }
     
     
-//
-// Flash Screen ---------------------------------------------------------------------------------------------------------
-//
+    //
+    // Flash Screen ---------------------------------------------------------------------------------------------------------
+    //
     // Flash Screen
     func flashScreen() {
         //
@@ -472,10 +472,10 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         })
     }
     
-  
-//
-// CountDown Timer ---------------------------------------------------------------------------------------------
-//
+    
+    //
+    // CountDown Timer ---------------------------------------------------------------------------------------------
+    //
     var isTiming = false
     // Timer CountDown Value
     func setTimerValue() {
@@ -506,11 +506,11 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             countDownLabel.removeFromSuperview()
             pickerViewTimer.alpha = 1
             isTiming = false
-        //
+            //
         } else if timerValue == 1 {
             timerValue -= 1
             countDownLabel.text = timeFormatted(totalSeconds: timerValue)
-        //
+            //
         } else {
             timerValue -= 1
             countDownLabel.text = timeFormatted(totalSeconds: timerValue)
@@ -613,10 +613,10 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         isTiming = false
     }
     
-
-//
-// Timer Picker View ---------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Timer Picker View ---------------------------------------------------------------------------------------------
+    //
     // Number of components
     func numberOfComponents(in: UIPickerView) -> Int {
         return 1
@@ -627,7 +627,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         //
         if pickerView == minutePicker {
             return 14
-        //
+            //
         } else if pickerView == secondPicker {
             return 4
         }
@@ -645,7 +645,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             rowLabel.attributedText = myTitle
             rowLabel.textAlignment = .center
             return rowLabel
-        //
+            //
         } else if pickerView == secondPicker {
             //
             let rowLabel = UILabel()
@@ -664,9 +664,9 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     }
     
     
-//
-// Timer Display and retract ----------------------------------------------------------------------------------------
-//
+    //
+    // Timer Display and retract ----------------------------------------------------------------------------------------
+    //
     // Display TimerView
     //
     let backgroundViewTimer = UIButton()
@@ -776,11 +776,11 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             self.backButton.isEnabled = true
         }
     }
-  
     
-//
-// Button Actions ------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Button Actions ------------------------------------------------------------------------------------------------
+    //
     // Set Buttons
     //
     var buttonNumber = 0
@@ -828,7 +828,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             //
             sessionScreenIndex = 0
             self.dismiss(animated: true)
-        //
+            //
         } else {
             //
             backButton.tintColor = colour1
@@ -864,9 +864,9 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     }
     
     
-//
-// Explanation -------------------------------------------------------------------------------------------------------------
-//
+    //
+    // Explanation -------------------------------------------------------------------------------------------------------------
+    //
     // Expand Explanation
     //
     let scrollViewExplanation = UIScrollView()
@@ -955,9 +955,9 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     }
     
     
-//
-// Pocket Mode ---------------------------------------------------------------------------------------------------------------------
-//
+    //
+    // Pocket Mode ---------------------------------------------------------------------------------------------------------------------
+    //
     let blurEffectView = UIVisualEffectView()
     let hideLabel = UILabel()
     var brightness = UIScreen.main.brightness
@@ -1008,7 +1008,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
         //
         self.hideLabel.alpha = 0
-
+        
         //
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             self.blurEffectView.alpha = 0
@@ -1017,16 +1017,16 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         //
         let delayInSeconds = 0.4
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-        //
-        self.blurEffectView.removeFromSuperview()
-        self.hideLabel.removeFromSuperview()
+            //
+            self.blurEffectView.removeFromSuperview()
+            self.hideLabel.removeFromSuperview()
         }
     }
     
-
-//
-// Image Buttons ----------------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Image Buttons ----------------------------------------------------------------------------------------------------------
+    //
     // Target Area Button (move to right image)
     @IBAction func targetAreaAction(_ sender: Any) {
         //
@@ -1065,7 +1065,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
                 self.imageScroll.contentOffset.x = 0
             }, completion: nil)
-        //
+            //
         } else if extraSwipe.direction == .left {
             //
             targetAreaButton.alpha = 0
@@ -1078,11 +1078,11 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             }, completion: nil)
         }
     }
-
     
-//
-// Walkthrough ----------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Walkthrough ----------------------------------------------------------------------------------------------------
+    //
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()
@@ -1254,7 +1254,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
-           
+            
             
             
         case 4:
