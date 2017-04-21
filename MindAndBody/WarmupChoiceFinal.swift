@@ -58,30 +58,13 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // Explanation Array
     var explanationArray: [String] = []
     
-    // Static Arrays
-    // Initial Custom Preset Texts
-    var presetTexts: [String] = []
-    
+    //
     // Navigation Titles
     let navigationTitles: [String] =
         ["fullBody",
          "upperBody",
          "lowerBody",
          "cardio"]
-    
-    // Custom Preset Keys
-    // Preset Array
-    let warmupPresets: [String] =
-        ["warmupPresetsFull",
-         "warmupPresetsUpper",
-         "warmupPresetsLower",
-         "warmupPresetsCardio"]
-    // Preset Text
-    let warmupPresetTexts: [String] =
-        ["warmupPresetTextsFull",
-         "warmupPresetTextsUpper",
-         "warmupPresetTextsLower",
-         "warmupPresetTextsCardio"]
     
     
 //

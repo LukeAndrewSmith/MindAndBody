@@ -62,6 +62,8 @@ class ClassicChoiceG: UIViewController  {
     //
     @IBOutlet weak var connection3Trailing: NSLayoutConstraint!
    
+    //
+    var workoutType2 = Int()
 //
 // View did load ----------------------------------------------------------------------------------------------------------------
 //
@@ -304,10 +306,57 @@ class ClassicChoiceG: UIViewController  {
         }
     }
     
+    
+    // Full
+    @IBAction func full(_ sender: Any) {
+        workoutType2 = 0
+        performSegue(withIdentifier: "classicSegue", sender: nil)
+    }
+    
+    // Upper
+    @IBAction func upper(_ sender: Any) {
+        workoutType2 = 1
+        performSegue(withIdentifier: "classicSegue", sender: nil)
+    }
+    
+    // Lower
+    @IBAction func lower(_ sender: Any) {
+        workoutType2 = 2
+        performSegue(withIdentifier: "classicSegue", sender: nil)
+    }
+    
+    // Legs
+    @IBAction func legs(_ sender: Any) {
+        workoutType2 = 3
+        performSegue(withIdentifier: "classicSegue", sender: nil)
+    }
+    
+    // Pull
+    @IBAction func pull(_ sender: Any) {
+        workoutType2 = 4
+        performSegue(withIdentifier: "classicSegue", sender: nil)
+    }
+    
+    // Push
+    @IBAction func push(_ sender: Any) {
+        workoutType2 = 5
+        performSegue(withIdentifier: "classicSegue", sender: nil)
+    }
+    
+    
 //
 // Remove back button text
 //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Pass Data
+        if (segue.identifier == "warmupSegue") {
+            //
+            let destinationVC = segue.destination as! WorkoutChoiceFinal
+            // Indicate to next screen which button was pressed
+            destinationVC.workoutType = 0
+            destinationVC.workoutType2 = workoutType2
+        }
+        //
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem

@@ -584,7 +584,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             tableViewConstraint.constant = view.frame.size.height - 98
             tableViewConstraint1.constant = -49.25
             //
-            seperatorConstraint.constant = -49.25
+            seperatorConstraint.constant = -49
             //
             beginButtonConstraint.constant = -49
         }
@@ -822,9 +822,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     self.removePreset.alpha = 1
                     //
                     self.tableViewConstraint.constant = 49
-                    self.tableViewConstraint1.constant = 49.75
+                    self.tableViewConstraint1.constant = 49.25
                     //
-                    self.seperatorConstraint.constant = 49.25
+                    self.seperatorConstraint.constant = 49
                     //
                     self.beginButtonConstraint.constant = 0
                     //
@@ -909,7 +909,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     self.tableViewConstraint.constant = self.view.frame.size.height - 98
                     self.tableViewConstraint1.constant = -49.25
                     //
-                    self.seperatorConstraint.constant = -49.25
+                    self.seperatorConstraint.constant = -49
                     //
                     self.beginButtonConstraint.constant = -49
                     //
@@ -1867,7 +1867,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             //
             destinationVC.sessionType = 0
             //
-            destinationVC.sessionTitle = titleDataArray[sessionPickerView.numberOfRows(inComponent: 0)]
+            destinationVC.sessionTitle = titleDataArray[sessionPickerView.selectedRow(inComponent: 0)]
         }
     }
  

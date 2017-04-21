@@ -47,6 +47,9 @@ class CircuitChoiceG: UIViewController  {
     //
     @IBOutlet weak var connectionTrailing: NSLayoutConstraint!
 
+    
+    //
+    var workoutType2 = Int()
 //
 // View did load -------------------------------------------------------------------------------------------------------
 //
@@ -245,10 +248,39 @@ class CircuitChoiceG: UIViewController  {
         }
     }
     
+    
+    // Full
+    @IBAction func full(_ sender: Any) {
+        workoutType2 = 0
+        performSegue(withIdentifier: "circuitSegue", sender: nil)
+    }
+    
+    // Upper
+    @IBAction func upper(_ sender: Any) {
+        workoutType2 = 1
+        performSegue(withIdentifier: "circuitSegue", sender: nil)
+    }
+    
+    // Lower
+    @IBAction func lower(_ sender: Any) {
+        workoutType2 = 2
+        performSegue(withIdentifier: "circuitSegue", sender: nil)
+    }
+    
+    
 //
 // Remove Back Bar Text
 //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Pass Data
+        if (segue.identifier == "circuitSegue") {
+            //
+            let destinationVC = segue.destination as! WorkoutChoiceFinal
+            // Indicate to next screen which button was pressed
+            destinationVC.workoutType = 1
+            destinationVC.workoutType2 = workoutType2
+        }
+        //
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem

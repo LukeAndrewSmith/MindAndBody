@@ -11,14 +11,13 @@ import UIKit
 
 
 //
-// Warmup Choice Class -------------------------------------------------------------------------------------------------------------
+// Workout Choice Class -------------------------------------------------------------------------------------------------------------
 //
 class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    // Selected Warmup Type
+    // Selected Workout Type
     //
     var workoutType = Int()
-    
     //
     var workoutType2 = Int()
     
@@ -74,7 +73,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     // Arrays to be set and used (Screen arrays)
     //
     // Movements Array
-    var warmupArray: [String] = []
+    var workoutArray: [String] = []
     
     // Sets Array
     var setsArray: [Int] = []
@@ -91,30 +90,13 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     // Explanation Array
     var explanationArray: [String] = []
     
-    // Static Arrays
-    // Initial Custom Preset Texts
-    var presetTexts: [String] = []
-    
+    //
     // Navigation Titles
     let navigationTitles: [String] =
         ["fullBody",
          "upperBody",
          "lowerBody",
          "cardio"]
-    
-    // Custom Preset Keys
-    // Preset Array
-    let warmupPresets: [String] =
-        ["warmupPresetsFull",
-         "warmupPresetsUpper",
-         "warmupPresetsLower",
-         "warmupPresetsCardio"]
-    // Preset Text
-    let warmupPresetTexts: [String] =
-        ["warmupPresetTextsFull",
-         "warmupPresetTextsUpper",
-         "warmupPresetTextsLower",
-         "warmupPresetTextsCardio"]
     
     
 //
@@ -189,7 +171,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
              42,
              43,
              44],
-            // Dynamic Warmup Drills
+            // Dynamic Workout Drills
             [45,
              46,
              47,
@@ -206,7 +188,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
              57]
     ]
     
-    // Warmup Movements Dictionary
+    // Workout Movements Dictionary
     var workoutMovementsDictionaryGym: [Int : String] =
         [
             // Cardio
@@ -261,7 +243,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             42: "hipHinges",
             43: "sideLegSwings",
             44: "frontLegSwings",
-            // Dynamic Warmup Drills
+            // Dynamic Workout Drills
             45: "jumpSquat",
             46: "lunge",
             47: "gluteKicks",
@@ -948,7 +930,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
              42,
              43,
              44],
-            // Dynamic Warmup Drills
+            // Dynamic Workout Drills
             [45,
              46,
              47,
@@ -965,8 +947,8 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
              57]
     ]
     
-    // Warmup Movements Dictionary
-    var warmupMovementsDictionaryCircuit: [Int : String] =
+    // Workout Movements Dictionary
+    var workoutMovementsDictionaryCircuit: [Int : String] =
         [
             // Cardio
             0: "5minCardio",
@@ -1020,7 +1002,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             42: "hipHinges",
             43: "sideLegSwings",
             44: "frontLegSwings",
-            // Dynamic Warmup Drills
+            // Dynamic Workout Drills
             45: "jumpSquat",
             46: "lunge",
             47: "gluteKicks",
@@ -1594,7 +1576,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     ]
     
     // Warmup Movements Dictionary
-    var warmupMovementsDictionaryBodyweight: [Int : String] =
+    var workoutMovementsDictionaryBodyweight: [Int : String] =
         [
             // Cardio
             0: "5minCardio",
@@ -2306,12 +2288,12 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         questionMark.tintColor = colour1
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString(navigationTitles[warmupType], comment: ""))
+        navigationBar.title = (NSLocalizedString(navigationTitles[workoutType], comment: ""))
         
         //
         presetsButton.backgroundColor = colour2
         presetsButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        presetsButton.setTitle(NSLocalizedString("selectWarmup", comment: ""), for: .normal)
+        presetsButton.setTitle(NSLocalizedString("selectWorkout", comment: ""), for: .normal)
         
         //
         movementsTableView.tableFooterView = UIView()
@@ -2362,9 +2344,9 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("workoutChoiceText", comment: "")))
         // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
+        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("workoutChoiceText", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         // Range of Titles
         let titleRangeString = (NSLocalizedString("movements", comment: ""))
@@ -2495,7 +2477,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             //
             cell.selectionStyle = .none
             //
-            cell.textLabel?.text = NSLocalizedString(warmupMovementsDictionary[overviewArray[indexPath.section][indexPath.row]]!, comment: "")
+            cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[overviewArray[indexPath.section][indexPath.row]]!, comment: "")
             //
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -2797,9 +2779,19 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func beginButton(_ sender: Any) {
         //
         if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
-            performSegue(withIdentifier: "warmupSessionSegue1", sender: nil)
+            //
+            switch workoutType {
+            case 0: performSegue(withIdentifier: "workoutSessionSegue1", sender: nil)
+            case 1, 2: performSegue(withIdentifier: "workoutSessionSegue11", sender: nil)
+            default: break
+            }
         } else {
-            performSegue(withIdentifier: "warmupSessionSegue2", sender: nil)
+            //
+            switch workoutType {
+            case 0: performSegue(withIdentifier: "workoutSessionSegue2", sender: nil)
+            case 1, 2: performSegue(withIdentifier: "workoutSessionSegue12", sender: nil)
+            default: break
+            }
         }
         // Return background to homescreen
         let delayInSeconds = 0.5
@@ -2813,7 +2805,9 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     // Pass Arrays ---------------------------------------------------------------------------------------------------------------------------
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "warmupSessionSegue1") {
+        switch segue.identifier! {
+        //
+        case "workoutSessionSegue1":
             //
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.viewControllers.first as! SessionScreen
@@ -2821,7 +2815,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             // Ensure array in ascending order
             for i in presetsArrays[selectedPreset[0]][selectedPreset[1]] {
                 //
-                warmupArray.append(warmupMovementsDictionary[i]!)
+                workoutArray.append(workoutMovementsDictionary[i]!)
                 //
                 setsArray.append(setsDictionary[i]!)
                 //
@@ -2834,7 +2828,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                 explanationArray.append(explanationDictionary[i]!)
             }
             //
-            destinationVC.sessionArray = warmupArray
+            destinationVC.sessionArray = workoutArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
             destinationVC.demonstrationArray = demonstrationArray
@@ -2843,7 +2837,8 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             //
             destinationVC.sessionType = 0
             //
-        } else if (segue.identifier == "warmupSessionSegue2") {
+        //
+        case "workoutSessionSegue2":
             //
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
@@ -2852,7 +2847,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             // Compress Arrays
             for i in presetsArrays[selectedPreset[0]][selectedPreset[1]] {
                 //
-                warmupArray.append(warmupMovementsDictionary[i]!)
+                workoutArray.append(workoutMovementsDictionary[i]!)
                 //
                 setsArray.append(setsDictionary[i]!)
                 //
@@ -2865,7 +2860,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                 explanationArray.append(explanationDictionary[i]!)
             }
             //
-            destinationVC.sessionArray = warmupArray
+            destinationVC.sessionArray = workoutArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
             destinationVC.demonstrationArray = demonstrationArray
@@ -2875,6 +2870,72 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             destinationVC.sessionType = 0
             //
             destinationVC.sessionTitle = presetsArray[selectedPreset[0]][selectedPreset[1]]
+        //
+        case "workoutSessionSegue11":
+            //
+            let destinationNC = segue.destination as! UINavigationController
+            let destinationVC = destinationNC.viewControllers.first as! WorkoutSessionScreen
+            
+            // Ensure array in ascending order
+            for i in presetsArrays[selectedPreset[0]][selectedPreset[1]] {
+                //
+                workoutArray.append(workoutMovementsDictionary[i]!)
+                //
+                setsArray.append(setsDictionary[i]!)
+                //
+                repsArray.append(repsDictionary[i]!)
+                //
+                demonstrationArray.append(demonstrationDictionary[i]!)
+                //
+                targetAreaArray.append(targetAreaDictionary[i]!)
+                //
+                explanationArray.append(explanationDictionary[i]!)
+            }
+            //
+            destinationVC.sessionArray = workoutArray
+            destinationVC.setsArray = setsArray
+            destinationVC.repsArray = repsArray
+            destinationVC.demonstrationArray = demonstrationArray
+            destinationVC.targetAreaArray = targetAreaArray
+            destinationVC.explanationArray = explanationArray
+            //
+            destinationVC.sessionType = 0
+            //
+        //
+        case "workoutSessionSegue12":
+            //
+            let destinationNC = segue.destination as! UINavigationController
+            let destinationVC = destinationNC.viewControllers.first as! WorkoutSessionScreenOverview
+            
+            // Ensure array in ascending order
+            // Compress Arrays
+            for i in presetsArrays[selectedPreset[0]][selectedPreset[1]] {
+                //
+                workoutArray.append(workoutMovementsDictionary[i]!)
+                //
+                setsArray.append(setsDictionary[i]!)
+                //
+                repsArray.append(repsDictionary[i]!)
+                //
+                demonstrationArray.append(demonstrationDictionary[i]!)
+                //
+                targetAreaArray.append(targetAreaDictionary[i]!)
+                //
+                explanationArray.append(explanationDictionary[i]!)
+            }
+            //
+            destinationVC.sessionArray = workoutArray
+            destinationVC.setsArray = setsArray
+            destinationVC.repsArray = repsArray
+            destinationVC.demonstrationArray = demonstrationArray
+            destinationVC.targetAreaArray = targetAreaArray
+            destinationVC.explanationArray = explanationArray
+            //
+            destinationVC.sessionType = 0
+            //
+            destinationVC.sessionTitle = presetsArray[selectedPreset[0]][selectedPreset[1]]
+            //
+        default: break
         }
     }
     

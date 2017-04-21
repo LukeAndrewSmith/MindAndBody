@@ -289,21 +289,6 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
         
         
-        //
-        // Progress Bar ----------------------------------------------------------------------------------------------------------
-        //
-        // Thickness
-        progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 49, height: self.progressBarView.frame.size.height / 2)
-        progressBar.center = progressBarView.center
-        progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
-        // Rounded Edges
-        progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
-        progressBar.clipsToBounds = true
-        // Initial state
-        progressBar.setProgress(0, animated: true)
-        //
-        progressBarLeft.constant = progressLabel.frame.size.width + 34
-        
         // Display Content
         displayContent()
     }
@@ -322,9 +307,11 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         // Demonstration Image
         demonstrationImage.frame = imageScroll.frame
         demonstrationImage.contentMode = .scaleAspectFit
+        demonstrationImage.layer.masksToBounds = true
         // Body Image
         bodyImage.frame = CGRect(x: imageScroll.frame.size.width, y: 0, width: imageScroll.frame.size.width, height: imageScroll.frame.size.width)
         bodyImage.contentMode = .scaleAspectFit
+        bodyImage.layer.masksToBounds = true
     }
     
     
@@ -433,19 +420,9 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         // Title Labels
         // Sets Reps
         self.setsRepsLabel.text = (String(setsArray[sessionScreenIndex]) + " x " + repsArray[sessionScreenIndex])
-        // Progress
-        self.progressLabel.text = (String(sessionScreenIndex + 1)+"/"+String(sessionArray.count))
         //
         setsRepsLabel.textColor = colour2
-        progressLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
-        // Progress Bar
-        let sessionIndexP = Float(sessionScreenIndex)
-        let sessionArrayP = Float(self.sessionArray.count)
-        //
-        let fractionalProgress = sessionIndexP/sessionArrayP
-        //
-        progressBar.setProgress(fractionalProgress, animated: true)
     }
     
     
@@ -1078,9 +1055,9 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     }
     
     
-    //
-    // Walkthrough ----------------------------------------------------------------------------------------------------
-    //
+//
+// Walkthrough ----------------------------------------------------------------------------------------------------
+//
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()
@@ -1089,8 +1066,6 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     
     // Walkthrough
     func walkthroughMindBody() {
-        
-        
         //
         let screenSize = UIScreen.main.bounds
         let navigationBarHeight = CGFloat(44)
@@ -1119,15 +1094,11 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         backButtonW.titleLabel?.textColor = .white
         backButtonW.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
         
-        
-        
-        
+        //
         switch viewNumber {
-            
+        //
         case 0:
             //
-            
-            
             // Clear Section
             let path = CGMutablePath()
             path.addEllipse(in: CGRect(x: view.frame.size.width/2 - ((navigationTitle.frame.size.width + 50) / 2), y: UIApplication.shared.statusBarFrame.height, width: navigationTitle.frame.size.width + 50, height: 40))
@@ -1142,26 +1113,19 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.clipsToBounds = true
             //
             
-            
+            //
             label.text = NSLocalizedString("movementScreen0", comment: "")
             walkthroughView.addSubview(label)
             
-            
-            
-            
+            //
             walkthroughView.addSubview(nextButtonW)
             self.view.addSubview(walkthroughView)
             UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
             walkthroughView.bringSubview(toFront: nextButtonW)
             
-            
-            
-            
         //
         case 1:
             //
-            
-            
             // Clear Section
             let path = CGMutablePath()
             path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
@@ -1176,12 +1140,11 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.clipsToBounds = true
             //
             
-            
+            //
             label.text = NSLocalizedString("movementScreen1", comment: "")
             walkthroughView.addSubview(label)
             
-            
-            
+            //
             walkthroughView.addSubview(backButtonW)
             walkthroughView.addSubview(nextButtonW)
             self.view.addSubview(walkthroughView)
@@ -1189,8 +1152,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
             
-            
-            
+        //
         case 2:
             // Clear Section
             let path = CGMutablePath()
@@ -1206,12 +1168,11 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.clipsToBounds = true
             //
             
-            
+            //
             label.text = NSLocalizedString("movementScreen2", comment: "")
             walkthroughView.addSubview(label)
             
-            
-            
+            //
             backButtonW.setTitle("", for: .normal)
             walkthroughView.addSubview(backButtonW)
             walkthroughView.addSubview(nextButtonW)
@@ -1220,8 +1181,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
             
-            
-            
+        //
         case 3:
             // Clear Section
             let path = CGMutablePath()
@@ -1237,15 +1197,13 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.clipsToBounds = true
             //
             
-            
+            //
             let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
             label.center.y = centerY
             label.text = NSLocalizedString("movementScreen3", comment: "")
             walkthroughView.addSubview(label)
             
-            
-            
-            
+            //
             walkthroughView.addSubview(backButtonW)
             walkthroughView.addSubview(nextButtonW)
             self.view.addSubview(walkthroughView)
@@ -1253,8 +1211,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
             
-            
-            
+        //
         case 4:
             // Clear Section
             let path = CGMutablePath()
@@ -1270,11 +1227,11 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.clipsToBounds = true
             //
             
+            //
             let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
             label.center.y = centerY
             label.text = NSLocalizedString("movementScreen4", comment: "")
             walkthroughView.addSubview(label)
-            
             
             // Demonstration Image
             //
@@ -1288,7 +1245,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             demonstrationImageButton.isEnabled = false
             //
             
-            
+            //
             walkthroughView.addSubview(backButtonW)
             walkthroughView.addSubview(nextButtonW)
             self.view.addSubview(walkthroughView)
@@ -1296,8 +1253,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
             
-            
-            
+        //
         case 5:
             // Clear Section
             let path = CGMutablePath()
@@ -1313,11 +1269,11 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.clipsToBounds = true
             //
             
+            //
             let centerY = setRepView.frame.maxY + navigationBarHeight + UIApplication.shared.statusBarFrame.height
             label.center.y = centerY
             label.text = NSLocalizedString("movementScreen5", comment: "")
             walkthroughView.addSubview(label)
-            
             
             // Target Area Image
             //
@@ -1331,7 +1287,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             demonstrationImageButton.isEnabled = true
             //
             
-            
+            //
             walkthroughView.addSubview(backButtonW)
             walkthroughView.addSubview(nextButtonW)
             self.view.addSubview(walkthroughView)
@@ -1339,8 +1295,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
             
-            
-            
+        //
         case 6:
             // Clear Section
             let path = CGMutablePath()
@@ -1361,7 +1316,6 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             label.text = NSLocalizedString("movementScreen6", comment: "")
             walkthroughView.addSubview(label)
             
-            
             // Target Area Image
             //
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
@@ -1374,8 +1328,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             demonstrationImageButton.isEnabled = true
             //
             
-            
-            
+            //
             walkthroughView.addSubview(backButtonW)
             walkthroughView.addSubview(nextButtonW)
             self.view.addSubview(walkthroughView)
@@ -1384,7 +1337,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.bringSubview(toFront: backButtonW)
             
             
-            
+        //
         case 7:
             // Clear Section
             let path = CGMutablePath()
@@ -1400,7 +1353,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.clipsToBounds = true
             //
             
-            
+            //
             let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
             label.center.y = centerY
             label.text = NSLocalizedString("movementScreen7", comment: "")
@@ -1419,7 +1372,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             demonstrationImageButton.isEnabled = false
             //
             
-            
+            //
             walkthroughView.addSubview(backButtonW)
             walkthroughView.addSubview(nextButtonW)
             self.view.addSubview(walkthroughView)
@@ -1427,9 +1380,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
             
-            
-            
-            
+        //
         case 8:
             // Clear Section
             let path = CGMutablePath()
@@ -1445,14 +1396,13 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.clipsToBounds = true
             //
             
+            //
             let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
             label.center.y = centerY
             label.text = NSLocalizedString("movementScreen8", comment: "")
             walkthroughView.addSubview(label)
             
-            
-            
-            
+            //
             walkthroughView.addSubview(backButtonW)
             walkthroughView.addSubview(nextButtonW)
             self.view.addSubview(walkthroughView)
@@ -1460,7 +1410,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
             
-            
+        //
         case 9:
             // Clear Section
             let path = CGMutablePath()
@@ -1476,15 +1426,13 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.clipsToBounds = true
             //
             
-            
+            //
             let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
             label.center.y = centerY
             label.text = NSLocalizedString("movementScreen9", comment: "")
             walkthroughView.addSubview(label)
             
-            
-            
-            
+            //
             walkthroughView.addSubview(backButtonW)
             walkthroughView.addSubview(nextButtonW)
             self.view.addSubview(walkthroughView)
@@ -1492,7 +1440,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
             
-            
+        //
         case 10:
             // Clear Section
             let path = CGMutablePath()
@@ -1508,15 +1456,13 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.clipsToBounds = true
             //
             
-            
+            //
             let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
             label.center.y = centerY
             label.text = NSLocalizedString("movementScreen10", comment: "")
             walkthroughView.addSubview(label)
             
-            
-            
-            
+            //
             walkthroughView.addSubview(backButtonW)
             walkthroughView.addSubview(nextButtonW)
             self.view.addSubview(walkthroughView)
@@ -1525,8 +1471,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.bringSubview(toFront: backButtonW)
             
             
-            
-            
+        //
         case 11:
             // Clear Section
             let path = CGMutablePath()
@@ -1542,14 +1487,13 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.clipsToBounds = true
             //
             
+            //
             let centerY = imageScroll.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height
             label.center.y = centerY
             label.text = NSLocalizedString("movementScreen11", comment: "")
             walkthroughView.addSubview(label)
             
-            
-            
-            
+            //
             walkthroughView.addSubview(backButtonW)
             walkthroughView.addSubview(nextButtonW)
             self.view.addSubview(walkthroughView)
@@ -1557,16 +1501,13 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
             
-            
-            
-            
-            
+        //
         case 12:
             // Clear Section
             let path = CGMutablePath()
             let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height
             let yValue = y + setsRepsLabel.frame.size.height + setRepView.frame.size.height + timerButton.frame.size.height
-            path.addRect(CGRect(x: 0, y: yValue, width: progressLabel.frame.size.width + 14, height: progressLabel.frame.size.height))
+            path.addRect(CGRect(x: 0, y: yValue, width: view.frame.size.width, height: 98))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1578,14 +1519,11 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.clipsToBounds = true
             //
             
-            
-            
+            //
             label.text = NSLocalizedString("movementScreen12", comment: "")
             walkthroughView.addSubview(label)
             
-            
-            
-            
+            //
             walkthroughView.addSubview(backButtonW)
             walkthroughView.addSubview(nextButtonW)
             self.view.addSubview(walkthroughView)
@@ -1593,44 +1531,8 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             walkthroughView.bringSubview(toFront: nextButtonW)
             walkthroughView.bringSubview(toFront: backButtonW)
             
-            
-            
-        case 13:
-            // Clear Section
-            let path = CGMutablePath()
-            let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height
-            let yValue = y + setsRepsLabel.frame.size.height + setRepView.frame.size.height + timerButton.frame.size.height
-            path.addRect(CGRect(x: 14 + progressLabel.frame.size.width, y: yValue, width: view.frame.size.width - 14 - progressLabel.frame.size.width, height: progressBarView.frame.size.height))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            
-            label.text = NSLocalizedString("movementScreen13", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
-            walkthroughView.addSubview(backButtonW)
-            walkthroughView.addSubview(nextButtonW)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButtonW)
-            walkthroughView.bringSubview(toFront: backButtonW)
-            
-            
-            
+        //
         default: break
-            
-            
         }
         
         

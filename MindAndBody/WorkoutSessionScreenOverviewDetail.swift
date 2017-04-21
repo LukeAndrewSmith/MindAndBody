@@ -256,19 +256,6 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
         
-        // Progress Bar
-        //
-        // Thickness
-        progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 49, height: self.progressBarView.frame.size.height / 2)
-        progressBar.center = progressBarView.center
-        progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
-        // Rounded Edges
-        progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
-        progressBar.clipsToBounds = true
-        // Initial state
-        progressBar.setProgress(0, animated: true)
-        //
-        progressBarLeft.constant = progressLabel.frame.size.width + 34
         
         // Display Content
         // Navigation Bar
@@ -336,18 +323,8 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
         // Sets Reps
         self.setsRepsLabel.text = (String(setsArray[selectedMovement]) + " x " + repsArray[selectedMovement])
         // Progress
-        self.progressLabel.text = (String(selectedMovement + 1)+"/"+String(sessionArray.count))
         //
         setsRepsLabel.textColor = colour2
-        progressLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        // Progress Bar
-        let sessionIndexP = Float(selectedMovement)
-        let sessionArrayP = Float(self.sessionArray.count)
-        //
-        let fractionalProgress = sessionIndexP/sessionArrayP
-        //
-        progressBar.setProgress(fractionalProgress, animated: true)
-        
         
         // Image Scroll
         //

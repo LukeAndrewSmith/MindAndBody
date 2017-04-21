@@ -365,10 +365,11 @@
 			isa = PBXGroup;
 			children = (
 				07DEE6FA1E0AC47F003B89AB /* WorkoutChoice.swift */,
+				07E98F0D1EA8F86D00C98ED5 /* Gym */,
+				07E98F0E1EA8F8E100C98ED5 /* BodyWeight */,
 				072829E11EA7D3880090164A /* WorkoutChoieFinal.swift */,
 				072829E31EA7D3FB0090164A /* Custom */,
-				077C2C811E5C7BA600BA62C0 /* Gym */,
-				077C2C841E5C7BBF00BA62C0 /* Bodyweight */,
+				077C2C811E5C7BA600BA62C0 /* Gym Old */,
 			);
 			name = Workout;
 			sourceTree = "<group>";
@@ -536,24 +537,13 @@
 			name = "SF-UI-Text";
 			sourceTree = "<group>";
 		};
-		077C2C811E5C7BA600BA62C0 /* Gym */ = {
+		077C2C811E5C7BA600BA62C0 /* Gym Old */ = {
 			isa = PBXGroup;
 			children = (
-				077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */,
-				07DEE6F01E0AAD2E003B89AB /* ClassicChoiceG.swift */,
-				077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */,
 				079B7AF51E9A6326005750F0 /* Custom */,
 				0782A2961E5DA6730016F908 /* Classic Old Stuff */,
 			);
-			name = Gym;
-			sourceTree = "<group>";
-		};
-		077C2C841E5C7BBF00BA62C0 /* Bodyweight */ = {
-			isa = PBXGroup;
-			children = (
-				071FB62B1E9283AE0081444F /* BodyweightChoice.swift */,
-			);
-			name = Bodyweight;
+			name = "Gym Old";
 			sourceTree = "<group>";
 		};
 		0782A2961E5DA6730016F908 /* Classic Old Stuff */ = {
@@ -630,6 +620,24 @@
 				07BE8C0A1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift */,
 			);
 			name = Overview;
+			sourceTree = "<group>";
+		};
+		07E98F0D1EA8F86D00C98ED5 /* Gym */ = {
+			isa = PBXGroup;
+			children = (
+				077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */,
+				07DEE6F01E0AAD2E003B89AB /* ClassicChoiceG.swift */,
+				077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */,
+			);
+			name = Gym;
+			sourceTree = "<group>";
+		};
+		07E98F0E1EA8F8E100C98ED5 /* BodyWeight */ = {
+			isa = PBXGroup;
+			children = (
+				071FB62B1E9283AE0081444F /* BodyweightChoice.swift */,
+			);
+			name = BodyWeight;
 			sourceTree = "<group>";
 		};
 		07F0C4911EA60AF500927DA8 /* Custom */ = {

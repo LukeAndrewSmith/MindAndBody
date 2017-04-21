@@ -664,7 +664,7 @@ class WorkoutSessionScreenOverview: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "SessionDetailSegue") {
             //
-            let destinationVC = segue.destination as! SessionScreenOverviewDetail
+            let destinationVC = segue.destination as! WorkoutSessionScreenOverviewDetail
             //
             let indexPath = tableView.indexPathForSelectedRow
             let indexPathInt = Int((indexPath?.row)!)

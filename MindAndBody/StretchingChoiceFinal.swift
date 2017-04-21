@@ -58,30 +58,13 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     // Explanation Array
     var explanationArray: [String] = []
     
-    // Static Arrays
-    // Initial Custom Preset Texts
-    var presetTexts: [String] = []
-    
+    //
     // Navigation Titles
     let navigationTitles: [String] =
         ["fullBody",
          "upperBody",
          "lowerBody",
          "cardio"]
-    
-    // Custom Preset Keys
-    // Preset Array
-    let stretchingPresets: [String] =
-        ["stretchingPresetsFull",
-         "stretchingPresetsUpper",
-         "stretchingPresetsLower",
-         "stretchingPresetsCardio"]
-    // Preset Text
-    let stretchingPresetTexts: [String] =
-        ["stretchingPresetTextsFull",
-         "stretchingPresetTextsUpper",
-         "stretchingPresetTextsLower",
-         "stretchingPresetTextsCardio"]
     
     
 //

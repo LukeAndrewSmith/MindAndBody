@@ -49,6 +49,15 @@ class GymChoice: UIViewController  {
 // Remove back button text on subsequent screens
 //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Pass Data 5x5
+        if (segue.identifier == "fiveSegue") {
+            //
+            let destinationVC = segue.destination as! WorkoutChoiceFinal
+            // Indicate to next screen which button was pressed
+            destinationVC.workoutType = 0
+            destinationVC.workoutType2 = 6
+        }
+        //
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
