@@ -35,6 +35,8 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     //
     var overviewArray: [[Int]] = []
     
+    var roundArray: [Int] = []
+    
     //
     // Picker View Array
     var presetsArray: [[String]] = []
@@ -67,6 +69,10 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
 
     // Reps Dictionary
     var repsDictionary: [Int : String] = [:]
+    
+    //
+    var numberOfRoundsArray: [[Int]] = []
+
 
     
     
@@ -851,6 +857,8 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             ]
     ]
   
+    var numberOfRoundsArrayGym: [[Int]] = []
+
     
     
     
@@ -1399,18 +1407,30 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     var presetsArraysCircuitFull: [[[Int]]] =
         [
             [
-                [0, 11, 12, 14, 17, 19, 21, 23, 26, 31, 32, 33, 35, 36],
-                []
+                [0, 11, 12],
+                [0, 23, 30]
             ],
             [
-                [],
-                [],
-                []
+                [3, 12, 34],
+                [5, 0, 12],
+                [1, 1, 4]
             ],
             [
                 [],
                 []
             ]
+    ]
+    
+    //
+    var numberOfRoundsArrayCircuitFull: [[Int]] =
+        [
+            [2,
+             3],
+            [4,
+             3,
+             5],
+            [2,
+             3]
     ]
     
     //
@@ -1432,19 +1452,32 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     var presetsArraysCircuitUpper: [[[Int]]] =
         [
             [
-                [0, 11, 12, 14, 17, 19, 21, 23, 26, 31, 32, 33, 35, 36],
-                []
+                [0, 11, 12],
+                [0, 23, 30]
             ],
             [
-                [],
-                [],
-                []
+                [3, 12, 34],
+                [5, 0, 12],
+                [1, 1, 4]
             ],
             [
                 [],
                 []
             ]
     ]
+    
+    //
+    var numberOfRoundsArrayCircuitUpper: [[Int]] =
+        [
+            [2,
+            3],
+            [4,
+            3,
+            5],
+            [2,
+            3]
+        ]
+    
     
     //
     // Lower Body --------------------------------------------------------------------------------------------------------------------------
@@ -1465,13 +1498,13 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     var presetsArraysCircuitLower: [[[Int]]] =
         [
             [
-                [0, 11, 12, 14, 17, 19, 21, 23, 26, 31, 32, 33, 35, 36],
-                []
+                [0, 11, 12],
+                [0, 23, 30]
             ],
             [
-                [],
-                [],
-                []
+                [3, 12, 34],
+                [5, 0, 12],
+                [1, 1, 4]
             ],
             [
                 [],
@@ -1479,7 +1512,20 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             ]
     ]
     
-  
+    //
+    var numberOfRoundsArrayCircuitLower: [[Int]] =
+        [
+            [2,
+             3],
+            [4,
+             3,
+             5],
+            [2,
+             3]
+        ]
+    
+    
+    
     
     
     
@@ -2005,7 +2051,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             55: "15-30s",
             56: NSLocalizedString("asNecessary", comment: ""),
             57: NSLocalizedString("asNecessary", comment: "")
-    ]
+        ]
     
     //
     // Full Body --------------------------------------------------------------------------------------------------------------------------
@@ -2020,7 +2066,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
              "strength"],
             ["highIntensity",
              "quick"]
-    ]
+        ]
     
     // Preseys Arrays
     var presetsArraysBodyweightFull: [[[Int]]] =
@@ -2041,6 +2087,19 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         ]
     
     //
+    var numberOfRoundsArrayBodyweightFull: [[Int]] =
+        [
+            [2,
+             3],
+            [4,
+             3,
+             5],
+            [2,
+             3]
+    ]
+    
+    
+    //
     // Upper Body --------------------------------------------------------------------------------------------------------------------------
     //
     // Picker View Array
@@ -2053,7 +2112,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
              "strength"],
             ["highIntensity",
              "quick"]
-    ]
+        ]
     
     // Preseys Arrays
     var presetsArraysBodyweightUpper: [[[Int]]] =
@@ -2074,6 +2133,19 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         ]
     
     //
+    var numberOfRoundsArrayBodyweightUpper: [[Int]] =
+        [
+            [2,
+             3],
+            [4,
+             3,
+             5],
+            [2,
+             3]
+    ]
+    
+    
+    //
     // Lower Body --------------------------------------------------------------------------------------------------------------------------
     //
     // Picker View Array
@@ -2086,7 +2158,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
              "strength"],
             ["highIntensity",
              "quick"]
-    ]
+        ]
     
     // Preseys Arrays
     var presetsArraysBodyweightLower: [[[Int]]] =
@@ -2105,6 +2177,19 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                 []
             ]
         ]
+    
+    //
+    var numberOfRoundsArrayBodyweightLower: [[Int]] =
+        [
+            [2,
+            3],
+            [4,
+            3,
+            5],
+            [2,
+            3]
+        ]
+    
     
     
     
@@ -2128,6 +2213,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             explanationDictionary = explanationDictionaryGym
             setsDictionary = setsDictionaryGym
             repsDictionary = repsDictionaryGym
+            numberOfRoundsArray = numberOfRoundsArrayGym
             //
             // Set Presets
             switch workoutType2 {
@@ -2171,12 +2257,15 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             case 0:
                 presetsArray = presetsArrayCircuitFull
                 presetsArrays = presetsArraysCircuitFull
+                numberOfRoundsArray = numberOfRoundsArrayCircuitFull
             case 1:
                 presetsArray = presetsArrayCircuitUpper
                 presetsArrays = presetsArraysCircuitUpper
+                numberOfRoundsArray = numberOfRoundsArrayCircuitUpper
             case 2:
                 presetsArray = presetsArrayCircuitLower
                 presetsArrays = presetsArraysCircuitLower
+                numberOfRoundsArray = numberOfRoundsArrayCircuitLower
             default: break
             }
         //
@@ -2196,12 +2285,15 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             case 0:
                 presetsArray = presetsArrayBodyweightFull
                 presetsArrays = presetsArraysBodyweightFull
+                numberOfRoundsArray = numberOfRoundsArrayBodyweightFull
             case 1:
                 presetsArray = presetsArrayBodyweightUpper
                 presetsArrays = presetsArraysBodyweightUpper
+                numberOfRoundsArray = numberOfRoundsArrayBodyweightUpper
             case 2:
                 presetsArray = presetsArrayBodyweightLower
                 presetsArrays = presetsArraysBodyweightLower
+                numberOfRoundsArray = numberOfRoundsArrayBodyweightLower
             default: break
             }
         //
@@ -2295,8 +2387,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         presetsButton.titleLabel?.adjustsFontSizeToFitWidth = true
         presetsButton.setTitle(NSLocalizedString("selectWorkout", comment: ""), for: .normal)
         
-        //
-        movementsTableView.tableFooterView = UIView()
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
@@ -2408,6 +2498,11 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        //
+        movementsTableView.tableFooterView = UIView()
+    }
     
     //
     // TableView -----------------------------------------------------------------------------------------------------------------------
@@ -2416,9 +2511,15 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     func numberOfSections(in tableView: UITableView) -> Int {
         switch tableView {
         case movementsTableView:
-            return overviewArray.count
+            if numberOfRoundsArray.count == 0 {
+                return overviewArray.count
+            } else {
+                if overviewArray.count != 0 {
+                    return numberOfRoundsArray[selectedPreset[0]][selectedPreset[1]]
+                }
+            }
         case presetsTableView:
-            return 3
+            return presetsArray.count
         default: break
         }
         return 0
@@ -2428,7 +2529,11 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch tableView {
         case movementsTableView:
-            return NSLocalizedString(tableViewSectionArray[sectionNumbers[section]], comment: "")
+            if numberOfRoundsArray.count == 0 {
+                return NSLocalizedString(tableViewSectionArray[sectionNumbers[section]], comment: "")
+            } else {
+                return NSLocalizedString("round", comment: "") + String(section + 1)  + NSLocalizedString("of", comment: "") + String(numberOfRoundsArray.count)
+            }
         case presetsTableView:
             return " "
         default: break
@@ -2438,30 +2543,24 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     
     // Will display header
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        switch tableView {
-        case movementsTableView:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
             header.textLabel?.textColor = colour1
             header.contentView.backgroundColor = colour2
             header.contentView.tintColor = colour1
-        case presetsTableView:
-            let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
-            header.textLabel?.textColor = colour1
-            header.contentView.backgroundColor = colour2
-            header.contentView.tintColor = colour1
-        default: break
-        }
     }
     
     // Number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case movementsTableView:
-            return overviewArray[section].count
+            if numberOfRoundsArray.count == 0 {
+                return overviewArray[section].count
+            } else {
+                return roundArray.count
+            }
         case presetsTableView:
-            return 2
+            return presetsArray[section].count
         default: break
         }
         return 0
@@ -2477,7 +2576,17 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             //
             cell.selectionStyle = .none
             //
-            cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[overviewArray[indexPath.section][indexPath.row]]!, comment: "")
+            // Cell contents
+            if numberOfRoundsArray.count == 0 {
+                //
+                cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[overviewArray[indexPath.section][indexPath.row]]!, comment: "")
+                //
+                cell.imageView?.image = demonstrationDictionary[overviewArray[indexPath.section][indexPath.row]]
+            } else {
+                cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[roundArray[indexPath.row]]!, comment: "")
+                //
+                cell.imageView?.image = demonstrationDictionary[roundArray[indexPath.row]]
+            }
             //
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -2487,7 +2596,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             cell.tintColor = colour2
             //
             // Cell Image
-            cell.imageView?.image = demonstrationDictionary[overviewArray[indexPath.section][indexPath.row]]
             cell.imageView?.isUserInteractionEnabled = true
             // Image Tap
             let imageTap = UITapGestureRecognizer()
@@ -2552,7 +2660,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                         overviewArray[i].remove(at: j)
                     }
                 }
-                
                 // Remove empty arrays
                 if overviewArray[i] == [] {
                     overviewArray.remove(at: i)
@@ -2560,8 +2667,13 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                 }
             }
             
+            // Rounds
+            if numberOfRoundsArray.count != 0 {
+                roundArray = overviewArray.flatMap { $0 }
+            }
             
-            
+            //
+            movementsTableView.contentOffset.y = 0
             
             presetsButton.setTitle("- " + NSLocalizedString(presetsArray[indexPath.section][indexPath.row], comment: "") + " -", for: .normal)
             presetsTableView.deselectRow(at: indexPath, animated: true)
@@ -2835,7 +2947,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
-            destinationVC.sessionType = 0
+            destinationVC.sessionType = 1
             //
         //
         case "workoutSessionSegue2":
@@ -2867,7 +2979,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
-            destinationVC.sessionType = 0
+            destinationVC.sessionType = 1
             //
             destinationVC.sessionTitle = presetsArray[selectedPreset[0]][selectedPreset[1]]
         //
@@ -2890,6 +3002,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                 targetAreaArray.append(targetAreaDictionary[i]!)
                 //
                 explanationArray.append(explanationDictionary[i]!)
+                
             }
             //
             destinationVC.sessionArray = workoutArray
@@ -2899,7 +3012,10 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
-            destinationVC.sessionType = 0
+            destinationVC.numberOfRounds = numberOfRoundsArray[selectedPreset[0]][selectedPreset[1]]
+
+            //
+            destinationVC.sessionType = 1
             //
         //
         case "workoutSessionSegue12":
@@ -2931,7 +3047,9 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
-            destinationVC.sessionType = 0
+            destinationVC.numberOfRounds = numberOfRoundsArray[selectedPreset[0]][selectedPreset[1]]
+            //
+            destinationVC.sessionType = 1
             //
             destinationVC.sessionTitle = presetsArray[selectedPreset[0]][selectedPreset[1]]
             //

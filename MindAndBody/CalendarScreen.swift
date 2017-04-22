@@ -208,7 +208,7 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
 //
 // Dismiss --------------------------------------------------------------------------------------------------------
 //
-    @IBAction func checkMarkAction(_ sender: Any) {
+    @IBAction func dismissView(_ sender: Any) {
         //
         self.dismiss(animated: true)
     }

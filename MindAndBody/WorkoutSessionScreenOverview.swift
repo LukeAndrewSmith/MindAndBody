@@ -45,6 +45,9 @@ class WorkoutSessionScreenOverview: UITableViewController {
     //
     var sessionType = Int()
     
+    //
+    var numberOfRounds = Int()
+    
     // Title
     var sessionTitle = String()
     

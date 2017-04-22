@@ -1818,8 +1818,17 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 setsArray.append(setsPickerArray[i])
             }
             //
+            for i in 0...11 {
+                if i == 0 {
+                    repsPickerArray[i] = repsPickerArray[i] + " rep"
+                } else {
+                    repsPickerArray[i] = repsPickerArray[i] + " reps"
+                }
+            }
+            //
             for i in customRepsArray[sessionPickerView.selectedRow(inComponent: 0)] {
                 repsArray.append(repsPickerArray[i])
+                
             }
             
             //
@@ -1851,6 +1860,14 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             //
             for i in customSetsArray[sessionPickerView.selectedRow(inComponent: 0)] {
                 setsArray.append(setsPickerArray[i])
+            }
+            //
+            for i in 0...11 {
+                if i == 0 {
+                   repsPickerArray[i] = repsPickerArray[i] + " rep"
+                } else {
+                    repsPickerArray[i] = repsPickerArray[i] + " reps"
+                }
             }
             //
             for i in customRepsArray[sessionPickerView.selectedRow(inComponent: 0)] {

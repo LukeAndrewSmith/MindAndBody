@@ -37,7 +37,7 @@ class TrackingScreen: UIViewController {
 //
 // Dismiss view --------------------------------------------------------------------------------------------------------
 //
-    @IBAction func checkMarkAction(_ sender: Any) {
+    @IBAction func dismissView(_ sender: Any) {
         self.dismiss(animated: true)
     }
     

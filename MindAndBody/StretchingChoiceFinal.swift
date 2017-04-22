@@ -1406,7 +1406,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
-            destinationVC.sessionType = 0
+            destinationVC.sessionType = 2
             //
         } else if (segue.identifier == "stretchingSessionSegue2") {
             //
@@ -1437,7 +1437,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
-            destinationVC.sessionType = 0
+            destinationVC.sessionType = 2
             //
             destinationVC.sessionTitle = presetsArray[selectedPreset[0]][selectedPreset[1]]
         }

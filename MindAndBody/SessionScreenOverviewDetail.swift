@@ -107,6 +107,8 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
     // Title Labels
     // Sets and Reps
     @IBOutlet weak var setsRepsLabel: UILabel!
+    @IBOutlet weak var setsRepsLabelCenter: NSLayoutConstraint!
+    @IBOutlet weak var weightSuggestion: UILabel!
     // Explanation Text
     let explanationText = UILabel()
     // Progress Label
@@ -170,6 +172,13 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         imageSwipeRight.direction = UISwipeGestureRecognizerDirection.right
         bodyImage.addGestureRecognizer(imageSwipeRight)
         bodyImage.isUserInteractionEnabled = true
+        
+        // Weight suggestion
+        if sessionType == 1 {
+            setsRepsLabelCenter.constant = (-view.frame.size.width / 2) * (1/3)
+        } else {
+            weightSuggestion.removeFromSuperview()
+        }
         
         // Set Rep View
         setRepView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)

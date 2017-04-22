@@ -111,6 +111,10 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     // Labels
     // Sets and Reps
     @IBOutlet weak var setsRepsLabel: UILabel!
+    @IBOutlet weak var setsRepsLabelCenter: NSLayoutConstraint!
+    // Weight suggestion label
+    @IBOutlet weak var weightSuggestion: UILabel!
+    
     // Explanation Text
     let explanationText = UILabel()
     // Progress Label
@@ -199,6 +203,13 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         bodyImage.isUserInteractionEnabled = true
         //
         demonstrationImageButton.alpha = 0
+        
+        // Weight suggestion
+        if sessionType == 1 {
+            setsRepsLabelCenter.constant = (-view.frame.size.width / 2) * (1/3)
+        } else {
+            weightSuggestion.removeFromSuperview()
+        }
         
         // Set Rep View
         setRepView.backgroundColor = colour2

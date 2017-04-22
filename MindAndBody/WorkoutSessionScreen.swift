@@ -25,9 +25,14 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     // Session Type
     var sessionType = Int()
     
+    //
+    var numberOfRounds = Int()
+    //
     // Session Screen Index
     //
     var sessionScreenIndex = 0
+    //
+    var sessionScreenRoundIndex = 0
     
     // Initialize Arrays
     //
@@ -49,6 +54,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     // Explanation Array
     var explanationArray: [String] = []
     
+   
     
     //
     // Outlets ---------------------------------------------------------------------------------------------------------------------
@@ -105,6 +111,13 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     // Round View
     //
     @IBOutlet weak var roundView: UIView!
+    //
+    @IBOutlet weak var roundNumber: UILabel!
+    // Round stack
+    @IBOutlet weak var roundStack: UIStackView!
+    // Round Progress
+    @IBOutlet weak var roundProgress: UIProgressView!
+    
     
     
     // Labels
@@ -288,6 +301,8 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
         
+        //
+        roundProgress.progress = 0.0
         
         // Display Content
         displayContent()
@@ -313,37 +328,50 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         bodyImage.contentMode = .scaleAspectFit
         bodyImage.layer.masksToBounds = true
     }
-    
+   
     
     //
-    // Generate Buttons ---------------------------------------------------------------------------------------------------------------------
+    // Generate Image Views --------------------------------------------------------------------------------------------------------------------
     //
-    func createButton() -> UIButton {
-        let setButton = UIButton()
-        let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
-        setButton.addConstraints([widthHeight])
-        setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
-        setButton.layer.borderWidth = 4
-        setButton.layer.borderColor = colour1.cgColor
-        setButton.layer.cornerRadius = 21.4375
-        setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
-        setButton.backgroundColor = colour2
-        setButton.isEnabled = false
+    //
+    func createStack(movementNumber: Int) -> UIStackView {
+        let movementStack = UIStackView()
+        movementStack.axis = .vertical
+        movementStack.distribution = .fillProportionally
         //
-        setRepView.addSubview(setButton)
+        let movementImage = UIImageView()
+        movementImage.image = demonstrationArray[movementNumber]
+        movementImage.contentMode = .scaleAspectFit
+        movementStack.addArrangedSubview(movementImage)
+        movementStack.frame.size.height = (roundView.frame.size.height - 20) * 2/3
         //
-        return setButton
+        let movementLabel = UILabel()
+        movementLabel.text = NSLocalizedString(sessionArray[movementNumber], comment: "")
+        movementLabel.font = UIFont(name: "SFUIDisplay-thin", size: 17)
+        movementLabel.textAlignment = .center
+        movementLabel.frame.size = CGSize(width: movementImage.frame.size.width - 10, height: 20)
+        movementLabel.textColor = colour1
+        movementLabel.adjustsFontSizeToFitWidth = true
+        movementLabel.frame.size.height = (roundView.frame.size.height - 20) * 1/3
+        if movementNumber == sessionScreenIndex {
+            movementLabel.layer.borderWidth = 1
+            movementLabel.layer.borderColor = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0).cgColor
+        }
+        movementStack.addArrangedSubview(movementLabel)
+        //
+        
+        return movementStack
     }
     
     //
-    var buttonArray = [UIButton]()
-    //
-    func createButtonArray(){
+    func fillRoundStack() {
         //
-        let numberOfButtons = setsArray[sessionScreenIndex]
+        let numberOfMovements = sessionArray.count
         //
-        for _ in 1...numberOfButtons{
-            buttonArray += [createButton()]
+        roundStack.subviews.forEach({ $0.removeFromSuperview() })
+        //
+        for i in 0...(numberOfMovements - 1) {
+            roundStack.addArrangedSubview(createStack(movementNumber: i))
         }
     }
     
@@ -383,34 +411,27 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         targetAreaButton.alpha = 1
         targetAreaButton.isEnabled = true
         
+        // Round
+        // String
+        let roundString = NSLocalizedString("round", comment: "") + String(sessionScreenRoundIndex + 1) + NSLocalizedString("of", comment: "") + String(numberOfRounds)
+        // Range of String
+        let roundRangeString = NSLocalizedString("round", comment: "") + String(sessionScreenRoundIndex + 1) + NSLocalizedString("of", comment: "") + String(numberOfRounds)
+        let roundRange = (roundString as NSString).range(of: roundRangeString)
+        // Range of Titles
+        let roundRangeString1 = (NSLocalizedString("round", comment: ""))
+        let roundRangeString2 = (NSLocalizedString("of", comment: ""))
+        let roundRange1 = (roundString as NSString).range(of: roundRangeString1)
+        let roundRange2 = (roundString as NSString).range(of: roundRangeString2)
+        //
+        let finalRoundText = NSMutableAttributedString(string: roundString)
+        // Add Attributes
+        finalRoundText.addAttribute(NSForegroundColorAttributeName, value: colour1, range: roundRange1)
+        finalRoundText.addAttribute(NSForegroundColorAttributeName, value: colour1, range: roundRange2)
+        //
+        roundNumber.attributedText = finalRoundText
+        //
+        fillRoundStack()
         
-        // Set Buttons
-        //
-        let setRepSubViews = self.setRepView.subviews
-        for subview in setRepSubViews{
-            subview.removeFromSuperview()
-        }
-        buttonArray = []
-        createButtonArray()
-        // Stack View
-        //
-        let stackView = UIStackView(arrangedSubviews: buttonArray)
-        buttonArray[0].isEnabled = true
-        let numberOfButtons2 = CGFloat(setsArray[sessionScreenIndex])
-        // Set Button Layout
-        //
-        let xValue = ((view.frame.size.width - (numberOfButtons2 * 42.875)) / CGFloat(numberOfButtons2 + 1))
-        let yValue = (setRepView.frame.size.height - 42.875) / 2
-        let widthValue1 =
-            CGFloat(numberOfButtons2 - 1) * CGFloat(view.frame.size.width - (numberOfButtons2 * 42.875))
-        let widthValue2 = (CGFloat(widthValue1) / CGFloat(numberOfButtons2 + 1)) + (numberOfButtons2 * 42.875)
-        // Layout formula
-        stackView.frame = CGRect(x: xValue, y: yValue, width: widthValue2, height: 42.875)
-        //
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        //
-        setRepView.addSubview(stackView)
         
         
         // Timer to Back
@@ -756,62 +777,37 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     //
     // Button Actions ------------------------------------------------------------------------------------------------
     //
-    // Set Buttons
-    //
-    var buttonNumber = 0
-    
-    // Set Button
-    @IBAction func setButtonAction(sender: UIButton) {
-        //
-        // Rest Timer Notification
-        //
-        //
-        let content = UNMutableNotificationContent()
-        content.title = NSLocalizedString("restOver", comment: "")
-        content.body = NSLocalizedString("nextSet", comment: "")
-        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
-        content.sound = UNNotificationSound.default()
-        //
-        let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
-        //
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTimes[sessionType]), repeats: false)
-        let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
-        //
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: { finished in
-            if self.buttonArray.count == 1 {
-            } else {
-                if self.buttonNumber < 2 {
-                    self.buttonNumber = self.buttonNumber + 1
-                    self.buttonArray[self.buttonNumber].isEnabled = true
-                }
-            }
-        })
-        
-        //
-        buttonArray[buttonNumber].isEnabled = false
-        //
-        //
-        sender.backgroundColor = colour1
-        sender.isEnabled = false
-    }
-    
-    
+   
     // Next Navigation Button
     @IBAction func nextButton(_ sender: Any) {
-        //
-        if sessionScreenIndex == sessionArray.count - 1 {
+        // Incriment movements and rounds
+        if sessionScreenRoundIndex < (numberOfRounds - 1) {
+            backButton.tintColor = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
+            // Next movement
+            if sessionScreenIndex < (sessionArray.count - 1) {
+                sessionScreenIndex = sessionScreenIndex + 1
+            // New Round
+            } else if sessionScreenIndex == (sessionArray.count - 1){
+                sessionScreenIndex = 0
+                //
+                sessionScreenRoundIndex = sessionScreenRoundIndex + 1
+                roundProgress.progress = Float(sessionScreenRoundIndex / numberOfRounds)
+            }
+            //
+        // Final screen. Dismiss
+        } else if sessionScreenIndex == (sessionArray.count - 1) || (sessionScreenRoundIndex == numberOfRounds - 1) {
             //
             sessionScreenIndex = 0
+            sessionScreenRoundIndex = 0
             self.dismiss(animated: true)
+        // Next round
+        } else if sessionScreenRoundIndex == (numberOfRounds - 1) {
             //
-        } else {
-            //
-            backButton.tintColor = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
-            sessionScreenIndex = sessionScreenIndex + 1
-            buttonNumber = 0
-            displayContent()
+            sessionScreenIndex = 0
+            sessionScreenRoundIndex = 0
+            self.dismiss(animated: true)
         }
-        //
+        displayContent()
         flashScreen()
     }
     
@@ -824,14 +820,12 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             //
             backButton.tintColor = .clear
             sessionScreenIndex = sessionScreenIndex - 1
-            buttonNumber = 0
             //
             flashScreen()
             displayContent()
         } else {
             //
             sessionScreenIndex = sessionScreenIndex - 1
-            buttonNumber = 0
             //
             flashScreen()
             displayContent()

@@ -266,21 +266,21 @@
 			name = Custom;
 			sourceTree = "<group>";
 		};
-		072829E61EA8A0C80090164A /* Workout Overview Session */ = {
+		072829E61EA8A0C80090164A /* Circuit Workout Overview Session */ = {
 			isa = PBXGroup;
 			children = (
 				072829EA1EA8A26A0090164A /* WorkoutSessionScreenOverview.swift */,
 				072829EC1EA8A2810090164A /* WorkoutSessionScreenOverviewDetail.swift */,
 			);
-			name = "Workout Overview Session";
+			name = "Circuit Workout Overview Session";
 			sourceTree = "<group>";
 		};
-		072829E71EA8A0CF0090164A /* Workout Detail Session */ = {
+		072829E71EA8A0CF0090164A /* Circuit Workout Detail Session */ = {
 			isa = PBXGroup;
 			children = (
 				072829E81EA8A2470090164A /* WorkoutSessionScreen.swift */,
 			);
-			name = "Workout Detail Session";
+			name = "Circuit Workout Detail Session";
 			sourceTree = "<group>";
 		};
 		0728F3E11E1C2D7C00EA409B /* Warmup */ = {
@@ -319,8 +319,8 @@
 			children = (
 				079187261E7B4D9F00E7153A /* Detail Session */,
 				079187271E7B4DCD00E7153A /* Overview Session */,
-				072829E71EA8A0CF0090164A /* Workout Detail Session */,
-				072829E61EA8A0C80090164A /* Workout Overview Session */,
+				072829E71EA8A0CF0090164A /* Circuit Workout Detail Session */,
+				072829E61EA8A0C80090164A /* Circuit Workout Overview Session */,
 				0719F2B31E50F8D100AC6729 /* Meditation Screens */,
 			);
 			name = "Session Screens";
