@@ -237,12 +237,37 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
             }
         }
     }
+  
+    
+//
+// Segues
+//
+    var yogaType = Int()
+    //
+    @IBAction func practicesAction(_ sender: Any) {
+        yogaType = 0
+        performSegue(withIdentifier: "yogaSegue", sender: nil)
+    }
+    
+    
+    @IBAction func guidedAction(_ sender: Any) {
+        yogaType = 0
+        performSegue(withIdentifier: "yogaSegue", sender: nil)
+    }
     
     
 //
 // Remove Back Bar Text
 //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Pass Data
+        if (segue.identifier == "yogaSegue") {
+            //
+            let destinationVC = segue.destination as! YogaChoiceFinal
+            // Indicate to next screen which button was pressed
+            destinationVC.yogaType = yogaType
+        }
+        // Remove back bar text
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem

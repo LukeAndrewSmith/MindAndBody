@@ -103,15 +103,12 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
     @IBOutlet weak var timerButton: UIButton!
     
     // Progress Bar
-    @IBOutlet weak var progressBarView: UIView!
     @IBOutlet weak var progressBar: UIProgressView!
     //
-    @IBOutlet weak var progressBarLeft: NSLayoutConstraint!
     
     // Labels
     // Sets and Reps
     @IBOutlet weak var setsRepsLabel: UILabel!
-    @IBOutlet weak var setsRepsLabelCenter: NSLayoutConstraint!
     // Weight suggestion label
     @IBOutlet weak var weightSuggestion: UILabel!
     
@@ -205,9 +202,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         demonstrationImageButton.alpha = 0
         
         // Weight suggestion
-        if sessionType == 1 {
-            setsRepsLabelCenter.constant = (-view.frame.size.width / 2) * (1/3)
-        } else {
+        if sessionType != 1 {
             weightSuggestion.removeFromSuperview()
         }
         
@@ -222,7 +217,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         explanationText.numberOfLines = 0
         
         // Expand Button
-        let origImage1 = UIImage(named: "Plus")
+        let origImage1 = UIImage(named: "QuestionMarkM")
         let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         explanationExpand.setImage(tintedImage1, for: .normal)
@@ -306,16 +301,14 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
 // Progress Bar ----------------------------------------------------------------------------------------------------------
 //
         // Thickness
-        progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 49, height: self.progressBarView.frame.size.height / 2)
-        progressBar.center = progressBarView.center
-        progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
+        //progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
         // Rounded Edges
-        progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
-        progressBar.clipsToBounds = true
+        // Colour
+        progressBar.trackTintColor = colour2
+        progressBar.progressTintColor = colour3
         // Initial state
         progressBar.setProgress(0, animated: true)
         //
-        progressBarLeft.constant = progressLabel.frame.size.width + 34
         
         // Display Content
         displayContent()
@@ -333,10 +326,10 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         imageScroll.contentSize = CGSize(width: imageScroll.frame.size.width * 2, height: imageScroll.frame.size.height)
         imageScroll.isScrollEnabled = false
         // Demonstration Image
-        demonstrationImage.frame = imageScroll.frame
+        demonstrationImage.frame = imageScroll.bounds
         demonstrationImage.contentMode = .scaleAspectFit
         // Body Image
-        bodyImage.frame = CGRect(x: imageScroll.frame.size.width, y: 0, width: imageScroll.frame.size.width, height: imageScroll.frame.size.width)
+        bodyImage.frame = CGRect(x: imageScroll.frame.size.width, y: 0, width: imageScroll.frame.size.width, height: imageScroll.frame.size.height)
         bodyImage.contentMode = .scaleAspectFit
     }
     
@@ -450,7 +443,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         self.progressLabel.text = (String(sessionScreenIndex + 1)+"/"+String(sessionArray.count))
         //
         setsRepsLabel.textColor = colour2
-        progressLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        progressLabel.textColor = colour2
         
         // Progress Bar
         let sessionIndexP = Float(sessionScreenIndex)
@@ -466,15 +459,14 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
 // Flash Screen ---------------------------------------------------------------------------------------------------------
 //
     // Flash Screen
-    func flashScreen() {
+    func flashScreenGreen() {
         //
         let flash = UIView()
         //
-        flash.frame = CGRect(x: 0, y: -100, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
-        flash.backgroundColor = colour1
-        self.view.alpha = 1
-        self.view.addSubview(flash)
-        self.view.bringSubview(toFront: flash)
+        flash.frame = UIScreen.main.bounds
+        flash.backgroundColor = colour3
+        flash.alpha = 0.9
+        UIApplication.shared.keyWindow?.insertSubview(flash, aboveSubview: view)
         //
         UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
             flash.alpha = 0
@@ -482,6 +474,23 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             flash.removeFromSuperview()
         })
     }
+    //
+    func flashScreenRed() {
+        //
+        let flash = UIView()
+        //
+        flash.frame = UIScreen.main.bounds
+        flash.backgroundColor = colour4
+        flash.alpha = 0.9
+        UIApplication.shared.keyWindow?.insertSubview(flash, aboveSubview: view)
+        //
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
+            flash.alpha = 0
+        }, completion: {(finished: Bool) -> Void in
+            flash.removeFromSuperview()
+        })
+    }
+
     
   
 //
@@ -842,13 +851,13 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
         //
         } else {
             //
-            backButton.tintColor = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
+            backButton.tintColor = colour4
             sessionScreenIndex = sessionScreenIndex + 1
             buttonNumber = 0
             displayContent()
         }
         //
-        flashScreen()
+        flashScreenGreen()
     }
     
     // Back Navigation Button
@@ -862,14 +871,14 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             sessionScreenIndex = sessionScreenIndex - 1
             buttonNumber = 0
             //
-            flashScreen()
+            flashScreenRed()
             displayContent()
         } else {
             //
             sessionScreenIndex = sessionScreenIndex - 1
             buttonNumber = 0
             //
-            flashScreen()
+            flashScreenRed()
             displayContent()
         }
     }
@@ -1613,7 +1622,7 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             let path = CGMutablePath()
             let y = navigationBarHeight + UIApplication.shared.statusBarFrame.height + imageScroll.frame.size.height
             let yValue = y + setsRepsLabel.frame.size.height + setRepView.frame.size.height + timerButton.frame.size.height
-            path.addRect(CGRect(x: 14 + progressLabel.frame.size.width, y: yValue, width: view.frame.size.width - 14 - progressLabel.frame.size.width, height: progressBarView.frame.size.height))
+            path.addRect(CGRect(x: 14 + progressLabel.frame.size.width, y: yValue, width: view.frame.size.width - 14 - progressLabel.frame.size.width, height: progressBar.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()

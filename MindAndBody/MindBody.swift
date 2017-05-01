@@ -16,8 +16,14 @@ let backgroundImageArray: [UIImage] =
     [#imageLiteral(resourceName: "Background 0"), #imageLiteral(resourceName: "Background 1"), #imageLiteral(resourceName: "Background 2"), #imageLiteral(resourceName: "Background 3"), #imageLiteral(resourceName: "Background 4")]
 
 // Colours
+// Grey
 let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+// Black
 let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+// Green
+let colour3 = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
+// Red
+let colour4 = UIColor(red:0.74, green:0.25, blue:0.20, alpha:1.0)
 
 
 //
@@ -632,7 +638,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     //
-    var  viewNumber = 0
+    var viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()
     let nextButton = UIButton()

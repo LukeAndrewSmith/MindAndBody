@@ -283,8 +283,8 @@ class WorkoutSessionScreenOverview: UITableViewController {
                 progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
                 progressBar.clipsToBounds = true
                 // Colour
-                progressBar.trackTintColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-                progressBar.progressTintColor = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
+                progressBar.trackTintColor = colour2
+                progressBar.progressTintColor = colour3
                 //
                 didSetFrame = true
             }

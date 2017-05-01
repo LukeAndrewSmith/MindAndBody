@@ -107,7 +107,6 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
     // Title Labels
     // Sets and Reps
     @IBOutlet weak var setsRepsLabel: UILabel!
-    @IBOutlet weak var setsRepsLabelCenter: NSLayoutConstraint!
     @IBOutlet weak var weightSuggestion: UILabel!
     // Explanation Text
     let explanationText = UILabel()
@@ -174,9 +173,7 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         bodyImage.isUserInteractionEnabled = true
         
         // Weight suggestion
-        if sessionType == 1 {
-            setsRepsLabelCenter.constant = (-view.frame.size.width / 2) * (1/3)
-        } else {
+        if sessionType != 1 {
             weightSuggestion.removeFromSuperview()
         }
         
@@ -191,7 +188,7 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         explanationText.numberOfLines = 0
         
         // Expand Button
-        let origImage1 = UIImage(named: "Plus")
+        let origImage1 = UIImage(named: "QuestionMarkM")
         let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         explanationExpand.setImage(tintedImage1, for: .normal)
@@ -272,16 +269,13 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         // Progress Bar
         //
         // Thickness
-        progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 49, height: self.progressBarView.frame.size.height / 2)
-        progressBar.center = progressBarView.center
-        progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
-        // Rounded Edges
-        progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
-        progressBar.clipsToBounds = true
+        progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
         // Initial state
         progressBar.setProgress(0, animated: true)
+        // Colour
+        progressBar.trackTintColor = colour2
+        progressBar.progressTintColor = colour3
         //
-        progressBarLeft.constant = progressLabel.frame.size.width + 34
 
         // Display Content
         // Navigation Bar
@@ -369,11 +363,11 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         imageScroll.isScrollEnabled = false
         
         // Demonstration Image
-        demonstrationImage.frame = imageScroll.frame
+        demonstrationImage.frame = imageScroll.bounds
         demonstrationImage.contentMode = .scaleAspectFit
         
         // Body Image
-        bodyImage.frame = CGRect(x: imageScroll.frame.size.width, y: 0, width: imageScroll.frame.size.width, height: imageScroll.frame.size.width)
+        bodyImage.frame = CGRect(x: imageScroll.frame.size.width, y: 0, width: imageScroll.frame.size.width, height: imageScroll.frame.size.height)
         bodyImage.contentMode = .scaleAspectFit
         
         // Image Scroll Position on Target Area

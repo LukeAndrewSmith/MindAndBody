@@ -109,18 +109,29 @@ class SessionScreenOverview: UITableViewController {
         //
         navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
         navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
-        navigationTitle.center.x = self.view.center.x
         navigationTitle.textColor = colour1
         navigationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 22)
         navigationTitle.backgroundColor = .clear
         navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
+        navigationTitle.center.x = self.view.center.x
         self.navigationController?.navigationBar.barTintColor = colour2
         //
         self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
         
         // Hide Screen
         hideScreen.tintColor = colour1
+        
+        // Progress Bar
+        // Thickness
+        progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
+        progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
+        // Rounded Edges
+        // Colour
+        progressBar.trackTintColor = colour1
+        progressBar.progressTintColor = colour3
+        //
+        progressBar.setProgress(0, animated: true)
         
         // TableView Background
         let tableViewBackground = UIView()
@@ -217,7 +228,7 @@ class SessionScreenOverview: UITableViewController {
         sender.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         
         //
-        tableView.reloadData()
+        updateProgress()
     }
     
     // Generate an Array of Arrays of Buttons
@@ -237,7 +248,25 @@ class SessionScreenOverview: UITableViewController {
         buttonArray[0][0].isEnabled = true
     }
     
-    
+    // Update Progress
+    func updateProgress() {
+        // Progress Bar
+        // Current Button
+        let currentButton = Float(buttonNumber.reduce(0, +))
+        // Total Buttons
+        let totalButtons = Float(setsArray.reduce(0, +))
+        
+        //
+        if currentButton > 0 {
+            // Current Progress
+            let currentProgress = currentButton/totalButtons
+            progressBar.setProgress(currentProgress
+                , animated: true)
+        } else {
+            // Initial state
+            progressBar.setProgress(0, animated: true)
+        }
+    }
 //
 // TableView ---------------------------------------------------------------------------------------------------------------------
 //
@@ -262,43 +291,20 @@ class SessionScreenOverview: UITableViewController {
         //
         if section == 0 {
             //
-            progressBar.removeFromSuperview()
-            
-            //
-            if didSetFrame == false {
-                // Thickness
-                progressBar.frame = CGRect(x: 27, y: 0, width: self.view.frame.size.width - 54, height: header.frame.size.height / 2)
-                progressBar.center = header.center
-                progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 3)
-                // Rounded Edges
-                progressBar.layer.cornerRadius = self.progressBar.frame.size.height / 2
-                progressBar.clipsToBounds = true
-                // Colour
-                progressBar.trackTintColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-                progressBar.progressTintColor = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
-                //
-                didSetFrame = true
-            }
-            //
-            header.addSubview(progressBar)
-    
-            // Progress Bar
-            // Current Button
-            let currentButton = Float(buttonNumber.reduce(0, +))
-            // Total Buttons
-            let totalButtons = Float(setsArray.reduce(0, +))
-            
-            //
-            if currentButton > 0 {
-                // Current Progress
-                let currentProgress = currentButton/totalButtons
-                progressBar.setProgress(currentProgress
-                    , animated: true)
+            if header.subviews.contains(progressBar) {
             } else {
-                // Initial state
-                progressBar.setProgress(0, animated: true)
+                header.addSubview(progressBar)
             }
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0: return 2
+        case 1: return 0
+        default: break
+        }
+        return 0
     }
     
     // Number of rows

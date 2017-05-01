@@ -1176,6 +1176,205 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
     ]
     
     
+    
+    
+    //
+    // Screen Arrays --------------------------------------------------------------------------------------
+    //
+    var targetAreaArrayF =
+        [
+            // Legs (Quads)
+            [#imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Quad")],
+            // Legs (Hamstrings/Glutes)
+            [#imageLiteral(resourceName: "Deadlift"),
+             #imageLiteral(resourceName: "Deadlift"),
+             #imageLiteral(resourceName: "Deadlift"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Rear Thigh"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Glute")],
+            // Legs (General)
+            [#imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat"),
+             #imageLiteral(resourceName: "Squat")],
+            
+            // Pull (Back)
+            [#imageLiteral(resourceName: "Back and Bicep"),
+             #imageLiteral(resourceName: "Back and Bicep"),
+             #imageLiteral(resourceName: "Back and Bicep"),
+             #imageLiteral(resourceName: "Back and Bicep"),
+             #imageLiteral(resourceName: "Back and Bicep"),
+             #imageLiteral(resourceName: "Back, Bicep and Erector"),
+             #imageLiteral(resourceName: "Back, Bicep and Erector"),
+             #imageLiteral(resourceName: "Back, Bicep and Erector"),
+             #imageLiteral(resourceName: "Back and Bicep"),
+             #imageLiteral(resourceName: "Back and Bicep")],
+            // Pull (Upper Back)
+            [#imageLiteral(resourceName: "Upper Back and Shoulder"),
+             #imageLiteral(resourceName: "Upper Back and Shoulder"),
+             #imageLiteral(resourceName: "Upper Back and Shoulder"),
+             #imageLiteral(resourceName: "Upper Back and Shoulder")],
+            // Pull (Rear Delts)
+            [#imageLiteral(resourceName: "Rear Delt")],
+            // Pull (Traps)
+            [#imageLiteral(resourceName: "Trap"),
+             #imageLiteral(resourceName: "Trap")],
+            // Pull (Biceps)
+            [#imageLiteral(resourceName: "Bicep"),
+             #imageLiteral(resourceName: "Bicep"),
+             #imageLiteral(resourceName: "Bicep"),
+             #imageLiteral(resourceName: "Bicep")],
+            // Pull (Forearms)
+            [#imageLiteral(resourceName: "Forearm"),
+             #imageLiteral(resourceName: "Forearm"),
+             #imageLiteral(resourceName: "Forearm")],
+            
+            // Push (Chest)
+            [#imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Pec and Front Delt"),
+             #imageLiteral(resourceName: "Pec and Front Delt"),
+             #imageLiteral(resourceName: "Pec and Front Delt")],
+            // Push (Shoulders)
+            [#imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Shoulder"),
+             #imageLiteral(resourceName: "Shoulder")],
+            // Push (Triceps)
+            [#imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+             #imageLiteral(resourceName: "Tricep"),
+             #imageLiteral(resourceName: "Tricep"),
+             #imageLiteral(resourceName: "Tricep"),
+             #imageLiteral(resourceName: "Tricep")],
+            
+            // Calves
+            [#imageLiteral(resourceName: "Calf"),
+             #imageLiteral(resourceName: "Calf")],
+            // Abs/Core
+            [#imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core"),
+             #imageLiteral(resourceName: "Core")]
+    ]
+    
+    var targetAreaArray: [UIImage] = []
+    // Explanation Array
+    var explanationArrayF =
+        [
+            // Legs (Quads)
+            ["squatE",
+             "frontSquatE",
+             "hackSquatE",
+             "legPressE",
+             "dumbellFrontSquatE",
+             "legExtensionsE"],
+            // Legs (Hamstrings/Glutes)
+            ["deadliftE",
+             "romanianDeadliftE",
+             "dumbellRomanianDeadliftE",
+             "weightedHipThrustE",
+             "legCurlE",
+             "oneLeggedDeadliftE",
+             "gluteIsolationMachineE"],
+            // Legs (General)
+            ["lungeBarbellE",
+             "lungeDumbellE",
+             "bulgarianSplitSquatE",
+             "stepUpE"],
+            
+            // Pull (Back)
+            ["pullUpE",
+             "pullDownE",
+             "pullDownMachineE",
+             "hammerStrengthPullDownE",
+             "kneelingPullDownE",
+             "bentOverRowBarbellE",
+             "bentOverRowDumbellE",
+             "tBarRowE",
+             "rowMachineE",
+             "hammerStrengthRowE"],
+            // Pull (Upper Back)
+            ["facePullE",
+             "smithMachinePullUpE",
+             "leaningBackPullDownE",
+             "seatedMachineRowE"],
+            // Pull (Rear Delts)
+            ["bentOverBarbellRowE"],
+            // Pull (Traps)
+            ["shrugBarbellE",
+             "shrugDumbellE"],
+            // Pull (Biceps)
+            ["hamerCurlE",
+             "hammerCurlCableE",
+             "cableCurlE",
+             "curlE"],
+            // Pull (Forearms)
+            ["farmersCarryE",
+             "reverseBarbellCurlE",
+             "forearmCurlE"],
+            
+            // Push (Chest)
+            ["pushUpE",
+             "benchPressE",
+             "benchPressDumbellE",
+             "semiInclineDumbellPressE",
+             "hammerStrengthPressE",
+             "chestPressE",
+             "platePressE",
+             "barbellKneelingPressE",
+             "cableFlyE"],
+            // Push (Shoulders)
+            ["standingShoulderPressBarbellE",
+             "standingShoulderPressDumbellE",
+             "lateralRaiseE",
+             "frontRaiseE"],
+            // Push (Triceps)
+            ["ballPushUpE",
+             "trianglePushUpE",
+             "closeGripBenchE",
+             "cableExtensionE",
+             "ropeExtensionE"],
+            
+            // Calves
+            ["standingCalfRaiseE",
+             "seatedCalfRaiseE"],
+            // Abs/Core
+            ["hangingLegRaiseE",
+             "hangingLegTwistE",
+             "plankE",
+             "sideLegDropE",
+             "abRolloutE"]
+    ]
+    var explanationArray: [String] = []
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Flash Screen
     func flashScreen() {
         
@@ -1255,7 +1454,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour2, for: .normal)
+        beginButton.setTitleColor(colour3, for: .normal)
         
         
         
@@ -2515,71 +2714,6 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
             
         }
     }
-    
-    
-    
-    
-    // Pass Array to next ViewController
-    //
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "workoutFull1") {
-            
-            
-            let destinationNC = segue.destination as! UINavigationController
-            
-            let destinationVC = destinationNC.viewControllers.first as! ClassicScreenFull
-            
-            destinationVC.workoutMovementsArray = workoutFullArray
-            destinationVC.workoutMovementsSelectedArray = workoutSelectedArray
-            destinationVC.setsArrayF = setsDictionary[pickerView.selectedRow(inComponent: 0)]!
-            destinationVC.repsArrayF = repsDictionary[pickerView.selectedRow(inComponent: 0)]!
-            
-            
-            // Weight
-            if UserDefaults.standard.string(forKey: "units") == "kg" {
-                destinationVC.weightArrayF = weightDictionaryKG[pickerView.selectedRow(inComponent: 0)]!
-            } else {
-                destinationVC.weightArrayF = weightDictionaryLB[pickerView.selectedRow(inComponent: 0)]!
-            }
-            
-        //
-        } else if (segue.identifier == "workoutFull2"){
-            
-            // OverView View Controller
-            let destinationNC = segue.destination as! UINavigationController
-            
-            let destinationVC = destinationNC.viewControllers.first as! ClassicScreenFull2
-            
-            destinationVC.workoutMovementsArray = workoutFullArray
-            destinationVC.workoutMovementsSelectedArray = workoutSelectedArray
-            destinationVC.setsArrayF = setsDictionary[pickerView.selectedRow(inComponent: 0)]!
-            destinationVC.repsArrayF = repsDictionary[pickerView.selectedRow(inComponent: 0)]!
-            
-            let pickerIndex = pickerView.selectedRow(inComponent: 0)
-            if pickerIndex < pickerViewArray.count - 1 {
-                destinationVC.workoutTitle = pickerViewArray[pickerIndex]
-            } else if pickerIndex > pickerViewArray.count - 1 {
-                let pickerArray = UserDefaults.standard.object(forKey: "workoutFullPresetTexts") as! [String]
-                destinationVC.workoutTitle = pickerArray[pickerIndex - pickerViewArray.count]
-            }
-            
-            
-            // Weight
-            if UserDefaults.standard.string(forKey: "units") == "kg" {
-                destinationVC.weightArrayF = weightDictionaryKG[pickerView.selectedRow(inComponent: 0)]!
-            } else {
-                destinationVC.weightArrayF = weightDictionaryLB[pickerView.selectedRow(inComponent: 0)]!
-            }
-            
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
     
     
     

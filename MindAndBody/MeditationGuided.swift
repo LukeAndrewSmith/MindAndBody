@@ -126,7 +126,7 @@ class MeditationGuided: UIViewController {
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour2, for: .normal)
+        beginButton.setTitleColor(colour3, for: .normal)
         
         // View Elements
         //

@@ -178,7 +178,7 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
         explanationText.numberOfLines = 0
         
         // Expand Button
-        let origImage1 = UIImage(named: "Plus")
+        let origImage1 = UIImage(named: "QuestionMarkM")
         let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         explanationExpand.setImage(tintedImage1, for: .normal)
@@ -333,11 +333,11 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
         imageScroll.isScrollEnabled = false
         
         // Demonstration Image
-        demonstrationImage.frame = imageScroll.frame
+        demonstrationImage.frame = imageScroll.bounds
         demonstrationImage.contentMode = .scaleAspectFit
         
         // Body Image
-        bodyImage.frame = CGRect(x: imageScroll.frame.size.width, y: 0, width: imageScroll.frame.size.width, height: imageScroll.frame.size.width)
+        bodyImage.frame = CGRect(x: imageScroll.frame.size.width, y: 0, width: imageScroll.frame.size.width, height: imageScroll.frame.size.height)
         bodyImage.contentMode = .scaleAspectFit
         
         // Image Scroll Position on Target Area

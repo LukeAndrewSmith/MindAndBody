@@ -443,16 +443,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         // Editing
         @IBOutlet weak var editingButton: UIButton!
     
-    // Information View
-    let informationView = UIScrollView()
-    // Information Title Label
-    let informationTitle = UILabel()
-    
     // Session Picker View
     @IBOutlet weak var sessionPickerView: UIPickerView!
-    
-    // Question Mark
-    @IBOutlet weak var questionMark: UIBarButtonItem!
     
     // Add Preset
     @IBOutlet weak var addPreset: UIButton!
@@ -538,7 +530,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         
         // Colour
         self.view.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        questionMark.tintColor = colour1
         
         // Navigation Bar Title
         navigationBar.title = NSLocalizedString("custom", comment: "")
@@ -569,7 +560,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour2, for: .normal)
+        beginButton.setTitleColor(colour3, for: .normal)
         
         
         
@@ -589,57 +580,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             beginButtonConstraint.constant = -49
         }
         
-        
-        
-        
-        // Information
-        //
-        // Scroll View Frame
-        informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
-        informationView.backgroundColor = colour1
-        // Information Text
-        //
-        // Information Text Frame
-        let informationText = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
-        // Information Text Frame
-        informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
-        informationTitle.text = (NSLocalizedString("information", comment: ""))
-        informationTitle.textAlignment = .center
-        informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour1
-        informationTitle.backgroundColor = colour2
-        //
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        downSwipe.direction = UISwipeGestureRecognizerDirection.down
-        informationTitle.addGestureRecognizer(downSwipe)
-        informationTitle.isUserInteractionEnabled = true
-        // Information Text and Attributes
-        //
-        // String
-        let informationLabelString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
-        // Range of String
-        let textRangeString = ((NSLocalizedString("movements", comment: ""))+"\n"+(NSLocalizedString("warmupChoiceText", comment: "")))
-        let textRange = (informationLabelString as NSString).range(of: textRangeString)
-        // Range of Titles
-        let titleRangeString = (NSLocalizedString("movements", comment: ""))
-        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
-        // Line Spacing
-        let lineSpacing = NSMutableParagraphStyle()
-        lineSpacing.lineSpacing = 1.6
-        // Add Attributes
-        let informationLabelText = NSMutableAttributedString(string: informationLabelString)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange1)
-        informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
-        // Final Text Editing
-        informationText.attributedText = informationLabelText
-        informationText.textAlignment = .natural
-        informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
-        informationText.numberOfLines = 0
-        informationText.sizeToFit()
-        self.informationView.addSubview(informationText)
-        //
-        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
         
         // TableView
         //
@@ -738,6 +678,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         let defaults = UserDefaults.standard
         var warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
         //
+        //
         if warmupPreset.count == 0 {
             editingButton.isEnabled = false
         } else {
@@ -755,10 +696,14 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         let defaults = UserDefaults.standard
         let warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
         //
-        if warmupPreset.count == 0 {
-            sessionPickerView.isUserInteractionEnabled = false
+        if customTableView.isEditing {
+            beginButton.isEnabled = false
         } else {
-            sessionPickerView.isUserInteractionEnabled = true
+            if warmupPreset.count == 0 {
+                sessionPickerView.isUserInteractionEnabled = false
+            } else {
+                sessionPickerView.isUserInteractionEnabled = true
+            }
         }
     }
 //
@@ -812,8 +757,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 self.customTableView.reloadData()
                 //
                 self.beginButtonEnabled()
-                self.editButtonEnabled()
                 self.pickerViewEnabled()
+                self.editButtonEnabled()
                 
                 //
                 // Initial Element Positions
@@ -897,8 +842,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 self.customTableView.reloadData()
                 //
                 self.beginButtonEnabled()
-                self.editButtonEnabled()
                 self.pickerViewEnabled()
+                self.editButtonEnabled()
                 
                 //
                 // Initial Element Positions
@@ -1580,14 +1525,20 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         if customTableView.isEditing {
             self.customTableView.setEditing(false, animated: true)
             self.editingButton.setTitle(NSLocalizedString("edit", comment: ""), for: .normal)
-            self.sessionPickerView.isUserInteractionEnabled = true
-            self.beginButton.isEnabled = true
+            //
+            addPreset.isEnabled = true
+            removePreset.isEnabled = true
+            self.beginButtonEnabled()
+            self.pickerViewEnabled()
         //
         } else {
             self.customTableView.setEditing(true, animated: true)
             self.editingButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-            self.sessionPickerView.isUserInteractionEnabled = false
-            self.beginButton.isEnabled = false
+            //
+            addPreset.isEnabled = false
+            removePreset.isEnabled = false
+            self.beginButtonEnabled()
+            self.pickerViewEnabled()
         }
     }
    
@@ -1628,70 +1579,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     
     
 //
-// Information Actions ------------------------------------------------------------------------------------------------
-//
-    // QuestionMark Button Action
-    @IBAction func informationButtonAction(_ sender: Any) {
-        // Slide information down
-        if self.informationView.frame.minY < self.view.frame.maxY {
-            // Animate slide
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
-                
-            }, completion: nil)
-            //
-            self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-            // Remove after animation
-            let delayInSeconds = 0.4
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                self.informationView.removeFromSuperview()
-                self.informationTitle.removeFromSuperview()
-            }
-            // Navigation buttons
-            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
-            navigationBar.setHidesBackButton(false, animated: true)
-            
-            // Slide information up
-        } else {
-            //
-            view.addSubview(informationView)
-            view.addSubview(informationTitle)
-            //
-            view.bringSubview(toFront: informationView)
-            view.bringSubview(toFront: informationTitle)
-            // Animate slide
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                self.informationView.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-            }, completion: nil)
-            //
-            self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-            // Navigation buttons
-            questionMark.image = #imageLiteral(resourceName: "Down")
-            navigationBar.setHidesBackButton(true, animated: true)
-        }
-    }
-    
-    // Handle Swipes
-    @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
-        // Information Swipe Down
-        if (extraSwipe.direction == .down){
-            // Animate slide
-            if self.informationView.frame.minY < self.view.frame.maxY {
-                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                    self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
-                }, completion: nil)
-                // Navigation buttons
-                questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
-                navigationBar.setHidesBackButton(false, animated: true)
-            }
-        }
-    }
-    
-    
-//
 // Expand/Retract Image ------------------------------------------------------------------------------------------------
 //
     // Expand Image
@@ -1722,7 +1609,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         backgroundViewImage.alpha = 0
         backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
         //
-        self.questionMark.isEnabled = true
         self.navigationItem.setHidesBackButton(true, animated: true)
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
@@ -1748,7 +1634,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             //
             self.expandedImage.removeFromSuperview()
             self.backgroundViewImage.removeFromSuperview()
-            self.questionMark.isEnabled = true
             self.navigationItem.setHidesBackButton(false, animated: true)
         }
     }

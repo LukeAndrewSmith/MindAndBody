@@ -33,6 +33,8 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     var sessionScreenIndex = 0
     //
     var sessionScreenRoundIndex = 0
+    //
+    var sessionProgress = 0
     
     // Initialize Arrays
     //
@@ -60,7 +62,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     // Outlets ---------------------------------------------------------------------------------------------------------------------
     //
     // Navigation Bar
-    @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     let navigationTitle = UILabel()
     // Buttons
@@ -145,6 +147,39 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     // Button Stack View Height
     @IBOutlet weak var buttonStackHeight: NSLayoutConstraint!
     
+    // Navigation Top Height
+    @IBOutlet weak var navigationTop: NSLayoutConstraint!
+    
+    // Round view heght
+    @IBOutlet weak var roundViewHeight: NSLayoutConstraint!
+    
+    
+    //
+    // View will appear
+    //
+    // Show round view function
+    func showRoundView() {
+        //
+        self.roundStack.alpha = 1
+        self.roundViewHeight.constant = 152
+        self.navigationTop.constant = 132
+        //
+        UIView.animate(withDuration: 0.4) {
+            self.view.layoutIfNeeded()
+        }
+        //
+        let delayInSeconds = 2.3
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            //
+            self.roundStack.alpha = 0
+            self.roundViewHeight.constant = 40
+            self.navigationTop.constant = 20
+            //
+            UIView.animate(withDuration: 0.4) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
     
     //
     // View did load ---------------------------------------------------------------------------------------------------------------------
@@ -167,11 +202,10 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             buttonStackHeight.constant = 49
         }
         
-        // Session Started
+        // Round 1
         //
         // Alert View
-        let title = NSLocalizedString("sessionStarted", comment: "")
-        //let message = NSLocalizedString("resetMessage", comment: "")
+        let title = NSLocalizedString("round1", comment: "")
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.view.tintColor = colour1
         alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
@@ -179,20 +213,30 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             //
             let delayInSeconds = 0.7
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                alert.dismiss(animated: true, completion: nil)
+                alert.dismiss(animated: true, completion: {
+                    self.showRoundView()
+                })
             }
         })
         
-        // Background Color
+        
+        // Color
+        navigationBar.barTintColor = colour2
         //
         self.view.backgroundColor = colour1
         //
         backButton.tintColor = .clear
+        //
+        roundView.backgroundColor = colour2
+        //
+        roundNumber.layer.borderWidth = 0.5
+        roundNumber.layer.borderColor = UIColor(red:0.08, green:0.08, blue:0.08, alpha:1.0).cgColor
+        roundNumber.layer.masksToBounds = true
         
         // Images
         //
         // Demonstration Image
-        demonstrationImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        demonstrationImage.backgroundColor = colour2
         imageScroll.addSubview(demonstrationImage)
         //
         let imageSwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -222,7 +266,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         explanationText.numberOfLines = 0
         
         // Expand Button
-        let origImage1 = UIImage(named: "Plus")
+        let origImage1 = UIImage(named: "QuestionMarkM")
         let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         // Set Image
         explanationExpand.setImage(tintedImage1, for: .normal)
@@ -302,7 +346,12 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
         
         //
-        roundProgress.progress = 0.0
+        roundProgress.frame.size.height = 1
+        roundProgress.transform = roundProgress.transform.scaledBy(x: 1, y: 2)
+        //
+        roundProgress.trackTintColor = colour2
+        roundProgress.progressTintColor = colour3
+        
         
         // Display Content
         displayContent()
@@ -320,11 +369,11 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         imageScroll.contentSize = CGSize(width: imageScroll.frame.size.width * 2, height: imageScroll.frame.size.height)
         imageScroll.isScrollEnabled = false
         // Demonstration Image
-        demonstrationImage.frame = imageScroll.frame
+        demonstrationImage.frame = imageScroll.bounds
         demonstrationImage.contentMode = .scaleAspectFit
         demonstrationImage.layer.masksToBounds = true
         // Body Image
-        bodyImage.frame = CGRect(x: imageScroll.frame.size.width, y: 0, width: imageScroll.frame.size.width, height: imageScroll.frame.size.width)
+        bodyImage.frame = CGRect(x: imageScroll.frame.size.width, y: 0, width: imageScroll.frame.size.width, height: imageScroll.frame.size.height)
         bodyImage.contentMode = .scaleAspectFit
         bodyImage.layer.masksToBounds = true
     }
@@ -337,25 +386,24 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     func createStack(movementNumber: Int) -> UIStackView {
         let movementStack = UIStackView()
         movementStack.axis = .vertical
-        movementStack.distribution = .fillProportionally
+        movementStack.distribution = .fillEqually
         //
         let movementImage = UIImageView()
         movementImage.image = demonstrationArray[movementNumber]
         movementImage.contentMode = .scaleAspectFit
         movementStack.addArrangedSubview(movementImage)
-        movementStack.frame.size.height = (roundView.frame.size.height - 20) * 2/3
         //
         let movementLabel = UILabel()
         movementLabel.text = NSLocalizedString(sessionArray[movementNumber], comment: "")
+        movementLabel.numberOfLines = 0
+        movementLabel.adjustsFontSizeToFitWidth = true
         movementLabel.font = UIFont(name: "SFUIDisplay-thin", size: 17)
         movementLabel.textAlignment = .center
-        movementLabel.frame.size = CGSize(width: movementImage.frame.size.width - 10, height: 20)
         movementLabel.textColor = colour1
-        movementLabel.adjustsFontSizeToFitWidth = true
-        movementLabel.frame.size.height = (roundView.frame.size.height - 20) * 1/3
+        //
         if movementNumber == sessionScreenIndex {
             movementLabel.layer.borderWidth = 1
-            movementLabel.layer.borderColor = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0).cgColor
+            movementLabel.layer.borderColor = colour3.cgColor
         }
         movementStack.addArrangedSubview(movementLabel)
         //
@@ -366,13 +414,22 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     //
     func fillRoundStack() {
         //
-        let numberOfMovements = sessionArray.count
+        roundStack.subviews.forEach({$0.removeFromSuperview()})
         //
-        roundStack.subviews.forEach({ $0.removeFromSuperview() })
-        //
-        for i in 0...(numberOfMovements - 1) {
+        for i in 0...(sessionArray.count - 1) {
             roundStack.addArrangedSubview(createStack(movementNumber: i))
         }
+    }
+    
+    //
+    func setProgress() {
+        // Session Progress
+        let sessionFractionN = Float(sessionProgress)
+        let sessionFractionD = Float(numberOfRounds * sessionArray.count)
+        let sessionFraction = sessionFractionN/sessionFractionD
+    roundProgress.setProgress(sessionFraction, animated: true)
+        //roundProgress.setProgress(0.3, animated: true)
+        //
     }
     
     
@@ -392,9 +449,8 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         navigationTitle.backgroundColor = .clear
         navigationTitle.textAlignment = .center
         navigationTitle.adjustsFontSizeToFitWidth = true
-        self.navigationController?.navigationBar.barTintColor = colour2
         //
-        self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
+        self.navigationBar.topItem?.titleView = navigationTitle
         
         // Images
         //
@@ -416,7 +472,6 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         let roundString = NSLocalizedString("round", comment: "") + String(sessionScreenRoundIndex + 1) + NSLocalizedString("of", comment: "") + String(numberOfRounds)
         // Range of String
         let roundRangeString = NSLocalizedString("round", comment: "") + String(sessionScreenRoundIndex + 1) + NSLocalizedString("of", comment: "") + String(numberOfRounds)
-        let roundRange = (roundString as NSString).range(of: roundRangeString)
         // Range of Titles
         let roundRangeString1 = (NSLocalizedString("round", comment: ""))
         let roundRangeString2 = (NSLocalizedString("of", comment: ""))
@@ -429,11 +484,13 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         finalRoundText.addAttribute(NSForegroundColorAttributeName, value: colour1, range: roundRange2)
         //
         roundNumber.attributedText = finalRoundText
+        
+        //
+        setProgress()
+        
         //
         fillRoundStack()
-        
-        
-        
+                
         // Timer to Back
         self.view.bringSubview(toFront: timerButton)
         cancelTimer(Any.self)
@@ -443,7 +500,6 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         self.setsRepsLabel.text = (String(setsArray[sessionScreenIndex]) + " x " + repsArray[sessionScreenIndex])
         //
         setsRepsLabel.textColor = colour2
-        
     }
     
     
@@ -455,11 +511,162 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         //
         let flash = UIView()
         //
-        flash.frame = CGRect(x: 0, y: -100, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
+        flash.frame = UIScreen.main.bounds
         flash.backgroundColor = colour1
-        self.view.alpha = 1
-        self.view.addSubview(flash)
-        self.view.bringSubview(toFront: flash)
+        flash.alpha = 0.8
+        UIApplication.shared.keyWindow?.insertSubview(flash, aboveSubview: view)
+        //
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
+            flash.alpha = 0
+        }, completion: {(finished: Bool) -> Void in
+            flash.removeFromSuperview()
+        })
+    }
+    //
+    // Flash Screen Green
+    
+    // Session Started
+    //
+    let restTitle = NSLocalizedString("rest", comment: "")
+    //
+    var restTime = Int()
+    //
+    var restMessage = String()
+    //
+    var restAlert = UIAlertController()
+    //
+    var restTimer = Timer()
+    //
+    func updateRestTimer() {
+        // End rest timer
+        if restTime == 0 {
+            restTimer.invalidate()
+            self.restAlert.dismiss(animated: true)
+            // Next Round
+            // Alert View
+            let titleString = "round" + String(self.sessionScreenRoundIndex + 1)
+            let title = NSLocalizedString(titleString, comment: "")
+            //let message = NSLocalizedString("resetMessage", comment: "")
+            let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+            alert.view.tintColor = colour1
+            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+            self.present(alert, animated: true, completion: {
+                //
+                let delayInSeconds = 0.7
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                    alert.dismiss(animated: true, completion: {
+                        self.showRoundView()
+                    })
+                }
+            })
+            
+        // Update rest timer
+        } else {
+            restTime -= 1
+            restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+            //self.restAlert.setValue(NSAttributedString(string: restMessage, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "message")
+        }
+    }
+    //
+    
+    
+
+    //
+    func flashScreenGreen() {
+        // Flash
+        //
+        let flash = UIView()
+        //
+        flash.frame = UIScreen.main.bounds
+        flash.backgroundColor = colour3
+        flash.alpha = 0.9
+        UIApplication.shared.keyWindow?.insertSubview(flash, aboveSubview: view)
+        //
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
+            flash.alpha = 0
+        }, completion: {(finished: Bool) -> Void in
+            flash.removeFromSuperview()
+        })
+        
+        //
+        //
+        self.roundStack.alpha = 1
+        self.roundViewHeight.constant = 152
+        self.navigationTop.constant = 132
+        //
+        UIView.animate(withDuration: 0.4) {
+            self.view.layoutIfNeeded()
+        }
+        
+        // Rest Alert
+        //
+        // Rest Timer
+        let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+        restTime = restTimes[1]
+        //
+        restMessage = "\n" + String(restTime)
+        //
+        restAlert.title = restTitle
+        restAlert.message = restMessage
+        //
+        restTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateRestTimer), userInfo: nil, repeats: true)
+    
+        // Timer end Notification 
+        let content = UNMutableNotificationContent()
+        content.title = NSLocalizedString("timerEnd", comment: "")
+        content.body = " "
+        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+        content.sound = UNNotificationSound.default()
+        //
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTime), repeats: false)
+        let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
+        //
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+        // Timer
+        restAlert = UIAlertController()
+        restAlert.view.tintColor = colour2
+        restAlert.setValue(NSAttributedString(string: restTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        restAlert.setValue(NSAttributedString(string: restMessage, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+        let skipAction = UIAlertAction(title: NSLocalizedString("skip", comment: ""), style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            //
+            self.restAlert.dismiss(animated: true)
+            self.restTimer.invalidate()
+            //
+            // Next Round
+            // Alert View
+            let titleString = "round" + String(self.sessionScreenRoundIndex + 1)
+            let title = NSLocalizedString(titleString, comment: "")
+            //let message = NSLocalizedString("resetMessage", comment: "")
+            let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+            alert.view.tintColor = colour1
+            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+            self.present(alert, animated: true, completion: {
+                //
+                let delayInSeconds = 0.7
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                    alert.dismiss(animated: true, completion: {
+                        self.showRoundView()
+                    })
+                }
+            })
+        }
+        self.restAlert.addAction(skipAction)
+        //
+        self.present(restAlert, animated: true, completion: {
+        })
+
+    }
+    //
+    func flashScreenRed() {
+        //
+        let flash = UIView()
+        //
+        flash.frame = UIScreen.main.bounds
+        flash.backgroundColor = colour4
+        flash.alpha = 0.9
+        UIApplication.shared.keyWindow?.insertSubview(flash, aboveSubview: view)
         //
         UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
             flash.alpha = 0
@@ -781,34 +988,33 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     // Next Navigation Button
     @IBAction func nextButton(_ sender: Any) {
         // Incriment movements and rounds
-        if sessionScreenRoundIndex < (numberOfRounds - 1) {
-            backButton.tintColor = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
+        if sessionScreenIndex < (sessionArray.count - 1) {
+            backButton.tintColor = colour4
             // Next movement
-            if sessionScreenIndex < (sessionArray.count - 1) {
-                sessionScreenIndex = sessionScreenIndex + 1
-            // New Round
-            } else if sessionScreenIndex == (sessionArray.count - 1){
-                sessionScreenIndex = 0
-                //
-                sessionScreenRoundIndex = sessionScreenRoundIndex + 1
-                roundProgress.progress = Float(sessionScreenRoundIndex / numberOfRounds)
-            }
-            //
+            sessionScreenIndex = sessionScreenIndex + 1
+            showRoundView()
+            flashScreen()
         // Final screen. Dismiss
-        } else if sessionScreenIndex == (sessionArray.count - 1) || (sessionScreenRoundIndex == numberOfRounds - 1) {
+        } else if sessionScreenIndex == (sessionArray.count - 1) && (sessionScreenRoundIndex == numberOfRounds - 1) {
             //
             sessionScreenIndex = 0
             sessionScreenRoundIndex = 0
             self.dismiss(animated: true)
+            flashScreenGreen()
         // Next round
-        } else if sessionScreenRoundIndex == (numberOfRounds - 1) {
+        } else if sessionScreenIndex == (sessionArray.count - 1) {
+            backButton.tintColor = .clear
             //
             sessionScreenIndex = 0
-            sessionScreenRoundIndex = 0
-            self.dismiss(animated: true)
+            //
+            sessionScreenRoundIndex = sessionScreenRoundIndex + 1
+            //        
+            flashScreenGreen()
+
         }
+        sessionProgress = sessionProgress + 1
+        //
         displayContent()
-        flashScreen()
     }
     
     // Back Navigation Button
@@ -820,14 +1026,16 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             //
             backButton.tintColor = .clear
             sessionScreenIndex = sessionScreenIndex - 1
+            sessionProgress = sessionProgress - 1
             //
-            flashScreen()
+            flashScreenRed()
             displayContent()
         } else {
             //
             sessionScreenIndex = sessionScreenIndex - 1
+            sessionProgress = sessionProgress - 1
             //
-            flashScreen()
+            flashScreenRed()
             displayContent()
         }
     }
