@@ -230,7 +230,8 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour3, for: .normal)
+        beginButton.backgroundColor = colour3
+        beginButton.setTitleColor(colour2, for: .normal)
         
         
         

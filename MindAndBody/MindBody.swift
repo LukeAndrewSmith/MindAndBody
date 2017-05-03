@@ -143,6 +143,8 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Test
+        self.tabBarController?.tabBar.isHidden = true
         
         
         // Background Index

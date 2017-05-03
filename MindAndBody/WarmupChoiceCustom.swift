@@ -560,7 +560,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour3, for: .normal)
+        beginButton.backgroundColor = colour3
+        beginButton.setTitleColor(colour2, for: .normal)
         
         
         
@@ -568,8 +569,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         let warmupPreset = UserDefaults.standard.object(forKey: "warmupPresetsCustom") as! [[Int]]
         if warmupPreset.count == 0 {
             editingButton.alpha = 0
-            removePreset.alpha = 0
-            //
             removePreset.alpha = 0
             //
             tableViewConstraint.constant = view.frame.size.height - 98

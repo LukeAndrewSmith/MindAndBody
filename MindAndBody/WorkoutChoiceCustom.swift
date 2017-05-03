@@ -451,8 +451,6 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var removePreset: UIButton!
     
     //
-    @IBOutlet weak var presetsConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var tableViewConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var tableViewConstraint1: NSLayoutConstraint!
@@ -549,7 +547,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         // Set Image
         addPreset.setImage(tintedImage1, for: .normal)
         //Image Tint
-        addPreset.tintColor = colour2
+        addPreset.tintColor = colour1
         
         // Minus Button Colour
         let origImage2 = UIImage(named: "Minus")
@@ -557,11 +555,12 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         // Set Image
         removePreset.setImage(tintedImage2, for: .normal)
         //Image Tint
-        removePreset.tintColor = colour2
+        removePreset.tintColor = colour1
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour3, for: .normal)
+        beginButton.backgroundColor = colour3
+        beginButton.setTitleColor(colour2, for: .normal)
         
         
         
@@ -571,12 +570,10 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             editingButton.alpha = 0
             removePreset.alpha = 0
             //
-            presetsConstraint.constant = (view.frame.size.width / 2) - 24.5
-            //
             tableViewConstraint.constant = view.frame.size.height - 98
             tableViewConstraint1.constant = -49.25
             //
-            seperatorConstraint.constant = -49.25
+            seperatorConstraint.constant = -49
             //
             beginButtonConstraint.constant = -49
         }
@@ -761,12 +758,12 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             // Initial Element Positions
             if customKeyArray.count != 0 {
                 //
-                self.presetsConstraint.constant = 0
+                self.removePreset.alpha = 1
                 //
                 self.tableViewConstraint.constant = 49
-                self.tableViewConstraint1.constant = 49.75
+                self.tableViewConstraint1.constant = 49.25
                 //
-                self.seperatorConstraint.constant = 49.25
+                self.seperatorConstraint.constant = 49
                 //
                 self.beginButtonConstraint.constant = 0
                 //
@@ -846,12 +843,12 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                 // Initial Element Positions
                 if customKeyArray.count == 0 {
                     //
-                    self.presetsConstraint.constant = (self.view.frame.size.width / 2) - 24.5
+                    self.removePreset.alpha = 0
                     //
                     self.tableViewConstraint.constant = self.view.frame.size.height - 98
                     self.tableViewConstraint1.constant = -49.25
                     //
-                    self.seperatorConstraint.constant = -49.25
+                    self.seperatorConstraint.constant = -49
                     //
                     self.beginButtonConstraint.constant = -49
                     //

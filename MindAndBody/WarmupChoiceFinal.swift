@@ -818,6 +818,13 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         })
     }
     
+//
+// View Will Appear
+//
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presetsButton.setTitle(NSLocalizedString("selectWarmup", comment: ""), for: .normal)
+    }
     
 //
 // View did load ------------------------------------------------------------------------------------------------------------------------------
@@ -838,14 +845,15 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         presetsButton.backgroundColor = colour2
         presetsButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        presetsButton.setTitle(NSLocalizedString("selectWarmup", comment: ""), for: .normal)
         
         //
         movementsTableView.tableFooterView = UIView()
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour3, for: .normal)
+        beginButton.backgroundColor = colour3
+        beginButton.setTitleColor(colour2, for: .normal)
+        //
         
         
         

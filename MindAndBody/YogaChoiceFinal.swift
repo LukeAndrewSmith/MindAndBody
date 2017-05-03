@@ -315,15 +315,15 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             3: [#imageLiteral(resourceName: "extendedToeGrab"), #imageLiteral(resourceName: "extendedToeGrab1"), #imageLiteral(resourceName: "extendedToeGrab2"), #imageLiteral(resourceName: "extendedToeGrab3"), #imageLiteral(resourceName: "extendedToeGrab4"), #imageLiteral(resourceName: "extendedToeGrab5")],
             4: [#imageLiteral(resourceName: "eagle"), #imageLiteral(resourceName: "eagle1"), #imageLiteral(resourceName: "eagle2"), #imageLiteral(resourceName: "eagle3"), #imageLiteral(resourceName: "eagle4"), #imageLiteral(resourceName: "eagle5"), #imageLiteral(resourceName: "eagle6"), #imageLiteral(resourceName: "eagle7")],
             5: [#imageLiteral(resourceName: "chair"), #imageLiteral(resourceName: "chair1"), #imageLiteral(resourceName: "chair2"), #imageLiteral(resourceName: "chair3"), #imageLiteral(resourceName: "chair4"), #imageLiteral(resourceName: "chair5")],
-            6: [#imageLiteral(resourceName: "Test 2")],
+            6: [#imageLiteral(resourceName: "lordOfDance"), #imageLiteral(resourceName: "lordOfDance1"), #imageLiteral(resourceName: "lordOfDance2"), #imageLiteral(resourceName: "lordOfDance3"), #imageLiteral(resourceName: "lordOfDance4"), #imageLiteral(resourceName: "lordOfDance5"), #imageLiteral(resourceName: "lordOfDance6"), #imageLiteral(resourceName: "lordOfDance7")],
             7: [#imageLiteral(resourceName: "Test 2")],
             8: [#imageLiteral(resourceName: "Test 2")],
-            9: [#imageLiteral(resourceName: "Test 2")],
+            9: [#imageLiteral(resourceName: "warrior3"), #imageLiteral(resourceName: "warrior31"), #imageLiteral(resourceName: "warrior32"), #imageLiteral(resourceName: "warrior33"), #imageLiteral(resourceName: "warrior34"), #imageLiteral(resourceName: "warrior35"), #imageLiteral(resourceName: "warrior36")],
             10: [#imageLiteral(resourceName: "Test 2")],
             11: [#imageLiteral(resourceName: "Test 2")],
-            12: [#imageLiteral(resourceName: "Test 2")],
-            13: [#imageLiteral(resourceName: "Test 2")],
-            14: [#imageLiteral(resourceName: "Test 2")],
+            12: [#imageLiteral(resourceName: "extendedSideAngle"), #imageLiteral(resourceName: "extendedSideAngle1"), #imageLiteral(resourceName: "extendedSideAngle2"), #imageLiteral(resourceName: "extendedSideAngle3"), #imageLiteral(resourceName: "extendedSideAngle4"), #imageLiteral(resourceName: "extendedSideAngle5"), #imageLiteral(resourceName: "extendedSideAngle6")],
+            13: [#imageLiteral(resourceName: "revolvedSideAngle"), #imageLiteral(resourceName: "revolvedSideAngle1"), #imageLiteral(resourceName: "revolvedSideAngle2"), #imageLiteral(resourceName: "revolvedSideAngle3"), #imageLiteral(resourceName: "revolvedSideAngle4"), #imageLiteral(resourceName: "revolvedSideAngle5"), #imageLiteral(resourceName: "revolvedSideAngle6")],
+            14: [#imageLiteral(resourceName: "revolvedTriangle"), #imageLiteral(resourceName: "revolvedTriangle1"), #imageLiteral(resourceName: "revolvedTriangle2"), #imageLiteral(resourceName: "revolvedTriangle3"), #imageLiteral(resourceName: "revolvedTriangle4"), #imageLiteral(resourceName: "revolvedTriangle5"), #imageLiteral(resourceName: "revolvedTriangle6")],
             15: [#imageLiteral(resourceName: "Test 2")],
             16: [#imageLiteral(resourceName: "Test 2")],
             17: [#imageLiteral(resourceName: "Test 2")],
@@ -331,15 +331,15 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             19: [#imageLiteral(resourceName: "Test 2")],
             20: [#imageLiteral(resourceName: "Test 2")],
             21: [#imageLiteral(resourceName: "Test 2")],
-            22: [#imageLiteral(resourceName: "Test 2")],
+            22: [#imageLiteral(resourceName: "deepSquat"), #imageLiteral(resourceName: "deepSquat1"), #imageLiteral(resourceName: "deepSquat2"), #imageLiteral(resourceName: "deepSquat3"), #imageLiteral(resourceName: "deepSquat4"), #imageLiteral(resourceName: "deepSquat5")],
             // Hand/Elbows and Feet/Knees
-            23: [#imageLiteral(resourceName: "Test 2")],
-            24: [#imageLiteral(resourceName: "Test 2")],
-            25: [#imageLiteral(resourceName: "Test 2")],
+            23: [#imageLiteral(resourceName: "dolphin"), #imageLiteral(resourceName: "dolphin1"), #imageLiteral(resourceName: "dolphin2"), #imageLiteral(resourceName: "dolphin3")],
+            24: [#imageLiteral(resourceName: "downwardDog"), #imageLiteral(resourceName: "downwardDog1"), #imageLiteral(resourceName: "downwardDog2"), #imageLiteral(resourceName: "downwardDog3"), #imageLiteral(resourceName: "downwardDog4")],
+            25: [#imageLiteral(resourceName: "halfDownwardDog"), #imageLiteral(resourceName: "halfDownwardDog1"), #imageLiteral(resourceName: "halfDownwardDog2"), #imageLiteral(resourceName: "halfDownwardDog3"), #imageLiteral(resourceName: "halfDownwardDog4")],
             26: [#imageLiteral(resourceName: "Test 2")],
             27: [#imageLiteral(resourceName: "Test 2")],
             28: [#imageLiteral(resourceName: "Test 2")],
-            29: [#imageLiteral(resourceName: "Test 2")],
+            29: [#imageLiteral(resourceName: "sidePlank"), #imageLiteral(resourceName: "sidePlank1"), #imageLiteral(resourceName: "sidePlank2"), #imageLiteral(resourceName: "sidePlank3"), #imageLiteral(resourceName: "sidePlank4")],
             30: [#imageLiteral(resourceName: "Test 2")],
             31: [#imageLiteral(resourceName: "Test 2")],
             32: [#imageLiteral(resourceName: "Test 2")],
@@ -396,17 +396,17 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             1: 0,
             2: 3.5,
             3: 3.0,
-            4: 4,
-            5: 3,
-            6: 0,
+            4: 4.0,
+            5: 3.0,
+            6: 4.0,
             7: 0,
             8: 0,
-            9: 0,
+            9: 3.5,
             10: 0,
             11: 0,
-            12: 0,
-            13: 0,
-            14: 0,
+            12: 3.5,
+            13: 3.5,
+            14: 3.5,
             15: 0,
             16: 0,
             17: 0,
@@ -414,15 +414,15 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             19: 0,
             20: 0,
             21: 0,
-            22: 0,
+            22: 3.0,
             // Hand/Elbows and Feet/Knees
-            23: 0,
-            24: 0,
-            25: 0,
+            23: 2.0,
+            24: 2.5,
+            25: 2.5,
             26: 0,
             27: 0,
             28: 0,
-            29: 0,
+            29: 2.5,
             30: 0,
             31: 0,
             32: 0,
@@ -580,7 +580,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         // 5 min
             // Relaxing
             [
-                [0,1,2,3,4,5,6,7,8],
+                [2,3,4,5,6,9,12,13,14,22,23,24,25,29,32,34,37,38,39,51,52,53,54,55,59,61,63,65,69],
                 [2,5,7,55,7,33,2],
                 [3,4,4]
             ],
@@ -652,6 +652,13 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         })
     }
     
+    //
+    // View will appear
+    //
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presetsButton.setTitle(NSLocalizedString("selectPractice", comment: ""), for: .normal)
+    }
     
     //
     // View did load ------------------------------------------------------------------------------------------------------------------------------
@@ -668,14 +675,14 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         presetsButton.backgroundColor = colour2
         presetsButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        presetsButton.setTitle(NSLocalizedString("selectPractice", comment: ""), for: .normal)
         
         //
         posesTableView.tableFooterView = UIView()
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.setTitleColor(colour3, for: .normal)
+        beginButton.backgroundColor = colour3
+        beginButton.setTitleColor(colour2, for: .normal)
         
         
         
