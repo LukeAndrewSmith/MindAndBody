@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+
+
 //
 // Slide Menu Class ----------------------------------------------------------------------------------
 //
@@ -28,7 +30,7 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
     var rowTitleArray: [String] =
         [
             "home",
-            "calendar",
+            "schedule",
             "tracking",
             "information",
             "profile",
@@ -50,8 +52,7 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
 //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
+               
         //
         view.backgroundColor = colour1
         //
@@ -103,12 +104,20 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //
+        //self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[indexPath.row]
+
+        //
+        tabBarIndex = indexPath.row
+        self.dismiss(animated: true)
+        //
+        UIApplication.shared.statusBarStyle = .lightContent
+        //
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        //
     }
-    
-    
-    
-    
     
     
     
@@ -116,29 +125,15 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
 //
 // Dismiss ----------------------------------------------------------------------------------
 //
-    // 1
-    var interactor:Interactor? = nil
-    // 2
-    @IBAction func handleGesture(sender: UIPanGestureRecognizer) {
-        // 3
-        let translation = sender.translation(in: view)
-        // 4
-        let progress = MenuHelper.calculateProgress(
-            translationInView: translation,
-            viewBounds: view.bounds,
-            direction: .Left
-        )
-        // 5
-        MenuHelper.mapGestureStateToInteractor(
-            gestureState: sender.state,
-            progress: progress,
-            interactor: interactor){
-                // 6
-                self.dismiss(animated: true, completion: nil)
-        }
+    @IBAction func swipeCloseGesture(_ sender: Any) {
+        //
+        UIApplication.shared.statusBarStyle = .lightContent
+        self.dismiss(animated: true)
     }
     
+    
     @IBAction func closeMenu(_ sender: Any) {
+        UIApplication.shared.statusBarStyle = .lightContent
         self.dismiss(animated: true)
     }
     

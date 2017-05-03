@@ -18,9 +18,7 @@ import UIKit
 class headerCell: UITableViewCell {
     //
     @IBOutlet weak var titleLabel: UILabel!
-    
-    @IBOutlet weak var settingButton: UIButton!
-    
+        
     @IBOutlet weak var logoView: UIImageView!
     
     @IBOutlet weak var gradientView: UIView!
@@ -122,6 +120,12 @@ class Profile: UITableViewController{
 // View will appear --------------------------------------------------------------------------------------------------------
 //
     override func viewWillAppear(_ animated: Bool) {
+     
+        // Select Tab
+        //self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[tabBarIndex]
+        //
+        //self.tabBarController?.customizableViewControllers = []
+        //self.tabBarController?.tabBar.isHidden = true
         //
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         //
@@ -135,8 +139,6 @@ class Profile: UITableViewController{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //
-        UIApplication.shared.statusBarStyle = .lightContent
-        //
         scrollUpButton.removeFromSuperview()
     }
     
@@ -146,6 +148,7 @@ class Profile: UITableViewController{
 //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // Walkthrough
         if UserDefaults.standard.bool(forKey: "profileWalkthrough") == false {
@@ -459,8 +462,6 @@ class Profile: UITableViewController{
         //
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! headerCell
-            //
-            cell.settingButton.addTarget(self, action: #selector(settingsButtonAction(_:)), for: .touchUpInside)
             //
             cell.gradientView.frame = cell.bounds
             //
@@ -835,14 +836,6 @@ class Profile: UITableViewController{
         default: break
         }
     }
-    
-    
-    // Settings Button Actions
-    func settingsButtonAction(_ sender: Any) {
-        //
-        performSegue(withIdentifier: "settingsSegue", sender: nil)
-    }
-    
     
     // Scroll Up Button Action
     func scrollUpButtonAction(_ sender: Any) {
@@ -1292,5 +1285,52 @@ class Profile: UITableViewController{
             walkthroughMindBody()
         }
     }
+    
+    
+    
+
+    
+    //
+    // Slide Menu ---------------------------------------------------------------------------------------------------------------------
+    //
+    // Elements
+    //
+    @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
+        self.performSegue(withIdentifier: "openMenu", sender: nil)
+    }
+    //
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //
+        if segue.identifier == "openMenu" {
+            //
+            UIApplication.shared.statusBarStyle = .default
+            //
+            if let destinationViewController = segue.destination as? SlideMenuView {
+                destinationViewController.transitioningDelegate = self
+            }
+        } else {
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
+        }
+    }
 //
 }
+
+
+
+//
+// Slide Menu Extension
+extension Profile: UIViewControllerTransitioningDelegate {
+    // Present
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PresentMenuAnimator()
+    }
+    
+    // Dismiss
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissMenuAnimator()
+    }
+}
+

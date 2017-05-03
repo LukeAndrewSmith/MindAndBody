@@ -82,6 +82,12 @@ class Information: UITableViewController{
 // View will appear ------------------------------------------------------------------------------------
 //
     override func viewWillAppear(_ animated: Bool) {
+        
+        // Select Tab
+        //self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[tabBarIndex]
+        //
+        //self.tabBarController?.customizableViewControllers = []
+        //self.tabBarController?.tabBar.isHidden = true
         //
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         //
@@ -95,8 +101,7 @@ class Information: UITableViewController{
 //
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //
-        UIApplication.shared.statusBarStyle = .lightContent
+        
         //
         scrollUpButton.removeFromSuperview()
 
@@ -108,6 +113,8 @@ class Information: UITableViewController{
 //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         // Walkthrough
         if UserDefaults.standard.bool(forKey: "informationWalkthrough") == false {
@@ -197,9 +204,6 @@ class Information: UITableViewController{
         switch indexPath.row {
         case 0:
         let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! headerCell
-            //
-            cell.settingButton.alpha = 0
-            cell.settingButton.isEnabled = false
             //
             cell.gradientView.frame = cell.bounds
             //
@@ -416,30 +420,58 @@ class Information: UITableViewController{
         //
         self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
+
+    
     
     
 //
-// Pass Data to next View Controller --------------------------------------------------------------------------
+// Slide Menu ---------------------------------------------------------------------------------------------------------------------
 //
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Pass Info
-        if (segue.identifier == "informationSegue") {
-            
-            let destinationVC = segue.destination as! InformationScreen1
-            destinationVC.selectedTopic = selectedTopic
-            
-            //destinationVC.selectedSession = selectedSession
-            
-            //destinationVC.guidedTitle = guidedTitleText
-            //destinationVC.keyArray = selectedArray
-            //destinationVC.poses = posesDictionary
-        }
     
-        // Remove Back Button Text
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        navigationItem.backBarButtonItem = backItem
+    // Elements
+    //
+    @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
+        self.performSegue(withIdentifier: "openMenu", sender: nil)
     }
+    
+    //
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //
+        if segue.identifier == "openMenu" {
+            //
+            UIApplication.shared.statusBarStyle = .default
+            //
+            if let destinationViewController = segue.destination as? SlideMenuView {
+                destinationViewController.transitioningDelegate = self
+            }
+        } else {
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
+            
+            // Pass Info
+            if (segue.identifier == "informationSegue") {
+                
+                let destinationVC = segue.destination as! InformationScreen1
+                destinationVC.selectedTopic = selectedTopic
+                
+                //destinationVC.selectedSession = selectedSession
+                
+                //destinationVC.guidedTitle = guidedTitleText
+                //destinationVC.keyArray = selectedArray
+                //destinationVC.poses = posesDictionary
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 //
@@ -516,4 +548,19 @@ class Information: UITableViewController{
         walkthroughMindBody()
     }
 //
+}
+
+
+//
+// Slide Menu Extension
+extension Information: UIViewControllerTransitioningDelegate {
+    // Present
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PresentMenuAnimator()
+    }
+    
+    // Dismiss
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissMenuAnimator()
+    }
 }

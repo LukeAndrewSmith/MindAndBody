@@ -26,6 +26,27 @@ class CalendarCell: UICollectionViewCell {
 //
 class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    
+//
+// View Will Appear ---------------------------------------------------------------------------------
+//
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+       
+        // Select Tab
+        //self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[tabBarIndex]
+        //
+        //self.tabBarController?.customizableViewControllers = []
+        //self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    
+    
+//
+//
+//
+    
     // Days array
     let dayArray: [String] =
         ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",]
@@ -71,11 +92,17 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var Three: UIButton!
     
     @IBOutlet weak var stack: UIStackView!
+    
+    
+    
+    
 //
 // View did load --------------------------------------------------------------------------------------------------------
 //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         // Walkthrough
         //
@@ -190,29 +217,44 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     
-//
-// Prepare for segue -------------------------------------------------------------------------------------------
-//
+    
+    
+    
+    
+    //
+    // Slide Menu ---------------------------------------------------------------------------------------------------------------------
+    //
+    
+    // Elements
+    //
+    @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
+        self.performSegue(withIdentifier: "openMenu", sender: nil)
+    }
+    
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
-        let destinationVC = segue.destination as! CalendarScreenDetail
-        //
-        destinationVC.selectedDay = selectedDay
-        // Remove Back Button Text
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        navigationItem.backBarButtonItem = backItem
+        if segue.identifier == "openMenu" {
+            //
+            UIApplication.shared.statusBarStyle = .default
+            //
+            if let destinationViewController = segue.destination as? SlideMenuView {
+                destinationViewController.transitioningDelegate = self
+            }
+        } else {
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
+            //
+            let destinationVC = segue.destination as! CalendarScreenDetail
+            //
+            destinationVC.selectedDay = selectedDay
+        }
     }
     
     
-//
-// Dismiss --------------------------------------------------------------------------------------------------------
-//
-    @IBAction func dismissView(_ sender: Any) {
-        //
-        self.dismiss(animated: true)
-    }
-    
+ 
     
 //
 // Walkthrough --------------------------------------------------------------------------------------------------------
@@ -435,4 +477,19 @@ extension CalendarScreen : UICollectionViewDelegateFlowLayout {
         return 0
     }
 //
+}
+
+
+//
+// Slide Menu Extension
+extension CalendarScreen: UIViewControllerTransitioningDelegate {
+    // Present
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PresentMenuAnimator()
+    }
+    
+    // Dismiss
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissMenuAnimator()
+    }
 }

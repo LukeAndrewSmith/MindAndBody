@@ -20,6 +20,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     //
     // Outlets
     //
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    
+    
     // Sets and Reps Choice
     var restTimeView = UIView()
     var restTimePicker = UIPickerView()
@@ -38,6 +41,24 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     // View Will Appear
     override func viewWillAppear(_ animated: Bool) {
+       
+        // Select Tab
+       // let viewControllerArray = self.tabBarController?.viewControllers
+        //let selectedController = self.tabBarController?.viewControllers?[tabBarIndex]
+        //self.tabBarController?.selectedViewController = selectedController
+            //self.tabBarController?.viewControllers?[tabBarIndex]
+
+        //self.tabBarController?.selectedIndex = testChoice
+        //self.tabBarController?.selectedViewController = MindBody
+        //self.tabBarController?.selectedViewController = UIViewController(nibName: "MindBody", bundle: .main)
+        //
+//        self.tabBarController?.customizableViewControllers = []
+//        self.tabBarController?.moreNavigationController.navigationBar.alpha = 0
+//        self.tabBarController?.moreNavigationController.setNavigationBarHidden(true, animated: false)
+//        self.tabBarController?.moreNavigationController.navigationBar.isTranslucent = false
+//        self.tabBarController?.moreNavigationController.navigationBar.tintColor = colour1
+//        self.tabBarController?.tabBar.isHidden = true
+        //
         // Set TableView Background Colour
         //
         let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
@@ -59,6 +80,23 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        
+        self.navigationController?.navigationBar.isHidden = false
+        // Navigation Bar
+        //
+        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "SlideMenu"), style: .plain, target: self, action: #selector(slideMenuPresent))
+        //
+        self.navigationController?.navigationBar.barTintColor = colour2
+        // Title
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 22)!]
+        // Navigation Title
+        navigationBar.title = NSLocalizedString("settings", comment: "")
+        // View
+        view.backgroundColor = colour1
+
         
         //
         // Sets Reps Selection
@@ -598,16 +636,54 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     }
     
 
-//   
-// Remove BackButton from next screen ----------------------------------------------------------------------------------------------
-//
     
-    // Remove Back Button for next screen
+    
+//
+// Slide Menu ---------------------------------------------------------------------------------------------------------------------
+//
+    @IBAction func slideMenuPresent() {
+        self.performSegue(withIdentifier: "openMenu", sender: nil)
+    }
+    
+    // Elements
+    //
+    @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
+        self.performSegue(withIdentifier: "openMenu", sender: nil)
+    }
+    
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        navigationItem.backBarButtonItem = backItem
-        
+        //
+        if segue.identifier == "openMenu" {
+            //
+            UIApplication.shared.statusBarStyle = .default
+            //
+            if let destinationViewController = segue.destination as? SlideMenuView {
+                destinationViewController.transitioningDelegate = self
+            }
+        } else {
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
+        }
     }
 //
 }
+
+
+
+//
+// Slide Menu Extension
+extension Settings: UIViewControllerTransitioningDelegate {
+    // Present
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PresentMenuAnimator()
+    }
+    
+    // Dismiss
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissMenuAnimator()
+    }
+}
+

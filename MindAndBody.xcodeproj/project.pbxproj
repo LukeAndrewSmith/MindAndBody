@@ -23,7 +23,6 @@
 		075732741E69957A003DA77E /* TrackingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075732731E69957A003DA77E /* TrackingScreen.swift */; };
 		075A0DB81E8C55680008E014 /* WarmupChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075A0DB71E8C55680008E014 /* WarmupChoiceCustom.swift */; };
 		077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DA1DA535830026895B /* AppDelegate.swift */; };
-		077AC0DF1DA535840026895B /* MindBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DE1DA535840026895B /* MindBody.swift */; };
 		077AC0E21DA535840026895B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E01DA535840026895B /* Main.storyboard */; };
 		077AC0E41DA535840026895B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E31DA535840026895B /* Assets.xcassets */; };
 		077AC0E71DA535840026895B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E51DA535840026895B /* LaunchScreen.storyboard */; };
@@ -56,8 +55,6 @@
 		077AC1371DA793950026895B /* SF-UI-Text-UltrathinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC1291DA793950026895B /* SF-UI-Text-UltrathinItalic.otf */; };
 		077C2C7E1E5C723D00BA62C0 /* GymChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */; };
 		077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */; };
-		077E47171EB9DE18005B0B22 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E47161EB9DE17005B0B22 /* Interactor.swift */; };
-		077E47191EB9DE8A005B0B22 /* MenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E47181EB9DE8A005B0B22 /* MenuHelper.swift */; };
 		077E471B1EB9DFC6005B0B22 /* PresentMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */; };
 		077E471F1EB9E221005B0B22 /* SlideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471E1EB9E221005B0B22 /* SlideMenuView.swift */; };
 		077E47231EB9EED3005B0B22 /* DismissMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */; };
@@ -71,6 +68,7 @@
 		07BDFEFC1EB1E65A00B131D7 /* YogaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BDFEFB1EB1E65A00B131D7 /* YogaScreen.swift */; };
 		07BE8C091E8BDF9500A851EF /* YogaScreenOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C081E8BDF9500A851EF /* YogaScreenOverview.swift */; };
 		07BE8C0B1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C0A1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift */; };
+		07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2D3BB1EBA88CF000770DE /* MindBody.swift */; };
 		07CB04371E604653002066CD /* MeditationChoiceGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CB04361E604653002066CD /* MeditationChoiceGuided.swift */; };
 		07CB04391E6049DF002066CD /* MeditationGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CB04381E6049DF002066CD /* MeditationGuided.swift */; };
 		07DEE6F11E0AAD2E003B89AB /* ClassicChoiceG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F01E0AAD2E003B89AB /* ClassicChoiceG.swift */; };
@@ -114,7 +112,6 @@
 		075A0DB71E8C55680008E014 /* WarmupChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoiceCustom.swift; sourceTree = "<group>"; };
 		077AC0D71DA535830026895B /* MindAndBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindAndBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		077AC0DA1DA535830026895B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		077AC0DE1DA535840026895B /* MindBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindBody.swift; sourceTree = "<group>"; };
 		077AC0E11DA535840026895B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		077AC0E31DA535840026895B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		077AC0E61DA535840026895B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -150,8 +147,6 @@
 		077AC1291DA793950026895B /* SF-UI-Text-UltrathinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-UltrathinItalic.otf"; sourceTree = "<group>"; };
 		077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymChoice.swift; sourceTree = "<group>"; };
 		077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircuitChoiceG.swift; sourceTree = "<group>"; };
-		077E47161EB9DE17005B0B22 /* Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
-		077E47181EB9DE8A005B0B22 /* MenuHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuHelper.swift; sourceTree = "<group>"; };
 		077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentMenuAnimator.swift; sourceTree = "<group>"; };
 		077E471E1EB9E221005B0B22 /* SlideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuView.swift; sourceTree = "<group>"; };
 		077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissMenuAnimator.swift; sourceTree = "<group>"; };
@@ -165,6 +160,7 @@
 		07BDFEFB1EB1E65A00B131D7 /* YogaScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreen.swift; sourceTree = "<group>"; };
 		07BE8C081E8BDF9500A851EF /* YogaScreenOverview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreenOverview.swift; sourceTree = "<group>"; };
 		07BE8C0A1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreenOverviewDetail.swift; sourceTree = "<group>"; };
+		07C2D3BB1EBA88CF000770DE /* MindBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindBody.swift; sourceTree = "<group>"; };
 		07CB04361E604653002066CD /* MeditationChoiceGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationChoiceGuided.swift; sourceTree = "<group>"; };
 		07CB04381E6049DF002066CD /* MeditationGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationGuided.swift; sourceTree = "<group>"; };
 		07DEE6F01E0AAD2E003B89AB /* ClassicChoiceG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassicChoiceG.swift; sourceTree = "<group>"; };
@@ -250,6 +246,15 @@
 				075A0DB61E8C538B0008E014 /* Custom */,
 			);
 			name = Warmup;
+			sourceTree = "<group>";
+		};
+		072CD2AD1EBA41AE002E2CD6 /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */,
+				077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */,
+			);
+			name = Functions;
 			sourceTree = "<group>";
 		};
 		07520BB51E9FB80C00FA682E /* Meditation Timer */ = {
@@ -398,10 +403,11 @@
 				077AC0E01DA535840026895B /* Main.storyboard */,
 				077E47151EB9DC54005B0B22 /* Slide Menu */,
 				077AC0FD1DA54C0C0026895B /* MindBody */,
-				077AC0FC1DA54BD60026895B /* Profile */,
-				077AC0FE1DA54C500026895B /* Information */,
 				075A0DB91E8D68800008E014 /* Calendar */,
 				075A0DBA1E8D688D0008E014 /* Tracking */,
+				077AC0FE1DA54C500026895B /* Information */,
+				077AC0FC1DA54BD60026895B /* Profile */,
+				07995A371E86A83A0009C9B1 /* Settings */,
 				077AC0E31DA535840026895B /* Assets.xcassets */,
 				077AC0E51DA535840026895B /* LaunchScreen.storyboard */,
 				077AC0E81DA535840026895B /* Info.plist */,
@@ -423,7 +429,6 @@
 			isa = PBXGroup;
 			children = (
 				077AC1031DA579680026895B /* Profile.swift */,
-				07995A371E86A83A0009C9B1 /* Settings */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -431,7 +436,7 @@
 		077AC0FD1DA54C0C0026895B /* MindBody */ = {
 			isa = PBXGroup;
 			children = (
-				077AC0DE1DA535840026895B /* MindBody.swift */,
+				07C2D3BB1EBA88CF000770DE /* MindBody.swift */,
 				07530C971E96716300BD33EC /* Choice Screens */,
 				07530C981E96717B00BD33EC /* Session Screens */,
 			);
@@ -504,11 +509,8 @@
 		077E47151EB9DC54005B0B22 /* Slide Menu */ = {
 			isa = PBXGroup;
 			children = (
-				077E47161EB9DE17005B0B22 /* Interactor.swift */,
-				077E47181EB9DE8A005B0B22 /* MenuHelper.swift */,
-				077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */,
+				072CD2AD1EBA41AE002E2CD6 /* Functions */,
 				077E471E1EB9E221005B0B22 /* SlideMenuView.swift */,
-				077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */,
 			);
 			name = "Slide Menu";
 			sourceTree = "<group>";
@@ -720,7 +722,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				077AC0DF1DA535840026895B /* MindBody.swift in Sources */,
 				079187301E7DB15000E7153A /* SessionScreen.swift in Sources */,
 				0782A2981E5DA6B20016F908 /* ClassicChoiceFull.swift in Sources */,
 				07B65F7B1E624A73004DBB97 /* MeditationScreenGuided.swift in Sources */,
@@ -747,9 +748,9 @@
 				0757326B1E64D8A3003DA77E /* InformationScreen1.swift in Sources */,
 				07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */,
 				075A0DB81E8C55680008E014 /* WarmupChoiceCustom.swift in Sources */,
-				077E47191EB9DE8A005B0B22 /* MenuHelper.swift in Sources */,
 				072829E51EA7D40C0090164A /* WorkoutChoiceCustom.swift in Sources */,
 				0728F3E51E1E9C0E00EA409B /* CalendarScreenDetail.swift in Sources */,
+				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,
 				07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */,
 				077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */,
 				077AC1001DA54C810026895B /* Information.swift in Sources */,
@@ -760,7 +761,6 @@
 				07F0C4931EA60B0B00927DA8 /* StretchingChoiceFinal.swift in Sources */,
 				07BE8C0B1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift in Sources */,
 				077C2C7E1E5C723D00BA62C0 /* GymChoice.swift in Sources */,
-				077E47171EB9DE18005B0B22 /* Interactor.swift in Sources */,
 				07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */,
 				077AC1041DA579680026895B /* Profile.swift in Sources */,
 				07BDFEFC1EB1E65A00B131D7 /* YogaScreen.swift in Sources */,

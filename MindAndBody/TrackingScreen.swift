@@ -19,10 +19,26 @@ class TrackingScreen: UIViewController {
     
     
 //
+// View Will Appear ---------------------------------------------------------------------------------
+//
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        
+        // Select Tab
+        //self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[tabBarIndex]
+        //
+        //self.tabBarController?.customizableViewControllers = []
+        //self.tabBarController?.tabBar.isHidden = true
+    }
+    
+//
 // View did load --------------------------------------------------------------------------------------------------------
 //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         //
         self.navigationController?.navigationBar.barTintColor = colour2
         
@@ -34,12 +50,52 @@ class TrackingScreen: UIViewController {
     }
     
     
-//
-// Dismiss view --------------------------------------------------------------------------------------------------------
-//
-    @IBAction func dismissView(_ sender: Any) {
-        self.dismiss(animated: true)
+    
+    
+    
+    //
+    // Slide Menu ---------------------------------------------------------------------------------------------------------------------
+    //
+    
+    // Elements
+    //
+    @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
+        self.performSegue(withIdentifier: "openMenu", sender: nil)
+    }
+    
+    //
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //
+        if segue.identifier == "openMenu" {
+            //
+            UIApplication.shared.statusBarStyle = .default
+            //
+            if let destinationViewController = segue.destination as? SlideMenuView {
+                destinationViewController.transitioningDelegate = self
+            }
+        } else {
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
+        }
     }
     
 //
+}
+
+
+
+//
+// Slide Menu Extension
+extension TrackingScreen: UIViewControllerTransitioningDelegate {
+    // Present
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PresentMenuAnimator()
+    }
+    
+    // Dismiss
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissMenuAnimator()
+    }
 }
