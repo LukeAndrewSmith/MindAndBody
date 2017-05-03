@@ -94,18 +94,15 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     // Add movement table background (dismiss table)
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.restTimeView.alpha = 0
             //
             self.backgroundViewExpanded.alpha = 0
-        }, completion: nil)
-        //
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        }, completion: { finished in
             self.restTimeView.removeFromSuperview()
             //
             self.backgroundViewExpanded.removeFromSuperview()
-        }
+        })
     }
     //
     // Ok button action
@@ -119,18 +116,15 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         //
         defaults.synchronize()
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.restTimeView.alpha = 0
             //
             self.backgroundViewExpanded.alpha = 0
-        }, completion: nil)
-        //
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        }, completion: { finished in
             self.restTimeView.removeFromSuperview()
             //
             self.backgroundViewExpanded.removeFromSuperview()
-        }
+        })
         //
         tableView.reloadData()
     }
@@ -237,16 +231,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 backgroundImageView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             
             // If red-orange background
-            } else if backgroundIndex == backgroundImageArray.count + 1 {
-                // Rotate Gradient Label
-                backgroundImageView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-                backgroundImageView.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
-                backgroundImageView.center.y = cell.center.y
-                //
-                backgroundImageView.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
-                //
-                }
-            
+            }            
             // Final background image view customization
             backgroundImageView.contentMode = .scaleToFill
             cell.addSubview(backgroundImageView)
@@ -399,12 +384,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             backgroundViewExpanded.frame = UIScreen.main.bounds
             // Animate table fade and size
             // Alpha
-            UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
+            UIView.animate(withDuration: 0.4, animations: {
                 self.restTimeView.alpha = 1
                 //
             }, completion: nil)
             // Position
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 self.restTimeView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
                 self.restTimeView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)

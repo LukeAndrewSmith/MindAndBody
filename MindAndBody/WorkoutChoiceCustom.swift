@@ -490,7 +490,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
         //
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
+        UIView.animate(withDuration: 0.4, animations: {
             flash.alpha = 0
         }, completion: {(finished: Bool) -> Void in
             flash.removeFromSuperview()
@@ -767,7 +767,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                 //
                 self.beginButtonConstraint.constant = 0
                 //
-                UIView.animate(withDuration: 0.4) {
+                UIView.animate(withDuration: 0.7) {
                     self.view.layoutIfNeeded()
                     self.editingButton.alpha = 1
                     self.removePreset.alpha = 1
@@ -852,7 +852,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                     //
                     self.beginButtonConstraint.constant = -49
                     //
-                    UIView.animate(withDuration: 0.4) {
+                    UIView.animate(withDuration: 0.7) {
                         self.view.layoutIfNeeded()
                         self.editingButton.alpha = 0
                         self.removePreset.alpha = 0
@@ -1255,12 +1255,12 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                     backgroundViewExpanded.frame = UIScreen.main.bounds
                     // Animate table fade and size
                     // Alpha
-                    UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
+                    UIView.animate(withDuration: 0.4, animations: {
                         self.movementsTableView.alpha = 1
                         //
                     }, completion: nil)
                     // Position
-                    UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
                         //
                         self.backgroundViewExpanded.alpha = 0.7
@@ -1280,12 +1280,12 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                         backgroundViewExpanded.frame = UIScreen.main.bounds
                         // Animate table fade and size
                         // Alpha
-                        UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
+                        UIView.animate(withDuration: 0.4, animations: {
                             self.movementsTableView.alpha = 1
                             //
                         }, completion: nil)
                         // Position
-                        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                             self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
                             //
                             self.backgroundViewExpanded.alpha = 0.7
@@ -1315,12 +1315,12 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                         backgroundViewExpanded.frame = UIScreen.main.bounds
                         // Animate table fade and size
                         // Alpha
-                        UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
+                        UIView.animate(withDuration: 0.4, animations: {
                             self.setsRepsView.alpha = 1
                             //
                         }, completion: nil)
                         // Position
-                        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                             //
                             self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
                             self.setsRepsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
@@ -1352,15 +1352,12 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                 //
                 defaults.synchronize()
                 // Remove Table
-                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     self.movementsTableView.alpha = 0
                     //
                     self.backgroundViewExpanded.alpha = 0
                     //
-                }, completion: nil)
-                //
-                let delayInSeconds = 0.4
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                }, completion: { finished in
                     self.movementsTableView.removeFromSuperview()
                     self.backgroundViewExpanded.removeFromSuperview()
                     //
@@ -1370,7 +1367,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                         //
                         self.customTableView.setContentOffset(CGPoint(x: 0, y: self.customTableView.contentSize.height - self.customTableView.frame.size.height), animated: true)
                     }
-                }
+                })
             //
             default: break
             }
@@ -1495,20 +1492,17 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     // Add movement table background (dismiss table)
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.movementsTableView.alpha = 0
             self.setsRepsView.alpha = 0
             //
             self.backgroundViewExpanded.alpha = 0
-        }, completion: nil)
-        //
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        }, completion: { finished in
             self.movementsTableView.removeFromSuperview()
             self.setsRepsView.removeFromSuperview()
             //
             self.backgroundViewExpanded.removeFromSuperview()
-        }
+        })
     }
     
     
@@ -1549,18 +1543,15 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         //
         defaults.synchronize()
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.setsRepsView.alpha = 0
             //
             self.backgroundViewExpanded.alpha = 0
-        }, completion: nil)
-        //
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        }, completion: { finished in
             self.setsRepsView.removeFromSuperview()
             //
             self.backgroundViewExpanded.removeFromSuperview()
-        }
+        })
         //
         customTableView.reloadData()
     }
@@ -1601,7 +1592,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.expandedImage.center.y = (height/2) * 1.5
             self.backgroundViewImage.alpha = 0.5
         }, completion: nil)
@@ -1612,18 +1603,15 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         //
         let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.expandedImage.center.y = (height/2) * 2.5
             self.backgroundViewImage.alpha = 0
-        }, completion: nil)
-        //
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        }, completion: { finished in
             //
             self.expandedImage.removeFromSuperview()
             self.backgroundViewImage.removeFromSuperview()
             self.navigationItem.setHidesBackButton(false, animated: true)
-        }
+        })
     }
     
     

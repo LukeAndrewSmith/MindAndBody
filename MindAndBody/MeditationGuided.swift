@@ -121,8 +121,7 @@ class MeditationGuided: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Colour
-        self.view.applyGradient(colours: [colour1, colour1])
+        view.backgroundColor = colour1
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")

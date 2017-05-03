@@ -145,7 +145,7 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
         
         // Background Gradient
         //
-        self.view.applyGradient(colours: [colour1, colour1])
+        view.backgroundColor = colour1
         
         // Images
         //
@@ -424,7 +424,7 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
         //
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             //
             flash.alpha = 0
         }, completion: {(finished: Bool) -> Void in
@@ -712,7 +712,7 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
         self.view.bringSubview(toFront: timerView)
         
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.timerView.center.y = (self.view.frame.size.height/2) * 1.5
             self.backgroundViewTimer.alpha = 0.5
         }, completion: nil)
@@ -721,17 +721,14 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
     // Retract Timer
     @IBAction func retractTimer(_ sender: Any) {
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.timerView.center.y = (self.view.frame.size.height/2) * 2.5
             self.backgroundViewTimer.alpha = 0
-        }, completion: nil)
-        //
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        }, completion: { finished in
             //
             self.timerView.removeFromSuperview()
             self.backgroundViewTimer.removeFromSuperview()
-        }
+        })
         //
         navigationItem.setHidesBackButton(false, animated: true)
     }
@@ -854,7 +851,7 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
         view.bringSubview(toFront: scrollViewExplanation)
         
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.scrollViewExplanation.center.y = (self.view.frame.size.height/2) * 1.5
             self.backgroundViewExplanation.alpha = 0.5
         }, completion: nil)
@@ -863,20 +860,17 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
     // Retract Explanation
     @IBAction func retractExplanation(_ sender: Any) {
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             //
             self.scrollViewExplanation.center.y = (self.view.frame.size.height/2) * 2.5
             self.backgroundViewExplanation.alpha = 0
-        }, completion: nil)
-        //
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        }, completion: { finished in
             //
             self.scrollViewExplanation.removeFromSuperview()
             self.backgroundViewExplanation.removeFromSuperview()
             //
             self.explanationLabel.removeFromSuperview()
-        }
+        })
         
         //
         navigationItem.setHidesBackButton(false, animated: true)
@@ -922,15 +916,12 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
         blurEffectView.addSubview(hideLabel)
         UIApplication.shared.keyWindow?.insertSubview(blurEffectView, aboveSubview: view)
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.4, animations: {
             self.blurEffectView.alpha = 1
             //UIScreen.main.brightness = self.brightness/2
-        }, completion: nil)
-        //
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        }, completion: { finished in
             self.hideLabel.alpha = 1
-        }
+        })
     }
     
     // Exit pocket mode
@@ -939,18 +930,15 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
         self.hideLabel.alpha = 0
         
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.4, animations: {
             self.blurEffectView.alpha = 0
             //UIScreen.main.brightness = self.brightness/2
-        }, completion: nil)
-        //
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        }, completion: { finished in
             //
             self.blurEffectView.removeFromSuperview()
             self.hideLabel.removeFromSuperview()
             //UIScreen.main.brightness = brightness
-        }
+        })
     }
     
     
@@ -965,7 +953,7 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
         demonstrationImageButton.alpha = 1
         demonstrationImageButton.isEnabled = true
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.imageScroll.contentOffset.x = self.imageScroll.frame.size.width
         }, completion: nil)
     }
@@ -978,7 +966,7 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
         demonstrationImageButton.alpha = 0
         demonstrationImageButton.isEnabled = false
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.imageScroll.contentOffset.x = 0
         }, completion: nil)
     }
@@ -993,7 +981,7 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
             demonstrationImageButton.alpha = 0
             demonstrationImageButton.isEnabled = false
             //
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.imageScroll.contentOffset.x = 0
             }, completion: nil)
             //
@@ -1004,7 +992,7 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
             demonstrationImageButton.alpha = 1
             demonstrationImageButton.isEnabled = true
             //
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.imageScroll.contentOffset.x = self.imageScroll.frame.size.width
             }, completion: nil)
         }

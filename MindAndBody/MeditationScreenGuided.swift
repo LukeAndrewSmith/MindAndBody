@@ -131,7 +131,7 @@ class MeditationScreenGuided: UIViewController {
         //
         UIApplication.shared.keyWindow?.insertSubview(self.hideScreenView, aboveSubview: view)
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.4, animations: {
             UIApplication.shared.isStatusBarHidden = true
             self.hideScreenView.alpha = 1
             UIScreen.main.brightness = CGFloat(0)

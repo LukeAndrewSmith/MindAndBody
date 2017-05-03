@@ -10,12 +10,16 @@ import Foundation
 import UIKit
 import UserNotifications
 
-// Global Variables
+
+//
+// Background Images Array ---------------------------------------------------------------------------------------------------------------
 //
 let backgroundImageArray: [UIImage] =
     [#imageLiteral(resourceName: "Background 0"), #imageLiteral(resourceName: "Background 1"), #imageLiteral(resourceName: "Background 2"), #imageLiteral(resourceName: "Background 3"), #imageLiteral(resourceName: "Background 4")]
 
-// Colours
+//
+// Colours ---------------------------------------------------------------------------------------------------------------------
+//
 // Grey
 let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
 // Black
@@ -25,12 +29,11 @@ let colour3 = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
 // Red
 let colour4 = UIColor(red:0.74, green:0.25, blue:0.20, alpha:1.0)
 
-
 //
 // Gradient Extension ----------------------------------------------------------------------------------------------------------------------
 //
 extension UIView {
-
+    
     func applyGradient(colours: [UIColor]) -> Void {
         //
         self.applyGradient(colours: colours, locations: nil)
@@ -45,6 +48,8 @@ extension UIView {
         self.layer.insertSublayer(gradient, at: 0)
     }
 }
+
+
 
 
 //
@@ -69,10 +74,11 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     //
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
-    // Calendar
-    @IBOutlet weak var calendar: UIBarButtonItem!
+    // View Indicator
+    @IBOutlet weak var viewIndicator: UIBarButtonItem!
     // Tracking
-    @IBOutlet weak var tracking: UIBarButtonItem!
+    @IBOutlet weak var slideMenu: UIBarButtonItem!
+    
     
     // Button Outlets
     //
@@ -160,10 +166,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             //
             backgroundImage.image = nil
             backgroundImage.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        } else if backgroundIndex == backgroundImageArray.count + 1 {
-            backgroundImage.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
         }
-        
         //
         // Title Colours and Blurs
         //
@@ -230,26 +233,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             view.insertSubview(blur6, belowSubview: body)
             view.insertSubview(blur7, belowSubview: mind)
             
-        // White Text with white mind and body and no blur
-        case backgroundImageArray.count + 1:
-            Warmup.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Workout.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Cardio.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Stretching.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Yoga.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            body.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            mind.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            //
-            blur.removeFromSuperview()
-            blur1.removeFromSuperview()
-            blur2.removeFromSuperview()
-            blur3.removeFromSuperview()
-            blur4.removeFromSuperview()
-            blur5.removeFromSuperview()
-            blur6.removeFromSuperview()
-            blur7.removeFromSuperview()
-            
         // White Text, Black body, White mind
         case 0:
             Warmup.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
@@ -309,6 +292,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         UserDefaults.standard.register(defaults: ["mindBodyWalkthrough" : false])
         
         
+        
         //
         // Alert View indicating meaning of resetting the app
         let title = NSLocalizedString("notificationsPopup", comment: "")
@@ -325,7 +309,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
             UIAlertAction in
             //
-            self.walkthroughMindBody()
+            //self.walkthroughMindBody()
             //
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             }
@@ -341,8 +325,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
 
 
         //
-    
-        
+
         
         
     
@@ -394,12 +377,14 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         UITabBar.appearance().barTintColor = colour2
         tabBarController?.tabBar.barStyle = .default
         self.tabBarController?.tabBar.barTintColor = colour2
-        // Navigation button
-        calendar.tintColor = colour1
-        tracking.tintColor = colour1
+        //
+        // Navigation Items
+        slideMenu.tintColor = colour1
+        viewIndicator.tintColor = colour1
+        //
         
         self.tabBarController?.tabBar.tintColor = colour1
-        
+
     
         // Button Customization
         //
@@ -422,7 +407,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         Workout.titleLabel?.textAlignment = .center
         Workout.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
         // Stretching
-        Stretching.setTitle(NSLocalizedString("stretching", comment: ""), for: UIControlState.normal)
+    Stretching.setTitle(NSLocalizedString("stretching", comment: ""), for: UIControlState.normal)
         Stretching.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
         Stretching.layer.borderWidth = 8
         Stretching.layer.borderColor = colour2.cgColor
@@ -450,7 +435,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         Yoga.titleLabel?.textAlignment = .center
         Yoga.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
         // Meditation
-        Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
+    Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
         Meditation.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 20)
         Meditation.layer.borderWidth = 8
         Meditation.layer.borderColor = colour2.cgColor
@@ -466,7 +451,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         blur.effect = vibrancyE
         blur.frame = Warmup.bounds
         blur.isUserInteractionEnabled = false
-        Warmup.insertSubview(blur, belowSubview: Warmup.titleLabel!)
         //
         let blurE1 = UIBlurEffect(style: .dark)
         blur1.effect = blurE1
@@ -474,7 +458,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         blur1.effect = vibrancyE1
         blur1.frame = Workout.bounds
         blur1.isUserInteractionEnabled = false
-        Workout.insertSubview(blur1, belowSubview: Workout.titleLabel!)
         //
         let blurE2 = UIBlurEffect(style: .dark)
         blur2.effect = blurE2
@@ -482,7 +465,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         blur2.effect = vibrancyE2
         blur2.frame = Cardio.bounds
         blur2.isUserInteractionEnabled = false
-        Cardio.insertSubview(blur2, belowSubview: Cardio.titleLabel!)
         //
         let blurE3 = UIBlurEffect(style: .dark)
         blur3.effect = blurE3
@@ -490,7 +472,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         blur3.effect = vibrancyE3
         blur3.frame = Stretching.bounds
         blur3.isUserInteractionEnabled = false
-        Stretching.insertSubview(blur3, belowSubview: Stretching.titleLabel!)
         //
         let blurE4 = UIBlurEffect(style: .dark)
         blur4.effect = blurE4
@@ -498,7 +479,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         blur4.effect = vibrancyE4
         blur4.frame = Yoga.bounds
         blur4.isUserInteractionEnabled = false
-        Yoga.insertSubview(blur4, belowSubview: Yoga.titleLabel!)
         //
         let blurE5 = UIBlurEffect(style: .dark)
         blur5.effect = blurE5
@@ -506,7 +486,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         blur5.effect = vibrancyE5
         blur5.frame = Meditation.bounds
         blur5.isUserInteractionEnabled = false
-        Meditation.insertSubview(blur5, belowSubview: Meditation.titleLabel!)
         
         
         // Mind & Body section titles
@@ -552,6 +531,8 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             //
             stack3Bottom.constant = 15
         }
+        
+        view.sendSubview(toBack: backgroundImage)
     }
     
     
@@ -601,358 +582,423 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         super.viewDidDisappear(false)
         // Background index
         let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
-        // Ensure gradient removed each time to avoid issues
-        if backgroundIndex == backgroundImageArray.count + 1 {
-            for i in backgroundImage.layer.sublayers! {
-                i.removeFromSuperlayer()
-            }
+    }
+    
+    
+    
+    
+    
+//
+// Slide Menu ---------------------------------------------------------------------------------------------------------------------
+//
+    
+// Elements
+    // 1
+    let interactor = Interactor()
+    
+    @IBAction func openMenu(sender: AnyObject) {
+        performSegue(withIdentifier: "openMenu", sender: nil)
+    }
+    
+    //
+    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer) {
+        let translation = sender.translation(in: view)
+        
+        let progress = MenuHelper.calculateProgress(translationInView: translation, viewBounds: view.bounds, direction: .Right)
+        
+        MenuHelper.mapGestureStateToInteractor(
+            gestureState: sender.state,
+            progress: progress,
+            interactor: interactor){
+                self.performSegue(withIdentifier: "openMenu", sender: nil)
         }
     }
     
-    
-//
-// Prepare for segue  ---------------------------------------------------------------------------------------------------------------------
-//
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Remove back button text
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        navigationItem.backBarButtonItem = backItem
+        //
+        if segue.identifier == "openMenu" {
+        if let destinationViewController = segue.destination as? SlideMenuView {
+            destinationViewController.transitioningDelegate = self
+            destinationViewController.interactor = interactor
+        }
+        } else {
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
+        }
     }
-
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 //
 // Walkthrough -----------------------------------------------------------------------------------------------------------------------------
 //
-    // Countdown
-    var time = 7
-    let countdownLabel = UILabel()
-    
-    //
-    // Update Timer
-    func updateTimer() {
-        if time == 0 {
-            countdownLabel.text = "0"
-        } else {
-            time -= 1
-            countdownLabel.text = String(time)
-        }
-    }
-    
-    //
-    var viewNumber = 0
-    let walkthroughView = UIView()
-    let label = UILabel()
-    let nextButton = UIButton()
-    let backButton = UIButton()
-    
-    // Walkthrough
-    func walkthroughMindBody() {
-       
-        //
-        let screenSize = UIScreen.main.bounds
-        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-        let tabBarHeight = self.tabBarController?.tabBar.frame.size.height
-
-        //
-        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
-        walkthroughView.backgroundColor = .black
-        walkthroughView.alpha = 0.55
-        walkthroughView.clipsToBounds = true
-        //
-        
-        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
-        label.center = view.center
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
-        label.textColor = .white
-        label.alpha = 0.9
-        
-        //
-        nextButton.frame = screenSize
-        nextButton.backgroundColor = .clear
-        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
-
-        //
-        backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
-        backButton.setTitle("Back", for: .normal)
-        backButton.titleLabel?.textAlignment = .left
-        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        backButton.titleLabel?.textColor = .white
-        backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
-        
-        //
-        switch viewNumber {
-        //
-        case 0:
-            //
-            // Clear Section
-            let path = CGMutablePath()
-            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - 80, y: UIApplication.shared.statusBarFrame.height, width: 160, height: 40))
-            path.addRect(walkthroughView.frame)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-
-            //
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-
-            
-            label.text = NSLocalizedString("mindBody0", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-            
-
-        //
-        case 1:
-            //
-            nextButton.isEnabled = false
-            backButton.isEnabled = false
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - 80, y: UIApplication.shared.statusBarFrame.height, width: 160, height: 40))
-            path.addRect(walkthroughView.frame)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            //
-            label.text = NSLocalizedString("mindBody1", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-            
-            // CountDown
-            //
-            time = 7
-            //
-            countdownLabel.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
-            countdownLabel.text = String(time)
-            countdownLabel.center.x = self.view.frame.size.width - 24.5
-            countdownLabel.center.y = self.view.frame.size.height - 24.5 + navigationBarHeight + UIApplication.shared.statusBarFrame.height + tabBarHeight!
-            countdownLabel.textAlignment = .center
-            countdownLabel.numberOfLines = 0
-            countdownLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-            countdownLabel.font = UIFont(name: "SFUIDisplay-light", size: 22)
-            countdownLabel.textColor = .white
-            //
-            walkthroughView.addSubview(countdownLabel)
-
-            //
-            let countdownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
-            
-            //
-            let delayInSeconds = 7.0
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                self.nextButton.isEnabled = true
-                self.backButton.isEnabled = true
-                countdownTimer.invalidate()
-                self.countdownLabel.removeFromSuperview()
-            }
-            
-        //
-        case 2:
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-
-            //
-            label.text = NSLocalizedString("mindBody2", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-            
-        //
-        case 3:
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width * 0.083, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            walkthroughView.addSubview(backButton)
-            backButton.setTitle("", for: .normal)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            //
-            label.text = NSLocalizedString("mindBody3", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-            
-        //
-        case 4:
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: stackView1.center.x - 10 - (Warmup.frame.size.width / 2), y: stackView1.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height), radius: Warmup.frame.width / 2, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(walkthroughView.frame)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            walkthroughView.addSubview(backButton)
-            backButton.setTitle(NSLocalizedString("back", comment: ""), for: .normal)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-
-            //
-            label.text = NSLocalizedString("mindBody4", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-            label.center = stackView3.center
-            
-        //
-        case 5:
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: (view.frame.width / 4) - ((view.frame.width / 4) * 1/3 ), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + view.frame.size.height + (tabBarHeight! / 2)), radius: 23, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(walkthroughView.frame)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-
-            //
-            label.text = NSLocalizedString("mindBody5", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-            label.center = view.center
-
-        //
-        case 6:
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.center.x, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + view.frame.size.height + (tabBarHeight! / 2)), radius: 23, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(walkthroughView.frame)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            //
-            label.text = NSLocalizedString("mindBody6", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-            
-        //
-        case 7:
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: ((view.frame.width / 4) * 3) + ((view.frame.width / 4) * 1/3 ), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + view.frame.size.height + (tabBarHeight! / 2)), radius: 23, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(walkthroughView.frame)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            //
-            label.text = NSLocalizedString("mindBody7", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-        //
-        default: break
-        }
-    }
-    
-    //
-    func nextWalkthroughView(_ sender: Any) {
-        walkthroughView.removeFromSuperview()
-        label.removeFromSuperview()
-        viewNumber = viewNumber + 1
-        walkthroughMindBody()
-    }
-    
-    //
-    func backWalkthroughView(_ sender: Any) {
-        if viewNumber > 0 {
-            label.removeFromSuperview()
-            walkthroughView.removeFromSuperview()
-            viewNumber = viewNumber - 1
-            walkthroughMindBody()
-        }
-    }
+//    // Countdown
+//    var time = 7
+//    let countdownLabel = UILabel()
+//    
+//    //
+//    // Update Timer
+//    func updateTimer() {
+//        if time == 0 {
+//            countdownLabel.text = "0"
+//        } else {
+//            time -= 1
+//            countdownLabel.text = String(time)
+//        }
+//    }
+//    
+//    //
+//    var viewNumber = 0
+//    let walkthroughView = UIView()
+//    let label = UILabel()
+//    let nextButton = UIButton()
+//    let backButton = UIButton()
+//    
+//    // Walkthrough
+//    func walkthroughMindBody() {
+//       
+//        //
+//        let screenSize = UIScreen.main.bounds
+//        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+//        let tabBarHeight = 0
+//            //self.tabBarController?.tabBar.frame.size.height
+//
+//        //
+//        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+//        walkthroughView.backgroundColor = .black
+//        walkthroughView.alpha = 0.55
+//        walkthroughView.clipsToBounds = true
+//        //
+//        
+//        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
+//        label.center = view.center
+//        label.textAlignment = .center
+//        label.numberOfLines = 0
+//        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+//        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
+//        label.textColor = .white
+//        label.alpha = 0.9
+//        
+//        //
+//        nextButton.frame = screenSize
+//        nextButton.backgroundColor = .clear
+//        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
+//
+//        //
+//        backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
+//        backButton.setTitle("Back", for: .normal)
+//        backButton.titleLabel?.textAlignment = .left
+//        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+//        backButton.titleLabel?.textColor = .white
+//        backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
+//        
+//        //
+//        switch viewNumber {
+//        //
+//        case 0:
+//            //
+//            // Clear Section
+//            let path = CGMutablePath()
+//            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - 80, y: UIApplication.shared.statusBarFrame.height, width: 160, height: 40))
+//            path.addRect(walkthroughView.frame)
+//            //
+//            let maskLayer = CAShapeLayer()
+//            maskLayer.backgroundColor = UIColor.black.cgColor
+//            maskLayer.path = path
+//            maskLayer.fillRule = kCAFillRuleEvenOdd
+//            //
+//            walkthroughView.layer.mask = maskLayer
+//            walkthroughView.clipsToBounds = true
+//            //
+//
+//            //
+//            walkthroughView.addSubview(backButton)
+//            walkthroughView.addSubview(nextButton)
+//            self.view.addSubview(walkthroughView)
+//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+//            walkthroughView.bringSubview(toFront: nextButton)
+//            walkthroughView.bringSubview(toFront: backButton)
+//
+//            
+//            label.text = NSLocalizedString("mindBody0", comment: "")
+//            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+//            
+//
+//        //
+//        case 1:
+//            //
+//            nextButton.isEnabled = false
+//            backButton.isEnabled = false
+//            
+//            // Clear Section
+//            let path = CGMutablePath()
+//            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - 80, y: UIApplication.shared.statusBarFrame.height, width: 160, height: 40))
+//            path.addRect(walkthroughView.frame)
+//            //
+//            let maskLayer = CAShapeLayer()
+//            maskLayer.backgroundColor = UIColor.black.cgColor
+//            maskLayer.path = path
+//            maskLayer.fillRule = kCAFillRuleEvenOdd
+//            //
+//            walkthroughView.layer.mask = maskLayer
+//            walkthroughView.clipsToBounds = true
+//            //
+//            walkthroughView.addSubview(backButton)
+//            walkthroughView.addSubview(nextButton)
+//            self.view.addSubview(walkthroughView)
+//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+//            walkthroughView.bringSubview(toFront: nextButton)
+//            walkthroughView.bringSubview(toFront: backButton)
+//            
+//            //
+//            label.text = NSLocalizedString("mindBody1", comment: "")
+//            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+//            
+//            // CountDown
+//            //
+//            time = 7
+//            //
+//            countdownLabel.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
+//            countdownLabel.text = String(time)
+//            countdownLabel.center.x = self.view.frame.size.width - 24.5
+//            //countdownLabel.center.y = self.view.frame.size.height - 24.5 + navigationBarHeight + UIApplication.shared.statusBarFrame.height + tabBarHeight
+//            countdownLabel.textAlignment = .center
+//            countdownLabel.numberOfLines = 0
+//            countdownLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+//            countdownLabel.font = UIFont(name: "SFUIDisplay-light", size: 22)
+//            countdownLabel.textColor = .white
+//            //
+//            walkthroughView.addSubview(countdownLabel)
+//
+//            //
+//            let countdownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+//            
+//            //
+//            let delayInSeconds = 7.0
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+//                self.nextButton.isEnabled = true
+//                self.backButton.isEnabled = true
+//                countdownTimer.invalidate()
+//                self.countdownLabel.removeFromSuperview()
+//            }
+//            
+//        //
+//        case 2:
+//            // Clear Section
+//            let path = CGMutablePath()
+//            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+//            path.addRect(screenSize)
+//            //
+//            let maskLayer = CAShapeLayer()
+//            maskLayer.backgroundColor = UIColor.black.cgColor
+//            maskLayer.path = path
+//            maskLayer.fillRule = kCAFillRuleEvenOdd
+//            //
+//            walkthroughView.layer.mask = maskLayer
+//            walkthroughView.clipsToBounds = true
+//            //
+//            walkthroughView.addSubview(backButton)
+//            walkthroughView.addSubview(nextButton)
+//            self.view.addSubview(walkthroughView)
+//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+//            walkthroughView.bringSubview(toFront: nextButton)
+//            walkthroughView.bringSubview(toFront: backButton)
+//
+//            //
+//            label.text = NSLocalizedString("mindBody2", comment: "")
+//            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+//            
+//        //
+//        case 3:
+//            // Clear Section
+//            let path = CGMutablePath()
+//            path.addArc(center: CGPoint(x: view.frame.size.width * 0.083, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+//            path.addRect(screenSize)
+//            //
+//            let maskLayer = CAShapeLayer()
+//            maskLayer.backgroundColor = UIColor.black.cgColor
+//            maskLayer.path = path
+//            maskLayer.fillRule = kCAFillRuleEvenOdd
+//            //
+//            walkthroughView.layer.mask = maskLayer
+//            walkthroughView.clipsToBounds = true
+//            //
+//            walkthroughView.addSubview(backButton)
+//            backButton.setTitle("", for: .normal)
+//            walkthroughView.addSubview(nextButton)
+//            self.view.addSubview(walkthroughView)
+//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+//            walkthroughView.bringSubview(toFront: nextButton)
+//            walkthroughView.bringSubview(toFront: backButton)
+//            
+//            //
+//            label.text = NSLocalizedString("mindBody3", comment: "")
+//            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+//            
+//        //
+//        case 4:
+//            // Clear Section
+//            let path = CGMutablePath()
+//            path.addArc(center: CGPoint(x: stackView1.center.x - 10 - (Warmup.frame.size.width / 2), y: stackView1.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height), radius: Warmup.frame.width / 2, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+//            path.addRect(walkthroughView.frame)
+//            //
+//            let maskLayer = CAShapeLayer()
+//            maskLayer.backgroundColor = UIColor.black.cgColor
+//            maskLayer.path = path
+//            maskLayer.fillRule = kCAFillRuleEvenOdd
+//            //
+//            walkthroughView.layer.mask = maskLayer
+//            walkthroughView.clipsToBounds = true
+//            //
+//            walkthroughView.addSubview(backButton)
+//            backButton.setTitle(NSLocalizedString("back", comment: ""), for: .normal)
+//            walkthroughView.addSubview(nextButton)
+//            self.view.addSubview(walkthroughView)
+//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+//            walkthroughView.bringSubview(toFront: nextButton)
+//            walkthroughView.bringSubview(toFront: backButton)
+//
+//            //
+//            label.text = NSLocalizedString("mindBody4", comment: "")
+//            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+//            label.center = stackView3.center
+//            
+//        //
+//        case 5:
+//            // Clear Section
+//            let path = CGMutablePath()
+//            path.addArc(center: CGPoint(x: (view.frame.width / 4) - ((view.frame.width / 4) * 1/3 ), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + view.frame.size.height + (tabBarHeight / 2)), radius: 23, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+//            path.addRect(walkthroughView.frame)
+//            //
+//            let maskLayer = CAShapeLayer()
+//            maskLayer.backgroundColor = UIColor.black.cgColor
+//            maskLayer.path = path
+//            maskLayer.fillRule = kCAFillRuleEvenOdd
+//            //
+//            walkthroughView.layer.mask = maskLayer
+//            walkthroughView.clipsToBounds = true
+//            //
+//            walkthroughView.addSubview(backButton)
+//            walkthroughView.addSubview(nextButton)
+//            self.view.addSubview(walkthroughView)
+//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+//            walkthroughView.bringSubview(toFront: nextButton)
+//            walkthroughView.bringSubview(toFront: backButton)
+//
+//            //
+//            label.text = NSLocalizedString("mindBody5", comment: "")
+//            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+//            label.center = view.center
+//
+//        //
+//        case 6:
+//            // Clear Section
+//            let path = CGMutablePath()
+//            path.addArc(center: CGPoint(x: view.center.x, y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + view.frame.size.height + (tabBarHeight / 2)), radius: 23, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+//            path.addRect(walkthroughView.frame)
+//            //
+//            let maskLayer = CAShapeLayer()
+//            maskLayer.backgroundColor = UIColor.black.cgColor
+//            maskLayer.path = path
+//            maskLayer.fillRule = kCAFillRuleEvenOdd
+//            //
+//            walkthroughView.layer.mask = maskLayer
+//            walkthroughView.clipsToBounds = true
+//            //
+//            walkthroughView.addSubview(backButton)
+//            walkthroughView.addSubview(nextButton)
+//            self.view.addSubview(walkthroughView)
+//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+//            walkthroughView.bringSubview(toFront: nextButton)
+//            walkthroughView.bringSubview(toFront: backButton)
+//            
+//            //
+//            label.text = NSLocalizedString("mindBody6", comment: "")
+//            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+//            
+//        //
+//        case 7:
+//            // Clear Section
+//            let path = CGMutablePath()
+//            path.addArc(center: CGPoint(x: ((view.frame.width / 4) * 3) + ((view.frame.width / 4) * 1/3 ), y: navigationBarHeight + UIApplication.shared.statusBarFrame.height + view.frame.size.height + (tabBarHeight / 2)), radius: 23, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+//            path.addRect(walkthroughView.frame)
+//            //
+//            let maskLayer = CAShapeLayer()
+//            maskLayer.backgroundColor = UIColor.black.cgColor
+//            maskLayer.path = path
+//            maskLayer.fillRule = kCAFillRuleEvenOdd
+//            //
+//            walkthroughView.layer.mask = maskLayer
+//            walkthroughView.clipsToBounds = true
+//            //
+//            walkthroughView.addSubview(backButton)
+//            walkthroughView.addSubview(nextButton)
+//            self.view.addSubview(walkthroughView)
+//            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+//            walkthroughView.bringSubview(toFront: nextButton)
+//            walkthroughView.bringSubview(toFront: backButton)
+//            
+//            //
+//            label.text = NSLocalizedString("mindBody7", comment: "")
+//            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
+//        //
+//        default: break
+//        }
+//    }
+//    
+//    //
+//    func nextWalkthroughView(_ sender: Any) {
+//        walkthroughView.removeFromSuperview()
+//        label.removeFromSuperview()
+//        viewNumber = viewNumber + 1
+//        walkthroughMindBody()
+//    }
+//    
+//    //
+//    func backWalkthroughView(_ sender: Any) {
+//        if viewNumber > 0 {
+//            label.removeFromSuperview()
+//            walkthroughView.removeFromSuperview()
+//            viewNumber = viewNumber - 1
+//            walkthroughMindBody()
+//        }
+//    }
 //
 }
+
+
+//
+// Slide Menu Extension
+extension MindBody: UIViewControllerTransitioningDelegate {
+    // Present
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PresentMenuAnimator()
+    }
+    //
+    func interactionControllerForPresentation(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+        
+    // Dismiss
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissMenuAnimator()
+    }
+    //
+    func interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+}
+

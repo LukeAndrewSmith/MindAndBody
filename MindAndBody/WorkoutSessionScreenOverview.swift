@@ -555,7 +555,7 @@ class WorkoutSessionScreenOverview: UITableViewController {
         blurEffectView.addSubview(hideLabel)
         UIApplication.shared.keyWindow?.insertSubview(blurEffectView, aboveSubview: view)
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.4, animations: {
             self.blurEffectView.alpha = 1
         }, completion: nil)
         //
@@ -571,7 +571,7 @@ class WorkoutSessionScreenOverview: UITableViewController {
         self.hideLabel.alpha = 0
         
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.4, animations: {
             self.blurEffectView.alpha = 0
         }, completion: nil)
         //
@@ -630,7 +630,7 @@ class WorkoutSessionScreenOverview: UITableViewController {
         UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
         
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.expandedImage.center.y = (height/2) * 1.5
             self.backgroundViewImage.alpha = 0.5
         }, completion: nil)
@@ -641,18 +641,14 @@ class WorkoutSessionScreenOverview: UITableViewController {
         //
         let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
         //
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.expandedImage.center.y = (height/2) * 2.5
             self.backgroundViewImage.alpha = 0
-        }, completion: nil)
-        
-        //
-        let delayInSeconds = 0.4
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        }, completion: { finished in
             //
             self.expandedImage.removeFromSuperview()
             self.backgroundViewImage.removeFromSuperview()
-        }
+        })
         
         //
         tableView.isScrollEnabled = true

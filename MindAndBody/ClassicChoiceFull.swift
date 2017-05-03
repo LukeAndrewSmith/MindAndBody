@@ -1387,7 +1387,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         self.view.bringSubview(toFront: flash)
         
         
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [],animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             
             flash.alpha = 0
             
@@ -1419,7 +1419,7 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         // Colours
-        self.view.applyGradient(colours: [colour1, colour1])
+        view.backgroundColor = colour1
         questionMark.tintColor = colour1
         
         
@@ -2615,77 +2615,60 @@ class ClassicChoiceFull: UIViewController, UITableViewDelegate, UITableViewDataS
     
     // QuestionMark Button Action
     @IBAction func informationButtonAction(_ sender: Any) {
-        
+        // Slide information down
         if self.informationView.frame.minY < self.view.frame.maxY {
-            
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
+            // Animate slide
+            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                
-            }, completion: nil)
-            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
-            }, completion: nil)
-            self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-            
-            
-            // Buttons
+                
+            }, completion: { finished in
+                // Remove after animation
+                self.informationView.removeFromSuperview()
+                self.informationTitle.removeFromSuperview()
+            })
+            // Navigation buttons
             questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
             navigationBar.setHidesBackButton(false, animated: true)
             
-            
+            // Slide information up
         } else {
-            
-            
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
+            //
+            view.addSubview(informationView)
+            view.addSubview(informationTitle)
+            //
+            view.bringSubview(toFront: informationView)
+            view.bringSubview(toFront: informationTitle)
+            // Animate slide
+            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.informationView.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-                
-            }, completion: nil)
-            UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-                
             }, completion: nil)
+            //
             self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-            
-            
-            // Buttons
+            // Navigation buttons
             questionMark.image = #imageLiteral(resourceName: "Down")
             navigationBar.setHidesBackButton(true, animated: true)
-            
-
-            
         }
-        
     }
-    
-    
-    
     
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
+        // Information Swipe Down
         if (extraSwipe.direction == .down){
-            
-            if self.informationView.frame.minY < self.view.frame.maxY {
-                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    
-                    self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                    
-                }, completion: nil)
-                UILabel.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    
-                    self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
-                }, completion: nil)
+            // Animate slide
+            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
                 
-                
-                // Buttons
-                questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
-                navigationBar.setHidesBackButton(false, animated: true)
-                
-                
-            }
+            }, completion: { finished in
+                // Remove after animation
+                self.informationView.removeFromSuperview()
+                self.informationTitle.removeFromSuperview()
+            })
+            // Navigation buttons
+            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+            navigationBar.setHidesBackButton(false, animated: true)
         }
     }
     

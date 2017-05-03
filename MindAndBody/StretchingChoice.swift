@@ -66,7 +66,7 @@ class StretchingChoice: UIViewController  {
         }
         
         // Colours
-        self.view.applyGradient(colours: [colour1, colour1])
+        view.backgroundColor = colour1
         questionMark.tintColor = colour1
         
         // Titles
@@ -210,19 +210,15 @@ class StretchingChoice: UIViewController  {
         // Slide information down
         if self.informationView.frame.minY < self.view.frame.maxY {
             // Animate slide
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
                 
-            }, completion: nil)
-            //
-            self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-            // Remove after animation
-            let delayInSeconds = 0.4
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            }, completion: { finished in
+                // Remove after animation
                 self.informationView.removeFromSuperview()
                 self.informationTitle.removeFromSuperview()
-            }
+            })
             // Navigation buttons
             questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
             navigationBar.setHidesBackButton(false, animated: true)
@@ -236,7 +232,7 @@ class StretchingChoice: UIViewController  {
             view.bringSubview(toFront: informationView)
             view.bringSubview(toFront: informationTitle)
             // Animate slide
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.informationView.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
             }, completion: nil)
@@ -253,17 +249,21 @@ class StretchingChoice: UIViewController  {
         // Information Swipe Down
         if (extraSwipe.direction == .down){
             // Animate slide
-            if self.informationView.frame.minY < self.view.frame.maxY {
-                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                    self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
-                }, completion: nil)
-                // Navigation buttons
-                questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
-                navigationBar.setHidesBackButton(false, animated: true)
-            }
+            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
+                
+            }, completion: { finished in
+                // Remove after animation
+                self.informationView.removeFromSuperview()
+                self.informationTitle.removeFromSuperview()
+            })
+            // Navigation buttons
+            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
+            navigationBar.setHidesBackButton(false, animated: true)
         }
     }
+
 
     
 //

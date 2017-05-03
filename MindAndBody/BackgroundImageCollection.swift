@@ -77,7 +77,7 @@ class BackgroundImageCollection: UICollectionViewController {
             // Image Section
             case 0: return backgroundImageArray.count
             // Colour Section
-            case 1: return 2
+            case 1: return 1
             //
             default: break
         }
@@ -165,18 +165,9 @@ class BackgroundImageCollection: UICollectionViewController {
             // Colour
             //
             // Grey
-            if indexPath.item == 0 {
-                //
-                cell.backgroundImage.image = nil
-                cell.backgroundImage.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-               
-            // Gradient
-            } else {
-                //
-                cell.backgroundImage.image = nil
-                cell.backgroundImage.applyGradient(colours: [UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)])
-            }
-            
+            //
+            cell.backgroundImage.image = nil
+            cell.backgroundImage.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             
             // Selection Label
             //
