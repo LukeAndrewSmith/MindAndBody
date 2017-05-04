@@ -41,23 +41,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     // View Will Appear
     override func viewWillAppear(_ animated: Bool) {
-       
-        // Select Tab
-       // let viewControllerArray = self.tabBarController?.viewControllers
-        //let selectedController = self.tabBarController?.viewControllers?[tabBarIndex]
-        //self.tabBarController?.selectedViewController = selectedController
-            //self.tabBarController?.viewControllers?[tabBarIndex]
-
-        //self.tabBarController?.selectedIndex = testChoice
-        //self.tabBarController?.selectedViewController = MindBody
-        //self.tabBarController?.selectedViewController = UIViewController(nibName: "MindBody", bundle: .main)
-        //
-//        self.tabBarController?.customizableViewControllers = []
-//        self.tabBarController?.moreNavigationController.navigationBar.alpha = 0
-//        self.tabBarController?.moreNavigationController.setNavigationBarHidden(true, animated: false)
-//        self.tabBarController?.moreNavigationController.navigationBar.isTranslucent = false
-//        self.tabBarController?.moreNavigationController.navigationBar.tintColor = colour1
-//        self.tabBarController?.tabBar.isHidden = true
         //
         // Set TableView Background Colour
         //
@@ -67,10 +50,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         self.tableView.backgroundView = backView
         //
         tableView.reloadData()
-        
-        // Show Navigation Bar
-        //
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
 
@@ -83,13 +62,17 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         
         
         
+        // Swipe
+        let rightSwipe = UISwipeGestureRecognizer()
+        rightSwipe.direction = .right
+        rightSwipe.addTarget(self, action: #selector(swipeGesture(sender:)))
+        tableView.addGestureRecognizer(rightSwipe)
         
-        self.navigationController?.navigationBar.isHidden = false
+        
         // Navigation Bar
         //
-        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "SlideMenu"), style: .plain, target: self, action: #selector(slideMenuPresent))
-        //
         self.navigationController?.navigationBar.barTintColor = colour2
+        self.navigationController?.navigationBar.tintColor = colour1
         // Title
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 22)!]
         // Navigation Title
@@ -687,3 +670,8 @@ extension Settings: UIViewControllerTransitioningDelegate {
     }
 }
 
+
+
+class SettingsNavigation: UINavigationController {
+    
+}

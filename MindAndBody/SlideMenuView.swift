@@ -105,12 +105,54 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //
-        //self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[indexPath.row]
+        let parent = presentingViewController
+            
+        self.dismiss(animated: true, completion:  { finished in
+            //
+            if indexPath.row != tabBarIndex {
+                
+            //
+            tabBarIndex = indexPath.row
+            //
+            let viewNamesArray: [String] = ["view0", "view1", "view2", "view3", "view4", "view5"]
+            //
+            switch tabBarIndex {
+            case 0:
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! MindBodyNavigation
+                //
+                parent?.present(vc, animated: false, completion: nil)
+            //
+            case 1:
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! CalendarNavigation
+                //
+                parent?.present(vc, animated: false, completion: nil)
+            //
+            case 2:
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! TrackingNavigation
+                //
+                parent?.present(vc, animated: false, completion: nil)
+            //
+            case 3:
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! InformationNavigation
+                //
+                parent?.present(vc, animated: false, completion: nil)
+            //
+            case 4:
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! ProfileNavigation
+                //
+                parent?.present(vc, animated: false, completion: nil)
+            //
+            case 5:
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! SettingsNavigation
+                //
+                parent?.present(vc, animated: false, completion: nil)
+            //
+            default: break
+            }
+            }
+            
+        })
 
-        //
-        tabBarIndex = indexPath.row
-        self.dismiss(animated: true)
         //
         UIApplication.shared.statusBarStyle = .lightContent
         //

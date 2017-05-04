@@ -50,6 +50,7 @@ extension UIView {
 }
 
 
+
 var tabBarIndex = 0
 
 
@@ -149,24 +150,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
-        self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[tabBarIndex]
-        
-        // Select Tab
-        //self.tabBarController?.selectedIndex = testChoice
-        //let viewControllerArray = self.tabBarController?.viewControllers
-        //self.tabBarController?.selectedViewController = viewControllerArray?[tabBarIndex]
-        
-        //
-        //self.tabBarController?.customizableViewControllers = []
-        //self.tabBarController?.tabBar.isHidden = true
-        
-        
-        
-        // Test
-        self.tabBarController?.tabBar.isHidden = true
-        
         
         // Background Index
         let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
@@ -983,4 +966,10 @@ extension MindBody: UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return DismissMenuAnimator()
     }
+}
+
+
+
+class MindBodyNavigation: UINavigationController {
+    
 }

@@ -23,13 +23,7 @@ class TrackingScreen: UIViewController {
 //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         
-        // Select Tab
-        //self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[tabBarIndex]
-        //
-        //self.tabBarController?.customizableViewControllers = []
-        //self.tabBarController?.tabBar.isHidden = true
     }
     
 //
@@ -98,4 +92,10 @@ extension TrackingScreen: UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return DismissMenuAnimator()
     }
+}
+
+
+
+class TrackingNavigation: UINavigationController {
+    
 }

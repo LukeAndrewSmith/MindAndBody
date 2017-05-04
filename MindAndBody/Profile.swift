@@ -120,14 +120,6 @@ class Profile: UITableViewController{
 // View will appear --------------------------------------------------------------------------------------------------------
 //
     override func viewWillAppear(_ animated: Bool) {
-     
-        // Select Tab
-        //self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers?[tabBarIndex]
-        //
-        //self.tabBarController?.customizableViewControllers = []
-        //self.tabBarController?.tabBar.isHidden = true
-        //
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         //
         tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
     }
@@ -148,6 +140,18 @@ class Profile: UITableViewController{
 //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        //
+        tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        
+        // Swipe
+        let rightSwipe = UISwipeGestureRecognizer()
+        rightSwipe.direction = .right
+        rightSwipe.addTarget(self, action: #selector(swipeGesture(sender:)))
+        tableView.addGestureRecognizer(rightSwipe)
+        
         
         
         // Walkthrough
@@ -1334,3 +1338,8 @@ extension Profile: UIViewControllerTransitioningDelegate {
     }
 }
 
+
+
+class ProfileNavigation: UINavigationController {
+    
+}
