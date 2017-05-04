@@ -98,7 +98,7 @@ class BackgroundImageCollection: UICollectionViewController {
         // Image View
         //
         // Image view size
-        let screenHeight = UIScreen.main.bounds.height - (navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height - (tabBarController?.tabBar.frame.size.height)!
+        let screenHeight = UIScreen.main.bounds.height - (navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height
         let screenWidth = UIScreen.main.bounds.width
         let ratio = screenHeight / screenWidth
         //
@@ -235,7 +235,7 @@ extension BackgroundImageCollection : UICollectionViewDelegateFlowLayout {
         //
         let width = collectionView.frame.size.width / 2
         //
-        let screenHeight = UIScreen.main.bounds.height - (navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height - (tabBarController?.tabBar.frame.size.height)!
+        let screenHeight = UIScreen.main.bounds.height - (navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height
         let screenWidth = UIScreen.main.bounds.width
         let ratio = screenHeight / screenWidth
         //

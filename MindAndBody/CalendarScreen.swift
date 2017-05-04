@@ -492,5 +492,4 @@ extension CalendarScreen: UIViewControllerTransitioningDelegate {
 
 //
 class CalendarNavigation: UINavigationController {
-    
 }

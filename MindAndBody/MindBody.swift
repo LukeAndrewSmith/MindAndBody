@@ -52,6 +52,7 @@ extension UIView {
 
 
 var tabBarIndex = 0
+var new = Bool()
 
 
 //
@@ -970,6 +971,8 @@ extension MindBody: UIViewControllerTransitioningDelegate {
 
 
 
+
+
+
 class MindBodyNavigation: UINavigationController {
-    
 }

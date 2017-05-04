@@ -1019,21 +1019,47 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         //
         if sessionScreenIndex == 0 {
             
-        } else if sessionScreenIndex == 1 {
+        } else {
+            
+        //
+        let snapshot1 = self.view.resizableSnapshotView(from: CGRect(x: 0, y: 89, width: view.frame.size.width, height: view.frame.size.height - 89), afterScreenUpdates: false, withCapInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        snapshot1?.frame = CGRect(x: 0, y: 89, width: view.frame.size.width, height: view.frame.size.height - 89)
+        //
+        backButton.tintColor = colour4
+        sessionProgress = sessionProgress - 1
+        sessionScreenIndex = sessionScreenIndex - 1
+        displayContent()
+        //
+        let snapshot2 = self.view.resizableSnapshotView(from: CGRect(x: 0, y: 89, width: view.frame.size.width, height: view.frame.size.height - 89), afterScreenUpdates: true, withCapInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        snapshot2?.frame = CGRect(x: 0, y: 89, width: view.frame.size.width, height: view.frame.size.height - 89)            //
+        snapshot2?.center.x -= UIScreen.main.bounds.width * 1
+        view.addSubview(snapshot1!)
+        view.bringSubview(toFront: snapshot1!)
+        view.addSubview(snapshot2!)
+        view.bringSubview(toFront: snapshot2!)
+        //
+        //
+        UIView.animate(withDuration: 0.4, animations: {
+            
+            //
+            snapshot1?.center.x += UIScreen.main.bounds.width * 1
+            snapshot2?.center.x = UIScreen.main.bounds.width * 0.5
+            
+        }, completion: { finished in
+            snapshot1?.removeFromSuperview()
+            snapshot2?.removeFromSuperview()
+        })
+
+        
+        if sessionScreenIndex == 1 {
             //
             backButton.tintColor = .clear
-            sessionScreenIndex = sessionScreenIndex - 1
-            sessionProgress = sessionProgress - 1
             //
             flashScreenRed()
-            displayContent()
         } else {
             //
-            sessionScreenIndex = sessionScreenIndex - 1
-            sessionProgress = sessionProgress - 1
-            //
             flashScreenRed()
-            displayContent()
+        }
         }
     }
     
