@@ -82,11 +82,10 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var collectionView: UICollectionView!
    
     //
-    @IBOutlet weak var One: UIButton!
-    @IBOutlet weak var Two: UIButton!
-    @IBOutlet weak var Three: UIButton!
+    @IBOutlet weak var leftButton: UIButton!
+    @IBOutlet weak var rightButton: UIButton!
     
-    @IBOutlet weak var stack: UIStackView!
+    @IBOutlet weak var scheduleLabel: UILabel!
     
     
     
@@ -122,12 +121,24 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         // View
         view.backgroundColor = UIColor(red:0.08, green:0.08, blue:0.08, alpha:1.0)
         
+        
+        
         //
-        One.backgroundColor = colour2
-        Two.backgroundColor = colour2
-        Three.backgroundColor = colour2
         //
-        stack.spacing = 0.25
+        leftButton.backgroundColor = colour2
+        leftButton.tintColor = colour1
+        leftButton.isEnabled = false
+        //
+        rightButton.backgroundColor = colour2
+        rightButton.tintColor = colour1
+        //
+        scheduleLabel.backgroundColor = colour2
+        scheduleLabel.tintColor = colour1
+        scheduleLabel.textColor = colour1
+        
+        
+        
+        
         
         // Collection View
         //

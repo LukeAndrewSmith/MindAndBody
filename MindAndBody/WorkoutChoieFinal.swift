@@ -2673,7 +2673,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         backgroundViewExpanded.frame = UIScreen.main.bounds
         // Animate table fade and size
         // Position
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.9, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.presetsTableView.alpha = 1
             self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + 44, width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88)
             self.presetsTableView.reloadData()

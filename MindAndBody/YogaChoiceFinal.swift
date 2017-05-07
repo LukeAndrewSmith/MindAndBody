@@ -363,26 +363,27 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             49: [#imageLiteral(resourceName: "Test 2")],
             50: [#imageLiteral(resourceName: "Test 2")],
             51: [#imageLiteral(resourceName: "vSideBend"), #imageLiteral(resourceName: "vSideBend1"), #imageLiteral(resourceName: "vSideBend2"), #imageLiteral(resourceName: "vSideBend3"), #imageLiteral(resourceName: "vSideBend4"), #imageLiteral(resourceName: "vSideBend5")],
-            52: [#imageLiteral(resourceName: "Test 2")],
-            53: [#imageLiteral(resourceName: "Test 2")],
-            54: [#imageLiteral(resourceName: "Test 2")],
-            55: [#imageLiteral(resourceName: "Test 2")],
+            52: [#imageLiteral(resourceName: "halfVForwardBend"), #imageLiteral(resourceName: "halfVForwardBend1"), #imageLiteral(resourceName: "halfVForwardBend2"), #imageLiteral(resourceName: "halfVForwardBend3"), #imageLiteral(resourceName: "halfVForwardBend4"), #imageLiteral(resourceName: "halfVForwardBend5"), #imageLiteral(resourceName: "halfVForwardBend6")],
+            53: [#imageLiteral(resourceName: "halfVSideBend"), #imageLiteral(resourceName: "halfVSideBend1"),
+                 #imageLiteral(resourceName: "halfVSideBend2"), #imageLiteral(resourceName: "halfVSideBend3"), #imageLiteral(resourceName: "halfVSideBend4"), #imageLiteral(resourceName: "halfVSideBend5")],
+            54: [#imageLiteral(resourceName: "marichi1"), #imageLiteral(resourceName: "marichi11"), #imageLiteral(resourceName: "marichi12"), #imageLiteral(resourceName: "marichi13"), #imageLiteral(resourceName: "marichi14"), #imageLiteral(resourceName: "marichi15"), #imageLiteral(resourceName: "marichi16"), #imageLiteral(resourceName: "marichi17")],
+            55: [#imageLiteral(resourceName: "marichi3"), #imageLiteral(resourceName: "marichi31"), #imageLiteral(resourceName: "marichi32"), #imageLiteral(resourceName: "marichi33"), #imageLiteral(resourceName: "marichi34"), #imageLiteral(resourceName: "marichi35"), #imageLiteral(resourceName: "marichi36"), #imageLiteral(resourceName: "marichi37")],
             56: [#imageLiteral(resourceName: "Test 2")],
             // Lying
             57: [#imageLiteral(resourceName: "Test 2")],
             58: [#imageLiteral(resourceName: "Test 2")],
-            59: [#imageLiteral(resourceName: "Test 2")],
+            59: [#imageLiteral(resourceName: "fish"), #imageLiteral(resourceName: "fish1"), #imageLiteral(resourceName: "fish2"), #imageLiteral(resourceName: "fish3"), #imageLiteral(resourceName: "fish4"), #imageLiteral(resourceName: "fish5")],
             60: [#imageLiteral(resourceName: "Test 2")],
-            61: [#imageLiteral(resourceName: "Test 2")],
+            61: [#imageLiteral(resourceName: "lyingButterfly"), #imageLiteral(resourceName: "lyingButterfly1"), #imageLiteral(resourceName: "lyingButterfly2"), #imageLiteral(resourceName: "lyingButterfly3"), #imageLiteral(resourceName: "lyingButterfly4")],
             62: [#imageLiteral(resourceName: "Test 2")],
-            63: [#imageLiteral(resourceName: "Test 2")],
+            63: [#imageLiteral(resourceName: "threadTheNeedle"), #imageLiteral(resourceName: "threadTheNeedle1"), #imageLiteral(resourceName: "threadTheNeedle2"), #imageLiteral(resourceName: "threadTheNeedle3"), #imageLiteral(resourceName: "threadTheNeedle4"), #imageLiteral(resourceName: "threadTheNeedle5")],
             64: [#imageLiteral(resourceName: "Test 2")],
-            65: [#imageLiteral(resourceName: "Test 2")],
+            65: [#imageLiteral(resourceName: "plow"), #imageLiteral(resourceName: "plow1"), #imageLiteral(resourceName: "plow2"), #imageLiteral(resourceName: "plow3"), #imageLiteral(resourceName: "plow4")],
             66: [#imageLiteral(resourceName: "Test 2")],
             67: [#imageLiteral(resourceName: "Test 2")],
             68: [#imageLiteral(resourceName: "Test 2")],
+            69: [#imageLiteral(resourceName: "spineRolling"), #imageLiteral(resourceName: "spineRolling1"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling3"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling4"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling3"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling4")],
             // Hand Stands
-            69: [#imageLiteral(resourceName: "Test 2")],
             70: [#imageLiteral(resourceName: "Test 2")],
             71: [#imageLiteral(resourceName: "Test 2")],
             72: [#imageLiteral(resourceName: "Test 2")]
@@ -446,26 +447,26 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             49: 0,
             50: 0,
             51: 3.0,
-            52: 0,
-            53: 0,
-            54: 0,
-            55: 0,
+            52: 3.5,
+            53: 3.0,
+            54: 4.0,
+            55: 4.0,
             56: 0,
             // Lying
             57: 0,
             58: 0,
-            59: 0,
+            59: 3.0,
             60: 0,
-            61: 0,
+            61: 2.5,
             62: 0,
-            63: 0,
+            63: 3.0,
             64: 0,
-            65: 0,
+            65: 2.5,
             66: 0,
             67: 0,
             68: 0,
+            69: 5.0,
             // Hand Stands
-            69: 0,
             70: 0,
             71: 0,
             72: 0
@@ -926,7 +927,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         backgroundViewExpanded.frame = UIScreen.main.bounds
         // Animate table fade and size
         // Position
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.9, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.presetsTableView.alpha = 1
             self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + 44, width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88)
             self.presetsTableView.reloadData()

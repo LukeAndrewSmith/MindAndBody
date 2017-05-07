@@ -115,8 +115,6 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     @IBOutlet weak var roundView: UIView!
     //
     @IBOutlet weak var roundNumber: UILabel!
-    // Round stack
-    @IBOutlet weak var roundStack: UIStackView!
     // Round Progress
     @IBOutlet weak var roundProgress: UIProgressView!
     
@@ -153,34 +151,6 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     // Round view heght
     @IBOutlet weak var roundViewHeight: NSLayoutConstraint!
     
-    
-    //
-    // View will appear
-    //
-    // Show round view function
-    func showRoundView() {
-        //
-        self.roundStack.alpha = 1
-        self.roundViewHeight.constant = 152
-        self.navigationTop.constant = 132
-        //
-        UIView.animate(withDuration: 0.7) {
-            self.view.layoutIfNeeded()
-        }
-        //
-        let delayInSeconds = 2.3
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            //
-            self.roundStack.alpha = 0
-            self.roundViewHeight.constant = 40
-            self.navigationTop.constant = 20
-            //
-            UIView.animate(withDuration: 0.7) {
-                self.view.layoutIfNeeded()
-            }
-        }
-    }
-    
     //
     // View did load ---------------------------------------------------------------------------------------------------------------------
     //
@@ -213,9 +183,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             //
             let delayInSeconds = 0.7
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                alert.dismiss(animated: true, completion: {
-                    self.showRoundView()
-                })
+                alert.dismiss(animated: true, completion: nil)
             }
         })
         
@@ -383,45 +351,6 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     // Generate Image Views --------------------------------------------------------------------------------------------------------------------
     //
     //
-    func createStack(movementNumber: Int) -> UIStackView {
-        let movementStack = UIStackView()
-        movementStack.axis = .vertical
-        movementStack.distribution = .fillEqually
-        //
-        let movementImage = UIImageView()
-        movementImage.image = demonstrationArray[movementNumber]
-        movementImage.contentMode = .scaleAspectFit
-        movementStack.addArrangedSubview(movementImage)
-        //
-        let movementLabel = UILabel()
-        movementLabel.text = NSLocalizedString(sessionArray[movementNumber], comment: "")
-        movementLabel.numberOfLines = 0
-        movementLabel.adjustsFontSizeToFitWidth = true
-        movementLabel.font = UIFont(name: "SFUIDisplay-thin", size: 17)
-        movementLabel.textAlignment = .center
-        movementLabel.textColor = colour1
-        //
-        if movementNumber == sessionScreenIndex {
-            movementLabel.layer.borderWidth = 1
-            movementLabel.layer.borderColor = colour3.cgColor
-        }
-        movementStack.addArrangedSubview(movementLabel)
-        //
-        
-        return movementStack
-    }
-    
-    //
-    func fillRoundStack() {
-        //
-        roundStack.subviews.forEach({$0.removeFromSuperview()})
-        //
-        for i in 0...(sessionArray.count - 1) {
-            roundStack.addArrangedSubview(createStack(movementNumber: i))
-        }
-    }
-    
-    //
     func setProgress() {
         // Session Progress
         let sessionFractionN = Float(sessionProgress)
@@ -488,9 +417,6 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         //
         setProgress()
         
-        //
-        fillRoundStack()
-                
         // Timer to Back
         self.view.bringSubview(toFront: timerButton)
         cancelTimer(Any.self)
@@ -554,9 +480,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
                 //
                 let delayInSeconds = 0.7
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                    alert.dismiss(animated: true, completion: {
-                        self.showRoundView()
-                    })
+                    alert.dismiss(animated: true, completion: nil)
                 }
             })
             
@@ -588,11 +512,6 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             flash.removeFromSuperview()
         })
         
-        //
-        //
-        self.roundStack.alpha = 1
-        self.roundViewHeight.constant = 152
-        self.navigationTop.constant = 132
         //
         UIView.animate(withDuration: 0.7) {
             self.view.layoutIfNeeded()
@@ -646,9 +565,7 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
                 //
                 let delayInSeconds = 0.7
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                    alert.dismiss(animated: true, completion: {
-                        self.showRoundView()
-                    })
+                    alert.dismiss(animated: true, completion: nil)
                 }
             })
         }
@@ -986,18 +903,45 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
     @IBAction func nextButton(_ sender: Any) {
         // Incriment movements and rounds
         if sessionScreenIndex < (sessionArray.count - 1) {
+            //
+            let snapshot1 = self.view.resizableSnapshotView(from: CGRect(x: 0, y: 89, width: view.frame.size.width, height: view.frame.size.height - 89), afterScreenUpdates: false, withCapInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+            snapshot1?.frame = CGRect(x: 0, y: 89, width: view.frame.size.width, height: view.frame.size.height - 89)
+            //
             backButton.tintColor = colour4
-            // Next movement
             sessionScreenIndex = sessionScreenIndex + 1
-            showRoundView()
+            sessionProgress = sessionProgress + 1
+            displayContent()
+            //
+            let snapshot2 = self.view.resizableSnapshotView(from: CGRect(x: 0, y: 89, width: view.frame.size.width, height: view.frame.size.height - 89), afterScreenUpdates: true, withCapInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+            snapshot2?.frame = CGRect(x: 0, y: 89, width: view.frame.size.width, height: view.frame.size.height - 89)            //
+            snapshot2?.center.x += UIScreen.main.bounds.width * 1
+            view.addSubview(snapshot1!)
+            view.bringSubview(toFront: snapshot1!)
+            view.addSubview(snapshot2!)
+            view.bringSubview(toFront: snapshot2!)
+            //
+            //
+            UIView.animate(withDuration: 0.4, animations: {
+                
+                //
+                snapshot1?.center.x -= UIScreen.main.bounds.width * 1
+                snapshot2?.center.x = UIScreen.main.bounds.width * 0.5
+                
+            }, completion: { finished in
+                snapshot1?.removeFromSuperview()
+                snapshot2?.removeFromSuperview()
+            })
+            // Next movement
             flashScreen()
         // Final screen. Dismiss
         } else if sessionScreenIndex == (sessionArray.count - 1) && (sessionScreenRoundIndex == numberOfRounds - 1) {
             //
             sessionScreenIndex = 0
             sessionScreenRoundIndex = 0
+            sessionProgress = sessionProgress + 1
             self.dismiss(animated: true)
             flashScreenGreen()
+            displayContent()
         // Next round
         } else if sessionScreenIndex == (sessionArray.count - 1) {
             backButton.tintColor = .clear
@@ -1005,13 +949,12 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
             sessionScreenIndex = 0
             //
             sessionScreenRoundIndex = sessionScreenRoundIndex + 1
-            //        
+            sessionProgress = sessionProgress + 1
+            //
             flashScreenGreen()
-
+            displayContent()
         }
-        sessionProgress = sessionProgress + 1
         //
-        displayContent()
     }
     
     // Back Navigation Button

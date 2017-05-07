@@ -52,9 +52,11 @@ class CalendarScreenDetail: UITableViewController {
 // View will appear --------------------------------------------------------------------------------------------------------
 //
     override func viewWillAppear(_ animated: Bool) {
-        let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
-        backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        self.tableView.backgroundView = backView
+        //let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        //backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        //self.tableView.backgroundView = backView
+        
+        
     }
     
 //
@@ -62,7 +64,9 @@ class CalendarScreenDetail: UITableViewController {
 //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.backgroundColor = colour2
+        view.backgroundColor = colour2
+        tableView.tableFooterView = UIView()
         // Walkthrough
         if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughC") == false {
             let delayInSeconds = 0.5
