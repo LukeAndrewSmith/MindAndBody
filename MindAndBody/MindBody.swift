@@ -99,55 +99,19 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var Yoga: UIButton!
     // Mindfullness
     @IBOutlet weak var Meditation: UIButton!
-    
-    // Stack Views
-    //
-    @IBOutlet weak var stackView1: UIStackView!
-    //
-    @IBOutlet weak var stackView2: UIStackView!
-    //
-    @IBOutlet weak var stackView3: UIStackView!
-    
+   
     // Constraints
     //
-    // StackView 1 bottom Constraint
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    // Mind Body Constraints
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var positionConstraint: NSLayoutConstraint!
-    // Body Constraints
-    @IBOutlet weak var bodyTop: NSLayoutConstraint!
-    @IBOutlet weak var bodyBottom: NSLayoutConstraint!
-    // Mind Constraints
-    @IBOutlet weak var mindTop: NSLayoutConstraint!
-    @IBOutlet weak var mindBottom: NSLayoutConstraint!
-    // Bottom StackView 3 Bottom Constraint
-    @IBOutlet weak var stack3Bottom: NSLayoutConstraint!
     
     // Background Image
     @IBOutlet weak var backgroundImage: UIImageView!
-    
-    // Mind Connection Label
-    @IBOutlet weak var connectionLabel: UILabel!
     
     // Mind & Body section titles
     // Mind
     @IBOutlet weak var body: UILabel!
     // Body
     @IBOutlet weak var mind: UILabel!
-    
-    // Blurs
-    //let blur = UIVisualEffectView()
-    let blur0 = UIVisualEffectView()
-    let blur1 = UIVisualEffectView()
-    let blur2 = UIVisualEffectView()
-    let blur3 = UIVisualEffectView()
-    let blur4 = UIVisualEffectView()
-    let blur5 = UIVisualEffectView()
-    let blur6 = UIVisualEffectView()
-    let blur7 = UIVisualEffectView()
-    
-    
+  
     
     //
     // View Will Appear ---------------------------------------------------------------------------------------------------------------------
@@ -402,88 +366,21 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         Meditation.titleLabel?.textAlignment = .center
         Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
         
-        // Blur and Vibrancy for Buttons
-        let blurE0 = UIBlurEffect(style: .dark)
-        blur0.effect = blurE0
-        let vibrancyE0 = UIVibrancyEffect(blurEffect: blurE0)
-        blur0.effect = vibrancyE0
-        blur0.isUserInteractionEnabled = false
-        //
-        let blurE1 = UIBlurEffect(style: .dark)
-        blur1.effect = blurE1
-        let vibrancyE1 = UIVibrancyEffect(blurEffect: blurE1)
-        blur1.effect = vibrancyE1
-        blur1.isUserInteractionEnabled = false
-        //
-        let blurE2 = UIBlurEffect(style: .dark)
-        blur2.effect = blurE2
-        let vibrancyE2 = UIVibrancyEffect(blurEffect: blurE2)
-        blur2.effect = vibrancyE2
-        blur2.isUserInteractionEnabled = false
-        //
-        let blurE3 = UIBlurEffect(style: .dark)
-        blur3.effect = blurE3
-        let vibrancyE3 = UIVibrancyEffect(blurEffect: blurE3)
-        blur3.effect = vibrancyE3
-        blur3.isUserInteractionEnabled = false
-        //
-        let blurE4 = UIBlurEffect(style: .dark)
-        blur4.effect = blurE4
-        let vibrancyE4 = UIVibrancyEffect(blurEffect: blurE4)
-        blur4.effect = vibrancyE4
-        blur4.isUserInteractionEnabled = false
-        //
-        let blurE5 = UIBlurEffect(style: .dark)
-        blur5.effect = blurE5
-        let vibrancyE5 = UIVibrancyEffect(blurEffect: blurE5)
-        blur5.effect = vibrancyE5
-        blur5.isUserInteractionEnabled = false
-        
-        
-        // Mind & Body section titles
-        // body
-        body.layer.cornerRadius = body.frame.size.height / 2
-        body.layer.masksToBounds = true
-        let blurE6 = UIBlurEffect(style: .dark)
-        blur6.effect = blurE6
-        let vibrancyE6 = UIVibrancyEffect(blurEffect: blurE6)
-        blur6.effect = vibrancyE6
-        blur6.center = blur6.center
-        blur6.isUserInteractionEnabled = false
-        blur6.layer.cornerRadius = blur6.frame.size.height / 2
-        blur6.layer.masksToBounds = true
-        view.insertSubview(blur6, belowSubview: body)
-        // mind
-        mind.layer.cornerRadius = mind.frame.size.height / 2
-        mind.layer.masksToBounds = true
-        let blurE7 = UIBlurEffect(style: .dark)
-        blur7.effect = blurE7
-        let vibrancyE7 = UIVibrancyEffect(blurEffect: blurE7)
-        blur7.effect = vibrancyE7
-        blur7.center = mind.center
-        blur7.isUserInteractionEnabled = false
-        blur7.layer.cornerRadius = mind.frame.size.height / 2
-        blur7.layer.masksToBounds = true
-        view.insertSubview(blur7, belowSubview: mind)
-        
-        
-        
-        
         // Iphone 5/SE layout
         if UIScreen.main.nativeBounds.height < 1334 {
             //
-            bottomConstraint.constant = 15
-            stackView3.spacing = 15
-            //
-            heightConstraint.constant = 15
-            positionConstraint.constant = -15
-            //
-            bodyTop.constant = 5
-            bodyBottom.constant = 2
-            mindTop.constant = 5
-            mindBottom.constant = 3
-            //
-            stack3Bottom.constant = 15
+//            bottomConstraint.constant = 15
+//            stackView3.spacing = 15
+//            //
+//            heightConstraint.constant = 15
+//            positionConstraint.constant = -15
+//            //
+//            bodyTop.constant = 5
+//            bodyBottom.constant = 2
+//            mindTop.constant = 5
+//            mindBottom.constant = 3
+//            //
+//            stack3Bottom.constant = 15
         }
         
         view.sendSubview(toBack: backgroundImage)
@@ -496,180 +393,134 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        stackView1.layoutSubviews()
-        stackView2.layoutSubviews()
-        stackView3.layoutSubviews()
-        
-        
         // Button Rounded Edges
         //
-        Warmup.layer.cornerRadius = stackView1.frame.size.height / 2
+        Warmup.layer.cornerRadius = Warmup.frame.size.height / 2
         Warmup.clipsToBounds = true
         //
-        Workout.layer.cornerRadius = stackView1.frame.size.height / 2
+        Workout.layer.cornerRadius = Workout.frame.size.height / 2
         Workout.clipsToBounds = true
         //
-        Stretching.layer.cornerRadius = stackView2.frame.size.height / 2
+        Stretching.layer.cornerRadius = Stretching.frame.size.height / 2
         Stretching.clipsToBounds = true
         //
-        Cardio.layer.cornerRadius = stackView2.frame.size.height / 2
+        Cardio.layer.cornerRadius = Cardio.frame.size.height / 2
         Cardio.clipsToBounds = true
         //
-        Yoga.layer.cornerRadius = (stackView3.frame.size.height - 20) / 4
+        Yoga.layer.cornerRadius = Yoga.frame.size.height / 2
         Yoga.clipsToBounds = true
         //
-        Meditation.layer.cornerRadius = (stackView3.frame.size.height - 20) / 4
+        Meditation.layer.cornerRadius = Meditation.frame.size.height / 2
         Meditation.clipsToBounds = true
+        
+        
+        // Blurs
+        let blur0 = UIVisualEffectView()
+        let blur1 = UIVisualEffectView()
+        let blur2 = UIVisualEffectView()
+        let blur3 = UIVisualEffectView()
+        let blur4 = UIVisualEffectView()
+        let blur5 = UIVisualEffectView()
+        let blur6 = UIVisualEffectView()
+        let blur7 = UIVisualEffectView()
+        //
+        let blur = UIBlurEffect(style: .dark)
+        let vibrancy = UIVibrancyEffect(blurEffect: blur)
+        //
+        blur0.effect = blur
+        blur0.effect = vibrancy
+        //
+        blur1.effect = blur
+        blur1.effect = vibrancy
+        
+        //
+        blur2.effect = blur
+        blur2.effect = vibrancy
+        //
+        blur3.effect = blur
+        blur3.effect = vibrancy
+        
+        //
+        blur4.effect = blur
+        blur4.effect = vibrancy
+        //
+        blur5.effect = blur
+        blur5.effect = vibrancy
+        
+        //
+        blur6.effect = blur
+        blur6.effect = vibrancy
+        //
+        blur7.effect = blur
+        blur7.effect = vibrancy
+        
         
         // Blur Positioning and frame
         blur0.bounds = Warmup.bounds
         blur0.layer.cornerRadius = Warmup.frame.size.height / 2
-        blur0.layer.masksToBounds = true
+        blur0.clipsToBounds = true
         blur0.center = Warmup.center
-        stackView1.insertSubview(blur0, belowSubview: Warmup)
         //
         blur1.bounds = Workout.bounds
         blur1.layer.cornerRadius = Workout.frame.size.height / 2
-        blur1.layer.masksToBounds = true
+        blur1.clipsToBounds = true
         blur1.center = Workout.center
-        stackView1.insertSubview(blur1, belowSubview: Workout)
 
         //
         blur2.bounds = Cardio.bounds
         blur2.layer.cornerRadius = Cardio.frame.size.height / 2
-        blur2.layer.masksToBounds = true
+        blur2.clipsToBounds = true
         blur2.center = Cardio.center
-        stackView2.insertSubview(blur2, belowSubview: Cardio)
         //
         blur3.bounds = Stretching.bounds
         blur3.layer.cornerRadius = Stretching.frame.size.height / 2
-        blur3.layer.masksToBounds = true
+        blur3.clipsToBounds = true
         blur3.center = Stretching.center
-        stackView2.insertSubview(blur3, belowSubview: Stretching)
         
         //
-        blur4.center = Yoga.center
         blur4.bounds = Yoga.bounds
         blur4.layer.cornerRadius = Yoga.frame.size.height / 2
-        blur4.layer.masksToBounds = true
-        stackView3.insertSubview(blur4, belowSubview: Yoga)
+        blur4.clipsToBounds = true
+        blur4.center = Yoga.center
         //
-        blur5.center = Meditation.center
         blur5.bounds = Meditation.bounds
-        blur5.layer.cornerRadius = Meditation.frame.size.height / 2
-        blur5.layer.masksToBounds = true
-        stackView3.insertSubview(blur5, belowSubview: Meditation)
-
+        blur5.layer.cornerRadius = Yoga.frame.size.height / 2
+            //Meditation.frame.size.height / 2
+        blur5.clipsToBounds = true
+        blur5.center = Meditation.center
         
         //
-        blur6.layer.cornerRadius = body.frame.size.height / 2
-        blur6.layer.masksToBounds = true
+        body.layer.cornerRadius = body.frame.size.height / 2
         blur6.frame = body.bounds
         blur6.center = body.center
+        blur6.layer.cornerRadius = blur6.frame.size.height / 2
+        blur6.clipsToBounds = true
         //
-        blur7.layer.cornerRadius = mind.frame.size.height / 2
-        blur7.layer.masksToBounds = true
+        mind.layer.cornerRadius = mind.frame.size.height / 2
         blur7.frame = mind.bounds
         blur7.center = mind.center
+        blur7.layer.cornerRadius = mind.frame.size.height / 2
+        blur7.clipsToBounds = true
         
         
-        view.insertSubview(blur6, belowSubview: body)
-        view.insertSubview(blur7, belowSubview: mind)
+       
         
         let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
-        //
         if backgroundIndex == backgroundImageArray.count {
-            //blur.removeFromSuperview()
-            blur0.removeFromSuperview()
-            blur1.removeFromSuperview()
-            blur2.removeFromSuperview()
-            blur3.removeFromSuperview()
-            blur4.removeFromSuperview()
-            blur5.removeFromSuperview()
-            blur6.removeFromSuperview()
-            blur7.removeFromSuperview()
+        } else {
+            //
+            view.insertSubview(blur0, belowSubview: Warmup)
+            view.insertSubview(blur1, belowSubview: Workout)
+            view.insertSubview(blur2, belowSubview: Cardio)
+            view.insertSubview(blur3, belowSubview: Stretching)
+            view.insertSubview(blur4, belowSubview: Yoga)
+            view.insertSubview(blur5, belowSubview: Meditation)
+            //
+            view.insertSubview(blur6, belowSubview: body)
+            view.insertSubview(blur7, belowSubview: mind)
         }
     }
     
-    
-    
-    
-//    
-//    //        Warmup.layoutIfNeeded()
-//    //        Workout.layoutIfNeeded()
-//    //        Cardio.layoutIfNeeded()
-//    //        Stretching.layoutIfNeeded()
-//    //        Yoga.layoutIfNeeded()
-//    //        Meditation.layoutIfNeeded()
-//    //
-//    //
-//    //
-//    // Button Rounded Edges
-//    //
-//    Warmup.layer.cornerRadius = stackView1.frame.size.height / 2
-//    Warmup.layer.masksToBounds = true
-//    //
-//    Workout.layer.cornerRadius = stackView1.frame.size.height / 2
-//    Workout.layer.masksToBounds = true
-//    //
-//    Stretching.layer.cornerRadius = stackView2.frame.size.height / 2
-//    Stretching.layer.masksToBounds = true
-//    //
-//    Cardio.layer.cornerRadius = stackView2.frame.size.height / 2
-//    Cardio.layer.masksToBounds = true
-//    //
-//    Yoga.layer.cornerRadius = (stackView3.frame.size.height - 20) / 4
-//    Yoga.layer.masksToBounds = true
-//    //
-//    Meditation.layer.cornerRadius = (stackView3.frame.size.height - 20) / 4
-//    Meditation.layer.masksToBounds = true
-//    
-//    // Blur Positioning and frame
-//    //blur0.center = Warmup.center
-//    blur0.frame = Warmup.bounds
-//    blur0.layer.cornerRadius = Warmup.frame.size.height / 2
-//    blur0.clipsToBounds = true
-//    //
-//    //blur1.center = Workout.center
-//    blur1.frame = Workout.bounds
-//    blur1.layer.cornerRadius = Workout.frame.size.height / 2
-//    blur1.clipsToBounds = true
-//    
-//    //
-//    //blur2.center = Cardio.center
-//    blur2.frame = Cardio.bounds
-//    blur2.layer.cornerRadius = Cardio.frame.size.height / 2
-//    blur2.clipsToBounds = true
-//    //
-//    //blur3.center = Stretching.center
-//    blur3.frame = Stretching.bounds
-//    blur3.layer.cornerRadius = Stretching.frame.size.height / 2
-//    blur3.clipsToBounds = true
-//    
-//    //
-//    //blur4.center = Yoga.center
-//    blur4.frame = Yoga.bounds
-//    blur4.layer.cornerRadius = Yoga.frame.size.height / 2
-//    blur4.clipsToBounds = true
-//    //
-//    //blur5.center = Meditation.center
-//    blur5.frame = Meditation.bounds
-//    blur5.layer.cornerRadius = Meditation.frame.size.height / 2
-//    blur5.clipsToBounds = true
-//    
-//    //
-//    blur6.layer.cornerRadius = body.frame.size.height / 2
-//    blur6.clipsToBounds = true
-//    blur6.frame = body.bounds
-//    blur6.center = body.center
-//    //
-//    blur7.layer.cornerRadius = mind.frame.size.height / 2
-//    blur7.clipsToBounds = true
-//    blur7.frame = mind.bounds
-//    blur7.center = mind.center
-//    
-//    
-//    
     
     //
     // Slide Menu ---------------------------------------------------------------------------------------------------------------------
@@ -681,6 +532,8 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         self.performSegue(withIdentifier: "openMenu", sender: nil)
     }
     
+    let transitionManager = TransitionManager()
+
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
@@ -688,12 +541,13 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             //
             UIApplication.shared.statusBarStyle = .default
 //            //
-//            let toViewController = segue.destination as UIViewController
-//            //
-//            toViewController.transitioningDelegate = self.transitionManager
-            if let destinationViewController = segue.destination as? SlideMenuView {
-                destinationViewController.transitioningDelegate = self
-            }
+            //
+            let toViewController = segue.destination as UIViewController
+            //
+            toViewController.transitioningDelegate = transitionManager
+//            if let destinationViewController = segue.destination as? SlideMenuView {
+//                destinationViewController.transitioningDelegate = self
+//            }
         } else {
             // Remove back button text
             let backItem = UIBarButtonItem()
@@ -1104,21 +958,21 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
 
 
 
-
-
 //
-// Slide Menu Extension
-extension MindBody: UIViewControllerTransitioningDelegate {
-    // Present
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PresentMenuAnimator()
-    }
-    
-    // Dismiss
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return DismissMenuAnimator()
-    }
-}
+//
+////
+//// Slide Menu Extension
+//extension MindBody: UIViewControllerTransitioningDelegate {
+//    // Present
+//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        return PresentMenuAnimator()
+//    }
+//    
+//    // Dismiss
+//    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        return DismissMenuAnimator()
+//    }
+//}
 
 
 
