@@ -112,8 +112,6 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
         
         //
-        let parent = presentingViewController
-        //
         self.dismiss(animated: true, completion: nil)
 
         //

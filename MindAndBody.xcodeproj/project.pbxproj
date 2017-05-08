@@ -69,6 +69,7 @@
 		07BE8C091E8BDF9500A851EF /* YogaScreenOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C081E8BDF9500A851EF /* YogaScreenOverview.swift */; };
 		07BE8C0B1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C0A1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift */; };
 		07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2D3BB1EBA88CF000770DE /* MindBody.swift */; };
+		07C2D3BE1EC068A8000770DE /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2D3BD1EC068A8000770DE /* TransitionManager.swift */; };
 		07CB04371E604653002066CD /* MeditationChoiceGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CB04361E604653002066CD /* MeditationChoiceGuided.swift */; };
 		07CB04391E6049DF002066CD /* MeditationGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CB04381E6049DF002066CD /* MeditationGuided.swift */; };
 		07DEE6F11E0AAD2E003B89AB /* ClassicChoiceG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F01E0AAD2E003B89AB /* ClassicChoiceG.swift */; };
@@ -161,6 +162,7 @@
 		07BE8C081E8BDF9500A851EF /* YogaScreenOverview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreenOverview.swift; sourceTree = "<group>"; };
 		07BE8C0A1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreenOverviewDetail.swift; sourceTree = "<group>"; };
 		07C2D3BB1EBA88CF000770DE /* MindBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindBody.swift; sourceTree = "<group>"; };
+		07C2D3BD1EC068A8000770DE /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		07CB04361E604653002066CD /* MeditationChoiceGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationChoiceGuided.swift; sourceTree = "<group>"; };
 		07CB04381E6049DF002066CD /* MeditationGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationGuided.swift; sourceTree = "<group>"; };
 		07DEE6F01E0AAD2E003B89AB /* ClassicChoiceG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassicChoiceG.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			children = (
 				077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */,
 				077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */,
+				07C2D3BD1EC068A8000770DE /* TransitionManager.swift */,
 			);
 			name = Functions;
 			sourceTree = "<group>";
@@ -746,6 +749,7 @@
 				07DEE6F11E0AAD2E003B89AB /* ClassicChoiceG.swift in Sources */,
 				072829ED1EA8A2810090164A /* WorkoutSessionScreenOverviewDetail.swift in Sources */,
 				0757326B1E64D8A3003DA77E /* InformationScreen1.swift in Sources */,
+				07C2D3BE1EC068A8000770DE /* TransitionManager.swift in Sources */,
 				07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */,
 				075A0DB81E8C55680008E014 /* WarmupChoiceCustom.swift in Sources */,
 				072829E51EA7D40C0090164A /* WorkoutChoiceCustom.swift in Sources */,
