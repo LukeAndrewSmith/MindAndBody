@@ -359,9 +359,13 @@ class WorkoutSessionScreenOverview: UITableViewController {
             
             // Image
             //
-            cell.demonstrationImageView.image = demonstrationArray[indexPath.row]
+            if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+                cell.demonstrationImageView.image = demonstrationArray[indexPath.row]
+            } else {
+                cell.demonstrationImageView.image = targetAreaArray[indexPath.row]
+            }
             
-            
+
             //
             // Button Stuff
             //

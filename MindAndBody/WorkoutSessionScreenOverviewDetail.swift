@@ -275,9 +275,13 @@ class WorkoutSessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate
         
         // Images
         //
-        demonstrationImage.image = demonstrationArray[selectedMovement]
-        //
-        bodyImage.image = targetAreaArray[selectedMovement]
+        if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+            demonstrationImage.image = demonstrationArray[selectedMovement]
+            bodyImage.image = targetAreaArray[selectedMovement]
+        } else {
+            bodyImage.image = demonstrationArray[selectedMovement]
+            demonstrationImage.image = targetAreaArray[selectedMovement]
+        }
         // Scroll
         imageScroll.contentOffset.x = 0
         //

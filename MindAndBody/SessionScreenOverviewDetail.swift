@@ -295,9 +295,13 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         
         // Images
         //
-        demonstrationImage.image = demonstrationArray[selectedMovement]
-        //
-        bodyImage.image = targetAreaArray[selectedMovement]
+        if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+            demonstrationImage.image = demonstrationArray[selectedMovement]
+            bodyImage.image = targetAreaArray[selectedMovement]
+        } else {
+            bodyImage.image = demonstrationArray[selectedMovement]
+            demonstrationImage.image = targetAreaArray[selectedMovement]
+        }
         // Scroll
         imageScroll.contentOffset.x = 0
         //
@@ -362,6 +366,7 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         imageScroll.contentSize = CGSize(width: imageScroll.frame.size.width * 2, height: imageScroll.frame.size.height)
         imageScroll.isScrollEnabled = false
         
+        
         // Demonstration Image
         demonstrationImage.frame = imageScroll.bounds
         demonstrationImage.contentMode = .scaleAspectFit
@@ -372,13 +377,13 @@ class SessionScreenOverviewDetail: UIViewController, UIScrollViewDelegate, UIPic
         
         // Image Scroll Position on Target Area
         //
-        imageScroll.contentOffset.x = imageScroll.frame.size.width
+        imageScroll.contentOffset.x = 0
         //
-        targetAreaButton.isEnabled = false
-        targetAreaButton.alpha = 0
+        targetAreaButton.isEnabled = true
+        targetAreaButton.alpha = 1
         //
-        demonstrationImageButton.isEnabled = true
-        demonstrationImageButton.alpha = 1
+        demonstrationImageButton.isEnabled = false
+        demonstrationImageButton.alpha = 0
     }
     
     

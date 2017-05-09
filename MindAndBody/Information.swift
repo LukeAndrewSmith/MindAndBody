@@ -102,12 +102,30 @@ class Information: UITableViewController{
 //
 // View did load ------------------------------------------------------------------------------------
 //
+    //
+    let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+    let backgroundImageView = UIImageView()
+
+   //
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        // Background Image
+        backgroundImageView.frame = UIScreen.main.bounds
+        backgroundImageView.contentMode = .scaleAspectFill
         //
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        if backgroundIndex < backgroundImageArray.count {
+            backgroundImageView.image = backgroundImageArray[backgroundIndex]
+        } else if backgroundIndex == backgroundImageArray.count {
+            //
+            backgroundImageView.image = nil
+            backgroundImageView.backgroundColor = colour1
+        }
         //
+        self.tableView.backgroundView = backgroundImageView
+        
+        // Initial TableView Position
         tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         
         // Swipe
@@ -123,11 +141,8 @@ class Information: UITableViewController{
             UserDefaults.standard.set(true, forKey: "informationWalkthrough")
         }
 
-        // Background Coolour
-        backView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        //
-        self.tableView.backgroundView = backView
-        self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        //  Navigation Bar
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         //
         self.navigationController?.navigationBar.barTintColor = colour2
         self.navigationController?.navigationBar.tintColor = colour1
@@ -155,7 +170,9 @@ class Information: UITableViewController{
         if scrollView == tableView {
             if tableView.contentOffset.y > 186 {
                 //
-                backView.backgroundColor = colour1
+                backgroundImageView.image = nil
+                backgroundImageView.backgroundColor = colour1
+                //
                 UIApplication.shared.statusBarStyle = .default
                 //
                 UIApplication.shared.keyWindow?.insertSubview(scrollUpButton, aboveSubview: self.tableView)
@@ -163,7 +180,15 @@ class Information: UITableViewController{
             } else {
                 self.scrollUpButton.removeFromSuperview()
                 //
-                backView.backgroundColor = colour2
+                //
+                if backgroundIndex < backgroundImageArray.count {
+                    backgroundImageView.image = backgroundImageArray[backgroundIndex]
+                } else if backgroundIndex == backgroundImageArray.count {
+                    //
+                    backgroundImageView.image = nil
+                    backgroundImageView.backgroundColor = colour1
+                }
+                //
                 UIApplication.shared.statusBarStyle = .lightContent
             }
         }
@@ -206,12 +231,10 @@ class Information: UITableViewController{
         case 0:
         let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! headerCell
             //
-            cell.gradientView.frame = cell.bounds
-            //
             cell.titleLabel.text = NSLocalizedString("information", comment: "")
             cell.titleLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             //
-            cell.gradientView.applyGradient(colours: [UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)])
+            cell.contentView.backgroundColor = .clear
             //
             cell.logoView.tintColor = colour1
             //

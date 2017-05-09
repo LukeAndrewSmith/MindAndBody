@@ -159,18 +159,19 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
 // Sections
     // Number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 6
     }
     
     // Section Titles
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return (NSLocalizedString("homeScreenImage", comment: ""))
-        case 1: return (NSLocalizedString("units", comment: ""))
-        case 2: return (NSLocalizedString("presentationStyle", comment: ""))
-        case 3: return (NSLocalizedString("restTime", comment: ""))
-        case 4: return (NSLocalizedString("reset", comment: ""))
-        default: return (NSLocalizedString("default", comment: ""))
+        case 0: return NSLocalizedString("homeScreenImage", comment: "")
+        case 1: return NSLocalizedString("units", comment: "")
+        case 2: return NSLocalizedString("presentationStyle", comment: "")
+        case 3: return NSLocalizedString("defaultImage", comment: "")
+        case 4: return NSLocalizedString("restTime", comment: "")
+        case 5: return NSLocalizedString("reset", comment: "")
+        default: return ""
         }
     }
     
@@ -208,9 +209,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         switch section {
-        case 0,1,2: return 1
-        case 3: return 3
-        case 4: return 2
+        case 0,1,2,3: return 1
+        case 4: return 3
+        case 5: return 2
         default: break
         }
         return 0
@@ -287,8 +288,20 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             return cell
             
-        // Rest Time
+        // Default Image
         case 3:
+            //
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            // Retreive Presentation Style
+            cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "defaultImage")!, comment: "")
+            cell.textLabel?.textAlignment = NSTextAlignment.left
+            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            return cell
+            
+            
+        // Rest Time
+        case 4:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             let row = indexPath.row
@@ -311,7 +324,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             return cell
             
         // Reset
-        case 4:
+        case 5:
         //
             // Reset Walkthrough
             if indexPath.row == 0 {
@@ -377,9 +390,22 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 UserDefaults.standard.set("detailed", forKey: "presentationStyle")
             }
             tableView.deselectRow(at: indexPath, animated: true)
-            
-        // Rest Time
+        
+        // Default Image
         case 3:
+            // demonstration --> targetArea
+            if cell?.textLabel?.text == NSLocalizedString("demonstration", comment: "") {
+                cell?.textLabel?.text = NSLocalizedString("targetArea", comment: "")
+                UserDefaults.standard.set("targetArea", forKey: "defaultImage")
+                // targetArea --> demonstration
+            } else if cell?.textLabel?.text == NSLocalizedString("targetArea", comment: "") {
+                cell?.textLabel?.text = NSLocalizedString("demonstration", comment: "")
+                UserDefaults.standard.set("demonstration", forKey: "defaultImage")
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Rest Time
+        case 4:
             //
             selectedRow = indexPath.row
             //
@@ -428,7 +454,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             tableView.deselectRow(at: indexPath, animated: true)
 
         // Reset
-        case 4:
+        case 5:
         //
             // Reset Walkthrough
             if indexPath.row == 0 {

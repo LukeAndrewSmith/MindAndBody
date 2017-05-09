@@ -21,7 +21,7 @@ class headerCell: UITableViewCell {
         
     @IBOutlet weak var logoView: UIImageView!
     
-    @IBOutlet weak var gradientView: UIView!
+    
 }
 
 // Navigation Cell
@@ -135,24 +135,40 @@ class Profile: UITableViewController{
     }
     
     
+    
 //
 // View did load --------------------------------------------------------------------------------------------------------
 //
+    //
+    let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+    let backgroundImageView = UIImageView()
+
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Background Image
+        backgroundImageView.frame = UIScreen.main.bounds
+        backgroundImageView.contentMode = .scaleAspectFill
         //
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        if backgroundIndex < backgroundImageArray.count {
+            backgroundImageView.image = backgroundImageArray[backgroundIndex]
+        } else if backgroundIndex == backgroundImageArray.count {
+            //
+            backgroundImageView.image = nil
+            backgroundImageView.backgroundColor = colour1
+        }
         //
+        self.tableView.backgroundView = backgroundImageView
+        
+        // Initial TableView Position
         tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         
-        // Swipe
+        // Swipe to Menu
         let rightSwipe = UISwipeGestureRecognizer()
         rightSwipe.direction = .right
         rightSwipe.addTarget(self, action: #selector(swipeGesture(sender:)))
         tableView.addGestureRecognizer(rightSwipe)
-        
-        
         
         // Walkthrough
         if UserDefaults.standard.bool(forKey: "profileWalkthrough") == false {
@@ -160,24 +176,11 @@ class Profile: UITableViewController{
             UserDefaults.standard.set(true, forKey: "profileWalkthrough")
         }
         
+        //  Navigation Bar
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         //
         self.navigationController?.navigationBar.barTintColor = colour2
-        //
-        self.tabBarController?.tabBar.tintColor = colour1
-        
-        // Initial Content Offset
-        tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        
-        // Title
-        //
-        self.navigationController?.navigationBar.topItem?.title = (NSLocalizedString("profile", comment: ""))
-        
-        // Background Coolour
-        backView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        //
-        self.tableView.backgroundView = backView
-        self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        //
+        self.navigationController?.navigationBar.tintColor = colour1
         
         // Scroll Up Button
         scrollUpButton.frame = CGRect(x: view.frame.size.width - 59, y: view.frame.size.height - UIApplication.shared.statusBarFrame.height - 88.5, width: 44, height: 44)
@@ -193,6 +196,7 @@ class Profile: UITableViewController{
         //
         scrollUpButton.addTarget(self, action: #selector(scrollUpButtonAction(_:)), for: .touchUpInside)
 
+        
         // Initialize the sections array
         meGroup = [
             Group(name: "gender", items: ["male", "female"]),
@@ -244,14 +248,23 @@ class Profile: UITableViewController{
                 //
                 UIApplication.shared.keyWindow?.insertSubview(scrollUpButton, aboveSubview: self.tableView)
                 //
-                backView.backgroundColor = colour1
+                backgroundImageView.image = nil
+                backgroundImageView.backgroundColor = colour1
+                //
                 UIApplication.shared.statusBarStyle = .default
             //
             } else {
                 //
                 self.scrollUpButton.removeFromSuperview()
                 //
-                backView.backgroundColor = colour2
+                if backgroundIndex < backgroundImageArray.count {
+                    backgroundImageView.image = backgroundImageArray[backgroundIndex]
+                } else if backgroundIndex == backgroundImageArray.count {
+                    //
+                    backgroundImageView.image = nil
+                    backgroundImageView.backgroundColor = colour1
+                }
+                //
                 UIApplication.shared.statusBarStyle = .lightContent
             }
         }
@@ -467,12 +480,10 @@ class Profile: UITableViewController{
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! headerCell
             //
-            cell.gradientView.frame = cell.bounds
-            //
             cell.titleLabel.text = NSLocalizedString("profile", comment: "")
             cell.titleLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             //
-            cell.gradientView.applyGradient(colours: [UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0)])
+            cell.contentView.backgroundColor = .clear
             //
             cell.logoView.tintColor = colour1
             //
@@ -779,8 +790,7 @@ class Profile: UITableViewController{
 //    return cell
 
 }
-   
-    
+
 //
 // Button Actions --------------------------------------------------------------------------------------------------------
 //

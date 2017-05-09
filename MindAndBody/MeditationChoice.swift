@@ -21,18 +21,26 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
     // Buttons
     @IBOutlet weak var guided: UIButton!
     @IBOutlet weak var meditationTimer: UIButton!
+    @IBOutlet weak var breathing: UIButton!
+    
+    // Stack
+    @IBOutlet weak var stackView: UIStackView!
+    
     
     // Information View
     let informationView = UIScrollView()
     // Information Title
     let informationTitle = UILabel()
     
-    // Stack View
-    @IBOutlet weak var stackView: UIStackView!
-    
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
    
+    
+    // Constraints
+    @IBOutlet weak var timerTop: NSLayoutConstraint!
+    @IBOutlet weak var timerBottom: NSLayoutConstraint!
+    @IBOutlet weak var stackBottom: NSLayoutConstraint!
+    
     
 //
 // View did load -------------------------------------------------------------------------------------------------------
@@ -77,6 +85,14 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         meditationTimer.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         meditationTimer.titleLabel?.textAlignment = .center
         //
+        breathing.setTitle(NSLocalizedString("breathing", comment: ""), for: UIControlState.normal)
+        breathing.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        breathing.setTitleColor(colour2, for: .normal)
+        breathing.layer.borderWidth = 8
+        breathing.layer.borderColor = colour2.cgColor
+        breathing.titleLabel?.adjustsFontSizeToFitWidth = true
+        breathing.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        breathing.titleLabel?.textAlignment = .center
         
         //Information
         //
@@ -135,6 +151,17 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         informationTextMeditationC.sizeToFit()
         self.informationView.addSubview(informationTextMeditationC)
         self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextMeditationC.frame.size.height + informationTitle.frame.size.height + 20)
+        
+        
+        // Iphone 5/SE
+        if UIScreen.main.nativeBounds.height < 1334 {
+            //
+            timerTop.constant = 52
+            timerBottom.constant = 52
+            stackBottom.constant = 52
+            //
+            stackView.spacing = 15
+        }
     }
     
     
@@ -144,11 +171,15 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //
-        guided.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
+        meditationTimer.layer.cornerRadius = ((self.stackView.frame.size.height) * 3/2) / 2
+        meditationTimer.layer.masksToBounds = true
+        //
+        guided.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         guided.layer.masksToBounds = true
         //
-        meditationTimer.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
-        meditationTimer.layer.masksToBounds = true
+        breathing.layer.cornerRadius = (self.stackView.frame.size.height) / 2
+        breathing.layer.masksToBounds = true
+        
     }
     
     

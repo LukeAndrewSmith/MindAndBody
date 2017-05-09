@@ -356,7 +356,11 @@ class SessionScreenOverview: UITableViewController {
             
             // Image
             //
-            cell.demonstrationImageView.image = demonstrationArray[indexPath.row]
+            if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+                cell.demonstrationImageView.image = demonstrationArray[indexPath.row]
+            } else {
+                cell.demonstrationImageView.image = targetAreaArray[indexPath.row]
+            }
             
             
             //
@@ -587,9 +591,8 @@ class SessionScreenOverview: UITableViewController {
         // Get Image
         let sender = extraTap.view as! UIImageView
         let image = sender.image
-        // Get Image
-        // let index = demonstrationImage.indexWhere
-        
+
+        //
         let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
         
         // Expanded Image

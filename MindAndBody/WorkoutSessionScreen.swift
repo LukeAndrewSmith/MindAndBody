@@ -383,10 +383,13 @@ class WorkoutSessionScreen: UIViewController, UIScrollViewDelegate, UIPickerView
         
         // Images
         //
-        //demonstrationImage.loadGif(name: "TestGif")
-        demonstrationImage.image = demonstrationArray[sessionScreenIndex]
-        //
-        bodyImage.image = targetAreaArray[sessionScreenIndex]
+        if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+            demonstrationImage.image = demonstrationArray[sessionScreenIndex]
+            bodyImage.image = targetAreaArray[sessionScreenIndex]
+        } else {
+            bodyImage.image = demonstrationArray[sessionScreenIndex]
+            demonstrationImage.image = targetAreaArray[sessionScreenIndex]
+        }
         // Scroll
         imageScroll.contentOffset.x = 0
         //

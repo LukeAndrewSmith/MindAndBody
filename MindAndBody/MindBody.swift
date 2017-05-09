@@ -112,6 +112,17 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     // Body
     @IBOutlet weak var mind: UILabel!
   
+    // Constraints
+    @IBOutlet weak var bodyTop: NSLayoutConstraint!
+    @IBOutlet weak var bodyBottom: NSLayoutConstraint!
+    //
+    @IBOutlet weak var wamupBottom: NSLayoutConstraint!
+    //
+    @IBOutlet weak var mindTop: NSLayoutConstraint!
+    @IBOutlet weak var mindBottom: NSLayoutConstraint!
+    //
+    @IBOutlet weak var yogaBottom: NSLayoutConstraint!
+    @IBOutlet weak var meditationBottom: NSLayoutConstraint!
     
     //
     // View Will Appear ---------------------------------------------------------------------------------------------------------------------
@@ -131,7 +142,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         } else if backgroundIndex == backgroundImageArray.count {
             //
             backgroundImage.image = nil
-            backgroundImage.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            backgroundImage.backgroundColor = colour1
         }
         //
         // Title Colours and Blurs
@@ -198,6 +209,45 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     }
 
     
+    //
+    // Register Defaults --------------------------------------------------------------------------------
+    //
+    func registerDefaults() {
+        // Register Walkthroughs for all screens
+        //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough1" : false])
+        //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthroughc" : false])
+        //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthroughw" : false])
+        //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2" : false])
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2y" : false])
+        //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough3" : false])
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough3y" : false])
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough4y" : false])
+        //
+        UserDefaults.standard.register(defaults: ["profileWalkthrough" : false])
+        //
+        UserDefaults.standard.register(defaults: ["informationWalkthrough" : false])
+        //
+        UserDefaults.standard.register(defaults: ["informationWalkthroughI" : false])
+        //
+        UserDefaults.standard.register(defaults: ["informationWalkthroughm" : false])
+        
+        // Register Weight
+        UserDefaults.standard.register(defaults: ["units" : "kg"])
+        // Register Presentation Style
+        UserDefaults.standard.register(defaults: ["presentationStyle" : "detailed"])
+        // Register Default Image
+        UserDefaults.standard.register(defaults: ["defaultImage" : "demonstration"])
+        // Register background image index
+        UserDefaults.standard.register(defaults: ["homeScreenBackground" : 0])
+        // Register rest times
+        UserDefaults.standard.register(defaults: ["restTimes" : [15, 45, 10]])
+        
+    }
     
     //
     // View Did Load ------------------------------------------------------------------------------------------------------------------------------
@@ -242,47 +292,12 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         // Present Alert
         if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough") == false {
             self.present(alert, animated: true, completion: nil)
-            //UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough")
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough")
         }
         
         
         //
-        
-        
-        
-        
-        
-        // Register Walkthroughs for all screens
-        //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough1" : false])
-        //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthroughc" : false])
-        //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthroughw" : false])
-        //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2" : false])
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2y" : false])
-        //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough3" : false])
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough3y" : false])
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough4y" : false])
-        //
-        UserDefaults.standard.register(defaults: ["profileWalkthrough" : false])
-        //
-        UserDefaults.standard.register(defaults: ["informationWalkthrough" : false])
-        //
-        UserDefaults.standard.register(defaults: ["informationWalkthroughI" : false])
-        //
-        UserDefaults.standard.register(defaults: ["informationWalkthroughm" : false])
-        
-        // Register Weight
-        UserDefaults.standard.register(defaults: ["units" : "kg"])
-        // Register Presentation Style
-        UserDefaults.standard.register(defaults: ["presentationStyle" : "detailed"])
-        // Register background image index
-        UserDefaults.standard.register(defaults: ["homeScreenBackground" : 0])
-        // Register rest times
-        UserDefaults.standard.register(defaults: ["restTimes" : [15, 45, 10]])
+        registerDefaults()
         
         
         
@@ -369,18 +384,15 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         // Iphone 5/SE layout
         if UIScreen.main.nativeBounds.height < 1334 {
             //
-//            bottomConstraint.constant = 15
-//            stackView3.spacing = 15
-//            //
-//            heightConstraint.constant = 15
-//            positionConstraint.constant = -15
-//            //
-//            bodyTop.constant = 5
-//            bodyBottom.constant = 2
-//            mindTop.constant = 5
-//            mindBottom.constant = 3
-//            //
-//            stack3Bottom.constant = 15
+            wamupBottom.constant = 15
+            //
+            bodyTop.constant = 5
+            bodyBottom.constant = 2
+            mindTop.constant = 5
+            mindBottom.constant = 3
+            //
+            yogaBottom.constant = 15
+            meditationBottom.constant = 15
         }
         
         view.sendSubview(toBack: backgroundImage)
@@ -532,22 +544,27 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         self.performSegue(withIdentifier: "openMenu", sender: nil)
     }
     
-    let transitionManager = TransitionManager()
-
+    
+    //let transitionManager = TransitionManager()
+    
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
         if segue.identifier == "openMenu" {
             //
             UIApplication.shared.statusBarStyle = .default
+            
 //            //
             //
-            let toViewController = segue.destination as UIViewController
-            //
-            toViewController.transitioningDelegate = transitionManager
-//            if let destinationViewController = segue.destination as? SlideMenuView {
-//                destinationViewController.transitioningDelegate = self
-//            }
+//            let toViewController = segue.destination as UIViewController
+//            
+//            toViewController.transitioningDelegate = self.transitionManager
+            
+           // self.transitioningDelegate = transitionManager
+            
+            if let destinationViewController = segue.destination as? SlideMenuView {
+                destinationViewController.transitioningDelegate = self
+            }
         } else {
             // Remove back button text
             let backItem = UIBarButtonItem()
@@ -958,21 +975,21 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
 
 
 
+
+
 //
-//
-////
-//// Slide Menu Extension
-//extension MindBody: UIViewControllerTransitioningDelegate {
-//    // Present
-//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        return PresentMenuAnimator()
-//    }
-//    
-//    // Dismiss
-//    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        return DismissMenuAnimator()
-//    }
-//}
+// Slide Menu Extension
+extension MindBody: UIViewControllerTransitioningDelegate {
+    // Present
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PresentMenuAnimator()
+    }
+    
+    // Dismiss
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissMenuAnimator()
+    }
+}
 
 
 
