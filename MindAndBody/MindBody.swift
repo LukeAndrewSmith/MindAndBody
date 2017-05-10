@@ -124,11 +124,33 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var yogaBottom: NSLayoutConstraint!
     @IBOutlet weak var meditationBottom: NSLayoutConstraint!
     
+    
+    
+    // Blurs
+    let blur0 = UIVisualEffectView()
+    let blur1 = UIVisualEffectView()
+    let blur2 = UIVisualEffectView()
+    let blur3 = UIVisualEffectView()
+    let blur4 = UIVisualEffectView()
+    let blur5 = UIVisualEffectView()
+    let blur6 = UIVisualEffectView()
+    let blur7 = UIVisualEffectView()
+    
     //
     // View Will Appear ---------------------------------------------------------------------------------------------------------------------
     //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //
+        blur0.removeFromSuperview()
+        blur1.removeFromSuperview()
+        blur2.removeFromSuperview()
+        blur3.removeFromSuperview()
+        blur4.removeFromSuperview()
+        blur5.removeFromSuperview()
+        blur6.removeFromSuperview()
+        blur7.removeFromSuperview()
         
         // Background Index
         let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
@@ -381,19 +403,19 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         Meditation.titleLabel?.textAlignment = .center
         Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
         
-        // Iphone 5/SE layout
-        if UIScreen.main.nativeBounds.height < 1334 {
-            //
-            wamupBottom.constant = 15
-            //
-            bodyTop.constant = 5
-            bodyBottom.constant = 2
-            mindTop.constant = 5
-            mindBottom.constant = 3
-            //
-            yogaBottom.constant = 15
-            meditationBottom.constant = 15
-        }
+//        // Iphone 5/SE layout
+//        if UIScreen.main.nativeBounds.height < 1334 {
+//            //
+//            wamupBottom.constant = 15
+//            //
+//            bodyTop.constant = 5
+//            bodyBottom.constant = 2
+//            mindTop.constant = 5
+//            mindBottom.constant = 3
+//            //
+//            yogaBottom.constant = 15
+//            meditationBottom.constant = 15
+//        }
         
         view.sendSubview(toBack: backgroundImage)
     }
@@ -426,15 +448,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         Meditation.clipsToBounds = true
         
         
-        // Blurs
-        let blur0 = UIVisualEffectView()
-        let blur1 = UIVisualEffectView()
-        let blur2 = UIVisualEffectView()
-        let blur3 = UIVisualEffectView()
-        let blur4 = UIVisualEffectView()
-        let blur5 = UIVisualEffectView()
-        let blur6 = UIVisualEffectView()
-        let blur7 = UIVisualEffectView()
+        
         //
         let blur = UIBlurEffect(style: .dark)
         let vibrancy = UIVibrancyEffect(blurEffect: blur)

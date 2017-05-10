@@ -21,7 +21,7 @@ class MeditationScreen: UIViewController {
     // Play/Pause
     @IBOutlet weak var playPause: UIButton!
     
-    // CheckMark
+    // Down Arrow
     @IBOutlet weak var checkMark: UIButton!
     
     // Background Image
@@ -62,7 +62,7 @@ class MeditationScreen: UIViewController {
         } else if backgroundIndex == backgroundImageArray.count {
             //
             backgroundImage.image = nil
-            backgroundImage.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            backgroundImage.backgroundColor = colour1
         }
     }
     
@@ -74,7 +74,7 @@ class MeditationScreen: UIViewController {
         super.viewDidLoad()
         
         // CheckMark
-        checkMark.tintColor = colour3
+        checkMark.tintColor = colour4
         
         // Play & Pause
         playPause.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
@@ -133,9 +133,9 @@ class MeditationScreen: UIViewController {
         hideScreen.insertSubview(blur3, belowSubview: hideScreen.imageView!)
         //
         let blurE4 = UIBlurEffect(style: .dark)
+        //let vibrancyE4 = UIVibrancyEffect(blurEffect: blurE4)
+        //blur4.effect = vibrancyE4
         blur4.effect = blurE4
-        let vibrancyE4 = UIVibrancyEffect(blurEffect: blurE4)
-        blur4.effect = vibrancyE4
         blur4.frame = UIApplication.shared.statusBarFrame
         blur4.isUserInteractionEnabled = false
     }

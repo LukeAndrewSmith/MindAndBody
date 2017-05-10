@@ -1075,6 +1075,15 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.presetsTableView.alpha = 0
                 self.backgroundViewExpanded.alpha = 0
                 self.movementsTableView.reloadData()
+                //
+                //
+                self.tableConstraint1.constant = 73.75
+                self.tableConstraint.constant = 49.75
+                //
+                self.presetsConstraint.constant = self.view.frame.size.height - 73.25
+                //
+                self.beginConstraint.constant = 0
+                self.view.layoutIfNeeded()
             }, completion: { finished in
             //
                 self.presetsTableView.removeFromSuperview()
@@ -1084,17 +1093,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                     UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2")
                 }
             })
-                
-                //
-                    self.tableConstraint1.constant = 73.75
-                    self.tableConstraint.constant = 49.75
-                    //
-                    self.presetsConstraint.constant = self.view.frame.size.height - 73.25
-                    //
-                    self.beginConstraint.constant = 0
-                UIView.animate(withDuration: 0.7) {
-                    self.view.layoutIfNeeded()
-                }
         default: break
         }
        

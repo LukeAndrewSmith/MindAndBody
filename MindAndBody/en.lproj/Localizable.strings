@@ -1114,11 +1114,31 @@
         // Meditation //
         //
         "meditationTimer" = "Meditation Timer";
+        "meditations" = "Meditations";
         //
         "breathing" = "Breathing";
 
         "meditationTimerTitle" = "Meditation Timer";
         "presetTimerTitle" = "Preset Timers";
+
+        // Timer
+            // Tests
+            "calming" = "Calming";
+            "relaxing" = "Relaxing";
+            "long" = "Long";
+            "uplifting" = "Uplifting";
+
+            //
+            "bowlRing" = "Bowl Ring";
+
+            "none" = "None";
+
+            //
+            "meditationBegin" = "Can't Begin";
+            "meditationBeginMessage" = "\nEnsure you have completed each option.\nSelect 'none' in the bells and background sound options if they aren't desired. ";
+
+
+
 
             // Information
             "meditationPurposeText" = "";

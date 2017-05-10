@@ -42,7 +42,7 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
             #imageLiteral(resourceName: "Mind&Body"),
             #imageLiteral(resourceName: "Calendar"),
             #imageLiteral(resourceName: "Graph"),
-            #imageLiteral(resourceName: "QuestionMarkM"),
+            #imageLiteral(resourceName: "QuestionMarkMenu"),
             #imageLiteral(resourceName: "Profile"),
             #imageLiteral(resourceName: "Settings")
         ]

@@ -870,7 +870,6 @@ class SessionScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegat
             //
             //
             UIView.animate(withDuration: 0.4, animations: {
-                
                 //
                 snapshot1?.center.x -= UIScreen.main.bounds.width * 1
                 snapshot2?.center.x = UIScreen.main.bounds.width * 0.5
