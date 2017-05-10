@@ -145,6 +145,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     let presetsTableView = UITableView()
     // Duration
     let pickerViewDuration = UIPickerView()
+        let hoursLabel = UILabel()
+        let minutesLabel = UILabel()
+        let secondsLabel = UILabel()
     // Bells
     let tableViewBells = UITableView()
     // Interval Bells
@@ -446,7 +449,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         pickerViewIntervalTimes.dataSource = self
         // Labels
         //
-        let hoursLabel = UILabel()
         hoursLabel.textAlignment = .center
         hoursLabel.textColor = colour1
         hoursLabel.text = "h"
@@ -454,14 +456,29 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         hoursLabel.numberOfLines = 1
         hoursLabel.sizeToFit()
         hoursLabel.center.y = pickerViewDuration.center.y
-        hoursLabel.center.x = pickerViewDuration.frame.minX + (pickerViewDuration.frame.size.width * (2.5/6))
+        hoursLabel.center.x = pickerViewDuration.frame.minX + (pickerViewDuration.frame.size.width * (2.4/6))
         pickerViewDuration.addSubview(hoursLabel)
         //
-        let minutesLabel = UILabel()
-        
+        minutesLabel.textAlignment = .center
+        minutesLabel.textColor = colour1
+        minutesLabel.text = "m"
+        minutesLabel.font = UIFont(name: "SFUIDisplay-thin", size: 22)
+        minutesLabel.numberOfLines = 1
+        minutesLabel.sizeToFit()
+        minutesLabel.center.y = pickerViewDuration.center.y
+        minutesLabel.center.x = pickerViewDuration.frame.minX + (pickerViewDuration.frame.size.width * (3.55/6))
+        pickerViewDuration.addSubview(minutesLabel)
         //
-        let secondsLabel = UILabel()
-        
+        secondsLabel.textAlignment = .center
+        secondsLabel.textColor = colour1
+        secondsLabel.text = "s"
+        secondsLabel.font = UIFont(name: "SFUIDisplay-thin", size: 22)
+        secondsLabel.numberOfLines = 1
+        secondsLabel.sizeToFit()
+        secondsLabel.center.y = pickerViewDuration.center.y
+        secondsLabel.center.x = pickerViewDuration.frame.minX + (pickerViewDuration.frame.size.width * (4.65/6))
+        pickerViewDuration.addSubview(secondsLabel)
+       
     }
  
     
@@ -584,9 +601,19 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             case 3:
                 break
             case 4:
-                break
+                //
+                if soundPlayer != nil {
+                    if soundPlayer.isPlaying {
+                        soundPlayer.stop()
+                    }
+                }
             case 5:
-                break
+                //
+                if soundPlayer != nil {
+                    if soundPlayer.isPlaying {
+                        soundPlayer.stop()
+                    }
+                }
             default: break
             }
         }
@@ -601,7 +628,17 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         switch selectedItem {
         case 0: break // OK button not used
         case 1:
-            break
+            var durationArray = UserDefaults.standard.object(forKey: "meditationTimerDuration") as! [Int]
+            //
+            durationArray[selectedPreset] = convertToSeconds()
+            UserDefaults.standard.set(durationArray, forKey: "meditationTimerDuration")
+            //
+            UserDefaults.standard.synchronize()
+
+            //
+            let hmsArray = convertToHMS()
+            durationDetail.text = String(hmsArray[0]) + "h " + String(hmsArray[1]) + "m " + String(hmsArray[2]) + "s"
+            
         case 2:
             //
             if soundPlayer != nil {
@@ -739,6 +776,11 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // PickerView
         selectionView.addSubview(pickerViewDuration)
         pickerViewDuration.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
+        // Select Rows
+        let hmsArray = convertToHMS()
+        pickerViewDuration.selectRow(durationTimeArray[0].index(of: hmsArray[0])!, inComponent: 0, animated: true)
+        pickerViewDuration.selectRow(durationTimeArray[1].index(of: hmsArray[1])!, inComponent: 1, animated: true)
+        pickerViewDuration.selectRow(durationTimeArray[2].index(of: hmsArray[2])!, inComponent: 2, animated: true)
         // ok
         okButton.frame = CGRect(x: 0, y: 147, width: selectionView.frame.size.width, height: 49)
         selectionView.addSubview(okButton)
@@ -756,6 +798,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.selectionView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
             //
             self.pickerViewDuration.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
+                self.hoursLabel.center.y = self.pickerViewDuration.center.y
+                self.minutesLabel.center.y = self.pickerViewDuration.center.y
+                self.secondsLabel.center.y = self.pickerViewDuration.center.y
             // ok
             self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
             //
@@ -815,31 +860,37 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Interval Bells
     @IBAction func intervalBellsAction(_ sender: Any) {
         selectedItem = 3
-        // View
-        selectionView.alpha = 0
-        UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
-        selectionView.frame = CGRect(x: 22, y: intervalBells.frame.minY, width: UIScreen.main.bounds.width - 44, height: intervalBells.frame.size.height)
+        //
+        selectionView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + (presets.frame.size.height / 2), width: presets.frame.size.width - 60, height: 0)
+        //
+        tableViewIntervalBells.alpha = 0
+        self.tableViewIntervalBells.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
+        selectionView.addSubview(tableViewIntervalBells)
+        //
+        backgroundViewSelection.alpha = 0
+        backgroundViewSelection.frame = UIScreen.main.bounds
+        selectionView.addSubview(backgroundViewSelection)
         //
         // ok
         okButton.frame = CGRect(x: 0, y: 147, width: selectionView.frame.size.width, height: 49)
         selectionView.addSubview(okButton)
-        //
-        backgroundViewSelection.alpha = 0
+        // Present
+        UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
-        backgroundViewSelection.frame = UIScreen.main.bounds
-        // Animate fade and size
+        // Animate table fade and size
         // Position
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.tableViewIntervalBells.alpha = 1
             //
-            self.selectionView.alpha = 1
-            //
-            self.selectionView.frame = CGRect(x: 22, y: 0, width: UIScreen.main.bounds.width - 44, height: 147 + 49)
-            self.selectionView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
-            // ok
-            self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
+            self.selectionView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + 44, width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88)
+            self.tableViewIntervalBells.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
+            self.okButton.frame = CGRect(x: 0, y: self.selectionView.frame.size.height - 49, width: self.selectionView.frame.size.width, height: 49)
+
+            self.tableViewIntervalBells.reloadData()
             //
             self.backgroundViewSelection.alpha = 0.5
         }, completion: nil)
+        //
     }
 
     // Ending Bell
@@ -962,8 +1013,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         let selectedBackgroundSoundsArray = defaults.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
         //
         if durationArray[selectedPreset] != 0 {
-            let duration = durationArray[selectedPreset]
-            durationDetail.text = ""
+            let hmsArray = convertToHMS()
+            durationDetail.text = String(hmsArray[0]) + "h " + String(hmsArray[1]) + "m " + String(hmsArray[2]) + "s"
         } else {
             durationDetail.text = "-"
         }
@@ -1011,8 +1062,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         case presetsTableView:
             return " " + NSLocalizedString("custom", comment: "")
         case tableViewBells: return ""
-        case tableViewIntervalBells: return " "
-        case tableViewBackgroundSounds: return ""
+        case tableViewIntervalBells: return " " + NSLocalizedString("intervalBells", comment: "")
+        case tableViewBackgroundSounds: return " "
         default: return ""
     }
     }
@@ -1036,7 +1087,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         case tableViewBells:
             return bellsArray.count
         case tableViewIntervalBells:
-            return intervalBellsArray.count + 1
+            // Retreive Interval Bells
+            let intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
+            return intervalBellsArray[selectedPreset].count + 1
         case tableViewBackgroundSounds:
             return backgroundSoundsArray.count
         default: return 0
@@ -1121,20 +1174,21 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.tintColor = colour1
         //
         case tableViewIntervalBells:
+            let intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
             //
             cell.textLabel?.textAlignment = .left
             cell.backgroundColor = colour2
             cell.textLabel?.textColor = colour1
             cell.tintColor = colour1
             // New Bell Row
-            if indexPath.row == intervalBellsArray.count {
+            if indexPath.row == intervalBellsArray[selectedPreset].count {
                 cell.imageView?.image = #imageLiteral(resourceName: "Plus")
                 //
                 cell.contentView.transform = CGAffineTransform(scaleX: -1,y: 1);
                 cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
             // Bells Rows
             } else {
-                cell.textLabel?.text = "Test"
+                cell.textLabel?.text = bellsArray[intervalBellsArray[selectedPreset][indexPath.row]]
             }
         //
         case tableViewBackgroundSounds:
@@ -1197,7 +1251,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Alert and Functions
                 //
                 //
-                let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
+                let inputTitle = NSLocalizedString("meditationInputTitle", comment: "")
                 //
                 let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
                 alert.view.tintColor = colour2
@@ -1338,7 +1392,18 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             tableViewBells.reloadData()
             tableViewBells.deselectRow(at: indexPath, animated: true)
         case tableViewIntervalBells:
-            break
+            let intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
+
+            //
+            if indexPath.row == intervalBellsArray.count {
+                
+                
+                
+            } else {
+                
+                
+                
+            }
         case tableViewBackgroundSounds:
             //
             if indexPath.row == backgroundSoundsArray.count - 1 {
@@ -1452,13 +1517,13 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     // View for row
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         //
-        let secondsLabel = UILabel()
-        secondsLabel.text = String(durationTimeArray[component][row])
-        secondsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-        secondsLabel.textColor = colour1
+        let label = UILabel()
+        label.text = String(durationTimeArray[component][row])
+        label.font = UIFont(name: "SFUIDisplay-light", size: 24)
+        label.textColor = colour1
         //
-        secondsLabel.textAlignment = .center
-        return secondsLabel
+        label.textAlignment = .center
+        return label
         //
     }
     
@@ -1470,6 +1535,35 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Did select row
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         //
+    }
+    
+    
+    // Convert to seconds func
+    func convertToSeconds() -> Int {
+        let hours = durationTimeArray[0][pickerViewDuration.selectedRow(inComponent: 0)]
+        let minutes = durationTimeArray[1][pickerViewDuration.selectedRow(inComponent: 1)]
+        let seconds = durationTimeArray[2][pickerViewDuration.selectedRow(inComponent: 2)]
+        //
+        let timeInSeconds = (hours * 3600) + (minutes * 60) + seconds
+        return timeInSeconds
+    }
+    
+    // Convert to hours, minutes, seconds func
+    func convertToHMS() -> [Int] {
+        var hmsArray: [Int] = []
+        //
+        let timeInSeconds = UserDefaults.standard.object(forKey: "meditationTimerDuration") as! [Int]
+        //
+        let hours = Int(timeInSeconds[selectedPreset] / 3600)
+        hmsArray.append(hours)
+        //
+        let minutes = Int((timeInSeconds[selectedPreset] % 3600) / 60)
+        hmsArray.append(minutes)
+        //
+        let seconds = Int(timeInSeconds[selectedPreset] % 60)
+        hmsArray.append(seconds)
+        //
+        return hmsArray
     }
     
     

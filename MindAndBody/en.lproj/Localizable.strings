@@ -1122,6 +1122,9 @@
         "presetTimerTitle" = "Preset Timers";
 
         // Timer
+            //
+            "meditationInputTitle" = "Meditation Title";
+
             // Tests
             "calming" = "Calming";
             "relaxing" = "Relaxing";
