@@ -1125,6 +1125,9 @@
             //
             "meditationInputTitle" = "Meditation Title";
 
+            "bells" = "Bells";
+            "bellTime" = "Bell time";
+
             // Tests
             "calming" = "Calming";
             "relaxing" = "Relaxing";
