@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import UserNotifications
+import AVFoundation
 
 
 //
@@ -15,11 +17,28 @@ import UIKit
 //
 class MeditationScreen: UIViewController {
     
+    
+    
+    //
+    // Arrays -------------------------------------------------------------------------------------------
+    //
+    var bellsArray: [String] = []
+    //
+    var backgroundSoundsArray: [String] = []
+    //
+    var selectedPreset = Int()
+    
+    
+    //
+    // Outlets -------------------------------------------------------------------------------------------
+    //
     // Timer Label
     @IBOutlet weak var timerLabel: UILabel!
-    
-    // Play/Pause
-    @IBOutlet weak var playPause: UIButton!
+    //
+    // Timer Countdown
+    var timerCountDown = Timer()
+    //
+    var timerValue = Int()
     
     // Down Arrow
     @IBOutlet weak var checkMark: UIButton!
@@ -67,6 +86,79 @@ class MeditationScreen: UIViewController {
     }
     
     
+    
+    
+//
+// Timer Functions ---------------------------------------------------------------------------------------------------------------
+//
+    var isTiming = false
+    // Timer CountDown Title
+    func timeFormatted(totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    // Time formatted hours
+    func timeFormattedHours(totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        let hours: Int = totalSeconds / 3600
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+    
+    // Update Timer
+    func updateTimer() {
+        //
+        if timerValue == 0 {
+            self.timerCountDown.invalidate()
+            isTiming = false
+            //
+        } else if timerValue == 1 {
+            timerValue -= 1
+            if isHours == true {
+                timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
+            } else {
+                timerLabel.text = timeFormatted(totalSeconds: timerValue)
+            }
+            //
+        } else {
+            timerValue -= 1
+            if isHours == true {
+                timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
+            } else {
+                timerLabel.text = timeFormatted(totalSeconds: timerValue)
+            }
+        }
+    }
+    
+    
+    // Bells
+    func bellNotifications() {
+        
+        //
+        // Bells
+        let intervalTimes = UserDefaults.standard.object(forKey: "meditationTimerIntervalTimes") as! [[Int]]
+        let intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
+        
+        for i in 0...1 {
+        //
+        let content = UNMutableNotificationContent()
+        //content.title = NSLocalizedString("timerEnd", comment: "")
+        //content.body = " "
+        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+        content.sound = UNNotificationSound.default()
+        //
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
+        let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
+    
+        //
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        }
+    }
+
+
+    var isHours = Bool()
 //
 // View did load -------------------------------------------------------------------------------------------
 //
@@ -76,8 +168,62 @@ class MeditationScreen: UIViewController {
         // CheckMark
         checkMark.tintColor = colour4
         
-        // Play & Pause
-        playPause.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
+        
+        //
+        hideScreen.tintColor = colour1
+        
+        
+        
+        
+        
+        //
+        // Test
+        //
+        let content = UNMutableNotificationContent()
+        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+        content.sound = UNNotificationSound.default()
+        //
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(5), repeats: false)
+        let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
+        
+        //
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+        
+        
+        
+        
+        
+        //
+        let defaults = UserDefaults.standard
+        //
+        let presetsArray = defaults.object(forKey: "meditationTimerTitles") as! [String]
+        //
+        let durationArray = defaults.object(forKey: "meditationTimerDuration") as! [Int]
+        let startingBellsArray = defaults.object(forKey: "meditationTimerStartingBells") as! [Int]
+        let intervalBellsArray = defaults.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
+        let intervalBellsTimesArray = defaults.object(forKey: "meditationTimerIntervalTimes") as! [[Int]]
+        let endingBellsArray = defaults.object(forKey: "meditationTimerEndingBells") as! [Int]
+        let selectedBackgroundSoundsArray = defaults.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
+        
+        
+        // Determine wether hours or not
+        if durationArray[selectedPreset] > 3599 {
+            isHours = true
+        } else {
+            isHours = false
+        }
+        
+        // Set initial time
+        if isHours == true {
+            timerLabel.text = timeFormattedHours(totalSeconds: durationArray[selectedPreset])
+        } else {
+            timerLabel.text = timeFormatted(totalSeconds: durationArray[selectedPreset])
+        }
+
+        // SEt timer value
+        timerValue = durationArray[selectedPreset]
+        
         
         
         // Blur
@@ -97,6 +243,26 @@ class MeditationScreen: UIViewController {
         //view.sendSubview(toBack: vibrancyEffectView)
         
         
+    }
+
+//
+// View Did Appear
+// 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Begin Timer
+        self.timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+        
+    }
+    
+//
+// Buttons -------------------------------------------------------------------------------------------
+//
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        //
+        
         // Blurs
         let blurE = UIBlurEffect(style: .dark)
         blur.effect = blurE
@@ -110,19 +276,17 @@ class MeditationScreen: UIViewController {
         blur1.effect = blurE1
         let vibrancyE1 = UIVibrancyEffect(blurEffect: blurE1)
         blur1.effect = vibrancyE1
-        blur1.frame = CGRect(x: 0, y: 0, width: timerLabel.frame.size.width + 40, height: timerLabel.frame.size.height)
+        //
+        if isHours == true {
+            blur1.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: timerLabel.frame.size.height)
+        } else {
+            blur1.frame = CGRect(x: 0, y: 0, width: timerLabel.frame.size.width + 40, height: timerLabel.frame.size.height)
+        }
         blur1.isUserInteractionEnabled = false
         blur1.layer.cornerRadius = 30
         blur1.layer.masksToBounds = true
         view.insertSubview(blur1, belowSubview: timerLabel)
         //
-        let blurE2 = UIBlurEffect(style: .dark)
-        blur2.effect = blurE2
-        let vibrancyE2 = UIVibrancyEffect(blurEffect: blurE2)
-        blur2.effect = vibrancyE2
-        blur2.frame = playPause.bounds
-        blur2.isUserInteractionEnabled = false
-        playPause.insertSubview(blur2, belowSubview: playPause.imageView!)
         //
         let blurE3 = UIBlurEffect(style: .dark)
         blur3.effect = blurE3
@@ -138,22 +302,14 @@ class MeditationScreen: UIViewController {
         blur4.effect = blurE4
         blur4.frame = UIApplication.shared.statusBarFrame
         blur4.isUserInteractionEnabled = false
-    }
-
-    
-//
-// Buttons -------------------------------------------------------------------------------------------
-//
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+        
+        
+        // Corner radii
         //
         blur.layer.cornerRadius = checkMark.frame.size.height / 2
         blur.layer.masksToBounds = true
         //
         blur1.center = timerLabel.center
-        //
-        blur2.layer.cornerRadius = playPause.frame.size.height / 2
-        blur2.layer.masksToBounds = true
         //
         blur3.layer.cornerRadius = hideScreen.frame.size.height / 2
         blur3.layer.masksToBounds = true
@@ -165,19 +321,8 @@ class MeditationScreen: UIViewController {
 //
 // Buttons -------------------------------------------------------------------------------------------
 //
-    // Play/Pause
-    @IBAction func playPauseAction(_ sender: Any) {
-        if playPause.image(for: .normal) == #imageLiteral(resourceName: "Pause"){
-            playPause.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
-        } else if playPause.image(for: .normal) == #imageLiteral(resourceName: "Play"){
-            playPause.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
-        }
-    }
-    
     // Hide Screen
     let hideScreenView = UIView()
-    let blurEffectView = UIVisualEffectView()
-    let hideLabel = UILabel()
     //
     var brightness = UIScreen.main.brightness
     //
@@ -199,8 +344,9 @@ class MeditationScreen: UIViewController {
         UIView.animate(withDuration: 0.4, animations: {
             UIApplication.shared.isStatusBarHidden = true
             self.hideScreenView.alpha = 1
+        }, completion: { finished in
             UIScreen.main.brightness = CGFloat(0)
-        }, completion: nil)
+        })
     }
     // Remove Hide Screen
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
@@ -225,6 +371,8 @@ class MeditationScreen: UIViewController {
         // Action
         let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
             UIAlertAction in
+            // Cancel Timer
+            self.timerCountDown.invalidate()
             self.dismiss(animated: true)
         }
         let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
