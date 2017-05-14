@@ -342,7 +342,7 @@
                                             </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXe-Y8-seR">
-                                            <rect key="frame" x="187.5" y="-5" width="94" height="54"/>
+                                            <rect key="frame" x="187" y="-5" width="94" height="54"/>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="20"/>
                                             <state key="normal" title="Body">
                                                 <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -813,7 +813,7 @@
                                     <constraint firstAttribute="width" constant="40" id="Wl9-dr-5MO"/>
                                     <constraint firstAttribute="height" constant="20.5" id="sPs-oU-Rus"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="17"/>
                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -823,7 +823,7 @@
                                     <constraint firstAttribute="width" constant="41.5" id="cas-aU-pA0"/>
                                     <constraint firstAttribute="height" constant="20.5" id="eLm-Ui-ZUK"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="17"/>
                                 <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -5897,12 +5897,12 @@
         <image name="Tricep" width="375" height="375"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Lwd-n2-ybY"/>
         <segue reference="Fog-TG-G84"/>
         <segue reference="lsr-M5-arq"/>
         <segue reference="gOe-Qm-Eka"/>
         <segue reference="AI0-jj-t3k"/>
         <segue reference="GFO-EU-4MD"/>
         <segue reference="gHI-x8-z0O"/>
+        <segue reference="M72-ar-DyO"/>
     </inferredMetricsTieBreakers>
 </document>

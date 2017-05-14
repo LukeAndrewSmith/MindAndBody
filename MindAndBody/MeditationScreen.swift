@@ -12,6 +12,8 @@ import UserNotifications
 import AVFoundation
 
 
+var timerCountDown = Timer()
+
 //
 // Meditation Screen Class -------------------------------------------------------------------------------------------
 //
@@ -29,6 +31,25 @@ class MeditationScreen: UIViewController {
     var selectedPreset = Int()
     
     
+    // Arrays
+    var durationArray: [Int] = []
+    var startingBellsArray: [Int] = []
+    var intervalBellsArray: [[Int]] = []
+    var intervalTimes: [[Int]] = []
+    var endingBellsArray: [Int] = []
+    var selectedBackgroundSoundsArray: [Int] = []
+    
+    
+    // VAriables
+    var didSetEndTime = false
+    var startTime = Double()
+    var endTime = Double()
+    
+    //
+    var isHours = Bool()
+
+    
+    
     //
     // Outlets -------------------------------------------------------------------------------------------
     //
@@ -36,7 +57,6 @@ class MeditationScreen: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     //
     // Timer Countdown
-    var timerCountDown = Timer()
     //
     var timerValue = Int()
     
@@ -59,12 +79,26 @@ class MeditationScreen: UIViewController {
     
     
     
+    // Background Sound
+   // var backgroundSound = AVAudioPlayer()
+    
     
 //
 // View will appear -----------------------------------------------------------------------------------------------
 //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Set Arrays
+        let defaults = UserDefaults.standard
+        durationArray = defaults.object(forKey: "meditationTimerDuration") as! [Int]
+        startingBellsArray = defaults.object(forKey: "meditationTimerStartingBells") as! [Int]
+        intervalBellsArray = defaults.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
+        intervalTimes = UserDefaults.standard.object(forKey: "meditationTimerIntervalTimes") as! [[Int]]
+        endingBellsArray = defaults.object(forKey: "meditationTimerEndingBells") as! [Int]
+        selectedBackgroundSoundsArray = defaults.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
+        
+        
         
         //
         backgroundImage.frame = view.bounds
@@ -83,166 +117,57 @@ class MeditationScreen: UIViewController {
             backgroundImage.image = nil
             backgroundImage.backgroundColor = colour1
         }
-    }
-    
-    
-    
-    
-//
-// Timer Functions ---------------------------------------------------------------------------------------------------------------
-//
-    var isTiming = false
-    // Timer CountDown Title
-    func timeFormatted(totalSeconds: Int) -> String {
-        let seconds: Int = totalSeconds % 60
-        let minutes: Int = (totalSeconds / 60) % 60
-        return String(format: "%02d:%02d", minutes, seconds)
-    }
-    // Time formatted hours
-    func timeFormattedHours(totalSeconds: Int) -> String {
-        let seconds: Int = totalSeconds % 60
-        let minutes: Int = (totalSeconds / 60) % 60
-        let hours: Int = totalSeconds / 3600
-        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-    }
-    
-    
-    // Update Timer
-    func updateTimer() {
+        
+        
+        
+        
+        // Initial Conditions
         //
-        if timerValue == 0 {
-            self.timerCountDown.invalidate()
-            isTiming = false
-            //
-        } else if timerValue == 1 {
-            timerValue -= 1
-            if isHours == true {
-                timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
-            } else {
-                timerLabel.text = timeFormatted(totalSeconds: timerValue)
-            }
-            //
-        } else {
-            timerValue -= 1
-            if isHours == true {
-                timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
-            } else {
-                timerLabel.text = timeFormatted(totalSeconds: timerValue)
-            }
-        }
-    }
-    
-    
-    // Bells
-    func bellNotifications() {
-        
-        //
-        // Bells
-        let intervalTimes = UserDefaults.standard.object(forKey: "meditationTimerIntervalTimes") as! [[Int]]
-        let intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-        
-        for i in 0...1 {
-        //
-        let content = UNMutableNotificationContent()
-        //content.title = NSLocalizedString("timerEnd", comment: "")
-        //content.body = " "
-        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
-        content.sound = UNNotificationSound.default()
-        //
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
-        let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
-    
-        //
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        }
-    }
-
-
-    var isHours = Bool()
-//
-// View did load -------------------------------------------------------------------------------------------
-//
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // CheckMark
-        checkMark.tintColor = colour4
-        
-        
-        //
-        hideScreen.tintColor = colour1
-        
-        
-        
-        
-        
-        //
-        // Test
-        //
-        let content = UNMutableNotificationContent()
-        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
-        content.sound = UNNotificationSound.default()
-        //
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(5), repeats: false)
-        let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
-        
-        //
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        
-        
-        
-        
-        
-        
-        //
-        let defaults = UserDefaults.standard
-        //
-        let presetsArray = defaults.object(forKey: "meditationTimerTitles") as! [String]
-        //
-        let durationArray = defaults.object(forKey: "meditationTimerDuration") as! [Int]
-        let startingBellsArray = defaults.object(forKey: "meditationTimerStartingBells") as! [Int]
-        let intervalBellsArray = defaults.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-        let intervalBellsTimesArray = defaults.object(forKey: "meditationTimerIntervalTimes") as! [[Int]]
-        let endingBellsArray = defaults.object(forKey: "meditationTimerEndingBells") as! [Int]
-        let selectedBackgroundSoundsArray = defaults.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
-        
-        
         // Determine wether hours or not
         if durationArray[selectedPreset] > 3599 {
             isHours = true
         } else {
             isHours = false
         }
+    }
+
+    
+//
+// View did load -------------------------------------------------------------------------------------------
+//
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        // Set initial time
-        if isHours == true {
-            timerLabel.text = timeFormattedHours(totalSeconds: durationArray[selectedPreset])
-        } else {
-            timerLabel.text = timeFormatted(totalSeconds: durationArray[selectedPreset])
+        
+        //
+        // Title Colours and Blurs
+        //
+        let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+        //
+        switch backgroundIndex {
+        // All Black
+        case 1,3,backgroundImageArray.count:
+            timerLabel.textColor = colour2
+            hideScreen.tintColor = colour2
+        // All White
+        case 0,2,3,4,5,6:
+            timerLabel.textColor = colour1
+            hideScreen.tintColor = colour1
+        //
+        default: break
         }
 
-        // SEt timer value
-        timerValue = durationArray[selectedPreset]
         
         
         
-        // Blur
-//        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-//        //
-//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//        blurEffectView.frame = view.bounds
-//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        view.addSubview(blurEffectView)
-//        view.sendSubview(toBack: blurEffectView)
-//        //
-//        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
-//        let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
-//        vibrancyEffectView.frame = view.bounds
-//        vibrancyEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        //view.addSubview(vibrancyEffectView)
-        //view.sendSubview(toBack: vibrancyEffectView)
+        // CheckMark
+        checkMark.tintColor = colour4
         
         
+        
+        //
+        // Watch for enter foreground
+        NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
 
 //
@@ -252,7 +177,7 @@ class MeditationScreen: UIViewController {
         super.viewDidAppear(animated)
         
         // Begin Timer
-        self.timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+        startTimer()
         
     }
     
@@ -316,7 +241,175 @@ class MeditationScreen: UIViewController {
         //
         view.addSubview(blur4)
     }
+   
     
+    
+    
+    //
+    // Timer Functions ---------------------------------------------------------------------------------------------------------------
+    //
+    //
+    // Update and Format Timer
+    //
+    // Timer CountDown Title
+    func timeFormatted(totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    // Time formatted hours
+    func timeFormattedHours(totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        let hours: Int = totalSeconds / 3600
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+    // Update Timer
+    func updateTimer() {
+        //
+        if timerValue == 0 {
+            timerCountDown.invalidate()
+            //
+            self.dismiss(animated: true)
+            
+            // Ending Bell
+            //
+            if endingBellsArray[selectedPreset] != -1 {
+
+            let content = UNMutableNotificationContent()
+            content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+            let soundName = bellsArray[endingBellsArray[selectedPreset]] + ".caf"
+            content.sound = UNNotificationSound(named: soundName)
+            
+            //
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
+            let name = "end"
+            let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
+            
+            //
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            }
+            //
+        } else if timerValue == 1 {
+            timerValue -= 1
+            if isHours == true {
+                timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
+            } else {
+                timerLabel.text = timeFormatted(totalSeconds: timerValue)
+            }
+            //
+        } else {
+            timerValue -= 1
+            if isHours == true {
+                timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
+            } else {
+                timerLabel.text = timeFormatted(totalSeconds: timerValue)
+            }
+        }
+    }
+    
+    
+    //
+    // Start Timer
+    //
+    func startTimer() {
+        // Dates and Times
+        startTime = Date().timeIntervalSinceReferenceDate
+        //
+        if didSetEndTime == false {
+            //
+            createNotifications()
+            //
+            didSetEndTime = true
+            //
+            //
+            let duration = durationArray[selectedPreset]
+            let endingTime = Int(startTime) + duration
+            //
+            endTime = Double(endingTime)
+            
+            // Starting Bell
+            //
+            if startingBellsArray[selectedPreset] != -1 {
+            
+            let content = UNMutableNotificationContent()
+            content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+            let soundName = bellsArray[startingBellsArray[selectedPreset]] + ".caf"
+            content.sound = UNNotificationSound(named: soundName)
+            
+            //
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
+            let name = "start"
+            let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
+            
+            //
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            }
+        }
+        
+        // Set timer value
+        timerValue = Int(endTime - startTime)
+        
+        // Check Greater than 0
+        if timerValue <= 0 {
+            timerValue = 0
+        }
+        
+        // Set Timer
+        // Set initial time
+        if isHours == true {
+            timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
+        } else {
+            timerLabel.text = timeFormatted(totalSeconds: timerValue)
+        }
+        
+        // Begin Timer or dismiss view
+        timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+    }
+    
+    
+    //
+    // Notifications
+    //
+    func createNotifications() {
+        
+        if intervalBellsArray[selectedPreset].count != 0 {
+        //
+        // Bells
+        for i in intervalTimes[selectedPreset] {
+            let index = intervalTimes[selectedPreset].index(of: i)
+            //
+            let content = UNMutableNotificationContent()
+            content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+            let soundName = bellsArray[intervalBellsArray[selectedPreset][index!]] + ".caf"
+            content.sound = UNNotificationSound(named: soundName)
+            
+            //
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(i), repeats: false)
+            let name = "bell" + String(describing: index)
+            let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
+            
+            //
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        }
+        }
+    }
+    //
+    func removeNotifications() {
+        //
+        var identifiers: [String] = []
+        //
+        for i in 0...(intervalTimes[selectedPreset].count - 1) {
+            //
+            let name = "bell" + String(describing: i)
+            //
+            identifiers.append(name)
+            //
+        }
+        //
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
     
 //
 // Buttons -------------------------------------------------------------------------------------------
@@ -372,7 +465,8 @@ class MeditationScreen: UIViewController {
         let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
             UIAlertAction in
             // Cancel Timer
-            self.timerCountDown.invalidate()
+            timerCountDown.invalidate()
+            NotificationCenter.default.removeObserver(self)
             self.dismiss(animated: true)
         }
         let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {

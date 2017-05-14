@@ -1141,7 +1141,7 @@
 
             //
             "meditationBegin" = "Can't Begin";
-            "meditationBeginMessage" = "\nEnsure you have completed each option.\nSelect 'none' in the bells and background sound options if they aren't desired. ";
+            "meditationBeginMessage" = "\nEnsure you have selected a duration.";
 
 
 

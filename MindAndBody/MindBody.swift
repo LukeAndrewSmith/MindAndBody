@@ -15,7 +15,7 @@ import UserNotifications
 // Background Images Array ---------------------------------------------------------------------------------------------------------------
 //
 let backgroundImageArray: [UIImage] =
-    [#imageLiteral(resourceName: "Background 0"), #imageLiteral(resourceName: "Background 1"), #imageLiteral(resourceName: "Background 2"), #imageLiteral(resourceName: "Background 3"), #imageLiteral(resourceName: "Background 4")]
+    [#imageLiteral(resourceName: "Background 0"), #imageLiteral(resourceName: "Background 1"), #imageLiteral(resourceName: "Background 2"), #imageLiteral(resourceName: "Background 3"), #imageLiteral(resourceName: "Background 4"), #imageLiteral(resourceName: "Background 5"), #imageLiteral(resourceName: "Background 6")]
 
 //
 // Colours ---------------------------------------------------------------------------------------------------------------------
@@ -53,8 +53,11 @@ extension UIView {
 
 
 
+
 var tabBarIndex = 0
 var new = Bool()
+
+//
 
 
 //
@@ -173,58 +176,74 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             // Black
         // All Black with no blur
         case backgroundImageArray.count:
-            Warmup.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
-            Workout.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
-            Cardio.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
-            Stretching.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
-            Yoga.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
-            Meditation.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
-            body.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            mind.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            //
-            
+            Warmup.setTitleColor(colour2, for: .normal)
+            Workout.setTitleColor(colour2, for: .normal)
+            Cardio.setTitleColor(colour2, for: .normal)
+            Stretching.setTitleColor(colour2, for: .normal)
+            Yoga.setTitleColor(colour2, for: .normal)
+            Meditation.setTitleColor(colour2, for: .normal)
+            body.textColor = colour2
+            mind.textColor = colour2
         // All Black
         case 1,3:
-            Warmup.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
-            Workout.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
-            Cardio.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
-            Stretching.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
-            Yoga.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
-            Meditation.setTitleColor(UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), for: .normal)
-            body.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            mind.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            // White
+            Warmup.setTitleColor(colour2, for: .normal)
+            Workout.setTitleColor(colour2, for: .normal)
+            Cardio.setTitleColor(colour2, for: .normal)
+            Stretching.setTitleColor(colour2, for: .normal)
+            Yoga.setTitleColor(colour2, for: .normal)
+            Meditation.setTitleColor(colour2, for: .normal)
+            body.textColor = colour2
+            mind.textColor = colour2
         // All White
         case 4:
-            Warmup.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Workout.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Cardio.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Stretching.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Yoga.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            body.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            mind.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            Warmup.setTitleColor(colour1, for: .normal)
+            Workout.setTitleColor(colour1, for: .normal)
+            Cardio.setTitleColor(colour1, for: .normal)
+            Stretching.setTitleColor(colour1, for: .normal)
+            Yoga.setTitleColor(colour1, for: .normal)
+            Meditation.setTitleColor(colour1, for: .normal)
+            body.textColor = colour1
+            mind.textColor = colour1
+        // White text, black body and mind
+        case 5:
+            Warmup.setTitleColor(colour1, for: .normal)
+            Workout.setTitleColor(colour1, for: .normal)
+            Cardio.setTitleColor(colour1, for: .normal)
+            Stretching.setTitleColor(colour1, for: .normal)
+            Yoga.setTitleColor(colour1, for: .normal)
+            Meditation.setTitleColor(colour1, for: .normal)
+            body.textColor = colour2
+            mind.textColor = colour2
+        // Black text, black body, white mind
+        case 6:
+            Warmup.setTitleColor(colour2, for: .normal)
+            Workout.setTitleColor(colour2, for: .normal)
+            Cardio.setTitleColor(colour2, for: .normal)
+            Stretching.setTitleColor(colour2, for: .normal)
+            Yoga.setTitleColor(colour2, for: .normal)
+            Meditation.setTitleColor(colour2, for: .normal)
+            body.textColor = colour2
+            mind.textColor = colour1
         // White Text, Black body, White mind
         case 0:
-            Warmup.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Workout.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Cardio.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Stretching.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Yoga.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            body.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-            mind.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            
+            Warmup.setTitleColor(colour1, for: .normal)
+            Workout.setTitleColor(colour1, for: .normal)
+            Cardio.setTitleColor(colour1, for: .normal)
+            Stretching.setTitleColor(colour1, for: .normal)
+            Yoga.setTitleColor(colour1, for: .normal)
+            Meditation.setTitleColor(colour1, for: .normal)
+            body.textColor = colour2
+            mind.textColor = colour1
         // White Text, Black mind, White body
         case 2:
-            Warmup.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Workout.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Cardio.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Stretching.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Yoga.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
-            body.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            mind.textColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+            Warmup.setTitleColor(colour1, for: .normal)
+            Workout.setTitleColor(colour1, for: .normal)
+            Cardio.setTitleColor(colour1, for: .normal)
+            Stretching.setTitleColor(colour1, for: .normal)
+            Yoga.setTitleColor(colour1, for: .normal)
+            Meditation.setTitleColor(colour1, for: .normal)
+            body.textColor = colour1
+            mind.textColor = colour2
         //
         default: break
         }
@@ -517,13 +536,15 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         
         //
         body.layer.cornerRadius = body.frame.size.height / 2
-        blur6.frame = body.bounds
+        blur6.frame = CGRect(x: 0, y: 0, width: body.bounds.width + 2, height: body.bounds.height + 1)
+            //body.bounds
         blur6.center = body.center
         blur6.layer.cornerRadius = blur6.frame.size.height / 2
         blur6.clipsToBounds = true
         //
         mind.layer.cornerRadius = mind.frame.size.height / 2
-        blur7.frame = mind.bounds
+        blur7.frame = CGRect(x: 0, y: 0, width: mind.bounds.width + 2, height: mind.bounds.height + 1)
+            //mind.bounds
         blur7.center = mind.center
         blur7.layer.cornerRadius = mind.frame.size.height / 2
         blur7.clipsToBounds = true

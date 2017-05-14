@@ -67,21 +67,13 @@ class BackgroundImageCollection: UICollectionViewController {
     
     // Number of Section
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     // Number of items in section
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //
-        switch section {
-            // Image Section
-            case 0: return backgroundImageArray.count
-            // Colour Section
-            case 1: return 1
-            //
-            default: break
-        }
-        return 0
+        return backgroundImageArray.count + 1
     }
 
     
@@ -140,11 +132,7 @@ class BackgroundImageCollection: UICollectionViewController {
         //
         // Section
         //
-        switch indexPath.section {
-        //
-        // Images
-        case 0:
-        //
+        if indexPath.row < backgroundImageArray.count {
             // Image
             cell.backgroundImage.image = backgroundImageArray[indexPath.item]
             
@@ -158,10 +146,8 @@ class BackgroundImageCollection: UICollectionViewController {
             if cell.isSelected == false {
                 cell.selectionLabel.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             }
-        
-        // Colours
-        case 1:
         //
+        } else if indexPath.row == backgroundImageArray.count {
             // Colour
             //
             // Grey
@@ -171,7 +157,7 @@ class BackgroundImageCollection: UICollectionViewController {
             
             // Selection Label
             //
-            if indexPath.item == backgroundIndex - backgroundImageArray.count {
+            if indexPath.item == backgroundIndex {
                 cell.selectionLabel.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
                 cell.isSelected = true
             }
@@ -179,9 +165,9 @@ class BackgroundImageCollection: UICollectionViewController {
             if cell.isSelected == false {
                 cell.selectionLabel.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             }
-            //
-        default: break
         }
+    
+    //
         return cell
     }
     
@@ -198,7 +184,7 @@ class BackgroundImageCollection: UICollectionViewController {
             deselectIndex = NSIndexPath(item: backgroundIndex, section: 0)
         // Colour
         } else {
-            deselectIndex = NSIndexPath(item: backgroundIndex - backgroundImageArray.count, section: 1)
+            deselectIndex = NSIndexPath(item: backgroundIndex - backgroundImageArray.count, section: 0)
         }
         //
         collectionView.deselectItem(at: deselectIndex as IndexPath, animated: false)
@@ -211,15 +197,11 @@ class BackgroundImageCollection: UICollectionViewController {
 
         
         // Store Selection Index
-        if indexPath.section == 0 {
-            // Section 1
-            UserDefaults.standard.set(indexPath.item, forKey: "homeScreenBackground")
+            // Image
+        UserDefaults.standard.set(indexPath.item, forKey: "homeScreenBackground")
             //
-        } else if indexPath.section == 1 {
-            // Section 2
-            UserDefaults.standard.set(backgroundImageArray.count + indexPath.item, forKey: "homeScreenBackground")
-            //
-        }
+        UserDefaults.standard.synchronize()
+        //
         collectionView.reloadData()
     }
 }

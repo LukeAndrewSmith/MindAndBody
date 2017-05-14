@@ -248,9 +248,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             } else if backgroundIndex == backgroundImageArray.count {
                 //
                 backgroundImageView.layer.borderWidth = 1
-                backgroundImageView.layer.borderColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0).cgColor
+                backgroundImageView.layer.borderColor = colour2.cgColor
                 //
-                backgroundImageView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+                backgroundImageView.backgroundColor = colour1
             
             // If red-orange background
             }            
