@@ -278,7 +278,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="whu-F8-a7E">
-                                            <rect key="frame" x="152" y="47" width="72.5" height="88"/>
+                                            <rect key="frame" x="151.5" y="47" width="72.5" height="88"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconTop" translatesAutoresizingMaskIntoConstraints="NO" id="ngN-Zn-rLm">
                                                     <rect key="frame" x="14.5" y="0.0" width="44" height="44"/>
@@ -324,6 +324,8 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="logoView" destination="ngN-Zn-rLm" id="2Kx-B1-Nr5"/>
+                                    <outlet property="menuButton" destination="dbZ-wn-sNg" id="bXv-QB-1gK"/>
+                                    <outlet property="stackViewTitle" destination="whu-F8-a7E" id="T7Q-DX-5mG"/>
                                     <outlet property="titleLabel" destination="hE2-Hf-aMc" id="B0n-TW-fk3"/>
                                 </connections>
                             </tableViewCell>
@@ -5897,12 +5899,12 @@
         <image name="Tricep" width="375" height="375"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="GFO-EU-4MD"/>
         <segue reference="Fog-TG-G84"/>
+        <segue reference="gHI-x8-z0O"/>
+        <segue reference="AI0-jj-t3k"/>
         <segue reference="lsr-M5-arq"/>
         <segue reference="gOe-Qm-Eka"/>
-        <segue reference="AI0-jj-t3k"/>
-        <segue reference="GFO-EU-4MD"/>
-        <segue reference="gHI-x8-z0O"/>
-        <segue reference="M72-ar-DyO"/>
+        <segue reference="TCQ-9e-eZH"/>
     </inferredMetricsTieBreakers>
 </document>

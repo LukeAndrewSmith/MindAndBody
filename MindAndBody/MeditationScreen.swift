@@ -140,7 +140,7 @@ class MeditationScreen: UIViewController {
         
         
         //
-        // Title Colours and Blurs
+        // Colours
         //
         let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
         //

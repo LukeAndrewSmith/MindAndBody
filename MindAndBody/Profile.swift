@@ -21,7 +21,9 @@ class headerCell: UITableViewCell {
         
     @IBOutlet weak var logoView: UIImageView!
     
+    @IBOutlet weak var menuButton: UIButton!
     
+    @IBOutlet weak var stackViewTitle: UIStackView!
 }
 
 // Navigation Cell
@@ -147,6 +149,15 @@ class Profile: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let blur4 = UIVisualEffectView()
+        let blurE4 = UIBlurEffect(style: .dark)
+        blur4.effect = blurE4
+        blur4.frame = UIApplication.shared.statusBarFrame
+        blur4.isUserInteractionEnabled = false
+        //
+        UIApplication.shared.keyWindow?.addSubview(blur4)
+        //insertSubview(backgroundViewSelection, belowSubview: selectionView)
+        
         // Background Image
         backgroundImageView.frame = UIScreen.main.bounds
         backgroundImageView.contentMode = .scaleAspectFill
@@ -160,6 +171,7 @@ class Profile: UITableViewController{
         }
         //
         self.tableView.backgroundView = backgroundImageView
+
         
         // Initial TableView Position
         tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
@@ -472,6 +484,11 @@ class Profile: UITableViewController{
 //        }
 }
     
+    // Blurs
+    let blur = UIVisualEffectView()
+    let blur2 = UIVisualEffectView()
+
+    
     // Cell for row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
@@ -481,13 +498,54 @@ class Profile: UITableViewController{
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! headerCell
             //
             cell.titleLabel.text = NSLocalizedString("profile", comment: "")
-            cell.titleLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             //
             cell.contentView.backgroundColor = .clear
             //
-            cell.logoView.tintColor = colour1
-            //
             cell.selectionStyle = .none
+            
+            //
+            // Blurs
+            blur.removeFromSuperview()
+            let blurE = UIBlurEffect(style: .dark)
+            blur.effect = blurE
+            let vibrancyE = UIVibrancyEffect(blurEffect: blurE)
+            blur.effect = vibrancyE
+            blur.frame = CGRect(x: 0, y: 0, width: cell.titleLabel!.frame.size.width * 1.1, height: cell.titleLabel!.frame.size.height * 0.8)
+            blur.center.x = cell.stackViewTitle.center.x
+            blur.center.y = cell.stackViewTitle.center.y + (cell.stackViewTitle.frame.size.height / 4)
+            blur.layer.cornerRadius = cell.titleLabel.frame.size.height / 3
+            blur.clipsToBounds = true
+            blur.isUserInteractionEnabled = false
+            cell.insertSubview(blur, at: 0)
+            //
+//            blur2.removeFromSuperview()
+//            let blurE2 = UIBlurEffect(style: .dark)
+//            blur2.effect = blurE2
+//            let vibrancyE2 = UIVibrancyEffect(blurEffect: blurE2)
+//            blur2.effect = vibrancyE2
+//            blur2.frame = CGRect(x: 0, y: cell.stackViewTitle.frame.minY, width: cell.logoView!.frame.size.width, height: cell.logoView!.frame.size.height * 1.5)
+//            blur2.center.x = cell.stackViewTitle.center.x
+//            //blur2.center.y = cell.stackViewTitle.center.y - (cell.stackViewTitle.frame.size.height / 4)
+//            blur2.layer.cornerRadius = cell.logoView.frame.size.height / 2
+//            blur2.clipsToBounds = true
+//            blur2.isUserInteractionEnabled = false
+//            cell.insertSubview(blur2, at: 1)
+            // Colours
+            //
+            switch backgroundIndex {
+            // All Black
+            case 3,backgroundImageArray.count:
+                cell.titleLabel.textColor = colour2
+                cell.logoView.tintColor = colour2
+                cell.menuButton.tintColor = colour2
+            // All White
+            case 0,2,3,4,5,6:
+                cell.titleLabel.textColor = colour1
+                cell.logoView.tintColor = colour1
+                cell.menuButton.tintColor = colour1
+            //
+            default: break
+            }
             //
             return cell
         //
