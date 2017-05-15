@@ -62,10 +62,14 @@ class profileMindCell: UITableViewCell {
 //
 // Profile Class --------------------------------------------------------------------------------------------------------------------------------
 //
-class Profile: UITableViewController{
+class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //Outlets
     @IBOutlet weak var MyPreferencesNavigationBar: UINavigationItem!
+    
+    //
+    @IBOutlet weak var tableView: UITableView!
+    
     
     // Background Colour View
     let backView = UIView()
@@ -121,11 +125,33 @@ class Profile: UITableViewController{
 //
 // View will appear --------------------------------------------------------------------------------------------------------
 //
+    var addedToApplication = false
     override func viewWillAppear(_ animated: Bool) {
         //
         tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        
+        
+        if addedToApplication == false {
+            let blurE4 = UIBlurEffect(style: .dark)
+            self.blur4.effect = blurE4
+            self.blur4.frame = UIApplication.shared.statusBarFrame
+            self.blur4.isUserInteractionEnabled = false
+            //
+            view.insertSubview(blur4, aboveSubview: tableView)
+            //
+        }
     }
     
+//
+// View Did appear --------------------------------------------------------------------------------------------------------
+//
+    let blur4 = UIVisualEffectView()
+    //
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+       
+    }
     
 //
 // View will dissapear --------------------------------------------------------------------------------------------------------
@@ -134,9 +160,14 @@ class Profile: UITableViewController{
         super.viewWillDisappear(animated)
         //
         scrollUpButton.removeFromSuperview()
+        
+        if addedToApplication == true {
+        //
+        blur4.removeFromSuperview()
+        }
     }
     
-    
+
     
 //
 // View did load --------------------------------------------------------------------------------------------------------
@@ -149,14 +180,7 @@ class Profile: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let blur4 = UIVisualEffectView()
-        let blurE4 = UIBlurEffect(style: .dark)
-        blur4.effect = blurE4
-        blur4.frame = UIApplication.shared.statusBarFrame
-        blur4.isUserInteractionEnabled = false
-        //
-        UIApplication.shared.keyWindow?.addSubview(blur4)
-        //insertSubview(backgroundViewSelection, belowSubview: selectionView)
+        
         
         // Background Image
         backgroundImageView.frame = UIScreen.main.bounds
@@ -249,10 +273,11 @@ class Profile: UITableViewController{
     }
     
     
+    
 //
 // Watch scroll view --------------------------------------------------------------------------------------------------------
 //
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //
         if scrollView == tableView {
             //
@@ -287,7 +312,7 @@ class Profile: UITableViewController{
 // Table View --------------------------------------------------------------------------------------------------------
 //
     // Number of sections
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
@@ -333,7 +358,7 @@ class Profile: UITableViewController{
 //    
     
     // Number of row
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             //
 
 //        switch section{
@@ -409,7 +434,7 @@ class Profile: UITableViewController{
 }
     
     // Height for row
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
         switch indexPath.row {
         case 0:
@@ -487,10 +512,11 @@ class Profile: UITableViewController{
     // Blurs
     let blur = UIVisualEffectView()
     let blur2 = UIVisualEffectView()
+    let blur3 = UIVisualEffectView()
 
     
     // Cell for row
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         switch indexPath.row {
         //
@@ -516,25 +542,42 @@ class Profile: UITableViewController{
             blur.layer.cornerRadius = cell.titleLabel.frame.size.height / 3
             blur.clipsToBounds = true
             blur.isUserInteractionEnabled = false
-            cell.insertSubview(blur, at: 0)
+            cell.addSubview(blur)
+            cell.sendSubview(toBack: blur)
             //
-//            blur2.removeFromSuperview()
-//            let blurE2 = UIBlurEffect(style: .dark)
-//            blur2.effect = blurE2
-//            let vibrancyE2 = UIVibrancyEffect(blurEffect: blurE2)
-//            blur2.effect = vibrancyE2
-//            blur2.frame = CGRect(x: 0, y: cell.stackViewTitle.frame.minY, width: cell.logoView!.frame.size.width, height: cell.logoView!.frame.size.height * 1.5)
-//            blur2.center.x = cell.stackViewTitle.center.x
-//            //blur2.center.y = cell.stackViewTitle.center.y - (cell.stackViewTitle.frame.size.height / 4)
-//            blur2.layer.cornerRadius = cell.logoView.frame.size.height / 2
-//            blur2.clipsToBounds = true
-//            blur2.isUserInteractionEnabled = false
-//            cell.insertSubview(blur2, at: 1)
+            blur2.removeFromSuperview()
+            let blurE2 = UIBlurEffect(style: .dark)
+            blur2.effect = blurE2
+            let vibrancyE2 = UIVibrancyEffect(blurEffect: blurE2)
+            blur2.effect = vibrancyE2
+            blur2.frame = CGRect(x: 0, y: 0, width: cell.logoView!.frame.size.width * 1.1, height: cell.logoView!.frame.size.height * 1.1)
+            blur2.center.x = cell.stackViewTitle.center.x
+            blur2.center.y = cell.stackViewTitle.center.y - (cell.stackViewTitle.frame.size.height / 4)
+            blur2.layer.cornerRadius = cell.logoView.frame.size.height / 2
+            blur2.clipsToBounds = true
+            blur2.isUserInteractionEnabled = false
+            cell.addSubview(blur2)
+            cell.sendSubview(toBack: blur2)
+            
+            //
+            blur3.removeFromSuperview()
+            let blurE3 = UIBlurEffect(style: .dark)
+            blur3.effect = blurE3
+            let vibrancyE3 = UIVibrancyEffect(blurEffect: blurE3)
+            blur3.effect = vibrancyE3
+            blur3.frame = CGRect(x: 0, y: 0, width: cell.menuButton.bounds.width * 0.7, height: cell.menuButton.bounds.height * 0.7)
+            blur3.center = cell.menuButton.center
+            blur3.layer.cornerRadius = cell.menuButton.frame.size.height * 0.35
+            blur3.clipsToBounds = true
+            blur3.isUserInteractionEnabled = false
+            cell.addSubview(blur3)
+            cell.sendSubview(toBack: blur3)
+            //
             // Colours
             //
             switch backgroundIndex {
             // All Black
-            case 3,backgroundImageArray.count:
+            case 1,3,backgroundImageArray.count:
                 cell.titleLabel.textColor = colour2
                 cell.logoView.tintColor = colour2
                 cell.menuButton.tintColor = colour2
@@ -919,7 +962,7 @@ class Profile: UITableViewController{
 //
 // Event Handlers --------------------------------------------------------------------------------------------------------
 //
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     
         // Calculate the real sub-section index and row index
