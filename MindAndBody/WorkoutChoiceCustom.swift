@@ -571,7 +571,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             removePreset.alpha = 0
             //
             tableViewConstraint.constant = view.frame.size.height - 98
-            tableViewConstraint1.constant = -49.25
+            tableViewConstraint1.constant = -49
             //
             seperatorConstraint.constant = -49
             //
@@ -761,7 +761,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                 self.removePreset.alpha = 1
                 //
                 self.tableViewConstraint.constant = 49
-                self.tableViewConstraint1.constant = 49.25
+                self.tableViewConstraint1.constant = 49
                 //
                 self.seperatorConstraint.constant = 49
                 //
@@ -846,7 +846,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                     self.removePreset.alpha = 0
                     //
                     self.tableViewConstraint.constant = self.view.frame.size.height - 98
-                    self.tableViewConstraint1.constant = -49.25
+                    self.tableViewConstraint1.constant = -49
                     //
                     self.seperatorConstraint.constant = -49
                     //
@@ -1260,7 +1260,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                         //
                     }, completion: nil)
                     // Position
-                    UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
                         //
                         self.backgroundViewExpanded.alpha = 0.7
@@ -1285,7 +1285,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                             //
                         }, completion: nil)
                         // Position
-                        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                             self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
                             //
                             self.backgroundViewExpanded.alpha = 0.7
@@ -1320,7 +1320,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                             //
                         }, completion: nil)
                         // Position
-                        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                             //
                             self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
                             self.setsRepsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
@@ -1352,7 +1352,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                 //
                 defaults.synchronize()
                 // Remove Table
-                UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     self.movementsTableView.alpha = 0
                     //
                     self.backgroundViewExpanded.alpha = 0
@@ -1492,7 +1492,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     // Add movement table background (dismiss table)
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.movementsTableView.alpha = 0
             self.setsRepsView.alpha = 0
             //
@@ -1543,7 +1543,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         //
         defaults.synchronize()
         //
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.setsRepsView.alpha = 0
             //
             self.backgroundViewExpanded.alpha = 0

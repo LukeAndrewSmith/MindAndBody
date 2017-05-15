@@ -21,10 +21,7 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
     
     //
     // Retreive Arrays ---------------------------------------------------------------------------------------------------------
-    //
-    // Session Type
-    var sessionType = Int()
-    
+    //    
     // Session Screen Index
     //
     var sessionScreenIndex = 0
@@ -39,6 +36,7 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
     
     // Demonstration Array
     var demonstrationArray: [[UIImage]] = []
+    var animationDurationArray: [Double] = []
     
     // Target Area Array
     var targetAreaArray: [UIImage] = []
@@ -168,15 +166,17 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         //
         backButton.tintColor = .clear
         
+        
         // Images
         //
         // Demonstration Image
+        // LEAVING POSSIBILITY OPEN TO ADD DEMONSTRATION IMAGES
         demonstrationImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         imageScroll.addSubview(demonstrationImage)
         //
         let imageSwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
         imageSwipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        demonstrationImage.addGestureRecognizer(imageSwipeLeft)
+        //demonstrationImage.addGestureRecognizer(imageSwipeLeft)
         demonstrationImage.isUserInteractionEnabled = true
         
         // Body Image
@@ -352,15 +352,15 @@ class YogaScreen: UIViewController, UIScrollViewDelegate, UIPickerViewDelegate, 
         
         
         //
-        bodyImage.image = targetAreaArray[sessionScreenIndex]
+        //bodyImage.image = targetAreaArray[sessionScreenIndex]
         // Scroll
         imageScroll.contentOffset.x = 0
         //
         demonstrationImageButton.alpha = 0
         demonstrationImageButton.isEnabled = false
         //
-        targetAreaButton.alpha = 1
-        targetAreaButton.isEnabled = true
+        targetAreaButton.alpha = 0
+        targetAreaButton.isEnabled = false
         
         // Timer to Back
         self.view.bringSubview(toFront: timerButton)

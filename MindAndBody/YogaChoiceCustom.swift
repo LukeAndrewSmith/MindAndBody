@@ -1,8 +1,8 @@
 //
-//  StretchingChoiceCustom.swift
+//  YogaChoiceCustom.swift
 //  MindAndBody
 //
-//  Created by Luke Smith on 18.04.17.
+//  Created by Luke Smith on 15.05.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -11,9 +11,9 @@ import UIKit
 
 
 //
-// Stretching Choice Custom --------------------------------------------------------------------------------------
+// Yoga Choice Custom --------------------------------------------------------------------------------------
 //
-class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     //
@@ -22,631 +22,459 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     // Custom Arrays
     //
     var presetTexts: [String] = []
-    // stretchingPresetsCustom, SetsArray, RepsArray
+    // YogaPresetsCustom, BreathArray
     var emptyArrayOfArrays: [[Int]] = []
     // Selected row
     var selectedRow = Int()
     
     //
-    var stretchingArray: [String] = []
+    var yogaArray: [String] = []
     //
-    var demonstrationArray: [UIImage] = []
+    var demonstrationArray: [[UIImage]] = []
     //
     var targetAreaArray: [UIImage] = []
     //
     var explanationArray: [String] = []
     
     //
-    var setsArray: [Int] = []
+    var breathsArray: [String] = []
     //
-    var repsArray: [String] = []
-    
     
     //
-    // Stretching Arrays -----------------------------------------------------------------------------------------------
+    // Yoga Arrays -----------------------------------------------------------------------------------------------
     //
-    // Table View Section Title Array
+    // TableView Section Array
     var tableViewSectionArray: [String] =
         [
-            "recommended",
-            "jointRotation",
-            "foamRoll",
-            "backStretch",
-            "sides",
-            "neck",
-            "arms",
-            "pecs",
-            "shoulders",
-            "hipsaGlutes",
-            "calves",
-            "hamstrings",
-            "quads"
-    ]
+            "standing",
+            "handElbow",
+            "seated",
+            "lying",
+            "handStands"
+        ]
     
-    // Stretching Post Workout Array
+    // Full Key Array
     var fullKeyArray: [[Int]] =
         [
-            // Recommended
-            [0],
-            // Joint Rotations
-            [1,
-             2,
-             3,
-             4,
-             5,
-             6,
-             7,
-             8],
-            // Foam/Ball Roll
-            [9,
-             10,
-             11,
-             12,
-             13,
-             14,
-             15,
-             16,
-             17,
-             18],
-            // Back
-            [19,
-             20,
-             21,
-             22,
-             23,
-             24,
-             25,
-             26,
-             27,
-             28],
-            // Obliques(Sides)
-            [29,
-             30,
-             31],
-            // Neck
-            [32,
-             33,
-             34,
-             35,
-             36,
-             37],
-            // Arms
-            [38,
-             39,
-             40],
-            // Pecs
-            [41],
-            // Shoulders
-            [42,
-             43,
-             44,
-             45,
-             46,
-             47],
-            // Hips and Glutes
-            [48,
-             49,
-             50,
-             51,
-             52,
-             53,
-             54],
-            // Calves
-            [55],
-            // Hamstrings
-            [56,
-             57,
-             58,
-             59,
-             60,
-             61],
-            // Quads
-            [62,
-             63]
+            // Standing
+            [0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22],
+            // Hand/Elbows and Feet/Knees
+            [23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40],
+            // Seated
+            [41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57],
+            // Lying
+            [58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69],
+            // Hand Stands
+            [70,
+            71,
+            72]
     ]
     
-    // Stretching Post Workout Array
-    var stretchingMovementsDictionary: [Int : String] =
+    // Yoga Poses
+    let yogaPosesDictionary: [Int: String] =
         [
-            // Recommended
-            0: "5minCardioL",
-            // Joint Rotations
-            1: "wrist",
-            2: "elbow",
-            3: "shoulderR",
-            4: "neckR",
-            5: "waist",
-            6: "hip",
-            7: "knees",
-            8: "ankles",
-            // Foam/Ball Roll
-            9: "backf",
-            10: "thoracicSpine",
-            11: "lat",
-            12: "pecDelt",
-            13: "rearDelt",
-            14: "quadf",
-            15: "adductorf",
-            16: "hamstringf",
-            17: "glutef",
-            18: "calvef",
-            // Back
-            19: "catCow",
-            20: "upwardsDog",
-            21: "extendedPuppy",
-            22: "childPose",
-            23: "staffPose",
-            24: "pelvicTilt",
-            25: "kneeToChest",
-            26: "legDrop",
-            27: "seatedTwist",
-            28: "legsWall",
-            // Obliques(Sides)
-            29: "sideLean",
-            30: "extendedSideAngle",
-            31: "seatedSide",
-            // Neck
-            32: "rearNeck",
-            33: "rearNeckHand",
-            34: "seatedLateral",
-            35: "neckRotator",
-            36: "scalene",
-            37: "headRoll",
-            // Arms
-            38: "forearmStretch",
-            39: "tricepStretch",
-            40: "bicepStretch",
-            // Pecs
-            41: "pecStretch",
-            // Shoulders
-            42: "shoulderRoll",
-            43: "behindBackTouch",
-            44: "frontDelt",
-            45: "lateralDelt",
-            46: "rearDelt",
-            47: "rotatorCuff",
-            // Hips and Glutes
-            48: "squatHold",
-            49: "groinStretch",
-            50: "butterflyPose",
-            51: "lungeStretch",
-            52: "threadTheNeedle",
-            53: "pigeonPose",
-            54: "seatedGlute",
-            // Calves
-            55: "calveStretch",
-            // Hamstrings
-            56: "standingHamstring",
-            57: "standingOneLegHamstring",
-            58: "singleLegStanding",
-            59: "downWardsDog",
-            60: "singleLegHamstring",
-            61: "twoLegHamstring",
-            // Quads
-            62: "lungeStretchWall",
-            63: "QuadStretch"
+            // Standing
+            0: "upwardsSalute",
+            1: "mountain",
+            2: "tree",
+            3: "extendedToeGrab",
+            4: "eagle",
+            5: "chair",
+            6: "lordOfDance",
+            7: "warrior1",
+            8: "warrior2",
+            9: "warrior3",
+            10: "halfMoon",
+            11: "extendedTriangle",
+            12: "extendedSideAngleY",
+            13: "revolvedSideAngle",
+            14: "revolvedTriangle",
+            15: "halfForwardBend",
+            16: "forwardBend",
+            17: "wideLeggedForwardBend",
+            18: "intenseSide",
+            19: "gate",
+            20: "highLunge",
+            21: "lowLungeY",
+            22: "deepSquat",
+            // Hand/Elbows and Feet/Knees
+            23: "dolphin",
+            24: "downwardDog",
+            25: "halfDownwardDog",
+            26: "plank",
+            27: "dolphinPlank",
+            28: "fourLimbedStaff",
+            29: "sidePlank",
+            30: "cat",
+            31: "cow",
+            32: "catCow",
+            33: "halfMonkey",
+            34: "childPose",
+            35: "wildThing",
+            36: "upwardBow",
+            37: "bridge",
+            38: "upwardPlank",
+            39: "extendedPuppy",
+            40: "upwardDog",
+            // Seated
+            41: "crossLeg", // Pic Only
+            42: "lotus", // Pic Only
+            43: "fireLog",  // Pic Only
+            44: "boat",
+            45: "cowFace", // Pic Only
+            46: "hero", // Pic Only
+            47: "butterfly", // Pic Only
+            48: "staffPose", // Pic Only
+            49: "seatedForwardBend", // Pic Only
+            50: "vForwardBend",
+            51: "vSideBend",
+            52: "halfVForwardBend",
+            53: "halfVSideBend",
+            54: "marichi1",
+            55: "marichi3",
+            56: "frontSplit", // Pic Only
+            57: "sideSplit", // Pic Only
+            // Lying
+            58: "corpse",
+            59: "fish",
+            60: "happyBaby",
+            61: "lyingButterfly",
+            62: "legRaiseToe",
+            63: "threadTheNeedle",
+            64: "shoulderStand",
+            65: "plow",
+            66: "cobra",
+            67: "sphinx",
+            68: "pigeon",
+            69: "spineRolling",
+            // Hand Stands
+            70: "handstand",
+            71: "headstand",
+            72: "forearmStand"
     ]
     
-    // Screen Arrays
-    //
-    var setsDictionary: [Int : Int] =
+    // Demonstration Poses
+    let demonstrationDictionary: [Int: [UIImage]] =
         [
-            // Recommended
-            0: 1,
-            // Joint Rotations
-            1: 1,
-            2: 1,
-            3: 1,
-            4: 1,
-            5: 1,
-            6: 1,
-            7: 1,
-            8: 1,
-            // Foam/Ball Roll
-            9: 1,
-            10: 3,
-            11: 1,
-            12: 1,
-            13: 1,
-            14: 1,
-            15: 1,
-            16: 1,
-            17: 1,
-            18: 1,
-            // Back
-            19: 1,
-            20: 1,
-            21: 1,
-            22: 1,
-            23: 1,
-            24: 1,
-            25: 1,
-            26: 1,
-            27: 1,
-            28: 1,
-            // Obliques(Sides)
-            29: 1,
-            30: 1,
-            31: 1,
-            // Neck
-            32: 1,
-            33: 2,
-            34: 1,
-            35: 1,
-            36: 1,
-            37: 1,
-            // Arms
-            38: 1,
-            39: 1,
-            40: 1,
-            // Pecs
-            41: 1,
-            // Shoulders
-            42: 1,
-            43: 1,
-            44: 1,
-            45: 1,
-            46: 1,
-            47: 1,
-            // Hips and Glutes
-            48: 2,
-            49: 1,
-            50: 1,
-            51: 1,
-            52: 1,
-            53: 1,
-            54: 1,
-            // Calves
-            55: 1,
-            // Hamstrings
-            56: 3,
-            57: 3,
-            58: 1,
-            59: 1,
-            60: 1,
-            61: 1,
-            // Quads
-            62: 1,
-            63: 1
+            // Standing
+            0: [#imageLiteral(resourceName: "Test 2")],
+            1: [#imageLiteral(resourceName: "Test 2")],
+            2: [#imageLiteral(resourceName: "tree"), #imageLiteral(resourceName: "tree1"), #imageLiteral(resourceName: "tree2"), #imageLiteral(resourceName: "tree3"), #imageLiteral(resourceName: "tree4"), #imageLiteral(resourceName: "tree5"), #imageLiteral(resourceName: "tree6")],
+            3: [#imageLiteral(resourceName: "extendedToeGrab"), #imageLiteral(resourceName: "extendedToeGrab1"), #imageLiteral(resourceName: "extendedToeGrab2"), #imageLiteral(resourceName: "extendedToeGrab3"), #imageLiteral(resourceName: "extendedToeGrab4"), #imageLiteral(resourceName: "extendedToeGrab5")],
+            4: [#imageLiteral(resourceName: "eagle"), #imageLiteral(resourceName: "eagle1"), #imageLiteral(resourceName: "eagle2"), #imageLiteral(resourceName: "eagle3"), #imageLiteral(resourceName: "eagle4"), #imageLiteral(resourceName: "eagle5"), #imageLiteral(resourceName: "eagle6"), #imageLiteral(resourceName: "eagle7")],
+            5: [#imageLiteral(resourceName: "chair"), #imageLiteral(resourceName: "chair1"), #imageLiteral(resourceName: "chair2"), #imageLiteral(resourceName: "chair3"), #imageLiteral(resourceName: "chair4"), #imageLiteral(resourceName: "chair5")],
+            6: [#imageLiteral(resourceName: "lordOfDance"), #imageLiteral(resourceName: "lordOfDance1"), #imageLiteral(resourceName: "lordOfDance2"), #imageLiteral(resourceName: "lordOfDance3"), #imageLiteral(resourceName: "lordOfDance4"), #imageLiteral(resourceName: "lordOfDance5"), #imageLiteral(resourceName: "lordOfDance6"), #imageLiteral(resourceName: "lordOfDance7")],
+            7: [#imageLiteral(resourceName: "Test 2")],
+            8: [#imageLiteral(resourceName: "Test 2")],
+            9: [#imageLiteral(resourceName: "warrior3"), #imageLiteral(resourceName: "warrior31"), #imageLiteral(resourceName: "warrior32"), #imageLiteral(resourceName: "warrior33"), #imageLiteral(resourceName: "warrior34"), #imageLiteral(resourceName: "warrior35"), #imageLiteral(resourceName: "warrior36")],
+            10: [#imageLiteral(resourceName: "Test 2")],
+            11: [#imageLiteral(resourceName: "Test 2")],
+            12: [#imageLiteral(resourceName: "extendedSideAngle"), #imageLiteral(resourceName: "extendedSideAngle1"), #imageLiteral(resourceName: "extendedSideAngle2"), #imageLiteral(resourceName: "extendedSideAngle3"), #imageLiteral(resourceName: "extendedSideAngle4"), #imageLiteral(resourceName: "extendedSideAngle5"), #imageLiteral(resourceName: "extendedSideAngle6")],
+            13: [#imageLiteral(resourceName: "revolvedSideAngle"), #imageLiteral(resourceName: "revolvedSideAngle1"), #imageLiteral(resourceName: "revolvedSideAngle2"), #imageLiteral(resourceName: "revolvedSideAngle3"), #imageLiteral(resourceName: "revolvedSideAngle4"), #imageLiteral(resourceName: "revolvedSideAngle5"), #imageLiteral(resourceName: "revolvedSideAngle6")],
+            14: [#imageLiteral(resourceName: "revolvedTriangle"), #imageLiteral(resourceName: "revolvedTriangle1"), #imageLiteral(resourceName: "revolvedTriangle2"), #imageLiteral(resourceName: "revolvedTriangle3"), #imageLiteral(resourceName: "revolvedTriangle4"), #imageLiteral(resourceName: "revolvedTriangle5"), #imageLiteral(resourceName: "revolvedTriangle6")],
+            15: [#imageLiteral(resourceName: "Test 2")],
+            16: [#imageLiteral(resourceName: "Test 2")],
+            17: [#imageLiteral(resourceName: "Test 2")],
+            18: [#imageLiteral(resourceName: "Test 2")],
+            19: [#imageLiteral(resourceName: "Test 2")],
+            20: [#imageLiteral(resourceName: "Test 2")],
+            21: [#imageLiteral(resourceName: "Test 2")],
+            22: [#imageLiteral(resourceName: "deepSquat"), #imageLiteral(resourceName: "deepSquat1"), #imageLiteral(resourceName: "deepSquat2"), #imageLiteral(resourceName: "deepSquat3"), #imageLiteral(resourceName: "deepSquat4"), #imageLiteral(resourceName: "deepSquat5")],
+            // Hand/Elbows and Feet/Knees
+            23: [#imageLiteral(resourceName: "dolphin"), #imageLiteral(resourceName: "dolphin1"), #imageLiteral(resourceName: "dolphin2"), #imageLiteral(resourceName: "dolphin3")],
+            24: [#imageLiteral(resourceName: "downwardDog"), #imageLiteral(resourceName: "downwardDog1"), #imageLiteral(resourceName: "downwardDog2"), #imageLiteral(resourceName: "downwardDog3"), #imageLiteral(resourceName: "downwardDog4")],
+            25: [#imageLiteral(resourceName: "halfDownwardDog"), #imageLiteral(resourceName: "halfDownwardDog1"), #imageLiteral(resourceName: "halfDownwardDog2"), #imageLiteral(resourceName: "halfDownwardDog3"), #imageLiteral(resourceName: "halfDownwardDog4")],
+            26: [#imageLiteral(resourceName: "Test 2")],
+            27: [#imageLiteral(resourceName: "Test 2")],
+            28: [#imageLiteral(resourceName: "Test 2")],
+            29: [#imageLiteral(resourceName: "sidePlank"), #imageLiteral(resourceName: "sidePlank1"), #imageLiteral(resourceName: "sidePlank2"), #imageLiteral(resourceName: "sidePlank3"), #imageLiteral(resourceName: "sidePlank4")],
+            30: [#imageLiteral(resourceName: "Test 2")],
+            31: [#imageLiteral(resourceName: "Test 2")],
+            32: [#imageLiteral(resourceName: "catCow"), #imageLiteral(resourceName: "catCow1"), #imageLiteral(resourceName: "catCow2"), #imageLiteral(resourceName: "catCow1"), #imageLiteral(resourceName: "catCow3"), #imageLiteral(resourceName: "catCow1")],
+            33: [#imageLiteral(resourceName: "Test 2")],
+            34: [#imageLiteral(resourceName: "childPose"), #imageLiteral(resourceName: "childPose1"), #imageLiteral(resourceName: "childPose2"), #imageLiteral(resourceName: "childPose3")],
+            35: [#imageLiteral(resourceName: "Test 2")],
+            36: [#imageLiteral(resourceName: "Test 2")],
+            37: [#imageLiteral(resourceName: "bridge"), #imageLiteral(resourceName: "bridge1"), #imageLiteral(resourceName: "bridge2"), #imageLiteral(resourceName: "bridge3")],
+            38: [#imageLiteral(resourceName: "upwardPlank"), #imageLiteral(resourceName: "upwardPlank1"), #imageLiteral(resourceName: "upwardPlank2"), #imageLiteral(resourceName: "upwardPlank3"), #imageLiteral(resourceName: "upwardPlank4"), #imageLiteral(resourceName: "upwardPlank5")],
+            39: [#imageLiteral(resourceName: "extendedPuppy"), #imageLiteral(resourceName: "extendedPuppy1"), #imageLiteral(resourceName: "extendedPuppy2"), #imageLiteral(resourceName: "extendedPuppy3"), #imageLiteral(resourceName: "extendedPuppy4"), #imageLiteral(resourceName: "extendedPuppy5")],
+            40: [#imageLiteral(resourceName: "Test 2")],
+            // Seated
+            41: [#imageLiteral(resourceName: "Test 2")],
+            42: [#imageLiteral(resourceName: "Test 2")],
+            43: [#imageLiteral(resourceName: "Test 2")],
+            44: [#imageLiteral(resourceName: "Test 2")],
+            45: [#imageLiteral(resourceName: "Test 2")],
+            46: [#imageLiteral(resourceName: "Test 2")],
+            47: [#imageLiteral(resourceName: "Test 2")],
+            48: [#imageLiteral(resourceName: "Test 2")],
+            49: [#imageLiteral(resourceName: "Test 2")],
+            50: [#imageLiteral(resourceName: "Test 2")],
+            51: [#imageLiteral(resourceName: "vSideBend"), #imageLiteral(resourceName: "vSideBend1"), #imageLiteral(resourceName: "vSideBend2"), #imageLiteral(resourceName: "vSideBend3"), #imageLiteral(resourceName: "vSideBend4"), #imageLiteral(resourceName: "vSideBend5")],
+            52: [#imageLiteral(resourceName: "halfVForwardBend"), #imageLiteral(resourceName: "halfVForwardBend1"), #imageLiteral(resourceName: "halfVForwardBend2"), #imageLiteral(resourceName: "halfVForwardBend3"), #imageLiteral(resourceName: "halfVForwardBend4"), #imageLiteral(resourceName: "halfVForwardBend5"), #imageLiteral(resourceName: "halfVForwardBend6")],
+            53: [#imageLiteral(resourceName: "halfVSideBend"), #imageLiteral(resourceName: "halfVSideBend1"),
+                 #imageLiteral(resourceName: "halfVSideBend2"), #imageLiteral(resourceName: "halfVSideBend3"), #imageLiteral(resourceName: "halfVSideBend4"), #imageLiteral(resourceName: "halfVSideBend5")],
+            54: [#imageLiteral(resourceName: "marichi1"), #imageLiteral(resourceName: "marichi11"), #imageLiteral(resourceName: "marichi12"), #imageLiteral(resourceName: "marichi13"), #imageLiteral(resourceName: "marichi14"), #imageLiteral(resourceName: "marichi15"), #imageLiteral(resourceName: "marichi16"), #imageLiteral(resourceName: "marichi17")],
+            55: [#imageLiteral(resourceName: "marichi3"), #imageLiteral(resourceName: "marichi31"), #imageLiteral(resourceName: "marichi32"), #imageLiteral(resourceName: "marichi33"), #imageLiteral(resourceName: "marichi34"), #imageLiteral(resourceName: "marichi35"), #imageLiteral(resourceName: "marichi36"), #imageLiteral(resourceName: "marichi37")],
+            56: [#imageLiteral(resourceName: "Test 2")],
+            // Lying
+            57: [#imageLiteral(resourceName: "Test 2")],
+            58: [#imageLiteral(resourceName: "Test 2")],
+            59: [#imageLiteral(resourceName: "fish"), #imageLiteral(resourceName: "fish1"), #imageLiteral(resourceName: "fish2"), #imageLiteral(resourceName: "fish3"), #imageLiteral(resourceName: "fish4"), #imageLiteral(resourceName: "fish5")],
+            60: [#imageLiteral(resourceName: "Test 2")],
+            61: [#imageLiteral(resourceName: "lyingButterfly"), #imageLiteral(resourceName: "lyingButterfly1"), #imageLiteral(resourceName: "lyingButterfly2"), #imageLiteral(resourceName: "lyingButterfly3"), #imageLiteral(resourceName: "lyingButterfly4")],
+            62: [#imageLiteral(resourceName: "Test 2")],
+            63: [#imageLiteral(resourceName: "threadTheNeedle"), #imageLiteral(resourceName: "threadTheNeedle1"), #imageLiteral(resourceName: "threadTheNeedle2"), #imageLiteral(resourceName: "threadTheNeedle3"), #imageLiteral(resourceName: "threadTheNeedle4"), #imageLiteral(resourceName: "threadTheNeedle5")],
+            64: [#imageLiteral(resourceName: "Test 2")],
+            65: [#imageLiteral(resourceName: "plow"), #imageLiteral(resourceName: "plow1"), #imageLiteral(resourceName: "plow2"), #imageLiteral(resourceName: "plow3"), #imageLiteral(resourceName: "plow4")],
+            66: [#imageLiteral(resourceName: "Test 2")],
+            67: [#imageLiteral(resourceName: "Test 2")],
+            68: [#imageLiteral(resourceName: "Test 2")],
+            69: [#imageLiteral(resourceName: "spineRolling"), #imageLiteral(resourceName: "spineRolling1"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling3"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling4"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling3"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling4")],
+            // Hand Stands
+            70: [#imageLiteral(resourceName: "Test 2")],
+            71: [#imageLiteral(resourceName: "Test 2")],
+            72: [#imageLiteral(resourceName: "Test 2")]
     ]
     
-    // Reps Array
-    var repsDictionary: [Int : String] =
+    // Demonstration Animation Duration
+    let animationDurationDictionary: [Int: Double] =
         [
-            // Recommended
-            0: "5min",
-            // Joint Rotations
-            1: "10-30s",
-            2: "10-30s",
-            3: "10-30s",
-            4: "10-30s",
-            5: "10-30s",
-            6: "10-30s",
-            7: "10-30s",
-            8: "10-30s",
-            // Foam/Ball Roll
-            9: "2-7 reps",
-            10: "5-10 reps",
-            11: "2-7 reps",
-            12: "15-30s",
-            13: "15-30s",
-            14: "2-7 reps",
-            15: "2-7 reps",
-            16: "2-7 reps",
-            17: "2-7 reps",
-            18: "2-7 reps",
-            // Back
-            19: "15-20 reps",
-            20: "15-30s",
-            21: "30-60s",
-            22: "30-180s",
-            23: "30-90s",
-            24: "10-30 reps",
-            25: "30-60s",
-            26: "25-45s",
-            27: "30-60s",
-            28: "30-180s",
-            // Obliques(Sides)
-            29: "10-20s",
-            30: "15-30s",
-            31: "15-30s",
-            // Neck
-            32: "15-30s",
-            33: "5-10s",
-            34: "15-30s",
-            35: "15-30s",
-            36: "15-30s",
-            37: "20-40s",
-            // Arms
-            38: "15-30s",
-            39: "15-30s",
-            40: "15-30s",
-            // Pecs
-            41: "15-30s",
-            // Shoulders
-            42: "20-40s",
-            43: "10-20s",
-            44: "15-30s",
-            45: "15-30s",
-            46: "15-30s",
-            47: "15-30s",
-            // Hips and Glutes
-            48: "1-5min",
-            49: "5-10 reps",
-            50: "15-30s",
-            51: "15-30s",
-            52: "15-30s",
-            53: "15-45s",
-            54: "15-45s",
-            // Calves
-            55: "15-30s",
-            // Hamstrings
-            56: "10s",
-            57: "10s",
-            58: "15-30s",
-            59: "15-45s",
-            60: "15-60s",
-            61: "15-60s",
-            // Quads
-            62: "15-30s",
-            63: "15-30s"
+            // Standing
+            0: 0,
+            1: 0,
+            2: 3.5,
+            3: 3.0,
+            4: 4.0,
+            5: 3.0,
+            6: 4.0,
+            7: 0,
+            8: 0,
+            9: 3.5,
+            10: 0,
+            11: 0,
+            12: 3.5,
+            13: 3.5,
+            14: 3.5,
+            15: 0,
+            16: 0,
+            17: 0,
+            18: 0,
+            19: 0,
+            20: 0,
+            21: 0,
+            22: 3.0,
+            // Hand/Elbows and Feet/Knees
+            23: 2.0,
+            24: 2.5,
+            25: 2.5,
+            26: 0,
+            27: 0,
+            28: 0,
+            29: 2.5,
+            30: 0,
+            31: 0,
+            32: 3.0,
+            33: 0,
+            34: 2.0,
+            35: 0,
+            36: 0,
+            37: 2.0,
+            38: 3.0,
+            39: 3.0,
+            40: 0,
+            // Seated
+            41: 0,
+            42: 0,
+            43: 0,
+            44: 0,
+            45: 0,
+            46: 0,
+            47: 0,
+            48: 0,
+            49: 0,
+            50: 0,
+            51: 3.0,
+            52: 3.5,
+            53: 3.0,
+            54: 4.0,
+            55: 4.0,
+            56: 0,
+            // Lying
+            57: 0,
+            58: 0,
+            59: 3.0,
+            60: 0,
+            61: 2.5,
+            62: 0,
+            63: 3.0,
+            64: 0,
+            65: 2.5,
+            66: 0,
+            67: 0,
+            68: 0,
+            69: 5.0,
+            // Hand Stands
+            70: 0,
+            71: 0,
+            72: 0
     ]
     
-    // Demonstration Array
-    var demonstrationDictionary: [Int : UIImage] =
+    // Explanation Dictionary
+    let explanationDictionary: [Int: String] =
         [
-            // Mandatory
-            0: #imageLiteral(resourceName: "Test"),
-            // Joint Rotations
-            1: #imageLiteral(resourceName: "Wrist Rotations"),
-            2: #imageLiteral(resourceName: "Test"),
-            3: #imageLiteral(resourceName: "Test"),
-            4: #imageLiteral(resourceName: "Test"),
-            5: #imageLiteral(resourceName: "Test"),
-            6: #imageLiteral(resourceName: "Test"),
-            7: #imageLiteral(resourceName: "Test"),
-            8: #imageLiteral(resourceName: "Test"),
-            // Foam/Ball Roll
-            9: #imageLiteral(resourceName: "Test"),
-            10: #imageLiteral(resourceName: "Test"),
-            11: #imageLiteral(resourceName: "Test"),
-            12: #imageLiteral(resourceName: "Test"),
-            13: #imageLiteral(resourceName: "Test"),
-            14: #imageLiteral(resourceName: "Test"),
-            15: #imageLiteral(resourceName: "Test"),
-            16: #imageLiteral(resourceName: "Test"),
-            17: #imageLiteral(resourceName: "Test"),
-            18: #imageLiteral(resourceName: "Test"),
-            // Back
-            19: #imageLiteral(resourceName: "Cow"),
-            20: #imageLiteral(resourceName: "Upwards Dog"),
-            21: #imageLiteral(resourceName: "Extended Puppy"),
-            22: #imageLiteral(resourceName: "Childs Pose"),
-            23: #imageLiteral(resourceName: "Staff Pose"),
-            24: #imageLiteral(resourceName: "Pelvic Tilt"),
-            25: #imageLiteral(resourceName: "Knee Chest"),
-            26: #imageLiteral(resourceName: "Knee Drop"),
-            27: #imageLiteral(resourceName: "Marichis Pose"),
-            28: #imageLiteral(resourceName: "Legs Wall"),
-            // Obliques(Sides)
-            29: #imageLiteral(resourceName: "Side Bend"),
-            30: #imageLiteral(resourceName: "Extended Side Angle"),
-            31: #imageLiteral(resourceName: "Half Straddle Side Bend"),
-            // Neck
-            32: #imageLiteral(resourceName: "Test"),
-            33: #imageLiteral(resourceName: "Test"),
-            34: #imageLiteral(resourceName: "Test"),
-            35: #imageLiteral(resourceName: "Test"),
-            36: #imageLiteral(resourceName: "Test"),
-            37: #imageLiteral(resourceName: "Test"),
-            // Arms
-            38: #imageLiteral(resourceName: "Test"),
-            39: #imageLiteral(resourceName: "Test"),
-            40: #imageLiteral(resourceName: "Test"),
-            // Pecs
-            41: #imageLiteral(resourceName: "Test"),
-            // Shoulders
-            42: #imageLiteral(resourceName: "Test"),
-            43: #imageLiteral(resourceName: "Test"),
-            44: #imageLiteral(resourceName: "Test"),
-            45: #imageLiteral(resourceName: "Test"),
-            46: #imageLiteral(resourceName: "Test"),
-            47: #imageLiteral(resourceName: "Test"),
-            // Hips and Glutes
-            48: #imageLiteral(resourceName: "Test"),
-            49: #imageLiteral(resourceName: "Test"),
-            50: #imageLiteral(resourceName: "Test"),
-            51: #imageLiteral(resourceName: "Test"),
-            52: #imageLiteral(resourceName: "Test"),
-            53: #imageLiteral(resourceName: "Test"),
-            54:#imageLiteral(resourceName: "Test"),
-            // Calves
-            55: #imageLiteral(resourceName: "Test"),
-            // Hamstrings
-            56: #imageLiteral(resourceName: "Test"),
-            57: #imageLiteral(resourceName: "Test"),
-            58: #imageLiteral(resourceName: "Test"),
-            59: #imageLiteral(resourceName: "Test"),
-            60: #imageLiteral(resourceName: "Test"),
-            61: #imageLiteral(resourceName: "Test"),
-            // Quads
-            62: #imageLiteral(resourceName: "Test"),
-            63: #imageLiteral(resourceName: "Test")
+            // Standing
+            0: "upwardsSaluteE",
+            1: "mountainE",
+            2: "treeE",
+            3: "extendedToeGrabE",
+            4: "eagleE",
+            5: "chairE",
+            6: "lordOfDanceE",
+            7: "warrior1E",
+            8: "warrior2E",
+            9: "warrior3E",
+            10: "halfMoonE",
+            11: "extendedTriangleE",
+            12: "extendedSideAngleYE",
+            13: "revolvedSideAngleE",
+            14: "revolvedTriangleE",
+            15: "halfForwardBendE",
+            16: "forwardBendE",
+            17: "wideLeggedForwardBendE",
+            18: "intenseSideE",
+            19: "gateE",
+            20: "highLungeE",
+            21: "lowLungeYE",
+            22: "deepSquatE",
+            // Hand/Elbows and Feet/Knees
+            23: "dolphinE",
+            24: "downwardDogE",
+            25: "halfDownwardDogE",
+            26: "plankE",
+            27: "dolphinPlankE",
+            28: "fourLimbedStaffE",
+            29: "sidePlankE",
+            30: "catE",
+            31: "cowE",
+            32: "catCowE",
+            33: "halfMonkeyE",
+            34: "childPoseE",
+            35: "wildThingE",
+            36: "upwardBowE",
+            37: "bridgeE",
+            38: "upwardPlankE",
+            39: "extendedPuppyE",
+            40: "upwardDogE",
+            // Seated
+            41: "crossLegE",
+            42: "lotusE",
+            43: "fireLogE",
+            44: "boatE",
+            45: "cowFaceE",
+            46: "heroE",
+            47: "butterflyE",
+            48: "staffPoseE",
+            49: "seatedForwardBendE",
+            50: "vForwardBendE",
+            51: "vSideBend",
+            52: "halfVForwardBendE",
+            53: "halfVSideBendE",
+            54: "marichi1E",
+            55: "marichi3E",
+            56: "frontSplitE",
+            57: "sideSplitE",
+            // Lying
+            58: "corpseE",
+            59: "fishE",
+            60: "happyBabyE",
+            61: "lyingButterflyE",
+            62: "legRaiseToeE",
+            63: "threadTheNeedleE",
+            64: "shoulderStandE",
+            65: "plowE",
+            66: "cobraE",
+            67: "sphinxE",
+            68: "pigeonE",
+            69: "spineRollingE",
+            // Hand Stands
+            70: "handstandE",
+            71: "headstandE",
+            72: "forearmStandE"
     ]
-    
-    // Target Area Array
-    var targetAreaDictionary: [Int : UIImage] =
-        [
-            // Mandatory
-            0: #imageLiteral(resourceName: "Heart"),
-            // Joint Rotations
-            1: #imageLiteral(resourceName: "Wrist Joint"),
-            2: #imageLiteral(resourceName: "Elbow Joint"),
-            3: #imageLiteral(resourceName: "Shoulder Joint"),
-            4: #imageLiteral(resourceName: "Neck Joint"),
-            5: #imageLiteral(resourceName: "Waist Joint"),
-            6: #imageLiteral(resourceName: "Hip Joint"),
-            7: #imageLiteral(resourceName: "Knee Joint"),
-            8: #imageLiteral(resourceName: "Ankle Joint"),
-            // Foam/Ball Roll
-            9: #imageLiteral(resourceName: "Thoracic"),
-            10: #imageLiteral(resourceName: "Thoracic"),
-            11: #imageLiteral(resourceName: "Lat and Delt"),
-            12: #imageLiteral(resourceName: "Pec and Front Delt"),
-            13: #imageLiteral(resourceName: "Rear Delt"),
-            14: #imageLiteral(resourceName: "Quad"),
-            15: #imageLiteral(resourceName: "Adductor"),
-            16: #imageLiteral(resourceName: "Hamstring"),
-            17: #imageLiteral(resourceName: "Glute"),
-            18: #imageLiteral(resourceName: "Calf"),
-            // Back
-            19: #imageLiteral(resourceName: "Spine"),
-            20: #imageLiteral(resourceName: "Spine and Core"),
-            21: #imageLiteral(resourceName: "Spine"),
-            22: #imageLiteral(resourceName: "Spine"),
-            23: #imageLiteral(resourceName: "Hamstring and Lower Back"),
-            24: #imageLiteral(resourceName: "Core"),
-            25: #imageLiteral(resourceName: "Spine"),
-            26: #imageLiteral(resourceName: "Core"),
-            27: #imageLiteral(resourceName: "Core"),
-            28: #imageLiteral(resourceName: "Hamstring and Lower Back"),
-            // Obliques(Sides)
-            29: #imageLiteral(resourceName: "Oblique"),
-            30: #imageLiteral(resourceName: "Oblique"),
-            31: #imageLiteral(resourceName: "Oblique"),
-            // Neck
-            32: #imageLiteral(resourceName: "Rear Neck"),
-            33: #imageLiteral(resourceName: "Rear Neck"),
-            34: #imageLiteral(resourceName: "Lateral Neck"),
-            35: #imageLiteral(resourceName: "Neck Rotator"),
-            36: #imageLiteral(resourceName: "Neck Rotator"),
-            37: #imageLiteral(resourceName: "Neck"),
-            // Arms
-            38: #imageLiteral(resourceName: "Forearm"),
-            39: #imageLiteral(resourceName: "Tricep"),
-            40: #imageLiteral(resourceName: "Bicep"),
-            // Pecs
-            41: #imageLiteral(resourceName: "Pec"),
-            // Shoulders
-            42: #imageLiteral(resourceName: "Shoulder Joint"),
-            43: #imageLiteral(resourceName: "Shoulder Joint"),
-            44: #imageLiteral(resourceName: "Front Delt"),
-            45: #imageLiteral(resourceName: "Lateral Neck"),
-            46: #imageLiteral(resourceName: "Rear Delt"),
-            47: #imageLiteral(resourceName: "Rear Delt"),
-            // Hips and Glutes
-            48: #imageLiteral(resourceName: "Hip Joint"),
-            49: #imageLiteral(resourceName: "Adductor"),
-            50: #imageLiteral(resourceName: "Adductor"),
-            51: #imageLiteral(resourceName: "Hip Area"),
-            52: #imageLiteral(resourceName: "Piriformis"),
-            53: #imageLiteral(resourceName: "Glute"),
-            54: #imageLiteral(resourceName: "Glute"),
-            // Calves
-            55: #imageLiteral(resourceName: "Calf"),
-            // Hamstrings
-            56: #imageLiteral(resourceName: "Hamstring"),
-            57: #imageLiteral(resourceName: "Hamstring"),
-            58: #imageLiteral(resourceName: "Hamstring"),
-            59: #imageLiteral(resourceName: "Hamstring"),
-            60: #imageLiteral(resourceName: "Hamstring"),
-            61: #imageLiteral(resourceName: "Hamstring"),
-            // Quads
-            62: #imageLiteral(resourceName: "Quad"),
-            63: #imageLiteral(resourceName: "Quad")
-    ]
-    
-    // Explanation Array
-    var explanationDictionary: [Int : String] =
-        [
-            // Recommended
-            0: "5minCardioL",
-            // Joint Rotations
-            1: "wrist",
-            2: "elbow",
-            3: "shoulderR",
-            4: "neckR",
-            5: "waist",
-            6: "hip",
-            7: "knees",
-            8: "ankles",
-            // Foam/Ball Roll
-            9: "backf",
-            10: "thoracicSpine",
-            11: "lat",
-            12: "pecDelt",
-            13: "rearDelt",
-            14: "quadf",
-            15: "adductorf",
-            16: "hamstringf",
-            17: "glutef",
-            18: "calvef",
-            // Back
-            19: "catCow",
-            20: "upwardsDog",
-            21: "extendedPuppy",
-            22: "childPose",
-            23: "staffPose",
-            24: "pelvicTilt",
-            25: "kneeToChest",
-            26: "legDrop",
-            27: "seatedTwist",
-            28: "legsWall",
-            // Obliques(Sides)
-            29: "sideLean",
-            30: "extendedSideAngle",
-            31: "seatedSide",
-            // Neck
-            32: "rearNeck",
-            33: "rearNeckHand",
-            34: "seatedLateral",
-            35: "neckRotator",
-            36: "scalene",
-            37: "headRoll",
-            // Arms
-            38: "forearmStretch",
-            39: "tricepStretch",
-            40: "bicepStretch",
-            // Pecs
-            41: "pecStretch",
-            // Shoulders
-            42: "shoulderRoll",
-            43: "behindBackTouch",
-            44: "frontDelt",
-            45: "lateralDelt",
-            46: "rearDelt",
-            47: "rotatorCuff",
-            // Hips and Glutes
-            48: "squatHold",
-            49: "groinStretch",
-            50: "butterflyPose",
-            51: "lungeStretch",
-            52: "threadTheNeedle",
-            53: "pigeonPose",
-            54: "seatedGlute",
-            // Calves
-            55: "calveStretch",
-            // Hamstrings
-            56: "standingHamstring",
-            57: "standingOneLegHamstring",
-            58: "singleLegStanding",
-            59: "downWardsDog",
-            60: "singleLegHamstring",
-            61: "twoLegHamstring",
-            // Quads
-            62: "lungeStretchWall",
-            63: "QuadStretch"
-    ]
-    
     
     
     //
-    // Sets Reps Picker View
+    // Breaths
     //
-    var setsPickerArray: [Int] = [1, 2, 3, 4, 5, 6]
-    //                              // Reps                                      Rep Range§                     // Seconds
-    var repsPickerArray: [String] = ["1", "3", "5", "8", "10", "12", "15", "20", "3-5", "5-8", "8-12", "15-20", "15s", "30s", "60s", "90s"]
-    
+    var breathsPickerArray: [Int] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99]
+    //
     
     //
     // Outlets ---------------------------------------------------------------------------------------------------------------------------
@@ -689,12 +517,12 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     var movementsTableView = UITableView()
     var backgroundViewExpanded = UIButton()
     
-    // Sets and Reps Choice
-    var setsRepsView = UIView()
-    var setsRepsPicker = UIPickerView()
+    // Breaths
+    var breathsView = UIView()
+    var breathsPicker = UIPickerView()
     var okButton = UIButton()
     //
-    let setsIndicatorLabel = UILabel()
+    let breathsIndicatorLabel = UILabel()
     
     
     //
@@ -710,7 +538,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
         //
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.4, animations: {
             flash.alpha = 0
         }, completion: {(finished: Bool) -> Void in
             flash.removeFromSuperview()
@@ -725,15 +553,14 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         
         //
-        // Preset Stretchings Sessions
+        // Preset Yogas
         //
         let defaults = UserDefaults.standard
         // Custom
-        defaults.register(defaults: ["stretchingPresetsCustom" : emptyArrayOfArrays])
-        defaults.register(defaults: ["stretchingPresetTextsCustom" : presetTexts])
+        defaults.register(defaults: ["yogaPresetsCustom" : emptyArrayOfArrays])
+        defaults.register(defaults: ["yogaPresetTextsCustom" : presetTexts])
         //
-        defaults.register(defaults: ["stretchingSetsCustom" : emptyArrayOfArrays])
-        defaults.register(defaults: ["stretchingRepsCustom" : emptyArrayOfArrays])
+        defaults.register(defaults: ["yogaBreathsCustom" : emptyArrayOfArrays])
         //
         defaults.synchronize()
         
@@ -785,8 +612,8 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         
         
         // Initial Element Positions
-        let stretchingPreset = UserDefaults.standard.object(forKey: "stretchingPresetsCustom") as! [[Int]]
-        if stretchingPreset.count == 0 {
+        let yogaPreset = UserDefaults.standard.object(forKey: "yogaPresetsCustom") as! [[Int]]
+        if yogaPreset.count == 0 {
             editingButton.alpha = 0
             removePreset.alpha = 0
             //
@@ -797,7 +624,8 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             //
             beginButtonConstraint.constant = -49
         }
-    
+        
+        
         
         // TableView
         //
@@ -818,15 +646,15 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         movementsTableView.layer.cornerRadius = 5
         movementsTableView.layer.masksToBounds = true
         //
-        // Sets Reps Selection
+        // Breaths Selection
         // view
-        setsRepsView.backgroundColor = colour2
-        setsRepsView.layer.cornerRadius = 5
-        setsRepsView.layer.masksToBounds = true
+        breathsView.backgroundColor = colour2
+        breathsView.layer.cornerRadius = 5
+        breathsView.layer.masksToBounds = true
         // picker
-        setsRepsPicker.backgroundColor = colour2
-        setsRepsPicker.delegate = self
-        setsRepsPicker.dataSource = self
+        breathsPicker.backgroundColor = colour2
+        breathsPicker.delegate = self
+        breathsPicker.dataSource = self
         // ok
         okButton.backgroundColor = colour1
         okButton.setTitleColor(colour2, for: .normal)
@@ -834,14 +662,14 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
         // sets
-        setsIndicatorLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        setsIndicatorLabel.textColor = colour1
-        setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+        breathsIndicatorLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        breathsIndicatorLabel.textColor = colour1
+        breathsIndicatorLabel.text = NSLocalizedString("breathsC", comment: "")
         //
-        setsRepsView.addSubview(setsRepsPicker)
-        setsRepsView.addSubview(okButton)
-        setsRepsView.addSubview(setsIndicatorLabel)
-        setsRepsView.bringSubview(toFront: setsIndicatorLabel)
+        breathsView.addSubview(breathsPicker)
+        breathsView.addSubview(okButton)
+        breathsView.addSubview(breathsIndicatorLabel)
+        breathsView.bringSubview(toFront: breathsIndicatorLabel)
         //
         // Background View
         backgroundViewExpanded.backgroundColor = .black
@@ -873,15 +701,15 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     func beginButtonEnabled() {
         // Begin Button
         let defaults = UserDefaults.standard
-        var stretchingPreset = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+        var yogaPreset = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
         //
         if customTableView.isEditing {
             beginButton.isEnabled = false
         } else {
-            if stretchingPreset.count == 0 {
+            if yogaPreset.count == 0 {
                 beginButton.isEnabled = false
             } else {
-                if stretchingPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
+                if yogaPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
                     beginButton.isEnabled = false
                 } else {
                     beginButton.isEnabled = true
@@ -894,12 +722,12 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     func editButtonEnabled() {
         //
         let defaults = UserDefaults.standard
-        var stretchingPreset = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+        var yogaPreset = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
         //
-        if stretchingPreset.count == 0 {
+        if yogaPreset.count == 0 {
             editingButton.isEnabled = false
         } else {
-            if stretchingPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
+            if yogaPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
                 editingButton.isEnabled = false
             } else {
                 editingButton.isEnabled = true
@@ -911,9 +739,9 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     func pickerViewEnabled() {
         //
         let defaults = UserDefaults.standard
-        let stretchingPreset = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+        let yogaPreset = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
         //
-        if stretchingPreset.count == 0 {
+        if yogaPreset.count == 0 {
             sessionPickerView.isUserInteractionEnabled = false
         } else {
             sessionPickerView.isUserInteractionEnabled = true
@@ -925,17 +753,16 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     // Set Personalized Preset
     var okAction = UIAlertAction()
     //
-    @IBAction func addCustomStretchingSession(_ sender: Any) {
+    @IBAction func addCustomYoga(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
-        var presetTextArray = defaults.object(forKey: "stretchingPresetTextsCustom") as! [String]
+        var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
+        var presetTextArray = defaults.object(forKey: "yogaPresetTextsCustom") as! [String]
         //
-        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+        var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
         // Alert and Functions
         //
-        let inputTitle = NSLocalizedString("stretchingInputTitle", comment: "")
+        let inputTitle = NSLocalizedString("yogaInputTitle", comment: "")
         //
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = colour2
@@ -952,16 +779,13 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             let textField = alert?.textFields![0]
             // Update Preset Text Arrays
             presetTextArray.append((textField?.text)!)
-            defaults.set(presetTextArray, forKey: "stretchingPresetTextsCustom")
+            defaults.set(presetTextArray, forKey: "yogaPresetTextsCustom")
             // Add New empty array
             customKeyArray.append([])
-            defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
+            defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
             // Add new sets and reps arrays
-            customSetsArray.append([])
-            defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
-            //
-            customRepsArray.append([])
-            defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+            customBreathsArray.append([])
+            defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
             //
             defaults.synchronize()
             // Flash Screen
@@ -981,8 +805,6 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                 //
                 self.tableViewConstraint.constant = 49
                 self.tableViewConstraint1.constant = 49
-                //
-                self.seperatorConstraint.constant = 49
                 //
                 self.beginButtonConstraint.constant = 0
                 //
@@ -1015,18 +837,17 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     }
     
     // Remove Personalized Preset
-    @IBAction func removeCustomStretchingSession(_ sender: Any) {
+    @IBAction func removeCustomYoga(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
-        var presetTextArray = defaults.object(forKey: "stretchingPresetTextsCustom") as! [String]
+        var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
+        var presetTextArray = defaults.object(forKey: "yogaPresetTextsCustom") as! [String]
         //
-        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+        var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
         //
         let selectedRow = sessionPickerView.selectedRow(inComponent: 0)
         //
-        let inputTitle = NSLocalizedString("stretchingRemoveTitle", comment: "")
+        let inputTitle = NSLocalizedString("yogaRemoveTitle", comment: "")
         //
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = colour2
@@ -1037,16 +858,13 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             if presetTextArray.count != 0 {
                 //
                 customKeyArray.remove(at: selectedRow)
-                defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
+                defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
                 //
                 presetTextArray.remove(at: selectedRow)
-                defaults.set(presetTextArray, forKey: "stretchingPresetTextsCustom")
+                defaults.set(presetTextArray, forKey: "yogaPresetTextsCustom")
                 //
-                customSetsArray.remove(at: selectedRow)
-                defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
-                //
-                customRepsArray.remove(at: selectedRow)
-                defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+                customBreathsArray.remove(at: selectedRow)
+                defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
                 //
                 defaults.synchronize()
                 
@@ -1062,7 +880,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                 // Initial Element Positions
                 if customKeyArray.count == 0 {
                     //
-                    self.removePreset.alpha = 1
+                    self.removePreset.alpha = 0
                     //
                     self.tableViewConstraint.constant = self.view.frame.size.height - 98
                     self.tableViewConstraint1.constant = -49
@@ -1081,7 +899,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             }
         })
         //
-        if customSetsArray.count > 0 {
+        if customBreathsArray.count > 0 {
             alert.addAction(okAction)
         } else {
         }
@@ -1102,35 +920,28 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     //
     // Number of components
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        if pickerView == sessionPickerView {
-            return 1
-        } else if pickerView == setsRepsPicker {
-            return 2
-        }
-        return 0
+        return 1
     }
     
     // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == sessionPickerView {
-            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTextsCustom") as! [String]
+        switch pickerView {
+        case sessionPickerView:
+            let titleDataArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
             return titleDataArray.count
-        } else if pickerView == setsRepsPicker {
-            if component == 0{
-                return 6
-            } else {
-                return 16
-            }
+        case breathsPicker:
+            return 100
+        default: return 0
         }
-        return 0
     }
     
     // View for row
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         //
-        if pickerView == sessionPickerView {
+        switch pickerView {
+        case sessionPickerView:
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTextsCustom") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
             //
             if titleDataArray.count > 0 {
                 let titleData = titleDataArray[row]
@@ -1140,64 +951,25 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                 rowLabel.textAlignment = .center
                 return rowLabel
             }
+
+        case breathsPicker:
             //
-        } else if pickerView == setsRepsPicker {
+            let breathsLabel = UILabel()
+            breathsLabel.text = String(breathsPickerArray[row])
+            breathsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
+            breathsLabel.textColor = colour1
             //
-            if component == 0 {
-                let setsLabel = UILabel()
-                setsLabel.text = String(setsPickerArray[row])
-                setsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                setsLabel.textColor = colour1
-                //
-                setsLabel.textAlignment = .center
-                return setsLabel
-                //
-            } else if component == 1 {
-                //
-                let repsLabel = UILabel()
-                // Row Label Text
-                switch row {
-                //
-                case 0:
-                    repsLabel.text = "        " + String(repsPickerArray[row]) + "  " + NSLocalizedString("rep", comment: "")
-                //
-                case 1:
-                    repsLabel.text = "         " + String(repsPickerArray[row]) + " " + NSLocalizedString("reps", comment: "")
-                //
-                case 2...15:
-                    repsLabel.text = String(repsPickerArray[row])
-                //
-                default: break
-                }
-                repsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                repsLabel.textColor = colour1
-                repsLabel.textAlignment = .center
-                return repsLabel
-                //
-            }
+            breathsLabel.textAlignment = .center
+            return breathsLabel
+        //
+        default: return UIView()
         }
-        return UILabel()
+        return UIView()
     }
     
     // Row height
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 30
-    }
-    
-    // Width
-    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        //
-        if pickerView == sessionPickerView {
-            return sessionPickerView.frame.size.width
-            //
-        } else if pickerView == setsRepsPicker {
-            if component == 0 {
-                return (setsRepsPicker.frame.size.width / 3)
-            } else if component == 1{
-                return (setsRepsPicker.frame.size.width / 3)
-            }
-        }
-        return 0
     }
     
     // Did select row
@@ -1208,19 +980,6 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             self.customTableView.reloadData()
             flashScreen()
             //
-        } else if pickerView == setsRepsPicker {
-            //
-            if component ==  0{
-                //
-                if row == 0 {
-                    self.setsIndicatorLabel.text = NSLocalizedString("set", comment: "")
-                } else {
-                    self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
-                }
-                // Row Label
-                //
-            } else {
-            }
         }
     }
     
@@ -1249,7 +1008,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         //
         case customTableView:
             //
-            let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTextsCustom") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
             if titleDataArray.count != 0 {
                 return titleDataArray[sessionPickerView.selectedRow(inComponent: 0)]
             } else {
@@ -1295,7 +1054,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         case customTableView:
             //
             let defaults = UserDefaults.standard
-            let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+            let customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
             //
             if customKeyArray.count == 0 {
                 return 1
@@ -1319,10 +1078,9 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         case customTableView:
             //
             let defaults = UserDefaults.standard
-            let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+            let customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
             //
-            var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-            var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+            var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
             //
             if customKeyArray.count == 0 {
                 //
@@ -1359,7 +1117,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                     let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                     //
                     let keyIndex = customKeyArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]
-                    cell.textLabel?.text = NSLocalizedString(stretchingMovementsDictionary[keyIndex]!, comment: "")
+                    cell.textLabel?.text = NSLocalizedString(yogaPosesDictionary[keyIndex]!, comment: "")
                     //
                     cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
                     cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -1367,21 +1125,23 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                     cell.backgroundColor = colour1
                     cell.textLabel?.textColor = colour2
                     cell.tintColor = .black
-                    // Detail sets x reps
-                    cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+                    // Detail Breaths
+                    cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
                     cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
                     cell.detailTextLabel?.textAlignment = .left
                     cell.detailTextLabel?.textColor = colour2
-                    cell.detailTextLabel?.text = String(setsPickerArray[customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]]) + " x " + repsPickerArray[customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]]
+                    cell.detailTextLabel?.text = String(customBreathsArray[sessionPickerView.selectedRow(inComponent:0)][indexPath.row]) + " " + NSLocalizedString("breathsA", comment: "")
                     //
                     // Cell Image
-                    cell.imageView?.image = demonstrationDictionary[keyIndex]
+                    cell.imageView?.image = demonstrationDictionary[keyIndex]?[0]
                     cell.imageView?.isUserInteractionEnabled = true
                     // Image Tap
                     let imageTap = UITapGestureRecognizer()
                     imageTap.numberOfTapsRequired = 1
                     imageTap.addTarget(self, action: #selector(handleTap))
                     cell.imageView?.addGestureRecognizer(imageTap)
+                    //
+                    cell.imageView?.tag = customKeyArray[sessionPickerView.selectedRow(inComponent:0)][indexPath.row]
                     //
                     return cell
                 }
@@ -1392,7 +1152,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
             let keyIndex = fullKeyArray[indexPath.section][indexPath.row]
-            cell.textLabel?.text = NSLocalizedString(stretchingMovementsDictionary[keyIndex]!, comment: "")
+            cell.textLabel?.text = NSLocalizedString(yogaPosesDictionary[keyIndex]!, comment: "")
             //
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -1401,13 +1161,15 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             cell.textLabel?.textColor = .black
             cell.tintColor = .black
             // Cell Image
-            cell.imageView?.image = demonstrationDictionary[keyIndex]
+            cell.imageView?.image = demonstrationDictionary[keyIndex]?[0]
             cell.imageView?.isUserInteractionEnabled = true
             // Image Tap
             let imageTap = UITapGestureRecognizer()
             imageTap.numberOfTapsRequired = 1
             imageTap.addTarget(self, action: #selector(handleTap))
             cell.imageView?.addGestureRecognizer(imageTap)
+            //
+            cell.imageView?.tag = fullKeyArray[indexPath.section][indexPath.row]
             //
             return cell
         //
@@ -1423,7 +1185,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         case customTableView:
             //
             let defaults = UserDefaults.standard
-            let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+            let customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
             //
             if customKeyArray.count == 0 {
                 return 49
@@ -1448,10 +1210,9 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+        var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
         //
-        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+        var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
         // If no session created
         if customKeyArray.count == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
@@ -1512,44 +1273,40 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                         //
                     } else {
                         // View
-                        setsRepsView.alpha = 0
-                        UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
+                        breathsView.alpha = 0
+                        UIApplication.shared.keyWindow?.insertSubview(breathsView, aboveSubview: view)
                         let selectedCell = tableView.cellForRow(at: indexPath)
-                        setsRepsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+                        breathsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
                         // selected row
-                        setsRepsPicker.selectRow(customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 0, animated: true)
-                        setsRepsPicker.selectRow(customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 1, animated: true)
+                        breathsPicker.selectRow(customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 0, animated: true)
                         //
-                        let componentWidth = setsRepsPicker.frame.size.width / 3
-                        let componentWidthFourth = componentWidth / 4
                         // picker
-                        setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+                        breathsPicker.frame = CGRect(x: 0, y: 0, width: breathsView.frame.size.width, height: 147)
                         // ok
-                        okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
+                        okButton.frame = CGRect(x: 0, y: 147, width: breathsView.frame.size.width, height: 49)
                         //
-                        self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+                        self.breathsIndicatorLabel.frame = CGRect(x: (breathsView.frame.size.width / 2) * 1.2, y: (self.breathsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
                         //
                         backgroundViewExpanded.alpha = 0
-                        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
+                        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: breathsView)
                         backgroundViewExpanded.frame = UIScreen.main.bounds
                         // Animate table fade and size
                         // Alpha
                         UIView.animate(withDuration: 0.4, animations: {
-                            self.setsRepsView.alpha = 1
+                            self.breathsView.alpha = 1
                             //
                         }, completion: nil)
                         // Position
                         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                             //
-                            self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
-                            self.setsRepsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
+                            self.breathsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
+                            self.breathsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
                             // picker
-                            self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+                            self.breathsPicker.frame = CGRect(x: 0, y: 0, width: self.breathsView.frame.size.width, height: 147)
                             // ok
-                            self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
-                            // Sets Indicator Label
-                            self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                            self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+                            self.okButton.frame = CGRect(x: 0, y: 147, width: self.breathsView.frame.size.width, height: 49)
+                            //
+                            self.breathsIndicatorLabel.frame = CGRect(x: (self.breathsView.frame.size.width / 2) * 1.2, y: (self.breathsPicker.frame.size.height / 2) - 15, width: 100, height: 30)
                             //
                             //
                             self.backgroundViewExpanded.alpha = 0.7
@@ -1561,17 +1318,14 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             case movementsTableView:
                 //
                 customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].append(fullKeyArray[indexPath.section][indexPath.row])
-                defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
-                // sets
-                customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
-                defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
-                // reps
-                customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
-                defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+                defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
+                // Breaths
+                customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
+                defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
                 //
                 defaults.synchronize()
                 // Remove Table
-                UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     self.movementsTableView.alpha = 0
                     //
                     self.backgroundViewExpanded.alpha = 0
@@ -1605,7 +1359,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         //
         let defaults = UserDefaults.standard
-        let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+        let customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
         //
         if customKeyArray.count == 0 {
             return false
@@ -1622,7 +1376,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         //
         let defaults = UserDefaults.standard
-        let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+        let customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
         //
         if customKeyArray.count == 0 {
             return false
@@ -1639,24 +1393,18 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
-        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+        var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
+        var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
         // Key
         let itemToMove = customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
         customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].insert(itemToMove, at: destinationIndexPath.row)
         //
-        defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
-        // Sets
-        let setToMove = customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
-        customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(setToMove, at: destinationIndexPath.row)
+        defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
+        // Breaths
+        let setToMove = customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
+        customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(setToMove, at: destinationIndexPath.row)
         //
-        defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
-        // Reps
-        let repToMove = customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
-        customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(repToMove, at: destinationIndexPath.row)
-        //
-        defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+        defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
         //
         defaults.synchronize()
     }
@@ -1665,7 +1413,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+        var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
         //
         if proposedDestinationIndexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
             return NSIndexPath(row: proposedDestinationIndexPath.row - 1, section: proposedDestinationIndexPath.section) as IndexPath
@@ -1685,18 +1433,14 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         //
         if editingStyle == UITableViewCellEditingStyle.delete {
             let defaults = UserDefaults.standard
-            var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
-            var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-            var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+            var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
+            var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
             // Key
             customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
-            // sets
-            customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
-            // reps
-            customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+            defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
+            // Breaths
+            customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
+            defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
             //
             defaults.synchronize()
             //
@@ -1713,12 +1457,12 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         //
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.movementsTableView.alpha = 0
-            self.setsRepsView.alpha = 0
+            self.breathsView.alpha = 0
             //
             self.backgroundViewExpanded.alpha = 0
         }, completion: { finished in
             self.movementsTableView.removeFromSuperview()
-            self.setsRepsView.removeFromSuperview()
+            self.breathsView.removeFromSuperview()
             //
             self.backgroundViewExpanded.removeFromSuperview()
         })
@@ -1732,20 +1476,14 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         if customTableView.isEditing {
             self.customTableView.setEditing(false, animated: true)
             self.editingButton.setTitle(NSLocalizedString("edit", comment: ""), for: .normal)
+            self.sessionPickerView.isUserInteractionEnabled = true
+            self.beginButton.isEnabled = true
             //
-            addPreset.isEnabled = true
-            removePreset.isEnabled = true
-            self.beginButtonEnabled()
-            self.pickerViewEnabled()
-        //
         } else {
             self.customTableView.setEditing(true, animated: true)
             self.editingButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-            //
-            addPreset.isEnabled = false
-            removePreset.isEnabled = false
-            self.beginButtonEnabled()
-            self.pickerViewEnabled()
+            self.sessionPickerView.isUserInteractionEnabled = false
+            self.beginButton.isEnabled = false
         }
     }
     
@@ -1757,23 +1495,19 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     func okButtonAction(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+        var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
         //
-        customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = setsRepsPicker.selectedRow(inComponent: 0)
-        defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
-        //
-        customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = setsRepsPicker.selectedRow(inComponent: 1)
-        defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+        customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = breathsPicker.selectedRow(inComponent: 0)
+        defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
         //
         defaults.synchronize()
         //
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.setsRepsView.alpha = 0
+            self.breathsView.alpha = 0
             //
             self.backgroundViewExpanded.alpha = 0
         }, completion: { finished in
-            self.setsRepsView.removeFromSuperview()
+            self.breathsView.removeFromSuperview()
             //
             self.backgroundViewExpanded.removeFromSuperview()
         })
@@ -1785,17 +1519,23 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     //
     // Expand/Retract Image ------------------------------------------------------------------------------------------------
     //
-    // Expand Image
+    //
+    // Handle Tap
     let expandedImage = UIImageView()
     let backgroundViewImage = UIButton()
+    var imageIndex = Int()
     //
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
-        // Get Image
-        let sender = extraTap.view as! UIImageView
-        let image = sender.image
-        // Get Image
-        // let index = demonstrationImage.indexWhere
+        //
         let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
+        
+        //
+        // Get Array index
+        let sender = extraTap.view as! UIImageView
+        let demonstrationIndex = sender.tag
+        //
+        imageIndex = demonstrationIndex
+        
         // Expanded Image
         //
         expandedImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height/2)
@@ -1805,7 +1545,18 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         expandedImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         expandedImage.contentMode = .scaleAspectFit
         expandedImage.isUserInteractionEnabled = true
-        expandedImage.image = image
+        //
+        // Animation
+        expandedImage.image = demonstrationDictionary[demonstrationIndex]?[0]
+        expandedImage.animationImages = demonstrationDictionary[demonstrationIndex]
+        expandedImage.animationDuration = animationDurationDictionary[demonstrationIndex]!
+        expandedImage.animationRepeatCount = 1
+        // Play
+        let imagePress = UITapGestureRecognizer(target: self, action: #selector(imageSequenceAnimation))
+        expandedImage.addGestureRecognizer(imagePress)
+        //
+        
+        
         // Background View
         //
         backgroundViewImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height)
@@ -1839,6 +1590,15 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         })
     }
     
+    //
+    // Play Image Sequence
+    @IBAction func imageSequenceAnimation() {
+        //
+        if demonstrationDictionary[imageIndex]?.count != 1 {
+            expandedImage.startAnimating()
+        }
+    }
+    
     
     
     //
@@ -1849,11 +1609,11 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         
         if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
             
-            performSegue(withIdentifier: "stretchingCustomSegue1", sender: nil)
+            performSegue(withIdentifier: "yogaCustomSegue1", sender: nil)
             
         } else {
             
-            performSegue(withIdentifier: "stretchingCustomSegue2", sender: nil)
+            performSegue(withIdentifier: "yogaCustomSegue2", sender: nil)
         }
         
         
@@ -1875,83 +1635,64 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         //
         let defaults = UserDefaults.standard
         //
-        var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+        var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
         //
-        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+        var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
         //
-        let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTextsCustom") as! [String]
+        let titleDataArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
         
         
-        if (segue.identifier == "stretchingCustomSegue1") {
+        if (segue.identifier == "yogaCustomSegue1") {
             //
             let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreen
+            let destinationVC = destinationNC.viewControllers.first as! YogaScreen
             
             // Compress Arrays
             for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
                 //
-                stretchingArray.append(stretchingMovementsDictionary[i]!)
+                yogaArray.append(yogaPosesDictionary[i]!)
                 //
                 demonstrationArray.append(demonstrationDictionary[i]!)
-                //
-                targetAreaArray.append(targetAreaDictionary[i]!)
                 //
                 explanationArray.append(explanationDictionary[i]!)
             }
             //
-            for i in customSetsArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                setsArray.append(setsPickerArray[i])
-            }
-            //
-            for i in customRepsArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                repsArray.append(repsPickerArray[i])
+            for i in customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)] {
+                breathsArray.append(String(breathsPickerArray[i]))
             }
             
             //
-            destinationVC.sessionArray = stretchingArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
+            destinationVC.sessionArray = yogaArray
+            destinationVC.breathsArray = breathsArray
             destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
+            //destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
-            destinationVC.sessionType = 0
-            //
-        } else if (segue.identifier == "stretchingCustomSegue2") {
+        } else if (segue.identifier == "yogaCustomSegue2") {
             //
             let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
+            let destinationVC = destinationNC.viewControllers.first as! YogaScreenOverview
             
             // Compress Arrays
             for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
                 //
-                stretchingArray.append(stretchingMovementsDictionary[i]!)
+                yogaArray.append(yogaPosesDictionary[i]!)
                 //
                 demonstrationArray.append(demonstrationDictionary[i]!)
-                //
-                targetAreaArray.append(targetAreaDictionary[i]!)
                 //
                 explanationArray.append(explanationDictionary[i]!)
             }
             //
-            for i in customSetsArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                setsArray.append(setsPickerArray[i])
-            }
-            //
-            for i in customRepsArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                repsArray.append(repsPickerArray[i])
+            for i in customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)] {
+                breathsArray.append(String(breathsPickerArray[i]))
             }
             
             //
-            destinationVC.sessionArray = stretchingArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
+            destinationVC.sessionArray = yogaArray
+            destinationVC.breathsArray = breathsArray
             destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
+            //destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
-            //
-            destinationVC.sessionType = 0
             //
             destinationVC.sessionTitle = titleDataArray[sessionPickerView.numberOfRows(inComponent: 0)]
         }

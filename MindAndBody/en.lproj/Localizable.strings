@@ -51,8 +51,8 @@
     "timer" = "Timer";
     "timerEnd" = "Timer Ended";
 
-    "warmupInputTitle" = "Custom Warmup Title";
-    "warmupRemoveTitle" = "Remove Custom Warmup";
+    "warmupInputTitle" = "Warmup Title";
+    "warmupRemoveTitle" = "Remove Warmup";
 
     "units" = "Units";
 
@@ -918,6 +918,18 @@
             "guidedPractice" = "Guided Practices";
 
 
+            // Custom //
+            "yogaInputTitle" = "Yoga Session Title";
+            "yogaRemoveTitle" = "Remove Yoga Session";
+
+            "standing" = "Standing";
+            "handElbow" = "Hands|Elbows & Feet|Knees";
+            "seated" = "Seated";
+            "lying" = "Lying";
+            "handStands" = "Hand Stands";
+
+            "breathsC" = "breaths";
+            "breathsA" = "br.";
 
 
 

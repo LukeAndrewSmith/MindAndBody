@@ -43,6 +43,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Demonstration Array
     var demonstrationArray: [[UIImage]] = []
+    var animationDurationArray: [Double] = []
     
     // Target Area Array
     var targetAreaArray: [UIImage] = []
@@ -1073,6 +1074,8 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 demonstrationArray.append(demonstrationDictionary[i]!)
                 //
+                animationDurationArray.append(animationDurationDictionary[i]!)
+                //
                 targetAreaArray.append(targetAreaDictionary[i]!)
                 //
                 explanationArray.append(explanationDictionary[i]!)
@@ -1081,40 +1084,41 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             destinationVC.sessionArray = yogaArray
             destinationVC.breathsArray = breathsArray
             destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
+            destinationVC.animationDurationArray = animationDurationArray
+            //destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
-            destinationVC.sessionType = 0
         //
         } else if (segue.identifier == "yogaSessionSegue2") {
-//            //
-//            let destinationNC = segue.destination as! UINavigationController
-//            let destinationVC = destinationNC.viewControllers.first as! YogaScreenOverview
-//            
-//            // Ensure array in ascending order
-//            // Compress Arrays
-//            for i in practiceArray[selectedPreset[0]][selectedPreset[1]] {
-//                //
-//                yogaArray.append(yogaPosesDictionary[i]!)
-//                //
-//                breathsArray.append(breathsDictionary[i]!)
-//                //
-//                demonstrationArray.append(demonstrationDictionary[i]!)
-//                //
-//                targetAreaArray.append(targetAreaDictionary[i]!)
-//                //
-//                explanationArray.append(explanationDictionary[i]!)
-//            }
-//            //
-//            destinationVC.sessionArray = yogaArray
-//            destinationVC.breathsArray = breathsArray
-//            destinationVC.demonstrationArray = demonstrationArray
-//            destinationVC.targetAreaArray = targetAreaArray
-//            destinationVC.explanationArray = explanationArray
-//            //
-//            destinationVC.sessionType = 1
-//            //
-//            destinationVC.sessionTitle = practiceTitlesArray[selectedPreset[0]][selectedPreset[1]]
+            //
+            let destinationNC = segue.destination as! UINavigationController
+            let destinationVC = destinationNC.viewControllers.first as! YogaScreenOverview
+            
+            // Ensure array in ascending order
+            // Compress Arrays
+            for i in practiceArray[selectedPreset[0]][selectedPreset[1]] {
+                //
+                yogaArray.append(yogaPosesDictionary[i]!)
+                //
+                breathsArray.append(breathsDictionary[i]!)
+                //
+                demonstrationArray.append(demonstrationDictionary[i]!)
+                //
+                animationDurationArray.append(animationDurationDictionary[i]!)
+                //
+                //targetAreaArray.append(targetAreaDictionary[i]!)
+                //
+                explanationArray.append(explanationDictionary[i]!)
+            }
+            //
+            destinationVC.sessionArray = yogaArray
+            destinationVC.breathsArray = breathsArray
+            destinationVC.demonstrationArray = demonstrationArray
+            destinationVC.animationDurationArray = animationDurationArray
+            //destinationVC.targetAreaArray = targetAreaArray
+            destinationVC.explanationArray = explanationArray
+            //
+            destinationVC.sessionTitle = practiceTitlesArray[selectedPreset[0]][selectedPreset[1]]
         }
     }
     
