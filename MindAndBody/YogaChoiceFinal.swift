@@ -1059,37 +1059,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Pass Arrays ---------------------------------------------------------------------------------------------------------------------------
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //
-        if (segue.identifier == "yogaSessionSegue1") {
-            //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! YogaScreen
-            
-            // Ensure array in ascending order
-            for i in practiceArray[selectedPreset[0]][selectedPreset[1]] {
-                //
-                yogaArray.append(yogaPosesDictionary[i]!)
-                //
-                breathsArray.append(breathsDictionary[i]!)
-                //
-                demonstrationArray.append(demonstrationDictionary[i]!)
-                //
-                animationDurationArray.append(animationDurationDictionary[i]!)
-                //
-                targetAreaArray.append(targetAreaDictionary[i]!)
-                //
-                explanationArray.append(explanationDictionary[i]!)
-            }
-            //
-            destinationVC.sessionArray = yogaArray
-            destinationVC.breathsArray = breathsArray
-            destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.animationDurationArray = animationDurationArray
-            //destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
-            //
-        //
-        } else if (segue.identifier == "yogaSessionSegue2") {
+        if (segue.identifier == "yogaSessionSegue2") {
             //
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.viewControllers.first as! YogaScreenOverview
