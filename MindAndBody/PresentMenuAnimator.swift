@@ -13,7 +13,7 @@ class PresentMenuAnimator : NSObject {
 
 extension PresentMenuAnimator : UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.6
+        return 0.7
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -36,9 +36,7 @@ extension PresentMenuAnimator : UIViewControllerAnimatedTransitioning {
         containerView.insertSubview(snapshot, aboveSubview: toVC.view)
         fromVC.view.isHidden = true
         
-        UIView.animate(
-            withDuration: transitionDuration(using: transitionContext),
-            animations: {
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 snapshot.center.x += UIScreen.main.bounds.width * 0.75
         },
             completion: { _ in

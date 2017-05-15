@@ -125,11 +125,11 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
 //
 // View will appear --------------------------------------------------------------------------------------------------------
 //
+    let blur4 = UIVisualEffectView()
     var addedToApplication = false
     override func viewWillAppear(_ animated: Bool) {
         //
-        tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        
+        tableView.setContentOffset(CGPoint(x: 0, y: -20), animated: false)
         
         if addedToApplication == false {
             let blurE4 = UIBlurEffect(style: .dark)
@@ -140,17 +140,6 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             view.insertSubview(blur4, aboveSubview: tableView)
             //
         }
-    }
-    
-//
-// View Did appear --------------------------------------------------------------------------------------------------------
-//
-    let blur4 = UIVisualEffectView()
-    //
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-       
     }
     
 //

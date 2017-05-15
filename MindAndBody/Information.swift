@@ -55,7 +55,11 @@ class informationDiscussionsCell: UITableViewCell {
 //
 // Session Screen Overview Class ------------------------------------------------------------------------------------
 //
-class Information: UITableViewController{
+class Information: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    //
+    @IBOutlet weak var tableView: UITableView!
+    
 
     // Background Colour View
     let backView = UIView()
@@ -81,9 +85,22 @@ class Information: UITableViewController{
 //
 // View will appear ------------------------------------------------------------------------------------
 //
+    let blur4 = UIVisualEffectView()
+    var addedToApplication = false
     override func viewWillAppear(_ animated: Bool) {
         //
-        tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        tableView.setContentOffset(CGPoint(x: 0, y: -20), animated: false)
+        
+        //
+        if addedToApplication == false {
+            let blurE4 = UIBlurEffect(style: .dark)
+            self.blur4.effect = blurE4
+            self.blur4.frame = UIApplication.shared.statusBarFrame
+            self.blur4.isUserInteractionEnabled = false
+            //
+            view.insertSubview(blur4, aboveSubview: tableView)
+            //
+        }
     }
     
 
@@ -96,6 +113,11 @@ class Information: UITableViewController{
         //
         scrollUpButton.removeFromSuperview()
 
+        //
+        if addedToApplication == true {
+            //
+            blur4.removeFromSuperview()
+        }
     }
     
     
@@ -166,7 +188,7 @@ class Information: UITableViewController{
 //
 // Watch scroll View ------------------------------------------------------------------------------------
 //
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == tableView {
             if tableView.contentOffset.y > 186 {
                 //
@@ -199,21 +221,21 @@ class Information: UITableViewController{
 // TableView ------------------------------------------------------------------------------------
 //
     // Number of Sections
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         //
         return 1
             //sectionArray.count
     }
     
     // Number of rows
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         return 6
         //return rowArray[section].count
     }
     
     // Height for row
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
         switch indexPath.row {
         case 0: return 152
@@ -224,21 +246,87 @@ class Information: UITableViewController{
         return 0
     }
     
+    
+    
+    // Blurs
+    let blur = UIVisualEffectView()
+    let blur2 = UIVisualEffectView()
+    let blur3 = UIVisualEffectView()
+    
     // Cell for row
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         switch indexPath.row {
         case 0:
         let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! headerCell
             //
             cell.titleLabel.text = NSLocalizedString("information", comment: "")
-            cell.titleLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             //
             cell.contentView.backgroundColor = .clear
             //
-            cell.logoView.tintColor = colour1
-            //
             cell.selectionStyle = .none
+            //
+        
+            //
+            // Blurs
+            blur.removeFromSuperview()
+            let blurE = UIBlurEffect(style: .dark)
+            blur.effect = blurE
+            let vibrancyE = UIVibrancyEffect(blurEffect: blurE)
+            blur.effect = vibrancyE
+            blur.frame = CGRect(x: 0, y: 0, width: cell.titleLabel!.frame.size.width * 1.1, height: cell.titleLabel!.frame.size.height * 0.8)
+            blur.center.x = cell.stackViewTitle.center.x
+            blur.center.y = cell.stackViewTitle.center.y + (cell.stackViewTitle.frame.size.height / 4)
+            blur.layer.cornerRadius = cell.titleLabel.frame.size.height / 3
+            blur.clipsToBounds = true
+            blur.isUserInteractionEnabled = false
+            cell.addSubview(blur)
+            cell.sendSubview(toBack: blur)
+            //
+            blur2.removeFromSuperview()
+            let blurE2 = UIBlurEffect(style: .dark)
+            blur2.effect = blurE2
+            let vibrancyE2 = UIVibrancyEffect(blurEffect: blurE2)
+            blur2.effect = vibrancyE2
+            blur2.frame = CGRect(x: 0, y: 0, width: cell.logoView!.frame.size.width * 1.1, height: cell.logoView!.frame.size.height * 1.1)
+            blur2.center.x = cell.stackViewTitle.center.x
+            blur2.center.y = cell.stackViewTitle.center.y - (cell.stackViewTitle.frame.size.height / 4)
+            blur2.layer.cornerRadius = cell.logoView.frame.size.height / 2
+            blur2.clipsToBounds = true
+            blur2.isUserInteractionEnabled = false
+            cell.addSubview(blur2)
+            cell.sendSubview(toBack: blur2)
+        
+            //
+            blur3.removeFromSuperview()
+            let blurE3 = UIBlurEffect(style: .dark)
+            blur3.effect = blurE3
+            let vibrancyE3 = UIVibrancyEffect(blurEffect: blurE3)
+            blur3.effect = vibrancyE3
+            blur3.frame = CGRect(x: 0, y: 0, width: cell.menuButton.bounds.width * 0.7, height: cell.menuButton.bounds.height * 0.7)
+            blur3.center = cell.menuButton.center
+            blur3.layer.cornerRadius = cell.menuButton.frame.size.height * 0.35
+            blur3.clipsToBounds = true
+            blur3.isUserInteractionEnabled = false
+            cell.addSubview(blur3)
+            cell.sendSubview(toBack: blur3)
+            //
+            // Colours
+            //
+            switch backgroundIndex {
+            // All Black
+            case 1,3,backgroundImageArray.count:
+                cell.titleLabel.textColor = colour2
+                cell.logoView.tintColor = colour2
+                cell.menuButton.tintColor = colour2
+            // All White
+            case 0,2,3,4,5,6:
+                cell.titleLabel.textColor = colour1
+                cell.logoView.tintColor = colour1
+                cell.menuButton.tintColor = colour1
+            //
+            default: break
+            }
             //
             return cell
         //
@@ -356,7 +444,7 @@ class Information: UITableViewController{
 }
     
     // Did select row
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         tableView.deselectRow(at: indexPath, animated: true)
 //        

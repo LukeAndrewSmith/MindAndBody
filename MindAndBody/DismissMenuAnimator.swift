@@ -13,7 +13,7 @@ class DismissMenuAnimator : NSObject {
 
 extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.5
+        return 0.6
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -66,11 +66,8 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
         toVC2.view.addSubview(newSnapshot)
         }
         
-
         //
-        UIView.animate(
-            withDuration: self.transitionDuration(using: transitionContext),
-            animations: {
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 if new == true {
                     toVC.view.center.x = UIScreen.main.bounds.width * 0.5
