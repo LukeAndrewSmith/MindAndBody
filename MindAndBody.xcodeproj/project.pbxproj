@@ -290,8 +290,8 @@
 				079187271E7B4DCD00E7153A /* Overview  */,
 				072829E71EA8A0CF0090164A /* Circuit Workout Detail */,
 				072829E61EA8A0C80090164A /* Circuit Workout Overview */,
-				07BDFEFD1EB1E66B00B131D7 /* Yoga Screen Detail */,
-				07BDFEFE1EB1E69700B131D7 /* Yoga Screen Overview */,
+				07BDFEFD1EB1E66B00B131D7 /* Yoga Detail -Unused- */,
+				07BDFEFE1EB1E69700B131D7 /* Yoga Screen */,
 				0719F2B31E50F8D100AC6729 /* Meditation Screens */,
 			);
 			name = "Session Screens";
@@ -572,21 +572,21 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
-		07BDFEFD1EB1E66B00B131D7 /* Yoga Screen Detail */ = {
+		07BDFEFD1EB1E66B00B131D7 /* Yoga Detail -Unused- */ = {
 			isa = PBXGroup;
 			children = (
 				07BDFEFB1EB1E65A00B131D7 /* YogaScreen.swift */,
 			);
-			name = "Yoga Screen Detail";
+			name = "Yoga Detail -Unused-";
 			sourceTree = "<group>";
 		};
-		07BDFEFE1EB1E69700B131D7 /* Yoga Screen Overview */ = {
+		07BDFEFE1EB1E69700B131D7 /* Yoga Screen */ = {
 			isa = PBXGroup;
 			children = (
 				07BE8C081E8BDF9500A851EF /* YogaScreenOverview.swift */,
 				07BE8C0A1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift */,
 			);
-			name = "Yoga Screen Overview";
+			name = "Yoga Screen";
 			sourceTree = "<group>";
 		};
 		07E98F0D1EA8F86D00C98ED5 /* Gym */ = {

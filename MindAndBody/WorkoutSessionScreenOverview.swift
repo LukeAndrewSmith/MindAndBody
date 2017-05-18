@@ -15,9 +15,9 @@ import UserNotifications
 // Custom Overview Tableview Cells ---------------------------------------------------------------------------
 //
 // Overview TableView Cell
-class OverviewTableViewCell: UITableViewCell {
+class WorkoutOverviewTableViewCell: UITableViewCell {
     // Demonstration Image View
-    @IBOutlet weak var demonstrationImageView: UIImageView!
+    @IBOutlet weak var imageScroll: UIScrollView!
     // Title Label
     @IBOutlet weak var movementLabel: UILabel!
     // Sets x Reps label
@@ -337,7 +337,7 @@ class WorkoutSessionScreenOverview: UITableViewController {
             //
             cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             cell.tintColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-            tableView.separatorInset = UIEdgeInsets(top: 0, left: (10 + cell.demonstrationImageView.frame.size.width), bottom: 0, right: 0)
+            tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             
             
             // Movement
@@ -360,9 +360,9 @@ class WorkoutSessionScreenOverview: UITableViewController {
             // Image
             //
             if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                cell.demonstrationImageView.image = demonstrationArray[indexPath.row]
+                //cell.demonstrationImageView.image = demonstrationArray[indexPath.row]
             } else {
-                cell.demonstrationImageView.image = targetAreaArray[indexPath.row]
+                //cell.demonstrationImageView.image = targetAreaArray[indexPath.row]
             }
             
 
@@ -421,7 +421,7 @@ class WorkoutSessionScreenOverview: UITableViewController {
             let imageTap = UITapGestureRecognizer()
             imageTap.numberOfTapsRequired = 1
             imageTap.addTarget(self, action: #selector(handleImageTap))
-            cell.demonstrationImageView.addGestureRecognizer(imageTap)
+            //cell.demonstrationImageView.addGestureRecognizer(imageTap)
             //
             return cell
         //

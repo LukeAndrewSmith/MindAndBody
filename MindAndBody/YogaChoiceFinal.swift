@@ -583,7 +583,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             // Relaxing
             [
                 [2,3,4,5,6,9,12,13,14,22,23,24,25,29,32,34,37,38,39,51,52,53,54,55,59,61,63,65,69],
-                [2,5,7,55,7,33,2],
+                [2,3,4,5,6,9,12,13],
                 [3,4,4]
             ],
         // Meditation
@@ -1042,11 +1042,8 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         //
-        if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
-            performSegue(withIdentifier: "yogaSessionSegue1", sender: nil)
-        } else {
-            performSegue(withIdentifier: "yogaSessionSegue2", sender: nil)
-        }
+        performSegue(withIdentifier: "yogaSessionSegue", sender: nil)
+        //
         // Return background to homescreen
         let delayInSeconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -1059,7 +1056,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Pass Arrays ---------------------------------------------------------------------------------------------------------------------------
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "yogaSessionSegue2") {
+        if (segue.identifier == "yogaSessionSegue") {
             //
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.viewControllers.first as! YogaScreenOverview

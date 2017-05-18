@@ -26,6 +26,9 @@ class YogaOverviewTableViewCell: UITableViewCell {
     @IBOutlet weak var nextButton: UIButton!
     // Back Button
     @IBOutlet weak var backButton: UIButton!
+    //
+    @IBOutlet weak var explanationButton: UIButton!
+    
 }
 
 
@@ -132,39 +135,6 @@ class YogaScreenOverview: UITableViewController {
     
     
     //
-    // Complete Button -----------------------------------------------------------------------------------------------
-    //
-    var buttonArray = [[UIButton]]()
-    
-    //
-    // Set Button Action
-    var buttonNumber = [Int]()
-    
-    //
-    // Generate Buttons
-    //
-    
-    
-    
-    // Update Progress
-    func updateProgress() {
-        // Current Pose
-        let currentPose = Float(selectedRow)
-        // Total Number Poses
-        let totalPoses = Float(sessionArray.count - 1)
-        
-        
-        //
-        if selectedRow > 0 {
-            //
-            let currentProgress = currentPose / totalPoses
-            progressBar.setProgress(currentProgress, animated: true)
-        } else {
-            // Initial state
-            progressBar.setProgress(0, animated: true)
-        }
-    }
-    //
     // TableView ---------------------------------------------------------------------------------------------------------------------
     //
     // Number of sections
@@ -226,6 +196,8 @@ class YogaScreenOverview: UITableViewController {
             cell.backgroundColor = colour2
             cell.tintColor = colour2
             tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            //
+            cell.selectionStyle = .none
             
             // Movement
             //
@@ -246,54 +218,12 @@ class YogaScreenOverview: UITableViewController {
             cell.breathsLabel?.textColor = colour1
             cell.breathsLabel.adjustsFontSizeToFitWidth = true
             
-            //
-            if indexPath.row == selectedRow {
-                // Next button
-                cell.nextButton.tintColor = colour3
-                cell.nextButton.isEnabled = true
-                // Back Button
-                cell.backButton.tintColor = colour4
-                cell.backButton.isEnabled = true
-                //
-                cell.breathsLabel.alpha = 1
-                //
-                cell.demonstrationImageView.isUserInteractionEnabled = true
-                //
-            //
-            } else if indexPath.row == selectedRow + 1 {
-                cell.selectionStyle = .none
-                cell.demonstrationImageView.isUserInteractionEnabled = false
-                //
-                cell.nextButton.tintColor = .clear
-                cell.nextButton.isEnabled = false
-                //
-                cell.backButton.tintColor = .clear
-                cell.backButton.isEnabled = false
-                //
-                cell.breathsLabel.alpha = 0
-            //
-            } else if indexPath.row == selectedRow - 1 {
-                cell.breathsLabel.alpha = 0
-            //
-            } else {
-                cell.nextButton.tintColor = .clear
-                cell.nextButton.isEnabled = false
-                //
-                cell.backButton.tintColor = .clear
-                cell.backButton.isEnabled = false
-                //
-                cell.breathsLabel.alpha = 1
-            }
-            
-            //
-            if selectedRow == 0 {
-                cell.backButton.alpha = 0
-            } else {
-                cell.backButton.alpha = 1
-            }
-            
-            //
-            
+            // Buttons
+//            cell.nextButton.tintColor = colour3
+//            cell.backButton.tintColor = colour4
+            //cell.nextButton.alpha = 0
+            //cell.backButton.alpha = 0
+            cell.explanationButton.tintColor = colour1
             
             // Image
             //
@@ -312,21 +242,65 @@ class YogaScreenOverview: UITableViewController {
             cell.demonstrationImageView.addGestureRecognizer(imageTap)
             //
             
-            // Next Tap
-            let nextTap = UITapGestureRecognizer()
-            nextTap.numberOfTapsRequired = 1
-            nextTap.addTarget(self, action: #selector(nextButtonAction))
-            cell.nextButton.addGestureRecognizer(nextTap)
+            // Next Swipe
+            let nextSwipe = UISwipeGestureRecognizer()
+            nextSwipe.direction = .up
+            nextSwipe.addTarget(self, action: #selector(nextButtonAction))
+            cell.addGestureRecognizer(nextSwipe)
+            
+            // Back Swipe
+            let backSwipe = UISwipeGestureRecognizer()
+            backSwipe.direction = .down
+            backSwipe.addTarget(self, action: #selector(backButtonAction))
+            cell.addGestureRecognizer(backSwipe)
+            
+            // Explanation
+            let explanationTap = UITapGestureRecognizer()
+            explanationTap.numberOfTapsRequired = 1
+            explanationTap.addTarget(self, action: #selector(expandExplanation))
+            cell.explanationButton.addGestureRecognizer(explanationTap)
+            
+//            // Next Tap
+//            let nextTap = UITapGestureRecognizer()
+//            nextTap.numberOfTapsRequired = 1
+//            nextTap.addTarget(self, action: #selector(nextButtonAction))
+//            cell.nextButton.addGestureRecognizer(nextTap)
+//            //
+//            
+//            // Back Button
+//            let backTap = UITapGestureRecognizer()
+//            backTap.numberOfTapsRequired = 1
+//            backTap.addTarget(self, action: #selector(backButtonAction))
+//            cell.backButton.addGestureRecognizer(backTap)
+//            //
+        
+            switch indexPath.row {
+            case selectedRow - 1:
+                cell.breathsLabel.alpha = 0
+                cell.poseLabel.alpha = 0
             //
-            
-            // Back Button
-            let backTap = UITapGestureRecognizer()
-            backTap.numberOfTapsRequired = 1
-            backTap.addTarget(self, action: #selector(backButtonAction))
-            cell.backButton.addGestureRecognizer(backTap)
+            case selectedRow:
+                cell.breathsLabel.alpha = 1
+                cell.poseLabel.alpha = 1
+                cell.explanationButton.alpha = 1
+                cell.explanationButton.isEnabled = true
+                cell.demonstrationImageView.isUserInteractionEnabled = true
             //
-            
-            
+            case selectedRow + 1:
+                //
+                cell.breathsLabel.alpha = 0
+                cell.poseLabel.alpha = 1
+                cell.explanationButton.alpha = 0
+                cell.explanationButton.isEnabled = false
+                cell.demonstrationImageView.isUserInteractionEnabled = false
+            //
+            default:
+                //
+                cell.breathsLabel.alpha = 1
+                cell.poseLabel.alpha = 1
+                cell.explanationButton.alpha = 1
+                cell.explanationButton.isEnabled = true
+            }
             
             return cell
         //
@@ -355,10 +329,13 @@ class YogaScreenOverview: UITableViewController {
         //
         switch indexPath.section {
         case 0:
-            if indexPath.row == selectedRow {
-                return (UIScreen.main.bounds.height - 22) * 2/3
-            } else {
-                return (UIScreen.main.bounds.height - 22) * 1/3
+            switch indexPath.row {
+            case selectedRow - 1, selectedRow:
+                return (UIScreen.main.bounds.height - 22) * 3/4
+            case selectedRow + 1:
+                return (UIScreen.main.bounds.height - 22) * 1/4
+            default:
+                return (UIScreen.main.bounds.height - 22) * 1/4
             }
         case 1: return 49
         default: return 0
@@ -370,7 +347,7 @@ class YogaScreenOverview: UITableViewController {
         //
         switch indexPath.section {
         case 0:
-            
+            //
             if indexPath.row == selectedRow {
 //                let cell = tableView.cellForRow(at: indexPath)
 //                //
@@ -380,22 +357,44 @@ class YogaScreenOverview: UITableViewController {
             //
             } else if indexPath.row == selectedRow + 1 {
                 //
-                selectedRow = selectedRow + 1
-                //
-                let indexPath = NSIndexPath(row: selectedRow, section: 0)
-                let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-                //
-                tableView.beginUpdates()
-                tableView.endUpdates()
-                //
-                tableView.reloadRows(at: [indexPath as IndexPath, indexPath2 as IndexPath], with: UITableViewRowAnimation.automatic)
-                //
-                tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
-                //
-                updateProgress()
+                if selectedRow < sessionArray.count {
+                    //
+                    selectedRow = selectedRow + 1
+                    updateProgress()
+                    //
+                    //
+                    let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
+                    let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
+                    let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
+                    //
+                    var cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
+                    //
+                    //
+                    UIView.animate(withDuration: 0.6, animations: {
+                        //
+                        self.tableView.beginUpdates()
+                        self.tableView.endUpdates()
+                        // 1
+                        cell.breathsLabel.alpha = 1
+                        cell.poseLabel.alpha = 1
+                        cell.explanationButton.alpha = 1
+                        cell.explanationButton.isEnabled = true
+                        cell.demonstrationImageView.isUserInteractionEnabled = true
+                        // -1
+                        cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! YogaOverviewTableViewCell
+                        cell.breathsLabel.alpha = 0
+                        cell.poseLabel.alpha = 0
+                        cell.demonstrationImageView.isUserInteractionEnabled = false
+                        //
+                        self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                    })
+                    // + 1
+                    if selectedRow < sessionArray.count - 1 {
+                        tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
+                    }
+                }
             //
             }
-            tableView.deselectRow(at: indexPath, animated: true)
         //
         case 1:
             //
@@ -459,10 +458,10 @@ class YogaScreenOverview: UITableViewController {
     //
     //
     // Image
-    @IBAction func handleImageTap(extraTap:UITapGestureRecognizer) {
+    @IBAction func handleImageTap(imageTap:UITapGestureRecognizer) {
         //
         // Get Image
-        let sender = extraTap.view as! UIImageView
+        let sender = imageTap.view as! UIImageView
         let tag = sender.tag
         //
         if demonstrationArray[tag].count != 1 {
@@ -472,59 +471,188 @@ class YogaScreenOverview: UITableViewController {
 
     
     // Next Button
-    @IBAction func nextButtonAction(extraTap:UITapGestureRecognizer) {
-        
-        if selectedRow < sessionArray.count {
+    @IBAction func nextButtonAction() {
         //
-        let sender = extraTap.view as! UIButton
-        
-        //
-        selectedRow = selectedRow + 1
-        
-        //
-        //
-        let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-        let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-        //
-        tableView.beginUpdates()
-        tableView.endUpdates()
-        //
-        tableView.reloadRows(at: [indexPath as IndexPath, indexPath2 as IndexPath], with: UITableViewRowAnimation.automatic)
-        //
-        tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
-        //
-        updateProgress()
+        if selectedRow < sessionArray.count - 1 {
+            //
+            selectedRow = selectedRow + 1
+            updateProgress()
+            //
+            //
+            let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
+            let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
+            let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
+            //
+            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
+            //
+            UIView.animate(withDuration: 0.6, animations: {
+                //
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
+                // 1
+                cell.breathsLabel.alpha = 1
+                cell.poseLabel.alpha = 1
+                cell.explanationButton.alpha = 1
+                cell.explanationButton.isEnabled = true
+                cell.demonstrationImageView.isUserInteractionEnabled = true
+                // -1
+                cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! YogaOverviewTableViewCell
+                cell.breathsLabel.alpha = 0
+                cell.poseLabel.alpha = 0
+                cell.demonstrationImageView.isUserInteractionEnabled = false
+                //
+                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+            })
+                // + 1
+                if selectedRow < sessionArray.count - 1 {
+                    tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
+                }
         }
     }
     
     // Back Button
-    @IBAction func backButtonAction(extraTap:UITapGestureRecognizer) {
+    @IBAction func backButtonAction() {
         
         if selectedRow != 0 {
-        //
-        let sender = extraTap.view as! UIButton
-        
-        //
-        selectedRow = selectedRow - 1
-        
-        //
-        //
-        let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-        let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-        let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
-        //
-        self.tableView.beginUpdates()
-        self.tableView.endUpdates()
-        //
-        tableView.reloadRows(at: [indexPath as IndexPath, indexPath2 as IndexPath, indexPath3 as IndexPath], with: UITableViewRowAnimation.automatic)
-        //
-        self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
-        //
-        updateProgress()
+            //
+            selectedRow = selectedRow - 1
+            updateProgress()
+            //
+            let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
+            let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
+            let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
+            //
+            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
+            //
+            UIView.animate(withDuration: 0.6, animations: {
+                //
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
+                //
+                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                
+                // 1
+                cell.breathsLabel.alpha = 1
+                cell.poseLabel.alpha = 1
+                cell.explanationButton.alpha = 1
+                cell.explanationButton.isEnabled = true
+                cell.demonstrationImageView.isUserInteractionEnabled = true
+                // - 1
+                if self.selectedRow > 0 {
+                    cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! YogaOverviewTableViewCell
+                    cell.breathsLabel.alpha = 0
+                    cell.poseLabel.alpha = 0
+                }
+                // + 1
+                cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! YogaOverviewTableViewCell
+                cell.breathsLabel.alpha = 0
+                cell.poseLabel.alpha = 1
+                cell.explanationButton.alpha = 0
+                cell.explanationButton.isEnabled = false
+                cell.demonstrationImageView.isUserInteractionEnabled = false
+            //
+            })
         }
     }
     
+    //
+    // Explanation
+    //
+    let scrollViewExplanation = UIScrollView()
+    let backgroundViewExplanation = UIButton()
+    //
+    let explanationLabel = UILabel()
+    // Expand
+    @IBAction func expandExplanation() {
+        let bounds = UIScreen.main.bounds
+        // View
+        //
+        scrollViewExplanation.frame = CGRect(x: 0, y: 0, width: bounds.width, height: (bounds.height - 20) / 2)
+        scrollViewExplanation.center.x = bounds.width/2
+        scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 2.5) + 20
+        //
+        scrollViewExplanation.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        
+        // Background View
+        //
+        backgroundViewExplanation.frame = CGRect(x: 0, y: 0, width: bounds.width, height: (bounds.height - 20))
+        backgroundViewExplanation.backgroundColor = .black
+        backgroundViewExplanation.alpha = 0
+        //
+        backgroundViewExplanation.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
+        
+        // Contents
+        //
+        explanationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+        explanationLabel.textColor = .black
+        explanationLabel.textAlignment = .natural
+        explanationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        explanationLabel.numberOfLines = 0
+        //
+        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[selectedRow], comment: ""))
+        let paragraphStyleEE = NSMutableParagraphStyle()
+        paragraphStyleEE.alignment = .natural
+        //
+        attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
+        //
+        explanationLabel.attributedText = attributedStringE
+        //
+        explanationLabel.frame = CGRect(x: 10, y: 10, width: bounds.width - 20, height: 0)
+        explanationLabel.sizeToFit()
+        
+        // Scroll View
+        scrollViewExplanation.addSubview(explanationLabel)
+        scrollViewExplanation.contentSize = CGSize(width: bounds.width, height: explanationLabel.frame.size.height + 20)
+        //
+        scrollViewExplanation.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        
+        // Add Views
+        UIApplication.shared.keyWindow?.addSubview(backgroundViewExplanation)
+        UIApplication.shared.keyWindow?.addSubview(scrollViewExplanation)
     
+        //
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 1.5) + 20
+            self.backgroundViewExplanation.alpha = 0.5
+        }, completion: nil)
+    }
+    
+    // Retract Explanation
+    @IBAction func retractExplanation(_ sender: Any) {
+        let bounds = UIScreen.main.bounds
+        //
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.scrollViewExplanation.center.y = ((bounds.height - 20)/2) * 2.5 + 20
+            self.backgroundViewExplanation.alpha = 0
+        }, completion: { finished in
+            //
+            self.scrollViewExplanation.removeFromSuperview()
+            self.backgroundViewExplanation.removeFromSuperview()
+            //
+            self.explanationLabel.removeFromSuperview()
+            //
+        })
+    }
+
+    
+    // Update Progress
+    func updateProgress() {
+        // Current Pose
+        let currentPose = Float(selectedRow)
+        // Total Number Poses
+        let totalPoses = Float(sessionArray.count - 1)
+        
+        
+        //
+        if selectedRow > 0 {
+            //
+            let currentProgress = currentPose / totalPoses
+            progressBar.setProgress(currentProgress, animated: true)
+        } else {
+            // Initial state
+            progressBar.setProgress(0, animated: true)
+        }
+    }
     
     
     //

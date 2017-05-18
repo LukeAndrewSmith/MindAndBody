@@ -31,6 +31,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     var yogaArray: [String] = []
     //
     var demonstrationArray: [[UIImage]] = []
+    var animationDurationArray: [Double] = []
     //
     var targetAreaArray: [UIImage] = []
     //
@@ -1600,29 +1601,18 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     
-    
     //
     // Begin Button ------------------------------------------------------------------------------------------------
     //
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
-        
-        if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
-            
-            performSegue(withIdentifier: "yogaCustomSegue1", sender: nil)
-            
-        } else {
-            
-            performSegue(withIdentifier: "yogaCustomSegue2", sender: nil)
-        }
-        
-        
+        //
+        performSegue(withIdentifier: "yogaCustomSegue", sender: nil)
+            //
         // Return background to homescreen
         let delayInSeconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            
             _ = self.navigationController?.popToRootViewController(animated: false)
-            
         }
     }
     
@@ -1641,34 +1631,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         //
         let titleDataArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
         
-        
-        if (segue.identifier == "yogaCustomSegue1") {
-            //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! YogaScreen
-            
-            // Compress Arrays
-            for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                //
-                yogaArray.append(yogaPosesDictionary[i]!)
-                //
-                demonstrationArray.append(demonstrationDictionary[i]!)
-                //
-                explanationArray.append(explanationDictionary[i]!)
-            }
-            //
-            for i in customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                breathsArray.append(String(breathsPickerArray[i]))
-            }
-            
-            //
-            destinationVC.sessionArray = yogaArray
-            destinationVC.breathsArray = breathsArray
-            destinationVC.demonstrationArray = demonstrationArray
-            //destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
-            //
-        } else if (segue.identifier == "yogaCustomSegue2") {
+        if (segue.identifier == "yogaCustomSegue") {
             //
             let destinationNC = segue.destination as! UINavigationController
             let destinationVC = destinationNC.viewControllers.first as! YogaScreenOverview
@@ -1681,6 +1644,8 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
                 demonstrationArray.append(demonstrationDictionary[i]!)
                 //
                 explanationArray.append(explanationDictionary[i]!)
+                //
+                animationDurationArray.append(animationDurationDictionary[i]!)
             }
             //
             for i in customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)] {
@@ -1691,10 +1656,10 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
             destinationVC.sessionArray = yogaArray
             destinationVC.breathsArray = breathsArray
             destinationVC.demonstrationArray = demonstrationArray
+            destinationVC.animationDurationArray = animationDurationArray
             //destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
-            destinationVC.sessionTitle = titleDataArray[sessionPickerView.numberOfRows(inComponent: 0)]
         }
     }
     
