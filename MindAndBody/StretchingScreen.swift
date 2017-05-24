@@ -1,8 +1,8 @@
 //
-//  SessionScreenOverview.swift
-//  MyFitnessMentor
+//  StretchingScreen.swift
+//  MindAndBody
 //
-//  Created by Luke Smith on 16.03.17.
+//  Created by Luke Smith on 24.05.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -12,10 +12,10 @@ import UserNotifications
 
 
 //
-// Custom Overview Tableview Cells ---------------------------------------------------------------------------
+// Custom StretchingTableViewCell ---------------------------------------------------------------------------
 //
-// Overview TableView Cell
-class OverviewTableViewCell: UITableViewCell {
+// Stretching TableView Cell
+class StretchingTableViewCell: UITableViewCell {
     // Image View
     @IBOutlet weak var imageViewCell: UIImageView!
     @IBOutlet weak var nextImage: UIButton!
@@ -24,24 +24,18 @@ class OverviewTableViewCell: UITableViewCell {
     @IBOutlet weak var movementLabel: UILabel!
     // Sets x Reps label
     @IBOutlet weak var setsRepsLabel: UILabel!
-    // Button View
-    @IBOutlet weak var buttonView: UIView!
     // Explanation
     @IBOutlet weak var explanationButton: UIButton!
-    // Hide Screen
-    @IBOutlet weak var hideScreen: UIButton!
 }
 
-
 //
-// Session Screen Overview Class ------------------------------------------------------------------------------------
+// Stretching Screen Class ------------------------------------------------------------------------------------
 //
-class SessionScreenOverview: UITableViewController {
+class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-//
-// Retreive Arrays ---------------------------------------------------------------------------------------------------
-//
+    //
+    // Retreive Arrays ---------------------------------------------------------------------------------------------------
+    //
     //
     var sessionType = Int()
     
@@ -51,11 +45,8 @@ class SessionScreenOverview: UITableViewController {
     // Movement Array
     var sessionArray: [String] = []
     
-    // Sets Array
-    var setsArray: [Int] = []
-    
-    // Sets Array
-    var repsArray: [String] = []
+    // Breaths/Reps/Time Array
+    var breathsArray: [String] = []
     
     // Demonstration Array
     var demonstrationArray: [UIImage] = []
@@ -70,37 +61,27 @@ class SessionScreenOverview: UITableViewController {
     //
     // Variables
     var selectedRow = 0
-   
-//
-// Outlets -----------------------------------------------------------------------------------------------------------
-//
-    // Navigation Bar
-    @IBOutlet weak var navigationBar: UINavigationItem!
     
-    // Navigation Title
-    let navigationTitle = UILabel()
+    //
+    // Outlets -----------------------------------------------------------------------------------------------------------
+    //
+    // Table View
+    @IBOutlet weak var tableView: UITableView!
     
     // Progress Bar
     let progressBar = UIProgressView()
     
     
-    
-//
-// View will appear
-//
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //
-        navigationController?.navigationBar.isHidden = true
-    }
-    
-//
-// View did load -----------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load -----------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //
+        view.backgroundColor = colour2
+        
+        //
         // Session Started
         //
         // Alert View
@@ -117,25 +98,7 @@ class SessionScreenOverview: UITableViewController {
             }
         })
         
-       // self.present(alert, animated: true, completion: (() -> Void)?)
-        
-        
-        // Navigation Title
-        navigationTitle.text = NSLocalizedString(sessionTitle, comment: "")
-        
-        // Navigation Title
-        //
-        navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
-        navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
-        navigationTitle.textColor = colour1
-        navigationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 22)
-        navigationTitle.backgroundColor = .clear
-        navigationTitle.textAlignment = .center
-        navigationTitle.adjustsFontSizeToFitWidth = true
-        navigationTitle.center.x = self.view.center.x
-        self.navigationController?.navigationBar.barTintColor = colour2
-        //
-        self.navigationController?.navigationBar.topItem?.titleView = navigationTitle
+        // self.present(alert, animated: true, completion: (() -> Void)?)
         
         // Progress Bar
         // Thickness
@@ -157,149 +120,27 @@ class SessionScreenOverview: UITableViewController {
         tableView.backgroundView = tableViewBackground
         //
         tableView.tableFooterView = UIView()
-        
-        // Buttons
-        //
-        fillButtonArray()
-    }
-    
-
-//
-// Set Buttons -----------------------------------------------------------------------------------------------
-//
-    // Button Array
-    //
-    var buttonArray = [[UIButton]]()
-    
-    //
-    // Set Button Action
-    var buttonNumber = [Int]()
-    
-    //
-    // Generate Buttons
-    //
-    func createButton() -> UIButton {
-        //
-        let setButton = UIButton()
-        let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
-        setButton.addConstraints([widthHeight])
-        setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
-        setButton.layer.borderWidth = 3
-        setButton.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        setButton.layer.cornerRadius = 21.4375
-        setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
-        setButton.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        setButton.isEnabled = false
-        //
-        return setButton
-    }
-    
-    // Set Button
-    @IBAction func setButtonAction(sender: UIButton) {
-        //
-        // Rest Timer Notification
-        //
-        //
-        let content = UNMutableNotificationContent()
-        content.title = NSLocalizedString("restOver", comment: "")
-        content.body = NSLocalizedString("nextSet", comment: "")
-        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
-        content.sound = UNNotificationSound.default()
-        //
-        let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
-        //
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTimes[sessionType]), repeats: false)
-        let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
-        //
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-
-        
-        //
-        let buttonRow = sender.tag
-        //
-        buttonArray[buttonRow][buttonNumber[buttonRow]].isEnabled = false
-        
-        // Increase Button Number
-        if self.setsArray[buttonRow] == 0 {
-        } else {
-            if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] {
-                self.buttonNumber[buttonRow] = self.buttonNumber[buttonRow] + 1
-            }
-        }
-        
-        // Enable After Delay
-        let delayInSeconds = 2.0
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            if self.setsArray[buttonRow] == 0 {
-            } else {
-                if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] {
-                    self.buttonArray[buttonRow][self.buttonNumber[buttonRow]].isEnabled = true
-                }
-            }
-        }
-        
-        //
-        sender.isEnabled = false
-        sender.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        
-        //
-        updateProgress()
-    }
-    
-    // Generate an Array of Arrays of Buttons
-    //
-    func fillButtonArray() {
-        for i in 0...(setsArray.count - 1){
-            //
-            var buttonArray2 = [UIButton]()
-            //
-            for _ in 1...setsArray[i]{
-                buttonArray2 += [createButton()]
-            }
-            //
-            buttonArray += [buttonArray2]
-            buttonNumber.append(0)
-        }
-        buttonArray[0][0].isEnabled = true
+       
     }
     
     
-//    // Update Progress
-//    func updateProgress() {
-//        // Progress Bar
-//        // Current Button
-//        let currentButton = Float(buttonNumber.reduce(0, +))
-//        // Total Buttons
-//        let totalButtons = Float(setsArray.reduce(0, +))
-//        
-//        //
-//        if currentButton > 0 {
-//            // Current Progress
-//            let currentProgress = currentButton/totalButtons
-//            progressBar.setProgress(currentProgress
-//                , animated: true)
-//        } else {
-//            // Initial state
-//            progressBar.setProgress(0, animated: true)
-//        }
-//    }
-//
-// TableView ---------------------------------------------------------------------------------------------------------------------
-//
+    //
+    // TableView ---------------------------------------------------------------------------------------------------------------------
+    //
     // Number of sections
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
     // Title for header
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return " "
     }
     
     // Will Display Header
     var didSetFrame = false
     //
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         //
         let header = view as! UITableViewHeaderFooterView
         header.contentView.backgroundColor = colour1
@@ -314,7 +155,7 @@ class SessionScreenOverview: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0: return 2
         case 1: return 0
@@ -324,7 +165,7 @@ class SessionScreenOverview: UITableViewController {
     }
     
     // Number of rows
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         switch section {
         case 0: return sessionArray.count
@@ -334,18 +175,13 @@ class SessionScreenOverview: UITableViewController {
     }
     
     // Cell for row
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OverviewTableViewCell", for: indexPath) as! OverviewTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "StretchingTableViewCell", for: indexPath) as! StretchingTableViewCell
             
-            //
-            // Clean Cell
-            for v in cell.buttonView.subviews {
-                v.removeFromSuperview()
-            }
-    
+           
             
             //
             // Cell
@@ -354,7 +190,7 @@ class SessionScreenOverview: UITableViewController {
             tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             cell.selectionStyle = .none
             
-           
+            
             
             // Image Tap
             //            let imageTap = UITapGestureRecognizer()
@@ -363,7 +199,7 @@ class SessionScreenOverview: UITableViewController {
             //            cell.demonstrationImageView.addGestureRecognizer(imageTap)
             //
             // Images
-
+            
             //
             // Images
             if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
@@ -371,7 +207,7 @@ class SessionScreenOverview: UITableViewController {
             } else {
                 cell.imageViewCell.image = targetAreaArray[indexPath.row]
             }
-           
+            
             //
             // Buttons
             cell.nextImage.tintColor = colour1
@@ -388,7 +224,11 @@ class SessionScreenOverview: UITableViewController {
             
             //
             // Set and Reps
-            cell.setsRepsLabel?.text = repsArray[indexPath.row]
+            if breathsArray[indexPath.row] == 0 {
+                cell.setsRepsLabel?.text = " "
+            } else {
+                cell.setsRepsLabel?.text = breathsArray[indexPath.row]
+            }
             cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.setsRepsLabel?.textAlignment = .right
             cell.setsRepsLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
@@ -398,58 +238,6 @@ class SessionScreenOverview: UITableViewController {
             // Explanation
             cell.explanationButton.tintColor = colour1
             
-            //
-            // Hide Screen
-            cell.hideScreen.tintColor = colour1
-            
-            
-            //
-            // Button Stuff
-            //
-            // Button Tag
-            for b in buttonArray[indexPath.row] {
-                b.tag = indexPath.row
-            }
-            //
-            // Set Button View
-            cell.buttonView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-            //
-            // Stack View
-            let stackView = UIStackView(arrangedSubviews: buttonArray[indexPath.row])
-            //
-            // Layout
-            let numberOfButtons = CGFloat(setsArray[indexPath.row])
-            let xValue = ((cell.buttonView.frame.size.width - (numberOfButtons * 42.875)) / (numberOfButtons + 1))
-            let yValue = (cell.buttonView.frame.size.height - 42.875) / 2
-            let widthValue1 =
-                (numberOfButtons - 1) * (cell.buttonView.frame.size.width - (numberOfButtons * 42.875))
-            let widthValue2 = (widthValue1 / (numberOfButtons + 1)) + (numberOfButtons * 42.875)
-            // Layout formula
-            stackView.frame = CGRect(x: xValue, y: yValue, width: widthValue2, height: 42.875)
-            //
-            stackView.axis = .horizontal
-            stackView.distribution = .equalSpacing
-            //
-            cell.buttonView.addSubview(stackView)
-            //
-            // Set Buttons
-            // Disable pressed buttons
-            let indexOfUnpressedButton = buttonNumber[indexPath.row]
-            if indexOfUnpressedButton > 0 {
-                for s in 0...indexOfUnpressedButton - 1 {
-                    //
-                    buttonArray[indexPath.row][s].isEnabled = false
-                    buttonArray[indexPath.row][s].backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-                }
-            }
-            //
-            // Enable next unpressed button
-            if indexOfUnpressedButton == setsArray[indexPath.row] {
-            } else {
-                buttonArray[indexPath.row][indexOfUnpressedButton].isEnabled = true
-            }
-            
-           
             //
             // Gestures
             //
@@ -471,12 +259,6 @@ class SessionScreenOverview: UITableViewController {
             explanationTap.addTarget(self, action: #selector(expandExplanation))
             cell.explanationButton.addGestureRecognizer(explanationTap)
             
-            // HideScreen
-            let hideScreenTap = UITapGestureRecognizer()
-            hideScreenTap.numberOfTapsRequired = 1
-            hideScreenTap.addTarget(self, action: #selector(hideScreenAction))
-            cell.hideScreen.addGestureRecognizer(hideScreenTap)
-            
             // Left Image Swift
             let imageSwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
             imageSwipeLeft.direction = UISwipeGestureRecognizerDirection.left
@@ -495,16 +277,13 @@ class SessionScreenOverview: UITableViewController {
             case selectedRow - 1:
                 cell.movementLabel.alpha = 0
                 cell.setsRepsLabel.alpha = 0
-                cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
             //
             case selectedRow:
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
-                cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
-                cell.hideScreen.alpha = 1
-                cell.nextImage.alpha = 0.72
+                cell.nextImage.alpha = 1
                 cell.previousImage.alpha = 0
                 //cell.demonstrationImageView.isUserInteractionEnabled = true
             //
@@ -514,9 +293,7 @@ class SessionScreenOverview: UITableViewController {
                 //
                 cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 1
-                cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
-                cell.hideScreen.alpha = 0
                 cell.nextImage.alpha = 0
                 cell.previousImage.alpha = 0
                 //cell.demonstrationImageView.isUserInteractionEnabled = false
@@ -525,10 +302,8 @@ class SessionScreenOverview: UITableViewController {
                 //
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
-                cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
-                cell.hideScreen.alpha = 1
-                cell.nextImage.alpha = 0.72
+                cell.nextImage.alpha = 1
                 cell.previousImage.alpha = 0
             }
             
@@ -556,7 +331,7 @@ class SessionScreenOverview: UITableViewController {
     }
     
     // Height for row
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
         switch indexPath.section {
         case 0:
@@ -574,15 +349,15 @@ class SessionScreenOverview: UITableViewController {
     }
     
     // Did select row
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         switch indexPath.section {
         case 0:
             if indexPath.row == selectedRow {
                 //
-//                performSegue(withIdentifier: "SessionDetailSegue", sender: nil)
-//                tableView.deselectRow(at: indexPath, animated: true)
-            //
+                //                performSegue(withIdentifier: "SessionDetailSegue", sender: nil)
+                //                tableView.deselectRow(at: indexPath, animated: true)
+                //
             } else if indexPath.row == selectedRow + 1 {
                 //
                 if selectedRow < sessionArray.count {
@@ -595,7 +370,7 @@ class SessionScreenOverview: UITableViewController {
                     let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
                     let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
                     //
-                    var cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
+                    var cell = tableView.cellForRow(at: indexPath as IndexPath) as! StretchingTableViewCell
                     //
                     //
                     UIView.animate(withDuration: 0.6, animations: {
@@ -605,18 +380,14 @@ class SessionScreenOverview: UITableViewController {
                         // 1
                         cell.setsRepsLabel.alpha = 1
                         cell.movementLabel.alpha = 1
-                        cell.buttonView.alpha = 1
                         cell.explanationButton.alpha = 1
-                        cell.hideScreen.alpha = 1
-                        cell.nextImage.alpha = 0.72
+                        cell.nextImage.alpha = 1
                         cell.previousImage.alpha = 0
                         //cell.demonstrationImageView.isUserInteractionEnabled = true
                         // -1
-                        cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! OverviewTableViewCell
+                        cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! StretchingTableViewCell
                         cell.setsRepsLabel.alpha = 0
                         cell.movementLabel.alpha = 0
-                        cell.buttonView.alpha = 0
-                        cell.hideScreen.alpha = 0
                         //
                         self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
                     })
@@ -683,9 +454,9 @@ class SessionScreenOverview: UITableViewController {
     }
     
     
-//
-// Pocket Mode ------------------------------------------------------------------------------------------------------
-//
+    //
+    // Pocket Mode ------------------------------------------------------------------------------------------------------
+    //
     let blurEffectView = UIVisualEffectView()
     let hideLabel = UILabel()
     //
@@ -731,7 +502,7 @@ class SessionScreenOverview: UITableViewController {
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
         //
         self.hideLabel.alpha = 0
-
+        
         //
         UIView.animate(withDuration: 0.4, animations: {
             self.blurEffectView.alpha = 0
@@ -743,9 +514,9 @@ class SessionScreenOverview: UITableViewController {
     }
     
     
-//
-// Tap Handlers, buttons and funcs -------------------------------------------------------------------------------------------------------
-//
+    //
+    // Tap Handlers, buttons and funcs -------------------------------------------------------------------------------------------------------
+    //
     //
     //
     // Image
@@ -756,7 +527,7 @@ class SessionScreenOverview: UITableViewController {
         let tag = sender.tag
         //
         //if demonstrationArray[tag].count != 1 {
-         //   sender.startAnimating()
+        //   sender.startAnimating()
         //}
     }
     
@@ -774,7 +545,7 @@ class SessionScreenOverview: UITableViewController {
             let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
             let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
             //
-            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
+            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! StretchingTableViewCell
             //
             UIView.animate(withDuration: 0.6, animations: {
                 //
@@ -783,17 +554,37 @@ class SessionScreenOverview: UITableViewController {
                 // 1
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
-                cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
-                cell.hideScreen.alpha = 1
-                cell.nextImage.alpha = 0.72
-                cell.previousImage.alpha = 0
-                //cell.demonstrationImageView.isUserInteractionEnabled = true
+                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+                    if cell.imageViewCell.image == self.demonstrationArray[self.selectedRow] {
+                        cell.nextImage.alpha = 1
+                        cell.nextImage.isEnabled = true
+                        cell.previousImage.alpha = 0
+                        cell.previousImage.isEnabled = false
+                    } else {
+                        cell.nextImage.alpha = 0
+                        cell.nextImage.isEnabled = false
+                        cell.previousImage.alpha = 1
+                        cell.previousImage.isEnabled = true
+                    }
+                } else {
+                    if cell.imageViewCell.image == self.targetAreaArray[self.selectedRow] {
+                        cell.nextImage.alpha = 1
+                        cell.nextImage.isEnabled = true
+                        cell.previousImage.alpha = 0
+                        cell.previousImage.isEnabled = false
+                    } else {
+                        cell.nextImage.alpha = 0
+                        cell.nextImage.isEnabled = false
+                        cell.previousImage.alpha = 1
+                        cell.previousImage.isEnabled = true
+                    }
+                }
+                //
                 // -1
-                cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! OverviewTableViewCell
+                cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! StretchingTableViewCell
                 cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 0
-                cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
@@ -817,7 +608,7 @@ class SessionScreenOverview: UITableViewController {
             let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
             let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
             //
-            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
+            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! StretchingTableViewCell
             //
             UIView.animate(withDuration: 0.6, animations: {
                 //
@@ -826,29 +617,47 @@ class SessionScreenOverview: UITableViewController {
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
                 
-                //
+                // 1
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
-                cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
-                cell.hideScreen.alpha = 1
-                cell.nextImage.alpha = 0.72
-                cell.previousImage.alpha = 0
-                //
+                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+                    if cell.imageViewCell.image == self.demonstrationArray[self.selectedRow] {
+                        cell.nextImage.alpha = 1
+                        cell.nextImage.isEnabled = true
+                        cell.previousImage.alpha = 0
+                        cell.previousImage.isEnabled = false
+                    } else {
+                        cell.nextImage.alpha = 0
+                        cell.nextImage.isEnabled = false
+                        cell.previousImage.alpha = 1
+                        cell.previousImage.isEnabled = true
+                    }
+                } else {
+                    if cell.imageViewCell.image == self.targetAreaArray[self.selectedRow] {
+                        cell.nextImage.alpha = 1
+                        cell.nextImage.isEnabled = true
+                        cell.previousImage.alpha = 0
+                        cell.previousImage.isEnabled = false
+                    } else {
+                        cell.nextImage.alpha = 0
+                        cell.nextImage.isEnabled = false
+                        cell.previousImage.alpha = 1
+                        cell.previousImage.isEnabled = true
+                    }
+                }
+                // - 1
                 if self.selectedRow > 0 {
-                    cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! OverviewTableViewCell
+                    cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! StretchingTableViewCell
                     cell.setsRepsLabel.alpha = 0
                     cell.movementLabel.alpha = 0
-                    cell.buttonView.alpha = 0
                     cell.explanationButton.alpha = 0
                 }
-                //
-                cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! OverviewTableViewCell
+                // + 1
+                cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! StretchingTableViewCell
                 cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 1
-                cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
-                cell.hideScreen.alpha = 0
                 cell.nextImage.alpha = 0
                 cell.previousImage.alpha = 0
                 //
@@ -941,19 +750,19 @@ class SessionScreenOverview: UITableViewController {
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
         //
         let indexPath = NSIndexPath(row: selectedRow, section: 0)
-        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! StretchingTableViewCell
         //
         switch extraSwipe.direction {
         //
         case UISwipeGestureRecognizerDirection.left:
             //
-            if cell.nextImage.alpha == 0.7 {
+            if cell.nextImage.alpha == 1 {
                 //
                 let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
                 snapshot1?.bounds = cell.imageViewCell.bounds
                 snapshot1?.center.x = cell.center.x
                 cell.addSubview(snapshot1!)
-
+                
                 //
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
                     cell.imageViewCell.image = targetAreaArray[indexPath.row]
@@ -962,7 +771,7 @@ class SessionScreenOverview: UITableViewController {
                 }
                 //
                 cell.imageViewCell.reloadInputViews()
-            
+                
                 //
                 let snapshot2 = cell.imageViewCell.snapshotView(afterScreenUpdates: true)
                 snapshot2?.bounds = cell.imageViewCell.bounds
@@ -977,38 +786,38 @@ class SessionScreenOverview: UITableViewController {
                     //
                     cell.nextImage.alpha = 0
                     cell.nextImage.isEnabled = false
-                    cell.previousImage.alpha = 0.72
+                    cell.previousImage.alpha = 1
                     cell.previousImage.isEnabled = true
                 }, completion: { finished in
                     cell.imageViewCell.alpha = 1
                     snapshot1?.removeFromSuperview()
                     snapshot2?.removeFromSuperview()
                 })
-            //
+                //
             }
         //
         case UISwipeGestureRecognizerDirection.right:
             //
-            if cell.previousImage.alpha == 0.72 {
+            if cell.previousImage.alpha == 1 {
                 //
                 let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
                 snapshot1?.bounds = cell.imageViewCell.bounds
                 snapshot1?.center.x = cell.center.x
                 cell.addSubview(snapshot1!)
-
+                
                 //
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
                     cell.imageViewCell.image = demonstrationArray[indexPath.row]
                 } else {
                     cell.imageViewCell.image = targetAreaArray[indexPath.row]
                 }
-            
+                
                 //
                 let snapshot2 = cell.imageViewCell.snapshotView(afterScreenUpdates: true)
                 snapshot2?.bounds = cell.imageViewCell.bounds
                 snapshot2?.center.x = cell.center.x - cell.frame.size.width
                 cell.addSubview(snapshot2!)
-
+                
                 //
                 cell.imageViewCell.alpha = 0
                 //
@@ -1016,7 +825,7 @@ class SessionScreenOverview: UITableViewController {
                     snapshot1?.center.x = cell.center.x + cell.frame.size.width
                     snapshot2?.center.x = cell.center.x
                     //
-                    cell.nextImage.alpha = 0.72
+                    cell.nextImage.alpha = 1
                     cell.nextImage.isEnabled = true
                     cell.previousImage.alpha = 0
                     cell.previousImage.isEnabled = false
@@ -1025,12 +834,12 @@ class SessionScreenOverview: UITableViewController {
                     snapshot1?.removeFromSuperview()
                     snapshot2?.removeFromSuperview()
                 })
-            //
+                //
             }
         default: break
         }
     }
-
+    
     
     
     //
@@ -1052,39 +861,5 @@ class SessionScreenOverview: UITableViewController {
             progressBar.setProgress(0, animated: true)
         }
     }
-
-    
-//
-// Pass data to next view controller --------------------------------------------------------------------------------
-//
-    // Prepare for Segue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "SessionDetailSegue") {
-            //
-            let destinationVC = segue.destination as! SessionScreenOverviewDetail
-            //
-            let indexPath = tableView.indexPathForSelectedRow
-            let indexPathInt = Int((indexPath?.row)!)
-            destinationVC.selectedMovement = indexPathInt
-            //
-            destinationVC.sessionArray = sessionArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
-            //
-            destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
-            //
-            destinationVC.sessionType = sessionType
-            
-            // Set Button
-            destinationVC.buttonNumber = buttonNumber
-            
-            // Hide Back Button Text
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            navigationItem.backBarButtonItem = backItem
-        }
-    }
-//
+    //
 }

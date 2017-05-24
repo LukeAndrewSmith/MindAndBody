@@ -34,6 +34,8 @@
 
     "begin" = "Begin";
     "end" = "End";
+    "endRound" = "End Round";
+    "endWorkout" = "End Workout";
 
     "mandatory" = "Mandatory";
     "lowerBack" = "Lower Back";
@@ -1373,7 +1375,7 @@
         "presentationStyle" = "Presentation Style";
         "defaultImage" = "Default Image";
         "colour" = "Colour";
-        "restTime" = "Rest Time";
+        "restTime" = "Rest Times";
 
         // Contents //
         // Presentation Style

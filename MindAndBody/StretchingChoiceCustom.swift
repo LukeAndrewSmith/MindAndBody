@@ -22,7 +22,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     // Custom Arrays
     //
     var presetTexts: [String] = []
-    // stretchingPresetsCustom, SetsArray, RepsArray
+    // stretchingPresetsCustom,, BreathsArray
     var emptyArrayOfArrays: [[Int]] = []
     // Selected row
     var selectedRow = Int()
@@ -37,9 +37,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     var explanationArray: [String] = []
     
     //
-    var setsArray: [Int] = []
-    //
-    var repsArray: [String] = []
+    var breathsArray: [String] = []
     
     
     //
@@ -227,170 +225,6 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             63: "QuadStretch"
     ]
     
-    // Screen Arrays
-    //
-    var setsDictionary: [Int : Int] =
-        [
-            // Recommended
-            0: 1,
-            // Joint Rotations
-            1: 1,
-            2: 1,
-            3: 1,
-            4: 1,
-            5: 1,
-            6: 1,
-            7: 1,
-            8: 1,
-            // Foam/Ball Roll
-            9: 1,
-            10: 3,
-            11: 1,
-            12: 1,
-            13: 1,
-            14: 1,
-            15: 1,
-            16: 1,
-            17: 1,
-            18: 1,
-            // Back
-            19: 1,
-            20: 1,
-            21: 1,
-            22: 1,
-            23: 1,
-            24: 1,
-            25: 1,
-            26: 1,
-            27: 1,
-            28: 1,
-            // Obliques(Sides)
-            29: 1,
-            30: 1,
-            31: 1,
-            // Neck
-            32: 1,
-            33: 2,
-            34: 1,
-            35: 1,
-            36: 1,
-            37: 1,
-            // Arms
-            38: 1,
-            39: 1,
-            40: 1,
-            // Pecs
-            41: 1,
-            // Shoulders
-            42: 1,
-            43: 1,
-            44: 1,
-            45: 1,
-            46: 1,
-            47: 1,
-            // Hips and Glutes
-            48: 2,
-            49: 1,
-            50: 1,
-            51: 1,
-            52: 1,
-            53: 1,
-            54: 1,
-            // Calves
-            55: 1,
-            // Hamstrings
-            56: 3,
-            57: 3,
-            58: 1,
-            59: 1,
-            60: 1,
-            61: 1,
-            // Quads
-            62: 1,
-            63: 1
-    ]
-    
-    // Reps Array
-    var repsDictionary: [Int : String] =
-        [
-            // Recommended
-            0: "5min",
-            // Joint Rotations
-            1: "10-30s",
-            2: "10-30s",
-            3: "10-30s",
-            4: "10-30s",
-            5: "10-30s",
-            6: "10-30s",
-            7: "10-30s",
-            8: "10-30s",
-            // Foam/Ball Roll
-            9: "2-7 reps",
-            10: "5-10 reps",
-            11: "2-7 reps",
-            12: "15-30s",
-            13: "15-30s",
-            14: "2-7 reps",
-            15: "2-7 reps",
-            16: "2-7 reps",
-            17: "2-7 reps",
-            18: "2-7 reps",
-            // Back
-            19: "15-20 reps",
-            20: "15-30s",
-            21: "30-60s",
-            22: "30-180s",
-            23: "30-90s",
-            24: "10-30 reps",
-            25: "30-60s",
-            26: "25-45s",
-            27: "30-60s",
-            28: "30-180s",
-            // Obliques(Sides)
-            29: "10-20s",
-            30: "15-30s",
-            31: "15-30s",
-            // Neck
-            32: "15-30s",
-            33: "5-10s",
-            34: "15-30s",
-            35: "15-30s",
-            36: "15-30s",
-            37: "20-40s",
-            // Arms
-            38: "15-30s",
-            39: "15-30s",
-            40: "15-30s",
-            // Pecs
-            41: "15-30s",
-            // Shoulders
-            42: "20-40s",
-            43: "10-20s",
-            44: "15-30s",
-            45: "15-30s",
-            46: "15-30s",
-            47: "15-30s",
-            // Hips and Glutes
-            48: "1-5min",
-            49: "5-10 reps",
-            50: "15-30s",
-            51: "15-30s",
-            52: "15-30s",
-            53: "15-45s",
-            54: "15-45s",
-            // Calves
-            55: "15-30s",
-            // Hamstrings
-            56: "10s",
-            57: "10s",
-            58: "15-30s",
-            59: "15-45s",
-            60: "15-60s",
-            61: "15-60s",
-            // Quads
-            62: "15-30s",
-            63: "15-30s"
-    ]
     
     // Demonstration Array
     var demonstrationDictionary: [Int : UIImage] =
@@ -641,11 +475,9 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     
     
     //
-    // Sets Reps Picker View
+    // Breaths/Breaths/Seconds Picker View
     //
-    var setsPickerArray: [Int] = [1, 2, 3, 4, 5, 6]
-    //                              // Reps                                      Rep Range§                     // Seconds
-    var repsPickerArray: [String] = ["1", "3", "5", "8", "10", "12", "15", "20", "3-5", "5-8", "8-12", "15-20", "15s", "30s", "60s", "90s"]
+    var breathsPickerArray: [String] = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99"]
     
     
     //
@@ -675,8 +507,6 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var tableViewConstraint1: NSLayoutConstraint!
     
-    @IBOutlet weak var seperatorConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var beginButtonConstraint: NSLayoutConstraint!
     
     
@@ -689,12 +519,12 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     var movementsTableView = UITableView()
     var backgroundViewExpanded = UIButton()
     
-    // Sets and Reps Choice
-    var setsRepsView = UIView()
-    var setsRepsPicker = UIPickerView()
+    // Breaths Choice
+    var breathsView = UIView()
+    var breathsPicker = UIPickerView()
     var okButton = UIButton()
     //
-    let setsIndicatorLabel = UILabel()
+    let breathsIndicatorLabel = UILabel()
     
     
     //
@@ -706,7 +536,8 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         let flash = UIView()
         flash.frame = CGRect(x: 0, y: sessionPickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
         flash.backgroundColor = colour1
-        self.view.alpha = 1
+        flash.alpha = 0.7
+        //
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
         //
@@ -732,8 +563,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         defaults.register(defaults: ["stretchingPresetsCustom" : emptyArrayOfArrays])
         defaults.register(defaults: ["stretchingPresetTextsCustom" : presetTexts])
         //
-        defaults.register(defaults: ["stretchingSetsCustom" : emptyArrayOfArrays])
-        defaults.register(defaults: ["stretchingRepsCustom" : emptyArrayOfArrays])
+        defaults.register(defaults: ["stretchingBreathsCustom" : emptyArrayOfArrays])
         //
         defaults.synchronize()
         
@@ -793,8 +623,6 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             tableViewConstraint.constant = view.frame.size.height - 98
             tableViewConstraint1.constant = -49
             //
-            seperatorConstraint.constant = -49
-            //
             beginButtonConstraint.constant = -49
         }
     
@@ -818,15 +646,15 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         movementsTableView.layer.cornerRadius = 5
         movementsTableView.layer.masksToBounds = true
         //
-        // Sets Reps Selection
+        // Breaths election
         // view
-        setsRepsView.backgroundColor = colour2
-        setsRepsView.layer.cornerRadius = 5
-        setsRepsView.layer.masksToBounds = true
+        breathsView.backgroundColor = colour2
+        breathsView.layer.cornerRadius = 5
+        breathsView.layer.masksToBounds = true
         // picker
-        setsRepsPicker.backgroundColor = colour2
-        setsRepsPicker.delegate = self
-        setsRepsPicker.dataSource = self
+        breathsPicker.backgroundColor = colour2
+        breathsPicker.delegate = self
+        breathsPicker.dataSource = self
         // ok
         okButton.backgroundColor = colour1
         okButton.setTitleColor(colour2, for: .normal)
@@ -834,14 +662,14 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
         // sets
-        setsIndicatorLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        setsIndicatorLabel.textColor = colour1
-        setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+        breathsIndicatorLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        breathsIndicatorLabel.textColor = colour1
+        breathsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
         //
-        setsRepsView.addSubview(setsRepsPicker)
-        setsRepsView.addSubview(okButton)
-        setsRepsView.addSubview(setsIndicatorLabel)
-        setsRepsView.bringSubview(toFront: setsIndicatorLabel)
+        breathsView.addSubview(breathsPicker)
+        breathsView.addSubview(okButton)
+        breathsView.addSubview(breathsIndicatorLabel)
+        breathsView.bringSubview(toFront: breathsIndicatorLabel)
         //
         // Background View
         backgroundViewExpanded.backgroundColor = .black
@@ -931,8 +759,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
         var presetTextArray = defaults.object(forKey: "stretchingPresetTextsCustom") as! [String]
         //
-        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+        var customBreathsArray = defaults.object(forKey: "stretchingBreathsCustom") as! [[Int]]
         // Alert and Functions
         //
         let inputTitle = NSLocalizedString("stretchingInputTitle", comment: "")
@@ -956,12 +783,9 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             // Add New empty array
             customKeyArray.append([])
             defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
-            // Add new sets and reps arrays
-            customSetsArray.append([])
-            defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
-            //
-            customRepsArray.append([])
-            defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+            // Add new breaths arrays
+            customBreathsArray.append([])
+            defaults.set(customBreathsArray, forKey: "stretchingBreathsCustom")
             //
             defaults.synchronize()
             // Flash Screen
@@ -981,8 +805,6 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                 //
                 self.tableViewConstraint.constant = 49
                 self.tableViewConstraint1.constant = 49
-                //
-                self.seperatorConstraint.constant = 49
                 //
                 self.beginButtonConstraint.constant = 0
                 //
@@ -1021,8 +843,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
         var presetTextArray = defaults.object(forKey: "stretchingPresetTextsCustom") as! [String]
         //
-        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+        var customBreathsArray = defaults.object(forKey: "stretchingBreathsCustom") as! [[Int]]
         //
         let selectedRow = sessionPickerView.selectedRow(inComponent: 0)
         //
@@ -1042,11 +863,8 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                 presetTextArray.remove(at: selectedRow)
                 defaults.set(presetTextArray, forKey: "stretchingPresetTextsCustom")
                 //
-                customSetsArray.remove(at: selectedRow)
-                defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
-                //
-                customRepsArray.remove(at: selectedRow)
-                defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+                customBreathsArray.remove(at: selectedRow)
+                defaults.set(customBreathsArray, forKey: "stretchingBreathsCustom")
                 //
                 defaults.synchronize()
                 
@@ -1067,8 +885,6 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                     self.tableViewConstraint.constant = self.view.frame.size.height - 98
                     self.tableViewConstraint1.constant = -49
                     //
-                    self.seperatorConstraint.constant = -49
-                    //
                     self.beginButtonConstraint.constant = -49
                     //
                     UIView.animate(withDuration: 0.7) {
@@ -1081,7 +897,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             }
         })
         //
-        if customSetsArray.count > 0 {
+        if customBreathsArray.count > 0 {
             alert.addAction(okAction)
         } else {
         }
@@ -1102,12 +918,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     //
     // Number of components
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        if pickerView == sessionPickerView {
-            return 1
-        } else if pickerView == setsRepsPicker {
-            return 2
-        }
-        return 0
+        return 1
     }
     
     // Number of rows
@@ -1115,12 +926,9 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         if pickerView == sessionPickerView {
             let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTextsCustom") as! [String]
             return titleDataArray.count
-        } else if pickerView == setsRepsPicker {
-            if component == 0{
-                return 6
-            } else {
-                return 16
-            }
+        } else if pickerView == breathsPicker {
+            return breathsPickerArray.count
+            
         }
         return 0
     }
@@ -1141,40 +949,29 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                 return rowLabel
             }
             //
-        } else if pickerView == setsRepsPicker {
+        } else if pickerView == breathsPicker {
             //
-            if component == 0 {
-                let setsLabel = UILabel()
-                setsLabel.text = String(setsPickerArray[row])
-                setsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                setsLabel.textColor = colour1
-                //
-                setsLabel.textAlignment = .center
-                return setsLabel
-                //
-            } else if component == 1 {
-                //
-                let repsLabel = UILabel()
-                // Row Label Text
-                switch row {
-                //
-                case 0:
-                    repsLabel.text = "        " + String(repsPickerArray[row]) + "  " + NSLocalizedString("rep", comment: "")
-                //
-                case 1:
-                    repsLabel.text = "         " + String(repsPickerArray[row]) + " " + NSLocalizedString("reps", comment: "")
-                //
-                case 2...15:
-                    repsLabel.text = String(repsPickerArray[row])
-                //
-                default: break
-                }
-                repsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                repsLabel.textColor = colour1
-                repsLabel.textAlignment = .center
-                return repsLabel
-                //
+            //
+            let breathsLabel = UILabel()
+            // Row Label Text
+            switch row {
+            //
+            case 0:
+                breathsLabel.text = "        " + String(breathsPickerArray[row]) + "  " + NSLocalizedString("rep", comment: "")
+            //
+            case 1:
+                breathsLabel.text = "         " + String(breathsPickerArray[row]) + " " + NSLocalizedString("reps", comment: "")
+            //
+            case 2...15:
+                breathsLabel.text = String(breathsPickerArray[row])
+            //
+            default: break
             }
+            breathsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
+            breathsLabel.textColor = colour1
+            breathsLabel.textAlignment = .center
+            return breathsLabel
+            //
         }
         return UILabel()
     }
@@ -1184,21 +981,6 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         return 30
     }
     
-    // Width
-    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        //
-        if pickerView == sessionPickerView {
-            return sessionPickerView.frame.size.width
-            //
-        } else if pickerView == setsRepsPicker {
-            if component == 0 {
-                return (setsRepsPicker.frame.size.width / 3)
-            } else if component == 1{
-                return (setsRepsPicker.frame.size.width / 3)
-            }
-        }
-        return 0
-    }
     
     // Did select row
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -1208,19 +990,8 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             self.customTableView.reloadData()
             flashScreen()
             //
-        } else if pickerView == setsRepsPicker {
+        } else if pickerView == breathsPicker {
             //
-            if component ==  0{
-                //
-                if row == 0 {
-                    self.setsIndicatorLabel.text = NSLocalizedString("set", comment: "")
-                } else {
-                    self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
-                }
-                // Row Label
-                //
-            } else {
-            }
         }
     }
     
@@ -1321,8 +1092,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             let defaults = UserDefaults.standard
             let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
             //
-            var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-            var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+            var customBreathsArray = defaults.object(forKey: "stretchingBreathsCustom") as! [[Int]]
             //
             if customKeyArray.count == 0 {
                 //
@@ -1367,12 +1137,16 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                     cell.backgroundColor = colour1
                     cell.textLabel?.textColor = colour2
                     cell.tintColor = .black
-                    // Detail sets x reps
-                    cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+                    // Detail Breaths
+                    cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
                     cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
                     cell.detailTextLabel?.textAlignment = .left
                     cell.detailTextLabel?.textColor = colour2
-                    cell.detailTextLabel?.text = String(setsPickerArray[customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]]) + " x " + repsPickerArray[customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]]
+                    if keyIndex == 0 {
+                        
+                    } else {
+                        cell.detailTextLabel?.text = breathsPickerArray[customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]]
+                    }
                     //
                     // Cell Image
                     cell.imageView?.image = demonstrationDictionary[keyIndex]
@@ -1450,8 +1224,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         let defaults = UserDefaults.standard
         var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
         //
-        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+        var customBreathsArray = defaults.object(forKey: "stretchingBreathsCustom") as! [[Int]]
         // If no session created
         if customKeyArray.count == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
@@ -1462,30 +1235,30 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                 //
                 selectedRow = indexPath.row
                 //
-                if customKeyArray.count == 0 {
-                    //
-                    movementsTableView.alpha = 0
-                    UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
-                    let selectedCell = tableView.cellForRow(at: indexPath)
-                    movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
-                    //
-                    backgroundViewExpanded.alpha = 0
-                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
-                    backgroundViewExpanded.frame = UIScreen.main.bounds
-                    // Animate table fade and size
-                    // Alpha
-                    UIView.animate(withDuration: 0.4, animations: {
-                        self.movementsTableView.alpha = 1
-                        //
-                    }, completion: nil)
-                    // Position
-                    UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                        self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
-                        //
-                        self.backgroundViewExpanded.alpha = 0.7
-                    }, completion: nil)
-                    //
-                } else {
+//                if customKeyArray.count == 0 {
+//                    //
+//                    movementsTableView.alpha = 0
+//                    UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
+//                    let selectedCell = tableView.cellForRow(at: indexPath)
+//                    movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+//                    //
+//                    backgroundViewExpanded.alpha = 0
+//                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
+//                    backgroundViewExpanded.frame = UIScreen.main.bounds
+//                    // Animate table fade and size
+//                    // Alpha
+//                    UIView.animate(withDuration: 0.4, animations: {
+//                        self.movementsTableView.alpha = 1
+//                        //
+//                    }, completion: nil)
+//                    // Position
+//                    UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+//                        self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
+//                        //
+//                        self.backgroundViewExpanded.alpha = 0.7
+//                    }, completion: nil)
+//                    //
+//                } else {
                     //
                     if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
                         //
@@ -1512,62 +1285,56 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                         //
                     } else {
                         // View
-                        setsRepsView.alpha = 0
-                        UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
+                        breathsView.alpha = 0
+                        UIApplication.shared.keyWindow?.insertSubview(breathsView, aboveSubview: view)
                         let selectedCell = tableView.cellForRow(at: indexPath)
-                        setsRepsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+                        breathsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
                         // selected row
-                        setsRepsPicker.selectRow(customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 0, animated: true)
-                        setsRepsPicker.selectRow(customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 1, animated: true)
+                        breathsPicker.selectRow(customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 0, animated: true)
                         //
-                        let componentWidth = setsRepsPicker.frame.size.width / 3
-                        let componentWidthFourth = componentWidth / 4
                         // picker
-                        setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+                        breathsPicker.frame = CGRect(x: 0, y: 0, width: breathsView.frame.size.width, height: 147)
                         // ok
-                        okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
+                        okButton.frame = CGRect(x: 0, y: 147, width: breathsView.frame.size.width, height: 49)
                         //
-                        self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+                        self.breathsIndicatorLabel.frame = CGRect(x: breathsPicker.frame.size.width + 15, y: (self.breathsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
                         //
                         backgroundViewExpanded.alpha = 0
-                        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
+                        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: breathsView)
                         backgroundViewExpanded.frame = UIScreen.main.bounds
                         // Animate table fade and size
                         // Alpha
                         UIView.animate(withDuration: 0.4, animations: {
-                            self.setsRepsView.alpha = 1
+                            self.breathsView.alpha = 1
                             //
                         }, completion: nil)
                         // Position
                         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                             //
-                            self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
-                            self.setsRepsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
+                            self.breathsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
+                            self.breathsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
                             // picker
-                            self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+                            self.breathsPicker.frame = CGRect(x:0, y: 0, width: self.breathsView.frame.size.width, height: 147)
                             // ok
-                            self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
+                            self.okButton.frame = CGRect(x: 0, y: 147, width: self.breathsView.frame.size.width, height: 49)
                             // Sets Indicator Label
-                            self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                            self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+                            self.breathsIndicatorLabel.frame = CGRect(x: (self.breathsPicker.frame.size.width / 2) + 15, y: (self.breathsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+                            self.breathsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
                             //
                             //
                             self.backgroundViewExpanded.alpha = 0.7
                             
                         }, completion: nil)
                     }
-                }
+                //}
             //
             case movementsTableView:
                 //
                 customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].append(fullKeyArray[indexPath.section][indexPath.row])
                 defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
-                // sets
-                customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
-                defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
-                // reps
-                customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
-                defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+                // Breaths
+                customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
+                defaults.set(customBreathsArray, forKey: "stretchingBreathsCustom")
                 //
                 defaults.synchronize()
                 // Remove Table
@@ -1604,34 +1371,46 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     // Can edit row
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         //
-        let defaults = UserDefaults.standard
-        let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
-        //
-        if customKeyArray.count == 0 {
-            return false
-        } else {
-            if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+        switch tableView {
+        case movementsTableView: return false
+        case customTableView:
+            //
+            let defaults = UserDefaults.standard
+            let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
+            //
+            if customKeyArray.count == 0 {
                 return false
             } else {
+                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+                    return false
+                } else {
                 return true
+                }
             }
+        default: return false
         }
     }
     
     // Can move to row
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         //
+        switch tableView {
+        case movementsTableView: return false
+        case customTableView:
+        //
         let defaults = UserDefaults.standard
         let customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
-        //
-        if customKeyArray.count == 0 {
-            return false
-        } else {
-            if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+            //
+            if customKeyArray.count == 0 {
                 return false
             } else {
-                return true
+                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+                    return false
+                } else {
+                    return true
+                }
             }
+        default: return false
         }
     }
     
@@ -1640,23 +1419,18 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         //
         let defaults = UserDefaults.standard
         var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
-        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+        var customBreathsArray = defaults.object(forKey: "stretchingBreathsCustom") as! [[Int]]
         // Key
         let itemToMove = customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
         customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].insert(itemToMove, at: destinationIndexPath.row)
         //
         defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
-        // Sets
-        let setToMove = customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
-        customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(setToMove, at: destinationIndexPath.row)
         //
-        defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
-        // Reps
-        let repToMove = customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
-        customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(repToMove, at: destinationIndexPath.row)
+        // Breaths
+        let repToMove = customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
+        customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(repToMove, at: destinationIndexPath.row)
         //
-        defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+        defaults.set(customBreathsArray, forKey: "stretchingBreathsCustom")
         //
         defaults.synchronize()
     }
@@ -1686,17 +1460,13 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         if editingStyle == UITableViewCellEditingStyle.delete {
             let defaults = UserDefaults.standard
             var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
-            var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-            var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+            var customBreathsArray = defaults.object(forKey: "stretchingBreathsCustom") as! [[Int]]
             // Key
             customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
             defaults.set(customKeyArray, forKey: "stretchingPresetsCustom")
-            // sets
-            customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
-            // reps
-            customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+            // Breaths
+            customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
+            defaults.set(customBreathsArray, forKey: "stretchingBreathsCustom")
             //
             defaults.synchronize()
             //
@@ -1713,12 +1483,12 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         //
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.movementsTableView.alpha = 0
-            self.setsRepsView.alpha = 0
+            self.breathsView.alpha = 0
             //
             self.backgroundViewExpanded.alpha = 0
         }, completion: { finished in
             self.movementsTableView.removeFromSuperview()
-            self.setsRepsView.removeFromSuperview()
+            self.breathsView.removeFromSuperview()
             //
             self.backgroundViewExpanded.removeFromSuperview()
         })
@@ -1757,23 +1527,19 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     func okButtonAction(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+        var customBreathsArray = defaults.object(forKey: "stretchingBreathsCustom") as! [[Int]]
         //
-        customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = setsRepsPicker.selectedRow(inComponent: 0)
-        defaults.set(customSetsArray, forKey: "stretchingSetsCustom")
-        //
-        customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = setsRepsPicker.selectedRow(inComponent: 1)
-        defaults.set(customRepsArray, forKey: "stretchingRepsCustom")
+        customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = breathsPicker.selectedRow(inComponent: 1)
+        defaults.set(customBreathsArray, forKey: "stretchingBreathsCustom")
         //
         defaults.synchronize()
         //
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.setsRepsView.alpha = 0
+            self.breathsView.alpha = 0
             //
             self.backgroundViewExpanded.alpha = 0
         }, completion: { finished in
-            self.setsRepsView.removeFromSuperview()
+            self.breathsView.removeFromSuperview()
             //
             self.backgroundViewExpanded.removeFromSuperview()
         })
@@ -1846,23 +1612,11 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     //
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
-        
-        if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
-            
-            performSegue(withIdentifier: "stretchingCustomSegue1", sender: nil)
-            
-        } else {
-            
-            performSegue(withIdentifier: "stretchingCustomSegue2", sender: nil)
-        }
-        
-        
+        //
         // Return background to homescreen
         let delayInSeconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            
             _ = self.navigationController?.popToRootViewController(animated: false)
-            
         }
     }
     
@@ -1877,16 +1631,13 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         //
         var customKeyArray = defaults.object(forKey: "stretchingPresetsCustom") as! [[Int]]
         //
-        var customSetsArray = defaults.object(forKey: "stretchingSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "stretchingRepsCustom") as! [[Int]]
+        var customBreathsArray = defaults.object(forKey: "stretchingBreathsCustom") as! [[Int]]
         //
         let titleDataArray = UserDefaults.standard.object(forKey: "stretchingPresetTextsCustom") as! [String]
         
-        
-        if (segue.identifier == "stretchingCustomSegue1") {
+        if (segue.identifier == "stretchingSessionSegueCustom") {
             //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreen
+            let destinationVC = segue.destination as! StretchingScreen
             
             // Compress Arrays
             for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
@@ -1899,64 +1650,22 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                 //
                 explanationArray.append(explanationDictionary[i]!)
             }
+
             //
-            for i in customSetsArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                setsArray.append(setsPickerArray[i])
-            }
-            //
-            for i in customRepsArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                repsArray.append(repsPickerArray[i])
+            for i in customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)] {
+                breathsArray.append(breathsPickerArray[i])
             }
             
             //
             destinationVC.sessionArray = stretchingArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
+            destinationVC.breathsArray = breathsArray
             destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
             destinationVC.sessionType = 0
-            //
-        } else if (segue.identifier == "stretchingCustomSegue2") {
-            //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
-            
-            // Compress Arrays
-            for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                //
-                stretchingArray.append(stretchingMovementsDictionary[i]!)
-                //
-                demonstrationArray.append(demonstrationDictionary[i]!)
-                //
-                targetAreaArray.append(targetAreaDictionary[i]!)
-                //
-                explanationArray.append(explanationDictionary[i]!)
-            }
-            //
-            for i in customSetsArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                setsArray.append(setsPickerArray[i])
-            }
-            //
-            for i in customRepsArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                repsArray.append(repsPickerArray[i])
-            }
-            
-            //
-            destinationVC.sessionArray = stretchingArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
-            destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
-            //
-            destinationVC.sessionType = 0
-            //
-            destinationVC.sessionTitle = titleDataArray[sessionPickerView.numberOfRows(inComponent: 0)]
         }
     }
-    
     
     
     //

@@ -1042,8 +1042,6 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         //
-        performSegue(withIdentifier: "yogaSessionSegue", sender: nil)
-        //
         // Return background to homescreen
         let delayInSeconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -1058,8 +1056,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "yogaSessionSegue") {
             //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! YogaScreenOverview
+            let destinationVC = segue.destination as! YogaScreen
             
             // Ensure array in ascending order
             // Compress Arrays

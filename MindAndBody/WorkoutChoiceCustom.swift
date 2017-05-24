@@ -1149,7 +1149,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.textLabel?.textColor = colour2
                     cell.tintColor = .black
                     // Detail sets x reps
-                    cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+                    cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
                     cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
                     cell.detailTextLabel?.textAlignment = .left
                     cell.detailTextLabel?.textColor = colour2
@@ -1623,11 +1623,8 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func beginButton(_ sender: Any) {
         
         if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
-            
             performSegue(withIdentifier: "warmupCustomSegue1", sender: nil)
-            
         } else {
-            
             performSegue(withIdentifier: "warmupCustomSegue2", sender: nil)
         }
         
@@ -1660,8 +1657,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         
         if (segue.identifier == "warmupCustomSegue1") {
             //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreen
+            let destinationVC = segue.destination as! SessionScreen
             
             // Compress Arrays
             for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
@@ -1695,8 +1691,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             //
         } else if (segue.identifier == "warmupCustomSegue2") {
             //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! WorkoutSessionScreenOverview
+            let destinationVC = segue.destination as! CircuitWorkoutScreen
             
             // Compress Arrays
             for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
@@ -1728,7 +1723,6 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             //
             destinationVC.sessionType = 0
             //
-            destinationVC.sessionTitle = titleDataArray[sessionPickerView.numberOfRows(inComponent: 0)]
         }
     }
     

@@ -504,8 +504,6 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     @IBOutlet weak var tableViewConstraint1: NSLayoutConstraint!
     
-    @IBOutlet weak var seperatorConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var beginButtonConstraint: NSLayoutConstraint!
     
     
@@ -535,7 +533,8 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         let flash = UIView()
         flash.frame = CGRect(x: 0, y: sessionPickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
         flash.backgroundColor = colour1
-        self.view.alpha = 1
+        flash.alpha = 0.7
+        //
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
         //
@@ -620,8 +619,6 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             tableViewConstraint.constant = view.frame.size.height - 98
             tableViewConstraint1.constant = -49
-            //
-            seperatorConstraint.constant = -49
             //
             beginButtonConstraint.constant = -49
         }
@@ -885,8 +882,6 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
                     //
                     self.tableViewConstraint.constant = self.view.frame.size.height - 98
                     self.tableViewConstraint1.constant = -49
-                    //
-                    self.seperatorConstraint.constant = -49
                     //
                     self.beginButtonConstraint.constant = -49
                     //
@@ -1358,35 +1353,45 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     //
     // Can edit row
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        //
-        let defaults = UserDefaults.standard
-        let customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
-        //
-        if customKeyArray.count == 0 {
-            return false
-        } else {
-            if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+        switch tableView {
+        case movementsTableView: return false
+        case customTableView:
+            //
+            let defaults = UserDefaults.standard
+            let customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
+            //
+            if customKeyArray.count == 0 {
                 return false
             } else {
-                return true
+                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+                    return false
+                } else {
+                    return true
+                }
             }
+        default: return false
         }
     }
     
     // Can move to row
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        switch tableView {
+        case movementsTableView: return false
+        case customTableView:
         //
         let defaults = UserDefaults.standard
         let customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
-        //
-        if customKeyArray.count == 0 {
-            return false
-        } else {
-            if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+            //
+            if customKeyArray.count == 0 {
                 return false
             } else {
-                return true
+                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+                    return false
+                } else {
+                    return true
+                }
             }
+        default: return false
         }
     }
     
@@ -1607,8 +1612,6 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         //
-        performSegue(withIdentifier: "yogaCustomSegue", sender: nil)
-            //
         // Return background to homescreen
         let delayInSeconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -1624,17 +1627,12 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
         let defaults = UserDefaults.standard
-        //
         var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
-        //
         var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
         //
-        let titleDataArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
-        
-        if (segue.identifier == "yogaCustomSegue") {
+        if (segue.identifier == "yogaSessionSegueCustom") {
             //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! YogaScreenOverview
+            let destinationVC = segue.destination as! YogaScreen
             
             // Compress Arrays
             for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {

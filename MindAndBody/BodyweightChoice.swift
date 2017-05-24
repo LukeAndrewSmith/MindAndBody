@@ -25,7 +25,6 @@ class BodyweightChoice: UIViewController  {
     //
     @IBOutlet weak var lowerBody: UIButton!
     //
-    @IBOutlet weak var custom: UIButton!
     
     // Information View
     let informationView = UIScrollView()
@@ -51,6 +50,7 @@ class BodyweightChoice: UIViewController  {
     
     
     //
+    var workoutType = Int()
     var workoutType2 = Int()
 //
 // View did load ----------------------------------------------------------------------------------------------------------------
@@ -72,7 +72,11 @@ class BodyweightChoice: UIViewController  {
         questionMark.tintColor = colour1
         
         // Titles
-        navigationBar.title = (NSLocalizedString("bodyweight", comment: ""))
+        if workoutType == 2 {
+            navigationBar.title = (NSLocalizedString("classic", comment: ""))
+        } else if workoutType == 3 {
+            navigationBar.title = (NSLocalizedString("circuit", comment: ""))
+        }
         
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
@@ -92,19 +96,6 @@ class BodyweightChoice: UIViewController  {
         lowerBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         lowerBody.layer.borderWidth = 8
         lowerBody.layer.borderColor = colour2.cgColor
-        //
-        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        custom.layer.borderWidth = 7
-        custom.layer.borderColor = colour2.cgColor
-        custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
-        custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(colour2, for: .normal)
-        custom.layer.cornerRadius = 49/2
-        custom.layer.masksToBounds = true
-        custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleLabel?.numberOfLines = 0
-        custom.titleLabel?.textAlignment = .center
         //
         
         // Information
@@ -287,7 +278,7 @@ class BodyweightChoice: UIViewController  {
             //
             let destinationVC = segue.destination as! WorkoutChoiceFinal
             // Indicate to next screen which button was pressed
-            destinationVC.workoutType = 2
+            destinationVC.workoutType = workoutType
             destinationVC.workoutType2 = 2
         }
         //
@@ -379,7 +370,6 @@ class BodyweightChoice: UIViewController  {
             
             // Clear Section
             let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: custom.center.x, y: custom.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height), radius: 24.5, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()

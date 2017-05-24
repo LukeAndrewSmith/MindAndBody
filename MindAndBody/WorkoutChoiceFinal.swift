@@ -17,8 +17,9 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     
     // Selected Workout Type
     //
+    // Gym (0), Gym Circuit (1), Bodyweight (2), Bodyweight Circtui (3)
     var workoutType = Int()
-    //
+    // Full body, upper, lower etc.
     var workoutType2 = Int()
     
     // Selected Preset
@@ -2297,6 +2298,36 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             default: break
             }
         //
+        case 3:
+            //
+            // TO DO !!!!!!!!!!!
+            //
+            // Choice Screen Arrays
+            tableViewSectionArray = tableViewSectionArrayBodyweight
+            fullKeyArray = fullKeyArrayBodyweight
+            workoutMovementsDictionary = workoutMovementsDictionaryBodyweight
+            demonstrationDictionary = demonstrationDictionaryBodyweight
+            targetAreaDictionary = targetAreaDictionaryBodyweight
+            explanationDictionary = explanationDictionaryBodyweight
+            setsDictionary = setsDictionaryBodyweight
+            repsDictionary = repsDictionaryBodyweight
+            //
+            // Set Presets
+            switch workoutType2 {
+            case 0:
+                presetsArray = presetsArrayBodyweightFull
+                presetsArrays = presetsArraysBodyweightFull
+                numberOfRoundsArray = numberOfRoundsArrayBodyweightFull
+            case 1:
+                presetsArray = presetsArrayBodyweightUpper
+                presetsArrays = presetsArraysBodyweightUpper
+                numberOfRoundsArray = numberOfRoundsArrayBodyweightUpper
+            case 2:
+                presetsArray = presetsArrayBodyweightLower
+                presetsArrays = presetsArraysBodyweightLower
+                numberOfRoundsArray = numberOfRoundsArrayBodyweightLower
+            default: break
+            }
         default: break
         }
     }
@@ -2526,20 +2557,29 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             if numberOfRoundsArray.count == 0 {
                 //
                 cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[overviewArray[indexPath.section][indexPath.row]]!, comment: "")
+                cell.detailTextLabel?.text = repsDictionary[overviewArray[indexPath.section][indexPath.row]]
                 //
                 cell.imageView?.image = demonstrationDictionary[overviewArray[indexPath.section][indexPath.row]]
             } else {
                 cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[roundArray[indexPath.row]]!, comment: "")
+                cell.detailTextLabel?.text = repsDictionary[roundArray[indexPath.row]]
                 //
                 cell.imageView?.image = demonstrationDictionary[roundArray[indexPath.row]]
             }
             //
+            // Text Label
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.textLabel?.textAlignment = .left
             cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             cell.textLabel?.textColor = colour2
             cell.tintColor = colour2
+            //
+            // Detail Text Label - reps
+            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)
+            cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
+            cell.detailTextLabel?.textAlignment = .right
+            cell.detailTextLabel?.textColor = colour2
             //
             // Cell Image
             cell.imageView?.isUserInteractionEnabled = true
@@ -2765,20 +2805,10 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         //
-        if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
-            //
-            switch workoutType {
-            case 0: performSegue(withIdentifier: "workoutSessionSegue1", sender: nil)
-            case 1, 2: performSegue(withIdentifier: "workoutSessionSegue11", sender: nil)
-            default: break
-            }
-        } else {
-            //
-            switch workoutType {
-            case 0: performSegue(withIdentifier: "workoutSessionSegue2", sender: nil)
-            case 1, 2: performSegue(withIdentifier: "workoutSessionSegue12", sender: nil)
-            default: break
-            }
+        switch workoutType {
+        case 0: performSegue(withIdentifier: "workoutSessionSegue1", sender: nil)
+        case 1,2: performSegue(withIdentifier: "workoutSessionSegue0", sender: nil)
+        default: break
         }
         // Return background to homescreen
         let delayInSeconds = 0.5
@@ -2796,39 +2826,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         //
         case "workoutSessionSegue1":
             //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreen
-            
-            // Ensure array in ascending order
-            for i in presetsArrays[selectedPreset[0]][selectedPreset[1]] {
-                //
-                workoutArray.append(workoutMovementsDictionary[i]!)
-                //
-                setsArray.append(setsDictionary[i]!)
-                //
-                repsArray.append(repsDictionary[i]!)
-                //
-                demonstrationArray.append(demonstrationDictionary[i]!)
-                //
-                targetAreaArray.append(targetAreaDictionary[i]!)
-                //
-                explanationArray.append(explanationDictionary[i]!)
-            }
-            //
-            destinationVC.sessionArray = workoutArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
-            destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
-            //
-            destinationVC.sessionType = 1
-            //
-        //
-        case "workoutSessionSegue2":
-            //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
+            let destinationVC = segue.destination as! SessionScreen
             
             // Ensure array in ascending order
             // Compress Arrays
@@ -2858,45 +2856,9 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             //
             destinationVC.sessionTitle = presetsArray[selectedPreset[0]][selectedPreset[1]]
         //
-        case "workoutSessionSegue11":
+        case "workoutSessionSegue0":
             //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! WorkoutSessionScreen
-            
-            // Ensure array in ascending order
-            for i in presetsArrays[selectedPreset[0]][selectedPreset[1]] {
-                //
-                workoutArray.append(workoutMovementsDictionary[i]!)
-                //
-                setsArray.append(setsDictionary[i]!)
-                //
-                repsArray.append(repsDictionary[i]!)
-                //
-                demonstrationArray.append(demonstrationDictionary[i]!)
-                //
-                targetAreaArray.append(targetAreaDictionary[i]!)
-                //
-                explanationArray.append(explanationDictionary[i]!)
-                
-            }
-            //
-            destinationVC.sessionArray = workoutArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
-            destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
-            //
-            destinationVC.numberOfRounds = numberOfRoundsArray[selectedPreset[0]][selectedPreset[1]]
-
-            //
-            destinationVC.sessionType = 1
-            //
-        //
-        case "workoutSessionSegue12":
-            //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! WorkoutSessionScreenOverview
+            let destinationVC = segue.destination as! CircuitWorkoutScreen
             
             // Ensure array in ascending order
             // Compress Arrays
@@ -2925,8 +2887,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             destinationVC.numberOfRounds = numberOfRoundsArray[selectedPreset[0]][selectedPreset[1]]
             //
             destinationVC.sessionType = 1
-            //
-            destinationVC.sessionTitle = presetsArray[selectedPreset[0]][selectedPreset[1]]
             //
         default: break
         }

@@ -989,6 +989,13 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.textLabel?.textColor = colour2
             cell.tintColor = colour2
             //
+            cell.detailTextLabel?.text = NSLocalizedString(String(setsDictionary[overviewArray[indexPath.section][indexPath.row]]!), comment: "") + " x " + repsDictionary[overviewArray[indexPath.section][indexPath.row]]!
+            //
+            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 18)
+            cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
+            cell.detailTextLabel?.textAlignment = .left
+            cell.detailTextLabel?.textColor = colour2
+            //
             // Cell Image
             cell.imageView?.image = demonstrationDictionary[overviewArray[indexPath.section][indexPath.row]]
             cell.imageView?.isUserInteractionEnabled = true
@@ -1209,11 +1216,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         //
-        if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
-            performSegue(withIdentifier: "warmupSessionSegue1", sender: nil)
-        } else {
-            performSegue(withIdentifier: "warmupSessionSegue2", sender: nil)
-        }
         // Return background to homescreen
         let delayInSeconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -1226,40 +1228,9 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
 // Pass Arrays ---------------------------------------------------------------------------------------------------------------------------
 //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "warmupSessionSegue1") {
+        if (segue.identifier == "warmupSessionSegue") {
             //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreen
-            
-            // Ensure array in ascending order
-            for i in presetsArrays[selectedPreset[0]][selectedPreset[1]] {
-                //
-                warmupArray.append(warmupMovementsDictionary[i]!)
-                //
-                setsArray.append(setsDictionary[i]!)
-                //
-                repsArray.append(repsDictionary[i]!)
-                //
-                demonstrationArray.append(demonstrationDictionary[i]!)
-                //
-                targetAreaArray.append(targetAreaDictionary[i]!)
-                //
-                explanationArray.append(explanationDictionary[i]!)
-            }
-            //
-            destinationVC.sessionArray = warmupArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
-            destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
-            //
-            destinationVC.sessionType = 0
-            //
-        } else if (segue.identifier == "warmupSessionSegue2") {
-            //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
+            let destinationVC = segue.destination as! SessionScreen
             
             // Ensure array in ascending order
             // Compress Arrays

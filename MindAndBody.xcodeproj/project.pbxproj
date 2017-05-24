@@ -9,11 +9,9 @@
 /* Begin PBXBuildFile section */
 		071C4FB31E98D6D800328D18 /* MeditationTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071C4FB21E98D6D800328D18 /* MeditationTimer.swift */; };
 		071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071FB62B1E9283AE0081444F /* BodyweightChoice.swift */; };
-		072829E21EA7D3880090164A /* WorkoutChoieFinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829E11EA7D3880090164A /* WorkoutChoieFinal.swift */; };
+		072829E21EA7D3880090164A /* WorkoutChoiceFinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829E11EA7D3880090164A /* WorkoutChoiceFinal.swift */; };
 		072829E51EA7D40C0090164A /* WorkoutChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829E41EA7D40C0090164A /* WorkoutChoiceCustom.swift */; };
-		072829E91EA8A2470090164A /* WorkoutSessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829E81EA8A2470090164A /* WorkoutSessionScreen.swift */; };
-		072829EB1EA8A26A0090164A /* WorkoutSessionScreenOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829EA1EA8A26A0090164A /* WorkoutSessionScreenOverview.swift */; };
-		072829ED1EA8A2810090164A /* WorkoutSessionScreenOverviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829EC1EA8A2810090164A /* WorkoutSessionScreenOverviewDetail.swift */; };
+		072829EB1EA8A26A0090164A /* WorkoutSessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */; };
 		0728F3E51E1E9C0E00EA409B /* CalendarScreenDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728F3E41E1E9C0E00EA409B /* CalendarScreenDetail.swift */; };
 		07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07520BB31E9F894C00FA682E /* MeditationScreen.swift */; };
 		07520BB91EA398FF00FA682E /* WarmupChoiceFinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07520BB81EA398FF00FA682E /* WarmupChoiceFinal.swift */; };
@@ -22,6 +20,42 @@
 		075732721E6757B1003DA77E /* InformationScreenMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075732711E6757B1003DA77E /* InformationScreenMusic.swift */; };
 		075732741E69957A003DA77E /* TrackingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075732731E69957A003DA77E /* TrackingScreen.swift */; };
 		075A0DB81E8C55680008E014 /* WarmupChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075A0DB71E8C55680008E014 /* WarmupChoiceCustom.swift */; };
+		076C681F1ED1D35D009160C2 /* Tibetan Chimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680E1ED1BFAD009160C2 /* Tibetan Chimes.caf */; };
+		076C68201ED1D35D009160C2 /* Tibetan Chimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680E1ED1BFAD009160C2 /* Tibetan Chimes.caf */; };
+		076C68211ED1D35F009160C2 /* Tibetan Singing Bowl (Low).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680F1ED1BFAD009160C2 /* Tibetan Singing Bowl (Low).caf */; };
+		076C68221ED1D35F009160C2 /* Tibetan Singing Bowl (Low).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680F1ED1BFAD009160C2 /* Tibetan Singing Bowl (Low).caf */; };
+		076C68231ED1D362009160C2 /* Tibetan Singing Bowl (Low)(x4).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68101ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(x4).caf */; };
+		076C68241ED1D362009160C2 /* Tibetan Singing Bowl (Low)(x4).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68101ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(x4).caf */; };
+		076C68251ED1D366009160C2 /* Tibetan Singing Bowl (Low)(Singing).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68111ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(Singing).caf */; };
+		076C68261ED1D366009160C2 /* Tibetan Singing Bowl (Low)(Singing).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68111ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(Singing).caf */; };
+		076C68271ED1D36A009160C2 /* Tibetan Singing Bowl (High).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68121ED1BFAD009160C2 /* Tibetan Singing Bowl (High).caf */; };
+		076C68281ED1D36B009160C2 /* Tibetan Singing Bowl (High).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68121ED1BFAD009160C2 /* Tibetan Singing Bowl (High).caf */; };
+		076C68291ED1D36D009160C2 /* Tibetan Singing Bowl (High)(x4).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68131ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(x4).caf */; };
+		076C682A1ED1D36D009160C2 /* Tibetan Singing Bowl (High)(x4).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68131ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(x4).caf */; };
+		076C682B1ED1D36F009160C2 /* Tibetan Singing Bowl (High)(Singing).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68141ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(Singing).caf */; };
+		076C682C1ED1D370009160C2 /* Tibetan Singing Bowl (High)(Singing).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68141ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(Singing).caf */; };
+		076C682D1ED1D372009160C2 /* Australian Rain Stick.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68151ED1BFAD009160C2 /* Australian Rain Stick.caf */; };
+		076C682E1ED1D373009160C2 /* Australian Rain Stick.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68151ED1BFAD009160C2 /* Australian Rain Stick.caf */; };
+		076C682F1ED1D375009160C2 /* Australian Rain Stick (x2).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68161ED1BFAD009160C2 /* Australian Rain Stick (x2).caf */; };
+		076C68301ED1D375009160C2 /* Australian Rain Stick (x2).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68161ED1BFAD009160C2 /* Australian Rain Stick (x2).caf */; };
+		076C68311ED1D377009160C2 /* Australian Rain Stick (2 sticks).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68171ED1BFAD009160C2 /* Australian Rain Stick (2 sticks).caf */; };
+		076C68321ED1D378009160C2 /* Australian Rain Stick (2 sticks).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68171ED1BFAD009160C2 /* Australian Rain Stick (2 sticks).caf */; };
+		076C68331ED1D37B009160C2 /* Wind Chimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68181ED1BFAD009160C2 /* Wind Chimes.caf */; };
+		076C68341ED1D37B009160C2 /* Wind Chimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68181ED1BFAD009160C2 /* Wind Chimes.caf */; };
+		076C68351ED1D37D009160C2 /* Gambang (Wood)(Up).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68191ED1BFAD009160C2 /* Gambang (Wood)(Up).caf */; };
+		076C68361ED1D37E009160C2 /* Gambang (Wood)(Up).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C68191ED1BFAD009160C2 /* Gambang (Wood)(Up).caf */; };
+		076C68371ED1D37F009160C2 /* Gambang (Wood)(Down).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C681A1ED1BFAD009160C2 /* Gambang (Wood)(Down).caf */; };
+		076C68381ED1D380009160C2 /* Gambang (Wood)(Down).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C681A1ED1BFAD009160C2 /* Gambang (Wood)(Down).caf */; };
+		076C68391ED1D383009160C2 /* Gambang (Metal).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C681B1ED1BFAD009160C2 /* Gambang (Metal).caf */; };
+		076C683A1ED1D383009160C2 /* Gambang (Metal).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C681B1ED1BFAD009160C2 /* Gambang (Metal).caf */; };
+		076C683B1ED1D385009160C2 /* Indonesian Frog.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C681C1ED1BFAD009160C2 /* Indonesian Frog.caf */; };
+		076C683C1ED1D386009160C2 /* Indonesian Frog.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C681C1ED1BFAD009160C2 /* Indonesian Frog.caf */; };
+		076C683D1ED1D388009160C2 /* Cow Bell (Small).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C681D1ED1BFAD009160C2 /* Cow Bell (Small).caf */; };
+		076C683E1ED1D388009160C2 /* Cow Bell (Small).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C681D1ED1BFAD009160C2 /* Cow Bell (Small).caf */; };
+		076C683F1ED1D38A009160C2 /* Cow Bell (Big).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C681E1ED1BFAD009160C2 /* Cow Bell (Big).caf */; };
+		076C68401ED1D38B009160C2 /* Cow Bell (Big).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C681E1ED1BFAD009160C2 /* Cow Bell (Big).caf */; };
+		076C68421ED497AD009160C2 /* BodyweightChoiceCC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076C68411ED497AD009160C2 /* BodyweightChoiceCC.swift */; };
+		076C68461ED58D65009160C2 /* StretchingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076C68451ED58D65009160C2 /* StretchingScreen.swift */; };
 		077595831EC9E941004EE93C /* YogaChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077595821EC9E941004EE93C /* YogaChoiceCustom.swift */; };
 		077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DA1DA535830026895B /* AppDelegate.swift */; };
 		077AC0E21DA535840026895B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E01DA535840026895B /* Main.storyboard */; };
@@ -59,18 +93,12 @@
 		077E471B1EB9DFC6005B0B22 /* PresentMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */; };
 		077E471F1EB9E221005B0B22 /* SlideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471E1EB9E221005B0B22 /* SlideMenuView.swift */; };
 		077E47231EB9EED3005B0B22 /* DismissMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */; };
-		0780FD531E8400420026F2E4 /* SessionScreenOverviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780FD521E8400420026F2E4 /* SessionScreenOverviewDetail.swift */; };
 		0782A2981E5DA6B20016F908 /* ClassicChoiceFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782A2971E5DA6B20016F908 /* ClassicChoiceFull.swift */; };
-		078C59561EC893FB00FA1890 /* bowlRing.caf in Resources */ = {isa = PBXBuildFile; fileRef = 078C59551EC893F900FA1890 /* bowlRing.caf */; };
-		078C59571EC893FB00FA1890 /* bowlRing.caf in Resources */ = {isa = PBXBuildFile; fileRef = 078C59551EC893F900FA1890 /* bowlRing.caf */; };
-		0791872B1E7B4E2C00E7153A /* SessionScreenOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872A1E7B4E2C00E7153A /* SessionScreenOverview.swift */; };
-		079187301E7DB15000E7153A /* SessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872F1E7DB15000E7153A /* SessionScreen.swift */; };
+		0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872A1E7B4E2C00E7153A /* SessionScreen.swift */; };
 		07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */; };
 		07995A391E893E590009C9B1 /* CalendarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07995A381E893E590009C9B1 /* CalendarScreen.swift */; };
 		07B65F7B1E624A73004DBB97 /* MeditationScreenGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B65F7A1E624A73004DBB97 /* MeditationScreenGuided.swift */; };
-		07BDFEFC1EB1E65A00B131D7 /* YogaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BDFEFB1EB1E65A00B131D7 /* YogaScreen.swift */; };
-		07BE8C091E8BDF9500A851EF /* YogaScreenOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C081E8BDF9500A851EF /* YogaScreenOverview.swift */; };
-		07BE8C0B1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C0A1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift */; };
+		07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C081E8BDF9500A851EF /* YogaScreen.swift */; };
 		07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2D3BB1EBA88CF000770DE /* MindBody.swift */; };
 		07CB04371E604653002066CD /* MeditationChoiceGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CB04361E604653002066CD /* MeditationChoiceGuided.swift */; };
 		07CB04391E6049DF002066CD /* MeditationGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CB04381E6049DF002066CD /* MeditationGuided.swift */; };
@@ -100,11 +128,9 @@
 /* Begin PBXFileReference section */
 		071C4FB21E98D6D800328D18 /* MeditationTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationTimer.swift; sourceTree = "<group>"; };
 		071FB62B1E9283AE0081444F /* BodyweightChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyweightChoice.swift; sourceTree = "<group>"; };
-		072829E11EA7D3880090164A /* WorkoutChoieFinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutChoieFinal.swift; sourceTree = "<group>"; };
+		072829E11EA7D3880090164A /* WorkoutChoiceFinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutChoiceFinal.swift; sourceTree = "<group>"; };
 		072829E41EA7D40C0090164A /* WorkoutChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutChoiceCustom.swift; sourceTree = "<group>"; };
-		072829E81EA8A2470090164A /* WorkoutSessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutSessionScreen.swift; sourceTree = "<group>"; };
-		072829EA1EA8A26A0090164A /* WorkoutSessionScreenOverview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutSessionScreenOverview.swift; sourceTree = "<group>"; };
-		072829EC1EA8A2810090164A /* WorkoutSessionScreenOverviewDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutSessionScreenOverviewDetail.swift; sourceTree = "<group>"; };
+		072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutSessionScreen.swift; sourceTree = "<group>"; };
 		0728F3E41E1E9C0E00EA409B /* CalendarScreenDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarScreenDetail.swift; sourceTree = "<group>"; };
 		07520BB31E9F894C00FA682E /* MeditationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationScreen.swift; sourceTree = "<group>"; };
 		07520BB81EA398FF00FA682E /* WarmupChoiceFinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoiceFinal.swift; sourceTree = "<group>"; };
@@ -113,6 +139,25 @@
 		075732711E6757B1003DA77E /* InformationScreenMusic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationScreenMusic.swift; sourceTree = "<group>"; };
 		075732731E69957A003DA77E /* TrackingScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingScreen.swift; sourceTree = "<group>"; };
 		075A0DB71E8C55680008E014 /* WarmupChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoiceCustom.swift; sourceTree = "<group>"; };
+		076C680E1ED1BFAD009160C2 /* Tibetan Chimes.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tibetan Chimes.caf"; sourceTree = "<group>"; };
+		076C680F1ED1BFAD009160C2 /* Tibetan Singing Bowl (Low).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tibetan Singing Bowl (Low).caf"; sourceTree = "<group>"; };
+		076C68101ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(x4).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tibetan Singing Bowl (Low)(x4).caf"; sourceTree = "<group>"; };
+		076C68111ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(Singing).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tibetan Singing Bowl (Low)(Singing).caf"; sourceTree = "<group>"; };
+		076C68121ED1BFAD009160C2 /* Tibetan Singing Bowl (High).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tibetan Singing Bowl (High).caf"; sourceTree = "<group>"; };
+		076C68131ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(x4).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tibetan Singing Bowl (High)(x4).caf"; sourceTree = "<group>"; };
+		076C68141ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(Singing).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tibetan Singing Bowl (High)(Singing).caf"; sourceTree = "<group>"; };
+		076C68151ED1BFAD009160C2 /* Australian Rain Stick.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Australian Rain Stick.caf"; sourceTree = "<group>"; };
+		076C68161ED1BFAD009160C2 /* Australian Rain Stick (x2).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Australian Rain Stick (x2).caf"; sourceTree = "<group>"; };
+		076C68171ED1BFAD009160C2 /* Australian Rain Stick (2 sticks).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Australian Rain Stick (2 sticks).caf"; sourceTree = "<group>"; };
+		076C68181ED1BFAD009160C2 /* Wind Chimes.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Wind Chimes.caf"; sourceTree = "<group>"; };
+		076C68191ED1BFAD009160C2 /* Gambang (Wood)(Up).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gambang (Wood)(Up).caf"; sourceTree = "<group>"; };
+		076C681A1ED1BFAD009160C2 /* Gambang (Wood)(Down).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gambang (Wood)(Down).caf"; sourceTree = "<group>"; };
+		076C681B1ED1BFAD009160C2 /* Gambang (Metal).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gambang (Metal).caf"; sourceTree = "<group>"; };
+		076C681C1ED1BFAD009160C2 /* Indonesian Frog.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Indonesian Frog.caf"; sourceTree = "<group>"; };
+		076C681D1ED1BFAD009160C2 /* Cow Bell (Small).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cow Bell (Small).caf"; sourceTree = "<group>"; };
+		076C681E1ED1BFAD009160C2 /* Cow Bell (Big).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cow Bell (Big).caf"; sourceTree = "<group>"; };
+		076C68411ED497AD009160C2 /* BodyweightChoiceCC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyweightChoiceCC.swift; sourceTree = "<group>"; };
+		076C68451ED58D65009160C2 /* StretchingScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StretchingScreen.swift; sourceTree = "<group>"; };
 		077595821EC9E941004EE93C /* YogaChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaChoiceCustom.swift; sourceTree = "<group>"; };
 		077AC0D71DA535830026895B /* MindAndBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindAndBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		077AC0DA1DA535830026895B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -154,17 +199,12 @@
 		077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentMenuAnimator.swift; sourceTree = "<group>"; };
 		077E471E1EB9E221005B0B22 /* SlideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuView.swift; sourceTree = "<group>"; };
 		077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissMenuAnimator.swift; sourceTree = "<group>"; };
-		0780FD521E8400420026F2E4 /* SessionScreenOverviewDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionScreenOverviewDetail.swift; sourceTree = "<group>"; };
 		0782A2971E5DA6B20016F908 /* ClassicChoiceFull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassicChoiceFull.swift; sourceTree = "<group>"; };
-		078C59551EC893F900FA1890 /* bowlRing.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bowlRing.caf; sourceTree = "<group>"; };
-		0791872A1E7B4E2C00E7153A /* SessionScreenOverview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionScreenOverview.swift; sourceTree = "<group>"; };
-		0791872F1E7DB15000E7153A /* SessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionScreen.swift; sourceTree = "<group>"; };
+		0791872A1E7B4E2C00E7153A /* SessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionScreen.swift; sourceTree = "<group>"; };
 		07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundImageCollection.swift; sourceTree = "<group>"; };
 		07995A381E893E590009C9B1 /* CalendarScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarScreen.swift; sourceTree = "<group>"; };
 		07B65F7A1E624A73004DBB97 /* MeditationScreenGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationScreenGuided.swift; sourceTree = "<group>"; };
-		07BDFEFB1EB1E65A00B131D7 /* YogaScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreen.swift; sourceTree = "<group>"; };
-		07BE8C081E8BDF9500A851EF /* YogaScreenOverview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreenOverview.swift; sourceTree = "<group>"; };
-		07BE8C0A1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreenOverviewDetail.swift; sourceTree = "<group>"; };
+		07BE8C081E8BDF9500A851EF /* YogaScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreen.swift; sourceTree = "<group>"; };
 		07C2D3BB1EBA88CF000770DE /* MindBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindBody.swift; sourceTree = "<group>"; };
 		07CB04361E604653002066CD /* MeditationChoiceGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationChoiceGuided.swift; sourceTree = "<group>"; };
 		07CB04381E6049DF002066CD /* MeditationGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationGuided.swift; sourceTree = "<group>"; };
@@ -226,21 +266,12 @@
 			name = Custom;
 			sourceTree = "<group>";
 		};
-		072829E61EA8A0C80090164A /* Circuit Workout Overview */ = {
+		072829E61EA8A0C80090164A /* Circuit Workout */ = {
 			isa = PBXGroup;
 			children = (
-				072829EA1EA8A26A0090164A /* WorkoutSessionScreenOverview.swift */,
-				072829EC1EA8A2810090164A /* WorkoutSessionScreenOverviewDetail.swift */,
+				072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */,
 			);
-			name = "Circuit Workout Overview";
-			sourceTree = "<group>";
-		};
-		072829E71EA8A0CF0090164A /* Circuit Workout Detail */ = {
-			isa = PBXGroup;
-			children = (
-				072829E81EA8A2470090164A /* WorkoutSessionScreen.swift */,
-			);
-			name = "Circuit Workout Detail";
+			name = "Circuit Workout";
 			sourceTree = "<group>";
 		};
 		0728F3E11E1C2D7C00EA409B /* Warmup */ = {
@@ -286,11 +317,10 @@
 		07530C981E96717B00BD33EC /* Session Screens */ = {
 			isa = PBXGroup;
 			children = (
-				079187261E7B4D9F00E7153A /* Detail  */,
-				079187271E7B4DCD00E7153A /* Overview  */,
-				072829E71EA8A0CF0090164A /* Circuit Workout Detail */,
-				072829E61EA8A0C80090164A /* Circuit Workout Overview */,
-				07BDFEFD1EB1E66B00B131D7 /* Yoga Detail -Unused- */,
+				079187271E7B4DCD00E7153A /* Warmup/Workout */,
+				072829E61EA8A0C80090164A /* Circuit Workout */,
+				076C68441ED58D18009160C2 /* Cardio */,
+				076C68431ED58D0E009160C2 /* Stretching */,
 				07BDFEFE1EB1E69700B131D7 /* Yoga Screen */,
 				0719F2B31E50F8D100AC6729 /* Meditation Screens */,
 			);
@@ -338,7 +368,7 @@
 				07DEE6FA1E0AC47F003B89AB /* WorkoutChoice.swift */,
 				07E98F0D1EA8F86D00C98ED5 /* Gym */,
 				07E98F0E1EA8F8E100C98ED5 /* BodyWeight */,
-				072829E11EA7D3880090164A /* WorkoutChoieFinal.swift */,
+				072829E11EA7D3880090164A /* WorkoutChoiceFinal.swift */,
 				072829E31EA7D3FB0090164A /* Custom */,
 				077C2C811E5C7BA600BA62C0 /* Gym Old */,
 			);
@@ -381,6 +411,21 @@
 				071B93511E60459600865FC5 /* Guided Meditation */,
 			);
 			name = Meditation;
+			sourceTree = "<group>";
+		};
+		076C68431ED58D0E009160C2 /* Stretching */ = {
+			isa = PBXGroup;
+			children = (
+				076C68451ED58D65009160C2 /* StretchingScreen.swift */,
+			);
+			name = Stretching;
+			sourceTree = "<group>";
+		};
+		076C68441ED58D18009160C2 /* Cardio */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cardio;
 			sourceTree = "<group>";
 		};
 		077595801EC9E91E004EE93C /* Custom */ = {
@@ -541,26 +586,33 @@
 		078C59541EC893EA00FA1890 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				078C59551EC893F900FA1890 /* bowlRing.caf */,
+				076C680E1ED1BFAD009160C2 /* Tibetan Chimes.caf */,
+				076C680F1ED1BFAD009160C2 /* Tibetan Singing Bowl (Low).caf */,
+				076C68101ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(x4).caf */,
+				076C68111ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(Singing).caf */,
+				076C68121ED1BFAD009160C2 /* Tibetan Singing Bowl (High).caf */,
+				076C68131ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(x4).caf */,
+				076C68141ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(Singing).caf */,
+				076C68151ED1BFAD009160C2 /* Australian Rain Stick.caf */,
+				076C68161ED1BFAD009160C2 /* Australian Rain Stick (x2).caf */,
+				076C68171ED1BFAD009160C2 /* Australian Rain Stick (2 sticks).caf */,
+				076C68181ED1BFAD009160C2 /* Wind Chimes.caf */,
+				076C68191ED1BFAD009160C2 /* Gambang (Wood)(Up).caf */,
+				076C681A1ED1BFAD009160C2 /* Gambang (Wood)(Down).caf */,
+				076C681B1ED1BFAD009160C2 /* Gambang (Metal).caf */,
+				076C681C1ED1BFAD009160C2 /* Indonesian Frog.caf */,
+				076C681D1ED1BFAD009160C2 /* Cow Bell (Small).caf */,
+				076C681E1ED1BFAD009160C2 /* Cow Bell (Big).caf */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
 		};
-		079187261E7B4D9F00E7153A /* Detail  */ = {
+		079187271E7B4DCD00E7153A /* Warmup/Workout */ = {
 			isa = PBXGroup;
 			children = (
-				0791872F1E7DB15000E7153A /* SessionScreen.swift */,
+				0791872A1E7B4E2C00E7153A /* SessionScreen.swift */,
 			);
-			name = "Detail ";
-			sourceTree = "<group>";
-		};
-		079187271E7B4DCD00E7153A /* Overview  */ = {
-			isa = PBXGroup;
-			children = (
-				0791872A1E7B4E2C00E7153A /* SessionScreenOverview.swift */,
-				0780FD521E8400420026F2E4 /* SessionScreenOverviewDetail.swift */,
-			);
-			name = "Overview ";
+			name = Warmup/Workout;
 			sourceTree = "<group>";
 		};
 		07995A371E86A83A0009C9B1 /* Settings */ = {
@@ -572,19 +624,10 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
-		07BDFEFD1EB1E66B00B131D7 /* Yoga Detail -Unused- */ = {
-			isa = PBXGroup;
-			children = (
-				07BDFEFB1EB1E65A00B131D7 /* YogaScreen.swift */,
-			);
-			name = "Yoga Detail -Unused-";
-			sourceTree = "<group>";
-		};
 		07BDFEFE1EB1E69700B131D7 /* Yoga Screen */ = {
 			isa = PBXGroup;
 			children = (
-				07BE8C081E8BDF9500A851EF /* YogaScreenOverview.swift */,
-				07BE8C0A1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift */,
+				07BE8C081E8BDF9500A851EF /* YogaScreen.swift */,
 			);
 			name = "Yoga Screen";
 			sourceTree = "<group>";
@@ -602,6 +645,7 @@
 		07E98F0E1EA8F8E100C98ED5 /* BodyWeight */ = {
 			isa = PBXGroup;
 			children = (
+				076C68411ED497AD009160C2 /* BodyweightChoiceCC.swift */,
 				071FB62B1E9283AE0081444F /* BodyweightChoice.swift */,
 			);
 			name = BodyWeight;
@@ -701,13 +745,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				078C59561EC893FB00FA1890 /* bowlRing.caf in Resources */,
+				076C68311ED1D377009160C2 /* Australian Rain Stick (2 sticks).caf in Resources */,
 				077AC0E71DA535840026895B /* LaunchScreen.storyboard in Resources */,
 				077AC1141DA7936E0026895B /* SF-UI-Display-Heavy.otf in Resources */,
 				077AC1181DA7936E0026895B /* SF-UI-Display-Semibold.otf in Resources */,
 				077AC12C1DA793950026895B /* SF-UI-Text-Heavy.otf in Resources */,
+				076C683B1ED1D385009160C2 /* Indonesian Frog.caf in Resources */,
 				07FE380C1DF9B3A200E7EA20 /* Localizable.strings in Resources */,
 				077AC1171DA7936E0026895B /* SF-UI-Display-Regular.otf in Resources */,
+				076C68241ED1D362009160C2 /* Tibetan Singing Bowl (Low)(x4).caf in Resources */,
+				076C68351ED1D37D009160C2 /* Gambang (Wood)(Up).caf in Resources */,
 				077AC1321DA793950026895B /* SF-UI-Text-Regular.otf in Resources */,
 				077AC12A1DA793950026895B /* SF-UI-Text-Bold.otf in Resources */,
 				077AC1151DA7936E0026895B /* SF-UI-Display-Light.otf in Resources */,
@@ -716,17 +763,30 @@
 				077AC1131DA7936E0026895B /* SF-UI-Display-Bold.otf in Resources */,
 				077AC1161DA7936E0026895B /* SF-UI-Display-Medium.otf in Resources */,
 				077AC1351DA793950026895B /* SF-UI-Text-SemiboldItalic.otf in Resources */,
+				076C681F1ED1D35D009160C2 /* Tibetan Chimes.caf in Resources */,
+				076C68211ED1D35F009160C2 /* Tibetan Singing Bowl (Low).caf in Resources */,
+				076C68331ED1D37B009160C2 /* Wind Chimes.caf in Resources */,
 				077AC1361DA793950026895B /* SF-UI-Text-Ultrathin.otf in Resources */,
+				076C68291ED1D36D009160C2 /* Tibetan Singing Bowl (High)(x4).caf in Resources */,
+				076C68271ED1D36A009160C2 /* Tibetan Singing Bowl (High).caf in Resources */,
 				077AC12B1DA793950026895B /* SF-UI-Text-BoldItalic.otf in Resources */,
+				076C68371ED1D37F009160C2 /* Gambang (Wood)(Down).caf in Resources */,
 				077AC11A1DA7936E0026895B /* SF-UI-Display-Ultralight.otf in Resources */,
 				077AC1341DA793950026895B /* SF-UI-Text-Semibold.otf in Resources */,
+				076C683D1ED1D388009160C2 /* Cow Bell (Small).caf in Resources */,
+				076C682B1ED1D36F009160C2 /* Tibetan Singing Bowl (High)(Singing).caf in Resources */,
 				077AC1301DA793950026895B /* SF-UI-Text-Medium.otf in Resources */,
 				077AC0E41DA535840026895B /* Assets.xcassets in Resources */,
+				076C68251ED1D366009160C2 /* Tibetan Singing Bowl (Low)(Singing).caf in Resources */,
 				077AC1371DA793950026895B /* SF-UI-Text-UltrathinItalic.otf in Resources */,
 				077AC1331DA793950026895B /* SF-UI-Text-RegularItalic.otf in Resources */,
+				076C682F1ED1D375009160C2 /* Australian Rain Stick (x2).caf in Resources */,
 				077AC12E1DA793950026895B /* SF-UI-Text-Light.otf in Resources */,
 				077AC0E21DA535840026895B /* Main.storyboard in Resources */,
 				077AC1191DA7936E0026895B /* SF-UI-Display-Thin.otf in Resources */,
+				076C68391ED1D383009160C2 /* Gambang (Metal).caf in Resources */,
+				076C682D1ED1D372009160C2 /* Australian Rain Stick.caf in Resources */,
+				076C683F1ED1D38A009160C2 /* Cow Bell (Big).caf in Resources */,
 				077AC12F1DA793950026895B /* SF-UI-Text-LightItalic.otf in Resources */,
 				077AC1121DA7936E0026895B /* SF-UI-Display-Black.otf in Resources */,
 			);
@@ -736,7 +796,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				078C59571EC893FB00FA1890 /* bowlRing.caf in Resources */,
+				076C68261ED1D366009160C2 /* Tibetan Singing Bowl (Low)(Singing).caf in Resources */,
+				076C68281ED1D36B009160C2 /* Tibetan Singing Bowl (High).caf in Resources */,
+				076C683C1ED1D386009160C2 /* Indonesian Frog.caf in Resources */,
+				076C68301ED1D375009160C2 /* Australian Rain Stick (x2).caf in Resources */,
+				076C68231ED1D362009160C2 /* Tibetan Singing Bowl (Low)(x4).caf in Resources */,
+				076C68341ED1D37B009160C2 /* Wind Chimes.caf in Resources */,
+				076C682A1ED1D36D009160C2 /* Tibetan Singing Bowl (High)(x4).caf in Resources */,
+				076C68201ED1D35D009160C2 /* Tibetan Chimes.caf in Resources */,
+				076C68321ED1D378009160C2 /* Australian Rain Stick (2 sticks).caf in Resources */,
+				076C682E1ED1D373009160C2 /* Australian Rain Stick.caf in Resources */,
+				076C68381ED1D380009160C2 /* Gambang (Wood)(Down).caf in Resources */,
+				076C68401ED1D38B009160C2 /* Cow Bell (Big).caf in Resources */,
+				076C683A1ED1D383009160C2 /* Gambang (Metal).caf in Resources */,
+				076C682C1ED1D370009160C2 /* Tibetan Singing Bowl (High)(Singing).caf in Resources */,
+				076C68221ED1D35F009160C2 /* Tibetan Singing Bowl (Low).caf in Resources */,
+				076C683E1ED1D388009160C2 /* Cow Bell (Small).caf in Resources */,
+				076C68361ED1D37E009160C2 /* Gambang (Wood)(Up).caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,21 +823,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				079187301E7DB15000E7153A /* SessionScreen.swift in Sources */,
 				0782A2981E5DA6B20016F908 /* ClassicChoiceFull.swift in Sources */,
 				07B65F7B1E624A73004DBB97 /* MeditationScreenGuided.swift in Sources */,
 				07DEE6F71E0AADE6003B89AB /* YogaChoice.swift in Sources */,
 				077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */,
 				071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */,
-				07BE8C091E8BDF9500A851EF /* YogaScreenOverview.swift in Sources */,
+				076C68421ED497AD009160C2 /* BodyweightChoiceCC.swift in Sources */,
+				07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */,
 				07F0C4951EA6128C00927DA8 /* StretchingChoiceCustom.swift in Sources */,
 				07DEE6F91E0AADF2003B89AB /* MeditationChoice.swift in Sources */,
 				07995A391E893E590009C9B1 /* CalendarScreen.swift in Sources */,
 				07CB04391E6049DF002066CD /* MeditationGuided.swift in Sources */,
 				075732741E69957A003DA77E /* TrackingScreen.swift in Sources */,
-				072829EB1EA8A26A0090164A /* WorkoutSessionScreenOverview.swift in Sources */,
+				072829EB1EA8A26A0090164A /* WorkoutSessionScreen.swift in Sources */,
 				071C4FB31E98D6D800328D18 /* MeditationTimer.swift in Sources */,
-				0791872B1E7B4E2C00E7153A /* SessionScreenOverview.swift in Sources */,
+				0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */,
 				07EDBEDD1EACB5730064213C /* YogaChoiceFinal.swift in Sources */,
 				07DEE6FB1E0AC47F003B89AB /* WorkoutChoice.swift in Sources */,
 				07520BB91EA398FF00FA682E /* WarmupChoiceFinal.swift in Sources */,
@@ -769,31 +845,27 @@
 				075732701E660AEC003DA77E /* InformationScreenAnatomy.swift in Sources */,
 				07CB04371E604653002066CD /* MeditationChoiceGuided.swift in Sources */,
 				07DEE6F11E0AAD2E003B89AB /* ClassicChoiceG.swift in Sources */,
-				072829ED1EA8A2810090164A /* WorkoutSessionScreenOverviewDetail.swift in Sources */,
 				077595831EC9E941004EE93C /* YogaChoiceCustom.swift in Sources */,
 				0757326B1E64D8A3003DA77E /* InformationScreen1.swift in Sources */,
 				07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */,
 				075A0DB81E8C55680008E014 /* WarmupChoiceCustom.swift in Sources */,
 				072829E51EA7D40C0090164A /* WorkoutChoiceCustom.swift in Sources */,
 				0728F3E51E1E9C0E00EA409B /* CalendarScreenDetail.swift in Sources */,
+				076C68461ED58D65009160C2 /* StretchingScreen.swift in Sources */,
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,
 				07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */,
 				077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */,
 				077AC1001DA54C810026895B /* Information.swift in Sources */,
 				077AC1021DA573210026895B /* Settings.swift in Sources */,
-				0780FD531E8400420026F2E4 /* SessionScreenOverviewDetail.swift in Sources */,
 				07DEE6F31E0AADAC003B89AB /* StretchingChoice.swift in Sources */,
-				072829E91EA8A2470090164A /* WorkoutSessionScreen.swift in Sources */,
 				07F0C4931EA60B0B00927DA8 /* StretchingChoiceFinal.swift in Sources */,
-				07BE8C0B1E8BDFA100A851EF /* YogaScreenOverviewDetail.swift in Sources */,
 				077C2C7E1E5C723D00BA62C0 /* GymChoice.swift in Sources */,
 				07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */,
 				077AC1041DA579680026895B /* Profile.swift in Sources */,
-				07BDFEFC1EB1E65A00B131D7 /* YogaScreen.swift in Sources */,
 				075732721E6757B1003DA77E /* InformationScreenMusic.swift in Sources */,
 				077E471B1EB9DFC6005B0B22 /* PresentMenuAnimator.swift in Sources */,
 				077E47231EB9EED3005B0B22 /* DismissMenuAnimator.swift in Sources */,
-				072829E21EA7D3880090164A /* WorkoutChoieFinal.swift in Sources */,
+				072829E21EA7D3880090164A /* WorkoutChoiceFinal.swift in Sources */,
 				077E471F1EB9E221005B0B22 /* SlideMenuView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

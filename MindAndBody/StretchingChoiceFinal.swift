@@ -43,11 +43,8 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     // Movements Array
     var stretchingArray: [String] = []
     
-    // Sets Array
-    var setsArray: [Int] = []
-    
     // Reps Array
-    var repsArray: [String] = []
+    var breathsArray: [String] = []
     
     // Demonstration Array
     var demonstrationArray: [UIImage] = []
@@ -252,91 +249,8 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             63: "QuadStretch"
     ]
     
-    // Screen Arrays
-    //
-    var setsDictionary: [Int : Int] =
-        [
-            // Recommended
-            0: 1,
-            // Joint Rotations
-            1: 1,
-            2: 1,
-            3: 1,
-            4: 1,
-            5: 1,
-            6: 1,
-            7: 1,
-            8: 1,
-            // Foam/Ball Roll
-            9: 1,
-            10: 3,
-            11: 1,
-            12: 1,
-            13: 1,
-            14: 1,
-            15: 1,
-            16: 1,
-            17: 1,
-            18: 1,
-            // Back
-            19: 1,
-            20: 1,
-            21: 1,
-            22: 1,
-            23: 1,
-            24: 1,
-            25: 1,
-            26: 1,
-            27: 1,
-            28: 1,
-            // Obliques(Sides)
-            29: 1,
-            30: 1,
-            31: 1,
-            // Neck
-            32: 1,
-            33: 2,
-            34: 1,
-            35: 1,
-            36: 1,
-            37: 1,
-            // Arms
-            38: 1,
-            39: 1,
-            40: 1,
-            // Pecs
-            41: 1,
-            // Shoulders
-            42: 1,
-            43: 1,
-            44: 1,
-            45: 1,
-            46: 1,
-            47: 1,
-            // Hips and Glutes
-            48: 2,
-            49: 1,
-            50: 1,
-            51: 1,
-            52: 1,
-            53: 1,
-            54: 1,
-            // Calves
-            55: 1,
-            // Hamstrings
-            56: 3,
-            57: 3,
-            58: 1,
-            59: 1,
-            60: 1,
-            61: 1,
-            // Quads
-            62: 1,
-            63: 1
-    ]
-    
-    // Reps Array
-    var repsDictionary: [Int : String] =
+    // Breaths/Reps/Seconds Array
+    var breathsDictionary: [Int : String] =
         [
             // Recommended
             0: "5min",
@@ -362,59 +276,59 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             18: "2-7 reps",
             // Back
             19: "15-20 reps",
-            20: "15-30s",
-            21: "30-60s",
-            22: "30-180s",
-            23: "30-90s",
+            20: "5-10 breaths",
+            21: "5-10 breaths",
+            22: "5-10 breaths",
+            23: "5-10 breaths",
             24: "10-30 reps",
-            25: "30-60s",
-            26: "25-45s",
-            27: "30-60s",
-            28: "30-180s",
+            25: "5-10 breaths",
+            26: "5-10 breaths",
+            27: "5-10 breaths",
+            28: "5-10 breaths",
             // Obliques(Sides)
-            29: "10-20s",
-            30: "15-30s",
-            31: "15-30s",
+            29: "5-10 breaths",
+            30: "5-10 breaths",
+            31: "5-10 breaths",
             // Neck
-            32: "15-30s",
-            33: "5-10s",
-            34: "15-30s",
-            35: "15-30s",
-            36: "15-30s",
-            37: "20-40s",
+            32: "5-10 breaths",
+            33: "5-10 breaths",
+            34: "5-10 breaths",
+            35: "5-10 breaths",
+            36: "5-10 breaths",
+            37: "5-10 breaths",
             // Arms
-            38: "15-30s",
-            39: "15-30s",
-            40: "15-30s",
+            38: "5-10 breaths",
+            39: "5-10 breaths",
+            40: "5-10 breaths",
             // Pecs
-            41: "15-30s",
+            41: "5-10 breaths",
             // Shoulders
-            42: "20-40s",
-            43: "10-20s",
-            44: "15-30s",
-            45: "15-30s",
-            46: "15-30s",
-            47: "15-30s",
+            42: "5-10 breaths",
+            43: "5-10 breaths",
+            44: "5-10 breaths",
+            45: "5-10 breaths",
+            46: "5-10 breaths",
+            47: "5-10 breaths",
             // Hips and Glutes
-            48: "1-5min",
+            48: "30 breaths",
             49: "5-10 reps",
-            50: "15-30s",
-            51: "15-30s",
-            52: "15-30s",
-            53: "15-45s",
-            54: "15-45s",
+            50: "5-10 breaths",
+            51: "5-10 breaths",
+            52: "5-10 breaths",
+            53: "5-10 breaths",
+            54: "5-10 breaths",
             // Calves
-            55: "15-30s",
+            55: "5-10 breaths",
             // Hamstrings
-            56: "10s",
-            57: "10s",
-            58: "15-30s",
-            59: "15-45s",
-            60: "15-60s",
-            61: "15-60s",
+            56: "5-10 breaths",
+            57: "5-10 breaths",
+            58: "5-10 breaths",
+            59: "5-10 breaths",
+            60: "5-10 breaths",
+            61: "5-10 breaths",
             // Quads
-            62: "15-30s",
-            63: "15-30s"
+            62: "5-10 breaths",
+            63: "5-10 breaths",
     ]
     
     // Demonstration Array
@@ -668,8 +582,8 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     // General -----------------------------------------------------------------------------------------------------
     //
     
-    // Picker View Array
-    var pickerViewArrayGeneral: [[String]] =
+    // Prests Table Array
+    var presetsTableArrayGeneral: [[String]] =
         [
             ["default",
             "beginner"],
@@ -704,8 +618,8 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     //
     // Post Workout Presets Arrays
     //
-    // Picker View Array
-    var pickerViewArrayWorkout: [[String]] =
+    // Prests Table Array
+    var presetsTableArrayWorkout: [[String]] =
         [
             ["default",
             "beginner"],
@@ -742,8 +656,8 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     
     // Presets Sessions Arrays
     //
-    // Picker View Array
-    var pickerViewArrayCardio: [[String]] =
+    // Prests Table Array
+    var presetsTableArrayCardio: [[String]] =
         [
             ["default",
             "beginner"],
@@ -783,17 +697,17 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         //
         case 0:
             // Choice Screen Arrays
-            presetsArray = pickerViewArrayGeneral
+            presetsArray = presetsTableArrayGeneral
             presetsArrays = presetsArraysGeneral
         //
         case 1:
             // Choice Screen Arrays
-            presetsArray = pickerViewArrayWorkout
+            presetsArray = presetsTableArrayWorkout
             presetsArrays = presetsArraysWorkout
         //
         case 2:
             // Choice Screen Arrays
-            presetsArray = pickerViewArrayCardio
+            presetsArray = presetsTableArrayCardio
             presetsArrays = presetsArraysCardio
         //
         default: break
@@ -1235,11 +1149,6 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         //
-        if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
-            performSegue(withIdentifier: "stretchingSessionSegue1", sender: nil)
-        } else {
-            performSegue(withIdentifier: "stretchingSessionSegue2", sender: nil)
-        }
         // Return background to homescreen
         let delayInSeconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -1252,40 +1161,9 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     // Pass Arrays ---------------------------------------------------------------------------------------------------------------------------
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "stretchingSessionSegue1") {
+        if (segue.identifier == "stretchingSessionSegue") {
             //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreen
-            
-            // Ensure array in ascending order
-            for i in presetsArrays[selectedPreset[0]][selectedPreset[1]] {
-                //
-                stretchingArray.append(stretchingMovementsDictionary[i]!)
-                //
-                setsArray.append(setsDictionary[i]!)
-                //
-                repsArray.append(repsDictionary[i]!)
-                //
-                demonstrationArray.append(demonstrationDictionary[i]!)
-                //
-                targetAreaArray.append(targetAreaDictionary[i]!)
-                //
-                explanationArray.append(explanationDictionary[i]!)
-            }
-            //
-            destinationVC.sessionArray = stretchingArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
-            destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
-            //
-            destinationVC.sessionType = 2
-            //
-        } else if (segue.identifier == "stretchingSessionSegue2") {
-            //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
+            let destinationVC = segue.destination as! StretchingScreen
             
             // Ensure array in ascending order
             // Compress Arrays
@@ -1293,9 +1171,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
                 //
                 stretchingArray.append(stretchingMovementsDictionary[i]!)
                 //
-                setsArray.append(setsDictionary[i]!)
-                //
-                repsArray.append(repsDictionary[i]!)
+                breathsArray.append(breathsDictionary[i]!)
                 //
                 demonstrationArray.append(demonstrationDictionary[i]!)
                 //
@@ -1305,8 +1181,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             }
             //
             destinationVC.sessionArray = stretchingArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
+            destinationVC.breathsArray = breathsArray
             destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray

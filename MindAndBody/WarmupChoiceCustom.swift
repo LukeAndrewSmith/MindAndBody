@@ -456,8 +456,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var tableViewConstraint1: NSLayoutConstraint!
     
-    @IBOutlet weak var seperatorConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var beginButtonConstraint: NSLayoutConstraint!
     
     
@@ -487,7 +485,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         let flash = UIView()
         flash.frame = CGRect(x: 0, y: sessionPickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
         flash.backgroundColor = colour1
-        self.view.alpha = 1
+        flash.alpha = 0.7
+        //self.view.alpha = 0.7
+
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
         //
@@ -573,8 +573,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             //
             tableViewConstraint.constant = view.frame.size.height - 98
             tableViewConstraint1.constant = -49
-            //
-            seperatorConstraint.constant = -49
             //
             beginButtonConstraint.constant = -49
         }
@@ -768,8 +766,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     self.tableViewConstraint.constant = 49
                     self.tableViewConstraint1.constant = 49
                     //
-                    self.seperatorConstraint.constant = 49
-                    //
                     self.beginButtonConstraint.constant = 0
                     //
                     UIView.animate(withDuration: 0.7) {
@@ -852,8 +848,6 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     //
                     self.tableViewConstraint.constant = self.view.frame.size.height - 98
                     self.tableViewConstraint1.constant = -49
-                    //
-                    self.seperatorConstraint.constant = -49
                     //
                     self.beginButtonConstraint.constant = -49
                     //
@@ -1021,8 +1015,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         case customTableView:
             return 1
         case movementsTableView:
-            let numberOfSections = tableViewSectionArray.count
-            return numberOfSections
+            return tableViewSectionArray.count
         default: break
         }
     return 0
@@ -1154,7 +1147,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     cell.textLabel?.textColor = colour2
                     cell.tintColor = .black
                     // Detail sets x reps
-                    cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+                    cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
                     cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
                     cell.detailTextLabel?.textAlignment = .left
                     cell.detailTextLabel?.textColor = colour2
@@ -1248,30 +1241,30 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             //
             selectedRow = indexPath.row
             //
-            if customKeyArray.count == 0 {
-                //
-                movementsTableView.alpha = 0
-                UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
-                let selectedCell = tableView.cellForRow(at: indexPath)
-                movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
-                //
-                backgroundViewExpanded.alpha = 0
-                UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
-                backgroundViewExpanded.frame = UIScreen.main.bounds
-                // Animate table fade and size
-                // Alpha
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.movementsTableView.alpha = 1
-                    //
-                }, completion: nil)
-                // Position
-                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
-                    //
-                    self.backgroundViewExpanded.alpha = 0.7
-                }, completion: nil)
-            //
-            } else {
+//            if customKeyArray.count == 0 {
+//                //
+//                movementsTableView.alpha = 0
+//                UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
+//                let selectedCell = tableView.cellForRow(at: indexPath)
+//                movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+//                //
+//                backgroundViewExpanded.alpha = 0
+//                UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
+//                backgroundViewExpanded.frame = UIScreen.main.bounds
+//                // Animate table fade and size
+//                // Alpha
+//                UIView.animate(withDuration: 0.4, animations: {
+//                    self.movementsTableView.alpha = 1
+//                    //
+//                }, completion: nil)
+//                // Position
+//                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+//                    self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
+//                    //
+//                    self.backgroundViewExpanded.alpha = 0.7
+//                }, completion: nil)
+//            //
+//            } else {
                 //
                 if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
                     //
@@ -1342,7 +1335,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                         
                     }, completion: nil)
             }
-        }
+//        }
         //
         case movementsTableView:
             //
@@ -1389,35 +1382,47 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
 //
     // Can edit row
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
         //
-        let defaults = UserDefaults.standard
-        let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-        //
-        if customKeyArray.count == 0 {
-            return false
-        } else {
-            if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+        switch tableView {
+        case movementsTableView: return false
+        case customTableView:
+            //
+            let defaults = UserDefaults.standard
+            let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+            //
+            if customKeyArray.count == 0 {
                 return false
             } else {
-                return true
+                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+                    return false
+                } else {
+                    return true
+                }
             }
+        default: return false
         }
     }
     
     // Can move to row
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        //
-        let defaults = UserDefaults.standard
-        let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-        //
-        if customKeyArray.count == 0 {
-            return false
-        } else {
-            if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+        switch tableView {
+        case movementsTableView: return false
+        case customTableView:
+            //
+            let defaults = UserDefaults.standard
+            let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+            //
+            if customKeyArray.count == 0 {
                 return false
             } else {
-                return true
+                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+                    return false
+                } else {
+                    return true
+                }
             }
+        default: return false
         }
     }
     
@@ -1632,17 +1637,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
 //
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
-        
-        if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
-            
-            performSegue(withIdentifier: "warmupCustomSegue1", sender: nil)
-            
-        } else {
-            
-            performSegue(withIdentifier: "warmupCustomSegue2", sender: nil)
-        }
-        
-        
+        //
         // Return background to homescreen
         let delayInSeconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -1669,54 +1664,9 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
 
         
-        if (segue.identifier == "warmupCustomSegue1") {
+        if (segue.identifier == "warmupSessionSegueCustom") {
             //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreen
-            
-            // Compress Arrays
-            for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                //
-                warmupArray.append(warmupMovementsDictionary[i]!)
-                //
-                demonstrationArray.append(demonstrationDictionary[i]!)
-                //
-                targetAreaArray.append(targetAreaDictionary[i]!)
-                //
-                explanationArray.append(explanationDictionary[i]!)
-            }
-            //
-            for i in customSetsArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                setsArray.append(setsPickerArray[i])
-            }
-            //
-            for i in 0...11 {
-                if i == 0 {
-                    repsPickerArray[i] = repsPickerArray[i] + " rep"
-                } else {
-                    repsPickerArray[i] = repsPickerArray[i] + " reps"
-                }
-            }
-            //
-            for i in customRepsArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                repsArray.append(repsPickerArray[i])
-                
-            }
-            
-            //
-            destinationVC.sessionArray = warmupArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
-            destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
-            //
-            destinationVC.sessionType = 0
-            //
-        } else if (segue.identifier == "warmupCustomSegue2") {
-            //
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! SessionScreenOverview
+            let destinationVC = segue.destination as! SessionScreen
             
             // Compress Arrays
             for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {

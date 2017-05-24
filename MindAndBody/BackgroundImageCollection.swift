@@ -59,7 +59,7 @@ class BackgroundImageCollection: UICollectionViewController {
         collectionView?.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
         
     }
-
+    
 
 // 
 // Collection View -----------------------------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ class BackgroundImageCollection: UICollectionViewController {
         // Image View
         //
         // Image view size
-        let screenHeight = UIScreen.main.bounds.height - (navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height
+        let screenHeight = view.bounds.height
         let screenWidth = UIScreen.main.bounds.width
         let ratio = screenHeight / screenWidth
         //
