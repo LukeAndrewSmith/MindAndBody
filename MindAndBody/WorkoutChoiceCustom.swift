@@ -11,7 +11,7 @@ import UIKit
 
 
 //
-// Warmup Choice Custom --------------------------------------------------------------------------------------
+// Workout Choice Custom --------------------------------------------------------------------------------------
 //
 class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -22,13 +22,13 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     // Custom Arrays
     //
     var presetTexts: [String] = []
-    // WarmupPresetsCustom, SetsArray, RepsArray
+    // WorkoutPresetsCustom, SetsArray, RepsArray
     var emptyArrayOfArrays: [[Int]] = []
     // Selected row
     var selectedRow = Int()
     
     //
-    var warmupArray: [String] = []
+    var workoutArray: [String] = []
     //
     var demonstrationArray: [UIImage] = []
     //
@@ -43,7 +43,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     //
-    // Warmup Arrays -----------------------------------------------------------------------------------------------
+    // Workout Arrays -----------------------------------------------------------------------------------------------
     //
     // TableView Section Array
     var tableViewSectionArray: [String] =
@@ -55,7 +55,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             "shoulder",
             "bandAssisted",
             "generalMobility",
-            "dynamicWarmupDrills",
+            "dynamicWorkoutDrills",
             "accessory"
     ]
     
@@ -114,7 +114,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
              42,
              43,
              44],
-            // Dynamic Warmup Drills
+            // Dynamic Workout Drills
             [45,
              46,
              47,
@@ -131,8 +131,8 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
              57]
     ]
     
-    // Warmup Movements Dictionary
-    var warmupMovementsDictionary: [Int : String] =
+    // Workout Movements Dictionary
+    var workoutMovementsDictionary: [Int : String] =
         [
             // Cardio
             0: "5minCardio",
@@ -186,7 +186,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             42: "hipHinges",
             43: "sideLegSwings",
             44: "frontLegSwings",
-            // Dynamic Warmup Drills
+            // Dynamic Workout Drills
             45: "jumpSquat",
             46: "lunge",
             47: "gluteKicks",
@@ -505,15 +505,15 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         
         //
-        // Preset Warmups
+        // Preset Workouts
         //
         let defaults = UserDefaults.standard
         // Custom
-        defaults.register(defaults: ["warmupPresetsCustom" : emptyArrayOfArrays])
-        defaults.register(defaults: ["warmupPresetTextsCustom" : presetTexts])
+        defaults.register(defaults: ["workoutPresetsCustom" : emptyArrayOfArrays])
+        defaults.register(defaults: ["workoutPresetTextsCustom" : presetTexts])
         //
-        defaults.register(defaults: ["warmupSetsCustom" : emptyArrayOfArrays])
-        defaults.register(defaults: ["warmupRepsCustom" : emptyArrayOfArrays])
+        defaults.register(defaults: ["workoutSetsCustom" : emptyArrayOfArrays])
+        defaults.register(defaults: ["workoutRepsCustom" : emptyArrayOfArrays])
         //
         defaults.synchronize()
         
@@ -565,8 +565,8 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         // Initial Element Positions
-        let warmupPreset = UserDefaults.standard.object(forKey: "warmupPresetsCustom") as! [[Int]]
-        if warmupPreset.count == 0 {
+        let workoutPreset = UserDefaults.standard.object(forKey: "workoutPresetsCustom") as! [[Int]]
+        if workoutPreset.count == 0 {
             editingButton.alpha = 0
             removePreset.alpha = 0
             //
@@ -654,15 +654,15 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func beginButtonEnabled() {
         // Begin Button
         let defaults = UserDefaults.standard
-        var warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        var workoutPreset = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
         //
         if customTableView.isEditing {
             beginButton.isEnabled = false
         } else {
-            if warmupPreset.count == 0 {
+            if workoutPreset.count == 0 {
                 beginButton.isEnabled = false
             } else {
-                if warmupPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
+                if workoutPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
                     beginButton.isEnabled = false
                 } else {
                     beginButton.isEnabled = true
@@ -675,12 +675,12 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func editButtonEnabled() {
         //
         let defaults = UserDefaults.standard
-        var warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        var workoutPreset = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
         //
-        if warmupPreset.count == 0 {
+        if workoutPreset.count == 0 {
             editingButton.isEnabled = false
         } else {
-            if warmupPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
+            if workoutPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
                 editingButton.isEnabled = false
             } else {
                 editingButton.isEnabled = true
@@ -692,9 +692,9 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func pickerViewEnabled() {
         //
         let defaults = UserDefaults.standard
-        let warmupPreset = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        let workoutPreset = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
         //
-        if warmupPreset.count == 0 {
+        if workoutPreset.count == 0 {
             sessionPickerView.isUserInteractionEnabled = false
         } else {
             sessionPickerView.isUserInteractionEnabled = true
@@ -706,17 +706,17 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     // Set Personalized Preset
     var okAction = UIAlertAction()
     //
-    @IBAction func addCustomWarmup(_ sender: Any) {
+    @IBAction func addCustomworkout(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-        var presetTextArray = defaults.object(forKey: "warmupPresetTextsCustom") as! [String]
+        var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
+        var presetTextArray = defaults.object(forKey: "workoutPresetTextsCustom") as! [String]
         //
-        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
         // Alert and Functions
         //
-        let inputTitle = NSLocalizedString("warmupInputTitle", comment: "")
+        let inputTitle = NSLocalizedString("workoutInputTitle", comment: "")
         //
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = colour2
@@ -733,16 +733,16 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             let textField = alert?.textFields![0]
             // Update Preset Text Arrays
             presetTextArray.append((textField?.text)!)
-            defaults.set(presetTextArray, forKey: "warmupPresetTextsCustom")
+            defaults.set(presetTextArray, forKey: "workoutPresetTextsCustom")
             // Add New empty array
             customKeyArray.append([])
-            defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
+            defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
             // Add new sets and reps arrays
             customSetsArray.append([])
-            defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+            defaults.set(customSetsArray, forKey: "workoutSetsCustom")
             //
             customRepsArray.append([])
-            defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+            defaults.set(customRepsArray, forKey: "workoutRepsCustom")
             //
             defaults.synchronize()
             // Flash Screen
@@ -796,18 +796,18 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     // Remove Personalized Preset
-    @IBAction func removeCustomWarmup(_ sender: Any) {
+    @IBAction func removeCustomWorkout(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-        var presetTextArray = defaults.object(forKey: "warmupPresetTextsCustom") as! [String]
+        var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
+        var presetTextArray = defaults.object(forKey: "workoutPresetTextsCustom") as! [String]
         //
-        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
         //
         let selectedRow = sessionPickerView.selectedRow(inComponent: 0)
         //
-        let inputTitle = NSLocalizedString("warmupRemoveTitle", comment: "")
+        let inputTitle = NSLocalizedString("workoutRemoveTitle", comment: "")
         //
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = colour2
@@ -818,16 +818,16 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             if presetTextArray.count != 0 {
                 //
                 customKeyArray.remove(at: selectedRow)
-                defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
+                defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
                 //
                 presetTextArray.remove(at: selectedRow)
-                defaults.set(presetTextArray, forKey: "warmupPresetTextsCustom")
+                defaults.set(presetTextArray, forKey: "workoutPresetTextsCustom")
                 //
                 customSetsArray.remove(at: selectedRow)
-                defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+                defaults.set(customSetsArray, forKey: "workoutSetsCustom")
                 //
                 customRepsArray.remove(at: selectedRow)
-                defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+                defaults.set(customRepsArray, forKey: "workoutRepsCustom")
                 //
                 defaults.synchronize()
                 
@@ -894,7 +894,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == sessionPickerView {
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
             return titleDataArray.count
         } else if pickerView == setsRepsPicker {
             if component == 0{
@@ -911,7 +911,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         //
         if pickerView == sessionPickerView {
             let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+            let titleDataArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
             //
             if titleDataArray.count > 0 {
                 let titleData = titleDataArray[row]
@@ -1014,7 +1014,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         
         switch tableView {
         case customTableView:
-            return 1
+            return 2
         case movementsTableView:
             let numberOfSections = tableViewSectionArray.count
             return numberOfSections
@@ -1029,13 +1029,19 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         switch tableView {
         //
         case customTableView:
-            //
-            let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
-            if titleDataArray.count != 0 {
-                return titleDataArray[sessionPickerView.selectedRow(inComponent: 0)]
-            } else {
-                return " "
+            switch section {
+            case 0:
+                //
+                let titleDataArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
+                if titleDataArray.count != 0 {
+                    return titleDataArray[sessionPickerView.selectedRow(inComponent: 0)]
+                } else {
+                    return " "
+                }
+            case 1:
+            default: return " "
             }
+            
         //
         case movementsTableView:
             return NSLocalizedString(tableViewSectionArray[section], comment: "")
@@ -1076,7 +1082,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         case customTableView:
             //
             let defaults = UserDefaults.standard
-            let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+            let customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
             //
             if customKeyArray.count == 0 {
                 return 1
@@ -1100,10 +1106,10 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         case customTableView:
             //
             let defaults = UserDefaults.standard
-            let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+            let customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
             //
-            var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-            var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+            var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
+            var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
             //
             if customKeyArray.count == 0 {
                 //
@@ -1140,7 +1146,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                     let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                     //
                     let keyIndex = customKeyArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]
-                    cell.textLabel?.text = NSLocalizedString(warmupMovementsDictionary[keyIndex]!, comment: "")
+                    cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[keyIndex]!, comment: "")
                     //
                     cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
                     cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -1173,7 +1179,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
             let keyIndex = fullKeyArray[indexPath.section][indexPath.row]
-            cell.textLabel?.text = NSLocalizedString(warmupMovementsDictionary[keyIndex]!, comment: "")
+            cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[keyIndex]!, comment: "")
             //
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -1204,7 +1210,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         case customTableView:
             //
             let defaults = UserDefaults.standard
-            let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+            let customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
             //
             if customKeyArray.count == 0 {
                 return 49
@@ -1229,10 +1235,10 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
         //
-        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
         // If no session created
         if customKeyArray.count == 0 {
             tableView.deselectRow(at: indexPath, animated: true)
@@ -1342,13 +1348,13 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             case movementsTableView:
                 //
                 customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].append(fullKeyArray[indexPath.section][indexPath.row])
-                defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
+                defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
                 // sets
                 customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
-                defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+                defaults.set(customSetsArray, forKey: "workoutSetsCustom")
                 // reps
                 customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
-                defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+                defaults.set(customRepsArray, forKey: "workoutRepsCustom")
                 //
                 defaults.synchronize()
                 // Remove Table
@@ -1386,7 +1392,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         //
         let defaults = UserDefaults.standard
-        let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        let customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
         //
         if customKeyArray.count == 0 {
             return false
@@ -1403,7 +1409,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         //
         let defaults = UserDefaults.standard
-        let customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        let customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
         //
         if customKeyArray.count == 0 {
             return false
@@ -1420,24 +1426,24 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
+        var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
         // Key
         let itemToMove = customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
         customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].insert(itemToMove, at: destinationIndexPath.row)
         //
-        defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
+        defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
         // Sets
         let setToMove = customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
         customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(setToMove, at: destinationIndexPath.row)
         //
-        defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+        defaults.set(customSetsArray, forKey: "workoutSetsCustom")
         // Reps
         let repToMove = customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
         customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(repToMove, at: destinationIndexPath.row)
         //
-        defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+        defaults.set(customRepsArray, forKey: "workoutRepsCustom")
         //
         defaults.synchronize()
     }
@@ -1446,7 +1452,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
         //
         let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
         //
         if proposedDestinationIndexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
             return NSIndexPath(row: proposedDestinationIndexPath.row - 1, section: proposedDestinationIndexPath.section) as IndexPath
@@ -1466,18 +1472,18 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         //
         if editingStyle == UITableViewCellEditingStyle.delete {
             let defaults = UserDefaults.standard
-            var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
-            var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-            var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+            var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
+            var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
+            var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
             // Key
             customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customKeyArray, forKey: "warmupPresetsCustom")
+            defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
             // sets
             customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+            defaults.set(customSetsArray, forKey: "workoutSetsCustom")
             // reps
             customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+            defaults.set(customRepsArray, forKey: "workoutRepsCustom")
             //
             defaults.synchronize()
             //
@@ -1532,14 +1538,14 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func okButtonAction(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
         //
         customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = setsRepsPicker.selectedRow(inComponent: 0)
-        defaults.set(customSetsArray, forKey: "warmupSetsCustom")
+        defaults.set(customSetsArray, forKey: "workoutSetsCustom")
         //
         customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = setsRepsPicker.selectedRow(inComponent: 1)
-        defaults.set(customRepsArray, forKey: "warmupRepsCustom")
+        defaults.set(customRepsArray, forKey: "workoutRepsCustom")
         //
         defaults.synchronize()
         //
@@ -1623,9 +1629,9 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func beginButton(_ sender: Any) {
         
         if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
-            performSegue(withIdentifier: "warmupCustomSegue1", sender: nil)
+            performSegue(withIdentifier: "workoutCustomSegue1", sender: nil)
         } else {
-            performSegue(withIdentifier: "warmupCustomSegue2", sender: nil)
+            performSegue(withIdentifier: "workoutCustomSegue2", sender: nil)
         }
         
         
@@ -1647,22 +1653,22 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         //
         let defaults = UserDefaults.standard
         //
-        var customKeyArray = defaults.object(forKey: "warmupPresetsCustom") as! [[Int]]
+        var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
         //
-        var customSetsArray = defaults.object(forKey: "warmupSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "warmupRepsCustom") as! [[Int]]
+        var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
+        var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
         //
-        let titleDataArray = UserDefaults.standard.object(forKey: "warmupPresetTextsCustom") as! [String]
+        let titleDataArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
         
         
-        if (segue.identifier == "warmupCustomSegue1") {
+        if (segue.identifier == "workoutCustomSegue1") {
             //
             let destinationVC = segue.destination as! SessionScreen
             
             // Compress Arrays
             for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
                 //
-                warmupArray.append(warmupMovementsDictionary[i]!)
+                workoutArray.append(workoutMovementsDictionary[i]!)
                 //
                 demonstrationArray.append(demonstrationDictionary[i]!)
                 //
@@ -1680,7 +1686,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             }
             
             //
-            destinationVC.sessionArray = warmupArray
+            destinationVC.sessionArray = workoutArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
             destinationVC.demonstrationArray = demonstrationArray
@@ -1689,14 +1695,14 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             //
             destinationVC.sessionType = 0
             //
-        } else if (segue.identifier == "warmupCustomSegue2") {
+        } else if (segue.identifier == "workoutCustomSegue2") {
             //
             let destinationVC = segue.destination as! CircuitWorkoutScreen
             
             // Compress Arrays
             for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
                 //
-                warmupArray.append(warmupMovementsDictionary[i]!)
+                workoutArray.append(workoutMovementsDictionary[i]!)
                 //
                 demonstrationArray.append(demonstrationDictionary[i]!)
                 //
@@ -1714,7 +1720,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             }
             
             //
-            destinationVC.sessionArray = warmupArray
+            destinationVC.sessionArray = workoutArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
             destinationVC.demonstrationArray = demonstrationArray

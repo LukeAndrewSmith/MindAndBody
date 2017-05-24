@@ -19,8 +19,6 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     // Buttons
-    @IBOutlet weak var guided: UIButton!
-    //
     @IBOutlet weak var custom: UIButton!
     //
     @IBOutlet weak var practices: UIButton!
@@ -29,9 +27,6 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     let informationView = UIScrollView()
     // Information Title
     let informationTitle = UILabel()
-    
-    // Stack View
-    @IBOutlet weak var stackView: UIStackView!
     
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
@@ -60,15 +55,6 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         navigationBar.title = (NSLocalizedString("yoga", comment: ""))
         
         // Button Titles
-        //
-        guided.setTitle(NSLocalizedString("guided", comment: ""), for: UIControlState.normal)
-        guided.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        guided.setTitleColor(colour2, for: .normal)
-        guided.layer.borderWidth = 8
-        guided.layer.borderColor = colour2.cgColor
-        guided.titleLabel?.adjustsFontSizeToFitWidth = true
-        guided.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        guided.titleLabel?.textAlignment = .center
         //
         practices.setTitle(NSLocalizedString("practices", comment: ""), for: UIControlState.normal)
         practices.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
@@ -160,14 +146,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         //
         super.viewDidLayoutSubviews()
         //
-        guided.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
-        guided.layer.masksToBounds = true
-        guided.titleLabel?.adjustsFontSizeToFitWidth = true
-        guided.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        guided.titleLabel?.numberOfLines = 0
-        guided.titleLabel?.textAlignment = .center
-        //
-        practices.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
+        practices.layer.cornerRadius = practices.frame.size.height / 2
         practices.layer.masksToBounds = true
         practices.titleLabel?.adjustsFontSizeToFitWidth = true
         practices.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)

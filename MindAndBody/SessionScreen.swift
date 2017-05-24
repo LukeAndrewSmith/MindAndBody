@@ -443,12 +443,22 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             imageSwipeLeft.direction = UISwipeGestureRecognizerDirection.left
             cell.imageViewCell.addGestureRecognizer(imageSwipeLeft)
             cell.imageViewCell.isUserInteractionEnabled = true
+            //
+            let nextImageTap = UITapGestureRecognizer()
+            nextImageTap.numberOfTapsRequired = 1
+            nextImageTap.addTarget(self, action: #selector(nextImageAction))
+            cell.nextImage.addGestureRecognizer(nextImageTap)
             
             // Right Image Swipe
             let imageSwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
             imageSwipeRight.direction = UISwipeGestureRecognizerDirection.right
             cell.imageViewCell.addGestureRecognizer(imageSwipeRight)
             cell.imageViewCell.isUserInteractionEnabled = true
+            //
+            let previousImageTap = UITapGestureRecognizer()
+            previousImageTap.numberOfTapsRequired = 1
+            previousImageTap.addTarget(self, action: #selector(previousImageAction))
+            cell.previousImage.addGestureRecognizer(previousImageTap)
             
             
             // Alphas
@@ -1041,7 +1051,103 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
 
+    //
+    // Next Image Buttons
+    @IBAction func nextImageAction() {
+        //
+        let indexPath = NSIndexPath(row: selectedRow, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
+        //
+            //
+            if cell.nextImage.alpha == 1 {
+                //
+                let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
+                snapshot1?.bounds = cell.imageViewCell.bounds
+                snapshot1?.center.x = cell.center.x
+                cell.addSubview(snapshot1!)
+                
+                //
+                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+                    cell.imageViewCell.image = targetAreaArray[indexPath.row]
+                } else {
+                    cell.imageViewCell.image = demonstrationArray[indexPath.row]
+                }
+                //
+                cell.imageViewCell.reloadInputViews()
+                
+                //
+                let snapshot2 = cell.imageViewCell.snapshotView(afterScreenUpdates: true)
+                snapshot2?.bounds = cell.imageViewCell.bounds
+                snapshot2?.center.x = cell.center.x + cell.frame.size.width
+                cell.addSubview(snapshot2!)
+                //
+                cell.imageViewCell.alpha = 0
+                //
+                UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    snapshot1?.center.x = cell.center.x - cell.frame.size.width
+                    snapshot2?.center.x = cell.center.x
+                    //
+                    cell.nextImage.alpha = 0
+                    cell.nextImage.isEnabled = false
+                    cell.previousImage.alpha = 1
+                    cell.previousImage.isEnabled = true
+                }, completion: { finished in
+                    cell.imageViewCell.alpha = 1
+                    snapshot1?.removeFromSuperview()
+                    snapshot2?.removeFromSuperview()
+                })
+                //
+            }
+    }
     
+    //
+    // Previous Image Buttons
+    @IBAction func previousImageAction() {
+        //
+        let indexPath = NSIndexPath(row: selectedRow, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
+        //
+            //
+            if cell.previousImage.alpha == 1 {
+                //
+                let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
+                snapshot1?.bounds = cell.imageViewCell.bounds
+                snapshot1?.center.x = cell.center.x
+                cell.addSubview(snapshot1!)
+                
+                //
+                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+                    cell.imageViewCell.image = demonstrationArray[indexPath.row]
+                } else {
+                    cell.imageViewCell.image = targetAreaArray[indexPath.row]
+                }
+                
+                //
+                let snapshot2 = cell.imageViewCell.snapshotView(afterScreenUpdates: true)
+                snapshot2?.bounds = cell.imageViewCell.bounds
+                snapshot2?.center.x = cell.center.x - cell.frame.size.width
+                cell.addSubview(snapshot2!)
+                
+                //
+                cell.imageViewCell.alpha = 0
+                //
+                UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    snapshot1?.center.x = cell.center.x + cell.frame.size.width
+                    snapshot2?.center.x = cell.center.x
+                    //
+                    cell.nextImage.alpha = 1
+                    cell.nextImage.isEnabled = true
+                    cell.previousImage.alpha = 0
+                    cell.previousImage.isEnabled = false
+                }, completion: { finished in
+                    cell.imageViewCell.alpha = 1
+                    snapshot1?.removeFromSuperview()
+                    snapshot2?.removeFromSuperview()
+                })
+                //
+            }
+    }
+
     
     //
     // Update Progress

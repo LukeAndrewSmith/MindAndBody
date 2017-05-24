@@ -46,7 +46,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     // Table View Section Title Array
     var tableViewSectionArray: [String] =
         [
-            "recommended",
+            "cardio",
             "jointRotation",
             "foamRoll",
             "backStretch",
@@ -665,6 +665,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         breathsIndicatorLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
         breathsIndicatorLabel.textColor = colour1
         breathsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+        breathsIndicatorLabel.textAlignment = .left
         //
         breathsView.addSubview(breathsPicker)
         breathsView.addSubview(okButton)
@@ -928,7 +929,6 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             return titleDataArray.count
         } else if pickerView == breathsPicker {
             return breathsPickerArray.count
-            
         }
         return 0
     }
@@ -954,19 +954,8 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             //
             let breathsLabel = UILabel()
             // Row Label Text
-            switch row {
+            breathsLabel.text = String(breathsPickerArray[row])
             //
-            case 0:
-                breathsLabel.text = "        " + String(breathsPickerArray[row]) + "  " + NSLocalizedString("rep", comment: "")
-            //
-            case 1:
-                breathsLabel.text = "         " + String(breathsPickerArray[row]) + " " + NSLocalizedString("reps", comment: "")
-            //
-            case 2...15:
-                breathsLabel.text = String(breathsPickerArray[row])
-            //
-            default: break
-            }
             breathsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
             breathsLabel.textColor = colour1
             breathsLabel.textAlignment = .center
@@ -1145,7 +1134,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                     if keyIndex == 0 {
                         
                     } else {
-                        cell.detailTextLabel?.text = breathsPickerArray[customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]]
+                        cell.detailTextLabel?.text = breathsPickerArray[customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]] + " br."
                     }
                     //
                     // Cell Image
@@ -1284,6 +1273,10 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                         }, completion: nil)
                         //
                     } else {
+                        if customKeyArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row] == 0 {
+                            tableView.deselectRow(at: indexPath, animated: true)
+                            // Nothing for cardio
+                        } else {
                         // View
                         breathsView.alpha = 0
                         UIApplication.shared.keyWindow?.insertSubview(breathsView, aboveSubview: view)
@@ -1297,7 +1290,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                         // ok
                         okButton.frame = CGRect(x: 0, y: 147, width: breathsView.frame.size.width, height: 49)
                         //
-                        self.breathsIndicatorLabel.frame = CGRect(x: breathsPicker.frame.size.width + 15, y: (self.breathsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+                        self.breathsIndicatorLabel.frame = CGRect(x: breathsPicker.frame.size.width + 17, y: (self.breathsPicker.frame.size.height / 2) - 15, width: 100, height: 30)
                         //
                         backgroundViewExpanded.alpha = 0
                         UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: breathsView)
@@ -1318,13 +1311,14 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                             // ok
                             self.okButton.frame = CGRect(x: 0, y: 147, width: self.breathsView.frame.size.width, height: 49)
                             // Sets Indicator Label
-                            self.breathsIndicatorLabel.frame = CGRect(x: (self.breathsPicker.frame.size.width / 2) + 15, y: (self.breathsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                            self.breathsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+                            self.breathsIndicatorLabel.frame = CGRect(x: (self.breathsPicker.frame.size.width / 2) + 17, y: (self.breathsPicker.frame.size.height / 2) - 15, width: 100, height: 30)
+                            self.breathsIndicatorLabel.text = NSLocalizedString("breathsC", comment: "")
                             //
                             //
                             self.backgroundViewExpanded.alpha = 0.7
                             
                         }, completion: nil)
+                        }
                     }
                 //}
             //
@@ -1529,7 +1523,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
         let defaults = UserDefaults.standard
         var customBreathsArray = defaults.object(forKey: "stretchingBreathsCustom") as! [[Int]]
         //
-        customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = breathsPicker.selectedRow(inComponent: 1)
+        customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = breathsPicker.selectedRow(inComponent: 0)
         defaults.set(customBreathsArray, forKey: "stretchingBreathsCustom")
         //
         defaults.synchronize()

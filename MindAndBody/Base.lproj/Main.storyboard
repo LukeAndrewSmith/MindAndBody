@@ -341,7 +341,7 @@
                                             </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXe-Y8-seR">
-                                            <rect key="frame" x="187" y="-5" width="94" height="54"/>
+                                            <rect key="frame" x="187.5" y="-5" width="94" height="54"/>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="20"/>
                                             <state key="normal" title="Body">
                                                 <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -2065,35 +2065,6 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="hlJ-cG-m2t">
-                                <rect key="frame" x="67" y="40" width="241.5" height="523"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1A-ek-ohU">
-                                        <rect key="frame" x="0.0" y="0.0" width="241.5" height="241.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="V1A-ek-ohU" secondAttribute="height" multiplier="1:1" id="JY1-Yb-XKW"/>
-                                        </constraints>
-                                        <state key="normal" title="Button">
-                                            <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="practicesAction:" destination="iFI-EE-j0k" eventType="touchUpInside" id="Bx4-JB-zjU"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCd-zU-Hzt">
-                                        <rect key="frame" x="0.0" y="281.5" width="241.5" height="241.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="LCd-zU-Hzt" secondAttribute="height" id="X8m-hu-Fkg"/>
-                                        </constraints>
-                                        <state key="normal" title="Button">
-                                            <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="guidedAction:" destination="iFI-EE-j0k" eventType="touchUpInside" id="77J-xv-Hng"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVu-G4-jgr">
                                 <rect key="frame" x="316" y="544" width="49" height="49"/>
                                 <constraints>
@@ -2108,14 +2079,27 @@
                                     <segue destination="NKt-4H-PqV" kind="show" id="gWo-hd-Nk0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1A-ek-ohU">
+                                <rect key="frame" x="72" y="186.5" width="231" height="231"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="V1A-ek-ohU" secondAttribute="height" multiplier="1:1" id="JY1-Yb-XKW"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="practicesAction:" destination="iFI-EE-j0k" eventType="touchUpInside" id="Bx4-JB-zjU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="SVu-G4-jgr" secondAttribute="trailing" constant="10" id="0On-NQ-hpj"/>
-                            <constraint firstAttribute="bottom" secondItem="hlJ-cG-m2t" secondAttribute="bottom" constant="40" id="0tP-Yz-Svg"/>
-                            <constraint firstItem="hlJ-cG-m2t" firstAttribute="top" secondItem="9of-vf-AI9" secondAttribute="bottom" constant="40" id="2sT-w1-QCl"/>
+                            <constraint firstAttribute="trailing" secondItem="V1A-ek-ohU" secondAttribute="trailing" constant="72" id="GK4-PN-PUJ"/>
                             <constraint firstAttribute="bottom" secondItem="SVu-G4-jgr" secondAttribute="bottom" constant="10" id="IW5-Rd-0Mh"/>
-                            <constraint firstItem="hlJ-cG-m2t" firstAttribute="centerX" secondItem="oVD-BE-kWD" secondAttribute="centerX" id="Obz-NX-WeQ"/>
+                            <constraint firstItem="V1A-ek-ohU" firstAttribute="centerY" secondItem="oVD-BE-kWD" secondAttribute="centerY" id="Qk3-45-ykM"/>
+                            <constraint firstItem="V1A-ek-ohU" firstAttribute="leading" secondItem="oVD-BE-kWD" secondAttribute="leading" constant="72" id="b63-5v-BkV"/>
+                            <constraint firstItem="V1A-ek-ohU" firstAttribute="centerX" secondItem="oVD-BE-kWD" secondAttribute="centerX" id="jNa-Ff-ftr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ndj-QS-m0l">
@@ -2129,11 +2113,9 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="custom" destination="SVu-G4-jgr" id="N1R-ek-Pmy"/>
-                        <outlet property="guided" destination="LCd-zU-Hzt" id="Hf7-TD-pMe"/>
                         <outlet property="navigationBar" destination="ndj-QS-m0l" id="7ww-eZ-10d"/>
                         <outlet property="practices" destination="V1A-ek-ohU" id="t5a-tQ-wzV"/>
                         <outlet property="questionMark" destination="Ord-In-gil" id="Crp-R4-MyK"/>
-                        <outlet property="stackView" destination="hlJ-cG-m2t" id="BlM-Jo-eg1"/>
                         <segue destination="fCC-R5-Wbd" kind="show" identifier="yogaSegue" id="MFz-Pe-gBB"/>
                     </connections>
                 </viewController>
@@ -3165,13 +3147,13 @@
                                         <rect key="frame" x="8" y="85.5" width="172" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Aim" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMd-42-eeN">
-                                                <rect key="frame" x="0.0" y="0.0" width="132" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="28" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Calm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTm-vk-7rW">
-                                                <rect key="frame" x="140" y="0.0" width="32" height="20.5"/>
+                                                <rect key="frame" x="36" y="0.0" width="136" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="15"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -3641,6 +3623,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="404.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aYQ-8x-smf">
+                                                    <rect key="frame" x="35" y="0.0" width="304" height="303.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="aYQ-8x-smf" secondAttribute="height" id="Lqb-1o-R7Y"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movement" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ph9-9z-aWa">
                                                     <rect key="frame" x="55" y="303.5" width="265" height="25.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="21"/>
@@ -3662,18 +3650,18 @@
                                                     <state key="normal" image="QuestionMarkM"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VbV-dt-dn2">
-                                                    <rect key="frame" x="331" y="205.5" width="44" height="44"/>
+                                                    <rect key="frame" x="320" y="200" width="55" height="55"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="44" id="BRA-nc-Aal"/>
-                                                        <constraint firstAttribute="width" constant="44" id="DZS-hw-sF2"/>
+                                                        <constraint firstAttribute="height" constant="55" id="BRA-nc-Aal"/>
+                                                        <constraint firstAttribute="width" constant="55" id="DZS-hw-sF2"/>
                                                     </constraints>
                                                     <state key="normal" image="Forward"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYS-xt-Lf5">
-                                                    <rect key="frame" x="0.0" y="205.5" width="44" height="44"/>
+                                                    <rect key="frame" x="0.0" y="200" width="55" height="55"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="44" id="LEh-yi-8K7"/>
-                                                        <constraint firstAttribute="height" constant="44" id="thM-NG-bQk"/>
+                                                        <constraint firstAttribute="width" constant="55" id="LEh-yi-8K7"/>
+                                                        <constraint firstAttribute="height" constant="55" id="thM-NG-bQk"/>
                                                     </constraints>
                                                     <state key="normal" image="Back Arrow"/>
                                                 </button>
@@ -3692,12 +3680,6 @@
                                                         <constraint firstAttribute="height" constant="42.880000000000003" id="iRE-Rq-og5"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aYQ-8x-smf">
-                                                    <rect key="frame" x="35" y="0.0" width="304" height="303.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="aYQ-8x-smf" secondAttribute="height" id="Lqb-1o-R7Y"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="zYS-xt-Lf5" firstAttribute="centerY" secondItem="aYQ-8x-smf" secondAttribute="centerY" multiplier="1.5" id="1Wr-Ci-Alh"/>
@@ -4658,18 +4640,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="405.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-jO-oQj">
-                                                    <rect key="frame" x="140.5" y="368.5" width="93.5" height="23"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5tM-Fs-tkx">
                                                     <rect key="frame" x="23" y="0.0" width="329" height="329.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="5tM-Fs-tkx" secondAttribute="height" id="FFz-qW-O3f"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-jO-oQj">
+                                                    <rect key="frame" x="140.5" y="368.5" width="93.5" height="23"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u08-q7-MDY">
                                                     <rect key="frame" x="320" y="350.5" width="55" height="55"/>
                                                     <constraints>
@@ -5439,6 +5421,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="404.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="POy-oA-8ma">
+                                                    <rect key="frame" x="35" y="0.0" width="304" height="303.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="POy-oA-8ma" secondAttribute="height" id="dkV-SB-dLl"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movement" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kz8-mk-fSQ">
                                                     <rect key="frame" x="140" y="316" width="95" height="25.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="21"/>
@@ -5460,27 +5448,21 @@
                                                     <state key="normal" image="QuestionMarkM"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzP-Ld-BH6">
-                                                    <rect key="frame" x="331" y="205.5" width="44" height="44"/>
+                                                    <rect key="frame" x="320" y="200" width="55" height="55"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="44" id="tmg-fT-iib"/>
-                                                        <constraint firstAttribute="height" constant="44" id="ugs-aW-adq"/>
+                                                        <constraint firstAttribute="width" constant="55" id="tmg-fT-iib"/>
+                                                        <constraint firstAttribute="height" constant="55" id="ugs-aW-adq"/>
                                                     </constraints>
                                                     <state key="normal" image="Forward"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNU-il-GSe">
-                                                    <rect key="frame" x="0.0" y="205.5" width="44" height="44"/>
+                                                    <rect key="frame" x="0.0" y="200" width="55" height="55"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="44" id="CAj-kI-xO1"/>
-                                                        <constraint firstAttribute="height" constant="44" id="cWa-Pb-wY1"/>
+                                                        <constraint firstAttribute="width" constant="55" id="CAj-kI-xO1"/>
+                                                        <constraint firstAttribute="height" constant="55" id="cWa-Pb-wY1"/>
                                                     </constraints>
                                                     <state key="normal" image="Back Arrow"/>
                                                 </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="POy-oA-8ma">
-                                                    <rect key="frame" x="35" y="0.0" width="304" height="303.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="POy-oA-8ma" secondAttribute="height" id="dkV-SB-dLl"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="r5O-yZ-uLf" firstAttribute="centerY" secondItem="d0d-1U-YoD" secondAttribute="centerY" multiplier="11/6" id="5pe-9v-O4p"/>
@@ -5582,8 +5564,8 @@
         <segue reference="Fhn-aO-iU6"/>
         <segue reference="b2c-Ny-now"/>
         <segue reference="B07-rW-0ou"/>
-        <segue reference="aER-Wi-cbZ"/>
-        <segue reference="k7U-gv-KN1"/>
+        <segue reference="O6g-tM-bKb"/>
+        <segue reference="o0k-ew-BN2"/>
         <segue reference="7BM-dm-LNL"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -70,7 +70,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     // Table View Section Title Array
     var tableViewSectionArray: [String] =
         [
-            "recommended",
+            "cardio",
             "jointRotation",
             "foamRoll",
             "backStretch",

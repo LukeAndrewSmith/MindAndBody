@@ -561,7 +561,7 @@
 		077C2C811E5C7BA600BA62C0 /* Gym Old */ = {
 			isa = PBXGroup;
 			children = (
-				0782A2961E5DA6730016F908 /* Classic Old Stuff */,
+				0782A2971E5DA6B20016F908 /* ClassicChoiceFull.swift */,
 			);
 			name = "Gym Old";
 			sourceTree = "<group>";
@@ -573,14 +573,6 @@
 				077E471E1EB9E221005B0B22 /* SlideMenuView.swift */,
 			);
 			name = "Slide Menu";
-			sourceTree = "<group>";
-		};
-		0782A2961E5DA6730016F908 /* Classic Old Stuff */ = {
-			isa = PBXGroup;
-			children = (
-				0782A2971E5DA6B20016F908 /* ClassicChoiceFull.swift */,
-			);
-			name = "Classic Old Stuff";
 			sourceTree = "<group>";
 		};
 		078C59541EC893EA00FA1890 /* Sounds */ = {
