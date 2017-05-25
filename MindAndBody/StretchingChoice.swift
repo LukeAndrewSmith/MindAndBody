@@ -76,19 +76,19 @@ class StretchingChoice: UIViewController  {
         general.setTitle(NSLocalizedString("general", comment: ""), for: UIControlState.normal)
         general.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         general.setTitleColor(colour2, for: .normal)
-        general.layer.borderWidth = 8
+        general.layer.borderWidth = 6
         general.layer.borderColor = colour2.cgColor
         //
         postWorkout.setTitle(NSLocalizedString("postWorkout", comment: ""), for: UIControlState.normal)
         postWorkout.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         postWorkout.setTitleColor(colour2, for: .normal)
-        postWorkout.layer.borderWidth = 8
+        postWorkout.layer.borderWidth = 6
         postWorkout.layer.borderColor = colour2.cgColor
         //
         postCardio.setTitle(NSLocalizedString("postCardio", comment: ""), for: UIControlState.normal)
         postCardio.setTitleColor(colour2, for: .normal)
         postCardio.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        postCardio.layer.borderWidth = 8
+        postCardio.layer.borderWidth = 6
         postCardio.layer.borderColor = colour2.cgColor
         //
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)

@@ -24,9 +24,6 @@ class GymChoice: UIViewController  {
     //
     @IBOutlet weak var fiveByFive: UIButton!
     
-    // Custom
-    @IBOutlet weak var custom: UIButton!
-    
     // Information View
     let informationView = UIScrollView()
     // Information Title
@@ -89,36 +86,23 @@ class GymChoice: UIViewController  {
         classic.setTitle(NSLocalizedString("classic", comment: ""), for: UIControlState.normal)
         classic.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         classic.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        classic.layer.borderWidth = 8
+        classic.layer.borderWidth = 6
         classic.layer.borderColor = colour2.cgColor
         classic.setTitleColor(colour2, for: .normal)
         //
         circuit.setTitle(NSLocalizedString("circuit", comment: ""), for: UIControlState.normal)
         circuit.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         circuit.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        circuit.layer.borderWidth = 8
+        circuit.layer.borderWidth = 6
         circuit.layer.borderColor = colour2.cgColor
         circuit.setTitleColor(colour2, for: .normal)
         //
         fiveByFive.setTitle(NSLocalizedString("5x5", comment: ""), for: UIControlState.normal)
         fiveByFive.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         fiveByFive.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        fiveByFive.layer.borderWidth = 8
+        fiveByFive.layer.borderWidth = 6
         fiveByFive.layer.borderColor = colour2.cgColor
         fiveByFive.setTitleColor(colour2, for: .normal)
-        //
-        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        custom.layer.borderWidth = 7
-        custom.layer.borderColor = colour2.cgColor
-        custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
-        custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(colour2, for: .normal)
-        custom.layer.cornerRadius = 49/2
-        custom.layer.masksToBounds = true
-        custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleLabel?.numberOfLines = 0
-        custom.titleLabel?.textAlignment = .center
         //
         
         // Information
@@ -361,7 +345,7 @@ class GymChoice: UIViewController  {
             
             // Clear Section
             let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: custom.center.x, y: custom.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height), radius: 24.5, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+            //path.addArc(center: CGPoint(x: custom.center.x, y: custom.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height), radius: 24.5, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()

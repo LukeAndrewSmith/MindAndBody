@@ -800,24 +800,6 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     var backgroundViewExpanded = UIButton()
     
     
-    // Flash Screen
-    func flashScreen() {
-        //
-        let flash = UIView()
-        //
-        flash.frame = CGRect(x: 0, y: presetsButton.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
-        flash.backgroundColor = colour1
-        self.view.alpha = 1
-        self.view.addSubview(flash)
-        self.view.bringSubview(toFront: flash)
-        //
-        UIView.animate(withDuration: 0.3, animations: {
-            flash.alpha = 0
-        }, completion: {(finished: Bool) -> Void in
-            flash.removeFromSuperview()
-        })
-    }
-    
 //
 // View Will Appear
 //
@@ -865,7 +847,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         presetsConstraint.constant = 0
         //
         tableConstraint1.constant = view.frame.size.height
-        tableConstraint.constant = -49.25
+        tableConstraint.constant = -49
         //
         beginConstraint.constant = -49
         

@@ -22,10 +22,13 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     // Custom Arrays
     //
     var presetTexts: [String] = []
-    // WorkoutPresetsCustom, SetsArray, RepsArray
+    // workoutPresetsCustom, SetsArray, RepsArray
     var emptyArrayOfArrays: [[Int]] = []
     // Selected row
     var selectedRow = Int()
+    
+    //
+    var selectedPreset = Int()
     
     //
     var workoutArray: [String] = []
@@ -48,375 +51,445 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     // TableView Section Array
     var tableViewSectionArray: [String] =
         [
-            "cardio",
-            "jointRotation",
-            "foamRoll",
-            "lowerBack",
-            "shoulder",
-            "bandAssisted",
-            "generalMobility",
-            "dynamicWorkoutDrills",
-            "accessory"
+            "legsQ",
+            "legsHG",
+            "legsG",
+            "pullBa",
+            "pullUB",
+            "pullRD",
+            "pullT",
+            "pullB",
+            "pullF",
+            "pushC",
+            "pushS",
+            "pushT",
+            "calves",
+            "coreAbs"
     ]
     
     // Full Key Array
     var fullKeyArray: [[Int]] =
         [
-            // Cardio
-            [0],
-            // Joint Rotations
-            [1,
-             2,
-             3,
-             4,
-             5,
-             6,
-             7,
-             8],
-            // Foam/Ball Roll
-            [9,
-             10,
-             11,
-             12,
-             13,
-             14,
-             15,
-             16,
-             17,
-             18],
-            // Lower Back
-            [19,
-             20,
-             21,
-             22,
-             23],
-            // Shoulder
-            [24,
-             25,
-             26,
-             27],
-            // Band/Bar/Machine Assisted
-            [28,
-             29,
-             30,
-             31,
-             32,
-             33],
-            // General Mobility
+            // Legs (Quads)
+            [0,
+            1,
+            2,
+            3,
+            4,
+            5],
+            // Legs (Hamstrings/Glutes)
+            [6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12],
+            // Legs (General)
+            [13,
+            14,
+            15,
+            16],
+            // Pull (Back)
+            [17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26],
+            // Pull (Upper Back)
+            [27,
+            28,
+            29,
+            30],
+            // Pull (Rear Delts)
+            [31],
+            // Pull (Traps)
+            [32,
+            33],
+            // Pull (Biceps)
             [34,
-             35,
-             36,
-             37,
-             38,
-             39,
-             40,
-             41,
-             42,
-             43,
-             44],
-            // Dynamic Workout Drills
-            [45,
-             46,
-             47,
-             48,
-             49,
-             50,
-             51,
-             52,
-             53],
-            // Accessory
+            35,
+            36,
+            37],
+            // Pull (Forearms)
+            [38,
+            39,
+            40],
+            // Push (Chest)
+            [41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49],
+            // Push (Shoulders)
+            [50,
+            51,
+            52,
+            53],
+            // Push (Triceps)
             [54,
-             55,
-             56,
-             57]
+            55,
+            56,
+            57,
+            58],
+            // Calves
+            [59,
+            60],
+            // Abs/Core
+            [61,
+            62,
+            63,
+            64,
+            65]
     ]
     
     // Workout Movements Dictionary
     var workoutMovementsDictionary: [Int : String] =
         [
-            // Cardio
-            0: "5minCardio",
-            // Joint Rotations
-            1: "wrist",
-            2: "elbow",
-            3: "shoulder",
-            4: "neckR",
-            5: "waist",
-            6: "hip",
-            7: "knees",
-            8: "ankles",
-            // Foam/Ball Roll
-            9: "backf",
-            10: "thoracicSpine",
-            11: "lat",
-            12: "pecDelt",
-            13: "rearDelt",
-            14: "quadf",
-            15: "adductorf",
-            16: "hamstringf",
-            17: "glutef",
-            18: "calvef",
-            // Lower Back
-            19: "sideLegDrop",
-            20: "sideLegKick",
-            21: "scorpionKick",
-            22: "sideBend",
-            23: "catCow",
-            // Shoulder
-            24: "wallSlides",
-            25: "superManShoulder",
-            26: "scapula",
-            27: "shoulderRotation",
-            // Band/Bar/Machine Assisted
-            28: "facePull",
-            29: "externalRotation",
-            30: "internalRotation",
-            31: "shoulderDislocation",
-            32: "rearDeltFly",
-            33: "latPullover",
-            // General Mobility
-            34: "rollBack",
-            35: "hipCircles",
-            36: "mountainClimber",
-            37: "groinStretch",
-            38: "gluteBridge",
-            39: "threadTheNeedle",
-            40: "butterflyPose",
-            41: "cossakSquat",
-            42: "hipHinges",
-            43: "sideLegSwings",
-            44: "frontLegSwings",
-            // Dynamic Workout Drills
-            45: "jumpSquat",
-            46: "lunge",
-            47: "gluteKicks",
-            48: "aSkips",
-            49: "bSkips",
-            50: "grapeVines",
-            51: "lateralBound",
-            52: "straightLegBound",
-            53: "sprints",
-            // Accessory
-            54: "latStretch",
-            55: "calveStretch",
-            56: "pushUp",
-            57: "pullUp"
+            // Legs (Quads)
+            0: "squat",
+            1: "frontSquat",
+            2: "hackSquat",
+            3: "legPress",
+            4: "dumbellFrontSquat",
+            5: "legExtensions",
+            // Legs (Hamstrings/Glutes)
+            6: "deadlift",
+            7: "romanianDeadlift",
+            8: "dumbellRomanianDeadlift",
+            9: "weightedHipThrust",
+            10: "legCurl",
+            11: "oneLeggedDeadlift",
+            12: "gluteIsolationMachine",
+            // Legs (General)
+            13: "lungeBarbell",
+            14: "lungeDumbell",
+            15: "bulgarianSplitSquat",
+            16: "stepUp",
+            // Pull (Back)
+            17: "pullUp",
+            18: "pullDown",
+            19: "pullDownMachine",
+            20: "hammerStrengthPullDown",
+            21: "kneelingPullDown",
+            22: "bentOverRowBarbell",
+            23: "bentOverRowDumbell",
+            24: "tBarRow",
+            25: "rowMachine",
+            26: "hammerStrengthRow",
+            // Pull (Upper Back)
+            27: "facePull",
+            28: "smithMachinePullUp",
+            29: "leaningBackPullDown",
+            30: "seatedMachineRow",
+            // Pull (Rear Delts)
+            31: "bentOverBarbellRow",
+            // Pull (Traps)
+            32: "shrugBarbell",
+            33: "shrugDumbell",
+            // Pull (Biceps)
+            34: "hamerCurl",
+            35: "hammerCurlCable",
+            36: "cableCurl",
+            37: "curl",
+            // Pull (Forearms)
+            38: "farmersCarry",
+            39: "reverseBarbellCurl",
+            40: "forearmCurl",
+            // Push (Chest)
+            41: "pushUp",
+            42: "benchPress",
+            43: "benchPressDumbell",
+            44: "semiInclineDumbellPress",
+            45: "hammerStrengthPress",
+            46: "chestPress",
+            47: "platePress",
+            48: "barbellKneelingPress",
+            49: "cableFly",
+            // Push (Shoulders)
+            50: "standingShoulderPressBarbell",
+            51: "standingShoulderPressDumbell",
+            52: "lateralRaise",
+            53: "frontRaise",
+            // Push (Triceps)
+            54: "ballPushUp",
+            55: "trianglePushUp",
+            56: "closeGripBench",
+            57: "cableExtension",
+            58: "ropeExtension",
+            // Calves
+            59: "standingCalfRaise",
+            60: "seatedCalfRaise",
+            // Abs/Core
+            61: "hangingLegRaise",
+            62: "hangingLegTwist",
+            63: "plank",
+            64: "sideLegDrop",
+            65: "abRollout"
     ]
     
     // Demonstration Array
     var demonstrationDictionary: [Int : UIImage] =
         [
-            // Cardio
+            // Legs (Quads)
             0: #imageLiteral(resourceName: "Test 2"),
-            // Joint Rotations
             1: #imageLiteral(resourceName: "Test 2"),
             2: #imageLiteral(resourceName: "Test 2"),
             3: #imageLiteral(resourceName: "Test 2"),
             4: #imageLiteral(resourceName: "Test 2"),
             5: #imageLiteral(resourceName: "Test 2"),
+            // Legs (Hamstrings/Glutes)
             6: #imageLiteral(resourceName: "Test 2"),
             7: #imageLiteral(resourceName: "Test 2"),
             8: #imageLiteral(resourceName: "Test 2"),
-            // Foam/Ball Roll
             9: #imageLiteral(resourceName: "Test 2"),
             10: #imageLiteral(resourceName: "Test 2"),
             11: #imageLiteral(resourceName: "Test 2"),
             12: #imageLiteral(resourceName: "Test 2"),
+            // Legs (General)
             13: #imageLiteral(resourceName: "Test 2"),
             14: #imageLiteral(resourceName: "Test 2"),
             15: #imageLiteral(resourceName: "Test 2"),
             16: #imageLiteral(resourceName: "Test 2"),
+            // Pull (Back)
             17: #imageLiteral(resourceName: "Test 2"),
             18: #imageLiteral(resourceName: "Test 2"),
-            // Lower Back
             19: #imageLiteral(resourceName: "Test 2"),
             20: #imageLiteral(resourceName: "Test 2"),
             21: #imageLiteral(resourceName: "Test 2"),
             22: #imageLiteral(resourceName: "Test 2"),
             23: #imageLiteral(resourceName: "Test 2"),
-            // Shoulder
             24: #imageLiteral(resourceName: "Test 2"),
             25: #imageLiteral(resourceName: "Test 2"),
             26: #imageLiteral(resourceName: "Test 2"),
+            // Pull (Upper Back)
             27: #imageLiteral(resourceName: "Test 2"),
-            // Band/Bar/Machine Assisted
             28: #imageLiteral(resourceName: "Test 2"),
             29: #imageLiteral(resourceName: "Test 2"),
             30: #imageLiteral(resourceName: "Test 2"),
+            // Pull (Rear Delts)
             31: #imageLiteral(resourceName: "Test 2"),
+            // Pull (Traps)
             32: #imageLiteral(resourceName: "Test 2"),
             33: #imageLiteral(resourceName: "Test 2"),
-            // General Mobility
+            // Pull (Biceps)
             34: #imageLiteral(resourceName: "Test 2"),
             35: #imageLiteral(resourceName: "Test 2"),
             36: #imageLiteral(resourceName: "Test 2"),
             37: #imageLiteral(resourceName: "Test 2"),
+            // Pull (Forearms)
             38: #imageLiteral(resourceName: "Test 2"),
             39: #imageLiteral(resourceName: "Test 2"),
             40: #imageLiteral(resourceName: "Test 2"),
+            // Push (Chest)
             41: #imageLiteral(resourceName: "Test 2"),
             42: #imageLiteral(resourceName: "Test 2"),
             43: #imageLiteral(resourceName: "Test 2"),
             44: #imageLiteral(resourceName: "Test 2"),
-            // Dynamic Warm Up Drills
             45: #imageLiteral(resourceName: "Test 2"),
             46: #imageLiteral(resourceName: "Test 2"),
             47: #imageLiteral(resourceName: "Test 2"),
             48: #imageLiteral(resourceName: "Test 2"),
             49: #imageLiteral(resourceName: "Test 2"),
+            // Push (Shoulders)
             50: #imageLiteral(resourceName: "Test 2"),
             51: #imageLiteral(resourceName: "Test 2"),
             52: #imageLiteral(resourceName: "Test 2"),
             53: #imageLiteral(resourceName: "Test 2"),
-            // Accessory
+            // Push (Triceps)
             54: #imageLiteral(resourceName: "Test 2"),
             55: #imageLiteral(resourceName: "Test 2"),
             56: #imageLiteral(resourceName: "Test 2"),
-            57: #imageLiteral(resourceName: "Test 2")
+            57: #imageLiteral(resourceName: "Test 2"),
+            58: #imageLiteral(resourceName: "Test 2"),
+            // Calves
+            59: #imageLiteral(resourceName: "Test 2"),
+            60: #imageLiteral(resourceName: "Test 2"),
+            // Abs/Core
+            61: #imageLiteral(resourceName: "Test 2"),
+            62: #imageLiteral(resourceName: "Test 2"),
+            63: #imageLiteral(resourceName: "Test 2"),
+            64: #imageLiteral(resourceName: "Test 2"),
+            65: #imageLiteral(resourceName: "Test 2"),
     ]
     
     // Target Area Array
     var targetAreaDictionary: [Int: UIImage] =
         [
-            // Cardio
-            0: #imageLiteral(resourceName: "Heart"),
-            // Joint Rotations
-            1: #imageLiteral(resourceName: "Wrist Joint"),
-            2: #imageLiteral(resourceName: "Elbow Joint"),
-            3: #imageLiteral(resourceName: "Shoulder Joint"),
-            4: #imageLiteral(resourceName: "Neck Joint"),
-            5: #imageLiteral(resourceName: "Waist Joint"),
-            6: #imageLiteral(resourceName: "Hip Joint"),
-            7: #imageLiteral(resourceName: "Knee Joint"),
-            8: #imageLiteral(resourceName: "Ankle Joint"),
-            // Foam/Ball Roll
-            9: #imageLiteral(resourceName: "Thoracic"),
-            10: #imageLiteral(resourceName: "Thoracic"),
-            11: #imageLiteral(resourceName: "Lat and Delt"),
-            12: #imageLiteral(resourceName: "Pec and Front Delt"),
-            13: #imageLiteral(resourceName: "Rear Delt"),
-            14: #imageLiteral(resourceName: "Quad"),
-            15: #imageLiteral(resourceName: "Adductor"),
-            16: #imageLiteral(resourceName: "Hamstring"),
-            17: #imageLiteral(resourceName: "Glute"),
-            18: #imageLiteral(resourceName: "Calf"),
-            // Lower Back
-            19: #imageLiteral(resourceName: "Core"),
-            20: #imageLiteral(resourceName: "Core"),
-            21: #imageLiteral(resourceName: "Core"),
-            22: #imageLiteral(resourceName: "Core"),
-            23: #imageLiteral(resourceName: "Spine"),
-            // Shoulder
-            24: #imageLiteral(resourceName: "Shoulder"),
-            25: #imageLiteral(resourceName: "Back and Shoulder"),
-            26: #imageLiteral(resourceName: "Serratus"),
-            27: #imageLiteral(resourceName: "Shoulder"),
-            // Band/Bar/Machine Assisted
+            // Legs (Quads)
+            0: #imageLiteral(resourceName: "Squat"),
+            1: #imageLiteral(resourceName: "Squat"),
+            2: #imageLiteral(resourceName: "Squat"),
+            3: #imageLiteral(resourceName: "Squat"),
+            4: #imageLiteral(resourceName: "Squat"),
+            5: #imageLiteral(resourceName: "Squat"),
+            // Legs (Hamstrings/Glutes)
+            6: #imageLiteral(resourceName: "Deadlift"),
+            7: #imageLiteral(resourceName: "Deadlift"),
+            8: #imageLiteral(resourceName: "Deadlift"),
+            9: #imageLiteral(resourceName: "Squat"),
+            10: #imageLiteral(resourceName: "Rear Thigh"),
+            11: #imageLiteral(resourceName: "Squat"),
+            12: #imageLiteral(resourceName: "Glute"),
+            // Legs (General)
+            13: #imageLiteral(resourceName: "Squat"),
+            14: #imageLiteral(resourceName: "Squat"),
+            15: #imageLiteral(resourceName: "Squat"),
+            16: #imageLiteral(resourceName: "Squat"),
+            // Pull (Back)
+            17: #imageLiteral(resourceName: "Back and Bicep"),
+            18: #imageLiteral(resourceName: "Back and Bicep"),
+            19: #imageLiteral(resourceName: "Back and Bicep"),
+            20: #imageLiteral(resourceName: "Back and Bicep"),
+            21: #imageLiteral(resourceName: "Back and Bicep"),
+            22: #imageLiteral(resourceName: "Back, Bicep and Erector"),
+            23: #imageLiteral(resourceName: "Back, Bicep and Erector"),
+            24: #imageLiteral(resourceName: "Back, Bicep and Erector"),
+            25: #imageLiteral(resourceName: "Back and Bicep"),
+            26: #imageLiteral(resourceName: "Back and Bicep"),
+            // Pull (Upper Back)
+            27: #imageLiteral(resourceName: "Upper Back and Shoulder"),
             28: #imageLiteral(resourceName: "Upper Back and Shoulder"),
-            29: #imageLiteral(resourceName: "Rear Delt"),
-            30: #imageLiteral(resourceName: "Rear Delt"),
-            31: #imageLiteral(resourceName: "Shoulder"),
-            32: #imageLiteral(resourceName: "Rear Delt"),
-            33: #imageLiteral(resourceName: "Back"),
-            // General Mobility
-            34: #imageLiteral(resourceName: "Hamstring and Lower Back"),
-            35: #imageLiteral(resourceName: "Hip Area"),
-            36: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-            37: #imageLiteral(resourceName: "Adductor"),
-            38: #imageLiteral(resourceName: "Hamstring and Lower Back"),
-            39: #imageLiteral(resourceName: "Piriformis"),
-            40: #imageLiteral(resourceName: "Adductor"),
-            41: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-            42: #imageLiteral(resourceName: "Hamstring and Glute"),
-            43: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-            44: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-            // Dynamic Warm Up Drills
-            45: #imageLiteral(resourceName: "Squat"),
-            46: #imageLiteral(resourceName: "Squat"),
-            47: #imageLiteral(resourceName: "Squat"),
-            48: #imageLiteral(resourceName: "Squat"),
-            49: #imageLiteral(resourceName: "Squat"),
-            50: #imageLiteral(resourceName: "Squat"),
-            51: #imageLiteral(resourceName: "Squat"),
-            52: #imageLiteral(resourceName: "Squat"),
-            53: #imageLiteral(resourceName: "Squat"),
-            // Accessory
-            54: #imageLiteral(resourceName: "Lat"),
-            55: #imageLiteral(resourceName: "Calf"),
-            56: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            57: #imageLiteral(resourceName: "Back and Bicep")
+            29: #imageLiteral(resourceName: "Upper Back and Shoulder"),
+            30: #imageLiteral(resourceName: "Upper Back and Shoulder"),
+            // Pull (Rear Delts)
+            31: #imageLiteral(resourceName: "Rear Delt"),
+            // Pull (Traps)
+            32: #imageLiteral(resourceName: "Trap"),
+            33: #imageLiteral(resourceName: "Trap"),
+            // Pull (Biceps)
+            34: #imageLiteral(resourceName: "Bicep"),
+            35: #imageLiteral(resourceName: "Bicep"),
+            36: #imageLiteral(resourceName: "Bicep"),
+            37: #imageLiteral(resourceName: "Bicep"),
+            // Pull (Forearms)
+            38: #imageLiteral(resourceName: "Bicep"),
+            39: #imageLiteral(resourceName: "Bicep"),
+            40: #imageLiteral(resourceName: "Bicep"),
+            // Push (Chest)
+            41: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            42: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            43: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            44: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            45: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            46: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            47: #imageLiteral(resourceName: "Pec and Front Delt"),
+            48: #imageLiteral(resourceName: "Pec and Front Delt"),
+            49: #imageLiteral(resourceName: "Pec and Front Delt"),
+            // Push (Shoulders)
+            50: #imageLiteral(resourceName: "Shoulder"),
+            51: #imageLiteral(resourceName: "Shoulder"),
+            52: #imageLiteral(resourceName: "Shoulder"),
+            53: #imageLiteral(resourceName: "Shoulder"),
+            // Push (Triceps)
+            54: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            55: #imageLiteral(resourceName: "Tricep"),
+            56: #imageLiteral(resourceName: "Tricep"),
+            57: #imageLiteral(resourceName: "Tricep"),
+            58: #imageLiteral(resourceName: "Tricep"),
+            // Calves
+            59: #imageLiteral(resourceName: "Calf"),
+            60: #imageLiteral(resourceName: "Calf"),
+            // Abs/Core
+            61: #imageLiteral(resourceName: "Core"),
+            62: #imageLiteral(resourceName: "Core"),
+            63: #imageLiteral(resourceName: "Core"),
+            64: #imageLiteral(resourceName: "Core"),
+            65: #imageLiteral(resourceName: "Core"),
     ]
     
     // Explanation Array
     var explanationDictionary: [Int : String] =
         [
-            // Cardio
-            0: "5minCardioL",
-            // Joint Rotations
-            1: "wristE",
-            2: "elbowE",
-            3: "shoulderE",
-            4: "neckE",
-            5: "waistE",
-            6: "hipE",
-            7: "kneesE",
-            8: "anklesE",
-            // Foam/Ball Roll
-            9: "backfE",
-            10: "thoracicSpineE",
-            11: "latE",
-            12: "pecDeltE",
-            13: "rearDeltE",
-            14: "quadfE",
-            15: "adductorfE",
-            16: "hamstringfE",
-            17: "glutefE",
-            18: "calvefE",
-            // Back
-            19: "sideLegDropE",
-            20: "sideLegKickE",
-            21: "scorpionKickE",
-            22: "sideBendE",
-            23: "catCowE",
-            // Shoulder
-            24: "wallSlidesE",
-            25: "superManShoulderE",
-            26: "scapulaE",
-            27: "shoulderRotationE",
-            // Band/Bar/Machine Assisted
-            28: "facePullE",
-            29: "externalRotationE",
-            30: "internalRotationE",
-            31: "shoulderDislocationE",
-            32: "rearDeltFlyE",
-            33: "latPulloverE",
-            // General Mobility
-            34: "rollBackE",
-            35: "hipCirclesE",
-            36: "mountainClimberE",
-            37: "groinStretchE",
-            38: "gluteBridgeE",
-            39: "threadTheNeedleE",
-            40: "butterflyPoseE",
-            41: "cossakSquatE",
-            42: "hipHingesE",
-            43: "sideLegSwingsE",
-            44: "frontLegSwingsE",
-            // Dynamic Warm Up Drills
-            45: "jumpSquatE",
-            46: "lungeE",
-            47: "gluteKicksE",
-            48: "aSkipsE",
-            49: "bSkipsE",
-            50: "grapeVinesE",
-            51: "lateralBoundE",
-            52: "straightLegBoundE",
-            53: "sprintsE",
-            // Accessory
-            54: "latStretchE",
-            55: "calveStretchE",
-            56: "pushUpE",
-            57: "pullUpE"
+            // Legs (Quads)
+            0: "squatE",
+            1: "frontSquatE",
+            2: "hackSquatE",
+            3: "legPressE",
+            4: "dumbellFrontSquatE",
+            5: "legExtensionsE",
+            // Legs (Hamstrings/Glutes)
+            6: "deadliftE",
+            7: "romanianDeadliftE",
+            8: "dumbellRomanianDeadliftE",
+            9: "weightedHipThrustE",
+            10: "legCurlE",
+            11: "oneLeggedDeadliftE",
+            12: "gluteIsolationMachineE",
+            // Legs (General)
+            13: "lungeBarbellE",
+            14: "lungeDumbellE",
+            15: "bulgarianSplitSquatE",
+            16: "stepUpE",
+            // Pull (Back)
+            17: "pullUpE",
+            18: "pullDownE",
+            19: "pullDownMachineE",
+            20: "hammerStrengthPullDownE",
+            21: "kneelingPullDownE",
+            22: "bentOverRowBarbellE",
+            23: "bentOverRowDumbellE",
+            24: "tBarRowE",
+            25: "rowMachineE",
+            26: "hammerStrengthRowE",
+            // Pull (Upper Back)
+            27: "facePullE",
+            28: "smithMachinePullUpE",
+            29: "leaningBackPullDownE",
+            30: "seatedMachineRowE",
+            // Pull (Rear Delts)
+            31: "bentOverBarbellRowE",
+            // Pull (Traps)
+            32: "shrugBarbellE",
+            33: "shrugDumbellE",
+            // Pull (Biceps)
+            34: "hamerCurlE",
+            35: "hammerCurlCableE",
+            36: "cableCurlE",
+            37: "curlE",
+            // Pull (Forearms)
+            38: "farmersCarryE",
+            39: "reverseBarbellCurlE",
+            40: "forearmCurlE",
+            // Push (Chest)
+            41: "pushUpE",
+            42: "benchPressE",
+            43: "benchPressDumbellE",
+            44: "semiInclineDumbellPressE",
+            45: "hammerStrengthPressE",
+            46: "chestPressE",
+            47: "platePressE",
+            48: "barbellKneelingPressE",
+            49: "cableFlyE",
+            // Push (Shoulders)
+            50: "standingShoulderPressBarbellE",
+            51: "standingShoulderPressDumbellE",
+            52: "lateralRaiseE",
+            53: "frontRaiseE",
+            // Push (Triceps)
+            54: "ballPushUpE",
+            55: "trianglePushUpE",
+            56: "closeGripBenchE",
+            57: "cableExtensionE",
+            58: "ropeExtensionE",
+            // Calves
+            59: "standingCalfRaiseE",
+            60: "seatedCalfRaiseE",
+            // Abs/Core
+            61: "hangingLegRaiseE",
+            62: "hangingLegTwistE",
+            63: "plankE",
+            64: "sideLegDropE",
+            65: "abRolloutE"
     ]
     
     
@@ -440,28 +513,30 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     // Table View
     @IBOutlet weak var customTableView: UITableView!
     
+    // Classic/Circuit
+    @IBOutlet weak var classicCircuitButton: UIButton!
+    
+    
     // Editing
     @IBOutlet weak var editingButton: UIButton!
+    //
+    @IBOutlet weak var presetsButton: UIButton!
     
-    // Session Picker View
-    @IBOutlet weak var sessionPickerView: UIPickerView!
-        
-    // Add Preset
-    @IBOutlet weak var addPreset: UIButton!
-    @IBOutlet weak var removePreset: UIButton!
     
     //
-    @IBOutlet weak var tableViewConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var tableViewConstraint1: NSLayoutConstraint!
-    
-    @IBOutlet weak var seperatorConstraint: NSLayoutConstraint!
-    
+    // Constraints
+    @IBOutlet weak var presetsConstraint: NSLayoutConstraint!
+    @IBOutlet weak var editConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewConstraintTop: NSLayoutConstraint!
+    @IBOutlet weak var tableViewConstraintBottom: NSLayoutConstraint!
     @IBOutlet weak var beginButtonConstraint: NSLayoutConstraint!
     
     
     //
     let emptyString = ""
+    
+    // Presets
+    var presetsTableView = UITableView()
     
     // Elements for cell actions
     //
@@ -484,9 +559,10 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func flashScreen() {
         //
         let flash = UIView()
-        flash.frame = CGRect(x: 0, y: sessionPickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
+        flash.frame = CGRect(x: 0, y: presetsButton.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
         flash.backgroundColor = colour1
-        self.view.alpha = 1
+        flash.alpha = 0.7
+        
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
         //
@@ -497,6 +573,13 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         })
     }
     
+    //
+    // View Will Appear
+    //
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presetsButton.setTitle(NSLocalizedString("customWorkout", comment: ""), for: .normal)
+    }
     
     //
     // View did load  ---------------------------------------------------------------------------------------------------------------------------
@@ -522,40 +605,40 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough2") == false {
             let delayInSeconds = 0.5
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                self.walkthroughMindBody()
+                //self.walkthroughMindBody()
             }
             UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2")
         }
         
+        
+        // Initial Element Positions
+        //
+        presetsConstraint.constant = 0
+        editConstraint.constant = view.frame.size.height
+        //
+        tableViewConstraintTop.constant = view.frame.size.height
+        tableViewConstraintBottom.constant = -49
+        //
+        beginButtonConstraint.constant = -49
+        
+        
+        
         // Colour
         self.view.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        
+        //
+        presetsButton.backgroundColor = colour2
         
         // Navigation Bar Title
         navigationBar.title = NSLocalizedString("custom", comment: "")
         
-        // Picker View Test
-        sessionPickerView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        // Classic/Circuit
+        classicCircuitButton.setTitle(NSLocalizedString("circuit", comment: ""), for: .normal)
         
         // TableView Editing
         // Start
         editingButton.setTitle(NSLocalizedString("edit", comment: ""), for: .normal)
         
-        
-        // Plus Button Colour
-        let origImage1 = UIImage(named: "Plus")
-        let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        // Set Image
-        addPreset.setImage(tintedImage1, for: .normal)
-        //Image Tint
-        addPreset.tintColor = colour1
-        
-        // Minus Button Colour
-        let origImage2 = UIImage(named: "Minus")
-        let tintedImage2 = origImage2?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        // Set Image
-        removePreset.setImage(tintedImage2, for: .normal)
-        //Image Tint
-        removePreset.tintColor = colour1
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
@@ -564,19 +647,24 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         
-        // Initial Element Positions
-        let workoutPreset = UserDefaults.standard.object(forKey: "workoutPresetsCustom") as! [[Int]]
-        if workoutPreset.count == 0 {
-            editingButton.alpha = 0
-            removePreset.alpha = 0
-            //
-            tableViewConstraint.constant = view.frame.size.height - 98
-            tableViewConstraint1.constant = -49
-            //
-            seperatorConstraint.constant = -49
-            //
-            beginButtonConstraint.constant = -49
-        }
+        // Presets TableView
+        //
+        let tableViewBackground2 = UIView()
+        //
+        tableViewBackground2.backgroundColor = colour2
+        tableViewBackground2.frame = CGRect(x: 0, y: 0, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
+        //
+        presetsTableView.backgroundView = tableViewBackground2
+        presetsTableView.tableFooterView = UIView()
+        // TableView Cell action items
+        //
+        presetsTableView.backgroundColor = colour2
+        presetsTableView.delegate = self
+        presetsTableView.dataSource = self
+        presetsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        presetsTableView.layer.cornerRadius = 5
+        presetsTableView.layer.masksToBounds = true
+        presetsTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         
         
@@ -641,9 +729,6 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         footerView.backgroundColor = .clear
         customTableView.tableFooterView = footerView
         //
-        beginButtonEnabled()
-        editButtonEnabled()
-        pickerViewEnabled()
     }
     
     
@@ -659,10 +744,10 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         if customTableView.isEditing {
             beginButton.isEnabled = false
         } else {
-            if workoutPreset.count == 0 {
-                beginButton.isEnabled = false
+            if selectedPreset == -1 {
+                
             } else {
-                if workoutPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
+                if workoutPreset[selectedPreset].count == 0 {
                     beginButton.isEnabled = false
                 } else {
                     beginButton.isEnabled = true
@@ -677,203 +762,16 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         let defaults = UserDefaults.standard
         var workoutPreset = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
         //
+        //
         if workoutPreset.count == 0 {
             editingButton.isEnabled = false
         } else {
-            if workoutPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
+            if workoutPreset[selectedPreset].count == 0 {
                 editingButton.isEnabled = false
             } else {
                 editingButton.isEnabled = true
             }
         }
-    }
-    
-    // PickerView Enabled
-    func pickerViewEnabled() {
-        //
-        let defaults = UserDefaults.standard
-        let workoutPreset = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
-        //
-        if workoutPreset.count == 0 {
-            sessionPickerView.isUserInteractionEnabled = false
-        } else {
-            sessionPickerView.isUserInteractionEnabled = true
-        }
-    }
-    //
-    // Custom Sessions -----------------------------------------------------------------------------------------------------
-    //
-    // Set Personalized Preset
-    var okAction = UIAlertAction()
-    //
-    @IBAction func addCustomworkout(_ sender: Any) {
-        //
-        let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
-        var presetTextArray = defaults.object(forKey: "workoutPresetTextsCustom") as! [String]
-        //
-        var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
-        // Alert and Functions
-        //
-        let inputTitle = NSLocalizedString("workoutInputTitle", comment: "")
-        //
-        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-        alert.view.tintColor = colour2
-        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-        //2. Add the text field
-        alert.addTextField { (textField: UITextField) in
-            textField.text = " "
-            textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
-            textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
-        }
-        // 3. Get the value from the text field, and perform actions upon OK press
-        okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            //
-            let textField = alert?.textFields![0]
-            // Update Preset Text Arrays
-            presetTextArray.append((textField?.text)!)
-            defaults.set(presetTextArray, forKey: "workoutPresetTextsCustom")
-            // Add New empty array
-            customKeyArray.append([])
-            defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
-            // Add new sets and reps arrays
-            customSetsArray.append([])
-            defaults.set(customSetsArray, forKey: "workoutSetsCustom")
-            //
-            customRepsArray.append([])
-            defaults.set(customRepsArray, forKey: "workoutRepsCustom")
-            //
-            defaults.synchronize()
-            // Flash Screen
-            self.sessionPickerView.reloadAllComponents()
-            self.sessionPickerView.selectRow(self.sessionPickerView.selectedRow(inComponent: 0) + 1, inComponent: 0, animated: true)
-            self.customTableView.reloadData()
-            //
-            self.beginButtonEnabled()
-            self.editButtonEnabled()
-            self.pickerViewEnabled()
-            
-            //
-            // Initial Element Positions
-            if customKeyArray.count != 0 {
-                //
-                self.removePreset.alpha = 1
-                //
-                self.tableViewConstraint.constant = 49
-                self.tableViewConstraint1.constant = 49
-                //
-                self.seperatorConstraint.constant = 49
-                //
-                self.beginButtonConstraint.constant = 0
-                //
-                UIView.animate(withDuration: 0.7) {
-                    self.view.layoutIfNeeded()
-                    self.editingButton.alpha = 1
-                    self.removePreset.alpha = 1
-                }
-            }
-        })
-        okAction.isEnabled = false
-        alert.addAction(okAction)
-        // Cancel reset action
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
-            UIAlertAction in
-        }
-        alert.addAction(cancelAction)
-        // 4. Present the alert.
-        self.present(alert, animated: true, completion: nil)
-        //
-    }
-    
-    // Enable ok alert action func
-    func textChanged(_ sender: UITextField) {
-        if sender.text == "" {
-            okAction.isEnabled = false
-        } else {
-            okAction.isEnabled = true
-        }
-    }
-    
-    // Remove Personalized Preset
-    @IBAction func removeCustomWorkout(_ sender: Any) {
-        //
-        let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
-        var presetTextArray = defaults.object(forKey: "workoutPresetTextsCustom") as! [String]
-        //
-        var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
-        var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
-        //
-        let selectedRow = sessionPickerView.selectedRow(inComponent: 0)
-        //
-        let inputTitle = NSLocalizedString("workoutRemoveTitle", comment: "")
-        //
-        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-        alert.view.tintColor = colour2
-        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-        // 3. Get the value from the text field, and perform actions upon OK press
-        okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            //
-            if presetTextArray.count != 0 {
-                //
-                customKeyArray.remove(at: selectedRow)
-                defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
-                //
-                presetTextArray.remove(at: selectedRow)
-                defaults.set(presetTextArray, forKey: "workoutPresetTextsCustom")
-                //
-                customSetsArray.remove(at: selectedRow)
-                defaults.set(customSetsArray, forKey: "workoutSetsCustom")
-                //
-                customRepsArray.remove(at: selectedRow)
-                defaults.set(customRepsArray, forKey: "workoutRepsCustom")
-                //
-                defaults.synchronize()
-                
-                // Reload Screen
-                self.sessionPickerView.reloadAllComponents()
-                self.customTableView.reloadData()
-                //
-                self.beginButtonEnabled()
-                self.editButtonEnabled()
-                self.pickerViewEnabled()
-                
-                //
-                // Initial Element Positions
-                if customKeyArray.count == 0 {
-                    //
-                    self.removePreset.alpha = 0
-                    //
-                    self.tableViewConstraint.constant = self.view.frame.size.height - 98
-                    self.tableViewConstraint1.constant = -49
-                    //
-                    self.seperatorConstraint.constant = -49
-                    //
-                    self.beginButtonConstraint.constant = -49
-                    //
-                    UIView.animate(withDuration: 0.7) {
-                        self.view.layoutIfNeeded()
-                        self.editingButton.alpha = 0
-                        self.removePreset.alpha = 0
-                    }
-                }
-            } else {
-            }
-        })
-        //
-        if customSetsArray.count > 0 {
-            alert.addAction(okAction)
-        } else {
-        }
-        // Cancel reset action
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
-            UIAlertAction in
-        }
-        alert.addAction(cancelAction)
-        //
-        self.present(alert, animated: true, completion: nil)
-        
     }
     
     
@@ -883,81 +781,55 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     //
     // Number of components
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        if pickerView == sessionPickerView {
-            return 1
-        } else if pickerView == setsRepsPicker {
-            return 2
-        }
-        return 0
+        return 2
     }
     
     // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == sessionPickerView {
-            let titleDataArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
-            return titleDataArray.count
-        } else if pickerView == setsRepsPicker {
-            if component == 0{
-                return 6
-            } else {
-                return 16
-            }
+        if component == 0{
+            return 6
+        } else {
+            return 16
         }
-        return 0
     }
     
     // View for row
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         //
-        if pickerView == sessionPickerView {
-            let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
+        //
+        if component == 0 {
+            let setsLabel = UILabel()
+            setsLabel.text = String(setsPickerArray[row])
+            setsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
+            setsLabel.textColor = colour1
             //
-            if titleDataArray.count > 0 {
-                let titleData = titleDataArray[row]
-                let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
-                rowLabel.attributedText = myTitle
-                //
-                rowLabel.textAlignment = .center
-                return rowLabel
+            setsLabel.textAlignment = .center
+            return setsLabel
+            //
+        } else if component == 1 {
+            //
+            let repsLabel = UILabel()
+            // Row Label Text
+            switch row {
+            //
+            case 0:
+                repsLabel.text = "        " + String(repsPickerArray[row]) + "  " + NSLocalizedString("rep", comment: "")
+            //
+            case 1:
+                repsLabel.text = "         " + String(repsPickerArray[row]) + " " + NSLocalizedString("reps", comment: "")
+            //
+            case 2...15:
+                repsLabel.text = String(repsPickerArray[row])
+            //
+            default: break
             }
+            repsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
+            repsLabel.textColor = colour1
+            repsLabel.textAlignment = .center
+            return repsLabel
             //
-        } else if pickerView == setsRepsPicker {
-            //
-            if component == 0 {
-                let setsLabel = UILabel()
-                setsLabel.text = String(setsPickerArray[row])
-                setsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                setsLabel.textColor = colour1
-                //
-                setsLabel.textAlignment = .center
-                return setsLabel
-                //
-            } else if component == 1 {
-                //
-                let repsLabel = UILabel()
-                // Row Label Text
-                switch row {
-                //
-                case 0:
-                    repsLabel.text = "        " + String(repsPickerArray[row]) + "  " + NSLocalizedString("rep", comment: "")
-                //
-                case 1:
-                    repsLabel.text = "         " + String(repsPickerArray[row]) + " " + NSLocalizedString("reps", comment: "")
-                //
-                case 2...15:
-                    repsLabel.text = String(repsPickerArray[row])
-                //
-                default: break
-                }
-                repsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                repsLabel.textColor = colour1
-                repsLabel.textAlignment = .center
-                return repsLabel
-                //
-            }
         }
-        return UILabel()
+        return UIView()
     }
     
     // Row height
@@ -968,15 +840,10 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     // Width
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         //
-        if pickerView == sessionPickerView {
-            return sessionPickerView.frame.size.width
-            //
-        } else if pickerView == setsRepsPicker {
-            if component == 0 {
-                return (setsRepsPicker.frame.size.width / 3)
-            } else if component == 1{
-                return (setsRepsPicker.frame.size.width / 3)
-            }
+        if component == 0 {
+            return (setsRepsPicker.frame.size.width / 3)
+        } else if component == 1{
+            return (setsRepsPicker.frame.size.width / 3)
         }
         return 0
     }
@@ -984,24 +851,17 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     // Did select row
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         //
-        if pickerView == sessionPickerView {
+        //
+        if component == 0{
             //
-            self.customTableView.reloadData()
-            flashScreen()
-            //
-        } else if pickerView == setsRepsPicker {
-            //
-            if component ==  0{
-                //
-                if row == 0 {
-                    self.setsIndicatorLabel.text = NSLocalizedString("set", comment: "")
-                } else {
-                    self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
-                }
-                // Row Label
-                //
+            if row == 0 {
+                self.setsIndicatorLabel.text = NSLocalizedString("set", comment: "")
             } else {
+                self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
             }
+            // Row Label
+            //
+        } else {
         }
     }
     
@@ -1013,11 +873,11 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func numberOfSections(in tableView: UITableView) -> Int {
         
         switch tableView {
+        case presetsTableView: return 1
         case customTableView:
-            return 2
+            return 1
         case movementsTableView:
-            let numberOfSections = tableViewSectionArray.count
-            return numberOfSections
+            return tableViewSectionArray.count
         default: break
         }
         return 0
@@ -1027,21 +887,17 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         //
         switch tableView {
+        case presetsTableView:
+            return " " + NSLocalizedString("customWorkout", comment: "")
         //
         case customTableView:
-            switch section {
-            case 0:
-                //
-                let titleDataArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
-                if titleDataArray.count != 0 {
-                    return titleDataArray[sessionPickerView.selectedRow(inComponent: 0)]
-                } else {
-                    return " "
-                }
-            case 1:
-            default: return " "
+            //
+            let titleDataArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
+            if titleDataArray.count != 0 {
+                return titleDataArray[selectedPreset]
+            } else {
+                return " "
             }
-            
         //
         case movementsTableView:
             return NSLocalizedString(tableViewSectionArray[section], comment: "")
@@ -1054,6 +910,12 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
         switch tableView {
+        case presetsTableView:
+            let header = view as! UITableViewHeaderFooterView
+            header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 17)!
+            header.textLabel?.textColor = colour1
+            header.contentView.backgroundColor = colour2
+            header.contentView.tintColor = colour1
         case customTableView:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
@@ -1078,6 +940,10 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         switch tableView {
+        case presetsTableView:
+            // Retreive Preset Timers
+            let presetsArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
+            return presetsArray.count + 1
         //
         case customTableView:
             //
@@ -1087,7 +953,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             if customKeyArray.count == 0 {
                 return 1
             } else {
-                return customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count + 1
+                return customKeyArray[selectedPreset].count + 1
             }
         //
         case movementsTableView:
@@ -1103,6 +969,34 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         switch tableView {
+        case presetsTableView:
+            var cell = UITableViewCell()
+            cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            cell.textLabel?.adjustsFontSizeToFitWidth = true
+            //
+            // Retreive Preset Timers
+            let presetsArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
+            //
+            cell.textLabel?.textAlignment = .center
+            cell.backgroundColor = colour1
+            cell.textLabel?.textColor = colour2
+            cell.tintColor = colour2
+            //
+            if indexPath.row == presetsArray.count {
+                //
+                cell.imageView?.image = #imageLiteral(resourceName: "Plus")
+                //
+                cell.contentView.transform = CGAffineTransform(scaleX: -1,y: 1);
+                cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
+                //
+            } else {
+                //
+                cell.textLabel?.text = presetsArray[indexPath.row]
+            }
+            //
+            return cell
+        //
         case customTableView:
             //
             let defaults = UserDefaults.standard
@@ -1127,7 +1021,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                 //
             } else {
                 //
-                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count  {
+                if indexPath.row == customKeyArray[selectedPreset].count  {
                     //
                     let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                     //
@@ -1145,7 +1039,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                     //
                     let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                     //
-                    let keyIndex = customKeyArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]
+                    let keyIndex = customKeyArray[selectedPreset][indexPath.row]
                     cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[keyIndex]!, comment: "")
                     //
                     cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
@@ -1159,7 +1053,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
                     cell.detailTextLabel?.textAlignment = .left
                     cell.detailTextLabel?.textColor = colour2
-                    cell.detailTextLabel?.text = String(setsPickerArray[customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]]) + " x " + repsPickerArray[customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]]
+                    cell.detailTextLabel?.text = String(setsPickerArray[customSetsArray[selectedPreset][indexPath.row]]) + " x " + repsPickerArray[customRepsArray[selectedPreset][indexPath.row]]
                     //
                     // Cell Image
                     cell.imageView?.image = demonstrationDictionary[keyIndex]
@@ -1207,6 +1101,8 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
         switch tableView {
+        case presetsTableView:
+            return 44
         case customTableView:
             //
             let defaults = UserDefaults.standard
@@ -1217,7 +1113,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                 //
             } else {
                 //
-                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count  {
+                if indexPath.row == customKeyArray[selectedPreset].count  {
                     return 49
                     //
                 } else {
@@ -1231,194 +1127,373 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         return 72
     }
     
+    //
+    var okAction = UIAlertAction()
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         let defaults = UserDefaults.standard
+        var presetsArray = defaults.object(forKey: "workoutPresetTextsCustom") as! [String]
         var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
         //
         var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
         var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
-        // If no session created
-        if customKeyArray.count == 0 {
-            tableView.deselectRow(at: indexPath, animated: true)
-        } else {
-            switch tableView {
-            //
-            case customTableView:
-                //
-                selectedRow = indexPath.row
-                //
-                if customKeyArray.count == 0 {
-                    //
-                    movementsTableView.alpha = 0
-                    UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
-                    let selectedCell = tableView.cellForRow(at: indexPath)
-                    movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
-                    //
-                    backgroundViewExpanded.alpha = 0
-                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
-                    backgroundViewExpanded.frame = UIScreen.main.bounds
-                    // Animate table fade and size
-                    // Alpha
-                    UIView.animate(withDuration: 0.4, animations: {
-                        self.movementsTableView.alpha = 1
-                        //
-                    }, completion: nil)
-                    // Position
-                    UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                        self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
-                        //
-                        self.backgroundViewExpanded.alpha = 0.7
-                    }, completion: nil)
-                    //
-                } else {
-                    //
-                    if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
-                        //
-                        movementsTableView.alpha = 0
-                        UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
-                        let selectedCell = tableView.cellForRow(at: indexPath)
-                        movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
-                        //
-                        backgroundViewExpanded.alpha = 0
-                        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
-                        backgroundViewExpanded.frame = UIScreen.main.bounds
-                        // Animate table fade and size
-                        // Alpha
-                        UIView.animate(withDuration: 0.4, animations: {
-                            self.movementsTableView.alpha = 1
-                            //
-                        }, completion: nil)
-                        // Position
-                        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                            self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
-                            //
-                            self.backgroundViewExpanded.alpha = 0.7
-                        }, completion: nil)
-                        //
-                    } else {
-                        // View
-                        setsRepsView.alpha = 0
-                        UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
-                        let selectedCell = tableView.cellForRow(at: indexPath)
-                        setsRepsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
-                        // selected row
-                        setsRepsPicker.selectRow(customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 0, animated: true)
-                        setsRepsPicker.selectRow(customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 1, animated: true)
-                        //
-                        let componentWidth = setsRepsPicker.frame.size.width / 3
-                        let componentWidthFourth = componentWidth / 4
-                        // picker
-                        setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: setsRepsView.frame.size.width + componentWidthFourth, height: 147)
-                        // ok
-                        okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
-                        //
-                        self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                        //
-                        backgroundViewExpanded.alpha = 0
-                        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
-                        backgroundViewExpanded.frame = UIScreen.main.bounds
-                        // Animate table fade and size
-                        // Alpha
-                        UIView.animate(withDuration: 0.4, animations: {
-                            self.setsRepsView.alpha = 1
-                            //
-                        }, completion: nil)
-                        // Position
-                        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                            //
-                            self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
-                            self.setsRepsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
-                            // picker
-                            self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
-                            // ok
-                            self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
-                            // Sets Indicator Label
-                            self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                            self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
-                            //
-                            //
-                            self.backgroundViewExpanded.alpha = 0.7
-                            
-                        }, completion: nil)
-                    }
-                }
-            //
-            case movementsTableView:
-                //
-                customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].append(fullKeyArray[indexPath.section][indexPath.row])
-                defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
-                // sets
-                customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
-                defaults.set(customSetsArray, forKey: "workoutSetsCustom")
-                // reps
-                customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
-                defaults.set(customRepsArray, forKey: "workoutRepsCustom")
-                //
-                defaults.synchronize()
-                // Remove Table
-                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    self.movementsTableView.alpha = 0
-                    //
+        switch tableView {
+        case presetsTableView:
+            // Add Custom Workout
+            if indexPath.row == presetsArray.count {
+                let snapShot1 = presetsTableView.snapshotView(afterScreenUpdates: false)
+                snapShot1?.center.x = view.center.x
+                snapShot1?.center.y = presetsTableView.center.y - UIApplication.shared.statusBarFrame.height - (navigationController?.navigationBar.frame.size.height)!
+                view.addSubview(snapShot1!)
+                self.presetsTableView.isHidden = true
+                UIView.animate(withDuration: 0.3, animations: {
                     self.backgroundViewExpanded.alpha = 0
-                    //
                 }, completion: { finished in
-                    self.movementsTableView.removeFromSuperview()
-                    self.backgroundViewExpanded.removeFromSuperview()
-                    //
-                    self.customTableView.reloadData()
-                    // Scroll to Bottom
-                    if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
-                        //
-                        self.customTableView.setContentOffset(CGPoint(x: 0, y: self.customTableView.contentSize.height - self.customTableView.frame.size.height), animated: true)
-                    }
+                    self.backgroundViewExpanded.isHidden = true
                 })
-            //
-            default: break
+                
+                //
+                let defaults = UserDefaults.standard
+                var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
+                var presetTextArray = defaults.object(forKey: "workoutPresetTextsCustom") as! [String]
+                //
+                var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
+                var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
+                // Alert and Functions
+                //
+                let inputTitle = NSLocalizedString("workoutInputTitle", comment: "")
+                //
+                let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+                alert.view.tintColor = colour2
+                alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+                //2. Add the text field
+                alert.addTextField { (textField: UITextField) in
+                    textField.text = " "
+                    textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
+                    textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
+                }
+                // 3. Get the value from the text field, and perform actions upon OK press
+                okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                    //
+                    let textField = alert?.textFields![0]
+                    // Update Preset Text Arrays
+                    presetTextArray.append((textField?.text)!)
+                    defaults.set(presetTextArray, forKey: "workoutPresetTextsCustom")
+                    // Add New empty array
+                    customKeyArray.append([])
+                    defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
+                    // Add new sets and reps arrays
+                    customSetsArray.append([])
+                    defaults.set(customSetsArray, forKey: "workoutSetsCustom")
+                    //
+                    customRepsArray.append([])
+                    defaults.set(customRepsArray, forKey: "workoutRepsCustom")
+                    //
+                    defaults.synchronize()
+                    
+                    
+                    //
+                    self.presetsTableView.isHidden = false
+                    snapShot1?.removeFromSuperview()
+                    //
+                    self.backgroundViewExpanded.isHidden = false
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.backgroundViewExpanded.alpha = 0.5
+                        self.presetsTableView.reloadData()
+                        // Dismiss and select new row
+                    }, completion: { finished in
+                        //
+                        //
+                        let presetsArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
+                        //
+                        let selectedIndexPath = NSIndexPath(row: presetsArray.count - 1, section: 0)
+                        self.presetsTableView.selectRow(at: selectedIndexPath as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
+                        self.selectedPreset = selectedIndexPath.row
+                        //
+                        if self.selectedPreset == -1 {
+                            self.presetsButton.setTitle(NSLocalizedString("customWorkout", comment: ""), for: .normal)
+                        } else {
+                            self.presetsButton.setTitle("- " + presetsArray[self.selectedPreset] + " -", for: .normal)
+                        }
+                        //
+                        tableView.deselectRow(at: indexPath, animated: true)
+                        // Flash Screen
+                        self.customTableView.reloadData()
+                        //
+                        self.beginButtonEnabled()
+                        self.editButtonEnabled()
+                        
+                        // Element Positions
+                        //
+                        self.presetsConstraint.constant = self.view.frame.size.height - 73.5
+                        self.editConstraint.constant = 73.5
+                        //
+                        self.tableViewConstraintTop.constant = 122.5
+                        self.tableViewConstraintBottom.constant = 49
+                        //
+                        self.beginButtonConstraint.constant = 0
+                        //
+                        //
+                        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                            //
+                            self.view.layoutIfNeeded()
+                            self.editingButton.alpha = 1
+                            //
+                            self.presetsTableView.frame = CGRect(x: 30, y: self.presetsButton.frame.minY + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
+                            self.presetsTableView.alpha = 0
+                            self.backgroundViewExpanded.alpha = 0
+                        }, completion: { finished in
+                            //
+                            self.presetsTableView.removeFromSuperview()
+                            self.backgroundViewExpanded.removeFromSuperview()
+                        })
+                    })
+                })
+                okAction.isEnabled = false
+                alert.addAction(okAction)
+                // Cancel reset action
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                    //
+                    self.backgroundViewExpanded.isHidden = false
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.backgroundViewExpanded.alpha = 0.5
+                    })
+                    //
+                    self.presetsTableView.isHidden = false
+                    snapShot1?.removeFromSuperview()
+                }
+                alert.addAction(cancelAction)
+                // 4. Present the alert.
+                self.present(alert, animated: true, completion: nil)
+                //
+                
+                
+                //
+                // Select Custom Workout
+            } else {
+                //
+                selectedPreset = indexPath.row
+                //
+                let presetsArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
+                //
+                self.presetsButton.setTitle("- " + presetsArray[self.selectedPreset] + " -", for: .normal)
+                //
+                tableView.deselectRow(at: indexPath, animated: true)
+                // Dismiss Table
+                if presetsArray.count != 0 {
+                    //
+                    // Element Positions
+                    //
+                    self.presetsConstraint.constant = self.view.frame.size.height - 73.5
+                    self.editConstraint.constant = 73.5
+                    //
+                    self.tableViewConstraintTop.constant = 122.5
+                    self.tableViewConstraintBottom.constant = 49
+                    //
+                    self.beginButtonConstraint.constant = 0
+                    //
+                    UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        self.presetsTableView.frame = CGRect(x: 30, y: 44 + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
+                        self.presetsTableView.alpha = 0
+                        self.backgroundViewExpanded.alpha = 0
+                        //
+                        //
+                        self.view.layoutIfNeeded()
+                        self.editingButton.alpha = 1
+                        //
+                        self.customTableView.reloadData()
+                        self.beginButtonEnabled()
+                        self.editButtonEnabled()
+                    }, completion: { finished in
+                        //
+                        self.presetsTableView.removeFromSuperview()
+                        self.backgroundViewExpanded.removeFromSuperview()
+                        //
+                    })
+                }
+                //
             }
             //
-            tableView.deselectRow(at: indexPath, animated: true)
-            beginButtonEnabled()
-            editButtonEnabled()
+        //
+        case customTableView:
+            //
+            selectedRow = indexPath.row
+            //
+            if indexPath.row == customKeyArray[selectedPreset].count {
+                //
+                movementsTableView.alpha = 0
+                UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
+                let selectedCell = tableView.cellForRow(at: indexPath)
+                movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+                //
+                backgroundViewExpanded.alpha = 0
+                UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
+                backgroundViewExpanded.frame = UIScreen.main.bounds
+                // Animate table fade and size
+                // Alpha
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.movementsTableView.alpha = 1
+                    //
+                }, completion: nil)
+                // Position
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
+                    //
+                    self.backgroundViewExpanded.alpha = 0.7
+                }, completion: nil)
+                //
+            } else {
+                // View
+                setsRepsView.alpha = 0
+                UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
+                let selectedCell = tableView.cellForRow(at: indexPath)
+                setsRepsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+                // selected row
+                setsRepsPicker.selectRow(customSetsArray[selectedPreset][indexPath.row], inComponent: 0, animated: true)
+                setsRepsPicker.selectRow(customRepsArray[selectedPreset][indexPath.row], inComponent: 1, animated: true)
+                //
+                let componentWidth = setsRepsPicker.frame.size.width / 3
+                let componentWidthFourth = componentWidth / 4
+                // picker
+                setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+                // ok
+                okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
+                //
+                self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+                //
+                backgroundViewExpanded.alpha = 0
+                UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
+                backgroundViewExpanded.frame = UIScreen.main.bounds
+                // Animate table fade and size
+                // Alpha
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.setsRepsView.alpha = 1
+                    //
+                }, completion: nil)
+                // Position
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    //
+                    self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
+                    self.setsRepsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
+                    // picker
+                    self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+                    // ok
+                    self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
+                    // Sets Indicator Label
+                    self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+                    self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+                    //
+                    //
+                    self.backgroundViewExpanded.alpha = 0.7
+                    
+                }, completion: nil)
+            }
+            //        }
+        //
+        case movementsTableView:
+            //
+            customKeyArray[selectedPreset].append(fullKeyArray[indexPath.section][indexPath.row])
+            defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
+            // sets
+            customSetsArray[selectedPreset].append(0)
+            defaults.set(customSetsArray, forKey: "workoutSetsCustom")
+            // reps
+            customRepsArray[selectedPreset].append(0)
+            defaults.set(customRepsArray, forKey: "workoutRepsCustom")
+            //
+            defaults.synchronize()
+            // Remove Table
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.movementsTableView.alpha = 0
+                //
+                self.backgroundViewExpanded.alpha = 0
+                //
+                self.beginButtonEnabled()
+                self.editButtonEnabled()
+                //
+            }, completion: { finished in
+                self.movementsTableView.removeFromSuperview()
+                self.backgroundViewExpanded.removeFromSuperview()
+                //
+                self.customTableView.reloadData()
+                // Scroll to Bottom
+                if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
+                    //
+                    self.customTableView.setContentOffset(CGPoint(x: 0, y: self.customTableView.contentSize.height - self.customTableView.frame.size.height), animated: true)
+                }
+            })
+        //
+        default: break
         }
+        //
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    // Enable ok alert action func
+    func textChanged(_ sender: UITextField) {
+        if sender.text == "" {
+            okAction.isEnabled = false
+        } else {
+            okAction.isEnabled = true
+        }
+    }
     
     //
     // TableView Editing -----------------------------------------------------------------------------------------------------
     //
     // Can edit row
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
         //
-        let defaults = UserDefaults.standard
-        let customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
-        //
-        if customKeyArray.count == 0 {
-            return false
-        } else {
-            if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
-                return false
-            } else {
+        switch tableView {
+        case presetsTableView:
+            let presetsArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
+            //
+            if indexPath.row < presetsArray.count {
                 return true
             }
+        case movementsTableView: return false
+        case customTableView:
+            //
+            let defaults = UserDefaults.standard
+            let customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
+            //
+            if customKeyArray.count == 0 {
+                return false
+            } else {
+                if indexPath.row == customKeyArray[selectedPreset].count {
+                    return false
+                } else {
+                    return true
+                }
+            }
+        default: return false
         }
+        return false
     }
     
     // Can move to row
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        //
-        let defaults = UserDefaults.standard
-        let customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
-        //
-        if customKeyArray.count == 0 {
-            return false
-        } else {
-            if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+        switch tableView {
+        case presetsTableView: return false
+        case movementsTableView: return false
+        case customTableView:
+            //
+            let defaults = UserDefaults.standard
+            let customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
+            //
+            if customKeyArray.count == 0 {
                 return false
             } else {
-                return true
+                if indexPath.row == customKeyArray[selectedPreset].count {
+                    return false
+                } else {
+                    return true
+                }
             }
+        default: return false
         }
     }
     
@@ -1430,18 +1505,18 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
         var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
         // Key
-        let itemToMove = customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
-        customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].insert(itemToMove, at: destinationIndexPath.row)
+        let itemToMove = customKeyArray[selectedPreset].remove(at: sourceIndexPath.row)
+        customKeyArray[selectedPreset].insert(itemToMove, at: destinationIndexPath.row)
         //
         defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
         // Sets
-        let setToMove = customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
-        customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(setToMove, at: destinationIndexPath.row)
+        let setToMove = customSetsArray[selectedPreset].remove(at: sourceIndexPath.row)
+        customSetsArray[selectedPreset].insert(setToMove, at: destinationIndexPath.row)
         //
         defaults.set(customSetsArray, forKey: "workoutSetsCustom")
         // Reps
-        let repToMove = customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
-        customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(repToMove, at: destinationIndexPath.row)
+        let repToMove = customRepsArray[selectedPreset].remove(at: sourceIndexPath.row)
+        customRepsArray[selectedPreset].insert(repToMove, at: destinationIndexPath.row)
         //
         defaults.set(customRepsArray, forKey: "workoutRepsCustom")
         //
@@ -1454,7 +1529,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         let defaults = UserDefaults.standard
         var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
         //
-        if proposedDestinationIndexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+        if proposedDestinationIndexPath.row == customKeyArray[selectedPreset].count {
             return NSIndexPath(row: proposedDestinationIndexPath.row - 1, section: proposedDestinationIndexPath.section) as IndexPath
         } else {
             return proposedDestinationIndexPath
@@ -1471,23 +1546,126 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         //
         if editingStyle == UITableViewCellEditingStyle.delete {
-            let defaults = UserDefaults.standard
-            var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
-            var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
-            var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
-            // Key
-            customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
-            // sets
-            customSetsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customSetsArray, forKey: "workoutSetsCustom")
-            // reps
-            customRepsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customRepsArray, forKey: "workoutRepsCustom")
+            
+            switch tableView {
+            case presetsTableView:
+                //
+                let defaults = UserDefaults.standard
+                var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
+                var presetTextArray = defaults.object(forKey: "workoutPresetTextsCustom") as! [String]
+                //
+                var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
+                var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
+                
+                //
+                //
+                customKeyArray.remove(at: self.selectedPreset)
+                defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
+                //
+                presetTextArray.remove(at: self.selectedPreset)
+                defaults.set(presetTextArray, forKey: "workoutPresetTextsCustom")
+                //
+                customSetsArray.remove(at: self.selectedPreset)
+                defaults.set(customSetsArray, forKey: "workoutSetsCustom")
+                //
+                customRepsArray.remove(at: self.selectedPreset)
+                defaults.set(customRepsArray, forKey: "workoutRepsCustom")
+                //
+                defaults.synchronize()
+                
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.presetsTableView.reloadData()
+                })
+                //
+                self.selectedPreset = self.selectedPreset - 1
+                self.customTableView.reloadData()
+                
+                //
+                
+                //
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.presetsTableView.reloadData()
+                    //
+                    if customKeyArray.count == 0 {
+                        self.presetsButton.setTitle(NSLocalizedString("customWorkout", comment: ""), for: .normal)
+                    } else {
+                        self.presetsButton.setTitle("- " + presetTextArray[self.selectedPreset] + " -", for: .normal)
+                    }
+                })
+                
+                
+                // Initial Element Positions
+                if customKeyArray.count == 0 {
+                    
+                    self.presetsTableView.isHidden = false
+                    //
+                    self.backgroundViewExpanded.isHidden = false
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.backgroundViewExpanded.alpha = 0.5
+                        self.presetsTableView.reloadData()
+                        // Dismiss and select new row
+                    }, completion: { finished in
+                        //
+                        self.selectedPreset = -1
+                        //
+                        tableView.deselectRow(at: indexPath, animated: true)
+                        //
+                        
+                        // Reload Data
+                        self.customTableView.reloadData()
+                        self.beginButtonEnabled()
+                        self.editButtonEnabled()
+                        //
+                        self.beginButtonEnabled()
+                        self.editButtonEnabled()
+                        
+                        // Initial Element Positions
+                        //
+                        self.presetsConstraint.constant = 0
+                        self.editConstraint.constant = self.view.frame.size.height
+                        //
+                        self.tableViewConstraintTop.constant = self.view.frame.size.height
+                        self.tableViewConstraintBottom.constant = -49
+                        //
+                        self.beginButtonConstraint.constant = -49
+                        //
+                        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                            //
+                            self.view.layoutIfNeeded()
+                            self.editingButton.alpha = 1
+                            //
+                            self.presetsTableView.frame = CGRect(x: 30, y: self.presetsButton.frame.minY + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
+                            self.presetsTableView.alpha = 0
+                            self.backgroundViewExpanded.alpha = 0
+                        }, completion: { finished in
+                            //
+                            self.presetsTableView.removeFromSuperview()
+                            self.backgroundViewExpanded.removeFromSuperview()
+                        })
+                    })
+                }
             //
-            defaults.synchronize()
-            //
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            case customTableView:
+                //
+                let defaults = UserDefaults.standard
+                var customKeyArray = defaults.object(forKey: "workoutPresetsCustom") as! [[Int]]
+                var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
+                var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
+                // Key
+                customKeyArray[selectedPreset].remove(at: indexPath.row)
+                defaults.set(customKeyArray, forKey: "workoutPresetsCustom")
+                // sets
+                customSetsArray[selectedPreset].remove(at: indexPath.row)
+                defaults.set(customSetsArray, forKey: "workoutSetsCustom")
+                // reps
+                customRepsArray[selectedPreset].remove(at: indexPath.row)
+                defaults.set(customRepsArray, forKey: "workoutRepsCustom")
+                //
+                defaults.synchronize()
+                //
+                tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            default: break
+            }
         }
     }
     
@@ -1495,20 +1673,63 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     //
     // Table view related button actions ------------------------------------------------------------------------------------------------
     //
+    // Prests
+    @IBAction func presetsAction(_ sender: Any) {
+        //
+        presetsTableView.reloadData()
+        //
+        presetsTableView.alpha = 0
+        presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + (presetsButton.frame.size.height / 2), width: presetsButton.frame.size.width - 60, height: 0)
+        presetsTableView.center.x = presetsButton.center.x
+        presetsTableView.center.y = presetsButton.center.y + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height)!
+        //
+        backgroundViewExpanded.alpha = 0
+        backgroundViewExpanded.frame = UIScreen.main.bounds
+        // Present
+        UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
+        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: presetsTableView)
+        // Animate table fade and size
+        // Positiona
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.presetsTableView.alpha = 1
+            self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + 44, width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88)
+            
+            //
+            self.backgroundViewExpanded.alpha = 0.5
+        }, completion: nil)
+        //
+        
+    }
+    
+    
     // Add movement table background (dismiss table)
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.movementsTableView.alpha = 0
-            self.setsRepsView.alpha = 0
+        if (UIApplication.shared.keyWindow?.subviews.contains(self.presetsTableView))! {
             //
-            self.backgroundViewExpanded.alpha = 0
-        }, completion: { finished in
-            self.movementsTableView.removeFromSuperview()
-            self.setsRepsView.removeFromSuperview()
+            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.presetsTableView.frame = CGRect(x: 30, y: self.presetsButton.frame.minY + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
+                self.presetsTableView.alpha = 0
+                self.backgroundViewExpanded.alpha = 0
+            }, completion: { finished in
+                //
+                self.presetsTableView.removeFromSuperview()
+                self.backgroundViewExpanded.removeFromSuperview()
+            })
             //
-            self.backgroundViewExpanded.removeFromSuperview()
-        })
+        } else {
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.movementsTableView.alpha = 0
+                self.setsRepsView.alpha = 0
+                //
+                self.backgroundViewExpanded.alpha = 0
+            }, completion: { finished in
+                self.movementsTableView.removeFromSuperview()
+                self.setsRepsView.removeFromSuperview()
+                //
+                self.backgroundViewExpanded.removeFromSuperview()
+            })
+        }
     }
     
     
@@ -1519,14 +1740,14 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         if customTableView.isEditing {
             self.customTableView.setEditing(false, animated: true)
             self.editingButton.setTitle(NSLocalizedString("edit", comment: ""), for: .normal)
-            self.sessionPickerView.isUserInteractionEnabled = true
-            self.beginButton.isEnabled = true
+            //
+            self.beginButtonEnabled()
             //
         } else {
             self.customTableView.setEditing(true, animated: true)
             self.editingButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-            self.sessionPickerView.isUserInteractionEnabled = false
-            self.beginButton.isEnabled = false
+            //
+            self.beginButtonEnabled()
         }
     }
     
@@ -1541,10 +1762,10 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         var customSetsArray = defaults.object(forKey: "workoutSetsCustom") as! [[Int]]
         var customRepsArray = defaults.object(forKey: "workoutRepsCustom") as! [[Int]]
         //
-        customSetsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = setsRepsPicker.selectedRow(inComponent: 0)
+        customSetsArray[selectedPreset][selectedRow] = setsRepsPicker.selectedRow(inComponent: 0)
         defaults.set(customSetsArray, forKey: "workoutSetsCustom")
         //
-        customRepsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = setsRepsPicker.selectedRow(inComponent: 1)
+        customRepsArray[selectedPreset][selectedRow] = setsRepsPicker.selectedRow(inComponent: 1)
         defaults.set(customRepsArray, forKey: "workoutRepsCustom")
         //
         defaults.synchronize()
@@ -1627,14 +1848,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     //
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
-        
-        if UserDefaults.standard.string(forKey: "presentationStyle") == "detailed" {
-            performSegue(withIdentifier: "workoutCustomSegue1", sender: nil)
-        } else {
-            performSegue(withIdentifier: "workoutCustomSegue2", sender: nil)
-        }
-        
-        
+        //
         // Return background to homescreen
         let delayInSeconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -1661,12 +1875,12 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         let titleDataArray = UserDefaults.standard.object(forKey: "workoutPresetTextsCustom") as! [String]
         
         
-        if (segue.identifier == "workoutCustomSegue1") {
+        if (segue.identifier == "workoutSessionSegueCustom") {
             //
             let destinationVC = segue.destination as! SessionScreen
             
             // Compress Arrays
-            for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
+            for i in customKeyArray[selectedPreset] {
                 //
                 workoutArray.append(workoutMovementsDictionary[i]!)
                 //
@@ -1677,11 +1891,19 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                 explanationArray.append(explanationDictionary[i]!)
             }
             //
-            for i in customSetsArray[sessionPickerView.selectedRow(inComponent: 0)] {
+            for i in customSetsArray[selectedPreset] {
                 setsArray.append(setsPickerArray[i])
             }
             //
-            for i in customRepsArray[sessionPickerView.selectedRow(inComponent: 0)] {
+            for i in 0...11 {
+                if i == 0 {
+                    repsPickerArray[i] = repsPickerArray[i] + " rep"
+                } else {
+                    repsPickerArray[i] = repsPickerArray[i] + " reps"
+                }
+            }
+            //
+            for i in customRepsArray[selectedPreset] {
                 repsArray.append(repsPickerArray[i])
             }
             
@@ -1695,40 +1917,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             //
             destinationVC.sessionType = 0
             //
-        } else if (segue.identifier == "workoutCustomSegue2") {
-            //
-            let destinationVC = segue.destination as! CircuitWorkoutScreen
-            
-            // Compress Arrays
-            for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                //
-                workoutArray.append(workoutMovementsDictionary[i]!)
-                //
-                demonstrationArray.append(demonstrationDictionary[i]!)
-                //
-                targetAreaArray.append(targetAreaDictionary[i]!)
-                //
-                explanationArray.append(explanationDictionary[i]!)
-            }
-            //
-            for i in customSetsArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                setsArray.append(setsPickerArray[i])
-            }
-            //
-            for i in customRepsArray[sessionPickerView.selectedRow(inComponent: 0)] {
-                repsArray.append(repsPickerArray[i])
-            }
-            
-            //
-            destinationVC.sessionArray = workoutArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
-            destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
-            //
-            destinationVC.sessionType = 0
-            //
+            destinationVC.sessionTitle = titleDataArray[selectedPreset]
         }
     }
     
@@ -1736,283 +1925,283 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     
     //
     // Walkthrough ------------------------------------------------------------------------------------------------
+    ////
+    //    var  viewNumber = 0
+    //    let walkthroughView = UIView()
+    //    let label = UILabel()
+    //    let nextButton = UIButton()
+    //    let backButton = UIButton()
     //
-    var  viewNumber = 0
-    let walkthroughView = UIView()
-    let label = UILabel()
-    let nextButton = UIButton()
-    let backButton = UIButton()
-    
-    // Walkthrough
-    func walkthroughMindBody() {
-        
-        //
-        let screenSize = UIScreen.main.bounds
-        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-        //
-        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
-        walkthroughView.backgroundColor = .black
-        walkthroughView.alpha = 0.72
-        walkthroughView.clipsToBounds = true
-        //
-        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
-        label.center = view.center
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
-        label.textColor = .white
-        //
-        nextButton.frame = screenSize
-        nextButton.backgroundColor = .clear
-        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
-        //
-        backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
-        backButton.setTitle("Back", for: .normal)
-        backButton.titleLabel?.textAlignment = .left
-        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        backButton.titleLabel?.textColor = .white
-        backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
-        
-        
-        
-        
-        switch viewNumber {
-        case 0:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight, width: self.view.frame.size.width, height: sessionPickerView.frame.size.height))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            
-            label.text = NSLocalizedString("choiceScreen21", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            
-            
-            
-        //
-        case 1:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + sessionPickerView.frame.size.height, width: self.view.frame.size.width, height: customTableView.frame.size.height))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            label.center = sessionPickerView.center
-            label.center.y = (UIApplication.shared.statusBarFrame.height/2) + sessionPickerView.frame.size.height
-            label.text = NSLocalizedString("choiceScreen22", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-        //
-        case 2:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y:   UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + sessionPickerView.frame.size.height + 24.5, width: 72 + 5, height: 72))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            label.center = sessionPickerView.center
-            label.center.y = (UIApplication.shared.statusBarFrame.height/2) + sessionPickerView.frame.size.height
-            label.text = NSLocalizedString("choiceScreen23", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-            
-            
-        //
-        case 3:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addEllipse(in: CGRect(x: self.view.frame.size.width - 98, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + sessionPickerView.frame.size.height, width: 98, height: 49))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            label.text = NSLocalizedString("choiceScreen24", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-        //
-        case 4:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + sessionPickerView.frame.size.height + customTableView.frame.size.height, width: self.view.frame.size.height, height: 49))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            
-            label.text = NSLocalizedString("choiceScreen25", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            // Picker
-            self.sessionPickerView.selectRow(0, inComponent: 0, animated: true)
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-            
-        //
-        case 5:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            
-            label.text = NSLocalizedString("choiceScreen26", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-            
-        //
-        default: break
-            
-            
-        }
-        
-        
-    }
-    
-    
-    
-    func nextWalkthroughView(_ sender: Any) {
-        walkthroughView.removeFromSuperview()
-        viewNumber = viewNumber + 1
-        walkthroughMindBody()
-    }
-    
-    
-    func backWalkthroughView(_ sender: Any) {
-        if viewNumber > 0 {
-            backButton.removeFromSuperview()
-            walkthroughView.removeFromSuperview()
-            viewNumber = viewNumber - 1
-            walkthroughMindBody()
-        }
-        
-    }
+    //    // Walkthrough
+    //    func walkthroughMindBody() {
+    //
+    //        //
+    //        let screenSize = UIScreen.main.bounds
+    //        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+    //        //
+    //        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+    //        walkthroughView.backgroundColor = .black
+    //        walkthroughView.alpha = 0.72
+    //        walkthroughView.clipsToBounds = true
+    //        //
+    //        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
+    //        label.center = view.center
+    //        label.textAlignment = .center
+    //        label.numberOfLines = 0
+    //        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+    //        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
+    //        label.textColor = .white
+    //        //
+    //        nextButton.frame = screenSize
+    //        nextButton.backgroundColor = .clear
+    //        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
+    //        //
+    //        backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
+    //        backButton.setTitle("Back", for: .normal)
+    //        backButton.titleLabel?.textAlignment = .left
+    //        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+    //        backButton.titleLabel?.textColor = .white
+    //        backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
+    //
+    //
+    //
+    //
+    //        switch viewNumber {
+    //        case 0:
+    //            //
+    //
+    //
+    //            // Clear Section
+    //            let path = CGMutablePath()
+    //            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight, width: self.view.frame.size.width, height: sessionPickerView.frame.size.height))
+    //            path.addRect(screenSize)
+    //            //
+    //            let maskLayer = CAShapeLayer()
+    //            maskLayer.backgroundColor = UIColor.black.cgColor
+    //            maskLayer.path = path
+    //            maskLayer.fillRule = kCAFillRuleEvenOdd
+    //            //
+    //            walkthroughView.layer.mask = maskLayer
+    //            walkthroughView.clipsToBounds = true
+    //            //
+    //
+    //
+    //            label.text = NSLocalizedString("choiceScreen21", comment: "")
+    //            walkthroughView.addSubview(label)
+    //
+    //
+    //
+    //            walkthroughView.addSubview(nextButton)
+    //            self.view.addSubview(walkthroughView)
+    //            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+    //            walkthroughView.bringSubview(toFront: nextButton)
+    //
+    //
+    //
+    //        //
+    //        case 1:
+    //            //
+    //
+    //
+    //            // Clear Section
+    //            let path = CGMutablePath()
+    //            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + sessionPickerView.frame.size.height, width: self.view.frame.size.width, height: customTableView.frame.size.height))
+    //            path.addRect(screenSize)
+    //            //
+    //            let maskLayer = CAShapeLayer()
+    //            maskLayer.backgroundColor = UIColor.black.cgColor
+    //            maskLayer.path = path
+    //            maskLayer.fillRule = kCAFillRuleEvenOdd
+    //            //
+    //            walkthroughView.layer.mask = maskLayer
+    //            walkthroughView.clipsToBounds = true
+    //            //
+    //
+    //            label.center = sessionPickerView.center
+    //            label.center.y = (UIApplication.shared.statusBarFrame.height/2) + sessionPickerView.frame.size.height
+    //            label.text = NSLocalizedString("choiceScreen22", comment: "")
+    //            walkthroughView.addSubview(label)
+    //
+    //
+    //
+    //
+    //            walkthroughView.addSubview(backButton)
+    //            walkthroughView.addSubview(nextButton)
+    //            self.view.addSubview(walkthroughView)
+    //            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+    //            walkthroughView.bringSubview(toFront: nextButton)
+    //            walkthroughView.bringSubview(toFront: backButton)
+    //
+    //
+    //        //
+    //        case 2:
+    //            //
+    //
+    //
+    //            // Clear Section
+    //            let path = CGMutablePath()
+    //            path.addRect(CGRect(x: 0, y:   UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + sessionPickerView.frame.size.height + 24.5, width: 72 + 5, height: 72))
+    //            path.addRect(screenSize)
+    //            //
+    //            let maskLayer = CAShapeLayer()
+    //            maskLayer.backgroundColor = UIColor.black.cgColor
+    //            maskLayer.path = path
+    //            maskLayer.fillRule = kCAFillRuleEvenOdd
+    //            //
+    //            walkthroughView.layer.mask = maskLayer
+    //            walkthroughView.clipsToBounds = true
+    //            //
+    //
+    //            label.center = sessionPickerView.center
+    //            label.center.y = (UIApplication.shared.statusBarFrame.height/2) + sessionPickerView.frame.size.height
+    //            label.text = NSLocalizedString("choiceScreen23", comment: "")
+    //            walkthroughView.addSubview(label)
+    //
+    //
+    //
+    //
+    //            walkthroughView.addSubview(backButton)
+    //            walkthroughView.addSubview(nextButton)
+    //            self.view.addSubview(walkthroughView)
+    //            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+    //            walkthroughView.bringSubview(toFront: nextButton)
+    //            walkthroughView.bringSubview(toFront: backButton)
+    //
+    //
+    //
+    //
+    //        //
+    //        case 3:
+    //            //
+    //
+    //
+    //            // Clear Section
+    //            let path = CGMutablePath()
+    //            path.addEllipse(in: CGRect(x: self.view.frame.size.width - 98, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + sessionPickerView.frame.size.height, width: 98, height: 49))
+    //            path.addRect(screenSize)
+    //            //
+    //            let maskLayer = CAShapeLayer()
+    //            maskLayer.backgroundColor = UIColor.black.cgColor
+    //            maskLayer.path = path
+    //            maskLayer.fillRule = kCAFillRuleEvenOdd
+    //            //
+    //            walkthroughView.layer.mask = maskLayer
+    //            walkthroughView.clipsToBounds = true
+    //            //
+    //            label.text = NSLocalizedString("choiceScreen24", comment: "")
+    //            walkthroughView.addSubview(label)
+    //
+    //
+    //
+    //            walkthroughView.addSubview(backButton)
+    //            walkthroughView.addSubview(nextButton)
+    //            self.view.addSubview(walkthroughView)
+    //            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+    //            walkthroughView.bringSubview(toFront: nextButton)
+    //            walkthroughView.bringSubview(toFront: backButton)
+    //
+    //
+    //        //
+    //        case 4:
+    //            //
+    //
+    //
+    //            // Clear Section
+    //            let path = CGMutablePath()
+    //            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + sessionPickerView.frame.size.height + customTableView.frame.size.height, width: self.view.frame.size.height, height: 49))
+    //            path.addRect(screenSize)
+    //            //
+    //            let maskLayer = CAShapeLayer()
+    //            maskLayer.backgroundColor = UIColor.black.cgColor
+    //            maskLayer.path = path
+    //            maskLayer.fillRule = kCAFillRuleEvenOdd
+    //            //
+    //            walkthroughView.layer.mask = maskLayer
+    //            walkthroughView.clipsToBounds = true
+    //            //
+    //
+    //
+    //            label.text = NSLocalizedString("choiceScreen25", comment: "")
+    //            walkthroughView.addSubview(label)
+    //
+    //
+    //
+    //            // Picker
+    //            self.sessionPickerView.selectRow(0, inComponent: 0, animated: true)
+    //
+    //
+    //
+    //            walkthroughView.addSubview(backButton)
+    //            walkthroughView.addSubview(nextButton)
+    //            self.view.addSubview(walkthroughView)
+    //            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+    //            walkthroughView.bringSubview(toFront: nextButton)
+    //            walkthroughView.bringSubview(toFront: backButton)
+    //
+    //
+    //
+    //        //
+    //        case 5:
+    //            //
+    //
+    //
+    //            // Clear Section
+    //            let path = CGMutablePath()
+    //            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+    //            path.addRect(screenSize)
+    //            //
+    //            let maskLayer = CAShapeLayer()
+    //            maskLayer.backgroundColor = UIColor.black.cgColor
+    //            maskLayer.path = path
+    //            maskLayer.fillRule = kCAFillRuleEvenOdd
+    //            //
+    //            walkthroughView.layer.mask = maskLayer
+    //            walkthroughView.clipsToBounds = true
+    //            //
+    //
+    //
+    //            label.text = NSLocalizedString("choiceScreen26", comment: "")
+    //            walkthroughView.addSubview(label)
+    //            
+    //            
+    //            
+    //            
+    //            walkthroughView.addSubview(backButton)
+    //            walkthroughView.addSubview(nextButton)
+    //            self.view.addSubview(walkthroughView)
+    //            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+    //            walkthroughView.bringSubview(toFront: nextButton)
+    //            walkthroughView.bringSubview(toFront: backButton)
+    //            
+    //            
+    //            
+    //        //
+    //        default: break
+    //            
+    //            
+    //        }
+    //        
+    //        
+    //    }
+    //    
+    //    
+    //    
+    //    func nextWalkthroughView(_ sender: Any) {
+    //        walkthroughView.removeFromSuperview()
+    //        viewNumber = viewNumber + 1
+    //        walkthroughMindBody()
+    //    }
+    //    
+    //    
+    //    func backWalkthroughView(_ sender: Any) {
+    //        if viewNumber > 0 {
+    //            backButton.removeFromSuperview()
+    //            walkthroughView.removeFromSuperview()
+    //            viewNumber = viewNumber - 1
+    //            walkthroughMindBody()
+    //        }
+    //        
+    //    }
     
     
     //

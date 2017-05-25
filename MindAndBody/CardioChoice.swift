@@ -62,7 +62,7 @@ class CardioChoice: UIViewController  {
         hiit.setTitle(NSLocalizedString("hiit", comment: ""), for: UIControlState.normal)
         hiit.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         hiit.setTitleColor(colour2, for: .normal)
-        hiit.layer.borderWidth = 8
+        hiit.layer.borderWidth = 6
         hiit.layer.borderColor = colour2.cgColor
         hiit.titleLabel?.adjustsFontSizeToFitWidth = true
         hiit.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -71,7 +71,7 @@ class CardioChoice: UIViewController  {
         regular.setTitle(NSLocalizedString("regular", comment: ""), for: UIControlState.normal)
         regular.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         regular.setTitleColor(colour2, for: .normal)
-        regular.layer.borderWidth = 8
+        regular.layer.borderWidth = 6
         regular.layer.borderColor = colour2.cgColor
         regular.titleLabel?.adjustsFontSizeToFitWidth = true
         regular.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -79,7 +79,7 @@ class CardioChoice: UIViewController  {
         //
         custom.setTitle("C", for: .normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        custom.layer.borderWidth = 8
+        custom.layer.borderWidth = 6
         custom.layer.borderColor = colour2.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)

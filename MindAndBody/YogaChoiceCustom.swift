@@ -22,10 +22,13 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Custom Arrays
     //
     var presetTexts: [String] = []
-    // YogaPresetsCustom, BreathArray
+    // yogaPresetsCustom, SetsArray, RepsArray
     var emptyArrayOfArrays: [[Int]] = []
     // Selected row
     var selectedRow = Int()
+    
+    //
+    var selectedPreset = Int()
     
     //
     var yogaArray: [String] = []
@@ -39,7 +42,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     //
     var breathsArray: [String] = []
-    //
+    
     
     //
     // Yoga Arrays -----------------------------------------------------------------------------------------------
@@ -52,89 +55,89 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
             "seated",
             "lying",
             "handStands"
-        ]
+    ]
     
     // Full Key Array
     var fullKeyArray: [[Int]] =
         [
             // Standing
             [0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18,
-            19,
-            20,
-            21,
-            22],
+             1,
+             2,
+             3,
+             4,
+             5,
+             6,
+             7,
+             8,
+             9,
+             10,
+             11,
+             12,
+             13,
+             14,
+             15,
+             16,
+             17,
+             18,
+             19,
+             20,
+             21,
+             22],
             // Hand/Elbows and Feet/Knees
             [23,
-            24,
-            25,
-            26,
-            27,
-            28,
-            29,
-            30,
-            31,
-            32,
-            33,
-            34,
-            35,
-            36,
-            37,
-            38,
-            39,
-            40],
+             24,
+             25,
+             26,
+             27,
+             28,
+             29,
+             30,
+             31,
+             32,
+             33,
+             34,
+             35,
+             36,
+             37,
+             38,
+             39,
+             40],
             // Seated
             [41,
-            42,
-            43,
-            44,
-            45,
-            46,
-            47,
-            48,
-            49,
-            50,
-            51,
-            52,
-            53,
-            54,
-            55,
-            56,
-            57],
+             42,
+             43,
+             44,
+             45,
+             46,
+             47,
+             48,
+             49,
+             50,
+             51,
+             52,
+             53,
+             54,
+             55,
+             56,
+             57],
             // Lying
             [58,
-            59,
-            60,
-            61,
-            62,
-            63,
-            64,
-            65,
-            66,
-            67,
-            68,
-            69],
+             59,
+             60,
+             61,
+             62,
+             63,
+             64,
+             65,
+             66,
+             67,
+             68,
+             69],
             // Hand Stands
             [70,
-            71,
-            72]
+             71,
+             72]
     ]
     
     // Yoga Poses
@@ -471,11 +474,12 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     ]
     
     
+    
     //
-    // Breaths
+    // Breaths/Breaths/Seconds Picker View
     //
-    var breathsPickerArray: [Int] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99]
-    //
+    var breathsPickerArray: [String] = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99"]
+    
     
     //
     // Outlets ---------------------------------------------------------------------------------------------------------------------------
@@ -489,26 +493,27 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Table View
     @IBOutlet weak var customTableView: UITableView!
     
+    
     // Editing
     @IBOutlet weak var editingButton: UIButton!
+    //
+    @IBOutlet weak var presetsButton: UIButton!
     
-    // Session Picker View
-    @IBOutlet weak var sessionPickerView: UIPickerView!
-    
-    // Add Preset
-    @IBOutlet weak var addPreset: UIButton!
-    @IBOutlet weak var removePreset: UIButton!
     
     //
-    @IBOutlet weak var tableViewConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var tableViewConstraint1: NSLayoutConstraint!
-    
+    // Constraints
+    @IBOutlet weak var presetsConstraint: NSLayoutConstraint!
+    @IBOutlet weak var editConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewConstraintTop: NSLayoutConstraint!
+    @IBOutlet weak var tableViewConstraintBottom: NSLayoutConstraint!
     @IBOutlet weak var beginButtonConstraint: NSLayoutConstraint!
     
     
     //
     let emptyString = ""
+    
+    // Presets
+    var presetsTableView = UITableView()
     
     // Elements for cell actions
     //
@@ -516,7 +521,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     var movementsTableView = UITableView()
     var backgroundViewExpanded = UIButton()
     
-    // Breaths
+    // Sets and Reps Choice
     var breathsView = UIView()
     var breathsPicker = UIPickerView()
     var okButton = UIButton()
@@ -531,10 +536,10 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     func flashScreen() {
         //
         let flash = UIView()
-        flash.frame = CGRect(x: 0, y: sessionPickerView.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
+        flash.frame = CGRect(x: 0, y: presetsButton.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height + 100)
         flash.backgroundColor = colour1
         flash.alpha = 0.7
-        //
+        
         self.view.addSubview(flash)
         self.view.bringSubview(toFront: flash)
         //
@@ -545,6 +550,13 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         })
     }
     
+    //
+    // View Will Appear
+    //
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presetsButton.setTitle(NSLocalizedString("customYogaPractice", comment: ""), for: .normal)
+    }
     
     //
     // View did load  ---------------------------------------------------------------------------------------------------------------------------
@@ -553,7 +565,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
         
         //
-        // Preset Yogas
+        // Preset Yoga Sessions
         //
         let defaults = UserDefaults.standard
         // Custom
@@ -569,40 +581,37 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough2") == false {
             let delayInSeconds = 0.5
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                self.walkthroughMindBody()
+                //self.walkthroughMindBody()
             }
             UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2")
         }
         
+        
+        // Initial Element Positions
+        //
+        presetsConstraint.constant = 0
+        editConstraint.constant = view.frame.size.height
+        //
+        tableViewConstraintTop.constant = view.frame.size.height
+        tableViewConstraintBottom.constant = -49
+        //
+        beginButtonConstraint.constant = -49
+        
+        
+        
         // Colour
-        self.view.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        self.view.backgroundColor = colour1
+        
+        //
+        presetsButton.backgroundColor = colour2
         
         // Navigation Bar Title
         navigationBar.title = NSLocalizedString("custom", comment: "")
-        
-        // Picker View Test
-        sessionPickerView.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         
         // TableView Editing
         // Start
         editingButton.setTitle(NSLocalizedString("edit", comment: ""), for: .normal)
         
-        
-        // Plus Button Colour
-        let origImage1 = UIImage(named: "Plus")
-        let tintedImage1 = origImage1?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        // Set Image
-        addPreset.setImage(tintedImage1, for: .normal)
-        //Image Tint
-        addPreset.tintColor = colour1
-        
-        // Minus Button Colour
-        let origImage2 = UIImage(named: "Minus")
-        let tintedImage2 = origImage2?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        // Set Image
-        removePreset.setImage(tintedImage2, for: .normal)
-        //Image Tint
-        removePreset.tintColor = colour1
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
@@ -611,17 +620,24 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         
         
-        // Initial Element Positions
-        let yogaPreset = UserDefaults.standard.object(forKey: "yogaPresetsCustom") as! [[Int]]
-        if yogaPreset.count == 0 {
-            editingButton.alpha = 0
-            removePreset.alpha = 0
-            //
-            tableViewConstraint.constant = view.frame.size.height - 98
-            tableViewConstraint1.constant = -49
-            //
-            beginButtonConstraint.constant = -49
-        }
+        // Presets TableView
+        //
+        let tableViewBackground2 = UIView()
+        //
+        tableViewBackground2.backgroundColor = colour2
+        tableViewBackground2.frame = CGRect(x: 0, y: 0, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
+        //
+        presetsTableView.backgroundView = tableViewBackground2
+        presetsTableView.tableFooterView = UIView()
+        // TableView Cell action items
+        //
+        presetsTableView.backgroundColor = colour2
+        presetsTableView.delegate = self
+        presetsTableView.dataSource = self
+        presetsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        presetsTableView.layer.cornerRadius = 5
+        presetsTableView.layer.masksToBounds = true
+        presetsTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         
         
@@ -644,7 +660,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         movementsTableView.layer.cornerRadius = 5
         movementsTableView.layer.masksToBounds = true
         //
-        // Breaths Selection
+        // Sets Reps Selection
         // view
         breathsView.backgroundColor = colour2
         breathsView.layer.cornerRadius = 5
@@ -662,7 +678,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         // sets
         breathsIndicatorLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
         breathsIndicatorLabel.textColor = colour1
-        breathsIndicatorLabel.text = NSLocalizedString("breathsC", comment: "")
+        breathsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
         //
         breathsView.addSubview(breathsPicker)
         breathsView.addSubview(okButton)
@@ -686,9 +702,6 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         footerView.backgroundColor = .clear
         customTableView.tableFooterView = footerView
         //
-        beginButtonEnabled()
-        editButtonEnabled()
-        pickerViewEnabled()
     }
     
     
@@ -704,10 +717,10 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         if customTableView.isEditing {
             beginButton.isEnabled = false
         } else {
-            if yogaPreset.count == 0 {
-                beginButton.isEnabled = false
+            if selectedPreset == -1 {
+                
             } else {
-                if yogaPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
+                if yogaPreset[selectedPreset].count == 0 {
                     beginButton.isEnabled = false
                 } else {
                     beginButton.isEnabled = true
@@ -722,191 +735,16 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         let defaults = UserDefaults.standard
         var yogaPreset = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
         //
+        //
         if yogaPreset.count == 0 {
             editingButton.isEnabled = false
         } else {
-            if yogaPreset[sessionPickerView.selectedRow(inComponent: 0)].count == 0 {
+            if yogaPreset[selectedPreset].count == 0 {
                 editingButton.isEnabled = false
             } else {
                 editingButton.isEnabled = true
             }
         }
-    }
-    
-    // PickerView Enabled
-    func pickerViewEnabled() {
-        //
-        let defaults = UserDefaults.standard
-        let yogaPreset = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
-        //
-        if yogaPreset.count == 0 {
-            sessionPickerView.isUserInteractionEnabled = false
-        } else {
-            sessionPickerView.isUserInteractionEnabled = true
-        }
-    }
-    //
-    // Custom Sessions -----------------------------------------------------------------------------------------------------
-    //
-    // Set Personalized Preset
-    var okAction = UIAlertAction()
-    //
-    @IBAction func addCustomYoga(_ sender: Any) {
-        //
-        let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
-        var presetTextArray = defaults.object(forKey: "yogaPresetTextsCustom") as! [String]
-        //
-        var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
-        // Alert and Functions
-        //
-        let inputTitle = NSLocalizedString("yogaInputTitle", comment: "")
-        //
-        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-        alert.view.tintColor = colour2
-        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-        //2. Add the text field
-        alert.addTextField { (textField: UITextField) in
-            textField.text = " "
-            textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
-            textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
-        }
-        // 3. Get the value from the text field, and perform actions upon OK press
-        okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            //
-            let textField = alert?.textFields![0]
-            // Update Preset Text Arrays
-            presetTextArray.append((textField?.text)!)
-            defaults.set(presetTextArray, forKey: "yogaPresetTextsCustom")
-            // Add New empty array
-            customKeyArray.append([])
-            defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
-            // Add new sets and reps arrays
-            customBreathsArray.append([])
-            defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
-            //
-            defaults.synchronize()
-            // Flash Screen
-            self.sessionPickerView.reloadAllComponents()
-            self.sessionPickerView.selectRow(self.sessionPickerView.selectedRow(inComponent: 0) + 1, inComponent: 0, animated: true)
-            self.customTableView.reloadData()
-            //
-            self.beginButtonEnabled()
-            self.editButtonEnabled()
-            self.pickerViewEnabled()
-            
-            //
-            // Initial Element Positions
-            if customKeyArray.count != 0 {
-                //
-                self.removePreset.alpha = 1
-                //
-                self.tableViewConstraint.constant = 49
-                self.tableViewConstraint1.constant = 49
-                //
-                self.beginButtonConstraint.constant = 0
-                //
-                UIView.animate(withDuration: 0.7) {
-                    self.view.layoutIfNeeded()
-                    self.editingButton.alpha = 1
-                    self.removePreset.alpha = 1
-                }
-            }
-        })
-        okAction.isEnabled = false
-        alert.addAction(okAction)
-        // Cancel reset action
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
-            UIAlertAction in
-        }
-        alert.addAction(cancelAction)
-        // 4. Present the alert.
-        self.present(alert, animated: true, completion: nil)
-        //
-    }
-    
-    // Enable ok alert action func
-    func textChanged(_ sender: UITextField) {
-        if sender.text == "" {
-            okAction.isEnabled = false
-        } else {
-            okAction.isEnabled = true
-        }
-    }
-    
-    // Remove Personalized Preset
-    @IBAction func removeCustomYoga(_ sender: Any) {
-        //
-        let defaults = UserDefaults.standard
-        var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
-        var presetTextArray = defaults.object(forKey: "yogaPresetTextsCustom") as! [String]
-        //
-        var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
-        //
-        let selectedRow = sessionPickerView.selectedRow(inComponent: 0)
-        //
-        let inputTitle = NSLocalizedString("yogaRemoveTitle", comment: "")
-        //
-        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-        alert.view.tintColor = colour2
-        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-        // 3. Get the value from the text field, and perform actions upon OK press
-        okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            //
-            if presetTextArray.count != 0 {
-                //
-                customKeyArray.remove(at: selectedRow)
-                defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
-                //
-                presetTextArray.remove(at: selectedRow)
-                defaults.set(presetTextArray, forKey: "yogaPresetTextsCustom")
-                //
-                customBreathsArray.remove(at: selectedRow)
-                defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
-                //
-                defaults.synchronize()
-                
-                // Reload Screen
-                self.sessionPickerView.reloadAllComponents()
-                self.customTableView.reloadData()
-                //
-                self.beginButtonEnabled()
-                self.editButtonEnabled()
-                self.pickerViewEnabled()
-                
-                //
-                // Initial Element Positions
-                if customKeyArray.count == 0 {
-                    //
-                    self.removePreset.alpha = 0
-                    //
-                    self.tableViewConstraint.constant = self.view.frame.size.height - 98
-                    self.tableViewConstraint1.constant = -49
-                    //
-                    self.beginButtonConstraint.constant = -49
-                    //
-                    UIView.animate(withDuration: 0.7) {
-                        self.view.layoutIfNeeded()
-                        self.editingButton.alpha = 0
-                        self.removePreset.alpha = 0
-                    }
-                }
-            } else {
-            }
-        })
-        //
-        if customBreathsArray.count > 0 {
-            alert.addAction(okAction)
-        } else {
-        }
-        // Cancel reset action
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
-            UIAlertAction in
-        }
-        alert.addAction(cancelAction)
-        //
-        self.present(alert, animated: true, completion: nil)
-        
     }
     
     
@@ -921,62 +759,26 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch pickerView {
-        case sessionPickerView:
-            let titleDataArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
-            return titleDataArray.count
-        case breathsPicker:
-            return 100
-        default: return 0
-        }
+        return breathsPickerArray.count
+        
     }
     
     // View for row
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         //
-        switch pickerView {
-        case sessionPickerView:
-            let rowLabel = UILabel()
-            let titleDataArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
-            //
-            if titleDataArray.count > 0 {
-                let titleData = titleDataArray[row]
-                let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-light", size: 24)!,NSForegroundColorAttributeName:UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)])
-                rowLabel.attributedText = myTitle
-                //
-                rowLabel.textAlignment = .center
-                return rowLabel
-            }
-
-        case breathsPicker:
-            //
-            let breathsLabel = UILabel()
-            breathsLabel.text = String(breathsPickerArray[row])
-            breathsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-            breathsLabel.textColor = colour1
-            //
-            breathsLabel.textAlignment = .center
-            return breathsLabel
+        let breathsLabel = UILabel()
+        // Row Label Text
+        breathsLabel.text = String(breathsPickerArray[row])
         //
-        default: return UIView()
-        }
-        return UIView()
+        breathsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
+        breathsLabel.textColor = colour1
+        breathsLabel.textAlignment = .center
+        return breathsLabel
     }
     
     // Row height
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 30
-    }
-    
-    // Did select row
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //
-        if pickerView == sessionPickerView {
-            //
-            self.customTableView.reloadData()
-            flashScreen()
-            //
-        }
     }
     
     
@@ -987,11 +789,11 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     func numberOfSections(in tableView: UITableView) -> Int {
         
         switch tableView {
+        case presetsTableView: return 1
         case customTableView:
             return 1
         case movementsTableView:
-            let numberOfSections = tableViewSectionArray.count
-            return numberOfSections
+            return tableViewSectionArray.count
         default: break
         }
         return 0
@@ -1001,12 +803,14 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         //
         switch tableView {
+        case presetsTableView:
+            return " " + NSLocalizedString("customYogaPractice", comment: "")
         //
         case customTableView:
             //
             let titleDataArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
             if titleDataArray.count != 0 {
-                return titleDataArray[sessionPickerView.selectedRow(inComponent: 0)]
+                return titleDataArray[selectedPreset]
             } else {
                 return " "
             }
@@ -1022,6 +826,12 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
         switch tableView {
+        case presetsTableView:
+            let header = view as! UITableViewHeaderFooterView
+            header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 17)!
+            header.textLabel?.textColor = colour1
+            header.contentView.backgroundColor = colour2
+            header.contentView.tintColor = colour1
         case customTableView:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
@@ -1046,6 +856,10 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         switch tableView {
+        case presetsTableView:
+            // Retreive Preset Timers
+            let presetsArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
+            return presetsArray.count + 1
         //
         case customTableView:
             //
@@ -1055,7 +869,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
             if customKeyArray.count == 0 {
                 return 1
             } else {
-                return customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count + 1
+                return customKeyArray[selectedPreset].count + 1
             }
         //
         case movementsTableView:
@@ -1071,6 +885,34 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         switch tableView {
+        case presetsTableView:
+            var cell = UITableViewCell()
+            cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            cell.textLabel?.adjustsFontSizeToFitWidth = true
+            //
+            // Retreive Preset Timers
+            let presetsArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
+            //
+            cell.textLabel?.textAlignment = .center
+            cell.backgroundColor = colour1
+            cell.textLabel?.textColor = colour2
+            cell.tintColor = colour2
+            //
+            if indexPath.row == presetsArray.count {
+                //
+                cell.imageView?.image = #imageLiteral(resourceName: "Plus")
+                //
+                cell.contentView.transform = CGAffineTransform(scaleX: -1,y: 1);
+                cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
+                //
+            } else {
+                //
+                cell.textLabel?.text = presetsArray[indexPath.row]
+            }
+            //
+            return cell
+        //
         case customTableView:
             //
             let defaults = UserDefaults.standard
@@ -1094,7 +936,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
                 //
             } else {
                 //
-                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count  {
+                if indexPath.row == customKeyArray[selectedPreset].count  {
                     //
                     let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                     //
@@ -1112,7 +954,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
                     //
                     let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                     //
-                    let keyIndex = customKeyArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row]
+                    let keyIndex = customKeyArray[selectedPreset][indexPath.row]
                     cell.textLabel?.text = NSLocalizedString(yogaPosesDictionary[keyIndex]!, comment: "")
                     //
                     cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
@@ -1121,12 +963,12 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
                     cell.backgroundColor = colour1
                     cell.textLabel?.textColor = colour2
                     cell.tintColor = .black
-                    // Detail Breaths
+                    // Detail sets x reps
                     cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
                     cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
                     cell.detailTextLabel?.textAlignment = .left
                     cell.detailTextLabel?.textColor = colour2
-                    cell.detailTextLabel?.text = String(customBreathsArray[sessionPickerView.selectedRow(inComponent:0)][indexPath.row]) + " " + NSLocalizedString("breathsA", comment: "")
+                    cell.detailTextLabel?.text = breathsPickerArray[customBreathsArray[selectedPreset][indexPath.row]] + " br."
                     //
                     // Cell Image
                     cell.imageView?.image = demonstrationDictionary[keyIndex]?[0]
@@ -1136,8 +978,6 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
                     imageTap.numberOfTapsRequired = 1
                     imageTap.addTarget(self, action: #selector(handleTap))
                     cell.imageView?.addGestureRecognizer(imageTap)
-                    //
-                    cell.imageView?.tag = customKeyArray[sessionPickerView.selectedRow(inComponent:0)][indexPath.row]
                     //
                     return cell
                 }
@@ -1165,8 +1005,6 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
             imageTap.addTarget(self, action: #selector(handleTap))
             cell.imageView?.addGestureRecognizer(imageTap)
             //
-            cell.imageView?.tag = fullKeyArray[indexPath.section][indexPath.row]
-            //
             return cell
         //
         default: break
@@ -1178,6 +1016,8 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
         switch tableView {
+        case presetsTableView:
+            return 44
         case customTableView:
             //
             let defaults = UserDefaults.standard
@@ -1188,7 +1028,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
                 //
             } else {
                 //
-                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count  {
+                if indexPath.row == customKeyArray[selectedPreset].count  {
                     return 49
                     //
                 } else {
@@ -1202,158 +1042,324 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         return 72
     }
     
+    //
+    var okAction = UIAlertAction()
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         let defaults = UserDefaults.standard
+        var presetsArray = defaults.object(forKey: "yogaPresetTextsCustom") as! [String]
         var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
         //
         var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
-        // If no session created
-        if customKeyArray.count == 0 {
-            tableView.deselectRow(at: indexPath, animated: true)
-        } else {
-            switch tableView {
-            //
-            case customTableView:
+        
+        //
+        switch tableView {
+        case presetsTableView:
+            // Add Custom Yoga
+            if indexPath.row == presetsArray.count {
+                let snapShot1 = presetsTableView.snapshotView(afterScreenUpdates: false)
+                snapShot1?.center.x = view.center.x
+                snapShot1?.center.y = presetsTableView.center.y - UIApplication.shared.statusBarFrame.height - (navigationController?.navigationBar.frame.size.height)!
+                view.addSubview(snapShot1!)
+                self.presetsTableView.isHidden = true
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.backgroundViewExpanded.alpha = 0
+                }, completion: { finished in
+                    self.backgroundViewExpanded.isHidden = true
+                })
+                
                 //
-                selectedRow = indexPath.row
+                let defaults = UserDefaults.standard
+                var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
+                var presetTextArray = defaults.object(forKey: "yogaPresetTextsCustom") as! [String]
                 //
-                if customKeyArray.count == 0 {
+                var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
+                // Alert and Functions
+                //
+                let inputTitle = NSLocalizedString("yogaInputTitle", comment: "")
+                //
+                let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+                alert.view.tintColor = colour2
+                alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+                //2. Add the text field
+                alert.addTextField { (textField: UITextField) in
+                    textField.text = " "
+                    textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
+                    textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
+                }
+                // 3. Get the value from the text field, and perform actions upon OK press
+                okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                     //
-                    movementsTableView.alpha = 0
-                    UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
+                    let textField = alert?.textFields![0]
+                    // Update Preset Text Arrays
+                    presetTextArray.append((textField?.text)!)
+                    defaults.set(presetTextArray, forKey: "yogaPresetTextsCustom")
+                    // Add New empty array
+                    customKeyArray.append([])
+                    defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
+                    // Add new breaths arrays
+                    customBreathsArray.append([])
+                    defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
+                    //
+                    defaults.synchronize()
+                    
+                    
+                    //
+                    self.presetsTableView.isHidden = false
+                    snapShot1?.removeFromSuperview()
+                    //
+                    self.backgroundViewExpanded.isHidden = false
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.backgroundViewExpanded.alpha = 0.5
+                        self.presetsTableView.reloadData()
+                        // Dismiss and select new row
+                    }, completion: { finished in
+                        //
+                        //
+                        let presetsArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
+                        //
+                        let selectedIndexPath = NSIndexPath(row: presetsArray.count - 1, section: 0)
+                        self.presetsTableView.selectRow(at: selectedIndexPath as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
+                        self.selectedPreset = selectedIndexPath.row
+                        //
+                        if self.selectedPreset == -1 {
+                            self.presetsButton.setTitle(NSLocalizedString("customYogaPractice", comment: ""), for: .normal)
+                        } else {
+                            self.presetsButton.setTitle("- " + presetsArray[self.selectedPreset] + " -", for: .normal)
+                        }
+                        //
+                        tableView.deselectRow(at: indexPath, animated: true)
+                        // Flash Screen
+                        self.customTableView.reloadData()
+                        //
+                        self.beginButtonEnabled()
+                        self.editButtonEnabled()
+                        
+                        // Element Positions
+                        //
+                        self.presetsConstraint.constant = self.view.frame.size.height - 73.5
+                        self.editConstraint.constant = 73.5
+                        //
+                        self.tableViewConstraintTop.constant = 122.5
+                        self.tableViewConstraintBottom.constant = 49
+                        //
+                        self.beginButtonConstraint.constant = 0
+                        //
+                        //
+                        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                            //
+                            self.view.layoutIfNeeded()
+                            self.editingButton.alpha = 1
+                            //
+                            self.presetsTableView.frame = CGRect(x: 30, y: self.presetsButton.frame.minY + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
+                            self.presetsTableView.alpha = 0
+                            self.backgroundViewExpanded.alpha = 0
+                        }, completion: { finished in
+                            //
+                            self.presetsTableView.removeFromSuperview()
+                            self.backgroundViewExpanded.removeFromSuperview()
+                        })
+                    })
+                })
+                okAction.isEnabled = false
+                alert.addAction(okAction)
+                // Cancel reset action
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                    //
+                    self.backgroundViewExpanded.isHidden = false
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.backgroundViewExpanded.alpha = 0.5
+                    })
+                    //
+                    self.presetsTableView.isHidden = false
+                    snapShot1?.removeFromSuperview()
+                }
+                alert.addAction(cancelAction)
+                // 4. Present the alert.
+                self.present(alert, animated: true, completion: nil)
+                //
+                
+                
+                //
+                // Select Custom Yoga
+            } else {
+                //
+                selectedPreset = indexPath.row
+                //
+                let presetsArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
+                //
+                self.presetsButton.setTitle("- " + presetsArray[self.selectedPreset] + " -", for: .normal)
+                //
+                tableView.deselectRow(at: indexPath, animated: true)
+                // Dismiss Table
+                if presetsArray.count != 0 {
+                    //
+                    // Element Positions
+                    //
+                    self.presetsConstraint.constant = self.view.frame.size.height - 73.5
+                    self.editConstraint.constant = 73.5
+                    //
+                    self.tableViewConstraintTop.constant = 122.5
+                    self.tableViewConstraintBottom.constant = 49
+                    //
+                    self.beginButtonConstraint.constant = 0
+                    //
+                    UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        self.presetsTableView.frame = CGRect(x: 30, y: 44 + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
+                        self.presetsTableView.alpha = 0
+                        self.backgroundViewExpanded.alpha = 0
+                        //
+                        //
+                        self.view.layoutIfNeeded()
+                        self.editingButton.alpha = 1
+                        //
+                        self.customTableView.reloadData()
+                        self.beginButtonEnabled()
+                        self.editButtonEnabled()
+                    }, completion: { finished in
+                        //
+                        self.presetsTableView.removeFromSuperview()
+                        self.backgroundViewExpanded.removeFromSuperview()
+                        //
+                    })
+                }
+                //
+            }
+            //
+        //
+        case customTableView:
+            //
+            selectedRow = indexPath.row
+            //
+            if indexPath.row == customKeyArray[selectedPreset].count {
+                //
+                movementsTableView.alpha = 0
+                UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
+                let selectedCell = tableView.cellForRow(at: indexPath)
+                movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+                //
+                backgroundViewExpanded.alpha = 0
+                UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
+                backgroundViewExpanded.frame = UIScreen.main.bounds
+                // Animate table fade and size
+                // Alpha
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.movementsTableView.alpha = 1
+                    //
+                }, completion: nil)
+                // Position
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
+                    //
+                    self.backgroundViewExpanded.alpha = 0.7
+                }, completion: nil)
+                //
+            } else {
+                    // View
+                    breathsView.alpha = 0
+                    UIApplication.shared.keyWindow?.insertSubview(breathsView, aboveSubview: view)
                     let selectedCell = tableView.cellForRow(at: indexPath)
-                    movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+                    breathsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
+                    // selected row
+                    breathsPicker.selectRow(customBreathsArray[selectedPreset][indexPath.row], inComponent: 0, animated: true)
+                    //
+                    // picker
+                    breathsPicker.frame = CGRect(x: 0, y: 0, width: breathsView.frame.size.width, height: 147)
+                    // ok
+                    okButton.frame = CGRect(x: 0, y: 147, width: breathsView.frame.size.width, height: 49)
+                    //
+                    self.breathsIndicatorLabel.frame = CGRect(x: breathsPicker.frame.size.width + 17, y: (self.breathsPicker.frame.size.height / 2) - 15, width: 100, height: 30)
                     //
                     backgroundViewExpanded.alpha = 0
-                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
+                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: breathsView)
                     backgroundViewExpanded.frame = UIScreen.main.bounds
                     // Animate table fade and size
                     // Alpha
                     UIView.animate(withDuration: 0.4, animations: {
-                        self.movementsTableView.alpha = 1
+                        self.breathsView.alpha = 1
                         //
                     }, completion: nil)
                     // Position
                     UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                        self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
+                        //
+                        self.breathsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
+                        self.breathsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
+                        // picker
+                        self.breathsPicker.frame = CGRect(x:0, y: 0, width: self.breathsView.frame.size.width, height: 147)
+                        // ok
+                        self.okButton.frame = CGRect(x: 0, y: 147, width: self.breathsView.frame.size.width, height: 49)
+                        // Sets Indicator Label
+                        self.breathsIndicatorLabel.frame = CGRect(x: (self.breathsPicker.frame.size.width / 2) + 17, y: (self.breathsPicker.frame.size.height / 2) - 15, width: 100, height: 30)
+                        self.breathsIndicatorLabel.text = NSLocalizedString("breathsC", comment: "")
+                        //
                         //
                         self.backgroundViewExpanded.alpha = 0.7
+                        
                     }, completion: nil)
-                    //
-                } else {
-                    //
-                    if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
-                        //
-                        movementsTableView.alpha = 0
-                        UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
-                        let selectedCell = tableView.cellForRow(at: indexPath)
-                        movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
-                        //
-                        backgroundViewExpanded.alpha = 0
-                        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
-                        backgroundViewExpanded.frame = UIScreen.main.bounds
-                        // Animate table fade and size
-                        // Alpha
-                        UIView.animate(withDuration: 0.4, animations: {
-                            self.movementsTableView.alpha = 1
-                            //
-                        }, completion: nil)
-                        // Position
-                        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                            self.movementsTableView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49)
-                            //
-                            self.backgroundViewExpanded.alpha = 0.7
-                        }, completion: nil)
-                        //
-                    } else {
-                        // View
-                        breathsView.alpha = 0
-                        UIApplication.shared.keyWindow?.insertSubview(breathsView, aboveSubview: view)
-                        let selectedCell = tableView.cellForRow(at: indexPath)
-                        breathsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
-                        // selected row
-                        breathsPicker.selectRow(customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)][indexPath.row], inComponent: 0, animated: true)
-                        //
-                        // picker
-                        breathsPicker.frame = CGRect(x: 0, y: 0, width: breathsView.frame.size.width, height: 147)
-                        // ok
-                        okButton.frame = CGRect(x: 0, y: 147, width: breathsView.frame.size.width, height: 49)
-                        //
-                        self.breathsIndicatorLabel.frame = CGRect(x: (breathsView.frame.size.width / 2) * 1.2, y: (self.breathsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                        //
-                        backgroundViewExpanded.alpha = 0
-                        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: breathsView)
-                        backgroundViewExpanded.frame = UIScreen.main.bounds
-                        // Animate table fade and size
-                        // Alpha
-                        UIView.animate(withDuration: 0.4, animations: {
-                            self.breathsView.alpha = 1
-                            //
-                        }, completion: nil)
-                        // Position
-                        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                            //
-                            self.breathsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
-                            self.breathsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
-                            // picker
-                            self.breathsPicker.frame = CGRect(x: 0, y: 0, width: self.breathsView.frame.size.width, height: 147)
-                            // ok
-                            self.okButton.frame = CGRect(x: 0, y: 147, width: self.breathsView.frame.size.width, height: 49)
-                            //
-                            self.breathsIndicatorLabel.frame = CGRect(x: (self.breathsView.frame.size.width / 2) * 1.2, y: (self.breathsPicker.frame.size.height / 2) - 15, width: 100, height: 30)
-                            //
-                            //
-                            self.backgroundViewExpanded.alpha = 0.7
-                            
-                        }, completion: nil)
-                    }
-                }
-            //
-            case movementsTableView:
-                //
-                customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].append(fullKeyArray[indexPath.section][indexPath.row])
-                defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
-                // Breaths
-                customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)].append(0)
-                defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
-                //
-                defaults.synchronize()
-                // Remove Table
-                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    self.movementsTableView.alpha = 0
-                    //
-                    self.backgroundViewExpanded.alpha = 0
-                    //
-                }, completion: { finished in
-                    self.movementsTableView.removeFromSuperview()
-                    self.backgroundViewExpanded.removeFromSuperview()
-                    //
-                    self.customTableView.reloadData()
-                    // Scroll to Bottom
-                    if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
-                        //
-                        self.customTableView.setContentOffset(CGPoint(x: 0, y: self.customTableView.contentSize.height - self.customTableView.frame.size.height), animated: true)
-                    }
-                })
-            //
-            default: break
             }
+            //        }
+        //
+        case movementsTableView:
             //
-            tableView.deselectRow(at: indexPath, animated: true)
-            beginButtonEnabled()
-            editButtonEnabled()
+            customKeyArray[selectedPreset].append(fullKeyArray[indexPath.section][indexPath.row])
+            defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
+            // reps
+            customBreathsArray[selectedPreset].append(0)
+            defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
+            //
+            defaults.synchronize()
+            // Remove Table
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.movementsTableView.alpha = 0
+                //
+                self.backgroundViewExpanded.alpha = 0
+                //
+                self.beginButtonEnabled()
+                self.editButtonEnabled()
+                //
+            }, completion: { finished in
+                self.movementsTableView.removeFromSuperview()
+                self.backgroundViewExpanded.removeFromSuperview()
+                //
+                self.customTableView.reloadData()
+                // Scroll to Bottom
+                if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
+                    //
+                    self.customTableView.setContentOffset(CGPoint(x: 0, y: self.customTableView.contentSize.height - self.customTableView.frame.size.height), animated: true)
+                }
+            })
+        //
+        default: break
         }
+        //
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    // Enable ok alert action func
+    func textChanged(_ sender: UITextField) {
+        if sender.text == "" {
+            okAction.isEnabled = false
+        } else {
+            okAction.isEnabled = true
+        }
+    }
     
     //
     // TableView Editing -----------------------------------------------------------------------------------------------------
     //
     // Can edit row
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        //
         switch tableView {
+        case presetsTableView:
+            let presetsArray = UserDefaults.standard.object(forKey: "yogaPresetTextsCustom") as! [String]
+            //
+            if indexPath.row < presetsArray.count {
+                return true
+            }
         case movementsTableView: return false
         case customTableView:
             //
@@ -1363,7 +1369,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
             if customKeyArray.count == 0 {
                 return false
             } else {
-                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+                if indexPath.row == customKeyArray[selectedPreset].count {
                     return false
                 } else {
                     return true
@@ -1371,21 +1377,23 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
         default: return false
         }
+        return false
     }
     
     // Can move to row
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         switch tableView {
+        case presetsTableView: return false
         case movementsTableView: return false
         case customTableView:
-        //
-        let defaults = UserDefaults.standard
-        let customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
+            //
+            let defaults = UserDefaults.standard
+            let customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
             //
             if customKeyArray.count == 0 {
                 return false
             } else {
-                if indexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+                if indexPath.row == customKeyArray[selectedPreset].count {
                     return false
                 } else {
                     return true
@@ -1402,13 +1410,13 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
         var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
         // Key
-        let itemToMove = customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
-        customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].insert(itemToMove, at: destinationIndexPath.row)
+        let itemToMove = customKeyArray[selectedPreset].remove(at: sourceIndexPath.row)
+        customKeyArray[selectedPreset].insert(itemToMove, at: destinationIndexPath.row)
         //
         defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
-        // Breaths
-        let setToMove = customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: sourceIndexPath.row)
-        customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)].insert(setToMove, at: destinationIndexPath.row)
+        // Reps
+        let breathToMove = customBreathsArray[selectedPreset].remove(at: sourceIndexPath.row)
+        customBreathsArray[selectedPreset].insert(breathToMove, at: destinationIndexPath.row)
         //
         defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
         //
@@ -1421,7 +1429,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         let defaults = UserDefaults.standard
         var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
         //
-        if proposedDestinationIndexPath.row == customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].count {
+        if proposedDestinationIndexPath.row == customKeyArray[selectedPreset].count {
             return NSIndexPath(row: proposedDestinationIndexPath.row - 1, section: proposedDestinationIndexPath.section) as IndexPath
         } else {
             return proposedDestinationIndexPath
@@ -1438,19 +1446,115 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         //
         if editingStyle == UITableViewCellEditingStyle.delete {
-            let defaults = UserDefaults.standard
-            var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
-            var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
-            // Key
-            customKeyArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
-            // Breaths
-            customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)].remove(at: indexPath.row)
-            defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
+            
+            switch tableView {
+            case presetsTableView:
+                //
+                let defaults = UserDefaults.standard
+                var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
+                var presetTextArray = defaults.object(forKey: "yogaPresetTextsCustom") as! [String]
+                //
+                var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
+                //
+                //
+                customKeyArray.remove(at: indexPath.row)
+                defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
+                //
+                presetTextArray.remove(at: indexPath.row)
+                defaults.set(presetTextArray, forKey: "yogaPresetTextsCustom")
+                //
+                customBreathsArray.remove(at: indexPath.row)
+                defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
+                //
+                defaults.synchronize()
+                
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.presetsTableView.reloadData()
+                })
+                //
+                self.selectedPreset = self.selectedPreset - 1
+                self.customTableView.reloadData()
+                //
+                
+                //
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.presetsTableView.reloadData()
+                    //
+                    if customKeyArray.count == 0 {
+                        self.presetsButton.setTitle(NSLocalizedString("customYogaPractice", comment: ""), for: .normal)
+                    } else {
+                        self.presetsButton.setTitle("- " + presetTextArray[self.selectedPreset] + " -", for: .normal)
+                    }
+                })
+                
+                
+                // Initial Element Positions
+                if customKeyArray.count == 0 {
+                    
+                    self.presetsTableView.isHidden = false
+                    //
+                    self.backgroundViewExpanded.isHidden = false
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.backgroundViewExpanded.alpha = 0.5
+                        self.presetsTableView.reloadData()
+                        // Dismiss and select new row
+                    }, completion: { finished in
+                        //
+                        self.selectedPreset = -1
+                        //
+                        tableView.deselectRow(at: indexPath, animated: true)
+                        //
+                        
+                        // Reload Data
+                        self.customTableView.reloadData()
+                        self.beginButtonEnabled()
+                        self.editButtonEnabled()
+                        //
+                        self.beginButtonEnabled()
+                        self.editButtonEnabled()
+                        
+                        // Initial Element Positions
+                        //
+                        self.presetsConstraint.constant = 0
+                        self.editConstraint.constant = self.view.frame.size.height
+                        //
+                        self.tableViewConstraintTop.constant = self.view.frame.size.height
+                        self.tableViewConstraintBottom.constant = -49
+                        //
+                        self.beginButtonConstraint.constant = -49
+                        //
+                        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                            //
+                            self.view.layoutIfNeeded()
+                            self.editingButton.alpha = 1
+                            //
+                            self.presetsTableView.frame = CGRect(x: 30, y: self.presetsButton.frame.minY + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
+                            self.presetsTableView.alpha = 0
+                            self.backgroundViewExpanded.alpha = 0
+                        }, completion: { finished in
+                            //
+                            self.presetsTableView.removeFromSuperview()
+                            self.backgroundViewExpanded.removeFromSuperview()
+                        })
+                    })
+                }
             //
-            defaults.synchronize()
-            //
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            case customTableView:
+                let defaults = UserDefaults.standard
+                var customKeyArray = defaults.object(forKey: "yogaPresetsCustom") as! [[Int]]
+                var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
+                // Key
+                customKeyArray[selectedPreset].remove(at: indexPath.row)
+                defaults.set(customKeyArray, forKey: "yogaPresetsCustom")
+                // Breaths
+                customBreathsArray[selectedPreset].remove(at: indexPath.row)
+                defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
+                //
+                defaults.synchronize()
+                //
+                tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            default: break
+            }
         }
     }
     
@@ -1458,20 +1562,63 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     //
     // Table view related button actions ------------------------------------------------------------------------------------------------
     //
+    // Prests
+    @IBAction func presetsAction(_ sender: Any) {
+        //
+        presetsTableView.reloadData()
+        //
+        presetsTableView.alpha = 0
+        presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + (presetsButton.frame.size.height / 2), width: presetsButton.frame.size.width - 60, height: 0)
+        presetsTableView.center.x = presetsButton.center.x
+        presetsTableView.center.y = presetsButton.center.y + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height)!
+        //
+        backgroundViewExpanded.alpha = 0
+        backgroundViewExpanded.frame = UIScreen.main.bounds
+        // Present
+        UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
+        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: presetsTableView)
+        // Animate table fade and size
+        // Positiona
+        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.presetsTableView.alpha = 1
+            self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + 44, width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88)
+            
+            //
+            self.backgroundViewExpanded.alpha = 0.5
+        }, completion: nil)
+        //
+        
+    }
+    
+    
     // Add movement table background (dismiss table)
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.movementsTableView.alpha = 0
-            self.breathsView.alpha = 0
+        if (UIApplication.shared.keyWindow?.subviews.contains(self.presetsTableView))! {
             //
-            self.backgroundViewExpanded.alpha = 0
-        }, completion: { finished in
-            self.movementsTableView.removeFromSuperview()
-            self.breathsView.removeFromSuperview()
+            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.presetsTableView.frame = CGRect(x: 30, y: self.presetsButton.frame.minY + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
+                self.presetsTableView.alpha = 0
+                self.backgroundViewExpanded.alpha = 0
+            }, completion: { finished in
+                //
+                self.presetsTableView.removeFromSuperview()
+                self.backgroundViewExpanded.removeFromSuperview()
+            })
             //
-            self.backgroundViewExpanded.removeFromSuperview()
-        })
+        } else {
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.movementsTableView.alpha = 0
+                self.breathsView.alpha = 0
+                //
+                self.backgroundViewExpanded.alpha = 0
+            }, completion: { finished in
+                self.movementsTableView.removeFromSuperview()
+                self.breathsView.removeFromSuperview()
+                //
+                self.backgroundViewExpanded.removeFromSuperview()
+            })
+        }
     }
     
     
@@ -1482,14 +1629,14 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         if customTableView.isEditing {
             self.customTableView.setEditing(false, animated: true)
             self.editingButton.setTitle(NSLocalizedString("edit", comment: ""), for: .normal)
-            self.sessionPickerView.isUserInteractionEnabled = true
-            self.beginButton.isEnabled = true
+            //
+            self.beginButtonEnabled()
             //
         } else {
             self.customTableView.setEditing(true, animated: true)
             self.editingButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-            self.sessionPickerView.isUserInteractionEnabled = false
-            self.beginButton.isEnabled = false
+            //
+            self.beginButtonEnabled()
         }
     }
     
@@ -1503,7 +1650,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         let defaults = UserDefaults.standard
         var customBreathsArray = defaults.object(forKey: "yogaBreathsCustom") as! [[Int]]
         //
-        customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)][selectedRow] = breathsPicker.selectedRow(inComponent: 0)
+        customBreathsArray[selectedPreset][selectedRow] = breathsPicker.selectedRow(inComponent: 0)
         defaults.set(customBreathsArray, forKey: "yogaBreathsCustom")
         //
         defaults.synchronize()
@@ -1525,23 +1672,17 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     //
     // Expand/Retract Image ------------------------------------------------------------------------------------------------
     //
-    //
-    // Handle Tap
+    // Expand Image
     let expandedImage = UIImageView()
     let backgroundViewImage = UIButton()
-    var imageIndex = Int()
     //
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
-        //
-        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
-        
-        //
-        // Get Array index
+        // Get Image
         let sender = extraTap.view as! UIImageView
-        let demonstrationIndex = sender.tag
-        //
-        imageIndex = demonstrationIndex
-        
+        let image = sender.image
+        // Get Image
+        // let index = demonstrationImage.indexWhere
+        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
         // Expanded Image
         //
         expandedImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height/2)
@@ -1551,18 +1692,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         expandedImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         expandedImage.contentMode = .scaleAspectFit
         expandedImage.isUserInteractionEnabled = true
-        //
-        // Animation
-        expandedImage.image = demonstrationDictionary[demonstrationIndex]?[0]
-        expandedImage.animationImages = demonstrationDictionary[demonstrationIndex]
-        expandedImage.animationDuration = animationDurationDictionary[demonstrationIndex]!
-        expandedImage.animationRepeatCount = 1
-        // Play
-        let imagePress = UITapGestureRecognizer(target: self, action: #selector(imageSequenceAnimation))
-        expandedImage.addGestureRecognizer(imagePress)
-        //
-        
-        
+        expandedImage.image = image
         // Background View
         //
         backgroundViewImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height)
@@ -1596,14 +1726,6 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         })
     }
     
-    //
-    // Play Image Sequence
-    @IBAction func imageSequenceAnimation() {
-        //
-        if demonstrationDictionary[imageIndex]?.count != 1 {
-            expandedImage.startAnimating()
-        }
-    }
     
     
     //
@@ -1615,7 +1737,9 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
         // Return background to homescreen
         let delayInSeconds = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            
             _ = self.navigationController?.popToRootViewController(animated: false)
+            
         }
     }
     
@@ -1635,7 +1759,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
             let destinationVC = segue.destination as! YogaScreen
             
             // Compress Arrays
-            for i in customKeyArray[sessionPickerView.selectedRow(inComponent: 0)] {
+            for i in customKeyArray[selectedPreset] {
                 //
                 yogaArray.append(yogaPosesDictionary[i]!)
                 //
@@ -1646,7 +1770,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
                 animationDurationArray.append(animationDurationDictionary[i]!)
             }
             //
-            for i in customBreathsArray[sessionPickerView.selectedRow(inComponent: 0)] {
+            for i in customBreathsArray[selectedPreset] {
                 breathsArray.append(String(breathsPickerArray[i]))
             }
             
@@ -1665,283 +1789,283 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     //
     // Walkthrough ------------------------------------------------------------------------------------------------
+    ////
+    //    var  viewNumber = 0
+    //    let walkthroughView = UIView()
+    //    let label = UILabel()
+    //    let nextButton = UIButton()
+    //    let backButton = UIButton()
     //
-    var  viewNumber = 0
-    let walkthroughView = UIView()
-    let label = UILabel()
-    let nextButton = UIButton()
-    let backButton = UIButton()
-    
-    // Walkthrough
-    func walkthroughMindBody() {
-        
-        //
-        let screenSize = UIScreen.main.bounds
-        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-        //
-        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
-        walkthroughView.backgroundColor = .black
-        walkthroughView.alpha = 0.72
-        walkthroughView.clipsToBounds = true
-        //
-        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
-        label.center = view.center
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
-        label.textColor = .white
-        //
-        nextButton.frame = screenSize
-        nextButton.backgroundColor = .clear
-        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
-        //
-        backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
-        backButton.setTitle("Back", for: .normal)
-        backButton.titleLabel?.textAlignment = .left
-        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        backButton.titleLabel?.textColor = .white
-        backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
-        
-        
-        
-        
-        switch viewNumber {
-        case 0:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight, width: self.view.frame.size.width, height: sessionPickerView.frame.size.height))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            
-            label.text = NSLocalizedString("choiceScreen21", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            
-            
-            
-        //
-        case 1:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + sessionPickerView.frame.size.height, width: self.view.frame.size.width, height: customTableView.frame.size.height))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            label.center = sessionPickerView.center
-            label.center.y = (UIApplication.shared.statusBarFrame.height/2) + sessionPickerView.frame.size.height
-            label.text = NSLocalizedString("choiceScreen22", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-        //
-        case 2:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y:   UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + sessionPickerView.frame.size.height + 24.5, width: 72 + 5, height: 72))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            label.center = sessionPickerView.center
-            label.center.y = (UIApplication.shared.statusBarFrame.height/2) + sessionPickerView.frame.size.height
-            label.text = NSLocalizedString("choiceScreen23", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-            
-            
-        //
-        case 3:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addEllipse(in: CGRect(x: self.view.frame.size.width - 98, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + sessionPickerView.frame.size.height, width: 98, height: 49))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            label.text = NSLocalizedString("choiceScreen24", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-        //
-        case 4:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + sessionPickerView.frame.size.height + customTableView.frame.size.height, width: self.view.frame.size.height, height: 49))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            
-            label.text = NSLocalizedString("choiceScreen25", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            // Picker
-            self.sessionPickerView.selectRow(0, inComponent: 0, animated: true)
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-            
-        //
-        case 5:
-            //
-            
-            
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            
-            label.text = NSLocalizedString("choiceScreen26", comment: "")
-            walkthroughView.addSubview(label)
-            
-            
-            
-            
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            
-            
-        //
-        default: break
-            
-            
-        }
-        
-        
-    }
-    
-    
-    
-    func nextWalkthroughView(_ sender: Any) {
-        walkthroughView.removeFromSuperview()
-        viewNumber = viewNumber + 1
-        walkthroughMindBody()
-    }
-    
-    
-    func backWalkthroughView(_ sender: Any) {
-        if viewNumber > 0 {
-            backButton.removeFromSuperview()
-            walkthroughView.removeFromSuperview()
-            viewNumber = viewNumber - 1
-            walkthroughMindBody()
-        }
-        
-    }
+    //    // Walkthrough
+    //    func walkthroughMindBody() {
+    //
+    //        //
+    //        let screenSize = UIScreen.main.bounds
+    //        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+    //        //
+    //        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
+    //        walkthroughView.backgroundColor = .black
+    //        walkthroughView.alpha = 0.72
+    //        walkthroughView.clipsToBounds = true
+    //        //
+    //        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
+    //        label.center = view.center
+    //        label.textAlignment = .center
+    //        label.numberOfLines = 0
+    //        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+    //        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
+    //        label.textColor = .white
+    //        //
+    //        nextButton.frame = screenSize
+    //        nextButton.backgroundColor = .clear
+    //        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
+    //        //
+    //        backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
+    //        backButton.setTitle("Back", for: .normal)
+    //        backButton.titleLabel?.textAlignment = .left
+    //        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+    //        backButton.titleLabel?.textColor = .white
+    //        backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
+    //
+    //
+    //
+    //
+    //        switch viewNumber {
+    //        case 0:
+    //            //
+    //
+    //
+    //            // Clear Section
+    //            let path = CGMutablePath()
+    //            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight, width: self.view.frame.size.width, height: sessionPickerView.frame.size.height))
+    //            path.addRect(screenSize)
+    //            //
+    //            let maskLayer = CAShapeLayer()
+    //            maskLayer.backgroundColor = UIColor.black.cgColor
+    //            maskLayer.path = path
+    //            maskLayer.fillRule = kCAFillRuleEvenOdd
+    //            //
+    //            walkthroughView.layer.mask = maskLayer
+    //            walkthroughView.clipsToBounds = true
+    //            //
+    //
+    //
+    //            label.text = NSLocalizedString("choiceScreen21", comment: "")
+    //            walkthroughView.addSubview(label)
+    //
+    //
+    //
+    //            walkthroughView.addSubview(nextButton)
+    //            self.view.addSubview(walkthroughView)
+    //            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+    //            walkthroughView.bringSubview(toFront: nextButton)
+    //
+    //
+    //
+    //        //
+    //        case 1:
+    //            //
+    //
+    //
+    //            // Clear Section
+    //            let path = CGMutablePath()
+    //            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + sessionPickerView.frame.size.height, width: self.view.frame.size.width, height: customTableView.frame.size.height))
+    //            path.addRect(screenSize)
+    //            //
+    //            let maskLayer = CAShapeLayer()
+    //            maskLayer.backgroundColor = UIColor.black.cgColor
+    //            maskLayer.path = path
+    //            maskLayer.fillRule = kCAFillRuleEvenOdd
+    //            //
+    //            walkthroughView.layer.mask = maskLayer
+    //            walkthroughView.clipsToBounds = true
+    //            //
+    //
+    //            label.center = sessionPickerView.center
+    //            label.center.y = (UIApplication.shared.statusBarFrame.height/2) + sessionPickerView.frame.size.height
+    //            label.text = NSLocalizedString("choiceScreen22", comment: "")
+    //            walkthroughView.addSubview(label)
+    //
+    //
+    //
+    //
+    //            walkthroughView.addSubview(backButton)
+    //            walkthroughView.addSubview(nextButton)
+    //            self.view.addSubview(walkthroughView)
+    //            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+    //            walkthroughView.bringSubview(toFront: nextButton)
+    //            walkthroughView.bringSubview(toFront: backButton)
+    //
+    //
+    //        //
+    //        case 2:
+    //            //
+    //
+    //
+    //            // Clear Section
+    //            let path = CGMutablePath()
+    //            path.addRect(CGRect(x: 0, y:   UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + sessionPickerView.frame.size.height + 24.5, width: 72 + 5, height: 72))
+    //            path.addRect(screenSize)
+    //            //
+    //            let maskLayer = CAShapeLayer()
+    //            maskLayer.backgroundColor = UIColor.black.cgColor
+    //            maskLayer.path = path
+    //            maskLayer.fillRule = kCAFillRuleEvenOdd
+    //            //
+    //            walkthroughView.layer.mask = maskLayer
+    //            walkthroughView.clipsToBounds = true
+    //            //
+    //
+    //            label.center = sessionPickerView.center
+    //            label.center.y = (UIApplication.shared.statusBarFrame.height/2) + sessionPickerView.frame.size.height
+    //            label.text = NSLocalizedString("choiceScreen23", comment: "")
+    //            walkthroughView.addSubview(label)
+    //
+    //
+    //
+    //
+    //            walkthroughView.addSubview(backButton)
+    //            walkthroughView.addSubview(nextButton)
+    //            self.view.addSubview(walkthroughView)
+    //            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+    //            walkthroughView.bringSubview(toFront: nextButton)
+    //            walkthroughView.bringSubview(toFront: backButton)
+    //
+    //
+    //
+    //
+    //        //
+    //        case 3:
+    //            //
+    //
+    //
+    //            // Clear Section
+    //            let path = CGMutablePath()
+    //            path.addEllipse(in: CGRect(x: self.view.frame.size.width - 98, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + sessionPickerView.frame.size.height, width: 98, height: 49))
+    //            path.addRect(screenSize)
+    //            //
+    //            let maskLayer = CAShapeLayer()
+    //            maskLayer.backgroundColor = UIColor.black.cgColor
+    //            maskLayer.path = path
+    //            maskLayer.fillRule = kCAFillRuleEvenOdd
+    //            //
+    //            walkthroughView.layer.mask = maskLayer
+    //            walkthroughView.clipsToBounds = true
+    //            //
+    //            label.text = NSLocalizedString("choiceScreen24", comment: "")
+    //            walkthroughView.addSubview(label)
+    //
+    //
+    //
+    //            walkthroughView.addSubview(backButton)
+    //            walkthroughView.addSubview(nextButton)
+    //            self.view.addSubview(walkthroughView)
+    //            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+    //            walkthroughView.bringSubview(toFront: nextButton)
+    //            walkthroughView.bringSubview(toFront: backButton)
+    //
+    //
+    //        //
+    //        case 4:
+    //            //
+    //
+    //
+    //            // Clear Section
+    //            let path = CGMutablePath()
+    //            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 49 + sessionPickerView.frame.size.height + customTableView.frame.size.height, width: self.view.frame.size.height, height: 49))
+    //            path.addRect(screenSize)
+    //            //
+    //            let maskLayer = CAShapeLayer()
+    //            maskLayer.backgroundColor = UIColor.black.cgColor
+    //            maskLayer.path = path
+    //            maskLayer.fillRule = kCAFillRuleEvenOdd
+    //            //
+    //            walkthroughView.layer.mask = maskLayer
+    //            walkthroughView.clipsToBounds = true
+    //            //
+    //
+    //
+    //            label.text = NSLocalizedString("choiceScreen25", comment: "")
+    //            walkthroughView.addSubview(label)
+    //
+    //
+    //
+    //            // Picker
+    //            self.sessionPickerView.selectRow(0, inComponent: 0, animated: true)
+    //
+    //
+    //
+    //            walkthroughView.addSubview(backButton)
+    //            walkthroughView.addSubview(nextButton)
+    //            self.view.addSubview(walkthroughView)
+    //            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+    //            walkthroughView.bringSubview(toFront: nextButton)
+    //            walkthroughView.bringSubview(toFront: backButton)
+    //
+    //
+    //
+    //        //
+    //        case 5:
+    //            //
+    //
+    //
+    //            // Clear Section
+    //            let path = CGMutablePath()
+    //            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
+    //            path.addRect(screenSize)
+    //            //
+    //            let maskLayer = CAShapeLayer()
+    //            maskLayer.backgroundColor = UIColor.black.cgColor
+    //            maskLayer.path = path
+    //            maskLayer.fillRule = kCAFillRuleEvenOdd
+    //            //
+    //            walkthroughView.layer.mask = maskLayer
+    //            walkthroughView.clipsToBounds = true
+    //            //
+    //
+    //
+    //            label.text = NSLocalizedString("choiceScreen26", comment: "")
+    //            walkthroughView.addSubview(label)
+    //
+    //
+    //
+    //
+    //            walkthroughView.addSubview(backButton)
+    //            walkthroughView.addSubview(nextButton)
+    //            self.view.addSubview(walkthroughView)
+    //            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
+    //            walkthroughView.bringSubview(toFront: nextButton)
+    //            walkthroughView.bringSubview(toFront: backButton)
+    //
+    //
+    //
+    //        //
+    //        default: break
+    //
+    //
+    //        }
+    //
+    //
+    //    }
+    //
+    //
+    //
+    //    func nextWalkthroughView(_ sender: Any) {
+    //        walkthroughView.removeFromSuperview()
+    //        viewNumber = viewNumber + 1
+    //        walkthroughMindBody()
+    //    }
+    //
+    //
+    //    func backWalkthroughView(_ sender: Any) {
+    //        if viewNumber > 0 {
+    //            backButton.removeFromSuperview()
+    //            walkthroughView.removeFromSuperview()
+    //            viewNumber = viewNumber - 1
+    //            walkthroughMindBody()
+    //        }
+    //
+    //    }
     
     
     //

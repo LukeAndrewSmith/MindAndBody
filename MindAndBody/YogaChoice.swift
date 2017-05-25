@@ -59,7 +59,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         practices.setTitle(NSLocalizedString("practices", comment: ""), for: UIControlState.normal)
         practices.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         practices.setTitleColor(colour2, for: .normal)
-        practices.layer.borderWidth = 8
+        practices.layer.borderWidth = 6
         practices.layer.borderColor = colour2.cgColor
         practices.titleLabel?.adjustsFontSizeToFitWidth = true
         practices.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -68,7 +68,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         custom.setTitle("C", for: UIControlState.normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.setTitleColor(colour2, for: .normal)
-        custom.layer.borderWidth = 8
+        custom.layer.borderWidth = 6
         custom.layer.borderColor = colour2.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)

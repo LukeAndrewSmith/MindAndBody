@@ -70,7 +70,7 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         guided.setTitle(NSLocalizedString("guided", comment: ""), for: UIControlState.normal)
         guided.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         guided.setTitleColor(colour2, for: .normal)
-        guided.layer.borderWidth = 8
+        guided.layer.borderWidth = 6
         guided.layer.borderColor = colour2.cgColor
         guided.titleLabel?.adjustsFontSizeToFitWidth = true
         guided.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -79,7 +79,7 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         meditationTimer.setTitle(NSLocalizedString("meditationTimer", comment: ""), for: UIControlState.normal)
         meditationTimer.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         meditationTimer.setTitleColor(colour2, for: .normal)
-        meditationTimer.layer.borderWidth = 8
+        meditationTimer.layer.borderWidth = 6
         meditationTimer.layer.borderColor = colour2.cgColor
         meditationTimer.titleLabel?.adjustsFontSizeToFitWidth = true
         meditationTimer.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -88,7 +88,7 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         breathing.setTitle(NSLocalizedString("breathing", comment: ""), for: UIControlState.normal)
         breathing.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         breathing.setTitleColor(colour2, for: .normal)
-        breathing.layer.borderWidth = 8
+        breathing.layer.borderWidth = 6
         breathing.layer.borderColor = colour2.cgColor
         breathing.titleLabel?.adjustsFontSizeToFitWidth = true
         breathing.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)

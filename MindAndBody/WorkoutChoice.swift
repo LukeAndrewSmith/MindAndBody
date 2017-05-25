@@ -22,6 +22,10 @@ class WorkoutChoice: UIViewController  {
     @IBOutlet weak var gym: UIButton!
     // Home
     @IBOutlet weak var home: UIButton!
+    
+    //
+    @IBOutlet weak var custom: UIButton!
+    
 
     // Information View
     let informationView = UIScrollView()
@@ -75,16 +79,31 @@ class WorkoutChoice: UIViewController  {
         gym.setTitle(NSLocalizedString("gym", comment: ""), for: UIControlState.normal)
         gym.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         gym.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        gym.layer.borderWidth = 8
+        gym.layer.borderWidth = 6
         gym.layer.borderColor = colour2.cgColor
         gym.setTitleColor(colour2, for: .normal)
         //
         home.setTitle(NSLocalizedString("bodyweight", comment: ""), for: UIControlState.normal)
         home.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         home.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        home.layer.borderWidth = 8
+        home.layer.borderWidth = 6
         home.layer.borderColor = colour2.cgColor
         home.setTitleColor(colour2, for: .normal)
+        
+        //
+        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        custom.layer.borderWidth = 7
+        custom.layer.borderColor = colour2.cgColor
+        custom.titleLabel?.adjustsFontSizeToFitWidth = true
+        custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
+        custom.titleLabel?.textAlignment = .center
+        custom.setTitleColor(colour2, for: .normal)
+        custom.layer.cornerRadius = 49/2
+        custom.layer.masksToBounds = true
+        custom.titleLabel?.adjustsFontSizeToFitWidth = true
+        custom.titleLabel?.numberOfLines = 0
+        custom.titleLabel?.textAlignment = .center
+
      
         // Information
         //

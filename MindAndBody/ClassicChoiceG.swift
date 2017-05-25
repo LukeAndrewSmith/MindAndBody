@@ -81,7 +81,7 @@ class ClassicChoiceG: UIViewController  {
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         fullBody.setTitleColor(colour2, for: .normal)
-        fullBody.layer.borderWidth = 8
+        fullBody.layer.borderWidth = 6
         fullBody.layer.borderColor = colour2.cgColor
         fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
         fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -98,7 +98,7 @@ class ClassicChoiceG: UIViewController  {
         upperBody.setTitle(NSLocalizedString("upper", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         upperBody.setTitleColor(colour2, for: .normal)
-        upperBody.layer.borderWidth = 8
+        upperBody.layer.borderWidth = 6
         upperBody.layer.borderColor = colour2.cgColor
         upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
         upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -107,7 +107,7 @@ class ClassicChoiceG: UIViewController  {
         lowerBody.setTitle(NSLocalizedString("lower", comment: ""), for: UIControlState.normal)
         lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         lowerBody.setTitleColor(colour2, for: .normal)
-        lowerBody.layer.borderWidth = 8
+        lowerBody.layer.borderWidth = 6
         lowerBody.layer.borderColor = colour2.cgColor
         lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
         lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -116,7 +116,7 @@ class ClassicChoiceG: UIViewController  {
         legs.setTitle(NSLocalizedString("legs", comment: ""), for: UIControlState.normal)
         legs.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         legs.setTitleColor(colour2, for: .normal)
-        legs.layer.borderWidth = 8
+        legs.layer.borderWidth = 6
         legs.layer.borderColor = colour2.cgColor
         legs.titleLabel?.adjustsFontSizeToFitWidth = true
         legs.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -125,7 +125,7 @@ class ClassicChoiceG: UIViewController  {
         pull.setTitle(NSLocalizedString("pull", comment: ""), for: UIControlState.normal)
         pull.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         pull.setTitleColor(colour2, for: .normal)
-        pull.layer.borderWidth = 8
+        pull.layer.borderWidth = 6
         pull.layer.borderColor = colour2.cgColor
         pull.titleLabel?.adjustsFontSizeToFitWidth = true
         pull.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -134,7 +134,7 @@ class ClassicChoiceG: UIViewController  {
         push.setTitle(NSLocalizedString("push", comment: ""), for: UIControlState.normal)
         push.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         push.setTitleColor(colour2, for: .normal)
-        push.layer.borderWidth = 8
+        push.layer.borderWidth = 6
         push.layer.borderColor = colour2.cgColor
         push.titleLabel?.adjustsFontSizeToFitWidth = true
         push.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)

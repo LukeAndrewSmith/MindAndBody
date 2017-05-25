@@ -142,6 +142,8 @@
     // Warm Up //
     //
         "selectWarmup" = "- Select Warmup -";
+        "customWarmup" = "- Custom Warmup -";
+        "customWarmups" = "Custom Warmups";
         // Warm Up //
         //
 
@@ -426,6 +428,11 @@
         "classic" = "Classic";
         "circuit" = "Circuit";
         "5x5" = "5 x 5";
+
+            // Custom
+            "customWorkout" = "- Custom Workout -";
+            "workoutInputTitle" = "Workout Title";
+            "workoutRemoveTitle" = "Remove Workout";
 
             // Information Workout
             "purposeTextWorkout" = "";
@@ -716,10 +723,10 @@
 
         "presetSessions" = "Preset Sessions";
         "stretches" = "Stretches";
+        "customStretchingSession" = "- Custom Stretching Session -";
 
-
-        "stretchingInputTitle" = "Custom Stretching Session Title";
-        "stretchingRemoveTitle" = "Remove Custom Stretching Session";
+        "stretchingInputTitle" = "Stretching Session Title";
+        "stretchingRemoveTitle" = "Remove Stretching Session";
 
 
         // Stretching Picker Array
@@ -921,8 +928,10 @@
 
 
             // Custom //
-            "yogaInputTitle" = "Yoga Session Title";
+            "yogaInputTitle" = "Yoga Practice Title";
             "yogaRemoveTitle" = "Remove Yoga Session";
+
+            "customYogaPractice" = "- Custom Yoga Practice -";
 
             "standing" = "Standing";
             "handElbow" = "Hands|Elbows & Feet|Knees";

@@ -82,19 +82,19 @@ class BodyweightChoice: UIViewController  {
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         fullBody.setTitleColor(colour2, for: .normal)
-        fullBody.layer.borderWidth = 8
+        fullBody.layer.borderWidth = 6
         fullBody.layer.borderColor = colour2.cgColor
         //
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         upperBody.setTitleColor(colour2, for: .normal)
-        upperBody.layer.borderWidth = 8
+        upperBody.layer.borderWidth = 6
         upperBody.layer.borderColor = colour2.cgColor
         //
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
         lowerBody.setTitleColor(colour2, for: .normal)
         lowerBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        lowerBody.layer.borderWidth = 8
+        lowerBody.layer.borderWidth = 6
         lowerBody.layer.borderColor = colour2.cgColor
         //
         
