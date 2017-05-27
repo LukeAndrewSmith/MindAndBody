@@ -113,7 +113,7 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.navigationController?.navigationBar.barTintColor = colour2
 
         // Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 22)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 23)!]
     
         // Navigation Title
         navigationBar.title = NSLocalizedString("schedule", comment: "")

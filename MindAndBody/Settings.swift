@@ -71,7 +71,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         self.navigationController?.navigationBar.barTintColor = colour2
         self.navigationController?.navigationBar.tintColor = colour1
         // Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 22)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 23)!]
         // Navigation Title
         navigationBar.title = NSLocalizedString("settings", comment: "")
         // View
@@ -164,7 +164,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         case 1: return NSLocalizedString("defaultImage", comment: "")
         case 2: return NSLocalizedString("units", comment: "")
         case 3: return NSLocalizedString("restTime", comment: "")
-        case 4: return NSLocalizedString("presentationStyle", comment: "")
+        case 4: return NSLocalizedString("automaticYoga", comment: "")
         case 5: return NSLocalizedString("reset", comment: "")
         default: return ""
         }
@@ -175,7 +175,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     {
         // Header
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 21)!
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)!
         header.textLabel?.textColor = .black
         header.textLabel?.text = header.textLabel?.text?.capitalized
         
@@ -270,7 +270,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "defaultImage")!, comment: "")
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             return cell
             
  
@@ -282,7 +282,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.textLabel?.text = UserDefaults.standard.string(forKey: "units")
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             return cell
 
             
@@ -301,9 +301,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             //
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             //cell.detailTextLabel?.textAlignment = NSTextAlignment
-            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
+            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)
             cell.detailTextLabel?.textColor = colour2
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             //
@@ -318,7 +318,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "presentationStyle")!, comment: "")
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             return cell
             
             
@@ -330,7 +330,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 cell.textLabel?.text = NSLocalizedString("resetWalkthrough", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
                 return cell
             }
             // Reset App
@@ -338,7 +338,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 cell.textLabel?.text = NSLocalizedString("resetApp", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
                 return cell
             }
         //
@@ -468,11 +468,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let message = NSLocalizedString("resetWalkthroughWarningMessage", comment: "")
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                 alert.view.tintColor = colour2
-                alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+                alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                 
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.alignment = .natural
-                alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+                alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 19)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
                 
                 
                 // Reset app action
@@ -522,11 +522,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let message = NSLocalizedString("resetMessage", comment: "")
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                 alert.view.tintColor = colour1
-                alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+                alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                 
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.alignment = .natural
-                alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+                alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 19)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
 
                 // Present alert
                 self.present(alert, animated: true, completion: nil)
@@ -552,11 +552,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             let message = NSLocalizedString("resetWarningMessage", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.view.tintColor = colour2
-            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
             
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .natural
-            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 19)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
            
                 
             // Reset app action
@@ -571,11 +571,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     let message = NSLocalizedString("resetMessage", comment: "")
                     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                     alert.view.tintColor = colour2
-                    alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+                    alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                     
                     let paragraphStyle = NSMutableParagraphStyle()
                     paragraphStyle.alignment = .natural
-                    alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+                    alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 19)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
                     
                     self.present(alert, animated: true, completion: nil)
                 }

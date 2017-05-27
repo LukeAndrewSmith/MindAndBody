@@ -430,9 +430,12 @@
         "5x5" = "5 x 5";
 
             // Custom
-            "customWorkout" = "- Custom Workout -";
+            "customWorkoutClassic" = "- Custom Workout (Classic) -";
+            "customWorkoutCircuit" = "- Custom Workout (Circuit) -";
             "workoutInputTitle" = "Workout Title";
             "workoutRemoveTitle" = "Remove Workout";
+            //
+            "numberOfRounds" = "Nº Rounds: ";
 
             // Information Workout
             "purposeTextWorkout" = "";
@@ -919,6 +922,9 @@
             // Various //
             "selectPractice" = "- Select Yoga Practice -";
 
+
+            // Custom
+            "automaticYoga" = "Automatic Yoga";
 
 
 
