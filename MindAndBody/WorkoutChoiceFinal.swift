@@ -1316,79 +1316,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             57: 1
     ]
     
-    // Reps Array
-    var repsDictionaryCircuit: [Int : String] =
-        [
-            // Mandatory
-            0: "5min",
-            // Joint Rotations
-            1: "10-30s",
-            2: "10-30s",
-            3: "10-30s",
-            4: "10-30s",
-            5: "10-30s",
-            6: "10-30s",
-            7: "10-30s",
-            8: "10-30s",
-            // Foam/Ball Roll
-            9: "2-7 reps",
-            10: "5-10 reps",
-            11: "2-7 reps",
-            12: "15-30s",
-            13: "15-30s",
-            14: "2-7 reps",
-            15: "2-7 reps",
-            16: "2-7 reps",
-            17: "2-7 reps",
-            18: "2-7 reps",
-            // Lower Back
-            19: "5-10 reps",
-            20: "5-10 reps",
-            21: "5-10 reps",
-            22: "5-10 reps",
-            23: "15-20 reps",
-            // Shoulder
-            24: "10-20 reps",
-            25: "5-10 reps",
-            26: "15 reps",
-            27: "10 reps",
-            // Band/Bar/Machine Assisted
-            28: "10-15 reps",
-            29: "5-15 reps",
-            30: "5-10 reps",
-            31: "5-10 reps",
-            32: "10-15 reps",
-            33: "10-20 reps",
-            // General Mobility
-            34: "10-15 reps",
-            35: "5-10 reps",
-            36: "5-10 reps",
-            37: "5-10 reps",
-            38: "10-15 reps",
-            39: "15-30s",
-            40: "15-30s",
-            41: "5-10 reps",
-            42: "10-20 reps",
-            43: "10-20 reps",
-            44: "10-20 reps",
-            // Dynamic Warm Up Drills
-            45: "5-15 reps",
-            46: "10-15 reps",
-            47: "15-30s",
-            48: "15-30s",
-            49: "15-30s",
-            50: "50m",
-            51: "50m",
-            52: "50m",
-            53: "5-20 reps",
-            // Accessory
-            54 :"15-30s",
-            55: "15-30s",
-            56: NSLocalizedString("asNecessary", comment: ""),
-            57: NSLocalizedString("asNecessary", comment: "")
-    ]
-    
-    
     //
     // Full Body --------------------------------------------------------------------------------------------------------------------------
     //
@@ -1407,7 +1334,9 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     // Preseys Arrays
     var presetsArraysCircuitFull: [[[Int]]] =
         [
+            // Sections in presets table
             [
+                //
                 [0, 11, 12],
                 [0, 23, 30]
             ],
@@ -1420,19 +1349,80 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                 [],
                 []
             ]
-    ]
+        ]
     
     //
     var numberOfRoundsArrayCircuitFull: [[Int]] =
         [
-            [2,
+            // Sections in presets table
+            [2,         // Rounds
              3],
+            //
             [4,
              3,
              5],
             [2,
              3]
-    ]
+        ]
+    
+   
+    // Reps Array
+    var repsArrayCircuitFull: [[[[String]]]] =
+        [
+            // Sections in presets table
+            [
+                // Preset
+                [
+                    // Rounds
+                    ["50 reps", "50 reps", "50 reps"],
+                    ["30 reps", "30 reps", "30 reps"]
+                ],
+                //
+                [
+                    ["50 reps", "50 reps", "50 reps"],
+                    ["30 reps", "30 reps", "30 reps"],
+                    ["20 reps", "20 reps", "20 reps"]
+                ],
+            ],
+            //
+            [
+                //
+                [
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ]
+            ],
+            [
+                //
+                [
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    []
+                ]
+            ]
+        ]
+    
     
     //
     // Upper Body --------------------------------------------------------------------------------------------------------------------------
@@ -1479,6 +1469,62 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             3]
         ]
     
+    // Reps Array
+    var repsArrayCircuitUpper: [[[[String]]]] =
+        [
+            // Sections in presets table
+            [
+                // Preset
+                [
+                    // Rounds
+                    ["50 reps", "50 reps", "50 reps"],
+                    ["30 reps", "30 reps", "30 reps"]
+                ],
+                //
+                [
+                    ["50 reps", "50 reps", "50 reps"],
+                    ["30 reps", "30 reps", "30 reps"],
+                    ["20 reps", "20 reps", "20 reps"]
+                ],
+                ],
+            //
+            [
+                //
+                [
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ]
+            ],
+            [
+                //
+                [
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    []
+                ]
+            ]
+    ]
     
     //
     // Lower Body --------------------------------------------------------------------------------------------------------------------------
@@ -1526,6 +1572,62 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         ]
     
     
+    // Reps Array
+    var repsArrayCircuitLower: [[[[String]]]] =
+        [
+            // Sections in presets table
+            [
+                // Preset
+                [
+                    // Rounds
+                    ["50 reps", "50 reps", "50 reps"],
+                    ["30 reps", "30 reps", "30 reps"]
+                ],
+                //
+                [
+                    ["50 reps", "50 reps", "50 reps"],
+                    ["30 reps", "30 reps", "30 reps"],
+                    ["20 reps", "20 reps", "20 reps"]
+                ],
+                ],
+            //
+            [
+                //
+                [
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ]
+            ],
+            [
+                //
+                [
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    []
+                ]
+            ]
+    ]
     
     
     
@@ -2251,7 +2353,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             targetAreaDictionary = targetAreaDictionaryCircuit
             explanationDictionary = explanationDictionaryCircuit
             setsDictionary = setsDictionaryCircuit
-            repsDictionary = repsDictionaryCircuit
             //
             // Set Presets
             switch workoutType2 {
@@ -2806,8 +2907,8 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func beginButton(_ sender: Any) {
         //
         switch workoutType {
-        case 0: performSegue(withIdentifier: "workoutSessionSegue1", sender: nil)
-        case 1,2: performSegue(withIdentifier: "workoutSessionSegue0", sender: nil)
+        case 0: performSegue(withIdentifier: "workoutSessionSegue0", sender: nil)
+        case 1,2: performSegue(withIdentifier: "workoutSessionSegue1", sender: nil)
         default: break
         }
         // Return background to homescreen
@@ -2824,7 +2925,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier! {
         //
-        case "workoutSessionSegue1":
+        case "workoutSessionSegue0":
             //
             let destinationVC = segue.destination as! SessionScreen
             
@@ -2856,7 +2957,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             //
             destinationVC.sessionTitle = presetsArray[selectedPreset[0]][selectedPreset[1]]
         //
-        case "workoutSessionSegue0":
+        case "workoutSessionSegue1":
             //
             let destinationVC = segue.destination as! CircuitWorkoutScreen
             
@@ -2866,10 +2967,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                 //
                 workoutArray.append(workoutMovementsDictionary[i]!)
                 //
-                setsArray.append(setsDictionary[i]!)
-                //
-                repsArray.append(repsDictionary[i]!)
-                //
+
                 demonstrationArray.append(demonstrationDictionary[i]!)
                 //
                 targetAreaArray.append(targetAreaDictionary[i]!)
@@ -2878,8 +2976,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             }
             //
             destinationVC.sessionArray = workoutArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
+            destinationVC.repsArray = repsArrayCircuitFull[selectedPreset[0]][selectedPreset[1]]
             destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray

@@ -59,11 +59,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     // Movement Array
     var sessionArray: [String] = []
     
-    // Sets Array
-    var setsArray: [Int] = []
-    
     // Reps Array
-    var repsArray: [String] = []
+    var repsArray: [[String]] = []
     
     // Demonstration Array
     var demonstrationArray: [UIImage] = []
@@ -141,6 +138,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         tableView.tableFooterView = UIView()
         
+        //
+        // Watch for enter foreground
+        NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     
     
@@ -241,7 +241,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             //
             // Set and Reps
-            cell.setsRepsLabel?.text = String(setsArray[indexPath.row]) + " x " + repsArray[indexPath.row]
+            cell.setsRepsLabel?.text = repsArray[sessionScreenRoundIndex][indexPath.row]
             cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.setsRepsLabel?.textAlignment = .right
             cell.setsRepsLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
@@ -508,14 +508,20 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     //
     var restAlert = UIAlertController()
     //
-    var restTimer = Timer()
-    //
-    func updateRestTimer() {
-        // End rest timer
+    // Timer
+    // Variables
+    var didSetEndTime = false
+    var startTime = Double()
+    var endTime = Double()
+    
+    // Update Timer
+    func updateTimer() {
+        //
         if restTime == 0 {
-            restTimer.invalidate()
+            timerCountDown.invalidate()
             self.restAlert.dismiss(animated: true)
-            
+            //
+            didSetEndTime = false
             //
             // Next Round
             self.tableView.beginUpdates()
@@ -524,11 +530,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             let indexPath0 = NSIndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
             //
-            //
-            let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-            let indexPath3 = NSIndexPath(row: self.sessionArray.count - 1, section: 0)
-            //
-            var cell = self.tableView.cellForRow(at: indexPath as IndexPath) as! WorkoutOverviewTableViewCell
+            var cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! WorkoutOverviewTableViewCell
             //
             UIView.animate(withDuration: 0.6, animations: {
                 // 1
@@ -563,11 +565,10 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 }
                 //
                 self.updateProgress()
-            //
+                //
             }, completion: { finished in
-                self.tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.automatic)
+                self.tableView.reloadData()
             })
-            
             
             //
             // Alert View
@@ -585,39 +586,54 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 }
             })
             
-            // Update rest timer
+        //
         } else {
             restTime -= 1
             restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
-            //self.restAlert.setValue(NSAttributedString(string: restMessage, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "message")
         }
     }
     
+    //
+    // Start Timer
+    //
+    func startTimer() {
+        // Dates and Times
+        startTime = Date().timeIntervalSinceReferenceDate
+        //
+        if didSetEndTime == false {
+            //
+            didSetEndTime = true
+            //
+            //
+            // Rest Timer
+            let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+            let duration = restTimes[1]
+            let endingTime = Int(startTime) + duration
+            //
+            endTime = Double(endingTime)
+        }
+        
+        // Set timer value
+        restTime = Int(endTime - startTime)
+        
+        // Check Greater than 0
+        if restTime <= 0 {
+            restTime = 0
+        }
+        
+        // Set Timer
+        // Set initial time
+        restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+
+        // Begin Timer or dismiss view
+        timerCountDown = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+    }
+    
+    //
     // End Round func
     func endRound() {
-//        // Flash
-//        //
-//        let flash = UIView()
-//        //
-//        flash.frame = UIScreen.main.bounds
-//        flash.backgroundColor = colour3
-//        flash.alpha = 0.9
-//        UIApplication.shared.keyWindow?.insertSubview(flash, aboveSubview: view)
-//        //
-//        UIView.animate(withDuration: 0.3, animations: {
-//            flash.alpha = 0
-//        }, completion: {(finished: Bool) -> Void in
-//            flash.removeFromSuperview()
-//        })
-//        
-//        //
-//        UIView.animate(withDuration: 0.7) {
-//            self.view.layoutIfNeeded()
-//        }
-        
         // Rest Alert
         //
-        // Rest Timer
         let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
         restTime = restTimes[1]
         //
@@ -626,8 +642,6 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         restAlert.title = restTitle
         restAlert.message = restMessage
         //
-        restTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateRestTimer), userInfo: nil, repeats: true)
-        
         // Timer end Notification
         let content = UNMutableNotificationContent()
         content.title = NSLocalizedString("timerEnd", comment: "")
@@ -641,6 +655,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
         // Timer
+        startTimer()
+        
+        // Rest Alert
         restAlert = UIAlertController()
         restAlert.view.tintColor = colour2
         restAlert.setValue(NSAttributedString(string: restTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
@@ -651,21 +668,20 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             // Dismiss Alert
             self.restAlert.dismiss(animated: true)
-            self.restTimer.invalidate()
+            timerCountDown.invalidate()
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
             
             //
             // Next Round
             self.tableView.beginUpdates()
             self.tableView.endUpdates()
             //
+            self.selectedRow = 0
+            //
             let indexPath0 = NSIndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
             //
-            //
-            let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-            let indexPath3 = NSIndexPath(row: self.sessionArray.count - 1, section: 0)
-            //
-            var cell = self.tableView.cellForRow(at: indexPath as IndexPath) as! WorkoutOverviewTableViewCell
+            let cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! WorkoutOverviewTableViewCell
             //
             UIView.animate(withDuration: 0.6, animations: {
                 // 1
@@ -702,12 +718,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 self.updateProgress()
             //
             }, completion: { finished in
-                self.tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.automatic)
+                self.tableView.reloadData()
+                self.tableView.reloadData()
             })
-            
-            
-            
-            
             
             //
             // Next Round Alert

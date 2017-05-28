@@ -139,6 +139,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Buttons
         //
         fillButtonArray()
+        //
     }
     
 

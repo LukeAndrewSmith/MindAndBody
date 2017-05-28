@@ -56,6 +56,8 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     var setsArray: [Int] = []
     //
     var repsArray: [String] = []
+    //
+    var repsArrayC: [[String]] = []
     
     
     //
@@ -652,7 +654,8 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         navigationBar.title = NSLocalizedString("custom", comment: "")
         
         // Number of Rounds
-        numberOfRounds.setTitle(NSLocalizedString("numberOfRounds", comment: "") + "2", for: .normal)
+        let roundNumber = defaults.object(forKey: "workoutRoundsCustomCircuit") as! [Int]
+        numberOfRounds.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(roundNumber[selectedPreset]), for: .normal)
         numberOfRounds.setTitleColor(colour2, for: .normal)
         //numberOfRounds.backgroundColor = .white
         //numberOfRounds.layer.cornerRadius = 5
@@ -1531,7 +1534,9 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                     //
                     defaults.synchronize()
                     
-                    
+                    let roundNumber = defaults.object(forKey: "workoutRoundsCustomCircuit") as! [Int]
+                    self.numberOfRounds.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(roundNumber[self.selectedPreset]), for: .normal)
+                    //
                     //
                     self.presetsTableView.isHidden = false
                     snapShot1?.removeFromSuperview()
@@ -1645,11 +1650,14 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                 //
                 
                 
-                //
-                // Select Custom Workout
+            //
+            // Select Custom Workout
             } else {
                 //
                 selectedPreset = indexPath.row
+                //
+                let roundNumber = defaults.object(forKey: "workoutRoundsCustomCircuit") as! [Int]
+                numberOfRounds.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(roundNumber[selectedPreset]), for: .normal)
                 //
                 switch self.selectedType {
                 case 0:
@@ -2081,6 +2089,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                 var customRepsArray: [[Int]] = []
                 //
                 var customRepsArrayC: [[[Int]]] = []
+                var roundNumber: [Int] = []
                 //
                 switch selectedType {
                 case 0:
@@ -2094,6 +2103,9 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                     customKeyArray = defaults.object(forKey: "workoutPresetsCustomCircuit") as! [[Int]]
                     //
                     customRepsArrayC = defaults.object(forKey: "workoutRepsCustomCircuit") as! [[[Int]]]
+                    //
+                    roundNumber = UserDefaults.standard.object(forKey: "workoutRoundsCustomCircuit") as! [Int]
+
                 default: break
                 }
 
@@ -2108,6 +2120,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                     customRepsArray.remove(at: self.selectedPreset)
                 } else {
                     customRepsArrayC.remove(at: self.selectedPreset)
+                    roundNumber.remove(at: self.selectedPreset)
                 }
                 //
                 
@@ -2125,11 +2138,17 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                     defaults.set(customKeyArray, forKey: "workoutPresetsCustomCircuit")
                     //
                     defaults.set(customRepsArrayC, forKey: "workoutRepsCustomCircuit")
+                    //
+                    defaults.set(roundNumber, forKey: "workoutRoundsCustomCircuit")
                 default: break
                 }
                 //
                 defaults.synchronize()
                 
+                //
+                numberOfRounds.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(roundNumber[selectedPreset]), for: .normal)
+                
+                //
                 UIView.animate(withDuration: 0.2, animations: {
                     self.presetsTableView.reloadData()
                 })
@@ -2525,6 +2544,8 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             //
             defaults.synchronize()
             //
+            numberOfRounds.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(roundNumber[selectedPreset]), for: .normal)
+            //
             selectingNumberOfRounds = false
             //
             //
@@ -2539,7 +2560,8 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             })
             //
             customTableView.reloadData()
-            
+            //
+
         //
         } else {
         //
@@ -2694,6 +2716,8 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         var customSetsArray: [[Int]] = []
         var customRepsArray: [[Int]] = []
         //
+        var roundNumber: [Int] = []
+        //
         var customRepsArrayC: [[[Int]]] = []
         //
         switch selectedType {
@@ -2706,6 +2730,8 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
         case 1:
             titleDataArray = defaults.object(forKey: "workoutPresetTextsCustomCircuit") as! [String]
             customKeyArray = defaults.object(forKey: "workoutPresetsCustomCircuit") as! [[Int]]
+            //
+            roundNumber = defaults.object(forKey: "workoutRoundsCustomCircuit") as! [Int]
             //
             customRepsArrayC = defaults.object(forKey: "workoutRepsCustomCircuit") as! [[[Int]]]
         default: break
@@ -2732,12 +2758,8 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                 setsArray.append(setsPickerArray[i])
             }
             //
-            for i in 0...11 {
-                if i == 0 {
-                    repsPickerArray[i] = repsPickerArray[i] + " rep"
-                } else {
-                    repsPickerArray[i] = repsPickerArray[i] + " reps"
-                }
+            for i in 0...(repsPickerArray.count - 1) {
+                repsPickerArray[i] = repsPickerArray[i] + " reps"
             }
             //
             for i in customRepsArray[selectedPreset] {
@@ -2755,7 +2777,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             destinationVC.sessionType = 0
             //
         //
-        } else if (segue.identifier == "workoutSessionSegueCustom0") {
+        } else if (segue.identifier == "workoutSessionSegueCustom1") {
             //
             let destinationVC = segue.destination as! CircuitWorkoutScreen
             
@@ -2771,21 +2793,22 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                 explanationArray.append(explanationDictionary[i]!)
             }
             //
-            for i in 0...11 {
-                if i == 0 {
-                    repsPickerArray[i] = repsPickerArray[i] + " rep"
-                } else {
-                    repsPickerArray[i] = repsPickerArray[i] + " reps"
-                }
+            for i in 0...(repsPickerArrayCircuit.count - 1) {
+                repsPickerArrayCircuit[i] = repsPickerArrayCircuit[i] + " reps"
             }
             //
-            for i in customRepsArray[selectedPreset] {
-                repsArray.append(repsPickerArray[i])
+            for i in 0...(customRepsArrayC[selectedPreset].count - 1) {
+                repsArrayC.append([])
+                for j in customRepsArrayC[selectedPreset][i] {
+                    repsArrayC[i].append(repsPickerArrayCircuit[j])
+                }
             }
             
             //
+            destinationVC.numberOfRounds = roundNumber[selectedPreset]
+            //
             destinationVC.sessionArray = workoutArray
-            destinationVC.repsArray = repsArray
+            destinationVC.repsArray = repsArrayC
             destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
@@ -2793,7 +2816,6 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             destinationVC.sessionType = 0
             //
         }
-        
     }
     
     

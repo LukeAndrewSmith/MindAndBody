@@ -281,7 +281,7 @@
                                             <rect key="frame" x="151.5" y="47" width="72.5" height="88"/>
                                             <subviews>
                                                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconTop" translatesAutoresizingMaskIntoConstraints="NO" id="ngN-Zn-rLm">
-                                                    <rect key="frame" x="14" y="0.0" width="44" height="44"/>
+                                                    <rect key="frame" x="14.5" y="0.0" width="44" height="44"/>
                                                     <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="AVs-Pq-B3c"/>
@@ -3147,13 +3147,13 @@
                                         <rect key="frame" x="8" y="85.5" width="172" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Aim" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMd-42-eeN">
-                                                <rect key="frame" x="0.0" y="0.0" width="132" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="28" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Calm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTm-vk-7rW">
-                                                <rect key="frame" x="140" y="0.0" width="32" height="20.5"/>
+                                                <rect key="frame" x="36" y="0.0" width="136" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="15"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -4548,6 +4548,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="u08-q7-MDY" secondAttribute="bottom" id="FNC-IN-Rxd"/>
                                                 <constraint firstItem="u08-q7-MDY" firstAttribute="top" secondItem="NeZ-gH-pu0" secondAttribute="bottom" id="JBn-76-0fe"/>
                                                 <constraint firstItem="AOR-jO-oQj" firstAttribute="centerY" secondItem="v8f-f7-OK1" secondAttribute="centerY" multiplier="30/16" id="KoB-Sw-P4a"/>
+                                                <constraint firstItem="AOR-jO-oQj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NB9-03-fUy" secondAttribute="bottom" id="R8k-y5-aPC"/>
                                                 <constraint firstItem="5tM-Fs-tkx" firstAttribute="height" secondItem="v8f-f7-OK1" secondAttribute="height" multiplier="13/16" id="Ry3-WK-evW"/>
                                                 <constraint firstItem="NeZ-gH-pu0" firstAttribute="leading" secondItem="NB9-03-fUy" secondAttribute="trailing" id="bMN-sj-7Qh"/>
                                                 <constraint firstItem="N8O-Iv-53i" firstAttribute="leading" secondItem="v8f-f7-OK1" secondAttribute="leading" id="bMO-bO-iZL"/>
@@ -4691,8 +4692,8 @@
                         <outlet property="presetsConstraint" destination="eHY-LG-d18" id="JyZ-Hc-IoP"/>
                         <outlet property="tableConstraint" destination="CHc-ao-0sk" id="od6-Um-QmS"/>
                         <outlet property="tableConstraint1" destination="w6H-1N-ivr" id="aNW-2g-zmK"/>
-                        <segue destination="bTr-Zb-a1u" kind="presentation" identifier="workoutSessionSegue1" id="k7U-gv-KN1"/>
-                        <segue destination="tIh-Sp-rUW" kind="presentation" identifier="workoutSessionSegue0" id="aER-Wi-cbZ"/>
+                        <segue destination="bTr-Zb-a1u" kind="presentation" identifier="workoutSessionSegue0" id="k7U-gv-KN1"/>
+                        <segue destination="tIh-Sp-rUW" kind="presentation" identifier="workoutSessionSegue1" id="aER-Wi-cbZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b1f-uQ-5g0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5603,12 +5604,12 @@
         <image name="Tricep" width="375" height="375"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Smu-lM-FLX"/>
         <segue reference="Ptw-Py-keQ"/>
-        <segue reference="i5t-5Y-b7o"/>
-        <segue reference="Fhn-aO-iU6"/>
-        <segue reference="gdC-aX-uWo"/>
-        <segue reference="Wu1-y8-GcO"/>
         <segue reference="KAO-wv-4Kd"/>
+        <segue reference="k7U-gv-KN1"/>
+        <segue reference="aER-Wi-cbZ"/>
+        <segue reference="Fhn-aO-iU6"/>
+        <segue reference="i5t-5Y-b7o"/>
+        <segue reference="Smu-lM-FLX"/>
     </inferredMetricsTieBreakers>
 </document>
