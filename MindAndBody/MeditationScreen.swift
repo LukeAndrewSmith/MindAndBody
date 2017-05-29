@@ -40,7 +40,7 @@ class MeditationScreen: UIViewController {
     var selectedBackgroundSoundsArray: [Int] = []
     
     
-    // VAriables
+    // Variables
     var didSetEndTime = false
     var startTime = Double()
     var endTime = Double()

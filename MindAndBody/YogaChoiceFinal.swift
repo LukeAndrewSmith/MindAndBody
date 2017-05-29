@@ -38,8 +38,6 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Pses Array
     var yogaArray: [String] = []
     
-    // Breaths Array
-    var breathsArray: [String] = []
     
     // Demonstration Array
     var demonstrationArray: [[UIImage]] = []
@@ -138,7 +136,8 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             70: "handstand",
             71: "headstand",
             72: "forearmStand"
-    ]
+        ]
+    
     
     // Explanation Dictionary
     let explanationDictionary: [Int: String] =
@@ -221,90 +220,8 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             70: "handstandE",
             71: "headstandE",
             72: "forearmStandE"
-    ]
+        ]
     
-    // Breaths Dictionary
-    let breathsDictionary: [Int: String] =
-        [
-            // Standing
-            0: "5",
-            1: "5",
-            2: "5",
-            3: "5",
-            4: "5",
-            5: "5",
-            6: "5",
-            7: "5",
-            8: "5",
-            9: "5",
-            10: "5",
-            11: "5",
-            12: "5",
-            13: "5",
-            14: "5",
-            15: "5",
-            16: "5",
-            17: "5",
-            18: "5",
-            19: "5",
-            20: "5",
-            21: "5",
-            22: "5",
-            // Hand/Elbows and Feet/Knees
-            23: "5",
-            24: "5",
-            25: "5",
-            26: "5",
-            27: "5",
-            28: "5",
-            29: "5",
-            30: "5",
-            31: "5",
-            32: "5",
-            33: "5",
-            34: "5",
-            35: "5",
-            36: "5",
-            37: "5",
-            38: "5",
-            39: "5",
-            40: "5",
-            // Seated
-            41: "5",
-            42: "5",
-            43: "5",
-            44: "5",
-            45: "5",
-            46: "5",
-            47: "5",
-            48: "5",
-            49: "5",
-            50: "5",
-            51: "5",
-            52: "5",
-            53: "5",
-            54: "5",
-            55: "5",
-            56: "5",
-            // Lying
-            57: "5",
-            58: "5",
-            59: "5",
-            60: "5",
-            61: "5",
-            62: "5",
-            63: "5",
-            64: "5",
-            65: "5",
-            66: "5",
-            67: "5",
-            68: "5",
-            // Hand Stands
-            69: "5",
-            70: "5",
-            71: "5",
-            72: "5"
-    ]
     
     // Demonstration Poses
     let demonstrationDictionary: [Int: [UIImage]] =
@@ -388,7 +305,8 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             70: [#imageLiteral(resourceName: "Test 2")],
             71: [#imageLiteral(resourceName: "Test 2")],
             72: [#imageLiteral(resourceName: "Test 2")]
-    ]
+        ]
+    
     
     // Demonstration Animation Duration
     let animationDurationDictionary: [Int: Double] =
@@ -571,7 +489,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         [
             // Test
             // Relaxing
-            ["lit", "lit", "44"],
+            ["lit", "lit", "test"],
             // Yoga Meditation
             ["lettingGo", "breathing"]
     ]
@@ -584,7 +502,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             [
                 [2,3,4,5,6,9,12,13,14,22,23,24,25,29,32,34,37,38,39,51,52,53,54,55,59,61,63,65,69],
                 [2,3,4,5,6,9,12,13],
-                [3,4,4]
+                [2,3,4]
             ],
         // Meditation
             [
@@ -592,6 +510,25 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
                 [66,66,66]
             ]
         ]
+    
+    // Breaths Array
+    var breathsArray: [[[Int]]] =
+        [
+            // 5 min
+            // Relaxing
+            [
+                [1,1,1,1,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5],
+                [1,1,1,1,1,1,1,1],
+                [1,1,1]
+            ],
+            // Meditation
+            [
+                [5,5,5],
+                [5,5,5]
+            ]
+    ]
+    
+    
     
     // Selected Array
     var selectedArray: [Int] = []
@@ -794,7 +731,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         case posesTableView:
             return practiceArray[selectedPreset[0]][selectedPreset[1]].count
         case presetsTableView:
-            return 2
+            return practiceTitlesArray[section].count
         default: break
         }
         return 0
@@ -1064,8 +1001,6 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 yogaArray.append(yogaPosesDictionary[i]!)
                 //
-                breathsArray.append(breathsDictionary[i]!)
-                //
                 demonstrationArray.append(demonstrationDictionary[i]!)
                 //
                 animationDurationArray.append(animationDurationDictionary[i]!)
@@ -1076,7 +1011,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             //
             destinationVC.sessionArray = yogaArray
-            destinationVC.breathsArray = breathsArray
+            destinationVC.breathsArray = breathsArray[selectedPreset[0]][selectedPreset[1]]
             destinationVC.demonstrationArray = demonstrationArray
             destinationVC.animationDurationArray = animationDurationArray
             //destinationVC.targetAreaArray = targetAreaArray

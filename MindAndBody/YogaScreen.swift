@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import UserNotifications
+import AVFoundation
 
 
 //
@@ -47,7 +48,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var sessionArray: [String] = []
     
     // Sets Array
-    var breathsArray: [String] = []
+    var breathsArray: [Int] = []
     
     // Demonstration Array
     var demonstrationArray: [[UIImage]] = []
@@ -63,8 +64,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //
     var automaticYogaArray: [Int] = []
 
-    
-    
+    // Bells Arrays
+    let bellsArray: [String] =
+        ["Tibetan Chimes", "Tibetan Singing Bowl (Low)", "Tibetan Singing Bowl (Low)(x4)", "Tibetan Singing Bowl (Low)(Singing)", "Tibetan Singing Bowl (High)", "Tibetan Singing Bowl (High)(x4)", "Tibetan Singing Bowl (High)(Singing)", "Australian Rain Stick", "Australian Rain Stick (x2)", "Australian Rain Stick (2 sticks)", "Wind Chimes", "Gambang (Wood)(Up)", "Gambang (Wood)(Down)", "Gambang (Metal)", "Indonesian Frog", "Cow Bell (Small)", "Cow Bell (Big)"]
     
     
     //
@@ -78,6 +80,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Pause/Play
     var playPause = UIButton()
     
+    //
+    var updateTimer = Timer()
+    var soundPlayer: AVAudioPlayer!
     
     //
     // View did load -----------------------------------------------------------------------------------------------------
@@ -139,11 +144,19 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Play/Pause
         playPause.backgroundColor = colour2
         playPause.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        playPause.image = #imageLiteral(resourceName: "Pause")
+        playPause.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
         playPause.tintColor = colour1
 
     }
     
+    //
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //
+        if automaticYogaArray[0] == 1 {
+            automaticYoga()
+        }
+    }
     
     //
     // TableView ---------------------------------------------------------------------------------------------------------------------
@@ -236,7 +249,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             // Set and Reps
             //
-            cell.breathsLabel?.text = breathsArray[indexPath.row] + " " + NSLocalizedString("breathsC", comment: "")
+            cell.breathsLabel?.text = String(breathsArray[indexPath.row]) + " " + NSLocalizedString("breathsC", comment: "")
             cell.breathsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.breathsLabel?.textAlignment = .right
             cell.breathsLabel?.textColor = colour1
@@ -266,17 +279,20 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.demonstrationImageView.addGestureRecognizer(imageTap)
             //
             
-            // Next Swipe
-            let nextSwipe = UISwipeGestureRecognizer()
-            nextSwipe.direction = .up
-            nextSwipe.addTarget(self, action: #selector(nextButtonAction))
-            cell.addGestureRecognizer(nextSwipe)
+            //
+            if automaticYogaArray[0] == 0 {
+                // Next Swipe
+                let nextSwipe = UISwipeGestureRecognizer()
+                nextSwipe.direction = .up
+                nextSwipe.addTarget(self, action: #selector(nextButtonAction))
+                cell.addGestureRecognizer(nextSwipe)
             
-            // Back Swipe
-            let backSwipe = UISwipeGestureRecognizer()
-            backSwipe.direction = .down
-            backSwipe.addTarget(self, action: #selector(backButtonAction))
-            cell.addGestureRecognizer(backSwipe)
+                // Back Swipe
+                let backSwipe = UISwipeGestureRecognizer()
+                backSwipe.direction = .down
+                backSwipe.addTarget(self, action: #selector(backButtonAction))
+                cell.addGestureRecognizer(backSwipe)
+            }
             
             // Explanation
             let explanationTap = UITapGestureRecognizer()
@@ -387,6 +403,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             //
+        if automaticYogaArray[0] == 0 {
+            //
             if indexPath.row == selectedRow {
 //                let cell = tableView.cellForRow(at: indexPath)
 //                //
@@ -419,11 +437,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         cell.explanationButton.alpha = 1
                         cell.explanationButton.isEnabled = true
                         cell.demonstrationImageView.isUserInteractionEnabled = true
-                        // -1
-                        cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! YogaOverviewTableViewCell
-                        cell.breathsLabel.alpha = 0
-                        cell.poseLabel.alpha = 0
-                        cell.demonstrationImageView.isUserInteractionEnabled = false
                         //
                         self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
                     })
@@ -434,6 +447,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             //
             }
+            
+        }
         //
         case 1:
             //
@@ -512,10 +527,18 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Next Button
     @IBAction func nextButtonAction() {
         //
+        //
         if selectedRow < sessionArray.count - 1 {
             //
+            if automaticYogaArray[0] == 1 {
+                automaticYoga()
+            }
+            //
             selectedRow = selectedRow + 1
-            updateProgress()
+            //
+            if automaticYogaArray[0] == 0 {
+                updateProgress()
+            }
             //
             //
             let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
@@ -534,11 +557,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 cell.explanationButton.alpha = 1
                 cell.explanationButton.isEnabled = true
                 cell.demonstrationImageView.isUserInteractionEnabled = true
-                // -1
-                cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! YogaOverviewTableViewCell
-                cell.breathsLabel.alpha = 0
-                cell.poseLabel.alpha = 0
-                cell.demonstrationImageView.isUserInteractionEnabled = false
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
             })
@@ -546,6 +564,11 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 if selectedRow < sessionArray.count - 1 {
                     tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
                 }
+        } else {
+            //
+            if automaticYogaArray[0] == 1 {
+                self.dismiss(animated: true)
+            }
         }
     }
     
@@ -693,4 +716,169 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     //
+    
+    
+    //
+    // Automatic Yoga Functions ---------------------------------------------------------
+    //
+    func automaticYoga() {
+        // App needs to stay on even when nothing is being touched (users watch the screen and follow the yoga poses)
+        UIApplication.shared.isIdleTimerDisabled = true
+        
+        if selectedRow == 0 {
+            // Play Initial Bell
+            let url = Bundle.main.url(forResource: bellsArray[automaticYogaArray[3]], withExtension: "caf")!
+            //
+            do {
+                let bell = try AVAudioPlayer(contentsOf: url)
+                soundPlayer = bell
+                bell.play()
+            } catch {
+                // couldn't load file :(
+            }
+            
+            // Update Progress
+            timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateProgressAutomatic), userInfo: nil, repeats: true)
+        }
+        
+        //
+        let poseTime = Double(transitionArray[automaticYogaArray[2]]) + (timeArray[automaticYogaArray[1]] * Double(breathsArray[selectedRow]))
+        // Play sound and repeat func
+        let dispatchTime = DispatchTime.now() + poseTime
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+            //
+            let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
+            //
+            do {
+                let bell = try AVAudioPlayer(contentsOf: url)
+                self.soundPlayer = bell
+                bell.play()
+            } catch {
+                // couldn't load file :(
+            }
+            //
+            self.nextButtonAction()
+        }
+    }
+    
+    
+    
+    //
+    // Start Timer
+        // VAriables
+        var timerValue = Int()
+        var didSetEndTime = false
+        var startTime = Double()
+        var endTime = Double()
+    //
+    func startTimer() {
+        // Dates and Times
+        startTime = Date().timeIntervalSinceReferenceDate
+        //
+        if didSetEndTime == false {
+            //
+            didSetEndTime = true
+            //
+            var duration = Double(0)
+            
+            //
+            duration = duration + (Double(sessionArray.count) * transitionArray[automaticYogaArray[2]])
+            
+            //
+            for i in 0...(sessionArray.count - 1) {
+                duration = duration + (breathsArray[i] * )
+            }
+            
+            let endingTime = Int(startTime) + duration
+            //
+            endTime = Double(endingTime)
+            
+            // Starting Bell
+            //
+            if startingBellsArray[selectedPreset] != -1 {
+                
+                let content = UNMutableNotificationContent()
+                content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+                let soundName = bellsArray[startingBellsArray[selectedPreset]] + ".caf"
+                content.sound = UNNotificationSound(named: soundName)
+                
+                //
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
+                let name = "start"
+                let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
+                
+                //
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            }
+        }
+        
+        // Set timer value
+        timerValue = Int(endTime - startTime)
+        
+        // Check Greater than 0
+        if timerValue <= 0 {
+            timerValue = 0
+        }
+        
+        // Set Timer
+        // Set initial time
+        if isHours == true {
+            timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
+        } else {
+            timerLabel.text = timeFormatted(totalSeconds: timerValue)
+        }
+        
+        // Begin Timer or dismiss view
+        timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+    }
+    
+    //
+    func updateProgressAutomatic() {
+        //
+        
+        //
+        if timerValue == 0 {
+            timerCountDown.invalidate()
+            //
+            self.dismiss(animated: true)
+            
+            // Ending Bell
+            //
+            if endingBellsArray[selectedPreset] != -1 {
+                
+                let content = UNMutableNotificationContent()
+                content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+                let soundName = bellsArray[endingBellsArray[selectedPreset]] + ".caf"
+                content.sound = UNNotificationSound(named: soundName)
+                
+                //
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
+                let name = "end"
+                let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
+                
+                //
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            }
+            //
+        } else if timerValue == 1 {
+            timerValue -= 1
+            if isHours == true {
+                timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
+            } else {
+                timerLabel.text = timeFormatted(totalSeconds: timerValue)
+            }
+            //
+        } else {
+            timerValue -= 1
+            if isHours == true {
+                timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
+            } else {
+                timerLabel.text = timeFormatted(totalSeconds: timerValue)
+            }
+        }
+    }
+    
+    
+    
+//
 }

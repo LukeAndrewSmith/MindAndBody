@@ -296,7 +296,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 if automaticYogaArray[3] == -1 {
                     cell.textLabel?.text = "-"
                 } else {
-                    cell.textLabel?.text = NSLocalizedString(bellsArray[selectedTransitionIndicator], comment: "")
+                    cell.textLabel?.text = NSLocalizedString(bellsArray[automaticYogaArray[3]], comment: "")
                 }
             default: break
             }
