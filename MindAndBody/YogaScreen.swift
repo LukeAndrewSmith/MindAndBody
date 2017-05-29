@@ -530,13 +530,11 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         if selectedRow < sessionArray.count - 1 {
             //
-            if automaticYogaArray[0] == 1 {
-                automaticYoga()
-            }
-            //
             selectedRow = selectedRow + 1
             //
-            if automaticYogaArray[0] == 0 {
+            if automaticYogaArray[0] == 1 {
+                automaticYoga()
+            } else if automaticYogaArray[0] == 0 {
                 updateProgress()
             }
             //
@@ -567,6 +565,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } else {
             //
             if automaticYogaArray[0] == 1 {
+                timerCountDown.invalidate()
                 self.dismiss(animated: true)
             }
         }
@@ -726,6 +725,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         UIApplication.shared.isIdleTimerDisabled = true
         
         if selectedRow == 0 {
+            if automaticYogaArray[3] != -1 {
             // Play Initial Bell
             let url = Bundle.main.url(forResource: bellsArray[automaticYogaArray[3]], withExtension: "caf")!
             //
@@ -736,9 +736,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             } catch {
                 // couldn't load file :(
             }
-            
-            // Update Progress
-            timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateProgressAutomatic), userInfo: nil, repeats: true)
+            }
+            //
+            startTimer()
         }
         
         //
@@ -747,6 +747,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let dispatchTime = DispatchTime.now() + poseTime
         DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
             //
+            if self.automaticYogaArray[3] != -1 {
             let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
             //
             do {
@@ -755,6 +756,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 bell.play()
             } catch {
                 // couldn't load file :(
+            }
             }
             //
             self.nextButtonAction()
@@ -766,54 +768,22 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //
     // Start Timer
         // VAriables
-        var timerValue = Int()
-        var didSetEndTime = false
-        var startTime = Double()
-        var endTime = Double()
+        var timerValue = Double()
+        var practiceLength = Double()
     //
     func startTimer() {
-        // Dates and Times
-        startTime = Date().timeIntervalSinceReferenceDate
         //
-        if didSetEndTime == false {
-            //
-            didSetEndTime = true
-            //
-            var duration = Double(0)
-            
-            //
-            duration = duration + (Double(sessionArray.count) * transitionArray[automaticYogaArray[2]])
-            
-            //
-            for i in 0...(sessionArray.count - 1) {
-                duration = duration + (breathsArray[i] * )
-            }
-            
-            let endingTime = Int(startTime) + duration
-            //
-            endTime = Double(endingTime)
-            
-            // Starting Bell
-            //
-            if startingBellsArray[selectedPreset] != -1 {
-                
-                let content = UNMutableNotificationContent()
-                content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
-                let soundName = bellsArray[startingBellsArray[selectedPreset]] + ".caf"
-                content.sound = UNNotificationSound(named: soundName)
-                
-                //
-                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
-                let name = "start"
-                let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
-                
-                //
-                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-            }
+        var duration = Double(0)
+        //
+        duration = (Double(sessionArray.count) * Double(transitionArray[automaticYogaArray[2]]))
+        //
+        for i in 0...(sessionArray.count - 1) {
+            duration = duration + (Double(breathsArray[i]) * timeArray[automaticYogaArray[1]])
         }
         
         // Set timer value
-        timerValue = Int(endTime - startTime)
+        timerValue = duration
+        practiceLength = duration
         
         // Check Greater than 0
         if timerValue <= 0 {
@@ -821,64 +791,33 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
         // Set Timer
-        // Set initial time
-        if isHours == true {
-            timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
-        } else {
-            timerLabel.text = timeFormatted(totalSeconds: timerValue)
-        }
-        
         // Begin Timer or dismiss view
-        timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+        let timeInterval = timeArray[automaticYogaArray[1]]
+        timerCountDown = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateProgressAutomatic), userInfo: nil, repeats: true)
     }
     
     //
     func updateProgressAutomatic() {
         //
-        
         //
         if timerValue == 0 {
             timerCountDown.invalidate()
             //
-            self.dismiss(animated: true)
-            
-            // Ending Bell
-            //
-            if endingBellsArray[selectedPreset] != -1 {
-                
-                let content = UNMutableNotificationContent()
-                content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
-                let soundName = bellsArray[endingBellsArray[selectedPreset]] + ".caf"
-                content.sound = UNNotificationSound(named: soundName)
-                
-                //
-                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
-                let name = "end"
-                let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
-                
-                //
-                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-            }
-            //
-        } else if timerValue == 1 {
-            timerValue -= 1
-            if isHours == true {
-                timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
-            } else {
-                timerLabel.text = timeFormatted(totalSeconds: timerValue)
-            }
-            //
         } else {
-            timerValue -= 1
-            if isHours == true {
-                timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
-            } else {
-                timerLabel.text = timeFormatted(totalSeconds: timerValue)
-            }
+            timerValue -= 0.001
         }
+        
+        //
+        // Set Progress
+        //
+        // Progress
+        let elapsedTime = Float(practiceLength - timerValue)
+        let practiceLength2 = Float(practiceLength)
+        let progress = elapsedTime / practiceLength2
+
+        //
+        progressBar.setProgress(progress, animated: true)
+        //
     }
-    
-    
-    
 //
 }

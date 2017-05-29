@@ -249,7 +249,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         navigationBar.title = NSLocalizedString("meditationTimer", comment: "")
         // Appearance
         self.navigationController?.navigationBar.tintColor = colour1
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-heavy", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 23)!]
         self.navigationController?.navigationBar.barTintColor = colour2
         
         // BackgroundBlur/Vibrancy
