@@ -308,7 +308,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 v.removeFromSuperview()
             }
     
-            
             //
             // Cell
             cell.backgroundColor = colour2

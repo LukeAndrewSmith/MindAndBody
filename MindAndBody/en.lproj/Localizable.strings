@@ -1387,7 +1387,6 @@
         //
         // Titles //
         "reset" = "Reset";
-        "presentationStyle" = "Presentation Style";
         "defaultImage" = "Default Image";
         "colour" = "Colour";
         "restTime" = "Rest Times";
@@ -1418,8 +1417,12 @@
         // Background Image //
         "homeScreenImage" = "Home Screen Image";
 
-
-
+        // Automatic Yoga //
+        "automaticYoga" = "Automatic Yoga";
+            "off/on" = "Off/On";
+            "averageBreathLength" = "Average Breath Length";
+            "transitionTime" = "Transition Time";
+            "transitionIndicator" = "Transition Indicator";
 
 
     //

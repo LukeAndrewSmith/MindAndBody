@@ -341,7 +341,7 @@
                                             </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXe-Y8-seR">
-                                            <rect key="frame" x="187" y="-5" width="94" height="54"/>
+                                            <rect key="frame" x="187.5" y="-5" width="94" height="54"/>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="20"/>
                                             <state key="normal" title="Body">
                                                 <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -862,6 +862,7 @@
                     <connections>
                         <outlet property="navigationBar" destination="cRC-HA-CGb" id="Rtg-7c-tk8"/>
                         <segue destination="U5d-IN-X7D" kind="show" identifier="BackgroundImageSegue" id="6nD-zj-fFF"/>
+                        <segue destination="8IA-AP-QDR" kind="show" identifier="YogaAutomaticSegue" id="a8X-m5-kfA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I2B-Cx-Vgy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -922,6 +923,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jYQ-DR-kda" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-346" y="3701"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="MUY-fT-Xj0">
+            <objects>
+                <viewController id="8IA-AP-QDR" customClass="YogaAutomatic" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Dm-yl-jFL"/>
+                        <viewControllerLayoutGuide type="bottom" id="8fl-iP-cbI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Iyv-0p-xDc">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fe2-yQ-cP8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="8IA-AP-QDR" id="wvy-DM-ZA6"/>
+                                    <outlet property="delegate" destination="8IA-AP-QDR" id="UWQ-We-6FJ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fe2-yQ-cP8" firstAttribute="leading" secondItem="Iyv-0p-xDc" secondAttribute="leading" id="Fey-KI-Mw4"/>
+                            <constraint firstAttribute="trailing" secondItem="fe2-yQ-cP8" secondAttribute="trailing" id="Qfe-Oa-OSX"/>
+                            <constraint firstItem="fe2-yQ-cP8" firstAttribute="top" secondItem="8Dm-yl-jFL" secondAttribute="bottom" id="VEp-5D-whx"/>
+                            <constraint firstItem="8fl-iP-cbI" firstAttribute="top" secondItem="fe2-yQ-cP8" secondAttribute="bottom" id="avG-rI-icM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="W0N-u7-40P"/>
+                    <connections>
+                        <outlet property="navigationBar" destination="W0N-u7-40P" id="hPI-1j-gKE"/>
+                        <outlet property="tableViewAutomatic" destination="fe2-yQ-cP8" id="ype-cF-3ZP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VoP-Fs-cEI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="486" y="3700"/>
         </scene>
         <!--view0-->
         <scene sceneID="Lwk-bd-tU1">
@@ -5605,11 +5645,11 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ptw-Py-keQ"/>
+        <segue reference="i5t-5Y-b7o"/>
         <segue reference="KAO-wv-4Kd"/>
         <segue reference="k7U-gv-KN1"/>
         <segue reference="aER-Wi-cbZ"/>
         <segue reference="Fhn-aO-iU6"/>
-        <segue reference="i5t-5Y-b7o"/>
-        <segue reference="Smu-lM-FLX"/>
+        <segue reference="hnd-ia-31H"/>
     </inferredMetricsTieBreakers>
 </document>

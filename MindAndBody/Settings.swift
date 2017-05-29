@@ -314,8 +314,15 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         case 4:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            //
+            let automaticYogaArray = UserDefaults.standard.object(forKey: "automaticYoga") as! [Int]
             // Retreive Presentation Style
-            cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "presentationStyle")!, comment: "")
+            if automaticYogaArray[0] == 0 {
+                cell.textLabel?.text = NSLocalizedString("off", comment: "")
+            } else {
+                cell.textLabel?.text = NSLocalizedString("on", comment: "")
+
+            }
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
@@ -442,20 +449,15 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             tableView.deselectRow(at: indexPath, animated: true)
             
             
-        // Presentation Style
+        // Yoga Automatic
         case 4:
         //
-            // detailed --> overview
-            if cell?.textLabel?.text == NSLocalizedString("detailed", comment: "") {
-                cell?.textLabel?.text = NSLocalizedString("overview", comment: "")
-                UserDefaults.standard.set("overview", forKey: "presentationStyle")
-            // overview --> detailed
-            } else if cell?.textLabel?.text == NSLocalizedString("overview", comment: "") {
-                cell?.textLabel?.text = NSLocalizedString("detailed", comment: "")
-                UserDefaults.standard.set("detailed", forKey: "presentationStyle")
-            }
+            //
+            // Segue to homescreen choice
+            performSegue(withIdentifier: "YogaAutomaticSegue", sender: nil)
+            //
             tableView.deselectRow(at: indexPath, animated: true)
-        
+            
         
         // Reset
         case 5:

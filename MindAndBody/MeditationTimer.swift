@@ -18,7 +18,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
 // Arrays -----------------------------------------------------------------------------------------------
 //
 
-    // Bells Array
+    // Bells Arrays
     let bellsArray: [String] =
         ["Tibetan Chimes", "Tibetan Singing Bowl (Low)", "Tibetan Singing Bowl (Low)(x4)", "Tibetan Singing Bowl (Low)(Singing)", "Tibetan Singing Bowl (High)", "Tibetan Singing Bowl (High)(x4)", "Tibetan Singing Bowl (High)(Singing)", "Australian Rain Stick", "Australian Rain Stick (x2)", "Australian Rain Stick (2 sticks)", "Wind Chimes", "Gambang (Wood)(Up)", "Gambang (Wood)(Down)", "Gambang (Metal)", "Indonesian Frog", "Cow Bell (Small)", "Cow Bell (Big)"]
     let bellsImages: [UIImage] =

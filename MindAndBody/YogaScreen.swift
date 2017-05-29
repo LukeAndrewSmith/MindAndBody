@@ -56,10 +56,15 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Explanation Array
     var explanationArray: [String] = []
     
-    
     //
     // Variables
     var selectedRow = 0
+    
+    //
+    var automaticYogaArray: [Int] = []
+
+    
+    
     
     
     //
@@ -69,13 +74,18 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Table view
     @IBOutlet weak var tableView: UITableView!
-
+    
+    // Pause/Play
+    var playPause = UIButton()
+    
     
     //
     // View did load -----------------------------------------------------------------------------------------------------
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        //
+        automaticYogaArray = UserDefaults.standard.object(forKey: "automaticYoga") as! [Int]
         
         //
         view.backgroundColor = colour2
@@ -99,8 +109,16 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         // Progress Bar
         // Thickness
-        progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
-        progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
+        switch automaticYogaArray[0] {
+        case 0:
+            progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
+            progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
+        case 1:
+            progressBar.frame = CGRect(x: 44, y: 0, width: self.view.frame.size.width - 44, height: 2)
+            progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 43)
+        default: break
+        }
+        
         // Rounded Edges
         // Colour
         progressBar.trackTintColor = colour1
@@ -117,6 +135,12 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.backgroundView = tableViewBackground
         //
         tableView.tableFooterView = UIView()
+        
+        // Play/Pause
+        playPause.backgroundColor = colour2
+        playPause.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        playPause.image = #imageLiteral(resourceName: "Pause")
+        playPause.tintColor = colour1
 
     }
     
@@ -150,11 +174,24 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 header.addSubview(progressBar)
             }
         }
+        
+        //
+        if automaticYogaArray[0] == 1 {
+            header.addSubview(playPause)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 0: return 2
+        case 0:
+            switch automaticYogaArray[0] {
+            case 0:
+                return 2
+            case 1:
+                return 44
+            default: break
+            }
+            return 0
         case 1: return 0
         default: break
         }
@@ -316,17 +353,32 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         switch indexPath.section {
         case 0:
-            switch indexPath.row {
-            case selectedRow - 1, selectedRow:
-                return (UIScreen.main.bounds.height - 22) * 3/4
-            case selectedRow + 1:
-                return (UIScreen.main.bounds.height - 22) * 1/4
-            default:
-                return (UIScreen.main.bounds.height - 22) * 1/4
+            switch automaticYogaArray[0] {
+            case 0:
+                switch indexPath.row {
+                case selectedRow - 1, selectedRow:
+                    return (UIScreen.main.bounds.height - 22) * 3/4
+                case selectedRow + 1:
+                    return (UIScreen.main.bounds.height - 22) * 1/4
+                default:
+                    return (UIScreen.main.bounds.height - 22) * 1/4
+                }
+            case 1:
+                switch indexPath.row {
+                case selectedRow - 1, selectedRow:
+                    return (UIScreen.main.bounds.height - 64) * 3/4
+                case selectedRow + 1:
+                    return (UIScreen.main.bounds.height - 64) * 1/4
+                default:
+                    return (UIScreen.main.bounds.height - 64) * 1/4
+                }
+            default: break
             }
+        //
         case 1: return 49
         default: return 0
         }
+        return 0
     }
     
     // Did select row

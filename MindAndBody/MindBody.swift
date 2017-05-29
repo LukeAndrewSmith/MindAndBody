@@ -279,8 +279,8 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         
         // Register Weight
         UserDefaults.standard.register(defaults: ["units" : "kg"])
-        // Register Presentation Style
-        UserDefaults.standard.register(defaults: ["presentationStyle" : "detailed"])
+        // Register Yoga Automatic
+        UserDefaults.standard.register(defaults: ["automaticYoga" : [0, -1, -1, -1]])
         // Register Default Image
         UserDefaults.standard.register(defaults: ["defaultImage" : "demonstration"])
         // Register background image index

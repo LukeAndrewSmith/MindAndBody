@@ -13,6 +13,7 @@
 		072829E51EA7D40C0090164A /* WorkoutChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829E41EA7D40C0090164A /* WorkoutChoiceCustom.swift */; };
 		072829EB1EA8A26A0090164A /* WorkoutSessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */; };
 		0728F3E51E1E9C0E00EA409B /* CalendarScreenDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728F3E41E1E9C0E00EA409B /* CalendarScreenDetail.swift */; };
+		074074AD1EDC0A4000DC2D0F /* YogaAutomatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */; };
 		07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07520BB31E9F894C00FA682E /* MeditationScreen.swift */; };
 		07520BB91EA398FF00FA682E /* WarmupChoiceFinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07520BB81EA398FF00FA682E /* WarmupChoiceFinal.swift */; };
 		0757326B1E64D8A3003DA77E /* InformationScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757326A1E64D8A3003DA77E /* InformationScreen1.swift */; };
@@ -131,6 +132,7 @@
 		072829E41EA7D40C0090164A /* WorkoutChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutChoiceCustom.swift; sourceTree = "<group>"; };
 		072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutSessionScreen.swift; sourceTree = "<group>"; };
 		0728F3E41E1E9C0E00EA409B /* CalendarScreenDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarScreenDetail.swift; sourceTree = "<group>"; };
+		074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaAutomatic.swift; sourceTree = "<group>"; };
 		07520BB31E9F894C00FA682E /* MeditationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationScreen.swift; sourceTree = "<group>"; };
 		07520BB81EA398FF00FA682E /* WarmupChoiceFinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoiceFinal.swift; sourceTree = "<group>"; };
 		0757326A1E64D8A3003DA77E /* InformationScreen1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationScreen1.swift; sourceTree = "<group>"; };
@@ -601,6 +603,7 @@
 			children = (
 				077AC1011DA573210026895B /* Settings.swift */,
 				07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */,
+				074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -817,6 +820,7 @@
 				075732741E69957A003DA77E /* TrackingScreen.swift in Sources */,
 				072829EB1EA8A26A0090164A /* WorkoutSessionScreen.swift in Sources */,
 				071C4FB31E98D6D800328D18 /* MeditationTimer.swift in Sources */,
+				074074AD1EDC0A4000DC2D0F /* YogaAutomatic.swift in Sources */,
 				0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */,
 				07EDBEDD1EACB5730064213C /* YogaChoiceFinal.swift in Sources */,
 				07DEE6FB1E0AC47F003B89AB /* WorkoutChoice.swift in Sources */,
