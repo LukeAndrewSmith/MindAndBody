@@ -20,8 +20,6 @@ class CardioChoice: UIViewController  {
     
     // Hiit
     @IBOutlet weak var hiit: UIButton!
-    // Regular
-    @IBOutlet weak var regular: UIButton!
     // Custom
     @IBOutlet weak var custom: UIButton!
     
@@ -29,9 +27,6 @@ class CardioChoice: UIViewController  {
     let informationView = UIScrollView()
     // Information Title
     let informationTitle = UILabel()
-    
-    // Stack View
-    @IBOutlet weak var stackView: UIStackView!
     
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
@@ -67,15 +62,6 @@ class CardioChoice: UIViewController  {
         hiit.titleLabel?.adjustsFontSizeToFitWidth = true
         hiit.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         hiit.titleLabel?.textAlignment = .center
-        //
-        regular.setTitle(NSLocalizedString("regular", comment: ""), for: UIControlState.normal)
-        regular.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        regular.setTitleColor(colour2, for: .normal)
-        regular.layer.borderWidth = 6
-        regular.layer.borderColor = colour2.cgColor
-        regular.titleLabel?.adjustsFontSizeToFitWidth = true
-        regular.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        regular.titleLabel?.textAlignment = .center
         //
         custom.setTitle("C", for: .normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
@@ -169,19 +155,13 @@ class CardioChoice: UIViewController  {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //
-        hiit.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
+        hiit.layer.cornerRadius = self.hiit.frame.size.height / 2
         hiit.layer.masksToBounds = true
         hiit.titleLabel?.adjustsFontSizeToFitWidth = true
         hiit.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         hiit.titleLabel?.numberOfLines = 0
         hiit.titleLabel?.textAlignment = .center
         //
-        regular.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
-        regular.layer.masksToBounds = true
-        regular.titleLabel?.adjustsFontSizeToFitWidth = true
-        regular.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        regular.titleLabel?.numberOfLines = 0
-        regular.titleLabel?.textAlignment = .center
     }
     
     

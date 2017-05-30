@@ -85,7 +85,7 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         meditationTimer.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         meditationTimer.titleLabel?.textAlignment = .center
         //
-        breathing.setTitle(NSLocalizedString("breathing", comment: ""), for: UIControlState.normal)
+        breathing.setTitle(NSLocalizedString("oxygenOverload", comment: ""), for: UIControlState.normal)
         breathing.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         breathing.setTitleColor(colour2, for: .normal)
         breathing.layer.borderWidth = 6
@@ -93,6 +93,8 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         breathing.titleLabel?.adjustsFontSizeToFitWidth = true
         breathing.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         breathing.titleLabel?.textAlignment = .center
+        breathing.titleLabel?.numberOfLines = 0
+        breathing.titleLabel?.lineBreakMode = .byWordWrapping
         
         //Information
         //

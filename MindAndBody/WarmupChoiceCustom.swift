@@ -1503,7 +1503,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 //
                 self.selectedPreset = self.selectedPreset - 1
                 self.customTableView.reloadData()
-
+                self.beginButtonEnabled()
                 //
                 
                 //

@@ -1,8 +1,8 @@
 //
-//  YogaScreenOverview.swift
-//  MyFitnessMentor
+//  CardioScreen.swift
+//  MindAndBody
 //
-//  Created by Luke Smith on 29.03.17.
+//  Created by Luke Smith on 30.05.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -16,23 +16,23 @@ import AVFoundation
 // Custom Overview Tableview Cells ---------------------------------------------------------------------------
 //
 // Overview TableView Cell
-class YogaOverviewTableViewCell: UITableViewCell {
-    // Demonstration Image View
-    @IBOutlet weak var demonstrationImageView: UIImageView!
-    // Title Label
-    @IBOutlet weak var poseLabel: UILabel!
-    // Breaths Label
-    @IBOutlet weak var breathsLabel: UILabel!
-    // Explanation Button
-    @IBOutlet weak var explanationButton: UIButton!
-    
-}
+//class YogaOverviewTableViewCell: UITableViewCell {
+//    // Demonstration Image View
+//    @IBOutlet weak var demonstrationImageView: UIImageView!
+//    // Title Label
+//    @IBOutlet weak var poseLabel: UILabel!
+//    // Breaths Label
+//    @IBOutlet weak var breathsLabel: UILabel!
+//    // Explanation Button
+//    @IBOutlet weak var explanationButton: UIButton!
+//    
+//}
 
 
 //
 // Session Screen Overview Class ------------------------------------------------------------------------------------
 //
-class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     //
@@ -63,7 +63,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //
     var automaticYogaArray: [Int] = []
-
+    
     // Bells Arrays
     let bellsArray: [String] =
         ["Tibetan Chimes", "Tibetan Singing Bowl (Low)", "Tibetan Singing Bowl (Low)(x4)", "Tibetan Singing Bowl (Low)(Singing)", "Tibetan Singing Bowl (High)", "Tibetan Singing Bowl (High)(x4)", "Tibetan Singing Bowl (High)(Singing)", "Australian Rain Stick", "Australian Rain Stick (x2)", "Australian Rain Stick (2 sticks)", "Wind Chimes", "Gambang (Wood)(Up)", "Gambang (Wood)(Down)", "Gambang (Metal)", "Indonesian Frog", "Cow Bell (Small)", "Cow Bell (Big)"]
@@ -257,8 +257,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.breathsLabel.adjustsFontSizeToFitWidth = true
             
             // Buttons
-//            cell.nextButton.tintColor = colour3
-//            cell.backButton.tintColor = colour4
+            //            cell.nextButton.tintColor = colour3
+            //            cell.backButton.tintColor = colour4
             //cell.nextButton.alpha = 0
             //cell.backButton.alpha = 0
             cell.explanationButton.tintColor = colour1
@@ -272,7 +272,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.demonstrationImageView.animationRepeatCount = 1
             //
             cell.demonstrationImageView.tag = indexPath.row
-        
+            
             // Image Tap
             let imageTap = UITapGestureRecognizer()
             imageTap.numberOfTapsRequired = 1
@@ -287,7 +287,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 nextSwipe.direction = .up
                 nextSwipe.addTarget(self, action: #selector(nextButtonAction))
                 cell.addGestureRecognizer(nextSwipe)
-            
+                
                 // Back Swipe
                 let backSwipe = UISwipeGestureRecognizer()
                 backSwipe.direction = .down
@@ -301,20 +301,20 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             explanationTap.addTarget(self, action: #selector(expandExplanation))
             cell.explanationButton.addGestureRecognizer(explanationTap)
             
-//            // Next Tap
-//            let nextTap = UITapGestureRecognizer()
-//            nextTap.numberOfTapsRequired = 1
-//            nextTap.addTarget(self, action: #selector(nextButtonAction))
-//            cell.nextButton.addGestureRecognizer(nextTap)
-//            //
-//            
-//            // Back Button
-//            let backTap = UITapGestureRecognizer()
-//            backTap.numberOfTapsRequired = 1
-//            backTap.addTarget(self, action: #selector(backButtonAction))
-//            cell.backButton.addGestureRecognizer(backTap)
-//            //
-        
+            //            // Next Tap
+            //            let nextTap = UITapGestureRecognizer()
+            //            nextTap.numberOfTapsRequired = 1
+            //            nextTap.addTarget(self, action: #selector(nextButtonAction))
+            //            cell.nextButton.addGestureRecognizer(nextTap)
+            //            //
+            //
+            //            // Back Button
+            //            let backTap = UITapGestureRecognizer()
+            //            backTap.numberOfTapsRequired = 1
+            //            backTap.addTarget(self, action: #selector(backButtonAction))
+            //            cell.backButton.addGestureRecognizer(backTap)
+            //            //
+            
             switch indexPath.row {
             case selectedRow - 1:
                 cell.breathsLabel.alpha = 0
@@ -404,52 +404,52 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             //
-        if automaticYogaArray[0] == 0 {
-            //
-            if indexPath.row == selectedRow {
-//                let cell = tableView.cellForRow(at: indexPath)
-//                //
-//                performSegue(withIdentifier: "SessionDetailSegue", sender: nil)
-//                //
-//                tableView.deselectRow(at: indexPath, animated: true)
-            //
-            } else if indexPath.row == selectedRow + 1 {
+            if automaticYogaArray[0] == 0 {
                 //
-                if selectedRow < sessionArray.count {
+                if indexPath.row == selectedRow {
+                    //                let cell = tableView.cellForRow(at: indexPath)
+                    //                //
+                    //                performSegue(withIdentifier: "SessionDetailSegue", sender: nil)
+                    //                //
+                    //                tableView.deselectRow(at: indexPath, animated: true)
                     //
-                    selectedRow = selectedRow + 1
-                    updateProgress()
+                } else if indexPath.row == selectedRow + 1 {
                     //
-                    //
-                    let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-                    let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-                    let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
-                    //
-                    var cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
-                    //
-                    //
-                    UIView.animate(withDuration: 0.6, animations: {
+                    if selectedRow < sessionArray.count {
                         //
-                        self.tableView.beginUpdates()
-                        self.tableView.endUpdates()
-                        // 1
-                        cell.breathsLabel.alpha = 1
-                        cell.poseLabel.alpha = 1
-                        cell.explanationButton.alpha = 1
-                        cell.explanationButton.isEnabled = true
-                        cell.demonstrationImageView.isUserInteractionEnabled = true
+                        selectedRow = selectedRow + 1
+                        updateProgress()
                         //
-                        self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-                    })
-                    // + 1
-                    if selectedRow < sessionArray.count - 1 {
-                        tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
+                        //
+                        let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
+                        let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
+                        let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
+                        //
+                        var cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
+                        //
+                        //
+                        UIView.animate(withDuration: 0.6, animations: {
+                            //
+                            self.tableView.beginUpdates()
+                            self.tableView.endUpdates()
+                            // 1
+                            cell.breathsLabel.alpha = 1
+                            cell.poseLabel.alpha = 1
+                            cell.explanationButton.alpha = 1
+                            cell.explanationButton.isEnabled = true
+                            cell.demonstrationImageView.isUserInteractionEnabled = true
+                            //
+                            self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                        })
+                        // + 1
+                        if selectedRow < sessionArray.count - 1 {
+                            tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
+                        }
                     }
+                    //
                 }
-            //
+                
             }
-            
-        }
         //
         case 1:
             if automaticYogaArray[0] == 1 {
@@ -464,7 +464,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     // couldn't load file :(
                 }
                 
-                // 
+                //
                 task?.cancel()
                 //
                 UIApplication.shared.isIdleTimerDisabled = false
@@ -541,7 +541,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             sender.startAnimating()
         }
     }
-
+    
     
     // Next Button
     @IBAction func nextButtonAction() {
@@ -577,10 +577,10 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
             })
-                // + 1
-                if selectedRow < sessionArray.count - 1 {
-                    tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
-                }
+            // + 1
+            if selectedRow < sessionArray.count - 1 {
+                tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
+            }
         } else {
             //
             if automaticYogaArray[0] == 1 {
@@ -630,7 +630,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 cell.explanationButton.alpha = 0
                 cell.explanationButton.isEnabled = false
                 cell.demonstrationImageView.isUserInteractionEnabled = false
-            //
+                //
             })
         }
     }
@@ -689,7 +689,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Add Views
         UIApplication.shared.keyWindow?.addSubview(backgroundViewExplanation)
         UIApplication.shared.keyWindow?.addSubview(scrollViewExplanation)
-    
+        
         //
         UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 1.5) + 20
@@ -713,7 +713,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
         })
     }
-
+    
     
     // Update Progress
     func updateProgress() {
@@ -743,7 +743,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var task: DispatchWorkItem?
     
     func createDispatch() {
-
+        
         task = DispatchWorkItem {
             //
             if self.automaticYogaArray[3] != -1 {
@@ -825,9 +825,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             alert.addAction(cancelAction)
             //
             self.present(alert, animated: true, completion: nil)
-        
             
-        // Play / Continue Practice
+            
+            // Play / Continue Practice
         } else {
             //
             playPause.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
@@ -858,7 +858,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if selectedRow == 0 {
             // App needs to stay on even when nothing is being touched (users watch the screen and follow the yoga poses)
             UIApplication.shared.isIdleTimerDisabled = true
-
+            
             //
             if automaticYogaArray[3] != -1 {
                 // Play Initial Bell
@@ -879,5 +879,5 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
     }
     
-//
+    //
 }

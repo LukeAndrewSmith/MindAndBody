@@ -1146,6 +1146,7 @@
         "meditations" = "Meditations";
         //
         "breathing" = "Breathing";
+        "oxygenOverload" = "Oxygen Overload";
 
         "meditationTimerTitle" = "Meditation Timer";
         "presetTimerTitle" = "Preset Timers";
@@ -1273,6 +1274,8 @@
                 "finishEarly" = "Finish Early";
                 "finishEarlyMessage" = "\nAre you sure you want to finish early?";
 
+                "finishEarlyMessageYoga" = "\nDo you want to finish early?";
+
         // Timer
         //
         // Choice
@@ -1282,8 +1285,9 @@
         "intervalBells" = "Interval Bells";
         "endingBell" = "Ending Bell";
 
-
-
+        // Oxygen Overload
+        //
+        "oxygenOverload" = "Oxygen Overload Timer";
 
 
 

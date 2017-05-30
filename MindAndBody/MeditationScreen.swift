@@ -387,7 +387,8 @@ class MeditationScreen: UIViewController {
             
             //
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(i), repeats: false)
-            let name = "bell" + String(describing: index)
+            var number = Int(index!)
+            let name = "bell" + String(describing: number)
             let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
             
             //
@@ -467,6 +468,7 @@ class MeditationScreen: UIViewController {
             // Cancel Timer
             timerCountDown.invalidate()
             NotificationCenter.default.removeObserver(self)
+            self.removeNotifications()
             self.dismiss(animated: true)
         }
         let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
