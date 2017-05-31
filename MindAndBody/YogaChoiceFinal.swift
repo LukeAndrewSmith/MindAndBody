@@ -15,17 +15,9 @@ import UIKit
 //
 class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    // Selected Yoga Type
-    //
-    var yogaType = Int()
-    
     // Selected Preset
     //
     var selectedPreset: [Int] = [0, 0]
-    
-    // Section Numbers
-    //
-    var sectionNumbers: [Int] = [0, 1, 2, 3, 4, 5, 6, 7, 8]
     
     //
     // Arrays ------------------------------------------------------------------------------------------------------------------------------
@@ -49,11 +41,6 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Explanation Array
     var explanationArray: [String] = []
     
-    //
-    // Navigation Titles
-    let navigationTitles: [String] =
-        ["practices",
-         "guided"]    
     
     // Yoga Poses
     let yogaPosesDictionary: [Int: String] =
@@ -609,7 +596,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         view.backgroundColor = UIColor(red:0.08, green:0.08, blue:0.08, alpha:1.0)
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString(navigationTitles[yogaType], comment: ""))
+        navigationBar.title = (NSLocalizedString("practices", comment: ""))
         
         //
         presetsButton.backgroundColor = colour2
@@ -922,6 +909,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Animation
         expandedImage.image = demonstrationDictionary[demonstrationIndex]?[0]
         expandedImage.animationImages = demonstrationDictionary[demonstrationIndex]
+        expandedImage.animationImages?.removeFirst()
         expandedImage.animationDuration = animationDurationDictionary[demonstrationIndex]!
         expandedImage.animationRepeatCount = 1
         // Play

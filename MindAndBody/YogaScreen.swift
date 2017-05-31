@@ -84,6 +84,10 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var updateTimer = Timer()
     var soundPlayer: AVAudioPlayer!
     
+
+    
+    
+    
     //
     // View did load -----------------------------------------------------------------------------------------------------
     //
@@ -95,21 +99,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         view.backgroundColor = colour2
         
-        // Session Started
-        //
-        // Alert View
-        let title = NSLocalizedString("sessionStarted", comment: "")
-        //let message = NSLocalizedString("resetMessage", comment: "")
-        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.view.tintColor = colour1
-        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
-        self.present(alert, animated: true, completion: {
-            //
-            let delayInSeconds = 0.7
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                alert.dismiss(animated: true, completion: nil)
-            }
-        })
+        
         
         
         // Progress Bar
@@ -153,6 +143,22 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // Session Started
+        //
+        // Alert View
+        let title = NSLocalizedString("sessionStarted", comment: "")
+        //let message = NSLocalizedString("resetMessage", comment: "")
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.view.tintColor = colour1
+        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        self.present(alert, animated: true, completion: {
+            //
+            let delayInSeconds = 0.7
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                alert.dismiss(animated: true, completion: nil)
+            }
+        })
         //
         if automaticYogaArray[0] == 1 {
             automaticYoga()
@@ -268,6 +274,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.demonstrationImageView.image = demonstrationArray[indexPath.row][0]
             // Animation
             cell.demonstrationImageView.animationImages = demonstrationArray[indexPath.row]
+            cell.demonstrationImageView.animationImages?.removeFirst()
             cell.demonstrationImageView.animationDuration = animationDurationArray[indexPath.row]
             cell.demonstrationImageView.animationRepeatCount = 1
             //
@@ -402,54 +409,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         switch indexPath.section {
-        case 0:
-            //
-        if automaticYogaArray[0] == 0 {
-            //
-            if indexPath.row == selectedRow {
-//                let cell = tableView.cellForRow(at: indexPath)
-//                //
-//                performSegue(withIdentifier: "SessionDetailSegue", sender: nil)
-//                //
-//                tableView.deselectRow(at: indexPath, animated: true)
-            //
-            } else if indexPath.row == selectedRow + 1 {
-                //
-                if selectedRow < sessionArray.count {
-                    //
-                    selectedRow = selectedRow + 1
-                    updateProgress()
-                    //
-                    //
-                    let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-                    let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-                    let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
-                    //
-                    var cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
-                    //
-                    //
-                    UIView.animate(withDuration: 0.6, animations: {
-                        //
-                        self.tableView.beginUpdates()
-                        self.tableView.endUpdates()
-                        // 1
-                        cell.breathsLabel.alpha = 1
-                        cell.poseLabel.alpha = 1
-                        cell.explanationButton.alpha = 1
-                        cell.explanationButton.isEnabled = true
-                        cell.demonstrationImageView.isUserInteractionEnabled = true
-                        //
-                        self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-                    })
-                    // + 1
-                    if selectedRow < sessionArray.count - 1 {
-                        tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
-                    }
-                }
-            //
-            }
-            
-        }
+        case 0: break
         //
         case 1:
             if automaticYogaArray[0] == 1 {

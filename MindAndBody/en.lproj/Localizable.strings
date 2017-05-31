@@ -690,6 +690,7 @@
         "hiit" = "HIIT";
         "regular" = "Regular";
 
+
             // Information
             //
             "purposeTextCardio" = "";
@@ -701,7 +702,40 @@
             "customInformation" = "The custom cardio section 'C' is so that you can build custom HIIT sessions, determining rest times and cardio burst times.";
 
 
+            //
+            "rowing" = "Rowing";
+            "biking" = "Biking";
+            "running" = "Running";
 
+            "selectCardioSession" = "- Select Cardio Session -";
+
+            "timeBased" = "Time Based";
+            "distanceBased" = "Distance Based";
+
+            "cardioEnd" = "Session Ended";
+
+
+            //
+            "sprint" = "Sprinting";    // Running
+            "run" = "Running";
+            "jog" = "Jogging";
+            "still" = "Pause";     // Running Pauses
+            "slowJog" = "Slow Joging";
+            "stretch" = "Stretching";
+
+            "sprintB" = "Sprinting";   // Bike
+            "fastB" = "Fast Biking";
+            "mediumB" = "Medium Speed Biking";
+            "stillB" = "Pause";      // Biking Pauses
+            "slowB"  = "Slow Biking";
+            "stretch" = "Stretching";
+
+            "sprintR" = "Sprinting";   // Rowing
+            "fastR" = "Fast Rowing";
+            "mediumR" = "Medium Speed Rowing";
+            "stillR" = "Pause";   // Rowing Pauses
+            "slowR" = "Slow Rowing";
+            "stretch" = "Stretching";
 
 
     //

@@ -88,13 +88,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
 
     
 //
-// View did load -----------------------------------------------------------------------------------------------------
-//
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //
-        view.backgroundColor = colour2
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         //
         // Session Started
@@ -112,8 +107,20 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 alert.dismiss(animated: true, completion: nil)
             }
         })
+
+    }
+    
+    
+//
+// View did load -----------------------------------------------------------------------------------------------------
+//
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-       // self.present(alert, animated: true, completion: (() -> Void)?)
+        //
+        view.backgroundColor = colour2
+        
+        
         
         // Progress Bar
         // Thickness
@@ -549,55 +556,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         switch indexPath.section {
-        case 0:
-            if indexPath.row == selectedRow {
-                //
-//                performSegue(withIdentifier: "SessionDetailSegue", sender: nil)
-//                tableView.deselectRow(at: indexPath, animated: true)
-            //
-            } else if indexPath.row == selectedRow + 1 {
-                //
-                if selectedRow < sessionArray.count {
-                    //
-                    selectedRow = selectedRow + 1
-                    updateProgress()
-                    //
-                    //
-                    let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-                    let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-                    let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
-                    //
-                    var cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
-                    //
-                    //
-                    UIView.animate(withDuration: 0.6, animations: {
-                        //
-                        self.tableView.beginUpdates()
-                        self.tableView.endUpdates()
-                        // 1
-                        cell.setsRepsLabel.alpha = 1
-                        cell.movementLabel.alpha = 1
-                        cell.buttonView.alpha = 1
-                        cell.explanationButton.alpha = 1
-                        cell.hideScreen.alpha = 1
-                        cell.nextImage.alpha = 1
-                        cell.previousImage.alpha = 0
-                        //cell.demonstrationImageView.isUserInteractionEnabled = true
-                        // -1
-                        cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! OverviewTableViewCell
-                        cell.setsRepsLabel.alpha = 0
-                        cell.movementLabel.alpha = 0
-                        cell.buttonView.alpha = 0
-                        cell.hideScreen.alpha = 0
-                        //
-                        self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-                    })
-                    // + 1
-                    if selectedRow < sessionArray.count - 1 {
-                        tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
-                    }
-                }
-            }
+        case 0: break
         //
         case 1:
             //

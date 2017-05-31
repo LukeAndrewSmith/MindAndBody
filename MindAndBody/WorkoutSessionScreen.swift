@@ -90,14 +90,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     
     
     //
-    // View did load -----------------------------------------------------------------------------------------------------
-    //
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //
-        view.backgroundColor = colour2
-        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         //
         // Session Started
         //
@@ -115,6 +109,19 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             }
         })
         
+    }
+    
+    
+    //
+    // View did load -----------------------------------------------------------------------------------------------------
+    //
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //
+        view.backgroundColor = colour2
+        
+       
         // self.present(alert, animated: true, completion: (() -> Void)?)
         
         // Progress Bar
@@ -381,52 +388,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         switch indexPath.section {
-        case 0:
-            if indexPath.row == selectedRow {
-                //
-                //                performSegue(withIdentifier: "SessionDetailSegue", sender: nil)
-                //                tableView.deselectRow(at: indexPath, animated: true)
-                //
-            } else if indexPath.row == selectedRow + 1 {
-                //
-                if selectedRow < sessionArray.count {
-                    //
-                    selectedRow = selectedRow + 1
-                    updateProgress()
-                    //
-                    //
-                    let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-                    let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-                    let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
-                    //
-                    var cell = tableView.cellForRow(at: indexPath as IndexPath) as! WorkoutOverviewTableViewCell
-                    //
-                    //
-                    UIView.animate(withDuration: 0.6, animations: {
-                        //
-                        self.tableView.beginUpdates()
-                        self.tableView.endUpdates()
-                        // 1
-                        cell.setsRepsLabel.alpha = 1
-                        cell.movementLabel.alpha = 1
-                        cell.explanationButton.alpha = 1
-                        cell.hideScreen.alpha = 1
-                        cell.nextImage.alpha = 1
-                        cell.previousImage.alpha = 0
-                        //cell.demonstrationImageView.isUserInteractionEnabled = true
-                        // -1
-                        cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! WorkoutOverviewTableViewCell
-                        cell.setsRepsLabel.alpha = 0
-                        cell.movementLabel.alpha = 0
-                        cell.hideScreen.alpha = 0
-                        //
-                    })
-                    // + 1
-                    if selectedRow < sessionArray.count - 1 {
-                        tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
-                    }
-                }
-            }
+        case 0: break
         //
         case 1:
             

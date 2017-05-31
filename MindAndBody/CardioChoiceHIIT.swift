@@ -1,9 +1,9 @@
 //
-//  YogaChoice.swift
-//  MyFitnessMentor
+//  CardioChoiceHIIT.swift
+//  MindAndBody
 //
-//  Created by Luke Smith on 21/12/16.
-//  Copyright © 2016 Luke Smith. All rights reserved.
+//  Created by Luke Smith on 31.05.17.
+//  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
 import Foundation
@@ -11,17 +11,20 @@ import UIKit
 
 
 //
-// Yoga choice class ---------------------------------------------------------------------------------------------------
+// HIIT Choice Class -------------------------------------------------------------------------------------------------------
 //
-class YogaChoice: UIViewController, UIScrollViewDelegate  {
+class CardioChoiceHIIT: UIViewController  {
     // Outlets
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     // Buttons
-    @IBOutlet weak var custom: UIButton!
+    @IBOutlet weak var rowing: UIButton!
     //
-    @IBOutlet weak var practices: UIButton!
+    @IBOutlet weak var biking: UIButton!
+    //
+    @IBOutlet weak var running: UIButton!
+    //
     
     // Information View
     let informationView = UIScrollView()
@@ -30,11 +33,12 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     
     // Question Mark
     @IBOutlet weak var questionMark: UIBarButtonItem!
-    
-    
-//
-// View did load -----------------------------------------------------------------------------------------------------
-//
+
+    //
+    var cardioType = Int()
+    //
+    // View did load ----------------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,42 +55,40 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         view.backgroundColor = colour1
         questionMark.tintColor = colour1
         
-        // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("yoga", comment: ""))
+        // Titles
+        navigationBar.title = (NSLocalizedString("hiit", comment: ""))
         
         // Button Titles
+        rowing.setTitle(NSLocalizedString("rowing", comment: ""), for: UIControlState.normal)
+        rowing.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        rowing.setTitleColor(colour2, for: .normal)
+        rowing.layer.borderWidth = 6
+        rowing.layer.borderColor = colour2.cgColor
         //
-        practices.setTitle(NSLocalizedString("practices", comment: ""), for: UIControlState.normal)
-        practices.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        practices.setTitleColor(colour2, for: .normal)
-        practices.layer.borderWidth = 6
-        practices.layer.borderColor = colour2.cgColor
-        practices.titleLabel?.adjustsFontSizeToFitWidth = true
-        practices.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        practices.titleLabel?.textAlignment = .center
+        biking.setTitle(NSLocalizedString("biking", comment: ""), for: UIControlState.normal)
+        biking.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        biking.setTitleColor(colour2, for: .normal)
+        biking.layer.borderWidth = 6
+        biking.layer.borderColor = colour2.cgColor
         //
-        custom.setTitle("C", for: UIControlState.normal)
-        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        custom.setTitleColor(colour2, for: .normal)
-        custom.layer.borderWidth = 6
-        custom.layer.borderColor = colour2.cgColor
-        custom.titleLabel?.adjustsFontSizeToFitWidth = true
-        custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        custom.titleLabel?.textAlignment = .center
-        custom.layer.cornerRadius = 49/2
-        custom.layer.masksToBounds = true
-        custom.titleLabel?.numberOfLines = 0
+        running.setTitle(NSLocalizedString("running", comment: ""), for: UIControlState.normal)
+        running.setTitleColor(colour2, for: .normal)
+        running.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        running.layer.borderWidth = 6
+        running.layer.borderColor = colour2.cgColor
         //
-
+        
         // Information
         //
         // Scroll View Frame
         informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
         informationView.backgroundColor = colour1
-        // Information Title
+        // Information Text
         //
-        // Information Title Frame
-        informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
+        // Information Text Frame
+        let informationText = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
+        // Information Text Frame
+        self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
         informationTitle.text = (NSLocalizedString("information", comment: ""))
         informationTitle.textAlignment = .center
         informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
@@ -97,26 +99,16 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         downSwipe.direction = UISwipeGestureRecognizerDirection.down
         informationTitle.addGestureRecognizer(downSwipe)
         informationTitle.isUserInteractionEnabled = true
-        // Information Text
-        //
-        // Information Text Frame
-        let informationTextYogaC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
         // Information Text and Attributes
         //
         // String
-        let informationLabelString = (
-            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextYoga", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextYoga", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextYoga", comment: "")))
+        let informationLabelString = ((NSLocalizedString("bodyweightWorkouts", comment: ""))+"\n"+(NSLocalizedString("bodyweightWorkoutChoice", comment: "")))
         // Range of String
-        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("purposeTextYoga", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("bodyTextYoga", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("mindTextYoga", comment: ""))
+        let textRangeString = ((NSLocalizedString("bodyweightWorkouts", comment: ""))+"\n"+(NSLocalizedString("bodyweightWorkoutChoice", comment: "")))
         let textRange = (informationLabelString as NSString).range(of: textRangeString)
         // Range of Titles
-        let titleRangeString1 = (NSLocalizedString("purpose", comment: ""))
-        let titleRangeString2 = (NSLocalizedString("body", comment: ""))
-        let titleRangeString3 = (NSLocalizedString("mind", comment: ""))
-        //
-        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString1)
-        let titleRange2 = (informationLabelString as NSString).range(of: titleRangeString2)
-        let titleRange3 = (informationLabelString as NSString).range(of: titleRangeString3)
+        let titleRangeString = (NSLocalizedString("bodyweightWorkouts", comment: ""))
+        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
         // Line Spacing
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.lineSpacing = 1.6
@@ -124,48 +116,59 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         let informationLabelText = NSMutableAttributedString(string: informationLabelString)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
         informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange1)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange2)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange3)
         informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
         // Final Text Editing
-        informationTextYogaC.attributedText = informationLabelText
-        informationTextYogaC.textAlignment = .natural
-        informationTextYogaC.lineBreakMode = NSLineBreakMode.byWordWrapping
-        informationTextYogaC.numberOfLines = 0
-        informationTextYogaC.sizeToFit()
-        self.informationView.addSubview(informationTextYogaC)
+        informationText.attributedText = informationLabelText
+        informationText.textAlignment = .natural
+        informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
+        informationText.numberOfLines = 0
+        informationText.sizeToFit()
+        self.informationView.addSubview(informationText)
         //
-        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextYogaC.frame.size.height + informationTitle.frame.size.height + 20)
+        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
+        
     }
     
-
-//
-// View did layout subviews ----------------------------------------------------------------------------------------
-//
+    
+    //
+    // View did layout subviews ----------------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLayoutSubviews() {
-        //
         super.viewDidLayoutSubviews()
         //
-        practices.layer.cornerRadius = practices.frame.size.height / 2
-        practices.layer.masksToBounds = true
-        practices.titleLabel?.adjustsFontSizeToFitWidth = true
-        practices.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        practices.titleLabel?.numberOfLines = 0
-        practices.titleLabel?.textAlignment = .center
+        rowing.layer.cornerRadius = rowing.frame.size.height / 2
+        rowing.layer.masksToBounds = true
+        rowing.titleLabel?.adjustsFontSizeToFitWidth = true
+        rowing.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        rowing.titleLabel?.numberOfLines = 0
+        rowing.titleLabel?.textAlignment = .center
+        //
+        biking.layer.cornerRadius = biking.frame.size.height / 2
+        biking.layer.masksToBounds = true
+        biking.titleLabel?.adjustsFontSizeToFitWidth = true
+        biking.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        biking.titleLabel?.numberOfLines = 0
+        biking.titleLabel?.textAlignment = .center
+        //
+        running.layer.cornerRadius = running.frame.size.height / 2
+        running.layer.masksToBounds = true
+        running.titleLabel?.adjustsFontSizeToFitWidth = true
+        running.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        running.titleLabel?.numberOfLines = 0
+        running.titleLabel?.textAlignment = .center
     }
-
     
-//
-// Information Actions ----------------------------------------------------------------------------------------------------------------
-//
-    @IBAction func informationButtonActionYogaC(_ sender: Any) {
+    
+    //
+    // Information Actions ----------------------------------------------------------------------------------------------------------------
+    //
+    @IBAction func informationButtonActionStretchingC(_ sender: Any) {
         // Slide information down
         if self.informationView.frame.minY < self.view.frame.maxY {
             // Animate slide
             UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
-                
             }, completion: { finished in
                 // Remove after animation
                 self.informationView.removeFromSuperview()
@@ -204,7 +207,6 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
             UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
-                
             }, completion: { finished in
                 // Remove after animation
                 self.informationView.removeFromSuperview()
@@ -215,38 +217,48 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
             navigationBar.setHidesBackButton(false, animated: true)
         }
     }
-
-  
     
-//
-// Segues
-//
-    //
-    @IBAction func practicesAction(_ sender: Any) {
-        performSegue(withIdentifier: "yogaSegue", sender: nil)
+    
+    // Full
+    @IBAction func full(_ sender: Any) {
+        cardioType = 0
+        performSegue(withIdentifier: "cardioSegue", sender: nil)
+    }
+    
+    // Upper
+    @IBAction func upper(_ sender: Any) {
+        cardioType = 1
+        performSegue(withIdentifier: "cardioSegue", sender: nil)
+    }
+    
+    // Lower
+    @IBAction func lower(_ sender: Any) {
+        cardioType = 2
+        performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     
     
-//
-// Remove Back Bar Text
-//
+    //
+    // Remove back bar text
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Pass Data
-        if (segue.identifier == "yogaSegue") {
+        if (segue.identifier == "cardioSegue") {
             //
-            let destinationVC = segue.destination as! YogaChoiceFinal
+            let destinationVC = segue.destination as! CardioChoiceFinal
             // Indicate to next screen which button was pressed
+            destinationVC.cardioType = cardioType
         }
-        // Remove back bar text
+        //
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
     }
- 
     
-//
-// Walkthrough ------------------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Walkthrough ----------------------------------------------------------------------------------------------------------------
+    //
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()
@@ -326,7 +338,6 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
             
             // Clear Section
             let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: custom.center.x, y: custom.center.y + navigationBarHeight + UIApplication.shared.statusBarFrame.height), radius: 24.5, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -339,7 +350,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
             //
             
             
-            label.text = NSLocalizedString("choiceScreen122", comment: "")
+            label.text = NSLocalizedString("choiceScreen12", comment: "")
             walkthroughView.addSubview(label)
             
             
@@ -383,5 +394,5 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         
     }
     
-
+    
 }

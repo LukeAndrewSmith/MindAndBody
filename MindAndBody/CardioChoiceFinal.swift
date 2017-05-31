@@ -15,477 +15,203 @@ import UIKit
 //
 class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    // Selected Yoga Type
-    //
-    var yogaType = Int()
-    
     // Selected Preset
     //
     var selectedPreset: [Int] = [0, 0]
     
-    // Section Numbers
+    // 0 == rowing, 1 == biking, 2 == running
+    var cardioType = 0
+    
+    
     //
-    var sectionNumbers: [Int] = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    // Arrays to be set
+    //
+    var presetsTitlesArray: [[String]] = []
+    var presetsArray: [[[Int]]] = []
+    var lengthArray: [[[Int]]] = []
     
     //
     // Arrays ------------------------------------------------------------------------------------------------------------------------------
-    
     //
     // Picker View Array
     //
     
     // Arrays to be set and used (Screen arrays)
     // Pses Array
-    var yogaArray: [String] = []
+    var cardioArray: [String] = []
     
+    // 
+    var lengthArraySession: [Int] = []
     
     // Demonstration Array
-    var demonstrationArray: [[UIImage]] = []
     var animationDurationArray: [Double] = []
     
-    // Target Area Array
-    var targetAreaArray: [UIImage] = []
     
     // Explanation Array
     var explanationArray: [String] = []
     
-    //
-    // Navigation Titles
-    let navigationTitles: [String] =
-        ["practices",
-         "guided"]
-    
     // Yoga Poses
-    let yogaPosesDictionary: [Int: String] =
+    let cardioMovementsDictionary: [Int: String] =
         [
-            // Standing
-            0: "upwardsSalute",
-            1: "mountain",
-            2: "tree",
-            3: "extendedToeGrab",
-            4: "eagle",
-            5: "chair",
-            6: "lordOfDance",
-            7: "warrior1",
-            8: "warrior2",
-            9: "warrior3",
-            10: "halfMoon",
-            11: "extendedTriangle",
-            12: "extendedSideAngleY",
-            13: "revolvedSideAngle",
-            14: "revolvedTriangle",
-            15: "halfForwardBend",
-            16: "forwardBend",
-            17: "wideLeggedForwardBend",
-            18: "intenseSide",
-            19: "gate",
-            20: "highLunge",
-            21: "lowLungeY",
-            22: "deepSquat",
-            // Hand/Elbows and Feet/Knees
-            23: "dolphin",
-            24: "downwardDog",
-            25: "halfDownwardDog",
-            26: "plank",
-            27: "dolphinPlank",
-            28: "fourLimbedStaff",
-            29: "sidePlank",
-            30: "cat",
-            31: "cow",
-            32: "catCow",
-            33: "halfMonkey",
-            34: "childPose",
-            35: "wildThing",
-            36: "upwardBow",
-            37: "bridge",
-            38: "upwardPlank",
-            39: "extendedPuppy",
-            40: "upwardDog",
-            // Seated
-            41: "crossLeg", // Pic Only
-            42: "lotus", // Pic Only
-            43: "fireLog",  // Pic Only
-            44: "boat",
-            45: "cowFace", // Pic Only
-            46: "hero", // Pic Only
-            47: "butterfly", // Pic Only
-            48: "staffPose", // Pic Only
-            49: "seatedForwardBend", // Pic Only
-            50: "vForwardBend",
-            51: "vSideBend",
-            52: "halfVForwardBend",
-            53: "halfVSideBend",
-            54: "marichi1",
-            55: "marichi3",
-            56: "frontSplit", // Pic Only
-            57: "sideSplit", // Pic Only
-            // Lying
-            58: "corpse",
-            59: "fish",
-            60: "happyBaby",
-            61: "lyingButterfly",
-            62: "legRaiseToe",
-            63: "threadTheNeedle",
-            64: "shoulderStand",
-            65: "plow",
-            66: "cobra",
-            67: "sphinx",
-            68: "pigeon",
-            69: "spineRolling",
-            // Hand Stands
-            70: "handstand",
-            71: "headstand",
-            72: "forearmStand"
+            // Movement
+            0: "sprint",    // Running
+            1: "run",
+            2: "jog",
+            3: "still",     // Running Pauses
+            4: "slowJog",
+            5: "stretch",
+            
+            6: "sprintB",   // Bike
+            7: "fastB",
+            8: "mediumB",
+            9: "stillB",      // Biking Pauses
+            10: "slowB",
+            11: "stretch",
+            
+            12: "sprintR",   // Rowing
+            13: "fastR",
+            14: "mediumR",
+            15: "stillR",   // Rowing Pauses
+            16: "slowR",
+            17: "stretch",
     ]
-    
-    
-    // Explanation Dictionary
-    let explanationDictionary: [Int: String] =
-        [
-            // Standing
-            0: "upwardsSaluteE",
-            1: "mountainE",
-            2: "treeE",
-            3: "extendedToeGrabE",
-            4: "eagleE",
-            5: "chairE",
-            6: "lordOfDanceE",
-            7: "warrior1E",
-            8: "warrior2E",
-            9: "warrior3E",
-            10: "halfMoonE",
-            11: "extendedTriangleE",
-            12: "extendedSideAngleYE",
-            13: "revolvedSideAngleE",
-            14: "revolvedTriangleE",
-            15: "halfForwardBendE",
-            16: "forwardBendE",
-            17: "wideLeggedForwardBendE",
-            18: "intenseSideE",
-            19: "gateE",
-            20: "highLungeE",
-            21: "lowLungeYE",
-            22: "deepSquatE",
-            // Hand/Elbows and Feet/Knees
-            23: "dolphinE",
-            24: "downwardDogE",
-            25: "halfDownwardDogE",
-            26: "plankE",
-            27: "dolphinPlankE",
-            28: "fourLimbedStaffE",
-            29: "sidePlankE",
-            30: "catE",
-            31: "cowE",
-            32: "catCowE",
-            33: "halfMonkeyE",
-            34: "childPoseE",
-            35: "wildThingE",
-            36: "upwardBowE",
-            37: "bridgeE",
-            38: "upwardPlankE",
-            39: "extendedPuppyE",
-            40: "upwardDogE",
-            // Seated
-            41: "crossLegE",
-            42: "lotusE",
-            43: "fireLogE",
-            44: "boatE",
-            45: "cowFaceE",
-            46: "heroE",
-            47: "butterflyE",
-            48: "staffPoseE",
-            49: "seatedForwardBendE",
-            50: "vForwardBendE",
-            51: "vSideBend",
-            52: "halfVForwardBendE",
-            53: "halfVSideBendE",
-            54: "marichi1E",
-            55: "marichi3E",
-            56: "frontSplitE",
-            57: "sideSplitE",
-            // Lying
-            58: "corpseE",
-            59: "fishE",
-            60: "happyBabyE",
-            61: "lyingButterflyE",
-            62: "legRaiseToeE",
-            63: "threadTheNeedleE",
-            64: "shoulderStandE",
-            65: "plowE",
-            66: "cobraE",
-            67: "sphinxE",
-            68: "pigeonE",
-            69: "spineRollingE",
-            // Hand Stands
-            70: "handstandE",
-            71: "headstandE",
-            72: "forearmStandE"
-    ]
-    
     
     // Demonstration Poses
     let demonstrationDictionary: [Int: [UIImage]] =
         [
-            // Standing
-            0: [#imageLiteral(resourceName: "Test 2")],
+            // Movement
+            0: [#imageLiteral(resourceName: "Test 2")],    // Running
             1: [#imageLiteral(resourceName: "Test 2")],
-            2: [#imageLiteral(resourceName: "tree"), #imageLiteral(resourceName: "tree1"), #imageLiteral(resourceName: "tree2"), #imageLiteral(resourceName: "tree3"), #imageLiteral(resourceName: "tree4"), #imageLiteral(resourceName: "tree5"), #imageLiteral(resourceName: "tree6")],
-            3: [#imageLiteral(resourceName: "extendedToeGrab"), #imageLiteral(resourceName: "extendedToeGrab1"), #imageLiteral(resourceName: "extendedToeGrab2"), #imageLiteral(resourceName: "extendedToeGrab3"), #imageLiteral(resourceName: "extendedToeGrab4"), #imageLiteral(resourceName: "extendedToeGrab5")],
-            4: [#imageLiteral(resourceName: "eagle"), #imageLiteral(resourceName: "eagle1"), #imageLiteral(resourceName: "eagle2"), #imageLiteral(resourceName: "eagle3"), #imageLiteral(resourceName: "eagle4"), #imageLiteral(resourceName: "eagle5"), #imageLiteral(resourceName: "eagle6"), #imageLiteral(resourceName: "eagle7")],
-            5: [#imageLiteral(resourceName: "chair"), #imageLiteral(resourceName: "chair1"), #imageLiteral(resourceName: "chair2"), #imageLiteral(resourceName: "chair3"), #imageLiteral(resourceName: "chair4"), #imageLiteral(resourceName: "chair5")],
-            6: [#imageLiteral(resourceName: "lordOfDance"), #imageLiteral(resourceName: "lordOfDance1"), #imageLiteral(resourceName: "lordOfDance2"), #imageLiteral(resourceName: "lordOfDance3"), #imageLiteral(resourceName: "lordOfDance4"), #imageLiteral(resourceName: "lordOfDance5"), #imageLiteral(resourceName: "lordOfDance6"), #imageLiteral(resourceName: "lordOfDance7")],
+            2: [#imageLiteral(resourceName: "Test 2")],
+            3: [#imageLiteral(resourceName: "Pause")],     // Running Pauses
+            4: [#imageLiteral(resourceName: "Pause")],
+            5: [#imageLiteral(resourceName: "Pause")],
+            
+            6: [#imageLiteral(resourceName: "Test 2")],   // Bike
             7: [#imageLiteral(resourceName: "Test 2")],
             8: [#imageLiteral(resourceName: "Test 2")],
-            9: [#imageLiteral(resourceName: "warrior3"), #imageLiteral(resourceName: "warrior31"), #imageLiteral(resourceName: "warrior32"), #imageLiteral(resourceName: "warrior33"), #imageLiteral(resourceName: "warrior34"), #imageLiteral(resourceName: "warrior35"), #imageLiteral(resourceName: "warrior36")],
-            10: [#imageLiteral(resourceName: "Test 2")],
-            11: [#imageLiteral(resourceName: "Test 2")],
-            12: [#imageLiteral(resourceName: "extendedSideAngle"), #imageLiteral(resourceName: "extendedSideAngle1"), #imageLiteral(resourceName: "extendedSideAngle2"), #imageLiteral(resourceName: "extendedSideAngle3"), #imageLiteral(resourceName: "extendedSideAngle4"), #imageLiteral(resourceName: "extendedSideAngle5"), #imageLiteral(resourceName: "extendedSideAngle6")],
-            13: [#imageLiteral(resourceName: "revolvedSideAngle"), #imageLiteral(resourceName: "revolvedSideAngle1"), #imageLiteral(resourceName: "revolvedSideAngle2"), #imageLiteral(resourceName: "revolvedSideAngle3"), #imageLiteral(resourceName: "revolvedSideAngle4"), #imageLiteral(resourceName: "revolvedSideAngle5"), #imageLiteral(resourceName: "revolvedSideAngle6")],
-            14: [#imageLiteral(resourceName: "revolvedTriangle"), #imageLiteral(resourceName: "revolvedTriangle1"), #imageLiteral(resourceName: "revolvedTriangle2"), #imageLiteral(resourceName: "revolvedTriangle3"), #imageLiteral(resourceName: "revolvedTriangle4"), #imageLiteral(resourceName: "revolvedTriangle5"), #imageLiteral(resourceName: "revolvedTriangle6")],
-            15: [#imageLiteral(resourceName: "Test 2")],
-            16: [#imageLiteral(resourceName: "Test 2")],
-            17: [#imageLiteral(resourceName: "Test 2")],
-            18: [#imageLiteral(resourceName: "Test 2")],
-            19: [#imageLiteral(resourceName: "Test 2")],
-            20: [#imageLiteral(resourceName: "Test 2")],
-            21: [#imageLiteral(resourceName: "Test 2")],
-            22: [#imageLiteral(resourceName: "deepSquat"), #imageLiteral(resourceName: "deepSquat1"), #imageLiteral(resourceName: "deepSquat2"), #imageLiteral(resourceName: "deepSquat3"), #imageLiteral(resourceName: "deepSquat4"), #imageLiteral(resourceName: "deepSquat5")],
-            // Hand/Elbows and Feet/Knees
-            23: [#imageLiteral(resourceName: "dolphin"), #imageLiteral(resourceName: "dolphin1"), #imageLiteral(resourceName: "dolphin2"), #imageLiteral(resourceName: "dolphin3")],
-            24: [#imageLiteral(resourceName: "downwardDog"), #imageLiteral(resourceName: "downwardDog1"), #imageLiteral(resourceName: "downwardDog2"), #imageLiteral(resourceName: "downwardDog3"), #imageLiteral(resourceName: "downwardDog4")],
-            25: [#imageLiteral(resourceName: "halfDownwardDog"), #imageLiteral(resourceName: "halfDownwardDog1"), #imageLiteral(resourceName: "halfDownwardDog2"), #imageLiteral(resourceName: "halfDownwardDog3"), #imageLiteral(resourceName: "halfDownwardDog4")],
-            26: [#imageLiteral(resourceName: "Test 2")],
-            27: [#imageLiteral(resourceName: "Test 2")],
-            28: [#imageLiteral(resourceName: "Test 2")],
-            29: [#imageLiteral(resourceName: "sidePlank"), #imageLiteral(resourceName: "sidePlank1"), #imageLiteral(resourceName: "sidePlank2"), #imageLiteral(resourceName: "sidePlank3"), #imageLiteral(resourceName: "sidePlank4")],
-            30: [#imageLiteral(resourceName: "Test 2")],
-            31: [#imageLiteral(resourceName: "Test 2")],
-            32: [#imageLiteral(resourceName: "catCow"), #imageLiteral(resourceName: "catCow1"), #imageLiteral(resourceName: "catCow2"), #imageLiteral(resourceName: "catCow1"), #imageLiteral(resourceName: "catCow3"), #imageLiteral(resourceName: "catCow1")],
-            33: [#imageLiteral(resourceName: "Test 2")],
-            34: [#imageLiteral(resourceName: "childPose"), #imageLiteral(resourceName: "childPose1"), #imageLiteral(resourceName: "childPose2"), #imageLiteral(resourceName: "childPose3")],
-            35: [#imageLiteral(resourceName: "Test 2")],
-            36: [#imageLiteral(resourceName: "Test 2")],
-            37: [#imageLiteral(resourceName: "bridge"), #imageLiteral(resourceName: "bridge1"), #imageLiteral(resourceName: "bridge2"), #imageLiteral(resourceName: "bridge3")],
-            38: [#imageLiteral(resourceName: "upwardPlank"), #imageLiteral(resourceName: "upwardPlank1"), #imageLiteral(resourceName: "upwardPlank2"), #imageLiteral(resourceName: "upwardPlank3"), #imageLiteral(resourceName: "upwardPlank4"), #imageLiteral(resourceName: "upwardPlank5")],
-            39: [#imageLiteral(resourceName: "extendedPuppy"), #imageLiteral(resourceName: "extendedPuppy1"), #imageLiteral(resourceName: "extendedPuppy2"), #imageLiteral(resourceName: "extendedPuppy3"), #imageLiteral(resourceName: "extendedPuppy4"), #imageLiteral(resourceName: "extendedPuppy5")],
-            40: [#imageLiteral(resourceName: "Test 2")],
-            // Seated
-            41: [#imageLiteral(resourceName: "Test 2")],
-            42: [#imageLiteral(resourceName: "Test 2")],
-            43: [#imageLiteral(resourceName: "Test 2")],
-            44: [#imageLiteral(resourceName: "Test 2")],
-            45: [#imageLiteral(resourceName: "Test 2")],
-            46: [#imageLiteral(resourceName: "Test 2")],
-            47: [#imageLiteral(resourceName: "Test 2")],
-            48: [#imageLiteral(resourceName: "Test 2")],
-            49: [#imageLiteral(resourceName: "Test 2")],
-            50: [#imageLiteral(resourceName: "Test 2")],
-            51: [#imageLiteral(resourceName: "vSideBend"), #imageLiteral(resourceName: "vSideBend1"), #imageLiteral(resourceName: "vSideBend2"), #imageLiteral(resourceName: "vSideBend3"), #imageLiteral(resourceName: "vSideBend4"), #imageLiteral(resourceName: "vSideBend5")],
-            52: [#imageLiteral(resourceName: "halfVForwardBend"), #imageLiteral(resourceName: "halfVForwardBend1"), #imageLiteral(resourceName: "halfVForwardBend2"), #imageLiteral(resourceName: "halfVForwardBend3"), #imageLiteral(resourceName: "halfVForwardBend4"), #imageLiteral(resourceName: "halfVForwardBend5"), #imageLiteral(resourceName: "halfVForwardBend6")],
-            53: [#imageLiteral(resourceName: "halfVSideBend"), #imageLiteral(resourceName: "halfVSideBend1"),
-                 #imageLiteral(resourceName: "halfVSideBend2"), #imageLiteral(resourceName: "halfVSideBend3"), #imageLiteral(resourceName: "halfVSideBend4"), #imageLiteral(resourceName: "halfVSideBend5")],
-            54: [#imageLiteral(resourceName: "marichi1"), #imageLiteral(resourceName: "marichi11"), #imageLiteral(resourceName: "marichi12"), #imageLiteral(resourceName: "marichi13"), #imageLiteral(resourceName: "marichi14"), #imageLiteral(resourceName: "marichi15"), #imageLiteral(resourceName: "marichi16"), #imageLiteral(resourceName: "marichi17")],
-            55: [#imageLiteral(resourceName: "marichi3"), #imageLiteral(resourceName: "marichi31"), #imageLiteral(resourceName: "marichi32"), #imageLiteral(resourceName: "marichi33"), #imageLiteral(resourceName: "marichi34"), #imageLiteral(resourceName: "marichi35"), #imageLiteral(resourceName: "marichi36"), #imageLiteral(resourceName: "marichi37")],
-            56: [#imageLiteral(resourceName: "Test 2")],
-            // Lying
-            57: [#imageLiteral(resourceName: "Test 2")],
-            58: [#imageLiteral(resourceName: "Test 2")],
-            59: [#imageLiteral(resourceName: "fish"), #imageLiteral(resourceName: "fish1"), #imageLiteral(resourceName: "fish2"), #imageLiteral(resourceName: "fish3"), #imageLiteral(resourceName: "fish4"), #imageLiteral(resourceName: "fish5")],
-            60: [#imageLiteral(resourceName: "Test 2")],
-            61: [#imageLiteral(resourceName: "lyingButterfly"), #imageLiteral(resourceName: "lyingButterfly1"), #imageLiteral(resourceName: "lyingButterfly2"), #imageLiteral(resourceName: "lyingButterfly3"), #imageLiteral(resourceName: "lyingButterfly4")],
-            62: [#imageLiteral(resourceName: "Test 2")],
-            63: [#imageLiteral(resourceName: "threadTheNeedle"), #imageLiteral(resourceName: "threadTheNeedle1"), #imageLiteral(resourceName: "threadTheNeedle2"), #imageLiteral(resourceName: "threadTheNeedle3"), #imageLiteral(resourceName: "threadTheNeedle4"), #imageLiteral(resourceName: "threadTheNeedle5")],
-            64: [#imageLiteral(resourceName: "Test 2")],
-            65: [#imageLiteral(resourceName: "plow"), #imageLiteral(resourceName: "plow1"), #imageLiteral(resourceName: "plow2"), #imageLiteral(resourceName: "plow3"), #imageLiteral(resourceName: "plow4")],
-            66: [#imageLiteral(resourceName: "Test 2")],
-            67: [#imageLiteral(resourceName: "Test 2")],
-            68: [#imageLiteral(resourceName: "Test 2")],
-            69: [#imageLiteral(resourceName: "spineRolling"), #imageLiteral(resourceName: "spineRolling1"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling3"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling4"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling3"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling4")],
-            // Hand Stands
-            70: [#imageLiteral(resourceName: "Test 2")],
-            71: [#imageLiteral(resourceName: "Test 2")],
-            72: [#imageLiteral(resourceName: "Test 2")]
+            9: [#imageLiteral(resourceName: "Pause")],      // Biking Pauses
+            10: [#imageLiteral(resourceName: "Pause")],
+            11: [#imageLiteral(resourceName: "Pause")],
+            
+            12: [#imageLiteral(resourceName: "Test 2")],   // Rowing
+            13: [#imageLiteral(resourceName: "Test 2")],
+            14: [#imageLiteral(resourceName: "Test 2")],
+            15: [#imageLiteral(resourceName: "Pause")],   // Rowing Pauses
+            16: [#imageLiteral(resourceName: "Pause")],
+            17: [#imageLiteral(resourceName: "Pause")],
     ]
-    
     
     // Demonstration Animation Duration
     let animationDurationDictionary: [Int: Double] =
         [
-            // Standing
-            0: 0,
+            // Movement
+            0: 0,    // Running
             1: 0,
-            2: 3.5,
-            3: 3.0,
-            4: 4.0,
-            5: 3.0,
-            6: 4.0,
+            2: 0,
+            3: 0,     // Running Pauses
+            4: 0,
+            5: 0,
+            
+            6: 0,   // Bike
             7: 0,
             8: 0,
-            9: 3.5,
+            9: 0,      // Biking Pauses
             10: 0,
             11: 0,
-            12: 3.5,
-            13: 3.5,
-            14: 3.5,
-            15: 0,
+            
+            12: 0,   // Rowing
+            13: 0,
+            14: 0,
+            15: 0,   // Rowing Pauses
             16: 0,
             17: 0,
-            18: 0,
-            19: 0,
-            20: 0,
-            21: 0,
-            22: 3.0,
-            // Hand/Elbows and Feet/Knees
-            23: 2.0,
-            24: 2.5,
-            25: 2.5,
-            26: 0,
-            27: 0,
-            28: 0,
-            29: 2.5,
-            30: 0,
-            31: 0,
-            32: 3.0,
-            33: 0,
-            34: 2.0,
-            35: 0,
-            36: 0,
-            37: 2.0,
-            38: 3.0,
-            39: 3.0,
-            40: 0,
-            // Seated
-            41: 0,
-            42: 0,
-            43: 0,
-            44: 0,
-            45: 0,
-            46: 0,
-            47: 0,
-            48: 0,
-            49: 0,
-            50: 0,
-            51: 3.0,
-            52: 3.5,
-            53: 3.0,
-            54: 4.0,
-            55: 4.0,
-            56: 0,
-            // Lying
-            57: 0,
-            58: 0,
-            59: 3.0,
-            60: 0,
-            61: 2.5,
-            62: 0,
-            63: 3.0,
-            64: 0,
-            65: 2.5,
-            66: 0,
-            67: 0,
-            68: 0,
-            69: 5.0,
-            // Hand Stands
-            70: 0,
-            71: 0,
-            72: 0
     ]
     
     
     // Target Area Dictionary
     let targetAreaDictionary: [Int: UIImage] =
         [
-            // Standing
-            0: #imageLiteral(resourceName: "Heart"),
+            // Movement
+            0: #imageLiteral(resourceName: "Heart"),    // Running
             1: #imageLiteral(resourceName: "Heart"),
             2: #imageLiteral(resourceName: "Heart"),
-            3: #imageLiteral(resourceName: "Heart"),
+            3: #imageLiteral(resourceName: "Heart"),     // Running Pauses
             4: #imageLiteral(resourceName: "Heart"),
             5: #imageLiteral(resourceName: "Heart"),
-            6: #imageLiteral(resourceName: "Heart"),
+            
+            6: #imageLiteral(resourceName: "Heart"),   // Bike
             7: #imageLiteral(resourceName: "Heart"),
             8: #imageLiteral(resourceName: "Heart"),
-            9: #imageLiteral(resourceName: "Heart"),
+            9: #imageLiteral(resourceName: "Heart"),      // Biking Pauses
             10: #imageLiteral(resourceName: "Heart"),
             11: #imageLiteral(resourceName: "Heart"),
-            12: #imageLiteral(resourceName: "Heart"),
+            
+            12: #imageLiteral(resourceName: "Heart"),   // Rowing
             13: #imageLiteral(resourceName: "Heart"),
             14: #imageLiteral(resourceName: "Heart"),
-            15: #imageLiteral(resourceName: "Heart"),
+            15: #imageLiteral(resourceName: "Heart"),   // Rowing Pauses
             16: #imageLiteral(resourceName: "Heart"),
             17: #imageLiteral(resourceName: "Heart"),
-            18: #imageLiteral(resourceName: "Heart"),
-            19: #imageLiteral(resourceName: "Heart"),
-            20: #imageLiteral(resourceName: "Heart"),
-            21: #imageLiteral(resourceName: "Heart"),
-            22: #imageLiteral(resourceName: "Heart"),
-            // Hand/Elbows and Feet/Knees
-            23: #imageLiteral(resourceName: "Heart"),
-            24: #imageLiteral(resourceName: "Heart"),
-            25: #imageLiteral(resourceName: "Heart"),
-            26: #imageLiteral(resourceName: "Heart"),
-            27: #imageLiteral(resourceName: "Heart"),
-            28: #imageLiteral(resourceName: "Heart"),
-            29: #imageLiteral(resourceName: "Heart"),
-            30: #imageLiteral(resourceName: "Heart"),
-            31: #imageLiteral(resourceName: "Heart"),
-            32: #imageLiteral(resourceName: "Heart"),
-            33: #imageLiteral(resourceName: "Heart"),
-            34: #imageLiteral(resourceName: "Heart"),
-            35: #imageLiteral(resourceName: "Heart"),
-            36: #imageLiteral(resourceName: "Heart"),
-            37: #imageLiteral(resourceName: "Heart"),
-            38: #imageLiteral(resourceName: "Heart"),
-            39: #imageLiteral(resourceName: "Heart"),
-            40: #imageLiteral(resourceName: "Heart"),
-            // Seated
-            41: #imageLiteral(resourceName: "Heart"),
-            42: #imageLiteral(resourceName: "Heart"),
-            43: #imageLiteral(resourceName: "Heart"),
-            44: #imageLiteral(resourceName: "Heart"),
-            45: #imageLiteral(resourceName: "Heart"),
-            46: #imageLiteral(resourceName: "Heart"),
-            47: #imageLiteral(resourceName: "Heart"),
-            48: #imageLiteral(resourceName: "Heart"),
-            49: #imageLiteral(resourceName: "Heart"),
-            50: #imageLiteral(resourceName: "Heart"),
-            51: #imageLiteral(resourceName: "Heart"),
-            52: #imageLiteral(resourceName: "Heart"),
-            53: #imageLiteral(resourceName: "Heart"),
-            54: #imageLiteral(resourceName: "Heart"),
-            55: #imageLiteral(resourceName: "Heart"),
-            56: #imageLiteral(resourceName: "Heart"),
-            // Lying
-            57: #imageLiteral(resourceName: "Heart"),
-            58: #imageLiteral(resourceName: "Heart"),
-            59: #imageLiteral(resourceName: "Heart"),
-            60: #imageLiteral(resourceName: "Heart"),
-            61: #imageLiteral(resourceName: "Heart"),
-            62: #imageLiteral(resourceName: "Heart"),
-            63: #imageLiteral(resourceName: "Heart"),
-            64: #imageLiteral(resourceName: "Heart"),
-            65: #imageLiteral(resourceName: "Heart"),
-            66: #imageLiteral(resourceName: "Heart"),
-            67: #imageLiteral(resourceName: "Heart"),
-            68: #imageLiteral(resourceName: "Heart"),
-            // Hand Stands
-            69: #imageLiteral(resourceName: "Heart"),
-            70: #imageLiteral(resourceName: "Heart"),
-            71: #imageLiteral(resourceName: "Heart"),
-            72: #imageLiteral(resourceName: "Heart")
     ]
     
     
-    // Practice Section Title
-    let practiceSectionTitles: [String] =
-        // Test
-        ["test",
-         // Meditation
-            "yogaMeditation"]
     
+    // Presets Header Arrays
+    let presetsHeaderArray: [String] = ["timeBased", "distanceBased"]
     
+    //
+    // Rowing ---------------------------------------------------------------------------------------------
+    //
     // Preset Arrays
-    let practiceTitlesArray: [[String]] =
+    let presetsTitlesArrayRowing: [[String]] =
+        [
+            // Test
+            // Relaxing
+            ["test", "?", "?"],
+            // Yoga Meditation
+            ["test2", "?"]
+    ]
+    
+    // Content Array
+    let presetsArrayRowing: [[[Int]]] =
+        [
+            // 5 min
+            // Relaxing
+            [
+                [12,16,12,16,12,16,12,16],
+                [2,3,4,5,6,9,12,13],
+                [2,3,4]
+            ],
+            // Meditation
+            [
+                [12,16,12,16,12,16,12,16],
+                [66,66,66]
+            ]
+    ]
+    
+    // Length Array
+    let lengthArrayRowing: [[[Int]]] =
+        [
+            // 5 min
+            // Relaxing
+            [
+                [30,60,30,60,30,60,30,60],
+                [1,1,1,1,1,1,1,1],
+                [1,1,1]
+            ],
+            // Meditation
+            [
+                [200,1,100,1,200,1,100,1],
+                [5,5,5]
+            ]
+    ]
+    
+    //
+    // Rowing ---------------------------------------------------------------------------------------------
+    //
+    // Preset Arrays
+    let presetsTitlesArrayBiking: [[String]] =
         [
             // Test
             // Relaxing
@@ -494,13 +220,13 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             ["lettingGo", "breathing"]
     ]
     
-    // Practice Content Array
-    let practiceArray: [[[Int]]] =
+    // Content Array
+    let presetsArrayBiking: [[[Int]]] =
         [
             // 5 min
             // Relaxing
             [
-                [2,3,4,5,6,9,12,13,14,22,23,24,25,29,32,34,37,38,39,51,52,53,54,55,59,61,63,65,69],
+                [2,3,4,5,6,9],
                 [2,3,4,5,6,9,12,13],
                 [2,3,4]
             ],
@@ -511,13 +237,13 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             ]
     ]
     
-    // Breaths Array
-    var breathsArray: [[[Int]]] =
+    // Length Array
+    let lengthArrayBiking: [[[Int]]] =
         [
             // 5 min
             // Relaxing
             [
-                [1,1,1,1,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5],
+                [1,1,1,1,5,5],
                 [1,1,1,1,1,1,1,1],
                 [1,1,1]
             ],
@@ -527,6 +253,83 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 [5,5,5]
             ]
     ]
+    
+    
+    //
+    // Rowing ---------------------------------------------------------------------------------------------
+    //
+    // Preset Arrays
+    let presetsTitlesArrayRunning: [[String]] =
+        [
+            // Test
+            // Relaxing
+            ["lit", "lit", "test"],
+            // Yoga Meditation
+            ["lettingGo", "breathing"]
+    ]
+    
+    // Content Array
+    let presetsArrayRunning: [[[Int]]] =
+        [
+            // 5 min
+            // Relaxing
+            [
+                [2,3,4,5,6,9],
+                [2,3,4,5,6,9,12,13],
+                [2,3,4]
+            ],
+            // Meditation
+            [
+                [33,33,33],
+                [66,66,66]
+            ]
+    ]
+    
+    // Length Array
+    var lengthArrayRunning: [[[Int]]] =
+        [
+            // 5 min
+            // Relaxing
+            [
+                [1,1,1,1,5,5],
+                [1,1,1,1,1,1,1,1],
+                [1,1,1]
+            ],
+            // Meditation
+            [
+                [5,5,5],
+                [5,5,5]
+            ]
+    ]
+    
+    
+    // Set Arrays
+    func setArrays() {
+        switch cardioType {
+        // Rowing
+        case 0:
+            presetsTitlesArray = presetsTitlesArrayRowing
+            presetsArray = presetsArrayRowing
+            lengthArray = lengthArrayRowing
+        // Biking
+        case 1:
+            presetsTitlesArray = presetsTitlesArrayBiking
+            presetsArray = presetsArrayBiking
+            lengthArray = lengthArrayBiking
+        // Running
+        case 2:
+            presetsTitlesArray = presetsTitlesArrayRunning
+            presetsArray = presetsArrayRunning
+            lengthArray = lengthArrayRunning
+        default: break
+        }
+    }
+    
+    
+    
+    //
+    let navigationTitles: [String] = ["rowing", "biking", "runnung"]
+    
     
     
     
@@ -548,7 +351,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var beginButton: UIButton!
     
     // Movements Table View
-    @IBOutlet weak var posesTableView: UITableView!
+    @IBOutlet weak var overviewTableView: UITableView!
     
     // Presets Button
     @IBOutlet weak var presetsButton: UIButton!
@@ -596,7 +399,11 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presetsButton.setTitle(NSLocalizedString("selectPractice", comment: ""), for: .normal)
+        //
+        setArrays()
+        
+        //
+        presetsButton.setTitle(NSLocalizedString("selectCardioSession", comment: ""), for: .normal)
     }
     
     //
@@ -604,19 +411,21 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //
+        setArrays()
+
         // Colour
         view.backgroundColor = UIColor(red:0.08, green:0.08, blue:0.08, alpha:1.0)
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString(navigationTitles[yogaType], comment: ""))
+        navigationBar.title = (NSLocalizedString(navigationTitles[cardioType], comment: ""))
         
         //
         presetsButton.backgroundColor = colour2
         presetsButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         //
-        posesTableView.tableFooterView = UIView()
+        overviewTableView.tableFooterView = UIView()
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
@@ -645,9 +454,9 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         let tableViewBackground = UIView()
         //
         tableViewBackground.backgroundColor = colour2
-        tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.posesTableView.frame.size.width, height: self.posesTableView.frame.size.height)
+        tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.overviewTableView.frame.size.width, height: self.overviewTableView.frame.size.height)
         //
-        posesTableView.backgroundView = tableViewBackground
+        overviewTableView.backgroundView = tableViewBackground
         
         //
         let tableViewBackground2 = UIView()
@@ -685,7 +494,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
         switch tableView {
-        case posesTableView:
+        case overviewTableView:
             return 1
         case presetsTableView:
             return 2
@@ -697,19 +506,22 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // Title for header
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch tableView {
-        case posesTableView:
-            return " "
+        case overviewTableView:
+            return ""
         case presetsTableView:
-            return NSLocalizedString(practiceSectionTitles[section], comment: "")
+            return NSLocalizedString(presetsHeaderArray[section], comment: "")
         default: break
         }
         return ""
     }
     
+    //
+   
+    
     // Will display header
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         switch tableView {
-        case posesTableView:
+        case overviewTableView:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
             header.textLabel?.textColor = colour1
@@ -728,10 +540,10 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // Number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
-        case posesTableView:
-            return practiceArray[selectedPreset[0]][selectedPreset[1]].count
+        case overviewTableView:
+            return presetsArray[selectedPreset[0]][selectedPreset[1]].count
         case presetsTableView:
-            return practiceTitlesArray[section].count
+            return presetsTitlesArray[section].count
         default: break
         }
         return 0
@@ -741,13 +553,13 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView {
         //
-        case posesTableView:
+        case overviewTableView:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
             cell.selectionStyle = .none
             //
-            cell.textLabel?.text = NSLocalizedString(yogaPosesDictionary[practiceArray[selectedPreset[0]][selectedPreset[1]][indexPath.row]]!, comment: "")
+            cell.textLabel?.text = NSLocalizedString(cardioMovementsDictionary[presetsArray[selectedPreset[0]][selectedPreset[1]][indexPath.row]]!, comment: "")
             //
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -755,12 +567,33 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             cell.textLabel?.textColor = colour2
             cell.tintColor = colour2
+            
+            // Detail
+            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
+            cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
+            cell.detailTextLabel?.textAlignment = .right
+            cell.detailTextLabel?.textColor = colour2
+            //
+            // Time
+            if selectedPreset[0] == 0 {
+                cell.detailTextLabel?.text = timeToString(totalSeconds: lengthArray[selectedPreset[0]][selectedPreset[1]][indexPath.row])
+            } else {
+                // Even IndexPath.rows (movement)
+                if indexPath.row % 2 == 0 {
+                    cell.detailTextLabel?.text = String(lengthArray[selectedPreset[0]][selectedPreset[1]][indexPath.row]) + "m"
+                // Odd IndexPath.rows (pauses)
+                } else {
+                    cell.detailTextLabel?.text = timeToString(totalSeconds: lengthArray[selectedPreset[0]][selectedPreset[1]][indexPath.row])
+                }
+            }
+            
+            
             //
             // Cell Image
-            cell.imageView?.image = demonstrationDictionary[practiceArray[selectedPreset[0]][selectedPreset[1]][indexPath.row]]?[0]
+            cell.imageView?.image = demonstrationDictionary[presetsArray[selectedPreset[0]][selectedPreset[1]][indexPath.row]]?[0]
             cell.imageView?.isUserInteractionEnabled = true
             //
-            cell.imageView?.tag = practiceArray[selectedPreset[0]][selectedPreset[1]][indexPath.row]
+            cell.imageView?.tag = presetsArray[selectedPreset[0]][selectedPreset[1]][indexPath.row]
             // Image Tap
             let imageTap = UITapGestureRecognizer()
             imageTap.numberOfTapsRequired = 1
@@ -773,7 +606,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             //
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             //
-            cell.textLabel?.text = "- " + NSLocalizedString(practiceTitlesArray[indexPath.section][indexPath.row], comment: "") + " -"
+            cell.textLabel?.text = "- " + NSLocalizedString(presetsTitlesArray[indexPath.section][indexPath.row], comment: "") + " -"
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -790,7 +623,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch tableView {
-        case posesTableView:
+        case overviewTableView:
             return 72
         case presetsTableView:
             return 44
@@ -803,7 +636,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView {
         //
-        case posesTableView:
+        case overviewTableView:
             break
         //
         case presetsTableView:
@@ -813,7 +646,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             //
             
             
-            presetsButton.setTitle("- " + NSLocalizedString(practiceTitlesArray[indexPath.section][indexPath.row], comment: "") + " -", for: .normal)
+            presetsButton.setTitle("- " + NSLocalizedString(presetsTitlesArray[indexPath.section][indexPath.row], comment: "") + " -", for: .normal)
             presetsTableView.deselectRow(at: indexPath, animated: true)
             
             //
@@ -821,7 +654,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsButton.frame.size.width - 60, height: 1)
                 self.presetsTableView.alpha = 0
                 self.backgroundViewExpanded.alpha = 0
-                self.posesTableView.reloadData()
+                self.overviewTableView.reloadData()
                 //
                 self.tableConstraint1.constant = 73.75
                 self.tableConstraint.constant = 49.75
@@ -909,6 +742,10 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         imageIndex = demonstrationIndex
         
+        if demonstrationDictionary[demonstrationIndex]?[0] == #imageLiteral(resourceName: "Pause") {
+            
+        } else {
+        
         // Expanded Image
         //
         expandedImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height/2)
@@ -922,6 +759,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         // Animation
         expandedImage.image = demonstrationDictionary[demonstrationIndex]?[0]
         expandedImage.animationImages = demonstrationDictionary[demonstrationIndex]
+        expandedImage.animationImages?.removeFirst()
         expandedImage.animationDuration = animationDurationDictionary[demonstrationIndex]!
         expandedImage.animationRepeatCount = 1
         // Play
@@ -945,6 +783,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             self.expandedImage.center.y = (height/2) * 1.5
             self.backgroundViewImage.alpha = 0.5
         }, completion: nil)
+        }
     }
     
     // Retract image
@@ -974,6 +813,39 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     //
+    // Time
+    func timeToString(totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        if minutes < 1 {
+            if seconds < 10 {
+                return String(format: "%01ds", seconds)
+            } else {
+                return String(format: "%02ds", seconds)
+            }
+        } else {
+            if minutes < 10 {
+                if seconds == 0 {
+                    return String(format: "%01dmin", minutes)
+                } else if seconds < 10 {
+                    return String(format: "%01dmin %01ds", minutes, seconds)
+                } else {
+                    return String(format: "%01dmin %02ds", minutes, seconds)
+                }
+            } else {
+                if seconds == 0 {
+                    return String(format: "%02dmin", minutes)
+                } else if seconds < 10 {
+                    return String(format: "%02dmin %01ds", minutes, seconds)
+                } else {
+                    return String(format: "%02dmin %02ds", minutes, seconds)
+                }
+            }
+        }
+    }
+    
+    
+    //
     // Begin Button ---------------------------------------------------------------------------------------------------------------------------
     //
     // Begin Button
@@ -991,33 +863,25 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // Pass Arrays ---------------------------------------------------------------------------------------------------------------------------
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "yogaSessionSegue") {
+        if (segue.identifier == "cardioSessionSegue") {
             //
-            let destinationVC = segue.destination as! YogaScreen
+            let destinationVC = segue.destination as! CardioScreen
             
             // Ensure array in ascending order
             // Compress Arrays
-            for i in practiceArray[selectedPreset[0]][selectedPreset[1]] {
+            for i in presetsArray[selectedPreset[0]][selectedPreset[1]] {
                 //
-                yogaArray.append(yogaPosesDictionary[i]!)
+                cardioArray.append(cardioMovementsDictionary[i]!)
                 //
-                demonstrationArray.append(demonstrationDictionary[i]!)
-                //
-                animationDurationArray.append(animationDurationDictionary[i]!)
-                //
-                //targetAreaArray.append(targetAreaDictionary[i]!)
-                //
-                explanationArray.append(explanationDictionary[i]!)
             }
             //
-            destinationVC.sessionArray = yogaArray
-            destinationVC.breathsArray = breathsArray[selectedPreset[0]][selectedPreset[1]]
-            destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.animationDurationArray = animationDurationArray
-            //destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
+            destinationVC.sessionArray = cardioArray
+            destinationVC.lengthArray = lengthArray[selectedPreset[0]][selectedPreset[1]]
+            
             //
-            destinationVC.sessionTitle = practiceTitlesArray[selectedPreset[0]][selectedPreset[1]]
+            destinationVC.sessionTitle = presetsTitlesArray[selectedPreset[0]][selectedPreset[1]]
+            //
+            destinationVC.sessionType = selectedPreset[0]
         }
     }
     
@@ -1093,7 +957,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             //
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 73.5, width: self.view.frame.size.width, height: posesTableView.frame.size.height))
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 73.5, width: self.view.frame.size.width, height: overviewTableView.frame.size.height))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1123,7 +987,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             //
             // Clear Section
             let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 73.5 + posesTableView.frame.size.height, width: self.view.frame.size.width, height: 49))
+            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 73.5 + overviewTableView.frame.size.height, width: self.view.frame.size.width, height: 49))
             path.addRect(screenSize)
             //
             let maskLayer = CAShapeLayer()
@@ -1144,7 +1008,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             walkthroughView.bringSubview(toFront: backButton)
             
             //
-            label.center = posesTableView.center
+            label.center = overviewTableView.center
             label.text = NSLocalizedString("choiceScreen22", comment: "")
             UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
         //

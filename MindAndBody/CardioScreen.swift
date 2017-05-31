@@ -13,24 +13,21 @@ import AVFoundation
 
 
 //
-// Custom Overview Tableview Cells ---------------------------------------------------------------------------
+// Cardio Tableview Cell ---------------------------------------------------------------------------
 //
-// Overview TableView Cell
-//class YogaOverviewTableViewCell: UITableViewCell {
-//    // Demonstration Image View
-//    @IBOutlet weak var demonstrationImageView: UIImageView!
-//    // Title Label
-//    @IBOutlet weak var poseLabel: UILabel!
-//    // Breaths Label
-//    @IBOutlet weak var breathsLabel: UILabel!
-//    // Explanation Button
-//    @IBOutlet weak var explanationButton: UIButton!
-//    
-//}
+// Cardio TableView Cell
+class CardioTableViewCell: UITableViewCell {
+    // DetailLabel (Time/Distance)
+    @IBOutlet weak var detailLabel: UILabel!
+    // Title Label
+    @IBOutlet weak var movementLabel: UILabel!
+    // Play/Pause
+    @IBOutlet weak var playPauseButton: UIButton!
+}
 
 
 //
-// Session Screen Overview Class ------------------------------------------------------------------------------------
+// Cardio Screen Class ------------------------------------------------------------------------------------
 //
 class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -41,29 +38,22 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     //
     var sessionType = Int()
     
+    
     // Title
     var sessionTitle = String()
     
     // Movement Array
     var sessionArray: [String] = []
     
-    // Sets Array
-    var breathsArray: [Int] = []
+    // Length Array
+    var lengthArray: [Int] = []
     
-    // Demonstration Array
-    var demonstrationArray: [[UIImage]] = []
-    var animationDurationArray: [Double] = []
-    
-    // Explanation Array
-    var explanationArray: [String] = []
     
     //
     // Variables
     var selectedRow = 0
     
-    //
-    var automaticYogaArray: [Int] = []
-    
+
     // Bells Arrays
     let bellsArray: [String] =
         ["Tibetan Chimes", "Tibetan Singing Bowl (Low)", "Tibetan Singing Bowl (Low)(x4)", "Tibetan Singing Bowl (Low)(Singing)", "Tibetan Singing Bowl (High)", "Tibetan Singing Bowl (High)(x4)", "Tibetan Singing Bowl (High)(Singing)", "Australian Rain Stick", "Australian Rain Stick (x2)", "Australian Rain Stick (2 sticks)", "Wind Chimes", "Gambang (Wood)(Up)", "Gambang (Wood)(Down)", "Gambang (Metal)", "Indonesian Frog", "Cow Bell (Small)", "Cow Bell (Big)"]
@@ -80,25 +70,14 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     // Pause/Play
     var playPause = UIButton()
     
-    //
-    var updateTimer = Timer()
-    var soundPlayer: AVAudioPlayer!
     
     //
-    // View did load -----------------------------------------------------------------------------------------------------
-    //
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //
-        automaticYogaArray = UserDefaults.standard.object(forKey: "automaticYoga") as! [Int]
-        
-        //
-        view.backgroundColor = colour2
-        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // Session Started
         //
         // Alert View
-        let title = NSLocalizedString("sessionStarted", comment: "")
+        let title = NSLocalizedString("sessionStarted", comment: "") + "\n" + NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[selectedRow], comment: "")
         //let message = NSLocalizedString("resetMessage", comment: "")
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.view.tintColor = colour1
@@ -108,21 +87,24 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             let delayInSeconds = 0.7
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 alert.dismiss(animated: true, completion: nil)
+                self.startTimer()
             }
         })
+    }
+    
+    //
+    // View did load -----------------------------------------------------------------------------------------------------
+    //
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //
+        //
+        view.backgroundColor = colour2
         
         
-        // Progress Bar
-        // Thickness
-        switch automaticYogaArray[0] {
-        case 0:
-            progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
-            progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
-        case 1:
-            progressBar.frame = CGRect(x: 44, y: 0, width: self.view.frame.size.width - 44, height: 2)
-            progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 43)
-        default: break
-        }
+        
+        progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
+        progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
         
         // Rounded Edges
         // Colour
@@ -146,19 +128,20 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         playPause.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         playPause.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
         playPause.tintColor = colour1
-        playPause.addTarget(self, action: #selector(pauseButtonAction), for: .touchUpInside)
+        //playPause.addTarget(self, action: #selector(pauseButtonAction), for: .touchUpInside)
         
-    }
-    
-    //
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        
         //
-        if automaticYogaArray[0] == 1 {
-            automaticYoga()
+        // Watch for enter foreground
+        switch sessionType {
+        case 0:
+            NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        case 1:
+            NotificationCenter.default.addObserver(self, selector: #selector(startAllTimers), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        default: break
         }
     }
-    
+
     //
     // TableView ---------------------------------------------------------------------------------------------------------------------
     //
@@ -189,23 +172,11 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
         }
         
-        //
-        if automaticYogaArray[0] == 1 {
-            header.addSubview(playPause)
-        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 0:
-            switch automaticYogaArray[0] {
-            case 0:
-                return 2
-            case 1:
-                return 44
-            default: break
-            }
-            return 0
+        case 0: return 2
         case 1: return 0
         default: break
         }
@@ -227,7 +198,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "YogaOverviewTableViewCell", for: indexPath) as! YogaOverviewTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CardioTableViewCell", for: indexPath) as! CardioTableViewCell
             
             // Cell
             //
@@ -239,108 +210,98 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             // Movement
             //
-            cell.poseLabel.text = NSLocalizedString(sessionArray[indexPath.row], comment: "")
+            cell.movementLabel.text = NSLocalizedString(sessionArray[indexPath.row], comment: "")
             //
-            cell.poseLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 23)
-            cell.poseLabel?.textAlignment = .center
-            cell.poseLabel?.textColor = colour1
-            cell.poseLabel?.numberOfLines = 0
-            cell.poseLabel?.lineBreakMode = .byWordWrapping
-            cell.poseLabel?.adjustsFontSizeToFitWidth = true
-            
-            // Set and Reps
-            //
-            cell.breathsLabel?.text = String(breathsArray[indexPath.row]) + " " + NSLocalizedString("breathsC", comment: "")
-            cell.breathsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            cell.breathsLabel?.textAlignment = .right
-            cell.breathsLabel?.textColor = colour1
-            cell.breathsLabel.adjustsFontSizeToFitWidth = true
-            
-            // Buttons
-            //            cell.nextButton.tintColor = colour3
-            //            cell.backButton.tintColor = colour4
-            //cell.nextButton.alpha = 0
-            //cell.backButton.alpha = 0
-            cell.explanationButton.tintColor = colour1
-            
-            // Image
-            //
-            cell.demonstrationImageView.image = demonstrationArray[indexPath.row][0]
-            // Animation
-            cell.demonstrationImageView.animationImages = demonstrationArray[indexPath.row]
-            cell.demonstrationImageView.animationDuration = animationDurationArray[indexPath.row]
-            cell.demonstrationImageView.animationRepeatCount = 1
-            //
-            cell.demonstrationImageView.tag = indexPath.row
-            
-            // Image Tap
-            let imageTap = UITapGestureRecognizer()
-            imageTap.numberOfTapsRequired = 1
-            imageTap.addTarget(self, action: #selector(handleImageTap))
-            cell.demonstrationImageView.addGestureRecognizer(imageTap)
-            //
+            cell.movementLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+            cell.movementLabel?.textAlignment = .center
+            cell.movementLabel?.textColor = colour1
+            cell.movementLabel?.numberOfLines = 0
+            cell.movementLabel?.lineBreakMode = .byWordWrapping
+            cell.movementLabel?.adjustsFontSizeToFitWidth = true
+
             
             //
-            if automaticYogaArray[0] == 0 {
-                // Next Swipe
-                let nextSwipe = UISwipeGestureRecognizer()
-                nextSwipe.direction = .up
-                nextSwipe.addTarget(self, action: #selector(nextButtonAction))
-                cell.addGestureRecognizer(nextSwipe)
-                
-                // Back Swipe
-                let backSwipe = UISwipeGestureRecognizer()
-                backSwipe.direction = .down
-                backSwipe.addTarget(self, action: #selector(backButtonAction))
-                cell.addGestureRecognizer(backSwipe)
+            // Next Swipe
+            let nextSwipe = UISwipeGestureRecognizer()
+            nextSwipe.direction = .up
+            nextSwipe.addTarget(self, action: #selector(nextButtonAction))
+            
+            // Play Pause
+            cell.playPauseButton.tintColor = colour1
+            cell.playPauseButton.addTarget(self, action: #selector(playPauseAction), for: .touchUpInside)
+            
+            
+            // Timer / Distance info
+            //
+            cell.detailLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 72)
+            cell.detailLabel.textColor = colour1
+            //
+            switch sessionType {
+            case 0:
+                if indexPath.row == selectedRow {
+                    //
+                    if selectedRow != 0 {
+                        cell.detailLabel.text = timeFormatted(totalSeconds: lengthArray[indexPath.row])
+                        startTimer()
+                    } else {
+                        cell.detailLabel.text = timeFormattedNicely(totalSeconds: lengthArray[indexPath.row])
+                    }
+                    cell.playPauseButton.alpha = 1
+                } else {
+                    //
+                    cell.detailLabel.text = timeFormattedNicely(totalSeconds: lengthArray[indexPath.row])
+                    cell.playPauseButton.alpha = 0
+                }
+            case 1:
+                // Even IndexPath.rows (movement)
+                if indexPath.row % 2 == 0 {
+                    //
+                    cell.detailLabel.text = String(lengthArray[indexPath.row]) + "m"
+                    //
+                    if indexPath.row == selectedRow {
+                        cell.addGestureRecognizer(nextSwipe)
+                    }
+                    //
+                    cell.playPauseButton.alpha = 0
+                    //
+                // Odd IndexPath.rows (pauses)
+                } else {
+                    if indexPath.row == selectedRow {
+                        cell.detailLabel.text = timeFormatted(totalSeconds: lengthArray[indexPath.row])
+                        startTimer()
+                    } else {
+                        cell.detailLabel.text = timeFormattedNicely(totalSeconds: lengthArray[indexPath.row])
+                        //
+                        if indexPath.row == selectedRow + 1 {
+                            cell.addGestureRecognizer(nextSwipe)
+                        }
+                    }
+                }
+            default: break
             }
+
+                    
+                    
             
-            // Explanation
-            let explanationTap = UITapGestureRecognizer()
-            explanationTap.numberOfTapsRequired = 1
-            explanationTap.addTarget(self, action: #selector(expandExplanation))
-            cell.explanationButton.addGestureRecognizer(explanationTap)
             
-            //            // Next Tap
-            //            let nextTap = UITapGestureRecognizer()
-            //            nextTap.numberOfTapsRequired = 1
-            //            nextTap.addTarget(self, action: #selector(nextButtonAction))
-            //            cell.nextButton.addGestureRecognizer(nextTap)
-            //            //
-            //
-            //            // Back Button
-            //            let backTap = UITapGestureRecognizer()
-            //            backTap.numberOfTapsRequired = 1
-            //            backTap.addTarget(self, action: #selector(backButtonAction))
+          
             //            cell.backButton.addGestureRecognizer(backTap)
             //            //
             
             switch indexPath.row {
             case selectedRow - 1:
-                cell.breathsLabel.alpha = 0
-                cell.poseLabel.alpha = 0
+                cell.movementLabel.alpha = 0
             //
             case selectedRow:
-                cell.breathsLabel.alpha = 1
-                cell.poseLabel.alpha = 1
-                cell.explanationButton.alpha = 1
-                cell.explanationButton.isEnabled = true
-                cell.demonstrationImageView.isUserInteractionEnabled = true
+                cell.movementLabel.alpha = 1
             //
             case selectedRow + 1:
                 //
-                cell.breathsLabel.alpha = 0
-                cell.poseLabel.alpha = 1
-                cell.explanationButton.alpha = 0
-                cell.explanationButton.isEnabled = false
-                cell.demonstrationImageView.isUserInteractionEnabled = false
+                cell.movementLabel.alpha = 1
             //
             default:
                 //
-                cell.breathsLabel.alpha = 1
-                cell.poseLabel.alpha = 1
-                cell.explanationButton.alpha = 1
-                cell.explanationButton.isEnabled = true
+                cell.movementLabel.alpha = 1
             }
             
             return cell
@@ -349,7 +310,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             //
             let cell = tableView.dequeueReusableCell(withIdentifier: "EndTableViewCell", for: indexPath) as! EndTableViewCell
             //
-            cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+            cell.backgroundColor = colour2
             //
             cell.separatorInset =  UIEdgeInsetsMake(0, 0, 0, 0)
             //
@@ -370,26 +331,13 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         switch indexPath.section {
         case 0:
-            switch automaticYogaArray[0] {
-            case 0:
-                switch indexPath.row {
-                case selectedRow - 1, selectedRow:
-                    return (UIScreen.main.bounds.height - 22) * 3/4
-                case selectedRow + 1:
-                    return (UIScreen.main.bounds.height - 22) * 1/4
-                default:
-                    return (UIScreen.main.bounds.height - 22) * 1/4
-                }
-            case 1:
-                switch indexPath.row {
-                case selectedRow - 1, selectedRow:
-                    return (UIScreen.main.bounds.height - 64) * 3/4
-                case selectedRow + 1:
-                    return (UIScreen.main.bounds.height - 64) * 1/4
-                default:
-                    return (UIScreen.main.bounds.height - 64) * 1/4
-                }
-            default: break
+            switch indexPath.row {
+            case selectedRow - 1, selectedRow:
+                return (UIScreen.main.bounds.height - 22) * 3/4
+            case selectedRow + 1:
+                return (UIScreen.main.bounds.height - 22) * 1/4
+            default:
+                return (UIScreen.main.bounds.height - 22) * 1/4
             }
         //
         case 1: return 49
@@ -398,78 +346,14 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         return 0
     }
     
+    
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         switch indexPath.section {
-        case 0:
-            //
-            if automaticYogaArray[0] == 0 {
-                //
-                if indexPath.row == selectedRow {
-                    //                let cell = tableView.cellForRow(at: indexPath)
-                    //                //
-                    //                performSegue(withIdentifier: "SessionDetailSegue", sender: nil)
-                    //                //
-                    //                tableView.deselectRow(at: indexPath, animated: true)
-                    //
-                } else if indexPath.row == selectedRow + 1 {
-                    //
-                    if selectedRow < sessionArray.count {
-                        //
-                        selectedRow = selectedRow + 1
-                        updateProgress()
-                        //
-                        //
-                        let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-                        let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-                        let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
-                        //
-                        var cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
-                        //
-                        //
-                        UIView.animate(withDuration: 0.6, animations: {
-                            //
-                            self.tableView.beginUpdates()
-                            self.tableView.endUpdates()
-                            // 1
-                            cell.breathsLabel.alpha = 1
-                            cell.poseLabel.alpha = 1
-                            cell.explanationButton.alpha = 1
-                            cell.explanationButton.isEnabled = true
-                            cell.demonstrationImageView.isUserInteractionEnabled = true
-                            //
-                            self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-                        })
-                        // + 1
-                        if selectedRow < sessionArray.count - 1 {
-                            tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
-                        }
-                    }
-                    //
-                }
-                
-            }
+        case 0: break
         //
         case 1:
-            if automaticYogaArray[0] == 1 {
-                // Play Ending Bell
-                let url = Bundle.main.url(forResource: bellsArray[automaticYogaArray[3]], withExtension: "caf")!
-                //
-                do {
-                    let bell = try AVAudioPlayer(contentsOf: url)
-                    soundPlayer = bell
-                    bell.play()
-                } catch {
-                    // couldn't load file :(
-                }
-                
-                //
-                task?.cancel()
-                //
-                UIApplication.shared.isIdleTimerDisabled = false
-            }
-            
             // Dismiss
             self.dismiss(animated: true)
             
@@ -528,20 +412,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     //
     // Tap Handlers -------------------------------------------------------------------------------------------------------
     //
-    //
-    //
-    // Image
-    @IBAction func handleImageTap(imageTap:UITapGestureRecognizer) {
-        //
-        // Get Image
-        let sender = imageTap.view as! UIImageView
-        let tag = sender.tag
-        //
-        if demonstrationArray[tag].count != 1 {
-            sender.startAnimating()
-        }
-    }
-    
     
     // Next Button
     @IBAction func nextButtonAction() {
@@ -551,167 +421,32 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             //
             selectedRow = selectedRow + 1
             //
-            if automaticYogaArray[0] == 1 {
-                automaticYoga()
-            }
+            didSetEndTime = false
             
             updateProgress()
             //
             //
-            let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
+            let indexPath = NSIndexPath(row: selectedRow, section: 0)
             let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-            let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
             //
-            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
+            let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
             //
             UIView.animate(withDuration: 0.6, animations: {
                 //
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
                 // 1
-                cell.breathsLabel.alpha = 1
-                cell.poseLabel.alpha = 1
-                cell.explanationButton.alpha = 1
-                cell.explanationButton.isEnabled = true
-                cell.demonstrationImageView.isUserInteractionEnabled = true
-                //
-                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-            })
-            // + 1
-            if selectedRow < sessionArray.count - 1 {
-                tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
-            }
-        } else {
-            //
-            if automaticYogaArray[0] == 1 {
-                UIApplication.shared.isIdleTimerDisabled = false
-                self.dismiss(animated: true)
-            }
-        }
-    }
-    
-    // Back Button
-    @IBAction func backButtonAction() {
-        
-        if selectedRow != 0 {
-            //
-            selectedRow = selectedRow - 1
-            updateProgress()
-            //
-            let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-            let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-            let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
-            //
-            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
-            //
-            UIView.animate(withDuration: 0.6, animations: {
-                //
-                self.tableView.beginUpdates()
-                self.tableView.endUpdates()
-                //
-                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-                
-                // 1
-                cell.breathsLabel.alpha = 1
-                cell.poseLabel.alpha = 1
-                cell.explanationButton.alpha = 1
-                cell.explanationButton.isEnabled = true
-                cell.demonstrationImageView.isUserInteractionEnabled = true
+                cell.movementLabel.alpha = 1
                 // - 1
-                if self.selectedRow > 0 {
-                    cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! YogaOverviewTableViewCell
-                    cell.breathsLabel.alpha = 0
-                    cell.poseLabel.alpha = 0
-                }
-                // + 1
-                cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! YogaOverviewTableViewCell
-                cell.breathsLabel.alpha = 0
-                cell.poseLabel.alpha = 1
-                cell.explanationButton.alpha = 0
-                cell.explanationButton.isEnabled = false
-                cell.demonstrationImageView.isUserInteractionEnabled = false
+                let cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! CardioTableViewCell
+                cell.playPauseButton.alpha = 0
                 //
+                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+            }, completion: { finished in
+                self.tableView.reloadRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.none)
             })
+        } else {
         }
-    }
-    
-    //
-    // Explanation
-    //
-    let scrollViewExplanation = UIScrollView()
-    let backgroundViewExplanation = UIButton()
-    //
-    let explanationLabel = UILabel()
-    // Expand
-    @IBAction func expandExplanation() {
-        let bounds = UIScreen.main.bounds
-        // View
-        //
-        scrollViewExplanation.frame = CGRect(x: 0, y: 0, width: bounds.width, height: (bounds.height - 20) / 2)
-        scrollViewExplanation.center.x = bounds.width/2
-        scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 2.5) + 20
-        //
-        scrollViewExplanation.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        
-        // Background View
-        //
-        backgroundViewExplanation.frame = CGRect(x: 0, y: 0, width: bounds.width, height: (bounds.height - 20))
-        backgroundViewExplanation.backgroundColor = .black
-        backgroundViewExplanation.alpha = 0
-        //
-        backgroundViewExplanation.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
-        
-        // Contents
-        //
-        explanationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-        explanationLabel.textColor = .black
-        explanationLabel.textAlignment = .natural
-        explanationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-        explanationLabel.numberOfLines = 0
-        //
-        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[selectedRow], comment: ""))
-        let paragraphStyleEE = NSMutableParagraphStyle()
-        paragraphStyleEE.alignment = .natural
-        //
-        attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
-        //
-        explanationLabel.attributedText = attributedStringE
-        //
-        explanationLabel.frame = CGRect(x: 10, y: 10, width: bounds.width - 20, height: 0)
-        explanationLabel.sizeToFit()
-        
-        // Scroll View
-        scrollViewExplanation.addSubview(explanationLabel)
-        scrollViewExplanation.contentSize = CGSize(width: bounds.width, height: explanationLabel.frame.size.height + 20)
-        //
-        scrollViewExplanation.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        
-        // Add Views
-        UIApplication.shared.keyWindow?.addSubview(backgroundViewExplanation)
-        UIApplication.shared.keyWindow?.addSubview(scrollViewExplanation)
-        
-        //
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 1.5) + 20
-            self.backgroundViewExplanation.alpha = 0.5
-        }, completion: nil)
-    }
-    
-    // Retract Explanation
-    @IBAction func retractExplanation(_ sender: Any) {
-        let bounds = UIScreen.main.bounds
-        //
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.scrollViewExplanation.center.y = ((bounds.height - 20)/2) * 2.5 + 20
-            self.backgroundViewExplanation.alpha = 0
-        }, completion: { finished in
-            //
-            self.scrollViewExplanation.removeFromSuperview()
-            self.backgroundViewExplanation.removeFromSuperview()
-            //
-            self.explanationLabel.removeFromSuperview()
-            //
-        })
     }
     
     
@@ -735,149 +470,300 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     //
     
-    
     //
-    // Automatic Yoga Functions ---------------------------------------------------------
-    //
-    //
-    var task: DispatchWorkItem?
-    
-    func createDispatch() {
-        
-        task = DispatchWorkItem {
-            //
-            if self.automaticYogaArray[3] != -1 {
-                let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
-                //
-                do {
-                    let bell = try AVAudioPlayer(contentsOf: url)
-                    self.soundPlayer = bell
-                    bell.play()
-                } catch {
-                    // couldn't load file :(
+    // Time
+    func timeFormattedNicely(totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        if minutes < 1 {
+            if seconds < 10 {
+                return String(format: "%01ds", seconds)
+            } else {
+                return String(format: "%02ds", seconds)
+            }
+        } else {
+            if minutes < 10 {
+                if seconds == 0 {
+                    return String(format: "%01dmin", minutes)
+                } else if seconds < 10 {
+                    return String(format: "%01dmin %01ds", minutes, seconds)
+                } else {
+                    return String(format: "%01dmin %02ds", minutes, seconds)
+                }
+            } else {
+                if seconds == 0 {
+                    return String(format: "%02dmin", minutes)
+                } else if seconds < 10 {
+                    return String(format: "%02dmin %01ds", minutes, seconds)
+                } else {
+                    return String(format: "%02dmin %02ds", minutes, seconds)
                 }
             }
-            //
-            self.nextButtonAction()
         }
-        
-        //
-        let poseTime = Double(transitionArray[automaticYogaArray[2]]) + (timeArray[automaticYogaArray[1]] * Double(breathsArray[selectedRow]))
-        // Play sound and repeat func
-        let dispatchTime = DispatchTime.now() + poseTime
-        //
-        DispatchQueue.main.asyncAfter(deadline:  dispatchTime, execute: task!)
-        
     }
     
+//
+// Count Down Timer -------------------------------------------------------------------------------------------------------------------------
+//
+    var isTiming = false
+    var timerValue = Int()
     
-    // Play Pause
-    func pauseButtonAction() {
+    // Timer CountDown Title
+    func timeFormatted(totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    // Update Timer
+    func updateTimer() {
         //
-        if playPause.image(for: .normal) == #imageLiteral(resourceName: "Pause") {
-            //
-            playPause.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
-            //
-            if soundPlayer != nil {
-                if soundPlayer.isPlaying == true {
-                    soundPlayer.stop()
-                }
-            }
-            //
-            // Cancel Dispatch
-            if task != nil {
-                task?.cancel()
-            }
-            
-            // Alert View
-            let title = NSLocalizedString("finishEarly", comment: "")
-            let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.view.tintColor = colour2
-            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-            //
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .natural
-            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
-            // Action
-            let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
-                UIAlertAction in
-                
-                // Play Ending Bell
-                let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
-                //
-                do {
-                    let bell = try AVAudioPlayer(contentsOf: url)
-                    self.soundPlayer = bell
-                    bell.play()
-                } catch {
-                    // couldn't load file :(
-                }
-                //
-                UIApplication.shared.isIdleTimerDisabled = false
+        let indexPath = NSIndexPath(row: selectedRow, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
+        //
+        
+        if timerValue == 0 {
+            if selectedRow < (sessionArray.count - 1) {
+                timerCountDown.invalidate()
+                removeCircle()
+                isTiming = false
+                nextButtonAction()
+            } else {
                 self.dismiss(animated: true)
             }
-            let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
-                UIAlertAction in
-            }
-            //
-            alert.addAction(okAction)
-            alert.addAction(cancelAction)
-            //
-            self.present(alert, animated: true, completion: nil)
-            
-            
-            // Play / Continue Practice
+        //
+        } else if timerValue == 1 {
+            timerValue -= 1
+            cell.detailLabel.text = timeFormatted(totalSeconds: timerValue)
+        //
         } else {
+            timerValue -= 1
             //
-            playPause.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
-            //
-            //
-            if automaticYogaArray[3] != -1 {
-                // Play Initial Bell
-                let url = Bundle.main.url(forResource: bellsArray[automaticYogaArray[3]], withExtension: "caf")!
-                //
-                do {
-                    let bell = try AVAudioPlayer(contentsOf: url)
-                    soundPlayer = bell
-                    bell.play()
-                } catch {
-                    // couldn't load file :(
-                }
-            }
-            //
-            // Creat Dispatch
-            createDispatch()
+            cell.detailLabel.text = timeFormatted(totalSeconds: timerValue)
         }
+    }
+
+    
+    var timerShapeLayer: CAShapeLayer!
+    // Funcs
+    func addCircle() {
+        //
+        let indexPath2 = NSIndexPath(row: selectedRow, section: 0)
+        let cell = tableView.cellForRow(at: indexPath2 as IndexPath) as! CardioTableViewCell
+        
+        var center = CGPoint()
+        if selectedRow != sessionArray.count - 1 {
+            center = CGPoint(x: cell.detailLabel.center.x, y: cell.detailLabel.center.y + 22)
+        } else {
+            let centery = (view.frame.size.height - 49 - cell.frame.size.height) + cell.detailLabel.center.y
+            
+            center = CGPoint(x: cell.detailLabel.center.x, y: centery)
+        }
+        //
+        let radius = ((cell.frame.size.width - 50) / 2)
+        //}
+        //
+        let circlePath = UIBezierPath(arcCenter: center, radius: radius, startAngle: .pi * 1.5, endAngle: (.pi * 2) + (.pi * 1.5), clockwise: true)
+        //let circlePath = UIBezierPath(arcCenter: cell.center, radius: CGFloat(20), startAngle: .pi, endAngle: .pi, clockwise: true)
+        timerShapeLayer = CAShapeLayer()
+        timerShapeLayer.path = circlePath.cgPath
+        timerShapeLayer.fillColor = UIColor.clear.cgColor
+        timerShapeLayer.strokeColor = colour1.cgColor
+        timerShapeLayer.lineWidth = 2.0
+        
+        //
+        timerShapeLayer.strokeEnd = 0.0
+
+        
+        view.layer.addSublayer(timerShapeLayer)
+        //cell.layer.addSublayer(timerShapeLayer)
+    }
+    
+    //
+    func removeCircle() {
+        timerShapeLayer.removeFromSuperlayer()
+    }
+    
+    //
+    func startAnimation() {
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.duration = Double(timerValue)
+        animation.fillMode = kCAFillModeForwards
+        animation.isRemovedOnCompletion = false
+        timerShapeLayer.strokeEnd = 1.0
+        //
+        timerShapeLayer.add(animation, forKey: "circleAnimation")
     }
     
     
     //
-    func automaticYoga() {
+    var didSetEndTime = false
+    var startTime = Double()
+    var endTime = Double()
+    //
+    func startTimer() {
+        //
+        startTime = Date().timeIntervalSinceReferenceDate
+        //
+        if didSetEndTime == false {
+            endTime = startTime + TimeInterval(lengthArray[selectedRow])
+            //
+            didSetEndTime = true
+        }
+        //
+        timerValue = Int(endTime - startTime)
+
+        isTiming = true
         
-        if selectedRow == 0 {
-            // App needs to stay on even when nothing is being touched (users watch the screen and follow the yoga poses)
-            UIApplication.shared.isIdleTimerDisabled = true
+        //
+        
+        if timerValue != 0 {
+            //
+            let indexPath = NSIndexPath(row: selectedRow, section: 0)
+            let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
+
+            //
+            cell.detailLabel.text = timeFormatted(totalSeconds: timerValue)
             
             //
-            if automaticYogaArray[3] != -1 {
-                // Play Initial Bell
-                let url = Bundle.main.url(forResource: bellsArray[automaticYogaArray[3]], withExtension: "caf")!
-                //
-                do {
-                    let bell = try AVAudioPlayer(contentsOf: url)
-                    soundPlayer = bell
-                    bell.play()
-                } catch {
-                    // couldn't load file :(
+            self.addCircle()
+            self.startAnimation()
+            timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+                
+            //
+            let content = UNMutableNotificationContent()
+            content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+            switch sessionType {
+            case 0:
+                if selectedRow != sessionArray.count - 1 {
+                    content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[selectedRow + 1], comment: "")
+                } else {
+                    content.title = NSLocalizedString("cardioEnd", comment: "")
                 }
+            case 1:
+                if selectedRow != sessionArray.count - 1 {
+                    content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[selectedRow + 1], comment: "") + " " + String(lengthArray[selectedRow + 1]) + "m"
+                } else {
+                    content.title = NSLocalizedString("cardioEnd", comment: "")
+                }
+            default: break
             }
+                
+            content.body = " "
+            content.sound = UNNotificationSound.default()
+                    
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
+            let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
+                
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         }
-        
+    }
+    
+    // Next Alert
+    func nextAlert() {
         //
-        createDispatch()
+        // Alert View
         //
+        let title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[selectedRow], comment: "")
+        //
+        //
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.view.tintColor = colour1
+        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        self.present(alert, animated: true, completion: {
+            //
+            let delayInSeconds = 0.7
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                alert.dismiss(animated: true, completion: nil)
+            }
+        })
     }
     
     //
+    func playPauseAction(_ sender: Any) {
+        let indexPath = NSIndexPath(row: selectedRow, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
+        
+        switch sessionType {
+        case 0: break
+            
+        case 1:
+            // Invalidate
+            if timerCountDown.isValid == true {
+                //
+                //
+                timerCountDown.invalidate()
+                timerShapeLayer.removeAllAnimations()
+                timerShapeLayer.removeFromSuperlayer()
+                isTiming = false
+                didSetEndTime = false
+                
+                //
+                cell.playPauseButton.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
+                //
+                cell.detailLabel.text = timeFormattedNicely(totalSeconds: lengthArray[indexPath.row])
+                
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
+                
+                
+                //
+                // Alert View
+                let title = NSLocalizedString("finishEarly", comment: "")
+                let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alert.view.tintColor = colour2
+                alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+                //
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.alignment = .natural
+                alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+                // Action
+                let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                    //
+                    self.dismiss(animated: true)
+                }
+                let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                }
+                //
+                alert.addAction(okAction)
+                alert.addAction(cancelAction)
+                //
+                self.present(alert, animated: true, completion: nil)
+                
+                
+                
+                // Validate
+            } else {
+                cell.playPauseButton.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
+                startTimer()
+            }
+            
+        default: break
+        }
+    }
+    //
+    
+    
+    
+    //
+    // Time Base
+    //
+    func startAllTimers() {
+        
+        //
+        //
+        //
+        // Create Function That Sets all timers and notifications, and moves table along (find end time, begin from selected row (thus after cancel removes all, start re begins from selected row)
+        //
+        //
+        //
+        
+    }
+    
+//
 }
