@@ -21,10 +21,10 @@ class CardioTableViewCell: UITableViewCell {
     @IBOutlet weak var detailLabel: UILabel!
     // Title Label
     @IBOutlet weak var movementLabel: UILabel!
-    // Play/Pause
-    @IBOutlet weak var playPauseButton: UIButton!
 }
 
+//
+var timerCountDown2 = Timer()
 
 //
 // Cardio Screen Class ------------------------------------------------------------------------------------
@@ -67,8 +67,9 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     // Table view
     @IBOutlet weak var tableView: UITableView!
     
-    // Pause/Play
-    var playPause = UIButton()
+    // Cancel Button
+    @IBOutlet weak var cancelButton: UIButton!
+    
     
     
     //
@@ -87,7 +88,12 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             let delayInSeconds = 0.7
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 alert.dismiss(animated: true, completion: nil)
-                self.startTimer()
+                //
+                if self.sessionType == 0 {
+                    self.startAllTimers()
+                } else {
+                    self.startTimer()
+                }
             }
         })
     }
@@ -123,23 +129,20 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         tableView.tableFooterView = UIView()
         
-        // Play/Pause
-        playPause.backgroundColor = colour2
-        playPause.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        playPause.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
-        playPause.tintColor = colour1
-        //playPause.addTarget(self, action: #selector(pauseButtonAction), for: .touchUpInside)
-        
+        // Cancel Button
+        cancelButton.tintColor = colour4
         
         //
         // Watch for enter foreground
         switch sessionType {
         case 0:
-            NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        case 1:
             NotificationCenter.default.addObserver(self, selector: #selector(startAllTimers), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        case 1:
+            NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         default: break
         }
+
     }
 
     //
@@ -226,10 +229,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             nextSwipe.direction = .up
             nextSwipe.addTarget(self, action: #selector(nextButtonAction))
             
-            // Play Pause
-            cell.playPauseButton.tintColor = colour1
-            cell.playPauseButton.addTarget(self, action: #selector(playPauseAction), for: .touchUpInside)
-            
             
             // Timer / Distance info
             //
@@ -242,15 +241,12 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                     //
                     if selectedRow != 0 {
                         cell.detailLabel.text = timeFormatted(totalSeconds: lengthArray[indexPath.row])
-                        startTimer()
                     } else {
                         cell.detailLabel.text = timeFormattedNicely(totalSeconds: lengthArray[indexPath.row])
                     }
-                    cell.playPauseButton.alpha = 1
                 } else {
                     //
                     cell.detailLabel.text = timeFormattedNicely(totalSeconds: lengthArray[indexPath.row])
-                    cell.playPauseButton.alpha = 0
                 }
             case 1:
                 // Even IndexPath.rows (movement)
@@ -261,8 +257,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                     if indexPath.row == selectedRow {
                         cell.addGestureRecognizer(nextSwipe)
                     }
-                    //
-                    cell.playPauseButton.alpha = 0
                     //
                 // Odd IndexPath.rows (pauses)
                 } else {
@@ -276,6 +270,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                             cell.addGestureRecognizer(nextSwipe)
                         }
                     }
+                    //
                 }
             default: break
             }
@@ -332,9 +327,9 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-            case selectedRow - 1, selectedRow:
+            case selectedRow - 1, selectedRow, currentIndex - 1, currentIndex:
                 return (UIScreen.main.bounds.height - 22) * 3/4
-            case selectedRow + 1:
+            case selectedRow + 1, currentIndex + 1:
                 return (UIScreen.main.bounds.height - 22) * 1/4
             default:
                 return (UIScreen.main.bounds.height - 22) * 1/4
@@ -409,67 +404,14 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
+    
+    
     //
-    // Tap Handlers -------------------------------------------------------------------------------------------------------
+    // Functions -------------------------------------------------------------------------------------------------------
     //
-    
-    // Next Button
-    @IBAction func nextButtonAction() {
-        //
-        //
-        if selectedRow < sessionArray.count - 1 {
-            //
-            selectedRow = selectedRow + 1
-            //
-            didSetEndTime = false
-            
-            updateProgress()
-            //
-            //
-            let indexPath = NSIndexPath(row: selectedRow, section: 0)
-            let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-            //
-            let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
-            //
-            UIView.animate(withDuration: 0.6, animations: {
-                //
-                self.tableView.beginUpdates()
-                self.tableView.endUpdates()
-                // 1
-                cell.movementLabel.alpha = 1
-                // - 1
-                let cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! CardioTableViewCell
-                cell.playPauseButton.alpha = 0
-                //
-                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-            }, completion: { finished in
-                self.tableView.reloadRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.none)
-            })
-        } else {
-        }
-    }
-    
-    
-    // Update Progress
-    func updateProgress() {
-        // Current Pose
-        let currentPose = Float(selectedRow)
-        // Total Number Poses
-        let totalPoses = Float(sessionArray.count - 1)
-        
-        
-        //
-        if selectedRow > 0 {
-            //
-            let currentProgress = currentPose / totalPoses
-            progressBar.setProgress(currentProgress, animated: true)
-        } else {
-            // Initial state
-            progressBar.setProgress(0, animated: true)
-        }
-    }
     //
-    
+    // Random -------------------------------------------------------------------------------------------------------
+    //
     //
     // Time
     func timeFormattedNicely(totalSeconds: Int) -> String {
@@ -502,10 +444,444 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-//
-// Count Down Timer -------------------------------------------------------------------------------------------------------------------------
-//
-    var isTiming = false
+    
+    
+    
+    //
+    // 0 -------------------------------------------------------------------------------------------------------
+    //
+    
+    // Next Button
+    @IBAction func nextButtonAction2() {
+        //
+        //
+        if currentIndex < sessionArray.count {
+            //
+            didSetEndTime2 = false
+            //
+            updateProgress2()
+            //
+            //
+            let indexPath = NSIndexPath(row: currentIndex, section: 0)
+            //
+            if didEnterBackground != true {
+            UIView.animate(withDuration: 0.6, animations: {
+                //
+                //
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
+                //
+                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                //
+            }, completion: { finished in
+            })
+            } else {
+                //
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
+                //
+                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                //
+                self.startTimer2()
+                //
+                didEnterBackground = false
+            }
+        }  else {
+        }
+    }
+    
+    
+    //
+    var didEnterBackground = false
+    //
+    func enterBackground() {
+        didSetEndTime2 = false
+        didEnterBackground = true
+    }
+    
+    
+    //
+    // Time Base
+    //
+    //
+    var sessionLength = Int()
+    // Index of element in length array
+    var indexNumber = Int()
+    //
+    var arrayOfNotifications: [String] = []
+    // Array of times to perform actions (next movement)
+    var arrayOfTimes: [Int] = []
+    var currentIndex = Int() // Essentially the same as selected row but works on index of arrayoftimes
+    // Session timer
+    var timerValue2 = Int()
+    //
+    var didSetNotifications = false
+    //
+    var firstCall = true
+    //
+    var testValue = Double()
+    var timerValue2Remainder = Double()
+
+    //
+    //
+    func startAllTimers() {
+        //
+        //
+        startTime = Date().timeIntervalSinceReferenceDate
+        
+        //
+        sessionLength = lengthArray.reduce(0, +)
+        indexNumber = -1
+        //
+        if didSetEndTime == false {
+            //
+            endTime = startTime + TimeInterval(sessionLength)
+            didSetEndTime = true
+        }
+        //
+        if endTime > startTime {
+            testValue = endTime - startTime
+            timerValue2Remainder = testValue.truncatingRemainder(dividingBy: 1)
+            timerValue2 = Int(endTime - startTime)
+        } else {
+            timerValue2 = 0
+        }
+        
+        //
+        // Create Notifications
+        if didSetNotifications == false {
+            didSetNotifications = true
+            for i in lengthArray {
+                //
+                indexNumber += 1
+                //
+                let content = UNMutableNotificationContent()
+                content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+                if indexNumber != sessionArray.count - 1 {
+                    content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[indexNumber + 1], comment: "")
+                } else {
+                    content.title = NSLocalizedString("cardioEnd", comment: "")
+                }
+                
+                content.body = " "
+                content.sound = UNNotificationSound.default()
+                
+                sessionLength -= i
+                //
+                arrayOfTimes.append(sessionLength)
+                //
+                let timeToTrigger = (endTime - startTime) - Double(sessionLength)
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeToTrigger, repeats: false)
+                //
+                let identifier = "timer" + String(indexNumber)
+                arrayOfNotifications.append(identifier)
+                let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+                
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                //
+            }
+        }
+        
+        //
+        if timerValue2 != 0 {
+            //
+            let delayInSeconds = timerValue2Remainder
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                timerCountDown2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer2), userInfo: nil, repeats: true)
+            }
+            //
+        } else
+        if timerValue2 == 0 {
+            self.dismiss(animated: true)
+        }
+        
+        //
+        // Start Timer 2
+        if firstCall == true {
+            startTimer2()
+            firstCall = false
+        }
+        //
+        //
+        let delayInSeconds = timerValue2Remainder
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        if self.didEnterBackground == true {
+            //
+            // new current index
+            let currentIndexCheck = self.currentIndex
+            for i in self.arrayOfTimes {
+                if (self.timerValue2 - i) > 0 {
+                    self.currentIndex = Int(self.arrayOfTimes.index(of: i)!)
+                    if currentIndexCheck != self.currentIndex {
+                        self.timerShapeLayer.removeAllAnimations()
+                        self.timerShapeLayer.removeFromSuperlayer()
+                    }
+                    self.nextButtonAction2()
+                    break
+                }
+            }
+        }
+        }
+    }
+    
+    //
+    func updateTimer2() {
+        if timerValue2 != 0 {
+            timerValue2 -= 1
+        } else {
+            timerCountDown2.invalidate()
+            self.dismiss(animated: true)
+        }
+        
+        // Perform Actions
+        if arrayOfTimes.contains(timerValue2) {
+            if timerCountDown.isValid == true {
+                timerCountDown.invalidate()
+                timeFormatted(totalSeconds: 0)
+            }
+            currentIndex = Int(arrayOfTimes.index(of: timerValue2)!) + 1
+            if animationAdded == true {
+                timerShapeLayer.removeAllAnimations()
+                timerShapeLayer.removeFromSuperlayer()
+                animationAdded = false
+            }
+            nextButtonAction2()
+            startTimer2()
+        }
+    }
+    
+    
+    
+    // Local Timer
+    //
+    var didSetEndTime2 = false
+    var startTime2 = Double()
+    var endTime2 = Double()
+    //
+    func startTimer2() {
+        //
+        if timerCountDown.isValid == true {
+            timerCountDown.invalidate()
+        }
+        //
+        startTime2 = Double(timerValue2)
+        //startTime2 = Date().timeIntervalSinceReferenceDate
+        //
+        if didSetEndTime2 == false {
+            endTime2 = startTime2 + TimeInterval(lengthArray[currentIndex])
+            //
+            didSetEndTime2 = true
+        }
+        //
+        if endTime2 > startTime2 {
+            timerValue = Int(endTime2 - startTime2)
+        } else {
+            timerValue = 0
+        }
+        
+        //
+        if timerValue != 0 && timerValue2 != 0  {
+            //
+            let indexPath = NSIndexPath(row: currentIndex, section: 0)
+            let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
+            
+            //
+            cell.detailLabel.text = timeFormatted(totalSeconds: timerValue)
+            
+            //
+            if animationAdded == false {
+                self.addCircle2()
+                self.startAnimation()
+            }
+            timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer3), userInfo: nil, repeats: true)
+            
+        }
+    }
+    
+    
+    
+    // Update Timer
+    func updateTimer3() {
+        //
+        let indexPath = NSIndexPath(row: currentIndex, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
+        //
+        //
+        if timerValue == 0 {
+            cell.detailLabel.text = timeFormatted(totalSeconds: timerValue)
+            //
+        } else {
+            timerValue -= 1
+            //
+            cell.detailLabel.text = timeFormatted(totalSeconds: timerValue)
+        }
+    }
+    
+
+    
+    //
+    // 1 -------------------------------------------------------------------------------------------------------
+    //
+    
+    // Next Button
+    @IBAction func nextButtonAction() {
+        //
+        //
+        if selectedRow < sessionArray.count - 1 {
+            //
+            selectedRow = selectedRow + 1
+            //
+            didSetEndTime = false
+            didSetEndTime2 = false
+            
+            updateProgress()
+            //
+            //
+            let indexPath = NSIndexPath(row: selectedRow, section: 0)
+            let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
+            //
+            let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
+            //
+            UIView.animate(withDuration: 0.6, animations: {
+                //
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
+                //
+                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+            }, completion: { finished in
+                self.tableView.reloadRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.none)
+            })
+        }  else {
+        }
+    }
+    
+    
+    //
+    var didSetEndTime = false
+    var startTime = Double()
+    var endTime = Double()
+    //
+    func startTimer() {
+        
+        // Even IndexPath.rows (movement)
+        if selectedRow % 2 == 0 {
+            
+            // Odd IndexPath.rows (pauses)
+        } else {
+            
+            //
+            startTime = Date().timeIntervalSinceReferenceDate
+            //
+            if didSetEndTime == false {
+                endTime = startTime + TimeInterval(lengthArray[selectedRow])
+                //
+                didSetEndTime = true
+            }
+            //
+            if endTime > startTime {
+                timerValue = Int(endTime - startTime)
+            } else {
+                timerValue = 0
+            }
+            
+            
+            //
+            
+            if timerValue != 0 {
+                //
+                let indexPath = NSIndexPath(row: selectedRow, section: 0)
+                let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
+                
+                //
+                cell.detailLabel.text = timeFormatted(totalSeconds: timerValue)
+                
+                //
+                if animationAdded == false {
+                    self.addCircle()
+                    self.startAnimation()
+                }
+                timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+                
+                //
+                let content = UNMutableNotificationContent()
+                content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+                switch sessionType {
+                case 0:
+                    if selectedRow != sessionArray.count - 1 {
+                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[selectedRow + 1], comment: "")
+                    } else {
+                        content.title = NSLocalizedString("cardioEnd", comment: "")
+                    }
+                case 1:
+                    if selectedRow != sessionArray.count - 1 {
+                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[selectedRow + 1], comment: "") + " " + String(lengthArray[selectedRow + 1]) + "m"
+                    } else {
+                        content.title = NSLocalizedString("cardioEnd", comment: "")
+                    }
+                default: break
+                }
+                
+                content.body = " "
+                content.sound = UNNotificationSound.default()
+                
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
+                let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
+                
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            } else if timerValue == 0 {
+                nextButtonAction()
+                if animationAdded == true {
+                    timerShapeLayer.removeAllAnimations()
+                    timerShapeLayer.removeFromSuperlayer()
+                    animationAdded = false
+                }
+            }
+            
+        }
+    }
+    
+
+    // Update Progress
+    func updateProgress() {
+        // Current Pose
+        let currentPose = Float(selectedRow)
+        // Total Number Poses
+        let totalPoses = Float(sessionArray.count - 1)
+        
+        
+        //
+        if selectedRow > 0 {
+            //
+            let currentProgress = currentPose / totalPoses
+            progressBar.setProgress(currentProgress, animated: true)
+        } else {
+            // Initial state
+            progressBar.setProgress(0, animated: true)
+        }
+    }
+    //
+    
+    // Update Progress
+    func updateProgress2() {
+        // Current Pose
+        let currentPose = Float(currentIndex)
+        // Total Number Poses
+        let totalPoses = Float(sessionArray.count - 1)
+        
+        
+        //
+        if selectedRow > 0 {
+            //
+            let currentProgress = currentPose / totalPoses
+            progressBar.setProgress(currentProgress, animated: true)
+        } else {
+            // Initial state
+            progressBar.setProgress(0, animated: true)
+        }
+    }
+    //
+   
+
     var timerValue = Int()
     
     // Timer CountDown Title
@@ -521,13 +897,17 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         let indexPath = NSIndexPath(row: selectedRow, section: 0)
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
         //
-        
+        //
         if timerValue == 0 {
             if selectedRow < (sessionArray.count - 1) {
                 timerCountDown.invalidate()
                 removeCircle()
-                isTiming = false
                 nextButtonAction()
+                if animationAdded == true {
+                    timerShapeLayer.removeAllAnimations()
+                    timerShapeLayer.removeFromSuperlayer()
+                    animationAdded = false
+                }
             } else {
                 self.dismiss(animated: true)
             }
@@ -542,7 +922,13 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.detailLabel.text = timeFormatted(totalSeconds: timerValue)
         }
     }
-
+    
+    
+    
+    
+    //
+    // Circle -------------------------------------------------------------------------------------------------------------------------
+    //
     
     var timerShapeLayer: CAShapeLayer!
     // Funcs
@@ -580,11 +966,47 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     //
+    func addCircle2() {
+        //
+        let indexPath2 = NSIndexPath(row: currentIndex, section: 0)
+        let cell = tableView.cellForRow(at: indexPath2 as IndexPath) as! CardioTableViewCell
+        
+        var center = CGPoint()
+        if currentIndex != sessionArray.count - 1 {
+            center = CGPoint(x: cell.detailLabel.center.x, y: cell.detailLabel.center.y + 22)
+        } else {
+            let centery = (view.frame.size.height - 49 - cell.frame.size.height) + cell.detailLabel.center.y
+            
+            center = CGPoint(x: cell.detailLabel.center.x, y: centery)
+        }
+        //
+        let radius = ((cell.frame.size.width - 50) / 2)
+        //}
+        //
+        let circlePath = UIBezierPath(arcCenter: center, radius: radius, startAngle: .pi * 1.5, endAngle: (.pi * 2) + (.pi * 1.5), clockwise: true)
+        //let circlePath = UIBezierPath(arcCenter: cell.center, radius: CGFloat(20), startAngle: .pi, endAngle: .pi, clockwise: true)
+        timerShapeLayer = CAShapeLayer()
+        timerShapeLayer.path = circlePath.cgPath
+        timerShapeLayer.fillColor = UIColor.clear.cgColor
+        timerShapeLayer.strokeColor = colour1.cgColor
+        timerShapeLayer.lineWidth = 2.0
+        
+        //
+        timerShapeLayer.strokeEnd = 0.0
+        
+        
+        view.layer.addSublayer(timerShapeLayer)
+        //cell.layer.addSublayer(timerShapeLayer)
+    }
+
+    
+    //
     func removeCircle() {
         timerShapeLayer.removeFromSuperlayer()
     }
     
     //
+    var animationAdded = false
     func startAnimation() {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0
@@ -596,174 +1018,65 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         timerShapeLayer.strokeEnd = 1.0
         //
         timerShapeLayer.add(animation, forKey: "circleAnimation")
+        animationAdded = true
+        
     }
     
-    
-    //
-    var didSetEndTime = false
-    var startTime = Double()
-    var endTime = Double()
-    //
-    func startTimer() {
-        //
-        startTime = Date().timeIntervalSinceReferenceDate
-        //
-        if didSetEndTime == false {
-            endTime = startTime + TimeInterval(lengthArray[selectedRow])
-            //
-            didSetEndTime = true
-        }
-        //
-        timerValue = Int(endTime - startTime)
 
-        isTiming = true
-        
-        //
-        
-        if timerValue != 0 {
-            //
-            let indexPath = NSIndexPath(row: selectedRow, section: 0)
-            let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
-
-            //
-            cell.detailLabel.text = timeFormatted(totalSeconds: timerValue)
-            
-            //
-            self.addCircle()
-            self.startAnimation()
-            timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
-                
-            //
-            let content = UNMutableNotificationContent()
-            content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
-            switch sessionType {
-            case 0:
-                if selectedRow != sessionArray.count - 1 {
-                    content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[selectedRow + 1], comment: "")
-                } else {
-                    content.title = NSLocalizedString("cardioEnd", comment: "")
-                }
-            case 1:
-                if selectedRow != sessionArray.count - 1 {
-                    content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[selectedRow + 1], comment: "") + " " + String(lengthArray[selectedRow + 1]) + "m"
-                } else {
-                    content.title = NSLocalizedString("cardioEnd", comment: "")
-                }
-            default: break
-            }
-                
-            content.body = " "
-            content.sound = UNNotificationSound.default()
-                    
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(self.timerValue), repeats: false)
-            let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
-                
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        }
-    }
-    
-    // Next Alert
-    func nextAlert() {
-        //
-        // Alert View
-        //
-        let title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[selectedRow], comment: "")
-        //
-        //
-        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.view.tintColor = colour1
-        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
-        self.present(alert, animated: true, completion: {
-            //
-            let delayInSeconds = 0.7
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                alert.dismiss(animated: true, completion: nil)
-            }
-        })
-    }
-    
+   
     //
-    func playPauseAction(_ sender: Any) {
-        let indexPath = NSIndexPath(row: selectedRow, section: 0)
-        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
+    // Cancel --------------------
+    //
+    
+    @IBAction func cancelButtonAction(_ sender: Any) {
+        // Invalidate
         
-        switch sessionType {
-        case 0: break
-            
-        case 1:
-            // Invalidate
-            if timerCountDown.isValid == true {
+            //
+            // Alert View
+            let title = NSLocalizedString("finishEarly", comment: "")
+            let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.view.tintColor = colour2
+            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+            //
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .natural
+            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+        
+            //
+            // Action
+            let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+                UIAlertAction in
                 //
-                //
-                timerCountDown.invalidate()
-                timerShapeLayer.removeAllAnimations()
-                timerShapeLayer.removeFromSuperlayer()
-                isTiming = false
-                didSetEndTime = false
-                
-                //
-                cell.playPauseButton.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
-                //
-                cell.detailLabel.text = timeFormattedNicely(totalSeconds: lengthArray[indexPath.row])
-                
-                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
-                
-                
-                //
-                // Alert View
-                let title = NSLocalizedString("finishEarly", comment: "")
-                let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
-                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alert.view.tintColor = colour2
-                alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-                //
-                let paragraphStyle = NSMutableParagraphStyle()
-                paragraphStyle.alignment = .natural
-                alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
-                // Action
-                let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
-                    UIAlertAction in
+                if timerCountDown.isValid == true {
+                    timerCountDown.invalidate()
+                }
                     //
-                    self.dismiss(animated: true)
-                }
-                let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
-                    UIAlertAction in
+                if self.animationAdded == true {
+                        self.timerShapeLayer.removeAllAnimations()
+                        self.timerShapeLayer.removeFromSuperlayer()
                 }
                 //
-                alert.addAction(okAction)
-                alert.addAction(cancelAction)
+                if self.sessionType == 0 {
+                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: self.arrayOfNotifications)
+                } else {
+                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
+                }
+                
+                
                 //
-                self.present(alert, animated: true, completion: nil)
-                
-                
-                
-                // Validate
-            } else {
-                cell.playPauseButton.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
-                startTimer()
+                self.dismiss(animated: true)
             }
-            
-        default: break
-        }
+            let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
+                UIAlertAction in
+            }
+            //
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            //
+            self.present(alert, animated: true, completion: nil)
     }
-    //
     
-    
-    
-    //
-    // Time Base
-    //
-    func startAllTimers() {
-        
-        //
-        //
-        //
-        // Create Function That Sets all timers and notifications, and moves table along (find end time, begin from selected row (thus after cancel removes all, start re begins from selected row)
-        //
-        //
-        //
-        
-    }
     
 //
 }

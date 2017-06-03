@@ -179,7 +179,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             // 5 min
             // Relaxing
             [
-                [12,16,12,16,12,16,12,16],
+                [12,16,12,16,12,16],
                 [2,3,4,5,6,9,12,13],
                 [2,3,4]
             ],
@@ -196,13 +196,13 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             // 5 min
             // Relaxing
             [
-                [30,60,30,60,30,60,30,60],
+                [5,10,5,10,5,10],
                 [1,1,1,1,1,1,1,1],
                 [1,1,1]
             ],
             // Meditation
             [
-                [200,1,100,1,200,1,100,1],
+                [200,10,100,5,200,5,100,5],
                 [5,5,5]
             ]
     ]

@@ -88,6 +88,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     // Progress Bar
     let progressBar = UIProgressView()
     
+    //
+    @IBOutlet weak var finishEarly: UIButton!
     
     //
     override func viewDidAppear(_ animated: Bool) {
@@ -122,6 +124,10 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         view.backgroundColor = colour2
         
        
+        //
+        finishEarly.tintColor = colour4
+        
+        
         // self.present(alert, animated: true, completion: (() -> Void)?)
         
         // Progress Bar
@@ -1243,4 +1249,40 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         }
     }
     //
+    
+    //
+    @IBAction func finishEarlyAction(_ sender: Any) {
+        //
+        // Alert View
+        let title = NSLocalizedString("finishEarly", comment: "")
+        let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = colour2
+        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        //
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+        
+        //
+        // Action
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            //
+            //
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["restTimer"])
+            
+            //
+            self.dismiss(animated: true)
+        }
+        let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        //
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        //
+        self.present(alert, animated: true, completion: nil)
+    }
+//
 }

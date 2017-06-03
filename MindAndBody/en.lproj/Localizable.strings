@@ -420,7 +420,7 @@
         // Choice //
         //
         "location" = "Location";
-        "gym" = "Gym";
+        "gym" = "Gym/Weights";
         "bodyweight" = "Bodyweight";
         "home" = "Home";
         //
@@ -709,8 +709,8 @@
 
             "selectCardioSession" = "- Select Cardio Session -";
 
-            "timeBased" = "Time Based";
-            "distanceBased" = "Distance Based";
+            "timeBased" = " Time Based"; // Space Important
+            "distanceBased" = " Distance Based";
 
             "cardioEnd" = "Session Ended";
 
