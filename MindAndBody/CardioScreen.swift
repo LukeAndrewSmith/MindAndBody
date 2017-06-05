@@ -482,6 +482,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
                 //
+                didSetEndTime2 = false
                 self.startTimer2()
                 //
                 didEnterBackground = false
@@ -668,7 +669,11 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //startTime2 = Date().timeIntervalSinceReferenceDate
         //
         if didSetEndTime2 == false {
-            endTime2 = startTime2 + TimeInterval(lengthArray[currentIndex])
+            if didEnterBackground == true {
+                endTime2 = startTime2 + (Double(timerValue2) - Double(arrayOfTimes[currentIndex]))
+            } else {
+                endTime2 = startTime2 + TimeInterval(lengthArray[currentIndex])
+            }
             //
             didSetEndTime2 = true
         }
