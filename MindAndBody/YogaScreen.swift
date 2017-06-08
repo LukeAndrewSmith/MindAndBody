@@ -52,7 +52,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Demonstration Array
     var demonstrationArray: [[UIImage]] = []
-    var animationDurationArray: [Double] = []
     
     // Explanation Array
     var explanationArray: [String] = []
@@ -283,7 +282,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             // Animation
             cell.demonstrationImageView.animationImages = demonstrationArray[indexPath.row]
             cell.demonstrationImageView.animationImages?.removeFirst()
-            cell.demonstrationImageView.animationDuration = animationDurationArray[indexPath.row]
+            cell.demonstrationImageView.animationDuration = Double(demonstrationArray[indexPath.row].count) * 0.5
             cell.demonstrationImageView.animationRepeatCount = 1
             //
             cell.demonstrationImageView.tag = indexPath.row
