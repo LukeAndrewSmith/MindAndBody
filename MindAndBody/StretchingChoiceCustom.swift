@@ -33,7 +33,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     //
     var stretchingArray: [String] = []
     //
-    var demonstrationArray: [UIImage] = []
+    var demonstrationArray: [[UIImage]] = []
     //
     var targetAreaArray: [UIImage] = []
     //
@@ -230,85 +230,87 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
     
     
     // Demonstration Array
-    var demonstrationDictionary: [Int : UIImage] =
+    var demonstrationDictionary: [Int : [UIImage]] =
         [
             // Mandatory
-            0: #imageLiteral(resourceName: "Test"),
+            0: [#imageLiteral(resourceName: "Test")],
             // Joint Rotations
-            1: #imageLiteral(resourceName: "Wrist Rotations"),
-            2: #imageLiteral(resourceName: "Test"),
-            3: #imageLiteral(resourceName: "Test"),
-            4: #imageLiteral(resourceName: "Test"),
-            5: #imageLiteral(resourceName: "Test"),
-            6: #imageLiteral(resourceName: "Test"),
-            7: #imageLiteral(resourceName: "Test"),
-            8: #imageLiteral(resourceName: "Test"),
+            1: [#imageLiteral(resourceName: "Wrist Rotations")],
+            2: [#imageLiteral(resourceName: "Test")],
+            3: [#imageLiteral(resourceName: "Test")],
+            4: [#imageLiteral(resourceName: "Test")],
+            5: [#imageLiteral(resourceName: "Test")],
+            6: [#imageLiteral(resourceName: "Test")],
+            7: [#imageLiteral(resourceName: "Test")],
+            8: [#imageLiteral(resourceName: "Test")],
             // Foam/Ball Roll
-            9: #imageLiteral(resourceName: "Test"),
-            10: #imageLiteral(resourceName: "Test"),
-            11: #imageLiteral(resourceName: "Test"),
-            12: #imageLiteral(resourceName: "Test"),
-            13: #imageLiteral(resourceName: "Test"),
-            14: #imageLiteral(resourceName: "Test"),
-            15: #imageLiteral(resourceName: "Test"),
-            16: #imageLiteral(resourceName: "Test"),
-            17: #imageLiteral(resourceName: "Test"),
-            18: #imageLiteral(resourceName: "Test"),
+            9: [#imageLiteral(resourceName: "Test")],
+            10: [#imageLiteral(resourceName: "Test")],
+            11: [#imageLiteral(resourceName: "Test")],
+            12: [#imageLiteral(resourceName: "Test")],
+            13: [#imageLiteral(resourceName: "Test")],
+            14: [#imageLiteral(resourceName: "Test")],
+            15: [#imageLiteral(resourceName: "Test")],
+            16: [#imageLiteral(resourceName: "Test")],
+            17: [#imageLiteral(resourceName: "Test")],
+            18: [#imageLiteral(resourceName: "Test")],
             // Back
-            19: #imageLiteral(resourceName: "Cow"),
-            20: #imageLiteral(resourceName: "Upwards Dog"),
-            21: #imageLiteral(resourceName: "Extended Puppy"),
-            22: #imageLiteral(resourceName: "Childs Pose"),
-            23: #imageLiteral(resourceName: "Staff Pose"),
-            24: #imageLiteral(resourceName: "Pelvic Tilt"),
-            25: #imageLiteral(resourceName: "Knee Chest"),
-            26: #imageLiteral(resourceName: "Knee Drop"),
-            27: #imageLiteral(resourceName: "Marichis Pose"),
-            28: #imageLiteral(resourceName: "Legs Wall"),
+            19: [#imageLiteral(resourceName: "catCowS"), #imageLiteral(resourceName: "catCowS1"), #imageLiteral(resourceName: "catCowS2"), #imageLiteral(resourceName: "catCowS1"), #imageLiteral(resourceName: "catCowS3"), #imageLiteral(resourceName: "catCowS1"), #imageLiteral(resourceName: "catCowS2"), #imageLiteral(resourceName: "catCowS1")],
+            20: [#imageLiteral(resourceName: "upwardsDogS")],
+            21: [#imageLiteral(resourceName: "extendedPuppyS")],
+            22: [#imageLiteral(resourceName: "childPoseS")],
+            23: [#imageLiteral(resourceName: "staffPoseS")],
+            24: [#imageLiteral(resourceName: "pelvicTilt"), #imageLiteral(resourceName: "pelvicTilt1"), #imageLiteral(resourceName: "pelvicTilt2"), #imageLiteral(resourceName: "pelvicTilt1"), #imageLiteral(resourceName: "pelvicTilt2"), #imageLiteral(resourceName: "pelvicTilt1"), #imageLiteral(resourceName: "pelvicTilt2")],
+            25: [#imageLiteral(resourceName: "kneeToChest")],
+            26: [#imageLiteral(resourceName: "legDrop"), #imageLiteral(resourceName: "legDrop1"), #imageLiteral(resourceName: "legDrop2"), #imageLiteral(resourceName: "legDrop1"), #imageLiteral(resourceName: "legDrop3"), #imageLiteral(resourceName: "legDrop1"), #imageLiteral(resourceName: "legDrop2"), #imageLiteral(resourceName: "legDrop1")],
+            27: [#imageLiteral(resourceName: "seatedTwist")],
+            28: [#imageLiteral(resourceName: "legsWall")],
             // Obliques(Sides)
-            29: #imageLiteral(resourceName: "Side Bend"),
-            30: #imageLiteral(resourceName: "Extended Side Angle"),
-            31: #imageLiteral(resourceName: "Half Straddle Side Bend"),
+            29: [#imageLiteral(resourceName: "sideLean")],
+            30: [#imageLiteral(resourceName: "extendedSideAngleS")],
+            31: [#imageLiteral(resourceName: "seatedSide")],
             // Neck
-            32: #imageLiteral(resourceName: "Test"),
-            33: #imageLiteral(resourceName: "Test"),
-            34: #imageLiteral(resourceName: "Test"),
-            35: #imageLiteral(resourceName: "Test"),
-            36: #imageLiteral(resourceName: "Test"),
-            37: #imageLiteral(resourceName: "Test"),
+            32: [#imageLiteral(resourceName: "rearNeck")],
+            33: [#imageLiteral(resourceName: "rearNeckHand")],
+            34: [#imageLiteral(resourceName: "seatedLateral")],
+            35: [#imageLiteral(resourceName: "neckRotator")],
+            36: [#imageLiteral(resourceName: "scalene")],
+            37: [#imageLiteral(resourceName: "headRoll")],
             // Arms
-            38: #imageLiteral(resourceName: "Test"),
-            39: #imageLiteral(resourceName: "Test"),
-            40: #imageLiteral(resourceName: "Test"),
+            38: [#imageLiteral(resourceName: "forearmStretch")],
+            39: [#imageLiteral(resourceName: "tricepStretch")],
+            40: [#imageLiteral(resourceName: "bicepStretch")],
             // Pecs
-            41: #imageLiteral(resourceName: "Test"),
+            41: [#imageLiteral(resourceName: "pecStretch")],
             // Shoulders
-            42: #imageLiteral(resourceName: "Test"),
-            43: #imageLiteral(resourceName: "Test"),
-            44: #imageLiteral(resourceName: "Test"),
-            45: #imageLiteral(resourceName: "Test"),
-            46: #imageLiteral(resourceName: "Test"),
-            47: #imageLiteral(resourceName: "Test"),
+            42: [#imageLiteral(resourceName: "shoulderRoll"), #imageLiteral(resourceName: "shoulderRoll1"), #imageLiteral(resourceName: "shoulderRoll2"), #imageLiteral(resourceName: "shoulderRoll3"), #imageLiteral(resourceName: "shoulderRoll4"), #imageLiteral(resourceName: "shoulderRoll1"), #imageLiteral(resourceName: "shoulderRoll2"), #imageLiteral(resourceName: "shoulderRoll3"), #imageLiteral(resourceName: "shoulderRoll4")],
+            43: [#imageLiteral(resourceName: "behindBackTouch")],
+            44: [#imageLiteral(resourceName: "frontDelt")],
+            45: [#imageLiteral(resourceName: "lateralDelt")],
+            46: [#imageLiteral(resourceName: "rearDelt")],
+            47: [#imageLiteral(resourceName: "rotatorCuff")],
             // Hips and Glutes
-            48: #imageLiteral(resourceName: "Test"),
-            49: #imageLiteral(resourceName: "Test"),
-            50: #imageLiteral(resourceName: "Test"),
-            51: #imageLiteral(resourceName: "Test"),
-            52: #imageLiteral(resourceName: "Test"),
-            53: #imageLiteral(resourceName: "Test"),
-            54:#imageLiteral(resourceName: "Test"),
+            48: [#imageLiteral(resourceName: "squatHold")],
+            49: [#imageLiteral(resourceName: "groinStretch")],
+            50: [#imageLiteral(resourceName: "butterflyPoseS")],
+            51: [#imageLiteral(resourceName: "lungeStretch")],
+            52: [#imageLiteral(resourceName: "threadTheNeedleS")],
+            53: [#imageLiteral(resourceName: "pigeonPoseS")],
+            54:[#imageLiteral(resourceName: "seatedGlute")],
             // Calves
-            55: #imageLiteral(resourceName: "Test"),
+            55: [#imageLiteral(resourceName: "calveStretch")],
             // Hamstrings
-            56: #imageLiteral(resourceName: "Test"),
-            57: #imageLiteral(resourceName: "Test"),
-            58: #imageLiteral(resourceName: "Test"),
-            59: #imageLiteral(resourceName: "Test"),
-            60: #imageLiteral(resourceName: "Test"),
-            61: #imageLiteral(resourceName: "Test"),
+            56: [#imageLiteral(resourceName: "standingHamstring")],
+            57: [#imageLiteral(resourceName: "standingSingleLegHamstring")],
+            58: [#imageLiteral(resourceName: "downWardsDogS")],
+            59: [#imageLiteral(resourceName: "singleLegHamstring")],
+            60: [#imageLiteral(resourceName: "twoLegHamstring")],
             // Quads
-            62: #imageLiteral(resourceName: "Test"),
-            63: #imageLiteral(resourceName: "Test")
+            61: [#imageLiteral(resourceName: "lungeStretchWall")],
+            62: [#imageLiteral(resourceName: "quadStretch")],
+            // Full Body
+            63: [#imageLiteral(resourceName: "sumoSquatTwist")],
+            64: [#imageLiteral(resourceName: "tinyFencerStretch")]
     ]
     
     // Target Area Array
@@ -977,7 +979,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
                     }
                     //
                     // Cell Image
-                    cell.imageView?.image = demonstrationDictionary[keyIndex]
+                    cell.imageView?.image = demonstrationDictionary[keyIndex]?[0]
                     cell.imageView?.isUserInteractionEnabled = true
                     // Image Tap
                     let imageTap = UITapGestureRecognizer()
@@ -1003,7 +1005,7 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             cell.textLabel?.textColor = .black
             cell.tintColor = .black
             // Cell Image
-            cell.imageView?.image = demonstrationDictionary[keyIndex]
+            cell.imageView?.image = demonstrationDictionary[keyIndex]?[0]
             cell.imageView?.isUserInteractionEnabled = true
             // Image Tap
             let imageTap = UITapGestureRecognizer()

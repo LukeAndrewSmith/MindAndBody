@@ -270,31 +270,9 @@ class OxygenOverloadScreen: UIViewController {
     //
     // Dismiss View
     @IBAction func dismissView(_ sender: Any) {
-        // Alert View
-        let title = NSLocalizedString("finishEarly", comment: "")
-        let message = NSLocalizedString("finishEarlyMessage", comment: "")
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = colour2
-        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-        //
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
-        // Action
-        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
-            UIAlertAction in
-            // Cancel Timer
-            timerCountUp.invalidate()
-            self.dismiss(animated: true)
-        }
-        let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
-            UIAlertAction in
-        }
-        //
-        alert.addAction(okAction)
-        alert.addAction(cancelAction)
-        //
-        self.present(alert, animated: true, completion: nil)
+        // Cancel Timer
+        timerCountUp.invalidate()
+        self.dismiss(animated: true)
     }
     //
 }

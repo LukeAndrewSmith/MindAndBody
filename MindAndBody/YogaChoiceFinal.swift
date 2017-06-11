@@ -33,7 +33,6 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Demonstration Array
     var demonstrationArray: [[UIImage]] = []
-    var animationDurationArray: [Double] = []
     
     // Target Area Array
     var targetAreaArray: [UIImage] = []
@@ -214,28 +213,28 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     let demonstrationDictionary: [Int: [UIImage]] =
         [
             // Standing
-            0: [#imageLiteral(resourceName: "Test 2")],
-            1: [#imageLiteral(resourceName: "Test 2")],
+            0: [#imageLiteral(resourceName: "upwardSalute")],
+            1: [#imageLiteral(resourceName: "mountain")],
             2: [#imageLiteral(resourceName: "tree"), #imageLiteral(resourceName: "tree1"), #imageLiteral(resourceName: "tree2"), #imageLiteral(resourceName: "tree3"), #imageLiteral(resourceName: "tree4"), #imageLiteral(resourceName: "tree5"), #imageLiteral(resourceName: "tree6")],
             3: [#imageLiteral(resourceName: "extendedToeGrab"), #imageLiteral(resourceName: "extendedToeGrab1"), #imageLiteral(resourceName: "extendedToeGrab2"), #imageLiteral(resourceName: "extendedToeGrab3"), #imageLiteral(resourceName: "extendedToeGrab4"), #imageLiteral(resourceName: "extendedToeGrab5")],
             4: [#imageLiteral(resourceName: "eagle"), #imageLiteral(resourceName: "eagle1"), #imageLiteral(resourceName: "eagle2"), #imageLiteral(resourceName: "eagle3"), #imageLiteral(resourceName: "eagle4"), #imageLiteral(resourceName: "eagle5"), #imageLiteral(resourceName: "eagle6"), #imageLiteral(resourceName: "eagle7")],
             5: [#imageLiteral(resourceName: "chair"), #imageLiteral(resourceName: "chair1"), #imageLiteral(resourceName: "chair2"), #imageLiteral(resourceName: "chair3"), #imageLiteral(resourceName: "chair4"), #imageLiteral(resourceName: "chair5")],
             6: [#imageLiteral(resourceName: "lordOfDance"), #imageLiteral(resourceName: "lordOfDance1"), #imageLiteral(resourceName: "lordOfDance2"), #imageLiteral(resourceName: "lordOfDance3"), #imageLiteral(resourceName: "lordOfDance4"), #imageLiteral(resourceName: "lordOfDance5"), #imageLiteral(resourceName: "lordOfDance6"), #imageLiteral(resourceName: "lordOfDance7")],
-            7: [#imageLiteral(resourceName: "warrior1")],
-            8: [#imageLiteral(resourceName: "warrior2")],
+            7: [#imageLiteral(resourceName: "warrior1"), #imageLiteral(resourceName: "warrior12"), #imageLiteral(resourceName: "warrior13"), #imageLiteral(resourceName: "warrior14"), #imageLiteral(resourceName: "warrior15")],
+            8: [#imageLiteral(resourceName: "warrior2"), #imageLiteral(resourceName: "warrior21"), #imageLiteral(resourceName: "warrior22"), #imageLiteral(resourceName: "warrior23"), #imageLiteral(resourceName: "warrior24"), #imageLiteral(resourceName: "warrior25")],
             9: [#imageLiteral(resourceName: "warrior3"), #imageLiteral(resourceName: "warrior31"), #imageLiteral(resourceName: "warrior32"), #imageLiteral(resourceName: "warrior33"), #imageLiteral(resourceName: "warrior34"), #imageLiteral(resourceName: "warrior35"), #imageLiteral(resourceName: "warrior36")],
-            10: [#imageLiteral(resourceName: "halfMoon")],
-            11: [#imageLiteral(resourceName: "extendedTriangle")],
+            10: [#imageLiteral(resourceName: "halfMoon"), #imageLiteral(resourceName: "halfMoon1"), #imageLiteral(resourceName: "halfMoon2"), #imageLiteral(resourceName: "halfMoon3"), #imageLiteral(resourceName: "halfMoon4"), #imageLiteral(resourceName: "halfMoon5"), #imageLiteral(resourceName: "halfMoon6"), #imageLiteral(resourceName: "halfMoon7")],
+            11: [#imageLiteral(resourceName: "extendedTriangle"), #imageLiteral(resourceName: "extendedTriangle1"), #imageLiteral(resourceName: "extendedTriangle2"), #imageLiteral(resourceName: "extendedTriangle3"), #imageLiteral(resourceName: "extendedTriangle4"), #imageLiteral(resourceName: "extendedTriangle5")],
             12: [#imageLiteral(resourceName: "extendedSideAngle"), #imageLiteral(resourceName: "extendedSideAngle1"), #imageLiteral(resourceName: "extendedSideAngle2"), #imageLiteral(resourceName: "extendedSideAngle3"), #imageLiteral(resourceName: "extendedSideAngle4"), #imageLiteral(resourceName: "extendedSideAngle5"), #imageLiteral(resourceName: "extendedSideAngle6")],
             13: [#imageLiteral(resourceName: "revolvedSideAngle"), #imageLiteral(resourceName: "revolvedSideAngle1"), #imageLiteral(resourceName: "revolvedSideAngle2"), #imageLiteral(resourceName: "revolvedSideAngle3"), #imageLiteral(resourceName: "revolvedSideAngle4"), #imageLiteral(resourceName: "revolvedSideAngle5"), #imageLiteral(resourceName: "revolvedSideAngle6")],
             14: [#imageLiteral(resourceName: "revolvedTriangle"), #imageLiteral(resourceName: "revolvedTriangle1"), #imageLiteral(resourceName: "revolvedTriangle2"), #imageLiteral(resourceName: "revolvedTriangle3"), #imageLiteral(resourceName: "revolvedTriangle4"), #imageLiteral(resourceName: "revolvedTriangle5"), #imageLiteral(resourceName: "revolvedTriangle6")],
-            15: [#imageLiteral(resourceName: "halfForwardBend")],
-            16: [#imageLiteral(resourceName: "forwardBend")],
-            17: [#imageLiteral(resourceName: "wideLeggedForwardBend")],
-            18: [#imageLiteral(resourceName: "intenseSide")],
+            15: [#imageLiteral(resourceName: "halfForwardBend"), #imageLiteral(resourceName: "halfForwardBend1"), #imageLiteral(resourceName: "halfForwardBend2"), #imageLiteral(resourceName: "halfForwardBend3"), #imageLiteral(resourceName: "halfForwardBend4"), #imageLiteral(resourceName: "halfForwardBend5"), #imageLiteral(resourceName: "halfForwardBend6"), #imageLiteral(resourceName: "halfForwardBend7")],
+            16: [#imageLiteral(resourceName: "forwardBend"), #imageLiteral(resourceName: "forwardBend1"), #imageLiteral(resourceName: "forwardBend2"), #imageLiteral(resourceName: "forwardBend3"), #imageLiteral(resourceName: "forwardBend4"), #imageLiteral(resourceName: "forwardBend5"), #imageLiteral(resourceName: "forwardBend6"), #imageLiteral(resourceName: "forwardBend7")],
+            17: [#imageLiteral(resourceName: "wideLeggedForwardBend"), #imageLiteral(resourceName: "wideLeggedForwardBend1"), #imageLiteral(resourceName: "wideLeggedForwardBend2"), #imageLiteral(resourceName: "wideLeggedForwardBend3"), #imageLiteral(resourceName: "wideLeggedForwardBend4"), #imageLiteral(resourceName: "wideLeggedForwardBend5"), #imageLiteral(resourceName: "wideLeggedForwardBend6")],
+            18: [#imageLiteral(resourceName: "intenseSide"), #imageLiteral(resourceName: "intenseSide1"), #imageLiteral(resourceName: "intenseSide2"), #imageLiteral(resourceName: "intenseSide3"), #imageLiteral(resourceName: "intenseSide4"), #imageLiteral(resourceName: "intenseSide5")],
             19: [#imageLiteral(resourceName: "gate")],
-            20: [#imageLiteral(resourceName: "highLunge")],
-            21: [#imageLiteral(resourceName: "lowLunge")],
+            20: [#imageLiteral(resourceName: "highLunge"), #imageLiteral(resourceName: "highLunge1"), #imageLiteral(resourceName: "highLunge2"), #imageLiteral(resourceName: "highLunge3"), #imageLiteral(resourceName: "highLunge4"), #imageLiteral(resourceName: "highLunge5"), #imageLiteral(resourceName: "highLunge6")],
+            21: [#imageLiteral(resourceName: "lowLunge"), #imageLiteral(resourceName: "lowLunge1"), #imageLiteral(resourceName: "lowLunge2"), #imageLiteral(resourceName: "lowLunge3"), #imageLiteral(resourceName: "lowLunge4"), #imageLiteral(resourceName: "lowLunge5"), #imageLiteral(resourceName: "lowLunge6")],
             22: [#imageLiteral(resourceName: "deepSquat"), #imageLiteral(resourceName: "deepSquat1"), #imageLiteral(resourceName: "deepSquat2"), #imageLiteral(resourceName: "deepSquat3"), #imageLiteral(resourceName: "deepSquat4"), #imageLiteral(resourceName: "deepSquat5")],
             // Hand/Elbows and Feet/Knees
             23: [#imageLiteral(resourceName: "dolphin"), #imageLiteral(resourceName: "dolphin1"), #imageLiteral(resourceName: "dolphin2"), #imageLiteral(resourceName: "dolphin3")],
@@ -248,14 +247,14 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             30: [#imageLiteral(resourceName: "Cat")],
             31: [#imageLiteral(resourceName: "Cow")],
             32: [#imageLiteral(resourceName: "catCow"), #imageLiteral(resourceName: "catCow1"), #imageLiteral(resourceName: "catCow2"), #imageLiteral(resourceName: "catCow1"), #imageLiteral(resourceName: "catCow3"), #imageLiteral(resourceName: "catCow1")],
-            33: [#imageLiteral(resourceName: "halfMonkey")],
+            33: [#imageLiteral(resourceName: "halfMonkey"), #imageLiteral(resourceName: "halfMonkey1"), #imageLiteral(resourceName: "halfMonkey2"), #imageLiteral(resourceName: "halfMonkey3"), #imageLiteral(resourceName: "halfMonkey4")],
             34: [#imageLiteral(resourceName: "childPose"), #imageLiteral(resourceName: "childPose1"), #imageLiteral(resourceName: "childPose2"), #imageLiteral(resourceName: "childPose3")],
             35: [#imageLiteral(resourceName: "wildThing")],
             36: [#imageLiteral(resourceName: "upwardBow")],
             37: [#imageLiteral(resourceName: "bridge"), #imageLiteral(resourceName: "bridge1"), #imageLiteral(resourceName: "bridge2"), #imageLiteral(resourceName: "bridge3")],
             38: [#imageLiteral(resourceName: "upwardPlank"), #imageLiteral(resourceName: "upwardPlank1"), #imageLiteral(resourceName: "upwardPlank2"), #imageLiteral(resourceName: "upwardPlank3"), #imageLiteral(resourceName: "upwardPlank4"), #imageLiteral(resourceName: "upwardPlank5")],
             39: [#imageLiteral(resourceName: "extendedPuppy"), #imageLiteral(resourceName: "extendedPuppy1"), #imageLiteral(resourceName: "extendedPuppy2"), #imageLiteral(resourceName: "extendedPuppy3"), #imageLiteral(resourceName: "extendedPuppy4"), #imageLiteral(resourceName: "extendedPuppy5")],
-            40: [#imageLiteral(resourceName: "upwardDog")],
+            40: [#imageLiteral(resourceName: "upwardDog"), #imageLiteral(resourceName: "upwardDog1"), #imageLiteral(resourceName: "upwardDog2"), #imageLiteral(resourceName: "upwardDog3"), #imageLiteral(resourceName: "upwardDog4")],
             // Seated
             41: [#imageLiteral(resourceName: "crossLegged")],
             42: [#imageLiteral(resourceName: "Lotus")],
@@ -282,16 +281,16 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             61: [#imageLiteral(resourceName: "lyingButterfly"), #imageLiteral(resourceName: "lyingButterfly1"), #imageLiteral(resourceName: "lyingButterfly2"), #imageLiteral(resourceName: "lyingButterfly3"), #imageLiteral(resourceName: "lyingButterfly4")],
             62: [#imageLiteral(resourceName: "legRaiseToe")],
             63: [#imageLiteral(resourceName: "threadTheNeedle"), #imageLiteral(resourceName: "threadTheNeedle1"), #imageLiteral(resourceName: "threadTheNeedle2"), #imageLiteral(resourceName: "threadTheNeedle3"), #imageLiteral(resourceName: "threadTheNeedle4"), #imageLiteral(resourceName: "threadTheNeedle5")],
-            64: [#imageLiteral(resourceName: "shoulderStand")],
+            64: [#imageLiteral(resourceName: "shoulderStand"), #imageLiteral(resourceName: "shoulderStand1"), #imageLiteral(resourceName: "shoulderStand2"), #imageLiteral(resourceName: "shoulderStand3"), #imageLiteral(resourceName: "shoulderStand4"), #imageLiteral(resourceName: "shoulderStand5"), #imageLiteral(resourceName: "shoulderStand6"), #imageLiteral(resourceName: "shoulderStand7")],
             65: [#imageLiteral(resourceName: "plow"), #imageLiteral(resourceName: "plow1"), #imageLiteral(resourceName: "plow2"), #imageLiteral(resourceName: "plow3"), #imageLiteral(resourceName: "plow4")],
-            66: [#imageLiteral(resourceName: "cobra")],
+            66: [#imageLiteral(resourceName: "cobra"), #imageLiteral(resourceName: "cobra1"), #imageLiteral(resourceName: "cobra2"), #imageLiteral(resourceName: "cobra3"), #imageLiteral(resourceName: "cobra4")],
             67: [#imageLiteral(resourceName: "sphinx")],
-            68: [#imageLiteral(resourceName: "pigeon")],
+            68: [#imageLiteral(resourceName: "pigeon"), #imageLiteral(resourceName: "pigeon1"), #imageLiteral(resourceName: "pigeon2"), #imageLiteral(resourceName: "pigeon3"), #imageLiteral(resourceName: "pigeon4"), #imageLiteral(resourceName: "pigeon5"), #imageLiteral(resourceName: "pigeon6"), #imageLiteral(resourceName: "pigeon7"), #imageLiteral(resourceName: "pigeon8")],
             69: [#imageLiteral(resourceName: "spineRolling"), #imageLiteral(resourceName: "spineRolling1"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling3"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling4"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling3"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling4")],
             // Hand Stands
-            70: [#imageLiteral(resourceName: "handStand")],
-            71: [#imageLiteral(resourceName: "headStand")],
-            72: [#imageLiteral(resourceName: "forearmStand")]
+            70: [#imageLiteral(resourceName: "handStand"), #imageLiteral(resourceName: "handStand1"), #imageLiteral(resourceName: "handStand2"), #imageLiteral(resourceName: "handStand3"), #imageLiteral(resourceName: "handStand4"), #imageLiteral(resourceName: "handStand5"), #imageLiteral(resourceName: "handStand6"), #imageLiteral(resourceName: "handStand7"), #imageLiteral(resourceName: "handStand8")],
+            71: [#imageLiteral(resourceName: "headStand"), #imageLiteral(resourceName: "headStand1"), #imageLiteral(resourceName: "headStand2"), #imageLiteral(resourceName: "headStand3"), #imageLiteral(resourceName: "headStand4"), #imageLiteral(resourceName: "headStand5"), #imageLiteral(resourceName: "headStand6"), #imageLiteral(resourceName: "headStand7"), #imageLiteral(resourceName: "headStand8")],
+            72: [#imageLiteral(resourceName: "forearmStand"), #imageLiteral(resourceName: "forearmStand1"), #imageLiteral(resourceName: "forearmStand2"), #imageLiteral(resourceName: "forearmStand3"), #imageLiteral(resourceName: "forearmStand4"), #imageLiteral(resourceName: "forearmStand5"), #imageLiteral(resourceName: "forearmStand6")]
         ]
    
     
@@ -323,7 +322,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             // Relaxing
             [
                 //0,1
-                [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72],
+                [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72],
                 [2,3,4,5,6,9,12,13],
                 [2,3,4]
             ],
@@ -745,6 +744,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Animation
         expandedImage.image = demonstrationDictionary[demonstrationIndex]?[0]
         expandedImage.animationImages = demonstrationDictionary[demonstrationIndex]
+        expandedImage.animationDuration = Double(demonstrationDictionary[demonstrationIndex]!.count) * 0.5
         expandedImage.animationImages?.removeFirst()
         expandedImage.animationRepeatCount = 1
         // Play

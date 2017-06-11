@@ -266,7 +266,7 @@ class Information: UIViewController, UITableViewDataSource, UITableViewDelegate 
             //
             cell.selectionStyle = .none
             //
-        
+            cell.layoutIfNeeded()
             //
             // Blurs
             blur.removeFromSuperview()

@@ -401,12 +401,14 @@ class MeditationScreen: UIViewController {
         //
         var identifiers: [String] = []
         //
-        for i in 0...(intervalTimes[selectedPreset].count - 1) {
-            //
-            let name = "bell" + String(describing: i)
-            //
-            identifiers.append(name)
-            //
+        if intervalTimes[selectedPreset].count != 0 {
+            for i in 0...(intervalTimes[selectedPreset].count - 1) {
+                //
+                let name = "bell" + String(describing: i)
+                //
+                identifiers.append(name)
+                //
+            }
         }
         //
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)

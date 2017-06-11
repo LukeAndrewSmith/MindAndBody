@@ -49,7 +49,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
     var breathsArray: [String] = []
     
     // Demonstration Array
-    var demonstrationArray: [UIImage] = []
+    var demonstrationArray: [[UIImage]] = []
     
     // Target Area Array
     var targetAreaArray: [UIImage] = []
@@ -210,13 +210,34 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             // Images
             
+            
             //
             // Images
             if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                cell.imageViewCell.image = demonstrationArray[indexPath.row]
+                cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
             } else {
                 cell.imageViewCell.image = targetAreaArray[indexPath.row]
             }
+            
+            
+            // Image
+            //
+            // Animation
+            cell.imageViewCell.animationImages = demonstrationArray[indexPath.row]
+            cell.imageViewCell.animationImages?.removeFirst()
+            cell.imageViewCell.animationDuration = Double(demonstrationArray[indexPath.row].count) * 0.5
+            cell.imageViewCell.animationRepeatCount = 1
+            //
+            cell.imageViewCell.tag = indexPath.row
+            //
+            
+            // Image Tap
+            let imageTap = UITapGestureRecognizer()
+            imageTap.numberOfTapsRequired = 1
+            imageTap.addTarget(self, action: #selector(handleImageTap))
+            cell.imageViewCell.addGestureRecognizer(imageTap)
+            //
+
             
             //
             // Buttons
@@ -502,9 +523,11 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         let sender = imageTap.view as! UIImageView
         let tag = sender.tag
         //
-        //if demonstrationArray[tag].count != 1 {
-        //   sender.startAnimating()
-        //}
+        if targetAreaArray.contains(sender.image!) == false {
+            if demonstrationArray[tag].count != 1 {
+                sender.startAnimating()
+            }
+        }
     }
     
     
@@ -532,7 +555,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    if cell.imageViewCell.image == self.demonstrationArray[self.selectedRow] {
+                    if self.demonstrationArray[self.selectedRow].contains(cell.imageViewCell.image!) {
                         cell.nextImage.alpha = 1
                         cell.nextImage.isEnabled = true
                         cell.previousImage.alpha = 0
@@ -598,7 +621,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    if cell.imageViewCell.image == self.demonstrationArray[self.selectedRow] {
+                    if self.demonstrationArray[self.selectedRow].contains(cell.imageViewCell.image!) {
                         cell.nextImage.alpha = 1
                         cell.nextImage.isEnabled = true
                         cell.previousImage.alpha = 0
@@ -728,6 +751,8 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         let indexPath = NSIndexPath(row: selectedRow, section: 0)
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! StretchingTableViewCell
         //
+        if cell.imageViewCell.isAnimating == false {
+        //
         switch extraSwipe.direction {
         //
         case UISwipeGestureRecognizerDirection.left:
@@ -743,7 +768,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
                     cell.imageViewCell.image = targetAreaArray[indexPath.row]
                 } else {
-                    cell.imageViewCell.image = demonstrationArray[indexPath.row]
+                    cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
                 }
                 //
                 cell.imageViewCell.reloadInputViews()
@@ -783,7 +808,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 
                 //
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    cell.imageViewCell.image = demonstrationArray[indexPath.row]
+                    cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
                 } else {
                     cell.imageViewCell.image = targetAreaArray[indexPath.row]
                 }
@@ -814,6 +839,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
         default: break
         }
+        }
     }
     
     
@@ -824,6 +850,8 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         let indexPath = NSIndexPath(row: selectedRow, section: 0)
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! StretchingTableViewCell
         //
+        //
+        if cell.imageViewCell.isAnimating == false {
         //
         if cell.nextImage.alpha == 1 {
             //
@@ -836,7 +864,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
                 cell.imageViewCell.image = targetAreaArray[indexPath.row]
             } else {
-                cell.imageViewCell.image = demonstrationArray[indexPath.row]
+                cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
             }
             //
             cell.imageViewCell.reloadInputViews()
@@ -864,6 +892,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             })
             //
         }
+        }
     }
     
     //
@@ -873,6 +902,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         let indexPath = NSIndexPath(row: selectedRow, section: 0)
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! StretchingTableViewCell
         //
+        if cell.imageViewCell.isAnimating == false {
         //
         if cell.previousImage.alpha == 1 {
             //
@@ -883,7 +913,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             //
             if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                cell.imageViewCell.image = demonstrationArray[indexPath.row]
+                cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
             } else {
                 cell.imageViewCell.image = targetAreaArray[indexPath.row]
             }
@@ -911,6 +941,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 snapshot2?.removeFromSuperview()
             })
             //
+        }
         }
     }
     

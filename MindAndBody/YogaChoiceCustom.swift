@@ -34,7 +34,6 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
     var yogaArray: [String] = []
     //
     var demonstrationArray: [[UIImage]] = []
-    var animationDurationArray: [Double] = []
     //
     var targetAreaArray: [UIImage] = []
     //
@@ -306,89 +305,7 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
             71: [#imageLiteral(resourceName: "Test 2")],
             72: [#imageLiteral(resourceName: "Test 2")]
     ]
-    
-    // Demonstration Animation Duration
-    let animationDurationDictionary: [Int: Double] =
-        [
-            // Standing
-            0: 0,
-            1: 0,
-            2: 3.5,
-            3: 3.0,
-            4: 4.0,
-            5: 3.0,
-            6: 4.0,
-            7: 0,
-            8: 0,
-            9: 3.5,
-            10: 0,
-            11: 0,
-            12: 3.5,
-            13: 3.5,
-            14: 3.5,
-            15: 0,
-            16: 0,
-            17: 0,
-            18: 0,
-            19: 0,
-            20: 0,
-            21: 0,
-            22: 3.0,
-            // Hand/Elbows and Feet/Knees
-            23: 2.0,
-            24: 2.5,
-            25: 2.5,
-            26: 0,
-            27: 0,
-            28: 0,
-            29: 2.5,
-            30: 0,
-            31: 0,
-            32: 3.0,
-            33: 0,
-            34: 2.0,
-            35: 0,
-            36: 0,
-            37: 2.0,
-            38: 3.0,
-            39: 3.0,
-            40: 0,
-            // Seated
-            41: 0,
-            42: 0,
-            43: 0,
-            44: 0,
-            45: 0,
-            46: 0,
-            47: 0,
-            48: 0,
-            49: 0,
-            50: 0,
-            51: 3.0,
-            52: 3.5,
-            53: 3.0,
-            54: 4.0,
-            55: 4.0,
-            56: 0,
-            // Lying
-            57: 0,
-            58: 0,
-            59: 3.0,
-            60: 0,
-            61: 2.5,
-            62: 0,
-            63: 3.0,
-            64: 0,
-            65: 2.5,
-            66: 0,
-            67: 0,
-            68: 0,
-            69: 5.0,
-            // Hand Stands
-            70: 0,
-            71: 0,
-            72: 0
-    ]
+   
     
     // Explanation Dictionary
     let explanationDictionary: [Int: String] =
@@ -1766,8 +1683,6 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
                 demonstrationArray.append(demonstrationDictionary[i]!)
                 //
                 explanationArray.append(explanationDictionary[i]!)
-                //
-                animationDurationArray.append(animationDurationDictionary[i]!)
             }
             //
             for i in customBreathsArray[selectedPreset] {

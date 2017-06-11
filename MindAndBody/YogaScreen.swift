@@ -770,18 +770,18 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
                 UIAlertAction in
                 
-                // Play Ending Bell
-                let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
-                //
-                do {
-                    let bell = try AVAudioPlayer(contentsOf: url)
-                    self.soundPlayer = bell
-                    bell.play()
-                } catch {
-                    // couldn't load file :(
-                }
-                //
-                UIApplication.shared.isIdleTimerDisabled = false
+//                // Play Ending Bell
+//                let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
+//                //
+//                do {
+//                    let bell = try AVAudioPlayer(contentsOf: url)
+//                    self.soundPlayer = bell
+//                    bell.play()
+//                } catch {
+//                    // couldn't load file :(
+//                }
+//                //
+//                UIApplication.shared.isIdleTimerDisabled = false
                 self.dismiss(animated: true)
             }
             let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
