@@ -867,7 +867,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         let tableViewBackground2 = UIView()
         //
-        tableViewBackground2.backgroundColor = colour2
+        tableViewBackground2.backgroundColor = colour1
         tableViewBackground2.frame = CGRect(x: 0, y: 0, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
         //
         presetsTableView.backgroundView = tableViewBackground2
@@ -878,13 +878,16 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         // TableView Cell action items
         //
         // Movement table
-        presetsTableView.backgroundColor = colour2
+        presetsTableView.backgroundColor = colour1
         presetsTableView.delegate = self
         presetsTableView.dataSource = self
         presetsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        presetsTableView.layer.cornerRadius = 5
+        presetsTableView.layer.cornerRadius = 15
         presetsTableView.layer.masksToBounds = true
         presetsTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        //
+        presetsTableView.layer.borderColor = colour1.cgColor
+        presetsTableView.layer.borderWidth = 1
         //
         // Background View
         backgroundViewExpanded.backgroundColor = .black
@@ -915,7 +918,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         case movementsTableView:
             return NSLocalizedString(tableViewSectionArray[sectionNumbers[section]], comment: "")
         case presetsTableView:
-            return " "
+            return "   " + "Test"
         default: break
         }
     return ""
@@ -926,13 +929,14 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         switch tableView {
         case movementsTableView:
             let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
+            header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)!
             header.textLabel?.textColor = colour1
             header.contentView.backgroundColor = colour2
             header.contentView.tintColor = colour1
         case presetsTableView:
             let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
+            header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)!
+            header.textLabel?.textAlignment = .left
             header.textLabel?.textColor = colour1
             header.contentView.backgroundColor = colour2
             header.contentView.tintColor = colour1
@@ -1052,19 +1056,20 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 }
             }
             
-            
-            
-            
             presetsButton.setTitle("- " + NSLocalizedString(presetsArray[indexPath.section][indexPath.row], comment: "") + " -", for: .normal)
             presetsTableView.deselectRow(at: indexPath, animated: true)
             
             //
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsButton.frame.size.width - 60, height: 1)
-                self.presetsTableView.alpha = 0
+            let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+            let tableWidth = UIScreen.main.bounds.width - 20
+            //
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
                 self.backgroundViewExpanded.alpha = 0
-                self.movementsTableView.reloadData()
                 //
+                self.movementsTableView.reloadData()
+                let indexPath2 = NSIndexPath(row: 0, section: 0)
+                self.movementsTableView.scrollToRow(at: indexPath2 as IndexPath, at: .top, animated: true)
                 //
                 self.tableConstraint1.constant = 73.75
                 self.tableConstraint.constant = 49.75
@@ -1074,7 +1079,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.beginConstraint.constant = 0
                 self.view.layoutIfNeeded()
             }, completion: { finished in
-            //
+                //
                 self.presetsTableView.removeFromSuperview()
                 self.backgroundViewExpanded.removeFromSuperview()
                 if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough2") == false {
@@ -1082,6 +1087,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
                     UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2")
                 }
             })
+
         default: break
         }
        
@@ -1093,12 +1099,11 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
 //
     @IBAction func presetsButtonAction(_ sender: Any) {
         //
-        presetsTableView.alpha = 0
         UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
-        presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + (presetsButton.frame.size.height / 2), width: presetsButton.frame.size.width - 60, height: 0)
-        //presetsTableView.frame = presetsButton.bounds
-        presetsTableView.center.x = presetsButton.center.x
-        presetsTableView.center.y = presetsButton.center.y + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height)!
+        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+        let tableWidth = UIScreen.main.bounds.width - 20
+        self.presetsTableView.frame = CGRect(x: 10, y: view.frame.maxY, width: tableWidth, height: tableHeight)
+        //
         //
         backgroundViewExpanded.alpha = 0
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: presetsTableView)
@@ -1106,11 +1111,10 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         // Animate table fade and size
         // Position
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.presetsTableView.alpha = 1
-            self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + 44, width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88)
+            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY - tableHeight - 10, width: tableWidth, height: tableHeight)
             self.presetsTableView.reloadData()
-                //
-            self.backgroundViewExpanded.alpha = 0.7
+            //
+            self.backgroundViewExpanded.alpha = 0.5
         }, completion: nil)
         //
     }
@@ -1119,9 +1123,11 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     // Dismiss presets table
     func backgroundViewExpandedAction(_ sender: Any) {
         //
+        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+        let tableWidth = UIScreen.main.bounds.width - 20
+        //
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsButton.frame.size.width - 60, height: 0)
-            self.presetsTableView.alpha = 0
+            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
             self.backgroundViewExpanded.alpha = 0
         }, completion: { finished in
         //

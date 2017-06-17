@@ -463,10 +463,10 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         presetsTableView.delegate = self
         presetsTableView.dataSource = self
         presetsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        presetsTableView.layer.cornerRadius = 5
+        presetsTableView.layer.cornerRadius = 15
         presetsTableView.layer.masksToBounds = true
         presetsTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
+        //
         
         // Duration Picker
         pickerViewDuration.backgroundColor = colour2
@@ -488,9 +488,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableViewBells.delegate = self
         tableViewBells.dataSource = self
         tableViewBells.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        tableViewBells.layer.cornerRadius = 5
+        tableViewBells.layer.cornerRadius = 15
         tableViewBells.layer.masksToBounds = true
-        //tableViewBells.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         //
         
         // Interval Bells Table
@@ -507,7 +506,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableViewIntervalBells.delegate = self
         tableViewIntervalBells.dataSource = self
         tableViewIntervalBells.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        tableViewIntervalBells.layer.cornerRadius = 5
+        tableViewIntervalBells.layer.cornerRadius = 15
         tableViewIntervalBells.layer.masksToBounds = true
         //tableViewIntervalBells.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
@@ -526,7 +525,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableViewBackgroundSounds.delegate = self
         tableViewBackgroundSounds.dataSource = self
         tableViewBackgroundSounds.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        tableViewBackgroundSounds.layer.cornerRadius = 5
+        tableViewBackgroundSounds.layer.cornerRadius = 15
         tableViewBackgroundSounds.layer.masksToBounds = true
         //tableViewBackgroundSounds.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         //
@@ -619,7 +618,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Selection Elements
         // view
         selectionView.backgroundColor = colour2
-        selectionView.layer.cornerRadius = 5
+        selectionView.layer.cornerRadius = 15
         selectionView.layer.masksToBounds = true
         // ok
         okButton.backgroundColor = colour1
@@ -642,7 +641,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
        
         // view2
         selectionView2.backgroundColor = colour2
-        selectionView2.layer.cornerRadius = 5
+        selectionView2.layer.cornerRadius = 15
         selectionView2.layer.masksToBounds = true
         //
         intervalBellTimeLabel.textColor = colour1
@@ -670,8 +669,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         if (UIApplication.shared.keyWindow?.subviews.contains(self.presetsTableView))! {
             //
             UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.presetsTableView.frame = CGRect(x: 30, y: self.presets.frame.minY + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
-                self.presetsTableView.alpha = 0
+                self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: self.presetsTableView.frame.size.height)
                 self.backgroundViewSelection.alpha = 0
             }, completion: { finished in
                 //
@@ -691,7 +689,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         } else {
             UIView.animate(withDuration: 0.4, animations: {
                 //
-                self.selectionView.alpha = 0
                 self.backgroundViewSelection.alpha = 0
             //
             }, completion: { finished in
@@ -990,7 +987,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             UIView.animate(withDuration: 0.4, animations: {
                 //
-                self.selectionView.alpha = 0
                 self.backgroundViewSelection.alpha = 0
                 //
             }, completion: { finished in
@@ -1200,6 +1196,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
+  
     
 //
 // Main Button Actions ----------------------------------------------------------------------------------------------------
@@ -1219,10 +1216,10 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
 
         selectedItem = 0
         //
-        presetsTableView.alpha = 0
-        presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + (presets.frame.size.height / 2), width: presets.frame.size.width - 60, height: 0)
-        presetsTableView.center.x = presets.center.x
-        presetsTableView.center.y = presets.center.y + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height)!
+        let presetsHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+        let presetsWidth = UIScreen.main.bounds.width - 20
+        //
+        presetsTableView.frame = CGRect(x: 10, y: view.frame.maxY, width: presetsWidth, height: presetsHeight)
         //
         backgroundViewSelection.alpha = 0
         backgroundViewSelection.frame = UIScreen.main.bounds
@@ -1231,10 +1228,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: presetsTableView)
         // Animate table fade and size
         // Positiona
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.presetsTableView.alpha = 1
-            self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + 44, width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88)
-            
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            //
+            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY - presetsHeight - 10, width: presetsWidth, height: presetsHeight)
             //
             self.backgroundViewSelection.alpha = 0.5
         }, completion: nil)
@@ -1249,13 +1245,23 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         selectedItem = 1
         // View
-        selectionView.alpha = 0
+        //
+        let selectionWidth = self.view.frame.size.width - 20
+        let selectionHeight = CGFloat(147 + 49)
+        //
         UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
-        selectionView.frame = CGRect(x: 22, y: duration.frame.minY, width: UIScreen.main.bounds.width - 44, height: duration.frame.size.height)
+        selectionView.frame = CGRect(x: 10, y: view.frame.maxY, width: selectionWidth, height: selectionHeight)
         //
         // PickerView
         selectionView.addSubview(pickerViewDuration)
-        pickerViewDuration.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
+        self.pickerViewDuration.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
+            self.hoursLabel.center.y = self.pickerViewDuration.center.y
+            self.minutesLabel.center.y = self.pickerViewDuration.center.y
+            self.secondsLabel.center.y = self.pickerViewDuration.center.y
+            //
+            self.secondsLabel.center.x = self.pickerViewDuration.frame.minX + (self.pickerViewDuration.frame.size.width * (4.65/6))
+            self.minutesLabel.center.x = self.pickerViewDuration.frame.minX + (self.pickerViewDuration.frame.size.width * (3.55/6))
+            self.hoursLabel.center.x = self.pickerViewDuration.frame.minX + (self.pickerViewDuration.frame.size.width * (2.4/6))
         // Select Rows
         let hmsArray = convertToHMS(time: 0, index: 0)
         pickerViewDuration.selectRow(durationTimeArray[0].index(of: hmsArray[0])!, inComponent: 0, animated: true)
@@ -1264,8 +1270,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         selectionView.addSubview(durationTimeLabel)
         durationTimeLabel.textAlignment = .left
+        self.durationTimeLabel.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: 22)
         // ok
-        okButton.frame = CGRect(x: 0, y: 147, width: selectionView.frame.size.width, height: 49)
+        self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
         selectionView.addSubview(okButton)
         //
         backgroundViewSelection.alpha = 0
@@ -1273,25 +1280,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         backgroundViewSelection.frame = UIScreen.main.bounds
         // Animate fade and size
         // Position
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             //
-            self.selectionView.alpha = 1
-            //
-            self.selectionView.frame = CGRect(x: 22, y: 0, width: UIScreen.main.bounds.width - 44, height: 147 + 49)
-            self.selectionView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
-            //
-            self.pickerViewDuration.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
-                self.hoursLabel.center.y = self.pickerViewDuration.center.y
-                self.minutesLabel.center.y = self.pickerViewDuration.center.y
-                self.secondsLabel.center.y = self.pickerViewDuration.center.y
-            // ok
-            self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
-            //
-            self.secondsLabel.center.x = self.pickerViewDuration.frame.minX + (self.pickerViewDuration.frame.size.width * (4.65/6))
-            self.minutesLabel.center.x = self.pickerViewDuration.frame.minX + (self.pickerViewDuration.frame.size.width * (3.55/6))
-            self.hoursLabel.center.x = self.pickerViewDuration.frame.minX + (self.pickerViewDuration.frame.size.width * (2.4/6))
-            //
-            self.durationTimeLabel.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: 22)
+            self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
             //
             self.backgroundViewSelection.alpha = 0.5
         }, completion: nil)
@@ -1309,13 +1300,15 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         didChangeStartingBell = false
         tableViewBells.reloadData()
         // View
-        selectionView.alpha = 0
-        selectionView.frame = CGRect(x: 22, y: startingBell.frame.minY, width: UIScreen.main.bounds.width - 44, height: startingBell.frame.size.height)
+        //
+        let selectionWidth = self.view.frame.size.width - 20
+        let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+        selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: selectionWidth, height: selectionHeight)
         // Tableview
         selectionView.addSubview(tableViewBells)
-        tableViewBells.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
+        self.tableViewBells.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: selectionHeight - 49)
         // ok
-        okButton.frame = CGRect(x: 0, y: 147, width: selectionView.frame.size.width, height: 49)
+        self.okButton.frame = CGRect(x: 0, y: selectionHeight - 49, width: self.selectionView.frame.size.width, height: 49)
         selectionView.addSubview(okButton)
         if selectedStartingBell != -1 {
             okButton.isEnabled = true
@@ -1330,23 +1323,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Position
         UIView.animate(withDuration: 0.4, animations: {
             //
-            let height = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
-            //
-            self.selectionView.alpha = 1
-            //
-            self.selectionView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + 44, width: UIScreen.main.bounds.width - 60, height: height)
-            // ok
-            self.tableViewBells.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: height - 49)
-            // ok
-            self.okButton.frame = CGRect(x: 0, y: height - 49, width: self.selectionView.frame.size.width, height: 49)
+            self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
             //
             self.backgroundViewSelection.alpha = 0.5
-            
-            //
-            self.selectionView.alpha = 1
-            //
-            //
-            
             //
         }, completion: nil)
         
@@ -1388,7 +1367,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         intervalBellStage = 0
         tableViewIntervalBells.reloadData()
         // View
-        selectionView.alpha = 0
         selectionView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + intervalBells.frame.minY, width: presets.frame.size.width - 44, height: 0)
         UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
         // Table
@@ -1456,7 +1434,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         didChangeEndingBell = false
         tableViewBells.reloadData()
         // View
-        selectionView.alpha = 0
         UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
         selectionView.frame = CGRect(x: 22, y: endingBell.frame.minY, width: UIScreen.main.bounds.width - 44, height: endingBell.frame.size.height)
         // Tableview
@@ -1533,7 +1510,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         didChangeBackgroundSound = false
         tableViewBackgroundSounds.reloadData()
         // View
-        selectionView.alpha = 0
         UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
         selectionView.frame = CGRect(x: 22, y: startingBell.frame.minY, width: UIScreen.main.bounds.width - 44, height: startingBell.frame.size.height)
         // Tableview
@@ -2036,9 +2012,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                         //
                         tableView.deselectRow(at: indexPath, animated: true)
                         // Dismiss Table
-                        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                        self.presetsTableView.frame = CGRect(x: 30, y: 44 + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
-                        self.presetsTableView.alpha = 0
+                        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: self.presetsTableView.frame.size.height)
                         self.backgroundViewSelection.alpha = 0
                         //
                         self.presetsConstraint.constant = 0
@@ -2101,8 +2076,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Dismiss Table
                 if presetsArray.count != 0 {
                 UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    self.presetsTableView.frame = CGRect(x: 30, y: 44 + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
-                    self.presetsTableView.alpha = 0
+                    self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: self.presetsTableView.frame.size.height)
                     self.backgroundViewSelection.alpha = 0
                     //
                     self.presetsConstraint.constant = 0

@@ -220,7 +220,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             4: [#imageLiteral(resourceName: "eagle"), #imageLiteral(resourceName: "eagle1"), #imageLiteral(resourceName: "eagle2"), #imageLiteral(resourceName: "eagle3"), #imageLiteral(resourceName: "eagle4"), #imageLiteral(resourceName: "eagle5"), #imageLiteral(resourceName: "eagle6"), #imageLiteral(resourceName: "eagle7")],
             5: [#imageLiteral(resourceName: "chair"), #imageLiteral(resourceName: "chair1"), #imageLiteral(resourceName: "chair2"), #imageLiteral(resourceName: "chair3"), #imageLiteral(resourceName: "chair4"), #imageLiteral(resourceName: "chair5")],
             6: [#imageLiteral(resourceName: "lordOfDance"), #imageLiteral(resourceName: "lordOfDance1"), #imageLiteral(resourceName: "lordOfDance2"), #imageLiteral(resourceName: "lordOfDance3"), #imageLiteral(resourceName: "lordOfDance4"), #imageLiteral(resourceName: "lordOfDance5"), #imageLiteral(resourceName: "lordOfDance6"), #imageLiteral(resourceName: "lordOfDance7")],
-            7: [#imageLiteral(resourceName: "warrior1"), #imageLiteral(resourceName: "warrior12"), #imageLiteral(resourceName: "warrior13"), #imageLiteral(resourceName: "warrior14"), #imageLiteral(resourceName: "warrior15")],
+            7: [#imageLiteral(resourceName: "warrior1"), #imageLiteral(resourceName: "warrior11"), #imageLiteral(resourceName: "warrior12"), #imageLiteral(resourceName: "warrior13"), #imageLiteral(resourceName: "warrior14"), #imageLiteral(resourceName: "warrior15")],
             8: [#imageLiteral(resourceName: "warrior2"), #imageLiteral(resourceName: "warrior21"), #imageLiteral(resourceName: "warrior22"), #imageLiteral(resourceName: "warrior23"), #imageLiteral(resourceName: "warrior24"), #imageLiteral(resourceName: "warrior25")],
             9: [#imageLiteral(resourceName: "warrior3"), #imageLiteral(resourceName: "warrior31"), #imageLiteral(resourceName: "warrior32"), #imageLiteral(resourceName: "warrior33"), #imageLiteral(resourceName: "warrior34"), #imageLiteral(resourceName: "warrior35"), #imageLiteral(resourceName: "warrior36")],
             10: [#imageLiteral(resourceName: "halfMoon"), #imageLiteral(resourceName: "halfMoon1"), #imageLiteral(resourceName: "halfMoon2"), #imageLiteral(resourceName: "halfMoon3"), #imageLiteral(resourceName: "halfMoon4"), #imageLiteral(resourceName: "halfMoon5"), #imageLiteral(resourceName: "halfMoon6"), #imageLiteral(resourceName: "halfMoon7")],
@@ -249,8 +249,8 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             32: [#imageLiteral(resourceName: "catCow"), #imageLiteral(resourceName: "catCow1"), #imageLiteral(resourceName: "catCow2"), #imageLiteral(resourceName: "catCow1"), #imageLiteral(resourceName: "catCow3"), #imageLiteral(resourceName: "catCow1")],
             33: [#imageLiteral(resourceName: "halfMonkey"), #imageLiteral(resourceName: "halfMonkey1"), #imageLiteral(resourceName: "halfMonkey2"), #imageLiteral(resourceName: "halfMonkey3"), #imageLiteral(resourceName: "halfMonkey4")],
             34: [#imageLiteral(resourceName: "childPose"), #imageLiteral(resourceName: "childPose1"), #imageLiteral(resourceName: "childPose2"), #imageLiteral(resourceName: "childPose3")],
-            35: [#imageLiteral(resourceName: "wildThing")],
-            36: [#imageLiteral(resourceName: "upwardBow")],
+            35: [#imageLiteral(resourceName: "wildThing"), #imageLiteral(resourceName: "wildThing1"), #imageLiteral(resourceName: "wildThing2"), #imageLiteral(resourceName: "wildThing3"), #imageLiteral(resourceName: "wildThing4"), #imageLiteral(resourceName: "wildThing5"), #imageLiteral(resourceName: "wildThing6")],
+            36: [#imageLiteral(resourceName: "upwardBow"), #imageLiteral(resourceName: "upwardBow1"), #imageLiteral(resourceName: "upwardBow2"), #imageLiteral(resourceName: "upwardBow3"), #imageLiteral(resourceName: "upwardBow4"), #imageLiteral(resourceName: "upwardBow5")],
             37: [#imageLiteral(resourceName: "bridge"), #imageLiteral(resourceName: "bridge1"), #imageLiteral(resourceName: "bridge2"), #imageLiteral(resourceName: "bridge3")],
             38: [#imageLiteral(resourceName: "upwardPlank"), #imageLiteral(resourceName: "upwardPlank1"), #imageLiteral(resourceName: "upwardPlank2"), #imageLiteral(resourceName: "upwardPlank3"), #imageLiteral(resourceName: "upwardPlank4"), #imageLiteral(resourceName: "upwardPlank5")],
             39: [#imageLiteral(resourceName: "extendedPuppy"), #imageLiteral(resourceName: "extendedPuppy1"), #imageLiteral(resourceName: "extendedPuppy2"), #imageLiteral(resourceName: "extendedPuppy3"), #imageLiteral(resourceName: "extendedPuppy4"), #imageLiteral(resourceName: "extendedPuppy5")],
@@ -339,7 +339,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             // 5 min
             // Relaxing
             [
-                [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72],
+                [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72],
                 [1,1,1,1,1,1,1,1],
                 [1,1,1]
             ],
@@ -489,9 +489,12 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         presetsTableView.delegate = self
         presetsTableView.dataSource = self
         presetsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        presetsTableView.layer.cornerRadius = 5
+        presetsTableView.layer.cornerRadius = 15
         presetsTableView.layer.masksToBounds = true
         presetsTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        //
+        presetsTableView.layer.borderColor = colour1.cgColor
+        presetsTableView.layer.borderWidth = 1
         //
         // Background View
         backgroundViewExpanded.backgroundColor = .black
@@ -520,7 +523,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch tableView {
         case posesTableView:
-            return " "
+            return ""
         case presetsTableView:
             return NSLocalizedString(practiceSectionTitles[section], comment: "")
         default: break
@@ -531,15 +534,9 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Will display header
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         switch tableView {
-        case posesTableView:
-            let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
-            header.textLabel?.textColor = colour1
-            header.contentView.backgroundColor = colour2
-            header.contentView.tintColor = colour1
         case presetsTableView:
             let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
+            header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)!
             header.textLabel?.textColor = colour1
             header.contentView.backgroundColor = colour2
             header.contentView.tintColor = colour1
@@ -639,11 +636,16 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             presetsTableView.deselectRow(at: indexPath, animated: true)
             
             //
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsButton.frame.size.width - 60, height: 1)
-                self.presetsTableView.alpha = 0
+            let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+            let tableWidth = UIScreen.main.bounds.width - 20
+            //
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
                 self.backgroundViewExpanded.alpha = 0
+                //
                 self.posesTableView.reloadData()
+                let indexPath2 = NSIndexPath(row: 0, section: 0)
+                self.posesTableView.scrollToRow(at: indexPath2 as IndexPath, at: .top, animated: true)
                 //
                 self.tableConstraint1.constant = 73.75
                 self.tableConstraint.constant = 49.75
@@ -651,7 +653,6 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.presetsConstraint.constant = self.view.frame.size.height - 73.25
                 //
                 self.beginConstraint.constant = 0
-                //
                 self.view.layoutIfNeeded()
             }, completion: { finished in
                 //
@@ -662,6 +663,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
                     UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2")
                 }
             })
+            
         default: break
         }
         
@@ -673,36 +675,35 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     @IBAction func presetsButtonAction(_ sender: Any) {
         //
-        presetsTableView.alpha = 0
         UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
-        presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + (presetsButton.frame.size.height / 2), width: presetsButton.frame.size.width - 60, height: 0)
-        //presetsTableView.frame = presetsButton.bounds
-        presetsTableView.center.x = presetsButton.center.x
-        presetsTableView.center.y = presetsButton.center.y + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height)!
+        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+        let tableWidth = UIScreen.main.bounds.width - 20
+        self.presetsTableView.frame = CGRect(x: 10, y: view.frame.maxY, width: tableWidth, height: tableHeight)
+        //
         //
         backgroundViewExpanded.alpha = 0
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: presetsTableView)
         backgroundViewExpanded.frame = UIScreen.main.bounds
         // Animate table fade and size
         // Position
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.presetsTableView.alpha = 1
-            self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + 44, width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88)
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY - tableHeight - 10, width: tableWidth, height: tableHeight)
             self.presetsTableView.reloadData()
             //
-            self.backgroundViewExpanded.alpha = 0.7
+            self.backgroundViewExpanded.alpha = 0.5
         }, completion: nil)
         //
-        //        })
     }
     
     
     // Dismiss presets table
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsButton.frame.size.width - 60, height: 0)
-            self.presetsTableView.alpha = 0
+        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+        let tableWidth = UIScreen.main.bounds.width - 20
+        //
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
             self.backgroundViewExpanded.alpha = 0
         }, completion: { finished in
             //

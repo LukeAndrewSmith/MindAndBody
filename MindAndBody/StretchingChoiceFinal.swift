@@ -110,64 +110,66 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
              15,
              16,
              17,
-             18],
+             18,
+             19,
+             20],
             // Back
-            [19,
-             20,
-             21,
+            [21,
              22,
              23,
              24,
              25,
              26,
              27,
-             28],
+             28,
+             29,
+             30],
             // Obliques(Sides)
-            [29,
-             30,
-             31],
+            [31,
+             32,
+             33],
             // Neck
-            [32,
-             33,
-             34,
+            [34,
              35,
              36,
-             37],
+             37,
+             38,
+             39],
             // Arms
-            [38,
-             39,
-             40],
+            [40,
+             41,
+             42],
             // Pecs
-            [41],
+            [43],
             // Shoulders
-            [42,
-             43,
-             44,
+            [44,
              45,
              46,
-             47],
+             47,
+             48,
+             49],
             // Hips and Glutes
-            [48,
-             49,
-             50,
+            [50,
              51,
              52,
              53,
-             54],
+             54,
+             55,
+             56],
             // Calves
-            [55],
+            [57],
             // Hamstrings
-            [56,
-             57,
-             58,
+            [58,
              59,
-             60],
-            // Quads
-            [61,
+             60,
+             61,
              62],
-            // Full Body
+            // Quads
             [63,
-            64]
+             64],
+            // Full Body
+            [65,
+            66]
     ]
     
     // Stretching Post Workout Array
@@ -195,63 +197,65 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             16: "hamstringf",
             17: "glutef",
             18: "calvef",
+            19: "itBand",
+            20: "standOnBall",
             // Back
-            19: "catCow",
-            20: "upwardsDog",
-            21: "extendedPuppy",
-            22: "childPose",
-            23: "staffPose",
-            24: "pelvicTilt",
-            25: "kneeToChest",
-            26: "legDrop",
-            27: "seatedTwist",
-            28: "legsWall",
+            21: "catCow",
+            22: "upwardsDog",
+            23: "extendedPuppy",
+            24: "childPose",
+            25: "staffPose",
+            26: "pelvicTilt",
+            27: "kneeToChest",
+            28: "legDrop",
+            29: "seatedTwist",
+            30: "legsWall",
             // Obliques(Sides)
-            29: "sideLean",
-            30: "extendedSideAngle",
-            31: "seatedSide",
+            31: "sideLean",
+            32: "extendedSideAngle",
+            33: "seatedSide",
             // Neck
-            32: "rearNeck",
-            33: "rearNeckHand",
-            34: "seatedLateral",
-            35: "neckRotator",
-            36: "scalene",
-            37: "headRoll",
+            34: "rearNeck",
+            35: "rearNeckHand",
+            36: "seatedLateral",
+            37: "neckRotator",
+            38: "scalene",
+            39: "headRoll",
             // Arms
-            38: "forearmStretch",
-            39: "tricepStretch",
-            40: "bicepStretch",
+            40: "forearmStretch",
+            41: "tricepStretch",
+            42: "bicepStretch",
             // Pecs
-            41: "pecStretch",
+            43: "pecStretch",
             // Shoulders
-            42: "shoulderRoll",
-            43: "behindBackTouch",
-            44: "frontDelt",
-            45: "lateralDelt",
-            46: "rearDelt",
-            47: "rotatorCuff",
+            44: "shoulderRoll",
+            45: "behindBackTouch",
+            46: "frontDelt",
+            47: "lateralDelt",
+            48: "rearDelt",
+            49: "rotatorCuff",
             // Hips and Glutes
-            48: "squatHold",
-            49: "groinStretch",
-            50: "butterflyPose",
-            51: "lungeStretch",
-            52: "threadTheNeedle",
-            53: "pigeonPose",
-            54: "seatedGlute",
+            50: "squatHold",
+            51: "groinStretch",
+            52: "butterflyPose",
+            53: "lungeStretch",
+            54: "threadTheNeedle",
+            55: "pigeonPose",
+            56: "seatedGlute",
             // Calves
-            55: "calveStretch",
+            57: "calveStretch",
             // Hamstrings
-            56: "standingHamstring",
-            57: "standingOneLegHamstring",
-            58: "downWardsDog",
-            59: "singleLegHamstring",
-            60: "twoLegHamstring",
+            58: "standingHamstring",
+            59: "standingOneLegHamstring",
+            60: "downWardsDog",
+            61: "singleLegHamstring",
+            62: "twoLegHamstring",
             // Quads
-            61: "lungeStretchWall",
-            62: "QuadStretch",
+            63: "lungeStretchWall",
+            64: "QuadStretch",
             // Full Body
-            63: "sumoSquatTwist",
-            64: "tinyFencerStretch",
+            65: "sumoSquatTwist",
+            66: "tinyFencerStretch",
     ]
     
     // Breaths/Reps/Seconds Array
@@ -279,63 +283,65 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             16: "2-7 reps",
             17: "2-7 reps",
             18: "2-7 reps",
+            19: "2-7 reps",
+            20: "2-7 reps",
             // Back
-            19: "15-20 reps",
-            20: "5-10 breaths",
-            21: "5-10 breaths",
+            21: "15-20 reps",
             22: "5-10 breaths",
             23: "5-10 breaths",
-            24: "10-30 reps",
+            24: "5-10 breaths",
             25: "5-10 breaths",
-            26: "5-10 breaths",
+            26: "10-30 reps",
             27: "5-10 breaths",
             28: "5-10 breaths",
-            // Obliques(Sides)
             29: "5-10 breaths",
             30: "5-10 breaths",
+            // Obliques(Sides)
             31: "5-10 breaths",
-            // Neck
             32: "5-10 breaths",
             33: "5-10 breaths",
+            // Neck
             34: "5-10 breaths",
             35: "5-10 breaths",
             36: "5-10 breaths",
             37: "5-10 breaths",
-            // Arms
             38: "5-10 breaths",
             39: "5-10 breaths",
+            // Arms
             40: "5-10 breaths",
-            // Pecs
             41: "5-10 breaths",
-            // Shoulders
             42: "5-10 breaths",
+            // Pecs
             43: "5-10 breaths",
+            // Shoulders
             44: "5-10 breaths",
             45: "5-10 breaths",
             46: "5-10 breaths",
             47: "5-10 breaths",
+            48: "5-10 breaths",
+            49: "5-10 breaths",
             // Hips and Glutes
-            48: "30 breaths",
-            49: "5-10 reps",
-            50: "5-10 breaths",
-            51: "5-10 breaths",
+            50: "30 breaths",
+            51: "5-10 reps",
             52: "5-10 breaths",
             53: "5-10 breaths",
             54: "5-10 breaths",
-            // Calves
             55: "5-10 breaths",
-            // Hamstrings
             56: "5-10 breaths",
+            // Calves
             57: "5-10 breaths",
+            // Hamstrings
             58: "5-10 breaths",
             59: "5-10 breaths",
             60: "5-10 breaths",
-            // Quads
             61: "5-10 breaths",
             62: "5-10 breaths",
-            // Full Body
+            // Quads
             63: "5-10 breaths",
             64: "5-10 breaths",
+            // Full Body
+            65: "5-10 breaths",
+            66: "5-10 breaths",
     ]
     
     // Demonstration Array
@@ -344,82 +350,84 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             // Mandatory
             0: [#imageLiteral(resourceName: "Test")],
             // Joint Rotations
-            1: [#imageLiteral(resourceName: "Wrist Rotations")],
-            2: [#imageLiteral(resourceName: "Test")],
-            3: [#imageLiteral(resourceName: "Test")],
-            4: [#imageLiteral(resourceName: "Test")],
-            5: [#imageLiteral(resourceName: "Test")],
-            6: [#imageLiteral(resourceName: "Test")],
-            7: [#imageLiteral(resourceName: "Test")],
-            8: [#imageLiteral(resourceName: "Test")],
+            1: [#imageLiteral(resourceName: "wristRotations"), #imageLiteral(resourceName: "wristRotations1"), #imageLiteral(resourceName: "wristRotations2"), #imageLiteral(resourceName: "wristRotations1"), #imageLiteral(resourceName: "wristRotations2"), #imageLiteral(resourceName: "wristRotations3"), #imageLiteral(resourceName: "wristRotations4"), #imageLiteral(resourceName: "wristRotations3"), #imageLiteral(resourceName: "wristRotations4")],
+            2: [#imageLiteral(resourceName: "elbowRotations"), #imageLiteral(resourceName: "elbowRotations1"), #imageLiteral(resourceName: "elbowRotations2"), #imageLiteral(resourceName: "elbowRotations3"), #imageLiteral(resourceName: "elbowRotations4"), #imageLiteral(resourceName: "elbowRotations3"), #imageLiteral(resourceName: "elbowRotations2"), #imageLiteral(resourceName: "elbowRotations1")],
+            3: [#imageLiteral(resourceName: "shoulderRotations"), #imageLiteral(resourceName: "shoulderRotations1"), #imageLiteral(resourceName: "shoulderRotations2"), #imageLiteral(resourceName: "shoulderRotations3"), #imageLiteral(resourceName: "shoulderRotations4"), #imageLiteral(resourceName: "shoulderRotations5"), #imageLiteral(resourceName: "shoulderRotations6"), #imageLiteral(resourceName: "shoulderRotations1")],
+            4: [#imageLiteral(resourceName: "neckRotations"), #imageLiteral(resourceName: "neckRotations1"), #imageLiteral(resourceName: "neckRotations2"), #imageLiteral(resourceName: "neckRotations1"), #imageLiteral(resourceName: "neckRotations2"), #imageLiteral(resourceName: "neckRotations3"), #imageLiteral(resourceName: "neckRotations4"), #imageLiteral(resourceName: "neckRotations3"), #imageLiteral(resourceName: "neckRotations4")],
+            5: [#imageLiteral(resourceName: "waistRotations"), #imageLiteral(resourceName: "waistRotations1"), #imageLiteral(resourceName: "waistRotations2"), #imageLiteral(resourceName: "waistRotations3"), #imageLiteral(resourceName: "waistRotations4"), #imageLiteral(resourceName: "waistRotations5"), #imageLiteral(resourceName: "waistRotations6"), #imageLiteral(resourceName: "waistRotations1")],
+            6: [#imageLiteral(resourceName: "hipRotations"), #imageLiteral(resourceName: "hipRotations1"), #imageLiteral(resourceName: "hipRotations2"), #imageLiteral(resourceName: "hipRotations3"), #imageLiteral(resourceName: "hipRotations4"), #imageLiteral(resourceName: "hipRotations5"), #imageLiteral(resourceName: "hipRotations6"), #imageLiteral(resourceName: "hipRotations7"), #imageLiteral(resourceName: "hipRotations1")],
+            7: [#imageLiteral(resourceName: "kneeRotations"), #imageLiteral(resourceName: "kneeRotations1"), #imageLiteral(resourceName: "kneeRotations2"), #imageLiteral(resourceName: "kneeRotations3"), #imageLiteral(resourceName: "kneeRotations2"), #imageLiteral(resourceName: "kneeRotations1"), #imageLiteral(resourceName: "kneeRotations4"), #imageLiteral(resourceName: "kneeRotations5"), #imageLiteral(resourceName: "kneeRotations4"), #imageLiteral(resourceName: "kneeRotations1")],
+            8: [#imageLiteral(resourceName: "ankleRotations"), #imageLiteral(resourceName: "ankleRotations1"), #imageLiteral(resourceName: "ankleRotations2"), #imageLiteral(resourceName: "ankleRotations1"), #imageLiteral(resourceName: "ankleRotations2"), #imageLiteral(resourceName: "ankleRotations3"), #imageLiteral(resourceName: "ankleRotations4"), #imageLiteral(resourceName: "ankleRotations3"), #imageLiteral(resourceName: "ankleRotations4")],
             // Foam/Ball Roll
-            9: [#imageLiteral(resourceName: "Test")],
-            10: [#imageLiteral(resourceName: "Test")],
-            11: [#imageLiteral(resourceName: "Test")],
-            12: [#imageLiteral(resourceName: "Test")],
-            13: [#imageLiteral(resourceName: "Test")],
-            14: [#imageLiteral(resourceName: "Test")],
-            15: [#imageLiteral(resourceName: "Test")],
-            16: [#imageLiteral(resourceName: "Test")],
-            17: [#imageLiteral(resourceName: "Test")],
-            18: [#imageLiteral(resourceName: "Test")],
+            9: [#imageLiteral(resourceName: "backFoam"), #imageLiteral(resourceName: "backFoam1"), #imageLiteral(resourceName: "backFoam2"), #imageLiteral(resourceName: "backFoam3"), #imageLiteral(resourceName: "backFoam4"), #imageLiteral(resourceName: "backFoam3"), #imageLiteral(resourceName: "backFoam2"), #imageLiteral(resourceName: "backFoam1")],
+            10: [#imageLiteral(resourceName: "thoracicSpineFoam"), #imageLiteral(resourceName: "thoracicSpineFoam1"), #imageLiteral(resourceName: "thoracicSpineFoam2"), #imageLiteral(resourceName: "thoracicSpineFoam3"), #imageLiteral(resourceName: "thoracicSpineFoam2"), #imageLiteral(resourceName: "thoracicSpineFoam1"), #imageLiteral(resourceName: "thoracicSpineFoam4"), #imageLiteral(resourceName: "thoracicSpineFoam5"), #imageLiteral(resourceName: "thoracicSpineFoam4"), #imageLiteral(resourceName: "thoracicSpineFoam1")],
+            11: [#imageLiteral(resourceName: "latFoam"), #imageLiteral(resourceName: "latFoam1"), #imageLiteral(resourceName: "latFoam2"), #imageLiteral(resourceName: "latFoam3"), #imageLiteral(resourceName: "latFoam4"), #imageLiteral(resourceName: "latFoam3"), #imageLiteral(resourceName: "latFoam2"), #imageLiteral(resourceName: "latFoam1")],
+            12: [#imageLiteral(resourceName: "pecDeltFoam")],
+            13: [#imageLiteral(resourceName: "rearDeltFoam")],
+            14: [#imageLiteral(resourceName: "quadFoam"), #imageLiteral(resourceName: "quadFoam1"), #imageLiteral(resourceName: "quadFoam2"), #imageLiteral(resourceName: "quadFoam3"), #imageLiteral(resourceName: "quadFoam4"), #imageLiteral(resourceName: "quadFoam3"), #imageLiteral(resourceName: "quadFoam2"), #imageLiteral(resourceName: "quadFoam1"), #imageLiteral(resourceName: "quadFoam5"), #imageLiteral(resourceName: "quadFoam6"), #imageLiteral(resourceName: "quadFoam5")],
+            15: [#imageLiteral(resourceName: "adductorFoam"), #imageLiteral(resourceName: "adductorFoam1"), #imageLiteral(resourceName: "adductorFoam2"), #imageLiteral(resourceName: "adductorFoam3"), #imageLiteral(resourceName: "adductorFoam2"), #imageLiteral(resourceName: "adductorFoam1")],
+            16: [#imageLiteral(resourceName: "hamstringFoam"), #imageLiteral(resourceName: "hamstringFoam1"), #imageLiteral(resourceName: "hamstringFoam2"), #imageLiteral(resourceName: "hamstringFoam3"), #imageLiteral(resourceName: "hamstringFoam4"), #imageLiteral(resourceName: "hamstringFoam3"), #imageLiteral(resourceName: "hamstringFoam2"), #imageLiteral(resourceName: "hamstringFoam1")],
+            17: [#imageLiteral(resourceName: "gluteFoam"), #imageLiteral(resourceName: "gluteFoam1"), #imageLiteral(resourceName: "gluteFoam2"), #imageLiteral(resourceName: "gluteFoam3"), #imageLiteral(resourceName: "gluteFoam4"), #imageLiteral(resourceName: "gluteFoam3"), #imageLiteral(resourceName: "gluteFoam2"), #imageLiteral(resourceName: "gluteFoam1")],
+            18: [#imageLiteral(resourceName: "calveFoam"), #imageLiteral(resourceName: "calveFoam1"), #imageLiteral(resourceName: "calveFoam2"), #imageLiteral(resourceName: "calveFoam3"), #imageLiteral(resourceName: "calveFoam2"), #imageLiteral(resourceName: "calveFoam1"), #imageLiteral(resourceName: "calveFoam2"), #imageLiteral(resourceName: "calveFoam3"), #imageLiteral(resourceName: "calveFoam4"), #imageLiteral(resourceName: "calveFoam5"), #imageLiteral(resourceName: "calveFoam4"), #imageLiteral(resourceName: "calveFoam3"), #imageLiteral(resourceName: "calveFoam2"), #imageLiteral(resourceName: "calveFoam1")],
+            19: [#imageLiteral(resourceName: "itBandFoam"), #imageLiteral(resourceName: "itBandFoam1"), #imageLiteral(resourceName: "itBandFoam2"), #imageLiteral(resourceName: "itBandFoam3"), #imageLiteral(resourceName: "itBandFoam2"), #imageLiteral(resourceName: "itBandFoam1")],
+            20: [#imageLiteral(resourceName: "standingOnBall")],
             // Back
-            19: [#imageLiteral(resourceName: "catCowS"), #imageLiteral(resourceName: "catCowS1"), #imageLiteral(resourceName: "catCowS2"), #imageLiteral(resourceName: "catCowS1"), #imageLiteral(resourceName: "catCowS3"), #imageLiteral(resourceName: "catCowS1"), #imageLiteral(resourceName: "catCowS2"), #imageLiteral(resourceName: "catCowS1")],
-            20: [#imageLiteral(resourceName: "upwardsDogS")],
-            21: [#imageLiteral(resourceName: "extendedPuppyS")],
-            22: [#imageLiteral(resourceName: "childPoseS")],
-            23: [#imageLiteral(resourceName: "staffPoseS")],
-            24: [#imageLiteral(resourceName: "pelvicTilt"), #imageLiteral(resourceName: "pelvicTilt1"), #imageLiteral(resourceName: "pelvicTilt2"), #imageLiteral(resourceName: "pelvicTilt1"), #imageLiteral(resourceName: "pelvicTilt2"), #imageLiteral(resourceName: "pelvicTilt1"), #imageLiteral(resourceName: "pelvicTilt2")],
-            25: [#imageLiteral(resourceName: "kneeToChest")],
-            26: [#imageLiteral(resourceName: "legDrop"), #imageLiteral(resourceName: "legDrop1"), #imageLiteral(resourceName: "legDrop2"), #imageLiteral(resourceName: "legDrop1"), #imageLiteral(resourceName: "legDrop3"), #imageLiteral(resourceName: "legDrop1"), #imageLiteral(resourceName: "legDrop2"), #imageLiteral(resourceName: "legDrop1")],
-            27: [#imageLiteral(resourceName: "seatedTwist")],
-            28: [#imageLiteral(resourceName: "legsWall")],
+            21: [#imageLiteral(resourceName: "catCowS"), #imageLiteral(resourceName: "catCowS1"), #imageLiteral(resourceName: "catCowS2"), #imageLiteral(resourceName: "catCowS1"), #imageLiteral(resourceName: "catCowS3"), #imageLiteral(resourceName: "catCowS1"), #imageLiteral(resourceName: "catCowS2"), #imageLiteral(resourceName: "catCowS1")],
+            22: [#imageLiteral(resourceName: "upwardsDogS")],
+            23: [#imageLiteral(resourceName: "extendedPuppyS")],
+            24: [#imageLiteral(resourceName: "childPoseS")],
+            25: [#imageLiteral(resourceName: "staffPoseS")],
+            26: [#imageLiteral(resourceName: "pelvicTilt"), #imageLiteral(resourceName: "pelvicTilt1"), #imageLiteral(resourceName: "pelvicTilt2"), #imageLiteral(resourceName: "pelvicTilt1"), #imageLiteral(resourceName: "pelvicTilt2"), #imageLiteral(resourceName: "pelvicTilt1"), #imageLiteral(resourceName: "pelvicTilt2")],
+            27: [#imageLiteral(resourceName: "kneeToChest")],
+            28: [#imageLiteral(resourceName: "legDrop"), #imageLiteral(resourceName: "legDrop1"), #imageLiteral(resourceName: "legDrop2"), #imageLiteral(resourceName: "legDrop1"), #imageLiteral(resourceName: "legDrop3"), #imageLiteral(resourceName: "legDrop1"), #imageLiteral(resourceName: "legDrop2"), #imageLiteral(resourceName: "legDrop1")],
+            29: [#imageLiteral(resourceName: "seatedTwist")],
+            30: [#imageLiteral(resourceName: "legsWall")],
             // Obliques(Sides)
-            29: [#imageLiteral(resourceName: "sideLean")],
-            30: [#imageLiteral(resourceName: "extendedSideAngleS")],
-            31: [#imageLiteral(resourceName: "seatedSide")],
+            31: [#imageLiteral(resourceName: "sideLean")],
+            32: [#imageLiteral(resourceName: "extendedSideAngleS")],
+            33: [#imageLiteral(resourceName: "seatedSide")],
             // Neck
-            32: [#imageLiteral(resourceName: "rearNeck")],
-            33: [#imageLiteral(resourceName: "rearNeckHand")],
-            34: [#imageLiteral(resourceName: "seatedLateral")],
-            35: [#imageLiteral(resourceName: "neckRotator")],
-            36: [#imageLiteral(resourceName: "scalene")],
-            37: [#imageLiteral(resourceName: "headRoll")],
+            34: [#imageLiteral(resourceName: "rearNeck")],
+            35: [#imageLiteral(resourceName: "rearNeckHand")],
+            36: [#imageLiteral(resourceName: "seatedLateral")],
+            37: [#imageLiteral(resourceName: "neckRotator")],
+            38: [#imageLiteral(resourceName: "scalene")],
+            39: [#imageLiteral(resourceName: "headRoll")],
             // Arms
-            38: [#imageLiteral(resourceName: "forearmStretch")],
-            39: [#imageLiteral(resourceName: "tricepStretch")],
-            40: [#imageLiteral(resourceName: "bicepStretch")],
+            40: [#imageLiteral(resourceName: "forearmStretch")],
+            41: [#imageLiteral(resourceName: "tricepStretch")],
+            42: [#imageLiteral(resourceName: "bicepStretch")],
             // Pecs
-            41: [#imageLiteral(resourceName: "pecStretch")],
+            43: [#imageLiteral(resourceName: "pecStretch")],
             // Shoulders
-            42: [#imageLiteral(resourceName: "shoulderRoll"), #imageLiteral(resourceName: "shoulderRoll1"), #imageLiteral(resourceName: "shoulderRoll2"), #imageLiteral(resourceName: "shoulderRoll3"), #imageLiteral(resourceName: "shoulderRoll4"), #imageLiteral(resourceName: "shoulderRoll1"), #imageLiteral(resourceName: "shoulderRoll2"), #imageLiteral(resourceName: "shoulderRoll3"), #imageLiteral(resourceName: "shoulderRoll4")],
-            43: [#imageLiteral(resourceName: "behindBackTouch")],
-            44: [#imageLiteral(resourceName: "frontDelt")],
-            45: [#imageLiteral(resourceName: "lateralDelt")],
-            46: [#imageLiteral(resourceName: "rearDelt")],
-            47: [#imageLiteral(resourceName: "rotatorCuff")],
+            44: [#imageLiteral(resourceName: "shoulderRoll"), #imageLiteral(resourceName: "shoulderRoll1"), #imageLiteral(resourceName: "shoulderRoll2"), #imageLiteral(resourceName: "shoulderRoll3"), #imageLiteral(resourceName: "shoulderRoll4"), #imageLiteral(resourceName: "shoulderRoll1"), #imageLiteral(resourceName: "shoulderRoll2"), #imageLiteral(resourceName: "shoulderRoll3"), #imageLiteral(resourceName: "shoulderRoll4")],
+            45: [#imageLiteral(resourceName: "behindBackTouch")],
+            46: [#imageLiteral(resourceName: "frontDelt")],
+            47: [#imageLiteral(resourceName: "lateralDelt")],
+            48: [#imageLiteral(resourceName: "rearDelt")],
+            49: [#imageLiteral(resourceName: "rotatorCuff")],
             // Hips and Glutes
-            48: [#imageLiteral(resourceName: "squatHold")],
-            49: [#imageLiteral(resourceName: "groinStretch")],
-            50: [#imageLiteral(resourceName: "butterflyPoseS")],
-            51: [#imageLiteral(resourceName: "lungeStretch")],
-            52: [#imageLiteral(resourceName: "threadTheNeedleS")],
-            53: [#imageLiteral(resourceName: "pigeonPoseS")],
-            54:[#imageLiteral(resourceName: "seatedGlute")],
+            50: [#imageLiteral(resourceName: "squatHold")],
+            51: [#imageLiteral(resourceName: "groinStretch")],
+            52: [#imageLiteral(resourceName: "butterflyPoseS")],
+            53: [#imageLiteral(resourceName: "lungeStretch")],
+            54: [#imageLiteral(resourceName: "threadTheNeedleS")],
+            55: [#imageLiteral(resourceName: "pigeonPoseS")],
+            56:[#imageLiteral(resourceName: "seatedGlute")],
             // Calves
-            55: [#imageLiteral(resourceName: "calveStretch")],
+            57: [#imageLiteral(resourceName: "calveStretch")],
             // Hamstrings
-            56: [#imageLiteral(resourceName: "standingHamstring")],
-            57: [#imageLiteral(resourceName: "standingSingleLegHamstring")],
-            58: [#imageLiteral(resourceName: "downWardsDogS")],
-            59: [#imageLiteral(resourceName: "singleLegHamstring")],
-            60: [#imageLiteral(resourceName: "twoLegHamstring")],
+            58: [#imageLiteral(resourceName: "standingHamstring")],
+            59: [#imageLiteral(resourceName: "standingSingleLegHamstring")],
+            60: [#imageLiteral(resourceName: "downWardsDogS")],
+            61: [#imageLiteral(resourceName: "singleLegHamstring")],
+            62: [#imageLiteral(resourceName: "twoLegHamstring")],
             // Quads
-            61: [#imageLiteral(resourceName: "lungeStretchWall")],
-            62: [#imageLiteral(resourceName: "quadStretch")],
+            63: [#imageLiteral(resourceName: "lungeStretchWall")],
+            64: [#imageLiteral(resourceName: "quadStretch")],
             // Full Body
-            63: [#imageLiteral(resourceName: "sumoSquatTwist")],
-            64: [#imageLiteral(resourceName: "tinyFencerStretch")]
+            65: [#imageLiteral(resourceName: "sumoSquatTwist")],
+            66: [#imageLiteral(resourceName: "tinyFencerStretch")]
     ]
     
     // Target Area Array
@@ -447,63 +455,65 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             16: #imageLiteral(resourceName: "Hamstring"),
             17: #imageLiteral(resourceName: "Glute"),
             18: #imageLiteral(resourceName: "Calf"),
+            19: #imageLiteral(resourceName: "Quad"),
+            20: #imageLiteral(resourceName: "Calf"),
             // Back
-            19: #imageLiteral(resourceName: "Spine"),
-            20: #imageLiteral(resourceName: "Spine and Core"),
             21: #imageLiteral(resourceName: "Spine"),
-            22: #imageLiteral(resourceName: "Spine"),
-            23: #imageLiteral(resourceName: "Hamstring and Lower Back"),
-            24: #imageLiteral(resourceName: "Core"),
-            25: #imageLiteral(resourceName: "Spine"),
+            22: #imageLiteral(resourceName: "Spine and Core"),
+            23: #imageLiteral(resourceName: "Spine"),
+            24: #imageLiteral(resourceName: "Spine"),
+            25: #imageLiteral(resourceName: "Hamstring and Lower Back"),
             26: #imageLiteral(resourceName: "Core"),
-            27: #imageLiteral(resourceName: "Core"),
-            28: #imageLiteral(resourceName: "Hamstring and Lower Back"),
+            27: #imageLiteral(resourceName: "Spine"),
+            28: #imageLiteral(resourceName: "Core"),
+            29: #imageLiteral(resourceName: "Core"),
+            30: #imageLiteral(resourceName: "Hamstring and Lower Back"),
             // Obliques(Sides)
-            29: #imageLiteral(resourceName: "Oblique"),
-            30: #imageLiteral(resourceName: "Oblique"),
             31: #imageLiteral(resourceName: "Oblique"),
+            32: #imageLiteral(resourceName: "Oblique"),
+            33: #imageLiteral(resourceName: "Oblique"),
             // Neck
-            32: #imageLiteral(resourceName: "Rear Neck"),
-            33: #imageLiteral(resourceName: "Rear Neck"),
-            34: #imageLiteral(resourceName: "Lateral Neck"),
-            35: #imageLiteral(resourceName: "Neck Rotator"),
-            36: #imageLiteral(resourceName: "Neck Rotator"),
-            37: #imageLiteral(resourceName: "Neck"),
+            34: #imageLiteral(resourceName: "Rear Neck"),
+            35: #imageLiteral(resourceName: "Rear Neck"),
+            36: #imageLiteral(resourceName: "Lateral Neck"),
+            37: #imageLiteral(resourceName: "Neck Rotator"),
+            38: #imageLiteral(resourceName: "Neck Rotator"),
+            39: #imageLiteral(resourceName: "Neck"),
             // Arms
-            38: #imageLiteral(resourceName: "Forearm"),
-            39: #imageLiteral(resourceName: "Tricep"),
-            40: #imageLiteral(resourceName: "Bicep"),
+            40: #imageLiteral(resourceName: "Forearm"),
+            41: #imageLiteral(resourceName: "Tricep"),
+            42: #imageLiteral(resourceName: "Bicep"),
             // Pecs
-            41: #imageLiteral(resourceName: "Pec"),
+            43: #imageLiteral(resourceName: "Pec"),
             // Shoulders
-            42: #imageLiteral(resourceName: "Shoulder Joint"),
-            43: #imageLiteral(resourceName: "Shoulder Joint"),
-            44: #imageLiteral(resourceName: "Front Delt"),
-            45: #imageLiteral(resourceName: "Lateral Neck"),
-            46: #imageLiteral(resourceName: "Rear Delt"),
-            47: #imageLiteral(resourceName: "Rear Delt"),
+            44: #imageLiteral(resourceName: "Shoulder Joint"),
+            45: #imageLiteral(resourceName: "Shoulder Joint"),
+            46: #imageLiteral(resourceName: "Front Delt"),
+            47: #imageLiteral(resourceName: "Lateral Neck"),
+            48: #imageLiteral(resourceName: "Rear Delt"),
+            49: #imageLiteral(resourceName: "Rear Delt"),
             // Hips and Glutes
-            48: #imageLiteral(resourceName: "Hip Joint"),
-            49: #imageLiteral(resourceName: "Adductor"),
-            50: #imageLiteral(resourceName: "Adductor"),
-            51: #imageLiteral(resourceName: "Hip Area"),
-            52: #imageLiteral(resourceName: "Piriformis"),
-            53: #imageLiteral(resourceName: "Glute"),
-            54: #imageLiteral(resourceName: "Glute"),
+            50: #imageLiteral(resourceName: "Hip Joint"),
+            51: #imageLiteral(resourceName: "Adductor"),
+            52: #imageLiteral(resourceName: "Adductor"),
+            53: #imageLiteral(resourceName: "Hip Area"),
+            54: #imageLiteral(resourceName: "Piriformis"),
+            55: #imageLiteral(resourceName: "Glute"),
+            56: #imageLiteral(resourceName: "Glute"),
             // Calves
-            55: #imageLiteral(resourceName: "Calf"),
+            57: #imageLiteral(resourceName: "Calf"),
             // Hamstrings
-            56: #imageLiteral(resourceName: "Hamstring"),
-            57: #imageLiteral(resourceName: "Hamstring"),
             58: #imageLiteral(resourceName: "Hamstring"),
             59: #imageLiteral(resourceName: "Hamstring"),
             60: #imageLiteral(resourceName: "Hamstring"),
+            61: #imageLiteral(resourceName: "Hamstring"),
+            62: #imageLiteral(resourceName: "Hamstring"),
             // Quads
-            61: #imageLiteral(resourceName: "Quad"),
-            62: #imageLiteral(resourceName: "Quad"),
+            63: #imageLiteral(resourceName: "Quad"),
+            64: #imageLiteral(resourceName: "Quad"),
             // Full Body
-            63: #imageLiteral(resourceName: "Squat"),
-            64: #imageLiteral(resourceName: "Squat")
+            65: #imageLiteral(resourceName: "Squat"),
+            66: #imageLiteral(resourceName: "Squat")
     ]
     
     // Explanation Array
@@ -531,63 +541,65 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             16: "hamstringfE",
             17: "glutefE",
             18: "calvefE",
+            19: "itBandE",
+            20: "standOnBallE",
             // Back
-            19: "catCowE",
-            20: "upwardsDogE",
-            21: "extendedPuppyE",
-            22: "childPoseE",
-            23: "staffPoseE",
-            24: "pelvicTiltE",
-            25: "kneeToChestE",
-            26: "legDropE",
-            27: "seatedTwistE",
-            28: "legsWallE",
+            21: "catCowE",
+            22: "upwardsDogE",
+            23: "extendedPuppyE",
+            24: "childPoseE",
+            25: "staffPoseE",
+            26: "pelvicTiltE",
+            27: "kneeToChestE",
+            28: "legDropE",
+            29: "seatedTwistE",
+            30: "legsWallE",
             // Obliques(Sides)
-            29: "sideLeanE",
-            30: "extendedSideAngleE",
-            31: "seatedSideE",
+            31: "sideLeanE",
+            32: "extendedSideAngleE",
+            33: "seatedSideE",
             // Neck
-            32: "rearNeckE",
-            33: "rearNeckHandE",
-            34: "seatedLateralE",
-            35: "neckRotatorE",
-            36: "scaleneE",
-            37: "headRollE",
+            34: "rearNeckE",
+            35: "rearNeckHandE",
+            36: "seatedLateralE",
+            37: "neckRotatorE",
+            38: "scaleneE",
+            39: "headRollE",
             // Arms
-            38: "forearmStretchE",
-            39: "tricepStretchE",
-            40: "bicepStretchE",
+            40: "forearmStretchE",
+            41: "tricepStretchE",
+            42: "bicepStretchE",
             // Pecs
-            41: "pecStretchE",
+            43: "pecStretchE",
             // Shoulders
-            42: "shoulderRollE",
-            43: "behindBackTouchE",
-            44: "frontDeltE",
-            45: "lateralDeltE",
-            46: "rearDeltE",
-            47: "rotatorCuffE",
+            44: "shoulderRollE",
+            45: "behindBackTouchE",
+            46: "frontDeltE",
+            47: "lateralDeltE",
+            48: "rearDeltE",
+            49: "rotatorCuffE",
             // Hips and Glutes
-            48: "squatHoldE",
-            49: "groinStretchE",
-            50: "butterflyPoseE",
-            51: "lungeStretchE",
-            52: "threadTheNeedleE",
-            53: "pigeonPoseE",
-            54: "seatedGluteE",
+            50: "squatHoldE",
+            51: "groinStretchE",
+            52: "butterflyPoseE",
+            53: "lungeStretchE",
+            54: "threadTheNeedleE",
+            55: "pigeonPoseE",
+            56: "seatedGluteE",
             // Calves
-            55: "calveStretchE",
+            57: "calveStretchE",
             // Hamstrings
-            56: "standingHamstringE",
-            57: "standingOneLegHamstringE",
-            58: "downWardsDogE",
-            59: "singleLegHamstringE",
-            60: "twoLegHamstringE",
+            58: "standingHamstringE",
+            59: "standingOneLegHamstringE",
+            60: "downWardsDogE",
+            61: "singleLegHamstringE",
+            62: "twoLegHamstringE",
             // Quads
-            61: "lungeStretchWallE",
-            62: "QuadStretchE",
+            63: "lungeStretchWallE",
+            64: "QuadStretchE",
             // Full Body
-            63: "sumoSquatTwistE",
-            64: "tinyFencerStretchE"
+            65: "sumoSquatTwistE",
+            66: "tinyFencerStretchE"
     ]
     
     
@@ -611,7 +623,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     var presetsArraysGeneral: [[[Int]]] =
         [
             [
-               [19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64],
+               [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64],
                 []
             ],
             [
@@ -863,9 +875,12 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         presetsTableView.delegate = self
         presetsTableView.dataSource = self
         presetsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        presetsTableView.layer.cornerRadius = 5
+        presetsTableView.layer.cornerRadius = 15
         presetsTableView.layer.masksToBounds = true
         presetsTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        //
+        presetsTableView.layer.borderColor = colour1.cgColor
+        presetsTableView.layer.borderWidth = 1
         //
         // Background View
         backgroundViewExpanded.backgroundColor = .black
@@ -905,7 +920,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     // Will display header
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 18)!
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)!
         header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         header.contentView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
         header.contentView.tintColor = colour1
@@ -1025,11 +1040,16 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             presetsTableView.deselectRow(at: indexPath, animated: true)
             
             //
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsButton.frame.size.width - 60, height: 1)
-                self.presetsTableView.alpha = 0
+            let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+            let tableWidth = UIScreen.main.bounds.width - 20
+            //
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
                 self.backgroundViewExpanded.alpha = 0
+                //
                 self.movementsTableView.reloadData()
+                let indexPath2 = NSIndexPath(row: 0, section: 0)
+                self.movementsTableView.scrollToRow(at: indexPath2 as IndexPath, at: .top, animated: true)
                 //
                 self.tableConstraint1.constant = 73.75
                 self.tableConstraint.constant = 49.75
@@ -1037,7 +1057,6 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
                 self.presetsConstraint.constant = self.view.frame.size.height - 73.25
                 //
                 self.beginConstraint.constant = 0
-                //
                 self.view.layoutIfNeeded()
             }, completion: { finished in
                 //
@@ -1048,6 +1067,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
                     UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2")
                 }
             })
+            
         default: break
         }
         
@@ -1059,12 +1079,11 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
     //
     @IBAction func presetsButtonAction(_ sender: Any) {
         //
-        presetsTableView.alpha = 0
         UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
-        presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + (presetsButton.frame.size.height / 2), width: presetsButton.frame.size.width - 60, height: 0)
-        //presetsTableView.frame = presetsButton.bounds
-        presetsTableView.center.x = presetsButton.center.x
-        presetsTableView.center.y = presetsButton.center.y + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height)!
+        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+        let tableWidth = UIScreen.main.bounds.width - 20
+        self.presetsTableView.frame = CGRect(x: 10, y: view.frame.maxY, width: tableWidth, height: tableHeight)
+        //
         //
         backgroundViewExpanded.alpha = 0
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: presetsTableView)
@@ -1072,25 +1091,26 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         // Animate table fade and size
         // Position
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.presetsTableView.alpha = 1
-            self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + 44, width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88)
+            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY - tableHeight - 10, width: tableWidth, height: tableHeight)
             self.presetsTableView.reloadData()
             //
-            self.backgroundViewExpanded.alpha = 0.7
+            self.backgroundViewExpanded.alpha = 0.5
         }, completion: nil)
         //
-        //        })
     }
     
     
     // Dismiss presets table
     func backgroundViewExpandedAction(_ sender: Any) {
         //
+        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+        let tableWidth = UIScreen.main.bounds.width - 20
+        //
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsButton.frame.size.width - 60, height: 1)
-            self.presetsTableView.alpha = 0
+            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
             self.backgroundViewExpanded.alpha = 0
         }, completion: { finished in
+            //
             self.presetsTableView.removeFromSuperview()
             self.backgroundViewExpanded.removeFromSuperview()
         })

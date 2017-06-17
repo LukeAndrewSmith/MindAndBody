@@ -81,7 +81,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Sets Reps Selection
         // view
         restTimeView.backgroundColor = colour2
-        restTimeView.layer.cornerRadius = 5
+        restTimeView.layer.cornerRadius = 15
         restTimeView.layer.masksToBounds = true
         // picker
         restTimePicker.backgroundColor = colour2
@@ -111,8 +111,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     // Add movement table background (dismiss table)
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.restTimeView.alpha = 0
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.restTimeView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
+
             //
             self.backgroundViewExpanded.alpha = 0
         }, completion: { finished in
@@ -133,8 +134,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         //
         defaults.synchronize()
         //
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.restTimeView.alpha = 0
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.restTimeView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
             //
             self.backgroundViewExpanded.alpha = 0
         }, completion: { finished in
@@ -326,6 +327,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            //
+            cell.accessoryType = .disclosureIndicator
+            //
             return cell
             
             
@@ -406,10 +410,10 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
             // View
-            restTimeView.alpha = 0
+            let restWidth = UIScreen.main.bounds.width - 20
+            let restHeight = CGFloat(147 + 49)
+            restTimeView.frame = CGRect(x: 10, y: view.frame.maxY, width: restWidth, height: restHeight)
             UIApplication.shared.keyWindow?.insertSubview(restTimeView, aboveSubview: tableView)
-            let selectedCell = tableView.cellForRow(at: indexPath)
-            restTimeView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: UIScreen.main.bounds.width - 40, height: (selectedCell?.bounds.height)!)
             // selected row
             let rowIndex = restTimesArray.index(of: restTimes[selectedRow])
             restTimePicker.selectRow(rowIndex!, inComponent: 0, animated: false)
@@ -424,17 +428,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             backgroundViewExpanded.alpha = 0
             UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: restTimeView)
             backgroundViewExpanded.frame = UIScreen.main.bounds
-            // Animate table fade and size
-            // Alpha
-            UIView.animate(withDuration: 0.4, animations: {
-                self.restTimeView.alpha = 1
-                //
-            }, completion: nil)
+            //
             // Position
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
-                self.restTimeView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
-                self.restTimeView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
+                self.restTimeView.frame = CGRect(x: 10, y: self.view.frame.maxY - restHeight - 10, width: restWidth, height: restHeight)
+
                 // picker
                 self.restTimePicker.frame = CGRect(x: 0, y: 0, width: self.restTimeView.frame.size.width, height: 147)
                 // ok
@@ -443,7 +442,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 self.secondIndicatorLabel.frame = CGRect(x: (self.restTimeView.frame.size.width / 2 + 30), y: (self.restTimePicker.frame.size.height / 2) - 15, width: 50, height: 30)
                 //
                 //
-                self.backgroundViewExpanded.alpha = 0.7
+                self.backgroundViewExpanded.alpha = 0.5
                 
             }, completion: nil)
             tableView.deselectRow(at: indexPath, animated: true)

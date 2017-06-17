@@ -489,6 +489,23 @@
         "calves" = "Calves";
         "coreAbs" = "Core/Abs";
 
+        // Bodyweight
+        "glutesW" = "Glutes";
+        "generalC" = "General (Core)";
+        "generalF" = "General (Full Body)";
+        "generalU" = "General (Upper Body)";
+        "cardio" = "Cardio";
+
+        // Isometric
+        "isometricL" = "Isometric (Legs)";
+        "isometricC" = "Isometric (Push)";
+
+        // With Equiptment
+        "equiptmentB" = "Equiptment (Ball)";
+        "equiptmentBa" = "Equiptment (Bar)";
+        "equiptmentBe" = "Equiptment (Bench)";
+
+
         // Classic Workout //
         "upperBody" = "Upper Body";
         "lowerBody" = "Lower Body";

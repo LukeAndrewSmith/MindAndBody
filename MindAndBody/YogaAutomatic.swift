@@ -124,7 +124,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Selection Items
         // view
         selectionView.backgroundColor = colour2
-        selectionView.layer.cornerRadius = 5
+        selectionView.layer.cornerRadius = 15
         selectionView.layer.masksToBounds = true
         
         // Background View
@@ -402,7 +402,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         tableView.isScrollEnabled = false
                     })
                 }
-            
                 //
                 UserDefaults.standard.set(automaticYogaArray, forKey: "automaticYoga")
                 
@@ -412,11 +411,16 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 okButton.isEnabled = true
                 //
                 selectedItem = 0
+                pickerView.reloadAllComponents()
                 // View
-                selectionView.alpha = 0
-                UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
-                selectionView.frame = CGRect(x: 22, y: view.frame.size.height / 2, width: UIScreen.main.bounds.width - 44, height: 0)
                 //
+                let selectionWidth = UIScreen.main.bounds.width - 20
+                let selectionHeight = CGFloat(147 + 49)
+                //
+                UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
+                selectionView.frame = CGRect(x: 10, y: view.frame.maxY, width: selectionWidth, height: selectionHeight)
+                self.pickerView.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
+                                //
                 // PickerView
                 selectionView.addSubview(pickerView)
                 pickerView.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
@@ -429,8 +433,10 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 //
                 selectionView.addSubview(indicatorLabel)
                 indicatorLabel.textAlignment = .left
+                self.indicatorLabel.center.y = self.pickerView.center.y
+                self.indicatorLabel.center.x = self.pickerView.frame.minX + (self.pickerView.frame.size.width * (3.55/6))
                 // ok
-                okButton.frame = CGRect(x: 0, y: 147, width: selectionView.frame.size.width, height: 49)
+                self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
                 selectionView.addSubview(okButton)
                 //
                 backgroundViewSelection.alpha = 0
@@ -440,19 +446,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 // Position
                 UIView.animate(withDuration: 0.4, animations: {
                     //
-                    self.selectionView.alpha = 1
-                    //
-                    self.selectionView.frame = CGRect(x: 22, y: 0, width: UIScreen.main.bounds.width - 44, height: 147 + 49)
-                    self.selectionView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
-                    //
-                    self.pickerView.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
-                    //
-                    self.indicatorLabel.center.y = self.pickerView.center.y
-                    // ok
-                    self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
-                    //
-                    self.indicatorLabel.center.x = self.pickerView.frame.minX + (self.pickerView.frame.size.width * (3.55/6))
-                    //
+                    self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
                     //
                     self.backgroundViewSelection.alpha = 0.5
                 }, completion: nil)
@@ -463,10 +457,15 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 okButton.isEnabled = true
                 //
                 selectedItem = 1
+                pickerView.reloadAllComponents()
                 // View
-                selectionView.alpha = 0
+                //
+                let selectionWidth = UIScreen.main.bounds.width - 20
+                let selectionHeight = CGFloat(147 + 49)
+                //
                 UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
-                selectionView.frame = CGRect(x: 22, y: view.frame.size.height / 2, width: UIScreen.main.bounds.width - 44, height: 0)
+                selectionView.frame = CGRect(x: 10, y: view.frame.maxY, width: selectionWidth, height: selectionHeight)
+                self.pickerView.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
                 //
                 // PickerView
                 selectionView.addSubview(pickerView)
@@ -480,8 +479,10 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 //
                 selectionView.addSubview(indicatorLabel)
                 indicatorLabel.textAlignment = .left
+                self.indicatorLabel.center.y = self.pickerView.center.y
+                self.indicatorLabel.center.x = self.pickerView.frame.minX + (self.pickerView.frame.size.width * (3.55/6))
                 // ok
-                okButton.frame = CGRect(x: 0, y: 147, width: selectionView.frame.size.width, height: 49)
+                self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
                 selectionView.addSubview(okButton)
                 //
                 backgroundViewSelection.alpha = 0
@@ -491,19 +492,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 // Position
                 UIView.animate(withDuration: 0.4, animations: {
                     //
-                    self.selectionView.alpha = 1
-                    //
-                    self.selectionView.frame = CGRect(x: 22, y: 0, width: UIScreen.main.bounds.width - 44, height: 147 + 49)
-                    self.selectionView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
-                    //
-                    self.pickerView.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
-                    //
-                    self.indicatorLabel.center.y = self.pickerView.center.y
-                    // ok
-                    self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
-                    //
-                    self.indicatorLabel.center.x = self.pickerView.frame.minX + (self.pickerView.frame.size.width * (3.55/6))
-                    //
+                    self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
                     //
                     self.backgroundViewSelection.alpha = 0.5
                 }, completion: nil)
@@ -520,13 +509,19 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 didChangeTransitionIndicator = false
                 tableViewBells.reloadData()
                 // View
-                selectionView.alpha = 0
-                selectionView.frame = CGRect(x: 22, y: view.frame.size.height / 2, width: view.frame.size.width - 44, height: 44)
+                //
+                let selectionWidth = UIScreen.main.bounds.width - 20
+                let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 47 - 88
+                //
+                UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
+                selectionView.frame = CGRect(x: 10, y: view.frame.maxY, width: selectionWidth, height: selectionHeight)
+                self.pickerView.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
+                
                 // Tableview
                 selectionView.addSubview(tableViewBells)
-                tableViewBells.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
+                self.tableViewBells.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: selectionHeight - 49)
                 // ok
-                okButton.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: 49)
+                self.okButton.frame = CGRect(x: 0, y: self.tableViewBells.frame.maxY, width: self.selectionView.frame.size.width, height: 49)
                 selectionView.addSubview(okButton)
                 if selectedTransitionIndicator != -1 {
                     okButton.isEnabled = true
@@ -541,21 +536,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 // Position
                 UIView.animate(withDuration: 0.4, animations: {
                     //
-                    let height = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 47 - 88
-                    //
-                    self.selectionView.alpha = 1
-                    //
-                    self.selectionView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + 44, width: UIScreen.main.bounds.width - 60, height: height)
-                    // ok
-                    self.tableViewBells.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: height - 49)
-                    // ok
-                    self.okButton.frame = CGRect(x: 0, y: self.tableViewBells.frame.maxY, width: self.selectionView.frame.size.width, height: 49)
+                    self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
                     //
                     self.backgroundViewSelection.alpha = 0.5
-                    
-                    //
-                    self.selectionView.alpha = 1
-                    //
                     //
                 }, completion: nil)
             //
@@ -654,9 +637,15 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func backgroundViewSelectionAction(_ sender: Any) {
         //
         //
-        UIView.animate(withDuration: 0.4, animations: {
+        // Remove View
+        UIView.animate(withDuration: 0.5, animations: {
             //
-            self.selectionView.alpha = 0
+            if self.selectedItem == 0 || self.selectedItem == 2 {
+                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
+            } else {
+                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 47 - 88)
+            }
+            //
             self.backgroundViewSelection.alpha = 0
             //
         }, completion: { finished in
@@ -667,6 +656,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             self.selectionView.removeFromSuperview()
             self.backgroundViewSelection.removeFromSuperview()
         })
+        //
             
         // Extra
         if selectedItem == 2 {
@@ -734,9 +724,14 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         //
         // Remove View
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             //
-            self.selectionView.alpha = 0
+            if self.selectedItem == 0 || self.selectedItem == 2 {
+                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
+            } else {
+                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 47 - 88)
+            }
+            //
             self.backgroundViewSelection.alpha = 0
             //
         }, completion: { finished in
