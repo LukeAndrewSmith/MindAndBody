@@ -64,7 +64,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var repsArray: [String] = []
     
     // Demonstration Array
-    var demonstrationArray: [UIImage] = []
+    var demonstrationArray: [[UIImage]] = []
     
     // Target Area Array
     var targetAreaArray: [UIImage] = []
@@ -340,7 +340,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             // Images
             if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                cell.imageViewCell.image = demonstrationArray[indexPath.row]
+                cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
             } else {
                 cell.imageViewCell.image = targetAreaArray[indexPath.row]
             }
@@ -723,7 +723,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.explanationButton.alpha = 1
                 cell.hideScreen.alpha = 1
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    if cell.imageViewCell.image == self.demonstrationArray[self.selectedRow] {
+                    if cell.imageViewCell.image == self.demonstrationArray[self.selectedRow][0] {
                         cell.nextImage.alpha = 1
                         cell.nextImage.isEnabled = true
                         cell.previousImage.alpha = 0
@@ -793,7 +793,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.explanationButton.alpha = 1
                 cell.hideScreen.alpha = 1
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    if cell.imageViewCell.image == self.demonstrationArray[self.selectedRow] {
+                    if cell.imageViewCell.image == self.demonstrationArray[self.selectedRow][0] {
                         cell.nextImage.alpha = 1
                         cell.nextImage.isEnabled = true
                         cell.previousImage.alpha = 0
@@ -942,7 +942,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
                     cell.imageViewCell.image = targetAreaArray[indexPath.row]
                 } else {
-                    cell.imageViewCell.image = demonstrationArray[indexPath.row]
+                    cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
                 }
                 //
                 cell.imageViewCell.reloadInputViews()
@@ -982,7 +982,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
 
                 //
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    cell.imageViewCell.image = demonstrationArray[indexPath.row]
+                    cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
                 } else {
                     cell.imageViewCell.image = targetAreaArray[indexPath.row]
                 }
@@ -1034,7 +1034,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
                     cell.imageViewCell.image = targetAreaArray[indexPath.row]
                 } else {
-                    cell.imageViewCell.image = demonstrationArray[indexPath.row]
+                    cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
                 }
                 //
                 cell.imageViewCell.reloadInputViews()
@@ -1081,7 +1081,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 
                 //
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    cell.imageViewCell.image = demonstrationArray[indexPath.row]
+                    cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
                 } else {
                     cell.imageViewCell.image = targetAreaArray[indexPath.row]
                 }

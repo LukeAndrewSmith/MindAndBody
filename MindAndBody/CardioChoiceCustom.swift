@@ -2770,7 +2770,7 @@ class CardioChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             destinationVC.sessionArray = workoutArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
-            destinationVC.demonstrationArray = demonstrationArray
+            //destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //

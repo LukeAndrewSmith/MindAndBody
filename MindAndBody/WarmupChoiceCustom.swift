@@ -33,7 +33,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
     //
     var warmupArray: [String] = []
     //
-    var demonstrationArray: [UIImage] = []
+    var demonstrationArray: [[UIImage]] = []
     //
     var targetAreaArray: [UIImage] = []
     //
@@ -1808,7 +1808,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                 //
                 warmupArray.append(warmupMovementsDictionary[i]!)
                 //
-                demonstrationArray.append(demonstrationDictionary[i]!)
+                //demonstrationArray.append(demonstrationDictionary[i]!)
                 //
                 targetAreaArray.append(targetAreaDictionary[i]!)
                 //
