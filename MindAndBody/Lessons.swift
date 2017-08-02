@@ -15,7 +15,7 @@ import UIKit
 // Custom Lessons Cells ------------------------------------------------------------------------------------
 //
 // Navigation Cell
-class informationNavigationCell: UITableViewCell {
+class lessonsNavigationCell: UITableViewCell {
     //
     @IBOutlet weak var important: UIButton!
     //
@@ -28,25 +28,25 @@ class informationNavigationCell: UITableViewCell {
 }
 
 //
-class informationImportantCell: UITableViewCell {
+class lessonsImportantCell: UITableViewCell {
     //
     @IBOutlet weak var titleLabel: UILabel!
 }
 
 //
-class informationMusicCell: UITableViewCell {
+class lessonsMusicCell: UITableViewCell {
    //
     @IBOutlet weak var titleLabel: UILabel!
 }
 
 //
-class informationAppCell: UITableViewCell {
+class lessonsAppCell: UITableViewCell {
     //
     @IBOutlet weak var titleLabel: UILabel!
 }
 
 //
-class informationDiscussionsCell: UITableViewCell {
+class lessonsDiscussionsCell: UITableViewCell {
     //
     @IBOutlet weak var titleLabel: UILabel!
 }
@@ -331,7 +331,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             return cell
         //
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "informationNavigationCell", for: indexPath) as! informationNavigationCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "lessonsNavigationCell", for: indexPath) as! lessonsNavigationCell
             //
             cell.important.titleLabel?.adjustsFontSizeToFitWidth = true
             //
@@ -356,7 +356,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             return cell
         //
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "informationImportantCell", for: indexPath) as! informationImportantCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "lessonsImportantCell", for: indexPath) as! lessonsImportantCell
             //
             // Border
             let border = CALayer()
@@ -371,7 +371,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             return cell
         // 
         case 3:
-             let cell = tableView.dequeueReusableCell(withIdentifier: "informationAppCell", for: indexPath) as! informationAppCell
+             let cell = tableView.dequeueReusableCell(withIdentifier: "lessonsAppCell", for: indexPath) as! lessonsAppCell
              //
              // Border
              let border = CALayer()
@@ -386,7 +386,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             return cell
         //
         case 4:
-             let cell = tableView.dequeueReusableCell(withIdentifier: "informationMusicCell", for: indexPath) as! informationMusicCell
+             let cell = tableView.dequeueReusableCell(withIdentifier: "lessonsMusicCell", for: indexPath) as! lessonsMusicCell
              //
              // Border
              let border = CALayer()
@@ -401,7 +401,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             return cell
         //
         case 5:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "informationDiscussionsCell", for: indexPath) as! informationDiscussionsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "lessonsDiscussionsCell", for: indexPath) as! lessonsDiscussionsCell
             //
             // Border
             let border = CALayer()
@@ -563,7 +563,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             navigationItem.backBarButtonItem = backItem
             
             // Pass Info
-            if (segue.identifier == "informationSegue") {
+            if (segue.identifier == "lessonsSegue") {
                 
                 let destinationVC = segue.destination as! LessonsScreen1
                 destinationVC.selectedTopic = selectedTopic
