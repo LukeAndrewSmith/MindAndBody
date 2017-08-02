@@ -1155,7 +1155,7 @@
                                             <outlet property="titleLabel" destination="7Kl-cR-sva" id="zoL-Rx-A26"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="informationNavigationCell" rowHeight="44" id="Uy8-eF-WDg" customClass="lessonsNavigationCell" customModule="MindAndBody" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lessonsNavigationCell" rowHeight="44" id="Uy8-eF-WDg" customClass="lessonsNavigationCell" customModule="MindAndBody" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="180" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uy8-eF-WDg" id="is7-Hq-NgK">
@@ -1163,50 +1163,40 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8X-eo-q7C">
-                                                    <rect key="frame" x="0.0" y="-5" width="94" height="54"/>
+                                                    <rect key="frame" x="0.0" y="-5" width="125" height="54"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="20"/>
-                                                    <state key="normal" title="Imp.">
+                                                    <state key="normal" title="Mind">
                                                         <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTq-FA-qOG">
-                                                    <rect key="frame" x="188" y="-5" width="94" height="54"/>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTq-FA-qOG">
+                                                    <rect key="frame" x="250" y="-5" width="95" height="54"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="20"/>
-                                                    <state key="normal" title="Music">
+                                                    <state key="normal" title="Other">
                                                         <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzH-kU-QIZ">
-                                                    <rect key="frame" x="94" y="-5" width="94" height="54"/>
+                                                    <rect key="frame" x="125" y="-5" width="125" height="54"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="20"/>
-                                                    <state key="normal" title="App">
-                                                        <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmv-6s-W9c">
-                                                    <rect key="frame" x="274" y="-5" width="93" height="54"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="20"/>
-                                                    <state key="normal" title="Disc.">
+                                                    <state key="normal" title="Body">
                                                         <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                 </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="h8X-eo-q7C" firstAttribute="leading" secondItem="is7-Hq-NgK" secondAttribute="leading" id="DIu-SD-CGW"/>
-                                                <constraint firstAttribute="bottom" secondItem="tmv-6s-W9c" secondAttribute="bottom" constant="-5" id="Fw5-v6-OFC"/>
+                                                <constraint firstItem="wTq-FA-qOG" firstAttribute="width" secondItem="is7-Hq-NgK" secondAttribute="width" multiplier="1/3" id="FBw-e1-CWz"/>
                                                 <constraint firstItem="hzH-kU-QIZ" firstAttribute="leading" secondItem="h8X-eo-q7C" secondAttribute="trailing" id="GsL-mH-gbF"/>
-                                                <constraint firstItem="tmv-6s-W9c" firstAttribute="width" secondItem="is7-Hq-NgK" secondAttribute="width" multiplier="1/4" id="NbP-1T-Qab"/>
+                                                <constraint firstAttribute="trailing" secondItem="wTq-FA-qOG" secondAttribute="trailing" id="LfO-yX-R4I"/>
                                                 <constraint firstAttribute="bottom" secondItem="h8X-eo-q7C" secondAttribute="bottom" constant="-5" id="PFb-Cf-jBm"/>
-                                                <constraint firstAttribute="trailing" secondItem="tmv-6s-W9c" secondAttribute="trailing" id="PZd-DY-Upb"/>
-                                                <constraint firstItem="tmv-6s-W9c" firstAttribute="leading" secondItem="wTq-FA-qOG" secondAttribute="trailing" id="Rl3-pu-8jV"/>
                                                 <constraint firstItem="hzH-kU-QIZ" firstAttribute="top" secondItem="is7-Hq-NgK" secondAttribute="top" constant="-5" id="VE7-Ry-3fe"/>
                                                 <constraint firstAttribute="bottom" secondItem="hzH-kU-QIZ" secondAttribute="bottom" constant="-5" id="dFi-GL-ycR"/>
                                                 <constraint firstItem="wTq-FA-qOG" firstAttribute="leading" secondItem="hzH-kU-QIZ" secondAttribute="trailing" id="fEJ-8c-vrl"/>
-                                                <constraint firstItem="tmv-6s-W9c" firstAttribute="top" secondItem="is7-Hq-NgK" secondAttribute="top" constant="-5" id="mMo-Fr-dja"/>
                                                 <constraint firstItem="wTq-FA-qOG" firstAttribute="top" secondItem="is7-Hq-NgK" secondAttribute="top" constant="-5" id="mZj-SD-dMl"/>
-                                                <constraint firstItem="h8X-eo-q7C" firstAttribute="width" secondItem="is7-Hq-NgK" secondAttribute="width" multiplier="1/4" id="noW-Ud-58a"/>
+                                                <constraint firstItem="h8X-eo-q7C" firstAttribute="width" secondItem="is7-Hq-NgK" secondAttribute="width" multiplier="1/3" id="noW-Ud-58a"/>
                                                 <constraint firstItem="h8X-eo-q7C" firstAttribute="top" secondItem="is7-Hq-NgK" secondAttribute="top" constant="-5" id="nzJ-87-yHI"/>
-                                                <constraint firstItem="hzH-kU-QIZ" firstAttribute="width" secondItem="is7-Hq-NgK" secondAttribute="width" multiplier="1/4" id="ujs-aa-50r"/>
+                                                <constraint firstItem="hzH-kU-QIZ" firstAttribute="width" secondItem="is7-Hq-NgK" secondAttribute="width" multiplier="1/3" id="tsO-wF-M7o"/>
                                                 <constraint firstAttribute="bottom" secondItem="wTq-FA-qOG" secondAttribute="bottom" constant="-5" id="vPd-ee-qbX"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1215,18 +1205,17 @@
                                             <outlet property="app" destination="hzH-kU-QIZ" id="mIN-lM-1J3"/>
                                             <outlet property="discussions" destination="wTq-FA-qOG" id="5ez-JH-BlS"/>
                                             <outlet property="important" destination="h8X-eo-q7C" id="DwT-25-n3y"/>
-                                            <outlet property="music" destination="tmv-6s-W9c" id="2LF-Hb-HWR"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lessonsImportantCell" rowHeight="95" id="WPg-af-qnE" customClass="lessonsImportantCell" customModule="MindAndBody" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lessonsMindCell" rowHeight="95" id="WPg-af-qnE" customClass="lessonsMindCell" customModule="MindAndBody" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="224" width="375" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WPg-af-qnE" id="6F3-Oa-IkO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Important" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4AP-mS-GoB">
-                                                    <rect key="frame" x="15" y="0.0" width="100" height="44"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mind" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4AP-mS-GoB">
+                                                    <rect key="frame" x="15" y="0.0" width="51" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="9x2-8u-ACD"/>
                                                     </constraints>
@@ -1245,15 +1234,15 @@
                                             <outlet property="titleLabel" destination="4AP-mS-GoB" id="yr3-op-xRn"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lessonsAppCell" rowHeight="78" id="zMS-by-3We" customClass="lessonsAppCell" customModule="MindAndBody" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lessonsBodyCell" rowHeight="78" id="zMS-by-3We" customClass="lessonsBodyCell" customModule="MindAndBody" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="319" width="375" height="78"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zMS-by-3We" id="3kb-V4-dPh">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="78"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tal-1P-1mG">
-                                                    <rect key="frame" x="15" y="0.0" width="42" height="44"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tal-1P-1mG">
+                                                    <rect key="frame" x="15" y="0.0" width="53" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="2QU-fL-6US"/>
                                                     </constraints>
@@ -1272,15 +1261,15 @@
                                             <outlet property="titleLabel" destination="Tal-1P-1mG" id="bgf-QU-cvu"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lessonsMusicCell" rowHeight="88" id="TBj-gm-SHQ" customClass="lessonsMusicCell" customModule="MindAndBody" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lessonsMusicCell" rowHeight="88" id="TBj-gm-SHQ" customClass="lessonsOtherCell" customModule="MindAndBody" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="397" width="375" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TBj-gm-SHQ" id="Vo1-99-r7c">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFg-FH-xw0">
-                                                    <rect key="frame" x="15" y="0.0" width="62" height="44"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFg-FH-xw0">
+                                                    <rect key="frame" x="15" y="0.0" width="58" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="gn8-De-Qwy"/>
                                                     </constraints>
@@ -1297,33 +1286,6 @@
                                         <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="titleLabel" destination="WFg-FH-xw0" id="HAT-mY-0Cd"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lessonsDiscussionsCell" rowHeight="78" id="Cpv-bj-WVI" customClass="lessonsDiscussionsCell" customModule="MindAndBody" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="485" width="375" height="78"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cpv-bj-WVI" id="faq-Vj-7ad">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="78"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discussions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGt-8h-avs">
-                                                    <rect key="frame" x="15" y="0.0" width="123" height="44"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="44" id="A1D-vN-Tvj"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="23"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="VGt-8h-avs" firstAttribute="top" secondItem="faq-Vj-7ad" secondAttribute="top" id="Auc-N1-UaK"/>
-                                                <constraint firstItem="VGt-8h-avs" firstAttribute="leading" secondItem="faq-Vj-7ad" secondAttribute="leading" constant="15" id="ufx-b1-0Dv"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="titleLabel" destination="VGt-8h-avs" id="Qo1-ig-IgK"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1352,7 +1314,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zbp-4k-0wU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1142" y="2221"/>
+            <point key="canvasLocation" x="-1143.2" y="2220.5397301349326"/>
         </scene>
         <!--Lessons Screen1-->
         <scene sceneID="W8g-PI-5v3">
@@ -2953,13 +2915,13 @@
                                         <rect key="frame" x="8" y="85.5" width="172" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Aim" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMd-42-eeN">
-                                                <rect key="frame" x="0.0" y="0.0" width="132" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="28" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Calm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTm-vk-7rW">
-                                                <rect key="frame" x="140" y="0.0" width="32" height="20.5"/>
+                                                <rect key="frame" x="36" y="0.0" width="136" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="15"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
