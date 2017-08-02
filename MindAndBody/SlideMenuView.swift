@@ -23,7 +23,6 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var menuTable: UITableView!
     
     
-    
 //
 // Arrays ----------------------------------------------------------------------------------
 //
@@ -32,7 +31,7 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
             "home",
             "schedule",
             "tracking",
-            "information",
+            "lessons",
             "profile",
             "settings"
         ]
@@ -58,7 +57,6 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         //
         menuTable.tableFooterView = UIView()
         menuTable.backgroundColor = colour1
-        
     }
     
     

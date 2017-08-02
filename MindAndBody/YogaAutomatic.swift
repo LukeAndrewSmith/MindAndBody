@@ -378,7 +378,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 
                     //
                     // Off view
-                    UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         self.offView.alpha = 0
                     }, completion: { finished in
                         self.offView.removeFromSuperview()
@@ -396,7 +396,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     view.insertSubview(offView, aboveSubview: tableView)
                     //
                     // Off view
-                    UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         self.offView.alpha = 0.5
                     }, completion: { finished in
                         tableView.isScrollEnabled = false
@@ -444,7 +444,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 backgroundViewSelection.frame = UIScreen.main.bounds
                 // Animate fade and size
                 // Position
-                UIView.animate(withDuration: 0.4, animations: {
+                UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     //
                     self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
                     //
@@ -490,7 +490,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 backgroundViewSelection.frame = UIScreen.main.bounds
                 // Animate fade and size
                 // Position
-                UIView.animate(withDuration: 0.4, animations: {
+                UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     //
                     self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
                     //
@@ -534,7 +534,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
                 // Animate fade and size
                 // Position
-                UIView.animate(withDuration: 0.4, animations: {
+                UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     //
                     self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
                     //
@@ -638,7 +638,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         //
         // Remove View
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: animationTime2, animations: {
             //
             if self.selectedItem == 0 || self.selectedItem == 2 {
                 self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
@@ -724,7 +724,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         //
         // Remove View
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: animationTime2, animations: {
             //
             if self.selectedItem == 0 || self.selectedItem == 2 {
                 self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)

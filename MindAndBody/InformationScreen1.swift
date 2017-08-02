@@ -13,7 +13,7 @@ import UIKit
 //
 // Information Screen 1 Class -----------------------------------------------------------------------------
 //
-class InformationScreen1: UIViewController {
+class LessonsScreen1: UIViewController {
     
     // Navigation
     @IBOutlet weak var navigationBar: UINavigationItem!

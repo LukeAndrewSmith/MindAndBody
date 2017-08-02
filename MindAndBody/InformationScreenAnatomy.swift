@@ -13,7 +13,7 @@ import UIKit
 //
 // Anatomy Class ------------------------------------------------------------------------------------
 //
-class InformationScreenAnatomy: UIViewController {
+class LessonsScreenAnatomy: UIViewController {
   
     
 //

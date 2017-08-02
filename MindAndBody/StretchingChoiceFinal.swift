@@ -1043,9 +1043,19 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
             let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
             let tableWidth = UIScreen.main.bounds.width - 20
             //
-            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            // Dismiss Table
+            //
+            UIView.animate(withDuration: animationTime2, animations: {
                 self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
                 self.backgroundViewExpanded.alpha = 0
+            }, completion: { finished in
+                //
+                self.presetsTableView.removeFromSuperview()
+                self.backgroundViewExpanded.removeFromSuperview()
+            })
+            //
+            // Animate new elements up
+            UIView.animate(withDuration: animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 self.movementsTableView.reloadData()
                 let indexPath2 = NSIndexPath(row: 0, section: 0)
@@ -1060,8 +1070,6 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
                 self.view.layoutIfNeeded()
             }, completion: { finished in
                 //
-                self.presetsTableView.removeFromSuperview()
-                self.backgroundViewExpanded.removeFromSuperview()
                 if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough2") == false {
                     self.walkthroughMindBody()
                     UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2")
@@ -1090,7 +1098,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         backgroundViewExpanded.frame = UIScreen.main.bounds
         // Animate table fade and size
         // Position
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY - tableHeight - 10, width: tableWidth, height: tableHeight)
             self.presetsTableView.reloadData()
             //
@@ -1106,7 +1114,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
         let tableWidth = UIScreen.main.bounds.width - 20
         //
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: animationTime2, animations: {
             self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
             self.backgroundViewExpanded.alpha = 0
         }, completion: { finished in
@@ -1169,7 +1177,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
         //
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.expandedImage.center.y = (height/2) * 1.5
             self.backgroundViewImage.alpha = 0.5
         }, completion: nil)
@@ -1180,7 +1188,7 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         //
         let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
         //
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: animationTime2, animations: {
             self.expandedImage.center.y = (height/2) * 2.5
             self.backgroundViewImage.alpha = 0
         }, completion: { finished in

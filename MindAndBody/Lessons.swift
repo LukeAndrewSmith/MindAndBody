@@ -1,7 +1,7 @@
 
 //
-//  MyTheory.swift
-//  MyFitnessMentor
+//  Lessons.swift
+//  MindAndBody
 //
 //  Created by Luke Smith on 05/10/16.
 //  Copyright © 2016 Luke Smith. All rights reserved.
@@ -12,7 +12,7 @@ import UIKit
 
 
 //
-// Custom Information Cells ------------------------------------------------------------------------------------
+// Custom Lessons Cells ------------------------------------------------------------------------------------
 //
 // Navigation Cell
 class informationNavigationCell: UITableViewCell {
@@ -55,7 +55,7 @@ class informationDiscussionsCell: UITableViewCell {
 //
 // Session Screen Overview Class ------------------------------------------------------------------------------------
 //
-class Information: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //
     @IBOutlet weak var tableView: UITableView!
@@ -260,7 +260,7 @@ class Information: UIViewController, UITableViewDataSource, UITableViewDelegate 
         case 0:
         let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! headerCell
             //
-            cell.titleLabel.text = NSLocalizedString("information", comment: "")
+            cell.titleLabel.text = NSLocalizedString("lessons", comment: "")
             //
             cell.contentView.backgroundColor = .clear
             //
@@ -565,7 +565,7 @@ class Information: UIViewController, UITableViewDataSource, UITableViewDelegate 
             // Pass Info
             if (segue.identifier == "informationSegue") {
                 
-                let destinationVC = segue.destination as! InformationScreen1
+                let destinationVC = segue.destination as! LessonsScreen1
                 destinationVC.selectedTopic = selectedTopic
                 
                 //destinationVC.selectedSession = selectedSession
@@ -665,7 +665,7 @@ class Information: UIViewController, UITableViewDataSource, UITableViewDelegate 
 
 //
 // Slide Menu Extension
-extension Information: UIViewControllerTransitioningDelegate {
+extension Lessons: UIViewControllerTransitioningDelegate {
     // Present
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return PresentMenuAnimator()
@@ -678,7 +678,6 @@ extension Information: UIViewControllerTransitioningDelegate {
 }
 
 
-
-class InformationNavigation: UINavigationController {
+class LessonsNavigation: UINavigationController {
     
 }

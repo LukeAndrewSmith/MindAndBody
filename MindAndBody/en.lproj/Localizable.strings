@@ -1522,9 +1522,10 @@
 
 
 //
-// Information //
+// Lessons //
 //
-//
+    "lessons" = "Lessons";
+
     // Section Array //
     "important" = "Important";
     "app" = "App";

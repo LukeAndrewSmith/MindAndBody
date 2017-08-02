@@ -13,7 +13,7 @@ import UIKit
 //
 // Music Suggestions Class ------------------------------------------------------------------------------------
 //
-class InformationScreenMusic: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class LessonsScreenMusic: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
 //

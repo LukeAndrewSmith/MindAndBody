@@ -12,55 +12,6 @@ import UserNotifications
 
 
 //
-// Background Images Array ---------------------------------------------------------------------------------------------------------------
-//
-let backgroundImageArray: [UIImage] =
-    [#imageLiteral(resourceName: "Background 0"), #imageLiteral(resourceName: "Background 1"), #imageLiteral(resourceName: "Background 2"), #imageLiteral(resourceName: "Background 3"), #imageLiteral(resourceName: "Background 4"), #imageLiteral(resourceName: "Background 5"), #imageLiteral(resourceName: "Background 6")]
-
-//
-// Colours ---------------------------------------------------------------------------------------------------------------------
-//
-// Grey
-let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-// Black
-let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-// Green
-let colour3 = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
-// Red
-let colour4 = UIColor(red:0.74, green:0.25, blue:0.20, alpha:1.0)
-//
-let colour5 = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
-
-//
-// Gradient Extension ----------------------------------------------------------------------------------------------------------------------
-//
-extension UIView {
-    
-    func applyGradient(colours: [UIColor]) -> Void {
-        //
-        self.applyGradient(colours: colours, locations: nil)
-    }
-    
-    func applyGradient(colours: [UIColor], locations: [NSNumber]?) -> Void {
-        //
-        let gradient = CAGradientLayer()
-        gradient.frame = self.bounds
-        gradient.colors = colours.map { $0.cgColor }
-        gradient.locations = locations
-        self.layer.insertSublayer(gradient, at: 0)
-    }
-}
-
-
-
-
-var tabBarIndex = 0
-var new = Bool()
-
-//
-
-
-//
 // Mind & Body Class ------------------------------------------------------------------------------------------------------------------------
 //
 class MindBody: UIViewController, UNUserNotificationCenterDelegate {

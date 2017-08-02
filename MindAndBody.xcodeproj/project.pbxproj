@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		071C4FB31E98D6D800328D18 /* MeditationTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071C4FB21E98D6D800328D18 /* MeditationTimer.swift */; };
 		071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071FB62B1E9283AE0081444F /* BodyweightChoice.swift */; };
+		07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07248E061F31CB5100230EAF /* GlobalVariables.swift */; };
 		072829E21EA7D3880090164A /* WorkoutChoiceFinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829E11EA7D3880090164A /* WorkoutChoiceFinal.swift */; };
 		072829E51EA7D40C0090164A /* WorkoutChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829E41EA7D40C0090164A /* WorkoutChoiceCustom.swift */; };
 		072829EB1EA8A26A0090164A /* WorkoutSessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */; };
@@ -64,7 +65,7 @@
 		077AC0E41DA535840026895B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E31DA535840026895B /* Assets.xcassets */; };
 		077AC0E71DA535840026895B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E51DA535840026895B /* LaunchScreen.storyboard */; };
 		077AC0F21DA535840026895B /* MindAndBodyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0F11DA535840026895B /* MindAndBodyTests.swift */; };
-		077AC1001DA54C810026895B /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0FF1DA54C810026895B /* Information.swift */; };
+		077AC1001DA54C810026895B /* Lessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0FF1DA54C810026895B /* Lessons.swift */; };
 		077AC1021DA573210026895B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC1011DA573210026895B /* Settings.swift */; };
 		077AC1041DA579680026895B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC1031DA579680026895B /* Profile.swift */; };
 		077AC1121DA7936E0026895B /* SF-UI-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC1091DA7936E0026895B /* SF-UI-Display-Black.otf */; };
@@ -134,6 +135,7 @@
 /* Begin PBXFileReference section */
 		071C4FB21E98D6D800328D18 /* MeditationTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationTimer.swift; sourceTree = "<group>"; };
 		071FB62B1E9283AE0081444F /* BodyweightChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyweightChoice.swift; sourceTree = "<group>"; };
+		07248E061F31CB5100230EAF /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		072829E11EA7D3880090164A /* WorkoutChoiceFinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutChoiceFinal.swift; sourceTree = "<group>"; };
 		072829E41EA7D40C0090164A /* WorkoutChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutChoiceCustom.swift; sourceTree = "<group>"; };
 		072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutSessionScreen.swift; sourceTree = "<group>"; };
@@ -176,7 +178,7 @@
 		077AC0ED1DA535840026895B /* MindAndBodyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MindAndBodyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		077AC0F11DA535840026895B /* MindAndBodyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindAndBodyTests.swift; sourceTree = "<group>"; };
 		077AC0F31DA535840026895B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		077AC0FF1DA54C810026895B /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
+		077AC0FF1DA54C810026895B /* Lessons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lessons.swift; sourceTree = "<group>"; };
 		077AC1011DA573210026895B /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		077AC1031DA579680026895B /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		077AC1091DA7936E0026895B /* SF-UI-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Black.otf"; sourceTree = "<group>"; };
@@ -481,7 +483,7 @@
 				077AC0FD1DA54C0C0026895B /* MindBody */,
 				075A0DB91E8D68800008E014 /* Calendar */,
 				075A0DBA1E8D688D0008E014 /* Tracking */,
-				077AC0FE1DA54C500026895B /* Information */,
+				077AC0FE1DA54C500026895B /* Lessons */,
 				077AC0FC1DA54BD60026895B /* Profile */,
 				078C59541EC893EA00FA1890 /* Sounds */,
 				07995A371E86A83A0009C9B1 /* Settings */,
@@ -513,6 +515,7 @@
 		077AC0FD1DA54C0C0026895B /* MindBody */ = {
 			isa = PBXGroup;
 			children = (
+				07248E061F31CB5100230EAF /* GlobalVariables.swift */,
 				07C2D3BB1EBA88CF000770DE /* MindBody.swift */,
 				07530C971E96716300BD33EC /* Choice Screens */,
 				07530C981E96717B00BD33EC /* Session Screens */,
@@ -520,13 +523,13 @@
 			name = MindBody;
 			sourceTree = "<group>";
 		};
-		077AC0FE1DA54C500026895B /* Information */ = {
+		077AC0FE1DA54C500026895B /* Lessons */ = {
 			isa = PBXGroup;
 			children = (
-				077AC0FF1DA54C810026895B /* Information.swift */,
+				077AC0FF1DA54C810026895B /* Lessons.swift */,
 				0757326C1E660A1F003DA77E /* Screen */,
 			);
-			name = Information;
+			name = Lessons;
 			sourceTree = "<group>";
 		};
 		077AC1061DA792EC0026895B /* SF Font */ = {
@@ -874,12 +877,13 @@
 				072829E51EA7D40C0090164A /* WorkoutChoiceCustom.swift in Sources */,
 				0728F3E51E1E9C0E00EA409B /* CalendarScreenDetail.swift in Sources */,
 				076C68461ED58D65009160C2 /* StretchingScreen.swift in Sources */,
+				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
 				07A42E431EDDB69A0047E8F1 /* OxygenOverloadChoice.swift in Sources */,
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,
 				07A42E451EDDC3000047E8F1 /* OxygenOverloadScreen.swift in Sources */,
 				07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */,
 				077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */,
-				077AC1001DA54C810026895B /* Information.swift in Sources */,
+				077AC1001DA54C810026895B /* Lessons.swift in Sources */,
 				077AC1021DA573210026895B /* Settings.swift in Sources */,
 				07DEE6F31E0AADAC003B89AB /* StretchingChoice.swift in Sources */,
 				07F0C4931EA60B0B00927DA8 /* StretchingChoiceFinal.swift in Sources */,

@@ -89,7 +89,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         restTimePicker.dataSource = self
         // ok
         okButton.backgroundColor = colour1
-        okButton.setTitleColor(colour2, for: .normal)
+        okButton.setTitleColor(colour3, for: .normal)
         okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
         okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
@@ -111,7 +111,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     // Add movement table background (dismiss table)
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: animationTime2, animations: {
             self.restTimeView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
 
             //
@@ -134,7 +134,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         //
         defaults.synchronize()
         //
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: animationTime2, animations: {
             self.restTimeView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
             //
             self.backgroundViewExpanded.alpha = 0
@@ -430,7 +430,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             backgroundViewExpanded.frame = UIScreen.main.bounds
             //
             // Position
-            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 self.restTimeView.frame = CGRect(x: 10, y: self.view.frame.maxY - restHeight - 10, width: restWidth, height: restHeight)
 

@@ -347,8 +347,12 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
            
             //
             // Buttons
-            cell.nextImage.tintColor = colour1
-            cell.previousImage.tintColor = colour1
+            cell.nextImage.tintColor = .clear
+            //cell.nextImage.alpha = 0
+                //colour1
+            cell.previousImage.tintColor = .clear
+            //cell.previousImage.alpha = 0
+                //colour1
             
             //
             // Movement
@@ -373,7 +377,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             //
             // Hide Screen
-            cell.hideScreen.tintColor = colour1
+            cell.hideScreen.tintColor = .clear
+                //colour1
             
             
             //

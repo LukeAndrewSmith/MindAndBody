@@ -26,16 +26,6 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
     // Stack
     @IBOutlet weak var stackView: UIStackView!
     
-    
-    // Information View
-    let informationView = UIScrollView()
-    // Information Title
-    let informationTitle = UILabel()
-    
-    // Question Mark
-    @IBOutlet weak var questionMark: UIBarButtonItem!
-   
-    
     // Constraints
     @IBOutlet weak var timerTop: NSLayoutConstraint!
     @IBOutlet weak var timerBottom: NSLayoutConstraint!
@@ -60,7 +50,6 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         
         // Colours
         view.backgroundColor = colour1
-        questionMark.tintColor = colour1
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("meditation", comment: ""))
@@ -96,65 +85,6 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         breathing.titleLabel?.numberOfLines = 0
         breathing.titleLabel?.lineBreakMode = .byWordWrapping
         
-        //Information
-        //
-        // Scroll View Frame
-        self.informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
-        informationView.backgroundColor = colour1
-        // Information Title
-        //
-        // Information Title Frame
-        self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
-        informationTitle.text = (NSLocalizedString("information", comment: ""))
-        informationTitle.textAlignment = .center
-        informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour1
-        informationTitle.backgroundColor = colour2
-        //
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        downSwipe.direction = UISwipeGestureRecognizerDirection.down
-        informationTitle.addGestureRecognizer(downSwipe)
-        informationTitle.isUserInteractionEnabled = true
-        // Information Text
-        //
-        // Information Text Frame
-        let informationTextMeditationC = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
-        // Information Text and Attributes
-        //
-        // String
-        let informationLabelString = (
-            (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("meditationPurposeText", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("meditationBodyText", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("meditationMindText", comment: "")))
-        // Range of String
-        let textRangeString = (NSLocalizedString("purpose", comment: ""))+"\n"+(NSLocalizedString("meditationPurposeText", comment: ""))+"\n"+"\n"+(NSLocalizedString("body", comment: ""))+"\n"+(NSLocalizedString("meditationBodyText", comment: ""))+"\n"+"\n"+(NSLocalizedString("mind", comment: ""))+"\n"+(NSLocalizedString("meditationMindText", comment: ""))
-        let textRange = (informationLabelString as NSString).range(of: textRangeString)
-        // Range of Titles
-        let titleRangeString1 = (NSLocalizedString("purpose", comment: ""))
-        let titleRangeString2 = (NSLocalizedString("body", comment: ""))
-        let titleRangeString3 = (NSLocalizedString("mind", comment: ""))
-        //
-        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString1)
-        let titleRange2 = (informationLabelString as NSString).range(of: titleRangeString2)
-        let titleRange3 = (informationLabelString as NSString).range(of: titleRangeString3)
-        // Line Spacing
-        let lineSpacing = NSMutableParagraphStyle()
-        lineSpacing.lineSpacing = 1.6
-        // Add Attributes
-        let informationLabelText = NSMutableAttributedString(string: informationLabelString)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange1)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange2)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange3)
-        informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
-        // Final Text Editing
-        informationTextMeditationC.attributedText = informationLabelText
-        informationTextMeditationC.textAlignment = .natural
-        informationTextMeditationC.lineBreakMode = NSLineBreakMode.byWordWrapping
-        informationTextMeditationC.numberOfLines = 0
-        informationTextMeditationC.sizeToFit()
-        self.informationView.addSubview(informationTextMeditationC)
-        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationTextMeditationC.frame.size.height + informationTitle.frame.size.height + 20)
-        
-        
         // Iphone 5/SE
         if UIScreen.main.nativeBounds.height < 1334 {
             //
@@ -182,68 +112,6 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         breathing.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         breathing.layer.masksToBounds = true
         
-    }
-    
-    
-//
-// Information Actions ----------------------------------------------------------------------------------------------------------------
-//
-    @IBAction func informationButtonActionMeditationC(_ sender: Any) {
-        // Slide information down
-        if self.informationView.frame.minY < self.view.frame.maxY {
-            // Animate slide
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
-                
-            }, completion: { finished in
-            // Remove after animation
-                self.informationView.removeFromSuperview()
-                self.informationTitle.removeFromSuperview()
-            })
-            // Navigation buttons
-            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
-            navigationBar.setHidesBackButton(false, animated: true)
-            
-            // Slide information up
-        } else {
-            //
-            view.addSubview(informationView)
-            view.addSubview(informationTitle)
-            //
-            view.bringSubview(toFront: informationView)
-            view.bringSubview(toFront: informationTitle)
-            // Animate slide
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.informationView.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-            }, completion: nil)
-            //
-            self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-            // Navigation buttons
-            questionMark.image = #imageLiteral(resourceName: "Down")
-            navigationBar.setHidesBackButton(true, animated: true)
-        }
-    }
-    
-    // Handle Swipes
-    @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
-        // Information Swipe Down
-        if (extraSwipe.direction == .down){
-            // Animate slide
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
-                
-            }, completion: { finished in
-                // Remove after animation
-                self.informationView.removeFromSuperview()
-                self.informationTitle.removeFromSuperview()
-            })
-            // Navigation buttons
-            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
-            navigationBar.setHidesBackButton(false, animated: true)
-        }
     }
 
     

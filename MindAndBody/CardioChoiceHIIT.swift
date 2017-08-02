@@ -26,14 +26,6 @@ class CardioChoiceHIIT: UIViewController  {
     @IBOutlet weak var running: UIButton!
     //
     
-    // Information View
-    let informationView = UIScrollView()
-    // Information Title
-    let informationTitle = UILabel()
-    
-    // Question Mark
-    @IBOutlet weak var questionMark: UIBarButtonItem!
-
     //
     var cardioType = Int()
     //
@@ -53,7 +45,6 @@ class CardioChoiceHIIT: UIViewController  {
         
         // Colours
         view.backgroundColor = colour1
-        questionMark.tintColor = colour1
         
         // Titles
         navigationBar.title = (NSLocalizedString("hiit", comment: ""))
@@ -77,56 +68,6 @@ class CardioChoiceHIIT: UIViewController  {
         running.layer.borderWidth = 6
         running.layer.borderColor = colour2.cgColor
         //
-        
-        // Information
-        //
-        // Scroll View Frame
-        informationView.frame = CGRect(x: 0, y: self.view.frame.maxY + 49, width: self.view.frame.size.width, height: self.view.frame.size.height - 73.5 - UIApplication.shared.statusBarFrame.height)
-        informationView.backgroundColor = colour1
-        // Information Text
-        //
-        // Information Text Frame
-        let informationText = UILabel(frame: CGRect(x: 20, y: 20, width: self.informationView.frame.size.width - 40, height: 0))
-        // Information Text Frame
-        self.informationTitle.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: 49)
-        informationTitle.text = (NSLocalizedString("information", comment: ""))
-        informationTitle.textAlignment = .center
-        informationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 20)
-        informationTitle.textColor = colour1
-        informationTitle.backgroundColor = colour2
-        //
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        downSwipe.direction = UISwipeGestureRecognizerDirection.down
-        informationTitle.addGestureRecognizer(downSwipe)
-        informationTitle.isUserInteractionEnabled = true
-        // Information Text and Attributes
-        //
-        // String
-        let informationLabelString = ((NSLocalizedString("bodyweightWorkouts", comment: ""))+"\n"+(NSLocalizedString("bodyweightWorkoutChoice", comment: "")))
-        // Range of String
-        let textRangeString = ((NSLocalizedString("bodyweightWorkouts", comment: ""))+"\n"+(NSLocalizedString("bodyweightWorkoutChoice", comment: "")))
-        let textRange = (informationLabelString as NSString).range(of: textRangeString)
-        // Range of Titles
-        let titleRangeString = (NSLocalizedString("bodyweightWorkouts", comment: ""))
-        let titleRange1 = (informationLabelString as NSString).range(of: titleRangeString)
-        // Line Spacing
-        let lineSpacing = NSMutableParagraphStyle()
-        lineSpacing.lineSpacing = 1.6
-        // Add Attributes
-        let informationLabelText = NSMutableAttributedString(string: informationLabelString)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-thin", size: 21)!, range: textRange)
-        informationLabelText.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-Medium", size: 21)!, range: titleRange1)
-        informationLabelText.addAttribute(NSParagraphStyleAttributeName, value: lineSpacing, range: textRange)
-        // Final Text Editing
-        informationText.attributedText = informationLabelText
-        informationText.textAlignment = .natural
-        informationText.lineBreakMode = NSLineBreakMode.byWordWrapping
-        informationText.numberOfLines = 0
-        informationText.sizeToFit()
-        self.informationView.addSubview(informationText)
-        //
-        self.informationView.contentSize = CGSize(width: self.view.frame.size.width, height: informationText.frame.size.height + informationTitle.frame.size.height + 20)
-        
     }
     
     
@@ -156,66 +97,6 @@ class CardioChoiceHIIT: UIViewController  {
         running.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         running.titleLabel?.numberOfLines = 0
         running.titleLabel?.textAlignment = .center
-    }
-    
-    
-    //
-    // Information Actions ----------------------------------------------------------------------------------------------------------------
-    //
-    @IBAction func informationButtonActionStretchingC(_ sender: Any) {
-        // Slide information down
-        if self.informationView.frame.minY < self.view.frame.maxY {
-            // Animate slide
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
-            }, completion: { finished in
-                // Remove after animation
-                self.informationView.removeFromSuperview()
-                self.informationTitle.removeFromSuperview()
-            })
-            // Navigation buttons
-            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
-            navigationBar.setHidesBackButton(false, animated: true)
-            
-            // Slide information up
-        } else {
-            //
-            view.addSubview(informationView)
-            view.addSubview(informationTitle)
-            //
-            view.bringSubview(toFront: informationView)
-            view.bringSubview(toFront: informationTitle)
-            // Animate slide
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.informationView.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: -(self.view.frame.maxY))
-            }, completion: nil)
-            //
-            self.informationView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-            // Navigation buttons
-            questionMark.image = #imageLiteral(resourceName: "Down")
-            navigationBar.setHidesBackButton(true, animated: true)
-        }
-    }
-    
-    // Handle Swipes
-    @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
-        // Information Swipe Down
-        if (extraSwipe.direction == .down){
-            // Animate slide
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.informationView.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.informationTitle.transform = CGAffineTransform(translationX: 0, y: 0)
-            }, completion: { finished in
-                // Remove after animation
-                self.informationView.removeFromSuperview()
-                self.informationTitle.removeFromSuperview()
-            })
-            // Navigation buttons
-            questionMark.image = #imageLiteral(resourceName: "QuestionMarkN")
-            navigationBar.setHidesBackButton(false, animated: true)
-        }
     }
     
     
