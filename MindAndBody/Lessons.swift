@@ -17,40 +17,31 @@ import UIKit
 // Navigation Cell
 class lessonsNavigationCell: UITableViewCell {
     //
-    @IBOutlet weak var important: UIButton!
+    
     //
     @IBOutlet weak var app: UIButton!
     //
     @IBOutlet weak var discussions: UIButton!
     //
-    @IBOutlet weak var music: UIButton!
-    
 }
 
 //
-class lessonsImportantCell: UITableViewCell {
+class lessonsMindCell: UITableViewCell {
     //
     @IBOutlet weak var titleLabel: UILabel!
 }
 
 //
-class lessonsMusicCell: UITableViewCell {
+class lessonsBodyCell: UITableViewCell {
    //
     @IBOutlet weak var titleLabel: UILabel!
 }
 
 //
-class lessonsAppCell: UITableViewCell {
+class lessonsOtherCell: UITableViewCell {
     //
     @IBOutlet weak var titleLabel: UILabel!
 }
-
-//
-class lessonsDiscussionsCell: UITableViewCell {
-    //
-    @IBOutlet weak var titleLabel: UILabel!
-}
-
 
 //
 // Session Screen Overview Class ------------------------------------------------------------------------------------
@@ -343,20 +334,10 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             cell.app.tag = 2
             cell.app.addTarget(self, action: #selector(navigationButtonAction(_:)), for: .touchUpInside)
             //
-            cell.discussions.titleLabel?.adjustsFontSizeToFitWidth = true
-            //
-            cell.discussions.tag = 3
-            cell.discussions.addTarget(self, action: #selector(navigationButtonAction(_:)), for: .touchUpInside)
-            //
-            cell.music.titleLabel?.adjustsFontSizeToFitWidth = true
-            //
-            cell.music.tag = 4
-            cell.music.addTarget(self, action: #selector(navigationButtonAction(_:)), for: .touchUpInside)
-            //
             return cell
         //
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "lessonsImportantCell", for: indexPath) as! lessonsImportantCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "lessonsMindCell", for: indexPath) as! lessonsMindCell
             //
             // Border
             let border = CALayer()
@@ -371,7 +352,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             return cell
         // 
         case 3:
-             let cell = tableView.dequeueReusableCell(withIdentifier: "lessonsAppCell", for: indexPath) as! lessonsAppCell
+             let cell = tableView.dequeueReusableCell(withIdentifier: "lessonsBodyCell", for: indexPath) as! lessonsBodyCell
              //
              // Border
              let border = CALayer()
@@ -386,7 +367,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             return cell
         //
         case 4:
-             let cell = tableView.dequeueReusableCell(withIdentifier: "lessonsMusicCell", for: indexPath) as! lessonsMusicCell
+             let cell = tableView.dequeueReusableCell(withIdentifier: "lessonsOtherCell", for: indexPath) as! lessonsOtherCell
              //
              // Border
              let border = CALayer()
@@ -398,21 +379,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
              //
              cell.backgroundColor = colour1
              //
-            return cell
-        //
-        case 5:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "lessonsDiscussionsCell", for: indexPath) as! lessonsDiscussionsCell
-            //
-            // Border
-            let border = CALayer()
-            border.backgroundColor = UIColor.black.cgColor
-            border.frame = CGRect(x: 15, y: cell.titleLabel.frame.maxY, width: cell.frame.size.width - 15, height: 1)
-            //
-            cell.layer.addSublayer(border)
-            cell.layer.masksToBounds = true
-            //
-            cell.backgroundColor = colour1
-            //
             return cell
         //
         default: break
