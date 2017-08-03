@@ -658,7 +658,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         UIApplication.shared.keyWindow?.addSubview(scrollViewExplanation)
     
         //
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 1.5) + 20
             self.backgroundViewExplanation.alpha = 0.5
         }, completion: nil)
@@ -668,7 +668,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBAction func retractExplanation(_ sender: Any) {
         let bounds = UIScreen.main.bounds
         //
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: animationTime2, animations: {
             self.scrollViewExplanation.center.y = ((bounds.height - 20)/2) * 2.5 + 20
             self.backgroundViewExplanation.alpha = 0
         }, completion: { finished in

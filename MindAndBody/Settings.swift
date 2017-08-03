@@ -190,7 +190,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         //
         header.layer.addSublayer(border)
         header.layer.masksToBounds = true
-        
     }
     
     // Header Height

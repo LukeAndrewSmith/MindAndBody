@@ -1012,7 +1012,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         UIApplication.shared.keyWindow?.addSubview(scrollViewExplanation)
         
         //
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 1.5) + 20
             self.backgroundViewExplanation.alpha = 0.5
         }, completion: nil)
@@ -1022,7 +1022,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     @IBAction func retractExplanation(_ sender: Any) {
         let bounds = UIScreen.main.bounds
         //
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: animationTime2, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.scrollViewExplanation.center.y = ((bounds.height - 20)/2) * 2.5 + 20
             self.backgroundViewExplanation.alpha = 0
         }, completion: { finished in
@@ -1048,41 +1048,34 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         case UISwipeGestureRecognizerDirection.left:
             //
             if cell.nextImage.alpha == 1 {
-                //
+                // Screenshot of current image
                 let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
                 snapshot1?.bounds = cell.imageViewCell.bounds
                 snapshot1?.center.x = cell.center.x
                 cell.addSubview(snapshot1!)
                 
-                //
+                // New image to display
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
                     cell.imageViewCell.image = targetAreaArray[indexPath.row]
                 } else {
                     cell.imageViewCell.image = demonstrationArray[indexPath.row]
                 }
-                //
+                
+                // Move new image to right of screen
+                cell.imageViewCell.center.x = cell.center.x + cell.frame.size.width
                 cell.imageViewCell.reloadInputViews()
                 
                 //
-                let snapshot2 = cell.imageViewCell.snapshotView(afterScreenUpdates: true)
-                snapshot2?.bounds = cell.imageViewCell.bounds
-                snapshot2?.center.x = cell.center.x + cell.frame.size.width
-                cell.addSubview(snapshot2!)
-                //
-                cell.imageViewCell.alpha = 0
-                //
-                UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     snapshot1?.center.x = cell.center.x - cell.frame.size.width
-                    snapshot2?.center.x = cell.center.x
+                    cell.imageViewCell.center.x = cell.center.x
                     //
                     cell.nextImage.alpha = 0
                     cell.nextImage.isEnabled = false
                     cell.previousImage.alpha = 1
                     cell.previousImage.isEnabled = true
                 }, completion: { finished in
-                    cell.imageViewCell.alpha = 1
                     snapshot1?.removeFromSuperview()
-                    snapshot2?.removeFromSuperview()
                 })
                 //
             }
@@ -1104,26 +1097,20 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 }
                 
                 //
-                let snapshot2 = cell.imageViewCell.snapshotView(afterScreenUpdates: true)
-                snapshot2?.bounds = cell.imageViewCell.bounds
-                snapshot2?.center.x = cell.center.x - cell.frame.size.width
-                cell.addSubview(snapshot2!)
+                cell.imageViewCell.center.x = cell.center.x - cell.frame.size.width
+                cell.imageViewCell.reloadInputViews()
                 
                 //
-                cell.imageViewCell.alpha = 0
-                //
-                UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     snapshot1?.center.x = cell.center.x + cell.frame.size.width
-                    snapshot2?.center.x = cell.center.x
+                    cell.imageViewCell.center.x = cell.center.x
                     //
                     cell.nextImage.alpha = 1
                     cell.nextImage.isEnabled = true
                     cell.previousImage.alpha = 0
                     cell.previousImage.isEnabled = false
                 }, completion: { finished in
-                    cell.imageViewCell.alpha = 1
                     snapshot1?.removeFromSuperview()
-                    snapshot2?.removeFromSuperview()
                 })
                 //
             }
