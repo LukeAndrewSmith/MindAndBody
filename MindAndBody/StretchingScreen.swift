@@ -201,16 +201,6 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.selectionStyle = .none
             
             
-            
-            // Image Tap
-            //            let imageTap = UITapGestureRecognizer()
-            //            imageTap.numberOfTapsRequired = 1
-            //            imageTap.addTarget(self, action: #selector(handleImageTap))
-            //            cell.demonstrationImageView.addGestureRecognizer(imageTap)
-            //
-            // Images
-            
-            
             //
             // Images
             if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
@@ -219,8 +209,6 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.imageViewCell.image = targetAreaArray[indexPath.row]
             }
             
-            
-            // Image
             //
             // Animation
             cell.imageViewCell.animationImages = demonstrationArray[indexPath.row]
@@ -230,7 +218,6 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             cell.imageViewCell.tag = indexPath.row
             //
-            
             // Image Tap
             let imageTap = UITapGestureRecognizer()
             imageTap.numberOfTapsRequired = 1
@@ -238,7 +225,6 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.imageViewCell.addGestureRecognizer(imageTap)
             //
 
-            
             //
             // Buttons
             cell.nextImage.tintColor = colour1

@@ -18,8 +18,8 @@ import UserNotifications
 class OverviewTableViewCell: UITableViewCell {
     // Image View
     @IBOutlet weak var imageViewCell: UIImageView!
-    @IBOutlet weak var nextImage: UIButton!
-    @IBOutlet weak var previousImage: UIButton!
+    //
+    @IBOutlet weak var indicatorStack: UIStackView!
     @IBOutlet weak var leftImageIndicator: UIImageView!
     @IBOutlet weak var rightImageIndicator: UIImageView!
     // Title Label
@@ -327,15 +327,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             cell.selectionStyle = .none
             
-           
-            
-            // Image Tap
-            //            let imageTap = UITapGestureRecognizer()
-            //            imageTap.numberOfTapsRequired = 1
-            //            imageTap.addTarget(self, action: #selector(handleImageTap))
-            //            cell.demonstrationImageView.addGestureRecognizer(imageTap)
-            //
-            // Images
 
             //
             // Images
@@ -344,15 +335,44 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             } else {
                 cell.imageViewCell.image = targetAreaArray[indexPath.row]
             }
+            // New image to display
+            // Demonstration on left
+            if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+                cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
+                // Indicator
+                if demonstrationArray[indexPath.row].count > 1 {
+                    cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
+                } else {
+                    cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
+                }
+                cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
+            // Target Area on left
+            } else {
+                cell.imageViewCell.image = targetAreaArray[indexPath.row]
+                // Indicator
+                if demonstrationArray[indexPath.row].count > 1 {
+                    cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
+                } else {
+                    cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
+                }
+                cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
+            }
            
             //
-            // Buttons
-            cell.nextImage.tintColor = .clear
-            //cell.nextImage.alpha = 0
-                //colour1
-            cell.previousImage.tintColor = .clear
-            //cell.previousImage.alpha = 0
-                //colour1
+            // Animation
+            cell.imageViewCell.animationImages = demonstrationArray[indexPath.row]
+            cell.imageViewCell.animationImages?.removeFirst()
+            cell.imageViewCell.animationDuration = Double(demonstrationArray[indexPath.row].count) * 0.5
+            cell.imageViewCell.animationRepeatCount = 1
+            //
+            cell.imageViewCell.tag = indexPath.row
+            //
+            // Image Tap
+            let imageTap = UITapGestureRecognizer()
+            imageTap.numberOfTapsRequired = 1
+            imageTap.addTarget(self, action: #selector(handleImageTap))
+            cell.imageViewCell.addGestureRecognizer(imageTap)
+            //
             
             //
             // Movement
@@ -449,61 +469,49 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             imageSwipeLeft.direction = UISwipeGestureRecognizerDirection.left
             cell.imageViewCell.addGestureRecognizer(imageSwipeLeft)
             cell.imageViewCell.isUserInteractionEnabled = true
-            //
-            let nextImageTap = UITapGestureRecognizer()
-            nextImageTap.numberOfTapsRequired = 1
-            nextImageTap.addTarget(self, action: #selector(nextImageAction))
-            cell.nextImage.addGestureRecognizer(nextImageTap)
             
             // Right Image Swipe
             let imageSwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
             imageSwipeRight.direction = UISwipeGestureRecognizerDirection.right
             cell.imageViewCell.addGestureRecognizer(imageSwipeRight)
             cell.imageViewCell.isUserInteractionEnabled = true
-            //
-            let previousImageTap = UITapGestureRecognizer()
-            previousImageTap.numberOfTapsRequired = 1
-            previousImageTap.addTarget(self, action: #selector(previousImageAction))
-            cell.previousImage.addGestureRecognizer(previousImageTap)
             
             
             // Alphas
             switch indexPath.row {
             case selectedRow - 1:
+                cell.indicatorStack.alpha = 0
                 cell.movementLabel.alpha = 0
                 cell.setsRepsLabel.alpha = 0
                 cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
             //
             case selectedRow:
+                cell.indicatorStack.alpha = 1
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
-                cell.nextImage.alpha = 1
-                cell.previousImage.alpha = 0
                 //cell.demonstrationImageView.isUserInteractionEnabled = true
             //
             case selectedRow + 1:
                 //
                 cell.selectionStyle = .none
                 //
+                cell.indicatorStack.alpha = 0
                 cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
-                cell.nextImage.alpha = 0
-                cell.previousImage.alpha = 0
                 //cell.demonstrationImageView.isUserInteractionEnabled = false
             //
             default:
                 //
+                cell.indicatorStack.alpha = 1
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
-                cell.nextImage.alpha = 1
-                cell.previousImage.alpha = 0
             }
             
             //
@@ -681,9 +689,11 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let sender = imageTap.view as! UIImageView
         let tag = sender.tag
         //
-        //if demonstrationArray[tag].count != 1 {
-         //   sender.startAnimating()
-        //}
+        if targetAreaArray.contains(sender.image!) == false {
+            if demonstrationArray[tag].count != 1 {
+                sender.startAnimating()
+            }
+        }
     }
     
     
@@ -707,38 +717,15 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
                 // 1
+                cell.indicatorStack.alpha = 1
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
-                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    if cell.imageViewCell.image == self.demonstrationArray[self.selectedRow][0] {
-                        cell.nextImage.alpha = 1
-                        cell.nextImage.isEnabled = true
-                        cell.previousImage.alpha = 0
-                        cell.previousImage.isEnabled = false
-                    } else {
-                        cell.nextImage.alpha = 0
-                        cell.nextImage.isEnabled = false
-                        cell.previousImage.alpha = 1
-                        cell.previousImage.isEnabled = true
-                    }
-                } else {
-                    if cell.imageViewCell.image == self.targetAreaArray[self.selectedRow] {
-                        cell.nextImage.alpha = 1
-                        cell.nextImage.isEnabled = true
-                        cell.previousImage.alpha = 0
-                        cell.previousImage.isEnabled = false
-                    } else {
-                        cell.nextImage.alpha = 0
-                        cell.nextImage.isEnabled = false
-                        cell.previousImage.alpha = 1
-                        cell.previousImage.isEnabled = true
-                    }
-                }
                 //
                 // -1
                 cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! OverviewTableViewCell
+                cell.indicatorStack.alpha = 0
                 cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 0
                 cell.buttonView.alpha = 0
@@ -775,38 +762,15 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
                 
                 // 1
+                cell.indicatorStack.alpha = 1
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
-                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    if cell.imageViewCell.image == self.demonstrationArray[self.selectedRow][0] {
-                        cell.nextImage.alpha = 1
-                        cell.nextImage.isEnabled = true
-                        cell.previousImage.alpha = 0
-                        cell.previousImage.isEnabled = false
-                    } else {
-                        cell.nextImage.alpha = 0
-                        cell.nextImage.isEnabled = false
-                        cell.previousImage.alpha = 1
-                        cell.previousImage.isEnabled = true
-                    }
-                } else {
-                    if cell.imageViewCell.image == self.targetAreaArray[self.selectedRow] {
-                        cell.nextImage.alpha = 1
-                        cell.nextImage.isEnabled = true
-                        cell.previousImage.alpha = 0
-                        cell.previousImage.isEnabled = false
-                    } else {
-                        cell.nextImage.alpha = 0
-                        cell.nextImage.isEnabled = false
-                        cell.previousImage.alpha = 1
-                        cell.previousImage.isEnabled = true
-                    }
-                }
                 // - 1
                 if self.selectedRow > 0 {
                     cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! OverviewTableViewCell
+                    cell.indicatorStack.alpha = 0
                     cell.setsRepsLabel.alpha = 0
                     cell.movementLabel.alpha = 0
                     cell.buttonView.alpha = 0
@@ -814,12 +778,11 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }
                 // + 1
                 cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! OverviewTableViewCell
+                cell.indicatorStack.alpha = 0
                 cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
-                cell.nextImage.alpha = 0
-                cell.previousImage.alpha = 0
                 //
             })
         }
@@ -918,7 +881,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             case UISwipeGestureRecognizerDirection.left:
                 //
-                if cell.nextImage.alpha == 1 {
+                // Check left image is displayed
+                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" && cell.imageViewCell.image == demonstrationArray[indexPath.row][0] || UserDefaults.standard.string(forKey: "defaultImage") == "targetArea" && cell.imageViewCell.image == targetAreaArray[indexPath.row] {
                     // Screenshot of current image
                     let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
                     snapshot1?.bounds = cell.imageViewCell.bounds
@@ -926,10 +890,26 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     cell.addSubview(snapshot1!)
                     
                     // New image to display
+                    // Demonstration on left
                     if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
                         cell.imageViewCell.image = targetAreaArray[indexPath.row]
+                            // Indicator
+                            if demonstrationArray[indexPath.row].count > 1 {
+                                cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
+                            } else {
+                                cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
+                            }
+                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
+                    // Target Area on left
                     } else {
                         cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
+                            // Indicator
+                            if demonstrationArray[indexPath.row].count > 1 {
+                                cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
+                            } else {
+                                cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
+                            }
+                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                     }
                     
                     // Move new image to right of screen
@@ -942,10 +922,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         snapshot1?.center.x = cell.center.x - cell.frame.size.width
                         cell.imageViewCell.center.x = cell.center.x
                         //
-                        cell.nextImage.alpha = 0
-                        cell.nextImage.isEnabled = false
-                        cell.previousImage.alpha = 1
-                        cell.previousImage.isEnabled = true
                     }, completion: { finished in
                         snapshot1?.removeFromSuperview()
                     })
@@ -954,18 +930,34 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             case UISwipeGestureRecognizerDirection.right:
                 //
-                if cell.previousImage.alpha == 1 {
+                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" && cell.imageViewCell.image == targetAreaArray[indexPath.row] || UserDefaults.standard.string(forKey: "defaultImage") == "targetArea" && cell.imageViewCell.image == demonstrationArray[indexPath.row][0] {
                     //
                     let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
                     snapshot1?.bounds = cell.imageViewCell.bounds
                     snapshot1?.center.x = cell.center.x
                     cell.addSubview(snapshot1!)
                     
-                    //
+                    // New image to display
+                    // Demonstration on left
                     if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
                         cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
+                        // Indicator
+                        if demonstrationArray[indexPath.row].count > 1 {
+                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
+                        } else {
+                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
+                        }
+                        cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
+                        // Target Area on left
                     } else {
                         cell.imageViewCell.image = targetAreaArray[indexPath.row]
+                        // Indicator
+                        if demonstrationArray[indexPath.row].count > 1 {
+                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
+                        } else {
+                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
+                        }
+                        cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
                     }
                     
                     //
@@ -977,10 +969,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         snapshot1?.center.x = cell.center.x + cell.frame.size.width
                         cell.imageViewCell.center.x = cell.center.x
                         //
-                        cell.nextImage.alpha = 1
-                        cell.nextImage.isEnabled = true
-                        cell.previousImage.alpha = 0
-                        cell.previousImage.isEnabled = false
                     }, completion: { finished in
                         snapshot1?.removeFromSuperview()
                     })
@@ -991,104 +979,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
 
-    //
-    // Next Image Buttons
-    @IBAction func nextImageAction() {
-        //
-        let indexPath = NSIndexPath(row: selectedRow, section: 0)
-        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
-        //
-            //
-            if cell.nextImage.alpha == 1 {
-                //
-                let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
-                snapshot1?.bounds = cell.imageViewCell.bounds
-                snapshot1?.center.x = cell.center.x
-                cell.addSubview(snapshot1!)
-                
-                //
-                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    cell.imageViewCell.image = targetAreaArray[indexPath.row]
-                } else {
-                    cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
-                }
-                //
-                cell.imageViewCell.reloadInputViews()
-                
-                //
-                let snapshot2 = cell.imageViewCell.snapshotView(afterScreenUpdates: true)
-                snapshot2?.bounds = cell.imageViewCell.bounds
-                snapshot2?.center.x = cell.center.x + cell.frame.size.width
-                cell.addSubview(snapshot2!)
-                //
-                cell.imageViewCell.alpha = 0
-                //
-                UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    snapshot1?.center.x = cell.center.x - cell.frame.size.width
-                    snapshot2?.center.x = cell.center.x
-                    //
-                    cell.nextImage.alpha = 0
-                    cell.nextImage.isEnabled = false
-                    cell.previousImage.alpha = 1
-                    cell.previousImage.isEnabled = true
-                }, completion: { finished in
-                    cell.imageViewCell.alpha = 1
-                    snapshot1?.removeFromSuperview()
-                    snapshot2?.removeFromSuperview()
-                })
-                //
-            }
-    }
-    
-    //
-    // Previous Image Buttons
-    @IBAction func previousImageAction() {
-        //
-        let indexPath = NSIndexPath(row: selectedRow, section: 0)
-        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
-        //
-            //
-            if cell.previousImage.alpha == 1 {
-                //
-                let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
-                snapshot1?.bounds = cell.imageViewCell.bounds
-                snapshot1?.center.x = cell.center.x
-                cell.addSubview(snapshot1!)
-                
-                //
-                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
-                } else {
-                    cell.imageViewCell.image = targetAreaArray[indexPath.row]
-                }
-                
-                //
-                let snapshot2 = cell.imageViewCell.snapshotView(afterScreenUpdates: true)
-                snapshot2?.bounds = cell.imageViewCell.bounds
-                snapshot2?.center.x = cell.center.x - cell.frame.size.width
-                cell.addSubview(snapshot2!)
-                
-                //
-                cell.imageViewCell.alpha = 0
-                //
-                UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    snapshot1?.center.x = cell.center.x + cell.frame.size.width
-                    snapshot2?.center.x = cell.center.x
-                    //
-                    cell.nextImage.alpha = 1
-                    cell.nextImage.isEnabled = true
-                    cell.previousImage.alpha = 0
-                    cell.previousImage.isEnabled = false
-                }, completion: { finished in
-                    cell.imageViewCell.alpha = 1
-                    snapshot1?.removeFromSuperview()
-                    snapshot2?.removeFromSuperview()
-                })
-                //
-            }
-    }
-
-    
     //
     // Update Progress
     func updateProgress() {

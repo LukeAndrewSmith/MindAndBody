@@ -39,7 +39,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" shadowImage="ShadowImage" id="Ace-JK-2vv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" shadowImage="ShadowImage" id="Ace-JK-2vv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,7 +70,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="CcZ-cs-3tG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="CcZ-cs-3tG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -341,7 +341,7 @@
                                             </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXe-Y8-seR">
-                                            <rect key="frame" x="187.5" y="-5" width="94" height="54"/>
+                                            <rect key="frame" x="187" y="-5" width="94" height="54"/>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="20"/>
                                             <state key="normal" title="Body">
                                                 <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -799,7 +799,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Kic-cx-WPG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Kic-cx-WPG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -873,7 +873,7 @@
         <scene sceneID="kMx-Nx-xwg">
             <objects>
                 <collectionViewController id="U5d-IN-X7D" customClass="BackgroundImageCollection" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="EZa-OY-nwE">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EZa-OY-nwE">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -975,7 +975,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="mbW-ps-Fws">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="mbW-ps-Fws">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -1062,7 +1062,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="4pX-9H-3C4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="4pX-9H-3C4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -2955,7 +2955,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="bfK-PA-aZv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="bfK-PA-aZv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3208,7 +3208,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="rov-No-Wka">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="rov-No-Wka">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -3314,22 +3314,6 @@
                                                     </constraints>
                                                     <state key="normal" image="QuestionMarkM"/>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VbV-dt-dn2">
-                                                    <rect key="frame" x="320" y="200" width="55" height="55"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="55" id="BRA-nc-Aal"/>
-                                                        <constraint firstAttribute="width" constant="55" id="DZS-hw-sF2"/>
-                                                    </constraints>
-                                                    <state key="normal" image="Forward"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYS-xt-Lf5">
-                                                    <rect key="frame" x="0.0" y="200" width="55" height="55"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="55" id="LEh-yi-8K7"/>
-                                                        <constraint firstAttribute="height" constant="55" id="thM-NG-bQk"/>
-                                                    </constraints>
-                                                    <state key="normal" image="Back Arrow"/>
-                                                </button>
                                                 <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="HRs-0d-j9h">
                                                     <rect key="frame" x="54" y="358" width="266" height="42.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3356,13 +3340,10 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="zYS-xt-Lf5" firstAttribute="centerY" secondItem="aYQ-8x-smf" secondAttribute="centerY" multiplier="1.5" id="1Wr-Ci-Alh"/>
                                                 <constraint firstItem="Ujc-DX-HXP" firstAttribute="leading" secondItem="HRs-0d-j9h" secondAttribute="trailing" id="4wb-5n-00n"/>
                                                 <constraint firstItem="Ph9-9z-aWa" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="CA0-ft-JuY"/>
                                                 <constraint firstItem="HRs-0d-j9h" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="HwU-gP-SlW"/>
-                                                <constraint firstAttribute="trailing" secondItem="VbV-dt-dn2" secondAttribute="trailing" id="IiH-Q3-L4Z"/>
                                                 <constraint firstItem="012-1d-8yV" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="MFS-LK-Sdy"/>
-                                                <constraint firstItem="VbV-dt-dn2" firstAttribute="centerY" secondItem="aYQ-8x-smf" secondAttribute="centerY" multiplier="1.5" id="Se8-34-TZS"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ujc-DX-HXP" secondAttribute="trailing" id="SvG-bT-RO1"/>
                                                 <constraint firstItem="aYQ-8x-smf" firstAttribute="height" secondItem="CWE-s5-9gl" secondAttribute="height" multiplier="3/4" id="UEd-Dd-iUf"/>
                                                 <constraint firstItem="Ph9-9z-aWa" firstAttribute="centerY" secondItem="CWE-s5-9gl" secondAttribute="centerY" multiplier="25/16" id="WnQ-IX-BGB"/>
@@ -3370,7 +3351,6 @@
                                                 <constraint firstItem="aYQ-8x-smf" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="g2L-mH-crG"/>
                                                 <constraint firstItem="Ph9-9z-aWa" firstAttribute="top" secondItem="0Ea-Pl-qcE" secondAttribute="bottom" id="g6H-5M-sDn"/>
                                                 <constraint firstItem="aYQ-8x-smf" firstAttribute="top" secondItem="CWE-s5-9gl" secondAttribute="top" id="gOx-MB-6mb"/>
-                                                <constraint firstItem="zYS-xt-Lf5" firstAttribute="leading" secondItem="CWE-s5-9gl" secondAttribute="leading" id="hnE-Q0-ysB"/>
                                                 <constraint firstItem="012-1d-8yV" firstAttribute="centerY" secondItem="CWE-s5-9gl" secondAttribute="centerY" multiplier="27/16" id="shr-kq-hPZ"/>
                                                 <constraint firstItem="0Ea-Pl-qcE" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="vZU-PO-meG"/>
                                                 <constraint firstAttribute="bottom" secondItem="Ujc-DX-HXP" secondAttribute="bottom" id="vmg-dI-xow"/>
@@ -3380,10 +3360,9 @@
                                             <outlet property="buttonView" destination="HRs-0d-j9h" id="3Rg-Qh-CL1"/>
                                             <outlet property="explanationButton" destination="Ujc-DX-HXP" id="Faz-cR-N0R"/>
                                             <outlet property="imageViewCell" destination="aYQ-8x-smf" id="xaN-Vt-ZeT"/>
+                                            <outlet property="indicatorStack" destination="0Ea-Pl-qcE" id="CyM-US-qP7"/>
                                             <outlet property="leftImageIndicator" destination="oac-Eb-pCs" id="c8F-HR-MZB"/>
                                             <outlet property="movementLabel" destination="Ph9-9z-aWa" id="e9h-1x-47f"/>
-                                            <outlet property="nextImage" destination="VbV-dt-dn2" id="aID-WQ-1uZ"/>
-                                            <outlet property="previousImage" destination="zYS-xt-Lf5" id="TAd-1o-I3p"/>
                                             <outlet property="rightImageIndicator" destination="5tG-C5-rN7" id="yn5-6I-O0A"/>
                                             <outlet property="setsRepsLabel" destination="012-1d-8yV" id="Tgu-4S-WdA"/>
                                         </connections>
