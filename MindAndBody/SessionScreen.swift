@@ -807,40 +807,31 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         backgroundViewExplanation.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
         
-//        // Contents
-//        //
-//        explanationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-//        explanationLabel.textColor = .black
-//        explanationLabel.textAlignment = .natural
-//        explanationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-//        explanationLabel.numberOfLines = 0
-//        //
-//        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[selectedRow], comment: ""))
-//        let paragraphStyleEE = NSMutableParagraphStyle()
-//        paragraphStyleEE.alignment = .natural
-//        //
-//        attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
-//        //
-//        explanationLabel.attributedText = attributedStringE
-//        //
-//        explanationLabel.frame = CGRect(x: 10, y: 10, width: bounds.width - 20, height: 0)
-//        explanationLabel.sizeToFit()
-        
-        
+        //
+        // Contents
+        explanationLabel.textAlignment = .natural
+        explanationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        explanationLabel.numberOfLines = 0
+        //
         explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionArray[selectedRow], comment: ""), howTo: NSLocalizedString("howToTest", comment: ""), toAvoid: NSLocalizedString("toAvoidTest", comment: ""))
-        explanationLabel.frame = CGRect(x: 10, y: 10, width: bounds.width - 20, height: 0)
+        explanationLabel.frame = CGRect(x: 10, y: 10, width: scrollViewExplanation.frame.size.width - 10, height: 0)
+        //
+        explanationLabel.sizeToFit()
         
+        //
         // Scroll View
         scrollViewExplanation.addSubview(explanationLabel)
         scrollViewExplanation.contentSize = CGSize(width: bounds.width, height: explanationLabel.frame.size.height + 20)
         //
         scrollViewExplanation.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         
+        //
         // Add Views
         UIApplication.shared.keyWindow?.addSubview(backgroundViewExplanation)
         UIApplication.shared.keyWindow?.addSubview(scrollViewExplanation)
         
         //
+        // Animate
         UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 1.5) + 20
             self.backgroundViewExplanation.alpha = 0.5

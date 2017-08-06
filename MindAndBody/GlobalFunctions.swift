@@ -117,15 +117,23 @@ extension UIViewController {
     // Format Explanation Text
     func formatExplanationText(title:String, howTo:String, toAvoid:String) -> NSAttributedString {
         //
+        let return1 = NSMutableAttributedString(string: "\n")
+        let return2 = NSMutableAttributedString(string: "\n\n")
+        //
         // Title
         let titleString = NSMutableAttributedString(string: title)
         titleString.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-light", size: 22)!, range: NSMakeRange(0, titleString.length))
-        titleString.addAttribute(NSParagraphStyleAttributeName, value: NSTextAlignment.center, range: NSMakeRange(0, titleString.length))
+        //
+        let centering = NSMutableParagraphStyle()
+        centering.alignment = .center
+        titleString.addAttribute(NSParagraphStyleAttributeName, value: centering, range: NSMakeRange(0, titleString.length))
+        
+        //
+        titleString.append(return2)
         
         //
         // Title Attributes
         let subTitleFont = [NSFontAttributeName : UIFont(name: "SFUIDisplay-light", size: 22)]
-        let subTitleAlignment = [NSParagraphStyleAttributeName : NSTextAlignment.left]
         //
         // Bullet Point Attributes
         let bulletPointFont = [NSFontAttributeName : UIFont(name: "SFUIDisplay-thin", size: 22)]
@@ -141,7 +149,8 @@ extension UIViewController {
         // How To
         let howToTitle = NSMutableAttributedString(string: NSLocalizedString("howTo", comment: ""))
         howToTitle.addAttributes(subTitleFont, range: NSMakeRange(0, howToTitle.length))
-        howToTitle.addAttributes(subTitleAlignment, range: NSMakeRange(0, howToTitle.length))
+        //
+        howToTitle.append(return1)
         //
         //
         let howToString = NSMutableAttributedString(string: "")
@@ -158,12 +167,15 @@ extension UIViewController {
         }
         //
         howToString.addAttributes(bulletPointFont, range: NSMakeRange(0, howToString.length))
+        //
+        howToString.append(return1)
         
         //
         // To Avoid
         let toAvoidTitle = NSMutableAttributedString(string: NSLocalizedString("toAvoid", comment: ""))
         toAvoidTitle.addAttributes(subTitleFont, range: NSMakeRange(0, toAvoidTitle.length))
-        toAvoidTitle.addAttributes(subTitleAlignment, range: NSMakeRange(0, toAvoidTitle.length))
+        //
+        toAvoidTitle.append(return1)
         //
         //
         let toAvoidString = NSMutableAttributedString(string: "")
@@ -180,17 +192,18 @@ extension UIViewController {
         }
         //
         toAvoidString.addAttributes(bulletPointFont, range: NSMakeRange(0, toAvoidString.length))
+        //
+        toAvoidString.append(return1)
         
         //
         // Return
-        let returnString = NSMutableAttributedString(string: "\n")
-        let returnString2 = NSMutableAttributedString(string: "\n\n")
-        //
-        //let return1 = titleString + returnString2 + howToTitle + returnString + howToString
-        //let return2 = returnString2 + toAvoidTitle + returnString + toAvoidString + returnString
-        
-        let returnS = titleString + "\n\n" + howToTitle + "\n" + howToString + "\n\n" + toAvoidTitle + "\n" + toAvoidString + "\n"
-        return returnS
+        let fullString = NSMutableAttributedString(string: "")
+        fullString.append(titleString)
+        fullString.append(howToTitle)
+        fullString.append(howToString)
+        fullString.append(toAvoidTitle)
+        fullString.append(toAvoidString)
+        return fullString
     }
 
     
