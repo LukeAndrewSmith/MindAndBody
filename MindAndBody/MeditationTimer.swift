@@ -1235,6 +1235,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
 
     // Prests
     @IBAction func presetsAction(_ sender: Any) {
+        selectedItem = 0
         //
         self.duration.isEnabled = false
         self.startingBell.isEnabled = false
@@ -1244,40 +1245,20 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         presetsTableView.reloadData()
         //
-
-        selectedItem = 0
-        //
-        let presetsHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
-        let presetsWidth = UIScreen.main.bounds.width - 20
-        //
-        presetsTableView.frame = CGRect(x: 10, y: view.frame.maxY, width: presetsWidth, height: presetsHeight)
-        //
-        backgroundViewSelection.alpha = 0
-        backgroundViewSelection.frame = UIScreen.main.bounds
-        // Present
         UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: presetsTableView)
-        // Animate table fade and size
-        // Positiona
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            //
-            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY - presetsHeight - 10, width: presetsWidth, height: presetsHeight)
-            //
-            self.backgroundViewSelection.alpha = 0.5
-        }, completion: nil)
         //
-   
+        animateActionSheetUp(actionSheet: presetsTableView, actionSheetHeight: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88, backgroundView: backgroundViewSelection)
     }
 
     // Duration
     @IBAction func durationAction(_ sender: Any) {
+        selectedItem = 1
+        didChangeDuration = false
         //
         okButton.isEnabled = true
         //
-        selectedItem = 1
-        didChangeDuration = false
         // View
-        //
         let selectionWidth = self.view.frame.size.width - 20
         let selectionHeight = CGFloat(147 + 49)
         //

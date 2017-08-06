@@ -328,13 +328,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.selectionStyle = .none
             
 
-            //
-            // Images
-            if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
-            } else {
-                cell.imageViewCell.image = targetAreaArray[indexPath.row]
-            }
             // New image to display
             // Demonstration on left
             if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
@@ -814,24 +807,28 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         backgroundViewExplanation.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
         
-        // Contents
-        //
-        explanationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-        explanationLabel.textColor = .black
-        explanationLabel.textAlignment = .natural
-        explanationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-        explanationLabel.numberOfLines = 0
-        //
-        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[selectedRow], comment: ""))
-        let paragraphStyleEE = NSMutableParagraphStyle()
-        paragraphStyleEE.alignment = .natural
-        //
-        attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
-        //
-        explanationLabel.attributedText = attributedStringE
-        //
+//        // Contents
+//        //
+//        explanationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+//        explanationLabel.textColor = .black
+//        explanationLabel.textAlignment = .natural
+//        explanationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+//        explanationLabel.numberOfLines = 0
+//        //
+//        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[selectedRow], comment: ""))
+//        let paragraphStyleEE = NSMutableParagraphStyle()
+//        paragraphStyleEE.alignment = .natural
+//        //
+//        attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
+//        //
+//        explanationLabel.attributedText = attributedStringE
+//        //
+//        explanationLabel.frame = CGRect(x: 10, y: 10, width: bounds.width - 20, height: 0)
+//        explanationLabel.sizeToFit()
+        
+        
+        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionArray[selectedRow], comment: ""), howTo: NSLocalizedString("howToTest", comment: ""), toAvoid: NSLocalizedString("toAvoidTest", comment: ""))
         explanationLabel.frame = CGRect(x: 10, y: 10, width: bounds.width - 20, height: 0)
-        explanationLabel.sizeToFit()
         
         // Scroll View
         scrollViewExplanation.addSubview(explanationLabel)

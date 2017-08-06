@@ -106,6 +106,7 @@
 		07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */; };
 		07B65F7B1E624A73004DBB97 /* MeditationScreenGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B65F7A1E624A73004DBB97 /* MeditationScreenGuided.swift */; };
 		07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C081E8BDF9500A851EF /* YogaScreen.swift */; };
+		07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */; };
 		07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2D3BB1EBA88CF000770DE /* MindBody.swift */; };
 		07CB04371E604653002066CD /* MeditationChoiceGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CB04361E604653002066CD /* MeditationChoiceGuided.swift */; };
 		07CB04391E6049DF002066CD /* MeditationGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CB04381E6049DF002066CD /* MeditationGuided.swift */; };
@@ -219,6 +220,7 @@
 		07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioScreen.swift; sourceTree = "<group>"; };
 		07B65F7A1E624A73004DBB97 /* MeditationScreenGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationScreenGuided.swift; sourceTree = "<group>"; };
 		07BE8C081E8BDF9500A851EF /* YogaScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreen.swift; sourceTree = "<group>"; };
+		07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		07C2D3BB1EBA88CF000770DE /* MindBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindBody.swift; sourceTree = "<group>"; };
 		07CB04361E604653002066CD /* MeditationChoiceGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationChoiceGuided.swift; sourceTree = "<group>"; };
 		07CB04381E6049DF002066CD /* MeditationGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationGuided.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 			isa = PBXGroup;
 			children = (
 				07248E061F31CB5100230EAF /* GlobalVariables.swift */,
+				07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */,
 				07C2D3BB1EBA88CF000770DE /* MindBody.swift */,
 				07530C971E96716300BD33EC /* Choice Screens */,
 				07530C981E96717B00BD33EC /* Session Screens */,
@@ -882,6 +885,7 @@
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,
 				07A42E451EDDC3000047E8F1 /* OxygenOverloadScreen.swift in Sources */,
 				07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */,
+				07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */,
 				077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */,
 				077AC1001DA54C810026895B /* Lessons.swift in Sources */,
 				077AC1021DA573210026895B /* Settings.swift in Sources */,

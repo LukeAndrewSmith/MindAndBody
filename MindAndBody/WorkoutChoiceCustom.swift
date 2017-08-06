@@ -16,7 +16,6 @@ import UIKit
 class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
-
     
     //
     // Arrays -----------------------------------------------------------------------------------------------------
@@ -46,7 +45,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     //
     var workoutArray: [String] = []
     //
-    var demonstrationArray: [UIImage] = []
+    var demonstrationArray: [[UIImage]] = []
     //
     var targetAreaArray: [UIImage] = []
     //
@@ -253,88 +252,88 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
     ]
     
     // Demonstration Array
-    var demonstrationDictionary: [Int : UIImage] =
+    var demonstrationDictionary: [Int : [UIImage]] =
         [
             // Legs (Quads)
-            0: #imageLiteral(resourceName: "Test 2"),
-            1: #imageLiteral(resourceName: "Test 2"),
-            2: #imageLiteral(resourceName: "Test 2"),
-            3: #imageLiteral(resourceName: "Test 2"),
-            4: #imageLiteral(resourceName: "Test 2"),
-            5: #imageLiteral(resourceName: "Test 2"),
+            0: [#imageLiteral(resourceName: "Test 2")],
+            1: [#imageLiteral(resourceName: "Test 2")],
+            2: [#imageLiteral(resourceName: "Test 2")],
+            3: [#imageLiteral(resourceName: "Test 2")],
+            4: [#imageLiteral(resourceName: "Test 2")],
+            5: [#imageLiteral(resourceName: "Test 2")],
             // Legs (Hamstrings/Glutes)
-            6: #imageLiteral(resourceName: "Test 2"),
-            7: #imageLiteral(resourceName: "Test 2"),
-            8: #imageLiteral(resourceName: "Test 2"),
-            9: #imageLiteral(resourceName: "Test 2"),
-            10: #imageLiteral(resourceName: "Test 2"),
-            11: #imageLiteral(resourceName: "Test 2"),
-            12: #imageLiteral(resourceName: "Test 2"),
+            6: [#imageLiteral(resourceName: "Test 2")],
+            7: [#imageLiteral(resourceName: "Test 2")],
+            8: [#imageLiteral(resourceName: "Test 2")],
+            9: [#imageLiteral(resourceName: "Test 2")],
+            10: [#imageLiteral(resourceName: "Test 2")],
+            11: [#imageLiteral(resourceName: "Test 2")],
+            12: [#imageLiteral(resourceName: "Test 2")],
             // Legs (General)
-            13: #imageLiteral(resourceName: "Test 2"),
-            14: #imageLiteral(resourceName: "Test 2"),
-            15: #imageLiteral(resourceName: "Test 2"),
-            16: #imageLiteral(resourceName: "Test 2"),
+            13: [#imageLiteral(resourceName: "Test 2")],
+            14: [#imageLiteral(resourceName: "Test 2")],
+            15: [#imageLiteral(resourceName: "Test 2")],
+            16: [#imageLiteral(resourceName: "Test 2")],
             // Pull (Back)
-            17: #imageLiteral(resourceName: "Test 2"),
-            18: #imageLiteral(resourceName: "Test 2"),
-            19: #imageLiteral(resourceName: "Test 2"),
-            20: #imageLiteral(resourceName: "Test 2"),
-            21: #imageLiteral(resourceName: "Test 2"),
-            22: #imageLiteral(resourceName: "Test 2"),
-            23: #imageLiteral(resourceName: "Test 2"),
-            24: #imageLiteral(resourceName: "Test 2"),
-            25: #imageLiteral(resourceName: "Test 2"),
-            26: #imageLiteral(resourceName: "Test 2"),
+            17: [#imageLiteral(resourceName: "Test 2")],
+            18: [#imageLiteral(resourceName: "Test 2")],
+            19: [#imageLiteral(resourceName: "Test 2")],
+            20: [#imageLiteral(resourceName: "Test 2")],
+            21: [#imageLiteral(resourceName: "Test 2")],
+            22: [#imageLiteral(resourceName: "Test 2")],
+            23: [#imageLiteral(resourceName: "Test 2")],
+            24: [#imageLiteral(resourceName: "Test 2")],
+            25: [#imageLiteral(resourceName: "Test 2")],
+            26: [#imageLiteral(resourceName: "Test 2")],
             // Pull (Upper Back)
-            27: #imageLiteral(resourceName: "Test 2"),
-            28: #imageLiteral(resourceName: "Test 2"),
-            29: #imageLiteral(resourceName: "Test 2"),
-            30: #imageLiteral(resourceName: "Test 2"),
+            27: [#imageLiteral(resourceName: "Test 2")],
+            28: [#imageLiteral(resourceName: "Test 2")],
+            29: [#imageLiteral(resourceName: "Test 2")],
+            30: [#imageLiteral(resourceName: "Test 2")],
             // Pull (Rear Delts)
-            31: #imageLiteral(resourceName: "Test 2"),
+            31: [#imageLiteral(resourceName: "Test 2")],
             // Pull (Traps)
-            32: #imageLiteral(resourceName: "Test 2"),
-            33: #imageLiteral(resourceName: "Test 2"),
+            32: [#imageLiteral(resourceName: "Test 2")],
+            33: [#imageLiteral(resourceName: "Test 2")],
             // Pull (Biceps)
-            34: #imageLiteral(resourceName: "Test 2"),
-            35: #imageLiteral(resourceName: "Test 2"),
-            36: #imageLiteral(resourceName: "Test 2"),
-            37: #imageLiteral(resourceName: "Test 2"),
+            34: [#imageLiteral(resourceName: "Test 2")],
+            35: [#imageLiteral(resourceName: "Test 2")],
+            36: [#imageLiteral(resourceName: "Test 2")],
+            37: [#imageLiteral(resourceName: "Test 2")],
             // Pull (Forearms)
-            38: #imageLiteral(resourceName: "Test 2"),
-            39: #imageLiteral(resourceName: "Test 2"),
-            40: #imageLiteral(resourceName: "Test 2"),
+            38: [#imageLiteral(resourceName: "Test 2")],
+            39: [#imageLiteral(resourceName: "Test 2")],
+            40: [#imageLiteral(resourceName: "Test 2")],
             // Push (Chest)
-            41: #imageLiteral(resourceName: "Test 2"),
-            42: #imageLiteral(resourceName: "Test 2"),
-            43: #imageLiteral(resourceName: "Test 2"),
-            44: #imageLiteral(resourceName: "Test 2"),
-            45: #imageLiteral(resourceName: "Test 2"),
-            46: #imageLiteral(resourceName: "Test 2"),
-            47: #imageLiteral(resourceName: "Test 2"),
-            48: #imageLiteral(resourceName: "Test 2"),
-            49: #imageLiteral(resourceName: "Test 2"),
+            41: [#imageLiteral(resourceName: "Test 2")],
+            42: [#imageLiteral(resourceName: "Test 2")],
+            43: [#imageLiteral(resourceName: "Test 2")],
+            44: [#imageLiteral(resourceName: "Test 2")],
+            45: [#imageLiteral(resourceName: "Test 2")],
+            46: [#imageLiteral(resourceName: "Test 2")],
+            47: [#imageLiteral(resourceName: "Test 2")],
+            48: [#imageLiteral(resourceName: "Test 2")],
+            49: [#imageLiteral(resourceName: "Test 2")],
             // Push (Shoulders)
-            50: #imageLiteral(resourceName: "Test 2"),
-            51: #imageLiteral(resourceName: "Test 2"),
-            52: #imageLiteral(resourceName: "Test 2"),
-            53: #imageLiteral(resourceName: "Test 2"),
+            50: [#imageLiteral(resourceName: "Test 2")],
+            51: [#imageLiteral(resourceName: "Test 2")],
+            52: [#imageLiteral(resourceName: "Test 2")],
+            53: [#imageLiteral(resourceName: "Test 2")],
             // Push (Triceps)
-            54: #imageLiteral(resourceName: "Test 2"),
-            55: #imageLiteral(resourceName: "Test 2"),
-            56: #imageLiteral(resourceName: "Test 2"),
-            57: #imageLiteral(resourceName: "Test 2"),
-            58: #imageLiteral(resourceName: "Test 2"),
+            54: [#imageLiteral(resourceName: "Test 2")],
+            55: [#imageLiteral(resourceName: "Test 2")],
+            56: [#imageLiteral(resourceName: "Test 2")],
+            57: [#imageLiteral(resourceName: "Test 2")],
+            58: [#imageLiteral(resourceName: "Test 2")],
             // Calves
-            59: #imageLiteral(resourceName: "Test 2"),
-            60: #imageLiteral(resourceName: "Test 2"),
+            59: [#imageLiteral(resourceName: "Test 2")],
+            60: [#imageLiteral(resourceName: "Test 2")],
             // Abs/Core
-            61: #imageLiteral(resourceName: "Test 2"),
-            62: #imageLiteral(resourceName: "Test 2"),
-            63: #imageLiteral(resourceName: "Test 2"),
-            64: #imageLiteral(resourceName: "Test 2"),
-            65: #imageLiteral(resourceName: "Test 2"),
+            61: [#imageLiteral(resourceName: "Test 2")],
+            62: [#imageLiteral(resourceName: "Test 2")],
+            63: [#imageLiteral(resourceName: "Test 2")],
+            64: [#imageLiteral(resourceName: "Test 2")],
+            65: [#imageLiteral(resourceName: "Test 2")]
     ]
     
     // Target Area Array
@@ -1298,7 +1297,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                         //
                         // Cell Image
-                        cell.imageView?.image = demonstrationDictionary[keyIndex]
+                        cell.imageView?.image = demonstrationDictionary[keyIndex]?[0]
                         cell.imageView?.isUserInteractionEnabled = true
                         // Image Tap
                         let imageTap = UITapGestureRecognizer()
@@ -1353,7 +1352,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                     //
                     // Cell Image
-                    cell.imageView?.image = demonstrationDictionary[keyIndex]
+                    cell.imageView?.image = demonstrationDictionary[keyIndex]?[0]
                     cell.imageView?.isUserInteractionEnabled = true
                     // Image Tap
                     let imageTap = UITapGestureRecognizer()
@@ -1379,7 +1378,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             cell.textLabel?.textColor = .black
             cell.tintColor = .black
             // Cell Image
-            cell.imageView?.image = demonstrationDictionary[keyIndex]
+            cell.imageView?.image = demonstrationDictionary[keyIndex]?[0]
             cell.imageView?.isUserInteractionEnabled = true
             // Image Tap
             let imageTap = UITapGestureRecognizer()

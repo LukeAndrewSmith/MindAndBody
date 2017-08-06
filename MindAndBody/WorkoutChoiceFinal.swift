@@ -57,7 +57,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     var workoutMovementsDictionary: [Int : String] = [:]
     
     // Demonstration Dictionary
-    var demonstrationDictionary: [Int : UIImage] = [:]
+    var demonstrationDictionary: [Int : [UIImage]] = [:]
 
     // Target Area Dictionary
     var targetAreaDictionary: [Int: UIImage] = [:]
@@ -89,7 +89,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     var repsArray: [String] = []
     
     // Demonstration Array
-    var demonstrationArray: [UIImage] = []
+    var demonstrationArray: [[UIImage]] = []
     
     // Target Area Array
     var targetAreaArray: [UIImage] = []
@@ -506,179 +506,179 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     ]
     
     // Demonstration Array
-    var demonstrationDictionaryGym: [Int : UIImage] =
+    var demonstrationDictionaryGym: [Int : [UIImage]] =
         [
             // Gym ------------------------------------
             // Legs (Quads) ---------
-            0: #imageLiteral(resourceName: "Test"),
-            1: #imageLiteral(resourceName: "Test"),
-            2: #imageLiteral(resourceName: "Test"),
-            3: #imageLiteral(resourceName: "Test"),
-            4: #imageLiteral(resourceName: "Test"),
-            5: #imageLiteral(resourceName: "Test"),
+            0: [#imageLiteral(resourceName: "Test")],
+            1: [#imageLiteral(resourceName: "Test")],
+            2: [#imageLiteral(resourceName: "Test")],
+            3: [#imageLiteral(resourceName: "Test")],
+            4: [#imageLiteral(resourceName: "Test")],
+            5: [#imageLiteral(resourceName: "Test")],
             // Legs (Hamstrings/Glutes)
-            6: #imageLiteral(resourceName: "Test"),
-            7: #imageLiteral(resourceName: "Test"),
-            8: #imageLiteral(resourceName: "Test"),
-            9: #imageLiteral(resourceName: "Test"),
-            10: #imageLiteral(resourceName: "Test"),
-            11: #imageLiteral(resourceName: "Test"),
+            6: [#imageLiteral(resourceName: "Test")],
+            7: [#imageLiteral(resourceName: "Test")],
+            8: [#imageLiteral(resourceName: "Test")],
+            9: [#imageLiteral(resourceName: "Test")],
+            10: [#imageLiteral(resourceName: "Test")],
+            11: [#imageLiteral(resourceName: "Test")],
             // Legs (General)
-            12: #imageLiteral(resourceName: "Test"),
-            13: #imageLiteral(resourceName: "Test"),
-            14: #imageLiteral(resourceName: "Test"),
+            12: [#imageLiteral(resourceName: "Test")],
+            13: [#imageLiteral(resourceName: "Test")],
+            14: [#imageLiteral(resourceName: "Test")],
             // Legs (Calves)
-            15: #imageLiteral(resourceName: "Test"),
-            16: #imageLiteral(resourceName: "Test"),
+            15: [#imageLiteral(resourceName: "Test")],
+            16: [#imageLiteral(resourceName: "Test")],
             // Pull (Back) ---------
-            17: #imageLiteral(resourceName: "Test"),
-            18: #imageLiteral(resourceName: "Test"),
-            19: #imageLiteral(resourceName: "Test"),
-            20: #imageLiteral(resourceName: "Test"),
-            21: #imageLiteral(resourceName: "Test"),
-            22: #imageLiteral(resourceName: "Test"),
-            23: #imageLiteral(resourceName: "Test"),
-            24: #imageLiteral(resourceName: "Test"),
-            25: #imageLiteral(resourceName: "Test"),
-            26: #imageLiteral(resourceName: "Test"),
-            27: #imageLiteral(resourceName: "Test"),
+            17: [#imageLiteral(resourceName: "Test")],
+            18: [#imageLiteral(resourceName: "Test")],
+            19: [#imageLiteral(resourceName: "Test")],
+            20: [#imageLiteral(resourceName: "Test")],
+            21: [#imageLiteral(resourceName: "Test")],
+            22: [#imageLiteral(resourceName: "Test")],
+            23: [#imageLiteral(resourceName: "Test")],
+            24: [#imageLiteral(resourceName: "Test")],
+            25: [#imageLiteral(resourceName: "Test")],
+            26: [#imageLiteral(resourceName: "Test")],
+            27: [#imageLiteral(resourceName: "Test")],
             // Pull (Upper Back)
-            28: #imageLiteral(resourceName: "Test"),
-            29: #imageLiteral(resourceName: "Test"),
-            30: #imageLiteral(resourceName: "Test"),
-            31: #imageLiteral(resourceName: "Test"),
+            28: [#imageLiteral(resourceName: "Test")],
+            29: [#imageLiteral(resourceName: "Test")],
+            30: [#imageLiteral(resourceName: "Test")],
+            31: [#imageLiteral(resourceName: "Test")],
             // Pull (Rear Delts)
-            32: #imageLiteral(resourceName: "Test"),
+            32: [#imageLiteral(resourceName: "Test")],
             // Pull (Traps)
-            33: #imageLiteral(resourceName: "Test"),
+            33: [#imageLiteral(resourceName: "Test")],
             // Pull (Biceps)
-            34: #imageLiteral(resourceName: "Test"),
-            35: #imageLiteral(resourceName: "Test"),
-            36: #imageLiteral(resourceName: "Test"),
-            37: #imageLiteral(resourceName: "Test"),
+            34: [#imageLiteral(resourceName: "Test")],
+            35: [#imageLiteral(resourceName: "Test")],
+            36: [#imageLiteral(resourceName: "Test")],
+            37: [#imageLiteral(resourceName: "Test")],
             // Pull (Forearms)
-            38: #imageLiteral(resourceName: "Test"),
-            39: #imageLiteral(resourceName: "Test"),
-            40: #imageLiteral(resourceName: "Test"),
+            38: [#imageLiteral(resourceName: "Test")],
+            39: [#imageLiteral(resourceName: "Test")],
+            40: [#imageLiteral(resourceName: "Test")],
             // Push (Chest) ---------
-            41: #imageLiteral(resourceName: "Test"),
-            42: #imageLiteral(resourceName: "Test"),
-            43: #imageLiteral(resourceName: "Test"),
-            44: #imageLiteral(resourceName: "Test"),
-            45: #imageLiteral(resourceName: "Test"),
-            46: #imageLiteral(resourceName: "Test"),
-            47: #imageLiteral(resourceName: "Test"),
-            48: #imageLiteral(resourceName: "Test"),
-            49: #imageLiteral(resourceName: "Test"),
-            50: #imageLiteral(resourceName: "Test"),
+            41: [#imageLiteral(resourceName: "Test")],
+            42: [#imageLiteral(resourceName: "Test")],
+            43: [#imageLiteral(resourceName: "Test")],
+            44: [#imageLiteral(resourceName: "Test")],
+            45: [#imageLiteral(resourceName: "Test")],
+            46: [#imageLiteral(resourceName: "Test")],
+            47: [#imageLiteral(resourceName: "Test")],
+            48: [#imageLiteral(resourceName: "Test")],
+            49: [#imageLiteral(resourceName: "Test")],
+            50: [#imageLiteral(resourceName: "Test")],
             // Push (Shoulders)
-            51: #imageLiteral(resourceName: "Test"),
-            52: #imageLiteral(resourceName: "Test"),
-            53: #imageLiteral(resourceName: "Test"),
-            54: #imageLiteral(resourceName: "Test"),
+            51: [#imageLiteral(resourceName: "Test")],
+            52: [#imageLiteral(resourceName: "Test")],
+            53: [#imageLiteral(resourceName: "Test")],
+            54: [#imageLiteral(resourceName: "Test")],
             // Push (Triceps)
-            55: #imageLiteral(resourceName: "Test"),
-            56: #imageLiteral(resourceName: "Test"),
-            57: #imageLiteral(resourceName: "Test"),
-            58: #imageLiteral(resourceName: "Test"),
-            59: #imageLiteral(resourceName: "Test"),
+            55: [#imageLiteral(resourceName: "Test")],
+            56: [#imageLiteral(resourceName: "Test")],
+            57: [#imageLiteral(resourceName: "Test")],
+            58: [#imageLiteral(resourceName: "Test")],
+            59: [#imageLiteral(resourceName: "Test")],
             // Full Body
-            60: #imageLiteral(resourceName: "Test"),
+            60: [#imageLiteral(resourceName: "Test")],
             // BodyWeight ------------------------------------
             // Legs (General) ---------
-            61: #imageLiteral(resourceName: "Test"),
-            62: #imageLiteral(resourceName: "Test"),
-            63: #imageLiteral(resourceName: "Test"),
-            64: #imageLiteral(resourceName: "Test"),
-            65: #imageLiteral(resourceName: "Test"),
-            66: #imageLiteral(resourceName: "Test"),
-            67: #imageLiteral(resourceName: "Test"),
-            68: #imageLiteral(resourceName: "Test"),
-            69: #imageLiteral(resourceName: "Test"),
+            61: [#imageLiteral(resourceName: "Test")],
+            62: [#imageLiteral(resourceName: "Test")],
+            63: [#imageLiteral(resourceName: "Test")],
+            64: [#imageLiteral(resourceName: "Test")],
+            65: [#imageLiteral(resourceName: "Test")],
+            66: [#imageLiteral(resourceName: "Test")],
+            67: [#imageLiteral(resourceName: "Test")],
+            68: [#imageLiteral(resourceName: "Test")],
+            69: [#imageLiteral(resourceName: "Test")],
             // Legs (Hamstrings)
-            70: #imageLiteral(resourceName: "Test"),
-            71: #imageLiteral(resourceName: "Test"),
+            70: [#imageLiteral(resourceName: "Test")],
+            71: [#imageLiteral(resourceName: "Test")],
             // Legs (Glutes)
-            72: #imageLiteral(resourceName: "Test"),
-            73: #imageLiteral(resourceName: "Test"),
-            74: #imageLiteral(resourceName: "Test"),
-            75: #imageLiteral(resourceName: "Test"),
-            76: #imageLiteral(resourceName: "Test"),
+            72: [#imageLiteral(resourceName: "Test")],
+            73: [#imageLiteral(resourceName: "Test")],
+            74: [#imageLiteral(resourceName: "Test")],
+            75: [#imageLiteral(resourceName: "Test")],
+            76: [#imageLiteral(resourceName: "Test")],
             // Legs (Calves)
-            77: #imageLiteral(resourceName: "Test"),
+            77: [#imageLiteral(resourceName: "Test")],
             // Pull (Back) ---------
-            78: #imageLiteral(resourceName: "Test"),
-            79: #imageLiteral(resourceName: "Test"),
-            80: #imageLiteral(resourceName: "Test"),
-            81: #imageLiteral(resourceName: "Test"),
-            82: #imageLiteral(resourceName: "Test"),
-            83: #imageLiteral(resourceName: "Test"),
-            84: #imageLiteral(resourceName: "Test"),
-            85: #imageLiteral(resourceName: "Test"),
+            78: [#imageLiteral(resourceName: "Test")],
+            79: [#imageLiteral(resourceName: "Test")],
+            80: [#imageLiteral(resourceName: "Test")],
+            81: [#imageLiteral(resourceName: "Test")],
+            82: [#imageLiteral(resourceName: "Test")],
+            83: [#imageLiteral(resourceName: "Test")],
+            84: [#imageLiteral(resourceName: "Test")],
+            85: [#imageLiteral(resourceName: "Test")],
             // Pull (Traps)
-            86: #imageLiteral(resourceName: "Test"),
-            87: #imageLiteral(resourceName: "Test"),
-            88: #imageLiteral(resourceName: "Test"),
+            86: [#imageLiteral(resourceName: "Test")],
+            87: [#imageLiteral(resourceName: "Test")],
+            88: [#imageLiteral(resourceName: "Test")],
             // Pull (Rear Delts)
-            89: #imageLiteral(resourceName: "Test"),
+            89: [#imageLiteral(resourceName: "Test")],
             // Push (Chest) ---------
-            90: #imageLiteral(resourceName: "Test"),
+            90: [#imageLiteral(resourceName: "Test")],
             // Push (Tricep)
-            91: #imageLiteral(resourceName: "Test"),
-            92: #imageLiteral(resourceName: "Test"),
-            93: #imageLiteral(resourceName: "Test"),
+            91: [#imageLiteral(resourceName: "Test")],
+            92: [#imageLiteral(resourceName: "Test")],
+            93: [#imageLiteral(resourceName: "Test")],
             // Push (Chest & Tricep)
-            94: #imageLiteral(resourceName: "Test"),
+            94: [#imageLiteral(resourceName: "Test")],
             // Push (Shoulder)
-            95: #imageLiteral(resourceName: "Test"),
-            96: #imageLiteral(resourceName: "Test"),
-            97: #imageLiteral(resourceName: "Test"),
-            98: #imageLiteral(resourceName: "Test"),
+            95: [#imageLiteral(resourceName: "Test")],
+            96: [#imageLiteral(resourceName: "Test")],
+            97: [#imageLiteral(resourceName: "Test")],
+            98: [#imageLiteral(resourceName: "Test")],
             // Core ---------
-            99: #imageLiteral(resourceName: "Test"),
-            100: #imageLiteral(resourceName: "Test"),
-            101: #imageLiteral(resourceName: "Test"),
-            102: #imageLiteral(resourceName: "Test"),
-            103: #imageLiteral(resourceName: "Test"),
-            104: #imageLiteral(resourceName: "Test"),
-            105: #imageLiteral(resourceName: "Test"),
-            106: #imageLiteral(resourceName: "Test"),
-            107: #imageLiteral(resourceName: "Test"),
+            99: [#imageLiteral(resourceName: "Test")],
+            100: [#imageLiteral(resourceName: "Test")],
+            101: [#imageLiteral(resourceName: "Test")],
+            102: [#imageLiteral(resourceName: "Test")],
+            103: [#imageLiteral(resourceName: "Test")],
+            104: [#imageLiteral(resourceName: "Test")],
+            105: [#imageLiteral(resourceName: "Test")],
+            106: [#imageLiteral(resourceName: "Test")],
+            107: [#imageLiteral(resourceName: "Test")],
             // General (Core) ---------
-            108: #imageLiteral(resourceName: "Test"),
+            108: [#imageLiteral(resourceName: "Test")],
             // General (Full Body)
-            109: #imageLiteral(resourceName: "Test"),
-            110: #imageLiteral(resourceName: "Test"),
+            109: [#imageLiteral(resourceName: "Test")],
+            110: [#imageLiteral(resourceName: "Test")],
             // General (Upper Body)
-            111: #imageLiteral(resourceName: "Test"),
-            112: #imageLiteral(resourceName: "Test"),
+            111: [#imageLiteral(resourceName: "Test")],
+            112: [#imageLiteral(resourceName: "Test")],
             // General (Cardio)
-            113: #imageLiteral(resourceName: "Test"),
-            114: #imageLiteral(resourceName: "Test"),
-            115: #imageLiteral(resourceName: "Test"),
-            116: #imageLiteral(resourceName: "Test"),
+            113: [#imageLiteral(resourceName: "Test")],
+            114: [#imageLiteral(resourceName: "Test")],
+            115: [#imageLiteral(resourceName: "Test")],
+            116: [#imageLiteral(resourceName: "Test")],
             // Isometric (Legs) ---------
-            117: #imageLiteral(resourceName: "Test"),
-            118: #imageLiteral(resourceName: "Test"),
-            119: #imageLiteral(resourceName: "Test"),
-            120: #imageLiteral(resourceName: "Test"),
-            121: #imageLiteral(resourceName: "Test"),
+            117: [#imageLiteral(resourceName: "Test")],
+            118: [#imageLiteral(resourceName: "Test")],
+            119: [#imageLiteral(resourceName: "Test")],
+            120: [#imageLiteral(resourceName: "Test")],
+            121: [#imageLiteral(resourceName: "Test")],
             // Isometric (Upper Body)
-            122: #imageLiteral(resourceName: "Test"),
-            123: #imageLiteral(resourceName: "Test"),
-            124: #imageLiteral(resourceName: "Test"),
+            122: [#imageLiteral(resourceName: "Test")],
+            123: [#imageLiteral(resourceName: "Test")],
+            124: [#imageLiteral(resourceName: "Test")],
             // Equiptment (Ball) ---------
-            125: #imageLiteral(resourceName: "Test"),
+            125: [#imageLiteral(resourceName: "Test")],
             // Equiptment (Bar)
-            126: #imageLiteral(resourceName: "Test"),
-            127: #imageLiteral(resourceName: "Test"),
-            128: #imageLiteral(resourceName: "Test"),
+            126: [#imageLiteral(resourceName: "Test")],
+            127: [#imageLiteral(resourceName: "Test")],
+            128: [#imageLiteral(resourceName: "Test")],
             // Equiptment (Bench/Step)
-            129: #imageLiteral(resourceName: "Test"),
-            130: #imageLiteral(resourceName: "Test"),
-            131: #imageLiteral(resourceName: "Test"),
-            132: #imageLiteral(resourceName: "Test"),
-            133: #imageLiteral(resourceName: "Test")
+            129: [#imageLiteral(resourceName: "Test")],
+            130: [#imageLiteral(resourceName: "Test")],
+            131: [#imageLiteral(resourceName: "Test")],
+            132: [#imageLiteral(resourceName: "Test")],
+            133: [#imageLiteral(resourceName: "Test")]
     ]
     
     // Target Area Array
@@ -2633,12 +2633,12 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                 cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[overviewArray[indexPath.section][indexPath.row]]!, comment: "")
                 cell.detailTextLabel?.text = repsDictionary[overviewArray[indexPath.section][indexPath.row]]
                 //
-                cell.imageView?.image = demonstrationDictionary[overviewArray[indexPath.section][indexPath.row]]
+                cell.imageView?.image = demonstrationDictionary[overviewArray[indexPath.section][indexPath.row]]?[0]
             } else {
                 cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[roundArray[indexPath.row]]!, comment: "")
                 cell.detailTextLabel?.text = repsDictionary[roundArray[indexPath.row]]
                 //
-                cell.imageView?.image = demonstrationDictionary[roundArray[indexPath.row]]
+                cell.imageView?.image = demonstrationDictionary[roundArray[indexPath.row]]?[0]
             }
             //
             // Text Label
@@ -2787,40 +2787,16 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func presetsButtonAction(_ sender: Any) {
         //
         UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
-        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
-        let tableWidth = UIScreen.main.bounds.width - 20
-        self.presetsTableView.frame = CGRect(x: 10, y: view.frame.maxY, width: tableWidth, height: tableHeight)
-        //
-        //
-        backgroundViewExpanded.alpha = 0
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: presetsTableView)
-        backgroundViewExpanded.frame = UIScreen.main.bounds
-        // Animate table fade and size
-        // Position
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY - tableHeight - 10, width: tableWidth, height: tableHeight)
-            self.presetsTableView.reloadData()
-            //
-            self.backgroundViewExpanded.alpha = 0.5
-        }, completion: nil)
         //
+        animateActionSheetUp(actionSheet: presetsTableView, actionSheetHeight: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88, backgroundView: backgroundViewExpanded)
     }
     
     
     // Dismiss presets table
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
-        let tableWidth = UIScreen.main.bounds.width - 20
-        //
-        UIView.animate(withDuration: animationTime2, animations: {
-            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
-            self.backgroundViewExpanded.alpha = 0
-        }, completion: { finished in
-            //
-            self.presetsTableView.removeFromSuperview()
-            self.backgroundViewExpanded.removeFromSuperview()
-        })
+        animateActionSheetDown(actionSheet: presetsTableView, actionSheetHeight: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88, backgroundView: backgroundViewExpanded)
     }
     
     
@@ -2835,53 +2811,20 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         // Get Image
         let sender = extraTap.view as! UIImageView
         let image = sender.image
-        // Get Image
-        // let index = demonstrationImage.indexWhere
-        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
-        
-        // Expanded Image
-        //
-        expandedImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height/2)
-        expandedImage.center.x = self.view.frame.size.width/2
-        expandedImage.center.y = (height/2) * 2.5
-        //
-        expandedImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        expandedImage.contentMode = .scaleAspectFit
-        expandedImage.isUserInteractionEnabled = true
-        //
         expandedImage.image = image
-        
-        // Background View
         //
-        backgroundViewImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height)
-        backgroundViewImage.backgroundColor = .black
-        backgroundViewImage.alpha = 0
         backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
         //
-        self.navigationItem.setHidesBackButton(true, animated: true)
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
         //
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.expandedImage.center.y = (height/2) * 1.5
-            self.backgroundViewImage.alpha = 0.5
-        }, completion: nil)
+        animateViewUp(animationView: expandedImage, backgroundView: backgroundViewImage)
     }
     
     // Retract image
     @IBAction func retractImage(_ sender: Any) {
         //
-        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
-        //
-        UIView.animate(withDuration: animationTime2, animations: {
-            self.expandedImage.center.y = (height/2) * 2.5
-            self.backgroundViewImage.alpha = 0
-        }, completion: { finished in
-            //
-            self.expandedImage.removeFromSuperview()
-            self.backgroundViewImage.removeFromSuperview()
-            self.navigationItem.setHidesBackButton(false, animated: true)
-        })
+        animateViewDown(animationView: expandedImage, backgroundView: backgroundViewImage)
     }
     
     

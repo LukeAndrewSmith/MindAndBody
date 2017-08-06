@@ -963,10 +963,10 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         presetsTableView.tableFooterView = UIView()
         
             
-        // TableView Cell action items
+        // Presets TableView
         //
-        // Movement table
-        presetsTableView.backgroundColor = colour1
+        // Movement tabl
+        presetsTableView.backgroundColor = colour2
         presetsTableView.delegate = self
         presetsTableView.dataSource = self
         presetsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
@@ -1200,40 +1200,16 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBAction func presetsButtonAction(_ sender: Any) {
         //
         UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
-        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
-        let tableWidth = UIScreen.main.bounds.width - 20
-        self.presetsTableView.frame = CGRect(x: 10, y: view.frame.maxY, width: tableWidth, height: tableHeight)
-        //
-        //
-        backgroundViewExpanded.alpha = 0
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: presetsTableView)
-        backgroundViewExpanded.frame = UIScreen.main.bounds
-        // Animate table fade and size
-        // Position
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.5, options: .curveEaseOut, animations: {
-            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY - tableHeight - 10, width: tableWidth, height: tableHeight)
-            self.presetsTableView.reloadData()
-            //
-            self.backgroundViewExpanded.alpha = 0.5
-        }, completion: nil)
         //
+        animateActionSheetUp(actionSheet: presetsTableView, actionSheetHeight: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88, backgroundView: backgroundViewExpanded)
     }
     
     
     // Dismiss presets table
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
-        let tableWidth = UIScreen.main.bounds.width - 20
-        //
-        UIView.animate(withDuration: 0.15, animations: {
-            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
-            self.backgroundViewExpanded.alpha = 0
-        }, completion: { finished in
-        //
-            self.presetsTableView.removeFromSuperview()
-            self.backgroundViewExpanded.removeFromSuperview()
-        })
+        animateActionSheetDown(actionSheet: presetsTableView, actionSheetHeight: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88, backgroundView: backgroundViewExpanded)
     }
     
     
@@ -1248,53 +1224,20 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         // Get Image
         let sender = extraTap.view as! UIImageView
         let image = sender.image
-        // Get Image
-        // let index = demonstrationImage.indexWhere
-        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
-        
-        // Expanded Image
-        //
-        expandedImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height/2)
-        expandedImage.center.x = self.view.frame.size.width/2
-        expandedImage.center.y = (height/2) * 2.5
-        //
-        expandedImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        expandedImage.contentMode = .scaleAspectFit
-        expandedImage.isUserInteractionEnabled = true
-        //
         expandedImage.image = image
-        
-        // Background View
         //
-        backgroundViewImage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height)
-        backgroundViewImage.backgroundColor = .black
-        backgroundViewImage.alpha = 0
         backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
         //
-        self.navigationItem.setHidesBackButton(true, animated: true)
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
         //
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.expandedImage.center.y = (height/2) * 1.5
-            self.backgroundViewImage.alpha = 0.5
-        }, completion: nil)
+        animateViewUp(animationView: expandedImage, backgroundView: backgroundViewImage)
     }
     
     // Retract image
     @IBAction func retractImage(_ sender: Any) {
         //
-        let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
-        //
-        UIView.animate(withDuration: animationTime2, animations: {
-            self.expandedImage.center.y = (height/2) * 2.5
-            self.backgroundViewImage.alpha = 0
-        }, completion: { finished in
-            //
-            self.expandedImage.removeFromSuperview()
-            self.backgroundViewImage.removeFromSuperview()
-            self.navigationItem.setHidesBackButton(false, animated: true)
-        })
+        animateViewDown(animationView: expandedImage, backgroundView: backgroundViewImage)
     }
     
     

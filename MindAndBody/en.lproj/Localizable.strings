@@ -86,7 +86,12 @@
 
     "remove" = "Remove";
 
-
+    // Test
+    "howTo" = "How To:";
+    "toAvoid" = "To Avoid:";
+    //
+    "howToTest" = "This is the first bullet point\nI wonder if this works\nHow about if I write a really long sentence like this one with many words\nWhat about a short one?";
+    "toAvoidTest" = "Don't do this\nDefinitely don't do this\nThis would be best to avoid";
 
 //
 // Calendar //

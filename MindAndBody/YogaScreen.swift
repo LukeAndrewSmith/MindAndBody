@@ -19,6 +19,7 @@ import AVFoundation
 class YogaOverviewTableViewCell: UITableViewCell {
     // Demonstration Image View
     @IBOutlet weak var demonstrationImageView: UIImageView!
+    @IBOutlet weak var imageIndicator: UIImageView!
     // Title Label
     @IBOutlet weak var poseLabel: UILabel!
     // Breaths Label
@@ -269,11 +270,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.breathsLabel?.textColor = colour1
             cell.breathsLabel.adjustsFontSizeToFitWidth = true
             
-            // Buttons
-//            cell.nextButton.tintColor = colour3
-//            cell.backButton.tintColor = colour4
-            //cell.nextButton.alpha = 0
-            //cell.backButton.alpha = 0
+            //
             cell.explanationButton.tintColor = colour1
             
             // Image
@@ -286,6 +283,13 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.demonstrationImageView.animationRepeatCount = 1
             //
             cell.demonstrationImageView.tag = indexPath.row
+            
+            //
+            if demonstrationArray[indexPath.row].count > 1 {
+                cell.imageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
+            } else {
+                cell.imageIndicator.image = nil
+            }
         
             // Image Tap
             let imageTap = UITapGestureRecognizer()
@@ -331,10 +335,12 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
             switch indexPath.row {
             case selectedRow - 1:
+                cell.imageIndicator.alpha = 0
                 cell.breathsLabel.alpha = 0
                 cell.poseLabel.alpha = 0
             //
             case selectedRow:
+                cell.imageIndicator.alpha = 1
                 cell.breathsLabel.alpha = 1
                 cell.poseLabel.alpha = 1
                 cell.explanationButton.alpha = 1
@@ -343,6 +349,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             case selectedRow + 1:
                 //
+                cell.imageIndicator.alpha = 0
                 cell.breathsLabel.alpha = 0
                 cell.poseLabel.alpha = 1
                 cell.explanationButton.alpha = 0
@@ -351,6 +358,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             default:
                 //
+                cell.imageIndicator.alpha = 1
                 cell.breathsLabel.alpha = 1
                 cell.poseLabel.alpha = 1
                 cell.explanationButton.alpha = 1
@@ -536,6 +544,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
                 // 1
+                cell.imageIndicator.alpha = 1
                 cell.breathsLabel.alpha = 1
                 cell.poseLabel.alpha = 1
                 cell.explanationButton.alpha = 1
@@ -579,6 +588,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
                 
                 // 1
+                cell.imageIndicator.alpha = 1
                 cell.breathsLabel.alpha = 1
                 cell.poseLabel.alpha = 1
                 cell.explanationButton.alpha = 1
@@ -587,11 +597,13 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 // - 1
                 if self.selectedRow > 0 {
                     cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! YogaOverviewTableViewCell
+                    cell.imageIndicator.alpha = 0
                     cell.breathsLabel.alpha = 0
                     cell.poseLabel.alpha = 0
                 }
                 // + 1
                 cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! YogaOverviewTableViewCell
+                cell.imageIndicator.alpha = 0
                 cell.breathsLabel.alpha = 0
                 cell.poseLabel.alpha = 1
                 cell.explanationButton.alpha = 0
