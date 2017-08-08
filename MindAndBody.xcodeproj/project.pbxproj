@@ -104,6 +104,7 @@
 		07A42E481EDDFD3C0047E8F1 /* CardioChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E471EDDFD3C0047E8F1 /* CardioChoiceCustom.swift */; };
 		07A42E4A1EDDFD7D0047E8F1 /* CardioChoiceFinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E491EDDFD7D0047E8F1 /* CardioChoiceFinal.swift */; };
 		07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */; };
+		07B4E00F1F377E1E00C77807 /* TestBackground.caf in Resources */ = {isa = PBXBuildFile; fileRef = 07B4E00E1F377E1E00C77807 /* TestBackground.caf */; };
 		07B65F7B1E624A73004DBB97 /* MeditationScreenGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B65F7A1E624A73004DBB97 /* MeditationScreenGuided.swift */; };
 		07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C081E8BDF9500A851EF /* YogaScreen.swift */; };
 		07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */; };
@@ -218,6 +219,7 @@
 		07A42E471EDDFD3C0047E8F1 /* CardioChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioChoiceCustom.swift; sourceTree = "<group>"; };
 		07A42E491EDDFD7D0047E8F1 /* CardioChoiceFinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioChoiceFinal.swift; sourceTree = "<group>"; };
 		07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioScreen.swift; sourceTree = "<group>"; };
+		07B4E00E1F377E1E00C77807 /* TestBackground.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestBackground.caf; sourceTree = "<group>"; };
 		07B65F7A1E624A73004DBB97 /* MeditationScreenGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationScreenGuided.swift; sourceTree = "<group>"; };
 		07BE8C081E8BDF9500A851EF /* YogaScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreen.swift; sourceTree = "<group>"; };
 		07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
@@ -593,23 +595,8 @@
 		078C59541EC893EA00FA1890 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				076C680E1ED1BFAD009160C2 /* Tibetan Chimes.caf */,
-				076C680F1ED1BFAD009160C2 /* Tibetan Singing Bowl (Low).caf */,
-				076C68101ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(x4).caf */,
-				076C68111ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(Singing).caf */,
-				076C68121ED1BFAD009160C2 /* Tibetan Singing Bowl (High).caf */,
-				076C68131ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(x4).caf */,
-				076C68141ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(Singing).caf */,
-				076C68151ED1BFAD009160C2 /* Australian Rain Stick.caf */,
-				076C68161ED1BFAD009160C2 /* Australian Rain Stick (x2).caf */,
-				076C68171ED1BFAD009160C2 /* Australian Rain Stick (2 sticks).caf */,
-				076C68181ED1BFAD009160C2 /* Wind Chimes.caf */,
-				076C68191ED1BFAD009160C2 /* Gambang (Wood)(Up).caf */,
-				076C681A1ED1BFAD009160C2 /* Gambang (Wood)(Down).caf */,
-				076C681B1ED1BFAD009160C2 /* Gambang (Metal).caf */,
-				076C681C1ED1BFAD009160C2 /* Indonesian Frog.caf */,
-				076C681D1ED1BFAD009160C2 /* Cow Bell (Small).caf */,
-				076C681E1ED1BFAD009160C2 /* Cow Bell (Big).caf */,
+				07B4E00B1F3774E500C77807 /* Background Sounds */,
+				07B4E00A1F3774DB00C77807 /* Bells */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -646,6 +633,38 @@
 				07A42E471EDDFD3C0047E8F1 /* CardioChoiceCustom.swift */,
 			);
 			name = Custom;
+			sourceTree = "<group>";
+		};
+		07B4E00A1F3774DB00C77807 /* Bells */ = {
+			isa = PBXGroup;
+			children = (
+				076C680E1ED1BFAD009160C2 /* Tibetan Chimes.caf */,
+				076C680F1ED1BFAD009160C2 /* Tibetan Singing Bowl (Low).caf */,
+				076C68101ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(x4).caf */,
+				076C68111ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(Singing).caf */,
+				076C68121ED1BFAD009160C2 /* Tibetan Singing Bowl (High).caf */,
+				076C68131ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(x4).caf */,
+				076C68141ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(Singing).caf */,
+				076C68151ED1BFAD009160C2 /* Australian Rain Stick.caf */,
+				076C68161ED1BFAD009160C2 /* Australian Rain Stick (x2).caf */,
+				076C68171ED1BFAD009160C2 /* Australian Rain Stick (2 sticks).caf */,
+				076C68181ED1BFAD009160C2 /* Wind Chimes.caf */,
+				076C68191ED1BFAD009160C2 /* Gambang (Wood)(Up).caf */,
+				076C681A1ED1BFAD009160C2 /* Gambang (Wood)(Down).caf */,
+				076C681B1ED1BFAD009160C2 /* Gambang (Metal).caf */,
+				076C681C1ED1BFAD009160C2 /* Indonesian Frog.caf */,
+				076C681D1ED1BFAD009160C2 /* Cow Bell (Small).caf */,
+				076C681E1ED1BFAD009160C2 /* Cow Bell (Big).caf */,
+			);
+			name = Bells;
+			sourceTree = "<group>";
+		};
+		07B4E00B1F3774E500C77807 /* Background Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				07B4E00E1F377E1E00C77807 /* TestBackground.caf */,
+			);
+			name = "Background Sounds";
 			sourceTree = "<group>";
 		};
 		07BDFEFE1EB1E69700B131D7 /* Yoga Screen */ = {
@@ -778,6 +797,7 @@
 				07FE380C1DF9B3A200E7EA20 /* Localizable.strings in Resources */,
 				077AC1171DA7936E0026895B /* SF-UI-Display-Regular.otf in Resources */,
 				076C68241ED1D362009160C2 /* Tibetan Singing Bowl (Low)(x4).caf in Resources */,
+				07B4E00F1F377E1E00C77807 /* TestBackground.caf in Resources */,
 				076C68351ED1D37D009160C2 /* Gambang (Wood)(Up).caf in Resources */,
 				077AC1321DA793950026895B /* SF-UI-Text-Regular.otf in Resources */,
 				077AC12A1DA793950026895B /* SF-UI-Text-Bold.otf in Resources */,

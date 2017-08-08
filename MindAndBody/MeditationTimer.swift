@@ -26,9 +26,10 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Background Sounds Array
     let backgroundSoundsArray: [String] =
-        ["1 Tibetan Chimes"]
+        ["TestBackground"]
     let backgroundSoundsImages: [UIImage] =
         [#imageLiteral(resourceName: "Tibetan Chimes")]
+    
     
     // Duration Array
     let durationTimeArray: [[Int]] =
@@ -541,6 +542,19 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         pickerViewIntervalTimes.dataSource = self
         
        
+        //
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            print("AVAudioSession Category Playback OK")
+            do {
+                try AVAudioSession.sharedInstance().setActive(true)
+                print("AVAudioSession is Active")
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
     }
  
     
@@ -2203,22 +2217,15 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             okButton.isEnabled = true
             //
-            if indexPath.row == backgroundSoundsArray.count - 1 {
-                if soundPlayer != nil {
-                    if soundPlayer.isPlaying == true {
-                        soundPlayer.stop()
-                    }
-                }
-            } else {
-                let backgroundSound = NSDataAsset(name: backgroundSoundsArray[indexPath.row])
-                
-                do {
-                    let backgroundSound = try AVAudioPlayer(data: (backgroundSound?.data)!)
-                    soundPlayer = backgroundSound
-                    backgroundSound.play()
-                } catch {
-                    // couldn't load file :(
-                }
+            let url = Bundle.main.url(forResource: backgroundSoundsArray[indexPath.row], withExtension: "caf")!
+            //
+            do {
+                let bell = try AVAudioPlayer(contentsOf: url)
+                soundPlayer = bell
+                soundPlayer.numberOfLoops = -1
+                bell.play()
+            } catch {
+                // couldn't load file :(
             }
             //
             selectedBackgroundSound = indexPath.row
