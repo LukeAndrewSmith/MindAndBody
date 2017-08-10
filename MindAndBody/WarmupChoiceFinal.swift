@@ -320,7 +320,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             47: [#imageLiteral(resourceName: "groinStretch")],
             48: [#imageLiteral(resourceName: "threadTheNeedleS")],
             49: [#imageLiteral(resourceName: "butterflyPoseS")],
-            50: [#imageLiteral(resourceName: "cossakSquat"), #imageLiteral(resourceName: "cossakSquat1"), #imageLiteral(resourceName: "cossakSquat2"), #imageLiteral(resourceName: "cossakSquat3"), #imageLiteral(resourceName: "cossakSquat2"), #imageLiteral(resourceName: "cossakSquat1"), #imageLiteral(resourceName: "cossakSquat4"), #imageLiteral(resourceName: "cossakSquat5"), #imageLiteral(resourceName: "cossakSquat6"), #imageLiteral(resourceName: "cossakSquat7"), #imageLiteral(resourceName: "cossakSquat6"), #imageLiteral(resourceName: "cossakSquat5"), #imageLiteral(resourceName: "cossakSquat4")],
+            50: [#imageLiteral(resourceName: "cossakSquat"), #imageLiteral(resourceName: "cossakSquat4"), #imageLiteral(resourceName: "cossakSquat1"), #imageLiteral(resourceName: "cossakSquat2"), #imageLiteral(resourceName: "cossakSquat3"), #imageLiteral(resourceName: "cossakSquat2"), #imageLiteral(resourceName: "cossakSquat1"), #imageLiteral(resourceName: "cossakSquat4"), #imageLiteral(resourceName: "cossakSquat5"), #imageLiteral(resourceName: "cossakSquat6"), #imageLiteral(resourceName: "cossakSquat7"), #imageLiteral(resourceName: "cossakSquat6"), #imageLiteral(resourceName: "cossakSquat5"), #imageLiteral(resourceName: "cossakSquat4")],
             51: [#imageLiteral(resourceName: "hipHinges"), #imageLiteral(resourceName: "hipHinges1"), #imageLiteral(resourceName: "hipHinges2"), #imageLiteral(resourceName: "hipHinges3"), #imageLiteral(resourceName: "hipHinges4"), #imageLiteral(resourceName: "hipHinges4"), #imageLiteral(resourceName: "hipHinges3"), #imageLiteral(resourceName: "hipHinges2"), #imageLiteral(resourceName: "hipHinges1"), #imageLiteral(resourceName: "hipHinges1")],
             52: [#imageLiteral(resourceName: "lungeTwist"), #imageLiteral(resourceName: "lungeTwist1"), #imageLiteral(resourceName: "lungeTwist2"), #imageLiteral(resourceName: "lungeTwist3"), #imageLiteral(resourceName: "lungeTwist4"), #imageLiteral(resourceName: "lungeTwist5"), #imageLiteral(resourceName: "lungeTwist6"), #imageLiteral(resourceName: "lungeTwist5"), #imageLiteral(resourceName: "lungeTwist4"), #imageLiteral(resourceName: "lungeTwist7"), #imageLiteral(resourceName: "lungeTwist8"), #imageLiteral(resourceName: "lungeTwist9"), #imageLiteral(resourceName: "lungeTwist10"), #imageLiteral(resourceName: "lungeTwist11"), #imageLiteral(resourceName: "lungeTwist12"), #imageLiteral(resourceName: "lungeTwist13"), #imageLiteral(resourceName: "lungeTwist12"), #imageLiteral(resourceName: "lungeTwist11"), #imageLiteral(resourceName: "lungeTwist14"), #imageLiteral(resourceName: "lungeTwist15")],
             53: [#imageLiteral(resourceName: "sideLegSwings"), #imageLiteral(resourceName: "sideLegSwings1"), #imageLiteral(resourceName: "sideLegSwings2"), #imageLiteral(resourceName: "sideLegSwings3"), #imageLiteral(resourceName: "sideLegSwings4"), #imageLiteral(resourceName: "sideLegSwings3"), #imageLiteral(resourceName: "sideLegSwings2"), #imageLiteral(resourceName: "sideLegSwings1"), #imageLiteral(resourceName: "sideLegSwings5"), #imageLiteral(resourceName: "sideLegSwings1"), #imageLiteral(resourceName: "sideLegSwings2"), #imageLiteral(resourceName: "sideLegSwings3"), #imageLiteral(resourceName: "sideLegSwings4")],
@@ -605,7 +605,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         [
             [
                 // Default
-                [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67],
+                [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67],
                 // Beginner
                 [0, 15, 18, 20, 23, 27, 30, 31]
             ],
@@ -630,7 +630,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         [
             [
                 // Default
-                [ 2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2],
+                [1,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2],
                 []
             ],
             [

@@ -17,9 +17,9 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     
     // Selected Workout Type
     //
-    // Gym (0), Gym Circuit (1), Bodyweight (2), Bodyweight Circtui (3)
+    // Gym (0), Gym Circuit (1), Bodyweight (2), Bodyweight Circuit (3)
     var workoutType = Int()
-    // Full body, upper, lower etc.
+    // Full Body (0), Upper (1), Lower (2), Legs (3), Pull (4), Push (5)
     var workoutType2 = Int()
     
     // Selected Preset
@@ -38,6 +38,9 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     
     var roundArray: [Int] = []
     
+    
+    //
+    // Set depending on which choices chosen (e.g gym - classic - full body)
     //
     // Picker View Array
     var presetsArray: [[String]] = []
@@ -47,29 +50,14 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     
     // Arrays to Use
     //
-    // Section Array
-    var tableViewSectionArray: [String] = []
-    
-    // Key Array
-    var fullKeyArray: [[Int]] = []
-    
-    // Movements Dictionary
-    var workoutMovementsDictionary: [Int : String] = [:]
-    
-    // Demonstration Dictionary
-    var demonstrationDictionary: [Int : [UIImage]] = [:]
+    // Sets Array
+    var presetSetsArray: [[[Int]]] = []
 
-    // Target Area Dictionary
-    var targetAreaDictionary: [Int: UIImage] = [:]
+    // Reps Array
+    var presetRepsArray: [[[String]]] = []
     
-    // Explanation Dictionary
-    var explanationDictionary: [Int : String] = [:]
-
-    // Sets Dictionary
-    var setsDictionary: [Int : Int] = [:]
-
-    // Reps Dictionary
-    var repsDictionary: [Int : String] = [:]
+    //
+    var presetRepsArrayCircuit: [[[[String]]]] = []
     
     //
     var numberOfRoundsArray: [[Int]] = []
@@ -87,6 +75,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     
     // Reps Array
     var repsArray: [String] = []
+    var repsArrayCircuit: [[String]] = []
     
     // Demonstration Array
     var demonstrationArray: [[UIImage]] = []
@@ -110,7 +99,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
 // Gym Classic + 5x5 --------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------------------------
     // TableView Section Array
-    var tableViewSectionArrayGym: [String] =
+    var tableViewSectionArray: [String] =
         [
             // Gym -----
             "legsQ",
@@ -134,7 +123,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             "calves",
             "pullBa",
             "pullT",
-            "pullRD",
             "pushC",
             "pushT",
             "pushS",
@@ -154,7 +142,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     ]
     
     // Full Key Array
-    var fullKeyArrayGym: [[Int]] =
+    var fullKeyArray: [[Int]] =
         [
             // Gym ------------------------------------
             // Legs (Quads) ---------
@@ -162,351 +150,319 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             1,
             2,
             3,
-            4,
-            5],
+            4],
             // Legs (Hamstrings/Glutes)
-            [6,
+            [5,
+            6,
             7,
             8,
             9,
-            10,
-            11],
+            10],
             // Legs (General)
-            [12,
-            13,
-            14],
+            [11,
+            12,
+            13],
             // Legs (Calves)
-            [15,
-            16],
+            [14,
+            15],
             // Pull (Back) ---------
-            [17,
+            [16,
+            17,
             18,
             19,
             20,
             21,
             22,
-            23,
-            24,
+            23],
+            // Pull (Upper Back)
+            [24,
             25,
             26,
             27],
-            // Pull (Upper Back)
-            [28,
-            29,
-            30,
-            31],
             // Pull (Rear Delts)
-            [32],
+            [28],
             // Pull (Traps)
-            [33],
+            [29],
             // Pull (Biceps)
-            [34,
-            35,
-            36,
-            37],
+            [30,
+            31,
+            32],
             // Pull (Forearms)
-            [38,
-            39,
-            40],
+            [33,
+            34,
+            35],
             // Push (Chest) ---------
-            [41,
+            [36,
+            37,
+            38,
+            39,
+            40,
+            41,
             42,
-            43,
-            44,
+            43],
+            // Push (Shoulders)
+            [44,
             45,
             46,
-            47,
-            48,
-            49,
-            50],
-            // Push (Shoulders)
-            [51,
-            52,
-            53,
-            54],
+            47],
             // Push (Triceps)
-            [55,
+            [48,
+            49,
+            50,
+            51],
+            // Full Body ---------
+            [52],
+            // BodyWeight ------------------------------------
+            // Legs (General) ---------
+            [53,
+            54,
+            55,
             56,
             57,
             58,
-            59],
-            // Full Body ---------
-            [60],
-            // BodyWeight ------------------------------------
-            // Legs (General) ---------
+            59,
+            60],
+            // Legs (Hamstrings)
             [61,
-            62,
-            63,
+            62],
+            // Legs (Glutes)
+            [63,
             64,
             65,
-            66,
-            67,
-            68,
-            69],
-            // Legs (Hamstrings)
-            [70,
-            71],
-            // Legs (Glutes)
-            [72,
-            73,
-            74,
-            75,
-            76],
+            66],
             // Legs (Calves)
-            [77],
+            [67],
             // Pull (Back) ---------
-            [78,
-            79,
-            80,
+            [68,
+            69,
+            70,
+            71,
+            72,
+            73],
+            // Pull (Traps)
+            [74],
+            // Push (Chest) ---------
+            [75],
+            // Push (Tricep)
+            [76,
+            77,
+            78],
+            // Push (Chest & Tricep)
+            [79],
+            // Push (Shoulder)
+            [80,
             81,
             82,
-            83,
-            84,
-            85],
-            // Pull (Traps)
-            [86,
-            87,
-            88],
-            // Pull (Rear Delts)
-            [89],
-            // Push (Chest) ---------
-            [90],
-            // Push (Tricep)
-            [91,
-            92,
-            93],
-            // Push (Chest & Tricep)
-            [94],
-            // Push (Shoulder)
-            [95,
-            96,
-            97,
-            98],
+            83],
             // Core ---------
-            [99,
+            [84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92],
+            // General (Core) ---------
+            [93],
+            // General (Full Body)
+            [94,
+            95],
+            // General (Upper Body)
+            [96,
+            97],
+            // General (Cardio)
+            [98,
+            99,
             100,
-            101,
-            102,
+            101],
+            // Isometric (Legs) ---------
+            [102,
             103,
             104,
             105,
-            106,
-            107],
-            // General (Core) ---------
-            [108],
-            // General (Full Body)
-            [109,
-            110],
-            // General (Upper Body)
-            [111,
-            112],
-            // General (Cardio)
-            [113,
-            114,
-            115,
-            116],
-            // Isometric (Legs) ---------
-            [117,
-            118,
-            119,
-            120,
-            121],
+            106],
             // Isometric (Upper Body)
-            [122,
-            123,
-            124],
+            [107,
+            108,
+            109],
             // Equiptment (Ball) ---------
-            [125],
+            [110],
             // Equiptment (Bar)
-            [126,
-            127,
-            128],
+            [111,
+            112,
+            113],
             // Equiptment (Bench/Step)
-            [129,
-            130,
-            131,
-            132,
-            133]
+            [114,
+            115,
+            116,
+            117,
+            118]
     ]
     
     // Workout Movements Dictionary
-    var workoutMovementsDictionaryGym: [Int : String] =
+    var workoutMovementsDictionary: [Int : String] =
         [
             // Gym ------------------------------------
             // Legs (Quads) ---------
             0: "squat",
             1: "frontSquat",
-            2: "hackSquat",
-            3: "legPress",
-            4: "dumbellFrontSquat",
-            5: "legExtensions",
+            2: "legPress",
+            3: "dumbellFrontSquat",
+            4: "legExtensions",
             // Legs (Hamstrings/Glutes)
-            6: "deadlift",
-            7: "romanianDeadlift",
-            8: "weightedHipThrust",
-            9: "legCurl",
-            10: "oneLeggedDeadlift",
-            11: "gluteIsolationMachine",
+            5: "deadlift",
+            6: "romanianDeadlift",
+            7: "weightedHipThrust",
+            8: "legCurl",
+            9: "oneLeggedDeadlift",
+            10: "gluteIsolationMachine",
             // Legs (General)
-            12: "lungeDumbell",
-            13: "bulgarianSplitSquat",
-            14: "stepUp",
+            11: "lungeDumbell",
+            12: "bulgarianSplitSquat",
+            13: "weightedStepUp",
             // Legs (Calves)
-            15: "standingCalfRaise",
-            16: "seatedCalfRaise",
+            14: "standingCalfRaise",
+            15: "seatedCalfRaise",
             // Pull (Back) ---------
-            17: "pullUp",
-            18: "pullDown",
-            19: "kneelingPullDown",
-            20: "pullDownMachine",
-            21: "hammerStrengthPullDown",
-            22: "bentOverRowBarbell",
-            23: "bentOverRowDumbell",
-            24: "tBarRow",
-            25: "rowMachine",
-            26: "hammerStrengthRow",
-            27: "latPullover",
+            16: "pullDown",
+            17: "kneelingPullDown",
+            18: "pullDownMachine",
+            19: "bentOverRowBarbell",
+            20: "bentOverRowDumbell",
+            21: "tBarRow",
+            22: "rowMachine",
+            23: "latPullover",
             // Pull (Upper Back)
-            28: "facePull",
-            29: "smithMachinePullUp",
-            30: "leaningBackPullDown",
-            31: "seatedMachineRow",
+            24: "facePull",
+            25: "smithMachinePullUp",
+            26: "leaningBackPullDown",
+            27: "seatedMachineRow",
             // Pull (Rear Delts)
-            32: "bentOverBarbellRow",
+            28: "bentOverBarbellRow",
             // Pull (Traps)
-            33: "shrugDumbell",
+            29: "shrugDumbell",
             // Pull (Biceps)
-            34: "hamerCurl",
-            35: "hammerCurlCable",
-            36: "cableCurl",
-            37: "curl",
+            30: "hammerCurl",
+            31: "hammerCurlCable",
+            32: "curl",
             // Pull (Forearms)
-            38: "farmersCarry",
-            39: "reverseBarbellCurl",
-            40: "forearmCurl",
+            33: "farmersCarry",
+            34: "reverseBarbellCurl",
+            35: "forearmCurl",
             // Push (Chest) ---------
-            41: "pushUp",
-            42: "benchPress",
-            43: "benchPressDumbell",
-            44: "semiInclineDumbellPress",
-            45: "hammerStrengthPress",
-            46: "chestPress",
-            47: "platePress",
-            48: "barbellKneelingPress",
-            49: "cableFly",
-            50: "dips",
+            36: "benchPress",
+            37: "benchPressDumbell",
+            38: "semiInclineDumbellPress",
+            39: "chestPress",
+            40: "platePress",
+            41: "barbellKneelingPress",
+            42: "cableFly",
+            43: "dips",
             // Push (Shoulders)
-            51: "standingShoulderPressBarbell",
-            52: "standingShoulderPressDumbell",
-            53: "lateralRaise",
-            54: "frontRaise",
+            44: "standingShoulderPressBarbell",
+            45: "standingShoulderPressDumbell",
+            46: "lateralRaise",
+            47: "frontRaise",
             // Push (Triceps)
-            55: "ballPushUp",
-            56: "trianglePushUp",
-            57: "closeGripBench",
-            58: "cableExtension",
-            59: "ropeExtension",
+            48: "ballPushUp",
+            49: "closeGripBench",
+            50: "cableExtension",
+            51: "ropeExtension",
             // Full Body
-            60: "cleanPress",
+            52: "cleanPress",
             // BodyWeight ------------------------------------
             // Legs (General) ---------
-            61: "bodyweightSquat",
-            62: "pistolSquat",
-            63: "skaterSquat",
-            64: "squatJump",
-            65: "sumoSquat",
-            66: "sumoSquatJump",
-            67: "lunge",
-            68: "lungeJump",
-            69: "stepUp",
+            53: "bodyweightSquat",
+            54: "pistolSquat",
+            55: "skaterSquat",
+            56: "squatJump",
+            57: "sumoSquat",
+            58: "lunge",
+            59: "lungeJump",
+            60: "stepUp",
             // Legs (Hamstrings)
-            70: "deadlift",
-            71: "singleLegDeadlift",
+            61: "deadlift",
+            62: "singleLegDeadlift",
             // Legs (Glutes)
-            72: "gluteBridge",
-            73: "singleLegGluteBridge",
-            74: "kickBack",
-            75: "standingKickBack",
-            76: "standingSideKick",
+            63: "gluteBridge",
+            64: "singleLegGluteBridge",
+            65: "kickBack",
+            66: "standingKickBack",
             // Legs (Calves)
-            77: "calfRaise",
+            67: "calfRaise",
             // Pull (Back) ---------
-            78: "contralateralLimbRaises",
-            79: "superMan",
-            80: "backHyperextension",
-            81: "doorFrameRow",
-            82: "reverseSnowAngels",
-            83: "elbowTorsoLift",
-            84: "backBridge",
-            85: "scapulaPushup",
+            68: "contralateralLimbRaises",
+            69: "superMan",
+            70: "backHyperextension",
+            71: "doorFrameRow",
+            72: "reverseSnowAngels",
+            73: "scapulaPushup",
             // Pull (Traps)
-            86: "handStandTrap",
-            87: "handStandShoulderTap",
-            88: "handStandWaistTap",
-            // Pull (Rear Delts)
-            89: "bentOverArmCircles",
+            74: "handStandTrap",
             // Push (Chest) ---------
-            90: "pushup",
+            75: "pushup",
             // Push (Tricep)
-            91: "trianglePushup",
-            92: "dolphinPushup",
-            93: "tricepExtensionsBodyweight",
+            76: "trianglePushup",
+            77: "dolphinPushup",
+            78: "tricepExtensionsBodyweight",
             // Push (Chest & Tricep)
-            94: "walkingPushup",
+            79: "walkingPushup",
             // Push (Shoulder)
-            95: "downwardDogPushup",
-            96: "wallPushup",
-            97: "boxer",
-            98: "armCircles",
+            80: "downwardDogPushup",
+            81: "wallPushup",
+            82: "boxer",
+            83: "armCircles",
             // Core ---------
-            99: "plank",
-            100: "dynamicPlank",
-            101: "sidePlank",
-            102: "pushupPlank",
-            103: "lSit",
-            104: "bicycleCrunch",
-            105: "divingHold",
-            106: "hipRaise",
-            107: "legHold",
+            84: "plank",
+            85: "dynamicPlank",
+            86: "sidePlank",
+            87: "pushupPlank",
+            88: "lSit",
+            89: "bicycleCrunch",
+            90: "divingHold",
+            91: "hipRaise",
+            92: "legHold",
             // General (Core) ---------
-            108: "mountainClimbers",
+            93: "mountainClimbers",
             // General (Full Body)
-            109: "burpee",
-            110: "kickThroughBurpee",
+            94: "burpee",
+            95: "kickThroughBurpee",
             // General (Upper Body)
-            111: "spiderPushup",
-            112: "crabWalk",
+            96: "spiderPushup",
+            97: "crabWalk",
             // General (Cardio)
-            113: "jumpingJacks",
-            114: "tuckJump",
-            115: "bumKicks",
-            116: "kneeRaises",
+            98: "jumpingJacks",
+            99: "tuckJump",
+            100: "bumKicks",
+            101: "kneeRaises",
             // Isometric (Legs) ---------
-            117: "wallSit",
-            118: "chairHold",
-            119: "toePress",
-            120: "staticLunge",
-            121: "calfRaise",
+            102: "wallSit",
+            103: "chairHold",
+            104: "toePress",
+            105: "staticLunge",
+            106: "calfRaise",
             // Isometric (Upper Body)
-            122: "chestSqueeze",
-            123: "dolphinPlank",
-            124: "pullupHold",
+            107: "chestSqueeze",
+            108: "dolphinPlank",
+            109: "pullupHold",
             // Equiptment (Ball) ---------
-            125: "ballPushup",
+            110: "ballPushup",
             // Equiptment (Bar)
-            126: "bodweightRow",
-            127: "pullup",
-            128: "hangingLegRaise",
+            111: "bodweightRow",
+            112: "pullup",
+            113: "hangingLegRaise",
             // Equiptment (Bench/Step)
-            129: "tricepDip",
-            130: "bulgarianSplitSquat",
-            131: "boxJump",
-            132: "hipThrusts",
-            133: "stepUp"
+            114: "tricepDip",
+            115: "bulgarianSplitSquat",
+            116: "boxJump",
+            117: "hipThrusts",
+            118: "stepUp"
     ]
     
     // Demonstration Array
-    var demonstrationDictionaryGym: [Int : [UIImage]] =
+    var demonstrationDictionary: [Int : [UIImage]] =
         [
             // Gym ------------------------------------
             // Legs (Quads) ---------
@@ -515,22 +471,22 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             2: [#imageLiteral(resourceName: "Test")],
             3: [#imageLiteral(resourceName: "Test")],
             4: [#imageLiteral(resourceName: "Test")],
-            5: [#imageLiteral(resourceName: "Test")],
             // Legs (Hamstrings/Glutes)
+            5: [#imageLiteral(resourceName: "Test")],
             6: [#imageLiteral(resourceName: "Test")],
             7: [#imageLiteral(resourceName: "Test")],
             8: [#imageLiteral(resourceName: "Test")],
             9: [#imageLiteral(resourceName: "Test")],
             10: [#imageLiteral(resourceName: "Test")],
-            11: [#imageLiteral(resourceName: "Test")],
             // Legs (General)
+            11: [#imageLiteral(resourceName: "Test")],
             12: [#imageLiteral(resourceName: "Test")],
             13: [#imageLiteral(resourceName: "Test")],
-            14: [#imageLiteral(resourceName: "Test")],
             // Legs (Calves)
+            14: [#imageLiteral(resourceName: "Test")],
             15: [#imageLiteral(resourceName: "Test")],
-            16: [#imageLiteral(resourceName: "Test")],
             // Pull (Back) ---------
+            16: [#imageLiteral(resourceName: "Test")],
             17: [#imageLiteral(resourceName: "Test")],
             18: [#imageLiteral(resourceName: "Test")],
             19: [#imageLiteral(resourceName: "Test")],
@@ -538,151 +494,135 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             21: [#imageLiteral(resourceName: "Test")],
             22: [#imageLiteral(resourceName: "Test")],
             23: [#imageLiteral(resourceName: "Test")],
+            // Pull (Upper Back)
             24: [#imageLiteral(resourceName: "Test")],
             25: [#imageLiteral(resourceName: "Test")],
             26: [#imageLiteral(resourceName: "Test")],
             27: [#imageLiteral(resourceName: "Test")],
-            // Pull (Upper Back)
+            // Pull (Rear Delts)
             28: [#imageLiteral(resourceName: "Test")],
+            // Pull (Traps)
             29: [#imageLiteral(resourceName: "Test")],
+            // Pull (Biceps)
             30: [#imageLiteral(resourceName: "Test")],
             31: [#imageLiteral(resourceName: "Test")],
-            // Pull (Rear Delts)
             32: [#imageLiteral(resourceName: "Test")],
-            // Pull (Traps)
+            // Pull (Forearms)
             33: [#imageLiteral(resourceName: "Test")],
-            // Pull (Biceps)
             34: [#imageLiteral(resourceName: "Test")],
             35: [#imageLiteral(resourceName: "Test")],
+            // Push (Chest) ---------
             36: [#imageLiteral(resourceName: "Test")],
             37: [#imageLiteral(resourceName: "Test")],
-            // Pull (Forearms)
             38: [#imageLiteral(resourceName: "Test")],
             39: [#imageLiteral(resourceName: "Test")],
             40: [#imageLiteral(resourceName: "Test")],
-            // Push (Chest) ---------
             41: [#imageLiteral(resourceName: "Test")],
             42: [#imageLiteral(resourceName: "Test")],
             43: [#imageLiteral(resourceName: "Test")],
+            // Push (Shoulders)
             44: [#imageLiteral(resourceName: "Test")],
             45: [#imageLiteral(resourceName: "Test")],
             46: [#imageLiteral(resourceName: "Test")],
             47: [#imageLiteral(resourceName: "Test")],
+            // Push (Triceps)
             48: [#imageLiteral(resourceName: "Test")],
             49: [#imageLiteral(resourceName: "Test")],
             50: [#imageLiteral(resourceName: "Test")],
-            // Push (Shoulders)
             51: [#imageLiteral(resourceName: "Test")],
+            // Full Body
             52: [#imageLiteral(resourceName: "Test")],
+            // BodyWeight ------------------------------------
+            // Legs (General) ---------
             53: [#imageLiteral(resourceName: "Test")],
             54: [#imageLiteral(resourceName: "Test")],
-            // Push (Triceps)
             55: [#imageLiteral(resourceName: "Test")],
             56: [#imageLiteral(resourceName: "Test")],
             57: [#imageLiteral(resourceName: "Test")],
             58: [#imageLiteral(resourceName: "Test")],
             59: [#imageLiteral(resourceName: "Test")],
-            // Full Body
             60: [#imageLiteral(resourceName: "Test")],
-            // BodyWeight ------------------------------------
-            // Legs (General) ---------
+            // Legs (Hamstrings)
             61: [#imageLiteral(resourceName: "Test")],
             62: [#imageLiteral(resourceName: "Test")],
+            // Legs (Glutes)
             63: [#imageLiteral(resourceName: "Test")],
             64: [#imageLiteral(resourceName: "Test")],
             65: [#imageLiteral(resourceName: "Test")],
             66: [#imageLiteral(resourceName: "Test")],
+            // Legs (Calves)
             67: [#imageLiteral(resourceName: "Test")],
+            // Pull (Back) ---------
             68: [#imageLiteral(resourceName: "Test")],
             69: [#imageLiteral(resourceName: "Test")],
-            // Legs (Hamstrings)
             70: [#imageLiteral(resourceName: "Test")],
             71: [#imageLiteral(resourceName: "Test")],
-            // Legs (Glutes)
             72: [#imageLiteral(resourceName: "Test")],
             73: [#imageLiteral(resourceName: "Test")],
+            // Pull (Traps)
             74: [#imageLiteral(resourceName: "Test")],
+            // Push (Chest) ---------
             75: [#imageLiteral(resourceName: "Test")],
+            // Push (Tricep)
             76: [#imageLiteral(resourceName: "Test")],
-            // Legs (Calves)
             77: [#imageLiteral(resourceName: "Test")],
-            // Pull (Back) ---------
             78: [#imageLiteral(resourceName: "Test")],
+            // Push (Chest & Tricep)
             79: [#imageLiteral(resourceName: "Test")],
+            // Push (Shoulder)
             80: [#imageLiteral(resourceName: "Test")],
             81: [#imageLiteral(resourceName: "Test")],
             82: [#imageLiteral(resourceName: "Test")],
             83: [#imageLiteral(resourceName: "Test")],
+            // Core ---------
             84: [#imageLiteral(resourceName: "Test")],
             85: [#imageLiteral(resourceName: "Test")],
-            // Pull (Traps)
             86: [#imageLiteral(resourceName: "Test")],
             87: [#imageLiteral(resourceName: "Test")],
             88: [#imageLiteral(resourceName: "Test")],
-            // Pull (Rear Delts)
             89: [#imageLiteral(resourceName: "Test")],
-            // Push (Chest) ---------
             90: [#imageLiteral(resourceName: "Test")],
-            // Push (Tricep)
             91: [#imageLiteral(resourceName: "Test")],
             92: [#imageLiteral(resourceName: "Test")],
+            // General (Core) ---------
             93: [#imageLiteral(resourceName: "Test")],
-            // Push (Chest & Tricep)
+            // General (Full Body)
             94: [#imageLiteral(resourceName: "Test")],
-            // Push (Shoulder)
             95: [#imageLiteral(resourceName: "Test")],
+            // General (Upper Body)
             96: [#imageLiteral(resourceName: "Test")],
             97: [#imageLiteral(resourceName: "Test")],
+            // General (Cardio)
             98: [#imageLiteral(resourceName: "Test")],
-            // Core ---------
             99: [#imageLiteral(resourceName: "Test")],
             100: [#imageLiteral(resourceName: "Test")],
             101: [#imageLiteral(resourceName: "Test")],
+            // Isometric (Legs) ---------
             102: [#imageLiteral(resourceName: "Test")],
             103: [#imageLiteral(resourceName: "Test")],
             104: [#imageLiteral(resourceName: "Test")],
             105: [#imageLiteral(resourceName: "Test")],
             106: [#imageLiteral(resourceName: "Test")],
+            // Isometric (Upper Body)
             107: [#imageLiteral(resourceName: "Test")],
-            // General (Core) ---------
             108: [#imageLiteral(resourceName: "Test")],
-            // General (Full Body)
             109: [#imageLiteral(resourceName: "Test")],
+            // Equiptment (Ball) ---------
             110: [#imageLiteral(resourceName: "Test")],
-            // General (Upper Body)
+            // Equiptment (Bar)
             111: [#imageLiteral(resourceName: "Test")],
             112: [#imageLiteral(resourceName: "Test")],
-            // General (Cardio)
             113: [#imageLiteral(resourceName: "Test")],
+            // Equiptment (Bench/Step)
             114: [#imageLiteral(resourceName: "Test")],
             115: [#imageLiteral(resourceName: "Test")],
             116: [#imageLiteral(resourceName: "Test")],
-            // Isometric (Legs) ---------
             117: [#imageLiteral(resourceName: "Test")],
-            118: [#imageLiteral(resourceName: "Test")],
-            119: [#imageLiteral(resourceName: "Test")],
-            120: [#imageLiteral(resourceName: "Test")],
-            121: [#imageLiteral(resourceName: "Test")],
-            // Isometric (Upper Body)
-            122: [#imageLiteral(resourceName: "Test")],
-            123: [#imageLiteral(resourceName: "Test")],
-            124: [#imageLiteral(resourceName: "Test")],
-            // Equiptment (Ball) ---------
-            125: [#imageLiteral(resourceName: "Test")],
-            // Equiptment (Bar)
-            126: [#imageLiteral(resourceName: "Test")],
-            127: [#imageLiteral(resourceName: "Test")],
-            128: [#imageLiteral(resourceName: "Test")],
-            // Equiptment (Bench/Step)
-            129: [#imageLiteral(resourceName: "Test")],
-            130: [#imageLiteral(resourceName: "Test")],
-            131: [#imageLiteral(resourceName: "Test")],
-            132: [#imageLiteral(resourceName: "Test")],
-            133: [#imageLiteral(resourceName: "Test")]
+            118: [#imageLiteral(resourceName: "Test")]
     ]
     
-    // Target Area Array
-    var targetAreaDictionaryGym: [Int: UIImage] =
+    // Demonstration Array
+    var targetAreaDictionary: [Int : UIImage] =
         [
             // Gym ------------------------------------
             // Legs (Quads) ---------
@@ -691,346 +631,314 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             2: #imageLiteral(resourceName: "Squat"),
             3: #imageLiteral(resourceName: "Squat"),
             4: #imageLiteral(resourceName: "Squat"),
-            5: #imageLiteral(resourceName: "Squat"),
             // Legs (Hamstrings/Glutes)
+            5: #imageLiteral(resourceName: "Deadlift"),
             6: #imageLiteral(resourceName: "Deadlift"),
             7: #imageLiteral(resourceName: "Deadlift"),
             8: #imageLiteral(resourceName: "Deadlift"),
-            9: #imageLiteral(resourceName: "Deadlift"),
-            10: #imageLiteral(resourceName: "Rear Thigh"),
-            11: #imageLiteral(resourceName: "Glute"),
+            9: #imageLiteral(resourceName: "Rear Thigh"),
+            10: #imageLiteral(resourceName: "Glute"),
             // Legs (General)
+            11: #imageLiteral(resourceName: "Squat"),
             12: #imageLiteral(resourceName: "Squat"),
             13: #imageLiteral(resourceName: "Squat"),
-            14: #imageLiteral(resourceName: "Squat"),
             // Legs (Calves)
+            14: #imageLiteral(resourceName: "Calf"),
             15: #imageLiteral(resourceName: "Calf"),
-            16: #imageLiteral(resourceName: "Calf"),
             // Pull (Back) ---------
-            17: #imageLiteral(resourceName: "Test"),
+            16: #imageLiteral(resourceName: "Back and Bicep"),
+            17: #imageLiteral(resourceName: "Back and Bicep"),
             18: #imageLiteral(resourceName: "Back and Bicep"),
             19: #imageLiteral(resourceName: "Back and Bicep"),
-            20: #imageLiteral(resourceName: "Back and Bicep"),
-            21: #imageLiteral(resourceName: "Back and Bicep"),
-            22: #imageLiteral(resourceName: "Back and Bicep"),
-            23: #imageLiteral(resourceName: "Back, Bicep and Erector"),
-            24: #imageLiteral(resourceName: "Back, Bicep and Erector"),
-            25: #imageLiteral(resourceName: "Back, Bicep and Erector"),
-            26: #imageLiteral(resourceName: "Back and Bicep"),
-            27: #imageLiteral(resourceName: "Back and Bicep"),
+            20: #imageLiteral(resourceName: "Back, Bicep and Erector"),
+            21: #imageLiteral(resourceName: "Back, Bicep and Erector"),
+            22: #imageLiteral(resourceName: "Back, Bicep and Erector"),
+            23: #imageLiteral(resourceName: "Back and Bicep"),
             // Pull (Upper Back)
-            28: #imageLiteral(resourceName: "Upper Back and Shoulder"),
-            29: #imageLiteral(resourceName: "Upper Back and Shoulder"),
-            30: #imageLiteral(resourceName: "Upper Back and Shoulder"),
-            31: #imageLiteral(resourceName: "Upper Back and Shoulder"),
+            24: #imageLiteral(resourceName: "Upper Back and Shoulder"),
+            25: #imageLiteral(resourceName: "Upper Back and Shoulder"),
+            26: #imageLiteral(resourceName: "Upper Back and Shoulder"),
+            27: #imageLiteral(resourceName: "Upper Back and Shoulder"),
             // Pull (Rear Delts)
-            32: #imageLiteral(resourceName: "Rear Delt"),
+            28: #imageLiteral(resourceName: "Rear Delt"),
             // Pull (Traps)
-            33: #imageLiteral(resourceName: "Trap"),
+            29: #imageLiteral(resourceName: "Trap"),
             // Pull (Biceps)
-            34: #imageLiteral(resourceName: "Bicep"),
-            35: #imageLiteral(resourceName: "Bicep"),
-            36: #imageLiteral(resourceName: "Bicep"),
-            37: #imageLiteral(resourceName: "Bicep"),
+            30: #imageLiteral(resourceName: "Bicep"),
+            31: #imageLiteral(resourceName: "Bicep"),
+            32: #imageLiteral(resourceName: "Bicep"),
             // Pull (Forearms)
-            38: #imageLiteral(resourceName: "Forearm"),
-            39: #imageLiteral(resourceName: "Forearm"),
-            40: #imageLiteral(resourceName: "Forearm"),
+            33: #imageLiteral(resourceName: "Forearm"),
+            34: #imageLiteral(resourceName: "Forearm"),
+            35: #imageLiteral(resourceName: "Forearm"),
             // Push (Chest) ---------
-            41: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            42: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            43: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            44: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            45: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            46: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            47: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            48: #imageLiteral(resourceName: "Pec and Front Delt"),
-            49: #imageLiteral(resourceName: "Pec and Front Delt"),
-            50: #imageLiteral(resourceName: "Pec and Front Delt"),
+            36: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            37: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            38: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            39: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            40: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            41: #imageLiteral(resourceName: "Pec and Front Delt"),
+            42: #imageLiteral(resourceName: "Pec and Front Delt"),
+            43: #imageLiteral(resourceName: "Pec and Front Delt"),
             // Push (Shoulders)
-            51: #imageLiteral(resourceName: "Shoulder"),
-            52: #imageLiteral(resourceName: "Shoulder"),
-            53: #imageLiteral(resourceName: "Shoulder"),
-            54: #imageLiteral(resourceName: "Shoulder"),
+            44: #imageLiteral(resourceName: "Shoulder"),
+            45: #imageLiteral(resourceName: "Shoulder"),
+            46: #imageLiteral(resourceName: "Shoulder"),
+            47: #imageLiteral(resourceName: "Shoulder"),
             // Push (Triceps)
-            55: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            56: #imageLiteral(resourceName: "Tricep"),
-            57: #imageLiteral(resourceName: "Tricep"),
-            58: #imageLiteral(resourceName: "Tricep"),
-            59: #imageLiteral(resourceName: "Tricep"),
+            48: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
+            49: #imageLiteral(resourceName: "Tricep"),
+            50: #imageLiteral(resourceName: "Tricep"),
+            51: #imageLiteral(resourceName: "Tricep"),
             // Full Body
-            60: #imageLiteral(resourceName: "Squat"),
+            52: #imageLiteral(resourceName: "Squat"),
             // BodyWeight ------------------------------------
             // Legs (General) ---------
+            53: #imageLiteral(resourceName: "Test"),
+            54: #imageLiteral(resourceName: "Test"),
+            55: #imageLiteral(resourceName: "Test"),
+            56: #imageLiteral(resourceName: "Test"),
+            57: #imageLiteral(resourceName: "Test"),
+            58: #imageLiteral(resourceName: "Test"),
+            59: #imageLiteral(resourceName: "Test"),
+            60: #imageLiteral(resourceName: "Test"),
+            // Legs (Hamstrings)
             61: #imageLiteral(resourceName: "Test"),
             62: #imageLiteral(resourceName: "Test"),
+            // Legs (Glutes)
             63: #imageLiteral(resourceName: "Test"),
             64: #imageLiteral(resourceName: "Test"),
             65: #imageLiteral(resourceName: "Test"),
             66: #imageLiteral(resourceName: "Test"),
+            // Legs (Calves)
+            67: #imageLiteral(resourceName: "Test"),
+            // Pull (Back) ---------
             68: #imageLiteral(resourceName: "Test"),
             69: #imageLiteral(resourceName: "Test"),
             70: #imageLiteral(resourceName: "Test"),
-            // Legs (Hamstrings)
             71: #imageLiteral(resourceName: "Test"),
             72: #imageLiteral(resourceName: "Test"),
-            // Legs (Glutes)
             73: #imageLiteral(resourceName: "Test"),
+            // Pull (Traps)
             74: #imageLiteral(resourceName: "Test"),
+            // Push (Chest) ---------
             75: #imageLiteral(resourceName: "Test"),
+            // Push (Tricep)
             76: #imageLiteral(resourceName: "Test"),
             77: #imageLiteral(resourceName: "Test"),
-            // Legs (Calves)
             78: #imageLiteral(resourceName: "Test"),
-            // Pull (Back) ---------
+            // Push (Chest & Tricep)
             79: #imageLiteral(resourceName: "Test"),
+            // Push (Shoulder)
             80: #imageLiteral(resourceName: "Test"),
             81: #imageLiteral(resourceName: "Test"),
             82: #imageLiteral(resourceName: "Test"),
             83: #imageLiteral(resourceName: "Test"),
+            // Core ---------
             84: #imageLiteral(resourceName: "Test"),
             85: #imageLiteral(resourceName: "Test"),
             86: #imageLiteral(resourceName: "Test"),
-            // Pull (Traps)
             87: #imageLiteral(resourceName: "Test"),
             88: #imageLiteral(resourceName: "Test"),
             89: #imageLiteral(resourceName: "Test"),
-            // Pull (Rear Delts)
             90: #imageLiteral(resourceName: "Test"),
-            // Push (Chest) ---------
-            91: #imageLiteral(resourceName: "Test"),
-            // Push (Tricep)
             91: #imageLiteral(resourceName: "Test"),
             92: #imageLiteral(resourceName: "Test"),
+            // General (Core) ---------
             93: #imageLiteral(resourceName: "Test"),
-            // Push (Chest & Tricep)
+            // General (Full Body)
             94: #imageLiteral(resourceName: "Test"),
-            // Push (Shoulder)
             95: #imageLiteral(resourceName: "Test"),
+            // General (Upper Body)
             96: #imageLiteral(resourceName: "Test"),
             97: #imageLiteral(resourceName: "Test"),
+            // General (Cardio)
             98: #imageLiteral(resourceName: "Test"),
-            // Core ---------
             99: #imageLiteral(resourceName: "Test"),
             100: #imageLiteral(resourceName: "Test"),
             101: #imageLiteral(resourceName: "Test"),
+            // Isometric (Legs) ---------
             102: #imageLiteral(resourceName: "Test"),
             103: #imageLiteral(resourceName: "Test"),
             104: #imageLiteral(resourceName: "Test"),
             105: #imageLiteral(resourceName: "Test"),
             106: #imageLiteral(resourceName: "Test"),
+            // Isometric (Upper Body)
             107: #imageLiteral(resourceName: "Test"),
-            // General (Core) ---------
             108: #imageLiteral(resourceName: "Test"),
-            // General (Full Body)
             109: #imageLiteral(resourceName: "Test"),
+            // Equiptment (Ball) ---------
             110: #imageLiteral(resourceName: "Test"),
-            // General (Upper Body)
+            // Equiptment (Bar)
             111: #imageLiteral(resourceName: "Test"),
             112: #imageLiteral(resourceName: "Test"),
-            // General (Cardio)
             113: #imageLiteral(resourceName: "Test"),
+            // Equiptment (Bench/Step)
             114: #imageLiteral(resourceName: "Test"),
             115: #imageLiteral(resourceName: "Test"),
             116: #imageLiteral(resourceName: "Test"),
-            // Isometric (Legs) ---------
             117: #imageLiteral(resourceName: "Test"),
-            118: #imageLiteral(resourceName: "Test"),
-            119: #imageLiteral(resourceName: "Test"),
-            120: #imageLiteral(resourceName: "Test"),
-            121: #imageLiteral(resourceName: "Test"),
-            // Isometric (Upper Body)
-            122: #imageLiteral(resourceName: "Test"),
-            123: #imageLiteral(resourceName: "Test"),
-            124: #imageLiteral(resourceName: "Test"),
-            // Equiptment (Ball) ---------
-            125: #imageLiteral(resourceName: "Test"),
-            // Equiptment (Bar)
-            126: #imageLiteral(resourceName: "Test"),
-            127: #imageLiteral(resourceName: "Test"),
-            128: #imageLiteral(resourceName: "Test"),
-            // Equiptment (Bench/Step)
-            129: #imageLiteral(resourceName: "Test"),
-            130: #imageLiteral(resourceName: "Test"),
-            131: #imageLiteral(resourceName: "Test"),
-            132: #imageLiteral(resourceName: "Test"),
-            133: #imageLiteral(resourceName: "Test")
-        ]
+            118: #imageLiteral(resourceName: "Test")
+    ]
     
     // Explanation Array
-    var explanationDictionaryGym: [Int : String] =
+    var explanationDictionary: [Int : String] =
         [
             // Gym ------------------------------------
             // Legs (Quads) ---------
             0: "squatE",
             1: "frontSquatE",
-            2: "hackSquatE",
-            3: "legPressE",
-            4: "dumbellFrontSquatE",
-            5: "legExtensionsE",
+            2: "legPressE",
+            3: "dumbellFrontSquatE",
+            4: "legExtensionsE",
             // Legs (Hamstrings/Glutes)
-            6: "deadliftE",
-            7: "romanianDeadliftE",
-            8: "weightedHipThrustE",
-            9: "legCurlE",
-            10: "oneLeggedDeadliftE",
-            11: "gluteIsolationMachineE",
+            5: "deadliftE",
+            6: "romanianDeadliftE",
+            7: "weightedHipThrustE",
+            8: "legCurlE",
+            9: "oneLeggedDeadliftE",
+            10: "gluteIsolationMachineE",
             // Legs (General)
-            12: "lungeDumbellE",
-            13: "bulgarianSplitSquatE",
-            14: "stepUpE",
+            11: "lungeDumbellE",
+            12: "bulgarianSplitSquatE",
+            13: "weightedStepUpE",
             // Legs (Calves)
-            15: "standingCalfRaiseE",
-            16: "seatedCalfRaiseE",
+            14: "standingCalfRaiseE",
+            15: "seatedCalfRaiseE",
             // Pull (Back) ---------
-            17: "pullUpE",
-            18: "pullDownE",
-            19: "kneelingPullDownE",
-            20: "pullDownMachineE",
-            21: "hammerStrengthPullDownE",
-            22: "bentOverRowBarbellE",
-            23: "bentOverRowDumbellE",
-            24: "tBarRowE",
-            25: "rowMachineE",
-            26: "hammerStrengthRowE",
-            27: "latPulloverE",
+            16: "pullDownE",
+            17: "kneelingPullDownE",
+            18: "pullDownMachineE",
+            19: "bentOverRowBarbellE",
+            20: "bentOverRowDumbellE",
+            21: "tBarRowE",
+            22: "rowMachineE",
+            23: "latPulloverE",
             // Pull (Upper Back)
-            28: "facePullE",
-            29: "smithMachinePullUpE",
-            30: "leaningBackPullDownE",
-            31: "seatedMachineRowE",
+            24: "facePullE",
+            25: "smithMachinePullUpE",
+            26: "leaningBackPullDownE",
+            27: "seatedMachineRowE",
             // Pull (Rear Delts)
-            32: "bentOverBarbellRowE",
+            28: "bentOverBarbellRowE",
             // Pull (Traps)
-            33: "shrugDumbellE",
+            29: "shrugDumbellE",
             // Pull (Biceps)
-            34: "hamerCurlE",
-            35: "hammerCurlCableE",
-            36: "cableCurlE",
-            37: "curlE",
+            30: "hammerCurlE",
+            31: "hammerCurlCableE",
+            32: "curlE",
             // Pull (Forearms)
-            38: "farmersCarryE",
-            39: "reverseBarbellCurlE",
-            40: "forearmCurlE",
+            33: "farmersCarryE",
+            34: "reverseBarbellCurlE",
+            35: "forearmCurlE",
             // Push (Chest) ---------
-            41: "pushUpE",
-            42: "benchPressE",
-            43: "benchPressDumbellE",
-            44: "semiInclineDumbellPressE",
-            45: "hammerStrengthPressE",
-            46: "chestPressE",
-            47: "platePressE",
-            48: "barbellKneelingPressE",
-            49: "cableFlyE",
-            50: "dipsE",
+            36: "benchPressE",
+            37: "benchPressDumbellE",
+            38: "semiInclineDumbellPressE",
+            39: "chestPressE",
+            40: "platePressE",
+            41: "barbellKneelingPressE",
+            42: "cableFlyE",
+            43: "dipsE",
             // Push (Shoulders)
-            51: "standingShoulderPressBarbellE",
-            52: "standingShoulderPressDumbellE",
-            53: "lateralRaiseE",
-            54: "frontRaiseE",
+            44: "standingShoulderPressBarbellE",
+            45: "standingShoulderPressDumbellE",
+            46: "lateralRaiseE",
+            47: "frontRaiseE",
             // Push (Triceps)
-            55: "ballPushUpE",
-            56: "trianglePushUpE",
-            57: "closeGripBenchE",
-            58: "cableExtensionE",
-            59: "ropeExtensionE",
+            48: "ballPushUpE",
+            49: "closeGripBenchE",
+            50: "cableExtensionE",
+            51: "ropeExtensionE",
             // Full Body
-            60: "cleanPressE",
+            52: "cleanPressE",
             // BodyWeight ------------------------------------
             // Legs (General) ---------
-            61: "bodyweightSquatE",
-            62: "pistolSquatE",
-            63: "skaterSquatE",
-            64: "squatJumpE",
-            65: "sumoSquatE",
-            66: "sumoSquatJumpE",
-            67: "lungeE",
-            68: "lungeJumpE",
-            69: "stepUpE",
+            53: "bodyweightSquatE",
+            54: "pistolSquatE",
+            55: "skaterSquatE",
+            56: "squatJumpE",
+            57: "sumoSquatE",
+            58: "lungeE",
+            59: "lungeJumpE",
+            60: "stepUpE",
             // Legs (Hamstrings)
-            70: "deadliftE",
-            71: "singleLegDeadliftE",
+            61: "deadliftE",
+            62: "singleLegDeadliftE",
             // Legs (Glutes)
-            72: "gluteBridgeE",
-            73: "singleLegGluteBridgeE",
-            74: "kickBackE",
-            75: "standingKickBackE",
-            76: "standingSideKickE",
+            63: "gluteBridgeE",
+            64: "singleLegGluteBridgeE",
+            65: "kickBackE",
+            66: "standingKickBackE",
             // Legs (Calves)
-            77: "calfRaiseE",
+            67: "calfRaiseE",
             // Pull (Back) ---------
-            78: "contralateralLimbRaisesE",
-            79: "superManE",
-            80: "backHyperextensionE",
-            81: "doorFrameRowE",
-            82: "reverseSnowAngelsE",
-            83: "elbowTorsoLiftE",
-            84: "backBridgeE",
-            85: "scapulaPushupE",
+            68: "contralateralLimbRaisesE",
+            69: "superManE",
+            70: "backHyperextensionE",
+            71: "doorFrameRowE",
+            72: "reverseSnowAngelsE",
+            73: "scapulaPushupE",
             // Pull (Traps)
-            86: "handStandTrapE",
-            87: "handStandShoulderTapE",
-            88: "handStandWaistTapE",
-            // Pull (Rear Delts)
-            89: "bentOverArmCirclesE",
+            74: "handStandTrapE",
             // Push (Chest) ---------
-            90: "pushupE",
+            75: "pushupE",
             // Push (Tricep)
-            91: "trianglePushupE",
-            92: "dolphinPushupE",
-            93: "tricepExtensionsBodyweightE",
+            76: "trianglePushupE",
+            77: "dolphinPushupE",
+            78: "tricepExtensionsBodyweightE",
             // Push (Chest & Tricep)
-            94: "walkingPushupE",
+            79: "walkingPushupE",
             // Push (Shoulder)
-            95: "downwardDogPushupE",
-            96: "wallPushupE",
-            97: "boxerE",
-            98: "armCirclesE",
+            80: "downwardDogPushupE",
+            81: "wallPushupE",
+            82: "boxerE",
+            83: "armCirclesE",
             // Core ---------
-            99: "plankE",
-            100: "dynamicPlankE",
-            101: "sidePlankE",
-            102: "pushupPlankE",
-            103: "lSitE",
-            104: "bicycleCrunchE",
-            105: "divingHoldE",
-            106: "hipRaiseE",
-            107: "legHoldE",
+            84: "plankE",
+            85: "dynamicPlankE",
+            86: "sidePlankE",
+            87: "pushupPlankE",
+            88: "lSitE",
+            89: "bicycleCrunchE",
+            90: "divingHoldE",
+            91: "hipRaiseE",
+            92: "legHoldE",
             // General (Core) ---------
-            108: "mountainClimbersE",
+            93: "mountainClimbersE",
             // General (Full Body)
-            109: "burpeeE",
-            110: "kickThroughBurpeeE",
+            94: "burpeeE",
+            95: "kickThroughBurpeeE",
             // General (Upper Body)
-            111: "spiderPushupE",
-            112: "crabWalkE",
+            96: "spiderPushupE",
+            97: "crabWalkE",
             // General (Cardio)
-            113: "jumpingJacksE",
-            114: "tuckJumpE",
-            115: "bumKicksE",
-            116: "kneeRaisesE",
+            98: "jumpingJacksE",
+            99: "tuckJumpE",
+            100: "bumKicksE",
+            101: "kneeRaisesE",
             // Isometric (Legs) ---------
-            117: "wallSitE",
-            118: "chairHoldE",
-            119: "toePressE",
-            120: "staticLungeE",
-            121: "calfRaiseE",
+            102: "wallSitE",
+            103: "chairHoldE",
+            104: "toePressE",
+            105: "staticLungeE",
+            106: "calfRaiseE",
             // Isometric (Upper Body)
-            122: "chestSqueezeE",
-            123: "dolphinPlankE",
-            124: "pullupHoldE",
+            107: "chestSqueezeE",
+            108: "dolphinPlankE",
+            109: "pullupHoldE",
             // Equiptment (Ball) ---------
-            125: "ballPushupE",
+            110: "ballPushupE",
             // Equiptment (Bar)
-            126: "bodweightRowE",
-            127: "pullupE",
-            128: "hangingLegRaiseE",
+            111: "bodweightRowE",
+            112: "pullupE",
+            113: "hangingLegRaiseE",
             // Equiptment (Bench/Step)
-            129: "tricepDipE",
-            130: "bulgarianSplitSquatE",
-            131: "boxJumpE",
-            132: "hipThrustsE",
-            133: "stepUpE"
+            114: "tricepDipE",
+            115: "bulgarianSplitSquatE",
+            116: "boxJumpE",
+            117: "hipThrustsE",
+            118: "stepUpE"
     ]
     
     
@@ -1054,6 +962,44 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         [
             [
                 [0, 11, 12, 14, 17, 19, 21, 23, 26, 31, 32, 33, 35, 36],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    // Sets Arrays
+    var presetSetsArrayGymFull: [[[Int]]] =
+        [
+            [
+                // Default
+                [2,1,2,1,2,1,2,1,1,2,2,1,2,1],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    // Reps Arrays
+    var presetRepsArrayGymFull: [[[String]]] =
+        [
+            [
+                // Default
+                ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps"],
                 []
             ],
             [
@@ -1100,6 +1046,44 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             ]
     ]
     
+    // Sets Arrays
+    var presetSetsArrayGymUpper: [[[Int]]] =
+        [
+            [
+                // Default
+                [2,1,2,1,2,1,2,1,1,2,2,1,2,1],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    // Reps Arrays
+    var presetRepsArrayGymUpper: [[[String]]] =
+        [
+            [
+                // Default
+                ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps"],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
     //
     // Lower Body --------------------------------------------------------------------------------------------------------------------------
     //
@@ -1133,8 +1117,46 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             ]
     ]
     
+    // Sets Arrays
+    var presetSetsArrayGymLower: [[[Int]]] =
+        [
+            [
+                // Default
+                [2,1,2,1,2,1,2,1,1,2,2,1,2,1],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    // Reps Arrays
+    var presetRepsArrayGymLower: [[[String]]] =
+        [
+            [
+                // Default
+                ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps"],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
     //
-    // Push Body --------------------------------------------------------------------------------------------------------------------------
+    // Legs Body --------------------------------------------------------------------------------------------------------------------------
     //
     // Picker View Array
     var presetsArrayGymLegs: [[String]] =
@@ -1153,6 +1175,44 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         [
             [
                 [0, 11, 12, 14, 17, 19, 21, 23, 26, 31, 32, 33, 35, 36],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    // Sets Arrays
+    var presetSetsArrayGymLegs: [[[Int]]] =
+        [
+            [
+                // Default
+                [2,1,2,1,2,1,2,1,1,2,2,1,2,1],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    // Reps Arrays
+    var presetRepsArrayGymLegs: [[[String]]] =
+        [
+            [
+                // Default
+                ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps"],
                 []
             ],
             [
@@ -1199,6 +1259,44 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             ]
     ]
     
+    // Sets Arrays
+    var presetSetsArrayGymPull: [[[Int]]] =
+        [
+            [
+                // Default
+                [2,1,2,1,2,1,2,1,1,2,2,1,2,1],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    // Reps Arrays
+    var presetRepsArrayGymPull: [[[String]]] =
+        [
+            [
+                // Default
+                ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps"],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
     //
     // Push Body --------------------------------------------------------------------------------------------------------------------------
     //
@@ -1219,6 +1317,44 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         [
             [
                 [0, 11, 12, 14, 17, 19, 21, 23, 26, 31, 32, 33, 35, 36],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    // Sets Arrays
+    var presetSetsArrayGymPush: [[[Int]]] =
+        [
+            [
+                // Default
+                [2,1,2,1,2,1,2,1,1,2,2,1,2,1],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    // Reps Arrays
+    var presetRepsArrayGymPush: [[[String]]] =
+        [
+            [
+                // Default
+                ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps"],
                 []
             ],
             [
@@ -1264,11 +1400,44 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                 []
             ]
     ]
-  
-    var numberOfRoundsArrayGym: [[Int]] = []
-
     
+    // Sets Arrays
+    var presetSetsArrayGym5x5: [[[Int]]] =
+        [
+            [
+                // Default
+                [2,1,2,1,2,1,2,1,1,2,2,1,2,1],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
     
+    // Reps Arrays
+    var presetRepsArrayGym5x5: [[[String]]] =
+        [
+            [
+                // Default
+                ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps"],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
     
 //
 // Gym Circuit -------------------------------------------------------------------------------------------------------------------------
@@ -1277,7 +1446,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     // Full Body --------------------------------------------------------------------------------------------------------------------------
     //
     // Picker View Array
-    var presetsArrayCircuitFull: [[String]] =
+    var presetsArrayGymCircuitFull: [[String]] =
         [
             ["default",
              "beginner"],
@@ -1289,7 +1458,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     ]
     
     // Preseys Arrays
-    var presetsArraysCircuitFull: [[[Int]]] =
+    var presetsArraysGymCircuitFull: [[[Int]]] =
         [
             // Sections in presets table
             [
@@ -1309,7 +1478,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         ]
     
     //
-    var numberOfRoundsArrayCircuitFull: [[Int]] =
+    var numberOfRoundsArrayGymCircuitFull: [[Int]] =
         [
             // Sections in presets table
             [2,         // Rounds
@@ -1324,7 +1493,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     
    
     // Reps Array
-    var repsArrayCircuitFull: [[[[String]]]] =
+    var repsArrayGymCircuitFull: [[[[String]]]] =
         [
             // Sections in presets table
             [
@@ -1385,7 +1554,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     // Upper Body --------------------------------------------------------------------------------------------------------------------------
     //
     // Picker View Array
-    var presetsArrayCircuitUpper: [[String]] =
+    var presetsArrayGymCircuitUpper: [[String]] =
         [
             ["default",
              "beginner"],
@@ -1397,7 +1566,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     ]
     
     // Preseys Arrays
-    var presetsArraysCircuitUpper: [[[Int]]] =
+    var presetsArraysGymCircuitUpper: [[[Int]]] =
         [
             [
                 [0, 11, 12],
@@ -1415,7 +1584,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     ]
     
     //
-    var numberOfRoundsArrayCircuitUpper: [[Int]] =
+    var numberOfRoundsArrayGymCircuitUpper: [[Int]] =
         [
             [2,
             3],
@@ -1427,7 +1596,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         ]
     
     // Reps Array
-    var repsArrayCircuitUpper: [[[[String]]]] =
+    var repsArrayGymCircuitUpper: [[[[String]]]] =
         [
             // Sections in presets table
             [
@@ -1487,7 +1656,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     // Lower Body --------------------------------------------------------------------------------------------------------------------------
     //
     // Picker View Array
-    var presetsArrayCircuitLower: [[String]] =
+    var presetsArrayGymCircuitLower: [[String]] =
         [
             ["default",
              "beginner"],
@@ -1499,7 +1668,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     ]
     
     // Preseys Arrays
-    var presetsArraysCircuitLower: [[[Int]]] =
+    var presetsArraysGymCircuitLower: [[[Int]]] =
         [
             [
                 [0, 11, 12],
@@ -1517,7 +1686,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     ]
     
     //
-    var numberOfRoundsArrayCircuitLower: [[Int]] =
+    var numberOfRoundsArrayGymCircuitLower: [[Int]] =
         [
             [2,
              3],
@@ -1530,7 +1699,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     
     
     // Reps Array
-    var repsArrayCircuitLower: [[[[String]]]] =
+    var repsArrayGymCircuitLower: [[[[String]]]] =
         [
             // Sections in presets table
             [
@@ -1587,545 +1756,9 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     ]
     
     
-    
-    
-    
-    
-    
 //
-// BodyWeight -------------------------------------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------------------------------------------
-    // TableView Section Array
-    var tableViewSectionArrayBodyweight: [String] =
-        [
-            "legsG",
-            "hamstrings",
-            "glutesW",
-            "calves",
-            "pullBa",
-            "pullT",
-            "pullRD",
-            "pushC",
-            "pushT",
-            "pushS",
-            "coreAbs",
-            // General
-            "generalC",
-            "generalF",
-            "generalU",
-            "cardio",
-            // Isometric
-            "isometricL",
-            // Equiptment
-            "equiptmentB",
-            "equiptmentBa",
-            "equiptmentBe"
-    ]
-    
-    // Full Key Array
-    var fullKeyArrayBodyweight: [[Int]] =
-        [
-            // Cardio
-            [0],
-            // Joint Rotations
-            [1,
-             2,
-             3,
-             4,
-             5,
-             6,
-             7,
-             8],
-            // Foam/Ball Roll
-            [9,
-             10,
-             11,
-             12,
-             13,
-             14,
-             15,
-             16,
-             17,
-             18],
-            // Lower Back
-            [19,
-             20,
-             21,
-             22,
-             23],
-            // Shoulder
-            [24,
-             25,
-             26,
-             27],
-            // Band/Bar/Machine Assisted
-            [28,
-             29,
-             30,
-             31,
-             32,
-             33],
-            // General Mobility
-            [34,
-             35,
-             36,
-             37,
-             38,
-             39,
-             40,
-             41,
-             42,
-             43,
-             44],
-            // Dynamic Warmup Drills
-            [45,
-             46,
-             47,
-             48,
-             49,
-             50,
-             51,
-             52,
-             53],
-            // Accessory
-            [54,
-             55,
-             56,
-             57]
-    ]
-    
-    // Warmup Movements Dictionary
-    var workoutMovementsDictionaryBodyweight: [Int : String] =
-        [
-            // Cardio
-            0: "5minCardio",
-            // Joint Rotations
-            1: "wrist",
-            2: "elbow",
-            3: "shoulder",
-            4: "neckR",
-            5: "waist",
-            6: "hip",
-            7: "knees",
-            8: "ankles",
-            // Foam/Ball Roll
-            9: "backf",
-            10: "thoracicSpine",
-            11: "lat",
-            12: "pecDelt",
-            13: "rearDelt",
-            14: "quadf",
-            15: "adductorf",
-            16: "hamstringf",
-            17: "glutef",
-            18: "calvef",
-            // Lower Back
-            19: "sideLegDrop",
-            20: "sideLegKick",
-            21: "scorpionKick",
-            22: "sideBend",
-            23: "catCow",
-            // Shoulder
-            24: "wallSlides",
-            25: "superManShoulder",
-            26: "scapula",
-            27: "shoulderRotation",
-            // Band/Bar/Machine Assisted
-            28: "facePull",
-            29: "externalRotation",
-            30: "internalRotation",
-            31: "shoulderDislocation",
-            32: "rearDeltFly",
-            33: "latPullover",
-            // General Mobility
-            34: "rollBack",
-            35: "hipCircles",
-            36: "mountainClimber",
-            37: "groinStretch",
-            38: "gluteBridge",
-            39: "threadTheNeedle",
-            40: "butterflyPose",
-            41: "cossakSquat",
-            42: "hipHinges",
-            43: "sideLegSwings",
-            44: "frontLegSwings",
-            // Dynamic Warmup Drills
-            45: "jumpSquat",
-            46: "lunge",
-            47: "gluteKicks",
-            48: "aSkips",
-            49: "bSkips",
-            50: "grapeVines",
-            51: "lateralBound",
-            52: "straightLegBound",
-            53: "sprints",
-            // Accessory
-            54: "latStretch",
-            55: "calveStretch",
-            56: "pushUp",
-            57: "pullUp"
-    ]
-    
-    // Demonstration Array
-    var demonstrationDictionaryBodyweight: [Int : UIImage] =
-        [
-            // Cardio
-            0: #imageLiteral(resourceName: "Test 2"),
-            // Joint Rotations
-            1: #imageLiteral(resourceName: "Test 2"),
-            2: #imageLiteral(resourceName: "Test 2"),
-            3: #imageLiteral(resourceName: "Test 2"),
-            4: #imageLiteral(resourceName: "Test 2"),
-            5: #imageLiteral(resourceName: "Test 2"),
-            6: #imageLiteral(resourceName: "Test 2"),
-            7: #imageLiteral(resourceName: "Test 2"),
-            8: #imageLiteral(resourceName: "Test 2"),
-            // Foam/Ball Roll
-            9: #imageLiteral(resourceName: "Test 2"),
-            10: #imageLiteral(resourceName: "Test 2"),
-            11: #imageLiteral(resourceName: "Test 2"),
-            12: #imageLiteral(resourceName: "Test 2"),
-            13: #imageLiteral(resourceName: "Test 2"),
-            14: #imageLiteral(resourceName: "Test 2"),
-            15: #imageLiteral(resourceName: "Test 2"),
-            16: #imageLiteral(resourceName: "Test 2"),
-            17: #imageLiteral(resourceName: "Test 2"),
-            18: #imageLiteral(resourceName: "Test 2"),
-            // Lower Back
-            19: #imageLiteral(resourceName: "Test 2"),
-            20: #imageLiteral(resourceName: "Test 2"),
-            21: #imageLiteral(resourceName: "Test 2"),
-            22: #imageLiteral(resourceName: "Test 2"),
-            23: #imageLiteral(resourceName: "Test 2"),
-            // Shoulder
-            24: #imageLiteral(resourceName: "Test 2"),
-            25: #imageLiteral(resourceName: "Test 2"),
-            26: #imageLiteral(resourceName: "Test 2"),
-            27: #imageLiteral(resourceName: "Test 2"),
-            // Band/Bar/Machine Assisted
-            28: #imageLiteral(resourceName: "Test 2"),
-            29: #imageLiteral(resourceName: "Test 2"),
-            30: #imageLiteral(resourceName: "Test 2"),
-            31: #imageLiteral(resourceName: "Test 2"),
-            32: #imageLiteral(resourceName: "Test 2"),
-            33: #imageLiteral(resourceName: "Test 2"),
-            // General Mobility
-            34: #imageLiteral(resourceName: "Test 2"),
-            35: #imageLiteral(resourceName: "Test 2"),
-            36: #imageLiteral(resourceName: "Test 2"),
-            37: #imageLiteral(resourceName: "Test 2"),
-            38: #imageLiteral(resourceName: "Test 2"),
-            39: #imageLiteral(resourceName: "Test 2"),
-            40: #imageLiteral(resourceName: "Test 2"),
-            41: #imageLiteral(resourceName: "Test 2"),
-            42: #imageLiteral(resourceName: "Test 2"),
-            43: #imageLiteral(resourceName: "Test 2"),
-            44: #imageLiteral(resourceName: "Test 2"),
-            // Dynamic Warm Up Drills
-            45: #imageLiteral(resourceName: "Test 2"),
-            46: #imageLiteral(resourceName: "Test 2"),
-            47: #imageLiteral(resourceName: "Test 2"),
-            48: #imageLiteral(resourceName: "Test 2"),
-            49: #imageLiteral(resourceName: "Test 2"),
-            50: #imageLiteral(resourceName: "Test 2"),
-            51: #imageLiteral(resourceName: "Test 2"),
-            52: #imageLiteral(resourceName: "Test 2"),
-            53: #imageLiteral(resourceName: "Test 2"),
-            // Accessory
-            54: #imageLiteral(resourceName: "Test 2"),
-            55: #imageLiteral(resourceName: "Test 2"),
-            56: #imageLiteral(resourceName: "Test 2"),
-            57: #imageLiteral(resourceName: "Test 2")
-    ]
-    
-    // Target Area Array
-    var targetAreaDictionaryBodyweight: [Int: UIImage] =
-        [
-            // Cardio
-            0: #imageLiteral(resourceName: "Heart"),
-            // Joint Rotations
-            1: #imageLiteral(resourceName: "Wrist Joint"),
-            2: #imageLiteral(resourceName: "Elbow Joint"),
-            3: #imageLiteral(resourceName: "Shoulder Joint"),
-            4: #imageLiteral(resourceName: "Neck Joint"),
-            5: #imageLiteral(resourceName: "Waist Joint"),
-            6: #imageLiteral(resourceName: "Hip Joint"),
-            7: #imageLiteral(resourceName: "Knee Joint"),
-            8: #imageLiteral(resourceName: "Ankle Joint"),
-            // Foam/Ball Roll
-            9: #imageLiteral(resourceName: "Thoracic"),
-            10: #imageLiteral(resourceName: "Thoracic"),
-            11: #imageLiteral(resourceName: "Lat and Delt"),
-            12: #imageLiteral(resourceName: "Pec and Front Delt"),
-            13: #imageLiteral(resourceName: "Rear Delt"),
-            14: #imageLiteral(resourceName: "Quad"),
-            15: #imageLiteral(resourceName: "Adductor"),
-            16: #imageLiteral(resourceName: "Hamstring"),
-            17: #imageLiteral(resourceName: "Glute"),
-            18: #imageLiteral(resourceName: "Calf"),
-            // Lower Back
-            19: #imageLiteral(resourceName: "Core"),
-            20: #imageLiteral(resourceName: "Core"),
-            21: #imageLiteral(resourceName: "Core"),
-            22: #imageLiteral(resourceName: "Core"),
-            23: #imageLiteral(resourceName: "Spine"),
-            // Shoulder
-            24: #imageLiteral(resourceName: "Shoulder"),
-            25: #imageLiteral(resourceName: "Back and Shoulder"),
-            26: #imageLiteral(resourceName: "Serratus"),
-            27: #imageLiteral(resourceName: "Shoulder"),
-            // Band/Bar/Machine Assisted
-            28: #imageLiteral(resourceName: "Upper Back and Shoulder"),
-            29: #imageLiteral(resourceName: "Rear Delt"),
-            30: #imageLiteral(resourceName: "Rear Delt"),
-            31: #imageLiteral(resourceName: "Shoulder"),
-            32: #imageLiteral(resourceName: "Rear Delt"),
-            33: #imageLiteral(resourceName: "Back"),
-            // General Mobility
-            34: #imageLiteral(resourceName: "Hamstring and Lower Back"),
-            35: #imageLiteral(resourceName: "Hip Area"),
-            36: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-            37: #imageLiteral(resourceName: "Adductor"),
-            38: #imageLiteral(resourceName: "Hamstring and Lower Back"),
-            39: #imageLiteral(resourceName: "Piriformis"),
-            40: #imageLiteral(resourceName: "Adductor"),
-            41: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-            42: #imageLiteral(resourceName: "Hamstring and Glute"),
-            43: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-            44: #imageLiteral(resourceName: "Quad, Hamstring and Glute Stretch"),
-            // Dynamic Warm Up Drills
-            45: #imageLiteral(resourceName: "Squat"),
-            46: #imageLiteral(resourceName: "Squat"),
-            47: #imageLiteral(resourceName: "Squat"),
-            48: #imageLiteral(resourceName: "Squat"),
-            49: #imageLiteral(resourceName: "Squat"),
-            50: #imageLiteral(resourceName: "Squat"),
-            51: #imageLiteral(resourceName: "Squat"),
-            52: #imageLiteral(resourceName: "Squat"),
-            53: #imageLiteral(resourceName: "Squat"),
-            // Accessory
-            54: #imageLiteral(resourceName: "Lat"),
-            55: #imageLiteral(resourceName: "Calf"),
-            56: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            57: #imageLiteral(resourceName: "Back and Bicep")
-    ]
-    
-    // Explanation Array
-    var explanationDictionaryBodyweight: [Int : String] =
-        [
-            // Cardio
-            0: "5minCardioL",
-            // Joint Rotations
-            1: "wristE",
-            2: "elbowE",
-            3: "shoulderE",
-            4: "neckE",
-            5: "waistE",
-            6: "hipE",
-            7: "kneesE",
-            8: "anklesE",
-            // Foam/Ball Roll
-            9: "backfE",
-            10: "thoracicSpineE",
-            11: "latE",
-            12: "pecDeltE",
-            13: "rearDeltE",
-            14: "quadfE",
-            15: "adductorfE",
-            16: "hamstringfE",
-            17: "glutefE",
-            18: "calvefE",
-            // Back
-            19: "sideLegDropE",
-            20: "sideLegKickE",
-            21: "scorpionKickE",
-            22: "sideBendE",
-            23: "catCowE",
-            // Shoulder
-            24: "wallSlidesE",
-            25: "superManShoulderE",
-            26: "scapulaE",
-            27: "shoulderRotationE",
-            // Band/Bar/Machine Assisted
-            28: "facePullE",
-            29: "externalRotationE",
-            30: "internalRotationE",
-            31: "shoulderDislocationE",
-            32: "rearDeltFlyE",
-            33: "latPulloverE",
-            // General Mobility
-            34: "rollBackE",
-            35: "hipCirclesE",
-            36: "mountainClimberE",
-            37: "groinStretchE",
-            38: "gluteBridgeE",
-            39: "threadTheNeedleE",
-            40: "butterflyPoseE",
-            41: "cossakSquatE",
-            42: "hipHingesE",
-            43: "sideLegSwingsE",
-            44: "frontLegSwingsE",
-            // Dynamic Warm Up Drills
-            45: "jumpSquatE",
-            46: "lungeE",
-            47: "gluteKicksE",
-            48: "aSkipsE",
-            49: "bSkipsE",
-            50: "grapeVinesE",
-            51: "lateralBoundE",
-            52: "straightLegBoundE",
-            53: "sprintsE",
-            // Accessory
-            54: "latStretchE",
-            55: "calveStretchE",
-            56: "pushUpE",
-            57: "pullUpE"
-    ]
-    
-    // Sets Dictionary
-    var setsDictionaryBodyweight: [Int : Int] =
-        [
-            // Cardio
-            0: 1,
-            // Joint Rotations
-            1: 1,
-            2: 1,
-            3: 1,
-            4: 1,
-            5: 1,
-            6: 1,
-            7: 1,
-            8: 1,
-            // Foam/Ball Roll
-            9: 1,
-            10: 3,
-            11: 1,
-            12: 1,
-            13: 1,
-            14: 1,
-            15: 1,
-            16: 1,
-            17: 1,
-            18: 1,
-            // Lower Back
-            19: 1,
-            20: 1,
-            21: 1,
-            22: 1,
-            23: 1,
-            // Shoulder
-            24: 2,
-            25: 1,
-            26: 1,
-            27: 1,
-            // Band/Bar/Machine Assisted
-            28: 2,
-            29: 1,
-            30: 1,
-            31: 1,
-            32: 1,
-            33: 1,
-            // General Mobility
-            34: 1,
-            35: 1,
-            36: 1,
-            37: 1,
-            38: 1,
-            39: 2,
-            40: 1,
-            41: 1,
-            42: 2,
-            43: 1,
-            44: 1,
-            // Dynamic Warm Up Drills
-            45: 2,
-            46: 2,
-            47: 3,
-            48: 3,
-            49: 3,
-            50: 2,
-            51: 2,
-            52: 2,
-            53: 4,
-            // Accessory
-            54: 1,
-            55: 1,
-            56: 1,
-            57: 1
-    ]
-    
-    // Reps Array
-    var repsDictionaryBodyweight: [Int : String] =
-        [
-            // Mandatory
-            0: "5min",
-            // Joint Rotations
-            1: "10-30s",
-            2: "10-30s",
-            3: "10-30s",
-            4: "10-30s",
-            5: "10-30s",
-            6: "10-30s",
-            7: "10-30s",
-            8: "10-30s",
-            // Foam/Ball Roll
-            9: "2-7 reps",
-            10: "5-10 reps",
-            11: "2-7 reps",
-            12: "15-30s",
-            13: "15-30s",
-            14: "2-7 reps",
-            15: "2-7 reps",
-            16: "2-7 reps",
-            17: "2-7 reps",
-            18: "2-7 reps",
-            // Lower Back
-            19: "5-10 reps",
-            20: "5-10 reps",
-            21: "5-10 reps",
-            22: "5-10 reps",
-            23: "15-20 reps",
-            // Shoulder
-            24: "10-20 reps",
-            25: "5-10 reps",
-            26: "15 reps",
-            27: "10 reps",
-            // Band/Bar/Machine Assisted
-            28: "10-15 reps",
-            29: "5-15 reps",
-            30: "5-10 reps",
-            31: "5-10 reps",
-            32: "10-15 reps",
-            33: "10-20 reps",
-            // General Mobility
-            34: "10-15 reps",
-            35: "5-10 reps",
-            36: "5-10 reps",
-            37: "5-10 reps",
-            38: "10-15 reps",
-            39: "15-30s",
-            40: "15-30s",
-            41: "5-10 reps",
-            42: "10-20 reps",
-            43: "10-20 reps",
-            44: "10-20 reps",
-            // Dynamic Warm Up Drills
-            45: "5-15 reps",
-            46: "10-15 reps",
-            47: "15-30s",
-            48: "15-30s",
-            49: "15-30s",
-            50: "50m",
-            51: "50m",
-            52: "50m",
-            53: "5-20 reps",
-            // Accessory
-            54 :"15-30s",
-            55: "15-30s",
-            56: NSLocalizedString("asNecessary", comment: ""),
-            57: NSLocalizedString("asNecessary", comment: "")
-        ]
-    
+// BodyWeight --------------------------------------------------------------------------------------------------------------------------
+//
     //
     // Full Body --------------------------------------------------------------------------------------------------------------------------
     //
@@ -2159,16 +1792,42 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             ]
         ]
     
-    //
-    var numberOfRoundsArrayBodyweightFull: [[Int]] =
+    // Sets Arrays
+    var presetSetsArrayBodyweightFull: [[[Int]]] =
         [
-            [2,
-             3],
-            [4,
-             3,
-             5],
-            [2,
-             3]
+            [
+                // Default
+                [2,1,2,1,2,1,2,1,1,2,2,1,2,1],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    // Reps Arrays
+    var presetRepsArrayBodyweightFull: [[[String]]] =
+        [
+            [
+                // Default
+                ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps"],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
     ]
     
     
@@ -2205,16 +1864,42 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             ]
         ]
     
-    //
-    var numberOfRoundsArrayBodyweightUpper: [[Int]] =
+    // Sets Arrays
+    var presetSetsArrayBodyweightUpper: [[[Int]]] =
         [
-            [2,
-             3],
-            [4,
-             3,
-             5],
-            [2,
-             3]
+            [
+                // Default
+                [2,1,2,1,2,1,2,1,1,2,2,1,2,1],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    // Reps Arrays
+    var presetRepsArrayBodyweightUpper: [[[String]]] =
+        [
+            [
+                // Default
+                ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps"],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
     ]
     
     
@@ -2251,18 +1936,355 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             ]
         ]
     
+    // Sets Arrays
+    var presetSetsArrayBodyweightLower: [[[Int]]] =
+        [
+            [
+                // Default
+                [2,1,2,1,2,1,2,1,1,2,2,1,2,1],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    // Reps Arrays
+    var presetRepsArrayBodyweightLower: [[[String]]] =
+        [
+            [
+                // Default
+                ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps"],
+                []
+            ],
+            [
+                [],
+                [],
+                []
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+//
+// BodyWeight Circuit --------------------------------------------------------------------------------------------------------------------------
+//
     //
-    var numberOfRoundsArrayBodyweightLower: [[Int]] =
+    // Full Body --------------------------------------------------------------------------------------------------------------------------
+    //
+    // Picker View Array
+    var presetsArrayBodyweightCircuitFull: [[String]] =
+        [
+            ["default",
+             "beginner"],
+            ["bodyWeight",
+             "bodybuilding",
+             "strength"],
+            ["highIntensity",
+             "quick"]
+    ]
+    
+    // Preseys Arrays
+    var presetsArraysBodyweightCircuitFull: [[[Int]]] =
+        [
+            [
+                [0, 11, 12],
+                [0, 23, 30]
+            ],
+            [
+                [3, 12, 34],
+                [5, 0, 12],
+                [1, 1, 4]
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    //
+    var numberOfRoundsArrayBodyweightCircuitFull: [[Int]] =
         [
             [2,
-            3],
+             3],
             [4,
-            3,
-            5],
+             3,
+             5],
             [2,
-            3]
-        ]
+             3]
+    ]
     
+    // Reps Array
+    var repsArrayBodyweightCircuitFull: [[[[String]]]] =
+        [
+            // Sections in presets table
+            [
+                // Preset
+                [
+                    // Rounds
+                    ["50 reps", "50 reps", "50 reps"],
+                    ["30 reps", "30 reps", "30 reps"]
+                ],
+                //
+                [
+                    ["50 reps", "50 reps", "50 reps"],
+                    ["30 reps", "30 reps", "30 reps"],
+                    ["20 reps", "20 reps", "20 reps"]
+                ],
+                ],
+            //
+            [
+                //
+                [
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ]
+            ],
+            [
+                //
+                [
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    []
+                ]
+            ]
+    ]
+    
+    
+    //
+    // Upper Body --------------------------------------------------------------------------------------------------------------------------
+    //
+    // Picker View Array
+    var presetsArrayBodyweightCircuitUpper: [[String]] =
+        [
+            ["default",
+             "beginner"],
+            ["bodyWeight",
+             "bodybuilding",
+             "strength"],
+            ["highIntensity",
+             "quick"]
+    ]
+    
+    // Preseys Arrays
+    var presetsArraysBodyweightCircuitUpper: [[[Int]]] =
+        [
+            [
+                [0, 11, 12],
+                [0, 23, 30]
+            ],
+            [
+                [3, 12, 34],
+                [5, 0, 12],
+                [1, 1, 4]
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    //
+    var numberOfRoundsArrayBodyweightCircuitUpper: [[Int]] =
+        [
+            [2,
+             3],
+            [4,
+             3,
+             5],
+            [2,
+             3]
+    ]
+    
+    // Reps Array
+    var repsArrayBodyweightCircuitUpper: [[[[String]]]] =
+        [
+            // Sections in presets table
+            [
+                // Preset
+                [
+                    // Rounds
+                    ["50 reps", "50 reps", "50 reps"],
+                    ["30 reps", "30 reps", "30 reps"]
+                ],
+                //
+                [
+                    ["50 reps", "50 reps", "50 reps"],
+                    ["30 reps", "30 reps", "30 reps"],
+                    ["20 reps", "20 reps", "20 reps"]
+                ],
+                ],
+            //
+            [
+                //
+                [
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ]
+            ],
+            [
+                //
+                [
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    []
+                ]
+            ]
+    ]
+    
+    
+    //
+    // Lower Body --------------------------------------------------------------------------------------------------------------------------
+    //
+    // Picker View Array
+    var presetsArrayBodyweightCircuitLower: [[String]] =
+        [
+            ["default",
+             "beginner"],
+            ["bodyWeight",
+             "bodybuilding",
+             "strength"],
+            ["highIntensity",
+             "quick"]
+    ]
+    
+    // Preseys Arrays
+    var presetsArraysBodyweightCircuitLower: [[[Int]]] =
+        [
+            [
+                [0, 11, 12],
+                [0, 23, 30]
+            ],
+            [
+                [3, 12, 34],
+                [5, 0, 12],
+                [1, 1, 4]
+            ],
+            [
+                [],
+                []
+            ]
+    ]
+    
+    //
+    var numberOfRoundsArrayBodyweightCircuitLower: [[Int]] =
+        [
+            [2,
+             3],
+            [4,
+             3,
+             5],
+            [2,
+             3]
+    ]
+    
+    // Reps Array
+    var repsArrayBodyweightCircuitLower: [[[[String]]]] =
+        [
+            // Sections in presets table
+            [
+                // Preset
+                [
+                    // Rounds
+                    ["50 reps", "50 reps", "50 reps"],
+                    ["30 reps", "30 reps", "30 reps"]
+                ],
+                //
+                [
+                    ["50 reps", "50 reps", "50 reps"],
+                    ["30 reps", "30 reps", "30 reps"],
+                    ["20 reps", "20 reps", "20 reps"]
+                ],
+                ],
+            //
+            [
+                //
+                [
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ]
+            ],
+            [
+                //
+                [
+                    [],
+                    []
+                ],
+                //
+                [
+                    [],
+                    [],
+                    []
+                ]
+            ]
+    ]
+
     
     
     
@@ -2274,133 +2296,135 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     func setArrays() {
         //
         // Set Dictionaries
-//        switch workoutType {
-//        //
-//        case 0:
-//            // Choice Screen Arrays
-//            tableViewSectionArray = tableViewSectionArrayGym
-//            fullKeyArray = fullKeyArrayGym
-//            workoutMovementsDictionary = workoutMovementsDictionaryGym
-//            demonstrationDictionary = demonstrationDictionaryGym
-//            targetAreaDictionary = targetAreaDictionaryGym
-//            explanationDictionary = explanationDictionaryGym
-//            setsDictionary = setsDictionaryGym
-//            repsDictionary = repsDictionaryGym
-//            numberOfRoundsArray = numberOfRoundsArrayGym
-//            //
-//            // Set Presets
-//            switch workoutType2 {
-//            case 0:
-//                presetsArray = presetsArrayGymFull
-//                presetsArrays = presetsArraysGymFull
-//            case 1:
-//                presetsArray = presetsArrayGymUpper
-//                presetsArrays = presetsArraysGymUpper
-//            case 2:
-//                presetsArray = presetsArrayGymLower
-//                presetsArrays = presetsArraysGymLower
-//            case 3:
-//                presetsArray = presetsArrayGymLegs
-//                presetsArrays = presetsArraysGymLegs
-//            case 4:
-//                presetsArray = presetsArrayGymPull
-//                presetsArrays = presetsArraysGymPull
-//            case 5:
-//                presetsArray = presetsArrayGymPush
-//                presetsArrays = presetsArraysGymPush
-//            case 6:
-//                presetsArray = presetsArrayGym5x5
-//                presetsArrays = presetsArraysGym5x5
-//            default: break
-//            }
-//        //
-//        case 1:
-//            // Choice Screen Arrays
-//            tableViewSectionArray = tableViewSectionArrayCircuit
-//            fullKeyArray = fullKeyArrayCircuit
-//            workoutMovementsDictionary = workoutMovementsDictionaryCircuit
-//            demonstrationDictionary = demonstrationDictionaryCircuit
-//            targetAreaDictionary = targetAreaDictionaryCircuit
-//            explanationDictionary = explanationDictionaryCircuit
-//            setsDictionary = setsDictionaryCircuit
-//            //
-//            // Set Presets
-//            switch workoutType2 {
-//            case 0:
-//                presetsArray = presetsArrayCircuitFull
-//                presetsArrays = presetsArraysCircuitFull
-//                numberOfRoundsArray = numberOfRoundsArrayCircuitFull
-//            case 1:
-//                presetsArray = presetsArrayCircuitUpper
-//                presetsArrays = presetsArraysCircuitUpper
-//                numberOfRoundsArray = numberOfRoundsArrayCircuitUpper
-//            case 2:
-//                presetsArray = presetsArrayCircuitLower
-//                presetsArrays = presetsArraysCircuitLower
-//                numberOfRoundsArray = numberOfRoundsArrayCircuitLower
-//            default: break
-//            }
-//        //
-//        case 2:
-//            // Choice Screen Arrays
-//            tableViewSectionArray = tableViewSectionArrayBodyweight
-//            fullKeyArray = fullKeyArrayBodyweight
-//            workoutMovementsDictionary = workoutMovementsDictionaryBodyweight
-//            demonstrationDictionary = demonstrationDictionaryBodyweight
-//            targetAreaDictionary = targetAreaDictionaryBodyweight
-//            explanationDictionary = explanationDictionaryBodyweight
-//            setsDictionary = setsDictionaryBodyweight
-//            repsDictionary = repsDictionaryBodyweight
-//            //
-//            // Set Presets
-//            switch workoutType2 {
-//            case 0:
-//                presetsArray = presetsArrayBodyweightFull
-//                presetsArrays = presetsArraysBodyweightFull
-//                numberOfRoundsArray = numberOfRoundsArrayBodyweightFull
-//            case 1:
-//                presetsArray = presetsArrayBodyweightUpper
-//                presetsArrays = presetsArraysBodyweightUpper
-//                numberOfRoundsArray = numberOfRoundsArrayBodyweightUpper
-//            case 2:
-//                presetsArray = presetsArrayBodyweightLower
-//                presetsArrays = presetsArraysBodyweightLower
-//                numberOfRoundsArray = numberOfRoundsArrayBodyweightLower
-//            default: break
-//            }
-//        //
-//        case 3:
-//            //
-//            // TO DO !!!!!!!!!!!
-//            //
-//            // Choice Screen Arrays
-//            tableViewSectionArray = tableViewSectionArrayBodyweight
-//            fullKeyArray = fullKeyArrayBodyweight
-//            workoutMovementsDictionary = workoutMovementsDictionaryBodyweight
-//            demonstrationDictionary = demonstrationDictionaryBodyweight
-//            targetAreaDictionary = targetAreaDictionaryBodyweight
-//            explanationDictionary = explanationDictionaryBodyweight
-//            setsDictionary = setsDictionaryBodyweight
-//            repsDictionary = repsDictionaryBodyweight
-//            //
-//            // Set Presets
-//            switch workoutType2 {
-//            case 0:
-//                presetsArray = presetsArrayBodyweightFull
-//                presetsArrays = presetsArraysBodyweightFull
-//                numberOfRoundsArray = numberOfRoundsArrayBodyweightFull
-//            case 1:
-//                presetsArray = presetsArrayBodyweightUpper
-//                presetsArrays = presetsArraysBodyweightUpper
-//                numberOfRoundsArray = numberOfRoundsArrayBodyweightUpper
-//            case 2:
-//                presetsArray = presetsArrayBodyweightLower
-//                presetsArrays = presetsArraysBodyweightLower
-//                numberOfRoundsArray = numberOfRoundsArrayBodyweightLower
-//            default: break
-//            }
-//        default: break
-//        }
+        switch workoutType {
+        //
+        // Gym
+        case 0:
+            //
+            // Set Presets
+            switch workoutType2 {
+            // Full
+            case 0:
+                presetsArray = presetsArrayGymFull
+                presetsArrays = presetsArraysGymFull
+                presetSetsArray = presetSetsArrayGymFull
+                presetRepsArray = presetRepsArrayGymFull
+            // Upper
+            case 1:
+                presetsArray = presetsArrayGymUpper
+                presetsArrays = presetsArraysGymUpper
+                presetSetsArray = presetSetsArrayGymUpper
+                presetRepsArray = presetRepsArrayGymUpper
+            // Lower
+            case 2:
+                presetsArray = presetsArrayGymLower
+                presetsArrays = presetsArraysGymLower
+                presetSetsArray = presetSetsArrayGymLower
+                presetRepsArray = presetRepsArrayGymLower
+            // Legs
+            case 3:
+                presetsArray = presetsArrayGymLegs
+                presetsArrays = presetsArraysGymLegs
+                presetSetsArray = presetSetsArrayGymLegs
+                presetRepsArray = presetRepsArrayGymLegs
+            // Pull
+            case 4:
+                presetsArray = presetsArrayGymPull
+                presetsArrays = presetsArraysGymPull
+                presetSetsArray = presetSetsArrayGymPull
+                presetRepsArray = presetRepsArrayGymPull
+            // Push
+            case 5:
+                presetsArray = presetsArrayGymPush
+                presetsArrays = presetsArraysGymPush
+                presetSetsArray = presetSetsArrayGymPush
+                presetRepsArray = presetRepsArrayGymPush
+            //
+            default: break
+            }
+        //
+        // Gym Circuit
+        case 1:
+            //
+            // Set Presets
+            switch workoutType2 {
+            // Full
+            case 0:
+                presetsArray = presetsArrayGymCircuitFull
+                presetsArrays = presetsArraysGymCircuitFull
+                numberOfRoundsArray = numberOfRoundsArrayGymCircuitFull
+                presetRepsArrayCircuit = repsArrayGymCircuitFull
+            // Upper
+            case 1:
+                presetsArray = presetsArrayGymCircuitUpper
+                presetsArrays = presetsArraysGymCircuitUpper
+                numberOfRoundsArray = numberOfRoundsArrayGymCircuitUpper
+                presetRepsArrayCircuit = repsArrayGymCircuitUpper
+            // Lower
+            case 2:
+                presetsArray = presetsArrayGymCircuitLower
+                presetsArrays = presetsArraysGymCircuitLower
+                numberOfRoundsArray = numberOfRoundsArrayGymCircuitLower
+                presetRepsArrayCircuit = repsArrayGymCircuitLower
+            //
+            default: break
+            }
+        //
+        // Bodyweight
+        case 2:
+            //
+            // Set Presets
+            switch workoutType2 {
+            // Full
+            case 0:
+                presetsArray = presetsArrayBodyweightFull
+                presetsArrays = presetsArraysBodyweightFull
+                presetSetsArray = presetSetsArrayBodyweightFull
+                presetRepsArray = presetRepsArrayBodyweightFull
+            // Upper
+            case 1:
+                presetsArray = presetsArrayBodyweightUpper
+                presetsArrays = presetsArraysBodyweightUpper
+                presetSetsArray = presetSetsArrayBodyweightUpper
+                presetRepsArray = presetRepsArrayBodyweightUpper
+            // Lower
+            case 2:
+                presetsArray = presetsArrayBodyweightLower
+                presetsArrays = presetsArraysBodyweightLower
+                presetSetsArray = presetSetsArrayBodyweightLower
+                presetRepsArray = presetRepsArrayBodyweightLower
+            //
+            default: break
+            }
+        //
+        // Bodyweight Circuit
+        case 3:
+            //
+            // Set Presets
+            switch workoutType2 {
+            // Full
+            case 0:
+                presetsArray = presetsArrayBodyweightCircuitFull
+                presetsArrays = presetsArraysBodyweightCircuitFull
+                numberOfRoundsArray = numberOfRoundsArrayBodyweightCircuitFull
+                presetRepsArrayCircuit = repsArrayBodyweightCircuitFull
+            // Upper
+            case 1:
+                presetsArray = presetsArrayBodyweightCircuitUpper
+                presetsArrays = presetsArraysBodyweightCircuitUpper
+                numberOfRoundsArray = numberOfRoundsArrayBodyweightCircuitUpper
+                presetRepsArrayCircuit = repsArrayBodyweightCircuitUpper
+            // Lower
+            case 2:
+                presetsArray = presetsArrayBodyweightCircuitLower
+                presetsArrays = presetsArraysBodyweightCircuitLower
+                numberOfRoundsArray = numberOfRoundsArrayBodyweightCircuitLower
+                presetRepsArrayCircuit = repsArrayBodyweightCircuitLower
+            //
+            default: break
+            }
+        default: break
+        }
     }
     
     
@@ -2628,17 +2652,21 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             cell.selectionStyle = .none
             //
             // Cell contents
-            if numberOfRoundsArray.count == 0 {
+            switch workoutType {
+            case 0,2:
                 //
                 cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[overviewArray[indexPath.section][indexPath.row]]!, comment: "")
-                cell.detailTextLabel?.text = repsDictionary[overviewArray[indexPath.section][indexPath.row]]
+                // Compress overview array to find index as int of movement as repsArray = [] and overviewArray = [[]]
+                let flatArray = overviewArray.flatMap { $0 }
+                cell.detailTextLabel?.text = repsArray[flatArray.index(of: overviewArray[indexPath.section][indexPath.row])!]
                 //
                 cell.imageView?.image = demonstrationDictionary[overviewArray[indexPath.section][indexPath.row]]?[0]
-            } else {
+            case 1,2:
                 cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[roundArray[indexPath.row]]!, comment: "")
-                cell.detailTextLabel?.text = repsDictionary[roundArray[indexPath.row]]
+                cell.detailTextLabel?.text = repsArrayCircuit[indexPath.section][indexPath.row]
                 //
                 cell.imageView?.image = demonstrationDictionary[roundArray[indexPath.row]]?[0]
+            default: break
             }
             //
             // Text Label
@@ -2707,7 +2735,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             selectedPreset[0] = indexPath.section
             selectedPreset[1] = indexPath.row
             //
-            sectionNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+            sectionNumbers = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]
             
             // Compress to new array
             overviewArray = fullKeyArray
@@ -2730,6 +2758,16 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             // Rounds
             if numberOfRoundsArray.count != 0 {
                 roundArray = overviewArray.flatMap { $0 }
+            }
+            
+            // Sets and Reps
+            switch workoutType {
+            case 0,2:
+                setsArray = presetSetsArray[selectedPreset[0]][selectedPreset[1]]
+                repsArray = presetRepsArray[selectedPreset[0]][selectedPreset[1]]
+            case 1,3:
+                repsArrayCircuit = presetRepsArrayCircuit[selectedPreset[0]][selectedPreset[1]]
+            default: break
             }
             
             //
@@ -2835,8 +2873,8 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func beginButton(_ sender: Any) {
         //
         switch workoutType {
-        case 0: performSegue(withIdentifier: "workoutSessionSegue0", sender: nil)
-        case 1,2: performSegue(withIdentifier: "workoutSessionSegue1", sender: nil)
+        case 0,2: performSegue(withIdentifier: "workoutSessionSegue0", sender: nil)
+        case 1,3: performSegue(withIdentifier: "workoutSessionSegue1", sender: nil)
         default: break
         }
         // Return background to homescreen
@@ -2863,10 +2901,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                 //
                 workoutArray.append(workoutMovementsDictionary[i]!)
                 //
-                setsArray.append(setsDictionary[i]!)
-                //
-                repsArray.append(repsDictionary[i]!)
-                //
                 demonstrationArray.append(demonstrationDictionary[i]!)
                 //
                 targetAreaArray.append(targetAreaDictionary[i]!)
@@ -2877,7 +2911,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             destinationVC.sessionArray = workoutArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
-            //destinationVC.demonstrationArray = demonstrationArray
+            destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
@@ -2904,7 +2938,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             }
             //
             destinationVC.sessionArray = workoutArray
-            destinationVC.repsArray = repsArrayCircuitFull[selectedPreset[0]][selectedPreset[1]]
+            destinationVC.repsArray = repsArrayCircuit
             destinationVC.demonstrationArray = demonstrationArray
             destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray

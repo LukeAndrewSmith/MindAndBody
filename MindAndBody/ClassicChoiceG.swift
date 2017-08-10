@@ -180,7 +180,7 @@ class ClassicChoiceG: UIViewController  {
     // Full
     @IBAction func full(_ sender: Any) {
         workoutType2 = 0
-        performSegue(withIdentifier: "classicSegue", sender: nil)
+        self.performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Upper
