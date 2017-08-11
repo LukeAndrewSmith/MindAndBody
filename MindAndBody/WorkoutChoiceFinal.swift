@@ -206,8 +206,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             46,
             47],
             // Push (Triceps)
-            [48,
-            49,
+            [49,                //!!!!!!!!
             50,
             51],
             // Full Body ---------
@@ -279,26 +278,24 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             101],
             // Isometric (Legs) ---------
             [102,
-            103,
             104,
-            105,
-            106],
+            105],
             // Isometric (Upper Body)
-            [107,
-            108,
-            109],
+            [106,
+            107,
+            108],
             // Equiptment (Ball) ---------
-            [110],
+            [109],
             // Equiptment (Bar)
-            [111,
-            112,
-            113],
+            [110,
+            111,
+            112],
             // Equiptment (Bench/Step)
-            [114,
+            [113,
+            114,
             115,
             116,
-            117,
-            118]
+            117]
     ]
     
     // Workout Movements Dictionary
@@ -366,7 +363,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             46: "lateralRaise",
             47: "frontRaise",
             // Push (Triceps)
-            48: "ballPushUp",
             49: "closeGripBench",
             50: "cableExtension",
             51: "ropeExtension",
@@ -439,26 +435,24 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             101: "kneeRaises",
             // Isometric (Legs) ---------
             102: "wallSit",
-            103: "chairHold",
             104: "toePress",
             105: "staticLunge",
-            106: "calfRaise",
             // Isometric (Upper Body)
-            107: "chestSqueeze",
-            108: "dolphinPlank",
-            109: "pullupHold",
+            106: "chestSqueeze",
+            107: "pushupHold",
+            108: "pullupHold",
             // Equiptment (Ball) ---------
-            110: "ballPushup",
+            109: "ballPushup",
             // Equiptment (Bar)
-            111: "bodweightRow",
-            112: "pullup",
-            113: "hangingLegRaise",
+            110: "bodweightRow",
+            111: "pullup",
+            112: "hangingLegRaise",
             // Equiptment (Bench/Step)
-            114: "tricepDip",
-            115: "bulgarianSplitSquat",
-            116: "boxJump",
-            117: "hipThrusts",
-            118: "stepUp"
+            113: "tricepDip",
+            114: "bulgarianSplitSquat",
+            115: "boxJump",
+            116: "hipThrusts",
+            117: "stepUp"
     ]
     
     // Demonstration Array
@@ -526,7 +520,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             46: [#imageLiteral(resourceName: "Test")],
             47: [#imageLiteral(resourceName: "Test")],
             // Push (Triceps)
-            48: [#imageLiteral(resourceName: "Test")],
             49: [#imageLiteral(resourceName: "Test")],
             50: [#imageLiteral(resourceName: "Test")],
             51: [#imageLiteral(resourceName: "Test")],
@@ -599,26 +592,24 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             101: [#imageLiteral(resourceName: "Test")],
             // Isometric (Legs) ---------
             102: [#imageLiteral(resourceName: "Test")],
-            103: [#imageLiteral(resourceName: "Test")],
             104: [#imageLiteral(resourceName: "Test")],
             105: [#imageLiteral(resourceName: "Test")],
-            106: [#imageLiteral(resourceName: "Test")],
             // Isometric (Upper Body)
+            106: [#imageLiteral(resourceName: "Test")],
             107: [#imageLiteral(resourceName: "Test")],
             108: [#imageLiteral(resourceName: "Test")],
-            109: [#imageLiteral(resourceName: "Test")],
             // Equiptment (Ball) ---------
-            110: [#imageLiteral(resourceName: "Test")],
+            109: [#imageLiteral(resourceName: "Test")],
             // Equiptment (Bar)
+            110: [#imageLiteral(resourceName: "Test")],
             111: [#imageLiteral(resourceName: "Test")],
             112: [#imageLiteral(resourceName: "Test")],
-            113: [#imageLiteral(resourceName: "Test")],
             // Equiptment (Bench/Step)
+            113: [#imageLiteral(resourceName: "Test")],
             114: [#imageLiteral(resourceName: "Test")],
             115: [#imageLiteral(resourceName: "Test")],
             116: [#imageLiteral(resourceName: "Test")],
-            117: [#imageLiteral(resourceName: "Test")],
-            118: [#imageLiteral(resourceName: "Test")]
+            117: [#imageLiteral(resourceName: "Test")]
     ]
     
     // Demonstration Array
@@ -686,7 +677,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             46: #imageLiteral(resourceName: "Shoulder"),
             47: #imageLiteral(resourceName: "Shoulder"),
             // Push (Triceps)
-            48: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
             49: #imageLiteral(resourceName: "Tricep"),
             50: #imageLiteral(resourceName: "Tricep"),
             51: #imageLiteral(resourceName: "Tricep"),
@@ -759,26 +749,24 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             101: #imageLiteral(resourceName: "Test"),
             // Isometric (Legs) ---------
             102: #imageLiteral(resourceName: "Test"),
-            103: #imageLiteral(resourceName: "Test"),
             104: #imageLiteral(resourceName: "Test"),
             105: #imageLiteral(resourceName: "Test"),
-            106: #imageLiteral(resourceName: "Test"),
             // Isometric (Upper Body)
+            106: #imageLiteral(resourceName: "Test"),
             107: #imageLiteral(resourceName: "Test"),
             108: #imageLiteral(resourceName: "Test"),
-            109: #imageLiteral(resourceName: "Test"),
             // Equiptment (Ball) ---------
-            110: #imageLiteral(resourceName: "Test"),
+            109: #imageLiteral(resourceName: "Test"),
             // Equiptment (Bar)
+            110: #imageLiteral(resourceName: "Test"),
             111: #imageLiteral(resourceName: "Test"),
             112: #imageLiteral(resourceName: "Test"),
-            113: #imageLiteral(resourceName: "Test"),
             // Equiptment (Bench/Step)
+            113: #imageLiteral(resourceName: "Test"),
             114: #imageLiteral(resourceName: "Test"),
             115: #imageLiteral(resourceName: "Test"),
             116: #imageLiteral(resourceName: "Test"),
-            117: #imageLiteral(resourceName: "Test"),
-            118: #imageLiteral(resourceName: "Test")
+            117: #imageLiteral(resourceName: "Test")
     ]
     
     // Explanation Array
@@ -846,7 +834,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             46: "lateralRaiseE",
             47: "frontRaiseE",
             // Push (Triceps)
-            48: "ballPushUpE",
             49: "closeGripBenchE",
             50: "cableExtensionE",
             51: "ropeExtensionE",
@@ -919,26 +906,24 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             101: "kneeRaisesE",
             // Isometric (Legs) ---------
             102: "wallSitE",
-            103: "chairHoldE",
             104: "toePressE",
             105: "staticLungeE",
-            106: "calfRaiseE",
             // Isometric (Upper Body)
-            107: "chestSqueezeE",
-            108: "dolphinPlankE",
-            109: "pullupHoldE",
+            106: "chestSqueezeE",
+            107: "pushupHoldE",
+            108: "pullupHoldE",
             // Equiptment (Ball) ---------
-            110: "ballPushupE",
+            109: "ballPushupE",
             // Equiptment (Bar)
-            111: "bodweightRowE",
-            112: "pullupE",
-            113: "hangingLegRaiseE",
+            110: "bodweightRowE",
+            111: "pullupE",
+            112: "hangingLegRaiseE",
             // Equiptment (Bench/Step)
-            114: "tricepDipE",
-            115: "bulgarianSplitSquatE",
-            116: "boxJumpE",
-            117: "hipThrustsE",
-            118: "stepUpE"
+            113: "tricepDipE",
+            114: "bulgarianSplitSquatE",
+            115: "boxJumpE",
+            116: "hipThrustsE",
+            117: "stepUpE"
     ]
     
     

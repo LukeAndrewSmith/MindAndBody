@@ -81,9 +81,7 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
                     // 3   
                     if new == true {
                         toVC.view.layer.shadowRadius = 0
-                        fromVC.dismiss(animated: true)
-                        toVC.dismiss(animated:true)
-                        //toVC2.present(toVC, animated: false, completion: nil)
+                        
                         //
                         let delayInSeconds = 0.5
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -91,6 +89,9 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
                                 newSnapshot.removeFromSuperview()
                             })
                         }
+                        //
+                        fromVC.dismiss(animated: true)
+                        toVC.dismiss(animated:true)
                     }
                     snapshot.removeFromSuperview()
                 }

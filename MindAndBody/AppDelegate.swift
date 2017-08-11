@@ -52,17 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:
-        //
-        // Cancel Timers
-//        UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
-//            var identifiers: [String] = []
-//            for notification:UNNotificationRequest in notificationRequests {
-//                if notification.identifier == "timer" {
-//                    identifiers.append(notification.identifier)
-//                }
-//            }
-//            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
-//        }
+
     }
 
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
