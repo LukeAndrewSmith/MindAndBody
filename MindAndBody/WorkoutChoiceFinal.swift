@@ -177,8 +177,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             // Pull (Upper Back)
             [24,
             25,
-            26,
-            27],
+            26],
             // Pull (Rear Delts)
             [28],
             // Pull (Traps)
@@ -335,7 +334,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             24: "facePull",
             25: "smithMachinePullUp",
             26: "leaningBackPullDown",
-            27: "seatedMachineRow",
             // Pull (Rear Delts)
             28: "bentOverBarbellRow",
             // Pull (Traps)
@@ -492,7 +490,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             24: [#imageLiteral(resourceName: "Test")],
             25: [#imageLiteral(resourceName: "Test")],
             26: [#imageLiteral(resourceName: "Test")],
-            27: [#imageLiteral(resourceName: "Test")],
             // Pull (Rear Delts)
             28: [#imageLiteral(resourceName: "Test")],
             // Pull (Traps)
@@ -649,7 +646,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             24: #imageLiteral(resourceName: "Upper Back and Shoulder"),
             25: #imageLiteral(resourceName: "Upper Back and Shoulder"),
             26: #imageLiteral(resourceName: "Upper Back and Shoulder"),
-            27: #imageLiteral(resourceName: "Upper Back and Shoulder"),
             // Pull (Rear Delts)
             28: #imageLiteral(resourceName: "Rear Delt"),
             // Pull (Traps)
@@ -806,7 +802,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             24: "facePullE",
             25: "smithMachinePullUpE",
             26: "leaningBackPullDownE",
-            27: "seatedMachineRowE",
             // Pull (Rear Delts)
             28: "bentOverBarbellRowE",
             // Pull (Traps)
