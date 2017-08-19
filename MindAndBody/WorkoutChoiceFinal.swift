@@ -125,6 +125,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             "pullT",
             "pushC",
             "pushT",
+            "pushCT", //!!!!!!!!!
             "pushS",
             "coreAbs",
             // General
@@ -134,7 +135,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             "cardio",
             // Isometric
             "isometricL",
-            "isometricC",
+            "isometricU", //!!!!!!!!!
             // Equiptment
             "equiptmentB",
             "equiptmentBa",
@@ -546,7 +547,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             // Pull (Traps)
             70: [#imageLiteral(resourceName: "handStandTrap"), #imageLiteral(resourceName: "handStandTrap1"), #imageLiteral(resourceName: "handStandTrap"), #imageLiteral(resourceName: "handStandTrap1")],
             // Push (Chest) ---------
-            71: [#imageLiteral(resourceName: "Test")], //!!!!!!!!!!
+            71: [#imageLiteral(resourceName: "pushUp"), #imageLiteral(resourceName: "pushUp1"), #imageLiteral(resourceName: "pushUp2"), #imageLiteral(resourceName: "pushUp3"), #imageLiteral(resourceName: "pushUp4"), #imageLiteral(resourceName: "pushUp4"), #imageLiteral(resourceName: "pushUp3"), #imageLiteral(resourceName: "pushUp2"), #imageLiteral(resourceName: "pushUp1")],
             // Push (Tricep)
             72: [#imageLiteral(resourceName: "trianglePushup"), #imageLiteral(resourceName: "trianglePushup1"), #imageLiteral(resourceName: "trianglePushup2"), #imageLiteral(resourceName: "trianglePushup3"), #imageLiteral(resourceName: "trianglePushup4"), #imageLiteral(resourceName: "trianglePushup4"), #imageLiteral(resourceName: "trianglePushup3"), #imageLiteral(resourceName: "trianglePushup2"), #imageLiteral(resourceName: "trianglePushup1")],
             73: [#imageLiteral(resourceName: "dolphinPushup"), #imageLiteral(resourceName: "dolphinPushup1"), #imageLiteral(resourceName: "dolphinPushup2"), #imageLiteral(resourceName: "dolphinPushup3"), #imageLiteral(resourceName: "dolphinPushup4"), #imageLiteral(resourceName: "dolphinPushup3"), #imageLiteral(resourceName: "dolphinPushup2"), #imageLiteral(resourceName: "dolphinPushup1")],
@@ -588,12 +589,12 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             // Isometric (Upper Body)
             101: [#imageLiteral(resourceName: "chestSqueeze")],
             102: [#imageLiteral(resourceName: "pushupHold")],
-            103: [#imageLiteral(resourceName: "Test")], //!!!!!!!
+            103: [#imageLiteral(resourceName: "pullUp")],
             // Equiptment (Ball) ---------
             104: [#imageLiteral(resourceName: "ballPushup"), #imageLiteral(resourceName: "ballPushup1"), #imageLiteral(resourceName: "ballPushup"), #imageLiteral(resourceName: "ballPushup1")],
             // Equiptment (Bar)
-            105: [#imageLiteral(resourceName: "Test")], //!!!!!!!
-            106: [#imageLiteral(resourceName: "Test")], //!!!!!!!
+            105: [#imageLiteral(resourceName: "bodyweightRow"), #imageLiteral(resourceName: "bodyweightRow1"), #imageLiteral(resourceName: "bodyweightRow"), #imageLiteral(resourceName: "bodyweightRow1")],
+            106: [#imageLiteral(resourceName: "pullUp"), #imageLiteral(resourceName: "pullUp1"), #imageLiteral(resourceName: "pullUp2"), #imageLiteral(resourceName: "pullUp3"), #imageLiteral(resourceName: "pullUp4"), #imageLiteral(resourceName: "pullUp4"), #imageLiteral(resourceName: "pullUp3"), #imageLiteral(resourceName: "pullUp2"), #imageLiteral(resourceName: "pullUp1")],
             107: [#imageLiteral(resourceName: "hangingLegRaises"), #imageLiteral(resourceName: "hangingLegRaises1"), #imageLiteral(resourceName: "hangingLegRaises2"), #imageLiteral(resourceName: "hangingLegRaises3"), #imageLiteral(resourceName: "hangingLegRaises4"), #imageLiteral(resourceName: "hangingLegRaises3"), #imageLiteral(resourceName: "hangingLegRaises2"), #imageLiteral(resourceName: "hangingLegRaises1")],
             // Equiptment (Bench/Step)
             108: [#imageLiteral(resourceName: "tricepDip"), #imageLiteral(resourceName: "tricepDip1"), #imageLiteral(resourceName: "tricepDip2"), #imageLiteral(resourceName: "tricepDip3"), #imageLiteral(resourceName: "tricepDip4"), #imageLiteral(resourceName: "tricepDip3"), #imageLiteral(resourceName: "tricepDip2"), #imageLiteral(resourceName: "tricepDip1")],
@@ -931,7 +932,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     var presetsArraysGymFull: [[[Int]]] =
         [
             [
-                [0, 11, 12, 14, 17, 19, 21, 23, 26, 31, 32, 33, 35, 36],
+                [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,112],
                 []
             ],
             [
@@ -950,7 +951,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         [
             [
                 // Default
-                [2,1,2,1,2,1,2,1,1,2,2,1,2,1],
+                [1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1],
                 []
             ],
             [
@@ -969,7 +970,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         [
             [
                 // Default
-                ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps"],
+                ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
                 []
             ],
             [
