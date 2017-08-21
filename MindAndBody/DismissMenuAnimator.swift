@@ -27,9 +27,11 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
         }
         //
     
+        var snapshot2 = UIView()
+        var snapshot1 = UIView()
+        //
         var toVC = UIViewController()
-        var newSnapshot = UIView()
-        if new == true {
+//        if new == true {
         let viewNamesArray: [String] = ["view0", "view1", "view2", "view3", "view4", "view5"]
         //
         switch tabBarIndex {
@@ -56,43 +58,39 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
     
         // Load new view
         snapshot.removeFromSuperview()
-        containerView.insertSubview(toVC.view, aboveSubview: fromVC.view)
-        toVC.view.center.x += UIScreen.main.bounds.width * 0.75
-        toVC.view.layer.shadowOpacity = 1
-        toVC.view.layer.shadowRadius = 15
         
+            
         //
-        newSnapshot = toVC.view.snapshotView(afterScreenUpdates: true)!
-        toVC2.view.addSubview(newSnapshot)
-        }
+        snapshot1 = UIScreen.main.snapshotView(afterScreenUpdates: false)
+        snapshot2 = toVC.view.snapshotView(afterScreenUpdates: true)!
+            
+        let keyWindow = UIApplication.shared.keyWindow
+        // Snapshot 1
+        keyWindow?.addSubview(snapshot1)
+        keyWindow?.bringSubview(toFront: snapshot1)
+        
+        // Snapshot 2
+        snapshot2.center.x += UIScreen.main.bounds.width * 0.75
+        snapshot2.layer.shadowOpacity = 1
+        snapshot2.layer.shadowRadius = 15
+        keyWindow?.addSubview(snapshot2)
+        keyWindow?.bringSubview(toFront: snapshot2)
         
         //
         UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
-                if new == true {
-                    toVC.view.center.x = UIScreen.main.bounds.width * 0.5
-                } else {
-                    snapshot.center.x = UIScreen.main.bounds.width * 0.5
-                }
+                snapshot2.center.x = UIScreen.main.bounds.width * 0.5
         },
             completion: { _ in
                 let didTransitionComplete = !transitionContext.transitionWasCancelled
                 if didTransitionComplete {
                     // 3   
-                    if new == true {
+                    //if new == true {
                         toVC.view.layer.shadowRadius = 0
-                        
-                        //
-                        let delayInSeconds = 0.5
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                            toVC2.present(toVC, animated: false, completion: { finished in
-                                newSnapshot.removeFromSuperview()
-                            })
-                        }
-                        //
-                        fromVC.dismiss(animated: true)
-                        toVC.dismiss(animated:true)
-                    }
+                    //}
+                    snapshot1.removeFromSuperview()
+                    snapshot2.removeFromSuperview()
+                    //
                     snapshot.removeFromSuperview()
                 }
                 transitionContext.completeTransition(didTransitionComplete)

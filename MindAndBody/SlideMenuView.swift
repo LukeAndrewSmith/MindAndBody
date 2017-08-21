@@ -110,7 +110,34 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
         
         //
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: { finished in
+            var toVC = UIViewController()
+                let viewNamesArray: [String] = ["view0", "view1", "view2", "view3", "view4", "view5"]
+                //
+                switch tabBarIndex {
+                case 0:
+                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! MindBodyNavigation
+                //
+                case 1:
+                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! CalendarNavigation
+                //
+                case 2:
+                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! TrackingNavigation
+                //
+                case 3:
+                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! LessonsNavigation
+                //
+                case 4:
+                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! ProfileNavigation
+                //
+                case 5:
+                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! SettingsNavigation
+                //
+                default: break
+                }
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = toVC
+        })
 
         //
         UIApplication.shared.statusBarStyle = .lightContent

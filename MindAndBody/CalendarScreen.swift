@@ -82,9 +82,6 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var collectionView: UICollectionView!
    
     //
-    @IBOutlet weak var leftButton: UIButton!
-    @IBOutlet weak var rightButton: UIButton!
-    
     @IBOutlet weak var scheduleLabel: UILabel!
     
     
@@ -123,14 +120,6 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
         
-        //
-        //
-        leftButton.backgroundColor = colour2
-        leftButton.tintColor = colour1
-        leftButton.isEnabled = false
-        //
-        rightButton.backgroundColor = colour2
-        rightButton.tintColor = colour1
         //
         scheduleLabel.backgroundColor = colour2
         scheduleLabel.tintColor = colour1

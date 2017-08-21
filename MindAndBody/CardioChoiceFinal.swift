@@ -80,9 +80,9 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     let demonstrationDictionary: [Int: [UIImage]] =
         [
             // Movement
-            0: [#imageLiteral(resourceName: "Test 2")],    // Running
-            1: [#imageLiteral(resourceName: "Test 2")],
-            2: [#imageLiteral(resourceName: "Test 2")],
+            0: [#imageLiteral(resourceName: "running")],    // Running
+            1: [#imageLiteral(resourceName: "running")],
+            2: [#imageLiteral(resourceName: "running")],
             3: [#imageLiteral(resourceName: "Pause")],     // Running Pauses
             4: [#imageLiteral(resourceName: "Pause")],
             5: [#imageLiteral(resourceName: "Pause")],
@@ -94,9 +94,9 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             10: [#imageLiteral(resourceName: "Pause")],
             11: [#imageLiteral(resourceName: "Pause")],
             
-            12: [#imageLiteral(resourceName: "Test 2")],   // Rowing
-            13: [#imageLiteral(resourceName: "Test 2")],
-            14: [#imageLiteral(resourceName: "Test 2")],
+            12: [#imageLiteral(resourceName: "rowing")],   // Rowing
+            13: [#imageLiteral(resourceName: "rowing")],
+            14: [#imageLiteral(resourceName: "rowing")],
             15: [#imageLiteral(resourceName: "Pause")],   // Rowing Pauses
             16: [#imageLiteral(resourceName: "Pause")],
             17: [#imageLiteral(resourceName: "Pause")],

@@ -491,7 +491,7 @@
         "pushC" = "Push (Chest)";
         "pushS" = "Push (Shoulders)";
         "pushT" = "Push (Triceps)";
-        "pushCT" = "Push (Chest & Triceps)"
+        "pushCT" = "Push (Chest & Triceps)";
         "calves" = "Calves";
         "coreAbs" = "Core/Abs";
 
