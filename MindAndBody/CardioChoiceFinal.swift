@@ -77,29 +77,29 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     ]
     
     // Demonstration Poses
-    let demonstrationDictionary: [Int: [UIImage]] =
+    let demonstrationDictionary: [Int: [String]] =
         [
             // Movement
-            0: [#imageLiteral(resourceName: "running")],    // Running
-            1: [#imageLiteral(resourceName: "running")],
-            2: [#imageLiteral(resourceName: "running")],
-            3: [#imageLiteral(resourceName: "Pause")],     // Running Pauses
-            4: [#imageLiteral(resourceName: "Pause")],
-            5: [#imageLiteral(resourceName: "Pause")],
+            0: ["running"],    // Running
+            1: ["running"],
+            2: ["running"],
+            3: ["Pause"],     // Running Pauses
+            4: ["Pause"],
+            5: ["Pause"],
             
-            6: [#imageLiteral(resourceName: "Test 2")],   // Bike
-            7: [#imageLiteral(resourceName: "Test 2")],
-            8: [#imageLiteral(resourceName: "Test 2")],
-            9: [#imageLiteral(resourceName: "Pause")],      // Biking Pauses
-            10: [#imageLiteral(resourceName: "Pause")],
-            11: [#imageLiteral(resourceName: "Pause")],
+            6: ["rowing"],   // Bike
+            7: ["rowing"],
+            8: ["rowing"],
+            9: ["Pause"],      // Biking Pauses
+            10: ["Pause"],
+            11: ["Pause"],
             
-            12: [#imageLiteral(resourceName: "rowing")],   // Rowing
-            13: [#imageLiteral(resourceName: "rowing")],
-            14: [#imageLiteral(resourceName: "rowing")],
-            15: [#imageLiteral(resourceName: "Pause")],   // Rowing Pauses
-            16: [#imageLiteral(resourceName: "Pause")],
-            17: [#imageLiteral(resourceName: "Pause")],
+            12: ["rowing"],   // Rowing
+            13: ["rowing"],
+            14: ["rowing"],
+            15: ["Pause"],   // Rowing Pauses
+            16: ["Pause"],
+            17: ["Pause"],
     ]
     
     // Demonstration Animation Duration
@@ -593,7 +593,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             //
             // Cell Image
-            cell.imageView?.image = demonstrationDictionary[presetsArray[selectedPreset[0]][selectedPreset[1]][indexPath.row]]?[0]
+            cell.imageView?.image = getUncachedImage(named: (demonstrationDictionary[presetsArray[selectedPreset[0]][selectedPreset[1]][indexPath.row]]?[0])!)
             cell.imageView?.isUserInteractionEnabled = true
             //
             cell.imageView?.tag = presetsArray[selectedPreset[0]][selectedPreset[1]][indexPath.row]
@@ -729,26 +729,15 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         let demonstrationIndex = sender.tag
         imageIndex = demonstrationIndex
         //
-        // Animation
-        expandedImage.image = demonstrationDictionary[demonstrationIndex]?[0]
-        expandedImage.animationImages = demonstrationDictionary[demonstrationIndex]
-        expandedImage.animationDuration = Double(demonstrationDictionary[demonstrationIndex]!.count) * 0.5
-        expandedImage.animationImages?.removeFirst()
-        expandedImage.animationRepeatCount = 1
-        // Play
-        let imagePress = UITapGestureRecognizer(target: self, action: #selector(imageSequenceAnimation))
-        expandedImage.addGestureRecognizer(imagePress)
+        expandedImage.image = getUncachedImage(named: (demonstrationDictionary[demonstrationIndex]?[0])!)
         //
         // Animate
-        if demonstrationDictionary[demonstrationIndex]?[0] != #imageLiteral(resourceName: "Pause") {
-            //
-            backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
-            //
-            UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
-            UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
-            //
-            animateViewUp(animationView: expandedImage, backgroundView: backgroundViewImage)
-        }
+        backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
+        //
+        UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
+        UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
+        //
+        animateViewUp(animationView: expandedImage, backgroundView: backgroundViewImage)
     }
         
     // Retract image
@@ -756,16 +745,6 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         animateViewDown(animationView: expandedImage, backgroundView: backgroundViewImage)
     }
-    
-    //
-    // Play Image Sequence
-    @IBAction func imageSequenceAnimation() {
-        //
-        if demonstrationDictionary[imageIndex]?.count != 1 {
-            expandedImage.startAnimating()
-        }
-    }
-    
     
     //
     // Time

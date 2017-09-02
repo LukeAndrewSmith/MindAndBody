@@ -78,10 +78,10 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     var repsArrayCircuit: [[String]] = []
     
     // Demonstration Array
-    var demonstrationArray: [[UIImage]] = []
+    var demonstrationArray: [[String]] = []
     
     // Target Area Array
-    var targetAreaArray: [UIImage] = []
+    var targetAreaArray: [String] = []
     
     // Explanation Array
     var explanationArray: [String] = []
@@ -451,311 +451,311 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     ]
     
     // Demonstration Array
-    var demonstrationDictionary: [Int : [UIImage]] =
+    var demonstrationDictionary: [Int : [String]] =
         [
             // Gym ------------------------------------
             // Legs (Quads) ---------
-            0: [#imageLiteral(resourceName: "squat"), #imageLiteral(resourceName: "squat1"), #imageLiteral(resourceName: "squat2"), #imageLiteral(resourceName: "squat3"), #imageLiteral(resourceName: "squat2"), #imageLiteral(resourceName: "squat1")],
-            1: [#imageLiteral(resourceName: "frontSquat"), #imageLiteral(resourceName: "frontSquat1"), #imageLiteral(resourceName: "frontSquat2"), #imageLiteral(resourceName: "frontSquat3"), #imageLiteral(resourceName: "frontSquat2"), #imageLiteral(resourceName: "frontSquat1")],
-            2: [#imageLiteral(resourceName: "legPress"), #imageLiteral(resourceName: "legPress4"), #imageLiteral(resourceName: "legPress3"), #imageLiteral(resourceName: "legPress2"), #imageLiteral(resourceName: "legPress1"), #imageLiteral(resourceName: "legPress2"), #imageLiteral(resourceName: "legPress3"), #imageLiteral(resourceName: "legPress4")],
-            3: [#imageLiteral(resourceName: "dumbellFrontSquat"), #imageLiteral(resourceName: "dumbellFrontSquat1"), #imageLiteral(resourceName: "dumbellFrontSquat"), #imageLiteral(resourceName: "dumbellFrontSquat1")],
-            4: [#imageLiteral(resourceName: "legExtensions"), #imageLiteral(resourceName: "legExtensions1"), #imageLiteral(resourceName: "legExtensions2"), #imageLiteral(resourceName: "legExtensions3"), #imageLiteral(resourceName: "legExtensions2"), #imageLiteral(resourceName: "legExtensions1")],
+            0: ["squat", "squat1", "squat2", "squat3", "squat2", "squat1"],
+            1: ["frontSquat", "frontSquat1", "frontSquat2", "frontSquat3", "frontSquat2", "frontSquat1"],
+            2: ["legPress", "legPress4", "legPress3", "legPress2", "legPress1", "legPress2", "legPress3", "legPress4"],
+            3: ["dumbellFrontSquat", "dumbellFrontSquat1", "dumbellFrontSquat", "dumbellFrontSquat1"],
+            4: ["legExtensions", "legExtensions1", "legExtensions2", "legExtensions3", "legExtensions2", "legExtensions1"],
             // Legs (Hamstrings/Glutes)
-            5: [#imageLiteral(resourceName: "deadlift"), #imageLiteral(resourceName: "deadlift1"), #imageLiteral(resourceName: "deadlift2"), #imageLiteral(resourceName: "deadlift3"), #imageLiteral(resourceName: "deadlift4"), #imageLiteral(resourceName: "deadlift5"), #imageLiteral(resourceName: "deadlift6"), #imageLiteral(resourceName: "deadlift7"), #imageLiteral(resourceName: "deadlift4"), #imageLiteral(resourceName: "deadlift2")],
-            6: [#imageLiteral(resourceName: "romanianDeadlift"), #imageLiteral(resourceName: "romanianDeadlift1"), #imageLiteral(resourceName: "romanianDeadlift2"), #imageLiteral(resourceName: "romanianDeadlift3"), #imageLiteral(resourceName: "romanianDeadlift2"), #imageLiteral(resourceName: "romanianDeadlift1")],
-            7: [#imageLiteral(resourceName: "weightedHipThrust"), #imageLiteral(resourceName: "weightedHipThrust1"), #imageLiteral(resourceName: "weightedHipThrust"), #imageLiteral(resourceName: "weightedHipThrust1")],
-            8: [#imageLiteral(resourceName: "legCurl"), #imageLiteral(resourceName: "legCurl1"), #imageLiteral(resourceName: "legCurl2"), #imageLiteral(resourceName: "legCurl3"), #imageLiteral(resourceName: "legCurl2"), #imageLiteral(resourceName: "legCurl1")],
-            9: [#imageLiteral(resourceName: "oneLeggedDeadlift"), #imageLiteral(resourceName: "oneLeggedDeadlift1"), #imageLiteral(resourceName: "oneLeggedDeadlift2"), #imageLiteral(resourceName: "oneLeggedDeadlift3"), #imageLiteral(resourceName: "oneLeggedDeadlift4"), #imageLiteral(resourceName: "oneLeggedDeadlift3"), #imageLiteral(resourceName: "oneLeggedDeadlift2"), #imageLiteral(resourceName: "oneLeggedDeadlift1")],
-            10: [#imageLiteral(resourceName: "gluteIsolationMachine"), #imageLiteral(resourceName: "gluteIsolationMachine1"), #imageLiteral(resourceName: "gluteIsolationMachine"), #imageLiteral(resourceName: "gluteIsolationMachine1")],
+            5: ["deadlift", "deadlift1", "deadlift2", "deadlift3", "deadlift4", "deadlift5", "deadlift6", "deadlift7", "deadlift4", "deadlift2"],
+            6: ["romanianDeadlift", "romanianDeadlift1", "romanianDeadlift2", "romanianDeadlift3", "romanianDeadlift2", "romanianDeadlift1"],
+            7: ["weightedHipThrust", "weightedHipThrust1", "weightedHipThrust", "weightedHipThrust1"],
+            8: ["legCurl", "legCurl1", "legCurl2", "legCurl3", "legCurl2", "legCurl1"],
+            9: ["oneLeggedDeadlift", "oneLeggedDeadlift1", "oneLeggedDeadlift2", "oneLeggedDeadlift3", "oneLeggedDeadlift4", "oneLeggedDeadlift3", "oneLeggedDeadlift2", "oneLeggedDeadlift1"],
+            10: ["gluteIsolationMachine", "gluteIsolationMachine1", "gluteIsolationMachine", "gluteIsolationMachine1"],
             // Legs (General)
-            11: [#imageLiteral(resourceName: "lungeDumbell"), #imageLiteral(resourceName: "lungeDumbell1"), #imageLiteral(resourceName: "lungeDumbell2"), #imageLiteral(resourceName: "lungeDumbell3"), #imageLiteral(resourceName: "lungeDumbell4"), #imageLiteral(resourceName: "lungeDumbell5"), #imageLiteral(resourceName: "lungeDumbell6"), #imageLiteral(resourceName: "lungeDumbell7"), #imageLiteral(resourceName: "lungeDumbell1"), #imageLiteral(resourceName: "lungeDumbell8"), #imageLiteral(resourceName: "lungeDumbell9"), #imageLiteral(resourceName: "lungeDumbell10"), #imageLiteral(resourceName: "lungeDumbell11"), #imageLiteral(resourceName: "lungeDumbell12"), #imageLiteral(resourceName: "lungeDumbell13"), #imageLiteral(resourceName: "lungeDumbell1")],
-            12: [#imageLiteral(resourceName: "bulgarianSplitSquat"), #imageLiteral(resourceName: "bulgarianSplitSquat1"), #imageLiteral(resourceName: "bulgarianSplitSquat"), #imageLiteral(resourceName: "bulgarianSplitSquat1")],
-            13: [#imageLiteral(resourceName: "stepUp"), #imageLiteral(resourceName: "stepUp1"), #imageLiteral(resourceName: "stepUp2"), #imageLiteral(resourceName: "stepUp3"), #imageLiteral(resourceName: "stepUp2"), #imageLiteral(resourceName: "stepUp1")],
+            11: ["lungeDumbell", "lungeDumbell1", "lungeDumbell2", "lungeDumbell3", "lungeDumbell4", "lungeDumbell5", "lungeDumbell6", "lungeDumbell7", "lungeDumbell1", "lungeDumbell8", "lungeDumbell9", "lungeDumbell10", "lungeDumbell11", "lungeDumbell12", "lungeDumbell13", "lungeDumbell1"],
+            12: ["bulgarianSplitSquat", "bulgarianSplitSquat1", "bulgarianSplitSquat", "bulgarianSplitSquat1"],
+            13: ["stepUp", "stepUp1", "stepUp2", "stepUp3", "stepUp2", "stepUp1"],
             // Legs (Calves)
-            14: [#imageLiteral(resourceName: "standingCalfRaise"), #imageLiteral(resourceName: "standingCalfRaise1"), #imageLiteral(resourceName: "standingCalfRaise"), #imageLiteral(resourceName: "standingCalfRaise1")],
-            15: [#imageLiteral(resourceName: "seatedCalfRaise"), #imageLiteral(resourceName: "seatedCalfRaise1"), #imageLiteral(resourceName: "seatedCalfRaise"), #imageLiteral(resourceName: "seatedCalfRaise1")],
+            14: ["standingCalfRaise", "standingCalfRaise1", "standingCalfRaise", "standingCalfRaise1"],
+            15: ["seatedCalfRaise", "seatedCalfRaise1", "seatedCalfRaise", "seatedCalfRaise1"],
             // Pull (Back) ---------
-            16: [#imageLiteral(resourceName: "pullDown"), #imageLiteral(resourceName: "pullDown1"), #imageLiteral(resourceName: "pullDown2"), #imageLiteral(resourceName: "pullDown3"), #imageLiteral(resourceName: "pullDown4"), #imageLiteral(resourceName: "pullDown5"), #imageLiteral(resourceName: "pullDown5"), #imageLiteral(resourceName: "pullDown4"), #imageLiteral(resourceName: "pullDown3"), #imageLiteral(resourceName: "pullDown2"), #imageLiteral(resourceName: "pullDown1")],
-            17: [#imageLiteral(resourceName: "kneelingPullDown"), #imageLiteral(resourceName: "kneelingPullDown1"), #imageLiteral(resourceName: "kneelingPullDown2"), #imageLiteral(resourceName: "kneelingPullDown3"), #imageLiteral(resourceName: "kneelingPullDown4"), #imageLiteral(resourceName: "kneelingPullDown4"), #imageLiteral(resourceName: "kneelingPullDown3"), #imageLiteral(resourceName: "kneelingPullDown2"), #imageLiteral(resourceName: "kneelingPullDown1")],
-            18: [#imageLiteral(resourceName: "pullDownMachine"), #imageLiteral(resourceName: "pullDownMachine1"), #imageLiteral(resourceName: "pullDownMachine"), #imageLiteral(resourceName: "pullDownMachine1")],
-            19: [#imageLiteral(resourceName: "bentOverBarbellRow"), #imageLiteral(resourceName: "bentOverBarbellRow1"), #imageLiteral(resourceName: "bentOverBarbellRow"), #imageLiteral(resourceName: "bentOverBarbellRow1")],
-            20: [#imageLiteral(resourceName: "bentOverRowDumbell"), #imageLiteral(resourceName: "bentOverRowDumbell1"), #imageLiteral(resourceName: "bentOverRowDumbell2"), #imageLiteral(resourceName: "bentOverRowDumbell3"), #imageLiteral(resourceName: "bentOverRowDumbell4"), #imageLiteral(resourceName: "bentOverRowDumbell5"), #imageLiteral(resourceName: "bentOverRowDumbell5"), #imageLiteral(resourceName: "bentOverRowDumbell4"), #imageLiteral(resourceName: "bentOverRowDumbell3"), #imageLiteral(resourceName: "bentOverRowDumbell2")],
-            21: [#imageLiteral(resourceName: "tBarRow"), #imageLiteral(resourceName: "tBarRow1"), #imageLiteral(resourceName: "tBarRow2"), #imageLiteral(resourceName: "tBarRow3"), #imageLiteral(resourceName: "tBarRow4"), #imageLiteral(resourceName: "tBarRow4"), #imageLiteral(resourceName: "tBarRow3"), #imageLiteral(resourceName: "tBarRow2"), #imageLiteral(resourceName: "tBarRow1")],
-            22: [#imageLiteral(resourceName: "rowMachine"), #imageLiteral(resourceName: "rowMachine1"), #imageLiteral(resourceName: "rowMachine2"), #imageLiteral(resourceName: "rowMachine3"), #imageLiteral(resourceName: "rowMachine4"), #imageLiteral(resourceName: "rowMachine4"), #imageLiteral(resourceName: "rowMachine3"), #imageLiteral(resourceName: "rowMachine2"), #imageLiteral(resourceName: "rowMachine1")],
-            23: [#imageLiteral(resourceName: "latPullover"), #imageLiteral(resourceName: "latPullover1"), #imageLiteral(resourceName: "latPullover2"), #imageLiteral(resourceName: "latPullover3"), #imageLiteral(resourceName: "latPullover3"), #imageLiteral(resourceName: "latPullover2"), #imageLiteral(resourceName: "latPullover1")],
+            16: ["pullDown", "pullDown1", "pullDown2", "pullDown3", "pullDown4", "pullDown5", "pullDown5", "pullDown4", "pullDown3", "pullDown2", "pullDown1"],
+            17: ["kneelingPullDown", "kneelingPullDown1", "kneelingPullDown2", "kneelingPullDown3", "kneelingPullDown4", "kneelingPullDown4", "kneelingPullDown3", "kneelingPullDown2", "kneelingPullDown1"],
+            18: ["pullDownMachine", "pullDownMachine1", "pullDownMachine", "pullDownMachine1"],
+            19: ["bentOverRowBarbell", "bentOverRowBarbell1", "bentOverRowBarbell2", "bentOverRowBarbell3", "bentOverRowBarbell4", "bentOverRowBarbell5", "bentOverRowBarbell5", "bentOverRowBarbell4", "bentOverRowBarbell3", "bentOverRowBarbell2"],
+            20: ["bentOverRowDumbell", "bentOverRowDumbell1", "bentOverRowDumbell2", "bentOverRowDumbell3", "bentOverRowDumbell4", "bentOverRowDumbell5", "bentOverRowDumbell5", "bentOverRowDumbell4", "bentOverRowDumbell3", "bentOverRowDumbell2"],
+            21: ["tBarRow", "tBarRow1", "tBarRow2", "tBarRow3", "tBarRow4", "tBarRow4", "tBarRow3", "tBarRow2", "tBarRow1"],
+            22: ["rowMachine", "rowMachine1", "rowMachine2", "rowMachine3", "rowMachine4", "rowMachine4", "rowMachine3", "rowMachine2", "rowMachine1"],
+            23: ["latPullover", "latPullover1", "latPullover2", "latPullover3", "latPullover2", "latPullover1"],
             // Pull (Upper Back)
-            24: [#imageLiteral(resourceName: "facePull"), #imageLiteral(resourceName: "facePull1"), #imageLiteral(resourceName: "facePull2"), #imageLiteral(resourceName: "facePull3"), #imageLiteral(resourceName: "facePull4"), #imageLiteral(resourceName: "facePull5"), #imageLiteral(resourceName: "facePull5"), #imageLiteral(resourceName: "facePull4"), #imageLiteral(resourceName: "facePull3"), #imageLiteral(resourceName: "facePull2"), #imageLiteral(resourceName: "facePull1")],
-            25: [#imageLiteral(resourceName: "leaningBackPullDown"), #imageLiteral(resourceName: "leaningBackPullDown1"), #imageLiteral(resourceName: "leaningBackPullDown2"), #imageLiteral(resourceName: "leaningBackPullDown3"), #imageLiteral(resourceName: "leaningBackPullDown4"), #imageLiteral(resourceName: "leaningBackPullDown4"), #imageLiteral(resourceName: "leaningBackPullDown3"), #imageLiteral(resourceName: "leaningBackPullDown2"), #imageLiteral(resourceName: "leaningBackPullDown1")],
+            24: ["facePull", "facePull1", "facePull2", "facePull3", "facePull4", "facePull5", "facePull5", "facePull4", "facePull3", "facePull2", "facePull1"],
+            25: ["leaningBackPullDown", "leaningBackPullDown1", "leaningBackPullDown2", "leaningBackPullDown3", "leaningBackPullDown4", "leaningBackPullDown4", "leaningBackPullDown3", "leaningBackPullDown2", "leaningBackPullDown1"],
             // Pull (Rear Delts)
-            26: [#imageLiteral(resourceName: "bentOverBarbellRow"), #imageLiteral(resourceName: "bentOverBarbellRow1"), #imageLiteral(resourceName: "bentOverBarbellRow"), #imageLiteral(resourceName: "bentOverBarbellRow1")],
+            26: ["bentOverBarbellRow", "bentOverBarbellRow1", "bentOverBarbellRow", "bentOverBarbellRow1"],
             // Pull (Traps)
-            27: [#imageLiteral(resourceName: "shrugDumbell"), #imageLiteral(resourceName: "shrugDumbell1"), #imageLiteral(resourceName: "shrugDumbell"), #imageLiteral(resourceName: "shrugDumbell1")],
+            27: ["shrugDumbell", "shrugDumbell1", "shrugDumbell", "shrugDumbell1"],
             // Pull (Biceps)
-            28: [#imageLiteral(resourceName: "hammerCurl"), #imageLiteral(resourceName: "hammerCurl1"), #imageLiteral(resourceName: "hammerCurl2"), #imageLiteral(resourceName: "hammerCurl3"), #imageLiteral(resourceName: "hammerCurl3"), #imageLiteral(resourceName: "hammerCurl2"), #imageLiteral(resourceName: "hammerCurl1"), #imageLiteral(resourceName: "hammerCurl4"), #imageLiteral(resourceName: "hammerCurl5"), #imageLiteral(resourceName: "hammerCurl5"), #imageLiteral(resourceName: "hammerCurl4"), #imageLiteral(resourceName: "hammerCurl1")],
-            29: [#imageLiteral(resourceName: "hammerCurlCable"), #imageLiteral(resourceName: "hammerCurlCable1"), #imageLiteral(resourceName: "hammerCurlCable2"), #imageLiteral(resourceName: "hammerCurlCable3"), #imageLiteral(resourceName: "hammerCurlCable3"), #imageLiteral(resourceName: "hammerCurlCable2"), #imageLiteral(resourceName: "hammerCurlCable1")],
-            30: [#imageLiteral(resourceName: "curl"), #imageLiteral(resourceName: "curl1"), #imageLiteral(resourceName: "curl2"), #imageLiteral(resourceName: "curl3"), #imageLiteral(resourceName: "curl3"), #imageLiteral(resourceName: "curl2"), #imageLiteral(resourceName: "curl1"), #imageLiteral(resourceName: "curl4"), #imageLiteral(resourceName: "curl5"), #imageLiteral(resourceName: "curl5"), #imageLiteral(resourceName: "curl4"), #imageLiteral(resourceName: "curl1")],
+            28: ["hammerCurl", "hammerCurl1", "hammerCurl2", "hammerCurl3", "hammerCurl3", "hammerCurl2", "hammerCurl1", "hammerCurl4", "hammerCurl5", "hammerCurl5", "hammerCurl4", "hammerCurl1"],
+            29: ["hammerCurlCable", "hammerCurlCable1", "hammerCurlCable2", "hammerCurlCable3", "hammerCurlCable3", "hammerCurlCable2", "hammerCurlCable1"],
+            30: ["curl", "curl1", "curl2", "curl3", "curl3", "curl2", "curl1", "curl4", "curl5", "curl5", "curl4", "curl1"],
             // Pull (Forearms)
-            31: [#imageLiteral(resourceName: "farmersCarry")],
-            32: [#imageLiteral(resourceName: "reverseBarbellCurl"), #imageLiteral(resourceName: "reverseBarbellCurl1"), #imageLiteral(resourceName: "reverseBarbellCurl"), #imageLiteral(resourceName: "reverseBarbellCurl1")],
-            33: [#imageLiteral(resourceName: "forearmCurl"), #imageLiteral(resourceName: "forearmCurl1"), #imageLiteral(resourceName: "forearmCurl2"), #imageLiteral(resourceName: "forearmCurl1"), #imageLiteral(resourceName: "forearmCurl"), #imageLiteral(resourceName: "forearmCurl"), #imageLiteral(resourceName: "forearmCurl1"), #imageLiteral(resourceName: "forearmCurl2"), #imageLiteral(resourceName: "forearmCurl1")],
+            31: ["farmersCarry"],
+            32: ["reverseBarbellCurl", "reverseBarbellCurl1", "reverseBarbellCurl", "reverseBarbellCurl1"],
+            33: ["forearmCurl", "forearmCurl1", "forearmCurl2", "forearmCurl1", "forearmCurl", "forearmCurl", "forearmCurl1", "forearmCurl2", "forearmCurl1"],
             // Push (Chest) ---------
-            34: [#imageLiteral(resourceName: "benchPress"), #imageLiteral(resourceName: "benchPress1"), #imageLiteral(resourceName: "benchPress2"), #imageLiteral(resourceName: "benchPress3"), #imageLiteral(resourceName: "benchPress4"), #imageLiteral(resourceName: "benchPress5"), #imageLiteral(resourceName: "benchPress5"), #imageLiteral(resourceName: "benchPress4"), #imageLiteral(resourceName: "benchPress3"), #imageLiteral(resourceName: "benchPress2")],
-            35: [#imageLiteral(resourceName: "benchPressDumbell"), #imageLiteral(resourceName: "benchPressDumbell4"), #imageLiteral(resourceName: "benchPressDumbell3"), #imageLiteral(resourceName: "benchPressDumbell2"), #imageLiteral(resourceName: "benchPressDumbell1"), #imageLiteral(resourceName: "benchPressDumbell1"), #imageLiteral(resourceName: "benchPressDumbell2"), #imageLiteral(resourceName: "benchPressDumbell3"), #imageLiteral(resourceName: "benchPressDumbell4")],
-            36: [#imageLiteral(resourceName: "semiInclineDumbellPress"), #imageLiteral(resourceName: "semiInclineDumbellPress4"), #imageLiteral(resourceName: "semiInclineDumbellPress3"), #imageLiteral(resourceName: "semiInclineDumbellPress2"), #imageLiteral(resourceName: "semiInclineDumbellPress1"), #imageLiteral(resourceName: "semiInclineDumbellPress1"), #imageLiteral(resourceName: "semiInclineDumbellPress2"), #imageLiteral(resourceName: "semiInclineDumbellPress3"), #imageLiteral(resourceName: "semiInclineDumbellPress4")],
-            37: [#imageLiteral(resourceName: "chestPress"), #imageLiteral(resourceName: "chestPress1"), #imageLiteral(resourceName: "chestPress"), #imageLiteral(resourceName: "chestPress1")],
-            38: [#imageLiteral(resourceName: "platePress"), #imageLiteral(resourceName: "platePress1"), #imageLiteral(resourceName: "platePress"), #imageLiteral(resourceName: "platePress1")],
-            39: [#imageLiteral(resourceName: "barbellKneelingPress"), #imageLiteral(resourceName: "barbellKneelingPress1"), #imageLiteral(resourceName: "barbellKneelingPress"), #imageLiteral(resourceName: "barbellKneelingPress1")],
-            40: [#imageLiteral(resourceName: "cableFly"), #imageLiteral(resourceName: "cableFly1"), #imageLiteral(resourceName: "cableFly2"), #imageLiteral(resourceName: "cableFly3"), #imageLiteral(resourceName: "cableFly4"), #imageLiteral(resourceName: "cableFly3"), #imageLiteral(resourceName: "cableFly2"), #imageLiteral(resourceName: "cableFly1"), #imageLiteral(resourceName: "cableFly1")],
-            41: [#imageLiteral(resourceName: "dips"), #imageLiteral(resourceName: "dips1"), #imageLiteral(resourceName: "dips"), #imageLiteral(resourceName: "dips1")],
+            34: ["benchPress", "benchPress1", "benchPress2", "benchPress3", "benchPress4", "benchPress5", "benchPress5", "benchPress4", "benchPress3", "benchPress2"],
+            35: ["benchPressDumbell", "benchPressDumbell4", "benchPressDumbell3", "benchPressDumbell2", "benchPressDumbell1", "benchPressDumbell1", "benchPressDumbell2", "benchPressDumbell3", "benchPressDumbell4"],
+            36: ["semiInclineDumbellPress", "semiInclineDumbellPress4", "semiInclineDumbellPress3", "semiInclineDumbellPress2", "semiInclineDumbellPress1", "semiInclineDumbellPress1", "semiInclineDumbellPress2", "semiInclineDumbellPress3", "semiInclineDumbellPress4"],
+            37: ["chestPress", "chestPress1", "chestPress", "chestPress1"],
+            38: ["platePress", "platePress1", "platePress", "platePress1"],
+            39: ["barbellKneelingPress", "barbellKneelingPress1", "barbellKneelingPress", "barbellKneelingPress1"],
+            40: ["cableFly", "cableFly1", "cableFly2", "cableFly3", "cableFly4", "cableFly3", "cableFly2", "cableFly1", "cableFly1"],
+            41: ["dips", "dips1", "dips", "dips1"],
             // Push (Shoulders)
-            42: [#imageLiteral(resourceName: "standingShoulderPressBarbell"), #imageLiteral(resourceName: "standingShoulderPressBarbell1"), #imageLiteral(resourceName: "standingShoulderPressBarbell2"), #imageLiteral(resourceName: "standingShoulderPressBarbell2"), #imageLiteral(resourceName: "standingShoulderPressBarbell1")],
-            43: [#imageLiteral(resourceName: "standingShoulderPressDumbell"), #imageLiteral(resourceName: "standingShoulderPressDumbell1"), #imageLiteral(resourceName: "standingShoulderPressDumbell2"), #imageLiteral(resourceName: "standingShoulderPressDumbell2"), #imageLiteral(resourceName: "standingShoulderPressDumbell1")],
-            44: [#imageLiteral(resourceName: "lateralRaise"), #imageLiteral(resourceName: "lateralRaise1"), #imageLiteral(resourceName: "lateralRaise2"), #imageLiteral(resourceName: "lateralRaise3"), #imageLiteral(resourceName: "lateralRaise4"), #imageLiteral(resourceName: "lateralRaise4"), #imageLiteral(resourceName: "lateralRaise3"), #imageLiteral(resourceName: "lateralRaise2"), #imageLiteral(resourceName: "lateralRaise1")],
-            45: [#imageLiteral(resourceName: "frontRaise"), #imageLiteral(resourceName: "frontRaise1"), #imageLiteral(resourceName: "frontRaise2"), #imageLiteral(resourceName: "frontRaise3"), #imageLiteral(resourceName: "frontRaise4"), #imageLiteral(resourceName: "frontRaise4"), #imageLiteral(resourceName: "frontRaise3"), #imageLiteral(resourceName: "frontRaise2"), #imageLiteral(resourceName: "frontRaise1")],
+            42: ["standingShoulderPressBarbell", "standingShoulderPressBarbell1", "standingShoulderPressBarbell2", "standingShoulderPressBarbell2", "standingShoulderPressBarbell1"],
+            43: ["standingShoulderPressDumbell", "standingShoulderPressDumbell1", "standingShoulderPressDumbell2", "standingShoulderPressDumbell2", "standingShoulderPressDumbell1"],
+            44: ["lateralRaise", "lateralRaise1", "lateralRaise2", "lateralRaise3", "lateralRaise4", "lateralRaise4", "lateralRaise3", "lateralRaise2", "lateralRaise1"],
+            45: ["frontRaise", "frontRaise1", "frontRaise2", "frontRaise3", "frontRaise4", "frontRaise4", "frontRaise3", "frontRaise2", "frontRaise1"],
             // Push (Triceps)
-            46: [#imageLiteral(resourceName: "closeGripBench"), #imageLiteral(resourceName: "closeGripBench1"), #imageLiteral(resourceName: "closeGripBench2"), #imageLiteral(resourceName: "closeGripBench3"), #imageLiteral(resourceName: "closeGripBench4"), #imageLiteral(resourceName: "closeGripBench5"), #imageLiteral(resourceName: "closeGripBench5"), #imageLiteral(resourceName: "closeGripBench4"), #imageLiteral(resourceName: "closeGripBench3"), #imageLiteral(resourceName: "closeGripBench2")],
-            47: [#imageLiteral(resourceName: "cableExtension"), #imageLiteral(resourceName: "cableExtension1"), #imageLiteral(resourceName: "cableExtension2"), #imageLiteral(resourceName: "cableExtension3"), #imageLiteral(resourceName: "cableExtension3"), #imageLiteral(resourceName: "cableExtension2"), #imageLiteral(resourceName: "cableExtension1")],
-            48: [#imageLiteral(resourceName: "ropeExtension"), #imageLiteral(resourceName: "ropeExtension1"), #imageLiteral(resourceName: "ropeExtension2"), #imageLiteral(resourceName: "ropeExtension3"), #imageLiteral(resourceName: "ropeExtension3"), #imageLiteral(resourceName: "ropeExtension2"), #imageLiteral(resourceName: "ropeExtension1")],
+            46: ["closeGripBench", "closeGripBench1", "closeGripBench2", "closeGripBench3", "closeGripBench4", "closeGripBench5", "closeGripBench5", "closeGripBench4", "closeGripBench3", "closeGripBench2"],
+            47: ["cableExtension", "cableExtension1", "cableExtension2", "cableExtension3", "cableExtension3", "cableExtension2", "cableExtension1"],
+            48: ["ropeExtensions", "ropeExtensions1", "ropeExtensions2", "ropeExtensions3", "ropeExtensions3", "ropeExtensions2", "ropeExtensions1"],
             // Full Body
-            49: [#imageLiteral(resourceName: "cleanPress"), #imageLiteral(resourceName: "cleanPress1"), #imageLiteral(resourceName: "cleanPress2"), #imageLiteral(resourceName: "cleanPress3"), #imageLiteral(resourceName: "cleanPress4"), #imageLiteral(resourceName: "cleanPress5"), #imageLiteral(resourceName: "cleanPress6"), #imageLiteral(resourceName: "cleanPress5"), #imageLiteral(resourceName: "cleanPress4"), #imageLiteral(resourceName: "cleanPress3"), #imageLiteral(resourceName: "cleanPress2"), #imageLiteral(resourceName: "cleanPress1")],
+            49: ["cleanPress", "cleanPress1", "cleanPress2", "cleanPress3", "cleanPress4", "cleanPress5", "cleanPress6", "cleanPress5", "cleanPress4", "cleanPress3", "cleanPress2", "cleanPress1"],
             // BodyWeight ------------------------------------
             // Legs (General) ---------
-            50: [#imageLiteral(resourceName: "bodyweightSquat"), #imageLiteral(resourceName: "bodyweightSquat1"), #imageLiteral(resourceName: "bodyweightSquat2"), #imageLiteral(resourceName: "bodyweightSquat3"), #imageLiteral(resourceName: "bodyweightSquat4"), #imageLiteral(resourceName: "bodyweightSquat5"), #imageLiteral(resourceName: "bodyweightSquat5"), #imageLiteral(resourceName: "bodyweightSquat4"), #imageLiteral(resourceName: "bodyweightSquat3"), #imageLiteral(resourceName: "bodyweightSquat2"), #imageLiteral(resourceName: "bodyweightSquat3"), #imageLiteral(resourceName: "bodyweightSquat4"), #imageLiteral(resourceName: "bodyweightSquat5"), #imageLiteral(resourceName: "bodyweightSquat5"), #imageLiteral(resourceName: "bodyweightSquat4"), #imageLiteral(resourceName: "bodyweightSquat3"), #imageLiteral(resourceName: "bodyweightSquat2"),],
-            51: [#imageLiteral(resourceName: "pistolSquat"), #imageLiteral(resourceName: "pistolSquat1"), #imageLiteral(resourceName: "pistolSquat2"), #imageLiteral(resourceName: "pistolSquat3"), #imageLiteral(resourceName: "pistolSquat4"), #imageLiteral(resourceName: "pistolSquat5"), #imageLiteral(resourceName: "pistolSquat5"), #imageLiteral(resourceName: "pistolSquat4"), #imageLiteral(resourceName: "pistolSquat3"), #imageLiteral(resourceName: "pistolSquat2"), #imageLiteral(resourceName: "pistolSquat1")],
-            52: [#imageLiteral(resourceName: "skaterSquat"), #imageLiteral(resourceName: "skaterSquat1"), #imageLiteral(resourceName: "skaterSquat2"), #imageLiteral(resourceName: "skaterSquat3"), #imageLiteral(resourceName: "skaterSquat4"), #imageLiteral(resourceName: "skaterSquat4"), #imageLiteral(resourceName: "skaterSquat3"), #imageLiteral(resourceName: "skaterSquat2"), #imageLiteral(resourceName: "skaterSquat1")],
-            53: [#imageLiteral(resourceName: "jumpSquat"), #imageLiteral(resourceName: "jumpSquat1"), #imageLiteral(resourceName: "jumpSquat2"), #imageLiteral(resourceName: "jumpSquat3"), #imageLiteral(resourceName: "jumpSquat4"), #imageLiteral(resourceName: "jumpSquat5"), #imageLiteral(resourceName: "jumpSquat4"), #imageLiteral(resourceName: "jumpSquat3"), #imageLiteral(resourceName: "jumpSquat2"), #imageLiteral(resourceName: "jumpSquat1")],
-            54: [#imageLiteral(resourceName: "sumoSquat"), #imageLiteral(resourceName: "sumoSquat1"), #imageLiteral(resourceName: "sumoSquat2"), #imageLiteral(resourceName: "sumoSquat3") , #imageLiteral(resourceName: "sumoSquat4"), #imageLiteral(resourceName: "sumoSquat4"), #imageLiteral(resourceName: "sumoSquat3"), #imageLiteral(resourceName: "sumoSquat2")],
-            55: [#imageLiteral(resourceName: "lunge"), #imageLiteral(resourceName: "lunge1"), #imageLiteral(resourceName: "lunge2"), #imageLiteral(resourceName: "lunge3"), #imageLiteral(resourceName: "lunge4"), #imageLiteral(resourceName: "lunge3"), #imageLiteral(resourceName: "lunge2"), #imageLiteral(resourceName: "lunge1"), #imageLiteral(resourceName: "lunge5"), #imageLiteral(resourceName: "lunge6"), #imageLiteral(resourceName: "lunge7"), #imageLiteral(resourceName: "lunge6"), #imageLiteral(resourceName: "lunge5"), #imageLiteral(resourceName: "lunge1")],
-            56: [#imageLiteral(resourceName: "lungeJump"), #imageLiteral(resourceName: "lungeJump1"), #imageLiteral(resourceName: "lungeJump2"), #imageLiteral(resourceName: "lungeJump3"), #imageLiteral(resourceName: "lungeJump4"), #imageLiteral(resourceName: "lungeJump5"), #imageLiteral(resourceName: "lungeJump6"), #imageLiteral(resourceName: "lungeJump5"), #imageLiteral(resourceName: "lungeJump4"), #imageLiteral(resourceName: "lungeJump3"), #imageLiteral(resourceName: "lungeJump2"), #imageLiteral(resourceName: "lungeJump1")],
+            50: ["bodyweightSquat", "bodyweightSquat1", "bodyweightSquat2", "bodyweightSquat3", "bodyweightSquat4", "bodyweightSquat5", "bodyweightSquat5", "bodyweightSquat4", "bodyweightSquat3", "bodyweightSquat2", "bodyweightSquat3", "bodyweightSquat4", "bodyweightSquat5", "bodyweightSquat5", "bodyweightSquat4", "bodyweightSquat3", "bodyweightSquat2",],
+            51: ["pistolSquat", "pistolSquat1", "pistolSquat2", "pistolSquat3", "pistolSquat4", "pistolSquat5", "pistolSquat5", "pistolSquat4", "pistolSquat3", "pistolSquat2", "pistolSquat1"],
+            52: ["skaterSquat", "skaterSquat1", "skaterSquat2", "skaterSquat3", "skaterSquat4", "skaterSquat4", "skaterSquat3", "skaterSquat2", "skaterSquat1"],
+            53: ["jumpSquat", "jumpSquat1", "jumpSquat2", "jumpSquat3", "jumpSquat4", "jumpSquat5", "jumpSquat4", "jumpSquat3", "jumpSquat2", "jumpSquat1"],
+            54: ["sumoSquat", "sumoSquat1", "sumoSquat2", "sumoSquat3", "sumoSquat4", "sumoSquat4", "sumoSquat3", "sumoSquat2"],
+            55: ["lunge", "lunge1", "lunge2", "lunge3", "lunge4", "lunge3", "lunge2", "lunge1", "lunge5", "lunge6", "lunge7", "lunge6", "lunge5", "lunge1"],
+            56: ["lungeJump", "lungeJump1", "lungeJump2", "lungeJump3", "lungeJump4", "lungeJump5", "lungeJump6", "lungeJump7", "lungeJump6", "lungeJump5", "lungeJump4", "lungeJump3", "lungeJump2", "lungeJump1"],
             // Legs (Hamstrings)
-            57: [#imageLiteral(resourceName: "bodyweightDeadlift"), #imageLiteral(resourceName: "bodyweightDeadlift1"), #imageLiteral(resourceName: "bodyweightDeadlift2"), #imageLiteral(resourceName: "bodyweightDeadlift3"), #imageLiteral(resourceName: "bodyweightDeadlift4"), #imageLiteral(resourceName: "bodyweightDeadlift3"), #imageLiteral(resourceName: "bodyweightDeadlift2"), #imageLiteral(resourceName: "bodyweightDeadlift1"), #imageLiteral(resourceName: "bodyweightDeadlift1")],
-            58: [#imageLiteral(resourceName: "singleLegDeadlift"), #imageLiteral(resourceName: "singleLegDeadlift1"), #imageLiteral(resourceName: "singleLegDeadlift2"), #imageLiteral(resourceName: "singleLegDeadlift3"), #imageLiteral(resourceName: "singleLegDeadlift4"), #imageLiteral(resourceName: "singleLegDeadlift3"), #imageLiteral(resourceName: "singleLegDeadlift2"), #imageLiteral(resourceName: "singleLegDeadlift1")],
+            57: ["bodyweightDeadlift", "bodyweightDeadlift1", "bodyweightDeadlift2", "bodyweightDeadlift3", "bodyweightDeadlift4", "bodyweightDeadlift3", "bodyweightDeadlift2", "bodyweightDeadlift1", "bodyweightDeadlift1"],
+            58: ["singleLegDeadlift", "singleLegDeadlift1", "singleLegDeadlift2", "singleLegDeadlift3", "singleLegDeadlift4", "singleLegDeadlift3", "singleLegDeadlift2", "singleLegDeadlift1"],
             // Legs (Glutes)
-            59: [#imageLiteral(resourceName: "gluteBridgeW"), #imageLiteral(resourceName: "gluteBridgeW1"), #imageLiteral(resourceName: "gluteBridgeW2"), #imageLiteral(resourceName: "gluteBridgeW3"), #imageLiteral(resourceName: "gluteBridgeW3"), #imageLiteral(resourceName: "gluteBridgeW2"), #imageLiteral(resourceName: "gluteBridgeW1")],
-            60: [#imageLiteral(resourceName: "singleLegGluteBridge"), #imageLiteral(resourceName: "singleLegGluteBridge1"), #imageLiteral(resourceName: "singleLegGluteBridge2"), #imageLiteral(resourceName: "singleLegGluteBridge3"), #imageLiteral(resourceName: "singleLegGluteBridge3"), #imageLiteral(resourceName: "singleLegGluteBridge2"), #imageLiteral(resourceName: "singleLegGluteBridge1")],
-            61: [#imageLiteral(resourceName: "kneelingHipRotations"), #imageLiteral(resourceName: "kneelingHipRotations8"), #imageLiteral(resourceName: "kneelingHipRotations9"), #imageLiteral(resourceName: "kneelingHipRotations10"), #imageLiteral(resourceName: "kneelingHipRotations10"), #imageLiteral(resourceName: "kneelingHipRotations9"), #imageLiteral(resourceName: "kneelingHipRotations8")],
-            62: [#imageLiteral(resourceName: "standingGluteKickback"), #imageLiteral(resourceName: "standingGluteKickback1"), #imageLiteral(resourceName: "standingGluteKickback2"), #imageLiteral(resourceName: "standingGluteKickback3"), #imageLiteral(resourceName: "standingGluteKickback3"), #imageLiteral(resourceName: "standingGluteKickback2"), #imageLiteral(resourceName: "standingGluteKickback1")],
+            59: ["gluteBridgeW", "gluteBridgeW1", "gluteBridgeW2", "gluteBridgeW3", "gluteBridgeW3", "gluteBridgeW2", "gluteBridgeW1", "gluteBridgeW2", "gluteBridgeW3", "gluteBridgeW3", "gluteBridgeW2", "gluteBridgeW1"],
+            60: ["singleLegGluteBridge", "singleLegGluteBridge1", "singleLegGluteBridge2", "singleLegGluteBridge3", "singleLegGluteBridge3", "singleLegGluteBridge2", "singleLegGluteBridge1"],
+            61: ["kneelingHipRotations", "kneelingHipRotations8", "kneelingHipRotations9", "kneelingHipRotations10", "kneelingHipRotations10", "kneelingHipRotations9", "kneelingHipRotations8"],
+            62: ["standingGluteKickback", "standingGluteKickback1", "standingGluteKickback2", "standingGluteKickback3", "standingGluteKickback3", "standingGluteKickback2", "standingGluteKickback1"],
             // Legs (Calves)
-            63: [#imageLiteral(resourceName: "calfRaise"), #imageLiteral(resourceName: "calfRaise1"), #imageLiteral(resourceName: "calfRaise"), #imageLiteral(resourceName: "calfRaise1")],
+            63: ["calfRaise", "calfRaise1", "calfRaise", "calfRaise1"],
             // Pull (Back) ---------
-            64: [#imageLiteral(resourceName: "contralateralLimbRaises"), #imageLiteral(resourceName: "contralateralLimbRaises1"), #imageLiteral(resourceName: "contralateralLimbRaises2"), #imageLiteral(resourceName: "contralateralLimbRaises3"), #imageLiteral(resourceName: "contralateralLimbRaises3"), #imageLiteral(resourceName: "contralateralLimbRaises2"), #imageLiteral(resourceName: "contralateralLimbRaises1"), #imageLiteral(resourceName: "contralateralLimbRaises4"), #imageLiteral(resourceName: "contralateralLimbRaises5"), #imageLiteral(resourceName: "contralateralLimbRaises5"), #imageLiteral(resourceName: "contralateralLimbRaises4"), #imageLiteral(resourceName: "contralateralLimbRaises1")],
-            65: [#imageLiteral(resourceName: "superMan")],
-            66: [#imageLiteral(resourceName: "backHyperextension"), #imageLiteral(resourceName: "backHyperextension1"), #imageLiteral(resourceName: "backHyperextension2"), #imageLiteral(resourceName: "backHyperextension3"), #imageLiteral(resourceName: "backHyperextension4"), #imageLiteral(resourceName: "backHyperextension4"), #imageLiteral(resourceName: "backHyperextension3"), #imageLiteral(resourceName: "backHyperextension2"), #imageLiteral(resourceName: "backHyperextension1")],
-            67: [#imageLiteral(resourceName: "doorFrameRow"), #imageLiteral(resourceName: "doorFrameRow1"), #imageLiteral(resourceName: "doorFrameRow2"), #imageLiteral(resourceName: "doorFrameRow2"), #imageLiteral(resourceName: "doorFrameRow1"), #imageLiteral(resourceName: "doorFrameRow")],
-            68: [#imageLiteral(resourceName: "reverseSnowAngels"), #imageLiteral(resourceName: "reverseSnowAngels1"), #imageLiteral(resourceName: "reverseSnowAngels2"), #imageLiteral(resourceName: "reverseSnowAngels3"), #imageLiteral(resourceName: "reverseSnowAngels4"), #imageLiteral(resourceName: "reverseSnowAngels4"), #imageLiteral(resourceName: "reverseSnowAngels3"), #imageLiteral(resourceName: "reverseSnowAngels2"), #imageLiteral(resourceName: "reverseSnowAngels1")],
-            69: [#imageLiteral(resourceName: "scapulaPushup"), #imageLiteral(resourceName: "scapulaPushup1"), #imageLiteral(resourceName: "scapulaPushup"), #imageLiteral(resourceName: "scapulaPushup1")],
+            64: ["contralateralLimbRaises", "contralateralLimbRaises1", "contralateralLimbRaises2", "contralateralLimbRaises3", "contralateralLimbRaises3", "contralateralLimbRaises2", "contralateralLimbRaises1", "contralateralLimbRaises4", "contralateralLimbRaises5", "contralateralLimbRaises5", "contralateralLimbRaises4", "contralateralLimbRaises1"],
+            65: ["superMan"],
+            66: ["backHyperextension", "backHyperextension1", "backHyperextension2", "backHyperextension3", "backHyperextension4", "backHyperextension4", "backHyperextension3", "backHyperextension2", "backHyperextension1"],
+            67: ["doorFrameRow", "doorFrameRow1", "doorFrameRow2", "doorFrameRow2", "doorFrameRow1"],
+            68: ["reverseSnowAngels", "reverseSnowAngels1", "reverseSnowAngels2", "reverseSnowAngels3", "reverseSnowAngels4", "reverseSnowAngels4", "reverseSnowAngels3", "reverseSnowAngels2", "reverseSnowAngels1"],
+            69: ["scapulaPushup", "scapulaPushup1", "scapulaPushup", "scapulaPushup1", "scapulaPushup", "scapulaPushup1"],
             // Pull (Traps)
-            70: [#imageLiteral(resourceName: "handStandTrap"), #imageLiteral(resourceName: "handStandTrap1"), #imageLiteral(resourceName: "handStandTrap"), #imageLiteral(resourceName: "handStandTrap1")],
+            70: ["handStandTrap", "handStandTrap1", "handStandTrap", "handStandTrap1"],
             // Push (Chest) ---------
-            71: [#imageLiteral(resourceName: "pushUp"), #imageLiteral(resourceName: "pushUp1"), #imageLiteral(resourceName: "pushUp2"), #imageLiteral(resourceName: "pushUp3"), #imageLiteral(resourceName: "pushUp4"), #imageLiteral(resourceName: "pushUp4"), #imageLiteral(resourceName: "pushUp3"), #imageLiteral(resourceName: "pushUp2"), #imageLiteral(resourceName: "pushUp1")],
+            71: ["pushUp", "pushUp1", "pushUp2", "pushUp3", "pushUp4", "pushUp4", "pushUp3", "pushUp2", "pushUp1"],
             // Push (Tricep)
-            72: [#imageLiteral(resourceName: "trianglePushup"), #imageLiteral(resourceName: "trianglePushup1"), #imageLiteral(resourceName: "trianglePushup2"), #imageLiteral(resourceName: "trianglePushup3"), #imageLiteral(resourceName: "trianglePushup4"), #imageLiteral(resourceName: "trianglePushup4"), #imageLiteral(resourceName: "trianglePushup3"), #imageLiteral(resourceName: "trianglePushup2"), #imageLiteral(resourceName: "trianglePushup1")],
-            73: [#imageLiteral(resourceName: "dolphinPushup"), #imageLiteral(resourceName: "dolphinPushup1"), #imageLiteral(resourceName: "dolphinPushup2"), #imageLiteral(resourceName: "dolphinPushup3"), #imageLiteral(resourceName: "dolphinPushup4"), #imageLiteral(resourceName: "dolphinPushup3"), #imageLiteral(resourceName: "dolphinPushup2"), #imageLiteral(resourceName: "dolphinPushup1")],
-            74: [#imageLiteral(resourceName: "tricepExtensionsBodyweight"), #imageLiteral(resourceName: "tricepExtensionsBodyweight1"), #imageLiteral(resourceName: "tricepExtensionsBodyweight"), #imageLiteral(resourceName: "tricepExtensionsBodyweight1")],
+            72: ["trianglePushup", "trianglePushup1", "trianglePushup2", "trianglePushup3", "trianglePushup4", "trianglePushup4", "trianglePushup3", "trianglePushup2", "trianglePushup1"],
+            73: ["dolphinPushup", "dolphinPushup1", "dolphinPushup2", "dolphinPushup3", "dolphinPushup4", "dolphinPushup3", "dolphinPushup2", "dolphinPushup1"],
+            74: ["tricepExtensionsBodyweight", "tricepExtensionsBodyweight1", "tricepExtensionsBodyweight", "tricepExtensionsBodyweight1"],
             // Push (Chest & Tricep)
-            75: [#imageLiteral(resourceName: "walkingPushup"), #imageLiteral(resourceName: "walkingPushup1"), #imageLiteral(resourceName: "walkingPushup2"), #imageLiteral(resourceName: "walkingPushup1"), #imageLiteral(resourceName: "walkingPushup3"), #imageLiteral(resourceName: "walkingPushup4"), #imageLiteral(resourceName: "walkingPushup5"), #imageLiteral(resourceName: "walkingPushup4"), #imageLiteral(resourceName: "walkingPushup3"), #imageLiteral(resourceName: "walkingPushup1"), #imageLiteral(resourceName: "walkingPushup2"), #imageLiteral(resourceName: "walkingPushup1"), #imageLiteral(resourceName: "walkingPushup6"), #imageLiteral(resourceName: "walkingPushup7"), #imageLiteral(resourceName: "walkingPushup8"), #imageLiteral(resourceName: "walkingPushup7"), #imageLiteral(resourceName: "walkingPushup6"), #imageLiteral(resourceName: "walkingPushup1"), #imageLiteral(resourceName: "walkingPushup2"), #imageLiteral(resourceName: "walkingPushup1")],
+            75: ["walkingPushup", "walkingPushup1", "walkingPushup2", "walkingPushup1", "walkingPushup3", "walkingPushup4", "walkingPushup5", "walkingPushup4", "walkingPushup3", "walkingPushup1", "walkingPushup2", "walkingPushup1", "walkingPushup6", "walkingPushup7", "walkingPushup8", "walkingPushup7", "walkingPushup6", "walkingPushup1", "walkingPushup2", "walkingPushup1"],
             // Push (Shoulder)
-            76: [#imageLiteral(resourceName: "downwardDogPushup"), #imageLiteral(resourceName: "downwardDogPushup1"), #imageLiteral(resourceName: "downwardDogPushup2"), #imageLiteral(resourceName: "downwardDogPushup3"), #imageLiteral(resourceName: "downwardDogPushup4"), #imageLiteral(resourceName: "downwardDogPushup5"), #imageLiteral(resourceName: "downwardDogPushup6"), #imageLiteral(resourceName: "downwardDogPushup7"), #imageLiteral(resourceName: "downwardDogPushup8"), #imageLiteral(resourceName: "downwardDogPushup1")],
-            77: [#imageLiteral(resourceName: "handStandTrap1")],
-            78: [#imageLiteral(resourceName: "boxer2"), #imageLiteral(resourceName: "boxer"), #imageLiteral(resourceName: "boxer1"), #imageLiteral(resourceName: "boxer2"), #imageLiteral(resourceName: "boxer1"), #imageLiteral(resourceName: "boxer"), #imageLiteral(resourceName: "boxer3"), #imageLiteral(resourceName: "boxer4"), #imageLiteral(resourceName: "boxer3"), #imageLiteral(resourceName: "boxer1")],
-            79: [#imageLiteral(resourceName: "armCircles")],
+            76: ["downwardDogPushup", "downwardDogPushup1", "downwardDogPushup2", "downwardDogPushup3", "downwardDogPushup4", "downwardDogPushup5", "downwardDogPushup6", "downwardDogPushup7", "downwardDogPushup8", "downwardDogPushup1"],
+            77: ["handStandTrap1"],
+            78: ["boxer2", "boxer", "boxer1", "boxer2", "boxer1", "boxer", "boxer3", "boxer4", "boxer3", "boxer1"],
+            79: ["armCircles"],
             // Core ---------
-            80: [#imageLiteral(resourceName: "plank")],
-            81: [#imageLiteral(resourceName: "dynamicPlank"), #imageLiteral(resourceName: "dynamicPlank1"), #imageLiteral(resourceName: "dynamicPlank"), #imageLiteral(resourceName: "dynamicPlank1")],
-            82: [#imageLiteral(resourceName: "sidePlank")],
-            83: [#imageLiteral(resourceName: "pushupPlank")],
-            84: [#imageLiteral(resourceName: "lSit")],
-            85: [#imageLiteral(resourceName: "bicycleCrunch"), #imageLiteral(resourceName: "bicycleCrunch1"), #imageLiteral(resourceName: "bicycleCrunch2"), #imageLiteral(resourceName: "bicycleCrunch3"), #imageLiteral(resourceName: "bicycleCrunch4"), #imageLiteral(resourceName: "bicycleCrunch3"), #imageLiteral(resourceName: "bicycleCrunch2"), #imageLiteral(resourceName: "bicycleCrunch1")],
-            86: [#imageLiteral(resourceName: "divingHold")],
-            87: [#imageLiteral(resourceName: "hipRaise"), #imageLiteral(resourceName: "hipRaise1"), #imageLiteral(resourceName: "hipRaise"), #imageLiteral(resourceName: "hipRaise1")],
-            88: [#imageLiteral(resourceName: "legHold")],
+            80: ["plank"],
+            81: ["dynamicPlank", "dynamicPlank1", "dynamicPlank", "dynamicPlank1"],
+            82: ["sidePlank"],
+            83: ["pushupPlank"],
+            84: ["lSit"],
+            85: ["bicycleCrunch", "bicycleCrunch1", "bicycleCrunch2", "bicycleCrunch3", "bicycleCrunch4", "bicycleCrunch3", "bicycleCrunch2", "bicycleCrunch1"],
+            86: ["divingHold"],
+            87: ["hipRaise", "hipRaise1", "hipRaise", "hipRaise1"],
+            88: ["legHold"],
             // General (Core) ---------
-            89: [#imageLiteral(resourceName: "mountainClimber"), #imageLiteral(resourceName: "mountainClimber1"), #imageLiteral(resourceName: "mountainClimber2"), #imageLiteral(resourceName: "mountainClimber3"), #imageLiteral(resourceName: "mountainClimber4"), #imageLiteral(resourceName: "mountainClimber5"), #imageLiteral(resourceName: "mountainClimber4"), #imageLiteral(resourceName: "mountainClimber3"), #imageLiteral(resourceName: "mountainClimber2"), #imageLiteral(resourceName: "mountainClimber1")],
+            89: ["mountainClimber", "mountainClimber3", "mountainClimber2", "mountainClimber1", "mountainClimber2", "mountainClimber3", "mountainClimber4", "mountainClimber5", "mountainClimber4", "mountainClimber3"],
             // General (Full Body)
-            90: [#imageLiteral(resourceName: "burpee3"), #imageLiteral(resourceName: "burpee2"), #imageLiteral(resourceName: "burpee1"), #imageLiteral(resourceName: "burpee"), #imageLiteral(resourceName: "burpee1"), #imageLiteral(resourceName: "burpee2"), #imageLiteral(resourceName: "burpee3"), #imageLiteral(resourceName: "burpee4"), #imageLiteral(resourceName: "burpee5"), #imageLiteral(resourceName: "burpee6"), #imageLiteral(resourceName: "burpee5"), #imageLiteral(resourceName: "burpee4"), #imageLiteral(resourceName: "burpee3"), #imageLiteral(resourceName: "burpee2")],
-            91: [#imageLiteral(resourceName: "kickThroughBurpee7"), #imageLiteral(resourceName: "kickThroughBurpee2"), #imageLiteral(resourceName: "kickThroughBurpee1"), #imageLiteral(resourceName: "kickThroughBurpee"), #imageLiteral(resourceName: "kickThroughBurpee1"), #imageLiteral(resourceName: "kickThroughBurpee2"), #imageLiteral(resourceName: "kickThroughBurpee3"), #imageLiteral(resourceName: "kickThroughBurpee4"), #imageLiteral(resourceName: "kickThroughBurpee5"), #imageLiteral(resourceName: "kickThroughBurpee4"), #imageLiteral(resourceName: "kickThroughBurpee6"), #imageLiteral(resourceName: "kickThroughBurpee7"), #imageLiteral(resourceName: "kickThroughBurpee6"), #imageLiteral(resourceName: "kickThroughBurpee4"), #imageLiteral(resourceName: "kickThroughBurpee8"), #imageLiteral(resourceName: "kickThroughBurpee9"), #imageLiteral(resourceName: "kickThroughBurpee8"), #imageLiteral(resourceName: "kickThroughBurpee4"), #imageLiteral(resourceName: "kickThroughBurpee3"), #imageLiteral(resourceName: "kickThroughBurpee2")],
+            90: ["burpee3", "burpee2", "burpee1", "burpee", "burpee1", "burpee2", "burpee3", "burpee4", "burpee5", "burpee6", "burpee5", "burpee4", "burpee3", "burpee2"],
+            91: ["kickThroughBurpee7", "kickThroughBurpee2", "kickThroughBurpee1", "kickThroughBurpee", "kickThroughBurpee1", "kickThroughBurpee2", "kickThroughBurpee3", "kickThroughBurpee4", "kickThroughBurpee5", "kickThroughBurpee4", "kickThroughBurpee6", "kickThroughBurpee7", "kickThroughBurpee6", "kickThroughBurpee4", "kickThroughBurpee8", "kickThroughBurpee9", "kickThroughBurpee8", "kickThroughBurpee4", "kickThroughBurpee3", "kickThroughBurpee2"],
             // General (Upper Body)
-            92: [#imageLiteral(resourceName: "spiderPushup4"), #imageLiteral(resourceName: "spiderPushup"), #imageLiteral(resourceName: "spiderPushup1"), #imageLiteral(resourceName: "spiderPushup2"), #imageLiteral(resourceName: "spiderPushup3"), #imageLiteral(resourceName: "spiderPushup4"), #imageLiteral(resourceName: "spiderPushup3"), #imageLiteral(resourceName: "spiderPushup2"), #imageLiteral(resourceName: "spiderPushup1"), #imageLiteral(resourceName: "spiderPushup"), #imageLiteral(resourceName: "spiderPushup1"), #imageLiteral(resourceName: "spiderPushup2"), #imageLiteral(resourceName: "spiderPushup5"), #imageLiteral(resourceName: "spiderPushup6"), #imageLiteral(resourceName: "spiderPushup5"), #imageLiteral(resourceName: "spiderPushup2"), #imageLiteral(resourceName: "spiderPushup1"), #imageLiteral(resourceName: "spiderPushup")],
-            93: [#imageLiteral(resourceName: "crabWalk"), #imageLiteral(resourceName: "crabWalk1"), #imageLiteral(resourceName: "crabWalk2"), #imageLiteral(resourceName: "crabWalk3"), #imageLiteral(resourceName: "crabWalk4"), #imageLiteral(resourceName: "crabWalk5"), #imageLiteral(resourceName: "crabWalk6")],
+            92: ["spiderPushup4", "spiderPushup", "spiderPushup1", "spiderPushup2", "spiderPushup3", "spiderPushup4", "spiderPushup3", "spiderPushup2", "spiderPushup1", "spiderPushup", "spiderPushup1", "spiderPushup2", "spiderPushup5", "spiderPushup6", "spiderPushup5", "spiderPushup2", "spiderPushup1", "spiderPushup"],
+            93: ["crabWalk", "crabWalk1", "crabWalk2", "crabWalk3", "crabWalk4", "crabWalk5", "crabWalk6"],
             // General (Cardio)
-            94: [#imageLiteral(resourceName: "jumpingJacks3"), #imageLiteral(resourceName: "jumpingJacks"), #imageLiteral(resourceName: "jumpingJacks1"), #imageLiteral(resourceName: "jumpingJacks2"), #imageLiteral(resourceName: "jumpingJacks3"), #imageLiteral(resourceName: "jumpingJacks4"), #imageLiteral(resourceName: "jumpingJacks3"), #imageLiteral(resourceName: "jumpingJacks2"), #imageLiteral(resourceName: "jumpingJacks1"), #imageLiteral(resourceName: "jumpingJacks")],
-            95: [#imageLiteral(resourceName: "tuckJump3"), #imageLiteral(resourceName: "tuckJump"), #imageLiteral(resourceName: "tuckJump1"), #imageLiteral(resourceName: "tuckJump2"), #imageLiteral(resourceName: "tuckJump3"), #imageLiteral(resourceName: "tuckJump2"), #imageLiteral(resourceName: "tuckJump1"), #imageLiteral(resourceName: "tuckJump")],
-            96: [#imageLiteral(resourceName: "bumKicks4"), #imageLiteral(resourceName: "bumKicks3"), #imageLiteral(resourceName: "bumKicks2"), #imageLiteral(resourceName: "bumKicks1"), #imageLiteral(resourceName: "bumKicks"), #imageLiteral(resourceName: "bumKicks1"), #imageLiteral(resourceName: "bumKicks2"), #imageLiteral(resourceName: "bumKicks3")],
-            97: [#imageLiteral(resourceName: "kneeRaises"), #imageLiteral(resourceName: "kneeRaises1"), #imageLiteral(resourceName: "kneeRaises2"), #imageLiteral(resourceName: "kneeRaises3"), #imageLiteral(resourceName: "kneeRaises4"), #imageLiteral(resourceName: "kneeRaises3"), #imageLiteral(resourceName: "kneeRaises2"), #imageLiteral(resourceName: "kneeRaises1")],
+            94: ["jumpingJacks3", "jumpingJacks", "jumpingJacks1", "jumpingJacks2", "jumpingJacks3", "jumpingJacks4", "jumpingJacks3", "jumpingJacks2", "jumpingJacks1", "jumpingJacks"],
+            95: ["tuckJump3", "tuckJump", "tuckJump1", "tuckJump2", "tuckJump3", "tuckJump2", "tuckJump1", "tuckJump"],
+            96: ["bumKicks", "bumKicks1", "bumKicks2", "bumKicks3", "bumKicks4", "bumKicks3", "bumKicks2", "bumKicks1"],
+            97: ["kneeRaises", "kneeRaises1", "kneeRaises2", "kneeRaises3", "kneeRaises4", "kneeRaises3", "kneeRaises2", "kneeRaises1"],
             // Isometric (Legs) ---------
-            98: [#imageLiteral(resourceName: "wallSit")],
-            99: [#imageLiteral(resourceName: "toePress")],
-            100: [#imageLiteral(resourceName: "lungeJump")],
+            98: ["wallSit"],
+            99: ["toePress"],
+            100: ["lungeJump"],
             // Isometric (Upper Body)
-            101: [#imageLiteral(resourceName: "chestSqueeze")],
-            102: [#imageLiteral(resourceName: "pushupHold")],
-            103: [#imageLiteral(resourceName: "pullUp")],
+            101: ["chestSqueeze"],
+            102: ["pushupHold"],
+            103: ["pullUp"],
             // Equiptment (Ball) ---------
-            104: [#imageLiteral(resourceName: "ballPushup"), #imageLiteral(resourceName: "ballPushup1"), #imageLiteral(resourceName: "ballPushup"), #imageLiteral(resourceName: "ballPushup1")],
+            104: ["ballPushup", "ballPushup1", "ballPushup", "ballPushup1"],
             // Equiptment (Bar)
-            105: [#imageLiteral(resourceName: "bodyweightRow"), #imageLiteral(resourceName: "bodyweightRow1"), #imageLiteral(resourceName: "bodyweightRow"), #imageLiteral(resourceName: "bodyweightRow1")],
-            106: [#imageLiteral(resourceName: "pullUp"), #imageLiteral(resourceName: "pullUp1"), #imageLiteral(resourceName: "pullUp2"), #imageLiteral(resourceName: "pullUp3"), #imageLiteral(resourceName: "pullUp4"), #imageLiteral(resourceName: "pullUp4"), #imageLiteral(resourceName: "pullUp3"), #imageLiteral(resourceName: "pullUp2"), #imageLiteral(resourceName: "pullUp1")],
-            107: [#imageLiteral(resourceName: "hangingLegRaises"), #imageLiteral(resourceName: "hangingLegRaises1"), #imageLiteral(resourceName: "hangingLegRaises2"), #imageLiteral(resourceName: "hangingLegRaises3"), #imageLiteral(resourceName: "hangingLegRaises4"), #imageLiteral(resourceName: "hangingLegRaises3"), #imageLiteral(resourceName: "hangingLegRaises2"), #imageLiteral(resourceName: "hangingLegRaises1")],
+            105: ["bodyweightRow", "bodyweightRow1", "bodyweightRow", "bodyweightRow1"],
+            106: ["pullUp", "pullUp1", "pullUp2", "pullUp3", "pullUp4", "pullUp4", "pullUp3", "pullUp2", "pullUp1"],
+            107: ["hangingLegRaises", "hangingLegRaises1", "hangingLegRaises2", "hangingLegRaises3", "hangingLegRaises4", "hangingLegRaises3", "hangingLegRaises2", "hangingLegRaises1"],
             // Equiptment (Bench/Step)
-            108: [#imageLiteral(resourceName: "tricepDip"), #imageLiteral(resourceName: "tricepDip1"), #imageLiteral(resourceName: "tricepDip2"), #imageLiteral(resourceName: "tricepDip3"), #imageLiteral(resourceName: "tricepDip4"), #imageLiteral(resourceName: "tricepDip3"), #imageLiteral(resourceName: "tricepDip2"), #imageLiteral(resourceName: "tricepDip1")],
-            109: [#imageLiteral(resourceName: "bulgarianSplitSquat"), #imageLiteral(resourceName: "bulgarianSplitSquat1"), #imageLiteral(resourceName: "bulgarianSplitSquat"), #imageLiteral(resourceName: "bulgarianSplitSquat1")],
-            110: [#imageLiteral(resourceName: "boxJump")],
-            111: [#imageLiteral(resourceName: "hipThrusts"), #imageLiteral(resourceName: "hipThrusts1"), #imageLiteral(resourceName: "hipThrusts"), #imageLiteral(resourceName: "hipThrusts1")],
-            112: [#imageLiteral(resourceName: "stepUp"), #imageLiteral(resourceName: "stepUp1"), #imageLiteral(resourceName: "stepUp2"), #imageLiteral(resourceName: "stepUp3"), #imageLiteral(resourceName: "stepUp2"), #imageLiteral(resourceName: "stepUp1")]
+            108: ["tricepDip", "tricepDip1", "tricepDip2", "tricepDip3", "tricepDip4", "tricepDip3", "tricepDip2", "tricepDip1"],
+            109: ["bulgarianSplitSquat", "bulgarianSplitSquat1", "bulgarianSplitSquat", "bulgarianSplitSquat1"],
+            110: ["boxJump"],
+            111: ["hipThrusts", "hipThrusts1", "hipThrusts", "hipThrusts1"],
+            112: ["stepUp", "stepUp1", "stepUp2", "stepUp3", "stepUp2", "stepUp1"]
     ]
     
     // Demonstration Array
-    var targetAreaDictionary: [Int : UIImage] =
+    var targetAreaDictionary: [Int : String] =
         [
             // Gym ------------------------------------
             // Legs (Quads) ---------
-            0: #imageLiteral(resourceName: "Squat"),
-            1: #imageLiteral(resourceName: "Squat"),
-            2: #imageLiteral(resourceName: "Squat"),
-            3: #imageLiteral(resourceName: "Squat"),
-            4: #imageLiteral(resourceName: "Squat"),
+            0: "squatBody",
+            1: "squatBody",
+            2: "squatBody",
+            3: "squatBody",
+            4: "squatBody",
             // Legs (Hamstrings/Glutes)
-            5: #imageLiteral(resourceName: "Deadlift"),
-            6: #imageLiteral(resourceName: "Deadlift"),
-            7: #imageLiteral(resourceName: "Deadlift"),
-            8: #imageLiteral(resourceName: "Deadlift"),
-            9: #imageLiteral(resourceName: "Rear Thigh"),
-            10: #imageLiteral(resourceName: "Glute"),
+            5: "deadlift",
+            6: "deadlift",
+            7: "deadlift",
+            8: "deadlift",
+            9: "rearThigh",
+            10: "glute",
             // Legs (General)
-            11: #imageLiteral(resourceName: "Squat"),
-            12: #imageLiteral(resourceName: "Squat"),
-            13: #imageLiteral(resourceName: "Squat"),
+            11: "squatBody",
+            12: "squatBody",
+            13: "squatBody",
             // Legs (Calves)
-            14: #imageLiteral(resourceName: "Calf"),
-            15: #imageLiteral(resourceName: "Calf"),
+            14: "calf",
+            15: "calf",
             // Pull (Back) ---------
-            16: #imageLiteral(resourceName: "Back and Bicep"),
-            17: #imageLiteral(resourceName: "Back and Bicep"),
-            18: #imageLiteral(resourceName: "Back and Bicep"),
-            19: #imageLiteral(resourceName: "Back and Bicep"),
-            20: #imageLiteral(resourceName: "Back, Bicep and Erector"),
-            21: #imageLiteral(resourceName: "Back, Bicep and Erector"),
-            22: #imageLiteral(resourceName: "Back, Bicep and Erector"),
-            23: #imageLiteral(resourceName: "Back and Bicep"),
+            16: "backBicep",
+            17: "backBicep",
+            18: "backBicep",
+            19: "backBicep",
+            20: "backBicepErector",
+            21: "backBicepErector",
+            22: "backBicepErector",
+            23: "backBicep",
             // Pull (Upper Back)
-            24: #imageLiteral(resourceName: "Upper Back and Shoulder"),
-            25: #imageLiteral(resourceName: "Upper Back and Shoulder"),
+            24: "upperBackShoulder",
+            25: "upperBackShoulder",
             // Pull (Rear Delts)
-            26: #imageLiteral(resourceName: "Rear Delt"),
+            26: "rearDelt",
             // Pull (Traps)
-            27: #imageLiteral(resourceName: "Trap"),
+            27: "trap",
             // Pull (Biceps)
-            28: #imageLiteral(resourceName: "Bicep"),
-            29: #imageLiteral(resourceName: "Bicep"),
-            30: #imageLiteral(resourceName: "Bicep"),
+            28: "bicep",
+            29: "bicep",
+            30: "bicep",
             // Pull (Forearms)
-            31: #imageLiteral(resourceName: "Forearm"),
-            32: #imageLiteral(resourceName: "Forearm"),
-            33: #imageLiteral(resourceName: "Forearm"),
+            31: "forearm",
+            32: "forearm",
+            33: "forearm",
             // Push (Chest) ---------
-            34: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            35: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            36: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            37: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            38: #imageLiteral(resourceName: "Chest, Front Delt and Tricep"),
-            39: #imageLiteral(resourceName: "Pec and Front Delt"),
-            40: #imageLiteral(resourceName: "Pec and Front Delt"),
-            41: #imageLiteral(resourceName: "Pec and Front Delt"),
+            34: "chestFrontDeltTricep",
+            35: "chestFrontDeltTricep",
+            36: "chestFrontDeltTricep",
+            37: "chestFrontDeltTricep",
+            38: "chestFrontDeltTricep",
+            39: "pecFrontDelt",
+            40: "pecFrontDelt",
+            41: "pecFrontDelt",
             // Push (Shoulders)
-            42: #imageLiteral(resourceName: "Shoulder"),
-            43: #imageLiteral(resourceName: "Shoulder"),
-            44: #imageLiteral(resourceName: "Shoulder"),
-            45: #imageLiteral(resourceName: "Shoulder"),
+            42: "shoulder",
+            43: "shoulder",
+            44: "shoulder",
+            45: "shoulder",
             // Push (Triceps)
-            46: #imageLiteral(resourceName: "Tricep"),
-            47: #imageLiteral(resourceName: "Tricep"),
-            48: #imageLiteral(resourceName: "Tricep"),
+            46: "tricep",
+            47: "tricep",
+            48: "tricep",
             // Full Body
-            49: #imageLiteral(resourceName: "Squat"),
+            49: "squatBody",
             // BodyWeight ------------------------------------
             // Legs (General) ---------
-            50: #imageLiteral(resourceName: "Test"),
-            51: #imageLiteral(resourceName: "Test"),
-            52: #imageLiteral(resourceName: "Test"),
-            53: #imageLiteral(resourceName: "Test"),
-            54: #imageLiteral(resourceName: "Test"),
-            55: #imageLiteral(resourceName: "Test"),
-            56: #imageLiteral(resourceName: "Test"),
+            50: "squatBody",
+            51: "squatBody",
+            52: "squatBody",
+            53: "squatBody",
+            54: "squatBody",
+            55: "squatBody",
+            56: "squatBody",
             // Legs (Hamstrings)
-            57: #imageLiteral(resourceName: "Test"),
-            58: #imageLiteral(resourceName: "Test"),
+            57: "squatBody",
+            58: "squatBody",
             // Legs (Glutes)
-            59: #imageLiteral(resourceName: "Test"),
-            60: #imageLiteral(resourceName: "Test"),
-            61: #imageLiteral(resourceName: "Test"),
-            62: #imageLiteral(resourceName: "Test"),
+            59: "squatBody",
+            60: "squatBody",
+            61: "squatBody",
+            62: "squatBody",
             // Legs (Calves)
-            63: #imageLiteral(resourceName: "Test"),
+            63: "squatBody",
             // Pull (Back) ---------
-            64: #imageLiteral(resourceName: "Test"),
-            65: #imageLiteral(resourceName: "Test"),
-            66: #imageLiteral(resourceName: "Test"),
-            67: #imageLiteral(resourceName: "Test"),
-            68: #imageLiteral(resourceName: "Test"),
-            69: #imageLiteral(resourceName: "Test"),
+            64: "squatBody",
+            65: "squatBody",
+            66: "squatBody",
+            67: "squatBody",
+            68: "squatBody",
+            69: "squatBody",
             // Pull (Traps)
-            70: #imageLiteral(resourceName: "Test"),
+            70: "squatBody",
             // Push (Chest) ---------
-            71: #imageLiteral(resourceName: "Test"),
+            71: "squatBody",
             // Push (Tricep)
-            72: #imageLiteral(resourceName: "Test"),
-            73: #imageLiteral(resourceName: "Test"),
-            74: #imageLiteral(resourceName: "Test"),
+            72: "squatBody",
+            73: "squatBody",
+            74: "squatBody",
             // Push (Chest & Tricep)
-            75: #imageLiteral(resourceName: "Test"),
+            75: "squatBody",
             // Push (Shoulder)
-            76: #imageLiteral(resourceName: "Test"),
-            77: #imageLiteral(resourceName: "Test"),
-            78: #imageLiteral(resourceName: "Test"),
-            79: #imageLiteral(resourceName: "Test"),
+            76: "squatBody",
+            77: "squatBody",
+            78: "squatBody",
+            79: "squatBody",
             // Core ---------
-            80: #imageLiteral(resourceName: "Test"),
-            81: #imageLiteral(resourceName: "Test"),
-            82: #imageLiteral(resourceName: "Test"),
-            83: #imageLiteral(resourceName: "Test"),
-            84: #imageLiteral(resourceName: "Test"),
-            85: #imageLiteral(resourceName: "Test"),
-            86: #imageLiteral(resourceName: "Test"),
-            87: #imageLiteral(resourceName: "Test"),
-            88: #imageLiteral(resourceName: "Test"),
+            80: "squatBody",
+            81: "squatBody",
+            82: "squatBody",
+            83: "squatBody",
+            84: "squatBody",
+            85: "squatBody",
+            86: "squatBody",
+            87: "squatBody",
+            88: "squatBody",
             // General (Core) ---------
-            89: #imageLiteral(resourceName: "Test"),
+            89: "squatBody",
             // General (Full Body)
-            90: #imageLiteral(resourceName: "Test"),
-            91: #imageLiteral(resourceName: "Test"),
+            90: "squatBody",
+            91: "squatBody",
             // General (Upper Body)
-            92: #imageLiteral(resourceName: "Test"),
-            93: #imageLiteral(resourceName: "Test"),
+            92: "squatBody",
+            93: "squatBody",
             // General (Cardio)
-            94: #imageLiteral(resourceName: "Test"),
-            95: #imageLiteral(resourceName: "Test"),
-            96: #imageLiteral(resourceName: "Test"),
-            97: #imageLiteral(resourceName: "Test"),
+            94: "squatBody",
+            95: "squatBody",
+            96: "squatBody",
+            97: "squatBody",
             // Isometric (Legs) ---------
-            98: #imageLiteral(resourceName: "Test"),
-            99: #imageLiteral(resourceName: "Test"),
-            100: #imageLiteral(resourceName: "Test"),
+            98: "squatBody",
+            99: "squatBody",
+            100: "squatBody",
             // Isometric (Upper Body)
-            101: #imageLiteral(resourceName: "Test"),
-            102: #imageLiteral(resourceName: "Test"),
-            103: #imageLiteral(resourceName: "Test"),
+            101: "squatBody",
+            102: "squatBody",
+            103: "squatBody",
             // Equiptment (Ball) ---------
-            104: #imageLiteral(resourceName: "Test"),
+            104: "squatBody",
             // Equiptment (Bar)
-            105: #imageLiteral(resourceName: "Test"),
-            106: #imageLiteral(resourceName: "Test"),
-            107: #imageLiteral(resourceName: "Test"),
+            105: "squatBody",
+            106: "squatBody",
+            107: "squatBody",
             // Equiptment (Bench/Step)
-            108: #imageLiteral(resourceName: "Test"),
-            109: #imageLiteral(resourceName: "Test"),
-            110: #imageLiteral(resourceName: "Test"),
-            111: #imageLiteral(resourceName: "Test"),
-            112: #imageLiteral(resourceName: "Test")
+            108: "squatBody",
+            109: "squatBody",
+            110: "squatBody",
+            111: "squatBody",
+            112: "squatBody"
     ]
     
     // Explanation Array
@@ -2459,6 +2459,19 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presetsButton.setTitle(NSLocalizedString("selectWorkout", comment: ""), for: .normal)
+        
+        // Device Scale for @2x and @3x of Target Area Images
+        switch UIScreen.main.scale {
+        case 1,2:
+            for i in 0...targetAreaDictionary.count - 1 {
+                targetAreaDictionary[i] = targetAreaDictionary[i]! + "@2x"
+            }
+        case 3:
+            for i in 0...targetAreaDictionary.count - 1 {
+                targetAreaDictionary[i] = targetAreaDictionary[i]! + "@3x"
+            }
+        default: break
+        }
     }
     
     //
@@ -2631,12 +2644,12 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                 let flatArray = overviewArray.flatMap { $0 }
                 cell.detailTextLabel?.text = repsArray[flatArray.index(of: overviewArray[indexPath.section][indexPath.row])!]
                 //
-                cell.imageView?.image = demonstrationDictionary[overviewArray[indexPath.section][indexPath.row]]?[0]
+                cell.imageView?.image = getUncachedImage(named: (demonstrationDictionary[overviewArray[indexPath.section][indexPath.row]]?[0])!)
             case 1,2:
                 cell.textLabel?.text = NSLocalizedString(workoutMovementsDictionary[roundArray[indexPath.row]]!, comment: "")
                 cell.detailTextLabel?.text = repsArrayCircuit[indexPath.section][indexPath.row]
                 //
-                cell.imageView?.image = demonstrationDictionary[roundArray[indexPath.row]]?[0]
+                cell.imageView?.image = getUncachedImage(named: (demonstrationDictionary[roundArray[indexPath.row]]?[0])!)
             default: break
             }
             //
@@ -2900,7 +2913,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                 //
                 workoutArray.append(workoutMovementsDictionary[i]!)
                 //
-
                 demonstrationArray.append(demonstrationDictionary[i]!)
                 //
                 targetAreaArray.append(targetAreaDictionary[i]!)

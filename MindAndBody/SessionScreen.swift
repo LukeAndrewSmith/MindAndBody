@@ -64,10 +64,10 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var repsArray: [String] = []
     
     // Demonstration Array
-    var demonstrationArray: [[UIImage]] = []
+    var demonstrationArray: [[String]] = []
     
     // Target Area Array
-    var targetAreaArray: [UIImage] = []
+    var targetAreaArray: [String] = []
     
     // Explanation Array
     var explanationArray: [String] = []
@@ -89,11 +89,13 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     @IBOutlet weak var finishEarly: UIButton!
     
+    
+    //
+    var didEnterBackground = false
+    
 //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        //
         // Session Started
         //
         // Alert View
@@ -109,9 +111,18 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 alert.dismiss(animated: true, completion: nil)
             }
         })
-
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //
+        tableView.reloadData()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        didEnterBackground = true
+    }
+
     
 //
 // View did load -----------------------------------------------------------------------------------------------------
@@ -331,7 +342,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // New image to display
             // Demonstration on left
             if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
+                cell.imageViewCell.image = getUncachedImage(named: demonstrationArray[indexPath.row][0])
                 // Indicator
                 if demonstrationArray[indexPath.row].count > 1 {
                     cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -341,7 +352,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
             // Target Area on left
             } else {
-                cell.imageViewCell.image = targetAreaArray[indexPath.row]
+                cell.imageViewCell.image = getUncachedImage(named: targetAreaArray[indexPath.row])
                 // Indicator
                 if demonstrationArray[indexPath.row].count > 1 {
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
@@ -351,12 +362,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
             }
            
-            //
-            // Animation
-            cell.imageViewCell.animationImages = demonstrationArray[indexPath.row]
-            cell.imageViewCell.animationImages?.removeFirst()
-            cell.imageViewCell.animationDuration = Double(demonstrationArray[indexPath.row].count) * 0.5
-            cell.imageViewCell.animationRepeatCount = 1
             //
             cell.imageViewCell.tag = indexPath.row
             //
@@ -530,11 +535,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OverviewTableViewCell", for: indexPath) as! OverviewTableViewCell
-        cell.imageViewCell.animationImages = nil
-        cell.imageViewCell.image = nil
-    }
     
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -617,66 +617,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     
 //
-// Pocket Mode !!!! CURRENTLY UNUSED, MIGHT ADD IN FUTURE UPDATES ------------------------------------------------------------------------------------------------------
-//
-    let blurEffectView = UIVisualEffectView()
-    let hideLabel = UILabel()
-    //
-    @IBAction func hideScreenAction() {
-        // Blur
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-        let screenSize = UIScreen.main.bounds
-        blurEffectView.effect = blurEffect
-        blurEffectView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.alpha = 0
-        
-        // Triple Tap
-        let tripleTap = UITapGestureRecognizer()
-        tripleTap.numberOfTapsRequired = 3
-        tripleTap.addTarget(self, action: #selector(handleTap))
-        blurEffectView.isUserInteractionEnabled = true
-        blurEffectView.addGestureRecognizer(tripleTap)
-        
-        // Text
-        hideLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
-        hideLabel.center = blurEffectView.center
-        hideLabel.textAlignment = .center
-        hideLabel.numberOfLines = 0
-        hideLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-        hideLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        hideLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        hideLabel.alpha = 0
-        hideLabel.text = NSLocalizedString("hideScreen", comment: "")
-        
-        //
-        blurEffectView.addSubview(hideLabel)
-        UIApplication.shared.keyWindow?.insertSubview(blurEffectView, aboveSubview: view)
-        //
-        UIView.animate(withDuration: 0.4, animations: {
-            self.blurEffectView.alpha = 1
-        }, completion: { finished in
-            self.hideLabel.alpha = 1
-        })
-    }
-    
-    // Exit pocket mode
-    @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
-        //
-        self.hideLabel.alpha = 0
-
-        //
-        UIView.animate(withDuration: 0.4, animations: {
-            self.blurEffectView.alpha = 0
-        }, completion: { finished in
-            //
-            self.blurEffectView.removeFromSuperview()
-            self.hideLabel.removeFromSuperview()
-        })
-    }
-    
-    
-//
 // Tap Handlers, buttons and funcs -------------------------------------------------------------------------------------------------------
 //
     //
@@ -684,13 +624,27 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Image
     @IBAction func handleImageTap(imageTap:UITapGestureRecognizer) {
         //
-        // Get Image
+        // Get Cell
         let sender = imageTap.view as! UIImageView
         let tag = sender.tag
+        let indexPath = NSIndexPath(row: tag, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
         //
-        if targetAreaArray.contains(sender.image!) == false {
-            if demonstrationArray[tag].count != 1 {
-                sender.startAnimating()
+        // Image Array
+        if demonstrationArray[indexPath.row].count > 1 && cell.imageViewCell.isAnimating == false {
+            var animationArray: [UIImage] = []
+            for i in 1...demonstrationArray[indexPath.row].count - 1 {
+                animationArray.append(getUncachedImage(named: demonstrationArray[indexPath.row][i])!)
+            }
+            //
+            cell.imageViewCell.animationImages = animationArray
+            cell.imageViewCell.animationDuration = Double(demonstrationArray[indexPath.row].count - 1) * 0.5
+            cell.imageViewCell.animationRepeatCount = 1
+            //
+            if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+                if demonstrationArray[tag].count != 1 {
+                    sender.startAnimating()
+                }
             }
         }
     }
@@ -701,7 +655,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         if selectedRow < sessionArray.count - 1 {
             //
-            selectedRow = selectedRow + 1
+            selectedRow += 1
             updateProgress()
             //
             //
@@ -876,7 +830,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             case UISwipeGestureRecognizerDirection.left:
                 //
                 // Check left image is displayed
-                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" && cell.imageViewCell.image == demonstrationArray[indexPath.row][0] || UserDefaults.standard.string(forKey: "defaultImage") == "targetArea" && cell.imageViewCell.image == targetAreaArray[indexPath.row] {
+                if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImageDot") || cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                     // Screenshot of current image
                     let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
                     snapshot1?.bounds = cell.imageViewCell.bounds
@@ -886,7 +840,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     // New image to display
                     // Demonstration on left
                     if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                        cell.imageViewCell.image = targetAreaArray[indexPath.row]
+                        cell.imageViewCell.image = getUncachedImage(named: targetAreaArray[indexPath.row])
                             // Indicator
                             if demonstrationArray[indexPath.row].count > 1 {
                                 cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
@@ -896,7 +850,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                             cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
                     // Target Area on left
                     } else {
-                        cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
+                        cell.imageViewCell.image = getUncachedImage(named: demonstrationArray[indexPath.row][0])
                             // Indicator
                             if demonstrationArray[indexPath.row].count > 1 {
                                 cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -924,7 +878,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             case UISwipeGestureRecognizerDirection.right:
                 //
-                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" && cell.imageViewCell.image == targetAreaArray[indexPath.row] || UserDefaults.standard.string(forKey: "defaultImage") == "targetArea" && cell.imageViewCell.image == demonstrationArray[indexPath.row][0] {
+                if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImageDotDeselected") || cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlayDeselected") {
                     //
                     let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
                     snapshot1?.bounds = cell.imageViewCell.bounds
@@ -934,7 +888,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     // New image to display
                     // Demonstration on left
                     if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                        cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
+                        cell.imageViewCell.image = getUncachedImage(named: demonstrationArray[indexPath.row][0])
                         // Indicator
                         if demonstrationArray[indexPath.row].count > 1 {
                             cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -944,7 +898,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                         // Target Area on left
                     } else {
-                        cell.imageViewCell.image = targetAreaArray[indexPath.row]
+                        cell.imageViewCell.image = getUncachedImage(named: targetAreaArray[indexPath.row])
                         // Indicator
                         if demonstrationArray[indexPath.row].count > 1 {
                             cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")

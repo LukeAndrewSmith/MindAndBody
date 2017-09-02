@@ -63,10 +63,10 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     var repsArray: [[String]] = []
     
     // Demonstration Array
-    var demonstrationArray: [[UIImage]] = [[]]
+    var demonstrationArray: [[String]] = [[]]
     
     // Target Area Array
-    var targetAreaArray: [UIImage] = []
+    var targetAreaArray: [String] = []
     
     // Explanation Array
     var explanationArray: [String] = []
@@ -225,7 +225,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             // New image to display
             // Demonstration on left
             if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
+                cell.imageViewCell.image = getUncachedImage(named: demonstrationArray[indexPath.row][0])
                 // Indicator
                 if demonstrationArray[indexPath.row].count > 1 {
                     cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -235,7 +235,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                 // Target Area on left
             } else {
-                cell.imageViewCell.image = targetAreaArray[indexPath.row]
+                cell.imageViewCell.image = getUncachedImage(named: targetAreaArray[indexPath.row])
                 // Indicator
                 if demonstrationArray[indexPath.row].count > 1 {
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
@@ -245,12 +245,6 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
             }
             
-            //
-            // Animation
-            cell.imageViewCell.animationImages = demonstrationArray[indexPath.row]
-            cell.imageViewCell.animationImages?.removeFirst()
-            cell.imageViewCell.animationDuration = Double(demonstrationArray[indexPath.row].count) * 0.5
-            cell.imageViewCell.animationRepeatCount = 1
             //
             cell.imageViewCell.tag = indexPath.row
             //
@@ -728,13 +722,29 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     // Image
     @IBAction func handleImageTap(imageTap:UITapGestureRecognizer) {
         //
-        // Get Image
+        // Get Cell
         let sender = imageTap.view as! UIImageView
         let tag = sender.tag
+        let indexPath = NSIndexPath(row: tag, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
         //
-        //if demonstrationArray[tag].count != 1 {
-        //   sender.startAnimating()
-        //}
+        // Image Array
+        if demonstrationArray[indexPath.row].count > 1 && cell.imageViewCell.isAnimating == false {
+            var animationArray: [UIImage] = []
+            for i in 1...demonstrationArray[indexPath.row].count - 1 {
+                animationArray.append(getUncachedImage(named: demonstrationArray[indexPath.row][i])!)
+            }
+            //
+            cell.imageViewCell.animationImages = animationArray
+            cell.imageViewCell.animationDuration = Double(demonstrationArray[indexPath.row].count - 1) * 0.5
+            cell.imageViewCell.animationRepeatCount = 1
+            //
+            if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+                if demonstrationArray[tag].count != 1 {
+                    sender.startAnimating()
+                }
+            }
+        }
     }
     
     
@@ -934,7 +944,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         case UISwipeGestureRecognizerDirection.left:
             //
             // Check left image is displayed
-            if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" && cell.imageViewCell.image == demonstrationArray[indexPath.row][0] || UserDefaults.standard.string(forKey: "defaultImage") == "targetArea" && cell.imageViewCell.image == targetAreaArray[indexPath.row] {
+            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImageDot") || cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 // Screenshot of current image
                 let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
                 snapshot1?.bounds = cell.imageViewCell.bounds
@@ -944,7 +954,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 // New image to display
                 // Demonstration on left
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    cell.imageViewCell.image = targetAreaArray[indexPath.row]
+                    cell.imageViewCell.image = getUncachedImage(named: targetAreaArray[indexPath.row])
                     // Indicator
                     if demonstrationArray[indexPath.row].count > 1 {
                         cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
@@ -954,7 +964,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
                     // Target Area on left
                 } else {
-                    cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
+                    cell.imageViewCell.image = getUncachedImage(named: demonstrationArray[indexPath.row][0])
                     // Indicator
                     if demonstrationArray[indexPath.row].count > 1 {
                         cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -981,7 +991,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         case UISwipeGestureRecognizerDirection.right:
             //
-            if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" && cell.imageViewCell.image == targetAreaArray[indexPath.row] || UserDefaults.standard.string(forKey: "defaultImage") == "targetArea" && cell.imageViewCell.image == demonstrationArray[indexPath.row][0] {
+            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImageDotDeselected") || cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlayDeselected") {
                 //
                 let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
                 snapshot1?.bounds = cell.imageViewCell.bounds
@@ -991,7 +1001,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 // New image to display
                 // Demonstration on left
                 if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    cell.imageViewCell.image = demonstrationArray[indexPath.row][0]
+                    cell.imageViewCell.image = getUncachedImage(named: demonstrationArray[indexPath.row][0])
                     // Indicator
                     if demonstrationArray[indexPath.row].count > 1 {
                         cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -1001,7 +1011,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                     // Target Area on left
                 } else {
-                    cell.imageViewCell.image = targetAreaArray[indexPath.row]
+                    cell.imageViewCell.image = getUncachedImage(named: targetAreaArray[indexPath.row])
                     // Indicator
                     if demonstrationArray[indexPath.row].count > 1 {
                         cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")

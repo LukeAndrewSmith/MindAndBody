@@ -38,7 +38,9 @@ class MeditationScreen: UIViewController {
     var intervalTimes: [[Int]] = []
     var endingBellsArray: [Int] = []
     var selectedBackgroundSoundsArray: [Int] = []
-    
+    //
+    var dispatchWorkItemArray: [DispatchWorkItem] = []
+
     
     // Variables
     var didSetEndTime = false
@@ -48,6 +50,7 @@ class MeditationScreen: UIViewController {
     //
     var isHours = Bool()
 
+    
     
     
     //
@@ -80,7 +83,9 @@ class MeditationScreen: UIViewController {
     
     
     // Background Sound
-   // var backgroundSound = AVAudioPlayer()
+    var soundPlayer = AVAudioPlayer()
+    
+    var bellPlayer = AVAudioPlayer()
     
     
 //
@@ -111,7 +116,7 @@ class MeditationScreen: UIViewController {
         //
         if backgroundIndex < backgroundImageArray.count {
             //
-            backgroundImage.image = backgroundImageArray[backgroundIndex]
+            backgroundImage.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
         } else if backgroundIndex == backgroundImageArray.count {
             //
             backgroundImage.image = nil
@@ -137,8 +142,6 @@ class MeditationScreen: UIViewController {
 //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         //
         // Colours
         //
@@ -157,13 +160,8 @@ class MeditationScreen: UIViewController {
         default: break
         }
 
-        
-        
-        
         // CheckMark
         checkMark.tintColor = colour4
-        
-        
         
         //
         // Watch for enter foreground
@@ -178,7 +176,6 @@ class MeditationScreen: UIViewController {
         
         // Begin Timer
         startTimer()
-        
     }
     
 //
@@ -269,28 +266,16 @@ class MeditationScreen: UIViewController {
     func updateTimer() {
         //
         if timerValue == 0 {
+            //
             timerCountDown.invalidate()
+            
+            // Stop Background sound
+            self.soundPlayer.stop()
+            //
+            NotificationCenter.default.removeObserver(self)
             //
             self.dismiss(animated: true)
-            
-            // Ending Bell
-            //
-            if endingBellsArray[selectedPreset] != -1 {
-
-            let content = UNMutableNotificationContent()
-            content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
-            let soundName = bellsArray[endingBellsArray[selectedPreset]] + ".caf"
-            content.sound = UNNotificationSound(named: soundName)
-            
-            //
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
-            let name = "end"
-            let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
-            
-            //
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-            }
-            //
+        //
         } else if timerValue == 1 {
             timerValue -= 1
             if isHours == true {
@@ -309,7 +294,6 @@ class MeditationScreen: UIViewController {
         }
     }
     
-    
     //
     // Start Timer
     //
@@ -319,33 +303,105 @@ class MeditationScreen: UIViewController {
         //
         if didSetEndTime == false {
             //
-            createNotifications()
-            //
             didSetEndTime = true
             //
-            //
             let duration = durationArray[selectedPreset]
-            let endingTime = Int(startTime) + duration
+            endTime = startTime + Double(duration)
             //
-            endTime = Double(endingTime)
             
+            //
             // Starting Bell
+            if self.startingBellsArray[self.selectedPreset] != -1 {
+            let url1 = Bundle.main.url(forResource: bellsArray[startingBellsArray[selectedPreset]], withExtension: "caf")!
             //
-            if startingBellsArray[selectedPreset] != -1 {
-            
-            let content = UNMutableNotificationContent()
-            content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
-            let soundName = bellsArray[startingBellsArray[selectedPreset]] + ".caf"
-            content.sound = UNNotificationSound(named: soundName)
-            
-            //
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
-            let name = "start"
-            let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
-            
-            //
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            do {
+                let bell = try AVAudioPlayer(contentsOf: url1)
+                bellPlayer = bell
+                bell.play()
+            } catch {
+                // couldn't load file :(
             }
+            }
+            
+            //
+            // Work Item Bells
+            for i in 0...intervalBellsArray[selectedPreset].count {
+                // Interval Bells
+                if i < intervalBellsArray[selectedPreset].count {
+                    // Bell
+                    //
+                    let bell = DispatchWorkItem {
+                        //
+                        let url = Bundle.main.url(forResource: self.bellsArray[self.intervalBellsArray[self.selectedPreset][i]], withExtension: "caf")!
+                        //
+                        do {
+                            let bell = try AVAudioPlayer(contentsOf: url)
+                            self.bellPlayer = bell
+                            bell.play()
+                        } catch {
+                            // couldn't load file :(
+                        }
+                    }
+                    
+                    // Delay bell
+                    // Delay
+                    let delayInSeconds = Double(intervalTimes[selectedPreset][i])
+                    let time = DispatchTime.now()
+                    
+                    // Dispatch
+                    DispatchQueue.main.asyncAfter(deadline: time + delayInSeconds, execute: bell)
+                    
+                    // Add to work items array
+                    dispatchWorkItemArray.append(bell)
+                    
+                //
+                // Ending Bell
+                } else {
+                    if self.endingBellsArray[self.selectedPreset] != -1 {
+                    // Bell
+                    let bell = DispatchWorkItem {
+                        //
+                        // Delayed Bell Test
+                        let url = Bundle.main.url(forResource: self.bellsArray[self.endingBellsArray[self.selectedPreset]], withExtension: "caf")!
+                        //
+                        do {
+                            let bell = try AVAudioPlayer(contentsOf: url)
+                            self.bellPlayer = bell
+                            bell.play()
+                        } catch {
+                            // couldn't load file :(
+                        }
+                    }
+                    
+                    // Delay bell
+                    // Delay
+                    let delayInSeconds = Double(durationArray[selectedPreset])
+                    // Dispatch
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: UInt64(startTime)) + delayInSeconds, execute: bell)
+                    
+                    // Add to work items array
+                    dispatchWorkItemArray.append(bell)
+                    }
+                }
+                    
+            }
+            
+            
+                
+            //
+            // Background Sound
+            if selectedBackgroundSoundsArray[selectedPreset] != -1 {
+            let url = Bundle.main.url(forResource: backgroundSoundsArray[selectedBackgroundSoundsArray[selectedPreset]], withExtension: "caf")!
+            //
+            do {
+                let bell = try AVAudioPlayer(contentsOf: url)
+                soundPlayer = bell
+                soundPlayer.numberOfLoops = -1
+                bell.play()
+            } catch {
+                // couldn't load file :(
+            }
+             }
         }
         
         // Set timer value
@@ -367,53 +423,6 @@ class MeditationScreen: UIViewController {
         // Begin Timer or dismiss view
         timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
     }
-    
-    
-    //
-    // Notifications
-    //
-    func createNotifications() {
-        
-        if intervalBellsArray[selectedPreset].count != 0 {
-        //
-        // Bells
-        for i in intervalTimes[selectedPreset] {
-            let index = intervalTimes[selectedPreset].index(of: i)
-            //
-            let content = UNMutableNotificationContent()
-            content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
-            let soundName = bellsArray[intervalBellsArray[selectedPreset][index!]] + ".caf"
-            content.sound = UNNotificationSound(named: soundName)
-            
-            //
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(i), repeats: false)
-            var number = Int(index!)
-            let name = "bell" + String(describing: number)
-            let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
-            
-            //
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        }
-        }
-    }
-    //
-    func removeNotifications() {
-        //
-        var identifiers: [String] = []
-        //
-        if intervalTimes[selectedPreset].count != 0 {
-            for i in 0...(intervalTimes[selectedPreset].count - 1) {
-                //
-                let name = "bell" + String(describing: i)
-                //
-                identifiers.append(name)
-                //
-            }
-        }
-        //
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
-    }
-    
 //
 // Buttons -------------------------------------------------------------------------------------------
 //
@@ -469,8 +478,19 @@ class MeditationScreen: UIViewController {
             UIAlertAction in
             // Cancel Timer
             timerCountDown.invalidate()
+            // Stop sounds
+            if self.soundPlayer.isPlaying == true {
+                self.soundPlayer.stop()
+            }
+            if self.bellPlayer.isPlaying {
+                self.bellPlayer.stop()
+            }
+            // Cancel Work Items
+            for i in 0...self.dispatchWorkItemArray.count - 1 {
+                self.dispatchWorkItemArray[i].cancel()
+            }
+            
             NotificationCenter.default.removeObserver(self)
-            self.removeNotifications()
             self.dismiss(animated: true)
         }
         let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {

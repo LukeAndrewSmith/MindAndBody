@@ -32,7 +32,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     // Demonstration Array
-    var demonstrationArray: [[UIImage]] = []
+    var demonstrationArray: [[String]] = []
     
     // Target Area Array
     var targetAreaArray: [UIImage] = []
@@ -88,23 +88,23 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             39: "extendedPuppy",
             40: "upwardDog",
             // Seated
-            41: "crossLeg", // Pic Only
-            42: "lotus", // Pic Only
-            43: "fireLog",  // Pic Only
+            41: "crossLeg",
+            42: "lotus",
+            43: "fireLog",
             44: "boat",
-            45: "cowFace", // Pic Only
-            46: "hero", // Pic Only
-            47: "butterfly", // Pic Only
-            48: "staffPose", // Pic Only
-            49: "seatedForwardBend", // Pic Only
+            45: "cowFace",
+            46: "hero",
+            47: "butterfly",
+            48: "staffPose",
+            49: "seatedForwardBend",
             50: "vForwardBend",
             51: "vSideBend",
             52: "halfVForwardBend",
             53: "halfVSideBend",
             54: "marichi1",
             55: "marichi3",
-            56: "frontSplit", // Pic Only
-            57: "sideSplit", // Pic Only
+            56: "frontSplit",
+            57: "sideSplit",
             // Lying
             58: "corpse",
             59: "fish",
@@ -210,87 +210,86 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     // Demonstration Poses
-    let demonstrationDictionary: [Int: [UIImage]] =
+    let demonstrationDictionary: [Int: [String]] =
         [
             // Standing
-            0: [#imageLiteral(resourceName: "upwardSalute")],
-            1: [#imageLiteral(resourceName: "mountain")],
-            2: [#imageLiteral(resourceName: "tree"), #imageLiteral(resourceName: "tree1"), #imageLiteral(resourceName: "tree2"), #imageLiteral(resourceName: "tree3"), #imageLiteral(resourceName: "tree4"), #imageLiteral(resourceName: "tree5"), #imageLiteral(resourceName: "tree6")],
-            3: [#imageLiteral(resourceName: "extendedToeGrab"), #imageLiteral(resourceName: "extendedToeGrab1"), #imageLiteral(resourceName: "extendedToeGrab2"), #imageLiteral(resourceName: "extendedToeGrab3"), #imageLiteral(resourceName: "extendedToeGrab4"), #imageLiteral(resourceName: "extendedToeGrab5")],
-            4: [#imageLiteral(resourceName: "eagle"), #imageLiteral(resourceName: "eagle1"), #imageLiteral(resourceName: "eagle2"), #imageLiteral(resourceName: "eagle3"), #imageLiteral(resourceName: "eagle4"), #imageLiteral(resourceName: "eagle5"), #imageLiteral(resourceName: "eagle6"), #imageLiteral(resourceName: "eagle7")],
-            5: [#imageLiteral(resourceName: "chair"), #imageLiteral(resourceName: "chair1"), #imageLiteral(resourceName: "chair2"), #imageLiteral(resourceName: "chair3"), #imageLiteral(resourceName: "chair4"), #imageLiteral(resourceName: "chair5")],
-            6: [#imageLiteral(resourceName: "lordOfDance"), #imageLiteral(resourceName: "lordOfDance1"), #imageLiteral(resourceName: "lordOfDance2"), #imageLiteral(resourceName: "lordOfDance3"), #imageLiteral(resourceName: "lordOfDance4"), #imageLiteral(resourceName: "lordOfDance5"), #imageLiteral(resourceName: "lordOfDance6"), #imageLiteral(resourceName: "lordOfDance7")],
-            7: [#imageLiteral(resourceName: "warrior1"), #imageLiteral(resourceName: "warrior11"), #imageLiteral(resourceName: "warrior12"), #imageLiteral(resourceName: "warrior13"), #imageLiteral(resourceName: "warrior14"), #imageLiteral(resourceName: "warrior15")],
-            8: [#imageLiteral(resourceName: "warrior2"), #imageLiteral(resourceName: "warrior21"), #imageLiteral(resourceName: "warrior22"), #imageLiteral(resourceName: "warrior23"), #imageLiteral(resourceName: "warrior24"), #imageLiteral(resourceName: "warrior25")],
-            9: [#imageLiteral(resourceName: "warrior3"), #imageLiteral(resourceName: "warrior31"), #imageLiteral(resourceName: "warrior32"), #imageLiteral(resourceName: "warrior33"), #imageLiteral(resourceName: "warrior34"), #imageLiteral(resourceName: "warrior35"), #imageLiteral(resourceName: "warrior36")],
-            10: [#imageLiteral(resourceName: "halfMoon"), #imageLiteral(resourceName: "halfMoon1"), #imageLiteral(resourceName: "halfMoon2"), #imageLiteral(resourceName: "halfMoon3"), #imageLiteral(resourceName: "halfMoon4"), #imageLiteral(resourceName: "halfMoon5"), #imageLiteral(resourceName: "halfMoon6"), #imageLiteral(resourceName: "halfMoon7")],
-            11: [#imageLiteral(resourceName: "extendedTriangle"), #imageLiteral(resourceName: "extendedTriangle1"), #imageLiteral(resourceName: "extendedTriangle2"), #imageLiteral(resourceName: "extendedTriangle3"), #imageLiteral(resourceName: "extendedTriangle4"), #imageLiteral(resourceName: "extendedTriangle5")],
-            12: [#imageLiteral(resourceName: "extendedSideAngle"), #imageLiteral(resourceName: "extendedSideAngle1"), #imageLiteral(resourceName: "extendedSideAngle2"), #imageLiteral(resourceName: "extendedSideAngle3"), #imageLiteral(resourceName: "extendedSideAngle4"), #imageLiteral(resourceName: "extendedSideAngle5"), #imageLiteral(resourceName: "extendedSideAngle6")],
-            13: [#imageLiteral(resourceName: "revolvedSideAngle"), #imageLiteral(resourceName: "revolvedSideAngle1"), #imageLiteral(resourceName: "revolvedSideAngle2"), #imageLiteral(resourceName: "revolvedSideAngle3"), #imageLiteral(resourceName: "revolvedSideAngle4"), #imageLiteral(resourceName: "revolvedSideAngle5"), #imageLiteral(resourceName: "revolvedSideAngle6")],
-            14: [#imageLiteral(resourceName: "revolvedTriangle"), #imageLiteral(resourceName: "revolvedTriangle1"), #imageLiteral(resourceName: "revolvedTriangle2"), #imageLiteral(resourceName: "revolvedTriangle3"), #imageLiteral(resourceName: "revolvedTriangle4"), #imageLiteral(resourceName: "revolvedTriangle5"), #imageLiteral(resourceName: "revolvedTriangle6")],
-            15: [#imageLiteral(resourceName: "halfForwardBend"), #imageLiteral(resourceName: "halfForwardBend1"), #imageLiteral(resourceName: "halfForwardBend2"), #imageLiteral(resourceName: "halfForwardBend3"), #imageLiteral(resourceName: "halfForwardBend4"), #imageLiteral(resourceName: "halfForwardBend5"), #imageLiteral(resourceName: "halfForwardBend6"), #imageLiteral(resourceName: "halfForwardBend7")],
-            16: [#imageLiteral(resourceName: "forwardBend"), #imageLiteral(resourceName: "forwardBend1"), #imageLiteral(resourceName: "forwardBend2"), #imageLiteral(resourceName: "forwardBend3"), #imageLiteral(resourceName: "forwardBend4"), #imageLiteral(resourceName: "forwardBend5"), #imageLiteral(resourceName: "forwardBend6"), #imageLiteral(resourceName: "forwardBend7")],
-            17: [#imageLiteral(resourceName: "wideLeggedForwardBend"), #imageLiteral(resourceName: "wideLeggedForwardBend1"), #imageLiteral(resourceName: "wideLeggedForwardBend2"), #imageLiteral(resourceName: "wideLeggedForwardBend3"), #imageLiteral(resourceName: "wideLeggedForwardBend4"), #imageLiteral(resourceName: "wideLeggedForwardBend5"), #imageLiteral(resourceName: "wideLeggedForwardBend6")],
-            18: [#imageLiteral(resourceName: "intenseSide"), #imageLiteral(resourceName: "intenseSide1"), #imageLiteral(resourceName: "intenseSide2"), #imageLiteral(resourceName: "intenseSide3"), #imageLiteral(resourceName: "intenseSide4"), #imageLiteral(resourceName: "intenseSide5")],
-            19: [#imageLiteral(resourceName: "gate")],
-            20: [#imageLiteral(resourceName: "highLunge"), #imageLiteral(resourceName: "highLunge1"), #imageLiteral(resourceName: "highLunge2"), #imageLiteral(resourceName: "highLunge3"), #imageLiteral(resourceName: "highLunge4"), #imageLiteral(resourceName: "highLunge5"), #imageLiteral(resourceName: "highLunge6")],
-            21: [#imageLiteral(resourceName: "lowLunge"), #imageLiteral(resourceName: "lowLunge1"), #imageLiteral(resourceName: "lowLunge2"), #imageLiteral(resourceName: "lowLunge3"), #imageLiteral(resourceName: "lowLunge4"), #imageLiteral(resourceName: "lowLunge5"), #imageLiteral(resourceName: "lowLunge6")],
-            22: [#imageLiteral(resourceName: "deepSquat"), #imageLiteral(resourceName: "deepSquat1"), #imageLiteral(resourceName: "deepSquat2"), #imageLiteral(resourceName: "deepSquat3"), #imageLiteral(resourceName: "deepSquat4"), #imageLiteral(resourceName: "deepSquat5")],
+            0: ["upwardSalute"],
+            1: ["mountain"],
+            2: ["tree", "tree1", "tree2", "tree3", "tree4", "tree5", "tree6"],
+            3: ["extendedToeGrab", "extendedToeGrab1", "extendedToeGrab2", "extendedToeGrab3", "extendedToeGrab4", "extendedToeGrab5"],
+            4: ["eagle", "eagle1", "eagle2", "eagle3", "eagle4", "eagle5", "eagle6", "eagle7"],
+            5: ["chair", "chair1", "chair2", "chair3", "chair4", "chair5"],
+            6: ["lordOfDance", "lordOfDance1", "lordOfDance2", "lordOfDance3", "lordOfDance4", "lordOfDance5", "lordOfDance6", "lordOfDance7"],
+            7: ["warrior1", "warrior11", "warrior12", "warrior13", "warrior14", "warrior15"],
+            8: ["warrior2", "warrior21", "warrior22", "warrior23", "warrior24", "warrior25"],
+            9: ["warrior3", "warrior31", "warrior32", "warrior33", "warrior34", "warrior35", "warrior36"],
+            10: ["halfMoon", "halfMoon1", "halfMoon2", "halfMoon3", "halfMoon4", "halfMoon5", "halfMoon6", "halfMoon7"],
+            11: ["extendedTriangle", "extendedTriangle1", "extendedTriangle2", "extendedTriangle3", "extendedTriangle4", "extendedTriangle5"],
+            12: ["extendedSideAngle", "extendedSideAngle1", "extendedSideAngle2", "extendedSideAngle3", "extendedSideAngle4", "extendedSideAngle5", "extendedSideAngle6"],
+            13: ["revolvedSideAngle", "revolvedSideAngle1", "revolvedSideAngle2", "revolvedSideAngle3", "revolvedSideAngle4", "revolvedSideAngle5", "revolvedSideAngle6"],
+            14: ["revolvedTriangle", "revolvedTriangle1", "revolvedTriangle2", "revolvedTriangle3", "revolvedTriangle4", "revolvedTriangle5", "revolvedTriangle6"],
+            15: ["halfForwardBend", "halfForwardBend1", "halfForwardBend2", "halfForwardBend3", "halfForwardBend4", "halfForwardBend5", "halfForwardBend6", "halfForwardBend7"],
+            16: ["forwardBend", "forwardBend1", "forwardBend2", "forwardBend3", "forwardBend4", "forwardBend5", "forwardBend6", "forwardBend7"],
+            17: ["wideLeggedForwardBend", "wideLeggedForwardBend1", "wideLeggedForwardBend2", "wideLeggedForwardBend3", "wideLeggedForwardBend4", "wideLeggedForwardBend5", "wideLeggedForwardBend6"],
+            18: ["intenseSide", "intenseSide1", "intenseSide2", "intenseSide3", "intenseSide4", "intenseSide5"],
+            19: ["gate"],
+            20: ["highLunge", "highLunge1", "highLunge2", "highLunge3", "highLunge4", "highLunge5", "highLunge6"],
+            21: ["lowLunge", "lowLunge1", "lowLunge2", "lowLunge3", "lowLunge4", "lowLunge5", "lowLunge6"],
+            22: ["deepSquat", "deepSquat1", "deepSquat2", "deepSquat3", "deepSquat4", "deepSquat5"],
             // Hand/Elbows and Feet/Knees
-            23: [#imageLiteral(resourceName: "dolphin"), #imageLiteral(resourceName: "dolphin1"), #imageLiteral(resourceName: "dolphin2"), #imageLiteral(resourceName: "dolphin3")],
-            24: [#imageLiteral(resourceName: "downwardDog"), #imageLiteral(resourceName: "downwardDog1"), #imageLiteral(resourceName: "downwardDog2"), #imageLiteral(resourceName: "downwardDog3"), #imageLiteral(resourceName: "downwardDog4")],
-            25: [#imageLiteral(resourceName: "halfDownwardDog"), #imageLiteral(resourceName: "halfDownwardDog1"), #imageLiteral(resourceName: "halfDownwardDog2"), #imageLiteral(resourceName: "halfDownwardDog3"), #imageLiteral(resourceName: "halfDownwardDog4")],
-            26: [#imageLiteral(resourceName: "Test 2")], //// UNUSED
-            27: [#imageLiteral(resourceName: "dolphinPlank")],
-            28: [#imageLiteral(resourceName: "fourLimbedStaff")],
-            29: [#imageLiteral(resourceName: "sidePlank"), #imageLiteral(resourceName: "sidePlank1"), #imageLiteral(resourceName: "sidePlank2"), #imageLiteral(resourceName: "sidePlank3"), #imageLiteral(resourceName: "sidePlank4")],
-            30: [#imageLiteral(resourceName: "Cat")],
-            31: [#imageLiteral(resourceName: "Cow")],
-            32: [#imageLiteral(resourceName: "catCow"), #imageLiteral(resourceName: "catCow1"), #imageLiteral(resourceName: "catCow2"), #imageLiteral(resourceName: "catCow1"), #imageLiteral(resourceName: "catCow3"), #imageLiteral(resourceName: "catCow1")],
-            33: [#imageLiteral(resourceName: "halfMonkey"), #imageLiteral(resourceName: "halfMonkey1"), #imageLiteral(resourceName: "halfMonkey2"), #imageLiteral(resourceName: "halfMonkey3"), #imageLiteral(resourceName: "halfMonkey4")],
-            34: [#imageLiteral(resourceName: "childPose"), #imageLiteral(resourceName: "childPose1"), #imageLiteral(resourceName: "childPose2"), #imageLiteral(resourceName: "childPose3")],
-            35: [#imageLiteral(resourceName: "wildThing"), #imageLiteral(resourceName: "wildThing1"), #imageLiteral(resourceName: "wildThing2"), #imageLiteral(resourceName: "wildThing3"), #imageLiteral(resourceName: "wildThing4"), #imageLiteral(resourceName: "wildThing5"), #imageLiteral(resourceName: "wildThing6")],
-            36: [#imageLiteral(resourceName: "upwardBow"), #imageLiteral(resourceName: "upwardBow1"), #imageLiteral(resourceName: "upwardBow2"), #imageLiteral(resourceName: "upwardBow3"), #imageLiteral(resourceName: "upwardBow4"), #imageLiteral(resourceName: "upwardBow5")],
-            37: [#imageLiteral(resourceName: "bridge"), #imageLiteral(resourceName: "bridge1"), #imageLiteral(resourceName: "bridge2"), #imageLiteral(resourceName: "bridge3")],
-            38: [#imageLiteral(resourceName: "upwardPlank"), #imageLiteral(resourceName: "upwardPlank1"), #imageLiteral(resourceName: "upwardPlank2"), #imageLiteral(resourceName: "upwardPlank3"), #imageLiteral(resourceName: "upwardPlank4"), #imageLiteral(resourceName: "upwardPlank5")],
-            39: [#imageLiteral(resourceName: "extendedPuppy"), #imageLiteral(resourceName: "extendedPuppy1"), #imageLiteral(resourceName: "extendedPuppy2"), #imageLiteral(resourceName: "extendedPuppy3"), #imageLiteral(resourceName: "extendedPuppy4"), #imageLiteral(resourceName: "extendedPuppy5")],
-            40: [#imageLiteral(resourceName: "upwardDog"), #imageLiteral(resourceName: "upwardDog1"), #imageLiteral(resourceName: "upwardDog2"), #imageLiteral(resourceName: "upwardDog3"), #imageLiteral(resourceName: "upwardDog4")],
+            23: ["dolphin", "dolphin1", "dolphin2", "dolphin3"],
+            24: ["downwardDog", "downwardDog1", "downwardDog2", "downwardDog3", "downwardDog4"],
+            25: ["halfDownwardDog", "halfDownwardDog1", "halfDownwardDog2", "halfDownwardDog3", "halfDownwardDog4"],
+            26: [""], //// UNUSED!!!!!!!
+            27: ["dolphinPlank"],
+            28: ["fourLimbedStaff"],
+            29: ["sidePlank", "sidePlank1", "sidePlank2", "sidePlank3", "sidePlank4"],
+            30: ["cat"],
+            31: ["cow"],
+            32: ["cat", "catCow1", "catCow2", "catCow1", "catCow3", "catCow1"],
+            33: ["halfMonkey", "halfMonkey1", "halfMonkey2", "halfMonkey3", "halfMonkey4"],
+            34: ["childPose", "childPose1", "childPose2", "childPose3"],
+            35: ["wildThing", "wildThing1", "wildThing2", "wildThing3", "wildThing4", "wildThing5", "wildThing6"],
+            36: ["upwardBow", "upwardBow1", "upwardBow2", "upwardBow3", "upwardBow4", "upwardBow5"],
+            37: ["bridge", "bridge1", "bridge2", "bridge3"],
+            38: ["upwardPlank", "upwardPlank1", "upwardPlank2", "upwardPlank3", "upwardPlank4", "upwardPlank5"],
+            39: ["extendedPuppy", "extendedPuppy1", "extendedPuppy2", "extendedPuppy3", "extendedPuppy4", "extendedPuppy5"],
+            40: ["upwardDog", "upwardDog1", "upwardDog2", "upwardDog3", "upwardDog4"],
             // Seated
-            41: [#imageLiteral(resourceName: "crossLegged")],
-            42: [#imageLiteral(resourceName: "Lotus")],
-            43: [#imageLiteral(resourceName: "fireLog")],
-            44: [#imageLiteral(resourceName: "boat")],
-            45: [#imageLiteral(resourceName: "cowFace")],
-            46: [#imageLiteral(resourceName: "hero")],
-            47: [#imageLiteral(resourceName: "butterfly")],
-            48: [#imageLiteral(resourceName: "staff")],
-            49: [#imageLiteral(resourceName: "seatedForwardBend")],
-            50: [#imageLiteral(resourceName: "vForwardBend")],
-            51: [#imageLiteral(resourceName: "vSideBend"), #imageLiteral(resourceName: "vSideBend1"), #imageLiteral(resourceName: "vSideBend2"), #imageLiteral(resourceName: "vSideBend3"), #imageLiteral(resourceName: "vSideBend4"), #imageLiteral(resourceName: "vSideBend5")],
-            52: [#imageLiteral(resourceName: "halfVForwardBend"), #imageLiteral(resourceName: "halfVForwardBend1"), #imageLiteral(resourceName: "halfVForwardBend2"), #imageLiteral(resourceName: "halfVForwardBend3"), #imageLiteral(resourceName: "halfVForwardBend4"), #imageLiteral(resourceName: "halfVForwardBend5"), #imageLiteral(resourceName: "halfVForwardBend6")],
-            53: [#imageLiteral(resourceName: "halfVSideBend"), #imageLiteral(resourceName: "halfVSideBend1"),
-                 #imageLiteral(resourceName: "halfVSideBend2"), #imageLiteral(resourceName: "halfVSideBend3"), #imageLiteral(resourceName: "halfVSideBend4"), #imageLiteral(resourceName: "halfVSideBend5")],
-            54: [#imageLiteral(resourceName: "marichi1"), #imageLiteral(resourceName: "marichi11"), #imageLiteral(resourceName: "marichi12"), #imageLiteral(resourceName: "marichi13"), #imageLiteral(resourceName: "marichi14"), #imageLiteral(resourceName: "marichi15"), #imageLiteral(resourceName: "marichi16"), #imageLiteral(resourceName: "marichi17")],
-            55: [#imageLiteral(resourceName: "marichi3"), #imageLiteral(resourceName: "marichi31"), #imageLiteral(resourceName: "marichi32"), #imageLiteral(resourceName: "marichi33"), #imageLiteral(resourceName: "marichi34"), #imageLiteral(resourceName: "marichi35"), #imageLiteral(resourceName: "marichi36"), #imageLiteral(resourceName: "marichi37")],
-            56: [#imageLiteral(resourceName: "frontSplit")],
-            57: [#imageLiteral(resourceName: "sideSplit")],
+            41: ["crossLegged"],
+            42: ["lotus"],
+            43: ["fireLog"],
+            44: ["boat"],
+            45: ["cowFace"],
+            46: ["hero"],
+            47: ["butterfly"],
+            48: ["staff"],
+            49: ["seatedForwardBend"],
+            50: ["vForwardBend"],
+            51: ["vSideBend", "vSideBend1", "vSideBend2", "vSideBend3", "vSideBend4", "vSideBend5"],
+            52: ["halfVForwardBend", "halfVForwardBend1", "halfVForwardBend2", "halfVForwardBend3", "halfVForwardBend4", "halfVForwardBend5", "halfVForwardBend6"],
+            53: ["halfVSideBend", "halfVSideBend1", "halfVSideBend2", "halfVSideBend3", "halfVSideBend4", "halfVSideBend5"],
+            54: ["marichi1", "marichi11", "marichi12", "marichi13", "marichi14", "marichi15", "marichi16", "marichi17"],
+            55: ["marichi3", "marichi31", "marichi32", "marichi33", "marichi34", "marichi35", "marichi36", "marichi37"],
+            56: ["frontSplit"],
+            57: ["sideSplit"],
             // Lying
-            58: [#imageLiteral(resourceName: "corpse")],
-            59: [#imageLiteral(resourceName: "fish"), #imageLiteral(resourceName: "fish1"), #imageLiteral(resourceName: "fish2"), #imageLiteral(resourceName: "fish3"), #imageLiteral(resourceName: "fish4"), #imageLiteral(resourceName: "fish5")],
-            60: [#imageLiteral(resourceName: "happyBaby")],
-            61: [#imageLiteral(resourceName: "lyingButterfly"), #imageLiteral(resourceName: "lyingButterfly1"), #imageLiteral(resourceName: "lyingButterfly2"), #imageLiteral(resourceName: "lyingButterfly3"), #imageLiteral(resourceName: "lyingButterfly4")],
-            62: [#imageLiteral(resourceName: "legRaiseToe")],
-            63: [#imageLiteral(resourceName: "threadTheNeedle"), #imageLiteral(resourceName: "threadTheNeedle1"), #imageLiteral(resourceName: "threadTheNeedle2"), #imageLiteral(resourceName: "threadTheNeedle3"), #imageLiteral(resourceName: "threadTheNeedle4"), #imageLiteral(resourceName: "threadTheNeedle5")],
-            64: [#imageLiteral(resourceName: "shoulderStand"), #imageLiteral(resourceName: "shoulderStand1"), #imageLiteral(resourceName: "shoulderStand2"), #imageLiteral(resourceName: "shoulderStand3"), #imageLiteral(resourceName: "shoulderStand4"), #imageLiteral(resourceName: "shoulderStand5"), #imageLiteral(resourceName: "shoulderStand6"), #imageLiteral(resourceName: "shoulderStand7")],
-            65: [#imageLiteral(resourceName: "plow"), #imageLiteral(resourceName: "plow1"), #imageLiteral(resourceName: "plow2"), #imageLiteral(resourceName: "plow3"), #imageLiteral(resourceName: "plow4")],
-            66: [#imageLiteral(resourceName: "cobra"), #imageLiteral(resourceName: "cobra1"), #imageLiteral(resourceName: "cobra2"), #imageLiteral(resourceName: "cobra3"), #imageLiteral(resourceName: "cobra4")],
-            67: [#imageLiteral(resourceName: "sphinx")],
-            68: [#imageLiteral(resourceName: "pigeon"), #imageLiteral(resourceName: "pigeon1"), #imageLiteral(resourceName: "pigeon2"), #imageLiteral(resourceName: "pigeon3"), #imageLiteral(resourceName: "pigeon4"), #imageLiteral(resourceName: "pigeon5"), #imageLiteral(resourceName: "pigeon6"), #imageLiteral(resourceName: "pigeon7"), #imageLiteral(resourceName: "pigeon8")],
-            69: [#imageLiteral(resourceName: "spineRolling"), #imageLiteral(resourceName: "spineRolling1"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling3"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling4"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling3"), #imageLiteral(resourceName: "spineRolling2"), #imageLiteral(resourceName: "spineRolling4")],
+            58: ["corpse"],
+            59: ["fish", "fish1", "fish2", "fish3", "fish4", "fish5"],
+            60: ["happyBaby"],
+            61: ["lyingButterfly", "lyingButterfly1", "lyingButterfly2", "lyingButterfly3", "lyingButterfly4"],
+            62: ["legRaiseToe"],
+            63: ["threadTheNeedle", "threadTheNeedle1", "threadTheNeedle2", "threadTheNeedle3", "threadTheNeedle4", "threadTheNeedle5"],
+            64: ["shoulderStand", "shoulderStand1", "shoulderStand2", "shoulderStand3", "shoulderStand4", "shoulderStand5", "shoulderStand6", "shoulderStand7"],
+            65: ["plow", "plow1", "plow2", "plow3", "plow4"],
+            66: ["cobra", "cobra1", "cobra2", "cobra3", "cobra4"],
+            67: ["sphinx"],
+            68: ["pigeon", "pigeon1", "pigeon2", "pigeon3", "pigeon4", "pigeon5", "pigeon6", "pigeon7", "pigeon8"],
+            69: ["spineRolling", "spineRolling1", "spineRolling2", "spineRolling3", "spineRolling2", "spineRolling4", "spineRolling2", "spineRolling3", "spineRolling2", "spineRolling4"],
             // Hand Stands
-            70: [#imageLiteral(resourceName: "handStand"), #imageLiteral(resourceName: "handStand1"), #imageLiteral(resourceName: "handStand2"), #imageLiteral(resourceName: "handStand3"), #imageLiteral(resourceName: "handStand4"), #imageLiteral(resourceName: "handStand5"), #imageLiteral(resourceName: "handStand6"), #imageLiteral(resourceName: "handStand7"), #imageLiteral(resourceName: "handStand8")],
-            71: [#imageLiteral(resourceName: "headStand"), #imageLiteral(resourceName: "headStand1"), #imageLiteral(resourceName: "headStand2"), #imageLiteral(resourceName: "headStand3"), #imageLiteral(resourceName: "headStand4"), #imageLiteral(resourceName: "headStand5"), #imageLiteral(resourceName: "headStand6"), #imageLiteral(resourceName: "headStand7"), #imageLiteral(resourceName: "headStand8")],
-            72: [#imageLiteral(resourceName: "forearmStand"), #imageLiteral(resourceName: "forearmStand1"), #imageLiteral(resourceName: "forearmStand2"), #imageLiteral(resourceName: "forearmStand3"), #imageLiteral(resourceName: "forearmStand4"), #imageLiteral(resourceName: "forearmStand5"), #imageLiteral(resourceName: "forearmStand6")]
+            70: ["handStand", "handStand1", "handStand2", "handStand3", "handStand4", "handStand5", "handStand6", "handStand7", "handStand8"],
+            71: ["headStand", "headStand1", "headStand2", "headStand3", "headStand4", "headStand5", "headStand6", "headStand7", "headStand8"],
+            72: ["forearmStand", "forearmStand1", "forearmStand2", "forearmStand3", "forearmStand4", "forearmStand5", "forearmStand6"]
         ]
    
     
@@ -576,7 +575,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.tintColor = colour2
             //
             // Cell Image
-            cell.imageView?.image = demonstrationDictionary[practiceArray[selectedPreset[0]][selectedPreset[1]][indexPath.row]]?[0]
+            cell.imageView?.image = getUncachedImage(named: (demonstrationDictionary[practiceArray[selectedPreset[0]][selectedPreset[1]][indexPath.row]]?[0])!)
             cell.imageView?.isUserInteractionEnabled = true
             //
             cell.imageView?.tag = practiceArray[selectedPreset[0]][selectedPreset[1]][indexPath.row]
@@ -712,18 +711,25 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         let demonstrationIndex = sender.tag
         imageIndex = demonstrationIndex
         //
-        // Animation
-        expandedImage.image = demonstrationDictionary[demonstrationIndex]?[0]
-        expandedImage.animationImages = demonstrationDictionary[demonstrationIndex]
-        expandedImage.animationDuration = Double(demonstrationDictionary[demonstrationIndex]!.count) * 0.5
-        expandedImage.animationImages?.removeFirst()
-        expandedImage.animationRepeatCount = 1
-        // Play
-        let imagePress = UITapGestureRecognizer(target: self, action: #selector(imageSequenceAnimation))
-        expandedImage.addGestureRecognizer(imagePress)
+        expandedImage.image = getUncachedImage(named: (demonstrationDictionary[demonstrationIndex]?[0])!)
         //
-        // Animate
-        backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
+        // Animation
+        if demonstrationDictionary[imageIndex]?.count != 1 {
+            var animationArray: [UIImage] = []
+            for i in 1...(demonstrationDictionary[demonstrationIndex]?.count)! - 1 {
+                animationArray.append(getUncachedImage(named: (demonstrationDictionary[demonstrationIndex]?[i])!)!)
+            }
+            //
+            expandedImage.animationImages = animationArray
+            expandedImage.animationDuration = Double(demonstrationDictionary[demonstrationIndex]!.count - 1) * 0.5
+            expandedImage.animationRepeatCount = 1
+            // Play
+            let imagePress = UITapGestureRecognizer(target: self, action: #selector(imageSequenceAnimation))
+            expandedImage.addGestureRecognizer(imagePress)
+            //
+            // Animate
+            backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
+        }
         //
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)

@@ -21,7 +21,6 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
     // Buttons
     @IBOutlet weak var guided: UIButton!
     @IBOutlet weak var meditationTimer: UIButton!
-    @IBOutlet weak var breathing: UIButton!
     
     // Stack
     @IBOutlet weak var stackView: UIStackView!
@@ -73,27 +72,8 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         meditationTimer.titleLabel?.adjustsFontSizeToFitWidth = true
         meditationTimer.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         meditationTimer.titleLabel?.textAlignment = .center
-        //
-        breathing.setTitle(NSLocalizedString("oxygenOverload", comment: ""), for: UIControlState.normal)
-        breathing.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        breathing.setTitleColor(colour2, for: .normal)
-        breathing.layer.borderWidth = 6
-        breathing.layer.borderColor = colour2.cgColor
-        breathing.titleLabel?.adjustsFontSizeToFitWidth = true
-        breathing.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        breathing.titleLabel?.textAlignment = .center
-        breathing.titleLabel?.numberOfLines = 0
-        breathing.titleLabel?.lineBreakMode = .byWordWrapping
+      
         
-        // Iphone 5/SE
-        if UIScreen.main.nativeBounds.height < 1334 {
-            //
-            timerTop.constant = 52
-            timerBottom.constant = 52
-            stackBottom.constant = 52
-            //
-            stackView.spacing = 15
-        }
     }
     
     
@@ -103,14 +83,12 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //
-        meditationTimer.layer.cornerRadius = ((self.stackView.frame.size.height) * 3/2) / 2
+        meditationTimer.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
         meditationTimer.layer.masksToBounds = true
         //
-        guided.layer.cornerRadius = (self.stackView.frame.size.height) / 2
+        guided.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
         guided.layer.masksToBounds = true
         //
-        breathing.layer.cornerRadius = (self.stackView.frame.size.height) / 2
-        breathing.layer.masksToBounds = true
         
     }
 

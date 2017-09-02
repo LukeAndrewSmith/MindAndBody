@@ -52,7 +52,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var breathsArray: [Int] = []
     
     // Demonstration Array
-    var demonstrationArray: [[UIImage]] = []
+    var demonstrationArray: [[String]] = []
     
     // Explanation Array
     var explanationArray: [String] = []
@@ -275,14 +275,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             // Image
             //
-            cell.demonstrationImageView.image = demonstrationArray[indexPath.row][0]
-            // Animation
-            cell.demonstrationImageView.animationImages = demonstrationArray[indexPath.row]
-            cell.demonstrationImageView.animationImages?.removeFirst()
-            cell.demonstrationImageView.animationDuration = Double(demonstrationArray[indexPath.row].count) * 0.5
-            cell.demonstrationImageView.animationRepeatCount = 1
-            //
-            cell.demonstrationImageView.tag = indexPath.row
+            cell.demonstrationImageView.image = getUncachedImage(named: demonstrationArray[indexPath.row][0])
             
             //
             if demonstrationArray[indexPath.row].count > 1 {
@@ -290,6 +283,10 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             } else {
                 cell.imageIndicator.image = nil
             }
+            
+            //
+            cell.demonstrationImageView.tag = indexPath.row
+
         
             // Image Tap
             let imageTap = UITapGestureRecognizer()
@@ -508,12 +505,26 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Image
     @IBAction func handleImageTap(imageTap:UITapGestureRecognizer) {
         //
-        // Get Image
+        // Get Cell
         let sender = imageTap.view as! UIImageView
         let tag = sender.tag
+        let indexPath = NSIndexPath(row: tag, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
         //
-        if demonstrationArray[tag].count != 1 {
-            sender.startAnimating()
+        // Image Array
+        if demonstrationArray[indexPath.row].count > 1 && cell.demonstrationImageView.isAnimating == false {
+            var animationArray: [UIImage] = []
+            for i in 1...demonstrationArray[indexPath.row].count - 1 {
+                animationArray.append(getUncachedImage(named: demonstrationArray[indexPath.row][i])!)
+            }
+            //
+            cell.demonstrationImageView.animationImages = animationArray
+            cell.demonstrationImageView.animationDuration = Double(demonstrationArray[indexPath.row].count - 1) * 0.5
+            cell.demonstrationImageView.animationRepeatCount = 1
+            //
+            if demonstrationArray[tag].count != 1 {
+                sender.startAnimating()
+            }
         }
     }
 
