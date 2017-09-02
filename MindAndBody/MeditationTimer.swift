@@ -219,7 +219,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         if backgroundIndex < backgroundImageArray.count {
             //
-            backgroundImage.image = backgroundImageArray[backgroundIndex]
+            backgroundImage.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
         } else if backgroundIndex == backgroundImageArray.count {
             //
             backgroundImage.image = nil
