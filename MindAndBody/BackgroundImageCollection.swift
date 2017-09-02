@@ -134,7 +134,7 @@ class BackgroundImageCollection: UICollectionViewController {
         //
         if indexPath.row < backgroundImageArray.count {
             // Image
-            cell.backgroundImage.image = backgroundImageArray[indexPath.item]
+            cell.backgroundImage.image = getUncachedImage(named: backgroundImageArray[indexPath.item])
             
             // Selection Label
             //
