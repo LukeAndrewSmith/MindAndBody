@@ -205,18 +205,234 @@ extension UIViewController {
         fullString.append(toAvoidString)
         return fullString
     }
+    
+    
+    //
+    // Get Uncached Image
+    func getUncachedImage(named: String) -> UIImage? {
+        let imgPath = Bundle.main.path(forResource: named, ofType: "png")
+        let imageToReturn = UIImage(contentsOfFile: imgPath!)
+        return imageToReturn
+    }
+    
+    
+    
+    //
+    // Update Tracking
+    //
+    // Monday  - Sunday
+    func updateWeekTracking() {
+        // Format Day
+        let dfDay = DateFormatter()
+        dfDay.dateFormat = "dd"
+        
+        // Get Today
+        var currentDate = Int(dfDay.string(from: NSDate() as Date))
+        
+        // Week Goal
+        var currentProgress = weekProgress / weekGoal
+       
+        // Week has already begun
+        if weekTrackingDictionary.count != 0 {
+            // Today has already begun
+            if weekTrackingDictionary[currentDate!] != nil {
+                weekTrackingDictionary[currentDate!] = currentProgress
+                
+            // Today has just started
+            } else {
+                weekTrackingDictionary.updateValue(currentProgress, forKey: currentDate!)
+            }
+            
+        // Week hasn't begun / user has't done anything this week
+        } else {
+            // Get Monday
+            var mondaysDate: Date {
+                return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+            }
+            let currentMondayDate = Int(dfDay.string(from: mondaysDate))
+            
+            // Today is monday
+            if currentDate == currentMondayDate {
+                weekTrackingDictionary.updateValue(currentProgress, forKey: currentMondayDate!)
+                
+            // Today isn't monday
+            } else {
+                // Update empty days
+                for i in currentMondayDate!...currentDate! - 1 {
+                    weekTrackingDictionary.updateValue(0, forKey: i)
+                }
+                // Update today
+                weekTrackingDictionary.updateValue(currentProgress, forKey: currentDate!)
+            }
+        }
+    }
+    
+    
+    // Week %
+    func updateTracking() {
+        // Format Day
+        let dfDay = DateFormatter()
+        dfDay.dateFormat = "dd"
+        // Get Monday
+        var mondaysDate: Date {
+            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        }
+        let currentMondayDate = Int(dfDay.string(from: mondaysDate))
+        
+        // Format Month
+        let dfMonth = DateFormatter()
+        dfMonth.dateFormat = "MM"
+        // Get Month
+        var monthsDate: Date {
+            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        }
+        let currentMonth = Int(dfMonth.string(from: monthsDate))
+        
+        // Format Year
+        let dfYear = DateFormatter()
+        dfYear.dateFormat = "yyyy"
+        // Get Year
+        var yearsDate: Date {
+            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        }
+        let currentYear = Int(dfYear.string(from: yearsDate))
 
+        // Week Goal
+        var currentProgress = weekProgress / weekGoal
+        
+//        // Year isn't next in line
+//        if trackingDictionary[currentYear!] == nil {
+//            trackingDictionary.updateValue([:], forKey: currentYear!)
+//            // Check last year is full
+//            if trackingDictionary[currentYear! - 1] != nil {
+//                // Fill last years unfinished weeks
+//                let yearDict = trackingDictionary[currentYear!]
+//                let keyArray = yearDict?.keys.sorted()
+//                let toFill = 12 - keyArray.count
+//                let lastMonth = keyArray?.last
+//                for i in 1...toFill {
+//                    monthTrackingDictionary[currentYear!]?.updateValue(0, forKey: lastMonth! + i)
+//                }
+//            }
+//        }
+//        
+//        // Week isn't next in line
+//        let monthDict = trackingDictionary[currentMonth!]
+//        let keyArray = monthDict?.keys.sorted()
+//        
+//        if keyArray?.count != 0 && currentMondayDate! != (keyArray?.last)! + 7 {
+//        
+//            // Check last month exists and is full
+//            if trackingDictionary[currentMonth! - 1] != nil {
+//                if trackingDictionary[currentMonth! - 1]?.count != 12 {
+//                    let lastYearKeyArray = trackingDictionary[currentMonth! - 1]?.keys.sorted()
+//                    let lastYearLastMonth = lastYearKeyArray?.last
+//                    let toFillLastYear = 12 - (lastYearKeyArray?.last)!
+//                    // Fill 0 into last years empty months
+//                    for i in 1...toFillLastYear {
+//                        trackingDictionary[currentMondayDate! - 1]?.updateValue(0, forKey: lastYearLastMonth! + i)
+//                    }
+//                }
+//            }
+//            
+//            // Fill empty months up to current months with 0
+//            let toFill = (currentMonth! - 1) - (keyArray?.last)!
+//            let lastMonth = keyArray?.last
+//            for i in 1...toFill {
+//                monthTrackingDictionary[currentYear!]?.updateValue(0, forKey: lastMonth! + i)
+//            }
+//            
+//            // Update current month
+//            monthTrackingDictionary[currentMonth!]?.updateValue(currentProgress, forKey: currentMonth!)
+//            
+//            
+//        // Year is correct
+//        // Week is next in line
+//        } else {
+//            // Week has already begun
+//            if trackingDictionary[currentMondayDate!] != nil {
+//                // Today has already begun
+//                trackingDictionary[currentMonth!]?[currentMondayDate!] = currentProgress
+//            
+//            // Week hasn't begun / user has't done anything this week
+//            } else {
+//                //
+//                trackingDictionary[currentMonth!]?.updateValue(currentProgress, forKey: currentMondayDate!)
+//                
+//            }
+//        }
+    }
+    
+    // Month %
+    func updateMonthTracking() {
+        // Format Month
+        let dfMonth = DateFormatter()
+        dfMonth.dateFormat = "MM"
+        // Get Month
+        var monthsDate: Date {
+            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        }
+        let currentMonth = Int(dfMonth.string(from: monthsDate))
+        
+        // Format Year
+        let dfYear = DateFormatter()
+        dfYear.dateFormat = "yyyy"
+        // Get Year
+        var yearsDate: Date {
+            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        }
+        let currentYear = Int(dfYear.string(from: yearsDate))
+        
+        // Month Goal
+        let currentProgress = monthProgress / monthGoal
+        
+        //
+        // If current year doesn't exist, add it
+        let keyArrayFull = monthTrackingDictionary.keys.sorted()
+        if (keyArrayFull.contains(currentYear!)) == false {
+            //
+            monthTrackingDictionary.updateValue([:], forKey: currentYear!)
+            
+            // Check last year exists and is full
+            if monthTrackingDictionary[currentYear! - 1] != nil {
+                if monthTrackingDictionary[currentYear! - 1]?.count != 12 {
+                    let lastYearKeyArray = monthTrackingDictionary[currentYear! - 1]?.keys.sorted()
+                    let lastYearLastMonth = lastYearKeyArray?.last
+                    let toFillLastYear = 12 - (lastYearKeyArray?.last)!
+                    // Fill 0 into last years empty months
+                    for i in 1...toFillLastYear {
+                        monthTrackingDictionary[currentYear! - 1]?.updateValue(0, forKey: lastYearLastMonth! + i)
+                    }
+                }
+            }
+        }
+        
+        //
+        // Month isn't next in line
+        let yearDict = monthTrackingDictionary[currentYear!]
+        let keyArray = yearDict?.keys.sorted()
+        if keyArray?.count != nil && currentMonth! > (keyArray?.last)! + 1 {
+            // Fill empty months up to current months with 0
+            let toFill = (currentMonth! - 1) - (keyArray?.last)!
+            let lastMonth = keyArray?.last
+            for i in 1...toFill {
+                monthTrackingDictionary[currentYear!]?.updateValue(0, forKey: lastMonth! + i)
+            }
+            
+            // Update current month
+            monthTrackingDictionary[currentYear!]?.updateValue(currentProgress, forKey: currentMonth!)
+            
+        // Month is next in line or current Month
+        } else {
+            // Month Has Begun
+            if monthTrackingDictionary[currentYear!]?[currentMonth!] != nil {
+                monthTrackingDictionary[currentYear!]?[currentMonth!] = currentProgress
+            
+            // Month Hasn't Begun
+            } else {
+                monthTrackingDictionary[currentYear!]?.updateValue(currentProgress, forKey: currentMonth!)
+            }
+        }
+    }
     
 }
-
-//
-// Mark: - Label Extensions
-//
-
-extension UILabel {
-    
-    }
-
-
-
-

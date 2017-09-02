@@ -173,7 +173,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         backgroundImageView.contentMode = .scaleAspectFill
         //
         if backgroundIndex < backgroundImageArray.count {
-            backgroundImageView.image = backgroundImageArray[backgroundIndex]
+            backgroundImageView.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
         } else if backgroundIndex == backgroundImageArray.count {
             //
             backgroundImageView.image = nil

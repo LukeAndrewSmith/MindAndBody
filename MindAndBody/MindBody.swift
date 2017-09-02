@@ -19,9 +19,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     // Previous Colours
     //            UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "colour1")
     //            UserDefaults.standard.setColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), forKey: "colour2")
-    //
-    
-    
     //  (UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "colour2")
     //  (UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "colour3")
     
@@ -114,7 +111,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         //
         if backgroundIndex < backgroundImageArray.count {
             //
-            backgroundImage.image = backgroundImageArray[backgroundIndex]
+            backgroundImage.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
         } else if backgroundIndex == backgroundImageArray.count {
             //
             backgroundImage.image = nil

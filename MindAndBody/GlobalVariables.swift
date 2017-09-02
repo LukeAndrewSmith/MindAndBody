@@ -15,8 +15,8 @@ import UIKit
 //
 // Background Images Array ---------------------------------------------------------------------------------------------------------------
 //
-let backgroundImageArray: [UIImage] =
-    [#imageLiteral(resourceName: "Background 0"), #imageLiteral(resourceName: "Background 1"), #imageLiteral(resourceName: "Background 2"), #imageLiteral(resourceName: "Background 3"), #imageLiteral(resourceName: "Background 4"), #imageLiteral(resourceName: "Background 5"), #imageLiteral(resourceName: "Background 6")]
+let backgroundImageArray: [String] =
+    ["iceland", "sunWater", "purpleTree", "water", "mountainsRedBlue", "magicWood", "mountains"]
 
 //
 // Colours ---------------------------------------------------------------------------------------------------------------------
@@ -50,3 +50,22 @@ var tabBarIndex = 0
 var new = Bool()
 
 //
+
+
+//
+// Tracking Variables ---------------------------------------------------------------------------------------------------------------
+//
+// Goals
+var weekGoal = Int()
+var monthGoal = Int()
+
+// Progress
+var weekProgress = Int()
+var monthProgress = Int()
+
+// Monday - Sunday
+var weekTrackingDictionary: [Int:Int] = [:]
+// All tracking in % of weeks
+var trackingDictionary: [Int:[Int:[Int:Int]]] = [:]
+// All tracking in % of months
+var monthTrackingDictionary: [Int:[Int:Int]] = [:]

@@ -72,7 +72,7 @@
     "rest" = "Rest";
     "skip" = "Skip";
 
-    "sessionStarted" = "Session Begun!";
+    "sessionStarted" = "Session Began!";
 
     "edit" = "Edit";
     "done" = "Done";
@@ -111,7 +111,14 @@
 //
 // Tracking //
     "tracking" = "Tracking";
-
+        //
+        // Time Scales
+        "1week" = "1 Week";
+        "1month" = "1 Month";
+        "3months" = "3 Months";
+        "6months" = "6 Months";
+        "1year" = "1 year";
+        "all" = "All";
 
 //
 // Mind & Body //

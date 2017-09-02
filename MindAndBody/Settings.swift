@@ -237,7 +237,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
             // Set image background based on index
             if backgroundIndex < backgroundImageArray.count {
-                backgroundImageView.image = backgroundImageArray[backgroundIndex]
+                backgroundImageView.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
 
             // If grey background
             } else if backgroundIndex == backgroundImageArray.count {
