@@ -19,5 +19,132 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/CircuitChoiceG.swift"
+            timestampString = "525207407.022681"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "CircuitChoiceG"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/WorkoutChoiceFinal.swift"
+            timestampString = "525262708.642289"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2429"
+            endingLineNumber = "2429"
+            landmarkName = "WorkoutChoiceFinal"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MindAndBody.WorkoutChoiceFinal.emptyString.getter : Swift.String"
+                  moduleName = "MindAndBody"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/WorkoutChoiceFinal.swift"
+                  timestampString = "525208535.904593"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2511"
+                  endingLineNumber = "2511"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MindAndBody.WorkoutChoiceFinal.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; MindAndBody.WorkoutChoiceFinal"
+                  moduleName = "MindAndBody"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/WorkoutChoiceFinal.swift"
+                  timestampString = "525208535.907828"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2511"
+                  endingLineNumber = "2511"
+                  offsetFromSymbolStart = "107028">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MindAndBody.WorkoutChoiceFinal.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;MindAndBody.WorkoutChoiceFinal&gt;"
+                  moduleName = "MindAndBody"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/WorkoutChoiceFinal.swift"
+                  timestampString = "525208535.910663"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2511"
+                  endingLineNumber = "2511"
+                  offsetFromSymbolStart = "106972">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/MeditationScreen.swift"
+            timestampString = "526038278.385671"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "340"
+            endingLineNumber = "340"
+            landmarkName = "startTimer()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/MeditationScreen.swift"
+            timestampString = "526038445.493943"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "369"
+            endingLineNumber = "369"
+            landmarkName = "startTimer()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/MeditationScreen.swift"
+            timestampString = "526038513.350687"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
+            landmarkName = "startTimer()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
