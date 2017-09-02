@@ -2772,7 +2772,7 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
             //destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
+            //destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
             destinationVC.sessionType = 0
@@ -2810,8 +2810,8 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             //
             destinationVC.sessionArray = workoutArray
             destinationVC.repsArray = repsArrayC
-            destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
+            //destinationVC.demonstrationArray = demonstrationArray
+            //destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
             destinationVC.sessionType = 0

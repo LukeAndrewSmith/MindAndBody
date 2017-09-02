@@ -1898,8 +1898,8 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             destinationVC.sessionArray = warmupArray
             destinationVC.setsArray = setsArray
             destinationVC.repsArray = repsArray
-            destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.targetAreaArray = targetAreaArray
+            //destinationVC.demonstrationArray = demonstrationArray
+            //destinationVC.targetAreaArray = targetAreaArray
             destinationVC.explanationArray = explanationArray
             //
             destinationVC.sessionType = 0
