@@ -412,7 +412,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
     
-    // Test
+    
     //
     // View will dissappear
     //
