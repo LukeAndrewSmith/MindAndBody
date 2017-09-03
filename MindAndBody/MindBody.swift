@@ -225,16 +225,16 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         //
         UserDefaults.standard.register(defaults: ["informationWalkthroughm" : false])
         
-        // Register Weight
-        UserDefaults.standard.register(defaults: ["units" : "kg"])
-        // Register Yoga Automatic
-        UserDefaults.standard.register(defaults: ["automaticYoga" : [0, -1, -1, -1]])
+        // Register background image index
+        UserDefaults.standard.register(defaults: ["homeScreenBackground" : 2])
         // Register Default Image
         UserDefaults.standard.register(defaults: ["defaultImage" : "demonstration"])
-        // Register background image index
-        UserDefaults.standard.register(defaults: ["homeScreenBackground" : 0])
+        // Register Weight
+        UserDefaults.standard.register(defaults: ["units" : "kg"])
         // Register rest times
         UserDefaults.standard.register(defaults: ["restTimes" : [15, 45, 10]])
+        // Register Yoga Automatic
+        UserDefaults.standard.register(defaults: ["automaticYoga" : [0, -1, -1, -1]])
         
     }
     

@@ -124,8 +124,6 @@ class MeditationScreen: UIViewController {
         }
         
         
-        
-        
         // Initial Conditions
         //
         // Determine wether hours or not
@@ -268,12 +266,17 @@ class MeditationScreen: UIViewController {
         if timerValue == 0 {
             //
             timerCountDown.invalidate()
-            
-            // Stop Background sound
-            self.soundPlayer.stop()
+            // Stop sounds
+            if self.selectedBackgroundSoundsArray[self.selectedPreset] != -1 {
+                if self.soundPlayer.isPlaying == true {
+                    self.soundPlayer.stop()
+                }
+            }
+            if self.bellPlayer.isPlaying {
+                self.bellPlayer.stop()
+            }
             //
             NotificationCenter.default.removeObserver(self)
-            //
             self.dismiss(animated: true)
         //
         } else if timerValue == 1 {
@@ -297,6 +300,8 @@ class MeditationScreen: UIViewController {
     //
     // Start Timer
     //
+    var qosDispatch: DispatchQoS? = nil
+    var workItemsDispatchQueue: DispatchQueue? = nil
     func startTimer() {
         // Dates and Times
         startTime = Date().timeIntervalSinceReferenceDate
@@ -323,6 +328,11 @@ class MeditationScreen: UIViewController {
             }
             }
             
+            if intervalBellsArray[selectedPreset].count != 0 || endingBellsArray[selectedPreset] != -1 {
+                qosDispatch = DispatchQoS.userInteractive
+                workItemsDispatchQueue = DispatchQueue(label: "workItemsDispatchQueue", qos: qosDispatch!)
+            }
+            
             //
             // Work Item Bells
             for i in 0...intervalBellsArray[selectedPreset].count {
@@ -346,10 +356,14 @@ class MeditationScreen: UIViewController {
                     // Delay bell
                     // Delay
                     let delayInSeconds = Double(intervalTimes[selectedPreset][i])
-                    let time = DispatchTime.now()
                     
                     // Dispatch
-                    DispatchQueue.main.asyncAfter(deadline: time + delayInSeconds, execute: bell)
+                    workItemsDispatchQueue?.asyncAfter(deadline: .now() + delayInSeconds, execute: bell)
+                    
+                    //
+//                    let backgroundQueue = DispatchQueue.global()
+//                    let deadline = DispatchTime.now() + delayInSeconds
+//                    backgroundQueue.asyncAfter(deadline: deadline, qos: .userInteractive, execute: be)
                     
                     // Add to work items array
                     dispatchWorkItemArray.append(bell)
@@ -377,7 +391,7 @@ class MeditationScreen: UIViewController {
                     // Delay
                     let delayInSeconds = Double(durationArray[selectedPreset])
                     // Dispatch
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: UInt64(startTime)) + delayInSeconds, execute: bell)
+                    workItemsDispatchQueue?.asyncAfter(deadline: DispatchTime.now() + delayInSeconds, execute: bell)
                     
                     // Add to work items array
                     dispatchWorkItemArray.append(bell)
@@ -479,15 +493,19 @@ class MeditationScreen: UIViewController {
             // Cancel Timer
             timerCountDown.invalidate()
             // Stop sounds
-            if self.soundPlayer.isPlaying == true {
-                self.soundPlayer.stop()
+            if self.selectedBackgroundSoundsArray[self.selectedPreset] != -1 {
+                if self.soundPlayer.isPlaying == true {
+                    self.soundPlayer.stop()
+                }
             }
             if self.bellPlayer.isPlaying {
                 self.bellPlayer.stop()
             }
             // Cancel Work Items
-            for i in 0...self.dispatchWorkItemArray.count - 1 {
-                self.dispatchWorkItemArray[i].cancel()
+            if self.dispatchWorkItemArray.count != 0 {
+                for i in 0...self.dispatchWorkItemArray.count - 1 {
+                    self.dispatchWorkItemArray[i].cancel()
+                }
             }
             
             NotificationCenter.default.removeObserver(self)

@@ -268,6 +268,7 @@ extension UIViewController {
     }
     
     
+    //
     // Week %
     func updateTracking() {
         // Format Day
@@ -287,7 +288,7 @@ extension UIViewController {
             return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
         }
         let currentMonth = Int(dfMonth.string(from: monthsDate))
-        
+    
         // Format Year
         let dfYear = DateFormatter()
         dfYear.dateFormat = "yyyy"
@@ -299,70 +300,180 @@ extension UIViewController {
 
         // Week Goal
         var currentProgress = weekProgress / weekGoal
+
         
-//        // Year isn't next in line
-//        if trackingDictionary[currentYear!] == nil {
-//            trackingDictionary.updateValue([:], forKey: currentYear!)
-//            // Check last year is full
-//            if trackingDictionary[currentYear! - 1] != nil {
-//                // Fill last years unfinished weeks
-//                let yearDict = trackingDictionary[currentYear!]
-//                let keyArray = yearDict?.keys.sorted()
-//                let toFill = 12 - keyArray.count
-//                let lastMonth = keyArray?.last
-//                for i in 1...toFill {
-//                    monthTrackingDictionary[currentYear!]?.updateValue(0, forKey: lastMonth! + i)
-//                }
-//            }
-//        }
-//        
-//        // Week isn't next in line
-//        let monthDict = trackingDictionary[currentMonth!]
-//        let keyArray = monthDict?.keys.sorted()
-//        
-//        if keyArray?.count != 0 && currentMondayDate! != (keyArray?.last)! + 7 {
-//        
-//            // Check last month exists and is full
-//            if trackingDictionary[currentMonth! - 1] != nil {
-//                if trackingDictionary[currentMonth! - 1]?.count != 12 {
-//                    let lastYearKeyArray = trackingDictionary[currentMonth! - 1]?.keys.sorted()
-//                    let lastYearLastMonth = lastYearKeyArray?.last
-//                    let toFillLastYear = 12 - (lastYearKeyArray?.last)!
-//                    // Fill 0 into last years empty months
-//                    for i in 1...toFillLastYear {
-//                        trackingDictionary[currentMondayDate! - 1]?.updateValue(0, forKey: lastYearLastMonth! + i)
-//                    }
-//                }
-//            }
-//            
-//            // Fill empty months up to current months with 0
-//            let toFill = (currentMonth! - 1) - (keyArray?.last)!
-//            let lastMonth = keyArray?.last
-//            for i in 1...toFill {
-//                monthTrackingDictionary[currentYear!]?.updateValue(0, forKey: lastMonth! + i)
-//            }
-//            
-//            // Update current month
-//            monthTrackingDictionary[currentMonth!]?.updateValue(currentProgress, forKey: currentMonth!)
-//            
-//            
-//        // Year is correct
-//        // Week is next in line
-//        } else {
-//            // Week has already begun
-//            if trackingDictionary[currentMondayDate!] != nil {
-//                // Today has already begun
-//                trackingDictionary[currentMonth!]?[currentMondayDate!] = currentProgress
-//            
-//            // Week hasn't begun / user has't done anything this week
-//            } else {
-//                //
-//                trackingDictionary[currentMonth!]?.updateValue(currentProgress, forKey: currentMondayDate!)
-//                
-//            }
-//        }
+        //
+        // If current year doesn't exist, add it
+        let keyArrayYear = trackingDictionary.keys.sorted()
+        if (keyArrayYear.contains(currentYear!)) == false {
+            //
+            trackingDictionary.updateValue([:], forKey: currentYear!)
+            
+            //
+            // Check last year exists and is full
+            let lastYear = currentYear! - 1
+            if trackingDictionary[lastYear] != nil {
+                // Check last year number months correct
+                if trackingDictionary[lastYear]?.count != 12 {
+                    let lastYearKeyArray = trackingDictionary[lastYear]?.keys.sorted()
+                    let lastYearLastMonth = lastYearKeyArray?.last
+                    
+                    // Check last month has correct number of mondays
+                    if (trackingDictionary[lastYear]?[lastYearLastMonth!]?.count)! != numberOfMondaysInMonth(lastYearLastMonth!, forYear: lastYear)! {
+                        let numberOfMondays = numberOfMondaysInMonth(lastYearLastMonth!, forYear: lastYear)!
+                        let numberOfMondaysTracking = (trackingDictionary[lastYear]?[lastYearLastMonth!]?.count)!
+                        let emptyMondays = numberOfMondays - numberOfMondaysTracking
+                        //
+                        let firstMonday = firstMondayInMonth(lastYearLastMonth!, forYear: lastYear)
+                        let lastFilledInMonday = firstMonday! + ((numberOfMondays - emptyMondays - 1) * 7)
+                        for i in 1...emptyMondays {
+                            trackingDictionary[lastYear]?[lastYearLastMonth!]?.updateValue(0, forKey: lastFilledInMonday + (7 * i))
+                        }
+                    }
+                    
+                    // Fill rest of months with nil for each week
+                    let toFillLastYear = 12 - (lastYearKeyArray?.last)!
+                    // Fill 0 into last years empty months
+                    for i in 1...toFillLastYear {
+                        let numberOfMondays = numberOfMondaysInMonth(i, forYear: lastYear)!
+                        let firstMonday = firstMondayInMonth(i, forYear: lastYear)
+
+                        // Fill in 0 in all weeks
+                        for j in 1...numberOfMondays {
+                            trackingDictionary[lastYear]?[i]?.updateValue(0, forKey: firstMonday! + (7 * j))
+                        }
+                    }
+                }
+            }
+        }
+        
+        //
+        // Month isn't next in line
+        let yearDict = trackingDictionary[currentYear!]
+        let keyArray = yearDict?.keys.sorted()
+        // Month isn't next in line
+        if keyArray?.count != nil && currentMonth! > (keyArray?.last)! + 1 {
+            let lastMonthUpdated = keyArray?.last
+            // Check last month has correct number of mondays
+            if (trackingDictionary[currentYear!]?[lastMonthUpdated!]?.count)! != numberOfMondaysInMonth(lastMonthUpdated!, forYear: currentYear!)! {
+                let numberOfMondays = numberOfMondaysInMonth(lastMonthUpdated!, forYear: currentYear!)!
+                let numberOfMondaysTracking = (trackingDictionary[currentYear!]?[lastMonthUpdated!]?.count)!
+                let emptyMondays = numberOfMondays - numberOfMondaysTracking
+                //
+                let firstMonday = firstMondayInMonth(lastMonthUpdated!, forYear: currentYear!)
+                let lastFilledInMonday = firstMonday! + ((numberOfMondays - emptyMondays - 1) * 7)
+                // Fill in last month empty weeks with 0
+                for i in 1...emptyMondays {
+                    trackingDictionary[currentYear!]?[lastMonthUpdated!]?.updateValue(0, forKey: lastFilledInMonday + (7 * i))
+                }
+            }
+            
+            // Fill rest of months with nil for each week up to current month
+            let toFillToCurrentYear = currentMonth! - lastMonthUpdated!
+            // Fill 0 into last years empty months
+            for i in 1...toFillToCurrentYear {
+                let numberOfMondays = numberOfMondaysInMonth(i, forYear: currentYear!)!
+                let firstMonday = firstMondayInMonth(i, forYear: currentYear!)
+                
+                // Fill in 0 in all weeks
+                for j in 1...numberOfMondays {
+                    trackingDictionary[currentYear!]?[i]?.updateValue(0, forKey: firstMonday! + (7 * j))
+                }
+            }
+            
+            // Fill current months empty weeks with 0
+            let firstMonday = firstMondayInMonth(currentMonth!, forYear: currentYear!)
+            let toFillCurrentMonth = ((currentMondayDate! - firstMonday!) / 7) - 1
+            for i in 0...toFillCurrentMonth {
+                trackingDictionary[currentYear!]?[currentMonth!]?.updateValue(0, forKey: firstMonday! + (7 * i))
+            }
+        
+            // Update current week
+            trackingDictionary[currentYear!]?[currentMonth!]?.updateValue(currentProgress, forKey: currentMondayDate!)
+            
+        // Month is next in line or current Month
+        } else {
+            // Month Has Begun
+            if trackingDictionary[currentYear!]?[currentMonth!]?[currentMondayDate!] != nil {
+                trackingDictionary[currentYear!]?[currentMonth!]?[currentMondayDate!] = currentProgress
+
+            // Month Hasn't Begun
+            } else {
+                trackingDictionary[currentYear!]?[currentMonth!]?.updateValue(currentProgress, forKey: currentMondayDate!)
+            }
+        }
     }
     
+    //
+    // Week tracking helper functions
+    func numberOfMondaysInMonth(_ month: Int, forYear year: Int) -> Int? {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.firstWeekday = 2 // 2 == Monday
+        
+        // First monday in month:
+        var comps = DateComponents(year: year, month: month,
+                                   weekday: calendar.firstWeekday, weekdayOrdinal: 1)
+        guard let first = calendar.date(from: comps)  else {
+            return nil
+        }
+        
+        // Last monday in month:
+        comps.weekdayOrdinal = -1
+        guard let last = calendar.date(from: comps)  else {
+            return nil
+        }
+        
+        // Difference in weeks:
+        let weeks = calendar.dateComponents([.weekOfMonth], from: first, to: last)
+        return weeks.weekOfMonth! + 1
+    }
+    
+    func firstMondayInMonth(_ month: Int, forYear year: Int) -> Int? {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.firstWeekday = 2 // 2 == Monday
+        
+        // First monday in month:
+        var comps = DateComponents(year: year, month: month,
+                                   weekday: calendar.firstWeekday, weekdayOrdinal: 1)
+        guard let first = calendar.date(from: comps)  else {
+            return nil
+        }
+        
+        // Format Day
+        let dfDay = DateFormatter()
+        dfDay.dateFormat = "dd"
+        // Get Monday
+        let firstMonday = Int(dfDay.string(from: first))
+        
+        return firstMonday
+    }
+    
+    
+    func emptyDictionaryOfMonth(_ month: Int, forYear year: Int) -> Int? {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.firstWeekday = 2 // 2 == Monday
+        
+        // First monday in month:
+        var comps = DateComponents(year: year, month: month,
+                                   weekday: calendar.firstWeekday, weekdayOrdinal: 1)
+        guard let first = calendar.date(from: comps)  else {
+            return nil
+        }
+        
+        // Last monday in month:
+        comps.weekdayOrdinal = -1
+        guard let last = calendar.date(from: comps)  else {
+            return nil
+        }
+        
+        // Difference in weeks:
+        let weeks = calendar.dateComponents([.weekOfMonth], from: first, to: last)
+        return weeks.weekOfMonth! + 1
+    }
+    
+
+    
+    //
     // Month %
     func updateMonthTracking() {
         // Format Month
