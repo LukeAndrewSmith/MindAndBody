@@ -272,9 +272,6 @@ class MeditationScreen: UIViewController {
                     self.soundPlayer.stop()
                 }
             }
-            if self.bellPlayer.isPlaying {
-                self.bellPlayer.stop()
-            }
             //
             NotificationCenter.default.removeObserver(self)
             self.dismiss(animated: true)
@@ -338,10 +335,9 @@ class MeditationScreen: UIViewController {
             for i in 0...intervalBellsArray[selectedPreset].count {
                 // Interval Bells
                 if i < intervalBellsArray[selectedPreset].count {
-                    // Bell
                     //
+                    // Bell
                     let bell = DispatchWorkItem {
-                        //
                         let url = Bundle.main.url(forResource: self.bellsArray[self.intervalBellsArray[self.selectedPreset][i]], withExtension: "caf")!
                         //
                         do {
@@ -352,19 +348,14 @@ class MeditationScreen: UIViewController {
                             // couldn't load file :(
                         }
                     }
-                    
                     // Delay bell
                     // Delay
-                    let delayInSeconds = Double(intervalTimes[selectedPreset][i])
-                    
+                    let delayInSeconds = intervalTimes[selectedPreset][i]
                     // Dispatch
-                    workItemsDispatchQueue?.asyncAfter(deadline: .now() + delayInSeconds, execute: bell)
-                    
+                    //workItemsDispatchQueue?.asyncAfter(wallDeadline: .now() + .seconds(intervalTimes[selectedPreset][i]), execute: bell)
                     //
-//                    let backgroundQueue = DispatchQueue.global()
-//                    let deadline = DispatchTime.now() + delayInSeconds
-//                    backgroundQueue.asyncAfter(deadline: deadline, qos: .userInteractive, execute: be)
-                    
+                    DispatchQueue.main.asyncAfter(wallDeadline: DispatchWallTime.now() + DispatchTimeInterval.seconds(delayInSeconds), execute: bell)
+
                     // Add to work items array
                     dispatchWorkItemArray.append(bell)
                     
@@ -390,18 +381,17 @@ class MeditationScreen: UIViewController {
                     // Delay bell
                     // Delay
                     let delayInSeconds = Double(durationArray[selectedPreset])
+                        
                     // Dispatch
-                    workItemsDispatchQueue?.asyncAfter(deadline: DispatchTime.now() + delayInSeconds, execute: bell)
+                    workItemsDispatchQueue?.asyncAfter(deadline: .now() + .seconds(durationArray[selectedPreset]), execute: bell)
                     
                     // Add to work items array
                     dispatchWorkItemArray.append(bell)
                     }
                 }
-                    
             }
             
             
-                
             //
             // Background Sound
             if selectedBackgroundSoundsArray[selectedPreset] != -1 {
@@ -434,9 +424,11 @@ class MeditationScreen: UIViewController {
             timerLabel.text = timeFormatted(totalSeconds: timerValue)
         }
         
-        // Begin Timer or dismiss view
+        // Begin Timer
         timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
     }
+    
+    
 //
 // Buttons -------------------------------------------------------------------------------------------
 //

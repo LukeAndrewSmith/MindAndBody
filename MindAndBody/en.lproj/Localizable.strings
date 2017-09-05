@@ -86,12 +86,19 @@
 
     "remove" = "Remove";
 
+
+
+
     // Test
     "howTo" = "How To:";
     "toAvoid" = "To Avoid:";
     //
     "howToTest" = "This is the first bullet point\nI wonder if this works\nHow about if I write a really long sentence like this one with many words\nWhat about a short one?";
     "toAvoidTest" = "Don't do this\nDefinitely don't do this\nThis would be best to avoid";
+
+
+
+
 
 //
 // Calendar //
@@ -113,12 +120,46 @@
     "tracking" = "Tracking";
         //
         // Time Scales
-        "1week" = "1 Week";
-        "1month" = "1 Month";
-        "3months" = "3 Months";
-        "6months" = "6 Months";
-        "1year" = "1 year";
+        "1week" = "Current Week";
+        "1month" = "Current Month";
+        "3months" = "Last 3 Months";
+        "6months" = "Last 6 Months";
+        "1year" = "Last Year";
         "all" = "All";
+
+        //
+        // Add ons to dates 1st/2nd/3rd/th
+        "st" = "st";
+        "nd" = "nd";
+        "rd" = "rd";
+        "th" = "th";
+        //
+        // Days of week as Character
+        "mondayChar" = "Mon";
+        "tuesdayChar" = "Tues";
+        "wednesdayChar" = "Wed";
+        "thursdayChar" = "Thurs";
+        "fridayChar" = "Fri";
+        "saturdayChar" = "Sat";
+        "sundayChar" = "Sun";
+
+        //
+        "currentWeek" = "Current Week";
+        //
+        "january" = "January";
+        "february" = "February";
+        "march" = "March";
+        "april" = "April";
+        "may" = "May";
+        "june" = "June";
+        "july" = "July";
+        "august" = "August";
+        "september" = "September";
+        "october" = "October";
+        "november" = "November";
+        "december" = "December";
+
+
 
 //
 // Mind & Body //

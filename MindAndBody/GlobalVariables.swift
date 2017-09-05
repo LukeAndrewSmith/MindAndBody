@@ -64,8 +64,32 @@ var weekProgress = Int()
 var monthProgress = Int()
 
 // Monday - Sunday
-var weekTrackingDictionary: [Int:Int] = [:]
+var weekTrackingDictionary: [Int:Int] =
+    // Test
+    [07:10,
+    08:15,
+    09:25,
+    10:40,
+    11:60]
+    // [:]
 // All tracking in % of weeks
-var trackingDictionary: [Int:[Int:[Int:Int]]] = [:]
+var trackingDictionary: [Int:[Int:[Int:Int]]] =
+    // Test
+    [2017:  [07: [3: 70,
+                  10: 75,
+                  17: 80,
+                  24: 85],
+            08: [1: 90,
+                   8: 95,
+                   15: 70,
+                   22: 80,
+                   29: 90],
+            09: [04: 100,
+                   11: 100,
+                   18: 97]
+            ]
+    ]
+    // [:]
+
 // All tracking in % of months
 var monthTrackingDictionary: [Int:[Int:Int]] = [:]
