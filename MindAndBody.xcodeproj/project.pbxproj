@@ -112,7 +112,6 @@
 		072829E21EA7D3880090164A /* WorkoutChoiceFinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829E11EA7D3880090164A /* WorkoutChoiceFinal.swift */; };
 		072829E51EA7D40C0090164A /* WorkoutChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829E41EA7D40C0090164A /* WorkoutChoiceCustom.swift */; };
 		072829EB1EA8A26A0090164A /* WorkoutSessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */; };
-		0728F3E51E1E9C0E00EA409B /* CalendarScreenDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728F3E41E1E9C0E00EA409B /* CalendarScreenDetail.swift */; };
 		072900001F4D713A0048A355 /* forefootBounces.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729FFFC1F4D713A0048A355 /* forefootBounces.png */; };
 		072900011F4D713A0048A355 /* forefootBounces1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729FFFD1F4D713A0048A355 /* forefootBounces1.png */; };
 		072900021F4D713A0048A355 /* forefootBounces2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729FFFE1F4D713A0048A355 /* forefootBounces2.png */; };
@@ -1505,7 +1504,6 @@
 		072829E11EA7D3880090164A /* WorkoutChoiceFinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutChoiceFinal.swift; sourceTree = "<group>"; };
 		072829E41EA7D40C0090164A /* WorkoutChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutChoiceCustom.swift; sourceTree = "<group>"; };
 		072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutSessionScreen.swift; sourceTree = "<group>"; };
-		0728F3E41E1E9C0E00EA409B /* CalendarScreenDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarScreenDetail.swift; sourceTree = "<group>"; };
 		072900041F4D713F0048A355 /* aSkips.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aSkips.png; sourceTree = "<group>"; };
 		072900051F4D713F0048A355 /* aSkips1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aSkips1.png; sourceTree = "<group>"; };
 		072900061F4D713F0048A355 /* aSkips2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aSkips2.png; sourceTree = "<group>"; };
@@ -2934,7 +2932,6 @@
 			isa = PBXGroup;
 			children = (
 				07995A381E893E590009C9B1 /* CalendarScreen.swift */,
-				0728F3E41E1E9C0E00EA409B /* CalendarScreenDetail.swift */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -8241,7 +8238,6 @@
 				07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */,
 				075A0DB81E8C55680008E014 /* WarmupChoiceCustom.swift in Sources */,
 				072829E51EA7D40C0090164A /* WorkoutChoiceCustom.swift in Sources */,
-				0728F3E51E1E9C0E00EA409B /* CalendarScreenDetail.swift in Sources */,
 				076C68461ED58D65009160C2 /* StretchingScreen.swift in Sources */,
 				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,

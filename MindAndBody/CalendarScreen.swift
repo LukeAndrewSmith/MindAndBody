@@ -11,20 +11,9 @@ import UIKit
 
 
 //
-// Custom Calendar Cell -----------------------------------------------------------------------------------------------------------------------
-//
-class CalendarCell: UICollectionViewCell {
-    //
-    @IBOutlet weak var cellBackgroundView: UIView!
-    @IBOutlet weak var dayLabel: UILabel!
-    @IBOutlet weak var activitiesLabel: UILabel!
-}
-
-
-//
 // Calendar Class -----------------------------------------------------------------------------------------------------------------------------
 //
-class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class CalendarScreen: UIViewController {
     
     
 //
@@ -33,7 +22,6 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //
-        collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
     }
     
     
@@ -75,16 +63,14 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             ]
     ]
     
-    // Outlets
-    @IBOutlet weak var navigationBar: UINavigationItem!
-    
-    // Collection View
-    @IBOutlet weak var collectionView: UICollectionView!
-   
     //
-    @IBOutlet weak var scheduleLabel: UILabel!
-    
-    
+    // Outlets
+    // Navigation Bar
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    // Background Image
+    @IBOutlet weak var backgroundImage: UIImageView!
+    let backgroundBlur = UIVisualEffectView()
+
     
     
 //
@@ -105,6 +91,41 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughC")
         }
         
+        
+        
+        
+        //
+        // Background Image
+        backgroundImage.frame = view.bounds
+        
+        // Background Index
+        let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+        //
+        // Background Image/Colour
+        if backgroundIndex < backgroundImageArray.count {
+            //
+            backgroundImage.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
+        } else if backgroundIndex == backgroundImageArray.count {
+            //
+            backgroundImage.image = nil
+            backgroundImage.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        }
+        //
+        // BackgroundBlur/Vibrancy
+        let backgroundBlurE = UIBlurEffect(style: .dark)
+        backgroundBlur.effect = backgroundBlurE
+        backgroundBlur.isUserInteractionEnabled = false
+        //
+        backgroundBlur.frame = backgroundImage.bounds
+        //
+        if backgroundIndex > backgroundImageArray.count {
+        } else {
+            view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
+        }
+        
+        
+        
+        
         // Navigation Bar
         //
         self.navigationController?.navigationBar.barTintColor = colour2
@@ -118,97 +139,6 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
         // View
         view.backgroundColor = UIColor(red:0.08, green:0.08, blue:0.08, alpha:1.0)
         
-        
-        
-        //
-        scheduleLabel.backgroundColor = colour2
-        scheduleLabel.tintColor = colour1
-        scheduleLabel.textColor = colour1
-        
-        
-        
-        
-        
-        // Collection View
-        //
-        collectionView?.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-    }
-    
-    
-//
-// Collection View --------------------------------------------------------------------------------------------------------
-//
-    // Number of sections
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    // Number of items
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
-    }
-    
-    // Cell for row
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
-        
-        //
-        cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-        
-        // Backround View
-        //
-        let screenHeight = UIScreen.main.bounds.height - (navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height
-        let screenWidth = UIScreen.main.bounds.width
-        let ratio = screenHeight / screenWidth
-        //
-        let width = cell.frame.size.width - 40
-        let height = width * ratio
-        //
-        if indexPath.item % 2 == 0 {
-            cell.cellBackgroundView.frame = CGRect(x: 25, y: 15, width: width, height: height)
-        } else {
-            cell.cellBackgroundView.frame = CGRect(x: 15, y: 15, width: width, height: height)
-        }
-        //
-        cell.cellBackgroundView.layer.cornerRadius = 5
-        cell.cellBackgroundView.layer.masksToBounds = true
-        cell.cellBackgroundView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        // Day Title
-        //
-        cell.dayLabel.frame = CGRect(x: 0, y: 0, width: cell.cellBackgroundView.frame.size.width, height: 36.75)
-        //
-        cell.dayLabel.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        cell.dayLabel.textColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-        //
-        cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        cell.dayLabel.textAlignment = .center
-        //
-        cell.dayLabel.text = NSLocalizedString(dayArray[indexPath.item], comment: "")
-        
-        // Activities Label
-        //
-        cell.activitiesLabel.frame = CGRect(x: 10, y: 36.75, width: cell.cellBackgroundView.frame.size.width - 20, height: cell.cellBackgroundView.frame.size.height - 36.75)
-        cell.activitiesLabel.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        //
-        cell.activitiesLabel.numberOfLines = 0
-        //
-        cell.activitiesLabel.textColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-        cell.activitiesLabel.font = UIFont(name: "SFUIDisplay-thin", size: 19)
-        cell.activitiesLabel.text = "• Yoga\n• Meditation\n\n• Warmup\n• Workout\n• Stretching\n• Workout\n• Stretching"
-        //
-        return cell
-    }
-    
-    // Did select
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Selected Day
-        //
-        selectedDay = indexPath.item
-        // Segue to Detail
-        performSegue(withIdentifier: "calendarDetail", sender: (Any).self)
-        // Deselect
-        collectionView.deselectItem(at: indexPath, animated: false)
     }
     
     
@@ -236,15 +166,6 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             if let destinationViewController = segue.destination as? SlideMenuView {
                 destinationViewController.transitioningDelegate = self
             }
-        } else {
-            // Remove back button text
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            navigationItem.backBarButtonItem = backItem
-            //
-            let destinationVC = segue.destination as! CalendarScreenDetail
-            //
-            destinationVC.selectedDay = selectedDay
         }
     }
     
@@ -344,63 +265,6 @@ class CalendarScreen: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             //
             label.text = NSLocalizedString("mindBodyC2", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-        //
-        case 2:
-            //
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 10, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 44, width: (self.view.frame.size.width / 2) - 10, height: collectionView.frame.size.height / 2.1))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            //
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            //
-            label.center.y = UIApplication.shared.statusBarFrame.height + navigationBarHeight + (collectionView.frame.size.height * 4/5)
-            label.text = NSLocalizedString("mindBodyC3", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-        //
-        case 3:
-            //
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            //
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            
-            //
-            label.text = NSLocalizedString("mindBodyC4", comment: "")
             UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
         //
         default: break

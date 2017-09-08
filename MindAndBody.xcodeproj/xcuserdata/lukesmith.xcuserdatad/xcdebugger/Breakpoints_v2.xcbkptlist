@@ -25,92 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MindAndBody/CircuitChoiceG.swift"
-            timestampString = "525207407.022681"
+            filePath = "MindAndBody/TrackingScreen.swift"
+            timestampString = "526508015.030395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "CircuitChoiceG"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MindAndBody/WorkoutChoiceFinal.swift"
-            timestampString = "525262708.642289"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2429"
-            endingLineNumber = "2429"
-            landmarkName = "WorkoutChoiceFinal"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MindAndBody.WorkoutChoiceFinal.emptyString.getter : Swift.String"
-                  moduleName = "MindAndBody"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/WorkoutChoiceFinal.swift"
-                  timestampString = "525208535.904593"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2511"
-                  endingLineNumber = "2511"
-                  offsetFromSymbolStart = "60">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MindAndBody.WorkoutChoiceFinal.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; MindAndBody.WorkoutChoiceFinal"
-                  moduleName = "MindAndBody"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/WorkoutChoiceFinal.swift"
-                  timestampString = "525208535.907828"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2511"
-                  endingLineNumber = "2511"
-                  offsetFromSymbolStart = "107028">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MindAndBody.WorkoutChoiceFinal.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;MindAndBody.WorkoutChoiceFinal&gt;"
-                  moduleName = "MindAndBody"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/WorkoutChoiceFinal.swift"
-                  timestampString = "525208535.910663"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2511"
-                  endingLineNumber = "2511"
-                  offsetFromSymbolStart = "106972">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MindAndBody/MeditationScreen.swift"
-            timestampString = "526142164.436461"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
-            landmarkName = "startTimer()"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
+            landmarkName = "drawGraph()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -120,13 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MindAndBody/MeditationScreen.swift"
-            timestampString = "526142164.436461"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "384"
-            endingLineNumber = "384"
-            landmarkName = "startTimer()"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
+            landmarkName = "updateWeekTracking()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/TrackingScreen.swift"
-            timestampString = "526298070.72918"
+            timestampString = "526508015.030395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "390"
@@ -153,11 +74,363 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/TrackingScreen.swift"
-            timestampString = "526298070.72918"
+            timestampString = "526508015.030395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "387"
-            endingLineNumber = "387"
+            startingLineNumber = "398"
+            endingLineNumber = "398"
+            landmarkName = "returnChartPoints()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/TrackingScreen.swift"
+            timestampString = "526552334.548505"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1035"
+            endingLineNumber = "1035"
+            landmarkName = "returnXAxisModel(xAxisValues:titleLabelSettings:axisLabelSettings:xAxisTitle:generator:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MindAndBody.TrackingScreen.returnXAxisModel (xAxisValues : Swift.Array&lt;SwiftCharts.ChartAxisValue&gt;, titleLabelSettings : SwiftCharts.ChartLabelSettings, axisLabelSettings : SwiftCharts.ChartLabelSettings, xAxisTitle : Swift.String, generator : SwiftCharts.ChartAxisGeneratorMultiplier) -&gt; SwiftCharts.ChartAxisModel"
+                  moduleName = "MindAndBody"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/TrackingScreen.swift"
+                  timestampString = "526484559.235848"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1042"
+                  endingLineNumber = "1042"
+                  offsetFromSymbolStart = "2476">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MindAndBody.TrackingScreen.returnXAxisModel (xAxisValues : Swift.Array&lt;SwiftCharts.ChartAxisValue&gt;, titleLabelSettings : SwiftCharts.ChartLabelSettings, axisLabelSettings : SwiftCharts.ChartLabelSettings, xAxisTitle : Swift.String, generator : SwiftCharts.ChartAxisGeneratorMultiplier) -&gt; SwiftCharts.ChartAxisModel"
+                  moduleName = "MindAndBody"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/TrackingScreen.swift"
+                  timestampString = "526484559.237843"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1042"
+                  endingLineNumber = "1042"
+                  offsetFromSymbolStart = "16536">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
+            landmarkName = "updateWeekTracking()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/TrackingScreen.swift"
+            timestampString = "526552535.975534"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "565"
+            endingLineNumber = "565"
+            landmarkName = "returnChartPoints()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/TrackingScreen.swift"
+            timestampString = "526552535.975534"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "546"
+            endingLineNumber = "546"
+            landmarkName = "returnChartPoints()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "558"
+            endingLineNumber = "558"
+            landmarkName = "updateTracking()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "559"
+            endingLineNumber = "559"
+            landmarkName = "updateTracking()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(extension in MindAndBody):__ObjC.UIViewController.updateTracking () -&gt; ()"
+                  moduleName = "MindAndBody"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/GlobalFunctions.swift"
+                  timestampString = "526505503.97659"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "449"
+                  endingLineNumber = "449"
+                  offsetFromSymbolStart = "12208">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(extension in MindAndBody):__ObjC.UIViewController.updateTracking () -&gt; ()"
+                  moduleName = "MindAndBody"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/GlobalFunctions.swift"
+                  timestampString = "526505503.978358"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "449"
+                  endingLineNumber = "449"
+                  offsetFromSymbolStart = "46052">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "596"
+            endingLineNumber = "596"
+            landmarkName = "updateTracking()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "538"
+            endingLineNumber = "538"
+            landmarkName = "updateTracking()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "544"
+            endingLineNumber = "544"
+            landmarkName = "updateTracking()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "548"
+            endingLineNumber = "548"
+            landmarkName = "updateTracking()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "783"
+            endingLineNumber = "783"
+            landmarkName = "updateMonthTracking()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "788"
+            endingLineNumber = "788"
+            landmarkName = "updateMonthTracking()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "801"
+            endingLineNumber = "801"
+            landmarkName = "updateMonthTracking()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "671"
+            endingLineNumber = "671"
+            landmarkName = "updateTracking()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "631"
+            endingLineNumber = "631"
+            landmarkName = "updateTracking()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/GlobalFunctions.swift"
+            timestampString = "526571716.893564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "454"
+            endingLineNumber = "454"
+            landmarkName = "updateWeekTracking()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/TrackingScreen.swift"
+            timestampString = "526552535.975534"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "507"
+            endingLineNumber = "507"
+            landmarkName = "returnChartPoints()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/TrackingScreen.swift"
+            timestampString = "526552641.746852"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "519"
+            endingLineNumber = "519"
             landmarkName = "returnChartPoints()"
             landmarkType = "7">
          </BreakpointContent>

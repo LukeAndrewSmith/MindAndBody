@@ -38,13 +38,11 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         super.viewDidLoad()
         
         // Walkthrough
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough1" : false])
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough1") == false {
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough") == false {
             let delayInSeconds = 0.5
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 self.walkthroughMindBody()
             }
-            UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough1")
         }
         
         // Colours

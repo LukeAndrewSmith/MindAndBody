@@ -118,6 +118,7 @@
 //
 // Tracking //
     "tracking" = "Tracking";
+    "trackingWarning" = "No data recorded yet";
         //
         // Time Scales
         "1week" = "Current Week";
