@@ -17,24 +17,18 @@ import UIKit
 class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    
+    //
     @IBOutlet weak var tableView: UITableView!
     
-    //
-    @IBOutlet weak var menuButton: UIButton!
-    //
-    @IBOutlet weak var stackViewTitle: UIStackView!
-    @IBOutlet weak var logoView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
     
     //
-    @IBOutlet weak var mind: UIButton!
-    @IBOutlet weak var body: UIButton!
-    @IBOutlet weak var other: UIButton!
+    let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+    let backgroundImageView = UIImageView()
+    let backgroundBlur = UIVisualEffectView()
     
-
-    // Background Colour View
-    let backView = UIView()
-
+    
     // Selected Topic
     var selectedTopic = [0,0]
     
@@ -56,116 +50,20 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let blur2 = UIVisualEffectView()
     let blur3 = UIVisualEffectView()
 
-//
-// View will appear ------------------------------------------------------------------------------------
-//
-    let blur4 = UIVisualEffectView()
-    var addedToApplication = false
-    override func viewWillAppear(_ animated: Bool) {
-        //
-        //
-        if addedToApplication == false {
-            let blurE4 = UIBlurEffect(style: .dark)
-            self.blur4.effect = blurE4
-            self.blur4.frame = UIApplication.shared.statusBarFrame
-            self.blur4.isUserInteractionEnabled = false
-            //
-            view.insertSubview(blur4, aboveSubview: tableView)
-            //
-        }
-    }
-    
-
-//
-// View will dissappear ------------------------------------------------------------------------------------
-//
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        //
-        if addedToApplication == true {
-            //
-            blur4.removeFromSuperview()
-        }
-    }
-  
     
 //
 // View did load ------------------------------------------------------------------------------------
 //
-    //
-    let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
-    let backgroundImageView = UIImageView()
+
+
 
    //
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        // Blurs
-        let blurE = UIBlurEffect(style: .dark)
-        blur.effect = blurE
-        let vibrancyE = UIVibrancyEffect(blurEffect: blurE)
-        blur.effect = vibrancyE
-        blur.frame = CGRect(x: 0, y: 0, width: titleLabel.frame.size.width * 1.1, height: titleLabel.frame.size.height * 0.8)
-        blur.center.x = stackViewTitle.center.x
-        blur.center.y = stackViewTitle.center.y + (stackViewTitle.frame.size.height / 4)
-        blur.layer.cornerRadius = titleLabel.frame.size.height / 3
-        blur.clipsToBounds = true
-        blur.isUserInteractionEnabled = false
-        view.addSubview(blur)
-        view.sendSubview(toBack: blur)
         //
-        let blurE2 = UIBlurEffect(style: .dark)
-        blur2.effect = blurE2
-        let vibrancyE2 = UIVibrancyEffect(blurEffect: blurE2)
-        blur2.effect = vibrancyE2
-        blur2.frame = CGRect(x: 0, y: 0, width: logoView!.frame.size.width * 1.1, height: logoView!.frame.size.height * 1.1)
-        blur2.center.x = stackViewTitle.center.x
-        blur2.center.y = stackViewTitle.center.y - (stackViewTitle.frame.size.height / 4)
-        blur2.layer.cornerRadius = logoView.frame.size.height / 2
-        blur2.clipsToBounds = true
-        blur2.isUserInteractionEnabled = false
-        view.addSubview(blur2)
-        view.sendSubview(toBack: blur2)
-        //
-        //
-        let blurE3 = UIBlurEffect(style: .dark)
-        blur3.effect = blurE3
-        let vibrancyE3 = UIVibrancyEffect(blurEffect: blurE3)
-        blur3.effect = vibrancyE3
-        blur3.frame = CGRect(x: 0, y: 0, width: menuButton.bounds.width * 0.7, height: menuButton.bounds.height * 0.7)
-        blur3.center = menuButton.center
-        blur3.layer.cornerRadius = menuButton.frame.size.height * 0.35
-        blur3.clipsToBounds = true
-        blur3.isUserInteractionEnabled = false
-        view.addSubview(blur3)
-        view.sendSubview(toBack: blur3)
-        
-        
-        // Colours
-        //
-        switch backgroundIndex {
-        // All Black
-        case 1,3,backgroundImageArray.count:
-            titleLabel.textColor = colour2
-            logoView.tintColor = colour2
-            menuButton.tintColor = colour2
-        // All White
-        case 0,2,3,4,5,6:
-            titleLabel.textColor = colour1
-            logoView.tintColor = colour1
-            menuButton.tintColor = colour1
-        //
-        default: break
-        }
-
-        //
-        mind.backgroundColor = colour2
-        body.backgroundColor = colour2
-        other.backgroundColor = colour2
-        
-        //
-        tableView.backgroundColor = colour1
+        tableView.backgroundColor = .clear
+        tableView.backgroundView = UIView()
 
 
         // Background Image
@@ -182,7 +80,24 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         //
         self.view.addSubview(backgroundImageView)
         self.view.sendSubview(toBack: backgroundImageView)
-        
+        // BackgroundBlur/Vibrancy
+        let backgroundBlurE = UIBlurEffect(style: .dark)
+        backgroundBlur.effect = backgroundBlurE
+        backgroundBlur.isUserInteractionEnabled = false
+        //
+        backgroundBlur.frame = backgroundImageView.bounds
+        //
+        view.insertSubview(backgroundBlur, aboveSubview: backgroundImageView)
+
+        // Tableview top view
+        let topView = UIVisualEffectView()
+        let topViewE = UIBlurEffect(style: .dark)
+        topView.effect = topViewE
+        topView.isUserInteractionEnabled = false
+        //
+        topView.frame = CGRect(x: 0, y: tableView.frame.minY - tableView.bounds.height, width: tableView.bounds.width, height: tableView.bounds.height)
+        //
+        tableView.addSubview(topView)
         
         // Swipe
         let rightSwipe = UISwipeGestureRecognizer()
@@ -197,34 +112,15 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             UserDefaults.standard.set(true, forKey: "informationWalkthrough")
         }
 
-        //  Navigation Bar
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
         //
+        //  Navigation Bar
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 23)!]
+        navigationBar.title = NSLocalizedString("lessons", comment: "")
         self.navigationController?.navigationBar.barTintColor = colour2
         self.navigationController?.navigationBar.tintColor = colour1
     }
   
-    
-//
-// Mind, Body Other button functions ---------------------------------------------------
-//
-    // Mind
-    @IBAction func mindAction(_ sender: Any) {
-        let indexPathScroll = NSIndexPath(row: 0, section: 0)
-        tableView.scrollToRow(at: indexPathScroll as IndexPath, at: .top, animated: true)
-    }
-    // Body
-    @IBAction func bodyAction(_ sender: Any) {
-        let indexPathScroll = NSIndexPath(row: 0, section: 1)
-        tableView.scrollToRow(at: indexPathScroll as IndexPath, at: .top, animated: true)
-    }
-    // Other
-    @IBAction func otherAction(_ sender: Any) {
-        let indexPathScroll = NSIndexPath(row: 0, section: 2)
-        tableView.scrollToRow(at: indexPathScroll as IndexPath, at: .top, animated: true)
-    }
-    
-    
+ 
 //
 // TableView ------------------------------------------------------------------------------------
 //
@@ -252,19 +148,18 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         // Header
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)!
-        header.textLabel?.textColor = .black
+        header.textLabel?.textColor = colour1
         header.textLabel?.text = header.textLabel?.text?.capitalized
         
         //
-        header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        header.backgroundColor = .clear
+        header.backgroundView = UIView()
         
-        // Border
-        let border = CALayer()
-        border.backgroundColor = colour2.cgColor
-        border.frame = CGRect(x: 15, y: header.frame.size.height-1, width: self.view.frame.size.height, height: 1)
-        //
-        header.layer.addSublayer(border)
-        header.layer.masksToBounds = true
+        let seperator = CALayer()
+        seperator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
+        seperator.backgroundColor = colour1.cgColor
+        seperator.opacity = 0.5
+        header.layer.addSublayer(seperator)
     }
     
     // Header Height
@@ -299,8 +194,10 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             //
             cell.textLabel?.text = NSLocalizedString(rowArray[indexPath.section][indexPath.row], comment: "")
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            cell.backgroundColor = .clear
+            cell.backgroundView = UIView()
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            cell.textLabel?.textColor = colour1
             //
             // Indicator
             cell.accessoryType = .disclosureIndicator
@@ -335,6 +232,27 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        for cell in tableView.visibleCells {
+            let hiddenFrameHeight = scrollView.contentOffset.y + navigationController!.navigationBar.frame.size.height - cell.frame.origin.y + 2
+            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
+                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
+            }
+        }
+    }
+    
+    func maskCell(cell: UITableViewCell, margin: Float) {
+        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
+        cell.layer.masksToBounds = true
+    }
+    
+    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
+        let mask = CAGradientLayer()
+        mask.frame = cell.bounds
+        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
+        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
+        return mask;
+    }
 
 //
 // Button Actions ------------------------------------------------------------------------------------
@@ -386,10 +304,9 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         self.performSegue(withIdentifier: "openMenu", sender: nil)
     }
     
-    @IBAction func menuButtonAction(_ sender: Any) {
+    @IBAction func slideMenuAction(_ sender: Any) {
         self.performSegue(withIdentifier: "openMenu", sender: nil)
     }
-    
     
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

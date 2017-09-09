@@ -296,50 +296,6 @@ class CalendarScreen: UIViewController {
 
 
 //
-// Calendar Screen Extension -----------------------------------------------------------------------------------------------------------
-//
-extension CalendarScreen : UICollectionViewDelegateFlowLayout {
-    //
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let width = collectionView.frame.size.width / 2
-        
-        let screenHeight = UIScreen.main.bounds.height - (navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.height
-        let screenWidth = UIScreen.main.bounds.width
-        let ratio = screenHeight / screenWidth
-        
-        // Height
-        let width2 = width - 40
-        let height2 = width2 * ratio
-        
-        let height = height2 + 30
-        
-        return CGSize(width: width, height: height)
-    }
-    
-    //
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    }
-    
-    //
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    //
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-//
-}
-
-
-//
 // Slide Menu Extension
 extension CalendarScreen: UIViewControllerTransitioningDelegate {
     // Present

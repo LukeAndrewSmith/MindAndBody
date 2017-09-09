@@ -33,15 +33,15 @@ class headerCell: UITableViewCell {
 class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //Outlets
-    @IBOutlet weak var MyPreferencesNavigationBar: UINavigationItem!
+    @IBOutlet weak var navigationBar: UINavigationItem!
     
     //
     @IBOutlet weak var tableView: UITableView!
     
-    
-    // Background Colour View
-    let backView = UIView()
-    
+    //
+    let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+    let backgroundImageView = UIImageView()
+    let backgroundBlur = UIVisualEffectView()
     
     //
     // Arrays
@@ -49,52 +49,13 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
 //
-// View will appear --------------------------------------------------------------------------------------------------------
-//
-    let blur4 = UIVisualEffectView()
-    var addedToApplication = false
-    override func viewWillAppear(_ animated: Bool) {
-        //
-        tableView.setContentOffset(CGPoint(x: 0, y: -20), animated: false)
-        
-        if addedToApplication == false {
-            let blurE4 = UIBlurEffect(style: .dark)
-            self.blur4.effect = blurE4
-            self.blur4.frame = UIApplication.shared.statusBarFrame
-            self.blur4.isUserInteractionEnabled = false
-            //
-            view.insertSubview(blur4, aboveSubview: tableView)
-            //
-        }
-    }
-    
-//
-// View will dissapear --------------------------------------------------------------------------------------------------------
-//
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        //
-        if addedToApplication == true {
-        //
-        blur4.removeFromSuperview()
-        }
-    }
-    
-
-    
-//
 // View did load --------------------------------------------------------------------------------------------------------
 //
-    //
-    let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
-    let backgroundImageView = UIImageView()
-
     //
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        //
         // Background Image
         backgroundImageView.frame = UIScreen.main.bounds
         backgroundImageView.contentMode = .scaleAspectFill
@@ -107,11 +68,33 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             backgroundImageView.backgroundColor = colour1
         }
         //
-        self.tableView.backgroundView = backgroundImageView
+        self.view.addSubview(backgroundImageView)
+        self.view.sendSubview(toBack: backgroundImageView)
+        //
+        // BackgroundBlur/Vibrancy
+        let backgroundBlurE = UIBlurEffect(style: .dark)
+        backgroundBlur.effect = backgroundBlurE
+        backgroundBlur.isUserInteractionEnabled = false
+        //
+        backgroundBlur.frame = backgroundImageView.bounds
+        //
+        view.insertSubview(backgroundBlur, aboveSubview: backgroundImageView)
+
+        // Tableview top view
+        let topView = UIVisualEffectView()
+        let topViewE = UIBlurEffect(style: .dark)
+        topView.effect = topViewE
+        topView.isUserInteractionEnabled = false
+        //
+        topView.frame = CGRect(x: 0, y: tableView.frame.minY - tableView.bounds.height, width: tableView.bounds.width, height: tableView.bounds.height)
+        //
+        tableView.addSubview(topView)
 
         
         // Initial TableView Position
         tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        tableView.backgroundColor = .clear
+        tableView.backgroundView = UIView()
         
         // Swipe to Menu
         let rightSwipe = UISwipeGestureRecognizer()
@@ -126,8 +109,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
         //  Navigation Bar
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
         //
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 23)!]
+        navigationBar.title = NSLocalizedString("profile", comment: "")
         self.navigationController?.navigationBar.barTintColor = colour2
         self.navigationController?.navigationBar.tintColor = colour1
         
@@ -152,13 +136,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
         switch indexPath.row {
-        case 0:
-            return view.bounds.height / 3
-        case 1,2,3:
-            return (view.bounds.height * (2/3)) / 3
-        default: break
+        case 4: return 49
+        default: return (view.bounds.height - 49) / 4
         }
-        return 0
     }
         
     
@@ -171,98 +151,50 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+
+        
         switch indexPath.row {
-        //
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! headerCell
+        case 4:
             //
-            cell.titleLabel.text = NSLocalizedString("profile", comment: "")
+            cell.textLabel?.text = "Update Schedule"
             //
-            cell.contentView.backgroundColor = .clear
-            //
-            cell.selectionStyle = .none
-            
-            //
-            // Blurs
-            blur.removeFromSuperview()
-            let blurE = UIBlurEffect(style: .dark)
-            blur.effect = blurE
-            let vibrancyE = UIVibrancyEffect(blurEffect: blurE)
-            blur.effect = vibrancyE
-            blur.frame = CGRect(x: 0, y: 0, width: cell.titleLabel!.frame.size.width * 1.1, height: cell.titleLabel!.frame.size.height * 0.8)
-            blur.center.x = cell.stackViewTitle.center.x
-            blur.center.y = cell.stackViewTitle.center.y + (cell.stackViewTitle.frame.size.height / 4)
-            blur.layer.cornerRadius = cell.titleLabel.frame.size.height / 3
-            blur.clipsToBounds = true
-            blur.isUserInteractionEnabled = false
-            cell.addSubview(blur)
-            cell.sendSubview(toBack: blur)
-            //
-            blur2.removeFromSuperview()
-            let blurE2 = UIBlurEffect(style: .dark)
-            blur2.effect = blurE2
-            let vibrancyE2 = UIVibrancyEffect(blurEffect: blurE2)
-            blur2.effect = vibrancyE2
-            blur2.frame = CGRect(x: 0, y: 0, width: cell.logoView!.frame.size.width * 1.1, height: cell.logoView!.frame.size.height * 1.1)
-            blur2.center.x = cell.stackViewTitle.center.x
-            blur2.center.y = cell.stackViewTitle.center.y - (cell.stackViewTitle.frame.size.height / 4)
-            blur2.layer.cornerRadius = cell.logoView.frame.size.height / 2
-            blur2.clipsToBounds = true
-            blur2.isUserInteractionEnabled = false
-            cell.addSubview(blur2)
-            cell.sendSubview(toBack: blur2)
-            
-            //
-            blur3.removeFromSuperview()
-            let blurE3 = UIBlurEffect(style: .dark)
-            blur3.effect = blurE3
-            let vibrancyE3 = UIVibrancyEffect(blurEffect: blurE3)
-            blur3.effect = vibrancyE3
-            blur3.frame = CGRect(x: 0, y: 0, width: cell.menuButton.bounds.width * 0.7, height: cell.menuButton.bounds.height * 0.7)
-            blur3.center = cell.menuButton.center
-            blur3.layer.cornerRadius = cell.menuButton.frame.size.height * 0.35
-            blur3.clipsToBounds = true
-            blur3.isUserInteractionEnabled = false
-            cell.addSubview(blur3)
-            cell.sendSubview(toBack: blur3)
-            //
-            // Colours
-            //
-            switch backgroundIndex {
-            // All Black
-            case 1,3,backgroundImageArray.count:
-                cell.titleLabel.textColor = colour2
-                cell.logoView.tintColor = colour2
-                cell.menuButton.tintColor = colour2
-            // All White
-            case 0,2,3,4,5,6:
-                cell.titleLabel.textColor = colour1
-                cell.logoView.tintColor = colour1
-                cell.menuButton.tintColor = colour1
-            //
-            default: break
-            }
-            //
-            return cell
-        //
-        case 1,2,3:
-            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            //
-            // Border
-            cell.backgroundColor = colour1
-            //
-            cell.textLabel?.text = sectionArray[indexPath.row - 1]
-            //
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.textLabel?.textAlignment = .center
-            cell.accessoryType = .disclosureIndicator
+            cell.textLabel?.textColor = colour1
             //
-            return cell
-        //
-        default: break
+            // BackgroundBlur/Vibrancy
+            let backgroundBlur = UIVisualEffectView()
+            let backgroundBlurE = UIBlurEffect(style: .dark)
+            backgroundBlur.effect = backgroundBlurE
+            backgroundBlur.isUserInteractionEnabled = false
+            //
+            backgroundBlur.frame = cell.bounds
+            //
+            cell.backgroundColor = colour3
+            cell.backgroundView = backgroundBlur
+            
+
+        default:
+            //
+            cell.backgroundColor = .clear
+            cell.backgroundView = UIView()
+            //
+            cell.textLabel?.text = sectionArray[indexPath.row]
+            //
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+            cell.textLabel?.textAlignment = .center
+            cell.textLabel?.textColor = colour1
+            cell.accessoryType = .disclosureIndicator
+            // Border
+            let seperator = CALayer()
+            seperator.frame = CGRect(x: 0, y: (view.bounds.height - 49) / 4, width: view.frame.size.width, height: 1)
+            seperator.backgroundColor = colour1.cgColor
+            seperator.opacity = 0.5
+            cell.layer.addSublayer(seperator)
         }
         //
-        return UITableViewCell()
+        return cell
     }
 
     // didSelectRow
@@ -410,6 +342,11 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
         self.performSegue(withIdentifier: "openMenu", sender: nil)
     }
+    
+    @IBAction func slideMenuAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "openMenu", sender: nil)
+    }
+    
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //

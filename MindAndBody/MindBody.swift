@@ -402,8 +402,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
 //            yogaBottom.constant = 15
 //            meditationBottom.constant = 15
 //        }
-        
-        view.sendSubview(toBack: backgroundImage)
     }
     
     
