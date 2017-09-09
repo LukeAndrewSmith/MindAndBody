@@ -74,7 +74,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         super.viewDidLoad()
         
         // Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        updateWeekTracking()
+//        updateWeekTracking()
 //        updateTracking()
 //        updateMonthTracking()
 
@@ -96,7 +96,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         okButton.backgroundColor = colour1
         okButton.setTitleColor(colour3, for: .normal)
         okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
-        okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
         okButton.frame = CGRect(x: 0, y: 147, width: self.view.frame.size.width - 20, height: 49)
         
@@ -113,7 +113,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         // Navigation Controller
         self.navigationController?.navigationBar.barTintColor = colour2
         // Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         
         // Navigation Title
         navigationBar.title = NSLocalizedString("tracking", comment: "")
@@ -155,7 +155,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             drawGraph()
         } else {
             let warningLabel = UILabel()
-            warningLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+            warningLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
             warningLabel.text = NSLocalizedString("trackingWarning", comment: "")
             warningLabel.textAlignment = .center
             warningLabel.textColor = colour1

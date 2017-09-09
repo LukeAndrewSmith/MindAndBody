@@ -114,7 +114,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
         //
         //  Navigation Bar
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         navigationBar.title = NSLocalizedString("lessons", comment: "")
         self.navigationController?.navigationBar.barTintColor = colour2
         self.navigationController?.navigationBar.tintColor = colour1
@@ -232,6 +232,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     }
     
+    // Mask cells under clear header
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {
             let hiddenFrameHeight = scrollView.contentOffset.y + navigationController!.navigationBar.frame.size.height - cell.frame.origin.y + 2

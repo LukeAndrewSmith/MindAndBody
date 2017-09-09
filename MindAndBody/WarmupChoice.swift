@@ -70,7 +70,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         //
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        fullBody.layer.borderWidth = 6
+        fullBody.layer.borderWidth = 5
         fullBody.layer.borderColor = colour2.cgColor
         fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
         fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -79,7 +79,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         //
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        upperBody.layer.borderWidth = 6
+        upperBody.layer.borderWidth = 5
         upperBody.layer.borderColor = colour2.cgColor
         upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
         upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -88,7 +88,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         //
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
         lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        lowerBody.layer.borderWidth = 6
+        lowerBody.layer.borderWidth = 5
         lowerBody.layer.borderColor = colour2.cgColor
         lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
         lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -97,15 +97,15 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         //
         cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
         cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        cardio.layer.borderWidth = 6
+        cardio.layer.borderWidth = 5
         cardio.layer.borderColor = colour2.cgColor
         cardio.titleLabel?.adjustsFontSizeToFitWidth = true
         cardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         cardio.titleLabel?.textAlignment = .center
         cardio.setTitleColor(colour2, for: .normal)
         //
-        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-        custom.layer.borderWidth = 7
+        custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        custom.layer.borderWidth = 5
         custom.layer.borderColor = colour2.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)

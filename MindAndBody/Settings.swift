@@ -71,7 +71,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         self.navigationController?.navigationBar.barTintColor = colour2
         self.navigationController?.navigationBar.tintColor = colour1
         // Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         // Navigation Title
         navigationBar.title = NSLocalizedString("settings", comment: "")
         // View
@@ -161,7 +161,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     // Section Titles
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return NSLocalizedString("homeScreenImage", comment: "")
+        case 0: return NSLocalizedString("backgroundImage", comment: "")
         case 1: return NSLocalizedString("defaultImage", comment: "")
         case 2: return NSLocalizedString("units", comment: "")
         case 3: return NSLocalizedString("restTime", comment: "")

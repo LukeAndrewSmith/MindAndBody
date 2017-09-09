@@ -899,11 +899,10 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let selectionWidth = self.view.frame.size.width - 20
                     let selectionHeight = CGFloat(147 + 49)
                     self.selectionView2.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
-
                     //
                     self.intervalBellTimeLabel.frame = CGRect(x: 0, y: 0, width: self.selectionView2.frame.size.width, height: 22)
                     //
-                    self.tableViewBells.frame = CGRect(x: 0, y: 0, width: 0, height: selectionHeight)
+                    self.tableViewBells.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
                     //
                     self.pickerViewDuration.frame = CGRect(x: 0, y: 0, width: self.selectionView2.frame.size.width, height: self.selectionView2.frame.size.height - 49)
                     //
@@ -1839,6 +1838,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     cell.layer.borderWidth = 1
                     //
                     cell.imageView?.image = #imageLiteral(resourceName: "Plus")
+                    cell.imageView?.tintColor = colour1
                     //
                     cell.contentView.transform = CGAffineTransform(scaleX: -1,y: 1);
                     cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
@@ -1849,17 +1849,18 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     cell.textLabel?.textColor = colour1
                     cell.tintColor = colour1
                     //
-                    cell.textLabel?.text = NSLocalizedString(bellsArray[intervalBellsArray[selectedPreset][indexPath.row]], comment: "")
-                    cell.textLabel?.adjustsFontSizeToFitWidth = true
-                    cell.imageView?.image = bellsImages[intervalBellsArray[selectedPreset][indexPath.row]]
-
-                    //
                     let timesArray = convertToHMS(time: 1, index: indexPath.row)
                     cell.detailTextLabel?.text = String(timesArray[0]) + "h " + String(timesArray[1]) + "m " + String(timesArray[2]) + "s"
                     cell.detailTextLabel?.adjustsFontSizeToFitWidth = false
                     //
                     cell.detailTextLabel?.textColor = colour1
                     cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
+                    //
+                    cell.textLabel?.text = NSLocalizedString(bellsArray[intervalBellsArray[selectedPreset][indexPath.row]], comment: "")
+                    cell.imageView?.image = bellsImages[intervalBellsArray[selectedPreset][indexPath.row]]
+                    cell.textLabel?.numberOfLines = 2
+                    cell.textLabel?.adjustsFontSizeToFitWidth = true
+                    cell.textLabel?.contentHuggingPriority(for: .horizontal)
                     //
                     cell.selectionStyle = .none
             }

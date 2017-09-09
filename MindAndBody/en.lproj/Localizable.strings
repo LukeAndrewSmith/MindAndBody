@@ -101,8 +101,7 @@
 
 
 //
-// Calendar //
-    "calendar" = "Calendar";
+// Schedule //
     "schedule" = "Schedule";
 
         "monday" = "Monday";
@@ -112,6 +111,14 @@
         "friday" = "Friday";
         "saturday" ="Saturday";
         "sunday" = "Sunday";
+        //
+        "mondayLetter" = "M";
+        "tuesdayLetter" = "T";
+        "wednesdayLetter" = "W";
+        "thursdayLetter" = "T";
+        "fridayLetter" = "F";
+        "saturdayLetter" = "S";
+        "sundayLetter" = "S";
 
 
 
@@ -1496,10 +1503,10 @@
     "settings" = "Settings";
         //
         // Titles //
-        "reset" = "Reset";
-        "defaultImage" = "Default Image";
-        "colour" = "Colour";
+        "backgroundImage" = "Background Image";
+        "defaultImage" = "Default Session Image";
         "restTime" = "Rest Times";
+        "reset" = "Reset";
 
         // Contents //
         // Presentation Style
@@ -1522,10 +1529,6 @@
         "resetWarningMessage" = "\nThis will reset the app to the state it was in when first downloaded.";
         //
         "resetWalkthroughWarningMessage" = "\nThis will reset the walkthrough.";
-
-
-        // Background Image //
-        "homeScreenImage" = "Home Screen Image";
 
         // Automatic Yoga //
         "automaticYoga" = "Automatic Yoga";
@@ -1677,7 +1680,7 @@
         "mindBody7" = "Information tab";
 
 
-        // Calendar
+        // Schedule
         "mindBodyC1" = "Weekly Schedule";
         "mindBodyC2" = "Schedule\n\nYou can create custom schedules, the one the app presents is under the '1' button.";
 //they show the session, time to perform the session, and the route to take from the homescreen to get to the session.";

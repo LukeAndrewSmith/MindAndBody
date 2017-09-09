@@ -81,7 +81,7 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         //
         cell.textLabel?.text = NSLocalizedString(rowTitleArray[indexPath.row], comment: "")
         //
-        cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+        cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.textLabel?.textAlignment = .left
         cell.backgroundColor = colour1
@@ -119,7 +119,7 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
                     toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! MindBodyNavigation
                 //
                 case 1:
-                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! CalendarNavigation
+                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! ScheduleNavigation
                 //
                 case 2:
                     toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! TrackingNavigation

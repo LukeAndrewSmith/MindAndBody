@@ -1065,7 +1065,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             //
             cell.textLabel?.text = NSLocalizedString(warmupMovementsDictionary[overviewArray[indexPath.section][indexPath.row]]!, comment: "")
             //
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.textLabel?.textAlignment = .left
             cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
@@ -1100,7 +1100,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             //
             cell.textLabel?.text = "- " + NSLocalizedString(presetsArray[indexPath.section][indexPath.row], comment: "") + " -"
             cell.textLabel?.textAlignment = .center
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.backgroundColor = colour1
             cell.textLabel?.textColor = colour2
@@ -1325,7 +1325,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
+        label.font = UIFont(name: "SFUIDisplay-thin", size: 22)
         label.textColor = .white
         //
         nextButton.frame = screenSize
@@ -1335,7 +1335,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
         backButton.setTitle("Back", for: .normal)
         backButton.titleLabel?.textAlignment = .left
-        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         backButton.titleLabel?.textColor = .white
         backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
         

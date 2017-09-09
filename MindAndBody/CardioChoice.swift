@@ -48,7 +48,7 @@ class CardioChoice: UIViewController  {
         hiit.setTitle(NSLocalizedString("hiit", comment: ""), for: UIControlState.normal)
         hiit.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         hiit.setTitleColor(colour2, for: .normal)
-        hiit.layer.borderWidth = 6
+        hiit.layer.borderWidth = 5
         hiit.layer.borderColor = colour2.cgColor
         hiit.titleLabel?.adjustsFontSizeToFitWidth = true
         hiit.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -56,7 +56,7 @@ class CardioChoice: UIViewController  {
         //
         custom.setTitle("C", for: .normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        custom.layer.borderWidth = 6
+        custom.layer.borderWidth = 5
         custom.layer.borderColor = colour2.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)

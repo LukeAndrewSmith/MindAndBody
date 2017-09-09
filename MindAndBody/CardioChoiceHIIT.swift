@@ -53,19 +53,19 @@ class CardioChoiceHIIT: UIViewController  {
         rowing.setTitle(NSLocalizedString("rowing", comment: ""), for: UIControlState.normal)
         rowing.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         rowing.setTitleColor(colour2, for: .normal)
-        rowing.layer.borderWidth = 6
+        rowing.layer.borderWidth = 5
         rowing.layer.borderColor = colour2.cgColor
         //
         biking.setTitle(NSLocalizedString("biking", comment: ""), for: UIControlState.normal)
         biking.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         biking.setTitleColor(colour2, for: .normal)
-        biking.layer.borderWidth = 6
+        biking.layer.borderWidth = 5
         biking.layer.borderColor = colour2.cgColor
         //
         running.setTitle(NSLocalizedString("running", comment: ""), for: UIControlState.normal)
         running.setTitleColor(colour2, for: .normal)
         running.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        running.layer.borderWidth = 6
+        running.layer.borderWidth = 5
         running.layer.borderColor = colour2.cgColor
         //
     }

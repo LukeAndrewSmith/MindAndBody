@@ -9,24 +9,6 @@
 import Foundation
 import UIKit
 
-
-//
-// Custom Profile Cells -------------------------------------------------------------------------------------------------------------------------
-//
-
-// Title Cell
-class headerCell: UITableViewCell {
-    //
-    @IBOutlet weak var titleLabel: UILabel!
-        
-    @IBOutlet weak var logoView: UIImageView!
-    
-    @IBOutlet weak var menuButton: UIButton!
-    
-    @IBOutlet weak var stackViewTitle: UIStackView!
-}
-
-
 //
 // Profile Class --------------------------------------------------------------------------------------------------------------------------------
 //
@@ -110,7 +92,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         //  Navigation Bar
         //
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         navigationBar.title = NSLocalizedString("profile", comment: "")
         self.navigationController?.navigationBar.barTintColor = colour2
         self.navigationController?.navigationBar.tintColor = colour1
@@ -180,11 +162,15 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.backgroundColor = .clear
             cell.backgroundView = UIView()
             //
-            cell.textLabel?.text = sectionArray[indexPath.row]
+            let centeredTextLabel = UILabel()
+            centeredTextLabel.text = sectionArray[indexPath.row]
+            centeredTextLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+            centeredTextLabel.textAlignment = .center
+            centeredTextLabel.sizeToFit()
+            centeredTextLabel.textColor = colour1
+            centeredTextLabel.center = CGPoint(x: view.bounds.width/2, y: (view.bounds.height - 49)/8)
+            cell.addSubview(centeredTextLabel)
             //
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            cell.textLabel?.textAlignment = .center
-            cell.textLabel?.textColor = colour1
             cell.accessoryType = .disclosureIndicator
             // Border
             let seperator = CALayer()
@@ -196,6 +182,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         return cell
     }
+    
 
     // didSelectRow
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

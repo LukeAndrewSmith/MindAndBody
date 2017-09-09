@@ -316,7 +316,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         navigationBar.title = "Mind & Body"
         // Appearance
         self.navigationController?.navigationBar.tintColor = colour1
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         self.navigationController?.navigationBar.barTintColor = colour2
         self.tabBarController?.tabBar.barTintColor = colour2
         UITabBar.appearance().barTintColor = colour2
@@ -336,7 +336,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         // Warmup
         Warmup.setTitle(NSLocalizedString("warmup", comment: ""), for: UIControlState.normal)
         Warmup.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        Warmup.layer.borderWidth = 6
+        Warmup.layer.borderWidth = 5
         Warmup.layer.borderColor = colour2.cgColor
         Warmup.titleLabel?.adjustsFontSizeToFitWidth = true
         Warmup.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -345,7 +345,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         // Workout
         Workout.setTitle(NSLocalizedString("workout", comment: ""), for: UIControlState.normal)
         Workout.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        Workout.layer.borderWidth = 6
+        Workout.layer.borderWidth = 5
         Workout.layer.borderColor = colour2.cgColor
         Workout.titleLabel?.adjustsFontSizeToFitWidth = true
         Workout.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -354,7 +354,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         // Stretching
         Stretching.setTitle(NSLocalizedString("stretching", comment: ""), for: UIControlState.normal)
         Stretching.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        Stretching.layer.borderWidth = 6
+        Stretching.layer.borderWidth = 5
         Stretching.layer.borderColor = colour2.cgColor
         Stretching.titleLabel?.adjustsFontSizeToFitWidth = true
         Stretching.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -363,7 +363,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         // Cardio
         Cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
         Cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        Cardio.layer.borderWidth = 6
+        Cardio.layer.borderWidth = 5
         Cardio.layer.borderColor = colour2.cgColor
         Cardio.titleLabel?.adjustsFontSizeToFitWidth = true
         Cardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -373,7 +373,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         Yoga.setTitle(NSLocalizedString("yoga", comment: ""), for: UIControlState.normal)
         Yoga.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         Yoga.titleLabel!.adjustsFontSizeToFitWidth = true
-        Yoga.layer.borderWidth = 6
+        Yoga.layer.borderWidth = 5
         Yoga.layer.borderColor = colour2.cgColor
         Yoga.titleLabel?.adjustsFontSizeToFitWidth = true
         Yoga.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
@@ -382,7 +382,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         // Meditation
         Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
         Meditation.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        Meditation.layer.borderWidth = 6
+        Meditation.layer.borderWidth = 5
         Meditation.layer.borderColor = colour2.cgColor
         Meditation.titleLabel?.adjustsFontSizeToFitWidth = true
         Meditation.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
