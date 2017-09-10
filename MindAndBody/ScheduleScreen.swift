@@ -34,6 +34,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var backgroundImage: UIImageView!
     let backgroundBlur = UIVisualEffectView()
 
+    // Content Arrays
+    var daySessionArray: [String] = ["Group 1 (sport)", "Group 1 (sport)", "Warmup -> Upper Body -> Default", "Workout -> Gym -> Classic -> Full Body -> Default"]
+    
     //
     // Variables
     // Days array
@@ -270,9 +273,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         switch tableView {
         case scheduleTable:
-            return 3 // +1
+            return daySessionArray.count + 1
         case scheduleChoiceTable:
-            return 2 // +1
+            return 1 + 1
         default:
             return 0
         }
@@ -292,7 +295,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         switch tableView {
         case scheduleTable:
             switch indexPath.row {
-            case 2:
+            case daySessionArray.count:
                 let editButton = UILabel()
                 editButton.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
                 editButton.textColor = colour1
@@ -324,7 +327,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 let dayLabel = UILabel()
                 dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
                 dayLabel.textColor = colour1
-                dayLabel.text = NSLocalizedString("Group 1 (sport)", comment: "")
+                dayLabel.text = NSLocalizedString(daySessionArray[indexPath.row], comment: "")
+                dayLabel.numberOfLines = 2
                 dayLabel.sizeToFit()
                 dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
                 cell.addSubview(dayLabel)
@@ -373,37 +377,57 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         case scheduleTable:
             //
             switch indexPath.row {
-            case 2:
+            case 4:
                 break
             default:
-                tableView.deselectRow(at: indexPath, animated: true)
-                //
-                let screenFrame = UIScreen.main.bounds
-                //
-                maskView1.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
-                maskView2.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
-                //
-                maskView1.frame = CGRect(x: 0, y: 0, width: screenFrame.width, height: UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.height)! + (tableView.bounds.height / 4))
-                maskView2.frame = CGRect(x: 0, y: screenFrame.height - 49, width: screenFrame.width, height: 49)
-                //
-                maskView1.backgroundColor = .black
-                maskView1.alpha = 0
-                maskView2.backgroundColor = .black
-                maskView2.alpha = 0
-                //
-                UIApplication.shared.keyWindow?.insertSubview(self.maskView1, aboveSubview: self.view)
-                UIApplication.shared.keyWindow?.insertSubview(self.maskView2, aboveSubview: self.view)
-                //
-                UIView.animate(withDuration: animationTime1, animations: {
-                    self.maskView1.alpha = 0.5
-                    self.maskView2.alpha = 0.5
-                })
-
-                // Incriment table counter
-                
-                // Select session
+                // Automatic selection test
+                switch indexPath.row {
+                case 2,3:
+                    automaticSelectionIsHappening = true
+                    automaticSelectionProgress = 0
+                    if indexPath.row == 2 {
+                        automaticSelectionArray = [0,1,0]
+                    } else {
+                        automaticSelectionArray = [1,0,0,0,0]
+                    }
+                    //
+                    noInteractionView.backgroundColor = .clear
+                    noInteractionView.frame = UIScreen.main.bounds
+                    UIApplication.shared.keyWindow?.insertSubview(noInteractionView, aboveSubview: view)
+                    //
+                    performSegue(withIdentifier: "openMenu", sender: self)
+                default:
+                    tableView.deselectRow(at: indexPath, animated: true)
+                    //
+                    let screenFrame = UIScreen.main.bounds
+                    //
+                    maskView1.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
+                    maskView2.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
+                    //
+                    maskView1.frame = CGRect(x: 0, y: 0, width: screenFrame.width, height: UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.height)! + (tableView.bounds.height / 4))
+                    maskView2.frame = CGRect(x: 0, y: screenFrame.height - 49, width: screenFrame.width, height: 49)
+                    //
+                    maskView1.backgroundColor = .black
+                    maskView1.alpha = 0
+                    maskView2.backgroundColor = .black
+                    maskView2.alpha = 0
+                    //
+                    UIApplication.shared.keyWindow?.insertSubview(self.maskView1, aboveSubview: self.view)
+                    UIApplication.shared.keyWindow?.insertSubview(self.maskView2, aboveSubview: self.view)
+                    //
+                    UIView.animate(withDuration: animationTime1, animations: {
+                        self.maskView1.alpha = 0.5
+                        self.maskView2.alpha = 0.5
+                    })
+                    
+                    // Incriment table counter
+                    
+                    // Select session
+                }
             }
 
+            //
+            tableView.deselectRow(at: indexPath, animated: true)
 
         case scheduleChoiceTable:
             tableView.deselectRow(at: indexPath, animated: true)

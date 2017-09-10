@@ -151,6 +151,45 @@ class ClassicChoiceG: UIViewController  {
         }
     }
     
+    //
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //
+        // Automatic Selection
+        if automaticSelectionIsHappening == true {
+            automaticSelectionProgress = 3
+            //
+            var buttonArray = [fullBody, upperBody, lowerBody, legs, pull, push]
+            //
+            let buttonToSelect = buttonArray[automaticSelectionArray[automaticSelectionProgress]]
+            //
+            let flashView = UIView(frame: (buttonToSelect?.bounds)!)
+            flashView.alpha = 0
+            flashView.backgroundColor = colour2
+            buttonToSelect?.addSubview(flashView)
+            UIView.animate(withDuration: animationTime4, animations: {
+                flashView.alpha = 1
+            }, completion: { finished in
+                UIView.animate(withDuration: animationTime1, animations: {
+                    flashView.alpha = 0
+                }, completion: { finished in
+                    flashView.removeFromSuperview( )
+                })
+            })
+            buttonToSelect?.sendActions(for: .touchUpInside)
+            //
+        }
+        
+        // Walkthrough
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughc") == false {
+            let delayInSeconds = 0.5
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+//                self.walkthroughMindBody()
+            }
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughc")
+        }
+    }
+    
 //
 // View did layout subviews ---------------------------------------------------------------------------------------------
 //

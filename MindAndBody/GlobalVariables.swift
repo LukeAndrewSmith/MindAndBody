@@ -41,6 +41,8 @@ let animationTime1 = 0.5
 let animationTime2 = 0.15
 // Final choice screen element animation
 let animationTime3 = 0.7
+//
+let animationTime4 = 0.05
 
 
 //
@@ -50,6 +52,17 @@ var tabBarIndex = 0
 var new = Bool()
 
 //
+// Automatic choice from schedule variables ---------------------------------------------------------------------------------------------------------------
+//
+// View to disable interaction
+var noInteractionView = UIView()
+// Variable to indicate automatic selection is happening
+var automaticSelectionIsHappening = false
+// Array to indicate selection
+var automaticSelectionArray: [Int] = []
+// Int to indicate progress through selection
+var automaticSelectionProgress = 0
+
 
 
 //

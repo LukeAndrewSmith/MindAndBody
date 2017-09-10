@@ -52,7 +52,7 @@ class BackgroundImageCollection: UICollectionViewController {
         
         
         // Navigation Bar Title
-        navigationBar.title = NSLocalizedString("homeScreenImage", comment: "")
+        navigationBar.title = NSLocalizedString("backgroundImage", comment: "")
         
         
         // Collection view background colour
@@ -126,7 +126,7 @@ class BackgroundImageCollection: UICollectionViewController {
         
         // Index
         //
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
+        let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
     
         
         //

@@ -44,6 +44,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     //
     @IBOutlet weak var connectionLabelTrailing: NSLayoutConstraint!
     
+    
    
 //
 // View Did Load ---------------------------------------------------------------------------------------------------------------------------
@@ -51,15 +52,6 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Walkthrough
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughc") == false {
-            let delayInSeconds = 0.5
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                self.walkthroughMindBody()
-            }
-            UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughc")
-        }
-    
         // Colours
         view.backgroundColor = colour1
         
@@ -127,6 +119,47 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
             stack2.spacing = 15
             connectionLabelTrailing.constant = 15
             connectionLabelWidth.constant = 15
+        }
+        
+        
+    }
+    
+    //
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //
+        // Automatic Selection
+        if automaticSelectionIsHappening == true {
+            automaticSelectionProgress = 1
+            //
+            var buttonArray = [fullBody, upperBody, lowerBody, cardio, custom]
+            //
+            let buttonToSelect = buttonArray[automaticSelectionArray[automaticSelectionProgress]]
+            //
+            let flashView = UIView(frame: (buttonToSelect?.bounds)!)
+            flashView.alpha = 0
+            flashView.backgroundColor = colour2
+            buttonToSelect?.addSubview(flashView)
+            UIView.animate(withDuration: animationTime4, animations: {
+                flashView.alpha = 1
+            }, completion: { finished in
+                UIView.animate(withDuration: animationTime1, animations: {
+                    flashView.alpha = 0
+                }, completion: { finished in
+                    flashView.removeFromSuperview( )
+                })
+            })
+            buttonToSelect?.sendActions(for: .touchUpInside)
+            //
+        }
+        
+        // Walkthrough
+        if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughc") == false {
+            let delayInSeconds = 0.5
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                self.walkthroughMindBody()
+            }
+            UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughc")
         }
     }
     

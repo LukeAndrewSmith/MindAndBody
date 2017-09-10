@@ -2564,6 +2564,36 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //
+        // Automatic Selection
+        if automaticSelectionIsHappening == true {
+            automaticSelectionProgress = 4
+            //
+            let sessions: [[Int]] =
+                [[0,0], [0,1],
+                 [1,0], [1,1],
+                 [2,0], [2,1]]
+            //
+            presetsButton.sendActions(for: .touchUpInside)
+            let test = automaticSelectionProgress
+            //
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + animationTime1) {
+                let selectedSession = automaticSelectionArray[automaticSelectionProgress]
+                let indexPath = NSIndexPath(row: sessions[selectedSession][0], section: sessions[selectedSession][1])
+                self.presetsTableView.selectRow(at: indexPath as IndexPath, animated: true, scrollPosition: .top)
+                self.presetsTableView.delegate?.tableView!(self.presetsTableView, didSelectRowAt: indexPath as IndexPath)
+                
+                automaticSelectionIsHappening = false
+                noInteractionView.removeFromSuperview()
+            }
+        }
+        
+    }
+
+    
+    //
     // TableView -----------------------------------------------------------------------------------------------------------------------
     //
     // Number of sections

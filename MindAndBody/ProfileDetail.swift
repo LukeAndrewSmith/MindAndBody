@@ -24,6 +24,18 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Arrays
     var titleArray: [String] = ["goals", "me", "time", "preferences"]
     
+    var questionArray: [[String]] =
+        [
+            // Goals
+            ["This is a question about goals", "This also is a question", "Hmm, tricky question", "Obvious question"],
+            // Me
+            ["This is a question about me", "This also is a question", "Hmm, tricky question", "Obvious question"],
+            // Time
+            ["This is a question about time", "This also is a question", "Hmm, tricky question", "Obvious question"],
+            // Preferences
+            ["This is a question about goals", "This also is a question", "Hmm, tricky question", "Obvious question"]
+        ]
+    
     //
     // Viewdidload --------------------------------------------------------------------------------------------------------
     //
@@ -33,6 +45,10 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString(titleArray[selectedSection], comment: ""))
+        
+        // Table View
+        questionsTable.tableFooterView = UIView()
+        questionsTable.separatorStyle = .none
         
     }
     
@@ -44,80 +60,72 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return questionArray.count
     }
+    
+    // Header
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        //
+        return NSLocalizedString(questionArray[selectedSection][section], comment: "")
+    }
+    
+    // Header Customization
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        // Header
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)!
+        header.textLabel?.textColor = colour2
+        header.textLabel?.text = header.textLabel?.text?.capitalized
+        
+        //
+        header.backgroundColor = .clear
+        header.backgroundView = UIView()
+        
+        let seperator = CALayer()
+        seperator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
+        seperator.backgroundColor = colour2.cgColor
+        seperator.opacity = 0.5
+        header.layer.addSublayer(seperator)
+    }
+    
+    // Header Height
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 47
+    }
+
     
     // Number of row
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
-//        return sectionArray.count + 1
-        return 0
+        return 1
     }
     
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
-        switch indexPath.row {
-        case 4: return 49
-        default: return (view.bounds.height - 49) / 4
-        }
+        return 47
     }
-    
-    
-    // Blurs
-    let blur = UIVisualEffectView()
-    let blur2 = UIVisualEffectView()
-    let blur3 = UIVisualEffectView()
-    
     
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         //
-        switch indexPath.row {
-        case 4:
-            //
-            cell.textLabel?.text = "Update Schedule"
-            //
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            cell.textLabel?.textAlignment = .center
-            cell.textLabel?.textColor = colour1
-            //
-            // BackgroundBlur/Vibrancy
-            let backgroundBlur = UIVisualEffectView()
-            let backgroundBlurE = UIBlurEffect(style: .dark)
-            backgroundBlur.effect = backgroundBlurE
-            backgroundBlur.isUserInteractionEnabled = false
-            //
-            backgroundBlur.frame = cell.bounds
-            //
-            cell.backgroundColor = colour3
-            cell.backgroundView = backgroundBlur
-            
+//        switch indexPath.row {
         //
-        default:
+//        default:
             //
             cell.backgroundColor = .clear
             cell.backgroundView = UIView()
             //
-            let centeredTextLabel = UILabel()
-//            centeredTextLabel.text = sectionArray[indexPath.row]
-            centeredTextLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            centeredTextLabel.textAlignment = .center
-            centeredTextLabel.sizeToFit()
-            centeredTextLabel.textColor = colour1
-            centeredTextLabel.center = CGPoint(x: view.bounds.width/2, y: (view.bounds.height - 49)/8)
-            cell.addSubview(centeredTextLabel)
+            cell.textLabel?.text = "-"
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            cell.textLabel?.textAlignment = .right
+            cell.textLabel? .textColor = colour2
             //
-            cell.accessoryType = .disclosureIndicator
             // Border
-            let seperator = CALayer()
-            seperator.frame = CGRect(x: 0, y: (view.bounds.height - 49) / 4, width: view.frame.size.width, height: 1)
-            seperator.backgroundColor = colour1.cgColor
-            seperator.opacity = 0.5
-            cell.layer.addSublayer(seperator)
-        }
+//        }
         //
         return cell
     }
@@ -126,13 +134,12 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // didSelectRow
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        switch indexPath.row {
-        case 4:
-            break
-        default:
-            // Selected section
-            performSegue(withIdentifier: "profileDetail", sender: self)
-        }
+//        switch indexPath.row {
+//        case 4:
+//            break
+//        default:
+//            // Selected section
+//        }
         
         tableView.deselectRow(at: indexPath, animated: true)
     }

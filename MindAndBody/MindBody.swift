@@ -389,19 +389,50 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         Meditation.titleLabel?.textAlignment = .center
         Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
         
-//        // Iphone 5/SE layout
-//        if UIScreen.main.nativeBounds.height < 1334 {
-//            //
-//            wamupBottom.constant = 15
-//            //
-//            bodyTop.constant = 5
-//            bodyBottom.constant = 2
-//            mindTop.constant = 5
-//            mindBottom.constant = 3
-//            //
-//            yogaBottom.constant = 15
-//            meditationBottom.constant = 15
-//        }
+        // Iphone 5/SE layout
+        if UIScreen.main.nativeBounds.height < 1334 {
+            //
+            wamupBottom.constant = 15
+            //
+            bodyTop.constant = 5
+            bodyBottom.constant = 2
+            mindTop.constant = 5
+            mindBottom.constant = 3
+            //
+            yogaBottom.constant = 15
+            meditationBottom.constant = 15
+        }
+        
+    }
+    
+    //
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //
+        // Automatic Selection
+        if automaticSelectionIsHappening == true {
+            var buttonArray = [Warmup, Workout, Cardio, Stretching, Yoga, Meditation]
+            //
+            let test = automaticSelectionArray[automaticSelectionProgress]
+            let buttonToSelect = buttonArray[automaticSelectionArray[automaticSelectionProgress]]
+            //
+            let flashView = UIView(frame: (buttonToSelect?.bounds)!)
+            flashView.alpha = 0
+            flashView.backgroundColor = colour1
+            buttonToSelect?.addSubview(flashView)
+            buttonToSelect?.bringSubview(toFront: flashView)
+            UIView.animate(withDuration: animationTime4, animations: {
+                flashView.alpha = 1
+            }, completion: { finished in
+                UIView.animate(withDuration: animationTime1, animations: {
+                    flashView.alpha = 0
+                }, completion: { finished in
+                    flashView.removeFromSuperview()
+                })
+            })
+            buttonToSelect?.sendActions(for: .touchUpInside)
+            //
+        }
     }
     
     

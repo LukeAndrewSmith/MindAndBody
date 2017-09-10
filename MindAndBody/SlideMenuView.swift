@@ -57,6 +57,21 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         //
         menuTable.tableFooterView = UIView()
         menuTable.backgroundColor = colour1
+        
+        
+
+    }
+    
+    //
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //
+        // Automatic Selection
+        if automaticSelectionIsHappening == true {
+            let indexPath = NSIndexPath(row: 0, section: 0)
+            menuTable.selectRow(at: indexPath as IndexPath, animated: true, scrollPosition: .none)
+            menuTable.delegate?.tableView!(menuTable, didSelectRowAt: indexPath as IndexPath)
+        }
     }
     
     
