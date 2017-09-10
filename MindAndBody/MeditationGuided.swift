@@ -235,12 +235,12 @@ class MeditationGuided: UIViewController {
 //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Pass Info
-        if (segue.identifier == "meditationGuided") {
-            let destinationNC = segue.destination as! UINavigationController
-            let destinationVC = destinationNC.viewControllers.first as! MeditationScreenGuided
-            //
-            destinationVC.selectedSession = selectedSession
-        }
+//        if (segue.identifier == "meditationGuided") {
+//            let destinationNC = segue.destination as! UINavigationController
+//            let destinationVC = destinationNC.viewControllers.first as! MeditationScreenGuided
+//            //
+//            destinationVC.selectedSession = selectedSession
+//        }
     }
 //
 }

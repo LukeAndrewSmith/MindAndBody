@@ -442,56 +442,13 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 UIApplication.shared.isIdleTimerDisabled = false
             }
             
+            //
+            // Tracking
+            updateWeekProgress()
+            updateMonthProgress()
             // Dismiss
             self.dismiss(animated: true)
-            
-            //            // Alert View
-            //            let title = NSLocalizedString("resetWarning", comment: "")
-            //            let message = NSLocalizedString("resetWarningMessage", comment: "")
-            //            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            //            alert.view.tintColor = colour2
-            //            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             //
-            //            let paragraphStyle = NSMutableParagraphStyle()
-            //            paragraphStyle.alignment = .justified
-            //            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
-            //
-            //
-            //            // Action
-            //            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
-            //                UIAlertAction in
-            //
-            //                UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-            //                UserDefaults.standard.synchronize()
-            //
-            //                // Alert View
-            //                let title = NSLocalizedString("resetTitle", comment: "")
-            //                let message = NSLocalizedString("resetMessage", comment: "")
-            //                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            //                alert.view.tintColor = self.colour2
-            //                alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-            //
-            //                let paragraphStyle = NSMutableParagraphStyle()
-            //                paragraphStyle.alignment = .justified
-            //                alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
-            //
-            //                self.present(alert, animated: true, completion: nil)
-            //
-            //
-            //            }
-            //            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
-            //                UIAlertAction in
-            //
-            //            }
-            //
-            //            alert.addAction(okAction)
-            //            alert.addAction(cancelAction)
-            //
-            //            self.present(alert, animated: true, completion: nil)
-            //
-            //            tableView.deselectRow(at: indexPath, animated: true)
-            
-        //
         default: break
         }
     }

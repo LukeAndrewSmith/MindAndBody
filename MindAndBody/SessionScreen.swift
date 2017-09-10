@@ -562,8 +562,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         case 1:
             //
-            // Tracking (Do you want to track)
-            
+            // Tracking
+            updateWeekProgress()
+            updateMonthProgress()
            
             self.dismiss(animated: true)
 

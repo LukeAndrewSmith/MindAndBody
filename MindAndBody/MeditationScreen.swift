@@ -274,6 +274,12 @@ class MeditationScreen: UIViewController {
             }
             //
             NotificationCenter.default.removeObserver(self)
+            //
+            //
+            // Tracking
+            updateWeekProgress()
+            updateMonthProgress()
+            //
             self.dismiss(animated: true)
         //
         } else if timerValue == 1 {
@@ -499,7 +505,6 @@ class MeditationScreen: UIViewController {
                     self.dispatchWorkItemArray[i].cancel()
                 }
             }
-            
             NotificationCenter.default.removeObserver(self)
             self.dismiss(animated: true)
         }

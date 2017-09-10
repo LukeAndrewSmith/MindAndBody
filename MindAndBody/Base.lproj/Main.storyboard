@@ -134,12 +134,15 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Calendar" id="zGf-6u-5eP">
                             <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="scheduleButton:" destination="oDd-SZ-o1F" id="BSQ-3I-ydU"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="backgroundImage" destination="fUs-PS-zGI" id="Krb-kf-x8e"/>
                         <outlet property="navigationBar" destination="xF1-Nx-yoQ" id="dBd-vq-1MD"/>
-                        <outlet property="tableView" destination="oPE-Kh-Caj" id="TSx-kd-3vh"/>
+                        <outlet property="scheduleTable" destination="oPE-Kh-Caj" id="UFV-AU-XOl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3dG-Jg-xiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -158,21 +161,21 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ozm-B7-J4A">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JUr-nE-2rw">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="xLa-HI-OEZ" id="pZn-Cv-1fQ"/>
-                                    <outlet property="delegate" destination="xLa-HI-OEZ" id="rOP-uX-nZp"/>
+                                    <outlet property="dataSource" destination="xLa-HI-OEZ" id="2Cb-I4-sbU"/>
+                                    <outlet property="delegate" destination="xLa-HI-OEZ" id="JBe-41-6SU"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ozm-B7-J4A" firstAttribute="leading" secondItem="Ecy-BT-V7P" secondAttribute="leading" id="6r7-9k-jn4"/>
-                            <constraint firstAttribute="trailing" secondItem="ozm-B7-J4A" secondAttribute="trailing" id="GMF-fF-BiO"/>
-                            <constraint firstItem="ozm-B7-J4A" firstAttribute="top" secondItem="Log-qX-7x4" secondAttribute="bottom" id="Hoe-IO-URM"/>
-                            <constraint firstItem="e5B-VS-evX" firstAttribute="top" secondItem="ozm-B7-J4A" secondAttribute="bottom" id="LH8-xi-5Fs"/>
+                            <constraint firstAttribute="trailing" secondItem="JUr-nE-2rw" secondAttribute="trailing" id="FTd-2j-vAM"/>
+                            <constraint firstItem="JUr-nE-2rw" firstAttribute="leading" secondItem="Ecy-BT-V7P" secondAttribute="leading" id="UVp-5s-gia"/>
+                            <constraint firstItem="e5B-VS-evX" firstAttribute="top" secondItem="JUr-nE-2rw" secondAttribute="bottom" id="neI-IS-XmQ"/>
+                            <constraint firstItem="JUr-nE-2rw" firstAttribute="top" secondItem="Log-qX-7x4" secondAttribute="bottom" id="ta8-kp-qlt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CS7-Ic-9nL">
@@ -187,12 +190,52 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="navigationBar" destination="CS7-Ic-9nL" id="fCD-pq-hJl"/>
-                        <outlet property="tableView" destination="ozm-B7-J4A" id="GRo-nM-voq"/>
+                        <outlet property="tableView" destination="JUr-nE-2rw" id="w1g-py-tSL"/>
+                        <segue destination="rEy-tv-PZG" kind="show" identifier="profileDetail" id="ISC-3A-zDs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jt2-tO-Tdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1142" y="2948"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="QDr-OM-Y8G">
+            <objects>
+                <viewController id="rEy-tv-PZG" customClass="ProfileDetail" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="p0E-Zj-HuI"/>
+                        <viewControllerLayoutGuide type="bottom" id="ij9-2y-qDH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="N05-Qb-aUo">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XR6-xc-CI0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="rEy-tv-PZG" id="Fid-18-8Gn"/>
+                                    <outlet property="delegate" destination="rEy-tv-PZG" id="kDQ-yH-G6B"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ij9-2y-qDH" firstAttribute="top" secondItem="XR6-xc-CI0" secondAttribute="bottom" id="2f0-1c-eMB"/>
+                            <constraint firstAttribute="trailing" secondItem="XR6-xc-CI0" secondAttribute="trailing" id="JV2-3Q-GF1"/>
+                            <constraint firstItem="XR6-xc-CI0" firstAttribute="leading" secondItem="N05-Qb-aUo" secondAttribute="leading" id="agw-5B-AIi"/>
+                            <constraint firstItem="XR6-xc-CI0" firstAttribute="top" secondItem="p0E-Zj-HuI" secondAttribute="bottom" id="yhd-Ja-J0Z"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="yuu-Nq-ctq"/>
+                    <connections>
+                        <outlet property="navigationBar" destination="yuu-Nq-ctq" id="isv-C9-1HQ"/>
+                        <outlet property="questionsTable" destination="XR6-xc-CI0" id="dLs-Af-72e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iLq-C7-mhX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-346" y="2947"/>
         </scene>
         <!--view5-->
         <scene sceneID="Qf8-wT-bjo">
@@ -2075,7 +2118,6 @@
                                 </state>
                                 <connections>
                                     <action selector="beginButton:" destination="3w2-bn-LxL" eventType="touchUpInside" id="bHE-Xt-ds0"/>
-                                    <segue destination="Eak-2Y-pYZ" kind="presentation" identifier="meditationGuided" id="LKs-Dq-9wj"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JS4-Cl-iIS">
@@ -2133,13 +2175,13 @@
                                         <rect key="frame" x="8" y="114" width="172" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Focus" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iuG-f6-A75">
-                                                <rect key="frame" x="0.0" y="0.0" width="117" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="44" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Present" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ga-UH-hwY">
-                                                <rect key="frame" x="125" y="0.0" width="47" height="20.5"/>
+                                                <rect key="frame" x="52" y="0.0" width="120" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="15"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2251,108 +2293,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lma-PB-JFE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4679" y="3140"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="ocX-rP-jlL">
-            <objects>
-                <navigationController id="Eak-2Y-pYZ" sceneMemberID="viewController">
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="bfK-PA-aZv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="21"/>
-                            <color key="textColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="ET0-uR-znQ" kind="relationship" relationship="rootViewController" id="SaV-XY-Szo"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SMR-fW-EGz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5690" y="3140"/>
-        </scene>
-        <!--Title-->
-        <scene sceneID="VAv-lk-sUe">
-            <objects>
-                <viewController id="ET0-uR-znQ" customClass="MeditationScreenGuided" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="h7a-nx-wFM"/>
-                        <viewControllerLayoutGuide type="bottom" id="8AQ-Cx-6AZ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kMp-7q-7wh">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODB-H8-Coa">
-                                <rect key="frame" x="157" y="272" width="60" height="60"/>
-                                <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="Play">
-                                    <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="play:" destination="ET0-uR-znQ" eventType="touchUpInside" id="Byv-50-bvF"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8g-sp-PqB">
-                                <rect key="frame" x="158" y="422" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="X8g-sp-PqB" secondAttribute="height" multiplier="1:1" id="YhU-op-RKn"/>
-                                </constraints>
-                                <state key="normal" image="HideScreenMeditation"/>
-                                <connections>
-                                    <action selector="hideScreen:" destination="ET0-uR-znQ" eventType="touchUpInside" id="zbK-eI-YNh"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZdP-UN-zgg">
-                                <rect key="frame" x="95.5" y="108" width="185.5" height="86"/>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="72"/>
-                                <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mB7-YE-zvB">
-                                <rect key="frame" x="158" y="272" width="60" height="60"/>
-                                <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="Pause"/>
-                                <connections>
-                                    <action selector="pause:" destination="ET0-uR-znQ" eventType="touchUpInside" id="Z0d-FC-g9F"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="ODB-H8-Coa" firstAttribute="centerX" secondItem="kMp-7q-7wh" secondAttribute="centerX" id="4WS-6x-qxB"/>
-                            <constraint firstItem="ZdP-UN-zgg" firstAttribute="centerX" secondItem="kMp-7q-7wh" secondAttribute="centerX" id="7T7-ag-C7A"/>
-                            <constraint firstItem="X8g-sp-PqB" firstAttribute="centerX" secondItem="kMp-7q-7wh" secondAttribute="centerX" id="FHp-6E-mwd"/>
-                            <constraint firstItem="mB7-YE-zvB" firstAttribute="centerX" secondItem="kMp-7q-7wh" secondAttribute="centerX" id="Qdy-b4-htR"/>
-                            <constraint firstItem="X8g-sp-PqB" firstAttribute="centerY" secondItem="kMp-7q-7wh" secondAttribute="centerY" multiplier="3/2" id="S5G-ou-L80"/>
-                            <constraint firstItem="ZdP-UN-zgg" firstAttribute="centerY" secondItem="kMp-7q-7wh" secondAttribute="centerY" multiplier="1/2" id="dh2-fp-xgc"/>
-                            <constraint firstItem="ODB-H8-Coa" firstAttribute="centerY" secondItem="kMp-7q-7wh" secondAttribute="centerY" id="nra-D9-1ks"/>
-                            <constraint firstItem="mB7-YE-zvB" firstAttribute="centerY" secondItem="kMp-7q-7wh" secondAttribute="centerY" id="rvR-WG-BtI"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Title" id="RC1-ZD-pPk">
-                        <barButtonItem key="rightBarButtonItem" image="CheckMark" id="Cz0-YD-2gb">
-                            <color key="tintColor" red="0.14901960780000001" green="0.65098039220000004" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="dismissView:" destination="ET0-uR-znQ" id="YEa-Kt-Rxk"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="navigationBar" destination="RC1-ZD-pPk" id="VGh-mh-bpE"/>
-                        <outlet property="pause" destination="mB7-YE-zvB" id="ntM-tB-UDm"/>
-                        <outlet property="play" destination="ODB-H8-Coa" id="dkw-v0-EdR"/>
-                        <outlet property="timerLabel" destination="ZdP-UN-zgg" id="qhf-xf-482"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6XZ-1M-g9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6394" y="3140"/>
         </scene>
         <!--Title-->
         <scene sceneID="YgL-go-pFL">
@@ -4078,7 +4018,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tD2-Ad-c9U">
-                                                    <rect key="frame" x="108.5" y="110" width="160" height="86"/>
+                                                    <rect key="frame" x="108" y="110" width="160" height="86"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="72"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4443,8 +4383,6 @@
         <image name="ImagePlay" width="15" height="15"/>
         <image name="ImagePlayDeselected" width="15" height="15"/>
         <image name="Mind&amp;Body" width="30" height="30"/>
-        <image name="Pause" width="60" height="60"/>
-        <image name="Play" width="60" height="60"/>
         <image name="Profile" width="30" height="30"/>
         <image name="Profile Selected" width="30" height="30"/>
         <image name="QuestionMark" width="30" height="30"/>
@@ -4455,6 +4393,7 @@
         <image name="Tricep" width="375" height="375"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="NiW-Wv-f4m"/>
         <segue reference="CTF-I1-syG"/>
         <segue reference="Ptw-Py-keQ"/>
         <segue reference="qzt-4F-2h8"/>
@@ -4462,6 +4401,5 @@
         <segue reference="Fhn-aO-iU6"/>
         <segue reference="LFV-jn-8Ld"/>
         <segue reference="omW-5o-hGa"/>
-        <segue reference="M72-ar-DyO"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -491,7 +491,6 @@
 		07A42E4A1EDDFD7D0047E8F1 /* CardioChoiceFinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E491EDDFD7D0047E8F1 /* CardioChoiceFinal.swift */; };
 		07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */; };
 		07B4E00F1F377E1E00C77807 /* TestBackground.caf in Resources */ = {isa = PBXBuildFile; fileRef = 07B4E00E1F377E1E00C77807 /* TestBackground.caf */; };
-		07B65F7B1E624A73004DBB97 /* MeditationScreenGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B65F7A1E624A73004DBB97 /* MeditationScreenGuided.swift */; };
 		07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C081E8BDF9500A851EF /* YogaScreen.swift */; };
 		07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */; };
 		07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2D3BB1EBA88CF000770DE /* MindBody.swift */; };
@@ -1268,6 +1267,7 @@
 		07E465231F4ED1E400A5AF49 /* soleus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E465051F4ED1E400A5AF49 /* soleus@2x.png */; };
 		07E465241F4ED1E400A5AF49 /* soleus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E465061F4ED1E400A5AF49 /* soleus@3x.png */; };
 		07EDBEDD1EACB5730064213C /* YogaChoiceFinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EDBEDC1EACB5730064213C /* YogaChoiceFinal.swift */; };
+		07EFC0AA1F6585560030DCE6 /* ProfileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EFC0A91F6585560030DCE6 /* ProfileDetail.swift */; };
 		07F0C4931EA60B0B00927DA8 /* StretchingChoiceFinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F0C4921EA60B0B00927DA8 /* StretchingChoiceFinal.swift */; };
 		07F0C4951EA6128C00927DA8 /* StretchingChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F0C4941EA6128C00927DA8 /* StretchingChoiceCustom.swift */; };
 		07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F912071DC2D1240004C924 /* WarmupChoice.swift */; };
@@ -1868,7 +1868,6 @@
 		07A42E491EDDFD7D0047E8F1 /* CardioChoiceFinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioChoiceFinal.swift; sourceTree = "<group>"; };
 		07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioScreen.swift; sourceTree = "<group>"; };
 		07B4E00E1F377E1E00C77807 /* TestBackground.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestBackground.caf; sourceTree = "<group>"; };
-		07B65F7A1E624A73004DBB97 /* MeditationScreenGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationScreenGuided.swift; sourceTree = "<group>"; };
 		07BE8C081E8BDF9500A851EF /* YogaScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreen.swift; sourceTree = "<group>"; };
 		07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		07C2D3BB1EBA88CF000770DE /* MindBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindBody.swift; sourceTree = "<group>"; };
@@ -2645,6 +2644,7 @@
 		07E465051F4ED1E400A5AF49 /* soleus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soleus@2x.png"; sourceTree = "<group>"; };
 		07E465061F4ED1E400A5AF49 /* soleus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soleus@3x.png"; sourceTree = "<group>"; };
 		07EDBEDC1EACB5730064213C /* YogaChoiceFinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaChoiceFinal.swift; sourceTree = "<group>"; };
+		07EFC0A91F6585560030DCE6 /* ProfileDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetail.swift; sourceTree = "<group>"; };
 		07F0C4921EA60B0B00927DA8 /* StretchingChoiceFinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StretchingChoiceFinal.swift; sourceTree = "<group>"; };
 		07F0C4941EA6128C00927DA8 /* StretchingChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StretchingChoiceCustom.swift; sourceTree = "<group>"; };
 		07F912071DC2D1240004C924 /* WarmupChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoice.swift; sourceTree = "<group>"; };
@@ -2770,7 +2770,6 @@
 			isa = PBXGroup;
 			children = (
 				07520BB31E9F894C00FA682E /* MeditationScreen.swift */,
-				07B65F7A1E624A73004DBB97 /* MeditationScreenGuided.swift */,
 			);
 			name = "Meditation Screens";
 			sourceTree = "<group>";
@@ -3666,6 +3665,7 @@
 			isa = PBXGroup;
 			children = (
 				077AC1031DA579680026895B /* Profile.swift */,
+				07EFC0A91F6585560030DCE6 /* ProfileDetail.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -8204,7 +8204,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07B65F7B1E624A73004DBB97 /* MeditationScreenGuided.swift in Sources */,
 				07DEE6F71E0AADE6003B89AB /* YogaChoice.swift in Sources */,
 				077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */,
 				071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */,
@@ -8239,6 +8238,7 @@
 				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,
 				07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */,
+				07EFC0AA1F6585560030DCE6 /* ProfileDetail.swift in Sources */,
 				07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */,
 				077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */,
 				077AC1001DA54C810026895B /* Lessons.swift in Sources */,

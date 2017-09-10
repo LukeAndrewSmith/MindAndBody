@@ -126,7 +126,7 @@ class BackgroundImageCollection: UICollectionViewController {
         
         // Index
         //
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
     
         
         //

@@ -16,7 +16,6 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //Outlets
     @IBOutlet weak var navigationBar: UINavigationItem!
-    
     //
     @IBOutlet weak var tableView: UITableView!
     
@@ -27,7 +26,10 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //
     // Arrays
-    let sectionArray: [String] = ["Goals", "Me", "Time", "Preferences"]
+    let sectionArray: [String] = ["goals", "me", "time", "preferences"]
+    
+    // selected section
+    var selectedSection = Int()
     
     
 //
@@ -71,12 +73,11 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         topView.frame = CGRect(x: 0, y: tableView.frame.minY - tableView.bounds.height, width: tableView.bounds.width, height: tableView.bounds.height)
         //
         tableView.addSubview(topView)
-
         
-        // Initial TableView Position
-        tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        // TableView Background
         tableView.backgroundColor = .clear
         tableView.backgroundView = UIView()
+        tableView.separatorStyle = .none
         
         // Swipe to Menu
         let rightSwipe = UISwipeGestureRecognizer()
@@ -86,7 +87,6 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         // Walkthrough
         if UserDefaults.standard.bool(forKey: "profileWalkthrough") == false {
-            self.walkthroughMindBody()
             UserDefaults.standard.set(true, forKey: "profileWalkthrough")
         }
         
@@ -110,8 +110,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Number of row
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            //
-            return sectionArray.count + 1
+        //
+        return sectionArray.count + 1
+        
     }
     
     // Height for row
@@ -163,7 +164,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.backgroundView = UIView()
             //
             let centeredTextLabel = UILabel()
-            centeredTextLabel.text = sectionArray[indexPath.row]
+            centeredTextLabel.text = NSLocalizedString(sectionArray[indexPath.row], comment: "")
             centeredTextLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
             centeredTextLabel.textAlignment = .center
             centeredTextLabel.sizeToFit()
@@ -187,140 +188,23 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // didSelectRow
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        // UserDefaults
-        let cell = tableView.cellForRow(at: indexPath)
+        switch indexPath.row {
+        case 4:
+            break
+        default:
+            // Selected section
+            selectedSection = indexPath.row
+            
+            performSegue(withIdentifier: "profileDetail", sender: self)
+        }
         
-        //
         tableView.deselectRow(at: indexPath, animated: true)
     }
-        
+    
+    
 //
 // Walkthrough ----------------------------------------------------------------------------------------------------------------------------------
 //
-    var  viewNumber = 0
-    let walkthroughView = UIView()
-    let label = UILabel()
-    let nextButton = UIButton()
-    let backButton = UIButton()
-    
-    
-    
-    // Walkthrough
-    func walkthroughMindBody() {
-        
-        //
-        let screenSize = UIScreen.main.bounds
-        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-        
-        //
-        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
-        walkthroughView.backgroundColor = .black
-        walkthroughView.alpha = 0.72
-        walkthroughView.clipsToBounds = true
-        //
-        
-        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
-        label.center = view.center
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
-        label.textColor = .white
-        label.alpha = 0.9
-        
-        //
-        nextButton.frame = screenSize
-        nextButton.backgroundColor = .clear
-        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
-        //
-        backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
-        backButton.setTitle("Back", for: .normal)
-        backButton.titleLabel?.textAlignment = .left
-        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        backButton.titleLabel?.textColor = .white
-        backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
-        
-        //
-        switch viewNumber {
-        //
-        case 0:
-            // Clear Section
-            let path = CGMutablePath()
-            path.addEllipse(in: CGRect(x: view.frame.size.width/2 - 50
-                , y: 94, width: 100, height: 40))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            
-            //
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            
-            //
-            label.text = NSLocalizedString("profile1", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-        //
-        case 1:
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width - 22, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 18, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            
-            //
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-
-            //
-            label.text = NSLocalizedString("profile2", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-        //
-        default: break
-        }
-    }
-
-    //
-    func nextWalkthroughView(_ sender: Any) {
-        walkthroughView.removeFromSuperview()
-        label.removeFromSuperview()
-        viewNumber = viewNumber + 1
-        walkthroughMindBody()
-    }
-
-    //
-    func backWalkthroughView(_ sender: Any) {
-        if viewNumber > 0 {
-            backButton.removeFromSuperview()
-            label.removeFromSuperview()
-            walkthroughView.removeFromSuperview()
-            viewNumber = viewNumber - 1
-            walkthroughMindBody()
-        }
-    }
-    
-    
-    
-
-    
     //
     // Slide Menu ---------------------------------------------------------------------------------------------------------------------
     //
@@ -344,13 +228,20 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if let destinationViewController = segue.destination as? SlideMenuView {
                 destinationViewController.transitioningDelegate = self
             }
-        } else {
+        //
+        } else if (segue.identifier == "profileDetail") {
             // Remove back button text
             let backItem = UIBarButtonItem()
             backItem.title = ""
             navigationItem.backBarButtonItem = backItem
+            
+            //
+            let destinationVC = segue.destination as! ProfileDetail
+            //
+            destinationVC.selectedSection = selectedSection
         }
     }
+    
 //
 }
 
