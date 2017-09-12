@@ -24,7 +24,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
     //
-    let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+    let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
     let backgroundImageView = UIImageView()
     let backgroundBlur = UIVisualEffectView()
     

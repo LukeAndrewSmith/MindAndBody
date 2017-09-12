@@ -35,20 +35,21 @@ let colour5 = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
 //
 // Animation Times ---------------------------------------------------------------------------------------------------------------
 //
+enum AnimationTimes {
 // View slide up
-let animationTime1 = 0.5
+static let animationTime1 = 0.5
 // View slide down
-let animationTime2 = 0.15
+static let animationTime2 = 0.15
 // Final choice screen element animation
-let animationTime3 = 0.7
-//
-let animationTime4 = 0.05
-
+static let animationTime3 = 0.7
+// Automatic selection
+static let animationTime4 = 0.05
+}
 
 //
 // Menu Index (ensures initial screen is home screen), variable misnamed tabBarIndex ---------------------------------------------------------------------------------------------------------------
 //
-var tabBarIndex = 0
+var tabBarIndex = Int()
 var new = Bool()
 
 //

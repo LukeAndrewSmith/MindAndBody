@@ -408,7 +408,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             // Core ---------
             80: "plank",
             81: "dynamicPlank",
-            82: "sidePlank",
+            82: "sidePlankW",
             83: "pushupPlank",
             84: "lSit",
             85: "bicycleCrunch",
@@ -562,7 +562,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             // Core ---------
             80: ["plank"],
             81: ["dynamicPlank", "dynamicPlank1", "dynamicPlank", "dynamicPlank1"],
-            82: ["sidePlank"],
+            82: ["sidePlankW"],
             83: ["pushupPlank"],
             84: ["lSit"],
             85: ["bicycleCrunch", "bicycleCrunch1", "bicycleCrunch2", "bicycleCrunch3", "bicycleCrunch4", "bicycleCrunch3", "bicycleCrunch2", "bicycleCrunch1"],
@@ -870,7 +870,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             // Core ---------
             80: "plankE",
             81: "dynamicPlankE",
-            82: "sidePlankE",
+            82: "sidePlankWE",
             83: "pushupPlankE",
             84: "lSitE",
             85: "bicycleCrunchE",
@@ -2579,7 +2579,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             presetsButton.sendActions(for: .touchUpInside)
             let test = automaticSelectionProgress
             //
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + animationTime1) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + AnimationTimes.animationTime1) {
                 let selectedSession = automaticSelectionArray[automaticSelectionProgress]
                 let indexPath = NSIndexPath(row: sessions[selectedSession][0], section: sessions[selectedSession][1])
                 self.presetsTableView.selectRow(at: indexPath as IndexPath, animated: true, scrollPosition: .top)
@@ -2796,7 +2796,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             //
             // Dismiss Presets Table
             //
-            UIView.animate(withDuration: animationTime2, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                 self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
                 self.backgroundViewExpanded.alpha = 0
             }, completion: { finished in
@@ -2806,7 +2806,7 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
             })
             //
             // Animate new elements up
-            UIView.animate(withDuration: animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 self.movementsTableView.reloadData()
                 let indexPath2 = NSIndexPath(row: 0, section: 0)

@@ -20,7 +20,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
     //
-    let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+    let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
     let backgroundImageView = UIImageView()
     let backgroundBlur = UIVisualEffectView()
     
@@ -190,7 +190,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
         switch indexPath.row {
         case 4:
-            break
+            
+            
+            performSegue(withIdentifier: "scheduleCreation", sender: self)
         default:
             // Selected section
             selectedSection = indexPath.row

@@ -750,7 +750,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         //
         // Animate
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 1.5) + 20
             self.backgroundViewExplanation.alpha = 0.5
         }, completion: nil)
@@ -760,7 +760,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBAction func retractExplanation(_ sender: Any) {
         let bounds = UIScreen.main.bounds
         //
-        UIView.animate(withDuration: animationTime2, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             self.scrollViewExplanation.center.y = ((bounds.height - 20)/2) * 2.5 + 20
             self.backgroundViewExplanation.alpha = 0
         }, completion: { finished in
@@ -823,7 +823,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     cell.imageViewCell.reloadInputViews()
                     
                     // Animate new and old image
-                    UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         //
                         snapshot1?.center.x = cell.center.x - cell.frame.size.width
                         cell.imageViewCell.center.x = cell.center.x
@@ -871,7 +871,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     cell.imageViewCell.reloadInputViews()
                     
                     //
-                    UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         snapshot1?.center.x = cell.center.x + cell.frame.size.width
                         cell.imageViewCell.center.x = cell.center.x
                         //

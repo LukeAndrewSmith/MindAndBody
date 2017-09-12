@@ -658,7 +658,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             //
             // Dismiss Action Sheet
-            UIView.animate(withDuration: animationTime2, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                 self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
                 self.backgroundViewExpanded.alpha = 0
             }, completion: { finished in
@@ -668,7 +668,7 @@ class CardioChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             })
             //
             // Present new elements
-            UIView.animate(withDuration: animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 self.overviewTableView.reloadData()
                 let indexPath2 = NSIndexPath(row: 0, section: 0)

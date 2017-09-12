@@ -112,10 +112,10 @@ class WorkoutChoice: UIViewController  {
             flashView.alpha = 0
             flashView.backgroundColor = colour2
             buttonToSelect?.addSubview(flashView)
-            UIView.animate(withDuration: animationTime4, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime4, animations: {
                 flashView.alpha = 1
             }, completion: { finished in
-                UIView.animate(withDuration: animationTime1, animations: {
+                UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                     flashView.alpha = 0
                 }, completion: { finished in
                     flashView.removeFromSuperview( )

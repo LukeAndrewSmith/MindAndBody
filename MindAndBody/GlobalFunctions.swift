@@ -11,13 +11,15 @@ import UIKit
 
 
 //
-// Mark: - Global Function as extensions
+// MARK: - Global Function as extensions
 //
 
 //
 // View Controller
 extension UIViewController {
     
+    //
+    // MARK: Animate
     //
     // Animate Action Sheet Up
     func animateActionSheetUp(actionSheet:UIView, actionSheetHeight:CGFloat, backgroundView:UIView) {
@@ -30,7 +32,7 @@ extension UIViewController {
         actionSheet.frame = CGRect(x: 10, y: self.view.frame.maxY, width: actionSheetWidth, height: actionSheetHeight)
         //
         // Animate
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.5, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.5, options: .curveEaseOut, animations: {
             //
             actionSheet.frame = CGRect(x: 10, y: self.view.frame.maxY - actionSheetHeight - 10, width: actionSheetWidth, height: actionSheetHeight)
             //
@@ -46,7 +48,7 @@ extension UIViewController {
         let actionSheetWidth = UIScreen.main.bounds.width - 20
         //
         // Animate
-        UIView.animate(withDuration: animationTime2, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             //
             actionSheet.frame = CGRect(x: 10, y: self.view.frame.maxY, width: actionSheetWidth, height: actionSheetHeight)
             backgroundView.alpha = 0
@@ -83,7 +85,7 @@ extension UIViewController {
         
         //
         // Animate
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             animationView.frame = CGRect(x: 0, y: animationViewHeight, width: animationViewWidth, height: animationViewHeight)
             backgroundView.alpha = 0.5
         }, completion: nil)
@@ -99,7 +101,7 @@ extension UIViewController {
         let animationViewWidth = UIScreen.main.bounds.width
         //
         // Animate
-        UIView.animate(withDuration: animationTime2, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             animationView.frame = CGRect(x: 0, y: self.view.frame.maxY, width: animationViewWidth, height: animationViewHeight)
             backgroundView.alpha = 0
         }, completion: { finished in
@@ -112,7 +114,7 @@ extension UIViewController {
     
     
     //
-    //
+    // MARK: Format
     //
     // Format Explanation Text
     func formatExplanationText(title:String, howTo:String, toAvoid:String) -> NSAttributedString {
@@ -216,7 +218,7 @@ extension UIViewController {
     }
     
     // ----------------------------------------------------------------------------------------------------------------
-    // Update Tracking Progress
+    // MARK: Update Tracking Progress
     //
     // Week Tracking
     func updateWeekProgress() {
@@ -267,7 +269,7 @@ extension UIViewController {
     // ---
     // Helper functions
     
-    // First monday in month
+    // First monday in week
     func firstMondayInCurrentWeek() -> String? {
         //
         // Get first monday in week

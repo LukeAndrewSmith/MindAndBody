@@ -640,7 +640,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             // Dismiss Presets Table
             //
-            UIView.animate(withDuration: animationTime2, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                 self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
                 self.backgroundViewExpanded.alpha = 0
             }, completion: { finished in
@@ -650,7 +650,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
             })
             //
             // Animate new Elements up
-            UIView.animate(withDuration: animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 self.posesTableView.reloadData()
                 let indexPath2 = NSIndexPath(row: 0, section: 0)
@@ -742,7 +742,7 @@ class YogaChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
         //
-        UIView.animate(withDuration: animationTime2, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             self.expandedImage.center.y = (height/2) * 2.5
             self.backgroundViewImage.alpha = 0
         }, completion: { finished in

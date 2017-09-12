@@ -96,14 +96,10 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         //
-        automaticYogaArray = UserDefaults.standard.object(forKey: "automaticYoga") as! [Int]
-        
-        //
         view.backgroundColor = colour2
         
-        
-        
-        
+        //
+        automaticYogaArray = UserDefaults.standard.object(forKey: "automaticYoga") as! [Int]
         // Progress Bar
         // Thickness
         switch automaticYogaArray[0] {
@@ -529,6 +525,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             if automaticYogaArray[0] == 1 {
                 UIApplication.shared.isIdleTimerDisabled = false
+                // Tracking
+                updateWeekProgress()
+                updateMonthProgress()
                 self.dismiss(animated: true)
             }
         }
@@ -638,7 +637,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         UIApplication.shared.keyWindow?.addSubview(scrollViewExplanation)
     
         //
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 1.5) + 20
             self.backgroundViewExplanation.alpha = 0.5
         }, completion: nil)
@@ -648,7 +647,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBAction func retractExplanation(_ sender: Any) {
         let bounds = UIScreen.main.bounds
         //
-        UIView.animate(withDuration: animationTime2, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             self.scrollViewExplanation.center.y = ((bounds.height - 20)/2) * 2.5 + 20
             self.backgroundViewExplanation.alpha = 0
         }, completion: { finished in

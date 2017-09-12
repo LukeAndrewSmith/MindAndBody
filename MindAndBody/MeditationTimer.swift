@@ -212,7 +212,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         backgroundImage.frame = view.bounds
         
         // Background Index
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
         
         //
         // Background Image/Colour
@@ -263,7 +263,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         backgroundBlur.effect = vibrancyE
         backgroundBlur.isUserInteractionEnabled = false
         //
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
             if backgroundIndex > backgroundImageArray.count {
         } else {
             view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
@@ -687,7 +687,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         if (UIApplication.shared.keyWindow?.subviews.contains(self.presetsTableView))! {
             //
-            UIView.animate(withDuration: animationTime2, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                 self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: self.presetsTableView.frame.size.height)
                 self.backgroundViewSelection.alpha = 0
             }, completion: { finished in
@@ -706,7 +706,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             
         //
         } else {
-            UIView.animate(withDuration: animationTime2, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                 //
                 self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height)
                 self.backgroundViewSelection.alpha = 0
@@ -894,7 +894,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 // Animate fade and size
                 // Position
-                UIView.animate(withDuration: animationTime1, animations: {
+                UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                     //
                     let selectionWidth = self.view.frame.size.width - 20
                     let selectionHeight = CGFloat(147 + 49)
@@ -944,7 +944,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.reorderIntervalBells()
                 
                 // Position
-                UIView.animate(withDuration: animationTime1, animations: {
+                UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                     //
                     //
                     let selectionWidth = self.view.frame.size.width - 20
@@ -1028,7 +1028,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Remove View
         if removeView == true {
             //
-            UIView.animate(withDuration: animationTime2, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                 //
                 self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height)
                 self.backgroundViewSelection.alpha = 0
@@ -1306,7 +1306,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         backgroundViewSelection.frame = UIScreen.main.bounds
         // Animate fade and size
         // Position
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             //
             self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
             //
@@ -1347,7 +1347,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
         // Animate fade and size
         // Position
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             //
             self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
             //
@@ -1414,7 +1414,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
         // Animate fade and size
         // Position
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             //
             self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
             //
@@ -1480,7 +1480,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
         // Animate fade and size
         // Position
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             //
             self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
             //
@@ -1547,7 +1547,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
         // Animate fade and size
         // Position
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             //
             self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
             //
@@ -2023,7 +2023,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                         
                         //
                         // Dismiss Table
-                        UIView.animate(withDuration: animationTime2, animations: {
+                        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                             self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: self.presetsTableView.frame.size.height)
                             self.backgroundViewSelection.alpha = 0
                         }, completion: { finished in
@@ -2033,7 +2033,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                         })
                         //
                         // Animate up new elements
-                        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                             //
                             self.presetsConstraint.constant = 0
                             self.durationConstraint.constant = 0
@@ -2093,7 +2093,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 if presetsArray.count != 0 {
                     //
                     // Dismiss Table
-                    UIView.animate(withDuration: animationTime2, animations: {
+                    UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                         self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: self.presetsTableView.frame.size.height)
                         self.backgroundViewSelection.alpha = 0
                     }, completion: { finished in
@@ -2103,7 +2103,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     })
                     //
                     // Animate up new elements
-                    UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         //
                         self.presetsConstraint.constant = 0
                         self.durationConstraint.constant = 0
@@ -2194,7 +2194,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     okButton2.isEnabled = false
                     // Animate fade and size
                     // Position
-                    UIView.animate(withDuration: animationTime1, animations: {
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                         //
                         let selectionWidth = self.view.frame.size.width - 20
                         let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88

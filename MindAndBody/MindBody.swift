@@ -104,7 +104,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         blur7.removeFromSuperview()
         
         // Background Index
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
         
         //
         // Background Image/Colour
@@ -199,68 +199,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
 
     
     //
-    // Register Defaults --------------------------------------------------------------------------------
-    //
-    func registerDefaults() {
-        let defaults = UserDefaults.standard
-        
-        
-        
-        //
-        // Tracking
-        // Progress
-        defaults.register(defaults: ["weekProgress" : 0])
-        defaults.register(defaults: ["monthProgress" : 0])
-        // Update progress (first monday of last week/month completed, used to check if progress needs to be reset to 0 for first entry of new week/month)
-        defaults.register(defaults: ["lastResetWeek" : firstMondayInCurrentWeek()])
-        defaults.register(defaults: ["lastResetWeek" : firstMondayInCurrentMonth()])
-
-        
-        
-        //
-        // Settings
-        // Background image index
-        UserDefaults.standard.register(defaults: ["homeScreenBackground" : 2])
-        // Default Image
-        UserDefaults.standard.register(defaults: ["defaultImage" : "demonstration"])
-        // Weight
-        UserDefaults.standard.register(defaults: ["units" : "kg"])
-        // Rest times
-        UserDefaults.standard.register(defaults: ["restTimes" : [15, 45, 10]])
-        // Yoga Automatic
-        UserDefaults.standard.register(defaults: ["automaticYoga" : [0, -1, -1, -1]])
-        
-        
-        
-        //
-        // Register Walkthroughs
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough" : false])
-        //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough1" : false])
-        //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthroughc" : false])
-        //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthroughw" : false])
-        //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2" : false])
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2y" : false])
-        //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough3" : false])
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough3y" : false])
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough4y" : false])
-        //
-        UserDefaults.standard.register(defaults: ["profileWalkthrough" : false])
-        //
-        UserDefaults.standard.register(defaults: ["informationWalkthrough" : false])
-        //
-        UserDefaults.standard.register(defaults: ["informationWalkthroughI" : false])
-        //
-        UserDefaults.standard.register(defaults: ["informationWalkthroughm" : false])
-        
-        
-    }
-    
-    //
     // View Did Load ------------------------------------------------------------------------------------------------------------------------------
     //
     override func viewDidLoad() {
@@ -302,12 +240,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             self.present(alert, animated: true, completion: nil)
             UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough")
         }
-        
-        
-        //
-        registerDefaults()
-        
-        
         
         
         // Navigation Bar
@@ -421,16 +353,18 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             flashView.backgroundColor = colour1
             buttonToSelect?.addSubview(flashView)
             buttonToSelect?.bringSubview(toFront: flashView)
-            UIView.animate(withDuration: animationTime4, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime4, animations: {
                 flashView.alpha = 1
             }, completion: { finished in
-                UIView.animate(withDuration: animationTime1, animations: {
+                //
+                buttonToSelect?.sendActions(for: .touchUpInside)
+                //
+                UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                     flashView.alpha = 0
                 }, completion: { finished in
                     flashView.removeFromSuperview()
                 })
             })
-            buttonToSelect?.sendActions(for: .touchUpInside)
             //
         }
     }
@@ -548,7 +482,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         
        
         
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
         if backgroundIndex == backgroundImageArray.count {
         } else {
             //

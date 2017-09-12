@@ -36,7 +36,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" shadowImage="ShadowImage" id="Ace-JK-2vv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" shadowImage="ShadowImage" id="Ace-JK-2vv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -67,7 +67,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="CcZ-cs-3tG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="CcZ-cs-3tG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -192,6 +192,7 @@
                         <outlet property="navigationBar" destination="CS7-Ic-9nL" id="fCD-pq-hJl"/>
                         <outlet property="tableView" destination="JUr-nE-2rw" id="w1g-py-tSL"/>
                         <segue destination="rEy-tv-PZG" kind="show" identifier="profileDetail" id="ISC-3A-zDs"/>
+                        <segue destination="MvL-yD-EMG" kind="presentation" identifier="scheduleCreation" id="1au-Rb-rJf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jt2-tO-Tdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -237,6 +238,24 @@
             </objects>
             <point key="canvasLocation" x="-346" y="2947"/>
         </scene>
+        <!--Schedule Creator-->
+        <scene sceneID="GYk-Ow-3Jh">
+            <objects>
+                <viewController id="MvL-yD-EMG" customClass="ScheduleCreator" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="biQ-vA-1IL"/>
+                        <viewControllerLayoutGuide type="bottom" id="swz-92-i1A"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="K2Y-Bu-j3L">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rHM-Hl-UU2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="486" y="2947"/>
+        </scene>
         <!--view5-->
         <scene sceneID="Qf8-wT-bjo">
             <objects>
@@ -248,7 +267,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Kic-cx-WPG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Kic-cx-WPG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -322,7 +341,7 @@
         <scene sceneID="kMx-Nx-xwg">
             <objects>
                 <collectionViewController id="U5d-IN-X7D" customClass="BackgroundImageCollection" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="EZa-OY-nwE">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EZa-OY-nwE">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -424,7 +443,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="mbW-ps-Fws">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="mbW-ps-Fws">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -511,7 +530,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="4pX-9H-3C4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="4pX-9H-3C4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -2404,7 +2423,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="rov-No-Wka">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="rov-No-Wka">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -2515,7 +2534,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="012-1d-8yV">
-                                                    <rect key="frame" x="141.5" y="330" width="93.5" height="23"/>
+                                                    <rect key="frame" x="141.5" y="331" width="93.5" height="23"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -3151,7 +3170,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-jO-oQj">
-                                                    <rect key="frame" x="141.5" y="369.5" width="93.5" height="23"/>
+                                                    <rect key="frame" x="141.5" y="369" width="93.5" height="23"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -3536,7 +3555,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5O-yZ-uLf">
-                                                    <rect key="frame" x="141.5" y="359.5" width="93.5" height="23"/>
+                                                    <rect key="frame" x="141.5" y="360.5" width="93.5" height="23"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4018,7 +4037,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tD2-Ad-c9U">
-                                                    <rect key="frame" x="108" y="110" width="160" height="86"/>
+                                                    <rect key="frame" x="108.5" y="110" width="160" height="86"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="72"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4393,7 +4412,6 @@
         <image name="Tricep" width="375" height="375"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NiW-Wv-f4m"/>
         <segue reference="CTF-I1-syG"/>
         <segue reference="Ptw-Py-keQ"/>
         <segue reference="qzt-4F-2h8"/>
@@ -4401,5 +4419,6 @@
         <segue reference="Fhn-aO-iU6"/>
         <segue reference="LFV-jn-8Ld"/>
         <segue reference="omW-5o-hGa"/>
+        <segue reference="M72-ar-DyO"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -111,7 +111,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     // Add movement table background (dismiss table)
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-        UIView.animate(withDuration: animationTime2, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             self.restTimeView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
 
             //
@@ -134,7 +134,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         //
         defaults.synchronize()
         //
-        UIView.animate(withDuration: animationTime2, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             self.restTimeView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
             //
             self.backgroundViewExpanded.alpha = 0
@@ -155,18 +155,19 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
 // Sections
     // Number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 7
     }
     
     // Section Titles
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0: return NSLocalizedString("backgroundImage", comment: "")
-        case 1: return NSLocalizedString("defaultImage", comment: "")
-        case 2: return NSLocalizedString("units", comment: "")
-        case 3: return NSLocalizedString("restTime", comment: "")
-        case 4: return NSLocalizedString("automaticYoga", comment: "")
-        case 5: return NSLocalizedString("reset", comment: "")
+        case 1: return NSLocalizedString("homePage", comment: "")
+        case 2: return NSLocalizedString("defaultImage", comment: "")
+        case 3: return NSLocalizedString("units", comment: "")
+        case 4: return NSLocalizedString("restTime", comment: "")
+        case 5: return NSLocalizedString("automaticYoga", comment: "")
+        case 6: return NSLocalizedString("reset", comment: "")
         default: return ""
         }
     }
@@ -204,9 +205,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         switch section {
-        case 0,1,2,4: return 1
-        case 3: return 3
-        case 5: return 2
+        case 0,1,2,3,5: return 1
+        case 4: return 3
+        case 6: return 2
         default: break
         }
         return 0
@@ -233,7 +234,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             backgroundImageView.center.y = cell.center.y
             
             // Retreive background index
-            let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+            let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
             
             // Set image background based on index
             if backgroundIndex < backgroundImageArray.count {
@@ -260,34 +261,31 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             }
             //
             return cell
+           
             
             
-        // Default Image
-        case 1:
+        // Home Screen, Default Image, Units
+        case 1,2,3:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             // Retreive Presentation Style
-            cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "defaultImage")!, comment: "")
+            switch indexPath.section {
+            case 1:
+                cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "homeScreen")!, comment: "")
+            case 2:
+                cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "defaultImage")!, comment: "")
+            case 3:
+                cell.textLabel?.text = UserDefaults.standard.string(forKey: "units")
+            default: break
+            }
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             return cell
             
- 
-        // Units
-        case 2:
-        //
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            // Retreive Units
-            cell.textLabel?.text = UserDefaults.standard.string(forKey: "units")
-            cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            return cell
-
             
         // Rest Time
-        case 3:
+        case 4:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             let row = indexPath.row
@@ -311,7 +309,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
           
             
         // Yoga Automatic
-        case 4:
+        case 5:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
@@ -333,7 +331,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
             
         // Reset
-        case 5:
+        case 6:
         //
             // Reset Walkthrough
             if indexPath.row == 0 {
@@ -373,8 +371,24 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             tableView.deselectRow(at: indexPath, animated: true)
 
             
-        // Default Image
+        // Home Screen
         case 1:
+            // home --> schedule
+            if cell?.textLabel?.text == NSLocalizedString("home", comment: "") {
+                cell?.textLabel?.text = NSLocalizedString("schedule", comment: "")
+                UserDefaults.standard.set("schedule", forKey: "homeScreen")
+            // schedule --> home
+            } else if cell?.textLabel?.text == NSLocalizedString("schedule", comment: "") {
+                cell?.textLabel?.text = NSLocalizedString("home", comment: "")
+                UserDefaults.standard.set("home", forKey: "homeScreen")
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
+            //
+            UserDefaults.standard.synchronize()
+            
+            
+        // Default Image
+        case 2:
             // demonstration --> targetArea
             if cell?.textLabel?.text == NSLocalizedString("demonstration", comment: "") {
                 cell?.textLabel?.text = NSLocalizedString("targetArea", comment: "")
@@ -385,10 +399,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 UserDefaults.standard.set("demonstration", forKey: "defaultImage")
             }
             tableView.deselectRow(at: indexPath, animated: true)
+            //
+            UserDefaults.standard.synchronize()
             
 
         // Units
-        case 2:
+        case 3:
         //  
             // kg --> lb
             if cell?.textLabel?.text == "kg" {
@@ -400,10 +416,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 UserDefaults.standard.set("kg", forKey: "units")
             }
             tableView.deselectRow(at: indexPath, animated: true)
+            //
+            UserDefaults.standard.synchronize()
             
             
         // Rest Time
-        case 3:
+        case 4:
             //
             selectedRow = indexPath.row
             //
@@ -429,7 +447,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             backgroundViewExpanded.frame = UIScreen.main.bounds
             //
             // Position
-            UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 self.restTimeView.frame = CGRect(x: 10, y: self.view.frame.maxY - restHeight - 10, width: restWidth, height: restHeight)
 
@@ -448,7 +466,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
             
         // Yoga Automatic
-        case 4:
+        case 5:
         //
             //
             // Segue to homescreen choice
@@ -458,7 +476,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
         
         // Reset
-        case 5:
+        case 6:
         //
             // Reset Walkthrough
             if indexPath.row == 0 {

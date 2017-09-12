@@ -1229,13 +1229,13 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                         //
                         self.beginButtonConstraint.constant = 0
                         //
-                        UIView.animate(withDuration: animationTime1, animations: {
+                        UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                             //
                             self.editingButton.alpha = 1
                             self.view.layoutIfNeeded()
                         })
                         //
-                        UIView.animate(withDuration: animationTime2, animations: {
+                        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                             self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
                             self.backgroundViewExpanded.alpha = 0
                             //
@@ -1294,13 +1294,13 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     //
                     self.beginButtonConstraint.constant = 0
                     //
-                    UIView.animate(withDuration: animationTime1, animations: {
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                         //
                         self.editingButton.alpha = 1
                         self.view.layoutIfNeeded()
                     })
                     //
-                    UIView.animate(withDuration: animationTime2, animations: {
+                    UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                         self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
                         self.backgroundViewExpanded.alpha = 0
                         //
@@ -1335,7 +1335,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     backgroundViewExpanded.frame = UIScreen.main.bounds
                     //
                     // Animate table
-                    UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         //
                         //
                         self.movementsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY - height - 10, width: UIScreen.main.bounds.width - 20, height: height)
@@ -1366,7 +1366,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     backgroundViewExpanded.frame = UIScreen.main.bounds
                     //
                     // Animate table
-                    UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         //
                         self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY - 147 - 49 - 10, width: UIScreen.main.bounds.width - 20, height: 147 + 49)
                         // picker
@@ -1397,7 +1397,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             //
             defaults.synchronize()
             // Remove Table
-            UIView.animate(withDuration: animationTime2, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                 self.movementsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.movementsTableView.frame.size.width, height: self.movementsTableView.frame.size.height)
                 //
                 self.backgroundViewExpanded.alpha = 0
@@ -1680,7 +1680,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         backgroundViewExpanded.frame = UIScreen.main.bounds
         // Animate table fade and size
         // Position
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.5, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.5, options: .curveEaseOut, animations: {
             self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY - tableHeight - 10, width: tableWidth, height: tableHeight)
             self.presetsTableView.reloadData()
             //
@@ -1695,7 +1695,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         if (UIApplication.shared.keyWindow?.subviews.contains(self.presetsTableView))! {
             //
-            UIView.animate(withDuration: animationTime2, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                 self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
                 self.backgroundViewExpanded.alpha = 0
             }, completion: { finished in
@@ -1705,7 +1705,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
             })
             //
         } else {
-            UIView.animate(withDuration: animationTime2, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                 self.movementsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.movementsTableView.frame.size.width, height: self.movementsTableView.frame.size.height)
                 self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.setsRepsView.frame.size.width, height: self.setsRepsView.frame.size.height)
                 //
@@ -1757,7 +1757,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         defaults.synchronize()
         //
-        UIView.animate(withDuration: animationTime2, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.setsRepsView.frame.size.width, height: self.setsRepsView.frame.size.height)
             //
             self.backgroundViewExpanded.alpha = 0
@@ -1806,7 +1806,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewImage, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(expandedImage, aboveSubview: backgroundViewImage)
         //
-        UIView.animate(withDuration: animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.expandedImage.center.y = (height/2) * 1.5
             self.backgroundViewImage.alpha = 0.5
         }, completion: nil)
@@ -1817,7 +1817,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
         //
         let height = self.view.frame.size.height + (navigationController?.navigationBar.frame.size.height)! + UIApplication.shared.statusBarFrame.height
         //
-        UIView.animate(withDuration: animationTime2, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             self.expandedImage.center.y = (height/2) * 2.5
             self.backgroundViewImage.alpha = 0
         }, completion: { finished in

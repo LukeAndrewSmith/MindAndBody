@@ -66,6 +66,10 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set status bar to light
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        
         //
         // Walkthrough
         if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughC") == false {
@@ -88,7 +92,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         scheduleChoiceTable.layer.borderWidth = 1
         scheduleChoiceTable.layer.borderColor = colour1.cgColor
         // Background View
-        backgroundViewExpanded.backgroundColor = .black
+        backgroundViewExpanded.backgroundColor = .black    
         backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
         //
 
@@ -97,18 +101,24 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         // Background Image
         backgroundImage.frame = view.bounds
         
+        //
+        let test = UserDefaults.standard.string(forKey: "defaultImage")
+        
         // Background Index
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
+        
         //
         // Background Image/Colour
+        //
         if backgroundIndex < backgroundImageArray.count {
             //
             backgroundImage.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
         } else if backgroundIndex == backgroundImageArray.count {
             //
             backgroundImage.image = nil
-            backgroundImage.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            backgroundImage.backgroundColor = colour1
         }
+
         //
         // BackgroundBlur/Vibrancy
         let backgroundBlurE = UIBlurEffect(style: .dark)
@@ -284,7 +294,14 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 72
+        switch tableView {
+        case scheduleTable:
+            return 72
+        case scheduleChoiceTable:
+            return 47
+        default:
+            return 0
+        }
     }
     
     // Row cell customization
@@ -370,6 +387,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     //
     let maskView1 = UIButton()
     let maskView2 = UIButton()
+    let maskViewBackButton = UIImageView()
     //
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
@@ -415,7 +433,13 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     UIApplication.shared.keyWindow?.insertSubview(self.maskView1, aboveSubview: self.view)
                     UIApplication.shared.keyWindow?.insertSubview(self.maskView2, aboveSubview: self.view)
                     //
-                    UIView.animate(withDuration: animationTime1, animations: {
+                    maskViewBackButton.image = #imageLiteral(resourceName: "Back Arrow")
+                    maskViewBackButton.tintColor = colour1
+                    maskViewBackButton.sizeToFit()
+                    maskViewBackButton.frame = CGRect(x: 5, y: maskView1.bounds.height - maskViewBackButton.bounds.height - 11, width: maskViewBackButton.bounds.width, height: maskViewBackButton.bounds.height)
+                    maskView1.addSubview(maskViewBackButton)
+                    //
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                         self.maskView1.alpha = 0.5
                         self.maskView2.alpha = 0.5
                     })
@@ -443,7 +467,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // Session selection mask
     func maskAction() {
         //
-        UIView.animate(withDuration: animationTime1, animations: {
+        UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
             self.maskView1.alpha = 0
             self.maskView2.alpha = 0
         }, completion: { finished in
@@ -514,7 +538,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             //
             scheduleTable.alpha = 0
             //
-            UIView.animate(withDuration: animationTime1, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                 snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
                 snapShot2?.center.x = self.view.center.x
             }, completion: { finish in
@@ -554,7 +578,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             //
             scheduleTable.alpha = 0
             //
-            UIView.animate(withDuration: animationTime1, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                 snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
                 snapShot2?.center.x = self.view.center.x
             }, completion: { finish in

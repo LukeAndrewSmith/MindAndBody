@@ -1463,6 +1463,8 @@
         "resetApp" = "Reset App";
         "resetWalkthrough" = "Reset Walkthrough";
 
+        //
+        "homeScreen" = "Home Screen";
 
         // Colour Alert //
         "colourTitle" = "App Colour Change";

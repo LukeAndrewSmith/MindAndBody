@@ -124,7 +124,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         backgroundImage.frame = view.bounds
         
         // Background Index
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "homeScreenBackground")
+        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
         //
         // Background Image/Colour
         if backgroundIndex < backgroundImageArray.count {
@@ -180,6 +180,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 //        view.bringSubview(toFront: swipeGestureView)
     }
 
+    // MARK: Test
     //
     // Set Dates
     func setDates() {
@@ -191,6 +192,8 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
         }
         currentMondayDate = Int(dfDay.string(from: mondaysDate))!
+        let test = mondaysDate
+        let test2 = Date()
         
         // Format Month
         let dfMonth = DateFormatter()
@@ -217,6 +220,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 //
     //
     var currentPositionLabels: [UILabel] = []
+    var currentPositionLabel = UILabel()
 
     //
     func drawGraph() {
@@ -305,29 +309,122 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         //
         // Extra detail touch tracker layer
-        let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 50, thumbBorderWidth: 2)
+        let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 100, thumbBorderWidth: 2)
         let trackerLayerSettings = ChartPointsLineTrackerLayerSettings(thumbSettings: thumbSettings, selectNearest: true)
         
-        // Current position labels array out of func so okbuttonaction can clear them
+//        // Current position labels array out of func so okbuttonaction can clear them
+//        let chartPointsTrackerLayer = ChartPointsLineTrackerLayer<ChartPoint, Any>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lines: [chartPoints], lineColor: colour2, animDuration: 1, animDelay: 2, settings: trackerLayerSettings) {chartPointsWithScreenLoc in
+//            
+//            self.currentPositionLabels.forEach{$0.removeFromSuperview()}
+//            
+//            for (index, chartPointWithScreenLoc) in chartPointsWithScreenLoc.enumerated() {
+//                
+//                let label = UILabel()
+//                let test = chartPointWithScreenLoc.chartPoint.y
+//                let test2 = chartPointWithScreenLoc.screenLoc.y
+//                label.text = chartPointWithScreenLoc.chartPoint.description
+//                label.sizeToFit()
+//                label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x + label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
+//                if label.frame.maxX > self.view.bounds.width {
+//                    label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x - label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
+//                }
+//                
+//                label.backgroundColor = colour2
+//                label.textColor = colour1
+//                
+//                self.currentPositionLabels.append(label)
+//                self.view.addSubview(label)
+//            }
+//        }
         
-        let chartPointsTrackerLayer = ChartPointsLineTrackerLayer<ChartPoint, Any>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lines: [chartPoints], lineColor: colour2, animDuration: 1, animDelay: 2, settings: trackerLayerSettings) {chartPointsWithScreenLoc in
-            
-            self.currentPositionLabels.forEach{$0.removeFromSuperview()}
-            
-            for (index, chartPointWithScreenLoc) in chartPointsWithScreenLoc.enumerated() {
-                
-                let label = UILabel()
-                label.text = chartPointWithScreenLoc.chartPoint.description
-                label.sizeToFit()
-                label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x + label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
-                
-                label.backgroundColor = colour2
-                label.textColor = colour1
-                
-                self.currentPositionLabels.append(label)
-                self.view.addSubview(label)
-            }
-        }
+//        let currentPositionLabel = UILabel()Z
+//        let trackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak chartPointsLayer, weak currentPositionLabel] chartPointWithScreenLoc in
+//            
+//            self.currentPositionLabels.forEach{$0.removeFromSuperview()}
+//            
+//            for (index, chartPointWithScreenLoc) in chartPointWithScreenLoc.enumerated() {
+//                
+//                let label = UILabel()
+//                let test = chartPointWithScreenLoc.chartPoint.y
+//                let test2 = chartPointWithScreenLoc.screenLoc.y
+//                label.text = chartPointWithScreenLoc.chartPoint.description
+//                label.sizeToFit()
+//                label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x + label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
+//                if label.frame.maxX > self.view.bounds.width {
+//                    label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x - label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
+//                }
+//                
+//                label.backgroundColor = colour2
+//                label.textColor = colour1
+//                
+//                self.currentPositionLabels.append(label)
+//                self.view.addSubview(label)
+//            }
+//        }
+        
+//        let infoView = InfoWithIntroView(frame: CGRect(x: 10, y: 70, width: 100, height: 50))
+//        view.addSubview(infoView)
+        
+
+//        let chartPointsTrackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak chartPointsLayer, weak currentPositionLabel] screenLoc in
+////                    chartPointsLayer?.highlightChartpointView(screenLoc: screenLoc)
+//                    if let chartPoint = chartPointsLayer?.chartPointsForScreenLocX(screenLoc.x).first {
+//                        currentPositionLabel?.text = chartPoint.description
+//                        currentPositionLabel?.sizeToFit()
+//                        self.view.addSubview(currentPositionLabel!)
+//                    } else {
+//                        currentPositionLabel?.removeFromSuperview()
+//                    }
+//                    }, lineColor: colour2, lineWidth: 1)
+        
+//        let chartPointsTrackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak chartPointsCircleLayer, weak currentPositionLabel] screenLoc in
+//            
+//            
+//            // Label
+//            currentPositionLabel?.text = chartPoints.description
+//            currentPositionLabel?.sizeToFit()
+//            currentPositionLabel?.center = CGPoint(x: (currentPositionLabel?.frame.width)! / 2, y: chartFrame.minY - (currentPositionLabel?.frame.height)! / 2)
+//            if (currentPositionLabel?.frame.maxX)! > self.view.bounds.width {
+//                currentPositionLabel?.center = CGPoint(x: (currentPositionLabel?.frame.width)! / 2, y: chartFrame.minY - ((currentPositionLabel?.frame.height)! / 2))
+//            }
+//            
+//            currentPositionLabel?.backgroundColor = colour2
+//            currentPositionLabel?.textColor = colour1
+//            
+//            self.currentPositionLabels.append(currentPositionLabel!)
+//            self.view.addSubview(currentPositionLabel!)
+//            
+//            //
+//            if let chartPoint = chartPointsCircleLayer?.chartPointsForScreenLocX(screenLoc.x).first {
+//                currentPositionLabel?.text = chartPoint.description
+//            } else {
+//                currentPositionLabel?.removeFromSuperview()
+//            }
+//        }, lineColor: colour2, lineWidth: 1)
+//
+        
+        
+//        let trackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak candleStickLayer, weak infoView] screenLoc in
+//            candleStickLayer?.highlightChartpointView(screenLoc: screenLoc)
+//            if let chartPoint = candleStickLayer?.chartPointsForScreenLocX(screenLoc.x).first {
+//                infoView?.showChartPoint(chartPoint)
+//            } else {
+//                infoView?.clear()
+//            }
+//            }, lineColor: UIColor.red, lineWidth: Env.iPad ? 1 : 0.6)
+        
+
+        
+//        
+//        locChangedFunc: {[weak chartPointsLayer, weak infoView] screenLoc in
+//            candleStickLayer?.highlightChartpointView(screenLoc: screenLoc)
+//            if let chartPoint = candleStickLayer?.chartPointsForScreenLocX(screenLoc.x).first {
+//                infoView?.showChartPoint(chartPoint)
+//            } else {
+//                infoView?.clear()
+//            }
+//            }, lineColor: colour2, lineWidth: 1)
+
 
         //
         // Finalise ----------------------------
@@ -341,7 +438,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             chartPointsLayer,
             chartPointsLineLayer,
             chartPointsCircleLayer,
-            chartPointsTrackerLayer
+//            chartPointsTrackerLayer
             ] as [ChartLayer]
         //
         // Add new layer for x dividers if selected time scale == 3 months or greater
@@ -1016,7 +1113,6 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         switch selectedTimeScale {
         // Week
         case 0:
-//            let xModel = ChartAxisModel(axisValues: xAxisValues, lineColor: colour1, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], leadingPadding: ChartAxisPadding.label, trailingPadding: ChartAxisPadding.label)
             // Date formatters
             let dfConvert = DateFormatter()
             dfConvert.dateFormat = "dd.MM.yyyy"
@@ -1354,3 +1450,129 @@ extension TrackingScreen: UIViewControllerTransitioningDelegate {
 class TrackingNavigation: UINavigationController {
     
 }
+
+
+
+private class InfoView: UIView {
+    
+    let statusView: UIView
+    
+    let dateLabel: UILabel
+    let percentageTextLabel: UILabel
+    
+    
+    override init(frame: CGRect) {
+        
+        let itemHeight: CGFloat = 40
+        let y = (frame.height - itemHeight) / CGFloat(2)
+        
+        statusView = UIView(frame: CGRect(x: 0, y: y, width: itemHeight, height: itemHeight))
+        statusView.layer.borderColor = UIColor.black.cgColor
+        statusView.layer.borderWidth = 1
+        statusView.layer.cornerRadius = 8
+        
+        let font = UIFont(name: "SFUIDisplay-light", size: 17)
+        
+        dateLabel = UILabel()
+        dateLabel.font = font
+        
+        percentageTextLabel = UILabel()
+        percentageTextLabel.font = font
+        
+        super.init(frame: frame)
+        
+        addSubview(statusView)
+        addSubview(dateLabel)
+        addSubview(percentageTextLabel)
+    }
+    
+    fileprivate override func didMoveToSuperview() {
+        
+        let views = [statusView, dateLabel, percentageTextLabel]
+        for v in views {
+            v.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        let namedViews = views.enumerated().map{index, view in
+            ("v\(index)", view)
+        }
+        
+        var viewsDict = Dictionary<String, UIView>()
+        for namedView in namedViews {
+            viewsDict[namedView.0] = namedView.1
+        }
+        
+        let circleDiameter: CGFloat = 15
+        let labelsSpace: CGFloat = 5
+        
+        let hConstraintStr = namedViews[1..<namedViews.count].reduce("H:|[v0(\(circleDiameter))]") {str, tuple in
+            "\(str)-(\(labelsSpace))-[\(tuple.0)]"
+        }
+        
+        let vConstraits = namedViews.flatMap {NSLayoutConstraint.constraints(withVisualFormat: "V:|-(18)-[\($0.0)(\(circleDiameter))]", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDict)}
+        
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: hConstraintStr, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDict)
+            + vConstraits)
+        
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func showChartPoint(_ chartPoint: ChartPoint) {
+        statusView.backgroundColor = colour2
+        dateLabel.text = chartPoint.x.labels.first?.text ?? ""
+        percentageTextLabel.text = "\(chartPoint.y)"
+    }
+    
+    func clear() {
+        statusView.backgroundColor = UIColor.clear
+    }
+}
+
+
+private class InfoWithIntroView: UIView {
+    
+    var introView: UIView!
+    var infoView: InfoView!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    fileprivate override func didMoveToSuperview() {
+        let label = UILabel(frame: CGRect(x: 0, y: bounds.origin.y, width: bounds.width, height: bounds.height))
+        label.text = "Drag the line to see chartpoint data"
+        label.font = UIFont(name: "SFUIDisplay-light", size: 17)
+        label.backgroundColor = UIColor.white
+        introView = label
+        
+        infoView = InfoView(frame: bounds)
+        
+        addSubview(infoView)
+        addSubview(introView)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    fileprivate func animateIntroAlpha(_ alpha: CGFloat) {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.introView.alpha = alpha
+        })
+    }
+    
+    func showChartPoint(_ chartPoint: ChartPointCandleStick) {
+        animateIntroAlpha(0)
+        infoView.showChartPoint(chartPoint)
+    }
+    
+    func clear() {
+        animateIntroAlpha(1)
+        infoView.clear()
+    }
+}
+
+

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     //
@@ -18,12 +18,22 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var navigationBar: UINavigationItem!
     //
     @IBOutlet weak var questionsTable: UITableView!
+    //
+    var answerTable = UITableView()
+    //
+    // Answer elements
+    var selectedQuestion = Int()
+    var answerView = UIView()
+    var answerPicker = UIPickerView()
+    var okButton = UIButton()
+    var backgroundViewExpanded = UIButton()
     
-    // Selected section
+    // Selected section (Goal/Me/Time/Preferences)
     var selectedSection = Int()
+    
     // Arrays
     var titleArray: [String] = ["goals", "me", "time", "preferences"]
-    
+    //
     var questionArray: [[String]] =
         [
             // Goals
@@ -35,6 +45,67 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // Preferences
             ["This is a question about goals", "This also is a question", "Hmm, tricky question", "Obvious question"]
         ]
+    // 
+    var answerArray: [[[String]]] =
+        [
+            // Goals
+            [
+                // Q1
+                ["Possible Answer", "Also a possible answer", "Could be", "Definitely not"],
+                // Q2
+                ["Possible Answer2", "Also a possible answer", "Could be", "Definitely not"],
+                // Q3
+                ["Possible Answer3", "Also a possible answer", "Could be", "Definitely not"],
+                // Q4
+                ["Possible Answer4", "Also a possible answer", "Could be", "Definitely not"]
+            ],
+            // Me
+            [
+                // Q1
+                ["Possible Answer", "Also a possible answer", "Could be", "Definitely not"],
+                // Q2
+                ["Possible Answer2", "Also a possible answer", "Could be", "Definitely not"],
+                // Q3
+                ["Possible Answer3", "Also a possible answer", "Could be", "Definitely not"],
+                // Q4
+                ["Possible Answer4", "Also a possible answer", "Could be", "Definitely not"]
+            ],
+            // Time
+            [
+                // Q1
+                ["Possible Answer", "Also a possible answer", "Could be", "Definitely not"],
+                // Q2
+                ["Possible Answer2", "Also a possible answer", "Could be", "Definitely not"],
+                // Q3
+                ["Possible Answer3", "Also a possible answer", "Could be", "Definitely not"],
+                // Q4
+                ["Possible Answer4", "Also a possible answer", "Could be", "Definitely not"]
+            ],
+            // Preferences
+            [
+                // Q1
+                ["Possible Answer", "Also a possible answer", "Could be", "Definitely not"],
+                // Q2
+                ["Possible Answer2", "Also a possible answer", "Could be", "Definitely not"],
+                // Q3
+                ["Possible Answer3", "Also a possible answer", "Could be", "Definitely not"],
+                // Q4
+                ["Possible Answer4", "Also a possible answer", "Could be", "Definitely not"]
+            ],
+    ]
+    //
+    var selectedAnswerArray: [[Int]] =
+        [
+            // Goals
+            [-1, -1, -1, -1],
+            // Me
+            [-1, -1, -1, -1],
+            // Time
+            [-1, -1, -1, -1],
+            // Preferences
+            [-1, -1, -1, -1]
+    ]
+
     
     //
     // Viewdidload --------------------------------------------------------------------------------------------------------
@@ -49,6 +120,34 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Table View
         questionsTable.tableFooterView = UIView()
         questionsTable.separatorStyle = .none
+        
+        // Answer Elements
+        // view
+        answerView.backgroundColor = colour2
+        answerView.layer.cornerRadius = 15
+        answerView.layer.masksToBounds = true
+        answerView.frame.size = CGSize(width: view.bounds.width - 20, height: 147 + 49)
+        // picker
+        answerPicker.backgroundColor = colour2
+        answerPicker.delegate = self
+        answerPicker.dataSource = self
+        answerPicker.frame = CGRect(x: 0, y: 0, width: answerView.bounds.width, height: 147)
+        // ok
+        okButton.backgroundColor = colour1
+        okButton.setTitleColor(colour3, for: .normal)
+        okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
+        okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
+        okButton.frame = CGRect(x: 0, y: 147, width: answerView.bounds.width, height: 49)
+        //
+        answerView.addSubview(answerPicker)
+        answerView.addSubview(okButton)
+        //
+        // Background View
+        backgroundViewExpanded.backgroundColor = .black
+        backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
+        //
+
         
     }
     
@@ -119,7 +218,11 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.backgroundColor = .clear
             cell.backgroundView = UIView()
             //
-            cell.textLabel?.text = "-"
+        if selectedAnswerArray[selectedSection][indexPath.section] == -1 {
+            cell.textLabel?.text = "Answer"
+        } else {
+            cell.textLabel?.text = answerArray[selectedSection][indexPath.row][selectedAnswerArray[selectedSection][indexPath.section]]
+        }
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.textLabel?.textAlignment = .right
             cell.textLabel? .textColor = colour2
@@ -140,9 +243,87 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
 //        default:
 //            // Selected section
 //        }
-        
+        //
+        selectedQuestion = indexPath.section
+        switch selectedAnswerArray[selectedSection][selectedQuestion] {
+        case -1:
+            answerPicker.selectRow(0, inComponent: 0, animated: true)
+        default:
+            answerPicker.selectRow(selectedAnswerArray[selectedSection][selectedQuestion], inComponent: 0, animated: true)
+            
+        }
+        //
+        UIApplication.shared.keyWindow?.insertSubview(answerView, aboveSubview: view)
+        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: answerView)
+        animateActionSheetUp(actionSheet: answerView, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
+        //
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+
+    //
+    // Picker View ----------------------------------------------------------------------------------------------------
+    //
+    // Number of components
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // Number of rows
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return answerArray[selectedSection][selectedQuestion].count
+    }
+    
+    // View for row
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        //
+        let answerLabel = UILabel()
+        answerLabel.text = NSLocalizedString(answerArray[selectedSection][selectedQuestion][row], comment: "")
+        answerLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        answerLabel.textColor = colour1
+        //
+        answerLabel.textAlignment = .center
+        return answerLabel
+        //
+    }
+    
+    // Row height
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 37
+    }
+    
+    // Did select row
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        //
+    }
+    
+    
+    // Background view expanded action
+    // Add movement table background (dismiss table)
+    func backgroundViewExpandedAction(_ sender: Any) {
+        //
+        animateActionSheetDown(actionSheet: answerView, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
+    }
+
+    // OK Button
+    //
+    // Ok button action
+    func okButtonAction(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        //
+//        var restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+        //
+//        restTimes[selectedRow] = restTimesArray[restTimePicker.selectedRow(inComponent: 0)]
+//        defaults.set(restTimes, forKey: "restTimes")
+        //
+//        defaults.synchronize()
+        selectedAnswerArray[selectedSection][selectedQuestion] = answerPicker.selectedRow(inComponent: 0)
+        //
+        animateActionSheetDown(actionSheet: answerView, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
+        //
+        questionsTable.reloadData()
+    }
+
     
     
 }

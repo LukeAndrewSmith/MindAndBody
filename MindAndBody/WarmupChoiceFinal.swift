@@ -1009,7 +1009,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             presetsButton.sendActions(for: .touchUpInside)
             let test = automaticSelectionProgress
             //
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + animationTime1) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + AnimationTimes.animationTime1) {
                 let selectedSession = automaticSelectionArray[automaticSelectionProgress]
                 let indexPath = NSIndexPath(row: sessions[selectedSession][0], section: sessions[selectedSession][1])
                 self.presetsTableView.selectRow(at: indexPath as IndexPath, animated: true, scrollPosition: .top)
@@ -1196,7 +1196,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             
             //
             // Dismiss Action Sheet
-            UIView.animate(withDuration: animationTime2, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                 self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
                 self.backgroundViewExpanded.alpha = 0
             }, completion: { finished in
@@ -1206,7 +1206,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             })
             //
             // Animate new elements into page
-            UIView.animate(withDuration: animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: AnimationTimes.animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 self.movementsTableView.reloadData()
                 let indexPath2 = NSIndexPath(row: 0, section: 0)

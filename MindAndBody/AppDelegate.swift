@@ -26,14 +26,136 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //
-        let mindBody = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view0") as! MindBodyNavigation
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = mindBody
-        self.window?.makeKeyAndVisible()
+        // Register Defaults --------------------------------------------------------------------------------
+        //
+        let defaults = UserDefaults.standard
+            
+        //
+        // Tracking
+        // Progress
+        defaults.register(defaults: ["weekProgress" : 0])
+        defaults.register(defaults: ["monthProgress" : 0])
+        // Update progress (first monday of last week/month completed, used to check if progress needs to be reset to 0 for first entry of new week/month)
+        defaults.register(defaults: ["lastResetWeek" : firstMondayInCurrentWeek()])
+        defaults.register(defaults: ["lastResetWeek" : firstMondayInCurrentMonth()])
+        
+        //
+        // Settings
+        // Background image index
+        UserDefaults.standard.register(defaults: ["backgroundImage" : 2])
+        // Home Screen
+        UserDefaults.standard.register(defaults: ["homeScreen" : "home"])
+        // Default Image
+        UserDefaults.standard.register(defaults: ["defaultImage" : "demonstration"])
+        // Weight
+        UserDefaults.standard.register(defaults: ["units" : "kg"])
+        // Rest times
+        UserDefaults.standard.register(defaults: ["restTimes" : [15, 45, 10]])
+        // Yoga Automatic
+        UserDefaults.standard.register(defaults: ["automaticYoga" : [0, -1, -1, -1]])
+        
+        //
+        // Register Walkthroughs
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough" : false])
+        //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough1" : false])
+        //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthroughc" : false])
+        //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthroughw" : false])
+        //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2" : false])
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2y" : false])
+        //
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough3" : false])
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough3y" : false])
+        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough4y" : false])
+        //
+        UserDefaults.standard.register(defaults: ["profileWalkthrough" : false])
+        //
+        UserDefaults.standard.register(defaults: ["informationWalkthrough" : false])
+        //
+        UserDefaults.standard.register(defaults: ["informationWalkthroughI" : false])
+        //
+        UserDefaults.standard.register(defaults: ["informationWalkthroughm" : false])
+
+        //
+        // Home Screen
+        let homeScreen = UserDefaults.standard.string(forKey: "homeScreen")
+        //
+        if homeScreen == "home" {
+            let mindBody = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view0") as! MindBodyNavigation
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.rootViewController = mindBody
+            self.window?.makeKeyAndVisible()
+            //
+            tabBarIndex = 0
+        } else {
+            let schedule = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view1") as! ScheduleNavigation
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.rootViewController = schedule
+            self.window?.makeKeyAndVisible()
+            //
+            tabBarIndex = 1
+        }
         
         //
         return true
     }
+    
+    // First monday in month
+    func firstMondayInCurrentWeek() -> String? {
+        //
+        // Get first monday in week
+        let dfDay = DateFormatter()
+        dfDay.dateFormat = "dd.MM.yyyy"
+        // Get Monday
+        var mondaysDate: Date {
+            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        }
+        let currentMondayDate = dfDay.string(from: mondaysDate)
+        return currentMondayDate
+    }
+    // First monday in month
+    func firstMondayInCurrentMonth() -> String? {
+        // Get month and year
+        // Get Month
+        let dfMonth = DateFormatter()
+        dfMonth.dateFormat = "MM"
+        // Get Month
+        var monthsDate: Date {
+            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        }
+        let month = Int(dfMonth.string(from: monthsDate))
+        // Get Year
+        let dfYear = DateFormatter()
+        dfYear.dateFormat = "yyyy"
+        // Get Year
+        var yearsDate: Date {
+            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        }
+        let year = Int(dfYear.string(from: yearsDate))
+        
+        
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.firstWeekday = 2 // 2 == Monday
+        
+        // First monday in month:
+        var comps = DateComponents(year: year, month: month,
+                                   weekday: calendar.firstWeekday, weekdayOrdinal: 1)
+        guard let first = calendar.date(from: comps)  else {
+            return nil
+        }
+        
+        // Format Day
+        let dfDay = DateFormatter()
+        dfDay.dateFormat = "dd.MM.yyyy"
+        // Get Monday
+        let firstMonday = dfDay.string(from: first)
+        
+        return firstMonday
+    }
+    
     
     
     //
