@@ -44,6 +44,8 @@ static let animationTime2 = 0.15
 static let animationTime3 = 0.7
 // Automatic selection
 static let animationTime4 = 0.05
+// Walkthrough
+static let animationTime5 = 0.4
 }
 
 //

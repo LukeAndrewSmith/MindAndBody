@@ -165,19 +165,8 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             view.bringSubview(toFront: warningLabel)
         }
         
-        //
-        // Swipe
-        let rightSwipe = UISwipeGestureRecognizer()
-        rightSwipe.direction = .right
-        rightSwipe.addTarget(self, action: #selector(swipeGestureRight))
         
-        swipeGestureView.backgroundColor = .clear
-        swipeGestureView.bounds = view.bounds
-        swipeGestureView.addGestureRecognizer(rightSwipe)
-        swipeGestureView.isUserInteractionEnabled = true
-        
-//        view.addSubview(swipeGestureView)
-//        view.bringSubview(toFront: swipeGestureView)
+       
     }
 
     // MARK: Test
@@ -312,30 +301,30 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 100, thumbBorderWidth: 2)
         let trackerLayerSettings = ChartPointsLineTrackerLayerSettings(thumbSettings: thumbSettings, selectNearest: true)
         
-//        // Current position labels array out of func so okbuttonaction can clear them
-//        let chartPointsTrackerLayer = ChartPointsLineTrackerLayer<ChartPoint, Any>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lines: [chartPoints], lineColor: colour2, animDuration: 1, animDelay: 2, settings: trackerLayerSettings) {chartPointsWithScreenLoc in
-//            
-//            self.currentPositionLabels.forEach{$0.removeFromSuperview()}
-//            
-//            for (index, chartPointWithScreenLoc) in chartPointsWithScreenLoc.enumerated() {
-//                
-//                let label = UILabel()
-//                let test = chartPointWithScreenLoc.chartPoint.y
-//                let test2 = chartPointWithScreenLoc.screenLoc.y
-//                label.text = chartPointWithScreenLoc.chartPoint.description
-//                label.sizeToFit()
-//                label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x + label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
-//                if label.frame.maxX > self.view.bounds.width {
-//                    label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x - label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
-//                }
-//                
-//                label.backgroundColor = colour2
-//                label.textColor = colour1
-//                
-//                self.currentPositionLabels.append(label)
-//                self.view.addSubview(label)
-//            }
-//        }
+        // Current position labels array out of func so okbuttonaction can clear them
+        let chartPointsTrackerLayer = ChartPointsLineTrackerLayer<ChartPoint, Any>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lines: [chartPoints], lineColor: colour2, animDuration: 1, animDelay: 2, settings: trackerLayerSettings) {chartPointsWithScreenLoc in
+            
+            self.currentPositionLabels.forEach{$0.removeFromSuperview()}
+            
+            for (index, chartPointWithScreenLoc) in chartPointsWithScreenLoc.enumerated() {
+                
+                let label = UILabel()
+                let test = chartPointWithScreenLoc.chartPoint.y
+                let test2 = chartPointWithScreenLoc.screenLoc.y
+                label.text = chartPointWithScreenLoc.chartPoint.description
+                label.sizeToFit()
+                label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x + label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
+                if label.frame.maxX > self.view.bounds.width {
+                    label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x - label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
+                }
+                
+                label.backgroundColor = colour2
+                label.textColor = colour1
+                
+                self.currentPositionLabels.append(label)
+                self.view.addSubview(label)
+            }
+        }
         
 //        let currentPositionLabel = UILabel()Z
 //        let trackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak chartPointsLayer, weak currentPositionLabel] chartPointWithScreenLoc in
@@ -438,7 +427,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             chartPointsLayer,
             chartPointsLineLayer,
             chartPointsCircleLayer,
-//            chartPointsTrackerLayer
+            chartPointsTrackerLayer
             ] as [ChartLayer]
         //
         // Add new layer for x dividers if selected time scale == 3 months or greater
@@ -470,6 +459,20 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         //
         view.addSubview(chart.view)
         self.chart = chart
+        
+        //
+        //
+        // Swipe
+        let rightSwipe = UISwipeGestureRecognizer()
+        rightSwipe.direction = .right
+        rightSwipe.addTarget(self, action: #selector(swipeGestureRight))
+        
+        swipeGestureView.backgroundColor = .clear
+        swipeGestureView.bounds = view.bounds
+        swipeGestureView.addGestureRecognizer(rightSwipe)
+        swipeGestureView.isUserInteractionEnabled = true
+        view.addSubview(swipeGestureView)
+        view.bringSubview(toFront: swipeGestureView)
         
         //
 //        view.bringSubview(toFront: swipeGestureView)

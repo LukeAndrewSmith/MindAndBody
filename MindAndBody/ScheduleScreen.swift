@@ -145,16 +145,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         view.backgroundColor = UIColor(red:0.08, green:0.08, blue:0.08, alpha:1.0)
         
         //
-        // Day Swipes
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        view.addGestureRecognizer(swipeLeft)
-        //
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        view.addGestureRecognizer(swipeRight)
-        
-        //
         // TableView
         scheduleTable.backgroundView = UIView()
         scheduleTable.backgroundColor = .clear
@@ -176,24 +166,25 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             var dayLabel = UILabel()
             dayLabel.textColor = colour1
             dayLabel.textAlignment = .center
-            dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 15)
             dayLabel.text = NSLocalizedString(dayArrayChar[i], comment: "")
             dayLabel.sizeToFit()
             dayLabel.alpha = 0.5
             stackArray.append(dayLabel)
         }
         let pageStack = UIStackView(arrangedSubviews: stackArray)
-        pageStack.frame = CGRect(x: 0, y: view.frame.maxY - 49 - 64, width: view.bounds.width, height: 49)
+        pageStack.frame = CGRect(x: 0, y:  view.frame.maxY - 24.5 - 64, width: view.bounds.width, height: 24.5)
         pageStack.distribution = .fillEqually
         pageStack.alignment = .center
+        pageStack.isUserInteractionEnabled = false
         view.addSubview(pageStack)
         
-        // Seperator
-        let indicatorSeperator = UIView()
-        indicatorSeperator.backgroundColor = colour1
-        indicatorSeperator.alpha = 0.5
-        indicatorSeperator.frame = CGRect(x: 0, y: pageStack.frame.minY - 1, width: view.bounds.width, height: 1)
-//        view.addSubview(indicatorSeperator)
+        //
+        // Swipe
+        let rightSwipe = UISwipeGestureRecognizer()
+        rightSwipe.direction = .right
+        rightSwipe.addTarget(self, action: #selector(swipeGestureRight))
+        scheduleTable.addGestureRecognizer(rightSwipe)
         
         //
         // Select Today
@@ -237,6 +228,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // Header Customization
+    let headerLabel = UILabel()
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         switch tableView {
         case scheduleTable:
@@ -257,6 +249,16 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             seperator.backgroundColor = colour1.cgColor
             seperator.opacity = 0.5
             header.layer.addSublayer(seperator)
+            
+            //
+            // Day Swipes
+            let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+            swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+            view.addGestureRecognizer(swipeLeft)
+            //
+            let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+            swipeRight.direction = UISwipeGestureRecognizerDirection.right
+            view.addGestureRecognizer(swipeRight)
 
         case scheduleChoiceTable:
             break
@@ -588,6 +590,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             })
             
         }
+    }
+    
+    // Slide menu swipe
+    func swipeGestureRight() {
+        performSegue(withIdentifier: "openMenu", sender: self)
     }
     
     //
