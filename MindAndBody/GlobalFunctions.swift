@@ -854,8 +854,8 @@ extension UIViewController {
     }
 
     //
-    // view, label, highlight, texts, labelframe, highlightsize, highlightcenter, highlightcornerradius, backgroundColor, textColor, animationTime, delay, walkthroughprogress
-    func nextWalkthroughView(walkthroughView: UIView, walkthroughLabel: UILabel, walkthroughHighlight: UIView, walkthroughTexts: [String], walkthroughLabelFrame: CGRect, highlightSize: CGSize, highlightCenter: CGPoint, highlightCornerRadius: Int, backgroundColor: UIColor, textColor: UIColor, animationTime: Double, delay: Double, walkthroughProgress: Int) {
+    // view, label, highlight, texts, labelframe, highlightsize, highlightcenter, highlightcornerradius, backgroundColor, textColor, animationTime, walkthroughprogress
+    func nextWalkthroughView(walkthroughView: UIView, walkthroughLabel: UILabel, walkthroughHighlight: UIView, walkthroughTexts: [String], walkthroughLabelFrame: Int, highlightSize: CGSize, highlightCenter: CGPoint, highlightCornerRadius: Int, backgroundColor: UIColor, textColor: UIColor, animationTime: Double, walkthroughProgress: Int) {
         
         //
         // Label animation
@@ -867,28 +867,30 @@ extension UIViewController {
         walkthroughLabel.alpha = 0
         walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
         walkthroughLabel.sizeToFit()
-        walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+        switch walkthroughLabelFrame {
+        case 0:
+            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+        case 1:
+            walkthroughLabel.frame = CGRect(x: 13, y: CGFloat(13) + TopBarHeights.statusBarHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+        default:
+            break
+        }
+        walkthroughLabel.center.x += view.bounds.width
+        walkthroughLabel.alpha = 0.93
         //
-        // Snapshot 2
-        let walkthroughSnapshot2 = walkthroughLabel.snapshotView(afterScreenUpdates: true)
-        walkthroughSnapshot2?.center = walkthroughLabel.center
-        walkthroughSnapshot2?.center.x += view.frame.size.width
-        
-        //
-        // Add Snapshots
+        // Add Snapshot
         UIApplication.shared.keyWindow?.insertSubview(walkthroughSnapshot1!, aboveSubview: walkthroughView)
-        UIApplication.shared.keyWindow?.insertSubview(walkthroughSnapshot2!, aboveSubview: walkthroughView)
     
         //
         // Animate Highlight and Label
         UIView.animate(withDuration: animationTime, animations: {
             // Snapshot
             walkthroughSnapshot1?.center.x -= self.view.frame.size.width * 1
-            walkthroughSnapshot2?.center.x = self.view.center.x
+            walkthroughLabel.center.x = self.view.center.x
             // Colour
             walkthroughLabel.textColor = textColor
             walkthroughLabel.backgroundColor = backgroundColor
-            walkthroughHighlight.backgroundColor = backgroundColor
+            walkthroughHighlight.backgroundColor = backgroundColor.withAlphaComponent(0.5)
             walkthroughHighlight.layer.borderColor = backgroundColor.cgColor
             // Highlight
             walkthroughHighlight.frame.size = highlightSize
@@ -898,16 +900,20 @@ extension UIViewController {
                 walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
             case 1:
                 walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.width / 2
+            case 2:
+                walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 4
+            case 3:
+                walkthroughHighlight.layer.cornerRadius = 15
             default:
                 break
             }
         }, completion: {finished in
             walkthroughLabel.alpha = 0.93
             walkthroughSnapshot1?.removeFromSuperview()
-            walkthroughSnapshot2?.removeFromSuperview()
+            
             //
             // Flash
-            UIView.animate(withDuration: 0.2, delay: 1.5, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
                 walkthroughHighlight.backgroundColor = backgroundColor.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
@@ -916,36 +922,10 @@ extension UIViewController {
                     walkthroughHighlight.backgroundColor = backgroundColor.withAlphaComponent(0.5)
                 }, completion: nil)
             })
+            
+            
         })
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+//
 }

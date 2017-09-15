@@ -57,8 +57,6 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         //
         menuTable.tableFooterView = UIView()
         menuTable.backgroundColor = colour1
-        
-        
 
     }
     
@@ -117,6 +115,7 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         
         //
         if indexPath.row != tabBarIndex {

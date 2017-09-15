@@ -387,6 +387,11 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         self.offView.removeFromSuperview()
                         tableView.isScrollEnabled = true
                     })
+                    //
+                    // Present walkthrough
+                    if UserDefaults.standard.bool(forKey: "automaticYogaWalkthrough") == false {
+                        walkthroughAutomaticYoga()
+                    }
                     // on -> off
                 } else {
                     //
@@ -753,5 +758,129 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         })
         //
     }
+    
+    
+    //
+    // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------
+    //
+    //
+    var walkthroughProgress = 0
+    var walkthroughView = UIView()
+    var walkthroughHighlight = UIView()
+    var walkthroughLabel = UILabel()
+    var nextButton = UIButton()
+    
+    var didSetWalkthrough = false
+    
+    //
+    // Components
+    var walkthroughTexts = ["automaticYoga0", "automaticYoga1", "automaticYoga2"]
+    var highlightSize: CGSize? = nil
+    var highlightCenter: CGPoint? = nil
+    // Corner radius, 0 = height / 2 && 1 = width / 2
+    var highlightCornerRadius = 0
+    var labelFrame = 0
+    //
+    var walkthroughBackgroundColor = UIColor()
+    var walkthroughTextColor = UIColor()
+    
+    // Walkthrough
+    func walkthroughAutomaticYoga() {
+        
+        //
+        if didSetWalkthrough == false {
+            //
+            nextButton.addTarget(self, action: #selector(walkthroughAutomaticYoga), for: .touchUpInside)
+            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
+            didSetWalkthrough = true
+        }
+        
+        //
+        switch walkthroughProgress {
+            // First has to be done differently
+        // Walkthrough explanation
+        case 0:
+            //
+            walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
+            walkthroughLabel.sizeToFit()
+            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            
+            // Colour
+            walkthroughLabel.textColor = colour1
+            walkthroughLabel.backgroundColor = colour2
+            walkthroughHighlight.backgroundColor = colour2.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = colour2.cgColor
+            // Highlight
+            walkthroughHighlight.frame.size = CGSize(width: 225, height: 47 * 2)
+            let homepageMaxY = TopBarHeights.combinedHeight + (47 * 2) + 44
+            walkthroughHighlight.center = CGPoint(x: (225 / 2) + 7.5, y: homepageMaxY)
+            walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 4
+            
+            //
+            // Flash
+            //
+            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
+                //
+                self.walkthroughHighlight.backgroundColor = colour2.withAlphaComponent(1)
+            }, completion: {(finished: Bool) -> Void in
+                UIView.animate(withDuration: 0.2, animations: {
+                    //
+                    self.walkthroughHighlight.backgroundColor = colour2.withAlphaComponent(0.5)
+                }, completion: nil)
+            })
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+        // Transition time
+        case 1:
+            //
+            highlightSize = CGSize(width: 175, height: 47 * 2)
+            let homepageMaxY = TopBarHeights.combinedHeight + (47 * 3) + (44 * 2)
+            highlightCenter = CGPoint(x: (175 / 2) + 7.5, y: homepageMaxY)
+            highlightCornerRadius = 2
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = colour2
+            walkthroughTextColor = colour1
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+        // Transition indicator
+        case 2:
+            //
+            highlightSize = CGSize(width: 200, height: 47 * 2)
+            let homepageMaxY = TopBarHeights.combinedHeight + (47 * 4) + (44 * 3)
+            highlightCenter = CGPoint(x: (200 / 2) + 7.5, y: homepageMaxY)
+            highlightCornerRadius = 2
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = colour2
+            walkthroughTextColor = colour1
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+
+            
+        //
+        default:
+            UIView.animate(withDuration: 0.4, animations: {
+                self.walkthroughView.alpha = 0
+            }, completion: { finished in
+                self.walkthroughView.removeFromSuperview()
+                UserDefaults.standard.set(true, forKey: "automaticYogaWalkthrough")
+            })
+        }
+    }
+    
 
 }

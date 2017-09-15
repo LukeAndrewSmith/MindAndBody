@@ -398,11 +398,11 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             case 1:
                 switch indexPath.row {
                 case selectedRow - 1, selectedRow:
-                    return (UIScreen.main.bounds.height - 64) * 3/4
+                    return (UIScreen.main.bounds.height - TopBarHeights.combinedHeight) * 3/4
                 case selectedRow + 1:
-                    return (UIScreen.main.bounds.height - 64) * 1/4
+                    return (UIScreen.main.bounds.height - TopBarHeights.combinedHeight) * 1/4
                 default:
-                    return (UIScreen.main.bounds.height - 64) * 1/4
+                    return (UIScreen.main.bounds.height - TopBarHeights.combinedHeight) * 1/4
                 }
             default: break
             }

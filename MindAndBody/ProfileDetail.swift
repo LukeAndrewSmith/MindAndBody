@@ -224,7 +224,7 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.textLabel?.text = answerArray[selectedSection][indexPath.row][selectedAnswerArray[selectedSection][indexPath.section]]
         }
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            cell.textLabel?.textAlignment = .right
+            cell.textLabel?.textAlignment = .left
             cell.textLabel? .textColor = colour2
             //
             // Border

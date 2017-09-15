@@ -1471,8 +1471,8 @@
         "colourMessage" = "\nTo register the colour change it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone and swipe the Mind & Body app upwards to quit it.";
 
         // Reset Alert //
-        "resetTitle" = "User Defaults Reset";
-        "resetMessage" = "\nTo register the reset it is necessary to quit the app and reopen it:\nDouble press the home button of the iphone and swipe the Mind & Body  app upwards to quit it.";
+        "resetTitle" = "Reset";
+        "resetMessage" = "\nTo register the reset quit the app and reopen it:\nDouble press the home button of the iphone and swipe the Mind & Body  app upwards to quit it.";
         //
         "resetWarning" = "Warning";
         "resetWarningMessage" = "\nThis will reset the app to the state it was in when first downloaded.";
@@ -1617,105 +1617,43 @@
 // Walkthrough
 //
     // Mind Body
-        // Home
+        // Mind Body
         "mindBody0" = "Walkthrough:\nExplanations of highlighted objects appear on the first viewing of most screens.";
         "mindBody1" = "Menu:\nAccess the menu to navigate the app.";
-        "mindBody2" = "Screen:\nNavigate the main screens of the app from the menu.";
-        "mindBody3" = "Home Screen";
-        "mindBody4" = "";
-        //"mindBody4" = "Sessions\n\nThe app can show you the path, but not walk it for you.\n\nThis is portrayed by having to access a session by clicking through a path of buttons.";
-        "mindBody5" = "Profile tab\n\nSettings are also found here.\n\nThe first thing to do is complete your profile.";
-        "mindBody6" = "Home screen tab\n\nCurrently selected.";
-        "mindBody7" = "Information tab";
-
+        "mindBody2" = "Screens:\nNavigate the main screens of the app from the menu.";
+        "mindBody3" = "Profile:\nFill in your profile to be presented a schedule.";
+        "mindBody4" = "Schedule:\nYour schedule presents a weekly plan and takes you to your sessions.";
+        "mindBody5" = "Home:\nAll sessions are accessed from Home, and custom sessions can be made here.";
+        "mindBody6" = "Tracking:\nWhat you've done as a percentage of what you planned is viewed here.";
+        "mindBody7" = "Lessons:\nUseful lessons regarding mind & body are found here. I advise to read them at least once";
+        "mindBody8" = "Settings:\nPersonalise the app, changing the background image, deciding if you want the schedule to be your home screen and more...";
+        "mindBody9" = "Recap:\nFill in your profile, get a schedule, and follow it!\n(Feel free to wander round the app before doing this to see if you actually like it)";
 
         // Schedule
-        "mindBodyC1" = "Weekly Schedule";
-        "mindBodyC2" = "Schedule\n\nYou can create custom schedules, the one the app presents is under the '1' button.";
-//they show the session, time to perform the session, and the route to take from the homescreen to get to the session.";
-        "mindBodyC3" = "Overview\n\nThe overview for a day is shown, press for more detail.";
-        "mindBodyC4" = "Dismiss the schedule.";
+        "schedule0" = "Schedule:\nThe schedule presents a weekly plan. It suggests a 'group' to do, each group helping you work towards a different goal. It also allows you to decide how you wish to work towards a goal on any given day by suggesting several manners in which to do so.";
+        "schedule1" = "Path:\nClick the desired session and the app will take you to it through the home page and the correct path of choices.";
+        "schedule2" = "Custom Schedules:\nCreate and select custom schedules, allowing you to have several weekly plans if desired.";
+        "schedule3" = "Swipe:\nSwipe on the day to change day, and to the right underneath the day to access the menu (most screens allow right swipe to access the menu).";
 
+        // Tracking
+        "tracking0" = "Goal:\nThe green line represents 100%; what you planned on doing.\nPress the red dots on the graph to see their percentage.";
+        "tracking1" = "Time Scale:\nChange the time scale to see a week, a month, a years worth of data.";
 
-        // Choice Screen 1
-        "choiceScreen1" = "Information\n\nRelevant information regarding the selected activity is provided.";
-        "choiceScreen12" = "Custom\n\nBuild custom sessions from scratch, defining; exercise order, sets, reps and rest times.";
-        "choiceScreen122" = "The 'C' (custom) buttons present a way to make fully custom session built from scratch; pose order and number of breaths to hold each pose for can be specified.";
+        // Profile
+        "profile0" = "Sections:\nAnswer all the questions in each section.";
+        "profile1" = "Update Schedule:\nPress update schedule once all the questions are answered, you will then be able to decide when to do each suggested session.";
 
+        // Settings
+        "settings0" = "Homepage:\nYou can set the schedule as the home page of the app (the first screen presented when you open the app).";
+        "settings1" = "Automatic Yoga:\nIf you are already comfortable with yoga poses, try automatic yoga. It allows you to follow a yoga practice without touching the phone.";
 
-        // Choice Screen 2
-        "choiceScreen2W" = "Selected Warmup\n\nClick to change selected warmup.";
-        "choiceScreen2W2" = "Selected Workout\n\nClick to change selected workout.";
-        "choiceScreen2S" = "Selected Stretching Session\n\nClick to change selected session.";
-        "choiceScreen21" = "Session overview\nSelect the image to expand it.";
-        "choiceScreen22" = "Begin Session";
+        // Automatic Yoga
+        "automaticYoga0" = "Averga Breath Length:\nThe length of your average breath when doing yoga, a breath being both inhale and exhale. It can be calculated by timing 10-30 breaths and dividing the time by the number of breaths.";
+        "automaticYoga1" = "Transition Time:\nThe average length of time you'd like to have to change pose.";
+        "automaticYoga2" = "Transition Indicator:\nA sound to indicate when to change pose.";
 
-
-        //
-        "choiceScreen23s" = "Table\nThe table contains all possible stretches, those included in the session are indicated with a tick.\nSessions can be fine tuned by selecting or deselecting stretches.";
-        //
-        "choiceScreen22y" = "Length\n\nSelect the desired length of the yoga practice in the 'picker'.";
-        "choiceScreen23y" = "Practices\n\nSelect the desired practice from the table.";
-        //
-        "choiceScreen22y2" = "Custom Practices\n\nYour custom presets are be stored in this 'picker'.";
-        "choiceScreen23y2" = "New Practice\n\nCreate a new practice using the '+' button, you will be prompted to name the practice.";
-        "choiceScreen24y2" = "Poses\n\nOnce you have created a custom practice, add poses using the '+' button. You can remove poses by selected them and pressing the '-', and change their order by pressing the right of the cell and dragging to the new position.";
-        "choiceScreen25y2" = "Begin\n\nOnce happy with the practice, press the begin button.";
-
-
-
-        // Movement Screen
-        "movementScreen0" = "Movement\n\nThis is the name of the movement.";
-        "movementScreen1" = "Next Button\n\nPress the next button when finished with the movement to proceed.";
-        "movementScreen2" = "Back Buton\n\nIncase you need to go back a movement.";
-        "movementScreen3" = "Demonstration\n\nThe demonstration is often in the form of a video (indicated by a play button in the top right), press the video to view one rep of the movement.";
-        "movementScreen4" = "Target Area Button\n\nThe target area can be viewed by pressing this next button or by swiping the image left.";
-        "movementScreen5" = "Target Area\n\nThe image highlights in red the body parts being targeted.\nThe target area image is important in helping the mind muscle connection and thus better muscle activation.";
-        "movementScreen6" = "Demonstration Button\n\nReturn to the demonstration by pressing this back button or by swiping the image right.";
-//
-        "movementScreen7" = "Sets & Reps\n\nThe sets and reps are given in the form: sets x reps.\nReps can take the form of an amount of time.\n\nA rep is a repetition of a movement, and a set is a group of reps (sets are usually seperated by a rest).";
-        "movementScreen8" = "Sets\n\nThe number of sets are represented by the number of circular buttons. When you finish a set press the button to activate a rest timer (a notification pops up to tell you to start the next set)";
-//
-        "movementScreen9" = "Timer\n\nA timer is provided and accessed with this button. Once open, it can be dismissed by pressing the darker area above the timer.\nThe timer will run in the background if you remain on the same screen (i.e don't press next or back).";
-        "movementScreen10" = "Explanation\n\nThe explanation for the movement is accessed using this button, scroll down to read through it.\nOnce open, it can be dismissed by pressing the darker area above the explanation.";
-        "movementScreen11" = "Pocket Mode\n\nActivate pocket mode before you put your phone in your pocket so as to avoid the accidentall pressing of buttons.";
-
-
-        "movementScreen12" = "Progress\n\nThe progress through the session is indicated in the format;\ncurrent movement/number of movements";
-        "movementScreen13" = "Progress\n\nThe progress is shown in a progress bar as well.";
-
-
-
-        // Workout
-        "movementScreens" = "Sets & Reps\n\nThe sets and reps are given in the form: sets x reps.\nReps can take the form of an amount of time.\n\nA rep is a repetition of a movement, and a set is a group of reps.\n\n1 or 2 warm up sets should be performed in addition before the working sets. The first using a very light weight or just the bar, and the second using half the working set weight.";
-        "movementScreenw" = "Weight\n\nA suggested starting weight is provided to give an idea of the weight to use. It is important however to get to know your strength and understand what weight works for you (this may vary day to day).\nDon't put excess weight as this greatly hinders progress, and for a beginner it is advised to use lower weights for longer to allow your muscles to get used to the movements.";
-        // Stretching
-        "movementScreen1m" = "Movement\n\nThis is the name of the movement/stretch.";
-        "movementScreen2m" = "Next Button\n\nPress the next button when finished with the movement\stretch to go to the next.";
-        // Yoga
-        "yogaScreen1" = "Pose\n\nThis is the name of the pose.";
-        "yogaScreen2" = "Next Button\n\nPress the next button when finished with the pose to go to the next.";
-        // movementScreen3
-        "yogaScreen3" = "Breaths\n\nThe number of breaths to hold the pose for is indicated here.";
-        "yogaScreen4" = "Demonstration\nThe demonstration is in the form of a video (indicated by a play button in the top right hand corner), press anywhere on the video to play the demonstration.";
-        "yogaScreen5" = "Explanation\n\nThe explanation of the pose is here, scroll down to read through it.";
-        // movementScreen8
-        // movementScreen12
-        // movementScreen13
-
-
-
-
-    // Profile
-    "profile1" = "Profile\n\nComplete the profile to be presented with your weekly schedule.";
-    "profile2" = "Settings\n\nUnits, session presentation style, background images, and rest times can be changed.\nYou can aslo reset the app and the walkthrough.";
-
-
-    // Information
-    "information1" = "Important\n\nAt the very least, read the first three topics in the 'important' section as they provide essential information regarding good training practices.";
-
-        // Anatomy
-        "anatomy1" = "Back Button\n\nHold down the back button to return to the information screen.";
-        "music1" = "Music\n\nSuggestions for music are given using playlists on youtube (a list of the songs is also stored in the app).\n\nI urge you to support the artists and buy the songs you like.";
-
+            // Session / Choice
+            "finalChoice0" = "Session:\nPress the session to change it if desired.";
+            "finalChoice1" = "Overview:\nAn overview of the session is shown here.";
+            "finalChoice2" = "Begin:\nPress begin to begin the session.";
 

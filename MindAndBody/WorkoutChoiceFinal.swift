@@ -2567,6 +2567,9 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //
+        // Select
+        self.presetsButton.sendActions(for: .touchUpInside)
+        //
         // Automatic Selection
         if automaticSelectionIsHappening == true {
             automaticSelectionProgress = 4
@@ -2819,12 +2822,6 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
                 //
                 self.beginConstraint.constant = 0
                 self.view.layoutIfNeeded()
-            }, completion: { finished in
-                //
-                if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough2") == false {
-                    self.walkthroughMindBody()
-                    UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough2")
-                }
             })
             
         default: break

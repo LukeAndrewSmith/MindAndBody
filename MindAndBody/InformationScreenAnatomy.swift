@@ -149,7 +149,7 @@ class LessonsScreenAnatomy: UIViewController {
         // Navigation Title
         //
         navigationTitle.frame = (navigationController?.navigationItem.accessibilityFrame)!
-        navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
+        navigationTitle.frame = CGRect(x: 0, y: 0, width: 0, height: TopBarHeights.navigationBarHeight)
         navigationTitle.center.x = self.view.center.x
         navigationTitle.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         navigationTitle.font = UIFont(name: "SFUIDisplay-medium", size: 22)

@@ -55,29 +55,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["automaticYoga" : [0, -1, -1, -1]])
         
         //
+        // Notifications popup
+        UserDefaults.standard.register(defaults: ["notificationsPopup" : false])
+        
+        //
         // Register Walkthroughs
         UserDefaults.standard.register(defaults: ["mindBodyWalkthrough" : false])
         //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough1" : false])
+        UserDefaults.standard.register(defaults: ["finalChoiceWalkthrough" : false])
+        UserDefaults.standard.register(defaults: ["sessionWalkthrough" : false])
+        UserDefaults.standard.register(defaults: ["yogaSessionWalkthrough" : false])
         //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthroughc" : false])
+        UserDefaults.standard.register(defaults: ["scheduleWalkthrough" : false])
         //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthroughw" : false])
-        //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2" : false])
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough2y" : false])
-        //
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough3" : false])
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough3y" : false])
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough4y" : false])
+        UserDefaults.standard.register(defaults: ["trackingWalkthrough" : false])
         //
         UserDefaults.standard.register(defaults: ["profileWalkthrough" : false])
         //
-        UserDefaults.standard.register(defaults: ["informationWalkthrough" : false])
-        //
-        UserDefaults.standard.register(defaults: ["informationWalkthroughI" : false])
-        //
-        UserDefaults.standard.register(defaults: ["informationWalkthroughm" : false])
+        UserDefaults.standard.register(defaults: ["settingsWalkthrough" : false])
+        UserDefaults.standard.register(defaults: ["automaticYogaWalkthrough" : false])
 
         //
         // Home Screen

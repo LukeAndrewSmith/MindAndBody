@@ -49,6 +49,18 @@ static let animationTime5 = 0.4
 }
 
 //
+// Navigation + Status height ---------------------------------------------------------------------------------------------------------------
+//
+enum TopBarHeights {
+// Navigation bar
+static let navigationBarHeight = 44
+//
+static let statusBarHeight = UIApplication.shared.statusBarFrame.height
+//
+static let combinedHeight = 44 + UIApplication.shared.statusBarFrame.height
+}
+
+//
 // Menu Index (ensures initial screen is home screen), variable misnamed tabBarIndex ---------------------------------------------------------------------------------------------------------------
 //
 var tabBarIndex = Int()

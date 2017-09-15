@@ -417,7 +417,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         view.insertSubview(beginBlur, belowSubview: beginButton)
         //
         beginButton.setTitle(NSLocalizedString("begin", comment: ""), for: .normal)
-        beginButton.setTitleColor(colour3, for: .normal)
+        beginButton.setTitleColor(colour1, for: .normal)
+        beginButton.backgroundColor = colour3
         
         
         // None Swipe and Button (named delete in code)
@@ -557,6 +558,13 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
  
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //
+        // Select
+        self.presets.sendActions(for: .touchUpInside)
+    }
     
 //
 // View Did Dissapear  ---------------------------------------------------------------------------------------------------------------------

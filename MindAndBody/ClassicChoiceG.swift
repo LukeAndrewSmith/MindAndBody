@@ -179,15 +179,6 @@ class ClassicChoiceG: UIViewController  {
             buttonToSelect?.sendActions(for: .touchUpInside)
             //
         }
-        
-        // Walkthrough
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughc") == false {
-            let delayInSeconds = 0.5
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-//                self.walkthroughMindBody()
-            }
-            UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughc")
-        }
     }
     
 //

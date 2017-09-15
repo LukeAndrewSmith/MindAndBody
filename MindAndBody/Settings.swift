@@ -18,7 +18,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     
     //
-    // Outlets
+    // MARK: Outlets ------------------------------------------------------------------------------------------------------------------
     //
     @IBOutlet weak var navigationBar: UINavigationItem!
     
@@ -59,6 +59,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //
+        // Walkthrough
+        if UserDefaults.standard.bool(forKey: "settingsWalkthrough") == false {
+            walkthroughSettings()
+        }
         
         // Swipe
         let rightSwipe = UISwipeGestureRecognizer()
@@ -149,7 +155,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
 
 //
-// Settings TableView --------------------------------------------------------------------------------------------------------------------------
+// MARK: Settings TableView --------------------------------------------------------------------------------------------------------------------------
 //
     
 // Sections
@@ -163,10 +169,10 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         switch section {
         case 0: return NSLocalizedString("backgroundImage", comment: "")
         case 1: return NSLocalizedString("homePage", comment: "")
-        case 2: return NSLocalizedString("defaultImage", comment: "")
-        case 3: return NSLocalizedString("units", comment: "")
-        case 4: return NSLocalizedString("restTime", comment: "")
-        case 5: return NSLocalizedString("automaticYoga", comment: "")
+        case 2: return NSLocalizedString("automaticYoga", comment: "")
+        case 3: return NSLocalizedString("restTime", comment: "")
+        case 4: return NSLocalizedString("defaultImage", comment: "")
+        case 5: return NSLocalizedString("units", comment: "")
         case 6: return NSLocalizedString("reset", comment: "")
         default: return ""
         }
@@ -199,14 +205,13 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     }
     
     
-    
 // Rows
     // Number of rows per section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         switch section {
-        case 0,1,2,3,5: return 1
-        case 4: return 3
+        case 0,1,2,4,5: return 1
+        case 3: return 3
         case 6: return 2
         default: break
         }
@@ -263,29 +268,31 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             return cell
            
             
-            
-        // Home Screen, Default Image, Units
-        case 1,2,3:
+        // Yoga Automatic
+        case 2:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            //
+            let automaticYogaArray = UserDefaults.standard.object(forKey: "automaticYoga") as! [Int]
             // Retreive Presentation Style
-            switch indexPath.section {
-            case 1:
-                cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "homeScreen")!, comment: "")
-            case 2:
-                cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "defaultImage")!, comment: "")
-            case 3:
-                cell.textLabel?.text = UserDefaults.standard.string(forKey: "units")
-            default: break
+            if automaticYogaArray[0] == 0 {
+                cell.textLabel?.text = NSLocalizedString("off", comment: "")
+            } else {
+                cell.textLabel?.text = NSLocalizedString("on", comment: "")
+                
             }
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            //
+            cell.accessoryType = .disclosureIndicator
+            //
             return cell
             
             
+            
         // Rest Time
-        case 4:
+        case 3:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             let row = indexPath.row
@@ -306,28 +313,28 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             //
             return cell
-          
             
-        // Yoga Automatic
-        case 5:
+            
+            
+        // Home Screen, Default Image, Units
+        case 1,4,5:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            //
-            let automaticYogaArray = UserDefaults.standard.object(forKey: "automaticYoga") as! [Int]
             // Retreive Presentation Style
-            if automaticYogaArray[0] == 0 {
-                cell.textLabel?.text = NSLocalizedString("off", comment: "")
-            } else {
-                cell.textLabel?.text = NSLocalizedString("on", comment: "")
-
+            switch indexPath.section {
+            case 1:
+                cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "homeScreen")!, comment: "")
+            case 4:
+                cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "defaultImage")!, comment: "")
+            case 5:
+                cell.textLabel?.text = UserDefaults.standard.string(forKey: "units")
+            default: break
             }
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            //
-            cell.accessoryType = .disclosureIndicator
-            //
             return cell
+            
             
             
         // Reset
@@ -371,6 +378,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             tableView.deselectRow(at: indexPath, animated: true)
 
             
+            
         // Home Screen
         case 1:
             // home --> schedule
@@ -387,41 +395,20 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             UserDefaults.standard.synchronize()
             
             
-        // Default Image
+            
+        // Yoga Automatic
         case 2:
-            // demonstration --> targetArea
-            if cell?.textLabel?.text == NSLocalizedString("demonstration", comment: "") {
-                cell?.textLabel?.text = NSLocalizedString("targetArea", comment: "")
-                UserDefaults.standard.set("targetArea", forKey: "defaultImage")
-                // targetArea --> demonstration
-            } else if cell?.textLabel?.text == NSLocalizedString("targetArea", comment: "") {
-                cell?.textLabel?.text = NSLocalizedString("demonstration", comment: "")
-                UserDefaults.standard.set("demonstration", forKey: "defaultImage")
-            }
-            tableView.deselectRow(at: indexPath, animated: true)
             //
-            UserDefaults.standard.synchronize()
+            //
+            // Segue to homescreen choice
+            performSegue(withIdentifier: "YogaAutomaticSegue", sender: nil)
+            //
+            tableView.deselectRow(at: indexPath, animated: true)
             
 
-        // Units
-        case 3:
-        //  
-            // kg --> lb
-            if cell?.textLabel?.text == "kg" {
-                cell?.textLabel?.text = "lb"
-                UserDefaults.standard.set("lb", forKey: "units")
-            // lb --> kg
-            } else if cell?.textLabel?.text == "lb" {
-                cell?.textLabel?.text = "kg"
-                UserDefaults.standard.set("kg", forKey: "units")
-            }
-            tableView.deselectRow(at: indexPath, animated: true)
-            //
-            UserDefaults.standard.synchronize()
-            
             
         // Rest Time
-        case 4:
+        case 3:
             //
             selectedRow = indexPath.row
             //
@@ -450,7 +437,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 self.restTimeView.frame = CGRect(x: 10, y: self.view.frame.maxY - restHeight - 10, width: restWidth, height: restHeight)
-
+                
                 // picker
                 self.restTimePicker.frame = CGRect(x: 0, y: 0, width: self.restTimeView.frame.size.width, height: 147)
                 // ok
@@ -465,14 +452,41 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             tableView.deselectRow(at: indexPath, animated: true)
             
             
-        // Yoga Automatic
-        case 5:
-        //
-            //
-            // Segue to homescreen choice
-            performSegue(withIdentifier: "YogaAutomaticSegue", sender: nil)
-            //
+            
+            
+        // Default Image
+        case 4:
+            // demonstration --> targetArea
+            if cell?.textLabel?.text == NSLocalizedString("demonstration", comment: "") {
+                cell?.textLabel?.text = NSLocalizedString("targetArea", comment: "")
+                UserDefaults.standard.set("targetArea", forKey: "defaultImage")
+                // targetArea --> demonstration
+            } else if cell?.textLabel?.text == NSLocalizedString("targetArea", comment: "") {
+                cell?.textLabel?.text = NSLocalizedString("demonstration", comment: "")
+                UserDefaults.standard.set("demonstration", forKey: "defaultImage")
+            }
             tableView.deselectRow(at: indexPath, animated: true)
+            //
+            UserDefaults.standard.synchronize()
+            
+
+            
+        // Units
+        case 5:
+        //  
+            // kg --> lb
+            if cell?.textLabel?.text == "kg" {
+                cell?.textLabel?.text = "lb"
+                UserDefaults.standard.set("lb", forKey: "units")
+            // lb --> kg
+            } else if cell?.textLabel?.text == "lb" {
+                cell?.textLabel?.text = "kg"
+                UserDefaults.standard.set("kg", forKey: "units")
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
+            //
+            UserDefaults.standard.synchronize()
+            
             
         
         // Reset
@@ -498,41 +512,21 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     UIAlertAction in
 
                 // Walkthrough
-                    // Mind Body
-                        // Home Screen
-                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough")
-                        // Calendar
-                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthroughC")
-                
-                        // Choice Screen 1
-                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough1")
-                        // c
-                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthroughc")
-                
-                        // w
-                        UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughw")
-                
-                        // Choice Screen 2
-                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough2")
-                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough2y")
-                
-                        // Movement Screen
-                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough3")
-                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough3y")
-                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough4y")
-                
-                        // Session Screen
-                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthroughw")
-                
-                        // Information
-                        UserDefaults.standard.set(false, forKey: "mindBodyWalkthroughI")
-                
-                    //Profile
-                    UserDefaults.standard.set(false, forKey: "profileWalkthrough")
-                    // Information
-                    UserDefaults.standard.set(false, forKey: "informationWalkthrough")
+                    // Reset Walkthroughs
+                    UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough")
                     //
-                    UserDefaults.standard.set(false, forKey: "informationWalkthroughm")
+                    UserDefaults.standard.set(false, forKey: "finalChoiceWalkthrough")
+                    UserDefaults.standard.set(false, forKey: "sessionWalkthrough")
+                    UserDefaults.standard.set(true, forKey: "yogaSessionWalkthrough")
+                    //
+                    UserDefaults.standard.set(false, forKey: "scheduleWalkthrough")
+                    //
+                    UserDefaults.standard.set(false, forKey: "trackingWalkthrough")
+                    //
+                    UserDefaults.standard.set(false, forKey: "profileWalkthrough")
+                    //
+                    UserDefaults.standard.set(false, forKey: "settingsWalkthrough")
+                    UserDefaults.standard.set(false, forKey: "automaticYogaWalkthrough")
                 
                 //
                 // Alert View indicating need for app reset
@@ -617,7 +611,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     
 //
-// Picker View ----------------------------------------------------------------------------------------------------
+// MARK: Picker View ----------------------------------------------------------------------------------------------------
 //
     // Number of components
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -670,7 +664,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     
 //
-// Slide Menu ---------------------------------------------------------------------------------------------------------------------
+// MARK: Slide Menu ---------------------------------------------------------------------------------------------------------------------
 //
     @IBAction func slideMenuPresent() {
         self.performSegue(withIdentifier: "openMenu", sender: nil)
@@ -699,10 +693,125 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             navigationItem.backBarButtonItem = backItem
         }
     }
+    
+    
+    
+    
+    //
+    // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------
+    //
+    //
+    var walkthroughProgress = 0
+    var walkthroughView = UIView()
+    var walkthroughHighlight = UIView()
+    var walkthroughLabel = UILabel()
+    var nextButton = UIButton()
+
+    var didSetWalkthrough = false
+    
+    //
+    // Components
+    var walkthroughTexts = ["settings0", "settings1"]
+    var highlightSize: CGSize? = nil
+    var highlightCenter: CGPoint? = nil
+    // Corner radius, 0 = height / 2 && 1 = width / 2
+    var highlightCornerRadius = 0
+    var labelFrame = 0
+    //
+    var walkthroughBackgroundColor = UIColor()
+    var walkthroughTextColor = UIColor()
+    
+    // Walkthrough
+    func walkthroughSettings() {
+        
+        //
+        if didSetWalkthrough == false {
+            //
+            nextButton.addTarget(self, action: #selector(walkthroughSettings), for: .touchUpInside)
+            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
+            didSetWalkthrough = true
+        }
+        
+        //
+        let screenSize = UIScreen.main.bounds
+        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+        //
+        
+        //
+        switch walkthroughProgress {
+            // First has to be done differently
+        // Walkthrough explanation
+        case 0:
+            //
+            walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
+            walkthroughLabel.sizeToFit()
+            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            
+            // Colour
+            walkthroughLabel.textColor = colour1
+            walkthroughLabel.backgroundColor = colour2
+            walkthroughHighlight.backgroundColor = colour2.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = colour2.cgColor
+            // Highlight
+            walkthroughHighlight.frame.size = CGSize(width: 125, height: 47 * 2)
+            let homepageMaxY = TopBarHeights.combinedHeight + (47 * 2) + 44
+            walkthroughHighlight.center = CGPoint(x: (125 / 2) + 7.5, y: homepageMaxY)
+            walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 4
+            
+            //
+            // Flash
+            //
+            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
+                //
+                self.walkthroughHighlight.backgroundColor = colour2.withAlphaComponent(1)
+            }, completion: {(finished: Bool) -> Void in
+                UIView.animate(withDuration: 0.2, animations: {
+                    //
+                    self.walkthroughHighlight.backgroundColor = colour2.withAlphaComponent(0.5)
+                }, completion: nil)
+            })
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+        // Menu
+        case 1:
+            //
+            highlightSize = CGSize(width: 175, height: 47 * 2)
+            let homepageMaxY = TopBarHeights.combinedHeight + (47 * 3) + (44 * 2)
+            highlightCenter = CGPoint(x: (175 / 2) + 7.5, y: homepageMaxY)
+            highlightCornerRadius = 2
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = colour2
+            walkthroughTextColor = colour1
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+        //
+        default:
+            UIView.animate(withDuration: 0.4, animations: {
+                self.walkthroughView.alpha = 0
+            }, completion: { finished in
+                self.walkthroughView.removeFromSuperview()
+                UserDefaults.standard.set(true, forKey: "settingsWalkthrough")
+            })
+        }
+    }
+    
 //
 }
 
 
+//
+// MARK: Slide Menu Extension ------------------------------------------------------------------------------------------------------------------
+//
 
 //
 // Slide Menu Extension

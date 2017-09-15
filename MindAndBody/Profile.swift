@@ -39,6 +39,11 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Present walkthrough 2
+        if UserDefaults.standard.bool(forKey: "profileWalkthrough") == false {
+            walkthroughProfile()
+        }
+        
         //
         // Background Image
         backgroundImageView.frame = UIScreen.main.bounds
@@ -84,11 +89,6 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         rightSwipe.direction = .right
         rightSwipe.addTarget(self, action: #selector(swipeGesture(sender:)))
         tableView.addGestureRecognizer(rightSwipe)
-        
-        // Walkthrough
-        if UserDefaults.standard.bool(forKey: "profileWalkthrough") == false {
-            UserDefaults.standard.set(true, forKey: "profileWalkthrough")
-        }
         
         //  Navigation Bar
         //
@@ -204,9 +204,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     
-//
-// Walkthrough ----------------------------------------------------------------------------------------------------------------------------------
-//
+
     //
     // Slide Menu ---------------------------------------------------------------------------------------------------------------------
     //
@@ -243,6 +241,109 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             destinationVC.selectedSection = selectedSection
         }
     }
+    
+    
+    
+    //
+    // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------
+    //
+    //
+    var walkthroughProgress = 0
+    var walkthroughView = UIView()
+    var walkthroughHighlight = UIView()
+    var walkthroughLabel = UILabel()
+    var nextButton = UIButton()
+    
+    var didSetWalkthrough = false
+    
+    //
+    // Components
+    var walkthroughTexts = ["profile0", "profile1"]
+    var highlightSize: CGSize? = nil
+    var highlightCenter: CGPoint? = nil
+    // Corner radius, 0 = height / 2 && 1 = width / 2
+    var highlightCornerRadius = 0
+    var labelFrame = 0
+    //
+    var walkthroughBackgroundColor = UIColor()
+    var walkthroughTextColor = UIColor()
+    
+    // Walkthrough
+    func walkthroughProfile() {
+        
+        //
+        if didSetWalkthrough == false {
+            //
+            nextButton.addTarget(self, action: #selector(walkthroughProfile), for: .touchUpInside)
+            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
+            didSetWalkthrough = true
+        }
+        
+        //
+        switch walkthroughProgress {
+            // First has to be done differently
+        // Walkthrough explanation
+        case 0:
+            //
+            walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
+            walkthroughLabel.sizeToFit()
+            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            
+            // Colour
+            walkthroughLabel.textColor = colour2
+            walkthroughLabel.backgroundColor = colour1
+            walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = colour1.cgColor
+            // Highlight
+            walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
+            walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: ((view.bounds.height - 49) / 8) + CGFloat(TopBarHeights.navigationBarHeight) + 10)
+            walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
+            
+            //
+            // Flash
+            //
+            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
+                //
+                self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(1)
+            }, completion: {(finished: Bool) -> Void in
+                UIView.animate(withDuration: 0.2, animations: {
+                    //
+                    self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
+                }, completion: nil)
+            })
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+        // Menu
+        case 1:
+            //
+            highlightSize = CGSize(width: view.bounds.width / 2, height: 36)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.combinedHeight + view.bounds.height - 24.5)
+            highlightCornerRadius = 0
+            //
+            labelFrame = 1
+            //
+            walkthroughBackgroundColor = colour1
+            walkthroughTextColor = colour2
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+        //
+        default:
+            UIView.animate(withDuration: 0.4, animations: {
+                self.walkthroughView.alpha = 0
+            }, completion: { finished in
+                self.walkthroughView.removeFromSuperview()
+                UserDefaults.standard.set(true, forKey: "profileWalkthrough")
+            })
+        }
+    }
+    
     
 //
 }

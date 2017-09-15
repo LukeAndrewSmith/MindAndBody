@@ -186,8 +186,8 @@ class MeditationScreen: UIViewController {
         // Blurs
         let blurE = UIBlurEffect(style: .dark)
         blur.effect = blurE
-        let vibrancyE = UIVibrancyEffect(blurEffect: blurE)
-        blur.effect = vibrancyE
+        //let vibrancyE = UIVibrancyEffect(blurEffect: blurE)
+        //blur.effect = vibrancyE
         blur.frame = checkMark.bounds
         blur.isUserInteractionEnabled = false
         checkMark.insertSubview(blur, belowSubview: checkMark.imageView!)
