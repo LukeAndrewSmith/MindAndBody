@@ -2827,6 +2827,13 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
         default: break
         }
         
+        //
+        // MARK: Walkthrough
+        if UserDefaults.standard.bool(forKey: "finalChoiceWalkthrough") == false {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + AnimationTimes.animationTime3, execute: {
+                self.walkthroughFinalChoice()
+            })
+        }
     }
     
     
@@ -2962,154 +2969,130 @@ class WorkoutChoiceFinal: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    
     //
-    // Walkthrough --------------------------------------------------------------------------------------------------------
+    // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------
     //
-    var  viewNumber = 0
-    let walkthroughView = UIView()
-    let label = UILabel()
-    let nextButton = UIButton()
-    let backButton = UIButton()
+    //
+    var walkthroughProgress = 0
+    var walkthroughView = UIView()
+    var walkthroughHighlight = UIView()
+    var walkthroughLabel = UILabel()
+    var nextButton = UIButton()
+    
+    var didSetWalkthrough = false
+    
+    //
+    // Components
+    var walkthroughTexts = ["finalChoice0", "finalChoice1", "finalChoice2"]
+    var highlightSize: CGSize? = nil
+    var highlightCenter: CGPoint? = nil
+    // Corner radius, 0 = height / 2 && 1 = width / 2
+    var highlightCornerRadius = 0
+    var labelFrame = 0
+    //
+    var walkthroughBackgroundColor = UIColor()
+    var walkthroughTextColor = UIColor()
+    var highlightColor = UIColor()
     
     // Walkthrough
-    func walkthroughMindBody() {
-        //
-        let screenSize = UIScreen.main.bounds
-        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-        //
-        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
-        walkthroughView.backgroundColor = .black
-        walkthroughView.alpha = 0.72
-        walkthroughView.clipsToBounds = true
-        //
-        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
-        label.center = view.center
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
-        label.textColor = .white
-        //
-        nextButton.frame = screenSize
-        nextButton.backgroundColor = .clear
-        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
-        //
-        backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
-        backButton.setTitle("Back", for: .normal)
-        backButton.titleLabel?.textAlignment = .left
-        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        backButton.titleLabel?.textColor = .white
-        backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
+    func walkthroughFinalChoice() {
         
         //
-        switch viewNumber {
+        if didSetWalkthrough == false {
+            //
+            nextButton.addTarget(self, action: #selector(walkthroughFinalChoice), for: .touchUpInside)
+            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
+            didSetWalkthrough = true
+        }
+        
+        //
+        switch walkthroughProgress {
+            // First has to be done differently
+        // Preset Session
         case 0:
             //
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight, width: self.view.frame.size.width, height: 73.5))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
+            walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
+            walkthroughLabel.sizeToFit()
+            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            
+            // Colour
+            walkthroughLabel.textColor = colour1
+            walkthroughLabel.backgroundColor = colour2
+            walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = colour1.cgColor
+            // Highlight
+            walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
+            walkthroughHighlight.center = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.combinedHeight + (73.5 / 2))
+            walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
             
             //
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
+            // Flash
+            //
+            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
+                //
+                self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(1)
+            }, completion: {(finished: Bool) -> Void in
+                UIView.animate(withDuration: 0.2, animations: {
+                    //
+                    self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
+                }, completion: nil)
+            })
             
             //
-            label.text = NSLocalizedString("choiceScreen2W", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-        //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+        // Overview
         case 1:
             //
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 73.5, width: self.view.frame.size.width, height: movementsTableView.frame.size.height))
-            path.addRect(screenSize)
+            highlightSize = CGSize(width: view.bounds.width, height: (view.bounds.height - 73.5 - 49))
+            highlightCenter = CGPoint(x: (view.bounds.width / 2), y: TopBarHeights.combinedHeight + 73.5 + ((view.bounds.height - 73.5 - 49) / 2))
+            highlightCornerRadius = 3
             //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
+            labelFrame = 1
             //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
+            walkthroughBackgroundColor = colour1
+            walkthroughTextColor = colour2
+            highlightColor = colour2
             //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
             //
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
+            walkthroughProgress = self.walkthroughProgress + 1
             
-            //
-            label.center.y = presetsButton.center.y + UIApplication.shared.statusBarFrame.height + navigationBarHeight
-            label.text = NSLocalizedString("choiceScreen21", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-            //
-        //
+            
+            
+        // Begin
         case 2:
             //
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 73.5 + movementsTableView.frame.size.height, width: self.view.frame.size.width, height: 49))
-            path.addRect(screenSize)
+            highlightSize = CGSize(width: view.bounds.width / 3, height: 36)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y:  view.frame.maxY - 24.5)
+            highlightCornerRadius = 0
             //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
+            labelFrame = 1
             //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
+            walkthroughBackgroundColor = colour1
+            walkthroughTextColor = colour2
+            highlightColor = colour2
             //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
             //
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
+            walkthroughProgress = self.walkthroughProgress + 1
             
-            //
-            label.center = movementsTableView.center
-            label.text = NSLocalizedString("choiceScreen22", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
         //
-        default: break
+        default:
+            UIView.animate(withDuration: 0.4, animations: {
+                self.walkthroughView.alpha = 0
+            }, completion: { finished in
+                self.walkthroughView.removeFromSuperview()
+                UserDefaults.standard.set(true, forKey: "finalChoiceWalkthrough")
+            })
         }
     }
+
     
-    //
-    func nextWalkthroughView(_ sender: Any) {
-        walkthroughView.removeFromSuperview()
-        label.removeFromSuperview()
-        viewNumber = viewNumber + 1
-        walkthroughMindBody()
-    }
-    
-    //
-    func backWalkthroughView(_ sender: Any) {
-        if viewNumber > 0 {
-            backButton.removeFromSuperview()
-            label.removeFromSuperview()
-            walkthroughView.removeFromSuperview()
-            viewNumber = viewNumber - 1
-            walkthroughMindBody()
-        }
-    }
     //
     //
 }

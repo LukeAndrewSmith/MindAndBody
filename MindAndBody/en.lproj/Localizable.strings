@@ -1025,6 +1025,8 @@
         "practices" = "Practices";
             "customPractices" = "Custom Practices";
 
+            "practiceStarted" = "Practice Began!";
+
 
             // Information //
             "purposeTextYoga" = "";
@@ -1652,8 +1654,36 @@
         "automaticYoga1" = "Transition Time:\nThe average length of time you'd like to have to change pose.";
         "automaticYoga2" = "Transition Indicator:\nA sound to indicate when to change pose.";
 
-            // Session / Choice
-            "finalChoice0" = "Session:\nPress the session to change it if desired.";
+            // Final Choice Screen
+            "finalChoice0" = "Session:\nThis is always the final screen before a session, the schedule brings you here.\nPress the session to change it if desired.";
             "finalChoice1" = "Overview:\nAn overview of the session is shown here.";
-            "finalChoice2" = "Begin:\nPress begin to begin the session.";
+            "finalChoice2" = "Begin:\nPress Begin to begin the session.";
+
+            // Session Screen
+            "session0" = "Movement:\nThe movement to perform.";
+            "session1" = "Sets x Reps:\nReps = The number of repetitions of a movement (sometimes a time or number of breaths)\nSets: How many times to repeat each set of repetitions";
+            "session2" = "Rest Timer:\nPress a rest button upon completion of a set; the app will notify you when to begin the next set (rest times can be changed in the app settings).";
+            "session3" = "Demonstration:\nA demonstration of the movement.";
+            "session4" = "Indicator:\nIf the demonstration indicator is a green play button not a white circle, the demonstration image can be pressed to play a rep of the movement.\nSwipe left to view the target area image. The next indicator will be highlighted.";
+            "session5" = "Target Area:\nThe target area of the movement is shown.\nSwipe right to return.";
+            "session6" = "";
+            "session7" = "Explanation:\nAn explanation of the movement is found here. Even if you think you know how to do the movement please read it at least once!!!";
+            "session8" = "";
+            "session9" = "Next Movement:\nSwipe up to go to the next movement (and swipe down to go to the previous).";
+            "session10" = "Progress:\nYour progress through the session is seen at the top of the screen.";
+            "session11" = "Finish Early:\nNote: the session wont be tracked unless you finish by completing the session and pressing 'End Session' at the bottom ('End Session' appears after the last movement).";
+
+            // Circuit Workout Note
+            "session102" = "Progress:\nYour progress through each round is seen at the top of the screen.";
+
+            // Stretching: Stretch or movement
+            "session02" = "Stretch/Movement:\nThe stretch or movement to perform.";
+
+            // Yoga
+            "session03" = "Pose:\nThe pose to perform";
+            "session12" = "Breaths:\nThe number of breaths to hold a pose for";
+            "session32" = "Demonstration:\nA demonstration of the pose.";
+
+
+
 

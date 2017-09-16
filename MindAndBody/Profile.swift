@@ -18,10 +18,12 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var navigationBar: UINavigationItem!
     //
     @IBOutlet weak var tableView: UITableView!
+    //
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    
     
     //
     let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
-    let backgroundImageView = UIImageView()
     let backgroundBlur = UIVisualEffectView()
     
     //
@@ -46,8 +48,6 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         //
         // Background Image
-        backgroundImageView.frame = UIScreen.main.bounds
-        backgroundImageView.contentMode = .scaleAspectFill
         //
         if backgroundIndex < backgroundImageArray.count {
             backgroundImageView.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
@@ -328,7 +328,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             walkthroughBackgroundColor = colour1
             walkthroughTextColor = colour2
             //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
             //
             walkthroughProgress = self.walkthroughProgress + 1

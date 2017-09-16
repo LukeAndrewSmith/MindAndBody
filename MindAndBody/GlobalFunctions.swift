@@ -811,10 +811,7 @@ extension UIViewController {
     // Set Initial States
     func setWalkthrough(walkthroughView: UIView, walkthroughLabel: UILabel, walkthroughHighlight: UIView, nextButton: UIButton) -> UIView {
         //
-        
-        //
         let screenSize = UIScreen.main.bounds
-        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
         
         // View
         walkthroughView.frame = screenSize
@@ -855,7 +852,7 @@ extension UIViewController {
 
     //
     // view, label, highlight, texts, labelframe, highlightsize, highlightcenter, highlightcornerradius, backgroundColor, textColor, animationTime, walkthroughprogress
-    func nextWalkthroughView(walkthroughView: UIView, walkthroughLabel: UILabel, walkthroughHighlight: UIView, walkthroughTexts: [String], walkthroughLabelFrame: Int, highlightSize: CGSize, highlightCenter: CGPoint, highlightCornerRadius: Int, backgroundColor: UIColor, textColor: UIColor, animationTime: Double, walkthroughProgress: Int) {
+    func nextWalkthroughView(walkthroughView: UIView, walkthroughLabel: UILabel, walkthroughHighlight: UIView, walkthroughTexts: [String], walkthroughLabelFrame: Int, highlightSize: CGSize, highlightCenter: CGPoint, highlightCornerRadius: Int, backgroundColor: UIColor, textColor: UIColor, highlightColor: UIColor, animationTime: Double, walkthroughProgress: Int) {
         
         //
         // Label animation
@@ -890,8 +887,8 @@ extension UIViewController {
             // Colour
             walkthroughLabel.textColor = textColor
             walkthroughLabel.backgroundColor = backgroundColor
-            walkthroughHighlight.backgroundColor = backgroundColor.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = backgroundColor.cgColor
+            walkthroughHighlight.backgroundColor = highlightColor.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = highlightColor.cgColor
             // Highlight
             walkthroughHighlight.frame.size = highlightSize
             walkthroughHighlight.center = highlightCenter
@@ -915,11 +912,11 @@ extension UIViewController {
             // Flash
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                walkthroughHighlight.backgroundColor = backgroundColor.withAlphaComponent(1)
+                walkthroughHighlight.backgroundColor = highlightColor.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    walkthroughHighlight.backgroundColor = backgroundColor.withAlphaComponent(0.5)
+                    walkthroughHighlight.backgroundColor = highlightColor.withAlphaComponent(0.5)
                 }, completion: nil)
             })
             

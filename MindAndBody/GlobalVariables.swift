@@ -78,6 +78,12 @@ var automaticSelectionArray: [Int] = []
 // Int to indicate progress through selection
 var automaticSelectionProgress = 0
 
+//
+// Walkthrough aids
+//
+var didSetFinalChoiceWalkthrough = false
+var walkthroughProgressFinalChoice = 0
+
 
 
 //

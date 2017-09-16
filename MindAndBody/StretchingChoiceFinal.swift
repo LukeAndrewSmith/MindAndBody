@@ -1093,6 +1093,13 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         default: break
         }
         
+        //
+        // MARK: Walkthrough
+        if UserDefaults.standard.bool(forKey: "finalChoiceWalkthrough") == false {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + AnimationTimes.animationTime3, execute: {
+                self.walkthroughFinalChoice()
+            })
+        }
     }
     
     
@@ -1220,6 +1227,132 @@ class StretchingChoiceFinal: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     //
+    
+    
+    
+    
+    //
+    // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------
+    //
+    //
+    var walkthroughProgress = 0
+    var walkthroughView = UIView()
+    var walkthroughHighlight = UIView()
+    var walkthroughLabel = UILabel()
+    var nextButton = UIButton()
+    
+    var didSetWalkthrough = false
+    
+    //
+    // Components
+    var walkthroughTexts = ["finalChoice0", "finalChoice1", "finalChoice2"]
+    var highlightSize: CGSize? = nil
+    var highlightCenter: CGPoint? = nil
+    // Corner radius, 0 = height / 2 && 1 = width / 2
+    var highlightCornerRadius = 0
+    var labelFrame = 0
+    //
+    var walkthroughBackgroundColor = UIColor()
+    var walkthroughTextColor = UIColor()
+    var highlightColor = UIColor()
+    
+    // Walkthrough
+    func walkthroughFinalChoice() {
+        
+        //
+        if didSetWalkthrough == false {
+            //
+            nextButton.addTarget(self, action: #selector(walkthroughFinalChoice), for: .touchUpInside)
+            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
+            didSetWalkthrough = true
+        }
+        
+        //
+        switch walkthroughProgress {
+            // First has to be done differently
+        // Preset Session
+        case 0:
+            //
+            walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
+            walkthroughLabel.sizeToFit()
+            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            
+            // Colour
+            walkthroughLabel.textColor = colour1
+            walkthroughLabel.backgroundColor = colour2
+            walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = colour1.cgColor
+            // Highlight
+            walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
+            walkthroughHighlight.center = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.combinedHeight + (73.5 / 2))
+            walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
+            
+            //
+            // Flash
+            //
+            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
+                //
+                self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(1)
+            }, completion: {(finished: Bool) -> Void in
+                UIView.animate(withDuration: 0.2, animations: {
+                    //
+                    self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
+                }, completion: nil)
+            })
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+        // Overview
+        case 1:
+            //
+            highlightSize = CGSize(width: view.bounds.width, height: (view.bounds.height - 73.5 - 49))
+            highlightCenter = CGPoint(x: (view.bounds.width / 2), y: TopBarHeights.combinedHeight + 73.5 + ((view.bounds.height - 73.5 - 49) / 2))
+            highlightCornerRadius = 3
+            //
+            labelFrame = 1
+            //
+            walkthroughBackgroundColor = colour1
+            walkthroughTextColor = colour2
+            highlightColor = colour2
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+            
+        // Begin
+        case 2:
+            //
+            highlightSize = CGSize(width: view.bounds.width / 3, height: 36)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y:  view.frame.maxY - 24.5)
+            highlightCornerRadius = 0
+            //
+            labelFrame = 1
+            //
+            walkthroughBackgroundColor = colour1
+            walkthroughTextColor = colour2
+            highlightColor = colour2
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+        //
+        default:
+            UIView.animate(withDuration: 0.4, animations: {
+                self.walkthroughView.alpha = 0
+            }, completion: { finished in
+                self.walkthroughView.removeFromSuperview()
+                UserDefaults.standard.set(true, forKey: "finalChoiceWalkthrough")
+            })
+        }
+    }
+
     
     //
 }

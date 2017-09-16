@@ -13,6 +13,7 @@ import AVFoundation
 
 
 var timerCountDown = Timer()
+var endingBellPlayer = AVAudioPlayer()
 
 //
 // Meditation Screen Class -------------------------------------------------------------------------------------------
@@ -39,8 +40,7 @@ class MeditationScreen: UIViewController {
     var endingBellsArray: [Int] = []
     var selectedBackgroundSoundsArray: [Int] = []
     //
-    var dispatchWorkItemArray: [DispatchWorkItem] = []
-
+    var audioPlayerArray: [AVAudioPlayer] = []
     
     // Variables
     var didSetEndTime = false
@@ -84,7 +84,6 @@ class MeditationScreen: UIViewController {
     
     // Background Sound
     var soundPlayer = AVAudioPlayer()
-    
     var bellPlayer = AVAudioPlayer()
     
     
@@ -303,8 +302,6 @@ class MeditationScreen: UIViewController {
     //
     // Start Timer
     //
-    var qosDispatch: DispatchQoS? = nil
-    var workItemsDispatchQueue: DispatchQueue? = nil
     func startTimer() {
         // Dates and Times
         startTime = Date().timeIntervalSinceReferenceDate
@@ -331,72 +328,44 @@ class MeditationScreen: UIViewController {
             }
             }
             
-            if intervalBellsArray[selectedPreset].count != 0 || endingBellsArray[selectedPreset] != -1 {
-                qosDispatch = DispatchQoS.userInteractive
-                workItemsDispatchQueue = DispatchQueue(label: "workItemsDispatchQueue", qos: qosDispatch!)
-            }
-            
             //
-            // Work Item Bells
+            // Perform delays
             for i in 0...intervalBellsArray[selectedPreset].count {
                 // Interval Bells
                 if i < intervalBellsArray[selectedPreset].count {
-                    //
-                    // Bell
-                    let bell = DispatchWorkItem {
-                        let url = Bundle.main.url(forResource: self.bellsArray[self.intervalBellsArray[self.selectedPreset][i]], withExtension: "caf")!
-                        //
-                        do {
-                            let bell = try AVAudioPlayer(contentsOf: url)
-                            self.bellPlayer = bell
-                            bell.play()
-                        } catch {
-                            // couldn't load file :(
-                        }
-                    }
                     // Delay bell
-                    // Delay
-                    let delayInSeconds = intervalTimes[selectedPreset][i]
-                    // Dispatch
-                    //workItemsDispatchQueue?.asyncAfter(wallDeadline: .now() + .seconds(intervalTimes[selectedPreset][i]), execute: bell)
+                    let delayInSeconds = Double(intervalTimes[selectedPreset][i])
+                    // Play with delay
+                    let url = Bundle.main.url(forResource: self.bellsArray[self.intervalBellsArray[self.selectedPreset][i]], withExtension: "caf")!
                     //
-                    DispatchQueue.main.asyncAfter(wallDeadline: DispatchWallTime.now() + DispatchTimeInterval.seconds(delayInSeconds), execute: bell)
-
-                    // Add to work items array
-                    dispatchWorkItemArray.append(bell)
+                    do {
+                        let audioPlayer = try AVAudioPlayer(contentsOf: url)
+                        audioPlayerArray.append(audioPlayer)
+                        audioPlayer.play(atTime: audioPlayer.deviceCurrentTime + delayInSeconds)
+                    } catch {
+                        // couldn't load file :(
+                    }
                     
-                //
                 // Ending Bell
                 } else {
                     if self.endingBellsArray[self.selectedPreset] != -1 {
-                    // Bell
-                    let bell = DispatchWorkItem {
                         //
-                        // Delayed Bell Test
+                        // Delay bell
+                        let delayInSeconds = Double(durationArray[selectedPreset])
+                        
                         let url = Bundle.main.url(forResource: self.bellsArray[self.endingBellsArray[self.selectedPreset]], withExtension: "caf")!
                         //
                         do {
-                            let bell = try AVAudioPlayer(contentsOf: url)
-                            self.bellPlayer = bell
-                            bell.play()
+                            endingBellPlayer = try AVAudioPlayer(contentsOf: url)
+                            audioPlayerArray.append(endingBellPlayer)
+                            endingBellPlayer.play(atTime: endingBellPlayer.deviceCurrentTime + delayInSeconds)
                         } catch {
                             // couldn't load file :(
                         }
                     }
-                    
-                    // Delay bell
-                    // Delay
-                    let delayInSeconds = Double(durationArray[selectedPreset])
-                        
-                    // Dispatch
-                    workItemsDispatchQueue?.asyncAfter(deadline: .now() + .seconds(durationArray[selectedPreset]), execute: bell)
-                    
-                    // Add to work items array
-                    dispatchWorkItemArray.append(bell)
-                    }
                 }
+
             }
-            
             
             //
             // Background Sound
@@ -433,7 +402,7 @@ class MeditationScreen: UIViewController {
         // Begin Timer
         timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
     }
-    
+
     
 //
 // Buttons -------------------------------------------------------------------------------------------
@@ -500,9 +469,9 @@ class MeditationScreen: UIViewController {
                 self.bellPlayer.stop()
             }
             // Cancel Work Items
-            if self.dispatchWorkItemArray.count != 0 {
-                for i in 0...self.dispatchWorkItemArray.count - 1 {
-                    self.dispatchWorkItemArray[i].cancel()
+            if self.audioPlayerArray.count != 0 {
+                for i in 0...self.audioPlayerArray.count - 1 {
+                    self.audioPlayerArray[i].stop()
                 }
             }
             NotificationCenter.default.removeObserver(self)

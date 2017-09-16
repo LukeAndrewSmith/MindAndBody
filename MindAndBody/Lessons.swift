@@ -22,10 +22,12 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //
     @IBOutlet weak var tableView: UITableView!
     
+    //
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    
     
     //
     let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
-    let backgroundImageView = UIImageView()
     let backgroundBlur = UIVisualEffectView()
     
     
@@ -67,8 +69,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 
         // Background Image
-        backgroundImageView.frame = UIScreen.main.bounds
-        backgroundImageView.contentMode = .scaleAspectFill
         //
         if backgroundIndex < backgroundImageArray.count {
             backgroundImageView.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])

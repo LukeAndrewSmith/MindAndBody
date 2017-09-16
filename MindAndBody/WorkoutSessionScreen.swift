@@ -108,6 +108,11 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             let delayInSeconds = 0.7
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 alert.dismiss(animated: true, completion: nil)
+                //
+                // MARK: Walkthrough
+                if UserDefaults.standard.bool(forKey: "sessionWalkthrough2") == false {
+                    self.walkthroughSession()
+                }
             }
         })
         
@@ -325,7 +330,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //
                 cell.indicatorStack.alpha = 0
                 cell.setsRepsLabel.alpha = 0
-                cell.movementLabel.alpha = 1
+                cell.movementLabel.alpha = 0
                 cell.explanationButton.alpha = 0
             }
             
@@ -410,7 +415,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     
     
     //
-    // Next Round -------------------------------------------------------------------------------------------
+    // MARK: Next Round -------------------------------------------------------------------------------------------
     //
     let restTitle = NSLocalizedString("rest", comment: "")
     //
@@ -500,11 +505,53 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         }
         
         // Set timer value
-        restTime = Int(endTime - startTime)
+        restTime = Int(endTime - startTime) - 1
         
         // Check Greater than 0
         if restTime <= 0 {
             restTime = 0
+            //
+            timerCountDown.invalidate()
+            self.restAlert.dismiss(animated: true)
+            //
+            didSetEndTime = false
+            //
+            // Next Round
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
+            //
+            let indexPath0 = NSIndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            //
+            var cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! WorkoutOverviewTableViewCell
+            //
+            UIView.animate(withDuration: 0.6, animations: {
+                // 1
+                cell.setsRepsLabel.alpha = 1
+                cell.movementLabel.alpha = 1
+                cell.explanationButton.alpha = 1
+                //
+                self.updateProgress()
+                //
+            }, completion: { finished in
+                self.tableView.reloadData()
+            })
+            
+            //
+            // Alert View
+            let titleString = "round" + String(self.sessionScreenRoundIndex + 1)
+            let title = NSLocalizedString(titleString, comment: "")
+            //let message = NSLocalizedString("resetMessage", comment: "")
+            let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+            alert.view.tintColor = colour1
+            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+            self.present(alert, animated: true, completion: {
+                //
+                let delayInSeconds = 0.7
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                    alert.dismiss(animated: true, completion: nil)
+                }
+            })
         }
         
         // Set Timer
@@ -683,7 +730,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let sender = imageTap.view as! UIImageView
         let tag = sender.tag
         let indexPath = NSIndexPath(row: tag, section: 0)
-        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! WorkoutOverviewTableViewCell
         //
         // Image Array
         if demonstrationArray[indexPath.row].count > 1 && cell.imageViewCell.isAnimating == false {
@@ -1051,6 +1098,373 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         alert.addAction(cancelAction)
         //
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    
+    //
+    // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------
+    //
+    //
+    var walkthroughProgress = 0
+    var walkthroughView = UIView()
+    var walkthroughHighlight = UIView()
+    var walkthroughLabel = UILabel()
+    var nextButton = UIButton()
+    
+    var didSetWalkthrough = false
+    
+    //
+    // Components
+    var walkthroughTexts = ["session0", "session1", "session3", "session4", "session5", "session6", "session7", "session8", "session9", "session102", "session11"]
+    var highlightSize: CGSize? = nil
+    var highlightCenter: CGPoint? = nil
+    // Corner radius, 0 = height / 2 && 1 = width / 2
+    var highlightCornerRadius = 0
+    var labelFrame = 0
+    //
+    var walkthroughBackgroundColor = UIColor()
+    var walkthroughTextColor = UIColor()
+    var highlightColor = UIColor()
+    //
+    
+    // Walkthrough
+    func walkthroughSession() {
+        //
+        var cellHeight = (UIScreen.main.bounds.height - 22) * 3/4
+        
+        //
+        if didSetWalkthrough == false {
+            //
+            nextButton.addTarget(self, action: #selector(walkthroughSession), for: .touchUpInside)
+            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
+            didSetWalkthrough = true
+        }
+        
+        //
+        switch walkthroughProgress {
+            // First has to be done differently
+        // Movement
+        case 0:
+            //
+            walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
+            walkthroughLabel.sizeToFit()
+            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            
+            // Colour
+            walkthroughLabel.textColor = colour2
+            walkthroughLabel.backgroundColor = colour1
+            walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = colour1.cgColor
+            // Highlight
+            walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
+            walkthroughHighlight.center = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight / 2) * (28/16)) + 2)
+            walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
+            
+            //
+            // Flash
+            //
+            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
+                //
+                self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(1)
+            }, completion: {(finished: Bool) -> Void in
+                UIView.animate(withDuration: 0.2, animations: {
+                    //
+                    self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
+                }, completion: nil)
+            })
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+        // Sets x Reps
+        case 1:
+            //
+            highlightSize = CGSize(width: view.bounds.width / 3, height: 33)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight / 2) * (30/16)) + 2)
+            highlightCornerRadius = 0
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = colour1
+            walkthroughTextColor = colour2
+            highlightColor = colour1
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+        
+            
+        // Demonstration
+        case 2:
+            //
+            highlightSize = CGSize(width: view.bounds.width * (7/8), height: (cellHeight * (13/16)))
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (13/16)) / 2) + 2)
+            highlightCornerRadius = 3
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = colour1
+            walkthroughTextColor = colour2
+            highlightColor = colour1
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+        // Indicator
+        case 3:
+            //
+            highlightSize = CGSize(width: 30, height: 15)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (13/16))) - (15 / 2))
+            highlightCornerRadius = 0
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = colour1
+            walkthroughTextColor = colour2
+            highlightColor = colour1
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+            
+        // Target Area
+        case 4:
+            // Swipe demonstration
+            let leftSwipe = UIView()
+            leftSwipe.frame.size = CGSize(width: 50, height: 50)
+            leftSwipe.backgroundColor = colour1
+            leftSwipe.layer.cornerRadius = 25
+            leftSwipe.clipsToBounds = true
+            leftSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2
+            leftSwipe.center.x = view.bounds.width * (7/8)
+            UIApplication.shared.keyWindow?.insertSubview(leftSwipe, aboveSubview: walkthroughView)
+            // Perform swipe action
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
+                let leftSwipeSimulate = UISwipeGestureRecognizer()
+                leftSwipeSimulate.direction = .left
+                self.handleSwipes(extraSwipe: leftSwipeSimulate)
+            })
+            // Animate swipe demonstration
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                //
+                leftSwipe.center.x = self.view.bounds.width * (1/8)
+                //
+            }, completion: { finished in
+                //
+                leftSwipe.removeFromSuperview()
+                
+                //
+                self.highlightSize = CGSize(width: self.view.bounds.width * (7/8), height: (cellHeight * (13/16)))
+                self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (13/16)) / 2) + 2)
+                self.highlightCornerRadius = 3
+                //
+                self.labelFrame = 0
+                //
+                self.walkthroughBackgroundColor = colour1
+                self.walkthroughTextColor = colour2
+                self.highlightColor = colour1
+                //
+                self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
+                
+                //
+                self.walkthroughProgress = self.walkthroughProgress + 1
+            })
+            
+            
+        // Return to demonstration and Explanation
+        case 5:
+            //
+            highlightSize = CGSize(width: 30, height: 15)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (3/4))) - (15 / 2))
+            highlightCornerRadius = 0
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = colour1
+            walkthroughTextColor = colour2
+            highlightColor = colour1
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            //
+            self.walkthroughProgress = self.walkthroughProgress + 1
+            
+            //
+            // Swipe demonstration
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
+                //
+                let rightSwipe = UIView()
+                rightSwipe.frame.size = CGSize(width: 50, height: 50)
+                rightSwipe.backgroundColor = colour1
+                rightSwipe.layer.cornerRadius = 25
+                rightSwipe.clipsToBounds = true
+                rightSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2
+                rightSwipe.center.x = self.view.bounds.width * (1/8)
+                UIApplication.shared.keyWindow?.insertSubview(rightSwipe, aboveSubview: self.walkthroughView)
+                // Perform swipe action
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
+                    let rightSwipeSimulate = UISwipeGestureRecognizer()
+                    rightSwipeSimulate.direction = .right
+                    self.handleSwipes(extraSwipe: rightSwipeSimulate)
+                })
+                // Animate swipe demonstration
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    //
+                    rightSwipe.center.x = self.view.bounds.width * (7/8)
+                    //
+                }, completion: { finished in
+                    //
+                    rightSwipe.removeFromSuperview()
+                    
+                    //
+                    self.highlightSize = CGSize(width: 45, height: 45)
+                    self.highlightCenter = CGPoint(x: self.view.bounds.width - 25 - 2.5, y: TopBarHeights.statusBarHeight + cellHeight - 25 - 2.5)
+                    self.highlightCornerRadius = 0
+                    //
+                    self.labelFrame = 0
+                    //
+                    self.walkthroughBackgroundColor = colour1
+                    self.walkthroughTextColor = colour2
+                    self.highlightColor = colour1
+                    //
+                    self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
+                    
+                    //
+                    self.walkthroughProgress = self.walkthroughProgress + 1
+                })
+            })
+            
+            
+            // Explanation open and Next Movement
+        // Case 7 not 6 as + 1 to walkthroughprogress twice in case 5 for label reasons (need an empty label)
+        case 7:
+            expandExplanation()
+            //
+            highlightSize = CGSize(width: 45, height: 45)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + (view.bounds.height / 2))
+            highlightCornerRadius = 0
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = colour1
+            walkthroughTextColor = colour2
+            highlightColor = .clear
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            //
+            self.walkthroughProgress = self.walkthroughProgress + 1
+            //
+            // Next Movement
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2, execute: {
+                self.retractExplanation(self)
+                
+                //
+                self.highlightSize = CGSize(width: self.view.bounds.width, height: 4)
+                self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 1)
+                self.highlightCornerRadius = 0
+                //
+                self.labelFrame = 0
+                //
+                self.walkthroughBackgroundColor = colour1
+                self.walkthroughTextColor = colour2
+                self.highlightColor = .clear
+                //
+                self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
+                //
+                self.walkthroughProgress = self.walkthroughProgress + 1
+            })
+            
+            
+            // Progress
+        // Case 9 not 8 as + 1 to walkthroughprogress twice in case 7 for label reasons (need an empty label)
+        case 9:
+            //
+            walkthroughLabel.alpha = 0
+            //
+            // Swipe demonstration
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
+                //
+                let upSwipe = UIView()
+                upSwipe.frame.size = CGSize(width: 50, height: 50)
+                upSwipe.backgroundColor = colour1
+                upSwipe.layer.cornerRadius = 25
+                upSwipe.clipsToBounds = true
+                upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (7/8)) + 2
+                upSwipe.center.x = self.view.bounds.width / 2
+                UIApplication.shared.keyWindow?.insertSubview(upSwipe, aboveSubview: self.walkthroughView)
+                // Perform swipe action
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
+                    self.nextButtonAction()
+                })
+                // Animate swipe demonstration
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    //
+                    upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
+                    //
+                }, completion: { finished in
+                    //
+                    upSwipe.removeFromSuperview()
+                    //
+                    self.walkthroughLabel.alpha = 1
+                    //
+                    self.highlightSize = CGSize(width: self.view.bounds.width, height: 8)
+                    self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 1)
+                    self.highlightCornerRadius = 0
+                    //
+                    self.labelFrame = 0
+                    //
+                    self.walkthroughBackgroundColor = colour1
+                    self.walkthroughTextColor = colour2
+                    self.highlightColor = colour1
+                    //
+                    self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
+                    //
+                    self.walkthroughProgress = self.walkthroughProgress + 1
+                    
+                })
+            })
+            
+            
+        // Finish Early
+        case 10:
+            //
+            highlightSize = CGSize(width: 36, height: 36)
+            highlightCenter = CGPoint(x: 27, y: TopBarHeights.statusBarHeight + 2 + 5 + 22)
+            highlightCornerRadius = 0
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = colour1
+            walkthroughTextColor = colour2
+            highlightColor = colour1
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            //
+            
+            
+        //
+        default:
+            //
+            backButtonAction()
+            //
+            UIView.animate(withDuration: 0.4, animations: {
+                self.walkthroughView.alpha = 0
+            }, completion: { finished in
+                self.walkthroughView.removeFromSuperview()
+                UserDefaults.standard.set(true, forKey: "sessionWalkthrough2")
+            })
+        }
     }
 //
 }

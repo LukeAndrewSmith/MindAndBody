@@ -1359,6 +1359,7 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     var walkthroughBackgroundColor = UIColor()
     var walkthroughTextColor = UIColor()
+    var highlightColor = UIColor()
     
     // Walkthrough
     func walkthroughFinalChoice() {
@@ -1382,8 +1383,8 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
-            walkthroughLabel.textColor = colour2
-            walkthroughLabel.backgroundColor = colour1
+            walkthroughLabel.textColor = colour1
+            walkthroughLabel.backgroundColor = colour2
             walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
             walkthroughHighlight.layer.borderColor = colour1.cgColor
             // Highlight
@@ -1411,16 +1412,17 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
         // Overview
         case 1:
             //
-            highlightSize = CGSize(width: view.bounds.width - 6, height: (view.bounds.height - 73.5 - 49))
-            highlightCenter = CGPoint(x: (view.bounds.width / 2) + 3, y: TopBarHeights.combinedHeight + 73.5 + ((view.bounds.height - 73.5 - 49) / 2))
-            highlightCornerRadius = 2
+            highlightSize = CGSize(width: view.bounds.width, height: (view.bounds.height - 73.5 - 49))
+            highlightCenter = CGPoint(x: (view.bounds.width / 2), y: TopBarHeights.combinedHeight + 73.5 + ((view.bounds.height - 73.5 - 49) / 2))
+            highlightCornerRadius = 3
             //
             labelFrame = 1
             //
             walkthroughBackgroundColor = colour1
             walkthroughTextColor = colour2
+            highlightColor = colour2
             //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
             //
             walkthroughProgress = self.walkthroughProgress + 1
@@ -1432,14 +1434,15 @@ class WarmupChoiceFinal: UIViewController, UITableViewDelegate, UITableViewDataS
             //
             highlightSize = CGSize(width: view.bounds.width / 3, height: 36)
             highlightCenter = CGPoint(x: view.bounds.width / 2, y:  view.frame.maxY - 24.5)
-            highlightCornerRadius = 1
+            highlightCornerRadius = 0
             //
             labelFrame = 1
             //
             walkthroughBackgroundColor = colour1
             walkthroughTextColor = colour2
+            highlightColor = colour2
             //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
             //
             walkthroughProgress = self.walkthroughProgress + 1

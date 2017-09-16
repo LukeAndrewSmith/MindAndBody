@@ -64,6 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         UserDefaults.standard.register(defaults: ["finalChoiceWalkthrough" : false])
         UserDefaults.standard.register(defaults: ["sessionWalkthrough" : false])
+        UserDefaults.standard.register(defaults: ["sessionWalkthrough2" : false])
         UserDefaults.standard.register(defaults: ["yogaSessionWalkthrough" : false])
         //
         UserDefaults.standard.register(defaults: ["scheduleWalkthrough" : false])

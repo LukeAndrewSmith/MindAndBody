@@ -304,8 +304,8 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         //
         // Extra detail touch tracker layer
-        let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 100, thumbBorderWidth: 2)
-        let trackerLayerSettings = ChartPointsLineTrackerLayerSettings(thumbSettings: thumbSettings, selectNearest: true)
+        let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 500, thumbBorderWidth: 2)
+        let trackerLayerSettings = ChartPointsLineTrackerLayerSettings(thumbSettings: thumbSettings, selectNearest: false)
         
         // Current position labels array out of func so okbuttonaction can clear them
         let chartPointsTrackerLayer = ChartPointsLineTrackerLayer<ChartPoint, Any>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lines: [chartPoints], lineColor: colour2, animDuration: 1, animDelay: 2, settings: trackerLayerSettings) {chartPointsWithScreenLoc in
@@ -315,6 +315,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             for (index, chartPointWithScreenLoc) in chartPointsWithScreenLoc.enumerated() {
                 
                 let label = UILabel()
+                let test3 = chartPoints[index].y
                 let test = chartPointWithScreenLoc.chartPoint.y
                 let test2 = chartPointWithScreenLoc.screenLoc.y
                 label.text = chartPointWithScreenLoc.chartPoint.description
@@ -1523,7 +1524,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             walkthroughBackgroundColor = colour1
             walkthroughTextColor = colour2
             //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
             //
             walkthroughProgress = self.walkthroughProgress + 1

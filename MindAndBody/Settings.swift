@@ -517,6 +517,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     //
                     UserDefaults.standard.set(false, forKey: "finalChoiceWalkthrough")
                     UserDefaults.standard.set(false, forKey: "sessionWalkthrough")
+                    UserDefaults.standard.set(false, forKey: "sessionWalkthrough2")
                     UserDefaults.standard.set(true, forKey: "yogaSessionWalkthrough")
                     //
                     UserDefaults.standard.set(false, forKey: "scheduleWalkthrough")
@@ -788,7 +789,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             walkthroughBackgroundColor = colour2
             walkthroughTextColor = colour1
             //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
             //
             walkthroughProgress = self.walkthroughProgress + 1
