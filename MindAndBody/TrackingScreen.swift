@@ -318,7 +318,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 let test3 = chartPoints[index].y
                 let test = chartPointWithScreenLoc.chartPoint.y
                 let test2 = chartPointWithScreenLoc.screenLoc.y
-                label.text = chartPointWithScreenLoc.chartPoint.description
+                label.text = chartPointWithScreenLoc.chartPoint.description + "%"
                 label.sizeToFit()
                 label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x + label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
                 if label.frame.maxX > self.view.bounds.width {
