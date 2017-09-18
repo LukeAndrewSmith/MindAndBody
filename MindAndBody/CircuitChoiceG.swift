@@ -120,19 +120,25 @@ class CircuitChoiceG: UIViewController  {
     
     // Full
     @IBAction func full(_ sender: Any) {
-        workoutType2 = 0
+        selectedSession[1] = 7
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "circuitSegue", sender: nil)
     }
     
     // Upper
     @IBAction func upper(_ sender: Any) {
-        workoutType2 = 1
+        selectedSession[1] = 8
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "circuitSegue", sender: nil)
     }
     
     // Lower
     @IBAction func lower(_ sender: Any) {
-        workoutType2 = 2
+        selectedSession[1] = 9
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "circuitSegue", sender: nil)
     }
     
@@ -144,10 +150,7 @@ class CircuitChoiceG: UIViewController  {
         // Pass Data
         if (segue.identifier == "circuitSegue") {
             //
-            let destinationVC = segue.destination as! WorkoutChoiceFinal
-            // Indicate to next screen which button was pressed
-            destinationVC.workoutType = 1
-            destinationVC.workoutType2 = workoutType2
+            let destinationVC = segue.destination as! FinalChoice
         }
         //
         let backItem = UIBarButtonItem()

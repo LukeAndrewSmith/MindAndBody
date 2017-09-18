@@ -2758,14 +2758,14 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             }
             
             //
-            destinationVC.sessionArray = workoutArray
-            destinationVC.setsArray = setsArray
-            destinationVC.repsArray = repsArray
-            //destinationVC.demonstrationArray = demonstrationArray
-            //destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
-            //
-            destinationVC.sessionType = 0
+//            destinationVC.sessionArray = workoutArray
+//            destinationVC.setsArray = setsArray
+//            destinationVC.repsArray = repsArray
+//            //destinationVC.demonstrationArray = demonstrationArray
+//            //destinationVC.targetAreaArray = targetAreaArray
+//            destinationVC.explanationArray = explanationArray
+//            //
+//            destinationVC.sessionType = 0
             //
         //
         } else if (segue.identifier == "workoutSessionSegueCustom1") {
@@ -2796,15 +2796,15 @@ class WorkoutChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDat
             }
             
             //
-            destinationVC.numberOfRounds = roundNumber[selectedPreset]
-            //
-            destinationVC.sessionArray = workoutArray
-            destinationVC.repsArray = repsArrayC
-            //destinationVC.demonstrationArray = demonstrationArray
-            //destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
-            //
-            destinationVC.sessionType = 0
+//            destinationVC.numberOfRounds = roundNumber[selectedPreset]
+//            //
+//            destinationVC.sessionArray = workoutArray
+//            destinationVC.repsArray = repsArrayC
+//            //destinationVC.demonstrationArray = demonstrationArray
+//            //destinationVC.targetAreaArray = targetAreaArray
+//            destinationVC.explanationArray = explanationArray
+//            //
+//            destinationVC.sessionType = 0
             //
         }
     }

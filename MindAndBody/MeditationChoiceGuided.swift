@@ -22,7 +22,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     
     // Selected Session
-    var selectedSession = [0, 0]
+    var selectedSessionMeditation = [0, 0]
     
     // Guided Sessions
     let guidedSessions =
@@ -136,8 +136,8 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         //
         tableView.deselectRow(at: indexPath, animated: true)
         // Selected Session
-        selectedSession[0] = indexPath.section
-        selectedSession[1] = indexPath.row
+        selectedSessionMeditation[0] = indexPath.section
+        selectedSessionMeditation[1] = indexPath.row
         // Title
 //        let currentCell = tableView.cellForRow(at: indexPath) as UITableViewCell!
 //        guidedTitleText = (currentCell?.textLabel!.text)!
@@ -154,7 +154,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         if (segue.identifier == "meditationGuided") {
             //
             let destinationVC = segue.destination as! MeditationGuided
-            destinationVC.selectedSession = selectedSession
+            destinationVC.selectedSession = selectedSessionMeditation
             //destinationVC.guidedTitle = guidedTitleText
             //destinationVC.keyArray = selectedArray
             //destinationVC.poses = posesDictionary

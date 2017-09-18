@@ -1680,10 +1680,10 @@ class YogaChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
             
             //
-            destinationVC.sessionArray = yogaArray
-            destinationVC.breathsArray = breathsArray
-            //destinationVC.demonstrationArray = demonstrationArray
-            destinationVC.explanationArray = explanationArray
+//            destinationVC.sessionArray = yogaArray
+//            destinationVC.breathsArray = breathsArray
+//            //destinationVC.demonstrationArray = demonstrationArray
+//            destinationVC.explanationArray = explanationArray
             //
         }
     }

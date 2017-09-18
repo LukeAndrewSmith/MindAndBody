@@ -554,11 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/MindBody.swift"
-            timestampString = "527109967.463357"
+            timestampString = "527360855.650058"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "676"
-            endingLineNumber = "676"
+            startingLineNumber = "700"
+            endingLineNumber = "700"
             landmarkName = "walkthroughMindBody()"
             landmarkType = "7">
          </BreakpointContent>

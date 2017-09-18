@@ -723,6 +723,7 @@
                                     <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="workoutAction:" destination="LRH-Iq-TMe" eventType="touchUpInside" id="E0W-6W-Qls"/>
                                     <segue destination="ecR-GP-fQv" kind="show" id="2ws-e7-x9r"/>
                                 </connections>
                             </button>
@@ -736,6 +737,7 @@
                                     <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="stretchingAction:" destination="LRH-Iq-TMe" eventType="touchUpInside" id="krO-y4-pn7"/>
                                     <segue destination="eF3-ge-hrn" kind="show" id="5xd-ua-sxt"/>
                                 </connections>
                             </button>
@@ -749,6 +751,7 @@
                                     <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="warmupAction:" destination="LRH-Iq-TMe" eventType="touchUpInside" id="UtA-al-L8J"/>
                                     <segue destination="v85-Zl-htK" kind="show" identifier="homeWarmup" id="pYl-WR-cih"/>
                                 </connections>
                             </button>
@@ -762,6 +765,7 @@
                                     <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="cardioAction:" destination="LRH-Iq-TMe" eventType="touchUpInside" id="wLd-kZ-PUg"/>
                                     <segue destination="5vm-2W-zCk" kind="show" id="yiT-DD-hGL"/>
                                 </connections>
                             </button>
@@ -771,6 +775,7 @@
                                     <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="meditationAction:" destination="LRH-Iq-TMe" eventType="touchUpInside" id="Lsd-xK-BYk"/>
                                     <segue destination="7el-a7-o9h" kind="show" id="LV5-jE-OJk"/>
                                 </connections>
                             </button>
@@ -782,6 +787,7 @@
                                     <color key="titleShadowColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 </state>
                                 <connections>
+                                    <action selector="yogaAction:" destination="LRH-Iq-TMe" eventType="touchUpInside" id="MOB-6G-Zxs"/>
                                     <segue destination="iFI-EE-j0k" kind="show" id="DTF-Hj-Efg"/>
                                 </connections>
                             </button>
@@ -1002,7 +1008,7 @@
                         <outlet property="stackTop" destination="FDI-ab-FZZ" id="h0y-g0-aZC"/>
                         <outlet property="stackView" destination="doF-1k-deY" id="BfE-gp-1rI"/>
                         <outlet property="upperBody" destination="riE-ZG-nMs" id="GEr-bm-nCe"/>
-                        <segue destination="Cxo-v6-Jb7" kind="show" identifier="warmupSegue" id="Sss-g5-n05"/>
+                        <segue destination="bRc-pd-jNj" kind="show" identifier="warmupSegue" id="bK5-Op-uet"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pZD-XG-Mow" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1177,12 +1183,12 @@
                         <outlet property="stackView1" destination="Hzy-mE-63N" id="gH8-v1-oVe"/>
                         <outlet property="stackView2" destination="1Kk-Pg-xV6" id="gve-YM-VBs"/>
                         <outlet property="upperBody" destination="DYY-gn-LYa" id="OWc-kP-Dvi"/>
-                        <segue destination="XiL-DY-SmN" kind="show" identifier="classicSegue" id="qzt-4F-2h8"/>
+                        <segue destination="bRc-pd-jNj" kind="show" identifier="classicSegue" id="IU0-L6-y9Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uby-KG-VGY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7682" y="-3550"/>
+            <point key="canvasLocation" x="7396" y="-2834"/>
         </scene>
         <!--Workout Choice-->
         <scene sceneID="L27-sl-q4K">
@@ -1382,7 +1388,7 @@
                         <outlet property="custom" destination="SVu-G4-jgr" id="N1R-ek-Pmy"/>
                         <outlet property="navigationBar" destination="ndj-QS-m0l" id="7ww-eZ-10d"/>
                         <outlet property="practices" destination="V1A-ek-ohU" id="t5a-tQ-wzV"/>
-                        <segue destination="fCC-R5-Wbd" kind="show" identifier="yogaSegue" id="MFz-Pe-gBB"/>
+                        <segue destination="bRc-pd-jNj" kind="show" identifier="yogaSegue" id="dk4-de-Awg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GC7-B4-tan" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1559,7 +1565,7 @@
                         <outlet property="postWorkout" destination="46d-HC-9KM" id="h5a-Vs-70e"/>
                         <outlet property="stackBottom" destination="IUr-jp-2Hm" id="cwY-cS-uKi"/>
                         <outlet property="stackView" destination="8KT-aB-UQc" id="76g-gQ-lVB"/>
-                        <segue destination="TxB-P6-Ned" kind="show" identifier="stretchingSegue" id="0aX-gI-V93"/>
+                        <segue destination="bRc-pd-jNj" kind="show" identifier="stretchingSegue" id="Cck-JM-IhA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DwH-wT-WU0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1842,7 +1848,8 @@
                                             <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="XiL-DY-SmN" kind="show" identifier="fiveSegue" id="KAO-wv-4Kd"/>
+                                            <action selector="fivebyfiveAction:" destination="LaR-DN-NDd" eventType="touchUpInside" id="5WS-cd-hwA"/>
+                                            <segue destination="bRc-pd-jNj" kind="show" identifier="fiveSegue" id="kbM-Nz-Z5r"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1889,7 +1896,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXB-XG-dSt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6820" y="-3240"/>
+            <point key="canvasLocation" x="6535" y="-2525"/>
         </scene>
         <!--Bodyweight Choice-->
         <scene sceneID="qkq-V5-2Ep">
@@ -1981,12 +1988,12 @@
                         <outlet property="stackBottom" destination="zde-hW-1Ds" id="gcZ-Px-tBy"/>
                         <outlet property="stackView" destination="s14-TV-DYC" id="ZfW-4X-1lh"/>
                         <outlet property="upperBody" destination="10V-m9-a2X" id="9b2-pS-MxU"/>
-                        <segue destination="XiL-DY-SmN" kind="show" identifier="bodyweightSegue" id="B07-rW-0ou"/>
+                        <segue destination="bRc-pd-jNj" kind="show" identifier="bodyweightSegue" id="6f1-8P-Dfb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKJ-8r-bSb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7681" y="-2041"/>
+            <point key="canvasLocation" x="7396" y="-1326"/>
         </scene>
         <!--Circuit ChoiceG-->
         <scene sceneID="3qv-Lz-auw">
@@ -2078,12 +2085,12 @@
                         <outlet property="stackBottom" destination="92x-Li-w34" id="Bhd-Uv-4Vd"/>
                         <outlet property="stackView" destination="I4A-8X-5BC" id="6fr-Mn-ie7"/>
                         <outlet property="upperBody" destination="XUp-xX-kdH" id="hVk-X4-wUe"/>
-                        <segue destination="XiL-DY-SmN" kind="show" identifier="circuitSegue" id="gHI-x8-z0O"/>
+                        <segue destination="bRc-pd-jNj" kind="show" identifier="circuitSegue" id="aDp-rJ-26a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2wx-ln-FSD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7682" y="-2877"/>
+            <point key="canvasLocation" x="7396" y="-2161"/>
         </scene>
         <!--Meditation Choice Guided-->
         <scene sceneID="Q6t-De-9N0">
@@ -2190,13 +2197,13 @@
                                         <rect key="frame" x="8" y="85.5" width="172" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Aim" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMd-42-eeN">
-                                                <rect key="frame" x="0.0" y="0.0" width="132" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="28" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Calm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTm-vk-7rW">
-                                                <rect key="frame" x="140" y="0.0" width="32" height="20.5"/>
+                                                <rect key="frame" x="36" y="0.0" width="136" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="15"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2671,7 +2678,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GQU-g8-sci" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9336.7999999999993" y="-961.16941529235385"/>
+            <point key="canvasLocation" x="10719" y="-1326"/>
         </scene>
         <!--Yoga Screen-->
         <scene sceneID="8Y4-y1-Twl">
@@ -2811,7 +2818,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q2f-6F-Mkd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8208.7999999999993" y="1656.521739130435"/>
+            <point key="canvasLocation" x="11055" y="8"/>
         </scene>
         <!--Warmup Choice Custom-->
         <scene sceneID="E5u-Ou-XuM">
@@ -2837,7 +2844,6 @@
                                 </state>
                                 <connections>
                                     <action selector="beginButton:" destination="tVV-zd-pp1" eventType="touchUpInside" id="skM-7i-Sgm"/>
-                                    <segue destination="bTr-Zb-a1u" kind="presentation" identifier="warmupSessionSegueCustom" id="IAN-EI-dLy"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krK-NN-AC1">
@@ -2910,7 +2916,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3JK-F5-lRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4240.8000000000002" y="-1807.6461769115444"/>
+            <point key="canvasLocation" x="8406" y="1504"/>
         </scene>
         <!--Title-->
         <scene sceneID="5Ny-vs-FlD">
@@ -2938,7 +2944,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBZ-aS-mhf">
-                                <rect key="frame" x="63" y="275.5" width="250" height="116"/>
+                                <rect key="frame" x="63" y="276" width="250" height="116"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="97"/>
                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2991,168 +2997,6 @@
             </objects>
             <point key="canvasLocation" x="5642" y="3958"/>
         </scene>
-        <!--Warmup Choice Final-->
-        <scene sceneID="Riy-sp-bdL">
-            <objects>
-                <viewController id="Cxo-v6-Jb7" customClass="WarmupChoiceFinal" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zP1-XF-Wvm"/>
-                        <viewControllerLayoutGuide type="bottom" id="ZC5-yZ-PUv"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="1F1-UI-yiT">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LSS-2E-gz7">
-                                <rect key="frame" x="0.0" y="74" width="375" height="480"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="Cxo-v6-Jb7" id="jMr-mh-A14"/>
-                                    <outlet property="delegate" destination="Cxo-v6-Jb7" id="JQq-cf-eoY"/>
-                                </connections>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3af-gd-lRN">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
-                                <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="73.5" id="czb-fS-Jc4"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="23"/>
-                                <state key="normal" title="- Select Warmup -">
-                                    <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="presetsButtonAction:" destination="Cxo-v6-Jb7" eventType="touchUpInside" id="mXK-fO-IN7"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yjw-Ab-s6R">
-                                <rect key="frame" x="0.0" y="554" width="375" height="49"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="X5d-VG-93W"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="23"/>
-                                <state key="normal" title="Begin">
-                                    <color key="titleColor" red="0.92156862750000001" green="0.50980392159999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="beginButton:" destination="Cxo-v6-Jb7" eventType="touchUpInside" id="jWD-fY-uTL"/>
-                                    <segue destination="bTr-Zb-a1u" kind="presentation" identifier="warmupSessionSegue" id="CTF-I1-syG"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="LSS-2E-gz7" firstAttribute="leading" secondItem="1F1-UI-yiT" secondAttribute="leading" id="4yy-Tf-VO9"/>
-                            <constraint firstItem="3af-gd-lRN" firstAttribute="top" secondItem="zP1-XF-Wvm" secondAttribute="bottom" id="5aE-9M-ZvM"/>
-                            <constraint firstAttribute="trailing" secondItem="LSS-2E-gz7" secondAttribute="trailing" id="9G1-WT-CGb"/>
-                            <constraint firstAttribute="trailing" secondItem="yjw-Ab-s6R" secondAttribute="trailing" id="A48-IQ-WIK"/>
-                            <constraint firstItem="yjw-Ab-s6R" firstAttribute="leading" secondItem="1F1-UI-yiT" secondAttribute="leading" id="C2U-I9-zf5"/>
-                            <constraint firstItem="LSS-2E-gz7" firstAttribute="top" secondItem="1F1-UI-yiT" secondAttribute="top" constant="73.5" id="Crq-Uy-Tvd"/>
-                            <constraint firstAttribute="trailing" secondItem="3af-gd-lRN" secondAttribute="trailing" id="O0q-og-8ZI"/>
-                            <constraint firstAttribute="bottom" secondItem="LSS-2E-gz7" secondAttribute="bottom" constant="49" id="gRn-Rt-amn"/>
-                            <constraint firstItem="3af-gd-lRN" firstAttribute="leading" secondItem="1F1-UI-yiT" secondAttribute="leading" id="hRW-vM-PMI"/>
-                            <constraint firstAttribute="bottom" secondItem="3af-gd-lRN" secondAttribute="bottom" constant="529.5" id="kLm-an-5KQ"/>
-                            <constraint firstItem="ZC5-yZ-PUv" firstAttribute="top" secondItem="yjw-Ab-s6R" secondAttribute="bottom" id="lBm-Ga-iQc"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="K3F-ZB-5QA"/>
-                    <connections>
-                        <outlet property="beginButton" destination="yjw-Ab-s6R" id="oau-NA-kKI"/>
-                        <outlet property="beginConstraint" destination="lBm-Ga-iQc" id="CHO-M9-TBE"/>
-                        <outlet property="movementsTableView" destination="LSS-2E-gz7" id="5fg-Fo-66E"/>
-                        <outlet property="navigationBar" destination="K3F-ZB-5QA" id="wJK-2A-Qgf"/>
-                        <outlet property="presetsButton" destination="3af-gd-lRN" id="Y3k-Tg-sxK"/>
-                        <outlet property="presetsConstraint" destination="kLm-an-5KQ" id="atc-B3-hos"/>
-                        <outlet property="tableConstraint" destination="gRn-Rt-amn" id="b1v-49-n6U"/>
-                        <outlet property="tableConstraint1" destination="Crq-Uy-Tvd" id="FLk-J2-hjN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RNX-hu-zVj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4241" y="-2509"/>
-        </scene>
-        <!--Stretching Choice Final-->
-        <scene sceneID="gNn-GJ-r7Y">
-            <objects>
-                <viewController id="TxB-P6-Ned" customClass="StretchingChoiceFinal" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="83i-XE-JWL"/>
-                        <viewControllerLayoutGuide type="bottom" id="Bki-Nn-pP9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zlx-vj-cia">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JTI-vo-hZF">
-                                <rect key="frame" x="0.0" y="74" width="375" height="480"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="TxB-P6-Ned" id="vfu-Q0-0D3"/>
-                                    <outlet property="delegate" destination="TxB-P6-Ned" id="jcP-bs-tru"/>
-                                </connections>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dvz-ij-3AV">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
-                                <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="73.5" id="djl-9s-zgi"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="23"/>
-                                <state key="normal" title="- Select Stretching Session -">
-                                    <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="presetsButtonAction:" destination="TxB-P6-Ned" eventType="touchUpInside" id="sjk-m7-Zbu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vfX-KD-8ec">
-                                <rect key="frame" x="0.0" y="554" width="375" height="49"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="vUS-0H-grR"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="23"/>
-                                <state key="normal" title="Begin">
-                                    <color key="titleColor" red="0.92156862750000001" green="0.50980392159999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="beginButton:" destination="TxB-P6-Ned" eventType="touchUpInside" id="5gC-He-3b0"/>
-                                    <segue destination="NUw-3d-e9i" kind="presentation" identifier="stretchingSessionSegue" id="Ptw-Py-keQ"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="JTI-vo-hZF" secondAttribute="bottom" constant="49.25" id="88z-0R-t6B"/>
-                            <constraint firstItem="vfX-KD-8ec" firstAttribute="leading" secondItem="zlx-vj-cia" secondAttribute="leading" id="HBh-u0-zL3"/>
-                            <constraint firstItem="Dvz-ij-3AV" firstAttribute="leading" secondItem="zlx-vj-cia" secondAttribute="leading" id="OWo-hq-eOs"/>
-                            <constraint firstAttribute="bottom" secondItem="Dvz-ij-3AV" secondAttribute="bottom" constant="529.5" id="RJH-Ij-1Gh"/>
-                            <constraint firstItem="Dvz-ij-3AV" firstAttribute="top" secondItem="83i-XE-JWL" secondAttribute="bottom" id="YRz-ZO-UDj"/>
-                            <constraint firstItem="JTI-vo-hZF" firstAttribute="leading" secondItem="zlx-vj-cia" secondAttribute="leading" id="ZSz-jh-oxd"/>
-                            <constraint firstAttribute="trailing" secondItem="vfX-KD-8ec" secondAttribute="trailing" id="aPz-hG-cCO"/>
-                            <constraint firstItem="JTI-vo-hZF" firstAttribute="top" secondItem="zlx-vj-cia" secondAttribute="top" constant="73.75" id="auV-Ce-uw4"/>
-                            <constraint firstAttribute="trailing" secondItem="Dvz-ij-3AV" secondAttribute="trailing" id="dSO-tD-NCt"/>
-                            <constraint firstItem="Bki-Nn-pP9" firstAttribute="top" secondItem="vfX-KD-8ec" secondAttribute="bottom" id="iT3-mX-lmz"/>
-                            <constraint firstAttribute="trailing" secondItem="JTI-vo-hZF" secondAttribute="trailing" id="qQB-AL-SZE"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="DLa-Mo-8h7"/>
-                    <connections>
-                        <outlet property="beginButton" destination="vfX-KD-8ec" id="hh2-qj-OdV"/>
-                        <outlet property="beginConstraint" destination="iT3-mX-lmz" id="gKu-o4-oCS"/>
-                        <outlet property="movementsTableView" destination="JTI-vo-hZF" id="upT-um-0nw"/>
-                        <outlet property="navigationBar" destination="DLa-Mo-8h7" id="Oog-ib-a9C"/>
-                        <outlet property="presetsButton" destination="Dvz-ij-3AV" id="SBA-HP-Esb"/>
-                        <outlet property="presetsConstraint" destination="RJH-Ij-1Gh" id="PJt-V8-A61"/>
-                        <outlet property="tableConstraint" destination="88z-0R-t6B" id="Oso-W4-LGc"/>
-                        <outlet property="tableConstraint1" destination="auV-Ce-uw4" id="pfT-rS-KNL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xe1-l6-tCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6820" y="-136"/>
-        </scene>
         <!--Circuit Workout Screen-->
         <scene sceneID="JPz-Q3-hmD">
             <objects>
@@ -3169,7 +3013,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OverviewTableViewCell" rowHeight="406" id="pCs-ay-AKn" customClass="WorkoutOverviewTableViewCell" customModule="MindAndBody" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutOverviewTableViewCell" rowHeight="406" id="pCs-ay-AKn" customClass="WorkoutOverviewTableViewCell" customModule="MindAndBody" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="406"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pCs-ay-AKn" id="v8f-f7-OK1">
@@ -3183,7 +3027,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-jO-oQj">
-                                                    <rect key="frame" x="141.5" y="369" width="93.5" height="23"/>
+                                                    <rect key="frame" x="141.5" y="369.5" width="93.5" height="23"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -3303,170 +3147,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Emc-IG-ad0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10860" y="-2544.3778110944531"/>
-        </scene>
-        <!--Workout Choice Final-->
-        <scene sceneID="2zV-gK-49M">
-            <objects>
-                <viewController id="XiL-DY-SmN" customClass="WorkoutChoiceFinal" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="itQ-qU-orM"/>
-                        <viewControllerLayoutGuide type="bottom" id="dbd-50-WVA"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9b5-kJ-f1L">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PRW-p7-2VJ">
-                                <rect key="frame" x="0.0" y="74" width="375" height="480"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="XiL-DY-SmN" id="FfL-tu-ufo"/>
-                                    <outlet property="delegate" destination="XiL-DY-SmN" id="OuD-Z2-x2H"/>
-                                </connections>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngg-Cb-7eh">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
-                                <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="73.5" id="DYx-gb-lZh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="23"/>
-                                <state key="normal" title="- Select Workout -">
-                                    <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="presetsButtonAction:" destination="XiL-DY-SmN" eventType="touchUpInside" id="P4I-wO-s3B"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p37-cO-fUP">
-                                <rect key="frame" x="0.0" y="554" width="375" height="49"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="ff4-C4-wP6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="23"/>
-                                <state key="normal" title="Begin">
-                                    <color key="titleColor" red="0.92156862750000001" green="0.50980392159999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="beginButton:" destination="XiL-DY-SmN" eventType="touchUpInside" id="ID1-YJ-OAG"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="ngg-Cb-7eh" secondAttribute="trailing" id="8bw-NN-gkJ"/>
-                            <constraint firstItem="dbd-50-WVA" firstAttribute="top" secondItem="p37-cO-fUP" secondAttribute="bottom" id="8kJ-br-G8x"/>
-                            <constraint firstItem="PRW-p7-2VJ" firstAttribute="leading" secondItem="9b5-kJ-f1L" secondAttribute="leading" id="9gS-DL-4ed"/>
-                            <constraint firstItem="ngg-Cb-7eh" firstAttribute="top" secondItem="itQ-qU-orM" secondAttribute="bottom" id="C6w-SL-sip"/>
-                            <constraint firstAttribute="bottom" secondItem="PRW-p7-2VJ" secondAttribute="bottom" constant="49.25" id="CHc-ao-0sk"/>
-                            <constraint firstAttribute="trailing" secondItem="PRW-p7-2VJ" secondAttribute="trailing" id="DH6-Wl-CM9"/>
-                            <constraint firstAttribute="trailing" secondItem="p37-cO-fUP" secondAttribute="trailing" id="QkD-bi-hVd"/>
-                            <constraint firstItem="p37-cO-fUP" firstAttribute="leading" secondItem="9b5-kJ-f1L" secondAttribute="leading" id="RtF-gJ-XSS"/>
-                            <constraint firstItem="ngg-Cb-7eh" firstAttribute="leading" secondItem="9b5-kJ-f1L" secondAttribute="leading" id="dqL-k6-bOE"/>
-                            <constraint firstAttribute="bottom" secondItem="ngg-Cb-7eh" secondAttribute="bottom" constant="529.5" id="eHY-LG-d18"/>
-                            <constraint firstItem="PRW-p7-2VJ" firstAttribute="top" secondItem="9b5-kJ-f1L" secondAttribute="top" constant="73.75" id="w6H-1N-ivr"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="gQl-lh-oCU"/>
-                    <connections>
-                        <outlet property="beginButton" destination="p37-cO-fUP" id="uh9-Io-bGt"/>
-                        <outlet property="beginConstraint" destination="8kJ-br-G8x" id="ytx-3U-jm7"/>
-                        <outlet property="movementsTableView" destination="PRW-p7-2VJ" id="YRk-zk-HJ2"/>
-                        <outlet property="navigationBar" destination="gQl-lh-oCU" id="HJY-yE-E3l"/>
-                        <outlet property="presetsButton" destination="ngg-Cb-7eh" id="q3F-g1-Xl3"/>
-                        <outlet property="presetsConstraint" destination="eHY-LG-d18" id="JyZ-Hc-IoP"/>
-                        <outlet property="tableConstraint" destination="CHc-ao-0sk" id="od6-Um-QmS"/>
-                        <outlet property="tableConstraint1" destination="w6H-1N-ivr" id="aNW-2g-zmK"/>
-                        <segue destination="bTr-Zb-a1u" kind="presentation" identifier="workoutSessionSegue0" id="k7U-gv-KN1"/>
-                        <segue destination="tIh-Sp-rUW" kind="presentation" identifier="workoutSessionSegue1" id="aER-Wi-cbZ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b1f-uQ-5g0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="9337" y="-2992"/>
-        </scene>
-        <!--Yoga Choice Final-->
-        <scene sceneID="lFG-4R-gkn">
-            <objects>
-                <viewController id="fCC-R5-Wbd" customClass="YogaChoiceFinal" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Zp1-4C-g9F"/>
-                        <viewControllerLayoutGuide type="bottom" id="8L8-EU-gnL"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="a1q-gU-sRq">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nwp-hr-3ZL">
-                                <rect key="frame" x="0.0" y="74" width="375" height="480"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="fCC-R5-Wbd" id="1zl-Y6-GS4"/>
-                                    <outlet property="delegate" destination="fCC-R5-Wbd" id="dqJ-vi-HIx"/>
-                                </connections>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pay-CB-QDe">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
-                                <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="73.5" id="4n4-Mf-nAh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="23"/>
-                                <state key="normal" title="- Select Yoga Practice -">
-                                    <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="presetsButtonAction:" destination="fCC-R5-Wbd" eventType="touchUpInside" id="DuD-Hk-88D"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxK-EG-oe7">
-                                <rect key="frame" x="0.0" y="554" width="375" height="49"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="PRp-rr-OKr"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="23"/>
-                                <state key="normal" title="Begin">
-                                    <color key="titleColor" red="0.92156862750000001" green="0.50980392159999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="beginButton:" destination="fCC-R5-Wbd" eventType="touchUpInside" id="Gc3-SO-z2S"/>
-                                    <segue destination="2ng-Gd-b3q" kind="presentation" identifier="yogaSessionSegue" id="i5t-5Y-b7o"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Nwp-hr-3ZL" firstAttribute="top" secondItem="a1q-gU-sRq" secondAttribute="top" constant="73.75" id="3TM-JW-tQo"/>
-                            <constraint firstAttribute="trailing" secondItem="pay-CB-QDe" secondAttribute="trailing" id="6Ik-cD-V8b"/>
-                            <constraint firstItem="pay-CB-QDe" firstAttribute="leading" secondItem="a1q-gU-sRq" secondAttribute="leading" id="766-MO-XLb"/>
-                            <constraint firstItem="Nwp-hr-3ZL" firstAttribute="leading" secondItem="a1q-gU-sRq" secondAttribute="leading" id="Ins-0T-yDa"/>
-                            <constraint firstAttribute="trailing" secondItem="uxK-EG-oe7" secondAttribute="trailing" id="VtD-KG-Msi"/>
-                            <constraint firstItem="pay-CB-QDe" firstAttribute="top" secondItem="Zp1-4C-g9F" secondAttribute="bottom" id="YsZ-rI-UIu"/>
-                            <constraint firstItem="8L8-EU-gnL" firstAttribute="top" secondItem="uxK-EG-oe7" secondAttribute="bottom" id="ZX7-CS-Awa"/>
-                            <constraint firstAttribute="bottom" secondItem="pay-CB-QDe" secondAttribute="bottom" constant="529.5" id="c0u-WO-sId"/>
-                            <constraint firstAttribute="trailing" secondItem="Nwp-hr-3ZL" secondAttribute="trailing" id="eK9-uq-qWA"/>
-                            <constraint firstAttribute="bottom" secondItem="Nwp-hr-3ZL" secondAttribute="bottom" constant="49.25" id="eoZ-eB-uma"/>
-                            <constraint firstItem="uxK-EG-oe7" firstAttribute="leading" secondItem="a1q-gU-sRq" secondAttribute="leading" id="hOf-35-rRC"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="Zuw-cR-dR4"/>
-                    <connections>
-                        <outlet property="beginButton" destination="uxK-EG-oe7" id="P2J-8f-XwZ"/>
-                        <outlet property="beginConstraint" destination="ZX7-CS-Awa" id="bak-CY-tP1"/>
-                        <outlet property="navigationBar" destination="Zuw-cR-dR4" id="bDq-um-9mM"/>
-                        <outlet property="posesTableView" destination="Nwp-hr-3ZL" id="U8p-Eq-UQT"/>
-                        <outlet property="presetsButton" destination="pay-CB-QDe" id="6sP-4x-HDv"/>
-                        <outlet property="presetsConstraint" destination="c0u-WO-sId" id="PL3-j6-ycr"/>
-                        <outlet property="tableConstraint" destination="eoZ-eB-uma" id="Ndx-Mn-U92"/>
-                        <outlet property="tableConstraint1" destination="3TM-JW-tQo" id="ZTo-aR-Lbf"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aYW-wh-Blt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6820" y="1306"/>
+            <point key="canvasLocation" x="11415" y="-1326"/>
         </scene>
         <!--Bodyweight ChoiceCC-->
         <scene sceneID="XCB-zw-8fF">
@@ -3530,7 +3211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BUA-pB-hij" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6820" y="-2042"/>
+            <point key="canvasLocation" x="6535" y="-1326"/>
         </scene>
         <!--Stretching Screen-->
         <scene sceneID="SFY-Vp-3Pi">
@@ -3681,7 +3362,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Kn-w1-dw8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8181.6000000000004" y="-136.28185907046478"/>
+            <point key="canvasLocation" x="11415" y="-657"/>
         </scene>
         <!--Stretching Choice Custom-->
         <scene sceneID="WlY-lv-XqZ">
@@ -3707,7 +3388,6 @@
                                 </state>
                                 <connections>
                                     <action selector="beginButton:" destination="1jr-nG-Qxz" eventType="touchUpInside" id="ZTz-8C-uy8"/>
-                                    <segue destination="NUw-3d-e9i" kind="presentation" identifier="stretchingSessionSegueCustom" id="taz-sG-qI2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCn-Sg-kWE">
@@ -3780,7 +3460,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q8F-Wh-3fC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6010" y="-136"/>
+            <point key="canvasLocation" x="9108" y="2161"/>
         </scene>
         <!--Yoga Choice Custom-->
         <scene sceneID="Naz-A1-K6s">
@@ -3806,7 +3486,6 @@
                                 </state>
                                 <connections>
                                     <action selector="beginButton:" destination="ke0-4X-nmn" eventType="touchUpInside" id="BPE-58-4k5"/>
-                                    <segue destination="2ng-Gd-b3q" kind="presentation" identifier="yogaSessionSegueCustom" id="LFV-jn-8Ld"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1CK-SI-ybL">
@@ -3879,7 +3558,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hue-24-GMB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6820" y="2042"/>
+            <point key="canvasLocation" x="8780" y="2840"/>
         </scene>
         <!--Workout Choice Custom-->
         <scene sceneID="T2C-5q-6kG">
@@ -4012,13 +3691,11 @@
                         <outlet property="presetsClassicTop" destination="hfB-mw-GKZ" id="jFw-0M-bZL"/>
                         <outlet property="tableViewConstraintBottom" destination="gI7-AZ-O9T" id="0bH-Qw-kca"/>
                         <outlet property="tableViewConstraintTop" destination="Uvc-Hn-DgC" id="ma1-oi-jdo"/>
-                        <segue destination="tIh-Sp-rUW" kind="presentation" identifier="workoutSessionSegueCustom1" id="Wu1-y8-GcO"/>
-                        <segue destination="bTr-Zb-a1u" kind="presentation" identifier="workoutSessionSegueCustom0" id="gdC-aX-uWo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FVh-YB-PJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9337" y="-2248"/>
+            <point key="canvasLocation" x="9108" y="1504"/>
         </scene>
         <!--Cardio Screen-->
         <scene sceneID="izm-Dm-HeK">
@@ -4050,7 +3727,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tD2-Ad-c9U">
-                                                    <rect key="frame" x="107.5" y="110" width="160" height="86"/>
+                                                    <rect key="frame" x="108" y="110" width="160" height="86"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="72"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4127,88 +3804,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ssp-3C-fgw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11552.799999999999" y="880.20989505247383"/>
-        </scene>
-        <!--Cardio Choice Final-->
-        <scene sceneID="LIS-WL-rdC">
-            <objects>
-                <viewController id="cxK-lw-ov2" customClass="CardioChoiceFinal" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="9OC-AF-lWD"/>
-                        <viewControllerLayoutGuide type="bottom" id="fcx-WC-qTh"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="JxR-bM-XKd">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I3B-vd-nD8">
-                                <rect key="frame" x="0.0" y="74" width="375" height="480"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="cxK-lw-ov2" id="alV-FA-FEj"/>
-                                    <outlet property="delegate" destination="cxK-lw-ov2" id="Xb0-Zw-eia"/>
-                                </connections>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aq-xc-Ffq">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
-                                <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="73.5" id="p4v-Bu-pjJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="23"/>
-                                <state key="normal" title="- Select Cardio Session -">
-                                    <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="presetsButtonAction:" destination="cxK-lw-ov2" eventType="touchUpInside" id="hVN-cq-tFH"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a4V-XM-tpA">
-                                <rect key="frame" x="0.0" y="554" width="375" height="49"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="eMN-lF-gJd"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="23"/>
-                                <state key="normal" title="Begin">
-                                    <color key="titleColor" red="0.92156862750000001" green="0.50980392159999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="beginButton:" destination="cxK-lw-ov2" eventType="touchUpInside" id="1CP-MV-UwQ"/>
-                                    <segue destination="FeY-es-fcA" kind="presentation" identifier="cardioSessionSegue" id="npy-er-874"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="I3B-vd-nD8" firstAttribute="leading" secondItem="JxR-bM-XKd" secondAttribute="leading" id="7sr-qW-EkT"/>
-                            <constraint firstItem="0aq-xc-Ffq" firstAttribute="leading" secondItem="JxR-bM-XKd" secondAttribute="leading" id="Fj6-bH-uZ8"/>
-                            <constraint firstItem="fcx-WC-qTh" firstAttribute="top" secondItem="a4V-XM-tpA" secondAttribute="bottom" id="IhT-io-IPd"/>
-                            <constraint firstAttribute="bottom" secondItem="0aq-xc-Ffq" secondAttribute="bottom" constant="529.5" id="KW7-Pr-ROH"/>
-                            <constraint firstAttribute="trailing" secondItem="I3B-vd-nD8" secondAttribute="trailing" id="PvU-Iz-3Ot"/>
-                            <constraint firstItem="a4V-XM-tpA" firstAttribute="leading" secondItem="JxR-bM-XKd" secondAttribute="leading" id="QMx-p3-Y5S"/>
-                            <constraint firstItem="I3B-vd-nD8" firstAttribute="top" secondItem="JxR-bM-XKd" secondAttribute="top" constant="73.75" id="hJk-t5-ZjR"/>
-                            <constraint firstAttribute="trailing" secondItem="0aq-xc-Ffq" secondAttribute="trailing" id="lxA-8A-G07"/>
-                            <constraint firstAttribute="bottom" secondItem="I3B-vd-nD8" secondAttribute="bottom" constant="49.25" id="mgX-8E-zpH"/>
-                            <constraint firstAttribute="trailing" secondItem="a4V-XM-tpA" secondAttribute="trailing" id="oLc-H7-lcK"/>
-                            <constraint firstItem="0aq-xc-Ffq" firstAttribute="top" secondItem="9OC-AF-lWD" secondAttribute="bottom" id="tJR-oq-AZV"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="HMO-se-lyr"/>
-                    <connections>
-                        <outlet property="beginButton" destination="a4V-XM-tpA" id="aw2-LF-KbL"/>
-                        <outlet property="beginConstraint" destination="IhT-io-IPd" id="Da9-K2-nBV"/>
-                        <outlet property="navigationBar" destination="HMO-se-lyr" id="Udv-Co-Lch"/>
-                        <outlet property="overviewTableView" destination="I3B-vd-nD8" id="tke-zq-C05"/>
-                        <outlet property="presetsButton" destination="0aq-xc-Ffq" id="PSJ-rh-57Q"/>
-                        <outlet property="presetsConstraint" destination="KW7-Pr-ROH" id="aXu-jQ-S5s"/>
-                        <outlet property="tableConstraint" destination="mgX-8E-zpH" id="TfC-ye-F4V"/>
-                        <outlet property="tableConstraint1" destination="hJk-t5-ZjR" id="Hnu-U7-nKq"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Lgf-np-V7x" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="10166" y="530"/>
+            <point key="canvasLocation" x="10719" y="-657"/>
         </scene>
         <!--Cardio Choice Custom-->
         <scene sceneID="0I0-6X-Zwe">
@@ -4234,7 +3830,6 @@
                                 </state>
                                 <connections>
                                     <action selector="beginButton:" destination="eVr-mr-rOR" eventType="touchUpInside" id="SfM-jY-eAX"/>
-                                    <segue destination="FeY-es-fcA" kind="presentation" identifier="cardioSessionSegueCustom" id="omW-5o-hGa"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyf-1w-plR">
@@ -4324,7 +3919,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kr7-Ct-u1C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10166" y="1274"/>
+            <point key="canvasLocation" x="8406" y="2162"/>
         </scene>
         <!--Cardio ChoiceHIIT-->
         <scene sceneID="0Mz-9C-0nQ">
@@ -4395,12 +3990,97 @@
                         <outlet property="navigationBar" destination="Bkv-Id-pn1" id="kY2-cu-mGQ"/>
                         <outlet property="rowing" destination="SRh-dA-TSZ" id="Gab-Pi-And"/>
                         <outlet property="running" destination="nW7-RO-SkC" id="MsH-Oc-6U2"/>
-                        <segue destination="cxK-lw-ov2" kind="show" identifier="cardioSegue" id="0vg-lx-X59"/>
+                        <segue destination="bRc-pd-jNj" kind="show" identifier="cardioSegue" id="bwM-Tf-pLH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vRR-da-eVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8528.7999999999993" y="742.5787106446777"/>
+            <point key="canvasLocation" x="6534" y="-136"/>
+        </scene>
+        <!--Final Choice-->
+        <scene sceneID="9aa-Nv-KN8">
+            <objects>
+                <viewController id="bRc-pd-jNj" customClass="FinalChoice" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ht1-4x-QCO"/>
+                        <viewControllerLayoutGuide type="bottom" id="kBd-Kp-U2B"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rXW-rU-P92">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lrr-4c-zLc">
+                                <rect key="frame" x="0.0" y="74" width="375" height="480"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="bRc-pd-jNj" id="ogn-Ni-tr5"/>
+                                    <outlet property="delegate" destination="bRc-pd-jNj" id="wkG-cj-uAs"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Vy-xt-ZkJ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                                <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="73.5" id="fc2-6L-Ufk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="23"/>
+                                <state key="normal" title="- Select Warmup -">
+                                    <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="presetsButtonAction:" destination="bRc-pd-jNj" eventType="touchUpInside" id="tjs-88-ihc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Vt-dy-BhA">
+                                <rect key="frame" x="0.0" y="554" width="375" height="49"/>
+                                <color key="backgroundColor" red="0.14901960780000001" green="0.65098039220000004" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="Dij-Z2-yb2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="23"/>
+                                <state key="normal" title="Begin">
+                                    <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="beginButton:" destination="bRc-pd-jNj" eventType="touchUpInside" id="Lzb-z7-hBQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8Vy-xt-ZkJ" firstAttribute="leading" secondItem="rXW-rU-P92" secondAttribute="leading" id="H0p-vU-H4V"/>
+                            <constraint firstItem="8Vy-xt-ZkJ" firstAttribute="top" secondItem="Ht1-4x-QCO" secondAttribute="bottom" id="RJI-FP-mDL"/>
+                            <constraint firstAttribute="bottom" secondItem="8Vy-xt-ZkJ" secondAttribute="bottom" constant="529.5" id="Xfa-lU-dXl"/>
+                            <constraint firstItem="kBd-Kp-U2B" firstAttribute="top" secondItem="1Vt-dy-BhA" secondAttribute="bottom" id="dGA-sT-NgX"/>
+                            <constraint firstItem="lrr-4c-zLc" firstAttribute="leading" secondItem="rXW-rU-P92" secondAttribute="leading" id="dfo-Gn-7RL"/>
+                            <constraint firstAttribute="bottom" secondItem="lrr-4c-zLc" secondAttribute="bottom" constant="49" id="eK3-PG-uHz"/>
+                            <constraint firstAttribute="trailing" secondItem="1Vt-dy-BhA" secondAttribute="trailing" id="jAY-Sj-u9l"/>
+                            <constraint firstItem="lrr-4c-zLc" firstAttribute="top" secondItem="rXW-rU-P92" secondAttribute="top" constant="73.5" id="jHR-X0-yAN"/>
+                            <constraint firstAttribute="trailing" secondItem="lrr-4c-zLc" secondAttribute="trailing" id="mgU-Dh-SOC"/>
+                            <constraint firstAttribute="trailing" secondItem="8Vy-xt-ZkJ" secondAttribute="trailing" id="qOh-3v-hZ7"/>
+                            <constraint firstItem="1Vt-dy-BhA" firstAttribute="leading" secondItem="rXW-rU-P92" secondAttribute="leading" id="yV9-Gh-P1W"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="PQo-6i-OjJ"/>
+                    <connections>
+                        <outlet property="beginButton" destination="1Vt-dy-BhA" id="gWo-D3-dEv"/>
+                        <outlet property="beginConstraint" destination="dGA-sT-NgX" id="9Yz-r5-FX1"/>
+                        <outlet property="movementsTableView" destination="lrr-4c-zLc" id="tkm-B4-0ej"/>
+                        <outlet property="navigationBar" destination="PQo-6i-OjJ" id="Ykq-9v-Hjj"/>
+                        <outlet property="presetsButton" destination="8Vy-xt-ZkJ" id="Aov-jZ-Bce"/>
+                        <outlet property="presetsConstraint" destination="Xfa-lU-dXl" id="xQq-MN-IWN"/>
+                        <outlet property="tableConstraint" destination="eK3-PG-uHz" id="d6v-gj-8kk"/>
+                        <outlet property="tableConstraint1" destination="jHR-X0-yAN" id="PLq-tu-xLE"/>
+                        <segue destination="bTr-Zb-a1u" kind="presentation" identifier="sessionSegue" id="Xte-T3-9AO"/>
+                        <segue destination="tIh-Sp-rUW" kind="presentation" identifier="sessionSegueCircuit" id="5ms-mh-HWc"/>
+                        <segue destination="FeY-es-fcA" kind="presentation" identifier="sessionSegueCardio" id="JpO-YN-OFV"/>
+                        <segue destination="NUw-3d-e9i" kind="presentation" identifier="sessionSegueStretching" id="tfD-MK-KSh"/>
+                        <segue destination="2ng-Gd-b3q" kind="presentation" identifier="sessionSegueYoga" id="xvj-fF-Qps"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GD2-1g-X2G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9577" y="-962"/>
         </scene>
     </scenes>
     <resources>
@@ -4425,13 +4105,8 @@
         <image name="Tricep" width="375" height="375"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ptw-Py-keQ"/>
-        <segue reference="Fhn-aO-iU6"/>
-        <segue reference="qzt-4F-2h8"/>
-        <segue reference="k7U-gv-KN1"/>
-        <segue reference="aER-Wi-cbZ"/>
-        <segue reference="omW-5o-hGa"/>
-        <segue reference="LFV-jn-8Ld"/>
-        <segue reference="NiW-Wv-f4m"/>
+        <segue reference="bsb-5O-GBj"/>
+        <segue reference="6f1-8P-Dfb"/>
+        <segue reference="M72-ar-DyO"/>
     </inferredMetricsTieBreakers>
 </document>

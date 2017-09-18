@@ -92,21 +92,26 @@ class CardioChoiceHIIT: UIViewController  {
     }
     
     
+    //
+    // MARK: Selected Session
     // Full
     @IBAction func full(_ sender: Any) {
-        cardioType = 0
+        selectedSession[1] = 0
+        selectedSession[2] = -1
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     
     // Upper
     @IBAction func upper(_ sender: Any) {
-        cardioType = 1
+        selectedSession[1] = 1
+        selectedSession[2] = -1
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     
     // Lower
     @IBAction func lower(_ sender: Any) {
-        cardioType = 2
+        selectedSession[1] = 2
+        selectedSession[2] = -1
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     
@@ -118,9 +123,7 @@ class CardioChoiceHIIT: UIViewController  {
         // Pass Data
         if (segue.identifier == "cardioSegue") {
             //
-            let destinationVC = segue.destination as! CardioChoiceFinal
-            // Indicate to next screen which button was pressed
-            destinationVC.cardioType = cardioType
+            let destinationVC = segue.destination as! FinalChoice
         }
         //
         let backItem = UIBarButtonItem()

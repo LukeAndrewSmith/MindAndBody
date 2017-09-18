@@ -43,29 +43,19 @@ class BodyweightChoice: UIViewController  {
     
     //
     var workoutType = Int()
-    var workoutType2 = Int()
 //
 // View did load ----------------------------------------------------------------------------------------------------------------
 //
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Walkthrough
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughc") == false {
-            let delayInSeconds = 0.5
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                self.walkthroughMindBody()
-            }
-            UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughc")
-        }
-        
         // Colours
         view.backgroundColor = colour1
         
         // Titles
-        if workoutType == 2 {
+        if workoutType == 0 {
             navigationBar.title = (NSLocalizedString("classic", comment: ""))
-        } else if workoutType == 3 {
+        } else if workoutType == 1 {
             navigationBar.title = (NSLocalizedString("circuit", comment: ""))
         }
         
@@ -135,19 +125,40 @@ class BodyweightChoice: UIViewController  {
     
     // Full
     @IBAction func full(_ sender: Any) {
-        workoutType2 = 0
+        if workoutType == 0 {
+            selectedSession[1] = 10
+            selectedSession[2] = -1
+        } else {
+            selectedSession[1] = 13
+            selectedSession[2] = -1
+        }
+        //
         performSegue(withIdentifier: "bodyweightSegue", sender: nil)
     }
     
     // Upper
     @IBAction func upper(_ sender: Any) {
-        workoutType2 = 1
+        if workoutType == 0 {
+            selectedSession[1] = 11
+            selectedSession[2] = -1
+        } else {
+            selectedSession[1] = 14
+            selectedSession[2] = -1
+        }
+        //
         performSegue(withIdentifier: "bodyweightSegue", sender: nil)
     }
     
     // Lower
     @IBAction func lower(_ sender: Any) {
-        workoutType2 = 2
+        if workoutType == 0 {
+            selectedSession[1] = 12
+            selectedSession[2] = -1
+        } else {
+            selectedSession[1] = 15
+            selectedSession[2] = -1
+        }
+        //
         performSegue(withIdentifier: "bodyweightSegue", sender: nil)
     }
     
@@ -159,10 +170,7 @@ class BodyweightChoice: UIViewController  {
         // Pass Data
         if (segue.identifier == "bodyweightSegue") {
             //
-            let destinationVC = segue.destination as! WorkoutChoiceFinal
-            // Indicate to next screen which button was pressed
-            destinationVC.workoutType = workoutType
-            destinationVC.workoutType2 = 2
+            let destinationVC = segue.destination as! FinalChoice
         }
         //
         let backItem = UIBarButtonItem()
@@ -170,123 +178,5 @@ class BodyweightChoice: UIViewController  {
         navigationItem.backBarButtonItem = backItem
     }
     
-    
-//
-// Walkthrough ----------------------------------------------------------------------------------------------------------------
-//
-    var  viewNumber = 0
-    let walkthroughView = UIView()
-    let label = UILabel()
-    let nextButton = UIButton()
-    let backButton = UIButton()
-    
-    // Walkthrough
-    func walkthroughMindBody() {
-        
-        //
-        let screenSize = UIScreen.main.bounds
-        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-        //
-        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
-        walkthroughView.backgroundColor = .black
-        walkthroughView.alpha = 0.72
-        walkthroughView.clipsToBounds = true
-        //
-        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
-        label.center = view.center
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
-        label.textColor = .white
-        //
-        nextButton.frame = screenSize
-        nextButton.backgroundColor = .clear
-        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
-        //
-        backButton.frame = CGRect(x: 3, y: UIApplication.shared.statusBarFrame.height, width: 50, height: navigationBarHeight)
-        backButton.setTitle("Back", for: .normal)
-        backButton.titleLabel?.textAlignment = .left
-        backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        backButton.titleLabel?.textColor = .white
-        backButton.addTarget(self, action: #selector(backWalkthroughView(_:)), for: .touchUpInside)
-        
-        //
-        switch viewNumber {
-        case 0:
-            //
-            // Clear Section
-            let path = CGMutablePath()
-            path.addArc(center: CGPoint(x: view.frame.size.width * 0.917, y: (navigationBarHeight / 2) + UIApplication.shared.statusBarFrame.height - 1), radius: 20, startAngle: 0.0, endAngle: 2 * 3.14, clockwise: false)
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            //
-            label.text = NSLocalizedString("choiceScreen1", comment: "")
-            walkthroughView.addSubview(label)
-            
-            //
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            
-        //
-        case 1:
-            //
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            //
-            
-            //
-            label.text = NSLocalizedString("choiceScreen12", comment: "")
-            walkthroughView.addSubview(label)
-            
-            //
-            walkthroughView.addSubview(backButton)
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            walkthroughView.bringSubview(toFront: backButton)
-            //
-        default: break
-            
-        }
-    }
-    
-    //
-    func nextWalkthroughView(_ sender: Any) {
-        walkthroughView.removeFromSuperview()
-        viewNumber = viewNumber + 1
-        walkthroughMindBody()
-    }
-
-    //
-    func backWalkthroughView(_ sender: Any) {
-        if viewNumber > 0 {
-            backButton.removeFromSuperview()
-            walkthroughView.removeFromSuperview()
-            viewNumber = viewNumber - 1
-            walkthroughMindBody()
-        }
-    }
     
 }

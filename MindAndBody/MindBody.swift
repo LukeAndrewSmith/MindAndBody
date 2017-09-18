@@ -505,6 +505,30 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     
     
     //
+    // MARK: Selected Session
+    @IBAction func warmupAction(_ sender: Any) {
+        selectedSession[0] = 0
+        selectedSession[2] = -1
+    }
+    @IBAction func workoutAction(_ sender: Any) {
+        selectedSession[0] = 1
+        selectedSession[2] = -1
+    }
+    @IBAction func cardioAction(_ sender: Any) {
+        selectedSession[0] = 2
+        selectedSession[2] = -1
+    }
+    @IBAction func stretchingAction(_ sender: Any) {
+        selectedSession[0] = 3
+        selectedSession[2] = -1
+    }
+    @IBAction func yogaAction(_ sender: Any) {
+        selectedSession[0] = 4
+        selectedSession[2] = -1
+    }
+    
+    
+    //
     // Slide Menu ---------------------------------------------------------------------------------------------------------------------
     //
     

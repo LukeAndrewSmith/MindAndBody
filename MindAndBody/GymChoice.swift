@@ -42,10 +42,7 @@ class GymChoice: UIViewController  {
         // Pass Data 5x5
         if (segue.identifier == "fiveSegue") {
             //
-            let destinationVC = segue.destination as! WorkoutChoiceFinal
-            // Indicate to next screen which button was pressed
-            destinationVC.workoutType = 0
-            destinationVC.workoutType2 = 5
+            let destinationVC = segue.destination as! FinalChoice
         }
         //
         let backItem = UIBarButtonItem()
@@ -157,4 +154,14 @@ class GymChoice: UIViewController  {
         fiveByFive.titleLabel?.numberOfLines = 0
         fiveByFive.titleLabel?.textAlignment = .center
     }
+    
+    
+    //
+    // MARK: Selected Session
+    @IBAction func fivebyfiveAction(_ sender: Any) {
+        selectedSession[1] = 6
+        selectedSession[2] = -1
+    }
+    
+    
 }

@@ -196,22 +196,30 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     var warmupType = Int()
     // Full Body
     @IBAction func fullBody(_ sender: Any) {
-        warmupType = 0
+        selectedSession[1] = 0
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     // Upper Body
     @IBAction func upperBody(_ sender: Any) {
-        warmupType = 1
+        selectedSession[1] = 1
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     // Lower Body
     @IBAction func lowerBody(_ sender: Any) {
-        warmupType = 2
+        selectedSession[1] = 2
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     // Cardio
     @IBAction func cardio(_ sender: Any) {
-        warmupType = 3
+        selectedSession[1] = 3
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     
@@ -220,9 +228,8 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         // Pass Data
         if (segue.identifier == "warmupSegue") {
         //
-        let destinationVC = segue.destination as! WarmupChoiceFinal
-        // Indicate to next screen which button was pressed
-        destinationVC.warmupType = warmupType
+        let destinationVC = segue.destination as! FinalChoice
+        
         }
         
         // Remove back bar text

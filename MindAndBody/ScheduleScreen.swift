@@ -52,7 +52,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // Time Scale Action Sheet
     let scheduleChoiceTable = UITableView()
     let backgroundViewExpanded = UIButton()
-    
+    //
     var selectedSchedule = 0
     
     //
@@ -65,6 +65,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
 //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Check Mask Views
+        checkMaskView()
         
         // Set status bar to light
         UIApplication.shared.statusBarStyle = .lightContent
@@ -277,7 +280,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         switch tableView {
         case scheduleTable:
-            return (view.bounds.height - 49) / 4
+            return (view.bounds.height - 24.5) / 4
         case scheduleChoiceTable:
             return 0
         default:
@@ -344,7 +347,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 cell.addSubview(plusImage)
                 //
                 let seperator = CALayer()
-                seperator.frame = CGRect(x: 27, y: 0, width: (view.bounds.width - 54) / 4, height: 1)
+                seperator.frame = CGRect(x: 27, y: 0, width: (view.bounds.width - 54) / 3, height: 1)
                 seperator.backgroundColor = colour1.cgColor
                 seperator.opacity = 0.25
                 cell.layer.addSublayer(seperator)
@@ -424,37 +427,17 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     performSegue(withIdentifier: "openMenu", sender: self)
                 default:
                     tableView.deselectRow(at: indexPath, animated: true)
-                    //
-                    let screenFrame = UIScreen.main.bounds
-                    //
-                    maskView1.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
-                    maskView2.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
-                    //
-                    maskView1.frame = CGRect(x: 0, y: 0, width: screenFrame.width, height: UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.height)! + (tableView.bounds.height / 4))
-                    maskView2.frame = CGRect(x: 0, y: screenFrame.height - 49, width: screenFrame.width, height: 49)
-                    //
-                    maskView1.backgroundColor = .black
-                    maskView1.alpha = 0
-                    maskView2.backgroundColor = .black
-                    maskView2.alpha = 0
-                    //
-                    UIApplication.shared.keyWindow?.insertSubview(self.maskView1, aboveSubview: self.view)
-                    UIApplication.shared.keyWindow?.insertSubview(self.maskView2, aboveSubview: self.view)
-                    //
-                    maskViewBackButton.image = #imageLiteral(resourceName: "Back Arrow")
-                    maskViewBackButton.tintColor = colour1
-                    maskViewBackButton.sizeToFit()
-                    maskViewBackButton.frame = CGRect(x: 5, y: maskView1.bounds.height - maskViewBackButton.bounds.height - 11, width: maskViewBackButton.bounds.width, height: maskViewBackButton.bounds.height)
-                    maskView1.addSubview(maskViewBackButton)
-                    //
-                    UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                        self.maskView1.alpha = 0.5
-                        self.maskView2.alpha = 0.5
-                    })
-                    
                     // Incriment table counter
+                    tableCounter += 1
                     
                     // Select session
+
+                    // Mask View
+                    maskView()
+                    
+                    // Next Table info
+                    slideLeft()
+                    
                 }
             }
 
@@ -469,11 +452,88 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+//
+// MARK: Helper Functions
+//
     //
-    // Helper Functions
-    //
+    // MARK: Mask Views
+    // Mask view func
+    func maskView() {
+        //
+        switch tableCounter {
+        // 1st table screen
+        case 0:
+            break
+        // 2nd table screen -> Group contents
+        case 1:
+            //
+            createMaskView(alpha: 0)
+            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                self.maskView1.alpha = 0.5
+                self.maskView2.alpha = 0.5
+            })
+        // 3rd table screen -> Multiple sessions (warmup, workout, stretching)
+        case 2:
+            break
+        //
+        default:
+            break
+        }
+    }
     // Session selection mask
     func maskAction() {
+        tableCounter -= 1
+        //
+        switch tableCounter {
+        case 0:
+            // Enable table scroll & schedule choice button & remove mask view
+            scheduleTable.isScrollEnabled = true
+            navigationBar.rightBarButtonItem?.isEnabled = true
+            removeMaskView()
+            slideRight()
+        case 1:
+            break
+        default:
+            break
+        }
+    }
+    // Open Schedule, check if mask views necessary
+    func checkMaskView() {
+        if tableCounter != 0 {
+            createMaskView(alpha: 0.5)
+        }
+    }
+    // Mask Views -----------------------------------
+    // Create Mask Views
+    func createMaskView(alpha: CGFloat) {
+        // Disable table scroll & schedule choice button
+        scheduleTable.isScrollEnabled = false
+        navigationBar.rightBarButtonItem?.isEnabled = false
+        //
+        let screenFrame = UIScreen.main.bounds
+        //
+        maskView1.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
+        maskView2.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
+        //
+        maskView1.frame = CGRect(x: 0, y: 0, width: screenFrame.width, height: (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4)
+        maskView2.frame = CGRect(x: 0, y: scheduleTable.frame.maxY, width: screenFrame.width, height: 24.5)
+        //
+        maskView1.backgroundColor = .black
+        maskView1.alpha = alpha
+        maskView2.backgroundColor = .black
+        maskView2.alpha = alpha
+        //
+        view.addSubview(maskView1)
+        view.addSubview(maskView2)
+        //
+        maskViewBackButton.image = #imageLiteral(resourceName: "Back Arrow")
+        maskViewBackButton.tintColor = colour1
+        maskViewBackButton.sizeToFit()
+        maskViewBackButton.frame = CGRect(x: 5, y: maskView1.bounds.height - maskViewBackButton.bounds.height - 11, width: maskViewBackButton.bounds.width, height: maskViewBackButton.bounds.height)
+        maskView1.addSubview(maskViewBackButton)
+    }
+    // Remove Mask Views
+    func removeMaskView() {
         //
         UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
             self.maskView1.alpha = 0
@@ -483,15 +543,95 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             self.maskView2.removeFromSuperview()
         })
     }
-    
-    
+    // Table View ------------------------------------
+    // Tableview slide left (next table)
+    func slideLeft() {
+        let screenFrame = UIScreen.main.bounds
+        let tableHeaderHeight = (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4
+        let snapShotFrame = CGRect(x: 0, y: tableHeaderHeight, width: view.bounds.width, height: view.bounds.height - tableHeaderHeight - 24.5)
+        let snapShotY = TopBarHeights.combinedHeight + tableHeaderHeight + ((view.bounds.height - tableHeaderHeight - 24.5) / 2)
+        // Snapshots
+        let snapShot1 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
+        //
+        scheduleTable.reloadData()
+        //
+        let snapShot2 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: true, withCapInsets: .zero)
+        //
+        snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
+        snapShot2?.center = CGPoint(x: view.center.x + view.frame.size.width, y: snapShotY)
+        //
+        UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
+        UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, aboveSubview: self.view)
+        //
+        maskTable()
+        // Animate new and old image to left
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            //
+            snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
+            snapShot2?.center.x = self.view.center.x
+            //
+        }, completion: { finished in
+            snapShot1?.removeFromSuperview()
+            snapShot2?.removeFromSuperview()
+            self.removeMaskTable()
+        })
+    }
+    // Tableview slide Right (previous table)
+    func slideRight() {
+        let screenFrame = UIScreen.main.bounds
+        let tableHeaderHeight = (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4
+        let snapShotFrame = CGRect(x: 0, y: tableHeaderHeight, width: view.bounds.width, height: view.bounds.height - tableHeaderHeight - 24.5)
+        let snapShotY = TopBarHeights.combinedHeight + tableHeaderHeight + ((view.bounds.height - tableHeaderHeight - 24.5) / 2)
+        // Snapshots
+        let snapShot1 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
+        //
+        scheduleTable.reloadData()
+        //
+        let snapShot2 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: true, withCapInsets: .zero)
+        //
+        snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
+        snapShot2?.center = CGPoint(x: view.center.x - view.frame.size.width, y: snapShotY)
+        //
+        UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
+        UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, aboveSubview: self.view)
+        //
+        maskTable()
+        // Animate new and old image to left
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            //
+            snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
+            snapShot2?.center.x = self.view.center.x
+            //
+        }, completion: { finished in
+            snapShot1?.removeFromSuperview()
+            snapShot2?.removeFromSuperview()
+            self.removeMaskTable()
+        })
+    }
+    // Mask Table
+    let mask = CAGradientLayer()
+    func maskTable() {
+        let screenFrame = UIScreen.main.bounds
+        let tableHeaderHeight = (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4
+        let maskY = TopBarHeights.combinedHeight + tableHeaderHeight + ((view.bounds.height - tableHeaderHeight - 24.5) / 2)
+        //
+        mask.frame = CGRect(x: 0, y: TopBarHeights.combinedHeight + tableHeaderHeight, width: view.bounds.width, height: view.bounds.height - tableHeaderHeight - 24.5)
+        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
+        //
+        scheduleTable.layer.mask = mask
+        //
+        // MASK LAYER Y = 0 INSTEAD OF TABLEVIEWHEIGHT !!!!
+    }
+    func removeMaskTable() {
+        mask.removeFromSuperlayer()
+    }
     
     
     //
-    // Mask cells under clear header
+    // Mask cells under clear header (unrelated to above functions)
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in scheduleTable.visibleCells {
-            let hiddenFrameHeight = scrollView.contentOffset.y - cell.frame.origin.y + (view.bounds.height - 49) / 4
+            let hiddenFrameHeight = scrollView.contentOffset.y - cell.frame.origin.y + (view.bounds.height - 24.5) / 4
             if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
                 maskCell(cell: cell, margin: Float(hiddenFrameHeight))
             }
@@ -602,6 +742,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     func swipeGestureRight() {
         performSegue(withIdentifier: "openMenu", sender: self)
     }
+    //
+    
     
     //
     func selectDay(day: Int) {
@@ -671,6 +813,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
         if segue.identifier == "openMenu" {
+            // Remove Mask View
+//            removeMaskView()
             //
             UIApplication.shared.statusBarStyle = .default
             //

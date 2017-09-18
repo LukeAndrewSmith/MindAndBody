@@ -1783,13 +1783,13 @@ class StretchingChoiceCustom: UIViewController, UITableViewDelegate, UITableView
             }
             
             //
-            destinationVC.sessionArray = stretchingArray
-            destinationVC.breathsArray = breathsArray
-            //destinationVC.demonstrationArray = demonstrationArray
-            //destinationVC.targetAreaArray = targetAreaArray
-            destinationVC.explanationArray = explanationArray
-            //
-            destinationVC.sessionType = 0
+//            destinationVC.sessionArray = stretchingArray
+//            destinationVC.breathsArray = breathsArray
+//            //destinationVC.demonstrationArray = demonstrationArray
+//            //destinationVC.targetAreaArray = targetAreaArray
+//            destinationVC.explanationArray = explanationArray
+//            //
+//            destinationVC.sessionType = 0
         }
     }
     

@@ -33,25 +33,23 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     
     //
-    // Retreive Arrays ---------------------------------------------------------------------------------------------------
-    //
-    //
-    var sessionType = Int()
-    
-    
-    // Title
-    var sessionTitle = String()
-    
-    // Movement Array
-    var sessionArray: [String] = []
-    
-    // Length Array
-    var lengthArray: [Int] = []
-    
-    
-    //
     // Variables
     var selectedRow = 0
+    
+    //
+    // MARK: Variables from Session Data
+    //
+    // Key Array
+    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [1] Keys Array
+    var keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+    
+    // Length
+    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] length array
+    var lengthArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+    
+    
+    // Distance based or time based, 0 = time based, 1 = distance based
+    var sessionType = Int()
     
 
     // Bells Arrays
@@ -78,7 +76,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Session Started
         //
         // Alert View
-        let title = NSLocalizedString("sessionStarted", comment: "") + "\n" + NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[selectedRow], comment: "")
+        let title = NSLocalizedString("sessionStarted", comment: "")
         //let message = NSLocalizedString("resetMessage", comment: "")
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.view.tintColor = colour1
@@ -190,7 +188,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         switch section {
-        case 0: return sessionArray.count
+        case 0: return keyArray.count
         case 1: return 1
         default: return 0
         }
@@ -202,6 +200,8 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "CardioTableViewCell", for: indexPath) as! CardioTableViewCell
+            //
+            let key = keyArray[indexPath.row]
             
             // Cell
             //
@@ -213,7 +213,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             // Movement
             //
-            cell.movementLabel.text = NSLocalizedString(sessionArray[indexPath.row], comment: "")
+            cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: "")
             //
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
             cell.movementLabel?.textAlignment = .center
@@ -274,15 +274,8 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 }
             default: break
             }
-
-                    
-                    
             
-            
-          
-            //            cell.backButton.addGestureRecognizer(backTap)
-            //            //
-            
+            //
             switch indexPath.row {
             case selectedRow - 1:
                 cell.movementLabel.alpha = 0
@@ -413,7 +406,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBAction func nextButtonAction2() {
         //
         //
-        if currentIndex < sessionArray.count {
+        if currentIndex < keyArray.count {
             //
             didSetEndTime2 = false
             //
@@ -516,8 +509,8 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 //
                 let content = UNMutableNotificationContent()
                 content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
-                if indexNumber != sessionArray.count - 1 {
-                    content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[indexNumber + 1], comment: "")
+                if indexNumber != keyArray.count - 1 {
+                    content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][indexNumber + 1]!, comment: "")
                 } else {
                     content.title = NSLocalizedString("cardioEnd", comment: "")
                 }
@@ -690,7 +683,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBAction func nextButtonAction() {
         //
         //
-        if selectedRow < sessionArray.count - 1 {
+        if selectedRow < keyArray.count - 1 {
             //
             selectedRow = selectedRow + 1
             //
@@ -725,6 +718,9 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     var endTime = Double()
     //
     func startTimer() {
+        
+        //
+        let key = keyArray[selectedRow]
         
         // Even IndexPath.rows (movement)
         if selectedRow % 2 == 0 {
@@ -770,14 +766,14 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
                 switch sessionType {
                 case 0:
-                    if selectedRow != sessionArray.count - 1 {
-                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[selectedRow + 1], comment: "")
+                    if selectedRow != keyArray.count - 1 {
+                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key + 1]!, comment: "")
                     } else {
                         content.title = NSLocalizedString("cardioEnd", comment: "")
                     }
                 case 1:
-                    if selectedRow != sessionArray.count - 1 {
-                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionArray[selectedRow + 1], comment: "") + " " + String(lengthArray[selectedRow + 1]) + "m"
+                    if selectedRow != keyArray.count - 1 {
+                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key + 1]!, comment: "") + " " + String(lengthArray[key + 1]) + "m"
                     } else {
                         content.title = NSLocalizedString("cardioEnd", comment: "")
                     }
@@ -809,7 +805,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Current Pose
         let currentPose = Float(selectedRow)
         // Total Number Poses
-        let totalPoses = Float(sessionArray.count - 1)
+        let totalPoses = Float(keyArray.count - 1)
         
         
         //
@@ -829,7 +825,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Current Pose
         let currentPose = Float(currentIndex)
         // Total Number Poses
-        let totalPoses = Float(sessionArray.count - 1)
+        let totalPoses = Float(keyArray.count - 1)
         
         
         //
@@ -862,7 +858,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         //
         if timerValue == 0 {
-            if selectedRow < (sessionArray.count - 1) {
+            if selectedRow < (keyArray.count - 1) {
                 timerCountDown.invalidate()
                 removeCircle()
                 nextButtonAction()
@@ -901,7 +897,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         let cell = tableView.cellForRow(at: indexPath2 as IndexPath) as! CardioTableViewCell
         
         var center = CGPoint()
-        if selectedRow != sessionArray.count - 1 {
+        if selectedRow != keyArray.count - 1 {
             center = CGPoint(x: cell.detailLabel.center.x, y: cell.detailLabel.center.y + 22)
         } else {
             let centery = (view.frame.size.height - 49 - cell.frame.size.height) + cell.detailLabel.center.y
@@ -935,7 +931,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         let cell = tableView.cellForRow(at: indexPath2 as IndexPath) as! CardioTableViewCell
         
         var center = CGPoint()
-        if currentIndex != sessionArray.count - 1 {
+        if currentIndex != keyArray.count - 1 {
             center = CGPoint(x: cell.detailLabel.center.x, y: cell.detailLabel.center.y + 22)
         } else {
             let centery = (view.frame.size.height - 49 - cell.frame.size.height) + cell.detailLabel.center.y

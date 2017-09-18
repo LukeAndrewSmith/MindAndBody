@@ -137,17 +137,23 @@ class StretchingChoice: UIViewController  {
     var stretchingType = Int()
     // General
     @IBAction func general(_ sender: Any) {
-        stretchingType = 0
+        selectedSession[1] = 0
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "stretchingSegue", sender: nil)
     }
     // Post-Workout
     @IBAction func postWorkout(_ sender: Any) {
-        stretchingType = 1
+        selectedSession[1] = 1
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "stretchingSegue", sender: nil)
     }
     // Post-Cardio
     @IBAction func postCardio(_ sender: Any) {
-        stretchingType = 2
+        selectedSession[1] = 2
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "stretchingSegue", sender: nil)
     }
     
@@ -159,9 +165,7 @@ class StretchingChoice: UIViewController  {
         //
         if (segue.identifier == "stretchingSegue") {
             // Pass data to next screen
-            let destinationVC = segue.destination as! StretchingChoiceFinal
-            // indicate which button pressed
-            destinationVC.stretchingType = stretchingType
+            let destinationVC = segue.destination as! FinalChoice
         }
         
         // Remove Back Bar Text

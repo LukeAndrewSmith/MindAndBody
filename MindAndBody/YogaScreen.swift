@@ -35,31 +35,20 @@ class YogaOverviewTableViewCell: UITableViewCell {
 //
 class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-    //
-    // Retreive Arrays ---------------------------------------------------------------------------------------------------
-    //
-    //
-    var sessionType = Int()
-    
-    // Title
-    var sessionTitle = String()
-    
-    // Movement Array
-    var sessionArray: [String] = []
-    
-    // Sets Array
-    var breathsArray: [Int] = []
-    
-    // Demonstration Array
-    var demonstrationArray: [[String]] = []
-    
-    // Explanation Array
-    var explanationArray: [String] = []
-    
     //
     // Variables
     var selectedRow = 0
+    
+    //
+    // MARK: Variables from Session Data
+    //
+    // Key Array
+    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [1] Keys Array
+    var keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+    
+    // Sets
+    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] breaths array
+    var breathsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
     
     //
     var automaticYogaArray: [Int] = []
@@ -231,7 +220,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         switch section {
-        case 0: return sessionArray.count
+        case 0: return keyArray.count
         case 1: return 1
         default: return 0
         }
@@ -243,6 +232,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "YogaOverviewTableViewCell", for: indexPath) as! YogaOverviewTableViewCell
+            //
+            let key = keyArray[indexPath.row]
             
             // Cell
             //
@@ -252,9 +243,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             cell.selectionStyle = .none
             
-            // Movement
             //
-            cell.poseLabel.text = NSLocalizedString(sessionArray[indexPath.row], comment: "")
+            // Movement
+            cell.poseLabel.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: "")
             //
             cell.poseLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 23)
             cell.poseLabel?.textAlignment = .center
@@ -276,10 +267,11 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             // Image
             //
-            cell.demonstrationImageView.image = getUncachedImage(named: demonstrationArray[indexPath.row][0])
+            // [key] = key, [0] = first image
+            cell.demonstrationImageView.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
             
             //
-            if demonstrationArray[indexPath.row].count > 1 {
+            if (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count > 1 {
                 cell.imageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
             } else {
                 cell.imageIndicator.image = nil
@@ -317,20 +309,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             explanationTap.addTarget(self, action: #selector(expandExplanation))
             cell.explanationButton.addGestureRecognizer(explanationTap)
             
-//            // Next Tap
-//            let nextTap = UITapGestureRecognizer()
-//            nextTap.numberOfTapsRequired = 1
-//            nextTap.addTarget(self, action: #selector(nextButtonAction))
-//            cell.nextButton.addGestureRecognizer(nextTap)
-//            //
-//            
-//            // Back Button
-//            let backTap = UITapGestureRecognizer()
-//            backTap.numberOfTapsRequired = 1
-//            backTap.addTarget(self, action: #selector(backButtonAction))
-//            cell.backButton.addGestureRecognizer(backTap)
-//            //
-        
+            
             switch indexPath.row {
             case selectedRow - 1:
                 cell.imageIndicator.alpha = 0
@@ -469,20 +448,22 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let indexPath = NSIndexPath(row: tag, section: 0)
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
         //
+        let key = keyArray[indexPath.row]
+        //
+        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        //
         // Image Array
-        if demonstrationArray[indexPath.row].count > 1 && cell.demonstrationImageView.isAnimating == false {
+        if imageCount > 1 && cell.demonstrationImageView.isAnimating == false {
             var animationArray: [UIImage] = []
-            for i in 1...demonstrationArray[indexPath.row].count - 1 {
-                animationArray.append(getUncachedImage(named: demonstrationArray[indexPath.row][i])!)
+            for i in 1...imageCount - 1 {
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
             }
             //
             cell.demonstrationImageView.animationImages = animationArray
-            cell.demonstrationImageView.animationDuration = Double(demonstrationArray[indexPath.row].count - 1) * 0.5
+            cell.demonstrationImageView.animationDuration = Double(imageCount - 1) * 0.5
             cell.demonstrationImageView.animationRepeatCount = 1
             //
-            if demonstrationArray[tag].count != 1 {
-                sender.startAnimating()
-            }
+            sender.startAnimating()
         }
     }
 
@@ -491,7 +472,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBAction func nextButtonAction() {
         //
         //
-        if selectedRow < sessionArray.count - 1 {
+        if selectedRow < keyArray.count - 1 {
             //
             selectedRow = selectedRow + 1
             //
@@ -523,7 +504,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
             })
                 // + 1
-                if selectedRow < sessionArray.count - 1 {
+                if selectedRow < keyArray.count - 1 {
                     tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
                 }
         } else {
@@ -612,23 +593,16 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         backgroundViewExplanation.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
         
-        // Contents
         //
-        explanationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-        explanationLabel.textColor = .black
+        // Contents
         explanationLabel.textAlignment = .natural
         explanationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         explanationLabel.numberOfLines = 0
         //
-        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[selectedRow], comment: ""))
-        let paragraphStyleEE = NSMutableParagraphStyle()
-        paragraphStyleEE.alignment = .natural
+        let key = keyArray[selectedRow]
+        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: ""), howTo: NSLocalizedString("howToTest", comment: ""), toAvoid: NSLocalizedString("toAvoidTest", comment: ""))
+        explanationLabel.frame = CGRect(x: 10, y: 10, width: scrollViewExplanation.frame.size.width - 10, height: 0)
         //
-        attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
-        //
-        explanationLabel.attributedText = attributedStringE
-        //
-        explanationLabel.frame = CGRect(x: 10, y: 10, width: bounds.width - 20, height: 0)
         explanationLabel.sizeToFit()
         
         // Scroll View
@@ -671,7 +645,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Current Pose
         let currentPose = Float(selectedRow)
         // Total Number Poses
-        let totalPoses = Float(sessionArray.count - 1)
+        let totalPoses = Float(keyArray.count - 1)
         
         
         //

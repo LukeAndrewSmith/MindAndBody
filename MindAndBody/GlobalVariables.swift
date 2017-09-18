@@ -19,6 +19,13 @@ let backgroundImageArray: [String] =
     ["iceland", "sunWater", "purpleTree", "water", "mountainsRedBlue", "magicWood", "mountains"]
 
 //
+// Selected Session ---------------------------------------------------------------------------------------------------------------------
+//
+// e.g [Warmup, UpperBody, Session]
+// or e.g [Workout, Bodyweight/Circuit/FullBody, Session]
+var selectedSession: [Int] = [0,0,-1]
+
+//
 // Colours ---------------------------------------------------------------------------------------------------------------------
 //
 // Grey
@@ -77,6 +84,10 @@ var automaticSelectionIsHappening = false
 var automaticSelectionArray: [Int] = []
 // Int to indicate progress through selection
 var automaticSelectionProgress = 0
+
+// Schedule table counter
+// If group is selected, counter + 1, again + 1 if group has option that contains several sessions (e.g, group 1 (sport) -> workout -> warmup, workout, stretching)
+var tableCounter = 0
 
 //
 // Walkthrough aids

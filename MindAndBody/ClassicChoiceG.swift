@@ -209,37 +209,49 @@ class ClassicChoiceG: UIViewController  {
     
     // Full
     @IBAction func full(_ sender: Any) {
-        workoutType2 = 0
+        selectedSession[1] = 0
+        selectedSession[2] = -1
+        //
         self.performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Upper
     @IBAction func upper(_ sender: Any) {
-        workoutType2 = 1
+        selectedSession[1] = 1
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Lower
     @IBAction func lower(_ sender: Any) {
-        workoutType2 = 2
+        selectedSession[1] = 2
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Legs
     @IBAction func legs(_ sender: Any) {
-        workoutType2 = 3
+        selectedSession[1] = 3
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Pull
     @IBAction func pull(_ sender: Any) {
-        workoutType2 = 4
+        selectedSession[1] = 4
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Push
     @IBAction func push(_ sender: Any) {
-        workoutType2 = 5
+        selectedSession[1] = 5
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
@@ -251,10 +263,7 @@ class ClassicChoiceG: UIViewController  {
         // Pass Data
         if (segue.identifier == "warmupSegue") {
             //
-            let destinationVC = segue.destination as! WorkoutChoiceFinal
-            // Indicate to next screen which button was pressed
-            destinationVC.workoutType = 0
-            destinationVC.workoutType2 = workoutType2
+            let destinationVC = segue.destination as! FinalChoice
         }
         //
         let backItem = UIBarButtonItem()

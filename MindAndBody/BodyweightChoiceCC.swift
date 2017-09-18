@@ -34,12 +34,12 @@ class BodyweightChoiceCC: UIViewController  {
             //
             let destinationVC = segue.destination as! BodyweightChoice
             // Indicate to next screen which button was pressed
-            destinationVC.workoutType = 3
+            destinationVC.workoutType = 1
         } else if (segue.identifier == "bodyweightClassic") {
             //
             let destinationVC = segue.destination as! BodyweightChoice
             // Indicate to next screen which button was pressed
-            destinationVC.workoutType = 2
+            destinationVC.workoutType = 0
         }
         //
         let backItem = UIBarButtonItem()
@@ -105,13 +105,5 @@ class BodyweightChoiceCC: UIViewController  {
         circuit.titleLabel?.numberOfLines = 0
         circuit.titleLabel?.textAlignment = .center
     }
-    
-
-//
-// Walkthrough ----------------------------------------------------------------------------------------------------------------
-//
-
-
-
 
 }

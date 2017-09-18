@@ -43,33 +43,28 @@ class EndRoundTableViewCell: UITableViewCell {
 //
 class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    //
+    // MARK: Variables from Session Data
+    //
+    // Key Array
+    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [1] Keys Array
+    var keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+    
+    // Reps
+    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [3] reps array
+    var repsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3] as! [String]
+    
     
     //
-    // Retreive Arrays ---------------------------------------------------------------------------------------------------
-    //
-    // Session Type
-    var sessionType = Int()
-    
-    //
-    var numberOfRounds = Int()
+    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] rounds array, [0] = round
+    var numberOfRounds = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2][0] as! Int
     
     
-    // Initialize Arrays
-    //
-    // Movement Array
-    var sessionArray: [String] = []
     
-    // Reps Array
-    var repsArray: [[String]] = []
+    // To Add (@2x or @3x) for demonstration images
+    var toAdd = String()
     
-    // Demonstration Array
-    var demonstrationArray: [[String]] = [[]]
     
-    // Target Area Array
-    var targetAreaArray: [String] = []
-    
-    // Explanation Array
-    var explanationArray: [String] = []
     
     //
     // Variables
@@ -124,6 +119,15 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Device Scale for @2x and @3x of Target Area Images
+        switch UIScreen.main.scale {
+        case 1,2:
+            toAdd = "@2x"
+        case 3:
+            toAdd = "@3x"
+        default: break
+        }
         
         //
         view.backgroundColor = colour2
@@ -205,7 +209,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         switch section {
-        case 0: return sessionArray.count
+        case 0: return keyArray.count
         case 1: return 1
         default: return 0
         }
@@ -216,8 +220,10 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OverviewTableViewCell", for: indexPath) as! WorkoutOverviewTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WorkoutOverviewTableViewCell", for: indexPath) as! WorkoutOverviewTableViewCell
             
+            //
+            let key = keyArray[indexPath.row]
 
             //
             // Cell
@@ -230,9 +236,10 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             // New image to display
             // Demonstration on left
             if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                cell.imageViewCell.image = getUncachedImage(named: demonstrationArray[indexPath.row][0])
+                // [key] = key, [0] = first image
+                cell.imageViewCell.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
                 // Indicator
-                if demonstrationArray[indexPath.row].count > 1 {
+                if (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count > 1 {
                     cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
                 } else {
                     cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
@@ -240,9 +247,10 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                 // Target Area on left
             } else {
-                cell.imageViewCell.image = getUncachedImage(named: targetAreaArray[indexPath.row])
+                // [key] = key
+                cell.imageViewCell.image = getUncachedImage(named: (sessionData.targetAreaDictionaries[selectedSession[0]][key])! + toAdd)
                 // Indicator
-                if demonstrationArray[indexPath.row].count > 1 {
+                if (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count > 1 {
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
                 } else {
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
@@ -263,7 +271,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             //
             // Movement
-            cell.movementLabel.text = NSLocalizedString(sessionArray[indexPath.row], comment: "")
+            cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: "")
             //
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 23)
             cell.movementLabel?.textAlignment = .center
@@ -272,7 +280,10 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             //
             // Set and Reps
-            cell.setsRepsLabel?.text = repsArray[sessionScreenRoundIndex][indexPath.row]
+            //
+            // (keyArray.count * sessionScreenRoundIndex) = first index of round
+            var indexRow = (keyArray.count * sessionScreenRoundIndex) + indexPath.row
+            cell.setsRepsLabel?.text = repsArray[indexRow]
             cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.setsRepsLabel?.textAlignment = .right
             cell.setsRepsLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
@@ -367,7 +378,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         switch indexPath.section {
         case 0:
             //
-            let height2 = 0.25/Double(sessionArray.count - 1)
+            let height2 = 0.25/Double(keyArray.count - 1)
             //
             switch indexPath.row {
             case selectedRow:
@@ -732,19 +743,23 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let indexPath = NSIndexPath(row: tag, section: 0)
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! WorkoutOverviewTableViewCell
         //
+        let key = keyArray[indexPath.row]
+        //
+        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        //
         // Image Array
-        if demonstrationArray[indexPath.row].count > 1 && cell.imageViewCell.isAnimating == false {
+        if imageCount > 1 && cell.imageViewCell.isAnimating == false {
             var animationArray: [UIImage] = []
-            for i in 1...demonstrationArray[indexPath.row].count - 1 {
-                animationArray.append(getUncachedImage(named: demonstrationArray[indexPath.row][i])!)
+            for i in 1...imageCount - 1 {
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
             }
             //
             cell.imageViewCell.animationImages = animationArray
-            cell.imageViewCell.animationDuration = Double(demonstrationArray[indexPath.row].count - 1) * 0.5
+            cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
             if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
-                if demonstrationArray[tag].count != 1 {
+                if imageCount != 1 {
                     sender.startAnimating()
                 }
             }
@@ -755,7 +770,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     // Next Button
     @IBAction func nextButtonAction() {
         //
-        if selectedRow < sessionArray.count - 1 {
+        if selectedRow < keyArray.count - 1 {
             let indexPath0 = NSIndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
             //
@@ -790,12 +805,12 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //
             })
             // + 1
-            if selectedRow < sessionArray.count - 1 {
+            if selectedRow < keyArray.count - 1 {
                 tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
             }
             
             // Next Round
-            if selectedRow == sessionArray.count - 1 {
+            if selectedRow == keyArray.count - 1 {
                 //
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
@@ -882,24 +897,18 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         backgroundViewExplanation.addTarget(self, action: #selector(retractExplanation(_:)), for: .touchUpInside)
         
-        // Contents
         //
-        explanationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-        explanationLabel.textColor = .black
+        // Contents
         explanationLabel.textAlignment = .natural
         explanationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         explanationLabel.numberOfLines = 0
         //
-        let attributedStringE = NSMutableAttributedString(string: NSLocalizedString(explanationArray[selectedRow], comment: ""))
-        let paragraphStyleEE = NSMutableParagraphStyle()
-        paragraphStyleEE.alignment = .natural
+        let key = keyArray[selectedRow]
+        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: ""), howTo: NSLocalizedString("howToTest", comment: ""), toAvoid: NSLocalizedString("toAvoidTest", comment: ""))
+        explanationLabel.frame = CGRect(x: 10, y: 10, width: scrollViewExplanation.frame.size.width - 10, height: 0)
         //
-        attributedStringE.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleEE, range: NSMakeRange(0, attributedStringE.length))
-        //
-        explanationLabel.attributedText = attributedStringE
-        //
-        explanationLabel.frame = CGRect(x: 10, y: 10, width: bounds.width - 20, height: 0)
         explanationLabel.sizeToFit()
+
         
         // Scroll View
         scrollViewExplanation.addSubview(explanationLabel)
@@ -943,103 +952,110 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let indexPath = NSIndexPath(row: selectedRow, section: 0)
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! WorkoutOverviewTableViewCell
         //
-        switch extraSwipe.direction {
+        let key = keyArray[indexPath.row]
+        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
         //
-        case UISwipeGestureRecognizerDirection.left:
+        if cell.imageViewCell.isAnimating == false {
             //
-            // Check left image is displayed
-            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImageDot") || cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
-                // Screenshot of current image
-                let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
-                snapshot1?.bounds = cell.imageViewCell.bounds
-                snapshot1?.center.x = cell.center.x
-                cell.addSubview(snapshot1!)
-                
-                // New image to display
-                // Demonstration on left
-                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    cell.imageViewCell.image = getUncachedImage(named: targetAreaArray[indexPath.row])
-                    // Indicator
-                    if demonstrationArray[indexPath.row].count > 1 {
-                        cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
+            switch extraSwipe.direction {
+            //
+            case UISwipeGestureRecognizerDirection.left:
+                //
+                // Check left image is displayed
+                if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImageDot") || cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+                    // Screenshot of current image
+                    let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
+                    snapshot1?.bounds = cell.imageViewCell.bounds
+                    snapshot1?.center.x = cell.center.x
+                    cell.addSubview(snapshot1!)
+                    
+                    // New image to display
+                    // Demonstration on left
+                    if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[selectedSession[0]][key]! + toAdd)
+                        // Indicator
+                        if imageCount > 1 {
+                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
+                        } else {
+                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
+                        }
+                        cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
+                        // Target Area on left
                     } else {
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![0])
+                        // Indicator
+                        if imageCount > 1 {
+                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
+                        } else {
+                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
+                        }
                         cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                     }
-                    cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
-                    // Target Area on left
-                } else {
-                    cell.imageViewCell.image = getUncachedImage(named: demonstrationArray[indexPath.row][0])
-                    // Indicator
-                    if demonstrationArray[indexPath.row].count > 1 {
-                        cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
-                    } else {
-                        cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
-                    }
-                    cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                }
-                
-                // Move new image to right of screen
-                cell.imageViewCell.center.x = cell.center.x + cell.frame.size.width
-                cell.imageViewCell.reloadInputViews()
-                
-                //
-                UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    snapshot1?.center.x = cell.center.x - cell.frame.size.width
-                    cell.imageViewCell.center.x = cell.center.x
+                    
+                    // Move new image to right of screen
+                    cell.imageViewCell.center.x = cell.center.x + cell.frame.size.width
+                    cell.imageViewCell.reloadInputViews()
+                    
+                    // Animate new and old image
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        //
+                        snapshot1?.center.x = cell.center.x - cell.frame.size.width
+                        cell.imageViewCell.center.x = cell.center.x
+                        //
+                    }, completion: { finished in
+                        snapshot1?.removeFromSuperview()
+                    })
                     //
-                }, completion: { finished in
-                    snapshot1?.removeFromSuperview()
-                })
-                //
-            }
-        //
-        case UISwipeGestureRecognizerDirection.right:
+                }
             //
-            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImageDotDeselected") || cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlayDeselected") {
+            case UISwipeGestureRecognizerDirection.right:
                 //
-                let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
-                snapshot1?.bounds = cell.imageViewCell.bounds
-                snapshot1?.center.x = cell.center.x
-                cell.addSubview(snapshot1!)
-                
-                // New image to display
-                // Demonstration on left
-                if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
-                    cell.imageViewCell.image = getUncachedImage(named: demonstrationArray[indexPath.row][0])
-                    // Indicator
-                    if demonstrationArray[indexPath.row].count > 1 {
-                        cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
+                if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImageDotDeselected") || cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlayDeselected") {
+                    //
+                    let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
+                    snapshot1?.bounds = cell.imageViewCell.bounds
+                    snapshot1?.center.x = cell.center.x
+                    cell.addSubview(snapshot1!)
+                    
+                    // New image to display
+                    // Demonstration on left
+                    if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![0])
+                        // Indicator
+                        if imageCount > 1 {
+                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
+                        } else {
+                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
+                        }
+                        cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
+                        // Target Area on left
                     } else {
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[selectedSession[0]][key]! + toAdd)
+                        // Indicator
+                        if imageCount > 1 {
+                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
+                        } else {
+                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
+                        }
                         cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
                     }
-                    cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                    // Target Area on left
-                } else {
-                    cell.imageViewCell.image = getUncachedImage(named: targetAreaArray[indexPath.row])
-                    // Indicator
-                    if demonstrationArray[indexPath.row].count > 1 {
-                        cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
-                    } else {
-                        cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                    }
-                    cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
-                }
-                
-                //
-                cell.imageViewCell.center.x = cell.center.x - cell.frame.size.width
-                cell.imageViewCell.reloadInputViews()
-                
-                //
-                UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    snapshot1?.center.x = cell.center.x + cell.frame.size.width
-                    cell.imageViewCell.center.x = cell.center.x
+                    
                     //
-                }, completion: { finished in
-                    snapshot1?.removeFromSuperview()
-                })
-                //
+                    cell.imageViewCell.center.x = cell.center.x - cell.frame.size.width
+                    cell.imageViewCell.reloadInputViews()
+                    
+                    //
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        snapshot1?.center.x = cell.center.x + cell.frame.size.width
+                        cell.imageViewCell.center.x = cell.center.x
+                        //
+                    }, completion: { finished in
+                        snapshot1?.removeFromSuperview()
+                    })
+                    //
+                }
+            default: break
             }
-        default: break
         }
     }
     
@@ -1050,7 +1066,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         // Current Pose
         let currentPose = Float(selectedRow)
         // Total Number Poses
-        let totalPoses = Float(sessionArray.count - 1)
+        let totalPoses = Float(keyArray.count - 1)
         
         
         //

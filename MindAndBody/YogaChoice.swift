@@ -84,6 +84,9 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
 //
     //
     @IBAction func practicesAction(_ sender: Any) {
+        selectedSession[1] = 0
+        selectedSession[2] = -1
+        //
         performSegue(withIdentifier: "yogaSegue", sender: nil)
     }
     
@@ -95,8 +98,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         // Pass Data
         if (segue.identifier == "yogaSegue") {
             //
-            let destinationVC = segue.destination as! YogaChoiceFinal
-            // Indicate to next screen which button was pressed
+            let destinationVC = segue.destination as! FinalChoice
         }
         // Remove back bar text
         let backItem = UIBarButtonItem()
