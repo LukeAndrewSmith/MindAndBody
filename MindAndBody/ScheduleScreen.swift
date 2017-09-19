@@ -426,18 +426,21 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     //
                     performSegue(withIdentifier: "openMenu", sender: self)
                 default:
+                    // ADD IF,: IF TABLECOUNTER[0] != -1 && STAND ALONE SESSION -> AUTOMATIC SELECTION, ELSE PRESENT SESSIONS (warmup,workout,stretching), if tableCounter[1] != -1 -> Automatic Selection
                     tableView.deselectRow(at: indexPath, animated: true)
-                    // Incriment table counter
-                    tableCounter += 1
-                    
                     // Select session
-
+                    switch tableCounter[0] {
+                    // section 1
+                    case -1:
+                        tableCounter[0] = indexPath.row
+                    // section 2
+                    default:
+                        tableCounter[1] = indexPath.row
+                    }
                     // Mask View
                     maskView()
-                    
                     // Next Table info
                     slideLeft()
-                    
                 }
             }
 
@@ -459,47 +462,35 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: Mask Views
     // Mask view func
     func maskView() {
-        //
-        switch tableCounter {
-        // 1st table screen
-        case 0:
-            break
-        // 2nd table screen -> Group contents
-        case 1:
-            //
+        // Animate mask view if group selected and mask doesnt already exist
+        if tableCounter[0] != -1 && view.subviews.contains(maskView1) == false {
             createMaskView(alpha: 0)
             UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                 self.maskView1.alpha = 0.5
                 self.maskView2.alpha = 0.5
             })
-        // 3rd table screen -> Multiple sessions (warmup, workout, stretching)
-        case 2:
-            break
-        //
-        default:
-            break
         }
     }
     // Session selection mask
     func maskAction() {
-        tableCounter -= 1
-        //
-        switch tableCounter {
-        case 0:
+        // Table Counter
+        // Return to choice 1 (sessions)
+        if tableCounter[1] != -1 {
+            tableCounter[1] = -1
+            slideRight()
+        // Return to choice 0 (groups)
+        } else {
+            tableCounter[0] = -1
             // Enable table scroll & schedule choice button & remove mask view
             scheduleTable.isScrollEnabled = true
             navigationBar.rightBarButtonItem?.isEnabled = true
             removeMaskView()
             slideRight()
-        case 1:
-            break
-        default:
-            break
         }
     }
     // Open Schedule, check if mask views necessary
     func checkMaskView() {
-        if tableCounter != 0 {
+        if tableCounter[0] != -1 {
             createMaskView(alpha: 0.5)
         }
     }
@@ -573,6 +564,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         }, completion: { finished in
             snapShot1?.removeFromSuperview()
             snapShot2?.removeFromSuperview()
+            self.snapShotHeader.removeFromSuperview()
             self.removeMaskTable()
         })
     }
@@ -605,18 +597,29 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         }, completion: { finished in
             snapShot1?.removeFromSuperview()
             snapShot2?.removeFromSuperview()
+            self.snapShotHeader.removeFromSuperview()
             self.removeMaskTable()
         })
     }
     // Mask Table
     let mask = CAGradientLayer()
+    var snapShotHeader = UIView()
     func maskTable() {
         let screenFrame = UIScreen.main.bounds
         let tableHeaderHeight = (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4
-        let maskY = TopBarHeights.combinedHeight + tableHeaderHeight + ((view.bounds.height - tableHeaderHeight - 24.5) / 2)
         //
-        mask.frame = CGRect(x: 0, y: TopBarHeights.combinedHeight + tableHeaderHeight, width: view.bounds.width, height: view.bounds.height - tableHeaderHeight - 24.5)
+        mask.frame = CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: view.bounds.height)
+        let test = mask.frame.minY
+        
+        //TopBarHeights.combinedHeight + tableHeaderHeight
         mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
+        //
+        // Snapshot Header - mask layer covers header so show it
+        // SHOULD FIND A BETTER WAY, MASKING ONLY THE NECESSARY CELLS AND NOT THE WHOLE TABLEVIEW WITH HEADER
+            // ISSUE: MASK.FRAME DOESNT SEE TO LISTEN TO Y VALUE or y value means something else
+        let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableHeaderHeight)
+        snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
+        view.insertSubview(snapShotHeader, belowSubview: maskView1)
         //
         scheduleTable.layer.mask = mask
         //

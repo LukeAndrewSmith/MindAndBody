@@ -85,9 +85,10 @@ var automaticSelectionArray: [Int] = []
 // Int to indicate progress through selection
 var automaticSelectionProgress = 0
 
-// Schedule table counter
-// If group is selected, counter + 1, again + 1 if group has option that contains several sessions (e.g, group 1 (sport) -> workout -> warmup, workout, stretching)
-var tableCounter = 0
+// Schedule table selection
+// [0] = selected group, [1] = selected sessions (e.g workout -> warmup, workout, stretching)(wont always be any)
+// [0] = Choice 1 (group1, group2, group3 etc..), [1] = Choice 2 (workout(3 items), yoga(2 items))
+var tableCounter = [-1,-1]
 
 //
 // Walkthrough aids
