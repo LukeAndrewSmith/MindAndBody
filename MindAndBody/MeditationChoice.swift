@@ -25,11 +25,6 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
     // Stack
     @IBOutlet weak var stackView: UIStackView!
     
-    // Constraints
-    @IBOutlet weak var timerTop: NSLayoutConstraint!
-    @IBOutlet weak var timerBottom: NSLayoutConstraint!
-    @IBOutlet weak var stackBottom: NSLayoutConstraint!
-    
     
 //
 // View did load -------------------------------------------------------------------------------------------------------

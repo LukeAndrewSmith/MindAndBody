@@ -40,24 +40,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         ]
     
     
-    // Custom Arrays
-    //
-    // Presets Arrays (Names of presets)
-    var presetsArray: [String] = []
-    // Duration Array
-    var durationArray: [Int] = []
-    // Selected Starting Bell
-    var startingBellsArray: [Int] = []
-    // Interval Bells
-    var intervalBellsArray: [[Int]] = []
-    // Interval Bells Times
-    var intervalBellsTimesArray: [[Int]] = []
-    //
-    var endingBellsArray: [Int] = []
-    // Background Sound Array
-    var selectedBackgroundSoundsArray: [Int] = []
-    
-    
     // Selected Preset
     var selectedPreset = Int()
     
@@ -83,6 +65,26 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     var selectedBackgroundSound = Int()
     var didChangeBackgroundSound = Bool()
+    
+    
+    
+    // Big Array Test
+    var meditationArrayRegister: [[[[Any]]]] = []
+    
+    var emptySession: [[[Any]]] =
+        [
+            // Name - String
+            [[]],
+            // Duration
+            [[]],
+            // Bells, starting and ending bells go at first and last, interval bells in the middle
+            // [Bell, Time]
+            [[-1,0],[-1,0]],
+            // Background Sound
+            [[-1]]
+        ]
+    
+    
 //
 // Outlets -----------------------------------------------------------------------------------------------
 //
@@ -237,13 +239,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         // Register Defaults
         let defaults = UserDefaults.standard
-        defaults.register(defaults: ["meditationTimerTitles" : presetsArray])
-        defaults.register(defaults: ["meditationTimerDuration" : durationArray])
-        defaults.register(defaults: ["meditationTimerStartingBells" : startingBellsArray])
-        defaults.register(defaults: ["meditationTimerIntervalBells" : intervalBellsArray])
-        defaults.register(defaults: ["meditationTimerIntervalTimes" : intervalBellsTimesArray])
-        defaults.register(defaults: ["meditationTimerEndingBells" : endingBellsArray])
-        defaults.register(defaults: ["meditationTimerBackgroundSounds" : selectedBackgroundSoundsArray])
+        defaults.register(defaults: ["meditationTimer" : meditationArrayRegister])
+//        defaults.register(defaults: ["meditationTimerTitles" : presetsArray])
+//        defaults.register(defaults: ["meditationTimerDuration" : durationArray])
+//        defaults.register(defaults: ["meditationTimerStartingBells" : startingBellsArray])
+//        defaults.register(defaults: ["meditationTimerIntervalBells" : intervalBellsArray])
+//        defaults.register(defaults: ["meditationTimerIntervalTimes" : intervalBellsTimesArray])
+//        defaults.register(defaults: ["meditationTimerEndingBells" : endingBellsArray])
+//        defaults.register(defaults: ["meditationTimerBackgroundSounds" : selectedBackgroundSoundsArray])
         
         
         
@@ -747,16 +750,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                         soundPlayer.stop()
                     }
                 }
-                //
-//                var startingBellsArray = UserDefaults.standard.object(forKey: "meditationTimerStartingBells") as! [Int]
-//                //
-//                startingBellsArray[selectedPreset] = selectedStartingBell
-//                //
-//                UserDefaults.standard.set(startingBellsArray, forKey: "meditationTimerStartingBells")
-//                //
-//                selectedStartingBell = -1
-//                //
-//                updateRows()
             //
             case 4:
                 //
@@ -778,9 +771,13 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     // Ok button action
+    var bellToAdd = [-1, 0] // Interval bell to add
+    //
     func okButtonAction(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
+        var meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
+        //
         var removeView = false
         
         // Ok Actions
@@ -793,21 +790,27 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 didChangeDuration = false
                 //
-                var durationArray = UserDefaults.standard.object(forKey: "meditationTimerDuration") as! [Int]
+                // Set new duration
+                if (meditationArray[selectedPreset][1][0] as! [Int]).count != 0 {
+                    meditationArray[selectedPreset][1][0][0] = convertToSeconds()
+                } else {
+                    meditationArray[selectedPreset][1][0].append(convertToSeconds())
+                }
+                // Set ending bell time to duration
+                let lastIndex = (meditationArray[selectedPreset][2] as! [[Int]]).count - 1
+                meditationArray[selectedPreset][2][lastIndex][1] = convertToSeconds()
                 //
-                durationArray[selectedPreset] = convertToSeconds()
-                UserDefaults.standard.set(durationArray, forKey: "meditationTimerDuration")
-                UserDefaults.standard.synchronize()
+                UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
 
-                //
+                // Change duration button detail text label
                 let hmsArray = convertToHMS(time: 0, index: 0)
                 durationDetail.text = String(hmsArray[0]) + "h " + String(hmsArray[1]) + "m " + String(hmsArray[2]) + "s"
                 //
-                //
                 isDurationSelected()
                 //
-                var intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-                if intervalBellsArray[selectedPreset].count > 0 {
+                // Check if interval bells should be removed (if new duration is shorter than old, there might be some interval bells that are after the end time and that should be removed)
+                // > 2 because starting and ending bells included in array
+                if (meditationArray[selectedPreset][2] as! [[Int]]).count > 2 {
                     removeIntervalBells()
                 }
             }
@@ -825,13 +828,12 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }
                 }
                 //
-                var startingBellsArray = UserDefaults.standard.object(forKey: "meditationTimerStartingBells") as! [Int]
+                // Change Starting Bell
+                meditationArray[selectedPreset][2][0][0] = selectedStartingBell
                 //
-                startingBellsArray[selectedPreset] = selectedStartingBell
-                startingBellDetail.text = NSLocalizedString(bellsArray[startingBellsArray[selectedPreset]], comment: "")
+                UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
                 //
-                UserDefaults.standard.set(startingBellsArray, forKey: "meditationTimerStartingBells")
-                UserDefaults.standard.synchronize()
+                startingBellDetail.text = NSLocalizedString(bellsArray[meditationArray[selectedPreset][2].first![0] as! Int], comment: "")
                 //
                 selectedStartingBell = -1
                 //
@@ -870,12 +872,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }
                 }
                 //
-                var intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-                //
-                intervalBellsArray[selectedPreset].append(selectedIntervalBell)
-                //
-                UserDefaults.standard.set(intervalBellsArray, forKey: "meditationTimerIntervalBells")
-                UserDefaults.standard.synchronize()
+                // ToAdd interval bell, set bell
+                bellToAdd = [-1, 0]
+                bellToAdd[0] = selectedIntervalBell
                 //
                 selectedIntervalBell = -1
                 //
@@ -935,21 +934,35 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 intervalBellStage = 0
                 //
                 //
-                var intervalTimesArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalTimes") as! [[Int]]
+                // Set Interval Bell Time, and insert it in relevant place
+                bellToAdd[1] = convertToSeconds()
+                // 1 as interval bells start at 1 (starting bell = 0)
+                let count = (meditationArray[selectedPreset][2] as! [[Int]]).count - 2
+                if count > 0 {
+                    // If biggest
+                    if bellToAdd[1] > meditationArray[selectedPreset][2][count][1] as! Int {
+                        meditationArray[selectedPreset][2].insert(bellToAdd, at: count)
+                    } else {
+                    // Else find spoty
+                        for i in 1...count {
+                            // If new time < i time, add at i
+                            if bellToAdd[1] < meditationArray[selectedPreset][2][i][1] as! Int {
+                                meditationArray[selectedPreset][2].insert(bellToAdd, at: i)
+                                break
+                            }
+                        }
+                    }
+                // No intervals yet -> insert between starting and ending thus at 1
+                } else {
+                    meditationArray[selectedPreset][2].insert(bellToAdd, at: 1)
+                }
                 //
-                //
-                intervalTimesArray[selectedPreset].append(convertToSeconds())
-                //
-                UserDefaults.standard.set(intervalTimesArray, forKey: "meditationTimerIntervalTimes")
-                UserDefaults.standard.synchronize()
+                UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
                 //
                 selectionView.isHidden = false
                 selectionView.frame = CGRect(x: selectionView.frame.maxX, y: selectionView.frame.minY, width: 0, height: selectionView.frame.size.height)
                 //
                 removeView = false
-                //
-                // Reorder Arrays
-                self.reorderIntervalBells()
                 
                 // Position
                 UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
@@ -994,12 +1007,13 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }
                 }
                 //
-                var endingBellsArray = UserDefaults.standard.object(forKey: "meditationTimerEndingBells") as! [Int]
-                endingBellsArray[selectedPreset] = selectedEndingBell
-                endingBellDetail.text = NSLocalizedString(bellsArray[endingBellsArray[selectedPreset]], comment: "")
+                // .last = ending bell, [0] = bell
+                let lastIndex = (meditationArray[selectedPreset][2] as! [[Int]]).count - 1
+                meditationArray[selectedPreset][2][lastIndex][0] = selectedEndingBell
                 //
-                UserDefaults.standard.set(endingBellsArray, forKey: "meditationTimerEndingBells")
-                UserDefaults.standard.synchronize()
+                UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
+                //
+                endingBellDetail.text = NSLocalizedString(bellsArray[selectedEndingBell], comment: "")
                 //
                 selectedEndingBell = -1
                 //
@@ -1018,12 +1032,12 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }
                 }
                 //
-                var selectedBackgroundSoundsArray = UserDefaults.standard.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
-                selectedBackgroundSoundsArray[selectedPreset] = selectedBackgroundSound
-                backgroundSoundDetail.text = NSLocalizedString(backgroundSoundsArray[selectedBackgroundSoundsArray[selectedPreset]], comment: "")
+                // [3] = background sound
+                meditationArray[selectedPreset][3][0][0] = selectedBackgroundSound
                 //
-                UserDefaults.standard.set(selectedBackgroundSoundsArray, forKey: "meditationTimerBackgroundSounds")
-                UserDefaults.standard.synchronize()
+                UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
+                //
+                backgroundSoundDetail.text = NSLocalizedString(backgroundSoundsArray[selectedBackgroundSound], comment: "")
                 //
                 selectedBackgroundSound = -1
                 //
@@ -1057,49 +1071,22 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
 //
 // Helper functions
 //
-    //
-    // Reorder interval Bells
-    func reorderIntervalBells() {
-        //
-        let defaults = UserDefaults.standard
-        var intervalBellsArray = defaults.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-        var intervalBellsTimesArray = defaults.object(forKey: "meditationTimerIntervalTimes") as! [[Int]]
-        
-        //
-        let combined = zip(intervalBellsTimesArray[selectedPreset], intervalBellsArray[selectedPreset]).sorted {$0.0 < $1.0}
-        
-        //
-        intervalBellsTimesArray[selectedPreset] = combined.map {$0.0}
-        intervalBellsArray[selectedPreset] = combined.map {$0.1}
-        
-        defaults.set(intervalBellsArray, forKey: "meditationTimerIntervalBells")
-        defaults.set(intervalBellsTimesArray, forKey: "meditationTimerIntervalTimes")
-    
-        defaults.synchronize()
-    }
-    
     // Remove interval Bells if time too high
     func removeIntervalBells() {
         //
         let defaults = UserDefaults.standard
-        var intervalBellsArray = defaults.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-        var intervalBellsTimesArray = defaults.object(forKey: "meditationTimerIntervalTimes") as! [[Int]]
+        var meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
         //
-        let durationArray = UserDefaults.standard.object(forKey: "meditationTimerDuration") as! [Int]
-        //
-        for i in intervalBellsTimesArray[selectedPreset] {
-            //
-            if i > durationArray[selectedPreset] {
-                let index = intervalBellsTimesArray[selectedPreset].index(of: i)
-                intervalBellsTimesArray[selectedPreset].remove(at: index!)
-                intervalBellsArray[selectedPreset].remove(at: index!)
+        // 1 as interval bells start at 1 (starting bell = 0)
+        for i in 1...(meditationArray[selectedPreset][2] as! [[Int]]).count - 2 {
+            // If time > duration -> remove bell
+            if meditationArray[selectedPreset][2][i][1] as! Int > meditationArray[selectedPreset][1][0][0] as! Int {
+                meditationArray[selectedPreset][2].remove(at: i)
+                break
             }
         }
         //
-        defaults.set(intervalBellsArray, forKey: "meditationTimerIntervalBells")
-        defaults.set(intervalBellsTimesArray, forKey: "meditationTimerIntervalTimes")
-        //
-        defaults.synchronize()
+        defaults.set(meditationArray, forKey: "meditationTimer")
         //
         updateRows()
     }
@@ -1152,57 +1139,51 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     func deleteAction(_ sender: Any) {
         let defaults = UserDefaults.standard
+        var meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
         // Set Nil
         switch deleteTag {
+        // Starting Bell
         case 0:
             //
-            var startingBellsArray = defaults.object(forKey: "meditationTimerStartingBells") as! [Int]
-            startingBellsArray[selectedPreset] = -1
-            defaults.set(startingBellsArray, forKey: "meditationTimerStartingBells")
-            UserDefaults.standard.synchronize()
+            meditationArray[selectedPreset][2][0][0] = -1
             //
             startingBellDetail.text = "-"
             startingBellDetail.alpha = 1
         //
         case 1:
             //
-            var intervalBellsArray = defaults.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-            intervalBellsArray[selectedPreset] = []
-            defaults.set(intervalBellsArray, forKey: "meditationTimerIntervalBells")
-            //
-            var intervalBellsTimesArray = defaults.object(forKey: "meditationTimerIntervalTimes") as! [[Int]]
-            intervalBellsTimesArray[selectedPreset] = []
-            defaults.set(intervalBellsTimesArray, forKey: "meditationTimerIntervalTimes")
-            //
-            UserDefaults.standard.synchronize()
+            // 1 as interval bells start at 1 (starting bell = 0)
+            let count = (meditationArray[selectedPreset][2] as! [[Int]]).count - 2
+            if count > 0 {
+                // Remove all interval bells
+                for i in 1...count {
+                    // If new time < i time, add at i
+                    meditationArray[selectedPreset][2].remove(at: 1)
+                }
+            }
+            
             //
             intervalBellsDetail.text = "-"
             intervalBellsDetail.alpha = 1
         //
         case 2:
             //
-            var endingBellsArray = defaults.object(forKey: "meditationTimerEndingBells") as! [Int]
-            endingBellsArray[selectedPreset] = -1
-            defaults.set(endingBellsArray, forKey: "meditationTimerEndingBells")
-            //
-            UserDefaults.standard.synchronize()
+            let count = (meditationArray[selectedPreset][2] as! [[Int]]).count - 1
+            meditationArray[selectedPreset][2][count][0] = -1
             //
             endingBellDetail.text = "-"
             endingBellDetail.alpha = 1
         //
         case 3:
             //
-            var selectedBackgroundSoundsArray = defaults.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
-            selectedBackgroundSoundsArray[selectedPreset] = -1
-            defaults.set(selectedBackgroundSoundsArray, forKey: "meditationTimerBackgroundSounds")
-            //
-            UserDefaults.standard.synchronize()
+            meditationArray[selectedPreset][3][0][0] = -1
             //
             backgroundSoundDetail.text = "-"
             backgroundSoundDetail.alpha = 1
         default: break
         }
         //
+        defaults.set(meditationArray, forKey: "meditationTimer")
         //
         isDeleting = false
         //
@@ -1231,11 +1212,13 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
 //
     func isDurationSelected() {
         //
-        // Enable only duration
-        let durationArray = UserDefaults.standard.object(forKey: "meditationTimerDuration") as! [Int]
-        if durationArray.count == 0 {
-            
-        } else if durationArray[selectedPreset] == 0 {
+        // Enable only if duration selected
+        let defaults = UserDefaults.standard
+        let meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
+        if meditationArray.count != 0 {
+        if meditationArray[selectedPreset][1][0].count == 0 {
+            print("thatsnotgonewell")
+        } else if (meditationArray[selectedPreset][1][0][0] as! Int) == 0 {
             self.startingBell.isEnabled = false
             self.intervalBells.isEnabled = false
             self.endingBell.isEnabled = false
@@ -1245,6 +1228,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.intervalBells.isEnabled = true
             self.endingBell.isEnabled = true
             self.backgroundSound.isEnabled = true
+        }
         }
     }
     
@@ -1296,11 +1280,16 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.secondsLabel.center.x = self.pickerViewDuration.frame.minX + (self.pickerViewDuration.frame.size.width * (4.65/6))
             self.minutesLabel.center.x = self.pickerViewDuration.frame.minX + (self.pickerViewDuration.frame.size.width * (3.55/6))
             self.hoursLabel.center.x = self.pickerViewDuration.frame.minX + (self.pickerViewDuration.frame.size.width * (2.4/6))
-        // Select Rows
-        let hmsArray = convertToHMS(time: 0, index: 0)
-        pickerViewDuration.selectRow(durationTimeArray[0].index(of: hmsArray[0])!, inComponent: 0, animated: true)
-        pickerViewDuration.selectRow(durationTimeArray[1].index(of: hmsArray[1])!, inComponent: 1, animated: true)
-        pickerViewDuration.selectRow(durationTimeArray[2].index(of: hmsArray[2])!, inComponent: 2, animated: true)
+        //
+        // Select Rows if duration already set
+        let defaults = UserDefaults.standard
+        let meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
+        if meditationArray[selectedPreset][1][0].count != 0 {
+            let hmsArray = convertToHMS(time: 0, index: 0)
+            pickerViewDuration.selectRow(durationTimeArray[0].index(of: hmsArray[0])!, inComponent: 0, animated: true)
+            pickerViewDuration.selectRow(durationTimeArray[1].index(of: hmsArray[1])!, inComponent: 1, animated: true)
+            pickerViewDuration.selectRow(durationTimeArray[2].index(of: hmsArray[2])!, inComponent: 2, animated: true)
+        }
         //
         selectionView.addSubview(durationTimeLabel)
         durationTimeLabel.textAlignment = .left
@@ -1600,48 +1589,60 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
   
     // Update Main Screen Detail Labels
     func updateRows() {
-        // Register Defaults
+        //
         let defaults = UserDefaults.standard
-        let presetsArray = defaults.object(forKey: "meditationTimerTitles") as! [String]
-        let durationArray = defaults.object(forKey: "meditationTimerDuration") as! [Int]
-        let startingBellsArray = defaults.object(forKey: "meditationTimerStartingBells") as! [Int]
-        let intervalBellsArray = defaults.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-        let endingBellsArray = defaults.object(forKey: "meditationTimerEndingBells") as! [Int]
-        let selectedBackgroundSoundsArray = defaults.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
+        let meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
         //
     // Test all for nil
-    if presetsArray.count != 0 {
+    if meditationArray.count != 0 {
         
-        //
-        presetsDetail.text = presetsArray[selectedPreset]
-        //
-        if durationArray[selectedPreset] != 0 {
+        // Title
+        // []0 = names, [0] = name array, [0] = name --> array due to interval bells needing to be in arrays, though only 1 value in name, duration, background sounds arrays
+        presetsDetail.text = meditationArray[selectedPreset][0][0][0] as? String
+        // Duration
+        // [1] = duration array, [0] = duration (as in array)
+        if (meditationArray[selectedPreset][1][0] as! [Int]).count != 0 && (meditationArray[selectedPreset][1][0][0] as! Int) != 0 {
             let hmsArray = convertToHMS(time: 0, index: 0)
             durationDetail.text = String(hmsArray[0]) + "h " + String(hmsArray[1]) + "m " + String(hmsArray[2]) + "s"
         } else {
             durationDetail.text = "-"
         }
         //
-        if startingBellsArray[selectedPreset] != -1 {
-            startingBellDetail.text = NSLocalizedString(bellsArray[startingBellsArray[selectedPreset]], comment: "")
+        // Starting Bell
+        // [2] = bells array, .first = starting bell, [0] = bell
+        let startingBell = meditationArray[selectedPreset][2].first![0] as! Int
+        if startingBell != -1 {
+            startingBellDetail.text = NSLocalizedString(bellsArray[startingBell], comment: "")
         } else {
             startingBellDetail.text = "-"
         }
         //
-        if intervalBellsArray[selectedPreset].count != 0 {
-            intervalBellsDetail.text = String(intervalBellsArray[selectedPreset].count)
+        // Interval Bells
+        // [2] = bells array
+        var intervalBellsArray = meditationArray[selectedPreset][2] as! [[Int]]
+        // Remove starting and ending bell
+        intervalBellsArray.removeFirst()
+        intervalBellsArray.removeLast()
+        if intervalBellsArray.count != 0 {
+            intervalBellsDetail.text = String(intervalBellsArray.count)
         } else {
             intervalBellsDetail.text = "-"
         }
         //
-        if endingBellsArray[selectedPreset] != -1 {
-            endingBellDetail.text = NSLocalizedString(bellsArray[endingBellsArray[selectedPreset]], comment: "")
+        // Ending Bells
+        // [2] = bells array, .first = ending bell, [0] = bell
+        let endingBell = meditationArray[selectedPreset][2].last![0] as! Int
+        if endingBell != -1 {
+            endingBellDetail.text = NSLocalizedString(bellsArray[endingBell], comment: "")
         } else {
             endingBellDetail.text = "-"
         }
         //
-        if selectedBackgroundSoundsArray[selectedPreset] != -1 {
-            backgroundSoundDetail.text = NSLocalizedString(backgroundSoundsArray[selectedBackgroundSoundsArray[selectedPreset]], comment: "")
+        // Background Sounds
+        // [3] = bells array, [0] = background sound array, [0] = background sounds
+        let backgroundSound = meditationArray[selectedPreset][3][0][0] as! Int
+        if backgroundSound != -1 {
+            backgroundSoundDetail.text = NSLocalizedString(backgroundSoundsArray[backgroundSound], comment: "")
         } else {
             backgroundSoundDetail.text = "-"
         }
@@ -1701,17 +1702,26 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let defaults = UserDefaults.standard
+        let meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
+
         switch tableView {
         case presetsTableView:
             // Retreive Preset Timers
-            let presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
-            return presetsArray.count + 1
+//            let presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
+            return meditationArray.count + 1
         case tableViewBells:
             return bellsArray.count
         case tableViewIntervalBells:
             // Retreive Interval Bells
-            let intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-                return intervalBellsArray[selectedPreset].count + 1
+//            let intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
+            // Interval Bells
+            // [2] = bells array
+            var intervalBellsArray = meditationArray[selectedPreset][2] as! [[Int]]
+            // Remove starting and ending bell
+            intervalBellsArray.removeFirst()
+            intervalBellsArray.removeLast()
+            return intervalBellsArray.count + 1
         case tableViewBackgroundSounds:
             return backgroundSoundsArray.count
         default: return 0
@@ -1721,7 +1731,10 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        //
+        let defaults = UserDefaults.standard
+        let meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
+
         // Cell
         var cell = UITableViewCell()
         
@@ -1734,14 +1747,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             //
             // Retreive Preset Timers
-            let presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
+//            let presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
             //
             cell.textLabel?.textAlignment = .center
             cell.backgroundColor = colour1
             cell.textLabel?.textColor = colour2
             cell.tintColor = colour2
             //
-            if indexPath.row == presetsArray.count {
+            if indexPath.row == meditationArray.count {
                 //
                 cell.imageView?.image = #imageLiteral(resourceName: "Plus")
                 //
@@ -1750,7 +1763,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             } else {
                 //
-                cell.textLabel?.text = presetsArray[indexPath.row]
+                cell.textLabel?.text = meditationArray[indexPath.row][0][0][0] as? String
             }
             //
         case tableViewBells:
@@ -1773,10 +1786,12 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             switch selectedItem {
             case 2:
                 //
-                let startingBellsArray = UserDefaults.standard.object(forKey: "meditationTimerStartingBells") as! [Int]
+//                let startingBellsArray = UserDefaults.standard.object(forKey: "meditationTimerStartingBells") as! [Int]
+                // Interval Bells
                 if didChangeStartingBell == false {
-                    if startingBellsArray[selectedPreset] != -1 {
-                        selectedStartingBell = startingBellsArray[selectedPreset]
+                    let startingBell = meditationArray[selectedPreset][2].first![0] as! Int
+                    if startingBell != -1 {
+                        selectedStartingBell = startingBell
                     }
                 }
                 //
@@ -1807,10 +1822,11 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             case 4:
                 //
-                let endingBellsArray = UserDefaults.standard.object(forKey: "meditationTimerEndingBells") as! [Int]
+//                let endingBellsArray = UserDefaults.standard.object(forKey: "meditationTimerEndingBells") as! [Int]
                 if didChangeEndingBell == false {
-                    if endingBellsArray[selectedPreset] != -1 {
-                        selectedEndingBell = endingBellsArray[selectedPreset]
+                    let endingBell = meditationArray[selectedPreset][2].last![0] as! Int
+                    if endingBell != -1 {
+                        selectedEndingBell = endingBell
                     }
                 }
                 //
@@ -1833,12 +1849,15 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             //
-            cell.textLabel?.textAlignment = .left
-            //
-            let intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
+            // Interval Bells
+            // [2] = bells array
+            var intervalBellsArray = meditationArray[selectedPreset][2] as! [[Int]]
+            // Remove starting and ending bell
+            intervalBellsArray.removeFirst()
+            intervalBellsArray.removeLast()
             //
                 // New Bell
-                if indexPath.row == intervalBellsArray[selectedPreset].count {
+                if indexPath.row == intervalBellsArray.count {
                     cell.backgroundColor = colour2
                     cell.textLabel?.textColor = colour1
                     cell.tintColor = colour1
@@ -1852,23 +1871,18 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
                     // Bells Rows
                 } else {
-                    let intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
                     cell.backgroundColor = colour2
                     cell.textLabel?.textColor = colour1
                     cell.tintColor = colour1
                     //
                     let timesArray = convertToHMS(time: 1, index: indexPath.row)
                     cell.detailTextLabel?.text = String(timesArray[0]) + "h " + String(timesArray[1]) + "m " + String(timesArray[2]) + "s"
-                    cell.detailTextLabel?.adjustsFontSizeToFitWidth = false
                     //
                     cell.detailTextLabel?.textColor = colour1
                     cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
                     //
-                    cell.textLabel?.text = NSLocalizedString(bellsArray[intervalBellsArray[selectedPreset][indexPath.row]], comment: "")
-                    cell.imageView?.image = bellsImages[intervalBellsArray[selectedPreset][indexPath.row]]
-                    cell.textLabel?.numberOfLines = 2
-                    cell.textLabel?.adjustsFontSizeToFitWidth = true
-                    cell.textLabel?.contentHuggingPriority(for: .horizontal)
+                    cell.textLabel?.text = NSLocalizedString(bellsArray[intervalBellsArray[indexPath.row][0]], comment: "")
+                    cell.imageView?.image = bellsImages[intervalBellsArray[indexPath.row][0]]
                     //
                     cell.selectionStyle = .none
             }
@@ -1885,10 +1899,11 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.textLabel?.textColor = colour1
             cell.tintColor = colour1
             //
-            let selectedBackgroundSoundsArray = UserDefaults.standard.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
+//            let selectedBackgroundSoundsArray = UserDefaults.standard.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
             if didChangeBackgroundSound == false {
-                if selectedBackgroundSoundsArray[selectedPreset] != -1 {
-                    selectedBackgroundSound = selectedBackgroundSoundsArray[selectedPreset]
+                let chosenBackgroundSound = meditationArray[selectedPreset][3][0][0] as! Int
+                if chosenBackgroundSound != -1 {
+                    selectedBackgroundSound = chosenBackgroundSound
                 }
             }
             //
@@ -1913,12 +1928,21 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let defaults = UserDefaults.standard
+        let meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
+
         switch tableView {
         case presetsTableView:
             return 44
         case tableViewIntervalBells:
-            let intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-            if indexPath.row == intervalBellsArray[selectedPreset].count {
+//            let intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
+            // Interval Bells
+            // [2] = bells array
+            var intervalBellsArray = meditationArray[selectedPreset][2] as! [[Int]]
+            // Remove starting and ending bell
+            intervalBellsArray.removeFirst()
+            intervalBellsArray.removeLast()
+            if indexPath.row == intervalBellsArray.count {
                 return 44
             } else {
                 return 88
@@ -1933,12 +1957,15 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     var okAction = UIAlertAction()
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let defaults = UserDefaults.standard
+        var meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
+        //
         switch tableView {
         case presetsTableView:
             // Retreive Preset Timers
-            var presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
+//            var presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
             // Add Custom Meditation
-            if indexPath.row == presetsArray.count {
+            if indexPath.row == meditationArray.count {
                 let snapShot1 = presetsTableView.snapshotView(afterScreenUpdates: false)
                 snapShot1?.center.x = view.center.x
                 snapShot1?.center.y = presetsTableView.center.y - UIApplication.shared.statusBarFrame.height - (navigationController?.navigationBar.frame.size.height)!
@@ -1967,42 +1994,17 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
                 // 3. Get the value from the text field, and perform actions upon OK press
                 okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-                    let defaults = UserDefaults.standard
                     //
                     let textField = alert?.textFields![0]
-                    // Update Preset Text Arrays
-                    var presetsArray = defaults.object(forKey: "meditationTimerTitles") as! [String]
-                    presetsArray.append((textField?.text)!)
-                    defaults.set(presetsArray, forKey: "meditationTimerTitles")
+                    //
+                    // New empty session array
+                    var newSession = self.emptySession
+                    // Update name
+                    newSession[0][0].append((textField?.text)!)
+                    meditationArray.append(newSession)
+                    //
+                    defaults.set(meditationArray, forKey: "meditationTimer")
                     
-                    //
-                    var durationArray = defaults.object(forKey: "meditationTimerDuration") as! [Int]
-                    var startingBellsArray = defaults.object(forKey: "meditationTimerStartingBells") as! [Int]
-                    var intervalBellsArray = defaults.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-                    var intervalBellsTimesArray = defaults.object(forKey: "meditationTimerIntervalTimes") as! [[Int]]
-                    var endingBellsArray = defaults.object(forKey: "meditationTimerEndingBells") as! [Int]
-                    var selectedBackgroundSoundsArray = defaults.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
-                    //
-                    durationArray.append(0)
-                    defaults.set(durationArray, forKey: "meditationTimerDuration")
-                    //
-                    startingBellsArray.append(-1)
-                    defaults.set(startingBellsArray, forKey: "meditationTimerStartingBells")
-                    //
-                    intervalBellsArray.append([])
-                    defaults.set(intervalBellsArray, forKey: "meditationTimerIntervalBells")
-                    //
-                    intervalBellsTimesArray.append([])
-                    defaults.set(intervalBellsTimesArray, forKey: "meditationTimerIntervalTimes")
-                    //
-                    endingBellsArray.append(-1)
-                    defaults.set(endingBellsArray, forKey: "meditationTimerEndingBells")
-                    //
-                    selectedBackgroundSoundsArray.append(-1)
-                    defaults.set(selectedBackgroundSoundsArray, forKey: "meditationTimerBackgroundSounds")
-
-                    //
-                    defaults.synchronize()
                     //
                     // Enable rows
                     self.isDurationSelected()
@@ -2019,13 +2021,13 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }, completion: { finished in
                         //
                         //
-                        let presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
+//                        let presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
                         //
-                        let selectedIndexPath = NSIndexPath(row: presetsArray.count - 1, section: 0)
+                        let selectedIndexPath = NSIndexPath(row: meditationArray.count - 1, section: 0)
                         self.presetsTableView.selectRow(at: selectedIndexPath as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
                         self.selectedPreset = selectedIndexPath.row
                         //
-                        self.presetsDetail.text = presetsArray[self.selectedPreset]
+                        self.presetsDetail.text = meditationArray[self.selectedPreset][0][0][0] as? String
                         //
                         tableView.deselectRow(at: indexPath, animated: true)
                         
@@ -2092,13 +2094,13 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 selectedPreset = indexPath.row
                 //
-                let presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
+//                let presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
                 //
-                presetsDetail.text = presetsArray[selectedPreset]
+                presetsDetail.text = meditationArray[selectedPreset][0][0][0] as? String
                 //
                 tableView.deselectRow(at: indexPath, animated: true)
                 // Dismiss Table
-                if presetsArray.count != 0 {
+                if meditationArray.count != 0 {
                     //
                     // Dismiss Table
                     UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
@@ -2173,10 +2175,16 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             okButton.isEnabled = true
             //
-            var intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
+//            var intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
             //
+            // Interval Bells
+            // [2] = bells array
+            var intervalBellsArray = meditationArray[selectedPreset][2] as! [[Int]]
+            // Remove starting and ending bell
+            intervalBellsArray.removeFirst()
+            intervalBellsArray.removeLast()
             //
-            if indexPath.row == intervalBellsArray[selectedPreset].count {
+            if indexPath.row == intervalBellsArray.count {
                     //
                     selectedItem = 3
                     //
@@ -2257,21 +2265,27 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Edit Rows
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let defaults = UserDefaults.standard
+        let meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
+        //
         switch tableView {
         case presetsTableView:
             // Retreive Preset Timers
-            let presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
             var returnValue = Bool()
-            if indexPath.row < presetsArray.count {
+            if indexPath.row < meditationArray.count {
                 returnValue = true
             }
             return returnValue
         //
         case tableViewIntervalBells:
-            // Retreive Preset Timers
-            let intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
+            // Interval Bells
+            // [2] = bells array
+            var intervalBellsArray = meditationArray[selectedPreset][2] as! [[Int]]
+            // Remove starting and ending bell
+            intervalBellsArray.removeFirst()
+            intervalBellsArray.removeLast()
             var returnValue = Bool()
-                if indexPath.row < intervalBellsArray[selectedPreset].count {
+                if indexPath.row < intervalBellsArray.count {
                     returnValue = true
                 }
             return returnValue
@@ -2284,6 +2298,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Delete
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let defaults = UserDefaults.standard
+        var meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
         //
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             //
@@ -2291,47 +2307,17 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             case presetsTableView:
                 //
-                let defaults = UserDefaults.standard
-                //
-                var presetsArray = defaults.object(forKey: "meditationTimerTitles") as! [String]
-                presetsArray.remove(at: indexPath.row)
-                defaults.set(presetsArray, forKey: "meditationTimerTitles")
-                //
-
-                var durationArray = defaults.object(forKey: "meditationTimerDuration") as! [Int]
-                var startingBellsArray = defaults.object(forKey: "meditationTimerStartingBells") as! [Int]
-                var intervalBellsArray = defaults.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-                var intervalBellsTimesArray = defaults.object(forKey: "meditationTimerIntervalTimes") as! [[Int]]
-                var endingBellsArray = defaults.object(forKey: "meditationTimerEndingBells") as! [Int]
-                var selectedBackgroundSoundsArray = defaults.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
-                //
-                durationArray.remove(at: indexPath.row)
-                defaults.set(durationArray, forKey: "meditationTimerDuration")
-                //
-                startingBellsArray.remove(at: indexPath.row)
-                defaults.set(startingBellsArray, forKey: "meditationTimerStartingBells")
-                //
-                intervalBellsArray.remove(at: indexPath.row)
-                defaults.set(intervalBellsArray, forKey: "meditationTimerIntervalBells")
-                //
-                intervalBellsTimesArray.remove(at: indexPath.row)
-                defaults.set(intervalBellsTimesArray, forKey: "meditationTimerIntervalTimes")
-                //
-                endingBellsArray.remove(at: indexPath.row)
-                defaults.set(endingBellsArray, forKey: "meditationTimerEndingBells")
-                //
-                selectedBackgroundSoundsArray.remove(at: indexPath.row)
-                defaults.set(selectedBackgroundSoundsArray, forKey: "meditationTimerBackgroundSounds")
-                //
-                defaults.synchronize()
+                // Remove session
+                meditationArray.remove(at: indexPath.row)
+                defaults.set(meditationArray, forKey: "meditationTimer")
                 //
                 UIView.animate(withDuration: 0.2, animations: {
                     self.presetsTableView.reloadData()
                 })
                 
                 //
-                if presetsArray.count != 0 {
-                    if selectedPreset == presetsArray.count {
+                if meditationArray.count != 0 {
+                    if selectedPreset == meditationArray.count {
                         selectedPreset = selectedPreset - 1
                     }
                 } else {
@@ -2340,10 +2326,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 updateRows()
                 // If no more meditations
-                if presetsArray.count == 0 {
+                if meditationArray.count == 0 {
                     //
-                    //
-                    
                     if seperatorLine.alpha != 0 {
                     UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     // Initial Positions and States
@@ -2368,16 +2352,10 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
             case tableViewIntervalBells:
                 let defaults = UserDefaults.standard
-                var intervalBellsArray = defaults.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-                var intervalBellsTimesArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalTimes") as! [[Int]]
-                //
-                intervalBellsArray[selectedPreset].remove(at: indexPath.row)
-                intervalBellsTimesArray[selectedPreset].remove(at: indexPath.row)
-                //
-                defaults.set(intervalBellsArray, forKey: "meditationTimerIntervalBells")
-                defaults.set(intervalBellsTimesArray, forKey: "meditationTimerIntervalTimes")
-                //
-                defaults.synchronize()
+                // Remove Bell
+                // [2] = bells, indexPath.row + 1 because array contains starting bell as well in position 0, therefore interval bells begin at 1 not 0
+                meditationArray[selectedPreset][2].remove(at: indexPath.row + 1)
+                defaults.set(meditationArray, forKey: "meditationTimer")
                 //
                 UIView.animate(withDuration: 0.2, animations: {
                     self.tableViewIntervalBells.reloadData()
@@ -2503,34 +2481,42 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Convert to hours, minutes, seconds func
     func convertToHMS(time: Int, index: Int) -> [Int] {
+        let defaults = UserDefaults.standard
+        let meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
         //
         var hmsArray: [Int] = []
         //
         switch time {
         case 0:
             //
-            let timeInSeconds = UserDefaults.standard.object(forKey: "meditationTimerDuration") as! [Int]
+            // Time in seconds (duration)
+            // [1] = duration array
+            var timeInSeconds = meditationArray[selectedPreset][1][0][0] as! Int
             //
-            let hours = Int(timeInSeconds[selectedPreset] / 3600)
+            let hours = Int(timeInSeconds / 3600)
             hmsArray.append(hours)
             //
-            let minutes = Int((timeInSeconds[selectedPreset] % 3600) / 60)
+            let minutes = Int((timeInSeconds % 3600) / 60)
             hmsArray.append(minutes)
             //
-            let seconds = Int(timeInSeconds[selectedPreset] % 60)
+            let seconds = Int(timeInSeconds % 60)
             hmsArray.append(seconds)
         //
         case 1:
-            //
-            let timeInSeconds = UserDefaults.standard.object(forKey: "meditationTimerIntervalTimes") as! [[Int]]
-            //
-            let hours = Int(timeInSeconds[selectedPreset][index] / 3600)
+            // Interval Bells
+            // [2] = bells array
+            var intervalBellsArray = meditationArray[selectedPreset][2] as! [[Int]]
+            // Remove starting and ending bell
+            intervalBellsArray.removeFirst()
+            intervalBellsArray.removeLast()
+            // [1] = time
+            let hours = Int(intervalBellsArray[index][1] / 3600)
             hmsArray.append(hours)
             //
-            let minutes = Int((timeInSeconds[selectedPreset][index]  % 3600) / 60)
+            let minutes = Int((intervalBellsArray[index][1]  % 3600) / 60)
             hmsArray.append(minutes)
             //
-            let seconds = Int(timeInSeconds[selectedPreset][index]  % 60)
+            let seconds = Int(intervalBellsArray[index][1]  % 60)
             hmsArray.append(seconds)
         //
         default: break
@@ -2544,11 +2530,10 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
 // Begin Action -----------------------------------------------------------------------------------------------
 //
     @IBAction func beginButtonAction(_ sender: Any) {
-        // Register Defaults
         let defaults = UserDefaults.standard
-        let durationArray = defaults.object(forKey: "meditationTimerDuration") as! [Int]
+        let meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
         //
-        if durationArray[selectedPreset] != 0 {
+        if meditationArray[selectedPreset][1][0].count != 0 && meditationArray[selectedPreset][1][0][0] as! Int != 0 {
             self.performSegue(withIdentifier: "meditationTimerSegue", sender: self)
             // Pop
             let delayInSeconds = 1.0
