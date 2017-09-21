@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import UserNotifications
+import CoreGraphics
 
 
 //
@@ -347,21 +348,20 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         super.viewDidAppear(animated)
         //
         // Home Screen
-        if view.window != nil {
         if isInitialAppOpen == true {
             let homeScreen = UserDefaults.standard.integer(forKey: "homeScreen")
             if homeScreen == 2 {
-                performSegue(withIdentifier: "openMenu", sender: self)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                    self.performSegue(withIdentifier: "openMenu", sender: self)
+                })
             }
             isInitialAppOpen = false
-        }
         }
         //
         // Automatic Selection
         if automaticSelectionIsHappening == true {
             var buttonArray = [Warmup, Workout, Cardio, Stretching, Yoga, Meditation]
             //
-            let test = automaticSelectionArray[automaticSelectionProgress]
             let buttonToSelect = buttonArray[automaticSelectionArray[automaticSelectionProgress]]
             //
             let flashView = UIView(frame: (buttonToSelect?.bounds)!)
