@@ -24,7 +24,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     
     // Sets and Reps Choice
-    var restTimeView = UIView()
+    var actionSheetView = UIView()
     var restTimePicker = UIPickerView()
     var okButton = UIButton()
     //
@@ -36,6 +36,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     //
     let restTimesArray: [Int] = [1, 5, 10, 15, 20, 30, 45, 60, 90, 120]
+    
+    // Home screen Array
+    var homeScreenArray: [String] = ["home", "schedule", "menu"]
+    var homeScreenPicker = UIPickerView()
+    // Use actionSheetView and okButton from above for home screen action sheet
     
     
     
@@ -84,11 +89,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         view.backgroundColor = colour1
 
         //
-        // Sets Reps Selection
+        // Sets Reps Selection (Action Sheet)
         // view
-        restTimeView.backgroundColor = colour2
-        restTimeView.layer.cornerRadius = 15
-        restTimeView.layer.masksToBounds = true
+        actionSheetView.backgroundColor = colour2
+        actionSheetView.layer.cornerRadius = 15
+        actionSheetView.layer.masksToBounds = true
         // picker
         restTimePicker.backgroundColor = colour2
         restTimePicker.delegate = self
@@ -99,31 +104,33 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
         okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
+        actionSheetView.addSubview(okButton)
         // sets
         secondIndicatorLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
         secondIndicatorLabel.textColor = colour1
         secondIndicatorLabel.text = "s"
         //
-        restTimeView.addSubview(restTimePicker)
-        restTimeView.addSubview(okButton)
-        restTimeView.addSubview(secondIndicatorLabel)
-        restTimeView.bringSubview(toFront: secondIndicatorLabel)
-        //
         // Background View
         backgroundViewExpanded.backgroundColor = .black
         backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
         //
+        //
+        // Home Screen Action Sheet
+        // picker
+        homeScreenPicker.backgroundColor = colour2
+        homeScreenPicker.delegate = self
+        homeScreenPicker.dataSource = self
     }
     // Add movement table background (dismiss table)
     func backgroundViewExpandedAction(_ sender: Any) {
         //
         UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-            self.restTimeView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
+            self.actionSheetView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
 
             //
             self.backgroundViewExpanded.alpha = 0
         }, completion: { finished in
-            self.restTimeView.removeFromSuperview()
+            self.actionSheetView.removeFromSuperview()
             //
             self.backgroundViewExpanded.removeFromSuperview()
         })
@@ -132,20 +139,30 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     // Ok button action
     func okButtonAction(_ sender: Any) {
         let defaults = UserDefaults.standard
-        //
-        var restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
-        //
-        restTimes[selectedRow] = restTimesArray[restTimePicker.selectedRow(inComponent: 0)]
-        defaults.set(restTimes, forKey: "restTimes")
-        //
-        defaults.synchronize()
-        //
+        // Rest time
+        if actionSheetView.subviews.contains(restTimePicker) {
+            var restTimes = defaults.object(forKey: "restTimes") as! [Int]
+            //
+            restTimes[selectedRow] = restTimesArray[restTimePicker.selectedRow(inComponent: 0)]
+            defaults.set(restTimes, forKey: "restTimes")
+            //
+        // Home Screen
+        } else if actionSheetView.subviews.contains(homeScreenPicker) {
+            var homeScreen = defaults.integer(forKey: "homeScreen")
+            //
+            homeScreen = homeScreenPicker.selectedRow(inComponent: 0)
+            //
+            defaults.set(homeScreen, forKey: "homeScreen")
+        }
+            
+            
+            
         UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-            self.restTimeView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
+            self.actionSheetView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
             //
             self.backgroundViewExpanded.alpha = 0
         }, completion: { finished in
-            self.restTimeView.removeFromSuperview()
+            self.actionSheetView.removeFromSuperview()
             //
             self.backgroundViewExpanded.removeFromSuperview()
         })
@@ -323,7 +340,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             // Retreive Presentation Style
             switch indexPath.section {
             case 1:
-                cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "homeScreen")!, comment: "")
+                let homeScreen = UserDefaults.standard.integer(forKey: "homeScreen")
+                cell.textLabel?.text = NSLocalizedString(homeScreenArray[homeScreen], comment: "")
             case 4:
                 cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "defaultImage")!, comment: "")
             case 5:
@@ -381,18 +399,48 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
         // Home Screen
         case 1:
-            // home --> schedule
-            if cell?.textLabel?.text == NSLocalizedString("home", comment: "") {
-                cell?.textLabel?.text = NSLocalizedString("schedule", comment: "")
-                UserDefaults.standard.set("schedule", forKey: "homeScreen")
-            // schedule --> home
-            } else if cell?.textLabel?.text == NSLocalizedString("schedule", comment: "") {
-                cell?.textLabel?.text = NSLocalizedString("home", comment: "")
-                UserDefaults.standard.set("home", forKey: "homeScreen")
-            }
-            tableView.deselectRow(at: indexPath, animated: true)
             //
-            UserDefaults.standard.synchronize()
+            if actionSheetView.subviews.contains(restTimePicker) {
+                let i = actionSheetView.subviews.index(of: restTimePicker)
+                actionSheetView.subviews[i!].removeFromSuperview()
+                let j = actionSheetView.subviews.index(of: secondIndicatorLabel)
+                actionSheetView.subviews[j!].removeFromSuperview()
+            }
+            actionSheetView.addSubview(homeScreenPicker)
+            
+            //
+            let homeScreen = UserDefaults.standard.integer(forKey: "homeScreen")
+            // View
+            let homeWidth = UIScreen.main.bounds.width - 20
+            let homeHeight = CGFloat(147 + 49)
+            actionSheetView.frame = CGRect(x: 10, y: view.frame.maxY, width: homeWidth, height: homeHeight)
+            UIApplication.shared.keyWindow?.insertSubview(actionSheetView, aboveSubview: tableView)
+            // selected row
+            homeScreenPicker.selectRow(homeScreen, inComponent: 0, animated: false)
+            //
+            // picker
+            homeScreenPicker.frame = CGRect(x: 0, y: 0, width: actionSheetView.frame.size.width, height: 147)
+            // ok
+            okButton.frame = CGRect(x: 0, y: 147, width: actionSheetView.frame.size.width, height: 49)
+            //
+            backgroundViewExpanded.alpha = 0
+            UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: actionSheetView)
+            backgroundViewExpanded.frame = UIScreen.main.bounds
+            //
+            // Position
+            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                //
+                self.actionSheetView.frame = CGRect(x: 10, y: self.view.frame.maxY - homeHeight - 10, width: homeWidth, height: homeHeight)
+                
+                // picker
+                self.homeScreenPicker.frame = CGRect(x: 0, y: 0, width: self.actionSheetView.frame.size.width, height: 147)
+                // ok
+                self.okButton.frame = CGRect(x: 0, y: 147, width: self.actionSheetView.frame.size.width, height: 49)
+                //
+                self.backgroundViewExpanded.alpha = 0.5
+                
+            }, completion: nil)
+            tableView.deselectRow(at: indexPath, animated: true)
             
             
             
@@ -410,40 +458,48 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Rest Time
         case 3:
             //
+            if actionSheetView.subviews.contains(homeScreenPicker) {
+                let i = actionSheetView.subviews.index(of: homeScreenPicker)
+                actionSheetView.subviews[i!].removeFromSuperview()
+            }
+            actionSheetView.addSubview(restTimePicker)
+            actionSheetView.addSubview(secondIndicatorLabel)
+            actionSheetView.bringSubview(toFront: secondIndicatorLabel)
+            //
             selectedRow = indexPath.row
             //
             let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
             // View
             let restWidth = UIScreen.main.bounds.width - 20
             let restHeight = CGFloat(147 + 49)
-            restTimeView.frame = CGRect(x: 10, y: view.frame.maxY, width: restWidth, height: restHeight)
-            UIApplication.shared.keyWindow?.insertSubview(restTimeView, aboveSubview: tableView)
+            actionSheetView.frame = CGRect(x: 10, y: view.frame.maxY, width: restWidth, height: restHeight)
+            UIApplication.shared.keyWindow?.insertSubview(actionSheetView, aboveSubview: tableView)
             // selected row
             let rowIndex = restTimesArray.index(of: restTimes[selectedRow])
             restTimePicker.selectRow(rowIndex!, inComponent: 0, animated: false)
             //
             // picker
-            restTimePicker.frame = CGRect(x: 0, y: 0, width: restTimeView.frame.size.width, height: 147)
+            restTimePicker.frame = CGRect(x: 0, y: 0, width: actionSheetView.frame.size.width, height: 147)
             // ok
-            okButton.frame = CGRect(x: 0, y: 147, width: restTimeView.frame.size.width, height: 49)
+            okButton.frame = CGRect(x: 0, y: 147, width: actionSheetView.frame.size.width, height: 49)
             //
-            self.secondIndicatorLabel.frame = CGRect(x: (restTimeView.frame.size.width / 2 + 30), y: (self.restTimePicker.frame.size.height / 2) - 15, width: 50, height: 30)
+            self.secondIndicatorLabel.frame = CGRect(x: (actionSheetView.frame.size.width / 2 + 30), y: (self.restTimePicker.frame.size.height / 2) - 15, width: 50, height: 30)
             //
             backgroundViewExpanded.alpha = 0
-            UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: restTimeView)
+            UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: actionSheetView)
             backgroundViewExpanded.frame = UIScreen.main.bounds
             //
             // Position
             UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
-                self.restTimeView.frame = CGRect(x: 10, y: self.view.frame.maxY - restHeight - 10, width: restWidth, height: restHeight)
+                self.actionSheetView.frame = CGRect(x: 10, y: self.view.frame.maxY - restHeight - 10, width: restWidth, height: restHeight)
                 
                 // picker
-                self.restTimePicker.frame = CGRect(x: 0, y: 0, width: self.restTimeView.frame.size.width, height: 147)
+                self.restTimePicker.frame = CGRect(x: 0, y: 0, width: self.actionSheetView.frame.size.width, height: 147)
                 // ok
-                self.okButton.frame = CGRect(x: 0, y: 147, width: self.restTimeView.frame.size.width, height: 49)
+                self.okButton.frame = CGRect(x: 0, y: 147, width: self.actionSheetView.frame.size.width, height: 49)
                 // Sets Indicator Label
-                self.secondIndicatorLabel.frame = CGRect(x: (self.restTimeView.frame.size.width / 2 + 30), y: (self.restTimePicker.frame.size.height / 2) - 15, width: 50, height: 30)
+                self.secondIndicatorLabel.frame = CGRect(x: (self.actionSheetView.frame.size.width / 2 + 30), y: (self.restTimePicker.frame.size.height / 2) - 15, width: 50, height: 30)
                 //
                 //
                 self.backgroundViewExpanded.alpha = 0.5
@@ -616,23 +672,25 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
 //
     // Number of components
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        if pickerView == restTimePicker {
-            return 1
-        }
-        return 0
+        return 1
     }
     
     // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == restTimePicker {
+        switch pickerView {
+        case restTimePicker:
             return restTimesArray.count
+        case homeScreenPicker:
+            return homeScreenArray.count
+        default:
+            return 0
         }
-        return 0
     }
     
     // View for row
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        if pickerView == restTimePicker {
+        switch pickerView {
+        case restTimePicker:
             //
             let secondsLabel = UILabel()
             secondsLabel.text = String(restTimesArray[row])
@@ -641,23 +699,29 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             secondsLabel.textAlignment = .center
             return secondsLabel
+        //
+        case homeScreenPicker:
             //
+            let screenLabel = UILabel()
+            screenLabel.text = NSLocalizedString(homeScreenArray[row], comment: "")
+            screenLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+            screenLabel.textColor = colour1
+            //
+            screenLabel.textAlignment = .center
+            return screenLabel
+        //
+        default:
+            return UIView()
         }
-        return UIView()
     }
     
     // Row height
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        if pickerView == restTimePicker {
-            return 30
-        }
-        return 0
+        return 30
     }
     
     // Did select row
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == restTimePicker {
-        }
         //
     }
     

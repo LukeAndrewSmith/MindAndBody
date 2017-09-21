@@ -341,10 +341,21 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         }
         
     }
-    
+    //
     //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        //
+        // Home Screen
+        if view.window != nil {
+        if isInitialAppOpen == true {
+            let homeScreen = UserDefaults.standard.integer(forKey: "homeScreen")
+            if homeScreen == 2 {
+                performSegue(withIdentifier: "openMenu", sender: self)
+            }
+            isInitialAppOpen = false
+        }
+        }
         //
         // Automatic Selection
         if automaticSelectionIsHappening == true {

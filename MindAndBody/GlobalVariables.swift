@@ -72,6 +72,8 @@ static let combinedHeight = 44 + UIApplication.shared.statusBarFrame.height
 //
 var tabBarIndex = Int()
 var new = Bool()
+// Check if app opening for the first time (in a session of the app)
+var isInitialAppOpen = true
 
 //
 // Automatic choice from schedule variables ---------------------------------------------------------------------------------------------------------------

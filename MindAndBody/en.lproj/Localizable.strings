@@ -1468,6 +1468,7 @@
 
         //
         "homeScreen" = "Home Screen";
+        "menu" = "Menu";
 
         // Colour Alert //
         "colourTitle" = "App Colour Change";
@@ -1629,7 +1630,7 @@
         "mindBody5" = "Home:\nAll sessions are accessed from Home, and custom sessions can be made here.";
         "mindBody6" = "Tracking:\nWhat you've done as a percentage of what you planned is viewed here.";
         "mindBody7" = "Lessons:\nUseful lessons regarding mind & body are found here. I advise to read them at least once";
-        "mindBody8" = "Settings:\nPersonalise the app, changing the background image, deciding if you want the schedule to be your home screen and more...";
+        "mindBody8" = "Settings:\nPersonalise the app, changing the background image, deciding if you want the schedule or the menu to be your home screen and more...";
         "mindBody9" = "Recap:\nFill in your profile, get a schedule, and follow it!\n(Feel free to wander round the app before doing this to see if you actually like it)";
 
         // Schedule

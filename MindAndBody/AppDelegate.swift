@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Background image index
         UserDefaults.standard.register(defaults: ["backgroundImage" : 2])
         // Home Screen
-        UserDefaults.standard.register(defaults: ["homeScreen" : "home"])
+        UserDefaults.standard.register(defaults: ["homeScreen" : 0])
         // Default Image
         UserDefaults.standard.register(defaults: ["defaultImage" : "demonstration"])
         // Weight
@@ -78,28 +78,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //
         // Home Screen
-        let homeScreen = UserDefaults.standard.string(forKey: "homeScreen")
+        let homeScreen = UserDefaults.standard.integer(forKey: "homeScreen")
         //
-        if homeScreen == "home" {
+        switch homeScreen {
+        case 0,2:
             let mindBody = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view0") as! MindBodyNavigation
             self.window = UIWindow(frame: UIScreen.main.bounds)
             self.window?.rootViewController = mindBody
             self.window?.makeKeyAndVisible()
+//            if homeScreen == 2 {
+//                let mindBodyScreen = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mindBody") as! MindBody
+//                mindBodyScreen.performSegue(withIdentifier: "openMenu", sender: self)
+//            }
             //
             tabBarIndex = 0
-        } else {
+        case 1:
             let schedule = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view1") as! ScheduleNavigation
             self.window = UIWindow(frame: UIScreen.main.bounds)
             self.window?.rootViewController = schedule
             self.window?.makeKeyAndVisible()
             //
             tabBarIndex = 1
+        default:
+            break
         }
         
+        //
         //
         return true
     }
     
+    // MARK: didFinishLaunching Helpers
     // First monday in month
     func firstMondayInCurrentWeek() -> String? {
         //
