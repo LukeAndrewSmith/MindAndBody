@@ -70,17 +70,17 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Big Array Test
     var meditationArrayRegister: [[[[Any]]]] = []
-    
+    //
     var emptySession: [[[Any]]] =
         [
             // Name - String
             [[]],
-            // Duration
+            // Duration - Int
             [[]],
             // Bells, starting and ending bells go at first and last, interval bells in the middle
-            // [Bell, Time]
+            // [Bell, Time] - [Int]
             [[-1,0],[-1,0]],
-            // Background Sound
+            // Background Sound - Int
             [[-1]]
         ]
     
@@ -240,15 +240,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Register Defaults
         let defaults = UserDefaults.standard
         defaults.register(defaults: ["meditationTimer" : meditationArrayRegister])
-//        defaults.register(defaults: ["meditationTimerTitles" : presetsArray])
-//        defaults.register(defaults: ["meditationTimerDuration" : durationArray])
-//        defaults.register(defaults: ["meditationTimerStartingBells" : startingBellsArray])
-//        defaults.register(defaults: ["meditationTimerIntervalBells" : intervalBellsArray])
-//        defaults.register(defaults: ["meditationTimerIntervalTimes" : intervalBellsTimesArray])
-//        defaults.register(defaults: ["meditationTimerEndingBells" : endingBellsArray])
-//        defaults.register(defaults: ["meditationTimerBackgroundSounds" : selectedBackgroundSoundsArray])
-        
-        
         
         // Navigation Bar
         //
@@ -256,7 +247,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         navigationBar.title = NSLocalizedString("meditationTimer", comment: "")
         // Appearance
         self.navigationController?.navigationBar.tintColor = colour1
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: colour1, NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 23)!]
         self.navigationController?.navigationBar.barTintColor = colour2
         
         // BackgroundBlur/Vibrancy

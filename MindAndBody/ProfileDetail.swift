@@ -32,14 +32,14 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var selectedSection = Int()
     
     // Arrays
-    var titleArray: [String] = ["goals", "me", "time", "preferences"]
+    var titleArray: [String] = ["me", "goals", "time", "preferences"]
     //
     var questionArray: [[String]] =
         [
-            // Goals
-            ["This is a question about goals", "This also is a question", "Hmm, tricky question", "Obvious question"],
             // Me
             ["This is a question about me", "This also is a question", "Hmm, tricky question", "Obvious question"],
+            // Goals
+            ["This is a question about goals", "This also is a question", "Hmm, tricky question", "Obvious question"],
             // Time
             ["This is a question about time", "This also is a question", "Hmm, tricky question", "Obvious question"],
             // Preferences
@@ -48,7 +48,7 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // 
     var answerArray: [[[String]]] =
         [
-            // Goals
+            // Me
             [
                 // Q1
                 ["Possible Answer", "Also a possible answer", "Could be", "Definitely not"],
@@ -59,7 +59,7 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 // Q4
                 ["Possible Answer4", "Also a possible answer", "Could be", "Definitely not"]
             ],
-            // Me
+            // Goals
             [
                 // Q1
                 ["Possible Answer", "Also a possible answer", "Could be", "Definitely not"],
@@ -96,9 +96,9 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     var selectedAnswerArray: [[Int]] =
         [
-            // Goals
-            [-1, -1, -1, -1],
             // Me
+            [-1, -1, -1, -1],
+            // Goals
             [-1, -1, -1, -1],
             // Time
             [-1, -1, -1, -1],

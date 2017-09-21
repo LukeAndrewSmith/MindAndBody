@@ -28,7 +28,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //
     // Arrays
-    let sectionArray: [String] = ["goals", "me", "time", "preferences"]
+    let sectionArray: [String] = ["me", "goals", "time", "preferences"]
     
     // selected section
     var selectedSection = Int()
