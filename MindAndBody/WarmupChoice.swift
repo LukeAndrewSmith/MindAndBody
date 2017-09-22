@@ -195,7 +195,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     // Indicate to next screen which button was pressed
     var warmupType = Int()
     // Full Body
-    @IBAction func fullBody(_ sender: Any) {
+    @IBAction func fullBody(_ sender: UIButton) {
         selectedSession[1] = 0
         selectedSession[2] = -1
         //

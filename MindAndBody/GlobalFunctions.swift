@@ -887,8 +887,13 @@ extension UIViewController {
             // Colour
             walkthroughLabel.textColor = textColor
             walkthroughLabel.backgroundColor = backgroundColor
-            walkthroughHighlight.backgroundColor = highlightColor.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = highlightColor.cgColor
+            if highlightColor != .clear {
+                walkthroughHighlight.backgroundColor = highlightColor.withAlphaComponent(0.5)
+                walkthroughHighlight.layer.borderColor = highlightColor.cgColor
+            } else {
+                walkthroughHighlight.backgroundColor = nil
+                walkthroughHighlight.layer.borderColor = nil
+            }
             // Highlight
             walkthroughHighlight.frame.size = highlightSize
             walkthroughHighlight.center = highlightCenter
@@ -912,11 +917,15 @@ extension UIViewController {
             // Flash
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                walkthroughHighlight.backgroundColor = highlightColor.withAlphaComponent(1)
+                if highlightColor != .clear {
+                    walkthroughHighlight.backgroundColor = highlightColor.withAlphaComponent(1)
+                }
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    walkthroughHighlight.backgroundColor = highlightColor.withAlphaComponent(0.5)
+                    if highlightColor != .clear {
+                        walkthroughHighlight.backgroundColor = highlightColor.withAlphaComponent(0.5)
+                    }
                 }, completion: nil)
             })
             
@@ -926,3 +935,47 @@ extension UIViewController {
 
 //
 }
+
+
+
+//
+// MARK: Button Extension
+// UNUSED BUT MIGHT BE USED ONE DAY
+extension UIButton {
+    // Pulsate
+    func pulsate() {
+        
+        let pulse = CASpringAnimation(keyPath: "transform.scale")
+        pulse.duration = 0.6
+        pulse.fromValue = 0.95
+        pulse.toValue = 1.0
+        pulse.autoreverses = true
+        pulse.repeatCount = 2
+        pulse.initialVelocity = 0.5
+        pulse.damping = 1.0
+        
+        layer.add(pulse, forKey: "pulse")
+    }
+    
+    func flash(color: UIColor) {
+        
+        UIView.animate(withDuration: 0.05, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.backgroundColor = color.withAlphaComponent(0.5)
+        }, completion: { finished in
+            UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.backgroundColor = color.withAlphaComponent(0)
+            }, completion: { finished in
+                self.backgroundColor = nil
+            })
+        })
+        
+    }
+}
+
+
+
+
+
+
+
+

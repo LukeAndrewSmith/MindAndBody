@@ -913,11 +913,13 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 self.handleSwipes(extraSwipe: leftSwipeSimulate)
             })
             // Animate swipe demonstration
+            nextButton.isEnabled = false
             UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 leftSwipe.center.x = self.view.bounds.width * (1/8)
                 //
             }, completion: { finished in
+                self.nextButton.isEnabled = true
                 //
                 leftSwipe.removeFromSuperview()
                 
@@ -958,6 +960,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             //
             // Swipe demonstration
+            nextButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
                 //
                 let rightSwipe = UIView()
@@ -980,6 +983,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                     rightSwipe.center.x = self.view.bounds.width * (7/8)
                     //
                 }, completion: { finished in
+                    self.nextButton.isEnabled = true
                     //
                     rightSwipe.removeFromSuperview()
                     
@@ -1005,6 +1009,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             // Explanation open and Next Movement
         // Case 7 not 6 as + 1 to walkthroughprogress twice in case 5 for label reasons (need an empty label)
         case 7:
+            backgroundViewExplanation.isEnabled = false
             expandExplanation()
             //
             highlightSize = CGSize(width: 45, height: 45)
@@ -1022,7 +1027,12 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             self.walkthroughProgress = self.walkthroughProgress + 1
             //
             // Next Movement
+            nextButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2, execute: {
+                //
+                self.nextButton.isEnabled = true
+                self.backgroundViewExplanation.isEnabled = true
+                //
                 self.retractExplanation(self)
                 
                 //
@@ -1042,13 +1052,14 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             })
             
             
-            // Progress
+        // Progress
         // Case 9 not 8 as + 1 to walkthroughprogress twice in case 7 for label reasons (need an empty label)
         case 9:
             //
             walkthroughLabel.alpha = 0
             //
             // Swipe demonstration
+            nextButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
                 //
                 let upSwipe = UIView()
@@ -1069,6 +1080,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                     upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
                     //
                 }, completion: { finished in
+                    self.nextButton.isEnabled = true
                     //
                     upSwipe.removeFromSuperview()
                     //

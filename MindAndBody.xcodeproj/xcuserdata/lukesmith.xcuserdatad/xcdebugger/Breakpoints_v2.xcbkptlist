@@ -474,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "527172148.942526"
+            timestampString = "527776406.06113"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "890"
-            endingLineNumber = "890"
+            startingLineNumber = "891"
+            endingLineNumber = "891"
             landmarkName = "nextWalkthroughView(walkthroughView:walkthroughLabel:walkthroughHighlight:walkthroughTexts:walkthroughLabelFrame:highlightSize:highlightCenter:highlightCornerRadius:backgroundColor:textColor:highlightColor:animationTime:walkthroughProgress:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -490,7 +490,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/MindBody.swift"
-            timestampString = "527712187.906332"
+            timestampString = "527769975.848983"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "711"

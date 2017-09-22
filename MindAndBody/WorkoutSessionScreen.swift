@@ -1270,11 +1270,13 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 self.handleSwipes(extraSwipe: leftSwipeSimulate)
             })
             // Animate swipe demonstration
+            nextButton.isEnabled = false
             UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 leftSwipe.center.x = self.view.bounds.width * (1/8)
                 //
             }, completion: { finished in
+                self.nextButton.isEnabled = true
                 //
                 leftSwipe.removeFromSuperview()
                 
@@ -1300,7 +1302,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         case 5:
             //
             highlightSize = CGSize(width: 30, height: 15)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (3/4))) - (15 / 2))
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (13/16))) - (15 / 2))
             highlightCornerRadius = 0
             //
             labelFrame = 0
@@ -1315,6 +1317,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             //
             // Swipe demonstration
+            nextButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
                 //
                 let rightSwipe = UIView()
@@ -1337,6 +1340,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     rightSwipe.center.x = self.view.bounds.width * (7/8)
                     //
                 }, completion: { finished in
+                    self.nextButton.isEnabled = true
                     //
                     rightSwipe.removeFromSuperview()
                     
@@ -1362,6 +1366,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             // Explanation open and Next Movement
         // Case 7 not 6 as + 1 to walkthroughprogress twice in case 5 for label reasons (need an empty label)
         case 7:
+            backgroundViewExplanation.isEnabled = false
             expandExplanation()
             //
             highlightSize = CGSize(width: 45, height: 45)
@@ -1379,7 +1384,12 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             self.walkthroughProgress = self.walkthroughProgress + 1
             //
             // Next Movement
+            nextButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2, execute: {
+                //
+                self.nextButton.isEnabled = true
+                self.backgroundViewExplanation.isEnabled = true
+                //
                 self.retractExplanation(self)
                 
                 //
@@ -1406,6 +1416,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             walkthroughLabel.alpha = 0
             //
             // Swipe demonstration
+            nextButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
                 //
                 let upSwipe = UIView()
@@ -1426,6 +1437,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
                     //
                 }, completion: { finished in
+                    self.nextButton.isEnabled = true
                     //
                     upSwipe.removeFromSuperview()
                     //

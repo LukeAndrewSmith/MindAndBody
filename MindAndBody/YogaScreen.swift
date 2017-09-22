@@ -976,6 +976,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
         // Explanation open and Next Movement
         case 4:
+            backgroundViewExplanation.isEnabled = false
             expandExplanation()
             //
             highlightSize = CGSize(width: 45, height: 45)
@@ -993,7 +994,12 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             self.walkthroughProgress = self.walkthroughProgress + 1
             //
             // Next Movement
+            nextButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2, execute: {
+                //
+                self.nextButton.isEnabled = true
+                self.backgroundViewExplanation.isEnabled = true
+                //
                 self.retractExplanation(self)
                 
                 //
@@ -1013,13 +1019,14 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             })
             
             
-            // Progress
+        // Progress
         // Case 6 not 5 as + 1 to walkthroughprogress twice in case 4 for label reasons (need an empty label)
         case 6:
             //
             walkthroughLabel.alpha = 0
             //
             // Swipe demonstration
+            nextButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
                 //
                 let upSwipe = UIView()
@@ -1040,6 +1047,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
                     //
                 }, completion: { finished in
+                    self.nextButton.isEnabled = true
                     //
                     upSwipe.removeFromSuperview()
                     //

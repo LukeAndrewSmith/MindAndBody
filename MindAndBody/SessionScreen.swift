@@ -1149,11 +1149,13 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 self.handleSwipes(extraSwipe: leftSwipeSimulate)
             })
             // Animate swipe demonstration
+            nextButton.isEnabled = false
             UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 leftSwipe.center.x = self.view.bounds.width * (1/8)
                 //
             }, completion: { finished in
+                self.nextButton.isEnabled = true
                 //
                 leftSwipe.removeFromSuperview()
                 
@@ -1194,6 +1196,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             //
             // Swipe demonstration
+            nextButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
                 //
                 let rightSwipe = UIView()
@@ -1216,6 +1219,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     rightSwipe.center.x = self.view.bounds.width * (7/8)
                     //
                 }, completion: { finished in
+                    self.nextButton.isEnabled = true
                     //
                     rightSwipe.removeFromSuperview()
                     
@@ -1241,6 +1245,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Explanation open and Next Movement 
         // Case 8 not 7 as + 1 to walkthroughprogress twice in case 6 for label reasons (need an empty label)
         case 8:
+            backgroundViewExplanation.isEnabled = false
             expandExplanation()
             //
             highlightSize = CGSize(width: 45, height: 45)
@@ -1258,7 +1263,12 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             self.walkthroughProgress = self.walkthroughProgress + 1
             //
             // Next Movement
+            nextButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2, execute: {
+                //
+                self.nextButton.isEnabled = true
+                self.backgroundViewExplanation.isEnabled = true
+                //
                 self.retractExplanation(self)
                 
                 //
@@ -1285,6 +1295,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             walkthroughLabel.alpha = 0
             //
             // Swipe demonstration
+            nextButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
                 //
                 let upSwipe = UIView()
@@ -1305,6 +1316,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
                 //
                 }, completion: { finished in
+                    self.nextButton.isEnabled = true
                     //
                     upSwipe.removeFromSuperview()
                     //
