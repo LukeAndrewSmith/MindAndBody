@@ -1435,14 +1435,17 @@
     //
     // Title //
     "profile" = "Profile";
-
+        "done" = "Done";
 
     //
     // Section Titles //
     "goals" = "Goals";
     "me" = "Me";
+    "groups" = "Group";
     "time" = "Time";
     "preferences" = "Preferences";
+    "numberSessions" = "Nº Sessions";
+
 
 
 

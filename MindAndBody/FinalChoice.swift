@@ -69,7 +69,9 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presetsButton.setTitle(NSLocalizedString("selectWarmup", comment: ""), for: .normal)
+        if selectedSession[2] == -1 {
+            presetsButton.setTitle(NSLocalizedString("selectWarmup", comment: ""), for: .normal)
+        }
         
 //        // Device Scale for @2x and @3x of Target Area Images
 //        switch UIScreen.main.scale {
@@ -96,6 +98,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString(sessionData.navigationTitles[selectedSession[0]][selectedSession[1]] as! String, comment: ""))
+        navigationController?.navigationBar.tintColor = colour1
         
         //
         presetsButton.backgroundColor = colour2
@@ -111,12 +114,75 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         //
         // Initial Element Positions
-        presetsConstraint.constant = 0
+        if selectedSession[2] == -1 {
+            presetsConstraint.constant = 0
+            //
+            tableConstraint1.constant = view.frame.size.height
+            tableConstraint.constant = -49
+            //
+            beginConstraint.constant = -49
         //
-        tableConstraint1.constant = view.frame.size.height
-        tableConstraint.constant = -49
-        //
-        beginConstraint.constant = -49
+        // Selected Automatically from schedule
+        } else {
+            //
+            // Perform relevant func
+            switch selectedSession[0] {
+            // Warmup
+            case 0:
+                session()
+            // Workout
+            case 1:
+                switch selectedSession[1] {
+                // Circuit Session
+                case 7,8,9,13,14,15:
+                    circuitSession()
+                // Normal Session
+                default:
+                    session()
+                }
+            // Cardio
+            case 2:
+                cardioSession()
+            // Stretching
+            case 3:
+                session()
+            // Yoga
+            case 4:
+                yogaSession()
+            default:
+                break
+            }
+            
+            // Cardio Type
+            if selectedSession[0] == 2 {
+                if (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][1][1]?[0] as! [Int]).contains(selectedSession[2]) {
+                    cardioType = 0
+                } else {
+                    cardioType = 1
+                }
+            }
+            
+            // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [sessionKey] = session, [0] titles, [0] title
+            presetsButton.setTitle("- " + NSLocalizedString(sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[0][0] as! String, comment: "") + " -", for: .normal)
+            
+            //
+            // Animate new elements into page
+            UIView.animate(withDuration: AnimationTimes.animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                //
+                self.movementsTableView.reloadData()
+                let indexPath2 = NSIndexPath(row: 0, section: 0)
+                self.movementsTableView.scrollToRow(at: indexPath2 as IndexPath, at: .top, animated: true)
+                //
+                self.tableConstraint1.constant = 73.75
+                self.tableConstraint.constant = 49.75
+                //
+                self.presetsConstraint.constant = self.view.frame.size.height - 73.25 - TopBarHeights.combinedHeight
+                //
+                self.beginConstraint.constant = 0
+//                self.view.layoutIfNeeded()
+            })
+
+        }
         
         
         //
@@ -166,7 +232,9 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         super.viewDidAppear(animated)
         //
         // Select
-        self.presetsButton.sendActions(for: .touchUpInside)
+        if selectedSession[2] == -1 {
+            self.presetsButton.sendActions(for: .touchUpInside)
+        }
         
         //
         // Automatic Selection

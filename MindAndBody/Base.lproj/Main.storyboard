@@ -143,6 +143,8 @@
                         <outlet property="backgroundImage" destination="fUs-PS-zGI" id="Krb-kf-x8e"/>
                         <outlet property="navigationBar" destination="xF1-Nx-yoQ" id="dBd-vq-1MD"/>
                         <outlet property="scheduleTable" destination="oPE-Kh-Caj" id="UFV-AU-XOl"/>
+                        <segue destination="bRc-pd-jNj" kind="show" identifier="scheduleSessionSegue" id="SOr-B2-NYZ"/>
+                        <segue destination="7el-a7-o9h" kind="show" identifier="scheduleMeditationSegue" id="BfV-4t-BLI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3dG-Jg-xiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -216,9 +218,55 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XR6-xc-CI0">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="74" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XR6-xc-CI0">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sliderCell" rowHeight="47" id="bTn-Co-Pxj" customClass="SliderCell" customModule="MindAndBody" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="47"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bTn-Co-Pxj" id="vJr-Xm-Ypy">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="46.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="abm-0H-qBs">
+                                                    <rect key="frame" x="30" y="8.5" width="315" height="31"/>
+                                                    <color key="minimumTrackTintColor" red="0.14901960780000001" green="0.65098039220000004" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="maximumTrackTintColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="thumbTintColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="sliderValueChangedWithSender:" destination="bTn-Co-Pxj" eventType="valueChanged" id="eRT-xy-eaX"/>
+                                                    </connections>
+                                                </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSy-En-W8j">
+                                                    <rect key="frame" x="15" y="13.5" width="17" height="20"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGv-8r-kgw">
+                                                    <rect key="frame" x="343" y="13.5" width="17" height="20"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="yGv-8r-kgw" secondAttribute="trailing" constant="15" id="9aU-DH-3tO"/>
+                                                <constraint firstItem="wSy-En-W8j" firstAttribute="leading" secondItem="vJr-Xm-Ypy" secondAttribute="leading" constant="15" id="B6Q-H6-E3j"/>
+                                                <constraint firstItem="abm-0H-qBs" firstAttribute="centerX" secondItem="vJr-Xm-Ypy" secondAttribute="centerX" id="K81-Up-TzW"/>
+                                                <constraint firstItem="yGv-8r-kgw" firstAttribute="centerY" secondItem="vJr-Xm-Ypy" secondAttribute="centerY" id="LBi-uD-M4q"/>
+                                                <constraint firstItem="abm-0H-qBs" firstAttribute="leading" secondItem="wSy-En-W8j" secondAttribute="trailing" id="O9n-FN-C3s"/>
+                                                <constraint firstItem="yGv-8r-kgw" firstAttribute="leading" secondItem="abm-0H-qBs" secondAttribute="trailing" id="PR4-QX-pa1"/>
+                                                <constraint firstItem="wSy-En-W8j" firstAttribute="centerY" secondItem="vJr-Xm-Ypy" secondAttribute="centerY" id="RHc-OV-LdH"/>
+                                                <constraint firstItem="abm-0H-qBs" firstAttribute="centerY" secondItem="vJr-Xm-Ypy" secondAttribute="centerY" id="d6R-j3-sPt"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="slider" destination="abm-0H-qBs" id="udv-zU-Oq1"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="rEy-tv-PZG" id="Fid-18-8Gn"/>
                                     <outlet property="delegate" destination="rEy-tv-PZG" id="kDQ-yH-G6B"/>
@@ -241,7 +289,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iLq-C7-mhX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-346" y="2947"/>
+            <point key="canvasLocation" x="-346.39999999999998" y="2946.4767616191907"/>
         </scene>
         <!--Schedule Creator-->
         <scene sceneID="GYk-Ow-3Jh">
@@ -884,7 +932,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1142" y="40"/>
+            <point key="canvasLocation" x="-1143.2" y="39.130434782608695"/>
         </scene>
         <!--Warmup Choice-->
         <scene sceneID="KwA-vW-ydj">
@@ -2217,13 +2265,13 @@
                                         <rect key="frame" x="8" y="114" width="172" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Focus" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iuG-f6-A75">
-                                                <rect key="frame" x="0.0" y="0.0" width="44" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="117" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Present" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ga-UH-hwY">
-                                                <rect key="frame" x="52" y="0.0" width="120" height="20.5"/>
+                                                <rect key="frame" x="125" y="0.0" width="47" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="15"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2557,7 +2605,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="012-1d-8yV">
-                                                    <rect key="frame" x="141.5" y="330" width="93.5" height="23"/>
+                                                    <rect key="frame" x="141.5" y="330.5" width="93.5" height="23"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -3030,7 +3078,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-jO-oQj">
-                                                    <rect key="frame" x="141.5" y="368.5" width="93.5" height="23"/>
+                                                    <rect key="frame" x="141.5" y="369" width="93.5" height="23"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -3252,7 +3300,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5O-yZ-uLf">
-                                                    <rect key="frame" x="141.5" y="359.5" width="93.5" height="23"/>
+                                                    <rect key="frame" x="141.5" y="360" width="93.5" height="23"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -3730,7 +3778,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tD2-Ad-c9U">
-                                                    <rect key="frame" x="107.5" y="110" width="160" height="86"/>
+                                                    <rect key="frame" x="108" y="110" width="160" height="86"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="72"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4245,8 +4293,9 @@
         <image name="Tricep" width="375" height="375"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Lwd-n2-ybY"/>
+        <segue reference="NiW-Wv-f4m"/>
+        <segue reference="Nyr-Bm-SSI"/>
         <segue reference="bsb-5O-GBj"/>
-        <segue reference="6f1-8P-Dfb"/>
+        <segue reference="SOr-B2-NYZ"/>
     </inferredMetricsTieBreakers>
 </document>

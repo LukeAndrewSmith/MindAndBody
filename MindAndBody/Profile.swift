@@ -28,7 +28,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //
     // Arrays
-    let sectionArray: [String] = ["me", "goals", "time", "preferences"]
+    let sectionArray: [String] = ["me", "goals", "numberSessions"]
     
     // selected section
     var selectedSection = Int()
@@ -119,8 +119,8 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
         switch indexPath.row {
-        case 4: return 49
-        default: return (view.bounds.height - 49) / 4
+        case 3: return 49
+        default: return (view.bounds.height - 49) / 3
         }
     }
         
@@ -138,7 +138,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
         
         switch indexPath.row {
-        case 4:
+        case 3:
             //
             cell.textLabel?.text = "Update Schedule"
             //
@@ -169,13 +169,13 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             centeredTextLabel.textAlignment = .center
             centeredTextLabel.sizeToFit()
             centeredTextLabel.textColor = colour1
-            centeredTextLabel.center = CGPoint(x: view.bounds.width/2, y: (view.bounds.height - 49)/8)
+            centeredTextLabel.center = CGPoint(x: view.bounds.width/2, y: (view.bounds.height - 49)/6)
             cell.addSubview(centeredTextLabel)
             //
             cell.accessoryType = .disclosureIndicator
             // Border
             let seperator = CALayer()
-            seperator.frame = CGRect(x: 0, y: (view.bounds.height - 49) / 4, width: view.frame.size.width, height: 1)
+            seperator.frame = CGRect(x: 0, y: (view.bounds.height - 49) / 3, width: view.frame.size.width, height: 1)
             seperator.backgroundColor = colour1.cgColor
             seperator.opacity = 0.5
             cell.layer.addSublayer(seperator)
@@ -189,7 +189,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         switch indexPath.row {
-        case 4:
+        case 3:
             
             
             performSegue(withIdentifier: "scheduleCreation", sender: self)
@@ -232,7 +232,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } else if (segue.identifier == "profileDetail") {
             // Remove back button text
             let backItem = UIBarButtonItem()
-            backItem.title = ""
+            backItem.title = NSLocalizedString("done", comment: "")
             navigationItem.backBarButtonItem = backItem
             
             //

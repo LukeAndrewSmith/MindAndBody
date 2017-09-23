@@ -50,7 +50,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Set TableView Background Colour
         //
         let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
-        backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        backView.backgroundColor = colour1
         //
         self.tableView.backgroundView = backView
         //
@@ -205,7 +205,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         header.textLabel?.text = header.textLabel?.text?.capitalized
         
         //
-        header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        header.contentView.backgroundColor = colour1
         
         // Border
         let border = CALayer()
@@ -222,7 +222,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     }
     
     
-// Rows
+    // Rows
     // Number of rows per section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
@@ -249,7 +249,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         case 0:
         //
             //
-            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            cell.backgroundColor = colour1
             
             // Background ImageView frame
             backgroundImageView.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
@@ -299,7 +299,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 
             }
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            cell.backgroundColor = colour1
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             //
             cell.accessoryType = .disclosureIndicator
@@ -327,7 +327,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //cell.detailTextLabel?.textAlignment = NSTextAlignment
             cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)
             cell.detailTextLabel?.textColor = colour2
-            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            cell.backgroundColor = colour1
             //
             return cell
             
@@ -349,7 +349,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             default: break
             }
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            cell.backgroundColor = colour1
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             return cell
             
@@ -362,7 +362,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             if indexPath.row == 0 {
                 cell.textLabel?.text = NSLocalizedString("resetWalkthrough", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
-                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+                cell.backgroundColor = colour1
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
                 return cell
             }
@@ -370,7 +370,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             else if indexPath.row == 1 {
                 cell.textLabel?.text = NSLocalizedString("resetApp", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
-                cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+                cell.backgroundColor = colour1
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
                 return cell
             }

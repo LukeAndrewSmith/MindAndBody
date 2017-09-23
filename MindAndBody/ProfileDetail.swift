@@ -9,17 +9,16 @@
 import Foundation
 import UIKit
 
+
+//
 class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    
     //
-    // Outlets --------------------------------------------------------------------------------------------------------
+    // MARK: Outlets --------------------------------------------------------------------------------------------------------
     //
     @IBOutlet weak var navigationBar: UINavigationItem!
     //
     @IBOutlet weak var questionsTable: UITableView!
-    //
-    var answerTable = UITableView()
     //
     // Answer elements
     var selectedQuestion = Int()
@@ -28,22 +27,20 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var okButton = UIButton()
     var backgroundViewExpanded = UIButton()
     
-    // Selected section (Goal/Me/Time/Preferences)
+    //
     var selectedSection = Int()
     
     // Arrays
-    var titleArray: [String] = ["me", "goals", "time", "preferences"]
+    var titleArray: [String] = ["me", "goals", "numberSessions"]
     //
     var questionArray: [[String]] =
         [
             // Me
             ["This is a question about me", "This also is a question", "Hmm, tricky question", "Obvious question"],
             // Goals
-            ["This is a question about goals", "This also is a question", "Hmm, tricky question", "Obvious question"],
-            // Time
-            ["This is a question about time", "This also is a question", "Hmm, tricky question", "Obvious question"],
-            // Preferences
-            ["This is a question about goals", "This also is a question", "Hmm, tricky question", "Obvious question"]
+            ["calm", "acceptance", "bodyShaping", "endurance", "strength", "flexibility", "postureJoints"],
+            // Groups
+            ["Body Group - Calm", "Body Group - Reduced Stress", "Body Group - Strength", "Body Group - Body Shaping"]
         ]
     // 
     var answerArray: [[[String]]] =
@@ -59,39 +56,12 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 // Q4
                 ["Possible Answer4", "Also a possible answer", "Could be", "Definitely not"]
             ],
-            // Goals
-            [
-                // Q1
-                ["Possible Answer", "Also a possible answer", "Could be", "Definitely not"],
-                // Q2
-                ["Possible Answer2", "Also a possible answer", "Could be", "Definitely not"],
-                // Q3
-                ["Possible Answer3", "Also a possible answer", "Could be", "Definitely not"],
-                // Q4
-                ["Possible Answer4", "Also a possible answer", "Could be", "Definitely not"]
-            ],
-            // Time
-            [
-                // Q1
-                ["Possible Answer", "Also a possible answer", "Could be", "Definitely not"],
-                // Q2
-                ["Possible Answer2", "Also a possible answer", "Could be", "Definitely not"],
-                // Q3
-                ["Possible Answer3", "Also a possible answer", "Could be", "Definitely not"],
-                // Q4
-                ["Possible Answer4", "Also a possible answer", "Could be", "Definitely not"]
-            ],
-            // Preferences
-            [
-                // Q1
-                ["Possible Answer", "Also a possible answer", "Could be", "Definitely not"],
-                // Q2
-                ["Possible Answer2", "Also a possible answer", "Could be", "Definitely not"],
-                // Q3
-                ["Possible Answer3", "Also a possible answer", "Could be", "Definitely not"],
-                // Q4
-                ["Possible Answer4", "Also a possible answer", "Could be", "Definitely not"]
-            ],
+    ]
+    //
+    var sliderArray: [[Int]] =
+    [
+        [0,0,0,0,0,0,0],
+        [0,0,0,0]
     ]
     //
     var selectedAnswerArray: [[Int]] =
@@ -100,10 +70,8 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
             [-1, -1, -1, -1],
             // Goals
             [-1, -1, -1, -1],
-            // Time
+            // Groups
             [-1, -1, -1, -1],
-            // Preferences
-            [-1, -1, -1, -1]
     ]
 
     
@@ -120,6 +88,7 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Table View
         questionsTable.tableFooterView = UIView()
         questionsTable.separatorStyle = .none
+        questionsTable.backgroundColor = colour1
         
         // Answer Elements
         // view
@@ -147,8 +116,6 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
         backgroundViewExpanded.backgroundColor = .black
         backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
         //
-
-        
     }
     
     
@@ -159,7 +126,7 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        return questionArray.count
+        return questionArray[selectedSection].count
     }
     
     // Header
@@ -169,17 +136,48 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     // Header Customization
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
+    var didAdd1 = false
+    var didAdd2 = false
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         // Header
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)!
         header.textLabel?.textColor = colour2
         header.textLabel?.text = header.textLabel?.text?.capitalized
         
+        // Detail
+        func createDetailLabel(section: Int) {
+            let detailLabel = UILabel()
+            detailLabel.font = UIFont(name: "SFUIDisplay-thin", size: 22)!
+            detailLabel.textColor = colour2.withAlphaComponent(0.5)
+            detailLabel.textAlignment = .right
+            //
+            if section == 0 {
+                detailLabel.text = NSLocalizedString("mind", comment: "")
+            } else if section == 2 {
+                detailLabel.text = NSLocalizedString("body", comment: "")
+            }
+            //
+            //
+            detailLabel.sizeToFit()
+            detailLabel.frame = CGRect(x: view.bounds.width - detailLabel.bounds.width - 15, y: (header.bounds.height - detailLabel.bounds.height) / 2, width: detailLabel.bounds.width, height: detailLabel.bounds.height)
+            header.addSubview(detailLabel)
+        }
         //
-        header.backgroundColor = .clear
-        header.backgroundView = UIView()
+        if section == 0 {
+            if didAdd1 == false {
+                createDetailLabel(section: 0)
+                didAdd1 = true
+            }
+        } else if section == 2 {
+            if didAdd2 == false {
+                createDetailLabel(section: 2)
+                didAdd2 = true
+            }
+        }
+        
+        //
+        header.contentView.backgroundColor = colour1
         
         let seperator = CALayer()
         seperator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
@@ -209,28 +207,92 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        //
-//        switch indexPath.row {
-        //
-//        default:
+        switch selectedSection {
+        case 0:
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             //
-            cell.backgroundColor = .clear
-            cell.backgroundView = UIView()
             //
-        if selectedAnswerArray[selectedSection][indexPath.section] == -1 {
-            cell.textLabel?.text = "Answer"
-        } else {
-            cell.textLabel?.text = answerArray[selectedSection][indexPath.row][selectedAnswerArray[selectedSection][indexPath.section]]
-        }
+            cell.backgroundColor = colour1
+            //
+            if selectedAnswerArray[selectedSection][indexPath.section] == -1 {
+                cell.textLabel?.text = "Answer"
+            } else {
+                cell.textLabel?.text = answerArray[selectedSection][indexPath.row][selectedAnswerArray[selectedSection][indexPath.section]]
+            }
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.textLabel?.textAlignment = .left
             cell.textLabel? .textColor = colour2
             //
             // Border
-//        }
+            //        }
+            //
+            return cell
         //
-        return cell
+        case 1:
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            cell.selectionStyle = .none
+            cell.backgroundColor = colour1
+            //
+            // Slider
+            let slider = UISlider()
+            cell.addSubview(slider)
+            slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
+            // Colours
+            slider.thumbTintColor = colour2
+            slider.minimumTrackTintColor = colour3
+            slider.maximumTrackTintColor = colour4
+            // Frame
+            slider.frame = CGRect(x: 45, y: (cell.bounds.height - slider.frame.height) / 2, width: view.frame.size.width - 60, height: slider.frame.height)
+            // Values
+            slider.minimumValue = 0
+            slider.maximumValue = 3
+            // Section tag
+            slider.tag = indexPath.section
+            //
+            let value = sliderArray[selectedSection - 1][indexPath.section]
+            slider.value = Float(value)
+            //
+            // Indicator Label
+            cell.textLabel?.text = String(value)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
+            cell.textLabel?.textColor = colour2
+
+            //
+            return cell
+        //
+        case 2:
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            //
+            cell.selectionStyle = .none
+            cell.backgroundColor = colour1
+            //
+            // Slider
+            let slider = UISlider()
+            cell.addSubview(slider)
+            slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
+            // Frame
+            slider.frame = CGRect(x: 45, y: (cell.bounds.height - slider.frame.height) / 2, width: view.frame.size.width - 60, height: slider.frame.height)
+            // Values
+            slider.minimumValue = 0
+            slider.maximumValue = 10
+            // Colours
+            slider.thumbTintColor = colour4
+            setSliderGradient(slider: slider)
+            // Section tag
+            slider.tag = indexPath.section
+            //
+            let value = sliderArray[selectedSection - 1][indexPath.section]
+            slider.value = Float(value)
+            //
+            // Indicator Label
+            cell.textLabel?.text = String(value)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
+            cell.textLabel?.textColor = colour2
+            //
+            return cell
+        default:
+            return UITableViewCell()
+        }
     }
     
     
@@ -323,7 +385,60 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         questionsTable.reloadData()
     }
-
+    
+    //
+    // MARK: Slider Helpers -----------------------------------------------------------
+    
+    
+    //
+        // MARK: sliderValueChanged
+    let step: Float = 1
+    @IBAction func sliderValueChanged(sender: UISlider) {
+        let roundedValue = round(sender.value / step) * step
+        sender.value = roundedValue
+        //
+        sliderArray[selectedSection - 1][sender.tag] = Int(roundedValue)
+        //
+        // Indicator
+        let indexPath = NSIndexPath(row: 0, section: sender.tag)
+        let cell = questionsTable.cellForRow(at: indexPath as IndexPath)
+        cell?.textLabel?.text = String(Int(roundedValue))
+        
+        // Change thumbTintColor for groups
+        if selectedSection == 2 {
+            // Red, below and above suggested
+            if roundedValue <= 2 || roundedValue >= 6 {
+                sender.thumbTintColor = colour4
+                // Green, suggested
+            } else {
+                sender.thumbTintColor = colour3
+            }
+        }
+    }
+    
+    //
+    // MARK: Set Slider Gradient
+    //
+    func setSliderGradient(slider:UISlider) {
+        //
+        // Gradient Layer
+        let tgl = CAGradientLayer()
+        let frame = CGRect(x: 0.0, y: 0.0, width: slider.bounds.width, height: 2 )
+        tgl.frame = frame
+        //
+        tgl.colors = [colour4.cgColor,colour4.cgColor,colour3.cgColor,colour3.cgColor,colour4.cgColor,colour4.cgColor]
+        tgl.locations = [0,0.2,0.3,0.5,0.6,1]
+        tgl.endPoint = CGPoint(x: 1.0, y:  1.0)
+        tgl.startPoint = CGPoint(x: 0.0, y:  1.0)
+        
+        UIGraphicsBeginImageContextWithOptions(tgl.frame.size, false, 0.0)
+        tgl.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        slider.setMinimumTrackImage(image?.resizableImage(withCapInsets:.zero),  for: .normal)
+        slider.setMaximumTrackImage(image?.resizableImage(withCapInsets:.zero),  for: .normal)
+    }
     
     
 }

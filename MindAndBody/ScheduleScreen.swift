@@ -412,19 +412,32 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 // Automatic selection test
                 switch indexPath.row {
                 case 2,3:
-                    automaticSelectionIsHappening = true
-                    automaticSelectionProgress = 0
                     if indexPath.row == 2 {
-                        automaticSelectionArray = [0,1,0]
+                        // !!!!!!!!!
+                        // STRAIGHT TO FINAL CHOICE TEST
+                        selectedSession = [0,1,0]
+                        performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                        // "scheduleMeditationSegue" for meditation
+                        //
+                        // Remove back button text
+                        let backItem = UIBarButtonItem()
+                        backItem.title = ""
+                        navigationItem.backBarButtonItem = backItem
+//                        automaticSelectionArray = [0,1,0]
                     } else {
+                        // AUTOMATIC SELECTION TEST
                         automaticSelectionArray = [1,0,0,0,0]
+                        //
+                        automaticSelectionIsHappening = true
+                        automaticSelectionProgress = 0
+                        //
+                        noInteractionView.backgroundColor = .clear
+                        noInteractionView.frame = UIScreen.main.bounds
+                        UIApplication.shared.keyWindow?.insertSubview(noInteractionView, aboveSubview: view)
+                        //
+                        performSegue(withIdentifier: "openMenu", sender: self)
                     }
-                    //
-                    noInteractionView.backgroundColor = .clear
-                    noInteractionView.frame = UIScreen.main.bounds
-                    UIApplication.shared.keyWindow?.insertSubview(noInteractionView, aboveSubview: view)
-                    //
-                    performSegue(withIdentifier: "openMenu", sender: self)
+                    
                 default:
                     // ADD IF,: IF TABLECOUNTER[0] != -1 && STAND ALONE SESSION -> AUTOMATIC SELECTION, ELSE PRESENT SESSIONS (warmup,workout,stretching), if tableCounter[1] != -1 -> Automatic Selection
                     tableView.deselectRow(at: indexPath, animated: true)
