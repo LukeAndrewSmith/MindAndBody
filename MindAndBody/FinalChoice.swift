@@ -235,31 +235,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         if selectedSession[2] == -1 {
             self.presetsButton.sendActions(for: .touchUpInside)
         }
-        
-        //
-        // Automatic Selection
-        if automaticSelectionIsHappening == true {
-            automaticSelectionProgress = 2
-            //
-            let sessions: [[Int]] =
-                [[0,0], [0,1],
-                 [1,0], [1,1],
-                 [2,0], [2,1]]
-            //
-            presetsButton.sendActions(for: .touchUpInside)
-            let test = automaticSelectionProgress
-            //
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + AnimationTimes.animationTime1) {
-                let selectedSession = automaticSelectionArray[automaticSelectionProgress]
-                let indexPath = NSIndexPath(row: sessions[selectedSession][0], section: sessions[selectedSession][1])
-                self.presetsTableView.selectRow(at: indexPath as IndexPath, animated: true, scrollPosition: .top)
-                self.presetsTableView.delegate?.tableView!(self.presetsTableView, didSelectRowAt: indexPath as IndexPath)
-                
-                automaticSelectionIsHappening = false
-                noInteractionView.removeFromSuperview()
-            }
-        }
-        
     }
     
     
@@ -371,6 +346,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             switch selectedSession[0] {
             // Warmup
             case 0:
+                let key = overviewArray[indexPath.section][indexPath.row]
+                cell.imageView?.tag = key
                 // [selectedSession[0]] = warmup/workout/cardio etc...
                 cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][overviewArray[indexPath.section][indexPath.row]]! as String, comment: "")
                 //
@@ -392,6 +369,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 // Circuit Session
                 case 7,8,9,13,14,15:
                     let key = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1][indexPath.row] as! Int
+                    cell.imageView?.tag = key
                     // [selectedSession[0]] = warmup/workout/cardio etc...
                     cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]! as String, comment: "")
                     //
@@ -405,6 +383,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     
                 // Normal Session
                 default:
+                    let key = overviewArray[indexPath.section][indexPath.row]
+                    cell.imageView?.tag = key
                     // [selectedSession[0]] = warmup/workout/cardio etc...
                     cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][overviewArray[indexPath.section][indexPath.row]]! as String, comment: "")
                     //
@@ -448,6 +428,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 
             // Stretching
             case 3:
+                let key = overviewArray[indexPath.section][indexPath.row]
+                cell.imageView?.tag = key
                 // [selectedSession[0]] = warmup/workout/cardio etc...
                 cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][overviewArray[indexPath.section][indexPath.row]]! as String, comment: "")
                 //
@@ -466,6 +448,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             // Yoga
             case 4:
                 let key = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1][indexPath.row] as! Int
+                cell.imageView?.tag = key
                 // [selectedSession[0]] = warmup/workout/cardio etc...
                 cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]! as String, comment: "")
                 //
@@ -480,6 +463,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             default:
                 break
             }
+            //
             
             //
             return cell
@@ -799,6 +783,13 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         let sender = extraTap.view as! UIImageView
         let image = sender.image
         expandedImage.image = image
+        expandedImage.tag = sender.tag
+        //
+        // Add tap gesture for animation
+        let animationTap = UITapGestureRecognizer()
+        animationTap.numberOfTapsRequired = 1
+        animationTap.addTarget(self, action: #selector(handleAnimationTap))
+        expandedImage.addGestureRecognizer(animationTap)
         //
         backgroundViewImage.addTarget(self, action: #selector(retractImage(_:)), for: .touchUpInside)
         //
@@ -812,6 +803,28 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     @IBAction func retractImage(_ sender: Any) {
         //
         animateViewDown(animationView: expandedImage, backgroundView: backgroundViewImage)
+    }
+    
+    //
+    @IBAction func handleAnimationTap(extraTap:UITapGestureRecognizer) {
+        //
+        // Get Cell
+        let sender = extraTap.view as! UIImageView
+        let key = sender.tag
+        //
+        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        //
+        // Image Array
+        if imageCount != 1 && sender.isAnimating == false {
+            var animationArray: [UIImage] = []
+            for i in 1...imageCount - 1 {
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
+            }
+            sender.animationImages = animationArray
+            sender.animationDuration = Double(imageCount - 1) * 0.5
+            sender.animationRepeatCount = 1
+            sender.startAnimating()
+        }
     }
     
     

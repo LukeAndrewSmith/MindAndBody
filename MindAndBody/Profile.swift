@@ -281,8 +281,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         //
         switch walkthroughProgress {
-            // First has to be done differently
-        // Walkthrough explanation
+        // First has to be done differently
         case 0:
             //
             walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
@@ -296,7 +295,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             walkthroughHighlight.layer.borderColor = colour1.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
-            walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: ((view.bounds.height - 49) / 8) + CGFloat(TopBarHeights.navigationBarHeight) + 10)
+            walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: ((view.bounds.height - 49) / 6) + CGFloat(TopBarHeights.navigationBarHeight) + 10)
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
             
             //

@@ -36,26 +36,24 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var questionArray: [[String]] =
         [
             // Me
-            ["This is a question about me", "This also is a question", "Hmm, tricky question", "Obvious question"],
+            ["age", "gender", "posture", "Obvious question"],
             // Goals
             ["calm", "acceptance", "bodyShaping", "endurance", "strength", "flexibility", "postureJoints"],
             // Groups
-            ["Body Group - Calm", "Body Group - Reduced Stress", "Body Group - Strength", "Body Group - Body Shaping"]
+            ["Mind - Calm", "Mind - Reduced Stress", "Body - Strength", "Body - Body Shaping"]
         ]
     // 
-    var answerArray: [[[String]]] =
+    var answerArray: [[String]] =
         [
             // Me
-            [
                 // Q1
-                ["Possible Answer", "Also a possible answer", "Could be", "Definitely not"],
+                ["16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "70+"],
                 // Q2
-                ["Possible Answer2", "Also a possible answer", "Could be", "Definitely not"],
+                ["male", "female", "other"],
                 // Q3
                 ["Possible Answer3", "Also a possible answer", "Could be", "Definitely not"],
                 // Q4
                 ["Possible Answer4", "Also a possible answer", "Could be", "Definitely not"]
-            ],
     ]
     //
     var sliderArray: [[Int]] =
@@ -74,13 +72,34 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
             [-1, -1, -1, -1],
     ]
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //
+        // Present walkthrough
+        switch selectedSection {
+        case 0:
+            if UserDefaults.standard.bool(forKey: "meWalkthrough") == false {
+                walkthroughProfileDetail()
+            }
+        case 1:
+            if UserDefaults.standard.bool(forKey: "goalsWalkthrough") == false {
+                walkthroughProfileDetail()
+            }
+        case 2:
+            if UserDefaults.standard.bool(forKey: "nSessionsWalkthrough") == false {
+                walkthroughProfileDetail()
+            }
+        default:
+            break
+        }
+    }
     
     //
     // Viewdidload --------------------------------------------------------------------------------------------------------
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
+       
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString(titleArray[selectedSection], comment: ""))
@@ -216,12 +235,13 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             if selectedAnswerArray[selectedSection][indexPath.section] == -1 {
                 cell.textLabel?.text = "Answer"
+                cell.textLabel?.textColor = colour4
             } else {
-                cell.textLabel?.text = answerArray[selectedSection][indexPath.row][selectedAnswerArray[selectedSection][indexPath.section]]
+                cell.textLabel?.text = answerArray[indexPath.section][selectedAnswerArray[selectedSection][indexPath.section]]
+                cell.textLabel?.textColor = colour2
             }
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.textLabel?.textAlignment = .left
-            cell.textLabel? .textColor = colour2
             //
             // Border
             //        }
@@ -298,21 +318,14 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // didSelectRow
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        switch indexPath.row {
-//        case 4:
-//            break
-//        default:
-//            // Selected section
-//        }
         //
         selectedQuestion = indexPath.section
+        answerPicker.reloadAllComponents()
         switch selectedAnswerArray[selectedSection][selectedQuestion] {
         case -1:
             answerPicker.selectRow(0, inComponent: 0, animated: true)
         default:
             answerPicker.selectRow(selectedAnswerArray[selectedSection][selectedQuestion], inComponent: 0, animated: true)
-            
         }
         //
         UIApplication.shared.keyWindow?.insertSubview(answerView, aboveSubview: view)
@@ -333,14 +346,14 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return answerArray[selectedSection][selectedQuestion].count
+        return answerArray[selectedQuestion].count
     }
     
     // View for row
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         //
         let answerLabel = UILabel()
-        answerLabel.text = NSLocalizedString(answerArray[selectedSection][selectedQuestion][row], comment: "")
+        answerLabel.text = NSLocalizedString(answerArray[selectedQuestion][row], comment: "")
         answerLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
         answerLabel.textColor = colour1
         //
@@ -373,17 +386,12 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func okButtonAction(_ sender: Any) {
         let defaults = UserDefaults.standard
         //
-//        var restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
-        //
-//        restTimes[selectedRow] = restTimesArray[restTimePicker.selectedRow(inComponent: 0)]
-//        defaults.set(restTimes, forKey: "restTimes")
-        //
-//        defaults.synchronize()
         selectedAnswerArray[selectedSection][selectedQuestion] = answerPicker.selectedRow(inComponent: 0)
         //
         animateActionSheetDown(actionSheet: answerView, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
         //
-        questionsTable.reloadData()
+        let indexPath = NSIndexPath(row: 0, section: selectedQuestion)
+        questionsTable.reloadRows(at: [indexPath as IndexPath], with: .automatic)
     }
     
     //
@@ -440,5 +448,116 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
         slider.setMaximumTrackImage(image?.resizableImage(withCapInsets:.zero),  for: .normal)
     }
     
+    
+    
+    
+    //
+    // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------
+    //
+    //
+    var walkthroughProgress = 0
+    var walkthroughView = UIView()
+    var walkthroughHighlight = UIView()
+    var walkthroughLabel = UILabel()
+    var nextButton = UIButton()
+    
+    var didSetWalkthrough = false
+    
+    //
+    // Components
+    var walkthroughTexts = ["me0", "goals0", "nSessions0"]
+    var highlightSize: CGSize? = nil
+    var highlightCenter: CGPoint? = nil
+    // Corner radius, 0 = height / 2 && 1 = width / 2
+    var highlightCornerRadius = 0
+    var labelFrame = 0
+    //
+    var walkthroughBackgroundColor = UIColor()
+    var walkthroughTextColor = UIColor()
+    
+    // Walkthrough
+    func walkthroughProfileDetail() {
+        
+        //
+        if didSetWalkthrough == false {
+            //
+            nextButton.addTarget(self, action: #selector(walkthroughProfileDetail), for: .touchUpInside)
+            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
+            didSetWalkthrough = true
+        }
+        
+        //
+        switch walkthroughProgress {
+        // First has to be done differently
+        case 0:
+            //
+            walkthroughLabel.text = NSLocalizedString(walkthroughTexts[selectedSection], comment: "")
+            walkthroughLabel.sizeToFit()
+            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            
+            // Colour
+            walkthroughLabel.textColor = colour1
+            walkthroughLabel.backgroundColor = colour2
+            // Highlight
+            if selectedSection != 0 {
+                walkthroughHighlight.backgroundColor = colour2.withAlphaComponent(0.5)
+                walkthroughHighlight.layer.borderColor = colour2.cgColor
+                walkthroughHighlight.frame.size = CGSize(width: view.bounds.width - 25, height: 47)
+                walkthroughHighlight.center = CGPoint(x: ((view.frame.size.width - 30) / 2) + 12.5, y: CGFloat(TopBarHeights.combinedHeight) + 47 + (47 / 2))
+                walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
+            } else {
+                walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
+                walkthroughHighlight.layer.borderColor = colour1.cgColor
+                walkthroughHighlight.frame.size = CGSize(width: 172, height: 33)
+                walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: 40)
+                walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
+            }
+            
+            //
+            // Flash
+            //
+            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
+                //
+                if self.selectedSection != 0 {
+                    self.walkthroughHighlight.backgroundColor = colour2.withAlphaComponent(1)
+                } else {
+                    self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(1)
+                }
+            }, completion: {(finished: Bool) -> Void in
+                UIView.animate(withDuration: 0.2, animations: {
+                    //
+                    if self.selectedSection != 0 {
+                        self.walkthroughHighlight.backgroundColor = colour2.withAlphaComponent(0.5)
+                    } else {
+                        self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
+                    }                }, completion: nil)
+            })
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+        //
+        default:
+            UIView.animate(withDuration: 0.4, animations: {
+                self.walkthroughView.alpha = 0
+            }, completion: { finished in
+                self.walkthroughView.removeFromSuperview()
+                switch self.selectedSection {
+                case 0:
+                    UserDefaults.standard.set(true, forKey: "meWalkthrough")
+                case 1:
+                    UserDefaults.standard.set(true, forKey: "goalsWalkthrough")
+                case 2:
+                    UserDefaults.standard.set(true, forKey: "nSessionsWalkthrough")
+                default: break
+                }
+            })
+        }
+    
+    
+    //
+}
+
     
 }

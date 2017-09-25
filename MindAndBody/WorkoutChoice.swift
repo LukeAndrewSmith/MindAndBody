@@ -88,36 +88,6 @@ class WorkoutChoice: UIViewController  {
         custom.titleLabel?.textAlignment = .center
     }
     
-    //
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //
-        // Automatic Selection
-        if automaticSelectionIsHappening == true {
-            automaticSelectionProgress = 1
-            //
-            var buttonArray = [gym, home, custom]
-            //
-            let buttonToSelect = buttonArray[automaticSelectionArray[automaticSelectionProgress]]
-            //
-            let flashView = UIView(frame: (buttonToSelect?.bounds)!)
-            flashView.alpha = 0
-            flashView.backgroundColor = colour2
-            buttonToSelect?.addSubview(flashView)
-            UIView.animate(withDuration: AnimationTimes.animationTime4, animations: {
-                flashView.alpha = 1
-            }, completion: { finished in
-                UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                    flashView.alpha = 0
-                }, completion: { finished in
-                    flashView.removeFromSuperview( )
-                })
-            })
-            buttonToSelect?.sendActions(for: .touchUpInside)
-            //
-        }
-    }
-    
 //
 // View did layout subview ------------------------------------------------------------------------------------------------------
 //

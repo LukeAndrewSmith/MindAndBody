@@ -72,6 +72,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["trackingWalkthrough" : false])
         //
         UserDefaults.standard.register(defaults: ["profileWalkthrough" : false])
+        UserDefaults.standard.register(defaults: ["meWalkthrough" : false])
+        UserDefaults.standard.register(defaults: ["goalsWalkthrough" : false])
+        UserDefaults.standard.register(defaults: ["nSessionsWalkthrough" : false])
         //
         UserDefaults.standard.register(defaults: ["settingsWalkthrough" : false])
         UserDefaults.standard.register(defaults: ["automaticYogaWalkthrough" : false])

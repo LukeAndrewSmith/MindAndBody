@@ -38,7 +38,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     let restTimesArray: [Int] = [1, 5, 10, 15, 20, 30, 45, 60, 90, 120]
     
     // Home screen Array
-    var homeScreenArray: [String] = ["home", "schedule", "menu"]
+    var homeScreenArray: [String] = ["sessions", "schedule", "menu"]
     var homeScreenPicker = UIPickerView()
     // Use actionSheetView and okButton from above for home screen action sheet
     
@@ -581,6 +581,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     UserDefaults.standard.set(false, forKey: "trackingWalkthrough")
                     //
                     UserDefaults.standard.set(false, forKey: "profileWalkthrough")
+                    UserDefaults.standard.set(false, forKey: "meWalkthrough")
+                    UserDefaults.standard.set(false, forKey: "goalsWalkthrough")
+                    UserDefaults.standard.set(false, forKey: "nSessionsWalkthrough")
                     //
                     UserDefaults.standard.set(false, forKey: "settingsWalkthrough")
                     UserDefaults.standard.set(false, forKey: "automaticYogaWalkthrough")

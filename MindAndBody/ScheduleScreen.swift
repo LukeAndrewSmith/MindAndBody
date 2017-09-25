@@ -35,7 +35,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     let backgroundBlur = UIVisualEffectView()
 
     // Content Arrays
-    var daySessionArray: [String] = ["Group 1 (sport)", "Group 1 (sport)", "Warmup -> Upper Body -> Default", "Workout -> Gym -> Classic -> Full Body -> Default"]
+    var daySessionArray: [String] = ["Body -   Endurance", "Mind", "Warmup Test", "Meditation Test"]
     
     //
     // Variables
@@ -338,13 +338,13 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 editButton.addGestureRecognizer(tap)
                 cell.addSubview(editButton)
                 //
-                let plusImage = UIImageView()
-                plusImage.image = #imageLiteral(resourceName: "Plus")
-                plusImage.tintColor = colour1
-                plusImage.alpha = 0.72
-                plusImage.sizeToFit()
-                plusImage.frame = CGRect(x: view.bounds.width - 27 - plusImage.bounds.width, y: (72 / 2) - (plusImage.bounds.height / 2), width: plusImage.bounds.width, height: plusImage.bounds.height)
-                cell.addSubview(plusImage)
+//                let plusImage = UIImageView()
+//                plusImage.image = #imageLiteral(resourceName: "Plus")
+//                plusImage.tintColor = colour1
+//                plusImage.alpha = 0.72
+//                plusImage.sizeToFit()
+//                plusImage.frame = CGRect(x: view.bounds.width - 27 - plusImage.bounds.width, y: (72 / 2) - (plusImage.bounds.height / 2), width: plusImage.bounds.width, height: plusImage.bounds.height)
+//                cell.addSubview(plusImage)
                 //
                 let seperator = CALayer()
                 seperator.frame = CGRect(x: 27, y: 0, width: (view.bounds.width - 54) / 3, height: 1)
@@ -409,37 +409,25 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             case 4:
                 break
             default:
-                // Automatic selection test
                 switch indexPath.row {
                 case 2,3:
                     if indexPath.row == 2 {
-                        // !!!!!!!!!
                         // STRAIGHT TO FINAL CHOICE TEST
                         selectedSession = [0,1,0]
                         performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
                         // "scheduleMeditationSegue" for meditation
-                        //
-                        // Remove back button text
-                        let backItem = UIBarButtonItem()
-                        backItem.title = ""
-                        navigationItem.backBarButtonItem = backItem
-//                        automaticSelectionArray = [0,1,0]
                     } else {
-                        // AUTOMATIC SELECTION TEST
-                        automaticSelectionArray = [1,0,0,0,0]
-                        //
-                        automaticSelectionIsHappening = true
-                        automaticSelectionProgress = 0
-                        //
-                        noInteractionView.backgroundColor = .clear
-                        noInteractionView.frame = UIScreen.main.bounds
-                        UIApplication.shared.keyWindow?.insertSubview(noInteractionView, aboveSubview: view)
-                        //
-                        performSegue(withIdentifier: "openMenu", sender: self)
+                        // STRAIGHT TO FINAL CHOICE TEST Meditation
+                        selectedSession = [5,0,0]
+                        performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
+                        // "scheduleMeditationSegue" for meditation
                     }
-                    
+                    //
+                    // Remove back button text
+                    let backItem = UIBarButtonItem()
+                    backItem.title = ""
+                    navigationItem.backBarButtonItem = backItem
                 default:
-                    // ADD IF,: IF TABLECOUNTER[0] != -1 && STAND ALONE SESSION -> AUTOMATIC SELECTION, ELSE PRESENT SESSIONS (warmup,workout,stretching), if tableCounter[1] != -1 -> Automatic Selection
                     tableView.deselectRow(at: indexPath, animated: true)
                     // Select session
                     switch tableCounter[0] {

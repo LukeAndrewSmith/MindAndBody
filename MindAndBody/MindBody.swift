@@ -357,32 +357,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             }
             isInitialAppOpen = false
         }
-        //
-        // Automatic Selection
-        if automaticSelectionIsHappening == true {
-            var buttonArray = [Warmup, Workout, Cardio, Stretching, Yoga, Meditation]
-            //
-            let buttonToSelect = buttonArray[automaticSelectionArray[automaticSelectionProgress]]
-            //
-            let flashView = UIView(frame: (buttonToSelect?.bounds)!)
-            flashView.alpha = 0
-            flashView.backgroundColor = colour1
-            buttonToSelect?.addSubview(flashView)
-            buttonToSelect?.bringSubview(toFront: flashView)
-            UIView.animate(withDuration: AnimationTimes.animationTime4, animations: {
-                flashView.alpha = 1
-            }, completion: { finished in
-                //
-                buttonToSelect?.sendActions(for: .touchUpInside)
-                //
-                UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                    flashView.alpha = 0
-                }, completion: { finished in
-                    flashView.removeFromSuperview()
-                })
-            })
-            //
-        }
     }
     
     
@@ -606,7 +580,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
     
         //
         // Components
-        var walkthroughTexts = ["mindBody0", "mindBody1", "mindBody2", "mindBody3", "mindBody4", "mindBody5", "mindBody6", "mindBody7", "mindBody8", "mindBody9"]
+        var walkthroughTexts = ["mindBody0", "mindBody1", "mindBody2", "mindBody3", "mindBody4", "mindBody5", "mindBody6", "mindBody7", "mindBody8", "mindBody9", "mindBody10"]
         var highlightSize: CGSize? = nil
         var highlightCenter: CGPoint? = nil
         // Corner radius, 0 = height / 2 && 1 = width / 2
@@ -670,9 +644,28 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
                 //
                 walkthroughProgress = self.walkthroughProgress + 1
 
-                
+            
             // Menu
             case 1:
+                //
+                highlightSize = CGSize(width: 172, height: 33)
+                highlightCenter = CGPoint(x: view.frame.size.width / 2, y: 40)
+                highlightCornerRadius = 0
+                //
+                labelFrame = 0
+                //
+                walkthroughBackgroundColor = colour1
+                walkthroughTextColor = colour2
+                //
+                nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+                
+                //
+                walkthroughProgress = self.walkthroughProgress + 1
+                
+                
+                
+            // Menu
+            case 2:
                 //
                 highlightSize = CGSize(width: 36, height: 36)
                 highlightCenter = CGPoint(x: self.value1, y: 41)
@@ -690,7 +683,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             
                 
             // Main App Screens
-            case 2:
+            case 3:
                 //
                 self.performSegue(withIdentifier: "openMenu", sender: nil)
                 //
@@ -711,7 +704,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
                
                 
             // Profile
-            case 3:
+            case 4:
                 //
                 highlightSize = CGSize(width: 44, height: 44)
                 highlightCenter = CGPoint(x: CGFloat(self.value2), y: TopBarHeights.combinedHeight + (72 * 4.5))
@@ -729,7 +722,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
                 
                 
             // Schedule
-            case 4:
+            case 5:
                 //
                 highlightSize = CGSize(width: 44, height: 44)
                 highlightCenter = CGPoint(x: CGFloat(self.value2), y: TopBarHeights.combinedHeight + (72 * 1.5))
@@ -747,7 +740,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
                
                 
             // Home
-            case 5:
+            case 6:
                 //
                 highlightSize = CGSize(width: 44, height: 44)
                 highlightCenter = CGPoint(x: CGFloat(self.value2), y: TopBarHeights.combinedHeight + (72 / 2))
@@ -765,7 +758,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
               
                 
             // Tracking
-            case 6:
+            case 7:
                 //
                 highlightSize = CGSize(width: 44, height: 44)
                 highlightCenter = CGPoint(x: CGFloat(self.value2), y: TopBarHeights.combinedHeight + (72 * 2.5))
@@ -783,7 +776,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
               
                 
             // Lessons
-            case 7:
+            case 8:
                 //
                 highlightSize = CGSize(width: 44, height: 44)
                 highlightCenter = CGPoint(x: CGFloat(self.value2), y: TopBarHeights.combinedHeight + (72 * 3.5))
@@ -801,7 +794,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
                
                 
             // Settings
-            case 8:
+            case 9:
                 //
                 highlightSize = CGSize(width: 44, height: 44)
                 highlightCenter = CGPoint(x: CGFloat(self.value2), y: TopBarHeights.combinedHeight + (72 * 5.5))
@@ -818,7 +811,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
                 walkthroughProgress = self.walkthroughProgress + 1
                 
             // Recap
-            case 9:
+            case 10:
                 //
                 highlightSize = CGSize(width: 44, height: 432)
                 highlightCenter = CGPoint(x: CGFloat(self.value2), y: 216 + TopBarHeights.combinedHeight)
@@ -841,6 +834,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
                 }, completion: { finished in
                     self.walkthroughView.removeFromSuperview()
                     UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough")
+                    UserDefaults.standard.set(1, forKey: "homeScreen")
                 })
             }
         }

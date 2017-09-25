@@ -97,6 +97,7 @@
     "toAvoidTest" = "Don't do this\nDefinitely don't do this\nThis would be best to avoid";
 
 
+    "sessions" = "Sessions";
 
 
 
@@ -483,7 +484,6 @@
         "location" = "Location";
         "gym" = "Gym/Weights";
         "bodyweight" = "Bodyweight";
-        "home" = "Home";
         //
         "workoutType" = "Workout Type";
         "classic" = "Classic";
@@ -1446,7 +1446,19 @@
     "preferences" = "Preferences";
     "numberSessions" = "Nº Sessions";
 
-
+    // Questions
+    //
+    "age" = "age";
+    "gender" = "Gender";
+        "male" = "Male";
+        "female" = "Female";
+        "other" = "Other";
+    "activityLevel" = "Activity Level";
+        "veryLow" = "";
+        "low" = "";
+        "lowerMiddle" = "";
+        "" = "";
+        "" = "";
 
 
 
@@ -1626,19 +1638,20 @@
     // Mind Body
         // Mind Body
         "mindBody0" = "Walkthrough:\nExplanations of highlighted objects appear on the first viewing of most screens.";
-        "mindBody1" = "Menu:\nAccess the menu to navigate the app.";
-        "mindBody2" = "Screens:\nNavigate the main screens of the app from the menu.";
-        "mindBody3" = "Profile:\nFill in your profile to be presented a schedule.";
-        "mindBody4" = "Schedule:\nYour schedule presents a weekly plan and takes you to your sessions.";
-        "mindBody5" = "Home:\nAll sessions are accessed from Home, and custom sessions can be made here.";
-        "mindBody6" = "Tracking:\nWhat you've done as a percentage of what you planned is viewed here.";
-        "mindBody7" = "Lessons:\nUseful lessons regarding mind & body are found here. I advise to read them at least once";
-        "mindBody8" = "Settings:\nPersonalise the app, changing the background image, deciding if you want the schedule or the menu to be your home screen and more...";
-        "mindBody9" = "Recap:\nFill in your profile, get a schedule, and follow it!\n(Feel free to wander round the app before doing this to see if you actually like it)";
+        "mindBody1" = "Mind & Body\nThis app is for those willing to make an effort and able to make decisions, to work with the app. It helps you create a schedule to work towards your goals based on a profile you make. The schedule presents several manners in which to work towards a goal on any given day allowing you to do so in the effective manner for the day.";
+        "mindBody2" = "Menu:\nAccess the menu to navigate the app.";
+        "mindBody3" = "Screens:\nNavigate the main screens of the app from the menu.";
+        "mindBody4" = "Profile:\nFill in your profile to be presented a schedule.";
+        "mindBody5" = "Schedule:\nYour schedule presents a weekly plan and takes you directly to your sessions.\nIt will be the default screen when opening the app.";
+        "mindBody6" = "Sessions:\nAll sessions are found here, and custom sessions can be made here.\nNote:\nThis screen is mainly for people who wish to use the app without the schedule, as the schedule takes you directly to the sessions.";
+        "mindBody7" = "Tracking:\nWhat you've done as a percentage of what you planned is viewed here.";
+        "mindBody8" = "Lessons:\nUseful lessons regarding mind & body are found here. I advise to read them at least once to get the most out of the app and the sessions.";
+        "mindBody9" = "Settings:\nPersonalise the app, changing the background image, choosing your homescreen (either sessions, menu or schedule) and more...";
+        "mindBody10" = "Recap:\nFill in your profile, get a schedule, and follow it!\n(Feel free to wander round the app first to see if you actually like it)";
 
         // Schedule
         "schedule0" = "Schedule:\nThe schedule presents a weekly plan. It suggests a 'group' to do, each group helping you work towards a different goal. It also allows you to decide how you wish to work towards a goal on any given day by suggesting several manners in which to do so.";
-        "schedule1" = "Path:\nClick the desired session and the app will take you to it through the home page and the correct path of choices.";
+        "schedule1" = "Session:\nClick the desired session and the app will take you directly to it.";
         "schedule2" = "Custom Schedules:\nCreate and select custom schedules, allowing you to have several weekly plans if desired.";
         "schedule3" = "Swipe:\nSwipe on the day to change day, and to the right underneath the day to access the menu (most screens allow right swipe to access the menu).";
 
@@ -1648,7 +1661,16 @@
 
         // Profile
         "profile0" = "Sections:\nAnswer all the questions in each section.";
-        "profile1" = "Update Schedule:\nPress update schedule once all the questions are answered, you will then be able to decide when to do each suggested session.";
+        "profile1" = "Update Schedule:\nPress update schedule once all the questions are answered, you will then be able to decide when to do each session.";
+
+            // Me
+            "me0" = "Me:\nAnswer all questions so the app can suggest sessions relevant to you.\nReturn here if you/your abilities change to edit your answers (press 'Update Schedule' after any change).";
+
+            // Goals
+            "goals0" = "Goals:\nRate how important each goal is to you on a scale of 0-3 (0 - not a goal of mine, 3 - the goals i'd most like to work towards) using the slider.\nReturn here if your goals change to edit them (press 'Update Schedule' after any change)).";
+
+            // Sessions
+            "nSessions0" = "Min-Max Nº possible hours per week; reduce if you lack the time (it might not be as much as you think and you can reduce later). The Nº sessions of each group can be changed underneath, with the recommended range shown in green.\nReturn here when/if you feel you want to do more/less in total, or more/less of a group (press 'Update Schedule' after any change)).";
 
         // Settings
         "settings0" = "Homepage:\nYou can set the schedule as the home page of the app (the first screen presented when you open the app).";

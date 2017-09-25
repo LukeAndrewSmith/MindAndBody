@@ -28,7 +28,7 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
 //
     var rowTitleArray: [String] =
         [
-            "home",
+            "sessions",
             "schedule",
             "tracking",
             "lessons",

@@ -483,6 +483,7 @@
 		077E471B1EB9DFC6005B0B22 /* PresentMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */; };
 		077E471F1EB9E221005B0B22 /* SlideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471E1EB9E221005B0B22 /* SlideMenuView.swift */; };
 		077E47231EB9EED3005B0B22 /* DismissMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */; };
+		0789ED061F79A6EA000EB739 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789ED051F79A6EA000EB739 /* UserData.swift */; };
 		078F409A1F4B700800B4F566 /* SwiftCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078F40951F4B6C1C00B4F566 /* SwiftCharts.framework */; };
 		078F409B1F4B700800B4F566 /* SwiftCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 078F40951F4B6C1C00B4F566 /* SwiftCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872A1E7B4E2C00E7153A /* SessionScreen.swift */; };
@@ -1860,6 +1861,7 @@
 		077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentMenuAnimator.swift; sourceTree = "<group>"; };
 		077E471E1EB9E221005B0B22 /* SlideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuView.swift; sourceTree = "<group>"; };
 		077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissMenuAnimator.swift; sourceTree = "<group>"; };
+		0789ED051F79A6EA000EB739 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		078F408E1F4B6C1C00B4F566 /* SwiftCharts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftCharts.xcodeproj; path = ../../Code/Carthage/Carthage/Checkouts/SwiftCharts/SwiftCharts.xcodeproj; sourceTree = "<group>"; };
 		0791872A1E7B4E2C00E7153A /* SessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionScreen.swift; sourceTree = "<group>"; };
 		07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundImageCollection.swift; sourceTree = "<group>"; };
@@ -3631,6 +3633,8 @@
 				077AC0DA1DA535830026895B /* AppDelegate.swift */,
 				077AC0E01DA535840026895B /* Main.storyboard */,
 				077E47151EB9DC54005B0B22 /* Slide Menu */,
+				0789ED091F79A71E000EB739 /* Global */,
+				0789ED0A1F79A725000EB739 /* Data */,
 				077AC0FD1DA54C0C0026895B /* MindBody */,
 				075A0DB91E8D68800008E014 /* Schedule */,
 				075A0DBA1E8D688D0008E014 /* Tracking */,
@@ -3669,9 +3673,6 @@
 		077AC0FD1DA54C0C0026895B /* MindBody */ = {
 			isa = PBXGroup;
 			children = (
-				07248E061F31CB5100230EAF /* GlobalVariables.swift */,
-				07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */,
-				073BA9CA1F6E81B8005DB480 /* DataStructures.swift */,
 				07C2D3BB1EBA88CF000770DE /* MindBody.swift */,
 				07530C971E96716300BD33EC /* Choice Screens */,
 				07530C981E96717B00BD33EC /* Session Screens */,
@@ -3741,6 +3742,24 @@
 				077E471E1EB9E221005B0B22 /* SlideMenuView.swift */,
 			);
 			name = "Slide Menu";
+			sourceTree = "<group>";
+		};
+		0789ED091F79A71E000EB739 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				07248E061F31CB5100230EAF /* GlobalVariables.swift */,
+				07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */,
+			);
+			name = Global;
+			sourceTree = "<group>";
+		};
+		0789ED0A1F79A725000EB739 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				073BA9CA1F6E81B8005DB480 /* DataStructures.swift */,
+				0789ED051F79A6EA000EB739 /* UserData.swift */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 		078C59541EC893EA00FA1890 /* Sounds */ = {
@@ -8219,6 +8238,7 @@
 				07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */,
 				074074AD1EDC0A4000DC2D0F /* YogaAutomatic.swift in Sources */,
 				0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */,
+				0789ED061F79A6EA000EB739 /* UserData.swift in Sources */,
 				07DEE6FB1E0AC47F003B89AB /* WorkoutChoice.swift in Sources */,
 				07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */,
 				075732701E660AEC003DA77E /* InformationScreenAnatomy.swift in Sources */,
