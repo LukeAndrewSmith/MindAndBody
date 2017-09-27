@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "526900086.983668"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "365"
-            endingLineNumber = "365"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
             landmarkName = "updateWeekTracking()"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "526900086.983668"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "424"
-            endingLineNumber = "424"
+            startingLineNumber = "455"
+            endingLineNumber = "455"
             landmarkName = "updateWeekTracking()"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "526900086.983668"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "560"
-            endingLineNumber = "560"
+            startingLineNumber = "591"
+            endingLineNumber = "591"
             landmarkName = "updateTracking()"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "526900086.983668"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "561"
-            endingLineNumber = "561"
+            startingLineNumber = "592"
+            endingLineNumber = "592"
             landmarkName = "updateTracking()"
             landmarkType = "7">
             <Locations>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "526900086.983668"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "598"
-            endingLineNumber = "598"
+            startingLineNumber = "629"
+            endingLineNumber = "629"
             landmarkName = "updateTracking()"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "526900086.983668"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "540"
-            endingLineNumber = "540"
+            startingLineNumber = "571"
+            endingLineNumber = "571"
             landmarkName = "updateTracking()"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "526900086.983668"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "546"
-            endingLineNumber = "546"
+            startingLineNumber = "577"
+            endingLineNumber = "577"
             landmarkName = "updateTracking()"
             landmarkType = "7">
          </BreakpointContent>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "526900086.983668"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "550"
-            endingLineNumber = "550"
+            startingLineNumber = "581"
+            endingLineNumber = "581"
             landmarkName = "updateTracking()"
             landmarkType = "7">
          </BreakpointContent>
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "526900086.983668"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "785"
-            endingLineNumber = "785"
+            startingLineNumber = "816"
+            endingLineNumber = "816"
             landmarkName = "updateMonthTracking()"
             landmarkType = "7">
          </BreakpointContent>
@@ -330,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "526900086.983668"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "790"
-            endingLineNumber = "790"
+            startingLineNumber = "821"
+            endingLineNumber = "821"
             landmarkName = "updateMonthTracking()"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "526900086.983668"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "803"
-            endingLineNumber = "803"
+            startingLineNumber = "834"
+            endingLineNumber = "834"
             landmarkName = "updateMonthTracking()"
             landmarkType = "7">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "526900086.983668"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "673"
-            endingLineNumber = "673"
+            startingLineNumber = "704"
+            endingLineNumber = "704"
             landmarkName = "updateTracking()"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "526900086.983668"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "456"
-            endingLineNumber = "456"
+            startingLineNumber = "487"
+            endingLineNumber = "487"
             landmarkName = "updateWeekTracking()"
             landmarkType = "7">
          </BreakpointContent>
@@ -474,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/GlobalFunctions.swift"
-            timestampString = "527776406.06113"
+            timestampString = "528222684.347016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "891"
-            endingLineNumber = "891"
+            startingLineNumber = "922"
+            endingLineNumber = "922"
             landmarkName = "nextWalkthroughView(walkthroughView:walkthroughLabel:walkthroughHighlight:walkthroughTexts:walkthroughLabelFrame:highlightSize:highlightCenter:highlightCornerRadius:backgroundColor:textColor:highlightColor:animationTime:walkthroughProgress:)"
             landmarkType = "7">
          </BreakpointContent>

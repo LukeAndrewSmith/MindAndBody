@@ -117,7 +117,7 @@ extension UIViewController {
     // MARK: Format
     //
     // Format Explanation Text
-    func formatExplanationText(title:String, howTo:String, toAvoid:String) -> NSAttributedString {
+    func formatExplanationText(title:String, howTo:String, toAvoid:String, focusOn:String) -> NSAttributedString {
         //
         let return1 = NSMutableAttributedString(string: "\n")
         let return2 = NSMutableAttributedString(string: "\n\n")
@@ -173,7 +173,7 @@ extension UIViewController {
         howToString.append(return1)
         
         //
-        // To Avoid
+        // Avoid
         let toAvoidTitle = NSMutableAttributedString(string: NSLocalizedString("toAvoid", comment: ""))
         toAvoidTitle.addAttributes(subTitleFont, range: NSMakeRange(0, toAvoidTitle.length))
         //
@@ -198,13 +198,44 @@ extension UIViewController {
         toAvoidString.append(return1)
         
         //
+        // Focus on
+        let focusOnTitle = NSMutableAttributedString(string: NSLocalizedString("focusOn", comment: ""))
+        focusOnTitle.addAttributes(subTitleFont, range: NSMakeRange(0, focusOnTitle.length))
+        //
+        focusOnTitle.append(return1)
+        //
+        //
+        let focusOnString = NSMutableAttributedString(string: "")
+        //
+        let focusOnPoints = focusOn.components(separatedBy: .newlines)
+        for string in focusOnPoints {
+            let bulletPoint: String = "\u{2022}"
+            let formattedString: String = "\(bulletPoint) \(string)\n"
+            let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: formattedString)
+            
+            attributedString.addAttributes([NSParagraphStyleAttributeName: paragraphStyle], range: NSMakeRange(0, attributedString.length))
+            
+            focusOnString.append(attributedString)
+        }
+        //
+        focusOnString.addAttributes(bulletPointFont, range: NSMakeRange(0, focusOnString.length))
+        //
+        focusOnString.append(return1)
+        
+        //
         // Return
         let fullString = NSMutableAttributedString(string: "")
         fullString.append(titleString)
         fullString.append(howToTitle)
         fullString.append(howToString)
-        fullString.append(toAvoidTitle)
-        fullString.append(toAvoidString)
+        if toAvoid != "" {
+            fullString.append(toAvoidTitle)
+            fullString.append(toAvoidString)
+        }
+        if focusOn != "" {
+            fullString.append(focusOnTitle)
+            fullString.append(focusOnString)
+        }
         return fullString
     }
     

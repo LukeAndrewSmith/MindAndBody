@@ -551,7 +551,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         explanationLabel.numberOfLines = 0
         //
         let key = keyArray[selectedRow]
-        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: ""), howTo: NSLocalizedString("howToTest", comment: ""), toAvoid: NSLocalizedString("toAvoidTest", comment: ""))
+        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: ""), howTo: NSLocalizedString(sessionData.explanationDictionaries[selectedSession[0]][key]![0], comment: ""), toAvoid: NSLocalizedString(sessionData.explanationDictionaries[selectedSession[0]][key]![1], comment: ""), focusOn: NSLocalizedString(sessionData.explanationDictionaries[selectedSession[0]][key]![2], comment: ""))
         explanationLabel.frame = CGRect(x: 10, y: 10, width: scrollViewExplanation.frame.size.width - 10, height: 0)
         //
         explanationLabel.sizeToFit()
