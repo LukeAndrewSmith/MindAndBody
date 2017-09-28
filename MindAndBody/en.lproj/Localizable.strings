@@ -333,13 +333,15 @@
 "hipEA" = "Using momentum\nRotating in too big a circle (it's best to keep the circle small)\nForcing your hip into unnatural positions";
 "hipEF" = "Keeping good posture and keeping tall\nRelaxing and not forcing your hip";
 // Knee rotations
-"kneesE" = "Movement:\nStand straight an lift one leg slightly off the ground.\nFlex the knee, bringing the calf as close to the hamstring as possible, then extend the knee, straightening the leg.\nRepeat for 5-10reps, then repeat with the other leg.\n\nNotes:\nDon't use momentum during this movement.\n\n\nPurpose:\nJoint rotations lubricate the joints with synovial fluid which facilitates their movement and helps to prevent injury.";
-"H" = "Stand upright\nShift your weight to one leg";
-"A" = "";
-"F" = "";
+"H" = "Stand upright\nShift your weight to one leg\nKeeping your knee pointing at the floor, flex it, gently bringing your ankle towards your glutes\nReturn your foot back to parrallel with the other, without putting your weight on it\nRepeat 5-10 times\nRepeat with the other leg\nRecommended extras:nWith your weight on one leg, point your toe as far to the left as possible, then as far to the right, repeat 5-10 times with each leg";
+"A" = "Tensing your hamstrings to much, the aim is to warm up the knee joint not the hamstring\nUsing momentum, slowly bring your ankle up, and pause at the bottom";
+"F" = "Keeping your knee pointed at the floor and your thighs parralel\nKeeping good posture";
 // Ankle rotations
 "anklesE" = "Movement:\nStand straight up with one leg lifted a little off the ground.\nRotate the ankle for the recommended amount of time, switching direction halfway through.\nRepeat the movement with the other ankle.\n\nNotes:\nRotate the ankles in a gentle manner, not too vigorously or quickly.\n\n\nPurpose:\nJoint rotations lubricate the joints with synovial fluid which facilitates their movement and helps to prevent injury.";
-
+"anklesEH" = "Stand upright\nShift your weight onto one leg\nRotate your ankle for ";
+"anklesEA" = "";
+"anklesEF" = "";
+// Wrist/Ankle Rotation
 "wristAnkleRotationE" = "Movement:\n./nProceed to lift one foot forward onto its toes, and perform circular rotations, half way through changin direction of motion.\nPerform the same with the other foot.\n\nNotes:\nDon't put much weight on your foot when performing ankle rotations.\nDon't perform either rotation too vigorously, it should be a medium speed controlled movement.\n\n\nPurpose:\nThese movements warm up the wrist and ankle joints to reduce the chance of injury when performing pressing or leg movements.";
 
 

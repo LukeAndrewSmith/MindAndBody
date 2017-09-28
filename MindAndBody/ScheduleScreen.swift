@@ -179,13 +179,20 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             dayLabel.text = NSLocalizedString(dayArrayChar[i], comment: "")
             dayLabel.sizeToFit()
             dayLabel.alpha = 0.5
+            dayLabel.tag = i
+            //
+            let dayTap = UITapGestureRecognizer()
+            dayTap.numberOfTapsRequired = 1
+            dayTap.addTarget(self, action: #selector(dayTapHandler))
+            dayLabel.isUserInteractionEnabled = true
+            dayLabel.addGestureRecognizer(dayTap)
             stackArray.append(dayLabel)
         }
         let pageStack = UIStackView(arrangedSubviews: stackArray)
         pageStack.frame = CGRect(x: 0, y:  view.frame.maxY - 24.5 - TopBarHeights.combinedHeight, width: view.bounds.width, height: 24.5)
         pageStack.distribution = .fillEqually
         pageStack.alignment = .center
-        pageStack.isUserInteractionEnabled = false
+        pageStack.isUserInteractionEnabled = true
         view.addSubview(pageStack)
         
         //
@@ -212,8 +219,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         stackArray[selectedDay].alpha = 1
     }
     
-    
-    
     //
     // Schedule TableView --------------------------------------------------------------------------------------------------------------------------
     //
@@ -237,6 +242,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // Header Customization
+    let seperator = CALayer()
     let headerLabel = UILabel()
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         switch tableView {
@@ -253,7 +259,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //
             // Seperator
-            let seperator = CALayer()
             seperator.frame = CGRect(x: 27, y: header.bounds.height - 1, width: view.bounds.width - 54, height: 1)
             seperator.backgroundColor = colour1.cgColor
             seperator.opacity = 0.5
@@ -273,6 +278,10 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             break
         default: break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        seperator.removeFromSuperlayer()
     }
     
     // Header Height
@@ -741,6 +750,94 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             
         }
     }
+    
+    //
+    // Day Tap
+    func dayTapHandler(sender: UITapGestureRecognizer) {
+        let dayLabel = sender.view as! UILabel
+        let index = dayLabel.tag
+        //
+        // Forward
+        if index > selectedDay {
+            // Update selected day
+            selectedDay = index
+            
+            // Deselect all indicators
+            for i in 0...(stackArray.count - 1) {
+                stackArray[i].alpha = 0.5
+            }
+            // Select indicator
+            stackArray[selectedDay].alpha = 1
+            
+            // Animate
+            scheduleTable.reloadData()
+            let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
+            let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
+            //
+            view.addSubview(snapShot1!)
+            view.bringSubview(toFront: snapShot1!)
+            //
+            snapShot2?.center.x = view.center.x + self.view.frame.size.width
+            view.addSubview(snapShot2!)
+            view.bringSubview(toFront: snapShot2!)
+            //
+            scheduleTable.alpha = 0
+            //
+            view.isUserInteractionEnabled = false
+            //
+            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
+                snapShot2?.center.x = self.view.center.x
+            }, completion: { finish in
+                self.scheduleTable.alpha = 1
+                snapShot1?.removeFromSuperview()
+                snapShot2?.removeFromSuperview()
+                self.view.isUserInteractionEnabled = true
+            })
+            
+            //
+        // Back
+        } else if index < selectedDay {
+            // Update selected day
+            selectedDay = index
+            
+            // Deselect all indicators
+            for i in 0...(stackArray.count - 1) {
+                stackArray[i].alpha = 0.5
+            }
+            // Select indicator
+            stackArray[selectedDay].alpha = 1
+            selectDay(day: selectedDay)
+            
+            // Animate
+            scheduleTable.reloadData()
+            let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
+            let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
+            //
+            view.addSubview(snapShot1!)
+            view.bringSubview(toFront: snapShot1!)
+            //
+            snapShot2?.center.x = view.center.x - self.view.frame.size.width
+            view.addSubview(snapShot2!)
+            view.bringSubview(toFront: snapShot2!)
+            //
+            scheduleTable.alpha = 0
+            //
+            view.isUserInteractionEnabled = false
+            //
+            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
+                snapShot2?.center.x = self.view.center.x
+            }, completion: { finish in
+                self.scheduleTable.alpha = 1
+                snapShot1?.removeFromSuperview()
+                snapShot2?.removeFromSuperview()
+                self.view.isUserInteractionEnabled = true
+            })
+            
+        }
+    }
+    
     
     // Slide menu swipe
     func swipeGestureRight() {
