@@ -325,13 +325,19 @@
 "neckEA" = "Relaxing/Dropping your head down, stand as tall as possible the whole time\nOverextending your neck (don't  do the rotations if you have a stiff neck)";
 "neckEF" = "Standing tall\nExtending your head up to the ceiling\nBeing gentle\nKeeping good posture";
 // Waist rotations
-"waistE" = "Movement:\nStand straight with good posture, and your feet at or slightly past hip width.\nPlace your hand on your hips, and rotate your hips in circles for the recommended amount of time, switching direction half way through.\n\nNotes:\nRotate your hips in as large a circle as possible whilst maintaining an active core and straight lower back.\nThe straight lower back is very important, a common mistake is to allow excessive movement in the lower back to increase the diameter of the circle but this can result in injury.\nDon't perform this movement too quickly, this will result in injury.\n\n\nPurpose:\nJoint rotations lubricate the joints with synovial fluid which facilitates their movement and helps to prevent injury.";
-"waistEH" = "";
-"waistEA" = "";
-"waistEF" = "";
+"waistEH" = "Stand with your feet at or slightly past hip width\nPlace your hands on your hips\nMainting an active core and straight lower back, slowly rotate your hips in circles for the recommended amount of time, changing directions half way through";
+"waistEA" = "Over extending your lower back when your hips are in front of your feet\nRotating too fast\nRotating in circles too big for your flexibility, don't force past what is sensible for you";
+"waistEF" = "Keeping an active core\nStanding tall, to avoid relaxing overextending your lower back\n";
 // Hip rotations
-"hipE" = "Movement:\nThis includes movements similar to leg swings but without the swinging motion.\nStand straight with an active core, holding onto a wall or support, lift one leg forwards as far as possible with it straight, then bring it back as far as possible, repeat for 5-10reps.\nPerform the same movement but this time to the side, bringing the leg as far out to the side as possible, then in front of the other and to the other side. Repeat for 5-10reps.\nFinally with your leg straight down, rotate your legs, pointing your toes as far in one direction, then as far in the other as possible.\nProceed to repeat the 3 movements with the other leg.\n\nNotes:\nDon't swing your legs or use momentum during the movements.\n\n\nPurpose:\nJoint rotations lubricate the joints with synovial fluid which facilitates their movement and helps to prevent injury.";
+"hipEH" = "Stand upright (holding a support if necessary)\nShift your weight to one leg\nWith your other knee, smoothly draw a circle, your knee going behind you\nup and to the side\nin front\nthen returning to it's starting position\nRepeat 5-10 times\nRepeat with the other leg\nRecommended extras:\nPerform each leg rotating the other direction (knee going forward first)\nWith your weight on one leg, point your toe as far to the left as possible, then as far to the right, repeat 5-10 times with each leg";
+"hipEA" = "Using momentum\nRotating in too big a circle (it's best to keep the circle small)\nForcing your hip into unnatural positions";
+"hipEF" = "Keeping good posture and keeping tall\nRelaxing and not forcing your hip";
+// Knee rotations
 "kneesE" = "Movement:\nStand straight an lift one leg slightly off the ground.\nFlex the knee, bringing the calf as close to the hamstring as possible, then extend the knee, straightening the leg.\nRepeat for 5-10reps, then repeat with the other leg.\n\nNotes:\nDon't use momentum during this movement.\n\n\nPurpose:\nJoint rotations lubricate the joints with synovial fluid which facilitates their movement and helps to prevent injury.";
+"H" = "Stand upright\nShift your weight to one leg";
+"A" = "";
+"F" = "";
+// Ankle rotations
 "anklesE" = "Movement:\nStand straight up with one leg lifted a little off the ground.\nRotate the ankle for the recommended amount of time, switching direction halfway through.\nRepeat the movement with the other ankle.\n\nNotes:\nRotate the ankles in a gentle manner, not too vigorously or quickly.\n\n\nPurpose:\nJoint rotations lubricate the joints with synovial fluid which facilitates their movement and helps to prevent injury.";
 
 "wristAnkleRotationE" = "Movement:\n./nProceed to lift one foot forward onto its toes, and perform circular rotations, half way through changin direction of motion.\nPerform the same with the other foot.\n\nNotes:\nDon't put much weight on your foot when performing ankle rotations.\nDon't perform either rotation too vigorously, it should be a medium speed controlled movement.\n\n\nPurpose:\nThese movements warm up the wrist and ankle joints to reduce the chance of injury when performing pressing or leg movements.";
