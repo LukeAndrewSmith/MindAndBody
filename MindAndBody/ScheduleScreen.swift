@@ -193,6 +193,16 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         pageStack.distribution = .fillEqually
         pageStack.alignment = .center
         pageStack.isUserInteractionEnabled = true
+        //
+        // Day Swipes
+        let stackSwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        stackSwipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        pageStack.addGestureRecognizer(stackSwipeLeft)
+        //
+        let stackSwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        stackSwipeRight.direction = UISwipeGestureRecognizerDirection.right
+        pageStack.addGestureRecognizer(stackSwipeRight)
+        //
         view.addSubview(pageStack)
         
         //
@@ -204,18 +214,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //
         // Select Today
-        let dfDay = DateFormatter()
-        dfDay.dateFormat = "dd"
-        // Get Monday
-        var mondaysDate: Date {
-            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-        }
-        var currentMondayDate = Int(dfDay.string(from: mondaysDate))!
-        // Get Today
-        var currentDay = Int(dfDay.string(from: NSDate() as Date))
-    
-        // Select todays indicator
-        selectedDay = currentDay! - currentMondayDate
+        // Get current day as index, currentWeekDay - 1 as week starts at 0 in array
+        selectedDay = Date().currentWeekDayFromMonday - 1
         stackArray[selectedDay].alpha = 1
     }
     

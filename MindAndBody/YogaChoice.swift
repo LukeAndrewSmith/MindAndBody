@@ -96,9 +96,9 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
 //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Pass Data
-        if (segue.identifier == "yogaSegue") {
-            //
-            let destinationVC = segue.destination as! FinalChoice
+        if (segue.identifier == "customSegueWarmup") {
+            let destinationVC = segue.destination as! FinalChoiceCustom
+            destinationVC.selectedType = 0
         }
         // Remove back bar text
         let backItem = UIBarButtonItem()

@@ -36,6 +36,11 @@ class WorkoutChoice: UIViewController  {
 //
     // Remove back bar text from next views
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "customSegueWorkout") {
+            let destinationVC = segue.destination as! FinalChoiceCustom
+            destinationVC.selectedType = 0
+        }
+        //
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem

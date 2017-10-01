@@ -85,6 +85,11 @@ class CardioChoice: UIViewController  {
 // Remove back bar text
 //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "customSegueWarmup") {
+            let destinationVC = segue.destination as! FinalChoiceCustom
+            destinationVC.selectedType = 0
+        }
+        //
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem

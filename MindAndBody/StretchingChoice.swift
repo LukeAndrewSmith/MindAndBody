@@ -163,9 +163,9 @@ class StretchingChoice: UIViewController  {
 //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
-        if (segue.identifier == "stretchingSegue") {
-            // Pass data to next screen
-            let destinationVC = segue.destination as! FinalChoice
+        if (segue.identifier == "customSegueWarmup") {
+            let destinationVC = segue.destination as! FinalChoiceCustom
+            destinationVC.selectedType = 0
         }
         
         // Remove Back Bar Text

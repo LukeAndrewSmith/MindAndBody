@@ -74,9 +74,9 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         super.viewDidLoad()
         
         // Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//        updateWeekTracking()
-//        updateTracking()
-//        updateMonthTracking()
+        updateWeekTracking()
+        updateTracking()
+        updateMonthTracking()
         
         // Present walkthrough 2
         if UserDefaults.standard.bool(forKey: "trackingWalkthrough") == false {
@@ -179,17 +179,6 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     //
     // Set Dates
     func setDates() {
-        // Format Monday
-        let dfDay = DateFormatter()
-        dfDay.dateFormat = "dd"
-        // Get Monday
-        var mondaysDate: Date {
-            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-        }
-        currentMondayDate = Int(dfDay.string(from: mondaysDate))!
-        let test = mondaysDate
-        let test2 = Date()
-        
         // Format Month
         let dfMonth = DateFormatter()
         dfMonth.dateFormat = "MM"
@@ -302,48 +291,26 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let chartPointsCircleLayer = ChartPointsViewsLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, viewGenerator: circleViewGenerator, displayDelay: 0, delayBetweenItems: 0.05, mode: .translate)
      
         
+        
+        
+        
         //
         // Extra detail touch tracker layer
-        let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 500, thumbBorderWidth: 2)
-        let trackerLayerSettings = ChartPointsLineTrackerLayerSettings(thumbSettings: thumbSettings, selectNearest: false)
+//        let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 500, thumbBorderWidth: 2)
+//        let trackerLayerSettings = ChartPointsLineTrackerLayerSettings(thumbSettings: thumbSettings, selectNearest: false)
         
-        // Current position labels array out of func so okbuttonaction can clear them
-        let chartPointsTrackerLayer = ChartPointsLineTrackerLayer<ChartPoint, Any>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lines: [chartPoints], lineColor: colour2, animDuration: 1, animDelay: 2, settings: trackerLayerSettings) {chartPointsWithScreenLoc in
-            
-            self.currentPositionLabels.forEach{$0.removeFromSuperview()}
-            
-            for (index, chartPointWithScreenLoc) in chartPointsWithScreenLoc.enumerated() {
-                
-                let label = UILabel()
-                let test3 = chartPoints[index].y
-                let test = chartPointWithScreenLoc.chartPoint.y
-                let test2 = chartPointWithScreenLoc.screenLoc.y
-                label.text = chartPointWithScreenLoc.chartPoint.description + "%"
-                label.sizeToFit()
-                label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x + label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
-                if label.frame.maxX > self.view.bounds.width {
-                    label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x - label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
-                }
-                
-                label.backgroundColor = colour2
-                label.textColor = colour1
-                
-                self.currentPositionLabels.append(label)
-                self.view.addSubview(label)
-            }
-        }
-        
-//        let currentPositionLabel = UILabel()Z
-//        let trackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak chartPointsLayer, weak currentPositionLabel] chartPointWithScreenLoc in
+//        // Current position labels array out of func so okbuttonaction can clear them
+//        let chartPointsTrackerLayer = ChartPointsLineTrackerLayer<ChartPoint, Any>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lines: [chartPoints], lineColor: colour2, animDuration: 1, animDelay: 2, settings: trackerLayerSettings) {chartPointsWithScreenLoc in
 //            
 //            self.currentPositionLabels.forEach{$0.removeFromSuperview()}
 //            
-//            for (index, chartPointWithScreenLoc) in chartPointWithScreenLoc.enumerated() {
+//            for (index, chartPointWithScreenLoc) in chartPointsWithScreenLoc.enumerated() {
 //                
 //                let label = UILabel()
+//                let test3 = chartPoints[index].y
 //                let test = chartPointWithScreenLoc.chartPoint.y
 //                let test2 = chartPointWithScreenLoc.screenLoc.y
-//                label.text = chartPointWithScreenLoc.chartPoint.description
+//                label.text = chartPointWithScreenLoc.chartPoint.description + "%"
 //                label.sizeToFit()
 //                label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x + label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
 //                if label.frame.maxX > self.view.bounds.width {
@@ -358,10 +325,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 //            }
 //        }
         
-//        let infoView = InfoWithIntroView(frame: CGRect(x: 10, y: 70, width: 100, height: 50))
-//        view.addSubview(infoView)
-        
-
+//
 //        let chartPointsTrackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak chartPointsLayer, weak currentPositionLabel] screenLoc in
 ////                    chartPointsLayer?.highlightChartpointView(screenLoc: screenLoc)
 //                    if let chartPoint = chartPointsLayer?.chartPointsForScreenLocX(screenLoc.x).first {
@@ -371,7 +335,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 //                    } else {
 //                        currentPositionLabel?.removeFromSuperview()
 //                    }
-//                    }, lineColor: colour2, lineWidth: 1)
+//        }, lineColor: colour2, lineWidth: 1)
         
 //        let chartPointsTrackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak chartPointsCircleLayer, weak currentPositionLabel] screenLoc in
 //            
@@ -434,7 +398,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             chartPointsLayer,
             chartPointsLineLayer,
             chartPointsCircleLayer,
-            chartPointsTrackerLayer
+//            chartPointsTrackerLayer
             ] as [ChartLayer]
         //
         // Add new layer for x dividers if selected time scale == 3 months or greater
@@ -490,263 +454,100 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     // --------------------------------------------------------------------------------------
     // Get Chart Points
     func returnChartPoints() -> [ChartPoint] {
+        //
+        // Format Date
+        let df = DateFormatter()
+        df.dateFormat = "dd.MM.yyyy"
+        //
         switch selectedTimeScale {
         // Week
         case 0:
-            let chartDataOld = weekTrackingDictionary.sorted(by: { $0.0.key < $0.1.key })
-            
-            var chartData: [(key: Date, value: Int)] = []
-            // Format Date
-            let df = DateFormatter()
-            df.dateFormat = "dd.MM.yyyy"
-            // Create dates from the keys and add to new array
-            for i in 0...(chartDataOld.count - 1) {
-                let key = chartDataOld[i].key
-                var date = Date()
-                // 2 months
-                if (chartDataOld.first?.key)! != currentMondayDate {
-                    // Last month
-                    if key >= currentMondayDate {
-                        var year = Int()
-                        switch currentMonth {
-                        // Month is january, last month is in last year
-                        case 1: year = currentYear - 1
-                        default: year = currentYear
-                        }
-                        let dateString = String(chartDataOld[i].key) + "." + String(currentMonth - 1) + "." + String(year)
-                        date = df.date(from: dateString)!
-                    // This month
-                    } else {
-                        let dateString = String(chartDataOld[i].key) + "." + String(currentMonth) + "." + String(currentYear)
-                        date = df.date(from: dateString)!
-
-                    }
-                // 1 month
-                } else {
-                    date = df.date(from: String(chartDataOld[i].key) + "." + String(currentMonth) + "." + String(currentYear))!
-                }
-                let valueToAdd = chartDataOld[i].value
-                let toAdd = (key: date, value: valueToAdd)
-                chartData.append(toAdd)
-            }
-            // sort
-            chartData = chartData.sorted(by: { $0.0.key < $0.1.key })
-
+            let chartData = weekTrackingDictionary.sorted(by: { $0.0.key < $0.1.key })
+            //
             let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
             return chartPoints
             
-        // Month
-        case 1:
-            let chartData = trackingDictionary[currentYear]?[currentMonth]?.sorted(by: { $0.0.key < $0.1.key })
-            let chartPoints: [ChartPoint] = (chartData?.map{ChartPoint(x: ChartAxisValueInt($0.0), y: ChartAxisValueInt($0.1))})!
-            return chartPoints
-            
-        // 3 Months, 6 Months
-        case 2,3:
+        // 1 Month, 3 Months, 6 Months
+        case 1,2,3:
             //
-            var monthsInt = Int()
+            // To get data from
+            let calendar = Calendar(identifier: .gregorian)
+            let keys = trackingDictionary.keys.sorted()
+            // To put data in (so only 1 month presented)
+            var chartData: [(key: Date, value: Int)] = []
+            //
+            // Add relevant daya to chartData Array
+            var startDate = Date()
+            // Start Date for 1, 3, 6 months
             switch selectedTimeScale {
+            case 1:
+                if keys.contains(Date().firstMondayInCurrentMonth) {
+                    startDate = Date().firstMondayInCurrentMonth
+                } else {
+                    startDate = keys.first!
+                }
             case 2:
-                monthsInt = 2
+                startDate = calendar.date(byAdding: .month, value: -2, to: Date().firstMondayInCurrentMonth)!
+                if keys.contains(startDate) == false {
+                    startDate = keys.first!
+                }
             case 3:
-                monthsInt = 5
+                startDate = calendar.date(byAdding: .month, value: -5, to: Date().firstMondayInCurrentMonth)!
+                if keys.contains(startDate) == false {
+                    startDate = keys.first!
+                }
             default: break
             }
-            //
-            //Chart Points
-            var chartPoints: [ChartPoint] = []
-            
-            //
-            // All months in same year
-            if currentMonth > monthsInt {
-                // Find last month filled in
-                var lastInt = Int()
-                for t in (0...monthsInt).reversed() {
-                    if trackingDictionary[currentYear]?[currentMonth - t] != nil {
-                        lastInt = t
-                        break
-                    }
-                }
-                //
-                chartPoints = returnChartPointsArray(chartPoints: chartPoints, year: currentYear, month: currentMonth, intToGoTo: lastInt)
-                
-            // Not all months in same year
-            } else {
-                // Last Year
-                // overlapInt = int to take away from 12 to get first month of the previous year possible (might not contain any data, if user started less than x (3,6) months ago)
-                    // Monthsint + 1 = number of months
-                let overLapIntFull = abs((monthsInt + 1) - currentMonth) - 1
-                // lastInt = int to take away from 12 to find last month of previous year that contains data
-                var overLapInt = Int()
-                for t in (0...overLapIntFull).reversed() {
-                    if trackingDictionary[currentYear - 1]?[12 - t] != nil {
-                        overLapInt = t
-                        break
-                    }
-                }
-                // Complete and append chartpoints last year
-                chartPoints = returnChartPointsArray(chartPoints: chartPoints, year: currentYear - 1, month: 12, intToGoTo: overLapInt)
-                
-                // This Year
-                // overLapInt is the number to take away from 12 to get the first month to use of the previous year
-                let nonOverLapInt = currentMonth - 1
-                // Complete and append chartpoints this year
-                chartPoints = returnChartPointsArray(chartPoints: chartPoints, year: currentYear, month: currentMonth, intToGoTo: nonOverLapInt)
+            let endDate = keys.last!
+            // Loop adding data to chartData
+            while startDate <= endDate {
+                let value = trackingDictionary[startDate]!
+                let tupleToAdd = (key: startDate, value: value)
+                chartData.append(tupleToAdd)
+                startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate)!
             }
             
+            let chartPoints: [ChartPoint] = (chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))})
             return chartPoints
             
         // Last year
         case 4:
-            //
-            //Chart Points
-            var chartPoints: [ChartPoint] = []
             
             //
-            // All months in same year
-            if currentMonth == 12 {
-                //
-                chartPoints = returnChartPointsArray2(chartPoints: chartPoints, year: currentYear, month: currentMonth, intToGoTo: 11)
-                
-            // Not all months in same year
-            } else {
-                // Last Year
-                // overlapInt = int to take away from 12 to get first month of the previous year possible (might not contain any data, if user started less than (3,6,12) months ago)
-                let overLapIntFull = abs(12 - currentMonth) - 1
-                // lastInt = int to take away from 12 to find last month of previous year that contains data
-                var overLapInt = Int()
-                for t in (0...overLapIntFull).reversed() {
-                    if monthTrackingDictionary[currentYear - 1]?[12 - t] != nil {
-                        overLapInt = t
-                        break
-                    }
-                }
-                // Complete and append chartpoints last year
-                if overLapInt != 0 {
-                    chartPoints = returnChartPointsArray2(chartPoints: chartPoints, year: currentYear - 1, month: 12, intToGoTo: overLapInt)
-                }
-                
-                // This Year
-                // overLapInt is the number to take away from 12 to get the first month to use of the previous year
-                let nonOverLapInt = currentMonth - 1
-                // Complete and append chartpoints this year
-                chartPoints = returnChartPointsArray2(chartPoints: chartPoints, year: currentYear, month: currentMonth, intToGoTo: nonOverLapInt)
+            // To get data from
+            let calendar = Calendar(identifier: .gregorian)
+            let keys = monthTrackingDictionary.keys.sorted()
+            // To put data in (so only 1 month presented)
+            var chartData: [(key: Date, value: Int)] = []
+            //
+            // Add relevant data to chartData Array
+            var startDate = calendar.date(byAdding: .year, value: -1, to: Date().firstDateInCurrentMonth)!
+            let endDate = keys.last!
+            // Loop adding data to chartData
+            while startDate <= endDate {
+                let tupleToAdd = (key: startDate, value: monthTrackingDictionary[startDate]!)
+                chartData.append(tupleToAdd)
+                startDate = calendar.date(byAdding: .month, value: 1, to: startDate)!
             }
             
+            let chartPoints: [ChartPoint] = (chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))})
             return chartPoints
         
         // All
         case 5:
+            let chartData = monthTrackingDictionary.sorted(by: { $0.0.key < $0.1.key })
             //
-            //Chart Points
-            var chartPoints: [ChartPoint] = []
-            
-            //
-            // All months in same year
-            if monthTrackingDictionary.count == 1 {
-                //
-                chartPoints = returnChartPointsArray2(chartPoints: chartPoints, year: currentYear, month: currentMonth, intToGoTo: currentMonth - 1)
-                
-            // Not all months in same year
-            } else {
-                
-                // Loop all years, starting from the first
-                for i in (1...monthTrackingDictionary.count - 1).reversed() {
-                    var overLapInt = Int()
-                    for t in (0...12).reversed() {
-                        if monthTrackingDictionary[currentYear - i]?[12 - t] != nil {
-                        overLapInt = t
-                            break
-                        }
-                    }
-                    
-                    // Complete and append chartpoints last year
-                    chartPoints = returnChartPointsArray2(chartPoints: chartPoints, year: currentYear - i, month: 12, intToGoTo: overLapInt)
-                }
-                
-                // This Year
-                let nonOverLapInt = currentMonth - 1
-                // Complete and append chartpoints this year
-                chartPoints = returnChartPointsArray2(chartPoints: chartPoints, year: currentYear, month: currentMonth, intToGoTo: nonOverLapInt)
-            }
-            
+            let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
             return chartPoints
         //
         default:
             //
-            let chartData = weekTrackingDictionary.sorted(by: { $0.0.key < $0.1.key })
-            let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueInt($0.0), y: ChartAxisValueInt($0.1))}
+            let chartData = monthTrackingDictionary.sorted(by: { $0.0.key < $0.1.key })
+            let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
             return chartPoints
             
         }
     }
-    //
-    // Return chart points func, 3 months, 6 months (uses trackingDictionary)
-    func returnChartPointsArray(chartPoints: [ChartPoint], year: Int, month: Int, intToGoTo: Int) -> [ChartPoint] {
-        // Test
-        let dfConvert = DateFormatter()
-        dfConvert.dateFormat = "dd.MM.yyyy"
-        //
-        var chartPointsUpdated = chartPoints
-        //test
-        //
-        for i in (0...intToGoTo).reversed() {
-            for j in 0...(trackingDictionary[year]?[month - i]?.count)! - 1 {
-                // Get array of dates sorted
-                var toConvertArray = trackingDictionary[year]?[month - i]?.sorted(by: { $0.0.key < $0.1.key })
-                var toAddValue = toConvertArray?[j].value
-                
-                // Get array of month keys sorted
-                var toConvertKeys = trackingDictionary[year]?[month - i]?.keys.sorted()
-                // Get month as string + .
-                let toAddMonth = "." + String(month - i)
-                // Get year as string + .
-                let toAddYear = "." + String(year)
-                // Get day as string
-                let toConvertString = toConvertKeys?[j]
-                let toAddDayString: String = String(toConvertString!)
-                // Format date as "dd.MM"
-                let toAddDateString = toAddDayString + toAddMonth + toAddYear
-                let toAddDate = dfConvert.date(from: toAddDateString)!
-                // Create Chart Point and add to chartPoints + make x axis values labels clear
-                let clearLabelSettings = ChartLabelSettings(font: UIFont(name: "SFUIDisplay-light", size: 19)!, fontColor: .clear)
-                let chartPointToAdd = ChartPoint(x: ChartAxisValueDate(date: toAddDate, formatter: dfConvert, labelSettings: clearLabelSettings), y: ChartAxisValueInt(toAddValue!))
-                chartPointsUpdated.append(chartPointToAdd)
-            }
-            
-        }
-        return chartPointsUpdated
-    }
-    //
-    // Return chart points func, 12 months, All (uses monthTrackingDictionary) (month has different use this time, it determines what value to take away intogoto from (current month - 1 if current year, 11 if last year
-    func returnChartPointsArray2(chartPoints: [ChartPoint], year: Int, month: Int, intToGoTo: Int) -> [ChartPoint] {
-        // Test
-        let dfConvert = DateFormatter()
-        dfConvert.dateFormat = "MM.yyyy"
-        //
-        var chartPointsUpdated = chartPoints
-        //test
-        //
-        // If no points in year
-        for i in (0...intToGoTo).reversed() {
-            // Get array of dates sorted
-            let toAddValue = monthTrackingDictionary[year]?[month - i]
-
-            // Get month as string
-            let toAddMonth: String = String(month - i)
-            // Get year as string + .
-            let toAddYear = "." + String(year)
-            // Format date as "MM.yyyy"
-            let toAddDateString = toAddMonth + toAddYear
-            let toAddDate = dfConvert.date(from: toAddDateString)!
-            // Create Chart Point and add to chartPoints + make x axis values labels clear
-            let clearLabelSettings = ChartLabelSettings(font: UIFont(name: "SFUIDisplay-light", size: 14)!, fontColor: .clear)
-            let chartPointToAdd = ChartPoint(x: ChartAxisValueDate(date: toAddDate, formatter: dfConvert, labelSettings: clearLabelSettings), y: ChartAxisValueInt(toAddValue!))
-            chartPointsUpdated.append(chartPointToAdd)
-        }
-        return chartPointsUpdated
-    }
-
     
     // --------------------------------------------------------------------------------------
     // Get Generator, only used for week and month
@@ -764,6 +565,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     // --------------------------------------------------------------------------------------
     // Get Axis Values
     func returnAxisValues(chartPoints: [ChartPoint]) -> [ChartAxisValue] {
+        
         // Parameters
         //
         var axisLabelSettings = ChartLabelSettings(font: UIFont(name: "SFUIDisplay-light", size: 14)!)
@@ -777,14 +579,13 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             let df = DateFormatter()
             df.dateFormat = "dd.MM.yyyy"
-            // Fill in empty values
+            // Fill in empty values if there are any (if current day isn't sunday)
             if xValues.count != 7 {
+                // Number of empty days to add
                 let numberToAdd = 7 - xValues.count
-                let valueToConvert = xValues.last!
-                let dateString: String = String(describing: valueToConvert)
-                let lastDate = df.date(from: dateString)
+                let keys = weekTrackingDictionary.keys.sorted()
                 for i in 1...numberToAdd {
-                    let dateToAdd = Calendar.current.date(byAdding: .day, value: i, to: lastDate!)
+                    let dateToAdd = Calendar.current.date(byAdding: .day, value: i, to: keys.last!)
                     let valueToAdd = ChartAxisValueDate(date: dateToAdd!, formatter: df)
                     xValues.append(valueToAdd)
                 }
@@ -792,319 +593,154 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             return xValues
 
-        // 1 month doesn't use axis values
-            
-        // 3 Months
-        case 2:
+        //
+        // 1 Month, 3 Months, 6 Months
+        case 1,2,3:
+            //
             var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
-            //
-            //
-            // All months in same year
-            if currentMonth > 2 {
-                //
-                xValues = completeChartAxisValues(xValues: xValues, year: currentYear, month: currentMonth, intToGoTo: 2)
-                
-                // Not all months in same year
-            } else {
-                // overLapInt is the number to take away from 12 to get the first month to use of the previous year
-                let overLapInt = abs(3 - currentMonth) - 1
-                // int to take away from current month to find first month of year (january)
-                let nonOverLapInt = 1 - overLapInt
-                // Complete chartAxisValues this year
-                xValues = completeChartAxisValues(xValues: xValues, year: currentYear, month: currentMonth, intToGoTo: nonOverLapInt)
-                // Complete chartAxisValues last year
-                xValues = completeChartAxisValues(xValues: xValues, year: currentYear - 1, month: 12, intToGoTo: overLapInt)
-            }
-            
-            
-            return xValues
-            
-            
-        // 6 Months
-        case 3:
-            var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
-            //
-            //
-            // All months in same year
-            if currentMonth > 5 {
-                //
-                xValues = completeChartAxisValues(xValues: xValues, year: currentYear, month: currentMonth, intToGoTo: 5)
-                
-            // Not all months in same year
-            } else {
-                // overLapInt is the number to take away from 12 to get the first month to use of the previous year
-                let overLapInt = abs(6 - currentMonth) - 1
-                // int to take away from current month to find first month of year (january)
-                let nonOverLapInt = 4 - overLapInt
-                // Complete chartAxisValues this year
-                xValues = completeChartAxisValues(xValues: xValues, year: currentYear, month: currentMonth, intToGoTo: nonOverLapInt)
-                // Complete chartAxisValues last year
-                xValues = completeChartAxisValues(xValues: xValues, year: currentYear - 1, month: 12, intToGoTo: overLapInt)
-            }
-            
-            
-            return xValues
 
+            // To get data from
+            let calendar = Calendar(identifier: .gregorian)
+            let keys = trackingDictionary.keys.sorted()
+            //
+            // Add empty xvalues before if necessart
+            var startDate = Date()
+            var endDate = Date()
+            
+            //
+            // Fill empty values before first date if neccessary (the user might have started within the selected timescale)
+            //
+            // lastweek - 1
+            endDate = calendar.date(byAdding: .weekOfYear, value: -1, to: keys.first!)!
+            // Start Date for 1, 3, 6 months
+            switch selectedTimeScale {
+            case 1:
+                startDate = Date().firstDateInCurrentMonth
+                if keys.contains(startDate) == false {
+                    xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
+                }
+            case 2:
+                startDate = calendar.date(byAdding: .month, value: -2, to: Date().firstDateInCurrentMonth)!
+                if keys.contains(startDate) == false {
+                    xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
+                }
+            case 3:
+                startDate = calendar.date(byAdding: .month, value: -5, to: Date().firstDateInCurrentMonth)!
+                if keys.contains(startDate) == false {
+                    xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
+                }
+            default: break
+            }
+            
+            
+            //
+            // Fill emtpy values after first date if neccessary (the current date wont always be last date in month)
+            //
+            // Start date is 1 after last monday added
+            startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: keys.last!)!
+            // firstmonday + ((numberofmondaysincurrentmonth - 1) * weeks) = lastmonday
+            let toAdd = Date().numberOfMondaysInCurrentMonth - 1
+            let test = Date().firstMondayInCurrentMonth
+            let test2 = Date().firstMondayInCurrentWeek
+            endDate = calendar.date(byAdding: .weekOfYear, value: toAdd, to: Date().firstMondayInCurrentMonth)!
+            // Start Date for 1, 3, 6 months
+            switch selectedTimeScale {
+            case 1:
+                if keys.contains(endDate) == false {
+                    xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
+                }
+            case 2:
+                if keys.contains(endDate) == false {
+                    xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
+                }
+            case 3:
+                if keys.contains(endDate) == false {
+                    xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
+                }
+            default: break
+            }
+            
+            
+            return xValues
+            
             
         // 12 Months
         case 4:
-            var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
             //
-            // All months in same year
-            if currentMonth == 12 {
-                //
-                xValues = completeChartAxisValues2(xValues: xValues, year: currentYear, intToGoTo: 11, month: currentMonth - 1)
-                
-                // Not all months in same year
-            } else {
-                // overLapInt is the number to take away from 12 to get the first month to use of the previous year
-                let overLapInt = abs(12 - currentMonth) - 1
-                // int to take away from current month to find first month of year (january)
-                let nonOverLapInt = 10 - overLapInt
-                // Complete chartAxisValues this year (month: is either current month - 1 or 11)
-                xValues = completeChartAxisValues2(xValues: xValues, year: currentYear, intToGoTo: nonOverLapInt, month: currentMonth)
-                
-                // lastMonth = last month with values contained in the dic, it is the value to take away from the current month to find the last month
-                var lastMonth = Int()
-                for t in (0...12).reversed() {
-                    if monthTrackingDictionary[currentYear - 1]?[12 - t] != nil {
-                        lastMonth = t
-                        break
-                    }
-                }
-                // Complete chartAxisValues last year
-                xValues = completeChartAxisValues2(xValues: xValues, year: currentYear - 1, intToGoTo: overLapInt, month: 12)
+            var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
+            
+            // To get data from
+            let calendar = Calendar(identifier: .gregorian)
+            let keys = monthTrackingDictionary.keys.sorted()
+            //
+            // Add empty xvalues before if necessart
+            var startDate = Date()
+            var endDate = Date()
+            
+            //
+            // Fill empty values before first date if neccessary (the user might have started within the selected timescale)
+            //
+            // Add empty xvalues before if necessary
+            // lastweek - 1
+            endDate = calendar.date(byAdding: .weekOfYear, value: -1, to: keys.first!)!
+            //
+            startDate = calendar.date(byAdding: .month, value: -11, to: Date().firstDateInCurrentMonth)!
+            if keys.contains(startDate) == false {
+                xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
             }
             
             
+            //
+            // Fill emtpy values after first date if neccessary (the current date wont always be last date in month)
+            //
+            // Add empty xvalues After if necessary
+            startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: Date().firstMondayInCurrentMonth)!
+            // firstmonday + ((numberofmondaysincurrentmonth - 1) * weeks) = lastmonday
+            let toAdd = Date().numberOfMondaysInCurrentMonth - 1
+            endDate = calendar.date(byAdding: .weekOfYear, value: toAdd, to: Date().firstMondayInCurrentMonth)!
+            //
+            if keys.contains(endDate) == false {
+                xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
+            }
+            
             return xValues
+            
             
         // All
         case 5:
-            var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
-            //
-            // All months in same year
-            if monthTrackingDictionary.count == 1 {
-                //
-                xValues = completeChartAxisValues2(xValues: xValues, year: currentYear, intToGoTo: 11, month: currentMonth - 1)
-                
-                // Not all months in same year
-            } else {
-                // overLapInt is the number to take away from 12 to get the first month to use of the previous year
-                let overLapInt = abs(12 - currentMonth) - 1
-                // int to take away from current month to find first month of year (january)
-                let nonOverLapInt = 10 - overLapInt
-                // Complete chartAxisValues this year (month: is either current month - 1 or 11)
-                xValues = completeChartAxisValues2(xValues: xValues, year: currentYear, intToGoTo: nonOverLapInt, month: currentMonth)
-                
-                
-                // Loop all years, starting from the current - 1
-                for i in 1...monthTrackingDictionary.count - 1 {
-                // lastMonth = last month with values contained in the dic, it is the value to take away from the current month to find the last month
-                var lastMonth = Int()
-                for t in (0...12).reversed() {
-                    if monthTrackingDictionary[currentYear - i]?[12 - t] != nil {
-                        lastMonth = t
-                        break
-                    }
-                }
-                // Complete chartAxisValues last year
-                xValues = completeChartAxisValues2(xValues: xValues, year: currentYear - 1, intToGoTo: lastMonth, month: 12)
-                }
-            }
-            
-            
+            let xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
             return xValues
         //
         default:
-            let first = weekTrackingDictionary.keys.sorted().first!
-            let xValues = [
-                ChartAxisValueString(NSLocalizedString("mondayChar", comment: ""), order: first, labelSettings: axisLabelSettings),
-                ChartAxisValueString(NSLocalizedString("tuesdayChar", comment: ""), order: first + 1, labelSettings: axisLabelSettings),
-                ChartAxisValueString(NSLocalizedString("wednesdayChar", comment: ""), order: first + 2, labelSettings: axisLabelSettings),
-                ChartAxisValueString(NSLocalizedString("thursdayChar", comment: ""), order: first + 3, labelSettings: axisLabelSettings),
-                ChartAxisValueString(NSLocalizedString("fridayChar", comment: ""), order: first + 4, labelSettings: axisLabelSettings),
-                ChartAxisValueString(NSLocalizedString("saturdayChar", comment: ""), order: first + 5, labelSettings: axisLabelSettings),
-                ChartAxisValueString(NSLocalizedString("sundayChar", comment: ""), order: first + 6, labelSettings: axisLabelSettings),
-                ]
+            let xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
             return xValues
         }
     }
-    //
-    //
-    // Complete chart axis values func (inToGoTo represent to cycle through 0...something, depends if year is current or previous year (i.e, months = 11.12|1.2.3.4, intToGoTo would be 3 for this year and 1 for last year, it is the number to take from the current month (for current year) to find january and the number to take from 12 (previous year) to find the first month), 3 Months - 6 Months
-    func completeChartAxisValues(xValues: [ChartAxisValue], year: Int, month: Int, intToGoTo: Int) -> [ChartAxisValue] {
+    
+    
+    
+    // Fill empty xvalues if user started less that 1,3,6 months ago
+    func fillEmptyValues(startDate: Date, endDate: Date, xValues: [ChartAxisValue]) -> [ChartAxisValue] {
         //
-        var xValuesUpdated = xValues
-        // Date Formatter
-        let dfConvert = DateFormatter()
-        dfConvert.dateFormat = "dd.MM.yyyy"
-        
+        let calendar = Calendar(identifier: .gregorian)
+        // Need a mutable start date
+        var startDate2 = startDate
+        var updatedXValues = xValues
         //
-        let mondayKeys = trackingDictionary[year]?[month]?.keys.sorted()
-        
-        // Add empty months mondays at the begging (if any empty months) -- this is a check incase the user's first value tracked was sooner than the desired display time (i.e in month 2 of the 3 months to be displayed)
-        // Find last month filled in
-        // lastMonth = last month with values contained in the dic, it is the value to take away from the current month to find the last month
-        var lastMonth = Int()
-        for t in (0...intToGoTo).reversed() {
-            if trackingDictionary[year]?[month - t] != nil {
-                lastMonth = t
-                break
-            }
-        }
-        // Get new values to add as chart points so labelsettings clear font can be applied to the points
-        var chartPoints3: [ChartPoint] = []
-        
-        // Add months
-        // intToGoTo - (lastMonth - 1) = the value to take away from month to find the last empty month|| doens't work if there is no last empty month so check lastMonth isn;t equal to the intToGoTo first
-        if lastMonth != intToGoTo {
-            for i in ((intToGoTo - (lastMonth + 1))...intToGoTo).reversed() {
-                let numberOfMondays = numberOfMondaysInMonth(month - i, forYear: year)
-                let firstMonday = firstMondayInMonth(month - i, forYear: year)
-                for j in 0...(numberOfMondays! - 1){
-                    // Get Month as string ".MM"
-                    let toAddMonth = "." + String(month - i)
-                    // Get year as string + .
-                    let toAddYear = "." + String(year)
-                    // Get Monday
-                    let mondayToConvert = firstMonday! + (7 * j)
-                    let mondayString: String = String(mondayToConvert)
-                    let dateToConvert = mondayString + toAddMonth + toAddYear
-                    let mondayDate = dfConvert.date(from: dateToConvert)
-                    // Create chart point with clear label settings
-                    let clearLabelSettings = ChartLabelSettings(font: UIFont(name: "SFUIDisplay-light", size: 19)!, fontColor: .clear)
-                    let chartPointToAdd = ChartPoint(x: ChartAxisValueDate(date: mondayDate!, formatter: dfConvert, labelSettings: clearLabelSettings), y: ChartAxisValueInt(0))
-                    chartPoints3.append(chartPointToAdd)
-                }
-                
-            }
-        }
-        
-        // Make sure last month has all values, i.e didn't start mid way through the month
-        let numberOfMondaysLast = numberOfMondaysInMonth(month - lastMonth, forYear: year)
-        if (trackingDictionary[year]?[month - lastMonth]?.count)! < numberOfMondaysLast! {
+        // Format Date
+        let df = DateFormatter()
+        df.dateFormat = "dd.MM.yyyy"
+        // Loop adding data to chartData
+        while startDate2 < endDate {
+            let dateToAdd = ChartAxisValueDate(date: startDate, formatter: df)
+            updatedXValues.append(dateToAdd)
             //
-            let toAdd = numberOfMondaysLast! - (trackingDictionary[year]?[month - lastMonth]?.count)!
-            let lastMonday = trackingDictionary[year]?[month - lastMonth]?.keys.sorted().last
-            // Create array of chart points to add
-            for i in 1...toAdd {
-                // Get Month as string ".MM"
-                let toAddMonth = "." + String(month - lastMonth)
-                // Get year as string + .
-                let toAddYear = "." + String(year)
-                // Get Monday
-                let mondayToConvert = lastMonday! + (7 * i)
-                let mondayString: String = String(mondayToConvert)
-                let dateToConvert = mondayString + toAddMonth + toAddYear
-                let mondayDate = dfConvert.date(from: dateToConvert)
-                // Create chart point with clear label settings
-                let clearLabelSettings = ChartLabelSettings(font: UIFont(name: "SFUIDisplay-light", size: 19)!, fontColor: .clear)
-                let chartPointToAdd = ChartPoint(x: ChartAxisValueDate(date: mondayDate!, formatter: dfConvert, labelSettings: clearLabelSettings), y: ChartAxisValueInt(0))
-                chartPoints3.append(chartPointToAdd)
-            }
-        }
-        
-        // Get array of xValues
-        let xValuesToAdd: [ChartAxisValue] = (NSOrderedSet(array: chartPoints3).array as! [ChartPoint]).map{$0.x}
-        
-        // Append new array to xValues array if there are new values to append
-        if xValuesToAdd.count != 0 {
-            for i in (0...xValuesToAdd.count - 1).reversed() {
-                xValuesUpdated.insert(xValuesToAdd[i], at: 0)
-            }
-        }
-        
-        // Check last month has all keys even if no value pair is associated with it, if not fill in necessary mondays (Add current months empty months if there are any)
-        let numberOfMondays = numberOfMondaysInMonth(month, forYear: year)
-        if (mondayKeys?.count)! < numberOfMondays! {
-            // Date Formatter
-            let dfConvert = DateFormatter()
-            dfConvert.dateFormat = "dd.MM.yyyy"
-            //
-            let toAdd = numberOfMondays! - (mondayKeys?.count)!
-            let lastMonday = mondayKeys?.last
-            // Create array of chart points to add
-            var chartPoints2: [ChartPoint] = []
-            for i in 1...toAdd {
-                // Get Month as string ".MM"
-                let toAddMonth = "." + String(month)
-                // Get year as string + .
-                let toAddYear = "." + String(year)
-                // Get Monday
-                let mondayToConvert = lastMonday! + (7 * i)
-                let mondayString: String = String(mondayToConvert)
-                let dateToConvert = mondayString + toAddMonth + toAddYear
-                let mondayDate = dfConvert.date(from: dateToConvert)
-                // Create chart point with clear label settings
-                let clearLabelSettings = ChartLabelSettings(font: UIFont(name: "SFUIDisplay-light", size: 19)!, fontColor: .clear)
-                let chartPointToAdd = ChartPoint(x: ChartAxisValueDate(date: mondayDate!, formatter: dfConvert, labelSettings: clearLabelSettings), y: ChartAxisValueInt(0))
-                chartPoints2.append(chartPointToAdd)
-            }
-            
-            // Get array of xValues
-            let xValuesToAdd: [ChartAxisValue] = (NSOrderedSet(array: chartPoints2).array as! [ChartPoint]).map{$0.x}
-            
-            // Append new array to xValues array
-            for i in 0...xValuesToAdd.count - 1 {
-                xValuesUpdated.append(xValuesToAdd[i])
-            }
+            startDate2 = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate2)!
         }
         //
-        return xValuesUpdated
+        return updatedXValues
     }
-
-    // ----
-    // Complete chart axis values func 2, 12Months - All
-    func completeChartAxisValues2(xValues: [ChartAxisValue], year: Int, intToGoTo: Int, month: Int) -> [ChartAxisValue] {
-        var xValuesUpdated = xValues
-        //
-        // Date Formatter
-        let dfConvert = DateFormatter()
-        dfConvert.dateFormat = "MM.yyyy"
-        
-        //
-        // lastMonth = last month with values contained in the dic, it is the value to take away from the current month to find the last month
-        var lastMonth = Int()
-        for t in (0...intToGoTo).reversed() {
-            if monthTrackingDictionary[year]?[12 - t] != nil {
-                lastMonth = t
-                break
-            }
-        }
-        
-        // Get new values to add as chart points so labelsettings clear font can be applied to the points
-        var chartPoints2: [ChartPoint] = []
-        // Add empty months if any exist
-        if lastMonth != intToGoTo {
-            for i in (0...intToGoTo).reversed() {
-                // Get month as string
-                var toAddMonth: String = String(month - i)
-                // Get year as string + .
-                let toAddYear = "." + String(year)
-                // Format date as "MM.yyyy"
-                let toAddDateString = toAddMonth + toAddYear
-                let toAddDate = dfConvert.date(from: toAddDateString)!
-                // Create Chart Point and add to chartPoints + make x axis values labels clear
-                let clearLabelSettings = ChartLabelSettings(font: UIFont(name: "SFUIDisplay-light", size: 19)!, fontColor: .clear)
-                let chartPointToAdd = ChartPoint(x: ChartAxisValueDate(date: toAddDate, formatter: dfConvert, labelSettings: clearLabelSettings), y: ChartAxisValueInt(0))
-                chartPoints2.append(chartPointToAdd)
-            }
-        }
-        
-        // Get array of xValues
-        let xValuesToAdd: [ChartAxisValue] = (NSOrderedSet(array: chartPoints2).array as! [ChartPoint]).map{$0.x}
-        
-        // Append new array to xValues array if there are new values to append
-        if xValuesToAdd.count != 0 {
-            for i in (0...xValuesToAdd.count - 1).reversed() {
-                xValuesUpdated.insert(xValuesToAdd[i], at: 0)
-            }
-        }
-        //
-        return xValuesUpdated
-    }
-
+    
     
     // --------------------------------------------------------------------------------------
     // Get xAxis Model
@@ -1143,13 +779,29 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
         // Month
         case 1:
+            // Date formatters
+            let dfConvert = DateFormatter()
+            dfConvert.dateFormat = "dd.MM.yyyy"
+            
+            let df2 = DateFormatter()
+            df2.dateFormat = " dd"
+            
+            // Generators
+            var titleLabelSettings2 = titleLabelSettings
+            titleLabelSettings2.textAlignment = .right
+            titleLabelSettings2.rotation = 0.1
+            titleLabelSettings2.rotationKeep = .top
             //
-            let firstModelValuex = Double((trackingDictionary[currentYear]?[currentMonth]?.keys.sorted().first)!)
+            let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: titleLabelSettings2, formatter: df2)
+            let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .month, preferredDividers: 2, minSpace: 0, maxTextSize: 12)
+            
             //
-            let numberOfMondaysToAdd = numberOfMondaysInMonth(currentMonth, forYear: currentYear)! - 1
-            let lastModelValuex = firstModelValuex + Double(numberOfMondaysToAdd * 7)
-            //
-            let xModel = ChartAxisModel(lineColor: colour1, firstModelValue: firstModelValuex, lastModelValue: lastModelValuex, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: generator, labelsGenerator: labelsGenerator, leadingPadding: ChartAxisPadding.label, trailingPadding: ChartAxisPadding.label)
+            let firstDateString: String = String(describing: xAxisValues.first!)
+            let firstDate = dfConvert.date(from: firstDateString)
+            let lastDateString: String = String(describing: xAxisValues.last!)
+            let lastDate = dfConvert.date(from: lastDateString)
+            let xModel = ChartAxisModel(lineColor: colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
+            
             return xModel
            
         // 3 Month

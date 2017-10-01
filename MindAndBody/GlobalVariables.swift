@@ -114,7 +114,11 @@ var weekProgress = 36.0
 var monthProgress = 36.0
 
 // Monday - Sunday
-var weekTrackingDictionary: [Int:Int] =
+var weekTrackingDictionary: [Date: Int] = [:]
+
+
+// Monday - Sunday
+//var weekTrackingDictionary: [Int:Int] =
 // Testing update funcs
     // Testing updating today - Works
 //        [2:10,
@@ -147,8 +151,8 @@ var weekTrackingDictionary: [Int:Int] =
     // Testing no days - Works
 //    [:]
     // Testing skipped days (current date = 7) + starting mid way through week - Works +
-    [04:10,
-    05:15]
+//    [04:10,
+//    05:15]
 
     // Test
 //    [07:10,
@@ -159,7 +163,8 @@ var weekTrackingDictionary: [Int:Int] =
 
 
 // All tracking in % of weeks
-var trackingDictionary: [Int:[Int:[Int:Int]]] =
+var trackingDictionary: [Date:Int] = [:]
+//var trackingDictionary: [Int:[Int:[Int:Int]]] =
     // Testing update funcs
     // Week tracking, starting new year, + skipping months last year (+ weeks), + skipping weeks last year - Works + Works + Works
 //    [2016:  [09: [5: 90,
@@ -237,27 +242,27 @@ var trackingDictionary: [Int:[Int:[Int:Int]]] =
 //            ]
 
     
-    
-    //=  [:]
-    // Test
-    [2017:  [06: [5: 70,
-                  12: 75,
-                  19: 80,
-                  26: 85],
-            07: [3: 70,
-                  10: 75,
-                  17: 80,
-                  24: 85,
-                  31: 90],
-            08: [7: 90,
-                   14: 95,
-                   21: 70,
-                   28: 80],
-            09: [04: 100,
-                   11: 100,
-                   18: 97]
-            ]
-    ]
+//
+//    //=  [:]
+//    // Test
+//    [2017:  [06: [5: 70,
+//                  12: 75,
+//                  19: 80,
+//                  26: 85],
+//            07: [3: 70,
+//                  10: 75,
+//                  17: 80,
+//                  24: 85,
+//                  31: 90],
+//            08: [7: 90,
+//                   14: 95,
+//                   21: 70,
+//                   28: 80],
+//            09: [04: 100,
+//                   11: 100,
+//                   18: 97]
+//            ]
+//    ]
     // Test 2
 //    [2016:  [12: [05: 70,
 //                  12: 75,
@@ -306,7 +311,8 @@ var trackingDictionary: [Int:[Int:[Int:Int]]] =
 //        ]
 //]
     // All tracking in % of months
-var monthTrackingDictionary: [Int:[Int:Int]] =
+var monthTrackingDictionary: [Date:Int] = [:]
+//var monthTrackingDictionary: [Int:[Int:Int]] =
     // Testing update funcs starting new year skipping months and starting new year - Works + Works
 //     [2016:[01: 70,
 //           02: 75,
@@ -324,17 +330,17 @@ var monthTrackingDictionary: [Int:[Int:Int]] =
 //    ]
 
     // Skipping months + starting new months + updating months - Works + Works + Works
-    [2017:[01: 70,
-           02: 75,
-           03: 80,
-           04: 85,
-           05: 70,
-           06: 75,
-           07: 80,
-           08: 85,
-           09: 25,
-        ]
-    ]
+//    [2017:[01: 70,
+//           02: 75,
+//           03: 80,
+//           04: 85,
+//           05: 70,
+//           06: 75,
+//           07: 80,
+//           08: 85,
+//           09: 25,
+//        ]
+//    ]
 
     
     

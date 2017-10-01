@@ -196,10 +196,9 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     // Pass data and remove back bar text on next screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Pass Data
-        if (segue.identifier == "warmupSegue") {
-        //
-        let destinationVC = segue.destination as! FinalChoice
-        
+        if (segue.identifier == "customSegueWarmup") {
+            let destinationVC = segue.destination as! FinalChoiceCustom
+            destinationVC.selectedType = 0
         }
         
         // Remove back bar text
