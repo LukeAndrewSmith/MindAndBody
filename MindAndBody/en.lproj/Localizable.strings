@@ -103,24 +103,77 @@
 
 
 //
-// MARK: Schedule //
+// MARK: Schedule // ------------------------------------------------
 "schedule" = "Schedule";
 
-    "monday" = "Monday";
-    "tuesday" = "Tuesday";
-    "wednesday" = "Wednesday";
-    "thursday" = "Thursday";
-    "friday" = "Friday";
-    "saturday" ="Saturday";
-    "sunday" = "Sunday";
-        //
-    "mondayLetter" = "M";
-    "tuesdayLetter" = "T";
-    "wednesdayLetter" = "W";
-    "thursdayLetter" = "T";
-    "fridayLetter" = "F";
-    "saturdayLetter" = "S";
-    "sundayLetter" = "S";
+"monday" = "Monday";
+"tuesday" = "Tuesday";
+"wednesday" = "Wednesday";
+"thursday" = "Thursday";
+"friday" = "Friday";
+"saturday" ="Saturday";
+"sunday" = "Sunday";
+//
+"mondayLetter" = "M";
+"tuesdayLetter" = "T";
+"wednesdayLetter" = "W";
+"thursdayLetter" = "T";
+"fridayLetter" = "F";
+"saturdayLetter" = "S";
+"sundayLetter" = "S";
+
+// Goals
+"mind" = "Mind";
+"flexibility" = "Flexibility";
+"endurance" = "Endurance";
+"fatLoss" = "Fat Loss";
+"muscleGain" = "Muscle Gain";
+"strength" = "Strength";
+
+// Choices
+// General
+"sessionLength" = "Session Length";
+"focus" = "Focus";
+"toDo" = "To Do";
+// Mind
+"mindType" = "Mind - Type";
+    // Choice 1
+    "walk" = "Walk";
+    "calm" = "Calm";
+    "stressReduction" = "Reduce Stress";
+    "strength" = "Strength";
+    "energising" = "Energy";
+    "focusing" = "Focus";
+    // Choice 2
+    "practiceLength" = "Practice Length";
+// Flexibility
+"flexibilityType" = "Flexibility - Type";
+    // Choice 3
+    "hamstrings" = "Hamstrings";
+    "hips" = "Hips";
+    "back/neck" = "Back/Neck";
+// Endurance
+"steadyState" = "Steady State";
+    // Choice 2
+    "enduranceType" = "Endurance - Type";
+// Fat Loss
+"fatLossType" = "Fat Loss Type";
+    // Choice 1
+    "highIntensityCardio" = "High Intensity Cardio";
+    "bodyWeightWorkout" = "Bodyweight Workout";
+// Muscle Gain
+"muscleGainType" = "Muscle Gain Type";
+// Strength
+    // Choice 1
+    "short" = "Short";
+    "normal" = "Normal";
+    // Choice 3
+    "5x51" = "5x5 - 1";
+    "5x52" = "5x5 - 2";
+    "accessory1" = "Accessory Workout 1";
+    "accessory2" = "Accessor";
+
+
 
 
 

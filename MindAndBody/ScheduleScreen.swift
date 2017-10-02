@@ -35,7 +35,29 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     let backgroundBlur = UIVisualEffectView()
 
     // Content Arrays
-    var daySessionArray: [String] = ["Body -   Endurance", "Mind", "Warmup Test", "Meditation Test"]
+    var daySessionsArray: [[Int]] =
+    [
+        // Monday
+        [0,1,2,3,4,5],
+        // Tuesday
+        [0,1,2],
+        // Wednesday
+        [2],
+        // Thursday
+        [5],
+        // Firday
+        [0,4],
+        // Saturday
+        [2],
+        // Sunday
+        [5]
+    ]
+    
+    
+    // choiceProgress Indicated progress through the choices to select a session
+    // choiceProgress[0] = -1 if first screen, i.e choices being displayed
+    var choiceProgress = [-1,0]
+    
     
     //
     // Variables
@@ -303,7 +325,13 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         switch tableView {
         case scheduleTable:
-            return daySessionArray.count + 1
+            // First Screen, showing groups
+            if choiceProgress[0] == -1 {
+                return daySessionsArray[selectedDay].count + 1
+            // Selecting a session
+            } else {
+                return sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]].count
+            }
         case scheduleChoiceTable:
             return 1 + 1
         default:
@@ -331,44 +359,80 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         switch tableView {
         case scheduleTable:
-            switch indexPath.row {
-            case daySessionArray.count:
-                let editButton = UILabel()
-                editButton.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
-                editButton.textColor = colour1
-                editButton.text = NSLocalizedString("edit", comment: "")
-                editButton.alpha = 0.72
-                editButton.sizeToFit()
-                editButton.frame = CGRect(x: 27, y: 0, width: (view.bounds.width - 54) / 2, height: 72)
-                // action
-                editButton.isUserInteractionEnabled = true
-                let tap = UITapGestureRecognizer(target: self, action: #selector(editButtonTap))
-                tap.numberOfTapsRequired = 1
-                editButton.addGestureRecognizer(tap)
-                cell.addSubview(editButton)
-                //
-//                let plusImage = UIImageView()
-//                plusImage.image = #imageLiteral(resourceName: "Plus")
-//                plusImage.tintColor = colour1
-//                plusImage.alpha = 0.72
-//                plusImage.sizeToFit()
-//                plusImage.frame = CGRect(x: view.bounds.width - 27 - plusImage.bounds.width, y: (72 / 2) - (plusImage.bounds.height / 2), width: plusImage.bounds.width, height: plusImage.bounds.height)
-//                cell.addSubview(plusImage)
-                //
-                let seperator = CALayer()
-                seperator.frame = CGRect(x: 27, y: 0, width: (view.bounds.width - 54) / 3, height: 1)
-                seperator.backgroundColor = colour1.cgColor
-                seperator.opacity = 0.25
-                cell.layer.addSublayer(seperator)
-            default:
-                let dayLabel = UILabel()
-                dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
-                dayLabel.textColor = colour1
-                dayLabel.text = NSLocalizedString(daySessionArray[indexPath.row], comment: "")
-                dayLabel.numberOfLines = 2
-                dayLabel.sizeToFit()
-                dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
-                cell.addSubview(dayLabel)
+            // First Screen, showing groups
+            if choiceProgress[0] == -1 {
+                switch indexPath.row {
+                case daySessionsArray[selectedDay].count:
+                    let editButton = UILabel()
+                    editButton.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
+                    editButton.textColor = colour1
+                    editButton.text = NSLocalizedString("edit", comment: "")
+                    editButton.alpha = 0.72
+                    editButton.sizeToFit()
+                    editButton.frame = CGRect(x: 27, y: 0, width: (view.bounds.width - 54) / 2, height: 72)
+                    // action
+                    editButton.isUserInteractionEnabled = true
+                    let tap = UITapGestureRecognizer(target: self, action: #selector(editButtonTap))
+                    tap.numberOfTapsRequired = 1
+                    editButton.addGestureRecognizer(tap)
+                    cell.addSubview(editButton)
+                    //
+    //                let plusImage = UIImageView()
+    //                plusImage.image = #imageLiteral(resourceName: "Plus")
+    //                plusImage.tintColor = colour1
+    //                plusImage.alpha = 0.72
+    //                plusImage.sizeToFit()
+    //                plusImage.frame = CGRect(x: view.bounds.width - 27 - plusImage.bounds.width, y: (72 / 2) - (plusImage.bounds.height / 2), width: plusImage.bounds.width, height: plusImage.bounds.height)
+    //                cell.addSubview(plusImage)
+                    //
+                    let seperator = CALayer()
+                    seperator.frame = CGRect(x: 27, y: 0, width: (view.bounds.width - 54) / 3, height: 1)
+                    seperator.backgroundColor = colour1.cgColor
+                    seperator.opacity = 0.25
+                    cell.layer.addSublayer(seperator)
+                    
+                // All other cells
+                default:
+                    let dayLabel = UILabel()
+                    dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
+                    dayLabel.textColor = colour1
+                    //
+                    let text = sessionData.sortedGroups[daySessionsArray[selectedDay][indexPath.row]]![0][0]
+                    dayLabel.text = NSLocalizedString(text, comment: "")
+                    dayLabel.numberOfLines = 2
+                    dayLabel.sizeToFit()
+                    dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
+                    cell.addSubview(dayLabel)
+                }
+                
+            // Currently selecting a session, i.e not first screen
+            } else {
+                // If title
+                if indexPath.row == 0 {
+                    let title = sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][0]
+                    cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
+                    cell.textLabel?.textColor = colour1
+                    cell.textLabel?.text = NSLocalizedString(title, comment: "")
+                    cell.textLabel?.textAlignment = .center
+//                    cell.textLabel?.numberOfLines = 2
+//                    cell.textLabel?.sizeToFit()
+                    cell.textLabel?.frame = CGRect(x: view.bounds.width / 2, y: 0, width: view.bounds.width / 2, height: 72)
+                    //
+                    cell.selectionStyle = .none
+                // Else if selection
+                } else {
+                    //
+                    let choiceLabel = UILabel()
+                    choiceLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
+                    choiceLabel.textColor = colour1
+                    //
+                    let text = sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][indexPath.row]
+                    choiceLabel.text = NSLocalizedString(text, comment: "")
+                    choiceLabel.numberOfLines = 2
+                    choiceLabel.sizeToFit()
+                    choiceLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
+                    cell.addSubview(choiceLabel)
+                }
             }
 
             //
@@ -415,43 +479,58 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         case scheduleTable:
             //
             switch indexPath.row {
-            case 4:
+            case daySessionsArray[selectedDay].count:
                 break
             default:
-                switch indexPath.row {
-                case 2,3:
-                    if indexPath.row == 2 {
-                        // STRAIGHT TO FINAL CHOICE TEST
-                        selectedSession = [0,1,0]
-                        performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-                        // "scheduleMeditationSegue" for meditation
-                    } else {
-                        // STRAIGHT TO FINAL CHOICE TEST Meditation
-                        selectedSession = [5,0,0]
-                        performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
-                        // "scheduleMeditationSegue" for meditation
-                    }
-                    //
-                    // Remove back button text
-                    let backItem = UIBarButtonItem()
-                    backItem.title = ""
-                    navigationItem.backBarButtonItem = backItem
-                default:
-                    tableView.deselectRow(at: indexPath, animated: true)
-                    // Select session
-                    switch tableCounter[0] {
-                    // section 1
-                    case -1:
-                        tableCounter[0] = indexPath.row
-                    // section 2
-                    default:
-                        tableCounter[1] = indexPath.row
-                    }
-                    // Mask View
+                // Next Choice Function
+                if choiceProgress[0] == -1 {
+                    choiceProgress[0] = daySessionsArray[selectedDay][indexPath.row]
+                    choiceProgress[1] += 1
                     maskView()
                     // Next Table info
                     slideLeft()
+                
+                //
+                } else {
+                    choiceProgress[1] += 1
                 }
+                
+                nextChoice()
+                
+//                switch indexPath.row {
+//                case 2,3:
+//                    if indexPath.row == 2 {
+//                        // STRAIGHT TO FINAL CHOICE TEST
+//                        selectedSession = [0,1,0]
+//                        performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+//                        // "scheduleMeditationSegue" for meditation
+//                    } else {
+//                        // STRAIGHT TO FINAL CHOICE TEST Meditation
+//                        selectedSession = [5,0,0]
+//                        performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
+//                        // "scheduleMeditationSegue" for meditation
+//                    }
+//                    //
+//                    // Remove back button text
+//                    let backItem = UIBarButtonItem()
+//                    backItem.title = ""
+//                    navigationItem.backBarButtonItem = backItem
+//                default:
+//                    tableView.deselectRow(at: indexPath, animated: true)
+//                    // Select session
+//                    switch tableCounter[0] {
+//                    // section 1
+//                    case -1:
+//                        tableCounter[0] = indexPath.row
+//                    // section 2
+//                    default:
+//                        tableCounter[1] = indexPath.row
+//                    }
+//                    // Mask View
+//                    maskView()
+//                    // Next Table info
+//                    slideLeft()
+//                }
             }
 
             //
@@ -473,7 +552,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // Mask view func
     func maskView() {
         // Animate mask view if group selected and mask doesnt already exist
-        if tableCounter[0] != -1 && view.subviews.contains(maskView1) == false {
+        if choiceProgress[0] != -1 && view.subviews.contains(maskView1) == false {
             createMaskView(alpha: 0)
             UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                 self.maskView1.alpha = 0.5
@@ -485,12 +564,18 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     func maskAction() {
         // Table Counter
         // Return to choice 1 (sessions)
-        if tableCounter[1] != -1 {
-            tableCounter[1] = -1
+        if choiceProgress[1] > 1 {
+            // Cardio has two choice paths
+            if choiceProgress[0] == 2 && choiceProgress[1] == 5 {
+                choiceProgress[1] = 1
+            } else {
+                choiceProgress[1] -= 1
+            }
             slideRight()
         // Return to choice 0 (groups)
-        } else {
-            tableCounter[0] = -1
+        } else if choiceProgress[1] == 1 {
+            choiceProgress[0] = -1
+            choiceProgress[1] = 0
             // Enable table scroll & schedule choice button & remove mask view
             scheduleTable.isScrollEnabled = true
             navigationBar.rightBarButtonItem?.isEnabled = true
@@ -547,8 +632,18 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // Table View ------------------------------------
     // Tableview slide left (next table)
     func slideLeft() {
+        //
+        view.isUserInteractionEnabled = false
+        //
         let screenFrame = UIScreen.main.bounds
         let tableHeaderHeight = (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4
+        //
+        // Mask hides table header so add screenshot
+        let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableHeaderHeight)
+        let snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
+        view.insertSubview(snapShotHeader, belowSubview: maskView1)
+        //
+        // Slide across table
         let snapShotFrame = CGRect(x: 0, y: tableHeaderHeight, width: view.bounds.width, height: view.bounds.height - tableHeaderHeight - 24.5)
         let snapShotY = TopBarHeights.combinedHeight + tableHeaderHeight + ((view.bounds.height - tableHeaderHeight - 24.5) / 2)
         // Snapshots
@@ -574,14 +669,25 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         }, completion: { finished in
             snapShot1?.removeFromSuperview()
             snapShot2?.removeFromSuperview()
-            self.snapShotHeader.removeFromSuperview()
+            snapShotHeader.removeFromSuperview()
             self.removeMaskTable()
+            self.view.isUserInteractionEnabled = true
         })
     }
     // Tableview slide Right (previous table)
     func slideRight() {
+        //
+        view.isUserInteractionEnabled = false
+        //
         let screenFrame = UIScreen.main.bounds
         let tableHeaderHeight = (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4
+        //
+        // Mask hides table header so add screenshot
+        let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableHeaderHeight)
+        let snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
+        view.insertSubview(snapShotHeader, belowSubview: maskView1)
+        //
+        // Slide table
         let snapShotFrame = CGRect(x: 0, y: tableHeaderHeight, width: view.bounds.width, height: view.bounds.height - tableHeaderHeight - 24.5)
         let snapShotY = TopBarHeights.combinedHeight + tableHeaderHeight + ((view.bounds.height - tableHeaderHeight - 24.5) / 2)
         // Snapshots
@@ -607,16 +713,16 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         }, completion: { finished in
             snapShot1?.removeFromSuperview()
             snapShot2?.removeFromSuperview()
-            self.snapShotHeader.removeFromSuperview()
+            snapShotHeader.removeFromSuperview()
             self.removeMaskTable()
+            self.view.isUserInteractionEnabled = true
         })
     }
     // Mask Table
     let mask = CAGradientLayer()
-    var snapShotHeader = UIView()
+//    var snapShotHeader = UIView()
     func maskTable() {
         let screenFrame = UIScreen.main.bounds
-        let tableHeaderHeight = (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4
         //
         mask.frame = CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: view.bounds.height)
         let test = mask.frame.minY
@@ -627,9 +733,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         // Snapshot Header - mask layer covers header so show it
         // SHOULD FIND A BETTER WAY, MASKING ONLY THE NECESSARY CELLS AND NOT THE WHOLE TABLEVIEW WITH HEADER
             // ISSUE: MASK.FRAME DOESNT SEE TO LISTEN TO Y VALUE or y value means something else
-        let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableHeaderHeight)
-        snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
-        view.insertSubview(snapShotHeader, belowSubview: maskView1)
+        
         //
         scheduleTable.layer.mask = mask
         //
@@ -660,6 +764,21 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
         mask.locations = [NSNumber(value: location), NSNumber(value: location)]
         return mask;
+    }
+    
+    
+    
+    //
+    // MARK: Choice Functions
+    func nextChoice() {
+        //
+        
+        
+        //
+        // Mask View
+        maskView()
+        // Next Table info
+        slideLeft()
     }
     
 

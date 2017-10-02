@@ -28,6 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         // Register Defaults --------------------------------------------------------------------------------
         let defaults = UserDefaults.standard
+        
+        
+        // Test
+        let test = Date().currentWeekDayFromMonday
+        let test1 = Date().firstMondayInCurrentWeek
+        let test2 = Date().firstMondayInCurrentMonth
+        let test3 = Date().numberOfMondaysInCurrentMonth
+        let test4 = Date().firstDateInCurrentMonth
+
+
+
             
         //
         // Tracking

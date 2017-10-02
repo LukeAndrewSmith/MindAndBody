@@ -2702,6 +2702,701 @@ enum sessionData {
         // Yoga
         ["practices"]
     ]
+    
+    
+//    //
+//    // MARK: Sessions sorted for use by schedule/profile
+//    // [Warmup, Workout, Cardio, Stretching, Yoga]
+//    static let sortedSessions: [[[[[Int]]]]] =
+//        [
+//            // ---------------------------------------------------------------------------------------------------
+//            // Warmup = 0
+//            // Session: [[name], [movements], [sets], [reps]]
+//            [
+//                // Warmup - Full Body
+//                [
+//                    // Short
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Medium
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Long
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ]
+//                ],
+//                // Warmup - Upper Body
+//                [
+//                    // Short
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Medium
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Long
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ]
+//                ],
+//                // Warmup - Lower Body
+//                [
+//                    // Short
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Medium
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Long
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ]
+//                ],
+//                // Warmup - Cardio
+//                [
+//                    // Short
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Medium
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Long
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ]
+//                ]
+//            ],
+//            // ---------------------------------------------------------------------------------------------------
+//            // Workout = 1
+//            // Classic Session: [[name], [movements], [sets], [reps]]
+//            // Circuit Session: [[name], [movements], [rounds], [reps]]
+//            [
+//                // -----------------------------------------------------------------------------------------------
+//                // Classic Gym - Full Body = 0
+//                [
+//                ],
+//                // Classic Gym - Upper Body = 1
+//                [
+//                ],
+//                // Classic Gym - Lower Body = 2
+//                [
+//                ],
+//                // Classic Gym - Legs = 3
+//                [
+//                ],
+//                // Classic Gym - Pull = 4
+//                [
+//                ],
+//                // Classic Gym - Push = 5
+//                [
+//                ],
+//                // -----------------------------------------------------------------------------------------------
+//                // Classic Gym - 5 x 5 = 6
+//                [
+//                ],
+//                // -----------------------------------------------------------------------------------------------
+//                // Circuit Gym - Full Body = 7
+//                [
+//                ],
+//                // Circuit Gym - Upper Body = 8
+//                [
+//                ],
+//                // Circuit Gym - Lower Body = 9
+//                [
+//                ],
+//                // -----------------------------------------------------------------------------------------------
+//                // Bodyweight - Full Body = 10
+//                [
+//                ],
+//                // Bodyweight - Upper Body = 11
+//                [
+//                ],
+//                // Bodyweight - Lower Body = 12
+//                [
+//                ],
+//                // -----------------------------------------------------------------------------------------------
+//                // Bodyweight Circuit - Full Body = 13
+//                [
+//                ],
+//                // Bodyweight Circuit - Upper Body = 14
+//                [
+//                ],
+//                // Bodyweight Circuit - Lower Body = 15
+//                [
+//                ]
+//            ],
+//            // ---------------------------------------------------------------------------------------------------
+//            // Cardio = 2
+//            // Session: [[name], [movement], [time/distance]]
+//            [
+//                // Rowing - Full Body
+//                [
+//                ],
+//                // Biking - Upper Body
+//                [
+//                ],
+//                // Running - Lower Body
+//                [
+//                ],
+//                ],
+//            // ---------------------------------------------------------------------------------------------------
+//            // Stretching = 3
+//            // Session: [[name], [stretches], [breaths]]
+//            [
+//                // Stretching - General
+//                [
+//                ],
+//                // Stretching - Post Workout
+//                [
+//                ],
+//                // Stretching - Post Cardio
+//                [
+//                ]
+//            ],
+//            // ---------------------------------------------------------------------------------------------------
+//            // Yoga = 4
+//            // Session: [[name], [poses], [breaths]]
+//            [
+//                // Yoga - Practices
+//                [
+//                ]
+//            ]
+//    ]
+//
+//
+//    static let sortedGroups: [Int:[Int]] =
+//    [
+//        // Warmup
+//        0:
+//            // Session: [[name], [movements], [sets], [reps]]
+//            [
+//                // Warmup - Full Body
+//                [
+//                    // Short
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Medium
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Long
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ]
+//                ],
+//                // Warmup - Upper Body
+//                [
+//                    // Short
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Medium
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Long
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ]
+//                ],
+//                // Warmup - Lower Body
+//                [
+//                    // Short
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Medium
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Long
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ]
+//                ],
+//                // Warmup - Cardio
+//                [
+//                    // Short
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Medium
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ],
+//                    // Long
+//                    [
+//                        // Easy
+//                        [
+//                        ],
+//                        // Medium
+//                        [
+//                        ],
+//                        // Hard
+//                        [
+//                        ]
+//                    ]
+//                ]
+//        ],
+//        // Stretching
+//        1:
+//
+//        // Endurance
+//        2:
+//
+//        // Fat Loss
+//        3:
+//
+//        // Muscle Gain
+//        4:
+//
+//        // Strength
+//        5:
+//
+//        // Yoga
+//        6:
+//    ]
+    
+    
+    
+    //
+    // MARK: Group Choices
+    static let sortedGroups: [Int:[[String]]] =
+        [
+            // MARK: Mind
+            0:
+                [
+                    // 0
+                    ["mind"],
+                    // 1 | Choice 1 - Type
+                    [
+                        "mindType",
+                        //
+                        "yoga",
+                        "meditation", // Goes to meditation choice
+                        "walk" // popup, go for a walk
+                    ],
+                    // 2 | Choice 2 - Yoga Length
+                    [
+                        "practiceLength",
+                        //
+                        "10-20 min",
+                        "20-40 min",
+                        "40+ min"
+                        ],
+                    // 3 | Choice 3 - Focus
+                    [
+                        "focus",
+                        //
+                        "calm",
+                        "stressReduction",
+                        "strength",
+                        "energising",
+                        "focusing"
+                        ],
+                    // 4 | Final - To Do
+                    [
+                        "toDo",
+                        //
+                        "warmup",
+                        "practice"
+                    ]
+            ],
+            
+            // Note: Choice = ["title","contents","contents"...]
+            // MARK: Flexibility
+            1:
+                [
+                    // 0
+                    ["flexibility"],
+                    // 1 | Choice 1 - Length
+                    [
+                        "sessionLength",
+                        //
+                        "10-20 min",
+                        "20-40 min",
+                        "40+ min"
+                    ],
+                    // 2 | Choice 2 - Type
+                    [
+                        "flexibilityType",
+                        //
+                        "stretching",
+                        "yoga",
+                    ],
+                    // 3 | Choice 3 - Focus
+                    [
+                        "focus",
+                        //
+                        "general",
+                        "hamstrings",
+                        "hips",
+                        "back/neck",
+                    ],
+                    // 4 | Final - To Do
+                    [
+                        "toDo",
+                        //
+                        "warmup",
+                        "session"
+                    ]
+                ],
+                
+            // MARK: Endurance
+            2:
+                [
+                    // 0
+                    ["endurance"],
+                    // 1 | Choice 1 - Type
+                    [
+                        "type",
+                        //
+                        "highIntensity",
+                        "steadyState",
+                    ],
+                    // --------------
+                    // High Intensity
+                    // 2 | Choice 1 - 2 - Type
+                    [
+                        "enduranceType",
+                        //
+                        "cardio",
+                        "bodyweightWorkout",
+                    ],
+                    // 3 | Chioce 1 - 3 - Length
+                    [
+                        "sessionLength",
+                        //
+                        "10-20 min",
+                        "20-40 min",
+                        "40+ min"
+                    ],
+                    // 4 | Final - to do
+                    [
+                        "toDo",
+                        //
+                        "warmup",
+                        "cardio",
+                        "stretching",
+                    ],
+                    // ------------
+                    // Steady State
+                    // 5 | Choice 2 - 2 - To Do
+                    [
+                        "toDo",
+                        //
+                        "warmup",
+                        "cardio",
+                        "stretching",
+                    ],
+                    // 6 | Chioce 3 - 2 - Warmup/Stretching Length,
+                    [
+                        "sessionLength",
+                        //
+                        "5 min",
+                        "5-10 min",
+                        "10+ min"
+                    ]
+            ],
+            // MARK: Fat Loss
+            3:
+                [
+                    // 0
+                    ["fatLoss"],
+                    // 1 | Choice 1 - Type
+                    [
+                        "fatLossType",
+                        //
+                        "highIntensityCardio",
+                        "bodyWeightWorkout",
+                    ],
+                    // 2 | Choice 2 - length
+                    [
+                        "sessionLength",
+                        //
+                        "10-20 min",
+                        "20-50 min",
+                        "40+ min",
+                    ],
+                    // 3 | Final - To Do
+                    [
+                        "toDo",
+                        //
+                        "warmup",
+                        "session",
+                        "stretching",
+                    ],
+            ],
+            
+            // MARK: Muscle Gain
+            4:
+                [
+                    // 0
+                    ["muscleGain"],
+                    // 1 | Choice 1 - Length
+                    [
+                        "sessionLength",
+                        //
+                        "10-20 min",
+                        "20-50 min",
+                        "40+ min",
+                    ],
+                    // 2 | Choice 2 - Type
+                    [
+                        "muscleGainType",
+                        //
+                        "gym",
+                        "bodyweight"
+                    ],
+                    // 3 | Choice 3 - Focus
+                    [
+                        "focus",
+                        //
+                        "fullBody",
+                        "upperBody",
+                        "lowerBody"
+                    ],
+                    // 4 | Final - To Do
+                    [
+                        "toDo",
+                        //
+                        "warmup",
+                        "session",
+                        "stretching",
+                    ],
+            ],
+            
+            // MARK: Strength
+            5:
+                [
+                    // 0
+                    [ "strength"],
+                    // 1 | Choice 1 - Length
+                    [
+                        "sessionLength",
+                        //
+                        "short",
+                        "normal"
+                    ],
+                    // 2 | Choice 2 - type
+                    [
+                        "type",
+                        //
+                        "gym",
+                        "bodyweight"
+                    ],
+                    // 3 | Final - Session
+                    [
+                        "session",
+                        //
+                        "5x51",
+                        "5x52",
+                        "accessory1",
+                        "accessory2"
+                    ],
+                    // 4 | Final - To Do
+                    [
+                        "toDo",
+                        //
+                        "warmup",
+                        "session",
+                        "stretching"
+                    ],
+            ]
+    ]
 
 }
 
