@@ -410,7 +410,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 // If title
                 if indexPath.row == 0 {
                     let title = sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][0]
-                    cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
+                    cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
                     cell.textLabel?.textColor = colour1
                     cell.textLabel?.text = NSLocalizedString(title, comment: "")
                     cell.textLabel?.textAlignment = .center
@@ -419,6 +419,13 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     cell.textLabel?.frame = CGRect(x: view.bounds.width / 2, y: 0, width: view.bounds.width / 2, height: 72)
                     //
                     cell.selectionStyle = .none
+                    //
+                    // Title Underline
+                    let seperator = CALayer()
+                    seperator.frame = CGRect(x: view.bounds.width / 4, y: 72 - 1, width: view.bounds.width / 2, height: 1)
+                    seperator.backgroundColor = colour1.cgColor
+                    seperator.opacity = 0.25
+                    cell.layer.addSublayer(seperator)
                 // Else if selection
                 } else {
                     //
@@ -492,45 +499,86 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 //
                 } else {
-                    choiceProgress[1] += 1
+                
+                    // Present next choice or present session
+                    switch choiceProgress[0] {
+                    // Mind
+                    case 0:
+                        if choiceProgress[1] == 4 {
+                            // Test
+                            selectedSession = [5,0,0]
+                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
+                            
+                            } else {
+                            choiceProgress[1] += 1
+                        }
+                        
+                    // Flexibility
+                    case 1:
+                        if choiceProgress[1] == 4 {
+                            // Test
+                            selectedSession = [1,0,0]
+                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
+                        } else {
+                            choiceProgress[1] += 1
+                        }
+                        
+                    // Endurance
+                    case 2:
+                        switch choiceProgress[1] {
+                        case 4:
+                            // Test
+                            selectedSession = [1,0,0]
+                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
+                        case 5:
+                            if indexPath.row == 2 {
+                                
+                            } else {
+                                choiceProgress[1] += 1
+                            }
+                        case 6:
+                            // Test
+                            selectedSession = [1,0,0]
+                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
+                        default:
+                            choiceProgress[1] += 1
+                        }
+                        
+                    // Fat Loss
+                    case 3:
+                        if choiceProgress[1] == 4 {
+                            // Test
+                            selectedSession = [1,0,0]
+                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
+                        } else {
+                            choiceProgress[1] += 1
+                        }
+                        
+                    // Muscle Gain
+                    case 4:
+                        if choiceProgress[1] == 4 {
+                            // Test
+                            selectedSession = [1,0,0]
+                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
+                        } else {
+                            choiceProgress[1] += 1
+                        }
+                        
+                    // Strength
+                    case 5:
+                        if choiceProgress[1] == 4 {
+                            // Test
+                            selectedSession = [1,0,0]
+                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
+                        } else {
+                            choiceProgress[1] += 1
+                        }
+                    default:
+                        break
+                    }
                 }
                 
                 nextChoice()
-                
-//                switch indexPath.row {
-//                case 2,3:
-//                    if indexPath.row == 2 {
-//                        // STRAIGHT TO FINAL CHOICE TEST
-//                        selectedSession = [0,1,0]
-//                        performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-//                        // "scheduleMeditationSegue" for meditation
-//                    } else {
-//                        // STRAIGHT TO FINAL CHOICE TEST Meditation
-//                        selectedSession = [5,0,0]
-//                        performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
-//                        // "scheduleMeditationSegue" for meditation
-//                    }
-//                    //
-//                    // Remove back button text
-//                    let backItem = UIBarButtonItem()
-//                    backItem.title = ""
-//                    navigationItem.backBarButtonItem = backItem
-//                default:
-//                    tableView.deselectRow(at: indexPath, animated: true)
-//                    // Select session
-//                    switch tableCounter[0] {
-//                    // section 1
-//                    case -1:
-//                        tableCounter[0] = indexPath.row
-//                    // section 2
-//                    default:
-//                        tableCounter[1] = indexPath.row
-//                    }
-//                    // Mask View
-//                    maskView()
-//                    // Next Table info
-//                    slideLeft()
-//                }
             }
 
             //
@@ -555,8 +603,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         if choiceProgress[0] != -1 && view.subviews.contains(maskView1) == false {
             createMaskView(alpha: 0)
             UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                self.maskView1.alpha = 0.5
-                self.maskView2.alpha = 0.5
+                self.maskView1.alpha = 0.72
+                self.maskView2.alpha = 0.72
             })
         }
     }
@@ -656,10 +704,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
         snapShot2?.center = CGPoint(x: view.center.x + view.frame.size.width, y: snapShotY)
         //
+        maskTable()
         UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
         UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, aboveSubview: self.view)
-        //
-        maskTable()
         // Animate new and old image to left
         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             //
@@ -700,10 +747,10 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
         snapShot2?.center = CGPoint(x: view.center.x - view.frame.size.width, y: snapShotY)
         //
+        maskTable()
         UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
         UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, aboveSubview: self.view)
         //
-        maskTable()
         // Animate new and old image to left
         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             //
