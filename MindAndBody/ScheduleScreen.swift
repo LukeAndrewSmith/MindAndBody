@@ -16,6 +16,31 @@ import UIKit
 class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
+    //
+    // Variablesclass
+    //
+    // Schedule Animation Helpers
+    let mask = CAGradientLayer()
+    let maskView1 = UIButton()
+    let maskView2 = UIButton()
+    let maskViewBackButton = UIImageView()
+    
+    
+    //
+    // Schedule
+    // choiceProgress Indicated progress through the choices to select a session
+        // Note: choiceProgress[0] = -1 if first screen, i.e choices being displayed
+    var choiceProgress = [-1,0]
+    
+    //
+    // Selected Choices
+    // Selected choices corrensponds to an array in 'sortedSession' containing (easy, medium, hard) of relevant selection to be chosen by the app based on the profile (arrays containing difficulty level for each group to select)
+    // 3 because arrays do not quite correspond in terms of accessing relevant sessions for a number of reasons; not a mistake
+    var selectedChoiceWarmup = [0,0,0,0,0,0]
+    var selectedChoiceSession = [0,0,0,0,0,0]
+    var selectedChoiceStretching = [0,0,0,0,0,0]
+
+    
 //
 // View Will Appear ---------------------------------------------------------------------------------
 //
@@ -34,7 +59,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var backgroundImage: UIImageView!
     let backgroundBlur = UIVisualEffectView()
 
-    // Content Arrays
+    // Content Arrays Test
     var daySessionsArray: [[Int]] =
     [
         // Monday
@@ -52,11 +77,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         // Sunday
         [5]
     ]
-    
-    
-    // choiceProgress Indicated progress through the choices to select a session
-    // choiceProgress[0] = -1 if first screen, i.e choices being displayed
-    var choiceProgress = [-1,0]
     
     
     //
@@ -327,7 +347,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         case scheduleTable:
             // First Screen, showing groups
             if choiceProgress[0] == -1 {
-                return daySessionsArray[selectedDay].count + 1
+                return daySessionsArray[selectedDay].count
+                    // + 1 incase edit button to reorder is wanted
+                    //+ 1
             // Selecting a session
             } else {
                 return sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]].count
@@ -362,6 +384,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             // First Screen, showing groups
             if choiceProgress[0] == -1 {
                 switch indexPath.row {
+                // Edit/Reorder button, currently unused
                 case daySessionsArray[selectedDay].count:
                     let editButton = UILabel()
                     editButton.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
@@ -391,7 +414,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     seperator.opacity = 0.25
                     cell.layer.addSublayer(seperator)
                     
-                // All other cells
+                // Groups
                 default:
                     let dayLabel = UILabel()
                     dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
@@ -403,6 +426,12 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     dayLabel.sizeToFit()
                     dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
                     cell.addSubview(dayLabel)
+                    //
+                    // CheckMark if completed
+                    if isCompleted() == true {
+                        cell.tintColor = colour3
+                        cell.accessoryType = .checkmark
+                    }
                 }
                 
             // Currently selecting a session, i.e not first screen
@@ -431,6 +460,12 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     if isLastChoice() == true {
                         cell.textLabel?.textColor = colour3
                         seperator.backgroundColor = colour3.cgColor
+                    }
+                    //
+                    // CheckMark if completed
+                    if isCompleted() == true {
+                        cell.tintColor = colour3
+                        cell.accessoryType = .checkmark
                     }
                 // Else if selection
                 } else {
@@ -479,12 +514,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         return cell
     }
-
-    // Did select row
-    //
-    let maskView1 = UIButton()
-    let maskView2 = UIButton()
-    let maskViewBackButton = UIImageView()
+    
     //
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
@@ -505,636 +535,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-//
-// MARK: Schedule Helper Functions
-//
-    func didSelectRowHandler(row: Int) {
-        // Next Choice Function
-        if choiceProgress[0] == -1 && row != daySessionsArray[selectedDay].count {
-            choiceProgress[0] = daySessionsArray[selectedDay][row]
-            choiceProgress[1] += 1
-            maskView()
-            // Next Table info
-            slideLeft()
-            
-            //
-        } else {
-            
-            // Present next choice or present session
-            switch choiceProgress[0] {
-            // Mind
-            case 0:
-                // Session Choice
-                switch choiceProgress[1] {
-                // First choice - yoga, meditation, walk
-                case 1:
-                    // Yoga, more choices
-                    if row == 1 {
-                        choiceProgress[1] += 1
-                        nextChoice()
-                    // Go to Meditation screen
-                    } else if row == 2 {
-                        // Meditation
-                        selectedSession = [5,0,0]
-                        performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
-                    // Walk, popup
-                    } else if row == 3 {
-                        // popup for walk
-                    }
-                case 4:
-                    // Test - Yoga
-                    selectedSession = [4,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-                default:
-                    choiceProgress[1] += 1
-                    nextChoice()
-                }
-                
-                
-                if choiceProgress[1] == 1 && row == 2 || row == 3 {
-                    if row == 2 {
-                        
-                    } else if row == 3 {
-                        // Popup for walk
-                    }
-                } else if choiceProgress[1] == 4 {
-                    
-                    
-                    // Go to next choice
-                } else {
-                   
-                }
-                
-            // Flexibility
-            case 1:
-                // Session Choice
-                if choiceProgress[1] == 4 {
-                    // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-                } else {
-                    choiceProgress[1] += 1
-                    nextChoice()
-                }
-                
-            // Endurance
-            case 2:
-                switch choiceProgress[1] {
-                // Session Choice
-                case 4:
-                    // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-                case 5:
-                    if row == 2 {
-                        
-                    } else {
-                        choiceProgress[1] += 1
-                        nextChoice()
-                    }
-                // Session Choice
-                case 6:
-                    // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-                default:
-                    choiceProgress[1] += 1
-                    nextChoice()
-                }
-                
-            // Toning
-            case 3:
-                if choiceProgress[1] == 4 {
-                    // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-                } else {
-                    choiceProgress[1] += 1
-                    nextChoice()
-                }
-                
-            // Muscle Gain
-            case 4:
-                // Session Choice
-                if choiceProgress[1] == 4 {
-                    // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-                } else {
-                    choiceProgress[1] += 1
-                    nextChoice()
-                }
-                
-            // Strength
-            case 5:
-                // Session Choice
-                if choiceProgress[1] == 4 {
-                    // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-                } else {
-                    choiceProgress[1] += 1
-                    nextChoice()
-                }
-            default:
-                break
-            }
-        }
-    }
-    
-    //
-    // Last choice, i.e session choice
-    func isLastChoice() -> Bool {
-        // Present next choice or present session
-        switch choiceProgress[0] {
-        // Mind
-        case 0:
-            if choiceProgress[1] == 4 {
-                return true
-            } else {
-                return false
-            }
-        // Flexibility
-        case 1:
-            if choiceProgress[1] == 4 {
-                return true
-            } else {
-                return false
-            }
-            
-        // Endurance
-        case 2:
-            if choiceProgress[1] == 4 || choiceProgress[1] == 6 {
-                return true
-            } else {
-                return false
-            }
-            
-        // Toning
-        case 3:
-            if choiceProgress[1] == 4 {
-                return true
-            } else {
-                return false
-            }
-            
-        // Muscle Gain
-        case 4:
-            if choiceProgress[1] == 4 {
-                return true
-            } else {
-                return false
-            }
-            
-        // Strength
-        case 5:
-            if choiceProgress[1] == 4 {
-                return true
-            } else {
-                return false
-            }
-        default:
-            return false
-        }
-    }
 
-//
-// MARK: Helper Functions View layout/slides etc.
-//
-    //
-    // MARK: Mask Views
-    // Mask view func
-    func maskView() {
-        // Animate mask view if group selected and mask doesnt already exist
-        if choiceProgress[0] != -1 && view.subviews.contains(maskView1) == false {
-            createMaskView(alpha: 0)
-            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                self.maskView1.alpha = 0.72
-                self.maskView2.alpha = 0.72
-            })
-        }
-    }
-    // Session selection mask
-    func maskAction() {
-        // Table Counter
-        // Return to choice 1 (sessions)
-        if choiceProgress[1] > 1 {
-            // Cardio has two choice paths
-            if choiceProgress[0] == 2 && choiceProgress[1] == 5 {
-                choiceProgress[1] = 1
-            } else {
-                choiceProgress[1] -= 1
-            }
-            slideRight()
-        // Return to choice 0 (groups)
-        } else if choiceProgress[1] == 1 {
-            choiceProgress[0] = -1
-            choiceProgress[1] = 0
-            // Enable table scroll & schedule choice button & remove mask view
-            scheduleTable.isScrollEnabled = true
-            navigationBar.rightBarButtonItem?.isEnabled = true
-            removeMaskView()
-            slideRight()
-        }
-    }
-    // Open Schedule, check if mask views necessary
-    func checkMaskView() {
-        if tableCounter[0] != -1 {
-            createMaskView(alpha: 0.5)
-        }
-    }
-    // Mask Views -----------------------------------
-    // Create Mask Views
-    func createMaskView(alpha: CGFloat) {
-        // Disable table scroll & schedule choice button
-        scheduleTable.isScrollEnabled = false
-        navigationBar.rightBarButtonItem?.isEnabled = false
-        //
-        let screenFrame = UIScreen.main.bounds
-        //
-        maskView1.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
-        maskView2.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
-        //
-        maskView1.frame = CGRect(x: 0, y: 0, width: screenFrame.width, height: (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4)
-        maskView2.frame = CGRect(x: 0, y: scheduleTable.frame.maxY, width: screenFrame.width, height: 24.5)
-        //
-        maskView1.backgroundColor = .black
-        maskView1.alpha = alpha
-        maskView2.backgroundColor = .black
-        maskView2.alpha = alpha
-        //
-        view.addSubview(maskView1)
-        view.addSubview(maskView2)
-        //
-        maskViewBackButton.image = #imageLiteral(resourceName: "Back Arrow")
-        maskViewBackButton.tintColor = colour1
-        maskViewBackButton.sizeToFit()
-        maskViewBackButton.frame = CGRect(x: 5, y: maskView1.bounds.height - maskViewBackButton.bounds.height - 11, width: maskViewBackButton.bounds.width, height: maskViewBackButton.bounds.height)
-        maskView1.addSubview(maskViewBackButton)
-    }
-    // Remove Mask Views
-    func removeMaskView() {
-        //
-        UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-            self.maskView1.alpha = 0
-            self.maskView2.alpha = 0
-        }, completion: { finished in
-            self.maskView1.removeFromSuperview()
-            self.maskView2.removeFromSuperview()
-        })
-    }
-    // Table View ------------------------------------
-    // Tableview slide left (next table)
-    func slideLeft() {
-        //
-        view.isUserInteractionEnabled = false
-        //
-        let screenFrame = UIScreen.main.bounds
-        let tableHeaderHeight = (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4
-        //
-        // Mask hides table header so add screenshot
-        let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableHeaderHeight)
-        let snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
-        view.insertSubview(snapShotHeader, belowSubview: maskView1)
-        //
-        // Slide across table
-        let snapShotFrame = CGRect(x: 0, y: tableHeaderHeight, width: view.bounds.width, height: view.bounds.height - tableHeaderHeight - 24.5)
-        let snapShotY = TopBarHeights.combinedHeight + tableHeaderHeight + ((view.bounds.height - tableHeaderHeight - 24.5) / 2)
-        // Snapshots
-        let snapShot1 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
-        //
-        scheduleTable.reloadData()
-        //
-        let snapShot2 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: true, withCapInsets: .zero)
-        //
-        snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
-        snapShot2?.center = CGPoint(x: view.center.x + view.frame.size.width, y: snapShotY)
-        //
-        maskTable()
-        UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
-        UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, aboveSubview: self.view)
-        // Animate new and old image to left
-        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            //
-            snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
-            snapShot2?.center.x = self.view.center.x
-            //
-        }, completion: { finished in
-            snapShot1?.removeFromSuperview()
-            snapShot2?.removeFromSuperview()
-            snapShotHeader.removeFromSuperview()
-            self.removeMaskTable()
-            self.view.isUserInteractionEnabled = true
-        })
-    }
-    // Tableview slide Right (previous table)
-    func slideRight() {
-        //
-        view.isUserInteractionEnabled = false
-        //
-        let screenFrame = UIScreen.main.bounds
-        let tableHeaderHeight = (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4
-        //
-        // Mask hides table header so add screenshot
-        let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableHeaderHeight)
-        let snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
-        view.insertSubview(snapShotHeader, belowSubview: maskView1)
-        //
-        // Slide table
-        let snapShotFrame = CGRect(x: 0, y: tableHeaderHeight, width: view.bounds.width, height: view.bounds.height - tableHeaderHeight - 24.5)
-        let snapShotY = TopBarHeights.combinedHeight + tableHeaderHeight + ((view.bounds.height - tableHeaderHeight - 24.5) / 2)
-        // Snapshots
-        let snapShot1 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
-        //
-        scheduleTable.reloadData()
-        //
-        let snapShot2 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: true, withCapInsets: .zero)
-        //
-        snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
-        snapShot2?.center = CGPoint(x: view.center.x - view.frame.size.width, y: snapShotY)
-        //
-        maskTable()
-        UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
-        UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, aboveSubview: self.view)
-        //
-        // Animate new and old image to left
-        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            //
-            snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
-            snapShot2?.center.x = self.view.center.x
-            //
-        }, completion: { finished in
-            snapShot1?.removeFromSuperview()
-            snapShot2?.removeFromSuperview()
-            snapShotHeader.removeFromSuperview()
-            self.removeMaskTable()
-            self.view.isUserInteractionEnabled = true
-        })
-    }
-    // Mask Table
-    let mask = CAGradientLayer()
-//    var snapShotHeader = UIView()
-    func maskTable() {
-        let screenFrame = UIScreen.main.bounds
-        //
-        mask.frame = CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: view.bounds.height)
-        let test = mask.frame.minY
-        
-        //TopBarHeights.combinedHeight + tableHeaderHeight
-        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        //
-        // Snapshot Header - mask layer covers header so show it
-        // SHOULD FIND A BETTER WAY, MASKING ONLY THE NECESSARY CELLS AND NOT THE WHOLE TABLEVIEW WITH HEADER
-            // ISSUE: MASK.FRAME DOESNT SEE TO LISTEN TO Y VALUE or y value means something else
-        
-        //
-        scheduleTable.layer.mask = mask
-        //
-        // MASK LAYER Y = 0 INSTEAD OF TABLEVIEWHEIGHT !!!!
-    }
-    func removeMaskTable() {
-        mask.removeFromSuperlayer()
-    }
-    
-    
-    //
-    // Mask cells under clear header (unrelated to above functions)
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        for cell in scheduleTable.visibleCells {
-            let hiddenFrameHeight = scrollView.contentOffset.y - cell.frame.origin.y + (view.bounds.height - 24.5) / 4
-            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-            }
-        }
-    }
-    func maskCell(cell: UITableViewCell, margin: Float) {
-        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
-        cell.layer.masksToBounds = true
-    }
-    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
-        let mask = CAGradientLayer()
-        mask.frame = cell.bounds
-        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
-        return mask;
-    }
-    
-    
-    
-    //
-    // MARK: Choice Functions
-    func nextChoice() {
-        //
-        
-        
-        //
-        // Mask View
-        maskView()
-        // Next Table info
-        slideLeft()
-    }
-    
-
-    
-    //
-    // Navigation through days ---------------------------------------------------------------------------------------------------------------------
-    //
-    // Handle Swipes
-    @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
-        //
-        // Forward 1 day
-        if (extraSwipe.direction == .left){
-            // Update selected day
-            switch selectedDay {
-            case 6: selectedDay = 0
-            default: selectedDay += 1
-            }
-            
-            // Deselect all indicators
-            for i in 0...(stackArray.count - 1) {
-                stackArray[i].alpha = 0.5
-            }
-            // Select indicator
-            stackArray[selectedDay].alpha = 1
-
-            // Animate
-            scheduleTable.reloadData()
-            let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-            let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
-            //
-            view.addSubview(snapShot1!)
-            view.bringSubview(toFront: snapShot1!)
-            //
-            snapShot2?.center.x = view.center.x + self.view.frame.size.width
-            view.addSubview(snapShot2!)
-            view.bringSubview(toFront: snapShot2!)
-            //
-            scheduleTable.alpha = 0
-            //
-            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
-                snapShot2?.center.x = self.view.center.x
-            }, completion: { finish in
-                self.scheduleTable.alpha = 1
-                snapShot1?.removeFromSuperview()
-                snapShot2?.removeFromSuperview()
-            })
-            
-            //
-        // Back 1 day
-        } else if extraSwipe.direction == .right {
-            // Update selected day
-            switch selectedDay {
-            case 0: selectedDay = 6
-            default: selectedDay -= 1
-            }
-            
-            // Deselect all indicators
-            for i in 0...(stackArray.count - 1) {
-                stackArray[i].alpha = 0.5
-            }
-            // Select indicator
-            stackArray[selectedDay].alpha = 1
-            selectDay(day: selectedDay)
-            
-            // Animate
-            scheduleTable.reloadData()
-            let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-            let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
-            //
-            view.addSubview(snapShot1!)
-            view.bringSubview(toFront: snapShot1!)
-            //
-            snapShot2?.center.x = view.center.x - self.view.frame.size.width
-            view.addSubview(snapShot2!)
-            view.bringSubview(toFront: snapShot2!)
-            //
-            scheduleTable.alpha = 0
-            //
-            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
-                snapShot2?.center.x = self.view.center.x
-            }, completion: { finish in
-                self.scheduleTable.alpha = 1
-                snapShot1?.removeFromSuperview()
-                snapShot2?.removeFromSuperview()
-            })
-            
-        }
-    }
-    
-    //
-    // Day Tap
-    func dayTapHandler(sender: UITapGestureRecognizer) {
-        let dayLabel = sender.view as! UILabel
-        let index = dayLabel.tag
-        //
-        // Forward
-        if index > selectedDay {
-            // Update selected day
-            selectedDay = index
-            
-            // Deselect all indicators
-            for i in 0...(stackArray.count - 1) {
-                stackArray[i].alpha = 0.5
-            }
-            // Select indicator
-            stackArray[selectedDay].alpha = 1
-            
-            // Animate
-            scheduleTable.reloadData()
-            let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-            let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
-            //
-            view.addSubview(snapShot1!)
-            view.bringSubview(toFront: snapShot1!)
-            //
-            snapShot2?.center.x = view.center.x + self.view.frame.size.width
-            view.addSubview(snapShot2!)
-            view.bringSubview(toFront: snapShot2!)
-            //
-            scheduleTable.alpha = 0
-            //
-            view.isUserInteractionEnabled = false
-            //
-            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
-                snapShot2?.center.x = self.view.center.x
-            }, completion: { finish in
-                self.scheduleTable.alpha = 1
-                snapShot1?.removeFromSuperview()
-                snapShot2?.removeFromSuperview()
-                self.view.isUserInteractionEnabled = true
-            })
-            
-            //
-        // Back
-        } else if index < selectedDay {
-            // Update selected day
-            selectedDay = index
-            
-            // Deselect all indicators
-            for i in 0...(stackArray.count - 1) {
-                stackArray[i].alpha = 0.5
-            }
-            // Select indicator
-            stackArray[selectedDay].alpha = 1
-            selectDay(day: selectedDay)
-            
-            // Animate
-            scheduleTable.reloadData()
-            let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-            let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
-            //
-            view.addSubview(snapShot1!)
-            view.bringSubview(toFront: snapShot1!)
-            //
-            snapShot2?.center.x = view.center.x - self.view.frame.size.width
-            view.addSubview(snapShot2!)
-            view.bringSubview(toFront: snapShot2!)
-            //
-            scheduleTable.alpha = 0
-            //
-            view.isUserInteractionEnabled = false
-            //
-            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
-                snapShot2?.center.x = self.view.center.x
-            }, completion: { finish in
-                self.scheduleTable.alpha = 1
-                snapShot1?.removeFromSuperview()
-                snapShot2?.removeFromSuperview()
-                self.view.isUserInteractionEnabled = true
-            })
-            
-        }
-    }
-    
-    
-    // Slide menu swipe
-    func swipeGestureRight() {
-        performSegue(withIdentifier: "openMenu", sender: self)
-    }
-    //
-    
-    
-    //
-    func selectDay(day: Int) {
-        
-        
-        // Select indicator
-        stackArray[day].alpha = 1
-        
-        // Reload table
-        scheduleTable.reloadData()
-    }
-    
-    
-    //
-    // Edit tap
-    func editButtonTap() {
-        //
-    }
     
     // 
     // Schedule Selection ---------------------------------------------------------------------------------------------------------------------

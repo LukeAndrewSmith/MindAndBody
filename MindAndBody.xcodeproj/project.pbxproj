@@ -284,6 +284,8 @@
 		075732701E660AEC003DA77E /* InformationScreenAnatomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757326F1E660AEC003DA77E /* InformationScreenAnatomy.swift */; };
 		075732741E69957A003DA77E /* TrackingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075732731E69957A003DA77E /* TrackingScreen.swift */; };
 		075A0DB81E8C55680008E014 /* WarmupChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075A0DB71E8C55680008E014 /* WarmupChoiceCustom.swift */; };
+		07686A8E1F84399A00C278CC /* ScheduleAnimationHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */; };
+		07686A901F843A1600C278CC /* ScheduleHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */; };
 		076C681F1ED1D35D009160C2 /* Tibetan Chimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680E1ED1BFAD009160C2 /* Tibetan Chimes.caf */; };
 		076C68201ED1D35D009160C2 /* Tibetan Chimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680E1ED1BFAD009160C2 /* Tibetan Chimes.caf */; };
 		076C68211ED1D35F009160C2 /* Tibetan Singing Bowl (Low).caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680F1ED1BFAD009160C2 /* Tibetan Singing Bowl (Low).caf */; };
@@ -1676,6 +1678,8 @@
 		0757326F1E660AEC003DA77E /* InformationScreenAnatomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationScreenAnatomy.swift; sourceTree = "<group>"; };
 		075732731E69957A003DA77E /* TrackingScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingScreen.swift; sourceTree = "<group>"; };
 		075A0DB71E8C55680008E014 /* WarmupChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoiceCustom.swift; sourceTree = "<group>"; };
+		07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAnimationHelpers.swift; sourceTree = "<group>"; };
+		07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleHelpers.swift; sourceTree = "<group>"; };
 		076C680E1ED1BFAD009160C2 /* Tibetan Chimes.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tibetan Chimes.caf"; sourceTree = "<group>"; };
 		076C680F1ED1BFAD009160C2 /* Tibetan Singing Bowl (Low).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tibetan Singing Bowl (Low).caf"; sourceTree = "<group>"; };
 		076C68101ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(x4).caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tibetan Singing Bowl (Low)(x4).caf"; sourceTree = "<group>"; };
@@ -2931,6 +2935,7 @@
 			isa = PBXGroup;
 			children = (
 				07995A381E893E590009C9B1 /* ScheduleScreen.swift */,
+				07686A8C1F84398000C278CC /* Helpers */,
 			);
 			name = Schedule;
 			sourceTree = "<group>";
@@ -2941,6 +2946,15 @@
 				075732731E69957A003DA77E /* TrackingScreen.swift */,
 			);
 			name = Tracking;
+			sourceTree = "<group>";
+		};
+		07686A8C1F84398000C278CC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */,
+				07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		076A9D0A1E23B1ED00DC8F42 /* Workout */ = {
@@ -8226,8 +8240,10 @@
 				07DEE6F71E0AADE6003B89AB /* YogaChoice.swift in Sources */,
 				077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */,
 				071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */,
+				07686A901F843A1600C278CC /* ScheduleHelpers.swift in Sources */,
 				076C68421ED497AD009160C2 /* BodyweightChoiceCC.swift in Sources */,
 				07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */,
+				07686A8E1F84399A00C278CC /* ScheduleAnimationHelpers.swift in Sources */,
 				07F0C4951EA6128C00927DA8 /* StretchingChoiceCustom.swift in Sources */,
 				07A42E481EDDFD3C0047E8F1 /* CardioChoiceCustom.swift in Sources */,
 				072A87721EDEC59A00684809 /* CardioChoiceHIIT.swift in Sources */,

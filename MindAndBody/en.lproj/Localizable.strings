@@ -156,6 +156,8 @@
     "back/neck" = "Back/Neck";
 // Endurance
 "enduranceToDo" = "Endurance - To Do";
+"enduranceType" = "Endurance - Type";
+"enduranceType2" = "Endurance - Type - 2";
 "steadyState" = "Steady State";
     // Choice 2
     "enduranceType" = "Endurance - Type";
@@ -170,6 +172,7 @@
 "muscleGainType" = "Muscle Gain Type";
 // Strength
 "strengthToDo" = "Strength - To Do";
+"strengthType" = "Strength - Type";
     // Choice 1
     "short" = "Short";
     "normal" = "Normal";

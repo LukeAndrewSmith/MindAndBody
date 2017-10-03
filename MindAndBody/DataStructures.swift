@@ -2713,16 +2713,15 @@ enum sessionData {
         // ------------------------------------------------------------------------------------------------
         // 0 | MARK: - Mind
         0:
-            // 0,0 - Mind
             [
                 // ------------------------------------------------------------------------------------------------
-                // 0,0,0 | MARK: - Warmup
+                // 0,0 | MARK: - Warmup
                 [
                 // Necessary extra 2 levels so all nested to same degree
-                // 0,0,0,0,0
+                // 0,0,0,0
                 [[
                     
-                    // 0,0,0,0,0,0 | Short
+                    // 0,0,0,0,0 | Short
                     [
                         // Easy
                         [0,0,1],
@@ -2731,7 +2730,7 @@ enum sessionData {
                         // Hard
                         [0,0,1]
                     ],
-                    // 0,0,0,0,0,1 | Medium
+                    // 0,0,0,0,1 | Medium
                     [
                         // Easy
                         [0,0,1],
@@ -2740,7 +2739,7 @@ enum sessionData {
                         // Hard
                         [0,0,1]
                     ],
-                    // 0,0,0,0,0,2 | Long
+                    // 0,0,0,0,2 | Long
                     [
                         // Easy
                         [0,0,1],
@@ -2752,13 +2751,13 @@ enum sessionData {
                 ]]
                 ],
                 // ------------------------------------------------------------------------------------------------
-                // 0,0,1,0 | MARK: Yoga Practices
+                // 0,1,0 | MARK: Yoga Practices
                 // Necessary extra 1 level so nested to same degree
                 [[
                     // Focus
-                    // 0,0,1,0,0 | Calm
+                    // 0,1,0,0 | Calm
                     [
-                        // 0,0,1,0,0,0 | Short
+                        // 0,1,0,0,0 | Short
                         [
                             // Easy
                             [4,0,1],
@@ -2767,7 +2766,7 @@ enum sessionData {
                             // Hard
                             [4,0,1]
                         ],
-                        // 0,0,1,0,0,1 | Medium
+                        // 0,1,0,0,1 | Medium
                         [
                             // Easy
                             [4,0,1],
@@ -2776,7 +2775,7 @@ enum sessionData {
                             // Hard
                             [4,0,1]
                         ],
-                        // 0,0,1,0,0,2 | Long
+                        // 0,1,0,0,2 | Long
                         [
                             // Easy
                             [4,0,1],
@@ -2786,9 +2785,9 @@ enum sessionData {
                             [4,0,1]
                         ]
                     ],
-                    // 0,0,1,0,1 | Stress Reduction
+                    // 0,1,0,1 | Stress Reduction
                     [
-                        // 0,0,1,0,1,0 | Short
+                        // 0,1,0,1,0 | Short
                         [
                             // Easy
                             [4,0,1],
@@ -2797,7 +2796,7 @@ enum sessionData {
                             // Hard
                             [4,0,1]
                         ],
-                        // 0,0,1,0,1,1 | Medium
+                        // 0,1,0,1,1 | Medium
                         [
                             // Easy
                             [4,0,1],
@@ -2806,7 +2805,7 @@ enum sessionData {
                             // Hard
                             [4,0,1]
                         ],
-                        // 0,0,1,0,1,2 | Long
+                        // 0,1,0,1,2 | Long
                         [
                             // Easy
                             [4,0,1],
@@ -2816,9 +2815,9 @@ enum sessionData {
                             [4,0,1]
                         ]
                     ],
-                    // 0,0,1,0,2 | Strength
+                    // 0,1,0,2 | Strength
                     [
-                        // 0,0,1,0,2,0 | Short
+                        // 0,1,0,2,0 | Short
                         [
                             // Easy
                             [4,0,1],
@@ -2827,7 +2826,7 @@ enum sessionData {
                             // Hard
                             [4,0,1]
                         ],
-                        // 0,0,1,0,2,1 | Medium
+                        // 0,1,0,2,1 | Medium
                         [
                             // Easy
                             [4,0,1],
@@ -2836,7 +2835,7 @@ enum sessionData {
                             // Hard
                             [4,0,1]
                         ],
-                        // 0,0,1,0,2,2 | Long
+                        // 0,1,0,2,2 | Long
                         [
                             // Easy
                             [4,0,1],
@@ -2846,9 +2845,9 @@ enum sessionData {
                             [4,0,1]
                         ]
                     ],
-                    // 0,0,1,0,3 | Energising
+                    // 0,1,0,3 | Energising
                     [
-                        // 0,0,1,0,3,0 | Short
+                        // 0,1,0,3,0 | Short
                         [
                             // Easy
                             [4,0,1],
@@ -2857,7 +2856,7 @@ enum sessionData {
                             // Hard
                             [4,0,1]
                         ],
-                        // 0,0,1,0,3,1 | Medium
+                        // 0,1,0,3,1 | Medium
                         [
                             // Easy
                             [4,0,1],
@@ -2866,7 +2865,7 @@ enum sessionData {
                             // Hard
                             [4,0,1]
                         ],
-                        // 0,0,1,0,3,2 | Long
+                        // 0,1,0,3,2 | Long
                         [
                             // Easy
                             [4,0,1],
@@ -2876,9 +2875,9 @@ enum sessionData {
                             [4,0,1]
                         ]
                     ],
-                    // 0,0,1,0,4 | Focusing
+                    // 0,1,0,4 | Focusing
                     [
-                        // 0,0,1,0,4,0 | Short
+                        // 0,1,0,4,0 | Short
                         [
                             // Easy
                             [4,0,1],
@@ -2887,7 +2886,7 @@ enum sessionData {
                             // Hard
                             [4,0,1]
                         ],
-                        // 0,0,1,0,4,1 | Medium
+                        // 0,1,0,4,1 | Medium
                         [
                             // Easy
                             [4,0,1],
@@ -2896,7 +2895,7 @@ enum sessionData {
                             // Hard
                             [4,0,1]
                         ],
-                        // 0,0,1,0,4,2 | Long
+                        // 0,1,0,4,2 | Long
                         [
                             // Easy
                             [4,0,1],
@@ -2912,18 +2911,17 @@ enum sessionData {
             // ------------------------------------------------------------------------------------------------
             // 1 | MARK: - Flexibility
             1:
-                // 1,0 - Felxibility
                 [
                 // ------------------------------------------------------------------------------------------------
-                // 1,0,0 | MARK: - Warmup
+                // 1,0 | MARK: - Warmup
                 [
                     // Focus
                     // Extra level to make sure all levels nested to same degree
+                    // 1,0,0
+                    [
                     // 1,0,0,0
                     [
-                    // 1,0,0,0,0
-                    [
-                        // 1,0,0,0,0,1 | Short
+                        // 1,0,0,0,1 | Short
                         [
                             // Easy
                             [0,0,1],
@@ -2932,7 +2930,7 @@ enum sessionData {
                             // Hard
                             [0,0,1]
                         ],
-                        // 1,0,0,0,0,2 | Medium
+                        // 1,0,0,0,2 | Medium
                         [
                             // Easy
                             [0,0,1],
@@ -2941,7 +2939,7 @@ enum sessionData {
                             // Hard
                             [0,0,1]
                         ],
-                        // 1,0,0,0,0,3 | Long
+                        // 1,0,0,0,3 | Long
                         [
                             // Easy
                             [0,0,1],
@@ -2951,9 +2949,9 @@ enum sessionData {
                             [0,0,1]
                         ]
                     ],
-                    // 1,0,0,0,1 | Hamstrings
+                    // 1,0,0,1 | Hamstrings
                     [
-                        // 1,0,0,0,1,0 | Short
+                        // 1,0,0,1,0 | Short
                         [
                             // Easy
                             [0,0,1],
@@ -2962,7 +2960,7 @@ enum sessionData {
                             // Hard
                             [0,0,1]
                         ],
-                        // 1,0,0,0,1,1 | Medium
+                        // 1,0,0,1,1 | Medium
                         [
                             // Easy
                             [0,0,1],
@@ -2971,7 +2969,7 @@ enum sessionData {
                             // Hard
                             [0,0,1]
                         ],
-                        // 1,0,0,0,1,2 | Long
+                        // 1,0,0,1,2 | Long
                         [
                             // Easy
                             [0,0,1],
@@ -2981,9 +2979,9 @@ enum sessionData {
                             [0,0,1]
                         ]
                     ],
-                    // 1,0,0,0,2 | Hips
+                    // 1,0,0,2 | Hips
                     [
-                        // 1,0,0,0,2,0 | Short
+                        // 1,0,0,2,0 | Short
                         [
                             // Easy
                             [0,0,1],
@@ -2992,7 +2990,7 @@ enum sessionData {
                             // Hard
                             [0,0,1]
                         ],
-                        // 1,0,0,0,2,1 | Medium
+                        // 1,0,0,2,1 | Medium
                         [
                             // Easy
                             [0,0,1],
@@ -3001,7 +2999,7 @@ enum sessionData {
                             // Hard
                             [0,0,1]
                         ],
-                        // 1,0,0,0,2,2 | Long
+                        // 1,0,0,2,2 | Long
                         [
                             // Easy
                             [0,0,1],
@@ -3011,9 +3009,9 @@ enum sessionData {
                             [0,0,1]
                         ]
                     ],
-                    // 1,0,0,0,3 | Back/Neck
+                    // 1,0,0,3 | Back/Neck
                     [
-                        // 1,0,0,0,3,0 | Short
+                        // 1,0,0,3,0 | Short
                         [
                             // Easy
                             [0,0,1],
@@ -3022,7 +3020,7 @@ enum sessionData {
                             // Hard
                             [0,0,1]
                         ],
-                        // 1,0,0,0,3,1 | Medium
+                        // 1,0,0,3,1 | Medium
                         [
                             // Easy
                             [0,0,1],
@@ -3031,7 +3029,7 @@ enum sessionData {
                             // Hard
                             [0,0,1]
                         ],
-                        // 1,0,0,0,3,2 | Long
+                        // 1,0,0,3,2 | Long
                         [
                             // Easy
                             [0,0,1],
@@ -3044,15 +3042,15 @@ enum sessionData {
                 ]],
                 // ------------------------------------------------------------------------------------------------
                 // MARK: Session
-                // 1,0,1
+                // 1,1
                 [
-                    // 1,0,1,0 | Stretching
+                    // 1,1,0 | Stretching
                     [
                         // Focus
                         //
-                        // 1,0,1,0,0 | General
+                        // 1,1,0,0 | General
                         [
-                            // 1,0,1,0,0,0 | Short
+                            // 1,1,0,0,0 | Short
                             [
                                 // Easy
                                 [3,0,1],
@@ -3061,7 +3059,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 1,0,1,0,0,1 | Medium
+                            // 1,1,0,0,1 | Medium
                             [
                                 // Easy
                                 [3,0,1],
@@ -3070,7 +3068,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 1,0,1,0,0,2 | Long
+                            // 1,1,0,0,2 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -3080,9 +3078,9 @@ enum sessionData {
                                 [3,0,1]
                             ]
                         ],
-                        // 1,0,1,0,1 | Hamstrings
+                        // 1,1,0,1 | Hamstrings
                         [
-                            // 1,0,1,0,1,0 | Short
+                            // 1,1,0,1,0 | Short
                             [
                                 // Easy
                                 [3,0,1],
@@ -3091,7 +3089,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 1,0,1,0,1,1 | Medium
+                            // 1,1,0,1,1 | Medium
                             [
                                 // Easy
                                 [3,0,1],
@@ -3100,7 +3098,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 1,0,1,0,1,2 | Long
+                            // 1,1,0,1,2 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -3110,9 +3108,9 @@ enum sessionData {
                                 [3,0,1]
                             ]
                         ],
-                        // 1,0,1,0,2 | Hips
+                        // 1,1,0,2 | Hips
                         [
-                            // 1,0,1,0,2,0 | Short
+                            // 1,1,0,2,0 | Short
                             [
                                 // Easy
                                 [3,0,1],
@@ -3121,7 +3119,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 1,0,1,0,2,1 | Medium
+                            // 1,1,0,2,1 | Medium
                             [
                                 // Easy
                                 [3,0,1],
@@ -3130,7 +3128,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 1,0,1,0,2,2 | Long
+                            // 1,1,0,2,2 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -3140,9 +3138,9 @@ enum sessionData {
                                 [3,0,1]
                             ]
                         ],
-                        // 1,0,1,0,3 | Back/Neck
+                        // 1,1,0,3 | Back/Neck
                         [
-                            // 1,0,1,0,3,0 | Short
+                            // 1,1,0,3,0 | Short
                             [
                                 // Easy
                                 [3,0,1],
@@ -3151,7 +3149,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 1,0,1,0,3,1 | Medium
+                            // 1,1,0,3,1 | Medium
                             [
                                 // Easy
                                 [3,0,1],
@@ -3160,7 +3158,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 1,0,1,0,3,2 | Long
+                            // 1,1,0,3,2 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -3172,13 +3170,13 @@ enum sessionData {
                         ]
                     ],
                     // ------------------------------------------------------------------------------------------------
-                    // 1,0,2,0 | Yoga
+                    // 1,2,0 | Yoga
                     [
                         // Focus
                         //
-                        // 1,0,2,0,0 | General
+                        // 1,2,0,0 | General
                         [
-                            // 1,0,2,0,0,0 | Short
+                            // 1,2,0,0,0 | Short
                             [
                                 // Easy
                                 [4,0,1],
@@ -3187,7 +3185,7 @@ enum sessionData {
                                 // Hard
                                 [4,0,1]
                             ],
-                            // 1,0,2,0,0,1 | Medium
+                            // 1,2,0,0,1 | Medium
                             [
                                 // Easy
                                 [4,0,1],
@@ -3196,7 +3194,7 @@ enum sessionData {
                                 // Hard
                                 [4,0,1]
                             ],
-                            // 1,0,2,0,0,2 | Long
+                            // 1,2,0,0,2 | Long
                             [
                                 // Easy
                                 [4,0,1],
@@ -3206,9 +3204,9 @@ enum sessionData {
                                 [4,0,1]
                             ]
                         ],
-                        // 1,0,2,0,1 | Hamstrings
+                        // 1,2,0,1 | Hamstrings
                         [
-                            // 1,0,2,0,1,0 | Short
+                            // 1,2,0,1,0 | Short
                             [
                                 // Easy
                                 [4,0,1],
@@ -3217,7 +3215,7 @@ enum sessionData {
                                 // Hard
                                 [4,0,1]
                             ],
-                            // 1,0,2,0,1,1 | Medium
+                            // 1,2,0,1,1 | Medium
                             [
                                 // Easy
                                 [4,0,1],
@@ -3226,7 +3224,7 @@ enum sessionData {
                                 // Hard
                                 [4,0,1]
                             ],
-                            // 1,0,2,0,1,2 | Long
+                            // 1,2,0,1,2 | Long
                             [
                                 // Easy
                                 [4,0,1],
@@ -3236,9 +3234,9 @@ enum sessionData {
                                 [4,0,1]
                             ]
                         ],
-                        // 1,0,2,0,2 | Hips
+                        // 1,2,0,2 | Hips
                         [
-                            // 1,0,2,0,2,0 | Short
+                            // 1,2,0,2,0 | Short
                             [
                                 // Easy
                                 [4,0,1],
@@ -3247,7 +3245,7 @@ enum sessionData {
                                 // Hard
                                 [4,0,1]
                             ],
-                            // 1,0,2,0,2,1 | Medium
+                            // 1,2,0,2,1 | Medium
                             [
                                 // Easy
                                 [4,0,1],
@@ -3256,7 +3254,7 @@ enum sessionData {
                                 // Hard
                                 [4,0,1]
                             ],
-                            // 1,0,2,0,2,2 | Long
+                            // 1,2,0,2,2 | Long
                             [
                                 // Easy
                                 [4,0,1],
@@ -3266,9 +3264,9 @@ enum sessionData {
                                 [4,0,1]
                             ]
                         ],
-                        // 1,0,2,0,3 | Back/Neck
+                        // 1,2,0,3 | Back/Neck
                         [
-                            // 1,0,2,0,3,0 | Short
+                            // 1,2,0,3,0 | Short
                             [
                                 // Easy
                                 [4,0,1],
@@ -3277,7 +3275,7 @@ enum sessionData {
                                 // Hard
                                 [4,0,1]
                             ],
-                            // 1,0,2,0,3,1 | Medium
+                            // 1,2,0,3,1 | Medium
                             [
                                 // Easy
                                 [4,0,1],
@@ -3286,7 +3284,7 @@ enum sessionData {
                                 // Hard
                                 [4,0,1]
                             ],
-                            // 1,0,2,0,3,2 | Long
+                            // 1,2,0,3,2 | Long
                             [
                                 // Easy
                                 [4,0,1],
@@ -3303,17 +3301,16 @@ enum sessionData {
             // ------------------------------------------------------------------------------------------------
             // 2 | MARK: - Endurance
             2:
-            // 2,0
             [
                 // ------------------------------------------------------------------------------------------------
-                // 2,0,0 | MARK: - Warmup
+                // 2,0 | MARK: - Warmup
                 [
                 // Extra level so all levels nested to same degree
-                // 2,0,0,0
+                // 2,0,0
                 [
-                    // 2,0,0,0,0 | High Intensity / Cardio (Also used for steady state cardio)
+                    // 2,0,0,0 | High Intensity / Cardio (Also used for steady state cardio)
                     [
-                        // 2,0,0,0,0,0 | Short
+                        // 2,0,0,0,0 | Short
                         [
                             // Easy
                             [0,0,1],
@@ -3322,7 +3319,7 @@ enum sessionData {
                             // Hard
                             [0,0,1]
                         ],
-                        // 2,0,0,0,0,1 | Medium
+                        // 2,0,0,0,1 | Medium
                         [
                             // Easy
                             [0,0,1],
@@ -3331,7 +3328,7 @@ enum sessionData {
                             // Hard
                             [0,0,1]
                         ],
-                        // 2,0,0,0,0,2 | Long
+                        // 2,0,0,0,2 | Long
                         [
                             // Easy
                             [0,0,1],
@@ -3341,9 +3338,9 @@ enum sessionData {
                             [0,0,1]
                         ]
                     ],
-                    // 2,0,0,0,1 | Bodyweight Workout
+                    // 2,0,0,1 | Bodyweight Workout
                     [
-                        // 2,0,0,0,1,0 | Short
+                        // 2,0,0,1,0 | Short
                         [
                             // Easy
                             [0,0,1],
@@ -3352,7 +3349,7 @@ enum sessionData {
                             // Hard
                             [0,0,1]
                         ],
-                        // 2,0,0,0,1,1 | Medium
+                        // 2,0,0,1,1 | Medium
                         [
                             // Easy
                             [0,0,1],
@@ -3361,7 +3358,7 @@ enum sessionData {
                             // Hard
                             [0,0,1]
                         ],
-                        // 2,0,0,0,1,0,2 | Long
+                        // 2,0,0,1,0,2 | Long
                         [
                             // Easy
                             [0,0,1],
@@ -3373,14 +3370,14 @@ enum sessionData {
                     ]
                 ]],
                 // ------------------------------------------------------------------------------------------------
-                // 2,0,1 | MARK: Session
+                // 2,1 | MARK: Session
                 [
                     // Extra level so all nested to same degree
-                    // 2,0,1,0
+                    // 2,1,0
                     [
-                        // 2,0,1,0,0 | High Intensity Cardio
+                        // 2,1,0,0 | High Intensity Cardio
                         [
-                            // 2,0,1,0,0,0 | Short
+                            // 2,1,0,0,0 | Short
                             [
                                 // Easy
                                 [2,0,1],
@@ -3389,7 +3386,7 @@ enum sessionData {
                                 // Hard
                                 [2,0,1]
                             ],
-                            // 2,0,1,0,0,1 | Medium
+                            // 2,1,0,0,1 | Medium
                             [
                                 // Easy
                                 [2,0,1],
@@ -3398,7 +3395,7 @@ enum sessionData {
                                 // Hard
                                 [2,0,1]
                             ],
-                            // 2,0,1,0,0,2 | Long
+                            // 2,1,0,0,2 | Long
                             [
                                 // Easy
                                 [2,0,1],
@@ -3408,9 +3405,9 @@ enum sessionData {
                                 [2,0,1]
                             ]
                         ],
-                        // 2,0,1,0,1 | Bodyweight Workout
+                        // 2,1,0,1 | Bodyweight Workout
                         [
-                            // 2,0,1,0,1,0 | Short
+                            // 2,1,0,1,0 | Short
                             [
                                 // Easy
                                 [1,0,1],
@@ -3419,7 +3416,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 2,0,1,0,1,1 | Medium
+                            // 2,1,0,1,1 | Medium
                             [
                                 // Easy
                                 [1,0,1],
@@ -3428,7 +3425,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 2,0,1,0,1,2 | Long
+                            // 2,1,0,1,2 | Long
                             [
                                 // Easy
                                 [1,0,1],
@@ -3441,15 +3438,15 @@ enum sessionData {
                     ]
                 ],
                 // ------------------------------------------------------------------------------------------------
-                // 2,0,2 | MARK: Stretching
+                // 2,2 | MARK: Stretching
                 [
                     // Extra level so all nested to same degree
-                    // 2,0,2,0
+                    // 2,2,0
                     [
                         // ------------------------------------------------------------------------------------------------
-                        // 2,0,2,0,0 | High Intensity (Also used for steady state cardio)
+                        // 2,2,0,0 | High Intensity (Also used for steady state cardio)
                         [
-                            // 2,0,2,0,0,0 | Short
+                            // 2,2,0,0,0 | Short
                             [
                                 // Easy
                                 [3,0,1],
@@ -3458,7 +3455,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 2,0,2,0,0,1 | Medium
+                            // 2,2,0,0,1 | Medium
                             [
                                 // Easy
                                 [3,0,1],
@@ -3467,7 +3464,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 2,0,2,0,0,2 | Long
+                            // 2,2,0,0,2 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -3478,9 +3475,9 @@ enum sessionData {
                             ]
                         ],
                         // ------------------------------------------------------------------------------------------------
-                        // 2,0,2,0,1 | Bodyweight Workout
+                        // 2,2,0,1 | Bodyweight Workout
                         [
-                            // 2,0,2,0,1,0 | Short
+                            // 2,2,0,1,0 | Short
                             [
                                 // Easy
                                 [3,0,1],
@@ -3489,7 +3486,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 2,0,2,0,1,1 | Medium
+                            // 2,2,0,1,1 | Medium
                             [
                                 // Easy
                                 [3,0,1],
@@ -3498,7 +3495,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 2,0,2,0,1,2 | Long
+                            // 2,2,0,1,2 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -3515,15 +3512,14 @@ enum sessionData {
             // ------------------------------------------------------------------------------------------------
             // 3 | MARK: - Toning
             3:
-            // 3,0 - Toning
             [
                 // ------------------------------------------------------------------------------------------------
-                // 3,0,0 | MARK: - Warmup
+                // 3,0 | MARK: - Warmup
                 [
-                        // 3,0,0,0,0 | High Intensity Cardio
+                        // 3,0,0,0 | High Intensity Cardio
                         // Nested 1 more time so all equally nested
                         [[
-                            // 3,0,0,0,0,0 | Short
+                            // 3,0,0,0,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
@@ -3532,7 +3528,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 3,0,0,0,0,1 | Medium
+                            // 3,0,0,0,1 | Medium
                             [
                                 // Easy
                                 [0,0,1],
@@ -3541,7 +3537,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 3,0,0,0,0,2 | Long
+                            // 3,0,0,0,2 | Long
                             [
                                 // Easy
                                 [0,0,1],
@@ -3551,11 +3547,11 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ]],
-                    // 3,0,0,1 | Bodyweight Workout
+                    // 3,0,1 | Bodyweight Workout
                     [
-                        // 3,0,0,1,0 | Full
+                        // 3,0,1,0 | Full
                         [
-                            // 3,0,0,1,0,0 | Short
+                            // 3,0,1,0,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
@@ -3564,7 +3560,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 3,0,0,1,0,1 | Medium
+                            // 3,0,1,0,1 | Medium
                             [
                                 // Easy
                                 [0,0,1],
@@ -3573,7 +3569,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 3,0,0,1,0,2 | Long
+                            // 3,0,1,0,2 | Long
                             [
                                 // Easy
                                 [0,0,1],
@@ -3583,9 +3579,9 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 3,0,0,1,1 | Upper
+                        // 3,0,1,1 | Upper
                         [
-                            // 3,0,0,1,1,0 | Short
+                            // 3,0,1,1,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
@@ -3594,7 +3590,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 3,0,0,1,1,1 | Medium
+                            // 3,0,1,1,1 | Medium
                             [
                                 // Easy
                                 [0,0,1],
@@ -3603,7 +3599,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 3,0,0,1,1,2 | Long
+                            // 3,0,1,1,2 | Long
                             [
                                 // Easy
                                 [0,0,1],
@@ -3613,9 +3609,9 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 3,0,0,1,2 | Lower
+                        // 3,0,1,2 | Lower
                         [
-                            // 3,0,0,1,2,0 | Short
+                            // 3,0,1,2,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
@@ -3624,7 +3620,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 3,0,0,1,2,1 | Medium
+                            // 3,0,1,2,1 | Medium
                             [
                                 // Easy
                                 [0,0,1],
@@ -3633,7 +3629,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 3,0,0,1,2,2 | Long
+                            // 3,0,1,2,2 | Long
                             [
                                 // Easy
                                 [0,0,1],
@@ -3646,12 +3642,12 @@ enum sessionData {
                     ]
                 ],
                 // ------------------------------------------------------------------------------------------------
-                // 3,0,1 | MARK: Session
+                // 3,1 | MARK: Session
                 [
-                        // 3,0,1,0,0 | High Intensity Cardio
+                        // 3,1,0,0 | High Intensity Cardio
                         // Nested 1 more time so all equally nested
                         [[
-                            // 3,0,1,0,0,0 | Short
+                            // 3,1,0,0,0 | Short
                             [
                                 // Easy
                                 [2,0,1],
@@ -3660,7 +3656,7 @@ enum sessionData {
                                 // Hard
                                 [2,0,1]
                             ],
-                            // 3,0,1,0,0,1 | Medium
+                            // 3,1,0,0,1 | Medium
                             [
                                 // Easy
                                 [2,0,1],
@@ -3669,7 +3665,7 @@ enum sessionData {
                                 // Hard
                                 [2,0,1]
                             ],
-                            // 3,0,1,0,0,2 | Long
+                            // 3,1,0,0,2 | Long
                             [
                                 // Easy
                                 [2,0,1],
@@ -3679,11 +3675,11 @@ enum sessionData {
                                 [2,0,1]
                             ]
                         ]],
-                    // 3,0,1,1 | Bodyweight Workout
+                    // 3,1,1 | Bodyweight Workout
                     [
-                        // 3,0,1,1,0 | Full
+                        // 3,1,1,0 | Full
                         [
-                            // 3,0,1,1,0,0 | Short
+                            // 3,1,1,0,0 | Short
                             [
                                 // Easy
                                 [1,0,1],
@@ -3692,7 +3688,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 3,0,1,1,0,1 | Medium
+                            // 3,1,1,0,1 | Medium
                             [
                                 // Easy
                                 [1,0,1],
@@ -3701,7 +3697,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 3,0,1,1,0,2 | Long
+                            // 3,1,1,0,2 | Long
                             [
                                 // Easy
                                 [1,0,1],
@@ -3711,9 +3707,9 @@ enum sessionData {
                                 [1,0,1]
                             ]
                         ],
-                        // 3,0,1,1,1 | Upper
+                        // 3,1,1,1 | Upper
                         [
-                            // 3,0,1,1,1,0 | Short
+                            // 3,1,1,1,0 | Short
                             [
                                 // Easy
                                 [1,0,1],
@@ -3722,7 +3718,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 3,0,1,1,1,1 | Medium
+                            // 3,1,1,1,1 | Medium
                             [
                                 // Easy
                                 [1,0,1],
@@ -3731,7 +3727,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 3,0,1,1,1,2 | Long
+                            // 3,1,1,1,2 | Long
                             [
                                 // Easy
                                 [1,0,1],
@@ -3741,9 +3737,9 @@ enum sessionData {
                                 [1,0,1]
                             ]
                         ],
-                        // 3,0,1,1,2 | Lower
+                        // 3,1,1,2 | Lower
                         [
-                            // 3,0,1,1,2,0 | Short
+                            // 3,1,1,2,0 | Short
                             [
                                 // Easy
                                 [1,0,1],
@@ -3752,7 +3748,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 3,0,1,1,2,1 | Medium
+                            // 3,1,1,2,1 | Medium
                             [
                                 // Easy
                                 [1,0,1],
@@ -3761,7 +3757,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 3,0,1,1,2,2 | Long
+                            // 3,1,1,2,2 | Long
                             [
                                 // Easy
                                 [1,0,1],
@@ -3774,12 +3770,12 @@ enum sessionData {
                     ]
                 ],
                 // ------------------------------------------------------------------------------------------------
-                // 3,0,2 | MARK: Stretching
+                // 3,2 | MARK: Stretching
                 [
-                        // 3,0,2,0,0 | High Intensity Cardio
+                        // 3,2,0,0 | High Intensity Cardio
                         // Nested 1 more time so all equally nested
                         [[
-                            // 3,0,2,0,0,0 | Short
+                            // 3,2,0,0,0 | Short
                             [
                                 // Easy
                                 [3,0,1],
@@ -3788,7 +3784,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 3,0,2,0,0,1 | Medium
+                            // 3,2,0,0,1 | Medium
                             [
                                 // Easy
                                 [3,0,1],
@@ -3797,7 +3793,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 3,0,2,0,0,2 | Long
+                            // 3,2,0,0,2 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -3807,11 +3803,11 @@ enum sessionData {
                                 [3,0,1]
                             ]
                         ]],
-                    // 3,0,2,1 | Workout
+                    // 3,2,1 | Workout
                     [
-                        // 3,0,2,1,0 | Full
+                        // 3,2,1,0 | Full
                         [
-                            // 3,0,2,1,0,0 | Short
+                            // 3,2,1,0,0 | Short
                             [
                                 // Easy
                                 [3,0,1],
@@ -3820,7 +3816,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 3,0,2,1,0,1 | Medium
+                            // 3,2,1,0,1 | Medium
                             [
                                 // Easy
                                 [3,0,1],
@@ -3829,7 +3825,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 3,0,2,1,0,2 | Long
+                            // 3,2,1,0,2 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -3839,9 +3835,9 @@ enum sessionData {
                                 [3,0,1]
                             ]
                         ],
-                        // 3,0,2,1,1 | Upper
+                        // 3,2,1,1 | Upper
                         [
-                            // 3,0,2,1,1,0 | Short
+                            // 3,2,1,1,0 | Short
                             [
                                 // Easy
                                 [3,0,1],
@@ -3850,7 +3846,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 3,0,2,1,1,2 | Medium
+                            // 3,2,1,1,2 | Medium
                             [
                                 // Easy
                                 [3,0,1],
@@ -3859,7 +3855,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 3,0,2,1,1,2 | Long
+                            // 3,2,1,1,2 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -3869,9 +3865,9 @@ enum sessionData {
                                 [3,0,1]
                             ]
                         ],
-                        // 3,0,2,1,2 | Lower
+                        // 3,2,1,2 | Lower
                         [
-                            // 3,0,2,1,2,0 | Short
+                            // 3,2,1,2,0 | Short
                             [
                                 // Easy
                                 [3,0,1],
@@ -3880,7 +3876,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 3,0,2,1,2,1 | Medium
+                            // 3,2,1,2,1 | Medium
                             [
                                 // Easy
                                 [3,0,1],
@@ -3889,7 +3885,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 3,0,2,1,2,2 | Long
+                            // 3,2,1,2,2 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -3906,16 +3902,15 @@ enum sessionData {
             // ------------------------------------------------------------------------------------------------
             // 4 | MARK: - Muscle Gain
             4:
-            // 4,0
             [
                 // ------------------------------------------------------------------------------------------------
-                // 4,0,0 | MARK: - Warmup
+                // 4,0 | MARK: - Warmup
                 [
-                    // 4,0,0,0 | Gym
+                    // 4,0,0 | Gym
                     [
-                        // 4,0,0,0,0 | Full
+                        // 4,0,0,0 | Full
                         [
-                            // 4,0,0,0,0,0 | Short
+                            // 4,0,0,0,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
@@ -3924,7 +3919,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,0,0,0,1 | Medium
+                            // 4,0,0,0,1 | Medium
                             [
                                 // Easy
                                 [0,0,1],
@@ -3933,7 +3928,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,0,0,0,2 | Long
+                            // 4,0,0,0,2 | Long
                             [
                                 // Easy
                                 [0,0,1],
@@ -3943,9 +3938,9 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 4,0,0,0,1 | Upper
+                        // 4,0,0,1 | Upper
                         [
-                            // 4,0,0,0,1,0 | Short
+                            // 4,0,0,1,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
@@ -3954,7 +3949,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,0,0,1,1 | Medium
+                            // 4,0,0,1,1 | Medium
                             [
                                 // Easy
                                 [0,0,1],
@@ -3963,7 +3958,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,0,0,1,2 | Long
+                            // 4,0,0,1,2 | Long
                             [
                                 // Easy
                                 [0,0,1],
@@ -3973,9 +3968,9 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 4,0,0,0,2 | Lower
+                        // 4,0,0,2 | Lower
                         [
-                            // 4,0,0,0,2,0 | Short
+                            // 4,0,0,2,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
@@ -3984,7 +3979,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,0,0,2,1 | Medium
+                            // 4,0,0,2,1 | Medium
                             [
                                 // Easy
                                 [0,0,1],
@@ -3993,7 +3988,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,0,0,2,2 | Long
+                            // 4,0,0,2,2 | Long
                             [
                                 // Easy
                                 [0,0,1],
@@ -4004,11 +3999,11 @@ enum sessionData {
                             ]
                         ]
                     ],
-                    // 4,0,0,1 | Bodyweight
+                    // 4,0,1 | Bodyweight
                     [
-                        // 4,0,0,1,0 | Full
+                        // 4,0,1,0 | Full
                         [
-                            // 4,0,0,1,0,0 | Short
+                            // 4,0,1,0,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
@@ -4017,7 +4012,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,0,1,0,1 | Medium
+                            // 4,0,1,0,1 | Medium
                             [
                                 // Easy
                                 [0,0,1],
@@ -4026,7 +4021,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,0,1,0,2 | Long
+                            // 4,0,1,0,2 | Long
                             [
                                 // Easy
                                 [0,0,1],
@@ -4036,9 +4031,9 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 4,0,0,1,1 | Upper
+                        // 4,0,1,1 | Upper
                         [
-                            // 4,0,0,1,1,0 | Short
+                            // 4,0,1,1,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
@@ -4047,7 +4042,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,0,1,1,1 | Medium
+                            // 4,0,1,1,1 | Medium
                             [
                                 // Easy
                                 [0,0,1],
@@ -4056,7 +4051,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,0,1,1,2 | Long
+                            // 4,0,1,1,2 | Long
                             [
                                 // Easy
                                 [0,0,1],
@@ -4066,9 +4061,9 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 4,0,0,1,2 | Lower
+                        // 4,0,1,2 | Lower
                         [
-                            // 4,0,0,1,2,0 | Short
+                            // 4,0,1,2,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
@@ -4077,7 +4072,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,0,1,2,1 | Medium
+                            // 4,0,1,2,1 | Medium
                             [
                                 // Easy
                                 [0,0,1],
@@ -4086,7 +4081,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,0,1,2,2 | Long
+                            // 4,0,1,2,2 | Long
                             [
                                 // Easy
                                 [0,0,1],
@@ -4099,13 +4094,13 @@ enum sessionData {
                     ]
                 ],
                 // ------------------------------------------------------------------------------------------------
-                // 4,0,1 | MARK: Workout
+                // 4,1 | MARK: Workout
                 [
-                    // 4,0,1,0 | Gym
+                    // 4,1,0 | Gym
                     [
-                        // 4,0,1,0,0 | Full
+                        // 4,1,0,0 | Full
                         [
-                            // 4,0,1,0,0,0 | Short
+                            // 4,1,0,0,0 | Short
                             [
                                 // Easy
                                 [1,0,1],
@@ -4114,7 +4109,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 4,0,1,0,0,1 | Medium
+                            // 4,1,0,0,1 | Medium
                             [
                                 // Easy
                                 [1,0,1],
@@ -4123,7 +4118,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 4,0,1,0,0,2 | Long
+                            // 4,1,0,0,2 | Long
                             [
                                 // Easy
                                 [1,0,1],
@@ -4133,9 +4128,9 @@ enum sessionData {
                                 [1,0,1]
                             ]
                         ],
-                        // 4,0,1,0,1 | Upper
+                        // 4,1,0,1 | Upper
                         [
-                            // 4,0,1,0,1,0 | Short
+                            // 4,1,0,1,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
@@ -4144,7 +4139,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,1,0,1,2 | Medium
+                            // 4,1,0,1,2 | Medium
                             [
                                 // Easy
                                 [0,0,1],
@@ -4153,7 +4148,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,1,0,1,2 | Long
+                            // 4,1,0,1,2 | Long
                             [
                                 // Easy
                                 [0,0,1],
@@ -4163,9 +4158,9 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 4,0,1,0,2 | Lower
+                        // 4,1,0,2 | Lower
                         [
-                            // 4,0,1,0,2,0 | Short
+                            // 4,1,0,2,0 | Short
                             [
                                 // Easy
                                 [1,0,1],
@@ -4174,7 +4169,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 4,0,1,0,2,1 | Medium
+                            // 4,1,0,2,1 | Medium
                             [
                                 // Easy
                                 [1,0,1],
@@ -4183,7 +4178,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 4,0,1,0,2,2 | Long
+                            // 4,1,0,2,2 | Long
                             [
                                 // Easy
                                 [1,0,1],
@@ -4194,11 +4189,11 @@ enum sessionData {
                             ]
                         ]
                     ],
-                    // 4,0,1,1 | Bodyweight
+                    // 4,1,1 | Bodyweight
                     [
-                        // 4,0,1,1,0 | Full
+                        // 4,1,1,0 | Full
                         [
-                            // 4,0,1,1,0,0 | Short
+                            // 4,1,1,0,0 | Short
                             [
                                 // Easy
                                 [1,0,1],
@@ -4207,7 +4202,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 4,0,1,1,0,1 | Medium
+                            // 4,1,1,0,1 | Medium
                             [
                                 // Easy
                                 [1,0,1],
@@ -4216,7 +4211,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 4,0,1,1,0,2 | Long
+                            // 4,1,1,0,2 | Long
                             [
                                 // Easy
                                 [1,0,1],
@@ -4226,9 +4221,9 @@ enum sessionData {
                                 [1,0,1]
                             ]
                         ],
-                        // 4,0,1,1,1 | Upper
+                        // 4,1,1,1 | Upper
                         [
-                            // 4,0,1,1,1,0 | Short
+                            // 4,1,1,1,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
@@ -4237,7 +4232,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,1,1,1,1 | Medium
+                            // 4,1,1,1,1 | Medium
                             [
                                 // Easy
                                 [0,0,1],
@@ -4246,7 +4241,7 @@ enum sessionData {
                                 // Hard
                                 [0,0,1]
                             ],
-                            // 4,0,1,1,1,2 | Long
+                            // 4,1,1,1,2 | Long
                             [
                                 // Easy
                                 [0,0,1],
@@ -4256,9 +4251,9 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 4,0,1,1,2 | Lower
+                        // 4,1,1,2 | Lower
                         [
-                            // 4,0,1,1,2,0 | Short
+                            // 4,1,1,2,0 | Short
                             [
                                 // Easy
                                 [1,0,1],
@@ -4267,7 +4262,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 4,0,1,1,2,1 | Medium
+                            // 4,1,1,2,1 | Medium
                             [
                                 // Easy
                                 [1,0,1],
@@ -4276,7 +4271,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 4,0,1,1,2,2 | Long
+                            // 4,1,1,2,2 | Long
                             [
                                 // Easy
                                 [1,0,1],
@@ -4289,14 +4284,14 @@ enum sessionData {
                     ]
                 ],
                 // ------------------------------------------------------------------------------------------------
-                // 4,0,2 | MARK: Stretching
+                // 4,2 | MARK: Stretching
                 [
                     // Extra level so all nested equally
-                    // 4,0,2,0
+                    // 4,2,0
                     [
-                        // 4,0,2,0,0 | Full
+                        // 4,2,0,0 | Full
                         [
-                            // 4,0,2,0,0,0 | Short
+                            // 4,2,0,0,0 | Short
                             [
                                 // Easy
                                 [3,0,1],
@@ -4305,7 +4300,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 4,0,2,0,0,1 | Medium
+                            // 4,2,0,0,1 | Medium
                             [
                                 // Easy
                                 [3,0,1],
@@ -4314,7 +4309,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 4,0,2,0,0,2 | Long
+                            // 4,2,0,0,2 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -4324,9 +4319,9 @@ enum sessionData {
                                 [3,0,1]
                             ]
                         ],
-                        // 4,0,2,0,1 | Upper
+                        // 4,2,0,1 | Upper
                         [
-                            // 4,0,2,0,1,0 | Short
+                            // 4,2,0,1,0 | Short
                             [
                                 // Easy
                                 [3,0,1],
@@ -4335,7 +4330,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 4,0,2,0,1,1 | Medium
+                            // 4,2,0,1,1 | Medium
                             [
                                 // Easy
                                 [3,0,1],
@@ -4344,7 +4339,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 4,0,2,0,1,0 | Long
+                            // 4,2,0,1,0 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -4354,9 +4349,9 @@ enum sessionData {
                                 [3,0,1]
                             ]
                         ],
-                        // 4,0,2,0,2 | Lower
+                        // 4,2,0,2 | Lower
                         [
-                            // 4,0,2,0,2,0 | Short
+                            // 4,2,0,2,0 | Short
                             [
                                 // Easy
                                 [3,0,1],
@@ -4365,7 +4360,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 4,0,2,0,2,1 | Medium
+                            // 4,2,0,2,1 | Medium
                             [
                                 // Easy
                                 [3,0,1],
@@ -4374,7 +4369,7 @@ enum sessionData {
                                 // Hard
                                 [3,0,1]
                             ],
-                            // 4,0,2,0,2,2 | Long
+                            // 4,2,0,2,2 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -4391,24 +4386,23 @@ enum sessionData {
             // ------------------------------------------------------------------------------------------------
             // 5 | MARK: - Strength
             5:
-            // 5,0
             [
                 // ------------------------------------------------------------------------------------------------
-                // 5,0,0 | MARK: - Warmup
+                // 5,0 | MARK: - Warmup
                 [
                     // ------------------------------------------------------------------------------------------------
-                    // 5,0,0,0 | Gym
+                    // 5,0,0 | Gym
                     [
-                        // 5,0,0,0,0 | 5x5 1
+                        // 5,0,0,0 | 5x5 1
                         [
-                            // 5,0,0,0,0 | Short
+                            // 5,0,0,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,0,0,1 | Normal
+                            // 5,0,0,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4416,16 +4410,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,0,0,1 | 5x5 2
+                        // 5,0,0,1 | 5x5 2
                         [
-                            // 5,0,0,0,1,0 | Short
+                            // 5,0,0,1,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,0,0,1,1 | Normal
+                            // 5,0,0,1,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4433,16 +4427,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,0,0,2 | Accessory 1
+                        // 5,0,0,2 | Accessory 1
                         [
-                            // 5,0,0,0,2,0 | Short
+                            // 5,0,0,2,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,0,0,2,1 | Normal
+                            // 5,0,0,2,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4450,16 +4444,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,0,0,3 | Accessory 2
+                        // 5,0,0,3 | Accessory 2
                         [
-                            // 5,0,0,0,3,0 | Short
+                            // 5,0,0,3,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,0,0,3,1 | Normal
+                            // 5,0,0,3,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4469,18 +4463,18 @@ enum sessionData {
                         ]
                     ],
                     // ------------------------------------------------------------------------------------------------
-                    // 5,0,0,1 | Bodyweight
+                    // 5,0,1 | Bodyweight
                     [
-                        // 5,0,0,1,0 | 5x5 1
+                        // 5,0,1,0 | 5x5 1
                         [
-                            // 5,0,0,1,0,0 | Short
+                            // 5,0,1,0,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,0,1,0,1 | Normal
+                            // 5,0,1,0,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4488,16 +4482,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,0,1,1 | 5x5 2
+                        // 5,0,1,1 | 5x5 2
                         [
-                            // 5,0,0,1,1,0 | Short
+                            // 5,0,1,1,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,0,1,1,1 | Normal
+                            // 5,0,1,1,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4505,16 +4499,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,0,1,2 | Accessory 1
+                        // 5,0,1,2 | Accessory 1
                         [
-                            // 5,0,0,1,2,0 | Short
+                            // 5,0,1,2,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,0,1,2,1 | Normal
+                            // 5,0,1,2,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4522,16 +4516,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,0,1,3 | Accessory 2
+                        // 5,0,1,3 | Accessory 2
                         [
-                            // 5,0,0,1,3,0 | Short
+                            // 5,0,1,3,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,0,1,3,1 | Normal
+                            // 5,0,1,3,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4542,21 +4536,21 @@ enum sessionData {
                     ]
                 ],
                 // ------------------------------------------------------------------------------------------------
-                // 5,0,1 | MARK: Workout
+                // 5,1 | MARK: Workout
                 [
                     // ------------------------------------------------------------------------------------------------
-                    // 5,0,1,0 | Gym
+                    // 5,1,0 | Gym
                     [
-                        // 5,0,1,0,0 | 5x5 1
+                        // 5,1,0,0 | 5x5 1
                         [
-                            // 5,0,1,0,0,0 | Short
+                            // 5,1,0,0,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,1,0,0,1 | Normal
+                            // 5,1,0,0,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4564,16 +4558,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,1,0,1 | 5x5 2
+                        // 5,1,0,1 | 5x5 2
                         [
-                            // 5,0,1,0,1,0 | Short
+                            // 5,1,0,1,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,1,0,1,1 | Normal
+                            // 5,1,0,1,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4581,16 +4575,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,1,0,2 | Accessory 1
+                        // 5,1,0,2 | Accessory 1
                         [
-                            // 5,0,1,0,2,0 | Short
+                            // 5,1,0,2,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,1,0,2,1 | Normal
+                            // 5,1,0,2,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4598,16 +4592,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,1,0,3 | Accessory 2
+                        // 5,1,0,3 | Accessory 2
                         [
-                            // 5,0,1,0,3,0 | Short
+                            // 5,1,0,3,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,1,0,3,1 | Normal
+                            // 5,1,0,3,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4617,18 +4611,18 @@ enum sessionData {
                         ]
                     ],
                     // ------------------------------------------------------------------------------------------------
-                    // 5,0,1,1 | Bodyweight
+                    // 5,1,1 | Bodyweight
                     [
-                        // 5,0,1,1,0 | 5x5 1
+                        // 5,1,1,0 | 5x5 1
                         [
-                            // 5,0,1,1,0,0 | Short
+                            // 5,1,1,0,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,1,1,0,1 | Normal
+                            // 5,1,1,0,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4636,16 +4630,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,1,1,1 | 5x5 2
+                        // 5,1,1,1 | 5x5 2
                         [
-                            // 5,0,1,1,1,0 | Short
+                            // 5,1,1,1,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,1,1,1,1 | Normal
+                            // 5,1,1,1,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4653,16 +4647,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,1,1,2 | Accessory 1
+                        // 5,1,1,2 | Accessory 1
                         [
-                            // 5,0,1,1,2,0 | Short
+                            // 5,1,1,2,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,1,1,2,1 | Normal
+                            // 5,1,1,2,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4670,16 +4664,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,1,1,3 | Accessory 2
+                        // 5,1,1,3 | Accessory 2
                         [
-                            // 5,0,1,1,3,0 | Short
+                            // 5,1,1,3,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,1,1,3,1 | Normal
+                            // 5,1,1,3,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4690,21 +4684,21 @@ enum sessionData {
                     ]
                 ],
                 // ------------------------------------------------------------------------------------------------
-                // 5,0,2 | MARK: Stretching
+                // 5,2 | MARK: Stretching
                 [
                     // Extra layer so all nested to same degree
-                    // 5,0,2,0
+                    // 5,2,0
                     [
-                        // 5,0,2,0,0 | 5x5 1
+                        // 5,2,0,0 | 5x5 1
                         [
-                            // 5,0,2,0,0,0 | Short
+                            // 5,2,0,0,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,2,0,0,1 | Normal
+                            // 5,2,0,0,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4712,16 +4706,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,2,0,1 | 5x5 2
+                        // 5,2,0,1 | 5x5 2
                         [
-                            // 5,0,2,0,1,0 | Short
+                            // 5,2,0,1,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,2,0,1,1 | Normal
+                            // 5,2,0,1,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4729,16 +4723,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,2,0,2 | Accessory 1
+                        // 5,2,0,2 | Accessory 1
                         [
-                            // 5,0,2,0,2,0 | Short
+                            // 5,2,0,2,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,2,0,2,1 | Normal
+                            // 5,2,0,2,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -4746,16 +4740,16 @@ enum sessionData {
                                 [0,0,1]
                             ]
                         ],
-                        // 5,0,2,0,3 | Accessory 2
+                        // 5,2,0,3 | Accessory 2
                         [
-                            // 5,0,2,0,3,0 | Short
+                            // 5,2,0,3,0 | Short
                             [
                                 // Easy
                                 [0,0,1],
                                 // Normal
                                 [0,0,1]
                             ],
-                            // 5,0,2,0,3,1 | Normal
+                            // 5,2,0,3,1 | Normal
                             [
                                 // Easy
                                 [0,0,1],
@@ -5119,7 +5113,7 @@ enum sessionData {
                         "mindType",
                         //
                         "yoga",
-                        "meditation", // Goes to meditation choice
+                        "meditation", // Goes to Choice 5
                         "walk" // popup, go for a walk
                     ],
                     // 2 | Choice 2 - Focus
@@ -5144,9 +5138,16 @@ enum sessionData {
                     [
                         "mindToDo",
                         //
-                        "warmup",
-                        "practice"
-                    ]
+                        "1. warmup",
+                        "2. practice"
+                    ],
+                    // 5 | Choice 5 - Type
+                    [
+                        "meditationType",
+                        //
+                        "meditationTimer",
+                        "guidedMeditation", // Goes to Choice 5
+                    ],
             ],
             
             // Note: Choice = ["title","contents","contents"...]
@@ -5183,8 +5184,8 @@ enum sessionData {
                     [
                         "flexibilityToDo",
                         //
-                        "warmup",
-                        "session"
+                        "1. warmup",
+                        "2. session"
                     ]
                 ],
                 
@@ -5195,7 +5196,7 @@ enum sessionData {
                     ["endurance"],
                     // 1 | Choice 1 - Type
                     [
-                        "type",
+                        "enduranceType",
                         //
                         "highIntensity",
                         "steadyState",
@@ -5204,7 +5205,7 @@ enum sessionData {
                     // High Intensity
                     // 2 | Choice 1 - 2 - Type
                     [
-                        "enduranceType",
+                        "enduranceType2",
                         //
                         "cardio",
                         "bodyweightWorkout",
@@ -5221,9 +5222,9 @@ enum sessionData {
                     [
                         "enduranceToDo",
                         //
-                        "warmup",
-                        "cardio",
-                        "stretching",
+                        "1. warmup",
+                        "2. cardio/bodyweight workout",
+                        "3. stretching",
                     ],
                     // ------------
                     // Steady State
@@ -5231,9 +5232,9 @@ enum sessionData {
                     [
                         "enduranceToDo",
                         //
-                        "warmup",
-                        "cardio",
-                        "stretching",
+                        "1. warmup",
+                        "2. cardio",
+                        "3. stretching",
                     ],
                     // 6 | Chioce 3 - 2 - Warmup/Stretching Length,
                     [
@@ -5268,9 +5269,9 @@ enum sessionData {
                     [
                         "toningToDo",
                         //
-                        "warmup",
-                        "session",
-                        "stretching",
+                        "1. warmup",
+                        "2. session",
+                        "3. stretching",
                     ],
             ],
             
@@ -5306,9 +5307,9 @@ enum sessionData {
                     [
                         "muscleGainToDo",
                         //
-                        "warmup",
-                        "session",
-                        "stretching",
+                        "1. warmup",
+                        "2. session",
+                        "3. stretching",
                     ],
             ],
             
@@ -5319,7 +5320,7 @@ enum sessionData {
                     [ "strength"],
                     // 1 | Choice 1 - type
                     [
-                        "type",
+                        "strengthType",
                         //
                         "gym",
                         "bodyweight"
@@ -5344,9 +5345,9 @@ enum sessionData {
                     [
                         "strengthToDo",
                         //
-                        "warmup",
-                        "session",
-                        "stretching"
+                        "1. warmup",
+                        "2. session",
+                        "3. stretching"
                     ],
             ]
     ]
