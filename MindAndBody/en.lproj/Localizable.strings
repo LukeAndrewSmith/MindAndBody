@@ -126,7 +126,7 @@
 "mind" = "Mind";
 "flexibility" = "Flexibility";
 "endurance" = "Endurance";
-"fatLoss" = "Fat Loss";
+"toning" = "Toning";
 "muscleGain" = "Muscle Gain";
 "strength" = "Strength";
 
@@ -137,6 +137,7 @@
 "toDo" = "To Do";
 // Mind
 "mindType" = "Mind - Type";
+"mindToDo" = "Mind - To Do";
     // Choice 1
     "walk" = "Walk";
     "calm" = "Calm";
@@ -147,23 +148,28 @@
     // Choice 2
     "practiceLength" = "Practice Length";
 // Flexibility
+"flexibilityToDo" = "Flexibility - To Do";
 "flexibilityType" = "Flexibility - Type";
     // Choice 3
     "hamstrings" = "Hamstrings";
     "hips" = "Hips";
     "back/neck" = "Back/Neck";
 // Endurance
+"enduranceToDo" = "Endurance - To Do";
 "steadyState" = "Steady State";
     // Choice 2
     "enduranceType" = "Endurance - Type";
-// Fat Loss
-"fatLossType" = "Fat Loss Type";
+// Toning
+"toningToDo" = "Toning - To Do";
+"toningType" = "Toning Type";
     // Choice 1
     "highIntensityCardio" = "High Intensity Cardio";
     "bodyWeightWorkout" = "Bodyweight Workout";
 // Muscle Gain
+"muscleGainToDo" = "Muscle Gain - To Do";
 "muscleGainType" = "Muscle Gain Type";
 // Strength
+"strengthToDo" = "Strength - To Do";
     // Choice 1
     "short" = "Short";
     "normal" = "Normal";

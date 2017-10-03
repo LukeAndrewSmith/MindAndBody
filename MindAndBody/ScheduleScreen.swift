@@ -426,6 +426,12 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     seperator.backgroundColor = colour1.cgColor
                     seperator.opacity = 0.25
                     cell.layer.addSublayer(seperator)
+                    //
+                    // Color if last choice
+                    if isLastChoice() == true {
+                        cell.textLabel?.textColor = colour3
+                        seperator.backgroundColor = colour3.cgColor
+                    }
                 // Else if selection
                 } else {
                     //
@@ -485,101 +491,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         switch tableView {
         case scheduleTable:
             //
-            switch indexPath.row {
-            case daySessionsArray[selectedDay].count:
-                break
-            default:
-                // Next Choice Function
-                if choiceProgress[0] == -1 {
-                    choiceProgress[0] = daySessionsArray[selectedDay][indexPath.row]
-                    choiceProgress[1] += 1
-                    maskView()
-                    // Next Table info
-                    slideLeft()
-                
-                //
-                } else {
-                
-                    // Present next choice or present session
-                    switch choiceProgress[0] {
-                    // Mind
-                    case 0:
-                        if choiceProgress[1] == 4 {
-                            // Test
-                            selectedSession = [5,0,0]
-                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
-                            
-                            } else {
-                            choiceProgress[1] += 1
-                        }
-                        
-                    // Flexibility
-                    case 1:
-                        if choiceProgress[1] == 4 {
-                            // Test
-                            selectedSession = [1,0,0]
-                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
-                        } else {
-                            choiceProgress[1] += 1
-                        }
-                        
-                    // Endurance
-                    case 2:
-                        switch choiceProgress[1] {
-                        case 4:
-                            // Test
-                            selectedSession = [1,0,0]
-                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
-                        case 5:
-                            if indexPath.row == 2 {
-                                
-                            } else {
-                                choiceProgress[1] += 1
-                            }
-                        case 6:
-                            // Test
-                            selectedSession = [1,0,0]
-                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
-                        default:
-                            choiceProgress[1] += 1
-                        }
-                        
-                    // Fat Loss
-                    case 3:
-                        if choiceProgress[1] == 4 {
-                            // Test
-                            selectedSession = [1,0,0]
-                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
-                        } else {
-                            choiceProgress[1] += 1
-                        }
-                        
-                    // Muscle Gain
-                    case 4:
-                        if choiceProgress[1] == 4 {
-                            // Test
-                            selectedSession = [1,0,0]
-                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
-                        } else {
-                            choiceProgress[1] += 1
-                        }
-                        
-                    // Strength
-                    case 5:
-                        if choiceProgress[1] == 4 {
-                            // Test
-                            selectedSession = [1,0,0]
-                            performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
-                        } else {
-                            choiceProgress[1] += 1
-                        }
-                    default:
-                        break
-                    }
-                }
-                
-                nextChoice()
-            }
+            // If choiceProgress[0] = -1
+            didSelectRowHandler(row: indexPath.row)
 
             //
             tableView.deselectRow(at: indexPath, animated: true)
@@ -593,7 +506,200 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
 //
-// MARK: Helper Functions
+// MARK: Schedule Helper Functions
+//
+    func didSelectRowHandler(row: Int) {
+        // Next Choice Function
+        if choiceProgress[0] == -1 && row != daySessionsArray[selectedDay].count {
+            choiceProgress[0] = daySessionsArray[selectedDay][row]
+            choiceProgress[1] += 1
+            maskView()
+            // Next Table info
+            slideLeft()
+            
+            //
+        } else {
+            
+            // Present next choice or present session
+            switch choiceProgress[0] {
+            // Mind
+            case 0:
+                // Session Choice
+                switch choiceProgress[1] {
+                // First choice - yoga, meditation, walk
+                case 1:
+                    // Yoga, more choices
+                    if row == 1 {
+                        choiceProgress[1] += 1
+                        nextChoice()
+                    // Go to Meditation screen
+                    } else if row == 2 {
+                        // Meditation
+                        selectedSession = [5,0,0]
+                        performSegue(withIdentifier: "scheduleMeditationSegue", sender: self)
+                    // Walk, popup
+                    } else if row == 3 {
+                        // popup for walk
+                    }
+                case 4:
+                    // Test - Yoga
+                    selectedSession = [4,0,0]
+                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                default:
+                    choiceProgress[1] += 1
+                    nextChoice()
+                }
+                
+                
+                if choiceProgress[1] == 1 && row == 2 || row == 3 {
+                    if row == 2 {
+                        
+                    } else if row == 3 {
+                        // Popup for walk
+                    }
+                } else if choiceProgress[1] == 4 {
+                    
+                    
+                    // Go to next choice
+                } else {
+                   
+                }
+                
+            // Flexibility
+            case 1:
+                // Session Choice
+                if choiceProgress[1] == 4 {
+                    // Test
+                    selectedSession = [1,0,0]
+                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                } else {
+                    choiceProgress[1] += 1
+                    nextChoice()
+                }
+                
+            // Endurance
+            case 2:
+                switch choiceProgress[1] {
+                // Session Choice
+                case 4:
+                    // Test
+                    selectedSession = [1,0,0]
+                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                case 5:
+                    if row == 2 {
+                        
+                    } else {
+                        choiceProgress[1] += 1
+                        nextChoice()
+                    }
+                // Session Choice
+                case 6:
+                    // Test
+                    selectedSession = [1,0,0]
+                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                default:
+                    choiceProgress[1] += 1
+                    nextChoice()
+                }
+                
+            // Toning
+            case 3:
+                if choiceProgress[1] == 4 {
+                    // Test
+                    selectedSession = [1,0,0]
+                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                } else {
+                    choiceProgress[1] += 1
+                    nextChoice()
+                }
+                
+            // Muscle Gain
+            case 4:
+                // Session Choice
+                if choiceProgress[1] == 4 {
+                    // Test
+                    selectedSession = [1,0,0]
+                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                } else {
+                    choiceProgress[1] += 1
+                    nextChoice()
+                }
+                
+            // Strength
+            case 5:
+                // Session Choice
+                if choiceProgress[1] == 4 {
+                    // Test
+                    selectedSession = [1,0,0]
+                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                } else {
+                    choiceProgress[1] += 1
+                    nextChoice()
+                }
+            default:
+                break
+            }
+        }
+    }
+    
+    //
+    // Last choice, i.e session choice
+    func isLastChoice() -> Bool {
+        // Present next choice or present session
+        switch choiceProgress[0] {
+        // Mind
+        case 0:
+            if choiceProgress[1] == 4 {
+                return true
+            } else {
+                return false
+            }
+        // Flexibility
+        case 1:
+            if choiceProgress[1] == 4 {
+                return true
+            } else {
+                return false
+            }
+            
+        // Endurance
+        case 2:
+            if choiceProgress[1] == 4 || choiceProgress[1] == 6 {
+                return true
+            } else {
+                return false
+            }
+            
+        // Toning
+        case 3:
+            if choiceProgress[1] == 4 {
+                return true
+            } else {
+                return false
+            }
+            
+        // Muscle Gain
+        case 4:
+            if choiceProgress[1] == 4 {
+                return true
+            } else {
+                return false
+            }
+            
+        // Strength
+        case 5:
+            if choiceProgress[1] == 4 {
+                return true
+            } else {
+                return false
+            }
+        default:
+            return false
+        }
+    }
+
+//
+// MARK: Helper Functions View layout/slides etc.
 //
     //
     // MARK: Mask Views
@@ -1088,6 +1194,12 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             if let destinationViewController = segue.destination as? SlideMenuView {
                 destinationViewController.transitioningDelegate = self
             }
+        } else {
+            //
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
         }
     }
     

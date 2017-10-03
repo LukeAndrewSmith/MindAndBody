@@ -492,6 +492,7 @@
 		07A42E481EDDFD3C0047E8F1 /* CardioChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E471EDDFD3C0047E8F1 /* CardioChoiceCustom.swift */; };
 		07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */; };
 		07B4E00F1F377E1E00C77807 /* TestBackground.caf in Resources */ = {isa = PBXBuildFile; fileRef = 07B4E00E1F377E1E00C77807 /* TestBackground.caf */; };
+		07B852621F83756C005F3781 /* ScheduleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B852611F83756C005F3781 /* ScheduleData.swift */; };
 		07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C081E8BDF9500A851EF /* YogaScreen.swift */; };
 		07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */; };
 		07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2D3BB1EBA88CF000770DE /* MindBody.swift */; };
@@ -1869,6 +1870,7 @@
 		07A42E471EDDFD3C0047E8F1 /* CardioChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioChoiceCustom.swift; sourceTree = "<group>"; };
 		07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioScreen.swift; sourceTree = "<group>"; };
 		07B4E00E1F377E1E00C77807 /* TestBackground.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestBackground.caf; sourceTree = "<group>"; };
+		07B852611F83756C005F3781 /* ScheduleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleData.swift; sourceTree = "<group>"; };
 		07BE8C081E8BDF9500A851EF /* YogaScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreen.swift; sourceTree = "<group>"; };
 		07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		07C2D3BB1EBA88CF000770DE /* MindBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindBody.swift; sourceTree = "<group>"; };
@@ -3758,6 +3760,7 @@
 			children = (
 				073BA9CA1F6E81B8005DB480 /* DataStructures.swift */,
 				0789ED051F79A6EA000EB739 /* UserData.swift */,
+				07B852611F83756C005F3781 /* ScheduleData.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -8251,6 +8254,7 @@
 				075A0DB81E8C55680008E014 /* WarmupChoiceCustom.swift in Sources */,
 				072829E51EA7D40C0090164A /* WorkoutChoiceCustom.swift in Sources */,
 				076C68461ED58D65009160C2 /* StretchingScreen.swift in Sources */,
+				07B852621F83756C005F3781 /* ScheduleData.swift in Sources */,
 				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,
 				07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */,
