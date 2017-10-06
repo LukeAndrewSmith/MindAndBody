@@ -69,6 +69,10 @@ var customSessionsRegister: [[[[Any]]]] =
     // Warmup, Workout, Workout(Circuit), Cardio, Stretching, Yoga
     var selectedType = Int()
     
+    // Presets button titles
+    let presetsButtonTitles = ["customWarmup", "customWorkout", "customCircuitWorkout", "customHIITCardioSession", "customStretchingSession", "customYogaPractice"]
+    
+    
     
     //
     // Selected row
@@ -102,8 +106,7 @@ var customSessionsRegister: [[[[Any]]]] =
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     // Presets
-    @IBOutlet weak var presetsButtonClassic: UIButton!
-    @IBOutlet weak var presetsButtonCircuit: UIButton!
+    @IBOutlet weak var presetsButton: UIButton!
     
     // Begin Button
     @IBOutlet weak var beginButton: UIButton!
@@ -122,10 +125,8 @@ var customSessionsRegister: [[[[Any]]]] =
     
     //
     // Constraints
-    @IBOutlet weak var presetsClassicTop: NSLayoutConstraint!
-    @IBOutlet weak var presetsClassicBottom: NSLayoutConstraint!
-    @IBOutlet weak var presetsCircuitTop: NSLayoutConstraint!
-    @IBOutlet weak var presetsCircuitBottom: NSLayoutConstraint!
+    @IBOutlet weak var presetsTop: NSLayoutConstraint!
+    @IBOutlet weak var presetsBottom: NSLayoutConstraint!
     //
     @IBOutlet weak var editConstraint: NSLayoutConstraint!
     @IBOutlet weak var numberOfRoundsConstraint: NSLayoutConstraint!
@@ -159,8 +160,8 @@ var customSessionsRegister: [[[[Any]]]] =
     //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presetsButtonClassic.setTitle(NSLocalizedString("customWorkoutClassic", comment: ""), for: .normal)
-        presetsButtonCircuit.setTitle(NSLocalizedString("customWorkoutCircuit", comment: ""), for: .normal)
+        // Set Title of presets button
+        presetsButton.setTitle(NSLocalizedString(presetsButtonTitles[selectedType], comment: ""), for: .normal)
     }
     
     //
@@ -175,10 +176,8 @@ var customSessionsRegister: [[[[Any]]]] =
         
         //
         // Initial Element Positions
-        presetsClassicTop.constant = 0
-        presetsClassicBottom.constant = view.frame.size.height/2
-        presetsCircuitTop.constant = view.frame.size.height/2
-        presetsCircuitBottom.constant = 0
+        presetsTop.constant = 0
+        presetsBottom.constant = 0
         editConstraint.constant = view.frame.size.height
         numberOfRoundsConstraint.constant = view.frame.size.height
         //
@@ -191,8 +190,7 @@ var customSessionsRegister: [[[[Any]]]] =
         self.view.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
         //
-        presetsButtonClassic.backgroundColor = colour2
-        presetsButtonCircuit.backgroundColor = colour2
+        presetsButton.backgroundColor = colour2
         
         // Navigation Bar Title
         navigationBar.title = NSLocalizedString("custom", comment: "")
@@ -222,22 +220,26 @@ var customSessionsRegister: [[[[Any]]]] =
         
         // Presets TableView
         //
-        let tableViewBackground2 = UIView()
-        //
-        tableViewBackground2.backgroundColor = colour2
-        tableViewBackground2.frame = CGRect(x: 0, y: 0, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
-        //
-        presetsTableView.backgroundView = tableViewBackground2
-        presetsTableView.tableFooterView = UIView()
-        // TableView Cell action items
-        //
+        // Movement tabl
         presetsTableView.backgroundColor = colour2
         presetsTableView.delegate = self
         presetsTableView.dataSource = self
         presetsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        presetsTableView.layer.cornerRadius = 5
+        presetsTableView.layer.cornerRadius = 15
         presetsTableView.layer.masksToBounds = true
         presetsTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        //
+        presetsTableView.layer.borderColor = colour1.cgColor
+        presetsTableView.layer.borderWidth = 1
+        //
+        //
+        let tableViewBackground2 = UIView()
+        //
+        tableViewBackground2.backgroundColor = colour1
+        tableViewBackground2.frame = CGRect(x: 0, y: 0, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
+        //
+        presetsTableView.backgroundView = tableViewBackground2
+        presetsTableView.tableFooterView = UIView()
         
         
         
@@ -257,13 +259,13 @@ var customSessionsRegister: [[[[Any]]]] =
         movementsTableView.delegate = self
         movementsTableView.dataSource = self
         movementsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        movementsTableView.layer.cornerRadius = 5
+        movementsTableView.layer.cornerRadius = 15
         movementsTableView.layer.masksToBounds = true
         //
         // Sets Reps Selection
         // view
         setsRepsView.backgroundColor = colour2
-        setsRepsView.layer.cornerRadius = 5
+        setsRepsView.layer.cornerRadius = 15
         setsRepsView.layer.masksToBounds = true
         // picker
         setsRepsPicker.backgroundColor = colour2
@@ -303,10 +305,8 @@ var customSessionsRegister: [[[[Any]]]] =
         // Initial Element Positions
         //
         if didLayout == false {
-            presetsClassicTop.constant = 0
-            presetsClassicBottom.constant = view.frame.size.height/2
-            presetsCircuitTop.constant = view.frame.size.height/2
-            presetsCircuitBottom.constant = 0
+            presetsTop.constant = 0
+            presetsBottom.constant = 0
             editConstraint.constant = view.frame.size.height
             numberOfRoundsConstraint.constant = view.frame.size.height
             //
@@ -547,7 +547,8 @@ var customSessionsRegister: [[[[Any]]]] =
         var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
         //
         switch tableView {
-        case presetsTableView: return 1
+        case presetsTableView:
+            return 1
         case customTableView:
             switch selectedType {
             case 0:
@@ -570,13 +571,8 @@ var customSessionsRegister: [[[[Any]]]] =
         //
         switch tableView {
         case presetsTableView:
-            switch selectedType {
-            case 0:
-                return " " + NSLocalizedString("customWorkoutClassic", comment: "")
-            case 1:
-                return " " + NSLocalizedString("customWorkoutCircuit", comment: "")
-            default: break
-            }
+//            return " " + NSLocalizedString("customSession", comment: "")
+            return " "
         //
         case customTableView:
             //
@@ -638,13 +634,13 @@ var customSessionsRegister: [[[[Any]]]] =
         //
         switch tableView {
         case presetsTableView:
-            return customSessionsArray[selectedType].count
+            return customSessionsArray[selectedType].count + 1
         //
         case customTableView:
             //
             switch selectedType {
             case 0:
-                if (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 {
+                if customSessionsArray[selectedType].count == 0 || (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 {
                     return 1
                 } else {
                     return (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count + 1
@@ -712,7 +708,7 @@ var customSessionsRegister: [[[[Any]]]] =
             //
             switch indexPath.section {
             case 0:
-                if (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 {
+                if customSessionsArray[selectedType].count != 0 && (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 {
                     //
                     let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                     //
@@ -728,7 +724,7 @@ var customSessionsRegister: [[[[Any]]]] =
                     //
                 } else {
                     //
-                    if indexPath.row == (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count  {
+                    if customSessionsArray[selectedType].count == 0 || indexPath.row == (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count  {
                         //
                         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                         //
@@ -882,7 +878,7 @@ var customSessionsRegister: [[[[Any]]]] =
             return 44
         case customTableView:
             //
-            if (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 {
+            if customSessionsArray[selectedType].count == 0 || (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 {
                 return 49
                 //
             } else {
@@ -926,7 +922,7 @@ var customSessionsRegister: [[[[Any]]]] =
                 
                 // Alert and Functions
                 //
-                let inputTitle = NSLocalizedString("workoutInputTitle", comment: "")
+                let inputTitle = NSLocalizedString("sessionInputTitle", comment: "")
                 //
                 let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
                 alert.view.tintColor = colour2
@@ -939,6 +935,25 @@ var customSessionsRegister: [[[[Any]]]] =
                 }
                 // 3. Get the value from the text field, and perform actions upon OK press
                 okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                    
+                    //
+                    // Append relevant (to selectedType) new array to customSessionsArray
+                    switch self.selectedType {
+                    // Warmup, Workout,
+                    case 0,1,2,3:
+                        customSessionsArray[self.selectedType].append(customSectionEmtpySessions.emptySessionFour)
+                    case 4,5:
+                        customSessionsArray[self.selectedType].append(customSectionEmtpySessions.emptySessionThree)
+
+                    //
+                    default:
+                        break
+                    }
+                    
+                    
+                    
+                    
+                    
                     //
                     let textField = alert?.textFields![0]
                     // Update Preset Text Arrays
@@ -974,10 +989,9 @@ var customSessionsRegister: [[[[Any]]]] =
                         switch self.selectedType {
                         case 0:
                             let string = customSessionsArray[self.selectedType][self.selectedPreset][0] as! String
-                            self.presetsButtonClassic.setTitle("- " + string + " -", for: .normal)
+                            self.presetsButton.setTitle("- " + string + " -", for: .normal)
                         case 1:
-                            let string = customSessionsArray[self.selectedType][self.selectedPreset][0] as! String
-                            self.presetsButtonCircuit.setTitle("- " + string + " -", for: .normal)
+                            break
                         default: break
                         }
                         
@@ -995,26 +1009,18 @@ var customSessionsRegister: [[[[Any]]]] =
                         switch self.selectedType {
                         case 0:
                             //
-                            self.presetsButtonCircuit.alpha = 0
-                            self.presetsButtonCircuit.isEnabled = false
-                            self.presetsCircuitTop.constant = self.view.frame.size.height
-                            self.presetsCircuitBottom.constant = self.view.frame.size.height
-                            //
                             self.numberOfRoundsConstraint.constant = self.view.frame.size.height
                             //
-                            self.presetsClassicBottom.constant = self.view.frame.size.height - 73.5
+                            self.presetsBottom.constant = self.view.frame.size.height - 73.5
                         case 1:
                             //
-                            self.presetsButtonClassic.alpha = 0
-                            self.presetsButtonClassic.isEnabled = false
-                            self.presetsClassicTop.constant = self.view.frame.size.height
-                            self.presetsClassicBottom.constant = self.view.frame.size.height
+                            self.presetsButton.alpha = 0
+                            self.presetsButton.isEnabled = false
+                            self.presetsTop.constant = self.view.frame.size.height
+                            self.presetsBottom.constant = self.view.frame.size.height
                             //
                             self.numberOfRoundsConstraint.constant = 73.5
-                            
                             //
-                            self.presetsCircuitBottom.constant = self.view.frame.size.height - 73.5
-                            self.presetsCircuitTop.constant = 0
                         default: break
                         }
                         //
@@ -1031,7 +1037,7 @@ var customSessionsRegister: [[[[Any]]]] =
                             self.view.layoutIfNeeded()
                             self.editingButton.alpha = 1
                             //
-                            self.presetsTableView.frame = CGRect(x: 30, y: self.presetsButtonClassic.frame.minY + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
+                            self.presetsTableView.frame = CGRect(x: 30, y: self.presetsButton.frame.minY + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
                             self.presetsTableView.alpha = 0
                             self.backgroundViewExpanded.alpha = 0
                         }, completion: { finished in
@@ -1073,10 +1079,9 @@ var customSessionsRegister: [[[[Any]]]] =
                 switch self.selectedType {
                 case 0:
                     let string = customSessionsArray[selectedType][selectedPreset][0] as! String
-                    self.presetsButtonClassic.setTitle("- " + string + " -", for: .normal)
+                    self.presetsButton.setTitle("- " + string + " -", for: .normal)
                 case 1:
-                    let string = customSessionsArray[selectedType][selectedPreset][0] as! String
-                    self.presetsButtonCircuit.setTitle("- " + string + " -", for: .normal)
+                    break
                 default: break
                 }
                 //
@@ -1089,26 +1094,20 @@ var customSessionsRegister: [[[[Any]]]] =
                     switch selectedType {
                     case 0:
                         //
-                        presetsButtonCircuit.alpha = 0
-                        presetsButtonCircuit.isEnabled = false
-                        presetsCircuitTop.constant = view.frame.size.height
-                        presetsCircuitBottom.constant = view.frame.size.height
                         //
                         self.numberOfRoundsConstraint.constant = self.view.frame.size.height
                         //
-                        presetsClassicBottom.constant = self.view.frame.size.height - 73.5
+                        presetsBottom.constant = self.view.frame.size.height - 73.5
                     case 1:
                         //
                         //
-                        presetsButtonClassic.alpha = 0
-                        presetsButtonClassic.isEnabled = false
-                        presetsClassicTop.constant = view.frame.size.height
-                        presetsClassicBottom.constant = view.frame.size.height
+                        presetsButton.alpha = 0
+                        presetsButton.isEnabled = false
+                        presetsTop.constant = view.frame.size.height
+                        presetsBottom.constant = view.frame.size.height
                         //
                         self.numberOfRoundsConstraint.constant = 73.5
                         //
-                        presetsCircuitBottom.constant = self.view.frame.size.height - 73.5
-                        presetsCircuitTop.constant = 0
                     default: break
                     }
                     //
@@ -1308,7 +1307,7 @@ var customSessionsRegister: [[[[Any]]]] =
         case customTableView:
             //
             if indexPath.section == 0 {
-                if (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 {
+                if customSessionsArray[selectedType].count == 0 || (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 {
                     return false
                 } else {
                     if indexPath.row == (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count {
@@ -1434,21 +1433,21 @@ var customSessionsRegister: [[[[Any]]]] =
                     if (customSessionsArray[self.selectedType][self.selectedPreset][1] as! [Int]).count == 0 {
                         switch self.selectedType {
                         case 0:
-                            self.presetsButtonClassic.setTitle(NSLocalizedString("customWorkoutClassic", comment: ""), for: .normal)
+                            self.presetsButton.setTitle(NSLocalizedString("customWorkoutClassic", comment: ""), for: .normal)
                         case 1:
-                            self.presetsButtonCircuit.setTitle(NSLocalizedString("customWorkoutClassic", comment: ""), for: .normal)
+                            break
                         default: break
                         }
                     } else {
                         let string = customSessionsArray[self.selectedType][self.selectedPreset][0][0] as! String
-                        self.presetsButtonClassic.setTitle("- " + string + " -", for: .normal)
+                        self.presetsButton.setTitle("- " + string + " -", for: .normal)
                         
                     }
                 })
                 
                 
                 // Initial Element Positions
-                if (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 && self.presetsButtonClassic.alpha == 1 && self.presetsButtonCircuit.alpha == 0 || (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 && self.presetsButtonClassic.alpha == 0 && self.presetsButtonCircuit.alpha == 1 {
+                if (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 && self.presetsButton.alpha == 1 || (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 && self.presetsButton.alpha == 0 {
                     
                     self.presetsTableView.isHidden = false
                     //
@@ -1474,13 +1473,7 @@ var customSessionsRegister: [[[[Any]]]] =
                         
                         // Initial Element Positions
                         //
-                        switch self.selectedType {
-                        case 0:
-                            self.presetsClassicBottom.constant = 0
-                        case 1:
-                            self.presetsCircuitBottom.constant = 0
-                        default: break
-                        }
+                        self.presetsBottom.constant = 0
                         self.editConstraint.constant = self.view.frame.size.height
                         self.numberOfRoundsConstraint.constant = self.view.frame.size.height
                         //
@@ -1494,7 +1487,7 @@ var customSessionsRegister: [[[[Any]]]] =
                             self.view.layoutIfNeeded()
                             self.editingButton.alpha = 1
                             //
-                            self.presetsTableView.frame = CGRect(x: 30, y: self.presetsButtonClassic.frame.minY + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
+                            self.presetsTableView.frame = CGRect(x: 30, y: self.presetsButton.frame.minY + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
                             self.presetsTableView.alpha = 0
                             self.backgroundViewExpanded.alpha = 0
                         }, completion: { finished in
@@ -1547,61 +1540,26 @@ var customSessionsRegister: [[[[Any]]]] =
     // Table view related button actions ------------------------------------------------------------------------------------------------
     //
     // Prests
-    @IBAction func presetsClassicAction(_ sender: Any) {
+    @IBAction func presetsAction(_ sender: Any) {
         //
-        selectedType = 0
+        UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
+        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+        let tableWidth = UIScreen.main.bounds.width - 20
+        self.presetsTableView.frame = CGRect(x: 10, y: view.frame.maxY, width: tableWidth, height: tableHeight)
         //
-        presetsTableView.reloadData()
-        //
-        presetsTableView.alpha = 0
-        presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + (presetsButtonClassic.frame.size.height / 2), width: presetsButtonClassic.frame.size.width - 60, height: 0)
-        presetsTableView.center.x = presetsButtonClassic.center.x
-        presetsTableView.center.y = presetsButtonClassic.center.y + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height)!
         //
         backgroundViewExpanded.alpha = 0
-        backgroundViewExpanded.frame = UIScreen.main.bounds
-        // Present
-        UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
         UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: presetsTableView)
+        backgroundViewExpanded.frame = UIScreen.main.bounds
         // Animate table fade and size
-        // Positiona
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.presetsTableView.alpha = 1
-            self.presetsTableView.frame = CGRect(x: 30, y: TopBarHeights.combinedHeight + 44, width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88)
-            
+        // Position
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.5, options: .curveEaseOut, animations: {
+            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY - tableHeight - 10, width: tableWidth, height: tableHeight)
+            self.presetsTableView.reloadData()
             //
             self.backgroundViewExpanded.alpha = 0.5
         }, completion: nil)
         //
-    }
-    
-    @IBAction func presetsCircuitAction(_ sender: Any) {
-        //
-        selectedType = 1
-        //
-        presetsTableView.reloadData()
-        //
-        presetsTableView.alpha = 0
-        presetsTableView.frame = CGRect(x: 30, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + (presetsButtonClassic.frame.size.height / 2), width: presetsButtonClassic.frame.size.width - 60, height: 0)
-        presetsTableView.center.x = presetsButtonClassic.center.x
-        presetsTableView.center.y = presetsButtonClassic.center.y + UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.size.height)!
-        //
-        backgroundViewExpanded.alpha = 0
-        backgroundViewExpanded.frame = UIScreen.main.bounds
-        // Present
-        UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
-        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: presetsTableView)
-        // Animate table fade and size
-        // Positiona
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.presetsTableView.alpha = 1
-            self.presetsTableView.frame = CGRect(x: 30, y: TopBarHeights.combinedHeight + 44, width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88)
-            
-            //
-            self.backgroundViewExpanded.alpha = 0.5
-        }, completion: nil)
-        //
-        
     }
     
     // Number Of Rounds Action
@@ -1660,15 +1618,10 @@ var customSessionsRegister: [[[[Any]]]] =
     // Add movement table background (dismiss table)
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-        if selectingNumberOfRounds == true {
-            selectingNumberOfRounds = false
-        }
-        //
         if (UIApplication.shared.keyWindow?.subviews.contains(self.presetsTableView))! {
             //
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.presetsTableView.frame = CGRect(x: 30, y: self.presetsButtonClassic.frame.minY + UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!, width: self.presetsTableView.frame.size.width, height: 1)
-                self.presetsTableView.alpha = 0
+            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
+                self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
                 self.backgroundViewExpanded.alpha = 0
             }, completion: { finished in
                 //
@@ -1677,9 +1630,9 @@ var customSessionsRegister: [[[[Any]]]] =
             })
             //
         } else {
-            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.movementsTableView.alpha = 0
-                self.setsRepsView.alpha = 0
+            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
+                self.movementsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.movementsTableView.frame.size.width, height: self.movementsTableView.frame.size.height)
+                self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.setsRepsView.frame.size.width, height: self.setsRepsView.frame.size.height)
                 //
                 self.backgroundViewExpanded.alpha = 0
             }, completion: { finished in
@@ -1688,25 +1641,6 @@ var customSessionsRegister: [[[[Any]]]] =
                 //
                 self.backgroundViewExpanded.removeFromSuperview()
             })
-        }
-    }
-    
-    
-    // Edit Tableview
-    //
-    @IBAction func editingAction(_ sender: Any) {
-        //
-        if customTableView.isEditing {
-            self.customTableView.setEditing(false, animated: true)
-            self.editingButton.setTitle(NSLocalizedString("edit", comment: ""), for: .normal)
-            //
-            self.beginButtonEnabled()
-            //
-        } else {
-            self.customTableView.setEditing(true, animated: true)
-            self.editingButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-            //
-            self.beginButtonEnabled()
         }
     }
     

@@ -76,6 +76,10 @@ var new = Bool()
 var isInitialAppOpen = true
 
 //
+// Schedule Variabls ---------------------------------------------------------------------------------------------------------------
+//
+var updatedSessionsArray = [0,0,0,0,0,0,0]
+//
 // Automatic choice from schedule variables ---------------------------------------------------------------------------------------------------------------
 //
 // View to disable interaction

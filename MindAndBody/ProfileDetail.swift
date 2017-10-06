@@ -33,45 +33,10 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Arrays
     var titleArray: [String] = ["me", "goals", "numberSessions"]
     //
-    var questionArray: [[String]] =
-        [
-            // Me
-            ["age", "gender", "posture", "Obvious question"],
-            // Goals
-            ["calm", "acceptance", "bodyShaping", "endurance", "strength", "flexibility", "postureJoints"],
-            // Groups
-            ["Mind - Calm", "Mind - Reduced Stress", "Body - Strength", "Body - Body Shaping"]
-        ]
-    // 
-    var answerArray: [[String]] =
-        [
-            // Me
-                // Q1
-                ["16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "70+"],
-                // Q2
-                ["male", "female", "other"],
-                // Q3
-                ["Possible Answer3", "Also a possible answer", "Could be", "Definitely not"],
-                // Q4
-                ["Possible Answer4", "Also a possible answer", "Could be", "Definitely not"]
-    ]
+    // Age
+    var ageAnswer = ["16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "70+"]
     //
-    var sliderArray: [[Int]] =
-    [
-        [0,0,0,0,0,0,0],
-        [0,0,0,0]
-    ]
-    //
-    var selectedAnswerArray: [[Int]] =
-        [
-            // Me
-            [-1, -1, -1, -1],
-            // Goals
-            [-1, -1, -1, -1],
-            // Groups
-            [-1, -1, -1, -1],
-    ]
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //
@@ -99,7 +64,6 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString(titleArray[selectedSection], comment: ""))
@@ -145,13 +109,13 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        return questionArray[selectedSection].count
+        return scheduleDataStructures.profileQA[selectedSection].count
     }
     
     // Header
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         //
-        return NSLocalizedString(questionArray[selectedSection][section], comment: "")
+        return NSLocalizedString(scheduleDataStructures.profileQA[selectedSection][section][0], comment: "")
     }
     
     // Header Customization
@@ -163,38 +127,7 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
         header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)!
         header.textLabel?.textColor = colour2
         header.textLabel?.text = header.textLabel?.text?.capitalized
-        
-        // Detail
-        func createDetailLabel(section: Int) {
-            let detailLabel = UILabel()
-            detailLabel.font = UIFont(name: "SFUIDisplay-thin", size: 22)!
-            detailLabel.textColor = colour2.withAlphaComponent(0.5)
-            detailLabel.textAlignment = .right
-            //
-            if section == 0 {
-                detailLabel.text = NSLocalizedString("mind", comment: "")
-            } else if section == 2 {
-                detailLabel.text = NSLocalizedString("body", comment: "")
-            }
-            //
-            //
-            detailLabel.sizeToFit()
-            detailLabel.frame = CGRect(x: view.bounds.width - detailLabel.bounds.width - 15, y: (header.bounds.height - detailLabel.bounds.height) / 2, width: detailLabel.bounds.width, height: detailLabel.bounds.height)
-            header.addSubview(detailLabel)
-        }
-        //
-        if section == 0 {
-            if didAdd1 == false {
-                createDetailLabel(section: 0)
-                didAdd1 = true
-            }
-        } else if section == 2 {
-            if didAdd2 == false {
-                createDetailLabel(section: 2)
-                didAdd2 = true
-            }
-        }
-        
+        header.textLabel?.adjustsFontSizeToFitWidth = true
         //
         header.contentView.backgroundColor = colour1
         
@@ -226,6 +159,8 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
+        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+        //
         switch selectedSection {
         case 0:
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
@@ -233,12 +168,18 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             cell.backgroundColor = colour1
             //
-            if selectedAnswerArray[selectedSection][indexPath.section] == -1 {
-                cell.textLabel?.text = "Answer"
+            if profileAnswers[selectedSection][indexPath.section] == -1 {
+                cell.textLabel?.text = NSLocalizedString("answer", comment: "")
                 cell.textLabel?.textColor = colour4
             } else {
-                cell.textLabel?.text = answerArray[indexPath.section][selectedAnswerArray[selectedSection][indexPath.section]]
-                cell.textLabel?.textColor = colour2
+                if indexPath.section != 0 {
+                    // + 1 due as question in same array at 0
+                    cell.textLabel?.text = NSLocalizedString(scheduleDataStructures.profileQA[selectedSection][indexPath.section][profileAnswers[selectedSection][indexPath.section] + 1], comment: "")
+                } else {
+                    cell.textLabel?.text = ageAnswer[profileAnswers[selectedSection][indexPath.section]]
+                }
+                
+                cell.textLabel?.textColor = colour3
             }
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.textLabel?.textAlignment = .left
@@ -269,7 +210,8 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // Section tag
             slider.tag = indexPath.section
             //
-            let value = sliderArray[selectedSection - 1][indexPath.section]
+            let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+            let value = profileAnswers[selectedSection][indexPath.section]
             slider.value = Float(value)
             //
             // Indicator Label
@@ -301,7 +243,8 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // Section tag
             slider.tag = indexPath.section
             //
-            let value = sliderArray[selectedSection - 1][indexPath.section]
+            let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+            let value = profileAnswers[selectedSection - 1][indexPath.section]
             slider.value = Float(value)
             //
             // Indicator Label
@@ -319,13 +262,15 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // didSelectRow
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
+        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+        //
         selectedQuestion = indexPath.section
         answerPicker.reloadAllComponents()
-        switch selectedAnswerArray[selectedSection][selectedQuestion] {
+        switch profileAnswers[selectedSection][selectedQuestion] {
         case -1:
             answerPicker.selectRow(0, inComponent: 0, animated: true)
         default:
-            answerPicker.selectRow(selectedAnswerArray[selectedSection][selectedQuestion], inComponent: 0, animated: true)
+            answerPicker.selectRow(profileAnswers[selectedSection][selectedQuestion], inComponent: 0, animated: true)
         }
         //
         UIApplication.shared.keyWindow?.insertSubview(answerView, aboveSubview: view)
@@ -346,14 +291,24 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return answerArray[selectedQuestion].count
+        if selectedQuestion != 0 {
+            // -1 as question included with answers
+            return scheduleDataStructures.profileQA[selectedSection][selectedQuestion].count - 1
+        } else {
+            return ageAnswer.count
+        }
     }
     
     // View for row
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         //
         let answerLabel = UILabel()
-        answerLabel.text = NSLocalizedString(answerArray[selectedQuestion][row], comment: "")
+        if selectedQuestion != 0 {
+            // row + 1 as question included with answers
+            answerLabel.text = NSLocalizedString(scheduleDataStructures.profileQA[selectedSection][selectedQuestion][row + 1], comment: "")
+        } else {
+            answerLabel.text = ageAnswer[row]
+        }
         answerLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
         answerLabel.textColor = colour1
         //
@@ -384,9 +339,9 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     // Ok button action
     func okButtonAction(_ sender: Any) {
-        let defaults = UserDefaults.standard
-        //
-        selectedAnswerArray[selectedSection][selectedQuestion] = answerPicker.selectedRow(inComponent: 0)
+        var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+        profileAnswers[selectedSection][selectedQuestion] = answerPicker.selectedRow(inComponent: 0)
+        UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
         //
         animateActionSheetDown(actionSheet: answerView, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
         //
@@ -405,8 +360,6 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let roundedValue = round(sender.value / step) * step
         sender.value = roundedValue
         //
-        sliderArray[selectedSection - 1][sender.tag] = Int(roundedValue)
-        //
         // Indicator
         let indexPath = NSIndexPath(row: 0, section: sender.tag)
         let cell = questionsTable.cellForRow(at: indexPath as IndexPath)
@@ -422,6 +375,12 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 sender.thumbTintColor = colour3
             }
         }
+        //
+        // Update Selected Value
+        var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+        profileAnswers[selectedSection][sender.tag] = Int(roundedValue)
+        UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
+
     }
     
     //

@@ -54,11 +54,12 @@ extension ScheduleScreen {
                     // TODO: Selected choice as index to sortedGroups (in data structures)
                     // Warmup
                     if row == 1 {
-                        selectedSession = sessionData.sortedSessions[selectedChoiceWarmup[0]]![selectedChoiceWarmup[1]][selectedChoiceWarmup[2]][selectedChoiceWarmup[3]][selectedChoiceWarmup[4]][selectedChoiceWarmup[5]]
+                        selectWarmup()
+                    // Session
                     } else if row == 2 {
-                        selectedSession = sessionData.sortedSessions[selectedChoiceSession[0]]![selectedChoiceSession[1]][selectedChoiceSession[2]][selectedChoiceSession[3]][selectedChoiceSession[4]][selectedChoiceSession[5]]
+                        selectSession()
                     }
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                    performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                 case 5:
                     // Timer
                     if row == 1 {
@@ -75,11 +76,20 @@ extension ScheduleScreen {
                 // ------------------------------------------------------------------------------------------------
             // Flexibility
             case 1:
-                // Session Choice
+                // Final choice -> session
                 if choiceProgress[1] == 4 {
                     // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                    // TODO: Selected choice as index to sortedGroups (in data structures)
+                    // Warmup
+                    if row == 1 {
+                        selectWarmup()
+                    // Session
+                    } else if row == 2 {
+                        selectSession()
+                    }
+                    //
+                    performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                // Choice
                 } else {
                     choiceProgress[1] += 1
                     nextChoice()
@@ -101,8 +111,18 @@ extension ScheduleScreen {
                 // Session Choice
                 case 4:
                     // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                    // TODO: Selected choice as index to sortedGroups (in data structures)
+                    // Warmup
+                    if row == 1 {
+                        selectWarmup()
+                    // Session
+                    } else if row == 2 {
+                        selectSession()
+                    // Stretching
+                    } else if row == 3 {
+                        selectStretching()
+                    }
+                    performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                 case 5:
                     if row == 2 {
                         // TODO: Popup saying go do cardio - run, bike, row, swim
@@ -113,8 +133,15 @@ extension ScheduleScreen {
                 // Session Choice
                 case 6:
                     // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                    // TODO: Selected choice as index to sortedGroups (in data structures)
+                    // Warmup
+                    if row == 1 {
+                        selectWarmup()
+                    // Stretching
+                    } else if row == 3 {
+                        selectStretching()
+                    }
+                    performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                     //
                     choiceProgress[1] -= 1
                     nextChoice()
@@ -126,10 +153,25 @@ extension ScheduleScreen {
                 // ------------------------------------------------------------------------------------------------
             // Toning
             case 3:
-                if choiceProgress[1] == 4 {
+                // Cardio
+                if choiceProgress[1] == 1 && row == 2 {
+                    choiceProgress[1] = 5
+                    nextChoice()
+                // Final choice workout
+                } else if choiceProgress[1] == 4 || choiceProgress[1] == 6 {
                     // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                    // TODO: Selected choice as index to sortedGroups (in data structures)
+                    // Warmup
+                    if row == 1 {
+                        selectWarmup()
+                        // Session
+                    } else if row == 2 {
+                        selectSession()
+                        // Stretching
+                    } else if row == 3 {
+                        selectStretching()
+                    }
+                    performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                 } else {
                     choiceProgress[1] += 1
                     nextChoice()
@@ -141,8 +183,18 @@ extension ScheduleScreen {
                 // Session Choice
                 if choiceProgress[1] == 4 {
                     // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                    // TODO: Selected choice as index to sortedGroups (in data structures)
+                    // Warmup
+                    if row == 1 {
+                        selectWarmup()
+                        // Session
+                    } else if row == 2 {
+                        selectSession()
+                        // Stretching
+                    } else if row == 3 {
+                        selectStretching()
+                    }
+                    performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                 } else {
                     choiceProgress[1] += 1
                     nextChoice()
@@ -154,8 +206,18 @@ extension ScheduleScreen {
                 // Session Choice
                 if choiceProgress[1] == 4 {
                     // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                    // TODO: Selected choice as index to sortedGroups (in data structures)
+                    // Warmup
+                    if row == 1 {
+                        selectWarmup()
+                        // Session
+                    } else if row == 2 {
+                        selectSession()
+                        // Stretching
+                    } else if row == 3 {
+                        selectStretching()
+                    }
+                    performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                 } else {
                     choiceProgress[1] += 1
                     nextChoice()
@@ -164,6 +226,21 @@ extension ScheduleScreen {
                 break
             }
         }
+    }
+    
+    //
+    // Select sessions
+    // Warmup
+    func selectWarmup() {
+        selectedSession = sessionData.sortedSessions[selectedChoiceWarmup[0]]![selectedChoiceWarmup[1]][selectedChoiceWarmup[2]][selectedChoiceWarmup[3]][selectedChoiceWarmup[4]][selectedChoiceWarmup[5]]
+    }
+    // Session
+    func selectSession() {
+        selectedSession = sessionData.sortedSessions[selectedChoiceSession[0]]![selectedChoiceSession[1]][selectedChoiceSession[2]][selectedChoiceSession[3]][selectedChoiceSession[4]][selectedChoiceSession[5]]
+    }
+    // Stretching
+    func selectStretching() {
+        selectedSession = sessionData.sortedSessions[selectedChoiceStretching[0]]![selectedChoiceStretching[1]][selectedChoiceStretching[2]][selectedChoiceStretching[3]][selectedChoiceStretching[4]][selectedChoiceStretching[5]]
     }
     
     //
@@ -189,18 +266,19 @@ extension ScheduleScreen {
                 // Yoga
                 case 1:
                     if row == 1 {
-                        // selectedChoiceWarmup[1-3] 0
+                        // selectedChoiceWarmup[1-3] = 0 (0,0,0,0,..)
                         selectedChoiceWarmup[1] = 0
                         selectedChoiceWarmup[2] = 0
                         selectedChoiceWarmup[3] = 0
-                        // selectedChoiceSession[1] to 1 (session),
+                        // selectedChoiceSession[1] to 1 (1 being session) (0,1...)
                         selectedChoiceSession[1] = 1
                     }
                 // Focus
                 case 2:
-                    // selectedChoiceSession[2] = 0 in this case due to nesting
+                    // selectedChoiceSession[2] = 0 in this case due to nesting (0,1,0,...)
                     selectedChoiceSession[2] = 0
                     // selectedchoiceSession[3] = row - 1 == focus (row - 1 as row is 1 too large due to title row)
+                    // (0,1,0,row-1)
                     selectedChoiceSession[3] = row - 1
                 // Length
                 case 3:
@@ -219,91 +297,224 @@ extension ScheduleScreen {
             // ------------------------------------------------------------------------------------------------
             // Flexibility
             case 1:
-                // Session Choice
-                if choiceProgress[1] == 4 {
-                    // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-                } else {
-                    choiceProgress[1] += 1
-                    nextChoice()
+                switch choiceProgress[1] {
+                // Stretching / Yoga
+                case 1:
+                    // Warmup (1,0,0), extra zeros necessary due to nesting
+                    selectedChoiceWarmup[1] = 0
+                    selectedChoiceWarmup[2] = 0
+                    // Session
+                    selectedChoiceSession[1] = 1
+                    // selectedChoiceSession[2] = row - 1 == stretching/yoga
+                    selectedChoiceSession[2] = row - 1
+                // Focus
+                case 2:
+                    // Focus = row - 1 due to extra title row
+                    selectedChoiceWarmup[3] = row - 1
+                    selectedChoiceSession[3] = row - 1
+                // Length
+                case 3:
+                    // Length = row - 1 due to extra title row
+                    selectedChoiceWarmup[4] = row - 1
+                    selectedChoiceSession[4] = row - 1
+                    
+                    // TODO: Update last index, difficulty, based on profile data
+                    // Testing so just set to 0
+                    selectedChoiceWarmup[5] = 0
+                    selectedChoiceSession[5] = 0
+                    
+                default:
+                    break
                 }
-                
+                //
             // ------------------------------------------------------------------------------------------------
             // Endurance
             case 2:
                 switch choiceProgress[1] {
-                // Type 1, hiit vs steady state
                 case 1:
-                    if row == 2 {
-                        choiceProgress[1] = 5
-                        nextChoice()
-                    } else {
-                        choiceProgress[1] += 1
-                        nextChoice()
-                    }
-                // Session Choice
-                case 4:
-                    // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-                case 5:
-                    if row == 2 {
-                        // TODO: Popup saying go do cardio - run, bike, row, swim
-                    } else {
-                        choiceProgress[1] += 1
-                        nextChoice()
-                    }
-                // Session Choice
-                case 6:
-                    // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
+                    // Warmup (2,0,0...), extra zeros necessary due to nesting
+                    selectedChoiceWarmup[1] = 0 // warmup
+                    selectedChoiceWarmup[2] = 0 // nesting
+                    // Session (2,1,0...)
+                    selectedChoiceSession[1] = 1 // session
+                    selectedChoiceSession[2] = 0 // nesting
+                    // Stretching (2,2,0....)
+                    selectedChoiceStretching[1] = 2 // stretching
+                    selectedChoiceStretching[2] = 0 // nesting
                     //
-                    choiceProgress[1] -= 1
-                    nextChoice()
+                    // Steady State
+                    if row == 2 {
+                        // Cardio so select 0 for warmup/workout
+                        selectedChoiceWarmup[3] = 0 // hiit / workout
+                        selectedChoiceStretching[3] = 0 // hiit / workout
+                    }
+                //
+                // Hiit/Workout
+                // Type: Hiit or workout
+                case 2:
+                    // Warmup (2,0,0...), extra zeros necessary due to nesting
+                    selectedChoiceWarmup[3] = row - 1 // hiit / workout
+                    // Session (2,1,0...)
+                    selectedChoiceSession[3] = row - 1 // hiit / workout
+                    // Stretching (2,2,0....)
+                    selectedChoiceStretching[3] = row - 1 // hiit / workout
+                // Length
+                case 3:
+                    // Length = row - 1 due to title row
+                    selectedChoiceWarmup[4] = row - 1
+                    selectedChoiceSession[4] = row - 1
+                    selectedChoiceStretching[4] = row - 1
+                    //
+                    // TODO: Update last index, difficulty, based on profile data
+                    // Testing so just set to 0
+                    selectedChoiceWarmup[5] = 0
+                    selectedChoiceSession[5] = 0
+                //
+                // Steady State
+                // Length
+                case 6:
+                    // Length = row - 1 due to title row
+                    selectedChoiceWarmup[4] = row - 1
+                    selectedChoiceStretching[4] = row - 1
+                    //
+                    // TODO: Update last index, difficulty, based on profile data
+                    // Testing so just set to 0
+                    selectedChoiceWarmup[5] = 0
+                    selectedChoiceStretching[5] = 0
                 default:
-                    choiceProgress[1] += 1
-                    nextChoice()
+                    break
                 }
-                
                 // ------------------------------------------------------------------------------------------------
             // Toning
             case 3:
-                if choiceProgress[1] == 4 {
-                    // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-                } else {
-                    choiceProgress[1] += 1
-                    nextChoice()
+                switch choiceProgress[1] {
+                case 1:
+                    selectedChoiceWarmup[1] = 0 // warmup
+                    selectedChoiceSession[1] = 1 // session
+                    selectedChoiceStretching[1] = 2 // stretching
+                    
+                    // Workout
+                    if row == 1 {
+                        selectedChoiceWarmup[2] = 1 //
+                        selectedChoiceSession[2] = 1 //
+                        selectedChoiceStretching[2] = 1 //
+                    // Cardio nesting required with 0
+                    } else if row == 2 {
+                        selectedChoiceWarmup[2] = 0 // nesting
+                        selectedChoiceSession[2] = 0 // nesting
+                        selectedChoiceStretching[2] = 0 // nesting
+                    }
+                //
+                // Bodyweight workout
+                // Focus
+                case 2:
+                    selectedChoiceWarmup[3] = row - 1
+                    selectedChoiceSession[3] = row - 1
+                    selectedChoiceStretching[3] = row - 1
+                // Length
+                case 3:
+                    // Length = row - 1 due to title row
+                    selectedChoiceWarmup[4] = row - 1
+                    selectedChoiceSession[4] = row - 1
+                    selectedChoiceStretching[4] = row - 1
+                    //
+                    // TODO: Update last index, difficulty, based on profile data
+                    // Testing so just set to 0
+                    selectedChoiceWarmup[5] = 0
+                    selectedChoiceSession[5] = 0
+                    selectedChoiceSession[5] = 0
+                case 5:
+                    // 0 due to nesting
+                    selectedChoiceWarmup[3] = 0
+                    selectedChoiceSession[3] = 0
+                    selectedChoiceStretching[3] = 0
+                    // Length = row - 1 due to title row
+                    selectedChoiceWarmup[4] = row - 1
+                    selectedChoiceSession[4] = row - 1
+                    selectedChoiceStretching[4] = row - 1
+                    //
+                    // TODO: Update last index, difficulty, based on profile data
+                    // Testing so just set to 0
+                    selectedChoiceWarmup[5] = 0
+                    selectedChoiceSession[5] = 0
+                    selectedChoiceSession[5] = 0
+                default:
+                    break
                 }
-                
                 // ------------------------------------------------------------------------------------------------
             // Muscle Gain
             case 4:
-                // Session Choice
-                if choiceProgress[1] == 4 {
-                    // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-                } else {
-                    choiceProgress[1] += 1
-                    nextChoice()
+                switch choiceProgress[1] {
+                // Gym/Bodyweight
+                case 1:
+                    // Warmup/Session/Stretching
+                    selectedChoiceWarmup[1] = 0 // warmup
+                    selectedChoiceSession[1] = 1 // session
+                    selectedChoiceStretching[1] = 2 // stretching
+                    // Gym/Bodyweight == row - 1 due to title
+                    selectedChoiceWarmup[2] = row - 1
+                    selectedChoiceSession[2] = row - 1
+                    // 0 as nested due to stretching sessions being the same for gym/bodyweight
+                    selectedChoiceStretching[2] = 0
+                // Focus
+                case 2:
+                    // Focus == row - 1 due to title
+                    selectedChoiceWarmup[3] = row - 1
+                    selectedChoiceSession[3] = row - 1
+                    selectedChoiceStretching[3] = row - 1
+                // Length
+                case 3:
+                    // Length = row - 1 due to title row
+                    selectedChoiceWarmup[4] = row - 1
+                    selectedChoiceSession[4] = row - 1
+                    selectedChoiceStretching[4] = row - 1
+                    //
+                    // TODO: Update last index, difficulty, based on profile data
+                    // Testing so just set to 0
+                    selectedChoiceWarmup[5] = 0
+                    selectedChoiceSession[5] = 0
+                    selectedChoiceSession[5] = 0
+                default:
+                     break
                 }
                 
-                // ------------------------------------------------------------------------------------------------
+            // ------------------------------------------------------------------------------------------------
             // Strength
             case 5:
-                // Session Choice
-                if choiceProgress[1] == 4 {
-                    // Test
-                    selectedSession = [1,0,0]
-                    performSegue(withIdentifier: "scheduleSessionSegue", sender: self)
-                } else {
-                    choiceProgress[1] += 1
-                    nextChoice()
+                switch choiceProgress[1] {
+                // Gym/Bodyweight
+                case 1:
+                    // Warmup/Session/Stretching
+                    selectedChoiceWarmup[1] = 0 // warmup
+                    selectedChoiceSession[1] = 1 // session
+                    selectedChoiceStretching[1] = 2 // stretching
+                    // Gym/Bodyweight == row - 1 due to title
+                    selectedChoiceWarmup[2] = row - 1
+                    selectedChoiceSession[2] = row - 1
+                    // 0 as nested due to stretching sessions being the same for gym/bodyweight
+                    selectedChoiceStretching[2] = 0
+                // Focus
+                case 2:
+                    // Focus == row - 1 due to title
+                    selectedChoiceWarmup[3] = row - 1
+                    selectedChoiceSession[3] = row - 1
+                    selectedChoiceStretching[3] = row - 1
+                // Length
+                case 3:
+                    // Length = row - 1 due to title row
+                    selectedChoiceWarmup[4] = row - 1
+                    selectedChoiceSession[4] = row - 1
+                    selectedChoiceStretching[4] = row - 1
+                    //
+                    // TODO: Update last index, difficulty, based on profile data
+                    // Testing so just set to 0
+                    selectedChoiceWarmup[5] = 0
+                    selectedChoiceSession[5] = 0
+                    selectedChoiceSession[5] = 0
+                default:
+                    break
                 }
+            //
             default:
                 break
             }
@@ -313,6 +524,7 @@ extension ScheduleScreen {
     //
     // MARK: isLastChoice()
     // Last choice, i.e session choice
+    // Used so the title can be set to green
     func isLastChoice() -> Bool {
         // Present next choice or present session
         switch choiceProgress[0] {
@@ -341,7 +553,7 @@ extension ScheduleScreen {
             
         // Toning
         case 3:
-            if choiceProgress[1] == 4 {
+            if choiceProgress[1] == 4 || choiceProgress[1] == 6 {
                 return true
             } else {
                 return false
@@ -369,8 +581,17 @@ extension ScheduleScreen {
     
     //
     // MARK: isCompleted()
-    func isCompleted() -> Bool {
-        return false
+    func isCompleted(row: Int) -> Bool {
+        if choiceProgress[0] == -1 {
+            let group = daySessionsArray[selectedDay][row]
+            if scheduleTrackingArray[selectedDay][group]![0][0] == false {
+                return false
+            } else {
+                return true
+            }
+        } else {
+            return false
+        }
     }
     
     //
@@ -561,10 +782,7 @@ extension ScheduleScreen {
             
         }
     }
-    
-    //
-    // MARK:
-    
+
     //
     // MARK: Slide menu swipe
     func swipeGestureRight() {
@@ -584,6 +802,61 @@ extension ScheduleScreen {
         // Reload table
         scheduleTable.reloadData()
     }
+    
+    
+    //
+    // MARK:
+    @IBAction func markAsCompleted(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == UIGestureRecognizerState.began {
+        // Get Cell
+        let cell = sender.view
+        let row = cell?.tag
+        // Day Table,
+        // [0][0] to get bool
+        if choiceProgress[0] == -1 {
+            let group = daySessionsArray[selectedDay][row!]
+            if scheduleTrackingArray[selectedDay][group]![0][0] == false {
+                scheduleTrackingArray[selectedDay][group]![0][0] = true
+            } else {
+                scheduleTrackingArray[selectedDay][group]![0][0] = false
+            }
+            
+        // Furthur down choices, only take action if final choice
+        } else {
+            switch choiceProgress[0] {
+            // Mind
+            case 0:
+                break
+            // Flexibility
+            case 1:
+                break
+            // Endurance
+            case 2:
+                break
+            // Toning
+            case 3:
+                break
+            // Muscle Gain
+            case 4:
+                break
+            // Strength
+            case 5:
+                break
+            //
+            default:
+                break
+            }
+        }
+        //
+        let indexPathToReload = NSIndexPath(row: row!, section: 0)
+        scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+        }
+    }
+    
+    
+    
+    
+    
     
     
     //

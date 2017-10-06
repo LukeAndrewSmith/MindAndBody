@@ -66,9 +66,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Table view
     @IBOutlet weak var tableView: UITableView!
     
-    // Pause/Play
-    var playPause = UIButton()
-    
     //
     var updateTimer = Timer()
     var soundPlayer: AVAudioPlayer!
@@ -91,21 +88,23 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         automaticYogaArray = UserDefaults.standard.object(forKey: "automaticYoga") as! [Int]
         // Progress Bar
         // Thickness
-        switch automaticYogaArray[0] {
-        // Auto off
-        case 0:
+//        switch automaticYogaArray[0] {
+//        // Auto off
+//        case 0:
             progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
             progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
             //
             finishEarly.tintColor = colour4
-        // Auto on
-        case 1:
-            progressBar.frame = CGRect(x: 44, y: 0, width: self.view.frame.size.width - 44, height: 2)
-            progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 43)
-            //
-            finishEarly.removeFromSuperview()
-        default: break
-        }
+//        // Auto on
+//        case 1:
+//            progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
+//            progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
+////            progressBar.frame = CGRect(x: 44, y: 0, width: self.view.frame.size.width - 44, height: 2)
+////            progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 43)
+//            //
+//            finishEarly.removeFromSuperview()
+//        default: break
+//        }
         
         // Rounded Edges
         // Colour
@@ -125,12 +124,11 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.tableFooterView = UIView()
         
         // Play/Pause
-        playPause.backgroundColor = colour2
-        playPause.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        playPause.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
-        playPause.tintColor = colour1
-        playPause.addTarget(self, action: #selector(pauseButtonAction), for: .touchUpInside)
-        
+        if automaticYogaArray[0] == 1 {
+            finishEarly.backgroundColor = colour2
+            finishEarly.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
+            finishEarly.tintColor = colour4
+        }
     }
     
     //
@@ -193,25 +191,16 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         }
         
-        //
-        if automaticYogaArray[0] == 1 {
-            header.addSubview(playPause)
-        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
-            switch automaticYogaArray[0] {
-            case 0:
-                return 2
-            case 1:
-                return 44
-            default: break
-            }
+            return 2
+        case 1:
             return 0
-        case 1: return 0
-        default: break
+        default:
+            break
         }
         return 0
     }
@@ -247,7 +236,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             // Movement
             cell.poseLabel.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: "")
             //
-            cell.poseLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 23)
+            cell.poseLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 33)
             cell.poseLabel?.textAlignment = .center
             cell.poseLabel?.textColor = colour1
             cell.poseLabel?.numberOfLines = 0
@@ -257,7 +246,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             // Set and Reps
             //
             cell.breathsLabel?.text = String(breathsArray[indexPath.row]) + " " + NSLocalizedString("breathsC", comment: "")
-            cell.breathsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            cell.breathsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 30)
             cell.breathsLabel?.textAlignment = .right
             cell.breathsLabel?.textColor = colour1
             cell.breathsLabel.adjustsFontSizeToFitWidth = true
@@ -326,6 +315,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             case selectedRow + 1:
                 //
+                cell.poseLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
                 cell.imageIndicator.alpha = 0
                 cell.breathsLabel.alpha = 0
                 cell.poseLabel.alpha = 1
@@ -369,27 +359,27 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         switch indexPath.section {
         case 0:
-            switch automaticYogaArray[0] {
-            case 0:
+//            switch automaticYogaArray[0] {
+//            case 0:
                 switch indexPath.row {
                 case selectedRow - 1, selectedRow:
-                    return (UIScreen.main.bounds.height - 22) * 3/4
+                    return (UIScreen.main.bounds.height - 22) * 7/8
                 case selectedRow + 1:
-                    return (UIScreen.main.bounds.height - 22) * 1/4
+                    return (UIScreen.main.bounds.height - 22) * 1/8
                 default:
-                    return (UIScreen.main.bounds.height - 22) * 1/4
+                    return (UIScreen.main.bounds.height - 22) * 1/8
                 }
-            case 1:
-                switch indexPath.row {
-                case selectedRow - 1, selectedRow:
-                    return (UIScreen.main.bounds.height - TopBarHeights.combinedHeight) * 3/4
-                case selectedRow + 1:
-                    return (UIScreen.main.bounds.height - TopBarHeights.combinedHeight) * 1/4
-                default:
-                    return (UIScreen.main.bounds.height - TopBarHeights.combinedHeight) * 1/4
-                }
-            default: break
-            }
+//            case 1:
+//                switch indexPath.row {
+//                case selectedRow - 1, selectedRow:
+//                    return (UIScreen.main.bounds.height - TopBarHeights.combinedHeight) * 7/8
+//                case selectedRow + 1:
+//                    return (UIScreen.main.bounds.height - TopBarHeights.combinedHeight) * 1/8
+//                default:
+//                    return (UIScreen.main.bounds.height - TopBarHeights.combinedHeight) * 1/8
+//                }
+//            default: break
+//            }
         //
         case 1: return 49
         default: return 0
@@ -494,6 +484,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
                 // 1
+                cell.poseLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 33)
                 cell.imageIndicator.alpha = 1
                 cell.breathsLabel.alpha = 1
                 cell.poseLabel.alpha = 1
@@ -556,6 +547,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
                 // + 1
                 cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! YogaOverviewTableViewCell
+                cell.poseLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
                 cell.imageIndicator.alpha = 0
                 cell.breathsLabel.alpha = 0
                 cell.poseLabel.alpha = 1
@@ -699,9 +691,10 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Play Pause
     func pauseButtonAction() {
         //
-        if playPause.image(for: .normal) == #imageLiteral(resourceName: "Pause") {
+        if finishEarly.image(for: .normal) == #imageLiteral(resourceName: "Pause") {
             //
-            playPause.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
+            finishEarly.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
+            finishEarly.tintColor = colour3
             //
             if soundPlayer != nil {
                 if soundPlayer.isPlaying == true {
@@ -755,7 +748,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Play / Continue Practice
         } else {
             //
-            playPause.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
+            finishEarly.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
+            finishEarly.tintColor = colour4
             //
             //
             if automaticYogaArray[3] != -1 {
@@ -809,34 +803,38 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBAction func finishEarlyAction(_ sender: Any) {
         // Invalidate
         
-        //
-        // Alert View
-        let title = NSLocalizedString("finishEarly", comment: "")
-        let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = colour2
-        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-        //
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
-        
-        //
-        // Action
-        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
-            UIAlertAction in
+        if automaticYogaArray[0] == 0 {
             //
+            // Alert View
+            let title = NSLocalizedString("finishEarly", comment: "")
+            let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.view.tintColor = colour2
+            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             //
-            self.dismiss(animated: true)
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .natural
+            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+            
+            //
+            // Action
+            let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+                UIAlertAction in
+                //
+                //
+                self.dismiss(animated: true)
+            }
+            let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
+                UIAlertAction in
+            }
+            //
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            //
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            pauseButtonAction()
         }
-        let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
-            UIAlertAction in
-        }
-        //
-        alert.addAction(okAction)
-        alert.addAction(cancelAction)
-        //
-        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -869,7 +867,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Walkthrough
     func walkthroughSession() {
         //
-        var cellHeight = (UIScreen.main.bounds.height - 22) * 3/4
+        var cellHeight = (UIScreen.main.bounds.height - 22) * 7/8
         
         //
         if didSetWalkthrough == false {
@@ -938,8 +936,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Demonstration
         case 2:
             //
-            highlightSize = CGSize(width: view.bounds.width * (7/8), height: (cellHeight * (3/4)))
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2)
+            highlightSize = CGSize(width: view.bounds.width * (7/8), height: (cellHeight * (7/8)))
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2)
             highlightCornerRadius = 3
             //
             labelFrame = 0

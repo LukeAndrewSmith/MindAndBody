@@ -279,6 +279,7 @@
 		073BA9C71F6E7CCA005DB480 /* FinalChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BA9C61F6E7CCA005DB480 /* FinalChoice.swift */; };
 		073BA9CB1F6E81B8005DB480 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BA9CA1F6E81B8005DB480 /* DataStructures.swift */; };
 		074074AD1EDC0A4000DC2D0F /* YogaAutomatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */; };
+		0750DB631F86C8F7003C2AE6 /* ScheduleFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0750DB621F86C8F7003C2AE6 /* ScheduleFunctions.swift */; };
 		07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07520BB31E9F894C00FA682E /* MeditationScreen.swift */; };
 		0757326B1E64D8A3003DA77E /* InformationScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757326A1E64D8A3003DA77E /* InformationScreen1.swift */; };
 		075732701E660AEC003DA77E /* InformationScreenAnatomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757326F1E660AEC003DA77E /* InformationScreenAnatomy.swift */; };
@@ -1673,6 +1674,7 @@
 		073BA9C61F6E7CCA005DB480 /* FinalChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalChoice.swift; sourceTree = "<group>"; };
 		073BA9CA1F6E81B8005DB480 /* DataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
 		074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaAutomatic.swift; sourceTree = "<group>"; };
+		0750DB621F86C8F7003C2AE6 /* ScheduleFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleFunctions.swift; sourceTree = "<group>"; };
 		07520BB31E9F894C00FA682E /* MeditationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationScreen.swift; sourceTree = "<group>"; };
 		0757326A1E64D8A3003DA77E /* InformationScreen1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationScreen1.swift; sourceTree = "<group>"; };
 		0757326F1E660AEC003DA77E /* InformationScreenAnatomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationScreenAnatomy.swift; sourceTree = "<group>"; };
@@ -2951,8 +2953,9 @@
 		07686A8C1F84398000C278CC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */,
 				07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */,
+				07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */,
+				0750DB621F86C8F7003C2AE6 /* ScheduleFunctions.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -8237,6 +8240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0750DB631F86C8F7003C2AE6 /* ScheduleFunctions.swift in Sources */,
 				07DEE6F71E0AADE6003B89AB /* YogaChoice.swift in Sources */,
 				077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */,
 				071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */,

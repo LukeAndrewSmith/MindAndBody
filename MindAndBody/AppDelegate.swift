@@ -30,16 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaults = UserDefaults.standard
         
         
-        // Test
-        let test = Date().currentWeekDayFromMonday
-        let test1 = Date().firstMondayInCurrentWeek
-        let test2 = Date().firstMondayInCurrentMonth
-        let test3 = Date().numberOfMondaysInCurrentMonth
-        let test4 = Date().firstDateInCurrentMonth
-
-
-
-            
+        
         //
         // Tracking
         // Progress
@@ -65,11 +56,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["automaticYoga" : [0, -1, -1, -1]])
         
         //
-        // Notifications popup
-        UserDefaults.standard.register(defaults: ["notificationsPopup" : false])
+        // Profile/Schedules
+        // Schedules
+        UserDefaults.standard.register(defaults: ["schedules" : scheduleDataStructures.schedules])
+        // Difficulty Levels
+        UserDefaults.standard.register(defaults: ["difficultyLevels" : scheduleDataStructures.defaultDifficultyLevels])
+        // Profile Answers
+        UserDefaults.standard.register(defaults: ["profileAnswers" : scheduleDataStructures.defaultProfileAnswers])
+
+        
         
         //
-        // Register Walkthroughs
+        // Walkthrough
+        // Notifications popup
+        UserDefaults.standard.register(defaults: ["notificationsPopup" : false])
+        // Walkthroughs
         UserDefaults.standard.register(defaults: ["mindBodyWalkthrough" : false])
         //
         UserDefaults.standard.register(defaults: ["finalChoiceWalkthrough" : false])
@@ -89,8 +90,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["settingsWalkthrough" : false])
         UserDefaults.standard.register(defaults: ["automaticYogaWalkthrough" : false])
 
+        
+        
+        
         //
-        // Home Screen
+        // Set Home Screen
         let homeScreen = UserDefaults.standard.integer(forKey: "homeScreen")
         //
         switch homeScreen {

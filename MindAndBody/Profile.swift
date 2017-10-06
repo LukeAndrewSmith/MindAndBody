@@ -187,20 +187,86 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     // didSelectRow
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+        
+        
         switch indexPath.row {
+        case 0:
+            if profileAnswers[3][0] == 0 {
+                profileAnswers[3][0] = 1
+                UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
+            }
+            selectedSection = indexPath.row
+            performSegue(withIdentifier: "profileDetail", sender: self)
+        case 1:
+            if profileAnswers[3][1] == 0 {
+                profileAnswers[3][1] = 1
+                UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
+            }
+            selectedSection = indexPath.row
+            performSegue(withIdentifier: "profileDetail", sender: self)
+        case 2:
+            // If all sections have been pressed at least once and me questions have been answered
+            if profileAnswers[3][1] != 0 {
+                selectedSection = indexPath.row
+                performSegue(withIdentifier: "profileDetail", sender: self)
+                if profileAnswers[3][2] == 0 {
+                    profileAnswers[3][2] = 1
+                    UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
+                }
+            } else {
+                warningPopup(section: indexPath.row)
+            }
         case 3:
-            
-            
-            performSegue(withIdentifier: "scheduleCreation", sender: self)
+            // If all sections have been pressed at least once and me questions have been answered
+            if profileAnswers[3].contains(0) == false && profileAnswers[0].contains(-1) == false {
+                selectedSection = indexPath.row
+                performSegue(withIdentifier: "scheduleCreation", sender: self)
+            } else {
+                warningPopup(section: indexPath.row)
+            }
         default:
             // Selected section
             selectedSection = indexPath.row
-            
             performSegue(withIdentifier: "profileDetail", sender: self)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
+    func warningPopup(section: Int) {
+        //
+        // Notifications Popup
+        //
+        // Alert View notifications
+        var title = String()
+        var message = String()
+        switch section {
+        case 2:
+            title = NSLocalizedString("sessionsWarningTitle", comment: "")
+            message = NSLocalizedString("sessionsWarningMessage", comment: "")
+        case 3:
+            title = NSLocalizedString("scheduleCreatorWarningTitle", comment: "")
+            message = NSLocalizedString("scheduleCreatorWarningMessage", comment: "")
+        default:
+            break
+        }
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        //
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+        // Ok Action
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { action in
+        }
+        //
+        alert.addAction(okAction)
+        
+        // Notifications Popup
+        self.present(alert, animated: true, completion: nil)
     }
     
     

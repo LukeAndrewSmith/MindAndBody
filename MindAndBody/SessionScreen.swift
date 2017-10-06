@@ -30,6 +30,10 @@ class OverviewTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonView: UIView!
     // Explanation
     @IBOutlet weak var explanationButton: UIButton!
+    //
+    // CountdownLabel, if timed workout
+    @IBOutlet weak var countDownLabel: UILabel!
+    //
 }
 
 // Overview End Cell
@@ -399,7 +403,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: "")
 
             //
-            cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 23)
+            cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 27)
             cell.movementLabel?.textAlignment = .center
             cell.movementLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             cell.movementLabel?.adjustsFontSizeToFitWidth = true
@@ -408,7 +412,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // Set and Reps
             let setsString = String(setsArray[indexPath.row])
             cell.setsRepsLabel?.text = setsString + " x " + repsArray[indexPath.row]
-            cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
             cell.setsRepsLabel?.textAlignment = .right
             cell.setsRepsLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             cell.setsRepsLabel.adjustsFontSizeToFitWidth = true
@@ -518,6 +522,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             case selectedRow + 1:
                 //
+                cell.movementLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
                 cell.selectionStyle = .none
                 //
                 cell.indicatorStack.alpha = 0
@@ -543,7 +548,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             let cell = tableView.dequeueReusableCell(withIdentifier: "EndTableViewCell", for: indexPath) as! EndTableViewCell
             //
-            cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+            cell.backgroundColor = colour2
             //
             cell.separatorInset =  UIEdgeInsetsMake(0.0, 0.0, 0.0, -cell.bounds.size.width)
             //
@@ -567,11 +572,11 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         case 0:
             switch indexPath.row {
             case selectedRow - 1, selectedRow:
-                return (UIScreen.main.bounds.height - 22) * 3/4
+                return (UIScreen.main.bounds.height - 22) * 7/8
             case selectedRow + 1:
-                return (UIScreen.main.bounds.height - 22) * 1/4
+                return (UIScreen.main.bounds.height - 22) * 1/8
             default:
-                return (UIScreen.main.bounds.height - 22) * 1/4
+                return (UIScreen.main.bounds.height - 22) * 1/8
             }
         case 1: return 49
         default: return 0
@@ -656,6 +661,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
                 // 1
+                cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 27)
                 cell.indicatorStack.alpha = 1
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
@@ -717,6 +723,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }
                 // + 1
                 cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! OverviewTableViewCell
+                cell.movementLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
                 cell.indicatorStack.alpha = 0
                 cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 1
@@ -1004,7 +1011,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Walkthrough
     func walkthroughSession() {
         //
-        let cellHeight = (UIScreen.main.bounds.height - 22) * 3/4
+        let cellHeight = (UIScreen.main.bounds.height - 22) * 7/8
 
         //
         if didSetWalkthrough == false {
@@ -1074,7 +1081,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Rest Timer
         case 2:
             //
-            highlightSize = CGSize(width: view.bounds.width * (3/4), height: 44)
+            highlightSize = CGSize(width: view.bounds.width * (7/8), height: 44)
             highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight / 2) * (30/16)) + 2)
             highlightCornerRadius = 0
             //
@@ -1094,8 +1101,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Demonstration
         case 3:
             //
-            highlightSize = CGSize(width: view.bounds.width * (7/8), height: (cellHeight * (3/4)))
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2)
+            highlightSize = CGSize(width: view.bounds.width * (7/8), height: (cellHeight * (7/8)))
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2)
             highlightCornerRadius = 3
             //
             labelFrame = 0
@@ -1115,7 +1122,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         case 4:
             //
             highlightSize = CGSize(width: 30, height: 15)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (3/4))) - (15 / 2))
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (7/8))) - (15 / 2))
             highlightCornerRadius = 0
             //
             labelFrame = 0
@@ -1139,7 +1146,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             leftSwipe.backgroundColor = colour1
             leftSwipe.layer.cornerRadius = 25
             leftSwipe.clipsToBounds = true
-            leftSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2
+            leftSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
             leftSwipe.center.x = view.bounds.width * (7/8)
             UIApplication.shared.keyWindow?.insertSubview(leftSwipe, aboveSubview: walkthroughView)
             // Perform swipe action
@@ -1160,8 +1167,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 leftSwipe.removeFromSuperview()
                 
                 //
-                self.highlightSize = CGSize(width: self.view.bounds.width * (7/8), height: (cellHeight * (3/4)))
-                self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2)
+                self.highlightSize = CGSize(width: self.view.bounds.width * (7/8), height: (cellHeight * (7/8)))
+                self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2)
                 self.highlightCornerRadius = 3
                 //
                 self.labelFrame = 0
@@ -1181,7 +1188,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         case 6:
             //
             highlightSize = CGSize(width: 30, height: 15)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (3/4))) - (15 / 2))
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (7/8))) - (15 / 2))
             highlightCornerRadius = 0
             //
             labelFrame = 0
@@ -1204,7 +1211,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 rightSwipe.backgroundColor = colour1
                 rightSwipe.layer.cornerRadius = 25
                 rightSwipe.clipsToBounds = true
-                rightSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2
+                rightSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
                 rightSwipe.center.x = self.view.bounds.width * (1/8)
                 UIApplication.shared.keyWindow?.insertSubview(rightSwipe, aboveSubview: self.walkthroughView)
                 // Perform swipe action

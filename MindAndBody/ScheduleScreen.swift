@@ -47,6 +47,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //
+        //
+        // Select Today
+        // Get current day as index, currentWeekDay - 1 as week starts at 0 in array
+        selectedDay = Date().currentWeekDayFromMonday - 1
+        stackArray[selectedDay].alpha = 1
     }
     
     //
@@ -59,6 +64,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var backgroundImage: UIImageView!
     let backgroundBlur = UIVisualEffectView()
 
+    
+    // MARK: - Tests
     // Content Arrays Test
     var daySessionsArray: [[Int]] =
     [
@@ -77,6 +84,292 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         // Sunday
         [5]
     ]
+    
+    //
+    // MARK: Schedule Tracking, tracking what youve done each week, putting a tick next to what you've done in schedule if true
+    var scheduleTrackingArray: [[Int:[[Bool]]]] =
+    [
+        // Monday
+        [
+                // MARK: Mind
+                0:
+                    [
+                        // 0
+                        [false],
+                        // Yoga, Meditation Walk
+                        [
+                            false,
+                            false,
+                            false
+                        ],
+                        // 4 | To Do Yoga - Warmup, Practice
+                        [
+                            false,
+                            false
+                        ]
+                ],
+                
+                // Note: Choice = ["title","contents","contents"...]
+                // MARK: Flexibility
+                1:
+                    [
+                        // 0
+                        [false],
+                        // 4 | To Do Flexibility - Warmup, Session
+                        [
+                            false,
+                            false
+                        ]
+                ],
+                
+                // MARK: Endurance
+                2:
+                    [
+                        // 0
+                        [false],
+                        // Type - High Intesnsity, Steady State
+                        [
+                            false,
+                            false
+                        ],
+                        // --------------
+                        // 4 | High Intensity To Do - warmup, cardio, stretching
+                        [
+                            false,
+                            false,
+                            false
+                        ],
+                        // ------------
+                        // Steady State
+                        // 5 | Steady State To Do 2 - 2 - To Do
+                        [
+                            false,
+                            false,
+                            false,
+                            ]
+                ],
+                // MARK: Toning
+                3:
+                    [
+                        // 0
+                        [false],
+                        // 3 | Toning To Do, warmup, session, stretching
+                        [
+                            false,
+                            false,
+                            false
+                        ]
+                ],
+                
+                // MARK: Muscle Gain
+                4:
+                    [
+                        // 0
+                        [false],
+                        // 4 | Muscle Gain To Do - Warmup, session, stretching
+                        [
+                            false,
+                            false,
+                            false
+                        ]
+                ],
+                
+                // MARK: Strength
+                5:
+                    [
+                        // 0
+                        [false],
+                        // 4 | Strength To Do, Warmup, Session, Stretching
+                        [
+                            false,
+                            false,
+                            false
+                        ]
+                ]
+        ],
+        // Tuesday
+        [
+                // MARK: Mind
+                0:
+                    [
+                        // 0
+                        [false],
+                        // Yoga, Meditation Walk
+                        [
+                            false,
+                            false,
+                            false
+                        ],
+                        // 4 | To Do Yoga - Warmup, Practice
+                        [
+                            false,
+                            false
+                        ]
+                ],
+                
+                // Note: Choice = ["title","contents","contents"...]
+                // MARK: Flexibility
+                1:
+                    [
+                        // 0
+                        [false],
+                        // 4 | To Do Flexibility - Warmup, Session
+                        [
+                            false,
+                            false
+                        ]
+                ],
+                
+                // MARK: Endurance
+                2:
+                    [
+                        // 0
+                        [false],
+                        // Type - High Intesnsity, Steady State
+                        [
+                            false,
+                            false
+                        ],
+                        // --------------
+                        // 4 | High Intensity To Do - warmup, cardio, stretching
+                        [
+                            false,
+                            false,
+                            false
+                        ],
+                        // ------------
+                        // Steady State
+                        // 5 | Steady State To Do 2 - 2 - To Do
+                        [
+                            false,
+                            false,
+                            false,
+                            ]
+                ]
+        ],
+        // Wednesday
+        [
+            // MARK: Endurance
+            2:
+                [
+                    // 0
+                    [false],
+                    // Type - High Intesnsity, Steady State
+                    [
+                        false,
+                        false
+                    ],
+                    // --------------
+                    // 4 | High Intensity To Do - warmup, cardio, stretching
+                    [
+                        false,
+                        false,
+                        false
+                    ],
+                    // ------------
+                    // Steady State
+                    // 5 | Steady State To Do 2 - 2 - To Do
+                    [
+                        false,
+                        false,
+                        false,
+                        ]
+            ]
+        ],
+        // Thursday
+        [
+            // MARK: Strength
+            5:
+                [
+                    // 0
+                    [false],
+                    // 4 | Strength To Do, Warmup, Session, Stretching
+                    [
+                        false,
+                        false,
+                        false
+                    ]
+            ]
+        ],
+        // Friday
+        [
+            // MARK: Mind
+            0:
+                [
+                    // 0
+                    [false],
+                    // Yoga, Meditation Walk
+                    [
+                        false,
+                        false,
+                        false
+                    ],
+                    // 4 | To Do Yoga - Warmup, Practice
+                    [
+                        false,
+                        false
+                    ]
+            ],
+            
+            // MARK: Muscle Gain
+            4:
+                [
+                    // 0
+                    [false],
+                    // 4 | Muscle Gain To Do - Warmup, session, stretching
+                    [
+                        false,
+                        false,
+                        false
+                    ]
+            ],
+        ],
+        // Saturday
+        [
+            // MARK: Endurance
+            2:
+                [
+                    // 0
+                    [false],
+                    // Type - High Intesnsity, Steady State
+                    [
+                        false,
+                        false
+                    ],
+                    // --------------
+                    // 4 | High Intensity To Do - warmup, cardio, stretching
+                    [
+                        false,
+                        false,
+                        false
+                    ],
+                    // ------------
+                    // Steady State
+                    // 5 | Steady State To Do 2 - 2 - To Do
+                    [
+                        false,
+                        false,
+                        false,
+                        ]
+            ],
+        ],
+        // Sunday
+        [
+            // MARK: Strength
+            5:
+                [
+                    // 0
+                    [false],
+                    // 4 | Strength To Do, Warmup, Session, Stretching
+                    [
+                        false,
+                        false,
+                        false
+                    ]
+            ]
+        ],
+    ]
+    // MARK: -
     
     
     //
@@ -253,12 +546,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         rightSwipe.direction = .right
         rightSwipe.addTarget(self, action: #selector(swipeGestureRight))
         scheduleTable.addGestureRecognizer(rightSwipe)
-        
-        //
-        // Select Today
-        // Get current day as index, currentWeekDay - 1 as week starts at 0 in array
-        selectedDay = Date().currentWeekDayFromMonday - 1
-        stackArray[selectedDay].alpha = 1
     }
     
     //
@@ -381,6 +668,13 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         switch tableView {
         case scheduleTable:
+            // Long tap; ability to mark session as complete
+            let markAsCompletedGesture = UILongPressGestureRecognizer()
+            cell.tag = indexPath.row
+            markAsCompletedGesture.addTarget(self, action: #selector(markAsCompleted))
+            cell.addGestureRecognizer(markAsCompletedGesture)
+            
+            
             // First Screen, showing groups
             if choiceProgress[0] == -1 {
                 switch indexPath.row {
@@ -394,11 +688,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     editButton.sizeToFit()
                     editButton.frame = CGRect(x: 27, y: 0, width: (view.bounds.width - 54) / 2, height: 72)
                     // action
-                    editButton.isUserInteractionEnabled = true
-                    let tap = UITapGestureRecognizer(target: self, action: #selector(editButtonTap))
-                    tap.numberOfTapsRequired = 1
-                    editButton.addGestureRecognizer(tap)
-                    cell.addSubview(editButton)
+//                    editButton.isUserInteractionEnabled = true
+////                    let tap = UITapGestureRecognizer(target: self, action: #selector(editButtonTap))
+//                    tap.numberOfTapsRequired = 1
+//                    editButton.addGestureRecognizer(tap)
+//                    cell.addSubview(editButton)
                     //
     //                let plusImage = UIImageView()
     //                plusImage.image = #imageLiteral(resourceName: "Plus")
@@ -428,7 +722,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     cell.addSubview(dayLabel)
                     //
                     // CheckMark if completed
-                    if isCompleted() == true {
+                    if isCompleted(row: indexPath.row) == true {
+                        dayLabel.textColor = colour3
+                        
                         cell.tintColor = colour3
                         cell.accessoryType = .checkmark
                     }
@@ -463,7 +759,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     }
                     //
                     // CheckMark if completed
-                    if isCompleted() == true {
+                    if isCompleted(row: indexPath.row) == true {
                         cell.tintColor = colour3
                         cell.accessoryType = .checkmark
                     }
@@ -595,7 +891,10 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             if let destinationViewController = segue.destination as? SlideMenuView {
                 destinationViewController.transitioningDelegate = self
             }
-        } else {
+        } else if segue.identifier == "scheduleSegueOverview" {
+            let destinationVC = segue.destination as? FinalChoice
+            destinationVC?.comingFromSchedule = true
+                
             //
             // Remove back button text
             let backItem = UIBarButtonItem()

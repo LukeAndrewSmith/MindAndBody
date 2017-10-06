@@ -26,6 +26,12 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     // Cardio - time or distance
     var cardioType = 0
     
+    // Coming from schedule, if coming from menu == true, hide presets button
+    // && set title to presets title
+    var comingFromSchedule = false
+    // Title Array for if schedule
+    let scheduleTitleArray = ["warmup", "workout", "cardio", "stretching", "yoga"]
+    
     
     //
     // MARK: Outlets ------------------------------------------------------------------------------------------------------------------------------
@@ -97,7 +103,13 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         view.backgroundColor = UIColor(red:0.08, green:0.08, blue:0.08, alpha:1.0)
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString(sessionData.navigationTitles[selectedSession[0]][selectedSession[1]] as! String, comment: ""))
+        if comingFromSchedule == false {
+            navigationBar.title = (NSLocalizedString(sessionData.navigationTitles[selectedSession[0]][selectedSession[1]] as! String, comment: ""))
+        } else {
+            presetsButton.alpha = 0
+            let sessionTypeString = NSLocalizedString(scheduleTitleArray[selectedSession[0]], comment: "")
+            navigationBar.title = sessionTypeString + " - " + NSLocalizedString("overview", comment: "")
+        }
         navigationController?.navigationBar.tintColor = colour1
         
         //
@@ -173,10 +185,17 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 let indexPath2 = NSIndexPath(row: 0, section: 0)
                 self.movementsTableView.scrollToRow(at: indexPath2 as IndexPath, at: .top, animated: true)
                 //
-                self.tableConstraint1.constant = 73.75
                 self.tableConstraint.constant = 49.75
                 //
-                self.presetsConstraint.constant = self.view.frame.size.height - 73.25 - TopBarHeights.combinedHeight
+                // Show presets button
+                if self.comingFromSchedule == false {
+                    self.tableConstraint1.constant = 73.75
+                    self.presetsConstraint.constant = self.view.frame.size.height - 73.25 - TopBarHeights.combinedHeight
+                // Hide presets button
+                } else {
+                    self.tableConstraint1.constant = 0
+                    self.presetsConstraint.constant = self.view.frame.size.height - TopBarHeights.combinedHeight
+                }
                 //
                 self.beginConstraint.constant = 0
 //                self.view.layoutIfNeeded()
@@ -581,10 +600,17 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 let indexPath2 = NSIndexPath(row: 0, section: 0)
                 self.movementsTableView.scrollToRow(at: indexPath2 as IndexPath, at: .top, animated: true)
                 //
-                self.tableConstraint1.constant = 73.75
                 self.tableConstraint.constant = 49.75
                 //
-                self.presetsConstraint.constant = self.view.frame.size.height - 73.25
+                // Show presets button
+                self.tableConstraint1.constant = 73.75
+                if self.comingFromSchedule == false {
+                    self.presetsConstraint.constant = self.view.frame.size.height - 73.25
+                // Hide presets button
+                } else {
+                    self.tableConstraint1.constant = 0
+                    self.presetsConstraint.constant = self.view.frame.size.height
+                }
                 //
                 self.beginConstraint.constant = 0
                 self.view.layoutIfNeeded()

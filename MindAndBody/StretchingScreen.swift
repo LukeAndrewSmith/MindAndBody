@@ -247,7 +247,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             // Movement
             cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: "")
             //
-            cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 23)
+            cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 27)
             cell.movementLabel?.textAlignment = .center
             cell.movementLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             cell.movementLabel?.adjustsFontSizeToFitWidth = true
@@ -259,7 +259,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             } else {
                 cell.setsRepsLabel?.text = String(breathsArray[indexPath.row]) + " " + NSLocalizedString("breathsC", comment: "")
             }
-            cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
             cell.setsRepsLabel?.textAlignment = .right
             cell.setsRepsLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             cell.setsRepsLabel.adjustsFontSizeToFitWidth = true
@@ -319,6 +319,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             case selectedRow + 1:
                 //
+                cell.movementLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
                 cell.selectionStyle = .none
                 //
                 cell.indicatorStack.alpha = 0
@@ -365,11 +366,11 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         case 0:
             switch indexPath.row {
             case selectedRow - 1, selectedRow:
-                return (UIScreen.main.bounds.height - 22) * 3/4
+                return (UIScreen.main.bounds.height - 22) * 7/8
             case selectedRow + 1:
-                return (UIScreen.main.bounds.height - 22) * 1/4
+                return (UIScreen.main.bounds.height - 22) * 1/8
             default:
-                return (UIScreen.main.bounds.height - 22) * 1/4
+                return (UIScreen.main.bounds.height - 22) * 1/8
             }
         case 1: return 49
         default: return 0
@@ -452,6 +453,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
                 // 1
+                cell.movementLabel?.font = UIFont(name: "SFUIDisplay-light", size: 27)
                 cell.indicatorStack.alpha = 1
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
@@ -509,6 +511,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 }
                 // + 1
                 cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! StretchingTableViewCell
+                cell.movementLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
                 cell.indicatorStack.alpha = 0
                 cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 1
@@ -790,7 +793,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Walkthrough
     func walkthroughSession() {
         //
-        var cellHeight = (UIScreen.main.bounds.height - 22) * 3/4
+        var cellHeight = (UIScreen.main.bounds.height - 22) * 7/8
         
         //
         if didSetWalkthrough == false {
@@ -859,8 +862,8 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         // Demonstration
         case 2:
             //
-            highlightSize = CGSize(width: view.bounds.width * (7/8), height: (cellHeight * (3/4)))
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2)
+            highlightSize = CGSize(width: view.bounds.width * (7/8), height: (cellHeight * (7/8)))
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2)
             highlightCornerRadius = 3
             //
             labelFrame = 0
@@ -879,7 +882,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         case 3:
             //
             highlightSize = CGSize(width: 30, height: 15)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (3/4))) - (15 / 2))
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (7/8))) - (15 / 2))
             highlightCornerRadius = 0
             //
             labelFrame = 0
@@ -903,7 +906,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             leftSwipe.backgroundColor = colour1
             leftSwipe.layer.cornerRadius = 25
             leftSwipe.clipsToBounds = true
-            leftSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2
+            leftSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
             leftSwipe.center.x = view.bounds.width * (7/8)
             UIApplication.shared.keyWindow?.insertSubview(leftSwipe, aboveSubview: walkthroughView)
             // Perform swipe action
@@ -924,8 +927,8 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 leftSwipe.removeFromSuperview()
                 
                 //
-                self.highlightSize = CGSize(width: self.view.bounds.width * (7/8), height: (cellHeight * (3/4)))
-                self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2)
+                self.highlightSize = CGSize(width: self.view.bounds.width * (7/8), height: (cellHeight * (7/8)))
+                self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2)
                 self.highlightCornerRadius = 3
                 //
                 self.labelFrame = 0
@@ -945,7 +948,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         case 5:
             //
             highlightSize = CGSize(width: 30, height: 15)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (3/4))) - (15 / 2))
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (7/8))) - (15 / 2))
             highlightCornerRadius = 0
             //
             labelFrame = 0
@@ -968,7 +971,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 rightSwipe.backgroundColor = colour1
                 rightSwipe.layer.cornerRadius = 25
                 rightSwipe.clipsToBounds = true
-                rightSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2
+                rightSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
                 rightSwipe.center.x = self.view.bounds.width * (1/8)
                 UIApplication.shared.keyWindow?.insertSubview(rightSwipe, aboveSubview: self.walkthroughView)
                 // Perform swipe action

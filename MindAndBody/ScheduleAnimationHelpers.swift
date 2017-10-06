@@ -31,12 +31,16 @@ extension ScheduleScreen {
         // Table Counter
         // Return to choice 1 (sessions)
         if choiceProgress[1] > 1 {
-            // Cardio has two choice paths
-            if choiceProgress[0] == 2 && choiceProgress[1] == 5 {
+            // Meditation has two choice paths
+            if choiceProgress[0] == 0 && choiceProgress[1] == 5 {
+            choiceProgress[1] = 1
+            } else if choiceProgress[0] == 2 && choiceProgress[1] == 5 {
                 choiceProgress[1] = 1
-                // Meditation has two choice paths
-            } else if choiceProgress[0] == 0 && choiceProgress[1] == 5 {
+            // Toning has two choice paths
+            } else if choiceProgress[0] == 3 && choiceProgress[1] == 5 {
                 choiceProgress[1] = 1
+                // Cardio has two choice paths
+            //
             } else {
                 choiceProgress[1] -= 1
             }

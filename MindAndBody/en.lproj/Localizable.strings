@@ -1502,7 +1502,9 @@
         //
         "oxygenOverload" = "Oxygen Overload Timer";
 
-
+//
+// MARK: Custom
+"sessionInputTitle" = "Title";
 
 
 
@@ -1543,20 +1545,111 @@
     "preferences" = "Preferences";
     "numberSessions" = "Nº Sessions";
 
-    // Questions
-    //
-    "age" = "age";
-    "gender" = "Gender";
-        "male" = "Male";
-        "female" = "Female";
-        "other" = "Other";
-    "activityLevel" = "Activity Level";
-        "veryLow" = "";
-        "low" = "";
-        "lowerMiddle" = "";
-        "" = "";
-        "" = "";
+    // Warning Popups
+    // 3
+    "sessionsWarningTitle" = "Note";
+    "sessionsWarningMessage" = "\nMake sure you've filled in your goals first";
+    // 2
+    "scheduleCreatorWarningTitle" = "Note";
+    "scheduleCreatorWarningMessage" = "\nMake sure you've completed 'Me' and 'Goals', and checked 'Nº Sessions";
+//
+"totalNumberSession" = "Total Nº Sessions";
 
+//
+// Questions
+    // Answers
+// Age
+"profileQ1" = "Age"; // Age
+    // Answer in me viewcontroller
+// Gender
+"profileQ2" = "Gender"; // Gender
+    "profileA21" = "Male";
+    "profileA22" = "Female";
+    "profileA23" = "Other";
+// Flexibility
+"profileQ3" = "Can you touch your toes with straight (slightly bent) legs?"; // Hamstrings
+    "profileA31" = "No";
+    "profileA32" = "Nearly";
+    "profileA33" = "Yes";
+"profileQ4" = "Are your knees close to the ground doing the butterfly?"; // Hips
+    "profileA41" = "No";
+    "profileA42" = "Fairly";
+    "profileA43" = "Yes";
+"profileQ5" = "Can you squat (hips below knees) comfortably?"; // Hips/Ankles
+    "profileA51" = "No";
+    "profileA52" = "Nearly";
+    "profileA53" = "Yes";
+"profileQ6" = "Can you sit on your heels?"; // Kneels
+    "profileA61" = "No";
+    "profileA62" = "Not comfortably";
+    "profileA63" = "Yes";
+"profileQ7" = "Does your back bend backward?"; // Back
+    "profileA71" = "No";
+    "profileA72" = "A little";
+    "profileA73" = "Yes";
+"profileQ8" = "Does your neck rotate freely?"; // Neck
+    "profileA81" = "No";
+    "profileA82" = "Nearly";
+    "profileA83" = "Yes";
+// Balance
+"profileQ9" = "Can you stand stand on one leg for 10s?"; // Balance
+    "profileA91" = "No";
+    "profileA92" = "Yes";
+    "profileA93" = "Yes, with my eyes closed";
+    "profileA94" = "Yes, with my eyes closed while looking up";
+// Experience
+"profileQ10" = "Are you experienced in yoga?"; // Experience: Yoga
+    "profileA101" = "No";
+    "profileA102" = "Fairly";
+    "profileA103" = "Yes";
+"profileQ11" = "Are you experienced in working out?"; // Experience: Workout
+    "profileA111" = "No";
+    "profileA112" = "Fairly";
+    "profileA113" = "Yes";
+"profileQ12" = "Do you do much cardio (running, biking etc..)?"; // Experience: Cardio
+    "profileA121" = "Hardly any (A few times a year)";
+    "profileA122" = "Occasionally (A few times a month)";
+    "profileA123" = "Lots (A few times a week)";
+// Strength
+"profileQ13" = "Can you do 5 pushups?"; // Strength: Pushup
+    "profileA131" = "No";
+    "profileA132" = "Not very easily";
+    "profileA133" = "Yes, comfortably";
+"profileQ14" = "Can you do 5 pullups?"; // Strength: Pullup
+    "profileA141" = "No";
+    "profileA142" = "Not very easily";
+    "profileA143" = "Yes, comfortably";
+"profileQ15" = "Would you consider yourself strong?"; // Strength: Pullup
+    "profileA151" = "Not at all";
+    "profileA152" = "Not really";
+    "profileA153" = "Yes";
+// Endurance
+"profileQ16" = "Can you run 5km (3 miles)?"; // Strength: Pullup
+    "profileA161" = "No";
+    "profileA162" = "Not comfortably";
+    "profileA163" = "Yes";
+// Mind
+"profileQ17" = "Are you calm?"; // Calm
+    "profileA1171" = "Not often";
+    "profileA1172" = "Occasionally";
+    "profileA1173" = "Mostly";
+"profileQ18" = "Are you content?"; // Contentedness
+    "profileA1181" = "Not often";
+    "profileA1182" = "Occasionally";
+    "profileA1183" = "Often";
+// General
+"profileQ19" = "Are you content with your body and it's abilities?"; // Contentedness with body
+    "profileA1191" = "No";
+    "profileA1192" = "Reasonably";
+    "profileA1193" = "Yes";
+"profileQ20" = "Do you have much time to work towards you're physical and mental goals?"; // Time
+    "profileA201" = "No, only a few days a week where I could";
+    "profileA202" = "Yes, a little every day";
+    "profileA203" = "Yes, for at least 1 goal a day";
+"profileQ21" = "Are you're physical and mental goals a high priority (will you be committed)?"; // Commitment
+    "profileA211" = "Not really, but I'd like to do a little";
+    "profileA212" = "Yes, but I should take it easy to begin with";
+    "profileA213" = "Definitely, I plan on getting into a routine";
 
 
 //
