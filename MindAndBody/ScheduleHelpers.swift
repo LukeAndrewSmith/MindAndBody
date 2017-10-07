@@ -108,7 +108,7 @@ extension ScheduleScreen {
                         choiceProgress[1] += 1
                         nextChoice()
                     }
-                // Session Choice
+                // Session Choice, To Do
                 case 4:
                     // Test
                     // TODO: Selected choice as index to sortedGroups (in data structures)
@@ -127,18 +127,24 @@ extension ScheduleScreen {
                     if row == 2 {
                         // TODO: Popup saying go do cardio - run, bike, row, swim
                     } else {
+                        if row == 1 {
+                            steadyStateChoice = 0
+                        } else if row == 3 {
+                            steadyStateChoice = 1
+                        }
+                        //
                         choiceProgress[1] += 1
                         nextChoice()
                     }
-                // Session Choice
+                // Session Choice , To do
                 case 6:
                     // Test
                     // TODO: Selected choice as index to sortedGroups (in data structures)
                     // Warmup
-                    if row == 1 {
+                    if steadyStateChoice == 0 {
                         selectWarmup()
                     // Stretching
-                    } else if row == 3 {
+                    } else if steadyStateChoice == 1 {
                         selectStretching()
                     }
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)

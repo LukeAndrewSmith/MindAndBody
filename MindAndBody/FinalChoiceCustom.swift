@@ -639,13 +639,8 @@ var customSessionsRegister: [[[[Any]]]] =
         case customTableView:
             //
             switch selectedType {
-            case 0:
-                if customSessionsArray[selectedType].count == 0 || (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 {
-                    return 1
-                } else {
-                    return (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count + 1
-                }
-            case 1:
+            // TODO: Selected Type
+            case 15:
                 if (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 {
                     return 1
                 } else {
@@ -655,7 +650,12 @@ var customSessionsRegister: [[[[Any]]]] =
                         return (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count
                     }
                 }
-            default: break
+            default:
+                if customSessionsArray[selectedType].count == 0 || (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count == 0 {
+                    return 1
+                } else {
+                    return (customSessionsArray[selectedType][selectedPreset][1] as! [Int]).count + 1
+                }
             }
             
         //
@@ -696,7 +696,7 @@ var customSessionsRegister: [[[[Any]]]] =
                 //
             } else {
                 //
-                cell.textLabel?.text = customSessionsArray[selectedType][indexPath.row][0]  as! String
+                cell.textLabel?.text = customSessionsArray[selectedType][indexPath.row][0] as! String
             }
             //
             return cell
@@ -935,7 +935,6 @@ var customSessionsRegister: [[[[Any]]]] =
                 }
                 // 3. Get the value from the text field, and perform actions upon OK press
                 okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-                    
                     //
                     // Append relevant (to selectedType) new array to customSessionsArray
                     switch self.selectedType {
@@ -949,55 +948,68 @@ var customSessionsRegister: [[[[Any]]]] =
                     default:
                         break
                     }
-                    
-                    
-                    
-                    
-                    
                     //
+                    // Update Title
                     let textField = alert?.textFields![0]
-                    // Update Preset Text Arrays
-                    customSessionsArray[self.selectedType][self.selectedPreset][0].append((textField?.text)!)
-                    // Add New Number of Rounds
-                    customSessionsArray[self.selectedType][self.selectedPreset][2].append(2)
+                    let lastIndex = customSessionsArray[self.selectedType].count - 1
+                    customSessionsArray[self.selectedType][lastIndex][0][0] = textField?.text!
                     //
-                    let selectedIndexPath = NSIndexPath(row: (customSessionsArray[self.selectedType][self.selectedPreset] as! [[Any]]).count - 1, section: 0)
-                    self.presetsTableView.selectRow(at: selectedIndexPath as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
-                    self.selectedPreset = selectedIndexPath.row
+                    // Default mumber of rounds if relevant
+                    // TODO: Selected Type
+                    if self.selectedType == 2 {
+                        customSessionsArray[self.selectedType][self.selectedPreset][2].append(2)
+                        self.numberOfRounds.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String((customSessionsArray[self.selectedType][self.selectedPreset][2] as! [Int])[self.selectedPreset]), for: .normal)
+                    }
+                    
                     //
-                    // SET NEW AARRAY
+                    // SET NEW ARRAY
                     UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-                    self.numberOfRounds.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String((customSessionsArray[self.selectedType][self.selectedPreset][2] as! [Int])[self.selectedPreset]), for: .normal)
+                    
                     //
+                    // Select new session and dismiss
+                    let selectedIndexPath = NSIndexPath(row: lastIndex, section: 0)
+                    self.presetsTableView.selectRow(at: selectedIndexPath as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
+                    self.selectedPreset = lastIndex
                     //
                     self.presetsTableView.isHidden = false
                     snapShot1?.removeFromSuperview()
-                    //
                     self.backgroundViewExpanded.isHidden = false
+                    
+                    //
                     UIView.animate(withDuration: 0.3, animations: {
                         self.backgroundViewExpanded.alpha = 0.5
                         self.presetsTableView.reloadData()
                         // Dismiss and select new row
                     }, completion: { finished in
-                        //
                         
                         //
-                        let selectedIndexPath = NSIndexPath(row: (customSessionsArray[self.selectedType] as! [[Any]]).count - 1, section: 0)
-                        self.presetsTableView.selectRow(at: selectedIndexPath as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
-                        self.selectedPreset = selectedIndexPath.row
-                        //
-                        switch self.selectedType {
-                        case 0:
-                            let string = customSessionsArray[self.selectedType][self.selectedPreset][0] as! String
-                            self.presetsButton.setTitle("- " + string + " -", for: .normal)
-                        case 1:
-                            break
-                        default: break
-                        }
+                        // Dismiss presets table
+                        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
+                            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
+                            self.backgroundViewExpanded.alpha = 0
+                        }, completion: { finished in
+                            //
+                            self.presetsTableView.removeFromSuperview()
+                            self.backgroundViewExpanded.removeFromSuperview()
+                        })
+                        
+//                        //
+//                        let selectedIndexPath = NSIndexPath(row: (customSessionsArray[self.selectedType] as! [[Any]]).count - 1, section: 0)
+//                        self.presetsTableView.selectRow(at: selectedIndexPath as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
+//                        self.selectedPreset = selectedIndexPath.row
+//                        //
+//                        switch self.selectedType {
+//                        case 0:
+//                            let string = customSessionsArray[self.selectedType][self.selectedPreset][0] as! String
+//                            self.presetsButton.setTitle("- " + string + " -", for: .normal)
+//                        case 1:
+//                            break
+//                        default: break
+//                        }
                         
                         //
                         tableView.deselectRow(at: indexPath, animated: true)
-                        // Flash Screen
+                        // Reload
                         self.customTableView.reloadData()
                         //
                         self.beginButtonEnabled()

@@ -69,30 +69,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     var presetsTableView = UITableView()
     var backgroundViewExpanded = UIButton()
     
-    
-    //
-    // View Will Appear
-    //
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if selectedSession[2] == -1 {
-            presetsButton.setTitle(NSLocalizedString("selectWarmup", comment: ""), for: .normal)
-        }
-        
-//        // Device Scale for @2x and @3x of Target Area Images
-//        switch UIScreen.main.scale {
-//        case 1,2:
-//            for i in 0...targetAreaDictionary.count - 1 {
-//                targetAreaDictionary[i] = targetAreaDictionary[i]! + "@2x"
-//            }
-//        case 3:
-//            for i in 0...targetAreaDictionary.count - 1 {
-//                targetAreaDictionary[i] = targetAreaDictionary[i]! + "@3x"
-//            }
-//        default: break
-//        }
-    }
-    
     //
     // MARK: View did load ------------------------------------------------------------------------------------------------------------------------------
     //

@@ -32,7 +32,6 @@ class OverviewTableViewCell: UITableViewCell {
     @IBOutlet weak var explanationButton: UIButton!
     //
     // CountdownLabel, if timed workout
-    @IBOutlet weak var countDownLabel: UILabel!
     //
 }
 

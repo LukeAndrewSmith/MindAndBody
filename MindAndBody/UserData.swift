@@ -54,7 +54,7 @@ enum customSectionEmtpySessions {
     static let emptySessionFour: [[Any]] =
     [
         // Name - String
-        [],
+        [""],
         // Movements - Int
         [],
         // Sets - Int
@@ -67,7 +67,7 @@ enum customSectionEmtpySessions {
     static let emptySessionThree: [[Any]] =
     [
         // Name - String
-        [],
+        [""],
         // Movements - Int
         [],
         // Rounds - Int

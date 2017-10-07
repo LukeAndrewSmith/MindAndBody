@@ -78,7 +78,12 @@ var isInitialAppOpen = true
 //
 // Schedule Variabls ---------------------------------------------------------------------------------------------------------------
 //
+// Used in profile, when creating schedule, uses this to create then adds to userdata after (this is so that update schedule can compare new to old to find whats different and tell the user)
 var updatedSessionsArray = [0,0,0,0,0,0,0]
+//
+// choiceProgress Indicated progress through the choices to select a session
+// Note: choiceProgress[0] = -1 if first screen, i.e choices being displayed
+var choiceProgress = [-1,0]
 //
 // Automatic choice from schedule variables ---------------------------------------------------------------------------------------------------------------
 //

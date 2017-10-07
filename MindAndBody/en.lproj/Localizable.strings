@@ -72,7 +72,7 @@
 "rest" = "Rest";
 "skip" = "Skip";
 
-"sessionStarted" = "Session Began!";
+"sessionStarted" = "Session has begun!";
 
 "edit" = "Edit";
 "done" = "Done";
@@ -1638,15 +1638,15 @@
     "profileA1182" = "Occasionally";
     "profileA1183" = "Often";
 // General
-"profileQ19" = "Are you content with your body and it's abilities?"; // Contentedness with body
+"profileQ19" = "Are you content with your body and its abilities?"; // Contentedness with body
     "profileA1191" = "No";
     "profileA1192" = "Reasonably";
     "profileA1193" = "Yes";
-"profileQ20" = "Do you have much time to work towards you're physical and mental goals?"; // Time
+"profileQ20" = "Do you have much time to work towards your physical and mental goals?"; // Time
     "profileA201" = "No, only a few days a week where I could";
     "profileA202" = "Yes, a little every day";
     "profileA203" = "Yes, for at least 1 goal a day";
-"profileQ21" = "Are you're physical and mental goals a high priority (will you be committed)?"; // Commitment
+"profileQ21" = "Are your physical and mental goals a high priority (will you be committed)?"; // Commitment
     "profileA211" = "Not really, but I'd like to do a little";
     "profileA212" = "Yes, but I should take it easy to begin with";
     "profileA213" = "Definitely, I plan on getting into a routine";

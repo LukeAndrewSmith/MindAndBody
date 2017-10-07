@@ -28,9 +28,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //
     // Schedule
-    // choiceProgress Indicated progress through the choices to select a session
-        // Note: choiceProgress[0] = -1 if first screen, i.e choices being displayed
-    var choiceProgress = [-1,0]
     
     //
     // Selected Choices
@@ -39,20 +36,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     var selectedChoiceWarmup = [0,0,0,0,0,0]
     var selectedChoiceSession = [0,0,0,0,0,0]
     var selectedChoiceStretching = [0,0,0,0,0,0]
-
-    
-//
-// View Will Appear ---------------------------------------------------------------------------------
-//
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //
-        //
-        // Select Today
-        // Get current day as index, currentWeekDay - 1 as week starts at 0 in array
-        selectedDay = Date().currentWeekDayFromMonday - 1
-        stackArray[selectedDay].alpha = 1
-    }
     
     //
     // Outlets
@@ -391,8 +374,23 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     var selectedSchedule = 0
     
     //
-    // Main arrays tests
+    // Very silly variable used in choices of endurance, steady state, as time choice after warmup/stretching choice, variable tell which one was selected
+    var steadyStateChoice = Int()
     
+    //
+    // View Will Appear ---------------------------------------------------------------------------------
+    //
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //
+        //
+        // Select Today
+        // Get current day as index, currentWeekDay - 1 as week starts at 0 in array
+        if choiceProgress[0] == -1 {
+            selectedDay = Date().currentWeekDayFromMonday - 1
+            stackArray[selectedDay].alpha = 1
+        }
+    }
     
     
 //
@@ -529,23 +527,24 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         pageStack.alignment = .center
         pageStack.isUserInteractionEnabled = true
         //
-        // Day Swipes
-        let stackSwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        stackSwipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        pageStack.addGestureRecognizer(stackSwipeLeft)
-        //
-        let stackSwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        stackSwipeRight.direction = UISwipeGestureRecognizerDirection.right
-        pageStack.addGestureRecognizer(stackSwipeRight)
-        //
         view.addSubview(pageStack)
         
         //
-        // Swipe
-        let rightSwipe = UISwipeGestureRecognizer()
-        rightSwipe.direction = .right
-        rightSwipe.addTarget(self, action: #selector(swipeGestureRight))
-        scheduleTable.addGestureRecognizer(rightSwipe)
+        // Day Swipes
+        let daySwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        daySwipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        view.addGestureRecognizer(daySwipeLeft)
+        //
+        let daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        daySwipeRight.direction = UISwipeGestureRecognizerDirection.right
+        view.addGestureRecognizer(daySwipeRight)
+        
+//        // CURRENTLY UNUSED, NO SWIPE TO MENU
+//        // Swipe
+//        let rightSwipe = UISwipeGestureRecognizer()
+//        rightSwipe.direction = .right
+//        rightSwipe.addTarget(self, action: #selector(swipeGestureRight))
+//        scheduleTable.addGestureRecognizer(rightSwipe)
     }
     
     //
@@ -592,17 +591,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             seperator.backgroundColor = colour1.cgColor
             seperator.opacity = 0.5
             header.layer.addSublayer(seperator)
-            
-            //
-            // Day Swipes
-            let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-            swipeLeft.direction = UISwipeGestureRecognizerDirection.left
-            view.addGestureRecognizer(swipeLeft)
-            //
-            let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-            swipeRight.direction = UISwipeGestureRecognizerDirection.right
-            view.addGestureRecognizer(swipeRight)
-
         case scheduleChoiceTable:
             break
         default: break
@@ -818,10 +806,13 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         case scheduleTable:
             //
             // If choiceProgress[0] = -1
-            didSelectRowHandler(row: indexPath.row)
-
-            //
-            tableView.deselectRow(at: indexPath, animated: true)
+            if choiceProgress[0] != -1 && indexPath.row == 0 {
+                
+            } else {
+                didSelectRowHandler(row: indexPath.row)
+                //
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
 
         case scheduleChoiceTable:
             tableView.deselectRow(at: indexPath, animated: true)
