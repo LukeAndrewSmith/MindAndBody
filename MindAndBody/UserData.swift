@@ -318,7 +318,7 @@ enum Register {
     
     // --------------------------------------------------------
     // Tracking
-    let registerTrackingArray: [[Any]] =
+    static let registerTrackingArray: [[Any]] =
     // Update progress (first monday of last week/month completed (lastResetWeek/Month) is used to check if progress needs to be reset to 0 for first entry of new week/month)
         [
             // Week - [weekProgress, lastResetWeek]

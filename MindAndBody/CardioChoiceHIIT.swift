@@ -94,21 +94,21 @@ class CardioChoiceHIIT: UIViewController  {
     
     //
     // MARK: Selected Session
-    // Full
+    // Rowing
     @IBAction func full(_ sender: Any) {
         selectedSession[1] = 0
         selectedSession[2] = -1
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     
-    // Upper
+    // Biking
     @IBAction func upper(_ sender: Any) {
         selectedSession[1] = 1
         selectedSession[2] = -1
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     
-    // Lower
+    // Running
     @IBAction func lower(_ sender: Any) {
         selectedSession[1] = 2
         selectedSession[2] = -1

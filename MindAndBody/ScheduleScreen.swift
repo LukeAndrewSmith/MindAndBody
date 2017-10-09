@@ -539,12 +539,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         daySwipeRight.direction = UISwipeGestureRecognizerDirection.right
         view.addGestureRecognizer(daySwipeRight)
         
-//        // CURRENTLY UNUSED, NO SWIPE TO MENU
-//        // Swipe
-//        let rightSwipe = UISwipeGestureRecognizer()
-//        rightSwipe.direction = .right
-//        rightSwipe.addTarget(self, action: #selector(swipeGestureRight))
-//        scheduleTable.addGestureRecognizer(rightSwipe)
+        // Swipe
+        let rightSwipe = UIScreenEdgePanGestureRecognizer()
+        rightSwipe.edges = .left
+        rightSwipe.addTarget(self, action: #selector(swipeGestureRight))
+        view.addGestureRecognizer(rightSwipe)
     }
     
     //

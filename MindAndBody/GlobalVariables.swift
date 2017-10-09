@@ -22,7 +22,18 @@ let backgroundImageArray: [String] =
 // Selected Session ---------------------------------------------------------------------------------------------------------------------
 //
 // e.g [Warmup, UpperBody, Session]
-// or e.g [Workout, Bodyweight/Circuit/FullBody, Session]
+// [0]; 0 = warmup, 1 = workout, 2 = cardio, 3 = stretching, 4 = yoga
+// [1];
+    // warmup: 0 = full, 1 = upper, 2 = lower, 3 = cardio
+    // workout
+        // gym
+            // workout classic; 0-5, 0 = full, 1 = upper, 2 = lower, 3 = legs, 4 = pull, 5 = push
+            // workout strength; 6 = 5x5
+            // workout circuit; 7-9, 7 = full, 8 = upper, 9 = lower
+        // bodyweight
+            // workout bodyweight; 10-12, 10 = full, 11 = upper, 12 = lower
+            // workout bodyweight circuit; 13-15, 13 = full, 14 = upper, 15 = lower
+    // cardio: 0 = rowing, 1 = biking, 2 = rowing
 var selectedSession: [Int] = [0,0,-1]
 
 //

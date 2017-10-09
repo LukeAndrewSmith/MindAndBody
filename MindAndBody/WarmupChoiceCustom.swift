@@ -1365,7 +1365,7 @@ class WarmupChoiceCustom: UIViewController, UITableViewDelegate, UITableViewData
                     UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
                     backgroundViewExpanded.frame = UIScreen.main.bounds
                     //
-                    // Animate table
+                    // Animate picker
                     UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         //
                         self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY - 147 - 49 - 10, width: UIScreen.main.bounds.width - 20, height: 147 + 49)

@@ -198,7 +198,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         // Pass Data
         if (segue.identifier == "customSegueWarmup") {
             let destinationVC = segue.destination as! FinalChoiceCustom
-            destinationVC.selectedType = 0
+//            destinationVC.selectedType = 0
         }
         
         // Remove back bar text

@@ -165,7 +165,7 @@ class StretchingChoice: UIViewController  {
         //
         if (segue.identifier == "customSegueWarmup") {
             let destinationVC = segue.destination as! FinalChoiceCustom
-            destinationVC.selectedType = 0
+//            destinationVC.selectedType = 0
         }
         
         // Remove Back Bar Text

@@ -38,7 +38,7 @@ class WorkoutChoice: UIViewController  {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "customSegueWorkout") {
             let destinationVC = segue.destination as! FinalChoiceCustom
-            destinationVC.selectedType = 0
+//            destinationVC.selectedType = 0
         }
         //
         let backItem = UIBarButtonItem()

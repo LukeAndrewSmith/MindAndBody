@@ -398,9 +398,13 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         //
         let blur = UIBlurEffect(style: .dark)
         let vibrancy = UIVibrancyEffect(blurEffect: blur)
+        
+        let vibrancyTest = UIVibrancyEffect()
+        let testVibrancy = UIVisualEffectView()
+        testVibrancy.effect = vibrancyTest
         //
-        blur0.effect = blur
-        blur0.effect = vibrancy
+//        blur0.effect = blur
+//        blur0.effect = vibrancy
         //
         blur1.effect = blur
         blur1.effect = vibrancy
@@ -428,10 +432,16 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         
         
         // Blur Positioning and frame
-        blur0.bounds = Warmup.bounds
-        blur0.layer.cornerRadius = Warmup.frame.size.height / 2
-        blur0.clipsToBounds = true
-        blur0.center = Warmup.center
+        testVibrancy.bounds = Warmup.bounds
+        testVibrancy.layer.cornerRadius = Warmup.frame.size.height / 2
+        testVibrancy.clipsToBounds = true
+        testVibrancy.center = Warmup.center
+        view.insertSubview(testVibrancy, belowSubview: Warmup)
+
+//        blur0.bounds = Warmup.bounds
+//        blur0.layer.cornerRadius = Warmup.frame.size.height / 2
+//        blur0.clipsToBounds = true
+//        blur0.center = Warmup.center
         //
         blur1.bounds = Workout.bounds
         blur1.layer.cornerRadius = Workout.frame.size.height / 2

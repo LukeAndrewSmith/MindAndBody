@@ -253,7 +253,7 @@ extension UIViewController {
     //
     // Week Progress
     func updateWeekProgress() {
-        var trackingProgressArray = UserDefaults.standard.array(forKey: "trackingProgressArray") as! [[Any]]
+        var trackingProgressArray = UserDefaults.standard.array(forKey: "trackingProgress") as! [[Any]]
         //
         let defaults = UserDefaults.standard
         var currentProgress = trackingProgressArray[0][0] as! Int
@@ -267,18 +267,18 @@ extension UIViewController {
         if lastReset != currentMondayDate {
             currentProgress = 0
             trackingProgressArray[0][1] = currentMondayDate
-            defaults.set(trackingProgressArray, forKey: "trackingProgressArray")
+            defaults.set(trackingProgressArray, forKey: "trackingProgress")
         }
         
         // Increment Progress
         currentProgress += 1
         trackingProgressArray[0][0] = currentProgress
-        defaults.set(trackingProgressArray, forKey: "trackingProgressArray")
+        defaults.set(trackingProgressArray, forKey: "trackingProgress")
     }
     
     // Month Progress
     func updateMonthProgress() {
-        var trackingProgressArray = UserDefaults.standard.array(forKey: "trackingProgressArray") as! [[Any]]
+        var trackingProgressArray = UserDefaults.standard.array(forKey: "trackingProgress") as! [[Any]]
         //
         var currentProgress = trackingProgressArray[1][0] as! Int
         
@@ -292,13 +292,13 @@ extension UIViewController {
         if lastReset != firstMonday  {
             currentProgress = 0
             trackingProgressArray[1][1] = firstMonday
-            defaults.set(trackingProgressArray, forKey: "trackingProgressArray")
+            UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
         }
         
         // Increment Progress
         currentProgress += 1
         trackingProgressArray[1][0] = currentProgress
-        defaults.set(trackingProgressArray, forKey: "trackingProgressArray")
+        UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
     }
     
     

@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         // Tracking Progress
         // [currentProgress, lastResetWeek/Month]
-        defaults.register(defaults: ["trackingProgressArray" : Register.registerTrackingArray])
+        defaults.register(defaults: ["trackingProgress" : Register.registerTrackingArray])
         
         //
         // Custom Sessions

@@ -48,9 +48,6 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var currentMondayDate = Int()
     var currentMonth = Int()
     var currentYear = Int()
-    
-    // Objects
-    var swipeGestureView = UIView()
 
     
 //
@@ -436,19 +433,14 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         //
         //
         // Swipe
-        let rightSwipe = UISwipeGestureRecognizer()
-        rightSwipe.direction = .right
+        // Swipe
+        let rightSwipe = UIScreenEdgePanGestureRecognizer()
+        rightSwipe.edges = .left
         rightSwipe.addTarget(self, action: #selector(swipeGestureRight))
-        
-        swipeGestureView.backgroundColor = .clear
-        swipeGestureView.bounds = view.bounds
-        swipeGestureView.addGestureRecognizer(rightSwipe)
-        swipeGestureView.isUserInteractionEnabled = true
-        view.addSubview(swipeGestureView)
-        view.bringSubview(toFront: swipeGestureView)
-        
-        //
-//        view.bringSubview(toFront: swipeGestureView)
+        view.addGestureRecognizer(rightSwipe)
+//        let rightSwipe = UISwipeGestureRecognizer()
+//        rightSwipe.direction = .right
+//        rightSwipe.addTarget(self, action: #selector(swipeGestureRight))
     }
     
     //

@@ -740,6 +740,10 @@ extension ScheduleScreen {
             })
             
         }
+        } else {
+            if extraSwipe.direction == .right {
+                maskAction()
+            }
         }
     }
     
