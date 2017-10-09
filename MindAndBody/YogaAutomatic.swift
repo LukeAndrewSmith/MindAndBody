@@ -393,7 +393,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     })
                     //
                     // Present walkthrough
-                    if UserDefaults.standard.bool(forKey: "automaticYogaWalkthrough") == false {
+                    let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                    if walkthroughs[12] == false {
                         walkthroughAutomaticYoga()
                     }
                     // on -> off
@@ -879,7 +880,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                UserDefaults.standard.set(true, forKey: "automaticYogaWalkthrough")
+                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                walkthroughs[12] = true
+                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             })
         }
     }

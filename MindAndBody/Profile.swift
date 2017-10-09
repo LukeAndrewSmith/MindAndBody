@@ -46,7 +46,8 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         backgroundIndex = settings[0][0]
         
         // Present walkthrough 2
-        if UserDefaults.standard.bool(forKey: "profileWalkthrough") == false {
+        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+        if walkthroughs[7] == false {
             walkthroughProfile()
         }
         
@@ -408,7 +409,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                UserDefaults.standard.set(true, forKey: "profileWalkthrough")
+                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                walkthroughs[7] = true
+                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             })
         }
     }

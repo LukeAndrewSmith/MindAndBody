@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/AppDelegate.swift"
-            timestampString = "529187499.773514"
+            timestampString = "529235946.572142"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
-            landmarkType = "7">
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "AppDelegate"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/TrackingScreen.swift"
-            timestampString = "528657526.898201"
+            timestampString = "529235946.57224"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "466"
-            endingLineNumber = "466"
+            startingLineNumber = "467"
+            endingLineNumber = "467"
             landmarkName = "returnChartPoints()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/TrackingScreen.swift"
-            timestampString = "528657526.898287"
+            timestampString = "529235946.572304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "777"
-            endingLineNumber = "777"
+            startingLineNumber = "778"
+            endingLineNumber = "778"
             landmarkName = "returnXAxisModel(xAxisValues:titleLabelSettings:axisLabelSettings:xAxisTitle:generator:)"
             landmarkType = "7">
             <Locations>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/MindBody.swift"
-            timestampString = "529187499.774259"
+            timestampString = "529235946.572586"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "704"
-            endingLineNumber = "704"
+            startingLineNumber = "707"
+            endingLineNumber = "707"
             landmarkName = "walkthroughMindBody()"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ProfileDetail.swift"
-            timestampString = "529080382.926656"
+            timestampString = "529235946.572726"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ProfileDetail.swift"
-            timestampString = "529080382.926734"
+            timestampString = "529235946.572794"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,7 +282,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/DataStructures.swift"
-            timestampString = "529187499.774524"
+            timestampString = "529235946.572854"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1436"
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ScheduleScreen.swift"
-            timestampString = "529173670.857386"
+            timestampString = "529235946.573162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "593"
-            endingLineNumber = "593"
+            startingLineNumber = "594"
+            endingLineNumber = "594"
             landmarkName = "tableView(_:willDisplayHeaderView:forSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/TrackingScreen.swift"
-            timestampString = "528657526.901945"
+            timestampString = "529235946.573277"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "290"
-            endingLineNumber = "290"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
             landmarkName = "drawGraph()"
             landmarkType = "7">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/TrackingScreen.swift"
-            timestampString = "528657526.902041"
+            timestampString = "529235946.573333"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "799"
-            endingLineNumber = "799"
+            startingLineNumber = "800"
+            endingLineNumber = "800"
             landmarkName = "returnXAxisModel(xAxisValues:titleLabelSettings:axisLabelSettings:xAxisTitle:generator:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/TrackingScreen.swift"
-            timestampString = "528657526.902131"
+            timestampString = "529235946.573386"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "663"
-            endingLineNumber = "663"
+            startingLineNumber = "664"
+            endingLineNumber = "664"
             landmarkName = "returnAxisValues(chartPoints:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -394,11 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/TrackingScreen.swift"
-            timestampString = "528657526.902205"
+            timestampString = "529235946.573437"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "637"
-            endingLineNumber = "637"
+            startingLineNumber = "638"
+            endingLineNumber = "638"
             landmarkName = "returnAxisValues(chartPoints:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -426,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ScheduleScreen.swift"
-            timestampString = "529173670.857883"
+            timestampString = "529235946.573519"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "714"
-            endingLineNumber = "714"
+            startingLineNumber = "715"
+            endingLineNumber = "715"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -474,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ProfileDetail.swift"
-            timestampString = "529080382.927059"
+            timestampString = "529235946.573624"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "381"
-            endingLineNumber = "381"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
             landmarkName = "sliderValueChanged(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -490,11 +490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/FinalChoice.swift"
-            timestampString = "529173670.859066"
+            timestampString = "529235946.573682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "839"
-            endingLineNumber = "839"
+            startingLineNumber = "840"
+            endingLineNumber = "840"
             landmarkName = "beginButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -506,7 +506,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/StretchingScreen.swift"
-            timestampString = "529173670.859243"
+            timestampString = "529235946.57432"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"

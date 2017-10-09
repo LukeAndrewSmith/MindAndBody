@@ -843,11 +843,11 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         case 0:
             // Warmup uses stretching Screen
             // NOTE: If time base 
-            if selectedSession[2] < 1 {
+//            if selectedSession[2] < 1 {
                 performSegue(withIdentifier: "sessionSegueStretching", sender: self)
-            } else {
-                performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
-            }
+//            } else {
+//                performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
+//            }
         // Workout
         case 1:
             switch selectedSession[1] {

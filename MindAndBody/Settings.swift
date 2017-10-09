@@ -67,7 +67,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         
         //
         // Walkthrough
-        if UserDefaults.standard.bool(forKey: "settingsWalkthrough") == false {
+        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+        if walkthroughs[11] == false {
             walkthroughSettings()
         }
         
@@ -892,7 +893,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                UserDefaults.standard.set(true, forKey: "settingsWalkthrough")
+                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                walkthroughs[11] = true
+                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             })
         }
     }

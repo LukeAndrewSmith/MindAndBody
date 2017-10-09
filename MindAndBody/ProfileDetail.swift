@@ -41,17 +41,18 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
         super.viewDidAppear(animated)
         //
         // Present walkthrough
+        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
         switch selectedSection {
         case 0:
-            if UserDefaults.standard.bool(forKey: "meWalkthrough") == false {
+            if walkthroughs[8] == false {
                 walkthroughProfileDetail()
             }
         case 1:
-            if UserDefaults.standard.bool(forKey: "goalsWalkthrough") == false {
+            if walkthroughs[9] == false {
                 walkthroughProfileDetail()
             }
         case 2:
-            if UserDefaults.standard.bool(forKey: "nSessionsWalkthrough") == false {
+            if walkthroughs[10] == false {
                 walkthroughProfileDetail()
             }
         default:
@@ -502,19 +503,19 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
+                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
                 switch self.selectedSection {
                 case 0:
-                    UserDefaults.standard.set(true, forKey: "meWalkthrough")
+                    walkthroughs[8] = true
                 case 1:
-                    UserDefaults.standard.set(true, forKey: "goalsWalkthrough")
+                    walkthroughs[9] = true
                 case 2:
-                    UserDefaults.standard.set(true, forKey: "nSessionsWalkthrough")
+                    walkthroughs[10] = true
                 default: break
                 }
+                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             })
         }
-    
-    
     //
 }
 

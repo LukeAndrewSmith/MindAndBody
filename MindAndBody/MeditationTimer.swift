@@ -66,20 +66,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     var selectedBackgroundSound = Int()
     var didChangeBackgroundSound = Bool()
     
-    //
-    var emptySession: [[[Any]]] =
-        [
-            // Name - String
-            [[]],
-            // Duration - Int
-            [[]],
-            // Bells, starting and ending bells go at first and last, interval bells in the middle
-            // [Bell, Time] - [Int]
-            [[-1,0],[-1,0]],
-            // Background Sound - Int
-            [[-1]]
-        ]
-    
     
 //
 // Outlets -----------------------------------------------------------------------------------------------
@@ -231,11 +217,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
 //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        // Register Defaults
-        let defaults = UserDefaults.standard
-        defaults.register(defaults: ["meditationTimer" : meditationArrayRegister])
         
         // Navigation Bar
         //
@@ -1984,7 +1965,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let textField = alert?.textFields![0]
                     //
                     // New empty session array
-                    var newSession = self.emptySession
+                    var newSession = Register.meditationEmptySession
                     // Update name
                     newSession[0][0].append((textField?.text)!)
                     meditationArray.append(newSession)

@@ -253,47 +253,52 @@ extension UIViewController {
     //
     // Week Progress
     func updateWeekProgress() {
+        var trackingProgressArray = UserDefaults.standard.array(forKey: "trackingProgressArray") as! [[Any]]
         //
         let defaults = UserDefaults.standard
-        var currentProgress = defaults.integer(forKey: "weekProgress")
+        var currentProgress = trackingProgressArray[0][0] as! Int
         //
         // Current mondays date in week
         let currentMondayDate = Date().firstMondayInCurrentWeek
         // Last Reset = monday of last week reset
-        var lastReset = defaults.object(forKey: "lastResetWeek") as! Date
+        var lastReset = trackingProgressArray[0][1] as! Date
         
         // Reset if last reset wasn't is current week
         if lastReset != currentMondayDate {
             currentProgress = 0
-            defaults.set(currentMondayDate, forKey: "lastResetWeek")
+            trackingProgressArray[0][1] = currentMondayDate
+            defaults.set(trackingProgressArray, forKey: "trackingProgressArray")
         }
         
         // Increment Progress
         currentProgress += 1
-        defaults.set(currentProgress, forKey: "weekProgress")
+        trackingProgressArray[0][0] = currentProgress
+        defaults.set(trackingProgressArray, forKey: "trackingProgressArray")
     }
     
     // Month Progress
     func updateMonthProgress() {
+        var trackingProgressArray = UserDefaults.standard.array(forKey: "trackingProgressArray") as! [[Any]]
         //
-        let defaults = UserDefaults.standard
-        var currentProgress = defaults.integer(forKey: "monthProgress")
+        var currentProgress = trackingProgressArray[1][0] as! Int
         
         //
         // Get first date in month
         let firstMonday = Date().firstDateInCurrentMonth
         // Last Reset = first monday in the last month reset
-        var lastReset = defaults.object(forKey: "lastResetMonth") as! Date
+        var lastReset = trackingProgressArray[1][1] as! Date
         
         // Reset if last reset wasn't in current month
         if lastReset != firstMonday  {
             currentProgress = 0
-            defaults.set(firstMonday, forKey: "lastResetMonth")
+            trackingProgressArray[1][1] = firstMonday
+            defaults.set(trackingProgressArray, forKey: "trackingProgressArray")
         }
         
         // Increment Progress
         currentProgress += 1
-        defaults.set(currentProgress, forKey: "monthProgress")
+        trackingProgressArray[1][0] = currentProgress
+        defaults.set(trackingProgressArray, forKey: "trackingProgressArray")
     }
     
     
@@ -668,133 +673,71 @@ extension Date {
         var currentWeekDay = Calendar(identifier: .gregorian).component(.weekday, from: Date())
         if currentWeekDay == 1 {
             currentWeekDay = 7
-         } else if currentWeekDay > 1 {
+        } else if currentWeekDay > 1 {
             currentWeekDay -= 1
         }
-         return currentWeekDay
+        return currentWeekDay
     }
     
     //
     // First Monday in current week as Date
     var firstMondayInCurrentWeek: Date {
-        var mondaysDate: Date {
-            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-        }
-        return mondaysDate
-    }
-
-    //
-    // First monday in month
-    var firstMondayInCurrentMonth: Date {
-        
-        var mondaysDate: Date {
-            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfMonth], from: Date()))!
-        }
-        return mondaysDate
-        
-//
-//        var calendar = Calendar(identifier: .gregorian)
-//        calendar.firstWeekday = 2 // 2 == Monday
-//
-////        //
-////        // Format Month
-////        let dfMonth = DateFormatter()
-////        dfMonth.dateFormat = "MM"
-////        // Get Month
-////        var monthsDate: Date {
-////            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-////        }
-////        let currentMonth = Int(dfMonth.string(from: monthsDate))
-////
-////        // Format Year
-////        let dfYear = DateFormatter()
-////        dfYear.dateFormat = "yyyy"
-////        // Get Year
-////        var yearsDate: Date {
-////            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-////        }
-////        let currentYear = Int(dfYear.string(from: yearsDate))
-////
-//        //
-//        // First monday in month:
-//        let comps = DateComponents(weekday: calendar.firstWeekday, weekdayOrdinal: 1)
-//        guard let first = calendar.date(from: comps)  else {
-//            return Date()
-//        }
-//        //
-//        return first
+        var components = Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+        components.timeZone = TimeZone(abbreviation: "UTC")
+        // Making a Date from week components gives the first day of the week, hence Monday
+        let mondaysDate = Calendar(identifier: .iso8601).date(from: components)
+        return mondaysDate!
     }
     
+    //
+    // First Monday in month
+    var firstMondayInMonth: Date {
+        var components = Calendar(identifier: .iso8601).dateComponents([.year, .month], from: self)
+        components.timeZone = TimeZone(abbreviation: "UTC")
+        
+        // First day of the month
+        let firstDate = Calendar(identifier: .iso8601).date(from: components)
+        let firstComponents = Calendar(identifier: .iso8601).dateComponents([.year, .month, .weekday], from: firstDate!)
+        
+        // Convert from Sunday=1 to Monday=1 day numbering
+        let addWeekdays = 7 - ((firstComponents.weekday! + 5) % 7)
+        // Jump forwards to next Monday if we arent already there
+        var mondaysDate = firstDate
+        if addWeekdays != 7 {
+            mondaysDate = Calendar(identifier: .iso8601).date(byAdding: .day, value: addWeekdays, to: firstDate!)
+        }
+        return mondaysDate!
+    }
+    
+    //
+    // Number of Mondays in month
     var numberOfMondaysInCurrentMonth: Int {
-        var calendar = Calendar(identifier: .gregorian)
-        calendar.firstWeekday = 2 // 2 == Monday
-        
-        //
-        // Format Month
-        let dfMonth = DateFormatter()
-        dfMonth.dateFormat = "MM"
-        // Get Month
-        var monthsDate: Date {
-            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-        }
-        let month = Int(dfMonth.string(from: monthsDate))
-        
-        // Format Year
-        let dfYear = DateFormatter()
-        dfYear.dateFormat = "yyyy"
-        // Get Year
-        var yearsDate: Date {
-            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-        }
-        let year = Int(dfYear.string(from: yearsDate))
-        
+        var components = Calendar(identifier: .iso8601).dateComponents([.year, .month], from: self)
         
         // First monday in month:
-        var comps = DateComponents(year: year, month: month,
-                                   weekday: calendar.firstWeekday, weekdayOrdinal: 1)
-        guard let first = calendar.date(from: comps)  else {
-            return 0
-        }
+        components.weekday = 2
+        components.weekdayOrdinal = 1
+        let first = Calendar(identifier: .iso8601).date(from: components)
         
         // Last monday in month:
-        comps.weekdayOrdinal = -1
-        guard let last = calendar.date(from: comps)  else {
-            return 0
-        }
+        components.weekdayOrdinal = -1
+        let last = Calendar(identifier: .iso8601).date(from: components)
         
         // Difference in weeks:
-        let weeks = calendar.dateComponents([.weekOfMonth], from: first, to: last)
+        let weeks = Calendar(identifier: .iso8601).dateComponents([.weekOfMonth], from: first!, to: last!)
         return weeks.weekOfMonth! + 1
     }
     
     //
-    // First monday in month
-    func firstMondayInMonth(_ month: Int, forYear year: Int) -> Int {
-        var calendar = Calendar(identifier: .gregorian)
-        calendar.firstWeekday = 2 // 2 == Monday
-        
-        // First monday in month:
-        let comps = DateComponents(year: year, month: month,
-                                   weekday: calendar.firstWeekday, weekdayOrdinal: 1)
-        guard let first = calendar.date(from: comps)  else {
-            return 0
-        }
-        
-        //
-        let firstMondayInMonth = Calendar(identifier: .gregorian).component(.day, from: first)
-        return firstMondayInMonth
-    }
-    
-    //
-    // First date in month
+    // First day in month
     var firstDateInCurrentMonth: Date {
-        var calendar = Calendar(identifier: .gregorian)
-        calendar.firstWeekday = 2 // 2 == Monday
+        var components = Calendar(identifier: .iso8601).dateComponents([.year, .month], from: self)
+        components.timeZone = TimeZone(abbreviation: "UTC")
+        
+        // First day of the month
+        let firstDateInCurrentMonth = Calendar(identifier: .iso8601).date(from: components)
         //
-        let components = calendar.dateComponents([.year, .month], from: Date())
-        let firstDateInCurrentMonth = calendar.date(from: components)!
-        //
-        return firstDateInCurrentMonth
+        return firstDateInCurrentMonth!
     }
 }
 

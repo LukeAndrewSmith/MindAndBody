@@ -197,7 +197,7 @@ enum customSectionEmtpySessions {
 
 // Settings
 enum Register {
-    //
+    // --------------------------------------------------------
     // Settings
     static let defaultSettings: [[Int]] = [
         // Background image index
@@ -214,6 +214,117 @@ enum Register {
         [0],   // 0 == "demonstration", 1 == "targetArea"
         // Metric/
         [0], // == "kg"
+    ]
+    
+    // --------------------------------------------------------
+    // Walkthroughs
+    //
+    // Walkthrough
+    static let registerWalkthroughArray: [Bool] =
+        [
+            // Notifications popup - 0
+            false,
+            // Mind Body, homescreen, - 1
+            false,
+            // Final Choice, - 2
+            false,
+            // Session - 3
+            false,
+            // Session 2 - 4
+            false,
+            // Schedule - 5
+            false,
+            // Tracking - 6
+            false,
+            // Profile - 7
+            false,
+            // Profile 'Me' - 8
+            false,
+            // Profile 'Goals' - 9
+            false,
+            // Profile 'Nº Session' - 10
+            false,
+            // Settings - 11
+            false,
+            // Automatic Yoga - 12
+            false
+    ]
+    
+    // --------------------------------------------------------
+    // Meditation array Register
+    static let meditationArrayRegister: [[[[Any]]]] = []
+    //
+    static let meditationEmptySession: [[[Any]]] =
+        [
+            // Name - String
+            [[]],
+            // Duration - Int
+            [[]],
+            // Bells, starting and ending bells go at first and last, interval bells in the middle
+            // [Bell, Time] - [Int]
+            [[-1,0],[-1,0]],
+            // Background Sound - Int
+            [[-1]]
+    ]
+    
+    // --------------------------------------------------------
+    // Custom Sessions
+    // Warmup, Workout, Cardio, Stretching, Yoga
+    static let customSessionsRegister: [[[[Any]]]] =
+        [
+            // Warmup - 0
+            // [name] - string, [movements] - int, [sets] - int, [reps] - string
+            [],
+            // Workout - 1
+            // [name] - string, [movements] - int, [sets] - int, [reps] - string
+            [],
+            // Workout - Circuit - 2
+            // [name] - string, [movements] - int, [rounds] - int, [reps] - string
+            [],
+            // Cardio - 3
+            // [name] - string, [movements] - int, [time/distance] - int
+            [],
+            // Stretching - 4
+            // [name] - string, [stretches] - int, [breaths] - int
+            [],
+            // Yoga - 5
+            // [name] - string, [stretches] - int, [poses] - int
+            []
+    ]
+    // Empty Session, Warmup, Workout, Workout - circuit - [string],[int],[int],[int]
+    static let emptySessionFour: [[Any]] =
+        [
+            // Name - String - 0
+            [],
+            // Movements - Int - 1
+            [],
+            // Sets - Int - 2
+            [],
+            // Reps - String? - 3
+            []
+    ]
+    // Empty Session, Cardio, Stretching, Yoga, - [string],[int],[int][int]
+    static let emptySessionThree: [[Any]] =
+        [
+            // Name - String - 0
+            [],
+            // Movements - Int - 1
+            [],
+            // Rounds - Int - 2
+            [],
+            // Reps - String?/Int? - 3
+            []
+    ]
+    
+    // --------------------------------------------------------
+    // Tracking
+    let registerTrackingArray: [[Any]] =
+    // Update progress (first monday of last week/month completed (lastResetWeek/Month) is used to check if progress needs to be reset to 0 for first entry of new week/month)
+        [
+            // Week - [weekProgress, lastResetWeek]
+            [0, Date().firstMondayInCurrentWeek],
+            // Month - [monthProgress, lastResetMonth]
+            [0, Date().firstMondayInMonth]
     ]
 }
 

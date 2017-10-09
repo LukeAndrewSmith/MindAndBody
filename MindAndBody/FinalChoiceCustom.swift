@@ -14,57 +14,6 @@ import UIKit
 // Workout Choice Custom --------------------------------------------------------------------------------------
 //
 class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    //
-
-// Warmup, Workout, Cardio, Stretching, Yoga
-var customSessionsRegister: [[[[Any]]]] =
-    [
-        // Warmup - 0
-        // [name] - string, [movements] - int, [sets] - int, [reps] - string
-        [],
-        // Workout - 1
-        // [name] - string, [movements] - int, [sets] - int, [reps] - string
-        [],
-        // Workout - Circuit - 2
-        // [name] - string, [movements] - int, [rounds] - int, [reps] - string
-        [],
-        // Cardio - 3
-        // [name] - string, [movements] - int, [time/distance] - int
-        [],
-        // Stretching - 4
-        // [name] - string, [stretches] - int, [breaths] - int
-        [],
-        // Yoga - 5
-        // [name] - string, [stretches] - int, [poses] - int
-        []
-]
-
-    // Empty Session, Warmup, Workout, Workout - circuit - [string],[int],[int],[int]
-    var emptySessionFour: [[Any]] =
-        [
-            // Name - String - 0
-            [],
-            // Movements - Int - 1
-            [],
-            // Sets - Int - 2
-            [],
-            // Reps - String? - 3
-            []
-    ]
-    
-    // Empty Session, Cardio, Stretching, Yoga, - [string],[int],[int][int]
-    var emptySessionThree: [[Any]] =
-        [
-            // Name - String - 0
-            [],
-            // Movements - Int - 1
-            [],
-            // Rounds - Int - 2
-            [],
-            // Reps - String?/Int? - 3
-            []
-    ]
 
     // Warmup, Workout, Workout(Circuit), Cardio, Stretching, Yoga
     var selectedType = Int()
@@ -169,10 +118,6 @@ var customSessionsRegister: [[[[Any]]]] =
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
-        // Register Custom Array
-        let defaults = UserDefaults.standard
-        defaults.register(defaults: ["customSessions" : customSessionsRegister])
         
         //
         // Initial Element Positions
@@ -196,7 +141,7 @@ var customSessionsRegister: [[[[Any]]]] =
         navigationBar.title = NSLocalizedString("custom", comment: "")
         
         // Number of Rounds
-        var customSessionsArray = defaults.object(forKey: "customSessions") as! [[[[Any]]]]
+        var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
         if (selectedType == 2 || selectedType == 3) && (selectedPreset != -1) {
             numberOfRounds.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(customSessionsArray[selectedType][selectedPreset][2][0] as! Int), for: .normal)
         }

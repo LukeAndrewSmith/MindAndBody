@@ -79,7 +79,8 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         updateMonthTracking()
         
         // Present walkthrough 2
-        if UserDefaults.standard.bool(forKey: "trackingWalkthrough") == false {
+        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+        if walkthroughs[6] == false {
             walkthroughTracking()
         }
 
@@ -482,18 +483,18 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             // Start Date for 1, 3, 6 months
             switch selectedTimeScale {
             case 1:
-                if keys.contains(Date().firstMondayInCurrentMonth) {
-                    startDate = Date().firstMondayInCurrentMonth
+                if keys.contains(Date().firstMondayInMonth) {
+                    startDate = Date().firstMondayInMonth
                 } else {
                     startDate = keys.first!
                 }
             case 2:
-                startDate = calendar.date(byAdding: .month, value: -2, to: Date().firstMondayInCurrentMonth)!
+                startDate = calendar.date(byAdding: .month, value: -2, to: Date().firstMondayInMonth)!
                 if keys.contains(startDate) == false {
                     startDate = keys.first!
                 }
             case 3:
-                startDate = calendar.date(byAdding: .month, value: -5, to: Date().firstMondayInCurrentMonth)!
+                startDate = calendar.date(byAdding: .month, value: -5, to: Date().firstMondayInMonth)!
                 if keys.contains(startDate) == false {
                     startDate = keys.first!
                 }
@@ -641,9 +642,9 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: keys.last!)!
             // firstmonday + ((numberofmondaysincurrentmonth - 1) * weeks) = lastmonday
             let toAdd = Date().numberOfMondaysInCurrentMonth - 1
-            let test = Date().firstMondayInCurrentMonth
+            let test = Date().firstMondayInMonth
             let test2 = Date().firstMondayInCurrentWeek
-            endDate = calendar.date(byAdding: .weekOfYear, value: toAdd, to: Date().firstMondayInCurrentMonth)!
+            endDate = calendar.date(byAdding: .weekOfYear, value: toAdd, to: Date().firstMondayInMonth)!
             // Start Date for 1, 3, 6 months
             switch selectedTimeScale {
             case 1:
@@ -695,10 +696,10 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             // Fill emtpy values after first date if neccessary (the current date wont always be last date in month)
             //
             // Add empty xvalues After if necessary
-            startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: Date().firstMondayInCurrentMonth)!
+            startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: Date().firstMondayInMonth)!
             // firstmonday + ((numberofmondaysincurrentmonth - 1) * weeks) = lastmonday
             let toAdd = Date().numberOfMondaysInCurrentMonth - 1
-            endDate = calendar.date(byAdding: .weekOfYear, value: toAdd, to: Date().firstMondayInCurrentMonth)!
+            endDate = calendar.date(byAdding: .weekOfYear, value: toAdd, to: Date().firstMondayInMonth)!
             //
             if keys.contains(endDate) == false {
                 xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
@@ -1188,7 +1189,9 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                UserDefaults.standard.set(true, forKey: "trackingWalkthrough")
+                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                walkthroughs[6] = true
+                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             })
         }
     }

@@ -29,21 +29,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Register Defaults --------------------------------------------------------------------------------
         let defaults = UserDefaults.standard
         
-        
-        //
-        // Tracking
-        // Progress
-        defaults.register(defaults: ["weekProgress" : 0])
-        defaults.register(defaults: ["monthProgress" : 0])
-        // Update progress (first monday of last week/month completed, used to check if progress needs to be reset to 0 for first entry of new week/month)
-        defaults.register(defaults: ["lastResetWeek" : Date().firstMondayInCurrentWeek])
-        defaults.register(defaults: ["lastResetMonth" : Date().firstDateInCurrentMonth])
-        
-        
         //
         // Settings
-        UserDefaults.standard.register(defaults: ["userSettings" : Register.defaultSettings])
+        defaults.register(defaults: ["userSettings" : Register.defaultSettings])
         
+        //
+        // Tracking Progress
+        // [currentProgress, lastResetWeek/Month]
+        defaults.register(defaults: ["trackingProgressArray" : Register.registerTrackingArray])
+        
+        //
+        // Custom Sessions
+        defaults.register(defaults: ["customSessions" : Register.customSessionsRegister])
+        
+        //
+        // Meditation Array
+        defaults.register(defaults: ["meditationTimer" : Register.meditationArrayRegister])
         
         //
         // Profile/Schedules
@@ -54,55 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Profile Answers
         UserDefaults.standard.register(defaults: ["profileAnswers" : scheduleDataStructures.defaultProfileAnswers])
 
-        
         //
-        // Walkthrough
-        let walkthroughArray: [Bool] =
-            [
-                // Notifications popup - 0
-                false,
-                // Mind Body, homescreen, - 1
-                false,
-                // Final Choice, - 2
-                false,
-                // Session - 3
-                false,
-                // Session 2 - 4
-                false,
-                // Schedule - 5
-                false,
-                // Tracking - 6
-                false,
-                // Profile - 7
-                false,
-                // Profile 'Me' - 8
-                false,
-                // Profile 'Goals' - 9
-                false,
-                // Profile 'Nº Session' - 10
-                false,
-                // Settings - 11
-                false,
-                // Automatic Yoga - 12
-                false
-        ]
-        
-        
-        UserDefaults.standard.register(defaults: ["walkthroughs" : walkthroughArray])
-
-        
         // Walkthroughs
-        UserDefaults.standard.register(defaults: ["trackingWalkthrough" : false])
-        //
-        UserDefaults.standard.register(defaults: ["profileWalkthrough" : false])
-        UserDefaults.standard.register(defaults: ["meWalkthrough" : false])
-        UserDefaults.standard.register(defaults: ["goalsWalkthrough" : false])
-        UserDefaults.standard.register(defaults: ["nSessionsWalkthrough" : false])
-        //
-        UserDefaults.standard.register(defaults: ["settingsWalkthrough" : false])
-        UserDefaults.standard.register(defaults: ["automaticYogaWalkthrough" : false])
-
-        
+        UserDefaults.standard.register(defaults: ["walkthroughs" : Register.registerWalkthroughArray])
         
         
         //
@@ -116,10 +71,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window = UIWindow(frame: UIScreen.main.bounds)
             self.window?.rootViewController = mindBody
             self.window?.makeKeyAndVisible()
-//            if homeScreen == 2 {
-//                let mindBodyScreen = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mindBody") as! MindBody
-//                mindBodyScreen.performSegue(withIdentifier: "openMenu", sender: self)
-//            }
             //
             tabBarIndex = 0
         case 1:
@@ -133,7 +84,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             break
         }
         
-        //
         //
         return true
     }

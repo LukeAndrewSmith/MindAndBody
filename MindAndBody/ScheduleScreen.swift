@@ -1029,7 +1029,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
                 walkthroughs[5] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             })

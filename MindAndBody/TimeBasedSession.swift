@@ -1134,7 +1134,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
                 walkthroughs[4] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             })
