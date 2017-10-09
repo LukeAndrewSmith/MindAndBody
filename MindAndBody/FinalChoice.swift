@@ -597,7 +597,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         //
         // MARK: Walkthrough
-        if UserDefaults.standard.bool(forKey: "finalChoiceWalkthrough") == false {
+        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+        if walkthroughs[2] == false {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + AnimationTimes.animationTime3, execute: {
                 self.walkthroughFinalChoice()
             })
@@ -840,7 +841,13 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         switch selectedSession[0] {
         // Warmup
         case 0:
-            performSegue(withIdentifier: "sessionSegue", sender: self)
+            // Warmup uses stretching Screen
+            // NOTE: If time base 
+            if selectedSession[2] < 1 {
+                performSegue(withIdentifier: "sessionSegueStretching", sender: self)
+            } else {
+                performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
+            }
         // Workout
         case 1:
             switch selectedSession[1] {
@@ -1039,7 +1046,9 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                UserDefaults.standard.set(true, forKey: "finalChoiceWalkthrough")
+                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                walkthroughs[2] = true
+                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             })
         }
     }

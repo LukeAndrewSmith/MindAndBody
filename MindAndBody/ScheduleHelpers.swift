@@ -101,13 +101,21 @@ extension ScheduleScreen {
                 switch choiceProgress[1] {
                 // Type 1, hiit vs steady state
                 case 1:
+                    // Workout
                     if row == 2 {
+                        choiceProgress[1] = 3
+                        nextChoice()
+                    // Steady state cardio
+                    } else if row == 3 {
                         choiceProgress[1] = 5
                         nextChoice()
                     } else {
                         choiceProgress[1] += 1
                         nextChoice()
                     }
+                case 3:
+                    choiceProgress[1] += 1
+                    nextChoice()
                 // Session Choice, To Do
                 case 4:
                     // Test
@@ -349,27 +357,58 @@ extension ScheduleScreen {
                     selectedChoiceStretching[2] = 0 // nesting
                     //
                     // Steady State
-                    if row == 2 {
+                    if row == 3 {
                         // Cardio so select 0 for warmup/workout
                         selectedChoiceWarmup[3] = 0 // hiit / workout
                         selectedChoiceStretching[3] = 0 // hiit / workout
+                    // Cardio/Bodyweight Workout
+                    } else if row == 2 {
+                        selectedChoiceWarmup[3] = 3
+                        selectedChoiceSession[3] = 3
+                        selectedChoiceStretching[3] = 3
+                    } else {
+                        selectedChoiceWarmup[3] = row - 1
+                        selectedChoiceSession[3] = row - 1
+                        selectedChoiceStretching[3] = row - 1
                     }
                 //
-                // Hiit/Workout
+                // Rowing/Biking/Running
                 // Type: Hiit or workout
                 case 2:
-                    // Warmup (2,0,0...), extra zeros necessary due to nesting
-                    selectedChoiceWarmup[3] = row - 1 // hiit / workout
-                    // Session (2,1,0...)
-                    selectedChoiceSession[3] = row - 1 // hiit / workout
-                    // Stretching (2,2,0....)
-                    selectedChoiceStretching[3] = row - 1 // hiit / workout
+                    // Rowing Biking Running all is same array, so 0-2, 3-5, 6-8 all different sections.. Could be done better having them in seperate arrays however late addition
+                    // Below is to pass the info to length choice so that it knows which one to select
+                    
+                    // Row - 1 due to header
+                    selectedChoiceWarmup[3] = row - 1
+                    selectedChoiceSession[3] = row - 1
+                    selectedChoiceStretching[3] = row - 1
+//                    if row == 1 {
+//                        selectedChoiceWarmup[4] = 0
+//                        selectedChoiceSession[4] = 0
+//                        selectedChoiceStretching[4] = 0
+//                    } else if row == 2 {
+//                        selectedChoiceWarmup[4] = 3
+//                        selectedChoiceSession[4] = 3
+//                        selectedChoiceStretching[4] = 3
+//                    } else if row == 3 {
+//                        selectedChoiceWarmup[4] = 6
+//                        selectedChoiceSession[4] = 6
+//                        selectedChoiceStretching[4] = 6
+//                    }
+                    
                 // Length
                 case 3:
                     // Length = row - 1 due to title row
+                    // + selectedChoiceWarmup[4] as rowing/biking/running in same array
+                    
+                    // Row - 1 due to header
                     selectedChoiceWarmup[4] = row - 1
                     selectedChoiceSession[4] = row - 1
                     selectedChoiceStretching[4] = row - 1
+                    
+//                    selectedChoiceWarmup[4] = row - 1 + selectedChoiceWarmup[4]
+//                    selectedChoiceSession[4] = row - 1 + selectedChoiceWarmup[4]
+//                    selectedChoiceStretching[4] = row - 1 + selectedChoiceWarmup[4]
                     //
                     // TODO: Update last index, difficulty, based on profile data
                     // Testing so just set to 0
@@ -620,6 +659,7 @@ extension ScheduleScreen {
     //
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
+        if choiceProgress[0] == -1 {
         //
         // Forward 1 day
         if (extraSwipe.direction == .left){
@@ -699,6 +739,7 @@ extension ScheduleScreen {
                 snapShot2?.removeFromSuperview()
             })
             
+        }
         }
     }
     

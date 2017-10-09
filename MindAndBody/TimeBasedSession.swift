@@ -1,8 +1,8 @@
 //
-//  StretchingScreen.swift
+//  TimeBasedSession.swift
 //  MindAndBody
 //
-//  Created by Luke Smith on 24.05.17.
+//  Created by Luke Smith on 08.10.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
@@ -12,10 +12,10 @@ import UserNotifications
 
 
 //
-// Custom StretchingTableViewCell ---------------------------------------------------------------------------
+// Custom TimeBasedTableViewCell ---------------------------------------------------------------------------
 //
 // Stretching TableView Cell
-class StretchingTableViewCell: UITableViewCell {
+class TimeBasedTableViewCell: UITableViewCell {
     // Image View
     @IBOutlet weak var imageViewCell: UIImageView!
     //
@@ -24,16 +24,16 @@ class StretchingTableViewCell: UITableViewCell {
     @IBOutlet weak var rightImageIndicator: UIImageView!
     // Title Label
     @IBOutlet weak var movementLabel: UILabel!
-    // Sets x Reps label
-    @IBOutlet weak var setsRepsLabel: UILabel!
     // Explanation
     @IBOutlet weak var explanationButton: UIButton!
+    // Time Label
+    @IBOutlet weak var timeLabel: UILabel!
 }
 
 //
 // Stretching Screen Class ------------------------------------------------------------------------------------
 //
-class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //
     // Variables
@@ -63,7 +63,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     // To Add (@2x or @3x) for demonstration images
     var toAdd = String()
-
+    
     
     //
     // Outlets -----------------------------------------------------------------------------------------------------------
@@ -148,7 +148,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         tableView.backgroundView = tableViewBackground
         //
         tableView.tableFooterView = UIView()
-       
+        
     }
     
     
@@ -207,11 +207,11 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         //
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "StretchingTableViewCell", for: indexPath) as! StretchingTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TimeBasedTableViewCell", for: indexPath) as! TimeBasedTableViewCell
             
             //
             let key = keyArray[indexPath.row]
-           
+            
             //
             // Cell
             cell.backgroundColor = colour2
@@ -266,25 +266,6 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.movementLabel?.adjustsFontSizeToFitWidth = true
             
             //
-            // Set and Reps
-            // Stretching
-            if selectedSession[0] != 0 {
-                if breathsArray[indexPath.row] == 0 {
-                    cell.setsRepsLabel?.text = " "
-                } else {
-                    cell.setsRepsLabel?.text = String(breathsArray[indexPath.row]) + " " + NSLocalizedString("breathsC", comment: "")
-                }
-            // Warmup
-            } else {
-                let setsString = String(setsArray[indexPath.row])
-                cell.setsRepsLabel?.text = setsString + " x " + repsArray[indexPath.row]
-            }
-            cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            cell.setsRepsLabel?.textAlignment = .right
-            cell.setsRepsLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-            cell.setsRepsLabel.adjustsFontSizeToFitWidth = true
-            
-            //
             // Explanation
             cell.explanationButton.tintColor = colour1
             
@@ -327,12 +308,10 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             case selectedRow - 1:
                 cell.indicatorStack.alpha = 0
                 cell.movementLabel.alpha = 0
-                cell.setsRepsLabel.alpha = 0
                 cell.explanationButton.alpha = 0
             //
             case selectedRow:
                 cell.indicatorStack.alpha = 1
-                cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
                 //cell.demonstrationImageView.isUserInteractionEnabled = true
@@ -343,7 +322,6 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.selectionStyle = .none
                 //
                 cell.indicatorStack.alpha = 0
-                cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 0
                 //cell.demonstrationImageView.isUserInteractionEnabled = false
@@ -351,7 +329,6 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             default:
                 //
                 cell.indicatorStack.alpha = 1
-                cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
             }
@@ -409,7 +386,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             updateWeekProgress()
             updateMonthProgress()
             //
-            self.dismiss(animated: true)            
+            self.dismiss(animated: true)
         //
         default: break
         }
@@ -427,7 +404,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         let sender = imageTap.view as! UIImageView
         let tag = sender.tag
         let indexPath = NSIndexPath(row: tag, section: 0)
-        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! StretchingTableViewCell
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
         //
         let key = keyArray[indexPath.row]
         //
@@ -468,7 +445,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
             let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
             //
-            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! StretchingTableViewCell
+            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
             //
             UIView.animate(withDuration: 0.6, animations: {
                 //
@@ -477,14 +454,12 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 // 1
                 cell.movementLabel?.font = UIFont(name: "SFUIDisplay-light", size: 27)
                 cell.indicatorStack.alpha = 1
-                cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
                 //
                 // -1
-                cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! StretchingTableViewCell
+                cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! TimeBasedTableViewCell
                 cell.indicatorStack.alpha = 0
-                cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 0
                 cell.explanationButton.alpha = 0
                 //
@@ -509,7 +484,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
             let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
             //
-            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! StretchingTableViewCell
+            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
             //
             UIView.animate(withDuration: 0.6, animations: {
                 //
@@ -520,22 +495,19 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 
                 // 1
                 cell.indicatorStack.alpha = 1
-                cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
                 // - 1
                 if self.selectedRow > 0 {
-                    cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! StretchingTableViewCell
+                    cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! TimeBasedTableViewCell
                     cell.indicatorStack.alpha = 0
-                    cell.setsRepsLabel.alpha = 0
                     cell.movementLabel.alpha = 0
                     cell.explanationButton.alpha = 0
                 }
                 // + 1
-                cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! StretchingTableViewCell
+                cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! TimeBasedTableViewCell
                 cell.movementLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
                 cell.indicatorStack.alpha = 0
-                cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 0
                 //
@@ -621,7 +593,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
         //
         let indexPath = NSIndexPath(row: selectedRow, section: 0)
-        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! StretchingTableViewCell
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
         //
         let key = keyArray[indexPath.row]
         let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
@@ -1081,7 +1053,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             })
             
             
-        // Progress
+            // Progress
         // Case 9 not 8 as + 1 to walkthroughprogress twice in case 7 for label reasons (need an empty label)
         case 9:
             //

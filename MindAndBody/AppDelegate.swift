@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaults = UserDefaults.standard
         
         
-        
         //
         // Tracking
         // Progress
@@ -40,20 +39,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.register(defaults: ["lastResetWeek" : Date().firstMondayInCurrentWeek])
         defaults.register(defaults: ["lastResetMonth" : Date().firstDateInCurrentMonth])
         
+        
         //
         // Settings
-        // Background image index
-        UserDefaults.standard.register(defaults: ["backgroundImage" : 2])
-        // Home Screen
-        UserDefaults.standard.register(defaults: ["homeScreen" : 0])
-        // Default Image
-        UserDefaults.standard.register(defaults: ["defaultImage" : "demonstration"])
-        // Weight
-        UserDefaults.standard.register(defaults: ["units" : "kg"])
-        // Rest times
-        UserDefaults.standard.register(defaults: ["restTimes" : [15, 45, 10]])
-        // Yoga Automatic
-        UserDefaults.standard.register(defaults: ["automaticYoga" : [0, -1, -1, -1]])
+        UserDefaults.standard.register(defaults: ["userSettings" : Register.defaultSettings])
+        
         
         //
         // Profile/Schedules
@@ -65,21 +55,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["profileAnswers" : scheduleDataStructures.defaultProfileAnswers])
 
         
-        
         //
         // Walkthrough
-        // Notifications popup
-        UserDefaults.standard.register(defaults: ["notificationsPopup" : false])
+        let walkthroughArray: [Bool] =
+            [
+                // Notifications popup - 0
+                false,
+                // Mind Body, homescreen, - 1
+                false,
+                // Final Choice, - 2
+                false,
+                // Session - 3
+                false,
+                // Session 2 - 4
+                false,
+                // Schedule - 5
+                false,
+                // Tracking - 6
+                false,
+                // Profile - 7
+                false,
+                // Profile 'Me' - 8
+                false,
+                // Profile 'Goals' - 9
+                false,
+                // Profile 'Nº Session' - 10
+                false,
+                // Settings - 11
+                false,
+                // Automatic Yoga - 12
+                false
+        ]
+        
+        
+        UserDefaults.standard.register(defaults: ["walkthroughs" : walkthroughArray])
+
+        
         // Walkthroughs
-        UserDefaults.standard.register(defaults: ["mindBodyWalkthrough" : false])
-        //
-        UserDefaults.standard.register(defaults: ["finalChoiceWalkthrough" : false])
-        UserDefaults.standard.register(defaults: ["sessionWalkthrough" : false])
-        UserDefaults.standard.register(defaults: ["sessionWalkthrough2" : false])
-        UserDefaults.standard.register(defaults: ["yogaSessionWalkthrough" : false])
-        //
-        UserDefaults.standard.register(defaults: ["scheduleWalkthrough" : false])
-        //
         UserDefaults.standard.register(defaults: ["trackingWalkthrough" : false])
         //
         UserDefaults.standard.register(defaults: ["profileWalkthrough" : false])
@@ -95,7 +107,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //
         // Set Home Screen
-        let homeScreen = UserDefaults.standard.integer(forKey: "homeScreen")
+        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let homeScreen = settings[1][0]
         //
         switch homeScreen {
         case 0,2:

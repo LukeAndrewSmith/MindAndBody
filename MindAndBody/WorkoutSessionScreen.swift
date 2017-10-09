@@ -105,7 +105,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 alert.dismiss(animated: true, completion: nil)
                 //
                 // MARK: Walkthrough
-                if UserDefaults.standard.bool(forKey: "sessionWalkthrough2") == false {
+                let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                if walkthroughs[4] == false {
                     self.walkthroughSession()
                 }
             }
@@ -235,7 +236,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         
             // New image to display
             // Demonstration on left
-            if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let defaultImage = settings[5][0]
+            if defaultImage == 0 {
                 // [key] = key, [0] = first image
                 cell.imageViewCell.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
                 // Indicator
@@ -508,7 +511,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             //
             // Rest Timer
-            let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let restTimes = settings[4]
             let duration = restTimes[1]
             let endingTime = Int(startTime) + duration
             //
@@ -578,7 +582,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     func endRound() {
         // Rest Alert
         //
-        let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let restTimes = settings[4]
         restTime = restTimes[1]
         //
         restMessage = "\n" + String(restTime)
@@ -758,7 +763,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let defaultImage = settings[5][0]
+            if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     sender.startAnimating()
                 }
@@ -971,7 +978,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     
                     // New image to display
                     // Demonstration on left
-                    if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+                    var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                    let defaultImage = settings[5][0]
+                    if defaultImage == 0 {
                         cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[selectedSession[0]][key]! + toAdd)
                         // Indicator
                         if imageCount > 1 {
@@ -1019,7 +1028,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     
                     // New image to display
                     // Demonstration on left
-                    if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+                    var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                    let defaultImage = settings[5][0]
+                    if defaultImage == 0 {
                         cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![0])
                         // Indicator
                         if imageCount > 1 {
@@ -1490,7 +1501,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                UserDefaults.standard.set(true, forKey: "sessionWalkthrough2")
+                let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                walkthroughs[4] = true
+                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             })
         }
     }

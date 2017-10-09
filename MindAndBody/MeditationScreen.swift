@@ -88,8 +88,8 @@ class MeditationScreen: UIViewController {
         backgroundImage.frame = view.bounds
         
         // Background Index
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
-        
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let backgroundIndex = settings[0][0]
         //
         // Background Image/Colour
         //
@@ -122,7 +122,8 @@ class MeditationScreen: UIViewController {
         //
         // Colours
         //
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let backgroundIndex = settings[0][0]
         //
         switch backgroundIndex {
         // All Black

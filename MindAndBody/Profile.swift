@@ -23,8 +23,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     //
-    let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
-    let backgroundBlur = UIVisualEffectView()
+    let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+    var backgroundIndex = Int()
+    var backgroundBlur = UIVisualEffectView()
     
     //
     // Arrays
@@ -40,6 +41,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //
+        backgroundIndex = settings[0][0]
         
         // Present walkthrough 2
         if UserDefaults.standard.bool(forKey: "profileWalkthrough") == false {

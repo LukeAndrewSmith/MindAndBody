@@ -105,7 +105,9 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         blur7.removeFromSuperview()
         
         // Background Index
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let backgroundIndex = settings[0][0]
+
         
         //
         // Background Image/Colour
@@ -230,21 +232,24 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             }
             //
-            UserDefaults.standard.set(true, forKey: "notificationsPopup")
+            var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+            walkthroughs[0] = true
+            UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             self.walkthroughMindBody()
         }
         //
         alert.addAction(okAction)
         
         // Notifications Popup
-        if UserDefaults.standard.bool(forKey: "notificationsPopup") == false {
+        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+        if walkthroughs[0] == false {
             self.present(alert, animated: true, completion: nil)
         }
-        
         //
         // Walkthroughs
         // Walkthrough app overview
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthrough") == false && UserDefaults.standard.bool(forKey: "notificationsPopup") == true {
+        // mindBody walkthrough == false, notifications popup == true
+        if walkthroughs[1] == false && walkthroughs[0] == true {
             self.walkthroughMindBody()
         }
         
@@ -349,7 +354,9 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         //
         // Home Screen
         if isInitialAppOpen == true {
-            let homeScreen = UserDefaults.standard.integer(forKey: "homeScreen")
+            // Deselect previous selection
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let homeScreen = settings[1][0]
             if homeScreen == 2 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                     self.performSegue(withIdentifier: "openMenu", sender: self)
@@ -471,8 +478,8 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         
         
        
-        
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let backgroundIndex = settings[0][0]
         if backgroundIndex == backgroundImageArray.count {
         } else {
             //
@@ -833,8 +840,14 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
                     self.walkthroughView.alpha = 0
                 }, completion: { finished in
                     self.walkthroughView.removeFromSuperview()
-                    UserDefaults.standard.set(true, forKey: "mindBodyWalkthrough")
-                    UserDefaults.standard.set(1, forKey: "homeScreen")
+                    // Walkthrough
+                    var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                    walkthroughs[1] = true
+                    UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+                    // Settings
+                    var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                    settings[1][0] = 1
+                    UserDefaults.standard.set(settings, forKey: "userSettings")
                 })
             }
         }

@@ -27,7 +27,8 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
     //
-    let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
+    let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+    var backgroundIndex = Int()
     let backgroundBlur = UIVisualEffectView()
     
     
@@ -62,7 +63,9 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
    //
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
+        backgroundIndex = settings[0][0]
+        
         //
         tableView.backgroundColor = .clear
         tableView.backgroundView = UIView()

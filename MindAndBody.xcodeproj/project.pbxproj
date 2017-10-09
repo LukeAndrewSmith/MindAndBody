@@ -490,6 +490,7 @@
 		078F409A1F4B700800B4F566 /* SwiftCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078F40951F4B6C1C00B4F566 /* SwiftCharts.framework */; };
 		078F409B1F4B700800B4F566 /* SwiftCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 078F40951F4B6C1C00B4F566 /* SwiftCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872A1E7B4E2C00E7153A /* SessionScreen.swift */; };
+		0798381E1F8A8DD9007C3CF5 /* TimeBasedSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798381D1F8A8DD8007C3CF5 /* TimeBasedSession.swift */; };
 		07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */; };
 		07995A391E893E590009C9B1 /* ScheduleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07995A381E893E590009C9B1 /* ScheduleScreen.swift */; };
 		07A42E481EDDFD3C0047E8F1 /* CardioChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E471EDDFD3C0047E8F1 /* CardioChoiceCustom.swift */; };
@@ -1871,6 +1872,7 @@
 		0789ED051F79A6EA000EB739 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		078F408E1F4B6C1C00B4F566 /* SwiftCharts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftCharts.xcodeproj; path = ../../Code/Carthage/Carthage/Checkouts/SwiftCharts/SwiftCharts.xcodeproj; sourceTree = "<group>"; };
 		0791872A1E7B4E2C00E7153A /* SessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionScreen.swift; sourceTree = "<group>"; };
+		0798381D1F8A8DD8007C3CF5 /* TimeBasedSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedSession.swift; sourceTree = "<group>"; };
 		07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundImageCollection.swift; sourceTree = "<group>"; };
 		07995A381E893E590009C9B1 /* ScheduleScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleScreen.swift; sourceTree = "<group>"; };
 		07A42E471EDDFD3C0047E8F1 /* CardioChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioChoiceCustom.swift; sourceTree = "<group>"; };
@@ -2906,10 +2908,11 @@
 		07530C981E96717B00BD33EC /* Session Screens */ = {
 			isa = PBXGroup;
 			children = (
-				079187271E7B4DCD00E7153A /* Warmup/Workout */,
+				079187271E7B4DCD00E7153A /* Workout */,
 				072829E61EA8A0C80090164A /* Circuit Workout */,
 				076C68441ED58D18009160C2 /* Cardio */,
-				076C68431ED58D0E009160C2 /* Stretching */,
+				076C68431ED58D0E009160C2 /* Stretching/Warmup */,
+				0798381F1F8A8DDF007C3CF5 /* Time Based */,
 				07BDFEFE1EB1E69700B131D7 /* Yoga Screen */,
 				0719F2B31E50F8D100AC6729 /* Meditation Screens */,
 			);
@@ -3009,12 +3012,12 @@
 			name = Meditation;
 			sourceTree = "<group>";
 		};
-		076C68431ED58D0E009160C2 /* Stretching */ = {
+		076C68431ED58D0E009160C2 /* Stretching/Warmup */ = {
 			isa = PBXGroup;
 			children = (
 				076C68451ED58D65009160C2 /* StretchingScreen.swift */,
 			);
-			name = Stretching;
+			name = Stretching/Warmup;
 			sourceTree = "<group>";
 		};
 		076C68441ED58D18009160C2 /* Cardio */ = {
@@ -4479,12 +4482,20 @@
 			name = wristRotations;
 			sourceTree = "<group>";
 		};
-		079187271E7B4DCD00E7153A /* Warmup/Workout */ = {
+		079187271E7B4DCD00E7153A /* Workout */ = {
 			isa = PBXGroup;
 			children = (
 				0791872A1E7B4E2C00E7153A /* SessionScreen.swift */,
 			);
-			name = Warmup/Workout;
+			name = Workout;
+			sourceTree = "<group>";
+		};
+		0798381F1F8A8DDF007C3CF5 /* Time Based */ = {
+			isa = PBXGroup;
+			children = (
+				0798381D1F8A8DD8007C3CF5 /* TimeBasedSession.swift */,
+			);
+			name = "Time Based";
 			sourceTree = "<group>";
 		};
 		07995A371E86A83A0009C9B1 /* Settings */ = {
@@ -8279,6 +8290,7 @@
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,
 				07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */,
 				07EFC0AA1F6585560030DCE6 /* ProfileDetail.swift in Sources */,
+				0798381E1F8A8DD9007C3CF5 /* TimeBasedSession.swift in Sources */,
 				07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */,
 				077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */,
 				077AC1001DA54C810026895B /* Lessons.swift in Sources */,

@@ -166,7 +166,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let yPosition = CGFloat(91)
         offView.frame = CGRect(x: 0, y: yPosition, width: self.view.frame.size.width, height: view.frame.size.height - yPosition)
         
-        let automaticYogaArray = UserDefaults.standard.object(forKey: "automaticYoga") as! [Int]
+        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let automaticYogaArray = settings[3]
         // Retreive Presentation Style
         if automaticYogaArray[0] == 0 {
             view.insertSubview(offView, aboveSubview: tableViewAutomatic)
@@ -266,7 +267,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             //
-            let automaticYogaArray = UserDefaults.standard.object(forKey: "automaticYoga") as! [Int]
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let automaticYogaArray = settings[3]
 
             //
             switch indexPath.section {
@@ -322,7 +324,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.tintColor = colour1
             
             //
-            let automaticYogaArray = UserDefaults.standard.object(forKey: "automaticYoga") as! [Int]
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let automaticYogaArray = settings[3]
             if didChangeTransitionIndicator == false {
                 if automaticYogaArray[3] != -1 {
                     selectedTransitionIndicator = automaticYogaArray[3]
@@ -361,7 +364,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         let cell = tableView.cellForRow(at: indexPath)
         //
-        var automaticYogaArray = UserDefaults.standard.object(forKey: "automaticYoga") as! [Int]
+        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let automaticYogaArray = settings[3]
         
         //
         switch tableView {
@@ -374,7 +378,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 if automaticYogaArray[0] == 0 {
                     //
                     cell?.textLabel?.text = NSLocalizedString("on", comment: "")
-                    automaticYogaArray[0] = 1
+                    settings[3][0] = 1
                 
                     if automaticYogaArray[1] == -1 && automaticYogaArray[2] == -1 {
                         navigationItem.hidesBackButton = true
@@ -396,7 +400,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 } else {
                     //
                     cell?.textLabel?.text = NSLocalizedString("off", comment: "")
-                    automaticYogaArray[0] = 0
+                    settings[3][0] = 0
                     //
                     navigationItem.hidesBackButton = false
                 
@@ -413,7 +417,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     })
                 }
                 //
-                UserDefaults.standard.set(automaticYogaArray, forKey: "automaticYoga")
+                UserDefaults.standard.set(settings, forKey: "userSettings")
                 
             // Breath Length
             case 1:
@@ -683,15 +687,16 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         //
         let defaults = UserDefaults.standard
-        var automaticYogaArray = defaults.object(forKey: "automaticYoga") as! [Int]
+        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let automaticYogaArray = settings[3]
         //
         switch selectedItem {
         //
         // Breath Length
         case 0:
             //
-            automaticYogaArray[1] = pickerView.selectedRow(inComponent: 0)
-            defaults.set(automaticYogaArray, forKey: "automaticYoga")
+            settings[3][1] = pickerView.selectedRow(inComponent: 0)
+            defaults.set(settings, forKey: "userSettings")
             //
             let indexPath = NSIndexPath(row: 0, section: 1)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
@@ -700,8 +705,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Transition time
         case 1:
             //
-            automaticYogaArray[2] = pickerView.selectedRow(inComponent: 0)
-            defaults.set(automaticYogaArray, forKey: "automaticYoga")
+            settings[3][2] = pickerView.selectedRow(inComponent: 0)
+            defaults.set(settings, forKey: "userSettings")
             //
             let indexPath = NSIndexPath(row: 0, section: 2)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
@@ -716,13 +721,13 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }
             }
             //
-            automaticYogaArray[3] = selectedTransitionIndicator
+            settings[3][3] = selectedTransitionIndicator
             //
             let indexPath = NSIndexPath(row: 0, section: 3)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
             cell?.textLabel?.text = NSLocalizedString(bellsArray[selectedTransitionIndicator], comment: "")
             //
-            defaults.set(automaticYogaArray, forKey: "automaticYoga")
+            defaults.set(settings, forKey: "userSettings")
             //
             selectedTransitionIndicator = -1
             //
@@ -732,9 +737,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         if automaticYogaArray[1] != -1 && automaticYogaArray[2] != -1 {
             navigationItem.hidesBackButton = false
         }
-        
-        //
-        defaults.synchronize()
         
         //
         // Remove View

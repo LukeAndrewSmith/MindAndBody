@@ -12,7 +12,8 @@ import UIKit
 class ScheduleCreator: UIViewController {
     
     //
-    let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
+    let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+    var backgroundIndex = Int()
     let backgroundImageView = UIImageView()
     let backgroundBlur = UIVisualEffectView()
     
@@ -26,6 +27,7 @@ class ScheduleCreator: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        backgroundIndex = settings[0][0]
         //
         // Background Image
         backgroundImageView.frame = UIScreen.main.bounds

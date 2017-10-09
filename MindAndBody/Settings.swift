@@ -141,18 +141,19 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         let defaults = UserDefaults.standard
         // Rest time
         if actionSheetView.subviews.contains(restTimePicker) {
-            var restTimes = defaults.object(forKey: "restTimes") as! [Int]
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let restTimes = settings[4]
             //
-            restTimes[selectedRow] = restTimesArray[restTimePicker.selectedRow(inComponent: 0)]
-            defaults.set(restTimes, forKey: "restTimes")
+            settings[4][selectedRow] = restTimesArray[restTimePicker.selectedRow(inComponent: 0)]
+            defaults.set(settings, forKey: "userSettings")
             //
         // Home Screen
         } else if actionSheetView.subviews.contains(homeScreenPicker) {
-            var homeScreen = defaults.integer(forKey: "homeScreen")
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
             //
-            homeScreen = homeScreenPicker.selectedRow(inComponent: 0)
+            settings[1][0] = homeScreenPicker.selectedRow(inComponent: 0)
             //
-            defaults.set(homeScreen, forKey: "homeScreen")
+            defaults.set(settings, forKey: "userSettings")
         }
             
             
@@ -178,7 +179,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
 // Sections
     // Number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
+        return 8
     }
     
     // Section Titles
@@ -186,11 +187,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         switch section {
         case 0: return NSLocalizedString("backgroundImage", comment: "")
         case 1: return NSLocalizedString("homePage", comment: "")
-        case 2: return NSLocalizedString("automaticYoga", comment: "")
-        case 3: return NSLocalizedString("restTime", comment: "")
-        case 4: return NSLocalizedString("defaultImage", comment: "")
-        case 5: return NSLocalizedString("units", comment: "")
-        case 6: return NSLocalizedString("reset", comment: "")
+        case 2: return NSLocalizedString("timedSession", comment: "")
+        case 3: return NSLocalizedString("automaticYoga", comment: "")
+        case 4: return NSLocalizedString("restTime", comment: "")
+        case 5: return NSLocalizedString("defaultImage", comment: "")
+        case 6: return NSLocalizedString("units", comment: "")
+        case 7: return NSLocalizedString("reset", comment: "")
         default: return ""
         }
     }
@@ -227,9 +229,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         switch section {
-        case 0,1,2,4,5: return 1
-        case 3: return 3
-        case 6: return 2
+        case 0,1,2,3,5,6: return 1
+        case 4: return 3
+        case 7: return 2
         default: break
         }
         return 0
@@ -256,8 +258,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             backgroundImageView.center.y = cell.center.y
             
             // Retreive background index
-            let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
-            
+            let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let backgroundIndex = settings[0][0]
             // Set image background based on index
             if backgroundIndex < backgroundImageArray.count {
                 backgroundImageView.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
@@ -286,11 +288,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
            
             
         // Yoga Automatic
-        case 2:
+        case 3:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
-            let automaticYogaArray = UserDefaults.standard.object(forKey: "automaticYoga") as! [Int]
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let automaticYogaArray = settings[3]
             // Retreive Presentation Style
             if automaticYogaArray[0] == 0 {
                 cell.textLabel?.text = NSLocalizedString("off", comment: "")
@@ -309,7 +312,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
             
         // Rest Time
-        case 3:
+        case 4:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             let row = indexPath.row
@@ -318,7 +321,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.textLabel?.text = NSLocalizedString(restTimeTitles[indexPath.row], comment: "")
             //
             // Retreive Rest Time
-            let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let restTimes = settings[4]
             cell.detailTextLabel?.text = String(restTimes[indexPath.row]) + " s"
             //
             //
@@ -333,19 +337,41 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
             
             
-        // Home Screen, Default Image, Units
-        case 1,4,5:
+        // Home Screen, Timed Session, Default Image, Units
+        case 1,2,5,6:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             // Retreive Presentation Style
             switch indexPath.section {
             case 1:
-                let homeScreen = UserDefaults.standard.integer(forKey: "homeScreen")
+                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                let homeScreen = settings[1][0]
                 cell.textLabel?.text = NSLocalizedString(homeScreenArray[homeScreen], comment: "")
-            case 4:
-                cell.textLabel?.text = NSLocalizedString(UserDefaults.standard.string(forKey: "defaultImage")!, comment: "")
+            case 2:
+                // timed schedule sessions
+                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                let timedSession = settings[2][0]
+                if timedSession == 0 {
+                    cell.textLabel?.text = NSLocalizedString("on", comment: "")
+                } else {
+                    cell.textLabel?.text = NSLocalizedString("off", comment: "")
+                }
             case 5:
-                cell.textLabel?.text = UserDefaults.standard.string(forKey: "units")
+                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                let defaultImage = settings[5][0]
+                if defaultImage == 0 {
+                    cell.textLabel?.text = NSLocalizedString("demonstration", comment: "")
+                } else {
+                    cell.textLabel?.text = NSLocalizedString("targetArea", comment: "")
+                }
+            case 6:
+                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                let units = settings[6][0]
+                if units == 0 {
+                    cell.textLabel?.text = NSLocalizedString("metric", comment: "")
+                } else {
+                    cell.textLabel?.text = NSLocalizedString("imperial", comment: "")
+                }
             default: break
             }
             cell.textLabel?.textAlignment = NSTextAlignment.left
@@ -356,7 +382,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
             
         // Reset
-        case 6:
+        case 7:
         //
             // Reset Walkthrough
             if indexPath.row == 0 {
@@ -409,7 +435,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             actionSheetView.addSubview(homeScreenPicker)
             
             //
-            let homeScreen = UserDefaults.standard.integer(forKey: "homeScreen")
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let homeScreen = settings[1][0]
             // View
             let homeWidth = UIScreen.main.bounds.width - 20
             let homeHeight = CGFloat(147 + 49)
@@ -445,7 +472,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
             
         // Yoga Automatic
-        case 2:
+        case 3:
             //
             //
             // Segue to homescreen choice
@@ -456,7 +483,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
 
             
         // Rest Time
-        case 3:
+        case 4:
             //
             if actionSheetView.subviews.contains(homeScreenPicker) {
                 let i = actionSheetView.subviews.index(of: homeScreenPicker)
@@ -468,7 +495,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             selectedRow = indexPath.row
             //
-            let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let restTimes = settings[4]
             // View
             let restWidth = UIScreen.main.bounds.width - 20
             let restHeight = CGFloat(147 + 49)
@@ -511,15 +539,19 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
             
         // Default Image
-        case 4:
+        case 5:
             // demonstration --> targetArea
-            if cell?.textLabel?.text == NSLocalizedString("demonstration", comment: "") {
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let defaultImage = settings[5][0]
+            if defaultImage == 0 {
                 cell?.textLabel?.text = NSLocalizedString("targetArea", comment: "")
-                UserDefaults.standard.set("targetArea", forKey: "defaultImage")
-                // targetArea --> demonstration
-            } else if cell?.textLabel?.text == NSLocalizedString("targetArea", comment: "") {
+                settings[5][0] = 1
+                UserDefaults.standard.set(settings, forKey: "userSettings")
+            // targetArea --> demonstration
+            } else if defaultImage == 1 {
                 cell?.textLabel?.text = NSLocalizedString("demonstration", comment: "")
-                UserDefaults.standard.set("demonstration", forKey: "defaultImage")
+                settings[5][0] = 0
+                UserDefaults.standard.set(settings, forKey: "userSettings")
             }
             tableView.deselectRow(at: indexPath, animated: true)
             //
@@ -528,16 +560,20 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
 
             
         // Units
-        case 5:
+        case 6:
         //  
             // kg --> lb
-            if cell?.textLabel?.text == "kg" {
-                cell?.textLabel?.text = "lb"
-                UserDefaults.standard.set("lb", forKey: "units")
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let units = settings[6][0]
+            if units == 0 {
+                cell?.textLabel?.text = NSLocalizedString("imperial", comment: "")
+                settings[6][0] = 1
+                UserDefaults.standard.set(settings, forKey: "userSettings")
             // lb --> kg
-            } else if cell?.textLabel?.text == "lb" {
-                cell?.textLabel?.text = "kg"
-                UserDefaults.standard.set("kg", forKey: "units")
+            } else if units == 1 {
+                cell?.textLabel?.text = NSLocalizedString("metric", comment: "")
+                settings[6][0] = 0
+                UserDefaults.standard.set(settings, forKey: "userSettings")
             }
             tableView.deselectRow(at: indexPath, animated: true)
             //
@@ -546,7 +582,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
         
         // Reset
-        case 6:
+        case 7:
         //
             // Reset Walkthrough
             if indexPath.row == 0 {
@@ -569,24 +605,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
 
                 // Walkthrough
                     // Reset Walkthroughs
-                    UserDefaults.standard.set(false, forKey: "mindBodyWalkthrough")
-                    //
-                    UserDefaults.standard.set(false, forKey: "finalChoiceWalkthrough")
-                    UserDefaults.standard.set(false, forKey: "sessionWalkthrough")
-                    UserDefaults.standard.set(false, forKey: "sessionWalkthrough2")
-                    UserDefaults.standard.set(true, forKey: "yogaSessionWalkthrough")
-                    //
-                    UserDefaults.standard.set(false, forKey: "scheduleWalkthrough")
-                    //
-                    UserDefaults.standard.set(false, forKey: "trackingWalkthrough")
-                    //
-                    UserDefaults.standard.set(false, forKey: "profileWalkthrough")
-                    UserDefaults.standard.set(false, forKey: "meWalkthrough")
-                    UserDefaults.standard.set(false, forKey: "goalsWalkthrough")
-                    UserDefaults.standard.set(false, forKey: "nSessionsWalkthrough")
-                    //
-                    UserDefaults.standard.set(false, forKey: "settingsWalkthrough")
-                    UserDefaults.standard.set(false, forKey: "automaticYogaWalkthrough")
+                    var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                    // not including notifications popup
+                    for i in 1...(walkthroughs.count - 1) {
+                        walkthroughs[i] = false
+                    }
+                    UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                 
                 //
                 // Alert View indicating need for app reset

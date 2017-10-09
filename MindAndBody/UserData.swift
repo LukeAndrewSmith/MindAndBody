@@ -195,3 +195,25 @@ enum customSectionEmtpySessions {
 
 }
 
+// Settings
+enum Register {
+    //
+    // Settings
+    static let defaultSettings: [[Int]] = [
+        // Background image index
+        [2],
+        // Home Screen
+        [0],
+        // Time Based Sessions
+        [0], // == Off
+        // Yoga Automatic
+        [0, -1, -1, -1],
+        // Rest times
+        [15, 45, 10],
+        // Default Image
+        [0],   // 0 == "demonstration", 1 == "targetArea"
+        // Metric/
+        [0], // == "kg"
+    ]
+}
+

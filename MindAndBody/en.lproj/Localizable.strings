@@ -158,15 +158,15 @@
 "enduranceToDo" = "Endurance - To Do";
 "enduranceType" = "Endurance - Type";
 "enduranceType2" = "Endurance - Type - 2";
-"steadyState" = "Steady State";
+"steadyState" = "Steady State (Without the app (e.g 5km run))";
     // Choice 2
     "enduranceType" = "Endurance - Type";
 // Toning
 "toningToDo" = "Toning - To Do";
 "toningType" = "Toning Type";
     // Choice 1
-    "highIntensityCardio" = "High Intensity Cardio";
-    "bodyWeightWorkout" = "Bodyweight Workout";
+    "highIntensityCardio" = "High Intensity: Cardio";
+    "highIntensityWorkout" = "High Intensity: Bodyweight Workout";
 // Muscle Gain
 "muscleGainToDo" = "Muscle Gain - To Do";
 "muscleGainType" = "Muscle Gain Type";
@@ -363,7 +363,7 @@
 // Warm Up Upper Movements Explanations
 //
 // Mandatory
-"5minCardioEH" = "Any form of cardio works;\nTreadmill (brisk walk)\nStep Machine (my favourite)\nBiking\nRowing, etc.";
+"5minCardioEH" = "Any form of cardio works;\nTreadmill (brisk walk)\nStep Machine (my favourite)\nBiking\nRowing, etc.\nNote for cardio home:\nWalking up stairs\nJogging/Jumping on the spot\nAnything to get your heart pumping!";
 "5minCardioEA" = "Pushing yourself";
 "5minCardioEF" = "Relaxing the mind\nBreathing";
 //Purpose:\nThe cardio should raise the body temperature, heart rate, and blood flow which together increase the flexibility of muscles and joints.

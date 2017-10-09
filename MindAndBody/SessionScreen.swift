@@ -106,7 +106,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 alert.dismiss(animated: true, completion: nil)
                 //
                 // MARK: Walkthrough
-                if UserDefaults.standard.bool(forKey: "sessionWalkthrough") == false {
+                let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                if walkthroughs[3] == false {
                     self.walkthroughSession()
                 }
             }
@@ -364,7 +365,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             // New image to display
             // Demonstration on left
-            if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let defaultImage = settings[5][0]
+            if defaultImage == 0 {
                 // [key] = key, [0] = first image
                 cell.imageViewCell.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
                 // Indicator
@@ -631,7 +634,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let defaultImage = settings[5][0]
+            if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     sender.startAnimating()
                 }
@@ -835,7 +840,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     
                     // New image to display
                     // Demonstration on left
-                    if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+                    var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                    let defaultImage = settings[5][0]
+                    if defaultImage == 0 {
                         cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[selectedSession[0]][key]! + toAdd)
                             // Indicator
                             if imageCount > 1 {
@@ -883,7 +890,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     
                     // New image to display
                     // Demonstration on left
-                    if UserDefaults.standard.string(forKey: "defaultImage") == "demonstration" {
+                    var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                    let defaultImage = settings[5][0]
+                    if defaultImage == 0 {
                         cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![0])
                         // Indicator
                         if imageCount > 1 {
@@ -1375,9 +1384,11 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                UserDefaults.standard.set(true, forKey: "sessionWalkthrough")
+                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                walkthroughs[3] = true
                 // Session walkthrough 2 there so this walkthrough is always seen (important note on rest timer that isnt in circuit/stretching)
-                UserDefaults.standard.set(true, forKey: "sessionWalkthrough2")
+                walkthroughs[4] = true
+                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             })
         }
     }

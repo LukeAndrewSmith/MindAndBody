@@ -80,7 +80,7 @@ extension UIViewController {
     func numberGroups() {
         // Fetch Arrays
         // [mind, flexibility, endurance, toning, muscle gain, strength]
-        updatedSessionsArray = [0,0,0,0,0,0,0]
+        updatedSessionsArray =  [0,0,0,0,0,0,0]
         let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
         
         // MARK: Preliminary Groups, Using 'Me'

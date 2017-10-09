@@ -33,8 +33,9 @@ extension ScheduleScreen {
         if choiceProgress[1] > 1 {
             // Meditation has two choice paths
             if choiceProgress[0] == 0 && choiceProgress[1] == 5 {
-            choiceProgress[1] = 1
-            } else if choiceProgress[0] == 2 && choiceProgress[1] == 5 {
+                choiceProgress[1] = 1
+            // Endurance has 3 choice paths
+            } else if choiceProgress[0] == 2 && choiceProgress[1] == 5 || choiceProgress[0] == 2 && choiceProgress[1] == 3 && selectedChoiceWarmup[3] == 3 {
                 choiceProgress[1] = 1
             // Toning has two choice paths
             } else if choiceProgress[0] == 3 && choiceProgress[1] == 5 {
@@ -45,7 +46,7 @@ extension ScheduleScreen {
                 choiceProgress[1] -= 1
             }
             slideRight()
-            // Return to choice 0 (groups)
+        // Return to choice 0 (groups)
         } else if choiceProgress[1] == 1 {
             choiceProgress[0] = -1
             choiceProgress[1] = 0

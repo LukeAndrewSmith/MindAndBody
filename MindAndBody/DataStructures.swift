@@ -3308,7 +3308,7 @@ enum sessionData {
                 // Extra level so all levels nested to same degree
                 // 2,0,0
                 [
-                    // 2,0,0,0 | High Intensity / Cardio (Also used for steady state cardio)
+                    // 2,0,0,0 | High Intensity / Running / Cardio (Also used for steady state cardio)
                     [
                         // 2,0,0,0,0 | Short
                         [
@@ -3338,7 +3338,7 @@ enum sessionData {
                             [0,0,1]
                         ]
                     ],
-                    // 2,0,0,1 | Bodyweight Workout
+                    // 2,0,0,1 | High Intensity / Biking
                     [
                         // 2,0,0,1,0 | Short
                         [
@@ -3358,7 +3358,67 @@ enum sessionData {
                             // Hard
                             [0,0,1]
                         ],
-                        // 2,0,0,1,0,2 | Long
+                        // 2,0,0,1,2 | Long
+                        [
+                            // Easy
+                            [0,0,1],
+                            // Medium
+                            [0,0,1],
+                            // Hard
+                            [0,0,1]
+                        ]
+                    ],
+                    // 2,0,0,2 | High Intensity / Rowing
+                    [
+                        // 2,0,0,2,0 | Short
+                        [
+                            // Easy
+                            [0,0,1],
+                            // Medium
+                            [0,0,1],
+                            // Hard
+                            [0,0,1]
+                        ],
+                        // 2,0,0,2,1 | Medium
+                        [
+                            // Easy
+                            [0,0,1],
+                            // Medium
+                            [0,0,1],
+                            // Hard
+                            [0,0,1]
+                        ],
+                        // 2,0,0,2,2 | Long
+                        [
+                            // Easy
+                            [0,0,1],
+                            // Medium
+                            [0,0,1],
+                            // Hard
+                            [0,0,1]
+                        ]
+                    ],
+                    // 2,0,0,3 | Bodyweight Workout
+                    [
+                        // 2,0,0,3,0 | Short
+                        [
+                            // Easy
+                            [0,0,1],
+                            // Medium
+                            [0,0,1],
+                            // Hard
+                            [0,0,1]
+                        ],
+                        // 2,0,0,3,1 | Medium
+                        [
+                            // Easy
+                            [0,0,1],
+                            // Medium
+                            [0,0,1],
+                            // Hard
+                            [0,0,1]
+                        ],
+                        // 2,0,0,3,2 | Long
                         [
                             // Easy
                             [0,0,1],
@@ -3375,9 +3435,9 @@ enum sessionData {
                     // Extra level so all nested to same degree
                     // 2,1,0
                     [
-                        // 2,1,0,0 | High Intensity Cardio
+                        // 2,1,0,0 | High Intensity Cardio/ Running
                         [
-                            // 2,1,0,0,0 | Short
+                            // 2,1,0,0,0 | Short Running
                             [
                                 // Easy
                                 [2,0,1],
@@ -3386,7 +3446,7 @@ enum sessionData {
                                 // Hard
                                 [2,0,1]
                             ],
-                            // 2,1,0,0,1 | Medium
+                            // 2,1,0,0,1 | Medium Running
                             [
                                 // Easy
                                 [2,0,1],
@@ -3395,7 +3455,69 @@ enum sessionData {
                                 // Hard
                                 [2,0,1]
                             ],
-                            // 2,1,0,0,2 | Long
+                            // 2,1,0,0,2 | Long Running
+                            [
+                                // Easy
+                                [2,0,1],
+                                // Medium
+                                [2,0,1],
+                                // Hard
+                                [2,0,1]
+                            ],
+                        ],
+                        // 2,1,0,1 | High Intensity Cardio/ Biking
+                        [
+                            // ------------------------------------------------------------------------------------------------
+                            // 2,1,0,1,0 | Short Biking
+                            [
+                                // Easy
+                                [2,0,1],
+                                // Medium
+                                [2,0,1],
+                                // Hard
+                                [2,0,1]
+                            ],
+                            // 2,1,0,1,1 | Medium Biking
+                            [
+                                // Easy
+                                [2,0,1],
+                                // Medium
+                                [2,0,1],
+                                // Hard
+                                [2,0,1]
+                            ],
+                            // 2,1,0,1,2 | Long Biking
+                            [
+                                // Easy
+                                [2,0,1],
+                                // Medium
+                                [2,0,1],
+                                // Hard
+                                [2,0,1]
+                            ],
+                        ],
+                        // 2,1,0,2 | High Intensity Cardio / Rowing
+                            [
+                            // ------------------------------------------------------------------------------------------------
+                            // 2,1,0,2,0 | Short Rowing
+                            [
+                                // Easy
+                                [2,0,1],
+                                // Medium
+                                [2,0,1],
+                                // Hard
+                                [2,0,1]
+                            ],
+                            // 2,1,0,2,1 | Medium Rowing
+                            [
+                                // Easy
+                                [2,0,1],
+                                // Medium
+                                [2,0,1],
+                                // Hard
+                                [2,0,1]
+                            ],
+                            // 2,1,0,2,2 | Long Rowing
                             [
                                 // Easy
                                 [2,0,1],
@@ -3405,9 +3527,9 @@ enum sessionData {
                                 [2,0,1]
                             ]
                         ],
-                        // 2,1,0,1 | Bodyweight Workout
+                        // 2,1,0,3 | Bodyweight Workout
                         [
-                            // 2,1,0,1,0 | Short
+                            // 2,1,0,3,0 | Short
                             [
                                 // Easy
                                 [1,0,1],
@@ -3416,7 +3538,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 2,1,0,1,1 | Medium
+                            // 2,1,0,3,1 | Medium
                             [
                                 // Easy
                                 [1,0,1],
@@ -3425,7 +3547,7 @@ enum sessionData {
                                 // Hard
                                 [1,0,1]
                             ],
-                            // 2,1,0,1,2 | Long
+                            // 2,1,0,3,2 | Long
                             [
                                 // Easy
                                 [1,0,1],
@@ -3475,7 +3597,7 @@ enum sessionData {
                             ]
                         ],
                         // ------------------------------------------------------------------------------------------------
-                        // 2,2,0,1 | Bodyweight Workout
+                        // 2,2,0,1 | High Intensity (Also used for steady state cardio)
                         [
                             // 2,2,0,1,0 | Short
                             [
@@ -3496,6 +3618,68 @@ enum sessionData {
                                 [3,0,1]
                             ],
                             // 2,2,0,1,2 | Long
+                            [
+                                // Easy
+                                [3,0,1],
+                                // Medium
+                                [3,0,1],
+                                // Hard
+                                [3,0,1]
+                            ]
+                        ],
+                        // ------------------------------------------------------------------------------------------------
+                        // 2,2,0,2 | High Intensity (Also used for steady state cardio)
+                        [
+                            // 2,2,0,2,0 | Short
+                            [
+                                // Easy
+                                [3,0,1],
+                                // Medium
+                                [3,0,1],
+                                // Hard
+                                [3,0,1]
+                            ],
+                            // 2,2,0,2,1 | Medium
+                            [
+                                // Easy
+                                [3,0,1],
+                                // Medium
+                                [3,0,1],
+                                // Hard
+                                [3,0,1]
+                            ],
+                            // 2,2,0,2,2 | Long
+                            [
+                                // Easy
+                                [3,0,1],
+                                // Medium
+                                [3,0,1],
+                                // Hard
+                                [3,0,1]
+                            ]
+                        ],
+                        // ------------------------------------------------------------------------------------------------
+                        // 2,2,0,3 | Bodyweight Workout
+                        [
+                            // 2,2,0,3,0 | Short
+                            [
+                                // Easy
+                                [3,0,1],
+                                // Medium
+                                [3,0,1],
+                                // Hard
+                                [3,0,1]
+                            ],
+                            // 2,2,0,3,1 | Medium
+                            [
+                                // Easy
+                                [3,0,1],
+                                // Medium
+                                [3,0,1],
+                                // Hard
+                                [3,0,1]
+                            ],
+                            // 2,2,0,3,2 | Long
                             [
                                 // Easy
                                 [3,0,1],
@@ -5199,7 +5383,8 @@ enum sessionData {
                     [
                         "enduranceType",
                         //
-                        "highIntensity",
+                        "highIntensityCardio",
+                        "highIntensityWorkout",
                         "steadyState",
                     ],
                     // --------------
@@ -5208,9 +5393,12 @@ enum sessionData {
                     [
                         "enduranceType2",
                         //
-                        "cardio",
-                        "bodyweightWorkout",
+                        "running",
+                        "biking",
+                        "rowing"
                     ],
+                    // --------------
+                    // High Intensity, workout skips to here
                     // 3 | Chioce 1 - 3 - Length
                     [
                         "sessionLength",

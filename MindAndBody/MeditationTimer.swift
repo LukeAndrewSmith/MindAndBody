@@ -66,10 +66,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     var selectedBackgroundSound = Int()
     var didChangeBackgroundSound = Bool()
     
-    
-    
-    // Big Array Test
-    var meditationArrayRegister: [[[[Any]]]] = []
     //
     var emptySession: [[[Any]]] =
         [
@@ -214,8 +210,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         backgroundImage.frame = view.bounds
         
         // Background Index
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
-        
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let backgroundIndex = settings[0][0]
         //
         // Background Image/Colour
         //
@@ -256,9 +252,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         backgroundBlur.effect = vibrancyE
         backgroundBlur.isUserInteractionEnabled = false
         //
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
-            if backgroundIndex > backgroundImageArray.count {
-        } else {
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let backgroundIndex = settings[0][0]
+        if backgroundIndex < backgroundImageArray.count {
             view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
         }
         

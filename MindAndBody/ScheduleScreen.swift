@@ -389,6 +389,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         if choiceProgress[0] == -1 {
             selectedDay = Date().currentWeekDayFromMonday - 1
             stackArray[selectedDay].alpha = 1
+        } else {
+            maskView()
         }
     }
     
@@ -406,8 +408,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         UIApplication.shared.statusBarStyle = .lightContent
         
         //
-        // Present walkthrough 2
-        if UserDefaults.standard.bool(forKey: "scheduleWalkthrough") == false {
+        // Present schedule walkthrough
+        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+        if walkthroughs[5] == false {
             walkthroughSchedule()
         }
 
@@ -443,12 +446,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         // Background Image
         backgroundImage.frame = view.bounds
         
-        //
-        let test = UserDefaults.standard.string(forKey: "defaultImage")
-        
         // Background Index
-        let backgroundIndex = UserDefaults.standard.integer(forKey: "backgroundImage")
-        
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let backgroundIndex = settings[0][0]
         //
         // Background Image/Colour
         //
@@ -1029,7 +1029,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                UserDefaults.standard.set(true, forKey: "scheduleWalkthrough")
+                let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                walkthroughs[5] = true
+                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             })
         }
     }
