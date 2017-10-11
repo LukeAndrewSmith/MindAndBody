@@ -15,37 +15,61 @@ import UIKit
 //
 class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    // selectedSession[0] == Warmup, Workout, Workout(Circuit), Cardio, Stretching, Yoga
-    
-    // Presets button titles
-    let presetsButtonTitles = ["customWarmup", "customWorkout", "customCircuitWorkout", "customHIITCardioSession", "customStretchingSession", "customYogaPractice"]
-    
-    
+//    // TEMPLATE
+//    //
+//    // Find out session type
+//    // Switch selectedSession[0] and selectedSession[1]
+//    switch selectedSession[0] {
+//    // Warmup
+//    case 0:
+//    
+//    // Workout
+//    case 1:
+//    
+//    // Cardio
+//    case 2:
+//    
+//    // Stretching
+//    case 3:
+//    
+//    // Yoga
+//    case 4:
+//    
+//    default:
+//    break
+//    }
     
     //
     // Selected row
     var selectedRow = Int()
     var selectedSection = Int()
-    
     //
     var selectedPreset = -1
-    
     //
     var selectingNumberOfRounds = false
     
-    
     //
-    // Sets Reps Picker View
-    //
+    // Picker Arrays
+    // Sets
     var setsPickerArray: [Int] = [1, 2, 3, 4, 5, 6]
-    //                              // Reps                                      Rep Ranges                     // Seconds
+    // Reps
     var repsPickerArray: [String] = ["1", "3", "5", "8", "10", "12", "15", "20", "3-5", "5-8", "8-12", "15-20", "15s", "30s", "60s", "90s"]
-    
-    //
+    // RepsCircuit
     var repsPickerArrayCircuit: [String] = ["5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80", "85", "90", "95"]
+    // Breaths
+    var breathsPickerArray: [Int] = [5,10,15,20,25,30,35,40,45,50,100]
     
     //
-    var roundsPickerArray: [Int] = [2, 3, 4, 5, 6, 7, 8, 9]
+    // Presets button titles
+    let presetsButtonTitles = ["customWarmup", "customWorkout", "customCircuitWorkout", "customHIITCardioSession", "customStretchingSession", "customYogaPractice"]
+    
+    
+    
+    // Rounds
+    // Note: if 1, "1 (not a circuit workout)"
+    var roundsPickerArray: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    
+    //
     
     //
     // Outlets ---------------------------------------------------------------------------------------------------------------------------
@@ -63,7 +87,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var customTableView: UITableView!
     
     // Action Buttons
-    @IBOutlet weak var nRoundButton: UIButton!
+    @IBOutlet weak var nRoundsButton: UIButton!
     @IBOutlet weak var newMovementButton: UIButton!
     
 
@@ -75,6 +99,9 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var tableViewConstraintTop: NSLayoutConstraint!
     @IBOutlet weak var tableViewConstraintBottom: NSLayoutConstraint!
     @IBOutlet weak var beginButtonConstraint: NSLayoutConstraint!
+    //
+    @IBOutlet weak var nRoundsRight: NSLayoutConstraint!
+    @IBOutlet weak var newMovementLeft: NSLayoutConstraint!
     
     //
     let emptyString = ""
@@ -95,7 +122,10 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     let setsIndicatorLabel = UILabel()
     
-    
+    // Nº Rounds Title
+    let nRoundsTitle = NSLocalizedString("nRoundsTitle", comment: "")
+
+
     //
     // View Will Appear
     //
@@ -126,10 +156,15 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         beginButtonConstraint.constant = -49
         
         // Width of action buttons
-        // TODO: width for all sections
-        if selectedSession[0] == 0 {
-            nRoundButton.frame.size = CGSize(width: 0, height: nRoundButton.bounds.height)
-            newMovementButton.frame.size = CGSize(width: view.bounds.width, height: newMovementButton.bounds.height)
+        // If Workout, option for circuit workout (numberofrounds)
+        if selectedSession[0] != 1 {
+            nRoundsRight.constant = view.bounds.width
+            nRoundsButton.alpha = 0
+            newMovementLeft.constant = 0
+        } else {
+            nRoundsRight.constant = view.bounds.width / 2
+            newMovementLeft.constant = view.bounds.width / 2
+            nRoundsButton.setTitle(nRoundsTitle + "1", for: .normal)
         }
         
         
@@ -249,7 +284,6 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             
         }
         
-        
         // TableView Footer
         let footerView = UIView(frame: .zero)
         footerView.backgroundColor = .clear
@@ -264,8 +298,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     // Button Enabled
     func beginButtonEnabled() {
         // Begin Button
-        var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
-        
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
         //
         if customTableView.isEditing {
             beginButton.isEnabled = false
@@ -273,7 +306,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             if selectedPreset == -1 {
                 
             } else {
-                if customSessionsArray[selectedSession[0]].count == 0 || (customSessionsArray[selectedSession[0]][selectedPreset][1] as! [Int]).count == 0 {
+                // Need at least 2 movements for session
+                if customSessionsArray[selectedSession[0]].count == 0 {
                     beginButton.isEnabled = false
                 } else {
                     beginButton.isEnabled = true
@@ -287,16 +321,23 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     // Number of components
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
         // Number of Rounds
         if selectingNumberOfRounds == true {
             return 1
-            // Other
+        // Set/Reps/Breaths
         } else {
-            //
             switch selectedSession[0] {
-            case -1: return 0
             case 0: return 2
-            case 1: return 1
+            case 1:
+                // If circuit
+                if customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int == -1 {
+                    return 1
+                // Normal
+                } else {
+                    return 2
+                }
+            case 3,4: return 1
             default: break
             }
         }
@@ -305,13 +346,11 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     
     // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
         // Number of Rounds
         if selectingNumberOfRounds == true {
             return roundsPickerArray.count
-            
         } else {
-            
-            // Other
             switch selectedSession[0] {
             case 0:
                 if component == 0 {
@@ -320,7 +359,19 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     return repsPickerArray.count
                 }
             case 1:
-                return repsPickerArrayCircuit.count
+                // If circuit
+                if customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int == -1 {
+                    return repsPickerArrayCircuit.count
+                // Normal
+                } else {
+                    if component == 0 {
+                        return setsPickerArray.count
+                    } else {
+                        return repsPickerArray.count
+                    }
+                }
+            case 3,4:
+                return breathsPickerArray.count
             default: break
             }
         }
@@ -333,19 +384,22 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         if selectingNumberOfRounds == true {
             let roundLabel = UILabel()
             roundLabel.text = String(roundsPickerArray[row])
+            if row == 0 {
+                roundLabel.text = String(roundsPickerArray[row]) + NSLocalizedString("notCircuitWorkout", comment: "")
+            }
             roundLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
             roundLabel.textColor = colour1
             //
             roundLabel.textAlignment = .center
             return roundLabel
             //
-            
             // Other
         } else {
             //
             switch selectedSession[0] {
             case 0:
                 //
+                // TODO: !
                 if component == 0 {
                     let setsLabel = UILabel()
                     setsLabel.text = String(setsPickerArray[row])
@@ -403,7 +457,6 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         // Number of Rounds
         if selectingNumberOfRounds == true {
             return setsRepsPicker.frame.size.width
-            
             // Other
         } else {
             switch selectedSession[0] {
@@ -459,15 +512,24 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         case presetsTableView:
             return 1
         case customTableView:
-            return 1
-
-            // TODO: Determine when circuit needs to be activated
-//            switch selectedSession[0] {
-//            case 0:
-//            case 1:
-//                return (customSessionsArray[selectedSession[0]][selectedPreset][2] as! [Int])[0]
-//            default: break
-//            }
+            // Nothing selected
+            if selectedPreset == -1 {
+                return 0
+            // Not workout
+            } else if selectedSession[0] != 1 {
+                return 1
+            // Workout (could be circuit)
+            } else {
+                // Not circuit wokrout ([1] = -1 if circuit workout)
+                if customSessionsArray[selectedSession[0]][selectedPreset][2].count == 0 || customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int != -1 {
+                    return 1
+                // Circuit Workout
+                } else {
+                    let test = customSessionsArray[selectedSession[0]][selectedPreset][2] as! [Int]
+                    return customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int
+                }
+            }
+        //
         case movementsTableView:
             let numberSections = sessionData.fullKeyArrays[selectedSession[0]].count
             return numberSections
@@ -478,28 +540,25 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     
     // Title for header
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
-
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
         //
         switch tableView {
         case presetsTableView:
-//            return " " + NSLocalizedString("customSession", comment: "")
             return " "
         //
         case customTableView:
-            //
-            switch selectedSession[0] {
-            case 0:
-                var titleDataArray: [String] = []
-                //
-                if titleDataArray.count != 0 {
-                    return titleDataArray[selectedPreset]
+            // Not workout
+            if selectedSession[0] != 1 {
+                return " "
+            // Workout (could be circuit)
+            } else {
+                // If nothing
+                // Circuit wokrout ([1] == -1 if circuit workout)
+                if customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int == -1 {
+                    return " " + NSLocalizedString("round", comment: "") + " " + String(section + 1)
                 } else {
                     return " "
                 }
-            case 1:
-                return " " + NSLocalizedString("round", comment: "") + " " + String(section + 1)
-            default: break
             }
         //
         case movementsTableView:
@@ -510,28 +569,25 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
-        
-        // TODO: Find circuit workouts
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
+        //
         switch tableView {
         case presetsTableView:
-            //            return " " + NSLocalizedString("customSession", comment: "")
             return 23.5
         //
         case customTableView:
-            //
-            switch selectedSession[0] {
-            case 0:
-                var titleDataArray: [String] = []
-                //
-                if titleDataArray.count != 0 {
+            // Not workout
+            if selectedSession[0] != 1 {
+                return 1
+            // Workout (could be circuit)
+            } else {
+                // If nothing
+                // Circuit wokrout ([1] == -1 if circuit workout)
+                if customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int == -1 {
                     return 23.5
                 } else {
                     return 1
                 }
-            case 1:
-                return 23.5
-            default: break
             }
         //
         case movementsTableView:
@@ -641,6 +697,9 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 cell.contentView.transform = CGAffineTransform(scaleX: -1,y: 1);
                 cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
                 //
+                cell.layer.borderWidth = 1
+                cell.layer.borderColor = colour2.cgColor
+                //
             } else {
                 //
                 cell.textLabel?.text = customSessionsArray[selectedSession[0]][indexPath.row][0][0] as! String
@@ -659,20 +718,19 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][keyIndex]! as String, comment: "")
             //
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
-            cell.textLabel?.adjustsFontSizeToFitWidth = true
-            cell.textLabel?.textAlignment = .left
+//            cell.textLabel?.numberOfLines = 0
+//            cell.textLabel?.lineBreakMode = .byTruncatingTail
             cell.backgroundColor = colour1
             cell.textLabel?.textColor = colour2
             cell.tintColor = .black
             // Detail sets x reps
             cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
-            cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
-            cell.detailTextLabel?.textAlignment = .left
             cell.detailTextLabel?.textColor = colour2
             //
+            // TODO: !!!
             switch selectedSession[0] {
             case 0:
-                let setsInt = setsPickerArray[(customSessionsArray[selectedSession[0]][selectedPreset][2] as! [Int])[indexPath.row]]
+                let setsInt = (customSessionsArray[selectedSession[0]][selectedPreset][2] as! [Int])[indexPath.row]
                 let sets = String(setsInt)
                 let reps = (customSessionsArray[selectedSession[0]][selectedPreset][3] as! [String])[indexPath.row]
                 cell.detailTextLabel?.text = sets + " x " + reps
@@ -808,16 +866,12 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     customSessionsArray[selectedSession[0]][lastIndex][0][0] = textField?.text!
                     //
                     // Default mumber of rounds if relevant
-                    // TODO: Selected Type
-//                    if selectedSession[0] == 2 {
-//                        customSessionsArray[selectedSession[0]][self.selectedPreset][2].append(2)
-//                        self.numberOfRounds.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String((customSessionsArray[selectedSession[0]][self.selectedPreset][2] as! [Int])[self.selectedPreset]), for: .normal)
-//                    }
-                    
+                    if selectedSession[0] == 1 {
+                        self.nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + "1", for: .normal)
+                    }
                     //
                     // SET NEW ARRAY
                     UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-                    
                     //
                     // Select new session and dismiss
                     let selectedIndexPath = NSIndexPath(row: lastIndex, section: 0)
@@ -827,7 +881,6 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     self.presetsTableView.isHidden = false
                     snapShot1?.removeFromSuperview()
                     self.backgroundViewExpanded.isHidden = false
-                    
                     //
                     // Presets title
                     let string = customSessionsArray[selectedSession[0]][self.selectedPreset][0][0] as! String
@@ -839,42 +892,17 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                         self.presetsTableView.reloadData()
                         // Dismiss and select new row
                     }, completion: { finished in
-                        
-//                        //
-//                        let selectedIndexPath = NSIndexPath(row: (customSessionsArray[selectedSession[0]] as! [[Any]]).count - 1, section: 0)
-//                        self.presetsTableView.selectRow(at: selectedIndexPath as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
-//                        self.selectedPreset = selectedIndexPath.row
-//                        //
-//                        switch selectedSession[0] {
-//                        case 0:
-//                            let string = customSessionsArray[selectedSession[0]][self.selectedPreset][0] as! String
-//                            self.presetsButton.setTitle("- " + string + " -", for: .normal)
-//                        case 1:
-//                            break
-//                        default: break
-//                        }
-                        
                         //
                         tableView.deselectRow(at: indexPath, animated: true)
                         // Reload
                         self.customTableView.reloadData()
-                        //
                         self.beginButtonEnabled()
-                        
                         //
                         // Element Positions
-                        //
                         self.presetsBottom.constant = self.view.frame.size.height - 73.5
-                        //
-                        //
                         self.tableViewConstraintTop.constant = 122.5
                         self.tableViewConstraintBottom.constant = 49
-                        //
                         self.beginButtonConstraint.constant = 0
-                        //
-                        //
-                        //
-                        // Dismiss presets table
                         //
                         // Dismiss presets table
                         UIView.animate(withDuration: AnimationTimes.animationTime3, animations: {
@@ -908,34 +936,39 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 // 4. Present the alert.
                 self.present(alert, animated: true, completion: nil)
                 //
-                
-                
-                //
-                // Select Custom Workout
+            //
+            // Select Custom Workout
             } else {
                 //
                 selectedPreset = indexPath.row
                 //
-                // TODO: NUMBER OF ROUNDS title
-//                let titleInt = customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int
-//                numberOfRounds.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(titleInt), for: .normal)
+                // NUMBER OF ROUNDS title
+                if selectedSession[0] == 1 {
+                    // Rounds
+                    if customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int == -1 {
+                        //
+                        nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int), for: .normal)
+                    // No rounds
+                    } else {
+                        nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + "1", for: .normal)
+                    }
+                }
+
                 //
-                switch selectedSession[0] {
-                case 0:
-                    let string = customSessionsArray[selectedSession[0]][selectedPreset][0][0] as! String
+                //
+                if selectedPreset == -1 {
+                    self.presetsButton.setTitle(NSLocalizedString(self.presetsButtonTitles[selectedSession[0]], comment: ""), for: .normal)
+                } else {
+                    let string = customSessionsArray[selectedSession[0]][self.selectedPreset][0][0] as! String
                     self.presetsButton.setTitle("- " + string + " -", for: .normal)
-                case 1:
-                    break
-                default: break
+                    
                 }
                 //
                 tableView.deselectRow(at: indexPath, animated: true)
                 // Dismiss Table
-                if (customSessionsArray[selectedSession[0]]  as! [[Any]]).count != 0 {
+                if customSessionsArray[selectedSession[0]].count != 0 {
                     //
                     // Element Positions
-                    //
-                    //
                     presetsBottom.constant = self.view.frame.size.height - 73.5
                     //
                     self.tableViewConstraintTop.constant = 122.5
@@ -974,18 +1007,21 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             //
             // selected row
             // TODO: selectedSession[0]
-            switch selectedSession[0] {
-            case 0:
-                setsRepsPicker.selectRow((customSessionsArray[selectedSession[0]][selectedPreset][2][indexPath.row] as! Int), inComponent: 0, animated: true)
-                let repsIndex = repsPickerArray.index(of: customSessionsArray[selectedSession[0]][selectedPreset][3][indexPath.row] as! String)
-                setsRepsPicker.selectRow(repsIndex!, inComponent: 1, animated: true)
-            case 1:
-                setsRepsPicker.selectRow((customSessionsArray[selectedSession[0]][selectedPreset][3][indexPath.row] as! Int), inComponent: 0, animated: true)
-            default: break
-            }
+//            switch selectedSession[0] {
+//            case 0:
+//                let test = customSessionsArray[selectedSession[0]][selectedPreset][2][indexPath.row] as! Int
+//                let setsIndex = setsPickerArray.index(of: customSessionsArray[selectedSession[0]][selectedPreset][2][indexPath.row] as! Int)
+//                setsRepsPicker.selectRow(setsIndex!, inComponent: 0, animated: true)
+//                let repsIndex = repsPickerArray.index(of: customSessionsArray[selectedSession[0]][selectedPreset][3][indexPath.row] as! String)
+//                setsRepsPicker.selectRow(repsIndex!, inComponent: 1, animated: true)
+//            case 1:
+//                setsRepsPicker.selectRow((customSessionsArray[selectedSession[0]][selectedPreset][3][indexPath.row] as! Int), inComponent: 0, animated: true)
+//            default: break
+//            }
             //
             let componentWidth = setsRepsPicker.frame.size.width / 3
             let componentWidthFourth = componentWidth / 4
+            // TODO: !!!!
             // picker
             switch selectedSession[0] {
             case 0:
@@ -1027,19 +1063,44 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         case movementsTableView:
             //
-            customSessionsArray[selectedSession[0]][selectedPreset][1].append(sessionData.fullKeyArrays[selectedSession[0]][indexPath.section][indexPath.row] as! Int)
-            // sets
-            // TODO: selectedSession[0]
-            if selectedSession[0] == 0 {
-                customSessionsArray[selectedSession[0]][selectedPreset][2].append(0)
-                customSessionsArray[selectedSession[0]][selectedPreset][3].append("1")
-            } else {
-                for i in 0...((customSessionsArray[selectedSession[0]][selectedPreset][3] as! [Int]).count - 1) {
-                    customSessionsArray[selectedSession[0]][selectedPreset][3].append(0)
-                }
-            }
-            // reps
+            // Append movement
+            customSessionsArray[selectedSession[0]][selectedPreset][1].append(sessionData.fullKeyArrays[selectedSession[0]][indexPath.section][indexPath.row])
+            // Sets/Reps/Breaths
             //
+            // Find out session type
+            // Switch selectedSession[0] and selectedSession[1]
+            switch selectedSession[0] {
+            // Warmup
+            case 0:
+                customSessionsArray[selectedSession[0]][selectedPreset][2].append(1)
+                customSessionsArray[selectedSession[0]][selectedPreset][3].append("1")
+            // Workout
+            case 1:
+                // Circuit
+                if customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int == -1 {
+                    //
+                    let numberOfRounds = customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int
+                    let originalNMovements = customSessionsArray[selectedSession[0]][selectedPreset][1].count
+                    for i in 0...numberOfRounds - 1 {
+                        let index = (originalNMovements * (i + 1)) + i
+                        customSessionsArray[selectedSession[0]][selectedPreset][3].insert("1", at: i)
+                    }
+                    
+                // Normal
+                } else {
+                    customSessionsArray[selectedSession[0]][selectedPreset][2].append(1)
+                    customSessionsArray[selectedSession[0]][selectedPreset][3].append("1")
+                }
+            // Cardio
+            case 2:
+                break
+            // Stretching/Yoga
+            case 3,4:
+                customSessionsArray[selectedSession[0]][selectedPreset][2].append(1)
+            default:
+                break
+            }
+            
             //
             // SET ARRAY
             UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
@@ -1059,9 +1120,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.customTableView.reloadData()
                 // Scroll to Bottom
                 if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
-                    //
-//                    let scrollIndex = NSIndexPath(row: customKeyArray[self.selectedPreset].count - 1, section: 0)
-//                    self.customTableView.scrollToRow(at: scrollIndex as IndexPath, at: .top, animated: true)
+                    let scrollIndex = NSIndexPath(row: customSessionsArray[selectedSession[0]][self.selectedPreset][1].count - 1, section: 0)
+                    self.customTableView.scrollToRow(at: scrollIndex as IndexPath, at: .top, animated: true)
                 }
             })
         //
@@ -1098,15 +1158,13 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         case movementsTableView: return false
         case customTableView:
             //
-            if indexPath.section == 0 {
-                if customSessionsArray[selectedSession[0]].count == 0 || (customSessionsArray[selectedSession[0]][selectedPreset][1] as! [Int]).count == 0 {
+            if customSessionsArray[selectedSession[0]].count == 0 || (customSessionsArray[selectedSession[0]][selectedPreset][1] as! [Int]).count == 0 {
+                return false
+            } else {
+                if indexPath.row == (customSessionsArray[selectedSession[0]][selectedPreset][1] as! [Int]).count {
                     return false
                 } else {
-                    if indexPath.row == (customSessionsArray[selectedSession[0]][selectedPreset][1] as! [Int]).count {
-                        return false
-                    } else {
-                        return true
-                    }
+                    return true
                 }
             }
         default: return false
@@ -1198,53 +1256,38 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             
             switch tableView {
             case presetsTableView:
-                //
+                // New array
                 customSessionsArray[selectedSession[0]].remove(at: indexPath.row)
-                //
-                // SET NEW ARRAY
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-
-                //
-//                numberOfRounds.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String((customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int)), for: .normal)
-                
                 //
                 UIView.animate(withDuration: 0.2, animations: {
                     self.presetsTableView.reloadData()
                 })
                 //
                 // Selected last
-                if customSessionsArray[selectedSession[0]].count == 0 {
-//                    self.selectedPreset = customSessionsArray[selectedSession[0]].count - 1
-//                // None to select
-//                } else {
-                self.selectedPreset = -1
-//                }
-                self.customTableView.reloadData()
-                self.beginButtonEnabled()
-                //
-
-                // TODO: d
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.presetsTableView.reloadData()
+    //                    self.selectedPreset = customSessionsArray[selectedSession[0]].count - 1
+    //                // None to select
+    //                } else {
+                    self.selectedPreset = -1
+    //                }
+                    self.customTableView.reloadData()
+                    self.beginButtonEnabled()
                     //
-                    if customSessionsArray[selectedSession[0]].count == 0 || (customSessionsArray[selectedSession[0]][self.selectedPreset][1] as! [Int]).count == 0 {
-                        switch selectedSession[0] {
-                        case 0:
+
+                    // TODO: d
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.presetsTableView.reloadData()
+                        //
+                        if self.selectedPreset == -1 {
                             self.presetsButton.setTitle(NSLocalizedString(self.presetsButtonTitles[selectedSession[0]], comment: ""), for: .normal)
-                        case 1:
-                            break
-                        default: break
+                        } else {
+                            let string = customSessionsArray[selectedSession[0]][self.selectedPreset][0][0] as! String
+                            self.presetsButton.setTitle("- " + string + " -", for: .normal)
+
                         }
-                    } else {
-                        let string = customSessionsArray[selectedSession[0]][self.selectedPreset][0][0] as! String
-                        self.presetsButton.setTitle("- " + string + " -", for: .normal)
-
-                    }
-                })
+                    })
                     //
-                // Initial Element Positions
-                if customSessionsArray[selectedSession[0]].count == 0 || (customSessionsArray[selectedSession[0]][selectedPreset][1] as! [Int]).count == 0 && self.presetsButton.alpha == 1 || (customSessionsArray[selectedSession[0]][selectedPreset][1] as! [Int]).count == 0 && self.presetsButton.alpha == 0 {
-
+                    //
                     self.presetsTableView.isHidden = false
                     //
                     self.backgroundViewExpanded.isHidden = false
@@ -1254,43 +1297,64 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                         // Dismiss and select new row
                     }, completion: { finished in
                         //
-                        self.selectedPreset = -1
-                        //
                         tableView.deselectRow(at: indexPath, animated: true)
                         //
-
                         // Reload Data
                         self.customTableView.reloadData()
                         self.beginButtonEnabled()
                         //
-                        self.beginButtonEnabled()
-
                         // Initial Element Positions
-                        //
                         self.presetsBottom.constant = 0
-                        //
                         self.tableViewConstraintTop.constant = self.view.frame.size.height
                         self.tableViewConstraintBottom.constant = -49
-                        //
                         self.beginButtonConstraint.constant = -49
                     })
-                }
-                }
             //
             case customTableView:
                 //
                 // Key
                 customSessionsArray[selectedSession[0]][selectedPreset][1].remove(at: indexPath.row)
-                // sets
-                if selectedSession[0] == 0 {
+                
+                // Sets/Reps/Breaths
+                //
+                // Find out session type
+                // Switch selectedSession[0] and selectedSession[1]
+                switch selectedSession[0] {
+                // Warmup
+                case 0:
                     customSessionsArray[selectedSession[0]][selectedPreset][2].remove(at: indexPath.row)
                     customSessionsArray[selectedSession[0]][selectedPreset][3].remove(at: indexPath.row)
-                } else {
-                    for i in 0...((customSessionsArray[selectedSession[0]][selectedPreset][3] as! [Int]).count - 1) {
+                // Workout
+                case 1:
+                    // Circuit
+                    if customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int == -1 {
+                        //
+                        let numberOfRounds = customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int
+                        let nMovements = customSessionsArray[selectedSession[0]][selectedPreset][1].count
+                        
+                        for i in (1...numberOfRounds).reversed() {
+                            //
+                            let lastIndexInRound = (i * nMovements) - 1
+                            let removeFromLastIndex = (nMovements - 1) - indexPath.row
+                            let indexToRemove = lastIndexInRound - removeFromLastIndex
+                            customSessionsArray[selectedSession[0]][selectedPreset][3].remove(at: indexToRemove)
+                        }
+                        
+                        // Normal
+                    } else {
+                        customSessionsArray[selectedSession[0]][selectedPreset][2].remove(at: indexPath.row)
                         customSessionsArray[selectedSession[0]][selectedPreset][3].remove(at: indexPath.row)
                     }
+                // Cardio
+                case 2:
+                    break
+                // Stretching/Yoga
+                case 3,4:
+                    customSessionsArray[selectedSession[0]][selectedPreset][2].remove(at: indexPath.row)
+                default:
+                    break
                 }
-                // reps
+                
                 //
                 // SET NEW ARRAY
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
@@ -1302,7 +1366,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     var indexArray: [IndexPath] = []
                     for i in 1...(customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int) {
                         let row = indexPath.row
-                        let section = ((indexPath.section + 1) * i) - 1
+                        let section = i - 1
                         let indexPathToRemove = NSIndexPath(row: row, section: section)
                         indexArray.append(indexPathToRemove as IndexPath)
                     }
@@ -1424,100 +1488,153 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     // Ok button action
     func okButtonAction(_ sender: Any) {
         //
-        // Number of Rounds
+        // TODO: Number of Rounds
+        // NUMBER OF ROUNDS!
         if selectingNumberOfRounds == true {
+            selectingNumberOfRounds = false
             var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
-
+            let numberOfMovements = customSessionsArray[selectedSession[0]][selectedPreset][1].count
             //
-            if roundsPickerArray[setsRepsPicker.selectedRow(inComponent: 0)] > (customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int) {
-                //
-                let oldRound = (customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int)
-                let newRound = roundsPickerArray[setsRepsPicker.selectedRow(inComponent: 0)]
-                //
-                let numberToAdd = newRound - oldRound
-                
-                // Add [] to reps
-                for _ in 0...(numberToAdd - 1) {
-                    customSessionsArray[selectedSession[0]][selectedPreset][3].append([])
+            nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(roundsPickerArray[setsRepsPicker.selectedRow(inComponent: 0)]), for: .normal)
+            //
+            // Empty session -> Empty session
+            if numberOfMovements == 0 {
+                // Selecting 1 round (not circuit)
+                if setsRepsPicker.selectedRow(inComponent: 0) == 0 {
+                    if customSessionsArray[selectedSession[0]][selectedPreset][2].count != 0 {
+                        customSessionsArray[selectedSession[0]][selectedPreset][2] = []
+                    }
+                // Selecting > 1 round (circuit)
+                } else {
+                    // Update values
+                    if customSessionsArray[selectedSession[0]][selectedPreset][2].count != 0 {
+                        customSessionsArray[selectedSession[0]][selectedPreset][2][0] = roundsPickerArray[setsRepsPicker.selectedRow(inComponent: 0)]
+                    // Append values
+                    } else {
+                        // Append nRounds
+                        customSessionsArray[selectedSession[0]][selectedPreset][2].append(roundsPickerArray[setsRepsPicker.selectedRow(inComponent: 0)])
+                        // Append circuit indicator
+                        customSessionsArray[selectedSession[0]][selectedPreset][2].append(-1)
+                    }
                 }
-                // Add 0 to reps
-                if (customSessionsArray[selectedSession[0]][selectedPreset][1] as! [Int]).count != 0 {
-                    for i in oldRound...(newRound - 1) {
-                        for _ in 0...((customSessionsArray[selectedSession[0]][selectedPreset][1] as! [Int]).count - 1) {
-                            customSessionsArray[selectedSession[0]][selectedPreset][3].append(0)
+                // Set
+                UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+            //
+            // Circuit -> Non-circuit
+                // If selected a non circuit workout, i.e selectedRounds = 1
+            } else if setsRepsPicker.selectedRow(inComponent: 0) == 0 {
+                //
+                // If it was previously a circuit workout do something (if not do nothing)
+                // Isn't empty && roundsArray[1] == -1 (indicating its a circuit workout)
+                if numberOfMovements != 0 && customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int == -1 {
+                    //
+                    // Set sets and reps array same length as movements array by removing &&
+                    let nRoundsOld = customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int
+                    let nToRemove = nRoundsOld - 1
+                    for _ in 1...nToRemove {
+                        for _ in 1...numberOfMovements {
+                            customSessionsArray[selectedSession[0]][selectedPreset][3].removeLast()
+                        }
+                    }
+                    // Reset sets to 0, and append 1 for each movement (new set always 1)
+                    customSessionsArray[selectedSession[0]][selectedPreset][2] = []
+                    for _ in 1...numberOfMovements {
+                        customSessionsArray[selectedSession[0]][selectedPreset][2].append(1)
+                    }
+                    // Set
+                    UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+                }
+                //
+            //
+            // Non-circuit -> Circuit
+                // If nMovments != 0 &&
+                // either [2].count not 2 or
+                // [2].count 2 and [2][1] != -1 (as if == -1 then circuit workout)
+            } else if numberOfMovements != 0 && customSessionsArray[selectedSession[0]][selectedPreset][2].count != 2 || numberOfMovements != 0 && customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int != -1 {
+                // Sets array -> Rounds array
+                    // Clear sets array
+                    customSessionsArray[selectedSession[0]][selectedPreset][2] = []
+                    // Append nRounds
+                    customSessionsArray[selectedSession[0]][selectedPreset][2].append(roundsPickerArray[setsRepsPicker.selectedRow(inComponent: 0)])
+                    // Append circuit indicator
+                    customSessionsArray[selectedSession[0]][selectedPreset][2].append(-1)
+                // Reps array -> rounds reps array (add new set of x(nMovements) reps for each round)
+                    // For each round (-2 as round 1 already there)
+                    for _ in 0...roundsPickerArray[setsRepsPicker.selectedRow(inComponent: 0)] - 2 {
+                        // for each movement
+                        for i in 0...numberOfMovements - 1 {
+                           customSessionsArray[selectedSession[0]][selectedPreset][3].append(customSessionsArray[selectedSession[0]][selectedPreset][3][i])
+                        }
+                    }
+                // Set
+                UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+                
+            //
+            // Circuit -> Circuit
+                // If circuit workout
+            } else if numberOfMovements != 0 && customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int == -1 {
+                // Note: nRoundsNew == nRoundsOld, do nothing (therefore no if for such a case)
+                let nRoundsNew = roundsPickerArray[setsRepsPicker.selectedRow(inComponent: 0)]
+                let nRoundsOld = customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int
+                //
+                // nRoundsNew > nRoundsOld
+                if nRoundsNew > nRoundsOld {
+                    // Change number of rounds
+                    customSessionsArray[selectedSession[0]][selectedPreset][2][0] = nRoundsNew
+                    // Add reps
+                    let nRoundsToAdd = nRoundsNew - nRoundsOld
+                    for _ in 1...nRoundsToAdd {
+                        for _ in 1...numberOfMovements {
+                            customSessionsArray[selectedSession[0]][selectedPreset][3].append("1")
+                        }
+                    }
+                //
+                // nRoundsNew < nRoundOld
+                } else if nRoundsNew < nRoundsOld {
+                    // Change number of rounds
+                    customSessionsArray[selectedSession[0]][selectedPreset][2][0] = nRoundsNew
+                    // Remove reps
+                    let nRoundsToRemove = nRoundsOld - nRoundsNew
+                    for _ in 1...nRoundsToRemove {
+                        // for each movement
+                        for _ in 0...numberOfMovements - 1 {
+                            customSessionsArray[selectedSession[0]][selectedPreset][3].removeLast()
                         }
                     }
                 }
-                
-                // SET ARRAY
+                // Set
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-                //
-                customSessionsArray[selectedSession[0]][selectedPreset][2][0] = newRound
-                //
-                //
-            } else if roundsPickerArray[setsRepsPicker.selectedRow(inComponent: 0)] < (customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int) {
-                //
-                let oldRound = (customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int)
-                let newRound = roundsPickerArray[setsRepsPicker.selectedRow(inComponent: 0)]
-                //
-                let numberToRemove = oldRound - newRound
                 
-                // remove reps and keys
-                for _ in 0...(numberToRemove - 1) {
-                    customSessionsArray[selectedSession[0]][selectedPreset][3].removeLast()
-                }
-                
-                // SET ARRAY
-                UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-                //
-                customSessionsArray[selectedSession[0]][selectedPreset][2][0] = newRound
-                //
-                //
             }
             //
-//            numberOfRounds.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String((customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int)), for: .normal)
-            //
-            selectingNumberOfRounds = false
-            //
-            //
-            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.setsRepsView.frame.size.width, height: self.setsRepsView.frame.size.height)
-                self.backgroundViewExpanded.alpha = 0
-            }, completion: { finished in
-                self.setsRepsView.removeFromSuperview()
-                self.backgroundViewExpanded.removeFromSuperview()
-            })
-            //
-            customTableView.reloadData()
-            //
-            
-            //
+        //
+        // SETS/REPS/BREATHS/TIME
         } else {
             //
             var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
-            //
+            // TODO: circuit
             if selectedSession[0] == 0 {
-                customSessionsArray[selectedSession[0]][selectedPreset][2][selectedRow] = setsRepsPicker.selectedRow(inComponent: 0)
+                customSessionsArray[selectedSession[0]][selectedPreset][2][selectedRow] = setsPickerArray[setsRepsPicker.selectedRow(inComponent: 0)]
                 customSessionsArray[selectedSession[0]][selectedPreset][3][selectedRow] = repsPickerArray[setsRepsPicker.selectedRow(inComponent: 1)]
             } else {
                 customSessionsArray[selectedSession[0]][selectedPreset][3][selectedRow] = setsRepsPicker.selectedRow(inComponent: 0)
             }
             //
-            //
             // SET NEW ARRAY
             UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-            //
-            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.setsRepsView.frame.size.width, height: self.setsRepsView.frame.size.height)
-                self.backgroundViewExpanded.alpha = 0
-            }, completion: { finished in
-                self.setsRepsView.removeFromSuperview()
-                self.backgroundViewExpanded.removeFromSuperview()
-            })
-            //
-            customTableView.reloadData()
             
         }
+        //
+        // Animate picker down and off
+        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
+            self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.setsRepsView.frame.size.width, height: self.setsRepsView.frame.size.height)
+            self.backgroundViewExpanded.alpha = 0
+        }, completion: { finished in
+            self.setsRepsView.removeFromSuperview()
+            self.backgroundViewExpanded.removeFromSuperview()
+        })
+        //
+        customTableView.reloadData()
     }
     
     
@@ -1694,27 +1811,94 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         }, completion: nil)
     }
     
+    //
+    // Nº Rounds Action
+    @IBAction func nRoundsAction(_ sender: Any) {
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
+        //
+        selectingNumberOfRounds = true
+//        let test1 = customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int
+//        let test2 = customSessionsArray[selectedSession[0]][selectedPreset][2] as! [Int]
+        // [1] == -1 indicates circuit workout
+        if customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int == -1 {
+            let index = roundsPickerArray.index(of: customSessionsArray[selectedSession[0]][selectedPreset][2][0] as! Int)
+            setsRepsPicker.selectRow(index!, inComponent: 0, animated: true)
+        } else {
+            setsRepsPicker.selectRow(0, inComponent: 0, animated: true)
+        }
+        // picker
+        self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
+        self.setsIndicatorLabel.text = NSLocalizedString("", comment: "")
+        // ok
+        okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
+        //
+        UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
+        setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: UIScreen.main.bounds.width - 20, height: 147 + 49)
+        //
+        backgroundViewExpanded.alpha = 0
+        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
+        backgroundViewExpanded.frame = UIScreen.main.bounds
+        //
+        // Animate table
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            //
+            self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY - 147 - 49 - 10, width: UIScreen.main.bounds.width - 20, height: 147 + 49)
+            //
+            self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
+            // ok
+            self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
+            //
+            self.backgroundViewExpanded.alpha = 0.7
+        }, completion: nil)
+
+    }
+    
     
     //
     // Begin Button ------------------------------------------------------------------------------------------------
     //
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
-        //
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
+
+        // Segue
         switch selectedSession[0] {
+        // Warmup
         case 0:
-            self.performSegue(withIdentifier: "workoutSessionSegueCustom0", sender: "")
+            // Warmup uses stretching Screen
+            performSegue(withIdentifier: "customSessionSegueStretching", sender: self)
+        // Workout
         case 1:
-            self.performSegue(withIdentifier: "workoutSessionSegueCustom1", sender: "")
-        default: break
+            // If circuit session
+            // i.e if many movements but one int in 3rd array therefore int in 3rd array is number of rounds
+            if customSessionsArray[selectedSession[0]][selectedPreset][1].count > 1 && customSessionsArray[selectedSession[0]][selectedPreset][2].count == 1 {
+                performSegue(withIdentifier: "customSessionSegueCircuit", sender: self)
+            // Normal session
+            } else {
+                performSegue(withIdentifier: "customSessionSegue", sender: self)
+
+            }
+        // Cardio
+        case 2:
+            performSegue(withIdentifier: "customSessionSegueCardio", sender: self)
+        // Stretching
+        case 3:
+            performSegue(withIdentifier: "customSessionSegueStretching", sender: self)
+        // Yoga
+        case 4:
+            performSegue(withIdentifier: "customSessionSegueYoga", sender: self)
+        default:
+            break
         }
+        
+        //
         // Return background to homescreen
-        let delayInSeconds = 0.5
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            
-            _ = self.navigationController?.popToRootViewController(animated: false)
-            
-        }
+        perform(#selector(popToRootView), with: Any?.self, afterDelay: 0.5)
+    }
+    
+    // Pop to root view
+    func popToRootView() {
+        _ = self.navigationController?.popToRootViewController(animated: false)
     }
     
     
@@ -1725,6 +1909,34 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     // Prepare for segue Cardio
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
+        //
+        switch segue.identifier {
+        // Warmup / Stretching
+        case "customSessionSegueStretching"?:
+            // Warmup
+                let destinationVC = segue.destination as! StretchingScreen
+                destinationVC.fromCustom = true
+                destinationVC.keyArray = customSessionsArray[selectedSession[0]][selectedPreset][1] as! [Int]
+                destinationVC.setsArray = customSessionsArray[selectedSession[0]][selectedPreset][2] as! [Int]
+                destinationVC.repsArray = customSessionsArray[selectedSession[0]][selectedPreset][3] as! [String]
+        // Circuit Workout
+        case "customSessionSegueCircuit"?:
+            break
+        // Normal Workout
+        case "customSessionSegue"?:
+            break
+        // Cardio
+        case "customSessionSegueCardio"?:
+            break
+        // Yoga
+        case "customSessionSegueYoga"?:
+            break
+        default:
+            break
+        }
+        
         if segue.identifier == "sessionSegueCardio" {
             //
             let destinationVC = segue.destination as! CardioScreen

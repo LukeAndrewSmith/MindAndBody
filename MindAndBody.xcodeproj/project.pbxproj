@@ -226,7 +226,6 @@
 		072953BC1F4EE37200B2F21C /* squatBody@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 072953BA1F4EE37200B2F21C /* squatBody@3x.png */; };
 		072953BF1F4EEA0800B2F21C /* neckJoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 072953BD1F4EEA0800B2F21C /* neckJoint@2x.png */; };
 		072953C01F4EEA0800B2F21C /* neckJoint@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 072953BE1F4EEA0800B2F21C /* neckJoint@3x.png */; };
-		0729F6761F8C11AD00C9F810 /* FinalChoiceCustomHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0729F6751F8C11AD00C9F810 /* FinalChoiceCustomHelpers.swift */; };
 		0729FF9F1F4D70E40048A355 /* cossakSquat.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729FF971F4D70E40048A355 /* cossakSquat.png */; };
 		0729FFA01F4D70E40048A355 /* cossakSquat1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729FF981F4D70E40048A355 /* cossakSquat1.png */; };
 		0729FFA11F4D70E40048A355 /* cossakSquat2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729FF991F4D70E40048A355 /* cossakSquat2.png */; };
@@ -1619,7 +1618,6 @@
 		072953BA1F4EE37200B2F21C /* squatBody@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "squatBody@3x.png"; sourceTree = "<group>"; };
 		072953BD1F4EEA0800B2F21C /* neckJoint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "neckJoint@2x.png"; sourceTree = "<group>"; };
 		072953BE1F4EEA0800B2F21C /* neckJoint@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "neckJoint@3x.png"; sourceTree = "<group>"; };
-		0729F6751F8C11AD00C9F810 /* FinalChoiceCustomHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalChoiceCustomHelpers.swift; sourceTree = "<group>"; };
 		0729FF971F4D70E40048A355 /* cossakSquat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cossakSquat.png; sourceTree = "<group>"; };
 		0729FF981F4D70E40048A355 /* cossakSquat1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cossakSquat1.png; sourceTree = "<group>"; };
 		0729FF991F4D70E40048A355 /* cossakSquat2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cossakSquat2.png; sourceTree = "<group>"; };
@@ -3642,7 +3640,6 @@
 		077AC0CE1DA535830026895B = {
 			isa = PBXGroup;
 			children = (
-				0729F6751F8C11AD00C9F810 /* FinalChoiceCustomHelpers.swift */,
 				078F408E1F4B6C1C00B4F566 /* SwiftCharts.xcodeproj */,
 				077AC0D91DA535830026895B /* MindAndBody */,
 				077AC0F01DA535840026895B /* MindAndBodyTests */,
@@ -8272,7 +8269,6 @@
 				07686A8E1F84399A00C278CC /* ScheduleAnimationHelpers.swift in Sources */,
 				07F0C4951EA6128C00927DA8 /* StretchingChoiceCustom.swift in Sources */,
 				07A42E481EDDFD3C0047E8F1 /* CardioChoiceCustom.swift in Sources */,
-				0729F6761F8C11AD00C9F810 /* FinalChoiceCustomHelpers.swift in Sources */,
 				072A87721EDEC59A00684809 /* CardioChoiceHIIT.swift in Sources */,
 				07DEE6F91E0AADF2003B89AB /* MeditationChoice.swift in Sources */,
 				077BC6951F725DCB00B9E798 /* FinalChoiceCustom.swift in Sources */,

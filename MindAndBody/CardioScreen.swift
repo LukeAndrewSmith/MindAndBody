@@ -296,18 +296,19 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         case 1:
             //
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EndTableViewCell", for: indexPath) as! EndTableViewCell
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             //
-            cell.backgroundColor = colour2
+            cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             //
             cell.separatorInset =  UIEdgeInsetsMake(0, 0, 0, 0)
             //
             cell.layer.borderWidth = 2
             cell.layer.borderColor = colour1.cgColor
             //
-            cell.titleLabel?.text = NSLocalizedString("end", comment: "")
-            cell.titleLabel?.textColor = colour1
-            cell.titleLabel?.textAlignment = .center
+            cell.textLabel?.text = NSLocalizedString("end", comment: "")
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+            cell.textLabel?.textColor = colour1
+            cell.textLabel?.textAlignment = .center
             //
             return cell
         default: return UITableViewCell(style: .value1, reuseIdentifier: nil)

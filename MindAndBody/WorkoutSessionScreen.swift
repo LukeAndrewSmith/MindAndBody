@@ -353,7 +353,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         case 1:
             //
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EndRoundTableViewCell", for: indexPath) as! EndRoundTableViewCell
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             //
             cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             //
@@ -363,12 +363,13 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.layer.borderColor = colour1.cgColor
             //
             if sessionScreenRoundIndex + 1 < numberOfRounds {
-                cell.titleLabel?.text = NSLocalizedString("endRound", comment: "") + " " + String(sessionScreenRoundIndex + 1)
+                cell.textLabel?.text = NSLocalizedString("endRound", comment: "") + " " + String(sessionScreenRoundIndex + 1)
             } else {
-                cell.titleLabel?.text = NSLocalizedString("endWorkout", comment: "")
+                cell.textLabel?.text = NSLocalizedString("endWorkout", comment: "")
             }
-            cell.titleLabel?.textColor = colour1
-            cell.titleLabel?.textAlignment = .center
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+            cell.textLabel?.textColor = colour1
+            cell.textLabel?.textAlignment = .center
             //
             return cell
         default: return UITableViewCell(style: .value1, reuseIdentifier: nil)

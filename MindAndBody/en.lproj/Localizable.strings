@@ -363,7 +363,7 @@
 // Warm Up Upper Movements Explanations
 //
 // Mandatory
-"5minCardioEH" = "Any form of cardio works;\nTreadmill (brisk walk)\nStep Machine (my favourite)\nBiking\nRowing, etc.\nNote for cardio home:\nWalking up stairs\nJogging/Jumping on the spot\nAnything to get your heart pumping!";
+"5minCardioEH" = "Any form of cardio works;\nTreadmill (brisk walk)\nStep Machine (my favourite)\nBiking\nRowing, etc.\nNOTE: Cardio at home:\nWalking up stairs\nJogging/Jumping on the spot\nAnything to get your heart pumping!";
 "5minCardioEA" = "Pushing yourself";
 "5minCardioEF" = "Relaxing the mind\nBreathing";
 //Purpose:\nThe cardio should raise the body temperature, heart rate, and blood flow which together increase the flexibility of muscles and joints.
@@ -588,12 +588,14 @@
     "5x5" = "5 x 5";
 
             // Custom
+        "nRoundsTitle" = "Nº Rounds: ";
         "customWorkoutClassic" = "- Custom Workout (Classic) -";
         "customWorkoutCircuit" = "- Custom Workout (Circuit) -";
         "workoutInputTitle" = "Workout Title";
         "workoutRemoveTitle" = "Remove Workout";
             //
         "numberOfRounds" = "Nº Rounds: ";
+        "notCircuitWorkout" = " (i.e not a circuit)";
 
             // Information Workout
         "purposeTextWorkout" = "";

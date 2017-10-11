@@ -57,7 +57,7 @@ enum customSectionEmtpySessions {
         [""],
         // Movements - Int
         [],
-        // Sets - Int
+        // Sets - Int || Rounds - Int ([nRounds, -1], -1 indicates that its a circuit workout)
         [],
         // Reps - String?
         []
@@ -70,9 +70,7 @@ enum customSectionEmtpySessions {
         [""],
         // Movements - Int
         [],
-        // Rounds - Int
-        [],
-        // Reps - String?
+        // Reps - Int
         []
     ]
     

@@ -36,6 +36,10 @@ class StretchingTableViewCell: UITableViewCell {
 class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //
+    // Custom?
+    var fromCustom = false
+    
+    //
     // Variables
     var selectedRow = 0
     
@@ -44,21 +48,21 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
     //
     // Key Array
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [1] Keys Array
-    var keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+    var keyArray: [Int] = []
     
     // STRETCHING
     // Breat
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] breaths array
-    var breathsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+    var breathsArray: [Int] = []
     
     // WARMUP
     // Sets
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] sets array
-    var setsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+    var setsArray: [Int] = []
     
     // Reps
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [3] reps array
-    var repsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3] as! [String]
+    var repsArray: [String] = []
     
     
     // To Add (@2x or @3x) for demonstration images
@@ -109,6 +113,15 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //
+        // Set Arrays
+        if fromCustom == false {
+            keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+            breathsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+            setsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+            repsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3] as! [String]
+        }
         
         // Device Scale for @2x and @3x of Target Area Images
         switch UIScreen.main.scale {
@@ -361,18 +374,19 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         //
         case 1:
             //
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EndTableViewCell", for: indexPath) as! EndTableViewCell
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             //
             cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             //
-            cell.separatorInset =  UIEdgeInsetsMake(0.0, 0.0, 0.0, -cell.bounds.size.width)
+            cell.separatorInset =  UIEdgeInsetsMake(0, 0, 0, 0)
             //
             cell.layer.borderWidth = 2
             cell.layer.borderColor = colour1.cgColor
             //
-            cell.titleLabel?.text = NSLocalizedString("end", comment: "")
-            cell.titleLabel?.textColor = colour1
-            cell.titleLabel?.textAlignment = .center
+            cell.textLabel?.text = NSLocalizedString("end", comment: "")
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+            cell.textLabel?.textColor = colour1
+            cell.textLabel?.textAlignment = .center
             //
             return cell
         default: return UITableViewCell(style: .value1, reuseIdentifier: nil)

@@ -36,7 +36,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" shadowImage="ShadowImage" id="Ace-JK-2vv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Ace-JK-2vv">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2678,7 +2678,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="012-1d-8yV">
-                                                    <rect key="frame" x="137" y="330.5" width="102.5" height="22.5"/>
+                                                    <rect key="frame" x="137" y="331" width="102.5" height="22.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4247,6 +4247,24 @@
                                     <outlet property="delegate" destination="A7A-wz-wFE" id="O9i-C3-TMz"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSe-cY-rnZ">
+                                <rect key="frame" x="345" y="73.5" width="30" height="49"/>
+                                <color key="tintColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="Plus"/>
+                                <connections>
+                                    <action selector="addMovementAction:" destination="A7A-wz-wFE" eventType="touchUpInside" id="KZ6-0z-3qa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KxY-4S-BJs">
+                                <rect key="frame" x="0.0" y="73.5" width="175" height="49"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="23"/>
+                                <state key="normal" title="Nº Rounds: 2">
+                                    <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="nRoundsAction:" destination="A7A-wz-wFE" eventType="touchUpInside" id="l1M-mb-Bta"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqe-lp-kT3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="73.5"/>
                                 <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4261,30 +4279,14 @@
                                     <action selector="presetsAction:" destination="A7A-wz-wFE" eventType="touchUpInside" id="jOj-Q9-3cS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSe-cY-rnZ">
-                                <rect key="frame" x="187.5" y="73.5" width="187.5" height="49"/>
-                                <color key="tintColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="Plus"/>
-                                <connections>
-                                    <action selector="addMovementAction:" destination="A7A-wz-wFE" eventType="touchUpInside" id="KZ6-0z-3qa"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KxY-4S-BJs">
-                                <rect key="frame" x="1" y="73.5" width="187.5" height="49"/>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="23"/>
-                                <state key="normal" title="Nº Rounds: 2">
-                                    <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KxY-4S-BJs" firstAttribute="width" secondItem="wAM-am-mSE" secondAttribute="width" multiplier="1/2" id="01Q-6O-P9M"/>
                             <constraint firstAttribute="trailing" secondItem="jqe-lp-kT3" secondAttribute="trailing" id="0KX-gv-4wX"/>
                             <constraint firstItem="LXD-T9-tMw" firstAttribute="leading" secondItem="wAM-am-mSE" secondAttribute="leading" id="0dU-rc-UrH"/>
                             <constraint firstAttribute="trailing" secondItem="kSe-cY-rnZ" secondAttribute="trailing" id="1ym-oq-KLQ"/>
-                            <constraint firstItem="kSe-cY-rnZ" firstAttribute="width" secondItem="wAM-am-mSE" secondAttribute="width" multiplier="1/2" id="23I-E8-YxQ"/>
                             <constraint firstItem="tTk-Gw-byp" firstAttribute="leading" secondItem="wAM-am-mSE" secondAttribute="leading" id="6Hv-yx-fKh"/>
+                            <constraint firstAttribute="trailing" secondItem="KxY-4S-BJs" secondAttribute="trailing" constant="200" id="AlR-io-cgg"/>
                             <constraint firstItem="KxY-4S-BJs" firstAttribute="leading" secondItem="wAM-am-mSE" secondAttribute="leading" id="BTb-X9-fPc"/>
                             <constraint firstItem="jqe-lp-kT3" firstAttribute="top" secondItem="MCf-F8-3YA" secondAttribute="bottom" id="CAM-cZ-9JJ"/>
                             <constraint firstItem="tTk-Gw-byp" firstAttribute="top" secondItem="wAM-am-mSE" secondAttribute="top" constant="122.5" id="F16-bX-eFs"/>
@@ -4298,6 +4300,7 @@
                             <constraint firstItem="jqe-lp-kT3" firstAttribute="leading" secondItem="wAM-am-mSE" secondAttribute="leading" id="dFI-X6-xEK"/>
                             <constraint firstItem="tTk-Gw-byp" firstAttribute="top" secondItem="KxY-4S-BJs" secondAttribute="bottom" id="dvS-cE-KPL"/>
                             <constraint firstAttribute="trailing" secondItem="LXD-T9-tMw" secondAttribute="trailing" id="hb6-cd-2y8"/>
+                            <constraint firstItem="kSe-cY-rnZ" firstAttribute="leading" secondItem="wAM-am-mSE" secondAttribute="leading" constant="345" id="lCf-Lv-s5z"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Fli-4C-mHo"/>
@@ -4305,19 +4308,27 @@
                         <outlet property="beginButton" destination="LXD-T9-tMw" id="dGw-oY-mMP"/>
                         <outlet property="beginButtonConstraint" destination="KKW-mY-1ap" id="9gq-Va-THO"/>
                         <outlet property="customTableView" destination="tTk-Gw-byp" id="Ae0-S3-rGn"/>
-                        <outlet property="nRoundButton" destination="KxY-4S-BJs" id="Kue-lG-aX7"/>
+                        <outlet property="nRoundsButton" destination="KxY-4S-BJs" id="Kue-lG-aX7"/>
+                        <outlet property="nRoundsRight" destination="AlR-io-cgg" id="OZn-ML-BP5"/>
                         <outlet property="navigationBar" destination="Fli-4C-mHo" id="tv6-f3-gio"/>
                         <outlet property="newMovementButton" destination="kSe-cY-rnZ" id="Drb-TC-HL3"/>
+                        <outlet property="newMovementLeft" destination="lCf-Lv-s5z" id="WNE-R4-6Ax"/>
                         <outlet property="presetsBottom" destination="YWP-Pp-KiO" id="Iin-cf-v22"/>
                         <outlet property="presetsButton" destination="jqe-lp-kT3" id="DeD-Ni-G3L"/>
                         <outlet property="presetsTop" destination="CAM-cZ-9JJ" id="Bfm-BF-4va"/>
                         <outlet property="tableViewConstraintBottom" destination="Vp9-ud-rkA" id="cLj-Qj-O6g"/>
                         <outlet property="tableViewConstraintTop" destination="F16-bX-eFs" id="hSd-of-4oZ"/>
+                        <segue destination="bTr-Zb-a1u" kind="presentation" identifier="customSessionSegue" id="5BM-ai-zL4"/>
+                        <segue destination="tIh-Sp-rUW" kind="presentation" identifier="customSessionSegueCircuit" id="WE3-0F-Tbc"/>
+                        <segue destination="XYb-Cm-7Dl" kind="presentation" identifier="customSessionSegueTimeBased" id="tUJ-Lb-bfp"/>
+                        <segue destination="NUw-3d-e9i" kind="presentation" identifier="customSessionSegueStretching" id="m3z-OW-W4C"/>
+                        <segue destination="FeY-es-fcA" kind="presentation" identifier="customSessionSegueCardio" id="zU9-Z8-ErV"/>
+                        <segue destination="2ng-Gd-b3q" kind="presentation" identifier="customSessionSegueYoga" id="NBb-3X-dfT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zok-z3-RTy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10200.799999999999" y="2159.3703148425789"/>
+            <point key="canvasLocation" x="9577" y="518"/>
         </scene>
         <!--Time Based Screen-->
         <scene sceneID="uJh-73-ahr">
@@ -4492,17 +4503,22 @@
         <image name="Profile Selected" width="30" height="30"/>
         <image name="QuestionMark" width="30" height="30"/>
         <image name="QuestionMarkM" width="30" height="30"/>
-        <image name="ShadowImage" width="1" height="1"/>
         <image name="SlideMenu" width="30" height="30"/>
         <image name="TrackingClock" width="30" height="30"/>
         <image name="Tricep" width="375" height="375"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="tUJ-Lb-bfp"/>
         <segue reference="2sH-Wt-Foe"/>
         <segue reference="SOr-B2-NYZ"/>
+        <segue reference="zU9-Z8-ErV"/>
+        <segue reference="m3z-OW-W4C"/>
+        <segue reference="WE3-0F-Tbc"/>
+        <segue reference="NBb-3X-dfT"/>
+        <segue reference="5BM-ai-zL4"/>
         <segue reference="aak-rT-dwz"/>
         <segue reference="bsb-5O-GBj"/>
         <segue reference="y3k-i5-esE"/>
-        <segue reference="M72-ar-DyO"/>
+        <segue reference="NiW-Wv-f4m"/>
     </inferredMetricsTieBreakers>
 </document>
