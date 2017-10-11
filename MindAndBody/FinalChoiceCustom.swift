@@ -55,7 +55,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     // Reps
     var repsPickerArray: [String] = ["1", "3", "5", "8", "10", "12", "15", "20", "3-5", "5-8", "8-12", "15-20", "15s", "30s", "60s", "90s"]
     // RepsCircuit
-    var repsPickerArrayCircuit: [String] = ["5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80", "85", "90", "95"]
+    var repsPickerArrayCircuit: [String] = ["1", "3", "5", "8", "10", "12", "15", "20", "30", "40", "50", "3-5", "5-8", "8-12", "15-20", "20-30", "30-40", "15s", "30s", "60s", "90s"]
     // Breaths
     var breathsPickerArray: [Int] = [5,10,15,20,25,30,35,40,45,50,100]
     
@@ -328,7 +328,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         // Set/Reps/Breaths
         } else {
             switch selectedSession[0] {
-            case 0: return 2
+            case 0:
+                return 2
             case 1:
                 // If circuit
                 if customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int == -1 {
@@ -337,8 +338,10 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 } else {
                     return 2
                 }
-            case 3,4: return 1
-            default: break
+            case 3,4:
+                return 1
+            default:
+                break
             }
         }
         return 0
@@ -380,6 +383,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     
     // View for row
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
         // Number of Rounds
         if selectingNumberOfRounds == true {
             let roundLabel = UILabel()
@@ -396,34 +400,30 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             // Other
         } else {
             //
+            // Find out session type
             switch selectedSession[0] {
+            // Warmup - Sets x Reps
             case 0:
                 //
-                // TODO: !
                 if component == 0 {
                     let setsLabel = UILabel()
                     setsLabel.text = String(setsPickerArray[row])
                     setsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
                     setsLabel.textColor = colour1
-                    //
                     setsLabel.textAlignment = .center
                     return setsLabel
-                    //
+                //
                 } else if component == 1 {
                     //
                     let repsLabel = UILabel()
                     // Row Label Text
                     switch row {
-                    //
                     case 0:
                         repsLabel.text = "        " + String(repsPickerArray[row]) + "  " + NSLocalizedString("rep", comment: "")
-                    //
                     case 1:
                         repsLabel.text = "         " + String(repsPickerArray[row]) + " " + NSLocalizedString("reps", comment: "")
-                    //
                     case 2...15:
                         repsLabel.text = String(repsPickerArray[row])
-                    //
                     default: break
                     }
                     repsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
@@ -432,16 +432,64 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     return repsLabel
                     //
                 }
+            // Workout
             case 1:
-                let repsLabel = UILabel()
-                repsLabel.text = String(repsPickerArrayCircuit[row])
-                repsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                repsLabel.textColor = colour1
+                // Circuit - Reps
+                if customSessionsArray[selectedSession[0]][selectedPreset][2].count == 2 && customSessionsArray[selectedSession[0]][selectedPreset][2][1] as! Int == -1 {
+                    //
+                    let repsLabel = UILabel()
+                    repsLabel.text = String(repsPickerArrayCircuit[row])
+                    repsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
+                    repsLabel.textColor = colour1
+                    repsLabel.textAlignment = .center
+                    return repsLabel
+                // Normal - Sets x Reps
+                } else {
+                    //
+                    if component == 0 {
+                        let setsLabel = UILabel()
+                        setsLabel.text = String(setsPickerArray[row])
+                        setsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
+                        setsLabel.textColor = colour1
+                        setsLabel.textAlignment = .center
+                        return setsLabel
+                        //
+                    } else if component == 1 {
+                        //
+                        let repsLabel = UILabel()
+                        // Row Label Text
+                        switch row {
+                        case 0:
+                            repsLabel.text = "        " + String(repsPickerArray[row]) + "  " + NSLocalizedString("rep", comment: "")
+                        case 1:
+                            repsLabel.text = "         " + String(repsPickerArray[row]) + " " + NSLocalizedString("reps", comment: "")
+                        case 2...15:
+                            repsLabel.text = String(repsPickerArray[row])
+                        default: break
+                        }
+                        repsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
+                        repsLabel.textColor = colour1
+                        repsLabel.textAlignment = .center
+                        return repsLabel
+                        //
+                    }
+                }
+            // Cardio
+            case 2:
+                // TODO: Cardio
+                break
+            // Stretching/Yoga - Breaths
+            case 3,4:
                 //
-                repsLabel.textAlignment = .center
-                return repsLabel
+                let breathsLabel = UILabel()
+                breathsLabel.text = String(breathsPickerArray[row])
+                breathsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
+                breathsLabel.textColor = colour1
+                breathsLabel.textAlignment = .center
+                return breathsLabel
             //
-            default: break
+            default:
+                break
             }
         }
         return UIView()
@@ -1003,7 +1051,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             
             //
             // selected row
-            // TODO: selectedSession[0]
+            // TODO: selectedSession[0], selectRowIndComponent
 //            switch selectedSession[0] {
 //            case 0:
 //                let test = customSessionsArray[selectedSession[0]][selectedPreset][2][indexPath.row] as! Int
