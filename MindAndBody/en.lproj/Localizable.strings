@@ -268,7 +268,6 @@
     //
     "selectWarmup" = "- Select Warmup -";
     "customWarmup" = "- Custom Warmup -";
-    "customWarmups" = "Custom Warmups";
         // Warm Up //
         //
 
@@ -589,8 +588,7 @@
 
             // Custom
         "nRoundsTitle" = "Nº Rounds: ";
-        "customWorkoutClassic" = "- Custom Workout (Classic) -";
-        "customWorkoutCircuit" = "- Custom Workout (Circuit) -";
+        "customWorkout" = "- Custom Workout -";
         "workoutInputTitle" = "Workout Title";
         "workoutRemoveTitle" = "Remove Workout";
             //
@@ -886,6 +884,7 @@
 "running" = "Running";
 
 "selectCardioSession" = "- Select Cardio Session -";
+"customHIITCardioSession" = "- Custom Cardio Session -";
 
 "timeBased" = " Time Based"; // Space Important
 "distanceBased" = " Distance Based";
