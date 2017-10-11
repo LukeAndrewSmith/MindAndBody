@@ -38,14 +38,15 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     //
     // MARK: Variables from Session Data
+    var fromCustom = false
     //
     // Key Array
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [1] Keys Array
-    var keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+    var keyArray: [Int] = []
     
     // Length
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] length array
-    var lengthArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+    var lengthArray: [Int] = []
     
     
     // Distance based or time based, 0 = time based, 1 = distance based
@@ -102,11 +103,19 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         //
-        //
         view.backgroundColor = colour2
         
+        //
+        // Custom?
+        if fromCustom == false {
+            keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+            lengthArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+        } else {
+            // Time based
+            sessionType = 0
+        }
         
-        
+        //
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
         
@@ -133,6 +142,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         // Watch for enter foreground
         switch sessionType {
+        //
         case 0:
             NotificationCenter.default.addObserver(self, selector: #selector(startAllTimers), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
@@ -215,7 +225,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             //
             cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: "")
             //
-            cell.movementLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+            cell.movementLabel?.font = UIFont(name: "SFUIDisplay-light", size: 33)
             cell.movementLabel?.textAlignment = .center
             cell.movementLabel?.textColor = colour1
             cell.movementLabel?.numberOfLines = 0
@@ -458,8 +468,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     //
     //
     var sessionLength = Int()
-    // Index of element in length array
-    var indexNumber = Int()
     //
     var arrayOfNotifications: [String] = []
     // Array of times to perform actions (next movement)
@@ -484,7 +492,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         //
         sessionLength = lengthArray.reduce(0, +)
-        indexNumber = -1
         //
         if didSetEndTime == false {
             //
@@ -504,29 +511,39 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Create Notifications
         if didSetNotifications == false {
             didSetNotifications = true
-            for i in lengthArray {
-                //
-                indexNumber += 1
+            for i in 1...keyArray.count {
                 //
                 let content = UNMutableNotificationContent()
                 content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
-                if indexNumber != keyArray.count - 1 {
-                    content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][indexNumber + 1]!, comment: "")
+                if i != keyArray.count {
+                    content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][keyArray[i]]!, comment: "")
+                    // Sound, low if pause, high if start cardio
+                    switch keyArray[i] {
+                    // High
+                    case 0,1,2, 6,7,8, 12,13,14:
+                        content.sound = UNNotificationSound(named: "Tibetan Singing Bowl (High).caf")
+                    // Low
+                    case 3,4,5, 9,10,11, 15,16,17:
+                        content.sound = UNNotificationSound(named: "Tibetan Singing Bowl (Low).caf")
+                    default:
+                        break
+                    }
                 } else {
                     content.title = NSLocalizedString("cardioEnd", comment: "")
+                    // Sound
+                    content.sound = UNNotificationSound(named: "Tibetan Singing Bowl (Low).caf")
                 }
-                
                 content.body = " "
-                content.sound = UNNotificationSound.default()
                 
-                sessionLength -= i
+                // Reduce session length (used for setting notification time)
+                sessionLength -= lengthArray[i - 1]
                 //
                 arrayOfTimes.append(sessionLength)
                 //
                 let timeToTrigger = (endTime - startTime) - Double(sessionLength)
                 let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeToTrigger, repeats: false)
                 //
-                let identifier = "timer" + String(indexNumber)
+                let identifier = "timer" + String(i)
                 arrayOfNotifications.append(identifier)
                 let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
                 

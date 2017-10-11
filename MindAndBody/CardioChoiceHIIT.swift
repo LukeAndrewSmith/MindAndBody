@@ -19,11 +19,11 @@ class CardioChoiceHIIT: UIViewController  {
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     // Buttons
-    @IBOutlet weak var rowing: UIButton!
+    @IBOutlet weak var running: UIButton!
     //
     @IBOutlet weak var biking: UIButton!
     //
-    @IBOutlet weak var running: UIButton!
+    @IBOutlet weak var rowing: UIButton!
     //
     
     //

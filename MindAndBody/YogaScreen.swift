@@ -41,14 +41,15 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //
     // MARK: Variables from Session Data
+    var fromCustom = false
     //
     // Key Array
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [1] Keys Array
-    var keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+    var keyArray: [Int] = []
     
     // Sets
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] breaths array
-    var breathsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+    var breathsArray: [Int] = []
     
     //
     var automaticYogaArray: [Int] = []
@@ -81,6 +82,13 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //
+        if fromCustom == false {
+            keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+            breathsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+        }
+        
         //
         view.backgroundColor = colour2
         

@@ -911,7 +911,7 @@
 "run" = "Running";
 "jog" = "Jogging";
 "still" = "Pause";     // Running Pauses
-"slowJog" = "Slow Joging";
+"slowJog" = "Slow Jogging";
 "stretch" = "Stretching";
 
 
@@ -1161,6 +1161,7 @@
 
             "breathsC" = "breaths";
             "breathsA" = "br.";
+            "breaths" = "breaths";
 
 
 

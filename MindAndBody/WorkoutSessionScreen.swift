@@ -45,20 +45,19 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     
     //
     // MARK: Variables from Session Data
+    var fromCustom = false
     //
     // Key Array
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [1] Keys Array
-    var keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+    var keyArray: [Int] = []
     
     // Reps
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [3] reps array
-    var repsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3] as! [String]
-    
+    var repsArray: [String] = []
     
     //
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] rounds array, [0] = round
-    var numberOfRounds = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2][0] as! Int
-    
+    var numberOfRounds = Int()
     
     
     // To Add (@2x or @3x) for demonstration images
@@ -121,15 +120,22 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Device Scale for @2x and @3x of Target Area Images
-        switch UIScreen.main.scale {
-        case 1,2:
-            toAdd = "@2x"
-        case 3:
-            toAdd = "@3x"
-        default: break
+        //
+        if fromCustom == false {
+            keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+            repsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3] as! [String]
+            numberOfRounds = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2][0] as! Int
         }
         
+//        // Device Scale for @2x and @3x of Target Area Images
+//        switch UIScreen.main.scale {
+//        case 1,2:
+//            toAdd = "@2x"
+//        case 3:
+//            toAdd = "@3x"
+//        default: break
+//        }
+//
         //
         view.backgroundColor = colour2
         
@@ -372,7 +378,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.textLabel?.textAlignment = .center
             //
             return cell
-        default: return UITableViewCell(style: .value1, reuseIdentifier: nil)
+        default:
+            return UITableViewCell(style: .value1, reuseIdentifier: nil)
         }
     }
     

@@ -53,18 +53,19 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     //
     // MARK: Variables from Session Data
+    var fromCustom = false
     //
     // Key Array
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [1] Keys Array
-    var keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+    var keyArray: [Int] = []
     
     // Sets
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] sets array
-    var setsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+    var setsArray: [Int] = []
     
     // Reps
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [3] reps array
-    var repsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3] as! [String]
+    var repsArray: [String] = []
     
     
     // To Add (@2x or @3x) for demonstration images
@@ -130,6 +131,13 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
 //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //
+        if fromCustom == false {
+            keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+            setsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+            repsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3] as! [String]
+        }
         
         // Device Scale for @2x and @3x of Target Area Images
         switch UIScreen.main.scale {
@@ -342,11 +350,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "OverviewTableViewCell", for: indexPath) as! OverviewTableViewCell
-            
             //
             let key = keyArray[indexPath.row]
-
-            
             //
             cell.buttonView.layoutIfNeeded()
             //
@@ -354,7 +359,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             for v in cell.buttonView.subviews {
                 v.removeFromSuperview()
             }
-    
             //
             // Cell
             cell.backgroundColor = colour2

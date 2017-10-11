@@ -74,6 +74,9 @@ enum sessionData {
             ],
             // Cardio
             [
+                "running",
+                "biking",
+                "rowing"
             ],
             // Stretching
             [
@@ -206,6 +209,12 @@ enum sessionData {
             ],
             // Cardio ??
             [
+                // Running
+                [0,1,2,3,4,5],
+                // Biking
+                [6,7,8,9,10,11],
+                // Rowing
+                [12,13,14,15,16,17]
             ],
             // Stretching
             [
@@ -494,12 +503,12 @@ enum sessionData {
             ],
             // Cardio
             [
-                // Rowing
-                0: "sprintR",    // Rowing
-                1: "fastR",
-                2: "mediumR",
-                3: "stillR",     // Rowing Pauses
-                4: "slowR",
+                // Running
+                0: "sprint",   // Running
+                1: "run",
+                2: "jog",
+                3: "still",   // Running Pauses
+                4: "slowJog",
                 5: "stretch",
                 // Biking
                 6: "sprintB",   // Bike
@@ -508,12 +517,12 @@ enum sessionData {
                 9: "stillB",      // Biking Pauses
                 10: "slowB",
                 11: "stretch",
-                // Running
-                12: "sprint",   // Running
-                13: "run",
-                14: "jog",
-                15: "still",   // Running Pauses
-                16: "slowJog",
+                // Rowing
+                12: "sprintR",    // Rowing
+                13: "fastR",
+                14: "mediumR",
+                15: "stillR",     // Rowing Pauses
+                16: "slowR",
                 17: "stretch",
                 ],
             // Stretching
@@ -924,10 +933,10 @@ enum sessionData {
             // Cardio
             [
                 // Running
-                0: ["rowing"],    // Rowing
-                1: ["rowing"],
-                2: ["rowing"],
-                3: ["Pause"],     // Rowing Pauses
+                0: ["running"],    // Running
+                1: ["running"],
+                2: ["running"],
+                3: ["Pause"],     // Running Pauses
                 4: ["Pause"],
                 5: ["Pause"],
                 // Biking
@@ -938,10 +947,10 @@ enum sessionData {
                 10: ["Pause"],
                 11: ["Pause"],
                 // Running
-                12: ["running"],   // Running
-                13: ["running"],
-                14: ["running"],
-                15: ["Pause"],   // Running Pauses
+                12: ["rowing"],   // Rowing
+                13: ["rowing"],
+                14: ["rowing"],
+                15: ["Pause"],   // Rowing Pauses
                 16: ["Pause"],
                 17: ["Pause"],
                 ],

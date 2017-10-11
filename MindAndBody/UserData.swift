@@ -301,16 +301,14 @@ enum Register {
             // Reps - String? - 3
             []
     ]
-    // Empty Session, Cardio, Stretching, Yoga, - [string],[int],[int][int]
+    // Empty Session, Cardio, Stretching, Yoga, - [string],[int][int]
     static let emptySessionThree: [[Any]] =
         [
             // Name - String - 0
             [],
             // Movements - Int - 1
             [],
-            // Rounds - Int - 2
-            [],
-            // Reps - String?/Int? - 3
+            // Breaths/Time - Int
             []
     ]
     
