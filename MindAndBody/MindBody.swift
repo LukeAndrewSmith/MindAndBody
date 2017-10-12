@@ -393,55 +393,33 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         Meditation.layer.cornerRadius = Meditation.frame.size.height / 2
         Meditation.clipsToBounds = true
         
-        
-        
         //
         let blur = UIBlurEffect(style: .dark)
         let vibrancy = UIVibrancyEffect(blurEffect: blur)
-        
-        let vibrancyTest = UIVibrancyEffect()
-        let testVibrancy = UIVisualEffectView()
-        testVibrancy.effect = vibrancyTest
+        let vibrancyView = UIVisualEffectView(effect: vibrancy)
         //
 //        blur0.effect = blur
-//        blur0.effect = vibrancy
-        //
-        blur1.effect = blur
+        blur0.contentView.addSubview(vibrancyView)
+//        blur1.effect = blur
         blur1.effect = vibrancy
-        
-        //
-        blur2.effect = blur
+//        blur2.effect = blur
         blur2.effect = vibrancy
-        //
-        blur3.effect = blur
+//        blur3.effect = blur
         blur3.effect = vibrancy
-        
-        //
-        blur4.effect = blur
+//        blur4.effect = blur
         blur4.effect = vibrancy
-        //
-        blur5.effect = blur
+//        blur5.effect = blur
         blur5.effect = vibrancy
-        
-        //
-        blur6.effect = blur
+//        blur6.effect = blur
         blur6.effect = vibrancy
-        //
-        blur7.effect = blur
+//        blur7.effect = blur
         blur7.effect = vibrancy
         
-        
         // Blur Positioning and frame
-        testVibrancy.bounds = Warmup.bounds
-        testVibrancy.layer.cornerRadius = Warmup.frame.size.height / 2
-        testVibrancy.clipsToBounds = true
-        testVibrancy.center = Warmup.center
-        view.insertSubview(testVibrancy, belowSubview: Warmup)
-
-//        blur0.bounds = Warmup.bounds
-//        blur0.layer.cornerRadius = Warmup.frame.size.height / 2
-//        blur0.clipsToBounds = true
-//        blur0.center = Warmup.center
+        blur0.bounds = Warmup.bounds
+        blur0.layer.cornerRadius = Warmup.frame.size.height / 2
+        blur0.clipsToBounds = true
+        blur0.center = Warmup.center
         //
         blur1.bounds = Workout.bounds
         blur1.layer.cornerRadius = Workout.frame.size.height / 2

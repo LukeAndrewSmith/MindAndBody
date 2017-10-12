@@ -74,6 +74,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     var selectedItem = Int()
     
+    // NOTE:
+    // settings[3] = settings[3]
+    
 //
 // View did load --------------------------------------------------------------------------------------------------
 //
@@ -167,9 +170,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         offView.frame = CGRect(x: 0, y: yPosition, width: self.view.frame.size.width, height: view.frame.size.height - yPosition)
         
         var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let automaticYogaArray = settings[3]
         // Retreive Presentation Style
-        if automaticYogaArray[0] == 0 {
+        if settings[3][0] == 0 {
             view.insertSubview(offView, aboveSubview: tableViewAutomatic)
             tableViewAutomatic.isScrollEnabled = false
         }
@@ -268,37 +270,36 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             //
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let automaticYogaArray = settings[3]
 
             //
             switch indexPath.section {
             case 0:
                 // Retreive Presentation Style
-                if automaticYogaArray[0] == 0 {
+                if settings[3][0] == 0 {
                     cell.textLabel?.text = NSLocalizedString("off", comment: "")
                 } else {
                     cell.textLabel?.text = NSLocalizedString("on", comment: "")
                 }
             case 1:
                 //
-                if automaticYogaArray[1] == -1 {
+                if settings[3][1] == -1 {
                     cell.textLabel?.text = "-"
                 } else {
-                    cell.textLabel?.text = String(timeArray[automaticYogaArray[1]]) + "s"
+                    cell.textLabel?.text = String(timeArray[settings[3][1]]) + "s"
                 }
             case 2:
                 //
-                if automaticYogaArray[2] == -1 {
+                if settings[3][2] == -1 {
                     cell.textLabel?.text = "-"
                 } else {
-                    cell.textLabel?.text = String(transitionArray[automaticYogaArray[2]]) + "s"
+                    cell.textLabel?.text = String(transitionArray[settings[3][2]]) + "s"
                 }
             case 3:
                 //
-                if automaticYogaArray[3] == -1 {
+                if settings[3][3] == -1 {
                     cell.textLabel?.text = "-"
                 } else {
-                    cell.textLabel?.text = NSLocalizedString(bellsArray[automaticYogaArray[3]], comment: "")
+                    cell.textLabel?.text = NSLocalizedString(bellsArray[settings[3][3]], comment: "")
                 }
             default: break
             }
@@ -325,10 +326,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             //
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let automaticYogaArray = settings[3]
             if didChangeTransitionIndicator == false {
-                if automaticYogaArray[3] != -1 {
-                    selectedTransitionIndicator = automaticYogaArray[3]
+                if settings[3][3] != -1 {
+                    selectedTransitionIndicator = settings[3][3]
                 }
             }
             //
@@ -365,7 +365,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.cellForRow(at: indexPath)
         //
         var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let automaticYogaArray = settings[3]
         
         //
         switch tableView {
@@ -375,12 +374,12 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // On/Off
             case 0:
                 // off -> on
-                if automaticYogaArray[0] == 0 {
+                if settings[3][0] == 0 {
                     //
                     cell?.textLabel?.text = NSLocalizedString("on", comment: "")
                     settings[3][0] = 1
                 
-                    if automaticYogaArray[1] == -1 && automaticYogaArray[2] == -1 {
+                    if settings[3][1] == -1 && settings[3][2] == -1 {
                         navigationItem.hidesBackButton = true
                     }
                     //
@@ -440,10 +439,10 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 selectionView.addSubview(pickerView)
                 pickerView.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
                 // Select Rows
-                if automaticYogaArray[1] == -1 {
+                if settings[3][1] == -1 {
                     pickerView.selectRow(0, inComponent: 0, animated: true)
                 } else {
-                    pickerView.selectRow(automaticYogaArray[1], inComponent: 0, animated: true)
+                    pickerView.selectRow(settings[3][1], inComponent: 0, animated: true)
                 }
                 //
                 selectionView.addSubview(indicatorLabel)
@@ -486,10 +485,10 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 selectionView.addSubview(pickerView)
                 pickerView.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
                 // Select Rows
-                if automaticYogaArray[1] == -1 {
+                if settings[3][1] == -1 {
                     pickerView.selectRow(0, inComponent: 0, animated: true)
                 } else {
-                    pickerView.selectRow(automaticYogaArray[2], inComponent: 0, animated: true)
+                    pickerView.selectRow(settings[3][2], inComponent: 0, animated: true)
                 }
                 //
                 selectionView.addSubview(indicatorLabel)
@@ -689,7 +688,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         let defaults = UserDefaults.standard
         var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let automaticYogaArray = settings[3]
         //
         switch selectedItem {
         //
@@ -701,7 +699,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             let indexPath = NSIndexPath(row: 0, section: 1)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
-            cell?.textLabel?.text = String(timeArray[automaticYogaArray[1]]) + "s"
+            cell?.textLabel?.text = String(timeArray[settings[3][1]]) + "s"
         //
         // Transition time
         case 1:
@@ -711,7 +709,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             let indexPath = NSIndexPath(row: 0, section: 2)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
-            cell?.textLabel?.text = String(transitionArray[automaticYogaArray[2]]) + "s"
+            cell?.textLabel?.text = String(transitionArray[settings[3][2]]) + "s"
         //
         // Transition Indicator
         case 2:
@@ -735,7 +733,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         default: break
         }
         //
-        if automaticYogaArray[1] != -1 && automaticYogaArray[2] != -1 {
+        if settings[3][1] != -1 && settings[3][2] != -1 {
             navigationItem.hidesBackButton = false
         }
         

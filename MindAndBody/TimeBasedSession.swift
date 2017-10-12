@@ -40,26 +40,18 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     var selectedRow = 0
     
     //
+    // Is paused
+    var isPaused = false
+    
+    //
     // MARK: Variables from Session Data
     //
     // Key Array
     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [1] Keys Array
     var keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
     
-    // STRETCHING
-    // Breat
-    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] breaths array
-    var breathsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
-    
-    // WARMUP
-    // Sets
-    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] sets array
-    var setsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
-    
-    // Reps
-    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [3] reps array
-    var repsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3] as! [String]
-    
+    // Length
+    var lengthArray: [Int] = []
     
     // To Add (@2x or @3x) for demonstration images
     var toAdd = String()
@@ -102,6 +94,9 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
         })
+        
+        // Play
+        playAnimation(row: selectedRow)
     }
     
     //
@@ -109,6 +104,18 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //
+        switch selectedSession[0] {
+        // Warmup/Stretching
+        case 0,3:
+         lengthArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[4] as! [Int]
+        // Bodyweight Circuit Workout
+        case 1:
+            lengthArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[4] as! [Int]
+        default:
+            break
+        }
         
         // Device Scale for @2x and @3x of Target Area Images
         switch UIScreen.main.scale {
@@ -260,7 +267,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             // Movement
             cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: "")
             //
-            cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 27)
+            cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 33)
             cell.movementLabel?.textAlignment = .center
             cell.movementLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             cell.movementLabel?.adjustsFontSizeToFitWidth = true
@@ -271,19 +278,11 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             //
             // Gestures
-            //
             // Next Swipe
             let nextSwipe = UISwipeGestureRecognizer()
             nextSwipe.direction = .up
             nextSwipe.addTarget(self, action: #selector(nextButtonAction))
             cell.addGestureRecognizer(nextSwipe)
-            
-            // Back Swipe
-            let backSwipe = UISwipeGestureRecognizer()
-            backSwipe.direction = .down
-            backSwipe.addTarget(self, action: #selector(backButtonAction))
-            cell.addGestureRecognizer(backSwipe)
-            
             // Explanation
             let explanationTap = UITapGestureRecognizer()
             explanationTap.numberOfTapsRequired = 1
@@ -302,18 +301,19 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.imageViewCell.addGestureRecognizer(imageSwipeRight)
             cell.imageViewCell.isUserInteractionEnabled = true
             
-            
             // Alphas
             switch indexPath.row {
             case selectedRow - 1:
                 cell.indicatorStack.alpha = 0
                 cell.movementLabel.alpha = 0
                 cell.explanationButton.alpha = 0
+                cell.timeLabel.alpha = 0
             //
             case selectedRow:
                 cell.indicatorStack.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
+                cell.timeLabel.alpha = 1
                 //cell.demonstrationImageView.isUserInteractionEnabled = true
             //
             case selectedRow + 1:
@@ -324,6 +324,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.indicatorStack.alpha = 0
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 0
+                cell.timeLabel.alpha = 0
+                cell.imageViewCell.alpha = 0
                 //cell.demonstrationImageView.isUserInteractionEnabled = false
             //
             default:
@@ -331,6 +333,14 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.indicatorStack.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
+                cell.timeLabel.alpha = 1
+            }
+            
+            //
+            // Hide question mark and image indicators if not paused
+            if isPaused == false {
+                cell.indicatorStack.alpha = 0
+                cell.explanationButton.alpha = 0
             }
             
             //
@@ -348,7 +358,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.layer.borderColor = colour1.cgColor
             //
             cell.textLabel?.text = NSLocalizedString("end", comment: "")
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 33)
             cell.textLabel?.textColor = colour1
             cell.textLabel?.textAlignment = .center
             //
@@ -364,11 +374,11 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         case 0:
             switch indexPath.row {
             case selectedRow - 1, selectedRow:
-                return (UIScreen.main.bounds.height - 22) * 7/8
+                return (UIScreen.main.bounds.height - 22) * 9/10
             case selectedRow + 1:
-                return (UIScreen.main.bounds.height - 22) * 1/8
+                return (UIScreen.main.bounds.height - 22) * 1/10
             default:
-                return (UIScreen.main.bounds.height - 22) * 1/8
+                return (UIScreen.main.bounds.height - 22) * 1/10
             }
         case 1: return 49
         default: return 0
@@ -432,6 +442,38 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
+    // Play Image
+    func playAnimation(row: Int) {
+        //
+        // Get Cell
+        let indexPath = NSIndexPath(row: row, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
+        //
+        let key = keyArray[indexPath.row]
+        //
+        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        //
+        // Image Array
+        if imageCount > 1 && cell.imageViewCell.isAnimating == false {
+            var animationArray: [UIImage] = []
+            for i in 1...imageCount - 1 {
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
+            }
+            //
+            cell.imageViewCell.animationImages = animationArray
+            cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
+            cell.imageViewCell.animationRepeatCount = 1
+            //
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let defaultImage = settings[5][0]
+            if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+                if imageCount != 1 {
+                    cell.imageViewCell.startAnimating()
+                }
+            }
+        }
+    }
+    
     
     // Next Button
     @IBAction func nextButtonAction() {
@@ -453,10 +495,10 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
                 // 1
-                cell.movementLabel?.font = UIFont(name: "SFUIDisplay-light", size: 27)
-                cell.indicatorStack.alpha = 1
+                cell.movementLabel?.font = UIFont(name: "SFUIDisplay-light", size: 33)
                 cell.movementLabel.alpha = 1
-                cell.explanationButton.alpha = 1
+                cell.imageViewCell.alpha = 1
+                cell.timeLabel.alpha = 1
                 //
                 // -1
                 cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! TimeBasedTableViewCell
@@ -465,6 +507,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.explanationButton.alpha = 0
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+            }, completion: { finished in
+                self.playAnimation(row: self.selectedRow)
             })
             // + 1
             if selectedRow < keyArray.count - 1 {
@@ -971,7 +1015,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 rightSwipe.layer.cornerRadius = 25
                 rightSwipe.clipsToBounds = true
                 rightSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
-                rightSwipe.center.x = self.view.bounds.width * (1/8)
+                rightSwipe.center.x = self.view.bounds.width * (1/10)
                 UIApplication.shared.keyWindow?.insertSubview(rightSwipe, aboveSubview: self.walkthroughView)
                 // Perform swipe action
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
@@ -1079,7 +1123,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Animate swipe demonstration
                 UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     //
-                    upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
+                    upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/10)) + 2
                     //
                 }, completion: { finished in
                     self.nextButton.isEnabled = true

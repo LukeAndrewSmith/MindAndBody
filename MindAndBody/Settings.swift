@@ -298,9 +298,10 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             // Retreive Presentation Style
             if automaticYogaArray[0] == 0 {
                 cell.textLabel?.text = NSLocalizedString("off", comment: "")
+                cell.textLabel?.textColor = colour4
             } else {
                 cell.textLabel?.text = NSLocalizedString("on", comment: "")
-                
+                cell.textLabel?.textColor = colour3
             }
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = colour1
@@ -353,9 +354,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
                 let timedSession = settings[2][0]
                 if timedSession == 0 {
-                    cell.textLabel?.text = NSLocalizedString("on", comment: "")
-                } else {
                     cell.textLabel?.text = NSLocalizedString("off", comment: "")
+                    cell.textLabel?.textColor = colour4
+                } else {
+                    cell.textLabel?.text = NSLocalizedString("on", comment: "")
+                    cell.textLabel?.textColor = colour3
                 }
             case 5:
                 var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
@@ -471,6 +474,26 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             tableView.deselectRow(at: indexPath, animated: true)
             
             
+        // Timed Sessions
+        case 2:
+            // off --> on
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let timedSession = settings[2][0]
+            if timedSession == 0 {
+                cell?.textLabel?.text = NSLocalizedString("on", comment: "")
+                cell?.textLabel?.textColor = colour3
+                settings[2][0] = 1
+                UserDefaults.standard.set(settings, forKey: "userSettings")
+            // on --> off
+            } else if timedSession == 1 {
+                cell?.textLabel?.text = NSLocalizedString("off", comment: "")
+                cell?.textLabel?.textColor = colour4
+                settings[2][0] = 0
+                UserDefaults.standard.set(settings, forKey: "userSettings")
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
+            //
+            UserDefaults.standard.synchronize()
             
         // Yoga Automatic
         case 3:
@@ -555,8 +578,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 UserDefaults.standard.set(settings, forKey: "userSettings")
             }
             tableView.deselectRow(at: indexPath, animated: true)
-            //
-            UserDefaults.standard.synchronize()
             
 
             
@@ -804,7 +825,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     //
     // Components
-    var walkthroughTexts = ["settings0", "settings1"]
+    var walkthroughTexts = ["settings0", "settings1", "settings2"]
     var highlightSize: CGSize? = nil
     var highlightCenter: CGPoint? = nil
     // Corner radius, 0 = height / 2 && 1 = width / 2
@@ -833,7 +854,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         //
         switch walkthroughProgress {
             // First has to be done differently
-        // Walkthrough explanation
+        // Homepage
         case 0:
             //
             walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
@@ -868,7 +889,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             walkthroughProgress = self.walkthroughProgress + 1
             
             
-        // Menu
+        // Timed Sessions
         case 1:
             //
             highlightSize = CGSize(width: 175, height: 47 * 2)
@@ -886,6 +907,23 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             walkthroughProgress = self.walkthroughProgress + 1
             
+        // Automatic yoga
+        case 2:
+            //
+            highlightSize = CGSize(width: 175, height: 47 * 2)
+            let homepageMaxY = TopBarHeights.combinedHeight + (47 * 4) + (44 * 3)
+            highlightCenter = CGPoint(x: (175 / 2) + 7.5, y: homepageMaxY)
+            highlightCornerRadius = 2
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = colour2
+            walkthroughTextColor = colour1
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
             
         //
         default:

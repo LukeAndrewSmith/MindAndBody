@@ -1860,38 +1860,49 @@ enum sessionData {
     //
     // MARK: Preset Dictionaries
     // [Warmup, Workout, Cardio, Stretching, Yoga]
+                    // Note: Could be done better?, perhaps instead of parrallel arrays of sets,reps,movements, have dictionary of movements with associated sets,reps (easier to make sure number of sets,reps,movements is equal)
     static let presetsDictionaries: [[[[Int: [[Any]]]]]] =
         [
             // ---------------------------------------------------------------------------------------------------
             // Warmup = 0
-            // Session: [[name], [movements], [sets], [reps]]
+            // Session: [[name], [movements], [sets], [reps], [Timed]]
+                // [Timed] = time in seconds, used for timed sessions
             [
                 // Warmup - Full Body
                 [
                     // Sessions
                     [
                         0: [
+                            // Title
                             ["All Movements"],
+                            // Movements
                             [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67],
-                        [1,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            // Sets
+                            [1,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2],
+                            // Reps
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            // Time
+                            [1,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2,1,1,2,2,1,2,1,2,1,2]
                             ],
                         1: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            [1,2,1,2,1,2,1,2,1,2]
                             ]
                     ],
                     // Session in Sections for final choice presets table
                     [
                         0: [
+                            // Section titles
                             ["testTitle"],
-                            ["testTitle2"]
+                            ["testTitle2"],
                             ],
                         1: [
+                            // Sessions in each section
                             [0],
-                            [1]
+                            [1],
                         ]
                     ]
                 ],
@@ -1903,13 +1914,15 @@ enum sessionData {
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            [1,2,1,2,1,2,1,2,1,2]
                             ],
                         1: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            [1,2,1,2,1,2,1,2,1,2]
                             ]
                     ],
                     // Session in Sections for final choice presets table
@@ -1932,13 +1945,15 @@ enum sessionData {
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            [1,2,1,2,1,2,1,2,1,2]
                         ],
                         1: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            [1,2,1,2,1,2,1,2,1,2]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -1961,13 +1976,15 @@ enum sessionData {
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            [1,2,1,2,1,2,1,2,1,2]
                         ],
                         1: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            [1,2,1,2,1,2,1,2,1,2]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -1995,8 +2012,8 @@ enum sessionData {
                     [
                         0: [
                             ["All Movements"],
-                            [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,112],
-                            [1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1],
+                        [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,112],
+                        [1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1],
                             ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
                             ],
                         1: [
@@ -2303,13 +2320,15 @@ enum sessionData {
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            [1,2,1,2,1,2,1,2,1,2]
                         ],
                         1: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            [1,2,1,2,1,2,1,2,1,2]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -2332,13 +2351,15 @@ enum sessionData {
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            [1,2,1,2,1,2,1,2,1,2]
                         ],
                         1: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            [1,2,1,2,1,2,1,2,1,2]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -2361,13 +2382,15 @@ enum sessionData {
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            [1,2,1,2,1,2,1,2,1,2]
                         ],
                         1: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            [1,2,1,2,1,2,1,2,1,2]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -2393,7 +2416,8 @@ enum sessionData {
                             [3],
                             ["30 reps", "30 reps", "30 reps",
                              "20 reps", "20 reps", "20 reps",
-                             "10 reps", "10 reps", "10 reps"]
+                             "10 reps", "10 reps", "10 reps"],
+                            [5,5,5,5,5,5,5,5,5]
                         ],
                         1: [
                             ["session"],
@@ -2401,7 +2425,8 @@ enum sessionData {
                             [3],
                             ["30 reps", "30 reps", "30 reps",
                              "20 reps", "20 reps", "20 reps",
-                             "10 reps", "10 reps", "10 reps"]
+                             "10 reps", "10 reps", "10 reps"],
+                            [5,5,5,5,5,5,5,5,5]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -2426,7 +2451,8 @@ enum sessionData {
                             [3],
                             ["30 reps", "30 reps", "30 reps",
                              "20 reps", "20 reps", "20 reps",
-                             "10 reps", "10 reps", "10 reps"]
+                             "10 reps", "10 reps", "10 reps"],
+                            [5,5,5,5,5,5,5,5,5]
                         ],
                         1: [
                             ["session"],
@@ -2434,7 +2460,8 @@ enum sessionData {
                             [3],
                             ["30 reps", "30 reps", "30 reps",
                              "20 reps", "20 reps", "20 reps",
-                             "10 reps", "10 reps", "10 reps"]
+                             "10 reps", "10 reps", "10 reps"],
+                            [5,5,5,5,5,5,5,5,5]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -2459,7 +2486,8 @@ enum sessionData {
                             [3],
                             ["30 reps", "30 reps", "30 reps",
                              "20 reps", "20 reps", "20 reps",
-                             "10 reps", "10 reps", "10 reps"]
+                             "10 reps", "10 reps", "10 reps"],
+                            [5,5,5,5,5,5,5,5,5]
                         ],
                         1: [
                             ["session"],
@@ -2467,7 +2495,8 @@ enum sessionData {
                             [3],
                             ["30 reps", "30 reps", "30 reps",
                              "20 reps", "20 reps", "20 reps",
-                             "10 reps", "10 reps", "10 reps"]
+                             "10 reps", "10 reps", "10 reps"],
+                            [5,5,5,5,5,5,5,5,5]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -2571,7 +2600,8 @@ enum sessionData {
             ],
             // ---------------------------------------------------------------------------------------------------
             // Stretching = 3
-            // Session: [[name], [stretches], [breaths]]
+            // Session: [[name], [stretches], [breaths], [time]]
+                // [time] for time based sessions
             [
                 // Stretching - General
                 [
@@ -2580,12 +2610,14 @@ enum sessionData {
                         0: [
                             ["All Stretches"],
                             [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64],
-                            [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
+                            [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],
+                            [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64]
                         ],
                         1: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
-                            [10,10,10,10,10,10,10,10,10,10]
+                            [10,10,10,10,10,10,10,10,10,10],
+                            [0,1,2,3,4,5,6,7,8,9]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -2607,12 +2639,14 @@ enum sessionData {
                         0: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
-                            [10,10,10,10,10,10,10,10,10,10]
+                            [10,10,10,10,10,10,10,10,10,10],
+                            [0,1,2,3,4,5,6,7,8,9]
                         ],
                         1: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
-                            [10,10,10,10,10,10,10,10,10,10]
+                            [10,10,10,10,10,10,10,10,10,10],
+                            [0,1,2,3,4,5,6,7,8,9]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -2634,12 +2668,14 @@ enum sessionData {
                         0: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
-                            [10,10,10,10,10,10,10,10,10,10]
+                            [10,10,10,10,10,10,10,10,10,10],
+                            [0,1,2,3,4,5,6,7,8,9]
                         ],
                         1: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
-                            [10,10,10,10,10,10,10,10,10,10]
+                            [10,10,10,10,10,10,10,10,10,10],
+                            [0,1,2,3,4,5,6,7,8,9]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -2732,6 +2768,7 @@ enum sessionData {
     // MARK: -
     // MARK: - Sessions sorted for use by schedule/profile
     // MARK: -
+    // at the end - [Type(warmup/workout...), Type2 (upper/lower...), session], to be set as selected session
     // Array matching the sorted groups array, containing sessoins for the end of each choice
     static let sortedSessions: [Int:[[[[[[Int]]]]]]] =
     [

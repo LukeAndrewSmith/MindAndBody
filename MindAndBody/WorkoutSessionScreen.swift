@@ -127,15 +127,15 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             numberOfRounds = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2][0] as! Int
         }
         
-//        // Device Scale for @2x and @3x of Target Area Images
-//        switch UIScreen.main.scale {
-//        case 1,2:
-//            toAdd = "@2x"
-//        case 3:
-//            toAdd = "@3x"
-//        default: break
-//        }
-//
+        // Device Scale for @2x and @3x of Target Area Images
+        switch UIScreen.main.scale {
+        case 1,2:
+            toAdd = "@2x"
+        case 3:
+            toAdd = "@3x"
+        default: break
+        }
+
         //
         view.backgroundColor = colour2
         

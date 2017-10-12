@@ -2134,8 +2134,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             default: break
             }
             //
-            tableViewBells.reloadData()
             tableViewBells.deselectRow(at: indexPath, animated: true)
+            tableViewBells.reloadData()
             
         //
         case tableViewIntervalBells:
@@ -2215,8 +2215,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             selectedBackgroundSound = indexPath.row
             didChangeBackgroundSound = true
             //
-            tableViewBackgroundSounds.reloadData()
             tableViewBackgroundSounds.deselectRow(at: indexPath, animated: true)
+            tableViewBackgroundSounds.reloadData()
         default: break
         }
     }

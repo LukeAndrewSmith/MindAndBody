@@ -31,7 +31,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     var comingFromSchedule = false
     // Title Array for if schedule
     let scheduleTitleArray = ["warmup", "workout", "cardio", "stretching", "yoga"]
-    
+
     
     //
     // MARK: Outlets ------------------------------------------------------------------------------------------------------------------------------
@@ -123,28 +123,26 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 switch selectedSession[1] {
                 // Circuit Session
                 case 7,8,9,13,14,15:
-                    circuitSession()
+                    break
                 // Normal Session
                 default:
                     session()
                 }
-            // Cardio
-            case 2:
-                cardioSession()
             // Stretching
             case 3:
                 session()
-            // Yoga
-            case 4:
-                yogaSession()
+            // Cardio,Yoga
             default:
                 break
             }
             
             // Cardio Type
+            // If cardio
             if selectedSession[0] == 2 {
+                // If time based (if section 0 in presetDictionaries (section 0 being time based sessions), contains the selected session)
                 if (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][1][1]?[0] as! [Int]).contains(selectedSession[2]) {
                     cardioType = 0
+                // Else if distance based
                 } else {
                     cardioType = 1
                 }
@@ -174,9 +172,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 }
                 //
                 self.beginConstraint.constant = 0
-//                self.view.layoutIfNeeded()
             })
-
         }
         
         
@@ -307,6 +303,11 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //
+        // timed schedule sessions
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let timedSession = settings[2][0]
+        //
         switch tableView {
         //
         case movementsTableView:
@@ -350,32 +351,62 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2]] = selected session, [1] = keys
                 let indexSetsReps = (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]).index(of: overviewArray[indexPath.section][indexPath.row])
                 //
-                // Sets x Reps
-                // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] sets array and [3] for reps
-                cell.detailTextLabel?.text = String(sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2][indexSetsReps!] as! Int) + " x " + (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3][indexSetsReps!] as! String)
-                //
                 // Cell Image
                 // [selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
                 cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][overviewArray[indexPath.section][indexPath.row]]?[0])!)
+                
+                // SetsxReps or Length
+                // Timed session off
+                if timedSession == 0 {
+                    // Sets x Reps
+                    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] sets array and [3] for reps
+                    cell.detailTextLabel?.text = String(sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2][indexSetsReps!] as! Int) + " x " + (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3][indexSetsReps!] as! String)
+                // On
+                } else {
+                    // Length [4]
+                    cell.detailTextLabel?.text = String(sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[4][indexSetsReps!] as! Int) + NSLocalizedString("s", comment: "")
+                }
                 
             // Workout
             case 1:
                 switch selectedSession[1] {
                 // Circuit Session
-                case 7,8,9,13,14,15:
+                case 7,8,9:
                     let key = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1][indexPath.row] as! Int
                     cell.imageView?.tag = key
                     // [selectedSession[0]] = warmup/workout/cardio etc...
                     cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]! as String, comment: "")
                     //
-                    // Sets x Reps
+                    // Cell Image
+                    // [selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
+                    cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][indexPath.row]?[0])!)
+                    //
+                    // Reps
                     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] sets array and [3] for reps
                     cell.detailTextLabel?.text = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3][indexPath.row] as? String
+                    
+                // Bodyweight Circuit Session (possibility of timed session)
+                case 13,14,15:
+                    let key = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1][indexPath.row] as! Int
+                    cell.imageView?.tag = key
+                    // [selectedSession[0]] = warmup/workout/cardio etc...
+                    cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]! as String, comment: "")
                     //
                     // Cell Image
                     // [selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
                     cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][indexPath.row]?[0])!)
-                    
+                    //
+                    // Reps or Length
+                    // Timed session off
+                    if timedSession == 0 {
+                        // Reps
+                        // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] sets array and [3] for reps
+                        cell.detailTextLabel?.text = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3][indexPath.row] as? String
+                    } else {
+                        // [4] = Length
+                        cell.detailTextLabel?.text = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[4][indexPath.row] as? String
+                    }
+                   
                 // Normal Session
                 default:
                     let key = overviewArray[indexPath.section][indexPath.row]
@@ -432,13 +463,20 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2]] = selected session, [1] = keys
                 let indexSetsReps = (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]).index(of: overviewArray[indexPath.section][indexPath.row])
                 //
-                // Breaths
-                // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] breaths array
-                cell.detailTextLabel?.text = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2][indexSetsReps!] as? String
-                //
                 // Cell Image
                 // [selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
                 cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][overviewArray[indexPath.section][indexPath.row]]?[0])!)
+                //
+                // Breaths or Length
+                // Timed session off
+                if timedSession == 0 {
+                    // Breaths
+                    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] breaths array
+                    cell.detailTextLabel?.text = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2][indexSetsReps!] as? String
+                } else {
+                    // Length = [3]
+                    cell.detailTextLabel?.text = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3][indexSetsReps!] as? String
+                }
                 
             // Yoga
             case 4:
@@ -524,20 +562,15 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 switch selectedSession[1] {
                 // Circuit Session
                 case 7,8,9,13,14,15:
-                    circuitSession()
+                    break
                 // Normal Session
                 default:
                     session()
                 }
-            // Cardio
-            case 2:
-                cardioSession()
             // Stretching
             case 3:
                 session()
-            // Yoga
-            case 4:
-                yogaSession()
+            // Cardio, Yoga
             default:
                 break
             }
@@ -610,6 +643,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     // MARK: TableView Helpers -----------------------------------------------------------------------------------------------------------------
     //
     // Normal Session
+    // Create overviewArray for warmup/workout/stretching, overview array being array of movements sorted in groups so section headers can be presented
     func session() {
         //
         switch selectedSession[0] {
@@ -619,6 +653,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         // Workout
         case 1:
             sectionNumbers = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]
+        // Stretching
         case 3:
             sectionNumbers = [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
         default:
@@ -637,7 +672,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     overviewArray[i].remove(at: j)
                 }
             }
-            
             // Remove empty arrays
             if overviewArray[i] == [] {
                 overviewArray.remove(at: i)
@@ -645,22 +679,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             }
         }
     }
-    
-    // Circuit Session
-    func circuitSession() {
-        
-    }
-    
-    // Cardio Session
-    func cardioSession() {
-        
-    }
-    
-    // Yoga Session
-    func yogaSession() {
-        
-    }
-    
     
     // Number of sections in movements tableview
     func numberOfSectionsMovements() -> Int {
@@ -753,7 +771,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-
     
     //
     // MARK: Presets Button Action -----------------------------------------------------------------------------------------------------------------
@@ -836,24 +853,37 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     //
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
+        // timed schedule sessions
+        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let timedSession = settings[2][0]
         //
         // Segue
         switch selectedSession[0] {
         // Warmup
         case 0:
-            // Warmup uses stretching Screen
-            // NOTE: If time base 
-//            if selectedSession[2] < 1 {
+            // Timed Session off
+            if timedSession == 0 {
+                // Warmup uses stretching Screen
                 performSegue(withIdentifier: "sessionSegueStretching", sender: self)
-//            } else {
-//                performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
-//            }
+            // Timed Session on
+            } else {
+                performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
+            }
         // Workout
         case 1:
             switch selectedSession[1] {
             // Circuit Session
-            case 7,8,9,13,14,15:
+            case 7,8,9:
                 performSegue(withIdentifier: "sessionSegueCircuit", sender: self)
+            // Bodyweight Circuit Session
+            case 13,14,15:
+                // Timed Session off
+                if timedSession == 0 {
+                    performSegue(withIdentifier: "sessionSegueCircuit", sender: self)
+                // Timed Session On
+                } else {
+                    performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
+                }
             // Normal Session
             default:
                 performSegue(withIdentifier: "sessionSegue", sender: self)
@@ -863,7 +893,13 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             performSegue(withIdentifier: "sessionSegueCardio", sender: self)
         // Stretching
         case 3:
-            performSegue(withIdentifier: "sessionSegueStretching", sender: self)
+            // Timed Session off
+            if timedSession == 0 {
+                performSegue(withIdentifier: "sessionSegueStretching", sender: self)
+            // Timed Session on
+            } else {
+                performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
+            }
         // Yoga
         case 4:
             performSegue(withIdentifier: "sessionSegueYoga", sender: self)

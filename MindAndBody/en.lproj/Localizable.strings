@@ -14,7 +14,7 @@
 "langugeOfBundle" = "English - English";
 
 
-// MARK: General
+// MARK: General (Didn't know/think where to classify them)
 //
 "notificationsPopup" = "! Notifications !";
 "notificationsPopupMessage" = "\nAllow notifications for timers, rest timers and reminders to work in the app.";
@@ -86,6 +86,10 @@
 
 "remove" = "Remove";
 
+"timedSession" = "Timed Sessions";
+
+"on" = "ON";
+"off" = "OFF";
 
 
 
@@ -1866,7 +1870,8 @@
 
         // Settings
         "settings0" = "Homepage:\nYou can set the schedule as the home page of the app (the first screen presented when you open the app).";
-        "settings1" = "Automatic Yoga:\nIf you are already comfortable with yoga poses, try automatic yoga. It allows you to follow a yoga practice without touching the phone.";
+        "settings1" = "Timed Sessions:\ne.g 30s rather than '15reps' of a movement. The session can be easily followed in a timed session.\nNOTE: Perform non-timed sessions until you have a good understanding of the movements regularly presented (by reading their explanations).";
+        "settings2" = "Automatic Yoga:\nIf you are already comfortable with yoga poses, try automatic yoga. It allows you to follow a yoga practice without touching the phone.";
 
         // Automatic Yoga
         "automaticYoga0" = "Averga Breath Length:\nThe length of your average breath when doing yoga, a breath being both inhale and exhale. It can be calculated by timing 10-30 breaths and dividing the time by the number of breaths.";
