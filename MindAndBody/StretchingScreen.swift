@@ -290,8 +290,13 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 setsRepsString = String(breathsArray[indexPath.row]) + " " + NSLocalizedString("breathsC", comment: "")
             // Warmup
             } else {
-                let setsString = String(setsArray[indexPath.row])
-                setsRepsString = setsString + " x " + repsArray[indexPath.row]
+                // If 1 set only put reps
+                if setsArray[indexPath.row] == 0 || setsArray[indexPath.row] == 1 {
+                    setsRepsString = repsArray[indexPath.row]
+                } else {
+                    let setsString = String(setsArray[indexPath.row])
+                    setsRepsString = setsString + " x " + repsArray[indexPath.row]
+                }
             }
             //
             // Indicate asymmetric exercises to the user

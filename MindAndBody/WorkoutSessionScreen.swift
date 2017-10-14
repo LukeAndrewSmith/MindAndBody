@@ -640,7 +640,6 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let content = UNMutableNotificationContent()
         content.title = NSLocalizedString("timerEnd", comment: "")
         content.body = " "
-        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
         content.sound = UNNotificationSound.default()
         //
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTime), repeats: false)
@@ -791,6 +790,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     @IBAction func nextButtonAction() {
         //
         if selectedRow < keyArray.count - 1 {
+            //
+            vibratePhone()
             let indexPath0 = NSIndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
             //

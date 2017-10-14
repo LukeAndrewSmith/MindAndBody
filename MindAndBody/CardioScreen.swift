@@ -511,7 +511,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             for i in 1...keyArray.count {
                 //
                 let content = UNMutableNotificationContent()
-                content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
                 if i != keyArray.count {
                     content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][keyArray[i]]!, comment: "")
                     // Sound, low if pause, high if start cardio
@@ -699,6 +698,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         //
         if selectedRow < keyArray.count - 1 {
+            vibratePhone()
             //
             selectedRow = selectedRow + 1
             //
@@ -709,9 +709,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             //
             //
             let indexPath = NSIndexPath(row: selectedRow, section: 0)
-            let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-            //
-            let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
             //
             UIView.animate(withDuration: 0.6, animations: {
                 //
@@ -778,7 +775,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
                 //
                 let content = UNMutableNotificationContent()
-                content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
                 switch sessionType {
                 case 0:
                     if selectedRow != keyArray.count - 1 {

@@ -586,7 +586,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let content = UNMutableNotificationContent()
         content.title = NSLocalizedString("restOver", comment: "")
         content.body = NSLocalizedString("nextSet", comment: "")
-        //        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
         content.sound = UNNotificationSound.default()
         //
         let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]

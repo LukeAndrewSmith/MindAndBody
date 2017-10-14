@@ -261,11 +261,12 @@ extension UIViewController {
         // Current mondays date in week
         let currentMondayDate = Date().firstMondayInCurrentWeek
         // Last Reset = monday of last week reset
-        var lastReset = trackingProgressArray[0][1] as! Date
+        let lastReset = trackingProgressArray[0][1] as! Date
         
         // Reset if last reset wasn't is current week
         if lastReset != currentMondayDate {
             currentProgress = 0
+            // Reset Last Reset
             trackingProgressArray[0][1] = currentMondayDate
             defaults.set(trackingProgressArray, forKey: "trackingProgress")
         }
@@ -286,11 +287,12 @@ extension UIViewController {
         // Get first date in month
         let firstMonday = Date().firstDateInCurrentMonth
         // Last Reset = first monday in the last month reset
-        var lastReset = trackingProgressArray[1][1] as! Date
+        let lastReset = trackingProgressArray[1][1] as! Date
         
         // Reset if last reset wasn't in current month
         if lastReset != firstMonday  {
             currentProgress = 0
+            // Reset last reset
             trackingProgressArray[1][1] = firstMonday
             UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
         }
@@ -628,6 +630,9 @@ extension UIViewController {
     //
     // Vibrate Phone
     func vibratePhone() {
+        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate) {
+            // do what you'd like now that the sound has completed playing
+        }
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
     }

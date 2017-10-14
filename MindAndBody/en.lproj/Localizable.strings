@@ -1574,10 +1574,9 @@
 
 //
 // Questions
-    // Answers
+    // Answer
 // Age
 "profileQ1" = "Age"; // Age
-    // Answer in me viewcontroller
 // Gender
 "profileQ2" = "Gender"; // Gender
     "profileA21" = "Male";
@@ -1606,7 +1605,7 @@
     "profileA73" = "Yes";
 "profileQ8" = "Does your neck rotate freely?"; // Neck
     "profileA81" = "No";
-    "profileA82" = "Nearly";
+    "profileA82" = "Sort of";
     "profileA83" = "Yes";
 // Balance
 "profileQ9" = "Can you stand stand on one leg for 10s?"; // Balance
@@ -1647,18 +1646,18 @@
     "profileA163" = "Yes";
 // Mind
 "profileQ17" = "Are you calm?"; // Calm
-    "profileA1171" = "Not often";
-    "profileA1172" = "Occasionally";
-    "profileA1173" = "Mostly";
+    "profileA171" = "Not often";
+    "profileA172" = "Occasionally";
+    "profileA173" = "Mostly";
 "profileQ18" = "Are you content?"; // Contentedness
-    "profileA1181" = "Not often";
-    "profileA1182" = "Occasionally";
-    "profileA1183" = "Often";
+    "profileA181" = "Not often";
+    "profileA182" = "Occasionally";
+    "profileA183" = "Often";
 // General
 "profileQ19" = "Are you content with your body and its abilities?"; // Contentedness with body
-    "profileA1191" = "No";
-    "profileA1192" = "Reasonably";
-    "profileA1193" = "Yes";
+    "profileA191" = "No";
+    "profileA192" = "Reasonably";
+    "profileA193" = "Yes";
 "profileQ20" = "Do you have much time to work towards your physical and mental goals?"; // Time
     "profileA201" = "No, only a few days a week where I could";
     "profileA202" = "Yes, a little every day";
