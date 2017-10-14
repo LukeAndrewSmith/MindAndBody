@@ -55,9 +55,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     let bellsImages: [UIImage] =
         [#imageLiteral(resourceName: "Tibetan Chimes"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Wind Chimes"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Small"), #imageLiteral(resourceName: "Indonesian Frog"), #imageLiteral(resourceName: "Cow Bell"), #imageLiteral(resourceName: "Cow Bell Big")]
     
-    
-    // Selection Items
     //
+    // Selection Items
     let selectionView = UIView()
     let okButton = UIButton()
     let backgroundViewSelection = UIButton()
@@ -91,7 +90,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         self.tableViewAutomatic.backgroundView = backView
         //
     }
-    
+
     
 //
 // View did load --------------------------------------------------------------------------------------------------
@@ -260,7 +259,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-
         //
         switch tableView {
         case tableViewAutomatic:
@@ -685,7 +683,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Ok button action
     func okButtonAction(_ sender: Any) {
         //
-        //
         let defaults = UserDefaults.standard
         var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         //
@@ -759,7 +756,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         })
         //
     }
-    
     
     //
     // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------

@@ -198,20 +198,20 @@ enum Register {
     // --------------------------------------------------------
     // Settings
     static let defaultSettings: [[Int]] = [
-        // Background image index
+        // Background image index - 0
         [2],
-        // Home Screen
+        // Home Screen - 1
         [0],
-        // Time Based Sessions
+        // Time Based Sessions - 2
         [0], // == Off
-        // Yoga Automatic
+        // Yoga Automatic - 3
         [0, -1, -1, -1],
-        // Rest times
-        [15, 45, 10],
+        // Rest times - 4
+        [5, 45, 10],
         // Default Image
-        [0],   // 0 == "demonstration", 1 == "targetArea"
+        [0],   // 0 == "demonstration", 1 == "targetArea" - 5
         // Metric/
-        [0], // == "kg"
+        [0], // == "kg" - 6
     ]
     
     // --------------------------------------------------------

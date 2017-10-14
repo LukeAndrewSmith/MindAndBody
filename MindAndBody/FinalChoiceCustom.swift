@@ -1247,7 +1247,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 customSessionsArray[selectedSession[0]][selectedPreset][2].append(30)
             // Stretching/Yoga
             case 3,4:
-                customSessionsArray[selectedSession[0]][selectedPreset][2].append(1)
+                customSessionsArray[selectedSession[0]][selectedPreset][2].append(5)
             default:
                 break
             }

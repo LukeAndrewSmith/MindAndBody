@@ -95,6 +95,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         timerCountDown.invalidate()
         timerCountDown2.invalidate()
+        
+        //
+        // For rare case where use quits app after turning automatic yoga on without changing breath/transition times -> automatic yoga is on but breath/transition time == -1 => crash
+        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        // Turn automatic yoga off
+        if settings[3][1] == -1 || settings[3][2] == -1 {
+            settings[3][0] = 0
+        }
+        UserDefaults.standard.set(settings, forKey: "userSettings")
+        
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {

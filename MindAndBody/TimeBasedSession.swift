@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import UserNotifications
-
+import AVFoundation
 
 //
 // Custom TimeBasedTableViewCell ---------------------------------------------------------------------------
@@ -28,6 +28,8 @@ class TimeBasedTableViewCell: UITableViewCell {
     @IBOutlet weak var explanationButton: UIButton!
     // Time Label
     @IBOutlet weak var timeLabel: UILabel!
+    // Indicator Label
+    @IBOutlet weak var indicatorLabel: UILabel!
 }
 
 //
@@ -56,6 +58,24 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     // To Add (@2x or @3x) for demonstration images
     var toAdd = String()
     
+    var soundPlayer = AVAudioPlayer()
+    //
+    // Timer Elements
+    //
+    var sessionLength = Int()
+    var timerShapeLayer: CAShapeLayer!
+    var lengthTimer = Timer()
+    var animationAdded = false
+    // Movement progresss indicates wether to display, rest, 5 second prepare for movement, or time to perform movement
+    // Starts on 1 as no need for rest before first movement
+        // 0 == rest, 1 == prepare, 2 == perform
+    var movementProgress = 1
+    // Timer value
+    var timerValue = 0
+    // Variable for circuit workout, indicating number of movements in one round
+    var nMovementsInRound = 0
+    // If asymmetric movement, time both sides, this variable indicates which side is being timed
+    var asymmetricProgress = 0
     
     //
     // Outlets -----------------------------------------------------------------------------------------------------------
@@ -86,17 +106,16 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             let delayInSeconds = 0.7
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 alert.dismiss(animated: true, completion: nil)
-                //
-                // MARK: Walkthrough
-                let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                if walkthroughs[4] == false {
-                    self.walkthroughSession()
-                }
+                self.indicateMovementProgress()
             }
         })
-        
-        // Play
-        playAnimation(row: selectedRow)
+    }
+    
+    //
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        // Reenable Idle Timer
+        UIApplication.shared.isIdleTimerDisabled = false
     }
     
     //
@@ -105,17 +124,38 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // User doesn't interact with the phone but it is still in use
+        UIApplication.shared.isIdleTimerDisabled = true
+        
         //
         switch selectedSession[0] {
-        // Warmup/Stretching
-        case 0,3:
-         lengthArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[4] as! [Int]
-        // Bodyweight Circuit Workout
-        case 1:
+        // Warmup/Bodyweight Circuit Wokrout
+        case 0,1:
             lengthArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[4] as! [Int]
+        // Stretching
+        case 3:
+            lengthArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3] as! [Int]
         default:
             break
         }
+        //
+        // Special case for circuit workout
+            // Add the movements to the key array x(number of rounds) more times
+        switch selectedSession[1] {
+        case 13,14,15:
+            nMovementsInRound = keyArray.count
+            var enlargedKeyArray = keyArray
+            let nRounds = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2][0] as! Int
+            // nRounds is always greater than 1, so if 2, then 1...1 adds 1 set of keys, therefore there are two rounds
+            for _ in 1...nRounds - 1 {
+                enlargedKeyArray += keyArray
+            }
+            keyArray = enlargedKeyArray
+            
+        default:
+            break
+        }
+        
         
         // Device Scale for @2x and @3x of Target Area Images
         switch UIScreen.main.scale {
@@ -125,6 +165,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             toAdd = "@3x"
         default: break
         }
+        
         
         //
         view.backgroundColor = colour2
@@ -271,6 +312,11 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.movementLabel?.textAlignment = .center
             cell.movementLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             cell.movementLabel?.adjustsFontSizeToFitWidth = true
+            //
+            cell.timeLabel?.adjustsFontSizeToFitWidth = true
+            
+            //
+            cell.indicatorLabel.text = " "
             
             //
             // Explanation
@@ -278,11 +324,6 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             //
             // Gestures
-            // Next Swipe
-            let nextSwipe = UISwipeGestureRecognizer()
-            nextSwipe.direction = .up
-            nextSwipe.addTarget(self, action: #selector(nextButtonAction))
-            cell.addGestureRecognizer(nextSwipe)
             // Explanation
             let explanationTap = UITapGestureRecognizer()
             explanationTap.numberOfTapsRequired = 1
@@ -314,7 +355,6 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
                 cell.timeLabel.alpha = 1
-                //cell.demonstrationImageView.isUserInteractionEnabled = true
             //
             case selectedRow + 1:
                 //
@@ -325,8 +365,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 0
                 cell.timeLabel.alpha = 0
-                cell.imageViewCell.alpha = 0
-                //cell.demonstrationImageView.isUserInteractionEnabled = false
+                cell.imageViewCell.alpha = 1
             //
             default:
                 //
@@ -474,6 +513,47 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
+    // Play Image
+    func playAnimationReversed(row: Int) {
+        //
+        // Get Cell
+        let indexPath = NSIndexPath(row: row, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
+        let key = keyArray[indexPath.row]
+        // Reverse image
+        //
+        // Image
+        // [key] = key, [0] = first image
+        let image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
+        // If asymmetric array contains image, flip imageview
+        if sessionData.asymmetricMovements[selectedSession[0]].contains(key) {
+            let flippedImage = UIImage(cgImage: (image?.cgImage!)!, scale: (image?.scale)!, orientation: .upMirrored)
+            cell.imageViewCell.image =  flippedImage
+        }
+        //
+        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        //
+        // Image Array
+        if imageCount > 1 && cell.imageViewCell.isAnimating == false {
+            var animationArray: [UIImage] = []
+            for i in 1...imageCount - 1 {
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
+            }
+            //
+            cell.imageViewCell.animationImages = animationArray
+            cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
+            cell.imageViewCell.animationRepeatCount = 1
+            //
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let defaultImage = settings[5][0]
+            if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+                if imageCount != 1 {
+                    cell.imageViewCell.startAnimating()
+                }
+            }
+        }
+    }
+    
     
     // Next Button
     @IBAction func nextButtonAction() {
@@ -507,56 +587,13 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.explanationButton.alpha = 0
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-            }, completion: { finished in
-                self.playAnimation(row: self.selectedRow)
             })
             // + 1
             if selectedRow < keyArray.count - 1 {
                 tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
             }
-        }
-    }
-    
-    // Back Button
-    @IBAction func backButtonAction() {
-        
-        if selectedRow != 0 {
             //
-            selectedRow = selectedRow - 1
-            updateProgress()
-            //
-            let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-            let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-            let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
-            //
-            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
-            //
-            UIView.animate(withDuration: 0.6, animations: {
-                //
-                self.tableView.beginUpdates()
-                self.tableView.endUpdates()
-                //
-                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-                
-                // 1
-                cell.indicatorStack.alpha = 1
-                cell.movementLabel.alpha = 1
-                cell.explanationButton.alpha = 1
-                // - 1
-                if self.selectedRow > 0 {
-                    cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! TimeBasedTableViewCell
-                    cell.indicatorStack.alpha = 0
-                    cell.movementLabel.alpha = 0
-                    cell.explanationButton.alpha = 0
-                }
-                // + 1
-                cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! TimeBasedTableViewCell
-                cell.movementLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                cell.indicatorStack.alpha = 0
-                cell.movementLabel.alpha = 1
-                cell.explanationButton.alpha = 0
-                //
-            })
+            indicateMovementProgress()
         }
     }
     
@@ -655,6 +692,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
                     snapshot1?.bounds = cell.imageViewCell.bounds
                     snapshot1?.center.x = cell.center.x
+                    snapshot1?.center.y = cell.imageViewCell.center.y
                     cell.addSubview(snapshot1!)
                     
                     // New image to display
@@ -705,6 +743,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
                     snapshot1?.bounds = cell.imageViewCell.bounds
                     snapshot1?.center.x = cell.center.x
+                    snapshot1?.center.y = cell.imageViewCell.center.y
                     cell.addSubview(snapshot1!)
                     
                     // New image to display
@@ -775,414 +814,142 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //
     @IBAction func finishEarlyAction(_ sender: Any) {
-        // Invalidate
-        //
-        // Alert View
-        let title = NSLocalizedString("finishEarly", comment: "")
-        let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = colour2
-        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-        //
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+        // Cell Detail
+        let indexPath = NSIndexPath(row: selectedRow, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
+        // Pause
+        if isPaused == false {
+            // Invalidate
+            lengthTimer.invalidate()
+            removeCircle()
+            isPaused = true
+            finishEarly.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
+            finishEarly.tintColor = colour3
+            switch movementProgress {
+            case 0:
+                cell.indicatorLabel.text = " "
+                cell.timeLabel.text = NSLocalizedString("rest", comment: "")
+            case 1:
+                cell.indicatorLabel.text = " "
+                cell.timeLabel.text = NSLocalizedString("prepare", comment: "")
+            case 2:
+                cell.indicatorLabel.text = " "
+                cell.timeLabel.text = NSLocalizedString("beginMovement", comment: "")
+            default:
+                break
+            }
+            //
+            cell.indicatorStack.alpha = 1
+            cell.explanationButton.alpha = 1
+            
+            //
+            // Alert View
+            let title = NSLocalizedString("finishEarly", comment: "")
+            let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.view.tintColor = colour2
+            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+            //
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .natural
+            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
         
-        //
-        // Action
-        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
-            UIAlertAction in
             //
+            // Action
+            let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+                UIAlertAction in
+                //
+                //
+                self.dismiss(animated: true)
+            }
+            let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
+                UIAlertAction in
+            }
             //
-            self.dismiss(animated: true)
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            //
+            self.present(alert, animated: true, completion: nil)
+            
+        // Play
+        } else {
+            // Cell Detail
+            cell.indicatorStack.alpha = 0
+            cell.explanationButton.alpha = 0
+            // Return to initial image
+            let rightSwipe = UISwipeGestureRecognizer()
+            rightSwipe.direction = .right
+            handleSwipes(extraSwipe: rightSwipe)
+            //
+            isPaused = false
+            finishEarly.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
+            finishEarly.tintColor = colour4
+            indicateMovementProgress()
         }
-        let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
-            UIAlertAction in
-        }
-        //
-        alert.addAction(okAction)
-        alert.addAction(cancelAction)
-        //
-        self.present(alert, animated: true, completion: nil)
     }
     
     
     //
-    // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------
+    // Helpers
     //
-    //
-    var walkthroughProgress = 0
-    var walkthroughView = UIView()
-    var walkthroughHighlight = UIView()
-    var walkthroughLabel = UILabel()
-    var nextButton = UIButton()
-    
-    var didSetWalkthrough = false
-    
-    //
-    // Components
-    var walkthroughTexts = ["session02", "session1", "session3", "session4", "session5", "session6", "session7", "session8", "session9", "session10", "session11"]
-    var highlightSize: CGSize? = nil
-    var highlightCenter: CGPoint? = nil
-    // Corner radius, 0 = height / 2 && 1 = width / 2
-    var highlightCornerRadius = 0
-    var labelFrame = 0
-    //
-    var walkthroughBackgroundColor = UIColor()
-    var walkthroughTextColor = UIColor()
-    var highlightColor = UIColor()
-    //
-    
-    // Walkthrough
-    func walkthroughSession() {
-        //
-        var cellHeight = (UIScreen.main.bounds.height - 22) * 7/8
-        
-        //
-        if didSetWalkthrough == false {
-            //
-            nextButton.addTarget(self, action: #selector(walkthroughSession), for: .touchUpInside)
-            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
-            didSetWalkthrough = true
+    // Time Formatted
+    func timeFormattedNicely(totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        if minutes < 1 {
+            if seconds < 10 {
+                return String(format: "%01ds", seconds)
+            } else {
+                return String(format: "%02ds", seconds)
+            }
+        } else {
+            if minutes < 10 {
+                if seconds == 0 {
+                    return String(format: "%01dmin", minutes)
+                } else if seconds < 10 {
+                    return String(format: "%01dmin %01ds", minutes, seconds)
+                } else {
+                    return String(format: "%01dmin %02ds", minutes, seconds)
+                }
+            } else {
+                if seconds == 0 {
+                    return String(format: "%02dmin", minutes)
+                } else if seconds < 10 {
+                    return String(format: "%02dmin %01ds", minutes, seconds)
+                } else {
+                    return String(format: "%02dmin %02ds", minutes, seconds)
+                }
+            }
         }
-        
-        //
-        switch walkthroughProgress {
-            // First has to be done differently
-        // Movement
-        case 0:
+    }
+    // Timer CountDown Title
+    func timeFormatted(totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    
+    // 0 for low bell, 1 for high bell
+    func playBell(bell: Int) {
+        if bell == 0 {
+            let url = Bundle.main.url(forResource: "Tibetan Singing Bowl (Low)", withExtension: "caf")!
             //
-            walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
-            walkthroughLabel.sizeToFit()
-            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
-            
-            // Colour
-            walkthroughLabel.textColor = colour2
-            walkthroughLabel.backgroundColor = colour1
-            walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = colour1.cgColor
-            // Highlight
-            walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
-            walkthroughHighlight.center = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight / 2) * (13/8)) + 2)
-            walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
-            
+            do {
+                soundPlayer = try AVAudioPlayer(contentsOf: url)
+                soundPlayer.play()
+            } catch {
+                // couldn't load file :(
+            }
+        } else {
+            let url = Bundle.main.url(forResource: "Tibetan Singing Bowl (High)", withExtension: "caf")!
             //
-            // Flash
-            //
-            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
-                //
-                self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(1)
-            }, completion: {(finished: Bool) -> Void in
-                UIView.animate(withDuration: 0.2, animations: {
-                    //
-                    self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
-                }, completion: nil)
-            })
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
-        // Sets x Reps
-        case 1:
-            //
-            highlightSize = CGSize(width: view.bounds.width / 2, height: 33)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight / 2) * (11/6)) + 2)
-            highlightCornerRadius = 0
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
-            highlightColor = colour1
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
-        // Demonstration
-        case 2:
-            //
-            highlightSize = CGSize(width: view.bounds.width * (7/8), height: (cellHeight * (7/8)))
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2)
-            highlightCornerRadius = 3
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
-            highlightColor = colour1
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
-        // Indicator
-        case 3:
-            //
-            highlightSize = CGSize(width: 30, height: 15)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (7/8))) - (15 / 2))
-            highlightCornerRadius = 0
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
-            highlightColor = colour1
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
-            
-        // Target Area
-        case 4:
-            // Swipe demonstration
-            let leftSwipe = UIView()
-            leftSwipe.frame.size = CGSize(width: 50, height: 50)
-            leftSwipe.backgroundColor = colour1
-            leftSwipe.layer.cornerRadius = 25
-            leftSwipe.clipsToBounds = true
-            leftSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
-            leftSwipe.center.x = view.bounds.width * (7/8)
-            UIApplication.shared.keyWindow?.insertSubview(leftSwipe, aboveSubview: walkthroughView)
-            // Perform swipe action
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
-                let leftSwipeSimulate = UISwipeGestureRecognizer()
-                leftSwipeSimulate.direction = .left
-                self.handleSwipes(extraSwipe: leftSwipeSimulate)
-            })
-            // Animate swipe demonstration
-            nextButton.isEnabled = false
-            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //
-                leftSwipe.center.x = self.view.bounds.width * (1/8)
-                //
-            }, completion: { finished in
-                self.nextButton.isEnabled = true
-                //
-                leftSwipe.removeFromSuperview()
-                
-                //
-                self.highlightSize = CGSize(width: self.view.bounds.width * (7/8), height: (cellHeight * (7/8)))
-                self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2)
-                self.highlightCornerRadius = 3
-                //
-                self.labelFrame = 0
-                //
-                self.walkthroughBackgroundColor = colour1
-                self.walkthroughTextColor = colour2
-                self.highlightColor = colour1
-                //
-                self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
-                
-                //
-                self.walkthroughProgress = self.walkthroughProgress + 1
-            })
-            
-            
-        // Return to demonstration and Explanation
-        case 5:
-            //
-            highlightSize = CGSize(width: 30, height: 15)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (7/8))) - (15 / 2))
-            highlightCornerRadius = 0
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
-            highlightColor = colour1
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            //
-            self.walkthroughProgress = self.walkthroughProgress + 1
-            
-            //
-            // Swipe demonstration
-            nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
-                //
-                let rightSwipe = UIView()
-                rightSwipe.frame.size = CGSize(width: 50, height: 50)
-                rightSwipe.backgroundColor = colour1
-                rightSwipe.layer.cornerRadius = 25
-                rightSwipe.clipsToBounds = true
-                rightSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
-                rightSwipe.center.x = self.view.bounds.width * (1/10)
-                UIApplication.shared.keyWindow?.insertSubview(rightSwipe, aboveSubview: self.walkthroughView)
-                // Perform swipe action
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
-                    let rightSwipeSimulate = UISwipeGestureRecognizer()
-                    rightSwipeSimulate.direction = .right
-                    self.handleSwipes(extraSwipe: rightSwipeSimulate)
-                })
-                // Animate swipe demonstration
-                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    //
-                    rightSwipe.center.x = self.view.bounds.width * (7/8)
-                    //
-                }, completion: { finished in
-                    self.nextButton.isEnabled = true
-                    //
-                    rightSwipe.removeFromSuperview()
-                    
-                    //
-                    self.highlightSize = CGSize(width: 45, height: 45)
-                    self.highlightCenter = CGPoint(x: self.view.bounds.width - 25 - 2.5, y: TopBarHeights.statusBarHeight + cellHeight - 25 - 2.5)
-                    self.highlightCornerRadius = 0
-                    //
-                    self.labelFrame = 0
-                    //
-                    self.walkthroughBackgroundColor = colour1
-                    self.walkthroughTextColor = colour2
-                    self.highlightColor = colour1
-                    //
-                    self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
-                    
-                    //
-                    self.walkthroughProgress = self.walkthroughProgress + 1
-                })
-            })
-            
-            
-            // Explanation open and Next Movement
-        // Case 7 not 6 as + 1 to walkthroughprogress twice in case 5 for label reasons (need an empty label)
-        case 7:
-            backgroundViewExplanation.isEnabled = false
-            expandExplanation()
-            //
-            highlightSize = CGSize(width: 45, height: 45)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + (view.bounds.height / 2))
-            highlightCornerRadius = 0
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
-            highlightColor = .clear
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            //
-            self.walkthroughProgress = self.walkthroughProgress + 1
-            //
-            // Next Movement
-            nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2, execute: {
-                //
-                self.nextButton.isEnabled = true
-                self.backgroundViewExplanation.isEnabled = true
-                //
-                self.retractExplanation(self)
-                
-                //
-                self.highlightSize = CGSize(width: self.view.bounds.width, height: 4)
-                self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 1)
-                self.highlightCornerRadius = 0
-                //
-                self.labelFrame = 0
-                //
-                self.walkthroughBackgroundColor = colour1
-                self.walkthroughTextColor = colour2
-                self.highlightColor = .clear
-                //
-                self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
-                //
-                self.walkthroughProgress = self.walkthroughProgress + 1
-            })
-            
-            
-            // Progress
-        // Case 9 not 8 as + 1 to walkthroughprogress twice in case 7 for label reasons (need an empty label)
-        case 9:
-            //
-            walkthroughLabel.alpha = 0
-            //
-            // Swipe demonstration
-            nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
-                //
-                let upSwipe = UIView()
-                upSwipe.frame.size = CGSize(width: 50, height: 50)
-                upSwipe.backgroundColor = colour1
-                upSwipe.layer.cornerRadius = 25
-                upSwipe.clipsToBounds = true
-                upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (7/8)) + 2
-                upSwipe.center.x = self.view.bounds.width / 2
-                UIApplication.shared.keyWindow?.insertSubview(upSwipe, aboveSubview: self.walkthroughView)
-                // Perform swipe action
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
-                    self.nextButtonAction()
-                })
-                // Animate swipe demonstration
-                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    //
-                    upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/10)) + 2
-                    //
-                }, completion: { finished in
-                    self.nextButton.isEnabled = true
-                    //
-                    upSwipe.removeFromSuperview()
-                    //
-                    self.walkthroughLabel.alpha = 1
-                    //
-                    self.highlightSize = CGSize(width: self.view.bounds.width, height: 8)
-                    self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 1)
-                    self.highlightCornerRadius = 0
-                    //
-                    self.labelFrame = 0
-                    //
-                    self.walkthroughBackgroundColor = colour1
-                    self.walkthroughTextColor = colour2
-                    self.highlightColor = colour1
-                    //
-                    self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
-                    //
-                    self.walkthroughProgress = self.walkthroughProgress + 1
-                    
-                })
-            })
-            
-            
-        // Finish Early
-        case 10:
-            //
-            highlightSize = CGSize(width: 36, height: 36)
-            highlightCenter = CGPoint(x: 27, y: TopBarHeights.statusBarHeight + 2 + 5 + 22)
-            highlightCornerRadius = 0
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
-            highlightColor = colour1
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            //
-            
-            
-        //
-        default:
-            //
-            backButtonAction()
-            //
-            UIView.animate(withDuration: 0.4, animations: {
-                self.walkthroughView.alpha = 0
-            }, completion: { finished in
-                self.walkthroughView.removeFromSuperview()
-                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                walkthroughs[4] = true
-                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
-            })
+            do {
+                soundPlayer = try AVAudioPlayer(contentsOf: url)
+                soundPlayer.play()
+            } catch {
+                // couldn't load file :(
+            }
         }
     }
     

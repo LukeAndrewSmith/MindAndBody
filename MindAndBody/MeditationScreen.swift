@@ -262,14 +262,6 @@ class MeditationScreen: UIViewController {
             //
             self.dismiss(animated: true)
         //
-        } else if timerValue == 1 {
-            timerValue -= 1
-            if isHours == true {
-                timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
-            } else {
-                timerLabel.text = timeFormatted(totalSeconds: timerValue)
-            }
-            //
         } else {
             timerValue -= 1
             if isHours == true {
@@ -277,6 +269,7 @@ class MeditationScreen: UIViewController {
             } else {
                 timerLabel.text = timeFormatted(totalSeconds: timerValue)
             }
+            //
         }
     }
     

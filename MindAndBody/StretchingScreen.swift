@@ -118,9 +118,14 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         // Set Arrays
         if fromCustom == false {
             keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
-            breathsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
-            setsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
-            repsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3] as! [String]
+            // Warmup
+            if selectedSession[0] == 0 {
+                setsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+                repsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3] as! [String]
+            // Stretching
+            } else {
+                 breathsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+            }
         }
         
         // Device Scale for @2x and @3x of Target Area Images
@@ -134,8 +139,6 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         //
         view.backgroundColor = colour2
-        
-        
         //
         finishEarly.tintColor = colour4
         
@@ -279,23 +282,44 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.movementLabel?.adjustsFontSizeToFitWidth = true
             
             //
-            // Set and Reps
+            // Sets x Reps
+            // String
+            var setsRepsString = String()
             // Stretching
             if selectedSession[0] != 0 {
-                if breathsArray[indexPath.row] == 0 {
-                    cell.setsRepsLabel?.text = " "
-                } else {
-                    cell.setsRepsLabel?.text = String(breathsArray[indexPath.row]) + " " + NSLocalizedString("breathsC", comment: "")
-                }
+                setsRepsString = String(breathsArray[indexPath.row]) + " " + NSLocalizedString("breathsC", comment: "")
             // Warmup
             } else {
                 let setsString = String(setsArray[indexPath.row])
-                cell.setsRepsLabel?.text = setsString + " x " + repsArray[indexPath.row]
+                setsRepsString = setsString + " x " + repsArray[indexPath.row]
             }
-            cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            cell.setsRepsLabel?.textAlignment = .right
-            cell.setsRepsLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            //
+            // Indicate asymmetric exercises to the user
+                // If asymmetric movement array contains the current movement
+            if sessionData.asymmetricMovements[selectedSession[0]].contains(keyArray[indexPath.row]) {
+                // Append indicator
+                let length = setsRepsString.count
+                let stringToAdd = NSLocalizedString(") per side", comment: "")
+                let length2 = stringToAdd.count
+                setsRepsString = "(" + setsRepsString + stringToAdd
+                let attributedString = NSMutableAttributedString(string: setsRepsString, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
+                // Change indicator to red
+                let range = NSRange(location:0,length:1) // specific location. This means "range" handle 1 character at location 2
+                attributedString.addAttribute(NSForegroundColorAttributeName, value: colour4, range: range)
+                let range2 = NSRange(location: 1 + length,length: length2)
+                attributedString.addAttribute(NSForegroundColorAttributeName, value: colour4, range: range2)
+                cell.setsRepsLabel?.textColor = colour1
+                cell.setsRepsLabel?.attributedText = attributedString
+            } else {
+                cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                cell.setsRepsLabel?.textColor = colour1
+                cell.setsRepsLabel?.text = setsRepsString
+            }
+            
+            cell.setsRepsLabel?.textAlignment = .center
             cell.setsRepsLabel.adjustsFontSizeToFitWidth = true
+            //
+            
             
             //
             // Explanation
@@ -433,7 +457,6 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
     // MARK: Tap Handlers, buttons and funcs -------------------------------------------------------------------------------------------------------
     //
     //
-    //
     // Image
     @IBAction func handleImageTap(imageTap:UITapGestureRecognizer) {
         //
@@ -463,6 +486,38 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     sender.startAnimating()
+                }
+            }
+        }
+    }
+    
+    // Play Image
+    func playAnimation(row: Int) {
+        //
+        // Get Cell
+        let indexPath = NSIndexPath(row: row, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! StretchingTableViewCell
+        //
+        let key = keyArray[indexPath.row]
+        //
+        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        //
+        // Image Array
+        if imageCount > 1 && cell.imageViewCell.isAnimating == false {
+            var animationArray: [UIImage] = []
+            for i in 1...imageCount - 1 {
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
+            }
+            //
+            cell.imageViewCell.animationImages = animationArray
+            cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
+            cell.imageViewCell.animationRepeatCount = 1
+            //
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let defaultImage = settings[5][0]
+            if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+                if imageCount != 1 {
+                    cell.imageViewCell.startAnimating()
                 }
             }
         }
@@ -503,6 +558,8 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.explanationButton.alpha = 0
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+            }, completion: { finished in
+                self.playAnimation(row: self.selectedRow)
             })
             // + 1
             if selectedRow < keyArray.count - 1 {

@@ -372,10 +372,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     // Functions -------------------------------------------------------------------------------------------------------
     //
     //
-    // Random -------------------------------------------------------------------------------------------------------
-    //
-    //
-    // Time
+    // Time Formatted
     func timeFormattedNicely(totalSeconds: Int) -> String {
         let seconds: Int = totalSeconds % 60
         let minutes: Int = (totalSeconds / 60) % 60
@@ -895,7 +892,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         } else {
             timerValue -= 1
-            //
             cell.detailLabel.text = timeFormatted(totalSeconds: timerValue)
         }
     }
@@ -906,7 +902,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     //
     // Circle -------------------------------------------------------------------------------------------------------------------------
     //
-    
     var timerShapeLayer: CAShapeLayer!
     // Funcs
     func addCircle() {

@@ -625,6 +625,13 @@ extension UIViewController {
         })
     }
 
+    //
+    // Vibrate Phone
+    func vibratePhone() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+    
 //
 }
 
@@ -739,5 +746,6 @@ extension Date {
         //
         return firstDateInCurrentMonth!
     }
+    
 }
 

@@ -20,9 +20,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     //
     var sectionNumbers: [Int] = []
     
-    // Array of movements in sections for final choice overview table
-    var overviewArray: [[Int]] = []
-    
     // Cardio - time or distance
     var cardioType = 0
     
@@ -112,30 +109,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         //
         // Selected Automatically from schedule
         } else {
-            //
-            // Perform relevant func
-            switch selectedSession[0] {
-            // Warmup
-            case 0:
-                session()
-            // Workout
-            case 1:
-                switch selectedSession[1] {
-                // Circuit Session
-                case 7,8,9,13,14,15:
-                    break
-                // Normal Session
-                default:
-                    session()
-                }
-            // Stretching
-            case 3:
-                session()
-            // Cardio,Yoga
-            default:
-                break
-            }
-            
             // Cardio Type
             // If cardio
             if selectedSession[0] == 2 {
@@ -342,18 +315,18 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             switch selectedSession[0] {
             // Warmup
             case 0:
-                let key = overviewArray[indexPath.section][indexPath.row]
+                let key = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1][indexPath.row] as! Int
                 cell.imageView?.tag = key
                 // [selectedSession[0]] = warmup/workout/cardio etc...
-                cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][overviewArray[indexPath.section][indexPath.row]]! as String, comment: "")
+                cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]! as String, comment: "")
                 //
                 // Get index of element
                 // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2]] = selected session, [1] = keys
-                let indexSetsReps = (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]).index(of: overviewArray[indexPath.section][indexPath.row])
+                let indexSetsReps = (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]).index(of: key)
                 //
                 // Cell Image
                 // [selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
-                cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][overviewArray[indexPath.section][indexPath.row]]?[0])!)
+                cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
                 
                 // SetsxReps or Length
                 // Timed session off
@@ -379,11 +352,14 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     //
                     // Cell Image
                     // [selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
-                    cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][indexPath.row]?[0])!)
+                    cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
                     //
                     // Reps
                     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] sets array and [3] for reps
-                    cell.detailTextLabel?.text = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3][indexPath.row] as? String
+                    // Find n movements in round, * round to find the index for the reps (if round to, nMovements = 3, indexPAth.row == 1 then index = 1 + 3 = 4)
+                    let nMovementsInRound = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1].count
+                    let index = indexPath.row + (indexPath.section * nMovementsInRound!)
+                    cell.detailTextLabel?.text = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3][index] as? String
                     
                 // Bodyweight Circuit Session (possibility of timed session)
                 case 13,14,15:
@@ -394,29 +370,35 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     //
                     // Cell Image
                     // [selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
-                    cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][indexPath.row]?[0])!)
+                    cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
                     //
                     // Reps or Length
                     // Timed session off
                     if timedSession == 0 {
                         // Reps
                         // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] sets array and [3] for reps
-                        cell.detailTextLabel?.text = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3][indexPath.row] as? String
+                        // Find n movements in round, * round to find the index for the reps (if round to, nMovements = 3, indexPAth.row == 1 then index = 1 + 3 = 4)
+                        let nMovementsInRound = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1].count
+                        let index = indexPath.row + (indexPath.section * nMovementsInRound!)
+                        cell.detailTextLabel?.text = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3][index] as? String
                     } else {
                         // [4] = Length
-                        cell.detailTextLabel?.text = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[4][indexPath.row] as? String
+                        // Find n movements in round, * round to find the index for the reps (if round to, nMovements = 3, indexPAth.row == 1 then index = 1 + 3 = 4)
+                        let nMovementsInRound = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1].count
+                        let index = indexPath.row + (indexPath.section * nMovementsInRound!)
+                        cell.detailTextLabel?.text = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[4][index] as? String
                     }
                    
                 // Normal Session
                 default:
-                    let key = overviewArray[indexPath.section][indexPath.row]
+                    let key = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1][indexPath.row] as! Int
                     cell.imageView?.tag = key
                     // [selectedSession[0]] = warmup/workout/cardio etc...
-                    cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][overviewArray[indexPath.section][indexPath.row]]! as String, comment: "")
+                    cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]! as String, comment: "")
                     //
                     // Get index of element
                     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2]] = selected session, [1] = keys
-                    let indexSetsReps = (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]).index(of: overviewArray[indexPath.section][indexPath.row])
+                    let indexSetsReps = (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]).index(of: key)
                     //
                     // Sets x Reps
                     // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] sets array and [3] for reps
@@ -424,7 +406,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     //
                     // Cell Image
                     // [selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
-                    cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][overviewArray[indexPath.section][indexPath.row]]?[0])!)
+                    cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
                 }
                 
             // Cardio
@@ -454,18 +436,18 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 
             // Stretching
             case 3:
-                let key = overviewArray[indexPath.section][indexPath.row]
+                let key = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1][indexPath.row] as! Int
                 cell.imageView?.tag = key
                 // [selectedSession[0]] = warmup/workout/cardio etc...
-                cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][overviewArray[indexPath.section][indexPath.row]]! as String, comment: "")
+                cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]! as String, comment: "")
                 //
                 // Get index of element
                 // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2]] = selected session, [1] = keys
-                let indexSetsReps = (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]).index(of: overviewArray[indexPath.section][indexPath.row])
+                let indexSetsReps = (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]).index(of: key)
                 //
                 // Cell Image
                 // [selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
-                cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][overviewArray[indexPath.section][indexPath.row]]?[0])!)
+                cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
                 //
                 // Breaths or Length
                 // Timed session off
@@ -491,7 +473,17 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 //
                 // Cell Image
                 // [selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
-                cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][indexPath.row]?[0])!)
+                //
+                // Image
+                // [key] = key, [0] = first image
+                let image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
+                // If asymmetric array contains image, flip imageview
+                if sessionData.asymmetricMovements[selectedSession[0]].contains(key) {
+                    let flippedImage = UIImage(cgImage: (image?.cgImage!)!, scale: (image?.scale)!, orientation: .upMirrored)
+                    cell.imageView?.image =  flippedImage
+                } else {
+                    cell.imageView?.image =  image
+                }
                 
             default:
                 break
@@ -550,30 +542,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             let selectedSessionKey: Int = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][1][1]?[indexPath.section][indexPath.row] as! Int
             //
             selectedSession[2] = selectedSessionKey
-            
-            //
-            // Perform relevant func
-            switch selectedSession[0] {
-            // Warmup
-            case 0:
-                session()
-            // Workout
-            case 1:
-                switch selectedSession[1] {
-                // Circuit Session
-                case 7,8,9,13,14,15:
-                    break
-                // Normal Session
-                default:
-                    session()
-                }
-            // Stretching
-            case 3:
-                session()
-            // Cardio, Yoga
-            default:
-                break
-            }
             
             // Cardio Type
             if selectedSession[0] == 2 {
@@ -642,51 +610,13 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     //
     // MARK: TableView Helpers -----------------------------------------------------------------------------------------------------------------
     //
-    // Normal Session
-    // Create overviewArray for warmup/workout/stretching, overview array being array of movements sorted in groups so section headers can be presented
-    func session() {
-        //
-        switch selectedSession[0] {
-        // Warmup
-        case 0:
-            sectionNumbers = [0,1,2,3,4,5,6,7,8,9,10,11]
-        // Workout
-        case 1:
-            sectionNumbers = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]
-        // Stretching
-        case 3:
-            sectionNumbers = [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
-        default:
-            break
-        }
-        
-        // Compress to new array
-        overviewArray = sessionData.fullKeyArrays[selectedSession[0]] as [[Int]]
-        
-        //
-        for i in (0...(overviewArray.count - 1)).reversed() {
-            // Reduce Array to session
-            for j in (0...(overviewArray[i].count - 1)).reversed() {
-                // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSessionKey] = session, [1] = session movements
-                if (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]).contains(overviewArray[i][j]) == false {
-                    overviewArray[i].remove(at: j)
-                }
-            }
-            // Remove empty arrays
-            if overviewArray[i] == [] {
-                overviewArray.remove(at: i)
-                sectionNumbers.remove(at: i)
-            }
-        }
-    }
-    
     // Number of sections in movements tableview
     func numberOfSectionsMovements() -> Int {
         //
         switch selectedSession[0] {
-        // Warmup, Stretching
-        case 0,3:
-            return overviewArray.count
+        // Warmup, Cardio, Stretching, Yoga
+        case 0,2,3,4:
+            return 1
             
         // Workout
         case 1:
@@ -697,13 +627,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 return sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]![2][0] as! Int
             // Normal Session
             default:
-                return overviewArray.count
+                return 1
             }
-            
-        // Cardio, Yoga
-        case 2,4:
-            return 1
-            
         //
         default:
             return 0
@@ -716,8 +641,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         switch selectedSession[0] {
         // Warmup, Stretching
         case 0,3:
-            // [selectedSession[0]] = warmup/workout/cardio etc..., [section] = section title
-            return NSLocalizedString(sessionData.tableViewSectionArrays[selectedSession[0]][section] as String, comment: "")
+            return ""
             
         // Workout
         case 1:
@@ -727,8 +651,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 return NSLocalizedString("round", comment: "") + String(section + 1)  + NSLocalizedString("of", comment: "") + String(sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]![2][0] as! Int)
             // Normal Session
             default:
-                // [selectedSession[0]] = warmup/workout/cardio etc..., [section] = section title
-                return NSLocalizedString(sessionData.tableViewSectionArrays[selectedSession[0]][section] as String, comment: "")
+                return ""
             }
         
         // Cardio, Yoga
@@ -745,9 +668,9 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     func numberOfRowsInSectionMovements(section: Int) -> Int {
         //
         switch selectedSession[0] {
-        // Warmup, Stretching
-        case 0,3:
-            return overviewArray[section].count
+        // Warmup, Cardio, Stretching, Yoga
+        case 0,2,3,4:
+            return sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]![1].count
             
         // Workout
         case 1:
@@ -756,15 +679,10 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             case 7,8,9,13,14,15:
                 // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = session, [1] = key array
                 return (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]![1] as! [Int]).count
+            // Normal Session
             default:
-                return overviewArray[section].count
+                return sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]![1].count
             }
-            
-        // Cardio, Yoga
-        case 2,4:
-            // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2]] = session, [1] = key array
-            return (sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]![1] as! [Int]).count
-            
         //
         default:
             return 0

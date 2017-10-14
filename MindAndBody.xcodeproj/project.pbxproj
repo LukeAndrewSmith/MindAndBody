@@ -448,6 +448,7 @@
 		07702C7F1F4D9433000E1DB8 /* quadStretch.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C7E1F4D9433000E1DB8 /* quadStretch.png */; };
 		07702C811F4D9437000E1DB8 /* sumoSquatTwist.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C801F4D9437000E1DB8 /* sumoSquatTwist.png */; };
 		07702C831F4D943B000E1DB8 /* tinyFencerStretch.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */; };
+		077206821F90C52000818088 /* TimeBasedHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077206811F90C52000818088 /* TimeBasedHelpers.swift */; };
 		077595831EC9E941004EE93C /* YogaChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077595821EC9E941004EE93C /* YogaChoiceCustom.swift */; };
 		077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DA1DA535830026895B /* AppDelegate.swift */; };
 		077AC0E21DA535840026895B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E01DA535840026895B /* Main.storyboard */; };
@@ -1827,6 +1828,7 @@
 		07702C7E1F4D9433000E1DB8 /* quadStretch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quadStretch.png; sourceTree = "<group>"; };
 		07702C801F4D9437000E1DB8 /* sumoSquatTwist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sumoSquatTwist.png; sourceTree = "<group>"; };
 		07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tinyFencerStretch.png; sourceTree = "<group>"; };
+		077206811F90C52000818088 /* TimeBasedHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedHelpers.swift; sourceTree = "<group>"; };
 		077595821EC9E941004EE93C /* YogaChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaChoiceCustom.swift; sourceTree = "<group>"; };
 		077AC0D71DA535830026895B /* MindAndBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindAndBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		077AC0DA1DA535830026895B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -4502,6 +4504,7 @@
 			isa = PBXGroup;
 			children = (
 				0798381D1F8A8DD8007C3CF5 /* TimeBasedSession.swift */,
+				077206811F90C52000818088 /* TimeBasedHelpers.swift */,
 			);
 			name = "Time Based";
 			sourceTree = "<group>";
@@ -8265,6 +8268,7 @@
 				071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */,
 				07686A901F843A1600C278CC /* ScheduleHelpers.swift in Sources */,
 				076C68421ED497AD009160C2 /* BodyweightChoiceCC.swift in Sources */,
+				077206821F90C52000818088 /* TimeBasedHelpers.swift in Sources */,
 				07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */,
 				07686A8E1F84399A00C278CC /* ScheduleAnimationHelpers.swift in Sources */,
 				07F0C4951EA6128C00927DA8 /* StretchingChoiceCustom.swift in Sources */,

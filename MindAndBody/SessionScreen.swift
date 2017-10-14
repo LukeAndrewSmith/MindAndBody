@@ -80,6 +80,23 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Table View
     @IBOutlet weak var tableView: UITableView!
     
+    // Top layout constraint for finish early button, used to relayout to take account of the rest timer
+    @IBOutlet weak var finishEarlyTop: NSLayoutConstraint!
+    
+    //
+    @IBOutlet weak var restTimeView: UIView!
+    @IBOutlet weak var restTimeHeight: NSLayoutConstraint!
+    @IBOutlet weak var restTimeTitleLabel: UILabel!
+    @IBOutlet weak var restTimeTimeLabel: UILabel!
+    @IBOutlet weak var restTimeSkipButton: UIButton!
+    // Timer Variables
+    var timerValue = Int()
+    var didSetEndTime = false
+    var startTime = Double()
+    var endTime = Double()
+    var isTiming = false
+
+    
     // Progress Bar
     let progressBar = UIProgressView()
 
@@ -151,11 +168,10 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         view.backgroundColor = colour2
         
-        
         //
         finishEarly.tintColor = colour4
         
-        
+        //
         // Progress Bar
         // Thickness
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
@@ -177,122 +193,24 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         tableView.tableFooterView = UIView()
         
+        // Rest Time View Layout
+        restTimeView.backgroundColor = colour2
+        restTimeView.alpha = 0
+        restTimeHeight.constant = 0
+        //
+        restTimeTitleLabel.text = NSLocalizedString("rest:", comment: "")
+        restTimeTitleLabel.textColor = colour1
+        restTimeTimeLabel.textColor = colour1
+        restTimeSkipButton.setTitle(NSLocalizedString("skip", comment: ""), for: .normal)
+        restTimeSkipButton.setTitleColor(colour4, for: .normal)
+        restTimeSkipButton.addTarget(self, action: #selector(skipRest), for: .touchUpInside)
+        
         // Buttons
         //
         fillButtonArray()
         //
+        
     }
-    
-
-//
-// MARK: Set Buttons -----------------------------------------------------------------------------------------------
-//
-    // Button Array
-    //
-    var buttonArray = [[UIButton]]()
-    
-    //
-    // Set Button Action
-    var buttonNumber = [Int]()
-    
-    //
-    // Generate Buttons
-    //
-    func createButton() -> UIButton {
-        //
-        let setButton = UIButton()
-        let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
-        setButton.addConstraints([widthHeight])
-        setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
-        setButton.layer.borderWidth = 3
-        setButton.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
-        setButton.layer.cornerRadius = 21.4375
-        setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
-        setButton.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-        setButton.isEnabled = false
-        //
-        return setButton
-    }
-    
-    // Set Button
-    @IBAction func setButtonAction(sender: UIButton) {
-        //
-        // Rest Timer Notification
-        //
-        //
-        let content = UNMutableNotificationContent()
-        content.title = NSLocalizedString("restOver", comment: "")
-        content.body = NSLocalizedString("nextSet", comment: "")
-        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
-        content.sound = UNNotificationSound.default()
-        //
-        let restTimes = UserDefaults.standard.object(forKey: "restTimes") as! [Int]
-        //
-        var sessionType = Int()
-        switch selectedSession[0] {
-        case 0:
-            sessionType = 0
-        case 1:
-            sessionType = 1
-        case 3:
-            sessionType = 2
-        default: break
-        }
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTimes[sessionType]), repeats: false)
-        let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
-        //
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-
-        
-        //
-        let buttonRow = sender.tag
-        //
-        buttonArray[buttonRow][buttonNumber[buttonRow]].isEnabled = false
-        
-        // Increase Button Number
-        if self.setsArray[buttonRow] == 0 {
-        } else {
-            if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] {
-                self.buttonNumber[buttonRow] = self.buttonNumber[buttonRow] + 1
-            }
-        }
-        
-        // Enable After Delay
-        let delayInSeconds = 2.0
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            if self.setsArray[buttonRow] == 0 {
-            } else {
-                if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] {
-                    self.buttonArray[buttonRow][self.buttonNumber[buttonRow]].isEnabled = true
-                }
-            }
-        }
-        
-        //
-        sender.isEnabled = false
-        sender.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        
-        //
-        updateProgress()
-    }
-    
-    // Generate an Array of Arrays of Buttons
-    //
-    func fillButtonArray() {
-        for i in 0...(setsArray.count - 1){
-            //
-            var buttonArray2 = [UIButton]()
-            //
-            for _ in 1...setsArray[i]{
-                buttonArray2 += [createButton()]
-            }
-            //
-            buttonArray += [buttonArray2]
-            buttonNumber.append(0)
-        }
-        buttonArray[0][0].isEnabled = true
-    }
-    
     
     //
     // MARK: TableView ---------------------------------------------------------------------------------------------------------------------
@@ -415,19 +333,40 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.movementLabel?.adjustsFontSizeToFitWidth = true
             
             //
-            // Set and Reps
+            // Sets x Reps
+            // String
+            var setsRepsString = String()
             let setsString = String(setsArray[indexPath.row])
-            cell.setsRepsLabel?.text = setsString + " x " + repsArray[indexPath.row]
-            cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            cell.setsRepsLabel?.textAlignment = .right
-            cell.setsRepsLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            setsRepsString = setsString + " x " + repsArray[indexPath.row]
+            // Indicate asymmetric exercises to the user
+            // If asymmetric movement array contains the current movement
+            if sessionData.asymmetricMovements[selectedSession[0]].contains(keyArray[indexPath.row]) {
+                // Append indicator
+                let length = setsRepsString.count
+                let stringToAdd = NSLocalizedString(") per side", comment: "")
+                let length2 = stringToAdd.count
+                setsRepsString = "(" + setsRepsString + stringToAdd
+                let attributedString = NSMutableAttributedString(string: setsRepsString, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
+                // Change indicator to red
+                let range = NSRange(location:0,length:1) // specific location. This means "range" handle 1 character at location 2
+                attributedString.addAttribute(NSForegroundColorAttributeName, value: colour4, range: range)
+                let range2 = NSRange(location: 1 + length,length: length2)
+                attributedString.addAttribute(NSForegroundColorAttributeName, value: colour4, range: range2)
+                cell.setsRepsLabel?.textColor = colour1
+                cell.setsRepsLabel?.attributedText = attributedString
+            } else {
+                cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                cell.setsRepsLabel?.textColor = colour1
+                cell.setsRepsLabel?.text = setsRepsString
+            }
+            //
+            cell.setsRepsLabel?.textAlignment = .center
             cell.setsRepsLabel.adjustsFontSizeToFitWidth = true
             
             //
             // Explanation
             cell.explanationButton.tintColor = colour1
             
-
             //
             // Button Stuff
             //
@@ -609,6 +548,202 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+//
+// MARK: Set Buttons and Rest Timers --------------------
+//
+    //
+    // MARK: Set Buttons -----------------------------------------------------------------------------------------------
+    //
+    // Button Array
+    var buttonArray = [[UIButton]]()
+    // Set Button Action
+    var buttonNumber = [Int]()
+    //
+    // Generate Buttons
+    func createButton() -> UIButton {
+        //
+        let setButton = UIButton()
+        let widthHeight = NSLayoutConstraint(item: setButton, attribute: NSLayoutAttribute.width, relatedBy: .equal, toItem: setButton, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
+        setButton.addConstraints([widthHeight])
+        setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
+        setButton.layer.borderWidth = 3
+        setButton.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        setButton.layer.cornerRadius = 21.4375
+        setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
+        setButton.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        setButton.isEnabled = false
+        //
+        return setButton
+    }
+    
+    // Set Button
+    @IBAction func setButtonAction(sender: UIButton) {
+        // Do nothing if a set button has already been presssed
+        // Do something if not
+        if isTiming == false {
+        //
+        // Rest Timer Notification
+        let content = UNMutableNotificationContent()
+        content.title = NSLocalizedString("restOver", comment: "")
+        content.body = NSLocalizedString("nextSet", comment: "")
+        //        content.setValue(true, forKey: "shouldAlwaysAlertWhileAppIsForeground")
+        content.sound = UNNotificationSound.default()
+        //
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let restTime = settings[4][1]
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTime), repeats: false)
+        let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
+        //
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+        // Start rest timer
+        startTimer()
+        
+        //
+        // Button editing, colour etc..
+        let buttonRow = sender.tag
+        //
+        buttonArray[buttonRow][buttonNumber[buttonRow]].isEnabled = false
+        // Increase Button Number
+        if self.setsArray[buttonRow] == 0 {
+        } else {
+            if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] {
+                self.buttonNumber[buttonRow] = self.buttonNumber[buttonRow] + 1
+            }
+        }
+        // Enable After Delay
+        let delayInSeconds = 2.0
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            if self.setsArray[buttonRow] == 0 {
+            } else {
+                if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] {
+                    self.buttonArray[buttonRow][self.buttonNumber[buttonRow]].isEnabled = true
+                }
+            }
+        }
+        //
+        sender.isEnabled = false
+        sender.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        //
+        updateProgress()
+        }
+    }
+    
+    
+    // Generate an Array of Arrays of Buttons
+    //
+    func fillButtonArray() {
+        for i in 0...(setsArray.count - 1){
+            //
+            var buttonArray2 = [UIButton]()
+            //
+            for _ in 1...setsArray[i]{
+                buttonArray2 += [createButton()]
+            }
+            //
+            buttonArray += [buttonArray2]
+            buttonNumber.append(0)
+        }
+        buttonArray[0][0].isEnabled = true
+    }
+    
+    //
+    // MARK: Timer Functions
+    //
+    // Update and Format Timer
+    // Timer CountDown Title
+    func timeFormatted(totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    // Update Timer
+    func updateTimer() {
+        //
+        if timerValue == 0 {
+            //
+            restTimeHeight.constant = 0
+            finishEarlyTop.constant = 7
+            UIView.animate(withDuration: AnimationTimes.animationTime1) {
+                self.restTimeView.alpha = 0
+                self.view.layoutIfNeeded()
+            }
+            //
+            vibratePhone()
+            timerCountDown.invalidate()
+            didSetEndTime = false
+            isTiming = false
+            NotificationCenter.default.removeObserver(self)
+            //
+        } else {
+            timerValue -= 1
+            restTimeTimeLabel.text = timeFormatted(totalSeconds: timerValue)
+            //
+        }
+    }
+    
+    //
+    // Start Timer
+    func startTimer() {
+        // Dates and Times
+        startTime = Date().timeIntervalSinceReferenceDate
+        //
+        if didSetEndTime == false {
+            // Watch for enter foreground (Incase user puts app in background then returns app to foreground, timer should be updated upon enter foreground)
+            NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+            // Layout
+            restTimeHeight.constant = 49
+            finishEarlyTop.constant = 7 + 49
+            UIView.animate(withDuration: AnimationTimes.animationTime1) {
+                self.restTimeView.alpha = 1
+                self.view.layoutIfNeeded()
+            }
+            // Times
+            isTiming = true
+            didSetEndTime = true
+            let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let duration = settings[4][1]
+            endTime = startTime + Double(duration)
+        }
+        
+        // Set timer value
+        timerValue = Int(endTime - startTime)
+        
+        // Check Greater than 0
+        if timerValue <= 0 {
+            timerValue = 0
+        }
+        
+        // Set Timer
+        // Set initial time
+        restTimeTimeLabel.text = timeFormatted(totalSeconds: timerValue)
+        
+        // Begin Timer
+        timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+    }
+    
+    //
+    // Skip Rest
+    @IBAction func skipRest(sender: UIButton) {
+        //
+        restTimeHeight.constant = 0
+        finishEarlyTop.constant = 7
+        UIView.animate(withDuration: AnimationTimes.animationTime1) {
+            self.restTimeView.alpha = 0
+            self.view.layoutIfNeeded()
+        }
+        //
+        vibratePhone()
+        timerCountDown.invalidate()
+        didSetEndTime = false
+        isTiming = false
+        NotificationCenter.default.removeObserver(self)
+        //
+    }
+    
+    
+    
     
 //
 // MARK: Tap Handlers, buttons and funcs -------------------------------------------------------------------------------------------------------
@@ -644,6 +779,38 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     sender.startAnimating()
+                }
+            }
+        }
+    }
+    
+    // Play Image
+    func playAnimation(row: Int) {
+        //
+        // Get Cell
+        let indexPath = NSIndexPath(row: row, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
+        //
+        let key = keyArray[indexPath.row]
+        //
+        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        //
+        // Image Array
+        if imageCount > 1 && cell.imageViewCell.isAnimating == false {
+            var animationArray: [UIImage] = []
+            for i in 1...imageCount - 1 {
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
+            }
+            //
+            cell.imageViewCell.animationImages = animationArray
+            cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
+            cell.imageViewCell.animationRepeatCount = 1
+            //
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let defaultImage = settings[5][0]
+            if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+                if imageCount != 1 {
+                    cell.imageViewCell.startAnimating()
                 }
             }
         }
@@ -686,6 +853,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.explanationButton.alpha = 0
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+            }, completion: { finished in
+                self.playAnimation(row: self.selectedRow)
             })
             // + 1
             if selectedRow < keyArray.count - 1 {

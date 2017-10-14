@@ -298,6 +298,43 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.setsRepsLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             cell.setsRepsLabel.adjustsFontSizeToFitWidth = true
             
+            
+            
+            //
+            // Sets x Reps
+            // String
+            var repsString = repsArray[indexRow]
+            //
+            // Indicate asymmetric exercises to the user
+            // If asymmetric movement array contains the current movement
+            if sessionData.asymmetricMovements[selectedSession[0]].contains(keyArray[indexPath.row]) {
+                // Append indicator
+                let length = repsString.count
+                let stringToAdd = NSLocalizedString(") per side", comment: "")
+                let length2 = stringToAdd.count
+                repsString = "(" + repsString + stringToAdd
+                let attributedString = NSMutableAttributedString(string: repsString, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
+                // Change indicator to red
+                let range = NSRange(location:0,length:1) // specific location. This means "range" handle 1 character at location 2
+                attributedString.addAttribute(NSForegroundColorAttributeName, value: colour4, range: range)
+                let range2 = NSRange(location: 1 + length,length: length2)
+                attributedString.addAttribute(NSForegroundColorAttributeName, value: colour4, range: range2)
+                cell.setsRepsLabel?.textColor = colour1
+                cell.setsRepsLabel?.attributedText = attributedString
+            } else {
+                cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                cell.setsRepsLabel?.textColor = colour1
+                cell.setsRepsLabel?.text = repsString
+            }
+            
+            cell.setsRepsLabel?.textAlignment = .center
+            cell.setsRepsLabel.adjustsFontSizeToFitWidth = true
+            //
+            
+            
+            
+            
+            
             //
             // Explanation
             cell.explanationButton.tintColor = colour1
@@ -676,75 +713,11 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         })
         
     }
-    
-    
-    
-    
-    
-    
-    //
-    // Pocket Mode ------------------------------------------------------------------------------------------------------
-    //
-    let blurEffectView = UIVisualEffectView()
-    let hideLabel = UILabel()
-    //
-    @IBAction func hideScreenAction() {
-        // Blur
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-        let screenSize = UIScreen.main.bounds
-        blurEffectView.effect = blurEffect
-        blurEffectView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.alpha = 0
-        
-        // Triple Tap
-        let tripleTap = UITapGestureRecognizer()
-        tripleTap.numberOfTapsRequired = 3
-        tripleTap.addTarget(self, action: #selector(handleTap))
-        blurEffectView.isUserInteractionEnabled = true
-        blurEffectView.addGestureRecognizer(tripleTap)
-        
-        // Text
-        hideLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
-        hideLabel.center = blurEffectView.center
-        hideLabel.textAlignment = .center
-        hideLabel.numberOfLines = 0
-        hideLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-        hideLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        hideLabel.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        hideLabel.alpha = 0
-        hideLabel.text = NSLocalizedString("hideScreen", comment: "")
-        
-        //
-        blurEffectView.addSubview(hideLabel)
-        UIApplication.shared.keyWindow?.insertSubview(blurEffectView, aboveSubview: view)
-        //
-        UIView.animate(withDuration: 0.4, animations: {
-            self.blurEffectView.alpha = 1
-        }, completion: { finished in
-            self.hideLabel.alpha = 1
-        })
-    }
-    
-    // Exit pocket mode
-    @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
-        //
-        self.hideLabel.alpha = 0
-        
-        //
-        UIView.animate(withDuration: 0.4, animations: {
-            self.blurEffectView.alpha = 0
-        }, completion: { finished in
-            //
-            self.blurEffectView.removeFromSuperview()
-            self.hideLabel.removeFromSuperview()
-        })
-    }
+
     
     
     //
     // Tap Handlers, buttons and funcs -------------------------------------------------------------------------------------------------------
-    //
     //
     //
     // Image
@@ -776,6 +749,38 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     sender.startAnimating()
+                }
+            }
+        }
+    }
+    
+    // Play Image
+    func playAnimation(row: Int) {
+        //
+        // Get Cell
+        let indexPath = NSIndexPath(row: row, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! WorkoutOverviewTableViewCell
+        //
+        let key = keyArray[indexPath.row]
+        //
+        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        //
+        // Image Array
+        if imageCount > 1 && cell.imageViewCell.isAnimating == false {
+            var animationArray: [UIImage] = []
+            for i in 1...imageCount - 1 {
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
+            }
+            //
+            cell.imageViewCell.animationImages = animationArray
+            cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
+            cell.imageViewCell.animationRepeatCount = 1
+            //
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let defaultImage = settings[5][0]
+            if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+                if imageCount != 1 {
+                    cell.imageViewCell.startAnimating()
                 }
             }
         }
@@ -818,6 +823,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //self.tableView.reloadRows(at: [indexPath2 as IndexPath], with: UITableViewRowAnimation.none)
 
                 //
+            }, completion: { finished in
+                self.playAnimation(row: self.selectedRow)
             })
             // + 1
             if selectedRow < keyArray.count - 1 {

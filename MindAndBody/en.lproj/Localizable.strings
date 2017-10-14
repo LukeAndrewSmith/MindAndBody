@@ -70,6 +70,7 @@
 "hideScreen" = "Pocket Mode\n\nTriple tap to exit";
 
 "rest" = "Rest";
+"rest:" = "Rest:";
 "skip" = "Skip";
 
 "sessionStarted" = "Session has begun!";
@@ -93,7 +94,7 @@
 
 
 
-    // Test
+// Test
 "howTo" = "How To:";
 "toAvoid" = "Avoid:";
 "focusOn" = "Focus On:";
@@ -571,6 +572,16 @@
     "demonstration" = "Demonstration";
     "targetArea" = "Target Area";
 
+
+
+//
+// MARK: Time Based
+//
+"prepare" = "Prepare";
+"rest" = "Rest";
+"beginMovement" = "Begin";
+"beginMovementSide1" = "Begin: Side 1";
+"beginMovementSide2" = "Begin: Side 2";
 
 
 

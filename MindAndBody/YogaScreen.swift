@@ -253,8 +253,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.poseLabel?.lineBreakMode = .byWordWrapping
             cell.poseLabel?.adjustsFontSizeToFitWidth = true
             
-            // Set and Reps
             //
+            // Breaths
             cell.breathsLabel?.text = String(breathsArray[indexPath.row]) + " " + NSLocalizedString("breathsC", comment: "")
             cell.breathsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 30)
             cell.breathsLabel?.textAlignment = .right
@@ -264,11 +264,19 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             cell.explanationButton.tintColor = colour1
             
-            // Image
             //
+            // Image
             // [key] = key, [0] = first image
-            cell.demonstrationImageView.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
-            
+            let image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
+            // If asymmetric array contains image, flip imageview
+            if sessionData.asymmetricMovements[selectedSession[0]].contains(key) {
+                let flippedImage = UIImage(cgImage: (image?.cgImage!)!, scale: (image?.scale)!, orientation: .upMirrored)
+                cell.demonstrationImageView.image =  flippedImage
+            } else {
+                cell.demonstrationImageView.image =  image
+            }
+
+
             //
             if (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count > 1 {
                 cell.imageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -439,8 +447,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //
     // Tap Handlers -------------------------------------------------------------------------------------------------------
     //
-    //
-    //
     // Image
     @IBAction func handleImageTap(imageTap:UITapGestureRecognizer) {
         //
@@ -466,6 +472,34 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.demonstrationImageView.animationRepeatCount = 1
             //
             sender.startAnimating()
+        }
+    }
+    
+    // Play Image
+    func playAnimation(row: Int) {
+        //
+        // Get Cell
+        let indexPath = NSIndexPath(row: row, section: 0)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "YogaOverviewTableViewCell", for: indexPath as IndexPath) as! YogaOverviewTableViewCell
+        //
+        let key = keyArray[indexPath.row]
+        //
+        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        //
+        // Image Array
+        if imageCount > 1 && cell.demonstrationImageView.isAnimating == false {
+            var animationArray: [UIImage] = []
+            for i in 1...imageCount - 1 {
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
+            }
+            //
+            cell.demonstrationImageView.animationImages = animationArray
+            cell.demonstrationImageView.animationDuration = Double(imageCount - 1) * 0.5
+            cell.demonstrationImageView.animationRepeatCount = 1
+            //
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let defaultImage = settings[5][0]
+            cell.demonstrationImageView.startAnimating()
         }
     }
 
@@ -505,6 +539,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 cell.demonstrationImageView.isUserInteractionEnabled = true
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+            }, completion: {finished in
+                self.playAnimation(row: self.selectedRow)
             })
                 // + 1
                 if selectedRow < keyArray.count - 1 {

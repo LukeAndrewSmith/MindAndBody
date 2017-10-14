@@ -250,20 +250,19 @@ enum sessionData {
             // Yoga
             [
                 // Standing
-                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
+                [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38],
                 // Hand/Elbows and Feet/Knees
-                [23, 24, 25, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40],
+                [39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59],
                 // Seated
-                [41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57],
+                [60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84],
                 // Lying
-                [58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69],
+                [85,86,87,88,89,90,91,92,93,94,95,96,97,98,99],
                 // Hand Stands
-                [70, 71, 72]
+                [100,101,102]
             ]
     ]
     
     //
-    
     // MARK: Movements Dictionaries
     static let movementsDictionaries: [[Int : String]] =
         [
@@ -614,81 +613,300 @@ enum sessionData {
                 // Standing
                 0: "upwardsSalute",
                 1: "mountain",
-                2: "tree",
-                3: "extendedToeGrab",
-                4: "eagle",
-                5: "chair",
-                6: "lordOfDance",
-                7: "warrior1",
-                8: "warrior2",
-                9: "warrior3",
-                10: "halfMoon",
-                11: "extendedTriangle",
-                12: "extendedSideAngleY",
-                13: "revolvedSideAngle",
-                14: "revolvedTriangle",
-                15: "halfForwardBend",
-                16: "forwardBend",
-                17: "wideLeggedForwardBend",
-                18: "intenseSide",
-                19: "gate",
-                20: "highLunge",
-                21: "lowLungeY",
-                22: "deepSquat",
+                2: "treeL", //
+                3: "treeR",
+                4: "extendedToeGrabL", //
+                5: "extendedToeGrabR",
+                6: "eagleL", //
+                7: "eagleR",
+                8: "chair",
+                9: "lordOfDanceL", //
+                10: "lordOfDanceR",
+                11: "warrior1L", //
+                12: "warrior1R",
+                13: "warrior2L", //
+                14: "warrior2R",
+                15: "warrior3L", //
+                16: "warrior3R",
+                17: "halfMoonL", //
+                18: "halfMoonR",
+                19: "extendedTriangleL", //
+                20: "extendedTriangleR",
+                21: "extendedSideAngleYL", //
+                22: "extendedSideAngleYR",
+                23: "revolvedSideAngleL", //
+                24: "revolvedSideAngleR",
+                25: "revolvedTriangleL", //
+                26: "revolvedTriangleR",
+                27: "halfForwardBend",
+                28: "forwardBend",
+                29: "wideLeggedForwardBend",
+                30: "intenseSideL", //
+                31: "intenseSideR",
+                32: "gateL", //
+                33: "gateR",
+                34: "highLungeL", //
+                35: "highLungeR",
+                36: "lowLungeYL", //
+                37: "lowLungeYR",
+                38: "deepSquat",
                 // Hand/Elbows and Feet/Knees
-                23: "dolphin",
-                24: "downwardDog",
-                25: "halfDownwardDog",
-                26: "plank", //// UNUSED
-                27: "dolphinPlank",
-                28: "fourLimbedStaff",
-                29: "sidePlank",
-                30: "cat",
-                31: "cow",
-                32: "catCow",
-                33: "halfMonkey",
-                34: "childPose",
-                35: "wildThing",
-                36: "upwardBow",
-                37: "bridge",
-                38: "upwardPlank",
-                39: "extendedPuppy",
-                40: "upwardDog",
+                39: "dolphin",
+                40: "downwardDog",
+                41: "halfDownwardDogL", //
+                42: "halfDownwardDogR",
+                43: "dolphinPlank",
+                44: "fourLimbedStaff",
+                45: "sidePlankL", //
+                46: "sidePlankR",
+                47: "cat",
+                48: "cow",
+                49: "catCow",
+                50: "halfMonkeyL", //
+                51: "halfMonkeyR",
+                52: "childPose",
+                53: "wildThingL", //
+                54: "wildThingR",
+                55: "upwardBow",
+                56: "bridge",
+                57: "upwardPlank",
+                58: "extendedPuppy",
+                59: "upwardDog",
                 // Seated
-                41: "crossLeg",
-                42: "lotus",
-                43: "fireLog",
-                44: "boat",
-                45: "cowFace",
-                46: "hero",
-                47: "butterfly",
-                48: "staffPose",
-                49: "seatedForwardBend",
-                50: "vForwardBend",
-                51: "vSideBend",
-                52: "halfVForwardBend",
-                53: "halfVSideBend",
-                54: "marichi1",
-                55: "marichi3",
-                56: "frontSplit",
-                57: "sideSplit",
+                60: "crossLeg",
+                61: "lotus",
+                62: "fireLogL", //
+                63: "fireLogR",
+                64: "boat",
+                65: "cowFaceL", //
+                66: "cowFaceR",
+                67: "hero",
+                68: "butterfly",
+                69: "staffPose",
+                70: "seatedForwardBend",
+                71: "vForwardBend",
+                72: "vSideBendL", //
+                73: "vSideBendR",
+                74: "halfVForwardBendL", //
+                75: "halfVForwardBendR",
+                76: "halfVSideBendL",
+                77: "halfVSideBendR",
+                78: "marichi1L", //
+                79: "marichi1R",
+                80: "marichi3L", //
+                81: "marichi3R",
+                82: "frontSplitL", //
+                83: "frontSplitR",
+                84: "sideSplit",
                 // Lying
-                58: "corpse",
-                59: "fish",
-                60: "happyBaby",
-                61: "lyingButterfly",
-                62: "legRaiseToe",
-                63: "threadTheNeedle",
-                64: "shoulderStand",
-                65: "plow",
-                66: "cobra",
-                67: "sphinx",
-                68: "pigeon",
-                69: "spineRolling",
+                85: "corpse",
+                86: "fish",
+                87: "happyBaby",
+                88: "lyingButterfly",
+                89: "legRaiseToeL", //
+                90: "legRaiseToeR",
+                91: "threadTheNeedleL", //
+                92: "threadTheNeedleR",
+                93: "shoulderStand",
+                94: "plow",
+                95: "cobra",
+                96: "sphinx",
+                97: "pigeonL", //
+                98: "pigeonR",
+                99: "spineRolling",
                 // Hand Stands
-                70: "handstand",
-                71: "headstand",
-                72: "forearmStand"
+                100: "handstand",
+                101: "headstand",
+                102: "forearmStand"
+            ]
+    ]
+    
+    //
+    // Asymmetric exercises
+    static let asymmetricMovements: [[Int]] =
+        [
+            // Warmup
+            [
+                // Joint Rotations
+                2, //: "elbow",
+                3, //: "shoulderR",
+//                4, //: "neckR",
+                5, //: "waist",
+                6, //: "hip",
+                7, //: "knees",
+                8, //: "ankles",
+                // Foam/Ball Roll
+                11, //: "lat",
+                12, //: "pecDelt",
+                13, //: "rearDelt",
+                14, //: "quadf",
+                15, //: "adductorf",
+                16, //: "hamstringf",
+                17, //: "glutef",
+                18, //: "calvef",
+                19, //: "itBand",
+                20, //: "standOnBall",
+                // Glutes
+                22, //: "kneelingKickBackW", ///
+                24, //: "standingGluteKickback", ///
+                // Lower Back
+                30, //: "legsToSideTwist", ///
+                // Upper Back
+                31, //: "upperBackRotation", ///
+                32, //: "latStretch", ///
+                33, //: "lyingSideWindmill", ///
+                // Shoulder
+                36, //: "shoulderRotationW",
+                // Band/Bar/Machine Assisted
+                41, //: "externalRotation",
+                42, //: "internalRotation",
+                // General Mobility
+                45, //: "seatedKneeDrop", ///
+                48, //: "threadTheNeedle",
+                53, //: "sideLegSwings",
+                54, //: "frontLegSwings",
+            ],
+            // Workout
+            [
+                // Gym ------------------------------------
+                // Legs (Hamstrings/Glutes)
+                9, //: "oneLeggedDeadlift",
+                10, //: "gluteIsolationMachine",
+                // Legs (General)
+                12, //: "bulgarianSplitSquat",
+                13, //: "weightedStepUp",
+                // Legs (Calves)
+                15, //: "seatedCalfRaise",
+                // Pull (Biceps)
+                29, //: "hammerCurlCable",
+                // Push (Triceps)
+                47, //: "cableExtension",
+                // BodyWeight ------------------------------------
+                // Legs (General) ---------
+                51, //: "pistolSquat",
+                52, //: "skaterSquat",
+                // Legs (Hamstrings)
+                58, //: "singleLegDeadlift",
+                // Legs (Glutes)
+                60, //: "singleLegGluteBridge",
+                61, //: "kickBack",
+                62, //: "standingKickBack",
+                // Legs (Calves)
+                63, //: "calfRaise",
+                // Pull (Back) ---------
+                67, //: "doorFrameRow",
+                // Core ---------
+                82, //: "sidePlankW",
+                // Equiptment (Bench/Step)
+                109, //: "bulgarianSplitSquat",
+                112, //: "stepUp"
+            ],
+            // Cardio - Unused but necessary to keep index consistent
+            [],
+            // Stretching
+            [
+                // Joint Rotations
+                2, //: "elbow",
+                3, //: "shoulderR",
+                4, //: "neckR",
+                5, //: "waist",
+                6, //: "hip",
+                7, //: "knees",
+                8, //: "ankles",
+                // Foam/Ball Roll
+                11, //: "lat",
+                12, //: "pecDelt",
+                13, //: "rearDelt",
+                14, //: "quadf",
+                15, //: "adductorf",
+                16, //: "hamstringf",
+                17, //: "glutef",
+                18, //: "calvef",
+                19, //: "itBand",
+                20, //: "standOnBall",
+                // Back
+                29, //: "seatedTwist",
+                // Obliques(Sides)
+                31, //: "sideLean",
+                32, //: "extendedSideAngle",
+                33, //: "seatedSide",
+                // Neck
+                36, //: "seatedLateral",
+                37, //: "neckRotator",
+                38, //: "scalene",
+                39, //: "headRoll",
+                // Arms
+                40, //: "forearmStretch",
+                41, //: "tricepStretch",
+                42, //: "bicepStretch",
+                // Pecs
+                43, //: "pecStretch",
+                // Shoulders
+                45, //: "behindBackTouch",
+                46, //: "frontDelt",
+                47, //: "lateralDelt",
+                48, //: "rearDelt",
+                49, //: "rotatorCuff",
+                // Hips and Glutes
+                53, //: "lungeStretch",
+                54, //: "threadTheNeedle",
+                55, //: "pigeonPose",
+                56, //: "seatedGlute",
+                // Calves
+                57, //: "calveStretch",
+                // Hamstrings
+                59, //: "standingOneLegHamstring",
+                61, //: "singleLegHamstring",
+                // Quads
+                63, //: "lungeStretchWall",
+                64, //: "QuadStretch",
+                // Full Body
+                65, //: "sumoSquatTwist",
+                66, //: "tinyFencerStretch",
+                ],
+            // Yoga - Contains the images that need to be reversed
+                // L/R
+                    // L/R foot on floor
+                    // L/R hand on floor
+                    // L/R foot in front/to side
+                    // L/R foot on top
+                    // L/R Twist
+            [
+                // Standing
+                3, //: "treeR",
+                4, //: "extendedToeGrabL", //
+                6, //: "eagleL", //
+                10, //: "lordOfDanceR",
+                12, //: "warrior1R",
+                14, //: "warrior2R",
+                15, //: "warrior3L", //
+                18, //: "halfMoonR",
+                20, //: "extendedTriangleR",
+                22, //: "extendedSideAngleYR",
+                24, //: "revolvedSideAngleR",
+                25, //: "revolvedTriangleL", //
+                31, //: "intenseSideR",
+                33, //: "gateR",
+                35, //: "highLungeR",
+                37, //: "lowLungeYR",
+                // Hand/Elbows and Feet/Knees
+                42, //: "halfDownwardDogR",
+                46, //: "sidePlankR",
+                51, //: "halfMonkeyR",
+                53, //: "wildThingL", //
+                // Seated
+                63, //: "fireLogR",
+                65, //: "cowFaceL", //
+                73, //: "vSideBendR",
+                75, //: "halfVForwardBendR",
+                77, //: "halfVSideBendR",
+                78, //: "marichi1L", //
+                80, //: "marichi3L", //
+                83, //: "frontSplitR",
+                // Lying
+                90, //: "legRaiseToeR",
+                91, //: "threadTheNeedleL", //
+                98, //: "pigeonR",
             ]
     ]
     
@@ -1043,81 +1261,111 @@ enum sessionData {
                 // Standing
                 0: ["upwardSalute"],
                 1: ["mountain"],
-                2: ["tree", "tree1", "tree2", "tree3", "tree4", "tree5", "tree6"],
-                3: ["extendedToeGrab", "extendedToeGrab1", "extendedToeGrab2", "extendedToeGrab3", "extendedToeGrab4", "extendedToeGrab5"],
-                4: ["eagle", "eagle1", "eagle2", "eagle3", "eagle4", "eagle5", "eagle6", "eagle7"],
-                5: ["chair", "chair1", "chair2", "chair3", "chair4", "chair5"],
-                6: ["lordOfDance", "lordOfDance1", "lordOfDance2", "lordOfDance3", "lordOfDance4", "lordOfDance5", "lordOfDance6", "lordOfDance7"],
-                7: ["warrior1", "warrior11", "warrior12", "warrior13", "warrior14", "warrior15"],
-                8: ["warrior2", "warrior21", "warrior22", "warrior23", "warrior24", "warrior25"],
-                9: ["warrior3", "warrior31", "warrior32", "warrior33", "warrior34", "warrior35", "warrior36"],
-                10: ["halfMoon", "halfMoon1", "halfMoon2", "halfMoon3", "halfMoon4", "halfMoon5", "halfMoon6", "halfMoon7"],
-                11: ["extendedTriangle", "extendedTriangle1", "extendedTriangle2", "extendedTriangle3", "extendedTriangle4", "extendedTriangle5"],
-                12: ["extendedSideAngle", "extendedSideAngle1", "extendedSideAngle2", "extendedSideAngle3", "extendedSideAngle4", "extendedSideAngle5", "extendedSideAngle6"],
-                13: ["revolvedSideAngle", "revolvedSideAngle1", "revolvedSideAngle2", "revolvedSideAngle3", "revolvedSideAngle4", "revolvedSideAngle5", "revolvedSideAngle6"],
-                14: ["revolvedTriangle", "revolvedTriangle1", "revolvedTriangle2", "revolvedTriangle3", "revolvedTriangle4", "revolvedTriangle5", "revolvedTriangle6"],
-                15: ["halfForwardBend", "halfForwardBend1", "halfForwardBend2", "halfForwardBend3", "halfForwardBend4", "halfForwardBend5", "halfForwardBend6", "halfForwardBend7"],
-                16: ["forwardBend", "forwardBend1", "forwardBend2", "forwardBend3", "forwardBend4", "forwardBend5", "forwardBend6", "forwardBend7"],
-                17: ["wideLeggedForwardBend", "wideLeggedForwardBend1", "wideLeggedForwardBend2", "wideLeggedForwardBend3", "wideLeggedForwardBend4", "wideLeggedForwardBend5", "wideLeggedForwardBend6"],
-                18: ["intenseSide", "intenseSide1", "intenseSide2", "intenseSide3", "intenseSide4", "intenseSide5"],
-                19: ["gate"],
-                20: ["highLunge", "highLunge1", "highLunge2", "highLunge3", "highLunge4", "highLunge5", "highLunge6"],
-                21: ["lowLunge", "lowLunge1", "lowLunge2", "lowLunge3", "lowLunge4", "lowLunge5", "lowLunge6"],
-                22: ["deepSquat", "deepSquat1", "deepSquat2", "deepSquat3", "deepSquat4", "deepSquat5"],
+                2: ["tree", "tree1", "tree2", "tree3", "tree4", "tree5", "tree6"], //
+                3: ["tree", "tree1", "tree2", "tree3", "tree4", "tree5", "tree6"],
+                4: ["extendedToeGrab", "extendedToeGrab1", "extendedToeGrab2", "extendedToeGrab3", "extendedToeGrab4", "extendedToeGrab5"], //
+                5: ["extendedToeGrab", "extendedToeGrab1", "extendedToeGrab2", "extendedToeGrab3", "extendedToeGrab4", "extendedToeGrab5"],
+                6: ["eagle", "eagle1", "eagle2", "eagle3", "eagle4", "eagle5", "eagle6", "eagle7"], //
+                7: ["eagle", "eagle1", "eagle2", "eagle3", "eagle4", "eagle5", "eagle6", "eagle7"],
+                8: ["chair", "chair1", "chair2", "chair3", "chair4", "chair5"],
+                9: ["lordOfDance", "lordOfDance1", "lordOfDance2", "lordOfDance3", "lordOfDance4", "lordOfDance5", "lordOfDance6", "lordOfDance7"], //
+                10: ["lordOfDance", "lordOfDance1", "lordOfDance2", "lordOfDance3", "lordOfDance4", "lordOfDance5", "lordOfDance6", "lordOfDance7"],
+                11: ["warrior1", "warrior11", "warrior12", "warrior13", "warrior14", "warrior15"], //
+                12: ["warrior1", "warrior11", "warrior12", "warrior13", "warrior14", "warrior15"],
+                13: ["warrior2", "warrior21", "warrior22", "warrior23", "warrior24", "warrior25"], //
+                14: ["warrior2", "warrior21", "warrior22", "warrior23", "warrior24", "warrior25"],
+                15: ["warrior3", "warrior31", "warrior32", "warrior33", "warrior34", "warrior35", "warrior36"], //
+                16: ["warrior3", "warrior31", "warrior32", "warrior33", "warrior34", "warrior35", "warrior36"],
+                17: ["halfMoon", "halfMoon1", "halfMoon2", "halfMoon3", "halfMoon4", "halfMoon5", "halfMoon6", "halfMoon7"], //
+                18: ["halfMoon", "halfMoon1", "halfMoon2", "halfMoon3", "halfMoon4", "halfMoon5", "halfMoon6", "halfMoon7"],
+                19: ["extendedTriangle", "extendedTriangle1", "extendedTriangle2", "extendedTriangle3", "extendedTriangle4", "extendedTriangle5"], //
+                20: ["extendedTriangle", "extendedTriangle1", "extendedTriangle2", "extendedTriangle3", "extendedTriangle4", "extendedTriangle5"],
+                21: ["extendedSideAngle", "extendedSideAngle1", "extendedSideAngle2", "extendedSideAngle3", "extendedSideAngle4", "extendedSideAngle5", "extendedSideAngle6"], //
+                22: ["extendedSideAngle", "extendedSideAngle1", "extendedSideAngle2", "extendedSideAngle3", "extendedSideAngle4", "extendedSideAngle5", "extendedSideAngle6"],
+                23: ["revolvedSideAngle", "revolvedSideAngle1", "revolvedSideAngle2", "revolvedSideAngle3", "revolvedSideAngle4", "revolvedSideAngle5", "revolvedSideAngle6"], //
+                24: ["revolvedSideAngle", "revolvedSideAngle1", "revolvedSideAngle2", "revolvedSideAngle3", "revolvedSideAngle4", "revolvedSideAngle5", "revolvedSideAngle6"],
+                25: ["revolvedTriangle", "revolvedTriangle1", "revolvedTriangle2", "revolvedTriangle3", "revolvedTriangle4", "revolvedTriangle5", "revolvedTriangle6"], //
+                26: ["revolvedTriangle", "revolvedTriangle1", "revolvedTriangle2", "revolvedTriangle3", "revolvedTriangle4", "revolvedTriangle5", "revolvedTriangle6"],
+                27: ["halfForwardBend", "halfForwardBend1", "halfForwardBend2", "halfForwardBend3", "halfForwardBend4", "halfForwardBend5", "halfForwardBend6", "halfForwardBend7"],
+                28: ["forwardBend", "forwardBend1", "forwardBend2", "forwardBend3", "forwardBend4", "forwardBend5", "forwardBend6", "forwardBend7"],
+                29: ["wideLeggedForwardBend", "wideLeggedForwardBend1", "wideLeggedForwardBend2", "wideLeggedForwardBend3", "wideLeggedForwardBend4", "wideLeggedForwardBend5", "wideLeggedForwardBend6"],
+                30: ["intenseSide", "intenseSide1", "intenseSide2", "intenseSide3", "intenseSide4", "intenseSide5"], //
+                31: ["intenseSide", "intenseSide1", "intenseSide2", "intenseSide3", "intenseSide4", "intenseSide5"],
+                32: ["gate"], //
+                33: ["gate"],
+                34: ["highLunge", "highLunge1", "highLunge2", "highLunge3", "highLunge4", "highLunge5", "highLunge6"], //
+                35: ["highLunge", "highLunge1", "highLunge2", "highLunge3", "highLunge4", "highLunge5", "highLunge6"],
+                36: ["lowLunge", "lowLunge1", "lowLunge2", "lowLunge3", "lowLunge4", "lowLunge5", "lowLunge6"], //
+                37: ["lowLunge", "lowLunge1", "lowLunge2", "lowLunge3", "lowLunge4", "lowLunge5", "lowLunge6"],
+                38: ["deepSquat", "deepSquat1", "deepSquat2", "deepSquat3", "deepSquat4", "deepSquat5"],
                 // Hand/Elbows and Feet/Knees
-                23: ["dolphin", "dolphin1", "dolphin2", "dolphin3"],
-                24: ["downwardDog", "downwardDog1", "downwardDog2", "downwardDog3", "downwardDog4"],
-                25: ["halfDownwardDog", "halfDownwardDog1", "halfDownwardDog2", "halfDownwardDog3", "halfDownwardDog4"],
-                26: [""], //// UNUSED!!!!!!!
-                27: ["dolphinPlank"],
-                28: ["fourLimbedStaff"],
-                29: ["sidePlank", "sidePlank1", "sidePlank2", "sidePlank3", "sidePlank4"],
-                30: ["cat"],
-                31: ["cow"],
-                32: ["cat", "catCow1", "catCow2", "catCow1", "catCow3", "catCow1"],
-                33: ["halfMonkey", "halfMonkey1", "halfMonkey2", "halfMonkey3", "halfMonkey4"],
-                34: ["childPose", "childPose1", "childPose2", "childPose3"],
-                35: ["wildThing", "wildThing1", "wildThing2", "wildThing3", "wildThing4", "wildThing5", "wildThing6"],
-                36: ["upwardBow", "upwardBow1", "upwardBow2", "upwardBow3", "upwardBow4", "upwardBow5"],
-                37: ["bridge", "bridge1", "bridge2", "bridge3"],
-                38: ["upwardPlank", "upwardPlank1", "upwardPlank2", "upwardPlank3", "upwardPlank4", "upwardPlank5"],
-                39: ["extendedPuppy", "extendedPuppy1", "extendedPuppy2", "extendedPuppy3", "extendedPuppy4", "extendedPuppy5"],
-                40: ["upwardDog", "upwardDog1", "upwardDog2", "upwardDog3", "upwardDog4"],
+                39: ["dolphin", "dolphin1", "dolphin2", "dolphin3"],
+                40: ["downwardDog", "downwardDog1", "downwardDog2", "downwardDog3", "downwardDog4"],
+                41: ["halfDownwardDog", "halfDownwardDog1", "halfDownwardDog2", "halfDownwardDog3", "halfDownwardDog4"], //
+                42: ["halfDownwardDog", "halfDownwardDog1", "halfDownwardDog2", "halfDownwardDog3", "halfDownwardDog4"],
+                43: ["dolphinPlank"],
+                44: ["fourLimbedStaff"],
+                45: ["sidePlank", "sidePlank1", "sidePlank2", "sidePlank3", "sidePlank4"], //
+                46: ["sidePlank", "sidePlank1", "sidePlank2", "sidePlank3", "sidePlank4"],
+                47: ["cat"],
+                48: ["cow"],
+                49: ["cat", "catCow1", "catCow2", "catCow1", "catCow3", "catCow1"],
+                50: ["halfMonkey", "halfMonkey1", "halfMonkey2", "halfMonkey3", "halfMonkey4"], //
+                51: ["halfMonkey", "halfMonkey1", "halfMonkey2", "halfMonkey3", "halfMonkey4"],
+                52: ["childPose", "childPose1", "childPose2", "childPose3"],
+                53: ["wildThing", "wildThing1", "wildThing2", "wildThing3", "wildThing4", "wildThing5", "wildThing6"], //
+                54: ["wildThing", "wildThing1", "wildThing2", "wildThing3", "wildThing4", "wildThing5", "wildThing6"],
+                55: ["upwardBow", "upwardBow1", "upwardBow2", "upwardBow3", "upwardBow4", "upwardBow5"],
+                56: ["bridge", "bridge1", "bridge2", "bridge3"],
+                57: ["upwardPlank", "upwardPlank1", "upwardPlank2", "upwardPlank3", "upwardPlank4", "upwardPlank5"],
+                58: ["extendedPuppy", "extendedPuppy1", "extendedPuppy2", "extendedPuppy3", "extendedPuppy4", "extendedPuppy5"],
+                59: ["upwardDog", "upwardDog1", "upwardDog2", "upwardDog3", "upwardDog4"],
                 // Seated
-                41: ["crossLegged"],
-                42: ["lotus"],
-                43: ["fireLog"],
-                44: ["boat"],
-                45: ["cowFace"],
-                46: ["hero"],
-                47: ["butterfly"],
-                48: ["staff"],
-                49: ["seatedForwardBend"],
-                50: ["vForwardBend"],
-                51: ["vSideBend", "vSideBend1", "vSideBend2", "vSideBend3", "vSideBend4", "vSideBend5"],
-                52: ["halfVForwardBend", "halfVForwardBend1", "halfVForwardBend2", "halfVForwardBend3", "halfVForwardBend4", "halfVForwardBend5", "halfVForwardBend6"],
-                53: ["halfVSideBend", "halfVSideBend1", "halfVSideBend2", "halfVSideBend3", "halfVSideBend4", "halfVSideBend5"],
-                54: ["marichi1", "marichi11", "marichi12", "marichi13", "marichi14", "marichi15", "marichi16", "marichi17"],
-                55: ["marichi3", "marichi31", "marichi32", "marichi33", "marichi34", "marichi35", "marichi36", "marichi37"],
-                56: ["frontSplit"],
-                57: ["sideSplit"],
+                60: ["crossLegged"],
+                61: ["lotus"],
+                62: ["fireLog"], //
+                63: ["fireLog"],
+                64: ["boat"],
+                65: ["cowFace"], //
+                66: ["cowFace"],
+                67: ["hero"],
+                68: ["butterfly"],
+                69: ["staff"],
+                70: ["seatedForwardBend"],
+                71: ["vForwardBend"],
+                72: ["vSideBend", "vSideBend1", "vSideBend2", "vSideBend3", "vSideBend4", "vSideBend5"], //
+                73: ["vSideBend", "vSideBend1", "vSideBend2", "vSideBend3", "vSideBend4", "vSideBend5"],
+                74: ["halfVForwardBend", "halfVForwardBend1", "halfVForwardBend2", "halfVForwardBend3", "halfVForwardBend4", "halfVForwardBend5", "halfVForwardBend6"], //
+                75: ["halfVForwardBend", "halfVForwardBend1", "halfVForwardBend2", "halfVForwardBend3", "halfVForwardBend4", "halfVForwardBend5", "halfVForwardBend6"],
+                76: ["halfVSideBend", "halfVSideBend1", "halfVSideBend2", "halfVSideBend3", "halfVSideBend4", "halfVSideBend5"], //
+                77: ["halfVSideBend", "halfVSideBend1", "halfVSideBend2", "halfVSideBend3", "halfVSideBend4", "halfVSideBend5"],
+                78: ["marichi1", "marichi11", "marichi12", "marichi13", "marichi14", "marichi15", "marichi16", "marichi17"], //
+                79: ["marichi1", "marichi11", "marichi12", "marichi13", "marichi14", "marichi15", "marichi16", "marichi17"],
+                80: ["marichi3", "marichi31", "marichi32", "marichi33", "marichi34", "marichi35", "marichi36", "marichi37"], //
+                81: ["marichi3", "marichi31", "marichi32", "marichi33", "marichi34", "marichi35", "marichi36", "marichi37"],
+                82: ["frontSplit"], //
+                83: ["frontSplit"],
+                84: ["sideSplit"],
                 // Lying
-                58: ["corpse"],
-                59: ["fish", "fish1", "fish2", "fish3", "fish4", "fish5"],
-                60: ["happyBaby"],
-                61: ["lyingButterfly", "lyingButterfly1", "lyingButterfly2", "lyingButterfly3", "lyingButterfly4"],
-                62: ["legRaiseToe"],
-                63: ["threadTheNeedle", "threadTheNeedle1", "threadTheNeedle2", "threadTheNeedle3", "threadTheNeedle4", "threadTheNeedle5"],
-                64: ["shoulderStand", "shoulderStand1", "shoulderStand2", "shoulderStand3", "shoulderStand4", "shoulderStand5", "shoulderStand6", "shoulderStand7"],
-                65: ["plow", "plow1", "plow2", "plow3", "plow4"],
-                66: ["cobra", "cobra1", "cobra2", "cobra3", "cobra4"],
-                67: ["sphinx"],
-                68: ["pigeon", "pigeon1", "pigeon2", "pigeon3", "pigeon4", "pigeon5", "pigeon6", "pigeon7", "pigeon8"],
-                69: ["spineRolling", "spineRolling1", "spineRolling2", "spineRolling3", "spineRolling2", "spineRolling4", "spineRolling2", "spineRolling3", "spineRolling2", "spineRolling4"],
+                85: ["corpse"],
+                86: ["fish", "fish1", "fish2", "fish3", "fish4", "fish5"],
+                87: ["happyBaby"],
+                88: ["lyingButterfly", "lyingButterfly1", "lyingButterfly2", "lyingButterfly3", "lyingButterfly4"],
+                89: ["legRaiseToe"], //
+                90: ["legRaiseToe"],
+                91: ["threadTheNeedle", "threadTheNeedle1", "threadTheNeedle2", "threadTheNeedle3", "threadTheNeedle4", "threadTheNeedle5"], //
+                92: ["threadTheNeedle", "threadTheNeedle1", "threadTheNeedle2", "threadTheNeedle3", "threadTheNeedle4", "threadTheNeedle5"],
+                93: ["shoulderStand", "shoulderStand1", "shoulderStand2", "shoulderStand3", "shoulderStand4", "shoulderStand5", "shoulderStand6", "shoulderStand7"],
+                94: ["plow", "plow1", "plow2", "plow3", "plow4"],
+                95: ["cobra", "cobra1", "cobra2", "cobra3", "cobra4"],
+                96: ["sphinx"],
+                97: ["pigeon", "pigeon1", "pigeon2", "pigeon3", "pigeon4", "pigeon5", "pigeon6", "pigeon7", "pigeon8"], //
+                98: ["pigeon", "pigeon1", "pigeon2", "pigeon3", "pigeon4", "pigeon5", "pigeon6", "pigeon7", "pigeon8"],
+                99: ["spineRolling", "spineRolling1", "spineRolling2", "spineRolling3", "spineRolling2", "spineRolling4", "spineRolling2", "spineRolling3", "spineRolling2", "spineRolling4"],
                 // Hand Stands
-                70: ["handStand", "handStand1", "handStand2", "handStand3", "handStand4", "handStand5", "handStand6", "handStand7", "handStand8"],
-                71: ["headStand", "headStand1", "headStand2", "headStand3", "headStand4", "headStand5", "headStand6", "headStand7", "headStand8"],
-                72: ["forearmStand", "forearmStand1", "forearmStand2", "forearmStand3", "forearmStand4", "forearmStand5", "forearmStand6"]
+                100: ["handStand", "handStand1", "handStand2", "handStand3", "handStand4", "handStand5", "handStand6", "handStand7", "handStand8"],
+                101: ["headStand", "headStand1", "headStand2", "headStand3", "headStand4", "headStand5", "headStand6", "headStand7", "headStand8"],
+                102: ["forearmStand", "forearmStand1", "forearmStand2", "forearmStand3", "forearmStand4", "forearmStand5", "forearmStand6"],
             ]
     ]
     
@@ -1446,7 +1694,7 @@ enum sessionData {
                 65: "squatBody",
                 66: "squatBody"
             ],
-            // Yoga
+            // Yoga, Unused, no target area provided
             [:]
     ]
     
@@ -1779,81 +2027,111 @@ enum sessionData {
                 // Standing
                 0: ["upwardsSaluteEH", "upwardsSaluteEA", "upwardsSaluteEF"],
                 1: ["mountainEH", "mountainEA", "mountainEF"],
-                2: ["treeEH", "treeEA", "treeEF"],
-                3: ["extendedToeGrabEH", "extendedToeGrabEA", "extendedToeGrabEF"],
-                4: ["eagleEH", "eagleEA", "eagleEF"],
-                5: ["chairEH", "chairEA", "chairEF"],
-                6: ["lordOfDanceEH", "lordOfDanceEA", "lordOfDanceEF"],
-                7: ["warrior1EH", "warrior1EA", "warrior1EF"],
-                8: ["warrior2EH", "warrior2EA", "warrior2EF"],
-                9: ["warrior3EH", "warrior3EA", "warrior3EF"],
-                10: ["halfMoonEH", "halfMoonEA", "halfMoonEF"],
-                11: ["extendedTriangleEH", "extendedTriangleEA", "extendedTriangleEF"],
-                12: ["extendedSideAngleYEH", "extendedSideAngleYEA", "extendedSideAngleYEF"],
-                13: ["revolvedSideAngleEH", "revolvedSideAngleEA", "revolvedSideAngleEF"],
-                14: ["revolvedTriangleEH", "revolvedTriangleEA", "revolvedTriangleEF"],
-                15: ["halfForwardBendEH", "halfForwardBendEA", "halfForwardBendEF"],
-                16: ["forwardBendEH", "forwardBendEA", "forwardBendEF"],
-                17: ["wideLeggedForwardBendEH", "wideLeggedForwardBendEA", "wideLeggedForwardBendEF"],
-                18: ["intenseSideEH", "intenseSideEA", "intenseSideEF"],
-                19: ["gateEH", "gateEA", "gateEF"],
-                20: ["highLungeEH", "highLungeEA", "highLungeEF"],
-                21: ["lowLungeYEH", "lowLungeYEA", "lowLungeYEF"],
-                22: ["deepSquatEH", "deepSquatEA", "deepSquatEF"],
+                2: ["treeEH", "treeEA", "treeEF"], //
+                3: ["treeEH", "treeEA", "treeEF"],
+                4: ["extendedToeGrabEH", "extendedToeGrabEA", "extendedToeGrabEF"], //
+                5: ["extendedToeGrabEH", "extendedToeGrabEA", "extendedToeGrabEF"],
+                6: ["eagleEH", "eagleEA", "eagleEF"], //
+                7: ["eagleEH", "eagleEA", "eagleEF"],
+                8: ["chairEH", "chairEA", "chairEF"],
+                9: ["lordOfDanceEH", "lordOfDanceEA", "lordOfDanceEF"], //
+                10: ["lordOfDanceEH", "lordOfDanceEA", "lordOfDanceEF"],
+                11: ["warrior1EH", "warrior1EA", "warrior1EF"], //
+                12: ["warrior1EH", "warrior1EA", "warrior1EF"],
+                13: ["warrior2EH", "warrior2EA", "warrior2EF"], //
+                14: ["warrior2EH", "warrior2EA", "warrior2EF"],
+                15: ["warrior3EH", "warrior3EA", "warrior3EF"], //
+                16: ["warrior3EH", "warrior3EA", "warrior3EF"],
+                17: ["halfMoonEH", "halfMoonEA", "halfMoonEF"], //
+                18: ["halfMoonEH", "halfMoonEA", "halfMoonEF"],
+                19: ["extendedTriangleEH", "extendedTriangleEA", "extendedTriangleEF"], //
+                20: ["extendedTriangleEH", "extendedTriangleEA", "extendedTriangleEF"],
+                21: ["extendedSideAngleYEH", "extendedSideAngleYEA", "extendedSideAngleYEF"], //
+                22: ["extendedSideAngleYEH", "extendedSideAngleYEA", "extendedSideAngleYEF"],
+                23: ["revolvedSideAngleEH", "revolvedSideAngleEA", "revolvedSideAngleEF"], //
+                24: ["revolvedSideAngleEH", "revolvedSideAngleEA", "revolvedSideAngleEF"],
+                25: ["revolvedTriangleEH", "revolvedTriangleEA", "revolvedTriangleEF"], //
+                26: ["revolvedTriangleEH", "revolvedTriangleEA", "revolvedTriangleEF"],
+                27: ["halfForwardBendEH", "halfForwardBendEA", "halfForwardBendEF"],
+                28: ["forwardBendEH", "forwardBendEA", "forwardBendEF"],
+                29: ["wideLeggedForwardBendEH", "wideLeggedForwardBendEA", "wideLeggedForwardBendEF"],
+                30: ["intenseSideEH", "intenseSideEA", "intenseSideEF"], //
+                31: ["intenseSideEH", "intenseSideEA", "intenseSideEF"],
+                32: ["gateEH", "gateEA", "gateEF"], //
+                33: ["gateEH", "gateEA", "gateEF"],
+                34: ["highLungeEH", "highLungeEA", "highLungeEF"], //
+                35: ["highLungeEH", "highLungeEA", "highLungeEF"],
+                36: ["lowLungeYEH", "lowLungeYEA", "lowLungeYEF"], //
+                37: ["lowLungeYEH", "lowLungeYEA", "lowLungeYEF"],
+                38: ["deepSquatEH", "deepSquatEA", "deepSquatEF"],
                 // Hand/Elbows and Feet/Knees
-                23: ["dolphinEH", "dolphinEA", "dolphinEF"],
-                24: ["downwardDogEH", "downwardDogEA", "downwardDogEF"],
-                25: ["halfDownwardDogEH", "halfDownwardDogEA", "halfDownwardDogEF"],
-                26: ["plankEH", "plankEA", "plankEF"], //// UNUSED
-                27: ["dolphinPlankEH", "dolphinPlankEA", "dolphinPlankEF"],
-                28: ["fourLimbedStaffEH", "fourLimbedStaffEA", "fourLimbedStaffEF"],
-                29: ["sidePlankEH", "sidePlankEA", "sidePlankEF"],
-                30: ["catEH", "catEA", "catEF"],
-                31: ["cowEH", "cowEA", "cowEF"],
-                32: ["catCowEH", "catCowEA", "catCowEF"],
-                33: ["halfMonkeyEH", "halfMonkeyEA", "halfMonkeyEF"],
-                34: ["childPoseEH", "childPoseEA", "childPoseEF"],
-                35: ["wildThingEH", "wildThingEA", "wildThingEF"],
-                36: ["upwardBowEH", "upwardBowEA", "upwardBowEF"],
-                37: ["bridgeEH", "bridgeEA", "bridgeEF"],
-                38: ["upwardPlankEH", "upwardPlankEA", "upwardPlankEF"],
-                39: ["extendedPuppyEH", "extendedPuppyEA", "extendedPuppyEF"],
-                40: ["upwardDogEH", "upwardDogEA", "upwardDogEF"],
+                39: ["dolphinEH", "dolphinEA", "dolphinEF"],
+                40: ["downwardDogEH", "downwardDogEA", "downwardDogEF"],
+                41: ["halfDownwardDogEH", "halfDownwardDogEA", "halfDownwardDogEF"], //
+                42: ["halfDownwardDogEH", "halfDownwardDogEA", "halfDownwardDogEF"],
+                43: ["dolphinPlankEH", "dolphinPlankEA", "dolphinPlankEF"],
+                44: ["fourLimbedStaffEH", "fourLimbedStaffEA", "fourLimbedStaffEF"],
+                45: ["sidePlankEH", "sidePlankEA", "sidePlankEF"], //
+                46: ["sidePlankEH", "sidePlankEA", "sidePlankEF"],
+                47: ["catEH", "catEA", "catEF"],
+                48: ["cowEH", "cowEA", "cowEF"],
+                49: ["catCowEH", "catCowEA", "catCowEF"],
+                50: ["halfMonkeyEH", "halfMonkeyEA", "halfMonkeyEF"], //
+                51: ["halfMonkeyEH", "halfMonkeyEA", "halfMonkeyEF"],
+                52: ["childPoseEH", "childPoseEA", "childPoseEF"],
+                53: ["wildThingEH", "wildThingEA", "wildThingEF"], //
+                54: ["wildThingEH", "wildThingEA", "wildThingEF"],
+                55: ["upwardBowEH", "upwardBowEA", "upwardBowEF"],
+                56: ["bridgeEH", "bridgeEA", "bridgeEF"],
+                57: ["upwardPlankEH", "upwardPlankEA", "upwardPlankEF"],
+                58: ["extendedPuppyEH", "extendedPuppyEA", "extendedPuppyEF"],
+                59: ["upwardDogEH", "upwardDogEA", "upwardDogEF"],
                 // Seated
-                41: ["crossLegEH", "crossLegEA", "crossLegEF"],
-                42: ["lotusEH", "lotusEA", "lotusEF"],
-                43: ["fireLogEH", "fireLogEA", "fireLogEF"],
-                44: ["boatEH", "boatEA", "boatEF"],
-                45: ["cowFaceEH", "cowFaceEA", "cowFaceEF"],
-                46: ["heroEH", "heroEA", "heroEF"],
-                47: ["butterflyEH", "butterflyEA", "butterflyEF"],
-                48: ["staffPoseEH", "staffPoseEA", "staffPoseEF"],
-                49: ["seatedForwardBendEH", "seatedForwardBendEA", "seatedForwardBendEF"],
-                50: ["vForwardBendEH", "vForwardBendEA", "vForwardBendEF"],
-                51: ["vSideBendH", "vSideBendA", "vSideBendF"],
-                52: ["halfVForwardBendEH", "halfVForwardBendEA", "halfVForwardBendEF"],
-                53: ["halfVSideBendEH", "halfVSideBendEA", "halfVSideBendEF"],
-                54: ["marichi1EH", "marichi1EA", "marichi1EF"],
-                55: ["marichi3EH", "marichi3EA", "marichi3EF"],
-                56: ["frontSplitEH", "frontSplitEA", "frontSplitEF"],
-                57: ["sideSplitEH", "sideSplitEA", "sideSplitEF"],
+                60: ["crossLegEH", "crossLegEA", "crossLegEF"],
+                61: ["lotusEH", "lotusEA", "lotusEF"],
+                62: ["fireLogEH", "fireLogEA", "fireLogEF"], //
+                63: ["fireLogEH", "fireLogEA", "fireLogEF"],
+                64: ["boatEH", "boatEA", "boatEF"],
+                65: ["cowFaceEH", "cowFaceEA", "cowFaceEF"], //
+                66: ["cowFaceEH", "cowFaceEA", "cowFaceEF"],
+                67: ["heroEH", "heroEA", "heroEF"],
+                68: ["butterflyEH", "butterflyEA", "butterflyEF"],
+                69: ["staffPoseEH", "staffPoseEA", "staffPoseEF"],
+                70: ["seatedForwardBendEH", "seatedForwardBendEA", "seatedForwardBendEF"],
+                71: ["vForwardBendEH", "vForwardBendEA", "vForwardBendEF"],
+                72: ["vSideBendH", "vSideBendA", "vSideBendF"], //
+                73: ["vSideBendH", "vSideBendA", "vSideBendF"],
+                74: ["halfVForwardBendEH", "halfVForwardBendEA", "halfVForwardBendEF"], //
+                75: ["halfVForwardBendEH", "halfVForwardBendEA", "halfVForwardBendEF"],
+                76: ["halfVSideBendEH", "halfVSideBendEA", "halfVSideBendEF"],
+                77: ["halfVSideBendEH", "halfVSideBendEA", "halfVSideBendEF"],
+                78: ["marichi1EH", "marichi1EA", "marichi1EF"], //
+                79: ["marichi1EH", "marichi1EA", "marichi1EF"],
+                80: ["marichi3EH", "marichi3EA", "marichi3EF"], //
+                81: ["marichi3EH", "marichi3EA", "marichi3EF"],
+                82: ["frontSplitEH", "frontSplitEA", "frontSplitEF"], //
+                83: ["frontSplitEH", "frontSplitEA", "frontSplitEF"],
+                84: ["sideSplitEH", "sideSplitEA", "sideSplitEF"],
                 // Lying
-                58: ["corpseEH", "corpseEA", "corpseEF"],
-                59: ["fishEH", "fishEA", "fishEF"],
-                60: ["happyBabyEH", "happyBabyEA", "happyBabyEF"],
-                61: ["lyingButterflyEH", "lyingButterflyEA", "lyingButterflyEF"],
-                62: ["legRaiseToeEH", "legRaiseToeEA", "legRaiseToeEF"],
-                63: ["threadTheNeedleEH", "threadTheNeedleEA", "threadTheNeedleEF"],
-                64: ["shoulderStandEH", "shoulderStandEA", "shoulderStandEF"],
-                65: ["plowEH", "plowEA", "plowEF"],
-                66: ["cobraEH", "cobraEA", "cobraEF"],
-                67: ["sphinxEH", "sphinxEA", "sphinxEF"],
-                68: ["pigeonEH", "pigeonEA", "pigeonEF"],
-                69: ["spineRollingEH", "spineRollingEA", "spineRollingEF"],
+                85: ["corpseEH", "corpseEA", "corpseEF"],
+                86: ["fishEH", "fishEA", "fishEF"],
+                87: ["happyBabyEH", "happyBabyEA", "happyBabyEF"],
+                88: ["lyingButterflyEH", "lyingButterflyEA", "lyingButterflyEF"],
+                89: ["legRaiseToeEH", "legRaiseToeEA", "legRaiseToeEF"], //
+                90: ["legRaiseToeEH", "legRaiseToeEA", "legRaiseToeEF"],
+                91: ["threadTheNeedleEH", "threadTheNeedleEA", "threadTheNeedleEF"], //
+                92: ["threadTheNeedleEH", "threadTheNeedleEA", "threadTheNeedleEF"],
+                93: ["shoulderStandEH", "shoulderStandEA", "shoulderStandEF"],
+                94: ["plowEH", "plowEA", "plowEF"],
+                95: ["cobraEH", "cobraEA", "cobraEF"],
+                96: ["sphinxEH", "sphinxEA", "sphinxEF"],
+                97: ["pigeonEH", "pigeonEA", "pigeonEF"], //
+                98: ["pigeonEH", "pigeonEA", "pigeonEF"],
+                99: ["spineRollingEH", "spineRollingEA", "spineRollingEF"],
                 // Hand Stands
-                70: ["handstandEH", "handstandEA", "handstandEF"],
-                71: ["headstandEH", "headstandEA", "headstandEF"],
-                72: ["forearmStandEH", "forearmStandEA", "forearmStandEF"]
+                100: ["handstandEH", "handstandEA", "handstandEF"],
+                101: ["headstandEH", "headstandEA", "headstandEF"],
+                102: ["forearmStandEH", "forearmStandEA", "forearmStandEF"],
             ]
     ]
     
@@ -1889,7 +2167,7 @@ enum sessionData {
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
                             ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
-                            [1,2,1,2,1,2,1,2,1,2]
+                            [10,10,10,10,10,10,10,10,10,10]
                             ]
                     ],
                     // Session in Sections for final choice presets table
@@ -1915,14 +2193,14 @@ enum sessionData {
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
                             ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
-                            [1,2,1,2,1,2,1,2,1,2]
+                            [10,10,10,10,10,10,10,10,10,10]
                             ],
                         1: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
                             ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
-                            [1,2,1,2,1,2,1,2,1,2]
+                            [10,10,10,10,10,10,10,10,10,10]
                             ]
                     ],
                     // Session in Sections for final choice presets table
@@ -1946,14 +2224,14 @@ enum sessionData {
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
                             ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
-                            [1,2,1,2,1,2,1,2,1,2]
+                            [10,10,10,10,10,10,10,10,10,10]
                         ],
                         1: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
                             ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
-                            [1,2,1,2,1,2,1,2,1,2]
+                            [10,10,10,10,10,10,10,10,10,10]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -1977,14 +2255,14 @@ enum sessionData {
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
                             ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
-                            [1,2,1,2,1,2,1,2,1,2]
+                            [10,10,10,10,10,10,10,10,10,10]
                         ],
                         1: [
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
                             ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
-                            [1,2,1,2,1,2,1,2,1,2]
+                            [10,10,10,10,10,10,10,10,10,10]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -2012,15 +2290,15 @@ enum sessionData {
                     [
                         0: [
                             ["All Movements"],
-                        [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,112],
+                        [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112],
                         [1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1],
                             ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
                             ],
                         1: [
                             ["session"],
-                            [0,1,2,3,4,5,6,7,8,9],
-                            [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"]
+                            [0,1,2,3,4,5,6,7,8,9,20],
+                            [1,2,1,2,1,2,1,2,1,2,3],
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps","20 reps"]
                             ]
                     ],
                     // Sessions in Sections for final choice presets table. with their titles
@@ -2320,7 +2598,7 @@ enum sessionData {
                             ["session"],
                             [0,1,2,3,4,5,6,7,8,9],
                             [1,2,1,2,1,2,1,2,1,2],
-                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps"],
+                            ["10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "10 reps", "20 reps"],
                             [1,2,1,2,1,2,1,2,1,2]
                         ],
                         1: [
@@ -2412,16 +2690,16 @@ enum sessionData {
                     [
                         0: [
                             ["session"],
-                            [0,1,2],
+                            [0,1,58,2],
                             [3],
-                            ["30 reps", "30 reps", "30 reps",
-                             "20 reps", "20 reps", "20 reps",
-                             "10 reps", "10 reps", "10 reps"],
+                            ["30 reps", "30 reps", "30 reps", "30 reps",
+                             "20 reps", "20 reps", "20 reps", "20 reps",
+                             "10 reps", "10 reps", "10 reps", "10 reps"],
                             [5,5,5,5,5,5,5,5,5]
                         ],
                         1: [
                             ["session"],
-                            [0,1,2],
+                            [0,1,58],
                             [3],
                             ["30 reps", "30 reps", "30 reps",
                              "20 reps", "20 reps", "20 reps",
@@ -2611,13 +2889,13 @@ enum sessionData {
                             ["All Stretches"],
                             [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64],
                             [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],
-                            [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64]
+                            [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66]
                         ],
                         1: [
                             ["session"],
-                            [0,1,2,3,4,5,6,7,8,9],
-                            [10,10,10,10,10,10,10,10,10,10],
-                            [0,1,2,3,4,5,6,7,8,9]
+                            [0,1,2,3,4,5,6,7,8,9,20],
+                            [10,10,10,10,10,10,10,10,10,10,10],
+                            [0,1,2,3,4,5,6,7,8,9,10]
                         ]
                     ],
                     // Session in Sections for final choice presets table
@@ -2701,8 +2979,8 @@ enum sessionData {
                     [
                         0: [
                             ["All Poses"],
-                            [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72],
-                            [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72]
+                            [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102],
+                            [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]
                         ],
                         1: [
                             ["session"],
