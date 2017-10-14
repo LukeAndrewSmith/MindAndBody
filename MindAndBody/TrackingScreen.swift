@@ -431,16 +431,11 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.chart = chart
         
         //
-        //
-        // Swipe
         // Swipe
         let rightSwipe = UIScreenEdgePanGestureRecognizer()
         rightSwipe.edges = .left
-        rightSwipe.addTarget(self, action: #selector(swipeGestureRight))
+        rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
         view.addGestureRecognizer(rightSwipe)
-//        let rightSwipe = UISwipeGestureRecognizer()
-//        rightSwipe.direction = .right
-//        rightSwipe.addTarget(self, action: #selector(swipeGestureRight))
     }
     
     //
@@ -1049,8 +1044,10 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     // Elements
     //
-    @IBAction func swipeGestureRight(sender: UISwipeGestureRecognizer) {
-        self.performSegue(withIdentifier: "openMenu", sender: nil)
+    @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
+        if sender.state == .began {
+            self.performSegue(withIdentifier: "openMenu", sender: nil)
+        }
     }
     @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
         self.performSegue(withIdentifier: "openMenu", sender: nil)

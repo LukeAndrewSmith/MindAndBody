@@ -447,6 +447,7 @@
 		07702C811F4D9437000E1DB8 /* sumoSquatTwist.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C801F4D9437000E1DB8 /* sumoSquatTwist.png */; };
 		07702C831F4D943B000E1DB8 /* tinyFencerStretch.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */; };
 		077206821F90C52000818088 /* TimeBasedHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077206811F90C52000818088 /* TimeBasedHelpers.swift */; };
+		077876231F92A50D005CE68A /* InitialProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077876221F92A50D005CE68A /* InitialProfile.swift */; };
 		077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DA1DA535830026895B /* AppDelegate.swift */; };
 		077AC0E21DA535840026895B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E01DA535840026895B /* Main.storyboard */; };
 		077AC0E41DA535840026895B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E31DA535840026895B /* Assets.xcassets */; };
@@ -1822,6 +1823,7 @@
 		07702C801F4D9437000E1DB8 /* sumoSquatTwist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sumoSquatTwist.png; sourceTree = "<group>"; };
 		07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tinyFencerStretch.png; sourceTree = "<group>"; };
 		077206811F90C52000818088 /* TimeBasedHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedHelpers.swift; sourceTree = "<group>"; };
+		077876221F92A50D005CE68A /* InitialProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialProfile.swift; sourceTree = "<group>"; };
 		077AC0D71DA535830026895B /* MindAndBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindAndBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		077AC0DA1DA535830026895B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		077AC0E11DA535840026895B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -3600,6 +3602,38 @@
 			name = upwardsDog;
 			sourceTree = "<group>";
 		};
+		0778761C1F92A44B005CE68A /* One Time Modals */ = {
+			isa = PBXGroup;
+			children = (
+				077876211F92A4EA005CE68A /* Initial info screen */,
+				077876201F92A47B005CE68A /* Profile */,
+				0778761F1F92A45A005CE68A /* Subscriptions */,
+			);
+			name = "One Time Modals";
+			sourceTree = "<group>";
+		};
+		0778761F1F92A45A005CE68A /* Subscriptions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Subscriptions;
+			sourceTree = "<group>";
+		};
+		077876201F92A47B005CE68A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				077876221F92A50D005CE68A /* InitialProfile.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		077876211F92A4EA005CE68A /* Initial info screen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Initial info screen";
+			sourceTree = "<group>";
+		};
 		077AC0CE1DA535830026895B = {
 			isa = PBXGroup;
 			children = (
@@ -3636,6 +3670,7 @@
 				07995A371E86A83A0009C9B1 /* Settings */,
 				078C59541EC893EA00FA1890 /* Sounds */,
 				07038CC11F4C5BF2001CC6D5 /* Images */,
+				0778761C1F92A44B005CE68A /* One Time Modals */,
 				077AC0E31DA535840026895B /* Assets.xcassets */,
 				077AC0E51DA535840026895B /* LaunchScreen.storyboard */,
 				077AC0E81DA535840026895B /* Info.plist */,
@@ -8221,6 +8256,7 @@
 				077BC6951F725DCB00B9E798 /* FinalChoiceCustom.swift in Sources */,
 				07995A391E893E590009C9B1 /* ScheduleScreen.swift in Sources */,
 				07CB04391E6049DF002066CD /* MeditationGuided.swift in Sources */,
+				077876231F92A50D005CE68A /* InitialProfile.swift in Sources */,
 				075732741E69957A003DA77E /* TrackingScreen.swift in Sources */,
 				072829EB1EA8A26A0090164A /* WorkoutSessionScreen.swift in Sources */,
 				071C4FB31E98D6D800328D18 /* MeditationTimer.swift in Sources */,

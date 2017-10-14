@@ -542,7 +542,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         // Swipe
         let rightSwipe = UIScreenEdgePanGestureRecognizer()
         rightSwipe.edges = .left
-        rightSwipe.addTarget(self, action: #selector(swipeGestureRight))
+        rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
         view.addGestureRecognizer(rightSwipe)
     }
     

@@ -836,8 +836,10 @@ extension ScheduleScreen {
 
     //
     // MARK: Slide menu swipe
-    func swipeGestureRight() {
-        performSegue(withIdentifier: "openMenu", sender: self)
+    @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
+        if sender.state == .began {
+            self.performSegue(withIdentifier: "openMenu", sender: nil)
+        }
     }
     //
     
