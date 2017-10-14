@@ -20,20 +20,20 @@
 //    @IBOutlet weak var questionLabel: UILabel!
 //    @IBOutlet weak var demonstrationImageView: UIImageView!
 //    @IBOutlet weak var answerTableView: UITableView!
-//    
+//
 //}
 //
 ////
 //// Initial Profile Class
 //class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
-//    
-//    
-//    
-//    
+//
+//
+//
+//
 //    //
 //    // MARK: Outlets --------------------------------------------------------------------------------------------------------
 //    //
-//    
+//
 //    @IBOutlet weak var questionsTable: UITableView!
 //    //
 //    // Answer elements
@@ -53,7 +53,7 @@
 //    var ageAnswer = ["16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "70+"]
 //    // Answer Images
 //    var answerImageArray = ["standingHamstring", "butterfly", "deepSquat", "hero", "upwardDog", "neckRotatorStretch", "tree"]
-//    
+//
 //    //
 //    // Viewdidload --------------------------------------------------------------------------------------------------------
 //    //
@@ -64,7 +64,7 @@
 //        questionsTable.tableFooterView = UIView()
 //        questionsTable.separatorStyle = .none
 //        questionsTable.backgroundColor = colour1
-//        
+//
 //        // Answer Elements 1 - Age Picker
 //        // picker
 //        agePicker.backgroundColor = colour2
@@ -100,7 +100,7 @@
 //        answerLabelQuestion.numberOfLines = 2
 //        answerLabelQuestion.adjustsFontSizeToFitWidth = true
 //        //
-//        
+//
 //        //
 //        // Progress Bar
 //        progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
@@ -109,8 +109,8 @@
 //        progressBar.progressTintColor = colour3
 //        progressBar.setProgress(0, animated: true)
 //    }
-//    
-//    
+//
+//
 //    //
 //    // Table View --------------------------------------------------------------------------------------------------------
 //    //
@@ -118,18 +118,18 @@
 //    func numberOfSections(in tableView: UITableView) -> Int {
 //        return 1
 //    }
-//    
+//
 //    // Header
 //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 //        //
 //        if tableView == questionsTable {
-//            
+//
 //        } else if tableView == answerTableView {
 //            return ""
 //        }
 //        return ""
 //    }
-//    
+//
 //    // Header Customization
 //    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
 //        //
@@ -143,7 +143,7 @@
 //            }
 //        }
 //    }
-//    
+//
 //    // Header Height
 //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 //        //
@@ -154,8 +154,8 @@
 //        }
 //        return 0
 //    }
-//    
-//    
+//
+//
 //    // Number of row
 //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        //
@@ -168,7 +168,7 @@
 //        }
 //        return 0
 //    }
-//    
+//
 //    // Height for row
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        //
@@ -179,7 +179,7 @@
 //        }
 //        return 0
 //    }
-//    
+//
 //    // Cell for row
 //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        //
@@ -252,7 +252,7 @@
 //            cell.textLabel?.text = String(value)
 //            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
 //            cell.textLabel?.textColor = colour2
-//            
+//
 //            //
 //            return cell
 //        // Session
@@ -291,8 +291,8 @@
 //            return UITableViewCell()
 //        }
 //    }
-//    
-//    
+//
+//
 //    // didSelectRow
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        // Only perform action if me section
@@ -352,7 +352,7 @@
 //                    UIApplication.shared.keyWindow?.insertSubview(answerView2, aboveSubview: view)
 //                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: answerView2)
 //                    animateActionSheetUp(actionSheet: answerView2, actionSheetHeight: totalHeight, backgroundView: backgroundViewExpanded)
-//                    
+//
 //                }
 //                // Answer, select answer and remove answers
 //            } else if tableView == answerTableView {
@@ -374,15 +374,15 @@
 //                        self.animateActionSheetDown(actionSheet: self.answerView2, actionSheetHeight: totalHeight, backgroundView: self.backgroundViewExpanded)
 //                    }
 //                })
-//                
+//
 //            }
 //            //
 //            tableView.deselectRow(at: indexPath, animated: true)
-//            
+//
 //        }
 //    }
-//    
-//    
+//
+//
 //    //
 //    // Picker View ----------------------------------------------------------------------------------------------------
 //    //
@@ -390,7 +390,7 @@
 //    func numberOfComponents(in pickerView: UIPickerView) -> Int {
 //        return 1
 //    }
-//    
+//
 //    // Number of rows
 //    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 //        if selectedQuestion != 0 {
@@ -400,7 +400,7 @@
 //            return ageAnswer.count
 //        }
 //    }
-//    
+//
 //    // View for row
 //    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
 //        //
@@ -413,18 +413,18 @@
 //        return answerLabel
 //        //
 //    }
-//    
+//
 //    // Row height
 //    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
 //        return 37
 //    }
-//    
+//
 //    // Did select row
 //    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 //        //
 //    }
-//    
-//    
+//
+//
 //    // Background view expanded action
 //    // Add movement table background (dismiss table)
 //    func backgroundViewExpandedAction(_ sender: Any) {
@@ -443,7 +443,7 @@
 //            }
 //        }
 //    }
-//    
+//
 //    // OK Button
 //    //
 //    // Ok button action
@@ -457,11 +457,11 @@
 //        let indexPath = NSIndexPath(row: 0, section: selectedQuestion)
 //        questionsTable.reloadRows(at: [indexPath as IndexPath], with: .automatic)
 //    }
-//    
+//
 //    //
 //    // MARK: Slider Helpers -----------------------------------------------------------
-//    
-//    
+//
+//
 //    //
 //    // MARK: sliderValueChanged
 //    let step: Float = 1
@@ -473,7 +473,7 @@
 //        let indexPath = NSIndexPath(row: 0, section: sender.tag)
 //        let cell = questionsTable.cellForRow(at: indexPath as IndexPath)
 //        cell?.textLabel?.text = String(Int(roundedValue))
-//        
+//
 //        // Change thumbTintColor for groups
 //        if selectedSection == 2 {
 //            // Red, below and above suggested
@@ -489,9 +489,9 @@
 //        var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
 //        profileAnswers[selectedSection][sender.tag] = Int(roundedValue)
 //        UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
-//        
+//
 //    }
-//    
+//
 //    //
 //    // MARK: Set Slider Gradient
 //    //
@@ -506,17 +506,17 @@
 //        tgl.locations = [0,0.2,0.3,0.5,0.6,1]
 //        tgl.endPoint = CGPoint(x: 1.0, y:  1.0)
 //        tgl.startPoint = CGPoint(x: 0.0, y:  1.0)
-//        
+//
 //        UIGraphicsBeginImageContextWithOptions(tgl.frame.size, false, 0.0)
 //        tgl.render(in: UIGraphicsGetCurrentContext()!)
 //        let image = UIGraphicsGetImageFromCurrentImageContext()
 //        UIGraphicsEndImageContext()
-//        
+//
 //        slider.setMinimumTrackImage(image?.resizableImage(withCapInsets:.zero),  for: .normal)
 //        slider.setMaximumTrackImage(image?.resizableImage(withCapInsets:.zero),  for: .normal)
 //    }
-//    
-//    
+//
+//
 //    //
 //    // Update Progress
 //    func updateProgress() {
@@ -524,8 +524,8 @@
 //        let currentPose = Float(selectedRow)
 //        // Total Number Poses
 //        let totalPoses = Float(keyArray.count - 1)
-//        
-//        
+//
+//
 //        //
 //        if selectedRow > 0 {
 //            //
@@ -536,6 +536,6 @@
 //            progressBar.setProgress(0, animated: true)
 //        }
 //    }
-//    
+//
 //}
 

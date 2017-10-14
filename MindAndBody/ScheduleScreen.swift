@@ -364,9 +364,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // StackView
     var stackArray: [UILabel] = []
     
-    //
-    var selectedDay = Int()
-    
     // Time Scale Action Sheet
     let scheduleChoiceTable = UITableView()
     let backgroundViewExpanded = UIButton()
@@ -374,7 +371,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     var selectedSchedule = 0
     
     //
-    // Very silly variable used in choices of endurance, steady state, as time choice after warmup/stretching choice, variable tell which one was selected
+    // Very silly variable used in choices of endurance, steady state, as 'time choice' after 'warmup/stretching' choice, variable tell which one was selected
     var steadyStateChoice = Int()
     
     //
@@ -383,13 +380,13 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //
-        //
         // Select Today
         // Get current day as index, currentWeekDay - 1 as week starts at 0 in array
         if choiceProgress[0] == -1 {
             selectedDay = Date().currentWeekDayFromMonday - 1
             stackArray[selectedDay].alpha = 1
         } else {
+            stackArray[selectedDay].alpha = 1
             maskView()
         }
     }
@@ -480,7 +477,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         // Title
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         // Navigation Title
-        navigationBar.title = NSLocalizedString("schedule", comment: "")
+        navigationBar.title = NSLocalizedString("Mind & Body", comment: "")
         
         //
         // View
@@ -576,7 +573,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         case scheduleTable:
             // Header
             let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)!
+            header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 30)!
             header.textLabel?.textAlignment = .center
             header.textLabel?.textColor = colour1
             
@@ -698,7 +695,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 // Groups
                 default:
                     let dayLabel = UILabel()
-                    dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
+                    dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
                     dayLabel.textColor = colour1
                     //
                     let text = sessionData.sortedGroups[daySessionsArray[selectedDay][indexPath.row]]![0][0]
@@ -722,7 +719,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 // If title
                 if indexPath.row == 0 {
                     let title = sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][0]
-                    cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
+                    cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 24)!
                     cell.textLabel?.textColor = colour1
                     cell.textLabel?.text = NSLocalizedString(title, comment: "")
                     cell.textLabel?.textAlignment = .center
@@ -754,7 +751,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 } else {
                     //
                     let choiceLabel = UILabel()
-                    choiceLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
+                    choiceLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
                     choiceLabel.textColor = colour1
                     //
                     let text = sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][indexPath.row]

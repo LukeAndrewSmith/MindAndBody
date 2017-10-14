@@ -95,6 +95,8 @@ var updatedSessionsArray = [0,0,0,0,0,0,0]
 // choiceProgress Indicated progress through the choices to select a session
 // Note: choiceProgress[0] = -1 if first screen, i.e choices being displayed
 var choiceProgress = [-1,0]
+// Selected day
+var selectedDay = Int()
 //
 // Automatic choice from schedule variables ---------------------------------------------------------------------------------------------------------------
 //
