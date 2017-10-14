@@ -236,8 +236,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         if section == 0 {
             //
-            if header.subviews.contains(progressBar) {
-            } else {
+            if header.subviews.contains(progressBar) == false {
                 header.addSubview(progressBar)
             }
         }

@@ -55,43 +55,49 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
         //
         default: break
         }
-    
-        // Load new view
-        snapshot.removeFromSuperview()
         
-            
+        let keyWindow = UIApplication.shared.keyWindow
         //
         snapshot1 = UIScreen.main.snapshotView(afterScreenUpdates: false)
-        snapshot2 = toVC.view.snapshotView(afterScreenUpdates: true)!
-            
-        let keyWindow = UIApplication.shared.keyWindow
-        // Snapshot 1
         keyWindow?.addSubview(snapshot1)
         keyWindow?.bringSubview(toFront: snapshot1)
-        
-        // Snapshot 2
-        snapshot2.center.x += UIScreen.main.bounds.width * 0.75
-        snapshot2.layer.shadowOpacity = 1
-        snapshot2.layer.shadowRadius = 15
-        keyWindow?.addSubview(snapshot2)
-        keyWindow?.bringSubview(toFront: snapshot2)
+
+        if new == false {
+            keyWindow?.addSubview(snapshot)
+            keyWindow?.bringSubview(toFront: snapshot)
+        } else {
+            //
+            snapshot.removeFromSuperview()
+            //
+            snapshot2 = toVC.view.snapshotView(afterScreenUpdates: true)!
+            snapshot2.center.x += UIScreen.main.bounds.width * 0.75
+            snapshot2.layer.shadowOpacity = 1
+            snapshot2.layer.shadowRadius = 15
+            keyWindow?.addSubview(snapshot2)
+            keyWindow?.bringSubview(toFront: snapshot2)
+        }
         
         //
         UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
+            if new == false {
+                snapshot.center.x = UIScreen.main.bounds.width * 0.5
+            } else {
                 snapshot2.center.x = UIScreen.main.bounds.width * 0.5
-        },
-            completion: { _ in
+            }
+            
+        }, completion: { _ in
                 let didTransitionComplete = !transitionContext.transitionWasCancelled
                 if didTransitionComplete {
                     // 3   
-                    //if new == true {
+                    if new == false {
+                        snapshot.removeFromSuperview()
+                        snapshot1.removeFromSuperview()
+                    } else {
                         toVC.view.layer.shadowRadius = 0
-                    //}
-                    snapshot1.removeFromSuperview()
-                    snapshot2.removeFromSuperview()
-                    //
-                    snapshot.removeFromSuperview()
+                        snapshot1.removeFromSuperview()
+                        snapshot2.removeFromSuperview()
+                    }
                 }
                 transitionContext.completeTransition(didTransitionComplete)
         })

@@ -121,6 +121,8 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         if indexPath.row != tabBarIndex {
             new = true
             tabBarIndex = indexPath.row
+        } else {
+            new = false
         }
         
         //
