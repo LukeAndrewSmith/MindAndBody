@@ -392,26 +392,26 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         Meditation.clipsToBounds = true
         
         //
-        let blur = UIBlurEffect(style: .dark)
+        let blur = UIBlurEffect(style: .light)
         let vibrancy = UIVibrancyEffect(blurEffect: blur)
         let vibrancyView = UIVisualEffectView(effect: vibrancy)
-        //
+        
 //        blur0.effect = blur
-        blur0.contentView.addSubview(vibrancyView)
+////        blur0.effect = vibrancy
 //        blur1.effect = blur
-        blur1.effect = vibrancy
+////        blur1.effect = vibrancy
 //        blur2.effect = blur
-        blur2.effect = vibrancy
+////        blur2.effect = vibrancy
 //        blur3.effect = blur
-        blur3.effect = vibrancy
+////        blur3.effect = vibrancy
 //        blur4.effect = blur
-        blur4.effect = vibrancy
+////        blur4.effect = vibrancy
 //        blur5.effect = blur
-        blur5.effect = vibrancy
+////        blur5.effect = vibrancy
 //        blur6.effect = blur
-        blur6.effect = vibrancy
+////        blur6.effect = vibrancy
 //        blur7.effect = blur
-        blur7.effect = vibrancy
+////        blur7.effect = vibrancy
         
         // Blur Positioning and frame
         blur0.bounds = Warmup.bounds

@@ -1542,11 +1542,39 @@
 
 
 
+//
+// MARK: Initial Screen //
+//
+"initialInfoSubtitle" = "Fitness  |  Yoga  |  Meditation";
+"initialProfileOption" = "Fill in Profile and create Schedule";
+"initialAppOption" = "Look around the app first";
+//
+// Info table
+// Overview
+"initialInfo" = "• Create and follow a weekly schedule\n• Choose how best to acheive each goal each day.\n• Track how much you've done of what you planned.\n• Or use the app without the schedule, as a source of good sessions and information.";
+"moreInfo" = "More information";
+// Sections
+"fitness" = "Fitness";
+// Bullet Points
+// Schedule
+"choiceI" = "• Choice each day";
+// Fitness
+"gymI" = "• Gym";
+"bodyweightI" = "• Bodyweight";
+"timedI" = "• Timed";
+// Yoga
+"hathaI" = "• Hatha";
+"timedI" = "• Timed";
+// Meditation
+"timerI" = "• Timer";
+"guidedI" = "• Guided";
+
+
 
 
 
 //
-// Profile //
+// MARK: Profile //
 //
     //
     // Title //

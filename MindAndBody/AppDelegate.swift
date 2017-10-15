@@ -64,12 +64,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Set Home Screen
         var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         let homeScreen = settings[1][0]
+        
+        
+        
+        // MARK: TESTING --------------------
         //
         // Testing initial profile screen
-        let initialProfile = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InitialProfile") as! InitialProfile
+//        let initialProfile = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InitialProfile") as! InitialProfile
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.rootViewController = initialProfile
+//        self.window?.makeKeyAndVisible()
+        //
+        // Testing initial info screen
+        let initialInfo = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InitialInfoScreen") as! InitialInfoScreen
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = initialProfile
+        self.window?.rootViewController = initialInfo
         self.window?.makeKeyAndVisible()
+        //
+        // MARK: END OF TESTING -------------
+        
         
 //        switch homeScreen {
 //        case 0,2:
