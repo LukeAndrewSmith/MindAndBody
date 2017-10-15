@@ -1561,7 +1561,8 @@
     "time" = "Time";
     "preferences" = "Preferences";
     "numberSessions" = "Nº Sessions";
-
+    //
+    "createSchedule" = "Create Schedule";
     // Warning Popups
     // 3
     "sessionsWarningTitle" = "Note";

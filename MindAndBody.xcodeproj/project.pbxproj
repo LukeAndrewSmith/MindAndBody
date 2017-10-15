@@ -489,6 +489,7 @@
 		078F409A1F4B700800B4F566 /* SwiftCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078F40951F4B6C1C00B4F566 /* SwiftCharts.framework */; };
 		078F409B1F4B700800B4F566 /* SwiftCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 078F40951F4B6C1C00B4F566 /* SwiftCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872A1E7B4E2C00E7153A /* SessionScreen.swift */; };
+		07928C621F93E6D400EDA5C6 /* InitialInfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07928C611F93E6D400EDA5C6 /* InitialInfoScreen.swift */; };
 		0798381E1F8A8DD9007C3CF5 /* TimeBasedSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798381D1F8A8DD8007C3CF5 /* TimeBasedSession.swift */; };
 		07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */; };
 		07995A391E893E590009C9B1 /* ScheduleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07995A381E893E590009C9B1 /* ScheduleScreen.swift */; };
@@ -1868,6 +1869,7 @@
 		0789ED051F79A6EA000EB739 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		078F408E1F4B6C1C00B4F566 /* SwiftCharts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftCharts.xcodeproj; path = ../../Code/Carthage/Carthage/Checkouts/SwiftCharts/SwiftCharts.xcodeproj; sourceTree = "<group>"; };
 		0791872A1E7B4E2C00E7153A /* SessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionScreen.swift; sourceTree = "<group>"; };
+		07928C611F93E6D400EDA5C6 /* InitialInfoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInfoScreen.swift; sourceTree = "<group>"; };
 		0798381D1F8A8DD8007C3CF5 /* TimeBasedSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedSession.swift; sourceTree = "<group>"; };
 		07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundImageCollection.swift; sourceTree = "<group>"; };
 		07995A381E893E590009C9B1 /* ScheduleScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleScreen.swift; sourceTree = "<group>"; };
@@ -3630,6 +3632,7 @@
 		077876211F92A4EA005CE68A /* Initial info screen */ = {
 			isa = PBXGroup;
 			children = (
+				07928C611F93E6D400EDA5C6 /* InitialInfoScreen.swift */,
 			);
 			name = "Initial info screen";
 			sourceTree = "<group>";
@@ -8251,6 +8254,7 @@
 				077206821F90C52000818088 /* TimeBasedHelpers.swift in Sources */,
 				07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */,
 				07686A8E1F84399A00C278CC /* ScheduleAnimationHelpers.swift in Sources */,
+				07928C621F93E6D400EDA5C6 /* InitialInfoScreen.swift in Sources */,
 				072A87721EDEC59A00684809 /* CardioChoiceHIIT.swift in Sources */,
 				07DEE6F91E0AADF2003B89AB /* MeditationChoice.swift in Sources */,
 				077BC6951F725DCB00B9E798 /* FinalChoiceCustom.swift in Sources */,

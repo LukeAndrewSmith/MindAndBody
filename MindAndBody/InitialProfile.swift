@@ -106,7 +106,6 @@ class InitialProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerView
     
     // Did select row
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //
     }
     
     //
@@ -341,57 +340,111 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Table View --------------------------------------------------------------------------------------------------------
     //
     // Number of sections
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+     func numberOfSections(in tableView: UITableView) -> Int {
+        // Me
+        if selectedSection == 0 {
+            return 1
+        // Goals/Session
+        } else {
+            return scheduleDataStructures.profileQA[selectedSection].count
+        }
     }
-
+    
     // Header
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        //
-        return ""
+        // Me
+        if selectedSection == 0 {
+            return ""
+         // Goals/Session
+         } else {
+            return NSLocalizedString(scheduleDataStructures.profileQA[selectedSection][section][0], comment: "")
+        }
     }
-
+    
     // Header Customization
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        //
-//        let header = view as! UITableViewHeaderFooterView
-//        header.contentView.backgroundColor = colour1
-//        //
-//        if header.subviews.contains(progressBar) == false {
-//            header.addSubview(progressBar)
-//        }
+        //
+        if selectedSection != 0 {
+            // Header
+            let header = view as! UITableViewHeaderFooterView
+            header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)!
+            header.textLabel?.textColor = colour1
+            header.textLabel?.text = header.textLabel?.text?.capitalized
+            //
+            header.backgroundColor = .clear
+            header.backgroundView = UIView()
+            //
+            let seperator = CALayer()
+            if header.layer.sublayers?.contains(seperator) == false {
+                seperator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
+                seperator.backgroundColor = colour1.cgColor
+                seperator.opacity = 0.5
+                header.layer.addSublayer(seperator)
+            }
+        }
     }
-
+    
     // Header Height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        //
-//        if tableView == questionsTable {
-//            return 2
-//        }
-        return 0
-    }
-
-
-    // Number of row
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	//
+	if tableView == questionsTable {
+        // Me
+        if selectedSection == 0 {
+                return 0
+        // Goals/Session
+        } else {
+            let height = questionsTable.bounds.height / CGFloat(scheduleDataStructures.profileQA[selectedSection].count * 2 + 1)
+            if height >= 45 {
+                return height
+            } else {
+                return 45
+            }
+        }
+	}
+	return 0
+	}
+    
+    
+	// Number of row
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         if tableView == questionsTable {
-            let count = scheduleDataStructures.profileQA[0].count + scheduleDataStructures.profileQA[1].count + scheduleDataStructures.profileQA[2].count
-            return count
+            // Me
+            if selectedSection == 0 {
+                let count = scheduleDataStructures.profileQA[0].count
+                return count
+        // Goals/Session
+        } else {
+            // If last section, add extra cell for completion
+                // Goals -> nSessions, nSessions -> Schedule Creator
+            if section == scheduleDataStructures.profileQA[selectedSection].count - 1 {
+                    return 2
+            } else {
+                return 1
+                }
+            }
         }
         return 0
     }
-
+    
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
         if tableView == questionsTable {
-                // - sectionlabelheight - progressbarheight
-            return questionsTable.bounds.height
+            if selectedSection == 0 {
+                return questionsTable.bounds.height
+            } else {
+                let height = questionsTable.bounds.height / CGFloat(scheduleDataStructures.profileQA[selectedSection].count * 2 + 1)
+                if height >= 45 {
+                    return height
+                } else {
+                    return 45
+                }
+            }
         }
         return 0
     }
-
+    
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
@@ -434,72 +487,127 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Goals
         case 1:
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            cell.selectionStyle = .none
-            cell.backgroundColor = colour1
-            //
-            // Slider
-            let slider = UISlider()
-            cell.addSubview(slider)
-            slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
-            // Colours
-            slider.thumbTintColor = colour2
-            slider.minimumTrackTintColor = colour3
-            slider.maximumTrackTintColor = colour4
-            // Frame
-            slider.frame = CGRect(x: 45, y: (cell.bounds.height - slider.frame.height) / 2, width: view.frame.size.width - 60, height: slider.frame.height)
-            // Values
-            slider.minimumValue = 0
-            slider.maximumValue = 3
-            // Section tag
-            slider.tag = indexPath.section
-            //
-            let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
-            let value = profileAnswers[selectedSection][indexPath.section]
-            slider.value = Float(value)
-            //
-            // Indicator Label
-            cell.textLabel?.text = String(value)
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
-            cell.textLabel?.textColor = colour2
-
-            //
+            // Sliders
+            if indexPath.row != 1 {
+                cell.selectionStyle = .none
+                cell.backgroundColor = .clear
+                //
+                // Slider
+                let slider = UISlider()
+                cell.addSubview(slider)
+                slider.addTarget(self, action: #selector(self.sliderValueChanged), for: .valueChanged)
+                // Colours
+                slider.thumbTintColor = colour2
+                slider.minimumTrackTintColor = colour3
+                slider.maximumTrackTintColor = colour4
+                // Frame
+                slider.frame = CGRect(x: 45, y: (cell.bounds.height - slider.frame.height) / 2, width: view.frame.size.width - 60, height: slider.frame.height)
+                // Values
+                slider.minimumValue = 0
+                slider.maximumValue = 3
+                // Section tag
+                slider.tag = indexPath.section
+                //
+                let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+                let value = profileAnswers[self.selectedSection][indexPath.section]
+                slider.value = Float(value)
+                //
+                // Indicator Label
+                cell.textLabel?.text = String(value)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                cell.textLabel?.textColor = colour1
+                //
+            // Next Section
+            } else {
+                // Indicator Label
+                cell.backgroundColor = colour3.withAlphaComponent(0.5)
+                cell.textLabel?.text = NSLocalizedString("done", comment: "")
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                cell.textLabel?.textColor = colour1
+                cell.textLabel?.textAlignment = .center
+            }
             return cell
+            //
         // Session
         case 2:
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            //
-            cell.selectionStyle = .none
-            cell.backgroundColor = colour1
-            //
-            // Slider
-            let slider = UISlider()
-            cell.addSubview(slider)
-            slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
-            // Frame
-            slider.frame = CGRect(x: 45, y: (cell.bounds.height - slider.frame.height) / 2, width: view.frame.size.width - 60, height: slider.frame.height)
-            // Values
-            slider.minimumValue = 0
-            slider.maximumValue = 10
-            // Colours
-            slider.thumbTintColor = colour4
-            setSliderGradient(slider: slider)
-            // Section tag
-            slider.tag = indexPath.section
-            //
-            let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
-            let value = profileAnswers[selectedSection - 1][indexPath.section]
-            slider.value = Float(value)
-            //
-            // Indicator Label
-            cell.textLabel?.text = String(value)
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
-            cell.textLabel?.textColor = colour2
-            //
+            // Sliders
+            if indexPath.row != 1 {
+                //
+                cell.selectionStyle = .none
+                cell.backgroundColor = .clear
+                //
+                // Slider
+                let slider = UISlider()
+                cell.addSubview(slider)
+                slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
+                // Frame
+                slider.frame = CGRect(x: 45, y: (cell.bounds.height - slider.frame.height) / 2, width: view.frame.size.width - 60, height: slider.frame.height)
+                // Values
+                slider.minimumValue = 0
+                slider.maximumValue = 10
+                // Colours
+                slider.thumbTintColor = colour4
+                setSliderGradient(slider: slider)
+                // Section tag
+                slider.tag = indexPath.section
+                //
+                let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+                let value = profileAnswers[selectedSection][indexPath.section]
+                slider.value = Float(value)
+                //
+                // Indicator Label
+                cell.textLabel?.text = String(value)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                cell.textLabel?.textColor = colour1
+                //
+            // Next Section
+            } else {
+                // Indicator Label
+                cell.backgroundColor = colour3.withAlphaComponent(0.5)
+                cell.textLabel?.text = NSLocalizedString("createSchedule", comment: "")
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                cell.textLabel?.textColor = colour1
+                cell.textLabel?.textAlignment = .center
+            }
             return cell
         default:
             return UITableViewCell()
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //
+        if selectedSection == 1 {
+            nextQuestion()
+        } else {
+            // Go to schedule creator
+        }
+    }
+    
+    // Mask cells under clear header
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if selectedSection > 0 {
+            for cell in questionsTable.visibleCells {
+                let hiddenFrameHeight = scrollView.contentOffset.y + 49 - cell.frame.origin.y + 2
+                if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
+                    maskCell(cell: cell, margin: Float(hiddenFrameHeight))
+                }
+            }
+        }
+    }
+    func maskCell(cell: UITableViewCell, margin: Float) {
+        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
+        cell.layer.masksToBounds = true
+    }
+    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
+        let mask = CAGradientLayer()
+        mask.frame = cell.bounds
+        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
+        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
+        return mask;
+    }
+    
     
     //
     // MARK: Slider Helpers -----------------------------------------------------------
@@ -564,7 +672,7 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Current Pose
         let currentQuestion = Float(selectedQuestion)
         // Total Number Poses
-        let questionCount = Float(scheduleDataStructures.profileQA[0].count + scheduleDataStructures.profileQA[1].count + scheduleDataStructures.profileQA[2].count)
+        let questionCount = Float(scheduleDataStructures.profileQA[0].count + 2)
         //
         if selectedQuestion > 0 {
             //
@@ -578,20 +686,27 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     //
     func nextQuestion() {
-        // Section
-        if selectedQuestion == scheduleDataStructures.profileQA[selectedSection].count - 1 {
+        // Me Section
+            // Next Question
+        if selectedSection == 0 && selectedQuestion != scheduleDataStructures.profileQA[selectedSection].count - 1 {
+            selectedQuestion += 1
+            updateProgress()
+            let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
+            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
+        // Goals Section
+        } else if selectedQuestion == scheduleDataStructures.profileQA[selectedSection].count - 1 && selectedSection == 0 {
             selectedSection += 1
-        }
-        // Question
-        selectedQuestion += 1
-        updateProgress()
-        let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
-        questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
-        // Section title
-        if selectedSection == 1 {
+            questionsTable.isScrollEnabled = true
+            questionsTable.reloadData()
+            let indexPath = NSIndexPath(row: 0, section: 0)
+            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
             sectionLabel.text = NSLocalizedString("goals", comment: "")
-        } else if selectedSection == 2 {
-            sectionLabel.text = NSLocalizedString("nSessions", comment: "")
+        // NSession Section
+        } else {
+            selectedSection += 1
+            questionsTable.isScrollEnabled = true
+            questionsTable.reloadData()
+            sectionLabel.text = NSLocalizedString("numberSessions", comment: "")
         }
     }
     
@@ -617,6 +732,7 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         }
     }
+    
 }
 
 protocol NextRowDelegate: class {

@@ -255,7 +255,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         mask.frame = cell.bounds
         mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
         mask.locations = [NSNumber(value: location), NSNumber(value: location)]
-        return mask;
+        return mask
     }
 
 //
