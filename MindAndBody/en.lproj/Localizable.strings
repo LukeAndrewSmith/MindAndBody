@@ -1635,12 +1635,12 @@
     "profileA141" = "No";
     "profileA142" = "Not very easily";
     "profileA143" = "Yes, comfortably";
-"profileQ15" = "Would you consider yourself strong?"; // Strength: Pullup
+"profileQ15" = "Would you consider yourself strong?"; // Strength: Question
     "profileA151" = "Not at all";
     "profileA152" = "Not really";
     "profileA153" = "Yes";
 // Endurance
-"profileQ16" = "Can you run 5km (3 miles)?"; // Strength: Pullup
+"profileQ16" = "Can you run 5km (3 miles)?"; // Running
     "profileA161" = "No";
     "profileA162" = "Not comfortably";
     "profileA163" = "Yes";

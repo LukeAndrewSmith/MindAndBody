@@ -674,8 +674,18 @@ extension UIButton {
     }
 }
 
-
 //
+// MARK:- Tableview cell
+extension UITableViewCell {
+    // Get Uncached Image
+    func getUncachedImage(named: String) -> UIImage? {
+        let imgPath = Bundle.main.path(forResource: named, ofType: "png")
+        let imageToReturn = UIImage(contentsOfFile: imgPath!)
+        return imageToReturn
+    }
+}
+
+// MARK:- Date
 extension Date {
     
     //

@@ -65,24 +65,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         let homeScreen = settings[1][0]
         //
-        switch homeScreen {
-        case 0,2:
-            let mindBody = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view0") as! MindBodyNavigation
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = mindBody
-            self.window?.makeKeyAndVisible()
-            //
-            tabBarIndex = 0
-        case 1:
-            let schedule = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view1") as! ScheduleNavigation
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = schedule
-            self.window?.makeKeyAndVisible()
-            //
-            tabBarIndex = 1
-        default:
-            break
-        }
+        // Testing initial profile screen
+        let initialProfile = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InitialProfile") as! InitialProfile
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = initialProfile
+        self.window?.makeKeyAndVisible()
+        
+//        switch homeScreen {
+//        case 0,2:
+//            let mindBody = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view0") as! MindBodyNavigation
+//            self.window = UIWindow(frame: UIScreen.main.bounds)
+//            self.window?.rootViewController = mindBody
+//            self.window?.makeKeyAndVisible()
+//            //
+//            tabBarIndex = 0
+//        case 1:
+//            let schedule = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view1") as! ScheduleNavigation
+//            self.window = UIWindow(frame: UIScreen.main.bounds)
+//            self.window?.rootViewController = schedule
+//            self.window?.makeKeyAndVisible()
+//            //
+//            tabBarIndex = 1
+//        default:
+//            break
+//        }
         
         //
         return true

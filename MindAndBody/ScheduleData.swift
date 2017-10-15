@@ -164,7 +164,8 @@ enum scheduleDataStructures {
             ["profileQ7", "profileA71", "profileA72", "profileA73"], // Back
             ["profileQ8", "profileA81", "profileA82", "profileA83"], // Neck
             // Balance
-            ["profileQ9", "profileA91", "profileA92", "profileA93", "profileA94"], // Answer 1 and 2 hold same value
+            ["profileQ9", "profileA91", "profileA92", "profileA93"], // Answer 1 and 2 hold same value
+                // , "profileA94" - yes with eyes closed looking up, currently unused but would be good to use
             // Experience
             ["profileQ10", "profileA101", "profileA102", "profileA103"], // Yoga
             ["profileQ11", "profileA111", "profileA112", "profileA113"], // Workout

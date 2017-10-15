@@ -107,8 +107,6 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         // Background Index
         let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         let backgroundIndex = settings[0][0]
-
-        
         //
         // Background Image/Colour
         //

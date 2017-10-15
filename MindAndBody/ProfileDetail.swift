@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 //
 class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -494,7 +493,6 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
 
-    // OK Button
     //
     // Ok button action
     func okButtonAction(_ sender: Any) {
