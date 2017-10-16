@@ -43,6 +43,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var navigationBar: UINavigationItem!
     // TableView
     @IBOutlet weak var scheduleTable: UITableView!
+    @IBOutlet weak var pageStack: UIStackView!
     // Background Image
     @IBOutlet weak var backgroundImage: UIImageView!
     let backgroundBlur = UIVisualEffectView()
@@ -392,11 +393,25 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    //
+    // MARK: View did appear
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
 //
 // View did load --------------------------------------------------------------------------------------------------------
 //
     override func viewDidLoad() {
         super.viewDidLoad()
+        //
+        // Initial info screen
+        // if initialInfoHasBeenPresented == false {
+        // initialInfoHasBeenPresented == true
+        // Save initialInfoHasBeenPresented to userDefaults
+        self.performSegue(withIdentifier: "InitialInfoSegue", sender: self)
+        // }
         
         // Check Mask Views
         checkMaskView()
@@ -502,7 +517,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         // Custom 'Page Control' m,t,w,t,f,s,s for bottom
         for i in 0...(dayArray.count - 1) {
-            var dayLabel = UILabel()
+            let dayLabel = UILabel()
             dayLabel.textColor = colour1
             dayLabel.textAlignment = .center
             dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 15)
@@ -518,13 +533,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             dayLabel.addGestureRecognizer(dayTap)
             stackArray.append(dayLabel)
         }
-        let pageStack = UIStackView(arrangedSubviews: stackArray)
-        pageStack.frame = CGRect(x: 0, y:  view.frame.maxY - 24.5 - TopBarHeights.combinedHeight, width: view.bounds.width, height: 24.5)
-        pageStack.distribution = .fillEqually
-        pageStack.alignment = .center
+        for i in 0...stackArray.count - 1 {
+            pageStack.addArrangedSubview(stackArray[i])
+        }
         pageStack.isUserInteractionEnabled = true
         //
-        view.addSubview(pageStack)
         
         //
         // Day Swipes
@@ -754,7 +767,20 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     choiceLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
                     choiceLabel.textColor = colour1
                     //
-                    let text = sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][indexPath.row]
+                    // Normal
+                    if isLastChoice() == false {
+                        let text = sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][indexPath.row]
+                        
+                    // Last Choice, indicator by color of 1., 2. and 3., which sessions have been performed (warmup, session, stretching)
+                    } else {
+                        //
+                        // if iscomplete == false {
+                        let text = sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][indexPath.row]
+                        
+                        // } else { green 1. 2. or 3.
+                        // }
+                    }
+                    //
                     choiceLabel.text = NSLocalizedString(text, comment: "")
                     choiceLabel.numberOfLines = 2
                     choiceLabel.sizeToFit()

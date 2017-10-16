@@ -51,9 +51,19 @@ class ScheduleCreator: UIViewController {
         //
         backgroundBlur.frame = backgroundImageView.bounds
         //
-        view.insertSubview(backgroundBlur, aboveSubview: backgroundImageView)        
+        view.insertSubview(backgroundBlur, aboveSubview: backgroundImageView)
+        
+        
+        //
+        // Test tap, just there to dismiss view when testing
+        let testTap = UITapGestureRecognizer()
+        testTap.addTarget(self, action: #selector(dismissView))
+        view.addGestureRecognizer(testTap)
     }
     
+    func dismissView() {
+        self.dismiss(animated: true)
+    }
 
     
     

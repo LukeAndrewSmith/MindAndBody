@@ -76,32 +76,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window?.makeKeyAndVisible()
         //
         // Testing initial info screen
-        let initialInfo = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InitialInfoScreen") as! InitialInfoScreen
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = initialInfo
-        self.window?.makeKeyAndVisible()
+//        let initialInfo = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InitialInfoNavigation") as! InitialInfoNavigation
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.rootViewController = initialInfo
+//        self.window?.makeKeyAndVisible()
         //
         // MARK: END OF TESTING -------------
         
         
-//        switch homeScreen {
-//        case 0,2:
-//            let mindBody = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view0") as! MindBodyNavigation
-//            self.window = UIWindow(frame: UIScreen.main.bounds)
-//            self.window?.rootViewController = mindBody
-//            self.window?.makeKeyAndVisible()
-//            //
-//            tabBarIndex = 0
-//        case 1:
-//            let schedule = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view1") as! ScheduleNavigation
-//            self.window = UIWindow(frame: UIScreen.main.bounds)
-//            self.window?.rootViewController = schedule
-//            self.window?.makeKeyAndVisible()
-//            //
-//            tabBarIndex = 1
-//        default:
-//            break
-//        }
+        switch homeScreen {
+        case 0,2:
+            let mindBody = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view0") as! MindBodyNavigation
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.rootViewController = mindBody
+            self.window?.makeKeyAndVisible()
+            //
+            tabBarIndex = 0
+        case 1:
+            let schedule = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view1") as! ScheduleNavigation
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.rootViewController = schedule
+            self.window?.makeKeyAndVisible()
+            //
+            tabBarIndex = 1
+        default:
+            break
+        }
         
         //
         return true

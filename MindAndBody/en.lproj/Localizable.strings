@@ -1546,18 +1546,46 @@
 // MARK: Initial Screen //
 //
 "initialInfoSubtitle" = "Fitness  |  Yoga  |  Meditation";
-"initialProfileOption" = "Fill in Profile and create Schedule";
+"initialProfileOption" = "Fill in Profile, create Schedule";
 "initialAppOption" = "Look around the app first";
 //
 // Info table
 // Overview
-"initialInfo" = "• Create and follow a weekly schedule\n• Choose how best to acheive each goal each day.\n• Track how much you've done of what you planned.\n• Or use the app without the schedule, as a source of good sessions and information.";
-"moreInfo" = "More information";
+"initialInfo1" = "• Create and follow a weekly schedule";
+"initialInfo2" = "• Choose how best to acheive each goal each day";
+"initialInfo3" = "• Track the % you acheived of what you planned";
+"initialInfo4" = "• Achieve your goals";
+"moreInfo" = "More info.";
+// More info
+"initialMoreInfo" = "Mind & Body's aim is to help you acheive your physical and/or mental goals. It will help you build a schedule, and will leave the responsability in your hands to decide each day how best to acheive your goal by presenting various manners in which to do so.\nThis helps you maintain the best routine obtain greater independence: you're the only one who can acheive your goals.\nMind & Body also provides detailed information on each movement/exercise/pose, and more general lessons to help you acheive your goals. It is up to you however to read them!\nNote: the app can also be used to compliment your current activity (e.g you are a proficient runner but would like help warming up, stretching and meditating)\nNote: the app can be used without a schedule, as a source of good sessions and info.\n\n\n\n\n\n";
 // Sections
-"fitness" = "Fitness";
+"features" = "Features";
 // Bullet Points
-// Schedule
-"choiceI" = "• Choice each day";
+// Features
+"scheduleI" = "• Schedule (app can be used without)";
+"trackingI" = "• Tracking (% acheived of planned)";
+"lessonsI" = "• Lessons (for mind and body)";
+"explanationsI" = "• Detailed explanations of all movements/exercises/poses";
+"warmupI" = "• Warmups (for all sessions)";
+"stretchingI" = "• Stretching (post sessions)";
+"stretchingI2" = "• Stretching (for flexibility)";
+"workoutsI" = "• Muscle gain, Toning and Strength Workouts";
+"gymI" = "• Gym Workouts";
+"bodyweightI" = "• Bodyweight Workouts";
+"timedSessionsI" = "• Timed Warmup/Workout/Stretching sessions";
+"cardioI" = "• Timed HIIT cardio sessions (for running, biking and rowing)";
+"cardioI2" = "• Bodyweight workout cardio sessions";
+"yogaI" = "• Hatha Yoga (breathing into poses rather than flowing)";
+"timedYogaI" = "• Timed Yoga Sessions";
+"meditationTimeI" = "• Meditation Timer";
+"guidedMeditationI" = "• 'Guided' meditation (detailed written explanations)";
+"customSessionsI" = "• Creation of custom sessions and schedules";
+"bulletPointTemplate" = "• ";
+
+
+
+
+
 // Fitness
 "gymI" = "• Gym";
 "bodyweightI" = "• Bodyweight";
@@ -1672,7 +1700,7 @@
 "profileQ16" = "Can you run 5km (3 miles)?"; // Running
     "profileA161" = "No";
     "profileA162" = "Not comfortably";
-    "profileA163" = "Yes";
+    "profileA163" = "Yes, comfortably";
 // Mind
 "profileQ17" = "Are you calm?"; // Calm
     "profileA171" = "Not often";
@@ -1688,7 +1716,7 @@
     "profileA192" = "Reasonably";
     "profileA193" = "Yes";
 "profileQ20" = "Do you have much time to work towards your physical and mental goals?"; // Time
-    "profileA201" = "No, only a few days a week where I could";
+    "profileA201" = "No, only a few days a week";
     "profileA202" = "Yes, a little every day";
     "profileA203" = "Yes, for at least 1 goal a day";
 "profileQ21" = "Are your physical and mental goals a high priority (will you be committed)?"; // Commitment

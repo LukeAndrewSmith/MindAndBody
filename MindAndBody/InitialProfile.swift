@@ -132,6 +132,7 @@ class InitialProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDel
     @IBOutlet weak var elementStack: UIStackView!
     @IBOutlet weak var answerImageLeading: NSLayoutConstraint!
     @IBOutlet weak var answerImageTrailing: NSLayoutConstraint!
+    @IBOutlet weak var tableHeight: NSLayoutConstraint!
     //
     // Passed data
     var row = Int()
@@ -207,7 +208,22 @@ class InitialProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 49
+        let label = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: answerTableView.bounds.width, height: 0)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textAlignment = .center
+        label.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        label.text = NSLocalizedString(scheduleDataStructures.profileQA[selectedSection][selectedQuestion][indexPath.row + 1], comment: "")
+        label.sizeToFit()
+        //
+        if label.bounds.height > 49 {
+            tableHeight.constant += (49 * 0.5)
+            return 49 * 1.5
+        } else {
+            tableHeight.constant = 147
+            return 49
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -222,6 +238,8 @@ class InitialProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDel
         cell.tintColor = colour3
         cell.textLabel?.textColor = .white
         cell.textLabel?.textAlignment = .center
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.lineBreakMode = .byWordWrapping
         // row + 1 as question included with answers
         cell.textLabel?.text = NSLocalizedString(scheduleDataStructures.profileQA[selectedSection][selectedQuestion][indexPath.row + 1], comment: "")
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
@@ -580,9 +598,11 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
         //
         if selectedSection == 1 {
             nextQuestion()
-        } else {
+        } else if selectedSection == 2 {
             // Go to schedule creator
+            self.performSegue(withIdentifier: "InitialScheduleCreatorSegue", sender: self)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // Mask cells under clear header
