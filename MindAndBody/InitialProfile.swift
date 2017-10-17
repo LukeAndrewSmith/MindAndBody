@@ -214,16 +214,42 @@ class InitialProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDel
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
         label.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        // + 1 as question inclueded in array
         label.text = NSLocalizedString(scheduleDataStructures.profileQA[selectedSection][selectedQuestion][indexPath.row + 1], comment: "")
         label.sizeToFit()
         //
+        setTableHeight()
+        //
         if label.bounds.height > 49 {
-            tableHeight.constant += (49 * 0.5)
             return 49 * 1.5
         } else {
-            tableHeight.constant = 147
             return 49
         }
+        //
+    }
+    
+    //
+    func setTableHeight() {
+        var tableHeightConstant: CGFloat = 0
+        for i in 0...scheduleDataStructures.profileQA[selectedSection][selectedQuestion].count - 2 {
+            let label = UILabel()
+            label.frame = CGRect(x: 0, y: 0, width: answerTableView.bounds.width, height: 0)
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            label.textAlignment = .center
+            label.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+            // + 1 as question inclueded in array
+            label.text = NSLocalizedString(scheduleDataStructures.profileQA[selectedSection][selectedQuestion][i + 1], comment: "")
+            label.sizeToFit()
+            if label.bounds.height > 49 {
+                tableHeightConstant += (49 * 1.5)
+            } else {
+                tableHeightConstant += 49
+            }
+        }
+        tableHeight.constant = tableHeightConstant
+        //
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -535,7 +561,7 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
                 cell.textLabel?.textColor = colour1
                 //
-            // Next Section
+            // Next Section -> N Sessions
             } else {
                 // Indicator Label
                 cell.backgroundColor = colour3.withAlphaComponent(0.5)
@@ -579,7 +605,7 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
                 cell.textLabel?.textColor = colour1
                 //
-            // Next Section
+            // Next Section -> Create schedule
             } else {
                 // Indicator Label
                 cell.backgroundColor = colour3.withAlphaComponent(0.5)
@@ -595,6 +621,7 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         //
         if selectedSection == 1 {
             nextQuestion()
@@ -602,7 +629,6 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
             // Go to schedule creator
             self.performSegue(withIdentifier: "InitialScheduleCreatorSegue", sender: self)
         }
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // Mask cells under clear header
@@ -715,18 +741,60 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
             questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
         // Goals Section
         } else if selectedQuestion == scheduleDataStructures.profileQA[selectedSection].count - 1 && selectedSection == 0 {
+            sectionLabel.text = NSLocalizedString("goals", comment: "")
             selectedSection += 1
             questionsTable.isScrollEnabled = true
+            //
+            // Animate as if normal scroll
+            let snapShot1 = questionsTable.snapshotView(afterScreenUpdates: false)
+            snapShot1?.center.y = questionsTable.center.y
+            view.insertSubview(snapShot1!, aboveSubview: questionsTable)
+            // Reload
             questionsTable.reloadData()
             let indexPath = NSIndexPath(row: 0, section: 0)
             questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-            sectionLabel.text = NSLocalizedString("goals", comment: "")
+            let snapShot2 = questionsTable.snapshotView(afterScreenUpdates: true)
+            questionsTable.alpha = 0
+            snapShot2?.center.y = questionsTable.center.y + questionsTable.bounds.height
+            view.insertSubview(snapShot2!, aboveSubview: questionsTable)
+            //
+            UIView.animate(withDuration: AnimationTimes.animationTime3, animations: {
+                snapShot1?.center.y -= self.questionsTable.bounds.height
+                snapShot2?.center.y = self.questionsTable.center.y
+            }, completion: { finished in
+                snapShot1?.removeFromSuperview()
+                snapShot2?.removeFromSuperview()
+                self.questionsTable.alpha = 1
+            })
+            
         // NSession Section
         } else {
             selectedSection += 1
             questionsTable.isScrollEnabled = true
-            questionsTable.reloadData()
             sectionLabel.text = NSLocalizedString("numberSessions", comment: "")
+            //
+            //
+            // Animate as if normal scroll down
+            let snapShot1 = questionsTable.snapshotView(afterScreenUpdates: false)
+            snapShot1?.center.y = questionsTable.center.y
+            view.insertSubview(snapShot1!, aboveSubview: questionsTable)
+            // Reload
+            questionsTable.reloadData()
+            let indexPath = NSIndexPath(row: 0, section: 0)
+            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+            let snapShot2 = questionsTable.snapshotView(afterScreenUpdates: true)
+            questionsTable.alpha = 0
+            snapShot2?.center.y = questionsTable.center.y + questionsTable.bounds.height
+            view.insertSubview(snapShot2!, aboveSubview: questionsTable)
+            //
+            UIView.animate(withDuration: AnimationTimes.animationTime3, animations: {
+                snapShot1?.center.y -= self.questionsTable.bounds.height
+                snapShot2?.center.y = self.questionsTable.center.y
+            }, completion: { finished in
+                snapShot1?.removeFromSuperview()
+                snapShot2?.removeFromSuperview()
+                self.questionsTable.alpha = 1
+            })
         }
     }
     

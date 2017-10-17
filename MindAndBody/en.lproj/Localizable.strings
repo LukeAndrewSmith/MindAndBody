@@ -1552,8 +1552,8 @@
 // Info table
 // Overview
 "initialInfo1" = "• Create and follow a weekly schedule";
-"initialInfo2" = "• Choose how best to acheive each goal each day";
-"initialInfo3" = "• Track the % you acheived of what you planned";
+"initialInfo2" = "• Choose how best to work towards each goal each day";
+"initialInfo3" = "• Track the % you done of what you planned";
 "initialInfo4" = "• Achieve your goals";
 "moreInfo" = "More info.";
 // More info
@@ -1562,7 +1562,7 @@
 "features" = "Features";
 // Bullet Points
 // Features
-"scheduleI" = "• Schedule (app can be used without)";
+"scheduleI" = "• Schedule (can be used without)";
 "trackingI" = "• Tracking (% acheived of planned)";
 "lessonsI" = "• Lessons (for mind and body)";
 "explanationsI" = "• Detailed explanations of all movements/exercises/poses";
@@ -1581,24 +1581,6 @@
 "guidedMeditationI" = "• 'Guided' meditation (detailed written explanations)";
 "customSessionsI" = "• Creation of custom sessions and schedules";
 "bulletPointTemplate" = "• ";
-
-
-
-
-
-// Fitness
-"gymI" = "• Gym";
-"bodyweightI" = "• Bodyweight";
-"timedI" = "• Timed";
-// Yoga
-"hathaI" = "• Hatha";
-"timedI" = "• Timed";
-// Meditation
-"timerI" = "• Timer";
-"guidedI" = "• Guided";
-
-
-
 
 
 //

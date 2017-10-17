@@ -768,20 +768,26 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     choiceLabel.textColor = colour1
                     //
                     // Normal
-                    if isLastChoice() == false {
-                        let text = sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][indexPath.row]
-                        
-                    // Last Choice, indicator by color of 1., 2. and 3., which sessions have been performed (warmup, session, stretching)
-                    } else {
-                        //
-                        // if iscomplete == false {
-                        let text = sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][indexPath.row]
-                        
-                        // } else { green 1. 2. or 3.
-                        // }
-                    }
                     //
-                    choiceLabel.text = NSLocalizedString(text, comment: "")
+                    // COLOUR TEST
+//                    if isLastChoice() == false {
+                        let text = sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][indexPath.row]
+                        choiceLabel.text = NSLocalizedString(text, comment: "")
+                    // Last Choice, indicator by color of 1., 2. and 3., which sessions have been performed (warmup, session, stretching)
+//                    } else {
+//                        //
+//                        let text = NSLocalizedString(sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][indexPath.row], comment: "")
+//                        let attributedString = NSMutableAttributedString(string: text, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
+//                        let range = NSRange(location: 0, length: 2)
+//                        // if iscomplete == false {
+//                        // Change 1. 2. 3. to red
+//                        attributedString.addAttribute(NSForegroundColorAttributeName, value: colour4, range: range)
+//                        choiceLabel.textColor = colour1
+//                        choiceLabel.attributedText = attributedString
+//                        // } else { green 1. 2. or 3.
+//                        // }
+//                    }
+                    //
                     choiceLabel.numberOfLines = 2
                     choiceLabel.sizeToFit()
                     choiceLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
