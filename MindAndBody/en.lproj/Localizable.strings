@@ -163,7 +163,7 @@
 "enduranceToDo" = "Endurance - To Do";
 "enduranceType" = "Endurance - Type";
 "enduranceType2" = "Endurance - Type - 2";
-"steadyState" = "Steady State (Without the app (e.g 5km run))";
+"steadyState" = "Steady State (Without the app)";
     // Choice 2
     "enduranceType" = "Endurance - Type";
 // Toning
@@ -1557,6 +1557,7 @@
 "initialInfo4" = "• Achieve your goals";
 "moreInfo" = "More info.";
 // More info
+"initialMoreInfoTest" = "I beleive that ";
 "initialMoreInfo" = "Mind & Body's aim is to help you acheive your physical and/or mental goals. It will help you build a schedule, and will leave the responsability in your hands to decide each day how best to acheive your goal by presenting various manners in which to do so.\nThis helps you maintain the best routine obtain greater independence: you're the only one who can acheive your goals.\nMind & Body also provides detailed information on each movement/exercise/pose, and more general lessons to help you acheive your goals. It is up to you however to read them!\nNote: the app can also be used to compliment your current activity (e.g you are a proficient runner but would like help warming up, stretching and meditating)\nNote: the app can be used without a schedule, as a source of good sessions and info.\n\n\n\n\n\n";
 // Sections
 "features" = "Features";
@@ -1594,11 +1595,13 @@
     //
     // Section Titles //
     "goals" = "Goals";
+    "goalsI" = "My Goals (scale: 0 - 2)";
     "me" = "Me";
     "groups" = "Group";
     "time" = "Time";
     "preferences" = "Preferences";
     "numberSessions" = "Nº Sessions";
+    "numberSessionsI" = "Nº Sessions (of each group)";
     //
     "createSchedule" = "Create Schedule";
     // Warning Popups
@@ -1621,90 +1624,108 @@
     "profileA21" = "Male";
     "profileA22" = "Female";
     "profileA23" = "Other";
-// Flexibility
-"profileQ3" = "Can you touch your toes with straight (slightly bent) legs?"; // Hamstrings
+// Experience
+"profileQ3" = "Are you experienced in yoga?"; // Experience: Yoga
     "profileA31" = "No";
-    "profileA32" = "Nearly";
+    "profileA32" = "Fairly";
     "profileA33" = "Yes";
-"profileQ4" = "Are your knees close to the ground doing the butterfly?"; // Hips
+"profileQ4" = "Are you experienced in working out?"; // Experience: Workout
     "profileA41" = "No";
     "profileA42" = "Fairly";
     "profileA43" = "Yes";
-"profileQ5" = "Can you squat (hips below knees) comfortably?"; // Hips/Ankles
-    "profileA51" = "No";
-    "profileA52" = "Nearly";
-    "profileA53" = "Yes";
-"profileQ6" = "Can you sit on your heels?"; // Kneels
+"profileQ5" = "Do you do much cardio (running, biking etc..)?"; // Experience: Cardio, amount
+    "profileA51" = "Hardly any (A few times a year)";
+    "profileA52" = "Occasionally (A few times a month)";
+    "profileA53" = "Lots (A few times a week)";
+// Endurance
+"profileQ6" = "Can you do 30min of cardio at a constant, swift pace (swift for you)?"; // Endurance ability
     "profileA61" = "No";
     "profileA62" = "Not comfortably";
-    "profileA63" = "Yes";
-"profileQ7" = "Does your back bend backward?"; // Back
+    "profileA63" = "Yes, comfortably";
+"profileQ7" = "Would you consider yourself fit?"; // Endurance opinion
     "profileA71" = "No";
-    "profileA72" = "A little";
-    "profileA73" = "Yes";
-"profileQ8" = "Does your neck rotate freely?"; // Neck
-    "profileA81" = "No";
-    "profileA82" = "Sort of";
-    "profileA83" = "Yes";
-// Balance
-"profileQ9" = "Can you stand stand on one leg for 10s?"; // Balance
-    "profileA91" = "No";
-    "profileA92" = "Yes";
-    "profileA93" = "Yes, with my eyes closed";
-    "profileA94" = "Yes, with my eyes closed while looking up";
-// Experience
-"profileQ10" = "Are you experienced in yoga?"; // Experience: Yoga
-    "profileA101" = "No";
-    "profileA102" = "Fairly";
-    "profileA103" = "Yes";
-"profileQ11" = "Are you experienced in working out?"; // Experience: Workout
-    "profileA111" = "No";
-    "profileA112" = "Fairly";
-    "profileA113" = "Yes";
-"profileQ12" = "Do you do much cardio (running, biking etc..)?"; // Experience: Cardio
-    "profileA121" = "Hardly any (A few times a year)";
-    "profileA122" = "Occasionally (A few times a month)";
-    "profileA123" = "Lots (A few times a week)";
+    "profileA72" = "Fairly (I wouldn't say I'm unfit)";
+    "profileA73" = "Yes (I like my sport)";
 // Strength
-"profileQ13" = "Can you do 5 pushups?"; // Strength: Pushup
+"profileQ8" = "Can you do 5 pushups?"; // Strength: Pushup
+    "profileA81" = "No";
+    "profileA82" = "Not very easily";
+    "profileA83" = "Yes, comfortably";
+"profileQ9" = "Can you do 5 pullups?"; // Strength: Pullup
+    "profileA91" = "No";
+    "profileA92" = "Not very easily";
+    "profileA93" = "Yes, comfortably";
+"profileQ10" = "Can you do 30 bodyweight squats?"; // Strength: Pullup
+    "profileA101" = "No";
+    "profileA102" = "Not very easily";
+    "profileA103" = "Yes, comfortably";
+"profileQ11" = "Would you consider yourself strong?"; // Strength: Question
+    "profileA111" = "Not at all";
+    "profileA112" = "Not really";
+    "profileA113" = "Yes";
+// Flexibility
+"profileQ12" = "Can you touch your toes with straight (slightly bent) legs?"; // Hamstrings
+    "profileA121" = "No";
+    "profileA122" = "Nearly";
+    "profileA123" = "Yes";
+"profileQ13" = "Are your knees close to the ground doing the butterfly (heels as close to your groin as comfortable)?"; // Hips
     "profileA131" = "No";
-    "profileA132" = "Not very easily";
-    "profileA133" = "Yes, comfortably";
-"profileQ14" = "Can you do 5 pullups?"; // Strength: Pullup
+    "profileA132" = "Fairly (the height of a fist to a first with your thumb sticking up off the ground)";
+    "profileA133" = "Yes (the height of a fist or less)";
+"profileQ14" = "Can you squat (hips below knees) comfortably?"; // Hips/Ankles
     "profileA141" = "No";
-    "profileA142" = "Not very easily";
-    "profileA143" = "Yes, comfortably";
-"profileQ15" = "Would you consider yourself strong?"; // Strength: Question
-    "profileA151" = "Not at all";
-    "profileA152" = "Not really";
-    "profileA153" = "Yes";
-// Endurance
-"profileQ16" = "Can you run 5km (3 miles)?"; // Running
-    "profileA161" = "No";
-    "profileA162" = "Not comfortably";
-    "profileA163" = "Yes, comfortably";
-// Mind
-"profileQ17" = "Are you calm?"; // Calm
-    "profileA171" = "Not often";
-    "profileA172" = "Occasionally";
-    "profileA173" = "Mostly";
-"profileQ18" = "Are you content?"; // Contentedness
-    "profileA181" = "Not often";
-    "profileA182" = "Occasionally";
-    "profileA183" = "Often";
-// General
-"profileQ19" = "Are you content with your body and its abilities?"; // Contentedness with body
+    "profileA142" = "Nearly (I have to put in effort to stay balanced)";
+    "profileA143" = "Yes";
+"profileQ15" = "Can you sit on your heels?"; // Kneels
+    "profileA151" = "No";
+    "profileA152" = "Not comfortably";
+    "profileA153" = "Yes, comfortably";
+"profileQ16" = "Does your back bend backwards?"; // Back
+    "profileA161" = "No (it's stiff or I have back pains)";
+    "profileA162" = "A little (but I tend to avoid bending it back)";
+    "profileA163" = "Yes";
+"profileQ17" = "Does your lower back rotate?"; // Back
+    "profileA171" = "No (it's stiff or I have back pains)";
+    "profileA172" = "A little (but I tend to avoid rotating it)";
+    "profileA173" = "Yes";
+"profileQ18" = "Does your neck rotate freely?"; // Neck
+    "profileA181" = "No (it's stiff or I have neck pains)";
+    "profileA182" = "A little (but I tend to avoid rotating it)";
+    "profileA183" = "Yes";
+// Balance
+"profileQ19" = "Can you stand stand on one leg for 10s?"; // Balance
     "profileA191" = "No";
-    "profileA192" = "Reasonably";
-    "profileA193" = "Yes";
-"profileQ20" = "Do you have much time to work towards your physical and mental goals?"; // Time
-    "profileA201" = "No, only a few days a week";
-    "profileA202" = "Yes, a little every day";
-    "profileA203" = "Yes, for at least 1 goal a day";
+    "profileA192" = "Yes";
+    "profileA193" = "Yes, with my eyes closed";
+    "profileA194" = "Yes, with my eyes closed while looking up";
+// Time / Committement
+"profileQ20" = "Do you have time to work towards your physical and mental goals (time where you're able and willing to)?"; // Time
+    "profileA201" = "Not much (1 - 2 days a week where I could)";
+    "profileA202" = "A little (3 - 4 days a week where I could)";
+    "profileA203" = "Yes (5 - 7 days a week where I could)";
 "profileQ21" = "Are your physical and mental goals a high priority (will you be committed)?"; // Commitment
     "profileA211" = "Not really, but I'd like to do a little";
     "profileA212" = "Yes, but I should take it easy to begin with";
-    "profileA213" = "Definitely, I plan on getting into a routine";
+    "profileA213" = "Definitely, I plan on getting into a good routine";
+
+//
+// Goals
+"mindfulnessI" = "Mindfulness";
+"calmnessI" = "Calmness";
+"contentednessI" = "Contentedness";
+"yogaII" = "Yoga";
+"flexibilityI" = "Flexibility";
+"enduranceI" = "Endurance";
+"toningI" = "Toning";
+"muscleGainI" = "Muscle Gain";
+"strengthI" = "Strength";
+
+//
+// Groups
+"mindI" = "Mind (Yoga & Meditation)";
+"totalNumberSessionI" = "Total Nº Sessions (per week)";
+
+
 
 
 //
@@ -1909,13 +1930,13 @@
         "profile1" = "Update Schedule:\nPress update schedule once all the questions are answered, you will then be able to decide when to do each session.";
 
             // Me
-            "me0" = "Me:\nAnswer all questions so the app can suggest sessions relevant to you.\nReturn here if you/your abilities change to edit your answers (press 'Update Schedule' after any change).";
+            "me0" = "Me:\nAnswer all questions so the app can suggest sessions relevant to you.\nReturn here if you/your abilities change to edit your answers.";
 
             // Goals
-            "goals0" = "Goals:\nRate how important each goal is to you on a scale of 0-3 (0 - not a goal of mine, 3 - the goals i'd most like to work towards) using the slider.\nReturn here if your goals change to edit them (press 'Update Schedule' after any change)).";
+            "goals0" = "Goals:\nRate how important each goal is to you on a scale of 0-3 (0 - not a goal, 2 - primary goal, 1 - secondary goal) using the slider.\nRate only the goals you would like the app to help you acheive.";
 
             // Sessions
-            "nSessions0" = "Min-Max Nº possible hours per week; reduce if you lack the time (it might not be as much as you think and you can reduce later). The Nº sessions of each group can be changed underneath, with the recommended range shown in green.\nReturn here when/if you feel you want to do more/less in total, or more/less of a group (press 'Update Schedule' after any change)).";
+            "nSessions0" = "Min-Max Nº possible hours per week; reduce if you lack the time (it might not be as much as you think and you can reduce later). The Nº sessions of each group can be changed underneath, with the recommended range shown in green.";
 
         // Settings
         "settings0" = "Homepage:\nYou can set the schedule as the home page of the app (the first screen presented when you open the app).";

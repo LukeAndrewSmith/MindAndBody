@@ -197,34 +197,17 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            if profileAnswers[3][0] == 0 {
-                profileAnswers[3][0] = 1
-                UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
-            }
             selectedSection = indexPath.row
             performSegue(withIdentifier: "profileDetail", sender: self)
         case 1:
-            if profileAnswers[3][1] == 0 {
-                profileAnswers[3][1] = 1
-                UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
-            }
             selectedSection = indexPath.row
             performSegue(withIdentifier: "profileDetail", sender: self)
         case 2:
-            // If all sections have been pressed at least once and me questions have been answered
-            if profileAnswers[3][1] != 0 {
-                selectedSection = indexPath.row
-                performSegue(withIdentifier: "profileDetail", sender: self)
-                if profileAnswers[3][2] == 0 {
-                    profileAnswers[3][2] = 1
-                    UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
-                }
-            } else {
-                warningPopup(section: indexPath.row)
-            }
+            selectedSection = indexPath.row
+            performSegue(withIdentifier: "profileDetail", sender: self)
         case 3:
             // If all sections have been pressed at least once and me questions have been answered
-            if profileAnswers[3].contains(0) == false && profileAnswers[0].contains(-1) == false {
+            if profileAnswers[0].contains(-1) == false {
                 selectedSection = indexPath.row
                 performSegue(withIdentifier: "scheduleCreation", sender: self)
             } else {

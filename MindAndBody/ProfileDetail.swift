@@ -40,9 +40,6 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var titleArray: [String] = ["me", "goals", "numberSessions"]
     // Age
     var ageAnswer = ["16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "70+"]
-    // Answer Images
-    var answerImageArray = ["standingHamstring", "butterfly", "deepSquat", "hero", "upwardDog", "neckRotatorStretch", "tree"]
-    
     
     //
     // View did appear
@@ -289,7 +286,7 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
             slider.frame = CGRect(x: 45, y: (cell.bounds.height - slider.frame.height) / 2, width: view.frame.size.width - 60, height: slider.frame.height)
             // Values
             slider.minimumValue = 0
-            slider.maximumValue = 3
+            slider.maximumValue = 2
             // Section tag
             slider.tag = indexPath.section
             //
@@ -319,7 +316,7 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
             slider.frame = CGRect(x: 45, y: (cell.bounds.height - slider.frame.height) / 2, width: view.frame.size.width - 60, height: slider.frame.height)
             // Values
             slider.minimumValue = 0
-            slider.maximumValue = 10
+            slider.maximumValue = 7
             // Colours
             slider.thumbTintColor = colour4
             setSliderGradient(slider: slider)
@@ -375,7 +372,7 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         answerViewQuestion.frame = CGRect(x: 0, y: 0, width: view.frame.size.width - 20, height: answerViewQuestion.frame.size.height)
                         // Image
                             // -2 as first question that requires image is index path 2
-                        answerImageView.image = getUncachedImage(named: answerImageArray[selectedQuestion - 2])
+                        answerImageView.image = getUncachedImage(named: scheduleDataStructures.answerImageArray[selectedQuestion])
                         answerImageView.frame = CGRect(x: 0, y: answerViewQuestion.bounds.height + 10, width: answerView2.bounds.width, height: view.bounds.width - 20)
                         answerImageView.alpha = 1
                         // AnswerTable
@@ -525,7 +522,7 @@ class ProfileDetail: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Change thumbTintColor for groups
         if selectedSection == 2 {
             // Red, below and above suggested
-            if roundedValue <= 2 || roundedValue >= 6 {
+            if roundedValue <= 2 || roundedValue >= 3 {
                 sender.thumbTintColor = colour4
                 // Green, suggested
             } else {

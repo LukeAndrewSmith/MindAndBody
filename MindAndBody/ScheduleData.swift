@@ -152,59 +152,63 @@ enum scheduleDataStructures {
     [
         // Me
         [
-            // Age
-            ["profileQ1"], // Age
-            // Gender
-            ["profileQ2", "profileA21", "profileA22", "profileA23"], // Gender
-            // Flexibility
-            ["profileQ3", "profileA31", "profileA32", "profileA33"], // Hamstrings
-            ["profileQ4", "profileA41", "profileA42", "profileA43"], // Hips
-            ["profileQ5", "profileA51", "profileA52", "profileA53"], // Hips/Ankles
-            ["profileQ6", "profileA61", "profileA62", "profileA63"], // Knees
-            ["profileQ7", "profileA71", "profileA72", "profileA73"], // Back
-            ["profileQ8", "profileA81", "profileA82", "profileA83"], // Neck
-            // Balance
-            ["profileQ9", "profileA91", "profileA92", "profileA93"], // Answer 1 and 2 hold same value
-                // , "profileA94" - yes with eyes closed looking up, currently unused but would be good to use
-            // Experience
-            ["profileQ10", "profileA101", "profileA102", "profileA103"], // Yoga
-            ["profileQ11", "profileA111", "profileA112", "profileA113"], // Workout
-            ["profileQ12", "profileA121", "profileA122", "profileA123"], // Cardio (Endurance)
+            // Age - GOOD
+            ["profileQ1"], // Age - 0
+            // Gender - GOOD
+            ["profileQ2", "profileA21", "profileA22", "profileA23"], // Gender - 1
+            // Experience - GOOD
+            ["profileQ3", "profileA31", "profileA32", "profileA33"], // Yoga - 2
+            ["profileQ4", "profileA41", "profileA42", "profileA43"], // Workout - 3
+            ["profileQ5", "profileA51", "profileA52", "profileA53"], // Cardio (Endurance) (Amount) - 4
+            // Endurance - GOOD
+            ["profileQ6", "profileA61", "profileA62", "profileA63"], // Endurance (Ability) - 5
+            ["profileQ7", "profileA71", "profileA72", "profileA73"], // Endurance (Opinion) - 6
             // Strength
-            ["profileQ13", "profileA131", "profileA132", "profileA133"], // Pushup
-            ["profileQ14", "profileA141", "profileA142", "profileA143"], // Pullup
-            ["profileQ15", "profileA151", "profileA152", "profileA153"], // // Used for presenting weights
-            // Endurance
-            ["profileQ16", "profileA161", "profileA162", "profileA163"], // Endurance
-            // Mind
-            ["profileQ17", "profileA171", "profileA172", "profileA173"], // // Calm
-            ["profileQ18", "profileA181", "profileA182", "profileA183"], // // Contentedness
-            // General
-            ["profileQ19", "profileA191", "profileA192", "profileA193"], // // Body Contentedness
-            ["profileQ20", "profileA201", "profileA202", "profileA203"], // // Time
-            ["profileQ21", "profileA211", "profileA212", "profileA213"], // // Commitment
+            ["profileQ8", "profileA81", "profileA82", "profileA83"], // Pushup - 7
+            ["profileQ9", "profileA91", "profileA92", "profileA93"], // Pullup - 8
+            ["profileQ10", "profileA101", "profileA102", "profileA103"], // Squat - 9
+            ["profileQ11", "profileA111", "profileA112", "profileA113"], // Strength (Opinion) - 10
+            // Flexibility - GOOD
+            ["profileQ12", "profileA121", "profileA122", "profileA123"], // Hamstrings - 11
+            ["profileQ13", "profileA131", "profileA132", "profileA133"], // Hips - 12
+            ["profileQ14", "profileA141", "profileA142", "profileA143"], // Hips/Ankles - 13
+            ["profileQ15", "profileA151", "profileA152", "profileA153"], // Knees - 14
+            ["profileQ16", "profileA161", "profileA162", "profileA163"], // Back (Backward) - 15
+            ["profileQ17", "profileA171", "profileA172", "profileA173"], // Back (Lower - sideways) - 16
+            ["profileQ18", "profileA181", "profileA182", "profileA183"], // Neck - 17
+            // Balance - GOOD
+            ["profileQ19", "profileA191", "profileA192", "profileA193"], // Balance - 18
+            // Time/Commitment
+            ["profileQ20", "profileA201", "profileA202", "profileA203"], // // Time - 20
+            ["profileQ21", "profileA211", "profileA212", "profileA213"], // // Commitment - 21
         ],
         // Goals
         [
-            // Mind
-            ["mind"],
+            // Mindfulness
+            ["mindfulnessI"],
+            // Calmness
+            ["calmnessI"],
+            // Contentedness
+            ["contentednessI"],
+            // Yoga
+            ["yogaII"],
             // Flexibility
-            ["flexibility"],
+            ["flexibilityI"],
             // Endurance
-            ["endurance"],
+            ["enduranceI"],
             // Toning
-            ["toning"],
+            ["toningI"],
             // Muscle Gain
-            ["muscleGain"],
+            ["muscleGainI"],
             // Strength
-            ["strength"],
+            ["strengthI"],
         ],
         // Groups
         [
             // Total
-            ["totalNumberSession"],
+            ["totalNumberSessionI"],
             // Mind
-            ["mind"],
+            ["mindI"],
             // Flexibility
             ["flexibility"],
             // Endurance
@@ -219,18 +223,26 @@ enum scheduleDataStructures {
     ]
     
     //
+    static let answerImageArray = ["", "", "", "", "", "", "", "pushUp", "pullUp", "bodyweightSquat", "", "standingHamstring", "butterfly", "deepSquat", "hero", "upwardDog", "legDrop", "neckRotatorStretch", "tree", "", "", "", "", "", ""]
+
+    
+    //
     // Data
     // Note: All scales 0,1,2
     // Note: All scales default to 1
     // Layer 1, Questions
+        // sees profileQA above for indexing
     static let defaultProfileAnswers: [[Int]] =
         [
 //            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            // Me
             [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
-            [0,0,0,0,0,0],
+            // Goals
+            [0,0,0,0,0,0,0,0,0],
+            // Sessions
             [0,0,0,0,0,0,0],
-            // Did complete, checks if all sections have actually been pressed
-            [0,0,0]
+            // Ranges (could be put in seperate array with arrays for each range but not in the mood to do so)
+            [0,0,  0,0,  0,0,  0,0,  0,0,  0,0,  0,0]
         ]
     
     // Layer 4: Final
@@ -262,6 +274,8 @@ enum scheduleDataStructures {
             // Toning/Muscle/Strength - 3
             [
                 // Workout Level
+                1,
+                // Workout Level Upper
                 1,
                 // Workout Level Lower
                 1
