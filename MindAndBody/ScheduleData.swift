@@ -179,17 +179,13 @@ enum scheduleDataStructures {
             // Balance - GOOD
             ["profileQ19", "profileA191", "profileA192", "profileA193"], // Balance - 18
             // Time/Commitment
-            ["profileQ20", "profileA201", "profileA202", "profileA203"], // // Time - 20
-            ["profileQ21", "profileA211", "profileA212", "profileA213"], // // Commitment - 21
+            ["profileQ20", "profileA201", "profileA202", "profileA203"], // // Time - 19
+            ["profileQ21", "profileA211", "profileA212", "profileA213"], // // Commitment - 20
         ],
         // Goals
         [
             // Mindfulness
-            ["mindfulnessI"],
-            // Calmness
-            ["calmnessI"],
-            // Contentedness
-            ["contentednessI"],
+            ["mindII"],
             // Yoga
             ["yogaII"],
             // Flexibility
@@ -205,8 +201,6 @@ enum scheduleDataStructures {
         ],
         // Groups
         [
-            // Total
-            ["totalNumberSessionI"],
             // Mind
             ["mindI"],
             // Flexibility
@@ -238,11 +232,12 @@ enum scheduleDataStructures {
             // Me
             [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
             // Goals
-            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
             // Sessions
             [0,0,0,0,0,0,0],
             // Ranges (could be put in seperate array with arrays for each range but not in the mood to do so)
-            [0,0,  0,0,  0,0,  0,0,  0,0,  0,0,  0,0]
+                // note no range for total sessions
+            [0,0,  0,0,  0,0,  0,0,  0,0,  0,0]
         ]
     
     // Layer 4: Final

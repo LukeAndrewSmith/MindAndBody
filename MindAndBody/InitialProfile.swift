@@ -59,7 +59,7 @@ class InitialProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerView
         okButton.backgroundColor = colour1
         okButton.setTitleColor(colour3, for: .normal)
         okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
-        okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         okButton.layer.cornerRadius = 15
         okButton.clipsToBounds = true
         //
@@ -91,7 +91,7 @@ class InitialProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerView
         //
         let answerLabel = UILabel()
         answerLabel.text = ageAnswer[row]
-        answerLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        answerLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         answerLabel.textColor = colour1
         //
         answerLabel.textAlignment = .center
@@ -314,6 +314,11 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Answer Table
     var answerLabelQuestion = UILabel()
     var answerImageView = UIImageView()
+    // 2 gesture for going back
+        // swipe - question
+        // tap - section
+    var downSwipe = UISwipeGestureRecognizer()
+    var downTap = UITapGestureRecognizer()
     //
     @IBOutlet weak var progressBar: UIProgressView!
     //
@@ -373,13 +378,13 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //
         // Previous question swipe
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(previousQuestion))
+        downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(previousQuestion))
         downSwipe.direction = .down
         questionsTable.addGestureRecognizer(downSwipe)
         //
-        let downSwipe2 = UISwipeGestureRecognizer(target: self, action: #selector(previousQuestion))
-        downSwipe2.direction = .down
-        sectionLabel.addGestureRecognizer(downSwipe2)
+        downTap = UITapGestureRecognizer(target: self, action: #selector(previousQuestion))
+        sectionLabel.isUserInteractionEnabled = true
+        sectionLabel.addGestureRecognizer(downTap)
     }
 
     //
@@ -413,7 +418,7 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
         if selectedSection != 0 {
             // Header
             let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)!
+            header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 22)!
             header.textLabel?.textColor = colour1
             //
             header.backgroundColor = .clear
@@ -591,14 +596,10 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
                 // Frame
                 slider.frame = CGRect(x: 45, y: (cell.bounds.height - slider.frame.height) / 2, width: view.frame.size.width - 60, height: slider.frame.height)
                 // Values
-                // Total n sessions
+                // mind
                 if indexPath.section == 0 {
                     slider.minimumValue = 0
-                    slider.maximumValue = 15
-                // mind
-                } else if indexPath.section == 1 {
-                    slider.minimumValue = 0
-                    slider.maximumValue = 21
+                    slider.maximumValue = 14
                 } else {
                     slider.minimumValue = 0
                     slider.maximumValue = 10
@@ -610,7 +611,9 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
                 slider.tag = indexPath.section
                 //
                 let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
-                let value = profileAnswers[selectedSection][indexPath.section]
+                // NOTE TOTAL N SESSIONS, THOUGH IN SAME ARRAY, IS PRESENTED IN TITLE
+                    // Therefore section + 1 to find first section value (n sessions is 0)
+                let value = profileAnswers[selectedSection][indexPath.section + 1]
                 slider.value = Float(value)
                 //
                 // Indicator Label
@@ -681,9 +684,14 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
         let roundedInt = Int(roundedValue)
         //
         // Indicator
+            // + 1 as totaln session not in table (so not row 0) but index 0 in array
         let indexPath = NSIndexPath(row: 0, section: sender.tag)
         let cell = questionsTable.cellForRow(at: indexPath as IndexPath)
         cell?.textLabel?.text = String(Int(roundedValue))
+        //
+        //
+        // Update Selected
+        profileAnswers[selectedSection][sender.tag] = Int(roundedInt)
 
         // N Sessions
             // Change thumbTintColor for groups
@@ -691,14 +699,15 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
         if selectedSection == 2 {
             // Thumb Tint
             // Red, below and above suggested
-            let index = indexPath.section * 2
+            let index = (indexPath.section + 1) * 2
             let rangeLower = profileAnswers[3][index]
             let rangeUpper = profileAnswers[3][index + 1]
-            if roundedInt >= rangeLower || roundedInt <= rangeUpper {
-                sender.thumbTintColor = colour4
-                // Green, suggested
-            } else {
+            // Value within range -> Green
+            if roundedInt >= rangeLower && roundedInt <= rangeUpper {
                 sender.thumbTintColor = colour3
+            // Value out of range -> Red
+            } else {
+                sender.thumbTintColor = colour4
             }
             //
             // Total n sessions
@@ -707,10 +716,10 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
                 nSessions += profileAnswers[2][i]
             }
             profileAnswers[2][0] = nSessions
+            //
+            let titleString = String(profileAnswers[2][0]) + NSLocalizedString("nSessionsPerWeek", comment: "")
+            sectionLabel.text = titleString
         }
-        //
-        // Update Selected Value
-        profileAnswers[selectedSection][sender.tag] = Int(roundedInt)
         UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
 
     }
@@ -723,9 +732,7 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Max possible slider value
         var maxValue = Int()
         if section == 0 {
-            maxValue = 15
-        } else if section == 1 {
-            maxValue = 21
+            maxValue = 14
         } else {
             maxValue = 10
         }
@@ -736,23 +743,41 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
         tgl.frame = frame
         //
         // Locations
-        var locationsArray = [NSNumber]()
+        var locationsArray = [Double]()
         let index = section * 2
-        let rangeLower = Double(profileAnswers[3][index] / maxValue) as NSNumber
-        let rangeUpper = Double(profileAnswers[3][index + 1] / maxValue) as NSNumber
-        locationsArray = [0, rangeLower,rangeLower, rangeUpper,rangeUpper, 6]
+        let rangeLower = Double(profileAnswers[3][index]) / Double(maxValue)
+        var rangeLower1 = Double()
+        var rangeLower2 = Double()
+        if profileAnswers[3][index] != 0 {
+            rangeLower1 = rangeLower - 0.01
+            rangeLower2 = rangeLower + 0.01
+        } else {
+            rangeLower1 = 0
+            rangeLower1 = 0.01
+        }
+        let rangeUpper = Double(profileAnswers[3][index + 1]) / Double(maxValue)
+        var rangeUpper1 = Double()
+        var rangeUpper2 = Double()
+        if profileAnswers[3][index + 1] != 0 {
+            rangeUpper1 = rangeUpper - 0.01
+            rangeUpper2 = rangeUpper + 0.01
+        } else {
+            rangeUpper1 = 0.02
+            rangeUpper2 = 0.03
+        }
+        locationsArray = [0, rangeLower1,rangeLower2, rangeUpper1,rangeUpper2, 1]
         //
         tgl.colors = [colour4.cgColor,colour4.cgColor,colour3.cgColor,colour3.cgColor,colour4.cgColor,colour4.cgColor]
-        tgl.locations = locationsArray
+        tgl.locations = locationsArray as [NSNumber]
         tgl.endPoint = CGPoint(x: 1.0, y:  1.0)
         tgl.startPoint = CGPoint(x: 0.0, y:  1.0)
         //
         // Button color
             // If within range
-        if profileAnswers[2][section] > profileAnswers[3][index] - 1 && profileAnswers[2][section] < profileAnswers[3][index + 1] + 1 {
-            slider.thumbTintColor = colour4
-        } else {
+        if profileAnswers[2][section] > profileAnswers[3][index] - 1 && profileAnswers[2][section] < profileAnswers[3][index] + 1 {
             slider.thumbTintColor = colour3
+        } else {
+            slider.thumbTintColor = colour4
         }
 
         UIGraphicsBeginImageContextWithOptions(tgl.frame.size, false, 0.0)
@@ -792,18 +817,17 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
             updateProgress()
             let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
             questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
-        // Goals Section -> NSessions section
+        // -> Goals Section
         } else if selectedQuestion == scheduleDataStructures.profileQA[selectedSection].count - 1 && selectedSection == 0 {
-            //
-            // CALL FUNCTIONS THAT SET DIFFICULTY LEVELS AND N SESSIONS
-            setDifficultyLevels()
-            setNumberOfSessions(updating: false)
+            questionsTable.removeGestureRecognizer(downSwipe)
+            sectionLabel.addGestureRecognizer(downTap)
             //
             sectionLabel.text = NSLocalizedString("goalsI", comment: "")
             selectedSection += 1
             questionsTable.isScrollEnabled = true
             //
             // Animate as if normal scroll
+                // Snapshot of before and after, animated '2 off screen and 1 on screen' to '2 on screen and 1 off screen'
             let snapShot1 = questionsTable.snapshotView(afterScreenUpdates: false)
             snapShot1?.center.y = questionsTable.center.y
             view.insertSubview(snapShot1!, aboveSubview: questionsTable)
@@ -825,12 +849,20 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.questionsTable.alpha = 1
             })
             
-        // NSession Section -> Schedule Creator
+        // -> NSession Section
         } else {
+            //
+            // MARK: CALL FUNCTIONS THAT SET DIFFICULTY LEVELS AND N SESSIONS
+            setDifficultyLevels()
+            setNumberOfSessions(updating: false)
+            //
+            let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+            //
             selectedSection += 1
             questionsTable.isScrollEnabled = true
-            sectionLabel.text = NSLocalizedString("numberSessionsI", comment: "")
             //
+            let titleString = String(profileAnswers[2][0]) + NSLocalizedString("nSessionsPerWeek", comment: "")
+            sectionLabel.text = titleString
             //
             // Animate as if normal scroll down
             let snapShot1 = questionsTable.snapshotView(afterScreenUpdates: false)
@@ -873,11 +905,28 @@ class InitialProfile: UIViewController, UITableViewDelegate, UITableViewDataSour
                     sectionLabel.text = NSLocalizedString("goals", comment: "")
                 }
             }
-        // Goals/Profile
-        } else {
-            selectedQuestion -= 1
+        // Goals -> Me
+        } else if selectedSection == 1 {
+            questionsTable.isScrollEnabled = false
+            questionsTable.addGestureRecognizer(downSwipe)
+            sectionLabel.removeGestureRecognizer(downTap)
+            selectedSection -= 1
             updateProgress()
             questionsTable.reloadData()
+            let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
+            questionsTable.reloadRows(at: [indexPath as IndexPath], with: .automatic)
+            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+            //
+            sectionLabel.text = NSLocalizedString("me", comment: "")
+            //
+//            questionsTable.reloadData()
+
+        // Sessions -> Goals
+        } else {
+            selectedSection -= 1
+            updateProgress()
+            questionsTable.reloadData()
+            sectionLabel.text = NSLocalizedString("goals", comment: "")
         }
     }
     

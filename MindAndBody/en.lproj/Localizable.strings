@@ -1613,6 +1613,7 @@
     "scheduleCreatorWarningMessage" = "\nMake sure you've completed 'Me' and 'Goals', and checked 'Nº Sessions";
 //
 "totalNumberSession" = "Total Nº Sessions";
+"nSessionsPerWeek" = " sessions per week";
 
 //
 // Questions
@@ -1655,7 +1656,7 @@
     "profileA91" = "No";
     "profileA92" = "Not very easily";
     "profileA93" = "Yes, comfortably";
-"profileQ10" = "Can you do 30 bodyweight squats?"; // Strength: Pullup
+"profileQ10" = "Can you do 50 consecutive bodyweight squats?"; // Strength: Pullup
     "profileA101" = "No";
     "profileA102" = "Not very easily";
     "profileA103" = "Yes, comfortably";
@@ -1699,21 +1700,23 @@
     "profileA193" = "Yes, with my eyes closed";
     "profileA194" = "Yes, with my eyes closed while looking up";
 // Time / Committement
-"profileQ20" = "Do you have time to work towards your physical and mental goals (time where you're able and willing to)?"; // Time
-    "profileA201" = "Not much (1 - 2 days a week where I could)";
-    "profileA202" = "A little (3 - 4 days a week where I could)";
-    "profileA203" = "Yes (5 - 7 days a week where I could)";
+"profileQ20" = "Do you have time and energy to work towards your physical and mental goals (time where you're able and willing to)?"; // Time
+    "profileA201" = "Not much (1 - 2 days a week)"; // 2 - 3???
+    "profileA202" = "A little (3 - 4 days a week)";  // 3 - 5????
+    "profileA203" = "Yes (5 - 7 days a week)";
 "profileQ21" = "Are your physical and mental goals a high priority (will you be committed)?"; // Commitment
     "profileA211" = "Not really, but I'd like to do a little";
     "profileA212" = "Yes, but I should take it easy to begin with";
-    "profileA213" = "Definitely, I plan on getting into a good routine";
+    "profileA213" = "Definitely, I will work hard towards my goals";
 
 //
 // Goals
 "mindfulnessI" = "Mindfulness";
 "calmnessI" = "Calmness";
 "contentednessI" = "Contentedness";
-"yogaII" = "Yoga";
+
+"mindII" = "Mind (mindfulness, calmness etc.)";
+"yogaII" = "Yoga (and all it's benifits)";
 "flexibilityI" = "Flexibility";
 "enduranceI" = "Endurance";
 "toningI" = "Toning";
