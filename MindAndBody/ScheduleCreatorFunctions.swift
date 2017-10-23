@@ -203,7 +203,11 @@ extension UIViewController {
         }
         // Their number of goals is 2 or more greater than the number of sessions
             // -> multiple goals must be achieved by 1 group
-        if goalCount > updatedSessionsArray[0] + 1 {
+        
+        
+        // TEST EVERYTHING GOES THROUGH WORKOUT REDUCTION
+        if goalCount > rangeArray[0][1] - 1 {
+//        if goalCount > updatedSessionsArray[0] + 1 {
             //
             // Create array of primary and secondary goals,
                 // 0 or 1
@@ -513,11 +517,58 @@ extension UIViewController {
             // Do nothing for the moment
         }
         
-        //
-        // MARK: Double check workout goals
-        // TODO: dd
-        //
-        // If woman, set strength, workout experience low, don't set strength,
+        
+        
+        
+        
+        
+        
+//        //
+//        // MARK: Double check workout goals
+//        // TODO:
+//        
+//        
+//        find n workout goals
+//        
+//        
+//        var nWorkoutGoals = 0
+//        var workoutGoals: [Int] = []
+//        for i in 4...6 {
+//            if profileAnswers[1][i] != 0 {
+//                nWorkoutGoals += 1
+//                nWorkoutGoals.append(i)
+//            }
+//        }
+//        
+//        
+//        //
+//        // Edit strength, as strength is more specific
+//        if profileAnswers[1][6] == 1 {
+//            // If srength if the only workout goal, do nothing, else do something
+//            if nWorkoutGoals != 1 {
+//                if woman don't do strength workout
+//                if profileAnswers[1][1] > 0 {
+//                    
+//                    if nWorkoutGoals == 2 {
+//                        // Add workout ratios together and set to other
+//                            // workoutGoals[0] as strength will always be [1] if 2 workout goals
+//                                // - 1 as goals has extra index at beginning compared to ratios
+//                        let totalRatio = ratios[workoutGoals[0] - 1] + ratios[6 - 1]
+//                        ratios[workoutGoals[0] - 1] = totalRatio
+//                        ratios[6 - 1] = 0
+//                    } else {
+//                        if
+//                    }
+//                }
+//            }
+//        //
+//        } else if profileAnswers[1][6] == 2 {
+//            
+//        }
+////        edit workouts for all users
+////            mainly focus on strength, this is not for everyone
+//        //
+//        // If woman, set strength, workout experience low, don't set strength,
         
         
         
@@ -556,7 +607,6 @@ extension UIViewController {
 //                updatedSessionsArray[0] = newNSessions
 //            }
         
-        let test = updatedSessionsArray
         updatedSessionsArray[0] = newNSessions
 
         

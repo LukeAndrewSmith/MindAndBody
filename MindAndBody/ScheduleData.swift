@@ -233,6 +233,7 @@ enum scheduleDataStructures {
             [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
             // Goals
             [0,0,0,0,0,0,0],
+           //0,1,2,3,4,5,6
             // Sessions
             [0,0,0,0,0,0,0],
             // Ranges (could be put in seperate array with arrays for each range but not in the mood to do so)

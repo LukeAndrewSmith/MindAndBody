@@ -1728,7 +1728,11 @@
 "mindI" = "Mind (Yoga & Meditation)";
 "totalNumberSessionI" = "Total Nº Sessions (per week)";
 
-
+//
+// Quick Question
+"scheduleView" = "I would like to:";
+"scheduleView1" = "Create a weekly routine, planning what to do each day";
+"scheduleView2" = "Simply see the whole week as a list of all my planned sessions";
 
 
 //
@@ -1865,26 +1869,6 @@
             "adductors" = "Adductors";
             "gastrocnemius" = "Gastrocnemius";
             "soleus" = "Soleus";
-
-
-            // Music
-            //
-            "blues" = "Blues";
-            "rock" = "Rock";
-            "house" = "House";
-            "funk" = "Funk";
-            "meditative" = "Meditative";
-            "jazz" = "Jazz";
-                //
-                "jazz(piano)" = "Jazz (Piano)";
-                "jazz(guitar)" = "Jazz (Guitar)";
-                "jazz(harp)" = "Jazz (Harp)";
-                "jazz(house)" = "Jazz (House)";
-            "classical" = "Classical";
-
-                // Information
-                "musicText1" = "";
-                "musicText2" = "";
 
 
     //
