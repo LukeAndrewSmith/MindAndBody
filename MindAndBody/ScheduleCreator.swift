@@ -13,8 +13,6 @@ import UIKit
 // MARK: Custom Schedule Creator Day Cell
 class DayCell: UITableViewCell {
     
-    weak var delegate: BeginDraggingFromCellDelegate?
-    
     @IBOutlet weak var dayLabel: UILabel!
     //
     @IBOutlet weak var groupLabel0: UILabel!
@@ -25,31 +23,14 @@ class DayCell: UITableViewCell {
     
     var groupLabelArray: [UILabel] = []
     
-    // Dragging
-    let longPressCell0 = UILongPressGestureRecognizer()
-    let longPressCell1 = UILongPressGestureRecognizer()
-    let longPressCell2 = UILongPressGestureRecognizer()
-    let longPressCell3 = UILongPressGestureRecognizer()
-    let longPressCell4 = UILongPressGestureRecognizer()
-    var longPressCellArray: [UILongPressGestureRecognizer] = []
-    
     override func layoutSubviews() {
         groupLabelArray = [groupLabel0, groupLabel1, groupLabel2, groupLabel3, groupLabel4]
-        longPressCellArray = [longPressCell0, longPressCell1, longPressCell2, longPressCell3, longPressCell4]
-        // note: default tag is 0 == veryy niice, i liike
-        
-        for i in 0...groupLabelArray.count - 1 {
-            longPressCellArray[i].minimumPressDuration = 0
-            longPressCellArray[i].addTarget(self, action: #selector(delegate?.beginDraggingFromCell(gestureRecognizer:)))
-            groupLabelArray[i].addGestureRecognizer(longPressCellArray[i])
-            groupLabelArray[i].isUserInteractionEnabled = true
-        }
     }
 }
 
 //
 // MARK: Schedule Creator Class
-class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSource, BeginDraggingFromCellDelegate {
+class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBOutlet weak var dayTable: UITableView!
@@ -86,6 +67,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     let longPress5 = UILongPressGestureRecognizer()
     var longPressArray: [UILongPressGestureRecognizer] = []
     
+    let longPressCell = UILongPressGestureRecognizer()
+    
     // Dragging elements
     var draggingLabel = UILabel()
     var stackViewMask = UIView()
@@ -97,7 +80,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     var previousIndexPath: IndexPath? = nil
     // Dragging label from dayTable, indicates where the group came from
     var initialIndexPath: IndexPath? = nil
-    
     
     // Array indicating the number of each group currently in the table
         // Updated in the beginning
@@ -182,6 +164,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         draggingLabel.layer.cornerRadius = 15
         draggingLabel.clipsToBounds = true
         
+        // Long press cell
+        longPressCell.minimumPressDuration = 0
+        longPressCell.addTarget(self, action: #selector(beginDraggingFromCell(gestureRecognizer:)))
+        dayTable.addGestureRecognizer(longPressCell)
+        
         // Back
         // Swipe
         let rightSwipe = UIScreenEdgePanGestureRecognizer()
@@ -227,7 +214,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
         //
         let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell", for: indexPath) as! DayCell
-        cell.delegate = self
         //
         cell.dayLabel.text = NSLocalizedString(dayArray[indexPath.row], comment: "")
         //
@@ -402,7 +388,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
         // User can drag from cell to
     
-    // Begin Dragging
+    // MARK: Begin Dragging
     func beginDraggingFromTop(gestureRecognizer: UIGestureRecognizer) {
         let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
 
@@ -423,6 +409,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             // If there are some session left to drag from group
             if dayTableGroupArray[indexOfDraggedGroup] != profileAnswers[2][indexOfDraggedGroup + 1] {
+                // Haptic feedback
+                var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .medium)
+                generator?.prepare()
+                generator?.impactOccurred()
+                generator = nil
                 
                 // Edit the draggingLabel
                 draggingLabel.text = NSLocalizedString(scheduleDataStructures.groupNames[indexOfDraggedGroup], comment: "")
@@ -539,6 +530,12 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Remove 1 from the relevant label of the group at the top of the screen
                     // If no more sessions of group, darken top label and make it green
             if indexPathForRow != nil {
+                // Haptic feedback
+                var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
+                generator?.prepare()
+                generator?.impactOccurred()
+                generator = nil
+                
                 let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
                 
                 // if there are already 5 things in one day, do nothing
@@ -588,10 +585,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     //
-    // Begin Dragging from cell
+    // MARK: Begin Dragging from cell
     func beginDraggingFromCell(gestureRecognizer: UIGestureRecognizer) {
         let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
         
         let longPress = gestureRecognizer as! UILongPressGestureRecognizer
         let state = longPress.state
@@ -602,34 +598,67 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         switch state {
         // Add dragging label
         case .began:
+            var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
             
-            // Get the index of the long press
-            indexOfDrag = longPressArray.index(of: longPress)!
-            // Get index of the group being dragged using the schedules array
-            indexOfDraggedGroup = schedules[0][indexPathForRow!.row][indexOfDrag]
-            // Set the initial index path
-            initialIndexPath = indexPathForRow
-            
-            // Edit the draggingLabel
-            draggingLabel.text = NSLocalizedString(scheduleDataStructures.groupNames[indexOfDraggedGroup], comment: "")
-            draggingLabel.frame = bigGroupLabelArray[indexOfDrag].bounds
-            draggingLabel.center = locationInView
-            
-            // Remove the label being dragged
             let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
-            cell.groupLabelArray[indexOfDrag].tag = 0
-            cell.groupLabelArray[indexOfDrag].text = ""
-            cell.groupLabelArray[indexOfDrag].tag = 0
+            let locationInView2 = longPress.location(in: cell)
 
-            // Add dragging label and mask stack views
-            dayTable.addSubview(draggingLabel)
-            maskStackViews()
+            
+            // Get the index of the long press and perform the relevant actions, if the press is not in the view, cancel the press
+            for i in 0...cell.groupLabelArray.count - 1 {
+                if cell.groupLabelArray[i].tag == 1 && cell.groupLabelArray[i].frame.contains(locationInView2) {
+                    
+                    // Haptic feedback
+                    var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .medium)
+                    generator?.prepare()
+                    generator?.impactOccurred()
+                    generator = nil
+                    indexOfDrag = i
+                    
+                    // Get index of the group being dragged using the schedules array
+                    indexOfDraggedGroup = schedules[0][indexPathForRow!.row][indexOfDrag]
+                    // Set the initial index path
+                    initialIndexPath = indexPathForRow
+                    previousIndexPath = indexPathForRow
+                    
+                    // Remove from schedules array
+                    schedules[0][(indexPathForRow?.row)!].remove(at: indexOfDrag)
+                    UserDefaults.standard.set(schedules, forKey: "schedules")
+                    // Reload cell
+                    dayTable.reloadRows(at: [indexPathForRow!], with: .none)
+                    
+                    
+                    // Edit the draggingLabel
+                    draggingLabel.text = NSLocalizedString(scheduleDataStructures.groupNames[indexOfDraggedGroup], comment: "")
+                    draggingLabel.frame = bigGroupLabelArray[indexOfDrag].bounds
+                    draggingLabel.center = locationInView
+                    
+                    // Remove the label being dragged
+                    cell.groupLabelArray[indexOfDrag].tag = 0
+                    cell.groupLabelArray[indexOfDrag].text = ""
+                    
+                    // Add dragging label and mask stack views
+                    dayTable.addSubview(draggingLabel)
+                    maskStackViews()
+                    break
+                } else {
+                    previousIndexPath = nil
+                }
+            }
+            
+            if previousIndexPath == nil {
+                longPress.isEnabled = false
+                longPress.isEnabled = true
+            }
             
             
+            //
+            
+//            }
         // Dragging lable being dragged
         case .changed:
             // Keep the draggingLabel under the finger
-            if locationInView.y < 0 {
+            if locationInView.y > 0 {
                 draggingLabel.center = locationInView
             }
             
@@ -686,8 +715,40 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         break
                     }
                 }
-                // Dragging label is dragged off table
+                // Dragging label is dragged off table, set to monday
             } else if indexPathForRow == nil {
+                // Clear old cell
+                // CLEAR INDICATOR
+                //
+                let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
+                // ADD INDICATOR
+                for i in 0...cell.groupLabelArray.count - 1 {
+                    if cell.groupLabelArray[i].backgroundColor == colour1 {
+                        break
+                    } else if cell.groupLabelArray[i].tag == 0 {
+                        cell.groupLabelArray[i].tag = 2
+                        cell.groupLabelArray[i].backgroundColor = colour1
+                        cell.groupLabelArray[i].alpha = 0.5
+                        cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
+                        cell.groupLabelArray[i].clipsToBounds = true
+                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+                        break
+                    }
+                }
+            }
+            
+            
+        // Dragging label let go
+        default:
+            // If it is equal to nil, then the long press is not in a label
+            if previousIndexPath != nil {
+                // Haptic feedback
+                var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
+                generator?.prepare()
+                generator?.impactOccurred()
+                generator = nil
+            
+            
                 // Clear old cell
                 // CLEAR INDICATOR
                 if previousIndexPath != nil {
@@ -702,75 +763,55 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                     }
                 }
-            }
             
+                //
+                // If Dragging label is over a day (if it isn't then above table, set to previousindexpath (monday))
+                // Set goal to day
+                // Remove 1 from the relevant label of the group at the top of the screen
+                // If no more sessions of group, darken top label and make it green
+                var cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
+                if indexPathForRow != nil {
+                    cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
+                }
             
-        // Dragging label let go
-        default:
-            // Clear old cell
-            // CLEAR INDICATOR
-            if previousIndexPath != nil {
-                let previousCell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
-                for i in 0...previousCell.groupLabelArray.count - 1 {
-                    if previousCell.groupLabelArray[i].tag == 2 {
-                        previousCell.groupLabelArray[i].tag = 0
-                        previousCell.groupLabelArray[i].backgroundColor = .clear
-                        previousCell.groupLabelArray[i].alpha = 0
-                        previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                        break
+                    // if there are already 5 things in one day, do nothing
+                    var dayIsFull = false
+                    // Put the goal in the day
+                    // ADD INDICATOR
+                    for i in 0...cell.groupLabelArray.count - 1 {
+                        if cell.groupLabelArray[i].tag == 0 {
+                            cell.groupLabelArray[i].tag = 1
+                            cell.groupLabelArray[i].alpha = 1
+                            cell.groupLabelArray[i].layer.borderWidth = 1
+                            cell.groupLabelArray[i].layer.borderColor = colour1.withAlphaComponent(0.75).cgColor
+                            cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
+                            cell.groupLabelArray[i].clipsToBounds = true
+                            //
+                            cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[indexOfDraggedGroup], comment: "")
+                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                            break
+                        } else if i == cell.groupLabelArray.count - 1 {
+                            // Too much in one day, cant add any more
+                            dayIsFull = true
+                        }
                     }
-                }
-            }
             
-            //
-            // If Dragging label is over a day
-            // Set goal to day
-            // Remove 1 from the relevant label of the group at the top of the screen
-            // If no more sessions of group, darken top label and make it green
-            if indexPathForRow != nil {
-                let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
-                
-                // if there are already 5 things in one day, do nothing
-                var dayIsFull = false
-                // Put the goal in the day
-                // ADD INDICATOR
-                for i in 0...cell.groupLabelArray.count - 1 {
-                    if cell.groupLabelArray[i].tag == 0 {
-                        cell.groupLabelArray[i].tag = 1
-                        cell.groupLabelArray[i].alpha = 1
-                        cell.groupLabelArray[i].layer.borderWidth = 1
-                        cell.groupLabelArray[i].layer.borderColor = colour1.withAlphaComponent(0.75).cgColor
-                        cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
-                        cell.groupLabelArray[i].clipsToBounds = true
-                        //
-                        cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[indexOfDraggedGroup], comment: "")
-                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                        break
-                    } else if i == cell.groupLabelArray.count - 1 {
-                        // Too much in one day, cant add any more
-                        dayIsFull = true
+                    if dayIsFull == false {
+                        // Update the array
+                        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
+                        // update schedules
+                        if indexPathForRow != nil {
+                            schedules[0][(indexPathForRow?.row)!].append(indexOfDraggedGroup)
+                        } else {
+                            schedules[0][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
+                        }
+                        UserDefaults.standard.set(schedules, forKey: "schedules")
+                        // update label
+    //                    setGroupLabels()
                     }
-                }
-                
-                if dayIsFull == false {
-                    // Update the array
-                    var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
-                    // update dayTableGroupArray
-                    dayTableGroupArray[indexOfDraggedGroup] += 1
-                    // update schedules
-                    schedules[0][(indexPathForRow?.row)!].append(indexOfDraggedGroup)
-                    UserDefaults.standard.set(schedules, forKey: "schedules")
-                    // update label
-                    setGroupLabels()
-                }
-                
-                draggingLabel.removeFromSuperview()
-                deMaskStackViews()
-                
-                // Dragging label is not over a day
-            } else {
-                draggingLabel.removeFromSuperview()
-                deMaskStackViews()
+            
+                    draggingLabel.removeFromSuperview()
+                    deMaskStackViews()
             }
         }
     }
@@ -813,9 +854,3 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
 }
-
-
-@objc protocol BeginDraggingFromCellDelegate: class {
-    func beginDraggingFromCell(gestureRecognizer: UIGestureRecognizer)
-}
-
