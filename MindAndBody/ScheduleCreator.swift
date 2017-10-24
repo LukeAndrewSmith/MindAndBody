@@ -40,8 +40,7 @@ class DayCell: UITableViewCell {
         
         for i in 0...groupLabelArray.count - 1 {
             longPressCellArray[i].minimumPressDuration = 0
-            longPressCellArray[i].addTarget(ScheduleCreator.self, action: #selector(delegate?.beginDraggingFromCell(gestureRecognizer:)))
-            longPressCellArray[i].addTarget(<#T##target: Any##Any#>, action: Selector)
+            longPressCellArray[i].addTarget(self, action: #selector(delegate?.beginDraggingFromCell(gestureRecognizer:)))
             groupLabelArray[i].addGestureRecognizer(longPressCellArray[i])
             groupLabelArray[i].isUserInteractionEnabled = true
         }
@@ -228,6 +227,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
         //
         let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell", for: indexPath) as! DayCell
+        cell.delegate = self
+        //
         cell.dayLabel.text = NSLocalizedString(dayArray[indexPath.row], comment: "")
         //
         // If friday, hide separayor
