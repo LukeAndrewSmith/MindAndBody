@@ -128,11 +128,19 @@ extension UIViewController {
         }
         // --------------------------------------------------------------------------------------------
             // divide total n goals by total of goal answers. Ratio is then determined by specific goal answer (e.g toning) divided by the total goal answers -> (2/7)
-        ratios[0] = Double(mindNumber) / Double(totalNGoals)
+        if mindNumber == 0 {
+            ratios[0] = 0
+        } else {
+            ratios[0] = Double(mindNumber) / Double(totalNGoals)
+        }
             // 4 as 0-3 are mind goals used above
         for i in 2...profileAnswers[1].count - 1 {
                 // i - 1 for ratios as e.g flexibility == profileAnswer[1][2] && ratios[1] -> -1
-            ratios[i - 1] = Double(profileAnswers[1][i]) / Double(totalNGoals)
+            if profileAnswers[1][i] == 0 {
+               ratios[i - 1] = 0
+            } else {
+                ratios[i - 1] = Double(profileAnswers[1][i]) / Double(totalNGoals)
+            }
         }
         
         // --------------------------------------------------------------------------------------------
@@ -581,7 +589,9 @@ extension UIViewController {
             // Round normally, exept up from less than 0.5, to ensure that all goals have at least 1 session, no matter the ratio
                 // + 1 as updatedsessionsArray includes total n sessions
             let nSessions = ratios[i] * Double(updatedSessionsArray[0])
-            if ratios[i] != 0 && nSessions < 0.5 {
+            if ratios[i] == 0 {
+                updatedSessionsArray[i + 1] = 0
+            } else if ratios[i] != 0 && nSessions < 0.5 {
                 updatedSessionsArray[i + 1] = 1
             } else {
                 updatedSessionsArray[i + 1] = Int(round(nSessions))

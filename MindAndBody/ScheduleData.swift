@@ -216,6 +216,32 @@ enum scheduleDataStructures {
         ]
     ]
     
+    static let groupNames =
+    [
+        "mind",
+        "flexibility",
+        "endurance",
+        "toning",
+        "muscleGain",
+        "strength",
+    ]
+    
+    static let shortenedGroupNames =
+    [
+        // Mind
+        "mindS",
+        // Flexibility
+        "flexibilityS",
+        // Endurance
+        "enduranceS",
+        // Toning
+        "toningS",
+        // Muscle Gain
+        "muscleGainS",
+        // Strength
+        "strengthS",
+    ]
+    
     //
     static let answerImageArray = ["", "", "", "", "", "", "", "pushUp", "pullUp", "bodyweightSquat", "", "standingHamstring", "butterfly", "deepSquat", "hero", "upwardDog", "legDrop", "neckRotatorStretch", "tree", "", "", "", "", "", ""]
 

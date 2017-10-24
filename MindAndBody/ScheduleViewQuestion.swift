@@ -67,6 +67,14 @@ class ScheduleViewQuestion: UIViewController {
         weekViewButton.setTitle(NSLocalizedString("scheduleView2", comment: ""), for: .normal)
         weekViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         weekViewButton.setTitleColor(colour1, for: .normal)
+        
+        //
+        // Back
+        // Swipe
+        let rightSwipe = UIScreenEdgePanGestureRecognizer()
+        rightSwipe.edges = .left
+        rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
+        view.addGestureRecognizer(rightSwipe)
     }
     
     //
@@ -88,6 +96,13 @@ class ScheduleViewQuestion: UIViewController {
     // Back Button
     @IBAction func backButtonAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    //
+    // MARK: Back Swipe
+    @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
+        if sender.state == .began {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
 }
