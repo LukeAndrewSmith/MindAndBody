@@ -624,18 +624,39 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     // Remove from schedules array
                     schedules[0][(indexPathForRow?.row)!].remove(at: indexOfDrag)
                     UserDefaults.standard.set(schedules, forKey: "schedules")
-                    // Reload cell
-                    dayTable.reloadRows(at: [indexPathForRow!], with: .none)
+                    // Remove the label being dragged
+                    cell.groupLabelArray[indexOfDrag].tag = 0
+                    cell.groupLabelArray[indexOfDrag].alpha = 0
+
+                    //reload cell
+                    if schedules[0][(indexPathForRow?.row)!].count != 0 {
+                        cell.layoutSubviews()
+                        // Remove all groups
+                        for i in 0...schedules[0][(indexPathForRow?.row)!].count {
+                            cell.groupLabelArray[i].tag = 0
+                            cell.groupLabelArray[i].alpha = 0
+                        }
+                        
+                        // Add all relevant groups
+                        for i in 0...schedules[0][(indexPathForRow?.row)!].count - 1 {
+                            cell.groupLabelArray[i].tag = 1
+                            cell.groupLabelArray[i].alpha = 1
+                            cell.groupLabelArray[i].layer.borderWidth = 1
+                            cell.groupLabelArray[i].layer.borderColor = colour1.withAlphaComponent(0.75).cgColor
+                            cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
+                            cell.groupLabelArray[i].clipsToBounds = true
+                            //
+                            cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[schedules[0][(indexPathForRow?.row)!][i]], comment: "")
+                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                        }
+                    }
+                    
                     
                     
                     // Edit the draggingLabel
                     draggingLabel.text = NSLocalizedString(scheduleDataStructures.groupNames[indexOfDraggedGroup], comment: "")
                     draggingLabel.frame = bigGroupLabelArray[indexOfDrag].bounds
                     draggingLabel.center = locationInView
-                    
-                    // Remove the label being dragged
-                    cell.groupLabelArray[indexOfDrag].tag = 0
-                    cell.groupLabelArray[indexOfDrag].text = ""
                     
                     // Add dragging label and mask stack views
                     dayTable.addSubview(draggingLabel)
