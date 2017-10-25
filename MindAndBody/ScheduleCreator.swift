@@ -682,43 +682,46 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             if locationInView.y > 0 {
                 draggingLabel.center = locationInView
             }
-            
             // If dragging label is over the dayTable, highlight the relevant label of the relevant day
             // Row being highlighted
             if indexPathForRow != nil && indexPathForRow == previousIndexPath {
-                //
-                let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
-                // ADD INDICATOR
-                for i in 0...cell.groupLabelArray.count - 1 {
-                    if cell.groupLabelArray[i].tag == 2 {
-                        break
-                    } else if cell.groupLabelArray[i].tag == 0 {
-                        cell.groupLabelArray[i].tag = 2
-                        cell.groupLabelArray[i].backgroundColor = colour1
-                        cell.groupLabelArray[i].alpha = 0.5
-                        cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
-                        cell.groupLabelArray[i].clipsToBounds = true
-                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
-                        break
-                    }
-                }
-                // Row is changing, changing highlight
-            } else if indexPathForRow != nil && indexPathForRow != previousIndexPath {
-                // Clear old cell
-                // CLEAR INDICATOR
-                if previousIndexPath != nil {
-                    let previousCell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
-                    for i in 0...previousCell.groupLabelArray.count - 1 {
-                        if previousCell.groupLabelArray[i].tag == 2 {
-                            previousCell.groupLabelArray[i].tag = 0
-                            previousCell.groupLabelArray[i].backgroundColor = .clear
-                            previousCell.groupLabelArray[i].alpha = 0
-                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                    //
+                    let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
+                    // ADD INDICATOR
+                    for i in 0...cell.groupLabelArray.count - 1 {
+                        if cell.groupLabelArray[i].tag == 2 {
+                            break
+                        } else if cell.groupLabelArray[i].tag == 0 {
+                            cell.groupLabelArray[i].tag = 2
+                            cell.groupLabelArray[i].backgroundColor = colour1
+                            cell.groupLabelArray[i].alpha = 0.5
+                            cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
+                            cell.groupLabelArray[i].clipsToBounds = true
+                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
                             break
                         }
                     }
-                }
-                previousIndexPath = indexPathForRow!
+                    // Row is changing, changing highlight
+                } else if indexPathForRow != nil && indexPathForRow != previousIndexPath {
+                
+                let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
+                if schedules[0][(indexPathForRow?.row)!].count != 5 {
+                    // Clear old cell
+                    // CLEAR INDICATOR
+                    if previousIndexPath != nil {
+                        let previousCell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
+                        for i in 0...previousCell.groupLabelArray.count - 1 {
+                            if previousCell.groupLabelArray[i].tag == 2 {
+                                previousCell.groupLabelArray[i].tag = 0
+                                previousCell.groupLabelArray[i].backgroundColor = .clear
+                                previousCell.groupLabelArray[i].alpha = 0
+                                previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                                break
+                            }
+                        }
+                    }
+                    
+                    previousIndexPath = indexPathForRow!
                 
                 //
                 let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
@@ -736,7 +739,10 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         break
                     }
                 }
-                // Dragging label is dragged off table, set to monday
+                
+            }
+                
+            // Dragging label is dragged off table, set to monday
             } else if indexPathForRow == nil {
                 // Clear old cell
                 // CLEAR INDICATOR
@@ -821,15 +827,43 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         // Update the array
                         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
                         // update schedules
+                            // Do a check, if the user is dragging off the top of the teable (indexpathforrow == nil, set to previous indexpath(always monday))
                         if indexPathForRow != nil {
                             schedules[0][(indexPathForRow?.row)!].append(indexOfDraggedGroup)
                         } else {
                             schedules[0][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
                         }
                         UserDefaults.standard.set(schedules, forKey: "schedules")
-                        // update label
-    //                    setGroupLabels()
-                    }
+                    } else {
+                        let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
+
+                        // Put the goal in the day
+                        // ADD INDICATOR
+                        for i in 0...cell.groupLabelArray.count - 1 {
+                            if cell.groupLabelArray[i].tag == 0 {
+                                cell.groupLabelArray[i].tag = 1
+                                cell.groupLabelArray[i].alpha = 1
+                                cell.groupLabelArray[i].layer.borderWidth = 1
+                                cell.groupLabelArray[i].layer.borderColor = colour1.withAlphaComponent(0.75).cgColor
+                                cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
+                                cell.groupLabelArray[i].clipsToBounds = true
+                                //
+                                cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[indexOfDraggedGroup], comment: "")
+                                cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                                break
+                            } else if i == cell.groupLabelArray.count - 1 {
+                                // Too much in one day, cant add any more
+                                dayIsFull = true
+                            }
+                        }
+                        
+                        
+                        // Update the array
+                        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
+                        // update schedules
+                        schedules[0][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
+                        UserDefaults.standard.set(schedules, forKey: "schedules")
+                }
             
                     draggingLabel.removeFromSuperview()
                     deMaskStackViews()
