@@ -15,11 +15,13 @@ extension ScheduleScreen {
     //
     // MARK: didSelectRowHandler
     func didSelectRowHandler(row: Int) {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
+
         updateSelectedChoice(row: row)
         // ------------------------------------------------------------------------------------------------
         // Next Choice Function
-        if choiceProgress[0] == -1 && row != daySessionsArray[selectedDay].count {
-            choiceProgress[0] = daySessionsArray[selectedDay][row]
+        if choiceProgress[0] == -1 && row != schedules[0][selectedDay].count {
+            choiceProgress[0] = schedules[0][selectedDay][row]
             choiceProgress[1] += 1
             maskView()
             // Next Table info
@@ -261,13 +263,14 @@ extension ScheduleScreen {
     // MARK: Update selected choice
     // Look at both sortedGroups & sortedSessions in dataStructures to understand the following
     func updateSelectedChoice(row: Int) {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
         // ------------------------------------------------------------------------------------------------
-        if choiceProgress[0] == -1 && row != daySessionsArray[selectedDay].count {
+        if choiceProgress[0] == -1 && row != schedules[0][selectedDay].count {
             // Notes selectedChoiceStretching not always used
             // selectedChoice...[0] to group
-            selectedChoiceWarmup[0] = daySessionsArray[selectedDay][row]
-            selectedChoiceSession[0] = daySessionsArray[selectedDay][row]
-            selectedChoiceStretching[0] = daySessionsArray[selectedDay][row]
+            selectedChoiceWarmup[0] = schedules[0][selectedDay][row]
+            selectedChoiceSession[0] = schedules[0][selectedDay][row]
+            selectedChoiceStretching[0] = schedules[0][selectedDay][row]
         //
         } else {
             // Present next choice or present session
@@ -627,29 +630,40 @@ extension ScheduleScreen {
     //
     // MARK: isCompleted()
     func isCompleted(row: Int) -> Bool {
-        if choiceProgress[0] == -1 {
-            let group = daySessionsArray[selectedDay][row]
-            if scheduleTrackingArray[selectedDay][group]![0][0] == false {
-                return false
-            } else {
-                return true
-            }
-        } else {
-            return false
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
+
+        // Day
+        if scheduleStyle == 0 {
+//            if choiceProgress[0] == -1 {
+//                let group = schedules[0][selectedDay][row]
+//                if scheduleTrackingArray[selectedDay][group]![0][0] == false {
+//                    return false
+//                } else {
+//                    return true
+//                }
+//            } else {
+//                return false
+//            }
+        // Week
+        } else if scheduleStyle == 1 {
+            
         }
+        return false
     }
     
     //
     // MARK: Choice Functions
     func nextChoice() {
         //
-        
-        
-        //
         // Mask View
         maskView()
         // Next Table info
         slideLeft()
+        //
+        if isLastChoice() == true {
+            // TODO: GREEN IF ALREADY COMPLETED
+            maskView3.backgroundColor = colour4
+        }
     }
     
     
@@ -860,6 +874,8 @@ extension ScheduleScreen {
     //
     // MARK:
     @IBAction func markAsCompleted(_ sender: UILongPressGestureRecognizer) {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
+
         if sender.state == UIGestureRecognizerState.began {
         // Get Cell
         let cell = sender.view
@@ -867,7 +883,7 @@ extension ScheduleScreen {
         // Day Table,
         // [0][0] to get bool
         if choiceProgress[0] == -1 {
-            let group = daySessionsArray[selectedDay][row!]
+            let group = schedules[0][selectedDay][row!]
             if scheduleTrackingArray[selectedDay][group]![0][0] == false {
                 scheduleTrackingArray[selectedDay][group]![0][0] = true
             } else {

@@ -23,6 +23,7 @@ extension ScheduleScreen {
             UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                 self.maskView1.alpha = 0.72
                 self.maskView2.alpha = 0.72
+                self.maskView3.alpha = 0.72
             })
         }
     }
@@ -46,6 +47,7 @@ extension ScheduleScreen {
                 choiceProgress[1] -= 1
             }
             slideRight()
+            maskView3.backgroundColor = .black
         // Return to choice 0 (groups)
         } else if choiceProgress[1] == 1 {
             choiceProgress[0] = -1
@@ -60,7 +62,7 @@ extension ScheduleScreen {
     // Open Schedule, check if mask views necessary
     func checkMaskView() {
         if tableCounter[0] != -1 {
-            createMaskView(alpha: 0.5)
+            createMaskView(alpha: 0.72)
         }
     }
     // Mask Views -----------------------------------
@@ -75,16 +77,35 @@ extension ScheduleScreen {
         maskView1.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
         maskView2.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
         //
-        maskView1.frame = CGRect(x: 0, y: 0, width: screenFrame.width, height: (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4)
-        maskView2.frame = CGRect(x: 0, y: scheduleTable.frame.maxY, width: screenFrame.width, height: 24.5)
+        maskView1.frame = CGRect(x: 0, y: 0, width: screenFrame.width, height: (screenFrame.height - TopBarHeights.combinedHeight - pageStack.bounds.height) / 4)
+        maskView2.frame = CGRect(x: 0, y: scheduleTable.frame.maxY, width: screenFrame.width, height: pageStack.bounds.height)
         //
         maskView1.backgroundColor = .black
         maskView1.alpha = alpha
         maskView2.backgroundColor = .black
         maskView2.alpha = alpha
         //
+        maskView3.isUserInteractionEnabled = false
+        maskView3.backgroundColor = .black
+        maskView3.alpha = alpha
+        maskView3.frame = CGRect(x: 0, y: maskView1.frame.maxY, width: view.frame.size.width, height: maskView2.frame.minY - maskView1.frame.maxY)
+        // Clear Section
+        let path = CGMutablePath()
+//        path.addRect(CGRect(x: 1, y: 1, width: view.frame.size.width - 2, height: maskView3.bounds.height - 2))
+        path.addRoundedRect(in: CGRect(x: 2, y: 1, width: view.frame.size.width - 4, height: maskView3.bounds.height - 2), cornerWidth: 15, cornerHeight: 15)
+        path.addRect(screenFrame)
+        //
+        let maskLayer = CAShapeLayer()
+        maskLayer.backgroundColor = UIColor.black.cgColor
+        maskLayer.path = path
+        maskLayer.fillRule = kCAFillRuleEvenOdd
+        //
+        maskView3.layer.mask = maskLayer
+        maskView3.clipsToBounds = true
+        //
         view.addSubview(maskView1)
         view.addSubview(maskView2)
+        view.addSubview(maskView3)
         //
         maskViewBackButton.image = #imageLiteral(resourceName: "Back Arrow")
         maskViewBackButton.tintColor = colour1
@@ -98,9 +119,11 @@ extension ScheduleScreen {
         UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
             self.maskView1.alpha = 0
             self.maskView2.alpha = 0
+            self.maskView3.alpha = 0
         }, completion: { finished in
             self.maskView1.removeFromSuperview()
             self.maskView2.removeFromSuperview()
+            self.maskView3.removeFromSuperview()
         })
     }
     // Table View ------------------------------------
@@ -218,10 +241,12 @@ extension ScheduleScreen {
     //
     // Mask cells under clear header (unrelated to above functions)
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        for cell in scheduleTable.visibleCells {
-            let hiddenFrameHeight = scrollView.contentOffset.y - cell.frame.origin.y + (view.bounds.height - 24.5) / 4
-            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
+        if scrollView == scheduleTable {
+            for cell in scheduleTable.visibleCells {
+                let hiddenFrameHeight = scrollView.contentOffset.y - cell.frame.origin.y + (view.bounds.height - 24.5) / 4
+                if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
+                    maskCell(cell: cell, margin: Float(hiddenFrameHeight))
+                }
             }
         }
     }

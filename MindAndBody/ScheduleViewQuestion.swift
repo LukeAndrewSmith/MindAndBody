@@ -87,8 +87,12 @@ class ScheduleViewQuestion: UIViewController {
     
     // Week
     @IBAction func weekButtonAction(_ sender: Any) {
-        
+        // Set user settings for schedule style to week
+        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        settings[7][0] = 1
+        UserDefaults.standard.set(settings, forKey: "userSettings")
         //
+        shouldReloadSchedule = true
         self.dismiss(animated: true)
     }
     

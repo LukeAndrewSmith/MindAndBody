@@ -111,6 +111,12 @@
 // MARK: Schedule // ------------------------------------------------
 "schedule" = "Schedule";
 
+"weekOfThe" = "Week of the ";
+
+"chooseCreateSchedule" = "Choose/Create Schedule";
+"editSchedule" = "Edit Schedule";
+"editProfile" = "Edit Profile";
+
 "monday" = "Monday";
 "tuesday" = "Tuesday";
 "wednesday" = "Wednesday";

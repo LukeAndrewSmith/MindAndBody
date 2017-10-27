@@ -15,16 +15,15 @@ import UIKit
 //
 class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    
     //
     // Variablesclass
     //
     // Schedule Animation Helpers
     let mask = CAGradientLayer()
-    let maskView1 = UIButton()
-    let maskView2 = UIButton()
+    let maskView1 = UIButton() // top
+    let maskView2 = UIButton() // bottom
+    let maskView3 = UIView() // Middle (rounded corners
     let maskViewBackButton = UIImageView()
-    
     
     //
     // Schedule
@@ -43,6 +42,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var navigationBar: UINavigationItem!
     // TableView
     @IBOutlet weak var scheduleTable: UITableView!
+    @IBOutlet weak var scheduleTableBottom: NSLayoutConstraint!
     @IBOutlet weak var pageStack: UIStackView!
     // Background Image
     @IBOutlet weak var backgroundImage: UIImageView!
@@ -51,23 +51,23 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - Tests
     // Content Arrays Test
-    var daySessionsArray: [[Int]] =
-    [
-        // Monday
-        [0,1,2,3,4,5],
-        // Tuesday
-        [0,1,2],
-        // Wednesday
-        [2],
-        // Thursday
-        [5],
-        // Firday
-        [0,4],
-        // Saturday
-        [2],
-        // Sunday
-        [5]
-    ]
+//    var schedules[0]: [[Int]] =
+//    [
+//        // Monday
+//        [0,1,2,3,4,5],
+//        // Tuesday
+//        [0,1,2],
+//        // Wednesday
+//        [],
+//        // Thursday
+//        [5],
+//        // Firday
+//        [0,4],
+//        // Saturday
+//        [2],
+//        // Sunday
+//        [5]
+//    ]
     
     //
     // MARK: Schedule Tracking, tracking what youve done each week, putting a tick next to what you've done in schedule if true
@@ -365,8 +365,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // StackView
     var stackArray: [UILabel] = []
     
-    // Time Scale Action Sheet
+    // Schedule creation and choices ACTION SHEET
+    let actionSheet = UIView()
     let scheduleChoiceTable = UITableView()
+    let editScheduleButton = UIButton()
+    let editProfileButton = UIButton()
     let backgroundViewExpanded = UIButton()
     //
     var selectedSchedule = 0
@@ -375,20 +378,23 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // Very silly variable used in choices of endurance, steady state, as 'time choice' after 'warmup/stretching' choice, variable tell which one was selected
     var steadyStateChoice = Int()
     
+    // IMPORTANT VARIABLE
+    // Variable saying which presentation style is wanted by the user, either
+        // 0 - presenting each day on the day
+        // 0 - presenting the whole week each week
+    var scheduleStyle = 0
+    
     //
     // View Will Appear ---------------------------------------------------------------------------------
     //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //
-        // Select Today
-        // Get current day as index, currentWeekDay - 1 as week starts at 0 in array
-        if choiceProgress[0] == -1 {
-            selectedDay = Date().currentWeekDayFromMonday - 1
-            stackArray[selectedDay].alpha = 1
-        } else {
-            stackArray[selectedDay].alpha = 1
-            maskView()
+        
+        if shouldReloadSchedule == true {
+            shouldReloadSchedule = false
+            let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            scheduleStyle = settings[7][0]
+            scheduleTable.reloadData()
         }
     }
     
@@ -405,6 +411,23 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
 //
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Check wether to present the schedule as :
+        // Days
+        // The whole week
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        scheduleStyle = settings[7][0]
+        //
+        // Present as days or as week
+        // days
+        if scheduleStyle == 0 {
+            scheduleTableBottom.constant = 24.5
+            pageStack.isUserInteractionEnabled = true
+        // week
+        } else if scheduleStyle == 1 {
+            scheduleTableBottom.constant = 0
+            pageStack.isUserInteractionEnabled = false
+        }
+        
         //
         // Initial info screen
         // if initialInfoHasBeenPresented == false {
@@ -436,7 +459,14 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughC")
         }
         
-        //
+        
+        // ACTION SHEET
+        actionSheet.backgroundColor = UIColor.black.withAlphaComponent(0.75)
+        actionSheet.layer.cornerRadius = 15
+        actionSheet.clipsToBounds = true
+        let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
+                                                                                // table    // buttons // spaces
+        actionSheet.frame.size = CGSize(width: view.bounds.width - 20, height: height)
         // Schedule choice
         scheduleChoiceTable.backgroundColor = colour2
         scheduleChoiceTable.delegate = self
@@ -448,6 +478,33 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         scheduleChoiceTable.clipsToBounds = true
         scheduleChoiceTable.layer.borderWidth = 1
         scheduleChoiceTable.layer.borderColor = colour1.cgColor
+        // Edit schedule
+        editScheduleButton.addTarget(self, action: #selector(editScheduleAction), for: .touchUpInside)
+        editScheduleButton.setTitle(NSLocalizedString("editSchedule", comment: ""), for: .normal)
+        editScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        editScheduleButton.frame = CGRect(x: 0, y: (147 + 49) + 20, width: view.bounds.width - 20, height: 49)
+        editScheduleButton.layer.cornerRadius = 49 / 2
+        editScheduleButton.clipsToBounds = true
+        editScheduleButton.setTitleColor(colour2, for: .normal)
+        editScheduleButton.backgroundColor = colour1
+        editScheduleButton.setImage(#imageLiteral(resourceName: "Calendar"), for: .normal)
+        editScheduleButton.tintColor = colour2
+        // Edit profile
+        editProfileButton.addTarget(self, action: #selector(editProfileAction), for: .touchUpInside)
+        editProfileButton.setTitle(NSLocalizedString("editProfile", comment: ""), for: .normal)
+        editProfileButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        editProfileButton.frame = CGRect(x: 0, y: (147 + 49) + 20 + 49 + 20, width: view.bounds.width - 20, height: 49)
+        editProfileButton.layer.cornerRadius = 49 / 2
+        editProfileButton.clipsToBounds = true
+        editProfileButton.setTitleColor(colour2, for: .normal)
+        editProfileButton.backgroundColor = colour1
+        editProfileButton.setImage(#imageLiteral(resourceName: "Profile"), for: .normal)
+        editProfileButton.tintColor = colour2
+        //
+        actionSheet.addSubview(scheduleChoiceTable)
+        actionSheet.addSubview(editScheduleButton)
+        actionSheet.addSubview(editProfileButton)
+        //
         // Background View
         backgroundViewExpanded.backgroundColor = .black    
         backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
@@ -459,7 +516,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         backgroundImage.frame = view.bounds
         
         // Background Index
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         let backgroundIndex = settings[0][0]
         //
         // Background Image/Colour
@@ -516,44 +572,63 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //
         // Custom 'Page Control' m,t,w,t,f,s,s for bottom
-        for i in 0...(dayArray.count - 1) {
-            let dayLabel = UILabel()
-            dayLabel.textColor = colour1
-            dayLabel.textAlignment = .center
-            dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 15)
-            dayLabel.text = NSLocalizedString(dayArrayChar[i], comment: "")
-            dayLabel.sizeToFit()
-            dayLabel.alpha = 0.5
-            dayLabel.tag = i
+            // If week is being presented as days, style 1
+        if scheduleStyle == 0 {
+            for i in 0...(dayArray.count - 1) {
+                let dayLabel = UILabel()
+                dayLabel.textColor = colour1
+                dayLabel.textAlignment = .center
+                dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 15)
+                dayLabel.text = NSLocalizedString(dayArrayChar[i], comment: "")
+                dayLabel.sizeToFit()
+                dayLabel.alpha = 0.5
+                dayLabel.tag = i
+                //
+                let dayTap = UITapGestureRecognizer()
+                dayTap.numberOfTapsRequired = 1
+                dayTap.addTarget(self, action: #selector(dayTapHandler))
+                dayLabel.isUserInteractionEnabled = true
+                dayLabel.addGestureRecognizer(dayTap)
+                stackArray.append(dayLabel)
+            }
+            for i in 0...stackArray.count - 1 {
+                pageStack.addArrangedSubview(stackArray[i])
+            }
+            pageStack.isUserInteractionEnabled = true
             //
-            let dayTap = UITapGestureRecognizer()
-            dayTap.numberOfTapsRequired = 1
-            dayTap.addTarget(self, action: #selector(dayTapHandler))
-            dayLabel.isUserInteractionEnabled = true
-            dayLabel.addGestureRecognizer(dayTap)
-            stackArray.append(dayLabel)
+            
+            //
+            // Day Swipes
+            let daySwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+            daySwipeLeft.direction = UISwipeGestureRecognizerDirection.left
+            view.addGestureRecognizer(daySwipeLeft)
+            //
+            let daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+            daySwipeRight.direction = UISwipeGestureRecognizerDirection.right
+            view.addGestureRecognizer(daySwipeRight)
         }
-        for i in 0...stackArray.count - 1 {
-            pageStack.addArrangedSubview(stackArray[i])
-        }
-        pageStack.isUserInteractionEnabled = true
-        //
-        
-        //
-        // Day Swipes
-        let daySwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        daySwipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        view.addGestureRecognizer(daySwipeLeft)
-        //
-        let daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        daySwipeRight.direction = UISwipeGestureRecognizerDirection.right
-        view.addGestureRecognizer(daySwipeRight)
         
         // Swipe
         let rightSwipe = UIScreenEdgePanGestureRecognizer()
         rightSwipe.edges = .left
         rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
         view.addGestureRecognizer(rightSwipe)
+        
+        //
+        // Select Today
+        // Get current day as index, currentWeekDay - 1 as week starts at 0 in array
+        if scheduleStyle == 0 {
+            if choiceProgress[0] == -1 {
+                selectedDay = Date().currentWeekDayFromMonday - 1
+                stackArray[selectedDay].alpha = 1
+            } else {
+                stackArray[selectedDay].alpha = 1
+                maskView()
+            }
+        } else {
+            // 7 is the full week array
+            selectedDay = 7
+        }
     }
     
     //
@@ -570,9 +645,26 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         switch tableView {
         case scheduleTable:
-            return NSLocalizedString(dayArray[selectedDay], comment: "")
+            // day
+            if scheduleStyle == 0 {
+                return NSLocalizedString(dayArray[selectedDay], comment: "")
+            // week
+            } else {
+                let weekOfThe = NSLocalizedString("weekOfThe", comment: "")
+                // Date formatters
+                let df = DateFormatter()
+                df.dateFormat = "dd"
+                let firstMonday = df.string(from: Date().firstMondayInCurrentWeek)
+                let firstMondayInt = Int(firstMonday)
+                //
+                let numberFormatter = NumberFormatter()
+                numberFormatter.numberStyle = .ordinal
+                let firstMondayWithOrdinal = numberFormatter.string(from: firstMondayInt! as NSNumber)
+                //
+                return weekOfThe + firstMondayWithOrdinal!
+            }
         case scheduleChoiceTable:
-            return ""
+            return NSLocalizedString("chooseCreateSchedule", comment: "")
         default:
             return ""
         }
@@ -601,7 +693,16 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             seperator.opacity = 0.5
             header.layer.addSublayer(seperator)
         case scheduleChoiceTable:
-            break
+            // Header
+            let header = view as! UITableViewHeaderFooterView
+            header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
+            header.textLabel?.textAlignment = .center
+            header.textLabel?.textColor = colour2
+            //
+            let background = UIView()
+            background.frame = header.bounds
+            background.backgroundColor = colour1
+            header.backgroundView = background
         default: break
         }
     }
@@ -615,9 +716,15 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         switch tableView {
         case scheduleTable:
-            return (view.bounds.height - 24.5) / 4
+            // day
+//            if scheduleStyle == 0 {
+                return (view.bounds.height - 24.5) / 4
+            // week
+//            } else if scheduleStyle == 1 {
+//                return view.bounds.height / 4
+//            }
         case scheduleChoiceTable:
-            return 0
+            return 47
         default:
             return 0
         }
@@ -626,20 +733,21 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // Rows
     // Number of rows per section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
         //
         switch tableView {
         case scheduleTable:
             // First Screen, showing groups
             if choiceProgress[0] == -1 {
-                return daySessionsArray[selectedDay].count
-                    // + 1 incase edit button to reorder is wanted
-                    //+ 1
+                return schedules[0][selectedDay].count
+                // TODO: return schedules[0][selectedDay].count
+                // TODO: replay schedules[0] ([0]) with variable selectedSchedule indicating the selected schedule
             // Selecting a session
             } else {
                 return sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]].count
             }
         case scheduleChoiceTable:
-            return 1 + 1
+            return schedules.count + 1
         default:
             return 0
         }
@@ -650,7 +758,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch tableView {
         case scheduleTable:
-            return 72
+            if scheduleStyle == 1 && choiceProgress[0] == -1 {
+                return 49
+            } else {
+                return 72
+            }
         case scheduleChoiceTable:
             return 47
         default:
@@ -660,6 +772,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Row cell customization
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
+
         // Get cell
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         //
@@ -674,57 +788,30 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             
             // First Screen, showing groups
             if choiceProgress[0] == -1 {
-                switch indexPath.row {
-                // Edit/Reorder button, currently unused
-                case daySessionsArray[selectedDay].count:
-                    let editButton = UILabel()
-                    editButton.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
-                    editButton.textColor = colour1
-                    editButton.text = NSLocalizedString("edit", comment: "")
-                    editButton.alpha = 0.72
-                    editButton.sizeToFit()
-                    editButton.frame = CGRect(x: 27, y: 0, width: (view.bounds.width - 54) / 2, height: 72)
-                    // action
-//                    editButton.isUserInteractionEnabled = true
-////                    let tap = UITapGestureRecognizer(target: self, action: #selector(editButtonTap))
-//                    tap.numberOfTapsRequired = 1
-//                    editButton.addGestureRecognizer(tap)
-//                    cell.addSubview(editButton)
-                    //
-    //                let plusImage = UIImageView()
-    //                plusImage.image = #imageLiteral(resourceName: "Plus")
-    //                plusImage.tintColor = colour1
-    //                plusImage.alpha = 0.72
-    //                plusImage.sizeToFit()
-    //                plusImage.frame = CGRect(x: view.bounds.width - 27 - plusImage.bounds.width, y: (72 / 2) - (plusImage.bounds.height / 2), width: plusImage.bounds.width, height: plusImage.bounds.height)
-    //                cell.addSubview(plusImage)
-                    //
-                    let seperator = CALayer()
-                    seperator.frame = CGRect(x: 27, y: 0, width: (view.bounds.width - 54) / 3, height: 1)
-                    seperator.backgroundColor = colour1.cgColor
-                    seperator.opacity = 0.25
-                    cell.layer.addSublayer(seperator)
-                    
                 // Groups
-                default:
-                    let dayLabel = UILabel()
-                    dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
-                    dayLabel.textColor = colour1
-                    //
-                    let text = sessionData.sortedGroups[daySessionsArray[selectedDay][indexPath.row]]![0][0]
-                    dayLabel.text = NSLocalizedString(text, comment: "")
-                    dayLabel.numberOfLines = 2
-                    dayLabel.sizeToFit()
+                let dayLabel = UILabel()
+                dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
+                dayLabel.textColor = colour1
+                //
+                    // TODO: SCHEDULES NOT schedules[0]
+                let text = sessionData.sortedGroups[schedules[0][selectedDay][indexPath.row]]![0][0]
+
+                dayLabel.text = NSLocalizedString(text, comment: "")
+                dayLabel.numberOfLines = 2
+                dayLabel.sizeToFit()
+                if scheduleStyle == 1 && choiceProgress[0] == -1 {
+                    dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 49)
+                } else {
                     dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
-                    cell.addSubview(dayLabel)
-                    //
-                    // CheckMark if completed
-                    if isCompleted(row: indexPath.row) == true {
-                        dayLabel.textColor = colour3
-                        
-                        cell.tintColor = colour3
-                        cell.accessoryType = .checkmark
-                    }
+                }
+                cell.addSubview(dayLabel)
+                //
+                // CheckMark if completed
+                if isCompleted(row: indexPath.row) == true {
+                    dayLabel.textColor = colour3
+                    
+                    cell.tintColor = colour3
+                    cell.accessoryType = .checkmark
                 }
                 
             // Currently selecting a session, i.e not first screen
@@ -769,23 +856,14 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     //
                     // Normal
                     //
-                    // COLOUR TEST
+                    // BORDER TEST
 //                    if isLastChoice() == false {
                         let text = sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][indexPath.row]
                         choiceLabel.text = NSLocalizedString(text, comment: "")
-                    // Last Choice, indicator by color of 1., 2. and 3., which sessions have been performed (warmup, session, stretching)
+                    // Last Choice, indicator by color border round the outside, red when incomplete, green when complete
 //                    } else {
-//                        //
-//                        let text = NSLocalizedString(sessionData.sortedGroups[choiceProgress[0]]![choiceProgress[1]][indexPath.row], comment: "")
-//                        let attributedString = NSMutableAttributedString(string: text, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
-//                        let range = NSRange(location: 0, length: 2)
-//                        // if iscomplete == false {
-//                        // Change 1. 2. 3. to red
-//                        attributedString.addAttribute(NSForegroundColorAttributeName, value: colour4, range: range)
-//                        choiceLabel.textColor = colour1
-//                        choiceLabel.attributedText = attributedString
-//                        // } else { green 1. 2. or 3.
-//                        // }
+                        // insert border
+                        // PROBABLY SHOULDN'T BE DONE HERE, BUT IN NEXT CHOICE FUNCTION
 //                    }
                     //
                     choiceLabel.numberOfLines = 2
@@ -855,6 +933,30 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // 
     // Schedule Selection ---------------------------------------------------------------------------------------------------------------------
 
+    // Edit Schedule
+    func editScheduleAction() {
+        //
+        let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
+        animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
+        //
+        // If app schedule (go to n sessions (section 2))
+//        self.performSegue(withIdentifier: "EditProfileSegue", sender: self)
+        // If custom schedule
+        self.performSegue(withIdentifier: "EditScheduleSegue", sender: self)
+    }
+    
+    // Edit Profile
+    func editProfileAction() {
+        //
+        let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
+        animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
+        //
+        // AND indicate to profile segue that coming from schedule so that the 'skip to goals section' button can be presented
+        self.performSegue(withIdentifier: "EditProfileSegue", sender: self)
+        
+    }
+    
+    
     // 
     //
     // Ok button action
@@ -873,25 +975,30 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
 //            // No data to display
 //        } else {
 //            selectedTimeScale = timeScalePickerView.selectedRow(inComponent: 0)
-            animateActionSheetDown(actionSheet: scheduleChoiceTable, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
+        let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
+        animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
 //        }
     }
     
     //
     @IBAction func scheduleButton(_ sender: Any) {
         //
-//        timeScalePickerView.selectRow(selectedTimeScale, inComponent: 0, animated: true)
+        UIApplication.shared.keyWindow?.insertSubview(actionSheet, aboveSubview: view)
+        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: actionSheet)
         //
-        UIApplication.shared.keyWindow?.insertSubview(scheduleChoiceTable, aboveSubview: view)
-        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: scheduleChoiceTable)
+        let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
+        animateActionSheetUp(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
+        
         //
-        animateActionSheetUp(actionSheet: scheduleChoiceTable, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
+        
     }
     
     // Dismiss presets table
     func backgroundViewExpandedAction(_ sender: Any) {
         //
-        animateActionSheetDown(actionSheet: scheduleChoiceTable, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
+        let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
+        animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
+        
     }
     
 
@@ -919,6 +1026,10 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             let backItem = UIBarButtonItem()
             backItem.title = ""
             navigationItem.backBarButtonItem = backItem
+        } else if segue.identifier == "EditProfileSegue" {
+            let destinationNC = segue.destination as! InitialProfileNavigation
+            let destinationVC = destinationNC.viewControllers.first as! InitialProfile
+            destinationVC.comingFromSchedule = true
         }
     }
     

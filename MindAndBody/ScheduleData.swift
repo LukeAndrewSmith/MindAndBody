@@ -261,6 +261,7 @@ enum scheduleDataStructures {
             [0,0,0,0,0,0,0],
            //0,1,2,3,4,5,6
             // Sessions
+            // 0 = total, 1 - 6 = mind - strength
             [0,0,0,0,0,0,0],
             // Ranges (could be put in seperate array with arrays for each range but not in the mood to do so)
                 // note no range for total sessions
@@ -306,24 +307,50 @@ enum scheduleDataStructures {
     
     
     // Schedules
-    static let schedules: [[[Int]]] =
+    static let schedules: [[[Any]]] =
     [
         // App Schedule
         [
-            // Monday
-            [],
-            // Tuesday
-            [],
-            // Wednesday
-            [],
-            // Thursday
-            [],
-            // Friday
-            [],
-            // Saturday
-            [],
-            // Sunday
-            []
+            // Schedule
+            [
+                // Monday
+                [],
+                // Tuesday
+                [],
+                // Wednesday
+                [],
+                // Thursday
+                [],
+                // Friday
+                [],
+                // Saturday
+                [],
+                // Sunday
+                [],
+                // Full week as list - 7
+                []
+            ],
+            // Tracking
+            [
+                // Monday
+                [
+                    [[]]
+                ],
+                // Tuesday
+                [],
+                // Wednesday
+                [],
+                // Thursday
+                [],
+                // Friday
+                [],
+                // Saturday
+                [],
+                // Sunday
+                [],
+                // Full week as list - 7
+                []
+            ],
         ]
     ]
     
@@ -343,6 +370,8 @@ enum scheduleDataStructures {
             // Saturday
             [],
             // Sunday
+            [],
+            // Full week list
             []
     ]
     
