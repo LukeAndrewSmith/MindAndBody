@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/MindBody.swift"
-            timestampString = "530818345.570028"
+            timestampString = "530912999.588177"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "629"
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ScheduleScreen.swift"
-            timestampString = "530836049.70441"
+            timestampString = "530912999.588344"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "695"
-            endingLineNumber = "695"
+            startingLineNumber = "696"
+            endingLineNumber = "696"
             landmarkName = "tableView(_:willDisplayHeaderView:forSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ScheduleHelpers.swift"
-            timestampString = "530748298.21968"
+            timestampString = "530884984.071849"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "884"
-            endingLineNumber = "884"
+            startingLineNumber = "887"
+            endingLineNumber = "887"
             landmarkName = "markAsCompleted(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ScheduleHelpers.swift"
-            timestampString = "530748298.219762"
+            timestampString = "530884984.071956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "873"
-            endingLineNumber = "873"
+            startingLineNumber = "875"
+            endingLineNumber = "875"
             landmarkName = "ScheduleScreen"
             landmarkType = "21">
          </BreakpointContent>
@@ -488,11 +488,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ScheduleHelpers.swift"
-            timestampString = "530748298.219889"
+            timestampString = "530884984.072142"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "412"
-            endingLineNumber = "412"
+            startingLineNumber = "413"
+            endingLineNumber = "413"
             landmarkName = "updateSelectedChoice(row:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -504,7 +504,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/FinalChoiceCustom.swift"
-            timestampString = "530652042.440406"
+            timestampString = "530912999.588614"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "749"
@@ -520,11 +520,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/FinalChoiceCustom.swift"
-            timestampString = "530652042.441022"
+            timestampString = "530912999.588695"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2017"
-            endingLineNumber = "2017"
+            startingLineNumber = "2022"
+            endingLineNumber = "2022"
             landmarkName = "addMovementAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -536,11 +536,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/FinalChoiceCustom.swift"
-            timestampString = "530652042.441474"
+            timestampString = "530912999.588769"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2019"
-            endingLineNumber = "2019"
+            startingLineNumber = "2024"
+            endingLineNumber = "2024"
             landmarkName = "addMovementAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -552,7 +552,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/FinalChoiceCustom.swift"
-            timestampString = "530652042.442042"
+            timestampString = "530912999.588842"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1383"
@@ -600,7 +600,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/FinalChoiceCustom.swift"
-            timestampString = "530652042.442499"
+            timestampString = "530912999.588913"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "910"
@@ -616,7 +616,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/FinalChoiceCustom.swift"
-            timestampString = "530652042.443362"
+            timestampString = "530912999.588983"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1099"
@@ -632,11 +632,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/FinalChoiceCustom.swift"
-            timestampString = "530652042.444005"
+            timestampString = "530912999.589053"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1761"
-            endingLineNumber = "1761"
+            startingLineNumber = "1766"
+            endingLineNumber = "1766"
             landmarkName = "okButtonAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -648,11 +648,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/FinalChoiceCustom.swift"
-            timestampString = "530652042.444522"
+            timestampString = "530912999.589128"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1759"
-            endingLineNumber = "1759"
+            startingLineNumber = "1764"
+            endingLineNumber = "1764"
             landmarkName = "okButtonAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -712,13 +712,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/InitialProfile.swift"
-            timestampString = "530818345.571087"
+            timestampString = "530912999.589263"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "534"
-            endingLineNumber = "534"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "535"
+            endingLineNumber = "535"
+            landmarkName = "setSliderGradient(slider:section:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -728,13 +728,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/InitialProfile.swift"
-            timestampString = "530818345.573104"
+            timestampString = "530912999.589322"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "509"
-            endingLineNumber = "509"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "510"
+            endingLineNumber = "510"
+            landmarkName = "setSliderGradient(slider:section:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -776,13 +776,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/InitialProfile.swift"
-            timestampString = "530818345.574908"
+            timestampString = "530912999.589418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "704"
-            endingLineNumber = "704"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "705"
+            endingLineNumber = "705"
+            landmarkName = "previousQuestion()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -792,13 +792,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/InitialProfile.swift"
-            timestampString = "530818345.576625"
+            timestampString = "530912999.589475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "640"
-            endingLineNumber = "640"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "641"
+            endingLineNumber = "641"
+            landmarkName = "nextQuestion()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -840,13 +840,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/InitialProfile.swift"
-            timestampString = "530818345.578376"
+            timestampString = "530912999.589571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "525"
-            endingLineNumber = "525"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "526"
+            endingLineNumber = "526"
+            landmarkName = "setSliderGradient(slider:section:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -856,13 +856,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/InitialProfile.swift"
-            timestampString = "530818345.580096"
+            timestampString = "530912999.589626"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "481"
-            endingLineNumber = "481"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "482"
+            endingLineNumber = "482"
+            landmarkName = "sliderValueChanged(sender:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -888,11 +888,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ScheduleCreator.swift"
-            timestampString = "530836049.705947"
+            timestampString = "530912999.58971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "643"
-            endingLineNumber = "643"
+            startingLineNumber = "703"
+            endingLineNumber = "703"
             landmarkName = "beginDraggingFromTop(gestureRecognizer:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -904,11 +904,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ScheduleCreator.swift"
-            timestampString = "530836049.711454"
+            timestampString = "530912999.592528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "641"
-            endingLineNumber = "641"
+            startingLineNumber = "701"
+            endingLineNumber = "701"
             landmarkName = "beginDraggingFromTop(gestureRecognizer:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -920,7 +920,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ScheduleCreator.swift"
-            timestampString = "530836049.716331"
+            timestampString = "530912999.595125"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "914"
+            endingLineNumber = "914"
+            landmarkName = "beginDraggingFromCell(gestureRecognizer:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/ScheduleCreator.swift"
+            timestampString = "530912999.597682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "857"
@@ -936,27 +952,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ScheduleCreator.swift"
-            timestampString = "530836049.721263"
+            timestampString = "530912999.60024"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "798"
-            endingLineNumber = "798"
-            landmarkName = "beginDraggingFromCell(gestureRecognizer:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MindAndBody/ScheduleCreator.swift"
-            timestampString = "530836049.726408"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "812"
-            endingLineNumber = "812"
+            startingLineNumber = "871"
+            endingLineNumber = "871"
             landmarkName = "beginDraggingFromCell(gestureRecognizer:)"
             landmarkType = "7">
             <Locations>
@@ -1000,11 +1000,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ScheduleCreator.swift"
-            timestampString = "530836049.731261"
+            timestampString = "530912999.602757"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "805"
-            endingLineNumber = "805"
+            startingLineNumber = "864"
+            endingLineNumber = "864"
             landmarkName = "beginDraggingFromCell(gestureRecognizer:)"
             landmarkType = "7">
             <Locations>
@@ -1048,13 +1048,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/InitialProfile.swift"
-            timestampString = "530818345.582201"
+            timestampString = "530912999.605306"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "671"
-            endingLineNumber = "671"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "672"
+            endingLineNumber = "672"
+            landmarkName = "upSwipeAction()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1064,12 +1064,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ScheduleCreator.swift"
-            timestampString = "530836049.73613"
+            timestampString = "530912999.605376"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/ScheduleCreator.swift"
+            timestampString = "530912999.607846"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1227"
+            endingLineNumber = "1227"
+            landmarkName = "beginDraggingFromCell(gestureRecognizer:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/ScheduleCreator.swift"
+            timestampString = "530912999.610308"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1304"
+            endingLineNumber = "1304"
+            landmarkName = "beginDraggingFromCell(gestureRecognizer:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/ScheduleCreator.swift"
+            timestampString = "530912999.612762"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1298"
+            endingLineNumber = "1298"
+            landmarkName = "beginDraggingFromCell(gestureRecognizer:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

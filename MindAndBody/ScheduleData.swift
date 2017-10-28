@@ -311,51 +311,31 @@ enum scheduleDataStructures {
     [
         // App Schedule
         [
-            // Schedule
-            [
-                // Monday
-                [],
-                // Tuesday
-                [],
-                // Wednesday
-                [],
-                // Thursday
-                [],
-                // Friday
-                [],
-                // Saturday
-                [],
-                // Sunday
-                [],
-                // Full week as list - 7
-                []
-            ],
-            // Tracking
-            [
-                // Monday
-                [
-                    [[]]
-                ],
-                // Tuesday
-                [],
-                // Wednesday
-                [],
-                // Thursday
-                [],
-                // Friday
-                [],
-                // Saturday
-                [],
-                // Sunday
-                [],
-                // Full week as list - 7
-                []
-            ],
-        ]
+            // Monday
+            [],
+            // Tuesday
+            [],
+            // Wednesday
+            [],
+            // Thursday
+            [],
+            // Friday
+            [],
+            // Saturday
+            [],
+            // Sunday
+            [],
+            // Full week as list - 7
+            [],
+            // Title - 8
+            ["appSchedule"],
+            // Schedule style: day(0) or full week (1) - 9
+            [0]
+        ],
     ]
     
     // Custom schedules insert this into schedules array
-    static let emptyWeek: [[Int]] =
+    static let emptyWeek: [[Any]] =
         [
             // Monday
             [],
@@ -371,8 +351,38 @@ enum scheduleDataStructures {
             [],
             // Sunday
             [],
-            // Full week list
+            // Full week list - 7
+            [],
+            // Title - 8
+            [""], // String
+            // Schedule style: day(0) or full week (1) - 9
+            [0]
+    ]
+    
+    // Tracking
+    static let registerTracking: [[Any]] =
+    [
+        // Tracking
+        [
+            // Monday
+            [
+                [[]]
+            ],
+            // Tuesday
+            [],
+            // Wednesday
+            [],
+            // Thursday
+            [],
+            // Friday
+            [],
+            // Saturday
+            [],
+            // Sunday
+            [],
+            // Full week as list - 7
             []
+        ],
     ]
     
 }

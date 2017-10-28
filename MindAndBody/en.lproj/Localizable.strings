@@ -86,6 +86,7 @@
 "preset" = "Preset";
 
 "remove" = "Remove";
+"delete" = "Delete";
 
 "timedSession" = "Timed Sessions";
 
@@ -116,6 +117,8 @@
 "chooseCreateSchedule" = "Choose/Create Schedule";
 "editSchedule" = "Edit Schedule";
 "editProfile" = "Edit Profile";
+"scheduleInputTitle" = "Schedule Title";
+"appSchedule" = "App Schedule";
 
 "monday" = "Monday";
 "tuesday" = "Tuesday";

@@ -15,13 +15,13 @@ extension ScheduleScreen {
     //
     // MARK: didSelectRowHandler
     func didSelectRowHandler(row: Int) {
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
 
         updateSelectedChoice(row: row)
         // ------------------------------------------------------------------------------------------------
         // Next Choice Function
-        if choiceProgress[0] == -1 && row != schedules[0][selectedDay].count {
-            choiceProgress[0] = schedules[0][selectedDay][row]
+        if choiceProgress[0] == -1 && row != schedules[selectedSchedule][selectedDay].count {
+            choiceProgress[0] = schedules[selectedSchedule][selectedDay][row] as! Int
             choiceProgress[1] += 1
             maskView()
             // Next Table info
@@ -263,14 +263,15 @@ extension ScheduleScreen {
     // MARK: Update selected choice
     // Look at both sortedGroups & sortedSessions in dataStructures to understand the following
     func updateSelectedChoice(row: Int) {
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
+        //
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         // ------------------------------------------------------------------------------------------------
-        if choiceProgress[0] == -1 && row != schedules[0][selectedDay].count {
+        if choiceProgress[0] == -1 && row != schedules[selectedSchedule][selectedDay].count {
             // Notes selectedChoiceStretching not always used
             // selectedChoice...[0] to group
-            selectedChoiceWarmup[0] = schedules[0][selectedDay][row]
-            selectedChoiceSession[0] = schedules[0][selectedDay][row]
-            selectedChoiceStretching[0] = schedules[0][selectedDay][row]
+            selectedChoiceWarmup[0] = schedules[selectedSchedule][selectedDay][row] as! Int
+            selectedChoiceSession[0] = schedules[selectedSchedule][selectedDay][row] as! Int
+            selectedChoiceStretching[0] = schedules[selectedSchedule][selectedDay][row] as! Int
         //
         } else {
             // Present next choice or present session
@@ -630,12 +631,13 @@ extension ScheduleScreen {
     //
     // MARK: isCompleted()
     func isCompleted(row: Int) -> Bool {
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
+        //
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
 
         // Day
         if scheduleStyle == 0 {
 //            if choiceProgress[0] == -1 {
-//                let group = schedules[0][selectedDay][row]
+//                let group = schedules[selectedSchedule][selectedDay][row]
 //                if scheduleTrackingArray[selectedDay][group]![0][0] == false {
 //                    return false
 //                } else {
@@ -874,7 +876,8 @@ extension ScheduleScreen {
     //
     // MARK:
     @IBAction func markAsCompleted(_ sender: UILongPressGestureRecognizer) {
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Int]]]
+        //
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
 
         if sender.state == UIGestureRecognizerState.began {
         // Get Cell
@@ -883,7 +886,7 @@ extension ScheduleScreen {
         // Day Table,
         // [0][0] to get bool
         if choiceProgress[0] == -1 {
-            let group = schedules[0][selectedDay][row!]
+            let group = schedules[selectedSchedule][selectedDay][row!] as! Int
             if scheduleTrackingArray[selectedDay][group]![0][0] == false {
                 scheduleTrackingArray[selectedDay][group]![0][0] = true
             } else {

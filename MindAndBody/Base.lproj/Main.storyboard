@@ -155,8 +155,8 @@
                         <segue destination="eVk-Z7-PzP" kind="show" identifier="scheduleMeditationSegueGuided" id="aak-rT-dwz"/>
                         <segue destination="6Gr-JQ-KAl" kind="show" identifier="scheduleMeditationSegueTimer" id="y3k-i5-esE"/>
                         <segue destination="RL9-kc-gfy" kind="presentation" identifier="InitialInfoSegue" animates="NO" id="LUK-2p-6ee"/>
-                        <segue destination="MvL-yD-EMG" kind="presentation" identifier="EditScheduleSegue" id="8So-BR-FDm"/>
                         <segue destination="eX1-Gh-PBN" kind="presentation" identifier="EditProfileSegue" id="RfD-jf-ByZ"/>
+                        <segue destination="YI7-aT-LbV" kind="presentation" identifier="EditScheduleSegue" id="dck-J0-5FN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3dG-Jg-xiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -335,7 +335,6 @@
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="dayButtonAction:" destination="JCR-Wc-eVJ" eventType="touchUpInside" id="Z3W-RR-oPq"/>
-                                            <segue destination="MvL-yD-EMG" kind="show" identifier="ScheduleViewDaySegue" id="TZI-yU-iKr"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1q-pB-yq6">
@@ -393,16 +392,19 @@
                             <constraint firstItem="N9w-fC-0yW" firstAttribute="centerY" secondItem="bLd-NF-dpz" secondAttribute="centerY" id="y3G-Wg-NhY"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="DSE-Bm-k9M"/>
                     <connections>
+                        <outlet property="backButton" destination="CAl-9a-eWk" id="tZW-Oa-LO5"/>
                         <outlet property="backgroundImage" destination="gEf-Ur-uPE" id="osu-rW-t43"/>
                         <outlet property="dayViewButton" destination="Tlu-c1-2e6" id="Fgl-Jb-GWN"/>
                         <outlet property="titleLabel" destination="UVO-oT-gm3" id="TgM-Pw-c9L"/>
                         <outlet property="weekViewButton" destination="Q1q-pB-yq6" id="g0j-WS-alA"/>
+                        <segue destination="MvL-yD-EMG" kind="show" identifier="ScheduleCreatorSegue" id="kIb-e7-fcP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mc5-rU-og4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4174" y="518"/>
+            <point key="canvasLocation" x="-4223" y="742"/>
         </scene>
         <!--Schedule Creator-->
         <scene sceneID="GYk-Ow-3Jh">
@@ -1200,18 +1202,9 @@
                                                         <constraint firstItem="hfl-pt-ZpS" firstAttribute="width" secondItem="hfl-pt-ZpS" secondAttribute="height" id="jJX-oe-mWW"/>
                                                     </constraints>
                                                 </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sessions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cA-8p-PeU">
-                                                    <rect key="frame" x="8" y="295" width="93" height="40"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="23"/>
-                                                    <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cHR-Ku-w8K">
-                                                    <rect key="frame" x="275" y="287" width="100" height="56"/>
+                                                    <rect key="frame" x="0.0" y="287" width="375" height="56"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="100" id="DGD-wm-HTo"/>
-                                                    </constraints>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bin" translatesAutoresizingMaskIntoConstraints="NO" id="5x3-pN-kh5">
                                                     <rect key="frame" x="327" y="295" width="40" height="40"/>
@@ -1219,6 +1212,12 @@
                                                         <constraint firstAttribute="width" secondItem="5x3-pN-kh5" secondAttribute="height" multiplier="1:1" id="D4N-7B-gyW"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sessions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cA-8p-PeU">
+                                                    <rect key="frame" x="8" y="295" width="93" height="40"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="23"/>
+                                                    <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ulk-XM-tST">
                                                     <rect key="frame" x="8" y="287" width="359" height="1"/>
                                                     <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -1235,6 +1234,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="ulk-XM-tST" secondAttribute="trailing" id="6bU-cA-QSs"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="zxn-MQ-oEj" secondAttribute="trailing" id="75C-Nv-uwU"/>
                                                 <constraint firstAttribute="bottom" secondItem="cHR-Ku-w8K" secondAttribute="bottom" id="8R1-wk-Nsg"/>
+                                                <constraint firstItem="cHR-Ku-w8K" firstAttribute="leading" secondItem="QoP-hv-Lap" secondAttribute="leading" id="9sl-WL-cPK"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="che-23-AUf" secondAttribute="trailing" id="GCZ-e8-RKe"/>
                                                 <constraint firstItem="che-23-AUf" firstAttribute="leading" secondItem="QoP-hv-Lap" secondAttribute="leadingMargin" id="J9J-th-8b8"/>
                                                 <constraint firstItem="5x3-pN-kh5" firstAttribute="bottom" secondItem="QoP-hv-Lap" secondAttribute="bottomMargin" id="Jv2-We-h5f"/>
@@ -1668,7 +1668,23 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1pT-xx-3WE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5794" y="743"/>
+            <point key="canvasLocation" x="-5823" y="8"/>
+        </scene>
+        <!--Schedule View Question Navigation-->
+        <scene sceneID="agi-PN-VHZ">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="YI7-aT-LbV" customClass="ScheduleViewQuestionNavigation" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0wp-rV-hTc">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="JCR-Wc-eVJ" kind="relationship" relationship="rootViewController" id="aIe-PF-ycY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m5I-Id-BQx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4223" y="8"/>
         </scene>
         <!--Slide Menu View-->
         <scene sceneID="FeV-YU-Abg">
@@ -1853,7 +1869,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YP5-1j-hTM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7404" y="744"/>
+            <point key="canvasLocation" x="-8316" y="743"/>
         </scene>
         <!--Initial Info Screen-->
         <scene sceneID="hZt-i6-WHB">
@@ -1968,7 +1984,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6HX-je-zpH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6625" y="743"/>
+            <point key="canvasLocation" x="-7538" y="742"/>
         </scene>
         <!--Initial Profile-->
         <scene sceneID="Iy6-lY-Ona">
@@ -2192,7 +2208,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q30-t8-8oO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4911.1999999999998" y="742.5787106446777"/>
+            <point key="canvasLocation" x="-5823" y="742"/>
         </scene>
         <!--Item-->
         <scene sceneID="o7y-bT-TM5">
@@ -3814,13 +3830,13 @@
                                         <rect key="frame" x="8" y="57" width="172" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Theme" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BC-Ha-gWL">
-                                                <rect key="frame" x="0.0" y="0.0" width="51" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="61.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Self-Acceptance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZf-CZ-07t">
-                                                <rect key="frame" x="59" y="0.0" width="113" height="20.5"/>
+                                                <rect key="frame" x="69.5" y="0.0" width="102.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="15"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -4542,7 +4558,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-jO-oQj">
-                                                    <rect key="frame" x="137" y="370" width="102.5" height="22.5"/>
+                                                    <rect key="frame" x="137" y="369.5" width="102.5" height="22.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4764,7 +4780,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5O-yZ-uLf">
-                                                    <rect key="frame" x="137" y="368" width="102.5" height="22.5"/>
+                                                    <rect key="frame" x="137" y="369" width="102.5" height="22.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -5442,7 +5458,7 @@
     </scenes>
     <resources>
         <image name="Back Arrow" width="30" height="30"/>
-        <image name="Bin" width="30" height="30"/>
+        <image name="Bin" width="45" height="45"/>
         <image name="Calendar" width="30" height="30"/>
         <image name="CheckMark" width="30" height="30"/>
         <image name="Down" width="30" height="30"/>
@@ -5475,8 +5491,9 @@
         <segue reference="aak-rT-dwz"/>
         <segue reference="bsb-5O-GBj"/>
         <segue reference="y3k-i5-esE"/>
-        <segue reference="5ld-je-K0Q"/>
+        <segue reference="A93-Uh-JO4"/>
         <segue reference="M72-ar-DyO"/>
-        <segue reference="8So-BR-FDm"/>
+        <segue reference="kIb-e7-fcP"/>
+        <segue reference="aIe-PF-ycY"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -226,7 +226,7 @@ extension ScheduleScreen {
         //
         // Snapshot Header - mask layer covers header so show it
         // SHOULD FIND A BETTER WAY, MASKING ONLY THE NECESSARY CELLS AND NOT THE WHOLE TABLEVIEW WITH HEADER
-        // ISSUE: MASK.FRAME DOESNT SEE TO LISTEN TO Y VALUE or y value means something else
+            // ISSUE: MASK.FRAME DOESNT SEE TO LISTEN TO Y VALUE or y value means something else
         
         //
         scheduleTable.layer.mask = mask

@@ -24,6 +24,9 @@ class ScheduleViewQuestion: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dayViewButton: UIButton!
     @IBOutlet weak var weekViewButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    
+    var comingFromSchedule = false
     
     //
     // MARK: View did load
@@ -75,25 +78,39 @@ class ScheduleViewQuestion: UIViewController {
         rightSwipe.edges = .left
         rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
         view.addGestureRecognizer(rightSwipe)
+        
+        if comingFromSchedule == true {
+            backButton.alpha = 0
+            backButton.isEnabled = false
+        }
     }
     
     //
     // MARK: Button actions
     // Day
     @IBAction func dayButtonAction(_ sender: Any) {
-        
-        
+        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        // Set user settings for schedule style to week
+        schedules[selectedSchedule][9] = 0
+        UserDefaults.standard.set(settings, forKey: "userSettings")
+        self.performSegue(withIdentifier: "ScheduleCreatorSegue", sender: Any)
     }
     
     // Week
     @IBAction func weekButtonAction(_ sender: Any) {
-        // Set user settings for schedule style to week
+        // If app schedule, go to week
         var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        settings[7][0] = 1
+        // Set user settings for schedule style to week
+        schedules[selectedSchedule][9] = 1
         UserDefaults.standard.set(settings, forKey: "userSettings")
-        //
-        shouldReloadSchedule = true
-        self.dismiss(animated: true)
+        if settings[7][0] == 0 {
+            //
+            shouldReloadSchedule = true
+            self.dismiss(animated: true)
+        // If custom schedule, go to schedule creator
+        } else {
+            self.performSegue(withIdentifier: "ScheduleCreatorSegue", sender: Any)
+        }
     }
     
     //
@@ -108,5 +125,9 @@ class ScheduleViewQuestion: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
     }
+    
+}
+
+class ScheduleViewQuestionNavigation: UINavigationController {
     
 }
