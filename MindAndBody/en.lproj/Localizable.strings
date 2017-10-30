@@ -1555,7 +1555,7 @@
 // MARK: Initial Screen //
 //
 "initialInfoSubtitle" = "Fitness  |  Yoga  |  Meditation";
-"initialProfileOption" = "Fill in Profile, create Schedule";
+"initialProfileOption" = "Create my Schedule";
 "initialAppOption" = "Look around the app first";
 //
 // Info table
@@ -1596,6 +1596,13 @@
 //
 // MARK: Profile //
 //
+
+// Quick question, how to create profile
+"profileQuestion" = "I would like to :";
+"profileQuestion1" = "Fill in my profile and let the app choose difficulty levels for me\n(Recommended)"; // Fill in my profile
+"profileQuestion2" = "Decide myself what difficulty levels are relevant to me"; // Decide my difficulty levels
+"profileQuestion3" = "Not have the app present sessions based on difficulty levels, i.e choose each session, each time\n(not recommended)"; // Choose sessions
+
     //
     // Title //
     "profile" = "Profile";

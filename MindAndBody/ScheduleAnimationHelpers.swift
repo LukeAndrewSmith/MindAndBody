@@ -18,7 +18,7 @@ extension ScheduleScreen {
     // Mask view func
     func maskView() {
         // Animate mask view if group selected and mask doesnt already exist
-        if choiceProgress[0] != -1 && view.subviews.contains(maskView1) == false {
+        if ScheduleVariables.shared.choiceProgress[0] != -1 && view.subviews.contains(maskView1) == false {
             createMaskView(alpha: 0)
             UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                 self.maskView1.alpha = 0.72
@@ -31,27 +31,27 @@ extension ScheduleScreen {
     func maskAction() {
         // Table Counter
         // Return to choice 1 (sessions)
-        if choiceProgress[1] > 1 {
+        if ScheduleVariables.shared.choiceProgress[1] > 1 {
             // Meditation has two choice paths
-            if choiceProgress[0] == 0 && choiceProgress[1] == 5 {
-                choiceProgress[1] = 1
+            if ScheduleVariables.shared.choiceProgress[0] == 0 && ScheduleVariables.shared.choiceProgress[1] == 5 {
+                ScheduleVariables.shared.choiceProgress[1] = 1
             // Endurance has 3 choice paths
-            } else if choiceProgress[0] == 2 && choiceProgress[1] == 5 || choiceProgress[0] == 2 && choiceProgress[1] == 3 && selectedChoiceWarmup[3] == 3 {
-                choiceProgress[1] = 1
+            } else if ScheduleVariables.shared.choiceProgress[0] == 2 && ScheduleVariables.shared.choiceProgress[1] == 5 || ScheduleVariables.shared.choiceProgress[0] == 2 && ScheduleVariables.shared.choiceProgress[1] == 3 && selectedChoiceWarmup[3] == 3 {
+                ScheduleVariables.shared.choiceProgress[1] = 1
             // Toning has two choice paths
-            } else if choiceProgress[0] == 3 && choiceProgress[1] == 5 {
-                choiceProgress[1] = 1
+            } else if ScheduleVariables.shared.choiceProgress[0] == 3 && ScheduleVariables.shared.choiceProgress[1] == 5 {
+                ScheduleVariables.shared.choiceProgress[1] = 1
                 // Cardio has two choice paths
             //
             } else {
-                choiceProgress[1] -= 1
+                ScheduleVariables.shared.choiceProgress[1] -= 1
             }
             slideRight()
             maskView3.backgroundColor = .black
         // Return to choice 0 (groups)
-        } else if choiceProgress[1] == 1 {
-            choiceProgress[0] = -1
-            choiceProgress[1] = 0
+        } else if ScheduleVariables.shared.choiceProgress[1] == 1 {
+            ScheduleVariables.shared.choiceProgress[0] = -1
+            ScheduleVariables.shared.choiceProgress[1] = 0
             // Enable table scroll & schedule choice button & remove mask view
             scheduleTable.isScrollEnabled = true
             navigationBar.rightBarButtonItem?.isEnabled = true
@@ -61,7 +61,7 @@ extension ScheduleScreen {
     }
     // Open Schedule, check if mask views necessary
     func checkMaskView() {
-        if tableCounter[0] != -1 {
+        if ScheduleVariables.shared.choiceProgress[0] != -1 {
             createMaskView(alpha: 0.72)
         }
     }
@@ -108,7 +108,7 @@ extension ScheduleScreen {
         view.addSubview(maskView3)
         //
         maskViewBackButton.image = #imageLiteral(resourceName: "Back Arrow")
-        maskViewBackButton.tintColor = colour1
+        maskViewBackButton.tintColor = Colours.colour1
         maskViewBackButton.sizeToFit()
         maskViewBackButton.frame = CGRect(x: 5, y: maskView1.bounds.height - maskViewBackButton.bounds.height - 11, width: maskViewBackButton.bounds.width, height: maskViewBackButton.bounds.height)
         maskView1.addSubview(maskViewBackButton)

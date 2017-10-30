@@ -20,9 +20,9 @@ extension ScheduleScreen {
         updateSelectedChoice(row: row)
         // ------------------------------------------------------------------------------------------------
         // Next Choice Function
-        if choiceProgress[0] == -1 && row != schedules[selectedSchedule][selectedDay].count {
-            choiceProgress[0] = schedules[selectedSchedule][selectedDay][row] as! Int
-            choiceProgress[1] += 1
+        if ScheduleVariables.shared.choiceProgress[0] == -1 && row != schedules[selectedSchedule][ScheduleVariables.shared.selectedDay].count {
+            ScheduleVariables.shared.choiceProgress[0] = schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][row] as! Int
+            ScheduleVariables.shared.choiceProgress[1] += 1
             maskView()
             // Next Table info
             slideLeft()
@@ -30,22 +30,22 @@ extension ScheduleScreen {
             //
         } else {
             // Present next choice or present session
-            switch choiceProgress[0] {
+            switch ScheduleVariables.shared.choiceProgress[0] {
                 // ------------------------------------------------------------------------------------------------
             // Mind
             case 0:
                 // Session Choice
-                switch choiceProgress[1] {
+                switch ScheduleVariables.shared.choiceProgress[1] {
                 // First choice - yoga, meditation, walk
                 case 1:
                     // Yoga, more choices
                     if row == 1 {
-                        choiceProgress[1] += 1
+                        ScheduleVariables.shared.choiceProgress[1] += 1
                         nextChoice()
                         // Go to Meditation screen
                     } else if row == 2 {
                         // Meditation
-                        choiceProgress[1] = 5
+                        ScheduleVariables.shared.choiceProgress[1] = 5
                         nextChoice()
                         // Walk, popup
                     } else if row == 3 {
@@ -71,7 +71,7 @@ extension ScheduleScreen {
                         performSegue(withIdentifier: "scheduleMeditationSegueGuided", sender: self)
                     }
                 default:
-                    choiceProgress[1] += 1
+                    ScheduleVariables.shared.choiceProgress[1] += 1
                     nextChoice()
                 }
                 
@@ -79,7 +79,7 @@ extension ScheduleScreen {
             // Flexibility
             case 1:
                 // Final choice -> session
-                if choiceProgress[1] == 4 {
+                if ScheduleVariables.shared.choiceProgress[1] == 4 {
                     // Test
                     // TODO: Selected choice as index to sortedGroups (in data structures)
                     // Warmup
@@ -93,30 +93,30 @@ extension ScheduleScreen {
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                 // Choice
                 } else {
-                    choiceProgress[1] += 1
+                    ScheduleVariables.shared.choiceProgress[1] += 1
                     nextChoice()
                 }
                 
                 // ------------------------------------------------------------------------------------------------
             // Endurance
             case 2:
-                switch choiceProgress[1] {
+                switch ScheduleVariables.shared.choiceProgress[1] {
                 // Type 1, hiit vs steady state
                 case 1:
                     // Workout
                     if row == 2 {
-                        choiceProgress[1] = 3
+                        ScheduleVariables.shared.choiceProgress[1] = 3
                         nextChoice()
                     // Steady state cardio
                     } else if row == 3 {
-                        choiceProgress[1] = 5
+                        ScheduleVariables.shared.choiceProgress[1] = 5
                         nextChoice()
                     } else {
-                        choiceProgress[1] += 1
+                        ScheduleVariables.shared.choiceProgress[1] += 1
                         nextChoice()
                     }
                 case 3:
-                    choiceProgress[1] += 1
+                    ScheduleVariables.shared.choiceProgress[1] += 1
                     nextChoice()
                 // Session Choice, To Do
                 case 4:
@@ -143,7 +143,7 @@ extension ScheduleScreen {
                             steadyStateChoice = 1
                         }
                         //
-                        choiceProgress[1] += 1
+                        ScheduleVariables.shared.choiceProgress[1] += 1
                         nextChoice()
                     }
                 // Session Choice , To do
@@ -159,10 +159,10 @@ extension ScheduleScreen {
                     }
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                     //
-                    choiceProgress[1] -= 1
+                    ScheduleVariables.shared.choiceProgress[1] -= 1
                     nextChoice()
                 default:
-                    choiceProgress[1] += 1
+                    ScheduleVariables.shared.choiceProgress[1] += 1
                     nextChoice()
                 }
                 
@@ -170,11 +170,11 @@ extension ScheduleScreen {
             // Toning
             case 3:
                 // Cardio
-                if choiceProgress[1] == 1 && row == 2 {
-                    choiceProgress[1] = 5
+                if ScheduleVariables.shared.choiceProgress[1] == 1 && row == 2 {
+                    ScheduleVariables.shared.choiceProgress[1] = 5
                     nextChoice()
                 // Final choice workout
-                } else if choiceProgress[1] == 4 || choiceProgress[1] == 6 {
+                } else if ScheduleVariables.shared.choiceProgress[1] == 4 || ScheduleVariables.shared.choiceProgress[1] == 6 {
                     // Test
                     // TODO: Selected choice as index to sortedGroups (in data structures)
                     // Warmup
@@ -189,7 +189,7 @@ extension ScheduleScreen {
                     }
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                 } else {
-                    choiceProgress[1] += 1
+                    ScheduleVariables.shared.choiceProgress[1] += 1
                     nextChoice()
                 }
                 
@@ -197,7 +197,7 @@ extension ScheduleScreen {
             // Muscle Gain
             case 4:
                 // Session Choice
-                if choiceProgress[1] == 4 {
+                if ScheduleVariables.shared.choiceProgress[1] == 4 {
                     // Test
                     // TODO: Selected choice as index to sortedGroups (in data structures)
                     // Warmup
@@ -212,7 +212,7 @@ extension ScheduleScreen {
                     }
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                 } else {
-                    choiceProgress[1] += 1
+                    ScheduleVariables.shared.choiceProgress[1] += 1
                     nextChoice()
                 }
                 
@@ -220,7 +220,7 @@ extension ScheduleScreen {
             // Strength
             case 5:
                 // Session Choice
-                if choiceProgress[1] == 4 {
+                if ScheduleVariables.shared.choiceProgress[1] == 4 {
                     // Test
                     // TODO: Selected choice as index to sortedGroups (in data structures)
                     // Warmup
@@ -235,7 +235,7 @@ extension ScheduleScreen {
                     }
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                 } else {
-                    choiceProgress[1] += 1
+                    ScheduleVariables.shared.choiceProgress[1] += 1
                     nextChoice()
                 }
             default:
@@ -248,15 +248,15 @@ extension ScheduleScreen {
     // Select sessions
     // Warmup
     func selectWarmup() {
-        selectedSession = sessionData.sortedSessions[selectedChoiceWarmup[0]]![selectedChoiceWarmup[1]][selectedChoiceWarmup[2]][selectedChoiceWarmup[3]][selectedChoiceWarmup[4]][selectedChoiceWarmup[5]]
+        SelectedSession.shared.selectedSession = sessionData.sortedSessions[selectedChoiceWarmup[0]]![selectedChoiceWarmup[1]][selectedChoiceWarmup[2]][selectedChoiceWarmup[3]][selectedChoiceWarmup[4]][selectedChoiceWarmup[5]]
     }
     // Session
     func selectSession() {
-        selectedSession = sessionData.sortedSessions[selectedChoiceSession[0]]![selectedChoiceSession[1]][selectedChoiceSession[2]][selectedChoiceSession[3]][selectedChoiceSession[4]][selectedChoiceSession[5]]
+        SelectedSession.shared.selectedSession = sessionData.sortedSessions[selectedChoiceSession[0]]![selectedChoiceSession[1]][selectedChoiceSession[2]][selectedChoiceSession[3]][selectedChoiceSession[4]][selectedChoiceSession[5]]
     }
     // Stretching
     func selectStretching() {
-        selectedSession = sessionData.sortedSessions[selectedChoiceStretching[0]]![selectedChoiceStretching[1]][selectedChoiceStretching[2]][selectedChoiceStretching[3]][selectedChoiceStretching[4]][selectedChoiceStretching[5]]
+        SelectedSession.shared.selectedSession = sessionData.sortedSessions[selectedChoiceStretching[0]]![selectedChoiceStretching[1]][selectedChoiceStretching[2]][selectedChoiceStretching[3]][selectedChoiceStretching[4]][selectedChoiceStretching[5]]
     }
     
     //
@@ -266,21 +266,21 @@ extension ScheduleScreen {
         //
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         // ------------------------------------------------------------------------------------------------
-        if choiceProgress[0] == -1 && row != schedules[selectedSchedule][selectedDay].count {
+        if ScheduleVariables.shared.choiceProgress[0] == -1 && row != schedules[selectedSchedule][ScheduleVariables.shared.selectedDay].count {
             // Notes selectedChoiceStretching not always used
             // selectedChoice...[0] to group
-            selectedChoiceWarmup[0] = schedules[selectedSchedule][selectedDay][row] as! Int
-            selectedChoiceSession[0] = schedules[selectedSchedule][selectedDay][row] as! Int
-            selectedChoiceStretching[0] = schedules[selectedSchedule][selectedDay][row] as! Int
+            selectedChoiceWarmup[0] = schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][row] as! Int
+            selectedChoiceSession[0] = schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][row] as! Int
+            selectedChoiceStretching[0] = schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][row] as! Int
         //
         } else {
             // Present next choice or present session
-            switch choiceProgress[0] {
+            switch ScheduleVariables.shared.choiceProgress[0] {
             // ------------------------------------------------------------------------------------------------
             // Mind
             case 0:
                 // Session Choice
-                switch choiceProgress[1] {
+                switch ScheduleVariables.shared.choiceProgress[1] {
                 // Yoga
                 case 1:
                     if row == 1 {
@@ -315,7 +315,7 @@ extension ScheduleScreen {
             // ------------------------------------------------------------------------------------------------
             // Flexibility
             case 1:
-                switch choiceProgress[1] {
+                switch ScheduleVariables.shared.choiceProgress[1] {
                 // Stretching / Yoga
                 case 1:
                     // Warmup (1,0,0), extra zeros necessary due to nesting
@@ -348,7 +348,7 @@ extension ScheduleScreen {
             // ------------------------------------------------------------------------------------------------
             // Endurance
             case 2:
-                switch choiceProgress[1] {
+                switch ScheduleVariables.shared.choiceProgress[1] {
                 case 1:
                     // Warmup (2,0,0...), extra zeros necessary due to nesting
                     selectedChoiceWarmup[1] = 0 // warmup
@@ -436,7 +436,7 @@ extension ScheduleScreen {
                 // ------------------------------------------------------------------------------------------------
             // Toning
             case 3:
-                switch choiceProgress[1] {
+                switch ScheduleVariables.shared.choiceProgress[1] {
                 case 1:
                     selectedChoiceWarmup[1] = 0 // warmup
                     selectedChoiceSession[1] = 1 // session
@@ -493,7 +493,7 @@ extension ScheduleScreen {
                 // ------------------------------------------------------------------------------------------------
             // Muscle Gain
             case 4:
-                switch choiceProgress[1] {
+                switch ScheduleVariables.shared.choiceProgress[1] {
                 // Gym/Bodyweight
                 case 1:
                     // Warmup/Session/Stretching
@@ -530,7 +530,7 @@ extension ScheduleScreen {
             // ------------------------------------------------------------------------------------------------
             // Strength
             case 5:
-                switch choiceProgress[1] {
+                switch ScheduleVariables.shared.choiceProgress[1] {
                 // Gym/Bodyweight
                 case 1:
                     // Warmup/Session/Stretching
@@ -576,17 +576,17 @@ extension ScheduleScreen {
     // Used so the title can be set to green
     func isLastChoice() -> Bool {
         // Present next choice or present session
-        switch choiceProgress[0] {
+        switch ScheduleVariables.shared.choiceProgress[0] {
         // Mind
         case 0:
-            if choiceProgress[1] == 4 {
+            if ScheduleVariables.shared.choiceProgress[1] == 4 {
                 return true
             } else {
                 return false
             }
         // Flexibility
         case 1:
-            if choiceProgress[1] == 4 {
+            if ScheduleVariables.shared.choiceProgress[1] == 4 {
                 return true
             } else {
                 return false
@@ -594,7 +594,7 @@ extension ScheduleScreen {
             
         // Endurance
         case 2:
-            if choiceProgress[1] == 4 || choiceProgress[1] == 5 {
+            if ScheduleVariables.shared.choiceProgress[1] == 4 || ScheduleVariables.shared.choiceProgress[1] == 5 {
                 return true
             } else {
                 return false
@@ -602,7 +602,7 @@ extension ScheduleScreen {
             
         // Toning
         case 3:
-            if choiceProgress[1] == 4 || choiceProgress[1] == 6 {
+            if ScheduleVariables.shared.choiceProgress[1] == 4 || ScheduleVariables.shared.choiceProgress[1] == 6 {
                 return true
             } else {
                 return false
@@ -610,7 +610,7 @@ extension ScheduleScreen {
             
         // Muscle Gain
         case 4:
-            if choiceProgress[1] == 4 {
+            if ScheduleVariables.shared.choiceProgress[1] == 4 {
                 return true
             } else {
                 return false
@@ -618,7 +618,7 @@ extension ScheduleScreen {
             
         // Strength
         case 5:
-            if choiceProgress[1] == 4 {
+            if ScheduleVariables.shared.choiceProgress[1] == 4 {
                 return true
             } else {
                 return false
@@ -636,9 +636,9 @@ extension ScheduleScreen {
 
         // Day
         if scheduleStyle == 0 {
-//            if choiceProgress[0] == -1 {
-//                let group = schedules[selectedSchedule][selectedDay][row]
-//                if scheduleTrackingArray[selectedDay][group]![0][0] == false {
+//            if ScheduleVariables.shared.choiceProgress[0] == -1 {
+//                let group = schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][row]
+//                if scheduleTrackingArray[ScheduleVariables.shared.selectedDay][group]![0][0] == false {
 //                    return false
 //                } else {
 //                    return true
@@ -664,7 +664,7 @@ extension ScheduleScreen {
         //
         if isLastChoice() == true {
             // TODO: GREEN IF ALREADY COMPLETED
-            maskView3.backgroundColor = colour4
+            maskView3.backgroundColor = Colours.colour4
         }
     }
     
@@ -675,14 +675,14 @@ extension ScheduleScreen {
     //
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
-        if choiceProgress[0] == -1 {
+        if ScheduleVariables.shared.choiceProgress[0] == -1 {
         //
         // Forward 1 day
         if (extraSwipe.direction == .left){
             // Update selected day
-            switch selectedDay {
-            case 6: selectedDay = 0
-            default: selectedDay += 1
+            switch ScheduleVariables.shared.selectedDay {
+            case 6: ScheduleVariables.shared.selectedDay = 0
+            default: ScheduleVariables.shared.selectedDay += 1
             }
             
             // Deselect all indicators
@@ -690,7 +690,7 @@ extension ScheduleScreen {
                 stackArray[i].alpha = 0.5
             }
             // Select indicator
-            stackArray[selectedDay].alpha = 1
+            stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
             
             // Animate
             scheduleTable.reloadData()
@@ -719,9 +719,9 @@ extension ScheduleScreen {
             // Back 1 day
         } else if extraSwipe.direction == .right {
             // Update selected day
-            switch selectedDay {
-            case 0: selectedDay = 6
-            default: selectedDay -= 1
+            switch ScheduleVariables.shared.selectedDay {
+            case 0: ScheduleVariables.shared.selectedDay = 6
+            default: ScheduleVariables.shared.selectedDay -= 1
             }
             
             // Deselect all indicators
@@ -729,8 +729,8 @@ extension ScheduleScreen {
                 stackArray[i].alpha = 0.5
             }
             // Select indicator
-            stackArray[selectedDay].alpha = 1
-            selectDay(day: selectedDay)
+            stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
+            selectDay(day: ScheduleVariables.shared.selectedDay)
             
             // Animate
             scheduleTable.reloadData()
@@ -770,16 +770,16 @@ extension ScheduleScreen {
         let index = dayLabel.tag
         //
         // Forward
-        if index > selectedDay {
+        if index > ScheduleVariables.shared.selectedDay {
             // Update selected day
-            selectedDay = index
+            ScheduleVariables.shared.selectedDay = index
             
             // Deselect all indicators
             for i in 0...(stackArray.count - 1) {
                 stackArray[i].alpha = 0.5
             }
             // Select indicator
-            stackArray[selectedDay].alpha = 1
+            stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
             
             // Animate
             scheduleTable.reloadData()
@@ -809,17 +809,17 @@ extension ScheduleScreen {
             
             //
             // Back
-        } else if index < selectedDay {
+        } else if index < ScheduleVariables.shared.selectedDay {
             // Update selected day
-            selectedDay = index
+            ScheduleVariables.shared.selectedDay = index
             
             // Deselect all indicators
             for i in 0...(stackArray.count - 1) {
                 stackArray[i].alpha = 0.5
             }
             // Select indicator
-            stackArray[selectedDay].alpha = 1
-            selectDay(day: selectedDay)
+            stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
+            selectDay(day: ScheduleVariables.shared.selectedDay)
             
             // Animate
             scheduleTable.reloadData()
@@ -885,17 +885,17 @@ extension ScheduleScreen {
         let row = cell?.tag
         // Day Table,
         // [0][0] to get bool
-        if choiceProgress[0] == -1 {
-            let group = schedules[selectedSchedule][selectedDay][row!] as! Int
-            if scheduleTrackingArray[selectedDay][group]![0][0] == false {
-                scheduleTrackingArray[selectedDay][group]![0][0] = true
+        if ScheduleVariables.shared.choiceProgress[0] == -1 {
+            let group = schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][row!] as! Int
+            if scheduleTrackingArray[ScheduleVariables.shared.selectedDay][group]![0][0] == false {
+                scheduleTrackingArray[ScheduleVariables.shared.selectedDay][group]![0][0] = true
             } else {
-                scheduleTrackingArray[selectedDay][group]![0][0] = false
+                scheduleTrackingArray[ScheduleVariables.shared.selectedDay][group]![0][0] = false
             }
             
         // Furthur down choices, only take action if final choice
         } else {
-            switch choiceProgress[0] {
+            switch ScheduleVariables.shared.choiceProgress[0] {
             // Mind
             case 0:
                 break

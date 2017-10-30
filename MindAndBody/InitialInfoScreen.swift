@@ -34,12 +34,12 @@ class InitialInfoScreen: UIViewController, UITableViewDataSource, UITableViewDel
         // Background Image/Colour
         let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         let backgroundIndex = settings[0][0]
-        if backgroundIndex < backgroundImageArray.count {
-            backgroundImageView.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == backgroundImageArray.count {
+        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
+            backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
+        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
             //
             backgroundImageView.image = nil
-            backgroundImageView.backgroundColor = colour1
+            backgroundImageView.backgroundColor = Colours.colour1
         }
         // Blur
         // BackgroundBlur/Vibrancy
@@ -48,7 +48,7 @@ class InitialInfoScreen: UIViewController, UITableViewDataSource, UITableViewDel
         backgroundBlur.effect = backgroundBlurE
         backgroundBlur.isUserInteractionEnabled = false
         backgroundBlur.frame = backgroundImageView.bounds
-        if backgroundIndex > backgroundImageArray.count {
+        if backgroundIndex > BackgroundImages.backgroundImageArray.count {
         } else {
             view.insertSubview(backgroundBlur, aboveSubview: backgroundImageView)
         }
@@ -71,7 +71,7 @@ class InitialInfoScreen: UIViewController, UITableViewDataSource, UITableViewDel
         profileButton.setTitle(NSLocalizedString("initialProfileOption", comment: ""), for: .normal)
         profileButton.layer.cornerRadius = profileButton.bounds.height / 2
         profileButton.layer.masksToBounds = true
-        profileButton.backgroundColor = colour3.withAlphaComponent(0.25)
+        profileButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
 //        let profileBlur = UIBlurEffect(style: .regular)
 //        let profileBlurView = UIVisualEffectView(effect: profileBlur)
 //        let profileVibrancy = UIVibrancyEffect(blurEffect: profileBlur)
@@ -87,7 +87,7 @@ class InitialInfoScreen: UIViewController, UITableViewDataSource, UITableViewDel
         appButton.setTitle(NSLocalizedString("initialAppOption", comment: ""), for: .normal)
         appButton.layer.cornerRadius = appButton.bounds.height / 2
         appButton.layer.masksToBounds = true
-        appButton.backgroundColor = colour1.withAlphaComponent(0.25)
+        appButton.backgroundColor = Colours.colour1.withAlphaComponent(0.25)
 //        let appBlur = UIVisualEffectView
 
 
@@ -124,7 +124,7 @@ class InitialInfoScreen: UIViewController, UITableViewDataSource, UITableViewDel
         // Header
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
-        header.textLabel?.textColor = colour1
+        header.textLabel?.textColor = Colours.colour1
         //
         header.backgroundColor = .clear
         header.backgroundView = UIView()
@@ -133,7 +133,7 @@ class InitialInfoScreen: UIViewController, UITableViewDataSource, UITableViewDel
             // Create seperator
             let seperator = CALayer()
             seperator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: topSeparator.bounds.width, height: 1)
-            seperator.backgroundColor = colour1.cgColor
+            seperator.backgroundColor = Colours.colour1.cgColor
             seperator.opacity = 0.15
             header.layer.addSublayer(seperator)
         }
@@ -200,7 +200,7 @@ class InitialInfoScreen: UIViewController, UITableViewDataSource, UITableViewDel
         cell.textLabel?.text = NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: "")
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        cell.textLabel?.textColor = colour1
+        cell.textLabel?.textColor = Colours.colour1
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.lineBreakMode = .byWordWrapping
         //

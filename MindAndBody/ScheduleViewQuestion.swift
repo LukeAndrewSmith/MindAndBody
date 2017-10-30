@@ -28,6 +28,8 @@ class ScheduleViewQuestion: UIViewController {
     
     var comingFromSchedule = false
     
+    var selectedSchedule = 0
+        
     //
     // MARK: View did load
     override func viewDidLoad() {
@@ -36,12 +38,12 @@ class ScheduleViewQuestion: UIViewController {
         // Background Image/Colour
         let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         let backgroundIndex = settings[0][0]
-        if backgroundIndex < backgroundImageArray.count {
-            backgroundImage.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == backgroundImageArray.count {
+        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
+            backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
+        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
             //
             backgroundImage.image = nil
-            backgroundImage.backgroundColor = colour1
+            backgroundImage.backgroundColor = Colours.colour1
         }
         // Blur
         // BackgroundBlur/Vibrancy
@@ -50,7 +52,7 @@ class ScheduleViewQuestion: UIViewController {
         backgroundBlur.effect = backgroundBlurE
         backgroundBlur.isUserInteractionEnabled = false
         backgroundBlur.frame = backgroundImage.bounds
-        if backgroundIndex > backgroundImageArray.count {
+        if backgroundIndex > BackgroundImages.backgroundImageArray.count {
         } else {
             view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
         }
@@ -58,18 +60,21 @@ class ScheduleViewQuestion: UIViewController {
         //
         // Title Label
         titleLabel.text = NSLocalizedString("scheduleView", comment: "")
-        titleLabel.textColor = colour1
+        titleLabel.textColor = Colours.colour1
         //
         // Buttons
         dayViewButton.titleLabel?.lineBreakMode = .byWordWrapping
         dayViewButton.setTitle(NSLocalizedString("scheduleView1", comment: ""), for: .normal)
         dayViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        dayViewButton.setTitleColor(colour1, for: .normal)
+        dayViewButton.setTitleColor(Colours.colour1, for: .normal)
         //
         weekViewButton.titleLabel?.lineBreakMode = .byWordWrapping
         weekViewButton.setTitle(NSLocalizedString("scheduleView2", comment: ""), for: .normal)
         weekViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        weekViewButton.setTitleColor(colour1, for: .normal)
+        weekViewButton.setTitleColor(Colours.colour1, for: .normal)
+        
+        // Selected schedule
+        selectedSchedule = settings[7][0]
         
         //
         // Back
@@ -89,23 +94,23 @@ class ScheduleViewQuestion: UIViewController {
     // MARK: Button actions
     // Day
     @IBAction func dayButtonAction(_ sender: Any) {
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         // Set user settings for schedule style to week
-        schedules[selectedSchedule][9] = 0
-        UserDefaults.standard.set(settings, forKey: "userSettings")
+        schedules[selectedSchedule][9][0] = 0
+        UserDefaults.standard.set(schedules, forKey: "schedules")
         self.performSegue(withIdentifier: "ScheduleCreatorSegue", sender: Any)
     }
     
     // Week
     @IBAction func weekButtonAction(_ sender: Any) {
         // If app schedule, go to week
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         // Set user settings for schedule style to week
-        schedules[selectedSchedule][9] = 1
-        UserDefaults.standard.set(settings, forKey: "userSettings")
-        if settings[7][0] == 0 {
+        schedules[selectedSchedule][9][0] = 1
+        UserDefaults.standard.set(schedules, forKey: "schedules")
+        if selectedSchedule == 0 {
             //
-            shouldReloadSchedule = true
+            ScheduleVariables.shared.shouldReloadSchedule = true
             self.dismiss(animated: true)
         // If custom schedule, go to schedule creator
         } else {

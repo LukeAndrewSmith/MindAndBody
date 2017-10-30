@@ -77,10 +77,10 @@ extension UIViewController {
     // MARK: - Determine Number of Sessions
     func setNumberOfSessions(updating: Bool) {
         // Create/Fetch Arrays
-        // Deduce number of sessions using '''updatedSessionsArray''', then let user edit, then set to defaults;  this is so if user is updating profile the new array can be checked against the existing schedule to see the difference
+        // Deduce number of sessions using '''ScheduleVariables.shared.updatedSessionsArray''', then let user edit, then set to defaults;  this is so if user is updating profile the new array can be checked against the existing schedule to see the difference
         // [nSessions, mind, flexibility, endurance, toning, muscle gain, strength]
             // [total,
-        updatedSessionsArray = [0,0,0,0,0,0,0] // Will be set to profileAnswers[2]
+        ScheduleVariables.shared.updatedSessionsArray = [0,0,0,0,0,0,0] // Will be set to profileAnswers[2]
         // Range of total n session and specific group sessions
         var rangeArray = [
             // Mind
@@ -154,37 +154,37 @@ extension UIViewController {
         case 0:
             // Do a little 1 - 2
             if profileAnswers[0][20] == 0 {
-                updatedSessionsArray[0] = 2
+                ScheduleVariables.shared.updatedSessionsArray[0] = 2
             // Take it easy, 1 - 3 sessions
             } else if profileAnswers[0][20] == 1 {
-                updatedSessionsArray[0] = 3
+                ScheduleVariables.shared.updatedSessionsArray[0] = 3
             // Routine, 2 - 4 sessions
             } else if profileAnswers[0][20] == 2  {
-                updatedSessionsArray[0] = 4
+                ScheduleVariables.shared.updatedSessionsArray[0] = 4
             }
         // 3-4 days
         case 1:
             // Do a little, 2 - 4 sessions
             if profileAnswers[0][20] == 0 {
-                updatedSessionsArray[0] = 4
+                ScheduleVariables.shared.updatedSessionsArray[0] = 4
             // take it easy, 3 - 5 sessions
             } else if profileAnswers[0][20] == 1 {
-                updatedSessionsArray[0] = 5
+                ScheduleVariables.shared.updatedSessionsArray[0] = 5
                 // Routine, 4 - 6 sessions
             } else if profileAnswers[0][20] == 2 {
-                updatedSessionsArray[0] = 6
+                ScheduleVariables.shared.updatedSessionsArray[0] = 6
             }
         // 5-7 days
         case 2:
             // Do a little, 5 sessions
             if profileAnswers[0][20] == 0 {
-                updatedSessionsArray[0] = 5
+                ScheduleVariables.shared.updatedSessionsArray[0] = 5
                 // take it easy, 7 sessions
             } else if profileAnswers[0][20] == 1 {
-                updatedSessionsArray[0] = 7
+                ScheduleVariables.shared.updatedSessionsArray[0] = 7
                 // Routine, 10 sessions
             } else if profileAnswers[0][20] == 2 {
-                updatedSessionsArray[0] = 10
+                ScheduleVariables.shared.updatedSessionsArray[0] = 10
             }
         default: break
         }
@@ -215,7 +215,7 @@ extension UIViewController {
         
         // TEST EVERYTHING GOES THROUGH WORKOUT REDUCTION
         if goalCount > rangeArray[0][1] - 1 {
-//        if goalCount > updatedSessionsArray[0] + 1 {
+//        if goalCount > ScheduleVariables.shared.updatedSessionsArray[0] + 1 {
             //
             // Create array of primary and secondary goals,
                 // 0 or 1
@@ -499,10 +499,10 @@ extension UIViewController {
                 }
             }
             // if 1 more than sessions, add 1 session
-            if nGoals2 == updatedSessionsArray[0] + 1 {
-                updatedSessionsArray[0] += 1
+            if nGoals2 == ScheduleVariables.shared.updatedSessionsArray[0] + 1 {
+                ScheduleVariables.shared.updatedSessionsArray[0] += 1
             // if goals still to high, reduce further
-            } else if nGoals2 > updatedSessionsArray[0] + 1 {
+            } else if nGoals2 > ScheduleVariables.shared.updatedSessionsArray[0] + 1 {
                 // Flexibility && Mind -> Mind
                 // index 1 is strength as strength is last goal
                 let totalRatio = ratios[0] + ratios[1]
@@ -514,10 +514,10 @@ extension UIViewController {
         // Their  their n goals is similar to number of sessions, in a range of 2 about goals
             // -> Do nothing except if goals are greater than
                 // Still checking range and not just +1 incase I want to do something more one day
-        } else if goalCount < updatedSessionsArray[0] + 2 && goalCount > updatedSessionsArray[0] - 2{
+        } else if goalCount < ScheduleVariables.shared.updatedSessionsArray[0] + 2 && goalCount > ScheduleVariables.shared.updatedSessionsArray[0] - 2{
             // If goals is 1 greater than sessions, increase sessions, if not leave sessions as is
-            if goalCount == updatedSessionsArray[0] + 1 {
-                updatedSessionsArray[0] += 1
+            if goalCount == ScheduleVariables.shared.updatedSessionsArray[0] + 1 {
+                ScheduleVariables.shared.updatedSessionsArray[0] += 1
             }
             
         // Their n goals is lower than preliminary number of sessions lower range
@@ -587,14 +587,14 @@ extension UIViewController {
         for i in 0...ratios.count - 1 {
             //
             // Round normally, exept up from less than 0.5, to ensure that all goals have at least 1 session, no matter the ratio
-                // + 1 as updatedsessionsArray includes total n sessions
-            let nSessions = ratios[i] * Double(updatedSessionsArray[0])
+                // + 1 as ScheduleVariables.shared.updatedSessionsArray includes total n sessions
+            let nSessions = ratios[i] * Double(ScheduleVariables.shared.updatedSessionsArray[0])
             if ratios[i] == 0 {
-                updatedSessionsArray[i + 1] = 0
+                ScheduleVariables.shared.updatedSessionsArray[i + 1] = 0
             } else if ratios[i] != 0 && nSessions < 0.5 {
-                updatedSessionsArray[i + 1] = 1
+                ScheduleVariables.shared.updatedSessionsArray[i + 1] = 1
             } else {
-                updatedSessionsArray[i + 1] = Int(round(nSessions))
+                ScheduleVariables.shared.updatedSessionsArray[i + 1] = Int(round(nSessions))
             }
         }
         
@@ -606,44 +606,44 @@ extension UIViewController {
         // MARK: Final check n sessions
         // CHECK CURRENTLY UNUSED, to be put it if edge cases are vary bad (i.e nsessions = 2, new nsessions = 4)
         var newNSessions = 0
-        for i in 1...updatedSessionsArray.count - 1 {
-            newNSessions += updatedSessionsArray[i]
+        for i in 1...ScheduleVariables.shared.updatedSessionsArray.count - 1 {
+            newNSessions += ScheduleVariables.shared.updatedSessionsArray[i]
         }
 //            // If nSessions (total of all sessions)[1]+...+[6] 2 or more greater than nSessions (total sessions)[0], edit
-//            if newNSessions > updatedSessionsArray[0] + 1 {
+//            if newNSessions > ScheduleVariables.shared.updatedSessionsArray[0] + 1 {
 //
 //            // New n sessions is sensible, reset n sessions to new
 //            } else {
-//                updatedSessionsArray[0] = newNSessions
+//                ScheduleVariables.shared.updatedSessionsArray[0] = newNSessions
 //            }
         
-        updatedSessionsArray[0] = newNSessions
+        ScheduleVariables.shared.updatedSessionsArray[0] = newNSessions
 
         
         
         // ----------------------------------------------
         // MARK: Update ranges
         // Session ranges
-        for i in 1...updatedSessionsArray.count - 1 {
-                // i - 1 as updatedSessionsArray contains total n sessions, but profileAnswers[3] does not
+        for i in 1...ScheduleVariables.shared.updatedSessionsArray.count - 1 {
+                // i - 1 as ScheduleVariables.shared.updatedSessionsArray contains total n sessions, but profileAnswers[3] does not
             // lower range: i*2
             // upper range: i*2 + 1
             let index = 2 * (i - 1)
-            if updatedSessionsArray[i] != 0 {
+            if ScheduleVariables.shared.updatedSessionsArray[i] != 0 {
                 // Lower Range
                     // 1 if 1, -1 if > 1
-                if updatedSessionsArray[i] > 1 {
-                    profileAnswers[3][index] = updatedSessionsArray[i] - 1
+                if ScheduleVariables.shared.updatedSessionsArray[i] > 1 {
+                    profileAnswers[3][index] = ScheduleVariables.shared.updatedSessionsArray[i] - 1
                 } else {
-                    profileAnswers[3][index] = updatedSessionsArray[i]
+                    profileAnswers[3][index] = ScheduleVariables.shared.updatedSessionsArray[i]
                 }
                 // Upper range
                 // If mind set upper range higher
                 if index == 0 {
-                    profileAnswers[3][index + 1] = updatedSessionsArray[i] + 3
+                    profileAnswers[3][index + 1] = ScheduleVariables.shared.updatedSessionsArray[i] + 3
                 // If mind set upper range higher
                 } else {
-                    profileAnswers[3][index + 1] = updatedSessionsArray[i] + 2
+                    profileAnswers[3][index + 1] = ScheduleVariables.shared.updatedSessionsArray[i] + 2
                 }
             } else {
                 profileAnswers[3][index] = 0
@@ -655,7 +655,7 @@ extension UIViewController {
         // MARK: Set new arrays
             // NOTE IF UPDATING SESSION, THE ARRAYS SHOULDN'T BE SET HERE THE USER SHOULD BE PRESENTED THE NEW ARRAYS AND THEY DECIDE THEN
         if updating == false {
-            profileAnswers[2] = updatedSessionsArray
+            profileAnswers[2] = ScheduleVariables.shared.updatedSessionsArray
             UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
         } else {
             

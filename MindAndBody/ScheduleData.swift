@@ -43,107 +43,6 @@ struct scheduleData {
 
 enum scheduleDataStructures {
     
-    //
-    // MARK: Schedule Tracking, tracking what youve done each week, putting a tick next to what you've done in schedule if true
-    static let scheduleTrackingArrays: [Int:[[Bool]]] =
-        [
-            // MARK: Mind
-            0:
-                [
-                    // 0
-                    [false],
-                    // Yoga, Meditation Walk
-                    [
-                        false,
-                        false,
-                        false
-                    ],
-                    // 4 | To Do Yoga - Warmup, Practice
-                    [
-                        false,
-                        false
-                    ]
-            ],
-            
-            // Note: Choice = ["title","contents","contents"...]
-            // MARK: Flexibility
-            1:
-                [
-                    // 0
-                    [false],
-                    // 4 | To Do Flexibility - Warmup, Session
-                    [
-                        false,
-                        false
-                    ]
-            ],
-            
-            // MARK: Endurance
-            2:
-                [
-                    // 0
-                    [false],
-                    // Type - High Intesnsity, Steady State
-                    [
-                        false,
-                        false
-                    ],
-                    // --------------
-                    // 4 | High Intensity To Do - warmup, cardio, stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ],
-                    // ------------
-                    // Steady State
-                    // 5 | Steady State To Do 2 - 2 - To Do
-                    [
-                        false,
-                        false,
-                        false,
-                        ]
-            ],
-            // MARK: Toning
-            3:
-                [
-                    // 0
-                    [false],
-                    // 3 | Toning To Do, warmup, session, stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ]
-            ],
-            
-            // MARK: Muscle Gain
-            4:
-                [
-                    // 0
-                    [false],
-                    // 4 | Muscle Gain To Do - Warmup, session, stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ]
-            ],
-            
-            // MARK: Strength
-            5:
-                [
-                    // 0
-                    [false],
-                    // 4 | Strength To Do, Warmup, Session, Stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ]
-            ]
-    ]
-    
     
     // MARK: Profile Data
     //
@@ -307,7 +206,7 @@ enum scheduleDataStructures {
     
     
     // Schedules
-    static let schedules: [[[Any]]] =
+    static let registerSchedules: [[[Any]]] =
     [
         // App Schedule
         [
@@ -360,14 +259,12 @@ enum scheduleDataStructures {
     ]
     
     // Tracking
-    static let registerTracking: [[Any]] =
+    static let registerTracking: [[[[[Any]]]]] =
     [
-        // Tracking
+        // Tracking App Schedule
         [
             // Monday
-            [
-                [[]]
-            ],
+            [],
             // Tuesday
             [],
             // Wednesday
@@ -383,6 +280,142 @@ enum scheduleDataStructures {
             // Full week as list - 7
             []
         ],
+        // Tracking Custom Schedule
+    ]
+    
+    // Empty Tracking Week
+    static let emptyTrackingWeek: [[[[Any]]]] =
+        // Tracking App Schedule
+        [
+            // Monday
+            [],
+            // Tuesday
+            [],
+            // Wednesday
+            [],
+            // Thursday
+            [],
+            // Friday
+            [],
+            // Saturday
+            [],
+            // Sunday
+            [],
+            // Full week as list - 7
+            []
+        ]
+    
+    //
+    // MARK: Schedule Tracking, tracking what youve done each week, putting a tick next to what you've done in schedule if true
+    static let scheduleTrackingArrays: [Int:[[Any]]] =
+        [
+            // MARK: Mind
+            0:
+                [
+                    // 0
+                    [false],
+                    // Choice Path - 1
+                    [0,0],
+                    // Yoga, Meditation Walk
+                    [
+                        false,
+                        false,
+                        false
+                    ],
+                    // 4 | To Do Yoga - Warmup, Practice
+                    [
+                        false,
+                        false
+                    ]
+            ],
+            
+            // Note: Choice = ["title","contents","contents"...]
+            // MARK: Flexibility
+            1:
+                [
+                    // 0
+                    [false],
+                    // Choice Path - 1
+                    [0,0],
+                    // 4 | To Do Flexibility - Warmup, Session
+                    [
+                        false,
+                        false
+                    ]
+            ],
+            
+            // MARK: Endurance
+            2:
+                [
+                    // 0
+                    [false],
+                    // Choice Path - 1
+                    [0,0],
+                    // Type - High Intesnsity, Steady State
+                    [
+                        false,
+                        false
+                    ],
+                    // --------------
+                    // 4 | High Intensity To Do - warmup, cardio, stretching
+                    [
+                        false,
+                        false,
+                        false
+                    ],
+                    // ------------
+                    // Steady State
+                    // 5 | Steady State To Do 2 - 2 - To Do
+                    [
+                        false,
+                        false,
+                        false,
+                    ]
+            ],
+            // MARK: Toning
+            3:
+                [
+                    // 0
+                    [false],
+                    // Choice Path - 1
+                    [0,0],
+                    // 3 | Toning To Do, warmup, session, stretching
+                    [
+                        false,
+                        false,
+                        false
+                    ]
+            ],
+            
+            // MARK: Muscle Gain
+            4:
+                [
+                    // 0
+                    [false],
+                    // Choice Path - 1
+                    [0,0],
+                    // 4 | Muscle Gain To Do - Warmup, session, stretching
+                    [
+                        false,
+                        false,
+                        false
+                    ]
+            ],
+            
+            // MARK: Strength
+            5:
+                [
+                    // 0
+                    [false],
+                    // Choice Path - 1
+                    [0,0],
+                    // 4 | Strength To Do, Warmup, Session, Stretching
+                    [
+                        false,
+                        false,
+                        false
+                    ]
+            ]
     ]
     
 }

@@ -1274,6 +1274,7 @@
 		07E465241F4ED1E400A5AF49 /* soleus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E465061F4ED1E400A5AF49 /* soleus@3x.png */; };
 		07EFC0AA1F6585560030DCE6 /* ProfileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EFC0A91F6585560030DCE6 /* ProfileDetail.swift */; };
 		07EFC0AC1F66CCEF0030DCE6 /* ScheduleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */; };
+		07F8EDD51FA5DB3700C452F4 /* InitialProfileQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F8EDD41FA5DB3700C452F4 /* InitialProfileQuestion.swift */; };
 		07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F912071DC2D1240004C924 /* WarmupChoice.swift */; };
 		07FE380C1DF9B3A200E7EA20 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07FE380E1DF9B3A200E7EA20 /* Localizable.strings */; };
 		07FFA30F1F4C614B00E9B0C1 /* cardioWarmup.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FFA30E1F4C614B00E9B0C1 /* cardioWarmup.png */; };
@@ -2655,6 +2656,7 @@
 		07E465061F4ED1E400A5AF49 /* soleus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soleus@3x.png"; sourceTree = "<group>"; };
 		07EFC0A91F6585560030DCE6 /* ProfileDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetail.swift; sourceTree = "<group>"; };
 		07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCreator.swift; sourceTree = "<group>"; };
+		07F8EDD41FA5DB3700C452F4 /* InitialProfileQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialProfileQuestion.swift; sourceTree = "<group>"; };
 		07F912071DC2D1240004C924 /* WarmupChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoice.swift; sourceTree = "<group>"; };
 		07FE380D1DF9B3A200E7EA20 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		07FE380F1DF9B3C700E7EA20 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
@@ -4553,10 +4555,8 @@
 		07D5C3D31F9E31B20038F143 /* Schedule Creation */ = {
 			isa = PBXGroup;
 			children = (
-				077876221F92A50D005CE68A /* InitialProfile.swift */,
-				0750DB621F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift */,
-				07D5C3D81F9E32430038F143 /* ScheduleViewQuestion.swift */,
-				07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */,
+				07F8EDD81FA5DB4900C452F4 /* Profile */,
+				07F8EDD91FA5DB5E00C452F4 /* Schedule */,
 			);
 			name = "Schedule Creation";
 			sourceTree = "<group>";
@@ -6828,6 +6828,25 @@
 			name = BodyWeight;
 			sourceTree = "<group>";
 		};
+		07F8EDD81FA5DB4900C452F4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				07F8EDD41FA5DB3700C452F4 /* InitialProfileQuestion.swift */,
+				077876221F92A50D005CE68A /* InitialProfile.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		07F8EDD91FA5DB5E00C452F4 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				07D5C3D81F9E32430038F143 /* ScheduleViewQuestion.swift */,
+				07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */,
+				0750DB621F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift */,
+			);
+			name = Schedule;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -8251,6 +8270,7 @@
 				0750DB631F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift in Sources */,
 				07DEE6F71E0AADE6003B89AB /* YogaChoice.swift in Sources */,
 				077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */,
+				07F8EDD51FA5DB3700C452F4 /* InitialProfileQuestion.swift in Sources */,
 				071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */,
 				07686A901F843A1600C278CC /* ScheduleHelpers.swift in Sources */,
 				076C68421ED497AD009160C2 /* BodyweightChoiceCC.swift in Sources */,

@@ -107,12 +107,12 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.clipsToBounds = true
         //
-        if backgroundIndex < backgroundImageArray.count {
-            backgroundImageView.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == backgroundImageArray.count {
+        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
+            backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
+        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
             //
             backgroundImageView.image = nil
-            backgroundImageView.backgroundColor = colour1
+            backgroundImageView.backgroundColor = Colours.colour1
         }
         //
         self.view.addSubview(backgroundImageView)
@@ -143,11 +143,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         // Dragging
-        draggingLabel.textColor = colour1
+        draggingLabel.textColor = Colours.colour1
         draggingLabel.textAlignment = .center
         draggingLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         draggingLabel.lineBreakMode = .byWordWrapping
-        draggingLabel.layer.borderColor = colour1.withAlphaComponent(0.5).cgColor
+        draggingLabel.layer.borderColor = Colours.colour1.withAlphaComponent(0.5).cgColor
         draggingLabel.layer.borderWidth = 1
         draggingLabel.layer.cornerRadius = 15
         draggingLabel.clipsToBounds = true
@@ -165,8 +165,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         //
         // Create schedule button
-        createScheduleButton.backgroundColor = colour3.withAlphaComponent(0.25)
-        createScheduleButton.tintColor = colour1
+        createScheduleButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+        createScheduleButton.tintColor = Colours.colour1
         createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
         
     }
@@ -193,7 +193,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Number of row
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Days
-        if settings[0][0] == 0 {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        if schedules[selectedSchedule][9][0] as! Int == 0 {
             return 7
         } else {
             return 1
@@ -202,8 +203,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         // Day or week
-        if schedules[selectedSchedule][9] == 0 {
+        if schedules[selectedSchedule][9][0] as! Int == 0 {
             return 49
         } else {
             return 343
@@ -218,7 +220,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
         //
         // Day view
-        if schedules[selectedSchedule][9] == 0 {
+        if schedules[selectedSchedule][9][0] as! Int == 0 {
             //
             let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell", for: indexPath) as! DayCell
             cell.selectionStyle = .none
@@ -233,7 +235,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     cell.groupLabelArray[i].tag = 1
                     cell.groupLabelArray[i].alpha = 1
                     cell.groupLabelArray[i].layer.borderWidth = 1
-                    cell.groupLabelArray[i].layer.borderColor = colour1.withAlphaComponent(0.75).cgColor
+                    cell.groupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
                     cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                     cell.groupLabelArray[i].clipsToBounds = true
                     //
@@ -259,7 +261,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         cell.groupLabelArray[i][j].tag = 1
                         cell.groupLabelArray[i][j].alpha = 1
                         cell.groupLabelArray[i][j].layer.borderWidth = 1
-                        cell.groupLabelArray[i][j].layer.borderColor = colour1.withAlphaComponent(0.75).cgColor
+                        cell.groupLabelArray[i][j].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
                         cell.groupLabelArray[i][j].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i][j].clipsToBounds = true
                         //
@@ -380,41 +382,44 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func setGroupLabels() {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
         // day and app schedule
-        if schedules[selectedSchedule][9] == 0 && settings[7][0] == 0 {
+        if schedules[selectedSchedule][9][0] as! Int == 0 && settings[7][0] == 0 {
             // Set titles
-            for i in 0...nGroups - 1 {
-                //
-                let indexOfGroup = groupIndexes[i]
-                let groupTitle = NSLocalizedString(scheduleDataStructures.groupNames[indexOfGroup], comment: "")
-                // Not selected filled in
-                var nGroupsString = String()
-                if dayTableGroupArray[indexOfGroup] == 0 {
-                    nGroupsString = "\n" + String(profileAnswers[2][indexOfGroup + 1]) + "x"
-                // Some selected already
-                } else if dayTableGroupArray[indexOfGroup] != profileAnswers[2][indexOfGroup + 1] {
-                    let number = profileAnswers[2][indexOfGroup + 1] - dayTableGroupArray[indexOfGroup]
-                    nGroupsString = "\n" + String(number) + "x"
-                } else {
-                    nGroupsString = ""
-                }
-                let title = groupTitle + nGroupsString
-                bigGroupLabelArray[i].text = title
-                bigGroupLabelArray[i].textColor = colour1
-                bigGroupLabelArray[i].alpha = 1
-                bigGroupLabelArray[i].layer.borderColor = colour1.withAlphaComponent(0.5).cgColor
-                bigGroupLabelArray[i].layer.borderWidth = 1
-                bigGroupLabelArray[i].isUserInteractionEnabled = true
-                bigGroupLabelArray[i].layer.cornerRadius = 15
-                bigGroupLabelArray[i].clipsToBounds = true
+            if nGroups != 0 {
+                for i in 0...nGroups - 1 {
+                    //
+                    let indexOfGroup = groupIndexes[i]
+                    let groupTitle = NSLocalizedString(scheduleDataStructures.groupNames[indexOfGroup], comment: "")
+                    // Not selected filled in
+                    var nGroupsString = String()
+                    if dayTableGroupArray[indexOfGroup] == 0 {
+                        nGroupsString = "\n" + String(profileAnswers[2][indexOfGroup + 1]) + "x"
+                    // Some selected already
+                    } else if dayTableGroupArray[indexOfGroup] != profileAnswers[2][indexOfGroup + 1] {
+                        let number = profileAnswers[2][indexOfGroup + 1] - dayTableGroupArray[indexOfGroup]
+                        nGroupsString = "\n" + String(number) + "x"
+                    } else {
+                        nGroupsString = ""
+                    }
+                    let title = groupTitle + nGroupsString
+                    bigGroupLabelArray[i].text = title
+                    bigGroupLabelArray[i].textColor = Colours.colour1
+                    bigGroupLabelArray[i].alpha = 1
+                    bigGroupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.5).cgColor
+                    bigGroupLabelArray[i].layer.borderWidth = 1
+                    bigGroupLabelArray[i].isUserInteractionEnabled = true
+                    bigGroupLabelArray[i].layer.cornerRadius = 15
+                    bigGroupLabelArray[i].clipsToBounds = true
 
-                
-                // Make label dark and green if all session of group have been chosen
-                if dayTableGroupArray[indexOfGroup] == profileAnswers[2][indexOfGroup + 1] {
-                    bigGroupLabelArray[i].alpha = 0.75
-                    bigGroupLabelArray[i].layer.borderColor = colour3.withAlphaComponent(0.5).cgColor
-                    bigGroupLabelArray[i].textColor = colour3
+                    
+                    // Make label dark and green if all session of group have been chosen
+                    if dayTableGroupArray[indexOfGroup] == profileAnswers[2][indexOfGroup + 1] {
+                        bigGroupLabelArray[i].alpha = 0.75
+                        bigGroupLabelArray[i].layer.borderColor = Colours.colour3.withAlphaComponent(0.5).cgColor
+                        bigGroupLabelArray[i].textColor = Colours.colour3
+                    }
                 }
             }
         // Custom schedule
@@ -427,9 +432,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Not selected filled in
                 let title = groupTitle
                 bigGroupLabelArray[i].text = title
-                bigGroupLabelArray[i].textColor = colour1
+                bigGroupLabelArray[i].textColor = Colours.colour1
                 bigGroupLabelArray[i].alpha = 1
-                bigGroupLabelArray[i].layer.borderColor = colour1.withAlphaComponent(0.5).cgColor
+                bigGroupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.5).cgColor
                 bigGroupLabelArray[i].layer.borderWidth = 1
                 bigGroupLabelArray[i].isUserInteractionEnabled = true
                 bigGroupLabelArray[i].layer.cornerRadius = 15
@@ -439,9 +444,10 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func displayCreateScheduleButton() {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
         var shouldDisplay = true
-        if schedules[selectedSchedule][9] == 0 && selectedSchedule == 0 {
+        if schedules[selectedSchedule][9][0] as! Int == 0 && selectedSchedule == 0 {
             for i in 0...dayTableGroupArray.count - 1 {
                 if dayTableGroupArray[i] != profileAnswers[2][i + 1] {
                     shouldDisplay = false
@@ -507,6 +513,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // MARK: Begin Dragging
     func beginDraggingFromTop(gestureRecognizer: UIGestureRecognizer) {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
 
         let longPress = gestureRecognizer as! UILongPressGestureRecognizer
@@ -517,7 +524,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         //
             // MARK: Day
-        if schedules[selectedSchedule][9] == 0 {
+        if schedules[selectedSchedule][9][0] as! Int == 0 {
             switch state {
             // Add dragging label
             case .began:
@@ -543,7 +550,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     UIApplication.shared.keyWindow?.addSubview(draggingLabel)
                     maskStackViews()
                     
+                    previousIndexPath = nil
                 } else {
+                    previousIndexPath = nil
                     longPress.isEnabled = false
                     longPress.isEnabled = true
                 }
@@ -565,7 +574,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             break
                         } else if cell.groupLabelArray[i].tag == 0 {
                             cell.groupLabelArray[i].tag = 2
-                            cell.groupLabelArray[i].backgroundColor = colour1
+                            cell.groupLabelArray[i].backgroundColor = Colours.colour1
                             cell.groupLabelArray[i].alpha = 0.5
                             cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[i].clipsToBounds = true
@@ -573,6 +582,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             break
                         }
                     }
+                    previousIndexPath = indexPathForRow!
                 // Row is changing, changing highlight
                 } else if indexPathForRow != nil && indexPathForRow != previousIndexPath {
                     // Clear old cell
@@ -589,17 +599,15 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }
                         }
                     }
-                    previousIndexPath = indexPathForRow!
-                    
                     //
                     let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
                     // ADD INDICATOR
                     for i in 0...cell.groupLabelArray.count - 1 {
-                        if cell.groupLabelArray[i].backgroundColor == colour1 {
+                        if cell.groupLabelArray[i].backgroundColor == Colours.colour1 {
                             break
                         } else if cell.groupLabelArray[i].tag == 0 {
                             cell.groupLabelArray[i].tag = 2
-                            cell.groupLabelArray[i].backgroundColor = colour1
+                            cell.groupLabelArray[i].backgroundColor = Colours.colour1
                             cell.groupLabelArray[i].alpha = 0.5
                             cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[i].clipsToBounds = true
@@ -607,6 +615,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             break
                         }
                     }
+                    previousIndexPath = indexPathForRow!
                 // Dragging label is dragged off table
                 } else if indexPathForRow == nil {
                     // Clear old cell
@@ -641,21 +650,18 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             break
                         }
                     }
-                }
-                
                 //
                 // If Dragging label is over a day
                     // Set goal to day
                     // Remove 1 from the relevant label of the group at the top of the screen
                         // If no more sessions of group, darken top label and make it green
-                if indexPathForRow != nil {
                     // Haptic feedback
                     var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
                     generator?.prepare()
                     generator?.impactOccurred()
                     generator = nil
                     
-                    let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
+                    let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
                     
                     // if there are already 5 things in one day, do nothing
                     var dayIsFull = false
@@ -666,7 +672,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             cell.groupLabelArray[i].tag = 1
                             cell.groupLabelArray[i].alpha = 1
                             cell.groupLabelArray[i].layer.borderWidth = 1
-                            cell.groupLabelArray[i].layer.borderColor = colour1.withAlphaComponent(0.75).cgColor
+                            cell.groupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
                             cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[i].clipsToBounds = true
                             //
@@ -684,13 +690,13 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         //
                         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
                         // update dayTableGroupArray
-                        if selectedSchedule == 0 || schedules[selectedSchedule][9] == 1 {
+                        if selectedSchedule == 0 || schedules[selectedSchedule][9][0] as! Int == 1 {
                             dayTableGroupArray[indexOfDraggedGroup] += 1
                         }
                         // update schedules
-                        schedules[selectedSchedule][(indexPathForRow?.row)!].append(indexOfDraggedGroup)
-                        updateFullWeek()
+                        schedules[selectedSchedule][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
                         UserDefaults.standard.set(schedules, forKey: "schedules")
+                        updateFullWeek()
                         // update label
                         setGroupLabels()
                         displayCreateScheduleButton()
@@ -750,7 +756,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             break
                         } else if cell.groupLabelArray[indexOfDraggedGroup][i].tag == 0 {
                             cell.groupLabelArray[indexOfDraggedGroup][i].tag = 2
-                            cell.groupLabelArray[indexOfDraggedGroup][i].backgroundColor = colour1
+                            cell.groupLabelArray[indexOfDraggedGroup][i].backgroundColor = Colours.colour1
                             cell.groupLabelArray[indexOfDraggedGroup][i].alpha = 0.5
                             cell.groupLabelArray[indexOfDraggedGroup][i].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[indexOfDraggedGroup][i].clipsToBounds = true
@@ -803,7 +809,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             cell.groupLabelArray[indexOfDraggedGroup][i].tag = 1
                             cell.groupLabelArray[indexOfDraggedGroup][i].alpha = 1
                             cell.groupLabelArray[indexOfDraggedGroup][i].layer.borderWidth = 1
-                            cell.groupLabelArray[indexOfDraggedGroup][i].layer.borderColor = colour1.withAlphaComponent(0.75).cgColor
+                            cell.groupLabelArray[indexOfDraggedGroup][i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
                             cell.groupLabelArray[indexOfDraggedGroup][i].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[indexOfDraggedGroup][i].clipsToBounds = true
                             //
@@ -837,6 +843,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // MARK: Begin Dragging from cell
     func beginDraggingFromCell(gestureRecognizer: UIGestureRecognizer) {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
         
         let longPress = gestureRecognizer as! UILongPressGestureRecognizer
@@ -847,7 +854,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         //
             // MARK: Day
-        if schedules[selectedSchedule][9] == 0 {
+        if schedules[selectedSchedule][9][0] as! Int == 0 {
             switch state {
             // Add dragging label
             case .began:
@@ -895,7 +902,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 cell.groupLabelArray[k].tag = 1
                                 cell.groupLabelArray[k].alpha = 1
                                 cell.groupLabelArray[k].layer.borderWidth = 1
-                                cell.groupLabelArray[k].layer.borderColor = colour1.withAlphaComponent(0.75).cgColor
+                                cell.groupLabelArray[k].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
                                 cell.groupLabelArray[k].layer.cornerRadius = 15 / 2
                                 cell.groupLabelArray[k].clipsToBounds = true
                                 //
@@ -922,7 +929,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         
                         // If custom schedule, turn createschedulebutton into bin
                         if selectedSchedule != 0 {
-                            createScheduleButton.backgroundColor = colour4.withAlphaComponent(0.25)
+                            createScheduleButton.backgroundColor = Colours.colour4.withAlphaComponent(0.25)
                             createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
                             createScheduleButton.setTitle("", for: .normal)
                         }
@@ -981,7 +988,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 break
                             } else if cell.groupLabelArray[i].tag == 0 {
                                 cell.groupLabelArray[i].tag = 2
-                                cell.groupLabelArray[i].backgroundColor = colour1
+                                cell.groupLabelArray[i].backgroundColor = Colours.colour1
                                 cell.groupLabelArray[i].alpha = 0.5
                                 cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                                 cell.groupLabelArray[i].clipsToBounds = true
@@ -1020,11 +1027,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
                     // ADD INDICATOR
                     for i in 0...cell.groupLabelArray.count - 1 {
-                        if cell.groupLabelArray[i].backgroundColor == colour1 {
+                        if cell.groupLabelArray[i].backgroundColor == Colours.colour1 {
                             break
                         } else if cell.groupLabelArray[i].tag == 0 {
                             cell.groupLabelArray[i].tag = 2
-                            cell.groupLabelArray[i].backgroundColor = colour1
+                            cell.groupLabelArray[i].backgroundColor = Colours.colour1
                             cell.groupLabelArray[i].alpha = 0.5
                             cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[i].clipsToBounds = true
@@ -1046,11 +1053,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
                     // ADD INDICATOR
                     for i in 0...cell.groupLabelArray.count - 1 {
-                        if cell.groupLabelArray[i].backgroundColor == colour1 {
+                        if cell.groupLabelArray[i].backgroundColor == Colours.colour1 {
                             break
                         } else if cell.groupLabelArray[i].tag == 0 {
                             cell.groupLabelArray[i].tag = 2
-                            cell.groupLabelArray[i].backgroundColor = colour1
+                            cell.groupLabelArray[i].backgroundColor = Colours.colour1
                             cell.groupLabelArray[i].alpha = 0.5
                             cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[i].clipsToBounds = true
@@ -1084,7 +1091,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }, completion: { finished in
                         self.createScheduleButton.setImage(nil, for: .normal)
                         self.createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-                        self.createScheduleButton.backgroundColor = colour3.withAlphaComponent(0.25)
+                        self.createScheduleButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
                         self.draggingLabel.removeFromSuperview()
                         self.deMaskStackViews()
                     })
@@ -1134,7 +1141,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 cell.groupLabelArray[i].tag = 1
                                 cell.groupLabelArray[i].alpha = 1
                                 cell.groupLabelArray[i].layer.borderWidth = 1
-                                cell.groupLabelArray[i].layer.borderColor = colour1.withAlphaComponent(0.75).cgColor
+                                cell.groupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
                                 cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                                 cell.groupLabelArray[i].clipsToBounds = true
                                 //
@@ -1169,7 +1176,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     cell.groupLabelArray[i].tag = 1
                                     cell.groupLabelArray[i].alpha = 1
                                     cell.groupLabelArray[i].layer.borderWidth = 1
-                                    cell.groupLabelArray[i].layer.borderColor = colour1.withAlphaComponent(0.75).cgColor
+                                    cell.groupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
                                     cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                                     cell.groupLabelArray[i].clipsToBounds = true
                                     //
@@ -1198,7 +1205,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     if selectedSchedule != 0 && shouldRemoveBin == true {
                         createScheduleButton.setImage(nil, for: .normal)
                         createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-                        createScheduleButton.backgroundColor = colour3.withAlphaComponent(0.25)
+                        createScheduleButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
                     }
                 }
             }
@@ -1234,7 +1241,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             //
                             previousIndexPath = indexPathForRow
                             
-                            // TODO: Remove from CUSTOM schedules array
                             // Remove from schedules array
                             let firstIndex = (schedules[selectedSchedule][7] as! [Int]).index(of: indexOfDraggedGroup)
                             schedules[selectedSchedule][7].remove(at: firstIndex!)
@@ -1262,7 +1268,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         cell.groupLabelArray[i][j].tag = 1
                                         cell.groupLabelArray[i][j].alpha = 1
                                         cell.groupLabelArray[i][j].layer.borderWidth = 1
-                                        cell.groupLabelArray[i][j].layer.borderColor = colour1.withAlphaComponent(0.75).cgColor
+                                        cell.groupLabelArray[i][j].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
                                         cell.groupLabelArray[i][j].layer.cornerRadius = 15 / 2
                                         cell.groupLabelArray[i][j].clipsToBounds = true
                                         //
@@ -1312,7 +1318,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     // In Bin
                     if cell.binView.frame.contains(locationInView) {
                         cell.bin.image = #imageLiteral(resourceName: "BinOpen")
-                        cell.bin.tintColor = colour4
+                        cell.bin.tintColor = Colours.colour4
                         // Clear old cell
                         // CLEAR INDICATOR
                         for i in 0...cell.groupLabelArray[indexOfDraggedGroup].count - 1 {
@@ -1326,14 +1332,14 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     // Out of bin
                     } else {
                         cell.bin.image = #imageLiteral(resourceName: "Bin")
-                        cell.bin.tintColor = colour1
+                        cell.bin.tintColor = Colours.colour1
                         // ADD INDICATOR
                         for i in 0...cell.groupLabelArray[indexOfDraggedGroup].count - 1 {
                             if cell.groupLabelArray[indexOfDraggedGroup][i].tag == 2 {
                                 break
                             } else if cell.groupLabelArray[indexOfDraggedGroup][i].tag == 0 {
                                 cell.groupLabelArray[indexOfDraggedGroup][i].tag = 2
-                                cell.groupLabelArray[indexOfDraggedGroup][i].backgroundColor = colour1
+                                cell.groupLabelArray[indexOfDraggedGroup][i].backgroundColor = Colours.colour1
                                 cell.groupLabelArray[indexOfDraggedGroup][i].alpha = 0.5
                                 cell.groupLabelArray[indexOfDraggedGroup][i].layer.cornerRadius = 15 / 2
                                 cell.groupLabelArray[indexOfDraggedGroup][i].clipsToBounds = true
@@ -1359,13 +1365,36 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         // Removal of dragging label handled here after animation
                         shouldRemoveLabel = false
                         
+                        // Remove from week as well
+                        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+                            // Loop week
+                        var shouldBreak = false
+                        for i in 0...6 {
+                            // If day isn't empty
+                            if schedules[selectedSchedule][i].count != 0 {
+                                // Loop Day
+                                for j in 0...schedules[selectedSchedule][i].count - 1 {
+                                    // Remove first instance of
+                                    if schedules[selectedSchedule][i][j] as! Int == indexOfDraggedGroup {
+                                        schedules[selectedSchedule][i].remove(at: j)
+                                        UserDefaults.standard.set(schedules, forKey: "schedules")
+                                        shouldBreak = true
+                                        break
+                                    }
+                                }
+                            }
+                            if shouldBreak == true {
+                                break
+                            }
+                        }
+                        
                         // Animate lable to bin
                         UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                             self.draggingLabel.frame.size = CGSize(width: 0, height: 0)
                             self.draggingLabel.center = cell.bin.center
                         }, completion: { finished in
                             cell.bin.image = #imageLiteral(resourceName: "Bin")
-                            cell.bin.tintColor = colour1
+                            cell.bin.tintColor = Colours.colour1
                             self.draggingLabel.removeFromSuperview()
                             self.deMaskStackViews()
                         })
@@ -1400,7 +1429,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 cell.groupLabelArray[indexOfDraggedGroup][i].tag = 1
                                 cell.groupLabelArray[indexOfDraggedGroup][i].alpha = 1
                                 cell.groupLabelArray[indexOfDraggedGroup][i].layer.borderWidth = 1
-                                cell.groupLabelArray[indexOfDraggedGroup][i].layer.borderColor = colour1.withAlphaComponent(0.75).cgColor
+                                cell.groupLabelArray[indexOfDraggedGroup][i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
                                 cell.groupLabelArray[indexOfDraggedGroup][i].layer.cornerRadius = 15 / 2
                                 cell.groupLabelArray[indexOfDraggedGroup][i].clipsToBounds = true
                                 //
@@ -1461,7 +1490,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // MARK: Dismiss view when finisehd
     // TODO: THIS FUNC
-    // shouldReloadSchedule = true
+    // ScheduleVariables.shared.shouldReloadSchedule = true
 
     
     
@@ -1477,12 +1506,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // Dismiss view
     @IBAction func createScheduleButtonAction(_ sender: Any) {
-        // Set user settings for schedule style to week
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        schedules[selectedSchedule][9] = 0
-        UserDefaults.standard.set(settings, forKey: "userSettings")
         //
-        shouldReloadSchedule = true
+        ScheduleVariables.shared.shouldReloadSchedule = true
         self.dismiss(animated: true)
     }
 }
