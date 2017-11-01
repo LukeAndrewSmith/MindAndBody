@@ -31,7 +31,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     //
     // Selected Choices
     // Selected choices corrensponds to an array in 'sortedSession' containing (easy, medium, hard) of relevant selection to be chosen by the app based on the profile (arrays containing difficulty level for each group to select)
-    // 3 because arrays do not quite correspond in terms of accessing relevant sessions for a number of reasons; not a mistake
+    // 3 seperate arrays because arrays do not quite correspond in terms of accessing relevant sessions for a number of reasons; not a mistake
+        // check sortedSessions array in dataStructures to understand indexing, each session has the corresponding index written above it
     var selectedChoiceWarmup = [0,0,0,0,0,0]
     var selectedChoiceSession = [0,0,0,0,0,0]
     var selectedChoiceStretching = [0,0,0,0,0,0]
@@ -48,313 +49,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var backgroundImage: UIImageView!
     let backgroundBlur = UIVisualEffectView()
     
-    // MARK: - Tests
-    // Content Arrays Test
-//    var schedules[selectedSchedule]: [[Int]] =
-//    [
-//        // Monday
-//        [0,1,2,3,4,5],
-//        // Tuesday
-//        [0,1,2],
-//        // Wednesday
-//        [],
-//        // Thursday
-//        [5],
-//        // Firday
-//        [0,4],
-//        // Saturday
-//        [2],
-//        // Sunday
-//        [5]
-//    ]
-    
-    //
-    // MARK: Schedule Tracking, tracking what youve done each week, putting a tick next to what you've done in schedule if true
-    var scheduleTrackingArray: [[Int:[[Bool]]]] =
-    [
-        // Monday
-        [
-                // MARK: Mind
-                0:
-                    [
-                        // 0
-                        [false],
-                        // Yoga, Meditation Walk
-                        [
-                            false,
-                            false,
-                            false
-                        ],
-                        // 4 | To Do Yoga - Warmup, Practice
-                        [
-                            false,
-                            false
-                        ]
-                ],
-                
-                // Note: Choice = ["title","contents","contents"...]
-                // MARK: Flexibility
-                1:
-                    [
-                        // 0
-                        [false],
-                        // 4 | To Do Flexibility - Warmup, Session
-                        [
-                            false,
-                            false
-                        ]
-                ],
-                
-                // MARK: Endurance
-                2:
-                    [
-                        // 0
-                        [false],
-                        // Type - High Intesnsity, Steady State
-                        [
-                            false,
-                            false
-                        ],
-                        // --------------
-                        // 4 | High Intensity To Do - warmup, cardio, stretching
-                        [
-                            false,
-                            false,
-                            false
-                        ],
-                        // ------------
-                        // Steady State
-                        // 5 | Steady State To Do 2 - 2 - To Do
-                        [
-                            false,
-                            false,
-                            false,
-                            ]
-                ],
-                // MARK: Toning
-                3:
-                    [
-                        // 0
-                        [false],
-                        // 3 | Toning To Do, warmup, session, stretching
-                        [
-                            false,
-                            false,
-                            false
-                        ]
-                ],
-                
-                // MARK: Muscle Gain
-                4:
-                    [
-                        // 0
-                        [false],
-                        // 4 | Muscle Gain To Do - Warmup, session, stretching
-                        [
-                            false,
-                            false,
-                            false
-                        ]
-                ],
-                
-                // MARK: Strength
-                5:
-                    [
-                        // 0
-                        [false],
-                        // 4 | Strength To Do, Warmup, Session, Stretching
-                        [
-                            false,
-                            false,
-                            false
-                        ]
-                ]
-        ],
-        // Tuesday
-        [
-                // MARK: Mind
-                0:
-                    [
-                        // 0
-                        [false],
-                        // Yoga, Meditation Walk
-                        [
-                            false,
-                            false,
-                            false
-                        ],
-                        // 4 | To Do Yoga - Warmup, Practice
-                        [
-                            false,
-                            false
-                        ]
-                ],
-                
-                // Note: Choice = ["title","contents","contents"...]
-                // MARK: Flexibility
-                1:
-                    [
-                        // 0
-                        [false],
-                        // 4 | To Do Flexibility - Warmup, Session
-                        [
-                            false,
-                            false
-                        ]
-                ],
-                
-                // MARK: Endurance
-                2:
-                    [
-                        // 0
-                        [false],
-                        // Type - High Intesnsity, Steady State
-                        [
-                            false,
-                            false
-                        ],
-                        // --------------
-                        // 4 | High Intensity To Do - warmup, cardio, stretching
-                        [
-                            false,
-                            false,
-                            false
-                        ],
-                        // ------------
-                        // Steady State
-                        // 5 | Steady State To Do 2 - 2 - To Do
-                        [
-                            false,
-                            false,
-                            false,
-                            ]
-                ]
-        ],
-        // Wednesday
-        [
-            // MARK: Endurance
-            2:
-                [
-                    // 0
-                    [false],
-                    // Type - High Intesnsity, Steady State
-                    [
-                        false,
-                        false
-                    ],
-                    // --------------
-                    // 4 | High Intensity To Do - warmup, cardio, stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ],
-                    // ------------
-                    // Steady State
-                    // 5 | Steady State To Do 2 - 2 - To Do
-                    [
-                        false,
-                        false,
-                        false,
-                        ]
-            ]
-        ],
-        // Thursday
-        [
-            // MARK: Strength
-            5:
-                [
-                    // 0
-                    [false],
-                    // 4 | Strength To Do, Warmup, Session, Stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ]
-            ]
-        ],
-        // Friday
-        [
-            // MARK: Mind
-            0:
-                [
-                    // 0
-                    [false],
-                    // Yoga, Meditation Walk
-                    [
-                        false,
-                        false,
-                        false
-                    ],
-                    // 4 | To Do Yoga - Warmup, Practice
-                    [
-                        false,
-                        false
-                    ]
-            ],
-            
-            // MARK: Muscle Gain
-            4:
-                [
-                    // 0
-                    [false],
-                    // 4 | Muscle Gain To Do - Warmup, session, stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ]
-            ],
-        ],
-        // Saturday
-        [
-            // MARK: Endurance
-            2:
-                [
-                    // 0
-                    [false],
-                    // Type - High Intesnsity, Steady State
-                    [
-                        false,
-                        false
-                    ],
-                    // --------------
-                    // 4 | High Intensity To Do - warmup, cardio, stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ],
-                    // ------------
-                    // Steady State
-                    // 5 | Steady State To Do 2 - 2 - To Do
-                    [
-                        false,
-                        false,
-                        false,
-                        ]
-            ],
-        ],
-        // Sunday
-        [
-            // MARK: Strength
-            5:
-                [
-                    // 0
-                    [false],
-                    // 4 | Strength To Do, Warmup, Session, Stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ]
-            ]
-        ],
-    ]
+ 
     // MARK: -
-    
-    
     //
     // Variables
     // Days array
@@ -400,12 +96,52 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    
+
     //
     // MARK: View did appear
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        // Reload choice
+            // MARK AS COMPLETED
+        if ScheduleVariables.shared.shouldReloadChoice == true {
+            //
+            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+            //
+            DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
+                let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
+                self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+                self.scheduleTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
+                self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
+                //
+                // Check if group is completed
+                if self.isGroupCompleted() == true {
+                    scheduleTracking[self.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][0][0] = true
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                        self.maskView3.backgroundColor = Colours.colour3
+                    // Slide back to initial choice when completed
+                    }, completion: { finished in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
+                            ScheduleVariables.shared.choiceProgress[1] = 1
+                            self.maskAction()
+                            // Set to false here so the tick doesn;t get loaded before the view has appeared
+                            ScheduleVariables.shared.shouldReloadChoice = false
+                            // Animate initial choice group completion after slideRight() animation finished
+                            let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
+                            DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
+                                let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
+                                self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
+                                self.scheduleTable.selectRow(at: indexPathToReload2 as IndexPath, animated: true, scrollPosition: .none)
+                                self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
+                            })
+                        })
+                    })
+                }
+            })
+            //
+            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+            //
+            updateDayIndicatorColours()
+        }
     }
     
 //
@@ -532,7 +268,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         // Navigation Bar
         self.navigationController?.navigationBar.barTintColor = Colours.colour2
         // Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-thin", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         // Navigation Title
         navigationBar.title = NSLocalizedString("Mind & Body", comment: "")
         
@@ -566,7 +302,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         // The whole week
         let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         selectedSchedule = settings[7][0]
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         scheduleStyle = schedules[selectedSchedule][9][0] as! Int
         //
         // Present as days or as week
@@ -637,6 +373,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             // 7 is the full week array
             ScheduleVariables.shared.selectedDay = 7
         }
+        
+        //
+        updateDayIndicatorColours()
     }
     
     //
@@ -817,9 +556,16 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 cell.addSubview(dayLabel)
                 //
                 // CheckMark if completed
-                if isCompleted(row: indexPath.row) == true {
+                if ScheduleVariables.shared.shouldReloadChoice == true {
+                    if indexPath.row != ScheduleVariables.shared.selectedRows[0] {
+                        if isCompleted(row: indexPath.row) == true {
+                            dayLabel.textColor = Colours.colour3
+                            cell.tintColor = Colours.colour3
+                            cell.accessoryType = .checkmark
+                        }
+                    }
+                } else if isCompleted(row: indexPath.row) == true {
                     dayLabel.textColor = Colours.colour3
-                    
                     cell.tintColor = Colours.colour3
                     cell.accessoryType = .checkmark
                 }
@@ -851,12 +597,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                         cell.textLabel?.textColor = Colours.colour3
                         seperator.backgroundColor = Colours.colour3.cgColor
                     }
-                    //
-                    // CheckMark if completed
-                    if isCompleted(row: indexPath.row) == true {
-                        cell.tintColor = Colours.colour3
-                        cell.accessoryType = .checkmark
-                    }
                 // Else if selection
                 } else {
                     //
@@ -868,7 +608,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     //
                     // BORDER TEST
 //                    if isLastChoice() == false {
-                        let text = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][indexPath.row]
+                    let text = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][indexPath.row]
                         choiceLabel.text = NSLocalizedString(text, comment: "")
                     // Last Choice, indicator by color border round the outside, red when incomplete, green when complete
 //                    } else {
@@ -880,6 +620,20 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     choiceLabel.sizeToFit()
                     choiceLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
                     cell.addSubview(choiceLabel)
+                    
+                    //
+                    if isLastChoice() == true {
+                        //
+                        // CheckMark if completed
+                        // - 1 as title included, so rows offset by 1
+                        if indexPath.row != 0 {
+                            if isCompleted(row: indexPath.row - 1) == true {
+                                choiceLabel.textColor = Colours.colour3
+                                cell.tintColor = Colours.colour3
+                                cell.accessoryType = .checkmark
+                            }
+                        }
+                    }
                 }
             }
 
@@ -930,14 +684,20 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             if ScheduleVariables.shared.choiceProgress[0] != -1 && indexPath.row == 0 {
                 
             } else {
-                didSelectRowHandler(row: indexPath.row)
+                //
+                // If completed, do nothing
+                if isLastChoice() == false && isCompleted(row: indexPath.row) == false {
+                    didSelectRowHandler(row: indexPath.row)
+                } else if isLastChoice() == true && isCompleted(row: indexPath.row - 1) == false {
+                    didSelectRowHandler(row: indexPath.row)
+                }
                 //
                 tableView.deselectRow(at: indexPath, animated: true)
             }
 
         case scheduleChoiceTable:
             var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
-            var weekTracking = UserDefaults.standard.array(forKey: "weekTracking") as! [[[[[Any]]]]]
+            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
             // Creat new schedule
             if indexPath.row == schedules.count {
                 // Present title option
@@ -958,7 +718,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 //
                 let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
                 alert.view.tintColor = Colours.colour2
-                alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+                alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                 //2. Add the text field
                 alert.addTextField { (textField: UITextField) in
                     textField.text = " "
@@ -970,7 +730,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     //
                     // Append new schedule array to schedules
                     schedules.append(scheduleDataStructures.emptyWeek)
-                    weekTracking.append(scheduleDataStructures.emptyTrackingWeek)
+                    scheduleTracking.append(scheduleDataStructures.emptyTrackingWeek)
                     //
                     // Update Title
                     let textField = alert?.textFields![0]
@@ -979,7 +739,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     //
                     // SET NEW ARRAY
                     UserDefaults.standard.set(schedules, forKey: "schedules")
-                    UserDefaults.standard.set(weekTracking, forKey: "weekTracking")
+                    UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                     //
                     // Select new session and dismiss
                     let selectedIndexPath = NSIndexPath(row: lastIndex, section: 0)
@@ -1003,7 +763,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                         let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
                         self.animateActionSheetDown(actionSheet: self.actionSheet, actionSheetHeight: height, backgroundView: self.backgroundViewExpanded)
                         //
-                        self.performSegue(withIdentifier: "EditScheduleSegue", sender: Any?)
+                        self.performSegue(withIdentifier: "EditScheduleSegue", sender: self)
                     })
                 })
                 okAction.isEnabled = false
@@ -1050,7 +810,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // Enable ok alert action func
-    func textChanged(_ sender: UITextField) {
+    @objc func textChanged(_ sender: UITextField) {
         if sender.text == "" {
             okAction.isEnabled = false
         } else {
@@ -1062,7 +822,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     //
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         //
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         if tableView == scheduleTable {
             return false
         } else if tableView == scheduleChoiceTable {
@@ -1076,15 +836,16 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // Commit editing style
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         //
         // Delete if scheduleChoiceTable, if not app schedule and if not plus row
         if editingStyle == UITableViewCellEditingStyle.delete {
             // Update arrays
             schedules.remove(at: indexPath.row)
+            scheduleTracking.remove(at: indexPath.row)
             UserDefaults.standard.set(schedules, forKey: "schedules")
+            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             
-            // TODO: Update tracking arrays
-
             // Select app schedule
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
             settings[7][0] = 0
@@ -1104,7 +865,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // Schedule Selection ---------------------------------------------------------------------------------------------------------------------
 
     // Edit Schedule
-    func editScheduleAction() {
+    @objc func editScheduleAction() {
         //
         let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
         animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
@@ -1116,7 +877,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // Edit Profile
-    func editProfileAction() {
+    @objc func editProfileAction() {
         //
         let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
         animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
@@ -1140,7 +901,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // Dismiss presets table
-    func backgroundViewExpandedAction(_ sender: Any) {
+    @objc func backgroundViewExpandedAction(_ sender: Any) {
         //
         let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
         animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
@@ -1166,6 +927,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         } else if segue.identifier == "scheduleSegueOverview" {
             let destinationVC = segue.destination as? FinalChoice
             destinationVC?.comingFromSchedule = true
+            //
                 
             //
             // Remove back button text
@@ -1209,7 +971,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     var walkthroughTextColor = UIColor()
     
     // Walkthrough
-    func walkthroughSchedule() {
+    @objc func walkthroughSchedule() {
         
         //
         if didSetWalkthrough == false {

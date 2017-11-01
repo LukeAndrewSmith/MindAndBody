@@ -217,7 +217,7 @@ class InitialInfoScreen: UIViewController, UITableViewDataSource, UITableViewDel
             // Keep indentation constant
             let paragraphStyle: NSMutableParagraphStyle
             paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-            paragraphStyle.tabStops = [NSTextTab(textAlignment: .left, location: 15, options: NSDictionary() as! [String : AnyObject])]
+            paragraphStyle.tabStops = [NSTextTab(textAlignment: .left, location: 15, options: [:])]
             paragraphStyle.defaultTabInterval = 15
             paragraphStyle.firstLineHeadIndent = 0
             paragraphStyle.headIndent = 15
@@ -225,8 +225,8 @@ class InitialInfoScreen: UIViewController, UITableViewDataSource, UITableViewDel
             let bulletPointFont = UIFont(name: "SFUIDisplay-thin", size: 21)
             //
             let attributedString = NSMutableAttributedString(string: NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: ""))
-            attributedString.addAttributes([NSParagraphStyleAttributeName: paragraphStyle], range: NSMakeRange(0, attributedString.length))
-            attributedString.addAttributes([NSFontAttributeName: bulletPointFont!], range: NSMakeRange(0, attributedString.length))
+            attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
+            attributedString.addAttributes([NSAttributedStringKey.font: bulletPointFont!], range: NSMakeRange(0, attributedString.length))
             cell.textLabel?.attributedText = attributedString
             //
             // Indent if not overview (if features cells)

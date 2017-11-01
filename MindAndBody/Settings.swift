@@ -83,7 +83,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         self.navigationController?.navigationBar.barTintColor = Colours.colour2
         self.navigationController?.navigationBar.tintColor = Colours.colour1
         // Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-thin", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         // Navigation Title
         navigationBar.title = NSLocalizedString("settings", comment: "")
         // View
@@ -123,7 +123,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         homeScreenPicker.dataSource = self
     }
     // Add movement table background (dismiss table)
-    func backgroundViewExpandedAction(_ sender: Any) {
+    @objc func backgroundViewExpandedAction(_ sender: Any) {
         //
         UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             self.actionSheetView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
@@ -138,12 +138,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     }
     //
     // Ok button action
-    func okButtonAction(_ sender: Any) {
+    @objc func okButtonAction(_ sender: Any) {
         let defaults = UserDefaults.standard
         // Rest time
         if actionSheetView.subviews.contains(restTimePicker) {
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let restTimes = settings[4]
             //
             settings[4][selectedRow] = restTimesArray[restTimePicker.selectedRow(inComponent: 0)]
             defaults.set(settings, forKey: "userSettings")
@@ -317,7 +316,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         case 4:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            let row = indexPath.row
             // Titles
             let restTimeTitles = ["warmup", "workout", "stretching"]
             cell.textLabel?.text = NSLocalizedString(restTimeTitles[indexPath.row], comment: "")
@@ -614,11 +612,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let message = NSLocalizedString("resetWalkthroughWarningMessage", comment: "")
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                 alert.view.tintColor = Colours.colour2
-                alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                 
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.alignment = .natural
-                alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 19)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+                alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
                 
                 
                 // Reset app action
@@ -640,11 +638,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let message = NSLocalizedString("resetMessage", comment: "")
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                 alert.view.tintColor = Colours.colour1
-                alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                 
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.alignment = .natural
-                alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 19)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+                alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
 
                 // Present alert
                 self.present(alert, animated: true, completion: nil)
@@ -670,11 +668,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             let message = NSLocalizedString("resetWarningMessage", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.view.tintColor = Colours.colour2
-            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
             
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .natural
-            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 19)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
            
                 
             // Reset app action
@@ -689,11 +687,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     let message = NSLocalizedString("resetMessage", comment: "")
                     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                     alert.view.tintColor = Colours.colour2
-                    alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+                    alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                     
                     let paragraphStyle = NSMutableParagraphStyle()
                     paragraphStyle.alignment = .natural
-                    alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 19)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+                    alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
                     
                     self.present(alert, animated: true, completion: nil)
                 }
@@ -836,7 +834,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     var walkthroughTextColor = UIColor()
     
     // Walkthrough
-    func walkthroughSettings() {
+    @objc func walkthroughSettings() {
         
         //
         if didSetWalkthrough == false {
@@ -847,10 +845,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         }
         
         //
-        let screenSize = UIScreen.main.bounds
-        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-        //
-        
         //
         switch walkthroughProgress {
             // First has to be done differently

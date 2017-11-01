@@ -54,6 +54,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     // MARK: Variables from Session Data
     var fromCustom = false
+    var fromSchedule = false
     //
     // Key Array
     // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [1] Keys Array
@@ -116,7 +117,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //let message = NSLocalizedString("resetMessage", comment: "")
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.view.tintColor = Colours.colour1
-        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
         self.present(alert, animated: true, completion: {
             //
             let delayInSeconds = 0.7
@@ -345,12 +346,12 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 let stringToAdd = NSLocalizedString(") per side", comment: "")
                 let length2 = stringToAdd.count
                 setsRepsString = "(" + setsRepsString + stringToAdd
-                let attributedString = NSMutableAttributedString(string: setsRepsString, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
+                let attributedString = NSMutableAttributedString(string: setsRepsString, attributes: [NSAttributedStringKey.font:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
                 // Change indicator to red
                 let range = NSRange(location:0,length:1) // specific location. This means "range" handle 1 character at location 2
-                attributedString.addAttribute(NSForegroundColorAttributeName, value: Colours.colour4, range: range)
+                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colours.colour4, range: range)
                 let range2 = NSRange(location: 1 + length,length: length2)
-                attributedString.addAttribute(NSForegroundColorAttributeName, value: Colours.colour4, range: range2)
+                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colours.colour4, range: range2)
                 cell.setsRepsLabel?.textColor = Colours.colour1
                 cell.setsRepsLabel?.attributedText = attributedString
             } else {
@@ -534,12 +535,15 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         switch indexPath.section {
         case 0: break
         //
+        // End button
         case 1:
             //
             // Tracking
             updateWeekProgress()
             updateMonthProgress()
-           
+            // Schedule Tracking
+            updateScheduleTracking(fromSchedule: fromSchedule)
+            //
             self.dismiss(animated: true)
 
         //
@@ -657,7 +661,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     // Update Timer
-    func updateTimer() {
+    @objc func updateTimer() {
         //
         if timerValue == 0 {
             //
@@ -683,7 +687,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     //
     // Start Timer
-    func startTimer() {
+    @objc func startTimer() {
         // Dates and Times
         startTime = Date().timeIntervalSinceReferenceDate
         //
@@ -852,7 +856,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
             }, completion: { finished in
-                self.playAnimation(row: self.selectedRow)
+//                self.playAnimation(row: self.selectedRow)
             })
             // + 1
             if selectedRow < keyArray.count - 1 {
@@ -1132,11 +1136,11 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colours.colour2
-        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         
         //
         // Action
@@ -1189,7 +1193,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     
     // Walkthrough
-    func walkthroughSession() {
+    @objc func walkthroughSession() {
         //
         let cellHeight = (UIScreen.main.bounds.height - 22) * 7/8
 

@@ -210,14 +210,12 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         } else {
             return 343
         }
-        return 0
     }
     
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
-        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
         //
         // Day view
         if schedules[selectedSchedule][9][0] as! Int == 0 {
@@ -316,6 +314,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             // indicates how many are of each group in the table
         //
         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         // week
         // If app schedule, find out
         if selectedSchedule == 0 {
@@ -359,6 +358,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         dayTableGroupArray[i] -= 1
                                         // Remove the group from the schedule
                                         schedules[selectedSchedule][j].remove(at: k)
+                                        scheduleTracking[selectedSchedule][j].remove(at: k)
                                         // Break the day Loop and the schedule loop
                                         breakScheduleLoop = true
                                         break
@@ -378,6 +378,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             // GROUP LOOP
             }
         }
+        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
         UserDefaults.standard.set(schedules, forKey: "schedules")
     }
     
@@ -474,7 +475,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // If user is in day mode, the full week should be still updating
     func updateFullWeek() {
         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         schedules[selectedSchedule][7] = []
+        scheduleTracking[selectedSchedule][7] = []
         // Loop week
         for i in 0...6 {
             // Check day isnt epmty
@@ -486,7 +489,14 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         schedules[selectedSchedule][7] = (schedules[selectedSchedule][7] as! [Int]).sorted()
+        // Add to week tracking here, not added before as could not sort
+        if schedules[selectedSchedule][7].count != 0 {
+            for i in 0...schedules[selectedSchedule][7].count - 1 {
+                scheduleTracking[selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[selectedSchedule][7][i] as! Int]!)
+            }
+        }
         //
+        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
         UserDefaults.standard.set(schedules, forKey: "schedules")
         //
         // Update 
@@ -512,7 +522,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // User can drag from cell to
     
     // MARK: Begin Dragging
-    func beginDraggingFromTop(gestureRecognizer: UIGestureRecognizer) {
+    @objc func beginDraggingFromTop(gestureRecognizer: UIGestureRecognizer) {
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
 
@@ -689,13 +699,16 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         // Update the array
                         //
                         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+                        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                         // update dayTableGroupArray
                         if selectedSchedule == 0 || schedules[selectedSchedule][9][0] as! Int == 1 {
                             dayTableGroupArray[indexOfDraggedGroup] += 1
                         }
                         // update schedules
                         schedules[selectedSchedule][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
+                        scheduleTracking[selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
                         UserDefaults.standard.set(schedules, forKey: "schedules")
+                        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                         updateFullWeek()
                         // update label
                         setGroupLabels()
@@ -824,12 +837,21 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     if dayIsFull == false {
                         // Update the array
                         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+                        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                         // update dayTableGroupArray
                         dayTableGroupArray[indexOfDraggedGroup] += 1
                         // update schedules
                         schedules[selectedSchedule][7].append(indexOfDraggedGroup)
                         schedules[selectedSchedule][7] = (schedules[selectedSchedule][7] as! [Int]).sorted()
+                        // Append to week tracking, start again as cannot sort
+                        scheduleTracking[selectedSchedule][7] = []
+                        if schedules[selectedSchedule][7].count != 0 {
+                            for i in 0...schedules[selectedSchedule][7].count - 1 {
+                                scheduleTracking[selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[selectedSchedule][7][i] as! Int]!)
+                            }
+                        }
                         UserDefaults.standard.set(schedules, forKey: "schedules")
+                        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                     }
                 }
                 
@@ -842,9 +864,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //
     // MARK: Begin Dragging from cell
-    func beginDraggingFromCell(gestureRecognizer: UIGestureRecognizer) {
+    @objc func beginDraggingFromCell(gestureRecognizer: UIGestureRecognizer) {
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
-        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
         
         let longPress = gestureRecognizer as! UILongPressGestureRecognizer
         let state = longPress.state
@@ -860,6 +881,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             case .began:
                 //
                 var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+                var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                 
                 let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
                 let locationInView2 = longPress.location(in: cell)
@@ -881,9 +903,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         //
                         previousIndexPath = indexPathForRow
                         
-                        // Remove from schedules array
+                        // Remove from schedules array and update userdefaults
                         schedules[selectedSchedule][(indexPathForRow?.row)!].remove(at: indexOfDrag)
+                        scheduleTracking[selectedSchedule][(indexPathForRow?.row)!].remove(at: indexOfDrag)
                         UserDefaults.standard.set(schedules, forKey: "schedules")
+                        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                         // Remove the label being dragged
                         cell.groupLabelArray[indexOfDrag].tag = 0
                         cell.groupLabelArray[indexOfDrag].alpha = 0
@@ -1158,14 +1182,18 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             // Update the array
                             //
                             var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+                            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                             // update schedules
                                 // Do a check, if the user is dragging off the top of the teable (indexpathforrow == nil, set to previous indexpath(always monday))
                             if indexPathForRow != nil {
                                 schedules[selectedSchedule][(indexPathForRow?.row)!].append(indexOfDraggedGroup)
+                                scheduleTracking[selectedSchedule][(indexPathForRow?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
                             } else {
                                 schedules[selectedSchedule][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
+                                scheduleTracking[selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
                             }
                             UserDefaults.standard.set(schedules, forKey: "schedules")
+                            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                         } else {
                             let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
 
@@ -1193,9 +1221,12 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             // Update the array
                             //
                             var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+                            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                             // update schedules
                             schedules[selectedSchedule][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
+                            scheduleTracking[selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
                             UserDefaults.standard.set(schedules, forKey: "schedules")
+                            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                     }
                     
                         draggingLabel.removeFromSuperview()
@@ -1217,6 +1248,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             case .began:
                 //
                 var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+                var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                 
                 let cell = dayTable.cellForRow(at: indexPathForRow!) as! WeekCell
                 let locationInView2 = longPress.location(in: cell)
@@ -1244,7 +1276,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             // Remove from schedules array
                             let firstIndex = (schedules[selectedSchedule][7] as! [Int]).index(of: indexOfDraggedGroup)
                             schedules[selectedSchedule][7].remove(at: firstIndex!)
+                            scheduleTracking[selectedSchedule][7].remove(at: firstIndex!)
                             UserDefaults.standard.set(schedules, forKey: "schedules")
+                            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                             dayTableGroupArray[indexOfDraggedGroup] -= 1
                             // Remove the label being dragged
                             cell.groupLabelArray[i][j].tag = 0
@@ -1283,6 +1317,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             draggingLabel.center = locationInView
                             
                             // Add dragging label and mask stack views
+                            draggingLabel.center = locationInView
                             dayTable.addSubview(draggingLabel)
                             maskStackViews()
                             shouldBreak = true
@@ -1367,6 +1402,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         
                         // Remove from week as well
                         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+                        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                             // Loop week
                         var shouldBreak = false
                         for i in 0...6 {
@@ -1377,7 +1413,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     // Remove first instance of
                                     if schedules[selectedSchedule][i][j] as! Int == indexOfDraggedGroup {
                                         schedules[selectedSchedule][i].remove(at: j)
+                                        scheduleTracking[selectedSchedule][i].remove(at: j)
                                         UserDefaults.standard.set(schedules, forKey: "schedules")
+                                        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                                         shouldBreak = true
                                         break
                                     }
@@ -1445,12 +1483,21 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             // TODO: CUSTOM SCHEDULE
                             // Update the array
                             var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+                            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                             // update dayTableGroupArray
                             dayTableGroupArray[indexOfDraggedGroup] += 1
                             // update schedules
                             schedules[selectedSchedule][7].append(indexOfDraggedGroup)
                             schedules[selectedSchedule][7] = (schedules[selectedSchedule][7] as! [Int]).sorted()
+                            // Update week tracking now as cannot sort
+                            scheduleTracking[selectedSchedule][7] = []
+                            if schedules[selectedSchedule][7].count != 0 {
+                                for i in 0...schedules[selectedSchedule][7].count - 1 {
+                                    scheduleTracking[selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[selectedSchedule][7][i] as! Int]!)
+                                }
+                            }
                             UserDefaults.standard.set(schedules, forKey: "schedules")
+                            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                         }
                     }
                     
@@ -1546,16 +1593,14 @@ class WeekCell: UITableViewCell {
     @IBOutlet weak var mind4: UILabel!
     @IBOutlet weak var mind5: UILabel!
     @IBOutlet weak var mind6: UILabel!
-    @IBOutlet weak var mind7: UILabel!
     //
+    @IBOutlet weak var mind7: UILabel!
     @IBOutlet weak var mind8: UILabel!
     @IBOutlet weak var mind9: UILabel!
     @IBOutlet weak var mind10: UILabel!
     @IBOutlet weak var mind11: UILabel!
     @IBOutlet weak var mind12: UILabel!
     @IBOutlet weak var mind13: UILabel!
-    @IBOutlet weak var mind14: UILabel!
-    @IBOutlet weak var mind15: UILabel!
     //
     // Flexibility
     @IBOutlet weak var flexibility0: UILabel!
@@ -1565,7 +1610,6 @@ class WeekCell: UITableViewCell {
     @IBOutlet weak var flexibility4: UILabel!
     @IBOutlet weak var flexibility5: UILabel!
     @IBOutlet weak var flexibility6: UILabel!
-    @IBOutlet weak var flexibility7: UILabel!
     //
     // Endurance
     @IBOutlet weak var endurance0: UILabel!
@@ -1575,7 +1619,6 @@ class WeekCell: UITableViewCell {
     @IBOutlet weak var endurance4: UILabel!
     @IBOutlet weak var endurance5: UILabel!
     @IBOutlet weak var endurance6: UILabel!
-    @IBOutlet weak var endurance7: UILabel!
     //
     // Toning
     @IBOutlet weak var toning0: UILabel!
@@ -1585,7 +1628,6 @@ class WeekCell: UITableViewCell {
     @IBOutlet weak var toning4: UILabel!
     @IBOutlet weak var toning5: UILabel!
     @IBOutlet weak var toning6: UILabel!
-    @IBOutlet weak var toning7: UILabel!
     //
     // Muscle Gain
     @IBOutlet weak var muscleGain0: UILabel!
@@ -1595,7 +1637,6 @@ class WeekCell: UITableViewCell {
     @IBOutlet weak var muscleGain4: UILabel!
     @IBOutlet weak var muscleGain5: UILabel!
     @IBOutlet weak var muscleGain6: UILabel!
-    @IBOutlet weak var muscleGain7: UILabel!
     //
     // Strength
     @IBOutlet weak var strength0: UILabel!
@@ -1605,7 +1646,6 @@ class WeekCell: UITableViewCell {
     @IBOutlet weak var strength4: UILabel!
     @IBOutlet weak var strength5: UILabel!
     @IBOutlet weak var strength6: UILabel!
-    @IBOutlet weak var strength7: UILabel!
     
     // Stack Views
     @IBOutlet weak var stackView0: UIStackView!
@@ -1629,17 +1669,17 @@ class WeekCell: UITableViewCell {
         groupLabelArray =
             [
                 // Mind
-                [mind0, mind1, mind2, mind3, mind4, mind5, mind6, mind7, mind8, mind9, mind10, mind11, mind12, mind13, mind14, mind15],
+                [mind0, mind1, mind2, mind3, mind4, mind5, mind6, mind7, mind8, mind9, mind10, mind11, mind12, mind13],
                 // Flexibility
-                [flexibility0, flexibility1, flexibility2, flexibility3, flexibility4, flexibility5, flexibility6, flexibility7],
+                [flexibility0, flexibility1, flexibility2, flexibility3, flexibility4, flexibility5, flexibility6],
                 // Endurance
-                [endurance0, endurance1, endurance2, endurance3, endurance4, endurance5, endurance6, endurance7],
+                [endurance0, endurance1, endurance2, endurance3, endurance4, endurance5, endurance6],
                 // Toning
-                [toning0, toning1, toning2, toning3, toning4, toning5, toning6, toning7],
+                [toning0, toning1, toning2, toning3, toning4, toning5, toning6],
                 // Muscle Gain
-                [muscleGain0, muscleGain1, muscleGain2, muscleGain3, muscleGain4, muscleGain5, muscleGain6, muscleGain7],
+                [muscleGain0, muscleGain1, muscleGain2, muscleGain3, muscleGain4, muscleGain5, muscleGain6],
                 // Strength
-                [strength0, strength1, strength2, strength3, strength4, strength5, strength6, strength7]
+                [strength0, strength1, strength2, strength3, strength4, strength5, strength6]
         ]
     }
 }

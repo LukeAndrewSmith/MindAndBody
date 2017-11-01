@@ -259,7 +259,7 @@ enum scheduleDataStructures {
     ]
     
     // Tracking
-    static let registerTracking: [[[[[Any]]]]] =
+    static let registerTracking: [[[[[Bool]]]]] =
     [
         // Tracking App Schedule
         [
@@ -284,7 +284,7 @@ enum scheduleDataStructures {
     ]
     
     // Empty Tracking Week
-    static let emptyTrackingWeek: [[[[Any]]]] =
+    static let emptyTrackingWeek: [[[[Bool]]]] =
         // Tracking App Schedule
         [
             // Monday
@@ -307,21 +307,14 @@ enum scheduleDataStructures {
     
     //
     // MARK: Schedule Tracking, tracking what youve done each week, putting a tick next to what you've done in schedule if true
-    static let scheduleTrackingArrays: [Int:[[Any]]] =
+    static let scheduleTrackingArrays: [Int:[[Bool]]] =
         [
             // MARK: Mind
+                // NOTE MIND HAS CHOICE OF GOING FOR A WALK, IF SELECTED WONT GO GREEN, WILL JUST TAKE BACK TO INITIAL SCREEN AND SET TO TRUE
             0:
                 [
                     // 0
                     [false],
-                    // Choice Path - 1
-                    [0,0],
-                    // Yoga, Meditation Walk
-                    [
-                        false,
-                        false,
-                        false
-                    ],
                     // 4 | To Do Yoga - Warmup, Practice
                     [
                         false,
@@ -335,8 +328,6 @@ enum scheduleDataStructures {
                 [
                     // 0
                     [false],
-                    // Choice Path - 1
-                    [0,0],
                     // 4 | To Do Flexibility - Warmup, Session
                     [
                         false,
@@ -349,36 +340,19 @@ enum scheduleDataStructures {
                 [
                     // 0
                     [false],
-                    // Choice Path - 1
-                    [0,0],
-                    // Type - High Intesnsity, Steady State
-                    [
-                        false,
-                        false
-                    ],
                     // --------------
-                    // 4 | High Intensity To Do - warmup, cardio, stretching
+                    // 4,5 , High intensity and steady state, both use same array of bool
                     [
                         false,
                         false,
                         false
                     ],
-                    // ------------
-                    // Steady State
-                    // 5 | Steady State To Do 2 - 2 - To Do
-                    [
-                        false,
-                        false,
-                        false,
-                    ]
             ],
             // MARK: Toning
             3:
                 [
                     // 0
                     [false],
-                    // Choice Path - 1
-                    [0,0],
                     // 3 | Toning To Do, warmup, session, stretching
                     [
                         false,
@@ -392,8 +366,6 @@ enum scheduleDataStructures {
                 [
                     // 0
                     [false],
-                    // Choice Path - 1
-                    [0,0],
                     // 4 | Muscle Gain To Do - Warmup, session, stretching
                     [
                         false,
@@ -407,8 +379,6 @@ enum scheduleDataStructures {
                 [
                     // 0
                     [false],
-                    // Choice Path - 1
-                    [0,0],
                     // 4 | Strength To Do, Warmup, Session, Stretching
                     [
                         false,

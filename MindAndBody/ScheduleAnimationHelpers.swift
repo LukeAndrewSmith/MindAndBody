@@ -28,7 +28,8 @@ extension ScheduleScreen {
         }
     }
     // Session selection mask
-    func maskAction() {
+        // Previous Question!!!!
+    @objc func maskAction() {
         // Table Counter
         // Return to choice 1 (sessions)
         if ScheduleVariables.shared.choiceProgress[1] > 1 {
@@ -169,6 +170,7 @@ extension ScheduleScreen {
             self.removeMaskTable()
             self.view.isUserInteractionEnabled = true
         })
+        //
     }
     // Tableview slide Right (previous table)
     func slideRight() {
@@ -216,10 +218,8 @@ extension ScheduleScreen {
     }
     // Mask Table
     func maskTable() {
-        let screenFrame = UIScreen.main.bounds
         //
         mask.frame = CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: view.bounds.height)
-        let test = mask.frame.minY
         
         //TopBarHeights.combinedHeight + tableHeaderHeight
         mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]

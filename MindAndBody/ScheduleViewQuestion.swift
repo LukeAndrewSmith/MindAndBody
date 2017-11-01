@@ -98,7 +98,7 @@ class ScheduleViewQuestion: UIViewController {
         // Set user settings for schedule style to week
         schedules[selectedSchedule][9][0] = 0
         UserDefaults.standard.set(schedules, forKey: "schedules")
-        self.performSegue(withIdentifier: "ScheduleCreatorSegue", sender: Any)
+        self.performSegue(withIdentifier: "ScheduleCreatorSegue", sender: self)
     }
     
     // Week
@@ -114,7 +114,7 @@ class ScheduleViewQuestion: UIViewController {
             self.dismiss(animated: true)
         // If custom schedule, go to schedule creator
         } else {
-            self.performSegue(withIdentifier: "ScheduleCreatorSegue", sender: Any)
+            self.performSegue(withIdentifier: "ScheduleCreatorSegue", sender: self)
         }
     }
     
