@@ -106,6 +106,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         if ScheduleVariables.shared.shouldReloadChoice == true {
             //
             var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+            scheduleTracking[self.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][0][0] = true
+            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             //
             DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
                 let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
@@ -113,9 +115,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.scheduleTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
                 self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
                 //
-                // Check if group is completed
+                // Check if group is completed for the day
                 if self.isGroupCompleted() == true {
-                    scheduleTracking[self.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][0][0] = true
                     UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                         self.maskView3.backgroundColor = Colours.colour3
                     // Slide back to initial choice when completed
@@ -137,8 +138,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     })
                 }
             })
-            //
-            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             //
             updateDayIndicatorColours()
         }

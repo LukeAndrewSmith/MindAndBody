@@ -953,7 +953,6 @@ extension ScheduleScreen {
                         }
                     }
                     //
-                    update
                 //
                 // Week
                 } else if schedules[selectedSchedule][9][0] as! Int == 1 {
@@ -1006,9 +1005,13 @@ extension ScheduleScreen {
             scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
             //
             // Box indicator round todo, done here because userdefaults set above
-            if isLastChoice() == true && isGroupCompleted() == true {
-                maskView3.backgroundColor = Colours.colour3
-            } else if isLastChoice() == true {
+            if isLastChoice() == true {
+                if isGroupCompleted() == true {
+                    maskView3.backgroundColor = Colours.colour3
+                } else if isGroupCompleted() == false {
+                    maskView3.backgroundColor = Colours.colour4
+                }
+            } else if isLastChoice() == false {
                 maskView3.backgroundColor = Colours.colour4
                 updateDayIndicatorColours()
             }
