@@ -35,7 +35,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // Selected Choices
     // Selected choices corrensponds to an array in 'sortedSession' containing (easy, medium, hard) of relevant selection to be chosen by the app based on the profile (arrays containing difficulty level for each group to select)
     // 3 seperate arrays because arrays do not quite correspond in terms of accessing relevant sessions for a number of reasons; not a mistake
-        // check sortedSessions array in dataStructures to understand indexing, each session has the corresponding index written above it
+    // check sortedSessions array in dataStructures to understand indexing, each session has the corresponding index written above it
     var selectedChoiceWarmup = [0,0,0,0,0,0]
     var selectedChoiceSession = [0,0,0,0,0,0]
     var selectedChoiceStretching = [0,0,0,0,0,0]
@@ -52,7 +52,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var backgroundImage: UIImageView!
     let backgroundBlur = UIVisualEffectView()
     
- 
+    
     // MARK: -
     //
     // Variables
@@ -78,8 +78,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // IMPORTANT VARIABLE
     // Variable saying which presentation style is wanted by the user, either
-        // 0 - presenting each day on the day
-        // 0 - presenting the whole week each week
+    // 0 - presenting each day on the day
+    // 0 - presenting the whole week each week
     var scheduleStyle = 0
     
     //
@@ -99,23 +99,23 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             if schedules[selectedSchedule][9][0] as! Int == 0 {
                 daySwipeLeft.isEnabled = true
                 daySwipeRight.isEnabled = true
-            // Else if week view disable swipes
+                // Else if week view disable swipes
             } else if schedules[selectedSchedule][9][0] as! Int == 1 {
                 daySwipeLeft.isEnabled = false
                 daySwipeRight.isEnabled = false
             }
-
+            
             scheduleTable.reloadData()
         }
     }
     
-
+    
     //
     // MARK: View did appear
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Reload choice
-            // MARK AS COMPLETED
+        // MARK AS COMPLETED
         if ScheduleVariables.shared.shouldReloadChoice == true && ScheduleVariables.shared.selectedRows[1] != 72 {
             var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
             scheduleTracking[self.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][0][0] = true
@@ -131,7 +131,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 if self.isGroupCompleted() == true {
                     UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                         self.maskView3.backgroundColor = Colours.colour3
-                    // Slide back to initial choice when completed
+                        // Slide back to initial choice when completed
                     }, completion: { finished in
                         DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
                             ScheduleVariables.shared.choiceProgress[1] = 1
@@ -152,7 +152,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             })
             //
             updateDayIndicatorColours()
-        // Meditation/Walk
+            // Meditation/Walk
         } else if ScheduleVariables.shared.shouldReloadChoice == true && ScheduleVariables.shared.selectedRows[1] == 72 {
             //
             // Go to initial choice
@@ -173,14 +173,14 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.scheduleTable.selectRow(at: indexPathToReload2 as IndexPath, animated: true, scrollPosition: .none)
                 self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
             })
-        updateDayIndicatorColours()
+            updateDayIndicatorColours()
         }
     }
     
     
-//
-// View did load --------------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load --------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -204,7 +204,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         if walkthroughs[5] == false {
             walkthroughSchedule()
         }
-
+        
         //
         // Walkthrough
         if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughC") == false {
@@ -220,7 +220,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         actionSheet.layer.cornerRadius = 15
         actionSheet.clipsToBounds = true
         let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
-                                                                                // table    // buttons // spaces
+        // table    // buttons // spaces
         actionSheet.frame.size = CGSize(width: view.bounds.width - 20, height: height)
         // Schedule choice
         scheduleChoiceTable.backgroundColor = Colours.colour2
@@ -261,10 +261,10 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         actionSheet.addSubview(editProfileButton)
         //
         // Background View
-        backgroundViewExpanded.backgroundColor = .black    
+        backgroundViewExpanded.backgroundColor = .black
         backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
         //
-
+        
         
         //
         // Background Image
@@ -284,7 +284,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             backgroundImage.image = nil
             backgroundImage.backgroundColor = Colours.colour1
         }
-
+        
         //
         // BackgroundBlur/Vibrancy
         let backgroundBlurE = UIBlurEffect(style: .dark)
@@ -349,10 +349,10 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             scheduleTableBottom.constant = 0
             pageStack.isUserInteractionEnabled = false
         }
-      
+        
         // Set status bar to light
         UIApplication.shared.statusBarStyle = .lightContent
-
+        
         //
         // Custom 'Page Control' m,t,w,t,f,s,s for bottom
         // If week is being presented as days, style 1
@@ -429,7 +429,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             // day
             if scheduleStyle == 0 {
                 return NSLocalizedString(dayArray[ScheduleVariables.shared.selectedDay], comment: "")
-            // week
+                // week
             } else {
                 let weekOfThe = NSLocalizedString("weekOfThe", comment: "")
                 // Date formatters
@@ -498,12 +498,12 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         switch tableView {
         case scheduleTable:
             // day
-//            if scheduleStyle == 0 {
-                return (view.bounds.height - 24.5) / 4
+            //            if scheduleStyle == 0 {
+            return (view.bounds.height - 24.5) / 4
             // week
-//            } else if scheduleStyle == 1 {
-//                return view.bounds.height / 4
-//            }
+            //            } else if scheduleStyle == 1 {
+            //                return view.bounds.height / 4
+        //            }
         case scheduleChoiceTable:
             return 47
         default:
@@ -514,7 +514,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // Rows
     // Number of rows per section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            //
+        //
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         //
         switch tableView {
@@ -524,7 +524,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 return schedules[selectedSchedule][ScheduleVariables.shared.selectedDay].count
                 // TODO: return schedules[selectedSchedule][ScheduleVariables.shared.selectedDay].count
                 // TODO: replay schedules[selectedSchedule] ([0]) with variable selectedSchedule indicating the selected schedule
-            // Selecting a session
+                // Selecting a session
             } else {
                 return sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count
             }
@@ -554,9 +554,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Row cell customization
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            // Note: accessing title so cast as any
+        // Note: accessing title so cast as any
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
-
+        
         // Get cell
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         //
@@ -576,9 +576,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
                 dayLabel.textColor = Colours.colour1
                 //
-                    // TODO: SCHEDULES NOT schedules[selectedSchedule]
+                // TODO: SCHEDULES NOT schedules[selectedSchedule]
                 let text = sessionData.sortedGroups[schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][indexPath.row] as! Int]![0][0]
-
+                
                 dayLabel.text = NSLocalizedString(text, comment: "")
                 dayLabel.numberOfLines = 2
                 dayLabel.sizeToFit()
@@ -604,7 +604,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     cell.accessoryType = .checkmark
                 }
                 
-            // Currently selecting a session, i.e not first screen
+                // Currently selecting a session, i.e not first screen
             } else {
                 // If title
                 if indexPath.row == 0 {
@@ -613,8 +613,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     cell.textLabel?.textColor = Colours.colour1
                     cell.textLabel?.text = NSLocalizedString(title, comment: "")
                     cell.textLabel?.textAlignment = .center
-//                    cell.textLabel?.numberOfLines = 2
-//                    cell.textLabel?.sizeToFit()
+                    //                    cell.textLabel?.numberOfLines = 2
+                    //                    cell.textLabel?.sizeToFit()
                     cell.textLabel?.frame = CGRect(x: view.bounds.width / 2, y: 0, width: view.bounds.width / 2, height: 72)
                     //
                     cell.selectionStyle = .none
@@ -631,7 +631,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                         cell.textLabel?.textColor = Colours.colour3
                         seperator.backgroundColor = Colours.colour3.cgColor
                     }
-                // Else if selection
+                    // Else if selection
                 } else {
                     //
                     let choiceLabel = UILabel()
@@ -641,14 +641,14 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     // Normal
                     //
                     // BORDER TEST
-//                    if isLastChoice() == false {
+                    //                    if isLastChoice() == false {
                     let text = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][indexPath.row]
-                        choiceLabel.text = NSLocalizedString(text, comment: "")
+                    choiceLabel.text = NSLocalizedString(text, comment: "")
                     // Last Choice, indicator by color border round the outside, red when incomplete, green when complete
-//                    } else {
-                        // insert border
-                        // PROBABLY SHOULDN'T BE DONE HERE, BUT IN NEXT CHOICE FUNCTION
-//                    }
+                    //                    } else {
+                    // insert border
+                    // PROBABLY SHOULDN'T BE DONE HERE, BUT IN NEXT CHOICE FUNCTION
+                    //                    }
                     //
                     choiceLabel.numberOfLines = 2
                     choiceLabel.sizeToFit()
@@ -670,8 +670,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     }
                 }
             }
-
-            //
+            
+        //
         case scheduleChoiceTable:
             let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
             //
@@ -694,7 +694,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             
-            //
+        //
         default:
             break
         }
@@ -728,7 +728,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 //
                 tableView.deselectRow(at: indexPath, animated: true)
             }
-
+            
         case scheduleChoiceTable:
             var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
             var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
@@ -818,7 +818,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 // 4. Present the alert.
                 self.present(alert, animated: true, completion: nil)
                 //
-            // Select schedule
+                // Select schedule
             } else {
                 // Select new schedule in user settings
                 settings[7][0] = indexPath.row
@@ -837,7 +837,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 })
             }
             tableView.deselectRow(at: indexPath, animated: true)
-
+            
         default:
             tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -893,11 +893,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-
     
-    // 
+    
+    //
     // Schedule Selection ---------------------------------------------------------------------------------------------------------------------
-
+    
     // Edit Schedule
     @objc func editScheduleAction() {
         //
@@ -905,7 +905,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
         //
         // If app schedule (go to n sessions (section 2))
-//        self.performSegue(withIdentifier: "EditProfileSegue", sender: self)
+        //        self.performSegue(withIdentifier: "EditProfileSegue", sender: self)
         // If custom schedule
         self.performSegue(withIdentifier: "EditScheduleSegue", sender: self)
     }
@@ -942,7 +942,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-
+    
     //
     // Slide Menu ---------------------------------------------------------------------------------------------------------------------
     //
@@ -951,7 +951,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         if segue.identifier == "openMenu" {
             // Remove Mask View
-//            removeMaskView()
+            //            removeMaskView()
             //
             UIApplication.shared.statusBarStyle = .default
             //
@@ -1031,7 +1031,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //
         switch walkthroughProgress {
-        // First has to be done differently
+            // First has to be done differently
         // Schedules
         case 0:
             //
@@ -1064,7 +1064,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //
             walkthroughProgress = self.walkthroughProgress + 1
-         
+            
             
         // Pasth
         case 1:
@@ -1103,7 +1103,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //
             walkthroughProgress = self.walkthroughProgress + 1
-        
+            
             
         // Swipe
         case 3:
@@ -1155,3 +1155,4 @@ extension ScheduleScreen: UIViewControllerTransitioningDelegate {
 //
 class ScheduleNavigation: UINavigationController {
 }
+

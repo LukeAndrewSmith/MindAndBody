@@ -24,14 +24,14 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     @IBOutlet weak var practices: UIButton!
     
     
-//
-// View did load -----------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load -----------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Colours
-        view.backgroundColor = colour1
+        view.backgroundColor = Colours.colour1
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("yoga", comment: ""))
@@ -40,18 +40,18 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         //
         practices.setTitle(NSLocalizedString("practices", comment: ""), for: UIControlState.normal)
         practices.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        practices.setTitleColor(colour2, for: .normal)
+        practices.setTitleColor(Colours.colour2, for: .normal)
         practices.layer.borderWidth = 5
-        practices.layer.borderColor = colour2.cgColor
+        practices.layer.borderColor = Colours.colour2.cgColor
         practices.titleLabel?.adjustsFontSizeToFitWidth = true
         practices.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         practices.titleLabel?.textAlignment = .center
         //
         custom.setTitle("C", for: UIControlState.normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        custom.setTitleColor(colour2, for: .normal)
+        custom.setTitleColor(Colours.colour2, for: .normal)
         custom.layer.borderWidth = 5
-        custom.layer.borderColor = colour2.cgColor
+        custom.layer.borderColor = Colours.colour2.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         custom.titleLabel?.textAlignment = .center
@@ -59,13 +59,13 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         custom.layer.masksToBounds = true
         custom.titleLabel?.numberOfLines = 0
         //
-
+        
     }
     
-
-//
-// View did layout subviews ----------------------------------------------------------------------------------------
-//
+    
+    //
+    // View did layout subviews ----------------------------------------------------------------------------------------
+    //
     override func viewDidLayoutSubviews() {
         //
         super.viewDidLayoutSubviews()
@@ -77,34 +77,30 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         practices.titleLabel?.numberOfLines = 0
         practices.titleLabel?.textAlignment = .center
     }
-  
     
-//
-// Segues
-//
+    
+    //
+    // Segues
+    //
     //
     @IBAction func practicesAction(_ sender: Any) {
-        selectedSession[1] = 0
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 0
+        SelectedSession.shared.selectedSession[2] = -1
         //
         performSegue(withIdentifier: "yogaSegue", sender: nil)
     }
     
     
-//
-// Remove Back Bar Text
-//
+    //
+    // Remove Back Bar Text
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Pass Data
-        if (segue.identifier == "customSegueWarmup") {
-            let destinationVC = segue.destination as! FinalChoiceCustom
-//            destinationVC.selectedType = 0
-        }
         // Remove back bar text
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
     }
-     
-
+    
+    
 }
+

@@ -48,11 +48,11 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var currentMondayDate = Int()
     var currentMonth = Int()
     var currentYear = Int()
-
     
-//
-// View Will Appear ---------------------------------------------------------------------------------
-//
+    
+    //
+    // View Will Appear ---------------------------------------------------------------------------------
+    //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //
@@ -64,9 +64,9 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
     }
     
-//
-// View did load --------------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load --------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,25 +80,25 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         if walkthroughs[6] == false {
             walkthroughTracking()
         }
-
+        
         
         
         //
         // Time Scale Elements
-        actionSheet.backgroundColor = colour1
+        actionSheet.backgroundColor = Colours.colour1
         actionSheet.layer.cornerRadius = 15
         actionSheet.clipsToBounds = true
         
         //
         // Picker
-        timeScalePickerView.backgroundColor = colour2
+        timeScalePickerView.backgroundColor = Colours.colour2
         timeScalePickerView.delegate = self
         timeScalePickerView.dataSource = self
         timeScalePickerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 20, height: 147)
         
         // ok
-        okButton.backgroundColor = colour1
-        okButton.setTitleColor(colour3, for: .normal)
+        okButton.backgroundColor = Colours.colour1
+        okButton.setTitleColor(Colours.colour3, for: .normal)
         okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
         okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
@@ -107,7 +107,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         // Background View
         backgroundViewExpanded.backgroundColor = .black
         backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
-
+        
         //
         actionSheet.addSubview(timeScalePickerView)
         actionSheet.addSubview(okButton)
@@ -115,9 +115,9 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         //
         // Navigation Controller
-        self.navigationController?.navigationBar.barTintColor = colour2
+        self.navigationController?.navigationBar.barTintColor = Colours.colour2
         // Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-thin", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         
         // Navigation Title
         navigationBar.title = NSLocalizedString("tracking", comment: "")
@@ -132,10 +132,10 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let backgroundIndex = settings[0][0]
         //
         // Background Image/Colour
-        if backgroundIndex < backgroundImageArray.count {
+        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
             //
-            backgroundImage.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == backgroundImageArray.count {
+            backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
+        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
             //
             backgroundImage.image = nil
             backgroundImage.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
@@ -148,7 +148,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         //
         backgroundBlur.frame = backgroundImage.bounds
         //
-        if backgroundIndex > backgroundImageArray.count {
+        if backgroundIndex > BackgroundImages.backgroundImageArray.count {
         } else {
             view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
         }
@@ -163,7 +163,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             warningLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
             warningLabel.text = NSLocalizedString("trackingWarning", comment: "")
             warningLabel.textAlignment = .center
-            warningLabel.textColor = colour1
+            warningLabel.textColor = Colours.colour1
             warningLabel.sizeToFit()
             warningLabel.center = CGPoint(x: backgroundImage.center.x, y: backgroundImage.center.y - 44)
             view.addSubview(warningLabel)
@@ -171,9 +171,9 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         
         
-       
+        
     }
-
+    
     // MARK: Test
     //
     // Set Dates
@@ -198,22 +198,22 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     
-//
-// Graphs ------------------------------------------------------------------------------------------------------------------------
-//
+    //
+    // Graphs ------------------------------------------------------------------------------------------------------------------------
+    //
     //
     var currentPositionLabels: [UILabel] = []
     var currentPositionLabel = UILabel()
-
+    
     //
     func drawGraph() {
         //
         // Axis Label Settings
         var titleLabelSettings = ChartLabelSettings(font: UIFont(name: "SFUIDisplay-light", size: 17)!)
-        titleLabelSettings.fontColor = colour1
+        titleLabelSettings.fontColor = Colours.colour1
         //
         var axisLabelSettings = ChartLabelSettings(font: UIFont(name: "SFUIDisplay-light", size: 14)!)
-        axisLabelSettings.fontColor = colour1
+        axisLabelSettings.fontColor = Colours.colour1
         
         //
         // Generators
@@ -228,7 +228,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let labelsGenerator2 = ChartAxisLabelsGeneratorFunc {scalar in
             return ChartAxisLabel(text: "", settings: axisLabelSettings)
         }
-       
+        
         //
         // Get data -- returns data based upon selectedTimeScale
         let chartPoints = returnChartPoints()
@@ -237,7 +237,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let xModel = returnXAxisModel(xAxisValues: xValues, titleLabelSettings: titleLabelSettings, axisLabelSettings: axisLabelSettings, xAxisTitle: xAxisTitle, generator: generator)
         
         let yValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.y}
-        let yModel = ChartAxisModel(lineColor: colour1, firstModelValue: 0, lastModelValue: 125, axisValuesGenerator: generator, labelsGenerator: labelsGenerator2)
+        let yModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: 0, lastModelValue: 125, axisValuesGenerator: generator, labelsGenerator: labelsGenerator2)
         
         //
         // Chart Settings
@@ -264,12 +264,12 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         //
         // Target
-        let guideLinesHighlightLayerSettings = ChartGuideLinesLayerSettings(linesColor: colour3, linesWidth: 0.5)
+        let guideLinesHighlightLayerSettings = ChartGuideLinesLayerSettings(linesColor: Colours.colour3, linesWidth: 0.5)
         let guideLinesHighlightLayer = ChartGuideLinesForValuesLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, settings: guideLinesHighlightLayerSettings, axisValuesX: [], axisValuesY: [ChartAxisValueDouble(100)])
         
         //
         // Line
-        let lineModel = ChartLineModel(chartPoints: chartPoints, lineColor: colour4, animDuration: 1.0, animDelay: 0)
+        let lineModel = ChartLineModel(chartPoints: chartPoints, lineColor: Colours.colour4, animDuration: 1.0, animDelay: 0)
         let chartPointsLineLayer = ChartPointsLineLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lineModels: [lineModel], useView: false)
         
         // view generator - this is a function that creates a view for each chartpoint
@@ -284,107 +284,107 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let circleViewGenerator = {(chartPointModel: ChartPointLayerModel, layer: ChartPointsLayer, chart: Chart) -> UIView? in
             let circleView = ChartPointEllipseView(center: chartPointModel.screenLoc, diameter: 12.25)
             circleView.animDuration = 1.0
-            circleView.fillColor = colour4
+            circleView.fillColor = Colours.colour4
             return circleView
         }
         let chartPointsCircleLayer = ChartPointsViewsLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, viewGenerator: circleViewGenerator, displayDelay: 0, delayBetweenItems: 0.05, mode: .translate)
-     
+        
         
         
         
         
         //
         // Extra detail touch tracker layer
-//        let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 500, thumbBorderWidth: 2)
-//        let trackerLayerSettings = ChartPointsLineTrackerLayerSettings(thumbSettings: thumbSettings, selectNearest: false)
+        //        let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 500, thumbBorderWidth: 2)
+        //        let trackerLayerSettings = ChartPointsLineTrackerLayerSettings(thumbSettings: thumbSettings, selectNearest: false)
         
-//        // Current position labels array out of func so okbuttonaction can clear them
-//        let chartPointsTrackerLayer = ChartPointsLineTrackerLayer<ChartPoint, Any>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lines: [chartPoints], lineColor: colour2, animDuration: 1, animDelay: 2, settings: trackerLayerSettings) {chartPointsWithScreenLoc in
-//            
-//            self.currentPositionLabels.forEach{$0.removeFromSuperview()}
-//            
-//            for (index, chartPointWithScreenLoc) in chartPointsWithScreenLoc.enumerated() {
-//                
-//                let label = UILabel()
-//                let test3 = chartPoints[index].y
-//                let test = chartPointWithScreenLoc.chartPoint.y
-//                let test2 = chartPointWithScreenLoc.screenLoc.y
-//                label.text = chartPointWithScreenLoc.chartPoint.description + "%"
-//                label.sizeToFit()
-//                label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x + label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
-//                if label.frame.maxX > self.view.bounds.width {
-//                    label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x - label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
-//                }
-//                
-//                label.backgroundColor = colour2
-//                label.textColor = colour1
-//                
-//                self.currentPositionLabels.append(label)
-//                self.view.addSubview(label)
-//            }
-//        }
+        //        // Current position labels array out of func so okbuttonaction can clear them
+        //        let chartPointsTrackerLayer = ChartPointsLineTrackerLayer<ChartPoint, Any>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lines: [chartPoints], lineColor: Colours.colour2, animDuration: 1, animDelay: 2, settings: trackerLayerSettings) {chartPointsWithScreenLoc in
+        //
+        //            self.currentPositionLabels.forEach{$0.removeFromSuperview()}
+        //
+        //            for (index, chartPointWithScreenLoc) in chartPointsWithScreenLoc.enumerated() {
+        //
+        //                let label = UILabel()
+        //                let test3 = chartPoints[index].y
+        //                let test = chartPointWithScreenLoc.chartPoint.y
+        //                let test2 = chartPointWithScreenLoc.screenLoc.y
+        //                label.text = chartPointWithScreenLoc.chartPoint.description + "%"
+        //                label.sizeToFit()
+        //                label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x + label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
+        //                if label.frame.maxX > self.view.bounds.width {
+        //                    label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x - label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
+        //                }
+        //
+        //                label.backgroundColor = Colours.colour2
+        //                label.textColor = Colours.colour1
+        //
+        //                self.currentPositionLabels.append(label)
+        //                self.view.addSubview(label)
+        //            }
+        //        }
         
-//
-//        let chartPointsTrackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak chartPointsLayer, weak currentPositionLabel] screenLoc in
-////                    chartPointsLayer?.highlightChartpointView(screenLoc: screenLoc)
-//                    if let chartPoint = chartPointsLayer?.chartPointsForScreenLocX(screenLoc.x).first {
-//                        currentPositionLabel?.text = chartPoint.description
-//                        currentPositionLabel?.sizeToFit()
-//                        self.view.addSubview(currentPositionLabel!)
-//                    } else {
-//                        currentPositionLabel?.removeFromSuperview()
-//                    }
-//        }, lineColor: colour2, lineWidth: 1)
+        //
+        //        let chartPointsTrackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak chartPointsLayer, weak currentPositionLabel] screenLoc in
+        ////                    chartPointsLayer?.highlightChartpointView(screenLoc: screenLoc)
+        //                    if let chartPoint = chartPointsLayer?.chartPointsForScreenLocX(screenLoc.x).first {
+        //                        currentPositionLabel?.text = chartPoint.description
+        //                        currentPositionLabel?.sizeToFit()
+        //                        self.view.addSubview(currentPositionLabel!)
+        //                    } else {
+        //                        currentPositionLabel?.removeFromSuperview()
+        //                    }
+        //        }, lineColor: Colours.colour2, lineWidth: 1)
         
-//        let chartPointsTrackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak chartPointsCircleLayer, weak currentPositionLabel] screenLoc in
-//            
-//            
-//            // Label
-//            currentPositionLabel?.text = chartPoints.description
-//            currentPositionLabel?.sizeToFit()
-//            currentPositionLabel?.center = CGPoint(x: (currentPositionLabel?.frame.width)! / 2, y: chartFrame.minY - (currentPositionLabel?.frame.height)! / 2)
-//            if (currentPositionLabel?.frame.maxX)! > self.view.bounds.width {
-//                currentPositionLabel?.center = CGPoint(x: (currentPositionLabel?.frame.width)! / 2, y: chartFrame.minY - ((currentPositionLabel?.frame.height)! / 2))
-//            }
-//            
-//            currentPositionLabel?.backgroundColor = colour2
-//            currentPositionLabel?.textColor = colour1
-//            
-//            self.currentPositionLabels.append(currentPositionLabel!)
-//            self.view.addSubview(currentPositionLabel!)
-//            
-//            //
-//            if let chartPoint = chartPointsCircleLayer?.chartPointsForScreenLocX(screenLoc.x).first {
-//                currentPositionLabel?.text = chartPoint.description
-//            } else {
-//                currentPositionLabel?.removeFromSuperview()
-//            }
-//        }, lineColor: colour2, lineWidth: 1)
-//
+        //        let chartPointsTrackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak chartPointsCircleLayer, weak currentPositionLabel] screenLoc in
+        //
+        //
+        //            // Label
+        //            currentPositionLabel?.text = chartPoints.description
+        //            currentPositionLabel?.sizeToFit()
+        //            currentPositionLabel?.center = CGPoint(x: (currentPositionLabel?.frame.width)! / 2, y: chartFrame.minY - (currentPositionLabel?.frame.height)! / 2)
+        //            if (currentPositionLabel?.frame.maxX)! > self.view.bounds.width {
+        //                currentPositionLabel?.center = CGPoint(x: (currentPositionLabel?.frame.width)! / 2, y: chartFrame.minY - ((currentPositionLabel?.frame.height)! / 2))
+        //            }
+        //
+        //            currentPositionLabel?.backgroundColor = Colours.colour2
+        //            currentPositionLabel?.textColor = Colours.colour1
+        //
+        //            self.currentPositionLabels.append(currentPositionLabel!)
+        //            self.view.addSubview(currentPositionLabel!)
+        //
+        //            //
+        //            if let chartPoint = chartPointsCircleLayer?.chartPointsForScreenLocX(screenLoc.x).first {
+        //                currentPositionLabel?.text = chartPoint.description
+        //            } else {
+        //                currentPositionLabel?.removeFromSuperview()
+        //            }
+        //        }, lineColor: Colours.colour2, lineWidth: 1)
+        //
         
         
-//        let trackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak candleStickLayer, weak infoView] screenLoc in
-//            candleStickLayer?.highlightChartpointView(screenLoc: screenLoc)
-//            if let chartPoint = candleStickLayer?.chartPointsForScreenLocX(screenLoc.x).first {
-//                infoView?.showChartPoint(chartPoint)
-//            } else {
-//                infoView?.clear()
-//            }
-//            }, lineColor: UIColor.red, lineWidth: Env.iPad ? 1 : 0.6)
+        //        let trackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak candleStickLayer, weak infoView] screenLoc in
+        //            candleStickLayer?.highlightChartpointView(screenLoc: screenLoc)
+        //            if let chartPoint = candleStickLayer?.chartPointsForScreenLocX(screenLoc.x).first {
+        //                infoView?.showChartPoint(chartPoint)
+        //            } else {
+        //                infoView?.clear()
+        //            }
+        //            }, lineColor: UIColor.red, lineWidth: Env.iPad ? 1 : 0.6)
         
-
         
-//        
-//        locChangedFunc: {[weak chartPointsLayer, weak infoView] screenLoc in
-//            candleStickLayer?.highlightChartpointView(screenLoc: screenLoc)
-//            if let chartPoint = candleStickLayer?.chartPointsForScreenLocX(screenLoc.x).first {
-//                infoView?.showChartPoint(chartPoint)
-//            } else {
-//                infoView?.clear()
-//            }
-//            }, lineColor: colour2, lineWidth: 1)
-
-
+        
+        //
+        //        locChangedFunc: {[weak chartPointsLayer, weak infoView] screenLoc in
+        //            candleStickLayer?.highlightChartpointView(screenLoc: screenLoc)
+        //            if let chartPoint = candleStickLayer?.chartPointsForScreenLocX(screenLoc.x).first {
+        //                infoView?.showChartPoint(chartPoint)
+        //            } else {
+        //                infoView?.clear()
+        //            }
+        //            }, lineColor: Colours.colour2, lineWidth: 1)
+        
+        
         //
         // Finalise ----------------------------
         //
@@ -397,7 +397,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             chartPointsLayer,
             chartPointsLineLayer,
             chartPointsCircleLayer,
-//            chartPointsTrackerLayer
+            //            chartPointsTrackerLayer
             ] as [ChartLayer]
         //
         // Add new layer for x dividers if selected time scale == 3 months or greater
@@ -412,7 +412,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             default: break
             }
             //
-            let dividersSettings =  ChartDividersLayerSettings(linesColor: colour1, linesWidth: 0.5, start: length, end: 0)
+            let dividersSettings =  ChartDividersLayerSettings(linesColor: Colours.colour1, linesWidth: 0.5, start: length, end: 0)
             let dividersLayer = ChartDividersLayer(xAxisLayer: xAxisLayer, yAxisLayer: yAxisLayer, axis: .x, settings: dividersSettings)
             //
             layersArray.append(dividersLayer)
@@ -424,7 +424,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             innerFrame: innerFrame,
             settings: chartSettings,
             layers: layersArray
-
+            
         )
         //
         view.addSubview(chart.view)
@@ -451,7 +451,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         switch selectedTimeScale {
         // Week
         case 0:
-            let chartData = weekTrackingDictionary.sorted(by: { $0.0.key < $0.1.key })
+            let chartData = weekTrackingDictionary.sorted(by: { $0.key < $1.key })
             //
             let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
             return chartPoints
@@ -521,17 +521,17 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             let chartPoints: [ChartPoint] = (chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))})
             return chartPoints
-        
+            
         // All
         case 5:
-            let chartData = monthTrackingDictionary.sorted(by: { $0.0.key < $0.1.key })
+            let chartData = monthTrackingDictionary.sorted(by: { $0.key < $1.key })
             //
             let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
             return chartPoints
         //
         default:
             //
-            let chartData = monthTrackingDictionary.sorted(by: { $0.0.key < $0.1.key })
+            let chartData = monthTrackingDictionary.sorted(by: { $0.key < $1.key })
             let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
             return chartPoints
             
@@ -558,7 +558,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         // Parameters
         //
         var axisLabelSettings = ChartLabelSettings(font: UIFont(name: "SFUIDisplay-light", size: 14)!)
-        axisLabelSettings.fontColor = colour1
+        axisLabelSettings.fontColor = Colours.colour1
         
         // Values
         switch selectedTimeScale {
@@ -581,13 +581,13 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             }
             
             return xValues
-
-        //
+            
+            //
         // 1 Month, 3 Months, 6 Months
         case 1,2,3:
             //
             var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
-
+            
             // To get data from
             let calendar = Calendar(identifier: .gregorian)
             let keys = trackingDictionary.keys.sorted()
@@ -763,7 +763,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let firstDate = dfConvert.date(from: firstDateString)
             let lastDateString: String = String(describing: xAxisValues.last!)
             let lastDate = dfConvert.date(from: lastDateString)
-            let xModel = ChartAxisModel(lineColor: colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, leadingPadding: ChartAxisPadding.label, trailingPadding: ChartAxisPadding.label)
+            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, leadingPadding: ChartAxisPadding.label, trailingPadding: ChartAxisPadding.label)
             return xModel
             
         // Month
@@ -789,10 +789,10 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let firstDate = dfConvert.date(from: firstDateString)
             let lastDateString: String = String(describing: xAxisValues.last!)
             let lastDate = dfConvert.date(from: lastDateString)
-            let xModel = ChartAxisModel(lineColor: colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
+            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
             
             return xModel
-           
+            
         // 3 Month
         case 2:
             // Date formatters
@@ -816,10 +816,10 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let firstDate = dfConvert.date(from: firstDateString)
             let lastDateString: String = String(describing: xAxisValues.last!)
             let lastDate = dfConvert.date(from: lastDateString)
-            let xModel = ChartAxisModel(lineColor: colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
+            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
             
             return xModel
-
+            
         // 6 Months
         case 3:
             // Date formatters
@@ -843,7 +843,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let firstDate = dfConvert.date(from: firstDateString)
             let lastDateString: String = String(describing: xAxisValues.last!)
             let lastDate = dfConvert.date(from: lastDateString)
-            let xModel = ChartAxisModel(lineColor: colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
+            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
             
             return xModel
             
@@ -866,14 +866,14 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: axisLabelSettings, formatter: df2)
             //
             let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .month, preferredDividers: 11, minSpace: 0, maxTextSize: 12)
-                
+            
             
             //
             let firstDateString: String = String(describing: xAxisValues.first!)
             let firstDate = dfConvert.date(from: firstDateString)
             let lastDateString: String = String(describing: xAxisValues.last!)
             let lastDate = dfConvert.date(from: lastDateString)
-            let xModel = ChartAxisModel(lineColor: colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, trailingPadding: ChartAxisPadding.label)
+            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, trailingPadding: ChartAxisPadding.label)
             
             return xModel
             
@@ -905,13 +905,13 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let firstDate = dfConvert.date(from: firstDateString)
             let lastDateString: String = String(describing: xAxisValues.last!)
             let lastDate = dfConvert.date(from: lastDateString)
-            let xModel = ChartAxisModel(lineColor: colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, trailingPadding: ChartAxisPadding.label)
+            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, trailingPadding: ChartAxisPadding.label)
             
             return xModel
             
         //
         default:
-            let xModel = ChartAxisModel(axisValues: xAxisValues, lineColor: colour1, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], leadingPadding: ChartAxisPadding.label, trailingPadding: ChartAxisPadding.label)
+            let xModel = ChartAxisModel(axisValues: xAxisValues, lineColor: Colours.colour1, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], leadingPadding: ChartAxisPadding.label, trailingPadding: ChartAxisPadding.label)
             return xModel
         }
     }
@@ -946,7 +946,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         default: return ""
         }
     }
-
+    
     // --------------------------------------------------------------------------------------
     // Return chart height
     var firstTimeOpened = true
@@ -958,7 +958,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             return self.view.bounds.height
         }
     }
-
+    
     
     //
     // Picker View ----------------------------------------------------------------------------------------------------
@@ -979,7 +979,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let timeLabel = UILabel()
         timeLabel.text = NSLocalizedString(timeScaleArray[row], comment: "")
         timeLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-        timeLabel.textColor = colour1
+        timeLabel.textColor = Colours.colour1
         //
         timeLabel.textAlignment = .center
         return timeLabel
@@ -995,10 +995,10 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         //
         
     }
-
+    
     //
     // Ok button action
-    func okButtonAction(_ sender: Any) {
+    @objc func okButtonAction(_ sender: Any) {
         // If data is available
         if weekTrackingDictionary.count != 0 {
             //
@@ -1010,14 +1010,14 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             //
             chart?.view.removeFromSuperview()
             drawGraph()
-        // No data to display
+            // No data to display
         } else {
             selectedTimeScale = timeScalePickerView.selectedRow(inComponent: 0)
             animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
         }
         
     }
-
+    
     //
     @IBAction func timeScaleButton(_ sender: Any) {
         //
@@ -1030,7 +1030,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     // Dismiss presets table
-    func backgroundViewExpandedAction(_ sender: Any) {
+    @objc func backgroundViewExpandedAction(_ sender: Any) {
         //
         animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
     }
@@ -1090,7 +1090,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var walkthroughHighlight = UIView()
     var walkthroughLabel = UILabel()
     var nextButton = UIButton()
-        
+    
     var didSetWalkthrough = false
     
     //
@@ -1106,7 +1106,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var walkthroughTextColor = UIColor()
     
     // Walkthrough
-    func walkthroughTracking() {
+    @objc func walkthroughTracking() {
         
         //
         if didSetWalkthrough == false {
@@ -1127,10 +1127,10 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
-            walkthroughLabel.textColor = colour2
-            walkthroughLabel.backgroundColor = colour1
-            walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = colour1.cgColor
+            walkthroughLabel.textColor = Colours.colour2
+            walkthroughLabel.backgroundColor = Colours.colour1
+            walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colours.colour1.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: view.bounds.width - 15, height: 20)
             walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: TopBarHeights.combinedHeight + 12.25 + ((view.bounds.height - 73.5) * (25/125)))
@@ -1141,11 +1141,11 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(1)
+                self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0)
+                    self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0)
                 }, completion: nil)
             })
             
@@ -1164,8 +1164,8 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
+            walkthroughBackgroundColor = Colours.colour1
+            walkthroughTextColor = Colours.colour2
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1186,7 +1186,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     
-//
+    //
 }
 
 
@@ -1280,7 +1280,7 @@ private class InfoView: UIView {
     }
     
     func showChartPoint(_ chartPoint: ChartPoint) {
-        statusView.backgroundColor = colour2
+        statusView.backgroundColor = Colours.colour2
         dateLabel.text = chartPoint.x.labels.first?.text ?? ""
         percentageTextLabel.text = "\(chartPoint.y)"
     }

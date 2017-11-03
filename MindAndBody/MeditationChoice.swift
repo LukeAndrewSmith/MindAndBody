@@ -26,45 +26,45 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
     @IBOutlet weak var stackView: UIStackView!
     
     
-//
-// View did load -------------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load -------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Colours
-        view.backgroundColor = colour1
+        view.backgroundColor = Colours.colour1
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("meditation", comment: ""))
-    
+        
         // Button Titles
         //
         guided.setTitle(NSLocalizedString("guided", comment: ""), for: UIControlState.normal)
         guided.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        guided.setTitleColor(colour2, for: .normal)
+        guided.setTitleColor(Colours.colour2, for: .normal)
         guided.layer.borderWidth = 5
-        guided.layer.borderColor = colour2.cgColor
+        guided.layer.borderColor = Colours.colour2.cgColor
         guided.titleLabel?.adjustsFontSizeToFitWidth = true
         guided.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         guided.titleLabel?.textAlignment = .center
         //
         meditationTimer.setTitle(NSLocalizedString("meditationTimer", comment: ""), for: UIControlState.normal)
         meditationTimer.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        meditationTimer.setTitleColor(colour2, for: .normal)
+        meditationTimer.setTitleColor(Colours.colour2, for: .normal)
         meditationTimer.layer.borderWidth = 5
-        meditationTimer.layer.borderColor = colour2.cgColor
+        meditationTimer.layer.borderColor = Colours.colour2.cgColor
         meditationTimer.titleLabel?.adjustsFontSizeToFitWidth = true
         meditationTimer.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         meditationTimer.titleLabel?.textAlignment = .center
-      
+        
         
     }
     
     
-//
-// View did layout subviews -------------------------------------------------------------------------------------------
-//
+    //
+    // View did layout subviews -------------------------------------------------------------------------------------------
+    //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //
@@ -76,11 +76,11 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         //
         
     }
-
     
-//
-// Remove Back Bar Text
-//
+    
+    //
+    // Remove Back Bar Text
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
         backItem.title = ""

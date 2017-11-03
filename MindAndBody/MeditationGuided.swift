@@ -50,12 +50,13 @@ class MeditationGuided: UIViewController {
     
     // Passed from previous VC
     //var guidedTitle = String()
-    var selectedSession = [0, 0]
+    var selectedSessionMeditation = [0, 0]
     
+    var fromSchedule = false
     
-//
-// Content Arrays -------------------------------------------------------------------------------------------
-//
+    //
+    // Content Arrays -------------------------------------------------------------------------------------------
+    //
     // Sessions Titles
     let guidedSessions =
         [
@@ -64,7 +65,7 @@ class MeditationGuided: UIViewController {
             ["lettingGo", "acceptance", "wandering", "oneness", "duality", "effort"],
             ["bodyScan", "unwind"],
             ["lotusStretch", "generalStretch"]
-        ]
+    ]
     // Theme
     let themeArray =
         [
@@ -73,7 +74,7 @@ class MeditationGuided: UIViewController {
             ["lettingGo", "acceptance", "wandering", "oneness", "duality", "effort"],
             ["bodyScan", "unwind"],
             ["lotusStretch", "generalStretch"]
-        ]
+    ]
     // Aim
     let aimArray =
         [
@@ -115,28 +116,28 @@ class MeditationGuided: UIViewController {
     ]
     
     
-//
-// View did load -------------------------------------------------------------------------------------------
-//
+    //
+    // View did load -------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = colour1
+        view.backgroundColor = Colours.colour1
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.backgroundColor = colour3
-        beginButton.setTitleColor(colour2, for: .normal)
+        beginButton.backgroundColor = Colours.colour3
+        beginButton.setTitleColor(Colours.colour2, for: .normal)
         
         // View Elements
         //
         // Description
-        detailView.backgroundColor = colour2
+        detailView.backgroundColor = Colours.colour2
         //
         detailTitle.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         detailTitle.text = NSLocalizedString("detail", comment: "")
         //
-        imageView.backgroundColor = colour2
+        imageView.backgroundColor = Colours.colour2
         imageView.layer.cornerRadius = 3
         imageView.layer.masksToBounds = true
         //
@@ -147,58 +148,58 @@ class MeditationGuided: UIViewController {
         //
         
         // Navigation Bar Title
-        navigationBar.title = NSLocalizedString(guidedSessions[selectedSession[0]][selectedSession[1]], comment: "")
+        navigationBar.title = NSLocalizedString(guidedSessions[selectedSessionMeditation[0]][selectedSessionMeditation[1]], comment: "")
         
         // Details
         //
         // Theme
-            //
-            themeTitle.text = NSLocalizedString("theme", comment: "")
-            //
-            theme.text = NSLocalizedString(themeArray[selectedSession[0]][selectedSession[1]], comment: "")
-            theme.adjustsFontSizeToFitWidth = true
+        //
+        themeTitle.text = NSLocalizedString("theme", comment: "")
+        //
+        theme.text = NSLocalizedString(themeArray[selectedSessionMeditation[0]][selectedSessionMeditation[1]], comment: "")
+        theme.adjustsFontSizeToFitWidth = true
         
         // Aim
-            //
-            aimTitle.text = NSLocalizedString("aim", comment: "")
-            //
-            aim.text = NSLocalizedString(aimArray[selectedSession[0]][selectedSession[1]], comment: "")
-            aim.adjustsFontSizeToFitWidth = true
-
+        //
+        aimTitle.text = NSLocalizedString("aim", comment: "")
+        //
+        aim.text = NSLocalizedString(aimArray[selectedSessionMeditation[0]][selectedSessionMeditation[1]], comment: "")
+        aim.adjustsFontSizeToFitWidth = true
+        
         // Focus
-            //
-            focusTitle.text = NSLocalizedString("focus", comment: "")
-            //
-            focus.text = NSLocalizedString(focusArray[selectedSession[0]][selectedSession[1]], comment: "")
-            focus.adjustsFontSizeToFitWidth = true
-
+        //
+        focusTitle.text = NSLocalizedString("focus", comment: "")
+        //
+        focus.text = NSLocalizedString(focusArray[selectedSessionMeditation[0]][selectedSessionMeditation[1]], comment: "")
+        focus.adjustsFontSizeToFitWidth = true
+        
         // Duration
-            //
-            durationTitle.text = NSLocalizedString("duration", comment: "")
-            //
-            duration.text = NSLocalizedString(durationArray[selectedSession[0]][selectedSession[1]], comment: "")
-            duration.adjustsFontSizeToFitWidth = true
-
+        //
+        durationTitle.text = NSLocalizedString("duration", comment: "")
+        //
+        duration.text = NSLocalizedString(durationArray[selectedSessionMeditation[0]][selectedSessionMeditation[1]], comment: "")
+        duration.adjustsFontSizeToFitWidth = true
+        
         // Image
         //
         
-    
+        
         // Discussion
         //
         // Scroll
         discussionScrollView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         //
         discussionTitle.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        discussionTitle.textColor = colour2
+        discussionTitle.textColor = Colours.colour2
         discussionTitle.text = NSLocalizedString("discussion", comment: "")
         
         // Text
         let discussionLabel = UILabel()
-        let attributedText = NSMutableAttributedString(string: NSLocalizedString(discussionArray[selectedSession[0]][selectedSession[1]], comment: ""))
+        let attributedText = NSMutableAttributedString(string: NSLocalizedString(discussionArray[selectedSessionMeditation[0]][selectedSessionMeditation[1]], comment: ""))
         let paragraphStyleE = NSMutableParagraphStyle()
         paragraphStyleE.alignment = .natural
         //
-        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyleE, range: NSMakeRange(0, attributedText.length))
+        attributedText.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyleE, range: NSMakeRange(0, attributedText.length))
         //
         discussionLabel.attributedText = attributedText
         //
@@ -217,9 +218,9 @@ class MeditationGuided: UIViewController {
     }
     
     
-//
-// Begin Button ----------------------------------------------------------------------------------
-//
+    //
+    // Begin Button ----------------------------------------------------------------------------------
+    //
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         //
@@ -230,17 +231,18 @@ class MeditationGuided: UIViewController {
     }
     
     
-//
-// Pass arrays to next View controller -------------------------------------------------------------------------------------------
-//
+    //
+    // Pass arrays to next View controller -------------------------------------------------------------------------------------------
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Pass Info
-//        if (segue.identifier == "meditationGuided") {
-//            let destinationNC = segue.destination as! UINavigationController
-//            let destinationVC = destinationNC.viewControllers.first as! MeditationScreenGuided
-//            //
-//            destinationVC.selectedSession = selectedSession
-//        }
+        //        if (segue.identifier == "meditationGuided") {
+        //            let destinationVC = segue.destination as! MeditationScreen
+        //            //
+        //            destinationVC.selectedSessionMeditation = selectedSessionMeditation
+        // destinationVC.fromSchedule = fromSchedule
+        //        }
     }
-//
+    //
 }
+

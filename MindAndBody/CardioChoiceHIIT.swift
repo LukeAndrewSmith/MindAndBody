@@ -36,7 +36,7 @@ class CardioChoiceHIIT: UIViewController  {
         
         
         // Colours
-        view.backgroundColor = colour1
+        view.backgroundColor = Colours.colour1
         
         // Titles
         navigationBar.title = (NSLocalizedString("hiit", comment: ""))
@@ -44,21 +44,21 @@ class CardioChoiceHIIT: UIViewController  {
         // Button Titles
         rowing.setTitle(NSLocalizedString("rowing", comment: ""), for: UIControlState.normal)
         rowing.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        rowing.setTitleColor(colour2, for: .normal)
+        rowing.setTitleColor(Colours.colour2, for: .normal)
         rowing.layer.borderWidth = 5
-        rowing.layer.borderColor = colour2.cgColor
+        rowing.layer.borderColor = Colours.colour2.cgColor
         //
         biking.setTitle(NSLocalizedString("biking", comment: ""), for: UIControlState.normal)
         biking.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        biking.setTitleColor(colour2, for: .normal)
+        biking.setTitleColor(Colours.colour2, for: .normal)
         biking.layer.borderWidth = 5
-        biking.layer.borderColor = colour2.cgColor
+        biking.layer.borderColor = Colours.colour2.cgColor
         //
         running.setTitle(NSLocalizedString("running", comment: ""), for: UIControlState.normal)
-        running.setTitleColor(colour2, for: .normal)
+        running.setTitleColor(Colours.colour2, for: .normal)
         running.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         running.layer.borderWidth = 5
-        running.layer.borderColor = colour2.cgColor
+        running.layer.borderColor = Colours.colour2.cgColor
         //
     }
     
@@ -96,22 +96,22 @@ class CardioChoiceHIIT: UIViewController  {
     // MARK: Selected Session
     // Rowing
     @IBAction func full(_ sender: Any) {
-        selectedSession[1] = 0
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 0
+        SelectedSession.shared.selectedSession[2] = -1
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     
     // Biking
     @IBAction func upper(_ sender: Any) {
-        selectedSession[1] = 1
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 1
+        SelectedSession.shared.selectedSession[2] = -1
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     
     // Running
     @IBAction func lower(_ sender: Any) {
-        selectedSession[1] = 2
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 2
+        SelectedSession.shared.selectedSession[2] = -1
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     
@@ -120,11 +120,6 @@ class CardioChoiceHIIT: UIViewController  {
     // Remove back bar text
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Pass Data
-        if (segue.identifier == "cardioSegue") {
-            //
-            let destinationVC = segue.destination as! FinalChoice
-        }
         //
         let backItem = UIBarButtonItem()
         backItem.title = ""
@@ -132,3 +127,4 @@ class CardioChoiceHIIT: UIViewController  {
     }
     
 }
+

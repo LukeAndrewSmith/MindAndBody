@@ -74,7 +74,7 @@ extension UIViewController {
         // View
         animationView.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: animationViewHeight)
         //
-        animationView.backgroundColor = colour2
+        animationView.backgroundColor = Colours.colour2
         animationView.contentMode = .scaleAspectFit
         animationView.isUserInteractionEnabled = true
         //
@@ -124,25 +124,25 @@ extension UIViewController {
         //
         // Title
         let titleString = NSMutableAttributedString(string: title)
-        titleString.addAttribute(NSFontAttributeName, value: UIFont(name: "SFUIDisplay-light", size: 22)!, range: NSMakeRange(0, titleString.length))
+        titleString.addAttribute(NSAttributedStringKey.font, value: UIFont(name: "SFUIDisplay-light", size: 22)!, range: NSMakeRange(0, titleString.length))
         //
         let centering = NSMutableParagraphStyle()
         centering.alignment = .center
-        titleString.addAttribute(NSParagraphStyleAttributeName, value: centering, range: NSMakeRange(0, titleString.length))
+        titleString.addAttribute(NSAttributedStringKey.paragraphStyle, value: centering, range: NSMakeRange(0, titleString.length))
         
         //
         titleString.append(return2)
         
         //
         // Title Attributes
-        let subTitleFont = [NSFontAttributeName : UIFont(name: "SFUIDisplay-light", size: 22)]
+        let subTitleFont: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font : UIFont(name: "SFUIDisplay-light", size: 22) as Any]
         //
         // Bullet Point Attributes
-        let bulletPointFont = [NSFontAttributeName : UIFont(name: "SFUIDisplay-thin", size: 22)]
+        let bulletPointFont: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font : UIFont(name: "SFUIDisplay-thin", size: 22) as Any]
         //
         let paragraphStyle: NSMutableParagraphStyle
         paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-        paragraphStyle.tabStops = [NSTextTab(textAlignment: .left, location: 15, options: NSDictionary() as! [String : AnyObject])]
+        paragraphStyle.tabStops = [NSTextTab(textAlignment: .left, location: 15, options: [:])]
         paragraphStyle.defaultTabInterval = 15
         paragraphStyle.firstLineHeadIndent = 0
         paragraphStyle.headIndent = 15
@@ -163,7 +163,7 @@ extension UIViewController {
             let formattedString: String = "\(bulletPoint) \(string)\n"
             let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: formattedString)
             
-            attributedString.addAttributes([NSParagraphStyleAttributeName: paragraphStyle], range: NSMakeRange(0, attributedString.length))
+            attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
             
             howToString.append(attributedString)
         }
@@ -188,7 +188,7 @@ extension UIViewController {
             let formattedString: String = "\(bulletPoint) \(string)\n"
             let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: formattedString)
             
-            attributedString.addAttributes([NSParagraphStyleAttributeName: paragraphStyle], range: NSMakeRange(0, attributedString.length))
+            attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
             
             toAvoidString.append(attributedString)
         }
@@ -213,7 +213,7 @@ extension UIViewController {
             let formattedString: String = "\(bulletPoint) \(string)\n"
             let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: formattedString)
             
-            attributedString.addAttributes([NSParagraphStyleAttributeName: paragraphStyle], range: NSMakeRange(0, attributedString.length))
+            attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
             
             focusOnString.append(attributedString)
         }
@@ -303,6 +303,34 @@ extension UIViewController {
         UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
     }
     
+    // Schedule Tracking
+    func updateScheduleTracking(fromSchedule: Bool) {
+        if fromSchedule == true {
+            let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let selectedSchedule = settings[7][0]
+            let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+            // Day
+            if schedules[selectedSchedule][9][0] as! Int == 0 {
+                // Update day
+                var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+                scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
+                // Set
+                UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+                // Reload
+                ScheduleVariables.shared.shouldReloadChoice = true
+                // Week
+            } else if schedules[selectedSchedule][9][0] as! Int == 1 {
+                // Update week [7]
+                var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+                scheduleTracking[selectedSchedule][7][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
+                // Set
+                UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+                // Reload
+                ScheduleVariables.shared.shouldReloadChoice = true
+            }
+        }
+    }
+    
     
     // ----------------------------------------------------------------------------------------------------------------
     // Update Tracking Arrays
@@ -333,13 +361,13 @@ extension UIViewController {
             if keys.last == currentDate {
                 weekTrackingDictionary[currentDate] = currentProgress
                 
-            //
-            // Day is next in line
+                //
+                // Day is next in line
             } else if keys.last == calendar.date(byAdding: .day, value: -1, to: currentDate) {
                 weekTrackingDictionary.updateValue(currentProgress, forKey: currentDate)
                 
-            //
-            // Day isn't next in line
+                //
+                // Day isn't next in line
             } else if keys.last! < calendar.date(byAdding: .day, value: -1, to: currentDate)! {
                 //
                 // Update missed days with 0
@@ -354,7 +382,7 @@ extension UIViewController {
                 weekTrackingDictionary.updateValue(currentProgress, forKey: currentDate)
             }
             
-        // Week hasn't begun (should start) / user has't done anything this week
+            // Week hasn't begun (should start) / user has't done anything this week
         } else {
             //
             // If today is monday, clear array and create monday
@@ -362,8 +390,8 @@ extension UIViewController {
                 weekTrackingDictionary = [:]
                 weekTrackingDictionary.updateValue(currentProgress, forKey: currentMondayDate)
                 
-            //
-            // Today isn't monday
+                //
+                // Today isn't monday
             } else {
                 //
                 // Clear array if necessary (if last key is less than current monday date)
@@ -389,10 +417,7 @@ extension UIViewController {
             }
         }
         //
-        let testDic: [Date:Int] = weekTrackingDictionary
-        
-        //
-        // Need to then save the dictionary somewhere !!!!!!!!!!!!!!!
+        // TODO:  Need to then save the dictionary somewhere !!!!!!!!!!!!!!!
     }
     
     
@@ -418,15 +443,15 @@ extension UIViewController {
             // Update current weeks progress
             trackingDictionary[currentMondayDate] = currentProgress
             
-        //
-        // Current week doesn't exist
+            //
+            // Current week doesn't exist
         } else {
             // Last updated week was last week |or| first week ever updated
             if keys.count == 0 || keys.last! == calendar.date(byAdding: .weekOfYear, value: -1, to: currentMondayDate) {
                 // Create current weeks progress
                 trackingDictionary.updateValue(currentProgress, forKey: currentMondayDate)
                 
-            // Skipped weeks
+                // Skipped weeks
             } else {
                 //
                 // Update missed weeks with 0
@@ -441,8 +466,6 @@ extension UIViewController {
                 trackingDictionary.updateValue(currentProgress, forKey: currentMondayDate)
             }
         }
-        
-        let testDic: [Date:Int] = trackingDictionary
         
     }
     
@@ -492,9 +515,6 @@ extension UIViewController {
             }
         }
         //
-        var testDic: [Date:Int] = monthTrackingDictionary
-       
-        
     }
     
     
@@ -512,8 +532,8 @@ extension UIViewController {
         walkthroughView.backgroundColor = .clear
         
         // Highlight
-        walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
-        walkthroughHighlight.layer.borderColor = colour1.cgColor
+        walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
+        walkthroughHighlight.layer.borderColor = Colours.colour1.cgColor
         walkthroughHighlight.layer.borderWidth = 1
         
         // Label
@@ -524,9 +544,9 @@ extension UIViewController {
         walkthroughLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         walkthroughLabel.layer.cornerRadius = 13
         walkthroughLabel.clipsToBounds = true
-        walkthroughLabel.backgroundColor = colour1
+        walkthroughLabel.backgroundColor = Colours.colour1
         walkthroughLabel.font = UIFont(name: "SFUIDisplay-thin", size: 22)
-        walkthroughLabel.textColor = colour2
+        walkthroughLabel.textColor = Colours.colour2
         walkthroughLabel.alpha = 0.93
         
         // Button
@@ -543,7 +563,7 @@ extension UIViewController {
         //
         return walkthroughView
     }
-
+    
     //
     // view, label, highlight, texts, labelframe, highlightsize, highlightcenter, highlightcornerradius, backgroundColor, textColor, animationTime, walkthroughprogress
     func nextWalkthroughView(walkthroughView: UIView, walkthroughLabel: UILabel, walkthroughHighlight: UIView, walkthroughTexts: [String], walkthroughLabelFrame: Int, highlightSize: CGSize, highlightCenter: CGPoint, highlightCornerRadius: Int, backgroundColor: UIColor, textColor: UIColor, highlightColor: UIColor, animationTime: Double, walkthroughProgress: Int) {
@@ -571,7 +591,7 @@ extension UIViewController {
         //
         // Add Snapshot
         UIApplication.shared.keyWindow?.insertSubview(walkthroughSnapshot1!, aboveSubview: walkthroughView)
-    
+        
         //
         // Animate Highlight and Label
         UIView.animate(withDuration: animationTime, animations: {
@@ -625,7 +645,7 @@ extension UIViewController {
             
         })
     }
-
+    
     //
     // Vibrate Phone
     func vibratePhone() {
@@ -636,7 +656,7 @@ extension UIViewController {
         generator.notificationOccurred(.success)
     }
     
-//
+    //
 }
 
 

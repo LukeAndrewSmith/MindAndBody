@@ -44,13 +44,13 @@ extension TimeBasedScreen {
         switch movementProgress {
         // Rest Time
         case 0:
-            timerShapeLayer.strokeColor = colour4.cgColor
+            timerShapeLayer.strokeColor = Colours.colour4.cgColor
         // Prepare for movement
         case 1:
-            timerShapeLayer.strokeColor = colour4.cgColor
+            timerShapeLayer.strokeColor = Colours.colour4.cgColor
         // Perform movement for:
         case 2:
-            timerShapeLayer.strokeColor = colour3.cgColor
+            timerShapeLayer.strokeColor = Colours.colour3.cgColor
         default:
             break
         }
@@ -74,7 +74,7 @@ extension TimeBasedScreen {
         if movementProgress == 0 {
             let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
             let restTimes = settings[4]
-            switch selectedSession[0] {
+            switch SelectedSession.shared.selectedSession[0] {
             // Warmup
             case 0:
                 animation.duration = Double(restTimes[0])
@@ -87,17 +87,17 @@ extension TimeBasedScreen {
             default:
                 break
             }
-        // Prepare for movement
+            // Prepare for movement
         } else if movementProgress == 1 {
             //
             // Longer preparation for circuit workout
-            switch selectedSession[1] {
+            switch SelectedSession.shared.selectedSession[1] {
             case 13,14,15:
                 animation.duration = Double(10)
             default:
                 animation.duration = Double(5)
             }
-        // Movement Time
+            // Movement Time
         } else if movementProgress == 2 {
             animation.duration = Double(lengthArray[selectedRow])
         }
@@ -122,7 +122,7 @@ extension TimeBasedScreen {
         case 0:
             let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
             let restTimes = settings[4]
-            switch selectedSession[0] {
+            switch SelectedSession.shared.selectedSession[0] {
             // Warmup
             case 0:
                 timerValue = restTimes[0]
@@ -139,7 +139,7 @@ extension TimeBasedScreen {
         case 1:
             //
             // Longer preparation for circuit workout
-            switch selectedSession[1] {
+            switch SelectedSession.shared.selectedSession[1] {
             case 13,14,15:
                 timerValue = 10
             default:
@@ -165,25 +165,25 @@ extension TimeBasedScreen {
     }
     
     //
-    func updateTimer() {
+    @objc func updateTimer() {
         //
         let indexPath = NSIndexPath(row: selectedRow, section: 0)
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
         //
         if timerValue == 0 {
             // Movement is not asymmetric (or is aysmmetric but rest or prepare)
-            if sessionData.asymmetricMovements[selectedSession[0]].contains(keyArray[selectedRow]) == false || movementProgress != 2 {
+            if sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]].contains(keyArray[selectedRow]) == false || movementProgress != 2 {
                 movementProgress += 1
                 removeCircle()
                 lengthTimer.invalidate()
                 indicateMovementProgress()
-            // Movement is asymmetric and first side just finished being timed
+                // Movement is asymmetric and first side just finished being timed
             } else if asymmetricProgress == 0 {
                 asymmetricProgress += 1
                 removeCircle()
                 lengthTimer.invalidate()
                 indicateMovementProgress()
-            // Movement is asymmetric and second side just finished being timed
+                // Movement is asymmetric and second side just finished being timed
             } else if asymmetricProgress == 1 {
                 movementProgress += 1
                 removeCircle()
@@ -201,7 +201,7 @@ extension TimeBasedScreen {
     
     //
     // Display in timerLabel: rest, prepare, perform
-        // Then perform necessary actions, start timer, play bell, start animation etc...
+    // Then perform necessary actions, start timer, play bell, start animation etc...
     func indicateMovementProgress(){
         //
         let indexPath = NSIndexPath(row: selectedRow, section: 0)
@@ -230,36 +230,36 @@ extension TimeBasedScreen {
                 self.playBell(bell: 0)
             })
         case 2:
-                cell.indicatorLabel.text = " "
-                finishEarly.isEnabled = false
-                // Title
-                // Movement is not asymmetric
-                if sessionData.asymmetricMovements[selectedSession[0]].contains(keyArray[selectedRow]) == false {
-                    cell.timeLabel.text = NSLocalizedString("beginMovement", comment: "")
+            cell.indicatorLabel.text = " "
+            finishEarly.isEnabled = false
+            // Title
+            // Movement is not asymmetric
+            if sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]].contains(keyArray[selectedRow]) == false {
+                cell.timeLabel.text = NSLocalizedString("beginMovement", comment: "")
                 // Asymmetric and first side, left
-                } else if asymmetricProgress == 0 {
-                    cell.timeLabel.text = NSLocalizedString("beginMovementSide1", comment: "")
+            } else if asymmetricProgress == 0 {
+                cell.timeLabel.text = NSLocalizedString("beginMovementSide1", comment: "")
                 // Asymmetric and second side, right
+            } else {
+                cell.timeLabel.text = NSLocalizedString("beginMovementSide2", comment: "")
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                self.startTimer()
+                self.finishEarly.isEnabled = true
+                self.playBell(bell: 1)
+                // Reverse image if second side of asymmetric exersize
+                if sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]].contains(self.keyArray[self.selectedRow]) && self.asymmetricProgress == 1 {
+                    //                        self.playAnimationReversed(row: self.selectedRow)
                 } else {
-                    cell.timeLabel.text = NSLocalizedString("beginMovementSide2", comment: "")
+                    //                        self.playAnimation(row: self.selectedRow)
                 }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
-                    self.startTimer()
-                    self.finishEarly.isEnabled = true
-                    self.playBell(bell: 1)
-                    // Reverse image if second side of asymmetric exersize
-                    if sessionData.asymmetricMovements[selectedSession[0]].contains(self.keyArray[self.selectedRow]) && self.asymmetricProgress == 1 {
-                        self.playAnimationReversed(row: self.selectedRow)
-                    } else {
-                        self.playAnimation(row: self.selectedRow)
-                    }
-                })
+            })
         case 3:
             if selectedRow != keyArray.count - 1 {
                 //
                 // Special case for circuit workout
-                switch selectedSession[1] {
+                switch SelectedSession.shared.selectedSession[1] {
                 case 13,14,15:
                     // If new selected movement is a multiple of the number of movements in the original key array, then it is the end of a round and a rest timer must be presented
                     if isNewRound() == true {
@@ -289,3 +289,4 @@ extension TimeBasedScreen {
     }
     
 }
+

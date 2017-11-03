@@ -102,28 +102,28 @@ class InitialProfileQuestion: UIViewController {
     // MARK: Button actions
     // Day
     @IBAction func fillInProfileButtonAction(_ sender: Any) {
-//        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
-//        // Set user settings for schedule style to week
-//        schedules[selectedSchedule][9][0] = 0
-//        UserDefaults.standard.set(schedules, forKey: "schedules")
+        //        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        //        // Set user settings for schedule style to week
+        //        schedules[selectedSchedule][9][0] = 0
+        //        UserDefaults.standard.set(schedules, forKey: "schedules")
         self.performSegue(withIdentifier: "InitialProfileSegue", sender: self)
     }
     
     // Week
     @IBAction func chooseDifficultiesButtonAction(_ sender: Any) {
         // If app schedule, go to week
-//        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
-//        // Set user settings for schedule style to week
-//        schedules[selectedSchedule][9][0] = 1
-//        UserDefaults.standard.set(schedules, forKey: "schedules")
-//        if selectedSchedule == 0 {
-//            //
-//            ScheduleVariables.shared.shouldReloadSchedule = true
-//            self.dismiss(animated: true)
-//            // If custom schedule, go to schedule creator
-//        } else {
-            self.performSegue(withIdentifier: "InitialProfileSegue", sender: self)
-//        }
+        //        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        //        // Set user settings for schedule style to week
+        //        schedules[selectedSchedule][9][0] = 1
+        //        UserDefaults.standard.set(schedules, forKey: "schedules")
+        //        if selectedSchedule == 0 {
+        //            //
+        //            ScheduleVariables.shared.shouldReloadSchedule = true
+        //            self.dismiss(animated: true)
+        //            // If custom schedule, go to schedule creator
+        //        } else {
+        self.performSegue(withIdentifier: "InitialProfileSegue", sender: self)
+        //        }
     }
     
     @IBAction func chooseSessionsButtonAction(_ sender: Any) {
@@ -164,3 +164,4 @@ class InitialProfileQuestion: UIViewController {
 class InitialProfileNavigation: UINavigationController {
     
 }
+

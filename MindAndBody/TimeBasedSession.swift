@@ -42,6 +42,9 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     var selectedRow = 0
     
     //
+    var fromSchedule = false
+    
+    //
     // Is paused
     var isPaused = false
     
@@ -49,8 +52,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     // MARK: Variables from Session Data
     //
     // Key Array
-    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [1] Keys Array
-    var keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
+    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [1] Keys Array
+    var keyArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1] as! [Int]
     
     // Length
     var lengthArray: [Int] = []
@@ -99,8 +102,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         let title = NSLocalizedString("sessionStarted", comment: "")
         //let message = NSLocalizedString("resetMessage", comment: "")
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.view.tintColor = colour1
-        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        alert.view.tintColor = Colours.colour1
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
         self.present(alert, animated: true, completion: {
             //
             let delayInSeconds = 0.7
@@ -128,24 +131,24 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         UIApplication.shared.isIdleTimerDisabled = true
         
         //
-        switch selectedSession[0] {
+        switch SelectedSession.shared.selectedSession[0] {
         // Warmup/Bodyweight Circuit Wokrout
         case 0,1:
-            lengthArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[4] as! [Int]
+            lengthArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[4] as! [Int]
         // Stretching
         case 3:
-            lengthArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3] as! [Int]
+            lengthArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[3] as! [Int]
         default:
             break
         }
         //
         // Special case for circuit workout
             // Add the movements to the key array x(number of rounds) more times
-        switch selectedSession[1] {
+        switch SelectedSession.shared.selectedSession[1] {
         case 13,14,15:
             nMovementsInRound = keyArray.count
             var enlargedKeyArray = keyArray
-            let nRounds = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2][0] as! Int
+            let nRounds = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2][0] as! Int
             // nRounds is always greater than 1, so if 2, then 1...1 adds 1 set of keys, therefore there are two rounds
             for _ in 1...nRounds - 1 {
                 enlargedKeyArray += keyArray
@@ -168,11 +171,11 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         
         //
-        view.backgroundColor = colour2
+        view.backgroundColor = Colours.colour2
         
         
         //
-        finishEarly.tintColor = colour4
+        finishEarly.tintColor = Colours.colour4
         
         // self.present(alert, animated: true, completion: (() -> Void)?)
         
@@ -182,15 +185,15 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
         // Rounded Edges
         // Colour
-        progressBar.trackTintColor = colour1
-        progressBar.progressTintColor = colour3
+        progressBar.trackTintColor = Colours.colour1
+        progressBar.progressTintColor = Colours.colour3
         //
         progressBar.setProgress(0, animated: true)
         
         // TableView Background
         let tableViewBackground = UIView()
         //
-        tableViewBackground.backgroundColor = colour2
+        tableViewBackground.backgroundColor = Colours.colour2
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
         //
         tableView.backgroundView = tableViewBackground
@@ -219,7 +222,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         //
         let header = view as! UITableViewHeaderFooterView
-        header.contentView.backgroundColor = colour1
+        header.contentView.backgroundColor = Colours.colour1
         
         //
         if section == 0 {
@@ -262,8 +265,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             //
             // Cell
-            cell.backgroundColor = colour2
-            cell.tintColor = colour2
+            cell.backgroundColor = Colours.colour2
+            cell.tintColor = Colours.colour2
             tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             cell.selectionStyle = .none
             
@@ -273,9 +276,9 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             let defaultImage = settings[5][0]
             if defaultImage == 0 {
                 // [key] = key, [0] = first image
-                cell.imageViewCell.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
+                cell.imageViewCell.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
                 // Indicator
-                if (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count > 1 {
+                if (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count > 1 {
                     cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
                 } else {
                     cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
@@ -284,9 +287,9 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Target Area on left
             } else {
                 // [key] = key
-                cell.imageViewCell.image = getUncachedImage(named: (sessionData.targetAreaDictionaries[selectedSession[0]][key])! + toAdd)
+                cell.imageViewCell.image = getUncachedImage(named: (sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key])! + toAdd)
                 // Indicator
-                if (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count > 1 {
+                if (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count > 1 {
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
                 } else {
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
@@ -306,7 +309,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             //
             // Movement
-            cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: "")
+            cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]!, comment: "")
             //
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 33)
             cell.movementLabel?.textAlignment = .center
@@ -320,7 +323,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             //
             // Explanation
-            cell.explanationButton.tintColor = colour1
+            cell.explanationButton.tintColor = Colours.colour1
             
             //
             // Gestures
@@ -394,11 +397,11 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.separatorInset =  UIEdgeInsetsMake(0, 0, 0, 0)
             //
             cell.layer.borderWidth = 2
-            cell.layer.borderColor = colour1.cgColor
+            cell.layer.borderColor = Colours.colour1.cgColor
             //
             cell.textLabel?.text = NSLocalizedString("end", comment: "")
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 33)
-            cell.textLabel?.textColor = colour1
+            cell.textLabel?.textColor = Colours.colour1
             cell.textLabel?.textAlignment = .center
             //
             return cell
@@ -435,6 +438,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             // Tracking
             updateWeekProgress()
             updateMonthProgress()
+            // Schedule Tracking
+            updateScheduleTracking(fromSchedule: fromSchedule)
             //
             self.dismiss(animated: true)
         //
@@ -458,13 +463,13 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
             var animationArray: [UIImage] = []
             for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![i])!)
             }
             //
             cell.imageViewCell.animationImages = animationArray
@@ -490,13 +495,13 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
             var animationArray: [UIImage] = []
             for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![i])!)
             }
             //
             cell.imageViewCell.animationImages = animationArray
@@ -524,20 +529,20 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         // Image
         // [key] = key, [0] = first image
-        let image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
+        let image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
         // If asymmetric array contains image, flip imageview
-        if sessionData.asymmetricMovements[selectedSession[0]].contains(key) {
+        if sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]].contains(key) {
             let flippedImage = UIImage(cgImage: (image?.cgImage!)!, scale: (image?.scale)!, orientation: .upMirrored)
             cell.imageViewCell.image =  flippedImage
         }
         //
-        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
             var animationArray: [UIImage] = []
             for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![i])!)
             }
             //
             cell.imageViewCell.animationImages = animationArray
@@ -630,7 +635,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         explanationLabel.numberOfLines = 0
         //
         let key = keyArray[selectedRow]
-        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: ""), howTo: NSLocalizedString(sessionData.explanationDictionaries[selectedSession[0]][key]![0], comment: ""), toAvoid: NSLocalizedString(sessionData.explanationDictionaries[selectedSession[0]][key]![1], comment: ""), focusOn: NSLocalizedString(sessionData.explanationDictionaries[selectedSession[0]][key]![2], comment: ""))
+        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]!, comment: ""), howTo: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0], comment: ""), toAvoid: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![1], comment: ""), focusOn: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![2], comment: ""))
         explanationLabel.frame = CGRect(x: 10, y: 10, width: scrollViewExplanation.frame.size.width - 10, height: 0)
         //
         explanationLabel.sizeToFit()
@@ -678,7 +683,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
         //
         let key = keyArray[indexPath.row]
-        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
         //
         if cell.imageViewCell.isAnimating == false {
             //
@@ -700,7 +705,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                     var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
                     let defaultImage = settings[5][0]
                     if defaultImage == 0 {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[selectedSession[0]][key]! + toAdd)
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key]! + toAdd)
                         // Indicator
                         if imageCount > 1 {
                             cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
@@ -710,7 +715,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                         cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
                         // Target Area on left
                     } else {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![0])
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0])
                         // Indicator
                         if imageCount > 1 {
                             cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -751,7 +756,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                     var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
                     let defaultImage = settings[5][0]
                     if defaultImage == 0 {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![0])
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0])
                         // Indicator
                         if imageCount > 1 {
                             cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -761,7 +766,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                         cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                         // Target Area on left
                     } else {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[selectedSession[0]][key]! + toAdd)
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key]! + toAdd)
                         // Indicator
                         if imageCount > 1 {
                             cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
@@ -824,7 +829,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             removeCircle()
             isPaused = true
             finishEarly.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
-            finishEarly.tintColor = colour3
+            finishEarly.tintColor = Colours.colour3
             switch movementProgress {
             case 0:
                 cell.indicatorLabel.text = " "
@@ -847,12 +852,12 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             let title = NSLocalizedString("finishEarly", comment: "")
             let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.view.tintColor = colour2
-            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+            alert.view.tintColor = Colours.colour2
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             //
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .natural
-            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         
             //
             // Action
@@ -883,7 +888,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             isPaused = false
             finishEarly.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
-            finishEarly.tintColor = colour4
+            finishEarly.tintColor = Colours.colour4
             indicateMovementProgress()
         }
     }
@@ -954,3 +959,4 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
 }
+
