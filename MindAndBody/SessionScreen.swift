@@ -71,13 +71,13 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // To Add (@2x or @3x) for demonstration images
     var toAdd = String()
-
+    
     
     //
-   
-//
-// Outlets -----------------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Outlets -----------------------------------------------------------------------------------------------------------
+    //
     // Table View
     @IBOutlet weak var tableView: UITableView!
     
@@ -96,11 +96,11 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var startTime = Double()
     var endTime = Double()
     var isTiming = false
-
+    
     
     // Progress Bar
     let progressBar = UIProgressView()
-
+    
     //
     @IBOutlet weak var finishEarly: UIButton!
     
@@ -142,11 +142,11 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     override func viewDidDisappear(_ animated: Bool) {
         didEnterBackground = true
     }
-
     
-//
-// MARK: View did load -----------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // MARK: View did load -----------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -299,7 +299,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
                 }
                 cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-            // Target Area on left
+                // Target Area on left
             } else {
                 // [key] = key
                 cell.imageViewCell.image = getUncachedImage(named: (sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key])! + toAdd)
@@ -311,7 +311,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }
                 cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
             }
-           
+            
             //
             cell.imageViewCell.tag = indexPath.row
             //
@@ -325,7 +325,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             // Movement
             cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]!, comment: "")
-
+            
             //
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 27)
             cell.movementLabel?.textAlignment = .center
@@ -413,7 +413,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 buttonArray[indexPath.row][indexOfUnpressedButton].isEnabled = true
             }
             
-           
+            
             //
             // Gestures
             //
@@ -534,7 +534,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         switch indexPath.section {
         case 0: break
-        //
+            //
         // End button
         case 1:
             //
@@ -545,15 +545,15 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             updateScheduleTracking(fromSchedule: fromSchedule)
             //
             self.dismiss(animated: true)
-
+            
         //
         default: break
         }
     }
     
-//
-// MARK: Set Buttons and Rest Timers --------------------
-//
+    //
+    // MARK: Set Buttons and Rest Timers --------------------
+    //
     //
     // MARK: Set Buttons -----------------------------------------------------------------------------------------------
     //
@@ -584,50 +584,50 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Do nothing if a set button has already been presssed
         // Do something if not
         if isTiming == false {
-        //
-        // Rest Timer Notification
-        let content = UNMutableNotificationContent()
-        content.title = NSLocalizedString("restOver", comment: "")
-        content.body = NSLocalizedString("nextSet", comment: "")
-        content.sound = UNNotificationSound.default()
-        //
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let restTime = settings[4][1]
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTime), repeats: false)
-        let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
-        //
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        
-        // Start rest timer
-        startTimer()
-        
-        //
-        // Button editing, colour etc..
-        let buttonRow = sender.tag
-        //
-        buttonArray[buttonRow][buttonNumber[buttonRow]].isEnabled = false
-        // Increase Button Number
-        if self.setsArray[buttonRow] == 0 {
-        } else {
-            if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] {
-                self.buttonNumber[buttonRow] = self.buttonNumber[buttonRow] + 1
-            }
-        }
-        // Enable After Delay
-        let delayInSeconds = 2.0
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            //
+            // Rest Timer Notification
+            let content = UNMutableNotificationContent()
+            content.title = NSLocalizedString("restOver", comment: "")
+            content.body = NSLocalizedString("nextSet", comment: "")
+            content.sound = UNNotificationSound.default()
+            //
+            let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let restTime = settings[4][1]
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTime), repeats: false)
+            let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
+            //
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            
+            // Start rest timer
+            startTimer()
+            
+            //
+            // Button editing, colour etc..
+            let buttonRow = sender.tag
+            //
+            buttonArray[buttonRow][buttonNumber[buttonRow]].isEnabled = false
+            // Increase Button Number
             if self.setsArray[buttonRow] == 0 {
             } else {
                 if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] {
-                    self.buttonArray[buttonRow][self.buttonNumber[buttonRow]].isEnabled = true
+                    self.buttonNumber[buttonRow] = self.buttonNumber[buttonRow] + 1
                 }
             }
-        }
-        //
-        sender.isEnabled = false
-        sender.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        //
-        updateProgress()
+            // Enable After Delay
+            let delayInSeconds = 2.0
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                if self.setsArray[buttonRow] == 0 {
+                } else {
+                    if self.buttonNumber[buttonRow] < self.setsArray[buttonRow] {
+                        self.buttonArray[buttonRow][self.buttonNumber[buttonRow]].isEnabled = true
+                    }
+                }
+            }
+            //
+            sender.isEnabled = false
+            sender.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            //
+            updateProgress()
         }
     }
     
@@ -747,9 +747,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     
     
-//
-// MARK: Tap Handlers, buttons and funcs -------------------------------------------------------------------------------------------------------
-//
+    //
+    // MARK: Tap Handlers, buttons and funcs -------------------------------------------------------------------------------------------------------
+    //
     //
     //
     // Image
@@ -856,7 +856,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
             }, completion: { finished in
-//                self.playAnimation(row: self.selectedRow)
+                //                self.playAnimation(row: self.selectedRow)
             })
             // + 1
             if selectedRow < keyArray.count - 1 {
@@ -1020,23 +1020,23 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     let defaultImage = settings[5][0]
                     if defaultImage == 0 {
                         cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key]! + toAdd)
-                            // Indicator
-                            if imageCount > 1 {
-                                cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
-                            } else {
-                                cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                            }
-                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
-                    // Target Area on left
+                        // Indicator
+                        if imageCount > 1 {
+                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
+                        } else {
+                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
+                        }
+                        cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
+                        // Target Area on left
                     } else {
                         cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0])
-                            // Indicator
-                            if imageCount > 1 {
-                                cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
-                            } else {
-                                cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
-                            }
-                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
+                        // Indicator
+                        if imageCount > 1 {
+                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
+                        } else {
+                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
+                        }
+                        cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                     }
                     
                     // Move new image to right of screen
@@ -1107,7 +1107,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }
         }
     }
-
+    
     //
     // Update Progress
     func updateProgress() {
@@ -1129,7 +1129,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     //
-    @IBAction func finishEarlyAction(_ sender: Any) {        
+    @IBAction func finishEarlyAction(_ sender: Any) {
         //
         // Alert View
         let title = NSLocalizedString("finishEarly", comment: "")
@@ -1161,7 +1161,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         alert.addAction(cancelAction)
         //
         self.present(alert, animated: true, completion: nil)
-
+        
     }
     
     
@@ -1196,7 +1196,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @objc func walkthroughSession() {
         //
         let cellHeight = (UIScreen.main.bounds.height - 22) * 7/8
-
+        
         //
         if didSetWalkthrough == false {
             //
@@ -1207,7 +1207,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         //
         switch walkthroughProgress {
-        // First has to be done differently
+            // First has to be done differently
         // Movement
         case 0:
             //
@@ -1431,9 +1431,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     self.walkthroughProgress = self.walkthroughProgress + 1
                 })
             })
-
             
-        // Explanation open and Next Movement 
+            
+            // Explanation open and Next Movement
         // Case 8 not 7 as + 1 to walkthroughprogress twice in case 6 for label reasons (need an empty label)
         case 8:
             backgroundViewExplanation.isEnabled = false
@@ -1479,7 +1479,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             })
             
             
-        // Progress
+            // Progress
         // Case 10 not 9 as + 1 to walkthroughprogress twice in case 8 for label reasons (need an empty label)
         case 10:
             //
@@ -1505,7 +1505,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     //
                     upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
-                //
+                    //
                 }, completion: { finished in
                     self.nextButton.isEnabled = true
                     //
@@ -1529,8 +1529,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     
                 })
             })
-
-         
+            
+            
         // Finish Early
         case 11:
             //
@@ -1550,7 +1550,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             walkthroughProgress = self.walkthroughProgress + 1
             //
             
-
+            
         //
         default:
             //
@@ -1568,5 +1568,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             })
         }
     }
-//
+    //
 }
+

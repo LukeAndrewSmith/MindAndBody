@@ -19,9 +19,9 @@ extension PresentMenuAnimator : UIViewControllerAnimatedTransitioning {
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
         guard
-        let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
-        let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
-        let snapshot = fromVC.view.snapshotView(afterScreenUpdates: false)
+            let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
+            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
+            let snapshot = fromVC.view.snapshotView(afterScreenUpdates: false)
             else {
                 return
         }
@@ -37,12 +37,13 @@ extension PresentMenuAnimator : UIViewControllerAnimatedTransitioning {
         fromVC.view.isHidden = true
         
         UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                snapshot.center.x += UIScreen.main.bounds.width * 0.75
+            snapshot.center.x += UIScreen.main.bounds.width * 0.75
         },
-            completion: { _ in
-                fromVC.view.isHidden = false
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                       completion: { _ in
+                        fromVC.view.isHidden = false
+                        transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
         )
     }
 }
+
