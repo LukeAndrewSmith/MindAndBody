@@ -10,7 +10,7 @@ import Foundation
 
 
 //
-// MARK: User Data 
+// MARK: User Data
 
 
 
@@ -21,25 +21,25 @@ struct customData {
     
     // Warmup, Workout, Cardio, Stretching, Yoga
     var customSession: [[[Any]]] =
-    [
-        // Warmup
-        // [name] - string, [movements] - int, [sets] - int, [reps] - string
-        [],
-        // Workout
-        // [name] - string, [movements] - int, [sets] - int, [reps] - string
-        [],
-        // Workout - Circuit
-        // [name] - string, [movements] - int, [rounds] - int, [reps] - string
-        [],
-        // Cardio
-        // [name] - string, [movements] - int, [time/distance] - int
-        [],
-        // Stretching
-        // [name] - string, [stretches] - int, [breaths] - int
-        [],
-        // Yoga
-        // [name] - string, [stretches] - int, [poses] - int
-        []
+        [
+            // Warmup
+            // [name] - string, [movements] - int, [sets] - int, [reps] - string
+            [],
+            // Workout
+            // [name] - string, [movements] - int, [sets] - int, [reps] - string
+            [],
+            // Workout - Circuit
+            // [name] - string, [movements] - int, [rounds] - int, [reps] - string
+            [],
+            // Cardio
+            // [name] - string, [movements] - int, [time/distance] - int
+            [],
+            // Stretching
+            // [name] - string, [stretches] - int, [breaths] - int
+            [],
+            // Yoga
+            // [name] - string, [stretches] - int, [poses] - int
+            []
     ]
     
     // Meditation
@@ -52,53 +52,56 @@ enum customSectionEmtpySessions {
     
     // Empty Session, Warmup, Workout, Workout - circuit - [string],[int],[int],[int]
     static let emptySessionFour: [[Any]] =
-    [
-        // Name - String
-        [""],
-        // Movements - Int
-        [],
-        // Sets - Int || Rounds - Int ([nRounds, -1], -1 indicates that its a circuit workout)
-        [],
-        // Reps - String?
-        []
+        [
+            // Name - String
+            [""],
+            // Movements - Int
+            [],
+            // Sets - Int || Rounds - Int ([nRounds, -1], -1 indicates that its a circuit workout)
+            [],
+            // Reps - String?
+            []
     ]
     
     // Empty Session, Cardio, Stretching, Yoga, - [string],[int],[int]
     static let emptySessionThree: [[Any]] =
-    [
-        // Name - String
-        [""],
-        // Movements - Int
-        [],
-        // Reps - Int
-        []
+        [
+            // Name - String
+            [""],
+            // Movements - Int
+            [],
+            // Reps - Int
+            []
     ]
     
     //
     static let emptySessionMeditation: [[[Any]]] =
-    [
-        // Name - String
-        [[]],
-        // Duration - Int
-        [[]],
-        // Bells, starting and ending bells go at first and last, interval bells in the middle
-        // [Bell, Time] - [Int]
-        [[-1,0],[-1,0]],
-        // Background Sound - Int
-        [[-1]]
+        [
+            // Name - String
+            [[]],
+            // Duration - Int
+            [[]],
+            // Bells, starting and ending bells go at first and last, interval bells in the middle
+            // [Bell, Time] - [Int]
+            [[-1,0],[-1,0]],
+            // Background Sound - Int
+            [[-1]]
     ]
     
     
     //
     // MARK: Schedule Tracking, tracking what youve done each week, putting a tick next to what you've done in schedule if true
     //
-    static let scheduleTrackingArrays: [Int:[[Bool]]] =
+    static let scheduleTrackingArrays: [Int:[[Any]]] =
         [
             // MARK: Mind
             0:
                 [
                     // 0
                     [false],
+                    // Choice progress state
+                    // Indicates which session was selected, i.e which selection was made to obtain the warmup/session/stretching choice
+                    [0,0],
                     // Yoga, Meditation Walk
                     [
                         false,
@@ -118,6 +121,9 @@ enum customSectionEmtpySessions {
                 [
                     // 0
                     [false],
+                    // Choice progress state
+                    // Indicates which session was selected, i.e which selection was made to obtain the warmup/session/stretching choice
+                    [0,0],
                     // 4 | To Do Flexibility - Warmup, Session
                     [
                         false,
@@ -130,6 +136,9 @@ enum customSectionEmtpySessions {
                 [
                     // 0
                     [false],
+                    // Choice progress state
+                    // Indicates which session was selected, i.e which selection was made to obtain the warmup/session/stretching choice
+                    [0,0],
                     // Type - High Intesnsity, Steady State
                     [
                         false,
@@ -137,25 +146,24 @@ enum customSectionEmtpySessions {
                     ],
                     // --------------
                     // 4 | High Intensity To Do - warmup, cardio, stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ],
-                    // ------------
+                    // or  ------------
                     // Steady State
                     // 5 | Steady State To Do 2 - 2 - To Do
                     [
                         false,
                         false,
-                        false,
-                        ]
+                        false
+                    ]
             ],
+            
             // MARK: Toning
             3:
                 [
                     // 0
                     [false],
+                    // Choice progress state
+                    // Indicates which session was selected, i.e which selection was made to obtain the warmup/session/stretching choice
+                    [0,0],
                     // 3 | Toning To Do, warmup, session, stretching
                     [
                         false,
@@ -169,6 +177,9 @@ enum customSectionEmtpySessions {
                 [
                     // 0
                     [false],
+                    // Choice progress state
+                    // Indicates which session was selected, i.e which selection was made to obtain the warmup/session/stretching choice
+                    [0,0],
                     // 4 | Muscle Gain To Do - Warmup, session, stretching
                     [
                         false,
@@ -182,6 +193,9 @@ enum customSectionEmtpySessions {
                 [
                     // 0
                     [false],
+                    // Choice progress state
+                    // Indicates which session was selected, i.e which selection was made to obtain the warmup/session/stretching choice
+                    [0,0],
                     // 4 | Strength To Do, Warmup, Session, Stretching
                     [
                         false,
@@ -190,7 +204,7 @@ enum customSectionEmtpySessions {
                     ]
             ]
     ]
-
+    
 }
 
 // Settings
@@ -208,10 +222,12 @@ enum Register {
         [0, -1, -1, -1],
         // Rest times - 4
         [5, 45, 10],
-        // Default Image
-        [0],   // 0 == "demonstration", 1 == "targetArea" - 5
-        // Metric/
-        [0], // == "kg" - 6
+        // Default Image - 5
+        [0],   // 0 == "demonstration", 1 == "targetArea"
+        // Metric/Imperial - 6
+        [0], // == "kg" (0), "lb" (1)
+        // Schedule style [0] (0 - day, 1- week), selected Schedule [1] - 7
+        [0, 0]  // (day(0) or week (1))
     ]
     
     // --------------------------------------------------------
@@ -315,7 +331,7 @@ enum Register {
     // --------------------------------------------------------
     // Tracking
     static let registerTrackingArray: [[Any]] =
-    // Update progress (first monday of last week/month completed (lastResetWeek/Month) is used to check if progress needs to be reset to 0 for first entry of new week/month)
+        // Update progress (first monday of last week/month completed (lastResetWeek/Month) is used to check if progress needs to be reset to 0 for first entry of new week/month)
         [
             // Week - [weekProgress, lastResetWeek]
             [0, Date().firstMondayInCurrentWeek],
