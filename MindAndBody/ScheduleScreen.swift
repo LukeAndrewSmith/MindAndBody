@@ -25,6 +25,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     let maskView3 = UIView() // Middle (rounded corners
     let maskViewBackButton = UIImageView()
     
+    var daySwipeLeft = UISwipeGestureRecognizer()
+    var daySwipeRight = UISwipeGestureRecognizer()
+    
     //
     // Schedule
     
@@ -84,6 +87,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // RELOAD VIEW
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         if ScheduleVariables.shared.shouldReloadSchedule == true {
             ScheduleVariables.shared.shouldReloadSchedule = false
@@ -91,6 +95,15 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             scheduleStyle = schedules[selectedSchedule][9][0] as! Int
             selectedSchedule = settings[7][0]
             layoutViews()
+            // If day view enable swipes
+            if schedules[selectedSchedule][9][0] as! Int == 0 {
+                daySwipeLeft.isEnabled = true
+                daySwipeRight.isEnabled = true
+            // Else if week view disable swipes
+            } else if schedules[selectedSchedule][9][0] as! Int == 1 {
+                daySwipeLeft.isEnabled = false
+                daySwipeRight.isEnabled = false
+            }
 
             scheduleTable.reloadData()
         }
@@ -103,8 +116,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidAppear(animated)
         // Reload choice
             // MARK AS COMPLETED
-        if ScheduleVariables.shared.shouldReloadChoice == true {
-            //
+        if ScheduleVariables.shared.shouldReloadChoice == true && ScheduleVariables.shared.selectedRows[1] != 72 {
             var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
             scheduleTracking[self.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][0][0] = true
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
@@ -140,8 +152,31 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             })
             //
             updateDayIndicatorColours()
+        // Meditation/Walk
+        } else if ScheduleVariables.shared.shouldReloadChoice == true && ScheduleVariables.shared.selectedRows[1] == 72 {
+            //
+            // Go to initial choice
+            ScheduleVariables.shared.choiceProgress[1] = 1
+            maskAction()
+            //
+            // Update
+            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+            scheduleTracking[self.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][0][0] = true
+            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+            // Set to false here so the tick doesn't get loaded before the view has appeared
+            ScheduleVariables.shared.shouldReloadChoice = false
+            // Animate initial choice group completion after slideRight() animation finished
+            let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
+            DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
+                let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
+                self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
+                self.scheduleTable.selectRow(at: indexPathToReload2 as IndexPath, animated: true, scrollPosition: .none)
+                self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
+            })
+        updateDayIndicatorColours()
         }
     }
+    
     
 //
 // View did load --------------------------------------------------------------------------------------------------------
@@ -348,11 +383,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //
             // Day Swipes
-            let daySwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+            daySwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
             daySwipeLeft.direction = UISwipeGestureRecognizerDirection.left
             view.addGestureRecognizer(daySwipeLeft)
             //
-            let daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+            daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
             daySwipeRight.direction = UISwipeGestureRecognizerDirection.right
             view.addGestureRecognizer(daySwipeRight)
         }
@@ -927,8 +962,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             let destinationVC = segue.destination as? FinalChoice
             destinationVC?.comingFromSchedule = true
             //
-                
-            //
             // Remove back button text
             let backItem = UIBarButtonItem()
             backItem.title = ""
@@ -941,6 +974,22 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             let destinationNC = segue.destination as! ScheduleViewQuestionNavigation
             let destinationVC = destinationNC.viewControllers.first as! ScheduleViewQuestion
             destinationVC.comingFromSchedule = true
+        } else if segue.identifier == "scheduleMeditationSegueTimer" {
+            let destinationVC = segue.destination as? MeditationTimer
+            destinationVC?.comingFromSchedule = true
+            //
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
+        } else if segue.identifier == "scheduleMeditationSegueGuided" {
+            let destinationVC = segue.destination as? MeditationChoiceGuided
+            destinationVC?.comingFromSchedule = true
+            //
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
         }
     }
     

@@ -43,13 +43,14 @@ extension ScheduleScreen {
                     if row == 1 {
                         ScheduleVariables.shared.choiceProgress[1] += 1
                         nextChoice()
-                        // Go to Meditation screen
+                    // Go to Meditation screen
                     } else if row == 2 {
                         // Meditation
                         ScheduleVariables.shared.choiceProgress[1] = 5
                         nextChoice()
-                        // Walk, popup
+                    // Walk, popup
                     } else if row == 3 {
+                        ScheduleVariables.shared.selectedRows[1] = 72
                         // TODO: popup for walk
                     }
                 case 4:
@@ -65,7 +66,7 @@ extension ScheduleScreen {
                     ScheduleVariables.shared.selectedRows[1] = row - 1
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                 case 5:
-                    ScheduleVariables.shared.selectedRows[1] = row - 1
+                    ScheduleVariables.shared.selectedRows[1] = 72
                     // Timer
                     if row == 1 {
                         performSegue(withIdentifier: "scheduleMeditationSegueTimer", sender: self)
@@ -650,7 +651,6 @@ extension ScheduleScreen {
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
                 return scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][row][0][0]
             //
-            // TODO: IF LATER IN CHOICES, CHECK [1] FOR CHOICE PATH ETC...
             // Later Choices
             } else {
                 // All only have one array of bool for indicating final choice completion
@@ -667,7 +667,11 @@ extension ScheduleScreen {
             //
             // TODO: IF LATER IN CHOICES, CHECK [1] FOR CHOICE PATH ETC...
             } else {
-                return false
+                // All only have one array of bool for indicating final choice completion
+                // Flexibility, Toning, Muscle Gain, Strength, 1,3,4,5
+                if isLastChoice() == true {
+                    return scheduleTracking[selectedSchedule][7][ScheduleVariables.shared.selectedRows[0]][1][row]
+                }
             }
         }
         return false
@@ -921,83 +925,56 @@ extension ScheduleScreen {
         //
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-        
 
         if sender.state == UIGestureRecognizerState.began {
             // Get Cell
             let cell = sender.view
             let row = cell?.tag
-            // Day Table, first choice, choiceProgress[0] == -1
+            
+            // Indexing variables
+                // Last three indexes of schedulesTracking or schedules index
+                    // Differ if last choice or first choice
+            var index0 = Int()
+            var index1 = Int()
+            var index2 = Int()
+            // If first choice
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
-                let indexOfGroup = schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][row!] as! Int
-                //
-                // Day
-                if schedules[selectedSchedule][9][0] as! Int == 0 {
-                    // Day
-                    // [0][0] when in group tracking to access main page tracker, look at schedule data: scheduleDataStructures.scheduleTrackingArrays to understand
-                    if scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][row!][0][0] == false {
-                        scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][row!][0][0] = true
-                    } else {
-                        scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][row!][0][0] = false
-                    }
-                    // Week
-                    // Loop week and set first instance of group to true/false, incase user switches between styles during the week
-                    for i in 0...schedules[selectedSchedule][7].count - 1 {
-                        if schedules[selectedSchedule][7][i] as? Int == indexOfGroup {
-                            if scheduleTracking[selectedSchedule][7][i][0][0] == false {
-                                scheduleTracking[selectedSchedule][7][i][0][0] = true
-                            } else {
-                                scheduleTracking[selectedSchedule][7][i][0][0] = false
-                            }
-                            break
-                        }
-                    }
-                    //
-                //
-                // Week
-                } else if schedules[selectedSchedule][9][0] as! Int == 1 {
-                    // Week
-                    if scheduleTracking[selectedSchedule][7][row!][0][0] == false {
-                        scheduleTracking[selectedSchedule][7][row!][0][0] = true
-                    } else {
-                        scheduleTracking[selectedSchedule][7][row!][0][0] = false
-                    }
-                    // Day, find first instance of group in week and remove
-                    var shouldBreak = false
-                    for i in 0...6 {
-                        if schedules[selectedSchedule][i].count != 0 {
-                            for j in 0...schedules[selectedSchedule][i].count - 1 {
-                                if schedules[selectedSchedule][i][j] as! Int == indexOfGroup {
-                                    if scheduleTracking[selectedSchedule][i][j][0][0] == false {
-                                        scheduleTracking[selectedSchedule][i][j][0][0] = true
-                                    } else {
-                                        scheduleTracking[selectedSchedule][i][j][0][0] = false
-                                    }
-                                    shouldBreak = true
-                                    break
-                                }
-                            }
-                        }
-                        if shouldBreak == true {
-                            break
-                        }
-                    }
-                }
-                
-            //
-            // Furthur down choices, only take action if final choice or if mind first screen
-            } else if row != 0 {
-                //
-                    // - 1 as row is offset by 1 due to inclusion of title in table
-                if isLastChoice() == true {
-                    if scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][row! - 1] == false {
-                        scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][row! - 1] = true
-                    } else {
-                        scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][row! - 1] = false
-                    }
-                }
-                //
+                index0 = row!
+                index1 = 0
+                index2 = 0
+            // If last choice
+            } else if isLastChoice() == true && row! == 0 {
+                // Selected row in first choice
+                index0 = ScheduleVariables.shared.selectedRows[0]
+                // 1 to access group contents tracking in trackingArray
+                index1 = 1
+                // -1 as title included so offset by 1
+                index2 = row! - 1
             }
+            
+            let indexOfGroup = schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][row!] as! Int
+            //
+            // Day View
+            if schedules[selectedSchedule][9][0] as! Int == 0 {
+                // Day
+                // [index1][index2] when in group tracking to access main page tracker, look at schedule data: scheduleDataStructures.scheduleTrackingArrays to understand
+                if scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] == false {
+                    scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] = true
+                } else {
+                    scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] = false
+                }
+            //
+            // Full Week View
+            } else if schedules[selectedSchedule][9][0] as! Int == 1 {
+                // Week
+                if scheduleTracking[selectedSchedule][7][index0][index1][index2] == false {
+                    scheduleTracking[selectedSchedule][7][index0][index1][index2] = true
+                } else {
+                    scheduleTracking[selectedSchedule][7][index0][index1][index2] = false
+                }
+            }
+            
+            //
             UserDefaults.standard.set(schedules, forKey: "schedules")
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             //
@@ -1012,11 +989,11 @@ extension ScheduleScreen {
                     maskView3.backgroundColor = Colours.colour4
                 }
             } else if isLastChoice() == false {
-                maskView3.backgroundColor = Colours.colour4
                 updateDayIndicatorColours()
             }
         }
     }
+    
     
     //
     // MARK: Update Day Indicator colours

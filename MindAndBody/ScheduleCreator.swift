@@ -64,6 +64,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     // If dragging label dragged over new row, this indicates the old
     var previousIndexPath: IndexPath? = nil
     
+    //
+    var wasDayView = false
+    
     // Selected schedule
     var selectedSchedule = 0
     
@@ -92,7 +95,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
+        // SETUP
         setVariables()
         setGroupLabels()
         displayCreateScheduleButton()
@@ -286,6 +289,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     func setVariables() {
         selectedSchedule = settings[7][0]
         
+        //
         let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
         // nGroups, groupsIndexes, nSessions
         // If app schedule, find which groups shown
@@ -474,41 +478,45 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Update full week array
         // If user is in day mode, the full week should be still updating
     func updateFullWeek() {
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
-        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-        schedules[selectedSchedule][7] = []
-        scheduleTracking[selectedSchedule][7] = []
-        // Loop week
-        for i in 0...6 {
-            // Check day isnt epmty
-            if schedules[selectedSchedule][i].count != 0 {
-                // Loop day
-                for j in 0...schedules[selectedSchedule][i].count - 1 {
-                    schedules[selectedSchedule][7].append(schedules[selectedSchedule][i][j] as! Int)
+        // Only update if previous schedule was day schedule
+        if wasDayView == true {
+            wasDayView = false
+            var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+            schedules[selectedSchedule][7] = []
+            scheduleTracking[selectedSchedule][7] = []
+            // Loop week
+            for i in 0...6 {
+                // Check day isnt epmty
+                if schedules[selectedSchedule][i].count != 0 {
+                    // Loop day
+                    for j in 0...schedules[selectedSchedule][i].count - 1 {
+                        schedules[selectedSchedule][7].append(schedules[selectedSchedule][i][j] as! Int)
+                    }
                 }
             }
-        }
-        schedules[selectedSchedule][7] = (schedules[selectedSchedule][7] as! [Int]).sorted()
-        // Add to week tracking here, not added before as could not sort
-        if schedules[selectedSchedule][7].count != 0 {
-            for i in 0...schedules[selectedSchedule][7].count - 1 {
-                scheduleTracking[selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[selectedSchedule][7][i] as! Int]!)
+            schedules[selectedSchedule][7] = (schedules[selectedSchedule][7] as! [Int]).sorted()
+            // Add to week tracking here, not added before as could not sort
+            if schedules[selectedSchedule][7].count != 0 {
+                for i in 0...schedules[selectedSchedule][7].count - 1 {
+                    scheduleTracking[selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[selectedSchedule][7][i] as! Int]!)
+                }
             }
-        }
-        //
-        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-        UserDefaults.standard.set(schedules, forKey: "schedules")
-        //
-        // Update 
-        // Loop full week
-        dayTableGroupArray = [0,0,0,0,0,0]
-        if schedules[selectedSchedule][7].count != 0 {
-            for i in 0...schedules[selectedSchedule][7].count - 1 {
-                let index = schedules[selectedSchedule][7][i] as! Int
-                dayTableGroupArray[index] += 1
+            //
+            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+            UserDefaults.standard.set(schedules, forKey: "schedules")
+            //
+            // Update
+            // Loop full week
+            dayTableGroupArray = [0,0,0,0,0,0]
+            if schedules[selectedSchedule][7].count != 0 {
+                for i in 0...schedules[selectedSchedule][7].count - 1 {
+                    let index = schedules[selectedSchedule][7][i] as! Int
+                    dayTableGroupArray[index] += 1
+                }
             }
+            dayTable.reloadData()
         }
-        dayTable.reloadData()
     }
     
     //

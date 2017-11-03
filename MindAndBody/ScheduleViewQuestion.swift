@@ -29,6 +29,8 @@ class ScheduleViewQuestion: UIViewController {
     var comingFromSchedule = false
     
     var selectedSchedule = 0
+    
+    var wasDayView = false
         
     //
     // MARK: View did load
@@ -105,6 +107,12 @@ class ScheduleViewQuestion: UIViewController {
     @IBAction func weekButtonAction(_ sender: Any) {
         // If app schedule, go to week
         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        // Check if it was day view before
+        if schedules[selectedSchedule][9][0] as! Int == 0 {
+            wasDayView = true
+        } else if schedules[selectedSchedule][9][0] as! Int == 1 {
+            wasDayView = false
+        }
         // Set user settings for schedule style to week
         schedules[selectedSchedule][9][0] = 1
         UserDefaults.standard.set(schedules, forKey: "schedules")
@@ -128,6 +136,19 @@ class ScheduleViewQuestion: UIViewController {
     @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
         if sender.state == .began {
             self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //
+        if segue.identifier == "ScheduleCreatorSegue" {
+            let destinationVC = segue.destination as? ScheduleCreator
+            destinationVC?.wasDayView = wasDayView
+            //
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
         }
     }
     
