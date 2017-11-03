@@ -14,11 +14,11 @@ import UIKit
 // Anatomy Class ------------------------------------------------------------------------------------
 //
 class LessonsScreenAnatomy: UIViewController {
-  
     
-//
-// Outlets ------------------------------------------------------------------------------------
-//
+    
+    //
+    // Outlets ------------------------------------------------------------------------------------
+    //
     // Navigation
     @IBOutlet weak var navigationBar: UINavigationItem!
     let navigationTitle = UILabel()
@@ -39,9 +39,9 @@ class LessonsScreenAnatomy: UIViewController {
     var bodyPartIndex = 0
     
     
-//
-// Arrays ------------------------------------------------------------------------------------
-//
+    //
+    // Arrays ------------------------------------------------------------------------------------
+    //
     // Body part array
     let bodyArray: [String] =
         [
@@ -65,7 +65,7 @@ class LessonsScreenAnatomy: UIViewController {
             "quads",
             "gastrocnemius",
             "soleus"
-        ]
+    ]
     
     // Image Array
     let imageArray: [UIImage] =
@@ -90,18 +90,18 @@ class LessonsScreenAnatomy: UIViewController {
             #imageLiteral(resourceName: "Quad"),
             #imageLiteral(resourceName: "Gastrocnemius"),
             #imageLiteral(resourceName: "Soleus")
-        ]
+    ]
     
     
-//
-// View did load ------------------------------------------------------------------------------------
-//
+    //
+    // View did load ------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Title Colour
         //
-        self.navigationController?.navigationBar.barTintColor = colour2
+        self.navigationController?.navigationBar.barTintColor = Colours.colour2
         self.navigationController?.navigationBar.tintColor = .white
         
         // Image Swipes
@@ -115,7 +115,7 @@ class LessonsScreenAnatomy: UIViewController {
         imageSwipeRight.direction = UISwipeGestureRecognizerDirection.right
         image.addGestureRecognizer(imageSwipeRight)
         image.isUserInteractionEnabled = true
-    
+        
         // Progress Bar
         //
         // Thickness
@@ -135,9 +135,9 @@ class LessonsScreenAnatomy: UIViewController {
     }
     
     
-//
-// Display Content ------------------------------------------------------------------------------------
-//
+    //
+    // Display Content ------------------------------------------------------------------------------------
+    //
     // Display Content Function
     //
     func displayContent() {
@@ -175,18 +175,18 @@ class LessonsScreenAnatomy: UIViewController {
         //
         progressBar.setProgress(fractionalProgress, animated: true)
     }
-   
     
-//
-// Button Actions ------------------------------------------------------------------------------------
-//
+    
+    //
+    // Button Actions ------------------------------------------------------------------------------------
+    //
     // Next Button
     @IBAction func nextButton(_ sender: Any) {
         //
         if bodyPartIndex == bodyArray.count - 1 {
             navigationTitle.removeFromSuperview()
             _ = self.navigationController?.popToRootViewController(animated: true)
-        //
+            //
         } else {
             //
             bodyPartIndex = bodyPartIndex + 1
@@ -213,13 +213,13 @@ class LessonsScreenAnatomy: UIViewController {
                 //
                 navigationTitle.removeFromSuperview()
                 _ = self.navigationController?.popToRootViewController(animated: true)
-            //
+                //
             } else {
                 //
                 bodyPartIndex = bodyPartIndex + 1
                 displayContent()
             }
-        //
+            //
         } else if extraSwipe.direction == .right {
             //
             if bodyPartIndex == 0 {
@@ -229,5 +229,6 @@ class LessonsScreenAnatomy: UIViewController {
             }
         }
     }
-//
+    //
 }
+

@@ -39,20 +39,21 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     //
     // MARK: Variables from Session Data
     var fromCustom = false
+    var fromSchedule = false
     //
     // Key Array
-    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [1] Keys Array
+    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [1] Keys Array
     var keyArray: [Int] = []
     
     // Length
-    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] length array
+    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [2] length array
     var lengthArray: [Int] = []
     
     
     // Distance based or time based, 0 = time based, 1 = distance based
     var sessionType = Int()
     
-
+    
     // Bells Arrays
     let bellsArray: [String] =
         ["Tibetan Chimes", "Tibetan Singing Bowl (Low)", "Tibetan Singing Bowl (Low)(x4)", "Tibetan Singing Bowl (Low)(Singing)", "Tibetan Singing Bowl (High)", "Tibetan Singing Bowl (High)(x4)", "Tibetan Singing Bowl (High)(Singing)", "Australian Rain Stick", "Australian Rain Stick (x2)", "Australian Rain Stick (2 sticks)", "Wind Chimes", "Gambang (Wood)(Up)", "Gambang (Wood)(Down)", "Gambang (Metal)", "Indonesian Frog", "Cow Bell (Small)", "Cow Bell (Big)"]
@@ -80,8 +81,8 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         let title = NSLocalizedString("sessionStarted", comment: "")
         //let message = NSLocalizedString("resetMessage", comment: "")
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.view.tintColor = colour1
-        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        alert.view.tintColor = Colours.colour1
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
         self.present(alert, animated: true, completion: {
             //
             let delayInSeconds = 0.7
@@ -103,13 +104,13 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         //
-        view.backgroundColor = colour2
+        view.backgroundColor = Colours.colour2
         
         //
         // Custom?
         if fromCustom == false {
-            keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
-            lengthArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2] as! [Int]
+            keyArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1] as! [Int]
+            lengthArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2] as! [Int]
         } else {
             // Time based
             sessionType = 0
@@ -121,15 +122,15 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         // Rounded Edges
         // Colour
-        progressBar.trackTintColor = colour1
-        progressBar.progressTintColor = colour3
+        progressBar.trackTintColor = Colours.colour1
+        progressBar.progressTintColor = Colours.colour3
         //
         progressBar.setProgress(0, animated: true)
         
         // TableView Background
         let tableViewBackground = UIView()
         //
-        tableViewBackground.backgroundColor = colour2
+        tableViewBackground.backgroundColor = Colours.colour2
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
         //
         tableView.backgroundView = tableViewBackground
@@ -137,7 +138,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableView.tableFooterView = UIView()
         
         // Cancel Button
-        cancelButton.tintColor = colour4
+        cancelButton.tintColor = Colours.colour4
         
         //
         // Watch for enter foreground
@@ -150,9 +151,9 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         default: break
         }
-
+        
     }
-
+    
     //
     // TableView ---------------------------------------------------------------------------------------------------------------------
     //
@@ -172,7 +173,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         //
         let header = view as! UITableViewHeaderFooterView
-        header.contentView.backgroundColor = colour1
+        header.contentView.backgroundColor = Colours.colour1
         
         //
         if section == 0 {
@@ -215,23 +216,23 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             // Cell
             //
-            cell.backgroundColor = colour2
-            cell.tintColor = colour2
+            cell.backgroundColor = Colours.colour2
+            cell.tintColor = Colours.colour2
             tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             //
             cell.selectionStyle = .none
             
             // Movement
             //
-            cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: "")
+            cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]!, comment: "")
             //
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-light", size: 33)
             cell.movementLabel?.textAlignment = .center
-            cell.movementLabel?.textColor = colour1
+            cell.movementLabel?.textColor = Colours.colour1
             cell.movementLabel?.numberOfLines = 0
             cell.movementLabel?.lineBreakMode = .byWordWrapping
             cell.movementLabel?.adjustsFontSizeToFitWidth = true
-
+            
             
             //
             // Next Swipe
@@ -243,7 +244,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             // Timer / Distance info
             //
             cell.detailLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 72)
-            cell.detailLabel.textColor = colour1
+            cell.detailLabel.textColor = Colours.colour1
             //
             switch sessionType {
             case 0:
@@ -268,7 +269,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                         cell.addGestureRecognizer(nextSwipe)
                     }
                     //
-                // Odd IndexPath.rows (pauses)
+                    // Odd IndexPath.rows (pauses)
                 } else {
                     if indexPath.row == selectedRow {
                         cell.detailLabel.text = timeFormatted(totalSeconds: lengthArray[indexPath.row])
@@ -313,11 +314,11 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.separatorInset =  UIEdgeInsetsMake(0, 0, 0, 0)
             //
             cell.layer.borderWidth = 2
-            cell.layer.borderColor = colour1.cgColor
+            cell.layer.borderColor = Colours.colour1.cgColor
             //
             cell.textLabel?.text = NSLocalizedString("end", comment: "")
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
-            cell.textLabel?.textColor = colour1
+            cell.textLabel?.textColor = Colours.colour1
             cell.textLabel?.textAlignment = .center
             //
             return cell
@@ -342,7 +343,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         case 1: return 49
         default: return 0
         }
-        return 0
     }
     
     
@@ -357,10 +357,11 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             // Tracking
             updateWeekProgress()
             updateMonthProgress()
-            //
+            // Schedule Tracking
+            updateScheduleTracking(fromSchedule: fromSchedule)
             // Dismiss
             self.dismiss(animated: true)
-            //
+        //
         default: break
         }
     }
@@ -424,16 +425,16 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             let indexPath = NSIndexPath(row: currentIndex, section: 0)
             //
             if didEnterBackground != true {
-            UIView.animate(withDuration: 0.6, animations: {
-                //
-                //
-                self.tableView.beginUpdates()
-                self.tableView.endUpdates()
-                //
-                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-                //
-            }, completion: { finished in
-            })
+                UIView.animate(withDuration: 0.6, animations: {
+                    //
+                    //
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                    //
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                    //
+                }, completion: { finished in
+                })
             } else {
                 //
                 self.tableView.beginUpdates()
@@ -454,7 +455,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     //
     var didEnterBackground = false
     //
-    func enterBackground() {
+    @objc func enterBackground() {
         didSetEndTime2 = false
         didEnterBackground = true
     }
@@ -479,10 +480,10 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     //
     var testValue = Double()
     var timerValue2Remainder = Double()
-
+    
     //
     //
-    func startAllTimers() {
+    @objc func startAllTimers() {
         //
         //
         startTime = Date().timeIntervalSinceReferenceDate
@@ -512,7 +513,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 //
                 let content = UNMutableNotificationContent()
                 if i != keyArray.count {
-                    content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][keyArray[i]]!, comment: "")
+                    content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][keyArray[i]]!, comment: "")
                     // Sound, low if pause, high if start cardio
                     switch keyArray[i] {
                     // High
@@ -557,8 +558,8 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
             //
         } else
-        if timerValue2 == 0 {
-            self.dismiss(animated: true)
+            if timerValue2 == 0 {
+                self.dismiss(animated: true)
         }
         
         //
@@ -571,27 +572,27 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         let delayInSeconds = timerValue2Remainder
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-        if self.didEnterBackground == true {
-            //
-            // new current index
-            let currentIndexCheck = self.currentIndex
-            for i in self.arrayOfTimes {
-                if (self.timerValue2 - i) > 0 {
-                    self.currentIndex = Int(self.arrayOfTimes.index(of: i)!)
-                    if currentIndexCheck != self.currentIndex {
-                        self.timerShapeLayer.removeAllAnimations()
-                        self.timerShapeLayer.removeFromSuperlayer()
+            if self.didEnterBackground == true {
+                //
+                // new current index
+                let currentIndexCheck = self.currentIndex
+                for i in self.arrayOfTimes {
+                    if (self.timerValue2 - i) > 0 {
+                        self.currentIndex = Int(self.arrayOfTimes.index(of: i)!)
+                        if currentIndexCheck != self.currentIndex {
+                            self.timerShapeLayer.removeAllAnimations()
+                            self.timerShapeLayer.removeFromSuperlayer()
+                        }
+                        self.nextButtonAction2()
+                        break
                     }
-                    self.nextButtonAction2()
-                    break
                 }
             }
-        }
         }
     }
     
     //
-    func updateTimer2() {
+    @objc func updateTimer2() {
         if timerValue2 != 0 {
             timerValue2 -= 1
         } else {
@@ -603,7 +604,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         if arrayOfTimes.contains(timerValue2) {
             if timerCountDown.isValid == true {
                 timerCountDown.invalidate()
-                timeFormatted(totalSeconds: 0)
             }
             currentIndex = Int(arrayOfTimes.index(of: timerValue2)!) + 1
             if animationAdded == true {
@@ -671,7 +671,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     
     // Update Timer
-    func updateTimer3() {
+    @objc func updateTimer3() {
         //
         let indexPath = NSIndexPath(row: currentIndex, section: 0)
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
@@ -687,7 +687,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-
+    
     
     //
     // 1 -------------------------------------------------------------------------------------------------------
@@ -729,7 +729,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     var startTime = Double()
     var endTime = Double()
     //
-    func startTimer() {
+    @objc func startTimer() {
         
         //
         let key = keyArray[selectedRow]
@@ -778,13 +778,13 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 switch sessionType {
                 case 0:
                     if selectedRow != keyArray.count - 1 {
-                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key + 1]!, comment: "")
+                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key + 1]!, comment: "")
                     } else {
                         content.title = NSLocalizedString("cardioEnd", comment: "")
                     }
                 case 1:
                     if selectedRow != keyArray.count - 1 {
-                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key + 1]!, comment: "") + " " + String(lengthArray[key + 1]) + "m"
+                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key + 1]!, comment: "") + " " + String(lengthArray[key + 1]) + "m"
                     } else {
                         content.title = NSLocalizedString("cardioEnd", comment: "")
                     }
@@ -810,7 +810,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-
+    
     // Update Progress
     func updateProgress() {
         // Current Pose
@@ -850,8 +850,8 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     //
-   
-
+    
+    
     var timerValue = Int()
     
     // Timer CountDown Title
@@ -862,7 +862,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     // Update Timer
-    func updateTimer() {
+    @objc func updateTimer() {
         //
         let indexPath = NSIndexPath(row: selectedRow, section: 0)
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
@@ -881,11 +881,11 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             } else {
                 self.dismiss(animated: true)
             }
-        //
+            //
         } else if timerValue == 1 {
             timerValue -= 1
             cell.detailLabel.text = timeFormatted(totalSeconds: timerValue)
-        //
+            //
         } else {
             timerValue -= 1
             cell.detailLabel.text = timeFormatted(totalSeconds: timerValue)
@@ -922,12 +922,12 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         timerShapeLayer = CAShapeLayer()
         timerShapeLayer.path = circlePath.cgPath
         timerShapeLayer.fillColor = UIColor.clear.cgColor
-        timerShapeLayer.strokeColor = colour1.cgColor
+        timerShapeLayer.strokeColor = Colours.colour1.cgColor
         timerShapeLayer.lineWidth = 2.0
         
         //
         timerShapeLayer.strokeEnd = 0.0
-
+        
         
         view.layer.addSublayer(timerShapeLayer)
         //cell.layer.addSublayer(timerShapeLayer)
@@ -956,7 +956,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         timerShapeLayer = CAShapeLayer()
         timerShapeLayer.path = circlePath.cgPath
         timerShapeLayer.fillColor = UIColor.clear.cgColor
-        timerShapeLayer.strokeColor = colour1.cgColor
+        timerShapeLayer.strokeColor = Colours.colour1.cgColor
         timerShapeLayer.lineWidth = 2.0
         
         //
@@ -966,7 +966,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         view.layer.addSublayer(timerShapeLayer)
         //cell.layer.addSublayer(timerShapeLayer)
     }
-
+    
     
     //
     func removeCircle() {
@@ -990,8 +990,8 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         
     }
     
-
-   
+    
+    
     //
     // Cancel --------------------
     //
@@ -999,52 +999,53 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBAction func cancelButtonAction(_ sender: Any) {
         // Invalidate
         
-            //
-            // Alert View
-            let title = NSLocalizedString("finishEarly", comment: "")
-            let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.view.tintColor = colour2
-            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-            //
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .natural
-            alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+        //
+        // Alert View
+        let title = NSLocalizedString("finishEarly", comment: "")
+        let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = Colours.colour2
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        //
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         
+        //
+        // Action
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+            UIAlertAction in
             //
-            // Action
-            let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
-                UIAlertAction in
-                //
-                if timerCountDown.isValid == true {
-                    timerCountDown.invalidate()
-                }
-                    //
-                if self.animationAdded == true {
-                        self.timerShapeLayer.removeAllAnimations()
-                        self.timerShapeLayer.removeFromSuperlayer()
-                }
-                //
-                if self.sessionType == 0 {
-                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: self.arrayOfNotifications)
-                } else {
-                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
-                }
-                
-                
-                //
-                self.dismiss(animated: true)
-            }
-            let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
-                UIAlertAction in
+            if timerCountDown.isValid == true {
+                timerCountDown.invalidate()
             }
             //
-            alert.addAction(okAction)
-            alert.addAction(cancelAction)
+            if self.animationAdded == true {
+                self.timerShapeLayer.removeAllAnimations()
+                self.timerShapeLayer.removeFromSuperlayer()
+            }
             //
-            self.present(alert, animated: true, completion: nil)
+            if self.sessionType == 0 {
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: self.arrayOfNotifications)
+            } else {
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
+            }
+            
+            
+            //
+            self.dismiss(animated: true)
+        }
+        let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        //
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        //
+        self.present(alert, animated: true, completion: nil)
     }
     
     
-//
+    //
 }
+

@@ -60,10 +60,10 @@ class BackgroundImageCollection: UICollectionViewController {
         
     }
     
-
-// 
-// Collection View -----------------------------------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Collection View -----------------------------------------------------------------------------------------------------------------------------
+    //
     
     // Number of Section
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -73,19 +73,19 @@ class BackgroundImageCollection: UICollectionViewController {
     // Number of items in section
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //
-        return backgroundImageArray.count + 1
+        return BackgroundImages.backgroundImageArray.count + 1
     }
-
+    
     
     // Cell customization
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // Dequeue reusable cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionImageCell", for: indexPath) as! CollectionImageCell
-    
+        
         //
         cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-
+        
         
         // Image View
         //
@@ -108,7 +108,7 @@ class BackgroundImageCollection: UICollectionViewController {
         cell.backgroundImage.layer.cornerRadius = 5
         cell.backgroundImage.layer.masksToBounds = true
         cell.backgroundImage.contentMode = .scaleAspectFill
-    
+        
         
         // Selection Indicator
         //
@@ -132,9 +132,9 @@ class BackgroundImageCollection: UICollectionViewController {
         //
         // Section
         //
-        if indexPath.row < backgroundImageArray.count {
+        if indexPath.row < BackgroundImages.backgroundImageArray.count {
             // Image
-            cell.backgroundImage.image = getUncachedImage(named: backgroundImageArray[indexPath.item])
+            cell.backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[indexPath.item])
             
             // Selection Label
             //
@@ -146,8 +146,8 @@ class BackgroundImageCollection: UICollectionViewController {
             if cell.isSelected == false {
                 cell.selectionLabel.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             }
-        //
-        } else if indexPath.row == backgroundImageArray.count {
+            //
+        } else if indexPath.row == BackgroundImages.backgroundImageArray.count {
             // Colour
             //
             // Grey
@@ -166,12 +166,12 @@ class BackgroundImageCollection: UICollectionViewController {
                 cell.selectionLabel.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             }
         }
-    
-    //
+        
+        //
         return cell
     }
     
-
+    
     // Selection handler
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -181,27 +181,27 @@ class BackgroundImageCollection: UICollectionViewController {
         //
         var deselectIndex = NSIndexPath()
         // Image
-        if backgroundIndex < backgroundImageArray.count {
+        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
             deselectIndex = NSIndexPath(item: backgroundIndex, section: 0)
-        // Colour
+            // Colour
         } else {
-            deselectIndex = NSIndexPath(item: backgroundIndex - backgroundImageArray.count, section: 0)
+            deselectIndex = NSIndexPath(item: backgroundIndex - BackgroundImages.backgroundImageArray.count, section: 0)
         }
         //
         collectionView.deselectItem(at: deselectIndex as IndexPath, animated: false)
-    
+        
         
         // Set New Selection
         let cell = collectionView.cellForItem(at: indexPath) as! CollectionImageCell
         cell.selectionLabel.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         cell.isSelected = true
-
+        
         
         // Store Selection Index
         // Image
         settings[0][0] = indexPath.item
         UserDefaults.standard.set(settings, forKey: "userSettings")
-            //
+        //
         UserDefaults.standard.synchronize()
         //
         collectionView.reloadData()
@@ -236,7 +236,7 @@ extension BackgroundImageCollection : UICollectionViewDelegateFlowLayout {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
-
+    
     // Minimum line spacing
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -251,3 +251,4 @@ extension BackgroundImageCollection : UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
+

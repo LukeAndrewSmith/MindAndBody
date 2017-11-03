@@ -46,17 +46,18 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     //
     // MARK: Variables from Session Data
     var fromCustom = false
+    var fromSchedule = false
     //
     // Key Array
-    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [1] Keys Array
+    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [1] Keys Array
     var keyArray: [Int] = []
     
     // Reps
-    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [3] reps array
+    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [3] reps array
     var repsArray: [String] = []
     
     //
-    // [selectedSession[0]] = warmup/workout/cardio etc..., [selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [selectedSession[2] = selected session, [2] rounds array, [0] = round
+    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [2] rounds array, [0] = round
     var numberOfRounds = Int()
     
     
@@ -72,7 +73,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     //
     var sessionScreenRoundIndex = 0
     //
-
+    
     //
     // Outlets -----------------------------------------------------------------------------------------------------------
     //
@@ -95,8 +96,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let title = NSLocalizedString("sessionStarted", comment: "")
         //let message = NSLocalizedString("resetMessage", comment: "")
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.view.tintColor = colour1
-        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        alert.view.tintColor = Colours.colour1
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
         self.present(alert, animated: true, completion: {
             //
             let delayInSeconds = 0.7
@@ -122,9 +123,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         
         //
         if fromCustom == false {
-            keyArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[1] as! [Int]
-            repsArray = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[3] as! [String]
-            numberOfRounds = sessionData.presetsDictionaries[selectedSession[0]][selectedSession[1]][0][selectedSession[2]]?[2][0] as! Int
+            keyArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1] as! [Int]
+            repsArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[3] as! [String]
+            numberOfRounds = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2][0] as! Int
         }
         
         // Device Scale for @2x and @3x of Target Area Images
@@ -135,13 +136,13 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             toAdd = "@3x"
         default: break
         }
-
-        //
-        view.backgroundColor = colour2
         
-       
         //
-        finishEarly.tintColor = colour4
+        view.backgroundColor = Colours.colour2
+        
+        
+        //
+        finishEarly.tintColor = Colours.colour4
         
         
         // self.present(alert, animated: true, completion: (() -> Void)?)
@@ -152,15 +153,15 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
         // Rounded Edges
         // Colour
-        progressBar.trackTintColor = colour1
-        progressBar.progressTintColor = colour3
+        progressBar.trackTintColor = Colours.colour1
+        progressBar.progressTintColor = Colours.colour3
         //
         progressBar.setProgress(0, animated: true)
         
         // TableView Background
         let tableViewBackground = UIView()
         //
-        tableViewBackground.backgroundColor = colour2
+        tableViewBackground.backgroundColor = Colours.colour2
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
         //
         tableView.backgroundView = tableViewBackground
@@ -191,7 +192,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         //
         let header = view as! UITableViewHeaderFooterView
-        header.contentView.backgroundColor = colour1
+        header.contentView.backgroundColor = Colours.colour1
         
         //
         if section == 0 {
@@ -231,24 +232,24 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             //
             let key = keyArray[indexPath.row]
-
+            
             //
             // Cell
-            cell.backgroundColor = colour2
-            cell.tintColor = colour2
+            cell.backgroundColor = Colours.colour2
+            cell.tintColor = Colours.colour2
             tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             cell.selectionStyle = .none
             
-        
+            
             // New image to display
             // Demonstration on left
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
             let defaultImage = settings[5][0]
             if defaultImage == 0 {
                 // [key] = key, [0] = first image
-                cell.imageViewCell.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[selectedSession[0]][key]?[0])!)
+                cell.imageViewCell.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
                 // Indicator
-                if (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count > 1 {
+                if (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count > 1 {
                     cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
                 } else {
                     cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
@@ -257,9 +258,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 // Target Area on left
             } else {
                 // [key] = key
-                cell.imageViewCell.image = getUncachedImage(named: (sessionData.targetAreaDictionaries[selectedSession[0]][key])! + toAdd)
+                cell.imageViewCell.image = getUncachedImage(named: (sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key])! + toAdd)
                 // Indicator
-                if (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count > 1 {
+                if (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count > 1 {
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
                 } else {
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
@@ -280,7 +281,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             //
             // Movement
-            cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: "")
+            cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]!, comment: "")
             //
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 23)
             cell.movementLabel?.textAlignment = .center
@@ -291,7 +292,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             // Set and Reps
             //
             // (keyArray.count * sessionScreenRoundIndex) = first index of round
-            var indexRow = (keyArray.count * sessionScreenRoundIndex) + indexPath.row
+            let indexRow = (keyArray.count * sessionScreenRoundIndex) + indexPath.row
             cell.setsRepsLabel?.text = repsArray[indexRow]
             cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.setsRepsLabel?.textAlignment = .right
@@ -307,23 +308,23 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             // Indicate asymmetric exercises to the user
             // If asymmetric movement array contains the current movement
-            if sessionData.asymmetricMovements[selectedSession[0]].contains(keyArray[indexPath.row]) {
+            if sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]].contains(keyArray[indexPath.row]) {
                 // Append indicator
                 let length = repsString.count
                 let stringToAdd = NSLocalizedString(") per side", comment: "")
                 let length2 = stringToAdd.count
                 repsString = "(" + repsString + stringToAdd
-                let attributedString = NSMutableAttributedString(string: repsString, attributes: [NSFontAttributeName:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
+                let attributedString = NSMutableAttributedString(string: repsString, attributes: [NSAttributedStringKey.font:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
                 // Change indicator to red
                 let range = NSRange(location:0,length:1) // specific location. This means "range" handle 1 character at location 2
-                attributedString.addAttribute(NSForegroundColorAttributeName, value: colour4, range: range)
+                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colours.colour4, range: range)
                 let range2 = NSRange(location: 1 + length,length: length2)
-                attributedString.addAttribute(NSForegroundColorAttributeName, value: colour4, range: range2)
-                cell.setsRepsLabel?.textColor = colour1
+                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colours.colour4, range: range2)
+                cell.setsRepsLabel?.textColor = Colours.colour1
                 cell.setsRepsLabel?.attributedText = attributedString
             } else {
                 cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                cell.setsRepsLabel?.textColor = colour1
+                cell.setsRepsLabel?.textColor = Colours.colour1
                 cell.setsRepsLabel?.text = repsString
             }
             
@@ -337,7 +338,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             //
             // Explanation
-            cell.explanationButton.tintColor = colour1
+            cell.explanationButton.tintColor = Colours.colour1
             
             
             //
@@ -403,7 +404,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.separatorInset =  UIEdgeInsetsMake(0.0, 0.0, 0.0, -cell.bounds.size.width)
             //
             cell.layer.borderWidth = 2
-            cell.layer.borderColor = colour1.cgColor
+            cell.layer.borderColor = Colours.colour1.cgColor
             //
             if sessionScreenRoundIndex + 1 < numberOfRounds {
                 cell.textLabel?.text = NSLocalizedString("endRound", comment: "") + " " + String(sessionScreenRoundIndex + 1)
@@ -411,7 +412,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.textLabel?.text = NSLocalizedString("endWorkout", comment: "")
             }
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
-            cell.textLabel?.textColor = colour1
+            cell.textLabel?.textColor = Colours.colour1
             cell.textLabel?.textAlignment = .center
             //
             return cell
@@ -446,7 +447,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         switch indexPath.section {
         case 0: break
-        //
+            //
+        // End Round/Workout button
         case 1:
             
             if sessionScreenRoundIndex < numberOfRounds - 1{
@@ -461,6 +463,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 // Tracking
                 updateWeekProgress()
                 updateMonthProgress()
+                // Schedule Tracking
+                updateScheduleTracking(fromSchedule: fromSchedule)
                 //
                 self.dismiss(animated: true)
             }
@@ -491,7 +495,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     var endTime = Double()
     
     // Update Timer
-    func updateTimer() {
+    @objc func updateTimer() {
         //
         if restTime == 0 {
             timerCountDown.invalidate()
@@ -506,7 +510,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             let indexPath0 = NSIndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
             //
-            var cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! WorkoutOverviewTableViewCell
+            let cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! WorkoutOverviewTableViewCell
             //
             UIView.animate(withDuration: 0.6, animations: {
                 // 1
@@ -526,8 +530,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             let title = NSLocalizedString(titleString, comment: "")
             //let message = NSLocalizedString("resetMessage", comment: "")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-            alert.view.tintColor = colour1
-            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+            alert.view.tintColor = Colours.colour1
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
             self.present(alert, animated: true, completion: {
                 //
                 let delayInSeconds = 0.7
@@ -536,17 +540,17 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 }
             })
             
-        //
+            //
         } else {
             restTime -= 1
-            restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+            restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
         }
     }
     
     //
     // Start Timer
     //
-    func startTimer() {
+    @objc func startTimer() {
         // Dates and Times
         startTime = Date().timeIntervalSinceReferenceDate
         //
@@ -583,7 +587,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             let indexPath0 = NSIndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
             //
-            var cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! WorkoutOverviewTableViewCell
+            let cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! WorkoutOverviewTableViewCell
             //
             UIView.animate(withDuration: 0.6, animations: {
                 // 1
@@ -603,8 +607,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             let title = NSLocalizedString(titleString, comment: "")
             //let message = NSLocalizedString("resetMessage", comment: "")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-            alert.view.tintColor = colour1
-            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+            alert.view.tintColor = Colours.colour1
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
             self.present(alert, animated: true, completion: {
                 //
                 let delayInSeconds = 0.7
@@ -616,8 +620,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         
         // Set Timer
         // Set initial time
-        restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
-
+        restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+        
         // Begin Timer or dismiss view
         timerCountDown = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
     }
@@ -652,9 +656,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         
         // Rest Alert
         restAlert = UIAlertController()
-        restAlert.view.tintColor = colour2
-        restAlert.setValue(NSAttributedString(string: restTitle, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
-        restAlert.setValue(NSAttributedString(string: restMessage, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+        restAlert.view.tintColor = Colours.colour2
+        restAlert.setValue(NSAttributedString(string: restTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        restAlert.setValue(NSAttributedString(string: restMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
         let skipAction = UIAlertAction(title: NSLocalizedString("skip", comment: ""), style: UIAlertActionStyle.default) {
             UIAlertAction in
             
@@ -683,7 +687,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.explanationButton.alpha = 1
                 //
                 self.updateProgress()
-            //
+                //
             }, completion: { finished in
                 self.tableView.reloadData()
                 self.tableView.reloadData()
@@ -696,8 +700,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             let title = NSLocalizedString(titleString, comment: "")
             //let message = NSLocalizedString("resetMessage", comment: "")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-            alert.view.tintColor = colour1
-            alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+            alert.view.tintColor = Colours.colour1
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
             self.present(alert, animated: true, completion: {
                 //
                 let delayInSeconds = 0.7
@@ -712,7 +716,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         })
         
     }
-
+    
     
     
     //
@@ -730,13 +734,13 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
             var animationArray: [UIImage] = []
             for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![i])!)
             }
             //
             cell.imageViewCell.animationImages = animationArray
@@ -762,13 +766,13 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
             var animationArray: [UIImage] = []
             for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![i])!)
+                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![i])!)
             }
             //
             cell.imageViewCell.animationImages = animationArray
@@ -822,10 +826,10 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.explanationButton.alpha = 0
                 //
                 //self.tableView.reloadRows(at: [indexPath2 as IndexPath], with: UITableViewRowAnimation.none)
-
+                
                 //
             }, completion: { finished in
-                self.playAnimation(row: self.selectedRow)
+                //                self.playAnimation(row: self.selectedRow)
             })
             // + 1
             if selectedRow < keyArray.count - 1 {
@@ -927,11 +931,11 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         explanationLabel.numberOfLines = 0
         //
         let key = keyArray[selectedRow]
-        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movementsDictionaries[selectedSession[0]][key]!, comment: ""), howTo: NSLocalizedString(sessionData.explanationDictionaries[selectedSession[0]][key]![0], comment: ""), toAvoid: NSLocalizedString(sessionData.explanationDictionaries[selectedSession[0]][key]![1], comment: ""), focusOn: NSLocalizedString(sessionData.explanationDictionaries[selectedSession[0]][key]![2], comment: ""))
+        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]!, comment: ""), howTo: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0], comment: ""), toAvoid: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![1], comment: ""), focusOn: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![2], comment: ""))
         explanationLabel.frame = CGRect(x: 10, y: 10, width: scrollViewExplanation.frame.size.width - 10, height: 0)
         //
         explanationLabel.sizeToFit()
-
+        
         
         // Scroll View
         scrollViewExplanation.addSubview(explanationLabel)
@@ -976,7 +980,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! WorkoutOverviewTableViewCell
         //
         let key = keyArray[indexPath.row]
-        let imageCount = (sessionData.demonstrationDictionaries[selectedSession[0]][key]!).count
+        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
         //
         if cell.imageViewCell.isAnimating == false {
             //
@@ -997,7 +1001,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
                     let defaultImage = settings[5][0]
                     if defaultImage == 0 {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[selectedSession[0]][key]! + toAdd)
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key]! + toAdd)
                         // Indicator
                         if imageCount > 1 {
                             cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
@@ -1007,7 +1011,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                         cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
                         // Target Area on left
                     } else {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![0])
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0])
                         // Indicator
                         if imageCount > 1 {
                             cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -1047,7 +1051,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
                     let defaultImage = settings[5][0]
                     if defaultImage == 0 {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[selectedSession[0]][key]![0])
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0])
                         // Indicator
                         if imageCount > 1 {
                             cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -1057,7 +1061,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                         cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                         // Target Area on left
                     } else {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[selectedSession[0]][key]! + toAdd)
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key]! + toAdd)
                         // Indicator
                         if imageCount > 1 {
                             cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
@@ -1115,12 +1119,12 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let title = NSLocalizedString("finishEarly", comment: "")
         let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = colour2
-        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        alert.view.tintColor = Colours.colour2
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         
         //
         // Action
@@ -1172,9 +1176,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     //
     
     // Walkthrough
-    func walkthroughSession() {
+    @objc func walkthroughSession() {
         //
-        var cellHeight = (UIScreen.main.bounds.height - 22) * 3/4
+        let cellHeight = (UIScreen.main.bounds.height - 22) * 3/4
         
         //
         if didSetWalkthrough == false {
@@ -1195,10 +1199,10 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
-            walkthroughLabel.textColor = colour2
-            walkthroughLabel.backgroundColor = colour1
-            walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = colour1.cgColor
+            walkthroughLabel.textColor = Colours.colour2
+            walkthroughLabel.backgroundColor = Colours.colour1
+            walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colours.colour1.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
             walkthroughHighlight.center = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight / 2) * (28/16)) + 2)
@@ -1209,11 +1213,11 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(1)
+                self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
+                    self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
                 }, completion: nil)
             })
             
@@ -1230,15 +1234,15 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
-            highlightColor = colour1
+            walkthroughBackgroundColor = Colours.colour1
+            walkthroughTextColor = Colours.colour2
+            highlightColor = Colours.colour1
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
             //
             walkthroughProgress = self.walkthroughProgress + 1
-        
+            
             
         // Demonstration
         case 2:
@@ -1249,9 +1253,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
-            highlightColor = colour1
+            walkthroughBackgroundColor = Colours.colour1
+            walkthroughTextColor = Colours.colour2
+            highlightColor = Colours.colour1
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1268,9 +1272,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
-            highlightColor = colour1
+            walkthroughBackgroundColor = Colours.colour1
+            walkthroughTextColor = Colours.colour2
+            highlightColor = Colours.colour1
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1284,7 +1288,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             // Swipe demonstration
             let leftSwipe = UIView()
             leftSwipe.frame.size = CGSize(width: 50, height: 50)
-            leftSwipe.backgroundColor = colour1
+            leftSwipe.backgroundColor = Colours.colour1
             leftSwipe.layer.cornerRadius = 25
             leftSwipe.clipsToBounds = true
             leftSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2
@@ -1314,9 +1318,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //
                 self.labelFrame = 0
                 //
-                self.walkthroughBackgroundColor = colour1
-                self.walkthroughTextColor = colour2
-                self.highlightColor = colour1
+                self.walkthroughBackgroundColor = Colours.colour1
+                self.walkthroughTextColor = Colours.colour2
+                self.highlightColor = Colours.colour1
                 //
                 self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
                 
@@ -1334,9 +1338,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
-            highlightColor = colour1
+            walkthroughBackgroundColor = Colours.colour1
+            walkthroughTextColor = Colours.colour2
+            highlightColor = Colours.colour1
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             //
@@ -1349,7 +1353,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //
                 let rightSwipe = UIView()
                 rightSwipe.frame.size = CGSize(width: 50, height: 50)
-                rightSwipe.backgroundColor = colour1
+                rightSwipe.backgroundColor = Colours.colour1
                 rightSwipe.layer.cornerRadius = 25
                 rightSwipe.clipsToBounds = true
                 rightSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2
@@ -1378,9 +1382,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     //
                     self.labelFrame = 0
                     //
-                    self.walkthroughBackgroundColor = colour1
-                    self.walkthroughTextColor = colour2
-                    self.highlightColor = colour1
+                    self.walkthroughBackgroundColor = Colours.colour1
+                    self.walkthroughTextColor = Colours.colour2
+                    self.highlightColor = Colours.colour1
                     //
                     self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
                     
@@ -1402,8 +1406,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
+            walkthroughBackgroundColor = Colours.colour1
+            walkthroughTextColor = Colours.colour2
             highlightColor = .clear
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
@@ -1426,8 +1430,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //
                 self.labelFrame = 0
                 //
-                self.walkthroughBackgroundColor = colour1
-                self.walkthroughTextColor = colour2
+                self.walkthroughBackgroundColor = Colours.colour1
+                self.walkthroughTextColor = Colours.colour2
                 self.highlightColor = .clear
                 //
                 self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
@@ -1448,7 +1452,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //
                 let upSwipe = UIView()
                 upSwipe.frame.size = CGSize(width: 50, height: 50)
-                upSwipe.backgroundColor = colour1
+                upSwipe.backgroundColor = Colours.colour1
                 upSwipe.layer.cornerRadius = 25
                 upSwipe.clipsToBounds = true
                 upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (7/8)) + 2
@@ -1476,9 +1480,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     //
                     self.labelFrame = 0
                     //
-                    self.walkthroughBackgroundColor = colour1
-                    self.walkthroughTextColor = colour2
-                    self.highlightColor = colour1
+                    self.walkthroughBackgroundColor = Colours.colour1
+                    self.walkthroughTextColor = Colours.colour2
+                    self.highlightColor = Colours.colour1
                     //
                     self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
                     //
@@ -1497,9 +1501,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
-            highlightColor = colour1
+            walkthroughBackgroundColor = Colours.colour1
+            walkthroughTextColor = Colours.colour2
+            highlightColor = Colours.colour1
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1523,5 +1527,6 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             })
         }
     }
-//
+    //
 }
+

@@ -23,6 +23,8 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     
     // Selected Session
     var selectedSessionMeditation = [0, 0]
+    //
+    var comingFromSchedule = false
     
     // Guided Sessions
     let guidedSessions =
@@ -32,17 +34,17 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
             ["lettingGo", "acceptance", "wandering", "oneness", "duality", "effort"],
             ["bodyScan", "unwind"],
             ["lotusStretch", "generalStretch"]
-        ]
+    ]
     
     
-//
-// View did load --------------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load --------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Colour
-        view.backgroundColor = colour1
+        view.backgroundColor = Colours.colour1
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("guidedSessions", comment: ""))
@@ -53,16 +55,16 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         //
         let tableViewBackground = UIView()
         //
-        tableViewBackground.backgroundColor = colour2
+        tableViewBackground.backgroundColor = Colours.colour2
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
         //
         tableView.backgroundView = tableViewBackground
     }
     
-
-//
-// TableView --------------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // TableView --------------------------------------------------------------------------------------------------------
+    //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
         return 5
@@ -92,7 +94,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
         header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        header.contentView.backgroundColor = colour2
+        header.contentView.backgroundColor = Colours.colour2
         //
     }
     
@@ -139,25 +141,26 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         selectedSessionMeditation[0] = indexPath.section
         selectedSessionMeditation[1] = indexPath.row
         // Title
-//        let currentCell = tableView.cellForRow(at: indexPath) as UITableViewCell!
-//        guidedTitleText = (currentCell?.textLabel!.text)!
+        //        let currentCell = tableView.cellForRow(at: indexPath) as UITableViewCell!
+        //        guidedTitleText = (currentCell?.textLabel!.text)!
         //
         performSegue(withIdentifier: "meditationGuided", sender: nil)
     }
     
     
-//
-// Pass Array to next Viewcontroller --------------------------------------------------------------------------------------------------------
-//
+    //
+    // Pass Array to next Viewcontroller --------------------------------------------------------------------------------------------------------
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Pass Info
         if (segue.identifier == "meditationGuided") {
             //
             let destinationVC = segue.destination as! MeditationGuided
-            destinationVC.selectedSession = selectedSessionMeditation
+            destinationVC.selectedSessionMeditation = selectedSessionMeditation
             //destinationVC.guidedTitle = guidedTitleText
             //destinationVC.keyArray = selectedArray
             //destinationVC.poses = posesDictionary
+            destinationVC.fromSchedule = comingFromSchedule
         }
         
         // Remove Back Button Text
@@ -166,5 +169,6 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         navigationItem.backBarButtonItem = backItem
     }
     
-//
+    //
 }
+

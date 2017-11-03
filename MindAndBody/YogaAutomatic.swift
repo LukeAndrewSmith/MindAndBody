@@ -29,12 +29,12 @@ let transitionArray: [Int] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
 class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
-//
-// Outlets --------------------------------------------------------------------------------------------------
-//
+    //
+    // Outlets --------------------------------------------------------------------------------------------------
+    //
     //
     @IBOutlet weak var tableViewAutomatic: UITableView!
-   
+    
     //
     @IBOutlet weak var navigationBar: UINavigationItem!
     
@@ -42,12 +42,12 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var offView = UIView()
     
     var soundPlayer: AVAudioPlayer!
-//
-// Arrays --------------------------------------------------------------------------------------------------
-//
+    //
+    // Arrays --------------------------------------------------------------------------------------------------
+    //
     // Section Headers
     var sectionHeaderArray: [String] = ["off/on", "averageBreathLength", "transitionTime", "transitionIndicator"]
-
+    
     
     // Bells Arrays
     let bellsArray: [String] =
@@ -63,12 +63,12 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     // Lengths
     let pickerView = UIPickerView()
-        let indicatorLabel = UILabel()
+    let indicatorLabel = UILabel()
     //
     // Bells
     let tableViewBells = UITableView()
-        var didChangeTransitionIndicator = false
-        var selectedTransitionIndicator = Int()
+    var didChangeTransitionIndicator = false
+    var selectedTransitionIndicator = Int()
     
     //
     var selectedItem = Int()
@@ -76,9 +76,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // NOTE:
     // settings[3] = settings[3]
     
-//
-// View did load --------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load --------------------------------------------------------------------------------------------------
+    //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //
@@ -90,11 +90,11 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         self.tableViewAutomatic.backgroundView = backView
         //
     }
-
     
-//
-// View did load --------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // View did load --------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -108,14 +108,14 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Bells Table
         let tableViewBackground2 = UIView()
         //
-        tableViewBackground2.backgroundColor = colour2
+        tableViewBackground2.backgroundColor = Colours.colour2
         tableViewBackground2.frame = CGRect(x: 0, y: 0, width: self.tableViewBells.frame.size.width, height: self.tableViewBells.frame.size.height)
         //
         tableViewBells.backgroundView = tableViewBackground2
         tableViewBells.tableFooterView = UIView()
         // TableView Cell action items
         //
-        tableViewBells.backgroundColor = colour2
+        tableViewBells.backgroundColor = Colours.colour2
         tableViewBells.delegate = self
         tableViewBells.dataSource = self
         tableViewBells.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
@@ -125,7 +125,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         // Selection Items
         // view
-        selectionView.backgroundColor = colour2
+        selectionView.backgroundColor = Colours.colour2
         selectionView.layer.cornerRadius = 15
         selectionView.layer.masksToBounds = true
         
@@ -133,21 +133,21 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         backgroundViewSelection.backgroundColor = .black
         backgroundViewSelection.addTarget(self, action: #selector(backgroundViewSelectionAction(_:)), for: .touchUpInside)
         //
-        okButton.backgroundColor = colour1
-        okButton.setTitleColor(colour3, for: .normal)
+        okButton.backgroundColor = Colours.colour1
+        okButton.setTitleColor(Colours.colour3, for: .normal)
         okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
         okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
         //
         
         // Picker
-        pickerView.backgroundColor = colour2
+        pickerView.backgroundColor = Colours.colour2
         pickerView.delegate = self
         pickerView.dataSource = self
         
         // indicator Label
         indicatorLabel.textAlignment = .center
-        indicatorLabel.textColor = colour1
+        indicatorLabel.textColor = Colours.colour1
         indicatorLabel.text = "s"
         indicatorLabel.font = UIFont(name: "SFUIDisplay-thin", size: 22)
         indicatorLabel.numberOfLines = 1
@@ -158,12 +158,12 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
     }
     
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         // Off View
-        offView.backgroundColor = colour2
+        offView.backgroundColor = Colours.colour2
         offView.alpha = 0.5
         let yPosition = CGFloat(91)
         offView.frame = CGRect(x: 0, y: yPosition, width: self.view.frame.size.width, height: view.frame.size.height - yPosition)
@@ -177,9 +177,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     
-//
-// Table View --------------------------------------------------------------------------------------------------
-//
+    //
+    // Table View --------------------------------------------------------------------------------------------------
+    //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
         switch tableView {
@@ -213,10 +213,10 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             //
             header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-        
+            
             // Border
             let border = CALayer()
-            border.backgroundColor = colour2.cgColor
+            border.backgroundColor = Colours.colour2.cgColor
             border.frame = CGRect(x: 15, y: header.frame.size.height-1, width: self.view.frame.size.height, height: 1)
             //
             header.layer.addSublayer(border)
@@ -224,9 +224,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         case tableViewBells:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 17)!
-            header.textLabel?.textColor = colour1
-            header.contentView.backgroundColor = colour2
-            header.contentView.tintColor = colour1
+            header.textLabel?.textColor = Colours.colour1
+            header.contentView.backgroundColor = Colours.colour2
+            header.contentView.tintColor = Colours.colour1
         default: break
         }
     }
@@ -268,7 +268,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             //
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-
+            
             //
             switch indexPath.section {
             case 0:
@@ -301,7 +301,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }
             default: break
             }
-        
+            
             //
             return cell
             
@@ -318,9 +318,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.imageView?.image = bellsImages[indexPath.row]
             //
             cell.textLabel?.textAlignment = .left
-            cell.backgroundColor = colour2
-            cell.textLabel?.textColor = colour1
-            cell.tintColor = colour1
+            cell.backgroundColor = Colours.colour2
+            cell.textLabel?.textColor = Colours.colour1
+            cell.tintColor = Colours.colour1
             
             //
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
@@ -331,9 +331,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }
             //
             if indexPath.row == selectedTransitionIndicator {
-                cell.textLabel?.textColor = colour3
+                cell.textLabel?.textColor = Colours.colour3
                 cell.accessoryType = .checkmark
-                cell.tintColor = colour3
+                cell.tintColor = Colours.colour3
             }
             //
             if selectedTransitionIndicator != -1 {
@@ -376,7 +376,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     //
                     cell?.textLabel?.text = NSLocalizedString("on", comment: "")
                     settings[3][0] = 1
-                
+                    
                     if settings[3][1] == -1 && settings[3][2] == -1 {
                         navigationItem.hidesBackButton = true
                     }
@@ -401,7 +401,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     settings[3][0] = 0
                     //
                     navigationItem.hidesBackButton = false
-                
+                    
                     //
                     //
                     offView.alpha = 0
@@ -432,7 +432,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
                 selectionView.frame = CGRect(x: 10, y: view.frame.maxY, width: selectionWidth, height: selectionHeight)
                 self.pickerView.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
-                                //
+                //
                 // PickerView
                 selectionView.addSubview(pickerView)
                 pickerView.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
@@ -614,7 +614,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         let secondsLabel = UILabel()
         secondsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-        secondsLabel.textColor = colour1
+        secondsLabel.textColor = Colours.colour1
         //
         switch selectedItem {
         case 0:
@@ -646,7 +646,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Selection Related actions ------------------------------------------------------------------------------------------------
     //
     // Add movement table background (dismiss table)
-    func backgroundViewSelectionAction(_ sender: Any) {
+    @objc func backgroundViewSelectionAction(_ sender: Any) {
         //
         //
         // Remove View
@@ -669,7 +669,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             self.backgroundViewSelection.removeFromSuperview()
         })
         //
-            
+        
         // Extra
         if selectedItem == 2 {
             if soundPlayer != nil {
@@ -681,13 +681,13 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     // Ok button action
-    func okButtonAction(_ sender: Any) {
+    @objc func okButtonAction(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
         var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         //
         switch selectedItem {
-        //
+            //
         // Breath Length
         case 0:
             //
@@ -697,7 +697,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let indexPath = NSIndexPath(row: 0, section: 1)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
             cell?.textLabel?.text = String(timeArray[settings[3][1]]) + "s"
-        //
+            //
         // Transition time
         case 1:
             //
@@ -707,7 +707,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let indexPath = NSIndexPath(row: 0, section: 2)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
             cell?.textLabel?.text = String(transitionArray[settings[3][2]]) + "s"
-        //
+            //
         // Transition Indicator
         case 2:
             //
@@ -726,7 +726,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             defaults.set(settings, forKey: "userSettings")
             //
             selectedTransitionIndicator = -1
-            //
+        //
         default: break
         }
         //
@@ -782,7 +782,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var walkthroughTextColor = UIColor()
     
     // Walkthrough
-    func walkthroughAutomaticYoga() {
+    @objc func walkthroughAutomaticYoga() {
         
         //
         if didSetWalkthrough == false {
@@ -803,10 +803,10 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
-            walkthroughLabel.textColor = colour1
-            walkthroughLabel.backgroundColor = colour2
-            walkthroughHighlight.backgroundColor = colour2.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = colour2.cgColor
+            walkthroughLabel.textColor = Colours.colour1
+            walkthroughLabel.backgroundColor = Colours.colour2
+            walkthroughHighlight.backgroundColor = Colours.colour2.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colours.colour2.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: 225, height: 47 * 2)
             let homepageMaxY = TopBarHeights.combinedHeight + (47 * 2) + 44
@@ -818,11 +818,11 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.backgroundColor = colour2.withAlphaComponent(1)
+                self.walkthroughHighlight.backgroundColor = Colours.colour2.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    self.walkthroughHighlight.backgroundColor = colour2.withAlphaComponent(0.5)
+                    self.walkthroughHighlight.backgroundColor = Colours.colour2.withAlphaComponent(0.5)
                 }, completion: nil)
             })
             
@@ -840,8 +840,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = colour2
-            walkthroughTextColor = colour1
+            walkthroughBackgroundColor = Colours.colour2
+            walkthroughTextColor = Colours.colour1
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -859,14 +859,14 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = colour2
-            walkthroughTextColor = colour1
+            walkthroughBackgroundColor = Colours.colour2
+            walkthroughTextColor = Colours.colour1
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
             //
             walkthroughProgress = self.walkthroughProgress + 1
-
+            
             
         //
         default:
@@ -881,5 +881,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-
+    
 }
+

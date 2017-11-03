@@ -72,15 +72,20 @@ class MeditationScreen: UIViewController {
     let blur3 = UIVisualEffectView()
     let blur4 = UIVisualEffectView()
     
-    
+    // Button things
+    // Hide Screen
+    let hideScreenView = UIView()
+    //
+    var brightness = UIScreen.main.brightness
     
     // Background Sound
     var soundPlayer = AVAudioPlayer()
     
+    var fromSchedule = false
     
-//
-// View will appear -----------------------------------------------------------------------------------------------
-//
+    //
+    // View will appear -----------------------------------------------------------------------------------------------
+    //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -93,13 +98,13 @@ class MeditationScreen: UIViewController {
         //
         // Background Image/Colour
         //
-        if backgroundIndex < backgroundImageArray.count {
+        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
             //
-            backgroundImage.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == backgroundImageArray.count {
+            backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
+        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
             //
             backgroundImage.image = nil
-            backgroundImage.backgroundColor = colour1
+            backgroundImage.backgroundColor = Colours.colour1
         }
         
         
@@ -112,11 +117,11 @@ class MeditationScreen: UIViewController {
             isHours = false
         }
     }
-
     
-//
-// View did load -------------------------------------------------------------------------------------------
-//
+    
+    //
+    // View did load -------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         //
@@ -127,28 +132,28 @@ class MeditationScreen: UIViewController {
         //
         switch backgroundIndex {
         // All Black
-        case 1,3,backgroundImageArray.count:
-            timerLabel.textColor = colour2
-            hideScreen.tintColor = colour2
+        case 1,3,BackgroundImages.backgroundImageArray.count:
+            timerLabel.textColor = Colours.colour2
+            hideScreen.tintColor = Colours.colour2
         // All White
         case 0,2,3,4,5,6:
-            timerLabel.textColor = colour1
-            hideScreen.tintColor = colour1
+            timerLabel.textColor = Colours.colour1
+            hideScreen.tintColor = Colours.colour1
         //
         default: break
         }
-
+        
         // CheckMark
-        checkMark.tintColor = colour4
+        checkMark.tintColor = Colours.colour4
         
         //
         // Watch for enter foreground
         NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
-
-//
-// View Did Appear
-// 
+    
+    //
+    // View Did Appear
+    //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -156,9 +161,9 @@ class MeditationScreen: UIViewController {
         startTimer()
     }
     
-//
-// Buttons -------------------------------------------------------------------------------------------
-//
+    //
+    // Buttons -------------------------------------------------------------------------------------------
+    //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //
@@ -216,7 +221,7 @@ class MeditationScreen: UIViewController {
         //
         view.addSubview(blur4)
     }
-   
+    
     
     
     
@@ -241,8 +246,9 @@ class MeditationScreen: UIViewController {
     }
     
     // Update Timer
-    func updateTimer() {
+    @objc func updateTimer() {
         //
+        // MARK: End of meditation
         if timerValue == 0 {
             //
             timerCountDown.invalidate()
@@ -260,8 +266,16 @@ class MeditationScreen: UIViewController {
             updateWeekProgress()
             updateMonthProgress()
             //
+            // Schedule Tracking
+            //            updateScheduleTracking(fromSchedule: fromSchedule)
+            ScheduleVariables.shared.shouldReloadChoice = true
+            //
+            if UIScreen.main.brightness == 0 {
+                UIScreen.main.brightness = brightness
+            }
+            //
             self.dismiss(animated: true)
-        //
+            //
         } else {
             timerValue -= 1
             if isHours == true {
@@ -276,7 +290,7 @@ class MeditationScreen: UIViewController {
     //
     // Start Timer
     //
-    func startTimer() {
+    @objc func startTimer() {
         // Dates and Times
         startTime = Date().timeIntervalSinceReferenceDate
         //
@@ -308,7 +322,7 @@ class MeditationScreen: UIViewController {
                     }
                 }
             }
-
+            
             //
             // Ending Bell
             // Requires different audio player to continue playing after view is dismissed
@@ -332,16 +346,16 @@ class MeditationScreen: UIViewController {
             //
             // Background Sound
             if meditationArray[selectedPreset][3][0][0] as! Int != -1 {
-            let url = Bundle.main.url(forResource: backgroundSoundsArray[meditationArray[selectedPreset][3][0][0] as! Int], withExtension: "caf")!
-            //
-            do {
-                let bell = try AVAudioPlayer(contentsOf: url)
-                soundPlayer = bell
-                soundPlayer.numberOfLoops = -1
-                bell.play()
-            } catch {
-                // couldn't load file :(
-            }
+                let url = Bundle.main.url(forResource: backgroundSoundsArray[meditationArray[selectedPreset][3][0][0] as! Int], withExtension: "caf")!
+                //
+                do {
+                    let bell = try AVAudioPlayer(contentsOf: url)
+                    soundPlayer = bell
+                    soundPlayer.numberOfLoops = -1
+                    bell.play()
+                } catch {
+                    // couldn't load file :(
+                }
             }
         }
         
@@ -364,15 +378,11 @@ class MeditationScreen: UIViewController {
         // Begin Timer
         timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
     }
-
     
-//
-// Buttons -------------------------------------------------------------------------------------------
-//
-    // Hide Screen
-    let hideScreenView = UIView()
+    
     //
-    var brightness = UIScreen.main.brightness
+    // Buttons -------------------------------------------------------------------------------------------
+    //
     //
     @IBAction func hideScreen(_ sender: Any) {
         // Hide Screen view
@@ -410,12 +420,12 @@ class MeditationScreen: UIViewController {
         let title = NSLocalizedString("finishEarly", comment: "")
         let message = NSLocalizedString("finishEarlyMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = colour2
-        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        alert.view.tintColor = Colours.colour2
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         // Action
         let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
             UIAlertAction in
@@ -434,6 +444,9 @@ class MeditationScreen: UIViewController {
                 }
             }
             NotificationCenter.default.removeObserver(self)
+            if UIScreen.main.brightness == 0 {
+                UIScreen.main.brightness = self.brightness
+            }
             self.dismiss(animated: true)
         }
         let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
@@ -447,3 +460,4 @@ class MeditationScreen: UIViewController {
     }
     //
 }
+

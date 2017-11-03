@@ -20,7 +20,7 @@ class ClassicChoiceG: UIViewController  {
     
     // Full Body
     @IBOutlet weak var fullBody: UIButton!
-
+    
     // Upper Lower
     @IBOutlet weak var upperBody: UIButton!
     @IBOutlet weak var lowerBody: UIButton!
@@ -43,7 +43,7 @@ class ClassicChoiceG: UIViewController  {
     @IBOutlet weak var stack1Bottom: NSLayoutConstraint!
     //
     @IBOutlet weak var stack2Bottom: NSLayoutConstraint!
-        //
+    //
     @IBOutlet weak var connection1Width: NSLayoutConstraint!
     //
     @IBOutlet weak var connection2Width: NSLayoutConstraint!
@@ -53,17 +53,17 @@ class ClassicChoiceG: UIViewController  {
     @IBOutlet weak var connection3Width: NSLayoutConstraint!
     //
     @IBOutlet weak var connection3Trailing: NSLayoutConstraint!
-   
+    
     //
     var workoutType2 = Int()
-//
-// View did load ----------------------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load ----------------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Colours
-        view.backgroundColor = colour1
+        view.backgroundColor = Colours.colour1
         
         // Titles
         navigationBar.title = (NSLocalizedString("classic", comment: ""))
@@ -71,9 +71,9 @@ class ClassicChoiceG: UIViewController  {
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        fullBody.setTitleColor(colour2, for: .normal)
+        fullBody.setTitleColor(Colours.colour2, for: .normal)
         fullBody.layer.borderWidth = 5
-        fullBody.layer.borderColor = colour2.cgColor
+        fullBody.layer.borderColor = Colours.colour2.cgColor
         fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
         fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         fullBody.titleLabel?.textAlignment = .center
@@ -88,45 +88,45 @@ class ClassicChoiceG: UIViewController  {
         //
         upperBody.setTitle(NSLocalizedString("upper", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        upperBody.setTitleColor(colour2, for: .normal)
+        upperBody.setTitleColor(Colours.colour2, for: .normal)
         upperBody.layer.borderWidth = 5
-        upperBody.layer.borderColor = colour2.cgColor
+        upperBody.layer.borderColor = Colours.colour2.cgColor
         upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
         upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         upperBody.titleLabel?.textAlignment = .center
         //
         lowerBody.setTitle(NSLocalizedString("lower", comment: ""), for: UIControlState.normal)
         lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        lowerBody.setTitleColor(colour2, for: .normal)
+        lowerBody.setTitleColor(Colours.colour2, for: .normal)
         lowerBody.layer.borderWidth = 5
-        lowerBody.layer.borderColor = colour2.cgColor
+        lowerBody.layer.borderColor = Colours.colour2.cgColor
         lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
         lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         lowerBody.titleLabel?.textAlignment = .center
         //
         legs.setTitle(NSLocalizedString("legs", comment: ""), for: UIControlState.normal)
         legs.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        legs.setTitleColor(colour2, for: .normal)
+        legs.setTitleColor(Colours.colour2, for: .normal)
         legs.layer.borderWidth = 5
-        legs.layer.borderColor = colour2.cgColor
+        legs.layer.borderColor = Colours.colour2.cgColor
         legs.titleLabel?.adjustsFontSizeToFitWidth = true
         legs.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         legs.titleLabel?.textAlignment = .center
         //
         pull.setTitle(NSLocalizedString("pull", comment: ""), for: UIControlState.normal)
         pull.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        pull.setTitleColor(colour2, for: .normal)
+        pull.setTitleColor(Colours.colour2, for: .normal)
         pull.layer.borderWidth = 5
-        pull.layer.borderColor = colour2.cgColor
+        pull.layer.borderColor = Colours.colour2.cgColor
         pull.titleLabel?.adjustsFontSizeToFitWidth = true
         pull.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         pull.titleLabel?.textAlignment = .center
         //
         push.setTitle(NSLocalizedString("push", comment: ""), for: UIControlState.normal)
         push.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        push.setTitleColor(colour2, for: .normal)
+        push.setTitleColor(Colours.colour2, for: .normal)
         push.layer.borderWidth = 5
-        push.layer.borderColor = colour2.cgColor
+        push.layer.borderColor = Colours.colour2.cgColor
         push.titleLabel?.adjustsFontSizeToFitWidth = true
         push.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         push.titleLabel?.textAlignment = .center
@@ -151,9 +151,9 @@ class ClassicChoiceG: UIViewController  {
         }
     }
     
-//
-// View did layout subviews ---------------------------------------------------------------------------------------------
-//
+    //
+    // View did layout subviews ---------------------------------------------------------------------------------------------
+    //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //
@@ -175,71 +175,67 @@ class ClassicChoiceG: UIViewController  {
         push.layer.cornerRadius = stackView2.frame.size.height / 2
         push.layer.masksToBounds = true
     }
-
+    
     
     // Full
     @IBAction func full(_ sender: Any) {
-        selectedSession[1] = 0
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 0
+        SelectedSession.shared.selectedSession[2] = -1
         //
         self.performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Upper
     @IBAction func upper(_ sender: Any) {
-        selectedSession[1] = 1
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 1
+        SelectedSession.shared.selectedSession[2] = -1
         //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Lower
     @IBAction func lower(_ sender: Any) {
-        selectedSession[1] = 2
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 2
+        SelectedSession.shared.selectedSession[2] = -1
         //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Legs
     @IBAction func legs(_ sender: Any) {
-        selectedSession[1] = 3
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 3
+        SelectedSession.shared.selectedSession[2] = -1
         //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Pull
     @IBAction func pull(_ sender: Any) {
-        selectedSession[1] = 4
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 4
+        SelectedSession.shared.selectedSession[2] = -1
         //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Push
     @IBAction func push(_ sender: Any) {
-        selectedSession[1] = 5
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 5
+        SelectedSession.shared.selectedSession[2] = -1
         //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     
-//
-// Remove back button text
-//
+    //
+    // Remove back button text
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Pass Data
-        if (segue.identifier == "warmupSegue") {
-            //
-            let destinationVC = segue.destination as! FinalChoice
-        }
         //
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
     }
     
-//
+    //
 }
+
