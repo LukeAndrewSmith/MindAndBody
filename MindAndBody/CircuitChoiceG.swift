@@ -39,18 +39,18 @@ class CircuitChoiceG: UIViewController  {
     @IBOutlet weak var connectionWidth: NSLayoutConstraint!
     //
     @IBOutlet weak var connectionTrailing: NSLayoutConstraint!
-
+    
     
     //
     var workoutType2 = Int()
-//
-// View did load -------------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load -------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         // Colours
-        view.backgroundColor = colour1
+        view.backgroundColor = Colours.colour1
         
         // Titles
         navigationBar.title = (NSLocalizedString("circuit", comment: ""))
@@ -58,21 +58,21 @@ class CircuitChoiceG: UIViewController  {
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        fullBody.setTitleColor(colour2, for: .normal)
+        fullBody.setTitleColor(Colours.colour2, for: .normal)
         fullBody.layer.borderWidth = 5
-        fullBody.layer.borderColor = colour2.cgColor
+        fullBody.layer.borderColor = Colours.colour2.cgColor
         //
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        upperBody.setTitleColor(colour2, for: .normal)
+        upperBody.setTitleColor(Colours.colour2, for: .normal)
         upperBody.layer.borderWidth = 5
-        upperBody.layer.borderColor = colour2.cgColor
+        upperBody.layer.borderColor = Colours.colour2.cgColor
         //
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
-        lowerBody.setTitleColor(colour2, for: .normal)
+        lowerBody.setTitleColor(Colours.colour2, for: .normal)
         lowerBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         lowerBody.layer.borderWidth = 5
-        lowerBody.layer.borderColor = colour2.cgColor
+        lowerBody.layer.borderColor = Colours.colour2.cgColor
         
         // Iphone 5/SE
         if UIScreen.main.nativeBounds.height < 1334 {
@@ -88,9 +88,9 @@ class CircuitChoiceG: UIViewController  {
     }
     
     
-//
-// View did layout subviews -------------------------------------------------------------------------------------------------------
-//
+    //
+    // View did layout subviews -------------------------------------------------------------------------------------------------------
+    //
     // Layout Subviews
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -120,43 +120,39 @@ class CircuitChoiceG: UIViewController  {
     
     // Full
     @IBAction func full(_ sender: Any) {
-        selectedSession[1] = 7
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 7
+        SelectedSession.shared.selectedSession[2] = -1
         //
         performSegue(withIdentifier: "circuitSegue", sender: nil)
     }
     
     // Upper
     @IBAction func upper(_ sender: Any) {
-        selectedSession[1] = 8
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 8
+        SelectedSession.shared.selectedSession[2] = -1
         //
         performSegue(withIdentifier: "circuitSegue", sender: nil)
     }
     
     // Lower
     @IBAction func lower(_ sender: Any) {
-        selectedSession[1] = 9
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 9
+        SelectedSession.shared.selectedSession[2] = -1
         //
         performSegue(withIdentifier: "circuitSegue", sender: nil)
     }
     
     
-//
-// Remove Back Bar Text
-//
+    //
+    // Remove Back Bar Text
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Pass Data
-        if (segue.identifier == "circuitSegue") {
-            //
-            let destinationVC = segue.destination as! FinalChoice
-        }
         //
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
     }
     
-//
+    //
 }
+

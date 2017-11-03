@@ -15,26 +15,26 @@ import UIKit
 // Slide Menu Class ----------------------------------------------------------------------------------
 //
 class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
     
-//
-// Outlets ----------------------------------------------------------------------------------
-//
+    
+    //
+    // Outlets ----------------------------------------------------------------------------------
+    //
     @IBOutlet weak var menuTable: UITableView!
     
     
-//
-// Arrays ----------------------------------------------------------------------------------
-//
+    //
+    // Arrays ----------------------------------------------------------------------------------
+    //
     var rowTitleArray: [String] =
         [
             "sessions",
             "schedule",
             "tracking",
             "lessons",
-            "profile",
+            //            "profile",
             "settings"
-        ]
+    ]
     
     var rowIconArray: [UIImage] =
         [
@@ -42,40 +42,27 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
             #imageLiteral(resourceName: "Calendar"),
             #imageLiteral(resourceName: "Graph"),
             #imageLiteral(resourceName: "QuestionMarkMenu"),
-            #imageLiteral(resourceName: "Profile"),
+            //            #imageLiteral(resourceName: "Profile"),
             #imageLiteral(resourceName: "Settings")
-        ]
+    ]
     
-//
-// View Did Load ----------------------------------------------------------------------------------
-//
+    //
+    // View Did Load ----------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
-               
+        
         //
-        view.backgroundColor = colour1
+        view.backgroundColor = Colours.colour1
         //
         menuTable.tableFooterView = UIView()
-        menuTable.backgroundColor = colour1
-
+        menuTable.backgroundColor = Colours.colour1
+        
     }
     
     //
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //
-        // Automatic Selection
-        if automaticSelectionIsHappening == true {
-            let indexPath = NSIndexPath(row: 0, section: 0)
-            menuTable.selectRow(at: indexPath as IndexPath, animated: true, scrollPosition: .none)
-            menuTable.delegate?.tableView!(menuTable, didSelectRowAt: indexPath as IndexPath)
-        }
-    }
-    
-    
-//
-// TableView ----------------------------------------------------------------------------------
-//
+    // TableView ----------------------------------------------------------------------------------
+    //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -97,9 +84,9 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.textLabel?.textAlignment = .left
-        cell.backgroundColor = colour1
-        cell.textLabel?.textColor = colour2
-        cell.tintColor = colour2
+        cell.backgroundColor = Colours.colour1
+        cell.textLabel?.textColor = Colours.colour2
+        cell.tintColor = Colours.colour2
         //
         // Cell Image
         cell.imageView?.image = rowIconArray[indexPath.row]
@@ -118,43 +105,44 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         
         //
-        if indexPath.row != tabBarIndex {
-            new = true
-            tabBarIndex = indexPath.row
+        if indexPath.row != MenuVariables.shared.menuIndex {
+            MenuVariables.shared.isNewView = true
+            MenuVariables.shared.menuIndex = indexPath.row
         } else {
-            new = false
+            MenuVariables.shared.isNewView = false
         }
         
         //
-        self.dismiss(animated: true, completion: { finished in
+        self.dismiss(animated: true) {
             var toVC = UIViewController()
-                let viewNamesArray: [String] = ["view0", "view1", "view2", "view3", "view4", "view5"]
+            let viewNamesArray: [String] = ["view0", "view1", "view2", "view3", "view5"]
+            //                "view4", Note: Profile currently unused
+            //
+            switch MenuVariables.shared.menuIndex {
+            case 0:
+                toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! MindBodyNavigation
+            //
+            case 1:
+                toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! ScheduleNavigation
+            //
+            case 2:
+                toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! TrackingNavigation
+            //
+            case 3:
+                toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! LessonsNavigation
                 //
-                switch tabBarIndex {
-                case 0:
-                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! MindBodyNavigation
-                //
-                case 1:
-                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! ScheduleNavigation
-                //
-                case 2:
-                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! TrackingNavigation
-                //
-                case 3:
-                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! LessonsNavigation
-                //
-                case 4:
-                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! ProfileNavigation
-                //
-                case 5:
-                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! SettingsNavigation
-                //
-                default: break
-                }
+                //                case 4:
+                //                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! ProfileNavigation
+            //
+            case 4:
+                toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! SettingsNavigation
+            //
+            default: break
+            }
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.window?.rootViewController = toVC
-        })
-
+        }
+        
         //
         UIApplication.shared.statusBarStyle = .lightContent
         //
@@ -166,9 +154,9 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     
-//
-// Dismiss ----------------------------------------------------------------------------------
-//
+    //
+    // Dismiss ----------------------------------------------------------------------------------
+    //
     @IBAction func swipeCloseGesture(_ sender: Any) {
         //
         UIApplication.shared.statusBarStyle = .lightContent
@@ -182,3 +170,4 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
 }
+

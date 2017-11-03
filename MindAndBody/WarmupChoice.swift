@@ -45,15 +45,15 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     @IBOutlet weak var connectionLabelTrailing: NSLayoutConstraint!
     
     
-   
-//
-// View Did Load ---------------------------------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // View Did Load ---------------------------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Colours
-        view.backgroundColor = colour1
+        view.backgroundColor = Colours.colour1
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("warmup", comment: ""))
@@ -63,46 +63,46 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         fullBody.layer.borderWidth = 5
-        fullBody.layer.borderColor = colour2.cgColor
+        fullBody.layer.borderColor = Colours.colour2.cgColor
         fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
         fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         fullBody.titleLabel?.textAlignment = .center
-        fullBody.setTitleColor(colour2, for: .normal)
+        fullBody.setTitleColor(Colours.colour2, for: .normal)
         //
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         upperBody.layer.borderWidth = 5
-        upperBody.layer.borderColor = colour2.cgColor
+        upperBody.layer.borderColor = Colours.colour2.cgColor
         upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
         upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         upperBody.titleLabel?.textAlignment = .center
-        upperBody.setTitleColor(colour2, for: .normal)
+        upperBody.setTitleColor(Colours.colour2, for: .normal)
         //
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
         lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         lowerBody.layer.borderWidth = 5
-        lowerBody.layer.borderColor = colour2.cgColor
+        lowerBody.layer.borderColor = Colours.colour2.cgColor
         lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
         lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         lowerBody.titleLabel?.textAlignment = .center
-        lowerBody.setTitleColor(colour2, for: .normal)
+        lowerBody.setTitleColor(Colours.colour2, for: .normal)
         //
         cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
         cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         cardio.layer.borderWidth = 5
-        cardio.layer.borderColor = colour2.cgColor
+        cardio.layer.borderColor = Colours.colour2.cgColor
         cardio.titleLabel?.adjustsFontSizeToFitWidth = true
         cardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         cardio.titleLabel?.textAlignment = .center
-        cardio.setTitleColor(colour2, for: .normal)
+        cardio.setTitleColor(Colours.colour2, for: .normal)
         //
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 5
-        custom.layer.borderColor = colour2.cgColor
+        custom.layer.borderColor = Colours.colour2.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
         custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(colour2, for: .normal)
+        custom.setTitleColor(Colours.colour2, for: .normal)
         custom.layer.cornerRadius = 49/2
         custom.layer.masksToBounds = true
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -124,9 +124,9 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         
     }
     
-//
-// View Did Layout Subviews -----------------------------------------------------------------------------------------------------------
-//
+    //
+    // View Did Layout Subviews -----------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //
@@ -159,52 +159,48 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         fullBody.titleLabel?.textAlignment = .center
     }
     
-//
-// Button Segues ----------------------------------------------------------------------------------------------------------------
-//
+    //
+    // Button Segues ----------------------------------------------------------------------------------------------------------------
+    //
     // Indicate to next screen which button was pressed
     var warmupType = Int()
     // Full Body
     @IBAction func fullBody(_ sender: UIButton) {
-        selectedSession[1] = 0
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 0
+        SelectedSession.shared.selectedSession[2] = -1
         //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     // Upper Body
     @IBAction func upperBody(_ sender: Any) {
-        selectedSession[1] = 1
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 1
+        SelectedSession.shared.selectedSession[2] = -1
         //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     // Lower Body
     @IBAction func lowerBody(_ sender: Any) {
-        selectedSession[1] = 2
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 2
+        SelectedSession.shared.selectedSession[2] = -1
         //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     // Cardio
     @IBAction func cardio(_ sender: Any) {
-        selectedSession[1] = 3
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 3
+        SelectedSession.shared.selectedSession[2] = -1
         //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     
     // Pass data and remove back bar text on next screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Pass Data
-        if (segue.identifier == "customSegueWarmup") {
-            let destinationVC = segue.destination as! FinalChoiceCustom
-//            destinationVC.selectedType = 0
-        }
         
         // Remove back bar text
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
     }
-//
+    //
 }
+

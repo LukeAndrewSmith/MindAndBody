@@ -34,30 +34,25 @@ class GymChoice: UIViewController  {
     
     @IBOutlet weak var stackBottom: NSLayoutConstraint!
     
-  
-//
-// Remove back button text on subsequent screens
-//
+    
+    //
+    // Remove back button text on subsequent screens
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Pass Data 5x5
-        if (segue.identifier == "fiveSegue") {
-            //
-            let destinationVC = segue.destination as! FinalChoice
-        }
         //
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
     }
     
-//
-// View did load ----------------------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load ----------------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Colours
-        view.backgroundColor = colour1
+        view.backgroundColor = Colours.colour1
         
         // Titles
         navigationBar.title = (NSLocalizedString("gym", comment: ""))
@@ -67,22 +62,22 @@ class GymChoice: UIViewController  {
         classic.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         classic.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         classic.layer.borderWidth = 5
-        classic.layer.borderColor = colour2.cgColor
-        classic.setTitleColor(colour2, for: .normal)
+        classic.layer.borderColor = Colours.colour2.cgColor
+        classic.setTitleColor(Colours.colour2, for: .normal)
         //
         circuit.setTitle(NSLocalizedString("circuit", comment: ""), for: UIControlState.normal)
         circuit.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         circuit.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         circuit.layer.borderWidth = 5
-        circuit.layer.borderColor = colour2.cgColor
-        circuit.setTitleColor(colour2, for: .normal)
+        circuit.layer.borderColor = Colours.colour2.cgColor
+        circuit.setTitleColor(Colours.colour2, for: .normal)
         //
         fiveByFive.setTitle(NSLocalizedString("5x5", comment: ""), for: UIControlState.normal)
         fiveByFive.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         fiveByFive.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         fiveByFive.layer.borderWidth = 5
-        fiveByFive.layer.borderColor = colour2.cgColor
-        fiveByFive.setTitleColor(colour2, for: .normal)
+        fiveByFive.layer.borderColor = Colours.colour2.cgColor
+        fiveByFive.setTitleColor(Colours.colour2, for: .normal)
         //
         
         // Iphone 5/SE
@@ -96,9 +91,9 @@ class GymChoice: UIViewController  {
         }
     }
     
-//
-// View did layout subview -----------------------------------------------------------------------------------------------
-//
+    //
+    // View did layout subview -----------------------------------------------------------------------------------------------
+    //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //
@@ -128,9 +123,10 @@ class GymChoice: UIViewController  {
     //
     // MARK: Selected Session
     @IBAction func fivebyfiveAction(_ sender: Any) {
-        selectedSession[1] = 6
-        selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = 6
+        SelectedSession.shared.selectedSession[2] = -1
     }
     
     
 }
+

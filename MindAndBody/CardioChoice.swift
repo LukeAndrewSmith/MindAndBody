@@ -23,15 +23,15 @@ class CardioChoice: UIViewController  {
     // Custom
     @IBOutlet weak var custom: UIButton!
     
-//
-// View did load -----------------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load -----------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         // Colours
-        view.backgroundColor = colour1
+        view.backgroundColor = Colours.colour1
         
         // Titles
         navigationBar.title = (NSLocalizedString("cardio", comment: ""))
@@ -39,9 +39,9 @@ class CardioChoice: UIViewController  {
         // Button Titles
         hiit.setTitle(NSLocalizedString("hiit", comment: ""), for: UIControlState.normal)
         hiit.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        hiit.setTitleColor(colour2, for: .normal)
+        hiit.setTitleColor(Colours.colour2, for: .normal)
         hiit.layer.borderWidth = 5
-        hiit.layer.borderColor = colour2.cgColor
+        hiit.layer.borderColor = Colours.colour2.cgColor
         hiit.titleLabel?.adjustsFontSizeToFitWidth = true
         hiit.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         hiit.titleLabel?.textAlignment = .center
@@ -49,11 +49,11 @@ class CardioChoice: UIViewController  {
         custom.setTitle("C", for: .normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 5
-        custom.layer.borderColor = colour2.cgColor
+        custom.layer.borderColor = Colours.colour2.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(colour2, for: .normal)
+        custom.setTitleColor(Colours.colour2, for: .normal)
         custom.layer.cornerRadius = 49/2
         custom.layer.masksToBounds = true
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -62,12 +62,12 @@ class CardioChoice: UIViewController  {
         custom.titleLabel?.textAlignment = .center
         //
         
-            }
+    }
     
     
-//
-// View did layout subviews  ---------------------------------------------------------------------------------------------
-//
+    //
+    // View did layout subviews  ---------------------------------------------------------------------------------------------
+    //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //
@@ -81,17 +81,14 @@ class CardioChoice: UIViewController  {
     }
     
     
-//
-// Remove back bar text
-//
+    //
+    // Remove back bar text
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "customSegueWarmup") {
-            let destinationVC = segue.destination as! FinalChoiceCustom
-//            destinationVC.selectedType = 0
-        }
         //
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
     }
 }
+

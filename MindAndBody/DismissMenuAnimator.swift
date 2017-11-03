@@ -19,39 +19,38 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
         guard
-            let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
-            let toVC2 = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
             let snapshot = containerView.viewWithTag(12345)
             else {
                 return
         }
         //
-    
+        
         var snapshot2 = UIView()
         var snapshot1 = UIView()
         //
         var toVC = UIViewController()
-//        if new == true {
-        let viewNamesArray: [String] = ["view0", "view1", "view2", "view3", "view4", "view5"]
+        //        if MenuVariables.shared.isNewView = true {
+        let viewNamesArray: [String] = ["view0", "view1", "view2", "view3", "view5"]
+        // "view4", Note profile currently unused
         //
-        switch tabBarIndex {
+        switch MenuVariables.shared.menuIndex {
         case 0:
-            toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! MindBodyNavigation
+            toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! MindBodyNavigation
         //
         case 1:
-            toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! ScheduleNavigation
+            toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! ScheduleNavigation
         //
         case 2:
-            toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! TrackingNavigation
+            toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! TrackingNavigation
         //
         case 3:
-            toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! LessonsNavigation
+            toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! LessonsNavigation
+            //
+            //        case 4:
+            //            toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! ProfileNavigation
         //
         case 4:
-            toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! ProfileNavigation
-        //
-        case 5:
-            toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[tabBarIndex]) as! SettingsNavigation
+            toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! SettingsNavigation
         //
         default: break
         }
@@ -61,8 +60,8 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
         snapshot1 = UIScreen.main.snapshotView(afterScreenUpdates: false)
         keyWindow?.addSubview(snapshot1)
         keyWindow?.bringSubview(toFront: snapshot1)
-
-        if new == false {
+        
+        if MenuVariables.shared.isNewView == false {
             keyWindow?.addSubview(snapshot)
             keyWindow?.bringSubview(toFront: snapshot)
         } else {
@@ -79,27 +78,27 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
         
         //
         UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //
-            if new == false {
+            //
+            if MenuVariables.shared.isNewView == false {
                 snapshot.center.x = UIScreen.main.bounds.width * 0.5
             } else {
                 snapshot2.center.x = UIScreen.main.bounds.width * 0.5
             }
             
         }, completion: { _ in
-                let didTransitionComplete = !transitionContext.transitionWasCancelled
-                if didTransitionComplete {
-                    // 3   
-                    if new == false {
-                        snapshot.removeFromSuperview()
-                        snapshot1.removeFromSuperview()
-                    } else {
-                        toVC.view.layer.shadowRadius = 0
-                        snapshot1.removeFromSuperview()
-                        snapshot2.removeFromSuperview()
-                    }
+            let didTransitionComplete = !transitionContext.transitionWasCancelled
+            if didTransitionComplete {
+                // 3
+                if MenuVariables.shared.isNewView == false {
+                    snapshot.removeFromSuperview()
+                    snapshot1.removeFromSuperview()
+                } else {
+                    toVC.view.layer.shadowRadius = 0
+                    snapshot1.removeFromSuperview()
+                    snapshot2.removeFromSuperview()
                 }
-                transitionContext.completeTransition(didTransitionComplete)
+            }
+            transitionContext.completeTransition(didTransitionComplete)
         })
     }
 }

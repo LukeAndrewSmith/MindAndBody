@@ -35,9 +35,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var selectedSection = Int()
     
     
-//
-// View did load --------------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load --------------------------------------------------------------------------------------------------------
+    //
     //
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,12 +54,12 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         // Background Image
         //
-        if backgroundIndex < backgroundImageArray.count {
-            backgroundImageView.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == backgroundImageArray.count {
+        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
+            backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
+        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
             //
             backgroundImageView.image = nil
-            backgroundImageView.backgroundColor = colour1
+            backgroundImageView.backgroundColor = Colours.colour1
         }
         //
         self.view.addSubview(backgroundImageView)
@@ -73,7 +73,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         backgroundBlur.frame = backgroundImageView.bounds
         //
         view.insertSubview(backgroundBlur, aboveSubview: backgroundImageView)
-
+        
         // Tableview top view
         let topView = UIVisualEffectView()
         let topViewE = UIBlurEffect(style: .dark)
@@ -97,17 +97,17 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         //  Navigation Bar
         //
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-thin", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         navigationBar.title = NSLocalizedString("profile", comment: "")
-        self.navigationController?.navigationBar.barTintColor = colour2
-        self.navigationController?.navigationBar.tintColor = colour1
+        self.navigationController?.navigationBar.barTintColor = Colours.colour2
+        self.navigationController?.navigationBar.tintColor = Colours.colour1
         
     }
     
     
-//
-// Table View --------------------------------------------------------------------------------------------------------
-//
+    //
+    // Table View --------------------------------------------------------------------------------------------------------
+    //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -128,19 +128,19 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         default: return (view.bounds.height - 49) / 3
         }
     }
-        
+    
     
     // Blurs
     let blur = UIVisualEffectView()
     let blur2 = UIVisualEffectView()
     let blur3 = UIVisualEffectView()
-
+    
     
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-
+        
         
         switch indexPath.row {
         case 3:
@@ -149,7 +149,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.textLabel?.textAlignment = .center
-            cell.textLabel?.textColor = colour1
+            cell.textLabel?.textColor = Colours.colour1
             //
             // BackgroundBlur/Vibrancy
             let backgroundBlur = UIVisualEffectView()
@@ -159,10 +159,10 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             backgroundBlur.frame = cell.bounds
             //
-            cell.backgroundColor = colour3
+            cell.backgroundColor = Colours.colour3
             cell.backgroundView = backgroundBlur
             
-
+            
         default:
             //
             cell.backgroundColor = .clear
@@ -173,7 +173,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             centeredTextLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
             centeredTextLabel.textAlignment = .center
             centeredTextLabel.sizeToFit()
-            centeredTextLabel.textColor = colour1
+            centeredTextLabel.textColor = Colours.colour1
             centeredTextLabel.center = CGPoint(x: view.bounds.width/2, y: (view.bounds.height - 49)/6)
             cell.addSubview(centeredTextLabel)
             //
@@ -181,7 +181,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             // Border
             let seperator = CALayer()
             seperator.frame = CGRect(x: 0, y: (view.bounds.height - 49) / 3, width: view.frame.size.width, height: 1)
-            seperator.backgroundColor = colour1.cgColor
+            seperator.backgroundColor = Colours.colour1.cgColor
             seperator.opacity = 0.5
             cell.layer.addSublayer(seperator)
         }
@@ -189,7 +189,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-
+    
     // didSelectRow
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
@@ -242,11 +242,11 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-        alert.setValue(NSAttributedString(string: title, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSFontAttributeName: UIFont(name: "SFUIDisplay-light", size: 18)!, NSParagraphStyleAttributeName: paragraphStyle]), forKey: "attributedMessage")
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         // Ok Action
         let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { action in
         }
@@ -258,7 +258,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     
-
+    
     //
     // Slide Menu ---------------------------------------------------------------------------------------------------------------------
     //
@@ -282,7 +282,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if let destinationViewController = segue.destination as? SlideMenuView {
                 destinationViewController.transitioningDelegate = self
             }
-        //
+            //
         } else if (segue.identifier == "profileDetail") {
             // Remove back button text
             let backItem = UIBarButtonItem()
@@ -323,7 +323,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var walkthroughTextColor = UIColor()
     
     // Walkthrough
-    func walkthroughProfile() {
+    @objc func walkthroughProfile() {
         
         //
         if didSetWalkthrough == false {
@@ -343,10 +343,10 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
-            walkthroughLabel.textColor = colour2
-            walkthroughLabel.backgroundColor = colour1
-            walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = colour1.cgColor
+            walkthroughLabel.textColor = Colours.colour2
+            walkthroughLabel.backgroundColor = Colours.colour1
+            walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colours.colour1.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
             walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: ((view.bounds.height - 49) / 6) + CGFloat(TopBarHeights.navigationBarHeight) + 10)
@@ -357,11 +357,11 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(1)
+                self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    self.walkthroughHighlight.backgroundColor = colour1.withAlphaComponent(0.5)
+                    self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
                 }, completion: nil)
             })
             
@@ -378,8 +378,8 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             labelFrame = 1
             //
-            walkthroughBackgroundColor = colour1
-            walkthroughTextColor = colour2
+            walkthroughBackgroundColor = Colours.colour1
+            walkthroughTextColor = Colours.colour2
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -400,7 +400,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     
-//
+    //
 }
 
 
@@ -424,3 +424,4 @@ extension Profile: UIViewControllerTransitioningDelegate {
 class ProfileNavigation: UINavigationController {
     
 }
+

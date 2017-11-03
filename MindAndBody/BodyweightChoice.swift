@@ -43,14 +43,14 @@ class BodyweightChoice: UIViewController  {
     
     //
     var workoutType = Int()
-//
-// View did load ----------------------------------------------------------------------------------------------------------------
-//
+    //
+    // View did load ----------------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Colours
-        view.backgroundColor = colour1
+        view.backgroundColor = Colours.colour1
         
         // Titles
         if workoutType == 0 {
@@ -62,21 +62,21 @@ class BodyweightChoice: UIViewController  {
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        fullBody.setTitleColor(colour2, for: .normal)
+        fullBody.setTitleColor(Colours.colour2, for: .normal)
         fullBody.layer.borderWidth = 5
-        fullBody.layer.borderColor = colour2.cgColor
+        fullBody.layer.borderColor = Colours.colour2.cgColor
         //
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        upperBody.setTitleColor(colour2, for: .normal)
+        upperBody.setTitleColor(Colours.colour2, for: .normal)
         upperBody.layer.borderWidth = 5
-        upperBody.layer.borderColor = colour2.cgColor
+        upperBody.layer.borderColor = Colours.colour2.cgColor
         //
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
-        lowerBody.setTitleColor(colour2, for: .normal)
+        lowerBody.setTitleColor(Colours.colour2, for: .normal)
         lowerBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         lowerBody.layer.borderWidth = 5
-        lowerBody.layer.borderColor = colour2.cgColor
+        lowerBody.layer.borderColor = Colours.colour2.cgColor
         //
         
         
@@ -94,9 +94,9 @@ class BodyweightChoice: UIViewController  {
     }
     
     
-//
-// View did layout subviews ----------------------------------------------------------------------------------------------------------------
-//
+    //
+    // View did layout subviews ----------------------------------------------------------------------------------------------------------------
+    //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //
@@ -126,11 +126,11 @@ class BodyweightChoice: UIViewController  {
     // Full
     @IBAction func full(_ sender: Any) {
         if workoutType == 0 {
-            selectedSession[1] = 10
-            selectedSession[2] = -1
+            SelectedSession.shared.selectedSession[1] = 10
+            SelectedSession.shared.selectedSession[2] = -1
         } else {
-            selectedSession[1] = 13
-            selectedSession[2] = -1
+            SelectedSession.shared.selectedSession[1] = 13
+            SelectedSession.shared.selectedSession[2] = -1
         }
         //
         performSegue(withIdentifier: "bodyweightSegue", sender: nil)
@@ -139,11 +139,11 @@ class BodyweightChoice: UIViewController  {
     // Upper
     @IBAction func upper(_ sender: Any) {
         if workoutType == 0 {
-            selectedSession[1] = 11
-            selectedSession[2] = -1
+            SelectedSession.shared.selectedSession[1] = 11
+            SelectedSession.shared.selectedSession[2] = -1
         } else {
-            selectedSession[1] = 14
-            selectedSession[2] = -1
+            SelectedSession.shared.selectedSession[1] = 14
+            SelectedSession.shared.selectedSession[2] = -1
         }
         //
         performSegue(withIdentifier: "bodyweightSegue", sender: nil)
@@ -152,26 +152,21 @@ class BodyweightChoice: UIViewController  {
     // Lower
     @IBAction func lower(_ sender: Any) {
         if workoutType == 0 {
-            selectedSession[1] = 12
-            selectedSession[2] = -1
+            SelectedSession.shared.selectedSession[1] = 12
+            SelectedSession.shared.selectedSession[2] = -1
         } else {
-            selectedSession[1] = 15
-            selectedSession[2] = -1
+            SelectedSession.shared.selectedSession[1] = 15
+            SelectedSession.shared.selectedSession[2] = -1
         }
         //
         performSegue(withIdentifier: "bodyweightSegue", sender: nil)
     }
     
     
-//
-// Remove back bar text
-//
+    //
+    // Remove back bar text
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Pass Data
-        if (segue.identifier == "bodyweightSegue") {
-            //
-            let destinationVC = segue.destination as! FinalChoice
-        }
         //
         let backItem = UIBarButtonItem()
         backItem.title = ""
@@ -180,3 +175,4 @@ class BodyweightChoice: UIViewController  {
     
     
 }
+

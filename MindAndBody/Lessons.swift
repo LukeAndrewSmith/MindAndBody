@@ -45,22 +45,22 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             ["breathing", "coreActivation", "equipment", "posture"],
             ["anatomy", "nutrition", "appUsage"],
             
-        ]
+            ]
     
     //
     // Blurs
     let blur = UIVisualEffectView()
     let blur2 = UIVisualEffectView()
     let blur3 = UIVisualEffectView()
-
     
-//
-// View did load ------------------------------------------------------------------------------------
-//
-
-
-
-   //
+    
+    //
+    // View did load ------------------------------------------------------------------------------------
+    //
+    
+    
+    
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,16 +69,16 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         //
         tableView.backgroundColor = .clear
         tableView.backgroundView = UIView()
-
-
+        
+        
         // Background Image
         //
-        if backgroundIndex < backgroundImageArray.count {
-            backgroundImageView.image = getUncachedImage(named: backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == backgroundImageArray.count {
+        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
+            backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
+        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
             //
             backgroundImageView.image = nil
-            backgroundImageView.backgroundColor = colour1
+            backgroundImageView.backgroundColor = Colours.colour1
         }
         //
         self.view.addSubview(backgroundImageView)
@@ -91,7 +91,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         backgroundBlur.frame = backgroundImageView.bounds
         //
         view.insertSubview(backgroundBlur, aboveSubview: backgroundImageView)
-
+        
         // Tableview top view
         let topView = UIVisualEffectView()
         let topViewE = UIBlurEffect(style: .dark)
@@ -114,19 +114,19 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             self.walkthroughMindBody()
             UserDefaults.standard.set(true, forKey: "informationWalkthrough")
         }
-
+        
         //
         //  Navigation Bar
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFUIDisplay-thin", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         navigationBar.title = NSLocalizedString("lessons", comment: "")
-        self.navigationController?.navigationBar.barTintColor = colour2
-        self.navigationController?.navigationBar.tintColor = colour1
+        self.navigationController?.navigationBar.barTintColor = Colours.colour2
+        self.navigationController?.navigationBar.tintColor = Colours.colour1
     }
-  
- 
-//
-// TableView ------------------------------------------------------------------------------------
-//
+    
+    
+    //
+    // TableView ------------------------------------------------------------------------------------
+    //
     // Number of Sections
     func numberOfSections(in tableView: UITableView) -> Int {
         //
@@ -151,7 +151,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         // Header
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)!
-        header.textLabel?.textColor = colour1
+        header.textLabel?.textColor = Colours.colour1
         header.textLabel?.text = header.textLabel?.text?.capitalized
         
         //
@@ -160,7 +160,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         let seperator = CALayer()
         seperator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
-        seperator.backgroundColor = colour1.cgColor
+        seperator.backgroundColor = Colours.colour1.cgColor
         seperator.opacity = 0.5
         header.layer.addSublayer(seperator)
     }
@@ -192,47 +192,47 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         //default:
-            //
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            //
-            cell.textLabel?.text = NSLocalizedString(rowArray[indexPath.section][indexPath.row], comment: "")
-            cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = .clear
-            cell.backgroundView = UIView()
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            cell.textLabel?.textColor = colour1
-            //
-            // Indicator
-            cell.accessoryType = .disclosureIndicator
-            //
-            return cell
-
-//        }
-//        //
-//        return UITableViewCell()
+        //
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        //
+        cell.textLabel?.text = NSLocalizedString(rowArray[indexPath.section][indexPath.row], comment: "")
+        cell.textLabel?.textAlignment = NSTextAlignment.left
+        cell.backgroundColor = .clear
+        cell.backgroundView = UIView()
+        cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+        cell.textLabel?.textColor = Colours.colour1
+        //
+        // Indicator
+        cell.accessoryType = .disclosureIndicator
+        //
+        return cell
+        
+        //        }
+        //        //
+        //        return UITableViewCell()
     }
     
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         tableView.deselectRow(at: indexPath, animated: true)
-//        
-//        // Selected Topic
-//        selectedTopic[0] = indexPath.section
-//        selectedTopic[1] = indexPath.row
-//        
-//        
-//        // Perform Segue
-//        //
-//        // Anatomy
-//        if (indexPath.section, indexPath.row) == (0, 3) {
-//            performSegue(withIdentifier: "anatomy", sender: nil)
-//        } else if (indexPath.section, indexPath.row) == (1, 0) {
-//            performSegue(withIdentifier: "music", sender: nil)
-//        } else {
-//            performSegue(withIdentifier: "informationSegue", sender: nil)
-//        }
-
+        //
+        //        // Selected Topic
+        //        selectedTopic[0] = indexPath.section
+        //        selectedTopic[1] = indexPath.row
+        //
+        //
+        //        // Perform Segue
+        //        //
+        //        // Anatomy
+        //        if (indexPath.section, indexPath.row) == (0, 3) {
+        //            performSegue(withIdentifier: "anatomy", sender: nil)
+        //        } else if (indexPath.section, indexPath.row) == (1, 0) {
+        //            performSegue(withIdentifier: "music", sender: nil)
+        //        } else {
+        //            performSegue(withIdentifier: "informationSegue", sender: nil)
+        //        }
+        
     }
     
     // Mask cells under clear header
@@ -257,10 +257,10 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         mask.locations = [NSNumber(value: location), NSNumber(value: location)]
         return mask
     }
-
-//
-// Button Actions ------------------------------------------------------------------------------------
-//
+    
+    //
+    // Button Actions ------------------------------------------------------------------------------------
+    //
     // Button Actions
     func navigationButtonAction(_ sender: Any) {
         //
@@ -298,9 +298,9 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     
-//
-// Slide Menu ---------------------------------------------------------------------------------------------------------------------
-//
+    //
+    // Slide Menu ---------------------------------------------------------------------------------------------------------------------
+    //
     
     // Elements
     //
@@ -334,7 +334,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 let destinationVC = segue.destination as! LessonsScreen1
                 destinationVC.selectedTopic = selectedTopic
                 
-                //destinationVC.selectedSession = selectedSession
+                //destinationVC.SelectedSession.shared.selectedSession = SelectedSession.shared.selectedSession
                 
                 //destinationVC.guidedTitle = guidedTitleText
                 //destinationVC.keyArray = selectedArray
@@ -352,9 +352,9 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
     
-//
-// Walkthrough ------------------------------------------------------------------------------------
-//
+    //
+    // Walkthrough ------------------------------------------------------------------------------------
+    //
     var  viewNumber = 0
     let walkthroughView = UIView()
     let label = UILabel()
@@ -419,13 +419,13 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     //
-    func nextWalkthroughView(_ sender: Any) {
+    @objc func nextWalkthroughView(_ sender: Any) {
         walkthroughView.removeFromSuperview()
         label.removeFromSuperview()
         viewNumber = viewNumber + 1
         walkthroughMindBody()
     }
-//
+    //
 }
 
 
@@ -447,3 +447,4 @@ extension Lessons: UIViewControllerTransitioningDelegate {
 class LessonsNavigation: UINavigationController {
     
 }
+
