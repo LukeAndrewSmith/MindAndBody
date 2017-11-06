@@ -652,12 +652,10 @@ extension ScheduleScreen {
                 return scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][row][0][0]
             //
             // Later Choices
-            } else {
+            } else if isLastChoice() == true {
                 // All only have one array of bool for indicating final choice completion
                     // Flexibility, Toning, Muscle Gain, Strength, 1,3,4,5
-                if isLastChoice() == true {
                     return scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][row]
-                }
             }
         // Week
         } else if scheduleStyle == 1 {
@@ -923,7 +921,6 @@ extension ScheduleScreen {
         // Also marks as incomplete if previously comleted, note: rename
     @IBAction func markAsCompleted(_ sender: UILongPressGestureRecognizer) {
         //
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
 
         if sender.state == UIGestureRecognizerState.began {
@@ -937,25 +934,25 @@ extension ScheduleScreen {
             var index0 = Int()
             var index1 = Int()
             var index2 = Int()
+                        
             // If first choice
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
                 index0 = row!
                 index1 = 0
                 index2 = 0
             // If last choice
-            } else if isLastChoice() == true && row! == 0 {
+            } else if isLastChoice() == true && row! != 0 {
                 // Selected row in first choice
                 index0 = ScheduleVariables.shared.selectedRows[0]
                 // 1 to access group contents tracking in trackingArray
                 index1 = 1
-                // -1 as title included so offset by 1
+                // -1 as title included in table so offset by 1
                 index2 = row! - 1
             }
             
-            let indexOfGroup = schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][row!] as! Int
             //
             // Day View
-            if schedules[selectedSchedule][9][0] as! Int == 0 {
+            if scheduleStyle == 0 {
                 // Day
                 // [index1][index2] when in group tracking to access main page tracker, look at schedule data: scheduleDataStructures.scheduleTrackingArrays to understand
                 if scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] == false {
@@ -965,7 +962,7 @@ extension ScheduleScreen {
                 }
             //
             // Full Week View
-            } else if schedules[selectedSchedule][9][0] as! Int == 1 {
+            } else if scheduleStyle == 1 {
                 // Week
                 if scheduleTracking[selectedSchedule][7][index0][index1][index2] == false {
                     scheduleTracking[selectedSchedule][7][index0][index1][index2] = true
@@ -974,8 +971,7 @@ extension ScheduleScreen {
                 }
             }
             
-            //
-            UserDefaults.standard.set(schedules, forKey: "schedules")
+            // Update tracking array
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             //
             let indexPathToReload = NSIndexPath(row: row!, section: 0)
@@ -1023,7 +1019,7 @@ extension ScheduleScreen {
         let scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         var isCompleted = 0
         //
-        if scheduleTracking[selectedSchedule][day].count != 0 {
+        if scheduleTracking.count != 0 && scheduleTracking[selectedSchedule][day].count != 0 {
             for i in 0...scheduleTracking[selectedSchedule][day].count - 1 {
                 if scheduleTracking[selectedSchedule][day][i][0][0] == false {
                     isCompleted = 1
@@ -1037,12 +1033,28 @@ extension ScheduleScreen {
     }
     
     
-    
-    
-    
     //
-    // Edit tap, unused, might be to reorder table
-    func editButtonTap() {
+    // Should scroll be enabled
+    func scheduleTableScrollCheck() {
+        let nRows = scheduleTable.numberOfRows(inSection: 0)
+        var rowHeight = Int()
+        // If first screen of week view, height 49, else 72
+        if scheduleStyle == 1 && ScheduleVariables.shared.selectedRows[0] == -1 {
+            rowHeight = 49
+        } else {
+            rowHeight = 72
+        }
+        let totalRowHeights = CGFloat(nRows * rowHeight)
         //
+        let headerHeight = (view.bounds.height - 24.5) / 4
+        //
+        // Enabled
+        if headerHeight + totalRowHeights <= scheduleTable.bounds.maxY {
+            scheduleTable.isScrollEnabled = false
+        } else {
+            scheduleTable.isScrollEnabled = true
+        }
     }
+    
+    
 }

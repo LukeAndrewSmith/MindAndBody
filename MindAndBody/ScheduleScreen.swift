@@ -92,20 +92,28 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         if ScheduleVariables.shared.shouldReloadSchedule == true {
             ScheduleVariables.shared.shouldReloadSchedule = false
             let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            scheduleStyle = schedules[selectedSchedule][9][0] as! Int
+            if schedules.count != 0 {
+                scheduleStyle = schedules[selectedSchedule][9][0] as! Int
+            } else {
+                scheduleStyle = 0
+            }
             selectedSchedule = settings[7][0]
             layoutViews()
             // If day view enable swipes
-            if schedules[selectedSchedule][9][0] as! Int == 0 {
-                daySwipeLeft.isEnabled = true
-                daySwipeRight.isEnabled = true
-                // Else if week view disable swipes
-            } else if schedules[selectedSchedule][9][0] as! Int == 1 {
-                daySwipeLeft.isEnabled = false
-                daySwipeRight.isEnabled = false
+            if schedules.count != 0 {
+                if schedules[selectedSchedule][9][0] as! Int == 0 {
+                    daySwipeLeft.isEnabled = true
+                    daySwipeRight.isEnabled = true
+                    // Else if week view disable swipes
+                } else if schedules[selectedSchedule][9][0] as! Int == 1 {
+                    daySwipeLeft.isEnabled = false
+                    daySwipeRight.isEnabled = false
+                }
             }
             
             scheduleTable.reloadData()
+            //
+            scheduleTableScrollCheck()
         }
     }
     
@@ -337,7 +345,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         selectedSchedule = settings[7][0]
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
-        scheduleStyle = schedules[selectedSchedule][9][0] as! Int
+        if schedules.count != 0 {
+            scheduleStyle = schedules[selectedSchedule][9][0] as! Int
+        } else {
+            scheduleStyle = 0
+        }
         //
         // Present as days or as week
         // days
@@ -410,6 +422,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //
         updateDayIndicatorColours()
+        
+        //
+        scheduleTableScrollCheck()
     }
     
     //
@@ -521,7 +536,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         case scheduleTable:
             // First Screen, showing groups
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
-                return schedules[selectedSchedule][ScheduleVariables.shared.selectedDay].count
+                if schedules.count != 0 {
+                    return schedules[selectedSchedule][ScheduleVariables.shared.selectedDay].count
+                } else {
+                    return 0
+                }
                 // TODO: return schedules[selectedSchedule][ScheduleVariables.shared.selectedDay].count
                 // TODO: replay schedules[selectedSchedule] ([0]) with variable selectedSchedule indicating the selected schedule
                 // Selecting a session
@@ -604,7 +623,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     cell.accessoryType = .checkmark
                 }
                 
-                // Currently selecting a session, i.e not first screen
+            // Currently selecting a session, i.e not first screen
             } else {
                 // If title
                 if indexPath.row == 0 {
@@ -860,7 +879,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         if tableView == scheduleTable {
             return false
         } else if tableView == scheduleChoiceTable {
-            if indexPath.row != 0 && indexPath.row != schedules.count {
+            if indexPath.row != schedules.count {
                 return true
             }
         }
@@ -889,7 +908,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-            scheduleChoiceTable.reloadData()
         }
     }
     
@@ -967,8 +985,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             backItem.title = ""
             navigationItem.backBarButtonItem = backItem
         } else if segue.identifier == "EditProfileSegue" {
-            let destinationNC = segue.destination as! InitialProfileNavigation
-            let destinationVC = destinationNC.viewControllers.first as! InitialProfileQuestion
+            let destinationVC = segue.destination as! Profile
             destinationVC.comingFromSchedule = true
         } else if segue.identifier == "EditScheduleSegue" {
             let destinationNC = segue.destination as! ScheduleViewQuestionNavigation

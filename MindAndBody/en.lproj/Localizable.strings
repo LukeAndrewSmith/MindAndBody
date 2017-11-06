@@ -1562,7 +1562,7 @@
 // Overview
 "initialInfo1" = "• Create and follow a weekly schedule";
 "initialInfo2" = "• Choose how best to work towards each goal each day";
-"initialInfo3" = "• Track the % you done of what you planned";
+"initialInfo3" = "• Track the % you've done of what you planned";
 "initialInfo4" = "• Achieve your goals";
 "moreInfo" = "More info.";
 // More info
@@ -1596,12 +1596,15 @@
 //
 // MARK: Profile //
 //
+// Initial profile question"profileQuestion" = "I would like to :";
+"profileQuestion" = "Schedule options :";
+// Initial profile question options
+"appApp" = "App - App\nApp helps create schedule\nApp chooses sessions";
+"appCustom" = "App - Custom\nApp helps create schedule\nI choose sessions";
+"customApp" = "Custom - App\nI create custom schedule\nApp chooses sessions";
+"customCustom" = "Custom - Custom\nI create custom schedule\nI choose sessions";
 
-// Quick question, how to create profile
-"profileQuestion" = "I would like to :";
-"profileQuestion1" = "Fill in my profile and let the app choose difficulty levels for me\n(Recommended)"; // Fill in my profile
-"profileQuestion2" = "Decide myself what difficulty levels are relevant to me"; // Decide my difficulty levels
-"profileQuestion3" = "Not have the app present sessions based on difficulty levels, i.e choose each session, each time\n(not recommended)"; // Choose sessions
+
 
     //
     // Title //

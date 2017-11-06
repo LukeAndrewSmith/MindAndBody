@@ -153,7 +153,3 @@ class ScheduleViewQuestion: UIViewController {
     }
     
 }
-
-class ScheduleViewQuestionNavigation: UINavigationController {
-    
-}

@@ -54,7 +54,7 @@ extension ScheduleScreen {
             ScheduleVariables.shared.choiceProgress[0] = -1
             ScheduleVariables.shared.choiceProgress[1] = 0
             // Enable table scroll & schedule choice button & remove mask view
-            scheduleTable.isScrollEnabled = true
+            scheduleTableScrollCheck()
             navigationBar.rightBarButtonItem?.isEnabled = true
             removeMaskView()
             slideRight()
@@ -70,7 +70,7 @@ extension ScheduleScreen {
     // Create Mask Views
     func createMaskView(alpha: CGFloat) {
         // Disable table scroll & schedule choice button
-        scheduleTable.isScrollEnabled = false
+        scheduleTableScrollCheck()
         navigationBar.rightBarButtonItem?.isEnabled = false
         //
         let screenFrame = UIScreen.main.bounds

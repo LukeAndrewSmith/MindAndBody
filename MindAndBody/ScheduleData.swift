@@ -208,30 +208,7 @@ enum scheduleDataStructures {
     // Schedules
     static let registerSchedules: [[[Any]]] =
         [
-            // App Schedule
-            [
-                // Monday
-                [],
-                // Tuesday
-                [],
-                // Wednesday
-                [],
-                // Thursday
-                [],
-                // Friday
-                [],
-                // Saturday
-                [],
-                // Sunday
-                [],
-                // Full week as list - 7
-                [],
-                // Title - 8
-                ["appSchedule"],
-                // Schedule style: day(0) or full week (1) - 9
-                [0]
-            ],
-            ]
+        ]
     
     // Custom schedules insert this into schedules array
     static let emptyWeek: [[Any]] =
@@ -252,34 +229,41 @@ enum scheduleDataStructures {
             [],
             // Full week list - 7
             [],
+                // Information about schedule
             // Title - 8
             [""], // String
             // Schedule style: day(0) or full week (1) - 9
-            [0]
+            [0],
+            // Session choice style
+            [],
+            // Empty arrays incase more data needs to be stored one day
+            [],
+            //
+            []
     ]
     
     // Tracking
     static let registerTracking: [[[[[Bool]]]]] =
         [
-            // Tracking App Schedule
-            [
-                // Monday
-                [],
-                // Tuesday
-                [],
-                // Wednesday
-                [],
-                // Thursday
-                [],
-                // Friday
-                [],
-                // Saturday
-                [],
-                // Sunday
-                [],
-                // Full week as list - 7
-                []
-            ],
+//            // Tracking App Schedule
+//            [
+//                // Monday
+//                [],
+//                // Tuesday
+//                [],
+//                // Wednesday
+//                [],
+//                // Thursday
+//                [],
+//                // Friday
+//                [],
+//                // Saturday
+//                [],
+//                // Sunday
+//                [],
+//                // Full week as list - 7
+//                []
+//            ],
             // Tracking Custom Schedule
     ]
     

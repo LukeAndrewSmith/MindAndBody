@@ -447,7 +447,7 @@
 		07702C811F4D9437000E1DB8 /* sumoSquatTwist.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C801F4D9437000E1DB8 /* sumoSquatTwist.png */; };
 		07702C831F4D943B000E1DB8 /* tinyFencerStretch.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */; };
 		077206821F90C52000818088 /* TimeBasedHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077206811F90C52000818088 /* TimeBasedHelpers.swift */; };
-		077876231F92A50D005CE68A /* InitialProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077876221F92A50D005CE68A /* InitialProfile.swift */; };
+		077876231F92A50D005CE68A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077876221F92A50D005CE68A /* Profile.swift */; };
 		077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DA1DA535830026895B /* AppDelegate.swift */; };
 		077AC0E21DA535840026895B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E01DA535840026895B /* Main.storyboard */; };
 		077AC0E41DA535840026895B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E31DA535840026895B /* Assets.xcassets */; };
@@ -455,7 +455,6 @@
 		077AC0F21DA535840026895B /* MindAndBodyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0F11DA535840026895B /* MindAndBodyTests.swift */; };
 		077AC1001DA54C810026895B /* Lessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0FF1DA54C810026895B /* Lessons.swift */; };
 		077AC1021DA573210026895B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC1011DA573210026895B /* Settings.swift */; };
-		077AC1041DA579680026895B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC1031DA579680026895B /* Profile.swift */; };
 		077AC1121DA7936E0026895B /* SF-UI-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC1091DA7936E0026895B /* SF-UI-Display-Black.otf */; };
 		077AC1131DA7936E0026895B /* SF-UI-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC10A1DA7936E0026895B /* SF-UI-Display-Bold.otf */; };
 		077AC1141DA7936E0026895B /* SF-UI-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC10B1DA7936E0026895B /* SF-UI-Display-Heavy.otf */; };
@@ -509,6 +508,7 @@
 		07DEE6F71E0AADE6003B89AB /* YogaChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F61E0AADE6003B89AB /* YogaChoice.swift */; };
 		07DEE6F91E0AADF2003B89AB /* MeditationChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */; };
 		07DEE6FB1E0AC47F003B89AB /* WorkoutChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6FA1E0AC47F003B89AB /* WorkoutChoice.swift */; };
+		07E1D4DF1FB0DDF600B53B85 /* ScheduleEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1D4DE1FB0DDF600B53B85 /* ScheduleEditing.swift */; };
 		07E45E641F4D9F2700A5AF49 /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E45E621F4D9F2700A5AF49 /* Pause.png */; };
 		07E45EB11F4DB45700A5AF49 /* upwardSalute.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E45EB01F4DB45700A5AF49 /* upwardSalute.png */; };
 		07E45EB31F4DB46400A5AF49 /* mountain.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E45EB21F4DB46400A5AF49 /* mountain.png */; };
@@ -1272,9 +1272,8 @@
 		07E465221F4ED1E400A5AF49 /* rearThigh@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E465041F4ED1E400A5AF49 /* rearThigh@3x.png */; };
 		07E465231F4ED1E400A5AF49 /* soleus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E465051F4ED1E400A5AF49 /* soleus@2x.png */; };
 		07E465241F4ED1E400A5AF49 /* soleus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E465061F4ED1E400A5AF49 /* soleus@3x.png */; };
-		07EFC0AA1F6585560030DCE6 /* ProfileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EFC0A91F6585560030DCE6 /* ProfileDetail.swift */; };
 		07EFC0AC1F66CCEF0030DCE6 /* ScheduleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */; };
-		07F8EDD51FA5DB3700C452F4 /* InitialProfileQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F8EDD41FA5DB3700C452F4 /* InitialProfileQuestion.swift */; };
+		07F8EDD51FA5DB3700C452F4 /* ScheduleTypeQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F8EDD41FA5DB3700C452F4 /* ScheduleTypeQuestion.swift */; };
 		07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F912071DC2D1240004C924 /* WarmupChoice.swift */; };
 		07FE380C1DF9B3A200E7EA20 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07FE380E1DF9B3A200E7EA20 /* Localizable.strings */; };
 		07FFA30F1F4C614B00E9B0C1 /* cardioWarmup.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FFA30E1F4C614B00E9B0C1 /* cardioWarmup.png */; };
@@ -1826,7 +1825,7 @@
 		07702C801F4D9437000E1DB8 /* sumoSquatTwist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sumoSquatTwist.png; sourceTree = "<group>"; };
 		07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tinyFencerStretch.png; sourceTree = "<group>"; };
 		077206811F90C52000818088 /* TimeBasedHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedHelpers.swift; sourceTree = "<group>"; };
-		077876221F92A50D005CE68A /* InitialProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialProfile.swift; sourceTree = "<group>"; };
+		077876221F92A50D005CE68A /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		077AC0D71DA535830026895B /* MindAndBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindAndBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		077AC0DA1DA535830026895B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		077AC0E11DA535840026895B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1838,7 +1837,6 @@
 		077AC0F31DA535840026895B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		077AC0FF1DA54C810026895B /* Lessons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lessons.swift; sourceTree = "<group>"; };
 		077AC1011DA573210026895B /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		077AC1031DA579680026895B /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		077AC1091DA7936E0026895B /* SF-UI-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Black.otf"; sourceTree = "<group>"; };
 		077AC10A1DA7936E0026895B /* SF-UI-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Bold.otf"; sourceTree = "<group>"; };
 		077AC10B1DA7936E0026895B /* SF-UI-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Heavy.otf"; sourceTree = "<group>"; };
@@ -1891,6 +1889,7 @@
 		07DEE6F61E0AADE6003B89AB /* YogaChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaChoice.swift; sourceTree = "<group>"; };
 		07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationChoice.swift; sourceTree = "<group>"; };
 		07DEE6FA1E0AC47F003B89AB /* WorkoutChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutChoice.swift; sourceTree = "<group>"; };
+		07E1D4DE1FB0DDF600B53B85 /* ScheduleEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditing.swift; sourceTree = "<group>"; };
 		07E45E621F4D9F2700A5AF49 /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
 		07E45EB01F4DB45700A5AF49 /* upwardSalute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upwardSalute.png; sourceTree = "<group>"; };
 		07E45EB21F4DB46400A5AF49 /* mountain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mountain.png; sourceTree = "<group>"; };
@@ -2654,9 +2653,8 @@
 		07E465041F4ED1E400A5AF49 /* rearThigh@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rearThigh@3x.png"; sourceTree = "<group>"; };
 		07E465051F4ED1E400A5AF49 /* soleus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soleus@2x.png"; sourceTree = "<group>"; };
 		07E465061F4ED1E400A5AF49 /* soleus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soleus@3x.png"; sourceTree = "<group>"; };
-		07EFC0A91F6585560030DCE6 /* ProfileDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetail.swift; sourceTree = "<group>"; };
 		07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCreator.swift; sourceTree = "<group>"; };
-		07F8EDD41FA5DB3700C452F4 /* InitialProfileQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialProfileQuestion.swift; sourceTree = "<group>"; };
+		07F8EDD41FA5DB3700C452F4 /* ScheduleTypeQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeQuestion.swift; sourceTree = "<group>"; };
 		07F912071DC2D1240004C924 /* WarmupChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoice.swift; sourceTree = "<group>"; };
 		07FE380D1DF9B3A200E7EA20 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		07FE380F1DF9B3C700E7EA20 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
@@ -2774,6 +2772,37 @@
 				07FFA3A01F4CA1FD00E9B0C1 /* mountains.png */,
 			);
 			name = Backgrounds;
+			sourceTree = "<group>";
+		};
+		07094BE71FB0D129003DB553 /* Main Screens */ = {
+			isa = PBXGroup;
+			children = (
+				077AC0FD1DA54C0C0026895B /* MindBody (choices/sessions etc.) */,
+				075A0DB91E8D68800008E014 /* Schedule */,
+				075A0DBA1E8D688D0008E014 /* Tracking */,
+				077AC0FE1DA54C500026895B /* Lessons */,
+				07995A371E86A83A0009C9B1 /* Settings */,
+			);
+			name = "Main Screens";
+			sourceTree = "<group>";
+		};
+		07094BE81FB0D17F003DB553 /* Audio/Visual */ = {
+			isa = PBXGroup;
+			children = (
+				078C59541EC893EA00FA1890 /* Sounds */,
+				07038CC11F4C5BF2001CC6D5 /* Images */,
+			);
+			name = Audio/Visual;
+			sourceTree = "<group>";
+		};
+		07094BE91FB0D1B3003DB553 /* Schedule Abilities */ = {
+			isa = PBXGroup;
+			children = (
+				07E1D4DD1FB0DDE100B53B85 /* Schedule Editing */,
+				07F8EDD81FA5DB4900C452F4 /* Profile Editing */,
+				07D5C3D31F9E31B20038F143 /* Schedule Creation */,
+			);
+			name = "Schedule Abilities";
 			sourceTree = "<group>";
 		};
 		0719F2B31E50F8D100AC6729 /* Meditation Screens */ = {
@@ -2932,6 +2961,7 @@
 			children = (
 				07995A381E893E590009C9B1 /* ScheduleScreen.swift */,
 				07686A8C1F84398000C278CC /* Helpers */,
+				07094BE91FB0D1B3003DB553 /* Schedule Abilities */,
 			);
 			name = Schedule;
 			sourceTree = "<group>";
@@ -3607,13 +3637,13 @@
 			name = upwardsDog;
 			sourceTree = "<group>";
 		};
-		0778761C1F92A44B005CE68A /* One Time Modals */ = {
+		0778761C1F92A44B005CE68A /* Initial/Subscriptions (One time modals) */ = {
 			isa = PBXGroup;
 			children = (
 				077876211F92A4EA005CE68A /* Initial info screen */,
 				0778761F1F92A45A005CE68A /* Subscriptions */,
 			);
-			name = "One Time Modals";
+			name = "Initial/Subscriptions (One time modals)";
 			sourceTree = "<group>";
 		};
 		0778761F1F92A45A005CE68A /* Subscriptions */ = {
@@ -3656,19 +3686,12 @@
 				07FE380E1DF9B3A200E7EA20 /* Localizable.strings */,
 				077AC0DA1DA535830026895B /* AppDelegate.swift */,
 				077AC0E01DA535840026895B /* Main.storyboard */,
+				07094BE71FB0D129003DB553 /* Main Screens */,
 				077E47151EB9DC54005B0B22 /* Slide Menu */,
 				0789ED091F79A71E000EB739 /* Global */,
 				0789ED0A1F79A725000EB739 /* Data */,
-				077AC0FD1DA54C0C0026895B /* MindBody */,
-				075A0DB91E8D68800008E014 /* Schedule */,
-				075A0DBA1E8D688D0008E014 /* Tracking */,
-				077AC0FE1DA54C500026895B /* Lessons */,
-				077AC0FC1DA54BD60026895B /* Profile */,
-				07995A371E86A83A0009C9B1 /* Settings */,
-				07D5C3D31F9E31B20038F143 /* Schedule Creation */,
-				0778761C1F92A44B005CE68A /* One Time Modals */,
-				078C59541EC893EA00FA1890 /* Sounds */,
-				07038CC11F4C5BF2001CC6D5 /* Images */,
+				0778761C1F92A44B005CE68A /* Initial/Subscriptions (One time modals) */,
+				07094BE81FB0D17F003DB553 /* Audio/Visual */,
 				077AC0E31DA535840026895B /* Assets.xcassets */,
 				077AC0E51DA535840026895B /* LaunchScreen.storyboard */,
 				077AC0E81DA535840026895B /* Info.plist */,
@@ -3686,23 +3709,14 @@
 			path = MindAndBodyTests;
 			sourceTree = "<group>";
 		};
-		077AC0FC1DA54BD60026895B /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				077AC1031DA579680026895B /* Profile.swift */,
-				07EFC0A91F6585560030DCE6 /* ProfileDetail.swift */,
-			);
-			name = Profile;
-			sourceTree = "<group>";
-		};
-		077AC0FD1DA54C0C0026895B /* MindBody */ = {
+		077AC0FD1DA54C0C0026895B /* MindBody (choices/sessions etc.) */ = {
 			isa = PBXGroup;
 			children = (
 				07C2D3BB1EBA88CF000770DE /* MindBody.swift */,
 				07530C971E96716300BD33EC /* Choice Screens */,
 				07530C981E96717B00BD33EC /* Session Screens */,
 			);
-			name = MindBody;
+			name = "MindBody (choices/sessions etc.)";
 			sourceTree = "<group>";
 		};
 		077AC0FE1DA54C500026895B /* Lessons */ = {
@@ -4555,10 +4569,20 @@
 		07D5C3D31F9E31B20038F143 /* Schedule Creation */ = {
 			isa = PBXGroup;
 			children = (
-				07F8EDD81FA5DB4900C452F4 /* Profile */,
-				07F8EDD91FA5DB5E00C452F4 /* Schedule */,
+				07F8EDD41FA5DB3700C452F4 /* ScheduleTypeQuestion.swift */,
+				07D5C3D81F9E32430038F143 /* ScheduleViewQuestion.swift */,
+				07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */,
+				0750DB621F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift */,
 			);
 			name = "Schedule Creation";
+			sourceTree = "<group>";
+		};
+		07E1D4DD1FB0DDE100B53B85 /* Schedule Editing */ = {
+			isa = PBXGroup;
+			children = (
+				07E1D4DE1FB0DDF600B53B85 /* ScheduleEditing.swift */,
+			);
+			name = "Schedule Editing";
 			sourceTree = "<group>";
 		};
 		07E45E651F4DB0CA00A5AF49 /* Yoga */ = {
@@ -6828,23 +6852,12 @@
 			name = BodyWeight;
 			sourceTree = "<group>";
 		};
-		07F8EDD81FA5DB4900C452F4 /* Profile */ = {
+		07F8EDD81FA5DB4900C452F4 /* Profile Editing */ = {
 			isa = PBXGroup;
 			children = (
-				07F8EDD41FA5DB3700C452F4 /* InitialProfileQuestion.swift */,
-				077876221F92A50D005CE68A /* InitialProfile.swift */,
+				077876221F92A50D005CE68A /* Profile.swift */,
 			);
-			name = Profile;
-			sourceTree = "<group>";
-		};
-		07F8EDD91FA5DB5E00C452F4 /* Schedule */ = {
-			isa = PBXGroup;
-			children = (
-				07D5C3D81F9E32430038F143 /* ScheduleViewQuestion.swift */,
-				07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */,
-				0750DB621F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift */,
-			);
-			name = Schedule;
+			name = "Profile Editing";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -8272,7 +8285,7 @@
 				0750DB631F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift in Sources */,
 				07DEE6F71E0AADE6003B89AB /* YogaChoice.swift in Sources */,
 				077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */,
-				07F8EDD51FA5DB3700C452F4 /* InitialProfileQuestion.swift in Sources */,
+				07F8EDD51FA5DB3700C452F4 /* ScheduleTypeQuestion.swift in Sources */,
 				071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */,
 				07686A901F843A1600C278CC /* ScheduleHelpers.swift in Sources */,
 				076C68421ED497AD009160C2 /* BodyweightChoiceCC.swift in Sources */,
@@ -8285,7 +8298,7 @@
 				077BC6951F725DCB00B9E798 /* FinalChoiceCustom.swift in Sources */,
 				07995A391E893E590009C9B1 /* ScheduleScreen.swift in Sources */,
 				07CB04391E6049DF002066CD /* MeditationGuided.swift in Sources */,
-				077876231F92A50D005CE68A /* InitialProfile.swift in Sources */,
+				077876231F92A50D005CE68A /* Profile.swift in Sources */,
 				075732741E69957A003DA77E /* TrackingScreen.swift in Sources */,
 				072829EB1EA8A26A0090164A /* WorkoutSessionScreen.swift in Sources */,
 				071C4FB31E98D6D800328D18 /* MeditationTimer.swift in Sources */,
@@ -8305,8 +8318,8 @@
 				07B852621F83756C005F3781 /* ScheduleData.swift in Sources */,
 				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,
+				07E1D4DF1FB0DDF600B53B85 /* ScheduleEditing.swift in Sources */,
 				07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */,
-				07EFC0AA1F6585560030DCE6 /* ProfileDetail.swift in Sources */,
 				07D5C3D91F9E32430038F143 /* ScheduleViewQuestion.swift in Sources */,
 				0798381E1F8A8DD9007C3CF5 /* TimeBasedSession.swift in Sources */,
 				07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */,
@@ -8318,7 +8331,6 @@
 				07DEE6F31E0AADAC003B89AB /* StretchingChoice.swift in Sources */,
 				077C2C7E1E5C723D00BA62C0 /* GymChoice.swift in Sources */,
 				07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */,
-				077AC1041DA579680026895B /* Profile.swift in Sources */,
 				077E471B1EB9DFC6005B0B22 /* PresentMenuAnimator.swift in Sources */,
 				077E47231EB9EED3005B0B22 /* DismissMenuAnimator.swift in Sources */,
 				077E471F1EB9E221005B0B22 /* SlideMenuView.swift in Sources */,
