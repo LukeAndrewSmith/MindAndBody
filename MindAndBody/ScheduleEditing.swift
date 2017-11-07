@@ -132,7 +132,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             if schedules[selectedSchedule][9][0] as! Int == 0 {
                 viewFullWeekSwitch.isOn = false
                 // Off
-            } else if schedules[selectedSchedule][10][0] as! Int == 1 {
+            } else if schedules[selectedSchedule][9][0] as! Int == 1 {
                 viewFullWeekSwitch.isOn = true
             }
         
@@ -270,7 +270,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
             //2. Add the text field
             alert.addTextField { (textField: UITextField) in
-                textField.text = schedules[self.selectedSchedule][8][0] as! String
+                textField.text = schedules[self.selectedSchedule][8][0] as? String
                 textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
                 textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
             }
@@ -280,13 +280,13 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Update Title
                 let textField = alert?.textFields![0]
                 let lastIndex = schedules.count - 1
-                schedules[lastIndex][8][0] = textField?.text!
+                schedules[lastIndex][8][0] = textField?.text! ?? ""
                 //
                 // SET NEW ARRAY
                 UserDefaults.standard.set(schedules, forKey: "schedules")
                 //
                 // Update name in table
-                cell?.detailTextLabel?.text = schedules[self.selectedSchedule][8][0] as! String
+                cell?.detailTextLabel?.text = schedules[self.selectedSchedule][8][0] as? String
             })
             // Cancel action
             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
@@ -413,9 +413,8 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Going to schedule creator (profile)
         if segue.identifier == "OverviewSessionsSegue" {
-            let destinationVC = segue.destination as? Profile
+            let destinationVC = segue.destination as? ScheduleCreationHelp
             // indicates that profile irrelevant, only care about creating schedule
-            destinationVC?.comingFromScheduleEditing = true
         }
     }
     

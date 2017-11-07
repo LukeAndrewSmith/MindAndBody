@@ -932,6 +932,15 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         }
     }
     
+    // QuestionMark, information needed, show walkthrough
+    @IBAction func questionMarkButtonAciton(_ sender: Any) {
+        walkthroughView.alpha = 1
+        didSetWalkthrough = false
+        walkthroughProgress = 0
+        walkthroughSettings()
+    }
+    
+    
 //
 }
 

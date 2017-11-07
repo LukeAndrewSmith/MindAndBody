@@ -20,13 +20,10 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var sectionLabel: UILabel!
     @IBOutlet weak var backgroundImageView: UIImageView!
     //
-    @IBOutlet weak var dismissViewButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var skipToGoalsButton: UIButton!
     
     // Answer elements
-    // Age Picker
-    var agePicker = UIPickerView()
-    let okButton = UIButton()
     // Answer Table
     var answerLabelQuestion = UILabel()
     var answerImageView = UIImageView()
@@ -44,11 +41,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     var selectedSection = 0
     // Question progress, incrimented by nextQuestion()
     var selectedQuestion = 0
-    
-    // schedule
-    var comingFromSchedule = false
-    // from schedule editing
-    var comingFromScheduleEditing = false
     
     //
     // Age
@@ -101,21 +93,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         //
         //
         skipToGoalsButton.backgroundColor = Colours.colour2.withAlphaComponent(0.5)
-        if comingFromSchedule == true {
-            skipToGoalsButton.isUserInteractionEnabled = true
-            skipToGoalsButton.isEnabled = true
-            skipToGoalsButton.alpha = 1
-            dismissViewButton.isUserInteractionEnabled = true
-            dismissViewButton.isEnabled = true
-            dismissViewButton.alpha = 1
-        } else {
-            skipToGoalsButton.isUserInteractionEnabled = false
-            skipToGoalsButton.isEnabled = false
-            skipToGoalsButton.alpha = 0
-            dismissViewButton.isUserInteractionEnabled = false
-            dismissViewButton.isEnabled = false
-            dismissViewButton.alpha = 0
-        }
         
         //
         // Previous question swipe
@@ -130,20 +107,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(upSwipeAction))
         upSwipe.direction = .up
         questionsTable.addGestureRecognizer(upSwipe)
-        
-        //
-        // If coming from schedule editing, means that the user wants help editing schedule, so profile irrelevent, skip to schedule creation questions
-        if comingFromScheduleEditing == true {
-            //
-            // Go to relevant question
-            selectedQuestion = 19
-            updateProgress()
-            let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
-            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-            questionsTable.reloadData()
-            //
-            // Enable back button
-        }
     }
     
     //
@@ -156,7 +119,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             return 1
             // Goals/Session
         } else {
-            return scheduleDataStructures.profileQA[selectedSection].count
+            return scheduleDataStructures.scheduleCreationHelp[selectedSection].count
         }
     }
     
@@ -167,7 +130,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             return ""
             // Goals/Session
         } else {
-            return NSLocalizedString(scheduleDataStructures.profileQA[selectedSection][section][0], comment: "")
+            return NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][section][0], comment: "")
         }
     }
     
@@ -202,7 +165,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 return 0
                 // Goals/Session
             } else {
-                let height = questionsTable.bounds.height / CGFloat(scheduleDataStructures.profileQA[selectedSection].count * 2 + 1)
+                let height = questionsTable.bounds.height / CGFloat(scheduleDataStructures.scheduleCreationHelp[selectedSection].count * 2 + 1)
                 if height >= 45 {
                     return height
                 } else {
@@ -220,13 +183,13 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         if tableView == questionsTable {
             // Me
             if selectedSection == 0 {
-                let count = scheduleDataStructures.profileQA[0].count
+                let count = scheduleDataStructures.scheduleCreationHelp[0].count
                 return count
                 // Goals/Session
             } else {
                 // If last section, add extra cell for completion
                 // Goals -> nSessions, nSessions -> Schedule Creator
-                if section == scheduleDataStructures.profileQA[selectedSection].count - 1 {
+                if section == scheduleDataStructures.scheduleCreationHelp[selectedSection].count - 1 {
                     return 2
                 } else {
                     return 1
@@ -243,7 +206,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             if selectedSection == 0 {
                 return questionsTable.bounds.height
             } else {
-                let height = questionsTable.bounds.height / CGFloat(scheduleDataStructures.profileQA[selectedSection].count * 2 + 1)
+                let height = questionsTable.bounds.height / CGFloat(scheduleDataStructures.scheduleCreationHelp[selectedSection].count * 2 + 1)
                 if height >= 45 {
                     return height
                 } else {
@@ -264,20 +227,9 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             // Question Table
             if tableView == questionsTable && indexPath.row == selectedQuestion {
                 switch indexPath.row {
-                // Age Picker
-                case 0:
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileAgeCell", for: indexPath) as! ProfileAgeCell
-                    cell.row = indexPath.row
-                    cell.ageAnswer = ageAnswer
-                    cell.selectedQuestion = selectedQuestion
-                    cell.selectedSection = selectedSection
-                    cell.agePicker.reloadAllComponents()
-                    cell.delegate = self
-                    return cell
-                    //
                 // Answer Table with image (flexibility questions)
                 default:
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleCreationHelpCell", for: indexPath) as! ScheduleCreationHelpCell
                     cell.row = indexPath.row
                     cell.answerImageArray = scheduleDataStructures.answerImageArray
                     cell.selectedQuestion = selectedQuestion
@@ -588,15 +540,10 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     func updateProgress() {
         // Current Question
         // Add on selectedSection for goals and sessions
-        var currentQuestion = Float(selectedQuestion) + Float(selectedSection)
+        let currentQuestion = Float(selectedQuestion) + Float(selectedSection)
         // Total Number questions
         // + 2 for goals and n sessions
-        var questionCount = Float(scheduleDataStructures.profileQA[0].count + 2)
-        // -19 as relevant questions for schedule creation start at 19 therefore 19 == first question
-        if comingFromScheduleEditing == true {
-            currentQuestion -= 19
-            questionCount -= 19
-        }
+        let questionCount = Float(scheduleDataStructures.scheduleCreationHelp[0].count + 2)
         //
         if selectedQuestion > 0 {
             //
@@ -612,13 +559,13 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     func nextQuestion() {
         // Me Section
         // Next Question
-        if selectedSection == 0 && selectedQuestion != scheduleDataStructures.profileQA[selectedSection].count - 1 {
+        if selectedSection == 0 && selectedQuestion != scheduleDataStructures.scheduleCreationHelp[selectedSection].count - 1 {
             selectedQuestion += 1
             updateProgress()
             let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
             questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
             // -> Goals Section
-        } else if selectedQuestion == scheduleDataStructures.profileQA[selectedSection].count - 1 && selectedSection == 0 {
+        } else if selectedQuestion == scheduleDataStructures.scheduleCreationHelp[selectedSection].count - 1 && selectedSection == 0 {
             questionsTable.removeGestureRecognizer(downSwipe)
             sectionLabel.addGestureRecognizer(downTap)
             //
@@ -649,14 +596,8 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 snapShot2?.removeFromSuperview()
                 self.questionsTable.alpha = 1
             })
-            //
-            if comingFromSchedule == true {
-                skipToGoalsButton.isEnabled = false
-                skipToGoalsButton.isUserInteractionEnabled = false
-                skipToGoalsButton.alpha = 0
-            }
             
-            // -> NSession Section
+        // -> NSession Section
         } else {
             // Select app schedule
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
@@ -709,7 +650,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             if profileAnswers[0][selectedQuestion] != -1 {
                 // Me Section
                 // Next Question
-                if selectedQuestion != scheduleDataStructures.profileQA[selectedSection].count - 1 {
+                if selectedQuestion != scheduleDataStructures.scheduleCreationHelp[selectedSection].count - 1 {
                     selectedQuestion += 1
                     updateProgress()
                     let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
@@ -724,12 +665,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     @objc func previousQuestion() {
         // Me
         if selectedSection == 0 {
-            var initialQuestion = 0
-            // If coming from schedule, profile irrelevent, only creation of schedule relevant (question 19 or above)
-            if comingFromScheduleEditing == true {
-                initialQuestion = 19
-            }
-            if selectedQuestion > initialQuestion {
+            if selectedQuestion > 0 {
                 selectedQuestion -= 1
                 updateProgress()
                 let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
@@ -742,7 +678,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                     sectionLabel.text = NSLocalizedString("goals", comment: "")
                 }
             }
-            // Goals -> Me
+        // Goals -> Me
         } else if selectedSection == 1 {
             questionsTable.isScrollEnabled = false
             questionsTable.addGestureRecognizer(downSwipe)
@@ -756,15 +692,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             //
             sectionLabel.text = NSLocalizedString("me", comment: "")
             
-            if comingFromSchedule == true {
-                skipToGoalsButton.isEnabled = true
-                skipToGoalsButton.isUserInteractionEnabled = true
-                skipToGoalsButton.alpha = 1
-            }
-            //
-            //            questionsTable.reloadData()
-            
-            // Sessions -> Goals
+        // Sessions -> Goals
         } else {
             selectedSection -= 1
             updateProgress()
@@ -780,13 +708,190 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         skipToGoalsButton.isUserInteractionEnabled = false
         skipToGoalsButton.alpha = 0
         // Set selected question to last question and perform nextquestion()
-        selectedQuestion = scheduleDataStructures.profileQA[selectedSection].count - 1
+        selectedQuestion = scheduleDataStructures.scheduleCreationHelp[selectedSection].count - 1
         nextQuestion()
     }
     
     //
     // Dismiss View
-    @IBAction func dismissViewButtonAction(_ sender: Any) {
-        self.dismiss(animated: true)
+    @IBAction func backButtonAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+}
+
+//
+// MARK: Default Cell With Image
+class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
+    
+    weak var delegate: NextRowDelegate?
+    //
+    @IBOutlet weak var answerTableView: UITableView!
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var answerImageView: UIImageView!
+    @IBOutlet weak var elementStack: UIStackView!
+    @IBOutlet weak var answerImageLeading: NSLayoutConstraint!
+    @IBOutlet weak var answerImageTrailing: NSLayoutConstraint!
+    @IBOutlet weak var tableHeight: NSLayoutConstraint!
+    //
+    
+    //
+    // Passed data
+    var row = Int()
+    var questionsTableHeight = CGFloat()
+    var answerImageArray: [String] = []
+    var selectedQuestion = Int()
+    var selectedSection = Int()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        //
+        self.backgroundColor = .clear
+        self.selectionStyle = .none
+        // Questions Label
+        questionLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        questionLabel.textColor = Colours.colour1
+        questionLabel.layer.cornerRadius = 15
+        questionLabel.clipsToBounds = true
+        questionLabel.backgroundColor = Colours.colour2
+        questionLabel.lineBreakMode = .byWordWrapping
+        questionLabel.textAlignment = .center
+        questionLabel.numberOfLines = 2
+        questionLabel.adjustsFontSizeToFitWidth = true
+        // Demonstration Image View
+        if answerImageArray[row] == "" {
+            // Hide image
+            //            answerImageView.removeFromSuperview()
+            answerImageLeading.constant = elementStack.bounds.width / 2
+            answerImageTrailing.constant = elementStack.bounds.width / 2
+        } else {
+            answerImageLeading.constant = 0
+            answerImageTrailing.constant = 0
+            // Ensure image is in stack view
+            //            if elementStack.arrangedSubviews.contains(answerImageView) == false {
+            //                elementStack.insertArrangedSubview(answerImageView, at: 1)
+            //            }
+            answerImageView.backgroundColor = Colours.colour2
+            answerImageView.layer.cornerRadius = 15
+            answerImageView.clipsToBounds = true
+            answerImageView.image = getUncachedImage(named: answerImageArray[row])
+        }
+        // Table View
+        answerTableView.dataSource = self
+        answerTableView.delegate = self
+        answerTableView.layer.cornerRadius = 15
+        answerTableView.layer.masksToBounds = true
+        answerTableView.tableFooterView = UIView()
+        answerTableView.backgroundColor = Colours.colour2
+        answerTableView.separatorColor = Colours.colour1.withAlphaComponent(0.5)
+        answerTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        answerTableView.layer.cornerRadius = 15
+        answerTableView.clipsToBounds = true
+        answerTableView.isScrollEnabled = false
+        //
+        questionLabel.text = NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][row][0], comment: "")
+        questionLabel.sizeToFit()
+        questionLabel.frame.size.width = elementStack.bounds.width
+        //
+        if answerImageArray[row] != "" && elementStack.bounds.height > questionsTableHeight {
+            answerImageTrailing.constant = (elementStack.bounds.width * 0.25) / 2
+            answerImageLeading.constant = (elementStack.bounds.width * 0.25) / 2
+        }
+    }
+    
+    //
+    // Answers tableview
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let label = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: answerTableView.bounds.width, height: 0)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textAlignment = .center
+        label.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        // + 1 as question inclueded in array
+        label.text = NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion][indexPath.row + 1], comment: "")
+        label.sizeToFit()
+        //
+        setTableHeight()
+        //
+        if label.bounds.height > 49 {
+            return 49 * 1.5
+        } else {
+            return 49
+        }
+        //
+    }
+    
+    //
+    func setTableHeight() {
+        var tableHeightConstant: CGFloat = 0
+        for i in 0...scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion].count - 2 {
+            let label = UILabel()
+            label.frame = CGRect(x: 0, y: 0, width: answerTableView.bounds.width, height: 0)
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            label.textAlignment = .center
+            label.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+            // + 1 as question inclueded in array
+            label.text = NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion][i + 1], comment: "")
+            label.sizeToFit()
+            if label.bounds.height > 49 {
+                tableHeightConstant += (49 * 1.5)
+            } else {
+                tableHeightConstant += 49
+            }
+        }
+        tableHeight.constant = tableHeightConstant
+        //
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion].count - 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+        //
+        cell.backgroundColor = Colours.colour2
+        cell.tintColor = Colours.colour3
+        cell.textLabel?.textColor = .white
+        cell.textLabel?.textAlignment = .center
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.lineBreakMode = .byWordWrapping
+        // row + 1 as question included with answers
+        cell.textLabel?.text = NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion][indexPath.row + 1], comment: "")
+        cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        // Select answer
+        if profileAnswers[selectedSection][row] != -1 && indexPath.row == profileAnswers[selectedSection][selectedQuestion] {
+            cell.textLabel?.textColor = Colours.colour3
+        }
+        // If last cell hide seperator
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        if indexPath.row == (scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion].count - 2) {
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+        }
+        //
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+        profileAnswers[selectedSection][row] = indexPath.row
+        UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
+        //
+        tableView.deselectRow(at: indexPath, animated: true)
+        answerTableView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.delegate?.nextQuestion()
+        }
     }
 }
