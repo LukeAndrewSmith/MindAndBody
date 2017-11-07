@@ -232,11 +232,15 @@ enum scheduleDataStructures {
                 // Information about schedule
             // Title - 8
             [""], // String
-            // Schedule style: day(0) or full week (1) - 9
+            // Schedule style: day [0] or full week [1] - 9
             [0],
-            // Session choice style
-            [],
+            // Session choice style: app [0] or user chooses [1] - 10
+            [0],
+            // Schedule type: app helps create scheudle [0], custom schedule [1] - 11
+            [0],
             // Empty arrays incase more data needs to be stored one day
+            [],
+            //
             [],
             //
             []
@@ -245,26 +249,6 @@ enum scheduleDataStructures {
     // Tracking
     static let registerTracking: [[[[[Bool]]]]] =
         [
-//            // Tracking App Schedule
-//            [
-//                // Monday
-//                [],
-//                // Tuesday
-//                [],
-//                // Wednesday
-//                [],
-//                // Thursday
-//                [],
-//                // Friday
-//                [],
-//                // Saturday
-//                [],
-//                // Sunday
-//                [],
-//                // Full week as list - 7
-//                []
-//            ],
-            // Tracking Custom Schedule
     ]
     
     // Empty Tracking Week

@@ -122,18 +122,20 @@
                         <segue destination="6Gr-JQ-KAl" kind="show" identifier="scheduleMeditationSegueTimer" id="y3k-i5-esE"/>
                         <segue destination="RL9-kc-gfy" kind="presentation" identifier="InitialInfoSegue" animates="NO" id="LUK-2p-6ee"/>
                         <segue destination="oWk-Ma-VKX" kind="presentation" identifier="EditScheduleSegue" id="48d-pH-vgR"/>
+                        <segue destination="eYo-Cx-z8f" kind="presentation" identifier="ScheduleCreationSegue" id="fC1-lN-iHZ"/>
+                        <segue destination="d1w-hu-wYA" kind="presentation" identifier="EditProfileSegue" id="izD-lx-C3k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3dG-Jg-xiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1143.2" y="743.47826086956525"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Schedule Editing Navigation-->
         <scene sceneID="gfY-IL-60q">
             <objects>
-                <navigationController navigationBarHidden="YES" id="oWk-Ma-VKX" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="oWk-Ma-VKX" customClass="ScheduleEditingNavigation" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4Wz-7p-PV6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="4Wz-7p-PV6">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -144,10 +146,10 @@
             </objects>
             <point key="canvasLocation" x="-3839" y="-761"/>
         </scene>
-        <!--View Controller-->
+        <!--Schedule Editing-->
         <scene sceneID="UeJ-LY-US4">
             <objects>
-                <viewController id="zdz-XK-58W" sceneMemberID="viewController">
+                <viewController id="zdz-XK-58W" customClass="ScheduleEditing" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8fB-kB-TJN"/>
                         <viewControllerLayoutGuide type="bottom" id="ayl-9a-AQv"/>
@@ -156,26 +158,121 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Zr-G6-sbh">
-                                <rect key="frame" x="67" y="519" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0zU-lN-gR3">
-                                <rect key="frame" x="67" y="246" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0zU-lN-gR3">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Zr-G6-sbh">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="zdz-XK-58W" id="yZb-lz-uM1"/>
+                                    <outlet property="delegate" destination="zdz-XK-58W" id="ty6-0V-VDO"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Thw-DF-qDx">
+                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                                <color key="backgroundColor" red="0.14901960780000001" green="0.65098039220000004" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="dKF-N8-9xG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="27"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveButtonAction:" destination="zdz-XK-58W" eventType="touchUpInside" id="lrp-gM-NRf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RoA-Q5-Hee">
+                                <rect key="frame" x="8" y="561" width="49" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="oZV-hx-qfH"/>
+                                    <constraint firstAttribute="height" constant="49" id="x1e-0v-GXi"/>
+                                </constraints>
+                                <color key="tintColor" red="0.74117647060000003" green="0.2470588235" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="Bin"/>
+                                <connections>
+                                    <action selector="deleteButtonAction:" destination="zdz-XK-58W" eventType="touchUpInside" id="rld-gu-UQD"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7r-BL-TX3">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Wer-cb-V5w"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="23"/>
+                                <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XrA-0V-rOp">
+                                <rect key="frame" x="0.0" y="63.5" width="375" height="0.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.40000000000000002" id="0JU-oP-L1w"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZe-pp-qdr">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2T-vz-G1J">
+                                <rect key="frame" x="323.5" y="20" width="43.5" height="43.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="y2T-vz-G1J" secondAttribute="height" id="OUX-Ob-kcB"/>
+                                </constraints>
+                                <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="QuestionMarkMenu"/>
+                                <connections>
+                                    <action selector="questionMarkButtonAction:" destination="zdz-XK-58W" eventType="touchUpInside" id="3La-tU-9Xh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="0zU-lN-gR3" secondAttribute="bottom" id="0Zc-Mu-MA5"/>
+                            <constraint firstItem="5Zr-G6-sbh" firstAttribute="leading" secondItem="xGb-Yf-CDT" secondAttribute="leading" id="1ik-bH-r7r"/>
+                            <constraint firstItem="AZe-pp-qdr" firstAttribute="top" secondItem="xGb-Yf-CDT" secondAttribute="top" id="4JC-sz-fp2"/>
+                            <constraint firstItem="Thw-DF-qDx" firstAttribute="top" secondItem="RoA-Q5-Hee" secondAttribute="bottom" constant="8" id="6p3-ZU-W6e"/>
+                            <constraint firstAttribute="trailing" secondItem="0zU-lN-gR3" secondAttribute="trailing" id="An9-1I-jga"/>
+                            <constraint firstItem="Thw-DF-qDx" firstAttribute="top" secondItem="5Zr-G6-sbh" secondAttribute="bottom" id="AxM-u5-3gV"/>
+                            <constraint firstItem="XrA-0V-rOp" firstAttribute="leading" secondItem="xGb-Yf-CDT" secondAttribute="leading" id="Boj-q0-G1C"/>
+                            <constraint firstAttribute="trailing" secondItem="Thw-DF-qDx" secondAttribute="trailing" id="DIf-je-zx6"/>
+                            <constraint firstItem="b7r-BL-TX3" firstAttribute="top" secondItem="AZe-pp-qdr" secondAttribute="bottom" id="DRS-oI-Xna"/>
+                            <constraint firstItem="AZe-pp-qdr" firstAttribute="leading" secondItem="xGb-Yf-CDT" secondAttribute="leading" id="EkV-7q-rCW"/>
+                            <constraint firstItem="XrA-0V-rOp" firstAttribute="bottom" secondItem="b7r-BL-TX3" secondAttribute="bottom" id="GBr-ff-7cH"/>
+                            <constraint firstItem="b7r-BL-TX3" firstAttribute="top" secondItem="8fB-kB-TJN" secondAttribute="bottom" id="JcS-6q-fEt"/>
+                            <constraint firstItem="Thw-DF-qDx" firstAttribute="leading" secondItem="xGb-Yf-CDT" secondAttribute="leading" id="OA4-5z-3Ww"/>
+                            <constraint firstAttribute="trailing" secondItem="5Zr-G6-sbh" secondAttribute="trailing" id="R0i-CS-YrE"/>
+                            <constraint firstAttribute="trailing" secondItem="XrA-0V-rOp" secondAttribute="trailing" id="TKv-L5-OUA"/>
+                            <constraint firstItem="5Zr-G6-sbh" firstAttribute="top" secondItem="b7r-BL-TX3" secondAttribute="bottom" id="TwL-5T-gaF"/>
+                            <constraint firstItem="ayl-9a-AQv" firstAttribute="top" secondItem="Thw-DF-qDx" secondAttribute="bottom" id="U7I-Et-Zae"/>
+                            <constraint firstItem="XrA-0V-rOp" firstAttribute="top" secondItem="y2T-vz-G1J" secondAttribute="bottom" id="Yaw-KB-Ee6"/>
+                            <constraint firstItem="0zU-lN-gR3" firstAttribute="leading" secondItem="xGb-Yf-CDT" secondAttribute="leading" id="i3c-8M-rZm"/>
+                            <constraint firstItem="b7r-BL-TX3" firstAttribute="leading" secondItem="xGb-Yf-CDT" secondAttribute="leading" id="jCz-cz-IaG"/>
+                            <constraint firstItem="y2T-vz-G1J" firstAttribute="top" secondItem="AZe-pp-qdr" secondAttribute="bottom" id="kUS-76-J1s"/>
+                            <constraint firstAttribute="trailing" secondItem="AZe-pp-qdr" secondAttribute="trailing" id="pn9-Tg-0vk"/>
+                            <constraint firstItem="RoA-Q5-Hee" firstAttribute="leading" secondItem="xGb-Yf-CDT" secondAttribute="leading" constant="8" id="rV9-b7-gY6"/>
+                            <constraint firstItem="0zU-lN-gR3" firstAttribute="top" secondItem="xGb-Yf-CDT" secondAttribute="top" id="wOa-ia-mYs"/>
+                            <constraint firstAttribute="trailing" secondItem="b7r-BL-TX3" secondAttribute="trailing" id="weU-LM-otZ"/>
+                            <constraint firstAttribute="trailing" secondItem="y2T-vz-G1J" secondAttribute="trailing" constant="8" id="x8I-jc-kfN"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Uuv-Dv-ozu"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <segue destination="MvL-yD-EMG" kind="show" id="gRr-Mf-DSK"/>
+                        <outlet property="backgroundImage" destination="0zU-lN-gR3" id="tVx-SJ-jPV"/>
+                        <outlet property="fakeNavigationBarLabel" destination="b7r-BL-TX3" id="mqI-Xw-Y9u"/>
+                        <outlet property="questionMarkButton" destination="y2T-vz-G1J" id="igP-Jg-wks"/>
+                        <outlet property="saveButton" destination="Thw-DF-qDx" id="Zqi-Iv-f86"/>
+                        <outlet property="scheduleOverviewTable" destination="5Zr-G6-sbh" id="cvy-XY-fR4"/>
+                        <segue destination="MvL-yD-EMG" kind="show" identifier="OverviewScheduleSegue" id="gRr-Mf-DSK"/>
+                        <segue destination="d1w-hu-wYA" kind="show" identifier="OverviewSessionsSegue" id="jNF-1y-xby"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LY6-xg-RtF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3839" y="-62"/>
+            <point key="canvasLocation" x="-3839.1999999999998" y="-62.518740629685162"/>
         </scene>
         <!--Schedule View Question-->
         <scene sceneID="6C8-Nr-xq7">
@@ -267,6 +364,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DSE-Bm-k9M"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="backButton" destination="CAl-9a-eWk" id="tZW-Oa-LO5"/>
                         <outlet property="backgroundImage" destination="gEf-Ur-uPE" id="osu-rW-t43"/>
@@ -1213,6 +1311,8 @@
                             <constraint firstItem="4MM-ms-QAM" firstAttribute="top" secondItem="C0r-gO-Few" secondAttribute="bottom" id="vtt-9Z-YXj"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bigGroupLabel0" destination="E7e-9d-e1i" id="HCH-pv-pFo"/>
                         <outlet property="bigGroupLabel1" destination="PhL-NG-o6b" id="O4i-nu-oCJ"/>
@@ -1235,7 +1335,7 @@
         <!--view4-->
         <scene sceneID="Qf8-wT-bjo">
             <objects>
-                <navigationController storyboardIdentifier="view5" title="view4" id="O8y-z6-cja" customClass="SettingsNavigation" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="view4" title="view4" id="O8y-z6-cja" customClass="SettingsNavigation" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Item" id="2Uk-Dd-ruP"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
@@ -1620,7 +1720,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YP5-1j-hTM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8622" y="743"/>
+            <point key="canvasLocation" x="-8903" y="743"/>
         </scene>
         <!--Initial Info Screen-->
         <scene sceneID="hZt-i6-WHB">
@@ -1727,12 +1827,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6HX-je-zpH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7844" y="742"/>
+            <point key="canvasLocation" x="-8124" y="742"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Iy6-lY-Ona">
             <objects>
-                <viewController storyboardIdentifier="InitialProfile" id="d1w-hu-wYA" customClass="Profile" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Profile" id="d1w-hu-wYA" customClass="Profile" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Pp-3K-CD5"/>
                         <viewControllerLayoutGuide type="bottom" id="5BY-SK-9oW"/>
@@ -1939,6 +2039,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bPs-lk-dLQ"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="backgroundImageView" destination="Qs5-dH-FAM" id="b0q-W7-dkn"/>
                         <outlet property="dismissViewButton" destination="fnx-9W-DOk" id="Vhr-CH-VgI"/>
@@ -1951,7 +2052,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q30-t8-8oO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5823" y="742"/>
+            <point key="canvasLocation" x="-6103" y="742"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="9U6-wy-ToP">
+            <objects>
+                <viewController id="XPs-qo-fj9" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EFr-6i-avF"/>
+                        <viewControllerLayoutGuide type="bottom" id="tbK-yU-N3k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="edE-pc-fSb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4y7-1U-lQA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5857" y="1552"/>
         </scene>
         <!--Item-->
         <scene sceneID="o7y-bT-TM5">
@@ -3983,7 +4102,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flZ-lL-U4w">
-                                        <rect key="frame" x="142" y="0.0" width="93" height="49"/>
+                                        <rect key="frame" x="141.5" y="0.0" width="93" height="49"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="37"/>
                                         <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -4218,7 +4337,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBZ-aS-mhf">
-                                <rect key="frame" x="66.5" y="277" width="243" height="113.5"/>
+                                <rect key="frame" x="66.5" y="277.5" width="243" height="113.5"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="97"/>
                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -4301,7 +4420,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-jO-oQj">
-                                                    <rect key="frame" x="137" y="369.5" width="102.5" height="22.5"/>
+                                                    <rect key="frame" x="137" y="369" width="102.5" height="22.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4523,7 +4642,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5O-yZ-uLf">
-                                                    <rect key="frame" x="137" y="369" width="102.5" height="22.5"/>
+                                                    <rect key="frame" x="137" y="368.5" width="102.5" height="22.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4670,7 +4789,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tD2-Ad-c9U">
-                                                    <rect key="frame" x="100" y="111" width="176.5" height="84"/>
+                                                    <rect key="frame" x="99.5" y="111" width="176.5" height="84"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="72"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -5083,7 +5202,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movement" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSy-Oq-wwH">
-                                                    <rect key="frame" x="133.5" y="0.0" width="109.5" height="27.5"/>
+                                                    <rect key="frame" x="133" y="0.0" width="109.5" height="27.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="27.5" id="DwF-Bf-aQz"/>
                                                     </constraints>
@@ -5098,7 +5217,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khd-CZ-X3F">
-                                                    <rect key="frame" x="155" y="328.5" width="66.5" height="31.5"/>
+                                                    <rect key="frame" x="154.5" y="328.5" width="66.5" height="31.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="27"/>
                                                     <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -5198,10 +5317,10 @@
             </objects>
             <point key="canvasLocation" x="12104.799999999999" y="-962.06896551724151"/>
         </scene>
-        <!--Initial Profile Question-->
+        <!--Schedule Type Question-->
         <scene sceneID="mpP-51-TNf">
             <objects>
-                <viewController id="eYo-Cx-z8f" customClass="InitialProfileQuestion" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eYo-Cx-z8f" customClass="ScheduleTypeQuestion" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hBe-kR-PZy"/>
                         <viewControllerLayoutGuide type="bottom" id="Yoh-vd-Klb"/>
@@ -5244,24 +5363,30 @@
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="139.5"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
-                                            <action selector="fillInProfileButtonAction:" destination="eYo-Cx-z8f" eventType="touchUpInside" id="ZZz-q6-wxB"/>
+                                            <action selector="appAppButtonAction:" destination="eYo-Cx-z8f" eventType="touchUpInside" id="ZZz-q6-wxB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Yf-iX-2U1">
                                         <rect key="frame" x="0.0" y="139.5" width="343" height="139.5"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="appCustomButtonAction:" destination="eYo-Cx-z8f" eventType="touchUpInside" id="Ls9-6F-O9C"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zfU-jR-qEe">
                                         <rect key="frame" x="0.0" y="279" width="343" height="139.5"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
-                                            <action selector="chooseDifficultiesButtonAction:" destination="eYo-Cx-z8f" eventType="touchUpInside" id="eL0-WK-1G7"/>
                                             <action selector="chooseSessionsButtonAction:" destination="eYo-Cx-z8f" eventType="touchUpInside" id="C7w-hm-Ouz"/>
+                                            <action selector="customAppButtonAction:" destination="eYo-Cx-z8f" eventType="touchUpInside" id="eL0-WK-1G7"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeI-ed-VF0">
                                         <rect key="frame" x="0.0" y="418.5" width="343" height="139.5"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="customCustomButtonAction:" destination="eYo-Cx-z8f" eventType="touchUpInside" id="uEb-2n-d48"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -5325,13 +5450,13 @@
                         <outlet property="customAppButton" destination="zfU-jR-qEe" id="oRl-Xs-WyA"/>
                         <outlet property="customCustomButton" destination="JeI-ed-VF0" id="eZb-kJ-htQ"/>
                         <outlet property="titleLabel" destination="uNq-aE-uYC" id="5YI-R4-NL5"/>
-                        <segue destination="d1w-hu-wYA" kind="show" identifier="InitialProfileSegue" id="2SZ-vO-x06"/>
-                        <segue destination="JCR-Wc-eVJ" kind="show" id="0hW-vM-NHz"/>
+                        <segue destination="d1w-hu-wYA" kind="show" identifier="ScheduleCreationProfileSegue" id="2SZ-vO-x06"/>
+                        <segue destination="JCR-Wc-eVJ" kind="show" identifier="ScheduleCreationCustomSegue" id="0hW-vM-NHz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgF-Df-hkq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6586.3999999999996" y="742.5787106446777"/>
+            <point key="canvasLocation" x="-6866" y="743"/>
         </scene>
     </scenes>
     <resources>
@@ -5351,11 +5476,13 @@
         <image name="Plus" width="30" height="30"/>
         <image name="QuestionMark" width="30" height="30"/>
         <image name="QuestionMarkM" width="30" height="30"/>
+        <image name="QuestionMarkMenu" width="30" height="30"/>
         <image name="SlideMenu" width="30" height="30"/>
         <image name="TrackingClock" width="30" height="30"/>
         <image name="Tricep" width="375" height="375"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="2AW-PI-fhz"/>
         <segue reference="tUJ-Lb-bfp"/>
         <segue reference="2sH-Wt-Foe"/>
         <segue reference="SOr-B2-NYZ"/>
@@ -5367,8 +5494,9 @@
         <segue reference="aak-rT-dwz"/>
         <segue reference="bsb-5O-GBj"/>
         <segue reference="y3k-i5-esE"/>
+        <segue reference="2SZ-vO-x06"/>
         <segue reference="M72-ar-DyO"/>
         <segue reference="gRr-Mf-DSK"/>
-        <segue reference="s9D-3O-zvR"/>
+        <segue reference="0hW-vM-NHz"/>
     </inferredMetricsTieBreakers>
 </document>

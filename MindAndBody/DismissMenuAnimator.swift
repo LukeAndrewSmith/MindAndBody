@@ -30,8 +30,7 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
         //
         var toVC = UIViewController()
         //        if MenuVariables.shared.isNewView = true {
-        let viewNamesArray: [String] = ["view0", "view1", "view2", "view3", "view5"]
-        // "view4", Note profile currently unused
+        let viewNamesArray: [String] = ["view0", "view1", "view2", "view3", "view4"]
         //
         switch MenuVariables.shared.menuIndex {
         case 0:
@@ -45,9 +44,6 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
         //
         case 3:
             toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! LessonsNavigation
-            //
-            //        case 4:
-            //            toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! ProfileNavigation
         //
         case 4:
             toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! SettingsNavigation

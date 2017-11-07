@@ -95,6 +95,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        //
         // SETUP
         setVariables()
         setGroupLabels()

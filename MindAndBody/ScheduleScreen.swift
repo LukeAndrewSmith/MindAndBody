@@ -112,6 +112,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             scheduleTable.reloadData()
+            scheduleChoiceTable.reloadData()
             //
             scheduleTableScrollCheck()
         }
@@ -816,12 +817,12 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                         let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
                         self.animateActionSheetDown(actionSheet: self.actionSheet, actionSheetHeight: height, backgroundView: self.backgroundViewExpanded)
                         //
-                        self.performSegue(withIdentifier: "EditScheduleSegue", sender: self)
+                        self.performSegue(withIdentifier: "ScheduleCreationSegue", sender: self)
                     })
                 })
                 okAction.isEnabled = false
                 alert.addAction(okAction)
-                // Cancel reset action
+                // Cancel action
                 let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
                     UIAlertAction in
                     //
@@ -891,7 +892,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         //
-        // Delete if scheduleChoiceTable, if not app schedule and if not plus row
+        // Delete if not plus row
         if editingStyle == UITableViewCellEditingStyle.delete {
             // Update arrays
             schedules.remove(at: indexPath.row)
@@ -918,14 +919,14 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Edit Schedule
     @objc func editScheduleAction() {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
         //
         let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
         animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
         //
-        // If app schedule (go to n sessions (section 2))
-        //        self.performSegue(withIdentifier: "EditProfileSegue", sender: self)
-        // If custom schedule
-        self.performSegue(withIdentifier: "EditScheduleSegue", sender: self)
+        if schedules.count != 0 {
+            self.performSegue(withIdentifier: "EditScheduleSegue", sender: self)
+        }
     }
     
     // Edit Profile
@@ -962,8 +963,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     //
-    // Slide Menu ---------------------------------------------------------------------------------------------------------------------
-    //
+    // MARK: Prepare for segue
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
@@ -988,9 +988,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             let destinationVC = segue.destination as! Profile
             destinationVC.comingFromSchedule = true
         } else if segue.identifier == "EditScheduleSegue" {
-            let destinationNC = segue.destination as! ScheduleViewQuestionNavigation
-            let destinationVC = destinationNC.viewControllers.first as! ScheduleViewQuestion
-            destinationVC.comingFromSchedule = true
+            let destinationNC = segue.destination as! ScheduleEditingNavigation
+            let destinationVC = destinationNC.viewControllers.first as! ScheduleEditing
+//            destinationVC.comingFromSchedule = true
         } else if segue.identifier == "scheduleMeditationSegueTimer" {
             let destinationVC = segue.destination as? MeditationTimer
             destinationVC?.comingFromSchedule = true

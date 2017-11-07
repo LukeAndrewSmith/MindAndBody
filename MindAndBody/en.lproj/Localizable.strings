@@ -107,99 +107,6 @@
 "sessions" = "Sessions";
 
 
-
-//
-// MARK: Schedule // ------------------------------------------------
-"schedule" = "Schedule";
-
-"weekOfThe" = "Week of the ";
-
-"chooseCreateSchedule" = "Choose/Create Schedule";
-"editSchedule" = "Edit Schedule";
-"editProfile" = "Edit Profile";
-"scheduleInputTitle" = "Schedule Title";
-"appSchedule" = "App Schedule";
-
-"monday" = "Monday";
-"tuesday" = "Tuesday";
-"wednesday" = "Wednesday";
-"thursday" = "Thursday";
-"friday" = "Friday";
-"saturday" ="Saturday";
-"sunday" = "Sunday";
-//
-"mondayLetter" = "M";
-"tuesdayLetter" = "T";
-"wednesdayLetter" = "W";
-"thursdayLetter" = "T";
-"fridayLetter" = "F";
-"saturdayLetter" = "S";
-"sundayLetter" = "S";
-
-// Goals
-"mind" = "Mind";
-"flexibility" = "Flexibility";
-"endurance" = "Endurance";
-"toning" = "Toning";
-"muscleGain" = "Muscle Gain";
-"strength" = "Strength";
-
-// Choices
-// General
-"sessionLength" = "Session Length";
-"focus" = "Focus";
-"toDo" = "To Do";
-// Mind
-"mindType" = "Mind - Type";
-"mindToDo" = "Mind - To Do";
-    // Choice 1
-    "walk" = "Walk";
-    "calm" = "Calm";
-    "stressReduction" = "Reduce Stress";
-    "strength" = "Strength";
-    "energising" = "Energy";
-    "focusing" = "Focus";
-    // Choice 2
-    "practiceLength" = "Practice Length";
-// Flexibility
-"flexibilityToDo" = "Flexibility - To Do";
-"flexibilityType" = "Flexibility - Type";
-    // Choice 3
-    "hamstrings" = "Hamstrings";
-    "hips" = "Hips";
-    "back/neck" = "Back/Neck";
-// Endurance
-"enduranceToDo" = "Endurance - To Do";
-"enduranceType" = "Endurance - Type";
-"enduranceType2" = "Endurance - Type - 2";
-"steadyState" = "Steady State (Without the app)";
-    // Choice 2
-    "enduranceType" = "Endurance - Type";
-// Toning
-"toningToDo" = "Toning - To Do";
-"toningType" = "Toning Type";
-    // Choice 1
-    "highIntensityCardio" = "High Intensity: Cardio";
-    "highIntensityWorkout" = "High Intensity: Bodyweight Workout";
-// Muscle Gain
-"muscleGainToDo" = "Muscle Gain - To Do";
-"muscleGainType" = "Muscle Gain Type";
-// Strength
-"strengthToDo" = "Strength - To Do";
-"strengthType" = "Strength - Type";
-    // Choice 1
-    "short" = "Short";
-    "normal" = "Normal";
-    // Choice 3
-    "5x51" = "5x5 - 1";
-    "5x52" = "5x5 - 2";
-    "accessory1" = "Accessory Workout 1";
-    "accessory2" = "Accessor";
-
-
-
-
-
 //
 // MARK: Tracking //
 "tracking" = "Tracking";
@@ -1591,6 +1498,109 @@
 "guidedMeditationI" = "• 'Guided' meditation (detailed written explanations)";
 "customSessionsI" = "• Creation of custom sessions and schedules";
 "bulletPointTemplate" = "• ";
+
+
+
+//
+// MARK: Schedule
+"schedule" = "Schedule";
+
+"weekOfThe" = "Week of the ";
+
+"chooseCreateSchedule" = "Choose/Create Schedule";
+"editSchedule" = "Edit Schedule";
+"editProfile" = "Edit Profile";
+"scheduleInputTitle" = "Schedule Title";
+"appSchedule" = "App Schedule";
+
+"monday" = "Monday";
+"tuesday" = "Tuesday";
+"wednesday" = "Wednesday";
+"thursday" = "Thursday";
+"friday" = "Friday";
+"saturday" ="Saturday";
+"sunday" = "Sunday";
+//
+"mondayLetter" = "M";
+"tuesdayLetter" = "T";
+"wednesdayLetter" = "W";
+"thursdayLetter" = "T";
+"fridayLetter" = "F";
+"saturdayLetter" = "S";
+"sundayLetter" = "S";
+
+// Goals
+"mind" = "Mind";
+"flexibility" = "Flexibility";
+"endurance" = "Endurance";
+"toning" = "Toning";
+"muscleGain" = "Muscle Gain";
+"strength" = "Strength";
+
+// Choices
+// General
+"sessionLength" = "Session Length";
+"focus" = "Focus";
+"toDo" = "To Do";
+// Mind
+"mindType" = "Mind - Type";
+"mindToDo" = "Mind - To Do";
+// Choice 1
+"walk" = "Walk";
+"calm" = "Calm";
+"stressReduction" = "Reduce Stress";
+"strength" = "Strength";
+"energising" = "Energy";
+"focusing" = "Focus";
+// Choice 2
+"practiceLength" = "Practice Length";
+// Flexibility
+"flexibilityToDo" = "Flexibility - To Do";
+"flexibilityType" = "Flexibility - Type";
+// Choice 3
+"hamstrings" = "Hamstrings";
+"hips" = "Hips";
+"back/neck" = "Back/Neck";
+// Endurance
+"enduranceToDo" = "Endurance - To Do";
+"enduranceType" = "Endurance - Type";
+"enduranceType2" = "Endurance - Type - 2";
+"steadyState" = "Steady State (Without the app)";
+// Choice 2
+"enduranceType" = "Endurance - Type";
+// Toning
+"toningToDo" = "Toning - To Do";
+"toningType" = "Toning Type";
+// Choice 1
+"highIntensityCardio" = "High Intensity: Cardio";
+"highIntensityWorkout" = "High Intensity: Bodyweight Workout";
+// Muscle Gain
+"muscleGainToDo" = "Muscle Gain - To Do";
+"muscleGainType" = "Muscle Gain Type";
+// Strength
+"strengthToDo" = "Strength - To Do";
+"strengthType" = "Strength - Type";
+// Choice 1
+"short" = "Short";
+"normal" = "Normal";
+// Choice 3
+"5x51" = "5x5 - 1";
+"5x52" = "5x5 - 2";
+"accessory1" = "Accessory Workout 1";
+"accessory2" = "Accessor";
+
+// Schedule Overview
+"scheduleOverview" = "Schedule Overview";
+"save" = "Save";
+//
+"name" = "Name";
+"sessionChoosing" = "App chooses sessions:";
+"viewFullWeek" = "View full week:";
+"sessionsOfSchedule" = "Sessions/Groups";
+"rearrangeSchedule" = "Rearrange Schedule";
+//
+"deleteScheduleWarning" = "Are you sure you'd like to delete this schedule?";
+    "yes" = "Yes";
 
 
 //

@@ -115,8 +115,7 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         //
         self.dismiss(animated: true) {
             var toVC = UIViewController()
-            let viewNamesArray: [String] = ["view0", "view1", "view2", "view3", "view5"]
-            //                "view4", Note: Profile currently unused
+            let viewNamesArray: [String] = ["view0", "view1", "view2", "view3", "view4"]
             //
             switch MenuVariables.shared.menuIndex {
             case 0:
@@ -130,9 +129,6 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
             //
             case 3:
                 toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! LessonsNavigation
-                //
-                //                case 4:
-                //                    toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! ProfileNavigation
             //
             case 4:
                 toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewNamesArray[MenuVariables.shared.menuIndex]) as! SettingsNavigation

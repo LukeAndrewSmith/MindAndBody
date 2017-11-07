@@ -509,6 +509,7 @@
 		07DEE6F91E0AADF2003B89AB /* MeditationChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */; };
 		07DEE6FB1E0AC47F003B89AB /* WorkoutChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6FA1E0AC47F003B89AB /* WorkoutChoice.swift */; };
 		07E1D4DF1FB0DDF600B53B85 /* ScheduleEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1D4DE1FB0DDF600B53B85 /* ScheduleEditing.swift */; };
+		07E1D4E11FB2250B00B53B85 /* ScheduleCreationHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1D4E01FB2250B00B53B85 /* ScheduleCreationHelp.swift */; };
 		07E45E641F4D9F2700A5AF49 /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E45E621F4D9F2700A5AF49 /* Pause.png */; };
 		07E45EB11F4DB45700A5AF49 /* upwardSalute.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E45EB01F4DB45700A5AF49 /* upwardSalute.png */; };
 		07E45EB31F4DB46400A5AF49 /* mountain.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E45EB21F4DB46400A5AF49 /* mountain.png */; };
@@ -1890,6 +1891,7 @@
 		07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationChoice.swift; sourceTree = "<group>"; };
 		07DEE6FA1E0AC47F003B89AB /* WorkoutChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutChoice.swift; sourceTree = "<group>"; };
 		07E1D4DE1FB0DDF600B53B85 /* ScheduleEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditing.swift; sourceTree = "<group>"; };
+		07E1D4E01FB2250B00B53B85 /* ScheduleCreationHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreationHelp.swift; sourceTree = "<group>"; };
 		07E45E621F4D9F2700A5AF49 /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
 		07E45EB01F4DB45700A5AF49 /* upwardSalute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upwardSalute.png; sourceTree = "<group>"; };
 		07E45EB21F4DB46400A5AF49 /* mountain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mountain.png; sourceTree = "<group>"; };
@@ -2795,16 +2797,6 @@
 			name = Audio/Visual;
 			sourceTree = "<group>";
 		};
-		07094BE91FB0D1B3003DB553 /* Schedule Abilities */ = {
-			isa = PBXGroup;
-			children = (
-				07E1D4DD1FB0DDE100B53B85 /* Schedule Editing */,
-				07F8EDD81FA5DB4900C452F4 /* Profile Editing */,
-				07D5C3D31F9E31B20038F143 /* Schedule Creation */,
-			);
-			name = "Schedule Abilities";
-			sourceTree = "<group>";
-		};
 		0719F2B31E50F8D100AC6729 /* Meditation Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -2961,7 +2953,9 @@
 			children = (
 				07995A381E893E590009C9B1 /* ScheduleScreen.swift */,
 				07686A8C1F84398000C278CC /* Helpers */,
-				07094BE91FB0D1B3003DB553 /* Schedule Abilities */,
+				07E1D4DD1FB0DDE100B53B85 /* Schedule Editing */,
+				07F8EDD81FA5DB4900C452F4 /* Profile Editing */,
+				07D5C3D31F9E31B20038F143 /* Schedule Creation */,
 			);
 			name = Schedule;
 			sourceTree = "<group>";
@@ -4570,6 +4564,7 @@
 			isa = PBXGroup;
 			children = (
 				07F8EDD41FA5DB3700C452F4 /* ScheduleTypeQuestion.swift */,
+				07E1D4E01FB2250B00B53B85 /* ScheduleCreationHelp.swift */,
 				07D5C3D81F9E32430038F143 /* ScheduleViewQuestion.swift */,
 				07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */,
 				0750DB621F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift */,
@@ -8316,6 +8311,7 @@
 				07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */,
 				076C68461ED58D65009160C2 /* StretchingScreen.swift in Sources */,
 				07B852621F83756C005F3781 /* ScheduleData.swift in Sources */,
+				07E1D4E11FB2250B00B53B85 /* ScheduleCreationHelp.swift in Sources */,
 				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,
 				07E1D4DF1FB0DDF600B53B85 /* ScheduleEditing.swift in Sources */,
