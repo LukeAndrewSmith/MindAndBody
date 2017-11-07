@@ -92,6 +92,10 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         if ScheduleVariables.shared.shouldReloadSchedule == true {
             ScheduleVariables.shared.shouldReloadSchedule = false
             let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            // Set selectedSchedule to 0 if too high
+            if selectedSchedule > schedules.count - 1 {
+                selectedSchedule = 0
+            }
             if schedules.count != 0 {
                 scheduleStyle = schedules[selectedSchedule][9][0] as! Int
             } else {
@@ -225,7 +229,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         // ACTION SHEET
-        actionSheet.backgroundColor = UIColor.black.withAlphaComponent(0.75)
+        actionSheet.backgroundColor = .clear
         actionSheet.layer.cornerRadius = 15
         actionSheet.clipsToBounds = true
         let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
@@ -1007,6 +1011,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             let backItem = UIBarButtonItem()
             backItem.title = ""
             navigationItem.backBarButtonItem = backItem
+        } else if segue.identifier == "ScheduleCreationSegue" {
+            let destinationVC = segue.destination as? ScheduleTypeQuestion
+            destinationVC?.comingFromSchedule = true
         }
     }
     

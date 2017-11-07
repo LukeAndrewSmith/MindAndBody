@@ -359,9 +359,8 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Delete Schedule
     @IBAction func deleteButtonAction(_ sender: Any) {
-        // TODO: popup saying are you sure...
         //
-        // Alert View indicating meaning of resetting the app
+        // Alert View asking if you really want to delete
         let title = NSLocalizedString("deleteScheduleWarning", comment: "")
         let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
         alert.view.tintColor = Colours.colour2
