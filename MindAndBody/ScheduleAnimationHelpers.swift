@@ -13,6 +13,15 @@ extension ScheduleScreen {
     //
     // MARK: Helper Functions View layout/slides etc.
     //
+    // MARK: Day Indicator
+    func animateDayIndicatorToDay() {
+        // Animate
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            //
+            self.dayIndicator.center.x = self.stackArray[ScheduleVariables.shared.selectedDay].center.x
+        })
+    }
+    
     //
     // MARK: Mask Views
     // Mask view func

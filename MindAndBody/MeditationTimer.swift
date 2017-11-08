@@ -2521,8 +2521,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             alert.setValue(NSAttributedString(string: inputMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 17)!]), forKey: "attributedMessage")
             
             //
-            okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            })
+            okAction = UIAlertAction(title: "Ok", style: .default) {
+                UIAlertAction in
+            }
             alert.addAction(okAction)
             //
             self.present(alert, animated: true, completion: nil)

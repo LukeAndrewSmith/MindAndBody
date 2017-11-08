@@ -308,9 +308,9 @@ extension UIViewController {
         if fromSchedule == true {
             let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
             let selectedSchedule = settings[7][0]
-            let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+            let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
             // Day
-            if schedules[selectedSchedule][9][0] as! Int == 0 {
+            if schedules[selectedSchedule][1][1][0] as! Int == 0 {
                 // Update day
                 var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                 scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
@@ -319,7 +319,7 @@ extension UIViewController {
                 // Reload
                 ScheduleVariables.shared.shouldReloadChoice = true
                 // Week
-            } else if schedules[selectedSchedule][9][0] as! Int == 1 {
+            } else if schedules[selectedSchedule][1][1][0] as! Int == 1 {
                 // Update week [7]
                 var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                 scheduleTracking[selectedSchedule][7][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true

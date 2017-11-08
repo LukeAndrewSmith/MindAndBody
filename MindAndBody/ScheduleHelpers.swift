@@ -15,13 +15,13 @@ extension ScheduleScreen {
     //
     // MARK: didSelectRowHandler
     func didSelectRowHandler(row: Int) {
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
 
         updateSelectedChoice(row: row)
         // ------------------------------------------------------------------------------------------------
         // Next Choice Function
-        if ScheduleVariables.shared.choiceProgress[0] == -1 && row != schedules[selectedSchedule][ScheduleVariables.shared.selectedDay].count {
-            ScheduleVariables.shared.choiceProgress[0] = schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][row] as! Int
+        if ScheduleVariables.shared.choiceProgress[0] == -1 && row != schedules[selectedSchedule][0][ScheduleVariables.shared.selectedDay].count {
+            ScheduleVariables.shared.choiceProgress[0] = schedules[selectedSchedule][0][ScheduleVariables.shared.selectedDay][row] as! Int
             ScheduleVariables.shared.choiceProgress[1] += 1
             ScheduleVariables.shared.selectedRows[0] = row
             maskView()
@@ -275,14 +275,14 @@ extension ScheduleScreen {
         // Function for going through choices on the schedule screen, is called when group/choice is pressed and determines what to present next
     func updateSelectedChoice(row: Int) {
         //
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         // ------------------------------------------------------------------------------------------------
-        if ScheduleVariables.shared.choiceProgress[0] == -1 && row != schedules[selectedSchedule][ScheduleVariables.shared.selectedDay].count {
+        if ScheduleVariables.shared.choiceProgress[0] == -1 && row != schedules[selectedSchedule][0][ScheduleVariables.shared.selectedDay].count {
             // Notes selectedChoiceStretching not always used
             // selectedChoice...[0] to group
-            selectedChoiceWarmup[0] = schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][row] as! Int
-            selectedChoiceSession[0] = schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][row] as! Int
-            selectedChoiceStretching[0] = schedules[selectedSchedule][ScheduleVariables.shared.selectedDay][row] as! Int
+            selectedChoiceWarmup[0] = schedules[selectedSchedule][0][ScheduleVariables.shared.selectedDay][row] as! Int
+            selectedChoiceSession[0] = schedules[selectedSchedule][0][ScheduleVariables.shared.selectedDay][row] as! Int
+            selectedChoiceStretching[0] = schedules[selectedSchedule][0][ScheduleVariables.shared.selectedDay][row] as! Int
         //
         } else {
             // Present next choice or present session
@@ -734,6 +734,7 @@ extension ScheduleScreen {
             }
             // Select indicator
             stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
+            animateDayIndicatorToDay()
             
             // Animate
             scheduleTable.reloadData()
@@ -774,6 +775,7 @@ extension ScheduleScreen {
             // Select indicator
             stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
             selectDay(day: ScheduleVariables.shared.selectedDay)
+            animateDayIndicatorToDay()
             
             // Animate
             scheduleTable.reloadData()
@@ -823,7 +825,8 @@ extension ScheduleScreen {
             }
             // Select indicator
             stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
-            
+            animateDayIndicatorToDay()
+
             // Animate
             scheduleTable.reloadData()
             let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)

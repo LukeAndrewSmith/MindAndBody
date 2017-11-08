@@ -56,6 +56,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         UIApplication.shared.statusBarStyle = .lightContent
         //
         sectionLabel.text = NSLocalizedString("profile", comment: "")
+        if comingFromSchedule == false {
+            dismissViewButton.imageView?.image = #imageLiteral(resourceName: "Back Arrow")
+        }
         //
         // Background Image/Colour
         let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
@@ -101,6 +104,13 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(upSwipeAction))
         upSwipe.direction = .up
         questionsTable.addGestureRecognizer(upSwipe)
+        //
+        // Back
+        // Swipe
+        let rightSwipe = UIScreenEdgePanGestureRecognizer()
+        rightSwipe.edges = .left
+        rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
+        view.addGestureRecognizer(rightSwipe)
     }
     
     //
@@ -200,9 +210,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
             } else {
                 let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
                 let selectedSchedule = settings[7][0]
-                let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+                let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
                 // App helps schedule creation
-                if schedules[selectedSchedule][11][0] as! Int == 11 {
+                if schedules[selectedSchedule][1][3][0] as! Int == 0 {
                     self.performSegue(withIdentifier: "ProfileAppHelpSegue", sender: self)
                 // Custom schedule creation
                 } else {
@@ -219,16 +229,12 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         // Current Question
         let currentQuestion = Float(selectedQuestion)
         // Total Number questions
-        let questionCount = Float(scheduleDataStructures.profileQA.count)
+        let questionCount = Float(scheduleDataStructures.profileQA.count - 1)
         //
-//        if selectedQuestion > 0 {
-            //
-            let currentProgress = currentQuestion / questionCount
-            progressBar.setProgress(currentProgress, animated: true)
-//        } else {
-//            // Initial state
-//            progressBar.setProgress(0, animated: true)
-//        }
+        //
+        let currentProgress = currentQuestion / questionCount
+        progressBar.setProgress(currentProgress, animated: true)
+
     }
     
     //
@@ -245,9 +251,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     //
     //
     @objc func upSwipeAction() {
-        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
         // If question has been answered
-        if profileAnswers[0][selectedQuestion] != -1 {
+        if profileAnswers[selectedQuestion] != -1 {
             nextQuestion()
         }
     }
@@ -265,7 +271,19 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     //
     // Dismiss View
     @IBAction func dismissViewButtonAction(_ sender: Any) {
-        self.dismiss(animated: true)
+        if comingFromSchedule == true {
+            self.dismiss(animated: true)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    //
+    // MARK: Back Swipe
+    @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
+        if sender.state == .began {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
 }
@@ -314,12 +332,12 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         agePicker.dataSource = self
         agePicker.layer.cornerRadius = 15
         agePicker.clipsToBounds = true
-        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
-        switch profileAnswers[selectedSection][row] {
+        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
+        switch profileAnswers[row] {
         case -1:
             agePicker.selectRow(0, inComponent: 0, animated: true)
         default:
-            agePicker.selectRow(profileAnswers[selectedSection][row], inComponent: 0, animated: true)
+            agePicker.selectRow(profileAnswers[row], inComponent: 0, animated: true)
         }
         // Ok Button
         okButton.backgroundColor = Colours.colour1
@@ -370,14 +388,10 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         return 37
     }
     
-    // Did select row
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    }
-    
     //
     @IBAction func okButtonAction(_ sender: Any) {
-        var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
-        profileAnswers[selectedSection][selectedQuestion] = agePicker.selectedRow(inComponent: 0)
+        var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
+        profileAnswers[selectedQuestion] = agePicker.selectedRow(inComponent: 0)
         UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
         //
         delegate?.nextQuestion()
@@ -520,13 +534,14 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         
     }
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return scheduleDataStructures.profileQA[selectedQuestion].count - 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
+        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
         //
         cell.backgroundColor = Colours.colour2
         cell.tintColor = Colours.colour3
@@ -538,7 +553,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.text = NSLocalizedString(scheduleDataStructures.profileQA[selectedQuestion][indexPath.row + 1], comment: "")
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         // Select answer
-        if profileAnswers[selectedSection][row] != -1 && indexPath.row == profileAnswers[selectedSection][selectedQuestion] {
+        if profileAnswers[row] != -1 && indexPath.row == profileAnswers[selectedQuestion] {
             cell.textLabel?.textColor = Colours.colour3
         }
         // If last cell hide seperator
@@ -551,14 +566,28 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [[Int]]
-        profileAnswers[selectedSection][row] = indexPath.row
+        var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
+        profileAnswers[row] = indexPath.row
         UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
         //
         tableView.deselectRow(at: indexPath, animated: true)
         answerTableView.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            // Update difficulty levels each time row selected
+                // this is incase 
+            var allAnswered = true
+            for i in 0...profileAnswers.count - 1 {
+                if profileAnswers[i] == -1 {
+                    allAnswered = false
+                }
+            }
+            if allAnswered == true {
+                // TODO: Call set difficulty levels
+//                setDifficultyLevels()
+            }
+            //
             self.delegate?.nextQuestion()
+            
         }
     }
 }

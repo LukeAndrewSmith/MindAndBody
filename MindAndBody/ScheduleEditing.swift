@@ -66,9 +66,9 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         selectedSchedule = settings[7][0]
         
-        // Schedule Style
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
-        schedules[selectedSchedule][11][0] as! Int
+        // Schedule Type
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        scheduleType = schedules[selectedSchedule][1][3][0] as! Int
     }
     
     // Layout
@@ -112,16 +112,16 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         scheduleOverviewTable.separatorColor = Colours.colour1.withAlphaComponent(0.27)
         scheduleOverviewTable.isScrollEnabled = false
         // Switches
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
             // App chooses sessions swithc
             appChoosesSessionsOnOffSwitch.onTintColor = Colours.colour3
             appChoosesSessionsOnOffSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
             // Set inital value
             // On
-            if schedules[selectedSchedule][10][0] as! Int == 0 {
+            if schedules[selectedSchedule][1][2][0] as! Int == 0 {
                 appChoosesSessionsOnOffSwitch.isOn = true
             // Off
-            } else if schedules[selectedSchedule][10][0] as! Int == 1 {
+            } else if schedules[selectedSchedule][1][2][0] as! Int == 1 {
                 appChoosesSessionsOnOffSwitch.isOn = false
             }
             // View Full week switch
@@ -129,10 +129,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             viewFullWeekSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
             // Set inital value
             // On
-            if schedules[selectedSchedule][9][0] as! Int == 0 {
+            if schedules[selectedSchedule][1][1][0] as! Int == 0 {
                 viewFullWeekSwitch.isOn = false
                 // Off
-            } else if schedules[selectedSchedule][9][0] as! Int == 1 {
+            } else if schedules[selectedSchedule][1][1][0] as! Int == 1 {
                 viewFullWeekSwitch.isOn = true
             }
         
@@ -186,7 +186,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         //
         return scheduleOverviewArrays[scheduleType].count
     }
@@ -214,11 +214,11 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         //
         // Detail label, shows schedule overview data
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         switch indexPath.row {
         // Name
         case 0:
-            cell.detailTextLabel?.text = schedules[selectedSchedule][8][0] as? String
+            cell.detailTextLabel?.text = schedules[selectedSchedule][1][0][0] as? String
         // Sessions choosing
         case 1:
             // App chooses
@@ -257,7 +257,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cell = tableView.cellForRow(at: indexPath)
         //
         // Detail label, shows schedule overview data
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         switch indexPath.row {
         // Name
         case 0:
@@ -270,7 +270,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
             //2. Add the text field
             alert.addTextField { (textField: UITextField) in
-                textField.text = schedules[self.selectedSchedule][8][0] as? String
+                textField.text = schedules[self.selectedSchedule][1][0][0] as? String
                 textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
                 textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
             }
@@ -280,13 +280,13 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Update Title
                 let textField = alert?.textFields![0]
                 let lastIndex = schedules.count - 1
-                schedules[lastIndex][8][0] = textField?.text! ?? ""
+                schedules[lastIndex][1][0][0] = textField?.text! ?? ""
                 //
                 // SET NEW ARRAY
                 UserDefaults.standard.set(schedules, forKey: "schedules")
                 //
                 // Update name in table
-                cell?.detailTextLabel?.text = schedules[self.selectedSchedule][8][0] as? String
+                cell?.detailTextLabel?.text = schedules[self.selectedSchedule][1][0][0] as? String
             })
             // Cancel action
             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
@@ -329,22 +329,22 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // Watch for switch changed
     @objc func switchValueChanged(sender: UISwitch) {
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         if sender == appChoosesSessionsOnOffSwitch {
             // App chooses sessions
             if sender.isOn == true {
-                schedules[selectedSchedule][10][0] = 0
+                schedules[selectedSchedule][1][2][0] = 0
             // User chooses sessions
             } else {
-                schedules[selectedSchedule][10][0] = 1
+                schedules[selectedSchedule][1][2][0] = 1
             }
         } else {
             // Schedule style -> full week
             if sender.isOn == true {
-                schedules[selectedSchedule][9][0] = 1
+                schedules[selectedSchedule][1][1][0] = 1
             // Schedule style -> see each day
             } else {
-                schedules[selectedSchedule][9][0] = 0
+                schedules[selectedSchedule][1][1][0] = 0
             }
         }
         UserDefaults.standard.set(schedules, forKey: "schedules")
@@ -371,7 +371,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             UIAlertAction in
             //
             // Delete Schedule
-            var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+            var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
             var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
             //
             // Delete if not plus row
@@ -413,7 +413,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Going to schedule creator (profile)
         if segue.identifier == "OverviewSessionsSegue" {
             let destinationVC = segue.destination as? ScheduleCreationHelp
-            // indicates that profile irrelevant, only care about creating schedule
+            destinationVC?.comingFromScheduleEditing = true
         }
     }
     

@@ -156,20 +156,17 @@ enum scheduleDataStructures {
     // Note: All scales default to 1
     // Layer 1, Questions
     // sees profileQA above for indexing
-    static let defaultProfileAnswers: [[Int]] =
+    static let defaultProfileAnswers: [Int] =
+        [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]
+    
+    
+    //
+    static let registerScheduleHelpArray: [[[Int]]] =
+        []
+    //
+    static let defaultScheduleHelpAnswers: [[Int]] =
         [
-            //            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            // Me
-            [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
-            // Goals
-            [0,0,0,0,0,0,0],
-            //0,1,2,3,4,5,6
-            // Sessions
-            // 0 = total, 1 - 6 = mind - strength
-            [0,0,0,0,0,0,0],
-            // Ranges (could be put in seperate array with arrays for each range but not in the mood to do so)
-            // note no range for total sessions
-            [0,0,  0,0,  0,0,  0,0,  0,0,  0,0]
+            
     ]
     
     // Layer 4: Final
@@ -211,44 +208,57 @@ enum scheduleDataStructures {
     
     
     // Schedules
-    static let registerSchedules: [[[Any]]] =
+    static let registerSchedules: [[[[Any]]]] =
         [
         ]
     
     // Custom schedules insert this into schedules array
-    static let emptyWeek: [[Any]] =
+    static let emptyWeek: [[[Any]]] =
         [
-            // Monday
-            [],
-            // Tuesday
-            [],
-            // Wednesday
-            [],
-            // Thursday
-            [],
-            // Friday
-            [],
-            // Saturday
-            [],
-            // Sunday
-            [],
-            // Full week list - 7
-            [],
-                // Information about schedule
-            // Title - 8
-            [""], // String
-            // Schedule style: day [0] or full week [1] - 9
-            [0],
-            // Session choice style: app [0] or user chooses [1] - 10
-            [0],
-            // Schedule type: app helps create scheudle [0], custom schedule [1] - 11
-            [0],
-            // Empty arrays incase more data needs to be stored one day
-            [],
-            //
-            [],
-            //
-            []
+            // [0] Schedule --------------------
+            [
+                // Monday
+                [],
+                // Tuesday
+                [],
+                // Wednesday
+                [],
+                // Thursday
+                [],
+                // Friday
+                [],
+                // Saturday
+                [],
+                // Sunday
+                [],
+                // Full week list - [0][7]
+                []
+            ],
+            // [1] Information about schedule ------------------
+            [
+                // Title - [1][0] 8
+                [""], // String
+                // Schedule style: day [0] or full week [1] - [1][1] 9
+                [0],
+                // Session choice style: app [0] or user chooses [1] - [1][2] 10
+                [0],
+                // Schedule type: app helps create scheudle [0], custom schedule [1] - [1][3] 11
+                [0],
+            ],
+            // [2] Schedule creation help data --------------------
+            [
+                // Question Answers [2][0]
+                [-1, -1 ],
+                // Goals [2][1]
+                [0,0,0,0,0,0,0],
+                //0,1,2,3,4,5,6
+                // Sessions
+                // 0 = total, 1 - 6 = mind - strength [2][2]
+                [0,0,0,0,0,0,0],
+                // Ranges (could be put in seperate array with arrays for each range but not in the mood to do so) [2][2]
+                // note no range for total sessions
+                [0,0,  0,0,  0,0,  0,0,  0,0,  0,0],
+            ]
     ]
     
     // Tracking

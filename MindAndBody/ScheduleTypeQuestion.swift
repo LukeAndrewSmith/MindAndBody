@@ -81,8 +81,6 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         titleLabel.textColor = Colours.colour1
         
         // Selected schedule
-        // TODO: IS THIS CORRECT?????
-            // Not sure should be called here anymore
         selectedSchedule = settings[7][0]
         
         //
@@ -97,8 +95,8 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             backButton.imageView?.image = #imageLiteral(resourceName: "Down")
             backButton.tintColor = Colours.colour4
         } else {
-            backButton.imageView?.image = #imageLiteral(resourceName: "Down")
-            backButton.tintColor = Colours.colour1
+            backButton.imageView?.image = #imageLiteral(resourceName: "Back Arrow")
+            backButton.tintColor = Colours.colour4
         }
     }
     
@@ -125,6 +123,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         if indexPath.row == 0 {
             cell.backgroundColor = .clear
             cell.backgroundView = UIView()
+            cell.selectionStyle = .none
             let titleLabel = UILabel()
             titleLabel.text = NSLocalizedString("scheduleOptionText", comment: "")
             titleLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
@@ -147,6 +146,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         } else if indexPath.row == 1 {
             cell.backgroundColor = .clear
             cell.backgroundView = UIView()
+            cell.selectionStyle = .none
             let titleLabel = UILabel()
             titleLabel.text = NSLocalizedString("sessionsOptionText", comment: "")
             titleLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
@@ -171,16 +171,32 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     
     //
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Check if user has filled in profile
+        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
+        var userHasFilledInProfile = true
+        // Loop profile answers
+        for i in 0...profileAnswers.count - 1 {
+            if profileAnswers[i] == -1 {
+                userHasFilledInProfile = false
+            }
+        }
+        
         //
         if indexPath.row == 2 {
+            let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
             //
-            // If
-            // ScheduleQuestionProfileSegue
-            // ScheduleQuestionHelpSegue
-            // Else
-            // ScheduleQuestionCustomSegue
-            
-//            self.performSegue(withIdentifier: "<#T##String#>", sender: self)
+            // App helps create schedule
+            if schedules[selectedSchedule][1][3][0] as! Int == 0 {
+                if userHasFilledInProfile == false {
+                    self.performSegue(withIdentifier: "ScheduleQuestionProfileSegue", sender: self)
+                } else {
+                    self.performSegue(withIdentifier: "ScheduleQuestionHelpSegue", sender: self)
+                }
+            // Custom Schedule
+            } else if schedules[selectedSchedule][1][3][0] as! Int == 1 {
+                self.performSegue(withIdentifier: "ScheduleQuestionCustomSegue", sender: self)
+
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -207,21 +223,21 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     // Switch handlers
     // Schedule option
     @objc func scheduleOptionSwitchAction(_ sender: UISwitch) {
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         if sender.isOn == true {
-            schedules[selectedSchedule][11][0] = 0
+            schedules[selectedSchedule][1][3][0] = 0
         } else if sender.isOn == false {
-            schedules[selectedSchedule][11][0] = 1
+            schedules[selectedSchedule][1][3][0] = 1
         }
         UserDefaults.standard.set(schedules, forKey: "schedules")
     }
     // Sessions option
     @objc func sessionsOptionSwitchAction(_ sender: UISwitch) {
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         if sender.isOn == true {
-            schedules[selectedSchedule][10][0] = 0
+            schedules[selectedSchedule][1][2][0] = 0
         } else if sender.isOn == false {
-            schedules[selectedSchedule][10][0] = 1
+            schedules[selectedSchedule][1][2][0] = 1
         }
         UserDefaults.standard.set(schedules, forKey: "schedules")
     }
@@ -244,7 +260,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
                 UIAlertAction in
                 //
                 // Delete Schedule
-                var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+                var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
                 var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                 //
                 // Delete if not plus row
@@ -287,13 +303,10 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     // Override segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
-        if segue.identifier == "ProfileSegue" {
-            let destinationVC = segue.destination as! Profile
-            if comingFromSchedule == true {
-                destinationVC.comingFromSchedule = true
-            }
-        }
-        
     }
+    
+}
+
+class ScheduleTypeQuestionNavigation: UINavigationController {
     
 }

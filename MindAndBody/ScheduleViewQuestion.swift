@@ -96,9 +96,9 @@ class ScheduleViewQuestion: UIViewController {
     // MARK: Button actions
     // Day
     @IBAction func dayButtonAction(_ sender: Any) {
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         // Set user settings for schedule style to week
-        schedules[selectedSchedule][9][0] = 0
+        schedules[selectedSchedule][1][1][0] = 0
         UserDefaults.standard.set(schedules, forKey: "schedules")
         self.performSegue(withIdentifier: "ScheduleCreatorSegue", sender: self)
     }
@@ -106,15 +106,15 @@ class ScheduleViewQuestion: UIViewController {
     // Week
     @IBAction func weekButtonAction(_ sender: Any) {
         // If app schedule, go to week
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[Any]]]
+        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         // Check if it was day view before
-        if schedules[selectedSchedule][9][0] as! Int == 0 {
+        if schedules[selectedSchedule][1][1][0] as! Int == 0 {
             wasDayView = true
-        } else if schedules[selectedSchedule][9][0] as! Int == 1 {
+        } else if schedules[selectedSchedule][1][1][0] as! Int == 1 {
             wasDayView = false
         }
         // Set user settings for schedule style to week
-        schedules[selectedSchedule][9][0] = 1
+        schedules[selectedSchedule][1][1][0] = 1
         UserDefaults.standard.set(schedules, forKey: "schedules")
         if selectedSchedule == 0 {
             //
