@@ -82,6 +82,8 @@ enum scheduleDataStructures {
         [
             // Schedule creation questions - 0
             [
+                // gender
+                
                 // Time/Commitment
                 ["profileQ20", "profileA201", "profileA202", "profileA203"], // // Time - 0
                 ["profileQ21", "profileA211", "profileA212", "profileA213"], // // Commitment - 1
@@ -157,7 +159,7 @@ enum scheduleDataStructures {
     // Layer 1, Questions
     // sees profileQA above for indexing
     static let defaultProfileAnswers: [Int] =
-        [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]
+        [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]
     
     
     //
@@ -236,19 +238,19 @@ enum scheduleDataStructures {
             ],
             // [1] Information about schedule ------------------
             [
-                // Title - [1][0] 8
+                // Title - [1][0]
                 [""], // String
-                // Schedule style: day [0] or full week [1] - [1][1] 9
+                // Schedule style: day [0] or full week [1] - [1][1]
                 [0],
-                // Session choice style: app [0] or user chooses [1] - [1][2] 10
+                // Session choice style: app [0] or user chooses [1] - [1][2]
                 [0],
-                // Schedule type: app helps create scheudle [0], custom schedule [1] - [1][3] 11
+                // Schedule type: app helps create scheudle [0], custom schedule [1] - [1][3]
                 [0],
             ],
             // [2] Schedule creation help data --------------------
             [
                 // Question Answers [2][0]
-                [-1, -1 ],
+                [-1, -1, -1],
                 // Goals [2][1]
                 [0,0,0,0,0,0,0],
                 //0,1,2,3,4,5,6

@@ -253,28 +253,13 @@ extension UIViewController {
     //
     // Week Progress
     func updateWeekProgress() {
-        var trackingProgressArray = UserDefaults.standard.array(forKey: "trackingProgress") as! [[Any]]
-        //
-        let defaults = UserDefaults.standard
-        var currentProgress = trackingProgressArray[0][0] as! Int
-        //
-        // Current mondays date in week
-        let currentMondayDate = Date().firstMondayInCurrentWeek
-        // Last Reset = monday of last week reset
-        let lastReset = trackingProgressArray[0][1] as! Date
-        
         // Reset if last reset wasn't is current week
-        if lastReset != currentMondayDate {
-            currentProgress = 0
-            // Reset Last Reset
-            trackingProgressArray[0][1] = currentMondayDate
-            defaults.set(trackingProgressArray, forKey: "trackingProgress")
-        }
-        
+        ScheduleVariables.shared.resetWeekTracking()
+        //
+        var trackingProgressArray = UserDefaults.standard.array(forKey: "trackingProgress") as! [[Any]]
         // Increment Progress
-        currentProgress += 1
-        trackingProgressArray[0][0] = currentProgress
-        defaults.set(trackingProgressArray, forKey: "trackingProgress")
+        trackingProgressArray[0][0] = trackingProgressArray[0][0] as! Int + 1
+        UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
     }
     
     // Month Progress
@@ -307,22 +292,21 @@ extension UIViewController {
     func updateScheduleTracking(fromSchedule: Bool) {
         if fromSchedule == true {
             let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let selectedSchedule = settings[7][0]
             let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
             // Day
-            if schedules[selectedSchedule][1][1][0] as! Int == 0 {
+            if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
                 // Update day
                 var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
+                scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
                 // Set
                 UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                 // Reload
                 ScheduleVariables.shared.shouldReloadChoice = true
                 // Week
-            } else if schedules[selectedSchedule][1][1][0] as! Int == 1 {
+            } else if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
                 // Update week [7]
                 var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                scheduleTracking[selectedSchedule][7][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
+                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
                 // Set
                 UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                 // Reload
@@ -330,6 +314,9 @@ extension UIViewController {
             }
         }
     }
+    
+    // NOTE: Func to reset schedule tracking and week tracking found in globalVariables, Schedule data, as needs to be contained in a class
+    // TODO: TURN THIS ENTIRE DOCUMENT INTO SEVERAL CLASSES CONTAINING A SHARED, AND THE FUNCTIONS, SO FUNCTIONS CAN BE CALLED MORE LEGIBLY BY CLASS.SHARED.FUNCTION
     
     
     // ----------------------------------------------------------------------------------------------------------------

@@ -21,7 +21,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var backgroundImageView: UIImageView!
     //
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var skipToGoalsButton: UIButton!
     
     // Answer elements
     // Answer Table
@@ -43,9 +42,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     var selectedQuestion = 0
     
     //
-    var selectedSchedule = Int()
-    
-    //
     var comingFromScheduleEditing = false
     
     //
@@ -60,7 +56,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         // Selected Schedule
         let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        selectedSchedule = settings[7][0]
+        ScheduleVariables.shared.selectedSchedule = settings[7][0]
         //
         UIApplication.shared.statusBarStyle = .lightContent
         //
@@ -100,8 +96,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         progressBar.progressTintColor = Colours.colour3
         progressBar.setProgress(0, animated: true)
         //
-        //
-        skipToGoalsButton.backgroundColor = Colours.colour2.withAlphaComponent(0.5)
         
         //
         // Previous question swipe
@@ -234,6 +228,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     // Cell for row
+    // Main table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         // Switch, me, goals, sessions
@@ -250,7 +245,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                     cell.answerImageArray = scheduleDataStructures.answerImageArray
                     cell.selectedQuestion = selectedQuestion
                     cell.selectedSection = selectedSection
-                    cell.selectedSchedule = selectedSchedule
                     cell.answerTableView.reloadData()
                     cell.delegate = self
                     return cell
@@ -287,8 +281,9 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 slider.tag = indexPath.section
                 //
                 let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-                let value = schedules[selectedSchedule][2][self.selectedSection][indexPath.section] as! Int
+                let value = schedules[ScheduleVariables.shared.selectedSchedule][2][self.selectedSection][indexPath.section] as! Int
                 slider.value = Float(value)
+                
                 //
                 // Indicator Label
                 cell.textLabel?.text = String(value)
@@ -340,7 +335,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
                 // NOTE TOTAL N SESSIONS, THOUGH IN SAME ARRAY, IS PRESENTED IN TITLE
                 // Therefore section + 1 to find first section value (n sessions is 0)
-                let value = schedules[selectedSchedule][2][selectedSection][indexPath.section + 1] as! Int
+                let value = schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection][indexPath.section + 1] as! Int
                 slider.value = Float(value)
                 //
                 // Indicator Label
@@ -363,14 +358,15 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    // Main table
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         //
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         //
         var count = 0
-        for i in 0...schedules[selectedSchedule][2][selectedSection].count - 1 {
-            count += schedules[selectedSchedule][2][selectedSection][i] as! Int
+        for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection].count - 1 {
+            count += schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection][i] as! Int
         }
         
         // If user has actually put something in, do something
@@ -380,33 +376,30 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 nextQuestion()
             // Sessions -> either scheduleviewquestion or scheduleediting
             } else if selectedSection == 2 {
+                //
                 // MARK: Update schedules full week list
                 // add each group * n sessions to the list (e.g [mind, mind, mind, flexibility, muscle gain, muscle gain] = [0,0,0,1,4,4]
-                //
                 var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
                 var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                 // reset full week list
-                // TODO: RESET FULL WEEK???
-                schedules[selectedSchedule][0][7] = []
+                schedules[ScheduleVariables.shared.selectedSchedule][0][7] = []
                 scheduleTracking[0][7] = []
-                
                 
                 //
                 // from 1, and -2 as array includes total n sessions
                 // Loop group sessions array
-                for i in 1...schedules[selectedSchedule][2][1].count - 2 {
-                    if schedules[selectedSchedule][2][1][i] as! Int != 0 {
+                for i in 1...schedules[ScheduleVariables.shared.selectedSchedule][2][2].count - 2 {
+                    if schedules[ScheduleVariables.shared.selectedSchedule][2][2][i] as! Int != 0 {
                         // Loop n session of each group with more than 0 sessions
-                        for _ in 1...(schedules[selectedSchedule][2][1][i] as! Int) {
+                        for _ in 1...(schedules[ScheduleVariables.shared.selectedSchedule][2][2][i] as! Int) {
                             // i - 1 as group number is 1 less as array includes total n sessions so is offset by 1
-                            schedules[selectedSchedule][0][7].append(i - 1)
+                            schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(i - 1)
                             scheduleTracking[0][7].append(scheduleDataStructures.scheduleTrackingArrays[i - 1]!)
                         }
                     }
                 }
                 UserDefaults.standard.set(schedules, forKey: "schedules")
                 UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                
                 
                 //
                 // CHECK WHERE TO GO
@@ -417,21 +410,25 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                         // -> either pop or go to schedule creator
                 } else {
                     let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                    let selectedSchedule = settings[7][0]
                     //
                     // If nothing changed, pop, else go to schedule creator
-                    var scheduleHasChanged = true
+                    var scheduleHasChanged = false
                     var newNSessions = [0,0,0,0,0,0,0]
                     //
                     for i in 0...6 {
-                        if schedules[selectedSchedule][0][i].count != 0 {
-                            for j in 0...schedules[selectedSchedule][0][i].count - 1 {
-                                newNSessions[schedules[selectedSchedule][0][i][j] as! Int] += 1
+                        if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count != 0 {
+                            for j in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][i].count - 1 {
+                                // i + 1 as week before total n sessions in schedules whereas total n sessions before groups in sessions array
+                                newNSessions[schedules[ScheduleVariables.shared.selectedSchedule][0][i][j] as! Int + 1] += 1
+                                // Total n sessions count
+                                newNSessions[0] += 1
                             }
                         }
                     }
-                    if newNSessions != schedules[selectedSchedule][2][1] as! [Int] {
-                        scheduleHasChanged = false
+                    
+                    //
+                    if newNSessions != schedules[ScheduleVariables.shared.selectedSchedule][2][2] as! [Int] {
+                        scheduleHasChanged = true
                     }
                     //
                     // GO TO
@@ -491,12 +488,12 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         // Change thumbTintColor for groups
         // Update total n sessions
         if selectedSection == 2 {
-            schedules[selectedSchedule][2][selectedSection][sender.tag + 1] = Int(roundedInt)
+            schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection][sender.tag + 1] = Int(roundedInt)
             // Thumb Tint
             // Red, below and above suggested
             let index = indexPath.section * 2
-            let rangeLower = schedules[selectedSchedule][2][3][index] as! Int
-            let rangeUpper = schedules[selectedSchedule][2][3][index + 1] as! Int
+            let rangeLower = schedules[ScheduleVariables.shared.selectedSchedule][2][3][index] as! Int
+            let rangeUpper = schedules[ScheduleVariables.shared.selectedSchedule][2][3][index + 1] as! Int
             // Value within range -> Green
             if roundedInt >= rangeLower && roundedInt <= rangeUpper {
                 sender.thumbTintColor = Colours.colour3
@@ -507,18 +504,21 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             //
             // Total n sessions
             var nSessions = 0
-            for i in 1...schedules[selectedSchedule][2][1].count - 1 {
-                nSessions += schedules[selectedSchedule][2][1][i] as! Int
+            for i in 1...schedules[ScheduleVariables.shared.selectedSchedule][2][2].count - 1 {
+                nSessions += schedules[ScheduleVariables.shared.selectedSchedule][2][2][i] as! Int
             }
-            schedules[selectedSchedule][2][1][0] = nSessions
+            schedules[ScheduleVariables.shared.selectedSchedule][2][2][0] = nSessions
             //
             let titleString = String(nSessions) + NSLocalizedString("nSessionsPerWeek", comment: "")
             sectionLabel.text = titleString
             
             // Goals
         } else {
-            schedules[selectedSchedule][2][selectedSection][sender.tag] = Int(roundedInt)
+            schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection][sender.tag] = Int(roundedInt)
         }
+        
+        let test = schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection] as! [Int]
+        
         UserDefaults.standard.set(schedules, forKey: "schedules")
         
     }
@@ -544,20 +544,20 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         // Locations
         var locationsArray = [Double]()
         let index = section * 2
-        let rangeLower = Double(schedules[selectedSchedule][2][3][index] as! Int) / Double(maxValue)
+        let rangeLower = Double(schedules[ScheduleVariables.shared.selectedSchedule][2][3][index] as! Int) / Double(maxValue)
         var rangeLower1 = Double()
         var rangeLower2 = Double()
-        if schedules[selectedSchedule][2][3][index] as! Int != 0 {
+        if schedules[ScheduleVariables.shared.selectedSchedule][2][3][index] as! Int != 0 {
             rangeLower1 = rangeLower - 0.01
             rangeLower2 = rangeLower + 0.01
         } else {
             rangeLower1 = 0
             rangeLower1 = 0.01
         }
-        let rangeUpper = Double(schedules[selectedSchedule][2][3][index + 1] as! Int) / Double(maxValue)
+        let rangeUpper = Double(schedules[ScheduleVariables.shared.selectedSchedule][2][3][index + 1] as! Int) / Double(maxValue)
         var rangeUpper1 = Double()
         var rangeUpper2 = Double()
-        if schedules[selectedSchedule][2][3][index + 1] as! Int != 0 {
+        if schedules[ScheduleVariables.shared.selectedSchedule][2][3][index + 1] as! Int != 0 {
             rangeUpper1 = rangeUpper - 0.01
             rangeUpper2 = rangeUpper + 0.01
         } else {
@@ -573,7 +573,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         //
         // Button color
         // If within range
-        if (schedules[selectedSchedule][2][1][section + 1] as! Int) > (schedules[selectedSchedule][2][3][index] as! Int) - 1 && (schedules[selectedSchedule][2][1][section + 1] as! Int) < (schedules[selectedSchedule][2][3][index + 1] as! Int) {
+        if (schedules[ScheduleVariables.shared.selectedSchedule][2][2][section + 1] as! Int) > (schedules[ScheduleVariables.shared.selectedSchedule][2][3][index] as! Int) - 1 && (schedules[ScheduleVariables.shared.selectedSchedule][2][2][section + 1] as! Int) < (schedules[ScheduleVariables.shared.selectedSchedule][2][3][index + 1] as! Int) {
             slider.thumbTintColor = Colours.colour3
         } else {
             slider.thumbTintColor = Colours.colour4
@@ -653,14 +653,10 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             
         // -> NSession Section
         } else {
-            // Select app schedule
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            settings[7][0] = 0
-            UserDefaults.standard.set(settings, forKey: "userSettings")
             //
             // MARK: CALL FUNCTIONS THAT SET DIFFICULTY LEVELS AND N SESSIONS
             // TODO: CALL SET N SESSIONS
-//            setNumberOfSessions(updating: false)
+            setNumberOfSessions(updating: false)
             //
             let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
             //
@@ -668,7 +664,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             updateProgress()
             questionsTable.isScrollEnabled = true
             //
-            let titleString = String(schedules[selectedSchedule][2][1][0] as! Int) + NSLocalizedString("nSessionsPerWeek", comment: "")
+            let titleString = String(schedules[ScheduleVariables.shared.selectedSchedule][2][2][0] as! Int) + NSLocalizedString("nSessionsPerWeek", comment: "")
             sectionLabel.text = titleString
             //
             // Animate as if normal scroll down
@@ -701,7 +697,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         if selectedSection == 0 {
             // If question has been answered
-            if schedules[selectedSchedule][2][0][selectedQuestion] as! Int != -1 {
+            if schedules[ScheduleVariables.shared.selectedSchedule][2][0][selectedQuestion] as! Int != -1 {
                 // Me Section
 //                // Next Question
 //                selectedQuestion += 1
@@ -755,17 +751,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     //
-    // Skip to goals
-    @IBAction func skipToGoalsAction(_ sender: Any) {
-        skipToGoalsButton.isEnabled = false
-        skipToGoalsButton.isUserInteractionEnabled = false
-        skipToGoalsButton.alpha = 0
-        // Set selected question to last question and perform nextquestion()
-        selectedQuestion = scheduleDataStructures.scheduleCreationHelp[selectedSection].count - 1
-        nextQuestion()
-    }
-    
-    //
     // Dismiss View
     @IBAction func backButtonAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -775,6 +760,15 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
         if sender.state == .began {
             self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    //
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //
+        if segue.identifier == "ScheduleHelpCreationSegue" {
+            let destinationVC = segue.destination as! ScheduleCreator
+            destinationVC.fromScheduleEditing = true
         }
     }
 }
@@ -801,7 +795,6 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     var answerImageArray: [String] = []
     var selectedQuestion = Int()
     var selectedSection = Int()
-    var selectedSchedule = Int()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -918,6 +911,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         return scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion].count - 1
     }
     
+    // ScheduleCreationHelpCell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
@@ -932,7 +926,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         cell.textLabel?.text = NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion][indexPath.row + 1], comment: "")
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         // Select answer
-        if schedules[selectedSchedule][2][selectedSection][row] as! Int != -1 && indexPath.row == schedules[selectedSchedule][2][selectedSection][selectedQuestion] as! Int {
+        if schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection][row] as! Int != -1 && indexPath.row == schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection][selectedQuestion] as! Int {
             cell.textLabel?.textColor = Colours.colour3
         }
         // If last cell hide seperator
@@ -944,9 +938,10 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         return cell
     }
     
+    // Cell Questions table, set answer in array to selected answer
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-        schedules[selectedSchedule][2][selectedSection][row] = indexPath.row
+        schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection][row] = indexPath.row
         UserDefaults.standard.set(schedules, forKey: "schedules")
         //
         tableView.deselectRow(at: indexPath, animated: true)

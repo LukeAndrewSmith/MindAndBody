@@ -21,14 +21,13 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var saveButton: UIButton!
     
     //
-    var selectedSchedule = Int()
-    //
     // App helps create schedule 0 or custom schedule 1
     var scheduleType = Int()
     
     //
     var appChoosesSessionsOnOffSwitch = UISwitch()
     var viewFullWeekSwitch = UISwitch()
+    var appHelpsCreateScheduleSwitch = UISwitch()
     
     //
     let scheduleOverviewArrays: [[String]] =
@@ -39,6 +38,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 "name",
                 "sessionChoosing",
                 "viewFullWeek",
+                "appHelpsCreateSchedule",
                 "sessionsOfSchedule",
                 "rearrangeSchedule"
             ],
@@ -47,6 +47,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 "name",
                 "sessionChoosing",
                 "viewFullWeek",
+                "appHelpsCreateSchedule",
                 "schedule"
             ]
     ]
@@ -60,15 +61,20 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         layoutView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        rearrangeScheduleHidden()
+    }
+    
     // Set Variables
     func setVariables() {
         // Selected Schedule
         let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        selectedSchedule = settings[7][0]
+        ScheduleVariables.shared.selectedSchedule = settings[7][0]
         
         // Schedule Type
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-        scheduleType = schedules[selectedSchedule][1][3][0] as! Int
+        scheduleType = schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int
     }
     
     // Layout
@@ -113,15 +119,15 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         scheduleOverviewTable.isScrollEnabled = false
         // Switches
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-            // App chooses sessions swithc
+            // App chooses sessions switch
             appChoosesSessionsOnOffSwitch.onTintColor = Colours.colour3
             appChoosesSessionsOnOffSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
             // Set inital value
             // On
-            if schedules[selectedSchedule][1][2][0] as! Int == 0 {
+            if schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] as! Int == 0 {
                 appChoosesSessionsOnOffSwitch.isOn = true
             // Off
-            } else if schedules[selectedSchedule][1][2][0] as! Int == 1 {
+            } else if schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] as! Int == 1 {
                 appChoosesSessionsOnOffSwitch.isOn = false
             }
             // View Full week switch
@@ -129,11 +135,22 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             viewFullWeekSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
             // Set inital value
             // On
-            if schedules[selectedSchedule][1][1][0] as! Int == 0 {
+            if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
                 viewFullWeekSwitch.isOn = false
                 // Off
-            } else if schedules[selectedSchedule][1][1][0] as! Int == 1 {
+            } else if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
                 viewFullWeekSwitch.isOn = true
+            }
+            // App Helps Create Schedule switch
+            appHelpsCreateScheduleSwitch.onTintColor = Colours.colour3
+            appHelpsCreateScheduleSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
+            // Set inital value
+            // On
+            if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
+                appHelpsCreateScheduleSwitch.isOn = true
+                // Off
+            } else if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 {
+                appHelpsCreateScheduleSwitch.isOn = false
             }
         
         //
@@ -141,6 +158,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         saveButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
         saveButton.setTitle(NSLocalizedString("save", comment: ""), for: .normal)
         //
+        rearrangeScheduleHidden()
     }
     
     //
@@ -194,6 +212,12 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
+        // Iphone 5/SE layout
+        if UIScreen.main.nativeBounds.height < 1334 {
+            return 62
+        } else {
+            return 72
+        }
         return 72
     }
     
@@ -218,7 +242,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         switch indexPath.row {
         // Name
         case 0:
-            cell.detailTextLabel?.text = schedules[selectedSchedule][1][0][0] as? String
+            cell.detailTextLabel?.text = schedules[ScheduleVariables.shared.selectedSchedule][1][0][0] as? String
         // Sessions choosing
         case 1:
             // App chooses
@@ -232,8 +256,18 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.addSubview(viewFullWeekSwitch)
             viewFullWeekSwitch.center = CGPoint(x: view.bounds.width - (viewFullWeekSwitch.bounds.width / 2) - 16, y: 72 / 2)
             
-        // N Sessions / Schedule
+        // App helps create schedule
         case 3:
+            // Iphone 5/SE layout, title too long
+            if UIScreen.main.nativeBounds.height < 1334 {
+                cell.textLabel?.text = NSLocalizedString("appHelpsCreateScheduleShort", comment: "")
+            }
+            cell.selectionStyle = .none
+            cell.addSubview(appHelpsCreateScheduleSwitch)
+            appHelpsCreateScheduleSwitch.center = CGPoint(x: view.bounds.width - (appHelpsCreateScheduleSwitch.bounds.width / 2) - 16, y: 72 / 2)
+            
+        // N Sessions / Schedule
+        case 4:
             // App scheudle, n sessions
             if scheduleType == 0 {
                 cell.accessoryType = .disclosureIndicator
@@ -242,7 +276,11 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.accessoryType = .disclosureIndicator
             }
         // Reorder Schedule
-        case 4:
+        case 5:
+            if scheduleType == 0 && schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
+                cell.isHidden = true
+                cell.isUserInteractionEnabled = false
+            }
             cell.accessoryType = .disclosureIndicator
         default: break
         }
@@ -270,7 +308,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
             //2. Add the text field
             alert.addTextField { (textField: UITextField) in
-                textField.text = schedules[self.selectedSchedule][1][0][0] as? String
+                textField.text = schedules[ScheduleVariables.shared.selectedSchedule][1][0][0] as? String
                 textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
                 textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
             }
@@ -286,7 +324,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 UserDefaults.standard.set(schedules, forKey: "schedules")
                 //
                 // Update name in table
-                cell?.detailTextLabel?.text = schedules[self.selectedSchedule][1][0][0] as? String
+                cell?.detailTextLabel?.text = schedules[ScheduleVariables.shared.selectedSchedule][1][0][0] as? String
             })
             // Cancel action
             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
@@ -298,16 +336,17 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.present(alert, animated: true, completion: nil)
             //
         // N Sessions / Schedule
-        case 3:
+        case 4:
             // App scheudle, n sessions
             if scheduleType == 0 {
                 self.performSegue(withIdentifier: "OverviewSessionsSegue", sender: self)
             // Custom schedule, schedule
             } else {
+                OverviewScheduleWeekSegue
                 self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
             }
         // App schedule: Reorder Schedule
-        case 4:
+        case 5:
             self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
         default: break
         }
@@ -326,6 +365,23 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
+    // Check if rearrange schedule
+    func rearrangeScheduleHidden() {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        // If app helps create schedule && view as full week then cannot rearrange schedule (schedule is presented in linear manner), therefore hide rearrange schedule row
+        if scheduleType == 0 && schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
+            let indexPath = IndexPath(row: 5, section: 0)
+            let rearrangeCell = scheduleOverviewTable.cellForRow(at: indexPath)
+            rearrangeCell?.isHidden = true
+            rearrangeCell?.isUserInteractionEnabled = false
+        } else {
+            let indexPath = IndexPath(row: 5, section: 0)
+            let rearrangeCell = scheduleOverviewTable.cellForRow(at: indexPath)
+            rearrangeCell?.isHidden = false
+            rearrangeCell?.isUserInteractionEnabled = true
+        }
+    }
+    
     //
     // Watch for switch changed
     @objc func switchValueChanged(sender: UISwitch) {
@@ -333,21 +389,36 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         if sender == appChoosesSessionsOnOffSwitch {
             // App chooses sessions
             if sender.isOn == true {
-                schedules[selectedSchedule][1][2][0] = 0
+                schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] = 0
             // User chooses sessions
             } else {
-                schedules[selectedSchedule][1][2][0] = 1
+                schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] = 1
             }
-        } else {
+        } else if sender == viewFullWeekSwitch {
             // Schedule style -> full week
             if sender.isOn == true {
-                schedules[selectedSchedule][1][1][0] = 1
+                schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] = 1
             // Schedule style -> see each day
             } else {
-                schedules[selectedSchedule][1][1][0] = 0
+                schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] = 0
+            }
+        } else if sender == appHelpsCreateScheduleSwitch {
+            // App chooses sessions
+            if sender.isOn == true {
+                schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] = 0
+                // User chooses sessions
+            } else {
+                schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] = 1
             }
         }
         UserDefaults.standard.set(schedules, forKey: "schedules")
+        
+        if sender == appHelpsCreateScheduleSwitch {
+            scheduleType = schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int
+            scheduleOverviewTable.reloadData()
+        } else if sender == viewFullWeekSwitch {
+            rearrangeScheduleHidden()
+        }
     }
     
     // Save Schedule
@@ -366,7 +437,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         alert.view.tintColor = Colours.colour2
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
         
-        // Reset app action
+        // Delete schedule action
         let okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: UIAlertActionStyle.default) {
             UIAlertAction in
             //
@@ -376,15 +447,19 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             // Delete if not plus row
             // Update arrays
-            schedules.remove(at: self.selectedSchedule)
-            scheduleTracking.remove(at: self.selectedSchedule)
+            schedules.remove(at: ScheduleVariables.shared.selectedSchedule)
+            scheduleTracking.remove(at: ScheduleVariables.shared.selectedSchedule)
             UserDefaults.standard.set(schedules, forKey: "schedules")
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             
-            // Select app schedule
+            // Select last schedule
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            settings[7][0] = 0
-            self.selectedSchedule = 0
+            if schedules.count == 0 {
+                settings[7][0] = 0
+            } else {
+                settings[7][0] = schedules.count - 1
+            }
+            ScheduleVariables.shared.selectedSchedule = settings[7][0]
             UserDefaults.standard.set(settings, forKey: "userSettings")
             //
             ScheduleVariables.shared.shouldReloadSchedule = true
@@ -414,6 +489,9 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         if segue.identifier == "OverviewSessionsSegue" {
             let destinationVC = segue.destination as? ScheduleCreationHelp
             destinationVC?.comingFromScheduleEditing = true
+        } else if segue.identifier == "OverviewScheduleSegue" {
+            let destinationVC = segue.destination as? ScheduleCreator
+            destinationVC?.fromScheduleEditing = true
         }
     }
     

@@ -122,10 +122,58 @@ class ScheduleVariables {
     var selectedRows = [0,0]
     // Selected day
     var selectedDay = Int()
+    // Selected schedule
+    var selectedSchedule = Int()
     // Should reload schedule table
     var shouldReloadSchedule = true
     // Should reload choice (once done session, reload to update tick if done)
     var shouldReloadChoice = false
+    
+    // Note, this function should be
+    // Func reset schedule tracking and week tracking
+    func resetWeekTracking() {
+        // Use lastResetWeek in tracking progress array to reset schedule tracking bools to false and and week progress to 0
+        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+        var trackingProgressArray = UserDefaults.standard.array(forKey: "trackingProgress") as! [[Any]]
+        //
+        let defaults = UserDefaults.standard
+        //
+        // Current mondays date in week
+        let currentMondayDate = Date().firstMondayInCurrentWeek
+        // Last Reset = monday of last week reset
+        let lastReset = trackingProgressArray[0][1] as! Date
+        
+        // Reset if last reset wasn't in current week
+        if lastReset != currentMondayDate {
+            // Reset all bools in week tracking to false
+            if scheduleTracking.count != 0 {
+                // Loop scheduleTracking
+                for i in 0...scheduleTracking.count - 1 {
+                    // Loop schedule (week containing days/ full week)
+                    for j in 0...scheduleTracking[i].count {
+                        // If day/full week not empty
+                        if scheduleTracking[i][j].count != 0 {
+                            // Loop day/full week
+                            for k in 0...scheduleTracking[i][j].count - 1 {
+                                // Loop groups (should always be 0...1, see SchedulDataStructures.scheduleTrackingArrays)
+                                for l in 0...scheduleTracking[i][j][k].count {
+                                    // Will always contain something, check SchedulDataStructures.scheduleTrackingArrays
+                                    for m in 0...scheduleTracking[i][j][k][l].count - 1 {
+                                        scheduleTracking[i][j][k][l][m] = false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            // Set week progress to 0
+            trackingProgressArray[0][0] = 0
+            // Reset Last Reset
+            trackingProgressArray[0][1] = currentMondayDate
+            defaults.set(trackingProgressArray, forKey: "trackingProgress")
+        }
+    }
 }
 
 //

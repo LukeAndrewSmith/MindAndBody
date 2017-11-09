@@ -20,8 +20,8 @@ extension ScheduleScreen {
         updateSelectedChoice(row: row)
         // ------------------------------------------------------------------------------------------------
         // Next Choice Function
-        if ScheduleVariables.shared.choiceProgress[0] == -1 && row != schedules[selectedSchedule][0][ScheduleVariables.shared.selectedDay].count {
-            ScheduleVariables.shared.choiceProgress[0] = schedules[selectedSchedule][0][ScheduleVariables.shared.selectedDay][row] as! Int
+        if ScheduleVariables.shared.choiceProgress[0] == -1 && row != schedules[ScheduleVariables.shared.selectedSchedule][0][ScheduleVariables.shared.selectedDay].count {
+            ScheduleVariables.shared.choiceProgress[0] = schedules[ScheduleVariables.shared.selectedSchedule][0][ScheduleVariables.shared.selectedDay][row] as! Int
             ScheduleVariables.shared.choiceProgress[1] += 1
             ScheduleVariables.shared.selectedRows[0] = row
             maskView()
@@ -277,12 +277,12 @@ extension ScheduleScreen {
         //
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         // ------------------------------------------------------------------------------------------------
-        if ScheduleVariables.shared.choiceProgress[0] == -1 && row != schedules[selectedSchedule][0][ScheduleVariables.shared.selectedDay].count {
+        if ScheduleVariables.shared.choiceProgress[0] == -1 && row != schedules[ScheduleVariables.shared.selectedSchedule][0][ScheduleVariables.shared.selectedDay].count {
             // Notes selectedChoiceStretching not always used
             // selectedChoice...[0] to group
-            selectedChoiceWarmup[0] = schedules[selectedSchedule][0][ScheduleVariables.shared.selectedDay][row] as! Int
-            selectedChoiceSession[0] = schedules[selectedSchedule][0][ScheduleVariables.shared.selectedDay][row] as! Int
-            selectedChoiceStretching[0] = schedules[selectedSchedule][0][ScheduleVariables.shared.selectedDay][row] as! Int
+            selectedChoiceWarmup[0] = schedules[ScheduleVariables.shared.selectedSchedule][0][ScheduleVariables.shared.selectedDay][row] as! Int
+            selectedChoiceSession[0] = schedules[ScheduleVariables.shared.selectedSchedule][0][ScheduleVariables.shared.selectedDay][row] as! Int
+            selectedChoiceStretching[0] = schedules[ScheduleVariables.shared.selectedSchedule][0][ScheduleVariables.shared.selectedDay][row] as! Int
         //
         } else {
             // Present next choice or present session
@@ -649,26 +649,26 @@ extension ScheduleScreen {
         if scheduleStyle == 0 {
             // First choice screen, groups
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
-                return scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][row][0][0]
+                return scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][row][0][0]
             //
             // Later Choices
             } else if isLastChoice() == true {
                 // All only have one array of bool for indicating final choice completion
                     // Flexibility, Toning, Muscle Gain, Strength, 1,3,4,5
-                    return scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][row]
+                    return scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][row]
             }
         // Week
         } else if scheduleStyle == 1 {
             // First choice screen, groups
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
-                return scheduleTracking[selectedSchedule][7][row][0][0]
+                return scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][row][0][0]
             //
             // TODO: IF LATER IN CHOICES, CHECK [1] FOR CHOICE PATH ETC...
             } else {
                 // All only have one array of bool for indicating final choice completion
                 // Flexibility, Toning, Muscle Gain, Strength, 1,3,4,5
                 if isLastChoice() == true {
-                    return scheduleTracking[selectedSchedule][7][ScheduleVariables.shared.selectedRows[0]][1][row]
+                    return scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][ScheduleVariables.shared.selectedRows[0]][1][row]
                 }
             }
         }
@@ -684,7 +684,7 @@ extension ScheduleScreen {
         var isCompleted = true
         // -2 because title included
         for i in 0...nRows - 2 {
-            if scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][i] == false {
+            if scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][i] == false {
                 isCompleted = false
                 break
             }
@@ -958,19 +958,19 @@ extension ScheduleScreen {
             if scheduleStyle == 0 {
                 // Day
                 // [index1][index2] when in group tracking to access main page tracker, look at schedule data: scheduleDataStructures.scheduleTrackingArrays to understand
-                if scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] == false {
-                    scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] = true
+                if scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] == false {
+                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] = true
                 } else {
-                    scheduleTracking[selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] = false
+                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] = false
                 }
             //
             // Full Week View
             } else if scheduleStyle == 1 {
                 // Week
-                if scheduleTracking[selectedSchedule][7][index0][index1][index2] == false {
-                    scheduleTracking[selectedSchedule][7][index0][index1][index2] = true
+                if scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] == false {
+                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] = true
                 } else {
-                    scheduleTracking[selectedSchedule][7][index0][index1][index2] = false
+                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] = false
                 }
             }
             
@@ -1022,9 +1022,9 @@ extension ScheduleScreen {
         let scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         var isCompleted = 0
         //
-        if scheduleTracking.count != 0 && scheduleTracking[selectedSchedule][day].count != 0 {
-            for i in 0...scheduleTracking[selectedSchedule][day].count - 1 {
-                if scheduleTracking[selectedSchedule][day][i][0][0] == false {
+        if scheduleTracking.count != 0 && scheduleTracking[ScheduleVariables.shared.selectedSchedule][day].count != 0 {
+            for i in 0...scheduleTracking[ScheduleVariables.shared.selectedSchedule][day].count - 1 {
+                if scheduleTracking[ScheduleVariables.shared.selectedSchedule][day][i][0][0] == false {
                     isCompleted = 1
                     break
                 }

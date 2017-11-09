@@ -1600,19 +1600,23 @@
 //
 "name" = "Name";
 "sessionChoosing" = "App chooses sessions:";
-"viewFullWeek" = "View full week:";
-"sessionsOfSchedule" = "Sessions/Groups";
-"rearrangeSchedule" = "Rearrange Schedule";
+"viewFullWeek" = "View schedule as week:";
+"appHelpsCreateSchedule" = "App helps create schedule:";
+"appHelpsCreateScheduleShort" = "App helps create sched.:";
+"sessionsOfSchedule" = "Edit schedule content";
+"rearrangeSchedule" = "Rearrange schedule";
 //
 "deleteScheduleWarning" = "Are you sure you'd like to delete this schedule?";
     "yes" = "Yes";
 
+"week" = "Nº Sessions per week";
 
 //
 // MARK: Profile //
 //
 //
 "saveProfile" = "Save Profile";
+"profileNotCompleteWarning" = "You have not answered every question, please go back and answers all unanswered questions";
 
     //
     // Title //
@@ -1675,11 +1679,11 @@
     "profileA72" = "Fairly (I wouldn't say I'm unfit)";
     "profileA73" = "Yes (I like my sport)";
 // Strength
-"profileQ8" = "Can you do 5 pushups?"; // Strength: Pushup
+"profileQ8" = "Can you do 15 pushups?"; // Strength: Pushup
     "profileA81" = "No";
     "profileA82" = "Not very easily";
     "profileA83" = "Yes, comfortably";
-"profileQ9" = "Can you do 5 pullups?"; // Strength: Pullup
+"profileQ9" = "Can you do 10 pullups?"; // Strength: Pullup
     "profileA91" = "No";
     "profileA92" = "Not very easily";
     "profileA93" = "Yes, comfortably";

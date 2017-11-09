@@ -490,6 +490,7 @@
 		0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872A1E7B4E2C00E7153A /* SessionScreen.swift */; };
 		07928C621F93E6D400EDA5C6 /* InitialInfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07928C611F93E6D400EDA5C6 /* InitialInfoScreen.swift */; };
 		0798381E1F8A8DD9007C3CF5 /* TimeBasedSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798381D1F8A8DD8007C3CF5 /* TimeBasedSession.swift */; };
+		0798925E1FB5078C00AA0B55 /* ScheduleCreatorWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798925D1FB5078C00AA0B55 /* ScheduleCreatorWeek.swift */; };
 		07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */; };
 		07995A391E893E590009C9B1 /* ScheduleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07995A381E893E590009C9B1 /* ScheduleScreen.swift */; };
 		07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */; };
@@ -497,6 +498,7 @@
 		07B852621F83756C005F3781 /* ScheduleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B852611F83756C005F3781 /* ScheduleData.swift */; };
 		07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C081E8BDF9500A851EF /* YogaScreen.swift */; };
 		07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */; };
+		07C028B41FB4D1A800CBB1ED /* ProfileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C028B31FB4D1A800CBB1ED /* ProfileHelper.swift */; };
 		07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2D3BB1EBA88CF000770DE /* MindBody.swift */; };
 		07C7E2731F52E1B6001155DF /* forwardBend.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C7E2721F52E1B6001155DF /* forwardBend.png */; };
 		07CB04371E604653002066CD /* MeditationChoiceGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CB04361E604653002066CD /* MeditationChoiceGuided.swift */; };
@@ -1872,6 +1874,7 @@
 		0791872A1E7B4E2C00E7153A /* SessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionScreen.swift; sourceTree = "<group>"; };
 		07928C611F93E6D400EDA5C6 /* InitialInfoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInfoScreen.swift; sourceTree = "<group>"; };
 		0798381D1F8A8DD8007C3CF5 /* TimeBasedSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedSession.swift; sourceTree = "<group>"; };
+		0798925D1FB5078C00AA0B55 /* ScheduleCreatorWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreatorWeek.swift; sourceTree = "<group>"; };
 		07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundImageCollection.swift; sourceTree = "<group>"; };
 		07995A381E893E590009C9B1 /* ScheduleScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleScreen.swift; sourceTree = "<group>"; };
 		07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioScreen.swift; sourceTree = "<group>"; };
@@ -1879,6 +1882,7 @@
 		07B852611F83756C005F3781 /* ScheduleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleData.swift; sourceTree = "<group>"; };
 		07BE8C081E8BDF9500A851EF /* YogaScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreen.swift; sourceTree = "<group>"; };
 		07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
+		07C028B31FB4D1A800CBB1ED /* ProfileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHelper.swift; sourceTree = "<group>"; };
 		07C2D3BB1EBA88CF000770DE /* MindBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindBody.swift; sourceTree = "<group>"; };
 		07C7E2721F52E1B6001155DF /* forwardBend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forwardBend.png; sourceTree = "<group>"; };
 		07CB04361E604653002066CD /* MeditationChoiceGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationChoiceGuided.swift; sourceTree = "<group>"; };
@@ -4567,6 +4571,7 @@
 				07E1D4E01FB2250B00B53B85 /* ScheduleCreationHelp.swift */,
 				07D5C3D81F9E32430038F143 /* ScheduleViewQuestion.swift */,
 				07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */,
+				0798925D1FB5078C00AA0B55 /* ScheduleCreatorWeek.swift */,
 				0750DB621F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift */,
 			);
 			name = "Schedule Creation";
@@ -6851,6 +6856,7 @@
 			isa = PBXGroup;
 			children = (
 				077876221F92A50D005CE68A /* Profile.swift */,
+				07C028B31FB4D1A800CBB1ED /* ProfileHelper.swift */,
 			);
 			name = "Profile Editing";
 			sourceTree = "<group>";
@@ -8282,6 +8288,7 @@
 				077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */,
 				07F8EDD51FA5DB3700C452F4 /* ScheduleTypeQuestion.swift in Sources */,
 				071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */,
+				07C028B41FB4D1A800CBB1ED /* ProfileHelper.swift in Sources */,
 				07686A901F843A1600C278CC /* ScheduleHelpers.swift in Sources */,
 				076C68421ED497AD009160C2 /* BodyweightChoiceCC.swift in Sources */,
 				077206821F90C52000818088 /* TimeBasedHelpers.swift in Sources */,
@@ -8299,6 +8306,7 @@
 				071C4FB31E98D6D800328D18 /* MeditationTimer.swift in Sources */,
 				07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */,
 				074074AD1EDC0A4000DC2D0F /* YogaAutomatic.swift in Sources */,
+				0798925E1FB5078C00AA0B55 /* ScheduleCreatorWeek.swift in Sources */,
 				0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */,
 				0789ED061F79A6EA000EB739 /* UserData.swift in Sources */,
 				07DEE6FB1E0AC47F003B89AB /* WorkoutChoice.swift in Sources */,

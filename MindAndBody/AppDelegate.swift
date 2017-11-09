@@ -61,8 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Walkthroughs
         UserDefaults.standard.register(defaults: ["walkthroughs" : Register.registerWalkthroughArray])
         
-        
-        
         //
         // Set Home Screen
         var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
@@ -122,6 +120,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        // Reset weekTracking/scheduleTracking (called a few times too many throughout but better safe than sorry)
+        ScheduleVariables.shared.resetWeekTracking()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

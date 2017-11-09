@@ -27,9 +27,7 @@ class ScheduleViewQuestion: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     
     var comingFromSchedule = false
-    
-    var selectedSchedule = 0
-    
+        
     var wasDayView = false
         
     //
@@ -76,7 +74,7 @@ class ScheduleViewQuestion: UIViewController {
         weekViewButton.setTitleColor(Colours.colour1, for: .normal)
         
         // Selected schedule
-        selectedSchedule = settings[7][0]
+        ScheduleVariables.shared.selectedSchedule = settings[7][0]
         
         //
         // Back
@@ -98,7 +96,7 @@ class ScheduleViewQuestion: UIViewController {
     @IBAction func dayButtonAction(_ sender: Any) {
         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         // Set user settings for schedule style to week
-        schedules[selectedSchedule][1][1][0] = 0
+        schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] = 0
         UserDefaults.standard.set(schedules, forKey: "schedules")
         self.performSegue(withIdentifier: "ScheduleCreatorSegue", sender: self)
     }
@@ -108,15 +106,15 @@ class ScheduleViewQuestion: UIViewController {
         // If app schedule, go to week
         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         // Check if it was day view before
-        if schedules[selectedSchedule][1][1][0] as! Int == 0 {
+        if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
             wasDayView = true
-        } else if schedules[selectedSchedule][1][1][0] as! Int == 1 {
+        } else if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
             wasDayView = false
         }
         // Set user settings for schedule style to week
-        schedules[selectedSchedule][1][1][0] = 1
+        schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] = 1
         UserDefaults.standard.set(schedules, forKey: "schedules")
-        if selectedSchedule == 0 {
+        if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
             //
             ScheduleVariables.shared.shouldReloadSchedule = true
             self.dismiss(animated: true)

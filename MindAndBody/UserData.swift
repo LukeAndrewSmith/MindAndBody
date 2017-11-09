@@ -226,8 +226,8 @@ enum Register {
         [0],   // 0 == "demonstration", 1 == "targetArea"
         // Metric/Imperial - 6
         [0], // == "kg" (0), "lb" (1)
-        // Schedule style [0] (0 - day, 1- week), selected Schedule [1] - 7
-        [0, 0]  // (day(0) or week (1))
+        // Selected Schedule [0] - 7
+        [0]
     ]
     
     // --------------------------------------------------------

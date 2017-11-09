@@ -79,9 +79,18 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         if comingFromSchedule == false {
             navigationBar.title = (NSLocalizedString(sessionData.navigationTitles[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]] , comment: ""))
         } else {
-            presetsButton.alpha = 0
-            let sessionTypeString = NSLocalizedString(scheduleTitleArray[SelectedSession.shared.selectedSession[0]], comment: "")
-            navigationBar.title = sessionTypeString + " - " + NSLocalizedString("overview", comment: "")
+            let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+            // App chooses session
+            if schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] as! Int == 0 {
+                presetsButton.alpha = 0
+                let sessionTypeString = NSLocalizedString(scheduleTitleArray[SelectedSession.shared.selectedSession[0]], comment: "")
+                navigationBar.title = sessionTypeString + " - " + NSLocalizedString("overview", comment: "")
+            // User chooses sessions
+            } else {
+                navigationBar.title = (NSLocalizedString(sessionData.navigationTitles[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]] , comment: ""))
+                // Select nothing, user wants to select somthing
+                SelectedSession.shared.selectedSession[2] = -1
+            }
         }
         navigationController?.navigationBar.tintColor = Colours.colour1
         

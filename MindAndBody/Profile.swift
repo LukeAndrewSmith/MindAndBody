@@ -209,14 +209,39 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
                 self.dismiss(animated: true)
             } else {
                 let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                let selectedSchedule = settings[7][0]
                 let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-                // App helps schedule creation
-                if schedules[selectedSchedule][1][3][0] as! Int == 0 {
-                    self.performSegue(withIdentifier: "ProfileAppHelpSegue", sender: self)
-                // Custom schedule creation
+                let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
+                var allAnswered = true
+                for i in 0...profileAnswers.count - 1 {
+                    if profileAnswers[i] == -1 {
+                        allAnswered = false
+                    }
+                }
+                if allAnswered == true {
+                    // App helps schedule creation
+                    if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
+                        self.performSegue(withIdentifier: "ProfileAppHelpSegue", sender: self)
+                    // Custom schedule creation
+                    } else {
+                        self.performSegue(withIdentifier: "ProfileCustomSegue", sender: self)
+                    }
                 } else {
-                    self.performSegue(withIdentifier: "ProfileCustomSegue", sender: self)
+                    //
+                    // Alert View asking if you really want to delete
+                    let title = NSLocalizedString("profileNotCompleteWarning", comment: "")
+                    let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+                    alert.view.tintColor = Colours.colour2
+                    alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
+                    
+                    // Reset app action
+                    let okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: UIAlertActionStyle.default) {
+                        UIAlertAction in
+                    }
+                    // Add Actions
+                    alert.addAction(okAction)
+                    
+                    // Present Alert
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
             
@@ -570,9 +595,12 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         profileAnswers[row] = indexPath.row
         UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
         //
+        answerTableView.isUserInteractionEnabled = false
+        //
         tableView.deselectRow(at: indexPath, animated: true)
         answerTableView.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.answerTableView.isUserInteractionEnabled = true
             // Update difficulty levels each time row selected
                 // this is incase 
             var allAnswered = true
@@ -583,7 +611,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
             }
             if allAnswered == true {
                 // TODO: Call set difficulty levels
-//                setDifficultyLevels()
+                ProfileFunctions.shared.setDifficultyLevels()
             }
             //
             self.delegate?.nextQuestion()
