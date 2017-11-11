@@ -317,8 +317,6 @@ extension UIViewController {
     
     // NOTE: Func to reset schedule tracking and week tracking found in globalVariables, Schedule data, as needs to be contained in a class
     // TODO: TURN THIS ENTIRE DOCUMENT INTO SEVERAL CLASSES CONTAINING A SHARED, AND THE FUNCTIONS, SO FUNCTIONS CAN BE CALLED MORE LEGIBLY BY CLASS.SHARED.FUNCTION
-    
-    
     // ----------------------------------------------------------------------------------------------------------------
     // Update Tracking Arrays
     //
@@ -340,7 +338,6 @@ extension UIViewController {
         
         //
         // Update
-        //
         // Week has already begun
         if keys.contains(currentMondayDate) {
             //
@@ -348,61 +345,49 @@ extension UIViewController {
             if keys.last == currentDate {
                 weekTrackingDictionary[currentDate] = currentProgress
                 
-                //
-                // Day is next in line
+            //
+            // Day is next in line
             } else if keys.last == calendar.date(byAdding: .day, value: -1, to: currentDate) {
                 weekTrackingDictionary.updateValue(currentProgress, forKey: currentDate)
                 
-                //
-                // Day isn't next in line
+            //
+            // Day isn't next in line
             } else if keys.last! < calendar.date(byAdding: .day, value: -1, to: currentDate)! {
                 //
                 // Update missed days with 0
                 var startDate = keys.last!
-                let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!
-                // Loop adding 0 to dates
-                while startDate <= endDate {
-                    weekTrackingDictionary.updateValue(0, forKey: startDate)
+                // Loop last adding previous value to dates
+                while startDate < currentDate {
+                    weekTrackingDictionary.updateValue(weekTrackingDictionary[startDate]!, forKey: startDate)
                     startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
                 }
                 // Update today
                 weekTrackingDictionary.updateValue(currentProgress, forKey: currentDate)
             }
             
-            // Week hasn't begun (should start) / user has't done anything this week
+        // Week hasn't begun (should start) / user has't done anything this week
         } else {
-            //
+            // Clear
+            weekTrackingDictionary = [:]
             // If today is monday, clear array and create monday
             if currentDate == currentMondayDate {
-                weekTrackingDictionary = [:]
                 weekTrackingDictionary.updateValue(currentProgress, forKey: currentMondayDate)
                 
-                //
-                // Today isn't monday
+            // Today isn't monday
             } else {
                 //
-                // Clear array if necessary (if last key is less than current monday date)
-                if  weekTrackingDictionary.count != 0 {
-                    if keys.last! < currentMondayDate {
-                        weekTrackingDictionary = [:]
-                    }
+                // Update missed days with 0
+                var startDate = currentMondayDate
+                // Loop adding 0 to dates
+                while startDate < currentDate {
+                    weekTrackingDictionary.updateValue(0, forKey: startDate)
+                    startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
                 }
-                // Update missed days
-                if currentDate > currentMondayDate {
-                    //
-                    // Update missed days with 0
-                    var startDate = currentMondayDate
-                    let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!
-                    // Loop adding 0 to dates
-                    while startDate <= endDate {
-                        weekTrackingDictionary.updateValue(0, forKey: startDate)
-                        startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
-                    }
-                    // Update today
-                    weekTrackingDictionary.updateValue(currentProgress, forKey: currentDate)
-                }
+                // Update today
+                weekTrackingDictionary.updateValue(currentProgress, forKey: currentDate)
             }
         }
+        
         //
         // TODO:  Need to then save the dictionary somewhere !!!!!!!!!!!!!!!
     }
@@ -430,30 +415,28 @@ extension UIViewController {
             // Update current weeks progress
             trackingDictionary[currentMondayDate] = currentProgress
             
-            //
-            // Current week doesn't exist
+        //
+        // Current week doesn't exist
         } else {
             // Last updated week was last week |or| first week ever updated
             if keys.count == 0 || keys.last! == calendar.date(byAdding: .weekOfYear, value: -1, to: currentMondayDate) {
                 // Create current weeks progress
                 trackingDictionary.updateValue(currentProgress, forKey: currentMondayDate)
                 
-                // Skipped weeks
+            // Skipped weeks
             } else {
                 //
                 // Update missed weeks with 0
                 var startDate = keys.last!
-                let endDate = calendar.date(byAdding: .day, value: -1, to: currentMondayDate)!
                 // Loop adding 0 to dates
-                while startDate <= endDate {
+                while startDate < currentMondayDate {
                     trackingDictionary.updateValue(0, forKey: startDate)
-                    startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
+                    startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate)!
                 }
                 // Update today
                 trackingDictionary.updateValue(currentProgress, forKey: currentMondayDate)
             }
         }
-        
     }
     
     // ----------------------------------------------------------------------------------------------------------------
@@ -473,35 +456,34 @@ extension UIViewController {
         
         // Note: Months defined by their first date
         //
-        // Current week exists
+        // Current month exists
         if keys.contains(firstDateInCurrentMonth) {
             // Update current weeks progress
             monthTrackingDictionary[firstDateInCurrentMonth] = currentProgress
             
-            //
-            // Current week doesn't exist
+        //
+        // Current month doesn't exist
         } else {
-            // Last updated week was last week |or| first week ever updated
-            if keys.count == 0 || keys.last! == calendar.date(byAdding: .weekOfYear, value: -1, to: firstDateInCurrentMonth) {
-                // Create current weeks progress
+            // Last updated months was last month |or| first month ever updated
+            if keys.count == 0 || keys.last! == calendar.date(byAdding: .month, value: -1, to: firstDateInCurrentMonth) {
+                // Create current months progress
                 monthTrackingDictionary.updateValue(currentProgress, forKey: firstDateInCurrentMonth)
                 
-                // Skipped weeks
+            // Skipped months
             } else {
                 //
-                // Update missed weeks with 0
+                // Update missed month with 0
                 var startDate = keys.last!
                 let endDate = calendar.date(byAdding: .day, value: -1, to: firstDateInCurrentMonth)!
                 // Loop adding 0 to dates
                 while startDate <= endDate {
                     monthTrackingDictionary.updateValue(0, forKey: startDate)
-                    startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
+                    startDate = calendar.date(byAdding: .month, value: 1, to: startDate)!
                 }
                 // Update today
                 monthTrackingDictionary.updateValue(currentProgress, forKey: firstDateInCurrentMonth)
             }
         }
-        //
     }
     
     

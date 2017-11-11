@@ -133,14 +133,12 @@ class ScheduleVariables {
     var didCreateNewSchedule = false
     
     
-    // Note, this function should be
+    // Note, this function should be somewhere else
     // Func reset schedule tracking and week tracking
     func resetWeekTracking() {
         // Use lastResetWeek in tracking progress array to reset schedule tracking bools to false and and week progress to 0
         var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         var trackingProgressArray = UserDefaults.standard.array(forKey: "trackingProgress") as! [[Any]]
-        //
-        let defaults = UserDefaults.standard
         //
         // Current mondays date in week
         let currentMondayDate = Date().firstMondayInCurrentWeek
@@ -175,7 +173,8 @@ class ScheduleVariables {
             trackingProgressArray[0][0] = 0
             // Reset Last Reset
             trackingProgressArray[0][1] = currentMondayDate
-            defaults.set(trackingProgressArray, forKey: "trackingProgress")
+            UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
+            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
         }
     }
 }
