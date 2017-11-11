@@ -270,7 +270,7 @@ extension UIViewController {
         
         //
         // Get first date in month
-        let firstMonday = Date().firstDateInCurrentMonth
+        let firstMonday = Date().firstDateInMonth
         // Last Reset = first monday in the last month reset
         let lastReset = trackingProgressArray[1][1] as! Date
         
@@ -356,8 +356,9 @@ extension UIViewController {
                 //
                 // Update missed days with 0
                 var startDate = keys.last!
+                let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!
                 // Loop last adding previous value to dates
-                while startDate < currentDate {
+                while startDate <= endDate {
                     weekTrackingDictionary.updateValue(weekTrackingDictionary[startDate]!, forKey: startDate)
                     startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
                 }
@@ -378,8 +379,9 @@ extension UIViewController {
                 //
                 // Update missed days with 0
                 var startDate = currentMondayDate
+                let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!
                 // Loop adding 0 to dates
-                while startDate < currentDate {
+                while startDate <= endDate {
                     weekTrackingDictionary.updateValue(0, forKey: startDate)
                     startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
                 }
@@ -387,7 +389,6 @@ extension UIViewController {
                 weekTrackingDictionary.updateValue(currentProgress, forKey: currentDate)
             }
         }
-        
         //
         // TODO:  Need to then save the dictionary somewhere !!!!!!!!!!!!!!!
     }
@@ -428,8 +429,9 @@ extension UIViewController {
                 //
                 // Update missed weeks with 0
                 var startDate = keys.last!
+                let endDate = calendar.date(byAdding: .weekOfYear, value: -1, to: currentMondayDate)!
                 // Loop adding 0 to dates
-                while startDate < currentMondayDate {
+                while startDate <= endDate {
                     trackingDictionary.updateValue(0, forKey: startDate)
                     startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate)!
                 }
@@ -445,7 +447,7 @@ extension UIViewController {
         //
         let calendar = Calendar(identifier: .gregorian)
         // Get Mondays date
-        let firstDateInCurrentMonth = Date().firstDateInCurrentMonth
+        let firstDateInCurrentMonth = Date().firstDateInMonth
         //
         // Month Goal
         let currentProgressDivision: Double = (monthProgress / monthGoal) * 100
@@ -474,7 +476,7 @@ extension UIViewController {
                 //
                 // Update missed month with 0
                 var startDate = keys.last!
-                let endDate = calendar.date(byAdding: .day, value: -1, to: firstDateInCurrentMonth)!
+                let endDate = calendar.date(byAdding: .month, value: -1, to: firstDateInCurrentMonth)!
                 // Loop adding 0 to dates
                 while startDate <= endDate {
                     monthTrackingDictionary.updateValue(0, forKey: startDate)
@@ -740,8 +742,19 @@ extension Date {
     
     //
     // First day in month
-    var firstDateInCurrentMonth: Date {
+    var firstDateInMonth: Date {
         var components = Calendar(identifier: .iso8601).dateComponents([.year, .month], from: self)
+        components.timeZone = TimeZone(abbreviation: "UTC")
+        
+        // First day of the month
+        let firstDateInCurrentMonth = Calendar(identifier: .iso8601).date(from: components)
+        //
+        return firstDateInCurrentMonth!
+    }
+    
+    //
+    var firstDateInYear: Date {
+        var components = Calendar(identifier: .iso8601).dateComponents([.year], from: self)
         components.timeZone = TimeZone(abbreviation: "UTC")
         
         // First day of the month

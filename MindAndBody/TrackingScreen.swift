@@ -11,7 +11,6 @@ import UIKit
 import SwiftCharts
 
 
-
 //
 // Tracking Screen Class --------------------------------------------------------------------------------------------------------
 //
@@ -25,10 +24,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     //
     let backgroundBlur = UIVisualEffectView()
     
-    
-    
     fileprivate var chart: Chart?
-    
     
     // Time Scale Action Sheet
     let actionSheet = UIView()
@@ -40,15 +36,9 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var selectedTimeScale = 0
     
-    
     //
     var timeScaleButton2 = UIButton()
-    
-    // Variables
-    var currentMondayDate = Int()
-    var currentMonth = Int()
-    var currentYear = Int()
-    
+
     
     //
     // View Will Appear ---------------------------------------------------------------------------------
@@ -81,8 +71,6 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             walkthroughTracking()
         }
         
-        
-        
         //
         // Time Scale Elements
         actionSheet.backgroundColor = Colours.colour1
@@ -112,7 +100,6 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         actionSheet.addSubview(timeScalePickerView)
         actionSheet.addSubview(okButton)
         
-        
         //
         // Navigation Controller
         self.navigationController?.navigationBar.barTintColor = Colours.colour2
@@ -121,7 +108,6 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         // Navigation Title
         navigationBar.title = NSLocalizedString("tracking", comment: "")
-        
         
         //
         // Background Image
@@ -153,9 +139,6 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
         }
         
-        //
-        setDates()
-        
         if weekTrackingDictionary.count != 0 {
             drawGraph()
         } else {
@@ -169,38 +152,10 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             view.addSubview(warningLabel)
             view.bringSubview(toFront: warningLabel)
         }
-        
-        
-        
     }
     
-    // MARK: Test
     //
-    // Set Dates
-    func setDates() {
-        // Format Month
-        let dfMonth = DateFormatter()
-        dfMonth.dateFormat = "MM"
-        // Get Month
-        var monthsDate: Date {
-            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-        }
-        currentMonth = Int(dfMonth.string(from: monthsDate))!
-        
-        // Format Year
-        let dfYear = DateFormatter()
-        dfYear.dateFormat = "yyyy"
-        // Get Year
-        var yearsDate: Date {
-            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-        }
-        currentYear = Int(dfYear.string(from: yearsDate))!
-    }
-    
-    
-    //
-    // Graphs ------------------------------------------------------------------------------------------------------------------------
-    //
+    // MARK: Graphs
     //
     var currentPositionLabels: [UILabel] = []
     var currentPositionLabel = UILabel()
@@ -290,104 +245,8 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let chartPointsCircleLayer = ChartPointsViewsLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, viewGenerator: circleViewGenerator, displayDelay: 0, delayBetweenItems: 0.05, mode: .translate)
         
         
-        
-        
-        
-        //
-        // Extra detail touch tracker layer
-        //        let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 500, thumbBorderWidth: 2)
-        //        let trackerLayerSettings = ChartPointsLineTrackerLayerSettings(thumbSettings: thumbSettings, selectNearest: false)
-        
-        //        // Current position labels array out of func so okbuttonaction can clear them
-        //        let chartPointsTrackerLayer = ChartPointsLineTrackerLayer<ChartPoint, Any>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lines: [chartPoints], lineColor: Colours.colour2, animDuration: 1, animDelay: 2, settings: trackerLayerSettings) {chartPointsWithScreenLoc in
-        //
-        //            self.currentPositionLabels.forEach{$0.removeFromSuperview()}
-        //
-        //            for (index, chartPointWithScreenLoc) in chartPointsWithScreenLoc.enumerated() {
-        //
-        //                let label = UILabel()
-        //                let test3 = chartPoints[index].y
-        //                let test = chartPointWithScreenLoc.chartPoint.y
-        //                let test2 = chartPointWithScreenLoc.screenLoc.y
-        //                label.text = chartPointWithScreenLoc.chartPoint.description + "%"
-        //                label.sizeToFit()
-        //                label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x + label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
-        //                if label.frame.maxX > self.view.bounds.width {
-        //                    label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x - label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
-        //                }
-        //
-        //                label.backgroundColor = Colours.colour2
-        //                label.textColor = Colours.colour1
-        //
-        //                self.currentPositionLabels.append(label)
-        //                self.view.addSubview(label)
-        //            }
-        //        }
-        
-        //
-        //        let chartPointsTrackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak chartPointsLayer, weak currentPositionLabel] screenLoc in
-        ////                    chartPointsLayer?.highlightChartpointView(screenLoc: screenLoc)
-        //                    if let chartPoint = chartPointsLayer?.chartPointsForScreenLocX(screenLoc.x).first {
-        //                        currentPositionLabel?.text = chartPoint.description
-        //                        currentPositionLabel?.sizeToFit()
-        //                        self.view.addSubview(currentPositionLabel!)
-        //                    } else {
-        //                        currentPositionLabel?.removeFromSuperview()
-        //                    }
-        //        }, lineColor: Colours.colour2, lineWidth: 1)
-        
-        //        let chartPointsTrackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak chartPointsCircleLayer, weak currentPositionLabel] screenLoc in
-        //
-        //
-        //            // Label
-        //            currentPositionLabel?.text = chartPoints.description
-        //            currentPositionLabel?.sizeToFit()
-        //            currentPositionLabel?.center = CGPoint(x: (currentPositionLabel?.frame.width)! / 2, y: chartFrame.minY - (currentPositionLabel?.frame.height)! / 2)
-        //            if (currentPositionLabel?.frame.maxX)! > self.view.bounds.width {
-        //                currentPositionLabel?.center = CGPoint(x: (currentPositionLabel?.frame.width)! / 2, y: chartFrame.minY - ((currentPositionLabel?.frame.height)! / 2))
-        //            }
-        //
-        //            currentPositionLabel?.backgroundColor = Colours.colour2
-        //            currentPositionLabel?.textColor = Colours.colour1
-        //
-        //            self.currentPositionLabels.append(currentPositionLabel!)
-        //            self.view.addSubview(currentPositionLabel!)
-        //
-        //            //
-        //            if let chartPoint = chartPointsCircleLayer?.chartPointsForScreenLocX(screenLoc.x).first {
-        //                currentPositionLabel?.text = chartPoint.description
-        //            } else {
-        //                currentPositionLabel?.removeFromSuperview()
-        //            }
-        //        }, lineColor: Colours.colour2, lineWidth: 1)
-        //
-        
-        
-        //        let trackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[weak candleStickLayer, weak infoView] screenLoc in
-        //            candleStickLayer?.highlightChartpointView(screenLoc: screenLoc)
-        //            if let chartPoint = candleStickLayer?.chartPointsForScreenLocX(screenLoc.x).first {
-        //                infoView?.showChartPoint(chartPoint)
-        //            } else {
-        //                infoView?.clear()
-        //            }
-        //            }, lineColor: UIColor.red, lineWidth: Env.iPad ? 1 : 0.6)
-        
-        
-        
-        //
-        //        locChangedFunc: {[weak chartPointsLayer, weak infoView] screenLoc in
-        //            candleStickLayer?.highlightChartpointView(screenLoc: screenLoc)
-        //            if let chartPoint = candleStickLayer?.chartPointsForScreenLocX(screenLoc.x).first {
-        //                infoView?.showChartPoint(chartPoint)
-        //            } else {
-        //                infoView?.clear()
-        //            }
-        //            }, lineColor: Colours.colour2, lineWidth: 1)
-        
-        
         //
         // Finalise ----------------------------
-        //
         //
         // Create array of layers
         var layersArray = [
@@ -397,7 +256,6 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             chartPointsLayer,
             chartPointsLineLayer,
             chartPointsCircleLayer,
-            //            chartPointsTrackerLayer
             ] as [ChartLayer]
         //
         // Add new layer for x dividers if selected time scale == 3 months or greater
@@ -439,7 +297,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     //
-    // drawGraph() Helper Functions --------------------------------------------------------------------------------------------------------------------------------------------------------
+    // MARK: drawGraph() Helper Functions --------------------------------------------------------------------------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
     // Get Chart Points
     func returnChartPoints() -> [ChartPoint] {
@@ -465,7 +323,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             // To put data in (so only 1 month presented)
             var chartData: [(key: Date, value: Int)] = []
             //
-            // Add relevant daya to chartData Array
+            // Add relevant data to chartData Array
             var startDate = Date()
             // Start Date for 1, 3, 6 months
             switch selectedTimeScale {
@@ -501,7 +359,6 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
         // Last year
         case 4:
-            
             //
             // To get data from
             let calendar = Calendar(identifier: .gregorian)
@@ -510,7 +367,10 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             var chartData: [(key: Date, value: Int)] = []
             //
             // Add relevant data to chartData Array
-            var startDate = calendar.date(byAdding: .year, value: -1, to: Date().firstDateInCurrentMonth)!
+            var startDate = calendar.date(byAdding: .year, value: -1, to: Date().firstDateInMonth)!
+            if keys.contains(startDate) == false {
+                startDate = keys.first!
+            }
             let endDate = keys.last!
             // Loop adding data to chartData
             while startDate <= endDate {
@@ -564,137 +424,84 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         switch selectedTimeScale {
         // Week
         case 0:
-            var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
-            
+            //
             let df = DateFormatter()
             df.dateFormat = "dd.MM.yyyy"
-            // Fill in empty values if there are any (if current day isn't sunday)
-            if xValues.count != 7 {
-                // Number of empty days to add
-                let numberToAdd = 7 - xValues.count
-                let keys = weekTrackingDictionary.keys.sorted()
-                for i in 1...numberToAdd {
-                    let dateToAdd = Calendar.current.date(byAdding: .day, value: i, to: keys.last!)
-                    let valueToAdd = ChartAxisValueDate(date: dateToAdd!, formatter: df)
-                    xValues.append(valueToAdd)
-                }
+            //
+            var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
+            let monday = Date().firstMondayInCurrentWeek
+            for i in 0...6 {
+                let calendar = Calendar(identifier: .gregorian)
+                let dateToAdd = calendar.date(byAdding: .day, value: i, to: monday)
+                let valueToAdd = ChartAxisValueDate(date: dateToAdd!, formatter: df)
+                xValues.append(valueToAdd)
             }
             
             return xValues
-            
+
             //
         // 1 Month, 3 Months, 6 Months
         case 1,2,3:
             //
-            var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
+            var xValues: [ChartAxisValue] = []
             
             // To get data from
             let calendar = Calendar(identifier: .gregorian)
-            let keys = trackingDictionary.keys.sorted()
             //
-            // Add empty xvalues before if necessart
             var startDate = Date()
-            var endDate = Date()
+            let endDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
             
-            //
-            // Fill empty values before first date if neccessary (the user might have started within the selected timescale)
-            //
-            // lastweek - 1
-            endDate = calendar.date(byAdding: .weekOfYear, value: -1, to: keys.first!)!
-            // Start Date for 1, 3, 6 months
             switch selectedTimeScale {
             case 1:
-                startDate = Date().firstDateInCurrentMonth
-                if keys.contains(startDate) == false {
-                    xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
-                }
+                startDate = Date().firstMondayInMonth
             case 2:
-                startDate = calendar.date(byAdding: .month, value: -2, to: Date().firstDateInCurrentMonth)!
-                if keys.contains(startDate) == false {
-                    xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
-                }
+                startDate = calendar.date(byAdding: .month, value: -2, to: Date())!
+                startDate = startDate.firstMondayInMonth
             case 3:
-                startDate = calendar.date(byAdding: .month, value: -5, to: Date().firstDateInCurrentMonth)!
-                if keys.contains(startDate) == false {
-                    xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
-                }
+                startDate = calendar.date(byAdding: .month, value: -5, to: Date())!
+                startDate = startDate.firstMondayInMonth
             default: break
             }
-            
-            
+
             //
-            // Fill emtpy values after first date if neccessary (the current date wont always be last date in month)
+            let df = DateFormatter()
+            df.dateFormat = "dd.MM.yyyy"
             //
-            // Start date is 1 after last monday added
-            startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: keys.last!)!
-            // firstmonday + ((numberofmondaysincurrentmonth - 1) * weeks) = lastmonday
-            let toAdd = Date().numberOfMondaysInCurrentMonth - 1
-            let test = Date().firstMondayInMonth
-            let test2 = Date().firstMondayInCurrentWeek
-            endDate = calendar.date(byAdding: .weekOfYear, value: toAdd, to: Date().firstMondayInMonth)!
-            // Start Date for 1, 3, 6 months
-            switch selectedTimeScale {
-            case 1:
-                if keys.contains(endDate) == false {
-                    xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
-                }
-            case 2:
-                if keys.contains(endDate) == false {
-                    xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
-                }
-            case 3:
-                if keys.contains(endDate) == false {
-                    xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
-                }
-            default: break
+            while startDate <= endDate! {
+                let calendar = Calendar(identifier: .gregorian)
+                let valueToAdd = ChartAxisValueDate(date: startDate, formatter: df)
+                xValues.append(valueToAdd)
+                startDate = calendar.date(byAdding: .weekOfMonth, value: 1, to: startDate)!
             }
-            
-            
+            //
             return xValues
             
-            
-        // 12 Months
+        // Current year
         case 4:
             //
             var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
             
             // To get data from
             let calendar = Calendar(identifier: .gregorian)
-            let keys = monthTrackingDictionary.keys.sorted()
             //
             // Add empty xvalues before if necessart
-            var startDate = Date()
-            var endDate = Date()
+            var startDate = Date().firstDateInYear
+            var endDate = calendar.date(byAdding: .month, value: 11, to: startDate)
+            endDate = endDate?.firstDateInMonth
             
             //
-            // Fill empty values before first date if neccessary (the user might have started within the selected timescale)
+            let df = DateFormatter()
+            df.dateFormat = "dd.MM.yyyy"
             //
-            // Add empty xvalues before if necessary
-            // lastweek - 1
-            endDate = calendar.date(byAdding: .weekOfYear, value: -1, to: keys.first!)!
-            //
-            startDate = calendar.date(byAdding: .month, value: -11, to: Date().firstDateInCurrentMonth)!
-            if keys.contains(startDate) == false {
-                xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
-            }
-            
-            
-            //
-            // Fill emtpy values after first date if neccessary (the current date wont always be last date in month)
-            //
-            // Add empty xvalues After if necessary
-            startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: Date().firstMondayInMonth)!
-            // firstmonday + ((numberofmondaysincurrentmonth - 1) * weeks) = lastmonday
-            let toAdd = Date().numberOfMondaysInCurrentMonth - 1
-            endDate = calendar.date(byAdding: .weekOfYear, value: toAdd, to: Date().firstMondayInMonth)!
-            //
-            if keys.contains(endDate) == false {
-                xValues = fillEmptyValues(startDate: startDate, endDate: endDate, xValues: xValues)
+            while startDate <= endDate! {
+                let calendar = Calendar(identifier: .gregorian)
+                let valueToAdd = ChartAxisValueDate(date: startDate, formatter: df)
+                xValues.append(valueToAdd)
+                startDate = calendar.date(byAdding: .weekOfMonth, value: 1, to: startDate)!
             }
             
             return xValues
-            
-            
+        
         // All
         case 5:
             let xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
@@ -705,31 +512,6 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             return xValues
         }
     }
-    
-    
-    
-    // Fill empty xvalues if user started less that 1,3,6 months ago
-    func fillEmptyValues(startDate: Date, endDate: Date, xValues: [ChartAxisValue]) -> [ChartAxisValue] {
-        //
-        let calendar = Calendar(identifier: .gregorian)
-        // Need a mutable start date
-        var startDate2 = startDate
-        var updatedXValues = xValues
-        //
-        // Format Date
-        let df = DateFormatter()
-        df.dateFormat = "dd.MM.yyyy"
-        // Loop adding data to chartData
-        while startDate2 < endDate {
-            let dateToAdd = ChartAxisValueDate(date: startDate, formatter: df)
-            updatedXValues.append(dateToAdd)
-            //
-            startDate2 = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate2)!
-        }
-        //
-        return updatedXValues
-    }
-    
     
     // --------------------------------------------------------------------------------------
     // Get xAxis Model
@@ -748,48 +530,38 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         switch selectedTimeScale {
         // Week
         case 0:
-            // Date formatters
-            let dfConvert = DateFormatter()
-            dfConvert.dateFormat = "dd.MM.yyyy"
-            
+            // Date formatter
             let df = DateFormatter()
             df.dateFormat = "EEE"
             //
             let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: axisLabelSettings, formatter: df)
             let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .day, preferredDividers: 6, minSpace: 0, maxTextSize: 12)
             
-            //
-            let firstDateString: String = String(describing: xAxisValues.first!)
-            let firstDate = dfConvert.date(from: firstDateString)
-            let lastDateString: String = String(describing: xAxisValues.last!)
-            let lastDate = dfConvert.date(from: lastDateString)
-            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, leadingPadding: ChartAxisPadding.label, trailingPadding: ChartAxisPadding.label)
+            // Dates
+            let firstDate = Date().firstMondayInCurrentWeek
+            let calendar = Calendar(identifier: .gregorian)
+            let lastDate = calendar.date(byAdding: .day, value: 6, to: firstDate)
+            
+            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: firstDate.timeIntervalSince1970, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, leadingPadding: ChartAxisPadding.label, trailingPadding: ChartAxisPadding.label)
             return xModel
             
         // Month
         case 1:
-            // Date formatters
-            let dfConvert = DateFormatter()
-            dfConvert.dateFormat = "dd.MM.yyyy"
-            
+            // Date formatter
             let df2 = DateFormatter()
             df2.dateFormat = " dd"
             
-            // Generators
-            var titleLabelSettings2 = titleLabelSettings
-            titleLabelSettings2.textAlignment = .right
-            titleLabelSettings2.rotation = 0.1
-            titleLabelSettings2.rotationKeep = .top
+            let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: axisLabelSettings, formatter: df2)
             //
-            let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: titleLabelSettings2, formatter: df2)
-            let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .month, preferredDividers: 2, minSpace: 0, maxTextSize: 12)
+            let nDividers = xAxisValues.count - 1
+            let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .day, preferredDividers: nDividers, minSpace: 0, maxTextSize: 12)
             
             //
-            let firstDateString: String = String(describing: xAxisValues.first!)
-            let firstDate = dfConvert.date(from: firstDateString)
-            let lastDateString: String = String(describing: xAxisValues.last!)
-            let lastDate = dfConvert.date(from: lastDateString)
-            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
+            let firstDate = Date().firstMondayInMonth
+            let calendar = Calendar(identifier: .gregorian)
+            let lastDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: firstDate)
+            
+            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate.timeIntervalSince1970), lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
             
             return xModel
             
@@ -811,12 +583,13 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: titleLabelSettings2, formatter: df2)
             let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .month, preferredDividers: 2, minSpace: 0, maxTextSize: 12)
             
+            let calendar = Calendar(identifier: .gregorian)
             //
-            let firstDateString: String = String(describing: xAxisValues.first!)
-            let firstDate = dfConvert.date(from: firstDateString)
-            let lastDateString: String = String(describing: xAxisValues.last!)
-            let lastDate = dfConvert.date(from: lastDateString)
-            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
+            var startDate = calendar.date(byAdding: .month, value: -2, to: Date())!
+            startDate = startDate.firstMondayInMonth
+            let endDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInCurrentWeek)
+            
+            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: startDate.timeIntervalSince1970, lastModelValue: (endDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
             
             return xModel
             
@@ -838,21 +611,20 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: titleLabelSettings2, formatter: df2)
             let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .month, preferredDividers: 5, minSpace: 0, maxTextSize: 12)
             
+            let calendar = Calendar(identifier: .gregorian)
             //
-            let firstDateString: String = String(describing: xAxisValues.first!)
-            let firstDate = dfConvert.date(from: firstDateString)
-            let lastDateString: String = String(describing: xAxisValues.last!)
-            let lastDate = dfConvert.date(from: lastDateString)
-            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
+            var startDate = calendar.date(byAdding: .month, value: -5, to: Date())!
+            startDate = startDate.firstMondayInMonth
+            let endDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInCurrentWeek)
+            
+            //
+            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: startDate.timeIntervalSince1970, lastModelValue: (endDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
             
             return xModel
             
         // 12 Months
         case 4:
-            // Date formatters
-            let dfConvert = DateFormatter()
-            dfConvert.dateFormat = "MM.yyyy"
-            
+            // Date formatter
             let df2 = DateFormatter()
             // Note: spaces shouldn't be used for spacing
             df2.dateFormat = "     MMMMM"
@@ -867,13 +639,14 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             //
             let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .month, preferredDividers: 11, minSpace: 0, maxTextSize: 12)
             
+            let calendar = Calendar(identifier: .gregorian)
+            //
+            var startDate = Date().firstDateInYear
+            var endDate = calendar.date(byAdding: .month, value: 11, to: startDate)
+            endDate = endDate?.firstDateInMonth
             
             //
-            let firstDateString: String = String(describing: xAxisValues.first!)
-            let firstDate = dfConvert.date(from: firstDateString)
-            let lastDateString: String = String(describing: xAxisValues.last!)
-            let lastDate = dfConvert.date(from: lastDateString)
-            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, trailingPadding: ChartAxisPadding.label)
+            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: startDate.timeIntervalSince1970, lastModelValue: (endDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, trailingPadding: ChartAxisPadding.label)
             
             return xModel
             
@@ -899,13 +672,19 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             //
             let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .quarter, preferredDividers: 4, minSpace: 0, maxTextSize: 12)
             
-            
             //
-            let firstDateString: String = String(describing: xAxisValues.first!)
-            let firstDate = dfConvert.date(from: firstDateString)
-            let lastDateString: String = String(describing: xAxisValues.last!)
-            let lastDate = dfConvert.date(from: lastDateString)
-            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate?.timeIntervalSince1970)!, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, trailingPadding: ChartAxisPadding.label)
+            let keys = monthTrackingDictionary.keys.sorted()
+            let startDate = keys.first!
+            let endDate = keys.last!
+//            if keys.count == 1 {
+//                endDate = keys.last!
+//            } else {
+//                let calendar = Calendar(identifier: .gregorian)
+//                endDate = calendar.date(byAdding: .month, value: 1, to: startDate)!
+//            }
+            
+            
+            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: startDate.timeIntervalSince1970, lastModelValue: endDate.timeIntervalSince1970, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, trailingPadding: ChartAxisPadding.label)
             
             return xModel
             
@@ -920,7 +699,6 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     // Get xAxis Title
     func returnAxisTitle(xValues : [ChartAxisValue]) -> String {
         //
-        let monthArray = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
         // x axis title
         switch selectedTimeScale {
         // 1 Week
@@ -928,11 +706,19 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             return NSLocalizedString("currentWeek", comment: "")
         // 1 Month
         case 1:
-            // -1 because array starts at 0
-            let month = NSLocalizedString(monthArray[currentMonth - 1], comment: "")
+            let df = DateFormatter()
+            df.dateFormat = "MMMM"
+            let month = df.string(from: Date().firstMondayInMonth)
             return month
-        // 1 year
-        case 4,5:
+        // Last year
+        case 4:
+            let df = DateFormatter()
+            df.dateFormat = "yyyy"
+            let year = df.string(from: Date().firstDateInYear)
+            return year
+            
+        // All year
+        case 5:
             //
             let df = DateFormatter()
             df.dateFormat = "MMM - yyyy"
