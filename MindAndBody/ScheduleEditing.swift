@@ -214,7 +214,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         } else {
             return 72
         }
-        return 72
     }
     
     // Cell for row

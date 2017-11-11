@@ -234,7 +234,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
                     alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
                     
                     // Reset app action
-                    let okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: UIAlertActionStyle.default) {
+                    let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default) {
                         UIAlertAction in
                     }
                     // Add Actions

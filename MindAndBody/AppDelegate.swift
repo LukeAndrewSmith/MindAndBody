@@ -17,10 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+
     //
     // Did finish launching ----------------------------------------------------------------------------------------------
-    //
-    
     //
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -85,6 +84,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         default:
             break
         }
+        
+        
+        // TODO: TEST
+        settings[7][0] = 0
+        ScheduleVariables.shared.selectedSchedule = 0
+        UserDefaults.standard.set(settings, forKey: "userSettings")
         
         //
         return true

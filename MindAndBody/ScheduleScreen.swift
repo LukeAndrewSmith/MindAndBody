@@ -874,9 +874,13 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             //
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             //
-            // Reload rows
-            let indexToReload = IndexPath(row: ScheduleVariables.shared.selectedSchedule, section: 0)
-            scheduleChoiceTable.reloadRows(at: [indexToReload], with: .automatic)
+            // Change indicator
+            if schedules.count != 0 {
+                let indexToReload = IndexPath(row: ScheduleVariables.shared.selectedSchedule, section: 0)
+                let cell = scheduleChoiceTable.cellForRow(at: indexToReload)
+                cell?.accessoryType = .checkmark
+                cell?.tintColor = Colours.colour3
+            }
         }
     }
     

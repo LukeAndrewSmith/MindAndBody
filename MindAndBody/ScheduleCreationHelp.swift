@@ -367,7 +367,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             count += schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection][i] as! Int
         }
         
-        // If user has actually put something in, do something
+        // If sessions not null
         if count != 0 {
             // Groups -> Sessions
             if selectedSection == 1 {
@@ -381,24 +381,23 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                 // reset full week list
                 schedules[ScheduleVariables.shared.selectedSchedule][0][7] = []
-                scheduleTracking[0][7] = []
-                
+                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
+                                
                 //
                 // from 1, and -2 as array includes total n sessions
                 // Loop group sessions array
-                for i in 1...schedules[ScheduleVariables.shared.selectedSchedule][2][2].count - 2 {
+                for i in 1...schedules[ScheduleVariables.shared.selectedSchedule][2][2].count - 1 {
                     if schedules[ScheduleVariables.shared.selectedSchedule][2][2][i] as! Int != 0 {
                         // Loop n session of each group with more than 0 sessions
                         for _ in 1...(schedules[ScheduleVariables.shared.selectedSchedule][2][2][i] as! Int) {
                             // i - 1 as group number is 1 less as array includes total n sessions so is offset by 1
                             schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(i - 1)
-                            scheduleTracking[0][7].append(scheduleDataStructures.scheduleTrackingArrays[i - 1]!)
+                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[i - 1]!)
                         }
                     }
                 }
                 UserDefaults.standard.set(schedules, forKey: "schedules")
                 UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                
                 //
                 // CHECK WHERE TO GO
                 // If not coming from schedule editing, go to scheudle help question
@@ -407,7 +406,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 // Schedule editing
                         // -> either pop or go to schedule creator
                 } else {
-                    let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
                     //
                     // If nothing changed, pop, else go to schedule creator
                     var scheduleHasChanged = false
@@ -514,9 +512,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection][sender.tag] = Int(roundedInt)
         }
-        
-        let test = schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection] as! [Int]
-        
+                
         UserDefaults.standard.set(schedules, forKey: "schedules")
         
     }
