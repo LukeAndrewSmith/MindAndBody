@@ -272,6 +272,15 @@ class InitialInfoScreen: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     //
+    // Ensure didCreateNewSchedule == false
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //
+        if segue.identifier == "openInitialCreateScheduleSegueMenu" {
+            ScheduleVariables.shared.didCreateNewSchedule = false
+        }
+    }
+    
+    //
     // Look around app button
     @IBAction func appButton(_ sender: Any) {
         self.dismiss(animated: true)

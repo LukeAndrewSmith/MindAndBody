@@ -92,23 +92,26 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         // RELOAD VIEW
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         if ScheduleVariables.shared.shouldReloadSchedule == true {
+            //
             ScheduleVariables.shared.shouldReloadSchedule = false
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
             // Set ScheduleVariables.shared.selectedSchedule to last schedule if too high
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
             if ScheduleVariables.shared.selectedSchedule > schedules.count - 1 {
-                if schedules.count == 0 {
+                if schedules.count == 0 || settings[7][0] == 0 {
                     settings[7][0] = 0
                 } else {
                     settings[7][0] = schedules.count - 1
                 }
                 UserDefaults.standard.set(settings, forKey: "userSettings")
             }
+            ScheduleVariables.shared.selectedSchedule = settings[7][0]
+            //
             if schedules.count != 0 {
                 scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int
             } else {
                 scheduleStyle = 0
             }
-            ScheduleVariables.shared.selectedSchedule = settings[7][0]
+            //
             layoutViews()
             // If day view enable swipes
             if schedules.count != 0 {
@@ -121,7 +124,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                     daySwipeRight.isEnabled = false
                 }
             }
-            
+            //
             scheduleTable.reloadData()
             scheduleChoiceTable.reloadData()
             //
@@ -362,11 +365,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         // Check wether to present the schedule as :
         // Days
         // The whole week
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        ScheduleVariables.shared.selectedSchedule = settings[7][0]
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         if schedules.count != 0 {
-            let test = ScheduleVariables.shared.selectedSchedule
             scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int
         } else {
             scheduleStyle = 0
@@ -767,7 +767,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     var okAction = UIAlertAction()
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         //
         switch tableView {
         case scheduleTable:
@@ -797,93 +796,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.animateActionSheetDown(actionSheet: self.actionSheet, actionSheetHeight: height, backgroundView: self.backgroundViewExpanded)
                 //
                 self.performSegue(withIdentifier: "ScheduleCreationSegue", sender: self)
-//                // Present title option
-//                let snapShot1 = actionSheet.snapshotView(afterScreenUpdates: false)
-//                snapShot1?.center.x = view.center.x
-//                snapShot1?.center.y = actionSheet.center.y - UIApplication.shared.statusBarFrame.height - (navigationController?.navigationBar.frame.size.height)!
-//                view.addSubview(snapShot1!)
-//                self.actionSheet.isHidden = true
-//                UIView.animate(withDuration: 0.3, animations: {
-//                    self.backgroundViewExpanded.alpha = 0
-//                }, completion: { finished in
-//                    self.backgroundViewExpanded.isHidden = true
-//                })
-//
-//                // Alert and Functions
-//                //
-//                let inputTitle = NSLocalizedString("scheduleInputTitle", comment: "")
-//                //
-//                let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-//                alert.view.tintColor = Colours.colour2
-//                alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
-//                //2. Add the text field
-//                alert.addTextField { (textField: UITextField) in
-//                    textField.text = " "
-//                    textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
-//                    textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
-//                }
-//                // 3. Get the value from the text field, and perform actions upon OK press
-//                okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-//                    //
-//                    // Append new schedule array to schedules
-//                    schedules.append(scheduleDataStructures.emptyWeek)
-//                    scheduleTracking.append(scheduleDataStructures.emptyTrackingWeek)
-//                    //
-//                    // Update Title
-//                    let textField = alert?.textFields![0]
-//                    let lastIndex = schedules.count - 1
-//                    schedules[lastIndex][1][0][0] = textField?.text!
-//                    //
-//                    // SET NEW ARRAY
-//                    UserDefaults.standard.set(schedules, forKey: "schedules")
-//                    UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-//                    //
-//                    // Select new session and dismiss
-//                    let selectedIndexPath = NSIndexPath(row: lastIndex, section: 0)
-//                    self.scheduleChoiceTable.selectRow(at: selectedIndexPath as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
-//                    settings[7][0] = lastIndex
-//                    ScheduleVariables.shared.selectedSchedule = lastIndex
-//                    self.scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int
-//                    UserDefaults.standard.set(settings, forKey: "userSettings")
-//                    //
-//                    self.actionSheet.isHidden = false
-//                    snapShot1?.removeFromSuperview()
-//                    self.backgroundViewExpanded.isHidden = false
-//                    //
-//                    UIView.animate(withDuration: 0.1, animations: {
-//                        self.backgroundViewExpanded.alpha = 0.5
-//                        self.scheduleChoiceTable.reloadData()
-//                        self.scheduleTable.reloadData()
-//                        // Dismiss and select new row
-//                    }, completion: { finished in
-//                        // Dismiss action sheet
-//                        let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
-//                        self.animateActionSheetDown(actionSheet: self.actionSheet, actionSheetHeight: height, backgroundView: self.backgroundViewExpanded)
-//                        //
-//                        self.performSegue(withIdentifier: "ScheduleCreationSegue", sender: self)
-//                    })
-//                })
-//                okAction.isEnabled = false
-//                alert.addAction(okAction)
-//                // Cancel action
-//                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
-//                    UIAlertAction in
-//                    //
-//                    self.backgroundViewExpanded.isHidden = false
-//                    UIView.animate(withDuration: 0.1, animations: {
-//                        self.backgroundViewExpanded.alpha = 0.5
-//                    })
-//                    //
-//                    self.actionSheet.isHidden = false
-//                    snapShot1?.removeFromSuperview()
-//                }
-//                alert.addAction(cancelAction)
-//                // 4. Present the alert.
-//                self.present(alert, animated: true, completion: nil)
             //
             // Select schedule
             } else {
                 // Select new schedule in user settings
+                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
                 settings[7][0] = indexPath.row
                 ScheduleVariables.shared.selectedSchedule = settings[7][0]
                 scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int
@@ -943,12 +860,12 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             UserDefaults.standard.set(schedules, forKey: "schedules")
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             
-            // Select last schedule
+            // Select 1 schedule before last schedule
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            if schedules.count == 0 {
+            if schedules.count == 0 || settings[7][0] == 0 {
                 settings[7][0] = 0
             } else {
-                settings[7][0] = schedules.count - 1
+                settings[7][0] -= 1
             }
             ScheduleVariables.shared.selectedSchedule = settings[7][0]
             UserDefaults.standard.set(settings, forKey: "userSettings")
@@ -956,6 +873,10 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            //
+            // Reload rows
+            let indexToReload = IndexPath(row: ScheduleVariables.shared.selectedSchedule, section: 0)
+            scheduleChoiceTable.reloadRows(at: [indexToReload], with: .automatic)
         }
     }
     
@@ -1016,8 +937,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         if segue.identifier == "openMenu" {
             // Remove Mask View
-            //            removeMaskView()
-            //
             UIApplication.shared.statusBarStyle = .default
             //
             if let destinationViewController = segue.destination as? SlideMenuView {
@@ -1035,13 +954,10 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             let destinationVC = segue.destination as! Profile
             destinationVC.comingFromSchedule = true
         } else if segue.identifier == "EditScheduleSegue" {
-            let destinationNC = segue.destination as! ScheduleEditingNavigation
-            let destinationVC = destinationNC.viewControllers.first as! ScheduleEditing
-//            destinationVC.comingFromSchedule = true
+            ScheduleVariables.shared.shouldReloadSchedule = true
         } else if segue.identifier == "scheduleMeditationSegueTimer" {
             let destinationVC = segue.destination as? MeditationTimer
             destinationVC?.comingFromSchedule = true
-            //
             // Remove back button text
             let backItem = UIBarButtonItem()
             backItem.title = ""
@@ -1049,15 +965,19 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         } else if segue.identifier == "scheduleMeditationSegueGuided" {
             let destinationVC = segue.destination as? MeditationChoiceGuided
             destinationVC?.comingFromSchedule = true
-            //
             // Remove back button text
             let backItem = UIBarButtonItem()
             backItem.title = ""
             navigationItem.backBarButtonItem = backItem
+        // Create Schedule
         } else if segue.identifier == "ScheduleCreationSegue" {
+            ScheduleVariables.shared.didCreateNewSchedule = false
+            ScheduleVariables.shared.shouldReloadSchedule = true
             let destinationNC = segue.destination as? ScheduleTypeQuestionNavigation
             let destinationVC = destinationNC?.viewControllers.first as? ScheduleTypeQuestion
             destinationVC?.comingFromSchedule = true
+        } else if segue.identifier == "" {
+            
         }
     }
     

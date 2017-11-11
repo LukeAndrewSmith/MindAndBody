@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 //
-// Initial Profile Class
+// Schedule Creation Help
 class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDataSource, NextRowDelegate {
     
     //
@@ -54,15 +54,13 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Selected Schedule
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        ScheduleVariables.shared.selectedSchedule = settings[7][0]
         //
         UIApplication.shared.statusBarStyle = .lightContent
         //
         sectionLabel.text = NSLocalizedString("me", comment: "")
         //
         // Background Image/Colour
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         let backgroundIndex = settings[0][0]
         if backgroundIndex < BackgroundImages.backgroundImageArray.count {
             backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
@@ -233,7 +231,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         //
         // Switch, me, goals, sessions
         switch selectedSection {
-        // Me
+        // Questions
         case 0:
             // Question Table
             if tableView == questionsTable && indexPath.row == selectedQuestion {
@@ -814,16 +812,12 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         // Demonstration Image View
         if answerImageArray[row] == "" {
             // Hide image
-            //            answerImageView.removeFromSuperview()
             answerImageLeading.constant = elementStack.bounds.width / 2
             answerImageTrailing.constant = elementStack.bounds.width / 2
         } else {
             answerImageLeading.constant = 0
             answerImageTrailing.constant = 0
             // Ensure image is in stack view
-            //            if elementStack.arrangedSubviews.contains(answerImageView) == false {
-            //                elementStack.insertArrangedSubview(answerImageView, at: 1)
-            //            }
             answerImageView.backgroundColor = Colours.colour2
             answerImageView.layer.cornerRadius = 15
             answerImageView.clipsToBounds = true
@@ -915,6 +909,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        //
         //
         cell.backgroundColor = Colours.colour2
         cell.tintColor = Colours.colour3

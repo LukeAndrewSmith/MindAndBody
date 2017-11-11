@@ -1770,8 +1770,8 @@
 //
 // Quick Question
 "scheduleView" = "I would like to:";
-"scheduleView1" = "Create a weekly routine, planning what to do each day";
-"scheduleView2" = "Simply see the whole week as a list of all my planned sessions";
+"scheduleView1" = "See each day of the week seperately";
+"scheduleView2" = "See the whole week as a list of all my planned sessions";
 
 
 //

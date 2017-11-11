@@ -66,9 +66,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     // If dragging label dragged over new row, this indicates the old
     var previousIndexPath: IndexPath? = nil
     
-    //
-    var wasDayView = false
-    
     
     // Array indicating the number of each group currently in the table
         // Updated in the beginning
@@ -99,10 +96,12 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // SETUP
         setVariables()
         setGroupLabels()
-        displayCreateScheduleButton()
-        if ScheduleVariables.shared.selectedSchedule != 0 {
-            updateFullWeek()
-        }
+        //
+        // If custom schedule update full week
+        // TODO: IS THIS RIGHT?????
+//        if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 {
+//            updateFullWeek()
+//        }
         
         backgroundIndex = settings[0][0]
         //
@@ -196,100 +195,52 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Number of row
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Days
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-        if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
-            return 7
-        } else {
-            return 1
-        }
+        return 7
     }
     
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-        // Day or week
-        if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
-            return 49
-        } else {
-            return 343
-        }
+       return 49
     }
     
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell", for: indexPath) as! DayCell
+        cell.selectionStyle = .none
+        //
+        cell.dayLabel.text = NSLocalizedString(dayArray[indexPath.row], comment: "")
+        cell.layoutSubviews()
+        //
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         //
-        // Day view
-        if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
-            //
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell", for: indexPath) as! DayCell
-            cell.selectionStyle = .none
-            //
-            cell.dayLabel.text = NSLocalizedString(dayArray[indexPath.row], comment: "")
-            cell.layoutSubviews()
-            //
-            // add relevant groups if they are there
-            //
-            if schedules[ScheduleVariables.shared.selectedSchedule][0][indexPath.row].count != 0 {
-                for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][indexPath.row].count - 1 {
-                    cell.groupLabelArray[i].tag = 1
-                    cell.groupLabelArray[i].alpha = 1
-                    cell.groupLabelArray[i].layer.borderWidth = 1
-                    cell.groupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
-                    cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
-                    cell.groupLabelArray[i].clipsToBounds = true
-                    //
-                    cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[schedules[ScheduleVariables.shared.selectedSchedule][0][indexPath.row][i] as! Int], comment: "")
-                    cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                }
+        // add relevant groups if they are there
+        if schedules[ScheduleVariables.shared.selectedSchedule][0][indexPath.row].count != 0 {
+            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][indexPath.row].count - 1 {
+                cell.groupLabelArray[i].tag = 1
+                cell.groupLabelArray[i].alpha = 1
+                cell.groupLabelArray[i].layer.borderWidth = 1
+                cell.groupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
+                cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
+                cell.groupLabelArray[i].clipsToBounds = true
+                //
+                cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[schedules[ScheduleVariables.shared.selectedSchedule][0][indexPath.row][i] as! Int], comment: "")
+                cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
             }
-            return cell
-            //
-        // custom Week view
-        } else if ScheduleVariables.shared.selectedSchedule != 0 {
-            let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-            //
-            let cell = tableView.dequeueReusableCell(withIdentifier: "WeekCell", for: indexPath) as! WeekCell
-            cell.selectionStyle = .none
-            cell.layoutSubviews()
-            //
-            // Add relevant groups if they are there
-            // Loop full list
-            for i in 0...dayTableGroupArray.count - 1 {
-                if dayTableGroupArray[i] != 0 {
-                    for j in 0...dayTableGroupArray[i] - 1 {
-                        cell.groupLabelArray[i][j].tag = 1
-                        cell.groupLabelArray[i][j].alpha = 1
-                        cell.groupLabelArray[i][j].layer.borderWidth = 1
-                        cell.groupLabelArray[i][j].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
-                        cell.groupLabelArray[i][j].layer.cornerRadius = 15 / 2
-                        cell.groupLabelArray[i][j].clipsToBounds = true
-                        //
-                        cell.groupLabelArray[i][j].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[i], comment: "")
-                    }
-                }
-            }
-            cell.totalSessions.text = String(schedules[ScheduleVariables.shared.selectedSchedule][0][7].count) + " " + NSLocalizedString("nSessionsPerWeek", comment: "")
-            //
-            return cell
-            //
         }
-        return UITableViewCell()
+        return cell
+        //
     }
 
     
     //
     // MARK: - Helper functions
     // MARK: General Helpers
-    func setVariables() {
-        ScheduleVariables.shared.selectedSchedule = settings[7][0]
-        
+    func setVariables() {        
         //
         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         // nGroups, groupsIndexes, nSessions
-        // If app schedule, find which groups shown
+        // If app helps create schedule, find which groups shown
         if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
             // Loop sessions array to find out what is presented
             for i in 1...schedules[ScheduleVariables.shared.selectedSchedule][2][2].count - 1 {
@@ -385,8 +336,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func setGroupLabels() {
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-        // day and app schedule
-        if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 && settings[7][0] == 0 {
+        // app helps create schedule
+        if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
             // Set titles
             if nGroups != 0 {
                 for i in 0...nGroups - 1 {
@@ -424,7 +375,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
         // Custom schedule
-                // Present all groups
+        // Present all groups
         } else {
             // Set titles for all groups
             for i in 0...5 {
@@ -444,74 +395,46 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    func displayCreateScheduleButton() {
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-        var shouldDisplay = true
-        if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 && ScheduleVariables.shared.selectedSchedule == 0 {
-            for i in 0...dayTableGroupArray.count - 1 {
-                if dayTableGroupArray[i] != schedules[ScheduleVariables.shared.selectedSchedule][2][2][i + 1] as! Int {
-                    shouldDisplay = false
-                    createScheduleButtonHeight.constant = 0
-                    createScheduleButton.isEnabled = false
-                    createScheduleButton.alpha = 0
-                    view.layoutIfNeeded()
-                    break
-                }
-            }
-        }
-        
-        if shouldDisplay == true {
-            createScheduleButton.isEnabled = true
-            createScheduleButton.alpha = 1
-            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                self.createScheduleButtonHeight.constant = 49
-                self.view.layoutIfNeeded()
-            })
-        }
-    }
-    
     // Update full week array
         // If user is in day mode, the full week should be still updating
     func updateFullWeek() {
-        // Only update if previous schedule was day schedule
-        if wasDayView == true {
-            wasDayView = false
-            var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-            schedules[ScheduleVariables.shared.selectedSchedule][0][7] = []
-            scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
-            // Loop week
-            for i in 0...6 {
-                // Check day isnt epmty
-                if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count != 0 {
-                    // Loop day
-                    for j in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][i].count - 1 {
-                        schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(schedules[ScheduleVariables.shared.selectedSchedule][0][i][j] as! Int)
-                    }
+        // TODO: Not sure about this function
+        
+        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+        schedules[ScheduleVariables.shared.selectedSchedule][0][7] = []
+        scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
+        // Loop week
+        for i in 0...6 {
+            // Check day isnt epmty
+            if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count != 0 {
+                // Loop day
+                for j in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][i].count - 1 {
+                    schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(schedules[ScheduleVariables.shared.selectedSchedule][0][i][j] as! Int)
                 }
             }
-            schedules[ScheduleVariables.shared.selectedSchedule][0][7] = (schedules[ScheduleVariables.shared.selectedSchedule][0][7] as! [Int]).sorted()
-            // Add to week tracking here, not added before as could not sort
-            if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
-                for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][7].count - 1 {
-                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int]!)
-                }
-            }
-            //
-            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-            UserDefaults.standard.set(schedules, forKey: "schedules")
-            //
-            // Update
-            // Loop full week
-            dayTableGroupArray = [0,0,0,0,0,0]
-            if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
-                for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][7].count - 1 {
-                    let index = schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int
-                    dayTableGroupArray[index] += 1
-                }
-            }
-            dayTable.reloadData()
         }
+        schedules[ScheduleVariables.shared.selectedSchedule][0][7] = (schedules[ScheduleVariables.shared.selectedSchedule][0][7] as! [Int]).sorted()
+        // Add to week tracking here, not added before as could not sort
+        if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
+            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][7].count - 1 {
+                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int]!)
+            }
+        }
+        //
+        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+        UserDefaults.standard.set(schedules, forKey: "schedules")
+        //
+        // Update
+        // Loop full week
+        dayTableGroupArray = [0,0,0,0,0,0]
+        if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
+            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][7].count - 1 {
+                let index = schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int
+                dayTableGroupArray[index] += 1
+            }
+        }
+        dayTable.reloadData()
     }
     
     //
@@ -535,49 +458,344 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         let indexPathForRow = self.dayTable.indexPathForRow(at: locationInView2)
         
         //
-        // MARK: Day
-        if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
-            switch state {
-            // Add dragging label
-            case .began:
+        switch state {
+        // Add dragging label
+        case .began:
+            
+            // Get the index of the long press
+            indexOfDrag = longPressArray.index(of: longPress)!
+            indexOfDraggedGroup = groupIndexes[indexOfDrag]
+            
+            // If there are some session left to drag from group or if custom schedule
+            if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 || dayTableGroupArray[indexOfDraggedGroup] != schedules[ScheduleVariables.shared.selectedSchedule][2][2][indexOfDraggedGroup + 1] as! Int {
+                // Haptic feedback
+                var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .medium)
+                generator?.prepare()
+                generator?.impactOccurred()
+                generator = nil
                 
-                // Get the index of the long press
-                indexOfDrag = longPressArray.index(of: longPress)!
-                indexOfDraggedGroup = groupIndexes[indexOfDrag]
+                // Edit the draggingLabel
+                draggingLabel.text = NSLocalizedString(scheduleDataStructures.groupNames[indexOfDraggedGroup], comment: "")
+                draggingLabel.frame = bigGroupLabelArray[indexOfDrag].bounds
+                draggingLabel.center = locationInView
                 
-                // If there are some session left to drag from group
-                if ScheduleVariables.shared.selectedSchedule != 0 || dayTableGroupArray[indexOfDraggedGroup] != schedules[ScheduleVariables.shared.selectedSchedule][2][2][indexOfDraggedGroup + 1] as! Int {
+                // Add dragging label and mask stack views
+                UIApplication.shared.keyWindow?.addSubview(draggingLabel)
+                maskStackViews()
+                
+                previousIndexPath = nil
+            } else {
+                previousIndexPath = nil
+                longPress.isEnabled = false
+                longPress.isEnabled = true
+            }
+ 
+            
+        // Dragging lable being dragged
+        case .changed:
+            // Keep the draggingLabel under the finger
+            draggingLabel.center = locationInView
+            
+            // If dragging label is over the dayTable, highlight the relevant label of the relevant day
+            // Row being highlighted
+            if indexPathForRow != nil && indexPathForRow == previousIndexPath {
+                //
+                let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
+                // ADD INDICATOR
+                for i in 0...cell.groupLabelArray.count - 1 {
+                    if cell.groupLabelArray[i].tag == 2 {
+                        break
+                    } else if cell.groupLabelArray[i].tag == 0 {
+                        cell.groupLabelArray[i].tag = 2
+                        cell.groupLabelArray[i].backgroundColor = Colours.colour1
+                        cell.groupLabelArray[i].alpha = 0.5
+                        cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
+                        cell.groupLabelArray[i].clipsToBounds = true
+                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+                        break
+                    }
+                }
+                previousIndexPath = indexPathForRow!
+            // Row is changing, changing highlight
+            } else if indexPathForRow != nil && indexPathForRow != previousIndexPath {
+                // Clear old cell
+                // CLEAR INDICATOR
+                if previousIndexPath != nil {
+                    let previousCell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
+                    for i in 0...previousCell.groupLabelArray.count - 1 {
+                        if previousCell.groupLabelArray[i].tag == 2 {
+                            previousCell.groupLabelArray[i].tag = 0
+                            previousCell.groupLabelArray[i].backgroundColor = .clear
+                            previousCell.groupLabelArray[i].alpha = 0
+                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                            break
+                        }
+                    }
+                }
+                //
+                let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
+                // ADD INDICATOR
+                for i in 0...cell.groupLabelArray.count - 1 {
+                    if cell.groupLabelArray[i].backgroundColor == Colours.colour1 {
+                        break
+                    } else if cell.groupLabelArray[i].tag == 0 {
+                        cell.groupLabelArray[i].tag = 2
+                        cell.groupLabelArray[i].backgroundColor = Colours.colour1
+                        cell.groupLabelArray[i].alpha = 0.5
+                        cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
+                        cell.groupLabelArray[i].clipsToBounds = true
+                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+                        break
+                    }
+                }
+                previousIndexPath = indexPathForRow!
+            // Dragging label is dragged off table
+            } else if indexPathForRow == nil {
+                // Clear old cell
+                // CLEAR INDICATOR
+                if previousIndexPath != nil {
+                    let previousCell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
+                    for i in 0...previousCell.groupLabelArray.count - 1 {
+                        if previousCell.groupLabelArray[i].tag == 2 {
+                            previousCell.groupLabelArray[i].tag = 0
+                            previousCell.groupLabelArray[i].backgroundColor = .clear
+                            previousCell.groupLabelArray[i].alpha = 0
+                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                            break
+                        }
+                    }
+                }
+            }
+            
+            
+        // Dragging label let go
+        default:
+            // Clear old cell
+            // CLEAR INDICATOR
+            if previousIndexPath != nil {
+                let previousCell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
+                for i in 0...previousCell.groupLabelArray.count - 1 {
+                    if previousCell.groupLabelArray[i].tag == 2 {
+                        previousCell.groupLabelArray[i].tag = 0
+                        previousCell.groupLabelArray[i].backgroundColor = .clear
+                        previousCell.groupLabelArray[i].alpha = 0
+                        previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                        break
+                    }
+                }
+            //
+            // If Dragging label is over a day
+                // Set goal to day
+                // Remove 1 from the relevant label of the group at the top of the screen
+                    // If no more sessions of group, darken top label and make it green
+                // Haptic feedback
+                var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
+                generator?.prepare()
+                generator?.impactOccurred()
+                generator = nil
+                
+                let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
+                
+                // if there are already 5 things in one day, do nothing
+                var dayIsFull = false
+                // Put the goal in the day
+                // ADD INDICATOR
+                for i in 0...cell.groupLabelArray.count - 1 {
+                    if cell.groupLabelArray[i].tag == 0 {
+                        cell.groupLabelArray[i].tag = 1
+                        cell.groupLabelArray[i].alpha = 1
+                        cell.groupLabelArray[i].layer.borderWidth = 1
+                        cell.groupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
+                        cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
+                        cell.groupLabelArray[i].clipsToBounds = true
+                        //
+                        cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[indexOfDraggedGroup], comment: "")
+                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                        break
+                    } else if i == cell.groupLabelArray.count - 1 {
+                        // Too much in one day, cant add any more
+                        dayIsFull = true
+                    }
+                }
+                
+                if dayIsFull == false {
+                    // Update the array
+                    //
+                    var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+                    var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+                    // update dayTableGroupArray
+//                    if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 || schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
+                        dayTableGroupArray[indexOfDraggedGroup] += 1
+//                    }
+                    // update schedules
+                    schedules[ScheduleVariables.shared.selectedSchedule][0][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
+                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
+                    UserDefaults.standard.set(schedules, forKey: "schedules")
+                    UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+//                    updateFullWeek()
+                    // update label
+                    setGroupLabels()
+                }
+                
+                draggingLabel.removeFromSuperview()
+                deMaskStackViews()
+                
+            // Dragging label is not over a day
+            } else {
+                draggingLabel.removeFromSuperview()
+                deMaskStackViews()
+            }
+        }
+        //
+    }
+    
+    
+    //
+    // MARK: Begin Dragging from cell
+    @objc func beginDraggingFromCell(gestureRecognizer: UIGestureRecognizer) {
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        
+        let longPress = gestureRecognizer as! UILongPressGestureRecognizer
+        let state = longPress.state
+        let locationInView = longPress.location(in: self.dayTable)
+        let locationInView2 = longPress.location(in: self.view)
+        let indexPathForRow = self.dayTable.indexPathForRow(at: locationInView)
+        
+        //
+        switch state {
+        // Add dragging label
+        case .began:
+            //
+            var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+            
+            let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
+            let locationInCell = longPress.location(in: cell)
+
+            
+            // Get the index of the long press and perform the relevant actions, if the press is not in the view, cancel the press
+            for i in 0...cell.groupLabelArray.count - 1 {
+                if cell.groupLabelArray[i].tag == 1 && cell.groupLabelArray[i].frame.contains(locationInCell) {
+                    
                     // Haptic feedback
                     var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .medium)
                     generator?.prepare()
                     generator?.impactOccurred()
                     generator = nil
+                    indexOfDrag = i
+                    
+                    // Get index of the group being dragged using the schedules array
+                    indexOfDraggedGroup = schedules[ScheduleVariables.shared.selectedSchedule][0][indexPathForRow!.row][indexOfDrag] as! Int
+                    //
+                    previousIndexPath = indexPathForRow
+                    
+                    
+                    // TODO: REMOVE FROM FULL WEEK
+                    // Remove from schedules array and update userdefaults
+                    schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!].remove(at: indexOfDrag)
+                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][(indexPathForRow?.row)!].remove(at: indexOfDrag)
+                    UserDefaults.standard.set(schedules, forKey: "schedules")
+                    UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+                    // Remove the label being dragged
+                    cell.groupLabelArray[indexOfDrag].tag = 0
+                    cell.groupLabelArray[indexOfDrag].alpha = 0
+
+                    //reload cell
+                    if schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!].count != 0 {
+                        cell.layoutSubviews()
+                        // Remove all groups
+                        for j in 0...cell.groupLabelArray.count - 1 {
+                            cell.groupLabelArray[j].tag = 0
+                            cell.groupLabelArray[j].alpha = 0
+                        }
+                        
+                        // Add all relevant groups
+                        for k in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!].count - 1 {
+                            cell.groupLabelArray[k].tag = 1
+                            cell.groupLabelArray[k].alpha = 1
+                            cell.groupLabelArray[k].layer.borderWidth = 1
+                            cell.groupLabelArray[k].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
+                            cell.groupLabelArray[k].layer.cornerRadius = 15 / 2
+                            cell.groupLabelArray[k].clipsToBounds = true
+                            //
+                            cell.groupLabelArray[k].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!][k] as! Int], comment: "")
+                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                        }
+                    }
+                    
+                    
                     
                     // Edit the draggingLabel
                     draggingLabel.text = NSLocalizedString(scheduleDataStructures.groupNames[indexOfDraggedGroup], comment: "")
                     draggingLabel.frame = bigGroupLabelArray[indexOfDrag].bounds
-                    draggingLabel.center = locationInView
                     
                     // Add dragging label and mask stack views
-                    UIApplication.shared.keyWindow?.addSubview(draggingLabel)
+                    // If app helps create schedule, add to day table
+                    if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
+                        draggingLabel.center = locationInView
+                        dayTable.addSubview(draggingLabel)
+                    // If custom schedule, add to view
+                    } else {
+                        draggingLabel.center = locationInView2
+                        UIApplication.shared.keyWindow?.addSubview(draggingLabel)
+                    }
                     maskStackViews()
                     
-                    previousIndexPath = nil
+                    // If custom schedule, turn createschedulebutton into bin
+                    if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 {
+                        createScheduleButton.backgroundColor = Colours.colour4.withAlphaComponent(0.25)
+                        createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
+                        createScheduleButton.setTitle("", for: .normal)
+                    }
+                    
+                    break
+                // Press is not in a group label, indicate by setting previousindexpath = nil
                 } else {
                     previousIndexPath = nil
-                    longPress.isEnabled = false
-                    longPress.isEnabled = true
                 }
-     
-                
-            // Dragging lable being dragged
-            case .changed:
-                // Keep the draggingLabel under the finger
+            }
+            
+            if previousIndexPath == nil {
+                longPress.isEnabled = false
+                longPress.isEnabled = true
+            }
+            
+            
+            //
+            
+//            }
+        // Dragging lable being dragged
+        case .changed:
+            // Keep the draggingLabel under the finger
+            // If app helps create schedule, location in table
+            if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 && locationInView.y > 0 && locationInView.y < dayTable.frame.maxY {
                 draggingLabel.center = locationInView
-                
-                // If dragging label is over the dayTable, highlight the relevant label of the relevant day
-                // Row being highlighted
-                if indexPathForRow != nil && indexPathForRow == previousIndexPath {
+            // If custom, location in view
+            } else if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 && locationInView.y > 0 {
+                draggingLabel.center = locationInView2
+            }
+            
+            // If Custom schedule and press over bin (createschedulebutton)
+            if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 && createScheduleButton.frame.contains(locationInView2) {
+                // Clear old cell
+                // CLEAR INDICATOR
+                if previousIndexPath != nil {
+                    let previousCell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
+                    for i in 0...previousCell.groupLabelArray.count - 1 {
+                        if previousCell.groupLabelArray[i].tag == 2 {
+                            previousCell.groupLabelArray[i].tag = 0
+                            previousCell.groupLabelArray[i].backgroundColor = .clear
+                            previousCell.groupLabelArray[i].alpha = 0
+                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                            break
+                        }
+                    }
+                }
+                //
+                createScheduleButton.setImage(#imageLiteral(resourceName: "BinOpen"), for: .normal)
+            // If dragging label is over the dayTable, highlight the relevant label of the relevant day
+            // Row being highlighted
+            } else if indexPathForRow != nil && indexPathForRow == previousIndexPath {
                     //
                     let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
                     // ADD INDICATOR
@@ -594,9 +812,16 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             break
                         }
                     }
-                    previousIndexPath = indexPathForRow!
+                if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 {
+                    createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
+                    createScheduleButton.setTitle("", for: .normal)
+                }
                 // Row is changing, changing highlight
-                } else if indexPathForRow != nil && indexPathForRow != previousIndexPath {
+            } else if indexPathForRow != nil && indexPathForRow != previousIndexPath {
+                
+                //
+                let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+                if schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!].count != 5 {
                     // Clear old cell
                     // CLEAR INDICATOR
                     if previousIndexPath != nil {
@@ -611,44 +836,93 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }
                         }
                     }
-                    //
-                    let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
-                    // ADD INDICATOR
-                    for i in 0...cell.groupLabelArray.count - 1 {
-                        if cell.groupLabelArray[i].backgroundColor == Colours.colour1 {
-                            break
-                        } else if cell.groupLabelArray[i].tag == 0 {
-                            cell.groupLabelArray[i].tag = 2
-                            cell.groupLabelArray[i].backgroundColor = Colours.colour1
-                            cell.groupLabelArray[i].alpha = 0.5
-                            cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
-                            cell.groupLabelArray[i].clipsToBounds = true
-                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
-                            break
-                        }
-                    }
+                    
                     previousIndexPath = indexPathForRow!
-                // Dragging label is dragged off table
-                } else if indexPathForRow == nil {
-                    // Clear old cell
-                    // CLEAR INDICATOR
-                    if previousIndexPath != nil {
-                        let previousCell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
-                        for i in 0...previousCell.groupLabelArray.count - 1 {
-                            if previousCell.groupLabelArray[i].tag == 2 {
-                                previousCell.groupLabelArray[i].tag = 0
-                                previousCell.groupLabelArray[i].backgroundColor = .clear
-                                previousCell.groupLabelArray[i].alpha = 0
-                                previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                                break
-                            }
-                        }
+                
+                //
+                let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
+                // ADD INDICATOR
+                for i in 0...cell.groupLabelArray.count - 1 {
+                    if cell.groupLabelArray[i].backgroundColor == Colours.colour1 {
+                        break
+                    } else if cell.groupLabelArray[i].tag == 0 {
+                        cell.groupLabelArray[i].tag = 2
+                        cell.groupLabelArray[i].backgroundColor = Colours.colour1
+                        cell.groupLabelArray[i].alpha = 0.5
+                        cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
+                        cell.groupLabelArray[i].clipsToBounds = true
+                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+                        break
                     }
                 }
                 
+            }
+                if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 {
+                    createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
+                    createScheduleButton.setTitle("", for: .normal)
+                }
+            // Dragging label is dragged off table, set to monday
+            } else if indexPathForRow == nil {
+                // Clear old cell
+                // CLEAR INDICATOR
+                //
+                let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
+                // ADD INDICATOR
+                for i in 0...cell.groupLabelArray.count - 1 {
+                    if cell.groupLabelArray[i].backgroundColor == Colours.colour1 {
+                        break
+                    } else if cell.groupLabelArray[i].tag == 0 {
+                        cell.groupLabelArray[i].tag = 2
+                        cell.groupLabelArray[i].backgroundColor = Colours.colour1
+                        cell.groupLabelArray[i].alpha = 0.5
+                        cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
+                        cell.groupLabelArray[i].clipsToBounds = true
+                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+                        break
+                    }
+                }
+                if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 {
+                    createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
+                    createScheduleButton.setTitle("", for: .normal)
+                }
+            }
+            
+            
+        // Dragging label let go
+        default:
+            var shouldRemoveBin = true
+            // If over bin
+            if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 && createScheduleButton.frame.contains(locationInView2) {
+                // Haptic feedback
+                var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
+                generator?.prepare()
+                generator?.impactOccurred()
+                generator = nil
                 
-            // Dragging label let go
-            default:
+                // Animate lable to bin
+                shouldRemoveBin = false // Remove bin handled here, after animation
+                UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
+                    self.draggingLabel.frame.size = CGSize(width: 0, height: 0)
+                    self.draggingLabel.center = self.createScheduleButton.center
+                }, completion: { finished in
+                    self.createScheduleButton.setImage(nil, for: .normal)
+                    self.createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
+                    self.createScheduleButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+                    self.draggingLabel.removeFromSuperview()
+                    self.deMaskStackViews()
+                })
+                
+                // Note: no need to remove from any arrays as already been removed when the label was picked up
+                
+            // If it is equal to nil, then the long press is not in a label
+            } else if previousIndexPath != nil {
+                // Haptic feedback
+                var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
+                generator?.prepare()
+                generator?.impactOccurred()
+                generator = nil
+            
+            
                 // Clear old cell
                 // CLEAR INDICATOR
                 if previousIndexPath != nil {
@@ -662,19 +936,18 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             break
                         }
                     }
+                }
+            
                 //
-                // If Dragging label is over a day
-                    // Set goal to day
-                    // Remove 1 from the relevant label of the group at the top of the screen
-                        // If no more sessions of group, darken top label and make it green
-                    // Haptic feedback
-                    var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
-                    generator?.prepare()
-                    generator?.impactOccurred()
-                    generator = nil
-                    
-                    let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
-                    
+                // If Dragging label is over a day (if it isn't then above table, set to previousindexpath (monday))
+                // Set goal to day
+                // Remove 1 from the relevant label of the group at the top of the screen
+                // If no more sessions of group, darken top label and make it green
+                var cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
+                if indexPathForRow != nil {
+                    cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
+                }
+            
                     // if there are already 5 things in one day, do nothing
                     var dayIsFull = false
                     // Put the goal in the day
@@ -696,470 +969,26 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             dayIsFull = true
                         }
                     }
-                    
+            
                     if dayIsFull == false {
                         // Update the array
                         //
                         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
                         var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                        // update dayTableGroupArray
-                        if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 || schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
-                            dayTableGroupArray[indexOfDraggedGroup] += 1
-                        }
                         // update schedules
-                        schedules[ScheduleVariables.shared.selectedSchedule][0][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
-                        scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
-                        UserDefaults.standard.set(schedules, forKey: "schedules")
-                        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                        updateFullWeek()
-                        // update label
-                        setGroupLabels()
-                        displayCreateScheduleButton()
-                    }
-                    
-                    draggingLabel.removeFromSuperview()
-                    deMaskStackViews()
-                    
-                // Dragging label is not over a day
-                } else {
-                    draggingLabel.removeFromSuperview()
-                    deMaskStackViews()
-                }
-            }
-        //
-            // MARK: Week
-        } else {
-            switch state {
-            // Add dragging label
-            case .began:
-                
-                // Get the index of the long press group
-                    // As all groups displayed, index is simply index in the longPressArray
-                indexOfDraggedGroup = longPressArray.index(of: longPress)!
-                
-                // Haptic feedback
-                var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .medium)
-                generator?.prepare()
-                generator?.impactOccurred()
-                generator = nil
-                
-                // Edit the draggingLabel
-                draggingLabel.text = NSLocalizedString(scheduleDataStructures.groupNames[indexOfDraggedGroup], comment: "")
-                draggingLabel.frame = bigGroupLabelArray[indexOfDrag].bounds
-                draggingLabel.center = locationInView
-                
-                //
-                previousIndexPath = nil
-                
-                // Add dragging label and mask stack views
-                UIApplication.shared.keyWindow?.addSubview(draggingLabel)
-                maskStackViews()
-                
-            // Dragging lable being dragged
-            case .changed:
-                // Keep the draggingLabel under the finger
-                draggingLabel.center = locationInView
-                
-                //
-                // Highlight the group and label
-                // Row being highlighted
-                if indexPathForRow != nil {
-                    let cell = dayTable.cellForRow(at: indexPathForRow!) as! WeekCell
-                    // ADD INDICATOR
-                    for i in 0...cell.groupLabelArray[indexOfDraggedGroup].count - 1 {
-                        if cell.groupLabelArray[indexOfDraggedGroup][i].tag == 2 {
-                            break
-                        } else if cell.groupLabelArray[indexOfDraggedGroup][i].tag == 0 {
-                            cell.groupLabelArray[indexOfDraggedGroup][i].tag = 2
-                            cell.groupLabelArray[indexOfDraggedGroup][i].backgroundColor = Colours.colour1
-                            cell.groupLabelArray[indexOfDraggedGroup][i].alpha = 0.5
-                            cell.groupLabelArray[indexOfDraggedGroup][i].layer.cornerRadius = 15 / 2
-                            cell.groupLabelArray[indexOfDraggedGroup][i].clipsToBounds = true
-                            break
-                        }
-                    }
-                    previousIndexPath = indexPathForRow
-                } else if previousIndexPath != nil {
-                    // CLEAR INDICATOR
-                    let cell = dayTable.cellForRow(at: previousIndexPath!) as! WeekCell
-                    for i in 0...cell.groupLabelArray[indexOfDraggedGroup].count - 1 {
-                        if cell.groupLabelArray[indexOfDraggedGroup][i].tag == 2 {
-                            cell.groupLabelArray[indexOfDraggedGroup][i].tag = 0
-                            cell.groupLabelArray[indexOfDraggedGroup][i].backgroundColor = .clear
-                            cell.groupLabelArray[indexOfDraggedGroup][i].alpha = 0
-                            break
-                        }
-                    }
-                }
-                
-            // Dragging label let go
-            default:
-                if indexPathForRow != nil {
-                    // Clear old cell
-                    // CLEAR INDICATOR
-                    let cell = dayTable.cellForRow(at: indexPathForRow!) as! WeekCell
-                    for i in 0...cell.groupLabelArray[indexOfDraggedGroup].count - 1 {
-                        if cell.groupLabelArray[indexOfDraggedGroup][i].tag == 2 {
-                            cell.groupLabelArray[indexOfDraggedGroup][i].tag = 0
-                            cell.groupLabelArray[indexOfDraggedGroup][i].backgroundColor = .clear
-                            cell.groupLabelArray[indexOfDraggedGroup][i].alpha = 0
-                            break
-                        }
-                    }
-                    
-                    //
-                    // Set goal to week if space in goal section
-                    // Haptic feedback
-                    var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
-                    generator?.prepare()
-                    generator?.impactOccurred()
-                    generator = nil
-                    
-                    // if there are already 5 things in one day, do nothing
-                    var dayIsFull = false
-                    // Put the goal in the day
-                    // ADD INDICATOR
-                    for i in 0...cell.groupLabelArray[indexOfDraggedGroup].count - 1 {
-                        if cell.groupLabelArray[indexOfDraggedGroup][i].tag == 0 {
-                            cell.groupLabelArray[indexOfDraggedGroup][i].tag = 1
-                            cell.groupLabelArray[indexOfDraggedGroup][i].alpha = 1
-                            cell.groupLabelArray[indexOfDraggedGroup][i].layer.borderWidth = 1
-                            cell.groupLabelArray[indexOfDraggedGroup][i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
-                            cell.groupLabelArray[indexOfDraggedGroup][i].layer.cornerRadius = 15 / 2
-                            cell.groupLabelArray[indexOfDraggedGroup][i].clipsToBounds = true
-                            //
-                            cell.groupLabelArray[indexOfDraggedGroup][i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[indexOfDraggedGroup], comment: "")
-                            break
-                        } else if i == cell.groupLabelArray[indexOfDraggedGroup].count - 1 {
-                            // Too much in one day, cant add any more
-                            dayIsFull = true
-                        }
-                    }
-                    
-                    if dayIsFull == false {
-                        // Update the array
-                        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-                        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                        // update dayTableGroupArray
-                        dayTableGroupArray[indexOfDraggedGroup] += 1
-                        // update schedules
-                        schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(indexOfDraggedGroup)
-                        schedules[ScheduleVariables.shared.selectedSchedule][0][7] = (schedules[ScheduleVariables.shared.selectedSchedule][0][7] as! [Int]).sorted()
-                        // Append to week tracking, start again as cannot sort
-                        scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
-                        if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
-                            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][7].count - 1 {
-                                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int]!)
-                            }
-                        }
-                        UserDefaults.standard.set(schedules, forKey: "schedules")
-                        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                    }
-                }
-                
-                draggingLabel.removeFromSuperview()
-                deMaskStackViews()
-            }
-        }
-    }
-    
-    
-    //
-    // MARK: Begin Dragging from cell
-    @objc func beginDraggingFromCell(gestureRecognizer: UIGestureRecognizer) {
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-        
-        let longPress = gestureRecognizer as! UILongPressGestureRecognizer
-        let state = longPress.state
-        let locationInView = longPress.location(in: self.dayTable)
-        let locationInView2 = longPress.location(in: self.view)
-        let indexPathForRow = self.dayTable.indexPathForRow(at: locationInView)
-        
-        //
-            // MARK: Day
-        if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
-            switch state {
-            // Add dragging label
-            case .began:
-                //
-                var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-                var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                
-                let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
-                let locationInView2 = longPress.location(in: cell)
-
-                
-                // Get the index of the long press and perform the relevant actions, if the press is not in the view, cancel the press
-                for i in 0...cell.groupLabelArray.count - 1 {
-                    if cell.groupLabelArray[i].tag == 1 && cell.groupLabelArray[i].frame.contains(locationInView2) {
-                        
-                        // Haptic feedback
-                        var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .medium)
-                        generator?.prepare()
-                        generator?.impactOccurred()
-                        generator = nil
-                        indexOfDrag = i
-                        
-                        // Get index of the group being dragged using the schedules array
-                        indexOfDraggedGroup = schedules[ScheduleVariables.shared.selectedSchedule][0][indexPathForRow!.row][indexOfDrag] as! Int
-                        //
-                        previousIndexPath = indexPathForRow
-                        
-                        // Remove from schedules array and update userdefaults
-                        schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!].remove(at: indexOfDrag)
-                        scheduleTracking[ScheduleVariables.shared.selectedSchedule][(indexPathForRow?.row)!].remove(at: indexOfDrag)
-                        UserDefaults.standard.set(schedules, forKey: "schedules")
-                        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                        // Remove the label being dragged
-                        cell.groupLabelArray[indexOfDrag].tag = 0
-                        cell.groupLabelArray[indexOfDrag].alpha = 0
-
-                        //reload cell
-                        if schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!].count != 0 {
-                            cell.layoutSubviews()
-                            // Remove all groups
-                            for j in 0...cell.groupLabelArray.count - 1 {
-                                cell.groupLabelArray[j].tag = 0
-                                cell.groupLabelArray[j].alpha = 0
-                            }
-                            
-                            // Add all relevant groups
-                            for k in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!].count - 1 {
-                                cell.groupLabelArray[k].tag = 1
-                                cell.groupLabelArray[k].alpha = 1
-                                cell.groupLabelArray[k].layer.borderWidth = 1
-                                cell.groupLabelArray[k].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
-                                cell.groupLabelArray[k].layer.cornerRadius = 15 / 2
-                                cell.groupLabelArray[k].clipsToBounds = true
-                                //
-                                cell.groupLabelArray[k].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!][k] as! Int], comment: "")
-                                cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                            }
-                        }
-                        
-                        
-                        
-                        // Edit the draggingLabel
-                        draggingLabel.text = NSLocalizedString(scheduleDataStructures.groupNames[indexOfDraggedGroup], comment: "")
-                        draggingLabel.frame = bigGroupLabelArray[indexOfDrag].bounds
-                        
-                        // Add dragging label and mask stack views
-                        if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
-                            draggingLabel.center = locationInView
-                            dayTable.addSubview(draggingLabel)
+                            // Do a check, if the user is dragging off the top of the teable (indexpathforrow == nil, set to previous indexpath(always monday))
+                        if indexPathForRow != nil {
+                            schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!].append(indexOfDraggedGroup)
+                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][(indexPathForRow?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
                         } else {
-                            draggingLabel.center = locationInView2
-                            UIApplication.shared.keyWindow?.addSubview(draggingLabel)
+                            schedules[ScheduleVariables.shared.selectedSchedule][0][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
+                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
                         }
-                        maskStackViews()
-                        
-                        // If custom schedule, turn createschedulebutton into bin
-                        if ScheduleVariables.shared.selectedSchedule != 0 {
-                            createScheduleButton.backgroundColor = Colours.colour4.withAlphaComponent(0.25)
-                            createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
-                            createScheduleButton.setTitle("", for: .normal)
-                        }
-                        
-                        break
-                    // Press is not in a group label, indicate by setting previousindexpath = nil
+                        UserDefaults.standard.set(schedules, forKey: "schedules")
+                        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                     } else {
-                        previousIndexPath = nil
-                    }
-                }
-                
-                if previousIndexPath == nil {
-                    longPress.isEnabled = false
-                    longPress.isEnabled = true
-                }
-                
-                
-                //
-                
-    //            }
-            // Dragging lable being dragged
-            case .changed:
-                // Keep the draggingLabel under the finger
-                if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 && locationInView.y > 0 && locationInView.y < dayTable.frame.maxY {
-                    draggingLabel.center = locationInView
-                } else if ScheduleVariables.shared.selectedSchedule != 0 && locationInView.y > 0 {
-                    draggingLabel.center = locationInView2
-                }
-                
-                // If Custom schedule and press over bin (createschedulebutton)
-                if ScheduleVariables.shared.selectedSchedule != 0 && createScheduleButton.frame.contains(locationInView2) {
-                    // Clear old cell
-                    // CLEAR INDICATOR
-                    if previousIndexPath != nil {
-                        let previousCell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
-                        for i in 0...previousCell.groupLabelArray.count - 1 {
-                            if previousCell.groupLabelArray[i].tag == 2 {
-                                previousCell.groupLabelArray[i].tag = 0
-                                previousCell.groupLabelArray[i].backgroundColor = .clear
-                                previousCell.groupLabelArray[i].alpha = 0
-                                previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                                break
-                            }
-                        }
-                    }
-                    //
-                    createScheduleButton.setImage(#imageLiteral(resourceName: "BinOpen"), for: .normal)
-                // If dragging label is over the dayTable, highlight the relevant label of the relevant day
-                // Row being highlighted
-                } else if indexPathForRow != nil && indexPathForRow == previousIndexPath {
-                        //
-                        let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
-                        // ADD INDICATOR
-                        for i in 0...cell.groupLabelArray.count - 1 {
-                            if cell.groupLabelArray[i].tag == 2 {
-                                break
-                            } else if cell.groupLabelArray[i].tag == 0 {
-                                cell.groupLabelArray[i].tag = 2
-                                cell.groupLabelArray[i].backgroundColor = Colours.colour1
-                                cell.groupLabelArray[i].alpha = 0.5
-                                cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
-                                cell.groupLabelArray[i].clipsToBounds = true
-                                cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
-                                break
-                            }
-                        }
-                    if ScheduleVariables.shared.selectedSchedule != 0 {
-                        createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
-                        createScheduleButton.setTitle("", for: .normal)
-                    }
-                    // Row is changing, changing highlight
-                } else if indexPathForRow != nil && indexPathForRow != previousIndexPath {
-                    
-                    //
-                    let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-                    if schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!].count != 5 {
-                        // Clear old cell
-                        // CLEAR INDICATOR
-                        if previousIndexPath != nil {
-                            let previousCell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
-                            for i in 0...previousCell.groupLabelArray.count - 1 {
-                                if previousCell.groupLabelArray[i].tag == 2 {
-                                    previousCell.groupLabelArray[i].tag = 0
-                                    previousCell.groupLabelArray[i].backgroundColor = .clear
-                                    previousCell.groupLabelArray[i].alpha = 0
-                                    previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                                    break
-                                }
-                            }
-                        }
-                        
-                        previousIndexPath = indexPathForRow!
-                    
-                    //
-                    let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
-                    // ADD INDICATOR
-                    for i in 0...cell.groupLabelArray.count - 1 {
-                        if cell.groupLabelArray[i].backgroundColor == Colours.colour1 {
-                            break
-                        } else if cell.groupLabelArray[i].tag == 0 {
-                            cell.groupLabelArray[i].tag = 2
-                            cell.groupLabelArray[i].backgroundColor = Colours.colour1
-                            cell.groupLabelArray[i].alpha = 0.5
-                            cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
-                            cell.groupLabelArray[i].clipsToBounds = true
-                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
-                            break
-                        }
-                    }
-                    
-                }
-                    if ScheduleVariables.shared.selectedSchedule != 0 {
-                        createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
-                        createScheduleButton.setTitle("", for: .normal)
-                    }
-                // Dragging label is dragged off table, set to monday
-                } else if indexPathForRow == nil {
-                    // Clear old cell
-                    // CLEAR INDICATOR
-                    //
-                    let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
-                    // ADD INDICATOR
-                    for i in 0...cell.groupLabelArray.count - 1 {
-                        if cell.groupLabelArray[i].backgroundColor == Colours.colour1 {
-                            break
-                        } else if cell.groupLabelArray[i].tag == 0 {
-                            cell.groupLabelArray[i].tag = 2
-                            cell.groupLabelArray[i].backgroundColor = Colours.colour1
-                            cell.groupLabelArray[i].alpha = 0.5
-                            cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
-                            cell.groupLabelArray[i].clipsToBounds = true
-                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
-                            break
-                        }
-                    }
-                    if ScheduleVariables.shared.selectedSchedule != 0 {
-                        createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
-                        createScheduleButton.setTitle("", for: .normal)
-                    }
-                }
-                
-                
-            // Dragging label let go
-            default:
-                var shouldRemoveBin = true
-                // If over bin
-                if ScheduleVariables.shared.selectedSchedule != 0 && createScheduleButton.frame.contains(locationInView2) {
-                    // Haptic feedback
-                    var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
-                    generator?.prepare()
-                    generator?.impactOccurred()
-                    generator = nil
-                    
-                    // Animate lable to bin
-                    shouldRemoveBin = false // Remove bin handled here, after animation
-                    UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                        self.draggingLabel.frame.size = CGSize(width: 0, height: 0)
-                        self.draggingLabel.center = self.createScheduleButton.center
-                    }, completion: { finished in
-                        self.createScheduleButton.setImage(nil, for: .normal)
-                        self.createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-                        self.createScheduleButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
-                        self.draggingLabel.removeFromSuperview()
-                        self.deMaskStackViews()
-                    })
-                    
-                    // Note: no need to remove from any arrays as already been removed when the label was picked up
-                    
-                // If it is equal to nil, then the long press is not in a label
-                } else if previousIndexPath != nil {
-                    // Haptic feedback
-                    var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
-                    generator?.prepare()
-                    generator?.impactOccurred()
-                    generator = nil
-                
-                
-                    // Clear old cell
-                    // CLEAR INDICATOR
-                    if previousIndexPath != nil {
-                        let previousCell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
-                        for i in 0...previousCell.groupLabelArray.count - 1 {
-                            if previousCell.groupLabelArray[i].tag == 2 {
-                                previousCell.groupLabelArray[i].tag = 0
-                                previousCell.groupLabelArray[i].backgroundColor = .clear
-                                previousCell.groupLabelArray[i].alpha = 0
-                                previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                                break
-                            }
-                        }
-                    }
-                
-                    //
-                    // If Dragging label is over a day (if it isn't then above table, set to previousindexpath (monday))
-                    // Set goal to day
-                    // Remove 1 from the relevant label of the group at the top of the screen
-                    // If no more sessions of group, darken top label and make it green
-                    var cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
-                    if indexPathForRow != nil {
-                        cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
-                    }
-                
-                        // if there are already 5 things in one day, do nothing
-                        var dayIsFull = false
+                        let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
+
                         // Put the goal in the day
                         // ADD INDICATOR
                         for i in 0...cell.groupLabelArray.count - 1 {
@@ -1179,337 +1008,35 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 dayIsFull = true
                             }
                         }
-                
-                        if dayIsFull == false {
-                            // Update the array
-                            //
-                            var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-                            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                            // update schedules
-                                // Do a check, if the user is dragging off the top of the teable (indexpathforrow == nil, set to previous indexpath(always monday))
-                            if indexPathForRow != nil {
-                                schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!].append(indexOfDraggedGroup)
-                                scheduleTracking[ScheduleVariables.shared.selectedSchedule][(indexPathForRow?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
-                            } else {
-                                schedules[ScheduleVariables.shared.selectedSchedule][0][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
-                                scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
-                            }
-                            UserDefaults.standard.set(schedules, forKey: "schedules")
-                            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                        } else {
-                            let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
-
-                            // Put the goal in the day
-                            // ADD INDICATOR
-                            for i in 0...cell.groupLabelArray.count - 1 {
-                                if cell.groupLabelArray[i].tag == 0 {
-                                    cell.groupLabelArray[i].tag = 1
-                                    cell.groupLabelArray[i].alpha = 1
-                                    cell.groupLabelArray[i].layer.borderWidth = 1
-                                    cell.groupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
-                                    cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
-                                    cell.groupLabelArray[i].clipsToBounds = true
-                                    //
-                                    cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[indexOfDraggedGroup], comment: "")
-                                    cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                                    break
-                                } else if i == cell.groupLabelArray.count - 1 {
-                                    // Too much in one day, cant add any more
-                                    dayIsFull = true
-                                }
-                            }
-                            
-                            
-                            // Update the array
-                            //
-                            var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-                            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                            // update schedules
-                            schedules[ScheduleVariables.shared.selectedSchedule][0][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
-                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
-                            UserDefaults.standard.set(schedules, forKey: "schedules")
-                            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                    }
-                    
-                        draggingLabel.removeFromSuperview()
-                        deMaskStackViews()
-                    
-                    // Remove bin
-                    if ScheduleVariables.shared.selectedSchedule != 0 && shouldRemoveBin == true {
-                        createScheduleButton.setImage(nil, for: .normal)
-                        createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-                        createScheduleButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
-                    }
-                }
-            }
-        //
-            // MARK: Week
-        } else {
-            switch state {
-            // Add dragging label
-            case .began:
-                //
-                var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-                var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                
-                let cell = dayTable.cellForRow(at: indexPathForRow!) as! WeekCell
-                let locationInView2 = longPress.location(in: cell)
-                
-                var shouldBreak = false
-                
-                // Get the index of the long press and perform the relevant actions, if the press is not in the view, cancel the press
-                // Group loop
-                for i in 0...cell.groupLabelArray.count - 1 {
-                    //
-                    for j in 0...cell.groupLabelArray[i].count - 1 {
-                        if cell.groupLabelArray[i][j].tag == 1 && cell.groupLabelArray[i][j].frame.contains(locationInView2) {
-                            
-                            // Haptic feedback
-                            var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .medium)
-                            generator?.prepare()
-                            generator?.impactOccurred()
-                            generator = nil
-                            
-                            // Index is simply index in array as all groups presented
-                            indexOfDraggedGroup = i
-                            //
-                            previousIndexPath = indexPathForRow
-                            
-                            // Remove from schedules array
-                            let firstIndex = (schedules[ScheduleVariables.shared.selectedSchedule][0][7] as! [Int]).index(of: indexOfDraggedGroup)
-                            schedules[ScheduleVariables.shared.selectedSchedule][0][7].remove(at: firstIndex!)
-                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].remove(at: firstIndex!)
-                            UserDefaults.standard.set(schedules, forKey: "schedules")
-                            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                            dayTableGroupArray[indexOfDraggedGroup] -= 1
-                            // Remove the label being dragged
-                            cell.groupLabelArray[i][j].tag = 0
-                            cell.groupLabelArray[i][j].alpha = 0
-                            
-                            // reload cell
-                            cell.layoutSubviews()
-                            // Remove all groups
-                            // TODO: CUSTOM SCHEDULE ARRAY!!!
-                            for k in 0...cell.groupLabelArray[i].count - 1 {
-                                cell.groupLabelArray[i][k].tag = 0
-                                cell.groupLabelArray[i][k].alpha = 0
-                            }
-                            
-                            //
-                            // Add relevant groups if they are there
-                            // Loop full list
-                            for i in 0...dayTableGroupArray.count - 1 {
-                                if dayTableGroupArray[i] != 0 {
-                                    for j in 0...dayTableGroupArray[i] - 1 {
-                                        cell.groupLabelArray[i][j].tag = 1
-                                        cell.groupLabelArray[i][j].alpha = 1
-                                        cell.groupLabelArray[i][j].layer.borderWidth = 1
-                                        cell.groupLabelArray[i][j].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
-                                        cell.groupLabelArray[i][j].layer.cornerRadius = 15 / 2
-                                        cell.groupLabelArray[i][j].clipsToBounds = true
-                                        //
-                                        cell.groupLabelArray[i][j].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[i], comment: "")
-                                    }
-                                }
-                            }
-                            
-                            // Edit the draggingLabel
-                            draggingLabel.text = NSLocalizedString(scheduleDataStructures.groupNames[indexOfDraggedGroup], comment: "")
-                            draggingLabel.frame = bigGroupLabelArray[indexOfDrag].bounds
-                            draggingLabel.center = locationInView
-                            
-                            // Add dragging label and mask stack views
-                            draggingLabel.center = locationInView
-                            dayTable.addSubview(draggingLabel)
-                            maskStackViews()
-                            shouldBreak = true
-                            break
-                        // Touch is not in group label, indicate by setting previousIndexPath = nil
-                        } else {
-                            previousIndexPath = nil
-                        }
-                    // Sessions Loop
-                    }
-                if shouldBreak == true {
-                    break
-                }
-                // Group Loop
-                }
-                
-                if previousIndexPath == nil {
-                    longPress.isEnabled = false
-                    longPress.isEnabled = true
-                }
-                
-            // Dragging label being dragged
-            case .changed:
-                // Keep the draggingLabel under the finger
-                if locationInView.y > 0 && locationInView.y < dayTable.bounds.height {
-                    draggingLabel.center = locationInView
-                }
-                //
-                // Highlight the group and label
-                // Row being highlighted
-                if indexPathForRow != nil {
-                    let cell = dayTable.cellForRow(at: indexPathForRow!) as! WeekCell
-                    // In Bin
-                    if cell.binView.frame.contains(locationInView) {
-                        cell.bin.image = #imageLiteral(resourceName: "BinOpen")
-                        cell.bin.tintColor = Colours.colour4
-                        // Clear old cell
-                        // CLEAR INDICATOR
-                        for i in 0...cell.groupLabelArray[indexOfDraggedGroup].count - 1 {
-                            if cell.groupLabelArray[indexOfDraggedGroup][i].tag == 2 {
-                                cell.groupLabelArray[indexOfDraggedGroup][i].tag = 0
-                                cell.groupLabelArray[indexOfDraggedGroup][i].backgroundColor = .clear
-                                cell.groupLabelArray[indexOfDraggedGroup][i].alpha = 0
-                                break
-                            }
-                        }
-                    // Out of bin
-                    } else {
-                        cell.bin.image = #imageLiteral(resourceName: "Bin")
-                        cell.bin.tintColor = Colours.colour1
-                        // ADD INDICATOR
-                        for i in 0...cell.groupLabelArray[indexOfDraggedGroup].count - 1 {
-                            if cell.groupLabelArray[indexOfDraggedGroup][i].tag == 2 {
-                                break
-                            } else if cell.groupLabelArray[indexOfDraggedGroup][i].tag == 0 {
-                                cell.groupLabelArray[indexOfDraggedGroup][i].tag = 2
-                                cell.groupLabelArray[indexOfDraggedGroup][i].backgroundColor = Colours.colour1
-                                cell.groupLabelArray[indexOfDraggedGroup][i].alpha = 0.5
-                                cell.groupLabelArray[indexOfDraggedGroup][i].layer.cornerRadius = 15 / 2
-                                cell.groupLabelArray[indexOfDraggedGroup][i].clipsToBounds = true
-                                break
-                            }
-                        }
-                    }
-                }
-                
-            // Dragging label let go
-            default:
-                if previousIndexPath != nil {
-                    let cell = dayTable.cellForRow(at: previousIndexPath!) as! WeekCell
-                    // If over bin
-                    var shouldRemoveLabel = true
-                    if ScheduleVariables.shared.selectedSchedule != 0 && cell.binView.frame.contains(locationInView) {
-                        // Haptic feedback
-                        var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
-                        generator?.prepare()
-                        generator?.impactOccurred()
-                        generator = nil
                         
-                        // Removal of dragging label handled here after animation
-                        shouldRemoveLabel = false
                         
-                        // Remove from week as well
+                        // Update the array
+                        //
                         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
                         var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                            // Loop week
-                        var shouldBreak = false
-                        for i in 0...6 {
-                            // If day isn't empty
-                            if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count != 0 {
-                                // Loop Day
-                                for j in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][i].count - 1 {
-                                    // Remove first instance of
-                                    if schedules[ScheduleVariables.shared.selectedSchedule][0][i][j] as! Int == indexOfDraggedGroup {
-                                        schedules[ScheduleVariables.shared.selectedSchedule][0][i].remove(at: j)
-                                        scheduleTracking[ScheduleVariables.shared.selectedSchedule][i].remove(at: j)
-                                        UserDefaults.standard.set(schedules, forKey: "schedules")
-                                        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                                        shouldBreak = true
-                                        break
-                                    }
-                                }
-                            }
-                            if shouldBreak == true {
-                                break
-                            }
-                        }
-                        
-                        // Animate lable to bin
-                        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                            self.draggingLabel.frame.size = CGSize(width: 0, height: 0)
-                            self.draggingLabel.center = cell.bin.center
-                        }, completion: { finished in
-                            cell.bin.image = #imageLiteral(resourceName: "Bin")
-                            cell.bin.tintColor = Colours.colour1
-                            self.draggingLabel.removeFromSuperview()
-                            self.deMaskStackViews()
-                        })
-                        // Note: no need to remove from any arrays as already been removed when the label was picked up
-                        
-                    // Previous index path incase touch is outside of cell, still set to in cell
-                    } else {
-                        // Clear old cell
-                        for i in 0...cell.groupLabelArray[indexOfDraggedGroup].count - 1 {
-                            if cell.groupLabelArray[indexOfDraggedGroup][i].tag == 2 {
-                                cell.groupLabelArray[indexOfDraggedGroup][i].tag = 0
-                                cell.groupLabelArray[indexOfDraggedGroup][i].backgroundColor = .clear
-                                cell.groupLabelArray[indexOfDraggedGroup][i].alpha = 0
-                                break
-                            }
-                        }
-                        
-                        //
-                        // Set goal to week if space in goal section
-                        // Haptic feedback
-                        var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
-                        generator?.prepare()
-                        generator?.impactOccurred()
-                        generator = nil
-                        
-                        // if there are already 5 things in one day, do nothing
-                        var dayIsFull = false
-                        // Put the goal in the day
-                        // ADD INDICATOR
-                        for i in 0...cell.groupLabelArray[indexOfDraggedGroup].count - 1 {
-                            if cell.groupLabelArray[indexOfDraggedGroup][i].tag == 0 {
-                                cell.groupLabelArray[indexOfDraggedGroup][i].tag = 1
-                                cell.groupLabelArray[indexOfDraggedGroup][i].alpha = 1
-                                cell.groupLabelArray[indexOfDraggedGroup][i].layer.borderWidth = 1
-                                cell.groupLabelArray[indexOfDraggedGroup][i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
-                                cell.groupLabelArray[indexOfDraggedGroup][i].layer.cornerRadius = 15 / 2
-                                cell.groupLabelArray[indexOfDraggedGroup][i].clipsToBounds = true
-                                //
-                                cell.groupLabelArray[indexOfDraggedGroup][i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[indexOfDraggedGroup], comment: "")
-                                break
-                            } else if i == cell.groupLabelArray[indexOfDraggedGroup].count - 1 {
-                                // Too much in one day, cant add any more
-                                dayIsFull = true
-                            }
-                        }
-                        
-                        if dayIsFull == false {
-                            // TODO: CUSTOM SCHEDULE
-                            // Update the array
-                            var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-                            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                            // update dayTableGroupArray
-                            dayTableGroupArray[indexOfDraggedGroup] += 1
-                            // update schedules
-                            schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(indexOfDraggedGroup)
-                            schedules[ScheduleVariables.shared.selectedSchedule][0][7] = (schedules[ScheduleVariables.shared.selectedSchedule][0][7] as! [Int]).sorted()
-                            // Update week tracking now as cannot sort
-                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
-                            if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
-                                for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][7].count - 1 {
-                                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int]!)
-                                }
-                            }
-                            UserDefaults.standard.set(schedules, forKey: "schedules")
-                            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                        }
-                    }
-                    
-                    if shouldRemoveLabel == true {
-                        draggingLabel.removeFromSuperview()
-                        deMaskStackViews()
-                    }
+                        // update schedules
+                        schedules[ScheduleVariables.shared.selectedSchedule][0][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
+                        scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
+                        UserDefaults.standard.set(schedules, forKey: "schedules")
+                        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+                }
+                
+                    draggingLabel.removeFromSuperview()
+                    deMaskStackViews()
+                
+                // Remove bin
+                if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 && shouldRemoveBin == true {
+                    createScheduleButton.setImage(nil, for: .normal)
+                    createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
+                    createScheduleButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
                 }
             }
         }
+        
+        
+        
+        
+    //
     }
     
     
@@ -1539,7 +1066,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // MARK: Dismiss view when finisehd
     // TODO: THIS FUNC
-    // ScheduleVariables.shared.shouldReloadSchedule = true
 
     
     
@@ -1555,8 +1081,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // Dismiss view
     @IBAction func createScheduleButtonAction(_ sender: Any) {
-        //
-        ScheduleVariables.shared.shouldReloadSchedule = true
         //
         // Return to schedule overview
         if fromScheduleEditing == true {

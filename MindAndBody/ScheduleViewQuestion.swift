@@ -27,9 +27,7 @@ class ScheduleViewQuestion: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     
     var comingFromSchedule = false
-        
-    var wasDayView = false
-        
+    
     //
     // MARK: View did load
     override func viewDidLoad() {
@@ -73,9 +71,6 @@ class ScheduleViewQuestion: UIViewController {
         weekViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         weekViewButton.setTitleColor(Colours.colour1, for: .normal)
         
-        // Selected schedule
-        ScheduleVariables.shared.selectedSchedule = settings[7][0]
-        
         //
         // Back
         // Swipe
@@ -105,19 +100,43 @@ class ScheduleViewQuestion: UIViewController {
     @IBAction func weekButtonAction(_ sender: Any) {
         // If app schedule, go to week
         var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-        // Check if it was day view before
-        if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
-            wasDayView = true
-        } else if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
-            wasDayView = false
-        }
         // Set user settings for schedule style to week
         schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] = 1
         UserDefaults.standard.set(schedules, forKey: "schedules")
+        //
+        // App helps create schedule, dismiss to schedule
         if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
+            // Fill up days in week array with sessions
+            var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+            // Loop sessions array from 1 (0 is total n sessions, rest are number of session of each group)
+            for i in 1...schedules[ScheduleVariables.shared.selectedSchedule][2][2].count - 1 {
+                // If n session not 0
+                if schedules[ScheduleVariables.shared.selectedSchedule][2][2][i] as! Int != 0 {
+                    // Loop number of sessions
+                    for _ in 1...(schedules[ScheduleVariables.shared.selectedSchedule][2][2][i] as! Int) {
+                        // Note: group is i - 1 as array includes total n session at 0
+                        let group = i - 1
+                        // Add to first available day in the week
+                        for j in 0...6 {
+                            // If week not full (max 5 things per day in week
+                            if schedules[ScheduleVariables.shared.selectedSchedule][0][j].count < 5 {
+                                schedules[ScheduleVariables.shared.selectedSchedule][0][j].append(group)
+                                scheduleTracking[ScheduleVariables.shared.selectedSchedule][j].append(scheduleDataStructures.scheduleTrackingArrays[group]!)
+                                break
+                            }
+                        }
+                       // Not already added to full week array [7] in scheduleCreationHelp
+                    }
+                }
+            }
             //
-            ScheduleVariables.shared.shouldReloadSchedule = true
+            UserDefaults.standard.set(schedules, forKey: "schedules")
+            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+            //
+            //
             self.dismiss(animated: true)
+        //
         // If custom schedule, go to schedule creator
         } else {
             self.performSegue(withIdentifier: "ScheduleCreatorSegue", sender: self)
@@ -140,9 +159,6 @@ class ScheduleViewQuestion: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
         if segue.identifier == "ScheduleCreatorSegue" {
-            let destinationVC = segue.destination as? ScheduleCreator
-            destinationVC?.wasDayView = wasDayView
-            //
             // Remove back button text
             let backItem = UIBarButtonItem()
             backItem.title = ""

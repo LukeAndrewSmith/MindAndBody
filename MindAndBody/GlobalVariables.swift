@@ -129,6 +129,10 @@ class ScheduleVariables {
     // Should reload choice (once done session, reload to update tick if done)
     var shouldReloadChoice = false
     
+    // Checks if new schedule has just been created
+    var didCreateNewSchedule = false
+    
+    
     // Note, this function should be
     // Func reset schedule tracking and week tracking
     func resetWeekTracking() {

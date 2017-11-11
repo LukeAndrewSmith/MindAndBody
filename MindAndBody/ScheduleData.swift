@@ -238,14 +238,14 @@ enum scheduleDataStructures {
             ],
             // [1] Information about schedule ------------------
             [
-                // Title - [1][0]
+                // Title - 0
                 [""], // String
-                // Schedule style: day [0] or full week [1] - [1][1]
+                // Schedule style: day [0] or full week [1] - 1
                 [0],
-                // Session choice style: app [0] or user chooses [1] - [1][2]
+                // Session choice style: app [0] or user chooses [1] - 2
                 [0],
-                // Schedule type: app helps create scheudle [0], custom schedule [1] - [1][3]
-                [0],
+                // Schedule type: app helps create scheudle [0], custom schedule [1] - 3
+                [0]
             ],
             // [2] Schedule creation help data --------------------
             [

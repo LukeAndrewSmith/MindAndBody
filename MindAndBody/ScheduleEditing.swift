@@ -68,10 +68,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Set Variables
     func setVariables() {
-        // Selected Schedule
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        ScheduleVariables.shared.selectedSchedule = settings[7][0]
-        
         // Schedule Type
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         scheduleType = schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int
@@ -342,13 +338,23 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.performSegue(withIdentifier: "OverviewSessionsSegue", sender: self)
             // Custom schedule, schedule
             } else {
-                OverviewScheduleWeekSegue
-                self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
+                // View each day
+                if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
+                    self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
+                // View full week
+                } else {
+                    self.performSegue(withIdentifier: "OverviewScheduleWeekSegue", sender: self)
+                }
             }
         // App schedule: Reorder Schedule
         case 5:
-            self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
-        default: break
+            // View each day
+            if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
+                self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
+                // View full week
+            } else {
+                self.performSegue(withIdentifier: "OverviewScheduleWeekSegue", sender: self)
+            }        default: break
         }
         //
         //
@@ -424,7 +430,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Save Schedule
     @IBAction func saveButtonAction(_ sender: Any) {
         // Note don't actually need to save anything, name for user experience
-        ScheduleVariables.shared.shouldReloadSchedule = true
         self.dismiss(animated: true)
     }
     
@@ -452,17 +457,16 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             UserDefaults.standard.set(schedules, forKey: "schedules")
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             
-            // Select last schedule
+            // Select previous schedule last schedule
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            if schedules.count == 0 {
+            if schedules.count == 0 || settings[7][0] == 0 {
                 settings[7][0] = 0
             } else {
-                settings[7][0] = schedules.count - 1
+                settings[7][0] -= 1
             }
             ScheduleVariables.shared.selectedSchedule = settings[7][0]
             UserDefaults.standard.set(settings, forKey: "userSettings")
             //
-            ScheduleVariables.shared.shouldReloadSchedule = true
             self.dismiss(animated: true)
         }
         // Cancel reset action
