@@ -53,6 +53,33 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    
+    func testTrackingValues() {
+        let calendar = Calendar(identifier: .gregorian)
+        weekTrackingDictionary = [:]
+        weekTrackingDictionary.updateValue(20, forKey: Date().firstMondayInMonth)
+
+        
+        trackingDictionary = [:]
+        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date())!
+        firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
+        //
+        trackingDictionary.updateValue(70, forKey: firstMondayLastMonth)
+        trackingDictionary.updateValue(90, forKey: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!)
+        trackingDictionary.updateValue(70, forKey: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!)
+        trackingDictionary.updateValue(80, forKey: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!)
+
+        
+        monthTrackingDictionary = [:]
+        var jan = Date().firstDateInYear
+        jan = jan.firstMondayInMonth
+        monthTrackingDictionary.updateValue(80, forKey: calendar.date(byAdding: .month, value: 1, to: jan)!)
+        monthTrackingDictionary.updateValue(80, forKey: calendar.date(byAdding: .month, value: 2, to: jan)!)
+        monthTrackingDictionary.updateValue(90, forKey: calendar.date(byAdding: .month, value: 3, to: jan)!)
+        
+    }
+    
+    
     //
     // View did load --------------------------------------------------------------------------------------------------------
     //
@@ -60,6 +87,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         
         // Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        testTrackingValues()
         updateWeekTracking()
         updateTracking()
         updateMonthTracking()
@@ -306,77 +334,21 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         // 1 Month, 3 Months, 6 Months
         case 1,2,3:
             //
-            // To get data from
-            let calendar = Calendar(identifier: .gregorian)
-            let keys = trackingDictionary.keys.sorted()
-            // To put data in (so only 1 month presented)
-            var chartData: [(key: Date, value: Int)] = []
+            let chartData = trackingDictionary.sorted(by: { $0.key < $1.key })
             //
-            // Add relevant data to chartData Array
-            var startDate = Date()
-            // Start Date for 1, 3, 6 months
-            switch selectedTimeScale {
-            case 1:
-                if keys.contains(Date().firstMondayInMonth) {
-                    startDate = Date().firstMondayInMonth
-                } else {
-                    startDate = keys.first!
-                }
-            case 2:
-                startDate = calendar.date(byAdding: .month, value: -2, to: Date().firstMondayInMonth)!
-                if keys.contains(startDate) == false {
-                    startDate = keys.first!
-                }
-            case 3:
-                startDate = calendar.date(byAdding: .month, value: -5, to: Date().firstMondayInMonth)!
-                if keys.contains(startDate) == false {
-                    startDate = keys.first!
-                }
-            default: break
-            }
-            let endDate = keys.last!
-            // Loop adding data to chartData
-            while startDate <= endDate {
-                let value = trackingDictionary[startDate]!
-                let tupleToAdd = (key: startDate, value: value)
-                chartData.append(tupleToAdd)
-                startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate)!
-            }
+            let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
             
-            let chartPoints: [ChartPoint] = (chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))})
             return chartPoints
             
         // Last year
-        case 4:
-            //
-            // To get data from
-            let calendar = Calendar(identifier: .gregorian)
-            let keys = monthTrackingDictionary.keys.sorted()
-            // To put data in (so only 1 month presented)
-            var chartData: [(key: Date, value: Int)] = []
-            //
-            // Add relevant data to chartData Array
-            var startDate = calendar.date(byAdding: .year, value: -1, to: Date().firstDateInMonth)!
-            if keys.contains(startDate) == false {
-                startDate = keys.first!
-            }
-            let endDate = keys.last!
-            // Loop adding data to chartData
-            while startDate <= endDate {
-                let tupleToAdd = (key: startDate, value: monthTrackingDictionary[startDate]!)
-                chartData.append(tupleToAdd)
-                startDate = calendar.date(byAdding: .month, value: 1, to: startDate)!
-            }
-            
-            let chartPoints: [ChartPoint] = (chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))})
-            return chartPoints
-            
-        // All
-        case 5:
+        case 4,5:
+           //
             let chartData = monthTrackingDictionary.sorted(by: { $0.key < $1.key })
             //
             let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
+            
             return chartPoints
+            
         //
         default:
             //
@@ -493,7 +465,17 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // All
         case 5:
-            let xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
+            var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
+            //
+            let df = DateFormatter()
+            df.dateFormat = "dd.MM.yyyy"
+            //
+            if xValues.count == 1 {
+                let keys = monthTrackingDictionary.keys.sorted()
+                let calendar = Calendar(identifier: .gregorian)
+                let valueToAdd = ChartAxisValueDate(date: keys.first!, formatter: df)
+                xValues.append(valueToAdd)
+            }
             return xValues
         //
         default:
@@ -664,13 +646,11 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             //
             let keys = monthTrackingDictionary.keys.sorted()
             let startDate = keys.first!
-            let endDate = keys.last!
-//            if keys.count == 1 {
-//                endDate = keys.last!
-//            } else {
-//                let calendar = Calendar(identifier: .gregorian)
-//                endDate = calendar.date(byAdding: .month, value: 1, to: startDate)!
-//            }
+            var endDate = keys.last!
+            if keys.count == 1 {
+                let calendar = Calendar(identifier: .gregorian)
+                endDate = calendar.date(byAdding: .month, value: 1, to: startDate)!
+            }
             
             
             let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: startDate.timeIntervalSince1970, lastModelValue: endDate.timeIntervalSince1970, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, trailingPadding: ChartAxisPadding.label)
@@ -744,7 +724,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // Section Titles
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString("trackingScreenViewOption", comment: "")
+        return NSLocalizedString("trackingScreenTimeScaleOption", comment: "")
     }
     
     // Header Customization

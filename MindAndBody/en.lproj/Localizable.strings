@@ -113,7 +113,7 @@
 "trackingWarning" = "No data recorded yet";
     //
     // Time Scales
-    "trackingScreenViewOption" = "View:";
+    "trackingScreenTimeScaleOption" = "Time Scale:";
     //
     "1week" = "Current Week";
     "1month" = "Current Month";

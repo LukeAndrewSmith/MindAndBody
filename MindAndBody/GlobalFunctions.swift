@@ -14,6 +14,17 @@ import AudioToolbox.AudioServices
 // MARK: - Global Function as extensions
 //
 
+// Update ICloud
+class UpdateICloud {
+    static var shared = UpdateICloud()
+    private init() {}
+    
+    // Update NSUbiquitousKeys
+    func updateICloud() {
+        
+    }
+}
+
 //
 // View Controller
 extension UIViewController {
@@ -356,10 +367,11 @@ extension UIViewController {
                 //
                 // Update missed days with 0
                 var startDate = keys.last!
+                var startValue = weekTrackingDictionary[startDate]!
                 let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!
                 // Loop last adding previous value to dates
                 while startDate <= endDate {
-                    weekTrackingDictionary.updateValue(weekTrackingDictionary[startDate]!, forKey: startDate)
+                    weekTrackingDictionary.updateValue(startValue, forKey: startDate)
                     startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
                 }
                 // Update today
