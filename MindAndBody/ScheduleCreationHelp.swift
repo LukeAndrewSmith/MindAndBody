@@ -399,7 +399,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 UserDefaults.standard.set(schedules, forKey: "schedules")
                 UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["schedules", "scheduleTracking"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
                 //
                 // CHECK WHERE TO GO
                 // If not coming from schedule editing, go to scheudle help question
@@ -517,7 +517,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
-        ICloudFunctions.shared.sync(toSync: ["schedules"])
+        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
         
     }
     
@@ -939,7 +939,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection][row] = indexPath.row
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
-        ICloudFunctions.shared.sync(toSync: ["schedules"])
+        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
         //
         tableView.deselectRow(at: indexPath, animated: true)
         answerTableView.reloadData()

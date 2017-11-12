@@ -771,7 +771,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["meditationTimer"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 
                 // Change duration button detail text label
                 let hmsArray = convertToHMS(time: 0, index: 0)
@@ -804,7 +804,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["meditationTimer"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 //
                 startingBellDetail.text = NSLocalizedString(bellsArray[meditationArray[selectedPreset][2].first![0] as! Int], comment: "")
                 //
@@ -932,7 +932,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["meditationTimer"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 //
                 selectionView.isHidden = false
                 selectionView.frame = CGRect(x: selectionView.frame.maxX, y: selectionView.frame.minY, width: 0, height: selectionView.frame.size.height)
@@ -988,7 +988,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["meditationTimer"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 //
                 endingBellDetail.text = NSLocalizedString(bellsArray[selectedEndingBell], comment: "")
                 //
@@ -1014,7 +1014,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["meditationTimer"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 //
                 backgroundSoundDetail.text = NSLocalizedString(backgroundSoundsArray[selectedBackgroundSound], comment: "")
                 //
@@ -1067,7 +1067,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         defaults.set(meditationArray, forKey: "meditationTimer")
         // Sync
-        ICloudFunctions.shared.sync(toSync: ["meditationTimer"])
+        ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
         //
         updateRows()
     }
@@ -1166,7 +1166,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         defaults.set(meditationArray, forKey: "meditationTimer")
         // Sync
-        ICloudFunctions.shared.sync(toSync: ["meditationTimer"])
+        ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
         //
         isDeleting = false
         //
@@ -1988,7 +1988,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //
                     defaults.set(meditationArray, forKey: "meditationTimer")
                     // Sync
-                    ICloudFunctions.shared.sync(toSync: ["meditationTimer"])
+                    ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                     
                     //
                     // Enable rows
@@ -2296,7 +2296,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 meditationArray.remove(at: indexPath.row)
                 defaults.set(meditationArray, forKey: "meditationTimer")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["meditationTimer"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 //
                 UIView.animate(withDuration: 0.2, animations: {
                     self.presetsTableView.reloadData()
@@ -2344,7 +2344,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 meditationArray[selectedPreset][2].remove(at: indexPath.row + 1)
                 defaults.set(meditationArray, forKey: "meditationTimer")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["meditationTimer"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 //
                 UIView.animate(withDuration: 0.2, animations: {
                     self.tableViewIntervalBells.reloadData()

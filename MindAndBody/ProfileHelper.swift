@@ -67,7 +67,7 @@ class ProfileFunctions {
         // Set new difficulty levels
         UserDefaults.standard.set(difficultyLevels, forKey: "difficultyLevels")
         // Sync
-        ICloudFunctions.shared.sync(toSync: ["difficultyLevels"])
+        ICloudFunctions.shared.pushToICloud(toSync: ["difficultyLevels"])
     }
     
     // Round down from .5

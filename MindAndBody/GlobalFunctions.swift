@@ -261,7 +261,7 @@ extension UIViewController {
         trackingProgressArray[0][0] = trackingProgressArray[0][0] as! Int + 1
         UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
         // Sync
-        ICloudFunctions.shared.sync(toSync: ["trackingProgress"])
+        ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
     }
     
     // Month Progress
@@ -283,7 +283,7 @@ extension UIViewController {
             trackingProgressArray[1][1] = firstMonday
             UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
             // Sync
-            ICloudFunctions.shared.sync(toSync: ["trackingProgress"])
+            ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
         }
         
         // Increment Progress
@@ -291,7 +291,7 @@ extension UIViewController {
         trackingProgressArray[1][0] = currentProgress
         UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
         // Sync
-        ICloudFunctions.shared.sync(toSync: ["trackingProgress"])
+        ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
     }
     
     // Schedule Tracking
@@ -307,7 +307,7 @@ extension UIViewController {
                 // Set
                 UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["trackingProgress"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
                 // Reload
                 ScheduleVariables.shared.shouldReloadChoice = true
                 // Week
@@ -318,7 +318,7 @@ extension UIViewController {
                 // Set
                 UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["trackingProgress"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
                 // Reload
                 ScheduleVariables.shared.shouldReloadChoice = true
             }

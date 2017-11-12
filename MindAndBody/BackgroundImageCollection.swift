@@ -202,7 +202,7 @@ class BackgroundImageCollection: UICollectionViewController {
         settings[0][0] = indexPath.item
         UserDefaults.standard.set(settings, forKey: "userSettings")
         // Sync
-        ICloudFunctions.shared.sync(toSync: ["userSettings"])
+        ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
         //
         UserDefaults.standard.synchronize()
         //

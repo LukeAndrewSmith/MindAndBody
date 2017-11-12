@@ -76,7 +76,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             ScheduleVariables.shared.selectedSchedule = selectedSchedule
             UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
             // Sync
-            ICloudFunctions.shared.sync(toSync: ["schedules", "scheduleTracking", "selectedSchedule"])
+            ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking", "selectedSchedule"])
         }
         
     }
@@ -258,7 +258,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
                 UserDefaults.standard.set(schedules, forKey: "schedules")
                 UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["selectedSchedule", "schedules", "scheduleTracking"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["selectedSchedule", "schedules", "scheduleTracking"])
                 //
                 // Indicate that new schedule has been created
                 ScheduleVariables.shared.didCreateNewSchedule = true
@@ -342,7 +342,11 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     //
     // Back Button
     @IBAction func backButtonAction(_ sender: Any) {
-        self.dismiss(animated: true)
+        if comingFromSchedule == true {
+            self.dismiss(animated: true)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     //
     // MARK: Back Swipe

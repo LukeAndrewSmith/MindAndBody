@@ -211,45 +211,10 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         
         
         //
-        // Notifications Popup
-        //
-        // Alert View notifications
-        let title = NSLocalizedString("notificationsPopup", comment: "")
-        let message = NSLocalizedString("notificationsPopupMessage", comment: "")
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-        //
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
-        // Ok Action
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
-            UIAlertAction in
-            //
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-            }
-            //
-            var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-            walkthroughs[0] = true
-            UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
-            // Sync
-            ICloudFunctions.shared.sync(toSync: ["walkthroughs"])
-            self.walkthroughMindBody()
-        }
-        //
-        alert.addAction(okAction)
-        
-        // Notifications Popup
-        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-        if walkthroughs[0] == false {
-            self.present(alert, animated: true, completion: nil)
-        }
-        //
         // Walkthroughs
         // Walkthrough app overview
-        // mindBody walkthrough == false, notifications popup == true
-        if walkthroughs[1] == false && walkthroughs[0] == true {
+        // mindBody walkthrough == false
+        if walkthroughs[1] == false {
             self.walkthroughMindBody()
         }
         
@@ -774,7 +739,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
                 settings[1][0] = 1
                 UserDefaults.standard.set(settings, forKey: "userSettings")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["walkthroughs", "userSettings"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs", "userSettings"])
             })
         }
     }

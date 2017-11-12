@@ -147,7 +147,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             settings[4][selectedRow] = restTimesArray[restTimePicker.selectedRow(inComponent: 0)]
             defaults.set(settings, forKey: "userSettings")
             // Sync
-            ICloudFunctions.shared.sync(toSync: ["userSettings"])
+            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             //
         // Home Screen
         } else if actionSheetView.subviews.contains(homeScreenPicker) {
@@ -157,7 +157,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             defaults.set(settings, forKey: "userSettings")
             // Sync
-            ICloudFunctions.shared.sync(toSync: ["userSettings"])
+            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
         }
             
             
@@ -487,7 +487,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 settings[2][0] = 1
                 UserDefaults.standard.set(settings, forKey: "userSettings")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["userSettings"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             // on --> off
             } else if timedSession == 1 {
                 cell?.textLabel?.text = NSLocalizedString("off", comment: "")
@@ -495,7 +495,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 settings[2][0] = 0
                 UserDefaults.standard.set(settings, forKey: "userSettings")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["userSettings"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             }
             tableView.deselectRow(at: indexPath, animated: true)
             //
@@ -578,14 +578,14 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 settings[5][0] = 1
                 UserDefaults.standard.set(settings, forKey: "userSettings")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["userSettings"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             // targetArea --> demonstration
             } else if defaultImage == 1 {
                 cell?.textLabel?.text = NSLocalizedString("demonstration", comment: "")
                 settings[5][0] = 0
                 UserDefaults.standard.set(settings, forKey: "userSettings")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["userSettings"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             }
             tableView.deselectRow(at: indexPath, animated: true)
             
@@ -602,14 +602,14 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 settings[6][0] = 1
                 UserDefaults.standard.set(settings, forKey: "userSettings")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["userSettings"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             // lb --> kg
             } else if units == 1 {
                 cell?.textLabel?.text = NSLocalizedString("metric", comment: "")
                 settings[6][0] = 0
                 UserDefaults.standard.set(settings, forKey: "userSettings")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["userSettings"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             }
             tableView.deselectRow(at: indexPath, animated: true)
             //
@@ -648,7 +648,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     }
                     UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                     // Sync
-                    ICloudFunctions.shared.sync(toSync: ["userSettings"])
+                    ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
                 
                 //
                 // Alert View indicating need for app reset
@@ -947,7 +947,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 walkthroughs[11] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["userSettings"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             })
         }
     }

@@ -318,7 +318,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // SET NEW ARRAY
                 UserDefaults.standard.set(schedules, forKey: "schedules")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["schedules"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                 //
                 // Update name in table
                 cell?.detailTextLabel?.text = schedules[ScheduleVariables.shared.selectedSchedule][1][0][0] as? String
@@ -420,7 +420,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
-        ICloudFunctions.shared.sync(toSync: ["schedules"])
+        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
         
         if sender == appHelpsCreateScheduleSwitch {
             scheduleType = schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int
@@ -470,7 +470,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             ScheduleVariables.shared.selectedSchedule = selectedSchedule
             UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
             // Sync
-            ICloudFunctions.shared.sync(toSync: ["schedules", "scheduleTracking", "selectedSchedule"])
+            ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking", "selectedSchedule"])
             //
             self.dismiss(animated: true)
         }

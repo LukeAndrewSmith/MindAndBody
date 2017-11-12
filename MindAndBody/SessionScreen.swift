@@ -1566,7 +1566,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 walkthroughs[4] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["walkthroughs"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
             })
         }
     }

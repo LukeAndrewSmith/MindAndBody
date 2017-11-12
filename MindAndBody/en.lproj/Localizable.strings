@@ -13,12 +13,7 @@
 // Language //
 "langugeOfBundle" = "English - English";
 
-
 // MARK: General (Didn't know/think where to classify them)
-//
-"notificationsPopup" = "! Notifications !";
-"notificationsPopupMessage" = "\nAllow notifications for timers, rest timers and reminders to work in the app.";
-
 
 "minutes" = "min";
 "seconds" = "sec";
@@ -1500,6 +1495,12 @@
 "guidedMeditationI" = "• 'Guided' meditation (detailed written explanations)";
 "customSessionsI" = "• Creation of custom sessions and schedules";
 "bulletPointTemplate" = "• ";
+
+// Popups
+"notificationsPopup" = "Notifications";
+"notificationsPopupMessage" = "\nAllow notifications for timers, rest timers and reminders to work in the app.";
+"iCloudPopup" = "iCloud";
+"iCloudPopupMessage" = "\nAllow icloud if you plan on using the app on multiple devices and wish for your data to be shared between them.";
 
 
 

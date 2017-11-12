@@ -1035,7 +1035,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 walkthroughs[2] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                 // Sync
-                ICloudFunctions.shared.sync(toSync: ["walkthroughs"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
             })
         }
     }

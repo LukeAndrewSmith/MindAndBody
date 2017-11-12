@@ -25,6 +25,80 @@ class InitialInfoScreen: UIViewController, UITableViewDataSource, UITableViewDel
     
     
     //
+    // Requestion notifications/icloud
+    func requestionOptions() {
+//
+//        //
+//        // iCloud popup
+//        let iCloudTitle = NSLocalizedString("iCloudPopup", comment: "")
+//        let iCloudMessage = NSLocalizedString("iCloudPopupMessage", comment: "")
+//        let iCloudAlert = UIAlertController(title: iCloudTitle, message: iCloudMessage, preferredStyle: .alert)
+//        iCloudAlert.view.tintColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+//        iCloudAlert.setValue(NSAttributedString(string: iCloudTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+//        //
+//        let paragraphStyle = NSMutableParagraphStyle()
+//        paragraphStyle.alignment = .natural
+//        iCloudAlert.setValue(NSAttributedString(string: iCloudMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+//        // Ok Action
+//        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+//            UIAlertAction in
+//            //
+//            var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+//            walkthroughs[0] = true
+//            UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+//            // Sync
+//            ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
+//            //
+//            //
+//
+//
+//            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+//            }
+//        }
+//        //
+//        iCloudAlert.addAction(okAction)
+//
+//
+//
+        
+        //
+        // Notifications Popup
+        let notificationsTitle = NSLocalizedString("notificationsPopup", comment: "")
+        let notificationsMessage = NSLocalizedString("notificationsPopupMessage", comment: "")
+        let notificationsAlert = UIAlertController(title: notificationsTitle, message: notificationsMessage, preferredStyle: .alert)
+        notificationsAlert.view.tintColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+        notificationsAlert.setValue(NSAttributedString(string: notificationsTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        //
+        let notificationsParagraphStyle = NSMutableParagraphStyle()
+        notificationsParagraphStyle.alignment = .natural
+        notificationsAlert.setValue(NSAttributedString(string: notificationsMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: notificationsParagraphStyle]), forKey: "attributedMessage")
+        // Ok Action
+        let notificationsOkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            //
+            var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+            walkthroughs[0] = true
+            UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
+            //
+            //
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+//                self.present(iCloudAlert, animated: true, completion: nil)
+            }
+        }
+        //
+        notificationsAlert.addAction(notificationsOkAction)
+    
+        // Notifications Popup
+        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+        if walkthroughs[0] == false {
+            self.present(notificationsAlert, animated: true, completion: nil)
+        }
+        
+    }
+    
+    //
     // MARK: View did load
     override func viewDidLoad() {
         super.viewDidLoad()
