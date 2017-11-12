@@ -925,6 +925,7 @@ extension ScheduleScreen {
     @IBAction func markAsCompleted(_ sender: UILongPressGestureRecognizer) {
         //
         var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
 
         if sender.state == UIGestureRecognizerState.began {
             // Get Cell
@@ -956,21 +957,88 @@ extension ScheduleScreen {
             //
             // Day View
             if scheduleStyle == 0 {
+                let selectedGroup = schedules[ScheduleVariables.shared.selectedSchedule][0][ScheduleVariables.shared.selectedDay][index0] as! Int
                 // Day
                 // [index1][index2] when in group tracking to access main page tracker, look at schedule data: scheduleDataStructures.scheduleTrackingArrays to understand
                 if scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] == false {
+                    // Update day
                     scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] = true
+                    // Update week
+                    if scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count != 0 {
+                        // Loop full week
+                        for i in 0...scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count - 1 {
+                            // If correct group and false
+                            if schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][i][index1][index2] == false {
+                                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] = true
+                                break
+                            }
+                        }
+                    }
+                    
                 } else {
                     scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] = false
+                    // Update week
+                    if scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count != 0 {
+                        // Loop full week
+                        for i in 0...scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count - 1 {
+                            // If correct group and true
+                            if schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][i][index1][index2] == true {
+                                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] = false
+                                break
+                            }
+                        }
+                    }
                 }
             //
             // Full Week View
             } else if scheduleStyle == 1 {
+                let selectedGroup = schedules[ScheduleVariables.shared.selectedSchedule][0][7][index0] as! Int
+                var shouldBreak = false
                 // Week
                 if scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] == false {
+                    // Update Full Week
                     scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] = true
+                    // Update Day
+                    // Loop week
+                    for i in 0...6 {
+                        // If day isn't empty
+                        if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count != 0 {
+                            // Loop day
+                            for j in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][i].count - 1 {
+                                // If correct group and false
+                                if schedules[ScheduleVariables.shared.selectedSchedule][0][i][j] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] == false {
+                                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] = true
+                                    shouldBreak = true
+                                    break
+                                }
+                            }
+                        }
+                        if shouldBreak == true {
+                            break
+                        }
+                    }
                 } else {
+                    // Update Full Week
                     scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] = false
+                    // Update Day
+                    // Loop week
+                    for i in 0...6 {
+                        // If day isn't empty
+                        if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count != 0 {
+                            // Loop day
+                            for j in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][i].count - 1 {
+                                // If correct group and true
+                                if schedules[ScheduleVariables.shared.selectedSchedule][0][i][j] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] == true {
+                                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] = false
+                                    shouldBreak = true
+                                    break
+                                }
+                            }
+                        }
+                        if shouldBreak == true {
+                            break
+                        }
+                    }
                 }
             }
             

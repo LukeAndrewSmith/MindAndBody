@@ -37,9 +37,11 @@ class ICloudFunctions {
     func pushToICloud(toSync: [String]) {
         if ICloudEnabled() {
             var endCount = 0
+            var toSync = toSync
             // Sync all
             if toSync[0] == "" {
                 endCount = ICloudFunctions.keyArray.count - 1
+                toSync = ICloudFunctions.keyArray
             // Sync specific
             } else {
                 endCount = toSync.count - 1
@@ -47,7 +49,7 @@ class ICloudFunctions {
             //
             for i in 0...endCount {
                 let defaultToPush = UserDefaults.standard.object(forKey: toSync[i])
-                NSUbiquitousKeyValueStore.default.setValue(defaultToPush, forKeyPath: toSync[i])
+                NSUbiquitousKeyValueStore.default.set(defaultToPush, forKey: toSync[i])
             }
         }
     }

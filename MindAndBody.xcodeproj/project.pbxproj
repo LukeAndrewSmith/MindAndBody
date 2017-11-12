@@ -1880,6 +1880,7 @@
 		07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundImageCollection.swift; sourceTree = "<group>"; };
 		07995A381E893E590009C9B1 /* ScheduleScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleScreen.swift; sourceTree = "<group>"; };
 		07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioScreen.swift; sourceTree = "<group>"; };
+		07A464231FB88C3F00139DCD /* MindAndBody.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindAndBody.entitlements; sourceTree = "<group>"; };
 		07B4E00E1F377E1E00C77807 /* TestBackground.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestBackground.caf; sourceTree = "<group>"; };
 		07B852611F83756C005F3781 /* ScheduleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleData.swift; sourceTree = "<group>"; };
 		07BE8C081E8BDF9500A851EF /* YogaScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreen.swift; sourceTree = "<group>"; };
@@ -3668,6 +3669,7 @@
 				077AC0D91DA535830026895B /* MindAndBody */,
 				077AC0F01DA535840026895B /* MindAndBodyTests */,
 				077AC0D81DA535830026895B /* Products */,
+				07A464241FB8C0D800139DCD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3683,6 +3685,7 @@
 		077AC0D91DA535830026895B /* MindAndBody */ = {
 			isa = PBXGroup;
 			children = (
+				07A464231FB88C3F00139DCD /* MindAndBody.entitlements */,
 				07FE380E1DF9B3A200E7EA20 /* Localizable.strings */,
 				077AC0DA1DA535830026895B /* AppDelegate.swift */,
 				077AC0E01DA535840026895B /* Main.storyboard */,
@@ -4525,6 +4528,13 @@
 				074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		07A464241FB8C0D800139DCD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		07B4E00A1F3774DB00C77807 /* Bells */ = {
@@ -6919,6 +6929,14 @@
 						DevelopmentTeam = 693LQB6VVR;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					077AC0EC1DA535840026895B = {
 						CreatedOnToolsVersion = 8.0;
@@ -8511,6 +8529,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MindAndBody/MindAndBody.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 693LQB6VVR;
 				INFOPLIST_FILE = MindAndBody/Info.plist;
@@ -8530,6 +8549,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MindAndBody/MindAndBody.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 693LQB6VVR;
 				INFOPLIST_FILE = MindAndBody/Info.plist;

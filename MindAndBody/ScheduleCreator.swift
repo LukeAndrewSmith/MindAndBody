@@ -100,7 +100,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // If custom schedule update full week
         // TODO: IS THIS RIGHT?????
 //        if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 {
-//            updateFullWeek()
+            updateFullWeek()
 //        }
         
         backgroundIndex = settings[0][0]
@@ -638,7 +638,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                     // Sync
                     ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
-//                    updateFullWeek()
+                    updateFullWeek()
                     // update label
                     setGroupLabels()
                 }

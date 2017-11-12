@@ -8,8 +8,10 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
-class InitialInfoScreen: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
+class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UITableViewDataSource, UITableViewDelegate {
     
     //
     // Outlets

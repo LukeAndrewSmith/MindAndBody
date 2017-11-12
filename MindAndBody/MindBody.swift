@@ -8,14 +8,13 @@
 
 import Foundation
 import UIKit
-import UserNotifications
 import CoreGraphics
 
 
 //
 // Mind & Body Class ------------------------------------------------------------------------------------------------------------------------
 //
-class MindBody: UIViewController, UNUserNotificationCenterDelegate {
+class MindBody: UIViewController {
     
     // Previous Colours
     //            UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "Colours.colour1")
@@ -214,6 +213,7 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
         // Walkthroughs
         // Walkthrough app overview
         // mindBody walkthrough == false
+        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
         if walkthroughs[1] == false {
             self.walkthroughMindBody()
         }

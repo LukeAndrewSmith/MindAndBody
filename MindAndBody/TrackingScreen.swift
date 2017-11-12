@@ -261,6 +261,38 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         let chartPointsCircleLayer = ChartPointsViewsLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, viewGenerator: circleViewGenerator, displayDelay: 0, delayBetweenItems: 0.05, mode: .translate)
         
+        let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 20, thumbBorderWidth: 4)
+        let trackerLayerSettings = ChartPointsLineTrackerLayerSettings(thumbSettings: thumbSettings)
+        
+        var currentPositionLabels: [UILabel] = []
+        
+        let chartPointsTrackerLayer = ChartPointsLineTrackerLayer<ChartPoint, Any>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lines: [chartPoints], lineColor: Colours.colour2, animDuration: 1, animDelay: 2, settings: trackerLayerSettings) { chartPointsWithScreenLoc in
+            
+            currentPositionLabels.forEach{$0.removeFromSuperview()}
+            
+            for (index, chartPointWithScreenLoc) in chartPointsWithScreenLoc.enumerated() {
+                
+                let label = UILabel()
+                label.text = chartPointWithScreenLoc.chartPoint.description
+                label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+                label.sizeToFit()
+                // Put to left of line if no room
+                if (chartPointWithScreenLoc.screenLoc.x + label.frame.width) > self.view.frame.maxX {
+                    label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x - label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
+                // Right of line if room
+                } else {
+                    label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x + label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
+                }
+                
+                
+                label.backgroundColor = Colours.colour2
+                label.textColor = Colours.colour1
+                
+                currentPositionLabels.append(label)
+                self.view.addSubview(label)
+            }
+        }
+        
         
         //
         // Finalise ----------------------------
@@ -273,6 +305,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             chartPointsLayer,
             chartPointsLineLayer,
             chartPointsCircleLayer,
+            chartPointsTrackerLayer
             ] as [ChartLayer]
         //
         // Add new layer for x dividers if selected time scale == 3 months or greater
@@ -639,7 +672,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             //
             let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: titleLabelSettings2, formatter: df2)
             //
-            let numberOfDividers = monthTrackingDictionary.count
+            let numberOfDividers = monthTrackingDictionary.count - 1
             //
             let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .quarter, preferredDividers: 4, minSpace: 0, maxTextSize: 12)
             
@@ -690,11 +723,10 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         case 5:
             //
             let df = DateFormatter()
-            df.dateFormat = "MMM - yyyy"
-            let firstDate = xValues.first
-            let firstString: String = String(describing: firstDate!)
-            let lastDate = xValues.last
-            let lastString: String = String(describing: lastDate!)
+            df.dateFormat = "MM.yyyy"
+            let keys = monthTrackingDictionary.keys.sorted()
+            let firstString = df.string(from: keys.first!)
+            let lastString = df.string(from: keys.last!)
             return firstString + " - " + lastString
             
         //

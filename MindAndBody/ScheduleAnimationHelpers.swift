@@ -16,9 +16,10 @@ extension ScheduleScreen {
     // MARK: Day Indicator
     func animateDayIndicatorToDay() {
         // Animate
+        dayIndicatorLeading.constant = self.stackArray[ScheduleVariables.shared.selectedDay].frame.minX
         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             //
-            self.dayIndicator.center.x = self.stackArray[ScheduleVariables.shared.selectedDay].center.x
+            self.view.layoutIfNeeded()
         })
     }
     

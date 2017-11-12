@@ -26,14 +26,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //
         // Icloud
-        NotificationCenter.default.addObserver(self, selector: #selector(ICloudFunctions.shared.pullToDefaults), name:  NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: NSUbiquitousKeyValueStore.default)
+//        NotificationCenter.default.addObserver(self, selector: #selector(), name:  NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: NSUbiquitousKeyValueStore.default)
+        
+        NotificationCenter.default.addObserver(
+            forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
+            object: NSUbiquitousKeyValueStore.default,
+            queue: OperationQueue.main) { notification in
+//                let ubiquitousKeyValueStore = notification.object as? NSUbiquitousKeyValueStore
+//                ubiquitousKeyValueStore?.synchronize()
+                //
+                ICloudFunctions.shared.pullToDefaults()
+        }
+
+        
+        
+        let currentiCloudToken = FileManager.default.ubiquityIdentityToken
+        UserDefaults.standard.set("", forKey: "com.apple.MindAndBody.UbiquityIdentityToken")
         
         //
         // Register Defaults --------------------------------------------------------------------------------
         //
         // Settings
         UserDefaults.standard.register(defaults: ["userSettings" : Register.defaultSettings])
-        
         //
         // Profile/Schedules
         // Selected Schedule
@@ -62,8 +76,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Walkthroughs
         UserDefaults.standard.register(defaults: ["walkthroughs" : Register.registerWalkthroughArray])
         
-        // Sync all
-        ICloudFunctions.shared.pullToDefaults()
+        // Push everything to iCloud
+        let check = NSUbiquitousKeyValueStore.default.object(forKey: "walkthroughs")
+        if check == nil {
+            ICloudFunctions.shared.pushToICloud(toSync: [""])
+        }
+        
+//        // Sync all
+//        ICloudFunctions.shared.pullToDefaults()
         
         //
         // Set Home Screen
@@ -127,8 +147,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ScheduleVariables.shared.resetWeekTracking()
         
         
-        // Sync all
-        ICloudFunctions.shared.pullToDefaults()
+//        // Sync all
+//        ICloudFunctions.shared.pullToDefaults()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

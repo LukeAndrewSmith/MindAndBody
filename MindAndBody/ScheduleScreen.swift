@@ -48,7 +48,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var scheduleTable: UITableView!
     @IBOutlet weak var scheduleTableBottom: NSLayoutConstraint!
     @IBOutlet weak var pageStack: UIStackView!
-    var dayIndicator = UIView()
+    //
+    @IBOutlet weak var dayIndicator: UIView!
+    @IBOutlet weak var dayIndicatorLeading: NSLayoutConstraint!
+    
+    //    var dayIndicator = UIView()
     // Background Image
     @IBOutlet weak var backgroundImage: UIImageView!
     let backgroundBlur = UIVisualEffectView()
@@ -86,6 +90,13 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //
+        if scheduleStyle == 0 {
+            dayIndicatorLeading.constant = stackArray[ScheduleVariables.shared.selectedDay].frame.minX
+            self.view.layoutIfNeeded()
+        } else {
+            dayIndicator.alpha = 0
+        }
         // Check if reset necessary
         ScheduleVariables.shared.resetWeekTracking()
         // shouldReloadSchedule
@@ -147,6 +158,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["scheduleTracking"])
+            // If day view, marks first instance of relevant group in full week array and vice versa
+                // -> To keep both day view and week view up to date
+            markOtherAsCompleted()
             //
             DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
                 let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
@@ -192,6 +206,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["scheduleTracking"])
+            // If day view, marks first instance of relevant group in full week array and vice versa
+            // -> To keep both day view and week view up to date
+            markOtherAsCompleted()
             // Set to false here so the tick doesn't get loaded before the view has appeared
             ScheduleVariables.shared.shouldReloadChoice = false
             // Animate initial choice group completion after slideRight() animation finished
@@ -205,7 +222,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             updateDayIndicatorColours()
         }
     }
-    
     
     //
     // View did load --------------------------------------------------------------------------------------------------------
@@ -352,11 +368,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     func layoutViews() {
         //
         if scheduleStyle == 0 {
-            dayIndicator.center = CGPoint(x: dayIndicator.bounds.width / 2, y: pageStack.frame.maxY - 1)
-            view.addSubview(dayIndicator)
-            view.bringSubview(toFront: dayIndicator)
+            dayIndicator.alpha = 0.5
         } else {
-            dayIndicator.removeFromSuperview()
+            dayIndicator.alpha = 0
         }
         // Check wether to present the schedule as :
         // Days
@@ -428,10 +442,12 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
                 ScheduleVariables.shared.selectedDay = Date().currentWeekDayFromMonday - 1
                 stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
-                dayIndicator.center.x = stackArray[ScheduleVariables.shared.selectedDay].center.x
+                dayIndicatorLeading.constant = stackArray[ScheduleVariables.shared.selectedDay].frame.minX
+                self.view.layoutIfNeeded()
             } else {
                 stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
-                dayIndicator.center.x = stackArray[ScheduleVariables.shared.selectedDay].center.x
+                dayIndicatorLeading.constant = stackArray[ScheduleVariables.shared.selectedDay].frame.minX
+                self.pageStack.layoutIfNeeded()
                 maskView()
             }
         } else {
@@ -442,7 +458,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         dayIndicator.frame.size = CGSize(width: view.bounds.width / 7, height: 1)
         dayIndicator.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
-        dayIndicator.center = CGPoint(x: dayIndicator.bounds.width / 2, y: pageStack.frame.maxY - 1)
         if scheduleStyle == 0 {
             view.addSubview(dayIndicator)
             view.bringSubview(toFront: dayIndicator)
@@ -984,6 +999,88 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             
         }
     }
+    
+    //
+    // MARK: Helpers
+    
+    //
+    // If day view, marks first instance of relevant group in full week array and vice versa
+    func markOtherAsCompleted() {
+        //
+        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        //
+        let row = ScheduleVariables.shared.selectedRows[0]
+        
+        // Indexing variables
+        // Last three indexes of schedulesTracking or schedules index
+        // Differ if last choice or first choice
+        var index0 = Int()
+        var index1 = Int()
+        var index2 = Int()
+        
+        // If first choice
+        if ScheduleVariables.shared.choiceProgress[0] == -1 {
+            index0 = row
+            index1 = 0
+            index2 = 0
+            // If last choice
+        } else if isLastChoice() == true && row != 0 {
+            // Selected row in first choice
+            index0 = ScheduleVariables.shared.selectedRows[0]
+            // 1 to access group contents tracking in trackingArray
+            index1 = 1
+            // -1 as title included in table so offset by 1
+            index2 = row - 1
+        }
+        //
+        // Day View
+        if scheduleStyle == 0 {
+            let selectedGroup = schedules[ScheduleVariables.shared.selectedSchedule][0][ScheduleVariables.shared.selectedDay][index0] as! Int
+            // Update week
+            if scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count != 0 {
+                // Loop full week
+                for i in 0...scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count - 1 {
+                    // If correct group and false
+                    if schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][i][index1][index2] == false {
+                        scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] = true
+                        break
+                    }
+                }
+            }
+            
+            //
+            // Full Week View
+        } else if scheduleStyle == 1 {
+            let selectedGroup = schedules[ScheduleVariables.shared.selectedSchedule][0][7][index0] as! Int
+            var shouldBreak = false
+            // Update Day
+            // Loop week
+            for i in 0...6 {
+                // If day isn't empty
+                if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count != 0 {
+                    // Loop day
+                    for j in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][i].count - 1 {
+                        // If correct group and false
+                        if schedules[ScheduleVariables.shared.selectedSchedule][0][i][j] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] == false {
+                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] = true
+                            shouldBreak = true
+                            break
+                        }
+                    }
+                }
+                if shouldBreak == true {
+                    break
+                }
+            }
+        }
+        
+        // Update tracking array
+        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+        // Sync
+        ICloudFunctions.shared.pushToICloud(toSync: ["scheduleTracking"])
+    }
+    
     
     
     //

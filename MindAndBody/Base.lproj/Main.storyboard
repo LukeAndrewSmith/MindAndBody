@@ -78,19 +78,29 @@
                                     <outlet property="delegate" destination="oDd-SZ-o1F" id="mGb-Rf-aF4"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bzt-Zq-NOh">
+                                <rect key="frame" x="0.0" y="601" width="54" height="1"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="gHH-Q7-xi3"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Uk6-xI-8tD" secondAttribute="trailing" id="3Se-J5-JNI"/>
                             <constraint firstItem="fUs-PS-zGI" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="67o-vL-1Dc"/>
+                            <constraint firstItem="bzt-Zq-NOh" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="6iG-BJ-b9Y"/>
                             <constraint firstItem="oPE-Kh-Caj" firstAttribute="top" secondItem="G33-j5-FFf" secondAttribute="bottom" id="7Gk-TW-Mg3"/>
                             <constraint firstItem="oPE-Kh-Caj" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="8eT-Ou-Jam"/>
+                            <constraint firstItem="bzt-Zq-NOh" firstAttribute="width" secondItem="Uk6-xI-8tD" secondAttribute="width" multiplier="1/7" id="Chq-l8-sFW"/>
                             <constraint firstItem="g2u-Qj-5jU" firstAttribute="top" secondItem="Uk6-xI-8tD" secondAttribute="bottom" id="HRZ-Wb-TZa"/>
                             <constraint firstItem="Uk6-xI-8tD" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="L8f-sx-BzF"/>
                             <constraint firstItem="fUs-PS-zGI" firstAttribute="top" secondItem="G33-j5-FFf" secondAttribute="bottom" id="PMc-V3-9IO"/>
                             <constraint firstAttribute="trailing" secondItem="oPE-Kh-Caj" secondAttribute="trailing" id="RwX-n2-cJz"/>
                             <constraint firstItem="Uk6-xI-8tD" firstAttribute="top" secondItem="oPE-Kh-Caj" secondAttribute="bottom" id="SWH-PO-ab2"/>
+                            <constraint firstItem="bzt-Zq-NOh" firstAttribute="bottom" secondItem="Uk6-xI-8tD" secondAttribute="bottom" constant="-1" id="dzf-qh-ECe"/>
                             <constraint firstItem="g2u-Qj-5jU" firstAttribute="top" secondItem="oPE-Kh-Caj" secondAttribute="bottom" constant="24.5" id="hvm-Og-oex"/>
                             <constraint firstItem="g2u-Qj-5jU" firstAttribute="top" secondItem="fUs-PS-zGI" secondAttribute="bottom" id="nXk-Qt-abS"/>
                             <constraint firstAttribute="trailing" secondItem="fUs-PS-zGI" secondAttribute="trailing" id="pEL-04-PYq"/>
@@ -113,6 +123,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="backgroundImage" destination="fUs-PS-zGI" id="Krb-kf-x8e"/>
+                        <outlet property="dayIndicator" destination="bzt-Zq-NOh" id="2F2-SL-0CU"/>
+                        <outlet property="dayIndicatorLeading" destination="6iG-BJ-b9Y" id="ael-Xe-TQG"/>
                         <outlet property="navigationBar" destination="xF1-Nx-yoQ" id="dBd-vq-1MD"/>
                         <outlet property="pageStack" destination="Uk6-xI-8tD" id="zin-Me-CB9"/>
                         <outlet property="scheduleTable" destination="oPE-Kh-Caj" id="UFV-AU-XOl"/>
@@ -300,17 +312,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bLd-NF-dpz">
-                                <rect key="frame" x="16" y="109" width="343" height="558"/>
+                                <rect key="frame" x="16" y="109" width="197.5" height="558"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tlu-c1-2e6">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="279"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="197.5" height="279"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="dayButtonAction:" destination="JCR-Wc-eVJ" eventType="touchUpInside" id="Z3W-RR-oPq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1q-pB-yq6">
-                                        <rect key="frame" x="0.0" y="279" width="343" height="279"/>
+                                        <rect key="frame" x="0.0" y="279" width="197.5" height="279"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="weekButtonAction:" destination="JCR-Wc-eVJ" eventType="touchUpInside" id="KaT-Yb-E5H"/>
@@ -340,23 +352,62 @@
                                     <action selector="backButtonAction:" destination="JCR-Wc-eVJ" eventType="touchUpInside" id="a5p-oG-FcT"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DayView" translatesAutoresizingMaskIntoConstraints="NO" id="xKh-BG-LD2">
+                                <rect key="frame" x="221.5" y="126.5" width="137.5" height="244"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xKh-BG-LD2" secondAttribute="height" multiplier="9:16" id="bCE-Nq-cLe"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WeekView" translatesAutoresizingMaskIntoConstraints="NO" id="wsH-iv-b5D">
+                                <rect key="frame" x="221.5" y="405.5" width="137.5" height="244"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="wsH-iv-b5D" secondAttribute="height" multiplier="9:16" id="y9i-Zf-Meh"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Z0E-7J-r3e">
+                                <rect key="frame" x="213.5" y="108" width="145.5" height="559"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nI0-3F-9gt">
+                                        <rect key="frame" x="0.0" y="0.0" width="145.5" height="279.5"/>
+                                        <connections>
+                                            <action selector="dayButtonAction:" destination="JCR-Wc-eVJ" eventType="touchUpInside" id="4zb-Zj-e8x"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="co7-S8-yNk">
+                                        <rect key="frame" x="0.0" y="279.5" width="145.5" height="279.5"/>
+                                        <connections>
+                                            <action selector="weekButtonAction:" destination="JCR-Wc-eVJ" eventType="touchUpInside" id="RwO-lm-SSr"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="xKh-BG-LD2" firstAttribute="height" secondItem="Tlu-c1-2e6" secondAttribute="height" multiplier="7/8" id="0By-gz-Cmz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wsH-iv-b5D" secondAttribute="trailing" id="1ep-XT-k1R"/>
                             <constraint firstItem="N9w-fC-0yW" firstAttribute="leading" secondItem="zH3-UM-LaW" secondAttribute="leadingMargin" constant="8" id="5AJ-Gx-I8N"/>
                             <constraint firstItem="UVO-oT-gm3" firstAttribute="top" secondItem="yee-Eb-EBK" secondAttribute="bottom" id="B0o-M1-iXP"/>
                             <constraint firstItem="gEf-Ur-uPE" firstAttribute="top" secondItem="zH3-UM-LaW" secondAttribute="top" id="E77-f6-O8R"/>
                             <constraint firstItem="UVO-oT-gm3" firstAttribute="leading" secondItem="zH3-UM-LaW" secondAttribute="leading" id="Ipx-Bg-Fg4"/>
+                            <constraint firstItem="Z0E-7J-r3e" firstAttribute="top" secondItem="UVO-oT-gm3" secondAttribute="bottom" id="JfU-Ui-Jut"/>
+                            <constraint firstItem="xKh-BG-LD2" firstAttribute="leading" secondItem="bLd-NF-dpz" secondAttribute="trailing" constant="8" id="Jti-kk-p1p"/>
                             <constraint firstItem="x8S-kI-xib" firstAttribute="leading" secondItem="zH3-UM-LaW" secondAttribute="leading" id="KAM-gT-ngc"/>
                             <constraint firstAttribute="trailing" secondItem="UVO-oT-gm3" secondAttribute="trailing" id="Mw7-Av-9lI"/>
-                            <constraint firstAttribute="trailing" secondItem="bLd-NF-dpz" secondAttribute="trailing" constant="16" id="VMF-B1-7Qu"/>
+                            <constraint firstItem="Z0E-7J-r3e" firstAttribute="leading" secondItem="bLd-NF-dpz" secondAttribute="trailing" id="Puc-Jd-By7"/>
+                            <constraint firstItem="b92-L2-xPK" firstAttribute="top" secondItem="Z0E-7J-r3e" secondAttribute="bottom" id="SC9-Iy-dsI"/>
+                            <constraint firstItem="xKh-BG-LD2" firstAttribute="trailing" secondItem="zH3-UM-LaW" secondAttribute="trailingMargin" id="SHZ-iI-49z"/>
                             <constraint firstAttribute="trailing" secondItem="x8S-kI-xib" secondAttribute="trailing" id="Wlh-jO-aAk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="N9w-fC-0yW" secondAttribute="trailing" constant="8" id="WqA-WH-dpZ"/>
+                            <constraint firstItem="wsH-iv-b5D" firstAttribute="height" secondItem="Q1q-pB-yq6" secondAttribute="height" multiplier="7/8" id="X6K-UY-QqG"/>
                             <constraint firstItem="bLd-NF-dpz" firstAttribute="top" secondItem="x8S-kI-xib" secondAttribute="bottom" id="aU4-H1-ND1"/>
                             <constraint firstItem="bLd-NF-dpz" firstAttribute="leading" secondItem="zH3-UM-LaW" secondAttribute="leading" constant="16" id="b6W-Mo-tXz"/>
                             <constraint firstAttribute="trailing" secondItem="gEf-Ur-uPE" secondAttribute="trailing" id="cCt-P2-K2Y"/>
                             <constraint firstItem="x8S-kI-xib" firstAttribute="top" secondItem="UVO-oT-gm3" secondAttribute="bottom" id="dpA-0q-NhK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Z0E-7J-r3e" secondAttribute="trailing" id="emO-oc-IT3"/>
                             <constraint firstItem="b92-L2-xPK" firstAttribute="top" secondItem="bLd-NF-dpz" secondAttribute="bottom" id="jxa-aC-mio"/>
+                            <constraint firstItem="wsH-iv-b5D" firstAttribute="centerY" secondItem="Q1q-pB-yq6" secondAttribute="centerY" id="kg8-oh-1Tc"/>
+                            <constraint firstItem="xKh-BG-LD2" firstAttribute="centerY" secondItem="Tlu-c1-2e6" secondAttribute="centerY" id="lDN-Hr-rMP"/>
                             <constraint firstItem="CAl-9a-eWk" firstAttribute="leading" secondItem="zH3-UM-LaW" secondAttribute="leadingMargin" id="mbf-Yy-WRz"/>
                             <constraint firstItem="gEf-Ur-uPE" firstAttribute="leading" secondItem="zH3-UM-LaW" secondAttribute="leading" id="pHI-VP-jHQ"/>
                             <constraint firstItem="CAl-9a-eWk" firstAttribute="centerY" secondItem="UVO-oT-gm3" secondAttribute="centerY" id="reH-Ui-hcd"/>
@@ -370,8 +421,10 @@
                         <outlet property="backButton" destination="CAl-9a-eWk" id="tZW-Oa-LO5"/>
                         <outlet property="backgroundImage" destination="gEf-Ur-uPE" id="osu-rW-t43"/>
                         <outlet property="dayViewButton" destination="Tlu-c1-2e6" id="Fgl-Jb-GWN"/>
+                        <outlet property="dayViewImage" destination="xKh-BG-LD2" id="mIe-VB-CMl"/>
                         <outlet property="titleLabel" destination="UVO-oT-gm3" id="TgM-Pw-c9L"/>
                         <outlet property="weekViewButton" destination="Q1q-pB-yq6" id="g0j-WS-alA"/>
+                        <outlet property="weekViewImage" destination="wsH-iv-b5D" id="pqP-mV-Qff"/>
                         <segue destination="MvL-yD-EMG" kind="show" identifier="ScheduleCreatorSegue" id="kIb-e7-fcP"/>
                         <segue destination="PFs-MA-8Ud" kind="show" identifier="ScheduleWeekCreatorSegue" id="faH-ex-aMQ"/>
                     </connections>
@@ -3970,7 +4023,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="012-1d-8yV">
-                                                    <rect key="frame" x="137" y="330.5" width="102.5" height="22.5"/>
+                                                    <rect key="frame" x="137" y="331" width="102.5" height="22.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4077,7 +4130,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flZ-lL-U4w">
-                                        <rect key="frame" x="141.5" y="0.0" width="93" height="49"/>
+                                        <rect key="frame" x="142" y="0.0" width="93" height="49"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="37"/>
                                         <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -4312,7 +4365,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBZ-aS-mhf">
-                                <rect key="frame" x="66.5" y="277.5" width="243" height="113.5"/>
+                                <rect key="frame" x="66.5" y="277" width="243" height="113.5"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="97"/>
                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -4395,7 +4448,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-jO-oQj">
-                                                    <rect key="frame" x="137" y="369" width="102.5" height="22.5"/>
+                                                    <rect key="frame" x="137" y="369.5" width="102.5" height="22.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4617,7 +4670,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5O-yZ-uLf">
-                                                    <rect key="frame" x="137" y="368.5" width="102.5" height="22.5"/>
+                                                    <rect key="frame" x="137" y="369" width="102.5" height="22.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4764,7 +4817,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tD2-Ad-c9U">
-                                                    <rect key="frame" x="99.5" y="111" width="176.5" height="84"/>
+                                                    <rect key="frame" x="100" y="111" width="176.5" height="84"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="72"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -5177,7 +5230,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movement" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSy-Oq-wwH">
-                                                    <rect key="frame" x="133" y="0.0" width="109.5" height="27.5"/>
+                                                    <rect key="frame" x="133.5" y="0.0" width="109.5" height="27.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="27.5" id="DwF-Bf-aQz"/>
                                                     </constraints>
@@ -5192,7 +5245,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khd-CZ-X3F">
-                                                    <rect key="frame" x="154.5" y="328.5" width="66.5" height="31.5"/>
+                                                    <rect key="frame" x="155" y="328.5" width="66.5" height="31.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="27"/>
                                                     <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -5598,7 +5651,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miz-N7-q66">
-                                                    <rect key="frame" x="150.5" y="0.0" width="76" height="61"/>
+                                                    <rect key="frame" x="150" y="0.0" width="76" height="61"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="27"/>
                                                     <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -5717,6 +5770,7 @@
         <image name="Bin" width="45" height="45"/>
         <image name="Calendar" width="30" height="30"/>
         <image name="CheckMark" width="30" height="30"/>
+        <image name="DayView" width="375" height="667"/>
         <image name="Down" width="30" height="30"/>
         <image name="Forward" width="30" height="30"/>
         <image name="HideScreenMeditation" width="60" height="60"/>
@@ -5734,9 +5788,10 @@
         <image name="SlideMenu" width="30" height="30"/>
         <image name="TrackingClock" width="30" height="30"/>
         <image name="Tricep" width="375" height="375"/>
+        <image name="WeekView" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="na3-42-cEE"/>
+        <segue reference="faH-ex-aMQ"/>
         <segue reference="KLr-4k-hco"/>
         <segue reference="2AW-PI-fhz"/>
         <segue reference="tUJ-Lb-bfp"/>

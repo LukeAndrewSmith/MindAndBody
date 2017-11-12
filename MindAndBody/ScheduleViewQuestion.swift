@@ -19,11 +19,12 @@ class ScheduleViewQuestion: UIViewController {
     
     //
     // MARK: Outlets
-    
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dayViewButton: UIButton!
+    @IBOutlet weak var dayViewImage: UIImageView!
     @IBOutlet weak var weekViewButton: UIButton!
+    @IBOutlet weak var weekViewImage: UIImageView!
     @IBOutlet weak var backButton: UIButton!
     
     var comingFromSchedule = false
@@ -65,11 +66,15 @@ class ScheduleViewQuestion: UIViewController {
         dayViewButton.setTitle(NSLocalizedString("scheduleView1", comment: ""), for: .normal)
         dayViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         dayViewButton.setTitleColor(Colours.colour1, for: .normal)
+        dayViewImage.layer.borderWidth = 1
+        dayViewImage.layer.borderColor = Colours.colour1.withAlphaComponent(0.5).cgColor
         //
         weekViewButton.titleLabel?.lineBreakMode = .byWordWrapping
         weekViewButton.setTitle(NSLocalizedString("scheduleView2", comment: ""), for: .normal)
         weekViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         weekViewButton.setTitleColor(Colours.colour1, for: .normal)
+        weekViewImage.layer.borderWidth = 1
+        weekViewImage.layer.borderColor = Colours.colour1.withAlphaComponent(0.5).cgColor
         
         //
         // Back
