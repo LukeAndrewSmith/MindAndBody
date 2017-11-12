@@ -120,7 +120,11 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
     //
     // Done
     @IBAction func doneButonAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        if comingFromScheduleEditing == true {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true)
+        }
     }
     
     //

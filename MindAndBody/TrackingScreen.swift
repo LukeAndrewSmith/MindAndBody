@@ -14,7 +14,8 @@ import SwiftCharts
 //
 // Tracking Screen Class --------------------------------------------------------------------------------------------------------
 //
-class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
+//UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -27,9 +28,7 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     fileprivate var chart: Chart?
     
     // Time Scale Action Sheet
-    let actionSheet = UIView()
-    let timeScalePickerView = UIPickerView()
-    let okButton = UIButton()
+    let timeScaleTable = UITableView()
     let backgroundViewExpanded = UIButton()
     
     let timeScaleArray: [String] = ["1week", "1month", "3months", "6months", "1year", "all"]
@@ -70,36 +69,26 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         if walkthroughs[6] == false {
             walkthroughTracking()
         }
+       
         
-        //
-        // Time Scale Elements
-        actionSheet.backgroundColor = Colours.colour1
-        actionSheet.layer.cornerRadius = 15
-        actionSheet.clipsToBounds = true
-        
-        //
-        // Picker
-        timeScalePickerView.backgroundColor = Colours.colour2
-        timeScalePickerView.delegate = self
-        timeScalePickerView.dataSource = self
-        timeScalePickerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 20, height: 147)
-        
-        // ok
-        okButton.backgroundColor = Colours.colour1
-        okButton.setTitleColor(Colours.colour3, for: .normal)
-        okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
-        okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
-        okButton.frame = CGRect(x: 0, y: 147, width: self.view.frame.size.width - 20, height: 49)
+        // Time scale table
+        timeScaleTable.dataSource = self
+        timeScaleTable.delegate = self
+        timeScaleTable.tableFooterView = UIView()
+        timeScaleTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        timeScaleTable.separatorColor = Colours.colour1.withAlphaComponent(0.5)
+        timeScaleTable.backgroundColor = Colours.colour2
+        timeScaleTable.layer.cornerRadius = 15
+        timeScaleTable.clipsToBounds = true
+        timeScaleTable.layer.borderWidth = 1
+        timeScaleTable.layer.borderColor = Colours.colour1.cgColor
+        timeScaleTable.isScrollEnabled = false
         
         // Background View
         backgroundViewExpanded.backgroundColor = .black
         backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
         
         //
-        actionSheet.addSubview(timeScalePickerView)
-        actionSheet.addSubview(okButton)
-        
         //
         // Navigation Controller
         self.navigationController?.navigationBar.barTintColor = Colours.colour2
@@ -745,80 +734,111 @@ class TrackingScreen: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
     
-    
     //
-    // Picker View ----------------------------------------------------------------------------------------------------
-    //
-    // Number of components
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    // MARK: Table View
+    // Sections
+    // Number of sections
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    // Number of rows
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    // Section Titles
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return NSLocalizedString("trackingScreenViewOption", comment: "")
+    }
+    
+    // Header Customization
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        // Header
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
+        header.textLabel?.textAlignment = .center
+        header.textLabel?.textColor = Colours.colour2
+        //
+        let background = UIView()
+        background.frame = header.bounds
+        background.backgroundColor = Colours.colour1
+        header.backgroundView = background
+    }
+    
+
+    // Header Height
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 47
+    }
+    
+    // Rows
+    // Number of rows per section
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timeScaleArray.count
     }
     
-    // View for row
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        //
-        let timeLabel = UILabel()
-        timeLabel.text = NSLocalizedString(timeScaleArray[row], comment: "")
-        timeLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-        timeLabel.textColor = Colours.colour1
-        //
-        timeLabel.textAlignment = .center
-        return timeLabel
+    // Height
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 47
     }
     
-    // Row height
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 30
-    }
-    
-    // Did select row
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    // Row cell customization
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
-        
+        let cell = UITableViewCell()
+        cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
+        cell.textLabel?.text = NSLocalizedString(timeScaleArray[indexPath.row], comment: "")
+        cell.textLabel?.textColor = Colours.colour1
+        cell.textLabel?.textAlignment = .center
+        cell.backgroundColor = Colours.colour2
+        if indexPath.row == selectedTimeScale {
+            cell.accessoryType = .checkmark
+            cell.tintColor = Colours.colour3
+            cell.textLabel?.textColor = Colours.colour3
+        }
+        if indexPath.row == timeScaleArray.count - 1 {
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+        }
+        return cell
     }
     
     //
-    // Ok button action
-    @objc func okButtonAction(_ sender: Any) {
+    // Did select row
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // If data is available
         if weekTrackingDictionary.count != 0 {
             //
             currentPositionLabels.forEach{$0.removeFromSuperview()}
             //
-            selectedTimeScale = timeScalePickerView.selectedRow(inComponent: 0)
-            //
-            animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
+            selectedTimeScale = indexPath.row
             //
             chart?.view.removeFromSuperview()
             drawGraph()
             // No data to display
         } else {
-            selectedTimeScale = timeScalePickerView.selectedRow(inComponent: 0)
-            animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
+            selectedTimeScale = indexPath.row
         }
-        
+        //
+        timeScaleTable.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: {
+            // Dismiss action sheet
+            let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
+            self.animateActionSheetDown(actionSheet: self.timeScaleTable, actionSheetHeight: CGFloat(47 * (self.timeScaleArray.count + 1)), backgroundView: self.backgroundViewExpanded)
+            //
+        })
+        //
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     //
     @IBAction func timeScaleButton(_ sender: Any) {
         //
-        timeScalePickerView.selectRow(selectedTimeScale, inComponent: 0, animated: true)
+        UIApplication.shared.keyWindow?.insertSubview(timeScaleTable, aboveSubview: view)
+        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: timeScaleTable)
         //
-        UIApplication.shared.keyWindow?.insertSubview(actionSheet, aboveSubview: view)
-        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: actionSheet)
-        //
-        animateActionSheetUp(actionSheet: actionSheet, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
+        animateActionSheetUp(actionSheet: timeScaleTable, actionSheetHeight: CGFloat(47 * (timeScaleArray.count + 1)), backgroundView: backgroundViewExpanded)
     }
     
     // Dismiss presets table
     @objc func backgroundViewExpandedAction(_ sender: Any) {
         //
-        animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: 147 + 49, backgroundView: backgroundViewExpanded)
+        animateActionSheetDown(actionSheet: timeScaleTable, actionSheetHeight: CGFloat(47 * (timeScaleArray.count + 1)), backgroundView: backgroundViewExpanded)
     }
     
     

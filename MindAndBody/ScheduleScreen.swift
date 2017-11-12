@@ -808,7 +808,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 // Reload table
                 layoutViews()
                 scheduleChoiceTable.reloadData()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: {
                     self.scheduleTable.reloadData()
                     // Dismiss action sheet
                     let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))

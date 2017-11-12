@@ -111,13 +111,15 @@
 // MARK: Tracking //
 "tracking" = "Tracking";
 "trackingWarning" = "No data recorded yet";
-        //
-        // Time Scales
+    //
+    // Time Scales
+    "trackingScreenViewOption" = "View:";
+    //
     "1week" = "Current Week";
     "1month" = "Current Month";
     "3months" = "Last 3 Months";
     "6months" = "Last 6 Months";
-    "1year" = "Last Year";
+    "1year" = "Current Year";
     "all" = "All";
 
         //

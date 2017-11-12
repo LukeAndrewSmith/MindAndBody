@@ -373,6 +373,7 @@
                         <outlet property="titleLabel" destination="UVO-oT-gm3" id="TgM-Pw-c9L"/>
                         <outlet property="weekViewButton" destination="Q1q-pB-yq6" id="g0j-WS-alA"/>
                         <segue destination="MvL-yD-EMG" kind="show" identifier="ScheduleCreatorSegue" id="kIb-e7-fcP"/>
+                        <segue destination="PFs-MA-8Ud" kind="show" identifier="ScheduleWeekCreatorSegue" id="faH-ex-aMQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mc5-rU-og4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3666,13 +3667,13 @@
                                         <rect key="frame" x="8" y="57" width="172" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Theme" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BC-Ha-gWL">
-                                                <rect key="frame" x="0.0" y="0.0" width="61.5" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="51" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Self-Acceptance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZf-CZ-07t">
-                                                <rect key="frame" x="69.5" y="0.0" width="102.5" height="20.5"/>
+                                                <rect key="frame" x="59" y="0.0" width="113" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="15"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -4394,7 +4395,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-jO-oQj">
-                                                    <rect key="frame" x="137" y="369.5" width="102.5" height="22.5"/>
+                                                    <rect key="frame" x="137" y="369" width="102.5" height="22.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4616,7 +4617,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5O-yZ-uLf">
-                                                    <rect key="frame" x="137" y="369" width="102.5" height="22.5"/>
+                                                    <rect key="frame" x="137" y="368.5" width="102.5" height="22.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -5735,8 +5736,9 @@
         <image name="Tricep" width="375" height="375"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="na3-42-cEE"/>
         <segue reference="KLr-4k-hco"/>
-        <segue reference="jst-VU-OYD"/>
+        <segue reference="2AW-PI-fhz"/>
         <segue reference="tUJ-Lb-bfp"/>
         <segue reference="2sH-Wt-Foe"/>
         <segue reference="SOr-B2-NYZ"/>

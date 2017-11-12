@@ -139,7 +139,7 @@ class ScheduleViewQuestion: UIViewController {
         //
         // If custom schedule, go to schedule creator
         } else {
-            self.performSegue(withIdentifier: "ScheduleCreatorSegue", sender: self)
+            self.performSegue(withIdentifier: "ScheduleWeekCreatorSegue", sender: self)
         }
     }
     

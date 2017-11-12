@@ -495,6 +495,9 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         } else if segue.identifier == "OverviewScheduleSegue" {
             let destinationVC = segue.destination as? ScheduleCreator
             destinationVC?.fromScheduleEditing = true
+        } else if segue.identifier == "OverviewScheduleWeekSegue" {
+            let destinationVC = segue.destination as! ScheduleCreatorWeek
+            destinationVC.comingFromScheduleEditing = true
         }
     }
     
