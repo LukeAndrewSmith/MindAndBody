@@ -67,14 +67,16 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             
             // Select previous schedule last schedule
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            if schedules.count == 0 || settings[7][0] == 0 {
-                settings[7][0] = 0
+            var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
+            if schedules.count == 0 || selectedSchedule == 0 {
+                selectedSchedule = 0
             } else {
-                settings[7][0] -= 1
+                selectedSchedule -= 1
             }
-            ScheduleVariables.shared.selectedSchedule = settings[7][0]
-            UserDefaults.standard.set(settings, forKey: "userSettings")
+            ScheduleVariables.shared.selectedSchedule = selectedSchedule
+            UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["schedules", "scheduleTracking", "selectedSchedule"])
         }
         
     }
@@ -228,10 +230,10 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
                 //
                 // Update selected Schedule
                     // Set selected schedule to newly created schedule (last schedule in schedules)
-                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                settings[7][0] = schedules.count - 1
-                ScheduleVariables.shared.selectedSchedule = settings[7][0]
-                UserDefaults.standard.set(settings, forKey: "userSettings")
+                var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
+                selectedSchedule = schedules.count - 1
+                ScheduleVariables.shared.selectedSchedule = selectedSchedule
+                UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
                 //
                 // Update Title
                 let textField = alert?.textFields![0]
@@ -255,6 +257,8 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
                 // SET NEW ARRAY
                 UserDefaults.standard.set(schedules, forKey: "schedules")
                 UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["selectedSchedule", "schedules", "scheduleTracking"])
                 //
                 // Indicate that new schedule has been created
                 ScheduleVariables.shared.didCreateNewSchedule = true
@@ -330,36 +334,11 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         ScheduleTypeQuestionTable.isScrollEnabled = false
         // Switches
         scheduleOptionSwitch.onTintColor = Colours.colour3
-        scheduleOptionSwitch.addTarget(self, action: #selector(scheduleOptionSwitchAction), for: .valueChanged)
         scheduleOptionSwitch.isOn = true
         sessionsOptionSwitch.onTintColor = Colours.colour3
-        sessionsOptionSwitch.addTarget(self, action: #selector(sessionsOptionSwitchAction), for: .valueChanged)
         sessionsOptionSwitch.isOn = true
     }
     
-    //
-    // Switch handlers
-    // Schedule option
-    @objc func scheduleOptionSwitchAction(_ sender: UISwitch) {
-//        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-//        if sender.isOn == true {
-//            schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] = 0
-//        } else if sender.isOn == false {
-//            schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] = 1
-//        }
-//        UserDefaults.standard.set(schedules, forKey: "schedules")
-    }
-    // Sessions option
-    @objc func sessionsOptionSwitchAction(_ sender: UISwitch) {
-//        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-//        if sender.isOn == true {
-//            schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] = 0
-//        } else if sender.isOn == false {
-//            schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] = 1
-//        }
-//        UserDefaults.standard.set(schedules, forKey: "schedules")
-    }
-
     //
     // Back Button
     @IBAction func backButtonAction(_ sender: Any) {

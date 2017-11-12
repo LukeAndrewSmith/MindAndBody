@@ -964,6 +964,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     //
                     // SET NEW ARRAY
                     UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+                    // Sync
+                    ICloudFunctions.shared.sync(toSync: ["customSessions"])
                     //
                     // Select new session and dismiss
                     let selectedIndexPath = NSIndexPath(row: lastIndex, section: 0)
@@ -1253,6 +1255,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             //
             // SET ARRAY
             UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["customSessions"])
             //
             // Remove Table
             UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
@@ -1373,6 +1377,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         // SET NEW ARRAY
         UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+        // Sync
+        ICloudFunctions.shared.sync(toSync: ["customSessions"])
         
         //
         tableView.reloadData()
@@ -1412,6 +1418,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 // New array
                 customSessionsArray[SelectedSession.shared.selectedSession[0]].remove(at: indexPath.row)
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["customSessions"])
                 //
                 UIView.animate(withDuration: 0.2, animations: {
                     self.presetsTableView.reloadData()
@@ -1500,6 +1508,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 //
                 // SET NEW ARRAY
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["customSessions"])
                 //
                 switch SelectedSession.shared.selectedSession[0] {
                 case 0,2,3,4:
@@ -1664,6 +1674,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 }
                 // Set
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["customSessions"])
                 //
                 // Circuit -> Non-circuit
                 // If selected a non circuit workout, i.e selectedRounds = 1
@@ -1688,6 +1700,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     }
                     // Set
                     UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+                    // Sync
+                    ICloudFunctions.shared.sync(toSync: ["customSessions"])
                 }
                 //
                 //
@@ -1713,6 +1727,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 }
                 // Set
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["customSessions"])
                 
                 //
                 // Circuit -> Circuit
@@ -1749,6 +1765,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 }
                 // Set
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["customSessions"])
                 
             }
             //
@@ -1788,6 +1806,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             //
             // SET NEW ARRAY
             UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["customSessions"])
             
         }
         //
@@ -1939,6 +1959,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     break
                 }
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["customSessions"])
                 //
                 self.customTableView.moveRow(at: Path.initialIndexPath!, to: indexPath!)
                 Path.initialIndexPath = indexPath

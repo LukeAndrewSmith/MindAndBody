@@ -1150,6 +1150,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
                 walkthroughs[4] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["walkthroughs"])
             })
         }
     }

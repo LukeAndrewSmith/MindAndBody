@@ -484,6 +484,7 @@
 		077E471B1EB9DFC6005B0B22 /* PresentMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */; };
 		077E471F1EB9E221005B0B22 /* SlideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471E1EB9E221005B0B22 /* SlideMenuView.swift */; };
 		077E47231EB9EED3005B0B22 /* DismissMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */; };
+		078674FE1FB84F7000C6B74C /* ICloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078674FD1FB84F7000C6B74C /* ICloudStorage.swift */; };
 		0789ED061F79A6EA000EB739 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789ED051F79A6EA000EB739 /* UserData.swift */; };
 		078F409A1F4B700800B4F566 /* SwiftCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078F40951F4B6C1C00B4F566 /* SwiftCharts.framework */; };
 		078F409B1F4B700800B4F566 /* SwiftCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 078F40951F4B6C1C00B4F566 /* SwiftCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -1869,6 +1870,7 @@
 		077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentMenuAnimator.swift; sourceTree = "<group>"; };
 		077E471E1EB9E221005B0B22 /* SlideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuView.swift; sourceTree = "<group>"; };
 		077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissMenuAnimator.swift; sourceTree = "<group>"; };
+		078674FD1FB84F7000C6B74C /* ICloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudStorage.swift; sourceTree = "<group>"; };
 		0789ED051F79A6EA000EB739 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		078F408E1F4B6C1C00B4F566 /* SwiftCharts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftCharts.xcodeproj; path = ../../Code/Carthage/Carthage/Checkouts/SwiftCharts/SwiftCharts.xcodeproj; sourceTree = "<group>"; };
 		0791872A1E7B4E2C00E7153A /* SessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionScreen.swift; sourceTree = "<group>"; };
@@ -3786,6 +3788,7 @@
 			children = (
 				07248E061F31CB5100230EAF /* GlobalVariables.swift */,
 				07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */,
+				078674FD1FB84F7000C6B74C /* ICloudStorage.swift */,
 			);
 			name = Global;
 			sourceTree = "<group>";
@@ -8310,6 +8313,7 @@
 				0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */,
 				0789ED061F79A6EA000EB739 /* UserData.swift in Sources */,
 				07DEE6FB1E0AC47F003B89AB /* WorkoutChoice.swift in Sources */,
+				078674FE1FB84F7000C6B74C /* ICloudStorage.swift in Sources */,
 				07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */,
 				075732701E660AEC003DA77E /* InformationScreenAnatomy.swift in Sources */,
 				07CB04371E604653002066CD /* MeditationChoiceGuided.swift in Sources */,

@@ -976,6 +976,8 @@ extension ScheduleScreen {
             
             // Update tracking array
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["scheduleTracking"])
             //
             let indexPathToReload = NSIndexPath(row: row!, section: 0)
             scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)

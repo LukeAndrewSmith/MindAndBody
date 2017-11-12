@@ -226,8 +226,8 @@ enum Register {
         [0],   // 0 == "demonstration", 1 == "targetArea"
         // Metric/Imperial - 6
         [0], // == "kg" (0), "lb" (1)
-        // Selected Schedule [0] - 7
-        [0]
+        // Is icloud enabled, 0 == true, 1 == false
+        [1],
     ]
     
     // --------------------------------------------------------
@@ -330,7 +330,7 @@ enum Register {
     
     // --------------------------------------------------------
     // Tracking
-    static let registerTrackingArray: [[Any]] =
+    static let registerTrackingProgressArray: [[Any]] =
         // Update progress (first monday of last week/month completed (lastResetWeek/Month) is used to check if progress needs to be reset to 0 for first entry of new week/month)
         [
             // Week - [weekProgress, lastResetWeek]
@@ -338,5 +338,10 @@ enum Register {
             // Month - [monthProgress, lastResetMonth]
             [0, Date().firstMondayInMonth]
     ]
+    
+    //
+    static let registerTrackingArrays: [[Date: Int]] =
+    [
+        
+    ]
 }
-

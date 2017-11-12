@@ -175,6 +175,8 @@ class ScheduleVariables {
             trackingProgressArray[0][1] = currentMondayDate
             UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["trackingProgress", "scheduleTracking"])
         }
     }
 }

@@ -332,6 +332,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
         UserDefaults.standard.set(schedules, forKey: "schedules")
+        // Sync
+        ICloudFunctions.shared.sync(toSync: ["schedules", "scheduleTracking"])
     }
     
     func setGroupLabels() {
@@ -424,6 +426,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
         UserDefaults.standard.set(schedules, forKey: "schedules")
+        // Sync
+        ICloudFunctions.shared.sync(toSync: ["schedules", "scheduleTracking"])
         //
         // Update
         // Loop full week
@@ -632,6 +636,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
                     UserDefaults.standard.set(schedules, forKey: "schedules")
                     UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+                    // Sync
+                    ICloudFunctions.shared.sync(toSync: ["schedules", "scheduleTracking"])
 //                    updateFullWeek()
                     // update label
                     setGroupLabels()
@@ -696,6 +702,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     scheduleTracking[ScheduleVariables.shared.selectedSchedule][(indexPathForRow?.row)!].remove(at: indexOfDrag)
                     UserDefaults.standard.set(schedules, forKey: "schedules")
                     UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+                    // Sync
+                    ICloudFunctions.shared.sync(toSync: ["schedules", "scheduleTracking"])
                     // Remove the label being dragged
                     cell.groupLabelArray[indexOfDrag].tag = 0
                     cell.groupLabelArray[indexOfDrag].alpha = 0
@@ -986,6 +994,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                         UserDefaults.standard.set(schedules, forKey: "schedules")
                         UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+                        // Sync
+                        ICloudFunctions.shared.sync(toSync: ["schedules", "scheduleTracking"])
                     } else {
                         let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
 
@@ -1019,6 +1029,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
                         UserDefaults.standard.set(schedules, forKey: "schedules")
                         UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+                        // Sync
+                        ICloudFunctions.shared.sync(toSync: ["schedules", "scheduleTracking"])
                 }
                 
                     draggingLabel.removeFromSuperview()

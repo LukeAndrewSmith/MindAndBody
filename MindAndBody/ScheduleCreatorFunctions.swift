@@ -598,6 +598,8 @@ extension UIViewController {
         if updating == false {
             schedules[ScheduleVariables.shared.selectedSchedule][2][2] = ScheduleVariables.shared.updatedSessionsArray
             UserDefaults.standard.set(schedules, forKey: "schedules")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["schedules"])
         } else {
             
         }

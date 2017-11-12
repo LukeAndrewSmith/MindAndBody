@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        
         //
         // Register Defaults --------------------------------------------------------------------------------
         let defaults = UserDefaults.standard
@@ -33,21 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.register(defaults: ["userSettings" : Register.defaultSettings])
         
         //
-        // Tracking Progress
-        // [currentProgress, lastResetWeek/Month]
-        defaults.register(defaults: ["trackingProgress" : Register.registerTrackingArray])
-        
-        
-        //
-        // Custom Sessions
-        defaults.register(defaults: ["customSessions" : Register.customSessionsRegister])
-        
-        //
-        // Meditation Array
-        defaults.register(defaults: ["meditationTimer" : Register.meditationArrayRegister])
-        
-        //
         // Profile/Schedules
+        // Selected Schedule
+        UserDefaults.standard.register(defaults: ["selectedSchedule" : 0])
         // Schedules
         UserDefaults.standard.register(defaults: ["schedules" : scheduleDataStructures.registerSchedules])
         // Tracking
@@ -58,8 +47,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["profileAnswers" : scheduleDataStructures.defaultProfileAnswers])
         
         //
+        // Tracking
+        // Tracking arrays [weekTracking, tracking, monthTracking]
+        defaults.register(defaults: ["trackingArrays" : Register.registerTrackingArrays])
+        // Progress, [currentProgress, lastResetWeek/Month]
+        defaults.register(defaults: ["trackingProgress" : Register.registerTrackingProgressArray])
+        
+        
+        // Custom
+        // Custom Sessions
+        defaults.register(defaults: ["customSessions" : Register.customSessionsRegister])
+        // Meditation Array
+        defaults.register(defaults: ["meditationTimer" : Register.meditationArrayRegister])
+        
+        //
         // Walkthroughs
         UserDefaults.standard.register(defaults: ["walkthroughs" : Register.registerWalkthroughArray])
+        
+        //
+        // Icloud storage timestamp
+        UserDefaults.standard.register(defaults: ["iCouldTimestamp" : Date().timeIntervalSince1970])
+        
+        // Sync all
+        ICloudFunctions.shared.sync(toSync: [""])
         
         //
         // Set Home Screen
@@ -86,12 +96,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             break
         }
         
-        
-        // TODO: TEST
-        settings[7][0] = 0
-        ScheduleVariables.shared.selectedSchedule = 0
-        UserDefaults.standard.set(settings, forKey: "userSettings")
-        
         //
         return true
     }
@@ -112,7 +116,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             settings[3][0] = 0
         }
         UserDefaults.standard.set(settings, forKey: "userSettings")
-        
+        // Sync all
+        ICloudFunctions.shared.sync(toSync: ["userSettings"])
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -129,6 +134,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Reset weekTracking/scheduleTracking (called a few times too many throughout but better safe than sorry)
         ScheduleVariables.shared.resetWeekTracking()
+        
+        
+        // Sync all
+        ICloudFunctions.shared.sync(toSync: [""])
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

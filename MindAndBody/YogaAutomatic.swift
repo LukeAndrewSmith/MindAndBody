@@ -416,6 +416,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }
                 //
                 UserDefaults.standard.set(settings, forKey: "userSettings")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["userSettings"])
                 
             // Breath Length
             case 1:
@@ -693,6 +695,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             settings[3][1] = pickerView.selectedRow(inComponent: 0)
             defaults.set(settings, forKey: "userSettings")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["userSettings"])
             //
             let indexPath = NSIndexPath(row: 0, section: 1)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
@@ -703,6 +707,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             settings[3][2] = pickerView.selectedRow(inComponent: 0)
             defaults.set(settings, forKey: "userSettings")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["userSettings"])
             //
             let indexPath = NSIndexPath(row: 0, section: 2)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
@@ -724,6 +730,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell?.textLabel?.text = NSLocalizedString(bellsArray[selectedTransitionIndicator], comment: "")
             //
             defaults.set(settings, forKey: "userSettings")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["userSettings"])
             //
             selectedTransitionIndicator = -1
         //
@@ -877,6 +885,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
                 walkthroughs[12] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["walkthroughs"])
             })
         }
     }

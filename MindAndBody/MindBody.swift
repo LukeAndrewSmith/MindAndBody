@@ -233,6 +233,8 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
             var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
             walkthroughs[0] = true
             UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["walkthroughs"])
             self.walkthroughMindBody()
         }
         //
@@ -771,6 +773,8 @@ class MindBody: UIViewController, UNUserNotificationCenterDelegate {
                 var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
                 settings[1][0] = 1
                 UserDefaults.standard.set(settings, forKey: "userSettings")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["walkthroughs", "userSettings"])
             })
         }
     }

@@ -95,16 +95,18 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             //
             ScheduleVariables.shared.shouldReloadSchedule = false
             // Set ScheduleVariables.shared.selectedSchedule to last schedule if too high
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            if ScheduleVariables.shared.selectedSchedule > schedules.count - 1 {
-                if schedules.count == 0 || settings[7][0] == 0 {
-                    settings[7][0] = 0
+                var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
+                if ScheduleVariables.shared.selectedSchedule > schedules.count - 1 {
+                if schedules.count == 0 || selectedSchedule == 0 {
+                    selectedSchedule = 0
                 } else {
-                    settings[7][0] = schedules.count - 1
+                    selectedSchedule = schedules.count - 1
                 }
-                UserDefaults.standard.set(settings, forKey: "userSettings")
+                UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
+                    // Sync
+                    ICloudFunctions.shared.sync(toSync: ["selectedSchedule"])
             }
-            ScheduleVariables.shared.selectedSchedule = settings[7][0]
+            ScheduleVariables.shared.selectedSchedule = selectedSchedule
             //
             if schedules.count != 0 {
                 scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int
@@ -143,6 +145,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
             scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][0][0] = true
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["scheduleTracking"])
             //
             DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
                 let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
@@ -186,6 +190,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
             scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][0][0] = true
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["scheduleTracking"])
             // Set to false here so the tick doesn't get loaded before the view has appeared
             ScheduleVariables.shared.shouldReloadChoice = false
             // Animate initial choice group completion after slideRight() animation finished
@@ -227,16 +233,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         if walkthroughs[5] == false {
             walkthroughSchedule()
         }
-        
-        //
-        // Walkthrough
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughC") == false {
-            let delayInSeconds = 0.5
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            }
-            UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughC")
-        }
-        
         
         // ACTION SHEET
         actionSheet.backgroundColor = .clear
@@ -731,7 +727,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             
         //
         case scheduleChoiceTable:
-            let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
             //
             switch indexPath.row {
             case schedules.count:
@@ -744,7 +740,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
                 cell.textLabel?.textAlignment = .left
                 cell.textLabel?.textColor = Colours.colour1
-                if indexPath.row == settings[7][0] {
+                if indexPath.row == selectedSchedule {
                     cell.accessoryType = .checkmark
                     cell.tintColor = Colours.colour3
                 }
@@ -800,11 +796,13 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             // Select schedule
             } else {
                 // Select new schedule in user settings
-                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                settings[7][0] = indexPath.row
-                ScheduleVariables.shared.selectedSchedule = settings[7][0]
+                var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
+                selectedSchedule = indexPath.row
+                ScheduleVariables.shared.selectedSchedule = selectedSchedule
                 scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int
-                UserDefaults.standard.set(settings, forKey: "userSettings")
+                UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["selectedSchedule"])
                 // Reload table
                 layoutViews()
                 scheduleChoiceTable.reloadData()
@@ -861,15 +859,17 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             
             // Select 1 schedule before last schedule
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            if schedules.count == 0 || settings[7][0] == 0 {
-                settings[7][0] = 0
+            var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
+            if schedules.count == 0 || selectedSchedule == 0 {
+                selectedSchedule = 0
             } else {
-                settings[7][0] -= 1
+                selectedSchedule -= 1
             }
-            ScheduleVariables.shared.selectedSchedule = settings[7][0]
-            UserDefaults.standard.set(settings, forKey: "userSettings")
+            ScheduleVariables.shared.selectedSchedule = selectedSchedule
+            UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
             scheduleTable.reloadData()
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["schedules", "scheduleTracking", "selectedSchedule"])
             
             //
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
@@ -1123,6 +1123,8 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
                 walkthroughs[5] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["walkthroughs"])
             })
         }
     }

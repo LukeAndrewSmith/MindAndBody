@@ -317,6 +317,8 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 // SET NEW ARRAY
                 UserDefaults.standard.set(schedules, forKey: "schedules")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["schedules"])
                 //
                 // Update name in table
                 cell?.detailTextLabel?.text = schedules[ScheduleVariables.shared.selectedSchedule][1][0][0] as? String
@@ -417,6 +419,8 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         UserDefaults.standard.set(schedules, forKey: "schedules")
+        // Sync
+        ICloudFunctions.shared.sync(toSync: ["schedules"])
         
         if sender == appHelpsCreateScheduleSwitch {
             scheduleType = schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int
@@ -457,14 +461,16 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             
             // Select previous schedule last schedule
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            if schedules.count == 0 || settings[7][0] == 0 {
-                settings[7][0] = 0
+            var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
+            if schedules.count == 0 || selectedSchedule == 0 {
+                selectedSchedule = 0
             } else {
-                settings[7][0] -= 1
+                selectedSchedule -= 1
             }
-            ScheduleVariables.shared.selectedSchedule = settings[7][0]
-            UserDefaults.standard.set(settings, forKey: "userSettings")
+            ScheduleVariables.shared.selectedSchedule = selectedSchedule
+            UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["schedules", "scheduleTracking", "selectedSchedule"])
             //
             self.dismiss(animated: true)
         }

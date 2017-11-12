@@ -93,6 +93,8 @@ class ScheduleViewQuestion: UIViewController {
         // Set user settings for schedule style to week
         schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] = 0
         UserDefaults.standard.set(schedules, forKey: "schedules")
+        // Sync
+        ICloudFunctions.shared.sync(toSync: ["schedules"])
         self.performSegue(withIdentifier: "ScheduleCreatorSegue", sender: self)
     }
     
@@ -103,6 +105,8 @@ class ScheduleViewQuestion: UIViewController {
         // Set user settings for schedule style to week
         schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] = 1
         UserDefaults.standard.set(schedules, forKey: "schedules")
+        // Sync
+        ICloudFunctions.shared.sync(toSync: ["schedules"])
         //
         // App helps create schedule, dismiss to schedule
         if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
@@ -133,7 +137,8 @@ class ScheduleViewQuestion: UIViewController {
             //
             UserDefaults.standard.set(schedules, forKey: "schedules")
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-            //
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["schedules", "scheduleTracking"])
             //
             self.dismiss(animated: true)
         //

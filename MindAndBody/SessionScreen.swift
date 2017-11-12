@@ -1565,6 +1565,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 // Session walkthrough 2 there so this walkthrough is always seen (important note on rest timer that isnt in circuit/stretching)
                 walkthroughs[4] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["walkthroughs"])
             })
         }
     }

@@ -967,6 +967,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
                 var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
                 walkthroughs[6] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["walkthroughs"])
             })
         }
     }

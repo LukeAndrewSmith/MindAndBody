@@ -418,6 +418,8 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
         profileAnswers[selectedQuestion] = agePicker.selectedRow(inComponent: 0)
         UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
+        // Sync
+        ICloudFunctions.shared.sync(toSync: ["profileAnswers"])
         //
         delegate?.nextQuestion()
     }
@@ -594,6 +596,8 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
         profileAnswers[row] = indexPath.row
         UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
+        // Sync
+        ICloudFunctions.shared.sync(toSync: ["profileAnswers"])
         //
         answerTableView.isUserInteractionEnabled = false
         //

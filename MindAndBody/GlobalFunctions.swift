@@ -14,17 +14,6 @@ import AudioToolbox.AudioServices
 // MARK: - Global Function as extensions
 //
 
-// Update ICloud
-class UpdateICloud {
-    static var shared = UpdateICloud()
-    private init() {}
-    
-    // Update NSUbiquitousKeys
-    func updateICloud() {
-        
-    }
-}
-
 //
 // View Controller
 extension UIViewController {
@@ -271,6 +260,8 @@ extension UIViewController {
         // Increment Progress
         trackingProgressArray[0][0] = trackingProgressArray[0][0] as! Int + 1
         UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
+        // Sync
+        ICloudFunctions.shared.sync(toSync: ["trackingProgress"])
     }
     
     // Month Progress
@@ -291,12 +282,16 @@ extension UIViewController {
             // Reset last reset
             trackingProgressArray[1][1] = firstMonday
             UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
+            // Sync
+            ICloudFunctions.shared.sync(toSync: ["trackingProgress"])
         }
         
         // Increment Progress
         currentProgress += 1
         trackingProgressArray[1][0] = currentProgress
         UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
+        // Sync
+        ICloudFunctions.shared.sync(toSync: ["trackingProgress"])
     }
     
     // Schedule Tracking
@@ -311,6 +306,8 @@ extension UIViewController {
                 scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
                 // Set
                 UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["trackingProgress"])
                 // Reload
                 ScheduleVariables.shared.shouldReloadChoice = true
                 // Week
@@ -320,6 +317,8 @@ extension UIViewController {
                 scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
                 // Set
                 UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+                // Sync
+                ICloudFunctions.shared.sync(toSync: ["trackingProgress"])
                 // Reload
                 ScheduleVariables.shared.shouldReloadChoice = true
             }

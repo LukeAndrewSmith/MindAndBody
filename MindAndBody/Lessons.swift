@@ -108,13 +108,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         rightSwipe.addTarget(self, action: #selector(swipeGesture))
         view.addGestureRecognizer(rightSwipe)
         
-        
-        // Walkthrough
-        if UserDefaults.standard.bool(forKey: "informationWalkthrough") == false {
-            self.walkthroughMindBody()
-            UserDefaults.standard.set(true, forKey: "informationWalkthrough")
-        }
-        
         //
         //  Navigation Bar
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]

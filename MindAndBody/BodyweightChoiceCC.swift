@@ -53,14 +53,6 @@ class BodyweightChoiceCC: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Walkthrough
-        if UserDefaults.standard.bool(forKey: "mindBodyWalkthroughc") == false {
-            let delayInSeconds = 0.5
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            }
-            UserDefaults.standard.set(true, forKey: "mindBodyWalkthroughc")
-        }
-        
         // Colours
         view.backgroundColor = Colours.colour1
         
