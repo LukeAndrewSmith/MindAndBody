@@ -540,7 +540,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             // Tracking
             updateWeekProgress()
-            updateMonthProgress()
             // Schedule Tracking
             updateScheduleTracking(fromSchedule: fromSchedule)
             //

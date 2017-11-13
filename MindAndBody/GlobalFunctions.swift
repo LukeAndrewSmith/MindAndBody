@@ -256,48 +256,18 @@ extension UIViewController {
         // Reset if last reset wasn't is current week
         ScheduleVariables.shared.resetWeekTracking()
         //
-        var trackingProgressArray = UserDefaults.standard.array(forKey: "trackingProgress") as! [[Any]]
+        var trackingProgressArray = UserDefaults.standard.object(forKey: "trackingProgress") as! [Any]
         // Increment Progress
-        trackingProgressArray[0][0] = trackingProgressArray[0][0] as! Int + 1
+        trackingProgressArray[0] = trackingProgressArray[0] as! Int + 1
         UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
     }
-    
-    // Month Progress
-    func updateMonthProgress() {
-        var trackingProgressArray = UserDefaults.standard.array(forKey: "trackingProgress") as! [[Any]]
-        //
-        var currentProgress = trackingProgressArray[1][0] as! Int
-        
-        //
-        // Get first date in month
-        let firstMonday = Date().firstDateInMonth
-        // Last Reset = first monday in the last month reset
-        let lastReset = trackingProgressArray[1][1] as! Date
-        
-        // Reset if last reset wasn't in current month
-        if lastReset != firstMonday  {
-            currentProgress = 0
-            // Reset last reset
-            trackingProgressArray[1][1] = firstMonday
-            UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
-        }
-        
-        // Increment Progress
-        currentProgress += 1
-        trackingProgressArray[1][0] = currentProgress
-        UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
-    }
+   
     
     // Schedule Tracking
     func updateScheduleTracking(fromSchedule: Bool) {
         if fromSchedule == true {
-            let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
             let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
             // Day
             if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
@@ -332,6 +302,8 @@ extension UIViewController {
     //
     // MARK: Monday  - Sunday
     func updateWeekTracking() {
+        let trackingProgressArray = UserDefaults.standard.object(forKey: "trackingProgress") as! [Any]
+        var trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[Date: Int]]
         //
         let calendar = Calendar(identifier: .gregorian)
         // Current Date
@@ -340,11 +312,13 @@ extension UIViewController {
         let currentMondayDate = Date().firstMondayInCurrentWeek
         //
         // Week Goal
+        let weekProgress: Double = trackingProgressArray[0] as! Double
+        let weekGoal: Double = trackingProgressArray[1] as! Double
         let currentProgressDivision: Double = (weekProgress / weekGoal) * 100.0
         let currentProgress = Int(currentProgressDivision)
         //
         // Keys
-        let keys = weekTrackingDictionary.keys.sorted()
+        let keys = trackingDictionaries[0].keys.sorted()
         
         //
         // Update
@@ -353,12 +327,12 @@ extension UIViewController {
             //
             // Day already started
             if keys.last == currentDate {
-                weekTrackingDictionary[currentDate] = currentProgress
+                trackingDictionaries[0][currentDate] = currentProgress
                 
             //
             // Day is next in line
             } else if keys.last == calendar.date(byAdding: .day, value: -1, to: currentDate) {
-                weekTrackingDictionary.updateValue(currentProgress, forKey: currentDate)
+                trackingDictionaries[0].updateValue(currentProgress, forKey: currentDate)
                 
             //
             // Day isn't next in line
@@ -366,24 +340,24 @@ extension UIViewController {
                 //
                 // Update missed days with 0
                 var startDate = keys.last!
-                var startValue = weekTrackingDictionary[startDate]!
+                let startValue = trackingDictionaries[0][startDate]!
                 let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!
                 // Loop last adding previous value to dates
                 while startDate <= endDate {
-                    weekTrackingDictionary.updateValue(startValue, forKey: startDate)
+                    trackingDictionaries[0].updateValue(startValue, forKey: startDate)
                     startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
                 }
                 // Update today
-                weekTrackingDictionary.updateValue(currentProgress, forKey: currentDate)
+                trackingDictionaries[0].updateValue(currentProgress, forKey: currentDate)
             }
             
         // Week hasn't begun (should start) / user has't done anything this week
         } else {
             // Clear
-            weekTrackingDictionary = [:]
+            trackingDictionaries[0] = [:]
             // If today is monday, clear array and create monday
             if currentDate == currentMondayDate {
-                weekTrackingDictionary.updateValue(currentProgress, forKey: currentMondayDate)
+                trackingDictionaries[0].updateValue(currentProgress, forKey: currentMondayDate)
                 
             // Today isn't monday
             } else {
@@ -393,39 +367,44 @@ extension UIViewController {
                 let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!
                 // Loop adding 0 to dates
                 while startDate <= endDate {
-                    weekTrackingDictionary.updateValue(0, forKey: startDate)
+                    trackingDictionaries[0].updateValue(0, forKey: startDate)
                     startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
                 }
                 // Update today
-                weekTrackingDictionary.updateValue(currentProgress, forKey: currentDate)
+                trackingDictionaries[0].updateValue(currentProgress, forKey: currentDate)
             }
         }
-        //
-        // TODO:  Need to then save the dictionary somewhere !!!!!!!!!!!!!!!
+        // Save
+        UserDefaults.standard.set(trackingDictionaries, forKey: "trackingDictionaries")
+        ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
     }
     
     
     // ----------------------------------------------------------------------------------------------------------------
     // MARK: Week %
     func updateTracking() {
+        let trackingProgressArray = UserDefaults.standard.object(forKey: "trackingProgress") as! [Any]
+        var trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[Date: Int]]
         //
         let calendar = Calendar(identifier: .gregorian)
         // Get Mondays date
         let currentMondayDate = Date().firstMondayInCurrentWeek
         //
         // Week Goal
-        let currentProgressDivision: Double = (weekProgress / weekGoal) * 100
+        let weekProgress: Double = trackingProgressArray[0] as! Double
+        let weekGoal: Double = trackingProgressArray[1] as! Double
+        let currentProgressDivision: Double = (weekProgress / weekGoal) * 100.0
         let currentProgress = Int(currentProgressDivision)
         //
         // Keys
-        let keys = trackingDictionary.keys.sorted()
+        let keys = trackingDictionaries[1].keys.sorted()
         
         // Note: Weeks defined by their mondays date
         //
         // Current week exists
         if keys.contains(currentMondayDate) {
             // Update current weeks progress
-            trackingDictionary[currentMondayDate] = currentProgress
+            trackingDictionaries[1][currentMondayDate] = currentProgress
             
         //
         // Current week doesn't exist
@@ -433,7 +412,7 @@ extension UIViewController {
             // Last updated week was last week |or| first week ever updated
             if keys.count == 0 || keys.last! == calendar.date(byAdding: .weekOfYear, value: -1, to: currentMondayDate) {
                 // Create current weeks progress
-                trackingDictionary.updateValue(currentProgress, forKey: currentMondayDate)
+                trackingDictionaries[1].updateValue(currentProgress, forKey: currentMondayDate)
                 
             // Skipped weeks
             } else {
@@ -443,62 +422,17 @@ extension UIViewController {
                 let endDate = calendar.date(byAdding: .weekOfYear, value: -1, to: currentMondayDate)!
                 // Loop adding 0 to dates
                 while startDate <= endDate {
-                    trackingDictionary.updateValue(0, forKey: startDate)
+                    trackingDictionaries[1].updateValue(0, forKey: startDate)
                     startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate)!
                 }
                 // Update today
-                trackingDictionary.updateValue(currentProgress, forKey: currentMondayDate)
+                trackingDictionaries[1].updateValue(currentProgress, forKey: currentMondayDate)
             }
         }
+        // Save
+        UserDefaults.standard.set(trackingDictionaries, forKey: "trackingDictionaries")
+        ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
     }
-    
-    // ----------------------------------------------------------------------------------------------------------------
-    // MARK: Month %
-    func updateMonthTracking() {
-        //
-        let calendar = Calendar(identifier: .gregorian)
-        // Get Mondays date
-        let firstDateInCurrentMonth = Date().firstDateInMonth
-        //
-        // Month Goal
-        let currentProgressDivision: Double = (monthProgress / monthGoal) * 100
-        let currentProgress = Int(currentProgressDivision)
-        //
-        // Keys
-        let keys = monthTrackingDictionary.keys.sorted()
-        
-        // Note: Months defined by their first date
-        //
-        // Current month exists
-        if keys.contains(firstDateInCurrentMonth) {
-            // Update current weeks progress
-            monthTrackingDictionary[firstDateInCurrentMonth] = currentProgress
-            
-        //
-        // Current month doesn't exist
-        } else {
-            // Last updated months was last month |or| first month ever updated
-            if keys.count == 0 || keys.last! == calendar.date(byAdding: .month, value: -1, to: firstDateInCurrentMonth) {
-                // Create current months progress
-                monthTrackingDictionary.updateValue(currentProgress, forKey: firstDateInCurrentMonth)
-                
-            // Skipped months
-            } else {
-                //
-                // Update missed month with 0
-                var startDate = keys.last!
-                let endDate = calendar.date(byAdding: .month, value: -1, to: firstDateInCurrentMonth)!
-                // Loop adding 0 to dates
-                while startDate <= endDate {
-                    monthTrackingDictionary.updateValue(0, forKey: startDate)
-                    startDate = calendar.date(byAdding: .month, value: 1, to: startDate)!
-                }
-                // Update today
-                monthTrackingDictionary.updateValue(currentProgress, forKey: firstDateInCurrentMonth)
-            }
-        }
-    }
-    
     
     //
     // MARK: Walkthrough

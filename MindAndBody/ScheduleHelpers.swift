@@ -969,7 +969,7 @@ extension ScheduleScreen {
                         for i in 0...scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count - 1 {
                             // If correct group and false
                             if schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][i][index1][index2] == false {
-                                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] = true
+                                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][i][index1][index2] = true
                                 break
                             }
                         }

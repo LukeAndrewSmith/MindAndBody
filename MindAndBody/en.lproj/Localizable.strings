@@ -1503,6 +1503,21 @@
 "iCloudPopupMessage" = "\nAllow icloud if you plan on using the app on multiple devices and wish for your data to be shared between them.";
 
 
+//
+// MARK: Subscriptions
+// Subtitle
+"becomeTheBestYou" = "Become the best you";
+"subscription" = "Subscription";
+// Info
+"subscription1" = "  Purchase a subscription for:";
+"subscription2" = "• Access to all the features of the Mind & Body app";
+"subscription3" = "• A promise for improvements and updates to the app";
+"subscription4" = "";
+"termsAndConditions" = "Terms & Conditions";
+"termsAndConditionsDetail" = "The Mind & Body subscription grants you access to use the Mind & Body App for a year. The subscription will automatically renew within 24 hours of the end of the year unless cancelled. You will be charged through your iTunes account. You can manage your subscription in Account Settings. By purchasing the subscription via in-app purchases, you agree to the Apple App Store terms and conditions.";
+// Buttons
+"purchaseSubscription" = "Mind & Body Subscription\nCHF 15 / Year";
+"alreadyHaveSubscription" = "I already have a subscription";
 
 //
 // MARK: Schedule

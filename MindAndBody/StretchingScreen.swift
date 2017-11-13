@@ -451,7 +451,6 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             // Tracking
             updateWeekProgress()
-            updateMonthProgress()
             // Schedule Tracking
             updateScheduleTracking(fromSchedule: fromSchedule)
             //

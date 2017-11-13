@@ -138,12 +138,12 @@ class ScheduleVariables {
     func resetWeekTracking() {
         // Use lastResetWeek in tracking progress array to reset schedule tracking bools to false and and week progress to 0
         var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-        var trackingProgressArray = UserDefaults.standard.array(forKey: "trackingProgress") as! [[Any]]
+        var trackingProgressArray = UserDefaults.standard.object(forKey: "trackingProgress") as! [Any]
         //
         // Current mondays date in week
         let currentMondayDate = Date().firstMondayInCurrentWeek
         // Last Reset = monday of last week reset
-        let lastReset = trackingProgressArray[0][1] as! Date
+        let lastReset = trackingProgressArray[2] as! Date
         
         // Reset if last reset wasn't in current week
         if lastReset != currentMondayDate {
@@ -152,13 +152,13 @@ class ScheduleVariables {
                 // Loop scheduleTracking
                 for i in 0...scheduleTracking.count - 1 {
                     // Loop schedule (week containing days/ full week)
-                    for j in 0...scheduleTracking[i].count {
+                    for j in 0...scheduleTracking[i].count - 1 {
                         // If day/full week not empty
                         if scheduleTracking[i][j].count != 0 {
                             // Loop day/full week
                             for k in 0...scheduleTracking[i][j].count - 1 {
                                 // Loop groups (should always be 0...1, see SchedulDataStructures.scheduleTrackingArrays)
-                                for l in 0...scheduleTracking[i][j][k].count {
+                                for l in 0...scheduleTracking[i][j][k].count - 1 {
                                     // Will always contain something, check SchedulDataStructures.scheduleTrackingArrays
                                     for m in 0...scheduleTracking[i][j][k][l].count - 1 {
                                         scheduleTracking[i][j][k][l][m] = false
@@ -170,9 +170,12 @@ class ScheduleVariables {
                 }
             }
             // Set week progress to 0
-            trackingProgressArray[0][0] = 0
-            // Reset Last Reset
-            trackingProgressArray[0][1] = currentMondayDate
+            trackingProgressArray[0] = 0
+            // Set Last Reset
+            trackingProgressArray[2] = currentMondayDate
+            // Indicate has been reset, to indicate if this func called again on a monday that it already has been reset
+            trackingProgressArray[3] = true
+            //
             UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             // Sync
@@ -180,27 +183,3 @@ class ScheduleVariables {
         }
     }
 }
-
-//
-// Tracking Variables ---------------------------------------------------------------------------------------------------------------
-// TESTS, USUALLY WILL BE ACCESSED FROM AND SET TO USER DEFAULTS
-// Goals
-var weekGoal = 72.0
-//Int()
-var monthGoal = 72.0
-
-// Progress
-var weekProgress = 36.0
-//Int()
-var monthProgress = 36.0
-
-// Monday - Sunday
-var weekTrackingDictionary: [Date: Int] = [:]
-
-// All tracking in % of weeks
-var trackingDictionary: [Date:Int] = [:]
-// All tracking in % of months
-var monthTrackingDictionary: [Date:Int] = [:]
-
-
-

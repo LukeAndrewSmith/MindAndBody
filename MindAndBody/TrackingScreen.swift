@@ -27,6 +27,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     fileprivate var chart: Chart?
     
+    var menuSwipeView = UIView()
+    
     // Time Scale Action Sheet
     let timeScaleTable = UITableView()
     let backgroundViewExpanded = UIButton()
@@ -56,26 +58,24 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func testTrackingValues() {
         let calendar = Calendar(identifier: .gregorian)
-        weekTrackingDictionary = [:]
-        weekTrackingDictionary.updateValue(20, forKey: Date().firstMondayInMonth)
+        //
+        var trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[Date: Int]]
+        trackingDictionaries[0] = [:]
+        trackingDictionaries[0].updateValue(20, forKey: Date().firstMondayInMonth)
 
         
-        trackingDictionary = [:]
+        trackingDictionaries[1] = [:]
         var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date())!
         firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
         //
-        trackingDictionary.updateValue(70, forKey: firstMondayLastMonth)
-        trackingDictionary.updateValue(90, forKey: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!)
-        trackingDictionary.updateValue(70, forKey: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!)
-        trackingDictionary.updateValue(80, forKey: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!)
-
+        trackingDictionaries[1].updateValue(70, forKey: firstMondayLastMonth)
+        trackingDictionaries[1].updateValue(90, forKey: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!)
+        trackingDictionaries[1].updateValue(70, forKey: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!)
+        trackingDictionaries[1].updateValue(80, forKey: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!)
         
-        monthTrackingDictionary = [:]
-        var jan = Date().firstDateInYear
-        jan = jan.firstMondayInMonth
-        monthTrackingDictionary.updateValue(80, forKey: calendar.date(byAdding: .month, value: 1, to: jan)!)
-        monthTrackingDictionary.updateValue(80, forKey: calendar.date(byAdding: .month, value: 2, to: jan)!)
-        monthTrackingDictionary.updateValue(90, forKey: calendar.date(byAdding: .month, value: 3, to: jan)!)
+        //
+        UserDefaults.standard.set(trackingDictionaries, forKey: "trackingDictionaries")
+        ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
         
     }
     
@@ -90,7 +90,6 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         testTrackingValues()
         updateWeekTracking()
         updateTracking()
-        updateMonthTracking()
         
         // Present walkthrough 2
         let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
@@ -98,7 +97,6 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             walkthroughTracking()
         }
        
-        
         // Time scale table
         timeScaleTable.dataSource = self
         timeScaleTable.delegate = self
@@ -156,7 +154,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
         }
         
-        if weekTrackingDictionary.count != 0 {
+        let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[Date: Int]]
+        if trackingDictionaries[0].count != 0 {
             drawGraph()
         } else {
             let warningLabel = UILabel()
@@ -261,8 +260,9 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         let chartPointsCircleLayer = ChartPointsViewsLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, viewGenerator: circleViewGenerator, displayDelay: 0, delayBetweenItems: 0.05, mode: .translate)
         
-        let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 20, thumbBorderWidth: 4)
-        let trackerLayerSettings = ChartPointsLineTrackerLayerSettings(thumbSettings: thumbSettings)
+        let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 50, thumbBorderWidth: 4)
+//        let trackerLayerSettings = ChartPointsLineTrackerLayerSettings(thumbSettings: thumbSettings)
+        let trackerLayerSettings = ChartPointsLineTrackerLayerSettings.init(thumbSettings: thumbSettings, selectNearest: true)
         
         var currentPositionLabels: [UILabel] = []
         
@@ -339,11 +339,16 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.chart = chart
         
         //
-        // Swipe
+        // Menu Swipe
         let rightSwipe = UIScreenEdgePanGestureRecognizer()
         rightSwipe.edges = .left
         rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
-        view.addGestureRecognizer(rightSwipe)
+        menuSwipeView.backgroundColor = .clear
+        menuSwipeView.frame = CGRect(x: 0, y: 0, width: 8.25, height: view.bounds.height)
+        menuSwipeView.addGestureRecognizer(rightSwipe)
+        view.addSubview(menuSwipeView)
+        view.bringSubview(toFront: menuSwipeView)
+        
     }
     
     //
@@ -351,6 +356,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     // --------------------------------------------------------------------------------------
     // Get Chart Points
     func returnChartPoints() -> [ChartPoint] {
+        let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[Date: Int]]
         //
         // Format Date
         let df = DateFormatter()
@@ -359,33 +365,24 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         switch selectedTimeScale {
         // Week
         case 0:
-            let chartData = weekTrackingDictionary.sorted(by: { $0.key < $1.key })
+            let chartData = trackingDictionaries[0].sorted(by: { $0.key < $1.key })
             //
             let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
             return chartPoints
             
         // 1 Month, 3 Months, 6 Months
-        case 1,2,3:
+        case 1,2,3,4,5:
             //
-            let chartData = trackingDictionary.sorted(by: { $0.key < $1.key })
-            //
-            let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
-            
-            return chartPoints
-            
-        // Last year
-        case 4,5:
-           //
-            let chartData = monthTrackingDictionary.sorted(by: { $0.key < $1.key })
+            let chartData = trackingDictionaries[1].sorted(by: { $0.key < $1.key })
             //
             let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
-            
             return chartPoints
             
         //
         default:
             //
-            let chartData = monthTrackingDictionary.sorted(by: { $0.key < $1.key })
+            let chartData = trackingDictionaries[1].sorted(by: { $0.key < $1.key })
+            //
             let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
             return chartPoints
             
@@ -498,13 +495,14 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // All
         case 5:
+            let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[Date: Int]]
             var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
             //
             let df = DateFormatter()
             df.dateFormat = "dd.MM.yyyy"
             //
             if xValues.count == 1 {
-                let keys = monthTrackingDictionary.keys.sorted()
+                let keys = trackingDictionaries[1].keys.sorted()
                 let calendar = Calendar(identifier: .gregorian)
                 let valueToAdd = ChartAxisValueDate(date: keys.first!, formatter: df)
                 xValues.append(valueToAdd)
@@ -645,7 +643,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             let calendar = Calendar(identifier: .gregorian)
             //
-            var startDate = Date().firstDateInYear
+            let startDate = Date().firstDateInYear
             var endDate = calendar.date(byAdding: .month, value: 11, to: startDate)
             endDate = endDate?.firstDateInMonth
             
@@ -672,12 +670,12 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             //
             let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: titleLabelSettings2, formatter: df2)
             //
-            let numberOfDividers = monthTrackingDictionary.count - 1
             //
             let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .quarter, preferredDividers: 4, minSpace: 0, maxTextSize: 12)
             
             //
-            let keys = monthTrackingDictionary.keys.sorted()
+            let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[Date: Int]]
+            let keys = trackingDictionaries[1].keys.sorted()
             let startDate = keys.first!
             var endDate = keys.last!
             if keys.count == 1 {
@@ -724,7 +722,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             //
             let df = DateFormatter()
             df.dateFormat = "MM.yyyy"
-            let keys = monthTrackingDictionary.keys.sorted()
+            let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[Date: Int]]
+            let keys = trackingDictionaries[1].keys.sorted()
             let firstString = df.string(from: keys.first!)
             let lastString = df.string(from: keys.last!)
             return firstString + " - " + lastString
@@ -814,7 +813,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // If data is available
-        if weekTrackingDictionary.count != 0 {
+        let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[Date: Int]]
+        if trackingDictionaries[0].count != 0 {
             //
             currentPositionLabels.forEach{$0.removeFromSuperview()}
             //

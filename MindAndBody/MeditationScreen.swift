@@ -264,7 +264,6 @@ class MeditationScreen: UIViewController {
             //
             // Tracking
             updateWeekProgress()
-            updateMonthProgress()
             //
             // Schedule Tracking
             //            updateScheduleTracking(fromSchedule: fromSchedule)

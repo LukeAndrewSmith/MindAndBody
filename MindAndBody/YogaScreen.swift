@@ -437,7 +437,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             // Tracking
             updateWeekProgress()
-            updateMonthProgress()
             // Schedule Tracking
             updateScheduleTracking(fromSchedule: fromSchedule)
             // Dismiss
@@ -553,7 +552,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 UIApplication.shared.isIdleTimerDisabled = false
                 // Tracking
                 updateWeekProgress()
-                updateMonthProgress()
                 self.dismiss(animated: true)
             }
         }

@@ -330,18 +330,23 @@ enum Register {
     
     // --------------------------------------------------------
     // Tracking
-    static let registerTrackingProgressArray: [[Any]] =
-        // Update progress (first monday of last week/month completed (lastResetWeek/Month) is used to check if progress needs to be reset to 0 for first entry of new week/month)
-        [
-            // Week - [weekProgress, lastResetWeek]
-            [0, Date().firstMondayInCurrentWeek],
-            // Month - [monthProgress, lastResetMonth]
-            [0, Date().firstMondayInMonth]
-    ]
+    static let registerTrackingProgressArray: [Any] =
+        // Update progress (first monday of last week completed (lastResetWeek) is used to check if progress needs to be reset to 0 for first entry of new week)
+            // Week - [weekProgress, weekGoal, lastResetWeek]
+        [0, 1, Date().firstMondayInCurrentWeek]
     
-    //
-    static let registerTrackingArrays: [[Date: Int]] =
+    // Tracking percentages
+        // % = completed / planned
+    static let registerTrackingDictionaries: [[Date: Int]] =
     [
-        
+        // Week Tracking
+            // Tracks % during each week
+                // -> Reset every week
+                    // Stores 7 values, 1 for each day
+        [:],
+        // Tracking
+            // Tracks % associated with monday of every week from beginning of using the app
+        [:]
     ]
+
 }

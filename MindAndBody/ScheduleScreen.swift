@@ -428,11 +428,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             // Day Swipes
             daySwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
             daySwipeLeft.direction = UISwipeGestureRecognizerDirection.left
-            view.addGestureRecognizer(daySwipeLeft)
+            scheduleTable.addGestureRecognizer(daySwipeLeft)
             //
             daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
             daySwipeRight.direction = UISwipeGestureRecognizerDirection.right
-            view.addGestureRecognizer(daySwipeRight)
+            scheduleTable.addGestureRecognizer(daySwipeRight)
         }
         
         //

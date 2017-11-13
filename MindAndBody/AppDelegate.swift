@@ -39,10 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         
-        
-        let currentiCloudToken = FileManager.default.ubiquityIdentityToken
-        UserDefaults.standard.set("", forKey: "com.apple.MindAndBody.UbiquityIdentityToken")
-        
         //
         // Register Defaults --------------------------------------------------------------------------------
         //
@@ -62,8 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["profileAnswers" : scheduleDataStructures.defaultProfileAnswers])
         //
         // Tracking
-        // Tracking arrays [weekTracking, tracking, monthTracking]
-        UserDefaults.standard.register(defaults: ["trackingArrays" : Register.registerTrackingArrays])
+        // Tracking arrays [weekTracking, tracking]
+        UserDefaults.standard.register(defaults: ["trackingDictionaries" : Register.registerTrackingDictionaries])
         // Progress, [currentProgress, lastResetWeek/Month]
         UserDefaults.standard.register(defaults: ["trackingProgress" : Register.registerTrackingProgressArray])
         //
