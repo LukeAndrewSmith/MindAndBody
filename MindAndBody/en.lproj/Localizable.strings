@@ -85,8 +85,18 @@
 
 "timedSession" = "Timed Sessions";
 
+"homePage" = "Home Page";
+
 "on" = "ON";
 "off" = "OFF";
+
+//
+// MARK: Settings
+"general" = "General";
+"timedSessions" = "Timed Sessions";
+"restTimes" = "Rest Times";
+"sessions" = "Sessions";
+"iCloud" = "iCloud";
 
 
 
@@ -1803,7 +1813,7 @@
         //
         // Titles //
         "backgroundImage" = "Background Image";
-        "defaultImage" = "Default Session Image";
+        "defaultImage" = "Default Image";
         "restTime" = "Rest Times";
         "reset" = "Reset";
 
