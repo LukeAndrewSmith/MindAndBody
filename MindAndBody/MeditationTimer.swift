@@ -144,7 +144,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     let selectionView = UIView()
     let okButton = UIButton()
-    let backgroundViewSelection = UIButton()
     //
     // Presets
     let presetsTableView = UITableView()
@@ -628,12 +627,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         selectionView.addSubview(okButton)
         //
-        // Background View
-        backgroundViewSelection.backgroundColor = .black
-        backgroundViewSelection.addTarget(self, action: #selector(backgroundViewSelectionAction(_:)), for: .touchUpInside)
-        //
-        //
-        //
         durationTimeLabel.textColor = Colours.colour1
         durationTimeLabel.font = UIFont(name: "SFUIDisplay-thin", size: 17)
         durationTimeLabel.text = "  " + NSLocalizedString("duration", comment: "")
@@ -653,7 +646,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         okButton2.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         okButton2.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
         //
-        backgroundViewSelection2.backgroundColor = .clear
     }
     
     
@@ -665,40 +657,13 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         updateRows()
         //
-        if (UIApplication.shared.keyWindow?.subviews.contains(self.presetsTableView))! {
+        if ActionSheet.shared.actionSheet.subviews.contains(self.presetsTableView) {
             //
-            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: self.presetsTableView.frame.size.height)
-                self.backgroundViewSelection.alpha = 0
-            }, completion: { finished in
-                //
-                self.presetsTableView.removeFromSuperview()
-                self.backgroundViewSelection.removeFromSuperview()
-                //
-                self.duration.isEnabled = true
-                self.startingBell.isEnabled = true
-                self.intervalBells.isEnabled = true
-                self.endingBell.isEnabled = true
-                self.backgroundSound.isEnabled = true
-            })
-            //
-            isDurationSelected()
-            
+            ActionSheet.shared.animateActionSheetDown()
             //
         } else {
-            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                //
-                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height)
-                self.backgroundViewSelection.alpha = 0
-                //
-            }, completion: { finished in
-                for i in self.selectionView.subviews {
-                    i.removeFromSuperview()
-                }
-                //
-                self.selectionView.removeFromSuperview()
-                self.backgroundViewSelection.removeFromSuperview()
-            })
+            //
+            ActionSheet.shared.animateActionSheetDown()
             
             // Extra
             switch selectedItem {
@@ -777,8 +742,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 let hmsArray = convertToHMS(time: 0, index: 0)
                 durationDetail.text = String(hmsArray[0]) + "h " + String(hmsArray[1]) + "m " + String(hmsArray[2]) + "s"
                 //
-                isDurationSelected()
-                //
                 // Check if interval bells should be removed (if new duration is shorter than old, there might be some interval bells that are after the end time and that should be removed)
                 // > 2 because starting and ending bells included in array
                 if (meditationArray[selectedPreset][2] as! [[Int]]).count > 2 {
@@ -856,7 +819,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 // Present Times View
                 // Hide original Selection View
-                selectionView.isHidden = true
+//                ActionSheet.shared.actionSheetBackgroundView.isHidden = true
                 //
                 // PickerView
                 selectionView2.addSubview(pickerViewDuration)
@@ -865,6 +828,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 selectionView2.addSubview(intervalBellTimeLabel)
                 intervalBellTimeLabel.textAlignment = .left
+                //
+                // iPhone X
+                var toMinus = CGFloat()
+                if UIScreen.main.nativeBounds.height == 2436 {
+                    toMinus = 10 + 34
+                } else {
+                    toMinus = 10
+                }
                 //
                 // Select Rows
                 pickerViewDuration.selectRow(0, inComponent: 0, animated: true)
@@ -878,11 +849,11 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //
                     let selectionWidth = self.view.frame.size.width - 20
                     let selectionHeight = CGFloat(147 + 49)
-                    self.selectionView2.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
+                    self.selectionView2.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - toMinus, width: selectionWidth, height: selectionHeight)
                     //
                     self.intervalBellTimeLabel.frame = CGRect(x: 0, y: 0, width: self.selectionView2.frame.size.width, height: 22)
                     //
-                    self.tableViewBells.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
+                    self.tableViewBells.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - toMinus, width: selectionWidth, height: selectionHeight)
                     //
                     self.pickerViewDuration.frame = CGRect(x: 0, y: 0, width: self.selectionView2.frame.size.width, height: self.selectionView2.frame.size.height - 49)
                     //
@@ -933,23 +904,33 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
-                //
-                selectionView.isHidden = false
-                selectionView.frame = CGRect(x: selectionView.frame.maxX, y: selectionView.frame.minY, width: 0, height: selectionView.frame.size.height)
+                
+                
+                // iPhone X
+                var toMinus = CGFloat()
+                if UIScreen.main.nativeBounds.height == 2436 {
+                    toMinus = 10 + 34
+                } else {
+                    toMinus = 10
+                }
                 //
                 removeView = false
+                
+                //
+                ActionSheet.shared.actionSheetBackgroundView.center.x += 2 * view.bounds.width
+                ActionSheet.shared.actionSheet.isHidden = false
+                ActionSheet.shared.cancelButton.isHidden = false
                 
                 // Position
                 UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                     //
+                    ActionSheet.shared.actionSheetBackgroundView.center.x -= self.view.bounds.width
+                    self.backgroundViewSelection2.center.x -= self.view.bounds.width
                     //
                     let selectionWidth = self.view.frame.size.width - 20
                     let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
-                    self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
                     //
-                    self.selectionView2.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: 0, height: self.selectionView.frame.size.height)
-                    self.pickerViewDuration.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: 0, height: self.selectionView.frame.size.height)
-                    self.okButton2.frame = CGRect(x: 0, y: self.selectionView.frame.size.height - 49, width: 0, height: 49)
+                    self.selectionView2.center.x -= self.view.bounds.width
                     //
                     //
                     self.tableViewIntervalBells.reloadData()
@@ -966,6 +947,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //
                     self.hoursLabel.alpha = 1
                     self.minutesLabel.alpha = 1
+                    //
+                    ActionSheet.shared.actionSheetBackgroundView.isEnabled = true
                 })
                 
             default: break
@@ -1029,19 +1012,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Remove View
         if removeView == true {
             //
-            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                //
-                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height)
-                self.backgroundViewSelection.alpha = 0
-                //
-            }, completion: { finished in
-                for i in self.selectionView.subviews {
-                    i.removeFromSuperview()
-                }
-                //
-                self.selectionView.removeFromSuperview()
-                self.backgroundViewSelection.removeFromSuperview()
-            })
+            ActionSheet.shared.animateActionSheetDown()
             //
         }
     }
@@ -1193,7 +1164,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // Check if duration option is completed ------------------------------------------------------------------------------
     //
-    func isDurationSelected() {
+    func isDurationSelected() -> Bool {
         //
         // Enable only if duration selected
         let defaults = UserDefaults.standard
@@ -1202,19 +1173,13 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             if meditationArray[selectedPreset][1][0].count == 0 {
                 print("thatsnotgonewell")
             } else if (meditationArray[selectedPreset][1][0][0] as! Int) == 0 {
-                self.startingBell.isEnabled = false
-                self.intervalBells.isEnabled = false
-                self.endingBell.isEnabled = false
-                self.backgroundSound.isEnabled = false
+                return false
             } else {
-                self.startingBell.isEnabled = true
-                self.intervalBells.isEnabled = true
-                self.endingBell.isEnabled = true
-                self.backgroundSound.isEnabled = true
+                return true
             }
         }
+        return false
     }
-    
     
     
     //
@@ -1233,6 +1198,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         presetsTableView.reloadData()
         //
+        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88 - 49 - 20
+        let tableWidth = UIScreen.main.bounds.width - 20
+        self.presetsTableView.frame = CGRect(x: 0, y: 0, width: tableWidth, height: tableHeight)
         //
         ActionSheet.shared.setupActionSheet()
         ActionSheet.shared.actionSheet.addSubview(presetsTableView)
@@ -1284,17 +1252,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
         selectionView.addSubview(okButton)
         //
-        backgroundViewSelection.alpha = 0
-        UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
-        backgroundViewSelection.frame = UIScreen.main.bounds
-        // Animate fade and size
-        // Position
-        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            //
-            self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
-            //
-            self.backgroundViewSelection.alpha = 0.5
-        }, completion: nil)
+        selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
+        //
+        ActionSheet.shared.setupActionSheet()
+        ActionSheet.shared.actionSheet.addSubview(selectionView)
+        let heightToAdd = selectionView.bounds.height
+        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+        ActionSheet.shared.resetCancelFrame()
+        ActionSheet.shared.animateActionSheetUp()
     }
     
     // Starting Bell
@@ -1302,7 +1267,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         okButton.isEnabled = true
         //
-        if isDeleting == false {
+        
+        if isDeleting == false && isDurationSelected() {
             selectedItem = 2
             //
             selectedStartingBell = -1
@@ -1323,20 +1289,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 okButton.isEnabled = true
             }
             //
-            backgroundViewSelection.alpha = 0
-            backgroundViewSelection.frame = UIScreen.main.bounds
+            selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
             //
-            UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
-            UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
-            // Animate fade and size
-            // Position
-            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //
-                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
-                //
-                self.backgroundViewSelection.alpha = 0.5
-                //
-            }, completion: nil)
+            ActionSheet.shared.setupActionSheet()
+            ActionSheet.shared.actionSheet.addSubview(selectionView)
+            let heightToAdd = selectionView.bounds.height
+            ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+            ActionSheet.shared.resetCancelFrame()
+            ActionSheet.shared.animateActionSheetUp()
             
             // Remove Delete Button
         } else {
@@ -1368,7 +1328,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         okButton.isEnabled = true
         //
-        if isDeleting == false {
+        if isDeleting == false && isDurationSelected() {
             selectedItem = 3
             //
             selectedIntervalBell = -1
@@ -1390,20 +1350,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 okButton.isEnabled = true
             }
             //
-            backgroundViewSelection.alpha = 0
-            backgroundViewSelection.frame = UIScreen.main.bounds
+            selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
             //
-            UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
-            UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
-            // Animate fade and size
-            // Position
-            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //
-                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
-                //
-                self.backgroundViewSelection.alpha = 0.5
-                //
-            }, completion: nil)
+            ActionSheet.shared.setupActionSheet()
+            ActionSheet.shared.actionSheet.addSubview(selectionView)
+            let heightToAdd = selectionView.bounds.height
+            ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+            ActionSheet.shared.resetCancelFrame()
+            ActionSheet.shared.animateActionSheetUp()
             
             // Remove Delete Button
         } else {
@@ -1435,7 +1389,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         okButton.isEnabled = true
         //
-        if isDeleting == false {
+        if isDeleting == false && isDurationSelected() {
             selectedItem = 4
             //
             selectedEndingBell = -1
@@ -1456,20 +1410,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 okButton.isEnabled = true
             }
             //
-            backgroundViewSelection.alpha = 0
-            backgroundViewSelection.frame = UIScreen.main.bounds
+            selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
             //
-            UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
-            UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
-            // Animate fade and size
-            // Position
-            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //
-                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
-                //
-                self.backgroundViewSelection.alpha = 0.5
-                //
-            }, completion: nil)
+            ActionSheet.shared.setupActionSheet()
+            ActionSheet.shared.actionSheet.addSubview(selectionView)
+            let heightToAdd = selectionView.bounds.height
+            ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+            ActionSheet.shared.resetCancelFrame()
+            ActionSheet.shared.animateActionSheetUp()
             
             
             // Remove Delete Button
@@ -1502,7 +1450,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         okButton.isEnabled = true
         //
-        if isDeleting == false {
+        if isDeleting == false && isDurationSelected() {
             selectedItem = 5
             //
             selectedBackgroundSound = -1
@@ -1523,20 +1471,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 okButton.isEnabled = true
             }
             //
-            backgroundViewSelection.alpha = 0
-            backgroundViewSelection.frame = UIScreen.main.bounds
+            selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
             //
-            UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
-            UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
-            // Animate fade and size
-            // Position
-            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //
-                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
-                //
-                self.backgroundViewSelection.alpha = 0.5
-                //
-            }, completion: nil)
+            ActionSheet.shared.setupActionSheet()
+            ActionSheet.shared.actionSheet.addSubview(selectionView)
+            let heightToAdd = selectionView.bounds.height
+            ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+            ActionSheet.shared.resetCancelFrame()
+            ActionSheet.shared.animateActionSheetUp()
             
             
             // Remove Delete Button
@@ -1952,20 +1894,11 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //            var presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
             // Add Custom Meditation
             if indexPath.row == meditationArray.count {
-                let snapShot1 = presetsTableView.snapshotView(afterScreenUpdates: false)
-                snapShot1?.center.x = view.center.x
-                snapShot1?.center.y = presetsTableView.center.y - UIApplication.shared.statusBarFrame.height - (navigationController?.navigationBar.frame.size.height)!
-                view.addSubview(snapShot1!)
-                self.presetsTableView.isHidden = true
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.backgroundViewSelection.alpha = 0
-                }, completion: { finished in
-                    self.backgroundViewSelection.isHidden = true
-                })
+            
+                ActionSheet.shared.actionSheetBackgroundView.isHidden = true
                 
                 //
                 // Alert and Functions
-                //
                 //
                 let inputTitle = NSLocalizedString("meditationInputTitle", comment: "")
                 //
@@ -1994,111 +1927,23 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                     
                     //
-                    // Enable rows
-                    self.isDurationSelected()
+                    ActionSheet.shared.actionSheetBackgroundView.isHidden = false
+                    //
+                    self.presetsTableView.reloadData()
+                    // Dismiss and select new row
+                    //
+                    let selectedIndexPath = NSIndexPath(row: meditationArray.count - 1, section: 0)
+                    self.presetsTableView.selectRow(at: selectedIndexPath as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
+                    self.selectedPreset = selectedIndexPath.row
+                    //
+                    self.presetsDetail.text = meditationArray[self.selectedPreset][0][0][0] as? String
+                    //
+                    tableView.deselectRow(at: indexPath, animated: true)
                     
-                    //
-                    self.presetsTableView.isHidden = false
-                    snapShot1?.removeFromSuperview()
-                    //
-                    self.backgroundViewSelection.isHidden = false
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.backgroundViewSelection.alpha = 0.5
-                        self.presetsTableView.reloadData()
-                        // Dismiss and select new row
-                    }, completion: { finished in
-                        //
-                        //
-                        //                        let presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
-                        //
-                        let selectedIndexPath = NSIndexPath(row: meditationArray.count - 1, section: 0)
-                        self.presetsTableView.selectRow(at: selectedIndexPath as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
-                        self.selectedPreset = selectedIndexPath.row
-                        //
-                        self.presetsDetail.text = meditationArray[self.selectedPreset][0][0][0] as? String
-                        //
-                        tableView.deselectRow(at: indexPath, animated: true)
-                        
-                        //
-                        // Dismiss Table
-                        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: self.presetsTableView.frame.size.height)
-                            self.backgroundViewSelection.alpha = 0
-                        }, completion: { finished in
-                            //
-                            self.presetsTableView.removeFromSuperview()
-                            self.backgroundViewSelection.removeFromSuperview()
-                        })
-                        //
-                        // Animate up new elements
-                        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                            //
-                            self.presetsConstraint.constant = 0
-                            self.durationConstraint.constant = 0
-                            self.startingConstraint.constant = 0
-                            self.intervalConstraint.constant = 0
-                            self.endingConstraint.constant = 0
-                            self.backgroundConstraint.constant = 0
-                            //
-                            self.beginButtonBottom.constant = 0
-                            self.seperatorLine.alpha = 1
-                            self.view.layoutIfNeeded()
-                        }, completion: { finished in
-                            //
-                            self.duration.isEnabled = true
-                            self.startingBell.isEnabled = true
-                            self.intervalBells.isEnabled = true
-                            self.endingBell.isEnabled = true
-                            self.backgroundSound.isEnabled = true
-                            self.isDurationSelected()
-                        })
-                        //
-                        self.updateRows()
-                    })
-                    
-                    //
-                })
-                okAction.isEnabled = false
-                alert.addAction(okAction)
-                // Cancel reset action
-                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
-                    UIAlertAction in
-                    //
-                    self.backgroundViewSelection.isHidden = false
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.backgroundViewSelection.alpha = 0.5
-                    })
-                    //
-                    self.presetsTableView.isHidden = false
-                    snapShot1?.removeFromSuperview()
-                }
-                alert.addAction(cancelAction)
-                // 4. Present the alert.
-                self.present(alert, animated: true, completion: nil)
-                tableView.deselectRow(at: indexPath, animated: true)
-                //
-                // Select Custom Meditation
-            } else {
-                //
-                selectedPreset = indexPath.row
-                //
-                //                let presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
-                //
-                presetsDetail.text = meditationArray[selectedPreset][0][0][0] as? String
-                //
-                tableView.deselectRow(at: indexPath, animated: true)
-                // Dismiss Table
-                if meditationArray.count != 0 {
                     //
                     // Dismiss Table
-                    UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                        self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: self.presetsTableView.frame.size.height)
-                        self.backgroundViewSelection.alpha = 0
-                    }, completion: { finished in
-                        //
-                        self.presetsTableView.removeFromSuperview()
-                        self.backgroundViewSelection.removeFromSuperview()
-                    })
+                    ActionSheet.shared.animateActionSheetDown()
+
                     //
                     // Animate up new elements
                     UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -2120,7 +1965,60 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                         self.intervalBells.isEnabled = true
                         self.endingBell.isEnabled = true
                         self.backgroundSound.isEnabled = true
-                        self.isDurationSelected()
+                    })
+                    //
+                    self.updateRows()
+                    //
+                })
+                okAction.isEnabled = false
+                alert.addAction(okAction)
+                // Cancel reset action
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                    //
+                    ActionSheet.shared.actionSheetBackgroundView.isHidden = false
+                }
+                alert.addAction(cancelAction)
+                // 4. Present the alert.
+                self.present(alert, animated: true, completion: nil)
+                tableView.deselectRow(at: indexPath, animated: true)
+                //
+                // Select Custom Meditation
+            } else {
+                //
+                selectedPreset = indexPath.row
+                //
+                //                let presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
+                //
+                presetsDetail.text = meditationArray[selectedPreset][0][0][0] as? String
+                //
+                tableView.deselectRow(at: indexPath, animated: true)
+                // Dismiss Table
+                if meditationArray.count != 0 {
+                    //
+                    // Dismiss Table
+                    ActionSheet.shared.animateActionSheetDown()
+                    //
+                    // Animate up new elements
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        //
+                        self.presetsConstraint.constant = 0
+                        self.durationConstraint.constant = 0
+                        self.startingConstraint.constant = 0
+                        self.intervalConstraint.constant = 0
+                        self.endingConstraint.constant = 0
+                        self.backgroundConstraint.constant = 0
+                        //
+                        self.beginButtonBottom.constant = 0
+                        self.seperatorLine.alpha = 1
+                        self.view.layoutIfNeeded()
+                    }, completion: { finished in
+                        //
+                        self.duration.isEnabled = true
+                        self.startingBell.isEnabled = true
+                        self.intervalBells.isEnabled = true
+                        self.endingBell.isEnabled = true
+                        self.backgroundSound.isEnabled = true
                     })
                 }
                 //
@@ -2163,8 +2061,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             okButton.isEnabled = true
             //
-            //            var intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
-            //
             // Interval Bells
             // [2] = bells array
             var intervalBellsArray = meditationArray[selectedPreset][2] as! [[Int]]
@@ -2181,15 +2077,34 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 intervalBellStage = 1
                 tableViewBells.reloadData()
                 //
-                UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection2, aboveSubview: selectionView)
-                backgroundViewSelection2.frame = UIScreen.main.bounds
+                
+                ActionSheet.shared.actionSheetBackgroundView.isEnabled = false
+
                 // View
-                selectionView2.alpha = 0
-                UIApplication.shared.keyWindow?.insertSubview(selectionView2, aboveSubview: backgroundViewSelection2)
-                selectionView2.frame = CGRect(x: selectionView.frame.maxX, y: selectionView.frame.minY, width: 0, height: selectionView.frame.size.height)
+                UIApplication.shared.keyWindow?.addSubview(selectionView2)
+                UIApplication.shared.keyWindow?.bringSubview(toFront: selectionView2)
+                
+                // iPhone X
+                var toMinus = CGFloat()
+                if UIScreen.main.nativeBounds.height == 2436 {
+                    toMinus = 10 + 34
+                } else {
+                    toMinus = 10
+                }
+                selectionView2.frame = CGRect(x: view.frame.maxX, y: view.frame.maxY - selectionView.bounds.height - toMinus, width: self.view.frame.size.width - 20, height: selectionView.frame.size.height)
                 // Tableview
                 selectionView2.addSubview(tableViewBells)
                 tableViewBells.frame = CGRect(x: 0, y: 0, width: selectionView2.frame.size.width, height: selectionView2.frame.size.height - 49)
+                
+                //
+                backgroundViewSelection2.frame = UIScreen.main.bounds
+                backgroundViewSelection2.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+                backgroundViewSelection2.center.x = view.center.x + view.bounds.width
+                UIApplication.shared.keyWindow?.addSubview(backgroundViewSelection2)
+                UIApplication.shared.keyWindow?.bringSubview(toFront: backgroundViewSelection2)
+                
+                //
+                UIApplication.shared.keyWindow?.insertSubview(selectionView2, aboveSubview: backgroundViewSelection2)
                 
                 // ok
                 okButton2.frame = CGRect(x: 0, y: selectionView2.frame.size.height - 49, width: selectionView2.frame.size.width, height: 49)
@@ -2200,9 +2115,12 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Position
                 UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                     //
+                    ActionSheet.shared.actionSheetBackgroundView.center.x -= self.view.bounds.width
+                    self.backgroundViewSelection2.center.x = self.view.center.x
+                    //
                     let selectionWidth = self.view.frame.size.width - 20
                     let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
-                    self.selectionView2.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
+                    self.selectionView2.frame = CGRect(x: 10, y: self.view.frame.maxY - self.selectionView2.bounds.height - toMinus, width: selectionWidth, height: selectionHeight)
                     //
                     self.selectionView2.alpha = 1
                     //
@@ -2213,9 +2131,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //
                     self.selectionView2.alpha = 1
                     //
-                }, completion: nil)
+                }, completion: { finished in
+                    //
+                    ActionSheet.shared.actionSheet.isHidden = true
+                    ActionSheet.shared.cancelButton.isHidden = true
+                })
                 //
                 tableViewIntervalBells.deselectRow(at: indexPath, animated: true)
+                
             }
             
         case tableViewBackgroundSounds:

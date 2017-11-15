@@ -1474,7 +1474,6 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     // Prests
     @IBAction func presetsAction(_ sender: Any) {
         //
-        UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
         let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88 - 49 - 20
         let tableWidth = UIScreen.main.bounds.width - 20
         self.presetsTableView.frame = CGRect(x: 0, y: 0, width: tableWidth, height: tableHeight)

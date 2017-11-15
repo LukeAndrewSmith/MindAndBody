@@ -192,6 +192,10 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         presetsTableView.layer.borderColor = Colours.colour1.cgColor
         presetsTableView.layer.borderWidth = 1
         //
+        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88 - 49 - 20
+        let tableWidth = UIScreen.main.bounds.width - 20
+        self.presetsTableView.frame = CGRect(x: 0, y: 0, width: tableWidth, height: tableHeight)
+        //
         ActionSheet.shared.setupActionSheet()
         ActionSheet.shared.actionSheet.addSubview(presetsTableView)
         let heightToAdd = presetsTableView.bounds.height
@@ -697,7 +701,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     // MARK: Presets Button Action -----------------------------------------------------------------------------------------------------------------
     //
     @IBAction func presetsButtonAction(_ sender: Any) {
-        ActionSheet.shared.animateActionSheetDown()
+        ActionSheet.shared.animateActionSheetUp()
     }
     
     

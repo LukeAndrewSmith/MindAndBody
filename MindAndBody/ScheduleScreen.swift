@@ -789,7 +789,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             
         case scheduleChoiceTable:
             var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
             // Creat new schedule
             if indexPath.row == schedules.count {
                 // Dismiss action sheet
