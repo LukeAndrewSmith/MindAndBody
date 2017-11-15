@@ -15,30 +15,6 @@ import UIKit
 //
 class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    //    // TEMPLATE
-    //    //
-    //    // Find out session type
-    //    // Switch SelectedSession.shared.selectedSession[0] and SelectedSession.shared.selectedSession[1]
-    //    switch SelectedSession.shared.selectedSession[0] {
-    //    // Warmup
-    //    case 0:
-    //
-    //    // Workout
-    //    case 1:
-    //
-    //    // Cardio
-    //    case 2:
-    //
-    //    // Stretching
-    //    case 3:
-    //
-    //    // Yoga
-    //    case 4:
-    //
-    //    default:
-    //    break
-    //    }
-    
     //
     // Selected row
     var selectedRow = Int()
@@ -907,18 +883,9 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         switch tableView {
         case presetsTableView:
             // Add Custom Workout
-            if indexPath.row == (customSessionsArray[SelectedSession.shared.selectedSession[0]]  as [[Any]]).count {
+            if indexPath.row == customSessionsArray[SelectedSession.shared.selectedSession[0]].count {
                 
-//                let snapShot1 = presetsTableView.snapshotView(afterScreenUpdates: false)
-//                snapShot1?.center.x = view.center.x
-//                snapShot1?.center.y = presetsTableView.center.y - UIApplication.shared.statusBarFrame.height - (navigationController?.navigationBar.frame.size.height)!
-//                view.addSubview(snapShot1!)
-//                self.presetsTableView.isHidden = true
-//                UIView.animate(withDuration: 0.3, animations: {
-//                    self.backgroundViewExpanded.alpha = 0
-//                }, completion: { finished in
-//                    self.backgroundViewExpanded.isHidden = true
-//                })
+                ActionSheet.shared.actionSheetBackgroundView.isHidden = true
                 
                 // Alert and Functions
                 //
@@ -968,44 +935,32 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     self.presetsTableView.selectRow(at: selectedIndexPath as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
                     self.selectedPreset = lastIndex
                     //
-                    self.presetsTableView.isHidden = false
-                    snapShot1?.removeFromSuperview()
-                    self.backgroundViewExpanded.isHidden = false
                     //
                     // Presets title
                     let string = customSessionsArray[SelectedSession.shared.selectedSession[0]][self.selectedPreset][0][0] as! String
                     self.presetsButton.setTitle("- " + string + " -", for: .normal)
                     
                     //
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.backgroundViewExpanded.alpha = 0.5
-                        self.presetsTableView.reloadData()
-                        // Dismiss and select new row
-                    }, completion: { finished in
-                        //
-                        tableView.deselectRow(at: indexPath, animated: true)
-                        // Reload
-                        self.customTableView.reloadData()
-                        self.beginButtonEnabled()
-                        //
-                        // Element Positions
-                        self.presetsBottom.constant = self.view.frame.size.height - 73.5
-                        self.tableViewConstraintTop.constant = 122.5
-                        self.tableViewConstraintBottom.constant = 49
-                        self.beginButtonConstraint.constant = 0
-                        //
-                        // Dismiss presets table
+                    self.presetsTableView.reloadData()
+                    //
+                    tableView.deselectRow(at: indexPath, animated: true)
+                    // Reload
+                    self.customTableView.reloadData()
+                    self.beginButtonEnabled()
+                    //
+                    // Element Positions
+                    self.presetsBottom.constant = self.view.frame.size.height - 73.5
+                    self.tableViewConstraintTop.constant = 122.5
+                    self.tableViewConstraintBottom.constant = 49
+                    self.beginButtonConstraint.constant = 0
+                    //
+                    // Dismiss presets table
+                    ActionSheet.shared.actionSheetBackgroundView.isHidden = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+                        ActionSheet.shared.animateActionSheetDown()
                         UIView.animate(withDuration: AnimationTimes.animationTime3, animations: {
                             self.view.layoutIfNeeded()
                         }, completion: nil)
-                        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
-                            self.backgroundViewExpanded.alpha = 0
-                        }, completion: { finished in
-                            //
-                            self.presetsTableView.removeFromSuperview()
-                            self.backgroundViewExpanded.removeFromSuperview()
-                        })
                     })
                 })
                 okAction.isEnabled = false
@@ -1014,13 +969,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
                     UIAlertAction in
                     //
-                    self.backgroundViewExpanded.isHidden = false
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.backgroundViewExpanded.alpha = 0.5
-                    })
-                    //
-                    self.presetsTableView.isHidden = false
-                    snapShot1?.removeFromSuperview()
+                    ActionSheet.shared.actionSheetBackgroundView.isHidden = false
                 }
                 alert.addAction(cancelAction)
                 // 4. Present the alert.
@@ -1064,18 +1013,10 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     //
                     self.beginButtonConstraint.constant = 0
                     //
-                    // Dismiss presets table
-                    UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                        self.customTableView.reloadData()
-                        self.beginButtonEnabled()
-                        self.view.layoutIfNeeded()
-                        self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
-                        self.backgroundViewExpanded.alpha = 0
-                    }, completion: { finished in
-                        //
-                        self.presetsTableView.removeFromSuperview()
-                        self.backgroundViewExpanded.removeFromSuperview()
-                    })
+                    ActionSheet.shared.animateActionSheetDown()
+                    self.customTableView.reloadData()
+                    self.beginButtonEnabled()
+                    self.view.layoutIfNeeded()
                 }
                 //
                 customTableView.reloadData()
@@ -1089,8 +1030,13 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             selectedSection = indexPath.section
             //
             setsRepsPicker.reloadAllComponents()
-            // View
-            UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
+            // okButton
+            //
+            setsRepsView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 20, height: 147 + 49)
+            //
+            okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
+
+            // Setup picker
             //
             // Set component widths, indicator label frame and select row in picker
             let componentWidth = setsRepsPicker.frame.size.width / 3
@@ -1151,63 +1097,69 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             default:
                 break
             }
-            // okButton
-            okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
             //
-            UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
-            setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: UIScreen.main.bounds.width - 20, height: 147 + 49)
             //
-            backgroundViewExpanded.alpha = 0
-            UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
-            backgroundViewExpanded.frame = UIScreen.main.bounds
-            //
-            // Animate Picker in
-            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //
-                self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY - 147 - 49 - 10, width: UIScreen.main.bounds.width - 20, height: 147 + 49)
-                // ok
-                self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
-                // Sets Indicator Label
-                self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
-                //
-                self.backgroundViewExpanded.alpha = 0.7
-                //
-                // Redo Sets indicator and picker frame
-                switch SelectedSession.shared.selectedSession[0] {
-                // Warmup - Sets x Reps
-                case 0:
-                    self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
-                    self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                    self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
-                // Workout
-                case 1:
-                    // Circuit - Reps
-                    if customSessionsArray[SelectedSession.shared.selectedSession[0]][self.selectedPreset][2].count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]][self.selectedPreset][2][1] as! Int == -1 {
-                        //
-                        self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
-                        self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.21, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 70, height: 30)
-                        self.setsIndicatorLabel.text = NSLocalizedString("reps", comment: "")
-                        // Normal - Sets x Reps
-                    } else {
-                        self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
-                        self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                        self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
-                    }
-                // Cardio
-                case 2:
-                    self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
-                    self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.13, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 70, height: 30)
-                    self.setsIndicatorLabel.text = NSLocalizedString("s", comment: "")
-                // Stretching/Yoga - Breaths
-                case 3,4:
-                    self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
-                    self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.13, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 130, height: 30)
-                    self.setsIndicatorLabel.text = NSLocalizedString("breaths", comment: "")
-                default:
-                    break
-                }
-            }, completion: nil)
+            ActionSheet.shared.setupActionSheet()
+            ActionSheet.shared.actionSheet.addSubview(setsRepsView)
+            let heightToAdd = setsRepsView.bounds.height
+            ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+            ActionSheet.shared.resetCancelFrame()
+            ActionSheet.shared.animateActionSheetUp()
+            
+            
+            // TODO: REMOVE!!
+//            //
+//            backgroundViewExpanded.alpha = 0
+//            UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
+//            backgroundViewExpanded.frame = UIScreen.main.bounds
+//            //
+//            // Animate Picker in
+//            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+//                //
+//                self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY - 147 - 49 - 10, width: UIScreen.main.bounds.width - 20, height: 147 + 49)
+//                // ok
+//                self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
+//                // Sets Indicator Label
+//                self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+//                self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+//                //
+//                self.backgroundViewExpanded.alpha = 0.7
+//                //
+//                // Redo Sets indicator and picker frame
+//                switch SelectedSession.shared.selectedSession[0] {
+//                // Warmup - Sets x Reps
+//                case 0:
+//                    self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+//                    self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+//                    self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+//                // Workout
+//                case 1:
+//                    // Circuit - Reps
+//                    if customSessionsArray[SelectedSession.shared.selectedSession[0]][self.selectedPreset][2].count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]][self.selectedPreset][2][1] as! Int == -1 {
+//                        //
+//                        self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
+//                        self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.21, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 70, height: 30)
+//                        self.setsIndicatorLabel.text = NSLocalizedString("reps", comment: "")
+//                        // Normal - Sets x Reps
+//                    } else {
+//                        self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
+//                        self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+//                        self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
+//                    }
+//                // Cardio
+//                case 2:
+//                    self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
+//                    self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.13, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 70, height: 30)
+//                    self.setsIndicatorLabel.text = NSLocalizedString("s", comment: "")
+//                // Stretching/Yoga - Breaths
+//                case 3,4:
+//                    self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
+//                    self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.13, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 130, height: 30)
+//                    self.setsIndicatorLabel.text = NSLocalizedString("breaths", comment: "")
+//                default:
+//                    break
+//                }
+//            }, completion: nil)
             
         //
         case movementsTableView:
@@ -1255,24 +1207,17 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
             //
             // Remove Table
-            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                self.movementsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.movementsTableView.frame.size.width, height: self.movementsTableView.frame.size.height)
-                //
-                self.backgroundViewExpanded.alpha = 0
-                //
-                self.beginButtonEnabled()
-                //
-            }, completion: { finished in
-                self.movementsTableView.removeFromSuperview()
-                self.backgroundViewExpanded.removeFromSuperview()
-                //
-                self.customTableView.reloadData()
-                // Scroll to Bottom
-                if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
-                    let scrollIndex = NSIndexPath(row: customSessionsArray[SelectedSession.shared.selectedSession[0]][self.selectedPreset][1].count - 1, section: 0)
-                    self.customTableView.scrollToRow(at: scrollIndex as IndexPath, at: .top, animated: true)
-                }
-            })
+            self.customTableView.reloadData()
+            //
+            ActionSheet.shared.animateActionSheetDown()
+            //
+            self.beginButtonEnabled()
+            // Scroll to Bottom
+            if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
+                let scrollIndex = NSIndexPath(row: customSessionsArray[SelectedSession.shared.selectedSession[0]][self.selectedPreset][1].count - 1, section: 0)
+                self.customTableView.scrollToRow(at: scrollIndex as IndexPath, at: .top, animated: true)
+            }
+            
         //
         default: break
         }
@@ -1436,28 +1381,20 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     }
                 })
                 //
-                //
                 self.presetsTableView.isHidden = false
                 //
-                self.backgroundViewExpanded.isHidden = false
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.backgroundViewExpanded.alpha = 0.5
-                    self.presetsTableView.reloadData()
-                    // Dismiss and select new row
-                }, completion: { finished in
-                    //
-                    tableView.deselectRow(at: indexPath, animated: true)
-                    //
-                    // Reload Data
-                    self.customTableView.reloadData()
-                    self.beginButtonEnabled()
-                    //
-                    // Initial Element Positions
-                    self.presetsBottom.constant = 0
-                    self.tableViewConstraintTop.constant = self.view.frame.size.height
-                    self.tableViewConstraintBottom.constant = -49
-                    self.beginButtonConstraint.constant = -49
-                })
+                self.presetsTableView.reloadData()
+                //
+                // Reload Data
+                self.customTableView.reloadData()
+                self.beginButtonEnabled()
+                //
+                // Initial Element Positions
+                self.presetsBottom.constant = 0
+                self.tableViewConstraintTop.constant = self.view.frame.size.height
+                self.tableViewConstraintBottom.constant = -49
+                self.beginButtonConstraint.constant = -49
+
             //
             case customTableView:
                 //
@@ -1538,22 +1475,18 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBAction func presetsAction(_ sender: Any) {
         //
         UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
-        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88 - 49 - 20
         let tableWidth = UIScreen.main.bounds.width - 20
-        self.presetsTableView.frame = CGRect(x: 10, y: view.frame.maxY, width: tableWidth, height: tableHeight)
+        self.presetsTableView.frame = CGRect(x: 0, y: 0, width: tableWidth, height: tableHeight)
         //
+        ActionSheet.shared.setupActionSheet()
+        ActionSheet.shared.actionSheet.addSubview(presetsTableView)
+        let heightToAdd = presetsTableView.bounds.height
+        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+        ActionSheet.shared.resetCancelFrame()
         //
-        backgroundViewExpanded.alpha = 0
-        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: presetsTableView)
-        backgroundViewExpanded.frame = UIScreen.main.bounds
-        // Animate table fade and size
-        // Position
-        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.5, options: .curveEaseOut, animations: {
-            self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY - tableHeight - 10, width: tableWidth, height: tableHeight)
-            self.presetsTableView.reloadData()
-            //
-            self.backgroundViewExpanded.alpha = 0.5
-        }, completion: nil)
+        ActionSheet.shared.animateActionSheetUp()
+        self.presetsTableView.reloadData()
         //
     }
     
@@ -1564,73 +1497,31 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         selectingNumberOfRounds = true
         setsRepsPicker.reloadAllComponents()
         //
-        UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
-        setsRepsView.frame = CGRect(x: 20, y: UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)! + 73.5, width: UIScreen.main.bounds.width - 40, height: 44)
-        //
         // selected number of rows
         setsRepsPicker.selectRow(roundsPickerArray.index(of: (customSessionsArray[SelectedSession.shared.selectedSession[0]][selectedPreset][2][0] as! Int))!, inComponent: 0, animated: true)
         //
+        self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
         // picker
         self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
         self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.13, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 70, height: 30)
         self.setsIndicatorLabel.text = NSLocalizedString("rounds", comment: "")
         // ok
         okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
+        // Sets Indicator Label
         //
-        backgroundViewExpanded.alpha = 0
-        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
-        backgroundViewExpanded.frame = UIScreen.main.bounds
-        // Animate table fade and size
-        // Position
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            //
-            self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 147 + 49)
-            self.setsRepsView.center.y = self.view.center.y - ((UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height)!) / 2)
-            // picker
-            self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
-            self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.13, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 70, height: 30)
-            // ok
-            self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
-            // Sets Indicator Label
-            //
-            //
-            self.backgroundViewExpanded.alpha = 0.7
-            
-        }, completion: nil)
+        ActionSheet.shared.setupActionSheet()
+        ActionSheet.shared.actionSheet.addSubview(setsRepsView)
+        let heightToAdd = setsRepsView.bounds.height
+        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+        ActionSheet.shared.resetCancelFrame()
+        ActionSheet.shared.animateActionSheetUp()
     }
     
     
     
     // Add movement table background (dismiss table)
     @objc func backgroundViewExpandedAction(_ sender: Any) {
-        //
-        if (UIApplication.shared.keyWindow?.subviews.contains(self.presetsTableView))! {
-            //
-            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
-                self.backgroundViewExpanded.alpha = 0
-            }, completion: { finished in
-                //
-                self.presetsTableView.removeFromSuperview()
-                self.backgroundViewExpanded.removeFromSuperview()
-            })
-            //
-        } else {
-            if selectingNumberOfRounds == true {
-                selectingNumberOfRounds = false
-            }
-            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                self.movementsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.movementsTableView.frame.size.width, height: self.movementsTableView.frame.size.height)
-                self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.setsRepsView.frame.size.width, height: self.setsRepsView.frame.size.height)
-                //
-                self.backgroundViewExpanded.alpha = 0
-            }, completion: { finished in
-                self.movementsTableView.removeFromSuperview()
-                self.setsRepsView.removeFromSuperview()
-                //
-                self.backgroundViewExpanded.removeFromSuperview()
-            })
-        }
+        ActionSheet.shared.animateActionSheetDown()
     }
     
     
@@ -1808,13 +1699,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         }
         //
         // Animate picker down and off
-        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-            self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.setsRepsView.frame.size.width, height: self.setsRepsView.frame.size.height)
-            self.backgroundViewExpanded.alpha = 0
-        }, completion: { finished in
-            self.setsRepsView.removeFromSuperview()
-            self.backgroundViewExpanded.removeFromSuperview()
-        })
+        ActionSheet.shared.animateActionSheetDown()
         //
         customTableView.reloadData()
     }
@@ -2019,22 +1904,17 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     @IBAction func addMovementAction(_ sender: Any) {
         //
-        let height = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49
+        let height = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 49 - 20
         //
         UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
-        movementsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: UIScreen.main.bounds.width - 20, height: height)
+        movementsTableView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 20, height: height)
         //
-        backgroundViewExpanded.alpha = 0
-        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: movementsTableView)
-        backgroundViewExpanded.frame = UIScreen.main.bounds
-        //
-        // Animate table
-        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            //
-            self.movementsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY - height - 10, width: UIScreen.main.bounds.width - 20, height: height)
-            //
-            self.backgroundViewExpanded.alpha = 0.7
-        }, completion: nil)
+        ActionSheet.shared.setupActionSheet()
+        ActionSheet.shared.actionSheet.addSubview(movementsTableView)
+        let heightToAdd = movementsTableView.bounds.height
+        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+        ActionSheet.shared.resetCancelFrame()
+        ActionSheet.shared.animateActionSheetUp()
     }
     
     //
@@ -2053,31 +1933,24 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         } else {
             setsRepsPicker.selectRow(0, inComponent: 0, animated: true)
         }
+        //
+        self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY - 147 - 49 - 10, width: UIScreen.main.bounds.width - 20, height: 147 + 49)
         // picker
         self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
         self.setsIndicatorLabel.text = NSLocalizedString("", comment: "")
+        //
         // ok
         okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
         //
         UIApplication.shared.keyWindow?.insertSubview(setsRepsView, aboveSubview: view)
         setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: UIScreen.main.bounds.width - 20, height: 147 + 49)
         //
-        backgroundViewExpanded.alpha = 0
-        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
-        backgroundViewExpanded.frame = UIScreen.main.bounds
-        //
-        // Animate table
-        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            //
-            self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY - 147 - 49 - 10, width: UIScreen.main.bounds.width - 20, height: 147 + 49)
-            //
-            self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
-            // ok
-            self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
-            //
-            self.backgroundViewExpanded.alpha = 0.7
-        }, completion: nil)
         
+        ActionSheet.shared.setupActionSheet()
+        ActionSheet.shared.actionSheet.addSubview(setsRepsView)
+        let heightToAdd = setsRepsView.bounds.height
+        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+        ActionSheet.shared.resetCancelFrame()
     }
     
     

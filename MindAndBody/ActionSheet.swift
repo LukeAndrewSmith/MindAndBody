@@ -24,11 +24,9 @@ class ActionSheet {
     
     //
     func setupActionSheet() {
-        if actionSheet.subviews.count != 0 {
-            for i in 0...actionSheet.subviews.count - 1 {
-                actionSheet.subviews[i].removeFromSuperview()
-            }
-        }
+        //
+        actionSheetBackgroundView.subviews.forEach { $0.removeFromSuperview() }
+        actionSheet.subviews.forEach { $0.removeFromSuperview() }
         //
         actionSheetBackgroundView.frame = UIScreen.main.bounds
         actionSheetBackgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.5)

@@ -147,6 +147,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             // App Helps Create Schedule switch
             appHelpsCreateScheduleSwitch.onTintColor = Colours.colour3
+            appHelpsCreateScheduleSwitch.tintColor = Colours.colour4
+            appHelpsCreateScheduleSwitch.backgroundColor = Colours.colour4
+            appHelpsCreateScheduleSwitch.layer.cornerRadius = appChoosesSessionsOnOffSwitch.bounds.height / 2
+            appHelpsCreateScheduleSwitch.clipsToBounds = true
             appHelpsCreateScheduleSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
             // Set inital value
             // On
