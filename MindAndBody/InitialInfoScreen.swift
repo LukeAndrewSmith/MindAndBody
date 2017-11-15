@@ -29,39 +29,34 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
     //
     // Requestion notifications/icloud
     func requestionOptions() {
-//
-//        //
-//        // iCloud popup
-//        let iCloudTitle = NSLocalizedString("iCloudPopup", comment: "")
-//        let iCloudMessage = NSLocalizedString("iCloudPopupMessage", comment: "")
-//        let iCloudAlert = UIAlertController(title: iCloudTitle, message: iCloudMessage, preferredStyle: .alert)
-//        iCloudAlert.view.tintColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-//        iCloudAlert.setValue(NSAttributedString(string: iCloudTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-//        //
-//        let paragraphStyle = NSMutableParagraphStyle()
-//        paragraphStyle.alignment = .natural
-//        iCloudAlert.setValue(NSAttributedString(string: iCloudMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
-//        // Ok Action
-//        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
-//            UIAlertAction in
-//            //
-//            var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-//            walkthroughs[0] = true
-//            UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
-//            // Sync
-//            ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
-//            //
-//            //
-//
-//
-//            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-//            }
-//        }
-//        //
-//        iCloudAlert.addAction(okAction)
-//
-//
-//
+
+        //
+        // iCloud popup
+        let iCloudTitle = NSLocalizedString("iCloudPopup", comment: "")
+        let iCloudMessage = NSLocalizedString("iCloudPopupMessage", comment: "")
+        let iCloudAlert = UIAlertController(title: iCloudTitle, message: iCloudMessage, preferredStyle: .alert)
+        iCloudAlert.view.tintColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
+        iCloudAlert.setValue(NSAttributedString(string: iCloudTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        //
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        iCloudAlert.setValue(NSAttributedString(string: iCloudMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        // Ok Action
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            //
+            var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+            walkthroughs[0] = true
+            UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: [""])
+            //
+        }
+        //
+        iCloudAlert.addAction(okAction)
+
+
+
         
         //
         // Notifications Popup
@@ -86,7 +81,7 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
             //
             //
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-//                self.present(iCloudAlert, animated: true, completion: nil)
+                self.present(iCloudAlert, animated: true, completion: nil)
             }
         }
         //
@@ -240,29 +235,19 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
             return (tableView.bounds.height - 47) / 5
         // Features
         } else if indexPath.section == 1 {
-            let label = UILabel()
-            label.frame = CGRect(x: 0, y: 0, width: infoTable.bounds.width, height: 0)
-            label.numberOfLines = 0
-            label.lineBreakMode = .byWordWrapping
-            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            label.text = NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: "")
-            label.sizeToFit()
+            let font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            let height = NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: "").height(withConstrainedWidth: infoTable.bounds.width - 32, font: font!)
             //
-            if label.bounds.height > 37 {
+            if height > 37 {
                 return 37 * 2
             } else {
                 return 37
             }
         // Overview cell
         } else if indexPath.section == 2 {
-            let label = UILabel()
-            label.frame = CGRect(x: 0, y: 0, width: infoTable.bounds.width, height: 0)
-            label.numberOfLines = 0
-            label.lineBreakMode = .byWordWrapping
-            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            label.text = NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: "")
-            label.sizeToFit()
-            return label.bounds.height
+            let font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            let height = NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: "").height(withConstrainedWidth: infoTable.bounds.width - 32, font: font!)
+            return height
         }
         return 0
     }

@@ -17,17 +17,26 @@ class ICloudFunctions {
     private init() {}
     
     static let keyArray = ["userSettings", "selectedSchedule", "schedules", "scheduleTracking", "difficultyLevels", "profileAnswers", "trackingDictionaries", "trackingProgress", "customSessions", "meditationTimer", "walkthroughs"]
-    // Note: timestamp set after looping array
-    
 
     //
     // Check if user wants to use icloud
     func ICloudEnabled() -> Bool {
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        if settings[7][0] == 0 {
-            return true
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        // Check iCloud if exists incase first opening on new device
+        if NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") != nil {
+            let iCloudSettings = NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") as! [[Int]]
+            if iCloudSettings[7][0] == 0 {
+                return true
+            } else {
+                return false
+            }
+        // Fall back on userdefaults
         } else {
-            return false
+            if settings[7][0] == 0 {
+                return true
+            } else {
+                return false
+            }
         }
     }
     
@@ -66,6 +75,12 @@ class ICloudFunctions {
                 let defaultToPull = NSUbiquitousKeyValueStore.default.object(forKey: ICloudFunctions.keyArray[i])
                 UserDefaults.standard.set(defaultToPull, forKey: ICloudFunctions.keyArray[i])
             }
+        }
+    }
+    
+    func removeAll() {
+        for i in 0...ICloudFunctions.keyArray.count - 1 {
+            NSUbiquitousKeyValueStore.default.removeObject(forKey: ICloudFunctions.keyArray[i])
         }
     }
 }

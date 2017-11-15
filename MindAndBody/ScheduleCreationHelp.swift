@@ -857,19 +857,13 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: answerTableView.bounds.width, height: 0)
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.textAlignment = .center
-        label.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        let font = UIFont(name: "SFUIDisplay-thin", size: 23)
         // + 1 as question inclueded in array
-        label.text = NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion][indexPath.row + 1], comment: "")
-        label.sizeToFit()
+        let height = NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion][indexPath.row + 1], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
         //
         setTableHeight()
         //
-        if label.bounds.height > 49 {
+        if height > 49 {
             return 49 * 1.5
         } else {
             return 49
@@ -880,17 +874,11 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     //
     func setTableHeight() {
         var tableHeightConstant: CGFloat = 0
-        for i in 0...scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion].count - 2 {
-            let label = UILabel()
-            label.frame = CGRect(x: 0, y: 0, width: answerTableView.bounds.width, height: 0)
-            label.numberOfLines = 0
-            label.lineBreakMode = .byWordWrapping
-            label.textAlignment = .center
-            label.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        for i in 1...scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion].count - 1 {
+            let font = UIFont(name: "SFUIDisplay-thin", size: 23)
             // + 1 as question inclueded in array
-            label.text = NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion][i + 1], comment: "")
-            label.sizeToFit()
-            if label.bounds.height > 49 {
+            let height = NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion][i], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
+            if height > 49 {
                 tableHeightConstant += (49 * 1.5)
             } else {
                 tableHeightConstant += 49

@@ -227,7 +227,7 @@ enum Register {
         // Metric/Imperial - 6
         [0], // == "kg" (0), "lb" (1)
         // Is icloud enabled, 0 == true, 1 == false
-        [0],
+        [1],
     ]
     
     // --------------------------------------------------------

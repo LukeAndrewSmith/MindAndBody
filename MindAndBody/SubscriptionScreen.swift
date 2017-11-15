@@ -54,7 +54,7 @@ class SubscriptionScreen: UIViewController, UITableViewDataSource, UITableViewDe
         
         //
         // Subtitle
-        subtitleLabel.text = NSLocalizedString("becomeTheBestYou", comment: "")
+        subtitleLabel.text = NSLocalizedString("makingTheEffort", comment: "")
         
         //
         // Info Table
@@ -71,7 +71,7 @@ class SubscriptionScreen: UIViewController, UITableViewDataSource, UITableViewDe
         subscriptionButton.titleLabel?.lineBreakMode = .byWordWrapping
         subscriptionButton.titleLabel?.numberOfLines = 0
         subscriptionButton.titleLabel?.textAlignment = .center
-        subscriptionButton.layer.cornerRadius = checkSubscriptionButton.bounds.height / 2
+        subscriptionButton.layer.cornerRadius = subscriptionButton.bounds.height / 2
         subscriptionButton.layer.masksToBounds = true
         subscriptionButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
         checkSubscriptionButton.setTitle(NSLocalizedString("alreadyHaveSubscription", comment: ""), for: .normal)
@@ -117,23 +117,15 @@ class SubscriptionScreen: UIViewController, UITableViewDataSource, UITableViewDe
         header.backgroundColor = .clear
         header.backgroundView = UIView()
         //
-        if section == 1 {
-            // Create seperator
-            let seperator = CALayer()
-            seperator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: topSeparator.bounds.width, height: 1)
-            seperator.backgroundColor = Colours.colour1.cgColor
-            seperator.opacity = 0.15
-            header.layer.addSublayer(seperator)
-        }
     }
     
     // Header Height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         //
-        if section != 2 {
-            return 37
-        } else {
+        if section == 1 {
             return 37 / 2
+        } else {
+            return 37
         }
     }
     
@@ -167,14 +159,18 @@ class SubscriptionScreen: UIViewController, UITableViewDataSource, UITableViewDe
 //            }
             // Overview cell
         } else if indexPath.section == 1 {
-            let label = UILabel()
-            label.frame = CGRect(x: 0, y: 0, width: infoTable.bounds.width, height: 0)
-            label.numberOfLines = 0
-            label.lineBreakMode = .byWordWrapping
-            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            label.text = NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: "")
-            label.sizeToFit()
-            return label.bounds.height
+//            let label = UILabel()
+//            label.frame = CGRect(x: 0, y: 0, width: infoTable.bounds.width - 32, height: 0)
+//            label.numberOfLines = 0
+//            label.lineBreakMode = .byWordWrapping
+            let font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            let height =
+                NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: "").height(withConstrainedWidth: infoTable.bounds.width - 32, font: font!)
+//            label.sizeToFit()
+//            label.frame
+            //
+            
+            return height
         }
         return 0
     }
@@ -235,31 +231,31 @@ class SubscriptionScreen: UIViewController, UITableViewDataSource, UITableViewDe
             infoTable.isScrollEnabled = true
         }
     }
-    
-    // Mask cells under clear header
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let visibleIndex = infoTable.indexPathsForVisibleRows
-        if visibleIndex!.first?.section == 1 {
-            for cell in infoTable.visibleCells {
-                let hiddenFrameHeight = scrollView.contentOffset.y + 37 - cell.frame.origin.y
-                if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                    maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-                }
-            }
-        }
-    }
-    func maskCell(cell: UITableViewCell, margin: Float) {
-        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
-        cell.layer.masksToBounds = true
-    }
-    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
-        let mask = CAGradientLayer()
-        mask.frame = cell.bounds
-        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
-        return mask;
-    }
-    
+//    
+//    // Mask cells under clear header
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let visibleIndex = infoTable.indexPathsForVisibleRows
+//        if visibleIndex!.first?.section == 1 {
+//            for cell in infoTable.visibleCells {
+//                let hiddenFrameHeight = scrollView.contentOffset.y + 37 - cell.frame.origin.y
+//                if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
+//                    maskCell(cell: cell, margin: Float(hiddenFrameHeight))
+//                }
+//            }
+//        }
+//    }
+//    func maskCell(cell: UITableViewCell, margin: Float) {
+//        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
+//        cell.layer.masksToBounds = true
+//    }
+//    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
+//        let mask = CAGradientLayer()
+//        mask.frame = cell.bounds
+//        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
+//        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
+//        return mask;
+//    }
+//    
     //
     // Ensure didCreateNewSchedule == false
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

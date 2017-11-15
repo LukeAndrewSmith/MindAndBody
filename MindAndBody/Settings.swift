@@ -183,7 +183,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
 // Sections
     // Number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 8
+        return 9
     }
     
     // Section Titles
@@ -196,7 +196,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         case 4: return NSLocalizedString("restTime", comment: "")
         case 5: return NSLocalizedString("defaultImage", comment: "")
         case 6: return NSLocalizedString("units", comment: "")
-        case 7: return NSLocalizedString("reset", comment: "")
+        case 7: return NSLocalizedString("iCloudStorage", comment: "")
+        case 8: return NSLocalizedString("reset", comment: "")
         default: return ""
         }
     }
@@ -208,7 +209,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)!
         header.textLabel?.textColor = .black
-        header.textLabel?.text = header.textLabel?.text?.capitalized
+//        header.textLabel?.text = header.textLabel?.text?.capitalized
         
         //
         header.contentView.backgroundColor = Colours.colour1
@@ -235,7 +236,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         switch section {
         case 0,1,2,3,5,6: return 1
         case 4: return 3
-        case 7: return 2
+        case 7: return 0
+        case 8: return 2
         default: break
         }
         return 0
@@ -388,7 +390,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
             
         // Reset
-        case 7:
+        case 8:
         //
             // Reset Walkthrough
             if indexPath.row == 0 {
@@ -618,7 +620,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
         
         // Reset
-        case 7:
+        case 8:
         //
             // Reset Walkthrough
             if indexPath.row == 0 {
@@ -639,91 +641,92 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
                     UIAlertAction in
 
-                // Walkthrough
-                    // Reset Walkthroughs
-                    var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                    // not including notifications popup
-                    for i in 1...(walkthroughs.count - 1) {
-                        walkthroughs[i] = false
-                    }
-                    UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
-                    // Sync
-                    ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-                
-                //
-                // Alert View indicating need for app reset
-                let title = NSLocalizedString("resetTitle", comment: "")
-                let message = NSLocalizedString("resetMessage", comment: "")
-                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alert.view.tintColor = Colours.colour1
-                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
-                
-                let paragraphStyle = NSMutableParagraphStyle()
-                paragraphStyle.alignment = .natural
-                alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
-
-                // Present alert
-                self.present(alert, animated: true, completion: nil)
-            }
-            // Cancel reset action
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
-                UIAlertAction in
-            }
-            // Add Actions
-            alert.addAction(okAction)
-            alert.addAction(cancelAction)
-            
-            // Present Alert
-            self.present(alert, animated: true, completion: nil)
-                //
-            tableView.deselectRow(at: indexPath, animated: true)
-               
-            // Reset App
-            } else if indexPath.row == 1 {
-                
-            // Alert View indicating meaning of resetting the app
-            let title = NSLocalizedString("resetWarning", comment: "")
-            let message = NSLocalizedString("resetWarningMessage", comment: "")
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.view.tintColor = Colours.colour2
-            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
-            
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .natural
-            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
-           
-                
-            // Reset app action
-                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
-                    UIAlertAction in
+                    // Walkthrough
+                        // Reset Walkthroughs
+                        var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                        // not including notifications popup
+                        for i in 1...(walkthroughs.count - 1) {
+                            walkthroughs[i] = false
+                        }
+                        UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+                        // Sync
+                        ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
                     
-                    UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-                    UserDefaults.standard.synchronize()
-                    
-                    // Alert View
+                    //
+                    // Alert View indicating need for app reset
                     let title = NSLocalizedString("resetTitle", comment: "")
                     let message = NSLocalizedString("resetMessage", comment: "")
                     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    alert.view.tintColor = Colours.colour2
+                    alert.view.tintColor = Colours.colour1
                     alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                     
                     let paragraphStyle = NSMutableParagraphStyle()
                     paragraphStyle.alignment = .natural
                     alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
-                    
+
+                    // Present alert
                     self.present(alert, animated: true, completion: nil)
                 }
-            // Cancel reset action
+                // Cancel reset action
                 let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
                     UIAlertAction in
                 }
-            // Add Actions
-            alert.addAction(okAction)
-            alert.addAction(cancelAction)
+                // Add Actions
+                alert.addAction(okAction)
+                alert.addAction(cancelAction)
+                
+                // Present Alert
+                self.present(alert, animated: true, completion: nil)
+                    //
+                tableView.deselectRow(at: indexPath, animated: true)
+                
+            // Reset App
+            } else if indexPath.row == 1 {
+                
+                // Alert View indicating meaning of resetting the app
+                let title = NSLocalizedString("resetWarning", comment: "")
+                let message = NSLocalizedString("resetWarningMessage", comment: "")
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alert.view.tintColor = Colours.colour2
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+                
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.alignment = .natural
+                alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
                
-            // Present Alert
-            self.present(alert, animated: true, completion: nil)
-            tableView.deselectRow(at: indexPath, animated: true)
+                
+                // Reset app action
+                    let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+                        UIAlertAction in
+                        
+                        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+                        UserDefaults.standard.synchronize()
+                        ICloudFunctions.shared.removeAll()
+                        
+                        // Alert View
+                        let title = NSLocalizedString("resetTitle", comment: "")
+                        let message = NSLocalizedString("resetMessage", comment: "")
+                        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                        alert.view.tintColor = Colours.colour2
+                        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+                        
+                        let paragraphStyle = NSMutableParagraphStyle()
+                        paragraphStyle.alignment = .natural
+                        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+                        
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                // Cancel reset action
+                    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+                        UIAlertAction in
+                    }
+                // Add Actions
+                alert.addAction(okAction)
+                alert.addAction(cancelAction)
+                
+                // Present Alert
+                self.present(alert, animated: true, completion: nil)
+                tableView.deselectRow(at: indexPath, animated: true)
             }
         //
         default:

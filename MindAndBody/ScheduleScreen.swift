@@ -86,8 +86,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     var scheduleStyle = 0
     
     //
-    // View Will Appear ---------------------------------------------------------------------------------
-    //
+    // View Will Appear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //

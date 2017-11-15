@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        ICloudFunctions.shared.removeAll()
         //
         // Icloud
 //        NotificationCenter.default.addObserver(self, selector: #selector(), name:  NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: NSUbiquitousKeyValueStore.default)
