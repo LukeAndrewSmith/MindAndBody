@@ -41,19 +41,39 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
         iCloudAlert.setValue(NSAttributedString(string: iCloudMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
-        // Ok Action
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+        // Yes Action
+        let yesAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
             UIAlertAction in
             //
             var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
             walkthroughs[0] = true
             UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+            //
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            settings[7][0] = 0
+            UserDefaults.standard.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: [""])
             //
         }
+        // No Action
+        let noAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            //
+            var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+            walkthroughs[0] = true
+            UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+            //
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            settings[7][0] = 1
+            UserDefaults.standard.set(settings, forKey: "userSettings")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+            //
+        }
         //
-        iCloudAlert.addAction(okAction)
+        iCloudAlert.addAction(yesAction)
+        iCloudAlert.addAction(noAction)
 
 
 
@@ -78,7 +98,6 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
             UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
-            //
             //
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
                 self.present(iCloudAlert, animated: true, completion: nil)

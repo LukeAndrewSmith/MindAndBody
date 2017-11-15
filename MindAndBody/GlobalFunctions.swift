@@ -19,49 +19,6 @@ import AudioToolbox.AudioServices
 extension UIViewController {
     
     //
-    // MARK: Animate
-    //
-    // Animate Action Sheet Up
-    func animateActionSheetUp(actionSheet:UIView, actionSheetHeight:CGFloat, backgroundView:UIView) {
-        //
-        let actionSheetWidth = UIScreen.main.bounds.width - 20
-        //
-        // Initial Conditions
-        backgroundView.alpha = 0
-        backgroundView.frame = UIScreen.main.bounds
-        actionSheet.frame = CGRect(x: 10, y: self.view.frame.maxY, width: actionSheetWidth, height: actionSheetHeight)
-        //
-        // Animate
-        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.5, options: .curveEaseOut, animations: {
-            //
-            actionSheet.frame = CGRect(x: 10, y: self.view.frame.maxY - actionSheetHeight - 10, width: actionSheetWidth, height: actionSheetHeight)
-            //
-            backgroundView.alpha = 0.5
-        }, completion: nil)
-    }
-    
-    
-    //
-    // Animate Action Sheet Down
-    func animateActionSheetDown(actionSheet:UIView, actionSheetHeight:CGFloat, backgroundView:UIView) {
-        //
-        let actionSheetWidth = UIScreen.main.bounds.width - 20
-        //
-        // Animate
-        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-            //
-            actionSheet.frame = CGRect(x: 10, y: self.view.frame.maxY, width: actionSheetWidth, height: actionSheetHeight)
-            backgroundView.alpha = 0
-            //
-        }, completion: { finished in
-            //
-            actionSheet.removeFromSuperview()
-            backgroundView.removeFromSuperview()
-        })
-    }
-    
-    
-    //
     // Animate Photo/Explanation Up
     func animateViewUp(animationView:UIImageView, backgroundView:UIButton) {
         //

@@ -1410,70 +1410,6 @@
             </objects>
             <point key="canvasLocation" x="-1903" y="2985"/>
         </scene>
-        <!--Settings-->
-        <scene sceneID="IH8-yX-OGk">
-            <objects>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="uwV-DU-Sa2" customClass="Settings" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="3ul-7b-zYg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="x8N-VY-ofd">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x8N-VY-ofd" id="v01-zB-Opi">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISH-lR-L4y">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                            <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="ISH-lR-L4y" firstAttribute="leading" secondItem="v01-zB-Opi" secondAttribute="leading" id="7w1-jH-G7l"/>
-                                        <constraint firstAttribute="bottom" secondItem="ISH-lR-L4y" secondAttribute="bottom" id="GoQ-FL-uBg"/>
-                                        <constraint firstAttribute="trailing" secondItem="ISH-lR-L4y" secondAttribute="trailing" id="ZgK-f2-FEu"/>
-                                        <constraint firstItem="ISH-lR-L4y" firstAttribute="top" secondItem="v01-zB-Opi" secondAttribute="top" id="qGw-31-6fZ"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="uwV-DU-Sa2" id="4AN-Uy-l7r"/>
-                            <outlet property="delegate" destination="uwV-DU-Sa2" id="6Yv-7x-rXG"/>
-                        </connections>
-                    </tableView>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" title="Item" id="gJN-cv-SqX"/>
-                    <navigationItem key="navigationItem" title="Settings" id="cRC-HA-CGb">
-                        <barButtonItem key="leftBarButtonItem" image="SlideMenu" id="eIA-9Q-f8k">
-                            <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <segue destination="BJi-pp-zkU" kind="presentation" identifier="openMenu" id="hnd-ia-31H"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="QuestionMarkMenu" id="pjl-Yz-Hsh">
-                            <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="questionMarkButtonAciton:" destination="uwV-DU-Sa2" id="rqC-dz-oBF"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="navigationBar" destination="cRC-HA-CGb" id="Rtg-7c-tk8"/>
-                        <segue destination="U5d-IN-X7D" kind="show" identifier="BackgroundImageSegue" id="6nD-zj-fFF"/>
-                        <segue destination="8IA-AP-QDR" kind="show" identifier="YogaAutomaticSegue" id="a8X-m5-kfA"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I2B-Cx-Vgy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1143" y="2985"/>
-        </scene>
         <!--Title-->
         <scene sceneID="kMx-Nx-xwg">
             <objects>
@@ -1541,9 +1477,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fe2-yQ-cP8">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="fe2-yQ-cP8">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="8IA-AP-QDR" id="wvy-DM-ZA6"/>
                                     <outlet property="delegate" destination="8IA-AP-QDR" id="UWQ-We-6FJ"/>
@@ -1558,7 +1494,14 @@
                             <constraint firstItem="8fl-iP-cbI" firstAttribute="top" secondItem="fe2-yQ-cP8" secondAttribute="bottom" id="avG-rI-icM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="W0N-u7-40P"/>
+                    <navigationItem key="navigationItem" title="Title" id="W0N-u7-40P">
+                        <barButtonItem key="rightBarButtonItem" image="QuestionMarkMenu" id="2z3-Oe-82l">
+                            <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="questionMarkButtonAciton:" destination="8IA-AP-QDR" id="M43-Og-se6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="navigationBar" destination="W0N-u7-40P" id="hPI-1j-gKE"/>
                         <outlet property="tableViewAutomatic" destination="fe2-yQ-cP8" id="ype-cF-3ZP"/>
@@ -5922,6 +5865,9 @@
                     <navigationItem key="navigationItem" title="Settings" id="JRG-rZ-TEm">
                         <barButtonItem key="leftBarButtonItem" image="SlideMenu" id="mo1-hk-8Rt">
                             <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="slideMenuPresent" destination="C87-uf-Q8P" id="iGg-lN-K3T"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="QuestionMarkMenu" id="vdh-hA-mxM">
                             <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -5940,7 +5886,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DbC-9W-Xf4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1143" y="3660"/>
+            <point key="canvasLocation" x="-1122" y="2984"/>
         </scene>
     </scenes>
     <resources>
@@ -5984,9 +5930,7 @@
         <segue reference="bsb-5O-GBj"/>
         <segue reference="y3k-i5-esE"/>
         <segue reference="2SZ-vO-x06"/>
-        <segue reference="hnd-ia-31H"/>
-        <segue reference="6Xa-ns-zfk"/>
-        <segue reference="GKV-bG-CaC"/>
+        <segue reference="hhr-yy-04w"/>
         <segue reference="gRr-Mf-DSK"/>
         <segue reference="NR1-hM-oZr"/>
     </inferredMetricsTieBreakers>

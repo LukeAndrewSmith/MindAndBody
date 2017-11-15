@@ -217,9 +217,9 @@ enum Register {
         // Home Screen - 1 (Defaults to schedule)
         [1],
         // Time Based Sessions - 2
-        [0], // == Off
+        [0], // 0 == Off, 1 = on
         // Yoga Automatic - 3
-        [0, -1, -1, -1],
+        [0, -1, -1, -1], // [0], 0 == off, 1 == on
         // Rest times - 4
         [5, 45, 10],
         // Default Image - 5

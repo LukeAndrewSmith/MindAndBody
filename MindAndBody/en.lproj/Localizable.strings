@@ -98,6 +98,9 @@
 "sessions" = "Sessions";
 "iCloud" = "iCloud";
 
+//
+"imperial" = "Imperial (lb)";
+"metric" = "Metric (kg)";
 
 
 // Test

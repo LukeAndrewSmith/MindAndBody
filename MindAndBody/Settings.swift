@@ -1,9 +1,9 @@
 //
-//  Settings.swift
-//  MyFitnessMentor
+//  SettingsTest.swift
+//  MindAndBody
 //
-//  Created by Luke Smith on 05/10/16.
-//  Copyright © 2016 Luke Smith. All rights reserved.
+//  Created by Luke Smith on 15.11.17.
+//  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
 import Foundation
@@ -14,7 +14,7 @@ import UIKit
 // Settings Class -------------------------------------------------------------------------------------------------------------------------------
 //
 
-class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     //
@@ -31,6 +31,14 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
     let secondIndicatorLabel = UILabel()
     //
     var backgroundViewExpanded = UIButton()
+    
+    //
+    var actionSheetTable = UITableView()
+    
+    // switches
+    let timedSessionSwitch = UISwitch()
+    let iCloudSwitch = UISwitch()
+    
     //
     var selectedRow = Int()
     
@@ -42,10 +50,6 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
     var homeScreenPicker = UIPickerView()
     // Use actionSheetView and okButton from above for home screen action sheet
     
-    
-    // Switches
-    let timedSessionsSwitch = UISwitch()
-    let iCloudSwitch = UISwitch()
     
     
     // View Will Appear
@@ -61,10 +65,10 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
         tableView.reloadData()
     }
     
-
-//
-// Rest Time Related -------------------------------------------------------------------------------------------------------------------------
-//
+    
+    //
+    // Rest Time Related -------------------------------------------------------------------------------------------------------------------------
+    //
     //
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,7 +96,7 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
         navigationBar.title = NSLocalizedString("settings", comment: "")
         // View
         view.backgroundColor = Colours.colour1
-
+        
         //
         // Sets Reps Selection (Action Sheet)
         // view
@@ -119,19 +123,34 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
         backgroundViewExpanded.backgroundColor = .black
         backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
         //
-        //
         // Home Screen Action Sheet
         // picker
         homeScreenPicker.backgroundColor = Colours.colour2
         homeScreenPicker.delegate = self
         homeScreenPicker.dataSource = self
+        
+        //
+        // Switches
+        timedSessionSwitch.onTintColor = Colours.colour3
+        timedSessionSwitch.tintColor = Colours.colour4
+        timedSessionSwitch.backgroundColor = Colours.colour4
+        timedSessionSwitch.layer.cornerRadius = timedSessionSwitch.bounds.height / 2
+        timedSessionSwitch.clipsToBounds = true
+        timedSessionSwitch.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
+        //
+        iCloudSwitch.onTintColor = Colours.colour3
+        iCloudSwitch.tintColor = Colours.colour4
+        iCloudSwitch.backgroundColor = Colours.colour4
+        iCloudSwitch.layer.cornerRadius = iCloudSwitch.bounds.height / 2
+        iCloudSwitch.clipsToBounds = true
+        iCloudSwitch.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
     // Add movement table background (dismiss table)
     @objc func backgroundViewExpandedAction(_ sender: Any) {
         //
         UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             self.actionSheetView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
-
+            
             //
             self.backgroundViewExpanded.alpha = 0
         }, completion: { finished in
@@ -153,7 +172,7 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             //
-        // Home Screen
+            // Home Screen
         } else if actionSheetView.subviews.contains(homeScreenPicker) {
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
             //
@@ -163,9 +182,9 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
         }
-            
-            
-            
+        
+        
+        
         UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             self.actionSheetView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
             //
@@ -179,29 +198,26 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
         tableView.reloadData()
     }
     
-
-//
-// MARK: Settings TableView --------------------------------------------------------------------------------------------------------------------------
-//
     
-// Sections
+    //
+    // MARK: Settings TableView --------------------------------------------------------------------------------------------------------------------------
+    //
+    
+    // Sections
     // Number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 9
+        return 6
     }
     
     // Section Titles
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return NSLocalizedString("backgroundImage", comment: "")
-        case 1: return NSLocalizedString("homePage", comment: "")
-        case 2: return NSLocalizedString("timedSession", comment: "")
-        case 3: return NSLocalizedString("automaticYoga", comment: "")
-        case 4: return NSLocalizedString("restTime", comment: "")
-        case 5: return NSLocalizedString("defaultImage", comment: "")
-        case 6: return NSLocalizedString("units", comment: "")
-        case 7: return NSLocalizedString("iCloudStorage", comment: "")
-        case 8: return NSLocalizedString("reset", comment: "")
+        case 0: return NSLocalizedString("general", comment: "")
+        case 1: return NSLocalizedString("timedSessions", comment: "")
+        case 2: return NSLocalizedString("restTimes", comment: "")
+        case 3: return NSLocalizedString("sessions", comment: "")
+        case 4: return NSLocalizedString("iCloud", comment: "")
+        case 5: return NSLocalizedString("reset", comment: "")
         default: return ""
         }
     }
@@ -211,28 +227,7 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
     {
         // Header
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)!
-        header.textLabel?.textColor = .black
-//        header.textLabel?.text = header.textLabel?.text?.capitalized
-        
-        //
-        header.contentView.backgroundColor = Colours.colour1
-        
-        // Border
-        let border = CALayer()
-        border.backgroundColor = Colours.colour2.cgColor
-        border.frame = CGRect(x: 15, y: header.frame.size.height-1, width: self.view.frame.size.height, height: 1)
-        //
-        header.layer.addSublayer(border)
-        header.layer.masksToBounds = true
-        
-        // Separator
-        let separator = CALayer()
-        separator.backgroundColor = Colours.colour2.withAlphaComponent(0.1).cgColor
-        separator.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.height, height: 1)
-        //
-        header.layer.addSublayer(separator)
-        header.layer.masksToBounds = true
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 17)!
     }
     
     // Header Height
@@ -246,9 +241,12 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         switch section {
-        case 0,1,2,3,5,6,7: return 1
-        case 4: return 3
-        case 8: return 2
+        case 0: return 2
+        case 1: return 2
+        case 2: return 3
+        case 3: return 2
+        case 4: return 1
+        case 5: return 2
         default: break
         }
         return 0
@@ -257,80 +255,132 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
     // Row cell customization
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // Get cell
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        // Image View for background images
-        let backgroundImageView = UIImageView()
-    
         // Settings sections
         switch indexPath.section {
-        // Homescreen Background
+        // Background / Home Screen
         case 0:
-        //
             //
-            cell.backgroundColor = Colours.colour1
-            
-            // Background ImageView frame
-            backgroundImageView.frame = CGRect(x: 15, y: 0, width: cell.frame.size.width - 15, height: cell.frame.size.height/2)
-            backgroundImageView.center.y = cell.center.y
-            
-            // Retreive background index
-            let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let backgroundIndex = settings[0][0]
-            // Set image background based on index
-            if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-                backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-
-            // If grey background
-            } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
+            switch indexPath.row {
+            // Background Image
+            case 0:
+                let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+                cell.backgroundColor = Colours.colour1
                 //
-                backgroundImageView.layer.borderWidth = 1
-                backgroundImageView.layer.borderColor = Colours.colour2.cgColor
-                //
-                backgroundImageView.backgroundColor = Colours.colour1
-            
-            // If red-orange background
-            }            
-            // Final background image view customization
-            backgroundImageView.contentMode = .scaleToFill
-            cell.addSubview(backgroundImageView)
-            cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.text = NSLocalizedString("backgroundImage", comment: "")
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 
-            // Background image frame if iPhone 5
-            if UIScreen.main.nativeBounds.height < 1334 {
-                backgroundImageView.frame = CGRect(x: 15, y: (cell.frame.size.height / 2) - (backgroundImageView.frame.size.height / 2), width: cell.frame.size.width - 70, height: cell.frame.size.height/2)
+                // Background ImageView
+                let backgroundImageView = UIImageView()
+                let height = cell.bounds.height - 10
+                backgroundImageView.frame.size = CGSize(width: 9/16 * height, height: height)
+                backgroundImageView.center = CGPoint(x: view.bounds.width - 40 - (backgroundImageView.bounds.width / 2), y: cell.bounds.height / 2)
+                
+                // Retreive background index
+                let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                let backgroundIndex = settings[0][0]
+                // Set image background based on index
+                if backgroundIndex < BackgroundImages.backgroundImageArray.count {
+                    backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
+                    
+                    // If grey background
+                } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
+                    //
+                    backgroundImageView.layer.borderWidth = 1
+                    backgroundImageView.layer.borderColor = Colours.colour2.cgColor
+                    //
+                    backgroundImageView.backgroundColor = Colours.colour1
+                    
+                    // If red-orange background
+                }
+                // Final background image view customization
+                backgroundImageView.contentMode = .scaleToFill
+                cell.addSubview(backgroundImageView)
+                cell.accessoryType = .disclosureIndicator
+                
+                //
+                return cell
+                
+            // Home screen
+            case 1:
+                //
+                let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+                //
+                cell.textLabel?.text = NSLocalizedString("homePage", comment: "")
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                
+                // Retreive Presentation Style
+                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                let homeScreen = settings[1][0]
+                cell.detailTextLabel?.text = NSLocalizedString(homeScreenArray[homeScreen], comment: "")
+                cell.detailTextLabel?.textAlignment = NSTextAlignment.left
+                cell.backgroundColor = Colours.colour1
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                return cell
+                
+            default: break
             }
             //
-            return cell
-           
             
-        // Yoga Automatic
-        case 3:
-            //
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let automaticYogaArray = settings[3]
-            // Retreive Presentation Style
-            if automaticYogaArray[0] == 0 {
-                cell.textLabel?.text = NSLocalizedString("off", comment: "")
-                cell.textLabel?.textColor = Colours.colour4
-            } else {
-                cell.textLabel?.text = NSLocalizedString("on", comment: "")
-                cell.textLabel?.textColor = Colours.colour3
+            
+        // Timed sessions
+        case 1:
+            
+            switch indexPath.row {
+            // Timed sessions
+            case 0:
+                //
+                // timed schedule sessions
+                let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+                cell.backgroundColor = Colours.colour1
+                cell.selectionStyle = .none
+                //
+                cell.textLabel?.text = NSLocalizedString("timedSession", comment: "")
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                //
+                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                let timedSession = settings[2][0]
+                if timedSession == 0 {
+                    timedSessionSwitch.isOn = false
+                } else {
+                    timedSessionSwitch.isOn = true
+                }
+                //
+                // on off
+                cell.addSubview(timedSessionSwitch)
+                timedSessionSwitch.center = CGPoint(x: view.bounds.width - 16 - (timedSessionSwitch.bounds.width / 2), y: cell.bounds.height / 2)
+                
+                //
+                return cell
+            // Yoga automatic
+            case 1:
+                //
+                let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+                //
+                cell.textLabel?.text = NSLocalizedString("automaticYoga", comment: "")
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                //
+                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                let automaticYogaArray = settings[3]
+                // Retreive Presentation Style
+                if automaticYogaArray[0] == 0 {
+                    cell.detailTextLabel?.text = NSLocalizedString("off", comment: "")
+                    cell.detailTextLabel?.textColor = Colours.colour4
+                } else {
+                    cell.detailTextLabel?.text = NSLocalizedString("on", comment: "")
+                    cell.detailTextLabel?.textColor = Colours.colour3
+                }
+                cell.detailTextLabel?.textAlignment = NSTextAlignment.left
+                cell.backgroundColor = Colours.colour1
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                //
+                cell.accessoryType = .disclosureIndicator
+                //
+                return cell
+            default: break
             }
-            cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = Colours.colour1
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            //
-            cell.accessoryType = .disclosureIndicator
-            //
-            return cell
-            
-            
             
         // Rest Time
-        case 4:
+        case 2:
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             // Titles
@@ -344,208 +394,179 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
             //
             //
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            //cell.detailTextLabel?.textAlignment = NSTextAlignment
-            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)
-            cell.detailTextLabel?.textColor = Colours.colour2
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
             cell.backgroundColor = Colours.colour1
             //
             return cell
             
-            
-            
-        // Home Screen, Timed Session, Default Image, Units
-        case 1,2,5,6:
-            //
+        // Session customization
+        case 3:
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            // Retreive Presentation Style
-            switch indexPath.section {
-            case 1:
-                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                let homeScreen = settings[1][0]
-                cell.textLabel?.text = NSLocalizedString(homeScreenArray[homeScreen], comment: "")
-            case 2:
-                // timed schedule sessions
-                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                let timedSession = settings[2][0]
-                if timedSession == 0 {
-                    cell.textLabel?.text = NSLocalizedString("off", comment: "")
-                    cell.textLabel?.textColor = Colours.colour4
-                } else {
-                    cell.textLabel?.text = NSLocalizedString("on", comment: "")
-                    cell.textLabel?.textColor = Colours.colour3
-                }
-            case 5:
+            cell.backgroundColor = Colours.colour1
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            //
+            switch indexPath.row {
+            // Default image
+            case 0:
+                cell.textLabel?.text = NSLocalizedString("defaultImage", comment: "")
                 var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
                 let defaultImage = settings[5][0]
                 if defaultImage == 0 {
-                    cell.textLabel?.text = NSLocalizedString("demonstration", comment: "")
+                    cell.detailTextLabel?.text = NSLocalizedString("demonstration", comment: "")
                 } else {
-                    cell.textLabel?.text = NSLocalizedString("targetArea", comment: "")
+                    cell.detailTextLabel?.text = NSLocalizedString("targetArea", comment: "")
                 }
-            case 6:
+            // Units
+            case 1:
+                cell.textLabel?.text = NSLocalizedString("units", comment: "")
                 var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
                 let units = settings[6][0]
                 if units == 0 {
-                    cell.textLabel?.text = NSLocalizedString("metric", comment: "")
+                    cell.detailTextLabel?.text = NSLocalizedString("metric", comment: "")
                 } else {
-                    cell.textLabel?.text = NSLocalizedString("imperial", comment: "")
+                    cell.detailTextLabel?.text = NSLocalizedString("imperial", comment: "")
                 }
             default: break
             }
-            cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.backgroundColor = Colours.colour1
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            
             return cell
             
-         
-        case 2:
-            cell.addSubview(timedSessionsSwitch)
-            // add switch
-            return cell
-        //
-        case 7:
-            cell.addSubview(iCloudSwitch)
+        // iCloud
+        case 4:
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            cell.backgroundColor = Colours.colour1
             cell.selectionStyle = .none
-            cell.backgroundColor = Colours.colour1
-//            iCloudSwitch.center = CGPoint(x: 16 + (iCloudSwitch.frame.width / 2), y: cell.frame.height / 2)
-            iCloudSwitch.center = CGPoint(x: view.frame.width - 16 - (iCloudSwitch.frame.width / 2), y: cell.frame.height / 2)
-            iCloudSwitch.backgroundColor = Colours.colour4
-            iCloudSwitch.layer.cornerRadius = iCloudSwitch.bounds.height / 2
-            iCloudSwitch.clipsToBounds = true
-            iCloudSwitch.tintColor = Colours.colour4
-//            iCloudSwitch.layer.borderColor = Colours.colour4.cgColor
-            iCloudSwitch.onTintColor = Colours.colour3
-            // add
-            return cell
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            cell.textLabel?.text = NSLocalizedString("iCloudStorage", comment: "")
+            //
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let iCloud = settings[7][0]
+            if iCloud == 0 {
+                iCloudSwitch.isOn = false
+            } else {
+                iCloudSwitch.isOn = true
+            }
+            // on off
+            cell.addSubview(iCloudSwitch)
+            iCloudSwitch.center = CGPoint(x: view.bounds.width - 16 - (iCloudSwitch.bounds.width / 2), y: cell.bounds.height / 2)
             
+            //
+            return cell
         // Reset
-        case 8:
-        //
+        case 5:
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            //
+            cell.backgroundColor = Colours.colour1
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            //
             // Reset Walkthrough
             if indexPath.row == 0 {
                 cell.textLabel?.text = NSLocalizedString("resetWalkthrough", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = Colours.colour1
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 return cell
-            }
             // Reset App
-            else if indexPath.row == 1 {
+            } else if indexPath.row == 1 {
                 cell.textLabel?.text = NSLocalizedString("resetApp", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = Colours.colour1
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 return cell
             }
         //
-        default: return cell
+        default: break
         }
-        return cell
+        return UITableViewCell()
     }
     
     // Selection handler
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let section = indexPath.section
-        let cell = tableView.cellForRow(at: indexPath)
-        //
-        switch section {
-        
-        // Homescreen Image
+        // Settings sections
+        switch indexPath.section {
+        // Background / Home Screen
         case 0:
-            // Segue to homescreen choice
-            performSegue(withIdentifier: "BackgroundImageSegue", sender: nil)
             //
-            tableView.deselectRow(at: indexPath, animated: true)
-
-            
-            
-        // Home Screen
-        case 1:
-            //
-            if actionSheetView.subviews.contains(restTimePicker) {
-                let i = actionSheetView.subviews.index(of: restTimePicker)
-                actionSheetView.subviews[i!].removeFromSuperview()
-                let j = actionSheetView.subviews.index(of: secondIndicatorLabel)
-                actionSheetView.subviews[j!].removeFromSuperview()
-            }
-            actionSheetView.addSubview(homeScreenPicker)
-            
-            //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let homeScreen = settings[1][0]
-            // View
-            let homeWidth = UIScreen.main.bounds.width - 20
-            let homeHeight = CGFloat(147 + 49)
-            actionSheetView.frame = CGRect(x: 10, y: view.frame.maxY, width: homeWidth, height: homeHeight)
-            UIApplication.shared.keyWindow?.insertSubview(actionSheetView, aboveSubview: tableView)
-            // selected row
-            homeScreenPicker.selectRow(homeScreen, inComponent: 0, animated: false)
-            //
-            // picker
-            homeScreenPicker.frame = CGRect(x: 0, y: 0, width: actionSheetView.frame.size.width, height: 147)
-            // ok
-            okButton.frame = CGRect(x: 0, y: 147, width: actionSheetView.frame.size.width, height: 49)
-            //
-            backgroundViewExpanded.alpha = 0
-            UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: actionSheetView)
-            backgroundViewExpanded.frame = UIScreen.main.bounds
-            //
-            // Position
-            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            switch indexPath.row {
+            // Background Image
+            case 0:
+                // Segue to homescreen choice
+                performSegue(withIdentifier: "BackgroundImageSegue", sender: nil)
                 //
-                self.actionSheetView.frame = CGRect(x: 10, y: self.view.frame.maxY - homeHeight - 10, width: homeWidth, height: homeHeight)
+                tableView.deselectRow(at: indexPath, animated: true)
                 
+            // Home screen
+            case 1:
+                //
+                if actionSheetView.subviews.contains(restTimePicker) {
+                    let i = actionSheetView.subviews.index(of: restTimePicker)
+                    actionSheetView.subviews[i!].removeFromSuperview()
+                    let j = actionSheetView.subviews.index(of: secondIndicatorLabel)
+                    actionSheetView.subviews[j!].removeFromSuperview()
+                }
+                actionSheetView.addSubview(homeScreenPicker)
+                
+                //
+                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                let homeScreen = settings[1][0]
+                // View
+                let homeWidth = UIScreen.main.bounds.width - 20
+                let homeHeight = CGFloat(147 + 49)
+                actionSheetView.frame = CGRect(x: 10, y: view.frame.maxY, width: homeWidth, height: homeHeight)
+                UIApplication.shared.keyWindow?.insertSubview(actionSheetView, aboveSubview: tableView)
+                // selected row
+                homeScreenPicker.selectRow(homeScreen, inComponent: 0, animated: false)
+                //
                 // picker
-                self.homeScreenPicker.frame = CGRect(x: 0, y: 0, width: self.actionSheetView.frame.size.width, height: 147)
+                homeScreenPicker.frame = CGRect(x: 0, y: 0, width: actionSheetView.frame.size.width, height: 147)
                 // ok
-                self.okButton.frame = CGRect(x: 0, y: 147, width: self.actionSheetView.frame.size.width, height: 49)
+                okButton.frame = CGRect(x: 0, y: 147, width: actionSheetView.frame.size.width, height: 49)
                 //
-                self.backgroundViewExpanded.alpha = 0.5
+                backgroundViewExpanded.alpha = 0
+                UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: actionSheetView)
+                backgroundViewExpanded.frame = UIScreen.main.bounds
+                //
+                // Position
+                UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    //
+                    self.actionSheetView.frame = CGRect(x: 10, y: self.view.frame.maxY - homeHeight - 10, width: homeWidth, height: homeHeight)
+                    
+                    // picker
+                    self.homeScreenPicker.frame = CGRect(x: 0, y: 0, width: self.actionSheetView.frame.size.width, height: 147)
+                    // ok
+                    self.okButton.frame = CGRect(x: 0, y: 147, width: self.actionSheetView.frame.size.width, height: 49)
+                    //
+                    self.backgroundViewExpanded.alpha = 0.5
+                    
+                }, completion: nil)
+                tableView.deselectRow(at: indexPath, animated: true)
                 
-            }, completion: nil)
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-            
-        // Timed Sessions
-        case 2:
-            // off --> on
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let timedSession = settings[2][0]
-            if timedSession == 0 {
-                cell?.textLabel?.text = NSLocalizedString("on", comment: "")
-                cell?.textLabel?.textColor = Colours.colour3
-                settings[2][0] = 1
-                UserDefaults.standard.set(settings, forKey: "userSettings")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-            // on --> off
-            } else if timedSession == 1 {
-                cell?.textLabel?.text = NSLocalizedString("off", comment: "")
-                cell?.textLabel?.textColor = Colours.colour4
-                settings[2][0] = 0
-                UserDefaults.standard.set(settings, forKey: "userSettings")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+                
+            default: break
             }
-            tableView.deselectRow(at: indexPath, animated: true)
             //
-            UserDefaults.standard.synchronize()
             
-        // Yoga Automatic
-        case 3:
-            //
-            //
-            // Segue to homescreen choice
-            performSegue(withIdentifier: "YogaAutomaticSegue", sender: nil)
-            //
-            tableView.deselectRow(at: indexPath, animated: true)
             
-
+        // Timed sessions
+        case 1:
+            
+            switch indexPath.row {
+            // Yoga automatic
+            case 1:
+                //
+                // Segue to homescreen choice
+                performSegue(withIdentifier: "YogaAutomaticSegue", sender: nil)
+                //
+                tableView.deselectRow(at: indexPath, animated: true)
+            //
+            default: break
+            }
             
         // Rest Time
-        case 4:
+        case 2:
             //
             if actionSheetView.subviews.contains(homeScreenPicker) {
                 let i = actionSheetView.subviews.index(of: homeScreenPicker)
@@ -598,60 +619,62 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
             tableView.deselectRow(at: indexPath, animated: true)
             
             
-            
-            
-        // Default Image
-        case 5:
-            // demonstration --> targetArea
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let defaultImage = settings[5][0]
-            if defaultImage == 0 {
-                cell?.textLabel?.text = NSLocalizedString("targetArea", comment: "")
-                settings[5][0] = 1
-                UserDefaults.standard.set(settings, forKey: "userSettings")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-            // targetArea --> demonstration
-            } else if defaultImage == 1 {
-                cell?.textLabel?.text = NSLocalizedString("demonstration", comment: "")
-                settings[5][0] = 0
-                UserDefaults.standard.set(settings, forKey: "userSettings")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-            }
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-
-            
-        // Units
-        case 6:
-        //  
-            // kg --> lb
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let units = settings[6][0]
-            if units == 0 {
-                cell?.textLabel?.text = NSLocalizedString("imperial", comment: "")
-                settings[6][0] = 1
-                UserDefaults.standard.set(settings, forKey: "userSettings")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-            // lb --> kg
-            } else if units == 1 {
-                cell?.textLabel?.text = NSLocalizedString("metric", comment: "")
-                settings[6][0] = 0
-                UserDefaults.standard.set(settings, forKey: "userSettings")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-            }
-            tableView.deselectRow(at: indexPath, animated: true)
+        // Session customization
+        case 3:
+            let cell = tableView.cellForRow(at: indexPath)
             //
-            UserDefaults.standard.synchronize()
-            
-            
-        
+            switch indexPath.row {
+            // Default Image
+            case 0:
+                // demonstration --> targetArea
+                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                let defaultImage = settings[5][0]
+                if defaultImage == 0 {
+                    cell?.detailTextLabel?.text = NSLocalizedString("targetArea", comment: "")
+                    settings[5][0] = 1
+                    UserDefaults.standard.set(settings, forKey: "userSettings")
+                    // Sync
+                    ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+                    // targetArea --> demonstration
+                } else if defaultImage == 1 {
+                    cell?.detailTextLabel?.text = NSLocalizedString("demonstration", comment: "")
+                    settings[5][0] = 0
+                    UserDefaults.standard.set(settings, forKey: "userSettings")
+                    // Sync
+                    ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+                }
+                tableView.deselectRow(at: indexPath, animated: true)
+                
+                
+            // Units
+            case 1:
+                //
+                // kg --> lb
+                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                let units = settings[6][0]
+                if units == 0 {
+                    cell?.detailTextLabel?.text = NSLocalizedString("imperial", comment: "")
+                    settings[6][0] = 1
+                    UserDefaults.standard.set(settings, forKey: "userSettings")
+                    // Sync
+                    ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+                    // lb --> kg
+                } else if units == 1 {
+                    cell?.detailTextLabel?.text = NSLocalizedString("metric", comment: "")
+                    settings[6][0] = 0
+                    UserDefaults.standard.set(settings, forKey: "userSettings")
+                    // Sync
+                    ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+                }
+                tableView.deselectRow(at: indexPath, animated: true)
+                //
+                
+            default: break
+            }
+      
         // Reset
-        case 8:
-        //
+        case 5:
+            //
             // Reset Walkthrough
             if indexPath.row == 0 {
                 //
@@ -670,17 +693,17 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
                 // Reset app action
                 let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
                     UIAlertAction in
-
+                    
                     // Walkthrough
-                        // Reset Walkthroughs
-                        var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                        // not including notifications popup
-                        for i in 1...(walkthroughs.count - 1) {
-                            walkthroughs[i] = false
-                        }
-                        UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
-                        // Sync
-                        ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+                    // Reset Walkthroughs
+                    var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+                    // not including notifications popup
+                    for i in 1...(walkthroughs.count - 1) {
+                        walkthroughs[i] = false
+                    }
+                    UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+                    // Sync
+                    ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
                     
                     //
                     // Alert View indicating need for app reset
@@ -693,7 +716,7 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
                     let paragraphStyle = NSMutableParagraphStyle()
                     paragraphStyle.alignment = .natural
                     alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
-
+                    
                     // Present alert
                     self.present(alert, animated: true, completion: nil)
                 }
@@ -707,10 +730,10 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
                 
                 // Present Alert
                 self.present(alert, animated: true, completion: nil)
-                    //
+                //
                 tableView.deselectRow(at: indexPath, animated: true)
                 
-            // Reset App
+                // Reset App
             } else if indexPath.row == 1 {
                 
                 // Alert View indicating meaning of resetting the app
@@ -723,33 +746,33 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.alignment = .natural
                 alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
-               
+                
                 
                 // Reset app action
-                    let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
-                        UIAlertAction in
-                        
-                        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-                        UserDefaults.standard.synchronize()
-                        ICloudFunctions.shared.removeAll()
-                        
-                        // Alert View
-                        let title = NSLocalizedString("resetTitle", comment: "")
-                        let message = NSLocalizedString("resetMessage", comment: "")
-                        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                        alert.view.tintColor = Colours.colour2
-                        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
-                        
-                        let paragraphStyle = NSMutableParagraphStyle()
-                        paragraphStyle.alignment = .natural
-                        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
-                        
-                        self.present(alert, animated: true, completion: nil)
-                    }
+                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                    
+                    UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+                    UserDefaults.standard.synchronize()
+                    ICloudFunctions.shared.removeAll()
+                    
+                    // Alert View
+                    let title = NSLocalizedString("resetTitle", comment: "")
+                    let message = NSLocalizedString("resetMessage", comment: "")
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    alert.view.tintColor = Colours.colour2
+                    alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+                    
+                    let paragraphStyle = NSMutableParagraphStyle()
+                    paragraphStyle.alignment = .natural
+                    alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+                    
+                    self.present(alert, animated: true, completion: nil)
+                }
                 // Cancel reset action
-                    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
-                        UIAlertAction in
-                    }
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                }
                 // Add Actions
                 alert.addAction(okAction)
                 alert.addAction(cancelAction)
@@ -759,15 +782,47 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
                 tableView.deselectRow(at: indexPath, animated: true)
             }
         //
-        default:
-            break
+        default: break
+        }
+    }
+    
+    //
+    // MARK: Switch handlers
+    @objc func valueChanged(_ sender: UISwitch) {
+        // Timed sessions
+        if sender == timedSessionSwitch {
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let timedSessions = settings[2][0]
+            if sender.isOn == true {
+                settings[2][0] = 0
+            } else {
+                settings[2][0] = 1
+            }
+            //
+            UserDefaults.standard.set(settings, forKey: "userSettings")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+                
+            // iCloud
+        } else if sender == iCloudSwitch {
+            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            let timedSessions = settings[7][0]
+            if sender.isOn == true {
+                settings[7][0] = 0
+            } else {
+                settings[7][0] = 1
+            }
+            //
+            UserDefaults.standard.set(settings, forKey: "userSettings")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
         }
     }
     
     
-//
-// MARK: Picker View ----------------------------------------------------------------------------------------------------
-//
+    //
+    // MARK: Picker View ----------------------------------------------------------------------------------------------------
+    //
     // Number of components
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -823,12 +878,11 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
         //
     }
     
-
     
     
-//
-// MARK: Slide Menu ---------------------------------------------------------------------------------------------------------------------
-//
+    //
+    // MARK: Slide Menu ---------------------------------------------------------------------------------------------------------------------
+    //
     @IBAction func slideMenuPresent() {
         self.performSegue(withIdentifier: "openMenu", sender: nil)
     }
@@ -847,8 +901,7 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
             UIApplication.shared.statusBarStyle = .default
             //
             if let destinationViewController = segue.destination as? SlideMenuView {
-                // TODO: !!!!
-//                destinationViewController.transitioningDelegate = self
+                destinationViewController.transitioningDelegate = self
             }
         } else {
             // Remove back button text
@@ -870,7 +923,7 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
     var walkthroughHighlight = UIView()
     var walkthroughLabel = UILabel()
     var nextButton = UIButton()
-
+    
     var didSetWalkthrough = false
     
     //
@@ -986,6 +1039,7 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
         }
     }
     
+    
     // QuestionMark, information needed, show walkthrough
     @IBAction func questionMarkButtonAciton(_ sender: Any) {
         walkthroughView.alpha = 1
@@ -995,7 +1049,7 @@ class SettingsOld: UITableViewController, UIPickerViewDelegate, UIPickerViewData
     }
     
     
-//
+    //
 }
 
 
@@ -1010,7 +1064,7 @@ extension Settings: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return PresentMenuAnimator()
     }
-    
+
     // Dismiss
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return DismissMenuAnimator()
@@ -1020,5 +1074,6 @@ extension Settings: UIViewControllerTransitioningDelegate {
 
 
 class SettingsNavigation: UINavigationController {
-    
+
 }
+

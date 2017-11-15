@@ -40,13 +40,15 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     //
     var offView = UIView()
+    var onOffSwitch = UISwitch()
     
     var soundPlayer: AVAudioPlayer!
     //
     // Arrays --------------------------------------------------------------------------------------------------
     //
     // Section Headers
-    var sectionHeaderArray: [String] = ["off/on", "averageBreathLength", "transitionTime", "transitionIndicator"]
+    var sectionHeaderArray: [String] = [" ", "personalisation"]
+    var personalisationArray: [String] = ["averageBreathLength", "transitionTime", "transitionIndicator"]
     
     
     // Bells Arrays
@@ -89,6 +91,13 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         self.tableViewAutomatic.backgroundView = backView
         //
+        // Switch
+        onOffSwitch.onTintColor = Colours.colour3
+        onOffSwitch.tintColor = Colours.colour4
+        onOffSwitch.backgroundColor = Colours.colour4
+        onOffSwitch.layer.cornerRadius = onOffSwitch.bounds.height / 2
+        onOffSwitch.clipsToBounds = true
+        onOffSwitch.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
     
     
@@ -183,7 +192,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
         switch tableView {
-        case tableViewAutomatic: return 4
+        case tableViewAutomatic: return 2
         case tableViewBells: return 1
         default: return 0
         }
@@ -207,20 +216,10 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         case tableViewAutomatic:
             // Header
             let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)!
-            header.textLabel?.textColor = .black
-            header.textLabel?.text = header.textLabel?.text?.capitalized
-            
+            header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 17)!
             //
-            header.contentView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            header.contentView.backgroundColor = Colours.colour1
             
-            // Border
-            let border = CALayer()
-            border.backgroundColor = Colours.colour2.cgColor
-            border.frame = CGRect(x: 15, y: header.frame.size.height-1, width: self.view.frame.size.height, height: 1)
-            //
-            header.layer.addSublayer(border)
-            header.layer.masksToBounds = true
         case tableViewBells:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 17)!
@@ -247,7 +246,11 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case tableViewAutomatic:
-            return 1
+            if section == 0 {
+                return 1
+            } else {
+                return personalisationArray.count
+            }
         case tableViewBells:
             return bellsArray.count
         default: break
@@ -258,46 +261,59 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         //
         switch tableView {
         case tableViewAutomatic:
             //
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            //
+            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
             //
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
             
             //
             switch indexPath.section {
             case 0:
+                cell.textLabel?.text = NSLocalizedString("on/off", comment: "")
+                cell.selectionStyle = .none
                 // Retreive Presentation Style
                 if settings[3][0] == 0 {
-                    cell.textLabel?.text = NSLocalizedString("off", comment: "")
+                    onOffSwitch.isOn = false
                 } else {
-                    cell.textLabel?.text = NSLocalizedString("on", comment: "")
+                    onOffSwitch.isOn = true
                 }
+                // on off
+                cell.addSubview(onOffSwitch)
+                onOffSwitch.center = CGPoint(x: view.bounds.width - 16 - (onOffSwitch.bounds.width / 2), y: cell.bounds.height / 2)
+                
             case 1:
-                //
-                if settings[3][1] == -1 {
-                    cell.textLabel?.text = "-"
-                } else {
-                    cell.textLabel?.text = String(timeArray[settings[3][1]]) + "s"
-                }
-            case 2:
-                //
-                if settings[3][2] == -1 {
-                    cell.textLabel?.text = "-"
-                } else {
-                    cell.textLabel?.text = String(transitionArray[settings[3][2]]) + "s"
-                }
-            case 3:
-                //
-                if settings[3][3] == -1 {
-                    cell.textLabel?.text = "-"
-                } else {
-                    cell.textLabel?.text = NSLocalizedString(bellsArray[settings[3][3]], comment: "")
+                cell.textLabel?.text = NSLocalizedString(personalisationArray[indexPath.row], comment: "")
+                switch indexPath.row {
+                case 0:
+                    //
+                    if settings[3][1] == -1 {
+                        cell.detailTextLabel?.text = "-"
+                    } else {
+                        cell.detailTextLabel?.text = String(timeArray[settings[3][1]]) + "s"
+                    }
+                case 1:
+                    //
+                    if settings[3][2] == -1 {
+                        cell.detailTextLabel?.text = "-"
+                    } else {
+                        cell.detailTextLabel?.text = String(transitionArray[settings[3][2]]) + "s"
+                    }
+                case 2:
+                    //
+                    if settings[3][3] == -1 {
+                        cell.detailTextLabel?.text = "-"
+                    } else {
+                        cell.detailTextLabel?.text = NSLocalizedString(bellsArray[settings[3][3]], comment: "")
+                    }
+                default: break
                 }
             default: break
             }
@@ -360,7 +376,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
-        let cell = tableView.cellForRow(at: indexPath)
         //
         var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         
@@ -368,197 +383,148 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         switch tableView {
         case tableViewAutomatic:
             //
-            switch indexPath.section {
-            // On/Off
-            case 0:
-                // off -> on
-                if settings[3][0] == 0 {
+            if indexPath.section == 1 {
+                switch indexPath.row {
+                // Breath Length
+                case 0:
                     //
-                    cell?.textLabel?.text = NSLocalizedString("on", comment: "")
-                    settings[3][0] = 1
-                    
-                    if settings[3][1] == -1 && settings[3][2] == -1 {
-                        navigationItem.hidesBackButton = true
-                    }
-                    //
-                    // Off view
-                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                        self.offView.alpha = 0
-                    }, completion: { finished in
-                        self.offView.removeFromSuperview()
-                        tableView.isScrollEnabled = true
-                    })
-                    //
-                    // Present walkthrough
-                    let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                    if walkthroughs[12] == false {
-                        walkthroughAutomaticYoga()
-                    }
-                    // on -> off
-                } else {
-                    //
-                    cell?.textLabel?.text = NSLocalizedString("off", comment: "")
-                    settings[3][0] = 0
-                    //
-                    navigationItem.hidesBackButton = false
-                    
-                    //
-                    //
-                    offView.alpha = 0
-                    view.insertSubview(offView, aboveSubview: tableView)
-                    //
-                    // Off view
-                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                        self.offView.alpha = 0.5
-                    }, completion: { finished in
-                        tableView.isScrollEnabled = false
-                    })
-                }
-                //
-                UserDefaults.standard.set(settings, forKey: "userSettings")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-                
-            // Breath Length
-            case 1:
-                //
-                okButton.isEnabled = true
-                //
-                selectedItem = 0
-                pickerView.reloadAllComponents()
-                // View
-                //
-                let selectionWidth = UIScreen.main.bounds.width - 20
-                let selectionHeight = CGFloat(147 + 49)
-                //
-                UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
-                selectionView.frame = CGRect(x: 10, y: view.frame.maxY, width: selectionWidth, height: selectionHeight)
-                self.pickerView.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
-                //
-                // PickerView
-                selectionView.addSubview(pickerView)
-                pickerView.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
-                // Select Rows
-                if settings[3][1] == -1 {
-                    pickerView.selectRow(0, inComponent: 0, animated: true)
-                } else {
-                    pickerView.selectRow(settings[3][1], inComponent: 0, animated: true)
-                }
-                //
-                selectionView.addSubview(indicatorLabel)
-                indicatorLabel.textAlignment = .left
-                self.indicatorLabel.center.y = self.pickerView.center.y
-                self.indicatorLabel.center.x = self.pickerView.frame.minX + (self.pickerView.frame.size.width * (3.55/6))
-                // ok
-                self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
-                selectionView.addSubview(okButton)
-                //
-                backgroundViewSelection.alpha = 0
-                UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
-                backgroundViewSelection.frame = UIScreen.main.bounds
-                // Animate fade and size
-                // Position
-                UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    //
-                    self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
-                    //
-                    self.backgroundViewSelection.alpha = 0.5
-                }, completion: nil)
-                
-            // Transition Time
-            case 2:
-                //
-                okButton.isEnabled = true
-                //
-                selectedItem = 1
-                pickerView.reloadAllComponents()
-                // View
-                //
-                let selectionWidth = UIScreen.main.bounds.width - 20
-                let selectionHeight = CGFloat(147 + 49)
-                //
-                UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
-                selectionView.frame = CGRect(x: 10, y: view.frame.maxY, width: selectionWidth, height: selectionHeight)
-                self.pickerView.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
-                //
-                // PickerView
-                selectionView.addSubview(pickerView)
-                pickerView.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
-                // Select Rows
-                if settings[3][1] == -1 {
-                    pickerView.selectRow(0, inComponent: 0, animated: true)
-                } else {
-                    pickerView.selectRow(settings[3][2], inComponent: 0, animated: true)
-                }
-                //
-                selectionView.addSubview(indicatorLabel)
-                indicatorLabel.textAlignment = .left
-                self.indicatorLabel.center.y = self.pickerView.center.y
-                self.indicatorLabel.center.x = self.pickerView.frame.minX + (self.pickerView.frame.size.width * (3.55/6))
-                // ok
-                self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
-                selectionView.addSubview(okButton)
-                //
-                backgroundViewSelection.alpha = 0
-                UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
-                backgroundViewSelection.frame = UIScreen.main.bounds
-                // Animate fade and size
-                // Position
-                UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    //
-                    self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
-                    //
-                    self.backgroundViewSelection.alpha = 0.5
-                }, completion: nil)
-                
-                
-            // Transition Indicator
-            case 3:
-                //
-                okButton.isEnabled = false
-                //
-                selectedItem = 2
-                //
-                selectedTransitionIndicator = -1
-                didChangeTransitionIndicator = false
-                tableViewBells.reloadData()
-                // View
-                //
-                let selectionWidth = UIScreen.main.bounds.width - 20
-                let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 47 - 88
-                //
-                UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
-                selectionView.frame = CGRect(x: 10, y: view.frame.maxY, width: selectionWidth, height: selectionHeight)
-                self.pickerView.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
-                
-                // Tableview
-                selectionView.addSubview(tableViewBells)
-                self.tableViewBells.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: selectionHeight - 49)
-                // ok
-                self.okButton.frame = CGRect(x: 0, y: self.tableViewBells.frame.maxY, width: self.selectionView.frame.size.width, height: 49)
-                selectionView.addSubview(okButton)
-                if selectedTransitionIndicator != -1 {
                     okButton.isEnabled = true
+                    //
+                    selectedItem = 0
+                    pickerView.reloadAllComponents()
+                    // View
+                    //
+                    let selectionWidth = UIScreen.main.bounds.width - 20
+                    let selectionHeight = CGFloat(147 + 49)
+                    //
+                    UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
+                    selectionView.frame = CGRect(x: 10, y: view.frame.maxY, width: selectionWidth, height: selectionHeight)
+                    self.pickerView.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
+                    //
+                    // PickerView
+                    selectionView.addSubview(pickerView)
+                    pickerView.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
+                    // Select Rows
+                    if settings[3][1] == -1 {
+                        pickerView.selectRow(0, inComponent: 0, animated: true)
+                    } else {
+                        pickerView.selectRow(settings[3][1], inComponent: 0, animated: true)
+                    }
+                    //
+                    selectionView.addSubview(indicatorLabel)
+                    indicatorLabel.textAlignment = .left
+                    self.indicatorLabel.center.y = self.pickerView.center.y
+                    self.indicatorLabel.center.x = self.pickerView.frame.minX + (self.pickerView.frame.size.width * (3.55/6))
+                    // ok
+                    self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
+                    selectionView.addSubview(okButton)
+                    //
+                    backgroundViewSelection.alpha = 0
+                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
+                    backgroundViewSelection.frame = UIScreen.main.bounds
+                    // Animate fade and size
+                    // Position
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        //
+                        self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
+                        //
+                        self.backgroundViewSelection.alpha = 0.5
+                    }, completion: nil)
+                    
+                // Transition Time
+                case 1:
+                    //
+                    okButton.isEnabled = true
+                    //
+                    selectedItem = 1
+                    pickerView.reloadAllComponents()
+                    // View
+                    //
+                    let selectionWidth = UIScreen.main.bounds.width - 20
+                    let selectionHeight = CGFloat(147 + 49)
+                    //
+                    UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
+                    selectionView.frame = CGRect(x: 10, y: view.frame.maxY, width: selectionWidth, height: selectionHeight)
+                    self.pickerView.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
+                    //
+                    // PickerView
+                    selectionView.addSubview(pickerView)
+                    pickerView.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
+                    // Select Rows
+                    if settings[3][1] == -1 {
+                        pickerView.selectRow(0, inComponent: 0, animated: true)
+                    } else {
+                        pickerView.selectRow(settings[3][2], inComponent: 0, animated: true)
+                    }
+                    //
+                    selectionView.addSubview(indicatorLabel)
+                    indicatorLabel.textAlignment = .left
+                    self.indicatorLabel.center.y = self.pickerView.center.y
+                    self.indicatorLabel.center.x = self.pickerView.frame.minX + (self.pickerView.frame.size.width * (3.55/6))
+                    // ok
+                    self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
+                    selectionView.addSubview(okButton)
+                    //
+                    backgroundViewSelection.alpha = 0
+                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
+                    backgroundViewSelection.frame = UIScreen.main.bounds
+                    // Animate fade and size
+                    // Position
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        //
+                        self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
+                        //
+                        self.backgroundViewSelection.alpha = 0.5
+                    }, completion: nil)
+                    
+                    
+                // Transition Indicator
+                case 2:
+                    //
+                    okButton.isEnabled = false
+                    //
+                    selectedItem = 2
+                    //
+                    selectedTransitionIndicator = -1
+                    didChangeTransitionIndicator = false
+                    tableViewBells.reloadData()
+                    // View
+                    //
+                    let selectionWidth = UIScreen.main.bounds.width - 20
+                    let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 47 - 88
+                    //
+                    UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
+                    selectionView.frame = CGRect(x: 10, y: view.frame.maxY, width: selectionWidth, height: selectionHeight)
+                    self.pickerView.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: self.selectionView.frame.size.height - 49)
+                    
+                    // Tableview
+                    selectionView.addSubview(tableViewBells)
+                    self.tableViewBells.frame = CGRect(x: 0, y: 0, width: self.selectionView.frame.size.width, height: selectionHeight - 49)
+                    // ok
+                    self.okButton.frame = CGRect(x: 0, y: self.tableViewBells.frame.maxY, width: self.selectionView.frame.size.width, height: 49)
+                    selectionView.addSubview(okButton)
+                    if selectedTransitionIndicator != -1 {
+                        okButton.isEnabled = true
+                    }
+                    //
+                    backgroundViewSelection.alpha = 0
+                    backgroundViewSelection.frame = UIScreen.main.bounds
+                    //
+                    UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
+                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
+                    // Animate fade and size
+                    // Position
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        //
+                        self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
+                        //
+                        self.backgroundViewSelection.alpha = 0.5
+                        //
+                    }, completion: nil)
+                //
+                default: break
                 }
-                //
-                backgroundViewSelection.alpha = 0
-                backgroundViewSelection.frame = UIScreen.main.bounds
-                //
-                UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
-                UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
-                // Animate fade and size
-                // Position
-                UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    //
-                    self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
-                    //
-                    self.backgroundViewSelection.alpha = 0.5
-                    //
-                }, completion: nil)
-            //
-            default: break
             }
-            
         //
         case tableViewBells:
             //
@@ -700,7 +666,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             let indexPath = NSIndexPath(row: 0, section: 1)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
-            cell?.textLabel?.text = String(timeArray[settings[3][1]]) + "s"
+            cell?.detailTextLabel?.text = String(timeArray[settings[3][1]]) + "s"
             //
         // Transition time
         case 1:
@@ -710,9 +676,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             //
-            let indexPath = NSIndexPath(row: 0, section: 2)
+            let indexPath = NSIndexPath(row: 1, section: 1)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
-            cell?.textLabel?.text = String(transitionArray[settings[3][2]]) + "s"
+            cell?.detailTextLabel?.text = String(transitionArray[settings[3][2]]) + "s"
             //
         // Transition Indicator
         case 2:
@@ -725,9 +691,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             settings[3][3] = selectedTransitionIndicator
             //
-            let indexPath = NSIndexPath(row: 0, section: 3)
+            let indexPath = NSIndexPath(row: 2, section: 1)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
-            cell?.textLabel?.text = NSLocalizedString(bellsArray[selectedTransitionIndicator], comment: "")
+            cell?.detailTextLabel?.text = NSLocalizedString(bellsArray[selectedTransitionIndicator], comment: "")
             //
             defaults.set(settings, forKey: "userSettings")
             // Sync
@@ -764,6 +730,68 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         })
         //
     }
+    
+    //
+    // MARK: Switch handlers
+    @objc func valueChanged(_ sender: UISwitch) {
+        // Timed sessions
+        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        // off -> on
+        if sender.isOn == true {
+            //
+            settings[3][0] = 1
+            
+            if settings[3][1] == -1 && settings[3][2] == -1 {
+                navigationItem.hidesBackButton = true
+            }
+            //
+            // Off view
+            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.offView.alpha = 0
+            }, completion: { finished in
+                self.offView.removeFromSuperview()
+                self.tableViewAutomatic.isScrollEnabled = true
+            })
+            //
+            // Present walkthrough
+            let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
+            if walkthroughs[12] == false {
+                walkthroughAutomaticYoga()
+            }
+            // on -> off
+        } else {
+            //
+            settings[3][0] = 0
+            //
+            navigationItem.hidesBackButton = false
+            
+            //
+            //
+            offView.alpha = 0
+            view.insertSubview(offView, aboveSubview: tableViewAutomatic)
+            //
+            // Off view
+            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.offView.alpha = 0.5
+            }, completion: { finished in
+                self.tableViewAutomatic.isScrollEnabled = false
+            })
+        }
+        //
+        UserDefaults.standard.set(settings, forKey: "userSettings")
+        // Sync
+        ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+        if sender.isOn == true {
+            settings[2][0] = 0
+        } else {
+            settings[2][0] = 1
+        }
+        //
+        UserDefaults.standard.set(settings, forKey: "userSettings")
+        // Sync
+        ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+    }
+    
     
     //
     // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------
@@ -891,6 +919,13 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+    // QuestionMark, information needed, show walkthrough
+    @IBAction func questionMarkButtonAciton(_ sender: Any) {
+        walkthroughView.alpha = 1
+        didSetWalkthrough = false
+        walkthroughProgress = 0
+        walkthroughAutomaticYoga()
+    }
     
 }
 

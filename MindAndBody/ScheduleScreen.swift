@@ -802,7 +802,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             // Creat new schedule
             if indexPath.row == schedules.count {
                 // Dismiss action sheet
-                let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
+//                let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
                 self.animateActionSheetDown(actionSheet: self.actionSheet, actionSheetHeight: height, backgroundView: self.backgroundViewExpanded)
                 //
                 self.performSegue(withIdentifier: "ScheduleCreationSegue", sender: self)

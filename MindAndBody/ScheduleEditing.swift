@@ -117,6 +117,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
             // App chooses sessions switch
             appChoosesSessionsOnOffSwitch.onTintColor = Colours.colour3
+            appChoosesSessionsOnOffSwitch.tintColor = Colours.colour4
+            appChoosesSessionsOnOffSwitch.backgroundColor = Colours.colour4
+            appChoosesSessionsOnOffSwitch.layer.cornerRadius = appChoosesSessionsOnOffSwitch.bounds.height / 2
+            appChoosesSessionsOnOffSwitch.clipsToBounds = true
             appChoosesSessionsOnOffSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
             // Set inital value
             // On
@@ -128,6 +132,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             // View Full week switch
             viewFullWeekSwitch.onTintColor = Colours.colour3
+            viewFullWeekSwitch.tintColor = Colours.colour4
+            viewFullWeekSwitch.backgroundColor = Colours.colour4
+            viewFullWeekSwitch.layer.cornerRadius = appChoosesSessionsOnOffSwitch.bounds.height / 2
+            viewFullWeekSwitch.clipsToBounds = true
             viewFullWeekSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
             // Set inital value
             // On

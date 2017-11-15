@@ -63,7 +63,6 @@ enum Colours {
 
 //
 // Animation Times ---------------------------------------------------------------------------------------------------------------
-//
 enum AnimationTimes {
     // View slide up
     static let animationTime1 = 0.5
@@ -79,7 +78,6 @@ enum AnimationTimes {
 
 //
 // Navigation + Status height ---------------------------------------------------------------------------------------------------------------
-//
 enum TopBarHeights {
     // Navigation bar
     static let navigationBarHeight = 44
@@ -87,11 +85,13 @@ enum TopBarHeights {
     static let statusBarHeight = UIApplication.shared.statusBarFrame.height
     //
     static let combinedHeight = 44 + UIApplication.shared.statusBarFrame.height
+    //
+    // Not in fitting with enum name....
+    static let homeIndicatorHeight: CGFloat = 34
 }
 
 //
 // Menu Variables ---------------------------------------------------------------------------------------------------------------
-//
 class MenuVariables {
     static var shared = MenuVariables()
     private init() {}
@@ -107,7 +107,6 @@ class MenuVariables {
 
 //
 // Schedule Variabls ---------------------------------------------------------------------------------------------------------------
-//
 class ScheduleVariables {
     static var shared = ScheduleVariables()
     private init() {}
