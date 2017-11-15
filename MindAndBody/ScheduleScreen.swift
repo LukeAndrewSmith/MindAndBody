@@ -69,11 +69,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     var stackArray: [UILabel] = []
     
     // Schedule creation and choices ACTION SHEET
-    let actionSheet = UIView()
     let scheduleChoiceTable = UITableView()
     let editScheduleButton = UIButton()
     let editProfileButton = UIButton()
-    let backgroundViewExpanded = UIButton()
     
     //
     // Very silly variable used in choices of endurance, steady state, as 'time choice' after 'warmup/stretching' choice, variable tell which one was selected
@@ -249,13 +247,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             walkthroughSchedule()
         }
         
-        // ACTION SHEET
-        actionSheet.backgroundColor = .clear
-        actionSheet.layer.cornerRadius = 15
-        actionSheet.clipsToBounds = true
-        let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
         // table    // buttons // spaces
-        actionSheet.frame.size = CGSize(width: view.bounds.width - 20, height: height)
         // Schedule choice
         scheduleChoiceTable.backgroundColor = Colours.colour2
         scheduleChoiceTable.delegate = self
@@ -290,15 +282,14 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         editProfileButton.setImage(#imageLiteral(resourceName: "Profile"), for: .normal)
         editProfileButton.tintColor = Colours.colour2
         //
-        actionSheet.addSubview(scheduleChoiceTable)
-        actionSheet.addSubview(editScheduleButton)
-        actionSheet.addSubview(editProfileButton)
+        ActionSheet.shared.setupActionSheet()
+        ActionSheet.shared.actionSheet.addSubview(scheduleChoiceTable)
+        ActionSheet.shared.actionSheet.addSubview(editScheduleButton)
+        ActionSheet.shared.actionSheet.addSubview(editProfileButton)
+        let heightToAdd = scheduleChoiceTable.bounds.height + 20 + editScheduleButton.bounds.height + 20 + editProfileButton.bounds.height
+        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+        ActionSheet.shared.resetCancelFrame()
         //
-        // Background View
-        backgroundViewExpanded.backgroundColor = .black
-        backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
-        //
-        
         
         //
         // Background Image
@@ -802,8 +793,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             // Creat new schedule
             if indexPath.row == schedules.count {
                 // Dismiss action sheet
-//                let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
-                self.animateActionSheetDown(actionSheet: self.actionSheet, actionSheetHeight: height, backgroundView: self.backgroundViewExpanded)
+                ActionSheet.shared.animateActionSheetDown()
                 //
                 self.performSegue(withIdentifier: "ScheduleCreationSegue", sender: self)
             //
@@ -823,8 +813,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: {
                     self.scheduleTable.reloadData()
                     // Dismiss action sheet
-                    let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
-                    self.animateActionSheetDown(actionSheet: self.actionSheet, actionSheetHeight: height, backgroundView: self.backgroundViewExpanded)
+                    ActionSheet.shared.animateActionSheetDown()
                     //
                 })
             }
@@ -907,8 +896,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     @objc func editScheduleAction() {
         let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
         //
-        let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
-        animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
+        ActionSheet.shared.animateActionSheetDown()
         //
         if schedules.count != 0 {
             self.performSegue(withIdentifier: "EditScheduleSegue", sender: self)
@@ -918,8 +906,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // Edit Profile
     @objc func editProfileAction() {
         //
-        let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
-        animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
+        ActionSheet.shared.animateActionSheetDown()
         //
         // AND indicate to profile segue that coming from schedule so that the 'skip to goals section' button can be presented
         self.performSegue(withIdentifier: "EditProfileSegue", sender: self)
@@ -928,23 +915,12 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //
     @IBAction func scheduleButton(_ sender: Any) {
-        //
-        UIApplication.shared.keyWindow?.insertSubview(actionSheet, aboveSubview: view)
-        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: actionSheet)
-        //
-        let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
-        animateActionSheetUp(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
-        
-        //
-        
+        ActionSheet.shared.animateActionSheetUp()
     }
     
     // Dismiss presets table
     @objc func backgroundViewExpandedAction(_ sender: Any) {
-        //
-        let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
-        animateActionSheetDown(actionSheet: actionSheet, actionSheetHeight: height, backgroundView: backgroundViewExpanded)
-        
+        ActionSheet.shared.animateActionSheetDown()
     }
     
     

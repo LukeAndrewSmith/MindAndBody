@@ -31,7 +31,6 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // Time Scale Action Sheet
     let timeScaleTable = UITableView()
-    let backgroundViewExpanded = UIButton()
     
     let timeScaleArray: [String] = ["1week", "1month", "3months", "6months", "1year", "all"]
     
@@ -109,11 +108,13 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         timeScaleTable.layer.borderWidth = 1
         timeScaleTable.layer.borderColor = Colours.colour1.cgColor
         timeScaleTable.isScrollEnabled = false
-        
-        // Background View
-        backgroundViewExpanded.backgroundColor = .black
-        backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
-        
+        //
+        ActionSheet.shared.setupActionSheet()
+        ActionSheet.shared.actionSheet.addSubview(timeScaleTable)
+        let heightToAdd = timeScaleTable.bounds.height
+        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+        ActionSheet.shared.resetCancelFrame()
+
         //
         //
         // Navigation Controller
@@ -830,8 +831,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         timeScaleTable.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: {
             // Dismiss action sheet
-            let height = CGFloat((147 + 49) + 49 + 49 + (20 * 2))
-            self.animateActionSheetDown(actionSheet: self.timeScaleTable, actionSheetHeight: CGFloat(47 * (self.timeScaleArray.count + 1)), backgroundView: self.backgroundViewExpanded)
+            ActionSheet.shared.animateActionSheetDown()
             //
         })
         //
@@ -840,21 +840,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //
     @IBAction func timeScaleButton(_ sender: Any) {
-        //
-        UIApplication.shared.keyWindow?.insertSubview(timeScaleTable, aboveSubview: view)
-        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: timeScaleTable)
-        //
-        animateActionSheetUp(actionSheet: timeScaleTable, actionSheetHeight: CGFloat(47 * (timeScaleArray.count + 1)), backgroundView: backgroundViewExpanded)
+        ActionSheet.shared.animateActionSheetDown()
     }
-    
-    // Dismiss presets table
-    @objc func backgroundViewExpandedAction(_ sender: Any) {
-        //
-        animateActionSheetDown(actionSheet: timeScaleTable, actionSheetHeight: CGFloat(47 * (timeScaleArray.count + 1)), backgroundView: backgroundViewExpanded)
-    }
-    
-    
-    
     
     //
     // Slide Menu ---------------------------------------------------------------------------------------------------------------------

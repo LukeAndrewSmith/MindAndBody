@@ -1233,10 +1233,13 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         presetsTableView.reloadData()
         //
-        UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
-        UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: presetsTableView)
         //
-        animateActionSheetUp(actionSheet: presetsTableView, actionSheetHeight: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88, backgroundView: backgroundViewSelection)
+        ActionSheet.shared.setupActionSheet()
+        ActionSheet.shared.actionSheet.addSubview(presetsTableView)
+        let heightToAdd = presetsTableView.bounds.height
+        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+        ActionSheet.shared.resetCancelFrame()
+        ActionSheet.shared.animateActionSheetUp()
     }
     
     // Duration

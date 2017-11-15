@@ -64,7 +64,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     //
     // Select Prest
     var presetsTableView = UITableView()
-    var backgroundViewExpanded = UIButton()
     
     //
     // MARK: View did load ------------------------------------------------------------------------------------------------------------------------------
@@ -193,11 +192,12 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         presetsTableView.layer.borderColor = Colours.colour1.cgColor
         presetsTableView.layer.borderWidth = 1
         //
-        // Background View
-        backgroundViewExpanded.backgroundColor = .black
-        backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
+        ActionSheet.shared.setupActionSheet()
+        ActionSheet.shared.actionSheet.addSubview(presetsTableView)
+        let heightToAdd = presetsTableView.bounds.height
+        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+        ActionSheet.shared.resetCancelFrame()
         //
-        
     }
     
     //
@@ -570,14 +570,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             
             //
             // Dismiss Action Sheet
-            UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-                self.presetsTableView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: tableWidth, height: tableHeight)
-                self.backgroundViewExpanded.alpha = 0
-            }, completion: { finished in
-                //
-                self.presetsTableView.removeFromSuperview()
-                self.backgroundViewExpanded.removeFromSuperview()
-            })
+            ActionSheet.shared.animateActionSheetDown()
+
             //
             // Animate new elements into page
             UIView.animate(withDuration: AnimationTimes.animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -703,18 +697,13 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     // MARK: Presets Button Action -----------------------------------------------------------------------------------------------------------------
     //
     @IBAction func presetsButtonAction(_ sender: Any) {
-        //
-        UIApplication.shared.keyWindow?.insertSubview(presetsTableView, aboveSubview: view)
-        UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: presetsTableView)
-        //
-        animateActionSheetUp(actionSheet: presetsTableView, actionSheetHeight: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88, backgroundView: backgroundViewExpanded)
+        ActionSheet.shared.animateActionSheetDown()
     }
     
     
     // Dismiss presets table
     @objc func backgroundViewExpandedAction(_ sender: Any) {
-        //
-        animateActionSheetDown(actionSheet: presetsTableView, actionSheetHeight: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88, backgroundView: backgroundViewExpanded)
+        ActionSheet.shared.animateActionSheetDown()
     }
     
     

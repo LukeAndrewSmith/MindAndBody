@@ -115,7 +115,6 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     // Add movement
     var movementsTableView = UITableView()
-    var backgroundViewExpanded = UIButton()
     
     // Sets and Reps Choice
     var setsRepsView = UIView()
@@ -266,10 +265,6 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         setsRepsView.addSubview(okButton)
         setsRepsView.addSubview(setsIndicatorLabel)
         setsRepsView.bringSubview(toFront: setsIndicatorLabel)
-        //
-        // Background View
-        backgroundViewExpanded.backgroundColor = .black
-        backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
         //
     }
     
@@ -913,16 +908,17 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         case presetsTableView:
             // Add Custom Workout
             if indexPath.row == (customSessionsArray[SelectedSession.shared.selectedSession[0]]  as [[Any]]).count {
-                let snapShot1 = presetsTableView.snapshotView(afterScreenUpdates: false)
-                snapShot1?.center.x = view.center.x
-                snapShot1?.center.y = presetsTableView.center.y - UIApplication.shared.statusBarFrame.height - (navigationController?.navigationBar.frame.size.height)!
-                view.addSubview(snapShot1!)
-                self.presetsTableView.isHidden = true
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.backgroundViewExpanded.alpha = 0
-                }, completion: { finished in
-                    self.backgroundViewExpanded.isHidden = true
-                })
+                
+//                let snapShot1 = presetsTableView.snapshotView(afterScreenUpdates: false)
+//                snapShot1?.center.x = view.center.x
+//                snapShot1?.center.y = presetsTableView.center.y - UIApplication.shared.statusBarFrame.height - (navigationController?.navigationBar.frame.size.height)!
+//                view.addSubview(snapShot1!)
+//                self.presetsTableView.isHidden = true
+//                UIView.animate(withDuration: 0.3, animations: {
+//                    self.backgroundViewExpanded.alpha = 0
+//                }, completion: { finished in
+//                    self.backgroundViewExpanded.isHidden = true
+//                })
                 
                 // Alert and Functions
                 //
