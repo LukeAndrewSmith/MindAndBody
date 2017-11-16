@@ -428,13 +428,19 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         //
         switch indexPath.section {
         case 0:
+            var toMinus = CGFloat()
+            if IPhoneType.shared.iPhoneType() == 2 {
+                toMinus = TopBarHeights.statusBarHeight + 2 + 34
+            } else {
+                toMinus = TopBarHeights.statusBarHeight + 2
+            }
             switch indexPath.row {
             case selectedRow - 1, selectedRow:
-                return (UIScreen.main.bounds.height - 22) * 7/8
+                return (UIScreen.main.bounds.height - toMinus) * 7/8
             case selectedRow + 1:
-                return (UIScreen.main.bounds.height - 22) * 1/8
+                return (UIScreen.main.bounds.height - toMinus) * 1/8
             default:
-                return (UIScreen.main.bounds.height - 22) * 1/8
+                return (UIScreen.main.bounds.height - toMinus) * 1/8
             }
         case 1: return 49
         default: return 0
@@ -897,7 +903,13 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Walkthrough
     @objc func walkthroughSession() {
         //
-        let cellHeight = (UIScreen.main.bounds.height - 22) * 7/8
+        var toMinus = CGFloat()
+        if IPhoneType.shared.iPhoneType() == 2 {
+            toMinus = TopBarHeights.statusBarHeight + 2 + 34
+        } else {
+            toMinus = TopBarHeights.statusBarHeight + 2
+        }
+        let cellHeight = (UIScreen.main.bounds.height - toMinus) * 7/8
         
         //
         if didSetWalkthrough == false {

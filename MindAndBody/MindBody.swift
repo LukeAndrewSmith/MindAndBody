@@ -297,7 +297,7 @@ class MindBody: UIViewController {
         }
         
         // Iphone 5/SE layout
-        if UIScreen.main.nativeBounds.height < 1334 {
+        if IPhoneType.shared.iPhoneType() == 0 {
             //
             wamupBottom.constant = 15
             //

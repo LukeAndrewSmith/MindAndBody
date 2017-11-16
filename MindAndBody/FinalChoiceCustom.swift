@@ -137,12 +137,16 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         // Initial Element Positions
         presetsTop.constant = 0
-        presetsBottom.constant = 0
+        if IPhoneType.shared.iPhoneType() == 2 {
+            presetsBottom.constant = -34
+        } else {
+            presetsBottom.constant = 0
+        }
         //
-        tableViewConstraintTop.constant = view.frame.size.height
-        tableViewConstraintBottom.constant = -49
+        tableViewConstraintTop.constant = view.frame.size.height + 34
+        tableViewConstraintBottom.constant = -49 - 34
         //
-        beginButtonConstraint.constant = -49
+        beginButtonConstraint.constant = -49 - 34
         
         // Width of action buttons
         // If Workout, option for circuit workout (numberofrounds)
@@ -244,25 +248,26 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         //
     }
     
-    
     var didLayout = false
     //
     // View did layout subviews Actions -------------------------------------------------------------------------------------------------
-    //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         //
         // Initial Element Positions
-        //
         if didLayout == false {
             presetsTop.constant = 0
-            presetsBottom.constant = 0
+            if IPhoneType.shared.iPhoneType() == 2 {
+                presetsBottom.constant = -34
+            } else {
+                presetsBottom.constant = 0
+            }
             //
-            tableViewConstraintTop.constant = view.frame.size.height
-            tableViewConstraintBottom.constant = -49
+            tableViewConstraintTop.constant = view.frame.size.height + 34
+            tableViewConstraintBottom.constant = -49 - 34
             //
-            beginButtonConstraint.constant = -49
+            beginButtonConstraint.constant = -49 - 34
             //
             didLayout = true
         } else {
@@ -950,7 +955,11 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     self.beginButtonEnabled()
                     //
                     // Element Positions
-                    self.presetsBottom.constant = self.view.frame.size.height - 73.5
+                    if IPhoneType.shared.iPhoneType() == 2 {
+                        self.presetsBottom.constant = self.view.frame.size.height - 73.5 - 34
+                    } else {
+                        self.presetsBottom.constant = self.view.frame.size.height - 73.5
+                    }
                     self.tableViewConstraintTop.constant = 122.5
                     self.tableViewConstraintBottom.constant = 49
                     self.beginButtonConstraint.constant = 0
@@ -1007,7 +1016,11 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 if customSessionsArray[SelectedSession.shared.selectedSession[0]].count != 0 {
                     //
                     // Element Positions
-                    presetsBottom.constant = self.view.frame.size.height - 73.5
+                    if IPhoneType.shared.iPhoneType() == 2 {
+                        self.presetsBottom.constant = self.view.frame.size.height - 73.5 - 34
+                    } else {
+                        self.presetsBottom.constant = self.view.frame.size.height - 73.5
+                    }
                     //
                     self.tableViewConstraintTop.constant = 122.5
                     self.tableViewConstraintBottom.constant = 49
@@ -1017,7 +1030,9 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     ActionSheet.shared.animateActionSheetDown()
                     self.customTableView.reloadData()
                     self.beginButtonEnabled()
-                    self.view.layoutIfNeeded()
+                    UIView.animate(withDuration: AnimationTimes.animationTime3, animations: {
+                        self.view.layoutIfNeeded()
+                    }, completion: nil)
                 }
                 //
                 customTableView.reloadData()
@@ -1337,10 +1352,15 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.beginButtonEnabled()
                 //
                 // Initial Element Positions
-                self.presetsBottom.constant = 0
-                self.tableViewConstraintTop.constant = self.view.frame.size.height
-                self.tableViewConstraintBottom.constant = -49
-                self.beginButtonConstraint.constant = -49
+                if IPhoneType.shared.iPhoneType() == 2 {
+                    presetsBottom.constant = -34
+                } else {
+                    presetsBottom.constant = 0
+                }
+                
+                self.tableViewConstraintTop.constant = self.view.frame.size.height + 34
+                self.tableViewConstraintBottom.constant = -49 - 34
+                self.beginButtonConstraint.constant = -49 - 34
 
             //
             case customTableView:

@@ -30,6 +30,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     let scheduleTitleArray = ["warmup", "workout", "cardio", "stretching", "yoga"]
     
     
+    
     //
     // MARK: Outlets ------------------------------------------------------------------------------------------------------------------------------
     //
@@ -108,12 +109,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         //
         // Initial Element Positions
         if SelectedSession.shared.selectedSession[2] == -1 {
-            presetsConstraint.constant = 0
-            //
-            tableConstraint1.constant = view.frame.size.height
-            tableConstraint.constant = -49
-            //
-            beginConstraint.constant = -49
+            
+            setConstraints(showingViews: false, animated: false)
             //
             // Selected Automatically from schedule
         } else {
@@ -133,27 +130,11 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             presetsButton.setTitle("- " + NSLocalizedString(sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[0][0] as! String, comment: "") + " -", for: .normal)
             
             //
-            // Animate new elements into page
-            UIView.animate(withDuration: AnimationTimes.animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //
-                self.movementsTableView.reloadData()
-                let indexPath2 = NSIndexPath(row: 0, section: 0)
-                self.movementsTableView.scrollToRow(at: indexPath2 as IndexPath, at: .top, animated: true)
-                //
-                self.tableConstraint.constant = 49.75
-                //
-                // Show presets button
-                if self.comingFromSchedule == false {
-                    self.tableConstraint1.constant = 73.75
-                    self.presetsConstraint.constant = self.view.frame.size.height - 73.25 - TopBarHeights.combinedHeight
-                    // Hide presets button
-                } else {
-                    self.tableConstraint1.constant = 0
-                    self.presetsConstraint.constant = self.view.frame.size.height - TopBarHeights.combinedHeight
-                }
-                //
-                self.beginConstraint.constant = 0
-            })
+            self.movementsTableView.reloadData()
+            let indexPath2 = NSIndexPath(row: 0, section: 0)
+            self.movementsTableView.scrollToRow(at: indexPath2 as IndexPath, at: .top, animated: true)
+            //
+            setConstraints(showingViews: true, animated: true)
         }
         
         
@@ -214,6 +195,47 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
+    //
+    func setConstraints(showingViews: Bool, animated: Bool) {
+        
+        // Set constraints
+        if showingViews == true {
+            //
+            self.tableConstraint.constant = 49.75
+            // Show presets button
+            if self.comingFromSchedule == false {
+                self.tableConstraint1.constant = 73.75
+                self.presetsConstraint.constant = self.view.frame.size.height - 73.25
+            // Hide presets button
+            } else {
+                self.tableConstraint1.constant = 0
+                self.presetsConstraint.constant = self.view.frame.size.height
+            }
+            //
+            self.beginConstraint.constant = 0
+
+        } else {
+            if IPhoneType.shared.iPhoneType() == 2 {
+                self.presetsConstraint.constant = -34
+            } else {
+                self.presetsConstraint.constant = 0
+            }
+            //
+            tableConstraint1.constant = view.frame.size.height
+            tableConstraint.constant = -49 - 34
+            //
+            beginConstraint.constant = -49 - 34
+        }
+        
+        // Animate / Set
+        if animated == true {
+            UIView.animate(withDuration: AnimationTimes.animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            self.view.layoutIfNeeded()
+        }
+    }
     
     //
     // MARK: TableView -----------------------------------------------------------------------------------------------------------------------
@@ -572,28 +594,11 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             ActionSheet.shared.animateActionSheetDown()
 
             //
-            // Animate new elements into page
-            UIView.animate(withDuration: AnimationTimes.animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //
-                self.movementsTableView.reloadData()
-                let indexPath2 = NSIndexPath(row: 0, section: 0)
-                self.movementsTableView.scrollToRow(at: indexPath2 as IndexPath, at: .top, animated: true)
-                //
-                self.tableConstraint.constant = 49.75
-                //
-                // Show presets button
-                self.tableConstraint1.constant = 73.75
-                if self.comingFromSchedule == false {
-                    self.presetsConstraint.constant = self.view.frame.size.height - 73.25
-                    // Hide presets button
-                } else {
-                    self.tableConstraint1.constant = 0
-                    self.presetsConstraint.constant = self.view.frame.size.height
-                }
-                //
-                self.beginConstraint.constant = 0
-                self.view.layoutIfNeeded()
-            })
+            self.movementsTableView.reloadData()
+            let indexPath2 = NSIndexPath(row: 0, section: 0)
+            self.movementsTableView.scrollToRow(at: indexPath2 as IndexPath, at: .top, animated: true)
+            //
+            setConstraints(showingViews: true, animated: true)
             
         default: break
         }

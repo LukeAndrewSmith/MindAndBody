@@ -429,13 +429,19 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             let height2 = 0.25/Double(keyArray.count - 1)
             //
+            var toMinus = CGFloat()
+            if IPhoneType.shared.iPhoneType() == 2 {
+                toMinus = TopBarHeights.statusBarHeight + 2 + 34
+            } else {
+                toMinus = TopBarHeights.statusBarHeight + 2
+            }
             switch indexPath.row {
             case selectedRow:
-                return (UIScreen.main.bounds.height - 22) * 3/4
+                return (UIScreen.main.bounds.height - toMinus) * 3/4
             case selectedRow + 1, selectedRow - 1:
-                return (UIScreen.main.bounds.height - 22) * CGFloat(height2)
+                return (UIScreen.main.bounds.height - toMinus) * CGFloat(height2)
             default:
-                return (UIScreen.main.bounds.height - 22) * CGFloat(height2)
+                return (UIScreen.main.bounds.height - toMinus) * CGFloat(height2)
             }
         case 1: return 49
         default: return 0
@@ -1177,7 +1183,13 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     // Walkthrough
     @objc func walkthroughSession() {
         //
-        let cellHeight = (UIScreen.main.bounds.height - 22) * 3/4
+        var toMinus = CGFloat()
+        if IPhoneType.shared.iPhoneType() == 2 {
+            toMinus = TopBarHeights.statusBarHeight + 2 + 34
+        } else {
+            toMinus = TopBarHeights.statusBarHeight + 2
+        }
+        let cellHeight = (UIScreen.main.bounds.height - toMinus) * 3/4
         
         //
         if didSetWalkthrough == false {

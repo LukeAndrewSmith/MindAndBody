@@ -1927,7 +1927,11 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                         // Animate up new elements
                         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                             //
-                            self.presetsConstraint.constant = 0
+                            if IPhoneType.shared.iPhoneType() == 2 {
+                                self.presetsConstraint.constant = -34
+                            } else {
+                                self.presetsConstraint.constant = 0
+                            }
                             self.durationConstraint.constant = 0
                             self.startingConstraint.constant = 0
                             self.intervalConstraint.constant = 0
@@ -1982,7 +1986,11 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     // Animate up new elements
                     UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         //
-                        self.presetsConstraint.constant = 0
+                        if IPhoneType.shared.iPhoneType() == 2 {
+                            self.presetsConstraint.constant = -34
+                        } else {
+                            self.presetsConstraint.constant = 0
+                        }
                         self.durationConstraint.constant = 0
                         self.startingConstraint.constant = 0
                         self.intervalConstraint.constant = 0

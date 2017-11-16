@@ -331,13 +331,19 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         switch indexPath.section {
         case 0:
+            var toMinus = CGFloat()
+            if IPhoneType.shared.iPhoneType() == 2 {
+                toMinus = TopBarHeights.statusBarHeight + 2 + 34
+            } else {
+                toMinus = TopBarHeights.statusBarHeight + 2
+            }
             switch indexPath.row {
             case selectedRow - 1, selectedRow, currentIndex - 1, currentIndex:
-                return (UIScreen.main.bounds.height - 22) * 3/4
+                return (UIScreen.main.bounds.height - toMinus) * 3/4
             case selectedRow + 1, currentIndex + 1:
-                return (UIScreen.main.bounds.height - 22) * 1/4
+                return (UIScreen.main.bounds.height - toMinus) * 1/4
             default:
-                return (UIScreen.main.bounds.height - 22) * 1/4
+                return (UIScreen.main.bounds.height - toMinus) * 1/4
             }
         //
         case 1: return 49

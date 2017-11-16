@@ -10,6 +10,28 @@ import Foundation
 import UIKit
 import AudioToolbox.AudioServices
 
+
+//
+// iPhone
+class IPhoneType {
+    static var shared = IPhoneType()
+    private init () {}
+    
+    func iPhoneType() -> Int {
+        // 0 == iPhone5
+        if UIScreen.main.nativeBounds.height < 1334 {
+            return 0
+        // iPhone X
+        } else if UIScreen.main.nativeBounds.height == 2436 {
+            return 2
+        // Normal
+        } else {
+            return 1
+        }
+    }
+}
+
+
 //
 // MARK: - Global Function as extensions
 //

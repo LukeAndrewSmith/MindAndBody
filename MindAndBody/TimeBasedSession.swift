@@ -414,13 +414,19 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         switch indexPath.section {
         case 0:
+            var toMinus = CGFloat()
+            if IPhoneType.shared.iPhoneType() == 2 {
+                toMinus = TopBarHeights.statusBarHeight + 2 + 34
+            } else {
+                toMinus = TopBarHeights.statusBarHeight + 2
+            }
             switch indexPath.row {
             case selectedRow - 1, selectedRow:
-                return (UIScreen.main.bounds.height - 22) * 9/10
+                return (UIScreen.main.bounds.height - toMinus) * 9/10
             case selectedRow + 1:
-                return (UIScreen.main.bounds.height - 22) * 1/10
+                return (UIScreen.main.bounds.height - toMinus) * 1/10
             default:
-                return (UIScreen.main.bounds.height - 22) * 1/10
+                return (UIScreen.main.bounds.height - toMinus) * 1/10
             }
         case 1: return 49
         default: return 0
