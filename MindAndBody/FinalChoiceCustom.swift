@@ -918,7 +918,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     // Update Title
                     let textField = alert?.textFields![0]
                     let lastIndex = customSessionsArray[SelectedSession.shared.selectedSession[0]].count - 1
-                    customSessionsArray[SelectedSession.shared.selectedSession[0]][lastIndex][0][0] = textField?.text!
+                    let title = textField?.text!
+                    customSessionsArray[SelectedSession.shared.selectedSession[0]][lastIndex][0][0] = title
                     //
                     // Default mumber of rounds if relevant
                     if SelectedSession.shared.selectedSession[0] == 1 {
@@ -1106,60 +1107,6 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             ActionSheet.shared.resetCancelFrame()
             ActionSheet.shared.animateActionSheetUp()
             
-            
-            // TODO: REMOVE!!
-//            //
-//            backgroundViewExpanded.alpha = 0
-//            UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: setsRepsView)
-//            backgroundViewExpanded.frame = UIScreen.main.bounds
-//            //
-//            // Animate Picker in
-//            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-//                //
-//                self.setsRepsView.frame = CGRect(x: 10, y: self.view.frame.maxY - 147 - 49 - 10, width: UIScreen.main.bounds.width - 20, height: 147 + 49)
-//                // ok
-//                self.okButton.frame = CGRect(x: 0, y: 147, width: self.setsRepsView.frame.size.width, height: 49)
-//                // Sets Indicator Label
-//                self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-//                self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
-//                //
-//                self.backgroundViewExpanded.alpha = 0.7
-//                //
-//                // Redo Sets indicator and picker frame
-//                switch SelectedSession.shared.selectedSession[0] {
-//                // Warmup - Sets x Reps
-//                case 0:
-//                    self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
-//                    self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-//                    self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
-//                // Workout
-//                case 1:
-//                    // Circuit - Reps
-//                    if customSessionsArray[SelectedSession.shared.selectedSession[0]][self.selectedPreset][2].count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]][self.selectedPreset][2][1] as! Int == -1 {
-//                        //
-//                        self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
-//                        self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.21, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 70, height: 30)
-//                        self.setsIndicatorLabel.text = NSLocalizedString("reps", comment: "")
-//                        // Normal - Sets x Reps
-//                    } else {
-//                        self.setsRepsPicker.frame = CGRect(x: -componentWidthFourth, y: 0, width: self.setsRepsView.frame.size.width + componentWidthFourth, height: 147)
-//                        self.setsIndicatorLabel.frame = CGRect(x: (componentWidth * 1.25) - componentWidthFourth, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-//                        self.setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
-//                    }
-//                // Cardio
-//                case 2:
-//                    self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
-//                    self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.13, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 70, height: 30)
-//                    self.setsIndicatorLabel.text = NSLocalizedString("s", comment: "")
-//                // Stretching/Yoga - Breaths
-//                case 3,4:
-//                    self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
-//                    self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.13, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 130, height: 30)
-//                    self.setsIndicatorLabel.text = NSLocalizedString("breaths", comment: "")
-//                default:
-//                    break
-//                }
-//            }, completion: nil)
             
         //
         case movementsTableView:
@@ -1515,14 +1462,6 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         ActionSheet.shared.resetCancelFrame()
         ActionSheet.shared.animateActionSheetUp()
     }
-    
-    
-    
-    // Add movement table background (dismiss table)
-    @objc func backgroundViewExpandedAction(_ sender: Any) {
-        ActionSheet.shared.animateActionSheetDown()
-    }
-    
     
     //
     // Picker Related actions ------------------------------------------------------------------------------------------------

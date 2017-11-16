@@ -15,8 +15,6 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
     
     //
     // Outlets
-    @IBOutlet weak var backgroundImageView: UIImageView!
-    //
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var topSeparator: UIView!
     @IBOutlet weak var infoTable: UITableView!
@@ -120,28 +118,8 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         super.viewDidLoad()
         UIApplication.shared.statusBarStyle = .lightContent
         
-        //
-        // Background Image/Colour
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImageView.image = nil
-            backgroundImageView.backgroundColor = Colours.colour1
-        }
-        // Blur
-        // BackgroundBlur/Vibrancy
-        let backgroundBlur = UIVisualEffectView()
-        let backgroundBlurE = UIBlurEffect(style: .dark)
-        backgroundBlur.effect = backgroundBlurE
-        backgroundBlur.isUserInteractionEnabled = false
-        backgroundBlur.frame = backgroundImageView.bounds
-        if backgroundIndex > BackgroundImages.backgroundImageArray.count {
-        } else {
-            view.insertSubview(backgroundBlur, aboveSubview: backgroundImageView)
-        }
+        // BackgroundImage
+        addBackgroundImage(withBlur: true, fullScreen: true)
         
         //
         // Subtitle

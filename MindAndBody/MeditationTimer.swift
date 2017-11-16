@@ -75,9 +75,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    // Background Image
-    @IBOutlet weak var backgroundImage: UIImageView!
-    
+
+    // Main Buttons
     //
     @IBOutlet weak var presets: UIButton!
     @IBOutlet weak var presetsDetail: UILabel!
@@ -165,11 +164,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Background Sounds
     let tableViewBackgroundSounds = UITableView()
     
-    // Sound
-    var soundPlayer: AVAudioPlayer!
-    
-    
-    
     //
     // View will appear -----------------------------------------------------------------------------------------------
     //
@@ -191,25 +185,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         seperatorLine.alpha = 0
         //
-        
-        
-        //
-        backgroundImage.frame = view.bounds
-        
-        // Background Index
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
-        //
-        // Background Image/Colour
-        //
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImage.image = nil
-            backgroundImage.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        }
+    
     }
     
     
@@ -227,18 +203,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.navigationController?.navigationBar.tintColor = Colours.colour1
         self.navigationController?.navigationBar.barTintColor = Colours.colour2
         
-        // BackgroundBlur/Vibrancy
-        let backgroundBlurE = UIBlurEffect(style: .dark)
-        backgroundBlur.effect = backgroundBlurE
-        let vibrancyE = UIVibrancyEffect(blurEffect: backgroundBlurE)
-        backgroundBlur.effect = vibrancyE
-        backgroundBlur.isUserInteractionEnabled = false
         //
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
-        }
+        // BackgroundImage
+        addBackgroundImage(withBlur: true, fullScreen: false)
         
         //
         presets.setTitle(NSLocalizedString("meditation", comment: ""), for: .normal)
@@ -309,7 +276,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Background Index
         //
         // Title Colours and Blurs
-        //
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let backgroundIndex = settings[0][0]
         switch backgroundIndex {
         // All Black, white presets
         case 1,2,3,5,6, BackgroundImages.backgroundImageArray.count:
@@ -575,8 +543,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         secondsLabel.center.x = pickerViewDuration.frame.minX + (pickerViewDuration.frame.size.width * (4.65/6))
         pickerViewDuration.addSubview(secondsLabel)
         //
-        backgroundImage.frame = view.bounds
-        backgroundBlur.frame = backgroundImage.bounds
         
         //
         presetBlur.frame = presets.frame
@@ -672,31 +638,31 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 break
             case 2:
                 //
-                if soundPlayer != nil {
-                    if soundPlayer.isPlaying {
-                        soundPlayer.stop()
+                if BellPlayer.shared.bellPlayer != nil {
+                    if BellPlayer.shared.bellPlayer.isPlaying {
+                        BellPlayer.shared.bellPlayer.stop()
                     }
                 }
             case 3:
                 //
-                if soundPlayer != nil {
-                    if soundPlayer.isPlaying == true {
-                        soundPlayer.stop()
+                if BellPlayer.shared.bellPlayer != nil {
+                    if BellPlayer.shared.bellPlayer.isPlaying == true {
+                        BellPlayer.shared.bellPlayer.stop()
                     }
                 }
             //
             case 4:
                 //
-                if soundPlayer != nil {
-                    if soundPlayer.isPlaying {
-                        soundPlayer.stop()
+                if BellPlayer.shared.bellPlayer != nil {
+                    if BellPlayer.shared.bellPlayer.isPlaying {
+                        BellPlayer.shared.bellPlayer.stop()
                     }
                 }
             case 5:
                 //
-                if soundPlayer != nil {
-                    if soundPlayer.isPlaying {
-                        soundPlayer.stop()
+                if BellPlayer.shared.bellPlayer != nil {
+                    if BellPlayer.shared.bellPlayer.isPlaying {
+                        BellPlayer.shared.bellPlayer.stop()
                     }
                 }
             default: break
@@ -756,9 +722,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 didChangeStartingBell = false
                 //
-                if soundPlayer != nil {
-                    if soundPlayer.isPlaying == true {
-                        soundPlayer.stop()
+                if BellPlayer.shared.bellPlayer != nil {
+                    if BellPlayer.shared.bellPlayer.isPlaying == true {
+                        BellPlayer.shared.bellPlayer.stop()
                     }
                 }
                 //
@@ -784,9 +750,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             case 0:
                 //
                 //
-                if soundPlayer != nil {
-                    if soundPlayer.isPlaying == true {
-                        soundPlayer.stop()
+                if BellPlayer.shared.bellPlayer != nil {
+                    if BellPlayer.shared.bellPlayer.isPlaying == true {
+                        BellPlayer.shared.bellPlayer.stop()
                     }
                 }
                 //
@@ -802,9 +768,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 intervalBellStage = 2
                 //
-                if soundPlayer != nil {
-                    if soundPlayer.isPlaying == true {
-                        soundPlayer.stop()
+                if BellPlayer.shared.bellPlayer != nil {
+                    if BellPlayer.shared.bellPlayer.isPlaying == true {
+                        BellPlayer.shared.bellPlayer.stop()
                     }
                 }
                 //
@@ -905,14 +871,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 
-                
-                // iPhone X
-                var toMinus = CGFloat()
-                if UIScreen.main.nativeBounds.height == 2436 {
-                    toMinus = 10 + 34
-                } else {
-                    toMinus = 10
-                }
                 //
                 removeView = false
                 
@@ -927,11 +885,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     ActionSheet.shared.actionSheetBackgroundView.center.x -= self.view.bounds.width
                     self.backgroundViewSelection2.center.x -= self.view.bounds.width
                     //
-                    let selectionWidth = self.view.frame.size.width - 20
-                    let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
-                    //
                     self.selectionView2.center.x -= self.view.bounds.width
-                    //
                     //
                     self.tableViewIntervalBells.reloadData()
                     // ok
@@ -959,9 +913,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 didChangeEndingBell = false
                 //
-                if soundPlayer != nil {
-                    if soundPlayer.isPlaying == true {
-                        soundPlayer.stop()
+                if BellPlayer.shared.bellPlayer != nil {
+                    if BellPlayer.shared.bellPlayer.isPlaying == true {
+                        BellPlayer.shared.bellPlayer.stop()
                     }
                 }
                 //
@@ -986,9 +940,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 didChangeBackgroundSound = false
                 //
-                if soundPlayer != nil {
-                    if soundPlayer.isPlaying == true {
-                        soundPlayer.stop()
+                if BellPlayer.shared.bellPlayer != nil {
+                    if BellPlayer.shared.bellPlayer.isPlaying == true {
+                        BellPlayer.shared.bellPlayer.stop()
                     }
                 }
                 //
@@ -1291,6 +1245,13 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
             //
+            // Scroll to row
+            let meditationArray = UserDefaults.standard.object(forKey: "meditationTimer") as! [[[[Any]]]]
+            if meditationArray[selectedPreset][2][0][0] as! Int != -1 {
+                let indexPath = IndexPath(row: meditationArray[selectedPreset][2][0][0] as! Int, section: 0)
+                tableViewBells.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
+            //
             ActionSheet.shared.setupActionSheet()
             ActionSheet.shared.actionSheet.addSubview(selectionView)
             let heightToAdd = selectionView.bounds.height
@@ -1412,6 +1373,15 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
             //
+            // Scroll to row
+            let meditationArray = UserDefaults.standard.object(forKey: "meditationTimer") as! [[[[Any]]]]
+            // .last = ending bell, [0] = bell
+            let lastIndex = (meditationArray[selectedPreset][2] as! [[Int]]).count - 1
+            if meditationArray[selectedPreset][2][lastIndex][0] as! Int != -1 {
+                let indexPath = IndexPath(row: meditationArray[selectedPreset][2][lastIndex][0] as! Int, section: 0)
+                tableViewBells.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
+            //
             ActionSheet.shared.setupActionSheet()
             ActionSheet.shared.actionSheet.addSubview(selectionView)
             let heightToAdd = selectionView.bounds.height
@@ -1472,6 +1442,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             //
             selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
+            //
+            // Scroll to row
+            let meditationArray = UserDefaults.standard.object(forKey: "meditationTimer") as! [[[[Any]]]]
+            // .last = ending bell, [0] = bell
+            if meditationArray[selectedPreset][3][0][0] as! Int != -1 {
+                let indexPath = IndexPath(row: meditationArray[selectedPreset][3][0][0] as! Int, section: 0)
+                tableViewBells.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
             //
             ActionSheet.shared.setupActionSheet()
             ActionSheet.shared.actionSheet.addSubview(selectionView)
@@ -1942,29 +1920,31 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     //
                     // Dismiss Table
-                    ActionSheet.shared.animateActionSheetDown()
-
-                    //
-                    // Animate up new elements
-                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+                        ActionSheet.shared.animateActionSheetDown()
+                        
                         //
-                        self.presetsConstraint.constant = 0
-                        self.durationConstraint.constant = 0
-                        self.startingConstraint.constant = 0
-                        self.intervalConstraint.constant = 0
-                        self.endingConstraint.constant = 0
-                        self.backgroundConstraint.constant = 0
-                        //
-                        self.beginButtonBottom.constant = 0
-                        self.seperatorLine.alpha = 1
-                        self.view.layoutIfNeeded()
-                    }, completion: { finished in
-                        //
-                        self.duration.isEnabled = true
-                        self.startingBell.isEnabled = true
-                        self.intervalBells.isEnabled = true
-                        self.endingBell.isEnabled = true
-                        self.backgroundSound.isEnabled = true
+                        // Animate up new elements
+                        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                            //
+                            self.presetsConstraint.constant = 0
+                            self.durationConstraint.constant = 0
+                            self.startingConstraint.constant = 0
+                            self.intervalConstraint.constant = 0
+                            self.endingConstraint.constant = 0
+                            self.backgroundConstraint.constant = 0
+                            //
+                            self.beginButtonBottom.constant = 0
+                            self.seperatorLine.alpha = 1
+                            self.view.layoutIfNeeded()
+                        }, completion: { finished in
+                            //
+                            self.duration.isEnabled = true
+                            self.startingBell.isEnabled = true
+                            self.intervalBells.isEnabled = true
+                            self.endingBell.isEnabled = true
+                            self.backgroundSound.isEnabled = true
+                        })
                     })
                     //
                     self.updateRows()
@@ -2033,7 +2013,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             do {
                 let bell = try AVAudioPlayer(contentsOf: url)
-                soundPlayer = bell
+                BellPlayer.shared.bellPlayer = bell
                 bell.play()
             } catch {
                 // couldn't load file :(
@@ -2149,8 +2129,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             do {
                 let bell = try AVAudioPlayer(contentsOf: url)
-                soundPlayer = bell
-                soundPlayer.numberOfLoops = -1
+                BellPlayer.shared.bellPlayer = bell
+                BellPlayer.shared.bellPlayer.numberOfLoops = -1
                 bell.play()
             } catch {
                 // couldn't load file :(

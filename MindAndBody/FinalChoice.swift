@@ -561,16 +561,11 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 cardioType = indexPath.section
             }
             
-            
             // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [sessionKey] = session, [0] titles, [0] title
             presetsButton.setTitle("- " + NSLocalizedString(sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[0][0] as! String, comment: "") + " -", for: .normal)
             
             //
             presetsTableView.deselectRow(at: indexPath, animated: true)
-            
-            //
-            let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
-            let tableWidth = UIScreen.main.bounds.width - 20
             
             //
             // Dismiss Action Sheet
@@ -703,13 +698,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     @IBAction func presetsButtonAction(_ sender: Any) {
         ActionSheet.shared.animateActionSheetUp()
     }
-    
-    
-    // Dismiss presets table
-    @objc func backgroundViewExpandedAction(_ sender: Any) {
-        ActionSheet.shared.animateActionSheetDown()
-    }
-    
     
     //
     // MARK: Expand image actions ----------------------------------------------------------------------------------------------------------------

@@ -20,11 +20,6 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    //
-    @IBOutlet weak var backgroundImage: UIImageView!
-    //
-    let backgroundBlur = UIVisualEffectView()
-    
     fileprivate var chart: Chart?
     
     var menuSwipeView = UIView()
@@ -126,34 +121,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         navigationBar.title = NSLocalizedString("tracking", comment: "")
         
         //
-        // Background Image
-        backgroundImage.frame = view.bounds
-        
-        // Background Index
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
-        //
-        // Background Image/Colour
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImage.image = nil
-            backgroundImage.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        }
-        //
-        // BackgroundBlur/Vibrancy
-        let backgroundBlurE = UIBlurEffect(style: .dark)
-        backgroundBlur.effect = backgroundBlurE
-        backgroundBlur.isUserInteractionEnabled = false
-        //
-        backgroundBlur.frame = backgroundImage.bounds
-        //
-        if backgroundIndex > BackgroundImages.backgroundImageArray.count {
-        } else {
-            view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
-        }
+        // BackgroundImage
+        addBackgroundImage(withBlur: true, fullScreen: false)
         
         let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[Date: Int]]
         if trackingDictionaries[0].count != 0 {
@@ -165,7 +134,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             warningLabel.textAlignment = .center
             warningLabel.textColor = Colours.colour1
             warningLabel.sizeToFit()
-            warningLabel.center = CGPoint(x: backgroundImage.center.x, y: backgroundImage.center.y - 44)
+            warningLabel.center = CGPoint(x: view.center.x, y: view.center.y - 44)
             view.addSubview(warningLabel)
             view.bringSubview(toFront: warningLabel)
         }
@@ -194,7 +163,6 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         let formatter = NumberFormatter()
         formatter.numberStyle = .none
         //
-        let labelsGenerator = ChartAxisLabelsGeneratorNumber(labelSettings: axisLabelSettings, formatter: formatter)
         
         // Y generator
         let labelsGenerator2 = ChartAxisLabelsGeneratorFunc {scalar in
@@ -208,7 +176,6 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         let xAxisTitle = returnAxisTitle(xValues: xValues)
         let xModel = returnXAxisModel(xAxisValues: xValues, titleLabelSettings: titleLabelSettings, axisLabelSettings: axisLabelSettings, xAxisTitle: xAxisTitle, generator: generator)
         
-        let yValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.y}
         let yModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: 0, lastModelValue: 125, axisValuesGenerator: generator, labelsGenerator: labelsGenerator2)
         
         //

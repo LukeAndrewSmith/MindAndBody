@@ -15,7 +15,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Using fake navigation bar as can;t get hiding the navigation bar on subsequent screens to work as desired
     @IBOutlet weak var fakeNavigationBarLabel: UILabel!
     @IBOutlet weak var questionMarkButton: UIButton!
-    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var scheduleOverviewTable: UITableView!
     
     @IBOutlet weak var saveButton: UIButton!
@@ -82,30 +81,8 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         fakeNavigationBarLabel.text = NSLocalizedString("scheduleOverview", comment: "")
         questionMarkButton.tintColor = Colours.colour1
         //
-        // Background Image
-        // Background Index
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
-        // Background Image/Colour
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-            backgroundImage.image = nil
-            backgroundImage.backgroundColor = Colours.colour1
-        }
-        //
-        // BackgroundBlur/Vibrancy
-        let backgroundBlurE = UIBlurEffect(style: .dark)
-        let backgroundBlur = UIVisualEffectView()
-        backgroundBlur.effect = backgroundBlurE
-        backgroundBlur.isUserInteractionEnabled = false
-        //
-        backgroundBlur.frame = backgroundImage.bounds
-        //
-        if backgroundIndex > BackgroundImages.backgroundImageArray.count {
-        } else {
-            view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
-        }
+        // BackgroundImage
+        addBackgroundImage(withBlur: true, fullScreen: false)
         
         //
         // TableView

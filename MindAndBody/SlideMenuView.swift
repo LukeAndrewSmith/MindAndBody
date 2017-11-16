@@ -105,12 +105,12 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         
         //
-        if indexPath.row != MenuVariables.shared.menuIndex {
+//        if indexPath.row != MenuVariables.shared.menuIndex {
             MenuVariables.shared.isNewView = true
             MenuVariables.shared.menuIndex = indexPath.row
-        } else {
-            MenuVariables.shared.isNewView = false
-        }
+//        } else {
+//            MenuVariables.shared.isNewView = false
+//        }
         
         //
         self.dismiss(animated: true) {
@@ -156,12 +156,14 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBAction func swipeCloseGesture(_ sender: Any) {
         //
         UIApplication.shared.statusBarStyle = .lightContent
+        MenuVariables.shared.isNewView = false
         self.dismiss(animated: true)
     }
     
     
     @IBAction func closeMenu(_ sender: Any) {
         UIApplication.shared.statusBarStyle = .lightContent
+        MenuVariables.shared.isNewView = false
         self.dismiss(animated: true)
     }
     

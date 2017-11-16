@@ -42,7 +42,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var offView = UIView()
     var onOffSwitch = UISwitch()
     
-    var soundPlayer: AVAudioPlayer!
     //
     // Arrays --------------------------------------------------------------------------------------------------
     //
@@ -61,7 +60,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Selection Items
     let selectionView = UIView()
     let okButton = UIButton()
-    let backgroundViewSelection = UIButton()
     //
     // Lengths
     let pickerView = UIPickerView()
@@ -138,9 +136,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         selectionView.layer.cornerRadius = 15
         selectionView.layer.masksToBounds = true
         
-        // Background View
-        backgroundViewSelection.backgroundColor = .black
-        backgroundViewSelection.addTarget(self, action: #selector(backgroundViewSelectionAction(_:)), for: .touchUpInside)
         //
         okButton.backgroundColor = Colours.colour1
         okButton.setTitleColor(Colours.colour3, for: .normal)
@@ -419,17 +414,15 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
                     selectionView.addSubview(okButton)
                     //
-                    backgroundViewSelection.alpha = 0
-                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
-                    backgroundViewSelection.frame = UIScreen.main.bounds
-                    // Animate fade and size
-                    // Position
-                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                        //
-                        self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
-                        //
-                        self.backgroundViewSelection.alpha = 0.5
-                    }, completion: nil)
+                    self.selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
+                    //
+                    
+                    ActionSheet.shared.setupActionSheet()
+                    ActionSheet.shared.actionSheet.addSubview(selectionView)
+                    let heightToAdd = selectionView.bounds.height
+                    ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+                    ActionSheet.shared.resetCancelFrame()
+                    ActionSheet.shared.animateActionSheetUp()
                     
                 // Transition Time
                 case 1:
@@ -465,17 +458,16 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     self.okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
                     selectionView.addSubview(okButton)
                     //
-                    backgroundViewSelection.alpha = 0
-                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
-                    backgroundViewSelection.frame = UIScreen.main.bounds
-                    // Animate fade and size
-                    // Position
-                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                        //
-                        self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
-                        //
-                        self.backgroundViewSelection.alpha = 0.5
-                    }, completion: nil)
+                    //
+                    self.selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
+                    //
+                    
+                    ActionSheet.shared.setupActionSheet()
+                    ActionSheet.shared.actionSheet.addSubview(selectionView)
+                    let heightToAdd = selectionView.bounds.height
+                    ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+                    ActionSheet.shared.resetCancelFrame()
+                    ActionSheet.shared.animateActionSheetUp()
                     
                     
                 // Transition Indicator
@@ -507,20 +499,24 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         okButton.isEnabled = true
                     }
                     //
-                    backgroundViewSelection.alpha = 0
-                    backgroundViewSelection.frame = UIScreen.main.bounds
+                    self.selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
                     //
-                    UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
-                    UIApplication.shared.keyWindow?.insertSubview(backgroundViewSelection, belowSubview: selectionView)
-                    // Animate fade and size
-                    // Position
-                    UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                        //
-                        self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY - selectionHeight - 10, width: selectionWidth, height: selectionHeight)
-                        //
-                        self.backgroundViewSelection.alpha = 0.5
-                        //
-                    }, completion: nil)
+                    // Scroll to row
+                    var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+                    if settings[3][3] != -1 {
+                        let indexPath = IndexPath(row: settings[3][3], section: 0)
+                        tableViewBells.scrollToRow(at: indexPath, at: .top, animated: true)
+                    }
+                    //
+                    
+                    //
+                    ActionSheet.shared.setupActionSheet()
+                    ActionSheet.shared.actionSheet.addSubview(selectionView)
+                    let heightToAdd = selectionView.bounds.height
+                    ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+                    ActionSheet.shared.resetCancelFrame()
+                    ActionSheet.shared.animateActionSheetUp()
+                
                 //
                 default: break
                 }
@@ -534,7 +530,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             do {
                 let bell = try AVAudioPlayer(contentsOf: url)
-                soundPlayer = bell
+                BellPlayer.shared.bellPlayer = bell
                 bell.play()
             } catch {
                 // couldn't load file :(
@@ -612,41 +608,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     //
     // Selection Related actions ------------------------------------------------------------------------------------------------
-    //
-    // Add movement table background (dismiss table)
-    @objc func backgroundViewSelectionAction(_ sender: Any) {
-        //
-        //
-        // Remove View
-        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-            //
-            if self.selectedItem == 0 || self.selectedItem == 2 {
-                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
-            } else {
-                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 47 - 88)
-            }
-            //
-            self.backgroundViewSelection.alpha = 0
-            //
-        }, completion: { finished in
-            for i in self.selectionView.subviews {
-                i.removeFromSuperview()
-            }
-            //
-            self.selectionView.removeFromSuperview()
-            self.backgroundViewSelection.removeFromSuperview()
-        })
-        //
-        
-        // Extra
-        if selectedItem == 2 {
-            if soundPlayer != nil {
-                if soundPlayer.isPlaying {
-                    soundPlayer.stop()
-                }
-            }
-        }
-    }
     
     // Ok button action
     @objc func okButtonAction(_ sender: Any) {
@@ -683,9 +644,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Transition Indicator
         case 2:
             //
-            if soundPlayer != nil {
-                if soundPlayer.isPlaying == true {
-                    soundPlayer.stop()
+            if BellPlayer.shared.bellPlayer != nil {
+                if BellPlayer.shared.bellPlayer.isPlaying == true {
+                    BellPlayer.shared.bellPlayer.stop()
                 }
             }
             //
@@ -708,26 +669,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             navigationItem.hidesBackButton = false
         }
         
-        //
-        // Remove View
-        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-            //
-            if self.selectedItem == 0 || self.selectedItem == 2 {
-                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
-            } else {
-                self.selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 47 - 88)
-            }
-            //
-            self.backgroundViewSelection.alpha = 0
-            //
-        }, completion: { finished in
-            for i in self.selectionView.subviews {
-                i.removeFromSuperview()
-            }
-            //
-            self.selectionView.removeFromSuperview()
-            self.backgroundViewSelection.removeFromSuperview()
-        })
+        ActionSheet.shared.animateActionSheetDown()
         //
     }
     

@@ -52,10 +52,6 @@ class MindBody: UIViewController {
     @IBOutlet weak var Meditation: UIButton!
     
     // Constraints
-    //
-    
-    // Background Image
-    @IBOutlet weak var backgroundImage: UIImageView!
     
     // Mind & Body section titles
     // Mind
@@ -107,16 +103,8 @@ class MindBody: UIViewController {
         let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
         let backgroundIndex = settings[0][0]
         //
-        // Background Image/Colour
-        //
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImage.image = nil
-            backgroundImage.backgroundColor = Colours.colour1
-        }
+        // BackgroundImage
+        addBackgroundImage(withBlur: false, fullScreen: false)
         //
         // Title Colours and Blurs
         //

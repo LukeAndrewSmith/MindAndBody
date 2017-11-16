@@ -19,7 +19,6 @@ class ScheduleViewQuestion: UIViewController {
     
     //
     // MARK: Outlets
-    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dayViewButton: UIButton!
     @IBOutlet weak var dayViewImage: UIImageView!
@@ -34,27 +33,8 @@ class ScheduleViewQuestion: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //
-        // Background Image/Colour
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImage.image = nil
-            backgroundImage.backgroundColor = Colours.colour1
-        }
-        // Blur
-        // BackgroundBlur/Vibrancy
-        let backgroundBlur = UIVisualEffectView()
-        let backgroundBlurE = UIBlurEffect(style: .dark)
-        backgroundBlur.effect = backgroundBlurE
-        backgroundBlur.isUserInteractionEnabled = false
-        backgroundBlur.frame = backgroundImage.bounds
-        if backgroundIndex > BackgroundImages.backgroundImageArray.count {
-        } else {
-            view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
-        }
+        // BackgroundImage
+        addBackgroundImage(withBlur: true, fullScreen: true)
         
         //
         // Title Label

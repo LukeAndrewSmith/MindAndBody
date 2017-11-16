@@ -58,9 +58,6 @@ class MeditationScreen: UIViewController {
     // Down Arrow
     @IBOutlet weak var checkMark: UIButton!
     
-    // Background Image
-    @IBOutlet weak var backgroundImage: UIImageView!
-    
     // Hide Screen
     @IBOutlet weak var hideScreen: UIButton!
     
@@ -90,22 +87,8 @@ class MeditationScreen: UIViewController {
         super.viewWillAppear(animated)
         
         //
-        backgroundImage.frame = view.bounds
-        
-        // Background Index
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
-        //
-        // Background Image/Colour
-        //
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImage.image = nil
-            backgroundImage.backgroundColor = Colours.colour1
-        }
+        // BackgroundImage
+        addBackgroundImage(withBlur: true, fullScreen: true)
         
         
         // Initial Conditions

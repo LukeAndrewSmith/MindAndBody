@@ -33,7 +33,6 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     
     //
     // MARK: Outlets
-    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     //
     @IBOutlet weak var ScheduleTypeQuestionTable: UITableView!
@@ -87,27 +86,8 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         // Layout
         layoutView()
         //
-        // Background Image/Colour
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImage.image = nil
-            backgroundImage.backgroundColor = Colours.colour1
-        }
-        // Blur
-        // BackgroundBlur/Vibrancy
-        let backgroundBlur = UIVisualEffectView()
-        let backgroundBlurE = UIBlurEffect(style: .dark)
-        backgroundBlur.effect = backgroundBlurE
-        backgroundBlur.isUserInteractionEnabled = false
-        backgroundBlur.frame = backgroundImage.bounds
-        if backgroundIndex > BackgroundImages.backgroundImageArray.count {
-        } else {
-            view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
-        }
+        // BackgroundImage
+        addBackgroundImage(withBlur: true, fullScreen: true)
         
         //
         // Title Label
@@ -238,7 +218,8 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
                 // Update Title
                 let textField = alert?.textFields![0]
                 let lastIndex = schedules.count - 1
-                schedules[lastIndex][1][0][0] = textField?.text!
+                let title = textField?.text!
+                schedules[lastIndex][1][0][0] = title
                 //
                 // Update schedule settings settings based on switches
                 // Schedule type option option
@@ -335,10 +316,19 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         // Switches
         scheduleOptionSwitch.onTintColor = Colours.colour3
         scheduleOptionSwitch.isOn = true
+        scheduleOptionSwitch.tintColor = Colours.colour4
+        scheduleOptionSwitch.backgroundColor = Colours.colour4
+        scheduleOptionSwitch.layer.cornerRadius = scheduleOptionSwitch.bounds.height / 2
+        scheduleOptionSwitch.clipsToBounds = true
         sessionsOptionSwitch.onTintColor = Colours.colour3
         sessionsOptionSwitch.isOn = true
+        sessionsOptionSwitch.tintColor = Colours.colour4
+        sessionsOptionSwitch.backgroundColor = Colours.colour4
+        sessionsOptionSwitch.layer.cornerRadius = scheduleOptionSwitch.bounds.height / 2
+        sessionsOptionSwitch.clipsToBounds = true
     }
     
+    //
     //
     // Back Button
     @IBAction func backButtonAction(_ sender: Any) {

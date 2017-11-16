@@ -22,9 +22,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //
     @IBOutlet weak var tableView: UITableView!
     
-    //
-    @IBOutlet weak var backgroundImageView: UIImageView!
-    
     
     //
     let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
@@ -71,26 +68,9 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.backgroundView = UIView()
         
         
-        // Background Image
         //
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImageView.image = nil
-            backgroundImageView.backgroundColor = Colours.colour1
-        }
-        //
-        self.view.addSubview(backgroundImageView)
-        self.view.sendSubview(toBack: backgroundImageView)
-        // BackgroundBlur/Vibrancy
-        let backgroundBlurE = UIBlurEffect(style: .dark)
-        backgroundBlur.effect = backgroundBlurE
-        backgroundBlur.isUserInteractionEnabled = false
-        //
-        backgroundBlur.frame = backgroundImageView.bounds
-        //
-        view.insertSubview(backgroundBlur, aboveSubview: backgroundImageView)
+        // BackgroundImage
+        addBackgroundImage(withBlur: true, fullScreen: false)
         
         // Tableview top view
         let topView = UIVisualEffectView()

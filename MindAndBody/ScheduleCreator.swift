@@ -19,9 +19,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var dayTable: UITableView!
     //
     let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-    var backgroundIndex = Int()
-    let backgroundImageView = UIImageView()
-    let backgroundBlur = UIVisualEffectView()
     
     // Create schedule button
     @IBOutlet weak var createScheduleButton: UIButton!
@@ -102,33 +99,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
 //        if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 {
             updateFullWeek()
 //        }
-        
-        backgroundIndex = settings[0][0]
         //
-        // Background Image
-        backgroundImageView.frame = UIScreen.main.bounds
-        backgroundImageView.contentMode = .scaleAspectFill
-        backgroundImageView.clipsToBounds = true
-        //
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImageView.image = nil
-            backgroundImageView.backgroundColor = Colours.colour1
-        }
-        //
-        self.view.addSubview(backgroundImageView)
-        self.view.sendSubview(toBack: backgroundImageView)
-        //
-        // BackgroundBlur/Vibrancy
-        let backgroundBlurE = UIBlurEffect(style: .dark)
-        backgroundBlur.effect = backgroundBlurE
-        backgroundBlur.isUserInteractionEnabled = false
-        //
-        backgroundBlur.frame = backgroundImageView.bounds
-        //
-        view.insertSubview(backgroundBlur, aboveSubview: backgroundImageView)
+        // BackgroundImage
+        addBackgroundImage(withBlur: true, fullScreen: true)
         
         //
         // Tables

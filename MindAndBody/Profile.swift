@@ -18,7 +18,6 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     //
     @IBOutlet weak var questionsTable: UITableView!
     @IBOutlet weak var sectionLabel: UILabel!
-    @IBOutlet weak var backgroundImageView: UIImageView!
     //
     // Also used as back button
     @IBOutlet weak var dismissViewButton: UIButton!
@@ -60,27 +59,8 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
             dismissViewButton.imageView?.image = #imageLiteral(resourceName: "Back Arrow")
         }
         //
-        // Background Image/Colour
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImageView.image = nil
-            backgroundImageView.backgroundColor = Colours.colour1
-        }
-        // Blur
-        // BackgroundBlur/Vibrancy
-        let backgroundBlur = UIVisualEffectView()
-        let backgroundBlurE = UIBlurEffect(style: .dark)
-        backgroundBlur.effect = backgroundBlurE
-        backgroundBlur.isUserInteractionEnabled = false
-        backgroundBlur.frame = backgroundImageView.bounds
-        if backgroundIndex > BackgroundImages.backgroundImageArray.count {
-        } else {
-            view.insertSubview(backgroundBlur, aboveSubview: backgroundImageView)
-        }
+        // BackgroundImage
+        addBackgroundImage(withBlur: true, fullScreen: true)
         //
         // Table View
         questionsTable.tableFooterView = UIView()

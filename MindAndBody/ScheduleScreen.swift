@@ -52,12 +52,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var dayIndicator: UIView!
     @IBOutlet weak var dayIndicatorLeading: NSLayoutConstraint!
     
-    //    var dayIndicator = UIView()
-    // Background Image
-    @IBOutlet weak var backgroundImage: UIImageView!
-    let backgroundBlur = UIVisualEffectView()
-    
-    
     // MARK: -
     //
     // Variables
@@ -263,7 +257,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         editScheduleButton.addTarget(self, action: #selector(editScheduleAction), for: .touchUpInside)
         editScheduleButton.setTitle(NSLocalizedString("editSchedule", comment: ""), for: .normal)
         editScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        editScheduleButton.frame = CGRect(x: 0, y: (147 + 49) + 20, width: view.bounds.width - 20, height: 49)
+        editScheduleButton.frame = CGRect(x: 0, y: (147 + 49) + 10, width: view.bounds.width - 20, height: 49)
         editScheduleButton.layer.cornerRadius = 49 / 2
         editScheduleButton.clipsToBounds = true
         editScheduleButton.setTitleColor(Colours.colour2, for: .normal)
@@ -274,54 +268,17 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         editProfileButton.addTarget(self, action: #selector(editProfileAction), for: .touchUpInside)
         editProfileButton.setTitle(NSLocalizedString("editProfile", comment: ""), for: .normal)
         editProfileButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        editProfileButton.frame = CGRect(x: 0, y: (147 + 49) + 20 + 49 + 20, width: view.bounds.width - 20, height: 49)
+        editProfileButton.frame = CGRect(x: 0, y: (147 + 49) + 10 + 49 + 10, width: view.bounds.width - 20, height: 49)
         editProfileButton.layer.cornerRadius = 49 / 2
         editProfileButton.clipsToBounds = true
         editProfileButton.setTitleColor(Colours.colour2, for: .normal)
         editProfileButton.backgroundColor = Colours.colour1
         editProfileButton.setImage(#imageLiteral(resourceName: "Profile"), for: .normal)
         editProfileButton.tintColor = Colours.colour2
-        //
-        ActionSheet.shared.setupActionSheet()
-        ActionSheet.shared.actionSheet.addSubview(scheduleChoiceTable)
-        ActionSheet.shared.actionSheet.addSubview(editScheduleButton)
-        ActionSheet.shared.actionSheet.addSubview(editProfileButton)
-        let heightToAdd = scheduleChoiceTable.bounds.height + 20 + editScheduleButton.bounds.height + 20 + editProfileButton.bounds.height
-        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
-        ActionSheet.shared.resetCancelFrame()
-        //
         
         //
-        // Background Image
-        backgroundImage.frame = view.bounds
         
-        // Background Index
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
-        //
-        // Background Image/Colour
-        //
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-            //
-            backgroundImage.image = nil
-            backgroundImage.backgroundColor = Colours.colour1
-        }
-        
-        //
-        // BackgroundBlur/Vibrancy
-        let backgroundBlurE = UIBlurEffect(style: .dark)
-        backgroundBlur.effect = backgroundBlurE
-        backgroundBlur.isUserInteractionEnabled = false
-        //
-        backgroundBlur.frame = backgroundImage.bounds
-        //
-        if backgroundIndex > BackgroundImages.backgroundImageArray.count {
-        } else {
-            view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
-        }
+        addBackgroundImage(withBlur: true, fullScreen: false)
         
         //
         // Navigation Bar
@@ -398,7 +355,6 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
                 dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 17)
                 dayLabel.text = NSLocalizedString(dayArrayChar[i], comment: "")
                 dayLabel.sizeToFit()
-                dayLabel.alpha = 0.5
                 dayLabel.tag = i
                 //
                 let dayTap = UITapGestureRecognizer()
@@ -431,11 +387,11 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         if scheduleStyle == 0 {
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
                 ScheduleVariables.shared.selectedDay = Date().currentWeekDayFromMonday - 1
-                stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
+                stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
                 dayIndicatorLeading.constant = stackArray[ScheduleVariables.shared.selectedDay].frame.minX
                 self.view.layoutIfNeeded()
             } else {
-                stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
+                stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-thin", size: 17)
                 dayIndicatorLeading.constant = stackArray[ScheduleVariables.shared.selectedDay].frame.minX
                 self.pageStack.layoutIfNeeded()
                 maskView()
@@ -914,14 +870,26 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //
     @IBAction func scheduleButton(_ sender: Any) {
+        //
+        let actionSheet = UIView()
+//        actionSheet.backgroundColor = Colours.colour1.withAlphaComponent(0.2)
+//        actionSheet.layer.borderColor = Colours.colour1.cgColor
+//        actionSheet.layer.borderWidth = 1
+        let height = scheduleChoiceTable.bounds.height + 10 + editScheduleButton.bounds.height + 10 + editProfileButton.bounds.height + 10
+        actionSheet.frame.size = CGSize(width: view.bounds.width - 20, height: height)
+        actionSheet.layer.cornerRadius = editScheduleButton.bounds.height / 2
+        actionSheet.addSubview(scheduleChoiceTable)
+        actionSheet.addSubview(editScheduleButton)
+        actionSheet.addSubview(editProfileButton)
+        //
+        ActionSheet.shared.setupActionSheet()
+        ActionSheet.shared.actionSheet.addSubview(actionSheet)
+        let heightToAdd = height
+        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+        ActionSheet.shared.resetCancelFrame()
+        //
         ActionSheet.shared.animateActionSheetUp()
     }
-    
-    // Dismiss presets table
-    @objc func backgroundViewExpandedAction(_ sender: Any) {
-        ActionSheet.shared.animateActionSheetDown()
-    }
-    
     
     //
     // MARK: Prepare for segue

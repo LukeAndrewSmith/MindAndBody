@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 
 //
@@ -88,6 +89,16 @@ enum TopBarHeights {
     //
     // Not in fitting with enum name....
     static let homeIndicatorHeight: CGFloat = 34
+}
+
+//
+// Sound player
+class BellPlayer {
+    static var shared = BellPlayer()
+    private init() {}
+    //
+    // Name possibly misleading, as also used for background sounds in meditation timer
+    var bellPlayer: AVAudioPlayer!
 }
 
 //

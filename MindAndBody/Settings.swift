@@ -30,7 +30,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     //
     let secondIndicatorLabel = UILabel()
     //
-    var backgroundViewExpanded = UIButton()
     
     //
     var actionSheetTable = UITableView()
@@ -119,10 +118,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         secondIndicatorLabel.textColor = Colours.colour1
         secondIndicatorLabel.text = "s"
         //
-        // Background View
-        backgroundViewExpanded.backgroundColor = .black
-        backgroundViewExpanded.addTarget(self, action: #selector(backgroundViewExpandedAction(_:)), for: .touchUpInside)
-        //
         // Home Screen Action Sheet
         // picker
         homeScreenPicker.backgroundColor = Colours.colour2
@@ -145,20 +140,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         iCloudSwitch.clipsToBounds = true
         iCloudSwitch.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
-    // Add movement table background (dismiss table)
-    @objc func backgroundViewExpandedAction(_ sender: Any) {
-        //
-        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-            self.actionSheetView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
-            
-            //
-            self.backgroundViewExpanded.alpha = 0
-        }, completion: { finished in
-            self.actionSheetView.removeFromSuperview()
-            //
-            self.backgroundViewExpanded.removeFromSuperview()
-        })
-    }
+    
     //
     // Ok button action
     @objc func okButtonAction(_ sender: Any) {
@@ -185,15 +167,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         
         
         
-        UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
-            self.actionSheetView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: self.view.frame.size.width - 20, height: 147 + 49)
-            //
-            self.backgroundViewExpanded.alpha = 0
-        }, completion: { finished in
-            self.actionSheetView.removeFromSuperview()
-            //
-            self.backgroundViewExpanded.removeFromSuperview()
-        })
+        ActionSheet.shared.animateActionSheetDown()
         //
         tableView.reloadData()
     }
@@ -525,25 +499,21 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 // ok
                 okButton.frame = CGRect(x: 0, y: 147, width: actionSheetView.frame.size.width, height: 49)
                 //
-                backgroundViewExpanded.alpha = 0
-                UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: actionSheetView)
-                backgroundViewExpanded.frame = UIScreen.main.bounds
-                //
-                // Position
-                UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    //
-                    self.actionSheetView.frame = CGRect(x: 10, y: self.view.frame.maxY - homeHeight - 10, width: homeWidth, height: homeHeight)
-                    
-                    // picker
-                    self.homeScreenPicker.frame = CGRect(x: 0, y: 0, width: self.actionSheetView.frame.size.width, height: 147)
-                    // ok
-                    self.okButton.frame = CGRect(x: 0, y: 147, width: self.actionSheetView.frame.size.width, height: 49)
-                    //
-                    self.backgroundViewExpanded.alpha = 0.5
-                    
-                }, completion: nil)
-                tableView.deselectRow(at: indexPath, animated: true)
+                self.actionSheetView.frame = CGRect(x: 0, y: 0, width: homeWidth, height: homeHeight)
                 
+                // picker
+                self.homeScreenPicker.frame = CGRect(x: 0, y: 0, width: self.actionSheetView.frame.size.width, height: 147)
+                // ok
+                self.okButton.frame = CGRect(x: 0, y: 147, width: self.actionSheetView.frame.size.width, height: 49)
+                
+                ActionSheet.shared.setupActionSheet()
+                ActionSheet.shared.actionSheet.addSubview(actionSheetView)
+                let heightToAdd = actionSheetView.bounds.height
+                ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+                ActionSheet.shared.resetCancelFrame()
+                ActionSheet.shared.animateActionSheetUp()
+                
+                tableView.deselectRow(at: indexPath, animated: true)
                 
             default: break
             }
@@ -596,26 +566,22 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             self.secondIndicatorLabel.frame = CGRect(x: (actionSheetView.frame.size.width / 2 + 30), y: (self.restTimePicker.frame.size.height / 2) - 15, width: 50, height: 30)
             //
-            backgroundViewExpanded.alpha = 0
-            UIApplication.shared.keyWindow?.insertSubview(backgroundViewExpanded, belowSubview: actionSheetView)
-            backgroundViewExpanded.frame = UIScreen.main.bounds
+            self.actionSheetView.frame = CGRect(x: 0, y: 0, width: restWidth, height: restHeight)
+            
+            // picker
+            self.restTimePicker.frame = CGRect(x: 0, y: 0, width: self.actionSheetView.frame.size.width, height: 147)
+            // ok
+            self.okButton.frame = CGRect(x: 0, y: 147, width: self.actionSheetView.frame.size.width, height: 49)
+            // Sets Indicator Label
+            self.secondIndicatorLabel.frame = CGRect(x: (self.actionSheetView.frame.size.width / 2 + 30), y: (self.restTimePicker.frame.size.height / 2) - 15, width: 50, height: 30)
             //
-            // Position
-            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //
-                self.actionSheetView.frame = CGRect(x: 10, y: self.view.frame.maxY - restHeight - 10, width: restWidth, height: restHeight)
-                
-                // picker
-                self.restTimePicker.frame = CGRect(x: 0, y: 0, width: self.actionSheetView.frame.size.width, height: 147)
-                // ok
-                self.okButton.frame = CGRect(x: 0, y: 147, width: self.actionSheetView.frame.size.width, height: 49)
-                // Sets Indicator Label
-                self.secondIndicatorLabel.frame = CGRect(x: (self.actionSheetView.frame.size.width / 2 + 30), y: (self.restTimePicker.frame.size.height / 2) - 15, width: 50, height: 30)
-                //
-                //
-                self.backgroundViewExpanded.alpha = 0.5
-                
-            }, completion: nil)
+            ActionSheet.shared.setupActionSheet()
+            ActionSheet.shared.actionSheet.addSubview(actionSheetView)
+            let heightToAdd = actionSheetView.bounds.height
+            ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+            ActionSheet.shared.resetCancelFrame()
+            ActionSheet.shared.animateActionSheetUp()
+            
             tableView.deselectRow(at: indexPath, animated: true)
             
             
@@ -792,7 +758,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Timed sessions
         if sender == timedSessionSwitch {
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let timedSessions = settings[2][0]
             if sender.isOn == true {
                 settings[2][0] = 0
             } else {
@@ -806,7 +771,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             // iCloud
         } else if sender == iCloudSwitch {
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let timedSessions = settings[7][0]
             if sender.isOn == true {
                 settings[7][0] = 0
             } else {

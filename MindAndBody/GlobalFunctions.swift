@@ -19,6 +19,46 @@ import AudioToolbox.AudioServices
 extension UIViewController {
     
     //
+    // Add background Image
+    func addBackgroundImage(withBlur: Bool, fullScreen: Bool) {
+        //
+        // Background Image View
+        let backgroundImage = UIImageView()
+        backgroundImage.contentMode = .scaleAspectFill
+        backgroundImage.clipsToBounds = true
+        // Frame
+        if fullScreen == true {
+            backgroundImage.frame = UIScreen.main.bounds
+        } else {
+            backgroundImage.frame = view.bounds
+        }
+        //
+        // Background Image
+        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        let backgroundIndex = settings[0][0]
+        // Background Image/Colour
+        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
+            backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
+        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
+            backgroundImage.image = nil
+            backgroundImage.backgroundColor = Colours.colour1
+        }
+        view.insertSubview(backgroundImage, at: 0)
+        //
+        // BackgroundBlur/Vibrancpy
+        if withBlur == true {
+            let backgroundBlur = UIVisualEffectView()
+            let backgroundBlurE = UIBlurEffect(style: .dark)
+            backgroundBlur.effect = backgroundBlurE
+            backgroundBlur.isUserInteractionEnabled = false
+            //
+            backgroundBlur.frame = backgroundImage.bounds
+            //
+            view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
+        }
+    }
+    
+    //
     // Animate Photo/Explanation Up
     func animateViewUp(animationView:UIImageView, backgroundView:UIButton) {
         //
