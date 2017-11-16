@@ -189,8 +189,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-        //
         return scheduleOverviewArrays[scheduleType].count
     }
     

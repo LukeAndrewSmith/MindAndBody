@@ -471,7 +471,6 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             //
             if xValues.count == 1 {
                 let keys = trackingDictionaries[1].keys.sorted()
-                let calendar = Calendar(identifier: .gregorian)
                 let valueToAdd = ChartAxisValueDate(date: keys.first!, formatter: df)
                 xValues.append(valueToAdd)
             }
@@ -490,11 +489,6 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         let formatter = NumberFormatter()
         formatter.numberStyle = .none
         //
-        let labelsGenerator = ChartAxisLabelsGeneratorNumber(labelSettings: axisLabelSettings, formatter: formatter)
-        //
-        let xEmptyLabelsGenerator = ChartAxisLabelsGeneratorFunc {value in return
-            ChartAxisLabel(text: "", settings: axisLabelSettings)
-        }
         
         //
         switch selectedTimeScale {

@@ -192,6 +192,9 @@ class MindBody: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //
+        // Check subscription -> Present Subscription Screen
+        checkSubscription()
         
         // Set status bar to light
         UIApplication.shared.statusBarStyle = .lightContent

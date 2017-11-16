@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import AudioToolbox.AudioServices
-
+import StoreKit
 
 //
 // iPhone
@@ -31,7 +31,6 @@ class IPhoneType {
     }
 }
 
-
 //
 // MARK: - Global Function as extensions
 //
@@ -39,6 +38,17 @@ class IPhoneType {
 //
 // View Controller
 extension UIViewController {
+    
+    
+    //
+    // Check subscriptions
+    func checkSubscription() {
+        guard SubscriptionService.shared.currentSessionId != nil, SubscriptionService.shared.hasReceiptData else {
+            self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
+            return
+        }
+    }
+    
     
     //
     // Add background Image

@@ -219,6 +219,10 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        //
+        // Check subscription -> Present Subscription Screen
+        checkSubscription()
+        
         
         //
         layoutViews()
