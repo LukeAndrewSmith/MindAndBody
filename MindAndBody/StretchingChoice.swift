@@ -43,13 +43,11 @@ class StretchingChoice: UIViewController  {
     //
     @IBOutlet weak var connectionTrailing: NSLayoutConstraint!
     
-    
     //
     // View did load -------------------------------------------------------------------------------------------------------
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // Colours
         view.backgroundColor = Colours.colour1
@@ -91,7 +89,7 @@ class StretchingChoice: UIViewController  {
         //
         
         // Iphone 5/SE
-        if UIScreen.main.nativeBounds.height < 1334 {
+        if IPhoneType.shared.iPhoneType() == 0 {
             //
             generalTop.constant = 52
             generalBottom.constant = 52
@@ -100,6 +98,12 @@ class StretchingChoice: UIViewController  {
             stackView.spacing = 15
             connectionWidth.constant = 15
             connectionTrailing.constant = 15
+        } else if IPhoneType.shared.iPhoneType() == 2 {
+            //
+            generalTop.constant = 102
+            generalBottom.constant = 102
+            stackBottom.constant = 102
+            //
         }
     }
     

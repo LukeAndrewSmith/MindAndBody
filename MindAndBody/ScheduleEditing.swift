@@ -196,7 +196,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
         // Iphone 5/SE layout
-        if UIScreen.main.nativeBounds.height < 1334 {
+        if IPhoneType.shared.iPhoneType() == 0 {
             return 62
         } else {
             return 72
@@ -241,7 +241,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // App helps create schedule
         case 3:
             // Iphone 5/SE layout, title too long
-            if UIScreen.main.nativeBounds.height < 1334 {
+            if IPhoneType.shared.iPhoneType() == 0 {
                 cell.textLabel?.text = NSLocalizedString("appHelpsCreateScheduleShort", comment: "")
             }
             cell.selectionStyle = .none

@@ -78,7 +78,7 @@ class ClassicChoiceG: UIViewController  {
         fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         fullBody.titleLabel?.textAlignment = .center
         // Change title if iPhone SE/5
-        if UIScreen.main.nativeBounds.height < 1334 {
+        if IPhoneType.shared.iPhoneType() == 0 {
             upperBody.setTitle(NSLocalizedString("upper", comment: ""), for: UIControlState.normal)
             lowerBody.setTitle(NSLocalizedString("lower", comment: ""), for: UIControlState.normal)
         } else {
@@ -133,7 +133,7 @@ class ClassicChoiceG: UIViewController  {
         
         
         // Iphone 5/SE
-        if UIScreen.main.nativeBounds.height < 1334 {
+        if IPhoneType.shared.iPhoneType() == 0 {
             //
             fullTop.constant = 20
             fullBottom.constant = 20
@@ -148,6 +148,14 @@ class ClassicChoiceG: UIViewController  {
             connection2Trailing.constant = 10
             connection3Width.constant = 10
             connection3Trailing.constant = 10
+        } else if IPhoneType.shared.iPhoneType() == 2 {
+            //
+            //
+            fullTop.constant = 60
+            fullBottom.constant = 60
+            stack1Bottom.constant = 60
+            stack2Bottom.constant = 60
+            //
         }
     }
     

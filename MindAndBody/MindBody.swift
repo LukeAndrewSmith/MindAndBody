@@ -311,6 +311,17 @@ class MindBody: UIViewController {
             //
             yogaBottom.constant = 15
             meditationBottom.constant = 15
+        } else if IPhoneType.shared.iPhoneType() == 2 {
+            //
+            wamupBottom.constant = 15
+            //
+            bodyTop.constant = 5
+            bodyBottom.constant = 2
+            mindTop.constant = 5
+            mindBottom.constant = 3
+            //
+            yogaBottom.constant = 15
+            meditationBottom.constant = 15
         }
         
     }

@@ -81,7 +81,7 @@ class BodyweightChoice: UIViewController  {
         
         
         // Iphone 5/SE
-        if UIScreen.main.nativeBounds.height < 1334 {
+        if IPhoneType.shared.iPhoneType() == 0 {
             //
             fullBodyTop.constant = 52
             fullBodyBottom.constant = 52
@@ -90,6 +90,12 @@ class BodyweightChoice: UIViewController  {
             stackView.spacing = 15
             connectionWidth.constant = 15
             connectionTrailing.constant = 15
+        } else if IPhoneType.shared.iPhoneType() == 2 {
+            //
+            fullBodyTop.constant = 102
+            fullBodyBottom.constant = 102
+            stackBottom.constant = 102
+            //
         }
     }
     

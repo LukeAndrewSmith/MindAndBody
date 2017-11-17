@@ -81,13 +81,19 @@ class GymChoice: UIViewController  {
         //
         
         // Iphone 5/SE
-        if UIScreen.main.nativeBounds.height < 1334 {
+        if IPhoneType.shared.iPhoneType() == 0 {
             //
             classicTop.constant = 52
             classicBottom.constant = 52
             stackBottom.constant = 52
             //
             stackView.spacing = 15
+        } else if IPhoneType.shared.iPhoneType() == 2 {
+            //
+            classicTop.constant = 102
+            classicBottom.constant = 102
+            stackBottom.constant = 102
+            //
         }
     }
     

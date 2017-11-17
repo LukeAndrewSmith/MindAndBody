@@ -40,7 +40,7 @@ class ActionSheet {
         actionSheet.addSubview(cancelButton)
         actionSheetBackgroundView.addSubview(actionSheet)
         //
-        actionSheet.frame.size = CGSize(width: UIScreen.main.bounds.width - 10, height: 49 + 10)
+        actionSheet.frame.size = CGSize(width: UIScreen.main.bounds.width - 20, height: 49 + 10)
         cancelButton.frame = CGRect(x: 0, y: actionSheet.bounds.height - 10, width: actionSheet.bounds.width, height: 49)
         cancelButton.addTarget(self, action: #selector(animateActionSheetDown), for: .touchUpInside)
         actionSheetBackgroundView.addTarget(self, action: #selector(animateActionSheetDown), for: .touchUpInside)

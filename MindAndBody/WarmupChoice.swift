@@ -111,7 +111,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         //
         
         // Iphone 5/SE
-        if UIScreen.main.nativeBounds.height < 1334 {
+        if IPhoneType.shared.iPhoneType() == 0 {
             //
             stackTop.constant = 30
             stackBottom.constant = 30
@@ -119,6 +119,10 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
             stack2.spacing = 15
             connectionLabelTrailing.constant = 15
             connectionLabelWidth.constant = 15
+        } else if IPhoneType.shared.iPhoneType() == 2 {
+            //
+            stackTop.constant = 80
+            stackBottom.constant = 80
         }
         
         
