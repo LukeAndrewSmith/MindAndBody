@@ -43,6 +43,8 @@ extension UIViewController {
     //
     // Check subscriptions
     func checkSubscription() {
+        
+        //
         guard SubscriptionService.shared.currentSessionId != nil, SubscriptionService.shared.hasReceiptData else {
             self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
             return

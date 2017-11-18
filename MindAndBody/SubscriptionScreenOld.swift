@@ -32,6 +32,8 @@ class SubscriptionScreen: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         //
+        SubscriptionService.shared.loadSubscriptionOptions()
+        //
         // Subscriptions
         options = SubscriptionService.shared.options
         
@@ -393,13 +395,13 @@ class SubscriptionScreen: UIViewController, UITableViewDataSource, UITableViewDe
         addLoadingAlert()
         //
         NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.dismissRestoreAlert), name: SubscriptionService.restoreSuccessfulNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.dismissLoading), name: SubscriptionService.restoreFailedNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.failedToRestore), name: SubscriptionService.restoreFailedNotification2, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.failedToRestore), name: SubscriptionService.restoreFailedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.dismissLoading), name: SubscriptionService.restoreFinishedNotification, object: nil)
         //
         SubscriptionService.shared.restorePurchases()
         //
         DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
-            if self.options == nil {
+            if self.loadingAlert.isBeingPresented {
                 self.removeLoadingPresentError()
             }
         })

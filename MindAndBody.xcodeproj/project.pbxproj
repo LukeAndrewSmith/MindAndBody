@@ -488,7 +488,7 @@
 		077E471B1EB9DFC6005B0B22 /* PresentMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */; };
 		077E471F1EB9E221005B0B22 /* SlideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471E1EB9E221005B0B22 /* SlideMenuView.swift */; };
 		077E47231EB9EED3005B0B22 /* DismissMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */; };
-		077EBC851FB9A5A3009B9818 /* SubscriptionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EBC841FB9A5A2009B9818 /* SubscriptionScreen.swift */; };
+		077EBC851FB9A5A3009B9818 /* SubscriptionScreenOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EBC841FB9A5A2009B9818 /* SubscriptionScreenOld.swift */; };
 		078674FE1FB84F7000C6B74C /* ICloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078674FD1FB84F7000C6B74C /* ICloudStorage.swift */; };
 		0789ED061F79A6EA000EB739 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789ED051F79A6EA000EB739 /* UserData.swift */; };
 		078F409A1F4B700800B4F566 /* SwiftCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078F40951F4B6C1C00B4F566 /* SwiftCharts.framework */; };
@@ -1883,7 +1883,7 @@
 		077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentMenuAnimator.swift; sourceTree = "<group>"; };
 		077E471E1EB9E221005B0B22 /* SlideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuView.swift; sourceTree = "<group>"; };
 		077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissMenuAnimator.swift; sourceTree = "<group>"; };
-		077EBC841FB9A5A2009B9818 /* SubscriptionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionScreen.swift; sourceTree = "<group>"; };
+		077EBC841FB9A5A2009B9818 /* SubscriptionScreenOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionScreenOld.swift; sourceTree = "<group>"; };
 		078674FD1FB84F7000C6B74C /* ICloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudStorage.swift; sourceTree = "<group>"; };
 		0789ED051F79A6EA000EB739 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		078F408E1F4B6C1C00B4F566 /* SwiftCharts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftCharts.xcodeproj; path = ../../Code/Carthage/Carthage/Checkouts/SwiftCharts/SwiftCharts.xcodeproj; sourceTree = "<group>"; };
@@ -3681,7 +3681,7 @@
 		0778761F1F92A45A005CE68A /* Subscriptions */ = {
 			isa = PBXGroup;
 			children = (
-				077EBC841FB9A5A2009B9818 /* SubscriptionScreen.swift */,
+				077EBC841FB9A5A2009B9818 /* SubscriptionScreenOld.swift */,
 				07DE23011FC0916F00940567 /* Subscriptions Other */,
 				074B39AC1FBE42A600D3ED47 /* Subscriptions Ray */,
 			);
@@ -8406,7 +8406,7 @@
 				07EFC0AC1F66CCEF0030DCE6 /* ScheduleCreator.swift in Sources */,
 				07DEE6F31E0AADAC003B89AB /* StretchingChoice.swift in Sources */,
 				077C2C7E1E5C723D00BA62C0 /* GymChoice.swift in Sources */,
-				077EBC851FB9A5A3009B9818 /* SubscriptionScreen.swift in Sources */,
+				077EBC851FB9A5A3009B9818 /* SubscriptionScreenOld.swift in Sources */,
 				07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */,
 				074B39B21FBE43A200D3ED47 /* SelfieService.swift in Sources */,
 				077E471B1EB9DFC6005B0B22 /* PresentMenuAnimator.swift in Sources */,

@@ -27,8 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //
         // Subscriptions
-        SKPaymentQueue.default().add(self)
-//        SubscriptionService.shared.loadSubscriptionOptions()
+//        SKPaymentQueue.default().add(self)
         
         // TODO: TEST!! REMOVE
 //        ICloudFunctions.shared.removeAll()
@@ -157,7 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:
-        SKPaymentQueue.default().remove(self)
+//        SKPaymentQueue.default().remove(self)
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
@@ -189,8 +188,9 @@ extension AppDelegate: SKPaymentTransactionObserver {
                 // Cancelled
                 } else {
                     // Reset expiring date
-                    
+                    // TODO: HANDLE CANCEL
                 }
+                SKPaymentQueue.default().finishTransaction(transaction)
             case .deferred:
                 handleDeferredState(for: transaction, in: queue)
             }
@@ -203,7 +203,6 @@ extension AppDelegate: SKPaymentTransactionObserver {
     
     func handlePurchasedState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
         print("User purchased product id: \(transaction.payment.productIdentifier)")
-        
         queue.finishTransaction(transaction)
         SubscriptionService.shared.uploadReceipt { (success) in
             DispatchQueue.main.async {
@@ -241,7 +240,7 @@ extension AppDelegate: SKPaymentTransactionObserver {
     //
     // Restore transaction failed
     public func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
-        print("Cancel Transaction")
+        print("Cancel Transaction / No Subscription Found")
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: SubscriptionService.restoreFailedNotification, object: nil)
         }
@@ -250,7 +249,7 @@ extension AppDelegate: SKPaymentTransactionObserver {
     public func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         print("Transaction Finished")
         DispatchQueue.main.async {
-            NotificationCenter.default.post(name: SubscriptionService.restoreFailedNotification2, object: nil)
+            NotificationCenter.default.post(name: SubscriptionService.restoreFinishedNotification, object: nil)
         }
     }
     
