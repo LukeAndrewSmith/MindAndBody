@@ -1522,6 +1522,18 @@
 
 //
 // MARK: Subscriptions
+"subscriptionButton" = "Subscription";
+// Subscrtioption failed to retreive
+"retreivalFailed" = "Can't retreive subscription";
+"subscriptionWarning" = "Warning. Cannot retreive subscriptions\n";
+"subscriptionWarningMessage" = "Please ensure that you are connected to the internet";
+"userCheckedConnection" = "I'm connected to the internet";
+// Restore failed
+"restoreWarning" = "No subscription found\n";
+"restoreWarningMessage" = "There does not seem to be a subscription associated with your Apple ID, please ensure that you are logged in to the Apple ID with which you bought the subscription";
+"ok" = "Ok";
+//
+"perYear" = " /Year";
 // Subtitle
 "makingTheEffort" = "For those willing to make the effort";
 "subscription" = "Subscription";

@@ -13,7 +13,7 @@ public struct Session {
     public var paidSubscriptions: [PaidSubscription]
     
     public var currentSubscription: PaidSubscription? {
-        let activeSubscriptions = paidSubscriptions.filter { $0.isActive && $0.purchaseDate >= SelfieService.shared.simulatedStartDate }
+        let activeSubscriptions = paidSubscriptions.filter { $0.isActive }
         let sortedByMostRecentPurchase = activeSubscriptions.sorted { $0.purchaseDate > $1.purchaseDate }
         
         return sortedByMostRecentPurchase.first

@@ -221,7 +221,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         //
         // Check subscription -> Present Subscription Screen
-//        checkSubscription()
+        checkSubscription()
         
         
         //

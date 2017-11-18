@@ -7,7 +7,6 @@
 //
 
 import Foundation
-//import SelfieService
 import StoreKit
 
 class SubscriptionService: NSObject {
@@ -15,6 +14,8 @@ class SubscriptionService: NSObject {
     static let sessionIdSetNotification = Notification.Name("SubscriptionServiceSessionIdSetNotification")
     static let optionsLoadedNotification = Notification.Name("SubscriptionServiceOptionsLoadedNotification")
     static let restoreSuccessfulNotification = Notification.Name("SubscriptionServiceRestoreSuccessfulNotification")
+    static let restoreFailedNotification = Notification.Name("SubscriptionServiceRestoreFailedNotification")
+    static let restoreFailedNotification2 = Notification.Name("SubscriptionServiceRestoreFailedNotification2")
     static let purchaseSuccessfulNotification = Notification.Name("SubscriptionServiceRestoreSuccessfulNotification")
     
     
@@ -22,7 +23,9 @@ class SubscriptionService: NSObject {
     
     var hasReceiptData: Bool {
         return loadReceipt() != nil
+        
     }
+    
     
     var currentSessionId: String? {
         didSet {
@@ -40,15 +43,9 @@ class SubscriptionService: NSObject {
     
     func loadSubscriptionOptions() {
         
-        let productIDPrefix = Bundle.main.bundleIdentifier! + ".sub."
+        let annual = "mind_and_body_yearly_subscription"
         
-        let allAccess = productIDPrefix + "allaccess"
-        let oneAWeek  = productIDPrefix + "oneaweek"
-        
-        let allAccessMonthly = productIDPrefix + "allaccess.monthly"
-        let oneAWeekMonthly  = productIDPrefix + "oneaweek.monthly"
-        
-        let productIDs = Set([allAccess, oneAWeek, allAccessMonthly, oneAWeekMonthly])
+        let productIDs = Set([annual])
         
         let request = SKProductsRequest(productIdentifiers: productIDs)
         request.delegate = self
@@ -82,6 +79,7 @@ class SubscriptionService: NSObject {
     }
     
     private func loadReceipt() -> Data? {
+        
         guard let url = Bundle.main.appStoreReceiptURL else {
             return nil
         }
@@ -99,11 +97,16 @@ class SubscriptionService: NSObject {
 // MARK: - SKProductsRequestDelegate
 
 extension SubscriptionService: SKProductsRequestDelegate {
+    
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        // Indicate to subscription screen that request has yielded a response
+        
+        // Load options
         options = response.products.map { Subscription(product: $0) }
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
+        
         if request is SKProductsRequest {
             print("Subscription Options Failed Loading: \(error.localizedDescription)")
         }

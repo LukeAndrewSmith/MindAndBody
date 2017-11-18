@@ -21,20 +21,72 @@ class SubscriptionScreen: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var subscriptionButton: UIButton!
     @IBOutlet weak var checkSubscriptionButton: UIButton!
     
+    // Loading
+    var loadingAlert = UIAlertController()
+    
+    // Subscriptions
+    var options: [Subscription]?
+    
     //
     // MARK: View did load
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIApplication.shared.statusBarStyle = .lightContent
+        //
+        // Subscriptions
+        options = SubscriptionService.shared.options
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleOptionsLoaded(notification:)),
+                                               name: SubscriptionService.optionsLoadedNotification,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handlePurchaseSuccessfull(notification:)),
+                                               name: SubscriptionService.purchaseSuccessfulNotification,
+                                               object: nil)
+        
+        //
+        loadMyView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if options == nil {
+            addLoadingAlert()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
+                if self.options == nil {
+                    self.removeLoadingPresentError()
+                }
+            })
+        } else {
+            setSubscriptionData()
+        }
+    }
+    
+    // Subscription handlers
+    @objc func handleOptionsLoaded(notification: Notification) {
+        DispatchQueue.main.async { [weak self] in
+            self?.options = SubscriptionService.shared.options
+            self?.setSubscriptionData()
+            self?.removeLoadingAlert()
+        }
+    }
+    
+    @objc func handlePurchaseSuccessfull(notification: Notification) {
+        DispatchQueue.main.async { [weak self] in
+            self?.dismiss(animated: true)
+        }
+    }
+    
+    // MARK: Load View
+    func loadMyView() {
+        UIApplication.shared.statusBarStyle = .lightContent
         //
         // BackgroundImage
         addBackgroundImage(withBlur: true, fullScreen: true)
-        
         //
         // Subtitle
         subtitleLabel.text = NSLocalizedString("makingTheEffort", comment: "")
-        
         //
         // Info Table
         infoTable.tableFooterView = UIView()
@@ -42,11 +94,11 @@ class SubscriptionScreen: UIViewController, UITableViewDataSource, UITableViewDe
         infoTable.dataSource = self
         infoTable.separatorStyle = .none
         infoTable.isScrollEnabled = false
-        
         //
         // Buttons
         // Profile
-        subscriptionButton.setTitle(NSLocalizedString("purchaseSubscription", comment: ""), for: .normal)
+        setSubscriptionData()
+        subscriptionButton.setTitle(NSLocalizedString(NSLocalizedString("subscriptionButton", comment: ""), comment: ""), for: .normal)
         subscriptionButton.titleLabel?.lineBreakMode = .byWordWrapping
         subscriptionButton.titleLabel?.numberOfLines = 0
         subscriptionButton.titleLabel?.textAlignment = .center
@@ -57,9 +109,80 @@ class SubscriptionScreen: UIViewController, UITableViewDataSource, UITableViewDe
         checkSubscriptionButton.layer.cornerRadius = checkSubscriptionButton.bounds.height / 2
         checkSubscriptionButton.layer.masksToBounds = true
         checkSubscriptionButton.backgroundColor = Colours.colour1.withAlphaComponent(0.25)
-        //        let appBlur = UIVisualEffectView
+    }
+    
+    // Load Subscription data
+    func setSubscriptionData() {
+        //
+        if let annualOption = self.options?[0] {
+            self.subscriptionButton.setTitle(annualOption.formattedPrice + NSLocalizedString("perYear", comment: ""), for: .normal)
+        } else {
+            self.subscriptionButton.setTitle(NSLocalizedString("retreivalFailed", comment: ""), for: .normal)
+        }
+    }
+    
+    // MARK: Alerts
+    // Loading
+    func addLoadingAlert() {
+        // Setup Alert
+        loadingAlert = UIAlertController(title: nil, message: "Loading...", preferredStyle: .alert)
+        
+        // Setup indicator
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.startAnimating()
+        
+        loadingAlert.view.addSubview(loadingIndicator)
+        
+        // Present Alert
+        self.present(loadingAlert, animated: true, completion: nil)
+    }
+    
+    //
+    func removeLoadingAlert() {
+        loadingAlert.dismiss(animated: true)
+    }
+    
+    func removeLoadingPresentError() {
+        loadingAlert.dismiss(animated: true) {
+            self.presentErrorAlert()
+        }
+    }
+    
+    // Loading
+    func presentErrorAlert() {
+        //
+        // Alert View indicating meaning of resetting the app
+        let title = NSLocalizedString("subscriptionWarning", comment: "")
+        let message = NSLocalizedString("subscriptionWarningMessage", comment: "")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = Colours.colour2
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         
         
+        // Reset app action
+        let okAction = UIAlertAction(title:  NSLocalizedString("userCheckedConnection", comment: ""), style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            if self.options == nil {
+                SubscriptionService.shared.loadSubscriptionOptions()
+                self.addLoadingAlert()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
+                    if self.options == nil {
+                        self.removeLoadingPresentError()
+                    }
+                })
+            }
+        }
+        // Add Actions
+        alert.addAction(okAction)
+        
+        // Present Alert
+        self.present(alert, animated: true, completion: nil)
     }
     
     //
@@ -244,10 +367,85 @@ class SubscriptionScreen: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    
+    //
+    // MARK: Button Handlers
+    // Subscription button
+    @IBAction func subscriptionButtonAction(_ sender: Any) {
+        if let option = options?[0] {
+            SubscriptionService.shared.purchase(subscription: option)
+        } else {
+            addLoadingAlert()
+            SubscriptionService.shared.loadSubscriptionOptions()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
+                if self.options == nil {
+                    self.removeLoadingPresentError()
+                }
+            })
+        }
+    }
+    
+    
     //
     // Look around app button
-    @IBAction func appButton(_ sender: Any) {
-        self.dismiss(animated: true)
+    @IBAction func restoreButton(_ sender: Any) {
+        //
+        addLoadingAlert()
+        //
+        NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.dismissRestoreAlert), name: SubscriptionService.restoreSuccessfulNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.dismissLoading), name: SubscriptionService.restoreFailedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.failedToRestore), name: SubscriptionService.restoreFailedNotification2, object: nil)
+        //
+        SubscriptionService.shared.restorePurchases()
+        //
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
+            if self.options == nil {
+                self.removeLoadingPresentError()
+            }
+        })
+    }
+    
+    @objc func dismissRestoreAlert() {
+        loadingAlert.dismiss(animated: true) {
+            self.dismiss(animated: true)
+        }
+    }
+    
+    @objc func dismissLoading() {
+        loadingAlert.dismiss(animated: true)
+    }
+    
+    @objc func failedToRestore() {
+        // Add alert saying failed to restore
+        loadingAlert.dismiss(animated: true, completion: {
+            self.presentFailedToRestoreAlert()
+        })
+        //
+    }
+    
+    func presentFailedToRestoreAlert() {
+        //
+        // Alert View indicating meaning of resetting the app
+        let title = NSLocalizedString("restoreWarning", comment: "")
+        let message = NSLocalizedString("restoreWarningMessage", comment: "")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = Colours.colour2
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        
+        
+        // Reset app action
+        let okAction = UIAlertAction(title:  NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        // Add Actions
+        alert.addAction(okAction)
+        
+        // Present Alert
+        self.present(alert, animated: true, completion: nil)
     }
     
 }

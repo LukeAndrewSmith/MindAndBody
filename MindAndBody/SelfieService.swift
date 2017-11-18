@@ -6,7 +6,7 @@
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
-private let itcAccountSecret = "YOUR_ACCOUNT_SECRET"
+private let itcAccountSecret = "a255263277c14664afb897c5de689810"
 
 import Foundation
 
@@ -29,20 +29,20 @@ public enum SelfieServiceError: Error {
 public class SelfieService {
     
     public static let shared = SelfieService()
-    let simulatedStartDate: Date
+//    let simulatedStartDate: Date
     
     private var sessions = [SessionId: Session]()
     
     init() {
-        let persistedDateKey = "RWSSimulatedStartDate"
-        if let persistedDate = UserDefaults.standard.object(forKey: persistedDateKey) as? Date {
-            simulatedStartDate = persistedDate
-        } else {
-            let date = Date().addingTimeInterval(-30) // 30 second difference to account for server/client drift.
-            UserDefaults.standard.set(date, forKey: "RWSSimulatedStartDate")
-            
-            simulatedStartDate = date
-        }
+//        let persistedDateKey = "RWSSimulatedStartDate"
+//        if let persistedDate = UserDefaults.standard.object(forKey: persistedDateKey) as? Date {
+//            simulatedStartDate = persistedDate
+//        } else {
+//            let date = Date().addingTimeInterval(-30) // 30 second difference to account for server/client drift.
+//            UserDefaults.standard.set(date, forKey: "RWSSimulatedStartDate")
+//
+//            simulatedStartDate = date
+//        }
     }
     
     /// Trade receipt for session id

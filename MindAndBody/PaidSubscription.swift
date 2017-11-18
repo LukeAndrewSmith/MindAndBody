@@ -22,10 +22,8 @@ public struct PaidSubscription {
         case all
         
         init?(productId: String) {
-            if productId.contains("oneaweek") {
+            if productId.contains("mind_and_body_yearly_subscription") {
                 self = .one
-            } else if productId.contains("allaccess") {
-                self = .all
             } else {
                 return nil
             }
@@ -56,7 +54,7 @@ public struct PaidSubscription {
         self.productId = productId
         self.purchaseDate = purchaseDate
         self.expiresDate = expiresDate
-        self.level = Level(productId: productId) ?? .all // if we've botched the productId give them all access :]
+        self.level = (Level(productId: productId) ?? nil)!
         
     }
 }
