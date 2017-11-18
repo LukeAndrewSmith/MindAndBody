@@ -337,7 +337,7 @@ enum Register {
     
     // Tracking percentages
         // % = completed / planned
-    static let registerTrackingDictionaries: [[Date: Int]] =
+    static let registerTrackingDictionaries: [[String: Int]] =
     [
         // Week Tracking
             // Tracks % during each week

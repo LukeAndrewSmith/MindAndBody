@@ -221,7 +221,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         //
         // Check subscription -> Present Subscription Screen
-        checkSubscription()
+//        checkSubscription()
         
         
         //
@@ -319,7 +319,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     func layoutViews() {
         //
         if scheduleStyle == 0 {
-            dayIndicator.alpha = 0.5
+            dayIndicator.alpha = 0.72
         } else {
             dayIndicator.alpha = 0
         }
@@ -909,6 +909,9 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         } else if segue.identifier == "scheduleSegueOverview" {
             let destinationVC = segue.destination as? FinalChoice
+            
+            let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+            // Only say from schedule if app chooses sessions for the user
             destinationVC?.comingFromSchedule = true
             //
             // Remove back button text

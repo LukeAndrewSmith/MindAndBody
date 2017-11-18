@@ -418,9 +418,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
             let iCloud = settings[7][0]
             if iCloud == 0 {
-                iCloudSwitch.isOn = false
-            } else {
                 iCloudSwitch.isOn = true
+            } else {
+                iCloudSwitch.isOn = false
             }
             // on off
             cell.addSubview(iCloudSwitch)
@@ -770,16 +770,23 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 
             // iCloud
         } else if sender == iCloudSwitch {
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            var settings: [[Int]] = []
             if sender.isOn == true {
+                ICloudFunctions.shared.pullToDefaults()
+                settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
                 settings[7][0] = 0
+                UserDefaults.standard.set(settings, forKey: "userSettings")
+                // Sync
+                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+                ICloudFunctions.shared.pushToICloud(toSync: [""])
             } else {
+                settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
                 settings[7][0] = 1
+                //
+                UserDefaults.standard.set(settings, forKey: "userSettings")
+                // Sync
+                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             }
-            //
-            UserDefaults.standard.set(settings, forKey: "userSettings")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
         }
     }
     

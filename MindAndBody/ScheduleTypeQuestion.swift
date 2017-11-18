@@ -274,6 +274,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         for i in 0...profileAnswers.count - 1 {
             if profileAnswers[i] == -1 {
                 userHasFilledInProfile = false
+                break
             }
         }
         // Perform relevant segue
@@ -281,17 +282,27 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         // PERFORM SEGUE
         // App helps create schedule
         if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
-            if userHasFilledInProfile == false {
+            // App chooses sessions
+            if schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] as! Int == 0 && userHasFilledInProfile == false {
                 // Goes to profile
                 self.performSegue(withIdentifier: "ScheduleQuestionProfileSegue", sender: self)
+            // User chooses sessions
             } else {
                 // Goes to schedule creation help
                 self.performSegue(withIdentifier: "ScheduleQuestionHelpSegue", sender: self)
             }
-            // Custom Schedule
+        // Custom Schedule
         } else if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 {
-            // Goes to schedule view type question
-            self.performSegue(withIdentifier: "ScheduleQuestionCustomSegue", sender: self)
+            // App chooses sessions
+            if schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] as! Int == 0 && userHasFilledInProfile == false {
+                // Goes to profile
+                self.performSegue(withIdentifier: "ScheduleQuestionProfileSegue", sender: self)
+            // User chooses sessions
+            } else {
+                // Goes to schedule view type question
+                self.performSegue(withIdentifier: "ScheduleQuestionCustomSegue", sender: self)
+            }
+            
         }
     }
     

@@ -208,8 +208,16 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 self.presetsConstraint.constant = self.view.frame.size.height - 73.25
             // Hide presets button
             } else {
-                self.tableConstraint1.constant = 0
-                self.presetsConstraint.constant = self.view.frame.size.height
+                let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+                // App chooses session
+                if schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] as! Int == 0 {
+                    self.tableConstraint1.constant = 0
+                    self.presetsConstraint.constant = self.view.frame.size.height
+                // User chooses sessions
+                } else {
+                    self.tableConstraint1.constant = 73.75
+                    self.presetsConstraint.constant = self.view.frame.size.height - 73.25
+                }
             }
             //
             self.beginConstraint.constant = 0

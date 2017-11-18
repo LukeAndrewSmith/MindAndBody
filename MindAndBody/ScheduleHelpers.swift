@@ -730,10 +730,10 @@ extension ScheduleScreen {
             
             // Deselect all indicators
             for i in 0...(stackArray.count - 1) {
-                stackArray[i].alpha = 0.5
+                stackArray[i].font = UIFont(name: "SFUIDisplay-thin", size: 17)
             }
             // Select indicator
-            stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
+            stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
             animateDayIndicatorToDay()
             
             // Animate
@@ -770,10 +770,10 @@ extension ScheduleScreen {
             
             // Deselect all indicators
             for i in 0...(stackArray.count - 1) {
-                stackArray[i].alpha = 0.5
+                stackArray[i].font = UIFont(name: "SFUIDisplay-thin", size: 17)
             }
             // Select indicator
-            stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
+            stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
             selectDay(day: ScheduleVariables.shared.selectedDay)
             animateDayIndicatorToDay()
             
@@ -821,10 +821,10 @@ extension ScheduleScreen {
             
             // Deselect all indicators
             for i in 0...(stackArray.count - 1) {
-                stackArray[i].alpha = 0.5
+                stackArray[i].font = UIFont(name: "SFUIDisplay-thin", size: 17)
             }
             // Select indicator
-            stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
+            stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
             animateDayIndicatorToDay()
 
             // Animate
@@ -861,10 +861,10 @@ extension ScheduleScreen {
             
             // Deselect all indicators
             for i in 0...(stackArray.count - 1) {
-                stackArray[i].alpha = 0.5
+                stackArray[i].font = UIFont(name: "SFUIDisplay-thin", size: 17)
             }
             // Select indicator
-            stackArray[ScheduleVariables.shared.selectedDay].alpha = 1
+            stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
             selectDay(day: ScheduleVariables.shared.selectedDay)
             
             // Animate

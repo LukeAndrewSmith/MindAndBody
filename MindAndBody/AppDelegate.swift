@@ -24,24 +24,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        //
+        // Subscriptions
         SubscriptionService.shared.loadSubscriptionOptions()
         
-        
+        // TODO: TEST!! REMOVE
 //        ICloudFunctions.shared.removeAll()
         //
-        // Icloud
-//        NotificationCenter.default.addObserver(self, selector: #selector(), name:  NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: NSUbiquitousKeyValueStore.default)
-        
+        // Icloud Oberver
         NotificationCenter.default.addObserver(
             forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
             object: NSUbiquitousKeyValueStore.default,
             queue: OperationQueue.main) { notification in
-//                let ubiquitousKeyValueStore = notification.object as? NSUbiquitousKeyValueStore
-//                ubiquitousKeyValueStore?.synchronize()
                 //
                 ICloudFunctions.shared.pullToDefaults()
         }
-
+        
+        //
+        // Sync all, only does something if new device but existing data on iCloud
+        if UserDefaults.standard.object(forKey: "userSettings") == nil {
+            NSUbiquitousKeyValueStore.default.synchronize()
+            ICloudFunctions.shared.pullToDefaults()
+        }
         
         //
         // Register Defaults --------------------------------------------------------------------------------
@@ -78,12 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Push everything to iCloud
         let check = NSUbiquitousKeyValueStore.default.object(forKey: "walkthroughs")
-        if check == nil {
+        if ICloudFunctions.shared.ICloudEnabled() && check == nil {
             ICloudFunctions.shared.pushToICloud(toSync: [""])
         }
-        
-//        // Sync all
-//        ICloudFunctions.shared.pullToDefaults()
         
         //
         // Set Home Screen

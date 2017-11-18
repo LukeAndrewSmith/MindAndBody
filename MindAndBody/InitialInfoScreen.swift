@@ -25,8 +25,8 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
     
     
     //
-    // Requestion notifications/icloud
-    func requestionOptions() {
+    // Request notifications/icloud
+    func requestOptions() {
 
         //
         // iCloud popup
@@ -40,7 +40,7 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         paragraphStyle.alignment = .natural
         iCloudAlert.setValue(NSAttributedString(string: iCloudMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         // Yes Action
-        let yesAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+        let yesAction = UIAlertAction(title: "On", style: UIAlertActionStyle.default) {
             UIAlertAction in
             //
             var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
@@ -55,7 +55,7 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
             //
         }
         // No Action
-        let noAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
+        let noAction = UIAlertAction(title: "Off", style: UIAlertActionStyle.default) {
             UIAlertAction in
             //
             var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
@@ -117,6 +117,8 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         UIApplication.shared.statusBarStyle = .lightContent
+        //
+        requestOptions()
         
         // BackgroundImage
         addBackgroundImage(withBlur: true, fullScreen: true)

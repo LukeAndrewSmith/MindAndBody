@@ -56,6 +56,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         var trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[Date: Int]]
         trackingDictionaries[0] = [:]
         trackingDictionaries[0].updateValue(20, forKey: Date().firstMondayInMonth)
+        
 
         
         trackingDictionaries[1] = [:]
@@ -68,8 +69,10 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         trackingDictionaries[1].updateValue(80, forKey: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!)
         
         //
+        // TODO: SAVE ALL TRACKING DICTIONARIES TO USERDEFAULTS WITH STRINGS AS KEYS
+        // CONVERT DATE TO TIME INTERVAL SINCE 1970, THEN STRING, THEN USE Date(timeIntervalSince1970: timeStamp) where timestamp is the string
         UserDefaults.standard.set(trackingDictionaries, forKey: "trackingDictionaries")
-        ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
+//        ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
         
     }
     
@@ -80,8 +83,23 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //
+        let test: [Date: Int] = [Date(): 0]
+//        [
+//            // Week Tracking
+//            // Tracks % during each week
+//            // -> Reset every week
+//            // Stores 7 values, 1 for each day
+//            [:],
+//            // Tracking
+//            // Tracks % associated with monday of every week from beginning of using the app
+//            [Date(): 0]
+//        ]
+        
+        UserDefaults.standard.setValue(test, forKey: "trackingDictionaries")
+        
         // Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        testTrackingValues()
+//        testTrackingValues()
         updateWeekTracking()
         updateTracking()
         
