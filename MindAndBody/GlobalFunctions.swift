@@ -32,6 +32,57 @@ class IPhoneType {
 }
 
 //
+// Tracking Helper
+class TrackingHelpers {
+    static var shared = TrackingHelpers()
+    private init () {}
+    
+    func dateToString(date: Date) -> String {
+        // Convert to time interval
+        let timeInterval = date.timeIntervalSince1970
+        // Convert to string
+        let dateAsString = String(timeInterval)
+        return dateAsString
+    }
+    
+    func stringToDate(string: String) -> Date {
+        let timeInterval = Double(string)
+        let stringAsDate = Date(timeIntervalSince1970: timeInterval!)
+        return stringAsDate
+    }
+    
+    func convertStringDictToDateDict(stringDict: [[String: Int]]) -> [[Date: Int]] {
+        var dateDict: [[Date: Int]] = [[:], [:]]
+        //
+        for i in 0...stringDict.count - 1 {
+            if stringDict[i].count != 0 {
+                let keys = stringDict[i].keys.sorted()
+                for j in 0...keys.count - 1 {
+                    dateDict[i].updateValue(stringDict[i][keys[j]]!, forKey: stringToDate(string: keys[j]))
+                }
+            }
+        }
+        //
+        return dateDict
+    }
+    
+    func convertDateDictToStringDict(dateDict: [[Date: Int]]) -> [[String: Int]] {
+        var stringDict: [[String: Int]] = [[:], [:]]
+        //
+        for i in 0...dateDict.count - 1 {
+            if dateDict[i].count != 0 {
+                let keys = dateDict[i].keys.sorted()
+                for j in 0...keys.count - 1 {
+                    stringDict[i].updateValue(dateDict[i][keys[j]]!, forKey: dateToString(date: keys[j]))
+                }
+            }
+        }
+        //
+        return stringDict
+    }
+}
+
+//
 // MARK: - Global Function as extensions
 //
 
@@ -43,12 +94,16 @@ extension UIViewController {
     //
     // Check subscriptions
     func checkSubscription() {
-        
         //
-        guard SubscriptionService.shared.currentSessionId != nil, SubscriptionService.shared.hasReceiptData else {
+        if !InAppManager.shared.checkSubscriptionAvailability() {
             self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
-            return
         }
+
+        //
+//        guard SubscriptionService.shared.currentSessionId != nil, SubscriptionService.shared.hasReceiptData else {
+//            self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
+//            return
+//        }
     }
     
     
@@ -334,7 +389,10 @@ extension UIViewController {
     // MARK: Monday  - Sunday
     func updateWeekTracking() {
         let trackingProgressArray = UserDefaults.standard.object(forKey: "trackingProgress") as! [Any]
-        var trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[Date: Int]]
+        let trackingDictionariesString = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
+        
+        // Convert to [Date: Int]
+        var trackingDictionaries: [[Date: Int]] = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionariesString)
         //
         let calendar = Calendar(identifier: .gregorian)
         // Current Date
@@ -405,8 +463,12 @@ extension UIViewController {
                 trackingDictionaries[0].updateValue(currentProgress, forKey: currentDate)
             }
         }
+        
+        // Convert back to [String: Int]
+        let updatedTrackingDictionariesString: [[String: Int]] = TrackingHelpers.shared.convertDateDictToStringDict(dateDict: trackingDictionaries)
+        
         // Save
-        UserDefaults.standard.set(trackingDictionaries, forKey: "trackingDictionaries")
+        UserDefaults.standard.set(updatedTrackingDictionariesString, forKey: "trackingDictionaries")
         ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
     }
     
@@ -415,7 +477,10 @@ extension UIViewController {
     // MARK: Week %
     func updateTracking() {
         let trackingProgressArray = UserDefaults.standard.object(forKey: "trackingProgress") as! [Any]
-        var trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[Date: Int]]
+        let trackingDictionariesString = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
+        
+        // Convert to [Date: Int]
+        var trackingDictionaries: [[Date: Int]] = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionariesString)
         //
         let calendar = Calendar(identifier: .gregorian)
         // Get Mondays date
@@ -460,8 +525,12 @@ extension UIViewController {
                 trackingDictionaries[1].updateValue(currentProgress, forKey: currentMondayDate)
             }
         }
+        
+        // Convert back to [String: Int]
+        let updatedTrackingDictionariesString: [[String: Int]] = TrackingHelpers.shared.convertDateDictToStringDict(dateDict: trackingDictionaries)
+        
         // Save
-        UserDefaults.standard.set(trackingDictionaries, forKey: "trackingDictionaries")
+        UserDefaults.standard.set(updatedTrackingDictionariesString, forKey: "trackingDictionaries")
         ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
     }
     

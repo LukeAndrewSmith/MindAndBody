@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //
         // Subscriptions
-//        SKPaymentQueue.default().add(self)
+        InAppManager.shared.startMonitoring()
         
         // TODO: TEST!! REMOVE
 //        ICloudFunctions.shared.removeAll()
@@ -156,7 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:
-//        SKPaymentQueue.default().remove(self)
+        InAppManager.shared.stopMonitoring()
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
@@ -165,93 +165,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //
 }
-
-
-
-// MARK: - SKPaymentTransactionObserver
-
-extension AppDelegate: SKPaymentTransactionObserver {
-  
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        for transaction in transactions {
-            switch transaction.transactionState {
-            case .purchasing:
-                handlePurchasingState(for: transaction, in: queue)
-            case .purchased:
-                handlePurchasedState(for: transaction, in: queue)
-            case .restored:
-                handleRestoredState(for: transaction, in: queue)
-            case .failed:
-                // Not Cancelled
-                if let transactionError = transaction.error as NSError?, transactionError.code != SKError.paymentCancelled.rawValue {
-                    handleFailedState(for: transaction, in: queue)
-                // Cancelled
-                } else {
-                    // Reset expiring date
-                    // TODO: HANDLE CANCEL
-                }
-                SKPaymentQueue.default().finishTransaction(transaction)
-            case .deferred:
-                handleDeferredState(for: transaction, in: queue)
-            }
-        }
-    }
-    
-    func handlePurchasingState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
-        print("User is attempting to purchase product id: \(transaction.payment.productIdentifier)")
-    }
-    
-    func handlePurchasedState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
-        print("User purchased product id: \(transaction.payment.productIdentifier)")
-        queue.finishTransaction(transaction)
-        SubscriptionService.shared.uploadReceipt { (success) in
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: SubscriptionService.purchaseSuccessfulNotification, object: nil)
-            }
-        }
-    }
-    
-    func handleRestoredState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
-        print("Purchase restored for product id: \(transaction.payment.productIdentifier)")
-        queue.finishTransaction(transaction)
-        SubscriptionService.shared.uploadReceipt { (success) in
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: SubscriptionService.restoreSuccessfulNotification, object: nil)
-            }
-        }
-    }
-    
-    
-    //
-    // Not sure if the next to work, never seem to be called
-    func handleFailedState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
-        print("Purchase failed for product id: \(transaction.payment.productIdentifier)")
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: SubscriptionService.restoreFailedNotification, object: nil)
-        }
-    }
-    func handleDeferredState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
-        print("Purchase deferred for product id: \(transaction.payment.productIdentifier)")
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: SubscriptionService.restoreFailedNotification, object: nil)
-        }
-    }
-    
-    //
-    // Restore transaction failed
-    public func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
-        print("Cancel Transaction / No Subscription Found")
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: SubscriptionService.restoreFailedNotification, object: nil)
-        }
-    }
-    // Restore transaction finished -- failed?
-    public func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
-        print("Transaction Finished")
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: SubscriptionService.restoreFinishedNotification, object: nil)
-        }
-    }
-    
-}
-

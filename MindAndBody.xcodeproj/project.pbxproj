@@ -107,6 +107,7 @@
 		07038D881F4C6081001CC6D5 /* itBandFoam3.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038D841F4C6081001CC6D5 /* itBandFoam3.png */; };
 		07038D8A1F4C6088001CC6D5 /* standingOnBall.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038D891F4C6088001CC6D5 /* standingOnBall.png */; };
 		071C4FB31E98D6D800328D18 /* MeditationTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071C4FB21E98D6D800328D18 /* MeditationTimer.swift */; };
+		071D4A331FC0CD1600ED779B /* SubscriptionNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071D4A321FC0CD1600ED779B /* SubscriptionNotifications.swift */; };
 		071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071FB62B1E9283AE0081444F /* BodyweightChoice.swift */; };
 		07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07248E061F31CB5100230EAF /* GlobalVariables.swift */; };
 		072829EB1EA8A26A0090164A /* WorkoutSessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */; };
@@ -514,6 +515,8 @@
 		07D5C3D91F9E32430038F143 /* ScheduleViewQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D5C3D81F9E32430038F143 /* ScheduleViewQuestion.swift */; };
 		07DE23001FC0420200940567 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DE22FF1FC0420200940567 /* StoreKit.framework */; };
 		07DE23031FC0919200940567 /* SubscriptionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DE23021FC0919200940567 /* SubscriptionsTest.swift */; };
+		07DE23051FC0A47500940567 /* SubscriptionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DE23041FC0A47400940567 /* SubscriptionScreen.swift */; };
+		07DE23071FC0AB3300940567 /* SwiftReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DE23061FC0AB3300940567 /* SwiftReceiptValidator.swift */; };
 		07DEE6F11E0AAD2E003B89AB /* ClassicChoiceG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F01E0AAD2E003B89AB /* ClassicChoiceG.swift */; };
 		07DEE6F31E0AADAC003B89AB /* StretchingChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F21E0AADAC003B89AB /* StretchingChoice.swift */; };
 		07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F41E0AADC3003B89AB /* CardioChoice.swift */; };
@@ -1515,6 +1518,7 @@
 		07038D841F4C6081001CC6D5 /* itBandFoam3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itBandFoam3.png; sourceTree = "<group>"; };
 		07038D891F4C6088001CC6D5 /* standingOnBall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = standingOnBall.png; sourceTree = "<group>"; };
 		071C4FB21E98D6D800328D18 /* MeditationTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationTimer.swift; sourceTree = "<group>"; };
+		071D4A321FC0CD1600ED779B /* SubscriptionNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionNotifications.swift; sourceTree = "<group>"; };
 		071FB62B1E9283AE0081444F /* BodyweightChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyweightChoice.swift; sourceTree = "<group>"; };
 		07248E061F31CB5100230EAF /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutSessionScreen.swift; sourceTree = "<group>"; };
@@ -1909,6 +1913,8 @@
 		07D5C3D81F9E32430038F143 /* ScheduleViewQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewQuestion.swift; sourceTree = "<group>"; };
 		07DE22FF1FC0420200940567 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		07DE23021FC0919200940567 /* SubscriptionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsTest.swift; sourceTree = "<group>"; };
+		07DE23041FC0A47400940567 /* SubscriptionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionScreen.swift; sourceTree = "<group>"; };
+		07DE23061FC0AB3300940567 /* SwiftReceiptValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftReceiptValidator.swift; sourceTree = "<group>"; };
 		07DEE6F01E0AAD2E003B89AB /* ClassicChoiceG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassicChoiceG.swift; sourceTree = "<group>"; };
 		07DEE6F21E0AADAC003B89AB /* StretchingChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StretchingChoice.swift; sourceTree = "<group>"; };
 		07DEE6F41E0AADC3003B89AB /* CardioChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioChoice.swift; sourceTree = "<group>"; };
@@ -3682,6 +3688,7 @@
 			isa = PBXGroup;
 			children = (
 				077EBC841FB9A5A2009B9818 /* SubscriptionScreenOld.swift */,
+				07DE23041FC0A47400940567 /* SubscriptionScreen.swift */,
 				07DE23011FC0916F00940567 /* Subscriptions Other */,
 				074B39AC1FBE42A600D3ED47 /* Subscriptions Ray */,
 			);
@@ -4630,6 +4637,8 @@
 			isa = PBXGroup;
 			children = (
 				07DE23021FC0919200940567 /* SubscriptionsTest.swift */,
+				07DE23061FC0AB3300940567 /* SwiftReceiptValidator.swift */,
+				071D4A321FC0CD1600ED779B /* SubscriptionNotifications.swift */,
 			);
 			name = "Subscriptions Other";
 			sourceTree = "<group>";
@@ -8353,6 +8362,7 @@
 			files = (
 				0750DB631F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift in Sources */,
 				07DEE6F71E0AADE6003B89AB /* YogaChoice.swift in Sources */,
+				071D4A331FC0CD1600ED779B /* SubscriptionNotifications.swift in Sources */,
 				077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */,
 				07F8EDD51FA5DB3700C452F4 /* ScheduleTypeQuestion.swift in Sources */,
 				071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */,
@@ -8377,6 +8387,7 @@
 				07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */,
 				074074AD1EDC0A4000DC2D0F /* YogaAutomatic.swift in Sources */,
 				0798925E1FB5078C00AA0B55 /* ScheduleCreatorWeek.swift in Sources */,
+				07DE23051FC0A47500940567 /* SubscriptionScreen.swift in Sources */,
 				0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */,
 				074B39AE1FBE42BE00D3ED47 /* SubscriptionService.swift in Sources */,
 				0789ED061F79A6EA000EB739 /* UserData.swift in Sources */,
@@ -8395,6 +8406,7 @@
 				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,
 				07E1D4DF1FB0DDF600B53B85 /* ScheduleEditing.swift in Sources */,
+				07DE23071FC0AB3300940567 /* SwiftReceiptValidator.swift in Sources */,
 				07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */,
 				07D5C3D91F9E32430038F143 /* ScheduleViewQuestion.swift in Sources */,
 				0794A74D1FBCC3D70029968D /* ActionSheet.swift in Sources */,
