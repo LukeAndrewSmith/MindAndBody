@@ -4,7 +4,7 @@
 //
 //  Created by Luke Smith on 18.11.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
-
+// Thanks to Ellina Kuznetcova for the code
 
 import Foundation
 import StoreKit
@@ -35,7 +35,7 @@ protocol InAppManagerDelegate: class {
     func inAppLoadingStarted()
     func inAppLoadingSucceded(productType: ProductType)
     func inAppLoadingFailed(error: Swift.Error?)
-    func subscriptionStatusUpdated(value: Bool)
+//    func subscriptionStatusUpdated(value: Bool)
 }
 
 class InAppManager: NSObject {
@@ -51,16 +51,15 @@ class InAppManager: NSObject {
     var expirationDate: Date?
     var purchasedProduct: ProductType?
 
-    var isSubscriptionAvailable: Bool = true
-    {
-        didSet(value) {
-            self.delegate?.subscriptionStatusUpdated(value: value)
-        }
-    }
+//    var isSubscriptionAvailable: Bool = true
+//    {
+//        didSet(value) {
+//            self.delegate?.subscriptionStatusUpdated(value: value)
+//        }
+//    }
 
     func startMonitoring() {
         SKPaymentQueue.default().add(self)
-        self.updateSubscriptionStatus()
     }
 
     func stopMonitoring() {
@@ -88,51 +87,60 @@ class InAppManager: NSObject {
         self.delegate?.inAppLoadingStarted()
     }
 
-    func checkSubscriptionAvailability() -> Bool {
+    func checkSubscriptionAvailability() {
         //
-        loadProducts()
         let productIdentifier = "mind_and_body_yearly_subscription"
         //
         // Validate receipt
-        var toReturn = false
         SwiftyReceiptValidator.validate(forIdentifier: productIdentifier, sharedSecret: InAppManager.accountSecret) { (success, response) in
             if success {
-                toReturn = self.checkExpiryDateAction(response: response, action: 1)
+                self.checkExpiryDateAction(response: response, action: 1)
+            } else {
+                // Timed out/ failed
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+                }
             }
         }
-        return toReturn
     }
 
-    func updateSubscriptionStatus() {
-        isSubscriptionAvailable = checkSubscriptionAvailability()
-    }
     
     // MARK: Check reciept/expiry date
     //
-    // reciptCheckAction
+    // Check expiry dates
     func checkExpiryDateAction(response: [String: AnyObject]?, action: Int) -> Bool {
-        /// Your code to restore product
-        let receiptInfoFieldKey = SwiftyReceiptValidator.ResponseKey.latest_receipt_info.rawValue
-        if let receipt = response![receiptInfoFieldKey] {
-//        let receiptKey = SwiftyReceiptValidator.ResponseKey.receipt.rawValue
-//        if let receipt = response![receiptKey] {
-            // Check if subscription active
+        /// Retreive the full apple receipt
+        let receiptKey = SwiftyReceiptValidator.ResponseKey.receipt.rawValue
+        if let receipt = response![receiptKey] {
+            // Retreive the array of in-app purchase receipts
             let inAppKey = SwiftyReceiptValidator.InfoKey.in_app.rawValue
-            if let inApp = receipt as? [AnyObject] {
-                // Loop receipts
+            if let inApp = receipt[inAppKey] as? [AnyObject] {
+                // Loop all in-app purchase receipts
                 for receiptInApp in inApp {
-                    let expiryDateKey = SwiftyReceiptValidator.InfoKey.InApp.expires_date.rawValue
-                    //
-                    if let expiryDate = receiptInApp[expiryDateKey] as? Date {
+                    // Find the expiry date of the in-app purchase receipt
+                    let expiryDateKey = SwiftyReceiptValidator.InfoKey.InApp.expires_date_ms.rawValue
+                    if let expiryDate = receiptInApp[expiryDateKey] as? String {
                         // Check expiry date
                         if isValidSubscription(expiryDate: expiryDate) {
-                            // Broadcast success notification 
+//                            let expiryDateS = Double(expiryDate)! / 1000
+//                            print("expiry:")
+//                            print(Date(timeIntervalSince1970: expiryDateS))
+//                            print("currentDate:")
+//                            print(Date())
+                            // Broadcast success notification
                             if action == 0 {
                                 DispatchQueue.main.async {
                                     NotificationCenter.default.post(name: SubscriptionNotifiations.restoreSuccessfulNotification, object: nil)
                                 }
                             }
-                            // If valid subscription found
+                            // Valid subscription found
+                            UserDefaults.standard.set(true, forKey: "userHasValidSubscription")
+                            ICloudFunctions.shared.pushToICloud(toSync: ["userHasValidSubscription"])
+                            SubscriptionsCheck.shared.isValid = true
+                            Loading.shared.shouldPresentLoading = false
+                            DispatchQueue.main.async {
+                                NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+                            }
                             return true
                         }
                     }
@@ -140,35 +148,26 @@ class InAppManager: NSObject {
             }
         }
         // If no valid subscription found
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+        }
+        UserDefaults.standard.set(false, forKey: "userHasValidSubscription")
+        ICloudFunctions.shared.pushToICloud(toSync: ["userHasValidSubscription"])
+        SubscriptionsCheck.shared.isValid = false
+        Loading.shared.shouldPresentLoading = false
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+        }
         return false
     }
     //
     // Check if subscription is valid
-    func isValidSubscription(expiryDate: Date) -> Bool {
-        return Date().timeIntervalSince1970 < expiryDate.timeIntervalSince1970
+    func isValidSubscription(expiryDate: String) -> Bool {
+        // Comes as ms since 1970, convert to s then to date
+        let expiryDateS = Double(expiryDate)! / 1000
+        //
+        return Date().timeIntervalSince1970 < expiryDateS
     }
-    
-//    func checkSubscriptionAvailability(_ completionHandler: @escaping (Bool) -> Void) {
-//        guard let receiptUrl = Bundle.main.appStoreReceiptURL,
-//            let receipt = try? Data(contentsOf: receiptUrl).base64EncodedString() as AnyObject else {
-//                completionHandler(false)
-//                return
-//        }
-//
-//        let _ = Router.User.sendReceipt(receipt: receipt).request(baseUrl: "https:sandbox.itunes.apple.com").responseObject { (response: DataResponse<RTSubscriptionResponse>) in
-//            switch response.result {
-//            case .success(let value):
-//                guard let expirationDate = value.expirationDate,
-//                    let productId = value.productId else {completionHandler(false); return}
-//                self.expirationDate = expirationDate
-//                self.isTrialPurchased = value.isTrial
-//                self.purchasedProduct = ProductType(rawValue: productId)
-//                completionHandler(Date().timeIntervalSince1970 < expirationDate.timeIntervalSince1970)
-//            case .failure(let error):
-//                completionHandler(false)
-//            }
-//        }
-//    }
 }
 
 
@@ -187,9 +186,12 @@ extension InAppManager: SKPaymentTransactionObserver {
                     if success {
                         InAppManager.shared.checkExpiryDateAction(response: response, action: 0)
                         // Her stuff
-                        self.updateSubscriptionStatus()
-                        self.isSubscriptionAvailable = true
                         self.delegate?.inAppLoadingSucceded(productType: productType)
+                    } else {
+                        // Timed out/ failed
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
+                        }
                     }
                     queue.finishTransaction(transaction)
                 }
@@ -204,9 +206,6 @@ extension InAppManager: SKPaymentTransactionObserver {
                     // her stuff
                     self.delegate?.inAppLoadingFailed(error: InAppErrors.noSubscriptionPurchased)
                     // Post failed notification
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
-                    }
                 }
                 SKPaymentQueue.default().finishTransaction(transaction)
             case .restored:
@@ -218,9 +217,12 @@ extension InAppManager: SKPaymentTransactionObserver {
                             InAppManager.shared.checkExpiryDateAction(response: response, action: 0)
                             // Her stuff
                             SKPaymentQueue.default().finishTransaction(transaction)
-                            self.updateSubscriptionStatus()
-                            self.isSubscriptionAvailable = true
                             self.delegate?.inAppLoadingSucceded(productType: productType)
+                        } else {
+                            // Timed out/ failed
+                            DispatchQueue.main.async {
+                                NotificationCenter.default.post(name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
+                            }
                         }
                         queue.finishTransaction(transaction)
                     }
@@ -239,7 +241,7 @@ extension InAppManager: SKPaymentTransactionObserver {
         //
         self.delegate?.inAppLoadingFailed(error: error)
         // Cancel transaction
-        print("Cancel Transaction / No Subscription Found")
+//        print("Cancel Transaction / No Subscription Found")
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
         }
@@ -248,9 +250,6 @@ extension InAppManager: SKPaymentTransactionObserver {
     // Restore transaction finished -- failed?
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         print("Transaction Finished")
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFinishedNotification, object: nil)
-        }
     }
 
 }
@@ -264,32 +263,3 @@ extension InAppManager: SKProductsRequestDelegate {
         NotificationCenter.default.post(name: SubscriptionNotifiations.productsLoadedNotification, object: products)
     }
 }
-
-
-//
-//// Test
-//class RTSubscriptionResponse: Mappable {
-//    var expirationDate: Date?
-//    var isTrial: Bool?
-//    var productId: String?
-//
-//    required convenience init?(map: Map) {
-//        self.init()
-//    }
-//
-//    func mapping(map: Map) {
-//        guard let latestReceiptInfo = (map.JSON["latest_receipt_info"] as? [[String: AnyObject]])?.first else {return}
-//
-//        if let expirationDateStringWithTimeZone = latestReceiptInfo["expires_date"] as? String,
-//            let range = expirationDateStringWithTimeZone.range(of: "Etc/GMT") {
-//            let expirationDateString = expirationDateStringWithTimeZone.substring(to: range.lowerBound)
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "yyy-MM-dd HH:mm:ss"
-//            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-//            self.expirationDate = dateFormatter.date(from: expirationDateString)
-//        }
-//        self.isTrial = Bool(latestReceiptInfo["is_trial_period"] as? String ?? "false")
-//        self.productId = latestReceiptInfo["product_id"] as? String
-//    }
-//}
-//

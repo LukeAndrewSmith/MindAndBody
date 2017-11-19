@@ -81,6 +81,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // View Will Appear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         //
         if scheduleStyle == 0 {
             dayIndicatorLeading.constant = stackArray[ScheduleVariables.shared.selectedDay].frame.minX
@@ -141,6 +142,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: View did appear
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         // shouldReloadChoice
         // MARK AS COMPLETED
         if ScheduleVariables.shared.shouldReloadChoice == true && ScheduleVariables.shared.selectedRows[1] != 72 {
@@ -214,15 +216,28 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    // Upon completion of check subscription, perform action
+    @objc func subscriptionCheckCompleted() {
+        Loading.shared.shouldPresentLoading = false
+        Loading.shared.endLoading()
+        if !SubscriptionsCheck.shared.isValid {
+            self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
+        }
+    }
+    
     //
     // View did load --------------------------------------------------------------------------------------------------------
     //
     override func viewDidLoad() {
         super.viewDidLoad()
         //
-        // Check subscription -> Present Subscription Screen
-//        checkSubscription()
+        // Checking subscription, present loading
+        if Loading.shared.shouldPresentLoading {
+            Loading.shared.beginLoading()
+        }
         
+        // Check subscription -> Present Subscription Screen
+        NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)
         
         //
         layoutViews()
@@ -232,7 +247,7 @@ class ScheduleScreen: UIViewController, UITableViewDataSource, UITableViewDelega
         // if initialInfoHasBeenPresented == false {
         // initialInfoHasBeenPresented == true
         // Save initialInfoHasBeenPresented to userDefaults
-        self.performSegue(withIdentifier: "InitialInfoSegue", sender: self)
+//        self.performSegue(withIdentifier: "InitialInfoSegue", sender: self)
         // }
         
         // Set status bar to light

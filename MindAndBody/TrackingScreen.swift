@@ -61,7 +61,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         //
         trackingDictionaries[1] = [:]
-        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date())!
+        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date().currentDate)!
         firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
         //
         trackingDictionaries[1].updateValue(70, forKey: TrackingHelpers.shared.dateToString(date: firstMondayLastMonth))
@@ -410,17 +410,17 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             // To get data from
             let calendar = Calendar(identifier: .gregorian)
             //
-            var startDate = Date()
+            var startDate = Date().currentDate
             let endDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
             
             switch selectedTimeScale {
             case 1:
                 startDate = Date().firstMondayInMonth
             case 2:
-                startDate = calendar.date(byAdding: .month, value: -2, to: Date())!
+                startDate = calendar.date(byAdding: .month, value: -2, to: Date().currentDate)!
                 startDate = startDate.firstMondayInMonth
             case 3:
-                startDate = calendar.date(byAdding: .month, value: -5, to: Date())!
+                startDate = calendar.date(byAdding: .month, value: -5, to: Date().currentDate)!
                 startDate = startDate.firstMondayInMonth
             default: break
             }
@@ -551,7 +551,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             let calendar = Calendar(identifier: .gregorian)
             //
-            var startDate = calendar.date(byAdding: .month, value: -2, to: Date())!
+            var startDate = calendar.date(byAdding: .month, value: -2, to: Date().currentDate)!
             startDate = startDate.firstMondayInMonth
             let endDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInCurrentWeek)
             
@@ -579,7 +579,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             let calendar = Calendar(identifier: .gregorian)
             //
-            var startDate = calendar.date(byAdding: .month, value: -5, to: Date())!
+            var startDate = calendar.date(byAdding: .month, value: -5, to: Date().currentDate)!
             startDate = startDate.firstMondayInMonth
             let endDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInCurrentWeek)
             

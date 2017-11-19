@@ -16,7 +16,7 @@ class ICloudFunctions {
     static var shared = ICloudFunctions()
     private init() {}
     
-    static let keyArray = ["userSettings", "selectedSchedule", "schedules", "scheduleTracking", "difficultyLevels", "profileAnswers", "trackingDictionaries", "trackingProgress", "customSessions", "meditationTimer", "walkthroughs"]
+    static let keyArray = ["userSettings", "selectedSchedule", "schedules", "scheduleTracking", "difficultyLevels", "profileAnswers", "trackingDictionaries", "trackingProgress", "customSessions", "meditationTimer", "walkthroughs", "userHasValidSubscription"]
 
     //
     // Check if user wants to use icloud

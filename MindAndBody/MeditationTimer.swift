@@ -485,10 +485,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-            print("AVAudioSession Category Playback OK")
             do {
                 try AVAudioSession.sharedInstance().setActive(true)
-                print("AVAudioSession is Active")
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
@@ -1125,7 +1123,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         let meditationArray = defaults.object(forKey: "meditationTimer") as! [[[[Any]]]]
         if meditationArray.count != 0 {
             if meditationArray[selectedPreset][1][0].count == 0 {
-                print("thatsnotgonewell")
+                print("error")
             } else if (meditationArray[selectedPreset][1][0][0] as! Int) == 0 {
                 return false
             } else {

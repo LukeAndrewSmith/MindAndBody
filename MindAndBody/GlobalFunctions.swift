@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import AudioToolbox.AudioServices
 import StoreKit
+import SystemConfiguration
 
 //
 // iPhone
@@ -83,29 +84,106 @@ class TrackingHelpers {
 }
 
 //
+// Subscriptions check
+class SubscriptionsCheck {
+    static var shared = SubscriptionsCheck()
+    private init() {}
+    
+    var isValid = false
+    //
+    // Check subscriptions
+    func checkSubscription() {
+        // If internet, check subscription with apple
+        if Reachability.isConnectedToNetwork() {
+            InAppManager.shared.checkSubscriptionAvailability()
+        // If no internet, fall back to userDefaults
+        } else {
+            Loading.shared.shouldPresentLoading = false
+            isValid = UserDefaults.standard.object(forKey: "userHasValidSubscription") as! Bool
+        }
+    }
+}
+
+//
+// Loading
+class Loading {
+    static var shared = Loading()
+    private init() {}
+    
+    var shouldPresentLoading = true
+    
+    var loadingView = UIView()
+    //
+    func beginLoading() {
+        // Setup Alert
+        loadingView.frame = UIScreen.main.bounds
+        loadingView.backgroundColor = Colours.colour1
+        let loadingImage = UIImageView()
+        loadingImage.image = #imageLiteral(resourceName: "Loading")
+        loadingImage.sizeToFit()
+        loadingImage.center = loadingView.center
+        loadingView.addSubview(loadingImage)
+        
+        // Setup indicator
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: (UIScreen.main.bounds.width / 2) - 25, y: loadingImage.frame.maxY, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.color = Colours.colour2
+        loadingIndicator.startAnimating()
+        loadingView.addSubview(loadingIndicator)
+        
+        // Present Alert
+        UIApplication.shared.keyWindow?.addSubview(loadingView)
+    }
+    
+    func endLoading() {
+        loadingView.removeFromSuperview()
+    }
+}
+
+// Thanks to RAJAMOHAN-S on stack overflow
+public class Reachability {
+    //
+    class func isConnectedToNetwork() -> Bool {
+        
+        var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
+                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+            }
+        }
+        
+        var flags: SCNetworkReachabilityFlags = SCNetworkReachabilityFlags(rawValue: 0)
+        if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == false {
+            return false
+        }
+        
+        /* Only Working for WIFI
+         let isReachable = flags == .reachable
+         let needsConnection = flags == .connectionRequired
+         
+         return isReachable && !needsConnection
+         */
+        
+        // Working for Cellular and WIFI
+        let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        let ret = (isReachable && !needsConnection)
+        
+        return ret
+        
+    }
+}
+
+//
 // MARK: - Global Function as extensions
 //
 
 //
 // View Controller
 extension UIViewController {
-    
-    
-    //
-    // Check subscriptions
-    func checkSubscription() {
-        //
-        if !InAppManager.shared.checkSubscriptionAvailability() {
-            self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
-        }
-
-        //
-//        guard SubscriptionService.shared.currentSessionId != nil, SubscriptionService.shared.hasReceiptData else {
-//            self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
-//            return
-//        }
-    }
-    
     
     //
     // Add background Image
@@ -396,7 +474,7 @@ extension UIViewController {
         //
         let calendar = Calendar(identifier: .gregorian)
         // Current Date
-        let currentDate = Date()
+        let currentDate = Date().currentDate
         // Get Mondays date
         let currentMondayDate = Date().firstMondayInCurrentWeek
         //
@@ -495,8 +573,8 @@ extension UIViewController {
         // Keys
         let keys = trackingDictionaries[1].keys.sorted()
         
-        // Note: Weeks defined by their mondays date
         //
+        // Note: Weeks defined by their mondays date
         // Current week exists
         if keys.contains(currentMondayDate) {
             // Update current weeks progress
@@ -515,11 +593,11 @@ extension UIViewController {
                 //
                 // Update missed weeks with 0
                 var startDate = keys.last!
-                let endDate = calendar.date(byAdding: .weekOfYear, value: -1, to: currentMondayDate)!
                 // Loop adding 0 to dates
-                while startDate <= endDate {
+                while startDate < currentMondayDate {
                     trackingDictionaries[1].updateValue(0, forKey: startDate)
-                    startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate)!
+                    // For some reason adding a week adds an extra hour here but not in other places, so add on a weeks worth of hours
+                    startDate = calendar.date(byAdding: .hour, value: 168, to: startDate)!
                 }
                 // Update today
                 trackingDictionaries[1].updateValue(currentProgress, forKey: currentMondayDate)
@@ -723,6 +801,14 @@ extension UITableViewCell {
 
 // MARK:- Date
 extension Date {
+    
+    var currentDate: Date {
+        var components = Calendar(identifier: .iso8601).dateComponents([.year, .month, .weekOfMonth, .day], from: self)
+        components.timeZone = TimeZone(abbreviation: "UTC")
+        // Making a Date from week components gives the first day of the week, hence Monday
+        let currentDate = Calendar(identifier: .iso8601).date(from: components)
+        return currentDate!
+    }
     
     //
     // Day in week of date from monday, monday being 1

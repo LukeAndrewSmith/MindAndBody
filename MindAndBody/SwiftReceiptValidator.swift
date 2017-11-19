@@ -4,7 +4,7 @@
 //
 //  Created by Luke Smith on 18.11.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
-//
+// Thanks to Dominik aka crashoverride777 for the code
 
 import StoreKit
 
@@ -243,7 +243,7 @@ private extension SwiftyReceiptValidator {
                 return
             }
             
-            print(urlRequestString + "Valid receipt in json reponse = \(receipt)")
+//            print(urlRequestString + "Valid receipt in json reponse = \(receipt)")
             
             /// Check receipt contains correct bundle and product id for app
             guard self.isAppBundleIDMatching(withReceipt: receipt) && self.isTransactionProductIDMatching(withReceipt: receipt) else {
@@ -425,7 +425,8 @@ extension SwiftyReceiptValidator {
             case original_transaction_id // For a transaction that restores a previous transaction, the transaction identifier of the original transaction. Otherwise, identical to the transaction identifier. This value corresponds to the original transaction’s transactionIdentifier property. All receipts in a chain of renewals for an auto-renewable subscription have the same value for this field.
             case purchase_date // The date and time that the item was purchased. This value corresponds to the transaction’s transactionDate property.
             case original_purchase_date // For a transaction that restores a previous transaction, the date of the original transaction. This value corresponds to the original transaction’s transactionDate property. In an auto-renewable subscription receipt, this indicates the beginning of the subscription period, even if the subscription has been renewed.
-            case expires_date // The expiration date for the subscription, expressed as the number of milliseconds since January 1, 1970, 00:00:00 GMT. This key is only present for auto-renewable subscription receipts.
+            case expires_date // The expiration date as a string
+            case expires_date_ms // The expiration date for the subscription, expressed as the number of milliseconds since January 1, 1970, 00:00:00 GMT. This key is only present for auto-renewable subscription receipts.
             case cancellation_date // For a transaction that was canceled by Apple customer support, the time and date of the cancellation. Treat a canceled receipt the same as if no purchase had ever been made.
             #if os(iOS) || os(tvOS)
             case app_item_id // A string that the App Store uses to uniquely identify the application that created the transaction. If your server supports multiple applications, you can use this value to differentiate between them. Apps are assigned an identifier only in the production environment, so this key is not present for receipts created in the test environment. This field is not present for Mac apps. See also Bundle Identifier.

@@ -88,6 +88,10 @@ class MindBody: UIViewController {
     //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Checking subscription, present loading
+        if Loading.shared.shouldPresentLoading {
+            Loading.shared.beginLoading()
+        }
         
         //
         blur0.removeFromSuperview()
@@ -185,16 +189,11 @@ class MindBody: UIViewController {
         }
     }
     
-    
     //
     // View Did Load ------------------------------------------------------------------------------------------------------------------------------
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //
-        // Check subscription -> Present Subscription Screen
-        checkSubscription()
         
         // Set status bar to light
         UIApplication.shared.statusBarStyle = .lightContent
@@ -345,12 +344,23 @@ class MindBody: UIViewController {
         }
     }
     
+    // Upon completion of check subscription, perform action
+    @objc func subscriptionCheckCompleted() {
+        Loading.shared.shouldPresentLoading = false
+        Loading.shared.endLoading()
+        if !SubscriptionsCheck.shared.isValid {
+            self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
+        }
+    }
     
     //
     // View Did Layout Subview ---------------------------------------------------------------------------------------------------------------------
     //
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+
+        // Check subscription -> Present Subscription Screen
+        NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)
         
         // Button Rounded Edges
         //

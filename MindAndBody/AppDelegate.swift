@@ -18,19 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-
+    
     //
-    // Did finish launching ----------------------------------------------------------------------------------------------
     //
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
         //
         // Subscriptions
         InAppManager.shared.startMonitoring()
         
         // TODO: TEST!! REMOVE
-//        ICloudFunctions.shared.removeAll()
+        //        ICloudFunctions.shared.removeAll()
         //
         // Icloud Oberver
         NotificationCenter.default.addObserver(
@@ -50,8 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         //
+        // Check if the user has a valid subscription
+        SubscriptionsCheck.shared.checkSubscription()
+        
+        //
         // Register Defaults --------------------------------------------------------------------------------
         //
+        // Subscriptions
+        UserDefaults.standard.register(defaults: ["userHasValidSubscription" : false])
         // Settings
         UserDefaults.standard.register(defaults: ["userSettings" : Register.defaultSettings])
         //
@@ -115,6 +119,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         return true
     }
+
+    //
+    // Did finish launching ----------------------------------------------------------------------------------------------
+    //
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // Override point for customization after application launch.
+        return true
+    }
     
     //
     func applicationWillResignActive(_ application: UIApplication) {
@@ -148,10 +160,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Reset weekTracking/scheduleTracking (called a few times too many throughout but better safe than sorry)
         ScheduleVariables.shared.resetWeekTracking()
-        
-        
-//        // Sync all
-//        ICloudFunctions.shared.pullToDefaults()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -160,7 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        print("help")
+        print("Memory Warning")
     }
     
     //

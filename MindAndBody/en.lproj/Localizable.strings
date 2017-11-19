@@ -1522,10 +1522,12 @@
 
 //
 // MARK: Subscriptions
+"freeTrial" = "Try For Free";
 "subscriptionButton" = "Subscription";
+"alreadyHaveSubscription" = "I'm already subscribed";
 // Subscrtioption failed to retreive
 "retreivalFailed" = "Can't retreive subscription";
-"subscriptionWarning" = "Warning. Cannot retreive subscriptions\n";
+"subscriptionWarning" = "Connection Error\n";
 "subscriptionWarningMessage" = "Please ensure that you are connected to the internet";
 "userCheckedConnection" = "I'm connected to the internet";
 // Restore failed
@@ -1544,9 +1546,6 @@
 "subscription4" = "";
 "termsAndConditions" = "Terms & Conditions";
 "termsAndConditionsDetail" = "The Mind & Body subscription grants you access to use the Mind & Body App for a year. The subscription will automatically renew within 24 hours of the end of the year unless cancelled. You will be charged through your iTunes account. You can manage your subscription in Account Settings. By purchasing the subscription via in-app purchases, you agree to the Apple App Store terms and conditions.";
-// Buttons
-"purchaseSubscription" = "CHF 15 / Year";
-"alreadyHaveSubscription" = "I already have a subscription";
 
 //
 // MARK: Schedule
