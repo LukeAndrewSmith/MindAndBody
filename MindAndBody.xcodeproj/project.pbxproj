@@ -279,6 +279,7 @@
 		073BA9C71F6E7CCA005DB480 /* FinalChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BA9C61F6E7CCA005DB480 /* FinalChoice.swift */; };
 		073BA9CB1F6E81B8005DB480 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BA9CA1F6E81B8005DB480 /* DataStructures.swift */; };
 		074074AD1EDC0A4000DC2D0F /* YogaAutomatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */; };
+		0748C2E11FC2DC4F0087992D /* InfoPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748C2E01FC2DC4F0087992D /* InfoPageController.swift */; };
 		0750DB631F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0750DB621F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift */; };
 		07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07520BB31E9F894C00FA682E /* MeditationScreen.swift */; };
 		0757326B1E64D8A3003DA77E /* InformationScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757326A1E64D8A3003DA77E /* InformationScreen1.swift */; };
@@ -478,6 +479,8 @@
 		077AC1351DA793950026895B /* SF-UI-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC1271DA793950026895B /* SF-UI-Text-SemiboldItalic.otf */; };
 		077AC1361DA793950026895B /* SF-UI-Text-Ultrathin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC1281DA793950026895B /* SF-UI-Text-Ultrathin.otf */; };
 		077AC1371DA793950026895B /* SF-UI-Text-UltrathinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC1291DA793950026895B /* SF-UI-Text-UltrathinItalic.otf */; };
+		077B0EE11FC2C35A008F3503 /* InfoTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077B0EE01FC2C35A008F3503 /* InfoTables.swift */; };
+		077B0EE51FC2D709008F3503 /* InfoCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077B0EE41FC2D709008F3503 /* InfoCells.swift */; };
 		077BC6951F725DCB00B9E798 /* FinalChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BC6941F725DCB00B9E798 /* FinalChoiceCustom.swift */; };
 		077C2C7E1E5C723D00BA62C0 /* GymChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */; };
 		077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */; };
@@ -1684,6 +1687,7 @@
 		073BA9C61F6E7CCA005DB480 /* FinalChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalChoice.swift; sourceTree = "<group>"; };
 		073BA9CA1F6E81B8005DB480 /* DataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
 		074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaAutomatic.swift; sourceTree = "<group>"; };
+		0748C2E01FC2DC4F0087992D /* InfoPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPageController.swift; sourceTree = "<group>"; };
 		0750DB621F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreatorFunctions.swift; sourceTree = "<group>"; };
 		07520BB31E9F894C00FA682E /* MeditationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationScreen.swift; sourceTree = "<group>"; };
 		0757326A1E64D8A3003DA77E /* InformationScreen1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationScreen1.swift; sourceTree = "<group>"; };
@@ -1870,6 +1874,8 @@
 		077AC1271DA793950026895B /* SF-UI-Text-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		077AC1281DA793950026895B /* SF-UI-Text-Ultrathin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Ultrathin.otf"; sourceTree = "<group>"; };
 		077AC1291DA793950026895B /* SF-UI-Text-UltrathinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-UltrathinItalic.otf"; sourceTree = "<group>"; };
+		077B0EE01FC2C35A008F3503 /* InfoTables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTables.swift; sourceTree = "<group>"; };
+		077B0EE41FC2D709008F3503 /* InfoCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCells.swift; sourceTree = "<group>"; };
 		077BC6941F725DCB00B9E798 /* FinalChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalChoiceCustom.swift; sourceTree = "<group>"; };
 		077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymChoice.swift; sourceTree = "<group>"; };
 		077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircuitChoiceG.swift; sourceTree = "<group>"; };
@@ -3664,6 +3670,7 @@
 			isa = PBXGroup;
 			children = (
 				07DE23041FC0A47400940567 /* SubscriptionScreen.swift */,
+				077B0EDD1FC2C349008F3503 /* Info Tables */,
 				07DE23011FC0916F00940567 /* Subscriptions Other */,
 			);
 			name = Subscriptions;
@@ -3790,6 +3797,16 @@
 				077AC1291DA793950026895B /* SF-UI-Text-UltrathinItalic.otf */,
 			);
 			name = "SF-UI-Text";
+			sourceTree = "<group>";
+		};
+		077B0EDD1FC2C349008F3503 /* Info Tables */ = {
+			isa = PBXGroup;
+			children = (
+				077B0EE01FC2C35A008F3503 /* InfoTables.swift */,
+				0748C2E01FC2DC4F0087992D /* InfoPageController.swift */,
+				077B0EE41FC2D709008F3503 /* InfoCells.swift */,
+			);
+			name = "Info Tables";
 			sourceTree = "<group>";
 		};
 		077E47151EB9DC54005B0B22 /* Slide Menu */ = {
@@ -8335,6 +8352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0750DB631F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift in Sources */,
+				077B0EE51FC2D709008F3503 /* InfoCells.swift in Sources */,
 				07DEE6F71E0AADE6003B89AB /* YogaChoice.swift in Sources */,
 				071D4A331FC0CD1600ED779B /* SubscriptionNotifications.swift in Sources */,
 				077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */,
@@ -8365,9 +8383,11 @@
 				0789ED061F79A6EA000EB739 /* UserData.swift in Sources */,
 				07DEE6FB1E0AC47F003B89AB /* WorkoutChoice.swift in Sources */,
 				078674FE1FB84F7000C6B74C /* ICloudStorage.swift in Sources */,
+				0748C2E11FC2DC4F0087992D /* InfoPageController.swift in Sources */,
 				07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */,
 				075732701E660AEC003DA77E /* InformationScreenAnatomy.swift in Sources */,
 				07CB04371E604653002066CD /* MeditationChoiceGuided.swift in Sources */,
+				077B0EE11FC2C35A008F3503 /* InfoTables.swift in Sources */,
 				07DEE6F11E0AAD2E003B89AB /* ClassicChoiceG.swift in Sources */,
 				073BA9C71F6E7CCA005DB480 /* FinalChoice.swift in Sources */,
 				0757326B1E64D8A3003DA77E /* InformationScreen1.swift in Sources */,

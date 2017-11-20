@@ -184,7 +184,7 @@ class ScheduleVariables {
             // Set Last Reset
             trackingProgressArray[2] = currentMondayDate
             // Indicate has been reset, to indicate if this func called again on a monday that it already has been reset
-            trackingProgressArray[3] = true
+//            trackingProgressArray[3] = true
             //
             UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
