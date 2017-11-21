@@ -21,8 +21,8 @@ class ProfileFunctions {
     // !!!!!! -> Look at scheduleDataStructures.profileQA and scheduleDataStructures.defaultDifficultyLevels to understand indexing
     func setDifficultyLevels() {
         // Fetch Arrays
-        var difficultyLevels = UserDefaults.standard.array(forKey: "difficultyLevels") as! [[Int]]
-        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
+        var difficultyLevels = UserDefaults.standard.object(forKey: "difficultyLevels") as! [[Int]]
+        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
         
         // MARK: Straightforward setting data
         // Flexibility - 0

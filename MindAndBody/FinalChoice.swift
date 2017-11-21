@@ -79,7 +79,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         if comingFromSchedule == false {
             navigationBar.title = (NSLocalizedString(sessionData.navigationTitles[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]] , comment: ""))
         } else {
-            let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
             // App chooses session
             if schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] as! Int == 0 {
                 presetsButton.alpha = 0
@@ -208,7 +208,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 self.presetsConstraint.constant = self.view.frame.size.height - 73.25
             // Hide presets button
             } else {
-                let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
                 // App chooses session
                 if schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] as! Int == 0 {
                     self.tableConstraint1.constant = 0
@@ -321,8 +321,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         // timed schedule sessions
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let timedSession = settings[2][0]
+        let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        let timedSession = settings["TimeBasedSessions"]![0]
         //
         switch tableView {
         //
@@ -613,8 +613,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         //
         // MARK: Walkthrough
-        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-        if walkthroughs[2] == false {
+        let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+        if walkthroughs["FinalChoice"] == false {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + AnimationTimes.animationTime3, execute: {
                 self.walkthroughFinalChoice()
             })
@@ -775,8 +775,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
         // timed schedule sessions
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let timedSession = settings[2][0]
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        let timedSession = settings["TimeBasedSessions"]![0]
         //
         // Segue
         switch SelectedSession.shared.selectedSession[0] {
@@ -1025,8 +1025,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                walkthroughs[2] = true
+                var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+                walkthroughs["FinalChoice"] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])

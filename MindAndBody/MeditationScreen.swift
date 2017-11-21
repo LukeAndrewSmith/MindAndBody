@@ -43,7 +43,7 @@ class MeditationScreen: UIViewController {
     var isHours = Bool()
     
     // Meditation Array
-    let meditationArray = UserDefaults.standard.object(forKey: "meditationTimer") as! [[[[Any]]]]
+    let meditationArray = UserDefaults.standard.object(forKey: "meditationTimer") as! [[String: [[Any]]]]
     
     //
     // Outlets -------------------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ class MeditationScreen: UIViewController {
         // Initial Conditions
         //
         // Determine wether hours or not
-        if meditationArray[selectedPreset][1][0][0] as! Int > 3599 {
+        if meditationArray[selectedPreset]["Duration"]?[0][0] as! Int > 3599 {
             isHours = true
         } else {
             isHours = false
@@ -110,8 +110,8 @@ class MeditationScreen: UIViewController {
         //
         // Colours
         //
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
+        let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        let backgroundIndex = settings["BackgroundImage"]![0]
         //
         switch backgroundIndex {
         // All Black
@@ -236,7 +236,7 @@ class MeditationScreen: UIViewController {
             //
             timerCountDown.invalidate()
             // Stop sounds
-            if meditationArray[selectedPreset][3][0][0] as! Int != -1 {
+            if meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
                 if self.soundPlayer.isPlaying == true {
                     self.soundPlayer.stop()
                 }
@@ -280,20 +280,20 @@ class MeditationScreen: UIViewController {
             //
             didSetEndTime = true
             //
-            let duration = meditationArray[selectedPreset][1][0][0] as! Int
+            let duration = meditationArray[selectedPreset]["Duration"]?[0][0] as! Int
             endTime = startTime + Double(duration)
             //
             
             //
             // Bells
             // Perform delays
-            for i in 0...meditationArray[selectedPreset][2].count - 2 {
+            for i in 0...(meditationArray[selectedPreset]["Bells"]?.count)! - 2 {
                 // Bells
-                if meditationArray[selectedPreset][2][i][0] as! Int != -1 {
+                if meditationArray[selectedPreset]["Bells"]?[i][0] as! Int != -1 {
                     // Delay bell
-                    let delayInSeconds = Double(meditationArray[selectedPreset][2][i][1] as! Int)
+                    let delayInSeconds = Double(meditationArray[selectedPreset]["Bells"]?[i][1] as! Int)
                     // Play with delay
-                    let url = Bundle.main.url(forResource: bellsArray[meditationArray[selectedPreset][2][i][0] as! Int], withExtension: "caf")!
+                    let url = Bundle.main.url(forResource: bellsArray[meditationArray[selectedPreset]["Bells"]?[i][0] as! Int], withExtension: "caf")!
                     //
                     do {
                         let audioPlayer = try AVAudioPlayer(contentsOf: url)
@@ -308,13 +308,13 @@ class MeditationScreen: UIViewController {
             //
             // Ending Bell
             // Requires different audio player to continue playing after view is dismissed
-            let lastIndex = meditationArray[selectedPreset][2].count - 1
-            if meditationArray[selectedPreset][2][lastIndex][0] as! Int != -1 {
+            let lastIndex = (meditationArray[selectedPreset]["Bells"]?.count)! - 1
+            if meditationArray[selectedPreset]["Bells"]?[lastIndex][0] as! Int != -1 {
                 //
                 // Delay bell
-                let delayInSeconds = Double(meditationArray[selectedPreset][2][lastIndex][1] as! Int)
+                let delayInSeconds = Double(meditationArray[selectedPreset]["Bells"]?[lastIndex][1] as! Int)
                 
-                let url = Bundle.main.url(forResource: self.bellsArray[meditationArray[selectedPreset][2][lastIndex][0] as! Int], withExtension: "caf")!
+                let url = Bundle.main.url(forResource: self.bellsArray[meditationArray[selectedPreset]["Bells"]?[lastIndex][0] as! Int], withExtension: "caf")!
                 //
                 do {
                     endingBellPlayer = try AVAudioPlayer(contentsOf: url)
@@ -327,8 +327,8 @@ class MeditationScreen: UIViewController {
             
             //
             // Background Sound
-            if meditationArray[selectedPreset][3][0][0] as! Int != -1 {
-                let url = Bundle.main.url(forResource: backgroundSoundsArray[meditationArray[selectedPreset][3][0][0] as! Int], withExtension: "caf")!
+            if meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
+                let url = Bundle.main.url(forResource: backgroundSoundsArray[meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int], withExtension: "caf")!
                 //
                 do {
                     let bell = try AVAudioPlayer(contentsOf: url)
@@ -414,7 +414,7 @@ class MeditationScreen: UIViewController {
             // Cancel Timer
             timerCountDown.invalidate()
             // Stop sounds
-            if self.meditationArray[self.selectedPreset][3][0][0] as! Int != -1 {
+            if self.meditationArray[self.selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
                 if self.soundPlayer.isPlaying == true {
                     self.soundPlayer.stop()
                 }

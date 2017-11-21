@@ -74,7 +74,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var selectedItem = Int()
     
     // NOTE:
-    // settings[3] = settings[3]
+    // settings["AutomaticYoga"]! = settings["AutomaticYoga"]!
     
     //
     // View did load --------------------------------------------------------------------------------------------------
@@ -172,9 +172,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let yPosition = CGFloat(91)
         offView.frame = CGRect(x: 0, y: yPosition, width: self.view.frame.size.width, height: view.frame.size.height - yPosition)
         
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         // Retreive Presentation Style
-        if settings[3][0] == 0 {
+        if settings["AutomaticYoga"]![0] == 0 {
             view.insertSubview(offView, aboveSubview: tableViewAutomatic)
             tableViewAutomatic.isScrollEnabled = false
         }
@@ -267,7 +267,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
             //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             
             //
             switch indexPath.section {
@@ -275,7 +275,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.textLabel?.text = NSLocalizedString("on/off", comment: "")
                 cell.selectionStyle = .none
                 // Retreive Presentation Style
-                if settings[3][0] == 0 {
+                if settings["AutomaticYoga"]![0] == 0 {
                     onOffSwitch.isOn = false
                 } else {
                     onOffSwitch.isOn = true
@@ -289,24 +289,24 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 switch indexPath.row {
                 case 0:
                     //
-                    if settings[3][1] == -1 {
+                    if settings["AutomaticYoga"]![1] == -1 {
                         cell.detailTextLabel?.text = "-"
                     } else {
-                        cell.detailTextLabel?.text = String(timeArray[settings[3][1]]) + "s"
+                        cell.detailTextLabel?.text = String(timeArray[settings["AutomaticYoga"]![1]]) + "s"
                     }
                 case 1:
                     //
-                    if settings[3][2] == -1 {
+                    if settings["AutomaticYoga"]![2] == -1 {
                         cell.detailTextLabel?.text = "-"
                     } else {
-                        cell.detailTextLabel?.text = String(transitionArray[settings[3][2]]) + "s"
+                        cell.detailTextLabel?.text = String(transitionArray[settings["AutomaticYoga"]![2]]) + "s"
                     }
                 case 2:
                     //
-                    if settings[3][3] == -1 {
+                    if settings["AutomaticYoga"]![3] == -1 {
                         cell.detailTextLabel?.text = "-"
                     } else {
-                        cell.detailTextLabel?.text = NSLocalizedString(bellsArray[settings[3][3]], comment: "")
+                        cell.detailTextLabel?.text = NSLocalizedString(bellsArray[settings["AutomaticYoga"]![3]], comment: "")
                     }
                 default: break
                 }
@@ -334,10 +334,10 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.tintColor = Colours.colour1
             
             //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             if didChangeTransitionIndicator == false {
-                if settings[3][3] != -1 {
-                    selectedTransitionIndicator = settings[3][3]
+                if settings["AutomaticYoga"]![3] != -1 {
+                    selectedTransitionIndicator = settings["AutomaticYoga"]![3]
                 }
             }
             //
@@ -372,7 +372,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         //
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         
         //
         switch tableView {
@@ -400,10 +400,10 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     selectionView.addSubview(pickerView)
                     pickerView.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
                     // Select Rows
-                    if settings[3][1] == -1 {
+                    if settings["AutomaticYoga"]![1] == -1 {
                         pickerView.selectRow(0, inComponent: 0, animated: true)
                     } else {
-                        pickerView.selectRow(settings[3][1], inComponent: 0, animated: true)
+                        pickerView.selectRow(settings["AutomaticYoga"]![1], inComponent: 0, animated: true)
                     }
                     //
                     selectionView.addSubview(indicatorLabel)
@@ -444,10 +444,10 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     selectionView.addSubview(pickerView)
                     pickerView.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
                     // Select Rows
-                    if settings[3][1] == -1 {
+                    if settings["AutomaticYoga"]![1] == -1 {
                         pickerView.selectRow(0, inComponent: 0, animated: true)
                     } else {
-                        pickerView.selectRow(settings[3][2], inComponent: 0, animated: true)
+                        pickerView.selectRow(settings["AutomaticYoga"]![2], inComponent: 0, animated: true)
                     }
                     //
                     selectionView.addSubview(indicatorLabel)
@@ -502,9 +502,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     self.selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
                     //
                     // Scroll to row
-                    var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                    if settings[3][3] != -1 {
-                        let indexPath = IndexPath(row: settings[3][3], section: 0)
+                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                    if settings["AutomaticYoga"]![3] != -1 {
+                        let indexPath = IndexPath(row: settings["AutomaticYoga"]![3], section: 0)
                         tableViewBells.scrollToRow(at: indexPath, at: .top, animated: true)
                     }
                     //
@@ -613,33 +613,33 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @objc func okButtonAction(_ sender: Any) {
         //
         let defaults = UserDefaults.standard
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         //
         switch selectedItem {
             //
         // Breath Length
         case 0:
             //
-            settings[3][1] = pickerView.selectedRow(inComponent: 0)
+            settings["AutomaticYoga"]![1] = pickerView.selectedRow(inComponent: 0)
             defaults.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             //
             let indexPath = NSIndexPath(row: 0, section: 1)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
-            cell?.detailTextLabel?.text = String(timeArray[settings[3][1]]) + "s"
+            cell?.detailTextLabel?.text = String(timeArray[settings["AutomaticYoga"]![1]]) + "s"
             //
         // Transition time
         case 1:
             //
-            settings[3][2] = pickerView.selectedRow(inComponent: 0)
+            settings["AutomaticYoga"]![2] = pickerView.selectedRow(inComponent: 0)
             defaults.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             //
             let indexPath = NSIndexPath(row: 1, section: 1)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
-            cell?.detailTextLabel?.text = String(transitionArray[settings[3][2]]) + "s"
+            cell?.detailTextLabel?.text = String(transitionArray[settings["AutomaticYoga"]![2]]) + "s"
             //
         // Transition Indicator
         case 2:
@@ -650,7 +650,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }
             }
             //
-            settings[3][3] = selectedTransitionIndicator
+            settings["AutomaticYoga"]![3] = selectedTransitionIndicator
             //
             let indexPath = NSIndexPath(row: 2, section: 1)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
@@ -665,7 +665,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         default: break
         }
         //
-        if settings[3][1] != -1 && settings[3][2] != -1 {
+        if settings["AutomaticYoga"]![1] != -1 && settings["AutomaticYoga"]![2] != -1 {
             navigationItem.hidesBackButton = false
         }
         
@@ -677,13 +677,13 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // MARK: Switch handlers
     @objc func valueChanged(_ sender: UISwitch) {
         // Timed sessions
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         // off -> on
         if sender.isOn == true {
             //
-            settings[3][0] = 1
+            settings["AutomaticYoga"]![0] = 1
             
-            if settings[3][1] == -1 && settings[3][2] == -1 {
+            if settings["AutomaticYoga"]![1] == -1 && settings["AutomaticYoga"]![2] == -1 {
                 navigationItem.hidesBackButton = true
             }
             //
@@ -696,14 +696,14 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             })
             //
             // Present walkthrough
-            let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-            if walkthroughs[12] == false {
+            let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+            if walkthroughs["AutomaticYoga"] == false {
                 walkthroughAutomaticYoga()
             }
             // on -> off
         } else {
             //
-            settings[3][0] = 0
+            settings["AutomaticYoga"]![0] = 0
             //
             navigationItem.hidesBackButton = false
             
@@ -724,9 +724,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
         if sender.isOn == true {
-            settings[2][0] = 0
+            settings["TimeBasedSessions"]![0] = 0
         } else {
-            settings[2][0] = 1
+            settings["TimeBasedSessions"]![0] = 1
         }
         //
         UserDefaults.standard.set(settings, forKey: "userSettings")
@@ -852,8 +852,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                walkthroughs[12] = true
+                var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+                walkthroughs["AutomaticYoga"] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])

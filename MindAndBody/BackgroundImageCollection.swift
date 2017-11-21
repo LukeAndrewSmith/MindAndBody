@@ -126,8 +126,8 @@ class BackgroundImageCollection: UICollectionViewController {
         
         // Index
         //
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
+        let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        let backgroundIndex = settings["BackgroundImage"]![0]
         
         //
         // Section
@@ -176,8 +176,8 @@ class BackgroundImageCollection: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         // Deselect previous selection
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        let backgroundIndex = settings["BackgroundImage"]![0]
         //
         var deselectIndex = NSIndexPath()
         // Image
@@ -199,7 +199,7 @@ class BackgroundImageCollection: UICollectionViewController {
         
         // Store Selection Index
         // Image
-        settings[0][0] = indexPath.item
+        settings["BackgroundImage"]![0] = indexPath.item
         UserDefaults.standard.set(settings, forKey: "userSettings")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])

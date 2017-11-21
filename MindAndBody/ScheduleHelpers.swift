@@ -15,7 +15,7 @@ extension ScheduleScreen {
     //
     // MARK: didSelectRowHandler
     func didSelectRowHandler(row: Int) {
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
 
         updateSelectedChoice(row: row)
         // ------------------------------------------------------------------------------------------------
@@ -275,7 +275,7 @@ extension ScheduleScreen {
         // Function for going through choices on the schedule screen, is called when group/choice is pressed and determines what to present next
     func updateSelectedChoice(row: Int) {
         //
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         // ------------------------------------------------------------------------------------------------
         if ScheduleVariables.shared.choiceProgress[0] == -1 && row != schedules[ScheduleVariables.shared.selectedSchedule][0][ScheduleVariables.shared.selectedDay].count {
             // Notes selectedChoiceStretching not always used
@@ -643,7 +643,7 @@ extension ScheduleScreen {
     // MARK: isCompleted()
     func isCompleted(row: Int) -> Bool {
         //
-        let scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+        let scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
 
         // Day
         if scheduleStyle == 0 {
@@ -679,7 +679,7 @@ extension ScheduleScreen {
     func isGroupCompleted() -> Bool {
         //
         // Check if group is completed
-        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         let nRows = scheduleTable.numberOfRows(inSection: 0)
         var isCompleted = true
         // -2 because title included
@@ -924,8 +924,8 @@ extension ScheduleScreen {
         // Also marks as incomplete if previously comleted, note: rename
     @IBAction func markAsCompleted(_ sender: UILongPressGestureRecognizer) {
         //
-        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
 
         if sender.state == UIGestureRecognizerState.began {
             // Get Cell
@@ -1089,7 +1089,7 @@ extension ScheduleScreen {
     // Is day completed
         // 0 == true, 1 == false, 2 == Nothing on the day
     func isDayCompleted(day: Int) -> Int {
-        let scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+        let scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         var isCompleted = 0
         //
         if scheduleTracking.count != 0 && scheduleTracking[ScheduleVariables.shared.selectedSchedule][day].count != 0 {

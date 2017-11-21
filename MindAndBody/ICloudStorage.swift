@@ -22,12 +22,12 @@ class ICloudFunctions {
     // Check if user wants to use icloud
     func ICloudEnabled() -> Bool {
         // Test is very silly, seems to force it to update and find something in i
-//        let test = NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") as! [[Int]]
+//        let test = NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") as! [String: [Int]]
         //
         // Check iCloud if exists incase first opening on new device
         if let iCloudSettings = NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") {
 //        if NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") != nil {
-//            let iCloudSettings = NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") as! [[Int]]
+//            let iCloudSettings = NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") as! [String: [Int]]
             if (iCloudSettings as! [[Int]])[7][0] == 0 {
                 return true
             } else {
@@ -35,9 +35,9 @@ class ICloudFunctions {
             }
         // Fall back on userdefaults
         } else {
-            if UserDefaults.standard.array(forKey: "userSettings") != nil {
-                let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                if settings[7][0] == 0 {
+            if UserDefaults.standard.object(forKey: "userSettings") != nil {
+                let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                if settings["iCloud"]![0] == 0 {
                     return true
                 } else {
                     return false

@@ -74,7 +74,7 @@ class ScheduleViewQuestion: UIViewController {
     // MARK: Button actions
     // Day
     @IBAction func dayButtonAction(_ sender: Any) {
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         // Set user settings for schedule style to week
         schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] = 0
         UserDefaults.standard.set(schedules, forKey: "schedules")
@@ -86,7 +86,7 @@ class ScheduleViewQuestion: UIViewController {
     // Week
     @IBAction func weekButtonAction(_ sender: Any) {
         // If app schedule, go to week
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         // Set user settings for schedule style to week
         schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] = 1
         UserDefaults.standard.set(schedules, forKey: "schedules")
@@ -96,8 +96,8 @@ class ScheduleViewQuestion: UIViewController {
         // App helps create schedule, dismiss to schedule
         if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
             // Fill up days in week array with sessions
-            var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+            var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
             // Loop sessions array from 1 (0 is total n sessions, rest are number of session of each group)
             for i in 1...schedules[ScheduleVariables.shared.selectedSchedule][2][2].count - 1 {
                 // If n session not 0

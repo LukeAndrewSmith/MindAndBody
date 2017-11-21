@@ -12,43 +12,7 @@ import Foundation
 //
 // MARK: User Data
 
-
-
-
-//
-// Custom Section
-struct customData {
-    
-    // Warmup, Workout, Cardio, Stretching, Yoga
-    var customSession: [[[Any]]] =
-        [
-            // Warmup
-            // [name] - string, [movements] - int, [sets] - int, [reps] - string
-            [],
-            // Workout
-            // [name] - string, [movements] - int, [sets] - int, [reps] - string
-            [],
-            // Workout - Circuit
-            // [name] - string, [movements] - int, [rounds] - int, [reps] - string
-            [],
-            // Cardio
-            // [name] - string, [movements] - int, [time/distance] - int
-            [],
-            // Stretching
-            // [name] - string, [stretches] - int, [breaths] - int
-            [],
-            // Yoga
-            // [name] - string, [stretches] - int, [poses] - int
-            []
-    ]
-    
-    // Meditation
-    var meditationArray: [[[[Any]]]] = []
-    
-}
-
-
-enum customSectionEmtpySessions {
+enum customSectionEmptySessions {
     
     // Empty Session, Warmup, Workout, Workout - circuit - [string],[int],[int],[int]
     static let emptySessionFour: [[Any]] =
@@ -211,79 +175,75 @@ enum customSectionEmtpySessions {
 enum Register {
     // --------------------------------------------------------
     // Settings
-    static let defaultSettings: [[Int]] = [
+    static let defaultSettings: [String: [Int]] = [
         // Background image index - 0
-        [2],
+        "BackgroundImage": [2],
         // Home Screen - 1 (Defaults to schedule)
-        [1],
+        "HomeScreen": [1],
         // Time Based Sessions - 2
-        [0], // 0 == Off, 1 = on
+        "TimeBasedSessions": [0], // 0 == Off, 1 = on
         // Yoga Automatic - 3
-        [0, -1, -1, -1], // [0], 0 == off, 1 == on
+        "AutomaticYoga": [0, -1, -1, -1], // [0], 0 == off, 1 == on
         // Rest times - 4
-        [5, 45, 10],
+        "RestTimes": [5, 45, 10],
         // Default Image - 5
-        [0],   // 0 == "demonstration", 1 == "targetArea"
+        "DefaultImage": [0],   // 0 == "demonstration", 1 == "targetArea"
         // Metric/Imperial - 6
-        [0], // == "kg" (0), "lb" (1)
+        "Units": [0], // == "kg" (0), "lb" (1)
         // Is icloud enabled, 0 == true, 1 == false
-        [1],
+        "iCloud": [1],
     ]
     
     // --------------------------------------------------------
     // Walkthroughs
     //
     // Walkthrough
-    static let registerWalkthroughArray: [Bool] =
+    static let registerWalkthroughDictionary: [String: Bool] =
         [
             // Notifications popup - 0
-            false,
+            "NotificationsPopup": false,
             // Mind Body, homescreen, - 1
-            false,
+            "HomeScreen": false,
             // Final Choice, - 2
-            false,
+            "FinalChoice": false,
             // Session - 3
-            false,
+            "Sessions": false,
             // Session 2 - 4
-            false,
+            "Session2": false,
             // Schedule - 5
-            false,
+            "Schedule": false,
             // Tracking - 6
-            false,
+            "Tracking": false,
             // Profile - 7
-            false,
-            // Profile 'Me' - 8
-            false,
-            // Profile 'Goals' - 9
-            false,
-            // Profile 'Nº Session' - 10
-            false,
-            // Settings - 11
-            false,
+            "Profile": false,
+            // Settings - 8
+            "Settings": false,
             // Automatic Yoga - 12
-            false
+            "AutomaticYoga": false
     ]
     
     // --------------------------------------------------------
     // Meditation array Register
-    static let meditationArrayRegister: [[[[Any]]]] = []
+        // Array because order matters
+    static let meditationArrayRegister: [[String: [[Any]]]] = []
     //
-    static let meditationEmptySession: [[[Any]]] =
+    static let meditationEmptySession: [String: [[Any]]] =
         [
             // Name - String
-            [[]],
+            "Name": [[]],
             // Duration - Int
-            [[]],
+            "Duration": [[]],
             // Bells, starting and ending bells go at first and last, interval bells in the middle
             // [Bell, Time] - [Int]
-            [[-1,0],[-1,0]],
+            "Bells": [[-1,0],[-1,0]],
             // Background Sound - Int
-            [[-1]]
+            "BackgroundSound": [[-1]]
     ]
     
     // --------------------------------------------------------
     // Custom Sessions
     // Warmup, Workout, Cardio, Stretching, Yoga
+        // Array because indexe with ints
     static let customSessionsRegister: [[[[Any]]]] =
         [
             // Warmup - 0
@@ -330,13 +290,17 @@ enum Register {
     
     // --------------------------------------------------------
     // Tracking
-    static let registerTrackingProgressArray: [Any] =
+    static let registertrackingProgressDictionary: [String: Any] =
         // Update progress (first monday of last week completed (lastResetWeek) is used to check if progress needs to be reset to 0 for first entry of new week)
-            // Week - [weekProgress, weekGoal, lastResetWeek]
-        [0, 1, Date().firstMondayInCurrentWeek]
+        [
+            "WeekProgress": 0,
+            "WeekGoal": 1,
+            "LastResetWeek": Date().firstMondayInCurrentWeek
+        ]
     
     // Tracking percentages
         // % = completed / planned
+                // Note kept as array not dictionary as nicer to convert to and fro Date: String
     static let registerTrackingDictionaries: [[String: Int]] =
     [
         // Week Tracking

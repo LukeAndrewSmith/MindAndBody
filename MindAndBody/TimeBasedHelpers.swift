@@ -72,8 +72,8 @@ extension TimeBasedScreen {
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         // Rest Time
         if movementProgress == 0 {
-            let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let restTimes = settings[4]
+            let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let restTimes = settings["RestTimes"]!
             switch SelectedSession.shared.selectedSession[0] {
             // Warmup
             case 0:
@@ -120,8 +120,8 @@ extension TimeBasedScreen {
         switch movementProgress {
         // Rest Time
         case 0:
-            let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let restTimes = settings[4]
+            let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let restTimes = settings["RestTimes"]!
             switch SelectedSession.shared.selectedSession[0] {
             // Warmup
             case 0:

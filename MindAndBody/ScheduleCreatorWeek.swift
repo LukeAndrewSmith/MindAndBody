@@ -151,7 +151,7 @@ class CustomScheduleWeekCell: UITableViewCell {
         groupLabel.lineBreakMode = .byWordWrapping
         groupLabel.numberOfLines = 0
         //
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         var groupArray = [0,0,0,0,0,0]
         // Create array of nsession of groups from full week array in schedule ([0][7])
         if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
@@ -180,8 +180,8 @@ class CustomScheduleWeekCell: UITableViewCell {
         generator = nil
         
         // Update the array
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         // update schedules
         schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(row)
         schedules[ScheduleVariables.shared.selectedSchedule][0][7] = (schedules[ScheduleVariables.shared.selectedSchedule][0][7] as! [Int]).sorted()
@@ -223,8 +223,8 @@ class CustomScheduleWeekCell: UITableViewCell {
         generator = nil
         
         // Update the array
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         // Remove from schedules array and update userdefaults
         // Remove first instance from from Week
         var shouldBreak = false

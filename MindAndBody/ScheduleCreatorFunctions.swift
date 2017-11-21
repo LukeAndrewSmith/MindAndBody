@@ -16,7 +16,7 @@ extension UIViewController {
     // MARK: - Determine Number of Sessions
     func setNumberOfSessions(updating: Bool) {
         // Create/Fetch Arrays
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         // Deduce number of sessions using '''ScheduleVariables.shared.updatedSessionsArray''', then let user edit, then set to defaults;  this is so if user is updating profile the new array can be checked against the existing schedule to see the difference
         // [nSessions, mind, flexibility, endurance, toning, muscle gain, strength]
         // [total,

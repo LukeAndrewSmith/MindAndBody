@@ -104,8 +104,8 @@ class MindBody: UIViewController {
         blur7.removeFromSuperview()
         
         // Background Index
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
+        let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        let backgroundIndex = settings["BackgroundImage"]![0]
         //
         // BackgroundImage
         addBackgroundImage(withBlur: false, fullScreen: false)
@@ -203,8 +203,8 @@ class MindBody: UIViewController {
         // Walkthroughs
         // Walkthrough app overview
         // mindBody walkthrough == false
-        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-        if walkthroughs[1] == false {
+        let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+        if walkthroughs["HomeScreen"] == false {
             self.walkthroughMindBody()
         }
         
@@ -287,8 +287,8 @@ class MindBody: UIViewController {
         Meditation.titleLabel?.textAlignment = .center
         Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
         
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
+        let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        let backgroundIndex = settings["BackgroundImage"]![0]
         if backgroundIndex != BackgroundImages.backgroundImageArray.count {
             Warmup.backgroundColor = Colours.colour2.withAlphaComponent(0.72)
             Workout.backgroundColor = Colours.colour2.withAlphaComponent(0.72)
@@ -333,8 +333,8 @@ class MindBody: UIViewController {
         if MenuVariables.shared.isInitialAppOpen == true {
             //        if isInitialAppOpen == true {
             // Deselect previous selection
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let homeScreen = settings[1][0]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let homeScreen = settings["HomeScreen"]![0]
             if homeScreen == 2 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                     self.performSegue(withIdentifier: "openMenu", sender: self)
@@ -389,8 +389,8 @@ class MindBody: UIViewController {
         mind.layer.cornerRadius = mind.frame.size.height / 2
         mind.clipsToBounds = true
         
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
+        let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        let backgroundIndex = settings["BackgroundImage"]![0]
         if backgroundIndex != BackgroundImages.backgroundImageArray.count {
             body.backgroundColor = Colours.colour2.withAlphaComponent(0.72)
             mind.backgroundColor = Colours.colour2.withAlphaComponent(0.72)
@@ -743,12 +743,12 @@ class MindBody: UIViewController {
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
                 // Walkthrough
-                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                walkthroughs[1] = true
+                var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+                walkthroughs["HomeScreen"] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                 // Settings
-                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                settings[1][0] = 1
+                var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                settings["HomeScreen"]![0] = 1
                 UserDefaults.standard.set(settings, forKey: "userSettings")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs", "userSettings"])

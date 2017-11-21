@@ -74,8 +74,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         
         //
         // Walkthrough
-        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-        if walkthroughs[11] == false {
+        let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+        if walkthroughs["Settings"] == false {
             walkthroughSettings()
         }
         
@@ -147,18 +147,18 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         let defaults = UserDefaults.standard
         // Rest time
         if actionSheetView.subviews.contains(restTimePicker) {
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             //
-            settings[4][selectedRow] = restTimesArray[restTimePicker.selectedRow(inComponent: 0)]
+            settings["RestTimes"]![selectedRow] = restTimesArray[restTimePicker.selectedRow(inComponent: 0)]
             defaults.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             //
             // Home Screen
         } else if actionSheetView.subviews.contains(homeScreenPicker) {
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             //
-            settings[1][0] = homeScreenPicker.selectedRow(inComponent: 0)
+            settings["HomeScreen"]![0] = homeScreenPicker.selectedRow(inComponent: 0)
             //
             defaults.set(settings, forKey: "userSettings")
             // Sync
@@ -250,8 +250,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 backgroundImageView.center = CGPoint(x: view.bounds.width - 40 - (backgroundImageView.bounds.width / 2), y: cell.bounds.height / 2)
                 
                 // Retreive background index
-                let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                let backgroundIndex = settings[0][0]
+                let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                let backgroundIndex = settings["BackgroundImage"]![0]
                 // Set image background based on index
                 if backgroundIndex < BackgroundImages.backgroundImageArray.count {
                     backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
@@ -283,8 +283,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 
                 // Retreive Presentation Style
-                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                let homeScreen = settings[1][0]
+                var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                let homeScreen = settings["HomeScreen"]![0]
                 cell.detailTextLabel?.text = NSLocalizedString(homeScreenArray[homeScreen], comment: "")
                 cell.detailTextLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = Colours.colour1
@@ -311,8 +311,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 cell.textLabel?.text = NSLocalizedString("timedSession", comment: "")
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 //
-                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                let timedSession = settings[2][0]
+                var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                let timedSession = settings["TimeBasedSessions"]![0]
                 if timedSession == 0 {
                     timedSessionSwitch.isOn = false
                 } else {
@@ -333,8 +333,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 cell.textLabel?.text = NSLocalizedString("automaticYoga", comment: "")
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 //
-                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                let automaticYogaArray = settings[3]
+                var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                let automaticYogaArray = settings["AutomaticYoga"]!
                 // Retreive Presentation Style
                 if automaticYogaArray[0] == 0 {
                     cell.detailTextLabel?.text = NSLocalizedString("off", comment: "")
@@ -362,8 +362,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.textLabel?.text = NSLocalizedString(restTimeTitles[indexPath.row], comment: "")
             //
             // Retreive Rest Time
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let restTimes = settings[4]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let restTimes = settings["RestTimes"]!
             cell.detailTextLabel?.text = String(restTimes[indexPath.row]) + " s"
             //
             //
@@ -385,8 +385,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             // Default image
             case 0:
                 cell.textLabel?.text = NSLocalizedString("defaultImage", comment: "")
-                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                let defaultImage = settings[5][0]
+                var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                let defaultImage = settings["DefaultImage"]![0]
                 if defaultImage == 0 {
                     cell.detailTextLabel?.text = NSLocalizedString("demonstration", comment: "")
                 } else {
@@ -395,8 +395,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             // Units
             case 1:
                 cell.textLabel?.text = NSLocalizedString("units", comment: "")
-                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                let units = settings[6][0]
+                var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                let units = settings["Units"]![0]
                 if units == 0 {
                     cell.detailTextLabel?.text = NSLocalizedString("metric", comment: "")
                 } else {
@@ -415,8 +415,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
             cell.textLabel?.text = NSLocalizedString("iCloudStorage", comment: "")
             //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let iCloud = settings[7][0]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let iCloud = settings["iCloud"]![0]
             if iCloud == 0 {
                 iCloudSwitch.isOn = true
             } else {
@@ -484,8 +484,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 actionSheetView.addSubview(homeScreenPicker)
                 
                 //
-                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                let homeScreen = settings[1][0]
+                var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                let homeScreen = settings["HomeScreen"]![0]
                 // View
                 let homeWidth = UIScreen.main.bounds.width - 20
                 let homeHeight = CGFloat(147 + 49)
@@ -548,8 +548,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             selectedRow = indexPath.row
             //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let restTimes = settings[4]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let restTimes = settings["RestTimes"]!
             // View
             let restWidth = UIScreen.main.bounds.width - 20
             let restHeight = CGFloat(147 + 49)
@@ -593,18 +593,18 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             // Default Image
             case 0:
                 // demonstration --> targetArea
-                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                let defaultImage = settings[5][0]
+                var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                let defaultImage = settings["DefaultImage"]![0]
                 if defaultImage == 0 {
                     cell?.detailTextLabel?.text = NSLocalizedString("targetArea", comment: "")
-                    settings[5][0] = 1
+                    settings["DefaultImage"]![0] = 1
                     UserDefaults.standard.set(settings, forKey: "userSettings")
                     // Sync
                     ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
                     // targetArea --> demonstration
                 } else if defaultImage == 1 {
                     cell?.detailTextLabel?.text = NSLocalizedString("demonstration", comment: "")
-                    settings[5][0] = 0
+                    settings["DefaultImage"]![0] = 0
                     UserDefaults.standard.set(settings, forKey: "userSettings")
                     // Sync
                     ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
@@ -616,18 +616,18 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             case 1:
                 //
                 // kg --> lb
-                var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                let units = settings[6][0]
+                var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                let units = settings["Units"]![0]
                 if units == 0 {
                     cell?.detailTextLabel?.text = NSLocalizedString("imperial", comment: "")
-                    settings[6][0] = 1
+                    settings["Units"]![0] = 1
                     UserDefaults.standard.set(settings, forKey: "userSettings")
                     // Sync
                     ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
                     // lb --> kg
                 } else if units == 1 {
                     cell?.detailTextLabel?.text = NSLocalizedString("metric", comment: "")
-                    settings[6][0] = 0
+                    settings["Units"]![0] = 0
                     UserDefaults.standard.set(settings, forKey: "userSettings")
                     // Sync
                     ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
@@ -662,11 +662,13 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     
                     // Walkthrough
                     // Reset Walkthroughs
-                    var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                    // not including notifications popup
-                    for i in 1...(walkthroughs.count - 1) {
-                        walkthroughs[i] = false
+                    var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+                    let keys = walkthroughs.keys.sorted()
+                    for i in 0...(keys.count - 1) {
+                        walkthroughs[keys[i]] = false
                     }
+                    // Should only be presented once
+                    walkthroughs["NotificationsPopup"] = true
                     UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                     // Sync
                     ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
@@ -757,11 +759,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     @objc func valueChanged(_ sender: UISwitch) {
         // Timed sessions
         if sender == timedSessionSwitch {
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             if sender.isOn == true {
-                settings[2][0] = 0
+                settings["TimeBasedSessions"]![0] = 0
             } else {
-                settings[2][0] = 1
+                settings["TimeBasedSessions"]![0] = 1
             }
             //
             UserDefaults.standard.set(settings, forKey: "userSettings")
@@ -770,18 +772,18 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 
             // iCloud
         } else if sender == iCloudSwitch {
-            var settings: [[Int]] = []
+            var settings: [String: [Int]] = [:]
             if sender.isOn == true {
                 ICloudFunctions.shared.pullToDefaults()
-                settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                settings[7][0] = 0
+                settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                settings["iCloud"]![0] = 0
                 UserDefaults.standard.set(settings, forKey: "userSettings")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
                 ICloudFunctions.shared.pushToICloud(toSync: [""])
             } else {
-                settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                settings[7][0] = 1
+                settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                settings["iCloud"]![0] = 1
                 //
                 UserDefaults.standard.set(settings, forKey: "userSettings")
                 // Sync
@@ -1001,8 +1003,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                walkthroughs[11] = true
+                var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+                walkthroughs["Settings"] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])

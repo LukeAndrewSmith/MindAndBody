@@ -90,8 +90,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         updateTracking()
         
         // Present walkthrough 2
-        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-        if walkthroughs[6] == false {
+        let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+        if walkthroughs["Tracking"] == false {
             walkthroughTracking()
         }
        
@@ -943,8 +943,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                walkthroughs[6] = true
+                var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+                walkthroughs["Tracking"] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])

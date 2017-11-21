@@ -68,7 +68,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Set Variables
     func setVariables() {
         // Schedule Type
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         scheduleType = schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int
     }
     
@@ -91,7 +91,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         scheduleOverviewTable.separatorColor = Colours.colour1.withAlphaComponent(0.27)
         scheduleOverviewTable.isScrollEnabled = false
         // Switches
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
             // App chooses sessions switch
             appChoosesSessionsOnOffSwitch.onTintColor = Colours.colour3
             appChoosesSessionsOnOffSwitch.tintColor = Colours.colour4
@@ -220,7 +220,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         //
         // Detail label, shows schedule overview data
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         switch indexPath.row {
         // Name
         case 0:
@@ -277,7 +277,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cell = tableView.cellForRow(at: indexPath)
         //
         // Detail label, shows schedule overview data
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         switch indexPath.row {
         // Name
         case 0:
@@ -361,7 +361,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Check if rearrange schedule
     func rearrangeScheduleHidden() {
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         // If app helps create schedule && view as full week then cannot rearrange schedule (schedule is presented in linear manner), therefore hide rearrange schedule row
         if scheduleType == 0 && schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
             let indexPath = IndexPath(row: 5, section: 0)
@@ -379,7 +379,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // Watch for switch changed
     @objc func switchValueChanged(sender: UISwitch) {
-        var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         if sender == appChoosesSessionsOnOffSwitch {
             // App chooses sessions
             if sender.isOn == true {
@@ -437,8 +437,8 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             UIAlertAction in
             //
             // Delete Schedule
-            var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+            var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
             //
             // Delete if not plus row
             // Update arrays

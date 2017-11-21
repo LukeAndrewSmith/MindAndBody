@@ -94,8 +94,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = Colours.colour2
         
         //
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        automaticYogaArray = settings[3]
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        automaticYogaArray = settings["AutomaticYoga"]!
         // Progress Bar
         // Thickness
 //        switch automaticYogaArray[0] {
@@ -160,8 +160,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 alert.dismiss(animated: true, completion: nil)
                 //
                 // MARK: Walkthrough
-                let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                if walkthroughs[4] == false {
+                let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+                if walkthroughs["Session2"] == false {
                     self.walkthroughSession()
                 }
             }
@@ -1144,8 +1144,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                walkthroughs[4] = true
+                var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+                walkthroughs["Session2"] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])

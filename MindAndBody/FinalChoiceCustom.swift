@@ -912,9 +912,9 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     switch SelectedSession.shared.selectedSession[0] {
                     // Warmup, Workout,
                     case 0,1:
-                        customSessionsArray[SelectedSession.shared.selectedSession[0]].append(customSectionEmtpySessions.emptySessionFour)
+                        customSessionsArray[SelectedSession.shared.selectedSession[0]].append(customSectionEmptySessions.emptySessionFour)
                     case 2,3,4:
-                        customSessionsArray[SelectedSession.shared.selectedSession[0]].append(customSectionEmtpySessions.emptySessionThree)
+                        customSessionsArray[SelectedSession.shared.selectedSession[0]].append(customSectionEmptySessions.emptySessionThree)
                     //
                     default:
                         break

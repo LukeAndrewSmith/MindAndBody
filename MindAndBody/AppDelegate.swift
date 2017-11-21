@@ -28,9 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         InAppManager.shared.startMonitoring()
         
         // TODO: TEST!! REMOVE
-        //        ICloudFunctions.shared.removeAll()
+//                ICloudFunctions.shared.removeAll()
         //
-        // Icloud Oberver
+        // iCloud Oberver
         NotificationCenter.default.addObserver(
             forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
             object: NSUbiquitousKeyValueStore.default,
@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //
         // Check if the user has a valid subscription
-        SubscriptionsCheck.shared.checkSubscription()
+//        SubscriptionsCheck.shared.checkSubscription()
         
         //
         // Register Defaults --------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Tracking arrays [weekTracking, tracking]
         UserDefaults.standard.register(defaults: ["trackingDictionaries" : Register.registerTrackingDictionaries])
         // Progress, [currentProgress, lastResetWeek/Month]
-        UserDefaults.standard.register(defaults: ["trackingProgress" : Register.registerTrackingProgressArray])
+        UserDefaults.standard.register(defaults: ["trackingProgress" : Register.registertrackingProgressDictionary])
         //
         // Custom
         // Custom Sessions
@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["meditationTimer" : Register.meditationArrayRegister])
         //
         // Walkthroughs
-        UserDefaults.standard.register(defaults: ["walkthroughs" : Register.registerWalkthroughArray])
+        UserDefaults.standard.register(defaults: ["walkthroughs" : Register.registerWalkthroughDictionary])
         
         // Push everything to iCloud
         let check = NSUbiquitousKeyValueStore.default.object(forKey: "walkthroughs")
@@ -94,8 +94,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //
         // Set Home Screen
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let homeScreen = settings[1][0]
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        let homeScreen = settings["HomeScreen"]![0]
         
         switch homeScreen {
         case 0,2:
@@ -138,10 +138,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //
         // For rare case where use quits app after turning automatic yoga on without changing breath/transition times -> automatic yoga is on but breath/transition time == -1 => crash
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         // Turn automatic yoga off
-        if settings[3][1] == -1 || settings[3][2] == -1 {
-            settings[3][0] = 0
+        if settings["AutomaticYoga"]![1] == -1 || settings["AutomaticYoga"]![2] == -1 {
+            settings["AutomaticYoga"]![0] = 0
         }
         UserDefaults.standard.set(settings, forKey: "userSettings")
     }

@@ -147,13 +147,13 @@ class ScheduleVariables {
     // Func reset schedule tracking and week tracking
     func resetWeekTracking() {
         // Use lastResetWeek in tracking progress array to reset schedule tracking bools to false and and week progress to 0
-        var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-        var trackingProgressArray = UserDefaults.standard.object(forKey: "trackingProgress") as! [Any]
+        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+        var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
         //
         // Current mondays date in week
         let currentMondayDate = Date().firstMondayInCurrentWeek
         // Last Reset = monday of last week reset
-        let lastReset = trackingProgressArray[2] as! Date
+        let lastReset = trackingProgressDictionary["LastResetWeek"] as! Date
         
         // Reset if last reset wasn't in current week
         if lastReset != currentMondayDate {
@@ -180,13 +180,13 @@ class ScheduleVariables {
                 }
             }
             // Set week progress to 0
-            trackingProgressArray[0] = 0
+            trackingProgressDictionary["WeekProgress"] = 0
             // Set Last Reset
-            trackingProgressArray[2] = currentMondayDate
+            trackingProgressDictionary["LastResetWeek"] = currentMondayDate
             // Indicate has been reset, to indicate if this func called again on a monday that it already has been reset
-//            trackingProgressArray[3] = true
+//            trackingProgressDictionary[3] = true
             //
-            UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
+            UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
             UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress", "scheduleTracking"])

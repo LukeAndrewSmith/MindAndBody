@@ -272,8 +272,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             // New image to display
             // Demonstration on left
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let defaultImage = settings[5][0]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let defaultImage = settings["DefaultImage"]![0]
             if defaultImage == 0 {
                 // [key] = key, [0] = first image
                 cell.imageViewCell.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
@@ -481,8 +481,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let defaultImage = settings[5][0]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let defaultImage = settings["DefaultImage"]![0]
             if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     sender.startAnimating()
@@ -513,8 +513,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let defaultImage = settings[5][0]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let defaultImage = settings["DefaultImage"]![0]
             if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     cell.imageViewCell.startAnimating()
@@ -554,8 +554,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let defaultImage = settings[5][0]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let defaultImage = settings["DefaultImage"]![0]
             if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     cell.imageViewCell.startAnimating()
@@ -707,8 +707,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     // New image to display
                     // Demonstration on left
-                    var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                    let defaultImage = settings[5][0]
+                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                    let defaultImage = settings["DefaultImage"]![0]
                     if defaultImage == 0 {
                         cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key]! + toAdd)
                         // Indicator
@@ -758,8 +758,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     // New image to display
                     // Demonstration on left
-                    var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                    let defaultImage = settings[5][0]
+                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                    let defaultImage = settings["DefaultImage"]![0]
                     if defaultImage == 0 {
                         cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0])
                         // Indicator

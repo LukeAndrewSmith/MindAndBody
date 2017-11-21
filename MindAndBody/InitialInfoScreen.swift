@@ -43,12 +43,12 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         let yesAction = UIAlertAction(title: "On", style: UIAlertActionStyle.default) {
             UIAlertAction in
             //
-            var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-            walkthroughs[0] = true
+            var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+            walkthroughs["NotificationsPopup"] = true
             UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            settings[7][0] = 0
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            settings["iCloud"]![0] = 0
             UserDefaults.standard.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: [""])
@@ -58,12 +58,12 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         let noAction = UIAlertAction(title: "Off", style: UIAlertActionStyle.default) {
             UIAlertAction in
             //
-            var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-            walkthroughs[0] = true
+            var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+            walkthroughs["NotificationsPopup"] = true
             UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            settings[7][0] = 1
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            settings["iCloud"]![0] = 1
             UserDefaults.standard.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
@@ -91,8 +91,8 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         let notificationsOkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
             UIAlertAction in
             //
-            var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-            walkthroughs[0] = true
+            var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+            walkthroughs["NotificationsPopup"] = true
             UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
@@ -105,8 +105,8 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         notificationsAlert.addAction(notificationsOkAction)
     
         // Notifications Popup
-        let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-        if walkthroughs[0] == false {
+        let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+        if walkthroughs["NotificationsPopup"] == false {
             self.present(notificationsAlert, animated: true, completion: nil)
         }
         

@@ -55,8 +55,8 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             ScheduleVariables.shared.didCreateNewSchedule = false
             //
             // Delete Schedule
-            var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-            var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+            var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
             //
             // Delete if not plus row
             // Update arrays
@@ -201,8 +201,8 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             }
             // 3. Get the value from the text field, and perform actions upon OK press
             okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-                var schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-                var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+                var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                 //
                 // Append new schedule array to schedules
                 schedules.append(scheduleDataStructures.emptyWeek)
@@ -268,7 +268,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     // Segues
     func performSegueFunction() {
         // Check if user has filled in profile
-        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
+        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
         var userHasFilledInProfile = true
         // Loop profile answers
         for i in 0...profileAnswers.count - 1 {
@@ -278,7 +278,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         // Perform relevant segue
-        let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         // PERFORM SEGUE
         // App helps create schedule
         if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {

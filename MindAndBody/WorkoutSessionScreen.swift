@@ -105,8 +105,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 alert.dismiss(animated: true, completion: nil)
                 //
                 // MARK: Walkthrough
-                let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                if walkthroughs[4] == false {
+                let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+                if walkthroughs["Session2"] == false {
                     self.walkthroughSession()
                 }
             }
@@ -243,8 +243,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             // New image to display
             // Demonstration on left
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let defaultImage = settings[5][0]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let defaultImage = settings["DefaultImage"]![0]
             if defaultImage == 0 {
                 // [key] = key, [0] = first image
                 cell.imageViewCell.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
@@ -565,8 +565,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             //
             // Rest Timer
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let restTimes = settings[4]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let restTimes = settings["RestTimes"]!
             let duration = restTimes[1]
             let endingTime = Int(startTime) + duration
             //
@@ -636,8 +636,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     func endRound() {
         // Rest Alert
         //
-        var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let restTimes = settings[4]
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        let restTimes = settings["RestTimes"]!
         restTime = restTimes[1]
         //
         restMessage = "\n" + String(restTime)
@@ -752,8 +752,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let defaultImage = settings[5][0]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let defaultImage = settings["DefaultImage"]![0]
             if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     sender.startAnimating()
@@ -784,8 +784,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let defaultImage = settings[5][0]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let defaultImage = settings["DefaultImage"]![0]
             if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     cell.imageViewCell.startAnimating()
@@ -1003,8 +1003,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     
                     // New image to display
                     // Demonstration on left
-                    var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                    let defaultImage = settings[5][0]
+                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                    let defaultImage = settings["DefaultImage"]![0]
                     if defaultImage == 0 {
                         cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key]! + toAdd)
                         // Indicator
@@ -1053,8 +1053,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     
                     // New image to display
                     // Demonstration on left
-                    var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                    let defaultImage = settings[5][0]
+                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                    let defaultImage = settings["DefaultImage"]![0]
                     if defaultImage == 0 {
                         cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0])
                         // Indicator
@@ -1532,8 +1532,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                walkthroughs[4] = true
+                var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+                walkthroughs["Session2"] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])

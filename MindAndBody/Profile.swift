@@ -188,9 +188,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
             if comingFromSchedule == true {
                 self.dismiss(animated: true)
             } else {
-                let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
-                let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
+                let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+                let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
                 var allAnswered = true
                 for i in 0...profileAnswers.count - 1 {
                     if profileAnswers[i] == -1 {
@@ -256,7 +256,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     //
     //
     @objc func upSwipeAction() {
-        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
+        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
         // If question has been answered
         if profileAnswers[selectedQuestion] != -1 {
             nextQuestion()
@@ -337,7 +337,7 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         agePicker.dataSource = self
         agePicker.layer.cornerRadius = 15
         agePicker.clipsToBounds = true
-        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
+        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
         switch profileAnswers[row] {
         case -1:
             agePicker.selectRow(0, inComponent: 0, animated: true)
@@ -395,7 +395,7 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
     
     //
     @IBAction func okButtonAction(_ sender: Any) {
-        var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
+        var profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
         profileAnswers[selectedQuestion] = agePicker.selectedRow(inComponent: 0)
         UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
         // Sync
@@ -535,7 +535,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        let profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
+        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
         //
         cell.backgroundColor = Colours.colour2
         cell.tintColor = Colours.colour3
@@ -560,7 +560,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var profileAnswers = UserDefaults.standard.array(forKey: "profileAnswers") as! [Int]
+        var profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
         profileAnswers[row] = indexPath.row
         UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
         // Sync

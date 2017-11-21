@@ -197,12 +197,12 @@ extension UIViewController {
         if fullScreen == true {
             backgroundImage.frame = UIScreen.main.bounds
         } else {
-            backgroundImage.frame = view.bounds
+            backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - (TopBarHeights.statusBarHeight + CGFloat(TopBarHeights.navigationBarHeight)))
         }
         //
         // Background Image
-        let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-        let backgroundIndex = settings[0][0]
+        let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        let backgroundIndex = settings["BackgroundImage"]![0]
         // Background Image/Colour
         if backgroundIndex < BackgroundImages.backgroundImageArray.count {
             backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
@@ -420,10 +420,10 @@ extension UIViewController {
         // Reset if last reset wasn't is current week
         ScheduleVariables.shared.resetWeekTracking()
         //
-        var trackingProgressArray = UserDefaults.standard.object(forKey: "trackingProgress") as! [Any]
+        var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
         // Increment Progress
-        trackingProgressArray[0] = trackingProgressArray[0] as! Int + 1
-        UserDefaults.standard.set(trackingProgressArray, forKey: "trackingProgress")
+        trackingProgressDictionary["WeekProgress"] = trackingProgressDictionary["WeekProgress"] as! Int + 1
+        UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
     }
@@ -432,11 +432,11 @@ extension UIViewController {
     // Schedule Tracking
     func updateScheduleTracking(fromSchedule: Bool) {
         if fromSchedule == true {
-            let schedules = UserDefaults.standard.array(forKey: "schedules") as! [[[[Any]]]]
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
             // Day
             if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
                 // Update day
-                var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+                var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                 scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
                 // Set
                 UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
@@ -447,7 +447,7 @@ extension UIViewController {
                 // Week
             } else if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
                 // Update week [7]
-                var scheduleTracking = UserDefaults.standard.array(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+                var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                 scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
                 // Set
                 UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
@@ -466,7 +466,7 @@ extension UIViewController {
     //
     // MARK: Monday  - Sunday
     func updateWeekTracking() {
-        let trackingProgressArray = UserDefaults.standard.object(forKey: "trackingProgress") as! [Any]
+        let trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
         let trackingDictionariesString = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
         
         // Convert to [Date: Int]
@@ -479,8 +479,8 @@ extension UIViewController {
         let currentMondayDate = Date().firstMondayInCurrentWeek
         //
         // Week Goal
-        let weekProgress: Double = trackingProgressArray[0] as! Double
-        let weekGoal: Double = trackingProgressArray[1] as! Double
+        let weekProgress: Double = trackingProgressDictionary["WeekProgress"] as! Double
+        let weekGoal: Double = trackingProgressDictionary["WeekGoal"] as! Double
         let currentProgressDivision: Double = (weekProgress / weekGoal) * 100.0
         let currentProgress = Int(currentProgressDivision)
         //
@@ -554,7 +554,7 @@ extension UIViewController {
     // ----------------------------------------------------------------------------------------------------------------
     // MARK: Week %
     func updateTracking() {
-        let trackingProgressArray = UserDefaults.standard.object(forKey: "trackingProgress") as! [Any]
+        let trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
         let trackingDictionariesString = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
         
         // Convert to [Date: Int]
@@ -565,8 +565,8 @@ extension UIViewController {
         let currentMondayDate = Date().firstMondayInCurrentWeek
         //
         // Week Goal
-        let weekProgress: Double = trackingProgressArray[0] as! Double
-        let weekGoal: Double = trackingProgressArray[1] as! Double
+        let weekProgress: Double = trackingProgressDictionary["WeekProgress"] as! Double
+        let weekGoal: Double = trackingProgressDictionary["WeekGoal"] as! Double
         let currentProgressDivision: Double = (weekProgress / weekGoal) * 100.0
         let currentProgress = Int(currentProgressDivision)
         //

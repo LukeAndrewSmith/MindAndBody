@@ -125,8 +125,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 alert.dismiss(animated: true, completion: nil)
                 //
                 // MARK: Walkthrough
-                let walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                if walkthroughs[3] == false {
+                let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+                if walkthroughs["Sessions"] == false {
                     self.walkthroughSession()
                 }
             }
@@ -287,8 +287,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             // New image to display
             // Demonstration on left
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let defaultImage = settings[5][0]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let defaultImage = settings["DefaultImage"]![0]
             if defaultImage == 0 {
                 // [key] = key, [0] = first image
                 cell.imageViewCell.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
@@ -596,8 +596,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             content.body = NSLocalizedString("nextSet", comment: "")
             content.sound = UNNotificationSound.default()
             //
-            let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let restTime = settings[4][1]
+            let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let restTime = settings["RestTimes"]![1]
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTime), repeats: false)
             let request = UNNotificationRequest(identifier: "restTimer", content: content, trigger: trigger)
             //
@@ -709,8 +709,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // Times
             isTiming = true
             didSetEndTime = true
-            let settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let duration = settings[4][1]
+            let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let duration = settings["RestTimes"]![1]
             endTime = startTime + Double(duration)
         }
         
@@ -781,8 +781,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let defaultImage = settings[5][0]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let defaultImage = settings["DefaultImage"]![0]
             if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     sender.startAnimating()
@@ -813,8 +813,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-            let defaultImage = settings[5][0]
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let defaultImage = settings["DefaultImage"]![0]
             if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     cell.imageViewCell.startAnimating()
@@ -1021,8 +1021,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     
                     // New image to display
                     // Demonstration on left
-                    var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                    let defaultImage = settings[5][0]
+                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                    let defaultImage = settings["DefaultImage"]![0]
                     if defaultImage == 0 {
                         cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key]! + toAdd)
                         // Indicator
@@ -1071,8 +1071,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     
                     // New image to display
                     // Demonstration on left
-                    var settings = UserDefaults.standard.array(forKey: "userSettings") as! [[Int]]
-                    let defaultImage = settings[5][0]
+                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                    let defaultImage = settings["DefaultImage"]![0]
                     if defaultImage == 0 {
                         cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0])
                         // Indicator
@@ -1571,10 +1571,10 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
-                var walkthroughs = UserDefaults.standard.array(forKey: "walkthroughs") as! [Bool]
-                walkthroughs[3] = true
+                var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+                walkthroughs["Sessions"] = true
                 // Session walkthrough 2 there so this walkthrough is always seen (important note on rest timer that isnt in circuit/stretching)
-                walkthroughs[4] = true
+                walkthroughs["Session2"] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
