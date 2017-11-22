@@ -360,8 +360,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         case 1:
             //
-            // Tracking
-            updateWeekProgress()
             // Schedule Tracking
             updateScheduleTracking(fromSchedule: fromSchedule)
             // Dismiss

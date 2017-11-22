@@ -245,9 +245,6 @@ class MeditationScreen: UIViewController {
             NotificationCenter.default.removeObserver(self)
             //
             //
-            // Tracking
-            updateWeekProgress()
-            //
             // Schedule Tracking
             //            updateScheduleTracking(fromSchedule: fromSchedule)
             ScheduleVariables.shared.shouldReloadChoice = true

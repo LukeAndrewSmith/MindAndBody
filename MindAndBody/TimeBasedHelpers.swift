@@ -160,7 +160,6 @@ extension TimeBasedScreen {
         addCircle()
         startAnimation()
         lengthTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        // TODO: Vibrate properly
         vibratePhone()
     }
     

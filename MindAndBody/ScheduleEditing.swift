@@ -82,7 +82,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         questionMarkButton.tintColor = Colours.colour1
         //
         // BackgroundImage
-        addBackgroundImage(withBlur: true, fullScreen: false)
+        addBackgroundImage(withBlur: true, fullScreen: true)
         
         //
         // TableView

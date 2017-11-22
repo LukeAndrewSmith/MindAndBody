@@ -416,13 +416,17 @@ extension UIViewController {
     // MARK: Update Tracking Progress
     //
     // Week Progress
-    func updateWeekProgress() {
+    func updateWeekProgress(add: Bool) {
         // Reset if last reset wasn't is current week
         ScheduleVariables.shared.resetWeekTracking()
         //
         var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
         // Increment Progress
-        trackingProgressDictionary["WeekProgress"] = trackingProgressDictionary["WeekProgress"] as! Int + 1
+        if add {
+            trackingProgressDictionary["WeekProgress"] = trackingProgressDictionary["WeekProgress"] as! Int + 1
+        } else {
+            trackingProgressDictionary["WeekProgress"] = trackingProgressDictionary["WeekProgress"] as! Int - 1
+        }
         UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
@@ -430,6 +434,7 @@ extension UIViewController {
    
     
     // Schedule Tracking
+        // Updates the 'finalChoice' of the group
     func updateScheduleTracking(fromSchedule: Bool) {
         if fromSchedule == true {
             let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
@@ -482,7 +487,11 @@ extension UIViewController {
         let weekProgress: Double = trackingProgressDictionary["WeekProgress"] as! Double
         let weekGoal: Double = trackingProgressDictionary["WeekGoal"] as! Double
         let currentProgressDivision: Double = (weekProgress / weekGoal) * 100.0
-        let currentProgress = Int(currentProgressDivision)
+        var currentProgress = Int(currentProgressDivision)
+        // Limit to 100
+        if currentProgress > 100 {
+            currentProgress = 100
+        }
         //
         // Keys
         let keys = trackingDictionaries[0].keys.sorted()
@@ -568,7 +577,11 @@ extension UIViewController {
         let weekProgress: Double = trackingProgressDictionary["WeekProgress"] as! Double
         let weekGoal: Double = trackingProgressDictionary["WeekGoal"] as! Double
         let currentProgressDivision: Double = (weekProgress / weekGoal) * 100.0
-        let currentProgress = Int(currentProgressDivision)
+        var currentProgress = Int(currentProgressDivision)
+        // Limit to 100
+        if currentProgress > 100 {
+            currentProgress = 100
+        }
         //
         // Keys
         let keys = trackingDictionaries[1].keys.sorted()
@@ -610,6 +623,27 @@ extension UIViewController {
         // Save
         UserDefaults.standard.set(updatedTrackingDictionariesString, forKey: "trackingDictionaries")
         ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
+    }
+    
+    //
+    // MARK: Update week goal
+    func updateWeekGoal() {
+        //
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+        var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
+        // Find goal = number of groups planned = fullWeekArray.count
+        var goal = Int()
+        if schedules.count != 0 {
+            goal = schedules[ScheduleVariables.shared.selectedSchedule][0][7].count
+        } else {
+            goal = 1
+        }
+        // SetWeekGoal
+        trackingProgressDictionary["WeekGoal"] = goal
+        //
+        UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
+        // Sync
+        ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
     }
     
     //

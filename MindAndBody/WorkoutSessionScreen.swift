@@ -466,8 +466,6 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //
             } else {
                 //
-                // Tracking
-                updateWeekProgress()
                 // Schedule Tracking
                 updateScheduleTracking(fromSchedule: fromSchedule)
                 //

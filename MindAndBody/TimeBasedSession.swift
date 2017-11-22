@@ -441,8 +441,6 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         case 1:
             //
-            // Tracking
-            updateWeekProgress()
             // Schedule Tracking
             updateScheduleTracking(fromSchedule: fromSchedule)
             //

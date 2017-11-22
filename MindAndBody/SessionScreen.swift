@@ -544,8 +544,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // End button
         case 1:
             //
-            // Tracking
-            updateWeekProgress()
             // Schedule Tracking
             updateScheduleTracking(fromSchedule: fromSchedule)
             //

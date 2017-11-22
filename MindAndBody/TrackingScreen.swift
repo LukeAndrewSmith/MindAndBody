@@ -79,6 +79,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Ensure week goal correct
+        updateWeekGoal()
         
         // Create [[Date: Int]] from the stored [[String: Int]] (Icloud wont store [Date: Int], only [String: Int])
         let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
@@ -411,7 +413,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             let calendar = Calendar(identifier: .gregorian)
             //
             var startDate = Date().currentDate
-            let endDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
+            let endDate = calendar.date(byAdding: .weekOfYear, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
             
             switch selectedTimeScale {
             case 1:
@@ -430,10 +432,9 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             df.dateFormat = "dd.MM.yyyy"
             //
             while startDate <= endDate! {
-                let calendar = Calendar(identifier: .gregorian)
                 let valueToAdd = ChartAxisValueDate(date: startDate, formatter: df)
                 xValues.append(valueToAdd)
-                startDate = calendar.date(byAdding: .weekOfMonth, value: 1, to: startDate)!
+                startDate = calendar.date(byAdding: .hour, value: 168, to: startDate)!
             }
             //
             return xValues
@@ -459,7 +460,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let calendar = Calendar(identifier: .gregorian)
                 let valueToAdd = ChartAxisValueDate(date: startDate, formatter: df)
                 xValues.append(valueToAdd)
-                startDate = calendar.date(byAdding: .weekOfMonth, value: 1, to: startDate)!
+                startDate = calendar.date(byAdding: .hour, value: 168, to: startDate)!
             }
             
             return xValues
@@ -553,7 +554,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             //
             var startDate = calendar.date(byAdding: .month, value: -2, to: Date().currentDate)!
             startDate = startDate.firstMondayInMonth
-            let endDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInCurrentWeek)
+            let endDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
             
             let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: startDate.timeIntervalSince1970, lastModelValue: (endDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
             
@@ -581,7 +582,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             //
             var startDate = calendar.date(byAdding: .month, value: -5, to: Date().currentDate)!
             startDate = startDate.firstMondayInMonth
-            let endDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInCurrentWeek)
+            let endDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
             
             //
             let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: startDate.timeIntervalSince1970, lastModelValue: (endDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)

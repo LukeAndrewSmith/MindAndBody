@@ -487,6 +487,8 @@
 		077E471B1EB9DFC6005B0B22 /* PresentMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */; };
 		077E471F1EB9E221005B0B22 /* SlideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471E1EB9E221005B0B22 /* SlideMenuView.swift */; };
 		077E47231EB9EED3005B0B22 /* DismissMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */; };
+		0782AB521FC4F0CE00D34500 /* ScheduleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782AB511FC4F0CE00D34500 /* ScheduleTableView.swift */; };
+		0782AB571FC4F1BB00D34500 /* ScheduleWalkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782AB561FC4F1BB00D34500 /* ScheduleWalkthrough.swift */; };
 		078674FE1FB84F7000C6B74C /* ICloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078674FD1FB84F7000C6B74C /* ICloudStorage.swift */; };
 		0789ED061F79A6EA000EB739 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789ED051F79A6EA000EB739 /* UserData.swift */; };
 		078F409A1F4B700800B4F566 /* SwiftCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078F40951F4B6C1C00B4F566 /* SwiftCharts.framework */; };
@@ -1882,6 +1884,8 @@
 		077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentMenuAnimator.swift; sourceTree = "<group>"; };
 		077E471E1EB9E221005B0B22 /* SlideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuView.swift; sourceTree = "<group>"; };
 		077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissMenuAnimator.swift; sourceTree = "<group>"; };
+		0782AB511FC4F0CE00D34500 /* ScheduleTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableView.swift; sourceTree = "<group>"; };
+		0782AB561FC4F1BB00D34500 /* ScheduleWalkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWalkthrough.swift; sourceTree = "<group>"; };
 		078674FD1FB84F7000C6B74C /* ICloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudStorage.swift; sourceTree = "<group>"; };
 		0789ED051F79A6EA000EB739 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		078F408E1F4B6C1C00B4F566 /* SwiftCharts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftCharts.xcodeproj; path = ../../Code/Carthage/Carthage/Checkouts/SwiftCharts/SwiftCharts.xcodeproj; sourceTree = "<group>"; };
@@ -2998,6 +3002,7 @@
 			isa = PBXGroup;
 			children = (
 				07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */,
+				0782AB511FC4F0CE00D34500 /* ScheduleTableView.swift */,
 				07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */,
 			);
 			name = Helpers;
@@ -3711,6 +3716,7 @@
 				07FE380E1DF9B3A200E7EA20 /* Localizable.strings */,
 				077AC0DA1DA535830026895B /* AppDelegate.swift */,
 				077AC0E01DA535840026895B /* Main.storyboard */,
+				0782AB551FC4F1A200D34500 /* Walkthroughs */,
 				07094BE71FB0D129003DB553 /* Main Screens */,
 				077E47151EB9DC54005B0B22 /* Slide Menu */,
 				0789ED091F79A71E000EB739 /* Global */,
@@ -3816,6 +3822,14 @@
 				077E471E1EB9E221005B0B22 /* SlideMenuView.swift */,
 			);
 			name = "Slide Menu";
+			sourceTree = "<group>";
+		};
+		0782AB551FC4F1A200D34500 /* Walkthroughs */ = {
+			isa = PBXGroup;
+			children = (
+				0782AB561FC4F1BB00D34500 /* ScheduleWalkthrough.swift */,
+			);
+			name = Walkthroughs;
 			sourceTree = "<group>";
 		};
 		0789ED091F79A71E000EB739 /* Global */ = {
@@ -8362,6 +8376,7 @@
 				07686A901F843A1600C278CC /* ScheduleHelpers.swift in Sources */,
 				076C68421ED497AD009160C2 /* BodyweightChoiceCC.swift in Sources */,
 				077206821F90C52000818088 /* TimeBasedHelpers.swift in Sources */,
+				0782AB521FC4F0CE00D34500 /* ScheduleTableView.swift in Sources */,
 				07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */,
 				07DE23031FC0919200940567 /* Subscriptions.swift in Sources */,
 				07686A8E1F84399A00C278CC /* ScheduleAnimationHelpers.swift in Sources */,
@@ -8393,6 +8408,7 @@
 				0757326B1E64D8A3003DA77E /* InformationScreen1.swift in Sources */,
 				07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */,
 				076C68461ED58D65009160C2 /* StretchingScreen.swift in Sources */,
+				0782AB571FC4F1BB00D34500 /* ScheduleWalkthrough.swift in Sources */,
 				07B852621F83756C005F3781 /* ScheduleData.swift in Sources */,
 				07E1D4E11FB2250B00B53B85 /* ScheduleCreationHelp.swift in Sources */,
 				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
