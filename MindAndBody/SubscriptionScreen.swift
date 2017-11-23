@@ -20,7 +20,6 @@ class SubscriptionScreen: UIViewController {
     // Loading
     var loadingAlert = UIAlertController()
     
-    
     //
     // MARK: View did load
     override func viewDidLoad() {
@@ -33,7 +32,7 @@ class SubscriptionScreen: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(removeLoadingPresentError), name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
         
         //
-        loadMyView()
+        setupView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -65,10 +64,11 @@ class SubscriptionScreen: UIViewController {
     }
     
     // MARK: Load View
-    func loadMyView() {
+    func setupView() {
         UIApplication.shared.statusBarStyle = .lightContent
         //
         // BackgroundImage
+//        view.backgroundColor = Colours.colour2
         addBackgroundImage(withBlur: true, fullScreen: true)
         //
         // Buttons
@@ -86,6 +86,10 @@ class SubscriptionScreen: UIViewController {
 //        checkSubscriptionButton.layer.masksToBounds = true
         checkSubscriptionButton.backgroundColor = .clear
 //            Colours.colour1.withAlphaComponent(0.25)
+        
+        // Page Control
+        InfoPageControl.shared.setupPageControl(x: view.center.x, y: subscriptionButton.frame.minY - 12)
+        view.addSubview(InfoPageControl.shared.pageControl)
     }
     
     // Load Subscription data

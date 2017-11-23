@@ -345,7 +345,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             }        default: break
         }
         //
-        //
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

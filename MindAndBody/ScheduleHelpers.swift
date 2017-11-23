@@ -927,6 +927,7 @@ extension ScheduleScreen {
         //
         var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+        //
         
         // Mark first instance of selected group in other schedules as completed, needs to be called after userdefaults have been updated here so that there is no conflictng setting of defaults
             // -> called at end to ensure correct calling sequence
@@ -938,6 +939,10 @@ extension ScheduleScreen {
             // Get Cell
             let cell = sender.view
             let row = cell?.tag
+            // Set selected row to ScheduleVariables.shared.selectedRow[0]
+            if ScheduleVariables.shared.choiceProgress[0] == -1 {
+                ScheduleVariables.shared.selectedRows[0] = row!
+            }
             
             // Indexing variables
                 // Last three indexes of schedulesTracking or schedules index

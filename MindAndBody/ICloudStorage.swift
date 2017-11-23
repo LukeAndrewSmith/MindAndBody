@@ -28,7 +28,7 @@ class ICloudFunctions {
         if let iCloudSettings = NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") {
 //        if NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") != nil {
 //            let iCloudSettings = NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") as! [String: [Int]]
-            if (iCloudSettings as! [[Int]])[7][0] == 0 {
+            if (iCloudSettings as! [String: [Int]])["iCloud"]![0] == 0 {
                 return true
             } else {
                 return false

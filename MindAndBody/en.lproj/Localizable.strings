@@ -1546,7 +1546,13 @@
 "subscription4" = "";
 "termsAndConditions" = "Terms & Conditions";
 "termsAndConditionsDetail" = "The Mind & Body subscription grants you access to use the Mind & Body App for a year. The subscription will automatically renew within 24 hours of the end of the year unless cancelled. You will be charged through your iTunes account. You can manage your subscription in Account Settings. By purchasing the subscription via in-app purchases, you agree to the Apple App Store terms and conditions.";
+// Info Tables
+"infoTable1" = "Aim:\nDo your mind & body justice\nHow:\nProvide you the aid needed, leave you the responsibility required\nMethods:\nPlans, schedules, tracking, customisation";
 
+
+//
+// MARK: Plans
+"plans" = "Plans";
 //
 // MARK: Schedule
 "schedule" = "Schedule";
