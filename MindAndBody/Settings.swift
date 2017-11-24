@@ -417,7 +417,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             let iCloud = settings["iCloud"]![0]
-            if iCloud == 0 {
+            if iCloud == 1 {
                 iCloudSwitch.isOn = true
             } else {
                 iCloudSwitch.isOn = false
@@ -761,9 +761,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         if sender == timedSessionSwitch {
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             if sender.isOn == true {
-                settings["TimeBasedSessions"]![0] = 0
-            } else {
                 settings["TimeBasedSessions"]![0] = 1
+            } else {
+                settings["TimeBasedSessions"]![0] = 0
             }
             //
             UserDefaults.standard.set(settings, forKey: "userSettings")
@@ -776,14 +776,14 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             if sender.isOn == true {
                 ICloudFunctions.shared.pullToDefaults()
                 settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-                settings["iCloud"]![0] = 0
+                settings["iCloud"]![0] = 1
                 UserDefaults.standard.set(settings, forKey: "userSettings")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
                 ICloudFunctions.shared.pushToICloud(toSync: [""])
             } else {
                 settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-                settings["iCloud"]![0] = 1
+                settings["iCloud"]![0] = 0
                 //
                 UserDefaults.standard.set(settings, forKey: "userSettings")
                 // Sync

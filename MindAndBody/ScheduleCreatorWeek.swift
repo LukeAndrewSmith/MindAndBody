@@ -140,6 +140,7 @@ class CustomScheduleWeekCell: UITableViewCell {
     
     //
     // Passed data
+        // Row = indexpath.row of cell = groupIndex
     var row = Int()
     
     //
@@ -179,38 +180,89 @@ class CustomScheduleWeekCell: UITableViewCell {
         generator?.impactOccurred()
         generator = nil
         
-        // Update the array
+//        updateFullWeek()
         var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-        // update schedules
-        schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(row)
-        schedules[ScheduleVariables.shared.selectedSchedule][0][7] = (schedules[ScheduleVariables.shared.selectedSchedule][0][7] as! [Int]).sorted()
-        // Append to week tracking, start again as cannot sort
-        scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
-        if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
-            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][7].count - 1 {
-                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int]!)
+        
+        var shouldAppend = false
+        var indexAtWhichToAdd = 0
+        var shouldBreak = false
+        let count = schedules[ScheduleVariables.shared.selectedSchedule][0][7].count
+        if count != 0 {
+            for i in 0...count - 1 {
+                // Compare group at i and 1 after i,  if groupAti <= groupToAdd < groupAti+1, the insert at i + 1
+                // e.g 001112233, inserting 2, -> 2 <= 2 < 3
+                // e.g 0015, inserting 2, -> 1 <= 2 < 5
+                switch i {
+                // Last, can't compare to i+1, indicate to append not insert
+                case count - 1:
+                    shouldAppend = true
+                default:
+                    let groupAtI = schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int
+                    let groupAtI1 = schedules[ScheduleVariables.shared.selectedSchedule][0][7][i + 1] as! Int
+                    if groupAtI <= row && groupAtI1 < row {
+                        indexAtWhichToAdd = i + 1
+                        shouldBreak = true
+                    }
+                }
+                if shouldBreak {
+                    break
+                }
             }
+            // Nowhere to insert - append
+        } else {
+            shouldAppend = true
         }
-        // Add to first available day in the week
-        for i in 0...6 {
-            // If week not full (max 5 things per day in week
-            if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count < 5 {
-                schedules[ScheduleVariables.shared.selectedSchedule][0][i].append(row)
-                scheduleTracking[ScheduleVariables.shared.selectedSchedule][i].append(scheduleDataStructures.scheduleTrackingArrays[row]!)
-                break
-            }
+        
+        // Append
+        if shouldAppend {
+            schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(row)
+            scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[row]!)
+            // Insert
+        } else {
+            schedules[ScheduleVariables.shared.selectedSchedule][0][7].insert(row, at: indexAtWhichToAdd)
+            scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].insert(scheduleDataStructures.scheduleTrackingArrays[row]!, at: indexAtWhichToAdd)
         }
         
         //
-        UserDefaults.standard.set(schedules, forKey: "schedules")
         UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+        UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+        //
+//        // Update the array
+//        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+//        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+//        // update schedules
+//        schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(row)
+//        schedules[ScheduleVariables.shared.selectedSchedule][0][7] = (schedules[ScheduleVariables.shared.selectedSchedule][0][7] as! [Int]).sorted()
+//        // Append to week tracking, start again as cannot sort
+//        scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
+//        if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
+//            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][7].count - 1 {
+//                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int]!)
+//            }
+//        }
+//        // Add to first available day in the week
+//        for i in 0...6 {
+//            // If week not full (max 5 things per day in week
+//            if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count < 5 {
+//                schedules[ScheduleVariables.shared.selectedSchedule][0][i].append(row)
+//                scheduleTracking[ScheduleVariables.shared.selectedSchedule][i].append(scheduleDataStructures.scheduleTrackingArrays[row]!)
+//                break
+//            }
+//        }
+        
+        //
+//        UserDefaults.standard.set(schedules, forKey: "schedules")
+//        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+//        // Sync
+//        ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
         
         // Update label
         sessionsLabel.text = String(Int(sessionsLabel.text!)! + 1)
     }
+    
     
     // MARK: Decrease
     @IBAction func decreaseButtonAction(_ sender: Any) {

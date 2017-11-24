@@ -386,6 +386,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         //
         // Delete if not plus row
         if editingStyle == UITableViewCellEditingStyle.delete {
+            //
+            updateWeekGoal()
             // Update arrays
             schedules.remove(at: indexPath.row)
             scheduleTracking.remove(at: indexPath.row)
@@ -400,7 +402,11 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 selectedSchedule -= 1
             }
             ScheduleVariables.shared.selectedSchedule = selectedSchedule
+            scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int
+            ScheduleVariables.shared.selectedDay = Date().currentWeekDayFromMonday - 1
             UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
+            // Reload table
+            layoutViews()
             scheduleTable.reloadData()
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking", "selectedSchedule"])

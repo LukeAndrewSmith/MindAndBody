@@ -44,7 +44,15 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewWillAppear(animated)
         //
         // TimeScale Button2
-        timeScaleButton2.frame = CGRect(x: 0, y: view.frame.maxY - 49, width: view.bounds.width, height: 49)
+        var yValue = CGFloat()
+        // iPhone X
+        if IPhoneType.shared.iPhoneType() == 2 {
+            yValue = view.frame.maxY - 49 - 34
+        // Normal iPhone
+        } else {
+            yValue = view.frame.maxY - 49
+        }
+        timeScaleButton2.frame = CGRect(x: 0, y: yValue, width: view.bounds.width, height: 49)
         timeScaleButton2.backgroundColor = .clear
         timeScaleButton2.addTarget(self, action: #selector(timeScaleButton(_:)), for: .touchUpInside)
         UIApplication.shared.keyWindow?.insertSubview(timeScaleButton2, aboveSubview: view)
@@ -193,7 +201,13 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         chartSettings.leading = 8.25
         chartSettings.top = 24.5
         chartSettings.trailing = 12.25
-        chartSettings.bottom = 10
+        // iPhone X
+        if IPhoneType.shared.iPhoneType() == 2 {
+            chartSettings.bottom = 34 + 10
+        // Normal iPhone
+        } else {
+            chartSettings.bottom = 10
+        }
         chartSettings.labelsToAxisSpacingX = 0
         chartSettings.labelsToAxisSpacingY = 0
         chartSettings.axisTitleLabelsToLabelsSpacing = 4

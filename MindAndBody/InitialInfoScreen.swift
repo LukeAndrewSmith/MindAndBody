@@ -48,7 +48,7 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
             UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             //
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            settings["iCloud"]![0] = 0
+            settings["iCloud"]![0] = 1
             UserDefaults.standard.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: [""])
@@ -63,7 +63,7 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
             UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             //
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            settings["iCloud"]![0] = 1
+            settings["iCloud"]![0] = 0
             UserDefaults.standard.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])

@@ -1547,7 +1547,23 @@
 "termsAndConditions" = "Terms & Conditions";
 "termsAndConditionsDetail" = "The Mind & Body subscription grants you access to use the Mind & Body App for a year. The subscription will automatically renew within 24 hours of the end of the year unless cancelled. You will be charged through your iTunes account. You can manage your subscription in Account Settings. By purchasing the subscription via in-app purchases, you agree to the Apple App Store terms and conditions.";
 // Info Tables
-"infoTable1" = "Aim:\nDo your mind & body justice\nHow:\nProvide you the aid needed, leave you the responsibility required\nMethods:\nPlans, schedules, tracking, customisation";
+"infoTable1" = "\nAim:\nDo your mind & body justice by getting into a routine";
+//"Aim:\nDo your mind & body justice\nHow:\nProvide you the aid needed, leave you the responsibility required\nMethods:\nPlans, schedules, tracking, customisation";
+// Schedule
+"infoTable2" = "Get help creating personalised weekly schedules in line with your goals, abilities and time (or create entirely custom ones). Each day you work towards a goal, you can decide how best to through a series of choices that lead you to a session that suits your feeling.";
+//
+"infoTable3" = "You can begin by follow a set plan for a number of weeks chosen based on your abilities with the aim of helping you get up to speed physically and mentally, teaching you what you need to know and preparing you for a schedule (very useful for beginners).";
+// Groups
+"infoTable4" = "Work towards your goals with a combination of 6 possible groups:\n• Mind\n• Flexibility\n• Endurance\n• Muscle Gain\n•  Toning\n• Strength";
+// Fitness
+"fitness" = "Fitness";
+//"infoTable4" = "A wide variety of gym/bodyweight workout, with equally wide variety in the goals of the workouts.\nEach exercise has a demonstration, and a concise but detailed explanation so you can get the most out of it.\nWarmup and stretching session are made and matched with the workout for best results.";
+// Yoga
+"infoTable5" = "";
+// Meditation
+"infoTable6" = "";
+// Tracking
+"infoTable7" = "";
 
 
 //

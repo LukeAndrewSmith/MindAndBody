@@ -110,7 +110,7 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
             // Image
             let titleImage = UIImageView()
             titleImage.frame.size = CGSize(width: aThirdRowHeight, height: aThirdRowHeight)
-            titleImage.image = #imageLiteral(resourceName: "Loading")
+            titleImage.image = #imageLiteral(resourceName: "Loading").withRenderingMode(.alwaysTemplate)
             titleImage.tintColor = Colours.colour1
             titleImage.alpha = 0.72
             titleImage.contentMode = .scaleAspectFit
@@ -145,6 +145,8 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let cell = UITableViewCell()
             cell.selectionStyle = .none
             cell.backgroundColor = Colours.colour1
+//            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+//            cell.textLabel?.text = NSLocalizedString("infoTable1", comment: "")
             let label = UILabel()
             label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             label.numberOfLines = 0
@@ -229,8 +231,10 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let rightImage = UIImageView()
             let imageWidth2 = infoTable.bounds.width * (1/3)
             //
+            let imageCenter = infoTable.bounds.width / 2
+            //
             let middleImage = UIImageView()
-            middleImage.frame = CGRect(x: cell.center.x - (imageWidth / 2), y: row0Height * (1/8), width: imageWidth, height: imageHeight)
+            middleImage.frame = CGRect(x: imageCenter - (imageWidth / 2), y: row0Height * (1/8), width: imageWidth, height: imageHeight)
             middleImage.contentMode = .scaleAspectFit
             middleImage.image = #imageLiteral(resourceName: "DayView")
             middleImage.backgroundColor = Colours.colour2
@@ -240,7 +244,6 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
             middleImage.layer.shadowOpacity = 0.72
             //
             let imageHeight2 = imageWidth2 * (16/9)
-//            let centerX = cell.center.x
             rightImage.frame = CGRect(x: middleImage.frame.maxX - (imageWidth2 * (1/3)), y: row0Height * (2/8), width: imageWidth2, height: imageHeight2)
             rightImage.contentMode = .scaleAspectFit
             rightImage.image = #imageLiteral(resourceName: "ScheduleFinalChoice")
@@ -272,6 +275,15 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
         case 3:
             let cell = UITableViewCell()
             cell.backgroundColor = Colours.colour1
+            let label = UILabel()
+            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            label.text = NSLocalizedString("infoTable2", comment: "")
+            label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
+            label.sizeToFit()
+            label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
+            cell.addSubview(label)
             cell.selectionStyle = .none
             //
             return cell
@@ -346,15 +358,20 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         case 2:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colours.colour1
-            cell.selectionStyle = .none
-            //
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 30)
-            cell.textLabel?.text = NSLocalizedString("plans", comment: "")
+            InfoTables.shared.setupTitleCell(cell: cell, title: NSLocalizedString("plans", comment: ""), infoWidth: infoTable.bounds.width)
             return cell
         case 3:
             let cell = UITableViewCell()
             cell.backgroundColor = Colours.colour1
+            let label = UILabel()
+            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            label.text = NSLocalizedString("infoTable3", comment: "")
+            label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
+            label.sizeToFit()
+            label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
+            cell.addSubview(label)
             cell.selectionStyle = .none
             //
             return cell
@@ -427,15 +444,20 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         case 2:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colours.colour1
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 30)
-            cell.textLabel?.text = NSLocalizedString("fitness", comment: "")
-            cell.selectionStyle = .none
-            //
+            InfoTables.shared.setupTitleCell(cell: cell, title: NSLocalizedString("fitness", comment: ""), infoWidth: infoTable.bounds.width)
             return cell
         case 3:
             let cell = UITableViewCell()
             cell.backgroundColor = Colours.colour1
+            let label = UILabel()
+            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            label.text = NSLocalizedString("infoTable4", comment: "")
+            label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
+            label.sizeToFit()
+            label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
+            cell.addSubview(label)
             cell.selectionStyle = .none
             //
             return cell

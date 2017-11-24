@@ -1456,17 +1456,6 @@ extension ScheduleScreen {
             }
             //
             layoutViews()
-            // If day view enable swipes
-            if schedules.count != 0 {
-                if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
-                    daySwipeLeft.isEnabled = true
-                    daySwipeRight.isEnabled = true
-                    // Else if week view disable swipes
-                } else if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
-                    daySwipeLeft.isEnabled = false
-                    daySwipeRight.isEnabled = false
-                }
-            }
             //
             scheduleTable.reloadData()
             scheduleChoiceTable.reloadData()
@@ -1634,6 +1623,19 @@ extension ScheduleScreen {
             daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
             daySwipeRight.direction = UISwipeGestureRecognizerDirection.right
             scheduleTable.addGestureRecognizer(daySwipeRight)
+            // 
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+            // If day view enable swipes
+            if schedules.count != 0 {
+                if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
+                    daySwipeLeft.isEnabled = true
+                    daySwipeRight.isEnabled = true
+                    // Else if week view disable swipes
+                } else if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
+                    daySwipeLeft.isEnabled = false
+                    daySwipeRight.isEnabled = false
+                }
+            }
         }
         
         //

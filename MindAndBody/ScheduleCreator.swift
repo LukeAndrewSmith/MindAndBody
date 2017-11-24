@@ -60,8 +60,10 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     var indexOfDraggedGroup = Int()
     // index of the biggrouplabel in the biggrouplabelarray
     var indexOfDrag = Int()
-    // If dragging label dragged over new row, this indicates the old
+    // If dragging label dragged over new row, this indicates the old row
     var previousIndexPath: IndexPath? = nil
+    // So that the state of the tracking isn't changed
+    var draggedTrackingArray: [[Bool]] = []
     
     
     // Array indicating the number of each group currently in the table
@@ -93,12 +95,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // SETUP
         setVariables()
         setGroupLabels()
-        //
-        // If custom schedule update full week
-        // TODO: IS THIS RIGHT?????
-//        if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 {
-            updateFullWeek()
-//        }
         //
         // BackgroundImage
         addBackgroundImage(withBlur: true, fullScreen: true)
@@ -253,56 +249,60 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
-        // Update dayTableGroupArray and Schedule array
-            // This is for if the user has edited their profile and been taken to this screen, it is possible they will now have less of something, if so then remove the relevant number of sessions starting from monday down
-        // Loop the groups
-        // GROUP LOOP
-            // Day
-        if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
-            for i in 0...dayTableGroupArray.count - 1 {
-                // If the group in dayTableGroupArray has more sessions than in the schedules[ScheduleVariables.shared.selectedSchedule][2][2][i + 1], remove the relevant amount
-                if dayTableGroupArray[i] > schedules[ScheduleVariables.shared.selectedSchedule][2][2][i + 1] as! Int {
-                    // Find the relevant amount to remove
-                    let difference = dayTableGroupArray[i] - (schedules[ScheduleVariables.shared.selectedSchedule][2][2][i + 1] as! Int)
-                    // Loop the difference, removing one each time
-                    // DIFFERENCE LOOP
-                    for _ in 1...difference {
-                        // Loop the week (schedule), finding non empty days
-                        // SCHEDULE LOOP
-                        for j in 0...6 - 1 {
-                            // variable to break the schedule loop if the day is removed (the difference loop will then be continued)
-                            var breakScheduleLoop = false
-                            // Non empty day
-                            if schedules[ScheduleVariables.shared.selectedSchedule][0][j].count != 0 {
-                                // Loop the day, removing the first instance of the group to remove if there is one, then stopping
-                                // DAY LOOP
-                                for k in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][j].count - 1 {
-                                    // if the group in th eday is equal to the desired group
-                                    if schedules[ScheduleVariables.shared.selectedSchedule][0][j][k] as! Int == i {
-                                        // Remove 1 from the dayTableGroupArray
-                                        dayTableGroupArray[i] -= 1
-                                        // Remove the group from the schedule
-                                        schedules[ScheduleVariables.shared.selectedSchedule][0][j].remove(at: k)
-                                        scheduleTracking[ScheduleVariables.shared.selectedSchedule][j].remove(at: k)
-                                        // Break the day Loop and the schedule loop
-                                        breakScheduleLoop = true
-                                        break
-                                    }
-                                // DAY LOOP
-                                }
-                            }
-                            // Break the schedule loop
-                            if breakScheduleLoop == true {
-                                break
-                            }
-                        // SCHEDULE LOOP
-                        }
-                    // DIFFERENCE LOOP
-                    }
-                }
-            // GROUP LOOP
-            }
-        }
+        // TODO: SHOULD I REMOVE THIS
+            // I beleive i now handle removal of groups in relevant places, so don't need to do here
+        
+        
+//        // Update dayTableGroupArray and Schedule array
+//            // This is for if the user has edited their profile and been taken to this screen, it is possible they will now have less of something, if so then remove the relevant number of sessions starting from monday down
+//        // Loop the groups
+//        // GROUP LOOP
+//            // Day
+//        if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
+//            for i in 0...dayTableGroupArray.count - 1 {
+//                // If the group in dayTableGroupArray has more sessions than in the schedules[ScheduleVariables.shared.selectedSchedule][2][2][i + 1], remove the relevant amount
+//                if dayTableGroupArray[i] > schedules[ScheduleVariables.shared.selectedSchedule][2][2][i + 1] as! Int {
+//                    // Find the relevant amount to remove
+//                    let difference = dayTableGroupArray[i] - (schedules[ScheduleVariables.shared.selectedSchedule][2][2][i + 1] as! Int)
+//                    // Loop the difference, removing one each time
+//                    // DIFFERENCE LOOP
+//                    for _ in 1...difference {
+//                        // Loop the week (schedule), finding non empty days
+//                        // SCHEDULE LOOP
+//                        for j in 0...6 - 1 {
+//                            // variable to break the schedule loop if the day is removed (the difference loop will then be continued)
+//                            var breakScheduleLoop = false
+//                            // Non empty day
+//                            if schedules[ScheduleVariables.shared.selectedSchedule][0][j].count != 0 {
+//                                // Loop the day, removing the first instance of the group to remove if there is one, then stopping
+//                                // DAY LOOP
+//                                for k in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][j].count - 1 {
+//                                    // if the group in th eday is equal to the desired group
+//                                    if schedules[ScheduleVariables.shared.selectedSchedule][0][j][k] as! Int == i {
+//                                        // Remove 1 from the dayTableGroupArray
+//                                        dayTableGroupArray[i] -= 1
+//                                        // Remove the group from the schedule
+//                                        schedules[ScheduleVariables.shared.selectedSchedule][0][j].remove(at: k)
+//                                        scheduleTracking[ScheduleVariables.shared.selectedSchedule][j].remove(at: k)
+//                                        // Break the day Loop and the schedule loop
+//                                        breakScheduleLoop = true
+//                                        break
+//                                    }
+//                                // DAY LOOP
+//                                }
+//                            }
+//                            // Break the schedule loop
+//                            if breakScheduleLoop == true {
+//                                break
+//                            }
+//                        // SCHEDULE LOOP
+//                        }
+//                    // DIFFERENCE LOOP
+//                    }
+//                }
+//            // GROUP LOOP
+//            }
+//        }
         UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
@@ -372,30 +372,53 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Update full week array
         // If user is in day mode, the full week should be still updating
+        // For when user adds new group to week, adds to the fullweek array as well to ensure consistency
     func updateFullWeek() {
-        // TODO: Not sure about this function
-        
         var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-        schedules[ScheduleVariables.shared.selectedSchedule][0][7] = []
-        scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
-        // Loop week
-        for i in 0...6 {
-            // Check day isnt epmty
-            if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count != 0 {
-                // Loop day
-                for j in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][i].count - 1 {
-                    schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(schedules[ScheduleVariables.shared.selectedSchedule][0][i][j] as! Int)
+        
+//        schedules[ScheduleVariables.shared.selectedSchedule][0][7] = []
+//        scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
+        var shouldAppend = false
+        var indexAtWhichToAdd = 0
+        var shouldBreak = false
+        let count = schedules[ScheduleVariables.shared.selectedSchedule][0][7].count
+        if count != 0 {
+            for i in 0...count - 1 {
+                // Compare group at i and 1 after i,  if groupAti <= groupToAdd < groupAti+1, the insert at i + 1
+                    // e.g 001112233, inserting 2, -> 2 <= 2 < 3
+                    // e.g 0015, inserting 2, -> 1 <= 2 < 5
+                switch i {
+                // Last, can't compare to i+1, indicate to append not insert
+                case count - 1:
+                    shouldAppend = true
+                default:
+                    let groupAtI = schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int
+                    let groupAtI1 = schedules[ScheduleVariables.shared.selectedSchedule][0][7][i + 1] as! Int
+                    if groupAtI <= indexOfDraggedGroup && groupAtI1 < indexOfDraggedGroup {
+                        indexAtWhichToAdd = i + 1
+                        shouldBreak = true
+                    }
+                }
+                if shouldBreak {
+                    break
                 }
             }
+        // Nowhere to insert - append
+        } else {
+            shouldAppend = true
         }
-        schedules[ScheduleVariables.shared.selectedSchedule][0][7] = (schedules[ScheduleVariables.shared.selectedSchedule][0][7] as! [Int]).sorted()
-        // Add to week tracking here, not added before as could not sort
-        if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
-            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][7].count - 1 {
-                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int]!)
-            }
+        
+        // Append
+        if shouldAppend {
+            schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(indexOfDraggedGroup)
+            scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
+        // Insert
+        } else {
+            schedules[ScheduleVariables.shared.selectedSchedule][0][7].insert(indexOfDraggedGroup, at: indexAtWhichToAdd)
+            scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].insert(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!, at: indexAtWhichToAdd)
         }
+        
         //
         UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
         UserDefaults.standard.set(schedules, forKey: "schedules")
@@ -601,9 +624,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
                     var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                     // update dayTableGroupArray
-//                    if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 || schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
-                        dayTableGroupArray[indexOfDraggedGroup] += 1
-//                    }
+                    dayTableGroupArray[indexOfDraggedGroup] += 1
                     // update schedules
                     schedules[ScheduleVariables.shared.selectedSchedule][0][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
                     scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
@@ -664,15 +685,15 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     indexOfDrag = i
                     
                     // Get index of the group being dragged using the schedules array
+                        // i.e find out which group being dragged
                     indexOfDraggedGroup = schedules[ScheduleVariables.shared.selectedSchedule][0][indexPathForRow!.row][indexOfDrag] as! Int
                     //
                     previousIndexPath = indexPathForRow
                     
-                    
-                    // TODO: REMOVE FROM FULL WEEK
                     // Remove from schedules array and update userdefaults
                     schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!].remove(at: indexOfDrag)
-                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][(indexPathForRow?.row)!].remove(at: indexOfDrag)
+                    draggedTrackingArray = scheduleTracking[ScheduleVariables.shared.selectedSchedule][(indexPathForRow?.row)!].remove(at: indexOfDrag)
+                    //
                     UserDefaults.standard.set(schedules, forKey: "schedules")
                     UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                     // Sync
@@ -894,6 +915,32 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 })
                 
                 // Note: no need to remove from any arrays as already been removed when the label was picked up
+                // However need to remove from full week array
+                //
+                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+                var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+                // Remove last instance of the group in the full week array, this is to aim at not removing a tracked/performed group, assuming that the user logically starts doing groups from the top
+                var lastGroupInstanceIndex = Int()
+                // If not empty
+                if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
+                    // Loop full week backwards
+                    for i in (0...schedules[ScheduleVariables.shared.selectedSchedule][0][7].count - 1).reversed() {
+                        // If correct group
+                        if schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int == indexOfDraggedGroup {
+                            // Indicate index
+                            lastGroupInstanceIndex = i
+                            break
+                        }
+                    }
+                }
+                schedules[ScheduleVariables.shared.selectedSchedule][0][7].remove(at: lastGroupInstanceIndex)
+                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].remove(at: lastGroupInstanceIndex)
+                //
+                UserDefaults.standard.set(schedules, forKey: "schedules")
+                UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+                // Sync
+                ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+                
                 
             // If it is equal to nil, then the long press is not in a label
             } else if previousIndexPath != nil {
@@ -960,10 +1007,10 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             // Do a check, if the user is dragging off the top of the teable (indexpathforrow == nil, set to previous indexpath(always monday))
                         if indexPathForRow != nil {
                             schedules[ScheduleVariables.shared.selectedSchedule][0][(indexPathForRow?.row)!].append(indexOfDraggedGroup)
-                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][(indexPathForRow?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
+                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][(indexPathForRow?.row)!].append(draggedTrackingArray)
                         } else {
                             schedules[ScheduleVariables.shared.selectedSchedule][0][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
-                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
+                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(draggedTrackingArray)
                         }
                         UserDefaults.standard.set(schedules, forKey: "schedules")
                         UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
@@ -999,7 +1046,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                         // update schedules
                         schedules[ScheduleVariables.shared.selectedSchedule][0][(previousIndexPath?.row)!].append(indexOfDraggedGroup)
-                        scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
+                        scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(draggedTrackingArray)
                         UserDefaults.standard.set(schedules, forKey: "schedules")
                         UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                         // Sync
