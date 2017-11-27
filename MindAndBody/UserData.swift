@@ -186,6 +186,8 @@ enum Register {
         "AutomaticYoga": [0, -1, -1, -1], // [0], 0 == off, 1 == on
         // Rest times - 4
         "RestTimes": [5, 45, 10],
+        // Random session
+        "DifferentSessions": [1], // 0 == off, 1 == on
         // Default Image - 5
         "DefaultImage": [0],   // 0 == "demonstration", 1 == "targetArea"
         // Metric/Imperial - 6

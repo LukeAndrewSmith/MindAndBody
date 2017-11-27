@@ -196,16 +196,21 @@ extension InAppManager: SKPaymentTransactionObserver {
                     queue.finishTransaction(transaction)
                 }
             case .failed:
+                // Post cancelled notification
                 if let transactionError = transaction.error as NSError?,
                     transactionError.code != SKError.paymentCancelled.rawValue {
                     self.delegate?.inAppLoadingFailed(error: transaction.error)
-                    // Cancelled maybe?
-                    // Reset expiring date
-                    // TODO: HANDLE CANCEL????
+                    // Timed out/ failed
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: SubscriptionNotifiations.purchaseCancelledNotification, object: nil)
+                    }
                 } else {
                     // her stuff
                     self.delegate?.inAppLoadingFailed(error: InAppErrors.noSubscriptionPurchased)
-                    // Post failed notification
+                    // Post cancelled notification
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: SubscriptionNotifiations.purchaseCancelledNotification, object: nil)
+                    }
                 }
                 SKPaymentQueue.default().finishTransaction(transaction)
             case .restored:

@@ -18,7 +18,7 @@ class SubscriptionScreen: UIViewController {
     @IBOutlet weak var checkSubscriptionButton: UIButton!
     
     // Loading
-    var loadingAlert = UIAlertController()
+    var loadingView = UIView()
     
     //
     // MARK: View did load
@@ -27,9 +27,11 @@ class SubscriptionScreen: UIViewController {
         // Load products
         InAppManager.shared.loadProducts()
         
+        //
         NotificationCenter.default.addObserver(self, selector: #selector(handleOptionsLoaded(notification:)), name: SubscriptionNotifiations.productsLoadedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseSuccessfull(notification:)), name: SubscriptionNotifiations.purchaseSuccessfulNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(removeLoadingPresentError), name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseCancelled(notification:)), name: SubscriptionNotifiations.purchaseCancelledNotification, object: nil)
         
         //
         setupView()
@@ -38,7 +40,7 @@ class SubscriptionScreen: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if InAppManager.shared.products == [] {
-            addLoadingAlert()
+            addLoadingView()
             DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
                 if InAppManager.shared.products == [] {
                     self.removeLoadingPresentError()
@@ -53,14 +55,42 @@ class SubscriptionScreen: UIViewController {
     @objc func handleOptionsLoaded(notification: Notification) {
         DispatchQueue.main.async { [weak self] in
             self?.setSubscriptionData()
-            self?.removeLoadingAlert()
+            self?.loadingView.removeFromSuperview()
         }
     }
     
     @objc func handlePurchaseSuccessfull(notification: Notification) {
         DispatchQueue.main.async { [weak self] in
+            self?.loadingView.removeFromSuperview()
             self?.dismiss(animated: true)
         }
+    }
+    
+    @objc func handlePurchaseCancelled(notification: Notification) {
+        //
+        // Tell the user they can cancel anytime
+        let title = NSLocalizedString("canCancelTitle", comment: "")
+        let message = NSLocalizedString("canCancelMessage", comment: "")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = Colours.colour2
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        
+        
+        // Reset app action
+        let okAction = UIAlertAction(title:  NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            //
+            self.loadingView.removeFromSuperview()
+        }
+        // Add Actions
+        alert.addAction(okAction)
+        
+        // Present Alert
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: Load View
@@ -108,37 +138,34 @@ class SubscriptionScreen: UIViewController {
     
     // MARK: Alerts
     // Loading
-    func addLoadingAlert() {
+    func addLoadingView() {
         // Setup Alert
-        loadingAlert = UIAlertController(title: nil, message: "Loading...", preferredStyle: .alert)
+        loadingView.backgroundColor = UIColor.black.withAlphaComponent(0.72)
+        loadingView.frame = UIScreen.main.bounds
         
         // Setup indicator
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        let loadingIndicator = UIActivityIndicatorView()
+        loadingIndicator.center = loadingView.center
         loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        loadingIndicator.color = Colours.colour1
         loadingIndicator.startAnimating()
-        
-        loadingAlert.view.addSubview(loadingIndicator)
+        loadingView.addSubview(loadingIndicator)
         
         // Present Alert
-        self.present(loadingAlert, animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.addSubview(loadingView)
     }
     
-    //
-    func removeLoadingAlert() {
-        loadingAlert.dismiss(animated: true)
-    }
-    
+
     @objc func removeLoadingPresentError() {
-        loadingAlert.dismiss(animated: true) {
-            self.presentErrorAlert()
-        }
+        loadingView.removeFromSuperview()
+        self.presentErrorAlert()
     }
     
     // Loading
     func presentErrorAlert() {
         //
-        // Alert View indicating meaning of resetting the app
+        // No connectio nmessage
         let title = NSLocalizedString("subscriptionWarning", comment: "")
         let message = NSLocalizedString("subscriptionWarningMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -155,7 +182,7 @@ class SubscriptionScreen: UIViewController {
             UIAlertAction in
             //
             if InAppManager.shared.products == [] {
-                self.addLoadingAlert()
+                self.addLoadingView()
                 InAppManager.shared.loadProducts()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
                     if InAppManager.shared.products == [] {
@@ -188,9 +215,10 @@ class SubscriptionScreen: UIViewController {
     // Subscription button
     @IBAction func subscriptionButtonAction(_ sender: Any) {
         if InAppManager.shared.products != [] {
+            addLoadingView()
             InAppManager.shared.purchaseProduct(productType: ProductType.yearly)
         } else {
-            addLoadingAlert()
+            addLoadingView()
             InAppManager.shared.loadProducts()
             DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
                 if InAppManager.shared.products == [] {
@@ -204,7 +232,7 @@ class SubscriptionScreen: UIViewController {
     // Look around app button
     @IBAction func restoreButton(_ sender: Any) {
         //
-        addLoadingAlert()
+        addLoadingView()
         //
         NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.dismissRestoreAlertSuccess), name: SubscriptionNotifiations.restoreSuccessfulNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.failedToRestore), name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
@@ -213,28 +241,25 @@ class SubscriptionScreen: UIViewController {
         InAppManager.shared.restoreSubscription()
         //
         DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
-            if self.loadingAlert.isBeingPresented {
+            if self.view.subviews.contains(self.loadingView) {
                 self.removeLoadingPresentError()
             }
         })
     }
     
     @objc func dismissRestoreAlertSuccess() {
-        loadingAlert.dismiss(animated: true) {
-            self.dismiss(animated: true)
-        }
+        loadingView.removeFromSuperview()
+        self.dismiss(animated: true)
     }
     
     @objc func dismissLoadingWhatever() {
-        loadingAlert.dismiss(animated: true)
+        loadingView.removeFromSuperview()
     }
     
     @objc func failedToRestore() {
         // Add alert saying failed to restore
-        loadingAlert.dismiss(animated: true, completion: {
-            self.presentFailedToRestoreAlert()
-        })
-        //
+        loadingView.removeFromSuperview()
+        self.presentFailedToRestoreAlert()
     }
     
     func presentFailedToRestoreAlert() {
@@ -265,9 +290,8 @@ class SubscriptionScreen: UIViewController {
     //
     // Timed out
     func timedOut() {
-        loadingAlert.dismiss(animated: true) {
-            self.presentErrorAlert()
-        }
+        loadingView.removeFromSuperview()
+        self.presentErrorAlert()
     }
     
 }

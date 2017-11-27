@@ -13,12 +13,13 @@ import StoreKit
 
 class SubscriptionNotifiations: NSObject {
     
-    static let sessionIdSetNotification = Notification.Name("SubscriptionServiceSessionIdSetNotification")
-    static let productsLoadedNotification = Notification.Name("SubscriptionServiceProductsLoadedNotification")
-    static let restoreSuccessfulNotification = Notification.Name("SubscriptionServiceRestoreSuccessfulNotification")
-    static let restoreFailedNotification = Notification.Name("SubscriptionServiceRestoreFailedNotification")
-    static let restoreFinishedNotification = Notification.Name("SubscriptionServiceRestoreFinishedNotification")
-    static let purchaseSuccessfulNotification = Notification.Name("SubscriptionServiceRestoreSuccessfulNotification")
+    static let sessionIdSetNotification = Notification.Name("SessionIdSetNotification")
+    static let productsLoadedNotification = Notification.Name("ProductsLoadedNotification")
+    static let restoreSuccessfulNotification = Notification.Name("RestoreSuccessfulNotification")
+    static let restoreFailedNotification = Notification.Name("RestoreFailedNotification")
+    static let restoreFinishedNotification = Notification.Name("RestoreFinishedNotification")
+    static let purchaseSuccessfulNotification = Notification.Name("RestoreSuccessfulNotification")
+    static let purchaseCancelledNotification = Notification.Name("PurchaseCancelledNotification")
     //
     static let didCheckSubscription = Notification.Name("DidCheckSubscriptionNotification")
     //

@@ -251,6 +251,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         // TODO: SHOULD I REMOVE THIS
             // I beleive i now handle removal of groups in relevant places, so don't need to do here
+            // Perhaps this is necessary in the schedule creation help screen, incase the number of groups changes and it's necessary to remove sessions
         
         
 //        // Update dayTableGroupArray and Schedule array

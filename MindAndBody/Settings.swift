@@ -37,6 +37,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     // switches
     let timedSessionSwitch = UISwitch()
     let iCloudSwitch = UISwitch()
+    let differentSessionsSwitch = UISwitch()
     
     //
     var selectedRow = Int()
@@ -139,6 +140,13 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         iCloudSwitch.layer.cornerRadius = iCloudSwitch.bounds.height / 2
         iCloudSwitch.clipsToBounds = true
         iCloudSwitch.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
+        //
+        differentSessionsSwitch.onTintColor = Colours.colour3
+        differentSessionsSwitch.tintColor = Colours.colour4
+        differentSessionsSwitch.backgroundColor = Colours.colour4
+        differentSessionsSwitch.layer.cornerRadius = differentSessionsSwitch.bounds.height / 2
+        differentSessionsSwitch.clipsToBounds = true
+        differentSessionsSwitch.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
     
     //
@@ -218,7 +226,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         case 0: return 2
         case 1: return 2
         case 2: return 3
-        case 3: return 2
+        case 3: return 3
         case 4: return 1
         case 5: return 2
         default: break
@@ -366,7 +374,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             let restTimes = settings["RestTimes"]!
             cell.detailTextLabel?.text = String(restTimes[indexPath.row]) + " s"
             //
-            //
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
             cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
@@ -376,14 +383,38 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
         // Session customization
         case 3:
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            cell.backgroundColor = Colours.colour1
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
             //
             switch indexPath.row {
-            // Default image
             case 0:
+                //
+                // timed schedule sessions
+                let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+                cell.backgroundColor = Colours.colour1
+                cell.selectionStyle = .none
+                //
+                cell.textLabel?.text = NSLocalizedString("differentSessions", comment: "")
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                //
+                var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                let timedSession = settings["DifferentSessions"]![0]
+                if timedSession == 0 {
+                    timedSessionSwitch.isOn = false
+                } else {
+                    timedSessionSwitch.isOn = true
+                }
+                //
+                // on off
+                cell.addSubview(timedSessionSwitch)
+                timedSessionSwitch.center = CGPoint(x: view.bounds.width - 16 - (timedSessionSwitch.bounds.width / 2), y: cell.bounds.height / 2)
+                //
+                return cell
+            // Default image
+            case 1:
+                let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+                cell.backgroundColor = Colours.colour1
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                //
                 cell.textLabel?.text = NSLocalizedString("defaultImage", comment: "")
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 let defaultImage = settings["DefaultImage"]![0]
@@ -392,8 +423,15 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 } else {
                     cell.detailTextLabel?.text = NSLocalizedString("targetArea", comment: "")
                 }
+                //
+                return cell
             // Units
-            case 1:
+            case 2:
+                let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+                cell.backgroundColor = Colours.colour1
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                //
                 cell.textLabel?.text = NSLocalizedString("units", comment: "")
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 let units = settings["Units"]![0]
@@ -402,10 +440,10 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 } else {
                     cell.detailTextLabel?.text = NSLocalizedString("imperial", comment: "")
                 }
+                //
+                return cell
             default: break
             }
-            
-            return cell
             
         // iCloud
         case 4:
@@ -591,7 +629,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             switch indexPath.row {
             // Default Image
-            case 0:
+            case 1:
                 // demonstration --> targetArea
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 let defaultImage = settings["DefaultImage"]![0]
@@ -613,7 +651,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 
                 
             // Units
-            case 1:
+            case 2:
                 //
                 // kg --> lb
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -774,6 +812,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         } else if sender == iCloudSwitch {
             var settings: [String: [Int]] = [:]
             if sender.isOn == true {
+                // Pull to ensure up to date
                 ICloudFunctions.shared.pullToDefaults()
                 settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 settings["iCloud"]![0] = 1
@@ -782,6 +821,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
                 ICloudFunctions.shared.pushToICloud(toSync: [""])
             } else {
+                // Pull to ensure up to date
                 settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 settings["iCloud"]![0] = 0
                 //
@@ -789,6 +829,17 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             }
+        } else if sender == differentSessionsSwitch {
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            if sender.isOn == true {
+                settings["DifferentSessions"]![0] = 1
+            } else {
+                settings["DifferentSessions"]![0] = 0
+            }
+            //
+            UserDefaults.standard.set(settings, forKey: "userSettings")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
         }
     }
     

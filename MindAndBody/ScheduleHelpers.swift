@@ -10,6 +10,18 @@ import Foundation
 import UIKit
 
 extension ScheduleScreen {
+    
+    // OVERVIEW
+    // Main functions
+    // didSelectRowHandler:
+        // decides what to do upon selection of row, wether it be go to next choice of go to overview screen
+        // Also calls selectWarmup, selecteSession selectStretching
+    // Update selected choice
+        // Selected choice indicates to schedule where in the choice path the user is, i.e at which point he is at when choosing a session
+        // This function updates it
+    // selectWarmup, selecteSession selectStretching
+        // These functions are called just before going to the session overview, they determine which session to present based on the choice pather (selectedChoice), and wether DifferenSessions settings is on, in which case they select a random session of equivalent sessions
+    //
     //
     // MARK: Schedule Helper Functions
     //
@@ -262,7 +274,14 @@ extension ScheduleScreen {
     }
     // Session
     func selectSession() {
-        SelectedSession.shared.selectedSession = sessionData.sortedSessions[selectedChoiceSession[0]]![selectedChoiceSession[1]][selectedChoiceSession[2]][selectedChoiceSession[3]][selectedChoiceSession[4]][selectedChoiceSession[5]]
+        let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        // Choose same session each time
+        if settings["DifferentSessions"]![0] == 0 {
+            SelectedSession.shared.selectedSession = sessionData.sortedSessions[selectedChoiceSession[0]]![selectedChoiceSession[1]][selectedChoiceSession[2]][selectedChoiceSession[3]][selectedChoiceSession[4]][selectedChoiceSession[5]]
+            // Choose random session of deemed equivalent sessions
+        } else {
+            // TODO: RANDOM SESSION
+        }
     }
     // Stretching
     func selectStretching() {
@@ -1623,7 +1642,7 @@ extension ScheduleScreen {
             daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
             daySwipeRight.direction = UISwipeGestureRecognizerDirection.right
             scheduleTable.addGestureRecognizer(daySwipeRight)
-            // 
+            //
             let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
             // If day view enable swipes
             if schedules.count != 0 {
