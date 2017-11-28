@@ -1114,6 +1114,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // Dismiss view
     @IBAction func createScheduleButtonAction(_ sender: Any) {
+        // Ensure notifications correct
+        ReminderNotifications.shared.setNotifications()
         //
         // Return to schedule overview
         if fromScheduleEditing == true {

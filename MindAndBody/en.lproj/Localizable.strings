@@ -1530,7 +1530,9 @@
 "alreadyHaveSubscription" = "I'm already subscribed";
 // Can cancel message
 "canCancelTitle" = "Are You Sure?";
-"canCancelMessage" = "\nYou can cancel at any time from your phone's settings, without having to pay anything.";
+"canCancelMessage" = "\nYou can cancel at any time from your phone's settings during the trial, without having to pay anything.";
+"ohGoOnThen" = "Oh go on then, i'll give it a go";
+"yesImSure" = "Yes I'm sure, I only like free things";
 // Subscrtioption failed to retreive
 "retreivalFailed" = "Can't retreive subscription";
 "subscriptionWarning" = "Connection Error\n";
@@ -1684,6 +1686,20 @@
     "yes" = "Yes";
 
 "week" = "Nº Sessions per week";
+
+//
+// MARK: Repeating Reminders/Notifications
+"mindBodySchedule" = "Mind & Body Schedule";
+"morningNotification1" = "You have "; // nSession
+"morningNotification2" = " sessions planned for today"; // 7 o'clock
+"afternoonNotification" = "Have you worked towards your goals as planned today?"; // 5 o'clock
+//
+"weekNotification2" = " sessions planned for this week";
+"sundayNotification" = "Have you worked towards your goals as planned this week?";
+// Breathing reminders
+"breathe" = "Breathe";
+//
+"reminders" = "Reminders";
 
 //
 // MARK: Profile //

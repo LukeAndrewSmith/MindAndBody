@@ -99,7 +99,10 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
     
     //
     // Done
-    @IBAction func doneButonAction(_ sender: Any) {
+    @IBAction func doneButtonAction(_ sender: Any) {
+        // Ensure notifications correct
+        ReminderNotifications.shared.setNotifications()
+        //
         if comingFromScheduleEditing == true {
             self.navigationController?.popViewController(animated: true)
         } else {

@@ -38,6 +38,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     let timedSessionSwitch = UISwitch()
     let iCloudSwitch = UISwitch()
     let differentSessionsSwitch = UISwitch()
+    let remindersSwitch = UISwitch()
     
     //
     var selectedRow = Int()
@@ -127,26 +128,19 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         
         //
         // Switches
-        timedSessionSwitch.onTintColor = Colours.colour3
-        timedSessionSwitch.tintColor = Colours.colour4
-        timedSessionSwitch.backgroundColor = Colours.colour4
-        timedSessionSwitch.layer.cornerRadius = timedSessionSwitch.bounds.height / 2
-        timedSessionSwitch.clipsToBounds = true
-        timedSessionSwitch.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
-        //
-        iCloudSwitch.onTintColor = Colours.colour3
-        iCloudSwitch.tintColor = Colours.colour4
-        iCloudSwitch.backgroundColor = Colours.colour4
-        iCloudSwitch.layer.cornerRadius = iCloudSwitch.bounds.height / 2
-        iCloudSwitch.clipsToBounds = true
-        iCloudSwitch.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
-        //
-        differentSessionsSwitch.onTintColor = Colours.colour3
-        differentSessionsSwitch.tintColor = Colours.colour4
-        differentSessionsSwitch.backgroundColor = Colours.colour4
-        differentSessionsSwitch.layer.cornerRadius = differentSessionsSwitch.bounds.height / 2
-        differentSessionsSwitch.clipsToBounds = true
-        differentSessionsSwitch.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
+        setupSwitch(switchToSetup: timedSessionSwitch)
+        setupSwitch(switchToSetup: iCloudSwitch)
+        setupSwitch(switchToSetup: differentSessionsSwitch)
+        setupSwitch(switchToSetup: remindersSwitch)
+    }
+    
+    func setupSwitch(switchToSetup: UISwitch) {
+        switchToSetup.onTintColor = Colours.colour3
+        switchToSetup.tintColor = Colours.colour4
+        switchToSetup.backgroundColor = Colours.colour4
+        switchToSetup.layer.cornerRadius = switchToSetup.bounds.height / 2
+        switchToSetup.clipsToBounds = true
+        switchToSetup.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
     
     //
@@ -188,7 +182,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     // Sections
     // Number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 7
     }
     
     // Section Titles
@@ -199,7 +193,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         case 2: return NSLocalizedString("restTimes", comment: "")
         case 3: return NSLocalizedString("sessions", comment: "")
         case 4: return NSLocalizedString("iCloud", comment: "")
-        case 5: return NSLocalizedString("reset", comment: "")
+        case 5: return NSLocalizedString("reminders", comment: "")
+        case 6: return NSLocalizedString("reset", comment: "")
         default: return ""
         }
     }
@@ -228,7 +223,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         case 2: return 3
         case 3: return 3
         case 4: return 1
-        case 5: return 2
+        case 5: return 1
+        case 6: return 2
         default: break
         }
         return 0
@@ -396,16 +392,16 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 //
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-                let timedSession = settings["DifferentSessions"]![0]
-                if timedSession == 0 {
-                    timedSessionSwitch.isOn = false
+                let differentSessions = settings["DifferentSessions"]![0]
+                if differentSessions == 0 {
+                    differentSessionsSwitch.isOn = false
                 } else {
-                    timedSessionSwitch.isOn = true
+                    differentSessionsSwitch.isOn = true
                 }
                 //
                 // on off
-                cell.addSubview(timedSessionSwitch)
-                timedSessionSwitch.center = CGPoint(x: view.bounds.width - 16 - (timedSessionSwitch.bounds.width / 2), y: cell.bounds.height / 2)
+                cell.addSubview(differentSessionsSwitch)
+                differentSessionsSwitch.center = CGPoint(x: view.bounds.width - 16 - (differentSessionsSwitch.bounds.width / 2), y: cell.bounds.height / 2)
                 //
                 return cell
             // Default image
@@ -466,8 +462,32 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
             //
             return cell
-        // Reset
+        
+        // Reminders
         case 5:
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            cell.backgroundColor = Colours.colour1
+            cell.selectionStyle = .none
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            //
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let reminderNotifications = settings["ReminderNotifications"]
+            //
+            cell.textLabel?.text = NSLocalizedString("reminders", comment: "")
+            //
+            if reminderNotifications![0] == 1 {
+                remindersSwitch.isOn = true
+            } else {
+                remindersSwitch.isOn = false
+            }
+            // on off
+            cell.addSubview(remindersSwitch)
+            remindersSwitch.center = CGPoint(x: view.bounds.width - 16 - (remindersSwitch.bounds.width / 2), y: cell.bounds.height / 2)
+            //
+            return cell
+            
+        // Reset
+        case 6:
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
             cell.backgroundColor = Colours.colour1
@@ -677,7 +697,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             }
       
         // Reset
-        case 5:
+        case 6:
             //
             // Reset Walkthrough
             if indexPath.row == 0 {
@@ -795,6 +815,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     //
     // MARK: Switch handlers
     @objc func valueChanged(_ sender: UISwitch) {
+        
         // Timed sessions
         if sender == timedSessionSwitch {
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -807,8 +828,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             UserDefaults.standard.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-                
-            // iCloud
+            
+        // iCloud
         } else if sender == iCloudSwitch {
             var settings: [String: [Int]] = [:]
             if sender.isOn == true {
@@ -829,6 +850,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             }
+            
+        // Different (random) sessions
         } else if sender == differentSessionsSwitch {
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             if sender.isOn == true {
@@ -840,6 +863,26 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             UserDefaults.standard.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+            
+        // Reminders
+        // Morning reminders
+        } else if sender == remindersSwitch {
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            if sender.isOn {
+                settings["ReminderNotifications"]![0] = 1
+            } else {
+                settings["ReminderNotifications"]![0] = 0
+            }
+            //
+            UserDefaults.standard.set(settings, forKey: "userSettings")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+            // Set/Cancel notifications after settings updated
+            if sender.isOn {
+                ReminderNotifications.shared.setNotifications()
+            } else {
+                ReminderNotifications.shared.setNotifications()
+            }
         }
     }
     

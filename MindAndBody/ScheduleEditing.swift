@@ -407,18 +407,21 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-        
+                
         if sender == appHelpsCreateScheduleSwitch {
             scheduleType = schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int
             scheduleOverviewTable.reloadData()
         } else if sender == viewFullWeekSwitch {
             rearrangeScheduleHidden()
+            ReminderNotifications.shared.setNotifications()
         }
     }
     
     // Save Schedule
     @IBAction func saveButtonAction(_ sender: Any) {
         // Note don't actually need to save anything, name for user experience
+        // Ensure notifications correct
+        ReminderNotifications.shared.setNotifications()
         self.dismiss(animated: true)
     }
     

@@ -192,6 +192,8 @@ enum Register {
         "DefaultImage": [0],   // 0 == "demonstration", 1 == "targetArea"
         // Metric/Imperial - 6
         "Units": [0], // == "kg" (0), "lb" (1)
+        // Notifications
+        "ReminderNotifications": [1], // 0 == disabled, 1 == enabled
         // Is icloud enabled, 0 == false, 1 == true
         "iCloud": [0],
     ]

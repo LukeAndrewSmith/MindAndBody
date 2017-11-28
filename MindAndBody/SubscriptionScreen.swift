@@ -80,15 +80,34 @@ class SubscriptionScreen: UIViewController {
         alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         
         
-        // Reset app action
-        let okAction = UIAlertAction(title:  NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
+        // 'Oh go on then'
+        let okAction = UIAlertAction(title:  NSLocalizedString("ohGoOnThen", comment: ""), style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            //
+            if InAppManager.shared.products != [] {
+                InAppManager.shared.purchaseProduct(productType: ProductType.yearly)
+            } else {
+                InAppManager.shared.loadProducts()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
+                    if InAppManager.shared.products == [] {
+                        self.removeLoadingPresentError()
+                    }
+                })
+            }
+            //
+        }
+        
+        // 'Yes im sure'
+        let cancelAction = UIAlertAction(title:  NSLocalizedString("yesImSure", comment: ""), style: UIAlertActionStyle.default) {
             UIAlertAction in
             //
             self.loadingView.removeFromSuperview()
         }
+        
         // Add Actions
         alert.addAction(okAction)
-        
+        alert.addAction(cancelAction)
+
         // Present Alert
         self.present(alert, animated: true, completion: nil)
     }

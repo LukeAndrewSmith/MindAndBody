@@ -498,7 +498,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-        
     }
     
     //

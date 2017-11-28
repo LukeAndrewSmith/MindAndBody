@@ -298,6 +298,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
+        // Session choice
         switch tableView {
         case scheduleTable:
             //
@@ -315,7 +316,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 //
                 tableView.deselectRow(at: indexPath, animated: true)
             }
-            
+          
+        // Select schedule
         case scheduleChoiceTable:
             var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
             // Creat new schedule
@@ -347,6 +349,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 })
                 //
                 updateWeekGoal()
+                ReminderNotifications.shared.setNotifications()
             }
             tableView.deselectRow(at: indexPath, animated: true)
             
@@ -410,6 +413,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             scheduleTable.reloadData()
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking", "selectedSchedule"])
+            //
+            ReminderNotifications.shared.setNotifications()
             
             //
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
