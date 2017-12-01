@@ -1476,7 +1476,8 @@
 //
 "chooseBackgroundImage" = "Choose a background image";
 "initialInfoSubtitle" = "Fitness  |  Yoga  |  Meditation";
-"initialProfileOption" = "Create my Schedule";
+"followPlanOption" = "Choose a plan to follow";
+"initialProfileOption" = "Create a Schedule";
 "initialAppOption" = "Look around the app first";
 //
 // Info table

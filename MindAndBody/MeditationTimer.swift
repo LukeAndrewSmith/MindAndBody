@@ -644,7 +644,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             case 3:
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying == true {
+                    if BellPlayer.shared.bellPlayer.isPlaying {
                         BellPlayer.shared.bellPlayer.stop()
                     }
                 }
@@ -684,7 +684,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         case 0: break // OK button not used
         // Duration
         case 1:
-            if didChangeDuration == true {
+            if didChangeDuration {
                 //
                 didChangeDuration = false
                 //
@@ -716,12 +716,12 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             removeView = true
         // Starting Bell
         case 2:
-            if didChangeStartingBell == true {
+            if didChangeStartingBell {
                 //
                 didChangeStartingBell = false
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying == true {
+                    if BellPlayer.shared.bellPlayer.isPlaying {
                         BellPlayer.shared.bellPlayer.stop()
                     }
                 }
@@ -749,7 +749,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying == true {
+                    if BellPlayer.shared.bellPlayer.isPlaying {
                         BellPlayer.shared.bellPlayer.stop()
                     }
                 }
@@ -767,7 +767,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 intervalBellStage = 2
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying == true {
+                    if BellPlayer.shared.bellPlayer.isPlaying {
                         BellPlayer.shared.bellPlayer.stop()
                     }
                 }
@@ -907,12 +907,12 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         // Ending Bell
         case 4:
-            if didChangeEndingBell == true {
+            if didChangeEndingBell {
                 //
                 didChangeEndingBell = false
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying == true {
+                    if BellPlayer.shared.bellPlayer.isPlaying {
                         BellPlayer.shared.bellPlayer.stop()
                     }
                 }
@@ -934,12 +934,12 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             removeView = true
         // Background Sound
         case 5:
-            if didChangeBackgroundSound == true {
+            if didChangeBackgroundSound {
                 //
                 didChangeBackgroundSound = false
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying == true {
+                    if BellPlayer.shared.bellPlayer.isPlaying {
                         BellPlayer.shared.bellPlayer.stop()
                     }
                 }
@@ -962,7 +962,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         //
         // Remove View
-        if removeView == true {
+        if removeView {
             //
             ActionSheet.shared.animateActionSheetDown()
             //

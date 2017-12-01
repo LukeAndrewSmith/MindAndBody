@@ -410,7 +410,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                     //
                     // GO TO
-                    if scheduleHasChanged == true {
+                    if scheduleHasChanged {
                         self.performSegue(withIdentifier: "ScheduleHelpCreationSegue", sender: self)
                     } else {
                         self.navigationController?.popViewController(animated: true)

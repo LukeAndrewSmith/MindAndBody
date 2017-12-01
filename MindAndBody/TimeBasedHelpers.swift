@@ -113,7 +113,7 @@ extension TimeBasedScreen {
     //
     func startTimer() {
         // Check
-        if lengthTimer.isValid == true {
+        if lengthTimer.isValid {
             lengthTimer.invalidate()
         }
         //
@@ -261,7 +261,7 @@ extension TimeBasedScreen {
                 switch SelectedSession.shared.selectedSession[1] {
                 case 13,14,15:
                     // If new selected movement is a multiple of the number of movements in the original key array, then it is the end of a round and a rest timer must be presented
-                    if isNewRound() == true {
+                    if isNewRound() {
                         movementProgress = 0
                     } else {
                         movementProgress = 1

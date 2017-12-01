@@ -645,7 +645,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         case 2:
             //
             if BellPlayer.shared.bellPlayer != nil {
-                if BellPlayer.shared.bellPlayer.isPlaying == true {
+                if BellPlayer.shared.bellPlayer.isPlaying {
                     BellPlayer.shared.bellPlayer.stop()
                 }
             }
@@ -679,7 +679,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Timed sessions
         var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         // off -> on
-        if sender.isOn == true {
+        if sender.isOn {
             //
             settings["AutomaticYoga"]![0] = 1
             
@@ -723,7 +723,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         UserDefaults.standard.set(settings, forKey: "userSettings")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-        if sender.isOn == true {
+        if sender.isOn {
             settings["TimeBasedSessions"]![0] = 0
         } else {
             settings["TimeBasedSessions"]![0] = 1

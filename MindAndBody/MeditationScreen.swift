@@ -165,7 +165,7 @@ class MeditationScreen: UIViewController {
         let vibrancyE1 = UIVibrancyEffect(blurEffect: blurE1)
         blur1.effect = vibrancyE1
         //
-        if isHours == true {
+        if isHours {
             blur1.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: timerLabel.frame.size.height)
         } else {
             blur1.frame = CGRect(x: 0, y: 0, width: timerLabel.frame.size.width + 40, height: timerLabel.frame.size.height)
@@ -237,7 +237,7 @@ class MeditationScreen: UIViewController {
             timerCountDown.invalidate()
             // Stop sounds
             if meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
-                if self.soundPlayer.isPlaying == true {
+                if self.soundPlayer.isPlaying {
                     self.soundPlayer.stop()
                 }
             }
@@ -257,7 +257,7 @@ class MeditationScreen: UIViewController {
             //
         } else {
             timerValue -= 1
-            if isHours == true {
+            if isHours {
                 timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
             } else {
                 timerLabel.text = timeFormatted(totalSeconds: timerValue)
@@ -348,7 +348,7 @@ class MeditationScreen: UIViewController {
         
         // Set Timer
         // Set initial time
-        if isHours == true {
+        if isHours {
             timerLabel.text = timeFormattedHours(totalSeconds: timerValue)
         } else {
             timerLabel.text = timeFormatted(totalSeconds: timerValue)
@@ -412,7 +412,7 @@ class MeditationScreen: UIViewController {
             timerCountDown.invalidate()
             // Stop sounds
             if self.meditationArray[self.selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
-                if self.soundPlayer.isPlaying == true {
+                if self.soundPlayer.isPlaying {
                     self.soundPlayer.stop()
                 }
             }

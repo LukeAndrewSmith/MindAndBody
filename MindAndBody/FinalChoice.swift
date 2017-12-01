@@ -23,7 +23,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     // Cardio - time or distance
     var cardioType = 0
     
-    // Coming from schedule, if coming from menu == true, hide presets button
+    // Coming from schedule, if coming from menu, hide presets button
     // && set title to presets title
     var comingFromSchedule = false
     // Title Array for if schedule
@@ -199,7 +199,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     func setConstraints(showingViews: Bool, animated: Bool) {
         
         // Set constraints
-        if showingViews == true {
+        if showingViews {
             //
             self.tableConstraint.constant = 49.75
             // Show presets button
@@ -236,7 +236,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
         
         // Animate / Set
-        if animated == true {
+        if animated {
             UIView.animate(withDuration: AnimationTimes.animationTime3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
             })

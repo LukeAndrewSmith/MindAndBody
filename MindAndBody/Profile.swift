@@ -185,7 +185,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         tableView.deselectRow(at: indexPath, animated: true)
         // If last row
         if indexPath.row == scheduleDataStructures.profileQA.count {
-            if comingFromSchedule == true {
+            if comingFromSchedule {
                 self.dismiss(animated: true)
             } else {
                 let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -197,7 +197,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
                         allAnswered = false
                     }
                 }
-                if allAnswered == true {
+                if allAnswered {
                     // App helps schedule creation
                     if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 0 {
                         self.performSegue(withIdentifier: "ProfileAppHelpSegue", sender: self)
@@ -276,7 +276,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     //
     // Dismiss View
     @IBAction func dismissViewButtonAction(_ sender: Any) {
-        if comingFromSchedule == true {
+        if comingFromSchedule {
             self.dismiss(animated: true)
         } else {
             self.navigationController?.popViewController(animated: true)
@@ -580,7 +580,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
                     allAnswered = false
                 }
             }
-            if allAnswered == true {
+            if allAnswered {
                 // TODO: Call set difficulty levels
                 ProfileFunctions.shared.setDifficultyLevels()
             }

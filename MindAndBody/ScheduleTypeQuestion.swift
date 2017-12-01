@@ -51,7 +51,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewWillAppear(animated)
         //
         // If going back to this screen, delete schedule that has just been created
-        if ScheduleVariables.shared.didCreateNewSchedule == true {
+        if ScheduleVariables.shared.didCreateNewSchedule {
             ScheduleVariables.shared.didCreateNewSchedule = false
             //
             // Delete Schedule
@@ -102,7 +102,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
         view.addGestureRecognizer(rightSwipe)
         
-        if comingFromSchedule == true {
+        if comingFromSchedule {
             backButton.imageView?.image = #imageLiteral(resourceName: "Down")
             backButton.tintColor = Colours.colour4
         } else {
@@ -223,13 +223,13 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
                 //
                 // Update schedule settings settings based on switches
                 // Schedule type option option
-                if self.scheduleOptionSwitch.isOn == true {
+                if self.scheduleOptionSwitch.isOn {
                     schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] = 0
                 } else if self.scheduleOptionSwitch.isOn == false {
                     schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] = 1
                 }
                 // Sessions choice option
-                if self.sessionsOptionSwitch.isOn == true {
+                if self.sessionsOptionSwitch.isOn {
                     schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] = 0
                 } else if self.sessionsOptionSwitch.isOn == false {
                     schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] = 1
@@ -343,7 +343,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     //
     // Back Button
     @IBAction func backButtonAction(_ sender: Any) {
-        if comingFromSchedule == true {
+        if comingFromSchedule {
             self.dismiss(animated: true)
         } else {
             self.navigationController?.popViewController(animated: true)

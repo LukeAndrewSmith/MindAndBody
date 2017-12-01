@@ -36,7 +36,7 @@ extension ScheduleScreen {
             ScheduleVariables.shared.choiceProgress[0] = schedules[ScheduleVariables.shared.selectedSchedule][0][ScheduleVariables.shared.selectedDay][row] as! Int
             ScheduleVariables.shared.choiceProgress[1] += 1
             ScheduleVariables.shared.selectedRows[0] = row
-            maskView()
+            maskView(animated: true)
             // Next Table info
             slideLeft()
             
@@ -671,7 +671,7 @@ extension ScheduleScreen {
                 return scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][row][0][0]
             //
             // Later Choices
-            } else if isLastChoice() == true {
+            } else if isLastChoice() {
                 // All only have one array of bool for indicating final choice completion
                     // Flexibility, Toning, Muscle Gain, Strength, 1,3,4,5
                     return scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][row]
@@ -686,7 +686,7 @@ extension ScheduleScreen {
             } else {
                 // All only have one array of bool for indicating final choice completion
                 // Flexibility, Toning, Muscle Gain, Strength, 1,3,4,5
-                if isLastChoice() == true {
+                if isLastChoice() {
                     return scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][ScheduleVariables.shared.selectedRows[0]][1][row]
                 }
             }
@@ -701,7 +701,8 @@ extension ScheduleScreen {
         var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         let nRows = scheduleTable.numberOfRows(inSection: 0)
         var isCompleted = true
-        // -2 because title included
+        // Loop second array in scheduleTracking, if one if false, not completed (warmup/session/stretching)
+            // -2 because title included
         for i in 0...nRows - 2 {
             if scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][i] == false {
                 isCompleted = false
@@ -717,12 +718,12 @@ extension ScheduleScreen {
     func nextChoice() {
         //
         // Mask View
-        maskView()
+        maskView(animated: true)
         // Next Table info
         slideLeft()
         //
-        if isLastChoice() == true {
-            if isGroupCompleted() == true {
+        if isLastChoice() {
+            if isGroupCompleted() {
                 maskView3.backgroundColor = Colours.colour3
             } else {
                 maskView3.backgroundColor = Colours.colour4
@@ -737,90 +738,104 @@ extension ScheduleScreen {
     //
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
-        if ScheduleVariables.shared.choiceProgress[0] == -1 {
+        // Determine wether the swipe should be enabled
+            // Only should be enabled if schedule style is day view, or if swiping back from choices
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+        var shouldBeEnabled = true
+        if schedules.count != 0 {
+            if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
+                shouldBeEnabled = false
+            }
+        }
         //
-        // Forward 1 day
-        if (extraSwipe.direction == .left){
-            // Update selected day
-            switch ScheduleVariables.shared.selectedDay {
-            case 6: ScheduleVariables.shared.selectedDay = 0
-            default: ScheduleVariables.shared.selectedDay += 1
-            }
-            
-            // Deselect all indicators
-            for i in 0...(stackArray.count - 1) {
-                stackArray[i].font = UIFont(name: "SFUIDisplay-thin", size: 17)
-            }
-            // Select indicator
-            stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
-            animateDayIndicatorToDay()
-            
-            // Animate
-            scheduleTable.reloadData()
-            let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-            let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
+        if ScheduleVariables.shared.choiceProgress[0] == -1 && shouldBeEnabled {
             //
-            view.addSubview(snapShot1!)
-            view.bringSubview(toFront: snapShot1!)
-            //
-            snapShot2?.center.x = view.center.x + self.view.frame.size.width
-            view.addSubview(snapShot2!)
-            view.bringSubview(toFront: snapShot2!)
-            //
-            scheduleTable.alpha = 0
-            //
-            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
-                snapShot2?.center.x = self.view.center.x
-            }, completion: { finish in
-                self.scheduleTable.alpha = 1
-                snapShot1?.removeFromSuperview()
-                snapShot2?.removeFromSuperview()
-            })
-            
+            // Forward 1 day
+            if (extraSwipe.direction == .left){
+                // Update selected day
+                switch ScheduleVariables.shared.selectedDay {
+                case 6: ScheduleVariables.shared.selectedDay = 0
+                default: ScheduleVariables.shared.selectedDay += 1
+                }
+                
+                // Deselect all indicators
+                for i in 0...(stackArray.count - 1) {
+                    stackArray[i].font = UIFont(name: "SFUIDisplay-thin", size: 17)
+                }
+                // Select indicator
+                stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
+                animateDayIndicatorToDay()
+                
+                // Animate
+                //
+                // Snapshot before update
+                let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
+                view.addSubview(snapShot1!)
+                view.bringSubview(toFront: snapShot1!)
+                //
+                // Snapshot after update
+                scheduleTable.reloadData()
+                let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
+                snapShot2?.center.x = view.center.x + self.view.frame.size.width
+                view.addSubview(snapShot2!)
+                view.bringSubview(toFront: snapShot2!)
+                //
+                scheduleTable.isHidden = true
+                //
+                UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                    snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
+                    snapShot2?.center.x = self.view.center.x
+                }, completion: { finish in
+                    self.scheduleTable.isHidden = false
+                    snapShot1?.removeFromSuperview()
+                    snapShot2?.removeFromSuperview()
+                })
+                
             //
             // Back 1 day
-        } else if extraSwipe.direction == .right {
-            // Update selected day
-            switch ScheduleVariables.shared.selectedDay {
-            case 0: ScheduleVariables.shared.selectedDay = 6
-            default: ScheduleVariables.shared.selectedDay -= 1
+            } else if extraSwipe.direction == .right {
+                // Update selected day
+                switch ScheduleVariables.shared.selectedDay {
+                case 0: ScheduleVariables.shared.selectedDay = 6
+                default: ScheduleVariables.shared.selectedDay -= 1
+                }
+                
+                // Deselect all indicators
+                for i in 0...(stackArray.count - 1) {
+                    stackArray[i].font = UIFont(name: "SFUIDisplay-thin", size: 17)
+                }
+                // Select indicator
+                stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
+                selectDay(day: ScheduleVariables.shared.selectedDay)
+                animateDayIndicatorToDay()
+                
+                // Animate
+                //
+                // Snapshot before update
+                let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
+                view.addSubview(snapShot1!)
+                view.bringSubview(toFront: snapShot1!)
+                //
+                // Snapshot after update
+                scheduleTable.reloadData()
+                let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
+                snapShot2?.center.x = view.center.x - self.view.frame.size.width
+                view.addSubview(snapShot2!)
+                view.bringSubview(toFront: snapShot2!)
+                //
+                scheduleTable.isHidden = true
+                //
+                UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                    snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
+                    snapShot2?.center.x = self.view.center.x
+                }, completion: { finish in
+                    self.scheduleTable.isHidden = false
+                    snapShot1?.removeFromSuperview()
+                    snapShot2?.removeFromSuperview()
+                })
+                
             }
-            
-            // Deselect all indicators
-            for i in 0...(stackArray.count - 1) {
-                stackArray[i].font = UIFont(name: "SFUIDisplay-thin", size: 17)
-            }
-            // Select indicator
-            stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
-            selectDay(day: ScheduleVariables.shared.selectedDay)
-            animateDayIndicatorToDay()
-            
-            // Animate
-            scheduleTable.reloadData()
-            let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-            let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
-            //
-            view.addSubview(snapShot1!)
-            view.bringSubview(toFront: snapShot1!)
-            //
-            snapShot2?.center.x = view.center.x - self.view.frame.size.width
-            view.addSubview(snapShot2!)
-            view.bringSubview(toFront: snapShot2!)
-            //
-            scheduleTable.alpha = 0
-            //
-            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
-                snapShot2?.center.x = self.view.center.x
-            }, completion: { finish in
-                self.scheduleTable.alpha = 1
-                snapShot1?.removeFromSuperview()
-                snapShot2?.removeFromSuperview()
-            })
-            
-        }
-        } else {
+        } else if ScheduleVariables.shared.choiceProgress[0] != -1 {
             if extraSwipe.direction == .right {
                 maskAction()
             }
@@ -976,7 +991,7 @@ extension ScheduleScreen {
                 index1 = 0
                 index2 = 0
             // If last choice
-            } else if isLastChoice() == true && row! != 0 {
+            } else if isLastChoice() && row! != 0 {
                 // Selected row in first choice
                 index0 = ScheduleVariables.shared.selectedRows[0]
                 // 1 to access group contents tracking in trackingArray
@@ -1020,7 +1035,7 @@ extension ScheduleScreen {
                         // Loop full week
                         for i in 0...scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count - 1 {
                             // If correct group and true
-                            if schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][i][index1][index2] == true {
+                            if schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][i][index1][index2] {
                                 scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] = false
                                 break
                             }
@@ -1058,7 +1073,7 @@ extension ScheduleScreen {
                                 }
                             }
                         }
-                        if shouldBreak == true {
+                        if shouldBreak {
                             break
                         }
                     }
@@ -1080,14 +1095,14 @@ extension ScheduleScreen {
                             // Loop day
                             for j in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][i].count - 1 {
                                 // If correct group and true
-                                if schedules[ScheduleVariables.shared.selectedSchedule][0][i][j] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] == true {
+                                if schedules[ScheduleVariables.shared.selectedSchedule][0][i][j] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] {
                                     scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] = false
                                     shouldBreak = true
                                     break
                                 }
                             }
                         }
-                        if shouldBreak == true {
+                        if shouldBreak {
                             break
                         }
                     }
@@ -1109,8 +1124,8 @@ extension ScheduleScreen {
             scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
             //
             // Box indicator round todo, done here because userdefaults set above
-            if isLastChoice() == true {
-                if isGroupCompleted() == true {
+            if isLastChoice() {
+                if isGroupCompleted() {
                     maskView3.backgroundColor = Colours.colour3
                 } else if isGroupCompleted() == false {
                     maskView3.backgroundColor = Colours.colour4
@@ -1149,7 +1164,7 @@ extension ScheduleScreen {
             index1 = 0
             index2 = 0
             // If last choice
-        } else if isLastChoice() == true && row != 0 {
+        } else if isLastChoice() && row != 0 {
             // Selected row in first choice
             index0 = ScheduleVariables.shared.selectedRows[0]
             // 1 to access group contents tracking in trackingArray
@@ -1193,7 +1208,7 @@ extension ScheduleScreen {
                         }
                     }
                 }
-                if shouldBreak == true {
+                if shouldBreak {
                     break
                 }
             }
@@ -1226,7 +1241,7 @@ extension ScheduleScreen {
             index1 = 0
             index2 = 0
             // If last choice
-        } else if isLastChoice() == true && row != 0 {
+        } else if isLastChoice() && row != 0 {
             // Selected row in first choice
             index0 = ScheduleVariables.shared.selectedRows[0]
             // 1 to access group contents tracking in trackingArray
@@ -1268,7 +1283,7 @@ extension ScheduleScreen {
                                 }
                             }
                         }
-                        if shouldBreak == true {
+                        if shouldBreak {
                             break
                         }
                     }
@@ -1318,7 +1333,7 @@ extension ScheduleScreen {
     }
     
     // Is day completed
-        // 0 == true, 1 == false, 2 == Nothing on the day
+        // 0, 1 == false, 2 == Nothing on the day
     func isDayCompleted(day: Int) -> Int {
         let scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         var isCompleted = 0
@@ -1365,17 +1380,7 @@ extension ScheduleScreen {
         // shouldReloadChoice
     func markAsCompletedAndAnimate() {
         // MARK AS COMPLETED
-        if ScheduleVariables.shared.shouldReloadChoice == true && ScheduleVariables.shared.selectedRows[1] != 72 {
-            var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-            scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][0][0] = true
-            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["scheduleTracking"])
-            // If day view, marks first instance of relevant group in full week array and vice versa
-            // -> To keep both day view and week view up to date
-            markAsCompletedForOtherWeekViewStyle()
-            // Mark first instance of group in all other schedules as completed
-            markAsGroupForOtherSchedules(markAs: true)
+        if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.selectedRows[1] != 72 {
             //
             DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
                 // Reload the finalChoiceScreen Session after a delay
@@ -1385,7 +1390,9 @@ extension ScheduleScreen {
                 self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
                 //
                 // Check if group is completed for the day
-                if self.isGroupCompleted() == true {
+                if self.isGroupCompleted() {
+                    //
+                    self.updateGroupTracking()
                     // Update Week Progress Only if group is completed
                     self.updateWeekProgress(add: true)
                     //
@@ -1410,10 +1417,8 @@ extension ScheduleScreen {
                     })
                 }
             })
-            //
-            updateDayIndicatorColours()
-            // Meditation/Walk
-        } else if ScheduleVariables.shared.shouldReloadChoice == true && ScheduleVariables.shared.selectedRows[1] == 72 {
+        // Meditation/Walk
+        } else if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.selectedRows[1] == 72 {
             //
             // Go to initial choice
             ScheduleVariables.shared.choiceProgress[1] = 1
@@ -1446,12 +1451,27 @@ extension ScheduleScreen {
         }
     }
     
+    func updateGroupTracking() {
+        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+        scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][0][0] = true
+        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+        // Sync
+        ICloudFunctions.shared.pushToICloud(toSync: ["scheduleTracking"])
+        // If day view, marks first instance of relevant group in full week array and vice versa
+        // -> To keep both day view and week view up to date
+        markAsCompletedForOtherWeekViewStyle()
+        // Mark first instance of group in all other schedules as completed
+        markAsGroupForOtherSchedules(markAs: true)
+        //
+        updateDayIndicatorColours()
+    }
+    
     // MARK: Reload View
         // shouldReloadSchedule
     func reloadView() {
         // RELOAD VIEW
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
-        if ScheduleVariables.shared.shouldReloadSchedule == true {
+        if ScheduleVariables.shared.shouldReloadSchedule {
             //
             ScheduleVariables.shared.shouldReloadSchedule = false
             // Set ScheduleVariables.shared.selectedSchedule to last schedule if too high
@@ -1632,30 +1652,17 @@ extension ScheduleScreen {
             }
             pageStack.isUserInteractionEnabled = true
             //
-            
-            //
-            // Day Swipes
-            daySwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-            daySwipeLeft.direction = UISwipeGestureRecognizerDirection.left
-            scheduleTable.addGestureRecognizer(daySwipeLeft)
-            //
-            daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-            daySwipeRight.direction = UISwipeGestureRecognizerDirection.right
-            scheduleTable.addGestureRecognizer(daySwipeRight)
-            //
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
-            // If day view enable swipes
-            if schedules.count != 0 {
-                if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
-                    daySwipeLeft.isEnabled = true
-                    daySwipeRight.isEnabled = true
-                    // Else if week view disable swipes
-                } else if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
-                    daySwipeLeft.isEnabled = false
-                    daySwipeRight.isEnabled = false
-                }
-            }
         }
+        //
+        // Day Swipes (also used for swipe back in choices)
+        daySwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        daySwipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        scheduleTable.addGestureRecognizer(daySwipeLeft)
+        //
+        daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        daySwipeRight.direction = UISwipeGestureRecognizerDirection.right
+        scheduleTable.addGestureRecognizer(daySwipeRight)
+        //
         
         //
         // Select Today
@@ -1670,11 +1677,12 @@ extension ScheduleScreen {
                 stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-thin", size: 17)
                 dayIndicatorLeading.constant = stackArray[ScheduleVariables.shared.selectedDay].frame.minX
                 self.pageStack.layoutIfNeeded()
-                maskView()
+                maskView(animated: false)
             }
         } else {
             // 7 is the full week array
             ScheduleVariables.shared.selectedDay = 7
+            maskView(animated: false)
         }
         
         //

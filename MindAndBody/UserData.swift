@@ -194,7 +194,7 @@ enum Register {
         "Units": [0], // == "kg" (0), "lb" (1)
         // Notifications
         "ReminderNotifications": [1], // 0 == disabled, 1 == enabled
-        // Is icloud enabled, 0 == false, 1 == true
+        // Is icloud enabled, 0 == false, 1
         "iCloud": [0],
     ]
     

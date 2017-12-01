@@ -327,7 +327,7 @@ extension UIViewController {
         backgroundImage.contentMode = .scaleAspectFill
         backgroundImage.clipsToBounds = true
         // Frame
-        if fullScreen == true {
+        if fullScreen {
             backgroundImage.frame = UIScreen.main.bounds
         } else {
             backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - (TopBarHeights.statusBarHeight + CGFloat(TopBarHeights.navigationBarHeight)))
@@ -346,7 +346,7 @@ extension UIViewController {
         view.insertSubview(backgroundImage, at: 0)
         //
         // BackgroundBlur/Vibrancpy
-        if withBlur == true {
+        if withBlur {
             let backgroundBlur = UIVisualEffectView()
             let backgroundBlurE = UIBlurEffect(style: .dark)
             backgroundBlur.effect = backgroundBlurE
@@ -569,7 +569,8 @@ extension UIViewController {
     // Schedule Tracking
         // Updates the 'finalChoice' of the group
     func updateScheduleTracking(fromSchedule: Bool) {
-        if fromSchedule == true {
+        // Only relevant if coming from schedule
+        if fromSchedule {
             let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
             // Day
             if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {

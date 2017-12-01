@@ -734,7 +734,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             finishEarly.tintColor = Colours.colour3
             //
             if soundPlayer != nil {
-                if soundPlayer.isPlaying == true {
+                if soundPlayer.isPlaying {
                     soundPlayer.stop()
                 }
             }

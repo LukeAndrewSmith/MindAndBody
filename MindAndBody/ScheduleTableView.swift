@@ -180,15 +180,15 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 cell.addSubview(dayLabel)
                 //
                 // CheckMark if completed
-                if ScheduleVariables.shared.shouldReloadChoice == true {
+                if ScheduleVariables.shared.shouldReloadChoice {
                     if indexPath.row != ScheduleVariables.shared.selectedRows[0] {
-                        if isCompleted(row: indexPath.row) == true {
+                        if isCompleted(row: indexPath.row) {
                             dayLabel.textColor = Colours.colour3
                             cell.tintColor = Colours.colour3
                             cell.accessoryType = .checkmark
                         }
                     }
-                } else if isCompleted(row: indexPath.row) == true {
+                } else if isCompleted(row: indexPath.row) {
                     dayLabel.textColor = Colours.colour3
                     cell.tintColor = Colours.colour3
                     cell.accessoryType = .checkmark
@@ -217,7 +217,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     cell.layer.addSublayer(seperator)
                     //
                     // Color if last choice
-                    if isLastChoice() == true {
+                    if isLastChoice() {
                         cell.textLabel?.textColor = Colours.colour3
                         seperator.backgroundColor = Colours.colour3.cgColor
                     }
@@ -246,12 +246,12 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     cell.addSubview(choiceLabel)
                     
                     //
-                    if isLastChoice() == true {
+                    if isLastChoice() {
                         //
                         // CheckMark if completed
                         // - 1 as title included, so rows offset by 1
                         if indexPath.row != 0 {
-                            if isCompleted(row: indexPath.row - 1) == true {
+                            if isCompleted(row: indexPath.row - 1) {
                                 choiceLabel.textColor = Colours.colour3
                                 cell.tintColor = Colours.colour3
                                 cell.accessoryType = .checkmark
@@ -310,7 +310,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 // If completed, do nothing
                 if isLastChoice() == false && isCompleted(row: indexPath.row) == false {
                     didSelectRowHandler(row: indexPath.row)
-                } else if isLastChoice() == true && isCompleted(row: indexPath.row - 1) == false {
+                } else if isLastChoice() && isCompleted(row: indexPath.row - 1) == false {
                     didSelectRowHandler(row: indexPath.row)
                 }
                 //
@@ -401,11 +401,12 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
             if schedules.count == 0 || selectedSchedule == 0 {
                 selectedSchedule = 0
+                scheduleStyle = 0
             } else {
                 selectedSchedule -= 1
+                scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int
             }
             ScheduleVariables.shared.selectedSchedule = selectedSchedule
-            scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int
             ScheduleVariables.shared.selectedDay = Date().currentWeekDayFromMonday - 1
             UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
             // Reload table

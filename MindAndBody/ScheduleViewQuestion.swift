@@ -64,7 +64,7 @@ class ScheduleViewQuestion: UIViewController {
         rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
         view.addGestureRecognizer(rightSwipe)
         
-        if comingFromSchedule == true {
+        if comingFromSchedule {
             backButton.alpha = 0
             backButton.isEnabled = false
         }

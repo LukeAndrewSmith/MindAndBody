@@ -20,8 +20,9 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
     @IBOutlet weak var infoTable: UITableView!
     
     
-    @IBOutlet weak var profileButton: UIButton!
-    @IBOutlet weak var appButton: UIButton!
+    @IBOutlet weak var followPlanButton: UIButton!
+    @IBOutlet weak var createScheduleButton: UIButton!
+    @IBOutlet weak var lookAroundAppButton: UIButton!
     
     
     //
@@ -137,27 +138,21 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         
         //
         // Buttons
-        // Profile
-        profileButton.setTitle(NSLocalizedString("initialProfileOption", comment: ""), for: .normal)
-        profileButton.layer.cornerRadius = profileButton.bounds.height / 2
-        profileButton.layer.masksToBounds = true
-        profileButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
-//        let profileBlur = UIBlurEffect(style: .regular)
-//        let profileBlurView = UIVisualEffectView(effect: profileBlur)
-//        let profileVibrancy = UIVibrancyEffect(blurEffect: profileBlur)
-//        let profileVibrancyView = UIVisualEffectView(effect: profileVibrancy)
-//        profileBlurView.addSubview(profileVibrancyView)
-//        //
-//        profileBlurView.frame = profileButton.bounds
-//        profileBlurView.layer.cornerRadius = 15
-//        profileBlurView.layer.masksToBounds = true
-//        profileBlurView.center = profileButton.center
-//        view.insertSubview(profileBlurView, belowSubview: profileButton)
+        // Plan
+        followPlanButton.setTitle(NSLocalizedString("followPlanOption", comment: ""), for: .normal)
+        followPlanButton.layer.cornerRadius = followPlanButton.bounds.height / 2
+        followPlanButton.layer.masksToBounds = true
+        followPlanButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+        // Schedule
+        createScheduleButton.setTitle(NSLocalizedString("initialProfileOption", comment: ""), for: .normal)
+        createScheduleButton.layer.cornerRadius = createScheduleButton.bounds.height / 2
+        createScheduleButton.layer.masksToBounds = true
+        createScheduleButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
         // App
-        appButton.setTitle(NSLocalizedString("initialAppOption", comment: ""), for: .normal)
-        appButton.layer.cornerRadius = appButton.bounds.height / 2
-        appButton.layer.masksToBounds = true
-        appButton.backgroundColor = Colours.colour1.withAlphaComponent(0.25)
+        lookAroundAppButton.setTitle(NSLocalizedString("initialAppOption", comment: ""), for: .normal)
+        lookAroundAppButton.layer.cornerRadius = lookAroundAppButton.bounds.height / 2
+        lookAroundAppButton.layer.masksToBounds = true
+        lookAroundAppButton.backgroundColor = Colours.colour1.withAlphaComponent(0.25)
 //        let appBlur = UIVisualEffectView
 
 

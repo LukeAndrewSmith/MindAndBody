@@ -121,7 +121,9 @@ class ScheduleScreen: UIViewController {
     // MARK: viewDidAppear
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Mark group as completed if coming back to schedule from having done a session, and animate from final choice if the group has been completed
+        // If coming back to schedule from having done a session, mark session as completed and, if the entire group has been completed, animate from final choice back to main schedule screen
+            // At end of session, updateScheduleTracking() gets called, this updates the final choice (session) tracking, then indicates the scheduleShouldReload
+            // This function that means the function does something, it reloads the relevant rows and animated back to the home schedule screen if necessary
         markAsCompletedAndAnimate()
     }
     
@@ -143,6 +145,8 @@ class ScheduleScreen: UIViewController {
         // Setup
         setupViews()
         layoutViews()
+        
+        self.performSegue(withIdentifier: "InitialInfoSegue", sender: self)
     }
     
     // MARK: viewDidLayoutSubviews

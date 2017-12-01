@@ -293,7 +293,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
 //                                }
 //                            }
 //                            // Break the schedule loop
-//                            if breakScheduleLoop == true {
+//                            if breakScheduleLoop {
 //                                break
 //                            }
 //                        // SCHEDULE LOOP
@@ -396,7 +396,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 default:
                     let groupAtI = schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int
                     let groupAtI1 = schedules[ScheduleVariables.shared.selectedSchedule][0][7][i + 1] as! Int
-                    if groupAtI <= indexOfDraggedGroup && groupAtI1 < indexOfDraggedGroup {
+                    if groupAtI <= indexOfDraggedGroup && indexOfDraggedGroup < groupAtI1 {
                         indexAtWhichToAdd = i + 1
                         shouldBreak = true
                     }
@@ -1058,7 +1058,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     deMaskStackViews()
                 
                 // Remove bin
-                if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 && shouldRemoveBin == true {
+                if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 && shouldRemoveBin {
                     createScheduleButton.setImage(nil, for: .normal)
                     createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
                     createScheduleButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
@@ -1118,7 +1118,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         ReminderNotifications.shared.setNotifications()
         //
         // Return to schedule overview
-        if fromScheduleEditing == true {
+        if fromScheduleEditing {
             self.navigationController?.popToRootViewController(animated: true)
         //
         // Schedule has just been created, dismiss to schedule screen

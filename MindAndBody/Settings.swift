@@ -819,7 +819,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Timed sessions
         if sender == timedSessionSwitch {
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            if sender.isOn == true {
+            if sender.isOn {
                 settings["TimeBasedSessions"]![0] = 1
             } else {
                 settings["TimeBasedSessions"]![0] = 0
@@ -832,7 +832,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // iCloud
         } else if sender == iCloudSwitch {
             var settings: [String: [Int]] = [:]
-            if sender.isOn == true {
+            if sender.isOn {
                 // Pull to ensure up to date
                 ICloudFunctions.shared.pullToDefaults()
                 settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -854,7 +854,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Different (random) sessions
         } else if sender == differentSessionsSwitch {
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            if sender.isOn == true {
+            if sender.isOn {
                 settings["DifferentSessions"]![0] = 1
             } else {
                 settings["DifferentSessions"]![0] = 0

@@ -26,15 +26,21 @@ extension ScheduleScreen {
     //
     // MARK: Mask Views
     // Mask view func
-    func maskView() {
+    func maskView(animated: Bool) {
         // Animate mask view if group selected and mask doesnt already exist
         if ScheduleVariables.shared.choiceProgress[0] != -1 && view.subviews.contains(maskView1) == false {
             createMaskView(alpha: 0)
-            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+            if animated {
+                UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                    self.maskView1.alpha = 0.72
+                    self.maskView2.alpha = 0.72
+                    self.maskView3.alpha = 0.72
+                })
+            } else {
                 self.maskView1.alpha = 0.72
                 self.maskView2.alpha = 0.72
                 self.maskView3.alpha = 0.72
-            })
+            }
         }
     }
     // Session selection mask
@@ -146,7 +152,7 @@ extension ScheduleScreen {
         let screenFrame = UIScreen.main.bounds
         let tableHeaderHeight = (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4
         //
-        // Mask hides table header so add screenshot
+        // Table gets hidden but need to keep header so add screenshot
         let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableHeaderHeight)
         let snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
         view.insertSubview(snapShotHeader, belowSubview: maskView1)
@@ -164,9 +170,9 @@ extension ScheduleScreen {
         snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
         snapShot2?.center = CGPoint(x: view.center.x + view.frame.size.width, y: snapShotY)
         //
-        maskTable()
         UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
         UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, aboveSubview: self.view)
+        scheduleTable.isHidden = true
         // Animate new and old image to left
         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             //
@@ -177,7 +183,7 @@ extension ScheduleScreen {
             snapShot1?.removeFromSuperview()
             snapShot2?.removeFromSuperview()
             snapShotHeader.removeFromSuperview()
-            self.removeMaskTable()
+            self.scheduleTable.isHidden = false
             self.view.isUserInteractionEnabled = true
         })
         //
@@ -190,7 +196,7 @@ extension ScheduleScreen {
         let screenFrame = UIScreen.main.bounds
         let tableHeaderHeight = (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4
         //
-        // Mask hides table header so add screenshot
+        // Table gets hidden but need to keep header so add screenshot
         let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableHeaderHeight)
         let snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
         view.insertSubview(snapShotHeader, belowSubview: maskView1)
@@ -208,9 +214,9 @@ extension ScheduleScreen {
         snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
         snapShot2?.center = CGPoint(x: view.center.x - view.frame.size.width, y: snapShotY)
         //
-        maskTable()
         UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
         UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, aboveSubview: self.view)
+        scheduleTable.isHidden = true
         //
         // Animate new and old image to left
         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -222,31 +228,11 @@ extension ScheduleScreen {
             snapShot1?.removeFromSuperview()
             snapShot2?.removeFromSuperview()
             snapShotHeader.removeFromSuperview()
-            self.removeMaskTable()
+            self.scheduleTable.isHidden = false
             self.view.isUserInteractionEnabled = true
         })
     }
-    // Mask Table
-    func maskTable() {
-        //
-        mask.frame = CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: view.bounds.height)
-        
-        //TopBarHeights.combinedHeight + tableHeaderHeight
-        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        //
-        // Snapshot Header - mask layer covers header so show it
-        // SHOULD FIND A BETTER WAY, MASKING ONLY THE NECESSARY CELLS AND NOT THE WHOLE TABLEVIEW WITH HEADER
-            // ISSUE: MASK.FRAME DOESNT SEE TO LISTEN TO Y VALUE or y value means something else
-        
-        //
-        scheduleTable.layer.mask = mask
-        //
-        // MASK LAYER Y = 0 INSTEAD OF TABLEVIEWHEIGHT !!!!
-    }
-    func removeMaskTable() {
-        mask.removeFromSuperlayer()
-    }
-    
+
     
     //
     // Mask cells under clear header (unrelated to above functions)

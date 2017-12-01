@@ -330,8 +330,8 @@ class MindBody: UIViewController {
         super.viewDidAppear(animated)
         //
         // Home Screen
-        if MenuVariables.shared.isInitialAppOpen == true {
-            //        if isInitialAppOpen == true {
+        if MenuVariables.shared.isInitialAppOpen {
+            //        if isInitialAppOpen {
             // Deselect previous selection
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             let homeScreen = settings["HomeScreen"]![0]

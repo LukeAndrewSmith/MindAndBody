@@ -103,7 +103,7 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
         // Ensure notifications correct
         ReminderNotifications.shared.setNotifications()
         //
-        if comingFromScheduleEditing == true {
+        if comingFromScheduleEditing {
             self.navigationController?.popViewController(animated: true)
         } else {
             self.dismiss(animated: true)
@@ -199,11 +199,13 @@ class CustomScheduleWeekCell: UITableViewCell {
                 switch i {
                 // Last, can't compare to i+1, indicate to append not insert
                 case count - 1:
+                    // Append
                     shouldAppend = true
                 default:
+                    // Insert
                     let groupAtI = schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int
                     let groupAtI1 = schedules[ScheduleVariables.shared.selectedSchedule][0][7][i + 1] as! Int
-                    if groupAtI <= row && groupAtI1 < row {
+                    if groupAtI <= row && row < groupAtI1 {
                         indexAtWhichToAdd = i + 1
                         shouldBreak = true
                     }
@@ -212,7 +214,7 @@ class CustomScheduleWeekCell: UITableViewCell {
                     break
                 }
             }
-            // Nowhere to insert - append
+        // Nowhere to insert - append
         } else {
             shouldAppend = true
         }
@@ -228,15 +230,15 @@ class CustomScheduleWeekCell: UITableViewCell {
         }
         
         //
-        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-        UserDefaults.standard.set(schedules, forKey: "schedules")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+//        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+//        UserDefaults.standard.set(schedules, forKey: "schedules")
+//        // Sync
+//        ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
         //
-//        // Update the array
+        // Update the array
 //        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
 //        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-//        // update schedules
+        // update schedules
 //        schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(row)
 //        schedules[ScheduleVariables.shared.selectedSchedule][0][7] = (schedules[ScheduleVariables.shared.selectedSchedule][0][7] as! [Int]).sorted()
 //        // Append to week tracking, start again as cannot sort
@@ -246,21 +248,21 @@ class CustomScheduleWeekCell: UITableViewCell {
 //                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int]!)
 //            }
 //        }
-//        // Add to first available day in the week
-//        for i in 0...6 {
-//            // If week not full (max 5 things per day in week
-//            if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count < 5 {
-//                schedules[ScheduleVariables.shared.selectedSchedule][0][i].append(row)
-//                scheduleTracking[ScheduleVariables.shared.selectedSchedule][i].append(scheduleDataStructures.scheduleTrackingArrays[row]!)
-//                break
-//            }
-//        }
+        // Add to first available day in the week
+        for i in 0...6 {
+            // If week not full (max 5 things per day in week
+            if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count < 5 {
+                schedules[ScheduleVariables.shared.selectedSchedule][0][i].append(row)
+                scheduleTracking[ScheduleVariables.shared.selectedSchedule][i].append(scheduleDataStructures.scheduleTrackingArrays[row]!)
+                break
+            }
+        }
         
-        //
-//        UserDefaults.standard.set(schedules, forKey: "schedules")
-//        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-//        // Sync
-//        ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+        
+        UserDefaults.standard.set(schedules, forKey: "schedules")
+        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+        // Sync
+        ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
         
         // Update label
         sessionsLabel.text = String(Int(sessionsLabel.text!)! + 1)
@@ -300,7 +302,7 @@ class CustomScheduleWeekCell: UITableViewCell {
                 }
             }
             // Break week loop
-            if shouldBreak == true {
+            if shouldBreak {
                 break
             }
         }

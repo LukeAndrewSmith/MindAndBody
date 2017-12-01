@@ -312,7 +312,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
         // Number of Rounds
-        if selectingNumberOfRounds == true {
+        if selectingNumberOfRounds {
             return 1
             // Set/Reps/Breaths
         } else {
@@ -340,7 +340,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
         // Number of Rounds
-        if selectingNumberOfRounds == true {
+        if selectingNumberOfRounds {
             return roundsPickerArray.count
         } else {
             switch SelectedSession.shared.selectedSession[0] {
@@ -376,7 +376,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
         // Number of Rounds
-        if selectingNumberOfRounds == true {
+        if selectingNumberOfRounds {
             let roundLabel = UILabel()
             roundLabel.text = String(roundsPickerArray[row])
             if row == 0 {
@@ -500,7 +500,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
         // Number of Rounds
-        if selectingNumberOfRounds == true {
+        if selectingNumberOfRounds {
             return setsRepsPicker.frame.size.width
             // Set/Reps/Breaths
         } else {
@@ -535,7 +535,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
         // Number of Rounds
-        if selectingNumberOfRounds == true {
+        if selectingNumberOfRounds {
             // Do nothing
             // Set/Reps/Breaths
         } else {
@@ -1490,7 +1490,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     @objc func okButtonAction(_ sender: Any) {
         //
         // NUMBER OF ROUNDS!
-        if selectingNumberOfRounds == true {
+        if selectingNumberOfRounds {
             selectingNumberOfRounds = false
             var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
             let numberOfMovements = customSessionsArray[SelectedSession.shared.selectedSession[0]][selectedPreset][1].count

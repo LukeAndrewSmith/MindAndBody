@@ -381,7 +381,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         if sender == appChoosesSessionsOnOffSwitch {
             // App chooses sessions
-            if sender.isOn == true {
+            if sender.isOn {
                 schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] = 0
             // User chooses sessions
             } else {
@@ -389,7 +389,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         } else if sender == viewFullWeekSwitch {
             // Schedule style -> full week
-            if sender.isOn == true {
+            if sender.isOn {
                 schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] = 1
             // Schedule style -> see each day
             } else {
@@ -397,7 +397,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         } else if sender == appHelpsCreateScheduleSwitch {
             // App chooses sessions
-            if sender.isOn == true {
+            if sender.isOn {
                 schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] = 0
                 // User chooses sessions
             } else {

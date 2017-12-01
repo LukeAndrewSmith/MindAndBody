@@ -567,7 +567,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         //
         // Start Timer 2
-        if firstCall == true {
+        if firstCall {
             startTimer2()
             firstCall = false
         }
@@ -575,7 +575,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         let delayInSeconds = timerValue2Remainder
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            if self.didEnterBackground == true {
+            if self.didEnterBackground {
                 //
                 // new current index
                 let currentIndexCheck = self.currentIndex
@@ -605,11 +605,11 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         // Perform Actions
         if arrayOfTimes.contains(timerValue2) {
-            if timerCountDown.isValid == true {
+            if timerCountDown.isValid {
                 timerCountDown.invalidate()
             }
             currentIndex = Int(arrayOfTimes.index(of: timerValue2)!) + 1
-            if animationAdded == true {
+            if animationAdded {
                 timerShapeLayer.removeAllAnimations()
                 timerShapeLayer.removeFromSuperlayer()
                 animationAdded = false
@@ -629,7 +629,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     //
     func startTimer2() {
         //
-        if timerCountDown.isValid == true {
+        if timerCountDown.isValid {
             timerCountDown.invalidate()
         }
         //
@@ -637,7 +637,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //startTime2 = Date().timeIntervalSinceReferenceDate
         //
         if didSetEndTime2 == false {
-            if didEnterBackground == true {
+            if didEnterBackground {
                 endTime2 = startTime2 + (Double(timerValue2) - Double(arrayOfTimes[currentIndex]))
             } else {
                 endTime2 = startTime2 + TimeInterval(lengthArray[currentIndex])
@@ -803,7 +803,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
             } else if timerValue == 0 {
                 nextButtonAction()
-                if animationAdded == true {
+                if animationAdded {
                     timerShapeLayer.removeAllAnimations()
                     timerShapeLayer.removeFromSuperlayer()
                     animationAdded = false
@@ -876,7 +876,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 timerCountDown.invalidate()
                 removeCircle()
                 nextButtonAction()
-                if animationAdded == true {
+                if animationAdded {
                     timerShapeLayer.removeAllAnimations()
                     timerShapeLayer.removeFromSuperlayer()
                     animationAdded = false
@@ -1019,11 +1019,11 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
             UIAlertAction in
             //
-            if timerCountDown.isValid == true {
+            if timerCountDown.isValid {
                 timerCountDown.invalidate()
             }
             //
-            if self.animationAdded == true {
+            if self.animationAdded {
                 self.timerShapeLayer.removeAllAnimations()
                 self.timerShapeLayer.removeFromSuperlayer()
             }

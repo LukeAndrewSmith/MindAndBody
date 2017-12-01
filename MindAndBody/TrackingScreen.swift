@@ -714,7 +714,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Return chart height
     var firstTimeOpened = true
     func returnChartHeight() -> CGFloat {
-        if firstTimeOpened == true {
+        if firstTimeOpened {
             firstTimeOpened = false
             return self.view.bounds.height - TopBarHeights.combinedHeight
         } else {
