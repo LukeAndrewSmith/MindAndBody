@@ -250,7 +250,7 @@ class Loading {
     func beginLoading() {
         // Setup Alert
         loadingView.frame = UIScreen.main.bounds
-        loadingView.backgroundColor = Colours.colour1
+        loadingView.backgroundColor = Colors.light
         let loadingImage = UIImageView()
         loadingImage.image = #imageLiteral(resourceName: "Loading")
         loadingImage.sizeToFit()
@@ -260,7 +260,7 @@ class Loading {
         // Setup indicator
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: (UIScreen.main.bounds.width / 2) - 25, y: loadingImage.frame.maxY, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.color = Colours.colour2
+        loadingIndicator.color = Colors.dark
         loadingIndicator.startAnimating()
         loadingView.addSubview(loadingIndicator)
         
@@ -341,7 +341,7 @@ extension UIViewController {
             backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
         } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
             backgroundImage.image = nil
-            backgroundImage.backgroundColor = Colours.colour1
+            backgroundImage.backgroundColor = Colors.light
         }
         view.insertSubview(backgroundImage, at: 0)
         //
@@ -371,7 +371,7 @@ extension UIViewController {
         // View
         animationView.frame = CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.size.width, height: animationViewHeight)
         //
-        animationView.backgroundColor = Colours.colour2
+        animationView.backgroundColor = Colors.dark
         animationView.contentMode = .scaleAspectFit
         animationView.isUserInteractionEnabled = true
         //
@@ -794,8 +794,8 @@ extension UIViewController {
         walkthroughView.backgroundColor = .clear
         
         // Highlight
-        walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
-        walkthroughHighlight.layer.borderColor = Colours.colour1.cgColor
+        walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
+        walkthroughHighlight.layer.borderColor = Colors.light.cgColor
         walkthroughHighlight.layer.borderWidth = 1
         
         // Label
@@ -806,9 +806,9 @@ extension UIViewController {
         walkthroughLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         walkthroughLabel.layer.cornerRadius = 13
         walkthroughLabel.clipsToBounds = true
-        walkthroughLabel.backgroundColor = Colours.colour1
+        walkthroughLabel.backgroundColor = Colors.light
         walkthroughLabel.font = UIFont(name: "SFUIDisplay-thin", size: 22)
-        walkthroughLabel.textColor = Colours.colour2
+        walkthroughLabel.textColor = Colors.dark
         walkthroughLabel.alpha = 0.93
         
         // Button

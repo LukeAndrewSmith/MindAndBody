@@ -59,7 +59,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Set TableView Background Colour
         //
         let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
-        backView.backgroundColor = Colours.colour1
+        backView.backgroundColor = Colors.light
         //
         self.tableView.backgroundView = backView
         //
@@ -89,40 +89,40 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         
         // Navigation Bar
         //
-        self.navigationController?.navigationBar.barTintColor = Colours.colour2
-        self.navigationController?.navigationBar.tintColor = Colours.colour1
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
+        self.navigationController?.navigationBar.tintColor = Colors.light
         // Title
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         // Navigation Title
         navigationBar.title = NSLocalizedString("settings", comment: "")
         // View
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         
         //
         // Sets Reps Selection (Action Sheet)
         // view
-        actionSheetView.backgroundColor = Colours.colour2
+        actionSheetView.backgroundColor = Colors.dark
         actionSheetView.layer.cornerRadius = 15
         actionSheetView.layer.masksToBounds = true
         // picker
-        restTimePicker.backgroundColor = Colours.colour2
+        restTimePicker.backgroundColor = Colors.dark
         restTimePicker.delegate = self
         restTimePicker.dataSource = self
         // ok
-        okButton.backgroundColor = Colours.colour1
-        okButton.setTitleColor(Colours.colour3, for: .normal)
+        okButton.backgroundColor = Colors.light
+        okButton.setTitleColor(Colors.green, for: .normal)
         okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
         okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
         actionSheetView.addSubview(okButton)
         // sets
         secondIndicatorLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        secondIndicatorLabel.textColor = Colours.colour1
+        secondIndicatorLabel.textColor = Colors.light
         secondIndicatorLabel.text = "s"
         //
         // Home Screen Action Sheet
         // picker
-        homeScreenPicker.backgroundColor = Colours.colour2
+        homeScreenPicker.backgroundColor = Colors.dark
         homeScreenPicker.delegate = self
         homeScreenPicker.dataSource = self
         
@@ -135,9 +135,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     }
     
     func setupSwitch(switchToSetup: UISwitch) {
-        switchToSetup.onTintColor = Colours.colour3
-        switchToSetup.tintColor = Colours.colour4
-        switchToSetup.backgroundColor = Colours.colour4
+        switchToSetup.onTintColor = Colors.green
+        switchToSetup.tintColor = Colors.red
+        switchToSetup.backgroundColor = Colors.red
         switchToSetup.layer.cornerRadius = switchToSetup.bounds.height / 2
         switchToSetup.clipsToBounds = true
         switchToSetup.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
@@ -242,7 +242,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             // Background Image
             case 0:
                 let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-                cell.backgroundColor = Colours.colour1
+                cell.backgroundColor = Colors.light
                 //
                 cell.textLabel?.text = NSLocalizedString("backgroundImage", comment: "")
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
@@ -264,9 +264,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
                     //
                     backgroundImageView.layer.borderWidth = 1
-                    backgroundImageView.layer.borderColor = Colours.colour2.cgColor
+                    backgroundImageView.layer.borderColor = Colors.dark.cgColor
                     //
-                    backgroundImageView.backgroundColor = Colours.colour1
+                    backgroundImageView.backgroundColor = Colors.light
                     
                     // If red-orange background
                 }
@@ -291,7 +291,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let homeScreen = settings["HomeScreen"]![0]
                 cell.detailTextLabel?.text = NSLocalizedString(homeScreenArray[homeScreen], comment: "")
                 cell.detailTextLabel?.textAlignment = NSTextAlignment.left
-                cell.backgroundColor = Colours.colour1
+                cell.backgroundColor = Colors.light
                 cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 return cell
                 
@@ -309,7 +309,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 //
                 // timed schedule sessions
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-                cell.backgroundColor = Colours.colour1
+                cell.backgroundColor = Colors.light
                 cell.selectionStyle = .none
                 //
                 cell.textLabel?.text = NSLocalizedString("timedSession", comment: "")
@@ -342,13 +342,13 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 // Retreive Presentation Style
                 if automaticYogaArray[0] == 0 {
                     cell.detailTextLabel?.text = NSLocalizedString("off", comment: "")
-                    cell.detailTextLabel?.textColor = Colours.colour4
+                    cell.detailTextLabel?.textColor = Colors.red
                 } else {
                     cell.detailTextLabel?.text = NSLocalizedString("on", comment: "")
-                    cell.detailTextLabel?.textColor = Colours.colour3
+                    cell.detailTextLabel?.textColor = Colors.green
                 }
                 cell.detailTextLabel?.textAlignment = NSTextAlignment.left
-                cell.backgroundColor = Colours.colour1
+                cell.backgroundColor = Colors.light
                 cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 //
                 cell.accessoryType = .disclosureIndicator
@@ -373,7 +373,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
             cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-            cell.backgroundColor = Colours.colour1
+            cell.backgroundColor = Colors.light
             //
             return cell
             
@@ -385,7 +385,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 //
                 // timed schedule sessions
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-                cell.backgroundColor = Colours.colour1
+                cell.backgroundColor = Colors.light
                 cell.selectionStyle = .none
                 //
                 cell.textLabel?.text = NSLocalizedString("differentSessions", comment: "")
@@ -407,7 +407,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             // Default image
             case 1:
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-                cell.backgroundColor = Colours.colour1
+                cell.backgroundColor = Colors.light
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 //
@@ -424,7 +424,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             // Units
             case 2:
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-                cell.backgroundColor = Colours.colour1
+                cell.backgroundColor = Colors.light
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 //
@@ -444,7 +444,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // iCloud
         case 4:
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            cell.backgroundColor = Colours.colour1
+            cell.backgroundColor = Colors.light
             cell.selectionStyle = .none
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
             cell.textLabel?.text = NSLocalizedString("iCloudStorage", comment: "")
@@ -466,7 +466,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Reminders
         case 5:
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            cell.backgroundColor = Colours.colour1
+            cell.backgroundColor = Colors.light
             cell.selectionStyle = .none
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
             //
@@ -490,21 +490,21 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         case 6:
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
-            cell.backgroundColor = Colours.colour1
+            cell.backgroundColor = Colors.light
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
             //
             // Reset Walkthrough
             if indexPath.row == 0 {
                 cell.textLabel?.text = NSLocalizedString("resetWalkthrough", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
-                cell.backgroundColor = Colours.colour1
+                cell.backgroundColor = Colors.light
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 return cell
             // Reset App
             } else if indexPath.row == 1 {
                 cell.textLabel?.text = NSLocalizedString("resetApp", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
-                cell.backgroundColor = Colours.colour1
+                cell.backgroundColor = Colors.light
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
                 return cell
             }
@@ -706,7 +706,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let title = NSLocalizedString("resetWarning", comment: "")
                 let message = NSLocalizedString("resetWalkthroughWarningMessage", comment: "")
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alert.view.tintColor = Colours.colour2
+                alert.view.tintColor = Colors.dark
                 alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                 
                 let paragraphStyle = NSMutableParagraphStyle()
@@ -736,7 +736,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     let title = NSLocalizedString("resetTitle", comment: "")
                     let message = NSLocalizedString("resetMessage", comment: "")
                     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    alert.view.tintColor = Colours.colour1
+                    alert.view.tintColor = Colors.light
                     alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                     
                     let paragraphStyle = NSMutableParagraphStyle()
@@ -766,7 +766,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let title = NSLocalizedString("resetWarning", comment: "")
                 let message = NSLocalizedString("resetWarningMessage", comment: "")
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alert.view.tintColor = Colours.colour2
+                alert.view.tintColor = Colors.dark
                 alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                 
                 let paragraphStyle = NSMutableParagraphStyle()
@@ -786,7 +786,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     let title = NSLocalizedString("resetTitle", comment: "")
                     let message = NSLocalizedString("resetMessage", comment: "")
                     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    alert.view.tintColor = Colours.colour2
+                    alert.view.tintColor = Colors.dark
                     alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                     
                     let paragraphStyle = NSMutableParagraphStyle()
@@ -915,7 +915,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             let secondsLabel = UILabel()
             secondsLabel.text = String(restTimesArray[row])
             secondsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-            secondsLabel.textColor = Colours.colour1
+            secondsLabel.textColor = Colors.light
             //
             secondsLabel.textAlignment = .center
             return secondsLabel
@@ -925,7 +925,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             let screenLabel = UILabel()
             screenLabel.text = NSLocalizedString(homeScreenArray[row], comment: "")
             screenLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
-            screenLabel.textColor = Colours.colour1
+            screenLabel.textColor = Colors.light
             //
             screenLabel.textAlignment = .center
             return screenLabel
@@ -1028,10 +1028,10 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
-            walkthroughLabel.textColor = Colours.colour1
-            walkthroughLabel.backgroundColor = Colours.colour2
-            walkthroughHighlight.backgroundColor = Colours.colour2.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = Colours.colour2.cgColor
+            walkthroughLabel.textColor = Colors.light
+            walkthroughLabel.backgroundColor = Colors.dark
+            walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colors.dark.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: 125, height: 47 * 2)
             let homepageMaxY = TopBarHeights.combinedHeight + (47 * 2) + 44
@@ -1043,11 +1043,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.backgroundColor = Colours.colour2.withAlphaComponent(1)
+                self.walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    self.walkthroughHighlight.backgroundColor = Colours.colour2.withAlphaComponent(0.5)
+                    self.walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
                 }, completion: nil)
             })
             
@@ -1065,8 +1065,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour2
-            walkthroughTextColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1083,8 +1083,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour2
-            walkthroughTextColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             

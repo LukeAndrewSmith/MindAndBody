@@ -122,22 +122,22 @@ class MeditationGuided: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.backgroundColor = Colours.colour3
-        beginButton.setTitleColor(Colours.colour2, for: .normal)
+        beginButton.backgroundColor = Colors.green
+        beginButton.setTitleColor(Colors.dark, for: .normal)
         
         // View Elements
         //
         // Description
-        detailView.backgroundColor = Colours.colour2
+        detailView.backgroundColor = Colors.dark
         //
         detailTitle.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         detailTitle.text = NSLocalizedString("detail", comment: "")
         //
-        imageView.backgroundColor = Colours.colour2
+        imageView.backgroundColor = Colors.dark
         imageView.layer.cornerRadius = 3
         imageView.layer.masksToBounds = true
         //
@@ -190,7 +190,7 @@ class MeditationGuided: UIViewController {
         discussionScrollView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         //
         discussionTitle.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        discussionTitle.textColor = Colours.colour2
+        discussionTitle.textColor = Colors.dark
         discussionTitle.text = NSLocalizedString("discussion", comment: "")
         
         // Text

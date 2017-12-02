@@ -53,7 +53,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         super.viewDidLoad()
         
         // Colours
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("warmup", comment: ""))
@@ -63,46 +63,46 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         fullBody.layer.borderWidth = 5
-        fullBody.layer.borderColor = Colours.colour2.cgColor
+        fullBody.layer.borderColor = Colors.dark.cgColor
         fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
         fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         fullBody.titleLabel?.textAlignment = .center
-        fullBody.setTitleColor(Colours.colour2, for: .normal)
+        fullBody.setTitleColor(Colors.dark, for: .normal)
         //
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         upperBody.layer.borderWidth = 5
-        upperBody.layer.borderColor = Colours.colour2.cgColor
+        upperBody.layer.borderColor = Colors.dark.cgColor
         upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
         upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         upperBody.titleLabel?.textAlignment = .center
-        upperBody.setTitleColor(Colours.colour2, for: .normal)
+        upperBody.setTitleColor(Colors.dark, for: .normal)
         //
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
         lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         lowerBody.layer.borderWidth = 5
-        lowerBody.layer.borderColor = Colours.colour2.cgColor
+        lowerBody.layer.borderColor = Colors.dark.cgColor
         lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
         lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         lowerBody.titleLabel?.textAlignment = .center
-        lowerBody.setTitleColor(Colours.colour2, for: .normal)
+        lowerBody.setTitleColor(Colors.dark, for: .normal)
         //
         cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
         cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         cardio.layer.borderWidth = 5
-        cardio.layer.borderColor = Colours.colour2.cgColor
+        cardio.layer.borderColor = Colors.dark.cgColor
         cardio.titleLabel?.adjustsFontSizeToFitWidth = true
         cardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         cardio.titleLabel?.textAlignment = .center
-        cardio.setTitleColor(Colours.colour2, for: .normal)
+        cardio.setTitleColor(Colors.dark, for: .normal)
         //
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 5
-        custom.layer.borderColor = Colours.colour2.cgColor
+        custom.layer.borderColor = Colors.dark.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
         custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(Colours.colour2, for: .normal)
+        custom.setTitleColor(Colors.dark, for: .normal)
         custom.layer.cornerRadius = 49/2
         custom.layer.masksToBounds = true
         custom.titleLabel?.adjustsFontSizeToFitWidth = true

@@ -48,7 +48,7 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
         
         //
         // Done
-        doneButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+        doneButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
         doneButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
         
         //
@@ -165,9 +165,9 @@ class CustomScheduleWeekCell: UITableViewCell {
         }
         sessionsLabel.text = String(groupArray[row])
         if groupArray[row] != 0 {
-            sessionsLabel.textColor = Colours.colour3
+            sessionsLabel.textColor = Colors.green
         } else {
-            sessionsLabel.textColor = Colours.colour1
+            sessionsLabel.textColor = Colors.light
         }
     }
     

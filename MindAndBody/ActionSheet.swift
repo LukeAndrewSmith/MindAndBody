@@ -31,8 +31,8 @@ class ActionSheet {
         actionSheetBackgroundView.frame = UIScreen.main.bounds
         actionSheetBackgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         //
-        cancelButton.backgroundColor = Colours.colour1
-        cancelButton.setTitleColor(Colours.colour4, for: .normal)
+        cancelButton.backgroundColor = Colors.light
+        cancelButton.setTitleColor(Colors.red, for: .normal)
         cancelButton.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
         cancelButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         cancelButton.layer.cornerRadius = cancelButton.bounds.height / 2

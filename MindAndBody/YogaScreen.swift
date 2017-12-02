@@ -91,7 +91,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
         //
-        view.backgroundColor = Colours.colour2
+        view.backgroundColor = Colors.dark
         
         //
         var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -104,7 +104,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
             progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
             //
-            finishEarly.tintColor = Colours.colour4
+            finishEarly.tintColor = Colors.red
 //        // Auto on
 //        case 1:
 //            progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
@@ -118,15 +118,15 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         // Rounded Edges
         // Colour
-        progressBar.trackTintColor = Colours.colour1
-        progressBar.progressTintColor = Colours.colour3
+        progressBar.trackTintColor = Colors.light
+        progressBar.progressTintColor = Colors.green
         //
         progressBar.setProgress(0, animated: true)
         
         // TableView Background
         let tableViewBackground = UIView()
         //
-        tableViewBackground.backgroundColor = Colours.colour2
+        tableViewBackground.backgroundColor = Colors.dark
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
         //
         tableView.backgroundView = tableViewBackground
@@ -135,9 +135,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         // Play/Pause
         if automaticYogaArray[0] == 1 {
-            finishEarly.backgroundColor = Colours.colour2
+            finishEarly.backgroundColor = Colors.dark
             finishEarly.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
-            finishEarly.tintColor = Colours.colour4
+            finishEarly.tintColor = Colors.red
         }
     }
     
@@ -151,7 +151,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let title = NSLocalizedString("practiceStarted", comment: "")
         //let message = NSLocalizedString("resetMessage", comment: "")
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.view.tintColor = Colours.colour1
+        alert.view.tintColor = Colors.light
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
         self.present(alert, animated: true, completion: {
             //
@@ -191,7 +191,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         //
         let header = view as! UITableViewHeaderFooterView
-        header.contentView.backgroundColor = Colours.colour1
+        header.contentView.backgroundColor = Colors.light
         
         //
         if section == 0 {
@@ -237,8 +237,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             // Cell
             //
-            cell.backgroundColor = Colours.colour2
-            cell.tintColor = Colours.colour2
+            cell.backgroundColor = Colors.dark
+            cell.tintColor = Colors.dark
             tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             //
             cell.selectionStyle = .none
@@ -249,7 +249,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             cell.poseLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 33)
             cell.poseLabel?.textAlignment = .center
-            cell.poseLabel?.textColor = Colours.colour1
+            cell.poseLabel?.textColor = Colors.light
             cell.poseLabel?.numberOfLines = 0
             cell.poseLabel?.lineBreakMode = .byWordWrapping
             cell.poseLabel?.adjustsFontSizeToFitWidth = true
@@ -259,11 +259,11 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.breathsLabel?.text = String(breathsArray[indexPath.row]) + " " + NSLocalizedString("breathsC", comment: "")
             cell.breathsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 30)
             cell.breathsLabel?.textAlignment = .right
-            cell.breathsLabel?.textColor = Colours.colour1
+            cell.breathsLabel?.textColor = Colors.light
             cell.breathsLabel.adjustsFontSizeToFitWidth = true
             
             //
-            cell.explanationButton.tintColor = Colours.colour1
+            cell.explanationButton.tintColor = Colors.light
             
             //
             // Image
@@ -362,11 +362,11 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.separatorInset =  UIEdgeInsetsMake(0, 0, 0, 0)
             //
             cell.layer.borderWidth = 2
-            cell.layer.borderColor = Colours.colour1.cgColor
+            cell.layer.borderColor = Colors.light.cgColor
             //
             cell.textLabel?.text = NSLocalizedString("end", comment: "")
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
-            cell.textLabel?.textColor = Colours.colour1
+            cell.textLabel?.textColor = Colors.light
             cell.textLabel?.textAlignment = .center
             //
             return cell
@@ -731,7 +731,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if finishEarly.image(for: .normal) == #imageLiteral(resourceName: "Pause") {
             //
             finishEarly.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
-            finishEarly.tintColor = Colours.colour3
+            finishEarly.tintColor = Colors.green
             //
             if soundPlayer != nil {
                 if soundPlayer.isPlaying {
@@ -748,7 +748,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let title = NSLocalizedString("finishEarly", comment: "")
             let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.view.tintColor = Colours.colour2
+            alert.view.tintColor = Colors.dark
             alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             //
             let paragraphStyle = NSMutableParagraphStyle()
@@ -786,7 +786,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } else {
             //
             finishEarly.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
-            finishEarly.tintColor = Colours.colour4
+            finishEarly.tintColor = Colors.red
             //
             //
             if automaticYogaArray[3] != -1 {
@@ -846,7 +846,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let title = NSLocalizedString("finishEarly", comment: "")
             let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.view.tintColor = Colours.colour2
+            alert.view.tintColor = Colors.dark
             alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             //
             let paragraphStyle = NSMutableParagraphStyle()
@@ -931,10 +931,10 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
-            walkthroughLabel.textColor = Colours.colour2
-            walkthroughLabel.backgroundColor = Colours.colour1
-            walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = Colours.colour1.cgColor
+            walkthroughLabel.textColor = Colors.dark
+            walkthroughLabel.backgroundColor = Colors.light
+            walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colors.light.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
             walkthroughHighlight.center = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight / 2) * (13/8)) + 2)
@@ -945,11 +945,11 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(1)
+                self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
+                    self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
                 }, completion: nil)
             })
             
@@ -966,9 +966,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -985,9 +985,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1006,9 +1006,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             self.labelFrame = 0
             //
-            self.walkthroughBackgroundColor = Colours.colour1
-            self.walkthroughTextColor = Colours.colour2
-            self.highlightColor = Colours.colour1
+            self.walkthroughBackgroundColor = Colors.light
+            self.walkthroughTextColor = Colors.dark
+            self.highlightColor = Colors.light
             //
             self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
             
@@ -1026,8 +1026,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
             highlightColor = .clear
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
@@ -1050,8 +1050,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 //
                 self.labelFrame = 0
                 //
-                self.walkthroughBackgroundColor = Colours.colour1
-                self.walkthroughTextColor = Colours.colour2
+                self.walkthroughBackgroundColor = Colors.light
+                self.walkthroughTextColor = Colors.dark
                 self.highlightColor = .clear
                 //
                 self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
@@ -1072,7 +1072,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 //
                 let upSwipe = UIView()
                 upSwipe.frame.size = CGSize(width: 50, height: 50)
-                upSwipe.backgroundColor = Colours.colour1
+                upSwipe.backgroundColor = Colors.light
                 upSwipe.layer.cornerRadius = 25
                 upSwipe.clipsToBounds = true
                 upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (7/8)) + 2
@@ -1100,9 +1100,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     //
                     self.labelFrame = 0
                     //
-                    self.walkthroughBackgroundColor = Colours.colour1
-                    self.walkthroughTextColor = Colours.colour2
-                    self.highlightColor = Colours.colour1
+                    self.walkthroughBackgroundColor = Colors.light
+                    self.walkthroughTextColor = Colors.dark
+                    self.highlightColor = Colors.light
                     //
                     self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
                     //
@@ -1121,9 +1121,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             

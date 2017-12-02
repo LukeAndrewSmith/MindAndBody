@@ -17,10 +17,10 @@ import CoreGraphics
 class MindBody: UIViewController {
     
     // Previous Colours
-    //            UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "Colours.colour1")
-    //            UserDefaults.standard.setColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), forKey: "Colours.colour2")
-    //  (UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "Colours.colour2")
-    //  (UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "Colours.colour3")
+    //            UserDefaults.standard.setColor(UIColor(red:0.67, green:0.13, blue:0.26, alpha:1.0), forKey: "Colors.light")
+    //            UserDefaults.standard.setColor(UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0), forKey: "Colors.dark")
+    //  (UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), forKey: "Colors.dark")
+    //  (UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0), forKey: "Colors.green")
     
     
     //
@@ -116,74 +116,74 @@ class MindBody: UIViewController {
             // Black
         // All Black with no blur
         case BackgroundImages.backgroundImageArray.count:
-            Warmup.setTitleColor(Colours.colour2, for: .normal)
-            Workout.setTitleColor(Colours.colour2, for: .normal)
-            Cardio.setTitleColor(Colours.colour2, for: .normal)
-            Stretching.setTitleColor(Colours.colour2, for: .normal)
-            Yoga.setTitleColor(Colours.colour2, for: .normal)
-            Meditation.setTitleColor(Colours.colour2, for: .normal)
-            body.textColor = Colours.colour2
-            mind.textColor = Colours.colour2
+            Warmup.setTitleColor(Colors.dark, for: .normal)
+            Workout.setTitleColor(Colors.dark, for: .normal)
+            Cardio.setTitleColor(Colors.dark, for: .normal)
+            Stretching.setTitleColor(Colors.dark, for: .normal)
+            Yoga.setTitleColor(Colors.dark, for: .normal)
+            Meditation.setTitleColor(Colors.dark, for: .normal)
+            body.textColor = Colors.dark
+            mind.textColor = Colors.dark
             // All Black
             //        case 1:   // 3
-            //            Warmup.setTitleColor(Colours.colour2, for: .normal)
-            //            Workout.setTitleColor(Colours.colour2, for: .normal)
-            //            Cardio.setTitleColor(Colours.colour2, for: .normal)
-            //            Stretching.setTitleColor(Colours.colour2, for: .normal)
-            //            Yoga.setTitleColor(Colours.colour2, for: .normal)
-            //            Meditation.setTitleColor(Colours.colour2, for: .normal)
-            //            body.textColor = Colours.colour2
-            //            mind.textColor = Colours.colour2
+            //            Warmup.setTitleColor(Colors.dark, for: .normal)
+            //            Workout.setTitleColor(Colors.dark, for: .normal)
+            //            Cardio.setTitleColor(Colors.dark, for: .normal)
+            //            Stretching.setTitleColor(Colors.dark, for: .normal)
+            //            Yoga.setTitleColor(Colors.dark, for: .normal)
+            //            Meditation.setTitleColor(Colors.dark, for: .normal)
+            //            body.textColor = Colors.dark
+            //            mind.textColor = Colors.dark
         // All White
         case 4,3,0,1,2,5,6:
-            Warmup.setTitleColor(Colours.colour1, for: .normal)
-            Workout.setTitleColor(Colours.colour1, for: .normal)
-            Cardio.setTitleColor(Colours.colour1, for: .normal)
-            Stretching.setTitleColor(Colours.colour1, for: .normal)
-            Yoga.setTitleColor(Colours.colour1, for: .normal)
-            Meditation.setTitleColor(Colours.colour1, for: .normal)
-            body.textColor = Colours.colour1
-            mind.textColor = Colours.colour1
+            Warmup.setTitleColor(Colors.light, for: .normal)
+            Workout.setTitleColor(Colors.light, for: .normal)
+            Cardio.setTitleColor(Colors.light, for: .normal)
+            Stretching.setTitleColor(Colors.light, for: .normal)
+            Yoga.setTitleColor(Colors.light, for: .normal)
+            Meditation.setTitleColor(Colors.light, for: .normal)
+            body.textColor = Colors.light
+            mind.textColor = Colors.light
             // White text, black body and mind
             //        case 5:
-            //            Warmup.setTitleColor(Colours.colour1, for: .normal)
-            //            Workout.setTitleColor(Colours.colour1, for: .normal)
-            //            Cardio.setTitleColor(Colours.colour1, for: .normal)
-            //            Stretching.setTitleColor(Colours.colour1, for: .normal)
-            //            Yoga.setTitleColor(Colours.colour1, for: .normal)
-            //            Meditation.setTitleColor(Colours.colour1, for: .normal)
-            //            body.textColor = Colours.colour2
-            //            mind.textColor = Colours.colour2
+            //            Warmup.setTitleColor(Colors.light, for: .normal)
+            //            Workout.setTitleColor(Colors.light, for: .normal)
+            //            Cardio.setTitleColor(Colors.light, for: .normal)
+            //            Stretching.setTitleColor(Colors.light, for: .normal)
+            //            Yoga.setTitleColor(Colors.light, for: .normal)
+            //            Meditation.setTitleColor(Colors.light, for: .normal)
+            //            body.textColor = Colors.dark
+            //            mind.textColor = Colors.dark
             //        // Black text, black body, white mind
             //        case 6:
-            //            Warmup.setTitleColor(Colours.colour2, for: .normal)
-            //            Workout.setTitleColor(Colours.colour2, for: .normal)
-            //            Cardio.setTitleColor(Colours.colour2, for: .normal)
-            //            Stretching.setTitleColor(Colours.colour2, for: .normal)
-            //            Yoga.setTitleColor(Colours.colour2, for: .normal)
-            //            Meditation.setTitleColor(Colours.colour2, for: .normal)
-            //            body.textColor = Colours.colour2
-            //            mind.textColor = Colours.colour1
+            //            Warmup.setTitleColor(Colors.dark, for: .normal)
+            //            Workout.setTitleColor(Colors.dark, for: .normal)
+            //            Cardio.setTitleColor(Colors.dark, for: .normal)
+            //            Stretching.setTitleColor(Colors.dark, for: .normal)
+            //            Yoga.setTitleColor(Colors.dark, for: .normal)
+            //            Meditation.setTitleColor(Colors.dark, for: .normal)
+            //            body.textColor = Colors.dark
+            //            mind.textColor = Colors.light
             // White Text, Black body, White mind
             //        case 6: // 0
-            //            Warmup.setTitleColor(Colours.colour1, for: .normal)
-            //            Workout.setTitleColor(Colours.colour1, for: .normal)
-            //            Cardio.setTitleColor(Colours.colour1, for: .normal)
-            //            Stretching.setTitleColor(Colours.colour1, for: .normal)
-            //            Yoga.setTitleColor(Colours.colour1, for: .normal)
-            //            Meditation.setTitleColor(Colours.colour1, for: .normal)
-            //            body.textColor = Colours.colour2
-            //            mind.textColor = Colours.colour1
+            //            Warmup.setTitleColor(Colors.light, for: .normal)
+            //            Workout.setTitleColor(Colors.light, for: .normal)
+            //            Cardio.setTitleColor(Colors.light, for: .normal)
+            //            Stretching.setTitleColor(Colors.light, for: .normal)
+            //            Yoga.setTitleColor(Colors.light, for: .normal)
+            //            Meditation.setTitleColor(Colors.light, for: .normal)
+            //            body.textColor = Colors.dark
+            //            mind.textColor = Colors.light
             // White Text, Black mind, White body
             //        case 2:
-            //            Warmup.setTitleColor(Colours.colour1, for: .normal)
-            //            Workout.setTitleColor(Colours.colour1, for: .normal)
-            //            Cardio.setTitleColor(Colours.colour1, for: .normal)
-            //            Stretching.setTitleColor(Colours.colour1, for: .normal)
-            //            Yoga.setTitleColor(Colours.colour1, for: .normal)
-            //            Meditation.setTitleColor(Colours.colour1, for: .normal)
-            //            body.textColor = Colours.colour1
-            //            mind.textColor = Colours.colour2
+            //            Warmup.setTitleColor(Colors.light, for: .normal)
+            //            Workout.setTitleColor(Colors.light, for: .normal)
+            //            Cardio.setTitleColor(Colors.light, for: .normal)
+            //            Stretching.setTitleColor(Colors.light, for: .normal)
+            //            Yoga.setTitleColor(Colors.light, for: .normal)
+            //            Meditation.setTitleColor(Colors.light, for: .normal)
+            //            body.textColor = Colors.light
+            //            mind.textColor = Colors.dark
         //
         default: break
         }
@@ -213,20 +213,20 @@ class MindBody: UIViewController {
         // Title
         navigationBar.title = "Mind & Body"
         // Appearance
-        self.navigationController?.navigationBar.tintColor = Colours.colour1
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colours.colour1, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
-        self.navigationController?.navigationBar.barTintColor = Colours.colour2
-        self.tabBarController?.tabBar.barTintColor = Colours.colour2
-        UITabBar.appearance().barTintColor = Colours.colour2
+        self.navigationController?.navigationBar.tintColor = Colors.light
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
+        self.tabBarController?.tabBar.barTintColor = Colors.dark
+        UITabBar.appearance().barTintColor = Colors.dark
         tabBarController?.tabBar.barStyle = .default
-        self.tabBarController?.tabBar.barTintColor = Colours.colour2
+        self.tabBarController?.tabBar.barTintColor = Colors.dark
         //
         // Navigation Items
-        slideMenu.tintColor = Colours.colour1
-        //viewIndicator.tintColor = Colours.colour1
+        slideMenu.tintColor = Colors.light
+        //viewIndicator.tintColor = Colors.light
         //
         
-        self.tabBarController?.tabBar.tintColor = Colours.colour1
+        self.tabBarController?.tabBar.tintColor = Colors.light
         
         
         // Button Customization
@@ -235,7 +235,7 @@ class MindBody: UIViewController {
         Warmup.setTitle(NSLocalizedString("warmup", comment: ""), for: UIControlState.normal)
         Warmup.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         Warmup.layer.borderWidth = 5
-        Warmup.layer.borderColor = Colours.colour2.cgColor
+        Warmup.layer.borderColor = Colors.dark.cgColor
         Warmup.titleLabel?.adjustsFontSizeToFitWidth = true
         Warmup.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Warmup.titleLabel?.textAlignment = .center
@@ -244,7 +244,7 @@ class MindBody: UIViewController {
         Workout.setTitle(NSLocalizedString("workout", comment: ""), for: UIControlState.normal)
         Workout.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         Workout.layer.borderWidth = 5
-        Workout.layer.borderColor = Colours.colour2.cgColor
+        Workout.layer.borderColor = Colors.dark.cgColor
         Workout.titleLabel?.adjustsFontSizeToFitWidth = true
         Workout.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Workout.titleLabel?.textAlignment = .center
@@ -253,7 +253,7 @@ class MindBody: UIViewController {
         Stretching.setTitle(NSLocalizedString("stretching", comment: ""), for: UIControlState.normal)
         Stretching.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         Stretching.layer.borderWidth = 5
-        Stretching.layer.borderColor = Colours.colour2.cgColor
+        Stretching.layer.borderColor = Colors.dark.cgColor
         Stretching.titleLabel?.adjustsFontSizeToFitWidth = true
         Stretching.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Stretching.titleLabel?.textAlignment = .center
@@ -262,7 +262,7 @@ class MindBody: UIViewController {
         Cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
         Cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         Cardio.layer.borderWidth = 5
-        Cardio.layer.borderColor = Colours.colour2.cgColor
+        Cardio.layer.borderColor = Colors.dark.cgColor
         Cardio.titleLabel?.adjustsFontSizeToFitWidth = true
         Cardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Cardio.titleLabel?.textAlignment = .center
@@ -272,7 +272,7 @@ class MindBody: UIViewController {
         Yoga.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         Yoga.titleLabel!.adjustsFontSizeToFitWidth = true
         Yoga.layer.borderWidth = 5
-        Yoga.layer.borderColor = Colours.colour2.cgColor
+        Yoga.layer.borderColor = Colors.dark.cgColor
         Yoga.titleLabel?.adjustsFontSizeToFitWidth = true
         Yoga.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Yoga.titleLabel?.textAlignment = .center
@@ -281,7 +281,7 @@ class MindBody: UIViewController {
         Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
         Meditation.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         Meditation.layer.borderWidth = 5
-        Meditation.layer.borderColor = Colours.colour2.cgColor
+        Meditation.layer.borderColor = Colors.dark.cgColor
         Meditation.titleLabel?.adjustsFontSizeToFitWidth = true
         Meditation.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Meditation.titleLabel?.textAlignment = .center
@@ -290,12 +290,12 @@ class MindBody: UIViewController {
         let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         let backgroundIndex = settings["BackgroundImage"]![0]
         if backgroundIndex != BackgroundImages.backgroundImageArray.count {
-            Warmup.backgroundColor = Colours.colour2.withAlphaComponent(0.72)
-            Workout.backgroundColor = Colours.colour2.withAlphaComponent(0.72)
-            Cardio.backgroundColor = Colours.colour2.withAlphaComponent(0.72)
-            Stretching.backgroundColor = Colours.colour2.withAlphaComponent(0.72)
-            Yoga.backgroundColor = Colours.colour2.withAlphaComponent(0.72)
-            Meditation.backgroundColor = Colours.colour2.withAlphaComponent(0.72)
+            Warmup.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+            Workout.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+            Cardio.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+            Stretching.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+            Yoga.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+            Meditation.backgroundColor = Colors.dark.withAlphaComponent(0.72)
         }
         
         // Iphone 5/SE layout
@@ -392,8 +392,8 @@ class MindBody: UIViewController {
         let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         let backgroundIndex = settings["BackgroundImage"]![0]
         if backgroundIndex != BackgroundImages.backgroundImageArray.count {
-            body.backgroundColor = Colours.colour2.withAlphaComponent(0.72)
-            mind.backgroundColor = Colours.colour2.withAlphaComponent(0.72)
+            body.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+            mind.backgroundColor = Colors.dark.withAlphaComponent(0.72)
         }
     }
     
@@ -528,10 +528,10 @@ class MindBody: UIViewController {
             walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
-            walkthroughLabel.textColor = Colours.colour2
-            walkthroughLabel.backgroundColor = Colours.colour1
-            walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = Colours.colour1.cgColor
+            walkthroughLabel.textColor = Colors.dark
+            walkthroughLabel.backgroundColor = Colors.light
+            walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colors.light.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: 172, height: 33)
             walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: 40)
@@ -542,11 +542,11 @@ class MindBody: UIViewController {
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(1)
+                self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
+                    self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
                 }, completion: nil)
             })
             
@@ -563,8 +563,8 @@ class MindBody: UIViewController {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -582,8 +582,8 @@ class MindBody: UIViewController {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -603,8 +603,8 @@ class MindBody: UIViewController {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour2
-            walkthroughTextColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
             
@@ -621,8 +621,8 @@ class MindBody: UIViewController {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour2
-            walkthroughTextColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -639,8 +639,8 @@ class MindBody: UIViewController {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour2
-            walkthroughTextColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
             
@@ -657,8 +657,8 @@ class MindBody: UIViewController {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour2
-            walkthroughTextColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
             
@@ -675,8 +675,8 @@ class MindBody: UIViewController {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour2
-            walkthroughTextColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
             
@@ -693,8 +693,8 @@ class MindBody: UIViewController {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour2
-            walkthroughTextColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
             
@@ -711,8 +711,8 @@ class MindBody: UIViewController {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour2
-            walkthroughTextColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
             
@@ -728,8 +728,8 @@ class MindBody: UIViewController {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour2
-            walkthroughTextColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
             

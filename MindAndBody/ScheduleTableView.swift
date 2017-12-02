@@ -56,7 +56,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 30)!
             header.textLabel?.textAlignment = .center
-            header.textLabel?.textColor = Colours.colour1
+            header.textLabel?.textColor = Colors.light
             
             //
             header.backgroundColor = .clear
@@ -65,7 +65,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             //
             // Seperator
             seperator.frame = CGRect(x: 27, y: header.bounds.height - 1, width: view.bounds.width - 54, height: 1)
-            seperator.backgroundColor = Colours.colour1.cgColor
+            seperator.backgroundColor = Colors.light.cgColor
             seperator.opacity = 0.5
             header.layer.addSublayer(seperator)
         case scheduleChoiceTable:
@@ -73,11 +73,11 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
             header.textLabel?.textAlignment = .center
-            header.textLabel?.textColor = Colours.colour2
+            header.textLabel?.textColor = Colors.dark
             //
             let background = UIView()
             background.frame = header.bounds
-            background.backgroundColor = Colours.colour1
+            background.backgroundColor = Colors.light
             header.backgroundView = background
         default: break
         }
@@ -165,7 +165,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 // Groups
                 let dayLabel = UILabel()
                 dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
-                dayLabel.textColor = Colours.colour1
+                dayLabel.textColor = Colors.light
                 //
                 let text = sessionData.sortedGroups[schedules[ScheduleVariables.shared.selectedSchedule][0][ScheduleVariables.shared.selectedDay][indexPath.row] as! Int]![0][0]
                 
@@ -183,14 +183,14 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 if ScheduleVariables.shared.shouldReloadChoice {
                     if indexPath.row != ScheduleVariables.shared.selectedRows[0] {
                         if isCompleted(row: indexPath.row) {
-                            dayLabel.textColor = Colours.colour3
-                            cell.tintColor = Colours.colour3
+                            dayLabel.textColor = Colors.green
+                            cell.tintColor = Colors.green
                             cell.accessoryType = .checkmark
                         }
                     }
                 } else if isCompleted(row: indexPath.row) {
-                    dayLabel.textColor = Colours.colour3
-                    cell.tintColor = Colours.colour3
+                    dayLabel.textColor = Colors.green
+                    cell.tintColor = Colors.green
                     cell.accessoryType = .checkmark
                 }
                 
@@ -200,7 +200,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 if indexPath.row == 0 {
                     let title = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][0]
                     cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 24)!
-                    cell.textLabel?.textColor = Colours.colour1
+                    cell.textLabel?.textColor = Colors.light
                     cell.textLabel?.text = NSLocalizedString(title, comment: "")
                     cell.textLabel?.textAlignment = .center
                     //                    cell.textLabel?.numberOfLines = 2
@@ -212,21 +212,21 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     // Title Underline
                     let seperator = CALayer()
                     seperator.frame = CGRect(x: view.bounds.width / 4, y: 72 - 1, width: view.bounds.width / 2, height: 1)
-                    seperator.backgroundColor = Colours.colour1.cgColor
+                    seperator.backgroundColor = Colors.light.cgColor
                     seperator.opacity = 0.25
                     cell.layer.addSublayer(seperator)
                     //
                     // Color if last choice
                     if isLastChoice() {
-                        cell.textLabel?.textColor = Colours.colour3
-                        seperator.backgroundColor = Colours.colour3.cgColor
+                        cell.textLabel?.textColor = Colors.green
+                        seperator.backgroundColor = Colors.green.cgColor
                     }
                     // Else if selection
                 } else {
                     //
                     let choiceLabel = UILabel()
                     choiceLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
-                    choiceLabel.textColor = Colours.colour1
+                    choiceLabel.textColor = Colors.light
                     //
                     // Normal
                     //
@@ -252,8 +252,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                         // - 1 as title included, so rows offset by 1
                         if indexPath.row != 0 {
                             if isCompleted(row: indexPath.row - 1) {
-                                choiceLabel.textColor = Colours.colour3
-                                cell.tintColor = Colours.colour3
+                                choiceLabel.textColor = Colors.green
+                                cell.tintColor = Colors.green
                                 cell.accessoryType = .checkmark
                             }
                         }
@@ -268,17 +268,17 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             switch indexPath.row {
             case schedules.count:
                 cell.imageView?.image = #imageLiteral(resourceName: "Plus")
-                cell.tintColor = Colours.colour1
+                cell.tintColor = Colors.light
                 //
                 cell.contentView.transform = CGAffineTransform(scaleX: -1,y: 1)
                 cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1)
             default:
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
                 cell.textLabel?.textAlignment = .left
-                cell.textLabel?.textColor = Colours.colour1
+                cell.textLabel?.textColor = Colors.light
                 if indexPath.row == selectedSchedule {
                     cell.accessoryType = .checkmark
-                    cell.tintColor = Colours.colour3
+                    cell.tintColor = Colors.green
                 }
                 cell.textLabel?.text = NSLocalizedString(schedules[indexPath.row][1][0][0] as! String, comment: "")
             }
@@ -425,7 +425,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 let indexToReload = IndexPath(row: ScheduleVariables.shared.selectedSchedule, section: 0)
                 let cell = scheduleChoiceTable.cellForRow(at: indexToReload)
                 cell?.accessoryType = .checkmark
-                cell?.tintColor = Colours.colour3
+                cell?.tintColor = Colors.green
             }
         }
     }

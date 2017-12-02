@@ -50,7 +50,7 @@ class CircuitChoiceG: UIViewController  {
         super.viewDidLoad()
         
         // Colours
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         
         // Titles
         navigationBar.title = (NSLocalizedString("circuit", comment: ""))
@@ -58,21 +58,21 @@ class CircuitChoiceG: UIViewController  {
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        fullBody.setTitleColor(Colours.colour2, for: .normal)
+        fullBody.setTitleColor(Colors.dark, for: .normal)
         fullBody.layer.borderWidth = 5
-        fullBody.layer.borderColor = Colours.colour2.cgColor
+        fullBody.layer.borderColor = Colors.dark.cgColor
         //
         upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        upperBody.setTitleColor(Colours.colour2, for: .normal)
+        upperBody.setTitleColor(Colors.dark, for: .normal)
         upperBody.layer.borderWidth = 5
-        upperBody.layer.borderColor = Colours.colour2.cgColor
+        upperBody.layer.borderColor = Colors.dark.cgColor
         //
         lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
-        lowerBody.setTitleColor(Colours.colour2, for: .normal)
+        lowerBody.setTitleColor(Colors.dark, for: .normal)
         lowerBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         lowerBody.layer.borderWidth = 5
-        lowerBody.layer.borderColor = Colours.colour2.cgColor
+        lowerBody.layer.borderColor = Colors.dark.cgColor
         
         // Iphone 5/SE
         if IPhoneType.shared.iPhoneType() == 0 {

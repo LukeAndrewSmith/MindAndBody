@@ -75,11 +75,11 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Layout
     func layoutView() {
         //
-        view.backgroundColor = Colours.colour2
+        view.backgroundColor = Colors.dark
         //
         // Navigation Bar
         fakeNavigationBarLabel.text = NSLocalizedString("scheduleOverview", comment: "")
-        questionMarkButton.tintColor = Colours.colour1
+        questionMarkButton.tintColor = Colors.light
         //
         // BackgroundImage
         addBackgroundImage(withBlur: true, fullScreen: true)
@@ -88,14 +88,14 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // TableView
         scheduleOverviewTable.backgroundColor = .clear
         scheduleOverviewTable.tableFooterView = UIView()
-        scheduleOverviewTable.separatorColor = Colours.colour1.withAlphaComponent(0.27)
+        scheduleOverviewTable.separatorColor = Colors.light.withAlphaComponent(0.27)
         scheduleOverviewTable.isScrollEnabled = false
         // Switches
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
             // App chooses sessions switch
-            appChoosesSessionsOnOffSwitch.onTintColor = Colours.colour3
-            appChoosesSessionsOnOffSwitch.tintColor = Colours.colour4
-            appChoosesSessionsOnOffSwitch.backgroundColor = Colours.colour4
+            appChoosesSessionsOnOffSwitch.onTintColor = Colors.green
+            appChoosesSessionsOnOffSwitch.tintColor = Colors.red
+            appChoosesSessionsOnOffSwitch.backgroundColor = Colors.red
             appChoosesSessionsOnOffSwitch.layer.cornerRadius = appChoosesSessionsOnOffSwitch.bounds.height / 2
             appChoosesSessionsOnOffSwitch.clipsToBounds = true
             appChoosesSessionsOnOffSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
@@ -108,9 +108,9 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 appChoosesSessionsOnOffSwitch.isOn = false
             }
             // View Full week switch
-            viewFullWeekSwitch.onTintColor = Colours.colour3
-            viewFullWeekSwitch.tintColor = Colours.colour4
-            viewFullWeekSwitch.backgroundColor = Colours.colour4
+            viewFullWeekSwitch.onTintColor = Colors.green
+            viewFullWeekSwitch.tintColor = Colors.red
+            viewFullWeekSwitch.backgroundColor = Colors.red
             viewFullWeekSwitch.layer.cornerRadius = appChoosesSessionsOnOffSwitch.bounds.height / 2
             viewFullWeekSwitch.clipsToBounds = true
             viewFullWeekSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
@@ -123,9 +123,9 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 viewFullWeekSwitch.isOn = true
             }
             // App Helps Create Schedule switch
-            appHelpsCreateScheduleSwitch.onTintColor = Colours.colour3
-            appHelpsCreateScheduleSwitch.tintColor = Colours.colour4
-            appHelpsCreateScheduleSwitch.backgroundColor = Colours.colour4
+            appHelpsCreateScheduleSwitch.onTintColor = Colors.green
+            appHelpsCreateScheduleSwitch.tintColor = Colors.red
+            appHelpsCreateScheduleSwitch.backgroundColor = Colors.red
             appHelpsCreateScheduleSwitch.layer.cornerRadius = appChoosesSessionsOnOffSwitch.bounds.height / 2
             appHelpsCreateScheduleSwitch.clipsToBounds = true
             appHelpsCreateScheduleSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
@@ -140,7 +140,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         //
         // Done Button
-        saveButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+        saveButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
         saveButton.setTitle(NSLocalizedString("save", comment: ""), for: .normal)
         //
         rearrangeScheduleHidden()
@@ -166,7 +166,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Header
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)!
-        header.textLabel?.textColor = Colours.colour1
+        header.textLabel?.textColor = Colors.light
         header.textLabel?.text = header.textLabel?.text?.capitalized
         
         //
@@ -175,7 +175,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         let seperator = CALayer()
         seperator.frame = CGRect(x: 16, y: header.frame.size.height - 1, width: view.frame.size.width - 32, height: 1)
-        seperator.backgroundColor = Colours.colour1.cgColor
+        seperator.backgroundColor = Colors.light.cgColor
         seperator.opacity = 0.5
         header.layer.addSublayer(seperator)
     }
@@ -213,10 +213,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        cell.textLabel?.textColor = Colours.colour1
+        cell.textLabel?.textColor = Colors.light
         // Detail text label
         cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-        cell.detailTextLabel?.textColor = Colours.colour1
+        cell.detailTextLabel?.textColor = Colors.light
         
         //
         // Detail label, shows schedule overview data
@@ -286,7 +286,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             let inputTitle = NSLocalizedString("scheduleInputTitle", comment: "")
             //
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-            alert.view.tintColor = Colours.colour2
+            alert.view.tintColor = Colors.dark
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
             //2. Add the text field
             alert.addTextField { (textField: UITextField) in
@@ -431,7 +431,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Alert View asking if you really want to delete
         let title = NSLocalizedString("deleteScheduleWarning", comment: "")
         let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
-        alert.view.tintColor = Colours.colour2
+        alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
         
         // Delete schedule action

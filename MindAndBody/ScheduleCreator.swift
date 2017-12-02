@@ -115,11 +115,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         // Dragging
-        draggingLabel.textColor = Colours.colour1
+        draggingLabel.textColor = Colors.light
         draggingLabel.textAlignment = .center
         draggingLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         draggingLabel.lineBreakMode = .byWordWrapping
-        draggingLabel.layer.borderColor = Colours.colour1.withAlphaComponent(0.5).cgColor
+        draggingLabel.layer.borderColor = Colors.light.withAlphaComponent(0.5).cgColor
         draggingLabel.layer.borderWidth = 1
         draggingLabel.layer.cornerRadius = 15
         draggingLabel.clipsToBounds = true
@@ -137,8 +137,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         //
         // Create schedule button
-        createScheduleButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
-        createScheduleButton.tintColor = Colours.colour1
+        createScheduleButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
+        createScheduleButton.tintColor = Colors.light
         createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
         
     }
@@ -189,7 +189,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.groupLabelArray[i].tag = 1
                 cell.groupLabelArray[i].alpha = 1
                 cell.groupLabelArray[i].layer.borderWidth = 1
-                cell.groupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
+                cell.groupLabelArray[i].layer.borderColor = Colors.light.withAlphaComponent(0.75).cgColor
                 cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                 cell.groupLabelArray[i].clipsToBounds = true
                 //
@@ -333,9 +333,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }
                     let title = groupTitle + nGroupsString
                     bigGroupLabelArray[i].text = title
-                    bigGroupLabelArray[i].textColor = Colours.colour1
+                    bigGroupLabelArray[i].textColor = Colors.light
                     bigGroupLabelArray[i].alpha = 1
-                    bigGroupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.5).cgColor
+                    bigGroupLabelArray[i].layer.borderColor = Colors.light.withAlphaComponent(0.5).cgColor
                     bigGroupLabelArray[i].layer.borderWidth = 1
                     bigGroupLabelArray[i].isUserInteractionEnabled = true
                     bigGroupLabelArray[i].layer.cornerRadius = 15
@@ -345,8 +345,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     // Make label dark and green if all session of group have been chosen
                     if dayTableGroupArray[indexOfGroup] == schedules[ScheduleVariables.shared.selectedSchedule][2][2][indexOfGroup + 1] as! Int {
                         bigGroupLabelArray[i].alpha = 0.75
-                        bigGroupLabelArray[i].layer.borderColor = Colours.colour3.withAlphaComponent(0.5).cgColor
-                        bigGroupLabelArray[i].textColor = Colours.colour3
+                        bigGroupLabelArray[i].layer.borderColor = Colors.green.withAlphaComponent(0.5).cgColor
+                        bigGroupLabelArray[i].textColor = Colors.green
                     }
                 }
             }
@@ -360,9 +360,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Not selected filled in
                 let title = groupTitle
                 bigGroupLabelArray[i].text = title
-                bigGroupLabelArray[i].textColor = Colours.colour1
+                bigGroupLabelArray[i].textColor = Colors.light
                 bigGroupLabelArray[i].alpha = 1
-                bigGroupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.5).cgColor
+                bigGroupLabelArray[i].layer.borderColor = Colors.light.withAlphaComponent(0.5).cgColor
                 bigGroupLabelArray[i].layer.borderWidth = 1
                 bigGroupLabelArray[i].isUserInteractionEnabled = true
                 bigGroupLabelArray[i].layer.cornerRadius = 15
@@ -508,7 +508,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         break
                     } else if cell.groupLabelArray[i].tag == 0 {
                         cell.groupLabelArray[i].tag = 2
-                        cell.groupLabelArray[i].backgroundColor = Colours.colour1
+                        cell.groupLabelArray[i].backgroundColor = Colors.light
                         cell.groupLabelArray[i].alpha = 0.5
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
@@ -537,11 +537,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
                 // ADD INDICATOR
                 for i in 0...cell.groupLabelArray.count - 1 {
-                    if cell.groupLabelArray[i].backgroundColor == Colours.colour1 {
+                    if cell.groupLabelArray[i].backgroundColor == Colors.light {
                         break
                     } else if cell.groupLabelArray[i].tag == 0 {
                         cell.groupLabelArray[i].tag = 2
-                        cell.groupLabelArray[i].backgroundColor = Colours.colour1
+                        cell.groupLabelArray[i].backgroundColor = Colors.light
                         cell.groupLabelArray[i].alpha = 0.5
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
@@ -606,7 +606,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         cell.groupLabelArray[i].tag = 1
                         cell.groupLabelArray[i].alpha = 1
                         cell.groupLabelArray[i].layer.borderWidth = 1
-                        cell.groupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
+                        cell.groupLabelArray[i].layer.borderColor = Colors.light.withAlphaComponent(0.75).cgColor
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
                         //
@@ -717,7 +717,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             cell.groupLabelArray[k].tag = 1
                             cell.groupLabelArray[k].alpha = 1
                             cell.groupLabelArray[k].layer.borderWidth = 1
-                            cell.groupLabelArray[k].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
+                            cell.groupLabelArray[k].layer.borderColor = Colors.light.withAlphaComponent(0.75).cgColor
                             cell.groupLabelArray[k].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[k].clipsToBounds = true
                             //
@@ -746,7 +746,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     // If custom schedule, turn createschedulebutton into bin
                     if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 {
-                        createScheduleButton.backgroundColor = Colours.colour4.withAlphaComponent(0.25)
+                        createScheduleButton.backgroundColor = Colors.red.withAlphaComponent(0.25)
                         createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
                         createScheduleButton.setTitle("", for: .normal)
                     }
@@ -807,7 +807,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             break
                         } else if cell.groupLabelArray[i].tag == 0 {
                             cell.groupLabelArray[i].tag = 2
-                            cell.groupLabelArray[i].backgroundColor = Colours.colour1
+                            cell.groupLabelArray[i].backgroundColor = Colors.light
                             cell.groupLabelArray[i].alpha = 0.5
                             cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[i].clipsToBounds = true
@@ -846,11 +846,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
                 // ADD INDICATOR
                 for i in 0...cell.groupLabelArray.count - 1 {
-                    if cell.groupLabelArray[i].backgroundColor == Colours.colour1 {
+                    if cell.groupLabelArray[i].backgroundColor == Colors.light {
                         break
                     } else if cell.groupLabelArray[i].tag == 0 {
                         cell.groupLabelArray[i].tag = 2
-                        cell.groupLabelArray[i].backgroundColor = Colours.colour1
+                        cell.groupLabelArray[i].backgroundColor = Colors.light
                         cell.groupLabelArray[i].alpha = 0.5
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
@@ -872,11 +872,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
                 // ADD INDICATOR
                 for i in 0...cell.groupLabelArray.count - 1 {
-                    if cell.groupLabelArray[i].backgroundColor == Colours.colour1 {
+                    if cell.groupLabelArray[i].backgroundColor == Colors.light {
                         break
                     } else if cell.groupLabelArray[i].tag == 0 {
                         cell.groupLabelArray[i].tag = 2
-                        cell.groupLabelArray[i].backgroundColor = Colours.colour1
+                        cell.groupLabelArray[i].backgroundColor = Colors.light
                         cell.groupLabelArray[i].alpha = 0.5
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
@@ -910,7 +910,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }, completion: { finished in
                     self.createScheduleButton.setImage(nil, for: .normal)
                     self.createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-                    self.createScheduleButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+                    self.createScheduleButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
                     self.draggingLabel.removeFromSuperview()
                     self.deMaskStackViews()
                 })
@@ -986,7 +986,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             cell.groupLabelArray[i].tag = 1
                             cell.groupLabelArray[i].alpha = 1
                             cell.groupLabelArray[i].layer.borderWidth = 1
-                            cell.groupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
+                            cell.groupLabelArray[i].layer.borderColor = Colors.light.withAlphaComponent(0.75).cgColor
                             cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[i].clipsToBounds = true
                             //
@@ -1027,7 +1027,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 cell.groupLabelArray[i].tag = 1
                                 cell.groupLabelArray[i].alpha = 1
                                 cell.groupLabelArray[i].layer.borderWidth = 1
-                                cell.groupLabelArray[i].layer.borderColor = Colours.colour1.withAlphaComponent(0.75).cgColor
+                                cell.groupLabelArray[i].layer.borderColor = Colors.light.withAlphaComponent(0.75).cgColor
                                 cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                                 cell.groupLabelArray[i].clipsToBounds = true
                                 //
@@ -1061,7 +1061,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 if schedules[ScheduleVariables.shared.selectedSchedule][1][3][0] as! Int == 1 && shouldRemoveBin {
                     createScheduleButton.setImage(nil, for: .normal)
                     createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-                    createScheduleButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+                    createScheduleButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
                 }
             }
         }

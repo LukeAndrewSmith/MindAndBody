@@ -116,18 +116,18 @@ class MeditationScreen: UIViewController {
         switch backgroundIndex {
         // All Black
         case 1,3,BackgroundImages.backgroundImageArray.count:
-            timerLabel.textColor = Colours.colour2
-            hideScreen.tintColor = Colours.colour2
+            timerLabel.textColor = Colors.dark
+            hideScreen.tintColor = Colors.dark
         // All White
         case 0,2,3,4,5,6:
-            timerLabel.textColor = Colours.colour1
-            hideScreen.tintColor = Colours.colour1
+            timerLabel.textColor = Colors.light
+            hideScreen.tintColor = Colors.light
         //
         default: break
         }
         
         // CheckMark
-        checkMark.tintColor = Colours.colour4
+        checkMark.tintColor = Colors.red
         
         //
         // Watch for enter foreground
@@ -399,7 +399,7 @@ class MeditationScreen: UIViewController {
         let title = NSLocalizedString("finishEarly", comment: "")
         let message = NSLocalizedString("finishEarlyMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = Colours.colour2
+        alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //
         let paragraphStyle = NSMutableParagraphStyle()

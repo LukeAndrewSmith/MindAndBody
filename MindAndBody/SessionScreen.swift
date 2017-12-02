@@ -116,7 +116,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let title = NSLocalizedString("sessionStarted", comment: "")
         //let message = NSLocalizedString("resetMessage", comment: "")
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.view.tintColor = Colours.colour1
+        alert.view.tintColor = Colors.light
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
         self.present(alert, animated: true, completion: {
             //
@@ -167,10 +167,10 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
         
         //
-        view.backgroundColor = Colours.colour2
+        view.backgroundColor = Colors.dark
         
         //
-        finishEarly.tintColor = Colours.colour4
+        finishEarly.tintColor = Colors.red
         
         //
         // Progress Bar
@@ -179,15 +179,15 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
         // Rounded Edges
         // Colour
-        progressBar.trackTintColor = Colours.colour1
-        progressBar.progressTintColor = Colours.colour3
+        progressBar.trackTintColor = Colors.light
+        progressBar.progressTintColor = Colors.green
         //
         progressBar.setProgress(0, animated: true)
         
         // TableView Background
         let tableViewBackground = UIView()
         //
-        tableViewBackground.backgroundColor = Colours.colour2
+        tableViewBackground.backgroundColor = Colors.dark
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
         //
         tableView.backgroundView = tableViewBackground
@@ -195,15 +195,15 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         tableView.tableFooterView = UIView()
         
         // Rest Time View Layout
-        restTimeView.backgroundColor = Colours.colour2
+        restTimeView.backgroundColor = Colors.dark
         restTimeView.alpha = 0
         restTimeHeight.constant = 0
         //
         restTimeTitleLabel.text = NSLocalizedString("rest:", comment: "")
-        restTimeTitleLabel.textColor = Colours.colour1
-        restTimeTimeLabel.textColor = Colours.colour1
+        restTimeTitleLabel.textColor = Colors.light
+        restTimeTimeLabel.textColor = Colors.light
         restTimeSkipButton.setTitle(NSLocalizedString("skip", comment: ""), for: .normal)
-        restTimeSkipButton.setTitleColor(Colours.colour4, for: .normal)
+        restTimeSkipButton.setTitleColor(Colors.red, for: .normal)
         restTimeSkipButton.addTarget(self, action: #selector(skipRest), for: .touchUpInside)
         
         // Buttons
@@ -232,7 +232,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         //
         let header = view as! UITableViewHeaderFooterView
-        header.contentView.backgroundColor = Colours.colour1
+        header.contentView.backgroundColor = Colors.light
         
         //
         if section == 0 {
@@ -279,8 +279,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }
             //
             // Cell
-            cell.backgroundColor = Colours.colour2
-            cell.tintColor = Colours.colour2
+            cell.backgroundColor = Colors.dark
+            cell.tintColor = Colors.dark
             tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             cell.selectionStyle = .none
             
@@ -349,14 +349,14 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 let attributedString = NSMutableAttributedString(string: setsRepsString, attributes: [NSAttributedStringKey.font:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
                 // Change indicator to red
                 let range = NSRange(location:0,length:1) // specific location. This means "range" handle 1 character at location 2
-                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colours.colour4, range: range)
+                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colors.red, range: range)
                 let range2 = NSRange(location: 1 + length,length: length2)
-                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colours.colour4, range: range2)
-                cell.setsRepsLabel?.textColor = Colours.colour1
+                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colors.red, range: range2)
+                cell.setsRepsLabel?.textColor = Colors.light
                 cell.setsRepsLabel?.attributedText = attributedString
             } else {
                 cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                cell.setsRepsLabel?.textColor = Colours.colour1
+                cell.setsRepsLabel?.textColor = Colors.light
                 cell.setsRepsLabel?.text = setsRepsString
             }
             //
@@ -365,7 +365,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             //
             // Explanation
-            cell.explanationButton.tintColor = Colours.colour1
+            cell.explanationButton.tintColor = Colors.light
             
             //
             // Button Stuff
@@ -498,11 +498,11 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.separatorInset =  UIEdgeInsetsMake(0, 0, 0, 0)
             //
             cell.layer.borderWidth = 2
-            cell.layer.borderColor = Colours.colour1.cgColor
+            cell.layer.borderColor = Colors.light.cgColor
             //
             cell.textLabel?.text = NSLocalizedString("end", comment: "")
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
-            cell.textLabel?.textColor = Colours.colour1
+            cell.textLabel?.textColor = Colors.light
             cell.textLabel?.textAlignment = .center
             //
             return cell
@@ -1138,7 +1138,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let title = NSLocalizedString("finishEarly", comment: "")
         let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = Colours.colour2
+        alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //
         let paragraphStyle = NSMutableParagraphStyle()
@@ -1225,10 +1225,10 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
-            walkthroughLabel.textColor = Colours.colour2
-            walkthroughLabel.backgroundColor = Colours.colour1
-            walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = Colours.colour1.cgColor
+            walkthroughLabel.textColor = Colors.dark
+            walkthroughLabel.backgroundColor = Colors.light
+            walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colors.light.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
             walkthroughHighlight.center = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight / 2) * (25/16)) + 2)
@@ -1239,11 +1239,11 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(1)
+                self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
+                    self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
                 }, completion: nil)
             })
             
@@ -1260,9 +1260,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1280,9 +1280,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1300,9 +1300,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1320,9 +1320,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1336,7 +1336,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // Swipe demonstration
             let leftSwipe = UIView()
             leftSwipe.frame.size = CGSize(width: 50, height: 50)
-            leftSwipe.backgroundColor = Colours.colour1
+            leftSwipe.backgroundColor = Colors.light
             leftSwipe.layer.cornerRadius = 25
             leftSwipe.clipsToBounds = true
             leftSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
@@ -1366,9 +1366,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 //
                 self.labelFrame = 0
                 //
-                self.walkthroughBackgroundColor = Colours.colour1
-                self.walkthroughTextColor = Colours.colour2
-                self.highlightColor = Colours.colour1
+                self.walkthroughBackgroundColor = Colors.light
+                self.walkthroughTextColor = Colors.dark
+                self.highlightColor = Colors.light
                 //
                 self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
                 
@@ -1386,9 +1386,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             //
@@ -1401,7 +1401,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 //
                 let rightSwipe = UIView()
                 rightSwipe.frame.size = CGSize(width: 50, height: 50)
-                rightSwipe.backgroundColor = Colours.colour1
+                rightSwipe.backgroundColor = Colors.light
                 rightSwipe.layer.cornerRadius = 25
                 rightSwipe.clipsToBounds = true
                 rightSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
@@ -1430,9 +1430,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     //
                     self.labelFrame = 0
                     //
-                    self.walkthroughBackgroundColor = Colours.colour1
-                    self.walkthroughTextColor = Colours.colour2
-                    self.highlightColor = Colours.colour1
+                    self.walkthroughBackgroundColor = Colors.light
+                    self.walkthroughTextColor = Colors.dark
+                    self.highlightColor = Colors.light
                     //
                     self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
                     
@@ -1454,8 +1454,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
             highlightColor = .clear
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
@@ -1478,8 +1478,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 //
                 self.labelFrame = 0
                 //
-                self.walkthroughBackgroundColor = Colours.colour1
-                self.walkthroughTextColor = Colours.colour2
+                self.walkthroughBackgroundColor = Colors.light
+                self.walkthroughTextColor = Colors.dark
                 self.highlightColor = .clear
                 //
                 self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
@@ -1500,7 +1500,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 //
                 let upSwipe = UIView()
                 upSwipe.frame.size = CGSize(width: 50, height: 50)
-                upSwipe.backgroundColor = Colours.colour1
+                upSwipe.backgroundColor = Colors.light
                 upSwipe.layer.cornerRadius = 25
                 upSwipe.clipsToBounds = true
                 upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (7/8)) + 2
@@ -1528,9 +1528,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     //
                     self.labelFrame = 0
                     //
-                    self.walkthroughBackgroundColor = Colours.colour1
-                    self.walkthroughTextColor = Colours.colour2
-                    self.highlightColor = Colours.colour1
+                    self.walkthroughBackgroundColor = Colors.light
+                    self.walkthroughTextColor = Colors.dark
+                    self.highlightColor = Colors.light
                     //
                     self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
                     //
@@ -1549,9 +1549,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             

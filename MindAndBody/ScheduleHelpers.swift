@@ -724,9 +724,9 @@ extension ScheduleScreen {
         //
         if isLastChoice() {
             if isGroupCompleted() {
-                maskView3.backgroundColor = Colours.colour3
+                maskView3.backgroundColor = Colors.green
             } else {
-                maskView3.backgroundColor = Colours.colour4
+                maskView3.backgroundColor = Colors.red
             }
         }
     }
@@ -1126,9 +1126,9 @@ extension ScheduleScreen {
             // Box indicator round todo, done here because userdefaults set above
             if isLastChoice() {
                 if isGroupCompleted() {
-                    maskView3.backgroundColor = Colours.colour3
+                    maskView3.backgroundColor = Colors.green
                 } else if isGroupCompleted() == false {
-                    maskView3.backgroundColor = Colours.colour4
+                    maskView3.backgroundColor = Colors.red
                 }
             } else if isLastChoice() == false {
                 updateDayIndicatorColours()
@@ -1320,13 +1320,13 @@ extension ScheduleScreen {
                 let isCompleted = isDayCompleted(day: i)
                 // True, green
                 if isCompleted == 0 {
-                    (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colours.colour3
+                    (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colors.green
                 // False, red
                 } else if isCompleted == 1 {
-                    (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colours.colour4
+                    (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colors.red
                 // Nothing on day, White
                 } else if isCompleted == 2 {
-                    (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colours.colour1
+                    (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colors.light
                 }
             }
         }
@@ -1397,7 +1397,7 @@ extension ScheduleScreen {
                     self.updateWeekProgress(add: true)
                     //
                     UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                        self.maskView3.backgroundColor = Colours.colour3
+                        self.maskView3.backgroundColor = Colors.green
                         // Slide back to initial choice when completed
                     }, completion: { finished in
                         DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
@@ -1526,7 +1526,7 @@ extension ScheduleScreen {
         
         // table    // buttons // spaces
         // Schedule choice
-        scheduleChoiceTable.backgroundColor = Colours.colour2
+        scheduleChoiceTable.backgroundColor = Colors.dark
         scheduleChoiceTable.delegate = self
         scheduleChoiceTable.dataSource = self
         scheduleChoiceTable.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 20, height: 147 + 49)
@@ -1535,7 +1535,7 @@ extension ScheduleScreen {
         scheduleChoiceTable.layer.cornerRadius = 15
         scheduleChoiceTable.clipsToBounds = true
         scheduleChoiceTable.layer.borderWidth = 1
-        scheduleChoiceTable.layer.borderColor = Colours.colour1.cgColor
+        scheduleChoiceTable.layer.borderColor = Colors.light.cgColor
         // Edit schedule
         editScheduleButton.addTarget(self, action: #selector(editScheduleAction), for: .touchUpInside)
         editScheduleButton.setTitle(NSLocalizedString("editSchedule", comment: ""), for: .normal)
@@ -1543,10 +1543,10 @@ extension ScheduleScreen {
         editScheduleButton.frame = CGRect(x: 0, y: (147 + 49) + 10, width: view.bounds.width - 20, height: 49)
         editScheduleButton.layer.cornerRadius = 49 / 2
         editScheduleButton.clipsToBounds = true
-        editScheduleButton.setTitleColor(Colours.colour2, for: .normal)
-        editScheduleButton.backgroundColor = Colours.colour1
+        editScheduleButton.setTitleColor(Colors.dark, for: .normal)
+        editScheduleButton.backgroundColor = Colors.light
         editScheduleButton.setImage(#imageLiteral(resourceName: "Calendar"), for: .normal)
-        editScheduleButton.tintColor = Colours.colour2
+        editScheduleButton.tintColor = Colors.dark
         // Edit profile
         editProfileButton.addTarget(self, action: #selector(editProfileAction), for: .touchUpInside)
         editProfileButton.setTitle(NSLocalizedString("editProfile", comment: ""), for: .normal)
@@ -1554,17 +1554,17 @@ extension ScheduleScreen {
         editProfileButton.frame = CGRect(x: 0, y: (147 + 49) + 10 + 49 + 10, width: view.bounds.width - 20, height: 49)
         editProfileButton.layer.cornerRadius = 49 / 2
         editProfileButton.clipsToBounds = true
-        editProfileButton.setTitleColor(Colours.colour2, for: .normal)
-        editProfileButton.backgroundColor = Colours.colour1
+        editProfileButton.setTitleColor(Colors.dark, for: .normal)
+        editProfileButton.backgroundColor = Colors.light
         editProfileButton.setImage(#imageLiteral(resourceName: "Profile"), for: .normal)
-        editProfileButton.tintColor = Colours.colour2
+        editProfileButton.tintColor = Colors.dark
         
         //
         addBackgroundImage(withBlur: true, fullScreen: false)
         
         //
         // Navigation Bar
-        self.navigationController?.navigationBar.barTintColor = Colours.colour2
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
         // Title
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         // Navigation Title
@@ -1633,7 +1633,7 @@ extension ScheduleScreen {
             
             for i in 0...(dayArray.count - 1) {
                 let dayLabel = UILabel()
-                dayLabel.textColor = Colours.colour1
+                dayLabel.textColor = Colors.light
                 dayLabel.textAlignment = .center
                 dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 17)
                 dayLabel.text = NSLocalizedString(dayArrayChar[i], comment: "")
@@ -1687,7 +1687,7 @@ extension ScheduleScreen {
         
         //
         dayIndicator.frame.size = CGSize(width: view.bounds.width / 7, height: 1)
-        dayIndicator.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
+        dayIndicator.backgroundColor = Colors.light.withAlphaComponent(0.5)
         if scheduleStyle == 0 {
             view.addSubview(dayIndicator)
             view.bringSubview(toFront: dayIndicator)

@@ -70,8 +70,8 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         // Progress Bar
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
-        progressBar.trackTintColor = Colours.colour1
-        progressBar.progressTintColor = Colours.colour3
+        progressBar.trackTintColor = Colors.light
+        progressBar.progressTintColor = Colors.green
         progressBar.setProgress(0, animated: true)
         //
         
@@ -129,7 +129,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             // Header
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 22)!
-            header.textLabel?.textColor = Colours.colour1
+            header.textLabel?.textColor = Colors.light
             //
             header.backgroundColor = .clear
             header.backgroundView = UIView()
@@ -137,7 +137,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             let seperator = CALayer()
             if header.layer.sublayers?.contains(seperator) == false {
                 seperator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
-                seperator.backgroundColor = Colours.colour1.cgColor
+                seperator.backgroundColor = Colors.light.cgColor
                 seperator.opacity = 0.5
                 header.layer.addSublayer(seperator)
             }
@@ -247,9 +247,9 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.addSubview(slider)
                 slider.addTarget(self, action: #selector(self.sliderValueChanged), for: .valueChanged)
                 // Colours
-                slider.thumbTintColor = Colours.colour2
-                slider.minimumTrackTintColor = Colours.colour3
-                slider.maximumTrackTintColor = Colours.colour4
+                slider.thumbTintColor = Colors.dark
+                slider.minimumTrackTintColor = Colors.green
+                slider.maximumTrackTintColor = Colors.red
                 // Frame
                 slider.frame = CGRect(x: 45, y: (cell.bounds.height - slider.frame.height) / 2, width: view.frame.size.width - 60, height: slider.frame.height)
                 // Values
@@ -266,15 +266,15 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 // Indicator Label
                 cell.textLabel?.text = String(value)
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                cell.textLabel?.textColor = Colours.colour1
+                cell.textLabel?.textColor = Colors.light
                 //
                 // Next Section -> N Sessions
             } else {
                 // Indicator Label
-                cell.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+                cell.backgroundColor = Colors.green.withAlphaComponent(0.25)
                 cell.textLabel?.text = NSLocalizedString("done", comment: "")
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                cell.textLabel?.textColor = Colours.colour1
+                cell.textLabel?.textColor = Colors.light
                 cell.textLabel?.textAlignment = .center
             }
             return cell
@@ -319,15 +319,15 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 // Indicator Label
                 cell.textLabel?.text = String(value)
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                cell.textLabel?.textColor = Colours.colour1
+                cell.textLabel?.textColor = Colors.light
                 //
                 // Next Section -> Create schedule
             } else {
                 // Indicator Label
-                cell.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+                cell.backgroundColor = Colors.green.withAlphaComponent(0.25)
                 cell.textLabel?.text = NSLocalizedString("createSchedule", comment: "")
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                cell.textLabel?.textColor = Colours.colour1
+                cell.textLabel?.textColor = Colors.light
                 cell.textLabel?.textAlignment = .center
             }
             return cell
@@ -474,10 +474,10 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             let rangeUpper = schedules[ScheduleVariables.shared.selectedSchedule][2][3][index + 1] as! Int
             // Value within range -> Green
             if roundedInt >= rangeLower && roundedInt <= rangeUpper {
-                sender.thumbTintColor = Colours.colour3
+                sender.thumbTintColor = Colors.green
                 // Value out of range -> Red
             } else {
-                sender.thumbTintColor = Colours.colour4
+                sender.thumbTintColor = Colors.red
             }
             //
             // Total n sessions
@@ -543,7 +543,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         }
         locationsArray = [0, rangeLower1,rangeLower2, rangeUpper1,rangeUpper2, 1]
         //
-        tgl.colors = [Colours.colour4.cgColor,Colours.colour4.cgColor,Colours.colour3.cgColor,Colours.colour3.cgColor,Colours.colour4.cgColor,Colours.colour4.cgColor]
+        tgl.colors = [Colors.red.cgColor,Colors.red.cgColor,Colors.green.cgColor,Colors.green.cgColor,Colors.red.cgColor,Colors.red.cgColor]
         tgl.locations = locationsArray as [NSNumber]
         tgl.endPoint = CGPoint(x: 1.0, y:  1.0)
         tgl.startPoint = CGPoint(x: 0.0, y:  1.0)
@@ -551,9 +551,9 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         // Button color
         // If within range
         if (schedules[ScheduleVariables.shared.selectedSchedule][2][2][section + 1] as! Int) > (schedules[ScheduleVariables.shared.selectedSchedule][2][3][index] as! Int) - 1 && (schedules[ScheduleVariables.shared.selectedSchedule][2][2][section + 1] as! Int) < (schedules[ScheduleVariables.shared.selectedSchedule][2][3][index + 1] as! Int) {
-            slider.thumbTintColor = Colours.colour3
+            slider.thumbTintColor = Colors.green
         } else {
-            slider.thumbTintColor = Colours.colour4
+            slider.thumbTintColor = Colors.red
         }
         
         UIGraphicsBeginImageContextWithOptions(tgl.frame.size, false, 0.0)
@@ -780,10 +780,10 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         self.selectionStyle = .none
         // Questions Label
         questionLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        questionLabel.textColor = Colours.colour1
+        questionLabel.textColor = Colors.light
         questionLabel.layer.cornerRadius = 15
         questionLabel.clipsToBounds = true
-        questionLabel.backgroundColor = Colours.colour2
+        questionLabel.backgroundColor = Colors.dark
         questionLabel.lineBreakMode = .byWordWrapping
         questionLabel.textAlignment = .center
         questionLabel.numberOfLines = 2
@@ -797,7 +797,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
             answerImageLeading.constant = 0
             answerImageTrailing.constant = 0
             // Ensure image is in stack view
-            answerImageView.backgroundColor = Colours.colour2
+            answerImageView.backgroundColor = Colors.dark
             answerImageView.layer.cornerRadius = 15
             answerImageView.clipsToBounds = true
             answerImageView.image = getUncachedImage(named: answerImageArray[row])
@@ -808,8 +808,8 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         answerTableView.layer.cornerRadius = 15
         answerTableView.layer.masksToBounds = true
         answerTableView.tableFooterView = UIView()
-        answerTableView.backgroundColor = Colours.colour2
-        answerTableView.separatorColor = Colours.colour1.withAlphaComponent(0.5)
+        answerTableView.backgroundColor = Colors.dark
+        answerTableView.separatorColor = Colors.light.withAlphaComponent(0.5)
         answerTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         answerTableView.layer.cornerRadius = 15
         answerTableView.clipsToBounds = true
@@ -878,8 +878,8 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
         //
         //
-        cell.backgroundColor = Colours.colour2
-        cell.tintColor = Colours.colour3
+        cell.backgroundColor = Colors.dark
+        cell.tintColor = Colors.green
         cell.textLabel?.textColor = .white
         cell.textLabel?.textAlignment = .center
         cell.textLabel?.numberOfLines = 0
@@ -889,7 +889,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         // Select answer
         if schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection][row] as! Int != -1 && indexPath.row == schedules[ScheduleVariables.shared.selectedSchedule][2][selectedSection][selectedQuestion] as! Int {
-            cell.textLabel?.textColor = Colours.colour3
+            cell.textLabel?.textColor = Colors.green
         }
         // If last cell hide seperator
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)

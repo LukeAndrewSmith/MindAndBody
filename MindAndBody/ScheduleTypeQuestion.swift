@@ -92,7 +92,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         //
         // Title Label
         titleLabel.text = NSLocalizedString("scheduleTypeQuestion", comment: "")
-        titleLabel.textColor = Colours.colour1
+        titleLabel.textColor = Colors.light
         
         //
         // Back
@@ -104,10 +104,10 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         
         if comingFromSchedule {
             backButton.imageView?.image = #imageLiteral(resourceName: "Down")
-            backButton.tintColor = Colours.colour4
+            backButton.tintColor = Colors.red
         } else {
             backButton.imageView?.image = #imageLiteral(resourceName: "Back Arrow")
-            backButton.tintColor = Colours.colour4
+            backButton.tintColor = Colors.red
         }
     }
     
@@ -138,7 +138,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             let titleLabel = UILabel()
             titleLabel.text = NSLocalizedString("scheduleOptionText", comment: "")
             titleLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            titleLabel.textColor = Colours.colour1
+            titleLabel.textColor = Colors.light
             titleLabel.numberOfLines = 0
             titleLabel.lineBreakMode = .byWordWrapping
             titleLabel.frame = CGRect(x: 24, y: 0, width: cell.bounds.width - 24 - scheduleOptionSwitch.bounds.width - 16 - 8, height: cellHeight)
@@ -148,7 +148,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             scheduleOptionSwitch.center = CGPoint(x: view.bounds.width - (scheduleOptionSwitch.bounds.width / 2) - 16, y: cellHeight / 2)
             // Separator
             let separator = UIView()
-            separator.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
+            separator.backgroundColor = Colors.light.withAlphaComponent(0.5)
             separator.frame.size = CGSize(width: view.bounds.width - 32, height: 1)
             separator.center = CGPoint(x: view.center.x, y: cellHeight)
             cell.addSubview(separator)
@@ -161,7 +161,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             let titleLabel = UILabel()
             titleLabel.text = NSLocalizedString("sessionsOptionText", comment: "")
             titleLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            titleLabel.textColor = Colours.colour1
+            titleLabel.textColor = Colors.light
             titleLabel.numberOfLines = 0
             titleLabel.lineBreakMode = .byWordWrapping
             titleLabel.frame = CGRect(x: 24, y: 0, width: cell.bounds.width - 24 - scheduleOptionSwitch.bounds.width - 16 - 8, height: cellHeight)
@@ -171,9 +171,9 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             sessionsOptionSwitch.center = CGPoint(x: view.bounds.width - (scheduleOptionSwitch.bounds.width / 2) - 16, y: cellHeight / 2)
         // Create Schedule Row
         } else if indexPath.row == 2 {
-            cell.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+            cell.backgroundColor = Colors.green.withAlphaComponent(0.25)
             cell.textLabel?.text = NSLocalizedString("createSchedule", comment: "")
-            cell.textLabel?.textColor = Colours.colour1
+            cell.textLabel?.textColor = Colors.light
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
             cell.textLabel?.textAlignment = .center
         }
@@ -191,7 +191,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             let inputTitle = NSLocalizedString("scheduleInputTitle", comment: "")
             //
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-            alert.view.tintColor = Colours.colour2
+            alert.view.tintColor = Colors.dark
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
             //2. Add the text field
             alert.addTextField { (textField: UITextField) in
@@ -325,16 +325,16 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         ScheduleTypeQuestionTable.separatorStyle = .none
         ScheduleTypeQuestionTable.isScrollEnabled = false
         // Switches
-        scheduleOptionSwitch.onTintColor = Colours.colour3
+        scheduleOptionSwitch.onTintColor = Colors.green
         scheduleOptionSwitch.isOn = true
-        scheduleOptionSwitch.tintColor = Colours.colour4
-        scheduleOptionSwitch.backgroundColor = Colours.colour4
+        scheduleOptionSwitch.tintColor = Colors.red
+        scheduleOptionSwitch.backgroundColor = Colors.red
         scheduleOptionSwitch.layer.cornerRadius = scheduleOptionSwitch.bounds.height / 2
         scheduleOptionSwitch.clipsToBounds = true
-        sessionsOptionSwitch.onTintColor = Colours.colour3
+        sessionsOptionSwitch.onTintColor = Colors.green
         sessionsOptionSwitch.isOn = true
-        sessionsOptionSwitch.tintColor = Colours.colour4
-        sessionsOptionSwitch.backgroundColor = Colours.colour4
+        sessionsOptionSwitch.tintColor = Colors.red
+        sessionsOptionSwitch.backgroundColor = Colors.red
         sessionsOptionSwitch.layer.cornerRadius = scheduleOptionSwitch.bounds.height / 2
         sessionsOptionSwitch.clipsToBounds = true
     }

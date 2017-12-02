@@ -33,7 +33,7 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         super.viewDidLoad()
         
         // Colours
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("meditation", comment: ""))
@@ -42,18 +42,18 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         //
         guided.setTitle(NSLocalizedString("guided", comment: ""), for: UIControlState.normal)
         guided.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        guided.setTitleColor(Colours.colour2, for: .normal)
+        guided.setTitleColor(Colors.dark, for: .normal)
         guided.layer.borderWidth = 5
-        guided.layer.borderColor = Colours.colour2.cgColor
+        guided.layer.borderColor = Colors.dark.cgColor
         guided.titleLabel?.adjustsFontSizeToFitWidth = true
         guided.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         guided.titleLabel?.textAlignment = .center
         //
         meditationTimer.setTitle(NSLocalizedString("meditationTimer", comment: ""), for: UIControlState.normal)
         meditationTimer.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        meditationTimer.setTitleColor(Colours.colour2, for: .normal)
+        meditationTimer.setTitleColor(Colors.dark, for: .normal)
         meditationTimer.layer.borderWidth = 5
-        meditationTimer.layer.borderColor = Colours.colour2.cgColor
+        meditationTimer.layer.borderColor = Colors.dark.cgColor
         meditationTimer.titleLabel?.adjustsFontSizeToFitWidth = true
         meditationTimer.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         meditationTimer.titleLabel?.textAlignment = .center

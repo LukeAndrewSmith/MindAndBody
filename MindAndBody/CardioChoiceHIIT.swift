@@ -36,7 +36,7 @@ class CardioChoiceHIIT: UIViewController  {
         
         
         // Colours
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         
         // Titles
         navigationBar.title = (NSLocalizedString("hiit", comment: ""))
@@ -44,21 +44,21 @@ class CardioChoiceHIIT: UIViewController  {
         // Button Titles
         rowing.setTitle(NSLocalizedString("rowing", comment: ""), for: UIControlState.normal)
         rowing.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        rowing.setTitleColor(Colours.colour2, for: .normal)
+        rowing.setTitleColor(Colors.dark, for: .normal)
         rowing.layer.borderWidth = 5
-        rowing.layer.borderColor = Colours.colour2.cgColor
+        rowing.layer.borderColor = Colors.dark.cgColor
         //
         biking.setTitle(NSLocalizedString("biking", comment: ""), for: UIControlState.normal)
         biking.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        biking.setTitleColor(Colours.colour2, for: .normal)
+        biking.setTitleColor(Colors.dark, for: .normal)
         biking.layer.borderWidth = 5
-        biking.layer.borderColor = Colours.colour2.cgColor
+        biking.layer.borderColor = Colors.dark.cgColor
         //
         running.setTitle(NSLocalizedString("running", comment: ""), for: UIControlState.normal)
-        running.setTitleColor(Colours.colour2, for: .normal)
+        running.setTitleColor(Colors.dark, for: .normal)
         running.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         running.layer.borderWidth = 5
-        running.layer.borderColor = Colours.colour2.cgColor
+        running.layer.borderColor = Colors.dark.cgColor
         //
     }
     

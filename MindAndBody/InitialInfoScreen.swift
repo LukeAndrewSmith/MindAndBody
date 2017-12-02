@@ -142,17 +142,17 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         followPlanButton.setTitle(NSLocalizedString("followPlanOption", comment: ""), for: .normal)
         followPlanButton.layer.cornerRadius = followPlanButton.bounds.height / 2
         followPlanButton.layer.masksToBounds = true
-        followPlanButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+        followPlanButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
         // Schedule
         createScheduleButton.setTitle(NSLocalizedString("initialProfileOption", comment: ""), for: .normal)
         createScheduleButton.layer.cornerRadius = createScheduleButton.bounds.height / 2
         createScheduleButton.layer.masksToBounds = true
-        createScheduleButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+        createScheduleButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
         // App
         lookAroundAppButton.setTitle(NSLocalizedString("initialAppOption", comment: ""), for: .normal)
         lookAroundAppButton.layer.cornerRadius = lookAroundAppButton.bounds.height / 2
         lookAroundAppButton.layer.masksToBounds = true
-        lookAroundAppButton.backgroundColor = Colours.colour1.withAlphaComponent(0.25)
+        lookAroundAppButton.backgroundColor = Colors.light.withAlphaComponent(0.25)
 //        let appBlur = UIVisualEffectView
 
 
@@ -187,7 +187,7 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         // Header
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
-        header.textLabel?.textColor = Colours.colour1
+        header.textLabel?.textColor = Colors.light
         header.textLabel?.textAlignment = .left
         //
         header.backgroundColor = .clear
@@ -197,7 +197,7 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         let seperator = UIView()
         seperator.frame = CGRect(x: 15, y: header.frame.height
              - 1, width: infoTable.bounds.width / 3, height: 1)
-        seperator.backgroundColor = Colours.colour1
+        seperator.backgroundColor = Colors.light
         seperator.alpha = 0.15
         header.addSubview(seperator)
     }
@@ -231,7 +231,7 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         cell.textLabel?.text = NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: "")
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        cell.textLabel?.textColor = Colours.colour1
+        cell.textLabel?.textColor = Colors.light
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.lineBreakMode = .byWordWrapping
         //

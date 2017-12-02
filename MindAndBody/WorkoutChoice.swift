@@ -51,7 +51,7 @@ class WorkoutChoice: UIViewController  {
         
         
         // Colours
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         
         // Titles
         navigationBar.title = (NSLocalizedString("workout", comment: ""))
@@ -64,24 +64,24 @@ class WorkoutChoice: UIViewController  {
         gym.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         gym.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         gym.layer.borderWidth = 5
-        gym.layer.borderColor = Colours.colour2.cgColor
-        gym.setTitleColor(Colours.colour2, for: .normal)
+        gym.layer.borderColor = Colors.dark.cgColor
+        gym.setTitleColor(Colors.dark, for: .normal)
         //
         home.setTitle(NSLocalizedString("bodyweight", comment: ""), for: UIControlState.normal)
         home.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         home.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         home.layer.borderWidth = 5
-        home.layer.borderColor = Colours.colour2.cgColor
-        home.setTitleColor(Colours.colour2, for: .normal)
+        home.layer.borderColor = Colors.dark.cgColor
+        home.setTitleColor(Colors.dark, for: .normal)
         
         //
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 5
-        custom.layer.borderColor = Colours.colour2.cgColor
+        custom.layer.borderColor = Colors.dark.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
         custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(Colours.colour2, for: .normal)
+        custom.setTitleColor(Colors.dark, for: .normal)
         custom.layer.cornerRadius = 49/2
         custom.layer.masksToBounds = true
         custom.titleLabel?.adjustsFontSizeToFitWidth = true

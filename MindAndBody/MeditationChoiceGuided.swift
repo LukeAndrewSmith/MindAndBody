@@ -44,7 +44,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         
         // Colour
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("guidedSessions", comment: ""))
@@ -55,7 +55,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         //
         let tableViewBackground = UIView()
         //
-        tableViewBackground.backgroundColor = Colours.colour2
+        tableViewBackground.backgroundColor = Colors.dark
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
         //
         tableView.backgroundView = tableViewBackground
@@ -94,7 +94,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
         header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        header.contentView.backgroundColor = Colours.colour2
+        header.contentView.backgroundColor = Colors.dark
         //
     }
     

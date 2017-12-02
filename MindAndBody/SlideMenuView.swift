@@ -53,10 +53,10 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         super.viewDidLoad()
         
         //
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         //
         menuTable.tableFooterView = UIView()
-        menuTable.backgroundColor = Colours.colour1
+        menuTable.backgroundColor = Colors.light
         
     }
     
@@ -84,9 +84,9 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.textLabel?.textAlignment = .left
-        cell.backgroundColor = Colours.colour1
-        cell.textLabel?.textColor = Colours.colour2
-        cell.tintColor = Colours.colour2
+        cell.backgroundColor = Colors.light
+        cell.textLabel?.textColor = Colors.dark
+        cell.tintColor = Colors.dark
         //
         // Cell Image
         cell.imageView?.image = rowIconArray[indexPath.row]

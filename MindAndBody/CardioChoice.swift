@@ -31,7 +31,7 @@ class CardioChoice: UIViewController  {
         
         
         // Colours
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         
         // Titles
         navigationBar.title = (NSLocalizedString("cardio", comment: ""))
@@ -39,9 +39,9 @@ class CardioChoice: UIViewController  {
         // Button Titles
         hiit.setTitle(NSLocalizedString("hiit", comment: ""), for: UIControlState.normal)
         hiit.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        hiit.setTitleColor(Colours.colour2, for: .normal)
+        hiit.setTitleColor(Colors.dark, for: .normal)
         hiit.layer.borderWidth = 5
-        hiit.layer.borderColor = Colours.colour2.cgColor
+        hiit.layer.borderColor = Colors.dark.cgColor
         hiit.titleLabel?.adjustsFontSizeToFitWidth = true
         hiit.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         hiit.titleLabel?.textAlignment = .center
@@ -49,11 +49,11 @@ class CardioChoice: UIViewController  {
         custom.setTitle("C", for: .normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 5
-        custom.layer.borderColor = Colours.colour2.cgColor
+        custom.layer.borderColor = Colors.dark.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(Colours.colour2, for: .normal)
+        custom.setTitleColor(Colors.dark, for: .normal)
         custom.layer.cornerRadius = 49/2
         custom.layer.masksToBounds = true
         custom.titleLabel?.adjustsFontSizeToFitWidth = true

@@ -72,7 +72,7 @@ class SubscriptionScreen: UIViewController {
         let title = NSLocalizedString("canCancelTitle", comment: "")
         let message = NSLocalizedString("canCancelMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = Colours.colour2
+        alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
         
         let paragraphStyle = NSMutableParagraphStyle()
@@ -117,7 +117,7 @@ class SubscriptionScreen: UIViewController {
         UIApplication.shared.statusBarStyle = .lightContent
         //
         // BackgroundImage
-//        view.backgroundColor = Colours.colour2
+//        view.backgroundColor = Colors.dark
         addBackgroundImage(withBlur: true, fullScreen: true)
         //
         // Buttons
@@ -129,12 +129,12 @@ class SubscriptionScreen: UIViewController {
         subscriptionButton.layer.cornerRadius = 15
 //            subscriptionButton.bounds.height / 2
         subscriptionButton.layer.masksToBounds = true
-        subscriptionButton.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+        subscriptionButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
         checkSubscriptionButton.setTitle(NSLocalizedString("alreadyHaveSubscription", comment: ""), for: .normal)
 //        checkSubscriptionButton.layer.cornerRadius = checkSubscriptionButton.bounds.height / 2
 //        checkSubscriptionButton.layer.masksToBounds = true
         checkSubscriptionButton.backgroundColor = .clear
-//            Colours.colour1.withAlphaComponent(0.25)
+//            Colors.light.withAlphaComponent(0.25)
         
         // Page Control
         InfoPageControl.shared.setupPageControl(x: view.center.x, y: subscriptionButton.frame.minY - 12)
@@ -167,7 +167,7 @@ class SubscriptionScreen: UIViewController {
         loadingIndicator.center = loadingView.center
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        loadingIndicator.color = Colours.colour1
+        loadingIndicator.color = Colors.light
         loadingIndicator.startAnimating()
         loadingView.addSubview(loadingIndicator)
         
@@ -188,7 +188,7 @@ class SubscriptionScreen: UIViewController {
         let title = NSLocalizedString("subscriptionWarning", comment: "")
         let message = NSLocalizedString("subscriptionWarningMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = Colours.colour2
+        alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
         
         let paragraphStyle = NSMutableParagraphStyle()
@@ -287,7 +287,7 @@ class SubscriptionScreen: UIViewController {
         let title = NSLocalizedString("restoreWarning", comment: "")
         let message = NSLocalizedString("restoreWarningMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = Colours.colour2
+        alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
         
         let paragraphStyle = NSMutableParagraphStyle()

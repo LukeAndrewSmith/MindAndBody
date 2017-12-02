@@ -92,8 +92,8 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         //  Navigation Bar
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         navigationBar.title = NSLocalizedString("lessons", comment: "")
-        self.navigationController?.navigationBar.barTintColor = Colours.colour2
-        self.navigationController?.navigationBar.tintColor = Colours.colour1
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
+        self.navigationController?.navigationBar.tintColor = Colors.light
     }
     
     
@@ -124,7 +124,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         // Header
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)!
-        header.textLabel?.textColor = Colours.colour1
+        header.textLabel?.textColor = Colors.light
         header.textLabel?.text = header.textLabel?.text?.capitalized
         
         //
@@ -133,7 +133,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         let seperator = CALayer()
         seperator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
-        seperator.backgroundColor = Colours.colour1.cgColor
+        seperator.backgroundColor = Colors.light.cgColor
         seperator.opacity = 0.5
         header.layer.addSublayer(seperator)
     }
@@ -173,7 +173,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-        cell.textLabel?.textColor = Colours.colour1
+        cell.textLabel?.textColor = Colors.light
         //
         // Indicator
         cell.accessoryType = .disclosureIndicator

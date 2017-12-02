@@ -125,7 +125,7 @@ extension ScheduleScreen {
         view.addSubview(maskView3)
         //
         maskViewBackButton.image = #imageLiteral(resourceName: "Back Arrow")
-        maskViewBackButton.tintColor = Colours.colour1
+        maskViewBackButton.tintColor = Colors.light
         maskViewBackButton.sizeToFit()
         maskViewBackButton.frame = CGRect(x: 5, y: maskView1.bounds.height - maskViewBackButton.bounds.height - 11, width: maskViewBackButton.bounds.width, height: maskViewBackButton.bounds.height)
         maskView1.addSubview(maskViewBackButton)

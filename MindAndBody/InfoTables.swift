@@ -28,27 +28,27 @@ class InfoTables {
     
     // Setup Image Cell
     func setupImageCell(cell: UITableViewCell, image: UIImage, infoWidth: CGFloat, rowHeight: CGFloat) {
-        cell.backgroundColor = Colours.colour2
+        cell.backgroundColor = Colors.dark
         cell.selectionStyle = .none
         //
         let cellImage = UIImageView()
         cellImage.frame = CGRect(x: 0, y: 0, width: infoWidth, height: rowHeight)
         cellImage.contentMode = .scaleAspectFit
         cellImage.image = image
-        cellImage.backgroundColor = Colours.colour2
+        cellImage.backgroundColor = Colors.dark
         cell.addSubview(cellImage)
     }
     
     // Setup Title Cell
     func setupTitleCell(cell: UITableViewCell, title: String, infoWidth: CGFloat) {
-        cell.backgroundColor = Colours.colour1
+        cell.backgroundColor = Colors.light
         cell.selectionStyle = .none
         //
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 30)
         cell.textLabel?.text = title
         //
         let separator = UIView()
-        separator.backgroundColor = Colours.colour2.withAlphaComponent(0.27)
+        separator.backgroundColor = Colors.dark.withAlphaComponent(0.27)
         separator.frame = CGRect(x: 8, y: 43, width: infoWidth - 16, height: 1)
         cell.addSubview(separator)
     }
@@ -69,7 +69,7 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = .clear
         InfoTables.shared.setupTable(tableView: infoTable)
         infoTable.layer.borderWidth = 1
-        infoTable.layer.borderColor = Colours.colour1.withAlphaComponent(0.27).cgColor
+        infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
         //
         row0Height = infoTable.bounds.height * (1/3)
     }
@@ -111,7 +111,7 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let titleImage = UIImageView()
             titleImage.frame.size = CGSize(width: aThirdRowHeight, height: aThirdRowHeight)
             titleImage.image = #imageLiteral(resourceName: "Loading").withRenderingMode(.alwaysTemplate)
-            titleImage.tintColor = Colours.colour1
+            titleImage.tintColor = Colors.light
             titleImage.alpha = 0.72
             titleImage.contentMode = .scaleAspectFit
             titleImage.center = CGPoint(x: cell.center.x, y: aThirdRowHeight * (7/8))
@@ -122,11 +122,11 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
             titleLabel.center = CGPoint(x: cell.center.x, y: ((aThirdRowHeight * 2) / 2) + aThirdRowHeight)
             titleLabel.text = "Mind & Body"
             titleLabel.font = UIFont(name: "SFUIDisplay-thin", size: 43)
-            titleLabel.textColor = Colours.colour1
+            titleLabel.textColor = Colors.light
             titleLabel.textAlignment = .center
             cell.addSubview(titleLabel)
             //
-            cell.backgroundColor = Colours.colour2
+            cell.backgroundColor = Colors.dark
             return cell
         case 2:
             let cell = UITableViewCell()
@@ -134,17 +134,17 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
             cell.textLabel?.text = "Fitness | Yoga | Meditation"
             cell.textLabel?.textAlignment = .center
-            cell.backgroundColor = Colours.colour1
+            cell.backgroundColor = Colors.light
             //
             let separator = UIView()
-            separator.backgroundColor = Colours.colour2.withAlphaComponent(0.27)
+            separator.backgroundColor = Colors.dark.withAlphaComponent(0.27)
             separator.frame = CGRect(x: 8, y: 43, width: infoTable.bounds.width - 16, height: 1)
             cell.addSubview(separator)
             return cell
         case 3:
             let cell = UITableViewCell()
             cell.selectionStyle = .none
-            cell.backgroundColor = Colours.colour1
+            cell.backgroundColor = Colors.light
 //            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
 //            cell.textLabel?.text = NSLocalizedString("infoTable1", comment: "")
             let label = UILabel()
@@ -160,7 +160,7 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
         default:
             let cell = UITableViewCell()
             cell.selectionStyle = .none
-            cell.backgroundColor = Colours.colour1
+            cell.backgroundColor = Colors.light
             cell.selectionStyle = .none
             //
             return cell
@@ -182,10 +182,10 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         view.backgroundColor = .clear
         InfoTables.shared.setupTable(tableView: infoTable)
-        infoTable.layer.borderColor = Colours.colour1.withAlphaComponent(0.27).cgColor
+        infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
         infoTable.layer.borderWidth = 1
         infoTable.layer.borderWidth = 1
-        infoTable.layer.borderColor = Colours.colour1.withAlphaComponent(0.27).cgColor
+        infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
         //
         row0Height = infoTable.bounds.height * (1/3)
     }
@@ -221,7 +221,7 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colours.colour2
+            cell.backgroundColor = Colors.dark
             cell.selectionStyle = .none
             cell.clipsToBounds = true
             //
@@ -237,7 +237,7 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
             middleImage.frame = CGRect(x: imageCenter - (imageWidth / 2), y: row0Height * (1/8), width: imageWidth, height: imageHeight)
             middleImage.contentMode = .scaleAspectFit
             middleImage.image = #imageLiteral(resourceName: "DayView")
-            middleImage.backgroundColor = Colours.colour2
+            middleImage.backgroundColor = Colors.dark
             middleImage.layer.shadowColor = UIColor.black.cgColor
             middleImage.layer.shadowRadius = 8
             middleImage.layer.shadowOffset = CGSize.zero
@@ -247,7 +247,7 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
             rightImage.frame = CGRect(x: middleImage.frame.maxX - (imageWidth2 * (1/3)), y: row0Height * (2/8), width: imageWidth2, height: imageHeight2)
             rightImage.contentMode = .scaleAspectFit
             rightImage.image = #imageLiteral(resourceName: "ScheduleFinalChoice")
-            rightImage.backgroundColor = Colours.colour2
+            rightImage.backgroundColor = Colors.dark
             rightImage.layer.shadowColor = UIColor.black.cgColor
             rightImage.layer.shadowRadius = 8
             rightImage.layer.shadowOffset = CGSize.zero
@@ -257,7 +257,7 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
             leftImage.frame = CGRect(x: middleImage.frame.minX - (imageWidth2 * (2/3)), y: row0Height * (2/8), width: imageWidth2, height: imageHeight2)
             leftImage.contentMode = .scaleAspectFit
             leftImage.image = #imageLiteral(resourceName: "ScheduleChoice")
-            leftImage.backgroundColor = Colours.colour2
+            leftImage.backgroundColor = Colors.dark
             leftImage.layer.shadowColor = UIColor.black.cgColor
             leftImage.layer.shadowRadius = 8
             leftImage.layer.shadowOffset = CGSize.zero
@@ -274,7 +274,7 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         case 3:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colours.colour1
+            cell.backgroundColor = Colors.light
             let label = UILabel()
             label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             label.numberOfLines = 0
@@ -289,7 +289,7 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         default:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colours.colour1
+            cell.backgroundColor = Colors.light
             cell.selectionStyle = .none
             //
             return cell
@@ -310,9 +310,9 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         view.backgroundColor = .clear
         InfoTables.shared.setupTable(tableView: infoTable)
-        infoTable.backgroundColor = Colours.colour1
+        infoTable.backgroundColor = Colors.light
         infoTable.layer.borderWidth = 1
-        infoTable.layer.borderColor = Colours.colour1.withAlphaComponent(0.27).cgColor
+        infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
         //
         row0Height = infoTable.bounds.height * (1/3)
     }
@@ -347,7 +347,7 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colours.colour2
+            cell.backgroundColor = Colors.dark
             cell.selectionStyle = .none
             //
             let cellImage = UIImageView()
@@ -362,7 +362,7 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         case 3:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colours.colour1
+            cell.backgroundColor = Colors.light
             let label = UILabel()
             label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             label.numberOfLines = 0
@@ -377,7 +377,7 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         default:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colours.colour1
+            cell.backgroundColor = Colors.light
             cell.selectionStyle = .none
             //
             return cell
@@ -398,9 +398,9 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         view.backgroundColor = .clear
         InfoTables.shared.setupTable(tableView: infoTable)
-        infoTable.backgroundColor = Colours.colour1
+        infoTable.backgroundColor = Colors.light
         infoTable.layer.borderWidth = 1
-        infoTable.layer.borderColor = Colours.colour1.withAlphaComponent(0.27).cgColor
+        infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
         //
         row0Height = infoTable.bounds.height * (1/3)
     }
@@ -435,7 +435,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colours.colour2
+            cell.backgroundColor = Colors.dark
             let cellImage = UIImageView()
             cellImage.frame = CGRect(x: 0, y: 0, width: infoTable.bounds.width, height: row0Height)
             cellImage.contentMode = .scaleAspectFit
@@ -448,7 +448,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         case 3:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colours.colour1
+            cell.backgroundColor = Colors.light
             let label = UILabel()
             label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             label.numberOfLines = 0
@@ -463,7 +463,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         default:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colours.colour1
+            cell.backgroundColor = Colors.light
             cell.selectionStyle = .none
             //
             return cell

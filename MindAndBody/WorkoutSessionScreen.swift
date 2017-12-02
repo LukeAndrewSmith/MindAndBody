@@ -96,7 +96,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let title = NSLocalizedString("sessionStarted", comment: "")
         //let message = NSLocalizedString("resetMessage", comment: "")
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.view.tintColor = Colours.colour1
+        alert.view.tintColor = Colors.light
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
         self.present(alert, animated: true, completion: {
             //
@@ -138,11 +138,11 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         }
         
         //
-        view.backgroundColor = Colours.colour2
+        view.backgroundColor = Colors.dark
         
         
         //
-        finishEarly.tintColor = Colours.colour4
+        finishEarly.tintColor = Colors.red
         
         
         // self.present(alert, animated: true, completion: (() -> Void)?)
@@ -153,15 +153,15 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
         // Rounded Edges
         // Colour
-        progressBar.trackTintColor = Colours.colour1
-        progressBar.progressTintColor = Colours.colour3
+        progressBar.trackTintColor = Colors.light
+        progressBar.progressTintColor = Colors.green
         //
         progressBar.setProgress(0, animated: true)
         
         // TableView Background
         let tableViewBackground = UIView()
         //
-        tableViewBackground.backgroundColor = Colours.colour2
+        tableViewBackground.backgroundColor = Colors.dark
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
         //
         tableView.backgroundView = tableViewBackground
@@ -192,7 +192,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         //
         let header = view as! UITableViewHeaderFooterView
-        header.contentView.backgroundColor = Colours.colour1
+        header.contentView.backgroundColor = Colors.light
         
         //
         if section == 0 {
@@ -235,8 +235,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             //
             // Cell
-            cell.backgroundColor = Colours.colour2
-            cell.tintColor = Colours.colour2
+            cell.backgroundColor = Colors.dark
+            cell.tintColor = Colors.dark
             tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             cell.selectionStyle = .none
             
@@ -317,14 +317,14 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 let attributedString = NSMutableAttributedString(string: repsString, attributes: [NSAttributedStringKey.font:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
                 // Change indicator to red
                 let range = NSRange(location:0,length:1) // specific location. This means "range" handle 1 character at location 2
-                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colours.colour4, range: range)
+                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colors.red, range: range)
                 let range2 = NSRange(location: 1 + length,length: length2)
-                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colours.colour4, range: range2)
-                cell.setsRepsLabel?.textColor = Colours.colour1
+                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colors.red, range: range2)
+                cell.setsRepsLabel?.textColor = Colors.light
                 cell.setsRepsLabel?.attributedText = attributedString
             } else {
                 cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                cell.setsRepsLabel?.textColor = Colours.colour1
+                cell.setsRepsLabel?.textColor = Colors.light
                 cell.setsRepsLabel?.text = repsString
             }
             
@@ -338,7 +338,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             //
             // Explanation
-            cell.explanationButton.tintColor = Colours.colour1
+            cell.explanationButton.tintColor = Colors.light
             
             
             //
@@ -404,7 +404,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.separatorInset =  UIEdgeInsetsMake(0.0, 0.0, 0.0, -cell.bounds.size.width)
             //
             cell.layer.borderWidth = 2
-            cell.layer.borderColor = Colours.colour1.cgColor
+            cell.layer.borderColor = Colors.light.cgColor
             //
             if sessionScreenRoundIndex + 1 < numberOfRounds {
                 cell.textLabel?.text = NSLocalizedString("endRound", comment: "") + " " + String(sessionScreenRoundIndex + 1)
@@ -412,7 +412,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.textLabel?.text = NSLocalizedString("endWorkout", comment: "")
             }
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
-            cell.textLabel?.textColor = Colours.colour1
+            cell.textLabel?.textColor = Colors.light
             cell.textLabel?.textAlignment = .center
             //
             return cell
@@ -533,7 +533,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             let title = NSLocalizedString(titleString, comment: "")
             //let message = NSLocalizedString("resetMessage", comment: "")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-            alert.view.tintColor = Colours.colour1
+            alert.view.tintColor = Colors.light
             alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
             self.present(alert, animated: true, completion: {
                 //
@@ -610,7 +610,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             let title = NSLocalizedString(titleString, comment: "")
             //let message = NSLocalizedString("resetMessage", comment: "")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-            alert.view.tintColor = Colours.colour1
+            alert.view.tintColor = Colors.light
             alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
             self.present(alert, animated: true, completion: {
                 //
@@ -659,7 +659,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         
         // Rest Alert
         restAlert = UIAlertController()
-        restAlert.view.tintColor = Colours.colour2
+        restAlert.view.tintColor = Colors.dark
         restAlert.setValue(NSAttributedString(string: restTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
         restAlert.setValue(NSAttributedString(string: restMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
         let skipAction = UIAlertAction(title: NSLocalizedString("skip", comment: ""), style: UIAlertActionStyle.default) {
@@ -703,7 +703,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             let title = NSLocalizedString(titleString, comment: "")
             //let message = NSLocalizedString("resetMessage", comment: "")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-            alert.view.tintColor = Colours.colour1
+            alert.view.tintColor = Colors.light
             alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
             self.present(alert, animated: true, completion: {
                 //
@@ -1122,7 +1122,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let title = NSLocalizedString("finishEarly", comment: "")
         let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = Colours.colour2
+        alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //
         let paragraphStyle = NSMutableParagraphStyle()
@@ -1208,10 +1208,10 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
-            walkthroughLabel.textColor = Colours.colour2
-            walkthroughLabel.backgroundColor = Colours.colour1
-            walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = Colours.colour1.cgColor
+            walkthroughLabel.textColor = Colors.dark
+            walkthroughLabel.backgroundColor = Colors.light
+            walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colors.light.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
             walkthroughHighlight.center = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight / 2) * (28/16)) + 2)
@@ -1222,11 +1222,11 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(1)
+                self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
+                    self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
                 }, completion: nil)
             })
             
@@ -1243,9 +1243,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1262,9 +1262,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1281,9 +1281,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1297,7 +1297,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             // Swipe demonstration
             let leftSwipe = UIView()
             leftSwipe.frame.size = CGSize(width: 50, height: 50)
-            leftSwipe.backgroundColor = Colours.colour1
+            leftSwipe.backgroundColor = Colors.light
             leftSwipe.layer.cornerRadius = 25
             leftSwipe.clipsToBounds = true
             leftSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2
@@ -1327,9 +1327,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //
                 self.labelFrame = 0
                 //
-                self.walkthroughBackgroundColor = Colours.colour1
-                self.walkthroughTextColor = Colours.colour2
-                self.highlightColor = Colours.colour1
+                self.walkthroughBackgroundColor = Colors.light
+                self.walkthroughTextColor = Colors.dark
+                self.highlightColor = Colors.light
                 //
                 self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
                 
@@ -1347,9 +1347,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             //
@@ -1362,7 +1362,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //
                 let rightSwipe = UIView()
                 rightSwipe.frame.size = CGSize(width: 50, height: 50)
-                rightSwipe.backgroundColor = Colours.colour1
+                rightSwipe.backgroundColor = Colors.light
                 rightSwipe.layer.cornerRadius = 25
                 rightSwipe.clipsToBounds = true
                 rightSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2
@@ -1391,9 +1391,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     //
                     self.labelFrame = 0
                     //
-                    self.walkthroughBackgroundColor = Colours.colour1
-                    self.walkthroughTextColor = Colours.colour2
-                    self.highlightColor = Colours.colour1
+                    self.walkthroughBackgroundColor = Colors.light
+                    self.walkthroughTextColor = Colors.dark
+                    self.highlightColor = Colors.light
                     //
                     self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
                     
@@ -1415,8 +1415,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
             highlightColor = .clear
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
@@ -1439,8 +1439,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //
                 self.labelFrame = 0
                 //
-                self.walkthroughBackgroundColor = Colours.colour1
-                self.walkthroughTextColor = Colours.colour2
+                self.walkthroughBackgroundColor = Colors.light
+                self.walkthroughTextColor = Colors.dark
                 self.highlightColor = .clear
                 //
                 self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
@@ -1461,7 +1461,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //
                 let upSwipe = UIView()
                 upSwipe.frame.size = CGSize(width: 50, height: 50)
-                upSwipe.backgroundColor = Colours.colour1
+                upSwipe.backgroundColor = Colors.light
                 upSwipe.layer.cornerRadius = 25
                 upSwipe.clipsToBounds = true
                 upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (7/8)) + 2
@@ -1489,9 +1489,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     //
                     self.labelFrame = 0
                     //
-                    self.walkthroughBackgroundColor = Colours.colour1
-                    self.walkthroughTextColor = Colours.colour2
-                    self.highlightColor = Colours.colour1
+                    self.walkthroughBackgroundColor = Colors.light
+                    self.walkthroughTextColor = Colors.dark
+                    self.highlightColor = Colors.light
                     //
                     self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
                     //
@@ -1510,9 +1510,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour1
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             

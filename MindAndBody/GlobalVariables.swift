@@ -50,16 +50,14 @@ class SelectedSession {
 // Colours ---------------------------------------------------------------------------------------------------------------------
 enum Colours {
     //
-    // Grey
-    static let colour1 = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
-    // Black
-    static let colour2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+    // Light
+    static let light = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    // Dark
+    static let dark = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     // Green
-    static let colour3 = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
+    static let green = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
     // Red
-    static let colour4 = UIColor(red:0.74, green:0.25, blue:0.20, alpha:1.0)
-    //
-    static let colour5 = UIColor(red:0.91, green:0.44, blue:0.25, alpha:1.0)
+    static let red = UIColor(red:0.74, green:0.25, blue:0.20, alpha:1.0)
 }
 
 //

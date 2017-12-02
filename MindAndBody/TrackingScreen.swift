@@ -1,26 +1,29 @@
 //
-//  TrackingScreen.swift
-//  MyFitnessMentor
+//  Tracking.swift
+//  MindAndBody
 //
-//  Created by Luke Smith on 03.03.17.
+//  Created by Luke Smith on 02.12.17.
 //  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
 import Foundation
 import UIKit
-import SwiftCharts
+import Charts
 
 
 //
 // Tracking Screen Class --------------------------------------------------------------------------------------------------------
 //
-class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
-//UIPickerViewDelegate, UIPickerViewDataSource {
+class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSource, ChartViewDelegate {
+    //UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    fileprivate var chart: Chart?
+    // Chart
+    let chartView = LineChartView()
+    var lineDataEntry: [ChartDataEntry] = []
+    
     
     var menuSwipeView = UIView()
     
@@ -33,7 +36,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //
     var timeScaleButton2 = UIButton()
-
+    
     //
     var trackingDictionariesDates: [[Date: Int]] = []
     
@@ -48,7 +51,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         // iPhone X
         if IPhoneType.shared.iPhoneType() == 2 {
             yValue = view.frame.maxY - 49 - 34
-        // Normal iPhone
+            // Normal iPhone
         } else {
             yValue = view.frame.maxY - 49
         }
@@ -66,7 +69,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         var trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
         trackingDictionaries[0] = [:]
         trackingDictionaries[0].updateValue(20, forKey: TrackingHelpers.shared.dateToString(date: Date().firstMondayInMonth))
-
+        
         //
         trackingDictionaries[1] = [:]
         var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date().currentDate)!
@@ -104,18 +107,18 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         if walkthroughs["Tracking"] == false {
             walkthroughTracking()
         }
-       
+        
         // Time scale table
         timeScaleTable.dataSource = self
         timeScaleTable.delegate = self
         timeScaleTable.tableFooterView = UIView()
         timeScaleTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        timeScaleTable.separatorColor = Colours.colour1.withAlphaComponent(0.5)
-        timeScaleTable.backgroundColor = Colours.colour2
+        timeScaleTable.separatorColor = Colors.light.withAlphaComponent(0.5)
+        timeScaleTable.backgroundColor = Colors.dark
         timeScaleTable.layer.cornerRadius = 15
         timeScaleTable.clipsToBounds = true
         timeScaleTable.layer.borderWidth = 1
-        timeScaleTable.layer.borderColor = Colours.colour1.cgColor
+        timeScaleTable.layer.borderColor = Colors.light.cgColor
         timeScaleTable.isScrollEnabled = false
         timeScaleTable.frame = CGRect(x: 0, y: 0, width: ActionSheet.shared.actionSheet.bounds.width, height: 7 * 47)
         //
@@ -124,11 +127,11 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         let heightToAdd = timeScaleTable.bounds.height
         ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
         ActionSheet.shared.resetCancelFrame()
-
+        
         //
         //
         // Navigation Controller
-        self.navigationController?.navigationBar.barTintColor = Colours.colour2
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
         // Title
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
         
@@ -139,588 +142,198 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         // BackgroundImage
         addBackgroundImage(withBlur: true, fullScreen: false)
         
-        if trackingDictionaries[0].count != 0 {
-            drawGraph()
-        } else {
-            let warningLabel = UILabel()
-            warningLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            warningLabel.text = NSLocalizedString("trackingWarning", comment: "")
-            warningLabel.textAlignment = .center
-            warningLabel.textColor = Colours.colour1
-            warningLabel.sizeToFit()
-            warningLabel.center = CGPoint(x: view.center.x, y: view.center.y - 44)
-            view.addSubview(warningLabel)
-            view.bringSubview(toFront: warningLabel)
-        }
+//        if trackingDictionaries[0].count != 0 {
+//            drawGraph()
+//        } else {
+//            let warningLabel = UILabel()
+//            warningLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+//            warningLabel.text = NSLocalizedString("trackingWarning", comment: "")
+//            warningLabel.textAlignment = .center
+//            warningLabel.textColor = Colors.light
+//            warningLabel.sizeToFit()
+//            warningLabel.center = CGPoint(x: view.center.x, y: view.center.y - 44)
+//            view.addSubview(warningLabel)
+//            view.bringSubview(toFront: warningLabel)
+//        }
+        
+        
+        let colors = [UIColor(red: 137/255, green: 230/255, blue: 81/255, alpha: 1),
+                      UIColor(red: 240/255, green: 240/255, blue: 30/255, alpha: 1),
+                      UIColor(red: 89/255, green: 199/255, blue: 250/255, alpha: 1),
+                      UIColor(red: 250/255, green: 104/255, blue: 104/255, alpha: 1)]
+        
+//        for (i, chartView) in chartViews.enumerated() {
+//            let data = dataWithCount(36, range: 100)
+//            data.setValueFont(UIFont(name: "HelveticaNeue", size: 7)!)
+        
+        
+        setupChart()
+            
+//            setupChart(chartView, data: data, color: colors[0])
+//        }
     }
     
-    //
-    // MARK: Graphs
-    //
-    var currentPositionLabels: [UILabel] = []
-    var currentPositionLabel = UILabel()
-    
-    //
-    func drawGraph() {
-        //
-        // Axis Label Settings
-        var titleLabelSettings = ChartLabelSettings(font: UIFont(name: "SFUIDisplay-light", size: 17)!)
-        titleLabelSettings.fontColor = Colours.colour1
-        //
-        var axisLabelSettings = ChartLabelSettings(font: UIFont(name: "SFUIDisplay-light", size: 14)!)
-        axisLabelSettings.fontColor = Colours.colour1
+    func setupChart() {
+        // Chart Setup
+        chartView.frame = view.bounds
+        view.addSubview(chartView)
+        
+        // No data
+        chartView.noDataFont = UIFont(name: "SFUIDisplay-thin", size: 23)
+        chartView.noDataText = NSLocalizedString("trackingWarning", comment: "")
+        chartView.noDataTextColor = Colors.light
+        
+        // Colours
+        chartView.xAxis.axisLineColor = Colors.light
+        chartView.leftAxis.axisLineColor = Colors.light
+        chartView.leftAxis.labelTextColor = Colors.light
+        chartView.leftAxis.labelFont = UIFont(name: "SFUIDisplay-thin", size: 21)!
         
         //
-        // Generators
-        // X generator for numbers
-        let generator = returnChartAxisGeneratorMultiplier()
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .none
-        //
+        chartView.leftAxis.axisMinimum = 0
+        chartView.leftAxis.axisMaximum = 125
         
-        // Y generator
-        let labelsGenerator2 = ChartAxisLabelsGeneratorFunc {scalar in
-            return ChartAxisLabel(text: "", settings: axisLabelSettings)
-        }
-        
-        //
-        // Get data -- returns data based upon selectedTimeScale
-        let chartPoints = returnChartPoints()
-        let xValues = returnAxisValues(chartPoints: chartPoints)
-        let xAxisTitle = returnAxisTitle(xValues: xValues)
-        let xModel = returnXAxisModel(xAxisValues: xValues, titleLabelSettings: titleLabelSettings, axisLabelSettings: axisLabelSettings, xAxisTitle: xAxisTitle, generator: generator)
-        
-        let yModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: 0, lastModelValue: 125, axisValuesGenerator: generator, labelsGenerator: labelsGenerator2)
-        
-        //
-        // Chart Settings
-        let height = returnChartHeight()
-        let chartFrame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: height)
-        //
-        var chartSettings = ChartSettings()
-        chartSettings.leading = 8.25
-        chartSettings.top = 24.5
-        chartSettings.trailing = 12.25
-        // iPhone X
-        if IPhoneType.shared.iPhoneType() == 2 {
-            chartSettings.bottom = 34 + 10
-        // Normal iPhone
-        } else {
-            chartSettings.bottom = 10
-        }
-        chartSettings.labelsToAxisSpacingX = 0
-        chartSettings.labelsToAxisSpacingY = 0
-        chartSettings.axisTitleLabelsToLabelsSpacing = 4
-        chartSettings.axisStrokeWidth = 0.5
-        chartSettings.spacingBetweenAxesX = 6.125
-        chartSettings.spacingBetweenAxesY = 0
-        chartSettings.labelsSpacing = 0
-        chartSettings.zoomPan.panEnabled = true
-        
-        // generate axes layers and calculate chart inner frame, based on the axis models
-        let coordsSpace = ChartCoordsSpaceLeftBottomSingleAxis(chartSettings: chartSettings, chartFrame: chartFrame, xModel: xModel, yModel: yModel)
-        let (xAxisLayer, yAxisLayer, innerFrame) = (coordsSpace.xAxisLayer, coordsSpace.yAxisLayer, coordsSpace.chartInnerFrame)
-        
-        //
-        // Target
-        let guideLinesHighlightLayerSettings = ChartGuideLinesLayerSettings(linesColor: Colours.colour3, linesWidth: 0.5)
-        let guideLinesHighlightLayer = ChartGuideLinesForValuesLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, settings: guideLinesHighlightLayerSettings, axisValuesX: [], axisValuesY: [ChartAxisValueDouble(100)])
-        
-        //
-        // Line
-        let lineModel = ChartLineModel(chartPoints: chartPoints, lineColor: Colours.colour4, animDuration: 1.0, animDelay: 0)
-        let chartPointsLineLayer = ChartPointsLineLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lineModels: [lineModel], useView: false)
-        
-        // view generator - this is a function that creates a view for each chartpoint
-        // would be better to not call at all
-        let viewGenerator = {(chartPointModel: ChartPointLayerModel, layer: ChartPointsViewsLayer, chart: Chart) -> UIView? in
-            let label = UILabel()
-            return label
-        }
-        
-        // create layer that uses viewGenerator to display chartpoints
-        let chartPointsLayer = ChartPointsViewsLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, viewGenerator: viewGenerator, mode: .translate)
-        let circleViewGenerator = {(chartPointModel: ChartPointLayerModel, layer: ChartPointsLayer, chart: Chart) -> UIView? in
-            let circleView = ChartPointEllipseView(center: chartPointModel.screenLoc, diameter: 12.25)
-            circleView.animDuration = 1.0
-            circleView.fillColor = Colours.colour4
-            return circleView
-        }
-        let chartPointsCircleLayer = ChartPointsViewsLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, viewGenerator: circleViewGenerator, displayDelay: 0, delayBetweenItems: 0.05, mode: .translate)
-        
-        let thumbSettings = ChartPointsLineTrackerLayerThumbSettings(thumbSize: 50, thumbBorderWidth: 4)
-//        let trackerLayerSettings = ChartPointsLineTrackerLayerSettings(thumbSettings: thumbSettings)
-        let trackerLayerSettings = ChartPointsLineTrackerLayerSettings.init(thumbSettings: thumbSettings, selectNearest: true)
-        
-        var currentPositionLabels: [UILabel] = []
-        
-        let chartPointsTrackerLayer = ChartPointsLineTrackerLayer<ChartPoint, Any>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lines: [chartPoints], lineColor: Colours.colour2, animDuration: 1, animDelay: 2, settings: trackerLayerSettings) { chartPointsWithScreenLoc in
-            
-            currentPositionLabels.forEach{$0.removeFromSuperview()}
-            
-            for (index, chartPointWithScreenLoc) in chartPointsWithScreenLoc.enumerated() {
-                
-                let label = UILabel()
-                label.text = chartPointWithScreenLoc.chartPoint.description
-                label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-                label.sizeToFit()
-                // Put to left of line if no room
-                if (chartPointWithScreenLoc.screenLoc.x + label.frame.width) > self.view.frame.maxX {
-                    label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x - label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
-                // Right of line if room
-                } else {
-                    label.center = CGPoint(x: chartPointWithScreenLoc.screenLoc.x + label.frame.width / 2, y: chartPointWithScreenLoc.screenLoc.y + chartFrame.minY - label.frame.height / 2)
-                }
-                
-                
-                label.backgroundColor = Colours.colour2
-                label.textColor = Colours.colour1
-                
-                currentPositionLabels.append(label)
-                self.view.addSubview(label)
-            }
-        }
+        // 100 %
+        let goalLine = ChartLimitLine(limit: 100, label: "100 %")
+        goalLine.lineWidth = 1
+        goalLine.lineDashLengths = [5,5]
+        goalLine.labelPosition = .rightBottom
+        goalLine.valueFont = .systemFont(ofSize: 10)
+        goalLine.lineColor = Colors.green
+        chartView.leftAxis.addLimitLine(goalLine)
         
         
-        //
-        // Finalise ----------------------------
-        //
-        // Create array of layers
-        var layersArray = [
-            xAxisLayer,
-            yAxisLayer,
-            guideLinesHighlightLayer,
-            chartPointsLayer,
-            chartPointsLineLayer,
-            chartPointsCircleLayer,
-            chartPointsTrackerLayer
-            ] as [ChartLayer]
-        //
-        // Add new layer for x dividers if selected time scale == 3 months or greater
-        if selectedTimeScale > 1 {
-            //
-            var length = CGFloat()
-            switch selectedTimeScale {
-            case 2,3,5:
-                length = 30
-            case 4:
-                length = 15
-            default: break
-            }
-            //
-            let dividersSettings =  ChartDividersLayerSettings(linesColor: Colours.colour1, linesWidth: 0.5, start: length, end: 0)
-            let dividersLayer = ChartDividersLayer(xAxisLayer: xAxisLayer, yAxisLayer: yAxisLayer, axis: .x, settings: dividersSettings)
-            //
-            layersArray.append(dividersLayer)
-        }
-        //
-        // Create chart instance with frame and layers
-        let chart = Chart(
-            frame: chartFrame,
-            innerFrame: innerFrame,
-            settings: chartSettings,
-            layers: layersArray
-            
-        )
-        //
-        view.addSubview(chart.view)
-        self.chart = chart
+        // Line chart
+        chartView.translatesAutoresizingMaskIntoConstraints = false
         
-        //
-        // Menu Swipe
-        let rightSwipe = UIScreenEdgePanGestureRecognizer()
-        rightSwipe.edges = .left
-        rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
-        menuSwipeView.backgroundColor = .clear
-        menuSwipeView.frame = CGRect(x: 0, y: 0, width: 8.25, height: view.bounds.height)
-        menuSwipeView.addGestureRecognizer(rightSwipe)
-        view.addSubview(menuSwipeView)
-        view.bringSubview(toFront: menuSwipeView)
+        // Animation
+        chartView.animate(xAxisDuration: AnimationTimes.animationTime1, yAxisDuration: AnimationTimes.animationTime1)
         
+        // Populate chart
+        setupChartData(timeScale: 0)
     }
     
-    //
-    // MARK: drawGraph() Helper Functions --------------------------------------------------------------------------------------------------------------------------------------------------------
-    // --------------------------------------------------------------------------------------
-    // Get Chart Points
-    func returnChartPoints() -> [ChartPoint] {
-        //
-        // Format Date
-        let df = DateFormatter()
-        df.dateFormat = "dd.MM.yyyy"
-        //
-        switch selectedTimeScale {
-        // Week
-        case 0:
-            let chartData = trackingDictionariesDates[0].sorted(by: { $0.key < $1.key })
-            //
-            let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
-            return chartPoints
-            
-        // 1 Month, 3 Months, 6 Months
-        case 1,2,3,4,5:
-            //
-            let chartData = trackingDictionariesDates[1].sorted(by: { $0.key < $1.key })
-            //
-            let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
-            return chartPoints
-            
-        //
-        default:
-            //
-            let chartData = trackingDictionariesDates[1].sorted(by: { $0.key < $1.key })
-            //
-            let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
-            return chartPoints
-            
-        }
-    }
-    
-    // --------------------------------------------------------------------------------------
-    // Get Generator, only used for week and month
-    func returnChartAxisGeneratorMultiplier() -> ChartAxisGeneratorMultiplier {
-        switch selectedTimeScale {
-        case 0:
-            return ChartAxisGeneratorMultiplier(1)
-        case 1:
-            return ChartAxisGeneratorMultiplier(7)
-        default:
-            return ChartAxisGeneratorMultiplier(0)
-        }
-    }
-    
-    // --------------------------------------------------------------------------------------
-    // Get Axis Values
-    func returnAxisValues(chartPoints: [ChartPoint]) -> [ChartAxisValue] {
+    func setupChartData(timeScale: Int) {
         
-        // Parameters
-        //
-        var axisLabelSettings = ChartLabelSettings(font: UIFont(name: "SFUIDisplay-light", size: 14)!)
-        axisLabelSettings.fontColor = Colours.colour1
-        
-        // Values
-        switch selectedTimeScale {
-        // Week
-        case 0:
-            //
-            let df = DateFormatter()
-            df.dateFormat = "dd.MM.yyyy"
-            //
-            var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
-            let monday = Date().firstMondayInCurrentWeek
-            for i in 0...6 {
-                let calendar = Calendar(identifier: .gregorian)
-                let dateToAdd = calendar.date(byAdding: .day, value: i, to: monday)
-                let valueToAdd = ChartAxisValueDate(date: dateToAdd!, formatter: df)
-                xValues.append(valueToAdd)
-            }
-            
-            return xValues
-
-            //
-        // 1 Month, 3 Months, 6 Months
-        case 1,2,3:
-            //
-            var xValues: [ChartAxisValue] = []
-            
-            // To get data from
-            let calendar = Calendar(identifier: .gregorian)
-            //
-            var startDate = Date().currentDate
-            let endDate = calendar.date(byAdding: .weekOfYear, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
-            
-            switch selectedTimeScale {
-            case 1:
-                startDate = Date().firstMondayInMonth
-            case 2:
-                startDate = calendar.date(byAdding: .month, value: -2, to: Date().currentDate)!
-                startDate = startDate.firstMondayInMonth
-            case 3:
-                startDate = calendar.date(byAdding: .month, value: -5, to: Date().currentDate)!
-                startDate = startDate.firstMondayInMonth
-            default: break
-            }
-
-            //
-            let df = DateFormatter()
-            df.dateFormat = "dd.MM.yyyy"
-            //
-            while startDate <= endDate! {
-                let valueToAdd = ChartAxisValueDate(date: startDate, formatter: df)
-                xValues.append(valueToAdd)
-                startDate = calendar.date(byAdding: .hour, value: 168, to: startDate)!
-            }
-            //
-            return xValues
-            
-        // Current year
-        case 4:
-            //
-            var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
-            
-            // To get data from
-            let calendar = Calendar(identifier: .gregorian)
-            //
-            // Add empty xvalues before if necessart
-            var startDate = Date().firstDateInYear
-            var endDate = calendar.date(byAdding: .month, value: 11, to: startDate)
-            endDate = endDate?.firstDateInMonth
-            
-            //
-            let df = DateFormatter()
-            df.dateFormat = "dd.MM.yyyy"
-            //
-            while startDate <= endDate! {
-                let calendar = Calendar(identifier: .gregorian)
-                let valueToAdd = ChartAxisValueDate(date: startDate, formatter: df)
-                xValues.append(valueToAdd)
-                startDate = calendar.date(byAdding: .hour, value: 168, to: startDate)!
-            }
-            
-            return xValues
-        
-        // All
-        case 5:
-            var xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
-            //
-            let df = DateFormatter()
-            df.dateFormat = "dd.MM.yyyy"
-            //
-            if xValues.count == 1 {
-                let keys = trackingDictionariesDates[1].keys.sorted()
-                let valueToAdd = ChartAxisValueDate(date: keys.first!, formatter: df)
-                xValues.append(valueToAdd)
-            }
-            return xValues
-        //
-        default:
-            let xValues: [ChartAxisValue] = (NSOrderedSet(array: chartPoints).array as! [ChartPoint]).map{$0.x}
-            return xValues
-        }
-    }
-    
-    // --------------------------------------------------------------------------------------
-    // Get xAxis Model
-    func returnXAxisModel(xAxisValues: [ChartAxisValue], titleLabelSettings: ChartLabelSettings, axisLabelSettings: ChartLabelSettings, xAxisTitle: String, generator: ChartAxisGeneratorMultiplier) -> ChartAxisModel {
-        // Parameters
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .none
-        //
-        
-        //
-        switch selectedTimeScale {
-        // Week
-        case 0:
-            // Date formatter
-            let df = DateFormatter()
-            df.dateFormat = "EEE"
-            //
-            let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: axisLabelSettings, formatter: df)
-            let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .day, preferredDividers: 6, minSpace: 0, maxTextSize: 12)
-            
-            // Dates
-            let firstDate = Date().firstMondayInCurrentWeek
-            let calendar = Calendar(identifier: .gregorian)
-            let lastDate = calendar.date(byAdding: .day, value: 6, to: firstDate)
-            
-            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: firstDate.timeIntervalSince1970, lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, leadingPadding: ChartAxisPadding.label, trailingPadding: ChartAxisPadding.label)
-            return xModel
-            
-        // Month
-        case 1:
-            // Date formatter
-            let df2 = DateFormatter()
-            df2.dateFormat = " dd"
-            
-            let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: axisLabelSettings, formatter: df2)
-            //
-            let nDividers = xAxisValues.count - 1
-            let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .day, preferredDividers: nDividers, minSpace: 0, maxTextSize: 12)
-            
-            //
-            let firstDate = Date().firstMondayInMonth
-            let calendar = Calendar(identifier: .gregorian)
-            let lastDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: firstDate)
-            
-            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: (firstDate.timeIntervalSince1970), lastModelValue: (lastDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
-            
-            return xModel
-            
-        // 3 Month
-        case 2:
-            // Date formatters
-            let dfConvert = DateFormatter()
-            dfConvert.dateFormat = "dd.MM.yyyy"
-            
-            let df2 = DateFormatter()
-            df2.dateFormat = " MMMM"
-            
-            // Generators
-            var titleLabelSettings2 = titleLabelSettings
-            titleLabelSettings2.textAlignment = .right
-            titleLabelSettings2.rotation = 0.1
-            titleLabelSettings2.rotationKeep = .top
-            //
-            let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: titleLabelSettings2, formatter: df2)
-            let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .month, preferredDividers: 2, minSpace: 0, maxTextSize: 12)
-            
-            let calendar = Calendar(identifier: .gregorian)
-            //
-            var startDate = calendar.date(byAdding: .month, value: -2, to: Date().currentDate)!
-            startDate = startDate.firstMondayInMonth
-            let endDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
-            
-            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: startDate.timeIntervalSince1970, lastModelValue: (endDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
-            
-            return xModel
-            
-        // 6 Months
-        case 3:
-            // Date formatters
-            let dfConvert = DateFormatter()
-            dfConvert.dateFormat = "dd.MM.yyyy"
-            
-            let df2 = DateFormatter()
-            df2.dateFormat = " MMM"
-            
-            // Generators
-            var titleLabelSettings2 = titleLabelSettings
-            titleLabelSettings2.textAlignment = .right
-            titleLabelSettings2.rotation = 0.1
-            titleLabelSettings2.rotationKeep = .top
-            //
-            let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: titleLabelSettings2, formatter: df2)
-            let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .month, preferredDividers: 5, minSpace: 0, maxTextSize: 12)
-            
-            let calendar = Calendar(identifier: .gregorian)
-            //
-            var startDate = calendar.date(byAdding: .month, value: -5, to: Date().currentDate)!
-            startDate = startDate.firstMondayInMonth
-            let endDate = calendar.date(byAdding: .weekOfMonth, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
-            
-            //
-            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: startDate.timeIntervalSince1970, lastModelValue: (endDate?.timeIntervalSince1970)!, axisTitleLabels: [], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator)
-            
-            return xModel
-            
-        // 12 Months
-        case 4:
-            // Date formatter
-            let df2 = DateFormatter()
-            // Note: spaces shouldn't be used for spacing
-            df2.dateFormat = "     MMMMM"
-            
-            // Generators
-            var titleLabelSettings2 = titleLabelSettings
-            titleLabelSettings2.textAlignment = .right
-            titleLabelSettings2.rotation = 0.1
-            titleLabelSettings2.rotationKeep = .top
-            //
-            let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: axisLabelSettings, formatter: df2)
-            //
-            let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .month, preferredDividers: 11, minSpace: 0, maxTextSize: 12)
-            
-            let calendar = Calendar(identifier: .gregorian)
-            //
-            let startDate = Date().firstDateInYear
-            var endDate = calendar.date(byAdding: .month, value: 11, to: startDate)
-            endDate = endDate?.firstDateInMonth
-            
-            //
-            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: startDate.timeIntervalSince1970, lastModelValue: (endDate?.timeIntervalSince1970)!, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, trailingPadding: ChartAxisPadding.label)
-            
-            return xModel
-            
-        // All
-        case 5:
-            // Date formatters
-            let dfConvert = DateFormatter()
-            dfConvert.dateFormat = "MM.yyyy"
-            
-            let df2 = DateFormatter()
-            // Note: spaces shouldn't be used for spacing
-            df2.dateFormat = " yyyy"
-            
-            // Generators
-            var titleLabelSettings2 = titleLabelSettings
-            titleLabelSettings2.textAlignment = .right
-            titleLabelSettings2.rotation = 0.1
-            titleLabelSettings2.rotationKeep = .top
-            //
-            let xLabelGenerator = ChartAxisLabelsGeneratorDate(labelSettings: titleLabelSettings2, formatter: df2)
-            //
-            //
-            let xValuesRangedGenerator = ChartAxisValuesGeneratorDate(unit: .quarter, preferredDividers: 4, minSpace: 0, maxTextSize: 12)
-            
-            //
-            let keys = trackingDictionariesDates[1].keys.sorted()
-            let startDate = keys.first!
-            var endDate = keys.last!
-            if keys.count == 1 {
-                let calendar = Calendar(identifier: .gregorian)
-                endDate = calendar.date(byAdding: .month, value: 1, to: startDate)!
-            }
-            
-            
-            let xModel = ChartAxisModel(lineColor: Colours.colour1, firstModelValue: startDate.timeIntervalSince1970, lastModelValue: endDate.timeIntervalSince1970, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], axisValuesGenerator: xValuesRangedGenerator, labelsGenerator: xLabelGenerator, trailingPadding: ChartAxisPadding.label)
-            
-            return xModel
-            
-        //
-        default:
-            let xModel = ChartAxisModel(axisValues: xAxisValues, lineColor: Colours.colour1, axisTitleLabels: [ChartAxisLabel(text: xAxisTitle, settings: titleLabelSettings)], leadingPadding: ChartAxisPadding.label, trailingPadding: ChartAxisPadding.label)
-            return xModel
-        }
-    }
-    
-    // --------------------------------------------------------------------------------------
-    // Get xAxis Title
-    func returnAxisTitle(xValues : [ChartAxisValue]) -> String {
-        //
-        // x axis title
-        switch selectedTimeScale {
+        // Data points
+        switch timeScale {
         // 1 Week
         case 0:
-            return NSLocalizedString("currentWeek", comment: "")
+            let chartData = trackingDictionariesDates[0].sorted(by: { $0.key < $1.key })
+                //
+            lineDataEntry = chartData.map{ChartDataEntry(x: $0.0.timeIntervalSince1970, y: Double($0.1))}
+//            chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
+//
+//            let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
+//            return chartPoints
+    
+//            for i in 0... {
+//                let dataPoint = ChartDataEntry(x: <#T##Double#>, y: <#T##Double#>)
+//                lineDataEntry.append(dataPoint)
+//            }
+            
         // 1 Month
-        case 1:
-            let df = DateFormatter()
-            df.dateFormat = "MMMM"
-            let month = df.string(from: Date().firstMondayInMonth)
-            return month
-        // Last year
-        case 4:
-            let df = DateFormatter()
-            df.dateFormat = "yyyy"
-            let year = df.string(from: Date().firstDateInYear)
-            return year
+//        case 1:
+//
+//        // 3 Months
+//        case 2:
+//
+//        // 6 Months
+//        case 3:
+//
+//        // 1 Year
+//        case 4:
+//
+//        // All
+//        case 5:
             
-        // All year
-        case 5:
-            //
-            let df = DateFormatter()
-            df.dateFormat = "MM.yyyy"
-            let keys = trackingDictionariesDates[1].keys.sorted()
-            let firstString = df.string(from: keys.first!)
-            let lastString = df.string(from: keys.last!)
-            return firstString + " - " + lastString
-            
-        //
-        default: return ""
+        default: break
         }
+        
+        // Chart data
+        let chartDataSet = LineChartDataSet(values: lineDataEntry, label: "Where am I??")
+        let chartData = LineChartData()
+        chartData.addDataSet(chartDataSet)
+        chartData.setDrawValues(true)
+        chartDataSet.colors = [Colors.red]
+        chartDataSet.setCircleColor(Colors.red)
+        chartDataSet.circleHoleColor = Colors.red
+        chartDataSet.circleRadius = 4
+        
+        // Gradient fill
+        let gradientColors = [Colors.green.cgColor, UIColor.clear.cgColor] as CFArray
+        let colorLocations: [CGFloat] = [1.0, 0.0]
+        guard let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: gradientColors, locations: colorLocations) else { print("gradient error"); return }
+        chartDataSet.fill = Fill.fillWithLinearGradient(gradient, angle: 90.0)
+        
+        // Axes setup
+//        let formatter = ChartFormatter()
+//        formatter.setValues(values: dadddd)
+//        let xAxis: XAxis = XAxis()
+//        xAxis.valueFormatter = formatter
+        
+        chartView.xAxis.labelPosition = .bottom
+        chartView.xAxis.drawGridLinesEnabled = false
+//        chartView.xAxis.valueFormatter = IAxisValueFormatter.stringForValue(.)
+//        chartView.chartDescription?.isEnabled = true
+        chartView.legend.enabled = false
+        chartView.rightAxis.enabled = false
+        chartView.leftAxis.drawGridLinesEnabled = false
+        chartView.leftAxis.drawLabelsEnabled = false
+        //
+        chartView.data = chartData
+    }
+
+    
+    
+    
+    func setupChartOLD(_ chart: LineChartView, data: LineChartData, color: UIColor) {
+        (data.getDataSetByIndex(0) as! LineChartDataSet).circleHoleColor = color
+        
+        chart.delegate = self
+        chart.backgroundColor = color
+        
+        chart.chartDescription?.enabled = false
+        
+        chart.dragEnabled = false
+        chart.setScaleEnabled(true)
+        chart.pinchZoomEnabled = false
+        chart.setViewPortOffsets(left: 10, top: 0, right: 10, bottom: 0)
+        
+        chart.legend.enabled = false
+        
+        chart.leftAxis.enabled = false
+        chart.leftAxis.spaceTop = 0.4
+        chart.leftAxis.spaceBottom = 0.4
+        chart.rightAxis.enabled = false
+        chart.xAxis.enabled = false
+        
+        chart.data = data
+        
+        chart.animate(xAxisDuration: 2.5)
     }
     
-    // --------------------------------------------------------------------------------------
-    // Return chart height
-    var firstTimeOpened = true
-    func returnChartHeight() -> CGFloat {
-        if firstTimeOpened {
-            firstTimeOpened = false
-            return self.view.bounds.height - TopBarHeights.combinedHeight
-        } else {
-            return self.view.bounds.height
+    func dataWithCount(_ count: Int, range: UInt32) -> LineChartData {
+        let yVals = (0..<count).map { i -> ChartDataEntry in
+            let val = Double(arc4random_uniform(range)) + 3
+            return ChartDataEntry(x: Double(i), y: val)
         }
+        
+        let set1 = LineChartDataSet(values: yVals, label: "DataSet 1")
+        
+        set1.lineWidth = 1.75
+        set1.circleRadius = 5.0
+        set1.circleHoleRadius = 2.5
+        set1.setColor(.white)
+        set1.setCircleColor(.white)
+        set1.highlightColor = .white
+        set1.drawValuesEnabled = false
+        
+        return LineChartData(dataSet: set1)
     }
+    
+    
+    
     
     //
     // MARK: Table View
@@ -741,15 +354,15 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
         header.textLabel?.textAlignment = .center
-        header.textLabel?.textColor = Colours.colour2
+        header.textLabel?.textColor = Colors.dark
         //
         let background = UIView()
         background.frame = header.bounds
-        background.backgroundColor = Colours.colour1
+        background.backgroundColor = Colors.light
         header.backgroundView = background
     }
     
-
+    
     // Header Height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 47
@@ -772,13 +385,13 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = UITableViewCell()
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
         cell.textLabel?.text = NSLocalizedString(timeScaleArray[indexPath.row], comment: "")
-        cell.textLabel?.textColor = Colours.colour1
+        cell.textLabel?.textColor = Colors.light
         cell.textLabel?.textAlignment = .center
-        cell.backgroundColor = Colours.colour2
+        cell.backgroundColor = Colors.dark
         if indexPath.row == selectedTimeScale {
             cell.accessoryType = .checkmark
-            cell.tintColor = Colours.colour3
-            cell.textLabel?.textColor = Colours.colour3
+            cell.tintColor = Colors.green
+            cell.textLabel?.textColor = Colors.green
         }
         if indexPath.row == timeScaleArray.count - 1 {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
@@ -792,12 +405,12 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         // If data is available
         if trackingDictionariesDates[0].count != 0 {
             //
-            currentPositionLabels.forEach{$0.removeFromSuperview()}
             //
             selectedTimeScale = indexPath.row
             //
-            chart?.view.removeFromSuperview()
-            drawGraph()
+//            TODO: REMOVE!!!
+//            chart?.view.removeFromSuperview()
+//            drawGraph()
             // No data to display
         } else {
             selectedTimeScale = indexPath.row
@@ -907,10 +520,10 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
-            walkthroughLabel.textColor = Colours.colour2
-            walkthroughLabel.backgroundColor = Colours.colour1
-            walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = Colours.colour1.cgColor
+            walkthroughLabel.textColor = Colors.dark
+            walkthroughLabel.backgroundColor = Colors.light
+            walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colors.light.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: view.bounds.width - 15, height: 20)
             walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: TopBarHeights.combinedHeight + 12.25 + ((view.bounds.height - 73.5) * (25/125)))
@@ -921,11 +534,11 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(1)
+                self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0)
+                    self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0)
                 }, completion: nil)
             })
             
@@ -944,8 +557,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             

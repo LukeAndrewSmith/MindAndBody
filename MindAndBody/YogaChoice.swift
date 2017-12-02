@@ -31,7 +31,7 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         super.viewDidLoad()
         
         // Colours
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         
         // Navigation Bar Title
         navigationBar.title = (NSLocalizedString("yoga", comment: ""))
@@ -40,18 +40,18 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         //
         practices.setTitle(NSLocalizedString("practices", comment: ""), for: UIControlState.normal)
         practices.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        practices.setTitleColor(Colours.colour2, for: .normal)
+        practices.setTitleColor(Colors.dark, for: .normal)
         practices.layer.borderWidth = 5
-        practices.layer.borderColor = Colours.colour2.cgColor
+        practices.layer.borderColor = Colors.dark.cgColor
         practices.titleLabel?.adjustsFontSizeToFitWidth = true
         practices.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         practices.titleLabel?.textAlignment = .center
         //
         custom.setTitle("C", for: UIControlState.normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        custom.setTitleColor(Colours.colour2, for: .normal)
+        custom.setTitleColor(Colors.dark, for: .normal)
         custom.layer.borderWidth = 5
-        custom.layer.borderColor = Colours.colour2.cgColor
+        custom.layer.borderColor = Colors.dark.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         custom.titleLabel?.textAlignment = .center

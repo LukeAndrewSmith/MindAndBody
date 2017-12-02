@@ -54,7 +54,7 @@ class BodyweightChoiceCC: UIViewController  {
         super.viewDidLoad()
         
         // Colours
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         
         // Titles
         navigationBar.title = (NSLocalizedString("bodyweight", comment: ""))
@@ -64,15 +64,15 @@ class BodyweightChoiceCC: UIViewController  {
         classic.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         classic.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         classic.layer.borderWidth = 5
-        classic.layer.borderColor = Colours.colour2.cgColor
-        classic.setTitleColor(Colours.colour2, for: .normal)
+        classic.layer.borderColor = Colors.dark.cgColor
+        classic.setTitleColor(Colors.dark, for: .normal)
         //
         circuit.setTitle(NSLocalizedString("circuit", comment: ""), for: UIControlState.normal)
         circuit.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         circuit.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         circuit.layer.borderWidth = 5
-        circuit.layer.borderColor = Colours.colour2.cgColor
-        circuit.setTitleColor(Colours.colour2, for: .normal)
+        circuit.layer.borderColor = Colors.dark.cgColor
+        circuit.setTitleColor(Colors.dark, for: .normal)
         //
     }
     

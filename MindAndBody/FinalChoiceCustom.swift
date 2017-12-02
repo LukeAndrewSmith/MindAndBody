@@ -165,22 +165,22 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         self.view.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
         
         //
-        presetsButton.backgroundColor = Colours.colour2
+        presetsButton.backgroundColor = Colors.dark
         
         // Navigation Bar Title
         navigationBar.title = NSLocalizedString("custom", comment: "")
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.backgroundColor = Colours.colour3
-        beginButton.setTitleColor(Colours.colour2, for: .normal)
+        beginButton.backgroundColor = Colors.green
+        beginButton.setTitleColor(Colors.dark, for: .normal)
         
         
         
         // Presets TableView
         //
         // Movement tabl
-        presetsTableView.backgroundColor = Colours.colour2
+        presetsTableView.backgroundColor = Colors.dark
         presetsTableView.delegate = self
         presetsTableView.dataSource = self
         presetsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
@@ -188,13 +188,13 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         presetsTableView.layer.masksToBounds = true
         presetsTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         //
-        presetsTableView.layer.borderColor = Colours.colour1.cgColor
+        presetsTableView.layer.borderColor = Colors.light.cgColor
         presetsTableView.layer.borderWidth = 1
         //
         //
         let tableViewBackground2 = UIView()
         //
-        tableViewBackground2.backgroundColor = Colours.colour1
+        tableViewBackground2.backgroundColor = Colors.light
         tableViewBackground2.frame = CGRect(x: 0, y: 0, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
         //
         presetsTableView.backgroundView = tableViewBackground2
@@ -207,14 +207,14 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         // TableView Background
         let tableViewBackground = UIView()
         //
-        tableViewBackground.backgroundColor = Colours.colour2
+        tableViewBackground.backgroundColor = Colors.dark
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.customTableView.frame.size.width, height: self.customTableView.frame.size.height)
         //
         customTableView.backgroundView = tableViewBackground
         // TableView Cell action items
         //
         // Movement table
-        movementsTableView.backgroundColor = Colours.colour2
+        movementsTableView.backgroundColor = Colors.dark
         movementsTableView.delegate = self
         movementsTableView.dataSource = self
         movementsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
@@ -223,22 +223,22 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         // Sets Reps Selection
         // view
-        setsRepsView.backgroundColor = Colours.colour2
+        setsRepsView.backgroundColor = Colors.dark
         setsRepsView.layer.cornerRadius = 15
         setsRepsView.layer.masksToBounds = true
         // picker
-        setsRepsPicker.backgroundColor = Colours.colour2
+        setsRepsPicker.backgroundColor = Colors.dark
         setsRepsPicker.delegate = self
         setsRepsPicker.dataSource = self
         // ok
-        okButton.backgroundColor = Colours.colour1
-        okButton.setTitleColor(Colours.colour3, for: .normal)
+        okButton.backgroundColor = Colors.light
+        okButton.setTitleColor(Colors.green, for: .normal)
         okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
         okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
         // sets
         setsIndicatorLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        setsIndicatorLabel.textColor = Colours.colour1
+        setsIndicatorLabel.textColor = Colors.light
         setsIndicatorLabel.text = NSLocalizedString("sets", comment: "")
         //
         setsRepsView.addSubview(setsRepsPicker)
@@ -383,7 +383,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 roundLabel.text = String(roundsPickerArray[row]) + NSLocalizedString("notCircuitWorkout", comment: "")
             }
             roundLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-            roundLabel.textColor = Colours.colour1
+            roundLabel.textColor = Colors.light
             //
             roundLabel.textAlignment = .center
             return roundLabel
@@ -400,7 +400,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     let setsLabel = UILabel()
                     setsLabel.text = String(setsPickerArray[row])
                     setsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                    setsLabel.textColor = Colours.colour1
+                    setsLabel.textColor = Colors.light
                     setsLabel.textAlignment = .center
                     return setsLabel
                     //
@@ -418,7 +418,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     default: break
                     }
                     repsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                    repsLabel.textColor = Colours.colour1
+                    repsLabel.textColor = Colors.light
                     repsLabel.textAlignment = .center
                     return repsLabel
                     //
@@ -431,7 +431,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     let repsLabel = UILabel()
                     repsLabel.text = String(repsPickerArrayCircuit[row])
                     repsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                    repsLabel.textColor = Colours.colour1
+                    repsLabel.textColor = Colors.light
                     repsLabel.textAlignment = .center
                     return repsLabel
                     // Normal - Sets x Reps
@@ -441,7 +441,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                         let setsLabel = UILabel()
                         setsLabel.text = String(setsPickerArray[row])
                         setsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                        setsLabel.textColor = Colours.colour1
+                        setsLabel.textColor = Colors.light
                         setsLabel.textAlignment = .center
                         return setsLabel
                         //
@@ -459,7 +459,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                         default: break
                         }
                         repsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                        repsLabel.textColor = Colours.colour1
+                        repsLabel.textColor = Colors.light
                         repsLabel.textAlignment = .center
                         return repsLabel
                         //
@@ -471,7 +471,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 let timeLabel = UILabel()
                 timeLabel.text = String(timePickerArray[row])
                 timeLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                timeLabel.textColor = Colours.colour1
+                timeLabel.textColor = Colors.light
                 timeLabel.textAlignment = .center
                 return timeLabel
             // Stretching/Yoga - Breaths
@@ -480,7 +480,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 let breathsLabel = UILabel()
                 breathsLabel.text = String(breathsPickerArray[row])
                 breathsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-                breathsLabel.textColor = Colours.colour1
+                breathsLabel.textColor = Colors.light
                 breathsLabel.textAlignment = .center
                 return breathsLabel
             //
@@ -667,15 +667,15 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         case presetsTableView:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 17)!
-            header.textLabel?.textColor = Colours.colour1
-            header.contentView.backgroundColor = Colours.colour2
-            header.contentView.tintColor = Colours.colour1
+            header.textLabel?.textColor = Colors.light
+            header.contentView.backgroundColor = Colors.dark
+            header.contentView.tintColor = Colors.light
         case customTableView:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)!
             header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             header.contentView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-            header.contentView.tintColor = Colours.colour1
+            header.contentView.tintColor = Colors.light
         //
         case movementsTableView:
             let header = view as! UITableViewHeaderFooterView
@@ -683,7 +683,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             header.textLabel?.adjustsFontSizeToFitWidth = true
             header.contentView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-            header.contentView.tintColor = Colours.colour1
+            header.contentView.tintColor = Colors.light
         //
         default: break
         }
@@ -730,9 +730,9 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [[[[Any]]]]
             //
             cell.textLabel?.textAlignment = .center
-            cell.backgroundColor = Colours.colour1
-            cell.textLabel?.textColor = Colours.colour2
-            cell.tintColor = Colours.colour2
+            cell.backgroundColor = Colors.light
+            cell.textLabel?.textColor = Colors.dark
+            cell.tintColor = Colors.dark
             //
             if indexPath.row == (customSessionsArray[SelectedSession.shared.selectedSession[0]]).count {
                 //
@@ -742,7 +742,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
                 //
                 cell.layer.borderWidth = 1
-                cell.layer.borderColor = Colours.colour2.cgColor
+                cell.layer.borderColor = Colors.dark.cgColor
                 //
             } else {
                 //
@@ -763,12 +763,12 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             //            cell.textLabel?.numberOfLines = 0
             //            cell.textLabel?.lineBreakMode = .byTruncatingTail
-            cell.backgroundColor = Colours.colour1
-            cell.textLabel?.textColor = Colours.colour2
+            cell.backgroundColor = Colors.light
+            cell.textLabel?.textColor = Colors.dark
             cell.tintColor = .black
             // Detail sets x reps
             cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
-            cell.detailTextLabel?.textColor = Colours.colour2
+            cell.detailTextLabel?.textColor = Colors.dark
             //
             // Find out session type
             switch SelectedSession.shared.selectedSession[0] {
@@ -897,7 +897,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 let inputTitle = NSLocalizedString("sessionInputTitle", comment: "")
                 //
                 let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-                alert.view.tintColor = Colours.colour2
+                alert.view.tintColor = Colors.dark
                 alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
                 //2. Add the text field
                 alert.addTextField { (textField: UITextField) in

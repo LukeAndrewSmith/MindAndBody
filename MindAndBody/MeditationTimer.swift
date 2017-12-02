@@ -200,8 +200,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Title
         navigationBar.title = NSLocalizedString("meditationTimer", comment: "")
         // Appearance
-        self.navigationController?.navigationBar.tintColor = Colours.colour1
-        self.navigationController?.navigationBar.barTintColor = Colours.colour2
+        self.navigationController?.navigationBar.tintColor = Colors.light
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
         
         //
         // BackgroundImage
@@ -281,32 +281,32 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         switch backgroundIndex {
         // All Black, white presets
         case 1,2,3,5,6, BackgroundImages.backgroundImageArray.count:
-            presets.setTitleColor(Colours.colour1, for: .normal)
-            presetsDetail.textColor = Colours.colour1
-            duration.setTitleColor(Colours.colour2, for: .normal)
-            durationDetail.textColor = Colours.colour2
-            startingBell.setTitleColor(Colours.colour2, for: .normal)
-            startingBellDetail.textColor = Colours.colour2
-            intervalBells.setTitleColor(Colours.colour2, for: .normal)
-            intervalBellsDetail.textColor = Colours.colour2
-            endingBell.setTitleColor(Colours.colour2, for: .normal)
-            endingBellDetail.textColor = Colours.colour2
-            backgroundSound.setTitleColor(Colours.colour2, for: .normal)
-            backgroundSoundDetail.textColor = Colours.colour2
+            presets.setTitleColor(Colors.light, for: .normal)
+            presetsDetail.textColor = Colors.light
+            duration.setTitleColor(Colors.dark, for: .normal)
+            durationDetail.textColor = Colors.dark
+            startingBell.setTitleColor(Colors.dark, for: .normal)
+            startingBellDetail.textColor = Colors.dark
+            intervalBells.setTitleColor(Colors.dark, for: .normal)
+            intervalBellsDetail.textColor = Colors.dark
+            endingBell.setTitleColor(Colors.dark, for: .normal)
+            endingBellDetail.textColor = Colors.dark
+            backgroundSound.setTitleColor(Colors.dark, for: .normal)
+            backgroundSoundDetail.textColor = Colors.dark
         // All White
         case 0,3,4:
-            presets.setTitleColor(Colours.colour1, for: .normal)
-            presetsDetail.textColor = Colours.colour1
-            duration.setTitleColor(Colours.colour1, for: .normal)
-            durationDetail.textColor = Colours.colour1
-            startingBell.setTitleColor(Colours.colour1, for: .normal)
-            startingBellDetail.textColor = Colours.colour1
-            intervalBells.setTitleColor(Colours.colour1, for: .normal)
-            intervalBellsDetail.textColor = Colours.colour1
-            endingBell.setTitleColor(Colours.colour1, for: .normal)
-            endingBellDetail.textColor = Colours.colour1
-            backgroundSound.setTitleColor(Colours.colour1, for: .normal)
-            backgroundSoundDetail.textColor = Colours.colour1
+            presets.setTitleColor(Colors.light, for: .normal)
+            presetsDetail.textColor = Colors.light
+            duration.setTitleColor(Colors.light, for: .normal)
+            durationDetail.textColor = Colors.light
+            startingBell.setTitleColor(Colors.light, for: .normal)
+            startingBellDetail.textColor = Colors.light
+            intervalBells.setTitleColor(Colors.light, for: .normal)
+            intervalBellsDetail.textColor = Colors.light
+            endingBell.setTitleColor(Colors.light, for: .normal)
+            endingBellDetail.textColor = Colors.light
+            backgroundSound.setTitleColor(Colors.light, for: .normal)
+            backgroundSoundDetail.textColor = Colors.light
         //
         default: break
         }
@@ -356,8 +356,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         view.insertSubview(beginBlur, belowSubview: beginButton)
         //
         beginButton.setTitle(NSLocalizedString("begin", comment: ""), for: .normal)
-        beginButton.setTitleColor(Colours.colour1, for: .normal)
-        beginButton.backgroundColor = Colours.colour3
+        beginButton.setTitleColor(Colors.light, for: .normal)
+        beginButton.backgroundColor = Colors.green
         
         
         // None Swipe and Button (named delete in code)
@@ -390,7 +390,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         deleteButton.frame.size = CGSize(width: 44, height: 88)
         deleteButton.setTitle(NSLocalizedString("none", comment: ""), for: .normal)
-        deleteButton.backgroundColor = Colours.colour4
+        deleteButton.backgroundColor = Colors.red
         deleteButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
         
         
@@ -398,14 +398,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         let tableViewBackground2 = UIView()
         //
-        tableViewBackground2.backgroundColor = Colours.colour2
+        tableViewBackground2.backgroundColor = Colors.dark
         tableViewBackground2.frame = CGRect(x: 0, y: 0, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
         //
         presetsTableView.backgroundView = tableViewBackground2
         presetsTableView.tableFooterView = UIView()
         // TableView Cell action items
         //
-        presetsTableView.backgroundColor = Colours.colour2
+        presetsTableView.backgroundColor = Colors.dark
         presetsTableView.delegate = self
         presetsTableView.dataSource = self
         presetsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
@@ -415,7 +415,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         
         // Duration Picker
-        pickerViewDuration.backgroundColor = Colours.colour2
+        pickerViewDuration.backgroundColor = Colors.dark
         pickerViewDuration.delegate = self
         pickerViewDuration.dataSource = self
         
@@ -423,14 +423,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Bells Table
         let tableViewBackground3 = UIView()
         //
-        tableViewBackground3.backgroundColor = Colours.colour2
+        tableViewBackground3.backgroundColor = Colors.dark
         tableViewBackground3.frame = CGRect(x: 0, y: 0, width: self.tableViewBells.frame.size.width, height: self.tableViewBells.frame.size.height)
         //
         tableViewBells.backgroundView = tableViewBackground3
         tableViewBells.tableFooterView = UIView()
         // TableView Cell action items
         //
-        tableViewBells.backgroundColor = Colours.colour2
+        tableViewBells.backgroundColor = Colors.dark
         tableViewBells.delegate = self
         tableViewBells.dataSource = self
         tableViewBells.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
@@ -441,14 +441,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Interval Bells Table
         let tableViewBackground4 = UIView()
         //
-        tableViewBackground4.backgroundColor = Colours.colour2
+        tableViewBackground4.backgroundColor = Colors.dark
         tableViewBackground4.frame = CGRect(x: 0, y: 0, width: self.tableViewIntervalBells.frame.size.width, height: self.tableViewIntervalBells.frame.size.height)
         //
         tableViewIntervalBells.backgroundView = tableViewBackground4
         tableViewIntervalBells.tableFooterView = UIView()
         // TableView Cell action items
         //
-        tableViewIntervalBells.backgroundColor = Colours.colour2
+        tableViewIntervalBells.backgroundColor = Colors.dark
         tableViewIntervalBells.delegate = self
         tableViewIntervalBells.dataSource = self
         tableViewIntervalBells.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
@@ -460,14 +460,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Background Sounds Table View
         let tableViewBackground5 = UIView()
         //
-        tableViewBackground5.backgroundColor = Colours.colour2
+        tableViewBackground5.backgroundColor = Colors.dark
         tableViewBackground5.frame = CGRect(x: 0, y: 0, width: self.tableViewBackgroundSounds.frame.size.width, height: self.tableViewBackgroundSounds.frame.size.height)
         //
         tableViewBackgroundSounds.backgroundView = tableViewBackground5
         tableViewBackgroundSounds.tableFooterView = UIView()
         // TableView Cell action items
         //
-        tableViewBackgroundSounds.backgroundColor = Colours.colour2
+        tableViewBackgroundSounds.backgroundColor = Colors.dark
         tableViewBackgroundSounds.delegate = self
         tableViewBackgroundSounds.dataSource = self
         tableViewBackgroundSounds.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
@@ -477,7 +477,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         
         // Interval Times Picker
-        pickerViewIntervalTimes.backgroundColor = Colours.colour2
+        pickerViewIntervalTimes.backgroundColor = Colors.dark
         pickerViewIntervalTimes.delegate = self
         pickerViewIntervalTimes.dataSource = self
         
@@ -512,7 +512,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Picker Labels
         //
         hoursLabel.textAlignment = .center
-        hoursLabel.textColor = Colours.colour1
+        hoursLabel.textColor = Colors.light
         hoursLabel.text = "h"
         hoursLabel.font = UIFont(name: "SFUIDisplay-thin", size: 22)
         hoursLabel.numberOfLines = 1
@@ -522,7 +522,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         pickerViewDuration.addSubview(hoursLabel)
         //
         minutesLabel.textAlignment = .center
-        minutesLabel.textColor = Colours.colour1
+        minutesLabel.textColor = Colors.light
         minutesLabel.text = "m"
         minutesLabel.font = UIFont(name: "SFUIDisplay-thin", size: 22)
         minutesLabel.numberOfLines = 1
@@ -532,7 +532,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         pickerViewDuration.addSubview(minutesLabel)
         //
         secondsLabel.textAlignment = .center
-        secondsLabel.textColor = Colours.colour1
+        secondsLabel.textColor = Colors.light
         secondsLabel.text = "s"
         secondsLabel.font = UIFont(name: "SFUIDisplay-thin", size: 22)
         secondsLabel.numberOfLines = 1
@@ -579,33 +579,33 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         // Selection Elements
         // view
-        selectionView.backgroundColor = Colours.colour2
+        selectionView.backgroundColor = Colors.dark
         selectionView.layer.cornerRadius = 15
         selectionView.layer.masksToBounds = true
         // ok
-        okButton.backgroundColor = Colours.colour1
-        okButton.setTitleColor(Colours.colour3, for: .normal)
+        okButton.backgroundColor = Colors.light
+        okButton.setTitleColor(Colors.green, for: .normal)
         okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
         okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
         //
         selectionView.addSubview(okButton)
         //
-        durationTimeLabel.textColor = Colours.colour1
+        durationTimeLabel.textColor = Colors.light
         durationTimeLabel.font = UIFont(name: "SFUIDisplay-thin", size: 17)
         durationTimeLabel.text = "  " + NSLocalizedString("duration", comment: "")
         
         // view2
-        selectionView2.backgroundColor = Colours.colour2
+        selectionView2.backgroundColor = Colors.dark
         selectionView2.layer.cornerRadius = 15
         selectionView2.layer.masksToBounds = true
         //
-        intervalBellTimeLabel.textColor = Colours.colour1
+        intervalBellTimeLabel.textColor = Colors.light
         intervalBellTimeLabel.font = UIFont(name: "SFUIDisplay-thin", size: 17)
         intervalBellTimeLabel.text = " " + NSLocalizedString("bellTime", comment: "")
         // ok2
-        okButton2.backgroundColor = Colours.colour1
-        okButton2.setTitleColor(Colours.colour3, for: .normal)
+        okButton2.backgroundColor = Colors.light
+        okButton2.setTitleColor(Colors.green, for: .normal)
         okButton2.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
         okButton2.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         okButton2.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
@@ -1599,9 +1599,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 17)!
-        header.textLabel?.textColor = Colours.colour1
-        header.contentView.backgroundColor = Colours.colour2
-        header.contentView.tintColor = Colours.colour1
+        header.textLabel?.textColor = Colors.light
+        header.contentView.backgroundColor = Colors.dark
+        header.contentView.tintColor = Colors.light
     }
     
     // Number of sections
@@ -1654,9 +1654,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //            let presetsArray = UserDefaults.standard.object(forKey: "meditationTimerTitles") as! [String]
             //
             cell.textLabel?.textAlignment = .center
-            cell.backgroundColor = Colours.colour1
-            cell.textLabel?.textColor = Colours.colour2
-            cell.tintColor = Colours.colour2
+            cell.backgroundColor = Colors.light
+            cell.textLabel?.textColor = Colors.dark
+            cell.tintColor = Colors.dark
             //
             if indexPath.row == meditationArray.count {
                 //
@@ -1683,9 +1683,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.imageView?.image = bellsImages[indexPath.row]
             //
             cell.textLabel?.textAlignment = .left
-            cell.backgroundColor = Colours.colour2
-            cell.textLabel?.textColor = Colours.colour1
-            cell.tintColor = Colours.colour1
+            cell.backgroundColor = Colors.dark
+            cell.textLabel?.textColor = Colors.light
+            cell.tintColor = Colors.light
             //
             switch selectedItem {
             case 2:
@@ -1700,9 +1700,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
                 //
                 if indexPath.row == selectedStartingBell {
-                    cell.textLabel?.textColor = Colours.colour3
+                    cell.textLabel?.textColor = Colors.green
                     cell.accessoryType = .checkmark
-                    cell.tintColor = Colours.colour3
+                    cell.tintColor = Colors.green
                 }
                 //
                 if selectedStartingBell != -1 {
@@ -1711,9 +1711,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             case 3:
                 //
                 if indexPath.row == selectedIntervalBell {
-                    cell.textLabel?.textColor = Colours.colour3
+                    cell.textLabel?.textColor = Colors.green
                     cell.accessoryType = .checkmark
-                    cell.tintColor = Colours.colour3
+                    cell.tintColor = Colors.green
                 }
                 //
                 if indexPath.row == bellsArray.count {
@@ -1735,9 +1735,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
                 //
                 if indexPath.row == selectedEndingBell {
-                    cell.textLabel?.textColor = Colours.colour3
+                    cell.textLabel?.textColor = Colors.green
                     cell.accessoryType = .checkmark
-                    cell.tintColor = Colours.colour3
+                    cell.tintColor = Colors.green
                 }
                 //
                 if selectedEndingBell != -1 {
@@ -1762,27 +1762,27 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             // New Bell
             if indexPath.row == intervalBellsArray.count {
-                cell.backgroundColor = Colours.colour2
-                cell.textLabel?.textColor = Colours.colour1
-                cell.tintColor = Colours.colour1
-                cell.layer.borderColor = Colours.colour1.cgColor
+                cell.backgroundColor = Colors.dark
+                cell.textLabel?.textColor = Colors.light
+                cell.tintColor = Colors.light
+                cell.layer.borderColor = Colors.light.cgColor
                 cell.layer.borderWidth = 1
                 //
                 cell.imageView?.image = #imageLiteral(resourceName: "Plus")
-                cell.imageView?.tintColor = Colours.colour1
+                cell.imageView?.tintColor = Colors.light
                 //
                 cell.contentView.transform = CGAffineTransform(scaleX: -1,y: 1);
                 cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1);
                 // Bells Rows
             } else {
-                cell.backgroundColor = Colours.colour2
-                cell.textLabel?.textColor = Colours.colour1
-                cell.tintColor = Colours.colour1
+                cell.backgroundColor = Colors.dark
+                cell.textLabel?.textColor = Colors.light
+                cell.tintColor = Colors.light
                 //
                 let timesArray = convertToHMS(time: 1, index: indexPath.row)
                 cell.detailTextLabel?.text = String(timesArray[0]) + "h " + String(timesArray[1]) + "m " + String(timesArray[2]) + "s"
                 //
-                cell.detailTextLabel?.textColor = Colours.colour1
+                cell.detailTextLabel?.textColor = Colors.light
                 cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
                 //
                 cell.textLabel?.text = NSLocalizedString(bellsArray[intervalBellsArray[indexPath.row][0]], comment: "")
@@ -1799,9 +1799,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             //
             cell.textLabel?.textAlignment = .left
-            cell.backgroundColor = Colours.colour2
-            cell.textLabel?.textColor = Colours.colour1
-            cell.tintColor = Colours.colour1
+            cell.backgroundColor = Colors.dark
+            cell.textLabel?.textColor = Colors.light
+            cell.tintColor = Colors.light
             //
             //            let selectedBackgroundSoundsArray = UserDefaults.standard.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
             if didChangeBackgroundSound == false {
@@ -1812,9 +1812,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             //
             if indexPath.row == selectedBackgroundSound {
-                cell.textLabel?.textColor = Colours.colour3
+                cell.textLabel?.textColor = Colors.green
                 cell.accessoryType = .checkmark
-                cell.tintColor = Colours.colour3
+                cell.tintColor = Colors.green
             }
             //
             if selectedBackgroundSound != -1 {
@@ -1879,7 +1879,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 let inputTitle = NSLocalizedString("meditationInputTitle", comment: "")
                 //
                 let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-                alert.view.tintColor = Colours.colour2
+                alert.view.tintColor = Colors.dark
                 alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
                 //2. Add the text field
                 alert.addTextField { (textField: UITextField) in
@@ -2346,7 +2346,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         let label = UILabel()
         label.text = String(durationTimeArray[component][row])
         label.font = UIFont(name: "SFUIDisplay-light", size: 24)
-        label.textColor = Colours.colour1
+        label.textColor = Colors.light
         //
         label.textAlignment = .center
         return label
@@ -2448,7 +2448,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             let inputMessage = NSLocalizedString("meditationBeginMessage", comment: "")
             //
             let alert = UIAlertController(title: inputTitle, message: inputMessage, preferredStyle: .alert)
-            alert.view.tintColor = Colours.colour2
+            alert.view.tintColor = Colors.dark
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Light", size: 20)!]), forKey: "attributedTitle")
             alert.setValue(NSAttributedString(string: inputMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 17)!]), forKey: "attributedMessage")
             

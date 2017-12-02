@@ -44,13 +44,13 @@ extension TimeBasedScreen {
         switch movementProgress {
         // Rest Time
         case 0:
-            timerShapeLayer.strokeColor = Colours.colour4.cgColor
+            timerShapeLayer.strokeColor = Colors.red.cgColor
         // Prepare for movement
         case 1:
-            timerShapeLayer.strokeColor = Colours.colour4.cgColor
+            timerShapeLayer.strokeColor = Colors.red.cgColor
         // Perform movement for:
         case 2:
-            timerShapeLayer.strokeColor = Colours.colour3.cgColor
+            timerShapeLayer.strokeColor = Colors.green.cgColor
         default:
             break
         }

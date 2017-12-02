@@ -92,10 +92,10 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 SelectedSession.shared.selectedSession[2] = -1
             }
         }
-        navigationController?.navigationBar.tintColor = Colours.colour1
+        navigationController?.navigationBar.tintColor = Colors.light
         
         //
-        presetsButton.backgroundColor = Colours.colour2
+        presetsButton.backgroundColor = Colors.dark
         presetsButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         //
@@ -103,8 +103,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.backgroundColor = Colours.colour3
-        beginButton.setTitleColor(Colours.colour2, for: .normal)
+        beginButton.backgroundColor = Colors.green
+        beginButton.setTitleColor(Colors.dark, for: .normal)
         
         //
         // Initial Element Positions
@@ -143,7 +143,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         //
         let tableViewBackground = UIView()
         //
-        tableViewBackground.backgroundColor = Colours.colour2
+        tableViewBackground.backgroundColor = Colors.dark
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.movementsTableView.frame.size.width, height: self.movementsTableView.frame.size.height)
         //
         movementsTableView.backgroundView = tableViewBackground
@@ -151,7 +151,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         //
         let tableViewBackground2 = UIView()
         //
-        tableViewBackground2.backgroundColor = Colours.colour1
+        tableViewBackground2.backgroundColor = Colors.light
         tableViewBackground2.frame = CGRect(x: 0, y: 0, width: self.presetsTableView.frame.size.width, height: self.presetsTableView.frame.size.height)
         //
         presetsTableView.backgroundView = tableViewBackground2
@@ -162,7 +162,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         // Presets TableView
         //
         // Movement tabl
-        presetsTableView.backgroundColor = Colours.colour2
+        presetsTableView.backgroundColor = Colors.dark
         presetsTableView.delegate = self
         presetsTableView.dataSource = self
         presetsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
@@ -170,7 +170,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         presetsTableView.layer.masksToBounds = true
         presetsTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         //
-        presetsTableView.layer.borderColor = Colours.colour1.cgColor
+        presetsTableView.layer.borderColor = Colors.light.cgColor
         presetsTableView.layer.borderWidth = 1
         //
         let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88 - 49 - 20
@@ -288,16 +288,16 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         case movementsTableView:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)!
-            header.textLabel?.textColor = Colours.colour1
-            header.contentView.backgroundColor = Colours.colour2
-            header.contentView.tintColor = Colours.colour1
+            header.textLabel?.textColor = Colors.light
+            header.contentView.backgroundColor = Colors.dark
+            header.contentView.tintColor = Colors.light
         case presetsTableView:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)!
             header.textLabel?.textAlignment = .left
-            header.textLabel?.textColor = Colours.colour1
-            header.contentView.backgroundColor = Colours.colour2
-            header.contentView.tintColor = Colours.colour1
+            header.textLabel?.textColor = Colors.light
+            header.contentView.backgroundColor = Colors.dark
+            header.contentView.tintColor = Colors.light
         default: break
         }
     }
@@ -337,14 +337,14 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.textLabel?.textAlignment = .left
             cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-            cell.textLabel?.textColor = Colours.colour2
-            cell.tintColor = Colours.colour2
+            cell.textLabel?.textColor = Colors.dark
+            cell.tintColor = Colors.dark
             
             //
             cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 18)
             cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
             cell.detailTextLabel?.textAlignment = .left
-            cell.detailTextLabel?.textColor = Colours.colour2
+            cell.detailTextLabel?.textColor = Colors.dark
             
             cell.imageView?.isUserInteractionEnabled = true
             // Image Tap
@@ -548,9 +548,9 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
-            cell.backgroundColor = Colours.colour1
-            cell.textLabel?.textColor = Colours.colour2
-            cell.tintColor = Colours.colour2
+            cell.backgroundColor = Colors.light
+            cell.textLabel?.textColor = Colors.dark
+            cell.tintColor = Colors.dark
             //
             return cell
         default: break
@@ -955,10 +955,10 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
-            walkthroughLabel.textColor = Colours.colour1
-            walkthroughLabel.backgroundColor = Colours.colour2
-            walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = Colours.colour1.cgColor
+            walkthroughLabel.textColor = Colors.light
+            walkthroughLabel.backgroundColor = Colors.dark
+            walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colors.light.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
             walkthroughHighlight.center = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.combinedHeight + (73.5 / 2))
@@ -969,11 +969,11 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(1)
+                self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    self.walkthroughHighlight.backgroundColor = Colours.colour1.withAlphaComponent(0.5)
+                    self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
                 }, completion: nil)
             })
             
@@ -990,9 +990,9 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             //
             labelFrame = 1
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour2
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.dark
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -1010,9 +1010,9 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             //
             labelFrame = 1
             //
-            walkthroughBackgroundColor = Colours.colour1
-            walkthroughTextColor = Colours.colour2
-            highlightColor = Colours.colour2
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.dark
             //
             nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             

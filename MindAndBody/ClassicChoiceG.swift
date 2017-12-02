@@ -63,7 +63,7 @@ class ClassicChoiceG: UIViewController  {
         super.viewDidLoad()
         
         // Colours
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         
         // Titles
         navigationBar.title = (NSLocalizedString("classic", comment: ""))
@@ -71,9 +71,9 @@ class ClassicChoiceG: UIViewController  {
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
         fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        fullBody.setTitleColor(Colours.colour2, for: .normal)
+        fullBody.setTitleColor(Colors.dark, for: .normal)
         fullBody.layer.borderWidth = 5
-        fullBody.layer.borderColor = Colours.colour2.cgColor
+        fullBody.layer.borderColor = Colors.dark.cgColor
         fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
         fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         fullBody.titleLabel?.textAlignment = .center
@@ -88,45 +88,45 @@ class ClassicChoiceG: UIViewController  {
         //
         upperBody.setTitle(NSLocalizedString("upper", comment: ""), for: UIControlState.normal)
         upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        upperBody.setTitleColor(Colours.colour2, for: .normal)
+        upperBody.setTitleColor(Colors.dark, for: .normal)
         upperBody.layer.borderWidth = 5
-        upperBody.layer.borderColor = Colours.colour2.cgColor
+        upperBody.layer.borderColor = Colors.dark.cgColor
         upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
         upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         upperBody.titleLabel?.textAlignment = .center
         //
         lowerBody.setTitle(NSLocalizedString("lower", comment: ""), for: UIControlState.normal)
         lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        lowerBody.setTitleColor(Colours.colour2, for: .normal)
+        lowerBody.setTitleColor(Colors.dark, for: .normal)
         lowerBody.layer.borderWidth = 5
-        lowerBody.layer.borderColor = Colours.colour2.cgColor
+        lowerBody.layer.borderColor = Colors.dark.cgColor
         lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
         lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         lowerBody.titleLabel?.textAlignment = .center
         //
         legs.setTitle(NSLocalizedString("legs", comment: ""), for: UIControlState.normal)
         legs.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        legs.setTitleColor(Colours.colour2, for: .normal)
+        legs.setTitleColor(Colors.dark, for: .normal)
         legs.layer.borderWidth = 5
-        legs.layer.borderColor = Colours.colour2.cgColor
+        legs.layer.borderColor = Colors.dark.cgColor
         legs.titleLabel?.adjustsFontSizeToFitWidth = true
         legs.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         legs.titleLabel?.textAlignment = .center
         //
         pull.setTitle(NSLocalizedString("pull", comment: ""), for: UIControlState.normal)
         pull.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        pull.setTitleColor(Colours.colour2, for: .normal)
+        pull.setTitleColor(Colors.dark, for: .normal)
         pull.layer.borderWidth = 5
-        pull.layer.borderColor = Colours.colour2.cgColor
+        pull.layer.borderColor = Colors.dark.cgColor
         pull.titleLabel?.adjustsFontSizeToFitWidth = true
         pull.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         pull.titleLabel?.textAlignment = .center
         //
         push.setTitle(NSLocalizedString("push", comment: ""), for: UIControlState.normal)
         push.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        push.setTitleColor(Colours.colour2, for: .normal)
+        push.setTitleColor(Colors.dark, for: .normal)
         push.layer.borderWidth = 5
-        push.layer.borderColor = Colours.colour2.cgColor
+        push.layer.borderColor = Colors.dark.cgColor
         push.titleLabel?.adjustsFontSizeToFitWidth = true
         push.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         push.titleLabel?.textAlignment = .center

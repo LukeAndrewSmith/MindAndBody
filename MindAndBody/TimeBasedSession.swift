@@ -102,7 +102,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         let title = NSLocalizedString("sessionStarted", comment: "")
         //let message = NSLocalizedString("resetMessage", comment: "")
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.view.tintColor = Colours.colour1
+        alert.view.tintColor = Colors.light
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
         self.present(alert, animated: true, completion: {
             //
@@ -171,11 +171,11 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         
         //
-        view.backgroundColor = Colours.colour2
+        view.backgroundColor = Colors.dark
         
         
         //
-        finishEarly.tintColor = Colours.colour4
+        finishEarly.tintColor = Colors.red
         
         // self.present(alert, animated: true, completion: (() -> Void)?)
         
@@ -185,15 +185,15 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
         // Rounded Edges
         // Colour
-        progressBar.trackTintColor = Colours.colour1
-        progressBar.progressTintColor = Colours.colour3
+        progressBar.trackTintColor = Colors.light
+        progressBar.progressTintColor = Colors.green
         //
         progressBar.setProgress(0, animated: true)
         
         // TableView Background
         let tableViewBackground = UIView()
         //
-        tableViewBackground.backgroundColor = Colours.colour2
+        tableViewBackground.backgroundColor = Colors.dark
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
         //
         tableView.backgroundView = tableViewBackground
@@ -222,7 +222,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         //
         let header = view as! UITableViewHeaderFooterView
-        header.contentView.backgroundColor = Colours.colour1
+        header.contentView.backgroundColor = Colors.light
         
         //
         if section == 0 {
@@ -265,8 +265,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             //
             // Cell
-            cell.backgroundColor = Colours.colour2
-            cell.tintColor = Colours.colour2
+            cell.backgroundColor = Colors.dark
+            cell.tintColor = Colors.dark
             tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             cell.selectionStyle = .none
             
@@ -323,7 +323,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             //
             // Explanation
-            cell.explanationButton.tintColor = Colours.colour1
+            cell.explanationButton.tintColor = Colors.light
             
             //
             // Gestures
@@ -397,11 +397,11 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.separatorInset =  UIEdgeInsetsMake(0, 0, 0, 0)
             //
             cell.layer.borderWidth = 2
-            cell.layer.borderColor = Colours.colour1.cgColor
+            cell.layer.borderColor = Colors.light.cgColor
             //
             cell.textLabel?.text = NSLocalizedString("end", comment: "")
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 33)
-            cell.textLabel?.textColor = Colours.colour1
+            cell.textLabel?.textColor = Colors.light
             cell.textLabel?.textAlignment = .center
             //
             return cell
@@ -832,7 +832,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             removeCircle()
             isPaused = true
             finishEarly.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
-            finishEarly.tintColor = Colours.colour3
+            finishEarly.tintColor = Colors.green
             switch movementProgress {
             case 0:
                 cell.indicatorLabel.text = " "
@@ -855,7 +855,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             let title = NSLocalizedString("finishEarly", comment: "")
             let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.view.tintColor = Colours.colour2
+            alert.view.tintColor = Colors.dark
             alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             //
             let paragraphStyle = NSMutableParagraphStyle()
@@ -891,7 +891,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             isPaused = false
             finishEarly.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
-            finishEarly.tintColor = Colours.colour4
+            finishEarly.tintColor = Colors.red
             indicateMovementProgress()
         }
     }

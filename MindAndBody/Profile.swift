@@ -71,8 +71,8 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         // Progress Bar
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
-        progressBar.trackTintColor = Colours.colour1
-        progressBar.progressTintColor = Colours.colour3
+        progressBar.trackTintColor = Colors.light
+        progressBar.progressTintColor = Colors.green
         progressBar.setProgress(0, animated: true)
         
         //
@@ -167,10 +167,10 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         } else if indexPath.row == scheduleDataStructures.profileQA.count {
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             // Indicator Label
-            cell.backgroundColor = Colours.colour3.withAlphaComponent(0.25)
+            cell.backgroundColor = Colors.green.withAlphaComponent(0.25)
             cell.textLabel?.text = NSLocalizedString("saveProfile", comment: "")
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            cell.textLabel?.textColor = Colours.colour1
+            cell.textLabel?.textColor = Colors.light
             cell.textLabel?.textAlignment = .center
             return cell
         }
@@ -210,7 +210,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
                     // Alert View asking if you really want to delete
                     let title = NSLocalizedString("profileNotCompleteWarning", comment: "")
                     let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
-                    alert.view.tintColor = Colours.colour2
+                    alert.view.tintColor = Colors.dark
                     alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
                     
                     // Reset app action
@@ -322,17 +322,17 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         self.selectionStyle = .none
         // Questions Label
         questionLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        questionLabel.textColor = Colours.colour1
+        questionLabel.textColor = Colors.light
         questionLabel.layer.cornerRadius = 15
         questionLabel.clipsToBounds = true
-        questionLabel.backgroundColor = Colours.colour2
+        questionLabel.backgroundColor = Colors.dark
         questionLabel.lineBreakMode = .byWordWrapping
         questionLabel.textAlignment = .center
         questionLabel.numberOfLines = 2
         questionLabel.adjustsFontSizeToFitWidth = true
         // Answer Elements 1 - Age Picker
         // picker
-        agePicker.backgroundColor = Colours.colour2
+        agePicker.backgroundColor = Colors.dark
         agePicker.delegate = self
         agePicker.dataSource = self
         agePicker.layer.cornerRadius = 15
@@ -345,8 +345,8 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
             agePicker.selectRow(profileAnswers[row], inComponent: 0, animated: true)
         }
         // Ok Button
-        okButton.backgroundColor = Colours.colour1
-        okButton.setTitleColor(Colours.colour3, for: .normal)
+        okButton.backgroundColor = Colors.light
+        okButton.setTitleColor(Colors.green, for: .normal)
         okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
         okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         okButton.layer.cornerRadius = 15
@@ -381,7 +381,7 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         let answerLabel = UILabel()
         answerLabel.text = ageAnswer[row]
         answerLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        answerLabel.textColor = Colours.colour1
+        answerLabel.textColor = Colors.light
         //
         answerLabel.textAlignment = .center
         return answerLabel
@@ -437,10 +437,10 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         self.selectionStyle = .none
         // Questions Label
         questionLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        questionLabel.textColor = Colours.colour1
+        questionLabel.textColor = Colors.light
         questionLabel.layer.cornerRadius = 15
         questionLabel.clipsToBounds = true
-        questionLabel.backgroundColor = Colours.colour2
+        questionLabel.backgroundColor = Colors.dark
         questionLabel.lineBreakMode = .byWordWrapping
         questionLabel.textAlignment = .center
         questionLabel.numberOfLines = 2
@@ -458,7 +458,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
             //            if elementStack.arrangedSubviews.contains(answerImageView) == false {
             //                elementStack.insertArrangedSubview(answerImageView, at: 1)
             //            }
-            answerImageView.backgroundColor = Colours.colour2
+            answerImageView.backgroundColor = Colors.dark
             answerImageView.layer.cornerRadius = 15
             answerImageView.clipsToBounds = true
             answerImageView.image = getUncachedImage(named: answerImageArray[row])
@@ -469,8 +469,8 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         answerTableView.layer.cornerRadius = 15
         answerTableView.layer.masksToBounds = true
         answerTableView.tableFooterView = UIView()
-        answerTableView.backgroundColor = Colours.colour2
-        answerTableView.separatorColor = Colours.colour1.withAlphaComponent(0.5)
+        answerTableView.backgroundColor = Colors.dark
+        answerTableView.separatorColor = Colors.light.withAlphaComponent(0.5)
         answerTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         answerTableView.layer.cornerRadius = 15
         answerTableView.clipsToBounds = true
@@ -537,8 +537,8 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
         //
-        cell.backgroundColor = Colours.colour2
-        cell.tintColor = Colours.colour3
+        cell.backgroundColor = Colors.dark
+        cell.tintColor = Colors.green
         cell.textLabel?.textColor = .white
         cell.textLabel?.textAlignment = .center
         cell.textLabel?.numberOfLines = 0
@@ -548,7 +548,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         // Select answer
         if profileAnswers[row] != -1 && indexPath.row == profileAnswers[selectedQuestion] {
-            cell.textLabel?.textColor = Colours.colour3
+            cell.textLabel?.textColor = Colors.green
         }
         // If last cell hide seperator
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)

@@ -101,7 +101,7 @@ class LessonsScreenAnatomy: UIViewController {
         
         // Title Colour
         //
-        self.navigationController?.navigationBar.barTintColor = Colours.colour2
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
         self.navigationController?.navigationBar.tintColor = .white
         
         // Image Swipes

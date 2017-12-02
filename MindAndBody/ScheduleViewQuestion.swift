@@ -39,22 +39,22 @@ class ScheduleViewQuestion: UIViewController {
         //
         // Title Label
         titleLabel.text = NSLocalizedString("scheduleView", comment: "")
-        titleLabel.textColor = Colours.colour1
+        titleLabel.textColor = Colors.light
         //
         // Buttons
         dayViewButton.titleLabel?.lineBreakMode = .byWordWrapping
         dayViewButton.setTitle(NSLocalizedString("scheduleView1", comment: ""), for: .normal)
         dayViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        dayViewButton.setTitleColor(Colours.colour1, for: .normal)
+        dayViewButton.setTitleColor(Colors.light, for: .normal)
         dayViewImage.layer.borderWidth = 1
-        dayViewImage.layer.borderColor = Colours.colour1.withAlphaComponent(0.5).cgColor
+        dayViewImage.layer.borderColor = Colors.light.withAlphaComponent(0.5).cgColor
         //
         weekViewButton.titleLabel?.lineBreakMode = .byWordWrapping
         weekViewButton.setTitle(NSLocalizedString("scheduleView2", comment: ""), for: .normal)
         weekViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        weekViewButton.setTitleColor(Colours.colour1, for: .normal)
+        weekViewButton.setTitleColor(Colors.light, for: .normal)
         weekViewImage.layer.borderWidth = 1
-        weekViewImage.layer.borderColor = Colours.colour1.withAlphaComponent(0.5).cgColor
+        weekViewImage.layer.borderColor = Colors.light.withAlphaComponent(0.5).cgColor
         
         //
         // Back

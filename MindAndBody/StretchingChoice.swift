@@ -50,7 +50,7 @@ class StretchingChoice: UIViewController  {
         super.viewDidLoad()
         
         // Colours
-        view.backgroundColor = Colours.colour1
+        view.backgroundColor = Colors.light
         
         // Titles
         navigationBar.title = (NSLocalizedString("stretching", comment: ""))
@@ -58,29 +58,29 @@ class StretchingChoice: UIViewController  {
         // Button Titles
         general.setTitle(NSLocalizedString("general", comment: ""), for: UIControlState.normal)
         general.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        general.setTitleColor(Colours.colour2, for: .normal)
+        general.setTitleColor(Colors.dark, for: .normal)
         general.layer.borderWidth = 5
-        general.layer.borderColor = Colours.colour2.cgColor
+        general.layer.borderColor = Colors.dark.cgColor
         //
         postWorkout.setTitle(NSLocalizedString("postWorkout", comment: ""), for: UIControlState.normal)
         postWorkout.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        postWorkout.setTitleColor(Colours.colour2, for: .normal)
+        postWorkout.setTitleColor(Colors.dark, for: .normal)
         postWorkout.layer.borderWidth = 5
-        postWorkout.layer.borderColor = Colours.colour2.cgColor
+        postWorkout.layer.borderColor = Colors.dark.cgColor
         //
         postCardio.setTitle(NSLocalizedString("postCardio", comment: ""), for: UIControlState.normal)
-        postCardio.setTitleColor(Colours.colour2, for: .normal)
+        postCardio.setTitleColor(Colors.dark, for: .normal)
         postCardio.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         postCardio.layer.borderWidth = 5
-        postCardio.layer.borderColor = Colours.colour2.cgColor
+        postCardio.layer.borderColor = Colors.dark.cgColor
         //
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 5
-        custom.layer.borderColor = Colours.colour2.cgColor
+        custom.layer.borderColor = Colors.dark.cgColor
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
         custom.titleEdgeInsets = UIEdgeInsetsMake(0,7,0,7)
         custom.titleLabel?.textAlignment = .center
-        custom.setTitleColor(Colours.colour2, for: .normal)
+        custom.setTitleColor(Colors.dark, for: .normal)
         custom.layer.cornerRadius = 49/2
         custom.layer.masksToBounds = true
         custom.titleLabel?.adjustsFontSizeToFitWidth = true
