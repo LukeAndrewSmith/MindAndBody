@@ -48,8 +48,7 @@ class SelectedSession {
 
 //
 // Colours ---------------------------------------------------------------------------------------------------------------------
-enum Colours {
-    //
+enum Colors {
     // Light
     static let light = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     // Dark
