@@ -145,8 +145,9 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func setupChart() {
-        // Chart Setup
-        chartView.frame = view.bounds
+        
+        // Chart
+        chartView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: returnChartHeight())
         view.addSubview(chartView)
         
         // No data
@@ -154,17 +155,30 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         chartView.noDataText = NSLocalizedString("trackingWarning", comment: "")
         chartView.noDataTextColor = Colors.light
         
-        // Colours
-        chartView.xAxis.axisLineColor = Colors.light
-        chartView.leftAxis.axisLineColor = Colors.light
-        chartView.leftAxis.labelTextColor = Colors.light
-        chartView.leftAxis.labelFont = UIFont(name: "SFUIDisplay-thin", size: 21)!
+        // General
+        chartView.legend.enabled = false
+        chartView.rightAxis.enabled = false
+        chartView.pinchZoomEnabled = false
+        chartView.doubleTapToZoomEnabled = false
         
-        //
-        chartView.leftAxis.axisMinimum = 0
-        chartView.leftAxis.axisMaximum = 125
+        // Y Axis
+        let leftAxis = chartView.leftAxis
+        leftAxis.axisLineColor = Colors.light
+        leftAxis.labelTextColor = Colors.light
+        leftAxis.labelFont = UIFont(name: "SFUIDisplay-thin", size: 21)!
+        leftAxis.drawGridLinesEnabled = false
+        leftAxis.drawLabelsEnabled = false
+        leftAxis.axisMinimum = 0
+        leftAxis.axisMaximum = 125
         
-        // 100 %
+        // X Axis
+        let xAxis = chartView.xAxis
+        xAxis.axisLineColor = Colors.light
+        xAxis.axisLineColor = Colors.light
+        xAxis.labelTextColor = Colors.light
+        xAxis.labelFont = UIFont(name: "SFUIDisplay-thin", size: 17)!
+        
+        // Goal: 100 %
         let goalLine = ChartLimitLine(limit: 100, label: "100 %")
         goalLine.valueFont = UIFont(name: "SFUIDisplay-thin", size: 10)!
         goalLine.lineWidth = 1
@@ -174,8 +188,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         goalLine.lineColor = Colors.green
         chartView.leftAxis.addLimitLine(goalLine)
         
-        
-        // Line chart
+        //
         chartView.translatesAutoresizingMaskIntoConstraints = false
         
         // Animation
@@ -187,6 +200,10 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func setupChartData(timeScale: Int) {
         
+        // Ensure no axis min/max set
+        chartView.xAxis.resetCustomAxisMin()
+        chartView.xAxis.resetCustomAxisMax()
+        
         // Data points
         switch timeScale {
         // 1 Week
@@ -194,31 +211,61 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             let chartData = trackingDictionariesDates[0].sorted(by: { $0.key < $1.key })
                 //
             lineDataEntry = chartData.map{ChartDataEntry(x: $0.0.timeIntervalSince1970, y: Double($0.1))}
-//            chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
-//
-//            let chartPoints: [ChartPoint] = chartData.map{ChartPoint(x: ChartAxisValueDate(date: $0.0, formatter: df), y: ChartAxisValueInt($0.1))}
-//            return chartPoints
-    
-//            for i in 0... {
-//                let dataPoint = ChartDataEntry(x: <#T##Double#>, y: <#T##Double#>)
-//                lineDataEntry.append(dataPoint)
-//            }
             
+            //
+            chartView.xAxis.valueFormatter = DateValueFormatterDay()
         // 1 Month
-//        case 1:
-//
-//        // 3 Months
-//        case 2:
-//
-//        // 6 Months
-//        case 3:
-//
-//        // 1 Year
-//        case 4:
-//
-//        // All
-//        case 5:
+        case 1,2,3,4,5:
+            let chartData = trackingDictionariesDates[1].sorted(by: { $0.key < $1.key })
+            //
+            lineDataEntry = chartData.map{ChartDataEntry(x: $0.0.timeIntervalSince1970, y: Double($0.1))}
             
+            //
+            let calendar = Calendar(identifier: .gregorian)
+            // Set Start and end dates for 1,3,6,12 months && set date formatter
+            switch timeScale {
+            // 1,3,6 months
+            case 1,2,3:
+                //
+                //
+                var startDate = Date().currentDate
+                let endDate = calendar.date(byAdding: .weekOfYear, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
+                
+                switch selectedTimeScale {
+                case 1:
+                    startDate = Date().firstMondayInMonth
+                case 2:
+                    startDate = calendar.date(byAdding: .month, value: -2, to: Date().currentDate)!
+                    startDate = startDate.firstMondayInMonth
+                case 3:
+                    startDate = calendar.date(byAdding: .month, value: -5, to: Date().currentDate)!
+                    startDate = startDate.firstMondayInMonth
+                default: break
+                }
+                //
+                chartView.xAxis.axisMinimum = startDate.timeIntervalSince1970
+                chartView.xAxis.axisMaximum = (endDate?.timeIntervalSince1970)!
+                //
+                chartView.xAxis.valueFormatter = DateValueFormatterDayDate()
+
+            // 12 months
+            case 4:
+                //
+                var startDate = Date().firstDateInYear
+                var endDate = calendar.date(byAdding: .month, value: 11, to: startDate)
+                endDate = endDate?.firstDateInMonth
+                //
+                chartView.xAxis.axisMinimum = startDate.timeIntervalSince1970
+                chartView.xAxis.axisMaximum = (endDate?.timeIntervalSince1970)!
+                //
+                chartView.xAxis.valueFormatter = DateValueFormatterDayDate()
+                
+            // All
+            case 5:
+                //
+                chartView.xAxis.valueFormatter = DateValueFormatterDayDate()
+            default: break
+            }
         default: break
         }
         
@@ -231,6 +278,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         chartDataSet.setCircleColor(Colors.red)
         chartDataSet.circleHoleColor = Colors.red
         chartDataSet.circleRadius = 4
+        chartDataSet.valueFont = UIFont(name: "SFUIDisplay-thin", size: 10)!
+        chartDataSet.valueTextColor = Colors.light
         
         // Gradient fill
         let gradientColors = [Colors.green.cgColor, UIColor.clear.cgColor] as CFArray
@@ -239,21 +288,22 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         chartDataSet.fill = Fill.fillWithLinearGradient(gradient, angle: 90.0)
         
         // Axes setup
-//        let formatter = ChartFormatter()
-//        formatter.setValues(values: dadddd)
-//        let xAxis: XAxis = XAxis()
-//        xAxis.valueFormatter = formatter
-        
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.drawGridLinesEnabled = false
-//        chartView.xAxis.valueFormatter = IAxisValueFormatter.stringForValue(.)
-//        chartView.chartDescription?.isEnabled = true
-        chartView.legend.enabled = false
-        chartView.rightAxis.enabled = false
-        chartView.leftAxis.drawGridLinesEnabled = false
-        chartView.leftAxis.drawLabelsEnabled = false
+        chartView.xAxis.drawAxisLineEnabled = true
         //
         chartView.data = chartData
+    }
+    
+    // Return chart height
+    var firstTimeOpened = true
+    func returnChartHeight() -> CGFloat {
+        if firstTimeOpened {
+            firstTimeOpened = false
+            return self.view.bounds.height - TopBarHeights.combinedHeight
+        } else {
+            return self.view.bounds.height
+        }
     }
     
     //
@@ -329,9 +379,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             //
             selectedTimeScale = indexPath.row
             //
-//            TODO: REMOVE!!!
-//            chart?.view.removeFromSuperview()
-//            drawGraph()
+            setupChartData(timeScale: selectedTimeScale)
             // No data to display
         } else {
             selectedTimeScale = indexPath.row
@@ -382,20 +430,14 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    
     //
     // View will dissappear
-    //
     override func viewDidDisappear(_ animated: Bool) {
         timeScaleButton2.removeFromSuperview()
     }
     
-    
-    
     //
-    // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------
-    //
-    //
+    // MARK: Walkthrough
     var walkthroughProgress = 0
     var walkthroughView = UIView()
     var walkthroughHighlight = UIView()
@@ -504,7 +546,50 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 
 //
-// Slide Menu Extension
+// MARK: Date Formatters
+// Day Name
+public class DateValueFormatterDay: NSObject, IAxisValueFormatter {
+    private let dateFormatter = DateFormatter()
+    
+    override init() {
+        super.init()
+        dateFormatter.dateFormat = "EEE"
+    }
+    
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
+    }
+}
+// Day Date
+public class DateValueFormatterDayDate: NSObject, IAxisValueFormatter {
+    private let dateFormatter = DateFormatter()
+    
+    override init() {
+        super.init()
+        dateFormatter.dateFormat = "dd"
+    }
+    
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
+    }
+}
+//
+public class DateValueFormatterMonth: NSObject, IAxisValueFormatter {
+    private let dateFormatter = DateFormatter()
+    
+    override init() {
+        super.init()
+        dateFormatter.dateFormat = "MM"
+    }
+    
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
+    }
+}
+
+
+//
+// MARK: Slide Menu Extension
 extension TrackingScreen: UIViewControllerTransitioningDelegate {
     // Present
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
