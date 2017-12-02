@@ -1475,12 +1475,26 @@
 // MARK: Initial Screen //
 //
 "chooseBackgroundImage" = "Choose a background image";
-"initialInfoSubtitle" = "Fitness  |  Yoga  |  Meditation";
+"initialInfoSubtitle" = "Plans  |  Schedules";
 "followPlanOption" = "Choose a plan to follow";
 "initialProfileOption" = "Create a Schedule";
 "initialAppOption" = "Look around the app first";
 //
 // Info table
+// Plans
+"plansAim" = "Plans aim to accustom you to the methods of the app, get you up to speed ";
+"" = "";
+"" = "";
+"" = "";
+// Schedules
+"scheduleAim" = "The schedule is a weekly routine to follow";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+
+//
+// OLD WAY BELOW
 // Overview
 "initialInfo1" = "• Create and follow a weekly schedule";
 "initialInfo2" = "• Choose how best to work towards each goal each day";

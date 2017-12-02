@@ -15,8 +15,8 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
     
     //
     // Outlets
-    @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var topSeparator: UIView!
+    @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var infoTable: UITableView!
     
     
@@ -161,16 +161,14 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
     //
     // MARK: Info table
     var infoSections: [String] =
-        [" ", "features", ""]
+        ["plans", "schedules"]
     var infoBulletPoints: [[String]] =
         [
             // Overview
-            ["initialInfo1", "initialInfo2", "initialInfo3", "initialInfo4", "moreInfo"],
+            ["plansAim", ""],
             // Features
-            ["scheduleI", "trackingI", "lessonsI", "explanationsI", "warmupI", "stretchingI", "stretchingI2", "workoutsI", "gymI", "bodyweightI", "timedSessionsI", "cardioI", "cardioI2", "yogaI", "timedYogaI", "meditationTimeI", "guidedMeditationI", "customSessionsI"],
-            // More info.
-            ["initialMoreInfo"],
-    ]
+            ["schedulesAim"],
+        ]
 
     //
     // Number of sections
@@ -188,30 +186,26 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         //
         // Header
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
         header.textLabel?.textColor = Colours.colour1
+        header.textLabel?.textAlignment = .left
         //
         header.backgroundColor = .clear
         header.backgroundView = UIView()
         //
-        if section == 1 {
-            // Create seperator
-            let seperator = CALayer()
-            seperator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: topSeparator.bounds.width, height: 1)
-            seperator.backgroundColor = Colours.colour1.cgColor
-            seperator.opacity = 0.15
-            header.layer.addSublayer(seperator)
-        }
+        // Seperator
+        let seperator = UIView()
+        seperator.frame = CGRect(x: 15, y: header.frame.height
+             - 1, width: infoTable.bounds.width / 3, height: 1)
+        seperator.backgroundColor = Colours.colour1
+        seperator.alpha = 0.15
+        header.addSubview(seperator)
     }
 
     // Header Height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         //
-        if section != 2 {
-            return 37
-        } else {
-            return 37 / 2
-        }
+        return 37
     }
 
 
@@ -223,27 +217,9 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
 
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // Initial
-        if indexPath.section == 0 {
-            // Overview
-            return (tableView.bounds.height - 47) / 5
-        // Features
-        } else if indexPath.section == 1 {
-            let font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            let height = NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: "").height(withConstrainedWidth: infoTable.bounds.width - 32, font: font!)
-            //
-            if height > 37 {
-                return 37 * 2
-            } else {
-                return 37
-            }
-        // Overview cell
-        } else if indexPath.section == 2 {
-            let font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            let height = NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: "").height(withConstrainedWidth: infoTable.bounds.width - 32, font: font!)
-            return height
-        }
-        return 0
+        let cellFont = UIFont(name: "SFUIDisplay-thin", size: 21)
+        let height = NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: "").height(withConstrainedWidth: infoTable.bounds.width, font: cellFont!)
+        return height
     }
 
     // Cell for row
@@ -259,36 +235,39 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.lineBreakMode = .byWordWrapping
         //
+        cell.textLabel?.text = NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: "")
+        
+        //
         // More info. cell
-        if indexPath.section == 0 && indexPath.row == 4 {
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 0)
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 15)
-            cell.textLabel?.textAlignment = .right
+//        if indexPath.section == 0 && indexPath.row == 4 {
+//            cell.separatorInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 0)
+//            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 15)
+//            cell.textLabel?.textAlignment = .right
         //
         // Bullet points
             // Long text cell (more information text) has nothing done to it (hence if section != 2)
-        } else if indexPath.section != 2 {
+//        } else if indexPath.section != 2 {
             //
             // Keep indentation constant
-            let paragraphStyle: NSMutableParagraphStyle
-            paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-            paragraphStyle.tabStops = [NSTextTab(textAlignment: .left, location: 15, options: [:])]
-            paragraphStyle.defaultTabInterval = 15
-            paragraphStyle.firstLineHeadIndent = 0
-            paragraphStyle.headIndent = 15
-            // Font
-            let bulletPointFont = UIFont(name: "SFUIDisplay-thin", size: 21)
-            //
-            let attributedString = NSMutableAttributedString(string: NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: ""))
-            attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
-            attributedString.addAttributes([NSAttributedStringKey.font: bulletPointFont!], range: NSMakeRange(0, attributedString.length))
-            cell.textLabel?.attributedText = attributedString
+//            let paragraphStyle: NSMutableParagraphStyle
+//            paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+//            paragraphStyle.tabStops = [NSTextTab(textAlignment: .left, location: 15, options: [:])]
+//            paragraphStyle.defaultTabInterval = 15
+//            paragraphStyle.firstLineHeadIndent = 0
+//            paragraphStyle.headIndent = 15
+//            // Font
+//            let bulletPointFont = UIFont(name: "SFUIDisplay-thin", size: 21)
+//            //
+//            let attributedString = NSMutableAttributedString(string: NSLocalizedString(infoBulletPoints[indexPath.section][indexPath.row], comment: ""))
+//            attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
+//            attributedString.addAttributes([NSAttributedStringKey.font: bulletPointFont!], range: NSMakeRange(0, attributedString.length))
+//            cell.textLabel?.attributedText = attributedString
             //
             // Indent if not overview (if features cells)
-            if indexPath.section > 0 {
-                cell.separatorInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 0)
-            }
-        }
+//            if indexPath.section > 0 {
+//                cell.separatorInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 0)
+//            }
+//        }
         return cell
     }
     
