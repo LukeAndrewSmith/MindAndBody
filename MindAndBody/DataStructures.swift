@@ -11,7 +11,7 @@ import Foundation
 
 //
 // MARK: Session Data
-enum sessionData {
+enum sessionDataOld {
     //
     // MARK: TableView Section Arrays
     static let tableViewSectionArrays: [[String]] =
@@ -2795,7 +2795,7 @@ enum sessionData {
             // Cardio = 2
             // Session: [[name], [movement], [time/distance]]
             [
-                // Rowing - Full Body
+                // Rowing
                 [
                     // Sessions
                     [
@@ -2822,7 +2822,7 @@ enum sessionData {
                         ]
                     ]
                 ],
-                // Biking - Upper Body
+                // Biking
                 [
                     // Sessions
                     [
@@ -2849,7 +2849,7 @@ enum sessionData {
                         ]
                     ]
                 ],
-                // Running - Lower Body
+                // Running
                 [
                     // Sessions
                     [

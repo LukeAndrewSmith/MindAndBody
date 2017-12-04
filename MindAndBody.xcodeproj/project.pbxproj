@@ -487,6 +487,9 @@
 		077BC6951F725DCB00B9E798 /* FinalChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BC6941F725DCB00B9E798 /* FinalChoiceCustom.swift */; };
 		077C2C7E1E5C723D00BA62C0 /* GymChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */; };
 		077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */; };
+		077DAB131FD5FCD500CF7949 /* Sessions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DAB121FD5FCD500CF7949 /* Sessions.swift */; };
+		077DAB151FD5FCE300CF7949 /* Movements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DAB141FD5FCE300CF7949 /* Movements.swift */; };
+		077DAB171FD5FE1900CF7949 /* LittleThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DAB161FD5FE1900CF7949 /* LittleThings.swift */; };
 		077E471B1EB9DFC6005B0B22 /* PresentMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */; };
 		077E471F1EB9E221005B0B22 /* SlideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E471E1EB9E221005B0B22 /* SlideMenuView.swift */; };
 		077E47231EB9EED3005B0B22 /* DismissMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */; };
@@ -1908,6 +1911,9 @@
 		077BC6941F725DCB00B9E798 /* FinalChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalChoiceCustom.swift; sourceTree = "<group>"; };
 		077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymChoice.swift; sourceTree = "<group>"; };
 		077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircuitChoiceG.swift; sourceTree = "<group>"; };
+		077DAB121FD5FCD500CF7949 /* Sessions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sessions.swift; sourceTree = "<group>"; };
+		077DAB141FD5FCE300CF7949 /* Movements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movements.swift; sourceTree = "<group>"; };
+		077DAB161FD5FE1900CF7949 /* LittleThings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LittleThings.swift; sourceTree = "<group>"; };
 		077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentMenuAnimator.swift; sourceTree = "<group>"; };
 		077E471E1EB9E221005B0B22 /* SlideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuView.swift; sourceTree = "<group>"; };
 		077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissMenuAnimator.swift; sourceTree = "<group>"; };
@@ -3759,6 +3765,7 @@
 				07094BE71FB0D129003DB553 /* Main Screens */,
 				077E47151EB9DC54005B0B22 /* Slide Menu */,
 				0789ED091F79A71E000EB739 /* Global */,
+				077DAB0E1FD5FCC200CF7949 /* Session Data */,
 				0789ED0A1F79A725000EB739 /* Data */,
 				0778761C1F92A44B005CE68A /* Initial/Subscriptions (One time modals) */,
 				07094BE81FB0D17F003DB553 /* Audio/Visual */,
@@ -3853,6 +3860,17 @@
 			name = "Info Tables";
 			sourceTree = "<group>";
 		};
+		077DAB0E1FD5FCC200CF7949 /* Session Data */ = {
+			isa = PBXGroup;
+			children = (
+				077DAB141FD5FCE300CF7949 /* Movements.swift */,
+				077DAB121FD5FCD500CF7949 /* Sessions.swift */,
+				07002A5F1FD5ACE00000A755 /* SessionsData.swift */,
+				077DAB161FD5FE1900CF7949 /* LittleThings.swift */,
+			);
+			name = "Session Data";
+			sourceTree = "<group>";
+		};
 		077E47151EB9DC54005B0B22 /* Slide Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -3885,7 +3903,6 @@
 			isa = PBXGroup;
 			children = (
 				073BA9CA1F6E81B8005DB480 /* DataStructures.swift */,
-				07002A5F1FD5ACE00000A755 /* SessionsData.swift */,
 				0789ED051F79A6EA000EB739 /* UserData.swift */,
 				07B852611F83756C005F3781 /* ScheduleData.swift */,
 			);
@@ -8442,6 +8459,7 @@
 				072A87721EDEC59A00684809 /* CardioChoiceHIIT.swift in Sources */,
 				07DEE6F91E0AADF2003B89AB /* MeditationChoice.swift in Sources */,
 				077BC6951F725DCB00B9E798 /* FinalChoiceCustom.swift in Sources */,
+				077DAB151FD5FCE300CF7949 /* Movements.swift in Sources */,
 				07995A391E893E590009C9B1 /* ScheduleScreen.swift in Sources */,
 				07CB04391E6049DF002066CD /* MeditationGuided.swift in Sources */,
 				077876231F92A50D005CE68A /* Profile.swift in Sources */,
@@ -8467,12 +8485,14 @@
 				07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */,
 				076C68461ED58D65009160C2 /* StretchingScreen.swift in Sources */,
 				0782AB571FC4F1BB00D34500 /* ScheduleWalkthrough.swift in Sources */,
+				077DAB131FD5FCD500CF7949 /* Sessions.swift in Sources */,
 				07B852621F83756C005F3781 /* ScheduleData.swift in Sources */,
 				07002A601FD5ACE00000A755 /* SessionsData.swift in Sources */,
 				07E1D4E11FB2250B00B53B85 /* ScheduleCreationHelp.swift in Sources */,
 				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,
 				07E1D4DF1FB0DDF600B53B85 /* ScheduleEditing.swift in Sources */,
+				077DAB171FD5FE1900CF7949 /* LittleThings.swift in Sources */,
 				07DE23071FC0AB3300940567 /* SwiftReceiptValidator.swift in Sources */,
 				07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */,
 				07D5C3D91F9E32430038F143 /* ScheduleViewQuestion.swift in Sources */,
