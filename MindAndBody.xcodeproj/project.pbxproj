@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07002A601FD5ACE00000A755 /* SessionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07002A5F1FD5ACE00000A755 /* SessionsData.swift */; };
 		07038CC61F4C5C2A001CC6D5 /* purpleTree.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038CC51F4C5C2A001CC6D5 /* purpleTree.png */; };
 		07038CCC1F4C5FD8001CC6D5 /* wristRotations.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038CC71F4C5FD8001CC6D5 /* wristRotations.png */; };
 		07038CCD1F4C5FD8001CC6D5 /* wristRotations1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038CC81F4C5FD8001CC6D5 /* wristRotations1.png */; };
@@ -1441,6 +1442,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07002A5F1FD5ACE00000A755 /* SessionsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsData.swift; sourceTree = "<group>"; };
 		07038CC51F4C5C2A001CC6D5 /* purpleTree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purpleTree.png; sourceTree = "<group>"; };
 		07038CC71F4C5FD8001CC6D5 /* wristRotations.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wristRotations.png; sourceTree = "<group>"; };
 		07038CC81F4C5FD8001CC6D5 /* wristRotations1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wristRotations1.png; sourceTree = "<group>"; };
@@ -3883,6 +3885,7 @@
 			isa = PBXGroup;
 			children = (
 				073BA9CA1F6E81B8005DB480 /* DataStructures.swift */,
+				07002A5F1FD5ACE00000A755 /* SessionsData.swift */,
 				0789ED051F79A6EA000EB739 /* UserData.swift */,
 				07B852611F83756C005F3781 /* ScheduleData.swift */,
 			);
@@ -8465,6 +8468,7 @@
 				076C68461ED58D65009160C2 /* StretchingScreen.swift in Sources */,
 				0782AB571FC4F1BB00D34500 /* ScheduleWalkthrough.swift in Sources */,
 				07B852621F83756C005F3781 /* ScheduleData.swift in Sources */,
+				07002A601FD5ACE00000A755 /* SessionsData.swift in Sources */,
 				07E1D4E11FB2250B00B53B85 /* ScheduleCreationHelp.swift in Sources */,
 				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,

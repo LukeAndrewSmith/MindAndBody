@@ -161,11 +161,11 @@ class InitialInfoScreen: UIViewController, UNUserNotificationCenterDelegate, UIT
     //
     // MARK: Info table
     var infoSections: [String] =
-        ["plans", "schedules"]
+        ["introductoryWeek", "schedules"]
     var infoBulletPoints: [[String]] =
         [
             // Overview
-            ["plansAim", ""],
+            ["introductoryWeekAim", ""],
             // Features
             ["schedulesAim"],
         ]

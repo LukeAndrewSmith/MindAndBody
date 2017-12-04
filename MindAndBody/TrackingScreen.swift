@@ -159,6 +159,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         chartView.legend.enabled = false
         chartView.rightAxis.enabled = false
         chartView.pinchZoomEnabled = false
+        chartView.setScaleEnabled(false)
         chartView.doubleTapToZoomEnabled = false
         
         // Y Axis
@@ -204,21 +205,23 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         chartView.xAxis.resetCustomAxisMin()
         chartView.xAxis.resetCustomAxisMax()
         
+        //
+        var chartDataOriginal: [(key: Date, value: Int)] = []
         // Data points
         switch timeScale {
         // 1 Week
         case 0:
-            let chartData = trackingDictionariesDates[0].sorted(by: { $0.key < $1.key })
+            chartDataOriginal = trackingDictionariesDates[0].sorted(by: { $0.key < $1.key })
                 //
-            lineDataEntry = chartData.map{ChartDataEntry(x: $0.0.timeIntervalSince1970, y: Double($0.1))}
-            
+            lineDataEntry = chartDataOriginal.map{ChartDataEntry(x: $0.0.timeIntervalSince1970, y: Double($0.1))}
+                
             //
             chartView.xAxis.valueFormatter = DateValueFormatterDay()
         // 1 Month
         case 1,2,3,4,5:
-            let chartData = trackingDictionariesDates[1].sorted(by: { $0.key < $1.key })
+            chartDataOriginal = trackingDictionariesDates[1].sorted(by: { $0.key < $1.key })
             //
-            lineDataEntry = chartData.map{ChartDataEntry(x: $0.0.timeIntervalSince1970, y: Double($0.1))}
+            lineDataEntry = chartDataOriginal.map{ChartDataEntry(x: $0.0.timeIntervalSince1970, y: Double($0.1))}
             
             //
             let calendar = Calendar(identifier: .gregorian)
@@ -269,8 +272,23 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         default: break
         }
         
+        var highlight: Highlight? = nil
+        
+//        for index in 0..<12 {
+//            let randomValue = Double(arc4random_uniform(5000))
+//            values.append(ChartDataEntry(x: Double(index), y: randomValue))
+//
+//            if index == 4 {
+//                highlight = Highlight(x: Double(index), y: randomValue, dataSetIndex: 0)
+//            }
+//        }
+        for i in 0...chartDataOriginal.count - 1 {
+            highlight = Highlight(x: chartDataOriginal[i].key.timeIntervalSince1970, y: Double(chartDataOriginal[i].value), dataSetIndex: 0)
+        }
+//        chartView.highlightValue(highlight)
+        
         // Chart data
-        let chartDataSet = LineChartDataSet(values: lineDataEntry, label: "Where am I??")
+        let chartDataSet = LineChartDataSet(values: lineDataEntry, label: "I'm a label that isn't shown")
         let chartData = LineChartData()
         chartData.addDataSet(chartDataSet)
         chartData.setDrawValues(true)
@@ -279,7 +297,15 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         chartDataSet.circleHoleColor = Colors.red
         chartDataSet.circleRadius = 4
         chartDataSet.valueFont = UIFont(name: "SFUIDisplay-thin", size: 10)!
-        chartDataSet.valueTextColor = Colors.light
+        chartDataSet.valueTextColor = UIColor.clear
+        //
+//        chartDataSet.setDrawHighlightIndicators(true)
+        chartDataSet.highlightColor = Colors.light
+        chartDataSet.highlightEnabled = true
+        chartDataSet.drawHorizontalHighlightIndicatorEnabled = false
+        chartDataSet.highlightLineWidth = 0.5
+//        chartView.highlightValue(Highlight.init(x: <#T##Double#>, dataSetIndex: <#T##Int#>, stackIndex: <#T##Int#>))
+//        chartDataSet.highli
         
         // Gradient fill
         let gradientColors = [Colors.green.cgColor, UIColor.clear.cgColor] as CFArray

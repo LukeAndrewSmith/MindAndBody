@@ -603,7 +603,7 @@ enum sessionData {
                 62: "twoLegHamstring",
                 // Quads
                 63: "lungeStretchWall",
-                64: "QuadStretch",
+                64: "quadStretch",
                 // Full Body
                 65: "sumoSquatTwist",
                 66: "tinyFencerStretch",
@@ -859,7 +859,7 @@ enum sessionData {
                 61, //: "singleLegHamstring",
                 // Quads
                 63, //: "lungeStretchWall",
-                64, //: "QuadStretch",
+                64, //: "quadStretch",
                 // Full Body
                 65, //: "sumoSquatTwist",
                 66, //: "tinyFencerStretch",
@@ -1609,7 +1609,7 @@ enum sessionData {
                 112: "squatBody"
             ],
             // Cardio
-            [:],
+            [:], // Unused
             // Stretching
             [
                 // Cardio

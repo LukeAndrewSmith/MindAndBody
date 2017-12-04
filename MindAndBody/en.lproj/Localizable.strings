@@ -976,7 +976,7 @@
             // Quads
     "quads" = "Quads";
 "lungeStretchWall" = "Lunge Stretch Against a Wall";
-"QuadStretch" = "Quad Stretch";
+"quadStretch" = "Quad Stretch";
 
 
 
@@ -1051,7 +1051,7 @@
 
             // Quads
             "lungeStretchWallE" = "Stretch:\nKneel down next to a wall.\nStretch your right leg forward, so that your knee is above your ankle, you should be in a lunge stretch position.\nLift your back foot up, and move back so that it is resting on the wall at about the height of your glute.\nRest your hands on your front thigh, and keeping an upright torso, stretch your hips towards the ground. You should feel a good stretch in the quad.\nHold for the recommended amount of time then repeat with the other leg.\n\nNotes:\nPut your foot at a height on the wall that allows you to get a good stretch in the quad.\nRotate your pelvis forwards to increase the stretch.\nBreath into the quad.";
-            "QuadStretchE" = "Stretch:\nA simple standing quad stretch where you you hold your heel at your glute is hard to perform without overly bending your lower back and aleiviating the stretch in the quad. If you can comfortably do it standing without rounding the lower back then do so, if not perform it lying down.:\nLie on your left side with your left arm above your head and your knees and hips pointing at 90º in front of you.\nHold the front of your right ankle/foot with your right hand, hold your heel at your glute and extend the right knee away from your and back to try and get your thigh in line with your torso.\nActively keep a straight lower back when doing this.\nHold for the recommended amount of time then repeat with the other leg.\n\nNotes:\nDon't rotate your torso.\nKeep your hips rotated forwards.\nBreath into your quad.";
+            "quadStretchE" = "Stretch:\nA simple standing quad stretch where you you hold your heel at your glute is hard to perform without overly bending your lower back and aleiviating the stretch in the quad. If you can comfortably do it standing without rounding the lower back then do so, if not perform it lying down.:\nLie on your left side with your left arm above your head and your knees and hips pointing at 90º in front of you.\nHold the front of your right ankle/foot with your right hand, hold your heel at your glute and extend the right knee away from your and back to try and get your thigh in line with your torso.\nActively keep a straight lower back when doing this.\nHold for the recommended amount of time then repeat with the other leg.\n\nNotes:\nDon't rotate your torso.\nKeep your hips rotated forwards.\nBreath into your quad.";
 
 
 
@@ -1475,18 +1475,20 @@
 // MARK: Initial Screen //
 //
 "chooseBackgroundImage" = "Choose a background image";
-"initialInfoSubtitle" = "Plans  |  Schedules";
-"followPlanOption" = "Choose a plan to follow";
+"initialInfoSubtitle" = "Fitness | Yoga | Meditation";
+"followPlanOption" = "Introductory week";
 "initialProfileOption" = "Create a Schedule";
 "initialAppOption" = "Look around the app first";
 //
 // Info table
 // Plans
-"plansAim" = "Plans aim to accustom you to the methods of the app, get you up to speed ";
+"introductoryWeek" = "Introductory Week";
+"introductoryWeekAim" = "The introductory week is strongly advised, it's aim is to  aim to accustom you to the methods of the app, get you up to speed ";
 "" = "";
 "" = "";
 "" = "";
 // Schedules
+"schedules" = "Schedules";
 "scheduleAim" = "The schedule is a weekly routine to follow";
 "" = "";
 "" = "";
