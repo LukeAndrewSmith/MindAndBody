@@ -9,6 +9,18 @@
 import Foundation
 import UIKit
 
+
+//
+// Schedule creator
+// Used for custom session creation, and for app helps create schedule, after the user has been presented with a suggested number of groups, he/she must choose days in the week to perform them on
+//
+// 6 labels at the top of the screen correspond to the 6 groups of the app
+// The user drags the group to the day they wish to perform the group
+//
+
+// NOTE: LABELS/GROUPS ARE STILL INDEXED WITH INTEGERS,
+
+
 //
 // MARK: Schedule Creator Class
 class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -75,14 +87,12 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //
     // Arrays
-    // The number of groups
+    // The number of different groups
     var nGroups = 0
     // Indicates which groups are relevant
         // GROUP INDEXES
             // contains the indexes of the groups of the sessions e.g [1,3,4] = [flexibility, toning, muscle gain]
     var groupIndexes = [Int]()
-    // Both used to determin when the user has chosen a time for all sessions
-    var sessionProgress = 0
     
     let dayArray = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",]
     
@@ -107,7 +117,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         dayTable.isScrollEnabled = false
         
         //
-        // Test tap, just there to dismiss view when testing
         for i in 0...bigGroupLabelArray.count - 1 {
             longPressArray[i].minimumPressDuration = 0
             longPressArray[i].addTarget(self, action: #selector(beginDraggingFromTop(gestureRecognizer:)))
@@ -374,69 +383,70 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Update full week array
         // If user is in day mode, the full week should be still updating
         // For when user adds new group to week, adds to the fullweek array as well to ensure consistency
-    func updateFullWeek() {
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-        
-//        schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7] = []
-//        scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
-        var shouldAppend = false
-        var indexAtWhichToAdd = 0
-        var shouldBreak = false
-        let count = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count
-        if count != 0 {
-            for i in 0...count - 1 {
-                // Compare group at i and 1 after i,  if groupAti <= groupToAdd < groupAti+1, the insert at i + 1
-                    // e.g 001112233, inserting 2, -> 2 <= 2 < 3
-                    // e.g 0015, inserting 2, -> 1 <= 2 < 5
-                switch i {
-                // Last, can't compare to i+1, indicate to append not insert
-                case count - 1:
-                    shouldAppend = true
-                default:
-                    let groupAtI = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i] as! Int
-                    let groupAtI1 = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i + 1] as! Int
-                    if groupAtI <= indexOfDraggedGroup && indexOfDraggedGroup < groupAtI1 {
-                        indexAtWhichToAdd = i + 1
-                        shouldBreak = true
-                    }
-                }
-                if shouldBreak {
-                    break
-                }
-            }
-        // Nowhere to insert - append
-        } else {
-            shouldAppend = true
-        }
-        
-        // Append
-        if shouldAppend {
-            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].append(indexOfDraggedGroup)
-            scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
-        // Insert
-        } else {
-            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].insert(indexOfDraggedGroup, at: indexAtWhichToAdd)
-            scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].insert(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!, at: indexAtWhichToAdd)
-        }
-        
-        //
-        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-        UserDefaults.standard.set(schedules, forKey: "schedules")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
-        //
-        // Update
-        // Loop full week
-        dayTableGroupArray = [0,0,0,0,0,0]
-        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count != 0 {
-            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count - 1 {
-                let index = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i] as! Int
-                dayTableGroupArray[index] += 1
-            }
-        }
-        dayTable.reloadData()
-    }
+    // TODO: TESTING, UPDATE FULL WEEK
+//    func updateFullWeek() {
+//        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+//        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+//
+////        schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7] = []
+////        scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
+//        var shouldAppend = false
+//        var indexAtWhichToAdd = 0
+//        var shouldBreak = false
+//        let count = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count
+//        if count != 0 {
+//            for i in 0...count - 1 {
+//                // Compare group at i and 1 after i,  if groupAti <= groupToAdd < groupAti+1, the insert at i + 1
+//                    // e.g 001112233, inserting 2, -> 2 <= 2 < 3
+//                    // e.g 0015, inserting 2, -> 1 <= 2 < 5
+//                switch i {
+//                // Last, can't compare to i+1, indicate to append not insert
+//                case count - 1:
+//                    shouldAppend = true
+//                default:
+//                    let groupAtI = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i] as! Int
+//                    let groupAtI1 = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i + 1] as! Int
+//                    if groupAtI <= indexOfDraggedGroup && indexOfDraggedGroup < groupAtI1 {
+//                        indexAtWhichToAdd = i + 1
+//                        shouldBreak = true
+//                    }
+//                }
+//                if shouldBreak {
+//                    break
+//                }
+//            }
+//        // Nowhere to insert - append
+//        } else {
+//            shouldAppend = true
+//        }
+//
+//        // Append
+//        if shouldAppend {
+//            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].append(indexOfDraggedGroup)
+//            scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
+//        // Insert
+//        } else {
+//            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].insert(indexOfDraggedGroup, at: indexAtWhichToAdd)
+//            scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].insert(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!, at: indexAtWhichToAdd)
+//        }
+//
+//        //
+//        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
+//        UserDefaults.standard.set(schedules, forKey: "schedules")
+//        // Sync
+//        ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+//        //
+//        // Update
+//        // Loop full week
+//        dayTableGroupArray = [0,0,0,0,0,0]
+//        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count != 0 {
+//            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count - 1 {
+//                let index = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i] as! Int
+//                dayTableGroupArray[index] += 1
+//            }
+//        }
+//        dayTable.reloadData()
+//    }
     
     //
     // MARK: Table Helpers
@@ -633,7 +643,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                     // Sync
                     ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
-                    updateFullWeek()
+                    // TODO: !!!!!
+//                    updateFullWeek()
                     // update label
                     setGroupLabels()
                 }

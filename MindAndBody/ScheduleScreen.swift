@@ -63,6 +63,12 @@ class ScheduleScreen: UIViewController {
     // StackView
     var stackArray: [UILabel] = []
     
+    // Temporary week array
+        // If viewed as week, then creates a temporary array of the full week from the schedules sotred to user defaults
+        // This array contains dictionaries with fields, group, day, index, so that the relevant group in the schedulesTracking array can be found and updated
+        // This avoids the need to store two seperate arrays for week view and day view
+    var temporaryWeekArray: [[String: Any]] = []
+    
     // Schedule creation and choices ACTION SHEET
     let scheduleChoiceTable = UITableView()
     let editScheduleButton = UIButton()
@@ -76,7 +82,7 @@ class ScheduleScreen: UIViewController {
     // IMPORTANT VARIABLE
     // Variable saying which presentation style is wanted by the user, either
     // 0 - presenting each day on the day
-    // 0 - presenting the whole week each week
+    // 1 - presenting the whole week at once
     var scheduleStyle = 0
     
     //
@@ -134,6 +140,12 @@ class ScheduleScreen: UIViewController {
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // If week view, crete temporary week array
+        if scheduleStyle == 1 {
+            createTemporaryWeekViewArray()
+        }
+        
         // Subscriptions
         // Checking subscription is valid, (present loading during check)
         if Loading.shared.shouldPresentLoading {

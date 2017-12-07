@@ -24,6 +24,42 @@ extension ScheduleScreen {
     //
     //
     // MARK: Schedule Helper Functions
+    func createTemporaryWeekViewArray() {
+        
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        
+        // Ensure empty
+        temporaryWeekArray = []
+        
+        // Create array ordered, by first finding and adding all instances of mind, then of flexibility, then of endurance etc...
+        let orderedGroupArray = ["mind", "flexibility", "endurance", "toning", "muscleGain", "strength"]
+        
+        // Loop groups
+        for i in 0..<searchArray.count {
+            // Loop week
+            for j in 0...6 {
+                // If day not empty
+                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j].count != 0 {
+                    // Loop day
+                    for k in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j].count {
+                        // If correct group
+                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j][k] as! String == orderedGroupArray[i] {
+                            // Create group dict
+                            var groupDict: [String: Any] = [
+                                "group": orderedGroupArray[i],
+                                "day": j,
+                                "index": k,
+                            ]
+                            // Append
+                            temporaryWeekArray.append(groupDict)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
     //
     // MARK: didSelectRowHandler
     func didSelectRowHandler(row: Int) {
